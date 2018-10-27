@@ -192,6 +192,11 @@
 		0852539922073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */; };
 		0852539A22073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */; };
 		0852539B22073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */; };
+		084784D82184DEC600E5A74F /* parse_play_url.js in Resources */ = {isa = PBXBuildFile; fileRef = 084784D72184DEC600E5A74F /* parse_play_url.js */; };
+		084784D92184DEC600E5A74F /* parse_play_url.js in Resources */ = {isa = PBXBuildFile; fileRef = 084784D72184DEC600E5A74F /* parse_play_url.js */; };
+		084784DA2184DEC600E5A74F /* parse_play_url.js in Resources */ = {isa = PBXBuildFile; fileRef = 084784D72184DEC600E5A74F /* parse_play_url.js */; };
+		084784DB2184DEC600E5A74F /* parse_play_url.js in Resources */ = {isa = PBXBuildFile; fileRef = 084784D72184DEC600E5A74F /* parse_play_url.js */; };
+		084784DC2184DEC600E5A74F /* parse_play_url.js in Resources */ = {isa = PBXBuildFile; fileRef = 084784D72184DEC600E5A74F /* parse_play_url.js */; };
 		08564B1D1D41111A00381549 /* HomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08564B1C1D41111A00381549 /* HomeSectionHeaderView.m */; };
 		08564B1E1D41111A00381549 /* HomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08564B1C1D41111A00381549 /* HomeSectionHeaderView.m */; };
 		08564B1F1D41111A00381549 /* HomeSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08564B1C1D41111A00381549 /* HomeSectionHeaderView.m */; };
@@ -1722,6 +1727,7 @@
 		084F94AF22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchSettingMultiSelectionViewController.storyboard; sourceTree = "<group>"; };
 		0852539522073D5200BCF0B1 /* UIApplication+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+PlaySRG.h"; sourceTree = "<group>"; };
 		0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+PlaySRG.m"; sourceTree = "<group>"; };
+		084784D72184DEC600E5A74F /* parse_play_url.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = parse_play_url.js; sourceTree = "<group>"; };
 		08564B1B1D41111A00381549 /* HomeSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSectionHeaderView.h; sourceTree = "<group>"; };
 		08564B1C1D41111A00381549 /* HomeSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSectionHeaderView.m; sourceTree = "<group>"; };
 		08564B221D41112800381549 /* HomeSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSectionHeaderView.xib; sourceTree = "<group>"; };
@@ -2639,6 +2645,14 @@
 				6F475FA81EB37BC6003021EA /* Views */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		08B6F7CE210CF3180097EF8B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				084784D72184DEC600E5A74F /* parse_play_url.js */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		08C68D461D38D49600BB8AAA = {
@@ -4009,6 +4023,7 @@
 				E6AE51331D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
 				E6DB5F211D66E0950057094B /* ShowsViewController.storyboard in Resources */,
 				E66BEC211DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
+				084784D82184DEC600E5A74F /* parse_play_url.js in Resources */,
 				6F0F88A41ECF0CE50060A893 /* override_default_srf3.pdf in Resources */,
 				6F2961FC2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				6F5F4FC91DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
@@ -4143,6 +4158,7 @@
 				0837CED31D3FDAF900A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				08D0E0EB1E9D29F700AB8298 /* HomeRadioLiveTableViewCell.xib in Resources */,
 				0804916A22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
+				084784D92184DEC600E5A74F /* parse_play_url.js in Resources */,
 				6F7C89D020AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				6F4C0A7C20DCBDD200069A85 /* HomeShowVerticalListTableViewCell.xib in Resources */,
 				6FD2CBC41DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
@@ -4179,6 +4195,7 @@
 				6F2961FE2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				081DAA291E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B51DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
+				084784DA2184DEC600E5A74F /* parse_play_url.js in Resources */,
 				6F0C99A32121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				6FCB574D1EC2047B0015CAB7 /* override_default_rete_uno.pdf in Resources */,
 				E64BA4031D4A5891002C10D5 /* WebViewController.storyboard in Resources */,
@@ -4356,6 +4373,7 @@
 				6F6B643621A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				08C68FE81D38E04B00BB8AAA /* LaunchScreen.xib in Resources */,
 				6F1A95EE216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
+				084784DB2184DEC600E5A74F /* parse_play_url.js in Resources */,
 				6F0C999F2121FBD800073AB6 /* SRGAnalytics.bundle in Resources */,
 				6FA7EC3C20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				6F0F883D1ECEE78C0060A893 /* override_artwork_radio_rtr.pdf in Resources */,
@@ -4418,6 +4436,7 @@
 				08C690E11D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */,
 				6F6B643721A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				6FD88F8022D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
+				084784DC2184DEC600E5A74F /* parse_play_url.js in Resources */,
 				6F1A95EF216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
 				E6E2DF301D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				6F12DB4F21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,

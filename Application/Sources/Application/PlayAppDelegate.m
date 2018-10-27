@@ -31,6 +31,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <Firebase/Firebase.h>
+#import <JavaScriptCore/JavaScriptCore.h>
 #import <libextobjc/libextobjc.h>
 #import <Mantle/Mantle.h>
 #import <SRGAnalytics_Identity/SRGAnalytics_Identity.h>
@@ -244,9 +245,34 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 
 // Open [scheme]://open?media=[media_urn] (optional &channel-id=[channel_id])
 // Open [scheme]://open?show=[show_urn] (optional &channel-id=[channel_id])
+// Open [scheme]://[play website url] ("parse_play_url.js" try to transformed to scheme urls)
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
+    if (! [URL.host.lowercaseString isEqualToString:@"open"]) {
+        NSString *javascriptFilePath = [NSBundle.mainBundle pathForResource:@"parse_play_url" ofType:@"js"];
+        NSString *javascript = [NSString stringWithContentsOfFile:javascriptFilePath encoding:NSUTF8StringEncoding error:nil];
+        JSContext *context = [[JSContext alloc] init];
+        [context evaluateScript:javascript];
+        JSValue * evaluate = [context objectForKeyedSubscript:@"parseForPlayApp"];
+        
+        NSMutableDictionary *queryItems = [NSMutableDictionary dictionary];
+        [URLComponents.queryItems enumerateObjectsUsingBlock:^(NSURLQueryItem * _Nonnull queryItem, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (queryItem.value) {
+                [queryItems setObject:queryItem.value forKey:queryItem.name];
+            }
+        }];
+        JSValue * result = [evaluate callWithArguments:@[ URLComponents.host ?: NSNull.null,
+                                                          URLComponents.path ?: NSNull.null,
+                                                          queryItems.copy,
+                                                          URLComponents.fragment ?: NSNull.null ]];
+        NSURL *playURL = [NSURL URLWithString:result.toString];
+        if (playURL) {
+            URLComponents = [NSURLComponents componentsWithURL:playURL resolvingAgainstBaseURL:NO];
+            URLComponents.scheme = URL.scheme;
+        }
+    }
+    
     if ([URLComponents.host.lowercaseString isEqualToString:@"open"]) {
         
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
