@@ -248,6 +248,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 // Open [scheme]://[play website url] ("parse_play_url.js" try to transformed to scheme urls)
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
+    AnalyticsSource analyticsOpenURLSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeeplink : AnalyticsSourceSchemeURL;
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     if (! [URL.host.lowercaseString isEqualToString:@"open"]) {
         NSString *javascriptFilePath = [NSBundle.mainBundle pathForResource:@"parse_play_url" ofType:@"js"];
@@ -297,9 +298,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         if (mediaURN) {
             [self openMediaWithURN:mediaURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = AnalyticsSourceSchemeURL;
+                labels.source = analyticsOpenURLSource;
                 labels.type = AnalyticsTypeActionPlayMedia;
                 labels.value = mediaURN;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
             return YES;
@@ -309,9 +311,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         if (showURN) {
             [self openShowWithURN:showURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = AnalyticsSourceSchemeURL;
+                labels.source = analyticsOpenURLSource;
                 labels.type = AnalyticsTypeActionDisplayShow;
                 labels.value = showURN;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
             return YES;

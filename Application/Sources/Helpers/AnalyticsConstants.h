@@ -197,6 +197,7 @@ typedef NSString * AnalyticsValue NS_STRING_ENUM;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceAutomatic;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceButton;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceClose;
+OBJC_EXPORT AnalyticsSource const AnalyticsSourceDeeplink;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceHandoff;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceLongPress;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotification;
