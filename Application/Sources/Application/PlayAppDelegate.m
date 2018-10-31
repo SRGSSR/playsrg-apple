@@ -397,7 +397,8 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 - (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType
 {
     return [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".playing"]]
-        || [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".displaying"]];
+        || [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".displaying"]]
+        || [userActivityType isEqualToString:NSUserActivityTypeBrowsingWeb];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
@@ -447,6 +448,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         }
         
         return (showURN != nil);
+    }
+    else if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+        return [self application:UIApplication.sharedApplication openURL:userActivity.webpageURL options:@{}];
     }
     else {
         return NO;
