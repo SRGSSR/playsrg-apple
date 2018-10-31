@@ -24,7 +24,7 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
     // Get BU
     var bu = null;
     switch (true) {
-    case hostname.includes("rts.ch") || hostname.includes("srgplayer-rts"):
+    case hostname.includes("rts.ch") || hostname.includes("srgplayer-rts") || (hostname.includes("play-mmf") && pathname.startsWith("/rts/play/")):
         bu = "rts";
         break;
     case hostname.includes("rsi.ch") || hostname.includes("srgplayer-rsi"):
@@ -44,6 +44,10 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
     if (! bu) {
         console.log("No known SRG BU hostname.");
         return null;
+    }
+
+    if (hostname.includes("play-mmf")) {
+        pathname = pathname.substring(4);
     }
 
     /**
