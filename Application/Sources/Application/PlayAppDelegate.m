@@ -296,7 +296,8 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         NSString *mediaURN = [self valueFromURLComponents:URLComponents withParameterName:@"media"];
         if (mediaURN) {
-            [self openMediaWithURN:mediaURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
+            NSInteger startTime = [[self valueFromURLComponents:URLComponents withParameterName:@"start-time"] integerValue];
+            [self openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsOpenURLSource;
                 labels.type = AnalyticsTypeActionPlayMedia;
@@ -362,13 +363,14 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     return queryItem.value;
 }
 
-- (BOOL)openMediaWithURN:(NSString *)mediaURN channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (BOOL)openMediaWithURN:(NSString *)mediaURN startTime:(NSInteger)startTime channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(mediaURN);
     
     MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
-        [self playURN:mediaURN media:nil atPosition:nil fromPushNotification:fromPushNotification completion:nil];
+        CMTime time = (startTime > 0) ? CMTimeMakeWithSeconds(startTime, NSEC_PER_SEC) : kCMTimeZero;
+        [self playURN:mediaURN media:nil atPosition:[SRGPosition positionAtTime:time] fromPushNotification:fromPushNotification completion:nil];
         
         // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;

@@ -6,7 +6,7 @@ Play applications can be opened with a custom URL scheme having the following fo
 
 Available actions are:
 
-* Open a media within the player: `[scheme]://open?media=[media_urn]`.
+* Open a media within the player: `[scheme]://open?media=[media_urn]`. An optional `&start-time=[start_time]` parameter can be added, to start the VOD / AOD playback at the position in second.
 * Open a show page: `[scheme]://open?show=[show_urn]`.
 
 In all cases, an optional `&channel-id=[channel_id]` parameter can be added, which also resets the homepage to the specified radio channel homepage. If this parameter is not specified or does not match a valid channel, the homepage is reset to the TV one instead.

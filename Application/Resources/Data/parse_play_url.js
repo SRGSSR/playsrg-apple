@@ -1,4 +1,4 @@
-// parsePlayUrl v0.1
+// parsePlayUrl v0.1.1
 
 var parsePlayUrl = function(urlString) {
     var url = urlString;
@@ -268,7 +268,7 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 var openMedia = function(bu, mediaType, mediaId, startTime) {
   var redirect = schemeForBu(bu) + "://open?media=urn:" + bu + ":" + mediaType + ":" + mediaId;
   if (startTime) {
-    redirect = redirect + "&startTime=" + startTime;
+    redirect = redirect + "&start-time=" + startTime;
   }
   return redirect;
 };
