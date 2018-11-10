@@ -27,16 +27,16 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
     case hostname.includes("rts.ch") || hostname.includes("srgplayer-rts") || (hostname.includes("play-mmf") && pathname.startsWith("/rts/play/")):
         bu = "rts";
         break;
-    case hostname.includes("rsi.ch") || hostname.includes("srgplayer-rsi"):
+    case hostname.includes("rsi.ch") || hostname.includes("srgplayer-rsi") || (hostname.includes("play-mmf") && pathname.startsWith("/rsi/play/")):
         bu = "rsi";
         break;
-    case hostname.includes("rtr.ch") || hostname.includes("srgplayer-rtr"):
+    case hostname.includes("rtr.ch") || hostname.includes("srgplayer-rtr") || (hostname.includes("play-mmf") && pathname.startsWith("/rtr/play/")):
         bu = "rtr";
         break;
-    case hostname.includes("swissinfo.ch") || hostname.includes("srgplayer-swi"):
+    case hostname.includes("swissinfo.ch") || hostname.includes("srgplayer-swi") || (hostname.includes("play-mmf") && pathname.startsWith("/swi/play/")):
         bu = "swi";
         break;
-    case hostname.includes("srf.ch") || hostname.includes("srgplayer-srf"):
+    case hostname.includes("srf.ch") || hostname.includes("srgplayer-srf") || (hostname.includes("play-mmf") && pathname.startsWith("/srf/play/")):
         bu = "srf";
         break;
     }
