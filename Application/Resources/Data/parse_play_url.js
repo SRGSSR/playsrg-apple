@@ -1,4 +1,4 @@
-// parsePlayUrl v0.1.1
+// parsePlayUrl v1.0-dev
 
 var parsePlayUrl = function(urlString) {
     var url = urlString;
@@ -132,7 +132,8 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
             return openMedia(bu, "video", mediaId, null);
         }
         else {
-            // TODO: returns TV homepage
+            // Returns default TV homepage
+            return openPage(bu, "tv:home", null);
         }
     }
 
@@ -207,7 +208,8 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
             return openMedia(mediaBu, "audio", mediaId, null);
         }
         else {
-            // TODO: returns default homepage
+            // Returns default radio homepage
+            return openPage(bu, "radio:home", null);
         }
     }
 
@@ -260,6 +262,25 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
         }
     }
 
+    /**
+     *  Catch home TV urls
+     *
+     *  Ex: https://www.srf.ch/play/tv
+     */
+    if (pathname.endsWith("/tv")) {
+        return openPage(bu, "tv:home", null);
+    }
+
+    /**
+     *  Catch home radio urls
+     *
+     *  Ex: https://www.srf.ch/play/radio?station=ee1fb348-2b6a-4958-9aac-ec6c87e190da
+     */
+    if (pathname.endsWith("/radio")) {
+        var channelId = queryParams["station"];
+        return openPage(bu, "radio:home", channelId);
+    }
+
     // Redirect fallback.
     console.log("Can't parse Play URL. Redirect.");
     return schemeForBu(bu) + "://redirect";
@@ -276,6 +297,18 @@ var openMedia = function(bu, mediaType, mediaId, startTime) {
 var openShow = function(bu, showTransmission, showId) {
   var redirect = schemeForBu(bu) + "://open?show=urn:" + bu + ":show:" + showTransmission + ":" + showId;
   return redirect;
+};
+
+var openPage = function(bu, page, channelId) {
+    if (! page) {
+        page = "tv:home";
+    }
+    
+    var redirect = schemeForBu(bu) + "://open?page=urn:" + bu + ":page:" + page;
+    if (channelId) {
+        redirect = redirect + "&channel-id=" + channelId;
+    }
+    return redirect;
 };
 
 var schemeForBu = function(bu) {

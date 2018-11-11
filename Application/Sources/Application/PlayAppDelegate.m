@@ -321,6 +321,25 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             return YES;
         }
         
+        NSString *pageURN = [self valueFromURLComponents:URLComponents withParameterName:@"page"];
+        if (pageURN) {
+            BOOL canOpen = [self openPageWithURN:pageURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.source = analyticsOpenURLSource;
+                labels.type = AnalyticsTypeActionDisplayPage;
+                labels.value = pageURN;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+            }];
+            
+            if (!canOpen) {
+                // TODO:
+                // Open in SafariWebViewController
+            }
+            
+            return YES;
+        }
+        
         // TODO: [scheme]://open?radio=uid, [scheme]://open?date=01-01-2016 …
         
         NSError *error = [NSError errorWithDomain:PlayErrorDomain
@@ -392,6 +411,24 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }];
     
     return YES;
+}
+
+- (BOOL)openPageWithURN:(NSString *)pageURN channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+{
+    NSParameterAssert(pageURN);
+    
+    MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
+    [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
+        // Call completion when the opening process has been initiated
+        completionBlock ? completionBlock() : nil;
+    }];
+    
+    if ([pageURN containsString:@"page:tv:home"] || [pageURN containsString:@"page:radio:home"]) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
 }
 
 #pragma mark Handoff
