@@ -245,6 +245,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 
 // Open [scheme]://open?media=[media_urn] (optional &channel-id=[channel_id])
 // Open [scheme]://open?show=[show_urn] (optional &channel-id=[channel_id])
+// Open [scheme]://open?page=[page_urn] (optional &channel-id=[channel_id], used for radio pages)
 // Open [scheme]://[play website url] ("parse_play_url.js" try to transformed to scheme urls)
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
