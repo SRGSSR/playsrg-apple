@@ -22,6 +22,7 @@
 #import "Play-Swift-Bridge.h"
 #import "PushService.h"
 #import "ShowViewController.h"
+#import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
@@ -34,6 +35,7 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import <libextobjc/libextobjc.h>
 #import <Mantle/Mantle.h>
+#import <SafariServices/SafariServices.h>
 #import <SRGAnalytics_Identity/SRGAnalytics_Identity.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGIdentity/SRGIdentity.h>
@@ -271,7 +273,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         NSURL *playURL = [NSURL URLWithString:result.toString];
         if (playURL) {
             URLComponents = [NSURLComponents componentsWithURL:playURL resolvingAgainstBaseURL:NO];
-            URLComponents.scheme = URL.scheme;
         }
     }
     
@@ -333,23 +334,19 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
             
-            if (!canOpen) {
-                // TODO:
-                // Open in SafariWebViewController
+            if (canOpen) {
+                return YES;
             }
-            
-            return YES;
         }
         
-        // TODO: [scheme]://open?radio=uid, [scheme]://open?date=01-01-2016 …
+        // TODO: [scheme]://open?date=01-01-2016 … or page urn bydate, az, topics, modules search …
         
-        NSError *error = [NSError errorWithDomain:PlayErrorDomain
-                                             code:PlayErrorCodeNotFound
-                             localizedDescription:NSLocalizedString(@"The content cannot be opened.", @"Error message when an external URN (media or show) from a scheme can't be opened")];
-        [Banner showError:error inViewController:nil];
-        
-        return NO;
     }
+    else if ([URLComponents.host.lowercaseString isEqualToString:@"redirect"]) {
+        // TODO: Send the URL to the deeplink service, for analyse.
+    }
+    
+    [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:nil];
     
     return NO;
 }
