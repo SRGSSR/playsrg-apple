@@ -1,4 +1,4 @@
-// parsePlayUrl v1.0-dev
+// parsePlayUrl v1.0-dev6
 
 var parsePlayUrl = function(urlString) {
     var url = urlString;
@@ -21,28 +21,31 @@ var parsePlayUrl = function(urlString) {
 
 var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 
+    // fix path issue
+    pathname = pathname.replace("//", "/");
+
     // Get BU
     var bu = null;
     switch (true) {
-    case hostname.includes("rts.ch") || hostname.includes("srgplayer-rts") || (hostname.includes("play-mmf") && pathname.startsWith("/rts/play/")):
+    case hostname.includes("rts.ch") || hostname.includes("srgplayer-rts") || (hostname.includes("play-mmf") && pathname.startsWith("/rts/")):
         bu = "rts";
         break;
-    case hostname.includes("rsi.ch") || hostname.includes("srgplayer-rsi") || (hostname.includes("play-mmf") && pathname.startsWith("/rsi/play/")):
+    case hostname.includes("rsi.ch") || hostname.includes("srgplayer-rsi") || (hostname.includes("play-mmf") && pathname.startsWith("/rsi/")):
         bu = "rsi";
         break;
-    case hostname.includes("rtr.ch") || hostname.includes("srgplayer-rtr") || (hostname.includes("play-mmf") && pathname.startsWith("/rtr/play/")):
+    case hostname.includes("rtr.ch") || hostname.includes("srgplayer-rtr") || (hostname.includes("play-mmf") && pathname.startsWith("/rtr/")):
         bu = "rtr";
         break;
-    case hostname.includes("swissinfo.ch") || hostname.includes("srgplayer-swi") || (hostname.includes("play-mmf") && pathname.startsWith("/swi/play/")):
+    case hostname.includes("swissinfo.ch") || hostname.includes("srgplayer-swi") || (hostname.includes("play-mmf") && pathname.startsWith("/swi/")):
         bu = "swi";
         break;
-    case hostname.includes("srf.ch") || hostname.includes("srgplayer-srf") || (hostname.includes("play-mmf") && pathname.startsWith("/srf/play/")):
+    case hostname.includes("srf.ch") || hostname.includes("srgplayer-srf") || (hostname.includes("play-mmf") && pathname.startsWith("/srf/")):
         bu = "srf";
         break;
     }
 
     if (! bu) {
-        console.log("No known SRG BU hostname.");
+        console.log("This hostname URL is not part of Play SRG URLs.");
         return null;
     }
 
@@ -53,14 +56,48 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
     /**
      *  Catch special case: shared RTS media urls built by RTS MAM.
      *
+     *  Ex: https://www.rts.ch/video
      *  Ex: https://www.rts.ch/video/emissions/signes/9901229-la-route-de-lexil-en-langue-des-signes.html
+     *  Ex: https://www.rts.ch/audio/la-1ere
      */
-     if (bu == "rts" && (pathname.startsWith("/video/") || pathname.startsWith("/audio/")) && pathname.endsWith(".html")) {
-        var lastPath = pathname.substr(pathname.lastIndexOf('/') + 1);
-        var mediaId = lastPath.split('.')[0].split('-')[0];
+     if (bu == "rts" && (pathname.startsWith("/video") || pathname.startsWith("/audio"))) {
+        var mediaId = null;
+
+        if (pathname.endsWith(".html")) {
+            var lastPath = pathname.substr(pathname.lastIndexOf('/') + 1);
+            mediaId = lastPath.split('.')[0].split('-')[0];
+        }
+
         if (mediaId) {
-            var mediaType = (pathname.startsWith("/video/")) ? "video" : "audio";
-            return openMedia(bu, mediaType, mediaId, null);
+                var mediaType = (pathname.startsWith("/video")) ? "video" : "audio";
+                return openMedia(bu, mediaType, mediaId, null);
+            }
+        else if (pathname.startsWith("/video")) {
+            // Returns default TV homepage
+            return openPage(bu, "tv:home", null);
+        }
+        else {
+            var channelId = null;
+            var paths = pathname.split('/');
+            if (paths.length > 2) {
+                var radioId = paths[2];
+                switch (radioId) {
+                    case "la-1ere":
+                        channelId = "a9e7621504c6959e35c3ecbe7f6bed0446cdf8da";
+                        break;
+                    case "espace-2":
+                        channelId = "a83f29dee7a5d0d3f9fccdb9c92161b1afb512db";
+                        break;
+                    case "couleur3":
+                        channelId = "8ceb28d9b3f1dd876d1df1780f908578cbefc3d7";
+                        break;
+                    case "option-musique":
+                        channelId = "f8517e5319a515e013551eea15aa114fa5cfbc3a";
+                        break;
+                }
+            }
+            // Returns default radio homepage
+            return openPage(bu, "radio:home", channelId);
         }
      }
 
@@ -210,6 +247,22 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
         else {
             // Returns default radio homepage
             return openPage(bu, "radio:home", null);
+        }
+    }
+
+    /**
+     *  Catch live tv popup urls
+     *
+     *  Ex: https://www.srf.ch/play/tv/popupvideoplayer?id=b833a5af-63c6-4310-bb80-05341310a4f5
+     */
+    if (pathname.includes("/tv/popupvideoplayer")) {
+        var mediaId = queryParams["id"];
+        if (mediaId) {
+            return openMedia(bu, "video", mediaId, null);
+        }
+        else {
+            // Returns default TV homepage
+            return openPage(bu, "tv:home", null);
         }
     }
 
