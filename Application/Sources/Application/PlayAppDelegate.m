@@ -27,7 +27,6 @@
 #import "UpdateInfo.h"
 #import "WebViewController.h"
 
-#import <AirshipKit/AirshipKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <Firebase/Firebase.h>
 #import <GoogleCast/GoogleCast.h>
@@ -38,6 +37,7 @@
 #import <SRGIdentity/SRGIdentity.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 #import <SRGUserData/SRGUserData.h>
+#import <UrbanAirship-iOS-SDK/AirshipKit.h>
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 #import <Fingertips/Fingertips.h>

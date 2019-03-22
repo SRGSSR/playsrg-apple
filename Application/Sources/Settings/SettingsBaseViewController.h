@@ -6,7 +6,7 @@
 
 #import "ContentInsets.h"
 
-#import <InAppSettingsKit/InAppSettingsKit.h>
+#import "InAppSettingsKit/IASKAppSettingsViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
