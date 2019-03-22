@@ -308,7 +308,7 @@ name: Protobuf, nameSpecified:
 body: Copyright 2008 Googl…
 version: 3.6.1
 
-name: CoconutKit, nameSpecified: , owner: defagos, version: 3.3.7
+name: CoconutKit, nameSpecified: , owner: defagos, version: c82d2b9
 
 name: ComScore-iOS-SDK, nameSpecified: , owner: comScore, version: 92f3489
 
@@ -338,7 +338,7 @@ name: paper-onboarding, nameSpecified: , owner: SRGSSR, version: ebf6bbd
 
 name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 3.6.3
 
-name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 1.1.9
+name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 2622962
 
 name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 6.5
 
@@ -346,11 +346,11 @@ name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
 name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 1.13
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 05940ca
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 1.0.8
 
-name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 2.5.6
+name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 30bfbc0
 
 name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 1.0
 
