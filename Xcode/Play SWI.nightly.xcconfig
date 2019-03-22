@@ -1,0 +1,2 @@
+#include "Xcode/Links/Play SWI.nightly.xcconfig"
+#include "Pods/Target Support Files/Pods-PlaySRG-Play SWI/Pods-PlaySRG-Play SWI.nightly.xcconfig"

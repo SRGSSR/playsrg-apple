@@ -1,0 +1,49 @@
+/* Resume playback onboarding name */
+/* Resume playback onboarding, 1st page title */
+"Resume playback" = "Reprise de lecture";
+
+/* Resume playback onboarding, 1st page description */
+"When reopening a content previously watched, playback resumes where you left off." = "Lorsque vous ouvrez un contenu précédemment joué, la lecture reprend là où vous l’aviez arrêtée.";
+
+/* Subscriptions onboarding name */
+"Subscriptions" = "Abonnements";
+
+/* Subscriptions onboarding, 1st page title */
+"Subscribe to the shows you like" = "Abonnez-vous à vos émissions préférées";
+
+/* Subscriptions onboarding, 1st page description */
+"Use the bell icon to receive show notifications." = "Utilisez la cloche pour recevoir les notifications d'une émission.";
+
+/* Subscriptions onboarding, 2nd page title */
+"Receive notifications" = "Recevez les notifications";
+
+/* Subscriptions onboarding, 2nd page description */
+"You will be notified when a new episode is available." = "Vous serez averti dès qu'un épisode de l'émission sera disponible.";
+
+/* Subscriptions onboarding, 3rd page title */
+"Manage your subscriptions" = "Gérez vos abonnements";
+
+/* Subscriptions onboarding, 3rd page description */
+"Add or cancel subscriptions at any time." = "Vous pouvez ajouter ou supprimer un abonnement à tout moment.";
+
+/* History onboarding name */
+/* History onboarding, 1st page title */
+/* Account onboarding, 3rd page title */
+"History" = "Historique";
+
+/* History onboarding, 1st page description */
+/* Account onboarding, 3rd page description */
+"Access your playback history." = "Retrouvez la liste des contenus précédemment consultés.";
+
+/* Account onboarding name */
+/* Account onboarding, 1st page title */
+"Account" = "Profil maRTS";
+
+/* Account onboarding, 1st page description */
+"Open an account to enable more features." = "Créez votre profil maRTS pour accéder à plus de fonctionnalités.";
+
+/* Account onboarding, 2nd page title */
+"Synchronize playback" = "Synchronisation de lecture";
+
+/* Account onboarding, 2nd page description */
+"With an account you can resume playback on another device." = "Grâce à votre profil, vous pouvez reprendre la lecture de votre contenu sur un autre appareil.";

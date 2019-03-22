@@ -1,0 +1,2 @@
+#include "Xcode/Links/Play RTR.appstore.xcconfig"
+#include "Pods/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR.appstore.xcconfig"

@@ -1,0 +1,74 @@
+[
+  {
+    "uid": "subscription",
+    "title": "Subscriptions",
+    "pages": [
+      {
+        "uid": "subscribe",
+        "title": "Subscribe to the shows you like",
+        "text": "Use the bell icon to receive show notifications.",
+        "color": "#c9002b"
+      },
+      {
+        "uid": "notify",
+        "title": "Receive notifications",
+        "text": "You will be notified when a new episode is available.",
+        "color": "#af001d"
+      },
+      {
+        "uid": "manage",
+        "title": "Manage your subscriptions",
+        "text": "Add or cancel subscriptions at any time.",
+        "color": "#8b0019"
+      }
+    ]
+  },
+  {
+    "uid": "resume_playback",
+    "title": "Resume playback",
+    "pages": [
+      {
+        "uid": "resume",
+        "title": "Resume playback",
+        "text": "When reopening a content previously watched, playback resumes where you left off.",
+        "color": "#c9002b"
+      }
+    ]
+  },
+  {
+      "uid": "account",
+      "title": "Account",
+      "pages": [
+          {
+              "uid": "account",
+              "title": "Account",
+              "text": "Open an account to enable more features.",
+              "color": "#c9002b"
+          },
+          {
+              "uid": "resume",
+              "title": "Synchronize playback",
+              "text": "With an account you can resume playback on another device.",
+              "color": "#af001d"
+          },
+          {
+              "uid": "history",
+              "title": "History",
+              "text": "Access your playback history.",
+              "color": "#8b0019"
+          }
+      ]
+  },
+  {
+      "uid": "history",
+      "title": "History",
+      "pages": [
+          {
+              "uid": "history",
+              "title": "History",
+              "text": "Access your playback history.",
+              "color": "#c9002b"
+          }
+      ]
+  }
+]

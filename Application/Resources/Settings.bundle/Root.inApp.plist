@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>StringsTable</key>
+	<string>Settings</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Quality</string>
+			<key>FooterText</key>
+			<string>By default, the application loads high-definition medias over cellular networks. To avoid possible extra costs, this option could be disable and the highest quality will be played only on Wi-Fi networks.</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>HD over cellular networks</string>
+			<key>Key</key>
+			<string>PlaySRGSettingHDOverCellularEnabled</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Playback</string>
+			<key>Key</key>
+			<string>Group_Playback</string>
+			<key>FooterText</key>
+			<string>When enabled, more content is automatically played after playback of the current content ends.</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Autoplay</string>
+			<key>Key</key>
+			<string>PlaySRGSettingAutoplayEnabled</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Key</key>
+			<string>Group_Information</string>
+			<key>Title</key>
+			<string>Information</string>
+		</dict>
+		<dict>
+			<key>IASKViewControllerStoryBoardFile</key>
+			<string>OnboardingsViewController</string>
+			<key>IASKViewControllerStoryBoardId</key>
+			<string>OnboardingsViewController</string>
+			<key>Title</key>
+			<string>Features</string>
+			<key>Key</key>
+			<string>Button_Features</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>What&apos;s new</string>
+			<key>Key</key>
+			<string>Button_WhatsNew</string>
+			<key>IASKTextAlignment</key>
+			<string>IASKUITextAlignmentLeft</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Terms and conditions</string>
+			<key>Key</key>
+			<string>Button_TermsAndConditions</string>
+			<key>IASKTextAlignment</key>
+			<string>IASKUITextAlignmentLeft</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>Licenses</string>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Become a beta tester</string>
+			<key>Key</key>
+			<string>Button_BetaTesting</string>
+			<key>IASKTextAlignment</key>
+			<string>IASKUITextAlignmentLeft</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Source code</string>
+			<key>Key</key>
+			<string>Button_Source code</string>
+			<key>IASKTextAlignment</key>
+			<string>IASKUITextAlignmentLeft</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Advanced features</string>
+			<key>Key</key>
+			<string>Group_AdvancedFeatures</string>
+			<key>FooterText</key>
+			<string>This section is only available in nightly and beta versions, and won&apos;t appear in the production version.</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>Server</string>
+			<key>File</key>
+			<string>Root.inApp.server</string>
+			<key>Key</key>
+			<string>Button_ServerSettings</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>User location</string>
+			<key>File</key>
+			<string>Root.inApp.userLocation</string>
+			<key>Key</key>
+			<string>Button_UserLocationSettings</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Presenter mode</string>
+			<key>Key</key>
+			<string>PlaySRGSettingPresenterModeEnabled</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Standalone playback</string>
+			<key>Key</key>
+			<string>PlaySRGSettingStandaloneEnabled</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Original images only</string>
+			<key>Key</key>
+			<string>PlaySRGSettingOriginalImagesOnlyEnabled</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Alternate radio homepage design</string>
+			<key>Key</key>
+			<string>PlaySRGSettingAlternateRadioHomepageDesignEnabled</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Check for updates</string>
+			<key>Key</key>
+			<string>Button_CheckForUpdates</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Install previous version</string>
+			<key>Key</key>
+			<string>Button_InstallPreviousVersion</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Subscribe to all shows</string>
+			<key>Key</key>
+			<string>Button_SubscribeToAllShows</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Open system settings</string>
+			<key>Key</key>
+			<string>Button_SystemSettings</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Reset</string>
+			<key>Key</key>
+			<string>Group_Reset</string>
+			<key>FooterText</key>
+			<string>This section is only available in nightly and beta versions, and won&apos;t appear in the production version.</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Clear web cache</string>
+			<key>Key</key>
+			<string>Button_ClearWebCache</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Clear vector image cache</string>
+			<key>Key</key>
+			<string>Button_ClearVectorImageCache</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Clear all contents</string>
+			<key>Key</key>
+			<string>Button_ClearAllContents</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Developer</string>
+			<key>Key</key>
+			<string>Group_Developer</string>
+			<key>FooterText</key>
+			<string>This section is only available in nightly and beta versions, and won&apos;t appear in the production version.</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Enable / disable FLEX</string>
+			<key>Key</key>
+			<string>Button_FLEX</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,557 @@
+/* Message displayed at the top of the screen when adding a media or a show to the favorite list. Quotes are managed by the application. */
+"%@ has been added to favorites" = "%@ è stato aggiunto alla lista dei preferiti";
+
+/* Message displayed at the top of the screen when adding an item to the subscription list. Quotes are managed by the application. */
+"%@ has been added to subscriptions" = "%@ è stato aggiunto alla lista degli abbonamenti";
+
+/* Message displayed at the top of the screen when removing an item to the favorite list. Quotes are managed by the application. */
+"%@ has been removed from favorites" = "%@ è stato tolto dalla lista dei preferiti";
+
+/* Message at the top of the screen displayed when removing an item from the subscription list. Quotes are managed by the application. */
+"%@ has been removed from subscriptions" = "%@ è stato tolto alla lista degli abbonamenti";
+
+/* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
+"%@ is idle." = "%@ è inattivo.";
+
+/* Label displaying the number of listenings on the player */
+"%@ listenings" = "%@ ascolti";
+
+/* Title displayed on the radio home button */
+"%@ overview" = "%@ home";
+
+/* Label displaying the number of views on the player */
+"%@ views" = "%@ visualizzazioni";
+
+/* Short title displayed in home page shows section. */
+"A to Z" = "Dalla A alla Z";
+
+/* Button label to add a download from the media long-press menu
+   Button label to add a download from the media preview window */
+"Add to downloads" = "Aggiungere ai download";
+
+/* Button label to add a favorite from the media long-press menu
+   Button label to add a favorite from the media preview window
+   Button label to add a favorite from the show long-press menu
+   Button label to add a favorite from the show preview window */
+"Add to favorites" = "Aggiungere ai preferiti";
+
+/* Title of the first cell of a media list on homepage. */
+"All content" = "Mostra tutto";
+
+/* Confirmation message displayed when the user is about to delete all download items
+   Confirmation message displayed when the user is about to delete all favorite items
+   Confirmation message displayed when the user is about to delete all subscription items
+   Confirmation message displayed when the user is about to delete the whole history */
+"Are you sure you want to delete all items?" = "Sei sicuro di voler eliminare tutti gli elementi?";
+
+/* Confirmation message displayed when the user is about to delete a download */
+"Are you sure you want to delete the downloaded media?" = "È di sicuro di voler eliminare gli elementi scaricati?";
+
+/* Confirmation message displayed when the user is about to delete selected download items
+   Confirmation message displayed when the user is about to delete selected favorite items
+   Confirmation message displayed when the user is about to delete selected history entries
+   Confirmation message displayed when the user is about to delete selected subscription items */
+"Are you sure you want to delete the selected items?" = "Sei sicuro di voler eliminare gli elementi selezionati?";
+
+/* Introductory text for next program information */
+"At %1$@: %2$@" = "Alle %1$@: %2$@";
+
+/* Tab name for audio results in the search */
+"Audios" = "Audios";
+
+/* Message title displayed when subscribing to all TV and radio shows
+   Message title displayed when the user subscribed to all TV and radio shows */
+"Automatic subscriptions" = "Abbonamenti automatici";
+
+/* Message description displayed when the user could not be subscribed to all TV and radio shows */
+"Automatic subscriptions failed. Please retry." = "L'attivazione dell'abbonamento non è riuscita. La preghiamo di riprovare.";
+
+/* Label used on the home page to present the soon expiring videos */
+"Available for a limited time" = "Disponibile per un periodo limitato";
+
+/* Short title displayed in home page shows section. */
+"By date" = "Per data";
+
+/* Label of the button to close the media long-press menu
+   Label of the button to close the media sharing menu
+   Label of the button to close the show long-press menu
+   Title of a cancel button
+   Title of the cancel button in the alert view when deleting a download in the player view */
+"Cancel" = "Interrompi";
+
+/* Information message of the action view to choose a regional radio
+   Title displayed on the regional radio selection button */
+"Choose a regional radio" = "Scegli la radio locale";
+
+/* Close button title */
+"Close" = "Chiudi";
+
+/* Text displayed on live cells when no program time information is available */
+"Currently" = "Attualmente";
+
+/* Title in the mini player for the live stream, if the current program is known. */
+"Currently: %@" = "Attualmente: %@";
+
+/* Title of a delete button
+   Title of the delete button in the alert view when deleting a download in the player view */
+"Delete" = "Elimina";
+
+/* Title of the confirmation pop-up displayed when the user is about to clear the history */
+"Delete history" = "Cancella la cronologia";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete selected history entries */
+"Delete history entries" = "Cancella gli elementi selezionati";
+
+/* Label for the button disabling autoplay */
+"Disable" = "Disattivare";
+
+/* Introductory title displayed at the top of the onboarding list */
+"Discover" = "Scopri";
+
+/* [Technical] Downloads page type for analytics measurements
+   Label in the left menu to present downloads
+   Title displayed at the top of the downloads screen */
+"Downloads" = "Download";
+
+/* Title of a button to propose the user to enable notifications in the system settings */
+"Enable in system settings" = "Attivare nelle impostazioni di sistema";
+
+/* Question displayed at the top of an alert asking the user to enable notifications */
+"Enable notifications?" = "Abilitare le notifiche?";
+
+/* Placeholder text displayed in the search field when empty (must be not too longth) */
+"Enter %@ characters or more" = "Immettere %@ o più caratteri per la ricerca";
+
+/* Placeholder text displayed in the search field when empty (with minimum number of characters freely specified) */
+"Enter %@ characters or more to search" = "Immettere %@ o più caratteri per la ricerca";
+
+/* Label used on the home page to present events while loading. It appears if no network connection available and no cache available. */
+"Events" = "Eventi";
+
+/* Short label identifying content which has expired. */
+"Expired" = "Scaduto";
+
+/* [Technical] Favorites page type for analytics measurements
+   Label in the left menu to present favorites
+   Title displayed at the top of the favorites screen */
+"Favorites" = "Preferiti";
+
+/* Title displayed at the top of the features list */
+"Features" = "Funzionalità";
+
+/* Label in the left menu to display the feedback form */
+"Feedback" = "Feedback";
+
+/* Explanation displayed in the alert asking the user to enable notifications */
+"For the application to inform you when a new episode is available, notifications must be enabled." = "Affinché l'app possa informarvi quando è disponibile un nuovo episodio, è necessario attivare le notifiche.";
+
+/* Total free space size, display at the bottom of download list */
+"Free space: %@" = "Spazio libero: %@";
+
+/* Text to inform a program time information, like the current program */
+"From %1$@ to %2$@" = "Dalle %1$@ alle %2$@";
+
+/* General menu section header label */
+"General" = "Generale";
+
+/* Label in the left menu to present the help page
+   Title displayed at the top of the help and copyright view */
+"Help and copyright" = "Aiuto e impressum";
+
+/* [Technical] History page type for analytics measurements
+   Label in the left menu to present history
+   Title displayed at the top of the history screen */
+"History" = "Cronologia";
+
+/* Title of the button to install a previous version */
+"I understand" = "Capisco";
+
+/* Image copyright introductory label */
+"Image credit: %@" = "Immagine: %@";
+
+/* Label for the button keeping autoplay enabled */
+"Keep" = "Tenere";
+
+/* Title of the alert view to keep autoplay permanently */
+"Keep autoplay?" = "Mantenere l'autoplay attivo?";
+
+/* Introductory text for the most recent data synchronization date */
+"Last synchronization: %@" = "Ultima sincronizzazione: %@";
+
+/* Label used on a radio home page to present the latest videos
+   Label used on the home page to present the latest videos */
+"Latest videos" = "I video più recenti";
+
+/* Label inviting the user to learn more information about an issue */
+"Learn more" = "Ulteriori informazioni";
+
+/* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
+"less than 1 hour" = "meno di 1 ora";
+
+/* Short label identifying a livestream. Display in uppercase. */
+"Live" = "Live";
+
+/* Label used on the home page to present live center medias. Only on test versions. */
+"Live center" = "Live center";
+
+/* Label used on a radio home page to present the livestream */
+"Live radio" = "Radio in diretta";
+
+/* Label used on the home page to present main TV channels */
+"Live TV" = "TV Live";
+
+/* Text displayed within the login / sign up menu header when no user is displayed */
+"Login / Sign up" = "Login / Registrati";
+
+/* Message title displayed when the user is forced to update the application. */
+"Mandatory update" = "È necessario aggiornare";
+
+/* Message on top screen when trying to open a media in the download list and the media is being downloaded. */
+"Media is being downloaded" = "Il media è in fase di download";
+
+/* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
+"Media not available yet" = "Media non disponibile";
+
+/* Miscellaneous menu section header label */
+"Miscellaneous" = "Varie";
+
+/* Button label to open the show episode page from the long-press menu
+   Button label to open the show episode page from the preview window */
+"More episodes" = "Più episodi";
+
+/* Title of the related content player section */
+"More on this subject" = "Di più sull'argomento";
+
+/* Label used on a radio home page to present the most listened / popular audio medias */
+"Most listened to" = "I più ascoltati";
+
+/* Label used on the home page to present the most seen / clicked / popular videos
+   Short title for the most clicked video topic list */
+"Most popular" = "I più visti";
+
+/* Short title for the most recent video topic list */
+"Most recent" = "I più recenti";
+
+/* Text displayed when a user is logged in but no information has been retrieved yet */
+"My account" = "Il mio account";
+
+/* Menu section header label for user personal content */
+"My content" = "Le mie trasmissioni";
+
+/* Text displayed when no data synchronization has been made yet */
+"Never" = "Mai";
+
+/* Title of the button to proceed to the next onboarding page */
+"Next" = "Prossimo";
+
+/* Text displayed when no downloads are available */
+"No downloads" = "Nessun download disponibile";
+
+/* Text displayed when no favorites are available */
+"No favorites" = "Nessun preferito disponibile";
+
+/* Message displayed if no Google Cast receiver is available */
+"No Google Cast receiver is available." = "Nessun ricevitore Google Cast disponibile.";
+
+/* Text displayed when no history is available */
+"No history" = "Nessuna cronologia";
+
+/* Text displayed when no notifications are available */
+"No notifications" = "Nessuna notifica";
+
+/* Default text displayed when no results are available */
+"No results" = "Nessun risultato";
+
+/* Text displayed when no subscriptions are available */
+"No subscriptions" = "Nessun abbonamento";
+
+/* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
+"Not available since %@" = "Non disponibile da %@";
+
+/* [Technical] Notifications page type for analytics measurements
+   Title displayed at the top of the notifications screen */
+"Notifications" = "Notifiche";
+
+/* Message displayed when the subscriptions feature is not available because notifications are not enabled in system settings */
+"Notifications are required to use this feature. Tap here to enable them in the system settings" = "Le notifiche sono necessari per utilizzare questa funzione. Toccare qui per abilitarle nelle impostazioni del sistema";
+
+/* Title of the button displayed at the end of an onboarding
+   Title of the button when the user subscribed to all TV and radio shows */
+"OK" = "OK";
+
+/* Short introductory text for what is currently playing on the radio */
+"On air" = "Ora in onda";
+
+/* [Technical] Onboarding page type for analytics measurements */
+"Onboarding" = "Onboarding";
+
+/* [Technical] Online page type for analytics measurements */
+"Online" = "Online";
+
+/* Button label to open a media from the start from the long-press menu
+   Button label to open a media from the start from the preview window
+   Button label to open a module from the preview window
+   Button label to open a show from the from the long-press menu
+   Button label to open a show from the preview window */
+"Open" = "Aprire";
+
+/* Label on the editor or trending lists in the home page, for prefered contents. Known as the SRF-TIPP label. Display in uppercase. */
+"OUR PICK" = "Proposta RSI";
+
+/* Home page title
+   Label in the left menu to present the main TV view */
+"Overview" = "Home";
+
+/* Notification message when a media is paused due to Handoff activity. */
+"Playback has resumed on another device." = "La riproduzione è stata ripresa su altro dispositivo.";
+
+/* Introductory text for DRM status information in the app settings */
+"Prefers DRM streams: %@." = "Preferisce i flussi DRM: %@.";
+
+/* Title of the button to proceed to the previous onboarding page */
+"Previous" = "Precedente";
+
+/* Message title displayed when the user wants to install a previous version */
+"Previous versions" = "Versioni precedenti";
+
+/* [Technical] Title for programmes A-Z analytics measurements
+   [Technical] Title for programmes A-Z page view analytics measurements
+   Label in the left menu to present shows A to Z (radio or TV)
+   Title displayed at the top of a (radio) show list */
+"Programmes A-Z" = "Trasmissioni dalla A alla Z";
+
+/* [Technical] Title for programmes by date page view analytics measurements
+   Label in the left menu to present programmes by date
+   Title displayed at the top of the screen where (radio) episodes can be accessed by date */
+"Programmes by date" = "Trasmissioni per data";
+
+/* Text displayed to inform the user she can pull a list to reload it */
+"Pull to reload" = "Scorrere verso il basso per ricaricare";
+
+/* [Technical] Radio page type for analytics measurements
+   Radio menu section header label */
+"Radio" = "Radio";
+
+/* Title displayed at the top of the radio show list */
+"Radio programmes A-Z" = "Programmi Radio dalla A alla Z";
+
+/* Tab name for radio show results in the search */
+"Radio shows" = "Programmi radio";
+
+/* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
+"Receiver is idle." = "Ricevitore inattivo.";
+
+/* Hint displayed when no history is available */
+"Recently played medias will be displayed here" = "I media consultati di recente verranno mostrati qui";
+
+/* Message title displayed when the user is recommended to update the application. */
+"Recommended update" = "Aggiornamento consigliato";
+
+/* Title of the action view to choose a regional radio */
+"Regional radios" = "Radio regionali";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete all download items */
+"Remove all downloads" = "Rimuovere tutti i download";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
+"Remove all favorites" = "Rimuovi tutto";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete all subscription items */
+"Remove all subscriptions" = "Rimuovere tutti gli abbonamenti";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete a download */
+"Remove download" = "Rimuovere i download";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete selected download items */
+"Remove downloads" = "Rimuovere i download";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete selected favorite items */
+"Remove favorites" = "Rimuovere i preferiti";
+
+/* Button label to remove a download from the media long-press menu
+   Button label to remove a download from the media preview window */
+"Remove from downloads" = "Rimuovere dai download";
+
+/* Button label to remove a favorite from the media long-press menu
+   Button label to remove a favorite from the media preview window
+   Button label to remove a favorite from the show long-press menu
+   Button label to remove a favorite from the show preview window */
+"Remove from favorites" = "Rimuovere dai preferiti";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete selected subscription items */
+"Remove subscriptions" = "Rimuovere gli abbonamenti";
+
+/* Short label identifying a replay sport event. Display in uppercase. */
+"Replay" = "Replay";
+
+/* [Technical] Search page type for analytics measurements
+   Label in the left menu to present the search view
+   Search page title
+   Search short label */
+"Search" = "Ricerca";
+
+/* Label in the left menu to present settings */
+"Settings" = "Impostazioni";
+
+/* Button label of the sharing choice in the media long-press menu
+   Button label of the sharing choice in the media preview window
+   Button label of the sharing choice in the module preview window
+   Button label of the sharing choice in the show long-press menu
+   Button label of the sharing choice in the show preview window
+   Title of the action view to choose a sharing action */
+"Share" = "Condividere";
+
+/* Show more button label when a link is available for broadcast information. */
+"Show more" = "Ulteriori informazioni";
+
+/* Label used on a radio home page to present its associated shows
+   Label used on a radio home page to present the shows AZ and shows by date access buttons.
+   Label used on the TV home page to present the shows AZ and shows by date access buttons. */
+"Shows" = "Programmi";
+
+/* Title of the button to skip updating the application */
+"Skip" = "Salta";
+
+/* Short label identifying content which will be available soon. */
+"Soon" = "Presto";
+
+/* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
+"Still available for %@" = "Ancora disponibile per %@";
+
+/* Button label to unsubscribe to a show */
+"Subscribe to show" = "Abbonarsi al programma";
+
+/* Message displayed when no notifications have been received */
+"Subscribe to shows you like to be notified when a new episode is available." = "Abbonati ai programmi che preferisci. Riceverai una notifica ogni volta che un nuovo episodio sarà disponibile.";
+
+/* Message description displayed when the user was subscribed to all TV and radio shows */
+"Subscribed to all TV and radio shows." = "Abbonato a tutti i programmi tv e radio.";
+
+/* Message description displayed when subscribing to all TV and radio shows */
+"Subscribing to all TV and radio shows…" = "In corso di abbonamento a tutti i programmi tv e radio…";
+
+/* [Technical] Subscriptions page type for analytics measurements
+   Label in the left menu to present subscriptions
+   Title displayed at the top of the subscriptions screen */
+"Subscriptions" = "Abbonamenti";
+
+/* Text displayed when subscriptions are disabled */
+"Subscriptions disabled" = "Abbonamenti disabilitati";
+
+/* [Technical] System page type for analytics measurements */
+"System" = "Sistema";
+
+/* Button label to share the content being played. */
+"The content" = "Il contenuto";
+
+/* Button label to share the content being played at time (hours / minutes / seconds). */
+"The content at %@" = "Il contenuto a %@";
+
+/* Error message when an external URN (media or show) from a scheme can't be opened */
+"The content cannot be opened." = "Il contenuto non può essere aperto.";
+
+/* Message displayed when some content (media, show, etc.) has been copied to the clipboard */
+"The content has been copied to the clipboard." = "Il contenuto è stato copiato negli Appunti.";
+
+/* Button label to share the entire episode being played. */
+"The entire episode" = "L'intero episodio";
+
+/* Button label to share the entire episode being played at time (hours / minutes / seconds). */
+"The episode at %@" = "L'episodio a %@";
+
+/* Message displayed if the Google Cast receiver cannot play audios */
+"The Google Cast receiver cannot play audios." = "Il ricevitore Google Cast non può riprodurre audio.";
+
+/* Message displayed if the Google Cast receiver cannot play videos */
+"The Google Cast receiver cannot play videos." = "Il ricevitore Google Cast non può riprodurre video.";
+
+/* Label used on a radio home page to present the latest audios */
+"The latest audios" = "Gli audio più recenti";
+
+/* Label used on a radio home page to present the latest audio episodes */
+"The latest episodes" = "Ultimi episodi";
+
+/* Error message when a media cannot be opened via Handoff
+   Error message when a media cannot be opened via Handoff or a push notification */
+"The media cannot be opened." = "Il media non può essere riprodotto.";
+
+/* Name of the favorited item, if no title or name to display
+   Name of the subscription item, if no title or name to display */
+"The selected content" = "Contenuto selezionato";
+
+/* Error message when a show cannot be opened via Handoff
+   Error message when a show cannot be opened via Handoff or a push notification */
+"The show cannot be opened." = "Il programma non può essere aperto.";
+
+/* Message displayed when attempting to play some content not allowed to be played with Google Cast */
+"This content is not allowed to be played with Google Cast." = "Non è permesso riprodurre questo contenuto con Google Cast.";
+
+/* Title of the button to go back to the current date */
+"Today" = "Oggi";
+
+/* Label used on the home page to present topics while loading. It appears if no network connection available and no cache available. */
+"Topics" = "Categorie";
+
+/* Total space size, display at the bottom of download list */
+"Total space used: %@" = "Spazio totale usato: %@";
+
+/* Label used on the home page to present trending TV videos */
+"Trending videos" = "Video di tendenza";
+
+/* [Technical] TV page type for analytics measurements
+   TV menu section header label */
+"TV" = "TV";
+
+/* Title displayed at the top of the TV show list */
+"TV programmes A-Z" = "Trasmissioni dalla A alla Z";
+
+/* Title displayed at the top of the screen where TV episodes can be accessed by date */
+"TV programmes by date" = "Trasmissioni per data";
+
+/* Tab name for TV show results in the search */
+"TV shows" = "Programmi TV";
+
+/* Button label to unsubscribe from a show */
+"Unsubscribe from show" = "Disabbonarsi dal programma";
+
+/* Title of the button to update the application */
+"Update" = "Aggiorna";
+
+/* Tab name for video results in the search */
+"Videos" = "Video";
+
+/* Label used on the home page to present scheduled livestream medias. Only on test versions. */
+"Web livestreams" = "Web livestreams";
+
+/* Title displayed at the top of the What's new view */
+"What's new" = "Novità";
+
+/* Description of the alert view to keep autoplay permanently */
+"You can manage this feature in the settings at any time." = "È possibile gestire questa funzionalità nelle impostazioni in qualsiasi momento.";
+
+/* Hint displayed when no subscriptions have been made and the device supports 3D touch */
+"You can press on a show to add it to subscriptions" = "È possibile premere su un programma per aggiungerlo agli abbonamenti";
+
+/* Hint displayed when no favorites are available and the device supports 3D touch */
+"You can press on an item to add it to favorites" = "È possibile premere su qualsiasi elemento per aggiungerlo ai preferiti";
+
+/* Hint displayed when no downloads are available and the device supports 3D touch */
+"You can press on an item to download it (not all items can be downloaded)" = "È possibile premere su un elemento per scaricarlo (non tutti gli elementi possono essere scaricati)";
+
+/* Hint displayed when no subscriptions have been made and the device does not support 3D touch */
+"You can tap and hold a show to add it to subscriptions" = "È possibile premere a lungo su un programma per aggiungerlo agli abbonamenti";
+
+/* Hint displayed when no favorites are available and the device does not support 3D touch */
+"You can tap and hold an item to add it to favorites" = "È possibile toccare e tenere premuto un elemento per aggiungerlo ai preferiti";
+
+/* Hint displayed when no downloads are available and the device does not support 3D touch */
+"You can tap and hold an item to download it (not all items can be downloaded)" = "È possibile toccare e tenere premuto un elemento per scaricarlo (non tutti gli elementi possono essere scaricati)";
+
+/* Notification displayed when the user has been logged out unexpectedly. */
+"You have been automatically logged out. Login again to keep your data synchronized across devices." = "È stato scollegato automaticamente. Esegua nuovamente il login per mantenere i dati sincronizzati su tutti i dispositivi.";
+
+/* Message description displayed when the user wants to install a previous version */
+"You may have to uninstall the application if the restored version crashes at launch.\n\nPrevious versions can be found under the \"History\" tab on the next screen." = "È possibile che lei debba disinstallare e l'applicazione se quella recuperata si blocca all'avvio.";
+
+/* Title displayed at the top of the feedback view */
+"Your feedback" = "La sua opinione";

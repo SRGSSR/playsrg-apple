@@ -1,0 +1,414 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "1.95.0"
+
+default_platform :ios
+
+platform :ios do
+
+  before_all do |lane|
+
+    if lane.to_s != "devLane"
+      ensure_git_status_clean
+    end
+
+    # For betas, before all, check if we have a beta release description
+    if lane.to_s == "betas"
+      build_number = get_build_number
+      marketing_version = getMarketingVersion
+      tag_version = marketing_version + '-' + build_number
+
+      whatsNewForBeta = getWhatsNewForBeta(tag_version: tag_version)
+      if whatsNewForBeta.empty?
+        UI.user_error!("Woops, there is no beta release note in the WhatsNew-beta.json file for " + tag_version)
+      end
+    end
+
+    if lane.to_s != "devLane"
+      ensure_git_status_clean
+      Dir.chdir("..") do
+        sh "make bootstrap"
+      end
+    end
+  end
+
+  desc "For each BUs, build a new nightly on HockeyApp, with a new build number, greater than the old nightly build number"
+  lane :nightlies do
+
+    schemes = ["Play SWI", "Play RTS", "Play SRF", "Play RSI", "Play RTR"]
+    hockeyapp_nightly_identifiers = [ENV['PLAY_SWI_NIGHTLY_HOCKEY_IDENTIFIER'], ENV['PLAY_RTS_NIGHTLY_HOCKEY_IDENTIFIER'], ENV['PLAY_SRF_NIGHTLY_HOCKEY_IDENTIFIER'], ENV['PLAY_RSI_NIGHTLY_HOCKEY_IDENTIFIER'], ENV['PLAY_RTR_NIGHTLY_HOCKEY_IDENTIFIER']]
+    hockeyapp_nightly_tokens = [ENV['PLAY_SWI_NIGHTLY_HOCKEY_TOKEN'], ENV['PLAY_RTS_NIGHTLY_HOCKEY_TOKEN'], ENV['PLAY_SRF_NIGHTLY_HOCKEY_TOKEN'], ENV['PLAY_RSI_NIGHTLY_HOCKEY_TOKEN'], ENV['PLAY_RTR_NIGHTLY_HOCKEY_TOKEN']]
+
+    hockeyAppBuildNumber = getHockeyAppNightlyBuildNumber
+    increment_build_number(
+      build_number: hockeyAppBuildNumber + 1
+    )
+
+    changelog = default_changelog_for_nightlies
+
+    branch_name = sh "git branch | grep \\* | cut -d ' ' -f2"
+
+    bundle_display_name_suffix = " 🌙"
+    marketing_version_suffix = "-nightly"
+    if (branch_name.include? 'feature/')
+    	bundle_display_name_suffix = " 🌿"
+    	marketing_version_suffix = marketing_version_suffix + '-' + branch_name.sub('feature/', '').strip
+    end
+
+    schemes.each_index do |index|
+
+      build_lane(
+        configuration: "Nightly",
+        scheme: schemes[index],
+        bundle_display_name_suffix: bundle_display_name_suffix,
+        marketing_version_suffix: marketing_version_suffix
+      )
+
+      hockey_lane(
+        api_token: hockeyapp_nightly_tokens[index],
+        public_identifier: hockeyapp_nightly_identifiers[index],
+        notes: changelog
+      )
+
+      clean_build_artifacts
+
+    end
+
+    merakiPushApps
+
+    saveLastNightliesSuccessGitCommitHash
+
+  end
+
+  desc "For each BUs, build a new beta on HockeyApp with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number"
+  lane :betas do
+
+    schemes = ["Play SWI", "Play RTS", "Play SRF", "Play RSI", "Play RTR"]
+    hockeyapp_beta_identifiers = [ENV['PLAY_SWI_BETA_HOCKEY_IDENTIFIER'], ENV['PLAY_RTS_BETA_HOCKEY_IDENTIFIER'], ENV['PLAY_SRF_BETA_HOCKEY_IDENTIFIER'], ENV['PLAY_RSI_BETA_HOCKEY_IDENTIFIER'], ENV['PLAY_RTR_BETA_HOCKEY_IDENTIFIER']]
+    hockeyapp_beta_tokens = [ENV['PLAY_SWI_BETA_HOCKEY_TOKEN'], ENV['PLAY_RTS_BETA_HOCKEY_TOKEN'], ENV['PLAY_SRF_BETA_HOCKEY_TOKEN'], ENV['PLAY_RSI_BETA_HOCKEY_TOKEN'], ENV['PLAY_RTR_BETA_HOCKEY_TOKEN']]
+
+    build_number = get_build_number
+    marketing_version = getMarketingVersion
+    tag_version = marketing_version + '-' + build_number
+
+    whatsNewForBeta = getWhatsNewForBeta(tag_version: tag_version)
+
+    schemes.each_index do |index|
+
+      build_lane(
+        configuration: "Beta",
+        scheme: schemes[index],
+        bundle_display_name_suffix: " 🎯",
+        marketing_version_suffix: "-beta"
+      )
+
+      hockey_lane(
+        api_token: hockeyapp_beta_tokens[index],
+        public_identifier: hockeyapp_beta_identifiers[index],
+        notes: whatsNewForBeta
+      )
+
+      clean_build_artifacts
+
+    end
+
+    merakiPushApps
+
+    #Tag the new beta, bump build number and push to the repo only if we're not in a release process
+    
+    branch_name = sh "git branch | grep \\* | cut -d ' ' -f2"
+    is_in_release_process = (branch_name.include? 'master') || (branch_name.include? 'release') || (branch_name.include? 'hotfix')
+
+    if ! is_in_release_process
+      add_git_tag tag: tag_version
+
+      build_number = increment_build_number
+      commit_version_bump(
+        xcodeproj: "PlaySRG.xcodeproj",
+        message: "Bump build number to " + build_number,
+        ignore: /.+/
+      )
+      push_to_git_remote
+    end
+
+  end
+
+  desc "SWI: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp."
+  lane :swiTestFlight do
+    testflight_lane(
+      scheme: "Play SWI",
+      hockey_api_token: ENV['PLAY_SWI_HOCKEY_TOKEN'],
+      hockey_public_identifier: ENV['PLAY_SWI_HOCKEY_IDENTIFIER']
+    )
+  end
+
+  desc "SRF: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp."
+  lane :srfTestFlight do
+    testflight_lane(
+      scheme: "Play SRF",
+      hockey_api_token: ENV['PLAY_SRF_HOCKEY_TOKEN'],
+      hockey_public_identifier: ENV['PLAY_SRF_HOCKEY_IDENTIFIER']
+    )
+  end
+
+  desc "RTS: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp."
+  lane :rtsTestFlight do
+    testflight_lane(
+      scheme: "Play RTS",
+      hockey_api_token: ENV['PLAY_RTS_HOCKEY_TOKEN'],
+      hockey_public_identifier: ENV['PLAY_RTS_HOCKEY_IDENTIFIER']
+    )
+  end
+
+  desc "RSI: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp."
+  lane :rsiTestFlight do
+    testflight_lane(
+      scheme: "Play RSI",
+      hockey_api_token: ENV['PLAY_RSI_HOCKEY_TOKEN'],
+      hockey_public_identifier: ENV['PLAY_RSI_HOCKEY_IDENTIFIER']
+    )
+  end
+
+  desc "RTR: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp."
+  lane :rtrTestFlight do
+    testflight_lane(
+      scheme: "Play RTR",
+      hockey_api_token: ENV['PLAY_RTR_HOCKEY_TOKEN'],
+      hockey_public_identifier: ENV['PLAY_RTR_HOCKEY_IDENTIFIER']
+    )
+  end
+
+  desc "Build, upload to TestFlight, send dSYM to HockeyApp"
+  private_lane :testflight_lane do |options|
+    scheme = options[:scheme]
+    hockey_public_identifier = options[:hockey_public_identifier]
+    hockey_api_token = options[:hockey_api_token]
+
+    # Remove dependency with UIImagePickerController and NSPhotoLibraryUsageDescription AppStore rejection
+    carthage(
+      command: "build",
+      platform: "iOS",
+      configuration: "ReleaseDefault HockeySDK-iOS"
+    )
+
+    build_lane(
+      configuration: "AppStore",
+      scheme: scheme,
+      export_to_appstore: true
+    )
+
+    pilot(
+      skip_waiting_for_build_processing: true
+    )
+
+    hockey_lane(
+      api_token: hockey_api_token,
+      public_identifier: hockey_public_identifier,
+      upload_dsym_only: true,
+      notes: 'Build uploaded on iTunes Connect (via fastlane).'
+    )
+
+    clean_build_artifacts
+  end
+
+  desc "Build for a scheme and a configuration"
+  private_lane :build_lane do |options|
+    scheme = options[:scheme]
+    configuration = options[:configuration]
+    export_to_appstore = options[:export_to_appstore] ? options[:export_to_appstore] : false
+    bundle_display_name_suffix = options[:bundle_display_name_suffix] ? options[:bundle_display_name_suffix] : ""
+    marketing_version_suffix = options[:marketing_version_suffix] ? options[:marketing_version_suffix] : ""
+
+    output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME] + '/'
+
+    # resetProvisioningProfileContext
+
+    # app_identifier = getAppIdentifier(scheme: scheme, configuration: configuration)
+    # get_provisioning_profile(app_identifier: app_identifier, force: true, development: true, output_path:output_directory)
+    # get_provisioning_profile(app_identifier: app_identifier, force: true, output_path:output_directory)
+    # notification_service_extension_identifier = app_identifier + ".notification-service-extension"
+    # get_provisioning_profile(app_identifier: notification_service_extension_identifier, force: true, development: true, output_path:output_directory)
+    # get_provisioning_profile(app_identifier: notification_service_extension_identifier, force: true, output_path:output_directory)
+
+    team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+
+    enable_bitcode_arg = export_to_appstore ? "ENABLE_BITCODE=YES" : "ENABLE_BITCODE=NO"
+    xcargs = enable_bitcode_arg + ' BUNDLE_DISPLAY_NAME_SUFFIX="' + bundle_display_name_suffix + '" MARKETING_VERSION_SUFFIX="' + marketing_version_suffix + '" DEVELOPMENT_TEAM="' + team_id + '" -allowProvisioningUpdates'
+    
+    gym(
+      configuration: configuration,
+      scheme: scheme,
+      silent: true,
+      clean: true,
+      xcargs: xcargs,
+      export_method: export_to_appstore ? "app-store" : "enterprise",
+      include_bitcode: export_to_appstore,
+      export_team_id: team_id,
+      output_directory: output_directory
+    )
+  end
+
+  desc "Upload a build on HockeyApp"
+  private_lane :hockey_lane do |options|
+    public_identifier = options[:public_identifier]
+    api_token = options[:api_token]
+    upload_dsym_only = options[:upload_dsym_only] ? options[:upload_dsym_only] : false
+    notes = options[:notes]
+
+    repository_url = sh "git config --get remote.origin.url"
+    if repository_url.include? "git@"
+      repository_url.slice! "git@"
+      repository_url = repository_url.tr(":", "/")
+      repository_url = "https://" + repository_url
+    end
+
+    build_server_url = ENV['BUILD_URL']
+    if build_server_url == nil
+        build_server_url = `hostname`.strip
+    end
+
+    hockey(
+      api_token: api_token,
+      public_identifier: public_identifier,
+      notify: '0',
+      notes: notes,
+      commit_sha: last_git_commit[:commit_hash],
+      repository_url: repository_url,
+      build_server_url: build_server_url,
+      upload_dsym_only: upload_dsym_only
+    )
+  end
+
+  desc "Returns a default changelog for nightlies"
+  private_lane :default_changelog_for_nightlies do
+
+    lastNightliesGitCommitHash = getLastNightliesSuccessGitCommitHash
+    if lastNightliesGitCommitHash.length < 12
+      lastNightliesGitCommitHash = "HEAD^^^^^"
+    end
+
+    changelog = changelog_from_git_commits(
+        between: [lastNightliesGitCommitHash, "HEAD"],
+        pretty: "- %s"
+    )
+    # HAX: strip emoji from changelog
+    changelog = changelog.sub(/[\u{1F300}-\u{1F6FF}]/, '')
+    Actions.lane_context[SharedValues::FL_CHANGELOG] = changelog
+    changelog
+  end
+
+  desc "Return current nightly build number on Hockey App"
+  private_lane :getHockeyAppNightlyBuildNumber do
+    hockeyAppBuildNumber = (sh "scripts/hockeyapp-build-number.sh -t #{ENV['HOCKEY_API_TOKEN']} #{ENV['PLAY_SWI_NIGHTLY_HOCKEY_IDENTIFIER']} #{ENV['PLAY_RTS_NIGHTLY_HOCKEY_IDENTIFIER']} #{ENV['PLAY_SRF_NIGHTLY_HOCKEY_IDENTIFIER']} #{ENV['PLAY_RSI_NIGHTLY_HOCKEY_IDENTIFIER']} #{ENV['PLAY_RTR_NIGHTLY_HOCKEY_IDENTIFIER']}")
+    hockeyAppBuildNumber = Integer(hockeyAppBuildNumber.lines.map(&:chomp).last)
+    hockeyAppBuildNumber
+  end
+
+  desc "Save the git commit hash in a local text file for nightlies"
+  private_lane :saveLastNightliesSuccessGitCommitHash do
+    last = last_git_commit
+    File.open("last-nightlies-success-git-commit-hash.txt", 'w') {|f| f.write(last[:commit_hash]) }
+    last[:commit_hash]
+  end
+
+  desc "Read the git commit hash in a local text file for nightlies"
+  private_lane :getLastNightliesSuccessGitCommitHash do
+    file = File.open("last-nightlies-success-git-commit-hash.txt", "a+")
+    lastNightliesSuccessGitCommitHash = file.read
+    file.close
+    lastNightliesSuccessGitCommitHash
+  end
+
+  desc "Return the marketing version, without suffix"
+  private_lane :getMarketingVersion do
+     marketing_version = sh 'cd ..; xcodebuild -showBuildSettings | grep "MARKETING_VERSION =" | tr -d " =" | sed "s/MARKETING_VERSION//"'
+     marketing_version = marketing_version.lines.last.gsub(/\s+/, "")
+     marketing_version
+  end
+
+  desc "Return the bundle app identifier"
+  private_lane :getAppIdentifier do |options|
+     app_identifier = sh 'cd ..; xcodebuild -scheme "' + options[:scheme] + '" -configuration "' + options[:configuration] + '" -showBuildSettings | grep "PRODUCT_BUNDLE_IDENTIFIER =" | tr -d " =" | sed "s/PRODUCT_BUNDLE_IDENTIFIER//"'
+     app_identifier = app_identifier.lines.last.gsub(/\s+/, "")
+     app_identifier
+  end
+
+  desc "Return the what's new text from WhatsNew-Beta.json file in the repository"
+  private_lane :getWhatsNewForBeta do |options|
+    tag_version = options[:tag_version]
+    file = File.open("../WhatsNew-beta.json", "r")  
+    json = JSON.parse(file.read)
+    file.close
+    whatsNew = json[tag_version]
+    whatsNew ? whatsNew : ''
+  end
+
+  desc "Reset provisioning profile context to prepare a new build"
+  private_lane :resetProvisioningProfileContext do
+    lane_context.delete(SharedValues::SIGH_PROFILE_PATHS)
+    lane_context.delete(SharedValues::SIGH_PROFILE_PATH)
+    lane_context.delete(SharedValues::SIGH_UDID)
+    lane_context.delete(SharedValues::SIGH_UUID)
+    lane_context.delete(SharedValues::SIGH_NAME)
+    lane_context.delete(SharedValues::SIGH_PROFILE_TYPE)
+  end
+
+  desc "Try to push new apps on registered devices with Meraki"
+  private_lane :merakiPushApps do
+    file = File.open("../Configuration/Scripts/merakiPushApps.sh", "r")
+    merakiPushApps = file.read
+    file.close
+    sh merakiPushApps
+  end
+
+  # desc "A dev lane to test ruby scripts"
+  # lane :devLane do
+    
+  #   build_number = increment_build_number
+  #   commit_version_bump(
+  #       xcodeproj: "PlaySRG.xcodeproj",
+  #       message: "Bump build number to " + build_number,
+  #       ignore: /.+/
+  #   )
+
+  # end
+
+  after_all do |lane|
+    if lane.to_s != "devLane"
+      reset_git_repo(skip_clean: true)
+    end
+
+    # slack(
+    #   message: "Successfully deployed new App Update."
+    # )
+  end
+
+  error do |lane, exception|
+    if lane.to_s != "devLane"
+      clean_build_artifacts
+      reset_git_repo(skip_clean: true, force: true)
+    end
+
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
+
+# fastlane reports which actions are used
+# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer

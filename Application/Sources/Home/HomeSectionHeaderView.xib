@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="HomeSectionHeaderView" id="Kq2-FP-Fs7" customClass="HomeSectionHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLc-tN-O5S" userLabel="Module Background View">
+                    <rect key="frame" x="0.0" y="31" width="600" height="48"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" userLabel="Content View">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;label&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yn-mg-rHU">
+                            <rect key="frame" x="8" y="43" width="534" height="24"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                            <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1M-OM-I5D">
+                            <rect key="frame" x="554" y="34" width="42" height="42"/>
+                            <color key="tintColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <inset key="contentEdgeInsets" minX="8" minY="8" maxX="10" maxY="10"/>
+                            <state key="normal" image="list-24"/>
+                            <connections>
+                                <action selector="openMediaList:" destination="Kq2-FP-Fs7" eventType="touchUpInside" id="2oc-Bj-me2"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="w1M-OM-I5D" firstAttribute="leading" secondItem="0yn-mg-rHU" secondAttribute="trailing" constant="12" id="Kud-3K-SFt"/>
+                        <constraint firstItem="w1M-OM-I5D" firstAttribute="centerY" secondItem="0yn-mg-rHU" secondAttribute="centerY" id="cZB-p0-hxt"/>
+                        <constraint firstAttribute="bottom" secondItem="0yn-mg-rHU" secondAttribute="bottom" constant="12" id="od5-ad-0SU"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="dLc-tN-O5S" firstAttribute="leading" secondItem="Kq2-FP-Fs7" secondAttribute="leading" id="2Bk-WP-gsD"/>
+                <constraint firstAttribute="bottom" secondItem="dLc-tN-O5S" secondAttribute="bottom" id="7cn-kY-oeq"/>
+                <constraint firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="9gV-9c-50Z"/>
+                <constraint firstItem="iN0-l3-epB" firstAttribute="trailing" secondItem="w1M-OM-I5D" secondAttribute="trailing" constant="4" id="JQV-jQ-ayU"/>
+                <constraint firstItem="dLc-tN-O5S" firstAttribute="top" secondItem="0yn-mg-rHU" secondAttribute="top" constant="-12" id="KTs-Qg-jml"/>
+                <constraint firstItem="iN0-l3-epB" firstAttribute="leading" secondItem="Kq2-FP-Fs7" secondAttribute="leading" id="RZ3-Si-LVw"/>
+                <constraint firstItem="0yn-mg-rHU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Yed-o3-sbn"/>
+                <constraint firstAttribute="trailing" secondItem="dLc-tN-O5S" secondAttribute="trailing" id="a5e-T8-foP"/>
+                <constraint firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="kaq-LU-Ym3"/>
+                <constraint firstItem="iN0-l3-epB" firstAttribute="top" secondItem="Kq2-FP-Fs7" secondAttribute="top" id="zGM-fd-39W"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="DVm-bs-AUs"/>
+                <outlet property="moduleBackgroundView" destination="dLc-tN-O5S" id="QyF-xa-OhR"/>
+                <outlet property="navigationButton" destination="w1M-OM-I5D" id="E6X-H5-CBS"/>
+                <outlet property="titleLabel" destination="0yn-mg-rHU" id="eDa-Bc-y1w"/>
+            </connections>
+            <point key="canvasLocation" x="24" y="88.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="list-24" width="24" height="24"/>
+    </resources>
+</document>

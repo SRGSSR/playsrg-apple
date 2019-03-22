@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TitleHeaderView" id="UHp-tl-zKd" customClass="TitleHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="526" height="57"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVd-JH-0S2">
+                    <rect key="frame" x="0.0" y="0.0" width="526" height="57"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5Jy-nx-d3N">
+                        <rect key="frame" x="0.0" y="0.0" width="526" height="57"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Xa-5N-yhT">
+                                <rect key="frame" x="0.0" y="0.0" width="526" height="57"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fVT-yy-NdV">
+                                    <rect key="frame" x="0.0" y="0.0" width="526" height="57"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <vibrancyEffect>
+                                    <blurEffect style="light"/>
+                                </vibrancyEffect>
+                            </visualEffectView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzr-J1-4az">
+                                <rect key="frame" x="9" y="17" width="508" height="24"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="8Xa-5N-yhT" secondAttribute="bottom" id="RgO-Ff-bCO"/>
+                            <constraint firstAttribute="trailing" secondItem="8Xa-5N-yhT" secondAttribute="trailing" id="YIn-nd-WAX"/>
+                            <constraint firstItem="8Xa-5N-yhT" firstAttribute="top" secondItem="5Jy-nx-d3N" secondAttribute="top" id="f9r-Kr-jrz"/>
+                            <constraint firstItem="8Xa-5N-yhT" firstAttribute="leading" secondItem="5Jy-nx-d3N" secondAttribute="leading" id="irS-lh-7ll"/>
+                            <constraint firstItem="dzr-J1-4az" firstAttribute="leading" secondItem="5Jy-nx-d3N" secondAttribute="leading" constant="9" id="jY2-Ii-mOK"/>
+                            <constraint firstItem="dzr-J1-4az" firstAttribute="centerY" secondItem="5Jy-nx-d3N" secondAttribute="centerY" id="rQh-JV-Q2b"/>
+                            <constraint firstAttribute="trailing" secondItem="dzr-J1-4az" secondAttribute="trailing" constant="9" id="wQe-Xn-fvy"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="dark"/>
+                </visualEffectView>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="CVd-JH-0S2" firstAttribute="leading" secondItem="UHp-tl-zKd" secondAttribute="leading" id="5UO-in-Tcc"/>
+                <constraint firstAttribute="trailing" secondItem="CVd-JH-0S2" secondAttribute="trailing" id="AAS-yQ-Y92"/>
+                <constraint firstItem="CVd-JH-0S2" firstAttribute="top" secondItem="UHp-tl-zKd" secondAttribute="top" id="qXC-sn-J5Z"/>
+                <constraint firstAttribute="bottom" secondItem="CVd-JH-0S2" secondAttribute="bottom" id="upd-pc-H8O"/>
+            </constraints>
+            <connections>
+                <outlet property="titleLabel" destination="dzr-J1-4az" id="PVb-eT-BIP"/>
+            </connections>
+            <point key="canvasLocation" x="547" y="355.5"/>
+        </collectionReusableView>
+    </objects>
+</document>

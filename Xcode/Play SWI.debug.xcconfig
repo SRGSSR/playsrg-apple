@@ -1,0 +1,2 @@
+#include "Xcode/Links/Play SWI.debug.xcconfig"
+#include "Pods/Target Support Files/Pods-PlaySRG-Play SWI/Pods-PlaySRG-Play SWI.debug.xcconfig"

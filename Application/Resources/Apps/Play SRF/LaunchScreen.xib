@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleAspectFit" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_play_srf-160" translatesAutoresizingMaskIntoConstraints="NO" id="Dy3-kV-poJ" userLabel="Logo Image View">
+                    <rect key="frame" x="165.5" y="170" width="148" height="160"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_srgssr-26" translatesAutoresizingMaskIntoConstraints="NO" id="zo2-SA-ZKu" userLabel="SRGSSR Image View">
+                    <rect key="frame" x="202" y="446" width="76" height="26"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.68627450980000004" green="0.01176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Dy3-kV-poJ" firstAttribute="centerX" secondItem="grX-xe-LZZ" secondAttribute="centerX" id="Emm-zP-dP0"/>
+                <constraint firstItem="grX-xe-LZZ" firstAttribute="bottom" secondItem="zo2-SA-ZKu" secondAttribute="bottom" constant="8" id="UcJ-Xv-7H9"/>
+                <constraint firstItem="zo2-SA-ZKu" firstAttribute="centerX" secondItem="grX-xe-LZZ" secondAttribute="centerX" id="qsD-cJ-9vN"/>
+                <constraint firstItem="Dy3-kV-poJ" firstAttribute="centerY" secondItem="grX-xe-LZZ" secondAttribute="centerY" id="vpz-5k-pRu"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="grX-xe-LZZ"/>
+            <point key="canvasLocation" x="404" y="445"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="logo_play_srf-160" width="148" height="160"/>
+        <image name="logo_srgssr-26" width="76" height="26"/>
+    </resources>
+</document>

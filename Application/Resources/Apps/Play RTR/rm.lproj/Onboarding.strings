@@ -1,0 +1,49 @@
+/* Resume playback onboarding name */
+/* Resume playback onboarding, 1st page title */
+"Resume playback" = "Cuntinuar consumaziun";
+
+/* Resume playback onboarding, 1st page description */
+"When reopening a content previously watched, playback resumes where you left off." = "Cun rechargiar il cuntegn, cuntinuà la consumaziun davent dalla davosa posiziun consumada.";
+
+/* Subscriptions onboarding name */
+"Subscriptions" = "Abunaments";
+
+/* Subscriptions onboarding, 1st page title */
+"Subscribe to the shows you like" = "Abunescha la show che interessescha tai";
+
+/* Subscriptions onboarding, 1st page description */
+"Use the bell icon to receive show notifications." = "Dovrà il icon da zain per retschaiver notificaziuns tar novs cuntegns.";
+
+/* Subscriptions onboarding, 2nd page title */
+"Receive notifications" = "Retschaiver notificaziuns";
+
+/* Subscriptions onboarding, 2nd page description */
+"You will be notified when a new episode is available." = "Ti retschaivas notificaziuns sche nov cuntegns stattan a disposiziun.";
+
+/* Subscriptions onboarding, 3rd page title */
+"Manage your subscriptions" = "Administrar ils abunaments";
+
+/* Subscriptions onboarding, 3rd page description */
+"Add or cancel subscriptions at any time." = "Aschuntà ni stizzà abunaments da tut temp.";
+
+/* History onboarding name */
+/* History onboarding, 1st page title */
+/* Account onboarding, 3rd page title */
+"History" = "Cronologia";
+
+/* History onboarding, 1st page description */
+/* Account onboarding, 3rd page description */
+"Access your playback history." = "Tar tia cronologia.";
+
+/* Account onboarding name */
+/* Account onboarding, 1st page title */
+"Account" = "Conto";
+
+/* Account onboarding, 1st page description */
+"Open an account to enable more features." = "Avrir in conto per profitar da dapli pussaivladads.";
+
+/* Account onboarding, 2nd page title */
+"Synchronize playback" = "Sincronisar il playback.";
+
+/* Account onboarding, 2nd page description */
+"With an account you can resume playback on another device." = "Cun in conto pudais tadlar e guardar vinavant sin in auter apparat.";

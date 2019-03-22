@@ -1,0 +1,6 @@
+# LicensePlist configuration file (https://github.com/mono0926/LicensePlist).
+
+exclude:
+  - Fingertips
+  - FLEX
+  - srgcontentprotection-ios

@@ -1,0 +1,124 @@
+/* Label displaying the number of listenings on the player */
+"%@ listenings" = "%@ gehört";
+
+/* Live content label, with a channel title
+   Live content label, with a media title */
+"%@ live" = "%@ live";
+
+/* Label displaying the number of views on the player */
+"%@ views" = "%@ gesehen";
+
+/* Title of the first cell of a media list on homepage. */
+"All content for \"%@\"" = "Alle anzeigen aus \"%@\"";
+
+/* Close button label on player view */
+"Close" = "Schliessen";
+
+/* Player close button hint */
+"Closes the player while continuing to play audio." = "Schliesst den Player, wobei Audio weiter läuft.";
+
+/* Delete button label */
+"Delete" = "Löschen";
+
+/* A download button label */
+"Download" = "Download";
+
+/* In the player, show description label */
+"Episode of %@ show" = "Eine Sendung von %@";
+
+/* Introductory title for error notifications */
+"Error" = "Fehler";
+
+/* Media favorite creation label
+   Show favorite creation label */
+"Favorite" = "Favoriten";
+
+/* Introductory title for information notifications */
+"Information" = "Information";
+
+/* Accessibility introductory text for the logged in user */
+"Logged in user: %@" = "Angemeldeter Nutzer: %@";
+
+/* Accessibility text for the login / signup header */
+"Login or sign up" = "Anmelden oder registrieren";
+
+/* Accessibility hint associated with the account header */
+"Manages account information" = "Anmeldeinformationen verwalten";
+
+/* Menu button label */
+"Menu" = "Seitenmenü";
+
+/* Announcement made when the left menu is closed */
+"Menu closed" = "Menü geschlossen";
+
+/* Announcement made when the left menu is opened */
+"Menu open" = "Menü geöffnet";
+
+/* Text displayed when a user is logged in but no information has been retrieved yet */
+"My account" = "Mein Konto";
+
+/* Notifications button label */
+"Notifications" = "Push-Mitteilungen";
+
+/* Mini player label */
+"Now playing: %@" = "Jetzt spielt: %@";
+
+/* Status header action hint */
+"Opens details." = "Details öffnen.";
+
+/* Hint for content opened in Safari */
+"Opens in Safari." = "Inhalt wird in Safari geöffnet.";
+
+/* Show cell action hint
+   Show cell hint */
+"Opens show details." = "Öffnet Sendungs-Detailseite";
+
+/* Livestream play action hint */
+"Plays livestream." = "Spielt Livestream ab.";
+
+/* Media cell hint
+   Mini player action hint */
+"Plays the content." = "Inhalt abspielen";
+
+/* Title displayed in home page shows section. */
+"Programmes A-Z" = "Sendungen A bis Z";
+
+/* Title displayed in home page shows section. */
+"Programmes by date" = "Sendungen nach Datum";
+
+/* Mini player label */
+"Recently played: %@" = "Kürzlich abgespielt: %@";
+
+/* A download button label */
+"Remove download" = "Download entfernen";
+
+/* Media favorite removal label
+   Show favorite removal label */
+"Remove favorite" = "Aus den Favoriten entfernen";
+
+/* A download button label */
+"Retry download" = "Erneut herunterladen";
+
+/* Search button label */
+"Search" = "Suchen";
+
+/* Regional livestream selection hint */
+"Select regional radio" = "Wählen Sie Ihr Regionaljournal";
+
+/* Share button label on player view */
+"Share" = "Inhalt teilen";
+
+/* Homepage header action hint */
+"Shows all contents." = "Alle Inhalte anzeigen";
+
+/* A download button label */
+"Stop downloading" = "Download beenden";
+
+/* Show subscription label */
+"Subscribe to show" = "Push-Mitteilungen für diese Sendung aktivieren";
+
+/* Show unsubscription label */
+"Unsubscribe from show" = "Push-Mitteilungen für diese Sendung deaktivieren";
+
+/* Introductory title for warning notifications */
+"Warning" = "Warnung";

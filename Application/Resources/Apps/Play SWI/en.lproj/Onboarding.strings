@@ -1,0 +1,49 @@
+/* Resume playback onboarding name */
+/* Resume playback onboarding, 1st page title */
+"Resume playback" = "Resume playback";
+
+/* Resume playback onboarding, 1st page description */
+"When reopening a content previously watched, playback resumes where you left off." = "When reopening a content previously watched, playback resumes where you left off.";
+
+/* Subscriptions onboarding name */
+"Subscriptions" = "Subscriptions";
+
+/* Subscriptions onboarding, 1st page title */
+"Subscribe to the shows you like" = "Subscribe to the topics you like";
+
+/* Subscriptions onboarding, 1st page description */
+"Use the bell icon to receive show notifications." = "Use the bell icon to receive show notifications.";
+
+/* Subscriptions onboarding, 2nd page title */
+"Receive notifications" = "Receive notifications";
+
+/* Subscriptions onboarding, 2nd page description */
+"You will be notified when a new episode is available." = "You will be notified when a new content is available.";
+
+/* Subscriptions onboarding, 3rd page title */
+"Manage your subscriptions" = "Manage your subscriptions";
+
+/* Subscriptions onboarding, 3rd page description */
+"Add or cancel subscriptions at any time." = "Add or cancel subscriptions at any time.";
+
+/* History onboarding name */
+/* History onboarding, 1st page title */
+/* Account onboarding, 3rd page title */
+"History" = "History";
+
+/* History onboarding, 1st page description */
+/* Account onboarding, 3rd page description */
+"Access your playback history." = "Access your playback history.";
+
+/* Account onboarding name */
+/* Account onboarding, 1st page title */
+"Account" = "Account";
+
+/* Account onboarding, 1st page description */
+"Open an account to enable more features." = "Open an account to enable more features.";
+
+/* Account onboarding, 2nd page title */
+"Synchronize playback" = "Synchronize playback";
+
+/* Account onboarding, 2nd page description */
+"With an account you can resume playback on another device." = "With an account you can resume playback on another device.";
