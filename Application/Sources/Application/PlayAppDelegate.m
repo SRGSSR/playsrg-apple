@@ -334,9 +334,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 }
 
 // https://support.urbanairship.com/hc/en-us/articles/213492483-iOS-Badging-and-Auto-Badging
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     [self updateApplicationBadge];
+    completionHandler(UIBackgroundFetchResultNoData);
 }
 
 #pragma mark Custom URL scheme support
