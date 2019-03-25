@@ -176,7 +176,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Masonry</string>
 			<key>Title</key>
-			<string>Masonry (v1.1.0)</string>
+			<string>Masonry (c563c92)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -224,7 +224,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-ios</string>
 			<key>Title</key>
-			<string>srganalytics-ios (3.6.3)</string>
+			<string>srganalytics-ios (cc8acf2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -256,7 +256,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-ios</string>
 			<key>Title</key>
-			<string>srgidentity-ios (8004a94)</string>
+			<string>srgidentity-ios (c08fc41)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -264,7 +264,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-ios</string>
 			<key>Title</key>
-			<string>srgletterbox-ios (e2e70a9)</string>
+			<string>srgletterbox-ios (15b9533)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -296,7 +296,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srguserdata-ios</string>
 			<key>Title</key>
-			<string>srguserdata-ios (1.0)</string>
+			<string>srguserdata-ios (c5d5538)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
