@@ -442,7 +442,7 @@ name: CoconutKit, nameSpecified: , owner: defagos, version: c82d2b9
 
 name: ComScore-iOS-SDK, nameSpecified: , owner: comScore, version: 92f3489
 
-name: DZNEmptyDataSet, nameSpecified: , owner: dzenbot, version: d210f5a
+name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: cca95bb
 
 name: FXReachability, nameSpecified: , owner: SRGSSR, version: 1.3.2_srg2
 
