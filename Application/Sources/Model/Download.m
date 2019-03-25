@@ -216,8 +216,7 @@ static NSArray<Download *> *s_sortedDownloads;
     static NSString *s_downloadsDirectoryURLString;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
-        s_downloadsDirectoryURLString = [libraryPath stringByAppendingPathComponent:@"Downloads"];
+        s_downloadsDirectoryURLString = [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"Downloads"];
         NSError *error = nil;
         [NSFileManager.defaultManager createDirectoryAtPath:s_downloadsDirectoryURLString
                                 withIntermediateDirectories:YES

@@ -1570,7 +1570,6 @@
 		051E95475182108980358378 /* Pods-PlaySRG-Play RTS.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTS.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS.beta.xcconfig"; sourceTree = "<group>"; };
 		0801E0791D4A4A810008021E /* RadioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannel.h; sourceTree = "<group>"; };
 		0801E07A1D4A4A810008021E /* RadioChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioChannel.m; sourceTree = "<group>"; };
-		0806E7A81D50CA32002ED406 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = Carthage/Build/iOS/HockeySDK.framework; sourceTree = "<group>"; };
 		0806E7B51D50D918002ED406 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		0806E7B61D50D918002ED406 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		080731B5222453EC00AF9C83 /* SRGAnalytics_Identity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGAnalytics_Identity.framework; path = Carthage/Build/iOS/Static/SRGAnalytics_Identity.framework; sourceTree = "<group>"; };
@@ -1591,7 +1590,6 @@
 		081DAA1C1E099A3A00018623 /* DownloadFooterSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFooterSectionView.h; sourceTree = "<group>"; };
 		081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadFooterSectionView.m; sourceTree = "<group>"; };
 		081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadFooterSectionView.xib; sourceTree = "<group>"; };
-		082092DA208DE0F600711DE4 /* AirshipKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AirshipKit.framework; path = Carthage/Build/iOS/AirshipKit.framework; sourceTree = "<group>"; };
 		082092FC208E272E00711DE4 /* Application.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Application.entitlements; sourceTree = "<group>"; };
 		08209306208F522A00711DE4 /* PushService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushService.h; sourceTree = "<group>"; };
 		08209307208F522A00711DE4 /* PushService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushService.m; sourceTree = "<group>"; };
@@ -1824,8 +1822,6 @@
 		6F1EBE1C222EBB7E003E0722 /* Play SRF.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.debug.xcconfig"; sourceTree = "<group>"; };
 		6F1EBE1D222EBB7E003E0722 /* Play RTR.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.nightly.xcconfig"; sourceTree = "<group>"; };
 		6F1EBE1E222EBB7E003E0722 /* Play SWI.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.appstore.xcconfig"; sourceTree = "<group>"; };
-		6F258C711DD7A9B80082E5AF /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MGSwipeTableCell.framework; path = Carthage/Build/iOS/MGSwipeTableCell.framework; sourceTree = "<group>"; };
-		6F26B8AC1FBADC5500A5599B /* SwiftMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftMessages.framework; path = Carthage/Build/iOS/SwiftMessages.framework; sourceTree = "<group>"; };
 		6F2961FB2006186000CAB0E4 /* placeholder_media_list-180.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "placeholder_media_list-180.pdf"; sourceTree = "<group>"; };
 		6F322756216F2FEB006A785D /* MenuAccountHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuAccountHeaderView.xib; sourceTree = "<group>"; };
 		6F322757216F2FEC006A785D /* MenuAccountHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuAccountHeaderView.h; sourceTree = "<group>"; };
@@ -1911,7 +1907,6 @@
 		6F556B361DDC419800B5DEA2 /* SettingsBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsBaseViewController.h; sourceTree = "<group>"; };
 		6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsBaseViewController.m; sourceTree = "<group>"; };
 		6F556DB020D1174100C3573A /* NotificationService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NotificationService-Info.plist"; sourceTree = "<group>"; };
-		6F58663E1DD217D1005DAFE4 /* InAppSettingsKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InAppSettingsKit.framework; path = Carthage/Build/iOS/InAppSettingsKit.framework; sourceTree = "<group>"; };
 		6F5866491DD226EE005DAFE4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		6F5F4FC11DB10CFD0011CCA3 /* RelatedContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedContentView.h; sourceTree = "<group>"; };
 		6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedContentView.m; sourceTree = "<group>"; };
@@ -2067,7 +2062,6 @@
 		E66BEC1B1DA7FCED00AD4450 /* MediaPlayerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MediaPlayerViewController.storyboard; sourceTree = "<group>"; };
 		E67BB6971D3E640C00E1FEA3 /* Mantle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mantle.framework; path = Carthage/Build/iOS/Mantle.framework; sourceTree = "<group>"; };
 		E68712311D65B3D600CE7142 /* Fingertips.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fingertips.framework; path = Carthage/Build/iOS/Fingertips.framework; sourceTree = "<group>"; };
-		E694A9CB1D65EF4A00372DF0 /* FSCalendar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FSCalendar.framework; path = Carthage/Build/iOS/FSCalendar.framework; sourceTree = "<group>"; };
 		E694A9D71D65EFF300372DF0 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
 		E694A9D81D65EFF300372DF0 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		E694A9D91D65EFF300372DF0 /* SearchResultsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchResultsViewController.storyboard; sourceTree = "<group>"; };
@@ -3200,21 +3194,16 @@
 		E65311E31D3E6FD100B4B8BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				082092DA208DE0F600711DE4 /* AirshipKit.framework */,
 				6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */,
 				E60178511D635E130000362E /* ComScore.framework */,
 				08B6F7E5210CF8660097EF8B /* CoreData.framework */,
 				E6EE7A981D426DD000D3547B /* DZNEmptyDataSet.framework */,
 				E68712311D65B3D600CE7142 /* Fingertips.framework */,
-				E694A9CB1D65EF4A00372DF0 /* FSCalendar.framework */,
 				6F0C991F2121F9DF00073AB6 /* FXReachability.framework */,
-				0806E7A81D50CA32002ED406 /* HockeySDK.framework */,
-				6F58663E1DD217D1005DAFE4 /* InAppSettingsKit.framework */,
 				6F0C99202121F9DF00073AB6 /* libextobjc.framework */,
 				6F0C992B2121F9E100073AB6 /* MAKVONotificationCenter.framework */,
 				E67BB6971D3E640C00E1FEA3 /* Mantle.framework */,
 				E6DB5F401D6738EA0057094B /* Masonry.framework */,
-				6F258C711DD7A9B80082E5AF /* MGSwipeTableCell.framework */,
 				6F00BFC820A9C40E009795AF /* PaperOnboarding.framework */,
 				6F0C99252121F9E000073AB6 /* SRGAnalytics_DataProvider.framework */,
 				080731B5222453EC00AF9C83 /* SRGAnalytics_Identity.framework */,
@@ -3241,7 +3230,6 @@
 				6F0C992C2121F9E100073AB6 /* SRGNetwork.framework */,
 				6F340F4A220DA86B00778CA3 /* SRGUserData.bundle */,
 				6F340F44220DA7E900778CA3 /* SRGUserData.framework */,
-				6F26B8AC1FBADC5500A5599B /* SwiftMessages.framework */,
 				6F5F7FE01F382E9D00C330EC /* TCCore.framework */,
 				6F5F7FE11F382E9D00C330EC /* TCSDK.framework */,
 				6F1A95F9216E007700DB15AA /* UICKeyChainStore.framework */,
