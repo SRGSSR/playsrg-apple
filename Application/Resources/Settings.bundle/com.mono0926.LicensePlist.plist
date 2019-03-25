@@ -256,7 +256,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-ios</string>
 			<key>Title</key>
-			<string>srgidentity-ios (1.0)</string>
+			<string>srgidentity-ios (8004a94)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -312,7 +312,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/UICKeyChainStore</string>
 			<key>Title</key>
-			<string>UICKeyChainStore (v2.1.2)</string>
+			<string>UICKeyChainStore (63b2a54)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

@@ -464,7 +464,7 @@ name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 6.5
 
 name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
-name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0
+name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 8004a94
 
 name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 05940ca
 
@@ -478,7 +478,7 @@ name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 1.0
 
 name: tagcommander-ios, nameSpecified: , owner: SRGSSR, version: 4.1.5_4.1.3
 
-name: UICKeyChainStore, nameSpecified: , owner: kishikawakatsumi, version: v2.1.2
+name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: 63b2a54
 
 name: YYWebImage, nameSpecified: , owner: ibireme, version: 1.0.5
 
