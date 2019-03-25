@@ -6,5 +6,5 @@ github "SRGSSR/srgletterbox-ios" "1.13"
 github "SRGSSR/srguserdata-ios" "1.0"
 
 # The title margin had to be fixed, on forked repository first. We should probably submit a pull request.
-github "SRGSSR/paper-onboarding" "ebf6bbdfb9ccee0bd90e7ed204fc3d11423cb122"
+github "SRGSSR/paper-onboarding" "4084ced68ad12a8e5ce811ef7ba4ceaca8acb9c5"
 # github "Ramotion/paper-onboarding" ~> 5.0.0

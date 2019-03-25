@@ -454,7 +454,7 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SnapKit, version: v1.1.0
 
-name: paper-onboarding, nameSpecified: , owner: SRGSSR, version: ebf6bbd
+name: paper-onboarding, nameSpecified: , owner: SRGSSR, version: 4084ced
 
 name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 3.6.3
 
