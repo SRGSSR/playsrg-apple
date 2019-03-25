@@ -466,7 +466,7 @@ name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
 name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 8004a94
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 05940ca
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: e2e70a9
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 1.0.8
 
@@ -480,7 +480,7 @@ name: tagcommander-ios, nameSpecified: , owner: SRGSSR, version: 4.1.5_4.1.3
 
 name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: 63b2a54
 
-name: YYWebImage, nameSpecified: , owner: ibireme, version: 1.0.5
+name: YYWebImage, nameSpecified: , owner: SRGSSR, version: 55704d0
 
 add-version-numbers: true
 
