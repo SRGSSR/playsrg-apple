@@ -3646,10 +3646,9 @@
 			};
 			buildConfigurationList = 08C68D4A1D38D49600BB8AAA /* Build configuration list for PBXProject "PlaySRG" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				it,
