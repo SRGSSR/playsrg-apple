@@ -9,6 +9,7 @@
 #import "PlayErrors.h"
 
 #import <CoconutKit/CoconutKit.h>
+#import <GoogleCast/GoogleCast.h>
 
 BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pError)
 {

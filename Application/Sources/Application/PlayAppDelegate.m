@@ -27,7 +27,6 @@
 #import "UpdateInfo.h"
 #import "WebViewController.h"
 
-#import <AirshipKit/AirshipKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <Firebase/Firebase.h>
 #import <GoogleCast/GoogleCast.h>
@@ -38,6 +37,7 @@
 #import <SRGIdentity/SRGIdentity.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 #import <SRGUserData/SRGUserData.h>
+#import <UrbanAirship-iOS-SDK/AirshipKit.h>
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 #import <Fingertips/Fingertips.h>
@@ -334,9 +334,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 }
 
 // https://support.urbanairship.com/hc/en-us/articles/213492483-iOS-Badging-and-Auto-Badging
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     [self updateApplicationBadge];
+    completionHandler(UIBackgroundFetchResultNoData);
 }
 
 #pragma mark Custom URL scheme support

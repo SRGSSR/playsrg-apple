@@ -11,8 +11,8 @@
 #import "PlayAppDelegate.h"
 #import "Notification.h"
 
-#import <AirshipKit/AirshipKit.h>
 #import <libextobjc/libextobjc.h>
+#import <UrbanAirship-iOS-SDK/AirshipKit.h>
 #import <UserNotifications/UserNotifications.h>
 
 NSString * const PushServiceSubscriptionStateDidChangeNotification = @"PushServiceSubscriptionStateDidChangeNotification";

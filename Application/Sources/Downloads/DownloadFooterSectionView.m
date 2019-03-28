@@ -83,8 +83,8 @@
     
     NSString *totalFreeSpaceString = @"";
     NSError *error = nil;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSDictionary *dictionary = [NSFileManager.defaultManager attributesOfFileSystemForPath:[paths lastObject] error: &error];
+    NSArray<NSString *> *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSDictionary *dictionary = [NSFileManager.defaultManager attributesOfFileSystemForPath:paths.lastObject error:&error];
     
     static dispatch_once_t s_onceToken;
     static NSByteCountFormatter *s_byteCountFormatter;

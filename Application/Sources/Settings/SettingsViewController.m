@@ -24,6 +24,7 @@
 
 #import <FLEX/FLEX.h>
 #import <HockeySDK/HockeySDK.h>
+#import <InAppSettingsKit/IASKSettingsReader.h>
 #import <libextobjc/libextobjc.h>
 #import <SafariServices/SafariServices.h>
 #import <SRGAppearance/SRGAppearance.h>
