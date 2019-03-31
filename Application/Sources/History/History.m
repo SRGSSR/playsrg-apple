@@ -10,6 +10,7 @@
 #import "Download.h"
 #import "NSTimer+PlaySRG.h"
 
+#import <GoogleCast/GoogleCast.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 #import <SRGUserData/SRGUserData.h>
 
@@ -71,31 +72,49 @@ __attribute__((constructor)) static void HistoryPlayerTrackerInit(void)
     s_tasks = [NSMutableDictionary dictionary];
     
     s_trackerTimer = [NSTimer play_timerWithTimeInterval:1. repeats:YES block:^(NSTimer * _Nonnull timer) {
-        SRGLetterboxController *letterboxController = SRGLetterboxService.sharedService.controller;
-        if (letterboxController.playbackState != SRGMediaPlayerPlaybackStatePlaying) {
-            return;
-        }
-        
-        SRGMedia *chapterMedia = HistoryChapterMedia(letterboxController);
-        if (! chapterMedia || chapterMedia.contentType == SRGContentTypeLivestream) {
-            return;
-        }
-        
-        CMTime currentTime = letterboxController.currentTime;
-        CMTime chapterPlaybackTime = (chapterMedia.contentType != SRGContentTypeScheduledLivestream && CMTIME_IS_VALID(currentTime)) ? currentTime : kCMTimeZero;
         NSString *deviceUid = UIDevice.currentDevice.name;
         
-        // Save the segment position.
-        SRGSubdivision *subdivision = letterboxController.subdivision;
-        if ([subdivision isKindOfClass:SRGSegment.class]) {
-            SRGSegment *segment = (SRGSegment *)subdivision;
-            CMTime segmentPlaybackTime = CMTimeMaximum(CMTimeSubtract(chapterPlaybackTime, CMTimeMakeWithSeconds(segment.markIn / 1000., NSEC_PER_SEC)), kCMTimeZero);
-            [SRGUserData.currentUserData.history saveHistoryEntryForUid:segment.URN withLastPlaybackTime:segmentPlaybackTime deviceUid:deviceUid completionBlock:nil];
+        GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
+        if (session) {
+            GCKMediaStatus *mediaStatus = session.remoteMediaClient.mediaStatus;
+            if (mediaStatus.playerState != GCKMediaPlayerStatePlaying) {
+                return;
+            }
+            
+            NSString *URN = mediaStatus.mediaInformation.contentID;
+            if (! URN) {
+                return;
+            }
+            
+            NSTimeInterval streamPosition = mediaStatus.streamPosition;
+            [SRGUserData.currentUserData.history saveHistoryEntryForUid:URN withLastPlaybackTime:CMTimeMakeWithSeconds(streamPosition, NSEC_PER_SEC) deviceUid:deviceUid completionBlock:nil];
         }
-        
-        // Save the main full-length position (update after the segment so that full-length entries are always more recent than corresponding
-        // segment entries)
-        [SRGUserData.currentUserData.history saveHistoryEntryForUid:chapterMedia.URN withLastPlaybackTime:chapterPlaybackTime deviceUid:deviceUid completionBlock:nil];
+        else {
+            SRGLetterboxController *letterboxController = SRGLetterboxService.sharedService.controller;
+            if (letterboxController.playbackState != SRGMediaPlayerPlaybackStatePlaying) {
+                return;
+            }
+            
+            SRGMedia *chapterMedia = HistoryChapterMedia(letterboxController);
+            if (! chapterMedia || chapterMedia.contentType == SRGContentTypeLivestream) {
+                return;
+            }
+            
+            CMTime currentTime = letterboxController.currentTime;
+            CMTime chapterPlaybackTime = (chapterMedia.contentType != SRGContentTypeScheduledLivestream && CMTIME_IS_VALID(currentTime)) ? currentTime : kCMTimeZero;
+            
+            // Save the segment position.
+            SRGSubdivision *subdivision = letterboxController.subdivision;
+            if ([subdivision isKindOfClass:SRGSegment.class]) {
+                SRGSegment *segment = (SRGSegment *)subdivision;
+                CMTime segmentPlaybackTime = CMTimeMaximum(CMTimeSubtract(chapterPlaybackTime, CMTimeMakeWithSeconds(segment.markIn / 1000., NSEC_PER_SEC)), kCMTimeZero);
+                [SRGUserData.currentUserData.history saveHistoryEntryForUid:segment.URN withLastPlaybackTime:segmentPlaybackTime deviceUid:deviceUid completionBlock:nil];
+            }
+            
+            // Save the main full-length position (update after the segment so that full-length entries are always more recent than corresponding
+            // segment entries)
+            [SRGUserData.currentUserData.history saveHistoryEntryForUid:chapterMedia.URN withLastPlaybackTime:chapterPlaybackTime deviceUid:deviceUid completionBlock:nil];
+        }
     }];
 }
 
