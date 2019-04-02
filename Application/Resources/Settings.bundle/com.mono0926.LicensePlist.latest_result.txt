@@ -456,7 +456,7 @@ name: Masonry, nameSpecified: , owner: SRGSSR, version: 07e577b
 
 name: paper-onboarding, nameSpecified: , owner: SRGSSR, version: 78f3f00
 
-name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: ef96077
+name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 1e0e35f
 
 name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 7b7c51e
 
@@ -466,11 +466,11 @@ name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
 name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 206b090
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: f8b454e
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 419f4f8
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: ba81171
 
-name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: f83076e
+name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: dfa597d
 
 name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 2318934
 
