@@ -1901,7 +1901,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)playlistsDidChange:(NSNotification *)notification
 {
     if ([notification.userInfo[SRGPlaylistChangedUidsKey] containsObject:SRGWatchLaterPlaylistUid]) {
-        NSDictionary *playlistEntryChanges = notification.userInfo[SRGPlaylistEntryChangesKey][SRGWatchLaterPlaylistUid];
+        NSDictionary<NSString *, NSArray<NSString *> *> *playlistEntryChanges = notification.userInfo[SRGPlaylistEntryChangesKey][SRGWatchLaterPlaylistUid];
         if (playlistEntryChanges && [playlistEntryChanges[SRGPlaylistEntryChangedUidsSubKey] containsObject:[self mainChapterMedia].URN]) {
             [self updateWatchLaterStatus];
         }
