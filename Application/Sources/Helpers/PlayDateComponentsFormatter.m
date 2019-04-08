@@ -8,7 +8,7 @@
 
 NSString *PlayFormattedDuration(NSTimeInterval duration)
 {
-    if (duration < 60. * 60.) {
+    if (duration <= 60. * 60.) {
         static NSDateComponentsFormatter *s_dateComponentsFormatter;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
@@ -32,7 +32,7 @@ NSString *PlayFormattedDuration(NSTimeInterval duration)
 
 NSString *PlayHumanReadableFormattedDuration(NSTimeInterval duration)
 {
-    if (duration < 60. * 60.) {
+    if (duration <= 60. * 60.) {
         static NSDateComponentsFormatter *s_dateComponentsFormatter;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
