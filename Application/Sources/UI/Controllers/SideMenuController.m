@@ -23,7 +23,6 @@
 #import "UIDevice+PlaySRG.h"
 #import "WebViewController.h"
 
-#import <ComScore/ComScore.h>
 #import <libextobjc/libextobjc.h>
 #import <Masonry/Masonry.h>
 
@@ -415,10 +414,6 @@ static const CGFloat SideMenuOffset = -50.f;
                 [queryItems addObject:[NSURLQueryItem queryItemWithName:@"type" value:isPad ? @"tablet" : @"phone"]];
                 [queryItems addObject:[NSURLQueryItem queryItemWithName:@"model" value:UIDevice.currentDevice.model]];
                 
-                NSString *visitorID = [CSComScore visitorID];
-                if (visitorID) {
-                    [queryItems addObject:[NSURLQueryItem queryItemWithName:@"cid" value:visitorID]];
-                }
                 
                 NSURL *feedbackURL = applicationConfiguration.feedbackURL;
                 NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:feedbackURL resolvingAgainstBaseURL:NO];
