@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) NSArray<Favorite *> *mediaFavorites;
 
 /**
- *  Remove favorites wihtout notifications
+ *  Remove "old" favorites files (without notifying changes)
  */
 + (void)finishMigrationForFavorites:(NSArray<Favorite *> *)favorites;
 

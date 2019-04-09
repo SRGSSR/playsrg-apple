@@ -186,7 +186,7 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterAdd;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemove;
 
 /**
- *  Title for events related to deletion of all watch alter entries
+ *  Title for events related to deletion of all watch later entries
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemoveAll;
 
