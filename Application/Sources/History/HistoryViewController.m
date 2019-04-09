@@ -7,15 +7,11 @@
 #import "HistoryViewController.h"
 
 #import "ApplicationConfiguration.h"
-#import "Banner.h"
 #import "History.h"
 #import "HistoryTableViewCell.h"
-#import "MediaPlayerViewController.h"
-#import "MediaPreviewViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
-#import "ShowViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 

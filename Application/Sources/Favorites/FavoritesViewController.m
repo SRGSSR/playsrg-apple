@@ -9,8 +9,6 @@
 #import "Banner.h"
 #import "Favorite.h"
 #import "FavoriteTableViewCell.h"
-#import "MediaPlayerViewController.h"
-#import "MediaPreviewViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "ShowViewController.h"
