@@ -177,7 +177,7 @@
                 labels.value = self.media.URN;
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
                 
-                [Banner showWatchLaterAdded:added forItemWithName:self.media.title inViewController:self];
+                [Banner showWatchLaterAdded:added forItemWithName:self.media.title inViewController:nil /* Not 'self' since dismissed */];
             }
         });
     }];

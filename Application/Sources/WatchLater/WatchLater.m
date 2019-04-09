@@ -21,7 +21,7 @@
 
 BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO && %K == %@", @keypath(SRGPlaylistEntry.new, discarded), @keypath(SRGPlaylistEntry.new, uid), mediaMetadata.URN];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO AND %K == %@", @keypath(SRGPlaylistEntry.new, discarded), @keypath(SRGPlaylistEntry.new, uid), mediaMetadata.URN];
     return [SRGUserData.currentUserData.playlists entriesFromPlaylistWithUid:SRGWatchLaterPlaylistUid matchingPredicate:predicate sortedWithDescriptors:nil].count > 0;
 }
 
@@ -45,8 +45,8 @@ void WatchLaterRemoveMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^co
 
 void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, void (^completion)(BOOL added, NSError * _Nullable error))
 {
-    BOOL contains = WatchLaterContainsMediaMetadata(mediaMetadata);
-    if (contains) {
+    BOOL contained = WatchLaterContainsMediaMetadata(mediaMetadata);
+    if (contained) {
         WatchLaterRemoveMediaMetadata(mediaMetadata, ^(NSError * _Nullable error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(NO, error);
@@ -62,7 +62,7 @@ void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, 
     }
 }
 
-void WatchLaterMigrate()
+void WatchLaterMigrate(void)
 {
     NSArray<Favorite *> *favorites = [Favorite mediaFavorites];
     if (favorites.count > 0) {

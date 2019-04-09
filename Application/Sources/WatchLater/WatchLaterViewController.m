@@ -176,7 +176,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(WatchLaterTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // FIXME: Work around crash. To reproduce, logout with the watchLater view visible, with a slow network (repeat a few
+    // FIXME: Work around crash. To reproduce, logout with the watch later view visible, with a slow network (repeat a few
     //        times to trigger the crash). For reasons yet to be determined, this method is called with an index path, while
     //        items is empty. This of course crashes.
     if (indexPath.row < self.items.count) {
@@ -318,6 +318,7 @@
 
 - (void)playlistsDidChange:(NSNotification *)notification
 {
+    // FIXME: Does not refresh the list when removing a single entry via peek or long press
     if ([notification.userInfo[SRGPlaylistsChangedUidsKey] containsObject:SRGWatchLaterPlaylistUid]) {
         NSDictionary<NSString *, NSArray<NSString *> *> *playlistEntryChanges = notification.userInfo[SRGPlaylistEntryChangesKey][SRGWatchLaterPlaylistUid];
         if (playlistEntryChanges) {

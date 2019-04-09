@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion Must be called from the main thread
  */
-
 OBJC_EXPORT BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata);
 
 /**
@@ -40,6 +39,6 @@ OBJC_EXPORT void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> _Nonnull med
 /**
  *  Perform migration.
  */
-OBJC_EXPORT void WatchLaterMigrate();
+OBJC_EXPORT void WatchLaterMigrate(void);
 
 NS_ASSUME_NONNULL_END
