@@ -1387,12 +1387,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [Banner showFavorite:(favorite != nil) forItemWithName:media.title inViewController:self];
 }
 
-- (BOOL)letterboxView:(SRGLetterboxView *)letterboxView shouldDisplayFavoriteForSubdivision:(SRGSubdivision *)subdivision
-{
-    SRGMedia *media = [self.letterboxController.mediaComposition mediaForSubdivision:subdivision];
-    return media && [Favorite favoriteForMedia:media];
-}
-
 #pragma mark SRGLetterboxPictureInPictureDelegate protocol
 
 - (BOOL)letterboxDismissUserInterfaceForPictureInPicture
@@ -1901,7 +1895,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)favoriteStateDidChange:(NSNotification *)notification
 {
     [self updateFavoriteStatus];
-    [self.letterboxView setNeedsSubdivisionFavoritesUpdate];
 }
 
 - (void)downloadStateDidChange:(NSNotification *)notification
