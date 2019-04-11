@@ -108,28 +108,8 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     SRGUserData.currentUserData = [[SRGUserData alloc] initWithStoreFileURL:storeFileURL
                                                           historyServiceURL:applicationConfiguration.historyServiceURL
                                                             identityService:SRGIdentityService.currentIdentityService];
-    
-    // Setup Google Cast
-    GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:applicationConfiguration.googleCastReceiverIdentifier];
-    GCKCastOptions *options = [[GCKCastOptions alloc] initWithDiscoveryCriteria:discoveryCriteria];
-    [GCKCastContext setSharedInstanceWithOptions:options];
-    [GCKCastContext sharedInstance].useDefaultExpandedMediaControls = YES;
-    
-    GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
-    styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
-    styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
-    styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
-    styleAttributes.muteOffImage = [UIImage imageNamed:@"player_mute-22"];
-    styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute-22"];
-    styleAttributes.pauseImage = [UIImage imageNamed:@"pause-50"];
-    styleAttributes.playImage = [UIImage imageNamed:@"play-50"];
-    styleAttributes.stopImage = [UIImage imageNamed:@"stop-50"];
-    // The subtitlesTrackImage property is buggy (the original icon is displayed when highlighted)
-    
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(googleCastStateDidChange:)
-                                               name:kGCKCastStateDidChangeNotification
-                                             object:nil];
+
+    [self setupGoogleCast];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(playbackDidContinueAutomatically:)
@@ -148,26 +128,13 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         self.window.accessibilityIgnoresInvertColors = YES;
     }
     
-    [SRGNetworkActivityManagement enable];
-    
-    // Analytics setup
-    SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
-                                                                                                       container:applicationConfiguration.analyticsContainer
-                                                                                             comScoreVirtualSite:applicationConfiguration.comScoreVirtualSite
-                                                                                             netMetrixIdentifier:applicationConfiguration.netMetrixIdentifier];
-    [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
-                                              identityService:SRGIdentityService.currentIdentityService];
-    
+    [self setupAnalytics];
     [self setupDataProvider];
-    
-    [UIImage play_setUseOriginalImagesOnly:ApplicationSettingOriginalImagesOnlyEnabled()];
     
     // Letterbox service setup for picture and picture
     SRGLetterboxService.sharedService.mirroredOnExternalScreen = ApplicationSettingPresenterModeEnabled();
-    
     // Use appropriate voice over language for the whole application
     application.accessibilityLanguage = applicationConfiguration.voiceOverLanguageCode;
-    
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
     [defaults addObserver:self forKeyPath:PlaySRGSettingServiceURL options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld  context:s_kvoContext];
@@ -272,6 +239,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         shouldNotPerformAdditionalDelegateHandling = NO;
         [self handleShortcutItem:launchedShortcutItem];
     }
+    
     return shouldNotPerformAdditionalDelegateHandling;
 }
 
@@ -472,6 +440,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 
 - (void)setupDataProvider
 {
+    [SRGNetworkActivityManagement enable];
+    [UIImage play_setUseOriginalImagesOnly:ApplicationSettingOriginalImagesOnlyEnabled()];
+    
     NSURL *serviceURL = ApplicationSettingServiceURL();
     SRGDataProvider *dataProvider = [[SRGDataProvider alloc] initWithServiceURL:serviceURL];
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -509,6 +480,47 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }
 #endif
     SRGDataProvider.currentDataProvider = dataProvider;
+}
+
+- (void)setupAnalytics
+{
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    
+    SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
+                                                                                                       container:applicationConfiguration.analyticsContainer
+                                                                                             comScoreVirtualSite:applicationConfiguration.comScoreVirtualSite
+                                                                                             netMetrixIdentifier:applicationConfiguration.netMetrixIdentifier];
+    [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
+                                              identityService:SRGIdentityService.currentIdentityService];
+}
+
+- (void)setupGoogleCast
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        
+        // Setup Google Cast
+        GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:applicationConfiguration.googleCastReceiverIdentifier];
+        GCKCastOptions *options = [[GCKCastOptions alloc] initWithDiscoveryCriteria:discoveryCriteria];
+        [GCKCastContext setSharedInstanceWithOptions:options];
+        [GCKCastContext sharedInstance].useDefaultExpandedMediaControls = YES;
+        
+        GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
+        styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
+        styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
+        styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
+        styleAttributes.muteOffImage = [UIImage imageNamed:@"player_mute-22"];
+        styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute-22"];
+        styleAttributes.pauseImage = [UIImage imageNamed:@"pause-50"];
+        styleAttributes.playImage = [UIImage imageNamed:@"play-50"];
+        styleAttributes.stopImage = [UIImage imageNamed:@"stop-50"];
+        // The subtitlesTrackImage property is buggy (the original icon is displayed when highlighted)
+        
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(googleCastStateDidChange:)
+                                                   name:kGCKCastStateDidChangeNotification
+                                                 object:nil];
+    });
 }
 
 // Reset the app view controller hierachy to display the specified menu item, executing the provided completion block when done.
