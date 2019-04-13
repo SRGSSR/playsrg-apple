@@ -95,7 +95,9 @@ static void commonInit(GoogleCastMiniPlayerView *self);
 {
     // We don't bind properties to the controller (which would have been easier) since we want to display custom information
     // when those are empty.
-    GCKSession *session = self.controller.session;
+    // Remark: Do not use controlle.session which, probably because of a bug, is not updated to point at the current session
+    //         if created before it. Its progress still reflects the one of the current session media, though.
+    GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
     GCKMediaMetadata *metadata = session.remoteMediaClient.mediaStatus.mediaInformation.metadata;
     if (metadata) {
         self.titleLabel.text = [metadata stringForKey:kGCKMetadataKeyTitle];
