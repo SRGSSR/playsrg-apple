@@ -20,9 +20,7 @@ static GoogleCastManager *s_googleCastManager;
 
 void GoogleCastSetup(void)
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        s_googleCastManager = [[GoogleCastManager alloc] init];
-    });
+    s_googleCastManager = [[GoogleCastManager alloc] init];
 }
 
 BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pError)
@@ -106,7 +104,6 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
     if (self = [super init]) {
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         
-        // Setup Google Cast
         GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:applicationConfiguration.googleCastReceiverIdentifier];
         GCKCastOptions *options = [[GCKCastOptions alloc] initWithDiscoveryCriteria:discoveryCriteria];
         [GCKCastContext setSharedInstanceWithOptions:options];
