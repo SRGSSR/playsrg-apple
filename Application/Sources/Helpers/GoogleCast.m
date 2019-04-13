@@ -6,10 +6,24 @@
 
 #import "GoogleCast.h"
 
+#import "ApplicationConfiguration.h"
 #import "PlayErrors.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <GoogleCast/GoogleCast.h>
+
+@interface GoogleCastManager : NSObject
+
+@end
+
+static GoogleCastManager *s_googleCastManager;
+
+void GoogleCastSetup(void)
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        s_googleCastManager = [[GoogleCastManager alloc] init];
+    });
+}
 
 BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pError)
 {
@@ -82,3 +96,47 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
     
     return YES;
 }
+
+@implementation GoogleCastManager
+
+#pragma mark Object lifecycle
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        
+        // Setup Google Cast
+        GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:applicationConfiguration.googleCastReceiverIdentifier];
+        GCKCastOptions *options = [[GCKCastOptions alloc] initWithDiscoveryCriteria:discoveryCriteria];
+        [GCKCastContext setSharedInstanceWithOptions:options];
+        [GCKCastContext sharedInstance].useDefaultExpandedMediaControls = YES;
+        
+        GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
+        styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
+        styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
+        styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
+        styleAttributes.muteOffImage = [UIImage imageNamed:@"player_mute-22"];
+        styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute-22"];
+        styleAttributes.pauseImage = [UIImage imageNamed:@"pause-50"];
+        styleAttributes.playImage = [UIImage imageNamed:@"play-50"];
+        styleAttributes.stopImage = [UIImage imageNamed:@"stop-50"];
+        // The subtitlesTrackImage property is buggy (the original icon is displayed when highlighted)
+        
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(googleCastStateDidChange:)
+                                                   name:kGCKCastStateDidChangeNotification
+                                                 object:nil];
+    }
+    return self;
+}
+
+#pragma mark Notifications
+
+- (void)googleCastStateDidChange:(NSNotification *)notification
+{
+    GCKCastState castState = [notification.userInfo[kGCKNotificationKeyCastState] integerValue];
+    SRGLetterboxService.sharedService.nowPlayingInfoAndCommandsEnabled = (castState != GCKCastStateConnected);
+}
+
+@end
