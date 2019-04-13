@@ -156,7 +156,14 @@ static void commonInit(GoogleCastMiniPlayerView *self);
 
 - (void)openFullScreenPlayer:(UIGestureRecognizer *)gestureRecognizer
 {
-    [[GCKCastContext sharedInstance] presentDefaultExpandedMediaControls];
+    GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
+    GCKMediaInformation *mediaInformation = session.remoteMediaClient.mediaStatus.mediaInformation;
+    if (mediaInformation) {
+        [[GCKCastContext sharedInstance] presentDefaultExpandedMediaControls];
+    }
+    else {
+        [[GCKCastContext sharedInstance] presentCastDialog];
+    }
 }
 
 #pragma mark Notifications
