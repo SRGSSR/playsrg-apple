@@ -76,7 +76,8 @@ __attribute__((constructor)) static void HistoryPlayerTrackerInit(void)
         
         GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
         if (session) {
-            GCKMediaStatus *mediaStatus = session.remoteMediaClient.mediaStatus;
+            GCKRemoteMediaClient *remoteMediaClient = session.remoteMediaClient;
+            GCKMediaStatus *mediaStatus = remoteMediaClient.mediaStatus;
             if (mediaStatus.playerState != GCKMediaPlayerStatePlaying) {
                 return;
             }
@@ -86,7 +87,9 @@ __attribute__((constructor)) static void HistoryPlayerTrackerInit(void)
                 return;
             }
             
-            NSTimeInterval streamPosition = mediaStatus.streamPosition;
+            // Use approximate value. The value in GCKMediaStatus is updated from time to time. The approximateStreamPosition
+            // interpolates between known values to get a smoother progress
+            NSTimeInterval streamPosition = remoteMediaClient.approximateStreamPosition;
             [SRGUserData.currentUserData.history saveHistoryEntryForUid:URN withLastPlaybackTime:CMTimeMakeWithSeconds(streamPosition, NSEC_PER_SEC) deviceUid:deviceUid completionBlock:nil];
         }
         else {
