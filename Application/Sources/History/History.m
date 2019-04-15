@@ -82,7 +82,13 @@ __attribute__((constructor)) static void HistoryPlayerTrackerInit(void)
                 return;
             }
             
-            NSString *URN = mediaStatus.mediaInformation.contentID;
+            // Only for on-demand streams
+            GCKMediaInformation *mediaInformation = mediaStatus.mediaInformation;
+            if (mediaInformation.streamType != GCKMediaStreamTypeBuffered) {
+                return;
+            }
+            
+            NSString *URN = mediaInformation.contentID;
             if (! URN) {
                 return;
             }
