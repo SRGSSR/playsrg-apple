@@ -10,8 +10,6 @@
 
 #import <SRGAppearance/SRGAppearance.h>
 
-static void commonInit(GoogleCastMiniPlayerView *self);
-
 @interface GoogleCastMiniPlayerView ()
 
 @property (nonatomic) GCKUIMediaController *controller;
@@ -33,24 +31,6 @@ static void commonInit(GoogleCastMiniPlayerView *self);
     return [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
 }
 
-#pragma mark Object lifecycle
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    if (self = [super initWithFrame:frame]) {
-        commonInit(self);
-    }
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        commonInit(self);
-    }
-    return self;
-}
-
 #pragma mark Overrides
 
 - (void)awakeFromNib
@@ -58,6 +38,12 @@ static void commonInit(GoogleCastMiniPlayerView *self);
     [super awakeFromNib];
     
     [self updateFonts];
+    
+    self.controller = [[GCKUIMediaController alloc] init];
+    self.controller.delegate = self;
+    
+    self.controller.playPauseToggleButton = self.playbackButton;
+    self.controller.streamProgressView = self.progressView;
     
     self.progressView.progress = 0.f;
     self.progressView.progressTintColor = UIColor.redColor;
@@ -70,9 +56,6 @@ static void commonInit(GoogleCastMiniPlayerView *self);
     [self.playbackButton setImage:[UIImage imageNamed:@"pause-50"] forButtonState:GCKUIButtonStatePlay];
     [self.playbackButton setImage:[UIImage imageNamed:@"pause-50"] forButtonState:GCKUIButtonStatePlayLive];
     [self.playbackButton setImage:[UIImage imageNamed:@"play-50"] forButtonState:GCKUIButtonStatePause];
-    
-    self.controller.playPauseToggleButton = self.playbackButton;
-    self.controller.streamProgressView = self.progressView;
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(contentSizeCategoryDidChange:)
@@ -174,9 +157,3 @@ static void commonInit(GoogleCastMiniPlayerView *self);
 }
 
 @end
-
-static void commonInit(GoogleCastMiniPlayerView *self)
-{
-    self.controller = [[GCKUIMediaController alloc] init];
-    self.controller.delegate = self;
-}

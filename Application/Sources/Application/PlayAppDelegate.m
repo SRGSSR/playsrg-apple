@@ -109,10 +109,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                                                           historyServiceURL:applicationConfiguration.historyServiceURL
                                                             identityService:SRGIdentityService.currentIdentityService];
 
-    // Take a significant amount of time at startup. Defer
-    dispatch_async(dispatch_get_main_queue(), ^{
-        GoogleCastSetup();
-    });
+    GoogleCastSetup();
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(playbackDidContinueAutomatically:)
