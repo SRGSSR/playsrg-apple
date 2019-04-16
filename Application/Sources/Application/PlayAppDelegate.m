@@ -11,6 +11,7 @@
 #import "Banner.h"
 #import "Download.h"
 #import "Favorite.h"
+#import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
 #import "NavigationController.h"
@@ -29,7 +30,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <Firebase/Firebase.h>
-#import <GoogleCast/GoogleCast.h>
 #import <libextobjc/libextobjc.h>
 #import <Mantle/Mantle.h>
 #import <SRGAnalytics_Identity/SRGAnalytics_Identity.h>
@@ -109,7 +109,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                                                           historyServiceURL:applicationConfiguration.historyServiceURL
                                                             identityService:SRGIdentityService.currentIdentityService];
 
-    [self setupGoogleCast];
+    GoogleCastSetup();
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(playbackDidContinueAutomatically:)
@@ -494,35 +494,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                                               identityService:SRGIdentityService.currentIdentityService];
 }
 
-- (void)setupGoogleCast
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        
-        // Setup Google Cast
-        GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:applicationConfiguration.googleCastReceiverIdentifier];
-        GCKCastOptions *options = [[GCKCastOptions alloc] initWithDiscoveryCriteria:discoveryCriteria];
-        [GCKCastContext setSharedInstanceWithOptions:options];
-        [GCKCastContext sharedInstance].useDefaultExpandedMediaControls = YES;
-        
-        GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
-        styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
-        styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
-        styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
-        styleAttributes.muteOffImage = [UIImage imageNamed:@"player_mute-22"];
-        styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute-22"];
-        styleAttributes.pauseImage = [UIImage imageNamed:@"pause-50"];
-        styleAttributes.playImage = [UIImage imageNamed:@"play-50"];
-        styleAttributes.stopImage = [UIImage imageNamed:@"stop-50"];
-        // The subtitlesTrackImage property is buggy (the original icon is displayed when highlighted)
-        
-        [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(googleCastStateDidChange:)
-                                                   name:kGCKCastStateDidChangeNotification
-                                                 object:nil];
-    });
-}
-
 // Reset the app view controller hierachy to display the specified menu item, executing the provided completion block when done.
 - (void)resetWithMenuItemInfo:(MenuItemInfo *)menuItemInfo completionBlock:(void (^)(void))completionBlock
 {
@@ -772,12 +743,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 }
 
 #pragma mark Notifications
-
-- (void)googleCastStateDidChange:(NSNotification *)notification
-{
-    GCKCastState castState = [notification.userInfo[kGCKNotificationKeyCastState] integerValue];
-    SRGLetterboxService.sharedService.nowPlayingInfoAndCommandsEnabled = (castState != GCKCastStateConnected);
-}
 
 - (void)playbackDidContinueAutomatically:(NSNotification *)notification
 {
