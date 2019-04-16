@@ -319,7 +319,10 @@ static void swizzle_unregisterForPreviewingWithContext(UIViewController *self, S
     CMTime time = position.time;
     BOOL isLivestream = mainChapter.contentType == SRGContentTypeLivestream || mainChapter.contentType == SRGContentTypeScheduledLivestream;
     if (! isLivestream && CMTIME_IS_VALID(time) && CMTIME_COMPARE_INLINE(time, !=, kCMTimeZero)) {
-        options.playPosition = CMTimeGetSeconds(time);
+        float progress = HistoryPlaybackProgress(CMTimeGetSeconds(time), mainChapter.duration / 1000.);
+        if (progress != 1.f) {
+            options.playPosition = CMTimeGetSeconds(time);
+        }
     }
     [castSession.remoteMediaClient loadMedia:[mediaInfoBuilder build] withOptions:options];
     

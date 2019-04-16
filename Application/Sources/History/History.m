@@ -20,7 +20,7 @@ static NSTimer *s_trackerTimer;
 
 #pragma mark Helpers
 
-static float HistoryPlaybackProgress(NSTimeInterval playbackPosition, double durationInSeconds)
+float HistoryPlaybackProgress(NSTimeInterval playbackPosition, double durationInSeconds)
 {
     NSTimeInterval durationWithToleranceInSeconds = fmax(durationInSeconds - ApplicationConfigurationEffectiveEndTolerance(durationInSeconds), 0.f);
     if (durationWithToleranceInSeconds == 0.f) {
