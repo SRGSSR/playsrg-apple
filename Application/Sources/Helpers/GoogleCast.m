@@ -109,21 +109,23 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
         [GCKCastContext setSharedInstanceWithOptions:options];
         [GCKCastContext sharedInstance].useDefaultExpandedMediaControls = YES;
         
-        GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
-        styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
-        styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
-        styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
-        styleAttributes.muteOffImage = [UIImage imageNamed:@"player_mute-22"];
-        styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute-22"];
-        styleAttributes.pauseImage = [UIImage imageNamed:@"pause-50"];
-        styleAttributes.playImage = [UIImage imageNamed:@"play-50"];
-        styleAttributes.stopImage = [UIImage imageNamed:@"stop-50"];
-        // The subtitlesTrackImage property is buggy (the original icon is displayed when highlighted)
-        
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(googleCastStateDidChange:)
                                                    name:kGCKCastStateDidChangeNotification
                                                  object:nil];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
+            styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
+            styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
+            styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
+            styleAttributes.muteOffImage = [UIImage imageNamed:@"player_mute-22"];
+            styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute-22"];
+            styleAttributes.pauseImage = [UIImage imageNamed:@"pause-50"];
+            styleAttributes.playImage = [UIImage imageNamed:@"play-50"];
+            styleAttributes.stopImage = [UIImage imageNamed:@"stop-50"];
+            // The subtitlesTrackImage property is buggy (the original icon is displayed when highlighted)
+        });
     }
     return self;
 }
