@@ -114,6 +114,9 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
                                                    name:kGCKCastStateDidChangeNotification
                                                  object:nil];
         
+        // If the GoogleCastManager is created from the app delegate (which is the best way to ensure Google Cast is setup
+        // early, so that accessing other related UI components works as expected), we can still apply styling slightly
+        // afterwards, so that the associated performance impact is mitigated.
         dispatch_async(dispatch_get_main_queue(), ^{
             GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
             styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
