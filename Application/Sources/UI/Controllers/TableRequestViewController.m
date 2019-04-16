@@ -40,11 +40,8 @@
     if (_emptyTableSubtitle) {
         return _emptyTableSubtitle;
     }
-    else if (! self.refreshControlDisabled) {
-        return NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it");
-    }
     else {
-        return @"";
+        return NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it");
     }
 }
 
