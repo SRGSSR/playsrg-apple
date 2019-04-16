@@ -46,12 +46,6 @@
     }
 }
 
-- (void)setRefreshControlDisabled:(BOOL)refreshControlDisabled
-{
-    _refreshControlDisabled = refreshControlDisabled;
-    [self updateRefreshControl];
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -70,7 +64,12 @@
     UINib *footerNib = [UINib nibWithNibName:footerIdentifier bundle:nil];
     [self.collectionView registerNib:footerNib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerIdentifier];
     
-    [self updateRefreshControl];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = UIColor.whiteColor;
+    refreshControl.layer.zPosition = -1.f;          // Ensure the refresh control appears behind the cells, see http://stackoverflow.com/a/25829016/760435
+    [refreshControl addTarget:self action:@selector(collectionRequestViewController_refresh:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView insertSubview:refreshControl atIndex:0];
+    self.refreshControl = refreshControl;
 }
 
 - (void)viewWillLayoutSubviews
@@ -148,21 +147,6 @@
 }
 
 #pragma mark UI
-
-- (void)updateRefreshControl
-{
-    if (! self.refreshControl && ! self.refreshControlDisabled) {
-        UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-        refreshControl.tintColor = UIColor.whiteColor;
-        refreshControl.layer.zPosition = -1.f;          // Ensure the refresh control appears behind the cells, see http://stackoverflow.com/a/25829016/760435
-        [refreshControl addTarget:self action:@selector(collectionRequestViewController_refresh:) forControlEvents:UIControlEventValueChanged];
-        [self.collectionView insertSubview:refreshControl atIndex:0];
-        self.refreshControl = refreshControl;
-    }
-    else {
-        [self.refreshControl removeFromSuperview];
-    }
-}
 
 - (void)endRefreshing
 {
