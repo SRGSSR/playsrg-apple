@@ -314,10 +314,16 @@
     }
     
     NSString *broadcastInformationMessage = self.show.broadcastInformation.message;
-    self.emptyCollectionTitle = broadcastInformationMessage;
-    [self.collectionView reloadEmptyDataSet];
+    if (broadcastInformationMessage) {
+        self.emptyCollectionTitle = broadcastInformationMessage;
+        self.emptyCollectionSubtitle = @"";
+    }
+    else {
+        self.emptyCollectionTitle = nil;
+        self.emptyCollectionSubtitle = nil;
+    }
     
-    self.refreshControlDisabled = (broadcastInformationMessage != nil);
+    [self.collectionView reloadEmptyDataSet];
 }
 
 #pragma mark Actions
