@@ -215,7 +215,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *identityWebserviceURL;
 @property (nonatomic) NSURL *identityWebsiteURL;
 
-@property (nonatomic) NSTimeInterval historySynchronizationInterval;
 @property (nonatomic) NSURL *userDataServiceURL;
 
 @property (nonatomic) NSURL *feedbackURL;
@@ -472,8 +471,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     NSString *identityWebsiteURLString = [self.remoteConfig configValueForKey:@"identityWebsiteURL"].stringValue;
     self.identityWebsiteURL = (identityWebsiteURLString.length != 0) ? [NSURL URLWithString:identityWebsiteURLString] : nil;
     
-    FIRRemoteConfigValue *historySynchronizationInterval = [self.remoteConfig configValueForKey:@"historySynchronizationInterval"];
-    self.historySynchronizationInterval = (historySynchronizationInterval.stringValue.length > 0) ? fmax(historySynchronizationInterval.numberValue.doubleValue, 10.) : 30.;
     NSString *userDataServiceURLString = [self.remoteConfig configValueForKey:@"userDataServiceURL"].stringValue;
     self.userDataServiceURL = (userDataServiceURLString.length != 0) ? [NSURL URLWithString:userDataServiceURLString] : nil;
     
