@@ -35,8 +35,7 @@
 {
     [super viewDidLoad];
     
-    self.title = SRGPlaylistNameForPlaylistWithUid(SRGWatchLaterPlaylistUid);
-    
+    self.title = NSLocalizedString(@"Watch later", @"Title displayed at the top of the watch later list screen");
     self.view.backgroundColor = UIColor.play_blackColor;
     
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
