@@ -110,8 +110,8 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *identityWebserviceURL;
 @property (nonatomic, readonly, nullable) NSURL *identityWebsiteURL;
 
-@property (nonatomic, readonly, nullable) NSURL *historyServiceURL;
 @property (nonatomic, readonly) NSTimeInterval historySynchronizationInterval;
+@property (nonatomic, readonly, nullable) NSURL *userDataServiceURL;
 
 @property (nonatomic, readonly) NSURL *feedbackURL;
 @property (nonatomic, readonly) NSURL *whatsNewURL;

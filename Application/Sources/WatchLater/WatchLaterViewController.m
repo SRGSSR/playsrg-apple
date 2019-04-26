@@ -81,7 +81,7 @@
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO", @keypath(SRGPlaylistEntry.new, discarded)];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGPlaylistEntry.new, date) ascending:NO];
-    NSArray<SRGPlaylistEntry *> *playlistEntries = [SRGUserData.currentUserData.playlists entriesFromPlaylistWithUid:SRGWatchLaterPlaylistUid matchingPredicate:predicate sortedWithDescriptors:@[sortDescriptor]];
+    NSArray<SRGPlaylistEntry *> *playlistEntries = [SRGUserData.currentUserData.playlists entriesFromPlaylistWithUid:SRGPlaylistUidWatchLater matchingPredicate:predicate sortedWithDescriptors:@[sortDescriptor]];
     self.mediaURNs = [playlistEntries valueForKeyPath:@keypath(SRGPlaylistEntry.new, uid)] ?: @[];
     
     [super refresh];
@@ -133,7 +133,7 @@
 
 - (void)watchLaterTableViewCell:(WatchLaterTableViewCell *)watchLaterTableViewCell deletePlaylistEntryForMedia:(SRGMedia *)media
 {
-    [SRGUserData.currentUserData.playlists removeEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGWatchLaterPlaylistUid completionBlock:^(NSError * _Nullable error) {
+    [SRGUserData.currentUserData.playlists removeEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (! error) {
                 NSInteger mediaIndex = [self.items indexOfObject:media];
@@ -232,7 +232,7 @@
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of a delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         NSArray<NSIndexPath *> *selectedRows = self.tableView.indexPathsForSelectedRows;
         if (deleteAllModeEnabled || selectedRows.count == self.items.count) {
-            [SRGUserData.currentUserData.playlists removeEntriesWithUids:nil fromPlaylistWithUid:SRGWatchLaterPlaylistUid completionBlock:^(NSError * _Nullable error) {
+            [SRGUserData.currentUserData.playlists removeEntriesWithUids:nil fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self refresh];
                 });
@@ -254,7 +254,7 @@
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterRemove labels:labels];
             }];
             
-            [SRGUserData.currentUserData.playlists removeEntriesWithUids:URNs fromPlaylistWithUid:SRGWatchLaterPlaylistUid completionBlock:^(NSError * _Nullable error) {
+            [SRGUserData.currentUserData.playlists removeEntriesWithUids:URNs fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     NSMutableArray<SRGMedia *> *mediasToRemove = [NSMutableArray array];
                     for (NSIndexPath *selectedIndexPath in selectedRows) {
@@ -319,8 +319,8 @@
 - (void)playlistsDidChange:(NSNotification *)notification
 {
     // FIXME: Does not refresh the list when removing a single entry via peek or long press
-    if ([notification.userInfo[SRGPlaylistsChangedUidsKey] containsObject:SRGWatchLaterPlaylistUid]) {
-        NSDictionary<NSString *, NSArray<NSString *> *> *playlistEntryChanges = notification.userInfo[SRGPlaylistEntryChangesKey][SRGWatchLaterPlaylistUid];
+    if ([notification.userInfo[SRGPlaylistsChangedUidsKey] containsObject:SRGPlaylistUidWatchLater]) {
+        NSDictionary<NSString *, NSArray<NSString *> *> *playlistEntryChanges = notification.userInfo[SRGPlaylistEntryChangesKey][SRGPlaylistUidWatchLater];
         if (playlistEntryChanges) {
             NSArray<NSString *> *previousURNs = playlistEntryChanges[SRGPlaylistEntryPreviousUidsSubKey];
             NSArray<NSString *> *URNs = playlistEntryChanges[SRGPlaylistEntryUidsSubKey];
