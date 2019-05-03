@@ -318,13 +318,35 @@
 
 - (void)playlistEntriesDidChange:(NSNotification *)notification
 {
-    // FIXME: Does not refresh the list when removing a single entry via peek or long press
     SRGPlaylist *playlist = notification.object;
     if ([playlist.uid isEqualToString:SRGPlaylistUidWatchLater]) {
         NSSet<NSString *> *previousURNs = notification.userInfo[SRGPlaylistEntriesPreviousUidsKey];
         NSSet<NSString *> *URNs = notification.userInfo[SRGPlaylistEntriesUidsKey];
         if (URNs.count == 0 || previousURNs.count == 0) {
             [self refresh];
+        }
+        else {
+            // TODO: Prefer a local notification just for peek or long press menus, and not be notified with the synchronisation update every 30 seconds.
+            NSMutableSet<NSString *> *removedURNs = previousURNs.mutableCopy;
+            [removedURNs minusSet:URNs];
+            
+            if (removedURNs.count > 0) {
+                NSArray<SRGMedia *> *removedMedias = [self.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K IN %@", @keypath(SRGMedia.new, URN), removedURNs]];
+                if (removedMedias.count > 0) {
+                    NSMutableArray<NSIndexPath *> *indexPaths = [NSMutableArray array];
+                    for (SRGMedia *media in removedMedias.copy) {
+                        NSInteger mediaIndex = [self.items indexOfObject:media];
+                        [self hideItem:media];
+                        
+                        [indexPaths addObject:[NSIndexPath indexPathForRow:mediaIndex inSection:0]];
+                    }
+                    [self.tableView deleteRowsAtIndexPaths:indexPaths.copy
+                                          withRowAnimation:UITableViewRowAnimationAutomatic];
+                    
+                    [self.tableView reloadEmptyDataSet];
+                    
+                    [self updateInterfaceForEditionAnimated:YES];
+                }
             }
         }
     }
