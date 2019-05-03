@@ -96,7 +96,7 @@ __attribute__((constructor)) static void HistoryPlayerTrackerInit(void)
             // Use approximate value. The value in GCKMediaStatus is updated from time to time. The approximateStreamPosition
             // interpolates between known values to get a smoother progress
             NSTimeInterval streamPosition = remoteMediaClient.approximateStreamPosition;
-            [SRGUserData.currentUserData.history saveHistoryEntryForUid:URN withLastPlaybackTime:CMTimeMakeWithSeconds(streamPosition, NSEC_PER_SEC) deviceUid:deviceUid completionBlock:nil];
+            [SRGUserData.currentUserData.history saveHistoryEntryWithUid:URN lastPlaybackTime:CMTimeMakeWithSeconds(streamPosition, NSEC_PER_SEC) deviceUid:deviceUid completionBlock:nil];
         }
         else {
             SRGLetterboxController *letterboxController = SRGLetterboxService.sharedService.controller;
@@ -117,12 +117,12 @@ __attribute__((constructor)) static void HistoryPlayerTrackerInit(void)
             if ([subdivision isKindOfClass:SRGSegment.class]) {
                 SRGSegment *segment = (SRGSegment *)subdivision;
                 CMTime segmentPlaybackTime = CMTimeMaximum(CMTimeSubtract(chapterPlaybackTime, CMTimeMakeWithSeconds(segment.markIn / 1000., NSEC_PER_SEC)), kCMTimeZero);
-                [SRGUserData.currentUserData.history saveHistoryEntryForUid:segment.URN withLastPlaybackTime:segmentPlaybackTime deviceUid:deviceUid completionBlock:nil];
+                [SRGUserData.currentUserData.history saveHistoryEntryWithUid:segment.URN lastPlaybackTime:segmentPlaybackTime deviceUid:deviceUid completionBlock:nil];
             }
             
             // Save the main full-length position (update after the segment so that full-length entries are always more recent than corresponding
             // segment entries)
-            [SRGUserData.currentUserData.history saveHistoryEntryForUid:chapterMedia.URN withLastPlaybackTime:chapterPlaybackTime deviceUid:deviceUid completionBlock:nil];
+            [SRGUserData.currentUserData.history saveHistoryEntryWithUid:chapterMedia.URN lastPlaybackTime:chapterPlaybackTime deviceUid:deviceUid completionBlock:nil];
         }
     }];
 }

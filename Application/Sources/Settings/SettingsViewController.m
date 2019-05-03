@@ -111,9 +111,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                                                name:SRGIdentityServiceUserDidLogoutNotification
                                              object:SRGIdentityService.currentIdentityService];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(historyDidFinishSynchronization:)
-                                               name:SRGHistoryDidFinishSynchronizationNotification
-                                             object:SRGUserData.currentUserData.history];
+                                           selector:@selector(userDataDidFinishSynchronization:)
+                                               name:SRGUserDataDidStartSynchronizationNotification
+                                             object:SRGUserData.currentUserData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -392,7 +392,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [self.tableView reloadData];
 }
 
-- (void)historyDidFinishSynchronization:(NSNotification *)notification
+- (void)userDataDidFinishSynchronization:(NSNotification *)notification
 {
     [self.tableView reloadData];
 }

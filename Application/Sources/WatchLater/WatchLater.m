@@ -22,12 +22,12 @@
 BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO AND %K == %@", @keypath(SRGPlaylistEntry.new, discarded), @keypath(SRGPlaylistEntry.new, uid), mediaMetadata.URN];
-    return [SRGUserData.currentUserData.playlists entriesFromPlaylistWithUid:SRGPlaylistUidWatchLater matchingPredicate:predicate sortedWithDescriptors:nil].count > 0;
+    return [SRGUserData.currentUserData.playlists entriesInPlaylistWithUid:SRGPlaylistUidWatchLater matchingPredicate:predicate sortedWithDescriptors:nil].count > 0;
 }
 
 void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(NSError * _Nullable error))
 {
-    [SRGUserData.currentUserData.playlists addEntryWithUid:mediaMetadata.URN toPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+    [SRGUserData.currentUserData.playlists saveEntryWithUid:mediaMetadata.URN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
          dispatch_async(dispatch_get_main_queue(), ^{
              completion(error);
          });
@@ -36,7 +36,7 @@ void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^compl
 
 void WatchLaterRemoveMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(NSError * _Nullable error))
 {
-    [SRGUserData.currentUserData.playlists removeEntriesWithUids:@[mediaMetadata.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+    [SRGUserData.currentUserData.playlists discardEntriesWithUids:@[mediaMetadata.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(error);
         });
