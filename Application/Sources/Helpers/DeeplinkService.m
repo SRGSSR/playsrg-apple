@@ -118,13 +118,26 @@
         NSURL *middlewareURL = ApplicationConfiguration.sharedApplicationConfiguration.middlewareURL;
         NSURL *URL = [NSURL URLWithString:resourcePath relativeToURL:middlewareURL];
         
-        SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (data) {
+        NSMutableURLRequest *midddlewareRequest = [NSMutableURLRequest requestWithURL:URL];
+        if ([NSUserDefaults.standardUserDefaults stringForKey:@"parse_play_url.js"]) {
+            [midddlewareRequest setValue:[NSUserDefaults.standardUserDefaults stringForKey:@"parse_play_url.js"] forHTTPHeaderField:@"If-None-Match"];
+        }
+        
+        SRGRequest *request = [SRGRequest dataRequestWithURLRequest:midddlewareRequest session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (data.length > 0) {
                 NSError *writeError = nil;
                 [data writeToFile:[self libraryParsePlayUrlFilePath] options:NSDataWritingAtomic error:&writeError];
                 if (writeError) {
                     PlayLogError(@"Deeplink", @"Could not save parse_play_url.js file. Reason: %@", writeError);
                     NSAssert(NO, @"Could not save parse_play_url.js file. Not safe. See error above.");
+                }
+                
+                if ([response isKindOfClass:NSHTTPURLResponse.class]) {
+                    NSHTTPURLResponse *HTTPURLResponse = (NSHTTPURLResponse *)response;
+                    if (HTTPURLResponse.allHeaderFields[@"ETag"]) {
+                        [NSUserDefaults.standardUserDefaults setObject:HTTPURLResponse.allHeaderFields[@"ETag"] forKey:@"parse_play_url.js"];
+                        [NSUserDefaults.standardUserDefaults synchronize];
+                    }
                 }
             }
         }];
