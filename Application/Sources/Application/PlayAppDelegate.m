@@ -463,11 +463,20 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     if ([pageUid isEqualToString:@"az"]) {
         canOpen = YES;
         // TODO: Support "index" query parameter.
-        pageViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel];
+        if ([pageURN containsString:@":radio:"] && !radioChannel) {
+            menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemRadioShowAZ];
+        }
+        else {
+            pageViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel];
+        }
     }
     else if ([pageUid isEqualToString:@"bydate"]) {
         canOpen = YES;
         // TODO: Support "date" query parameter.
+        if ([pageURN containsString:@":radio:"] && !radioChannel) {
+            radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannels].firstObject;
+        }
+        
         pageViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel];
     }
     else if ([pageUid isEqualToString:@"search"]) {
@@ -477,6 +486,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }
     else if ([pageUid isEqualToString:@"home"]) {
         canOpen = YES;
+        if ([pageURN containsString:@":radio:"] && !radioChannel) {
+            radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannels].firstObject;
+        }
     }
     
     if (!menuItemInfo) {
@@ -1060,4 +1072,3 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid)
     }
     return [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVOverview];
 }
-
