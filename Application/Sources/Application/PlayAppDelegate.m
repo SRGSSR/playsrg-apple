@@ -9,6 +9,7 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
+#import "CalendarViewController.h"
 #import "Download.h"
 #import "Favorites.h"
 #import "GoogleCast.h"
@@ -24,6 +25,7 @@
 #import "Play-Swift-Bridge.h"
 #import "PushService.h"
 #import "ShowViewController.h"
+#import "ShowsViewController.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -451,18 +453,46 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 {
     NSParameterAssert(pageURN);
     
-    MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
+    BOOL canOpen = NO;
+    
+    RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:channelUid];
+    NSString *pageUid = [pageURN componentsSeparatedByString:@":"].lastObject;
+    
+    MenuItemInfo *menuItemInfo = nil;
+    UIViewController *pageViewController = nil;
+    if ([pageUid isEqualToString:@"az"]) {
+        canOpen = YES;
+        // TODO: Support "index" query parameter.
+        pageViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel];
+    }
+    else if ([pageUid isEqualToString:@"bydate"]) {
+        canOpen = YES;
+        // TODO: Support "date" query parameter.
+        pageViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel];
+    }
+    else if ([pageUid isEqualToString:@"search"]) {
+        canOpen = YES;
+        // TODO: Support "search" query parameter.
+        menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch];
+    }
+    else if ([pageUid isEqualToString:@"home"]) {
+        canOpen = YES;
+    }
+    
+    if (!menuItemInfo) {
+        menuItemInfo = MenuItemInfoForChannelUid(channelUid);
+    }
+    
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
+        if (pageViewController) {
+            [self.sideMenuController pushViewController:pageViewController animated:YES];
+        }
+        
         // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;
     }];
     
-    if ([pageURN containsString:@"page:tv:home"] || [pageURN containsString:@"page:radio:home"]) {
-        return YES;
-    }
-    else {
-        return NO;
-    }
+    return canOpen;
 }
 
 - (BOOL)openTopicWithURN:(NSString *)topicURN fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
