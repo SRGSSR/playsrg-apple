@@ -82,6 +82,11 @@
 		0820930A208F522B00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
 		0820930B208F522B00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
 		0820930C208F522B00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
+		0821D53E227F5ED300FC091F /* DeeplinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeeplinkService.m */; };
+		0821D53F227F5ED300FC091F /* DeeplinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeeplinkService.m */; };
+		0821D540227F5ED300FC091F /* DeeplinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeeplinkService.m */; };
+		0821D541227F5ED300FC091F /* DeeplinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeeplinkService.m */; };
+		0821D542227F5ED300FC091F /* DeeplinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeeplinkService.m */; };
 		082590F01F054A6A00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
 		082590F11F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */; };
 		082590F21F054ACD00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
@@ -1698,6 +1703,8 @@
 		082092FC208E272E00711DE4 /* Application.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Application.entitlements; sourceTree = "<group>"; };
 		08209306208F522A00711DE4 /* PushService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushService.h; sourceTree = "<group>"; };
 		08209307208F522A00711DE4 /* PushService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushService.m; sourceTree = "<group>"; };
+		0821D53C227F5ED300FC091F /* DeeplinkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeeplinkService.h; sourceTree = "<group>"; };
+		0821D53D227F5ED300FC091F /* DeeplinkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeeplinkService.m; sourceTree = "<group>"; };
 		082590ED1F054A6A00BB527C /* HomeMediaCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediaCollectionHeaderView.h; sourceTree = "<group>"; };
 		082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediaCollectionHeaderView.m; sourceTree = "<group>"; };
 		082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeMediaCollectionHeaderView.xib; sourceTree = "<group>"; };
@@ -2557,15 +2564,17 @@
 		08654B921D3CDA160040EF04 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6F4760181EB37BD1003021EA /* Categories */,
 				08AF947E217D27E40028B082 /* ActivityItemSource.h */,
 				08AF947F217D27E40028B082 /* ActivityItemSource.m */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
 				6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */,
+				6F4760181EB37BD1003021EA /* Categories */,
 				6FE686DF1EB9D57400067D40 /* ChannelService.h */,
 				6FE686E01EB9D57400067D40 /* ChannelService.m */,
 				6FE1B9171FAC34D600A58F3B /* ContentInsets.h */,
 				6FE1B9181FAC34D600A58F3B /* ContentInsets.m */,
+				0821D53C227F5ED300FC091F /* DeeplinkService.h */,
+				0821D53D227F5ED300FC091F /* DeeplinkService.m */,
 				6F8144122008FA970075F52F /* GoogleCast.h */,
 				6F8144132008FA970075F52F /* GoogleCast.m */,
 				6F80106720443230009FE197 /* PlayApplication.h */,
@@ -5636,6 +5645,7 @@
 				6F12DB5021A3EFBF0054879D /* HistoryViewController.m in Sources */,
 				6F40920022DCF43D005F3850 /* Previewing.m in Sources */,
 				6FDF08E6218B126700B2AF2C /* Onboarding.m in Sources */,
+				0821D53E227F5ED300FC091F /* DeeplinkService.m in Sources */,
 				081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */,
 				6FAAF77C20CABA3A00BB58A3 /* Notification.m in Sources */,
 				6FC8866B1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
@@ -5664,6 +5674,7 @@
 				088899462077628300242654 /* TVChannel.m in Sources */,
 				E66BEC1D1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6F4C673F1EA6115C006A0A3B /* SearchViewController.m in Sources */,
+				0821D53F227F5ED300FC091F /* DeeplinkService.m in Sources */,
 				6F47607F1EB37DF1003021EA /* UIColor+PlaySRG.m in Sources */,
 				6F475FC41EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6FD633EB1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
@@ -5822,6 +5833,7 @@
 				088899472077628400242654 /* TVChannel.m in Sources */,
 				E66BEC1E1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6F4C67401EA6115C006A0A3B /* SearchViewController.m in Sources */,
+				0821D540227F5ED300FC091F /* DeeplinkService.m in Sources */,
 				6F4760861EB37DF1003021EA /* UIColor+PlaySRG.m in Sources */,
 				6F475FC51EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6FD633EC1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
@@ -5980,6 +5992,7 @@
 				088899482077628400242654 /* TVChannel.m in Sources */,
 				E66BEC1F1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6F4C67411EA6115C006A0A3B /* SearchViewController.m in Sources */,
+				0821D541227F5ED300FC091F /* DeeplinkService.m in Sources */,
 				6F47608D1EB37DF1003021EA /* UIColor+PlaySRG.m in Sources */,
 				6F475FC61EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6FD633ED1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
@@ -6138,6 +6151,7 @@
 				088899492077628500242654 /* TVChannel.m in Sources */,
 				E66BEC201DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6F4C67421EA6115C006A0A3B /* SearchViewController.m in Sources */,
+				0821D542227F5ED300FC091F /* DeeplinkService.m in Sources */,
 				6F4760941EB37DF2003021EA /* UIColor+PlaySRG.m in Sources */,
 				6F475FC71EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6FD633EE1FFD151000875BE5 /* MiniPlayerView.m in Sources */,

@@ -10,6 +10,7 @@
 #import "ApplicationSettings.h"
 #import "Banner.h"
 #import "CalendarViewController.h"
+#import "DeeplinkService.h"
 #import "Download.h"
 #import "Favorites.h"
 #import "GoogleCast.h"
@@ -36,7 +37,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <Firebase/Firebase.h>
-#import <JavaScriptCore/JavaScriptCore.h>
 #import <libextobjc/libextobjc.h>
 #import <Mantle/Mantle.h>
 #import <SafariServices/SafariServices.h>
@@ -259,26 +259,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 {
     AnalyticsSource analyticsSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeeplink : AnalyticsSourceSchemeURL;
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
-    if (! [URL.host.lowercaseString isEqualToString:@"open"]) {
-        NSString *javascriptFilePath = [NSBundle.mainBundle pathForResource:@"parse_play_url" ofType:@"js"];
-        NSString *javascript = [NSString stringWithContentsOfFile:javascriptFilePath encoding:NSUTF8StringEncoding error:nil];
-        JSContext *context = [[JSContext alloc] init];
-        [context evaluateScript:javascript];
-        JSValue * evaluate = [context objectForKeyedSubscript:@"parseForPlayApp"];
-        
-        NSMutableDictionary *queryItems = [NSMutableDictionary dictionary];
-        [URLComponents.queryItems enumerateObjectsUsingBlock:^(NSURLQueryItem * _Nonnull queryItem, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (queryItem.value) {
-                [queryItems setObject:queryItem.value forKey:queryItem.name];
-            }
-        }];
-        JSValue * result = [evaluate callWithArguments:@[ URLComponents.host ?: NSNull.null,
-                                                          URLComponents.path ?: NSNull.null,
-                                                          queryItems.copy,
-                                                          URLComponents.fragment ?: NSNull.null ]];
-        NSURL *playURL = [NSURL URLWithString:result.toString];
-        if (playURL) {
-            URLComponents = [NSURLComponents componentsWithURL:playURL resolvingAgainstBaseURL:NO];
+    if (! [URLComponents.host.lowercaseString isEqualToString:@"open"]) {
+        NSURL *deeplinkURL = [DeeplinkService.sharedService schemeURLFromWebURL:URL];
+        if (deeplinkURL) {
+            URLComponents = [NSURLComponents componentsWithURL:deeplinkURL resolvingAgainstBaseURL:NO];
         }
     }
     
@@ -379,9 +363,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         // TODO: [scheme]://open?date=01-01-2016 … or page urn bydate, az, search …
         
-    }
-    else if ([URLComponents.host.lowercaseString isEqualToString:@"redirect"]) {
-        // TODO: Send the URL to the deeplink service, for analyse.
     }
     
     [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:nil];
