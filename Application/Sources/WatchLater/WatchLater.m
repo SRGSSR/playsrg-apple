@@ -26,14 +26,14 @@ NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataStat
 BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO AND %K == %@", @keypath(SRGPlaylistEntry.new, discarded), @keypath(SRGPlaylistEntry.new, uid), mediaMetadata.URN];
-    return [SRGUserData.currentUserData.playlists entriesInPlaylistWithUid:SRGPlaylistUidWatchLater matchingPredicate:predicate sortedWithDescriptors:nil].count > 0;
+    return [SRGUserData.currentUserData.playlists playlistEntriesInPlaylistWithUid:SRGPlaylistUidWatchLater matchingPredicate:predicate sortedWithDescriptors:nil].count > 0;
 }
 
 void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(NSError * _Nullable error))
 {
-    [SRGUserData.currentUserData.playlists saveEntryWithUid:mediaMetadata.URN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+    [SRGUserData.currentUserData.playlists savePlaylistEntryWithUid:mediaMetadata.URN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
          dispatch_async(dispatch_get_main_queue(), ^{
-             if (!error) {
+             if (! error) {
                  [NSNotificationCenter.defaultCenter postNotificationName:WatchLaterDidChangeNotification
                                                                    object:nil
                                                                  userInfo:@{ WatchLaterMediaMetadataUidKey : mediaMetadata.URN,
@@ -46,9 +46,9 @@ void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^compl
 
 void WatchLaterRemoveMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(NSError * _Nullable error))
 {
-    [SRGUserData.currentUserData.playlists discardEntriesWithUids:@[mediaMetadata.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[mediaMetadata.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (!error) {
+            if (! error) {
                 [NSNotificationCenter.defaultCenter postNotificationName:WatchLaterDidChangeNotification
                                                                   object:nil
                                                                 userInfo:@{ WatchLaterMediaMetadataUidKey : mediaMetadata.URN,

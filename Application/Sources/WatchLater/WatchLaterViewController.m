@@ -113,7 +113,7 @@
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO", @keypath(SRGPlaylistEntry.new, discarded)];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGPlaylistEntry.new, date) ascending:NO];
-    [SRGUserData.currentUserData.playlists entriesInPlaylistWithUid:SRGPlaylistUidWatchLater matchingPredicate:predicate sortedWithDescriptors:@[sortDescriptor] completionBlock:^(NSArray<SRGPlaylistEntry *> * _Nullable playlistEntries, NSError * _Nullable error) {
+    [SRGUserData.currentUserData.playlists playlistEntriesInPlaylistWithUid:SRGPlaylistUidWatchLater matchingPredicate:predicate sortedWithDescriptors:@[sortDescriptor] completionBlock:^(NSArray<SRGPlaylistEntry *> * _Nullable playlistEntries, NSError * _Nullable error) {
         if (error) {
             return;
         }
@@ -173,7 +173,7 @@
 
 - (void)watchLaterTableViewCell:(WatchLaterTableViewCell *)watchLaterTableViewCell deletePlaylistEntryForMedia:(SRGMedia *)media
 {
-    [SRGUserData.currentUserData.playlists discardEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (! error) {
                 [self hideWatchLaterCellsWithMedias:@[media]];
@@ -265,7 +265,7 @@
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of a delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         NSArray<NSIndexPath *> *selectedRows = self.tableView.indexPathsForSelectedRows;
         if (deleteAllModeEnabled || selectedRows.count == self.items.count) {
-            [SRGUserData.currentUserData.playlists discardEntriesWithUids:nil fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+            [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:nil fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self refresh];
                 });
@@ -287,9 +287,9 @@
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterRemove labels:labels];
             }];
             
-            [SRGUserData.currentUserData.playlists discardEntriesWithUids:URNs fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+            [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:URNs fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if (!error) {
+                    if (! error) {
                         NSArray<SRGMedia *> *medias = [self.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K IN %@", @keypath(SRGMedia.new, URN), URNs]];
                         [self hideWatchLaterCellsWithMedias:medias];
                     }
