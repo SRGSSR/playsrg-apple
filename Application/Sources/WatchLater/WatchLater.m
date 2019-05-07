@@ -11,6 +11,10 @@
 #import <libextobjc/libextobjc.h>
 #import <SRGUserData/SRGUserData.h>
 
+NSString * const WatchLaterDidChangeNotification = @"WatchLaterDidChangeNotification";
+NSString * const WatchLaterMediaMetadataUidKey = @"WatchLaterMediaMetadataUid";
+NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataStateKey";
+
 @interface SRGPlaylists (Private)
 
 - (void)saveEntryDictionaries:(NSArray<NSDictionary *> *)playlistEntryDictionaries toPlaylistUid:(NSString *)playlistUid withCompletionBlock:(void (^)(NSError * _Nullable error))completionBlock;
@@ -29,6 +33,12 @@ void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^compl
 {
     [SRGUserData.currentUserData.playlists saveEntryWithUid:mediaMetadata.URN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
          dispatch_async(dispatch_get_main_queue(), ^{
+             if (!error) {
+                 [NSNotificationCenter.defaultCenter postNotificationName:WatchLaterDidChangeNotification
+                                                                   object:nil
+                                                                 userInfo:@{ WatchLaterMediaMetadataUidKey : mediaMetadata.URN,
+                                                                             WatchLaterMediaMetadataStateKey : @(WatchLaterMediaMetadataStateAdded) }];
+             }
              completion(error);
          });
     }];
@@ -38,6 +48,12 @@ void WatchLaterRemoveMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^co
 {
     [SRGUserData.currentUserData.playlists discardEntriesWithUids:@[mediaMetadata.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            if (!error) {
+                [NSNotificationCenter.defaultCenter postNotificationName:WatchLaterDidChangeNotification
+                                                                  object:nil
+                                                                userInfo:@{ WatchLaterMediaMetadataUidKey : mediaMetadata.URN,
+                                                                            WatchLaterMediaMetadataStateKey : @(WatchLaterMediaMetadataStateRemoved) }];
+            }
             completion(error);
         });
     }];

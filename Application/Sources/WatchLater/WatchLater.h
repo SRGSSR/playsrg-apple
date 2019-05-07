@@ -9,6 +9,31 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ *  WatchLater media metadata state.
+ */
+typedef NS_ENUM(NSInteger, WatchLaterMediaMetadataState) {
+    /**
+     *  Added media metadata.
+     */
+    WatchLaterMediaMetadataStateAdded = 0,
+    /**
+     *  Removed media metadata.
+     */
+    WatchLaterMediaMetadataStateRemoved
+};
+
+/**
+ *  Notification sent when one media metadata changes. Use the keys below to retrieve detailed information from the notification
+ *  `userInfo` dictionary.
+ *
+ *  @discussion Those notifications are broadcasted without any object, getted on the main thread.
+ */
+OBJC_EXPORT NSString * const WatchLaterDidChangeNotification;                     // Notification name.
+
+OBJC_EXPORT NSString * const WatchLaterMediaMetadataUidKey;                       // Key to access the media metata uid (`NSString`) which have changed.
+OBJC_EXPORT NSString * const WatchLaterMediaMetadataStateKey;                     // Key to access the new uid media metata state as an `NSNumber` (wrapping an `WatchLaterMediaMetadataState` value).
+
+/**
  *  Return `YES` if the media is in the watch later list.
  *
  *  @discussion Must be called from the main thread

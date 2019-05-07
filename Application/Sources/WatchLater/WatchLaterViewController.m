@@ -12,6 +12,7 @@
 #import "PlayLogger.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
+#import "WatchLater.h"
 #import "WatchLaterTableViewCell.h"
 
 #import <libextobjc/libextobjc.h>
@@ -53,6 +54,10 @@
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(playlistEntriesDidChange:)
                                                name:SRGPlaylistEntriesDidChangeNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(watchLaterDidChange:)
+                                               name:WatchLaterDidChangeNotification
                                              object:nil];
     
     [self updateInterfaceForEditionAnimated:NO];
@@ -345,6 +350,23 @@
         }
     }];
 
+}
+
+- (void)watchLaterDidChange:(NSNotification *)notification
+{
+    if ([notification.userInfo[WatchLaterMediaMetadataStateKey] integerValue] == WatchLaterMediaMetadataStateRemoved) {
+        NSString *URN = notification.userInfo[WatchLaterMediaMetadataUidKey];
+        SRGMedia *media = [self.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGMedia.new, URN), URN]].firstObject;
+        
+        NSInteger mediaIndex = [self.items indexOfObject:media];
+        [self hideItem:media];
+        
+        [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:mediaIndex inSection:0] ]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadEmptyDataSet];
+        
+        [self updateInterfaceForEditionAnimated:YES];
+    }
 }
 
 @end
