@@ -190,15 +190,15 @@ static void commonInit(ListRequestViewController *self);
 
 #pragma mark Item hiding
 
-- (void)hideItem:(id)item
+- (void)hideItems:(NSArray *)items
 {
-    [self.hiddenItems addObject:item];
+    [self.hiddenItems addObjectsFromArray:items];
     self.cachedItems = nil;         // Invalidate cache
 }
 
-- (void)unhideItem:(id)item
+- (void)unhideItems:(NSArray *)items
 {
-    [self.hiddenItems removeObject:item];
+    [self.hiddenItems removeObjectsInArray:items];
     self.cachedItems = nil;         // Invalidate cache
 }
 

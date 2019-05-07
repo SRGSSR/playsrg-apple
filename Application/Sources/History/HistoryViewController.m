@@ -155,7 +155,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if (! error) {
                 NSInteger mediaIndex = [self.items indexOfObject:media];
-                [self hideItem:media];
+                [self hideItems:@[media]];
                 
                 [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:mediaIndex inSection:0] ]
                                       withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -281,7 +281,7 @@
                     }
                     
                     for (SRGMedia *media in mediasToRemove) {
-                        [self hideItem:media];
+                        [self hideItems:@[media]];
                     }
                     
                     [self.tableView deleteRowsAtIndexPaths:selectedRows

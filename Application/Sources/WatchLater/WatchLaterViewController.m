@@ -127,6 +127,25 @@
     }];
 }
 
+- (void)hideWatchLaterCellsWithMedias:(NSArray<SRGMedia *> *)medias
+{
+    NSMutableArray<NSIndexPath *> *indexPaths = [NSMutableArray array];
+    for (SRGMedia *media in medias) {
+        NSInteger mediaIndex = [self.items indexOfObject:media];
+        if (mediaIndex != NSNotFound) {
+            [indexPaths addObject:[NSIndexPath indexPathForRow:mediaIndex inSection:0]];
+        }
+    }
+    
+    [self hideItems:medias];
+    [self.tableView deleteRowsAtIndexPaths:indexPaths.copy
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self.tableView reloadEmptyDataSet];
+    
+    [self updateInterfaceForEditionAnimated:YES];
+}
+
 #pragma mark UI
 
 - (void)updateInterfaceForEditionAnimated:(BOOL)animated
@@ -154,26 +173,18 @@
 
 - (void)watchLaterTableViewCell:(WatchLaterTableViewCell *)watchLaterTableViewCell deletePlaylistEntryForMedia:(SRGMedia *)media
 {
-    
     [SRGUserData.currentUserData.playlists discardEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (! error) {
-                NSInteger mediaIndex = [self.items indexOfObject:media];
-                [self hideItem:media];
+                [self hideWatchLaterCellsWithMedias:@[media]];
                 
-                [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:mediaIndex inSection:0] ]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-                [self.tableView reloadEmptyDataSet];
-                
-                [self updateInterfaceForEditionAnimated:YES];
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.value = media.URN;
+                labels.source = AnalyticsSourceSwipe;
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterRemove labels:labels];
             }
         });
     }];
-    
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.value = media.URN;
-    labels.source = AnalyticsSourceSwipe;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterRemove labels:labels];
 }
 
 #pragma mark UITableViewDataSource protocol
@@ -278,21 +289,10 @@
             
             [SRGUserData.currentUserData.playlists discardEntriesWithUids:URNs fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSMutableArray<SRGMedia *> *mediasToRemove = [NSMutableArray array];
-                    for (NSIndexPath *selectedIndexPath in selectedRows) {
-                        SRGMedia *media = self.items[selectedIndexPath.row];
-                        [mediasToRemove addObject:media];
+                    if (!error) {
+                        NSArray<SRGMedia *> *medias = [self.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K IN %@", @keypath(SRGMedia.new, URN), URNs]];
+                        [self hideWatchLaterCellsWithMedias:medias];
                     }
-                    
-                    for (SRGMedia *media in mediasToRemove) {
-                        [self hideItem:media];
-                    }
-                    
-                    [self.tableView deleteRowsAtIndexPaths:selectedRows
-                                          withRowAnimation:UITableViewRowAnimationAutomatic];
-                    [self.tableView reloadEmptyDataSet];
-                    
-                    [self updateInterfaceForEditionAnimated:YES];
                 });
             }];
         }
@@ -358,14 +358,7 @@
         NSString *URN = notification.userInfo[WatchLaterMediaMetadataUidKey];
         SRGMedia *media = [self.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGMedia.new, URN), URN]].firstObject;
         
-        NSInteger mediaIndex = [self.items indexOfObject:media];
-        [self hideItem:media];
-        
-        [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:mediaIndex inSection:0] ]
-                              withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView reloadEmptyDataSet];
-        
-        [self updateInterfaceForEditionAnimated:YES];
+        [self hideWatchLaterCellsWithMedias:@[media]];
     }
 }
 

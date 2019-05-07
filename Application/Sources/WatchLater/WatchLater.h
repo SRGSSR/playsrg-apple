@@ -34,28 +34,28 @@ OBJC_EXPORT NSString * const WatchLaterMediaMetadataUidKey;                     
 OBJC_EXPORT NSString * const WatchLaterMediaMetadataStateKey;                     // Key to access the new uid media metata state as an `NSNumber` (wrapping an `WatchLaterMediaMetadataState` value).
 
 /**
- *  Return `YES` if the media is in the watch later list.
+ *  Return `YES` if the media metadata is in the watch later list.
  *
  *  @discussion Must be called from the main thread
  */
 OBJC_EXPORT BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata);
 
 /**
- *  Add a media to the watch later list.
+ *  Add a media metadata to the watch later list.
  *
  *  @discussion Must be called from the main thread. The completion block is called on the main thread.
  */
 OBJC_EXPORT void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, void (^completion)(NSError * _Nullable error));
 
 /**
- *  Remove a media to the watch later list.
+ *  Remove a media metadata to the watch later list.
  *
  *  @discussion Must be called from the main thread. The completion block is called on the main thread.
  */
 OBJC_EXPORT void WatchLaterRemoveMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, void (^completion)(NSError * _Nullable error));
 
 /**
- *  Toggle a media to the watch later list.
+ *  Toggle a media metadata to the watch later list.
  *
  *  @discussion Must be called from the main thread. The completion block is called on the main thread.
  */
