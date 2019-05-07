@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface Favorite (WatchLaterMigration)
+
 /**
  *  Available media favorites, sorted by date at which they were favorited (from the oldest to the most recent)
  */

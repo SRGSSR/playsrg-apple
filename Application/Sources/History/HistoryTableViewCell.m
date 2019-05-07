@@ -113,13 +113,13 @@
                                                    name:DownloadStateDidChangeNotification
                                                  object:nil];
         [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(historyDidChange:)
-                                                   name:SRGHistoryDidChangeNotification
+                                               selector:@selector(historyEntriesDidChange:)
+                                                   name:SRGHistoryEntriesDidChangeNotification
                                                  object:SRGUserData.currentUserData.history];
     }
     else {
         [NSNotificationCenter.defaultCenter removeObserver:self name:DownloadStateDidChangeNotification object:nil];
-        [NSNotificationCenter.defaultCenter removeObserver:self name:SRGHistoryDidChangeNotification object:SRGUserData.currentUserData.history];
+        [NSNotificationCenter.defaultCenter removeObserver:self name:SRGHistoryEntriesDidChangeNotification object:SRGUserData.currentUserData.history];
     }
 }
 
@@ -327,9 +327,9 @@
     [self updateDownloadStatus];
 }
 
-- (void)historyDidChange:(NSNotification *)notification
+- (void)historyEntriesDidChange:(NSNotification *)notification
 {
-    NSArray<NSString *> *updatedURNs = notification.userInfo[SRGHistoryChangedUidsKey];
+    NSArray<NSString *> *updatedURNs = notification.userInfo[SRGHistoryEntriesUidsKey];
     if (self.media && [updatedURNs containsObject:self.media.URN]) {
         [self updateHistoryStatus];
     }

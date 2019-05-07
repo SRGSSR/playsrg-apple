@@ -53,8 +53,8 @@
     [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
     
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(historyDidChange:)
-                                               name:SRGHistoryDidChangeNotification
+                                           selector:@selector(historyEntriesDidChange:)
+                                               name:SRGHistoryEntriesDidChangeNotification
                                              object:SRGUserData.currentUserData.history];
     
     [self updateInterfaceForEditionAnimated:NO];
@@ -317,13 +317,16 @@
 
 #pragma mark Notifications
 
-- (void)historyDidChange:(NSNotification *)notification
+- (void)historyEntriesDidChange:(NSNotification *)notification
 {
-    NSArray<NSString *> *previousURNs = notification.userInfo[SRGHistoryPreviousUidsKey];
+    // FIXME:
+#if 0
+    NSArray<NSString *> *previousURNs = notification.userInfo[SRGHistoryEntriesUidsKey];
     NSArray<NSString *> *URNs = notification.userInfo[SRGHistoryUidsKey];
     if (URNs.count == 0 || previousURNs.count == 0) {
         [self refresh];
     }
+#endif
 }
 
 @end
