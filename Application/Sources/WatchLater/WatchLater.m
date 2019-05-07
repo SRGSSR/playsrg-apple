@@ -17,7 +17,7 @@ NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataStat
 
 @interface SRGPlaylists (Private)
 
-- (void)saveEntryDictionaries:(NSArray<NSDictionary *> *)playlistEntryDictionaries toPlaylistUid:(NSString *)playlistUid withCompletionBlock:(void (^)(NSError * _Nullable error))completionBlock;
+- (void)savePlaylistEntryDictionaries:(NSArray<NSDictionary *> *)playlistEntryDictionaries toPlaylistWithUid:(NSString *)playlistUid withCompletionBlock:(void (^)(NSError * _Nullable error))completionBlock;
 
 @end
 
@@ -86,7 +86,7 @@ void WatchLaterMigrate(void)
         for (Favorite *favorite in favorites) {
             [mediaDictionaries addObject:favorite.watchLaterDictionary];
         }
-        [SRGUserData.currentUserData.playlists saveEntryDictionaries:mediaDictionaries.copy toPlaylistUid:SRGPlaylistUidWatchLater withCompletionBlock:^(NSError * _Nullable error) {
+        [SRGUserData.currentUserData.playlists savePlaylistEntryDictionaries:mediaDictionaries.copy toPlaylistWithUid:SRGPlaylistUidWatchLater withCompletionBlock:^(NSError * _Nullable error) {
             if (! error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [Favorite finishMigrationForFavorites:favorites];

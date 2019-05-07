@@ -1486,7 +1486,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     WatchLaterToggleMediaMetadata(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
-        if (!error) {
+        if (! error) {
             AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceButton;
