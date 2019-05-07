@@ -262,7 +262,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     if ([key isEqualToString:SettingsInformationGroup]) {
         if (SRGIdentityService.currentIdentityService.isLoggedIn) {
             NSDate *synchronizationDate = SRGUserData.currentUserData.user.synchronizationDate;
-            NSString *dateString = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:synchronizationDate] ?: NSLocalizedString(@"Never", @"Text displayed when no data synchronization has been made yet");
+            NSString *dateString = synchronizationDate ? [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:synchronizationDate] : NSLocalizedString(@"Never", @"Text displayed when no data synchronization has been made yet");
             return [NSString stringWithFormat:NSLocalizedString(@"Last synchronization: %@", @"Introductory text for the most recent data synchronization date"), dateString];
         }
         return nil;
