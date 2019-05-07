@@ -341,7 +341,7 @@
     // page of content is or was displayed (because other pages after it depend on the first page).
     [self updateMediaURNsWithCompletionBlock:^(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs) {
         NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
-        if (! [previousURNs isEqual:self.mediaURNs] && (previousURNs.count < pageSize || self.mediaURNs.count < pageSize)) {
+        if (! [previousURNs isEqual:self.mediaURNs] && (previousURNs.count <= pageSize || self.mediaURNs.count <= pageSize)) {
             [self refresh];
         }
     }];
