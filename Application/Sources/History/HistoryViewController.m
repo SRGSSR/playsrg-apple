@@ -76,16 +76,11 @@
 
 #pragma mark Overrides
 
-// TODO: Probably provide a subclassing hook instead of having -refresh overridden. Refreshes can also be probably initiated
-//       on a background thread
 - (void)refresh
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO", @keypath(SRGHistoryEntry.new, discarded)];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGHistoryEntry.new, date) ascending:NO];
-    NSArray<SRGHistoryEntry *> *historyEntries = [SRGUserData.currentUserData.history historyEntriesMatchingPredicate:predicate sortedWithDescriptors:@[sortDescriptor]];
-    self.mediaURNs = [historyEntries valueForKeyPath:@keypath(SRGHistoryEntry.new, uid)] ?: @[];
-    
-    [super refresh];
+    [self updateMediaURNsWithCompletionBlock:^(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs) {
+        [super refresh];
+    }];
 }
 
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
@@ -105,6 +100,28 @@
 - (AnalyticsPageType)pageType
 {
     return AnalyticsPageTypeHistory;
+}
+
+#pragma mark Data
+
+- (void)updateMediaURNsWithCompletionBlock:(void (^)(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs))completionBlock
+{
+    NSParameterAssert(completionBlock);
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO", @keypath(SRGHistoryEntry.new, discarded)];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGHistoryEntry.new, date) ascending:NO];
+    [SRGUserData.currentUserData.history historyEntriesMatchingPredicate:predicate sortedWithDescriptors:@[sortDescriptor] completionBlock:^(NSArray<SRGHistoryEntry *> * _Nullable historyEntries, NSError * _Nullable error) {
+        if (error) {
+            return;
+        }
+        
+        NSArray<NSString *> *mediaURNs = [historyEntries valueForKeyPath:@keypath(SRGHistoryEntry.new, uid)] ?: @[];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray<NSString *> *previousMediaURNs = self.mediaURNs;
+            self.mediaURNs = mediaURNs;
+            completionBlock(mediaURNs, previousMediaURNs);
+        });
+    }];
 }
 
 #pragma mark UI
@@ -319,14 +336,15 @@
 
 - (void)historyEntriesDidChange:(NSNotification *)notification
 {
-    // FIXME:
-#if 0
-    NSArray<NSString *> *previousURNs = notification.userInfo[SRGHistoryEntriesUidsKey];
-    NSArray<NSString *> *URNs = notification.userInfo[SRGHistoryUidsKey];
-    if (URNs.count == 0 || previousURNs.count == 0) {
-        [self refresh];
-    }
-#endif
+    // Update the URN list. If we had no media retrieval with pagination, a simple diff could then be used to animate between
+    // the previous list and the new one. Since we have pagination here, we can only automatially perform a refresh if a single
+    // page of content is or was displayed (because other pages after it depend on the first page).
+    [self updateMediaURNsWithCompletionBlock:^(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs) {
+        NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
+        if (! [previousURNs isEqual:self.mediaURNs] && (previousURNs.count < pageSize || self.mediaURNs.count < pageSize)) {
+            [self refresh];
+        }
+    }];
 }
 
 @end
