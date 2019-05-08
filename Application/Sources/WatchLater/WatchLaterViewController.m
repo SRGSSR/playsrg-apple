@@ -344,7 +344,8 @@
     // the previous list and the new one. Since we have pagination here, we can only automatially perform a refresh if a single
     // page of content is or was displayed (because other pages after it depend on the first page).
     [self updateMediaURNsWithCompletionBlock:^(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs) {
-        if (! [previousURNs isEqual:self.mediaURNs] && (previousURNs.count == 0 || self.mediaURNs.count == 0)) {
+        NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
+        if (! [previousURNs isEqual:self.mediaURNs] && (previousURNs.count <= pageSize || self.mediaURNs.count <= pageSize)) {
             [self refresh];
         }
     }];
