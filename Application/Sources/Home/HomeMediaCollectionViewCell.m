@@ -6,6 +6,7 @@
 
 #import "HomeMediaCollectionViewCell.h"
 
+#import "ApplicationConfiguration.h"
 #import "AnalyticsConstants.h"
 #import "Download.h"
 #import "History.h"
