@@ -154,13 +154,7 @@
     [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:@[media.URN] completionBlock:^(NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (! error) {
-                NSInteger mediaIndex = [self.items indexOfObject:media];
                 [self hideItems:@[media]];
-                
-                [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:mediaIndex inSection:0] ]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-                [self.tableView reloadEmptyDataSet];
-                
                 [self updateInterfaceForEditionAnimated:YES];
             }
         });
@@ -274,21 +268,11 @@
             
             [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:URNs completionBlock:^(NSError * _Nonnull error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSMutableArray<SRGMedia *> *mediasToRemove = [NSMutableArray array];
-                    for (NSIndexPath *selectedIndexPath in selectedRows) {
-                        SRGMedia *media = self.items[selectedIndexPath.row];
-                        [mediasToRemove addObject:media];
+                    if (! error) {
+                        NSArray<SRGMedia *> *medias = [self.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K IN %@", @keypath(SRGMedia.new, URN), URNs]];
+                        [self hideItems:medias];
+                        [self updateInterfaceForEditionAnimated:YES];
                     }
-                    
-                    for (SRGMedia *media in mediasToRemove) {
-                        [self hideItems:@[media]];
-                    }
-                    
-                    [self.tableView deleteRowsAtIndexPaths:selectedRows
-                                          withRowAnimation:UITableViewRowAnimationAutomatic];
-                    [self.tableView reloadEmptyDataSet];
-                    
-                    [self updateInterfaceForEditionAnimated:YES];
                 });
             }];
         }

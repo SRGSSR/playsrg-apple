@@ -127,25 +127,6 @@
     }];
 }
 
-- (void)hideWatchLaterCellsWithMedias:(NSArray<SRGMedia *> *)medias
-{
-    NSMutableArray<NSIndexPath *> *indexPaths = [NSMutableArray array];
-    for (SRGMedia *media in medias) {
-        NSInteger mediaIndex = [self.items indexOfObject:media];
-        if (mediaIndex != NSNotFound) {
-            [indexPaths addObject:[NSIndexPath indexPathForRow:mediaIndex inSection:0]];
-        }
-    }
-    
-    [self hideItems:medias];
-    [self.tableView deleteRowsAtIndexPaths:indexPaths.copy
-                          withRowAnimation:UITableViewRowAnimationAutomatic];
-    
-    [self.tableView reloadEmptyDataSet];
-    
-    [self updateInterfaceForEditionAnimated:YES];
-}
-
 #pragma mark UI
 
 - (void)updateInterfaceForEditionAnimated:(BOOL)animated
@@ -176,7 +157,8 @@
     [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (! error) {
-                [self hideWatchLaterCellsWithMedias:@[media]];
+                [self hideItems:@[media]];
+                [self updateInterfaceForEditionAnimated:YES];
                 
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.value = media.URN;
@@ -291,7 +273,8 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (! error) {
                         NSArray<SRGMedia *> *medias = [self.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K IN %@", @keypath(SRGMedia.new, URN), URNs]];
-                        [self hideWatchLaterCellsWithMedias:medias];
+                        [self hideItems:medias];
+                        [self updateInterfaceForEditionAnimated:YES];
                     }
                 });
             }];
@@ -358,7 +341,10 @@
         NSString *URN = notification.userInfo[WatchLaterMediaMetadataUidKey];
         SRGMedia *media = [self.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGMedia.new, URN), URN]].firstObject;
         
-        [self hideWatchLaterCellsWithMedias:@[media]];
+        if (media) {
+            [self hideItems:@[media]];
+            [self updateInterfaceForEditionAnimated:YES];
+        }
     }
 }
 
