@@ -41,7 +41,7 @@ SRGPosition *HistoryResumePlaybackPositionForMedia(SRGMedia *media)
     // Allow faster seek to an earlier position, but not to a later position (playback for a history entry should not resume with
     // content the user has not seen yet)
     SRGHistoryEntry *historyEntry = [SRGUserData.currentUserData.history historyEntryWithUid:media.URN];
-    if (historyEntry && ! historyEntry.discarded) {
+    if (historyEntry) {
         return [SRGPosition positionBeforeTime:historyEntry.lastPlaybackTime];
     }
     else {
@@ -137,8 +137,7 @@ static BOOL HistoryIsProgressForMediaMetadataTracked(id<SRGMediaMetadata> mediaM
 static float HistoryPlaybackProgressForMediaMetadataHistoryEntry(SRGHistoryEntry *historyEntry, id<SRGMediaMetadata> mediaMetadata)
 {
     NSCParameterAssert(historyEntry);
-    
-    return ! historyEntry.discarded ? HistoryPlaybackProgress(CMTimeGetSeconds(historyEntry.lastPlaybackTime), mediaMetadata.duration / 1000.) : 0.f;
+    return HistoryPlaybackProgress(CMTimeGetSeconds(historyEntry.lastPlaybackTime), mediaMetadata.duration / 1000.);
 }
 
 float HistoryPlaybackProgressForMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
@@ -193,8 +192,7 @@ static BOOL HistoryIsProgressForFavoriteTracked(Favorite *favorite)
 static float HistoryPlaybackProgressForFavoriteHistoryEntry(SRGHistoryEntry *historyEntry, Favorite *favorite)
 {
     NSCParameterAssert(historyEntry);
-    
-    return ! historyEntry.discarded ? HistoryPlaybackProgress(CMTimeGetSeconds(historyEntry.lastPlaybackTime), favorite.duration / 1000.) : 0.f;
+    return HistoryPlaybackProgress(CMTimeGetSeconds(historyEntry.lastPlaybackTime), favorite.duration / 1000.);
 }
 
 float HistoryPlaybackProgressForFavorite(Favorite *favorite)

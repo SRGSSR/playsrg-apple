@@ -25,7 +25,7 @@ NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataStat
 
 BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO AND %K == %@", @keypath(SRGPlaylistEntry.new, discarded), @keypath(SRGPlaylistEntry.new, uid), mediaMetadata.URN];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGPlaylistEntry.new, uid), mediaMetadata.URN];
     return [SRGUserData.currentUserData.playlists playlistEntriesInPlaylistWithUid:SRGPlaylistUidWatchLater matchingPredicate:predicate sortedWithDescriptors:nil].count > 0;
 }
 
