@@ -332,7 +332,6 @@
             [self refresh];
         }
     }];
-
 }
 
 - (void)watchLaterDidChange:(NSNotification *)notification
