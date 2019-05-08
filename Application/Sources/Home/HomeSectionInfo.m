@@ -123,7 +123,7 @@
         }
             
         case HomeSectionTVMyListShows: {
-            return [[[SRGDataProvider.currentDataProvider showsWithURNs:PushService.sharedService.subscribedShowURNs completionBlock:paginatedItemListCompletionBlock] requestWithPageSize:pageSize] requestWithPage:page];
+            return [[SRGDataProvider.currentDataProvider showsWithURNs:PushService.sharedService.subscribedShowURNs completionBlock:paginatedItemListCompletionBlock] requestWithPageSize:50];
             break;
         }
             
@@ -191,7 +191,7 @@
         }
             
         case HomeSectionRadioMyListShows: {
-            return [[[SRGDataProvider.currentDataProvider showsWithURNs:PushService.sharedService.subscribedShowURNs completionBlock:paginatedItemListCompletionBlock] requestWithPageSize:pageSize] requestWithPage:page];
+            return [[SRGDataProvider.currentDataProvider showsWithURNs:PushService.sharedService.subscribedShowURNs completionBlock:paginatedItemListCompletionBlock] requestWithPageSize:50];
             break;
         }
             
