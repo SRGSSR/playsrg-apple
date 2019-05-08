@@ -48,6 +48,7 @@
 
 @property (nonatomic, getter=isTopicsLoaded) BOOL topicsLoaded;
 @property (nonatomic, getter=isEventsLoaded) BOOL eventsLoaded;
+@property (nonatomic, getter=isMyListLoaded) BOOL myListLoaded;
 
 @end
 
@@ -376,6 +377,10 @@
         [homeSectionInfo refreshWithRequestQueue:requestQueue completionBlock:^(NSError * _Nullable error) {
             // Refresh as data becomes available for better perceived loading times
             if (! error) {
+                if (homeSection == HomeSectionTVMyListShows || homeSection == HomeSectionRadioMyListShows) {
+                    self.myListLoaded = YES;
+                    [self synchronizeHomeSections];
+                }
                 [self.tableView reloadData];
             }
         }];
@@ -409,6 +414,15 @@
             }
             else if (! self.eventsLoaded) {
                 HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:nil title:TitleForHomeSection(homeSection.integerValue)];
+                [homeSectionInfos addObject:homeSectionInfo];
+            }
+        }
+        else if (homeSection.integerValue == HomeSectionTVMyListShows || homeSection.integerValue == HomeSectionRadioMyListShows) {
+            HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:self.radioChannel.uid title:TitleForHomeSection(homeSection.integerValue)];
+            if (homeSectionInfo.items.count != 0) {
+                [homeSectionInfos addObject:homeSectionInfo];
+            }
+            else if (! self.myListLoaded) {
                 [homeSectionInfos addObject:homeSectionInfo];
             }
         }
