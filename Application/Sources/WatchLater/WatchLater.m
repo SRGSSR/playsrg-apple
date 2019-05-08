@@ -80,17 +80,29 @@ void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, 
 
 void WatchLaterMigrate(void)
 {
-    NSArray<Favorite *> *favorites = [Favorite mediaFavorites];
-    if (favorites.count > 0) {
-        NSMutableArray<NSDictionary *> *mediaDictionaries = [NSMutableArray array];
-        for (Favorite *favorite in favorites) {
-            [mediaDictionaries addObject:favorite.watchLaterDictionary];
+    NSCAssert(SRGUserData.currentUserData != nil, @"User data storage must be available");
+    
+    SRGPlaylist *watchLaterPlaylist = [SRGUserData.currentUserData.playlists playlistWithUid:SRGPlaylistUidWatchLater];
+    if (watchLaterPlaylist) {
+        NSArray<Favorite *> *favorites = [Favorite mediaFavorites];
+        if (favorites.count > 0) {
+            NSMutableArray<NSDictionary *> *mediaDictionaries = [NSMutableArray array];
+            for (Favorite *favorite in favorites) {
+                [mediaDictionaries addObject:favorite.watchLaterDictionary];
+            }
+            [SRGUserData.currentUserData.playlists savePlaylistEntryDictionaries:mediaDictionaries.copy toPlaylistWithUid:SRGPlaylistUidWatchLater withCompletionBlock:^(NSError * _Nullable error) {
+                if (! error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [Favorite finishMigrationForFavorites:favorites];
+                    });
+                }
+            }];
         }
-        [SRGUserData.currentUserData.playlists savePlaylistEntryDictionaries:mediaDictionaries.copy toPlaylistWithUid:SRGPlaylistUidWatchLater withCompletionBlock:^(NSError * _Nullable error) {
-            if (! error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [Favorite finishMigrationForFavorites:favorites];
-                });
+    }
+    else {
+        [NSNotificationCenter.defaultCenter addObserverForName:SRGPlaylistsDidChangeNotification object:SRGUserData.currentUserData.playlists queue:nil usingBlock:^(NSNotification * _Nonnull notification) {
+            if ([notification.userInfo[SRGPlaylistUidKey] containsObject:SRGPlaylistUidWatchLater]) {
+                WatchLaterMigrate();
             }
         }];
     }
