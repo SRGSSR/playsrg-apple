@@ -4,21 +4,21 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "HomeShowListTableViewCell.h"
+#import "HomeShowVerticalListTableViewCell.h"
 
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
 
 #import <SRGAppearance/SRGAppearance.h>
 
-@interface HomeShowListTableViewCell ()
+@interface HomeShowVerticalListTableViewCell ()
 
 @property (nonatomic, weak) IBOutlet UIView *wrapperView;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 
 @end
 
-@implementation HomeShowListTableViewCell
+@implementation HomeShowVerticalListTableViewCell
 
 #pragma mark Class methods
 
@@ -40,7 +40,7 @@
     static UICollectionViewFlowLayout *s_collectionViewLayout;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        HomeShowListTableViewCell *headerView = [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
+        HomeShowVerticalListTableViewCell *headerView = [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
         s_collectionViewLayout = (UICollectionViewFlowLayout *)headerView.collectionView.collectionViewLayout;
     });
     
@@ -123,7 +123,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [HomeShowListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds collectionViewLayout:collectionViewLayout];
+    return [HomeShowVerticalListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds collectionViewLayout:collectionViewLayout];
 }
 
 @end

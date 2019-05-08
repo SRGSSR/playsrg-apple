@@ -13,7 +13,7 @@
 #import "HomeRadioLiveTableViewCell.h"
 #import "HomeSectionInfo.h"
 #import "HomeShowsAccessTableViewCell.h"
-#import "HomeShowListTableViewCell.h"
+#import "HomeShowVerticalListTableViewCell.h"
 #import "HomeStatusHeaderView.h"
 #import "NavigationController.h"
 #import "Notification.h"
@@ -103,9 +103,9 @@
     UINib *homeMediaListTableViewCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
     [self.tableView registerNib:homeMediaListTableViewCellNib forCellReuseIdentifier:mediaCellIdentifier];
     
-    NSString *showListCellIdentifier = NSStringFromClass(HomeShowListTableViewCell.class);
-    UINib *homeShowListTableViewCellNib = [UINib nibWithNibName:showListCellIdentifier bundle:nil];
-    [self.tableView registerNib:homeShowListTableViewCellNib forCellReuseIdentifier:showListCellIdentifier];
+    NSString *showVerticalListCellIdentifier = NSStringFromClass(HomeShowVerticalListTableViewCell.class);
+    UINib *homeShowVerticalListTableViewCellNib = [UINib nibWithNibName:showVerticalListCellIdentifier bundle:nil];
+    [self.tableView registerNib:homeShowVerticalListTableViewCellNib forCellReuseIdentifier:showVerticalListCellIdentifier];
     
     NSString *radioLiveCellIdentifier = NSStringFromClass(HomeRadioLiveTableViewCell.class);
     UINib *homeRadioLiveTableViewCellNib = [UINib nibWithNibName:radioLiveCellIdentifier bundle:nil];

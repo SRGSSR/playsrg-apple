@@ -8,7 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeShowListTableViewCell : HomeTableViewCell <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface HomeShowVerticalListTableViewCell : HomeTableViewCell <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
 

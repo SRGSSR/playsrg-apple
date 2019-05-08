@@ -63,7 +63,7 @@
         return ApplicationSettingAlternateRadioHomepageDesignEnabled() ? HomeMediaListTableViewCell.class : HomeRadioLiveTableViewCell.class;
     }
     else if (self.homeSection == HomeSectionRadioAllShows) {
-        return HomeShowListTableViewCell.class;
+        return HomeShowVerticalListTableViewCell.class;
     }
     else if (self.homeSection == HomeSectionTVShowsAccess || self.homeSection == HomeSectionRadioShowsAccess) {
         return HomeShowsAccessTableViewCell.class;
