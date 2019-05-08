@@ -47,7 +47,7 @@
     self.placeholderView.alpha = 1.f;
     
     // Accommodate all kinds of usages (medium or small)
-    self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMedia)
+    self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
                                                             withScale:ImageScaleMedium];
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
