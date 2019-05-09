@@ -1015,7 +1015,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)updateWatchLaterStatusForMedia:(SRGMedia *)media
 {
-    if (! WatchLaterCanContainsMediaMetadata(media) || self.letterboxController.continuousPlaybackUpcomingMedia || ! media) {
+    if (! WatchLaterCanStoreMediaMetadata(media) || self.letterboxController.continuousPlaybackUpcomingMedia || ! media) {
         self.watchLaterButton.hidden = YES;
         return;
     }

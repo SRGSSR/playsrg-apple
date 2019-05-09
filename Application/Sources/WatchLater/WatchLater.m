@@ -13,11 +13,11 @@
 
 NSString * const WatchLaterDidChangeNotification = @"WatchLaterDidChangeNotification";
 NSString * const WatchLaterMediaMetadataUidKey = @"WatchLaterMediaMetadataUid";
-NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataStateKey";
+NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataState";
 
 #pragma mark Media metadata functions
 
-BOOL WatchLaterCanContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
+BOOL WatchLaterCanStoreMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 {
     return mediaMetadata.contentType != SRGContentTypeLivestream;
 }

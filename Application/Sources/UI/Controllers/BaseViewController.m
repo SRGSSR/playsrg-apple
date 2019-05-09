@@ -181,7 +181,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
         NSString *message = (media.show.title && ! [media.title containsString:media.show.title]) ? media.show.title : nil;
         alertController = [UIAlertController alertControllerWithTitle:media.title message:message preferredStyle:UIAlertControllerStyleActionSheet];
         
-        if (WatchLaterCanContainsMediaMetadata(media)) {
+        if (WatchLaterCanStoreMediaMetadata(media)) {
             BOOL inWatchLaterList = WatchLaterContainsMediaMetadata(media);
             [alertController addAction:[UIAlertAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Watch later\"", @"Button label to remove a media from the watch later list, from the media long-press menu") : NSLocalizedString(@"Add to \"Watch later\"", @"Button label to add a media to the watch later list, from the media long-press menu") style:inWatchLaterList ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 WatchLaterToggleMediaMetadata(media, ^(BOOL added, NSError * _Nullable error) {

@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, WatchLaterMediaMetadataState) {
  *  Notification sent when one media metadata changes. Use the keys below to retrieve detailed information from the notification
  *  `userInfo` dictionary.
  *
- *  @discussion Those notifications are broadcasted without any object, getted on the main thread.
+ *  @discussion These notifications are broadcasted without any object and received on the main thread.
  */
 OBJC_EXPORT NSString * const WatchLaterDidChangeNotification;                     // Notification name.
 
@@ -38,7 +38,7 @@ OBJC_EXPORT NSString * const WatchLaterMediaMetadataStateKey;                   
  *
  *  @discussion Must be called from the main thread
  */
-OBJC_EXPORT BOOL WatchLaterCanContainsMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata);
+OBJC_EXPORT BOOL WatchLaterCanStoreMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata);
 
 /**
  *  Return `YES` if the media metadata is in the watch later list.
