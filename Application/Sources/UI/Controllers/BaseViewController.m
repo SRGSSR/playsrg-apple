@@ -178,23 +178,25 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     if ([previewObject isKindOfClass:SRGMedia.class]) {
         SRGMedia *media = previewObject;
         
-        BOOL inWatchLaterList = WatchLaterContainsMediaMetadata(media);
-        
         NSString *message = (media.show.title && ! [media.title containsString:media.show.title]) ? media.show.title : nil;
         alertController = [UIAlertController alertControllerWithTitle:media.title message:message preferredStyle:UIAlertControllerStyleActionSheet];
-        [alertController addAction:[UIAlertAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Watch later\"", @"Button label to remove a media from the watch later list, from the media long-press menu") : NSLocalizedString(@"Add to \"Watch later\"", @"Button label to add a media to the watch later list, from the media long-press menu") style:inWatchLaterList ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            WatchLaterToggleMediaMetadata(media, ^(BOOL added, NSError * _Nullable error) {
-                if (! error) {
-                    AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
-                    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                    labels.source = AnalyticsSourceLongPress;
-                    labels.value = media.URN;
-                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-                    
-                    [Banner showWatchLaterAdded:added forItemWithName:media.title inViewController:self];
-                }
-            });
-        }]];
+        
+        if (WatchLaterCanContainsMediaMetadata(media)) {
+            BOOL inWatchLaterList = WatchLaterContainsMediaMetadata(media);
+            [alertController addAction:[UIAlertAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Watch later\"", @"Button label to remove a media from the watch later list, from the media long-press menu") : NSLocalizedString(@"Add to \"Watch later\"", @"Button label to add a media to the watch later list, from the media long-press menu") style:inWatchLaterList ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                WatchLaterToggleMediaMetadata(media, ^(BOOL added, NSError * _Nullable error) {
+                    if (! error) {
+                        AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
+                        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                        labels.source = AnalyticsSourceLongPress;
+                        labels.value = media.URN;
+                        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
+                        
+                        [Banner showWatchLaterAdded:added forItemWithName:media.title inViewController:self];
+                    }
+                });
+            }]];
+        }
         
         BOOL downloadable = [Download canDownloadMedia:media];
         if (downloadable) {

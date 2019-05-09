@@ -34,6 +34,13 @@ OBJC_EXPORT NSString * const WatchLaterMediaMetadataUidKey;                     
 OBJC_EXPORT NSString * const WatchLaterMediaMetadataStateKey;                     // Key to access the new uid media metata state as an `NSNumber` (wrapping an `WatchLaterMediaMetadataState` value).
 
 /**
+ *  Return `YES` if the media metadata can be added to the watch later list.
+ *
+ *  @discussion Must be called from the main thread
+ */
+OBJC_EXPORT BOOL WatchLaterCanContainsMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata);
+
+/**
  *  Return `YES` if the media metadata is in the watch later list.
  *
  *  @discussion Must be called from the main thread

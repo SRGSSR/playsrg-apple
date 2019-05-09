@@ -166,22 +166,23 @@
 {
     NSMutableArray<id<UIPreviewActionItem>> *previewActionItems = [NSMutableArray array];
     
-    BOOL inWatchLaterList = WatchLaterContainsMediaMetadata(self.media);
-    
-    UIPreviewAction *watchLaterAction = [UIPreviewAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Watch later\"", @"Button label to remove a media from the watch later list, from the media preview window") : NSLocalizedString(@"Add to \"Watch later\"", @"Button label to add a media to the watch later list, from the media preview window") style:inWatchLaterList ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        WatchLaterToggleMediaMetadata(self.media, ^(BOOL added, NSError * _Nullable error) {
-            if (! error) {
-                AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = AnalyticsSourcePeekMenu;
-                labels.value = self.media.URN;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-                
-                [Banner showWatchLaterAdded:added forItemWithName:self.media.title inViewController:nil /* Not 'self' since dismissed */];
-            }
-        });
-    }];
-    [previewActionItems addObject:watchLaterAction];
+    if (WatchLaterCanContainsMediaMetadata(self.media)) {
+        BOOL inWatchLaterList = WatchLaterContainsMediaMetadata(self.media);
+        UIPreviewAction *watchLaterAction = [UIPreviewAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Watch later\"", @"Button label to remove a media from the watch later list, from the media preview window") : NSLocalizedString(@"Add to \"Watch later\"", @"Button label to add a media to the watch later list, from the media preview window") style:inWatchLaterList ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+            WatchLaterToggleMediaMetadata(self.media, ^(BOOL added, NSError * _Nullable error) {
+                if (! error) {
+                    AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
+                    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                    labels.source = AnalyticsSourcePeekMenu;
+                    labels.value = self.media.URN;
+                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
+                    
+                    [Banner showWatchLaterAdded:added forItemWithName:self.media.title inViewController:nil /* Not 'self' since dismissed */];
+                }
+            });
+        }];
+        [previewActionItems addObject:watchLaterAction];
+    }
     
     BOOL downloadable = [Download canDownloadMedia:self.media];
     if (downloadable) {

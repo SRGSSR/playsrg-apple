@@ -17,6 +17,11 @@ NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataStat
 
 #pragma mark Media metadata functions
 
+BOOL WatchLaterCanContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
+{
+    return mediaMetadata.contentType != SRGContentTypeLivestream;
+}
+
 BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGPlaylistEntry.new, uid), mediaMetadata.URN];
@@ -80,17 +85,27 @@ void WatchLaterMigrate(void)
     if (watchLaterPlaylist) {
         NSArray<Favorite *> *favorites = [Favorite mediaFavorites];
         
-        __block NSUInteger remainingFavoritesCount = favorites.count;
-        if (remainingFavoritesCount == 0) {
+        if (favorites.count == 0) {
             return;
         }
         
-        for (Favorite *favorite in favorites) {
+        // Don't add livestreams to the watch later list.
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(Favorite.new, mediaContentType), @(FavoriteMediaContentTypeLive)];
+        NSArray<Favorite *> *livestreamFavorites = [favorites filteredArrayUsingPredicate:predicate];
+        [Favorite finishMigrationForFavorites:livestreamFavorites];
+        
+        NSMutableArray<Favorite *> *mutableFavorites = favorites.mutableCopy;
+        [mutableFavorites removeObjectsInArray:livestreamFavorites];
+        NSArray<Favorite *> *nonLivestreamFavorites = mutableFavorites.copy;
+        
+        __block NSUInteger remainingFavoritesCount = nonLivestreamFavorites.count;
+        
+        for (Favorite *favorite in nonLivestreamFavorites) {
             [SRGUserData.currentUserData.playlists savePlaylistEntryWithUid:favorite.mediaURN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
                 --remainingFavoritesCount;
                 if (remainingFavoritesCount == 0) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [Favorite finishMigrationForFavorites:favorites];
+                        [Favorite finishMigrationForFavorites:nonLivestreamFavorites];
                     });
                 }
             }];
