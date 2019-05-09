@@ -15,12 +15,6 @@ NSString * const WatchLaterDidChangeNotification = @"WatchLaterDidChangeNotifica
 NSString * const WatchLaterMediaMetadataUidKey = @"WatchLaterMediaMetadataUid";
 NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataStateKey";
 
-@interface SRGPlaylists (Private)
-
-- (void)savePlaylistEntryDictionaries:(NSArray<NSDictionary *> *)playlistEntryDictionaries toPlaylistWithUid:(NSString *)playlistUid completionBlock:(nullable void (^)(NSError * _Nullable error))completionBlock;
-
-@end
-
 #pragma mark Media metadata functions
 
 BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
@@ -85,13 +79,16 @@ void WatchLaterMigrate(void)
     SRGPlaylist *watchLaterPlaylist = [SRGUserData.currentUserData.playlists playlistWithUid:SRGPlaylistUidWatchLater];
     if (watchLaterPlaylist) {
         NSArray<Favorite *> *favorites = [Favorite mediaFavorites];
-        if (favorites.count > 0) {
-            NSMutableArray<NSDictionary *> *mediaDictionaries = [NSMutableArray array];
-            for (Favorite *favorite in favorites) {
-                [mediaDictionaries addObject:favorite.watchLaterDictionary];
-            }
-            [SRGUserData.currentUserData.playlists savePlaylistEntryDictionaries:mediaDictionaries.copy toPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
-                if (! error) {
+        
+        __block NSUInteger remainingFavoritesCount = favorites.count;
+        if (remainingFavoritesCount == 0) {
+            return;
+        }
+        
+        for (Favorite *favorite in favorites) {
+            [SRGUserData.currentUserData.playlists savePlaylistEntryWithUid:favorite.mediaURN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+                --remainingFavoritesCount;
+                if (remainingFavoritesCount == 0) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [Favorite finishMigrationForFavorites:favorites];
                     });

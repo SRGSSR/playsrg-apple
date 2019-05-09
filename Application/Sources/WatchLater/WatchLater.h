@@ -62,7 +62,7 @@ OBJC_EXPORT void WatchLaterRemoveMediaMetadata(id<SRGMediaMetadata> _Nonnull med
 OBJC_EXPORT void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, void (^completion)(BOOL added, NSError * _Nullable error));
 
 /**
- *  Perform migration.
+ *  Migrate favorites (legacy plist-based way of bookmarking medias), if anym to the watch later playlist.
  */
 OBJC_EXPORT void WatchLaterMigrate(void);
 

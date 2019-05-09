@@ -36,11 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)finishMigrationForFavorites:(NSArray<Favorite *> *)favorites;
 
-/**
- *  Watch later synchronisation dictionary
- */
-- (NSDictionary *)watchLaterDictionary;
-
 @end
 
 NS_ASSUME_NONNULL_END

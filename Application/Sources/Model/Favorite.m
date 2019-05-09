@@ -688,17 +688,6 @@ static NSArray<Favorite *> *s_sortedFavorites;
     [self saveFavoritesDictionary];
 }
 
-- (NSDictionary *)watchLaterDictionary
-{
-    if (self.type == FavoriteTypeMedia) {
-        return @{ @"itemId" : self.mediaURN,
-                  @"date" : @(round((self.creationDate.timeIntervalSince1970 - 2) * 1000.)) };
-    }
-    else {
-        return @{};
-    }
-}
-
 #pragma mark Description
 
 - (NSString *)description
