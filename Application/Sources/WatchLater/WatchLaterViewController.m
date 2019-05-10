@@ -231,7 +231,7 @@
         }
     }
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:deleteAllModeEnabled ? NSLocalizedString(@"Empty list", @"Title of the confirmation pop-up displayed when the user is about to clean the watch later list") : NSLocalizedString(@"Delete entries", @"Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list")
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:deleteAllModeEnabled ? NSLocalizedString(@"Remove all content", @"Title of the confirmation pop-up displayed when the user is about to clean the watch later list") : NSLocalizedString(@"Remove content", @"Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list")
                                                                              message:deleteAllModeEnabled ? NSLocalizedString(@"Are you sure you want to delete all items?", @"Confirmation message displayed when the user is about to clean the watch later list") : NSLocalizedString(@"Are you sure you want to delete the selected items?", @"Confirmation message displayed when the user is about to remove selected entries from the watch later list")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
