@@ -11,7 +11,7 @@
   "feedbackURL": "https://play.typeform.com/to/rwxtud",
   "identityWebserviceURL": "https://hummingbird.rts.ch/api/profile",
   "identityWebsiteURL": "https://www.rts.ch/profile",
-  "historyServiceURL": "https://profil.rts.ch/api/history",
+  "userDataServiceURL": "https://profil.rts.ch/api",
   "searchOptions": "tvShows,videos,radioShows,audios",
   "tvHomeSections": "tvTrending,tvLive,tvEvents,tvTopics",
   "tvTrendingEpisodesOnly": false,

@@ -93,7 +93,7 @@
         s_byteCountFormatter.zeroPadsFractionDigits = YES;
     });
     
-    if (dictionary && !error) {
+    if (dictionary && ! error) {
         NSNumber *totalFreeFileSystemSizeInBytes = [dictionary objectForKey:NSFileSystemFreeSize];
         self.totalFreeSpaceSize = [totalFreeFileSystemSizeInBytes unsignedLongLongValue];
         totalFreeSpaceString = [s_byteCountFormatter stringFromByteCount:self.totalFreeSpaceSize];

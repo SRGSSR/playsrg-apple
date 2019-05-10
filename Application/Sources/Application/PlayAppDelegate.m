@@ -26,6 +26,7 @@
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 #import "UpdateInfo.h"
+#import "WatchLater.h"
 #import "WebViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
@@ -106,9 +107,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     
     NSURL *storeFileURL = [HLSApplicationLibraryDirectoryURL() URLByAppendingPathComponent:@"PlayData.sqlite"];
     SRGUserData.currentUserData = [[SRGUserData alloc] initWithStoreFileURL:storeFileURL
-                                                          historyServiceURL:applicationConfiguration.historyServiceURL
+                                                                 serviceURL:applicationConfiguration.userDataServiceURL
                                                             identityService:SRGIdentityService.currentIdentityService];
-
+    
     GoogleCastSetup();
     
     [NSNotificationCenter.defaultCenter addObserver:self
@@ -148,6 +149,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     
     // Local objects migration
     [Favorite migrate];
+    WatchLaterMigrate();
     
     // 3D touch dynamic shortcut items. If search options are available, append a search option as last item. Dynamic shortcut
     // items are persisted between application launches, do not add them several times

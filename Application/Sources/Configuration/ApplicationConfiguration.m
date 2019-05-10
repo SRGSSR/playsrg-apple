@@ -128,6 +128,7 @@ NSString *TitleForMenuItem(MenuItem menuItem)
         s_names = @{ @(MenuItemSearch) : NSLocalizedString(@"Search", @"Label in the left menu to present the search view"),
                      @(MenuItemFavorites) : NSLocalizedString(@"Favorites", @"Label in the left menu to present favorites"),
                      @(MenuItemSubscriptions) : NSLocalizedString(@"Subscriptions", @"Label in the left menu to present subscriptions"),
+                     @(MenuItemWatchLater) : NSLocalizedString(@"Watch later", @"Label in the left menu to present the watch later list"),
                      @(MenuItemDownloads) : NSLocalizedString(@"Downloads", @"Label in the left menu to present downloads"),
                      @(MenuItemHistory) : NSLocalizedString(@"History", @"Label in the left menu to present history"),
                      @(MenuItemTVOverview) : NSLocalizedString(@"Overview", @"Label in the left menu to present the main TV view"),
@@ -214,8 +215,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *identityWebserviceURL;
 @property (nonatomic) NSURL *identityWebsiteURL;
 
-@property (nonatomic) NSURL *historyServiceURL;
-@property (nonatomic) NSTimeInterval historySynchronizationInterval;
+@property (nonatomic) NSURL *userDataServiceURL;
 
 @property (nonatomic) NSURL *feedbackURL;
 @property (nonatomic) NSURL *whatsNewURL;
@@ -471,11 +471,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     NSString *identityWebsiteURLString = [self.remoteConfig configValueForKey:@"identityWebsiteURL"].stringValue;
     self.identityWebsiteURL = (identityWebsiteURLString.length != 0) ? [NSURL URLWithString:identityWebsiteURLString] : nil;
     
-    NSString *historyServiceURLString = [self.remoteConfig configValueForKey:@"historyServiceURL"].stringValue;
-    self.historyServiceURL = (historyServiceURLString.length != 0) ? [NSURL URLWithString:historyServiceURLString] : nil;
-    
-    FIRRemoteConfigValue *historySynchronizationInterval = [self.remoteConfig configValueForKey:@"historySynchronizationInterval"];
-    self.historySynchronizationInterval = (historySynchronizationInterval.stringValue.length > 0) ? fmax(historySynchronizationInterval.numberValue.doubleValue, 10.) : 30.;
+    NSString *userDataServiceURLString = [self.remoteConfig configValueForKey:@"userDataServiceURL"].stringValue;
+    self.userDataServiceURL = (userDataServiceURLString.length != 0) ? [NSURL URLWithString:userDataServiceURLString] : nil;
     
     NSString *impressumURLString = [self.remoteConfig configValueForKey:@"impressumURL"].stringValue;
     self.impressumURL = (impressumURLString.length != 0) ? [NSURL URLWithString:impressumURLString] : nil;

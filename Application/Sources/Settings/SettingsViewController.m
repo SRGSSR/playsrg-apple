@@ -111,9 +111,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                                                name:SRGIdentityServiceUserDidLogoutNotification
                                              object:SRGIdentityService.currentIdentityService];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(historyDidFinishSynchronization:)
-                                               name:SRGHistoryDidFinishSynchronizationNotification
-                                             object:SRGUserData.currentUserData.history];
+                                           selector:@selector(userDataDidFinishSynchronization:)
+                                               name:SRGUserDataDidStartSynchronizationNotification
+                                             object:SRGUserData.currentUserData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -261,8 +261,8 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     NSString *key = [settingsViewController.settingsReader keyForSection:section];
     if ([key isEqualToString:SettingsInformationGroup]) {
         if (SRGIdentityService.currentIdentityService.isLoggedIn) {
-            NSDate *historyLocalSynchronizationDate = SRGUserData.currentUserData.user.historyLocalSynchronizationDate;
-            NSString *dateString = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:historyLocalSynchronizationDate] ?: NSLocalizedString(@"Never", @"Text displayed when no data synchronization has been made yet");
+            NSDate *synchronizationDate = SRGUserData.currentUserData.user.synchronizationDate;
+            NSString *dateString = synchronizationDate ? [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:synchronizationDate] : NSLocalizedString(@"Never", @"Text displayed when no data synchronization has been made yet");
             return [NSString stringWithFormat:NSLocalizedString(@"Last synchronization: %@", @"Introductory text for the most recent data synchronization date"), dateString];
         }
         return nil;
@@ -392,7 +392,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [self.tableView reloadData];
 }
 
-- (void)historyDidFinishSynchronization:(NSNotification *)notification
+- (void)userDataDidFinishSynchronization:(NSNotification *)notification
 {
     [self.tableView reloadData];
 }

@@ -4,13 +4,11 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "Playlist.h"
+#import "TableRequestViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol PlaylistDataSource <NSObject>
-
-@property (nonatomic, readonly, nullable) Playlist *play_playlist;
+@interface WatchLaterViewController : TableRequestViewController
 
 @end
 

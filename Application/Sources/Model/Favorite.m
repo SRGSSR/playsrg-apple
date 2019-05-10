@@ -669,6 +669,25 @@ static NSArray<Favorite *> *s_sortedFavorites;
     return nil;
 }
 
+#pragma mark WatchLaterMigration
+
++ (NSArray<Favorite *> *)mediaFavorites
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(Favorite.new, type), @(FavoriteTypeMedia)];
+    NSArray<Favorite *> *favorites = [self.favorites filteredArrayUsingPredicate:predicate];
+    return favorites.reverseObjectEnumerator.allObjects;
+}
+
++ (void)finishMigrationForFavorites:(NSArray<Favorite *> *)favorites
+{
+    [favorites enumerateObjectsUsingBlock:^(Favorite * _Nonnull favorite, NSUInteger idx, BOOL * _Nonnull stop) {
+        [s_favoritesDictionary removeObjectForKey:favorite.identifier];
+    }];
+    s_sortedFavorites = nil;            // Invalidate sorted favorite cache
+    
+    [self saveFavoritesDictionary];
+}
+
 #pragma mark Description
 
 - (NSString *)description

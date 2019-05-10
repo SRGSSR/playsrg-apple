@@ -43,6 +43,7 @@
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
+@property (nonatomic) UIColor *blockingOverlayViewColor;
 @property (nonatomic) UIColor *durationLabelBackgroundColor;
 @property (nonatomic) UIColor *favoriteImageViewBackgroundColor;
 
@@ -73,8 +74,9 @@
     self.favoriteImageView.backgroundColor = UIColor.play_redColor;
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
-    self.favoriteImageViewBackgroundColor = self.favoriteImageView.backgroundColor;
+    self.blockingOverlayViewColor = self.blockingOverlayView.backgroundColor;
     self.durationLabelBackgroundColor = self.durationLabel.backgroundColor;
+    self.favoriteImageViewBackgroundColor = self.favoriteImageView.backgroundColor;
     
     self.subscriptionImageView.layer.shadowOpacity = 0.3f;
     self.subscriptionImageView.layer.shadowRadius = 2.f;
@@ -136,8 +138,8 @@
                                                    name:PushServiceSubscriptionStateDidChangeNotification
                                                  object:nil];
         [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(historyDidChange:)
-                                                   name:SRGHistoryDidChangeNotification
+                                               selector:@selector(historyEntriesDidChange:)
+                                                   name:SRGHistoryEntriesDidChangeNotification
                                                  object:SRGUserData.currentUserData.history];
     }
     else {
@@ -145,7 +147,7 @@
         
         [NSNotificationCenter.defaultCenter removeObserver:self name:DownloadStateDidChangeNotification object:nil];
         [NSNotificationCenter.defaultCenter removeObserver:self name:PushServiceSubscriptionStateDidChangeNotification object:nil];
-        [NSNotificationCenter.defaultCenter removeObserver:self name:SRGHistoryDidChangeNotification object:SRGUserData.currentUserData.history];
+        [NSNotificationCenter.defaultCenter removeObserver:self name:SRGHistoryEntriesDidChangeNotification object:SRGUserData.currentUserData.history];
     }
 }
 
@@ -171,8 +173,9 @@
     [super setSelected:selected animated:animated];
     
     if (self.editing) {
-        self.favoriteImageView.backgroundColor = self.favoriteImageViewBackgroundColor;
+        self.blockingOverlayView.backgroundColor = self.blockingOverlayViewColor;
         self.durationLabel.backgroundColor = self.durationLabelBackgroundColor;
+        self.favoriteImageView.backgroundColor = self.favoriteImageViewBackgroundColor;
     }
 }
 
@@ -181,8 +184,9 @@
     [super setHighlighted:highlighted animated:animated];
     
     if (self.editing) {
-        self.favoriteImageView.backgroundColor = self.favoriteImageViewBackgroundColor;
+        self.blockingOverlayView.backgroundColor = self.blockingOverlayViewColor;
         self.durationLabel.backgroundColor = self.durationLabelBackgroundColor;
+        self.favoriteImageView.backgroundColor = self.favoriteImageViewBackgroundColor;
     }
 }
 
@@ -381,7 +385,7 @@
     [self.favorite objectForType:FavoriteTypeUnspecified available:NULL withCompletionBlock:^(SRGMedia * _Nullable media, NSError * _Nullable error) {
         previewObject = media;
     }];
-    return previewObject;
+    return (! self.editing) ? previewObject : nil;
 }
 
 #pragma mark Notifications
@@ -396,9 +400,9 @@
     [self updateSubscriptionStatus];
 }
 
-- (void)historyDidChange:(NSNotification *)notification
+- (void)historyEntriesDidChange:(NSNotification *)notification
 {
-    NSArray<NSString *> *updatedURNs = notification.userInfo[SRGHistoryChangedUidsKey];
+    NSArray<NSString *> *updatedURNs = notification.userInfo[SRGHistoryEntriesUidsKey];
     if (self.favorite && [updatedURNs containsObject:self.favorite.mediaURN]) {
         [self updateHistoryStatus];
     }

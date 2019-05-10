@@ -151,6 +151,26 @@
     }
 }
 
+#pragma mark Overrides
+
+- (void)hideItems:(NSArray *)items
+{
+    NSMutableArray<NSIndexPath *> *indexPaths = [NSMutableArray array];
+    for (id item in items) {
+        NSInteger itemIndex = [self.items indexOfObject:item];
+        if (itemIndex != NSNotFound) {
+            [indexPaths addObject:[NSIndexPath indexPathForRow:itemIndex inSection:0]];
+        }
+    }
+    
+    [super hideItems:items];
+    
+    [self.tableView deleteRowsAtIndexPaths:indexPaths.copy
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self.tableView reloadEmptyDataSet];
+}
+
 #pragma mark Helpers
 
 - (NSArray *)itemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
