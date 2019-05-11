@@ -391,11 +391,19 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 return YES;
             }
         }
+        
+        [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.source = analyticsSource;
+        labels.type = AnalyticsTypeActionOpenPlayApp;
+        labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+        
+        return YES;
     }
     
-    [UIApplication.sharedApplication play_openURL:URLComponents.URL withCompletionHandler:^(BOOL success) {
-        [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
-    }];
+    [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
     
     return NO;
 }

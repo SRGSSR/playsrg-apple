@@ -225,6 +225,7 @@ OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayLogin;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionCancelLogin;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLogin;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLogout;
+OBJC_EXPORT AnalyticsType const AnalyticsTypeActionOpenPlayApp;
 
 /**
  *  Values

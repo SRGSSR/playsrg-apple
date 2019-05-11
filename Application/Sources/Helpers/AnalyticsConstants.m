@@ -88,6 +88,7 @@ AnalyticsType const AnalyticsTypeActionDisplayLogin = @"display_login";
 AnalyticsType const AnalyticsTypeActionCancelLogin = @"cancel_login";
 AnalyticsType const AnalyticsTypeActionLogin = @"login";
 AnalyticsType const AnalyticsTypeActionLogout = @"logout";
+AnalyticsType const AnalyticsTypeActionOpenPlayApp = @"open_play_app";
 
 AnalyticsValue const AnalyticsTypeValueSharingContent = @"content";
 AnalyticsValue const AnalyticsTypeValueSharingContentAtTime = @"content_at_time";

@@ -89,6 +89,8 @@
     
     if ([playURL.host.lowercaseString isEqualToString:@"redirect"]) {
         // TODO: Send the URL to the deeplink service, for analyse.
+        
+        playURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://open", playURL.scheme]];
     }
     
     return playURL;
