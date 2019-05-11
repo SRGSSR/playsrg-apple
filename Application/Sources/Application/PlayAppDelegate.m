@@ -393,7 +393,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         }
     }
     
-    [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:^(BOOL success) {
+    [UIApplication.sharedApplication play_openURL:URLComponents.URL withCompletionHandler:^(BOOL success) {
         [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
     }];
     
