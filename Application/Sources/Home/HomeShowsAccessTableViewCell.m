@@ -133,7 +133,7 @@
 - (IBAction)openShowsByDate:(id)sender
 {
     RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:self.homeSectionInfo.identifier];
-    UIViewController *viewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel];
+    UIViewController *viewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:nil];
     [self.nearestViewController.navigationController pushViewController:viewController animated:YES];
 }
 

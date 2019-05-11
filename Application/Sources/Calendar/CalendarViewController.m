@@ -20,6 +20,7 @@
 @interface CalendarViewController ()
 
 @property (nonatomic) RadioChannel *radioChannel;
+@property (nonatomic) NSDate *initialDate;
 
 @property (nonatomic, weak) UIPageViewController *pageViewController;
 
@@ -36,10 +37,11 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel
+- (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel date:(nullable NSDate *)date
 {
     if (self = [super init]) {
         self.radioChannel = radioChannel;
+        self.initialDate = date;
         
         UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
@@ -65,7 +67,7 @@
 
 - (instancetype)init
 {
-    return [self initWithRadioChannel:nil];
+    return [self initWithRadioChannel:nil date:nil];
 }
 
 #pragma mark View lifecycle
@@ -115,7 +117,8 @@
     
     [self updateFonts];
     
-    [self showVideosForDate:self.calendar.today animated:NO];
+    NSDate *date = (self.initialDate && [self.initialDate isEarlierThanDate:self.calendar.today]) ? self.initialDate : self.calendar.today;
+    [self showVideosForDate:date animated:NO];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)

@@ -45,6 +45,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeTimeAccessibilityFormatter;
 
+/**
+ *  Use to decode scheme url option for a shows by date page.
+ */
++ (NSDateFormatter *)play_schemeURLOptionFormatter;
+
 @end
 
 NS_ASSUME_NONNULL_END

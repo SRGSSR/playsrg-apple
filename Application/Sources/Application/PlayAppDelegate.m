@@ -19,6 +19,7 @@
 #import "MediaPlayerViewController.h"
 #import "ModuleViewController.h"
 #import "NavigationController.h"
+#import "NSDateFormatter+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PlayErrors.h"
 #import "Playlist.h"
@@ -390,9 +391,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 return YES;
             }
         }
-        
-        // TODO: [scheme]://open?date=01-01-2016 … or page urn bydate, az.
-        
     }
     
     [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:^(BOOL success) {
@@ -485,13 +483,18 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }
     else if ([pageUid isEqualToString:@"bydate"]) {
         canOpen = YES;
-        // TODO: Support "date" query parameter.
+        
+        NSString *dateString = [self valueFromURLComponents:URLComponents withParameterName:@"date"];
+        NSDate *date = nil;
+        if (dateString) {
+            date =  [NSDateFormatter.play_schemeURLOptionFormatter dateFromString:dateString];
+        }
         if ([pageURN containsString:@":radio:"] && !radioChannel) {
             radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannels].firstObject;
             channelUid = radioChannel.uid;
         }
         
-        pageViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel];
+        pageViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:date];
     }
     else if ([pageUid isEqualToString:@"search"]) {
         canOpen = YES;

@@ -98,4 +98,15 @@
     return s_dateFormatter;
 }
 
++ (NSDateFormatter *)play_schemeURLOptionFormatter
+{
+    static NSDateFormatter *s_dateFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateFormatter = [[NSDateFormatter alloc] init];
+        s_dateFormatter.dateFormat = @"yyyy-MM-dd";
+    });
+    return s_dateFormatter;
+}
+
 @end
