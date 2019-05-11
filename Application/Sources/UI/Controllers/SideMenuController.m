@@ -459,10 +459,10 @@ static const CGFloat SideMenuOffset = -50.f;
                 NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioChannels;
                 NSAssert(radioChannels.count > 0, @"Radio channels expected");
                 if (radioChannels.count > 1) {
-                    viewController = [[RadioShowsViewController alloc] initWithRadioChannels:radioChannels];
+                    viewController = [[RadioShowsViewController alloc] initWithRadioChannels:radioChannels alphabeticalIndex:selectedMenuItemInfo.options[MenuItemOptionShowAZIndexKey]];
                 }
                 else {
-                    viewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannels.firstObject];
+                    viewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannels.firstObject alphabeticalIndex:selectedMenuItemInfo.options[MenuItemOptionShowAZIndexKey]];
                 }
                 break;
             }

@@ -27,6 +27,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 }
 
 @property (nonatomic) RadioChannel *radioChannel;
+@property (nonatomic) NSString *initialAlphabeticalIndex;
 
 @property (nonatomic) NSArray<NSString *> *indexLetters;
 @property (nonatomic) NSDictionary<NSString *, NSArray<SRGShow *> *> *showsAlphabeticalMap;
@@ -41,10 +42,11 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel
+- (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel alphabeticalIndex:(NSString *)alphabeticalIndex
 {
     if (self = [super init]) {
         self.radioChannel = radioChannel;
+        self.initialAlphabeticalIndex = alphabeticalIndex;
         
         if (@available(iOS 10, *)) {
             self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];      // Only available for iOS 10 and above
@@ -64,7 +66,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (instancetype)init
 {
-    return [self initWithRadioChannel:nil];
+    return [self initWithRadioChannel:nil alphabeticalIndex:nil];
 }
 
 #pragma mark View lifecycle
@@ -208,6 +210,17 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     
     // Call last to continue with the reload process, based on the sorted data
     [super refreshDidFinishWithError:error];
+    
+    if (self.indexLetters.count > 0 && self.initialAlphabeticalIndex) {
+        NSInteger section = [self.indexLetters indexOfObject:self.initialAlphabeticalIndex.uppercaseString];
+        if (section != NSNotFound) {
+            // TODO: fix that it doesn't take care of the sticky section header and transparent navigation bar.
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:section]
+                                        atScrollPosition:UICollectionViewScrollPositionTop
+                                                animated:YES];
+        }
+        self.initialAlphabeticalIndex = nil;
+    }
 }
 
 - (BOOL)srg_isTrackedAutomatically

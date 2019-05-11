@@ -126,7 +126,7 @@
 - (IBAction)openShowsAZ:(id)sender
 {
     RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:self.homeSectionInfo.identifier];
-    UIViewController *viewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel];
+    UIViewController *viewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:nil];
     [self.nearestViewController.navigationController pushViewController:viewController animated:YES];
 }
 

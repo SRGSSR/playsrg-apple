@@ -12,13 +12,13 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRadioChannels:(NSArray<RadioChannel *> *)radioChannels
+- (instancetype)initWithRadioChannels:(NSArray<RadioChannel *> *)radioChannels alphabeticalIndex:(NSString *)alphabeticalIndex
 {
     NSAssert(radioChannels.count > 1, @"Several radio channels expected");
     
     NSMutableArray<UIViewController *> *viewControllers = [NSMutableArray array];
     for (RadioChannel *radioChannel in radioChannels) {
-        ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel];
+        ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:alphabeticalIndex];
         showsViewController.play_pageItem = [[PageItem alloc] initWithTitle:radioChannel.name image:RadioChannelLogo22Image(radioChannel)];
         [viewControllers addObject:showsViewController];
     }

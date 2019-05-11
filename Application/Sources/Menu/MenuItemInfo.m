@@ -10,6 +10,7 @@
 
 MenuItemOptionKey const MenuItemOptionSearchOptionKey = @"MenuItemOptionSearchOption";
 MenuItemOptionKey const MenuItemOptionSearchQueryKey = @"MenuItemOptionSearchQuery";
+MenuItemOptionKey const MenuItemOptionShowAZIndexKey = @"MenuItemOptionShowAZIndex";
 
 @interface MenuItemInfo ()
 

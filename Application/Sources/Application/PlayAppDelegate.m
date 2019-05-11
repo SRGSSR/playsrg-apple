@@ -473,12 +473,14 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     UIViewController *pageViewController = nil;
     if ([pageUid isEqualToString:@"az"]) {
         canOpen = YES;
-        // TODO: Support "index" query parameter.
+        
+        NSString *index = [self valueFromURLComponents:URLComponents withParameterName:@"index"];
         if ([pageURN containsString:@":radio:"] && !radioChannel) {
-            menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemRadioShowAZ];
+            NSDictionary *options = (index) ? @{ MenuItemOptionShowAZIndexKey : index } : nil;
+            menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemRadioShowAZ options:options];
         }
         else {
-            pageViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel];
+            pageViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:index];
         }
     }
     else if ([pageUid isEqualToString:@"bydate"]) {
@@ -523,6 +525,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }
     else if ([pageUid isEqualToString:@"home"]) {
         canOpen = YES;
+        
         if ([pageURN containsString:@":radio:"] && !radioChannel) {
             radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannels].firstObject;
             channelUid = radioChannel.uid;
