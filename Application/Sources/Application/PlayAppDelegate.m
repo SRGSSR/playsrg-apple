@@ -339,7 +339,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         NSString *pageURN = [self valueFromURLComponents:URLComponents withParameterName:@"page"];
         if (pageURN) {
-            BOOL canOpen = [self openPageWithURN:pageURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
+            BOOL canOpen = [self openPageWithURN:pageURN channelUid:channelUid URLComponents:URLComponents fromPushNotification:NO completionBlock:^{
                 [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
                 
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -391,7 +391,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             }
         }
         
-        // TODO: [scheme]://open?date=01-01-2016 … or page urn bydate, az, search …
+        // TODO: [scheme]://open?date=01-01-2016 … or page urn bydate, az.
         
     }
     
@@ -462,7 +462,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     return YES;
 }
 
-- (BOOL)openPageWithURN:(NSString *)pageURN channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (BOOL)openPageWithURN:(NSString *)pageURN channelUid:(NSString *)channelUid URLComponents:(NSURLComponents *)URLComponents fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(pageURN);
     
@@ -488,19 +488,41 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         // TODO: Support "date" query parameter.
         if ([pageURN containsString:@":radio:"] && !radioChannel) {
             radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannels].firstObject;
+            channelUid = radioChannel.uid;
         }
         
         pageViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel];
     }
     else if ([pageUid isEqualToString:@"search"]) {
         canOpen = YES;
-        // TODO: Support "search" query parameter.
-        menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch];
+        
+        NSString *mediaType = [self valueFromURLComponents:URLComponents withParameterName:@"mediaType"];
+        SearchOption searchOption = SearchOptionUnknown;
+        if ([mediaType isEqualToString:@"video"]) {
+            searchOption = SearchOptionVideos;
+        }
+        else if ([mediaType isEqualToString:@"audio"]) {
+            searchOption = SearchOptionAudios;
+        }
+        else if ([pageURN containsString:@":radio:"] || channelUid) {
+            searchOption = SearchOptionRadioShows;
+        }
+        else if ([pageURN containsString:@":tv:"]) {
+            searchOption = SearchOptionTVShows;
+        }
+        
+        NSString *query = [self valueFromURLComponents:URLComponents withParameterName:@"query"];
+        
+        NSMutableDictionary *options = @{}.mutableCopy;
+        options[MenuItemOptionSearchOptionKey] = @(searchOption);
+        options[MenuItemOptionSearchQueryKey] = query;
+        menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch options:options.copy];
     }
     else if ([pageUid isEqualToString:@"home"]) {
         canOpen = YES;
         if ([pageURN containsString:@":radio:"] && !radioChannel) {
             radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannels].firstObject;
+            channelUid = radioChannel.uid;
         }
     }
     

@@ -8,11 +8,16 @@
 
 #import "ApplicationConfiguration.h"
 
+MenuItemOptionKey const MenuItemOptionSearchOptionKey = @"MenuItemOptionSearchOption";
+MenuItemOptionKey const MenuItemOptionSearchQueryKey = @"MenuItemOptionSearchQuery";
+
 @interface MenuItemInfo ()
 
 @property (nonatomic) MenuItem menuItem;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *uid;
+
+@property (nonatomic, nullable) NSDictionary<MenuItemOptionKey, id> *options;
 
 @end
 
@@ -23,29 +28,47 @@
 + (MenuItemInfo *)menuItemInfoWithMenuItem:(MenuItem)menuItem
 {
     return [[MenuItemInfo alloc] initWithMenuItem:menuItem
-                                            title:TitleForMenuItem(menuItem)];
+                                            title:TitleForMenuItem(menuItem)
+                                          options:nil];
+}
+
++ (MenuItemInfo *)menuItemInfoWithMenuItem:(MenuItem)menuItem options:(NSDictionary<NSString *, id> *)options
+{
+    return [[MenuItemInfo alloc] initWithMenuItem:menuItem
+                                            title:TitleForMenuItem(menuItem)
+                                          options:options];
 }
 
 + (MenuItemInfo *)menuItemInfoWithRadioChannel:(RadioChannel *)radioChannel
 {
     return [[MenuItemInfo alloc] initWithMenuItem:MenuItemRadio
                                             title:radioChannel.name
-                                              uid:radioChannel.uid];
+                                              uid:radioChannel.uid
+                                          options:nil];
 }
 
-- (instancetype)initWithMenuItem:(MenuItem)menuItem title:(NSString *)title uid:(NSString *)uid
++ (MenuItemInfo *)menuItemInfoWithRadioChannel:(RadioChannel *)radioChannel options:(NSDictionary<NSString *, id> *)options
+{
+    return [[MenuItemInfo alloc] initWithMenuItem:MenuItemRadio
+                                            title:radioChannel.name
+                                              uid:radioChannel.uid
+                                          options:options];
+}
+
+- (instancetype)initWithMenuItem:(MenuItem)menuItem title:(NSString *)title uid:(NSString *)uid options:(NSDictionary<NSString *, id> *)options
 {
     if (self = [super init]) {
         self.menuItem = menuItem;
         self.title = title;
         self.uid = uid;
+        self.options = options;
     }
     return self;
 }
 
-- (instancetype)initWithMenuItem:(MenuItem)menuItem title:(NSString *)title
+- (instancetype)initWithMenuItem:(MenuItem)menuItem title:(NSString *)title options:(NSDictionary<NSString *, id> *)options
 {
-    return [self initWithMenuItem:menuItem title:title uid:nil];
+    return [self initWithMenuItem:menuItem title:title uid:nil options:options];
 }
 
 #pragma clang diagnostic push
@@ -54,7 +77,7 @@
 - (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
-    return [self initWithMenuItem:MenuItemUnknown title:@"" uid:nil];
+    return [self initWithMenuItem:MenuItemUnknown title:@"" uid:nil options:nil];
 }
 
 #pragma clang diagnostic pop
