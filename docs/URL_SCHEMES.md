@@ -4,10 +4,21 @@ Play applications can be opened with a custom URL scheme having the following fo
 
 ## Actions
 
-Available actions are:
+The application supports Apple universal links. Replacing the `http`or `https`scheme with the application scheme can convert a web url to a scheme url:
+
+* `[scheme]://[play_website_url_without_the_original_scheme]`.
+
+Here ar all available actions:
 
 * Open a media within the player: `[scheme]://open?media=[media_urn]`. An optional `&start-time=[start_time]` parameter can be added, to start the VOD / AOD playback at the position in second.
 * Open a show page: `[scheme]://open?show=[show_urn]`.
+* Open a topic page: `[scheme]://open?topic=[topic_urn]`.
+* Open a module page: `[scheme]://open?module=[module_urn]`.
+* Open a page: `[scheme]://open?page=[page_urn]`.
+	* Home page: `urn:[bu]:page:[transmission]:home`.
+	* Search page: `urn:[bu]:page:[transmission]:search` or `urn:[bu]:page:search`. An optional `query` parameter with the search query, and an optional `mediaType` parameter with `video` or `audio` values, exist.
+	* Shows A to Z page: `urn:[bu]:page:[transmission]:az`. An optional `index` parameter with one character exists.
+	* Shows by dates page: `urn:[bu]:page:[transmission]:bydate`. An optional `date` parameter with `yyyy-MM-dd` format exists.
 
 In all cases, an optional `&channel-id=[channel_id]` parameter can be added, which also resets the homepage to the specified radio channel homepage. If this parameter is not specified or does not match a valid channel, the homepage is reset to the TV one instead.
 

@@ -257,7 +257,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 
 // Open [scheme]://open?media=[media_urn] (optional query parameters: channel-id=[channel_id], start-time=[start_position_seconds])
 // Open [scheme]://open?show=[show_urn] (optional query parameter: channel-id=[channel_id])
-// Open [scheme]://open?page=[page_urn] (optional query parameters: channel-id=[channel_id], used for radio pages)
+// Open [scheme]://open?page=[page_urn] (optional query parameters: channel-id=[channel_id], and other per pages. See URL_SCHEMES.md)
 // Open [scheme]://open?topic=[topic_urn]
 // Open [scheme]://open?module=[module_urn]
 // Open [scheme]://[play website url] ("parse_play_url.js" try to transformed to scheme urls)
