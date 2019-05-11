@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "DailyVideosViewController.h"
+#import "DailyMediasViewController.h"
 
 #import "ApplicationConfiguration.h"
 #import "NSDateFormatter+PlaySRG.h"
@@ -12,7 +12,7 @@
 #import "UIDevice+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-@interface DailyVideosViewController ()
+@interface DailyMediasViewController ()
 
 @property (nonatomic) NSDate *date;
 
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation DailyVideosViewController
+@implementation DailyMediasViewController
 
 #pragma mark Object lifecycle
 

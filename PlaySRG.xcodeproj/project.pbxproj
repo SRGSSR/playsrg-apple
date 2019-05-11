@@ -1408,16 +1408,16 @@
 		E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */; };
 		E64BA4031D4A5891002C10D5 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */; };
 		E64BA4041D4A5892002C10D5 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */; };
-		E65FB20B1D66D69700820696 /* DailyVideosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyVideosViewController.m */; };
-		E65FB20C1D66D69700820696 /* DailyVideosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyVideosViewController.m */; };
-		E65FB20D1D66D69700820696 /* DailyVideosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyVideosViewController.m */; };
-		E65FB20E1D66D69700820696 /* DailyVideosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyVideosViewController.m */; };
-		E65FB20F1D66D69700820696 /* DailyVideosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyVideosViewController.m */; };
-		E65FB2101D66D69700820696 /* DailyVideosViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65FB20A1D66D69700820696 /* DailyVideosViewController.storyboard */; };
-		E65FB2111D66D69700820696 /* DailyVideosViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65FB20A1D66D69700820696 /* DailyVideosViewController.storyboard */; };
-		E65FB2121D66D69700820696 /* DailyVideosViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65FB20A1D66D69700820696 /* DailyVideosViewController.storyboard */; };
-		E65FB2131D66D69700820696 /* DailyVideosViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65FB20A1D66D69700820696 /* DailyVideosViewController.storyboard */; };
-		E65FB2141D66D69700820696 /* DailyVideosViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65FB20A1D66D69700820696 /* DailyVideosViewController.storyboard */; };
+		E65FB20B1D66D69700820696 /* DailyMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyMediasViewController.m */; };
+		E65FB20C1D66D69700820696 /* DailyMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyMediasViewController.m */; };
+		E65FB20D1D66D69700820696 /* DailyMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyMediasViewController.m */; };
+		E65FB20E1D66D69700820696 /* DailyMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyMediasViewController.m */; };
+		E65FB20F1D66D69700820696 /* DailyMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyMediasViewController.m */; };
+		E65FB2101D66D69700820696 /* DailyMediasViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65FB20A1D66D69700820696 /* DailyMediasViewController.storyboard */; };
+		E65FB2111D66D69700820696 /* DailyMediasViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65FB20A1D66D69700820696 /* DailyMediasViewController.storyboard */; };
+		E65FB2121D66D69700820696 /* DailyMediasViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65FB20A1D66D69700820696 /* DailyMediasViewController.storyboard */; };
+		E65FB2131D66D69700820696 /* DailyMediasViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65FB20A1D66D69700820696 /* DailyMediasViewController.storyboard */; };
+		E65FB2141D66D69700820696 /* DailyMediasViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65FB20A1D66D69700820696 /* DailyMediasViewController.storyboard */; };
 		E66BEC1C1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */; };
 		E66BEC1D1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */; };
 		E66BEC1E1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */; };
@@ -2221,9 +2221,9 @@
 		E64BA3F71D4A587E002C10D5 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		E64BA3F81D4A587E002C10D5 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WebViewController.storyboard; sourceTree = "<group>"; };
-		E65FB2081D66D69700820696 /* DailyVideosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyVideosViewController.h; sourceTree = "<group>"; };
-		E65FB2091D66D69700820696 /* DailyVideosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyVideosViewController.m; sourceTree = "<group>"; };
-		E65FB20A1D66D69700820696 /* DailyVideosViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DailyVideosViewController.storyboard; sourceTree = "<group>"; };
+		E65FB2081D66D69700820696 /* DailyMediasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyMediasViewController.h; sourceTree = "<group>"; };
+		E65FB2091D66D69700820696 /* DailyMediasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyMediasViewController.m; sourceTree = "<group>"; };
+		E65FB20A1D66D69700820696 /* DailyMediasViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DailyMediasViewController.storyboard; sourceTree = "<group>"; };
 		E66BEC191DA7FCED00AD4450 /* MediaPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPlayerViewController.h; sourceTree = "<group>"; };
 		E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPlayerViewController.m; sourceTree = "<group>"; };
 		E66BEC1B1DA7FCED00AD4450 /* MediaPlayerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MediaPlayerViewController.storyboard; sourceTree = "<group>"; };
@@ -3516,9 +3516,9 @@
 				E694A9F21D65F02700372DF0 /* CalendarViewController.h */,
 				E694A9F31D65F02700372DF0 /* CalendarViewController.m */,
 				E694A9F41D65F02700372DF0 /* CalendarViewController.storyboard */,
-				E65FB2081D66D69700820696 /* DailyVideosViewController.h */,
-				E65FB2091D66D69700820696 /* DailyVideosViewController.m */,
-				E65FB20A1D66D69700820696 /* DailyVideosViewController.storyboard */,
+				E65FB2081D66D69700820696 /* DailyMediasViewController.h */,
+				E65FB2091D66D69700820696 /* DailyMediasViewController.m */,
+				E65FB20A1D66D69700820696 /* DailyMediasViewController.storyboard */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -4047,7 +4047,7 @@
 				6F0F88A41ECF0CE50060A893 /* override_default_srf3.pdf in Resources */,
 				6F2961FC2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				6F5F4FC91DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
-				E65FB2101D66D69700820696 /* DailyVideosViewController.storyboard in Resources */,
+				E65FB2101D66D69700820696 /* DailyMediasViewController.storyboard in Resources */,
 				6F0C99922121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				086BDE161EA63D3800965F45 /* AudioMiniPlayerView.xib in Resources */,
 				6F0F88961ECF0CE50060A893 /* override_artwork_tv_srf_info.pdf in Resources */,
@@ -4164,7 +4164,7 @@
 				08602BFD2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				E66BEC221DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F5F4FCA1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
-				E65FB2111D66D69700820696 /* DailyVideosViewController.storyboard in Resources */,
+				E65FB2111D66D69700820696 /* DailyMediasViewController.storyboard in Resources */,
 				6F340F4C220DA87500778CA3 /* SRGUserData.bundle in Resources */,
 				6F0C99A22121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				0832BF1622BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
@@ -4281,7 +4281,7 @@
 				08C68FA51D38DF8300BB8AAA /* Localizable.strings in Resources */,
 				6F6B643521A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				6F5F4FCB1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
-				E65FB2121D66D69700820696 /* DailyVideosViewController.storyboard in Resources */,
+				E65FB2121D66D69700820696 /* DailyMediasViewController.storyboard in Resources */,
 				086BDE1A1EA63D5B00965F45 /* AudioMiniPlayerView.xib in Resources */,
 				0865F61A223C7684007DE03B /* parse_play_url.js in Resources */,
 				08BAABDF1E76141F007644D7 /* HomeMediasViewController.storyboard in Resources */,
@@ -4384,7 +4384,7 @@
 				6F4EA1371EE034C500BEC4DA /* Accessibility.strings in Resources */,
 				08DADF8F20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				08754F44201BAFF500458F3A /* InfoPlist.strings in Resources */,
-				E65FB2131D66D69700820696 /* DailyVideosViewController.storyboard in Resources */,
+				E65FB2131D66D69700820696 /* DailyMediasViewController.storyboard in Resources */,
 				086BDE1C1EA63D5B00965F45 /* AudioMiniPlayerView.xib in Resources */,
 				6F628AF11F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.xib in Resources */,
 				08BAABE11E76141F007644D7 /* HomeMediasViewController.storyboard in Resources */,
@@ -4484,7 +4484,7 @@
 				086321132258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				6F5F4FCD1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				086F8D6822984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */,
-				E65FB2141D66D69700820696 /* DailyVideosViewController.storyboard in Resources */,
+				E65FB2141D66D69700820696 /* DailyMediasViewController.storyboard in Resources */,
 				6F0C99A02121FBD800073AB6 /* SRGAnalytics.bundle in Resources */,
 				08C690811D38E3E600BB8AAA /* Localizable.strings in Resources */,
 				6F0C99962121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
@@ -5601,7 +5601,7 @@
 				6F80106920443230009FE197 /* PlayApplication.m in Sources */,
 				086F8D6922984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
 				6F6B642E21A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
-				E65FB20B1D66D69700820696 /* DailyVideosViewController.m in Sources */,
+				E65FB20B1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6F06E0A41DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08AF9480217D27E40028B082 /* ActivityItemSource.m in Sources */,
 				6F12DB4621A3EFBF0054879D /* HistoryTableViewCell.m in Sources */,
@@ -5782,7 +5782,7 @@
 				6F340F53220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF77E20CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D5E1FFE6EF800115906 /* ModuleHeaderView.m in Sources */,
-				E65FB20C1D66D69700820696 /* DailyVideosViewController.m in Sources */,
+				E65FB20C1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AA21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F4760831EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
@@ -5941,7 +5941,7 @@
 				6F340F54220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78020CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D621FFE6EF900115906 /* ModuleHeaderView.m in Sources */,
-				E65FB20D1D66D69700820696 /* DailyVideosViewController.m in Sources */,
+				E65FB20D1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AB21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F47608A1EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
@@ -6100,7 +6100,7 @@
 				6F340F55220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78220CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D661FFE6EF900115906 /* ModuleHeaderView.m in Sources */,
-				E65FB20E1D66D69700820696 /* DailyVideosViewController.m in Sources */,
+				E65FB20E1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AC21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F4760911EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
@@ -6259,7 +6259,7 @@
 				6F340F56220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78420CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D6A1FFE6EFA00115906 /* ModuleHeaderView.m in Sources */,
-				E65FB20F1D66D69700820696 /* DailyVideosViewController.m in Sources */,
+				E65FB20F1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AD21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F4760981EB37DF2003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6F06E0A81DB7791300220FC6 /* ApplicationSettings.m in Sources */,

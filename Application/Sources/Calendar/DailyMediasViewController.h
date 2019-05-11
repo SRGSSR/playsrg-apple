@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DailyVideosViewController : MediasViewController
+@interface DailyMediasViewController : MediasViewController
 
 /**
  *  Instantiate for medias belonging to the specified radio channel and date. If no channel is provided, TV medias will

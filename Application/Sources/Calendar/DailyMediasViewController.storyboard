@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Daily Videos View Controller-->
+        <!--Daily Medias View Controller-->
         <scene sceneID="H8x-KK-oxm">
             <objects>
-                <viewController storyboardIdentifier="DailyVideosViewController" id="iK6-Dy-NKq" customClass="DailyVideosViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DailyMediasViewController" id="iK6-Dy-NKq" customClass="DailyMediasViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JNq-FS-7Pv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
