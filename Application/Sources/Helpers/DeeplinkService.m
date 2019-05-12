@@ -8,12 +8,16 @@
 
 #import "ApplicationConfiguration.h"
 
+#import "NSDateFormatter+PlaySRG.h"
 #import "PlayLogger.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <FXReachability/FXReachability.h>
 #import <JavaScriptCore/JavaScriptCore.h>
+#import <SRGDiagnostics/SRGDiagnostics.h>
 #import <SRGNetwork/SRGNetwork.h>
+
+NSString * const DeeplinkDiagnosticsServiceName = @"DeeplinkDiagnosticsServiceName";
 
 @interface DeeplinkService ()
 
@@ -54,6 +58,21 @@
                                                selector:@selector(enterForeground:)
                                                    name:UIApplicationWillEnterForegroundNotification
                                                  object:nil];
+        
+        [SRGDiagnosticsService serviceWithName:DeeplinkDiagnosticsServiceName].submissionBlock = ^(NSDictionary * _Nonnull JSONDictionary, void (^ _Nonnull completionBlock)(BOOL)) {
+            NSURL *middlewareURL = ApplicationConfiguration.sharedApplicationConfiguration.middlewareURL;
+            NSURL *diagnosticsServiceURL = [NSURL URLWithString:@"api/v1/deeplink/report" relativeToURL:middlewareURL];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:diagnosticsServiceURL];
+            request.HTTPMethod = @"POST";
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            request.HTTPBody = [NSJSONSerialization dataWithJSONObject:JSONDictionary options:0 error:NULL];
+            
+            [[[SRGRequest dataRequestWithURLRequest:request session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                BOOL success = (error == nil);
+                PlayLogInfo(@"diagnostics", @"%@ report %@: %@", DeeplinkDiagnosticsServiceName, success ? @"sent" : @"not sent", JSONDictionary);
+                completionBlock(success);
+            }] requestWithOptions:SRGRequestOptionBackgroundCompletionEnabled] resume];
+        };
     }
     return self;
 }
@@ -65,9 +84,9 @@
 
 #pragma mark Getters and setters
 
-- (NSURL *)schemeURLFromWebURL:(NSURL *)url
+- (NSURL *)schemeURLFromWebURL:(NSURL *)URL
 {
-    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
+    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     
     NSString *javascriptFilePath = [self parsePlayUrlFilePath];
     NSString *javascript = [NSString stringWithContentsOfFile:javascriptFilePath encoding:NSUTF8StringEncoding error:nil];
@@ -88,7 +107,12 @@
     NSURL *playURL = [NSURL URLWithString:result.toString];
     
     if ([playURL.host.lowercaseString isEqualToString:@"redirect"]) {
-        // TODO: Send the URL to the deeplink service, for analyse.
+        SRGDiagnosticReport *report = [[SRGDiagnosticsService serviceWithName:DeeplinkDiagnosticsServiceName] reportWithName:URL.absoluteString];
+        [report setString:[[NSDateFormatter play_backendDateFormatter] stringFromDate:NSDate.date] forKey:@"clientTime"];
+        [report setString:NSBundle.mainBundle.bundleIdentifier forKey:@"clientId"];
+        [report setString:[context objectForKeyedSubscript:@"parsePlayUrlVersion"].toString forKey:@"jsVersion"];
+        [report setString:URL.absoluteString forKey:@"url"];
+        [report finish];
         
         playURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://open", playURL.scheme]];
     }
@@ -116,9 +140,8 @@
 - (void)updateDeeplinkScript
 {
     if (self.needAnUpdate && [FXReachability sharedInstance].reachable && !self.request.running) {
-        NSString *resourcePath = @"deeplink/v1/parse_play_url.js";
         NSURL *middlewareURL = ApplicationConfiguration.sharedApplicationConfiguration.middlewareURL;
-        NSURL *URL = [NSURL URLWithString:resourcePath relativeToURL:middlewareURL];
+        NSURL *URL = [NSURL URLWithString:@"api/v1/deeplink/parse_play_url.js" relativeToURL:middlewareURL];
         
         SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (data) {

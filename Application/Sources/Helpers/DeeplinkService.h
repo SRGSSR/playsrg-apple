@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (class, nonatomic, readonly) DeeplinkService *sharedService;
 
-- (nullable NSURL *)schemeURLFromWebURL:(NSURL *)url;
+- (nullable NSURL *)schemeURLFromWebURL:(NSURL *)URL;
 
 @end
 
