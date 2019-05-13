@@ -56,12 +56,12 @@ typedef NS_ENUM(NSInteger, BannerStyle) {
 + (void)showError:(nullable NSError *)error inViewController:(nullable UIViewController *)viewController;
 
 /**
- *  Show a banner telling the user that the specified item has been (un)favorited.
+ *  Show a banner telling the user that the specified item has been added or remvoed from My List.
  *
  *  @discussion If no name is provided, a standard description will be used.
  */
-+ (void)showFavorite:(BOOL)isFavorite forItemWithName:(nullable NSString *)name inView:(nullable UIView *)view;
-+ (void)showFavorite:(BOOL)isFavorite forItemWithName:(nullable NSString *)name inViewController:(nullable UIViewController *)viewController;
++ (void)showMyList:(BOOL)inMyList forItemWithName:(nullable NSString *)name inView:(nullable UIView *)view;
++ (void)showMyList:(BOOL)inMyList forItemWithName:(nullable NSString *)name inViewController:(nullable UIViewController *)viewController;
 
 /**
  *  Show a banner telling the user that the specified show has been added to or removed from the subscription list.

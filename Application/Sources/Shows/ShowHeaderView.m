@@ -9,6 +9,7 @@
 #import "AnalyticsConstants.h"
 #import "Banner.h"
 #import "Favorite.h"
+#import "MyList.h"
 #import "NSBundle+PlaySRG.h"
 #import "PushService.h"
 #import "UIImage+PlaySRG.h"
@@ -26,7 +27,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
-@property (nonatomic, weak) IBOutlet UIButton *favoriteButton;
+@property (nonatomic, weak) IBOutlet UIButton *myListButton;
 @property (nonatomic, weak) IBOutlet UIButton *subscriptionButton;
 
 @property (nonatomic) IBOutlet NSLayoutConstraint *logoImageViewRatio16_9Constraint; // Need to retain it, because active state removes it
@@ -93,15 +94,10 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     [super willMoveToWindow:newWindow];
     
     if (newWindow) {
-        [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(favoriteStateDidChange:)
-                                                   name:FavoriteStateDidChangeNotification
-                                                 object:nil];
+        // TODO: MyListDidChangeNotification
     }
     else {
-        [NSNotificationCenter.defaultCenter removeObserver:self
-                                                      name:FavoriteStateDidChangeNotification
-                                                    object:nil];
+        // TODO: MyListDidChangeNotification
     }
 }
 
@@ -119,19 +115,18 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     
     [self.logoImageView play_requestImageForObject:show withScale:ImageScaleLarge type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
     
-    [self updateFavoriteStatus];
+    [self updateMyListStatus];
     [self updateSubscriptionStatus];
 }
 
 #pragma mark UI
 
-- (void)updateFavoriteStatus
+- (void)updateMyListStatus
 {
-    Favorite *favorite = [Favorite favoriteForShow:self.show];
-    BOOL isFavorite = (favorite != nil);
-    [self.favoriteButton setImage:isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"]
+    BOOL inMyList = MyListContainsShow(self.show);
+    [self.myListButton setImage:inMyList ? [UIImage imageNamed:@"my_list_full-22"] : [UIImage imageNamed:@"my_list-22"]
                          forState:UIControlStateNormal];
-    self.favoriteButton.accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove favorite", @"Show favorite removal label") : PlaySRGAccessibilityLocalizedString(@"Favorite", @"Show favorite creation label");
+    self.myListButton.accessibilityLabel = inMyList ? PlaySRGAccessibilityLocalizedString(@"Remove from My List", @"My List show removal label") : PlaySRGAccessibilityLocalizedString(@"Add to My List", @"My List show insertion label");
 }
 
 - (void)updateSubscriptionStatus
@@ -168,18 +163,18 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 #pragma mark Actions
 
-- (IBAction)toggleFavorite:(id)sender
+- (IBAction)toggleMyList:(id)sender
 {
-    Favorite *favorite = [Favorite toggleFavoriteForShow:self.show];
-    [self updateFavoriteStatus];
+    BOOL inMyList = MyListToggleShow(self.show);
+    [self updateMyListStatus];
     
-    AnalyticsTitle analyticsTitle = (favorite) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
+    AnalyticsTitle analyticsTitle = (inMyList) ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.source = AnalyticsSourceButton;
     labels.value = self.show.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
     
-    [Banner showFavorite:(favorite != nil) forItemWithName:self.show.title inView:self];
+    [Banner showMyList:inMyList forItemWithName:self.show.title inView:self];
 }
 
 - (IBAction)toggleSubscription:(id)sender
@@ -205,13 +200,6 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
     
     [Banner showSubscription:subscribed forShowWithName:self.show.title inView:self];
-}
-
-#pragma mark Notifications
-
-- (void)favoriteStateDidChange:(NSNotification *)notification
-{
-    [self updateFavoriteStatus];
 }
 
 @end

@@ -13,7 +13,7 @@
 #import "HomeShowListTableViewCell.h"
 #import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowVerticalListTableViewCell.h"
-#import "PushService.h"
+#import "MyList.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGDataProvider/SRGDataProvider.h>
@@ -124,7 +124,7 @@
         }
             
         case HomeSectionTVMyListShows: {
-            return [[SRGDataProvider.currentDataProvider showsWithURNs:PushService.sharedService.subscribedShowURNs completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+            return [[SRGDataProvider.currentDataProvider showsWithURNs:MyListShowURNs() completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGShow.new, transmission), @(SRGTransmissionTV)];
                 paginatedItemListCompletionBlock([shows filteredArrayUsingPredicate:predicate], page, nextPage, HTTPResponse, error);
             }] requestWithPageSize:50];
@@ -197,7 +197,7 @@
         case HomeSectionRadioMyListShows: {
             NSString *identifier = self.identifier;
             if (identifier) {
-                return [[SRGDataProvider.currentDataProvider showsWithURNs:PushService.sharedService.subscribedShowURNs completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                return [[SRGDataProvider.currentDataProvider showsWithURNs:MyListShowURNs() completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == %@", @keypath(SRGShow.new, transmission), @(SRGTransmissionRadio), @keypath(SRGShow.new, primaryChannelUid), identifier];
                     paginatedItemListCompletionBlock([shows filteredArrayUsingPredicate:predicate], page, nextPage, HTTPResponse, error);
                 }] requestWithPageSize:50];

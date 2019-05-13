@@ -7,7 +7,6 @@
 #import "MenuSectionInfo.h"
 
 #import "ApplicationConfiguration.h"
-#import "PushService.h"
 
 @interface MenuSectionInfo ()
 
@@ -37,10 +36,8 @@
     // My content section
     NSMutableArray<MenuItemInfo *> *myContentMenuItems = [NSMutableArray array];
     [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemHistory]];
-    if (PushService.sharedService) {
-        [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemSubscriptions]];
-    }
     [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemFavorites]];
+    [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemMyList]];
     [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemWatchLater]];
     [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemDownloads]];
     

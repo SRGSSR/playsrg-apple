@@ -16,6 +16,7 @@
 #import "MediaPlayerViewController.h"
 #import "MediaPreviewViewController.h"
 #import "ModuleViewController.h"
+#import "MyList.h"
 #import "PlayErrors.h"
 #import "Previewing.h"
 #import "PushService.h"
@@ -300,21 +301,20 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     else if ([previewObject isKindOfClass:SRGShow.class]) {
         SRGShow *show = previewObject;
         
-        Favorite *favorite = [Favorite favoriteForShow:show];
-        BOOL favorited = (favorite != nil);
+        BOOL inMyList = MyListContainsShow(show);
         
         alertController = [UIAlertController alertControllerWithTitle:show.title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        [alertController addAction:[UIAlertAction actionWithTitle:favorited ? NSLocalizedString(@"Remove from favorites", @"Button label to remove a favorite from the show long-press menu") : NSLocalizedString(@"Add to favorites", @"Button label to add a favorite from the show long-press menu") style:favorited ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [Favorite toggleFavoriteForShow:show];
+        [alertController addAction:[UIAlertAction actionWithTitle:inMyList ? NSLocalizedString(@"Remove from My List", @"Button label to remove a show from My list in the show long-press menu") : NSLocalizedString(@"Add to My List", @"Button label to add a show to My List in the show long-press menu") style:inMyList ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            MyListToggleShow(show);
             
-            // Use !favorited since favorited status has been reversed
-            AnalyticsTitle analyticsTitle = (! favorited) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
+            // Use !inMylIst since inMylIst status has been reversed
+            AnalyticsTitle analyticsTitle = (! inMyList) ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceLongPress;
             labels.value = show.URN;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
             
-            [Banner showFavorite:! favorited forItemWithName:show.title inViewController:self];
+            [Banner showMyList:! inMyList forItemWithName:show.title inViewController:self];
         }]];
         
         PushService *pushService = PushService.sharedService;

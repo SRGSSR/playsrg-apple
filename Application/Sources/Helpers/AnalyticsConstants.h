@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, AnalyticsPageType) {
     AnalyticsPageTypeFavorites,
     AnalyticsPageTypeDownloads,
     AnalyticsPageTypeHistory,
-    AnalyticsPageTypeSubscriptions,
+    AnalyticsPageTypeMyList,
     AnalyticsPageTypeNotifications,
     AnalyticsPageTypeSearch,
     AnalyticsPageTypeOnboarding,
@@ -156,14 +156,24 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSubscriptionAdd;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSubscriptionRemove;
 
 /**
- *  Title for events related to deletion of all subscriptions
+ *  Title for events related to subscriptions
  */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSubscriptionRemoveAll;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListAdd;
 
 /**
- *  Title for events related to opening a subscription show
+ *  Title for events related to deletion of a subscription
  */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSubscriptionOpenShow;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListRemove;
+
+/**
+ *  Title for events related to deletion of all subscriptions
+ */
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListRemoveAll;
+
+/**
+ *  Title for events related to opening a show from My List
+ */
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListOpenShow;
 
 /**
  *  Title for events related to the search

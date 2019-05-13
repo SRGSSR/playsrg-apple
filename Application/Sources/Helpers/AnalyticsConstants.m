@@ -19,7 +19,7 @@ NSString *AnalyticsNameForPageType(AnalyticsPageType pageType)
                      @(AnalyticsPageTypeFavorites) : NSLocalizedString(@"Favorites", @"[Technical] Favorites page type for analytics measurements"),
                      @(AnalyticsPageTypeDownloads) : NSLocalizedString(@"Downloads", @"[Technical] Downloads page type for analytics measurements"),
                      @(AnalyticsPageTypeHistory) : NSLocalizedString(@"History", @"[Technical] History page type for analytics measurements"),
-                     @(AnalyticsPageTypeSubscriptions) : NSLocalizedString(@"Subscriptions", @"[Technical] Subscriptions page type for analytics measurements"),
+                     @(AnalyticsPageTypeMyList) : NSLocalizedString(@"My List", @"[Technical] Subscriptions page type for analytics measurements"),
                      @(AnalyticsPageTypeNotifications) : NSLocalizedString(@"Notifications", @"[Technical] Notifications page type for analytics measurements"),
                      @(AnalyticsPageTypeSearch) : NSLocalizedString(@"Search", @"[Technical] Search page type for analytics measurements"),
                      @(AnalyticsPageTypeOnboarding) : NSLocalizedString(@"Onboarding", @"[Technical] Onboarding page type for analytics measurements"),
@@ -54,8 +54,10 @@ AnalyticsTitle const AnalyticsTitleSharingModule = @"share_module";
 AnalyticsTitle const AnalyticsTitleSharingShow = @"share_show";
 AnalyticsTitle const AnalyticsTitleSubscriptionAdd = @"subscription";
 AnalyticsTitle const AnalyticsTitleSubscriptionRemove = @"subscription_remove";
-AnalyticsTitle const AnalyticsTitleSubscriptionRemoveAll = @"subscription_remove_all";
-AnalyticsTitle const AnalyticsTitleSubscriptionOpenShow = @"show_subscription";
+AnalyticsTitle const AnalyticsTitleMyListAdd = @"my_list_add";
+AnalyticsTitle const AnalyticsTitleMyListRemove = @"my_list_remove";
+AnalyticsTitle const AnalyticsTitleMyListRemoveAll = @"my_list_remove_all";
+AnalyticsTitle const AnalyticsTitleMyListOpenShow = @"open_my_list_show";
 AnalyticsTitle const AnalyticsTitleSearch = @"search";
 AnalyticsTitle const AnalyticsTitleUserActivity = @"user_activity_ios";
 AnalyticsTitle const AnalyticsTitleWatchLaterAdd = @"watch_later";
