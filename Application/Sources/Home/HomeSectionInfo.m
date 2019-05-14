@@ -195,13 +195,11 @@
         }
             
         case HomeSectionRadioMyListShows: {
-            NSString *identifier = self.identifier;
-            if (identifier) {
-                return [[SRGDataProvider.currentDataProvider showsWithURNs:MyListShowURNs() completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == %@", @keypath(SRGShow.new, transmission), @(SRGTransmissionRadio), @keypath(SRGShow.new, primaryChannelUid), identifier];
-                    paginatedItemListCompletionBlock([shows filteredArrayUsingPredicate:predicate], page, nextPage, HTTPResponse, error);
-                }] requestWithPageSize:50];
-            }
+            // Don't use ìdentifier`. My List Radio doesn't not filter by channel.
+            return [[SRGDataProvider.currentDataProvider showsWithURNs:MyListShowURNs() completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGShow.new, transmission), @(SRGTransmissionRadio)];
+                paginatedItemListCompletionBlock([shows filteredArrayUsingPredicate:predicate], page, nextPage, HTTPResponse, error);
+            }] requestWithPageSize:50];
             break;
         }
             
