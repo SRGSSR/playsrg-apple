@@ -44,20 +44,36 @@
                                 <rect key="frame" x="157.5" y="0.0" width="435.5" height="114"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAc-5G-idk" userLabel="Title Label">
-                                        <rect key="frame" x="0.0" y="0.0" width="435.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="403.5" height="20.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5S-t3-tgx" userLabel="Subscription Button">
+                                        <rect key="frame" x="403.5" y="26" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="9wk-qf-B72"/>
+                                            <constraint firstAttribute="width" constant="32" id="LDa-tz-dZA"/>
+                                        </constraints>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="subscription-22"/>
+                                        <connections>
+                                            <action selector="toggleSubscription:" destination="1wd-bd-BEE" eventType="touchUpInside" id="1fl-Ce-mhA"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="VAc-5G-idk" firstAttribute="leading" secondItem="GkD-I1-QAB" secondAttribute="leading" id="9bE-nO-KQ8"/>
-                                    <constraint firstAttribute="trailing" secondItem="VAc-5G-idk" secondAttribute="trailing" id="Okt-sy-sX1"/>
+                                    <constraint firstItem="L5S-t3-tgx" firstAttribute="leading" secondItem="VAc-5G-idk" secondAttribute="trailing" id="XFi-5v-3Rz"/>
                                     <constraint firstItem="VAc-5G-idk" firstAttribute="top" secondItem="GkD-I1-QAB" secondAttribute="top" id="r8F-hn-ebb"/>
+                                    <constraint firstAttribute="trailing" secondItem="L5S-t3-tgx" secondAttribute="trailing" id="yd2-dh-dLX"/>
                                 </constraints>
                             </view>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="ncO-mH-V9z" firstAttribute="centerY" secondItem="L5S-t3-tgx" secondAttribute="centerY" id="5xc-vx-ozk"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
@@ -70,10 +86,14 @@
             <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
             <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="subscriptionButton" destination="L5S-t3-tgx" id="JLd-ow-1fG"/>
                 <outlet property="thumbnailImageView" destination="ncO-mH-V9z" id="JFK-yM-zi1"/>
                 <outlet property="titleLabel" destination="VAc-5G-idk" id="16Z-1V-9wH"/>
             </connections>
             <point key="canvasLocation" x="634.5" y="152"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="subscription-22" width="22" height="22"/>
+    </resources>
 </document>

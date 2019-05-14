@@ -7,6 +7,9 @@
 #import "MyListTableViewCell.h"
 
 #import "AnalyticsConstants.h"
+#import "Banner.h"
+#import "PushService.h"
+#import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
@@ -19,6 +22,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
+@property (nonatomic, weak) IBOutlet UIButton *subscriptionButton;
 
 @end
 
@@ -56,6 +60,26 @@
     [self.thumbnailImageView play_resetImage];
 }
 
+- (void)willMoveToWindow:(UIWindow *)newWindow
+{
+    [super willMoveToWindow:newWindow];
+    
+    if (newWindow) {
+        // Ensure proper state when the view is reinserted
+        [self updateSubscriptionStatus];
+        
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(subscriptionStateDidChange:)
+                                                   name:PushServiceSubscriptionStateDidChangeNotification
+                                                 object:nil];
+    }
+    else {
+        [NSNotificationCenter.defaultCenter removeObserver:self name:PushServiceSubscriptionStateDidChangeNotification object:nil];
+    }
+}
+
+
+
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
 {
     [super traitCollectionDidChange:previousTraitCollection];
@@ -82,7 +106,20 @@
     self.titleLabel.text = show.title;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     
-    [self.thumbnailImageView play_requestImageForObject:show withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];    
+    [self.thumbnailImageView play_requestImageForObject:show withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
+    
+    [self updateSubscriptionStatus];
+}
+
+#pragma mark UI
+
+- (void)updateSubscriptionStatus
+{
+    PushService *pushService = PushService.sharedService;
+    BOOL subscribed = [pushService isSubscribedToShow:self.show];
+    [self.subscriptionButton setImage:subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"]
+                             forState:UIControlStateNormal];
+    self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Unsubscribe from show", @"My List show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Subscribe to show", @"My List show subscription label");
 }
 
 #pragma mark Previewing protocol
@@ -90,6 +127,37 @@
 - (id)previewObject
 {
     return (! self.editing) ? self.show : nil;
+}
+
+#pragma mark Actions
+
+- (IBAction)toggleSubscription:(id)sender
+{
+    PushService *pushService = PushService.sharedService;
+    
+    BOOL toggled = [pushService toggleSubscriptionForShow:self.show inView:self];
+    if (! toggled) {
+        return;
+    }
+    
+    [self updateSubscriptionStatus];
+    
+    BOOL subscribed = [pushService isSubscribedToShow:self.show];
+    
+    AnalyticsTitle analyticsTitle = (subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
+    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+    labels.source = AnalyticsSourceButton;
+    labels.value = self.show.URN;
+    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
+    
+    [Banner showSubscription:subscribed forShowWithName:self.show.title inView:self];
+}
+
+#pragma mark Notifications
+
+- (void)subscriptionStateDidChange:(NSNotification *)notification
+{
+    [self updateSubscriptionStatus];
 }
 
 @end
