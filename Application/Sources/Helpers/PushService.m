@@ -275,6 +275,15 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     return YES;
 }
 
+- (void)unsubscribeFromShowURNs:(NSArray<NSString *> *)showURNs
+{
+    for (NSString *showURN in showURNs) {
+        [[UAirship push] removeTag:[self tagForURN:showURN]];        
+        // TODO: Do we have to notify?
+    }
+    [[UAirship push] updateRegistration];
+}
+
 - (BOOL)isSubscribedToShow:(SRGShow *)show
 {
     if (! self.enabled || ! show) {

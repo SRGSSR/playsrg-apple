@@ -71,6 +71,13 @@ OBJC_EXPORT NSString * const PushServiceDidReceiveNotification;
 - (BOOL)unsubscribeFromShow:(SRGShow *)show;
 
 /**
+ *  Remove any subscription for the specified show urns.
+ *
+ *  @discussion: No notificaiton sent. To be defined.
+ */
+- (void)unsubscribeFromShowURNs:(NSArray<NSString *> *)showURNs;
+
+/**
  *  Return YES iff the user has subscribed to the specified show.
  */
 - (BOOL)isSubscribedToShow:(SRGShow *)show;

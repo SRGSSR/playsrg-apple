@@ -39,9 +39,14 @@ void MyListRemoveShows(NSArray<SRGShow *> *shows)
         NSArray<NSString *> *removeURNs = [shows valueForKeyPath:@"@distinctUnionOfObjects.URN"];
         [URNs removeObjectsInArray:removeURNs];
         [SRGUserData.currentUserData.preferences setArray:URNs.copy atPath:@"myList" inDomain:MyListDomain];
+        
+        [PushService.sharedService unsubscribeFromShowURNs:removeURNs];
     }
     else {
-       [SRGUserData.currentUserData.preferences setArray:@[] atPath:@"myList" inDomain:MyListDomain];
+        [SRGUserData.currentUserData.preferences setArray:@[] atPath:@"myList" inDomain:MyListDomain];
+        
+        [PushService.sharedService unsubscribeFromShowURNs:PushService.sharedService.subscribedShowURNs];
+        
     }
 }
 
