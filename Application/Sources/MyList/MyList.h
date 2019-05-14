@@ -30,12 +30,17 @@ OBJC_EXPORT void MyListAddShow(SRGShow * _Nonnull show);
 OBJC_EXPORT void MyListRemoveShows(NSArray<SRGShow *> * _Nullable shows);
 
 /**
- *  Toggle a show to My List.
+ *  Toggle a show to My List. Return `YES` if the show is in My List after.
  *
  *  @discussion Must be called from the main thread.
  */
 OBJC_EXPORT BOOL MyListToggleShow(SRGShow * _Nonnull show);
 
+/**
+ *  Get all show URNs in My List.
+ *
+ *  @discussion Must be called from the main thread.
+ */
 OBJC_EXPORT NSArray<NSString *> * MyListShowURNs();
 
 /**

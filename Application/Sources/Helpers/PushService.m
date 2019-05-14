@@ -275,7 +275,7 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     return YES;
 }
 
-- (void)unsubscribeFromShowURNs:(NSArray<NSString *> *)showURNs
+- (void)silenceUnsubscribtionFromShowURNs:(NSArray<NSString *> *)showURNs
 {
     for (NSString *showURN in showURNs) {
         [[UAirship push] removeTag:[self tagForURN:showURN]];        
