@@ -12,6 +12,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
+#import "ShowViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -182,12 +183,14 @@
         return;
     }
     
-    SRGMedia *media = self.items[indexPath.row];
-    [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
+    SRGShow *show = self.items[indexPath.row];
+    ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+    [self.navigationController pushViewController:showViewController animated:YES];
     
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.value = media.URN;
+    labels.value = show.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListOpenShow labels:labels];
+
 }
 
 #pragma mark Actions
