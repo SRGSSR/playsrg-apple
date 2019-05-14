@@ -8,7 +8,6 @@
 
 #import "AnalyticsConstants.h"
 #import "Banner.h"
-#import "Favorite.h"
 #import "MyList.h"
 #import "NSBundle+PlaySRG.h"
 #import "PushService.h"

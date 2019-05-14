@@ -11,7 +11,6 @@
 #import "ApplicationSettings.h"
 #import "Banner.h"
 #import "Download.h"
-#import "Favorite.h"
 #import "History.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
@@ -246,7 +245,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsClearAllContentsButton]) {
         [self clearWebCache];
         [UIImage srg_clearVectorImageCache];
-        [Favorite removeAllFavorites];
         [Download removeAllDownloads];
     }
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)

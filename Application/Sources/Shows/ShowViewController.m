@@ -9,7 +9,6 @@
 #import "ActivityItemSource.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
-#import "Favorite.h"
 #import "MediaCollectionViewCell.h"
 #import "MyList.h"
 #import "NSBundle+PlaySRG.h"

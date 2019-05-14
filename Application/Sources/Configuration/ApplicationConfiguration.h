@@ -52,7 +52,6 @@ typedef NS_ENUM(NSInteger, MenuItem) {
     MenuItemUnknown,
     
     MenuItemSearch,
-    MenuItemFavorites,
     MenuItemMyList,
     MenuItemWatchLater,
     MenuItemDownloads,

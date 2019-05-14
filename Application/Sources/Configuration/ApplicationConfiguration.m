@@ -130,7 +130,6 @@ NSString *TitleForMenuItem(MenuItem menuItem)
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_names = @{ @(MenuItemSearch) : NSLocalizedString(@"Search", @"Label in the left menu to present the search view"),
-                     @(MenuItemFavorites) : NSLocalizedString(@"Favorites", @"Label in the left menu to present favorites"),
                      @(MenuItemMyList) : NSLocalizedString(@"My List", @"Label in the left menu to present My List"),
                      @(MenuItemWatchLater) : NSLocalizedString(@"Watch later", @"Label in the left menu to present the watch later list"),
                      @(MenuItemDownloads) : NSLocalizedString(@"Downloads", @"Label in the left menu to present downloads"),

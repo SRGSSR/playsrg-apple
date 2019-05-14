@@ -6,8 +6,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "Favorite.h"
-
 #import <SRGDataProvider/SRGDataProvider.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,11 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  Use this method to display the correct duration label for an object conform to a media metadata
  */
 - (void)play_displayDurationLabelForMediaMetadata:(id<SRGMediaMetadata>)object;
-
-/**
- *  Use this method to display the correct duration label for a favorite object
- */
-- (void)play_displayDurationLabelForFavorite:(Favorite *)favorite;
 
 /**
  *  Use this method to display the correct availability label for an object conform to a media metadata, if needed

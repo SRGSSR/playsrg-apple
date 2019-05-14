@@ -10,7 +10,6 @@
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "Download.h"
-#import "Favorite.h"
 #import "GoogleCast.h"
 #import "HomeTopicViewController.h"
 #import "MediaPlayerViewController.h"

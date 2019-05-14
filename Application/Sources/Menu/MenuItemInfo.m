@@ -70,11 +70,6 @@
             break;
         }
             
-        case MenuItemFavorites: {
-            image = [UIImage imageNamed:@"favorite-22"];
-            break;
-        }
-            
         case MenuItemMyList: {
             image = [UIImage imageNamed:@"my_list-22"];
             break;
