@@ -5,7 +5,7 @@
 "%@ has been added to subscriptions" = "%@ has been added to subscriptions";
 
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes are managed by the application. */
-"%@ has been added to the \"Watch later\" list" = "%@ has been added to the \"Watch later\" list";
+"%@ has been added to the \"Watch later\"" = "%@ has been added to the \"Watch later\"";
 
 /* Message displayed at the top of the screen when removing an item from the favorite list. Quotes are managed by the application. */
 "%@ has been removed from favorites" = "%@ has been removed from favorites";
@@ -14,7 +14,7 @@
 "%@ has been removed from subscriptions" = "%@ has been removed from subscriptions";
 
 /* Message displayed at the top of the screen when removing an item from the watch later list. Quotes are managed by the application. */
-"%@ has been removed from the \"Watch later\" list" = "%@ has been removed from the \"Watch later\" list";
+"%@ has been removed from the \"Watch later\"" = "%@ has been removed from the \"Watch later\"";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ is idle.";
