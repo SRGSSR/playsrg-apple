@@ -19,29 +19,29 @@ static NSString * const MyListDomain = @"play";
 
 BOOL MyListContainsShow(SRGShow *show)
 {
-    return [[SRGUserData.currentUserData.preferences arrayForKeyPath:@"myList" inDomain:MyListDomain] ?: @[] containsObject:show.URN];
+    return [[SRGUserData.currentUserData.preferences arrayAtPath:@"myList" inDomain:MyListDomain] ?: @[] containsObject:show.URN];
 }
 
 void MyListAddShow(SRGShow *show)
 {
-    NSInteger index = [[SRGUserData.currentUserData.preferences arrayForKeyPath:@"myList" inDomain:MyListDomain] ?: @[] indexOfObject:show.URN];
+    NSInteger index = [[SRGUserData.currentUserData.preferences arrayAtPath:@"myList" inDomain:MyListDomain] ?: @[] indexOfObject:show.URN];
     if (index == NSNotFound) {
-        NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayForKeyPath:@"myList" inDomain:MyListDomain].mutableCopy ?: NSMutableArray.new;
+        NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayAtPath:@"myList" inDomain:MyListDomain].mutableCopy ?: NSMutableArray.new;
         [URNs insertObject:show.URN atIndex:0];
-        [SRGUserData.currentUserData.preferences setArray:URNs.copy forKeyPath:@"myList" inDomain:MyListDomain];
+        [SRGUserData.currentUserData.preferences setArray:URNs.copy atPath:@"myList" inDomain:MyListDomain];
     }
 }
 
 void MyListRemoveShows(NSArray<SRGShow *> *shows)
 {
     if (shows) {
-        NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayForKeyPath:@"myList" inDomain:MyListDomain].mutableCopy ?: NSMutableArray.new;
+        NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayAtPath:@"myList" inDomain:MyListDomain].mutableCopy ?: NSMutableArray.new;
         NSArray<NSString *> *removeURNs = [shows valueForKeyPath:@"@distinctUnionOfObjects.URN"];
         [URNs removeObjectsInArray:removeURNs];
-        [SRGUserData.currentUserData.preferences setArray:URNs.copy forKeyPath:@"myList" inDomain:MyListDomain];
+        [SRGUserData.currentUserData.preferences setArray:URNs.copy atPath:@"myList" inDomain:MyListDomain];
     }
     else {
-       [SRGUserData.currentUserData.preferences setArray:@[] forKeyPath:@"myList" inDomain:MyListDomain];
+       [SRGUserData.currentUserData.preferences setArray:@[] atPath:@"myList" inDomain:MyListDomain];
     }
 }
 
@@ -60,20 +60,20 @@ BOOL MyListToggleShow(SRGShow *show)
 
 NSArray<NSString *> * MyListShowURNs()
 {
-    return [SRGUserData.currentUserData.preferences arrayForKeyPath:@"myList" inDomain:MyListDomain] ?: @[];
+    return [SRGUserData.currentUserData.preferences arrayAtPath:@"myList" inDomain:MyListDomain] ?: @[];
 }
 
 void MyListMigrate(void)
 {
     NSArray<Favorite *> *favorites = [Favorite showFavorites];
     if (favorites.count) {
-        NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayForKeyPath:@"myList" inDomain:MyListDomain].mutableCopy ?: NSMutableArray.new;
+        NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayAtPath:@"myList" inDomain:MyListDomain].mutableCopy ?: NSMutableArray.new;
         for (Favorite *favorite in favorites) {
             if (favorite.showURN && ! [URNs containsObject:favorite.showURN]) {
                 [URNs insertObject:favorite.showURN atIndex:0];
             }
         }
-        [SRGUserData.currentUserData.preferences setArray:URNs.copy forKeyPath:@"myList" inDomain:MyListDomain];
+        [SRGUserData.currentUserData.preferences setArray:URNs.copy atPath:@"myList" inDomain:MyListDomain];
         [Favorite finishMigrationForFavorites:favorites];
     }
     
@@ -82,11 +82,11 @@ void MyListMigrate(void)
         NSArray<NSString *> *subscribedShowURNs = PushService.sharedService.subscribedShowURNs;
         
         for (NSString *URN in subscribedShowURNs) {
-            NSInteger index = [[SRGUserData.currentUserData.preferences arrayForKeyPath:@"myList" inDomain:MyListDomain] ?: @[] indexOfObject:URN];
+            NSInteger index = [[SRGUserData.currentUserData.preferences arrayAtPath:@"myList" inDomain:MyListDomain] ?: @[] indexOfObject:URN];
             if (index == NSNotFound) {
-                NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayForKeyPath:@"myList" inDomain:MyListDomain].mutableCopy ?: NSMutableArray.new;
+                NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayAtPath:@"myList" inDomain:MyListDomain].mutableCopy ?: NSMutableArray.new;
                 [URNs insertObject:URN atIndex:0];
-                [SRGUserData.currentUserData.preferences setArray:URNs.copy forKeyPath:@"myList" inDomain:MyListDomain];
+                [SRGUserData.currentUserData.preferences setArray:URNs.copy atPath:@"myList" inDomain:MyListDomain];
             }
         }
         completionHandler(subscribedShowURNs != nil);
