@@ -7,6 +7,8 @@
 #import "MyList.h"
 
 #import "Favorite+Private.h"
+#import "PlayApplication.h"
+#import "PushService.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGUserData/SRGUserData.h>
@@ -74,4 +76,19 @@ void MyListMigrate(void)
         [SRGUserData.currentUserData.preferences setArray:URNs.copy forKeyPath:@"myList" inDomain:MyListDomain];
         [Favorite finishMigrationForFavorites:favorites];
     }
+    
+    // Processes run once in the lifetime of the application
+    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+        NSArray<NSString *> *subscribedShowURNs = PushService.sharedService.subscribedShowURNs;
+        
+        for (NSString *URN in subscribedShowURNs) {
+            NSInteger index = [[SRGUserData.currentUserData.preferences arrayForKeyPath:@"myList" inDomain:MyListDomain] ?: @[] indexOfObject:URN];
+            if (index == NSNotFound) {
+                NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayForKeyPath:@"myList" inDomain:MyListDomain].mutableCopy ?: NSMutableArray.new;
+                [URNs insertObject:URN atIndex:0];
+                [SRGUserData.currentUserData.preferences setArray:URNs.copy forKeyPath:@"myList" inDomain:MyListDomain];
+            }
+        }
+        completionHandler(subscribedShowURNs != nil);
+    }, @"SubscriptionsToMyListMigrationDone", nil);
 }

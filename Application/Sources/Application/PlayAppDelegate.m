@@ -148,11 +148,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     [self setupHockey];
 #endif
     
-    // Local objects migration
-    [Favorite migrate];
-    WatchLaterMigrate();
-    MyListMigrate();
-    
     // 3D touch dynamic shortcut items. If search options are available, append a search option as last item. Dynamic shortcut
     // items are persisted between application launches, do not add them several times
     UIApplicationShortcutIcon *icon = [UIApplicationShortcutIcon iconWithTemplateImageName:@"search-35"];
@@ -206,6 +201,11 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     
     [PushService.sharedService setup];
     [self updateApplicationBadge];
+    
+    // Local objects migration
+    [Favorite migrate];
+    WatchLaterMigrate();
+    MyListMigrate();
     
     [self showNextAvailableOnboarding];
     
