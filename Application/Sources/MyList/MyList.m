@@ -63,4 +63,15 @@ NSArray<NSString *> * MyListShowURNs()
 
 void MyListMigrate(void)
 {
+    NSArray<Favorite *> *favorites = [Favorite showFavorites];
+    if (favorites.count) {
+        NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayForKeyPath:@"myList" inDomain:MyListDomain].mutableCopy ?: NSMutableArray.new;
+        for (Favorite *favorite in favorites) {
+            if (favorite.showURN && ! [URNs containsObject:favorite.showURN]) {
+                [URNs insertObject:favorite.showURN atIndex:0];
+            }
+        }
+        [SRGUserData.currentUserData.preferences setArray:URNs.copy forKeyPath:@"myList" inDomain:MyListDomain];
+        [Favorite finishMigrationForFavorites:favorites];
+    }
 }

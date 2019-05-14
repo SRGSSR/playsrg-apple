@@ -14,6 +14,7 @@
 #import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
+#import "MyList.h"
 #import "NavigationController.h"
 #import "PlayApplication.h"
 #import "PlayErrors.h"
@@ -150,6 +151,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     // Local objects migration
     [Favorite migrate];
     WatchLaterMigrate();
+    MyListMigrate();
     
     // 3D touch dynamic shortcut items. If search options are available, append a search option as last item. Dynamic shortcut
     // items are persisted between application launches, do not add them several times
