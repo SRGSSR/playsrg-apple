@@ -137,6 +137,7 @@
 
 - (void)myListTableViewCell:(MyListTableViewCell *)myListTableViewCell deleteShow:(SRGShow *)show
 {
+    MyListRemoveShows(@[show]);
     [self hideItems:@[show]];
     [self updateInterfaceForEditionAnimated:YES];
     
@@ -234,20 +235,19 @@
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemoveAll labels:labels];
         }
         else {
-            NSMutableArray<NSString *> *URNs = [NSMutableArray array];
+            NSMutableArray<SRGShow *> *shows = [NSMutableArray array];
             [selectedRows enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger idx, BOOL * _Nonnull stop) {
-                SRGMedia *media = self.items[indexPath.row];
-                [URNs addObject:media.URN];
+                SRGShow *show = self.items[indexPath.row];
+                [shows addObject:show];
                 
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.value = media.URN;
+                labels.value = show.URN;
                 labels.source = AnalyticsSourceSelection;
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemove labels:labels];
             }];
             
-            MyListRemoveShows(URNs.copy);
-            NSArray<SRGShow *> *shows = [self.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K IN %@", @keypath(SRGShow.new, URN), URNs]];
-            [self hideItems:shows];
+            MyListRemoveShows(shows.copy);
+            [self hideItems:shows.copy];
             [self updateInterfaceForEditionAnimated:YES];
         }
         
