@@ -18,18 +18,46 @@ static NSString * const MyListPreferencePath = @"myList";
 
 #pragma mark Media metadata functions
 
+BOOL MyListContainsShowURN(NSString *URN)
+{
+    return [[SRGUserData.currentUserData.preferences dictionaryAtPath:MyListPreferencePath inDomain:PlayPreferenceDomain].allKeys containsObject:URN];
+}
+
 BOOL MyListContainsShow(SRGShow *show)
 {
-    return [[SRGUserData.currentUserData.preferences dictionaryAtPath:MyListPreferencePath inDomain:PlayPreferenceDomain].allKeys containsObject:show.URN];
+    return MyListContainsShowURN(show.URN);
+}
+
+void MyListAddShowURNWithDate(NSString *URN, NSDate *date)
+{
+    if (! MyListContainsShowURN(URN)) {
+        NSDictionary *myListEntry = @{ @"date" : @(date.timeIntervalSince1970),
+                                       @"newodNotification" : @(NO) };
+        [SRGUserData.currentUserData.preferences setDictionary:myListEntry atPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, URN] inDomain:PlayPreferenceDomain];
+    }
+}
+
+void MyListSubscribedToShowURN(NSString *URN)
+{
+    if (MyListContainsShowURN(URN)) {
+        NSMutableDictionary *myListEntry = [SRGUserData.currentUserData.preferences dictionaryAtPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, URN] inDomain:PlayPreferenceDomain].mutableCopy;
+        myListEntry[@"newodNotification"] = @(YES);
+        [SRGUserData.currentUserData.preferences setDictionary:myListEntry.copy atPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, URN] inDomain:PlayPreferenceDomain];
+    }
+}
+
+void MyListUnsubscribedFromShowURN(NSString *URN)
+{
+    if (MyListContainsShowURN(URN)) {
+        NSMutableDictionary *myListEntry = [SRGUserData.currentUserData.preferences dictionaryAtPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, URN] inDomain:PlayPreferenceDomain].mutableCopy;
+        myListEntry[@"newodNotification"] = @(NO);
+        [SRGUserData.currentUserData.preferences setDictionary:myListEntry.copy atPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, URN] inDomain:PlayPreferenceDomain];
+    }
 }
 
 void MyListAddShow(SRGShow *show)
 {
-    if (! MyListContainsShow(show)) {
-        NSDictionary *myListEntry = @{ @"date" : @(NSDate.date.timeIntervalSince1970),
-                                       @"newodNotification" : @(NO) };
-        [SRGUserData.currentUserData.preferences setDictionary:myListEntry atPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, show.URN] inDomain:PlayPreferenceDomain];
-    }
+    MyListAddShowURNWithDate(show.URN, NSDate.date);
 }
 
 void MyListRemoveShows(NSArray<SRGShow *> *shows)
@@ -71,13 +99,11 @@ void MyListMigrate(void)
 {
     NSArray<Favorite *> *favorites = [Favorite showFavorites];
     if (favorites.count) {
-        NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayAtPath:@"myList" inDomain:PlayPreferenceDomain].mutableCopy ?: NSMutableArray.new;
         for (Favorite *favorite in favorites) {
-            if (favorite.showURN && ! [URNs containsObject:favorite.showURN]) {
-                [URNs insertObject:favorite.showURN atIndex:0];
+            if (favorite.showURN && ! MyListContainsShowURN(favorite.showURN)) {
+                MyListAddShowURNWithDate(favorite.showURN, favorite.date ?: NSDate.date);
             }
         }
-        [SRGUserData.currentUserData.preferences setArray:URNs.copy atPath:@"myList" inDomain:PlayPreferenceDomain];
         [Favorite finishMigrationForFavorites:favorites];
     }
     
@@ -86,12 +112,10 @@ void MyListMigrate(void)
         NSArray<NSString *> *subscribedShowURNs = PushService.sharedService.subscribedShowURNs;
         
         for (NSString *URN in subscribedShowURNs) {
-            NSInteger index = [[SRGUserData.currentUserData.preferences arrayAtPath:@"myList" inDomain:PlayPreferenceDomain] ?: @[] indexOfObject:URN];
-            if (index == NSNotFound) {
-                NSMutableArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences arrayAtPath:@"myList" inDomain:PlayPreferenceDomain].mutableCopy ?: NSMutableArray.new;
-                [URNs insertObject:URN atIndex:0];
-                [SRGUserData.currentUserData.preferences setArray:URNs.copy atPath:@"myList" inDomain:PlayPreferenceDomain];
+            if (! MyListContainsShowURN(URN)) {
+                MyListAddShowURNWithDate(URN, NSDate.date);
             }
+            MyListSubscribedToShowURN(URN);
         }
         completionHandler(subscribedShowURNs != nil);
     }, @"SubscriptionsToMyListMigrationDone", nil);
