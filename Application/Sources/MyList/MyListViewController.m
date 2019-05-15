@@ -7,26 +7,30 @@
 #import "MyListViewController.h"
 
 #import "ApplicationConfiguration.h"
+#import "NSArray+PlaySRG.h"
+#import "NSBundle+PlaySRG.h"
+#import "ShowViewController.h"
 #import "MyList.h"
 #import "MyListTableViewCell.h"
-#import "NSBundle+PlaySRG.h"
-#import "PlayErrors.h"
-#import "PlayLogger.h"
-#import "ShowViewController.h"
 #import "UIColor+PlaySRG.h"
+#import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-
 #import <libextobjc/libextobjc.h>
-#import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
-#import <SRGUserData/SRGUserData.h>
+#import <SRGDataProvider/SRGDataProvider.h>
 
-@interface MyListViewController () <MyListTableViewCellDelegate>
+@interface MyListViewController ()
+
+@property (nonatomic) NSArray<SRGShow *> *shows;
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) UIRefreshControl *refreshControl;
 
 @property (nonatomic) UIBarButtonItem *defaultLeftBarButtonItem;
 
-@property (nonatomic) NSSet<NSString *> *showURNs;
+@property (nonatomic) NSError *lastRequestError;
+@property (nonatomic) NSArray<SRGShow *> *requestedShows;
 
 @end
 
@@ -39,21 +43,42 @@
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"My List", @"Title displayed at the top of the My List screen");
+
     self.view.backgroundColor = UIColor.play_blackColor;
     
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     self.tableView.allowsSelectionDuringEditing = YES;
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     
-    self.emptyTableTitle = NSLocalizedString(@"No content", @"Text displayed when no show added to My List");
-    self.emptyTableSubtitle = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a show to add it to My List", @"Hint displayed when no show added to theMy List and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a show to add it to My List", @"Hint displayed when no show added to My List and the device does not support 3D touch");
-    self.emptyCollectionImage = [UIImage imageNamed:@"my_list-90"];
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
     
     NSString *cellIdentifier = NSStringFromClass(MyListTableViewCell.class);
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = UIColor.whiteColor;
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
+    self.refreshControl = refreshControl;
+    
     [self updateInterfaceForEditionAnimated:NO];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(myListStateDidChange:)
+                                               name:nil
+                                             object:nil];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    // Force a layout update for the empty view to that it takes into account updated content insets appropriately.
+    [self.tableView reloadEmptyDataSet];
 }
 
 #pragma mark Rotation
@@ -70,27 +95,72 @@
     return UIStatusBarStyleLightContent;
 }
 
-#pragma mark Overrides
+#pragma mark Accessibility
 
-- (void)refresh
+- (void)updateForContentSizeCategory
 {
-    [self updateMediaURNsWithCompletionBlock:^(NSSet<NSString *> *URNs, NSSet<NSString *> *previousURNs) {
-        [super refresh];
-    }];
+    [super updateForContentSizeCategory];
+    
+    [self reloadDataAnimated:NO];
 }
 
-- (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
+#pragma mark Overrides
+
+- (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue
 {
+    self.requestedShows = [NSArray array];
+    
+    NSArray<NSString *> *showURNs = MyListShowURNs().allObjects;
     NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
-    SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider showsWithURNs:self.showURNs.allObjects completionBlock:completionHandler] requestWithPageSize:pageSize] requestWithPage:page];
-    [requestQueue addRequest:request resume:YES];
+    
+    @weakify(self)
+    __block SRGFirstPageRequest *firstRequest = [[SRGDataProvider.currentDataProvider showsWithURNs:showURNs completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        @strongify(self)
+        
+        if (error) {
+            [requestQueue reportError:error];
+            return;
+        }
+        
+        self.requestedShows = [self.requestedShows arrayByAddingObjectsFromArray:shows];
+        if (nextPage) {
+            SRGPageRequest *nextRequest = [firstRequest requestWithPage:nextPage];
+            [requestQueue addRequest:nextRequest resume:YES];
+        }
+        else {
+            firstRequest = nil;
+        }
+    }] requestWithPageSize:pageSize];
+    [requestQueue addRequest:firstRequest resume:YES];
+}
+
+- (void)refreshDidStart
+{
+    self.lastRequestError = nil;
 }
 
 - (void)refreshDidFinishWithError:(NSError *)error
 {
-    [self updateInterfaceForEditionAnimated:NO];
+    self.lastRequestError = error;
     
-    [super refreshDidFinishWithError:error];
+    if (! error) {
+        NSSortDescriptor *titleSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, title) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+        NSSortDescriptor *transmissionSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, transmission) ascending:YES];
+        self.shows = [self.requestedShows sortedArrayUsingDescriptors:@[titleSortDescriptor, transmissionSortDescriptor]];
+    }
+    self.requestedShows = nil;
+    
+    // Avoid stopping scrolling
+    // See http://stackoverflow.com/a/31681037/760435
+    if (self.refreshControl.refreshing) {
+        [self.refreshControl endRefreshing];
+    }
+    
+    [self reloadDataAnimated:YES];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView flashScrollIndicators];
+    });
 }
 
 - (AnalyticsPageType)pageType
@@ -98,23 +168,17 @@
     return AnalyticsPageTypeMyList;
 }
 
-#pragma mark Data
-
-- (void)updateMediaURNsWithCompletionBlock:(void (^)(NSSet<NSString *> *URNs, NSSet<NSString *> *previousURNs))completionBlock
-{
-    NSParameterAssert(completionBlock);
-    
-    NSSet<NSString *> *URNs = MyListShowURNs();
-    NSSet<NSString *> *previousURNs = self.showURNs;
-    self.showURNs = URNs;
-    completionBlock(URNs, previousURNs);
-}
-
 #pragma mark UI
+
+- (void)reloadDataAnimated:(BOOL)animated
+{
+    [self.tableView reloadData];
+    [self updateInterfaceForEditionAnimated:animated];
+}
 
 - (void)updateInterfaceForEditionAnimated:(BOOL)animated
 {
-    if (self.items.count != 0) {
+    if (self.shows.count != 0) {
         UIBarButtonItem *rightBarButtonItem = ! self.tableView.editing ? self.editButtonItem : [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button")
                                                                                                                                 style:UIBarButtonItemStylePlain
                                                                                                                                target:self
@@ -128,30 +192,85 @@
 
 #pragma mark ContentInsets protocol
 
+- (NSArray<UIScrollView *> *)play_contentScrollViews
+{
+    return self.tableView ? @[self.tableView] : nil;
+}
+
 - (UIEdgeInsets)play_paddingContentInsets
 {
     return UIEdgeInsetsMake(5.f, 0.f, 10.f, 0.f);
 }
 
-#pragma mark MyListTableViewCellDelegate protocol
+#pragma mark DZNEmptyDataSetSource protocol
 
-- (void)myListTableViewCell:(MyListTableViewCell *)myListTableViewCell deleteShow:(SRGShow *)show
+- (UIView *)customViewForEmptyDataSet:(UIScrollView *)scrollView
 {
-    MyListRemoveShows(@[show]);
-    [self hideItems:@[show]];
-    [self updateInterfaceForEditionAnimated:YES];
+    if (self.loading) {
+        // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
+        // stretched
+        UIImageView *loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
+        loadingImageView.contentMode = UIViewContentModeCenter;
+        return loadingImageView;
+    }
+    else {
+        return nil;
+    }
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    // Remark: No test for self.loading since a custom view is used in such cases
+    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
+                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
     
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.value = show.URN;
-    labels.source = AnalyticsSourceSwipe;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemove labels:labels];
+    NSString *title = NSLocalizedString(@"No content", @"Text displayed when no show added to My List");
+    return [[NSAttributedString alloc] initWithString:title
+                                           attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    // Remark: No test for self.loading since a custom view is used in such cases
+    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
+    
+    NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a show to add it to My List", @"Hint displayed when no show added to theMy List and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a show to add it to My List", @"Hint displayed when no show added to My List and the device does not support 3D touch");
+    return [[NSAttributedString alloc] initWithString:description
+                                           attributes:attributes];
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    // Remark: No test for self.loading since a custom view is used in such cases
+    if (self.lastRequestError) {
+        return [UIImage imageNamed:@"error-90"];
+    }
+    else {
+        return [UIImage imageNamed:@"my_list-90"];
+    }
+}
+
+- (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return UIColor.play_lightGrayColor;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.items.count;
+    return self.shows.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -169,13 +288,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(MyListTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // FIXME: Work around crash. To reproduce, logout with My List view visible, with a slow network (repeat a few
-    //        times to trigger the crash). For reasons yet to be determined, this method is called with an index path, while
-    //        items is empty. This of course crashes.
-    if (indexPath.row < self.items.count) {
-        cell.show = self.items[indexPath.row];
-        cell.cellDelegate = self;
-    }
+    cell.show = self.shows[indexPath.row];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -184,19 +297,23 @@
         return;
     }
     
-    SRGShow *show = self.items[indexPath.row];
+    SRGShow *show = self.shows[indexPath.row];
     ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
     [self.navigationController pushViewController:showViewController animated:YES];
     
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.value = show.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListOpenShow labels:labels];
-
 }
 
 #pragma mark Actions
 
-- (void)removeShow:(id)sender
+- (void)refresh:(id)sender
+{
+    [self refresh];
+}
+
+- (void)removeSubscriptions:(id)sender
 {
     NSArray *selectedRows = self.tableView.indexPathsForSelectedRows;
     
@@ -225,30 +342,32 @@
         }
     }]];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of a delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        NSArray<NSIndexPath *> *selectedRows = self.tableView.indexPathsForSelectedRows;
-        if (deleteAllModeEnabled || selectedRows.count == self.items.count) {
-            MyListRemoveShows(nil);
-            [self refresh];
-            
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceSelection;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemoveAll labels:labels];
-        }
-        else {
-            NSMutableArray<SRGShow *> *shows = [NSMutableArray array];
-            [selectedRows enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger idx, BOOL * _Nonnull stop) {
-                SRGShow *show = self.items[indexPath.row];
-                [shows addObject:show];
+        // Avoid issues if the user switches off notifications while the alert is displayed
+            NSArray *selectedRows = self.tableView.indexPathsForSelectedRows;
+            if (deleteAllModeEnabled || selectedRows.count == self.shows.count) {
+                MyListRemoveShows(nil);
+                
+                self.shows = nil;
+                [self reloadDataAnimated:YES];
                 
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.value = show.URN;
                 labels.source = AnalyticsSourceSelection;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemove labels:labels];
-            }];
-            
-            MyListRemoveShows(shows.copy);
-            [self hideItems:shows.copy];
-            [self updateInterfaceForEditionAnimated:YES];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemoveAll labels:labels];
+            }
+            else {
+                NSMutableArray<SRGShow *> *showToRemove = [NSMutableArray array];
+                for (NSIndexPath *selectedIndexPath in selectedRows) {
+                    [showToRemove addObject:self.shows[selectedIndexPath.row]];
+                }
+                
+                MyListRemoveShows(showToRemove.copy);
+                
+                for (SRGShow *show in showToRemove.copy) {
+                    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                    labels.value = show.URN;
+                    labels.source = AnalyticsSourceSelection;
+                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemove labels:labels];
+                }
         }
         
         if (self.tableView.isEditing) {
@@ -278,7 +397,7 @@
     UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]
                                                                             style:UIBarButtonItemStylePlain
                                                                            target:self
-                                                                           action:@selector(removeShow:)];
+                                                                           action:@selector(removeSubscriptions:)];
     deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Delete", @"Delete button label");
     
     UIBarButtonItem *leftBarButtonItem = editing ? deleteBarButtonItem : self.defaultLeftBarButtonItem;
@@ -292,17 +411,9 @@
 
 #pragma mark Notifications
 
-- (void)playlistEntriesDidChange:(NSNotification *)notification
+- (void)myListStateDidChange:(NSNotification *)notification
 {
-    // Update the URN list. If we had no media retrieval with pagination, a simple diff could then be used to animate between
-    // the previous list and the new one. Since we have pagination here, we can only automatially perform a refresh if a single
-    // page of content is or was displayed (because other pages after it depend on the first page).
-    [self updateMediaURNsWithCompletionBlock:^(NSSet<NSString *> *URNs, NSSet<NSString *> *previousURNs) {
-        NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
-        if (! [previousURNs isEqual:self.showURNs] && (previousURNs.count <= pageSize || self.showURNs.count <= pageSize)) {
-            [self refresh];
-        }
-    }];
+    // TODO:
 }
 
 @end
