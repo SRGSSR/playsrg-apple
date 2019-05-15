@@ -16,7 +16,6 @@ NSString *AnalyticsNameForPageType(AnalyticsPageType pageType)
                      @(AnalyticsPageTypeRadio) : NSLocalizedString(@"Radio", @"[Technical] Radio page type for analytics measurements"),
                      @(AnalyticsPageTypeOnline) : NSLocalizedString(@"Online", @"[Technical] Online page type for analytics measurements"),
                      @(AnalyticsPageTypeSystem) : NSLocalizedString(@"System", @"[Technical] System page type for analytics measurements"),
-                     @(AnalyticsPageTypeFavorites) : NSLocalizedString(@"Favorites", @"[Technical] Favorites page type for analytics measurements"),
                      @(AnalyticsPageTypeDownloads) : NSLocalizedString(@"Downloads", @"[Technical] Downloads page type for analytics measurements"),
                      @(AnalyticsPageTypeHistory) : NSLocalizedString(@"History", @"[Technical] History page type for analytics measurements"),
                      @(AnalyticsPageTypeMyList) : NSLocalizedString(@"My List", @"[Technical] Subscriptions page type for analytics measurements"),
@@ -34,11 +33,6 @@ AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download";
 AnalyticsTitle const AnalyticsTitleDownloadRemove = @"download_remove";
 AnalyticsTitle const AnalyticsTitleDownloadRemoveAll = @"download_remove_all";
 AnalyticsTitle const AnalyticsTitleDownloadOpenMedia = @"play_download";
-AnalyticsTitle const AnalyticsTitleFavoriteAdd = @"favorite";
-AnalyticsTitle const AnalyticsTitleFavoriteRemove = @"favorite_remove";
-AnalyticsTitle const AnalyticsTitleFavoriteRemoveAll = @"favorite_remove_all";
-AnalyticsTitle const AnalyticsTitleFavoriteOpenMedia = @"play_favorite";
-AnalyticsTitle const AnalyticsTitleFavoriteOpenShow = @"show_favorite";
 AnalyticsTitle const AnalyticsTitleGoogleCast = @"google_cast";
 AnalyticsTitle const AnalyticsTitleHistoryRemove = @"history_remove";
 AnalyticsTitle const AnalyticsTitleHistoryRemoveAll = @"history_remove_all";
@@ -78,7 +72,6 @@ AnalyticsSource const AnalyticsSourceSelection = @"selection";
 AnalyticsSource const AnalyticsSourceSwipe = @"swipe";
 
 AnalyticsType const AnalyticsTypeActionLive = @"openlive";
-AnalyticsType const AnalyticsTypeActionFavorites = @"openfavorites";
 AnalyticsType const AnalyticsTypeActionMyList = @"openmylist";
 AnalyticsType const AnalyticsTypeActionDownloads = @"opendownloads";
 AnalyticsType const AnalyticsTypeActionHistory = @"openhistory";

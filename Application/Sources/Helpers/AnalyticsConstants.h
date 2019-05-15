@@ -17,7 +17,6 @@ typedef NS_ENUM(NSInteger, AnalyticsPageType) {
     AnalyticsPageTypeRadio,
     AnalyticsPageTypeOnline,
     AnalyticsPageTypeSystem,
-    AnalyticsPageTypeFavorites,
     AnalyticsPageTypeDownloads,
     AnalyticsPageTypeHistory,
     AnalyticsPageTypeMyList,
@@ -62,31 +61,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadRemoveAll;
  *  Title for events related to download playback
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadOpenMedia;
-
-/**
- *  Title for events related to favorites
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteAdd;
-
-/**
- *  Title for events related to deletion of a favorite
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemove;
-
-/**
- *  Title for events related to deletion of all favorites
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemoveAll;
-
-/**
- *  Title for events related to favorite playback
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteOpenMedia;
-
-/**
- *  Title for events related to opening a favorited show
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteOpenShow;
 
 /**
  *  Title for Google Cast events
@@ -231,7 +205,6 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceSwipe;
  *  Actions
  */
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLive;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionFavorites;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionMyList;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDownloads;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionHistory;
