@@ -720,7 +720,11 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     MenuItemInfo *menuItemInfo = nil;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     
-    if ([shortcutItem.type isEqualToString:@"downloads"]) {
+    if ([shortcutItem.type isEqualToString:@"mylist"]) {
+        menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemMyList];
+        labels.type = AnalyticsTypeActionMyList;
+    }
+    else if ([shortcutItem.type isEqualToString:@"downloads"]) {
         menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemDownloads];
         labels.type = AnalyticsTypeActionDownloads;
     }

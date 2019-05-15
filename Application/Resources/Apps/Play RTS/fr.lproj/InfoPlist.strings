@@ -1,4 +1,5 @@
 "Downloads" = "Téléchargements";
 "History" = "Historique";
+"My List" = "Ma Liste";
 "NSBluetoothPeripheralUsageDescription" = "L'application utilise le Bluetooth pour la découverte de récepteur Google Cast.";
 "NSMicrophoneUsageDescription" = "L'application utilise le micro pour la découverte de récepteur Google Cast.";

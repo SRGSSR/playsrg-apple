@@ -79,6 +79,7 @@ AnalyticsSource const AnalyticsSourceSwipe = @"swipe";
 
 AnalyticsType const AnalyticsTypeActionLive = @"openlive";
 AnalyticsType const AnalyticsTypeActionFavorites = @"openfavorites";
+AnalyticsType const AnalyticsTypeActionMyList = @"openmylist";
 AnalyticsType const AnalyticsTypeActionDownloads = @"opendownloads";
 AnalyticsType const AnalyticsTypeActionHistory = @"openhistory";
 AnalyticsType const AnalyticsTypeActionSearch = @"opensearch";
