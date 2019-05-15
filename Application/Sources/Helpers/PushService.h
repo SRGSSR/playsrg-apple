@@ -75,7 +75,7 @@ OBJC_EXPORT NSString * const PushServiceDidReceiveNotification;
  *
  *  @discussion: No notification sent.
  */
-- (void)silenceUnsubscribtionFromShowURNs:(NSArray<NSString *> *)showURNs;
+- (void)silenceUnsubscribtionFromShowURNs:(NSSet<NSString *> *)showURNs;
 
 /**
  *  Return YES iff the user has subscribed to the specified show.
@@ -85,7 +85,7 @@ OBJC_EXPORT NSString * const PushServiceDidReceiveNotification;
 /**
  *  Return the URNs of all shows the user has subscribed to.
  */
-@property (nonatomic, readonly) NSArray<NSString *> *subscribedShowURNs;
+@property (nonatomic, readonly) NSSet<NSString *> *subscribedShowURNs;
 
 @end
 

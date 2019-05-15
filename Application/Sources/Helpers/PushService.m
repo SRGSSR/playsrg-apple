@@ -123,17 +123,17 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     return environmentIdentifier;
 }
 
-- (NSArray<NSString *> *)subscribedShowURNs
+- (NSSet<NSString *> *)subscribedShowURNs
 {
     if (! self.enabled) {
-        return @[];
+        return NSSet.set;
     }
     
-    NSMutableArray<NSString *> *URNs = [NSMutableArray array];
+    NSMutableSet<NSString *> *URNs = [NSMutableSet set];
     
     NSArray<NSString *> *tags = [UAirship push].tags;
     if (tags.count == 0) {
-        return @[];
+        return NSSet.set;
     }
     
     for (NSString *tag in tags) {
@@ -275,7 +275,7 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     return YES;
 }
 
-- (void)silenceUnsubscribtionFromShowURNs:(NSArray<NSString *> *)showURNs
+- (void)silenceUnsubscribtionFromShowURNs:(NSSet<NSString *> *)showURNs
 {
     for (NSString *showURN in showURNs) {
         [[UAirship push] removeTag:[self tagForURN:showURN]];        

@@ -90,9 +90,9 @@ BOOL MyListToggleShow(SRGShow *show)
     }
 }
 
-NSArray<NSString *> * MyListShowURNs()
+NSSet<NSString *> * MyListShowURNs()
 {
-    return [SRGUserData.currentUserData.preferences dictionaryAtPath:MyListPreferencePath inDomain:PlayPreferenceDomain].allKeys;
+    return [NSSet setWithArray:[SRGUserData.currentUserData.preferences dictionaryAtPath:MyListPreferencePath inDomain:PlayPreferenceDomain].allKeys];
 }
 
 void MyListMigrate(void)
@@ -109,7 +109,7 @@ void MyListMigrate(void)
     
     // Processes run once in the lifetime of the application
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
-        NSArray<NSString *> *subscribedShowURNs = PushService.sharedService.subscribedShowURNs;
+        NSSet<NSString *> *subscribedShowURNs = PushService.sharedService.subscribedShowURNs;
         
         for (NSString *URN in subscribedShowURNs) {
             if (! MyListContainsShowURN(URN)) {

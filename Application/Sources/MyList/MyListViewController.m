@@ -26,7 +26,7 @@
 
 @property (nonatomic) UIBarButtonItem *defaultLeftBarButtonItem;
 
-@property (nonatomic) NSArray<NSString *> *showURNs;
+@property (nonatomic) NSSet<NSString *> *showURNs;
 
 @end
 
@@ -74,7 +74,7 @@
 
 - (void)refresh
 {
-    [self updateMediaURNsWithCompletionBlock:^(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs) {
+    [self updateMediaURNsWithCompletionBlock:^(NSSet<NSString *> *URNs, NSSet<NSString *> *previousURNs) {
         [super refresh];
     }];
 }
@@ -82,7 +82,7 @@
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
-    SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider showsWithURNs:self.showURNs completionBlock:completionHandler] requestWithPageSize:pageSize] requestWithPage:page];
+    SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider showsWithURNs:self.showURNs.allObjects completionBlock:completionHandler] requestWithPageSize:pageSize] requestWithPage:page];
     [requestQueue addRequest:request resume:YES];
 }
 
@@ -100,12 +100,12 @@
 
 #pragma mark Data
 
-- (void)updateMediaURNsWithCompletionBlock:(void (^)(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs))completionBlock
+- (void)updateMediaURNsWithCompletionBlock:(void (^)(NSSet<NSString *> *URNs, NSSet<NSString *> *previousURNs))completionBlock
 {
     NSParameterAssert(completionBlock);
     
-    NSArray<NSString *> *URNs = MyListShowURNs();
-    NSArray<NSString *> *previousURNs = self.showURNs;
+    NSSet<NSString *> *URNs = MyListShowURNs();
+    NSSet<NSString *> *previousURNs = self.showURNs;
     self.showURNs = URNs;
     completionBlock(URNs, previousURNs);
 }
@@ -297,7 +297,7 @@
     // Update the URN list. If we had no media retrieval with pagination, a simple diff could then be used to animate between
     // the previous list and the new one. Since we have pagination here, we can only automatially perform a refresh if a single
     // page of content is or was displayed (because other pages after it depend on the first page).
-    [self updateMediaURNsWithCompletionBlock:^(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs) {
+    [self updateMediaURNsWithCompletionBlock:^(NSSet<NSString *> *URNs, NSSet<NSString *> *previousURNs) {
         NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
         if (! [previousURNs isEqual:self.showURNs] && (previousURNs.count <= pageSize || self.showURNs.count <= pageSize)) {
             [self refresh];

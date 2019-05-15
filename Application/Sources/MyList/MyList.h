@@ -41,7 +41,7 @@ OBJC_EXPORT BOOL MyListToggleShow(SRGShow * _Nonnull show);
  *
  *  @discussion Must be called from the main thread.
  */
-OBJC_EXPORT NSArray<NSString *> * MyListShowURNs();
+OBJC_EXPORT NSSet<NSString *> * MyListShowURNs();
 
 /**
  *  Migrate favorites (legacy plist-based way of bookmarking shows) and subscriptions, if any to My List.
