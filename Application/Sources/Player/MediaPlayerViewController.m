@@ -16,6 +16,7 @@
 #import "History.h"
 #import "LiveAccessView.h"
 #import "ModalTransition.h"
+#import "MyList.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -106,14 +107,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
 @property (nonatomic, weak) IBOutlet UIStackView *mediaInfoStackView;
-@property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
-@property (nonatomic, weak) IBOutlet UIStackView *showStackView;
-@property (nonatomic, weak) IBOutlet UILabel *showLabel;
 @property (nonatomic, weak) IBOutlet UIStackView *dateStackView;
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
-@property (nonatomic, weak) IBOutlet UIStackView *viewCountStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *viewCountImageView;
 @property (nonatomic, weak) IBOutlet UILabel *viewCountLabel;
+@property (nonatomic, weak) IBOutlet UIButton *detailsButton;
 @property (nonatomic, weak) IBOutlet UILabel *summaryLabel;
 @property (nonatomic, weak) IBOutlet UIView *youthProtectionColorSpacerView;
 @property (nonatomic, weak) IBOutlet UIStackView *youthProtectionColorStackView;
@@ -122,14 +120,15 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIView *imageCopyrightSpacerView;
 @property (nonatomic, weak) IBOutlet UILabel *imageCopyrightLabel;
 
-// The details button might appear at different locations depending on the layout. A button is placed at all possible
-// location, and we will ensure only the first one is visible.
-@property (nonatomic) IBOutletCollection(UIButton) NSArray *detailsButtons;
-
 @property (nonatomic, weak) IBOutlet UIStackView *channelInfoStackView;
 @property (nonatomic, weak) IBOutlet UILabel *programTimeLabel;
 @property (nonatomic, weak) IBOutlet UILabel *nextProgramLabel;
 @property (nonatomic, weak) IBOutlet UILabel *channelLabel;
+
+@property (nonatomic, weak) IBOutlet UIStackView *showStackView;
+@property (nonatomic, weak) IBOutlet UIImageView *showThumbnailImageView;
+@property (nonatomic, weak) IBOutlet UILabel *showLabel;
+@property (nonatomic, weak) IBOutlet UIButton *myListButton;
 
 @property (nonatomic, weak) IBOutlet UIView *radioHomeView;
 @property (nonatomic, weak) IBOutlet UIButton *radioHomeButton;
@@ -302,7 +301,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.view.backgroundColor = UIColor.play_blackColor;
     
-    self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     
     self.pullDownGestureRecognizer.delegate = self;
     
@@ -700,6 +699,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     [self.availabilibityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
     
+    SRGShow *show = nil;
+    
     // Livestream: Display channel information when available
     if (media.contentType == SRGContentTypeLivestream) {
         [self.mediaInfoStackView play_setHidden:YES];
@@ -738,6 +739,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 self.nextProgramLabel.text = nil;
                 self.nextProgramLabel.accessibilityLabel = nil;
             }
+            
+            show = currentProgram.show;
         }
         else {
             self.titleLabel.text = media.title;
@@ -752,21 +755,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self.mediaInfoStackView play_setHidden:NO];
         [self.channelInfoStackView play_setHidden:YES];
         
-        [self.thumbnailImageView play_requestImageForObject:media withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
-        
         self.dateLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
         self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
         self.dateLabel.accessibilityLabel = [NSDateFormatter.play_relativeDateAndTimeAccessibilityFormatter stringFromDate:media.date];
-        
-        if (media.show) {
-            self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-            self.showLabel.text = media.show.title;
-            self.showLabel.accessibilityLabel = (media.show.title) ? [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"Episode of %@ show", @"In the player, show description label"), media.show.title] : nil;
-            [self.showStackView play_setHidden:NO];
-        }
-        else {
-            [self.showStackView play_setHidden:YES];
-        }
         
         self.viewCountLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
         
@@ -783,11 +774,15 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), @(socialCount.value)];
                 self.viewCountImageView.image = [UIImage imageNamed:@"viewCountVideo-16"];
             }
-            [self.viewCountStackView play_setHidden:NO];
+            self.viewCountImageView.hidden = NO;
+            self.viewCountLabel.hidden = NO;
         }
         else {
-            [self.viewCountStackView play_setHidden:YES];
+            self.viewCountImageView.hidden = YES;
+            self.viewCountLabel.hidden = YES;
         }
+        
+        show = media.show;
     }
     
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -799,6 +794,22 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.summaryLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.summaryLabel.text = media.play_fullSummary;
+    
+    if (show) {
+        [self.showThumbnailImageView play_requestImageForObject:show withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia unavailabilityHandler:^{
+            [self.showThumbnailImageView play_requestImageForObject:media withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
+        }];
+        
+        self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.showLabel.text = show.title;
+       
+        [self updateMyListStatusForShow:show];
+        
+        [self.showStackView play_setHidden:NO];
+    }
+    else {
+        [self.showStackView play_setHidden:YES];
+    }
     
     [self updateRadioHomeButton];
     self.radioHomeButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
@@ -887,18 +898,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (expanded) {
         self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelExpandedPriority;
         
-        [self.detailsButtons enumerateObjectsUsingBlock:^(UIButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
-            button.transform = CGAffineTransformMakeRotation(M_PI);
-        }];
+        self.detailsButton.transform = CGAffineTransformMakeRotation(M_PI);
     }
     // Change to collapsed mode (set high priority for height restriction)
     else {
         self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelNormalPriority;
         
-        [self.detailsButtons enumerateObjectsUsingBlock:^(UIButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
-            // Use small value so that the arrow always rotates in the inverse direction
-            button.transform = CGAffineTransformMakeRotation(0.00001);
-        }];
+        // Use small value so that the arrow always rotates in the inverse direction
+        self.detailsButton.transform = CGAffineTransformMakeRotation(0.00001);
     }
 }
 
@@ -925,9 +932,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (self.summaryLabel.text) {
         CGFloat summaryLabelHeight = self.summaryLabel.intrinsicContentSize.height;
         if (summaryLabelHeight / MediaPlayerDetailsLabelCollapsedHeight <= MediaPlayerDetailsLabelExpansionThresholdFactor) {
-            [self.detailsButtons enumerateObjectsUsingBlock:^(UIButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
-                button.hidden = YES;
-            }];
+            self.detailsButton.hidden = YES;
             self.detailsGestureRecognizer.enabled = NO;
             isDetailsButtonHidden = YES;
             
@@ -938,9 +943,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             self.detailsAvailable = YES;
             self.collapsedDetailsLabelsHeightConstraint.constant = MediaPlayerDetailsLabelCollapsedHeight;
             
-            [self.detailsButtons enumerateObjectsUsingBlock:^(UIButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
-                button.hidden = NO;
-            }];
+            self.detailsButton.hidden = NO;
             self.detailsGestureRecognizer.enabled = YES;
         }
     }
@@ -948,20 +951,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.detailsAvailable = NO;
         self.collapsedDetailsLabelsHeightConstraint.constant = 0.f;
         
-        [self.detailsButtons enumerateObjectsUsingBlock:^(UIButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
-            button.hidden = YES;
-        }];
+        self.detailsButton.hidden = YES;
         self.detailsGestureRecognizer.enabled = NO;
         isDetailsButtonHidden = YES;
     }
     
-    // Make the first button whose direct parent is actually visible the only possibly visible details button
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO", @keypath(UIButton.new, superview.play_isActuallyHidden)];
-    NSArray<UIButton *> *visibleDetailsButtons = [self.detailsButtons filteredArrayUsingPredicate:predicate];
-    [visibleDetailsButtons enumerateObjectsUsingBlock:^(UIButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
-        button.hidden = YES;
-    }];
-    visibleDetailsButtons.firstObject.hidden = isDetailsButtonHidden || UIAccessibilityIsVoiceOverRunning();
+    self.detailsButton.hidden = isDetailsButtonHidden || UIAccessibilityIsVoiceOverRunning();
 }
 
 - (SRGMedia *)mainChapterMedia
@@ -1114,6 +1109,18 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     else {
         [self.subscriptionButton setImage:[UIImage imageNamed:@"subscription-48"] forState:UIControlStateNormal];
         self.subscriptionButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Subscribe to show", @"Show subscription label");
+    }
+}
+
+- (void)updateMyListStatusForShow:(SRGShow *)show
+{
+    if (MyListContainsShow(show)) {
+        [self.myListButton setImage:[UIImage imageNamed:@"my_list_full-34"] forState:UIControlStateNormal];
+        self.myListButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove from My List", @"Show My List removal label");
+    }
+    else {
+        [self.myListButton setImage:[UIImage imageNamed:@"my_list-34"] forState:UIControlStateNormal];
+        self.myListButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Add to My List", @"Show My List creation label");
     }
 }
 
@@ -1687,6 +1694,24 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (IBAction)toggleDetails:(id)sender
 {
     [self setDetailsExpanded:! self.detailsExpanded animated:YES];
+}
+
+- (IBAction)toggleMyList:(id)sender
+{
+    SRGShow *show = [self mainShow];
+    if (show) {
+        BOOL inMyList = MyListToggleShow(show);
+        
+        [self updateMyListStatusForShow:show];
+        
+        AnalyticsTitle analyticsTitle = inMyList ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.source = AnalyticsSourceButton;
+        labels.value = show.URN;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
+        
+        [Banner showMyList:inMyList forItemWithName:show.title inViewController:self];
+    }
 }
 
 - (IBAction)openRadioHome:(id)sender
