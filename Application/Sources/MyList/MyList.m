@@ -111,10 +111,6 @@ BOOL MyListToggleSubscriptionShow(SRGShow *show, UIView *view, BOOL withBanner)
         return NO;
     }
     
-    if (! PushService.sharedService.enabled) {
-        return NO;
-    }
-    
     BOOL toggled = NO;
     if (withBanner) {
         toggled = [PushService.sharedService toggleSubscriptionForShow:show inView:view];
