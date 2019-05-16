@@ -19,6 +19,7 @@
 #import <libextobjc/libextobjc.h>
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGDataProvider/SRGDataProvider.h>
+#import <SRGUserData/SRGUserData.h>
 
 @interface MyListViewController ()
 
@@ -69,7 +70,7 @@
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(myListStateDidChange:)
-                                               name:nil
+                                               name:SRGPreferencesDidChangeNotification
                                              object:nil];
 }
 

@@ -1643,6 +1643,7 @@
 		08BAABD71E7613F0007644D7 /* HomeMediasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediasViewController.h; sourceTree = "<group>"; };
 		08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediasViewController.m; sourceTree = "<group>"; };
 		08BAABD91E7613F0007644D7 /* HomeMediasViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeMediasViewController.storyboard; sourceTree = "<group>"; };
+		08BDB5B1228D520000335898 /* PushService+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushService+Private.h"; sourceTree = "<group>"; };
 		08C68D891D38D6F400BB8AAA /* Play SRF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play SRF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08C68DC01D38D70D00BB8AAA /* Play RTS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play RTS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08C68DF71D38D72000BB8AAA /* Play RSI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play RSI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2396,11 +2397,11 @@
 		08654B921D3CDA160040EF04 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6F4760181EB37BD1003021EA /* Categories */,
 				08AF947E217D27E40028B082 /* ActivityItemSource.h */,
 				08AF947F217D27E40028B082 /* ActivityItemSource.m */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
 				6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */,
+				6F4760181EB37BD1003021EA /* Categories */,
 				6FE686DF1EB9D57400067D40 /* ChannelService.h */,
 				6FE686E01EB9D57400067D40 /* ChannelService.m */,
 				6FE1B9171FAC34D600A58F3B /* ContentInsets.h */,
@@ -2422,6 +2423,7 @@
 				6F7218121DBE75AC00575072 /* PreviewingDelegate.m */,
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
+				08BDB5B1228D520000335898 /* PushService+Private.h */,
 				6F00875B219AA888004BD6FF /* StoreReview.h */,
 				6F00875C219AA888004BD6FF /* StoreReview.m */,
 				089EA017201148D70070E11A /* TimerTarget.h */,

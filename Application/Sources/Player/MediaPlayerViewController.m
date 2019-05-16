@@ -90,7 +90,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIButton *closeButton;
 @property (nonatomic, weak) IBOutlet GCKUICastButton *googleCastButton;
 @property (nonatomic, weak) IBOutlet UIButton *downloadButton;
-@property (nonatomic, weak) IBOutlet UIButton *subscriptionButton;
 @property (nonatomic, weak) IBOutlet UIButton *watchLaterButton;
 @property (nonatomic, weak) IBOutlet UIButton *shareButton;
 
@@ -261,8 +260,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self updateDownloadStatus];
         [self updateWatchLaterStatus];
         [self updateSharingStatus];
-        
-        [self updateSubscriptionStatus];
         
         if (letterboxController.continuousPlaybackUpcomingMedia) {
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -684,7 +681,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     [self updateWatchLaterStatus];
-    [self updateSubscriptionStatus];
     
     [self updateliveAccessViewContentForMediaType:media.mediaType force:NO];
 }
@@ -843,8 +839,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self updateDownloadStatusForMedia:mainChapterMedia];
     [self updateWatchLaterStatusForMedia:mainChapterMedia];
     [self updateSharingStatusForMedia:mainChapterMedia];
-    
-    [self updateSubscriptionStatus];
 }
 
 #pragma mark UI
@@ -1085,33 +1079,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.downloadButton.accessibilityLabel = downloadButtonAccessibilityLabel;
 }
 
-- (void)updateSubscriptionStatus
-{
-    PushService *pushService = PushService.sharedService;
-    if (! pushService || self.letterboxController.continuousPlaybackUpcomingMedia) {
-        self.subscriptionButton.hidden = YES;
-        return;
-    }
-    
-    SRGShow *show = [self mainShow];
-    if (! show) {
-        self.subscriptionButton.hidden = YES;
-        return;
-    }
-    
-    self.subscriptionButton.hidden = NO;
-    
-    BOOL subscribed = [pushService isSubscribedToShow:show];
-    if (subscribed) {
-        [self.subscriptionButton setImage:[UIImage imageNamed:@"subscription_full-48"] forState:UIControlStateNormal];
-        self.subscriptionButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Unsubscribe from show", @"Show unsubscription label");
-    }
-    else {
-        [self.subscriptionButton setImage:[UIImage imageNamed:@"subscription-48"] forState:UIControlStateNormal];
-        self.subscriptionButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Subscribe to show", @"Show subscription label");
-    }
-}
-
 - (void)updateMyListStatusForShow:(SRGShow *)show
 {
     if (MyListContainsShow(show)) {
@@ -1328,9 +1295,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         SRGMedia *media = subdivision ? [self.letterboxController.mediaComposition mediaForSubdivision:subdivision] : self.letterboxController.fullLengthMedia;
         [self reloadDataOverriddenWithMedia:media mainChapterMedia:[self mainChapterMedia]];
     }
-    else {
-        [self updateSubscriptionStatus];
-    }
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didSelectSubdivision:(SRGSubdivision *)subdivision
@@ -1505,33 +1469,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     });
 }
 
-- (IBAction)toggleSubscription:(id)sender
-{
-    PushService *pushService = PushService.sharedService;
-    if (! pushService) {
-        return;
-    }
-    
-    SRGShow *show = [self mainShow];
-    
-    BOOL toggled = [pushService toggleSubscriptionForShow:show inViewController:self];
-    if (! toggled) {
-        return;
-    }
-    
-    [self updateSubscriptionStatus];
-    
-    BOOL subscribed = [pushService isSubscribedToShow:show];
-    
-    AnalyticsTitle analyticsTitle = (subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = AnalyticsSourceButton;
-    labels.value = show.URN;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-    
-    [Banner showSubscription:subscribed forShowWithName:show.title inViewController:self];
-}
-
 - (IBAction)toggleDownload:(id)sender
 {
     SRGMedia *media = [self mainChapterMedia];
@@ -1700,9 +1637,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGShow *show = [self mainShow];
     if (show) {
-        BOOL inMyList = MyListToggleShow(show);
+        BOOL togged = MyListToggleShow(show);
+        if (! togged) {
+            return;
+        }
         
         [self updateMyListStatusForShow:show];
+        
+        BOOL inMyList = MyListContainsShow(show);
         
         AnalyticsTitle analyticsTitle = inMyList ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -1907,9 +1849,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self srg_trackPageView];
         self.fromPushNotification = NO;
     }
-    
-    // Refresh subscription status in case the user left to toggle notification in settings
-    [self updateSubscriptionStatus];
 }
 
 - (void)reachabilityDidChange:(NSNotification *)notification

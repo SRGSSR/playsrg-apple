@@ -138,7 +138,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     
     self.subscriptionButton.hidden = NO;
     
-    BOOL subscribed = [pushService isSubscribedToShow:self.show];
+    BOOL subscribed = MyListIsSubscribedToShow(self.show);
     [self.subscriptionButton setImage:subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"]
                              forState:UIControlStateNormal];
     self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Unsubscribe from show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Subscribe to show", @"Show subscription label");
@@ -164,8 +164,14 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (IBAction)toggleMyList:(id)sender
 {
-    BOOL inMyList = MyListToggleShow(self.show);
+    BOOL togged = MyListToggleShow(self.show);
+    if (! togged) {
+        return;
+    }
+    
     [self updateMyListStatus];
+    
+    BOOL inMyList = MyListContainsShow(self.show);
     
     AnalyticsTitle analyticsTitle = (inMyList) ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -178,19 +184,14 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (IBAction)toggleSubscription:(id)sender
 {
-    PushService *pushService = PushService.sharedService;
-    if (! pushService) {
-        return;
-    }
-    
-    BOOL toggled = [pushService toggleSubscriptionForShow:self.show inView:self];
+    BOOL toggled = MyListToggleSubscriptionShow(self.show, self, YES);
     if (! toggled) {
         return;
     }
     
     [self updateSubscriptionStatus];
     
-    BOOL subscribed = [pushService isSubscribedToShow:self.show];
+    BOOL subscribed = MyListIsSubscribedToShow(self.show);
     
     AnalyticsTitle analyticsTitle = (subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];

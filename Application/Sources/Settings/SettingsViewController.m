@@ -12,6 +12,7 @@
 #import "Banner.h"
 #import "Download.h"
 #import "History.h"
+#import "MyList.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "Onboarding.h"
@@ -211,8 +212,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             
             [self.requestQueue reportError:error];
             [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
-                if (! [PushService.sharedService isSubscribedToShow:show]) {
-                    [PushService.sharedService toggleSubscriptionForShow:show];
+                if (! MyListIsSubscribedToShow(show)) {
+                    MyListAddShow(show);
+                    MyListToggleSubscriptionShow(show, nil, NO);
                 }
             }];
         }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
@@ -224,8 +226,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                 
                 [self.requestQueue reportError:error];
                 [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if (! [PushService.sharedService isSubscribedToShow:show]) {
-                        [PushService.sharedService toggleSubscriptionForShow:show];
+                    if (! MyListIsSubscribedToShow(show)) {
+                        MyListAddShow(show);
+                        MyListToggleSubscriptionShow(show, nil, NO);
                     }
                 }];
             }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];

@@ -206,30 +206,6 @@
         [previewActionItems addObject:downloadAction];
     }
     
-    PushService *pushService = PushService.sharedService;
-    if (pushService && self.media.contentType != SRGContentTypeLivestream) {
-        SRGShow *show = self.media.show;
-        if (show) {
-            BOOL subscribed = [pushService isSubscribedToShow:show];
-            UIPreviewAction *subscriptionAction = [UIPreviewAction actionWithTitle:subscribed ? NSLocalizedString(@"Unsubscribe from show", @"Button label to unsubscribe from a show") : NSLocalizedString(@"Subscribe to show", @"Button label to unsubscribe to a show") style:subscribed ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-                BOOL toggled = [pushService toggleSubscriptionForShow:show inViewController:nil /* Not 'self' since dismissed */];
-                if (! toggled) {
-                    return;
-                }
-                
-                // Use !subscribed since the status has been reversed
-                AnalyticsTitle analyticsTitle = (! subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = AnalyticsSourcePeekMenu;
-                labels.value = show.URN;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-                
-                [Banner showSubscription:! subscribed forShowWithName:show.title inViewController:nil /* Not 'self' since dismissed */];
-            }];
-            [previewActionItems addObject:subscriptionAction];
-        }
-    }
-    
     NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:self.media atTime:kCMTimeZero];
     if (sharingURL) {
         UIPreviewAction *shareAction = [UIPreviewAction actionWithTitle:NSLocalizedString(@"Share", @"Button label of the sharing choice in the media preview window") style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {

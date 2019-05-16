@@ -8,6 +8,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#pragma makr My List entries
+
 /**
  *  Return `YES` if the show is in My List.
  *
@@ -30,7 +32,7 @@ OBJC_EXPORT void MyListAddShow(SRGShow * _Nonnull show);
 OBJC_EXPORT void MyListRemoveShows(NSArray<SRGShow *> * _Nullable shows);
 
 /**
- *  Toggle a show to My List. Return `YES` if the show is in My List after.
+ *  Toggle a show to My List.
  *
  *  @discussion Must be called from the main thread.
  */
@@ -42,6 +44,20 @@ OBJC_EXPORT BOOL MyListToggleShow(SRGShow * _Nonnull show);
  *  @discussion Must be called from the main thread.
  */
 OBJC_EXPORT NSSet<NSString *> * MyListShowURNs();
+
+#pragma mark Subscriptions
+
+/**
+ *  Toggle a subscription to My List.
+ *
+ *  @discussion Must be called from the main thread.
+ */
+OBJC_EXPORT BOOL MyListToggleSubscriptionShow(SRGShow * _Nonnull show, UIView * _Nullable view, BOOL withBanner);
+
+/**
+ *  Return YES iff the user has subscribed to the specified show.
+ */
+OBJC_EXPORT BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show);
 
 /**
  *  Migrate favorites (legacy plist-based way of bookmarking shows) and subscriptions, if any to My List.

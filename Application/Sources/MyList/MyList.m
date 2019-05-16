@@ -8,7 +8,7 @@
 
 #import "Favorite+Private.h"
 #import "PlayApplication.h"
-#import "PushService.h"
+#import "PushService+Private.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGUserData/SRGUserData.h>
@@ -46,6 +46,11 @@ void MyListSubscribedToShowURN(NSString *URN)
     }
 }
 
+void MyListSubscribedToShow(SRGShow *show)
+{
+    MyListSubscribedToShowURN(show.URN);
+}
+
 void MyListUnsubscribedFromShowURN(NSString *URN)
 {
     if (MyListContainsShowURN(URN)) {
@@ -53,6 +58,11 @@ void MyListUnsubscribedFromShowURN(NSString *URN)
         notifications[@"newod"] = @(NO);
         [SRGUserData.currentUserData.preferences setDictionary:notifications.copy atPath:[NSString stringWithFormat:@"%@/%@/%@", MyListPreferencePath, URN, @"notifications"] inDomain:PlayPreferenceDomain];
     }
+}
+
+void MyListUnsubscribedFromShow(SRGShow *show)
+{
+    MyListUnsubscribedFromShowURN(show.URN);
 }
 
 void MyListAddShow(SRGShow *show)
@@ -82,17 +92,57 @@ BOOL MyListToggleShow(SRGShow *show)
     BOOL contained = MyListContainsShow(show);
     if (contained) {
         MyListRemoveShows(@[show]);
-        return NO;
     }
     else {
         MyListAddShow(show);
-        return YES;
     }
+    
+    return YES;
 }
 
 NSSet<NSString *> * MyListShowURNs()
 {
     return [NSSet setWithArray:[SRGUserData.currentUserData.preferences dictionaryAtPath:MyListPreferencePath inDomain:PlayPreferenceDomain].allKeys];
+}
+
+BOOL MyListToggleSubscriptionShow(SRGShow *show, UIView *view, BOOL withBanner)
+{
+    if (! MyListContainsShow(show)) {
+        return NO;
+    }
+    
+    if (! PushService.sharedService.enabled) {
+        return NO;
+    }
+    
+    BOOL toggled = NO;
+    if (withBanner) {
+        toggled = [PushService.sharedService toggleSubscriptionForShow:show inView:view];
+    }
+    else {
+        toggled = [PushService.sharedService toggleSubscriptionForShow:show];
+    }
+    if (! toggled) {
+        return NO;
+    }
+    
+    BOOL subscribed = [PushService.sharedService isSubscribedToShow:show];
+    [SRGUserData.currentUserData.preferences setNumber:@(subscribed) atPath:[NSString stringWithFormat:@"%@/%@/%@/%@", MyListPreferencePath, show.URN, @"notifications", @"newod"] inDomain:PlayPreferenceDomain];
+    
+    return YES;
+}
+
+OBJC_EXPORT BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show)
+{
+    if (! MyListContainsShow(show)) {
+        return NO;
+    }
+    
+    if (! PushService.sharedService.enabled) {
+        return NO;
+    }
+    
+    return [SRGUserData.currentUserData.preferences numberAtPath:[NSString stringWithFormat:@"%@/%@/%@/%@", MyListPreferencePath, show.URN, @"notifications", @"newod"] inDomain:PlayPreferenceDomain].boolValue;
 }
 
 void MyListMigrate(void)

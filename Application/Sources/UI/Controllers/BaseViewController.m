@@ -219,29 +219,6 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
             }]];
         }
         
-        PushService *pushService = PushService.sharedService;
-        if (pushService && media.contentType != SRGContentTypeLivestream) {
-            SRGShow *show = media.show;
-            if (show) {
-                BOOL subscribed = [pushService isSubscribedToShow:show];
-                [alertController addAction:[UIAlertAction actionWithTitle:subscribed ? NSLocalizedString(@"Unsubscribe from show", @"Button label to unsubscribe from a show") : NSLocalizedString(@"Subscribe to show", @"Button label to unsubscribe to a show") style:subscribed ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    BOOL toggled = [pushService toggleSubscriptionForShow:show inViewController:self];
-                    if (! toggled) {
-                        return ;
-                    }
-                    
-                    // Use !subscribed since the status has been reversed
-                    AnalyticsTitle analyticsTitle = (! subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
-                    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                    labels.source = AnalyticsSourceLongPress;
-                    labels.value = show.URN;
-                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-                    
-                    [Banner showSubscription:! subscribed forShowWithName:show.title inViewController:self];
-                }]];
-            }
-        }
-        
         NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:media atTime:kCMTimeZero];
         if (sharingURL) {
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Share", @"Button label of the sharing choice in the media long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -315,26 +292,6 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
             
             [Banner showMyList:! inMyList forItemWithName:show.title inViewController:self];
         }]];
-        
-        PushService *pushService = PushService.sharedService;
-        if (pushService) {
-            BOOL subscribed = [pushService isSubscribedToShow:show];
-            [alertController addAction:[UIAlertAction actionWithTitle:subscribed ? NSLocalizedString(@"Unsubscribe from show", @"Button label to unsubscribe from a show") : NSLocalizedString(@"Subscribe to show", @"Button label to unsubscribe to a show") style:subscribed ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                BOOL toggled = [pushService toggleSubscriptionForShow:show inViewController:self];
-                if (! toggled) {
-                    return;
-                }
-                
-                // Use !subscribed since the status has been reversed
-                AnalyticsTitle analyticsTitle = (! subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = AnalyticsSourceLongPress;
-                labels.value = show.URN;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-                
-                [Banner showSubscription:! subscribed forShowWithName:show.title inViewController:self];
-            }]];
-        }
         
         NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:show];
         if (sharingURL) {

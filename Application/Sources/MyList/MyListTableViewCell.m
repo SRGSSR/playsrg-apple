@@ -8,7 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "Banner.h"
-#import "PushService.h"
+#import "MyList.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -17,6 +17,7 @@
 #import <libextobjc/libextobjc.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
+#import <SRGUserData/SRGUserData.h>
 
 @interface MyListTableViewCell ()
 
@@ -69,12 +70,12 @@
         [self updateSubscriptionStatus];
         
         [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(subscriptionStateDidChange:)
-                                                   name:PushServiceSubscriptionStateDidChangeNotification
+                                               selector:@selector(myListStateDidChange:)
+                                                   name:SRGPreferencesDidChangeNotification
                                                  object:nil];
     }
     else {
-        [NSNotificationCenter.defaultCenter removeObserver:self name:PushServiceSubscriptionStateDidChangeNotification object:nil];
+        [NSNotificationCenter.defaultCenter removeObserver:self name:SRGPreferencesDidChangeNotification object:nil];
     }
 }
 
@@ -115,8 +116,7 @@
 
 - (void)updateSubscriptionStatus
 {
-    PushService *pushService = PushService.sharedService;
-    BOOL subscribed = [pushService isSubscribedToShow:self.show];
+    BOOL subscribed = MyListIsSubscribedToShow(self.show);
     [self.subscriptionButton setImage:subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"]
                              forState:UIControlStateNormal];
     self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Unsubscribe from show", @"My List show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Subscribe to show", @"My List show subscription label");
@@ -133,17 +133,15 @@
 
 - (IBAction)toggleSubscription:(id)sender
 {
-    PushService *pushService = PushService.sharedService;
-    
-    BOOL toggled = [pushService toggleSubscriptionForShow:self.show inView:self];
+    BOOL toggled = MyListToggleSubscriptionShow(self.show, self, YES);
     if (! toggled) {
         return;
     }
     
     [self updateSubscriptionStatus];
     
-    BOOL subscribed = [pushService isSubscribedToShow:self.show];
-    
+    BOOL subscribed = MyListIsSubscribedToShow(self.show);
+
     AnalyticsTitle analyticsTitle = (subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.source = AnalyticsSourceButton;
@@ -155,7 +153,9 @@
 
 #pragma mark Notifications
 
-- (void)subscriptionStateDidChange:(NSNotification *)notification
+#pragma mark Notifications
+
+- (void)myListStateDidChange:(NSNotification *)notification
 {
     [self updateSubscriptionStatus];
 }

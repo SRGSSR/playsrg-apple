@@ -52,18 +52,18 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="254" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="voH-ZG-9Jv" userLabel="Spacer View">
-                                                        <rect key="frame" x="48" y="0.0" width="736" height="50"/>
+                                                        <rect key="frame" x="48" y="0.0" width="784" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztP-om-rhx" userLabel="Google Cast Button" customClass="GCKUICastButton">
-                                                        <rect key="frame" x="784" y="0.0" width="48" height="50"/>
+                                                        <rect key="frame" x="832" y="0.0" width="48" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" priority="999" constant="48" id="7dT-R7-Ex6"/>
                                                         </constraints>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nnp-1j-BhQ" userLabel="Download Button">
-                                                        <rect key="frame" x="832" y="0.0" width="48" height="50"/>
+                                                        <rect key="frame" x="880" y="0.0" width="48" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" priority="999" constant="48" id="DBO-au-Xpw"/>
                                                         </constraints>
@@ -71,17 +71,6 @@
                                                         <state key="normal" image="downloadable-48"/>
                                                         <connections>
                                                             <action selector="toggleDownload:" destination="HgT-ei-KY5" eventType="touchUpInside" id="ZN1-DA-CBf"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5k-Rt-4FH" userLabel="Subscription Button">
-                                                        <rect key="frame" x="880" y="0.0" width="48" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="48" id="8bb-VE-haf"/>
-                                                        </constraints>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <state key="normal" image="subscription-48"/>
-                                                        <connections>
-                                                            <action selector="toggleSubscription:" destination="HgT-ei-KY5" eventType="touchUpInside" id="FSI-Na-gMr"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFX-0J-R4d" userLabel="Watch later Button">
@@ -483,7 +472,6 @@
                         <outlet property="showLabel" destination="IOa-0n-yq2" id="m0b-8k-P2x"/>
                         <outlet property="showStackView" destination="NWy-HJ-fcx" id="6e9-XW-kw7"/>
                         <outlet property="showThumbnailImageView" destination="vef-hf-97c" id="yDZ-uc-al4"/>
-                        <outlet property="subscriptionButton" destination="n5k-Rt-4FH" id="Cb6-5W-KNz"/>
                         <outlet property="summaryLabel" destination="kRd-cW-giP" id="3dW-rU-Ugz"/>
                         <outlet property="titleLabel" destination="PeJ-A5-wlQ" id="Fi7-4j-dDj"/>
                         <outlet property="topBarView" destination="6iD-kT-jj5" id="2q1-Z6-HOm"/>
@@ -525,7 +513,6 @@
         <image name="home-22" width="22" height="22"/>
         <image name="my_list-34" width="34" height="31"/>
         <image name="share-48" width="48" height="48"/>
-        <image name="subscription-48" width="48" height="48"/>
         <image name="viewCountVideo-16" width="16" height="16"/>
         <image name="watch_later-48" width="48" height="48"/>
         <image name="youth_protection_yellow-18" width="18" height="18"/>

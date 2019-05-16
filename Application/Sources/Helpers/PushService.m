@@ -5,6 +5,7 @@
 //
 
 #import "PushService.h"
+#import "PushService+Private.h"
 
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
@@ -14,10 +15,6 @@
 #import <libextobjc/libextobjc.h>
 #import <UrbanAirship-iOS-SDK/AirshipKit.h>
 #import <UserNotifications/UserNotifications.h>
-
-NSString * const PushServiceSubscriptionStateDidChangeNotification = @"PushServiceSubscriptionStateDidChangeNotification";
-NSString * const PushServiceSubscriptionObjectKey = @"PushServiceSubscriptionObject";
-NSString * const PushServiceSubscriptionStateKey = @"PushServiceSubscriptionState";
 
 NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNotification";
 
@@ -241,11 +238,6 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     [[UAirship push] addTag:[self tagForShow:show]];
     [[UAirship push] updateRegistration];
     
-    [NSNotificationCenter.defaultCenter postNotificationName:PushServiceSubscriptionStateDidChangeNotification
-                                                      object:self
-                                                    userInfo:@{ PushServiceSubscriptionObjectKey : show,
-                                                                PushServiceSubscriptionStateKey : @YES }];
-    
     return YES;
 }
 
@@ -268,10 +260,6 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     [[UAirship push] removeTag:[self tagForShow:show]];
     [[UAirship push] updateRegistration];
     
-    [NSNotificationCenter.defaultCenter postNotificationName:PushServiceSubscriptionStateDidChangeNotification
-                                                      object:self
-                                                    userInfo:@{ PushServiceSubscriptionObjectKey : show,
-                                                                PushServiceSubscriptionStateKey : @NO }];
     return YES;
 }
 
@@ -279,7 +267,6 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 {
     for (NSString *showURN in showURNs) {
         [[UAirship push] removeTag:[self tagForURN:showURN]];        
-        // TODO: Do we have to notify?
     }
     [[UAirship push] updateRegistration];
 }
