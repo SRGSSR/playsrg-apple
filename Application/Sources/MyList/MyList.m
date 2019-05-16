@@ -32,7 +32,7 @@ void MyListAddShowURNWithDate(NSString *URN, NSDate *date)
 {
     if (! MyListContainsShowURN(URN)) {
         NSDictionary *myListEntry = @{ @"date" : @(date.timeIntervalSince1970),
-                                       @"newodNotification" : @(NO) };
+                                       @"notifications" : @{} };
         [SRGUserData.currentUserData.preferences setDictionary:myListEntry atPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, URN] inDomain:PlayPreferenceDomain];
     }
 }
@@ -40,18 +40,18 @@ void MyListAddShowURNWithDate(NSString *URN, NSDate *date)
 void MyListSubscribedToShowURN(NSString *URN)
 {
     if (MyListContainsShowURN(URN)) {
-        NSMutableDictionary *myListEntry = [SRGUserData.currentUserData.preferences dictionaryAtPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, URN] inDomain:PlayPreferenceDomain].mutableCopy;
-        myListEntry[@"newodNotification"] = @(YES);
-        [SRGUserData.currentUserData.preferences setDictionary:myListEntry.copy atPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, URN] inDomain:PlayPreferenceDomain];
+        NSMutableDictionary *notifications = [SRGUserData.currentUserData.preferences dictionaryAtPath:[NSString stringWithFormat:@"%@/%@/%@", MyListPreferencePath, URN, @"notifications"] inDomain:PlayPreferenceDomain].mutableCopy;
+        notifications[@"newod"] = @(YES);
+        [SRGUserData.currentUserData.preferences setDictionary:notifications.copy atPath:[NSString stringWithFormat:@"%@/%@/%@", MyListPreferencePath, URN, @"notifications"] inDomain:PlayPreferenceDomain];
     }
 }
 
 void MyListUnsubscribedFromShowURN(NSString *URN)
 {
     if (MyListContainsShowURN(URN)) {
-        NSMutableDictionary *myListEntry = [SRGUserData.currentUserData.preferences dictionaryAtPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, URN] inDomain:PlayPreferenceDomain].mutableCopy;
-        myListEntry[@"newodNotification"] = @(NO);
-        [SRGUserData.currentUserData.preferences setDictionary:myListEntry.copy atPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, URN] inDomain:PlayPreferenceDomain];
+        NSMutableDictionary *notifications = [SRGUserData.currentUserData.preferences dictionaryAtPath:[NSString stringWithFormat:@"%@/%@/%@", MyListPreferencePath, URN, @"notifications"] inDomain:PlayPreferenceDomain].mutableCopy;
+        notifications[@"newod"] = @(NO);
+        [SRGUserData.currentUserData.preferences setDictionary:notifications.copy atPath:[NSString stringWithFormat:@"%@/%@/%@", MyListPreferencePath, URN, @"notifications"] inDomain:PlayPreferenceDomain];
     }
 }
 
