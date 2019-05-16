@@ -25,9 +25,10 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
-@property (nonatomic, weak) IBOutlet UIButton *myListButton;
+@property (nonatomic, weak) IBOutlet UIButton *myListImageButton;
+@property (nonatomic, weak) IBOutlet UIButton *myListLabelButton;
 @property (nonatomic, weak) IBOutlet UIButton *subscriptionButton;
+@property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 
 @property (nonatomic) IBOutlet NSLayoutConstraint *logoImageViewRatio16_9Constraint; // Need to retain it, because active state removes it
 @property (nonatomic) IBOutlet NSLayoutConstraint *logoImageViewRatioBigLandscapeScreenConstraint; // Need to retain it, because active state removes it
@@ -79,6 +80,8 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     // Accommodate all kinds of usages
     self.logoImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
                                                      withScale:ImageScaleLarge];
+    
+    self.myListImageButton.accessibilityElementsHidden = YES;
 }
 
 - (void)layoutSubviews
@@ -123,9 +126,14 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 - (void)updateMyListStatus
 {
     BOOL inMyList = MyListContainsShow(self.show);
-    [self.myListButton setImage:inMyList ? [UIImage imageNamed:@"my_list_full-22"] : [UIImage imageNamed:@"my_list-22"]
+    [self.myListImageButton setImage:inMyList ? [UIImage imageNamed:@"my_list_full-22"] : [UIImage imageNamed:@"my_list-22"]
                          forState:UIControlStateNormal];
-    self.myListButton.accessibilityLabel = inMyList ? PlaySRGAccessibilityLocalizedString(@"Remove from My List", @"My List show removal label") : PlaySRGAccessibilityLocalizedString(@"Add to My List", @"My List show insertion label");
+    
+    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                  NSForegroundColorAttributeName : UIColor.whiteColor };
+    NSString *title = [inMyList ? NSLocalizedString(@"Remove from My List", @"My List show removal label in the show view") : NSLocalizedString(@"Add to My List", @"My List show insertion label in the show view") uppercaseString];
+    [self.myListLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
+                                                                               attributes:attributes] forState:UIControlStateNormal];
 }
 
 - (void)updateSubscriptionStatus
@@ -170,6 +178,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     }
     
     [self updateMyListStatus];
+    [self updateSubscriptionStatus];
     
     BOOL inMyList = MyListContainsShow(self.show);
     
