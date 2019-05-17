@@ -64,6 +64,13 @@ OBJC_EXPORT BOOL MyListToggleSubscriptionShow(SRGShow * _Nonnull show, UIView * 
  */
 OBJC_EXPORT BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show);
 
+#pragma mark PushService
+
+/**
+ * Setup needs Push Service to be setup and will synchronize subscribed shows.
+ */
+OBJC_EXPORT void MyListSetup();
+    
 #pragma mark Migration
 
 /**

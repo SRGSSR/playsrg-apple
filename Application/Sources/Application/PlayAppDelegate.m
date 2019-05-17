@@ -201,6 +201,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     
     [PushService.sharedService setup];
     [self updateApplicationBadge];
+    MyListSetup();
     
     // Local objects migration
     [Favorite migrate];

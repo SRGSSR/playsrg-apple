@@ -71,7 +71,7 @@
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(myListStateDidChange:)
                                                name:SRGPreferencesDidChangeNotification
-                                             object:nil];
+                                             object:SRGUserData.currentUserData.preferences];
 }
 
 - (void)viewWillLayoutSubviews

@@ -103,10 +103,10 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(preferencesStateDidChange:)
                                                    name:SRGPreferencesDidChangeNotification
-                                                 object:nil];
+                                                 object:SRGUserData.currentUserData.preferences];
     }
     else {
-        [NSNotificationCenter.defaultCenter removeObserver:self name:SRGPreferencesDidChangeNotification object:nil];
+        [NSNotificationCenter.defaultCenter removeObserver:self name:SRGPreferencesDidChangeNotification object:SRGUserData.currentUserData.preferences];
     }
 }
 

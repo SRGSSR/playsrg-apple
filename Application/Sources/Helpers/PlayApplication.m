@@ -6,12 +6,12 @@
 
 #import "PlayApplication.h"
 
+static NSString * const PlayApplicationRunOnceDictionaryKey = @"PlaySRGPlayApplicationRunOnce";
+
 void PlayApplicationRunOnce(void (^block)(void (^completionHandler)(BOOL success)), NSString *key, id object)
 {
     NSCParameterAssert(block);
     NSCParameterAssert(key);
-    
-    static NSString * const PlayApplicationRunOnceDictionaryKey = @"PlaySRGPlayApplicationRunOnce";
     
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     NSMutableDictionary *runOnceDictionary = [[userDefaults objectForKey:PlayApplicationRunOnceDictionaryKey] mutableCopy] ?: [NSMutableDictionary dictionary];
@@ -29,4 +29,10 @@ void PlayApplicationRunOnce(void (^block)(void (^completionHandler)(BOOL success
     if (!existingObject || (object && ![existingObject isEqual:object])) {
         block(completionHandler);
     }
+}
+
+id PlayApplicationRunOnceObjectForKey(NSString *key)
+{
+    NSDictionary *runOnceDictionary = [NSUserDefaults.standardUserDefaults objectForKey:PlayApplicationRunOnceDictionaryKey];
+    return runOnceDictionary[key];
 }

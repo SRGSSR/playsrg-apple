@@ -225,9 +225,11 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     return components[3];
 }
 
-- (void)subscribeToShowURN:(NSString *)URN
+- (void)subscribeToShowURNs:(NSSet<NSString *> *)URNs
 {
-    [[UAirship push] addTag:[self tagForShowURN:URN]];
+    for (NSString *URN in URNs) {
+        [[UAirship push] addTag:[self tagForShowURN:URN]];
+    }
     [[UAirship push] updateRegistration];
 }
 
@@ -346,7 +348,7 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
         [self unsubscribeFromShowURNs:[NSSet setWithObject:show.URN]];
     }
     else {
-        [self subscribeToShowURN:show.URN];
+        [self subscribeToShowURNs:[NSSet setWithObject:show.URN]];
     }
     
     return YES;
