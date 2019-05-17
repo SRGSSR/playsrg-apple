@@ -8,7 +8,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#pragma makr My List entries
+/**
+ *  Play domain for `SRGPreferences`.
+ */
+OBJC_EXPORT NSString * const PlayPreferenceDomain;
+
+#pragma mark My List entries
 
 /**
  *  Return `YES` if the show is in My List.
@@ -52,7 +57,7 @@ OBJC_EXPORT NSSet<NSString *> * MyListShowURNs();
  *
  *  @discussion Must be called from the main thread.
  */
-OBJC_EXPORT BOOL MyListToggleSubscriptionShow(SRGShow * _Nonnull show, UIView * _Nullable view, BOOL withBanner);
+OBJC_EXPORT BOOL MyListToggleSubscriptionShow(SRGShow * _Nonnull show, UIView * _Nullable view);
 
 /**
  *  Return YES iff the user has subscribed to the specified show.

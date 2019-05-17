@@ -122,10 +122,6 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 
 - (NSSet<NSString *> *)subscribedShowURNs
 {
-    if (! self.enabled) {
-        return NSSet.set;
-    }
-    
     NSMutableSet<NSString *> *URNs = [NSMutableSet set];
     
     NSArray<NSString *> *tags = [UAirship push].tags;
@@ -229,38 +225,16 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     return components[3];
 }
 
-- (BOOL)subscribeToShow:(SRGShow *)show
+- (void)subscribeToShow:(SRGShow *)show
 {
-    if (! self.enabled || ! show) {
-        return NO;
-    }
-    
     [[UAirship push] addTag:[self tagForShow:show]];
     [[UAirship push] updateRegistration];
-    
-    return YES;
 }
 
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show
+- (void)unsubscribeFromShow:(SRGShow *)show
 {
-    if ([self isSubscribedToShow:show]) {
-        return [self unsubscribeFromShow:show];
-    }
-    else {
-        return [self subscribeToShow:show];
-    }
-}
-
-- (BOOL)unsubscribeFromShow:(SRGShow *)show
-{
-    if (! self.enabled || ! show) {
-        return NO;
-    }
-    
     [[UAirship push] removeTag:[self tagForShow:show]];
     [[UAirship push] updateRegistration];
-    
-    return YES;
 }
 
 - (void)silenceUnsubscribtionFromShowURNs:(NSSet<NSString *> *)showURNs
@@ -273,10 +247,6 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 
 - (BOOL)isSubscribedToShow:(SRGShow *)show
 {
-    if (! self.enabled || ! show) {
-        return NO;
-    }
-    
     return [[UAirship push].tags containsObject:[self tagForShow:show]];
 }
 
@@ -372,6 +342,22 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 
 @implementation PushService (Helpers)
 
+- (BOOL)toggleSubscriptionForShow:(SRGShow *)show
+{
+    if (! self.enabled || ! show) {
+        return NO;
+    }
+    
+    if ([self isSubscribedToShow:show]) {
+        [self unsubscribeFromShow:show];
+    }
+    else {
+        [self subscribeToShow:show];
+    }
+    
+    return YES;
+}
+
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show inView:(UIView *)view
 {
     return [self toggleSubscriptionForShow:show inViewController:view.nearestViewController];
@@ -379,7 +365,7 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show inViewController:(UIViewController *)viewController
 {
-    if (! [self toggleSubscriptionForShow:show]) {
+    if (! self.enabled) {
         if (! [self presentSystemAlertForPushNotifications]) {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable notifications?", @"Question displayed at the top of an alert asking the user to enable notifications")
                                                                                      message:NSLocalizedString(@"For the application to inform you when a new episode is available, notifications must be enabled.", @"Explanation displayed in the alert asking the user to enable notifications")
@@ -393,8 +379,10 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
         }
         return NO;
     }
-    
-    return YES;
+    else {
+        [self toggleSubscriptionForShow:show];
+        return YES;
+    }
 }
 
 @end

@@ -206,7 +206,7 @@
     
     BOOL subscribed = MyListIsSubscribedToShow(self.show);
     UIPreviewAction *subscriptionAction = [UIPreviewAction actionWithTitle:subscribed ? NSLocalizedString(@"Unsubscribe from show", @"Button label to unsubscribe from a show") : NSLocalizedString(@"Subscribe to show", @"Button label to unsubscribe to a show") style:subscribed ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        BOOL toggled = MyListToggleSubscriptionShow(self.show, nil /* Not 'self.view' since dismissed */, YES);
+        BOOL toggled = MyListToggleSubscriptionShow(self.show, nil /* Not 'self.view' since dismissed */);
         if (! toggled) {
             return;
         }

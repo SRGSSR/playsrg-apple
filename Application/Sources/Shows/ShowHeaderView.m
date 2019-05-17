@@ -15,6 +15,7 @@
 
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
+#import <SRGUserData/SRGUserData.h>
 
 // Choose the good aspect ratio for the logo image view, depending of the screen size
 static const UILayoutPriority LogoImageViewAspectRatioConstraintNormalPriority = 900;
@@ -95,10 +96,17 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     [super willMoveToWindow:newWindow];
     
     if (newWindow) {
-        // TODO: MyListDidChangeNotification
+        // Ensure proper state when the view is reinserted
+        [self updateMyListStatus];
+        [self updateSubscriptionStatus];
+        
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(preferencesStateDidChange:)
+                                                   name:SRGPreferencesDidChangeNotification
+                                                 object:nil];
     }
     else {
-        // TODO: MyListDidChangeNotification
+        [NSNotificationCenter.defaultCenter removeObserver:self name:SRGPreferencesDidChangeNotification object:nil];
     }
 }
 
@@ -175,9 +183,6 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
         return;
     }
     
-    [self updateMyListStatus];
-    [self updateSubscriptionStatus];
-    
     BOOL inMyList = MyListContainsShow(self.show);
     
     AnalyticsTitle analyticsTitle = (inMyList) ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
@@ -191,12 +196,10 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (IBAction)toggleSubscription:(id)sender
 {
-    BOOL toggled = MyListToggleSubscriptionShow(self.show, self, YES);
+    BOOL toggled = MyListToggleSubscriptionShow(self.show, self);
     if (! toggled) {
         return;
     }
-    
-    [self updateSubscriptionStatus];
     
     BOOL subscribed = MyListIsSubscribedToShow(self.show);
     
@@ -207,6 +210,17 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
     
     [Banner showSubscription:subscribed forShowWithName:self.show.title inView:self];
+}
+
+#pragma mark Notifications
+
+- (void)preferencesStateDidChange:(NSNotification *)notification
+{
+    NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
+    if ([domains containsObject:PlayPreferenceDomain]) {
+        [self updateMyListStatus];
+        [self updateSubscriptionStatus];
+    }
 }
 
 @end

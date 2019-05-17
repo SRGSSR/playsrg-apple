@@ -13,7 +13,7 @@
 #import <libextobjc/libextobjc.h>
 #import <SRGUserData/SRGUserData.h>
 
-static NSString * const PlayPreferenceDomain = @"play";
+NSString * const PlayPreferenceDomain = @"play";
 
 static NSString * const MyListPreferencePath = @"myList";
 static NSString * const DatePreferencePath = @"date";
@@ -114,19 +114,20 @@ NSSet<NSString *> * MyListShowURNs()
     return [NSSet setWithArray:[SRGUserData.currentUserData.preferences dictionaryAtPath:MyListPreferencePath inDomain:PlayPreferenceDomain].allKeys];
 }
 
-BOOL MyListToggleSubscriptionShow(SRGShow *show, UIView *view, BOOL withBanner)
+BOOL MyListToggleSubscriptionShow(SRGShow *show, UIView *view)
 {
     if (! MyListContainsShow(show)) {
         return NO;
     }
     
     BOOL toggled = NO;
-    if (withBanner) {
+    if (view) {
         toggled = [PushService.sharedService toggleSubscriptionForShow:show inView:view];
     }
     else {
         toggled = [PushService.sharedService toggleSubscriptionForShow:show];
     }
+    
     if (! toggled) {
         return NO;
     }

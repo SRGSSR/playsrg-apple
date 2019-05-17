@@ -70,7 +70,7 @@
         [self updateSubscriptionStatus];
         
         [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(myListStateDidChange:)
+                                               selector:@selector(preferencesStateDidChange:)
                                                    name:SRGPreferencesDidChangeNotification
                                                  object:nil];
     }
@@ -133,12 +133,10 @@
 
 - (IBAction)toggleSubscription:(id)sender
 {
-    BOOL toggled = MyListToggleSubscriptionShow(self.show, self, YES);
+    BOOL toggled = MyListToggleSubscriptionShow(self.show, self);
     if (! toggled) {
         return;
     }
-    
-    [self updateSubscriptionStatus];
     
     BOOL subscribed = MyListIsSubscribedToShow(self.show);
 
@@ -153,11 +151,12 @@
 
 #pragma mark Notifications
 
-#pragma mark Notifications
-
-- (void)myListStateDidChange:(NSNotification *)notification
+- (void)preferencesStateDidChange:(NSNotification *)notification
 {
-    [self updateSubscriptionStatus];
+    NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
+    if ([domains containsObject:PlayPreferenceDomain]) {
+        [self updateSubscriptionStatus];
+    }
 }
 
 @end

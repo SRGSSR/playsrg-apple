@@ -11,19 +11,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PushService (Private)
 
 /**
- *  Toggle subscription for the specified show.
- */
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show;
-
-/**
  *  Add subscription for the specified show.
  */
-- (BOOL)subscribeToShow:(SRGShow *)show;
+- (void)subscribeToShow:(SRGShow *)show;
 
 /**
  *  Remove any subscription for the specified show.
  */
-- (BOOL)unsubscribeFromShow:(SRGShow *)show;
+- (void)unsubscribeFromShow:(SRGShow *)show;
 
 /**
  *  Remove any subscription for the specified show urns.
@@ -46,6 +41,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PushService (Helpers)
 
+/**
+ *  Toggle subscription for the specified show.
+ *
+ *  @discussion Return `YES` if toggled, `NO` if notifications disabled.
+ */
+- (BOOL)toggleSubscriptionForShow:(SRGShow *)show;
+
+/**
+ *  Toggle subscription for the specified show and notifified with a banner.
+ *
+ *  @discussion Return `YES` if toggled, `NO` if notifications disabled and display a a message to enabble it.
+ */
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show inView:(nullable UIView *)view;
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show inViewController:(nullable UIViewController *)viewController;
 
