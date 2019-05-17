@@ -14,13 +14,18 @@
 #import <SRGUserData/SRGUserData.h>
 
 static NSString * const PlayPreferenceDomain = @"play";
+
 static NSString * const MyListPreferencePath = @"myList";
+static NSString * const DatePreferencePath = @"date";
+static NSString * const NotificationsPreferencePath = @"notifications";
+static NSString * const NewOnDemandNotificationPreferencePath = @"newod";
 
 #pragma mark Media metadata functions
 
 BOOL MyListContainsShowURN(NSString *URN)
 {
-    return [[SRGUserData.currentUserData.preferences dictionaryAtPath:MyListPreferencePath inDomain:PlayPreferenceDomain].allKeys containsObject:URN];
+    NSString *path = [MyListPreferencePath stringByAppendingPathComponent:URN];
+    return [SRGUserData.currentUserData.preferences hasObjectAtPath:path inDomain:PlayPreferenceDomain];
 }
 
 BOOL MyListContainsShow(SRGShow *show)
@@ -31,18 +36,20 @@ BOOL MyListContainsShow(SRGShow *show)
 void MyListAddShowURNWithDate(NSString *URN, NSDate *date)
 {
     if (! MyListContainsShowURN(URN)) {
-        NSDictionary *myListEntry = @{ @"date" : @(date.timeIntervalSince1970),
-                                       @"notifications" : @{} };
-        [SRGUserData.currentUserData.preferences setDictionary:myListEntry atPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, URN] inDomain:PlayPreferenceDomain];
+        NSString *path = [MyListPreferencePath stringByAppendingPathComponent:URN];
+        NSDictionary *myListEntry = @{ DatePreferencePath : @(round(date.timeIntervalSince1970 * 1000.)),
+                                       NotificationsPreferencePath : @{ NewOnDemandNotificationPreferencePath : @NO } };
+        [SRGUserData.currentUserData.preferences setDictionary:myListEntry atPath:path inDomain:PlayPreferenceDomain];
     }
 }
 
 void MyListSubscribedToShowURN(NSString *URN)
 {
     if (MyListContainsShowURN(URN)) {
-        NSMutableDictionary *notifications = [SRGUserData.currentUserData.preferences dictionaryAtPath:[NSString stringWithFormat:@"%@/%@/%@", MyListPreferencePath, URN, @"notifications"] inDomain:PlayPreferenceDomain].mutableCopy;
-        notifications[@"newod"] = @(YES);
-        [SRGUserData.currentUserData.preferences setDictionary:notifications.copy atPath:[NSString stringWithFormat:@"%@/%@/%@", MyListPreferencePath, URN, @"notifications"] inDomain:PlayPreferenceDomain];
+        NSString *path = [[MyListPreferencePath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:NotificationsPreferencePath];
+        NSMutableDictionary *notifications = [SRGUserData.currentUserData.preferences dictionaryAtPath:path inDomain:PlayPreferenceDomain].mutableCopy;
+        notifications[NewOnDemandNotificationPreferencePath] = @YES;
+        [SRGUserData.currentUserData.preferences setDictionary:notifications.copy atPath:path inDomain:PlayPreferenceDomain];
     }
 }
 
@@ -54,9 +61,10 @@ void MyListSubscribedToShow(SRGShow *show)
 void MyListUnsubscribedFromShowURN(NSString *URN)
 {
     if (MyListContainsShowURN(URN)) {
-        NSMutableDictionary *notifications = [SRGUserData.currentUserData.preferences dictionaryAtPath:[NSString stringWithFormat:@"%@/%@/%@", MyListPreferencePath, URN, @"notifications"] inDomain:PlayPreferenceDomain].mutableCopy;
-        notifications[@"newod"] = @(NO);
-        [SRGUserData.currentUserData.preferences setDictionary:notifications.copy atPath:[NSString stringWithFormat:@"%@/%@/%@", MyListPreferencePath, URN, @"notifications"] inDomain:PlayPreferenceDomain];
+        NSString *path = [[MyListPreferencePath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:NotificationsPreferencePath];
+        NSMutableDictionary *notifications = [SRGUserData.currentUserData.preferences dictionaryAtPath:path inDomain:PlayPreferenceDomain].mutableCopy;
+        notifications[NewOnDemandNotificationPreferencePath] = @NO;
+        [SRGUserData.currentUserData.preferences setDictionary:notifications.copy atPath:path inDomain:PlayPreferenceDomain];
     }
 }
 
@@ -73,17 +81,18 @@ void MyListAddShow(SRGShow *show)
 void MyListRemoveShows(NSArray<SRGShow *> *shows)
 {
     if (shows) {
-        for (SRGShow *show in shows) {
-            [SRGUserData.currentUserData.preferences removeObjectAtPath:[NSString stringWithFormat:@"%@/%@", MyListPreferencePath, show.URN] inDomain:PlayPreferenceDomain];
-        }
         NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGShow.new, URN)];
         [PushService.sharedService silenceUnsubscribtionFromShowURNs:[shows valueForKeyPath:keyPath]];
+        
+        for (SRGShow *show in shows) {
+            NSString *path = [MyListPreferencePath stringByAppendingPathComponent:show.URN];
+            [SRGUserData.currentUserData.preferences removeObjectAtPath:path inDomain:PlayPreferenceDomain];
+        }
     }
     else {
-        [SRGUserData.currentUserData.preferences setDictionary:@{} atPath:MyListPreferencePath inDomain:PlayPreferenceDomain];
-        
         [PushService.sharedService silenceUnsubscribtionFromShowURNs:PushService.sharedService.subscribedShowURNs];
         
+        [SRGUserData.currentUserData.preferences setDictionary:@{} atPath:MyListPreferencePath inDomain:PlayPreferenceDomain];
     }
 }
 
@@ -123,7 +132,8 @@ BOOL MyListToggleSubscriptionShow(SRGShow *show, UIView *view, BOOL withBanner)
     }
     
     BOOL subscribed = [PushService.sharedService isSubscribedToShow:show];
-    [SRGUserData.currentUserData.preferences setNumber:@(subscribed) atPath:[NSString stringWithFormat:@"%@/%@/%@/%@", MyListPreferencePath, show.URN, @"notifications", @"newod"] inDomain:PlayPreferenceDomain];
+    NSString *path = [[[MyListPreferencePath stringByAppendingPathComponent:show.URN] stringByAppendingPathComponent:NotificationsPreferencePath] stringByAppendingPathComponent:NewOnDemandNotificationPreferencePath];
+    [SRGUserData.currentUserData.preferences setNumber:@(subscribed) atPath:path inDomain:PlayPreferenceDomain];
     
     return YES;
 }
@@ -138,7 +148,8 @@ OBJC_EXPORT BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show)
         return NO;
     }
     
-    return [SRGUserData.currentUserData.preferences numberAtPath:[NSString stringWithFormat:@"%@/%@/%@/%@", MyListPreferencePath, show.URN, @"notifications", @"newod"] inDomain:PlayPreferenceDomain].boolValue;
+    NSString *path = [[[MyListPreferencePath stringByAppendingPathComponent:show.URN] stringByAppendingPathComponent:NotificationsPreferencePath] stringByAppendingPathComponent:NewOnDemandNotificationPreferencePath];
+    return [SRGUserData.currentUserData.preferences numberAtPath:path inDomain:PlayPreferenceDomain].boolValue;
 }
 
 void MyListMigrate(void)
