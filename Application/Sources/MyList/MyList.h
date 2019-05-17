@@ -64,6 +64,8 @@ OBJC_EXPORT BOOL MyListToggleSubscriptionShow(SRGShow * _Nonnull show, UIView * 
  */
 OBJC_EXPORT BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show);
 
+#pragma mark Migration
+
 /**
  *  Migrate favorites (legacy plist-based way of bookmarking shows) and subscriptions, if any to My List.
  */

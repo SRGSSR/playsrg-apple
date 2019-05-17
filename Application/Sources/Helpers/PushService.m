@@ -197,14 +197,14 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 
 #pragma mrk Subscription management
 
-- (NSString *)tagForURN:(NSString *)URN
+- (NSString *)tagForShowURN:(NSString *)URN
 {
     return [NSString stringWithFormat:@"%@|%@|%@|%@", self.appIdentifier, NotificationTypeString(NotificationTypeNewOnDemandContentAvailable), self.environmentIdentifier, URN];
 }
 
 - (NSString *)tagForShow:(SRGShow *)show
 {
-    return [self tagForURN:show.URN];
+    return [self tagForShowURN:show.URN];
 }
 
 - (NSString *)showURNFromTag:(NSString *)tag
@@ -225,29 +225,23 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     return components[3];
 }
 
-- (void)subscribeToShow:(SRGShow *)show
+- (void)subscribeToShowURN:(NSString *)URN
 {
-    [[UAirship push] addTag:[self tagForShow:show]];
+    [[UAirship push] addTag:[self tagForShowURN:URN]];
     [[UAirship push] updateRegistration];
 }
 
-- (void)unsubscribeFromShow:(SRGShow *)show
+- (void)unsubscribeFromShowURNs:(NSSet<NSString *> *)URNs
 {
-    [[UAirship push] removeTag:[self tagForShow:show]];
-    [[UAirship push] updateRegistration];
-}
-
-- (void)silenceUnsubscribtionFromShowURNs:(NSSet<NSString *> *)showURNs
-{
-    for (NSString *showURN in showURNs) {
-        [[UAirship push] removeTag:[self tagForURN:showURN]];        
+    for (NSString *URN in URNs) {
+        [[UAirship push] removeTag:[self tagForShowURN:URN]];
     }
     [[UAirship push] updateRegistration];
 }
 
-- (BOOL)isSubscribedToShow:(SRGShow *)show
+- (BOOL)isSubscribedToShowURN:(NSString *)URN
 {
-    return [[UAirship push].tags containsObject:[self tagForShow:show]];
+    return [[UAirship push].tags containsObject:[self tagForShowURN:URN]];
 }
 
 #pragma mark Actions
@@ -348,11 +342,11 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
         return NO;
     }
     
-    if ([self isSubscribedToShow:show]) {
-        [self unsubscribeFromShow:show];
+    if ([self isSubscribedToShowURN:show.URN]) {
+        [self unsubscribeFromShowURNs:[NSSet setWithObject:show.URN]];
     }
     else {
-        [self subscribeToShow:show];
+        [self subscribeToShowURN:show.URN];
     }
     
     return YES;

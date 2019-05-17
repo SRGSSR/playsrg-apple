@@ -15,41 +15,59 @@
 
 NSString * const PlayPreferenceDomain = @"play";
 
-static NSString * const MyListPreferencePath = @"myList";
-static NSString * const DatePreferencePath = @"date";
-static NSString * const NotificationsPreferencePath = @"notifications";
-static NSString * const NewOnDemandNotificationPreferencePath = @"newod";
+static NSString * const PlayMyListPath = @"myList";
+static NSString * const PlayDatePath = @"date";
+static NSString * const PlayNotificationsPath = @"notifications";
+static NSString * const PlayNewOnDemandPath = @"newod";
 
-#pragma mark Media metadata functions
+#pragma mark Private
 
 BOOL MyListContainsShowURN(NSString *URN)
 {
-    NSString *path = [MyListPreferencePath stringByAppendingPathComponent:URN];
+    NSString *path = [PlayMyListPath stringByAppendingPathComponent:URN];
     return [SRGUserData.currentUserData.preferences hasObjectAtPath:path inDomain:PlayPreferenceDomain];
-}
-
-BOOL MyListContainsShow(SRGShow *show)
-{
-    return MyListContainsShowURN(show.URN);
 }
 
 void MyListAddShowURNWithDate(NSString *URN, NSDate *date)
 {
     if (! MyListContainsShowURN(URN)) {
-        NSString *path = [MyListPreferencePath stringByAppendingPathComponent:URN];
-        NSDictionary *myListEntry = @{ DatePreferencePath : @(round(date.timeIntervalSince1970 * 1000.)),
-                                       NotificationsPreferencePath : @{ NewOnDemandNotificationPreferencePath : @NO } };
+        NSString *path = [PlayMyListPath stringByAppendingPathComponent:URN];
+        NSDictionary *myListEntry = @{ PlayDatePath : @(round(date.timeIntervalSince1970 * 1000.)),
+                                       PlayNotificationsPath : @{ PlayNewOnDemandPath : @NO } };
         [SRGUserData.currentUserData.preferences setDictionary:myListEntry atPath:path inDomain:PlayPreferenceDomain];
     }
 }
 
+OBJC_EXPORT BOOL MyListIsSubscribedToShowURN(NSString * _Nonnull URN)
+{
+    if (! MyListContainsShowURN(URN)) {
+        return NO;
+    }
+    
+    if (! PushService.sharedService.enabled) {
+        return NO;
+    }
+    
+    NSString *path = [[[PlayMyListPath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
+    return [SRGUserData.currentUserData.preferences numberAtPath:path inDomain:PlayPreferenceDomain].boolValue;
+}
+
+
 void MyListSubscribedToShowURN(NSString *URN)
 {
-    if (MyListContainsShowURN(URN)) {
-        NSString *path = [[MyListPreferencePath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:NotificationsPreferencePath];
-        NSMutableDictionary *notifications = [SRGUserData.currentUserData.preferences dictionaryAtPath:path inDomain:PlayPreferenceDomain].mutableCopy;
-        notifications[NewOnDemandNotificationPreferencePath] = @YES;
-        [SRGUserData.currentUserData.preferences setDictionary:notifications.copy atPath:path inDomain:PlayPreferenceDomain];
+    if (MyListContainsShowURN(URN) && ! MyListIsSubscribedToShowURN(URN)) {
+        [PushService.sharedService subscribeToShowURN:URN];
+        NSString *path = [[[PlayMyListPath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
+        [SRGUserData.currentUserData.preferences setNumber:@YES atPath:path inDomain:PlayPreferenceDomain];
+    }
+}
+
+void MyListUnsubscribedFromShowURN(NSString *URN)
+{
+    if (MyListContainsShowURN(URN) && MyListIsSubscribedToShowURN(URN)) {
+        [PushService.sharedService unsubscribeFromShowURNs:[NSSet setWithObject:URN]];
+        NSString *path = [[[PlayMyListPath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
+        [SRGUserData.currentUserData.preferences setNumber:@NO atPath:path inDomain:PlayPreferenceDomain];
     }
 }
 
@@ -58,19 +76,16 @@ void MyListSubscribedToShow(SRGShow *show)
     MyListSubscribedToShowURN(show.URN);
 }
 
-void MyListUnsubscribedFromShowURN(NSString *URN)
-{
-    if (MyListContainsShowURN(URN)) {
-        NSString *path = [[MyListPreferencePath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:NotificationsPreferencePath];
-        NSMutableDictionary *notifications = [SRGUserData.currentUserData.preferences dictionaryAtPath:path inDomain:PlayPreferenceDomain].mutableCopy;
-        notifications[NewOnDemandNotificationPreferencePath] = @NO;
-        [SRGUserData.currentUserData.preferences setDictionary:notifications.copy atPath:path inDomain:PlayPreferenceDomain];
-    }
-}
-
 void MyListUnsubscribedFromShow(SRGShow *show)
 {
     MyListUnsubscribedFromShowURN(show.URN);
+}
+
+#pragma mark My List entries
+
+BOOL MyListContainsShow(SRGShow *show)
+{
+    return MyListContainsShowURN(show.URN);
 }
 
 void MyListAddShow(SRGShow *show)
@@ -82,17 +97,17 @@ void MyListRemoveShows(NSArray<SRGShow *> *shows)
 {
     if (shows) {
         NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGShow.new, URN)];
-        [PushService.sharedService silenceUnsubscribtionFromShowURNs:[shows valueForKeyPath:keyPath]];
+        [PushService.sharedService unsubscribeFromShowURNs:[shows valueForKeyPath:keyPath]];
         
         for (SRGShow *show in shows) {
-            NSString *path = [MyListPreferencePath stringByAppendingPathComponent:show.URN];
+            NSString *path = [PlayMyListPath stringByAppendingPathComponent:show.URN];
             [SRGUserData.currentUserData.preferences removeObjectAtPath:path inDomain:PlayPreferenceDomain];
         }
     }
     else {
-        [PushService.sharedService silenceUnsubscribtionFromShowURNs:PushService.sharedService.subscribedShowURNs];
+        [PushService.sharedService unsubscribeFromShowURNs:PushService.sharedService.subscribedShowURNs];
         
-        [SRGUserData.currentUserData.preferences setDictionary:@{} atPath:MyListPreferencePath inDomain:PlayPreferenceDomain];
+        [SRGUserData.currentUserData.preferences setDictionary:@{} atPath:PlayMyListPath inDomain:PlayPreferenceDomain];
     }
 }
 
@@ -111,8 +126,10 @@ BOOL MyListToggleShow(SRGShow *show)
 
 NSSet<NSString *> * MyListShowURNs()
 {
-    return [NSSet setWithArray:[SRGUserData.currentUserData.preferences dictionaryAtPath:MyListPreferencePath inDomain:PlayPreferenceDomain].allKeys];
+    return [NSSet setWithArray:[SRGUserData.currentUserData.preferences dictionaryAtPath:PlayMyListPath inDomain:PlayPreferenceDomain].allKeys];
 }
+
+#pragma mark Subscriptions
 
 BOOL MyListToggleSubscriptionShow(SRGShow *show, UIView *view)
 {
@@ -132,8 +149,8 @@ BOOL MyListToggleSubscriptionShow(SRGShow *show, UIView *view)
         return NO;
     }
     
-    BOOL subscribed = [PushService.sharedService isSubscribedToShow:show];
-    NSString *path = [[[MyListPreferencePath stringByAppendingPathComponent:show.URN] stringByAppendingPathComponent:NotificationsPreferencePath] stringByAppendingPathComponent:NewOnDemandNotificationPreferencePath];
+    BOOL subscribed = [PushService.sharedService isSubscribedToShowURN:show.URN];
+    NSString *path = [[[PlayMyListPath stringByAppendingPathComponent:show.URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
     [SRGUserData.currentUserData.preferences setNumber:@(subscribed) atPath:path inDomain:PlayPreferenceDomain];
     
     return YES;
@@ -141,17 +158,10 @@ BOOL MyListToggleSubscriptionShow(SRGShow *show, UIView *view)
 
 OBJC_EXPORT BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show)
 {
-    if (! MyListContainsShow(show)) {
-        return NO;
-    }
-    
-    if (! PushService.sharedService.enabled) {
-        return NO;
-    }
-    
-    NSString *path = [[[MyListPreferencePath stringByAppendingPathComponent:show.URN] stringByAppendingPathComponent:NotificationsPreferencePath] stringByAppendingPathComponent:NewOnDemandNotificationPreferencePath];
-    return [SRGUserData.currentUserData.preferences numberAtPath:path inDomain:PlayPreferenceDomain].boolValue;
+    return MyListIsSubscribedToShowURN(show.URN);
 }
+
+#pragma mark Migration
 
 void MyListMigrate(void)
 {

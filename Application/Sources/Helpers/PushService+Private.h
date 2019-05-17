@@ -11,26 +11,21 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PushService (Private)
 
 /**
- *  Add subscription for the specified show.
+ *  Add subscription for the specified show URN.
  */
-- (void)subscribeToShow:(SRGShow *)show;
-
-/**
- *  Remove any subscription for the specified show.
- */
-- (void)unsubscribeFromShow:(SRGShow *)show;
+- (void)subscribeToShowURN:(NSString *)URN;
 
 /**
  *  Remove any subscription for the specified show urns.
  *
  *  @discussion: No notification sent.
  */
-- (void)silenceUnsubscribtionFromShowURNs:(NSSet<NSString *> *)showURNs;
+- (void)unsubscribeFromShowURNs:(NSSet<NSString *> *)URNs;
 
 /**
  *  Return YES iff the user has subscribed to the specified show.
  */
-- (BOOL)isSubscribedToShow:(SRGShow *)show;
+- (BOOL)isSubscribedToShowURN:(NSString *)URN;
 
 /**
  *  Return the URNs of all shows the user has subscribed to.
