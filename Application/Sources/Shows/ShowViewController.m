@@ -13,7 +13,6 @@
 #import "MyList.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayAppDelegate.h"
-#import "PushService.h"
 #import "ShowHeaderView.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIColor+PlaySRG.h"

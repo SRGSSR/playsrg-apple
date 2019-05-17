@@ -10,7 +10,6 @@
 #import "Banner.h"
 #import "MyList.h"
 #import "NSBundle+PlaySRG.h"
-#import "PushService.h"
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
@@ -144,18 +143,11 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     if (! inMyList) {
         return;
     }
-
-    if (! PushService.sharedService.enabled) {
-        [self.subscriptionButton setImage:[UIImage imageNamed:@"subscription_disabled-22"]
-                                  forState:UIControlStateNormal];
-        self.subscriptionButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Enable application notification", @"Button displayed when application didn't enable Push notification");
-    }
-    else {
-        BOOL subscribed = MyListIsSubscribedToShow(self.show);
-        [self.subscriptionButton setImage:subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"]
-                                 forState:UIControlStateNormal];
-        self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Unsubscribe from show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Subscribe to show", @"Show subscription label");
-    }
+    
+    BOOL subscribed = MyListIsSubscribedToShow(self.show);
+    [self.subscriptionButton setImage:subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"]
+                             forState:UIControlStateNormal];
+    self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Unsubscribe from show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Subscribe to show", @"Show subscription label");
 }
 
 - (void)updateAspectRatioWithSize:(CGSize)size
