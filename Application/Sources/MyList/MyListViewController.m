@@ -69,7 +69,7 @@
     [self updateInterfaceForEditionAnimated:NO];
     
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(myListStateDidChange:)
+                                           selector:@selector(preferencesStateDidChange:)
                                                name:SRGPreferencesDidChangeNotification
                                              object:SRGUserData.currentUserData.preferences];
 }
@@ -412,9 +412,13 @@
 
 #pragma mark Notifications
 
-- (void)myListStateDidChange:(NSNotification *)notification
+- (void)preferencesStateDidChange:(NSNotification *)notification
 {
-    // TODO:
+    // Update the URN list. Unlike other media / shows list, there is no pagination in this one. A simple refresh is accepted.
+    NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
+    if ([domains containsObject:PlayPreferenceDomain]) {
+        [self refresh];
+    }
 }
 
 @end
