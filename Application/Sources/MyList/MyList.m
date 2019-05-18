@@ -101,10 +101,11 @@ void MyListRemoveShows(NSArray<SRGShow *> *shows)
         NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGShow.new, URN)];
         [PushService.sharedService unsubscribeFromShowURNs:[shows valueForKeyPath:keyPath]];
         
+        NSMutableArray<NSString *> *paths = NSMutableArray.array;
         for (SRGShow *show in shows) {
-            NSString *path = [PlayMyListPath stringByAppendingPathComponent:show.URN];
-            [SRGUserData.currentUserData.preferences removeObjectAtPath:path inDomain:PlayPreferenceDomain];
+            [paths addObject:[PlayMyListPath stringByAppendingPathComponent:show.URN]];
         }
+        [SRGUserData.currentUserData.preferences removeObjectsAtPaths:paths.copy inDomain:PlayPreferenceDomain];
     }
     else {
         [PushService.sharedService unsubscribeFromShowURNs:PushService.sharedService.subscribedShowURNs];
