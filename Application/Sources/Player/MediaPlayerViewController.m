@@ -26,7 +26,6 @@
 #import "PlayDateComponentsFormatter.h"
 #import "PlayErrors.h"
 #import "Playlist.h"
-#import "PushService.h"
 #import "RelatedContentView.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
