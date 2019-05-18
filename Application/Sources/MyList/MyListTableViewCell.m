@@ -133,7 +133,7 @@
 
 - (IBAction)toggleSubscription:(id)sender
 {
-    BOOL toggled = MyListToggleSubscriptionShow(self.show, self);
+    BOOL toggled = MyListToggleSubscriptionForShow(self.show, self);
     if (! toggled) {
         return;
     }

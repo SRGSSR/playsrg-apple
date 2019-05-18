@@ -22,49 +22,6 @@ static NSString * const PlayNewOnDemandPath = @"newod";
 
 static NSString * const SubscriptionsToMyListMigrationDoneKey = @"SubscriptionsToMyListMigrationDone";
 
-#pragma mark PushService
-
-void MyListUpdatePushService()
-{
-    if ([PlayApplicationRunOnceObjectForKey(SubscriptionsToMyListMigrationDoneKey) boolValue]) {
-        NSMutableSet *subscribedURNs = NSMutableSet.set;
-        NSDictionary<NSString *, id> *myList = [SRGUserData.currentUserData.preferences dictionaryAtPath:PlayMyListPath inDomain:PlayPreferenceDomain];
-        [myList enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull URN, id  _Nonnull entry, BOOL * _Nonnull stop) {
-            if ([entry[PlayNotificationsPath][PlayNewOnDemandPath] boolValue]) {
-                [subscribedURNs addObject:URN];
-            }
-        }];
-        NSSet *subscribedMyListURNs = subscribedURNs.copy;
-        NSSet *subscribedPushServiceURNs = PushService.sharedService.subscribedShowURNs;
-        
-        if (! [subscribedMyListURNs isEqualToSet:subscribedPushServiceURNs]) {
-            NSPredicate *toAddPredicate = [NSPredicate predicateWithFormat:@"! SELF IN %@", subscribedPushServiceURNs];
-            NSSet<NSString *> *toAddURNs = [subscribedMyListURNs filteredSetUsingPredicate:toAddPredicate];
-            if (toAddURNs.count > 0) {
-                [PushService.sharedService subscribeToShowURNs:toAddURNs];
-            }
-            
-            NSPredicate *toRemovePredicate = [NSPredicate predicateWithFormat:@"! SELF IN %@", subscribedMyListURNs];
-            NSSet<NSString *> *toRemoveURNs = [subscribedPushServiceURNs filteredSetUsingPredicate:toRemovePredicate];
-            if (toRemoveURNs.count > 0) {
-                [PushService.sharedService unsubscribeFromShowURNs:toRemoveURNs];
-            }
-        }
-    }
-}
-
-void MyListSetup()
-{
-    MyListUpdatePushService();
-    
-    [NSNotificationCenter.defaultCenter addObserverForName:SRGPreferencesDidChangeNotification object:SRGUserData.currentUserData.preferences queue:nil usingBlock:^(NSNotification * _Nonnull notification) {
-        NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
-        if ([domains containsObject:PlayPreferenceDomain]) {
-            MyListUpdatePushService();
-        }
-    }];
-}
-
 #pragma mark Private
 
 BOOL MyListContainsShowURN(NSString *URN)
@@ -95,33 +52,57 @@ BOOL MyListIsSubscribedToShowURN(NSString * _Nonnull URN)
     return [SRGUserData.currentUserData.preferences numberAtPath:path inDomain:PlayPreferenceDomain].boolValue;
 }
 
-
+// Force subscription, even if Push Notifications is disableed.
 void MyListSubscribedToShowURN(NSString *URN)
 {
     if (MyListContainsShowURN(URN) && ! MyListIsSubscribedToShowURN(URN)) {
-        [PushService.sharedService subscribeToShowURNs:[NSSet setWithObject:URN]];
         NSString *path = [[[PlayMyListPath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
         [SRGUserData.currentUserData.preferences setNumber:@YES atPath:path inDomain:PlayPreferenceDomain];
     }
 }
 
-void MyListUnsubscribedFromShowURN(NSString *URN)
+#pragma mark PushService
+
+void MyListUpdatePushService(void)
 {
-    if (MyListContainsShowURN(URN) && MyListIsSubscribedToShowURN(URN)) {
-        [PushService.sharedService unsubscribeFromShowURNs:[NSSet setWithObject:URN]];
-        NSString *path = [[[PlayMyListPath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
-        [SRGUserData.currentUserData.preferences setNumber:@NO atPath:path inDomain:PlayPreferenceDomain];
+    if ([PlayApplicationRunOnceObjectForKey(SubscriptionsToMyListMigrationDoneKey) boolValue]) {
+        NSMutableSet *subscribedURNs = NSMutableSet.set;
+        for (NSString *URN in MyListShowURNs()) {
+            if (MyListIsSubscribedToShowURN(URN)) {
+                [subscribedURNs addObject:URN];
+            }
+        }
+        NSSet *subscribedMyListURNs = subscribedURNs.copy;
+        NSSet *subscribedPushServiceURNs = PushService.sharedService.subscribedShowURNs;
+        
+        if (! [subscribedMyListURNs isEqualToSet:subscribedPushServiceURNs]) {
+            NSPredicate *toAddPredicate = [NSPredicate predicateWithFormat:@"! SELF IN %@", subscribedPushServiceURNs];
+            NSSet<NSString *> *toAddURNs = [subscribedMyListURNs filteredSetUsingPredicate:toAddPredicate];
+            if (toAddURNs.count > 0) {
+                [PushService.sharedService subscribeToShowURNs:toAddURNs];
+            }
+            
+            NSPredicate *toRemovePredicate = [NSPredicate predicateWithFormat:@"! SELF IN %@", subscribedMyListURNs];
+            NSSet<NSString *> *toRemoveURNs = [subscribedPushServiceURNs filteredSetUsingPredicate:toRemovePredicate];
+            if (toRemoveURNs.count > 0) {
+                [PushService.sharedService unsubscribeFromShowURNs:toRemoveURNs];
+            }
+        }
+        
+        NSCAssert([subscribedMyListURNs isEqualToSet:PushService.sharedService.subscribedShowURNs], @"Subscribed My List shows have to be equal to Push Service subscribed shows");
     }
 }
 
-void MyListSubscribedToShow(SRGShow *show)
+void MyListSetup(void)
 {
-    MyListSubscribedToShowURN(show.URN);
-}
-
-void MyListUnsubscribedFromShow(SRGShow *show)
-{
-    MyListUnsubscribedFromShowURN(show.URN);
+    MyListUpdatePushService();
+    
+    [NSNotificationCenter.defaultCenter addObserverForName:SRGPreferencesDidChangeNotification object:SRGUserData.currentUserData.preferences queue:nil usingBlock:^(NSNotification * _Nonnull notification) {
+        NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
+        if ([domains containsObject:PlayPreferenceDomain]) {
+            MyListUpdatePushService();
+        }
+    }];
 }
 
 #pragma mark My List entries
@@ -152,8 +133,6 @@ void MyListRemoveShows(NSArray<SRGShow *> *shows)
         [paths addObject:[PlayMyListPath stringByAppendingPathComponent:URN]];
     }
     [SRGUserData.currentUserData.preferences removeObjectsAtPaths:paths.copy inDomain:PlayPreferenceDomain];
-    
-    MyListUpdatePushService();
 }
 
 BOOL MyListToggleShow(SRGShow *show)
@@ -171,12 +150,13 @@ BOOL MyListToggleShow(SRGShow *show)
 
 NSSet<NSString *> * MyListShowURNs()
 {
-    return [NSSet setWithArray:[SRGUserData.currentUserData.preferences dictionaryAtPath:PlayMyListPath inDomain:PlayPreferenceDomain].allKeys];
+    NSArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences dictionaryAtPath:PlayMyListPath inDomain:PlayPreferenceDomain].allKeys;
+    return (URNs) ? [NSSet setWithArray:URNs] : NSSet.set;
 }
 
 #pragma mark Subscriptions
 
-BOOL MyListToggleSubscriptionShow(SRGShow *show, UIView *view)
+BOOL MyListToggleSubscriptionForShow(SRGShow *show, UIView *view)
 {
     if (! MyListContainsShow(show)) {
         return NO;

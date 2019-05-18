@@ -214,7 +214,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
                 if (! MyListIsSubscribedToShow(show)) {
                     MyListAddShow(show);
-                    MyListToggleSubscriptionShow(show, nil);
+                    MyListToggleSubscriptionForShow(show, nil);
                 }
             }];
         }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
@@ -228,7 +228,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                 [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
                     if (! MyListIsSubscribedToShow(show)) {
                         MyListAddShow(show);
-                        MyListToggleSubscriptionShow(show, nil);
+                        MyListToggleSubscriptionForShow(show, nil);
                     }
                 }];
             }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
