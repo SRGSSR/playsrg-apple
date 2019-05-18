@@ -16,6 +16,7 @@
 #import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowVerticalListTableViewCell.h"
 #import "HomeStatusHeaderView.h"
+#import "Mylist.h"
 #import "NavigationController.h"
 #import "Notification.h"
 #import "NotificationsViewController.h"
@@ -29,6 +30,7 @@
 #import <PPBadgeView/PPBadgeView.h>
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGDataProvider/SRGDataProvider.h>
+#import <SRGUserData/SRGUserData.h>
 
 @interface HomeViewController ()
 
@@ -48,7 +50,8 @@
 
 @property (nonatomic, getter=isTopicsLoaded) BOOL topicsLoaded;
 @property (nonatomic, getter=isEventsLoaded) BOOL eventsLoaded;
-@property (nonatomic, getter=isMyListLoaded) BOOL myListLoaded;
+@property (nonatomic, getter=isMyListTVLoaded) BOOL myListTVLoaded;
+@property (nonatomic, getter=isMyListRadioLoaded) BOOL myListRadioLoaded;
 
 @end
 
@@ -137,6 +140,10 @@
                                            selector:@selector(didReceiveNotification:)
                                                name:PushServiceDidReceiveNotification
                                              object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(preferencesStateDidChange:)
+                                               name:SRGPreferencesDidChangeNotification
+                                             object:SRGUserData.currentUserData.preferences];
     
     [self updateStatusHeaderViewLayout];
     [self.tableView reloadData];
@@ -377,8 +384,12 @@
         [homeSectionInfo refreshWithRequestQueue:requestQueue completionBlock:^(NSError * _Nullable error) {
             // Refresh as data becomes available for better perceived loading times
             if (! error) {
-                if (homeSection == HomeSectionTVMyListShows || homeSection == HomeSectionRadioMyListShows) {
-                    self.myListLoaded = YES;
+                if (homeSection == HomeSectionTVMyListShows) {
+                    self.myListTVLoaded = YES;
+                    [self synchronizeHomeSections];
+                }
+                else if (homeSection == HomeSectionRadioMyListShows) {
+                    self.myListRadioLoaded = YES;
                     [self synchronizeHomeSections];
                 }
                 [self.tableView reloadData];
@@ -417,12 +428,21 @@
                 [homeSectionInfos addObject:homeSectionInfo];
             }
         }
-        else if (homeSection.integerValue == HomeSectionTVMyListShows || homeSection.integerValue == HomeSectionRadioMyListShows) {
+        else if (homeSection.integerValue == HomeSectionTVMyListShows) {
+            HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:nil title:TitleForHomeSection(homeSection.integerValue)];
+            if (homeSectionInfo.items.count != 0) {
+                [homeSectionInfos addObject:homeSectionInfo];
+            }
+            else if (! self.myListTVLoaded) {
+                [homeSectionInfos addObject:homeSectionInfo];
+            }
+        }
+        else if (homeSection.integerValue == HomeSectionRadioMyListShows) {
             HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:self.radioChannel.uid title:TitleForHomeSection(homeSection.integerValue)];
             if (homeSectionInfo.items.count != 0) {
                 [homeSectionInfos addObject:homeSectionInfo];
             }
-            else if (! self.myListLoaded) {
+            else if (! self.myListRadioLoaded) {
                 [homeSectionInfos addObject:homeSectionInfo];
             }
         }
@@ -627,6 +647,16 @@
 - (void)didReceiveNotification:(NSNotification *)notification
 {
     [self updateBarButtonItems];
+}
+
+- (void)preferencesStateDidChange:(NSNotification *)notification
+{
+    if ([self.homeSections containsObject:@(HomeSectionTVMyListShows)] || [self.homeSections containsObject:@(HomeSectionRadioMyListShows)]) {
+        NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
+        if ([domains containsObject:PlayPreferenceDomain]) {
+            [self refresh];
+        }
+    }
 }
 
 @end
