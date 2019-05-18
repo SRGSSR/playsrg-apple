@@ -179,14 +179,14 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Syd-sC-Oze" userLabel="Date Stack View">
                                                         <rect key="frame" x="0.0" y="0.0" width="996" height="16"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="&lt;date&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaZ-CL-kRu" userLabel="Date Label">
-                                                                <rect key="frame" x="0.0" y="0.0" width="676.5" height="16"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="1000" text="&lt;date&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaZ-CL-kRu" userLabel="Date Label">
+                                                                <rect key="frame" x="0.0" y="0.0" width="191" height="16"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="viewCountVideo-16" translatesAutoresizingMaskIntoConstraints="NO" id="dTA-Ue-XAg" userLabel="View Count Image View">
-                                                                <rect key="frame" x="686.5" y="0.0" width="16" height="16"/>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="viewCountVideo-16" translatesAutoresizingMaskIntoConstraints="NO" id="dTA-Ue-XAg" userLabel="View Count Image View">
+                                                                <rect key="frame" x="201" y="0.0" width="16" height="16"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
@@ -194,13 +194,17 @@
                                                                     <constraint firstAttribute="width" constant="16" id="FLK-Iq-Gda"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;views&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grW-q6-oE3" userLabel="View Count Label">
-                                                                <rect key="frame" x="712.5" y="0.0" width="241.5" height="16"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="1000" text="&lt;views&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grW-q6-oE3" userLabel="View Count Label">
+                                                                <rect key="frame" x="227" y="0.0" width="191.5" height="16"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                 <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="wbX-Ki-mXk" userLabel="Spacer View">
+                                                                <rect key="frame" x="428.5" y="0.0" width="525.5" height="16"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuO-1V-zBs" userLabel="Details Button">
                                                                 <rect key="frame" x="964" y="0.0" width="32" height="16"/>
                                                                 <constraints>
