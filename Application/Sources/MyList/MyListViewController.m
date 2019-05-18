@@ -21,7 +21,7 @@
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGUserData/SRGUserData.h>
 
-@interface MyListViewController ()
+@interface MyListViewController () <MyListTableViewCellDelegate>
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
 
@@ -267,6 +267,19 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
+#pragma mark MyListTableViewCellDelegate protocol
+
+- (void)myListTableViewCell:(MyListTableViewCell *)myListTableViewCell deleteShow:(SRGShow *)show
+{
+    MyListRemoveShows(@[show]);
+    [self updateInterfaceForEditionAnimated:YES];
+    
+    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+    labels.value = show.URN;
+    labels.source = AnalyticsSourceSwipe;
+    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemove labels:labels];
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -290,6 +303,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(MyListTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.show = self.shows[indexPath.row];
+    cell.cellDelegate = self;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
