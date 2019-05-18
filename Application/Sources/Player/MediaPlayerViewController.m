@@ -17,6 +17,7 @@
 #import "LiveAccessView.h"
 #import "ModalTransition.h"
 #import "MyList.h"
+#import "MyListPlayerButtonView.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -126,7 +127,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIStackView *showStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *showThumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *showLabel;
-@property (nonatomic, weak) IBOutlet UIButton *myListButton;
+@property (nonatomic, weak) IBOutlet MyListPlayerButtonView *myListButtonView;
 
 @property (nonatomic, weak) IBOutlet UIView *radioHomeView;
 @property (nonatomic, weak) IBOutlet UIButton *radioHomeButton;
@@ -1080,14 +1081,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)updateMyListStatusForShow:(SRGShow *)show
 {
-    if (MyListContainsShow(show)) {
-        [self.myListButton setImage:[UIImage imageNamed:@"my_list_full-34"] forState:UIControlStateNormal];
-        self.myListButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove from My List", @"Show My List removal label");
-    }
-    else {
-        [self.myListButton setImage:[UIImage imageNamed:@"my_list-34"] forState:UIControlStateNormal];
-        self.myListButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Add to My List", @"Show My List creation label");
-    }
+    self.myListButtonView.inMyList = MyListContainsShow(show);
 }
 
 - (void)updateliveAccessViewContentForMediaType:(SRGMediaType)mediaType force:(BOOL)force
@@ -1632,29 +1626,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self setDetailsExpanded:! self.detailsExpanded animated:YES];
 }
 
-- (IBAction)toggleMyList:(id)sender
-{
-    SRGShow *show = [self mainShow];
-    if (show) {
-        BOOL togged = MyListToggleShow(show);
-        if (! togged) {
-            return;
-        }
-        
-        [self updateMyListStatusForShow:show];
-        
-        BOOL inMyList = MyListContainsShow(show);
-        
-        AnalyticsTitle analyticsTitle = inMyList ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = AnalyticsSourceButton;
-        labels.value = show.URN;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-        
-        [Banner showMyList:inMyList forItemWithName:show.title inViewController:self];
-    }
-}
-
 - (IBAction)openRadioHome:(id)sender
 {
     RadioChannel *radioChannel = [self radioChannel];
@@ -1775,6 +1746,29 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         [self.letterboxView setFullScreen:(gestureRecognizer.scale > 1.f) animated:YES];
+    }
+}
+
+- (IBAction)toggleMyList:(UIPinchGestureRecognizer *)gestureRecognizer
+{
+    SRGShow *show = [self mainShow];
+    if (show) {
+        BOOL togged = MyListToggleShow(show);
+        if (! togged) {
+            return;
+        }
+        
+        [self updateMyListStatusForShow:show];
+        
+        BOOL inMyList = MyListContainsShow(show);
+        
+        AnalyticsTitle analyticsTitle = inMyList ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.source = AnalyticsSourceButton;
+        labels.value = show.URN;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
+        
+        [Banner showMyList:inMyList forItemWithName:show.title inViewController:self];
     }
 }
 

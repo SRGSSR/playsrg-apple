@@ -129,7 +129,7 @@
                                 <rect key="frame" x="0.0" y="596" width="1024" height="770"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4mL-6P-GaC" userLabel="Info Stack View">
-                                        <rect key="frame" x="4" y="0.0" width="1016" height="780.5"/>
+                                        <rect key="frame" x="4" y="0.0" width="1016" height="628"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="drV-Ca-Mf5">
                                                 <rect key="frame" x="10" y="12" width="996" height="58"/>
@@ -295,10 +295,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NWy-HJ-fcx" userLabel="Show Stack View">
-                                                <rect key="frame" x="10" y="390" width="996" height="262.5"/>
+                                                <rect key="frame" x="10" y="390" width="996" height="110"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="juP-Lx-1bq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="106.5" height="262.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="106.5" height="110"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vef-hf-97c">
                                                                 <rect key="frame" x="0.0" y="0.0" width="106.5" height="60"/>
@@ -308,41 +308,41 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SY3-mr-l6N" userLabel="Spacer View">
-                                                                <rect key="frame" x="0.0" y="60" width="106.5" height="202.5"/>
+                                                                <rect key="frame" x="0.0" y="60" width="106.5" height="50"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-9E-Q5j">
-                                                        <rect key="frame" x="114.5" y="0.0" width="817.5" height="262.5"/>
+                                                        <rect key="frame" x="114.5" y="0.0" width="823.5" height="110"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;show&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOa-0n-yq2">
-                                                                <rect key="frame" x="0.0" y="0.0" width="817.5" height="18"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;show&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOa-0n-yq2">
+                                                                <rect key="frame" x="0.0" y="0.0" width="823.5" height="18"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                 <color key="textColor" white="0.67000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kBD-eM-IYG" userLabel="Spacer View">
-                                                                <rect key="frame" x="0.0" y="18" width="817.5" height="244.5"/>
+                                                                <rect key="frame" x="0.0" y="18" width="823.5" height="92"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGX-bL-mGy" userLabel="My List Button">
-                                                        <rect key="frame" x="940" y="0.0" width="56" height="262.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rH9-bM-n9J" customClass="MyListPlayerButtonView">
+                                                        <rect key="frame" x="946" y="0.0" width="50" height="110"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="56" id="tCe-Gk-Xxb"/>
+                                                            <constraint firstAttribute="width" constant="50" id="zyS-V2-ldh"/>
                                                         </constraints>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <state key="normal" image="my_list-34"/>
                                                         <connections>
-                                                            <action selector="toggleMyList:" destination="HgT-ei-KY5" eventType="touchUpInside" id="Y7z-gh-u6x"/>
+                                                            <outletCollection property="gestureRecognizers" destination="fuf-om-cZ9" appends="YES" id="dje-xO-J1Q"/>
                                                         </connections>
-                                                    </button>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6z-kO-Hg8" userLabel="Radio Home View">
-                                                <rect key="frame" x="10" y="660.5" width="996" height="58"/>
+                                                <rect key="frame" x="10" y="508" width="996" height="58"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwq-4e-QPr" userLabel="Radio Home Button">
                                                         <rect key="frame" x="-2" y="10" width="1000" height="38"/>
@@ -372,14 +372,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4k-XC-bcU" userLabel="Spacer View">
-                                                <rect key="frame" x="10" y="726.5" width="996" height="10"/>
+                                                <rect key="frame" x="10" y="574" width="996" height="10"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="999" constant="10" id="HYL-ex-0MM"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JPp-bl-8B9" userLabel="Related Contents Stack View">
-                                                <rect key="frame" x="10" y="744.5" width="996" height="24"/>
+                                                <rect key="frame" x="10" y="592" width="996" height="24"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More on this subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-Ao-wDq">
                                                         <rect key="frame" x="0.0" y="0.0" width="996" height="18"/>
@@ -454,7 +454,7 @@
                         <outlet property="livestreamButtonImageView" destination="SWT-Kh-dsw" id="8Tc-Ht-E8t"/>
                         <outlet property="livestreamView" destination="drV-Ca-Mf5" id="1v8-ix-Ovc"/>
                         <outlet property="mediaInfoStackView" destination="44Z-TF-U9J" id="MCN-kL-Vf4"/>
-                        <outlet property="myListButton" destination="OGX-bL-mGy" id="awx-nk-Xth"/>
+                        <outlet property="myListButtonView" destination="rH9-bM-n9J" id="Pum-jf-Wd8"/>
                         <outlet property="nextProgramLabel" destination="TWK-yS-nud" id="1Me-Wn-V7J"/>
                         <outlet property="playerAspectRatio16_9Constraint" destination="sHT-jJ-Lxy" id="sae-Wk-L16"/>
                         <outlet property="playerAspectRatioBigLandscapeScreenConstraint" destination="d4e-DG-s50" id="Xip-HB-R7g"/>
@@ -486,7 +486,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YfY-ML-gnW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="dXH-ia-Dmj" customClass="SRGLetterboxController"/>
-                <tapGestureRecognizer id="pQW-g8-tXr">
+                <tapGestureRecognizer id="pQW-g8-tXr" userLabel="User Activity Gesture Recognizer">
                     <connections>
                         <action selector="toggleUserInterfaceVisibility:" destination="HgT-ei-KY5" id="3LP-Sq-5d0"/>
                     </connections>
@@ -501,6 +501,11 @@
                         <action selector="pullDown:" destination="HgT-ei-KY5" id="Eku-5S-LqA"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="fuf-om-cZ9" userLabel="My List Gesture Recognizer">
+                    <connections>
+                        <action selector="toggleMyList:" destination="HgT-ei-KY5" id="UCq-0f-6jP"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-144.80000000000001" y="143.47826086956522"/>
         </scene>
@@ -511,7 +516,6 @@
         <image name="downloadable-48" width="48" height="48"/>
         <image name="expand_22" width="22" height="22"/>
         <image name="home-22" width="22" height="22"/>
-        <image name="my_list-34" width="34" height="31"/>
         <image name="share-48" width="48" height="48"/>
         <image name="viewCountVideo-16" width="16" height="16"/>
         <image name="watch_later-48" width="48" height="48"/>
