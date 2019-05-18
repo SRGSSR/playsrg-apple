@@ -66,7 +66,7 @@ void MyListSubscribedToShowURN(NSString *URN)
 void MyListUpdatePushService(void)
 {
     if ([PlayApplicationRunOnceObjectForKey(SubscriptionsToMyListMigrationDoneKey) boolValue]) {
-        NSMutableSet *subscribedURNs = NSMutableSet.set;
+        NSMutableSet *subscribedURNs = [NSMutableSet set];
         for (NSString *URN in MyListShowURNs()) {
             if (MyListIsSubscribedToShowURN(URN)) {
                 [subscribedURNs addObject:URN];
@@ -151,7 +151,7 @@ BOOL MyListToggleShow(SRGShow *show)
 NSSet<NSString *> * MyListShowURNs()
 {
     NSArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences dictionaryAtPath:PlayMyListPath inDomain:PlayPreferenceDomain].allKeys;
-    return (URNs) ? [NSSet setWithArray:URNs] : NSSet.set;
+    return (URNs) ? [NSSet setWithArray:URNs] : [NSSet set];
 }
 
 #pragma mark Subscriptions

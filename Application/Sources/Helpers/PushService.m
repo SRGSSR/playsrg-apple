@@ -126,7 +126,7 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     
     NSArray<NSString *> *tags = [UAirship push].tags;
     if (tags.count == 0) {
-        return NSSet.set;
+        return [NSSet set];
     }
     
     for (NSString *tag in tags) {
