@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,31 +22,33 @@
                         <constraint firstAttribute="width" secondItem="Sae-FF-dJE" secondAttribute="height" multiplier="16:9" priority="900" id="5xa-GV-ZZN"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyW-ox-kMV">
-                    <rect key="frame" x="8" y="220.5" width="355" height="22"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="&lt;subtitle&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ART-wi-iC6">
-                    <rect key="frame" x="8" y="250.5" width="355" height="20.5"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                    <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BCR-3L-grh">
+                    <rect key="frame" x="8" y="216.5" width="355" height="54.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyW-ox-kMV">
+                            <rect key="frame" x="0.0" y="0.0" width="355" height="26"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="&lt;subtitle&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ART-wi-iC6">
+                            <rect key="frame" x="0.0" y="34" width="355" height="20.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Sae-FF-dJE" secondAttribute="trailing" id="1sa-pg-Bet"/>
-                <constraint firstAttribute="trailing" secondItem="ART-wi-iC6" secondAttribute="trailing" constant="8" id="IZG-Cl-7hT"/>
                 <constraint firstItem="Sae-FF-dJE" firstAttribute="top" secondItem="7YI-iM-3v4" secondAttribute="top" id="QYa-Rv-4Oa"/>
-                <constraint firstAttribute="trailing" secondItem="yyW-ox-kMV" secondAttribute="trailing" constant="8" id="UGd-t4-bFJ"/>
-                <constraint firstItem="ART-wi-iC6" firstAttribute="leading" secondItem="7YI-iM-3v4" secondAttribute="leading" constant="8" id="aYV-El-gtn"/>
+                <constraint firstAttribute="trailing" secondItem="BCR-3L-grh" secondAttribute="trailing" constant="8" id="au6-4S-Yf9"/>
+                <constraint firstItem="BCR-3L-grh" firstAttribute="leading" secondItem="7YI-iM-3v4" secondAttribute="leading" constant="8" id="bqh-d5-K0K"/>
                 <constraint firstItem="Sae-FF-dJE" firstAttribute="leading" secondItem="7YI-iM-3v4" secondAttribute="leading" id="cay-wg-9km"/>
-                <constraint firstItem="yyW-ox-kMV" firstAttribute="top" secondItem="Sae-FF-dJE" secondAttribute="bottom" constant="12" id="hgq-aS-ftl"/>
-                <constraint firstAttribute="bottom" secondItem="ART-wi-iC6" secondAttribute="bottom" constant="8" id="k3s-pp-sCt"/>
-                <constraint firstItem="yyW-ox-kMV" firstAttribute="leading" secondItem="7YI-iM-3v4" secondAttribute="leading" constant="8" id="n3R-yE-ON1"/>
-                <constraint firstItem="ART-wi-iC6" firstAttribute="top" secondItem="yyW-ox-kMV" secondAttribute="bottom" constant="8" id="nt7-xK-SZH"/>
+                <constraint firstItem="BCR-3L-grh" firstAttribute="top" secondItem="Sae-FF-dJE" secondAttribute="bottom" constant="8" id="nrF-zo-otR"/>
+                <constraint firstAttribute="bottom" secondItem="BCR-3L-grh" secondAttribute="bottom" constant="8" id="qTU-KJ-aMM"/>
             </constraints>
             <connections>
                 <outlet property="logoImageView" destination="Sae-FF-dJE" id="WXs-zb-rU3"/>
