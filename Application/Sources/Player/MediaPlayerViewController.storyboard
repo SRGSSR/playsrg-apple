@@ -129,7 +129,7 @@
                                 <rect key="frame" x="0.0" y="596" width="1024" height="770"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4mL-6P-GaC" userLabel="Info Stack View">
-                                        <rect key="frame" x="4" y="0.0" width="1016" height="628"/>
+                                        <rect key="frame" x="4" y="0.0" width="1016" height="646"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="drV-Ca-Mf5">
                                                 <rect key="frame" x="10" y="12" width="996" height="58"/>
@@ -294,8 +294,15 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILj-5e-L39" userLabel="Line View">
+                                                <rect key="frame" x="10" y="390" width="996" height="1"/>
+                                                <color key="backgroundColor" red="0.19608062509999999" green="0.19607549909999999" blue="0.1960765421" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="999" constant="1" id="o9D-pv-W3U"/>
+                                                </constraints>
+                                            </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NWy-HJ-fcx" userLabel="Show Stack View">
-                                                <rect key="frame" x="10" y="390" width="996" height="110"/>
+                                                <rect key="frame" x="10" y="399" width="996" height="110"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="juP-Lx-1bq">
                                                         <rect key="frame" x="0.0" y="0.0" width="106.5" height="110"/>
@@ -341,8 +348,15 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWz-P2-92a" userLabel="Line View">
+                                                <rect key="frame" x="10" y="517" width="996" height="1"/>
+                                                <color key="backgroundColor" red="0.19608062509999999" green="0.19607549909999999" blue="0.1960765421" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="999" constant="1" id="VC0-DF-aen"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6z-kO-Hg8" userLabel="Radio Home View">
-                                                <rect key="frame" x="10" y="508" width="996" height="58"/>
+                                                <rect key="frame" x="10" y="526" width="996" height="58"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwq-4e-QPr" userLabel="Radio Home Button">
                                                         <rect key="frame" x="-2" y="10" width="1000" height="38"/>
@@ -372,14 +386,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4k-XC-bcU" userLabel="Spacer View">
-                                                <rect key="frame" x="10" y="574" width="996" height="10"/>
+                                                <rect key="frame" x="10" y="592" width="996" height="10"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="999" constant="10" id="HYL-ex-0MM"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JPp-bl-8B9" userLabel="Related Contents Stack View">
-                                                <rect key="frame" x="10" y="592" width="996" height="24"/>
+                                                <rect key="frame" x="10" y="610" width="996" height="24"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More on this subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-Ao-wDq">
                                                         <rect key="frame" x="0.0" y="0.0" width="996" height="18"/>
@@ -435,6 +449,7 @@
                     </view>
                     <connections>
                         <outlet property="availabilibityLabel" destination="5B6-wH-ilY" id="PQH-MM-Ffr"/>
+                        <outlet property="bottomShowStackView" destination="KWz-P2-92a" id="k6g-yE-i0a"/>
                         <outlet property="channelInfoStackView" destination="aiH-rN-Erx" id="IsT-Kk-daa"/>
                         <outlet property="channelLabel" destination="3Pv-nN-gHG" id="wwG-rc-fVp"/>
                         <outlet property="closeButton" destination="URR-EB-goh" id="GT8-V7-lKB"/>
@@ -475,6 +490,7 @@
                         <outlet property="summaryLabel" destination="kRd-cW-giP" id="3dW-rU-Ugz"/>
                         <outlet property="titleLabel" destination="PeJ-A5-wlQ" id="Fi7-4j-dDj"/>
                         <outlet property="topBarView" destination="6iD-kT-jj5" id="2q1-Z6-HOm"/>
+                        <outlet property="topShowStackView" destination="ILj-5e-L39" id="ntc-RW-abX"/>
                         <outlet property="viewCountImageView" destination="dTA-Ue-XAg" id="cu3-Wd-brF"/>
                         <outlet property="viewCountLabel" destination="grW-q6-oE3" id="5gg-LO-jeS"/>
                         <outlet property="watchLaterButton" destination="ZFX-0J-R4d" id="IT7-Fk-04K"/>
