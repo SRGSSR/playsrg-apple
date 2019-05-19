@@ -124,17 +124,18 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *nextProgramLabel;
 @property (nonatomic, weak) IBOutlet UILabel *channelLabel;
 
-@property (nonatomic, weak) IBOutlet UIView *topShowStackView;
+@property (nonatomic, weak) IBOutlet UIView *showTopLineSpacerView;
 @property (nonatomic, weak) IBOutlet UIStackView *showStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *showThumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *showLabel;
 @property (nonatomic, weak) IBOutlet MyListPlayerButtonView *myListButtonView;
-@property (nonatomic, weak) IBOutlet UIView *bottomShowStackView;
+@property (nonatomic, weak) IBOutlet UIView *showBottomLineSpacerView;
 
 @property (nonatomic, weak) IBOutlet UIView *radioHomeView;
 @property (nonatomic, weak) IBOutlet UIButton *radioHomeButton;
 @property (nonatomic, weak) IBOutlet UIImageView *radioHomeButtonImageView;
 
+@property (nonatomic, weak) IBOutlet UIView *relatedContentsSpacerView;
 @property (nonatomic, weak) IBOutlet UILabel *relatedContentsTitleLabel;
 @property (nonatomic, weak) IBOutlet UIStackView *relatedContentsStackView;
 
@@ -676,9 +677,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             [self.relatedContentsStackView addArrangedSubview:relatedContentView];
         }
         
+        self.relatedContentsSpacerView.hidden = NO;
         [self.relatedContentsStackView play_setHidden:NO];
     }
     else {
+        self.relatedContentsSpacerView.hidden = YES;
         [self.relatedContentsStackView play_setHidden:YES];
     }
     
@@ -803,14 +806,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
        
         [self updateMyListStatusForShow:show];
         
-        self.topShowStackView.hidden = NO;
+        self.showTopLineSpacerView.hidden = NO;
         [self.showStackView play_setHidden:NO];
-        self.bottomShowStackView.hidden = NO;
+        self.showBottomLineSpacerView.hidden = NO;
     }
     else {
-        self.topShowStackView.hidden = YES;
+        self.showTopLineSpacerView.hidden = YES;
         [self.showStackView play_setHidden:YES];
-        self.bottomShowStackView.hidden = YES;
+        self.showBottomLineSpacerView.hidden = YES;
     }
     
     [self updateRadioHomeButton];
@@ -822,13 +825,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.youthProtectionColorLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         self.youthProtectionColorLabel.text = SRGMessageForYouthProtectionColor(media.youthProtectionColor);
         self.youthProtectionColorSpacerView.hidden = NO;
-        self.youthProtectionColorStackView.hidden = NO;
+        [self.youthProtectionColorStackView play_setHidden:NO];
     }
     else {
         self.youthProtectionColorImageView.image = nil;
         self.youthProtectionColorLabel.text = nil;
         self.youthProtectionColorSpacerView.hidden = YES;
-        self.youthProtectionColorStackView.hidden = YES;
+        [self.youthProtectionColorStackView play_setHidden:YES];
     }
     
     NSString *imageCopyright = media.imageCopyright;
