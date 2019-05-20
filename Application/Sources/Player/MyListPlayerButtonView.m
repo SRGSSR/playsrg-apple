@@ -29,7 +29,7 @@
     
     self.backgroundColor = UIColor.clearColor;
     
-    self.label.font = [UIFont srg_mediumFontWithSize:10.];
+    self.label.font = [UIFont srg_mediumFontWithSize:10.f];
     self.label.text = [NSLocalizedString(@"My List", @"Title displayed in the My List player button") uppercaseString];
 
 }

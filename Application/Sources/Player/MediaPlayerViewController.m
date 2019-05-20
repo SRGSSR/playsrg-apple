@@ -1760,12 +1760,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
 }
 
-- (IBAction)toggleMyList:(UIPinchGestureRecognizer *)gestureRecognizer
+- (IBAction)toggleMyList:(UIGestureRecognizer *)gestureRecognizer
 {
     SRGShow *show = [self mainShow];
     if (show) {
-        BOOL togged = MyListToggleShow(show);
-        if (! togged) {
+        BOOL toggled = MyListToggleShow(show);
+        if (! toggled) {
             return;
         }
         
