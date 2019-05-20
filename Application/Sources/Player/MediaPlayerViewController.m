@@ -757,11 +757,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self.mediaInfoStackView play_setHidden:NO];
         [self.channelInfoStackView play_setHidden:YES];
         
-        self.dateLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.dateLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
         self.dateLabel.accessibilityLabel = [NSDateFormatter.play_relativeDateAndTimeAccessibilityFormatter stringFromDate:media.date];
         
-        self.viewCountLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+        self.viewCountLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         
         NSPredicate *socialViewsPredicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGSocialCount.new, type), @(SRGSocialCountTypeSRGView)];
         SRGSocialCount *socialCount = [media.socialCounts filteredArrayUsingPredicate:socialViewsPredicate].firstObject;
