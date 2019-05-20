@@ -122,13 +122,12 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 
 - (NSSet<NSString *> *)subscribedShowURNs
 {
-    NSMutableSet<NSString *> *URNs = [NSMutableSet set];
-    
     NSArray<NSString *> *tags = [UAirship push].tags;
     if (tags.count == 0) {
         return [NSSet set];
     }
     
+    NSMutableSet<NSString *> *URNs = [NSMutableSet set];
     for (NSString *tag in tags) {
         NSString *URN = [self showURNFromTag:tag];
         if (URN) {

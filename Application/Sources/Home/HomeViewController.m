@@ -16,7 +16,7 @@
 #import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowVerticalListTableViewCell.h"
 #import "HomeStatusHeaderView.h"
-#import "Mylist.h"
+#import "MyList.h"
 #import "NavigationController.h"
 #import "Notification.h"
 #import "NotificationsViewController.h"
