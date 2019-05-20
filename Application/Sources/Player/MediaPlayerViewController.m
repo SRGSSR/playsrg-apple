@@ -700,8 +700,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     [self.availabilibityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
     
-    SRGShow *show = nil;
-    
     // Livestream: Display channel information when available
     if (media.contentType == SRGContentTypeLivestream) {
         [self.mediaInfoStackView play_setHidden:YES];
@@ -721,12 +719,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
                 self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
                 self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:currentProgram.endDate]];
+                
+                [self reloadDetailsWithShow:currentProgram.show];
             }
             else {
                 self.titleLabel.text = channel.title;
                 self.channelLabel.text = nil;
                 self.programTimeLabel.text = nil;
                 self.programTimeLabel.accessibilityLabel = nil;
+                
+                [self reloadDetailsWithShow:nil];
             }
             
             SRGProgram *nextProgram = channel.nextProgram;
@@ -740,12 +742,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 self.nextProgramLabel.text = nil;
                 self.nextProgramLabel.accessibilityLabel = nil;
             }
-            
-            show = currentProgram.show;
         }
         else {
             self.titleLabel.text = media.title;
             
+            [self reloadDetailsWithShow:nil];
             [self.channelInfoStackView play_setHidden:YES];
         }
     }
@@ -783,7 +784,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             self.viewCountLabel.hidden = YES;
         }
         
-        show = media.show;
+        [self reloadDetailsWithShow:media.show];
     }
     
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -795,24 +796,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.summaryLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.summaryLabel.text = media.play_fullSummary;
-    
-    if (show) {
-        [self.showThumbnailImageView play_requestImageForObject:show withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList unavailabilityHandler:nil];
-        
-        self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-        self.showLabel.text = show.title;
-       
-        [self updateMyListStatusForShow:show];
-        
-        self.showTopLineSpacerView.hidden = NO;
-        [self.showStackView play_setHidden:NO];
-        self.showBottomLineSpacerView.hidden = NO;
-    }
-    else {
-        self.showTopLineSpacerView.hidden = YES;
-        [self.showStackView play_setHidden:YES];
-        self.showBottomLineSpacerView.hidden = YES;
-    }
     
     [self updateRadioHomeButton];
     self.radioHomeButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
@@ -846,6 +829,27 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self updateDownloadStatusForMedia:mainChapterMedia];
     [self updateWatchLaterStatusForMedia:mainChapterMedia];
     [self updateSharingStatusForMedia:mainChapterMedia];
+}
+
+- (void)reloadDetailsWithShow:(SRGShow *)show
+{
+    if (show) {
+        [self.showThumbnailImageView play_requestImageForObject:show withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList unavailabilityHandler:nil];
+        
+        self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.showLabel.text = show.title;
+        
+        [self updateMyListStatusForShow:show];
+        
+        self.showTopLineSpacerView.hidden = NO;
+        [self.showStackView play_setHidden:NO];
+        self.showBottomLineSpacerView.hidden = NO;
+    }
+    else {
+        self.showTopLineSpacerView.hidden = YES;
+        [self.showStackView play_setHidden:YES];
+        self.showBottomLineSpacerView.hidden = YES;
+    }
 }
 
 #pragma mark UI
