@@ -133,7 +133,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 - (void)updateMyListStatus
 {
     BOOL inMyList = MyListContainsShow(self.show);
-    [self.myListImageButton setImage:inMyList ? [UIImage imageNamed:@"my_list_full-22"] : [UIImage imageNamed:@"my_list-22"] forState:UIControlStateNormal];
+    [self.myListImageButton setImage:inMyList ? [UIImage imageNamed:@"my_list_full_show_page-22"] : [UIImage imageNamed:@"my_list_show_page-22"] forState:UIControlStateNormal];
     
     NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
                                   NSForegroundColorAttributeName : UIColor.whiteColor };

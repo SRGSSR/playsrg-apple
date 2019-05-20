@@ -41,7 +41,7 @@
                                         <constraint firstAttribute="height" constant="32" id="Cla-bu-Zod"/>
                                     </constraints>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" image="my_list-22"/>
+                                    <state key="normal" image="my_list_show_page-22"/>
                                     <connections>
                                         <action selector="toggleMyList:" destination="7YI-iM-3v4" eventType="touchUpInside" id="GO4-La-rZa"/>
                                     </connections>
@@ -105,7 +105,7 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="my_list-22" width="22" height="22"/>
+        <image name="my_list_show_page-22" width="22" height="22"/>
         <image name="subscription-22" width="22" height="22"/>
     </resources>
 </document>
