@@ -225,9 +225,19 @@
     NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
                                                              NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
     
-    NSString *title = NSLocalizedString(@"No content", @"Text displayed when no show added to My List");
-    return [[NSAttributedString alloc] initWithString:title
-                                           attributes:attributes];
+    if (self.lastRequestError) {
+        // Multiple errors. Pick the first ones
+        NSError *error = self.lastRequestError;
+        if ([error hasCode:SRGNetworkErrorMultiple withinDomain:SRGNetworkErrorDomain]) {
+            error = [error.userInfo[SRGNetworkErrorsKey] firstObject];
+        }
+        return [[NSAttributedString alloc] initWithString:error.localizedDescription
+                                               attributes:attributes];
+    }
+    else {
+        return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No content", @"Text displayed when no show has been added to My List")
+                                               attributes:attributes];
+    }
 }
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
@@ -236,9 +246,15 @@
     NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
                                                              NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
     
-    NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a show to add it to My List", @"Hint displayed when no show added to theMy List and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a show to add it to My List", @"Hint displayed when no show added to My List and the device does not support 3D touch");
-    return [[NSAttributedString alloc] initWithString:description
-                                           attributes:attributes];
+    if (self.lastRequestError) {
+        return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it")
+                                               attributes:attributes];
+    }
+    else {
+        NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a show to add it to My List", @"Hint displayed when no show added to theMy List and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a show to add it to My List", @"Hint displayed when no show added to My List and the device does not support 3D touch");
+        return [[NSAttributedString alloc] initWithString:description
+                                               attributes:attributes];
+    }
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
