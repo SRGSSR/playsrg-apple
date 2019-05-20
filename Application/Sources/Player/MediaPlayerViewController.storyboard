@@ -344,29 +344,57 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-9E-Q5j">
-                                                        <rect key="frame" x="114.5" y="0.0" width="823.5" height="110"/>
+                                                        <rect key="frame" x="114.5" y="0.0" width="782.5" height="110"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;show&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOa-0n-yq2">
-                                                                <rect key="frame" x="0.0" y="0.0" width="823.5" height="18"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="782.5" height="18"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                 <color key="textColor" white="0.67000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kBD-eM-IYG" userLabel="Spacer View">
-                                                                <rect key="frame" x="0.0" y="18" width="823.5" height="92"/>
+                                                                <rect key="frame" x="0.0" y="18" width="782.5" height="92"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rH9-bM-n9J" customClass="MyListPlayerButtonView">
-                                                        <rect key="frame" x="946" y="0.0" width="50" height="110"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4re-Xl-Kus" customClass="MyListPlayerButtonView">
+                                                        <rect key="frame" x="905" y="0.0" width="91" height="110"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_list-34" translatesAutoresizingMaskIntoConstraints="NO" id="yMX-7W-UOZ">
+                                                                <rect key="frame" x="50" y="33.5" width="34" height="31"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </imageView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="euv-TV-wuq">
+                                                                <rect key="frame" x="42.5" y="68.5" width="48.5" height="11"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_list_add-10" translatesAutoresizingMaskIntoConstraints="NO" id="ITw-gT-I4e">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="10" height="11"/>
+                                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY LIST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ce-eM-LO3">
+                                                                        <rect key="frame" x="12" y="0.0" width="36.5" height="11"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="zyS-V2-ldh"/>
+                                                            <constraint firstAttribute="width" constant="91" id="D6o-iw-Lts"/>
+                                                            <constraint firstItem="euv-TV-wuq" firstAttribute="top" secondItem="yMX-7W-UOZ" secondAttribute="bottom" constant="4" id="WZC-7C-IJE"/>
+                                                            <constraint firstAttribute="trailing" secondItem="euv-TV-wuq" secondAttribute="trailing" id="fpj-bl-29Z"/>
+                                                            <constraint firstItem="yMX-7W-UOZ" firstAttribute="centerY" secondItem="4re-Xl-Kus" secondAttribute="centerY" constant="-6" id="if5-gq-YNG"/>
+                                                            <constraint firstItem="yMX-7W-UOZ" firstAttribute="centerX" secondItem="euv-TV-wuq" secondAttribute="centerX" id="xXu-Be-8yA"/>
                                                         </constraints>
                                                         <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="fuf-om-cZ9" appends="YES" id="dje-xO-J1Q"/>
+                                                            <outlet property="label" destination="7Ce-eM-LO3" id="pL1-ep-bM2"/>
+                                                            <outlet property="mainImageView" destination="yMX-7W-UOZ" id="6v1-Z1-N1o"/>
+                                                            <outlet property="statusImageView" destination="ITw-gT-I4e" id="yHf-H2-vrq"/>
+                                                            <outletCollection property="gestureRecognizers" destination="fuf-om-cZ9" appends="YES" id="zlU-bE-odE"/>
                                                         </connections>
                                                     </view>
                                                 </subviews>
@@ -503,7 +531,7 @@
                         <outlet property="livestreamButtonImageView" destination="SWT-Kh-dsw" id="8Tc-Ht-E8t"/>
                         <outlet property="livestreamView" destination="drV-Ca-Mf5" id="1v8-ix-Ovc"/>
                         <outlet property="mediaInfoStackView" destination="44Z-TF-U9J" id="MCN-kL-Vf4"/>
-                        <outlet property="myListButtonView" destination="rH9-bM-n9J" id="Pum-jf-Wd8"/>
+                        <outlet property="myListButtonView" destination="4re-Xl-Kus" id="MsA-lk-vsU"/>
                         <outlet property="nextProgramLabel" destination="TWK-yS-nud" id="1Me-Wn-V7J"/>
                         <outlet property="playerAspectRatio16_9Constraint" destination="sHT-jJ-Lxy" id="sae-Wk-L16"/>
                         <outlet property="playerAspectRatioBigLandscapeScreenConstraint" destination="d4e-DG-s50" id="Xip-HB-R7g"/>
@@ -568,6 +596,8 @@
         <image name="downloadable-48" width="48" height="48"/>
         <image name="expand_22" width="22" height="22"/>
         <image name="home-22" width="22" height="22"/>
+        <image name="my_list-34" width="34" height="31"/>
+        <image name="my_list_add-10" width="10" height="10"/>
         <image name="share-48" width="48" height="48"/>
         <image name="view_count_video-16" width="16" height="16"/>
         <image name="watch_later-48" width="48" height="48"/>

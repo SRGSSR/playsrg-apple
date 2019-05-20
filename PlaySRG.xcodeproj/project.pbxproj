@@ -232,11 +232,6 @@
 		087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6671EDF1B7D00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
-		0880481C2290831F00CF2991 /* MyListPlayerButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0880481B2290831F00CF2991 /* MyListPlayerButtonView.xib */; };
-		0880481D2290831F00CF2991 /* MyListPlayerButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0880481B2290831F00CF2991 /* MyListPlayerButtonView.xib */; };
-		0880481E2290831F00CF2991 /* MyListPlayerButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0880481B2290831F00CF2991 /* MyListPlayerButtonView.xib */; };
-		0880481F2290831F00CF2991 /* MyListPlayerButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0880481B2290831F00CF2991 /* MyListPlayerButtonView.xib */; };
-		088048202290831F00CF2991 /* MyListPlayerButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0880481B2290831F00CF2991 /* MyListPlayerButtonView.xib */; };
 		088048232290876400CF2991 /* MyListPlayerButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 088048222290876400CF2991 /* MyListPlayerButtonView.m */; };
 		088048242290876400CF2991 /* MyListPlayerButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 088048222290876400CF2991 /* MyListPlayerButtonView.m */; };
 		088048252290876400CF2991 /* MyListPlayerButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 088048222290876400CF2991 /* MyListPlayerButtonView.m */; };
@@ -1634,7 +1629,6 @@
 		087A88341EAA610500525C2A /* LiveAccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveAccessView.m; sourceTree = "<group>"; };
 		087BC6611EDF1B7B00EED89B /* UILabel+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+PlaySRG.h"; sourceTree = "<group>"; };
 		087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+PlaySRG.m"; sourceTree = "<group>"; };
-		0880481B2290831F00CF2991 /* MyListPlayerButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyListPlayerButtonView.xib; sourceTree = "<group>"; };
 		088048212290876400CF2991 /* MyListPlayerButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyListPlayerButtonView.h; sourceTree = "<group>"; };
 		088048222290876400CF2991 /* MyListPlayerButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyListPlayerButtonView.m; sourceTree = "<group>"; };
 		088899432077627900242654 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
@@ -3282,7 +3276,6 @@
 				6FB3C1A71DBCE783008160B4 /* MediaPreviewViewController.storyboard */,
 				088048212290876400CF2991 /* MyListPlayerButtonView.h */,
 				088048222290876400CF2991 /* MyListPlayerButtonView.m */,
-				0880481B2290831F00CF2991 /* MyListPlayerButtonView.xib */,
 				6F5F4FC11DB10CFD0011CCA3 /* RelatedContentView.h */,
 				6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */,
 				6F5F4FC31DB10CFD0011CCA3 /* RelatedContentView.xib */,
@@ -3856,7 +3849,6 @@
 				0837CEC81D3FD6E600A1E089 /* SRGSSRType_It.ttf in Resources */,
 				6F475FFA1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
 				6F0F889C1ECF0CE50060A893 /* override_artwork_tv_srf2.pdf in Resources */,
-				0880481C2290831F00CF2991 /* MyListPlayerButtonView.xib in Resources */,
 				6FA7EC3920AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				6F12DB4B21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
 				E694A9FA1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
@@ -3962,7 +3954,6 @@
 				E6E2DF201D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */,
 				6F0C99932121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				0837CED11D3FDAF900A1E089 /* SRGSSRType_It.ttf in Resources */,
-				0880481D2290831F00CF2991 /* MyListPlayerButtonView.xib in Resources */,
 				6F475FFB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
 				086321102258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				E694A9FB1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
@@ -3988,7 +3979,6 @@
 				6F2961FE2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				081DAA291E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B51DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
-				0880481E2290831F00CF2991 /* MyListPlayerButtonView.xib in Resources */,
 				6F0C99A32121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				6FCB574D1EC2047B0015CAB7 /* override_default_rete_uno.pdf in Resources */,
 				E64BA4031D4A5891002C10D5 /* WebViewController.storyboard in Resources */,
@@ -4083,7 +4073,6 @@
 				081DAA281E0C1FC800018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6F0F88401ECEE78C0060A893 /* override_default_rtr_srf_info.pdf in Resources */,
-				0880481F2290831F00CF2991 /* MyListPlayerButtonView.xib in Resources */,
 				6F0C99AE2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
 				6FA9ECC920C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */,
@@ -4250,7 +4239,6 @@
 				6FB0BB4320AEF5DC007C5D87 /* Onboarding.strings in Resources */,
 				6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */,
 				6F0C99B42121FBD800073AB6 /* SRGLogger.bundle in Resources */,
-				088048202290831F00CF2991 /* MyListPlayerButtonView.xib in Resources */,
 				6FA9ECCA20C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				6F3B33B11EEEB20400D60789 /* MenuHeaderSectionView.xib in Resources */,
 				6F0C999B2121FBD800073AB6 /* SRGAppearance.bundle in Resources */,
