@@ -1,20 +1,14 @@
-/* Message displayed at the top of the screen when adding a media or a show to the favorite list. Quotes are managed by the application. */
-"%@ has been added to favorites" = "%@ wurde zu den Favoriten hinzugefügt";
+/* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been added to \"Watch later\"" = "%@ has been added to \"Watch later\"";
 
-/* Message displayed at the top of the screen when adding an item to the subscription list. Quotes are managed by the application. */
-"%@ has been added to subscriptions" = "%@ wurde zu den Push-Mitteilungen hinzugefügt";
+/* Message displayed at the top of the screen when adding a show to My List. Quotes are managed by the application. */
+"%@ has been added to My List" = "%@ has been added to My List";
 
-/* Message displayed at the top of the screen when adding a media to the watch later list. Quotes are managed by the application. */
-"%@ has been added to the \"Watch later\"" = "%@ has been added to the \"Watch later\"";
+/* Message displayed at the top of the screen when removing an item from the watch later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been removed from \"Watch later\"" = "%@ has been removed from \"Watch later\"";
 
-/* Message displayed at the top of the screen when removing an item from the favorite list. Quotes are managed by the application. */
-"%@ has been removed from favorites" = "%@ wurde von den Favoriten entfernt";
-
-/* Message at the top of the screen displayed when removing an item from the subscription list. Quotes are managed by the application. */
-"%@ has been removed from subscriptions" = "%@ wurde von den Push-Mitteilungen entfernt";
-
-/* Message displayed at the top of the screen when removing an item from the watch later list. Quotes are managed by the application. */
-"%@ has been removed from the \"Watch later\"" = "%@ has been removed from the \"Watch later\"";
+/* Message displayed at the top of the screen when removing a show from My List. Quotes are managed by the application. */
+"%@ has been removed from My List" = "%@ has been removed from My List";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ wartet.";
@@ -39,17 +33,17 @@
    Button label to add a download from the media preview window */
 "Add to downloads" = "Zu den Downloads hinzufügen";
 
-/* Button label to add a favorite from the show long-press menu
-   Button label to add a favorite from the show preview window */
-"Add to favorites" = "Zu den Favoriten hinzufügen";
+/* Button label to add a show to My List in the show long-press menu
+   Button label to add a show to My List in the show preview window
+   My List show insertion label in the show view */
+"Add to My List" = "Add to My List";
 
 /* Title of the first cell of a media list on homepage. */
 "All content" = "Alle anzeigen";
 
-/* Confirmation message displayed when the user is about to clean the watch later list
+/* Confirmation message displayed when the user is about to clean My List
+   Confirmation message displayed when the user is about to clean the watch later list
    Confirmation message displayed when the user is about to delete all download items
-   Confirmation message displayed when the user is about to delete all favorite items
-   Confirmation message displayed when the user is about to delete all subscription items
    Confirmation message displayed when the user is about to delete the whole history */
 "Are you sure you want to delete all items?" = "Sind Sie sicher, dass Sie alle Elemente löschen wollen?";
 
@@ -57,9 +51,8 @@
 "Are you sure you want to delete the downloaded media?" = "Sind Sie sicher, dass Sie alle Downloads löschen wollen?";
 
 /* Confirmation message displayed when the user is about to delete selected download items
-   Confirmation message displayed when the user is about to delete selected favorite items
    Confirmation message displayed when the user is about to delete selected history entries
-   Confirmation message displayed when the user is about to delete selected subscription items
+   Confirmation message displayed when the user is about to remove selected entries from My List
    Confirmation message displayed when the user is about to remove selected entries from the watch later list */
 "Are you sure you want to delete the selected items?" = "Sind Sie sicher, dass Sie die ausgewählten Elemente löschen wollen?";
 
@@ -140,11 +133,6 @@
 
 /* Short label identifying content which has expired. */
 "Expired" = "Abgelaufen";
-
-/* [Technical] Favorites page type for analytics measurements
-   Label in the left menu to present favorites
-   Title displayed at the top of the favorites screen */
-"Favorites" = "Favoriten";
 
 /* Title displayed at the top of the features list */
 "Features" = "Funktionen";
@@ -248,20 +236,30 @@
 /* Menu section header label for user personal content */
 "My content" = "Meine Sendungen";
 
+/* [Technical] Subscriptions page type for analytics measurements
+   Label in the left menu to present My List
+   Title displayed at the top of the My List screen
+   Title displayed in the My List player button */
+"My List" = "My List";
+
+/* Label used on a radio home page to present the My List shows. */
+"My list Radio" = "My list Radio";
+
+/* Label used on the TV home page to present the My List shows. */
+"My list TV" = "My list TV";
+
 /* Text displayed when no data synchronization has been made yet */
 "Never" = "Nie";
 
 /* Title of the button to proceed to the next onboarding page */
 "Next" = "Weiter";
 
-/* Text displayed when no media added to the watch later list */
+/* Text displayed when no media added to the watch later list
+   Text displayed when no show added to My List */
 "No content" = "No content";
 
 /* Text displayed when no downloads are available */
 "No downloads" = "Keine Downloads vorhanden";
-
-/* Text displayed when no favorites are available */
-"No favorites" = "Keine Favoriten vorhanden";
 
 /* Message displayed if no Google Cast receiver is available */
 "No Google Cast receiver is available." = "Kein Google Cast Empfänger verfügbar.";
@@ -275,9 +273,6 @@
 /* Default text displayed when no results are available */
 "No results" = "Keine Ergebnisse";
 
-/* Text displayed when no subscriptions are available */
-"No subscriptions" = "Keine Push-Mitteilungen aktiviert";
-
 /* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
 "Not available since %@" = "Nicht mehr verfügbar seit %@";
 
@@ -285,8 +280,11 @@
    Title displayed at the top of the notifications screen */
 "Notifications" = "Push-Mitteilungen";
 
-/* Message displayed when the subscriptions feature is not available because notifications are not enabled in system settings */
-"Notifications are required to use this feature. Tap here to enable them in the system settings" = "Für diese Funktion müssen Push-Mitteilungen aktiviert sein. Tippen Sie hier, um Push-Mitteilungen in den Einstellungen zu aktivieren.";
+/* Message at the top of the screen displayed when disabling push notifications. Quotes around the content placeholder are managed by the application. */
+"Notifications have been disabled for %@" = "Notifications have been disabled for %@";
+
+/* Message displayed at the top of the screen when enabling push notifications. Quotes around the content placeholder managed by the application. */
+"Notifications have been enabled for %@" = "Notifications have been enabled for %@";
 
 /* Title of the button displayed at the end of an onboarding
    Title of the button when the user subscribed to all TV and radio shows */
@@ -363,19 +361,15 @@
 /* Title of the action view to choose a regional radio */
 "Regional radios" = "Radio SRF 1 mit Regionaljournal";
 
-/* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
+/* Title of the confirmation pop-up displayed when the user is about to clean My List
+   Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
 "Remove all content" = "Remove all content";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete all download items */
 "Remove all downloads" = "Alle Downloads entfernen";
 
-/* Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
-"Remove all favorites" = "Alle Favoriten entfernen";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete all subscription items */
-"Remove all subscriptions" = "Alle Push-Mitteilungen entfernen.";
-
-/* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list */
+/* Title of the confirmation pop-up displayed when the user is about to remove selected entries from My List
+   Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list */
 "Remove content" = "Remove content";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete a download */
@@ -383,9 +377,6 @@
 
 /* Title of the confirmation pop-up displayed when the user is about to delete selected download items */
 "Remove downloads" = "Downloads löschen";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete selected favorite items */
-"Remove favorites" = "Favoriten entfernen";
 
 /* Button label to remove a media from the watch later list, from the media long-press menu
    Button label to remove a media from the watch later list, from the media preview window */
@@ -395,12 +386,10 @@
    Button label to remove a download from the media preview window */
 "Remove from downloads" = "Aus den Downloads entfernen";
 
-/* Button label to remove a favorite from the show long-press menu
-   Button label to remove a favorite from the show preview window */
-"Remove from favorites" = "Aus den Favoriten entfernen";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete selected subscription items */
-"Remove subscriptions" = "Push-Mitteilungen entfernen";
+/* Button label to remove a show from My list in the show long-press menu
+   Button label to remove a show from My List in the show preview window
+   My List show removal label in the show view */
+"Remove from My List" = "Remove from My List";
 
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
@@ -439,9 +428,6 @@
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Noch %@ online";
 
-/* Button label to unsubscribe to a show */
-"Subscribe to show" = "Push-Mitteilungen für diese Sendung aktivieren";
-
 /* Message displayed when no notifications have been received */
 "Subscribe to shows you like to be notified when a new episode is available." = "Aktivieren Sie Push-Mitteilungen, damit Sie eine Mitteilung erhalten, wenn eine neue Episode einer Sendung verfügbar ist.";
 
@@ -450,14 +436,6 @@
 
 /* Message description displayed when subscribing to all TV and radio shows */
 "Subscribing to all TV and radio shows…" = "Push-Mitteilungen für alle Sendungen aktivieren.";
-
-/* [Technical] Subscriptions page type for analytics measurements
-   Label in the left menu to present subscriptions
-   Title displayed at the top of the subscriptions screen */
-"Subscriptions" = "Push-Mitteilungen";
-
-/* Text displayed when subscriptions are disabled */
-"Subscriptions disabled" = "Push-Mitteilungen deaktivert";
 
 /* [Technical] System page type for analytics measurements */
 "System" = "System";
@@ -496,7 +474,7 @@
    Error message when a media cannot be opened via Handoff or a push notification */
 "The media cannot be opened." = "Der Inhalt kann nicht geöffnet werden.";
 
-/* Name of the favorited item, if no title or name to display
+/* Name of the My List item, if no title or name to display
    Name of the subscription item, if no title or name to display
    Name of the watch later item, if no title or name to display */
 "The selected content" = "Der gewählte Inhalt";
@@ -533,9 +511,6 @@
 /* Tab name for TV show results in the search */
 "TV shows" = "TV-Sendungen";
 
-/* Button label to unsubscribe from a show */
-"Unsubscribe from show" = "Push-Mitteilungen für diese Sendung deaktivieren";
-
 /* Title of the button to update the application */
 "Update" = "Updaten";
 
@@ -558,11 +533,8 @@
 /* Hint displayed when no media added to the watch later list and the device supports 3D touch */
 "You can press on a content to add it to this watch later list" = "You can press on a content to add it to this watch later list";
 
-/* Hint displayed when no subscriptions have been made and the device supports 3D touch */
-"You can press on a show to add it to subscriptions" = "Drücken Sie fest auf die Sendung, um sie zu Ihren Push-Mitteilungen hinzuzufügen";
-
-/* Hint displayed when no favorites are available and the device supports 3D touch */
-"You can press on an item to add it to favorites" = "Drücken Sie fest auf einen Inhalt, um ihn zu Ihren Favoriten hinzuzufügen";
+/* Hint displayed when no show added to theMy List and the device supports 3D touch */
+"You can press on a show to add it to My List" = "You can press on a show to add it to My List";
 
 /* Hint displayed when no downloads are available and the device supports 3D touch */
 "You can press on an item to download it (not all items can be downloaded)" = "Drücken Sie fest auf ein beliebiges Video oder Audio, um es herunterzuladen. Achtung: Aus rechtlichen Gründen lassen sich nicht alle Inhalte herunterladen.";
@@ -570,11 +542,8 @@
 /* Hint displayed when no media added to the watch later list and the device does not support 3D touch */
 "You can tap and hold a content to add it to this watch later list" = "You can tap and hold a content to add it to this watch later list";
 
-/* Hint displayed when no subscriptions have been made and the device does not support 3D touch */
-"You can tap and hold a show to add it to subscriptions" = "Tippen und halten Sie eine Sendung, um sie zu Ihren Push-Mitteilungen hinzuzufügen";
-
-/* Hint displayed when no favorites are available and the device does not support 3D touch */
-"You can tap and hold an item to add it to favorites" = "Tippen und halten Sie einen Inhalt, um ihn zu Ihren Favoriten hinzuzufügen";
+/* Hint displayed when no show added to My List and the device does not support 3D touch */
+"You can tap and hold a show to add it to My List" = "You can tap and hold a show to add it to My List";
 
 /* Hint displayed when no downloads are available and the device does not support 3D touch */
 "You can tap and hold an item to download it (not all items can be downloaded)" = "Drücken Sie zwei Sekunden auf ein beliebiges Video oder Audio, um es herunterzuladen. Achtung: Aus rechtlichen Gründen lassen sich nicht alle Inhalte herunterladen.";

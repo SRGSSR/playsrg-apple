@@ -8,6 +8,12 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ vis";
 
+/* Show My List creation label */
+"Add to My List" = "Add to My List";
+
+/* Media watch later creation label */
+"Add to the watch later list" = "Add to the watch later list";
+
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Mussar tut \"%@\"";
 
@@ -20,18 +26,19 @@
 /* Delete button label */
 "Delete" = "Stizzar";
 
+/* My List show unsubscription label
+   Show unsubscription label */
+"Disable notifications for show" = "Disable notifications for show";
+
 /* A download button label */
 "Download" = "Telechargiar";
 
-/* In the player, show description label */
-"Episode of %@ show" = "Episoda da program %@";
+/* My List show subscription label
+   Show subscription label */
+"Enable notifications for show" = "Enable notifications for show";
 
 /* Introductory title for error notifications */
 "Error" = "Errur";
-
-/* Media favorite creation label
-   Show favorite creation label */
-"Favorite" = "Favurit";
 
 /* Introductory title for information notifications */
 "Information" = "Infurmaziun";
@@ -69,8 +76,7 @@
 /* Hint for content opened in Safari */
 "Opens in Safari." = "Avrir en Safari.";
 
-/* Show cell action hint
-   Show cell hint */
+/* Show cell hint */
 "Opens show details." = "Arva detagls da program.";
 
 /* Livestream play action hint */
@@ -92,9 +98,11 @@
 /* A download button label */
 "Remove download" = "Allontanar download";
 
-/* Media favorite removal label
-   Show favorite removal label */
-"Remove favorite" = "Allontanar favurit";
+/* Show My List removal label */
+"Remove from My List" = "Remove from My List";
+
+/* Media watch later removal label */
+"Remove from the watch later list" = "Remove from the watch later list";
 
 /* A download button label */
 "Retry download" = "Turnar da telechargiar";
@@ -113,12 +121,6 @@
 
 /* A download button label */
 "Stop downloading" = "Interrumper il download";
-
-/* Show subscription label */
-"Subscribe to show" = "S'abonnar a l'emissiun";
-
-/* Show unsubscription label */
-"Unsubscribe from show" = "Sa desabonnar da l'emmissiun";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attenziun";

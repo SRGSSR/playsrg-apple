@@ -1,20 +1,14 @@
-/* Message displayed at the top of the screen when adding a media to the watch later list. Quotes are managed by the application. */
+/* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Watch later\"" = "%@ a été ajouté à \"Plus tard\"";
 
 /* Message displayed at the top of the screen when adding a show to My List. Quotes are managed by the application. */
-"%@ has been added to My List" = "%@ a été ajouté à Ma liste";
+"%@ has been added to My List" = "%@ a été ajouté à \"Ma liste\"";
 
-/* Message displayed at the top of the screen when adding an item to the subscription list. Quotes are managed by the application. */
-"%@ has been added to subscriptions" = "%@ a été ajouté aux abonnements";
-
-/* Message displayed at the top of the screen when removing an item from the watch later list. Quotes are managed by the application. */
+/* Message displayed at the top of the screen when removing an item from the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been removed from \"Watch later\"" = "%@ a été retiré de \"Plus tard\"";
 
 /* Message displayed at the top of the screen when removing a show from My List. Quotes are managed by the application. */
-"%@ has been removed from My List" = "%@ has been removed from My List";
-
-/* Message at the top of the screen displayed when removing an item from the subscription list. Quotes are managed by the application. */
-"%@ has been removed from subscriptions" = "%@ a été supprimé des abonnements";
+"%@ has been removed from My List" = "%@ a été retiré de \"Ma liste\"";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ est en attente.";
@@ -42,7 +36,7 @@
 /* Button label to add a show to My List in the show long-press menu
    Button label to add a show to My List in the show preview window
    My List show insertion label in the show view */
-"Add to My List" = "Ajouter à Ma liste";
+"Add to My List" = "Ajouter à \"Ma liste\"";
 
 /* Title of the first cell of a media list on homepage. */
 "All content" = "Tout le contenu";
@@ -73,7 +67,7 @@
 "Automatic subscriptions" = "Abonnements automatiques";
 
 /* Message description displayed when the user could not be subscribed to all TV and radio shows */
-"Automatic subscriptions failed. Please retry." = "L'abonnements automatique a échoué. Veuillez réessayer.";
+"Automatic subscriptions failed. Please retry." = "L'abonnement automatique a échoué. Veuillez réessayer.";
 
 /* Label used on the home page to present the soon expiring videos */
 "Available for a limited time" = "Disponible pour un temps limité";
@@ -286,6 +280,12 @@
    Title displayed at the top of the notifications screen */
 "Notifications" = "Notifications";
 
+/* Message at the top of the screen displayed when disabling push notifications. Quotes around the content placeholder are managed by the application. */
+"Notifications have been disabled for %@" = "Les notifications ont été désactivées pour %@";
+
+/* Message displayed at the top of the screen when enabling push notifications. Quotes around the content placeholder managed by the application. */
+"Notifications have been enabled for %@" = "Les notifications ont été activées pour %@";
+
 /* Title of the button displayed at the end of an onboarding
    Title of the button when the user subscribed to all TV and radio shows */
 "OK" = "OK";
@@ -389,7 +389,7 @@
 /* Button label to remove a show from My list in the show long-press menu
    Button label to remove a show from My List in the show preview window
    My List show removal label in the show view */
-"Remove from My List" = "Retirer de Ma liste";
+"Remove from My List" = "Retirer de \"Ma liste\"";
 
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
@@ -427,9 +427,6 @@
 
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Disponible encore %@";
-
-/* Button label to unsubscribe to a show */
-"Subscribe to show" = "S'abonner à l'émission";
 
 /* Message displayed when no notifications have been received */
 "Subscribe to shows you like to be notified when a new episode is available." = "Abonnez-vous à vos émissions préférées afin d'être averti dès qu'un nouvel épisode est disponible.";
@@ -514,9 +511,6 @@
 /* Tab name for TV show results in the search */
 "TV shows" = "Émissions TV";
 
-/* Button label to unsubscribe from a show */
-"Unsubscribe from show" = "Se désabonner de l'émission";
-
 /* Title of the button to update the application */
 "Update" = "Mettre à jour";
 
@@ -540,7 +534,7 @@
 "You can press on a content to add it to this watch later list" = "Vous pouvez appuyer sur un élément pour l'ajouter à \"Plus tard\"";
 
 /* Hint displayed when no show added to theMy List and the device supports 3D touch */
-"You can press on a show to add it to My List" = "Vous pouvez appuyer sur une émission pour l'ajouter à Ma liste";
+"You can press on a show to add it to My List" = "Vous pouvez appuyer sur une émission pour l'ajouter à \"Ma liste\"";
 
 /* Hint displayed when no downloads are available and the device supports 3D touch */
 "You can press on an item to download it (not all items can be downloaded)" = "Vous pouvez appuyer sur un élément pour le télécharger (certains éléments ne peuvent être téléchargés)";
@@ -549,7 +543,7 @@
 "You can tap and hold a content to add it to this watch later list" = "Vous pouvez appuyer longuement sur un élément pour l'ajouter à \"Plus tard\"";
 
 /* Hint displayed when no show added to My List and the device does not support 3D touch */
-"You can tap and hold a show to add it to My List" = "Vous pouvez appuyer longuement une émission pour l'ajouter à Ma liste";
+"You can tap and hold a show to add it to My List" = "Vous pouvez appuyer longuement une émission pour l'ajouter à \"Ma liste\"";
 
 /* Hint displayed when no downloads are available and the device does not support 3D touch */
 "You can tap and hold an item to download it (not all items can be downloaded)" = "Vous pouvez appuyer longuement sur un élément pour le télécharger (certains éléments ne peuvent être téléchargés)";

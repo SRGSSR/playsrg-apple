@@ -9,10 +9,10 @@
 "%@ views" = "%@ vues";
 
 /* Show My List creation label */
-"Add to My List" = "Ajouter à ma liste";
+"Add to My List" = "Ajouter à \"Ma liste\"";
 
 /* Media watch later creation label */
-"Add to the watch later list" = "Ajouter à plus tard";
+"Add to the watch later list" = "Ajouter à \"Plus tard\"";
 
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Tout le contenu pour \"%@\"";
@@ -26,8 +26,16 @@
 /* Delete button label */
 "Delete" = "Supprimer";
 
+/* My List show unsubscription label
+   Show unsubscription label */
+"Disable notifications for show" = "Désactiver les notifications pour l'émission";
+
 /* A download button label */
 "Download" = "Télécharger";
+
+/* My List show subscription label
+   Show subscription label */
+"Enable notifications for show" = "Activer les notifications pour l'émission";
 
 /* Introductory title for error notifications */
 "Error" = "Erreur";
@@ -91,10 +99,10 @@
 "Remove download" = "Supprimer le téléchargement";
 
 /* Show My List removal label */
-"Remove from My List" = "Retirer de Ma liste";
+"Remove from My List" = "Retirer de \"Ma liste\"";
 
 /* Media watch later removal label */
-"Remove from the watch later list" = "Retirer de plus tard";
+"Remove from the watch later list" = "Retirer de \"Plus tard\"";
 
 /* A download button label */
 "Retry download" = "Réessayer le téléchargement";
@@ -113,14 +121,6 @@
 
 /* A download button label */
 "Stop downloading" = "Arrêter le téléchargement";
-
-/* My List show subscription label
-   Show subscription label */
-"Subscribe to show" = "S'abonner à l'émission";
-
-/* My List show unsubscription label
-   Show unsubscription label */
-"Unsubscribe from show" = "Se désabonner de l'émission";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attention";
