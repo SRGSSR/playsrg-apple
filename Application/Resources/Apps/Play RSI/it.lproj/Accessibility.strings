@@ -26,15 +26,13 @@
 /* Delete button label */
 "Delete" = "Elimina";
 
-/* My List show unsubscription label
-   Show unsubscription label */
+/* Show unsubscription label */
 "Disable notifications for show" = "Disable notifications for show";
 
 /* A download button label */
 "Download" = "Scarica";
 
-/* My List show subscription label
-   Show subscription label */
+/* Show subscription label */
 "Enable notifications for show" = "Enable notifications for show";
 
 /* Introductory title for error notifications */

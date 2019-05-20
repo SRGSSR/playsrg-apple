@@ -243,10 +243,10 @@
 "My List" = "My List";
 
 /* Label used on a radio home page to present the My List shows. */
-"My list Radio" = "My list Radio";
+"My List Radio" = "My List Radio";
 
 /* Label used on the TV home page to present the My List shows. */
-"My list TV" = "My list TV";
+"My List TV" = "My List TV";
 
 /* Text displayed when no data synchronization has been made yet */
 "Never" = "Nie";
@@ -255,7 +255,7 @@
 "Next" = "Weiter";
 
 /* Text displayed when no media added to the watch later list
-   Text displayed when no show added to My List */
+   Text displayed when no show has been added to My List */
 "No content" = "No content";
 
 /* Text displayed when no downloads are available */
