@@ -201,6 +201,6 @@ void MyListMigrate(void)
             }
             MyListSubscribeToShowURN(URN);
         }
-        completionHandler(subscribedShowURNs != nil);
+        completionHandler(YES);
     }, SubscriptionsToMyListMigrationDoneKey, nil);
 }
