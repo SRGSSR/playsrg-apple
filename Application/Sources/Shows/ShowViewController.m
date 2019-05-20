@@ -202,26 +202,7 @@
         
         [Banner showMyList:! inMyList forItemWithName:self.show.title inViewController:nil /* Not 'self' since dismissed */];
     }];
-    [previewActionItems addObject:myListAction];
-    
-    BOOL subscribed = MyListIsSubscribedToShow(self.show);
-    UIPreviewAction *subscriptionAction = [UIPreviewAction actionWithTitle:subscribed ? NSLocalizedString(@"Unsubscribe from show", @"Button label to unsubscribe from a show") : NSLocalizedString(@"Subscribe to show", @"Button label to unsubscribe to a show") style:subscribed ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        BOOL toggled = MyListToggleSubscriptionForShow(self.show, nil /* Not 'self.view' since dismissed */);
-        if (! toggled) {
-            return;
-        }
-        
-        // Use !subscribed since the status has been reversed
-        AnalyticsTitle analyticsTitle = (! subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = AnalyticsSourcePeekMenu;
-        labels.value = self.show.URN;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-        
-        [Banner showSubscription:! subscribed forShowWithName:self.show.title inViewController:nil /* Not 'self' since dismissed */];
-    }];
-    [previewActionItems addObject:subscriptionAction];
-    
+    [previewActionItems addObject:myListAction];    
     
     NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
     if (sharingURL) {

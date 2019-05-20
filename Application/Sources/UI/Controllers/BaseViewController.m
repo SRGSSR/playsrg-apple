@@ -282,7 +282,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
         [alertController addAction:[UIAlertAction actionWithTitle:inMyList ? NSLocalizedString(@"Remove from My List", @"Button label to remove a show from My list in the show long-press menu") : NSLocalizedString(@"Add to My List", @"Button label to add a show to My List in the show long-press menu") style:inMyList ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             MyListToggleShow(show);
             
-            // Use !inMylIst since inMylIst status has been reversed
+            // Use !inMyList since inMyList status has been reversed
             AnalyticsTitle analyticsTitle = (! inMyList) ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceLongPress;
