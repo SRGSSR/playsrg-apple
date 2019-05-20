@@ -155,7 +155,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     BOOL subscribed = MyListIsSubscribedToShow(self.show);
     [self.subscriptionButton setImage:subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"]
                              forState:UIControlStateNormal];
-    self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Unsubscribe from show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Subscribe to show", @"Show subscription label");
+    self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Disable notifications for show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
 }
 
 - (void)updateAspectRatioWithSize:(CGSize)size
