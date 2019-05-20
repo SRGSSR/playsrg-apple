@@ -46,14 +46,14 @@ OBJC_EXPORT NSSet<NSString *> * _Nonnull MyListShowURNs(void);
  */
 
 /**
- *  Toggle a subscription to My List.
+ *  Toggle a subscription in My List.
  *
- *  @discussion The optional view gives the opportunity to display an alter if Push notifications are disabled.
+ *  @discussion The optional view gives the opportunity to display an alert if push notifications are disabled.
  */
 OBJC_EXPORT BOOL MyListToggleSubscriptionForShow(SRGShow * _Nonnull show, UIView * _Nullable view);
 
 /**
- *  Return YES iff the user has subscribed to the specified show.
+ *  Return `YES` iff the user has subscribed to the specified show.
  */
 OBJC_EXPORT BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show);
 
@@ -63,9 +63,9 @@ OBJC_EXPORT BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show);
  */
 
 /**
- * Setup My List, to synchronize subscribed shows at any time.
+ *  Setup My List to synchronize subscribed shows at any time.
  *
- *  @discussion Needs to be call after the Push Service setup.
+ *  @discussion Needs to be called after the Push Service setup.
  */
 OBJC_EXPORT void MyListSetup(void);
     

@@ -52,8 +52,8 @@ BOOL MyListIsSubscribedToShowURN(NSString * _Nonnull URN)
     return [SRGUserData.currentUserData.preferences numberAtPath:path inDomain:PlayPreferenceDomain].boolValue;
 }
 
-// Force subscription, even if Push Notifications is disableed.
-void MyListSubscribedToShowURN(NSString *URN)
+// Force subscription, even if Push Notifications are disabled.
+void MyListSubscribeToShowURN(NSString *URN)
 {
     if (MyListContainsShowURN(URN) && ! MyListIsSubscribedToShowURN(URN)) {
         NSString *path = [[[PlayMyListPath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
@@ -61,19 +61,19 @@ void MyListSubscribedToShowURN(NSString *URN)
     }
 }
 
-#pragma mark PushService
+#pragma mark Push service synchronization
 
 void MyListUpdatePushService(void)
 {
     if ([PlayApplicationRunOnceObjectForKey(SubscriptionsToMyListMigrationDoneKey) boolValue]) {
-        NSMutableSet *subscribedURNs = [NSMutableSet set];
+        NSMutableSet<NSString *> *subscribedURNs = [NSMutableSet set];
         for (NSString *URN in MyListShowURNs()) {
             if (MyListIsSubscribedToShowURN(URN)) {
                 [subscribedURNs addObject:URN];
             }
         }
-        NSSet *subscribedMyListURNs = subscribedURNs.copy;
-        NSSet *subscribedPushServiceURNs = PushService.sharedService.subscribedShowURNs;
+        NSSet<NSString *> *subscribedMyListURNs = subscribedURNs.copy;
+        NSSet<NSString *> *subscribedPushServiceURNs = PushService.sharedService.subscribedShowURNs;
         
         if (! [subscribedMyListURNs isEqualToSet:subscribedPushServiceURNs]) {
             NSPredicate *toAddPredicate = [NSPredicate predicateWithFormat:@"! SELF IN %@", subscribedPushServiceURNs];
@@ -208,7 +208,7 @@ void MyListMigrate(void)
             if (! MyListContainsShowURN(URN)) {
                 MyListAddShowURNWithDate(URN, NSDate.date);
             }
-            MyListSubscribedToShowURN(URN);
+            MyListSubscribeToShowURN(URN);
         }
         completionHandler(subscribedShowURNs != nil);
     }, SubscriptionsToMyListMigrationDoneKey, nil);
