@@ -19,19 +19,23 @@ A wide list of parameters are available. Some parameters support multiple comma-
 ### Homepage
 
 * `radioHomeSections` (optional, string, multiple): The sections to be displayed on the radio homepages, in the order they must appear. Available values are:
+   * `radioAllShows`: All available shows.
    * `radioLatest`: The latest audios.
    * `radioLatestEpisodes`: The latest episodes.
+   * `radioLatestVideos`: The latest videos.
    * `radioLive`: Access to the livestreams.
    * `radioMostPopular`: The most popular audios.
-   * `radioLatestVideos`: The latest videos.
-   * `radioAllShows`: All available shows.
+   * `radioMyListShows`: Shows from "My list".
+   * `radioShowsAccess`: A-Z and By date access buttons.
 * `radioFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured media lists will not display any header on the radio homepages.
 * `tvHomeSections` (optional, string, multiple): The sections to be displayed on the TV homepage, in the order they must appear. Available values are:
    * `tvEvents`: Event modules. 
    * `tvLatest`: The latest medias.
    * `tvLive`: Access to the livestreams.
    * `tvLiveCenter`: Access to SwissTXT livestreams.
+   * `tvMyListShows`: Shows from "My list".
    * `tvScheduledLivestreams`: Access to scheduled livestreams.
+   * `tvShowsAccess`: A-Z and By date access buttons.
    * `tvSoonExpiring`: Soon expiring videos.
    * `tvTopics`: Topics.
    * `tvTrending`: Trending medias and editorial picks. See `tvTrendingEpisodesOnly` and `tvTrendingEditorialLimit` options.
