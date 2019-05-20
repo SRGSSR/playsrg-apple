@@ -44,6 +44,13 @@
     self.statusImageView.image = inMyList ? [UIImage imageNamed:@"my_list_added-10"] : [UIImage imageNamed:@"my_list_add-10"];
 }
 
+#pragma mark Accessibility
+
+- (BOOL)isAccessibilityElement
+{
+    return YES;
+}
+
 - (UIAccessibilityTraits)accessibilityTraits
 {
     return UIAccessibilityTraitButton;
@@ -51,7 +58,7 @@
 
 - (NSString *)accessibilityLabel
 {
-    return (self.inMyList) ? PlaySRGAccessibilityLocalizedString(@"Remove from My List", @"Show My List removal label") : PlaySRGAccessibilityLocalizedString(@"Add to My List", @"Show My List creation label");
+    return self.inMyList ? PlaySRGAccessibilityLocalizedString(@"Remove from My List", @"Show My List removal label") : PlaySRGAccessibilityLocalizedString(@"Add to My List", @"Show My List creation label");
 }
 
 @end
