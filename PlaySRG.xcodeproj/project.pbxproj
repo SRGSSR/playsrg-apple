@@ -1165,6 +1165,11 @@
 		6FBF24462148238300E576A2 /* SRGDiagnostics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF24432148238300E576A2 /* SRGDiagnostics.bundle */; };
 		6FBF24472148238300E576A2 /* SRGDiagnostics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF24432148238300E576A2 /* SRGDiagnostics.bundle */; };
 		6FBF24482148238300E576A2 /* SRGDiagnostics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF24432148238300E576A2 /* SRGDiagnostics.bundle */; };
+		6FC1FA882292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
+		6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
+		6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
+		6FC1FA8B2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
+		6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
 		6FC8866B1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866C1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866D1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
@@ -1987,6 +1992,8 @@
 		6FBA2ECF20D11A65005EB21D /* Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Application-Info.plist"; sourceTree = "<group>"; };
 		6FBF243D2148232A00E576A2 /* SRGDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGDiagnostics.framework; path = Carthage/Build/iOS/Static/SRGDiagnostics.framework; sourceTree = "<group>"; };
 		6FBF24432148238300E576A2 /* SRGDiagnostics.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGDiagnostics.bundle; path = Carthage/Build/iOS/Static/SRGDiagnostics.framework/SRGDiagnostics.bundle; sourceTree = "<group>"; };
+		6FC1FA862292E3460036CB34 /* NSSet+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+PlaySRG.h"; sourceTree = "<group>"; };
+		6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+PlaySRG.m"; sourceTree = "<group>"; };
 		6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGProgram+PlaySRG.h"; sourceTree = "<group>"; };
 		6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGProgram+PlaySRG.m"; sourceTree = "<group>"; };
 		6FCB57421EC2047B0015CAB7 /* override_artwork_rete_due.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_rete_due.pdf; sourceTree = "<group>"; };
@@ -2935,6 +2942,8 @@
 				0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */,
 				6F47601B1EB37BD1003021EA /* NSDateFormatter+PlaySRG.h */,
 				6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */,
+				6FC1FA862292E3460036CB34 /* NSSet+PlaySRG.h */,
+				6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */,
 				6FA5D15B1F2077B10059E4E2 /* NSString+PlaySRG.h */,
 				6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */,
 				089EA00F201148170070E11A /* NSTimer+PlaySRG.h */,
@@ -5308,6 +5317,7 @@
 				6F7218131DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F475FC81EB37BC6003021EA /* MediasViewController.m in Sources */,
 				6F47607C1EB37D60003021EA /* UIStackView+PlaySRG.m in Sources */,
+				6FC1FA882292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				08EB37AD1D48B1D20080EDE4 /* MenuTableViewCell.m in Sources */,
 				6F4760791EB37D60003021EA /* UIDevice+PlaySRG.m in Sources */,
 				6F475FE11EB37BC6003021EA /* ModalTransition.m in Sources */,
@@ -5429,6 +5439,7 @@
 				08AA55BC1D49EFC700C5026E /* HomeTableViewCell.m in Sources */,
 				0806E7B91D50D918002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */,
+				6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA012201148250070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F628AEA1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
 				088048242290876400CF2991 /* MyListPlayerButtonView.m in Sources */,
@@ -5571,6 +5582,7 @@
 				08AA55BD1D49EFC800C5026E /* HomeTableViewCell.m in Sources */,
 				0806E7BA1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */,
+				6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F628AEB1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
 				088048252290876400CF2991 /* MyListPlayerButtonView.m in Sources */,
@@ -5713,6 +5725,7 @@
 				08AA55BE1D49EFC800C5026E /* HomeTableViewCell.m in Sources */,
 				0806E7BB1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB71EB37BC6003021EA /* BaseViewController.m in Sources */,
+				6FC1FA8B2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA014201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F628AEC1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
 				088048262290876400CF2991 /* MyListPlayerButtonView.m in Sources */,
@@ -5855,6 +5868,7 @@
 				08AA55BF1D49EFC800C5026E /* HomeTableViewCell.m in Sources */,
 				0806E7BC1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
+				6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA015201148270070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F628AED1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
 				088048272290876400CF2991 /* MyListPlayerButtonView.m in Sources */,

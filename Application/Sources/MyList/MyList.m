@@ -7,6 +7,7 @@
 #import "MyList.h"
 
 #import "Favorite+Private.h"
+#import "NSSet+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PushService+Private.h"
 
@@ -72,24 +73,17 @@ void MyListUpdatePushService(void)
                 [subscribedURNs addObject:URN];
             }
         }
-        NSSet<NSString *> *subscribedMyListURNs = subscribedURNs.copy;
         NSSet<NSString *> *subscribedPushServiceURNs = PushService.sharedService.subscribedShowURNs;
         
-        if (! [subscribedMyListURNs isEqualToSet:subscribedPushServiceURNs]) {
-            NSPredicate *toAddPredicate = [NSPredicate predicateWithFormat:@"! SELF IN %@", subscribedPushServiceURNs];
-            NSSet<NSString *> *toAddURNs = [subscribedMyListURNs filteredSetUsingPredicate:toAddPredicate];
-            if (toAddURNs.count > 0) {
-                [PushService.sharedService subscribeToShowURNs:toAddURNs];
-            }
+        if (! [subscribedURNs isEqualToSet:subscribedPushServiceURNs]) {
+            NSSet<NSString *> *toSubscribeURNs = [subscribedURNs play_setByRemovingObjectsInSet:subscribedPushServiceURNs];
+            [PushService.sharedService subscribeToShowURNs:toSubscribeURNs];
             
-            NSPredicate *toRemovePredicate = [NSPredicate predicateWithFormat:@"! SELF IN %@", subscribedMyListURNs];
-            NSSet<NSString *> *toRemoveURNs = [subscribedPushServiceURNs filteredSetUsingPredicate:toRemovePredicate];
-            if (toRemoveURNs.count > 0) {
-                [PushService.sharedService unsubscribeFromShowURNs:toRemoveURNs];
-            }
+            NSSet<NSString *> *toUnsubscribeURNs = [subscribedPushServiceURNs play_setByRemovingObjectsInSet:subscribedURNs];
+            [PushService.sharedService unsubscribeFromShowURNs:toUnsubscribeURNs];
         }
         
-        NSCAssert([subscribedMyListURNs isEqualToSet:PushService.sharedService.subscribedShowURNs], @"Subscribed My List shows have to be equal to Push Service subscribed shows");
+        NSCAssert([subscribedURNs isEqualToSet:PushService.sharedService.subscribedShowURNs], @"Subscribed My List shows have to be equal to Push Service subscribed shows");
     }
 }
 

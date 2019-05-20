@@ -226,6 +226,10 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 
 - (void)subscribeToShowURNs:(NSSet<NSString *> *)URNs
 {
+    if (URNs.count == 0) {
+        return;
+    }
+    
     for (NSString *URN in URNs) {
         [[UAirship push] addTag:[self tagForShowURN:URN]];
     }
@@ -234,6 +238,10 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 
 - (void)unsubscribeFromShowURNs:(NSSet<NSString *> *)URNs
 {
+    if (URNs.count == 0) {
+        return;
+    }
+    
     for (NSString *URN in URNs) {
         [[UAirship push] removeTag:[self tagForShowURN:URN]];
     }
