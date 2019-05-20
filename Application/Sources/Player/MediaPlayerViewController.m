@@ -768,12 +768,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             if (media.mediaType == SRGMediaTypeAudio) {
                 self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), @(socialCount.value)];
                 self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), @(socialCount.value)];
-                self.viewCountImageView.image = [UIImage imageNamed:@"viewCountAudio-16"];
+                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_audio-16"];
             }
             else {
                 self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), @(socialCount.value)];
                 self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), @(socialCount.value)];
-                self.viewCountImageView.image = [UIImage imageNamed:@"viewCountVideo-16"];
+                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_video-16"];
             }
             self.viewCountImageView.hidden = NO;
             self.viewCountLabel.hidden = NO;
