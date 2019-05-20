@@ -3,7 +3,7 @@ github "Flipboard/FLEX" ~> 2.4.0
 github "mapbox/Fingertips" "cdffabac5506103a2c7cc5aedeed4021df2501da"
 github "SRGSSR/DZNEmptyDataSet" "14b19b3614f93ebe9701cdfae5f1f1423b926a3e"
 github "SRGSSR/srgletterbox-ios" "8a211cc44a5ddbb25c6d14218ee4f4f71be12efe"
-github "SRGSSR/srguserdata-ios" "3bea4f6727be84717924cf822510cb32d485c904"
+github "SRGSSR/srguserdata-ios" "00ec8a49eb720e329f116b7722be9eca993eb29f"
 
 # The title margin had to be fixed, on forked repository first. We should probably submit a pull request.
 github "SRGSSR/paper-onboarding" "78f3f004a5651a6faf3d673a3f2f877dc146acb9"
