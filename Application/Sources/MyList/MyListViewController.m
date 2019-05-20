@@ -358,31 +358,31 @@
     }]];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of a delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         // Avoid issues if the user switches off notifications while the alert is displayed
-            NSArray *selectedRows = self.tableView.indexPathsForSelectedRows;
-            if (deleteAllModeEnabled || selectedRows.count == self.shows.count) {
-                MyListRemoveShows(nil);
-                
-                self.shows = nil;
-                [self reloadDataAnimated:YES];
-                
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = AnalyticsSourceSelection;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemoveAll labels:labels];
+        NSArray *selectedRows = self.tableView.indexPathsForSelectedRows;
+        if (deleteAllModeEnabled || selectedRows.count == self.shows.count) {
+            MyListRemoveShows(nil);
+            
+            self.shows = nil;
+            [self reloadDataAnimated:YES];
+            
+            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+            labels.source = AnalyticsSourceSelection;
+            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemoveAll labels:labels];
+        }
+        else {
+            NSMutableArray<SRGShow *> *showsToRemove = [NSMutableArray array];
+            for (NSIndexPath *selectedIndexPath in selectedRows) {
+                [showsToRemove addObject:self.shows[selectedIndexPath.row]];
             }
-            else {
-                NSMutableArray<SRGShow *> *showToRemove = [NSMutableArray array];
-                for (NSIndexPath *selectedIndexPath in selectedRows) {
-                    [showToRemove addObject:self.shows[selectedIndexPath.row]];
-                }
-                
-                MyListRemoveShows(showToRemove.copy);
-                
-                for (SRGShow *show in showToRemove.copy) {
-                    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                    labels.value = show.URN;
-                    labels.source = AnalyticsSourceSelection;
-                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemove labels:labels];
-                }
+            
+            MyListRemoveShows(showsToRemove.copy);
+            
+            for (SRGShow *show in showsToRemove) {
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.value = show.URN;
+                labels.source = AnalyticsSourceSelection;
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemove labels:labels];
+            }
         }
         
         if (self.tableView.isEditing) {
