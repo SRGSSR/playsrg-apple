@@ -133,8 +133,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 - (void)updateMyListStatus
 {
     BOOL inMyList = MyListContainsShow(self.show);
-    [self.myListImageButton setImage:inMyList ? [UIImage imageNamed:@"my_list_full-22"] : [UIImage imageNamed:@"my_list-22"]
-                         forState:UIControlStateNormal];
+    [self.myListImageButton setImage:inMyList ? [UIImage imageNamed:@"my_list_full-22"] : [UIImage imageNamed:@"my_list-22"] forState:UIControlStateNormal];
     
     NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
                                   NSForegroundColorAttributeName : UIColor.whiteColor };
@@ -178,14 +177,14 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (IBAction)toggleMyList:(id)sender
 {
-    BOOL togged = MyListToggleShow(self.show);
-    if (! togged) {
+    BOOL toggled = MyListToggleShow(self.show);
+    if (! toggled) {
         return;
     }
     
     BOOL inMyList = MyListContainsShow(self.show);
     
-    AnalyticsTitle analyticsTitle = (inMyList) ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
+    AnalyticsTitle analyticsTitle = inMyList? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.source = AnalyticsSourceButton;
     labels.value = self.show.URN;
