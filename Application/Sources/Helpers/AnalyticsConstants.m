@@ -51,7 +51,7 @@ AnalyticsTitle const AnalyticsTitleSubscriptionRemove = @"subscription_remove";
 AnalyticsTitle const AnalyticsTitleMyListAdd = @"my_list_add";
 AnalyticsTitle const AnalyticsTitleMyListRemove = @"my_list_remove";
 AnalyticsTitle const AnalyticsTitleMyListRemoveAll = @"my_list_remove_all";
-AnalyticsTitle const AnalyticsTitleMyListOpenShow = @"open_my_list_show";
+AnalyticsTitle const AnalyticsTitleMyListOpenShow = @"my_list_open";
 AnalyticsTitle const AnalyticsTitleSearch = @"search";
 AnalyticsTitle const AnalyticsTitleUserActivity = @"user_activity_ios";
 AnalyticsTitle const AnalyticsTitleWatchLaterAdd = @"watch_later";
@@ -72,7 +72,7 @@ AnalyticsSource const AnalyticsSourceSelection = @"selection";
 AnalyticsSource const AnalyticsSourceSwipe = @"swipe";
 
 AnalyticsType const AnalyticsTypeActionLive = @"openlive";
-AnalyticsType const AnalyticsTypeActionMyList = @"openmylist";
+AnalyticsType const AnalyticsTypeActionMyList = @"my_list_open";
 AnalyticsType const AnalyticsTypeActionDownloads = @"opendownloads";
 AnalyticsType const AnalyticsTypeActionHistory = @"openhistory";
 AnalyticsType const AnalyticsTypeActionSearch = @"opensearch";
