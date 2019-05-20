@@ -26,21 +26,24 @@ OBJC_EXPORT BOOL MyListContainsShow(SRGShow * _Nonnull show);
 OBJC_EXPORT void MyListAddShow(SRGShow * _Nonnull show);
 
 /**
- *  Remove mshows from My List. If `nil`, all shows are removed.
+ *  Remove shows from My List. If `nil`, all shows are removed.
  */
 OBJC_EXPORT void MyListRemoveShows(NSArray<SRGShow *> * _Nullable shows);
 
 /**
- *  Toggle a show to My List.
+ *  Toggle a show in My List.
  */
 OBJC_EXPORT BOOL MyListToggleShow(SRGShow * _Nonnull show);
 
 /**
  *  Get all show URNs in My List.
  */
-OBJC_EXPORT NSSet<NSString *> * _Nonnull MyListShowURNs();
+OBJC_EXPORT NSSet<NSString *> * _Nonnull MyListShowURNs(void);
 
-#pragma mark Subscriptions
+
+/**
+ *  @name Subscriptions
+ */
 
 /**
  *  Toggle a subscription to My List.
@@ -54,7 +57,10 @@ OBJC_EXPORT BOOL MyListToggleSubscriptionForShow(SRGShow * _Nonnull show, UIView
  */
 OBJC_EXPORT BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show);
 
-#pragma mark PushService
+
+/**
+ *  @name Setup
+ */
 
 /**
  * Setup My List, to synchronize subscribed shows at any time.
@@ -63,7 +69,10 @@ OBJC_EXPORT BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show);
  */
 OBJC_EXPORT void MyListSetup(void);
     
-#pragma mark Migration
+
+/**
+ *  @name Migration
+ */
 
 /**
  *  Migrate favorites (legacy plist-based way of bookmarking shows) and subscriptions, if any to My List.
