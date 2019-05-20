@@ -1764,11 +1764,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGShow *show = [self mainShow];
     if (show) {
-        BOOL toggled = MyListToggleShow(show);
-        if (! toggled) {
-            return;
-        }
-        
+        MyListToggleShow(show);
         [self updateMyListStatusForShow:show];
         
         BOOL inMyList = MyListContainsShow(show);

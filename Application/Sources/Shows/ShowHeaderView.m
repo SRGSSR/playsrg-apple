@@ -177,11 +177,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (IBAction)toggleMyList:(id)sender
 {
-    BOOL toggled = MyListToggleShow(self.show);
-    if (! toggled) {
-        return;
-    }
-    
+    MyListToggleShow(self.show);
     BOOL inMyList = MyListContainsShow(self.show);
     
     AnalyticsTitle analyticsTitle = inMyList? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;

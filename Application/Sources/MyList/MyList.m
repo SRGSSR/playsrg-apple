@@ -129,23 +129,20 @@ void MyListRemoveShows(NSArray<SRGShow *> *shows)
     [SRGUserData.currentUserData.preferences removeObjectsAtPaths:paths.copy inDomain:PlayPreferenceDomain];
 }
 
-BOOL MyListToggleShow(SRGShow *show)
+void MyListToggleShow(SRGShow *show)
 {
-    BOOL contained = MyListContainsShow(show);
-    if (contained) {
+    if (MyListContainsShow(show)) {
         MyListRemoveShows(@[show]);
     }
     else {
         MyListAddShow(show);
     }
-    
-    return YES;
 }
 
-NSSet<NSString *> * MyListShowURNs()
+NSSet<NSString *> *MyListShowURNs(void)
 {
     NSArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences dictionaryAtPath:PlayMyListPath inDomain:PlayPreferenceDomain].allKeys;
-    return (URNs) ? [NSSet setWithArray:URNs] : [NSSet set];
+    return URNs ? [NSSet setWithArray:URNs] : [NSSet set];
 }
 
 #pragma mark Subscriptions
@@ -175,7 +172,7 @@ BOOL MyListToggleSubscriptionForShow(SRGShow *show, UIView *view)
     return YES;
 }
 
-BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show)
+BOOL MyListIsSubscribedToShow(SRGShow *show)
 {
     return MyListIsSubscribedToShowURN(show.URN);
 }
@@ -185,7 +182,7 @@ BOOL MyListIsSubscribedToShow(SRGShow * _Nonnull show)
 void MyListMigrate(void)
 {
     NSArray<Favorite *> *favorites = [Favorite showFavorites];
-    if (favorites.count) {
+    if (favorites.count != 0) {
         for (Favorite *favorite in favorites) {
             if (favorite.showURN && ! MyListContainsShowURN(favorite.showURN)) {
                 MyListAddShowURNWithDate(favorite.showURN, favorite.date ?: NSDate.date);

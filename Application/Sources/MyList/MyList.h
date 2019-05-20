@@ -13,7 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 OBJC_EXPORT NSString * const PlayPreferenceDomain;
 
-#pragma mark My List entries
+
+/**
+ *  @name My List entries
+ */
 
 /**
  *  Return `YES` if the show is in My List.
@@ -33,7 +36,7 @@ OBJC_EXPORT void MyListRemoveShows(NSArray<SRGShow *> * _Nullable shows);
 /**
  *  Toggle a show in My List.
  */
-OBJC_EXPORT BOOL MyListToggleShow(SRGShow * _Nonnull show);
+OBJC_EXPORT void MyListToggleShow(SRGShow * _Nonnull show);
 
 /**
  *  Get all show URNs in My List.
