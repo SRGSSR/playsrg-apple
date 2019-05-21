@@ -243,10 +243,10 @@
 "My List" = "My List";
 
 /* Label used on a radio home page to present the My List shows. */
-"My List Radio" = "My List Radio";
+"My List Radio" = "My List";
 
 /* Label used on the TV home page to present the My List shows. */
-"My List TV" = "My List TV";
+"My List TV" = "My List";
 
 /* Text displayed when no data synchronization has been made yet */
 "Never" = "Never";
@@ -531,19 +531,19 @@
 "You can manage this feature in the settings at any time." = "You can manage this feature in the settings at any time.";
 
 /* Hint displayed when no media added to the watch later list and the device supports 3D touch */
-"You can press on a content to add it to this watch later list" = "You can press on a content to add it to this watch later list";
+"You can press on a content to add it to this watch later list" = "You can press on a content to add it to the watch later list";
 
 /* Hint displayed when no show added to theMy List and the device supports 3D touch */
-"You can press on a show to add it to My List" = "You can press on a show to add it to My List";
+"You can press on a show to add it to My List" = "You can press on a topic to add it to My List";
 
 /* Hint displayed when no downloads are available and the device supports 3D touch */
 "You can press on an item to download it (not all items can be downloaded)" = "You can press on an item to download it (not all items are allowed to be downloaded)";
 
 /* Hint displayed when no media added to the watch later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to this watch later list" = "You can tap and hold a content to add it to this watch later list";
+"You can tap and hold a content to add it to this watch later list" = "You can tap and hold a content to add it to the watch later list";
 
 /* Hint displayed when no show added to My List and the device does not support 3D touch */
-"You can tap and hold a show to add it to My List" = "You can tap and hold a show to add it to My List";
+"You can tap and hold a show to add it to My List" = "You can tap and hold a topic to add it to My List";
 
 /* Hint displayed when no downloads are available and the device does not support 3D touch */
 "You can tap and hold an item to download it (not all items can be downloaded)" = "You can tap and hold an item to download it (not all items are allowed to be downloaded)";

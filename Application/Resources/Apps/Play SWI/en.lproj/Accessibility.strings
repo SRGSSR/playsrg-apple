@@ -33,7 +33,7 @@
 "Download" = "Download";
 
 /* Show subscription label */
-"Enable notifications for show" = "Enable notifications for show";
+"Enable notifications for show" = "Enable notifications for topic";
 
 /* Introductory title for error notifications */
 "Error" = "Error";
