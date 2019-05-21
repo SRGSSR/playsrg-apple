@@ -37,6 +37,8 @@
 
 @property (nonatomic) UIColor *durationLabelBackgroundColor;
 
+@property (nonatomic, copy) NSString *progressTaskHandle;
+
 @end
 
 @implementation DownloadTableViewCell
@@ -267,7 +269,8 @@
 
 - (void)updateHistoryStatus
 {
-    HistoryPlaybackProgressForMediaMetadataAsync(self.download, ^(float progress) {
+    HistoryPlaybackProgressAsyncCancel(self.progressTaskHandle);
+    self.progressTaskHandle = HistoryPlaybackProgressForMediaMetadataAsync(self.download, ^(float progress) {
         self.progressView.hidden = (progress == 0.f);
         self.progressView.progress = progress;
     });
