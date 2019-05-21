@@ -14,6 +14,7 @@
 #import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
+#import "MyList.h"
 #import "NavigationController.h"
 #import "PlayApplication.h"
 #import "PlayErrors.h"
@@ -147,10 +148,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     [self setupHockey];
 #endif
     
-    // Local objects migration
-    [Favorite migrate];
-    WatchLaterMigrate();
-    
     // 3D touch dynamic shortcut items. If search options are available, append a search option as last item. Dynamic shortcut
     // items are persisted between application launches, do not add them several times
     UIApplicationShortcutIcon *icon = [UIApplicationShortcutIcon iconWithTemplateImageName:@"search-35"];
@@ -204,6 +201,12 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     
     [PushService.sharedService setup];
     [self updateApplicationBadge];
+    MyListSetup();
+    
+    // Local objects migration
+    [Favorite migrate];
+    WatchLaterMigrate();
+    MyListMigrate();
     
     [self showNextAvailableOnboarding];
     
@@ -718,9 +721,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     MenuItemInfo *menuItemInfo = nil;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     
-    if ([shortcutItem.type isEqualToString:@"favorites"]) {
-        menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemFavorites];
-        labels.type = AnalyticsTypeActionFavorites;
+    if ([shortcutItem.type isEqualToString:@"mylist"]) {
+        menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemMyList];
+        labels.type = AnalyticsTypeActionMyList;
     }
     else if ([shortcutItem.type isEqualToString:@"downloads"]) {
         menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemDownloads];

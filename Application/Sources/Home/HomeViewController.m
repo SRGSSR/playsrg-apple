@@ -12,9 +12,11 @@
 #import "HomeMediaListTableViewCell.h"
 #import "HomeRadioLiveTableViewCell.h"
 #import "HomeSectionInfo.h"
-#import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowListTableViewCell.h"
+#import "HomeShowsAccessTableViewCell.h"
+#import "HomeShowVerticalListTableViewCell.h"
 #import "HomeStatusHeaderView.h"
+#import "MyList.h"
 #import "NavigationController.h"
 #import "Notification.h"
 #import "NotificationsViewController.h"
@@ -28,6 +30,7 @@
 #import <PPBadgeView/PPBadgeView.h>
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGDataProvider/SRGDataProvider.h>
+#import <SRGUserData/SRGUserData.h>
 
 @interface HomeViewController ()
 
@@ -47,6 +50,8 @@
 
 @property (nonatomic, getter=isTopicsLoaded) BOOL topicsLoaded;
 @property (nonatomic, getter=isEventsLoaded) BOOL eventsLoaded;
+@property (nonatomic, getter=isMyListTVLoaded) BOOL myListTVLoaded;
+@property (nonatomic, getter=isMyListRadioLoaded) BOOL myListRadioLoaded;
 
 @end
 
@@ -103,9 +108,13 @@
     UINib *homeMediaListTableViewCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
     [self.tableView registerNib:homeMediaListTableViewCellNib forCellReuseIdentifier:mediaCellIdentifier];
     
-    NSString *showListCellIdentifier = NSStringFromClass(HomeShowListTableViewCell.class);
-    UINib *homeShowListTableViewCellNib = [UINib nibWithNibName:showListCellIdentifier bundle:nil];
-    [self.tableView registerNib:homeShowListTableViewCellNib forCellReuseIdentifier:showListCellIdentifier];
+    NSString *showCellIdentifier = NSStringFromClass(HomeShowListTableViewCell.class);
+    UINib *homeShowListTableViewCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
+    [self.tableView registerNib:homeShowListTableViewCellNib forCellReuseIdentifier:showCellIdentifier];
+    
+    NSString *showVerticalListCellIdentifier = NSStringFromClass(HomeShowVerticalListTableViewCell.class);
+    UINib *homeShowVerticalListTableViewCellNib = [UINib nibWithNibName:showVerticalListCellIdentifier bundle:nil];
+    [self.tableView registerNib:homeShowVerticalListTableViewCellNib forCellReuseIdentifier:showVerticalListCellIdentifier];
     
     NSString *radioLiveCellIdentifier = NSStringFromClass(HomeRadioLiveTableViewCell.class);
     UINib *homeRadioLiveTableViewCellNib = [UINib nibWithNibName:radioLiveCellIdentifier bundle:nil];
@@ -131,6 +140,10 @@
                                            selector:@selector(didReceiveNotification:)
                                                name:PushServiceDidReceiveNotification
                                              object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(preferencesStateDidChange:)
+                                               name:SRGPreferencesDidChangeNotification
+                                             object:SRGUserData.currentUserData.preferences];
     
     [self updateStatusHeaderViewLayout];
     [self.tableView reloadData];
@@ -371,6 +384,14 @@
         [homeSectionInfo refreshWithRequestQueue:requestQueue completionBlock:^(NSError * _Nullable error) {
             // Refresh as data becomes available for better perceived loading times
             if (! error) {
+                if (homeSection == HomeSectionTVMyListShows) {
+                    self.myListTVLoaded = YES;
+                    [self synchronizeHomeSections];
+                }
+                else if (homeSection == HomeSectionRadioMyListShows) {
+                    self.myListRadioLoaded = YES;
+                    [self synchronizeHomeSections];
+                }
                 [self.tableView reloadData];
             }
         }];
@@ -404,6 +425,24 @@
             }
             else if (! self.eventsLoaded) {
                 HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:nil title:TitleForHomeSection(homeSection.integerValue)];
+                [homeSectionInfos addObject:homeSectionInfo];
+            }
+        }
+        else if (homeSection.integerValue == HomeSectionTVMyListShows) {
+            HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:nil title:TitleForHomeSection(homeSection.integerValue)];
+            if (homeSectionInfo.items.count != 0) {
+                [homeSectionInfos addObject:homeSectionInfo];
+            }
+            else if (! self.myListTVLoaded) {
+                [homeSectionInfos addObject:homeSectionInfo];
+            }
+        }
+        else if (homeSection.integerValue == HomeSectionRadioMyListShows) {
+            HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:self.radioChannel.uid title:TitleForHomeSection(homeSection.integerValue)];
+            if (homeSectionInfo.items.count != 0) {
+                [homeSectionInfos addObject:homeSectionInfo];
+            }
+            else if (! self.myListRadioLoaded) {
                 [homeSectionInfos addObject:homeSectionInfo];
             }
         }
@@ -608,6 +647,16 @@
 - (void)didReceiveNotification:(NSNotification *)notification
 {
     [self updateBarButtonItems];
+}
+
+- (void)preferencesStateDidChange:(NSNotification *)notification
+{
+    if ([self.homeSections containsObject:@(HomeSectionTVMyListShows)] || [self.homeSections containsObject:@(HomeSectionRadioMyListShows)]) {
+        NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
+        if ([domains containsObject:PlayPreferenceDomain]) {
+            [self refresh];
+        }
+    }
 }
 
 @end

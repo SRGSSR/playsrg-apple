@@ -174,11 +174,11 @@
 	<array>
 		<dict>
 			<key>UIApplicationShortcutItemIconFile</key>
-			<string>favorites-35</string>
+			<string>my_list-35</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Favorites</string>
+			<string>My List</string>
 			<key>UIApplicationShortcutItemType</key>
-			<string>favorites</string>
+			<string>mylist</string>
 		</dict>
 		<dict>
 			<key>UIApplicationShortcutItemIconFile</key>

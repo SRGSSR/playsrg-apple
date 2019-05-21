@@ -9,17 +9,16 @@
 #import "ApplicationSettings.h"
 #import "CalendarViewController.h"
 #import "DownloadsViewController.h"
-#import "FavoritesViewController.h"
 #import "HistoryViewController.h"
 #import "HomeViewController.h"
 #import "MainNavigationController.h"
+#import "MyListViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "RadioShowsViewController.h"
 #import "SearchViewController.h"
 #import "SettingsViewController.h"
 #import "ShowsViewController.h"
-#import "SubscriptionsViewController.h"
 #import "UIDevice+PlaySRG.h"
 #import "WatchLaterViewController.h"
 #import "WebViewController.h"
@@ -367,13 +366,8 @@ static const CGFloat SideMenuOffset = -50.f;
                 break;
             }
                 
-            case MenuItemFavorites: {
-                viewController = [[FavoritesViewController alloc] init];
-                break;
-            }
-                
-            case MenuItemSubscriptions: {
-                viewController = [[SubscriptionsViewController alloc] init];
+            case MenuItemMyList: {
+                viewController = [[MyListViewController alloc] init];
                 break;
             }
                 

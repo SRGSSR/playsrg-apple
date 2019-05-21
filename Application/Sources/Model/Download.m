@@ -484,7 +484,7 @@ static NSArray<Download *> *s_sortedDownloads;
     [NSFileManager.defaultManager removeItemAtURL:localURL error:nil];
     NSError *error = nil;
     if (localURL && [NSFileManager.defaultManager moveItemAtURL:tmpFile toURL:localURL error:&error] && !error) {
-        BOOL excludeFileFromBackup = [localURL setResourceValue:@(YES)
+        BOOL excludeFileFromBackup = [localURL setResourceValue:@YES
                                                          forKey:NSURLIsExcludedFromBackupKey
                                                           error:&error];
         PlayLogDebug(@"download", @"Downloaded file %@ is%@ excluded from iTunes/iCloud backup.%@%@",

@@ -6,6 +6,7 @@
 
 #import "HomeMediaCollectionViewCell.h"
 
+#import "ApplicationConfiguration.h"
 #import "AnalyticsConstants.h"
 #import "Download.h"
 #import "History.h"
@@ -48,6 +49,8 @@
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
 @property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *titleVerticalSpacingConstraints;
+
+@property (nonatomic, copy) NSString *progressTaskHandle;
 
 @end
 
@@ -333,7 +336,8 @@
 
 - (void)updateHistoryStatus
 {
-    HistoryPlaybackProgressForMediaMetadataAsync(self.media, ^(float progress) {
+    HistoryPlaybackProgressAsyncCancel(self.progressTaskHandle);
+    self.progressTaskHandle = HistoryPlaybackProgressForMediaMetadataAsync(self.media, ^(float progress) {
         self.progressView.hidden = (progress == 0.f);
         self.progressView.progress = progress;
     });

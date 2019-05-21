@@ -150,7 +150,7 @@
 
 - (AnalyticsPageType)pageType
 {
-    return AnalyticsPageTypeSubscriptions;
+    return AnalyticsPageTypeNotifications;
 }
 
 #pragma mark UI

@@ -10,15 +10,14 @@
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "Download.h"
-#import "Favorite.h"
 #import "GoogleCast.h"
 #import "HomeTopicViewController.h"
 #import "MediaPlayerViewController.h"
 #import "MediaPreviewViewController.h"
 #import "ModuleViewController.h"
+#import "MyList.h"
 #import "PlayErrors.h"
 #import "Previewing.h"
-#import "PushService.h"
 #import "ShowViewController.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIViewController+PlaySRG_Private.h"
@@ -219,29 +218,6 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
             }]];
         }
         
-        PushService *pushService = PushService.sharedService;
-        if (pushService && media.contentType != SRGContentTypeLivestream) {
-            SRGShow *show = media.show;
-            if (show) {
-                BOOL subscribed = [pushService isSubscribedToShow:show];
-                [alertController addAction:[UIAlertAction actionWithTitle:subscribed ? NSLocalizedString(@"Unsubscribe from show", @"Button label to unsubscribe from a show") : NSLocalizedString(@"Subscribe to show", @"Button label to unsubscribe to a show") style:subscribed ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    BOOL toggled = [pushService toggleSubscriptionForShow:show inViewController:self];
-                    if (! toggled) {
-                        return ;
-                    }
-                    
-                    // Use !subscribed since the status has been reversed
-                    AnalyticsTitle analyticsTitle = (! subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
-                    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                    labels.source = AnalyticsSourceLongPress;
-                    labels.value = show.URN;
-                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-                    
-                    [Banner showSubscription:! subscribed forShowWithName:show.title inViewController:self];
-                }]];
-            }
-        }
-        
         NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:media atTime:kCMTimeZero];
         if (sharingURL) {
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Share", @"Button label of the sharing choice in the media long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -300,42 +276,21 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     else if ([previewObject isKindOfClass:SRGShow.class]) {
         SRGShow *show = previewObject;
         
-        Favorite *favorite = [Favorite favoriteForShow:show];
-        BOOL favorited = (favorite != nil);
+        BOOL inMyList = MyListContainsShow(show);
         
         alertController = [UIAlertController alertControllerWithTitle:show.title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        [alertController addAction:[UIAlertAction actionWithTitle:favorited ? NSLocalizedString(@"Remove from favorites", @"Button label to remove a favorite from the show long-press menu") : NSLocalizedString(@"Add to favorites", @"Button label to add a favorite from the show long-press menu") style:favorited ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [Favorite toggleFavoriteForShow:show];
+        [alertController addAction:[UIAlertAction actionWithTitle:inMyList ? NSLocalizedString(@"Remove from My List", @"Button label to remove a show from My list in the show long-press menu") : NSLocalizedString(@"Add to My List", @"Button label to add a show to My List in the show long-press menu") style:inMyList ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            MyListToggleShow(show);
             
-            // Use !favorited since favorited status has been reversed
-            AnalyticsTitle analyticsTitle = (! favorited) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
+            // Use !inMyList since inMyList status has been reversed
+            AnalyticsTitle analyticsTitle = (! inMyList) ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceLongPress;
             labels.value = show.URN;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
             
-            [Banner showFavorite:! favorited forItemWithName:show.title inViewController:self];
+            [Banner showMyList:! inMyList forItemWithName:show.title inViewController:self];
         }]];
-        
-        PushService *pushService = PushService.sharedService;
-        if (pushService) {
-            BOOL subscribed = [pushService isSubscribedToShow:show];
-            [alertController addAction:[UIAlertAction actionWithTitle:subscribed ? NSLocalizedString(@"Unsubscribe from show", @"Button label to unsubscribe from a show") : NSLocalizedString(@"Subscribe to show", @"Button label to unsubscribe to a show") style:subscribed ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                BOOL toggled = [pushService toggleSubscriptionForShow:show inViewController:self];
-                if (! toggled) {
-                    return;
-                }
-                
-                // Use !subscribed since the status has been reversed
-                AnalyticsTitle analyticsTitle = (! subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = AnalyticsSourceLongPress;
-                labels.value = show.URN;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-                
-                [Banner showSubscription:! subscribed forShowWithName:show.title inViewController:self];
-            }]];
-        }
         
         NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:show];
         if (sharingURL) {

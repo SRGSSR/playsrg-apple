@@ -15,7 +15,6 @@
 #import <SRGUserData/SRGUserData.h>
 
 static NSMutableDictionary<NSString *, NSNumber *> *s_cachedProgresses;
-static NSMutableDictionary<NSString *, NSString *> *s_tasks;
 static NSTimer *s_trackerTimer;
 
 #pragma mark Helpers
@@ -69,8 +68,6 @@ static SRGMedia *HistoryChapterMedia(SRGLetterboxController *controller)
 __attribute__((constructor)) static void HistoryPlayerTrackerInit(void)
 {
     s_cachedProgresses = [NSMutableDictionary dictionary];
-    s_tasks = [NSMutableDictionary dictionary];
-    
     s_trackerTimer = [NSTimer play_timerWithTimeInterval:1. repeats:YES block:^(NSTimer * _Nonnull timer) {
         NSString *deviceUid = UIDevice.currentDevice.name;
         
@@ -151,19 +148,14 @@ float HistoryPlaybackProgressForMediaMetadata(id<SRGMediaMetadata> mediaMetadata
     }
 }
 
-void HistoryPlaybackProgressForMediaMetadataAsync(id<SRGMediaMetadata> mediaMetadata, void (^update)(float progress))
+NSString *HistoryPlaybackProgressForMediaMetadataAsync(id<SRGMediaMetadata> mediaMetadata, void (^update)(float progress))
 {
     if (! HistoryIsProgressForMediaMetadataTracked(mediaMetadata)) {
         update(0.f);
-        return;
+        return nil;
     }
     
-    NSString *taskHandle = s_tasks[mediaMetadata.URN];
-    if (taskHandle) {
-        [SRGUserData.currentUserData.history cancelTaskWithHandle:taskHandle];
-    }
-    
-    s_tasks[mediaMetadata.URN] = [SRGUserData.currentUserData.history historyEntryWithUid:mediaMetadata.URN completionBlock:^(SRGHistoryEntry * _Nullable historyEntry, NSError * _Nullable error) {
+    NSString *handle = [SRGUserData.currentUserData.history historyEntryWithUid:mediaMetadata.URN completionBlock:^(SRGHistoryEntry * _Nullable historyEntry, NSError * _Nullable error) {
         if (error) {
             return;
         }
@@ -172,67 +164,19 @@ void HistoryPlaybackProgressForMediaMetadataAsync(id<SRGMediaMetadata> mediaMeta
         
         dispatch_async(dispatch_get_main_queue(), ^{
             s_cachedProgresses[mediaMetadata.URN] = (progress > 0.f) ? @(progress) : nil;
-            s_tasks[mediaMetadata.URN] = nil;
-            
             update(progress);
         });
     }];
     
     NSNumber *cachedProgress = s_cachedProgresses[mediaMetadata.URN];
     update(cachedProgress.floatValue);
-}
-
-#pragma mark Favorite functions
-
-static BOOL HistoryIsProgressForFavoriteTracked(Favorite *favorite)
-{
-    return favorite && favorite.type == FavoriteTypeMedia && favorite.duration > 0. && favorite.mediaContentType != FavoriteMediaContentTypeLive && favorite.mediaContentType != FavoriteMediaContentTypeScheduledLive;
-}
-
-static float HistoryPlaybackProgressForFavoriteHistoryEntry(SRGHistoryEntry *historyEntry, Favorite *favorite)
-{
-    NSCParameterAssert(historyEntry);
-    return HistoryPlaybackProgress(CMTimeGetSeconds(historyEntry.lastPlaybackTime), favorite.duration / 1000.);
-}
-
-float HistoryPlaybackProgressForFavorite(Favorite *favorite)
-{
-    if (HistoryIsProgressForFavoriteTracked(favorite)) {
-        SRGHistoryEntry *historyEntry = [SRGUserData.currentUserData.history historyEntryWithUid:favorite.mediaURN];
-        return historyEntry ? HistoryPlaybackProgressForFavoriteHistoryEntry(historyEntry, favorite) : 0.f;
-    }
-    else {
-        return 0.f;
-    }
-}
-
-void HistoryPlaybackProgressForFavoriteAsync(Favorite *favorite, void (^update)(float progress))
-{
-    if (! HistoryIsProgressForFavoriteTracked(favorite)) {
-        update(0.f);
-        return;
-    }
     
-    NSString *taskHandle = s_tasks[favorite.mediaURN];
-    if (taskHandle) {
-        [SRGUserData.currentUserData.history cancelTaskWithHandle:taskHandle];
+    return handle;
+}
+
+void HistoryPlaybackProgressAsyncCancel(NSString *handle)
+{
+    if (handle) {
+        [SRGUserData.currentUserData.history cancelTaskWithHandle:handle];
     }
-    
-    s_tasks[favorite.mediaURN] = [SRGUserData.currentUserData.history historyEntryWithUid:favorite.mediaURN completionBlock:^(SRGHistoryEntry * _Nullable historyEntry, NSError * _Nullable error) {
-        if (error) {
-            return;
-        }
-        
-        float progress = historyEntry ? HistoryPlaybackProgressForFavoriteHistoryEntry(historyEntry, favorite) : 0.f;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            s_cachedProgresses[favorite.mediaURN] = (progress > 0.f) ? @(progress) : nil;
-            s_tasks[favorite.mediaURN] = nil;
-            
-            update(progress);
-        });
-    }];
-    
-    NSNumber *cachedProgress = s_cachedProgresses[favorite.mediaURN];
-    update(cachedProgress.floatValue);
 }

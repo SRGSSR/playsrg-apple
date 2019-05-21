@@ -42,6 +42,8 @@
 @property (nonatomic) UIColor *blockingOverlayViewColor;
 @property (nonatomic) UIColor *durationLabelBackgroundColor;
 
+@property (nonatomic, copy) NSString *progressTaskHandle;
+
 @end
 
 @implementation HistoryTableViewCell
@@ -307,7 +309,8 @@
 
 - (void)updateHistoryStatus
 {
-    HistoryPlaybackProgressForMediaMetadataAsync(self.media, ^(float progress) {
+    HistoryPlaybackProgressAsyncCancel(self.progressTaskHandle);
+    self.progressTaskHandle = HistoryPlaybackProgressForMediaMetadataAsync(self.media, ^(float progress) {
         self.progressView.hidden = (progress == 0.f);
         self.progressView.progress = progress;
     });

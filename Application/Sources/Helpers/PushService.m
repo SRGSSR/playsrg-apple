@@ -5,6 +5,7 @@
 //
 
 #import "PushService.h"
+#import "PushService+Private.h"
 
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
@@ -14,10 +15,6 @@
 #import <libextobjc/libextobjc.h>
 #import <UrbanAirship-iOS-SDK/AirshipKit.h>
 #import <UserNotifications/UserNotifications.h>
-
-NSString * const PushServiceSubscriptionStateDidChangeNotification = @"PushServiceSubscriptionStateDidChangeNotification";
-NSString * const PushServiceSubscriptionObjectKey = @"PushServiceSubscriptionObject";
-NSString * const PushServiceSubscriptionStateKey = @"PushServiceSubscriptionState";
 
 NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNotification";
 
@@ -123,19 +120,14 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     return environmentIdentifier;
 }
 
-- (NSArray<NSString *> *)subscribedShowURNs
+- (NSSet<NSString *> *)subscribedShowURNs
 {
-    if (! self.enabled) {
-        return @[];
-    }
-    
-    NSMutableArray<NSString *> *URNs = [NSMutableArray array];
-    
     NSArray<NSString *> *tags = [UAirship push].tags;
     if (tags.count == 0) {
-        return @[];
+        return [NSSet set];
     }
     
+    NSMutableSet<NSString *> *URNs = [NSMutableSet set];
     for (NSString *tag in tags) {
         NSString *URN = [self showURNFromTag:tag];
         if (URN) {
@@ -204,14 +196,14 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 
 #pragma mrk Subscription management
 
-- (NSString *)tagForURN:(NSString *)URN
+- (NSString *)tagForShowURN:(NSString *)URN
 {
     return [NSString stringWithFormat:@"%@|%@|%@|%@", self.appIdentifier, NotificationTypeString(NotificationTypeNewOnDemandContentAvailable), self.environmentIdentifier, URN];
 }
 
 - (NSString *)tagForShow:(SRGShow *)show
 {
-    return [self tagForURN:show.URN];
+    return [self tagForShowURN:show.URN];
 }
 
 - (NSString *)showURNFromTag:(NSString *)tag
@@ -232,56 +224,33 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     return components[3];
 }
 
-- (BOOL)subscribeToShow:(SRGShow *)show
+- (void)subscribeToShowURNs:(NSSet<NSString *> *)URNs
 {
-    if (! self.enabled || ! show) {
-        return NO;
+    if (URNs.count == 0) {
+        return;
     }
     
-    [[UAirship push] addTag:[self tagForShow:show]];
+    for (NSString *URN in URNs) {
+        [[UAirship push] addTag:[self tagForShowURN:URN]];
+    }
     [[UAirship push] updateRegistration];
-    
-    [NSNotificationCenter.defaultCenter postNotificationName:PushServiceSubscriptionStateDidChangeNotification
-                                                      object:self
-                                                    userInfo:@{ PushServiceSubscriptionObjectKey : show,
-                                                                PushServiceSubscriptionStateKey : @YES }];
-    
-    return YES;
 }
 
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show
+- (void)unsubscribeFromShowURNs:(NSSet<NSString *> *)URNs
 {
-    if ([self isSubscribedToShow:show]) {
-        return [self unsubscribeFromShow:show];
-    }
-    else {
-        return [self subscribeToShow:show];
-    }
-}
-
-- (BOOL)unsubscribeFromShow:(SRGShow *)show
-{
-    if (! self.enabled || ! show) {
-        return NO;
+    if (URNs.count == 0) {
+        return;
     }
     
-    [[UAirship push] removeTag:[self tagForShow:show]];
+    for (NSString *URN in URNs) {
+        [[UAirship push] removeTag:[self tagForShowURN:URN]];
+    }
     [[UAirship push] updateRegistration];
-    
-    [NSNotificationCenter.defaultCenter postNotificationName:PushServiceSubscriptionStateDidChangeNotification
-                                                      object:self
-                                                    userInfo:@{ PushServiceSubscriptionObjectKey : show,
-                                                                PushServiceSubscriptionStateKey : @NO }];
-    return YES;
 }
 
-- (BOOL)isSubscribedToShow:(SRGShow *)show
+- (BOOL)isSubscribedToShowURN:(NSString *)URN
 {
-    if (! self.enabled || ! show) {
-        return NO;
-    }
-    
-    return [[UAirship push].tags containsObject:[self tagForShow:show]];
+    return [[UAirship push].tags containsObject:[self tagForShowURN:URN]];
 }
 
 #pragma mark Actions
@@ -376,6 +345,22 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 
 @implementation PushService (Helpers)
 
+- (BOOL)toggleSubscriptionForShow:(SRGShow *)show
+{
+    if (! self.enabled || ! show) {
+        return NO;
+    }
+    
+    if ([self isSubscribedToShowURN:show.URN]) {
+        [self unsubscribeFromShowURNs:[NSSet setWithObject:show.URN]];
+    }
+    else {
+        [self subscribeToShowURNs:[NSSet setWithObject:show.URN]];
+    }
+    
+    return YES;
+}
+
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show inView:(UIView *)view
 {
     return [self toggleSubscriptionForShow:show inViewController:view.nearestViewController];
@@ -383,7 +368,7 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
 
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show inViewController:(UIViewController *)viewController
 {
-    if (! [self toggleSubscriptionForShow:show]) {
+    if (! self.enabled) {
         if (! [self presentSystemAlertForPushNotifications]) {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable notifications?", @"Question displayed at the top of an alert asking the user to enable notifications")
                                                                                      message:NSLocalizedString(@"For the application to inform you when a new episode is available, notifications must be enabled.", @"Explanation displayed in the alert asking the user to enable notifications")
@@ -397,8 +382,10 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
         }
         return NO;
     }
-    
-    return YES;
+    else {
+        [self toggleSubscriptionForShow:show];
+        return YES;
+    }
 }
 
 @end

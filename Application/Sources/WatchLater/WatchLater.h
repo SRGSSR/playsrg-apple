@@ -36,14 +36,14 @@ OBJC_EXPORT NSString * const WatchLaterMediaMetadataStateKey;                   
 /**
  *  Return `YES` if the media metadata can be added to the watch later list.
  *
- *  @discussion Must be called from the main thread
+ *  @discussion Must be called from the main thread.
  */
 OBJC_EXPORT BOOL WatchLaterCanStoreMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata);
 
 /**
  *  Return `YES` if the media metadata is in the watch later list.
  *
- *  @discussion Must be called from the main thread
+ *  @discussion Must be called from the main thread.
  */
 OBJC_EXPORT BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata);
 
@@ -69,7 +69,7 @@ OBJC_EXPORT void WatchLaterRemoveMediaMetadata(id<SRGMediaMetadata> _Nonnull med
 OBJC_EXPORT void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, void (^completion)(BOOL added, NSError * _Nullable error));
 
 /**
- *  Migrate favorites (legacy plist-based way of bookmarking medias), if anym to the watch later playlist.
+ *  Migrate favorites (legacy plist-based way of bookmarking medias), if any to the watch later playlist.
  */
 OBJC_EXPORT void WatchLaterMigrate(void);
 

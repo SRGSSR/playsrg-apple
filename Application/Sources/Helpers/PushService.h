@@ -10,14 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Notification sent when a subscription state changes (added or removed). Use associated keys to retrieve information
- *  about the change.
- */
-OBJC_EXPORT NSString * const PushServiceSubscriptionStateDidChangeNotification;                                         // Notification name
-OBJC_EXPORT NSString * const PushServiceSubscriptionObjectKey;                                                          // Object subscribed to / from
-OBJC_EXPORT NSString * const PushServiceSubscriptionStateKey;                                                           // Key to access the current subscription state as a `BOOL` (wrapped as an `NSNumber`)
-
-/**
  *  Notitfication sent when a push notification has been received by the device.
  */
 OBJC_EXPORT NSString * const PushServiceDidReceiveNotification;
@@ -59,33 +51,6 @@ OBJC_EXPORT NSString * const PushServiceDidReceiveNotification;
  *  Update the application badge on the Springboard.
  */
 - (void)updateApplicationBadge;
-
-/**
- *  Toggle subscription for the specified show.
- */
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show;
-
-/**
- *  Remove any subscription for the specified show.
- */
-- (BOOL)unsubscribeFromShow:(SRGShow *)show;
-
-/**
- *  Return YES iff the user has subscribed to the specified show.
- */
-- (BOOL)isSubscribedToShow:(SRGShow *)show;
-
-/**
- *  Return the URNs of all shows the user has subscribed to.
- */
-@property (nonatomic, readonly) NSArray<NSString *> *subscribedShowURNs;
-
-@end
-
-@interface PushService (Helpers)
-
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show inView:(nullable UIView *)view;
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show inViewController:(nullable UIViewController *)viewController;
 
 @end
 

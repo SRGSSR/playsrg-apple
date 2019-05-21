@@ -70,13 +70,8 @@
             break;
         }
             
-        case MenuItemFavorites: {
-            image = [UIImage imageNamed:@"favorite-22"];
-            break;
-        }
-            
-        case MenuItemSubscriptions: {
-            image = [UIImage imageNamed:@"subscriptions-22"];
+        case MenuItemMyList: {
+            image = [UIImage imageNamed:@"my_list-22"];
             break;
         }
             

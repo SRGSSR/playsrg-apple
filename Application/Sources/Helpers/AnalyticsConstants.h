@@ -17,10 +17,9 @@ typedef NS_ENUM(NSInteger, AnalyticsPageType) {
     AnalyticsPageTypeRadio,
     AnalyticsPageTypeOnline,
     AnalyticsPageTypeSystem,
-    AnalyticsPageTypeFavorites,
     AnalyticsPageTypeDownloads,
     AnalyticsPageTypeHistory,
-    AnalyticsPageTypeSubscriptions,
+    AnalyticsPageTypeMyList,
     AnalyticsPageTypeNotifications,
     AnalyticsPageTypeSearch,
     AnalyticsPageTypeOnboarding,
@@ -62,31 +61,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadRemoveAll;
  *  Title for events related to download playback
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadOpenMedia;
-
-/**
- *  Title for events related to favorites
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteAdd;
-
-/**
- *  Title for events related to deletion of a favorite
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemove;
-
-/**
- *  Title for events related to deletion of all favorites
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemoveAll;
-
-/**
- *  Title for events related to favorite playback
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteOpenMedia;
-
-/**
- *  Title for events related to opening a favorited show
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteOpenShow;
 
 /**
  *  Title for Google Cast events
@@ -156,14 +130,24 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSubscriptionAdd;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSubscriptionRemove;
 
 /**
- *  Title for events related to deletion of all subscriptions
+ *  Title for events related to subscriptions
  */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSubscriptionRemoveAll;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListAdd;
 
 /**
- *  Title for events related to opening a subscription show
+ *  Title for events related to deletion of a subscription
  */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSubscriptionOpenShow;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListRemove;
+
+/**
+ *  Title for events related to deletion of all subscriptions
+ */
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListRemoveAll;
+
+/**
+ *  Title for events related to opening a show from My List
+ */
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListOpenShow;
 
 /**
  *  Title for events related to the search
@@ -221,7 +205,7 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceSwipe;
  *  Actions
  */
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLive;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionFavorites;
+OBJC_EXPORT AnalyticsType const AnalyticsTypeActionMyList;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDownloads;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionHistory;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionSearch;

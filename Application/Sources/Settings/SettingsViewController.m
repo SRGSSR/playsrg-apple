@@ -11,8 +11,8 @@
 #import "ApplicationSettings.h"
 #import "Banner.h"
 #import "Download.h"
-#import "Favorite.h"
 #import "History.h"
+#import "MyList.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "Onboarding.h"
@@ -212,8 +212,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             
             [self.requestQueue reportError:error];
             [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
-                if (! [PushService.sharedService isSubscribedToShow:show]) {
-                    [PushService.sharedService toggleSubscriptionForShow:show];
+                if (! MyListIsSubscribedToShow(show)) {
+                    MyListAddShow(show);
+                    MyListToggleSubscriptionForShow(show, nil);
                 }
             }];
         }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
@@ -225,8 +226,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                 
                 [self.requestQueue reportError:error];
                 [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if (! [PushService.sharedService isSubscribedToShow:show]) {
-                        [PushService.sharedService toggleSubscriptionForShow:show];
+                    if (! MyListIsSubscribedToShow(show)) {
+                        MyListAddShow(show);
+                        MyListToggleSubscriptionForShow(show, nil);
                     }
                 }];
             }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
@@ -246,7 +248,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsClearAllContentsButton]) {
         [self clearWebCache];
         [UIImage srg_clearVectorImageCache];
-        [Favorite removeAllFavorites];
         [Download removeAllDownloads];
     }
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)

@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, HomeSection) {
     HomeSectionTVScheduledLivestreams,
     HomeSectionTVLiveCenter,
     HomeSectionTVShowsAccess,
+    HomeSectionTVMyListShows,
     
     // Radio sections
     HomeSectionRadioLive,
@@ -37,7 +38,8 @@ typedef NS_ENUM(NSInteger, HomeSection) {
     HomeSectionRadioLatest,
     HomeSectionRadioLatestVideos,
     HomeSectionRadioAllShows,
-    HomeSectionRadioShowsAccess
+    HomeSectionRadioShowsAccess,
+    HomeSectionRadioMyListShows
 };
 
 typedef NS_ENUM(NSInteger, TopicSection) {
@@ -50,8 +52,7 @@ typedef NS_ENUM(NSInteger, MenuItem) {
     MenuItemUnknown,
     
     MenuItemSearch,
-    MenuItemFavorites,
-    MenuItemSubscriptions,
+    MenuItemMyList,
     MenuItemWatchLater,
     MenuItemDownloads,
     MenuItemHistory,
