@@ -33,7 +33,7 @@ NSString *TitleForHomeSection(HomeSection homeSection)
                      @(HomeSectionTVScheduledLivestreams) : NSLocalizedString(@"Web livestreams", @"Label used on the home page to present scheduled livestream medias. Only on test versions."),
                      @(HomeSectionTVLiveCenter) : NSLocalizedString(@"Live center", @"Label used on the home page to present live center medias. Only on test versions."),
                      @(HomeSectionTVShowsAccess) : NSLocalizedString(@"Shows", @"Label used on the TV home page to present the shows AZ and shows by date access buttons."),
-                     @(HomeSectionTVMyListShows) : NSLocalizedString(@"My List TV", @"Label used on the TV home page to present the My List shows."),
+                     @(HomeSectionTVMyListShows) : NSLocalizedString(@"My List", @"Label used on the TV home page to present the My List shows."),
                      @(HomeSectionRadioLive) : NSLocalizedString(@"Live radio", @"Label used on a radio home page to present the livestream"),
                      @(HomeSectionRadioLatestEpisodes) : NSLocalizedString(@"The latest episodes", @"Label used on a radio home page to present the latest audio episodes"),
                      @(HomeSectionRadioMostPopular) : NSLocalizedString(@"Most listened to", @"Label used on a radio home page to present the most listened / popular audio medias"),
@@ -41,7 +41,7 @@ NSString *TitleForHomeSection(HomeSection homeSection)
                      @(HomeSectionRadioLatestVideos) : NSLocalizedString(@"Latest videos", @"Label used on a radio home page to present the latest videos"),
                      @(HomeSectionRadioAllShows) : NSLocalizedString(@"Shows", @"Label used on a radio home page to present its associated shows"),
                      @(HomeSectionRadioShowsAccess) : NSLocalizedString(@"Shows", @"Label used on a radio home page to present the shows AZ and shows by date access buttons."),
-                     @(HomeSectionRadioMyListShows) : NSLocalizedString(@"My List Radio", @"Label used on a radio home page to present the My List shows.") };
+                     @(HomeSectionRadioMyListShows) : NSLocalizedString(@"My List", @"Label used on a radio home page to present the My List shows.") };
     });
     return s_names[@(homeSection)];
 }
