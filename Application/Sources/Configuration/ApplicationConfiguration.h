@@ -118,6 +118,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, nullable) NSURL *impressumURL;
 @property (nonatomic, readonly, nullable) NSURL *termsAndConditionsURL;
+@property (nonatomic, readonly, nullable) NSURL *dataProtectionURL;
 @property (nonatomic, readonly, nullable) NSURL *betaTestingURL;
 @property (nonatomic, readonly, nullable) NSURL *sourceCodeURL;
 
