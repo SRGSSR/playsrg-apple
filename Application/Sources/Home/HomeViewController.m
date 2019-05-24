@@ -8,6 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
+#import "Favorites.h"
 #import "HomeSectionHeaderView.h"
 #import "HomeMediaListTableViewCell.h"
 #import "HomeRadioLiveTableViewCell.h"
@@ -16,7 +17,6 @@
 #import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowVerticalListTableViewCell.h"
 #import "HomeStatusHeaderView.h"
-#import "MyList.h"
 #import "NavigationController.h"
 #import "Notification.h"
 #import "NotificationsViewController.h"
@@ -50,8 +50,8 @@
 
 @property (nonatomic, getter=isTopicsLoaded) BOOL topicsLoaded;
 @property (nonatomic, getter=isEventsLoaded) BOOL eventsLoaded;
-@property (nonatomic, getter=isMyListTVLoaded) BOOL myListTVLoaded;
-@property (nonatomic, getter=isMyListRadioLoaded) BOOL myListRadioLoaded;
+@property (nonatomic, getter=isMyListTVLoaded) BOOL favoriteTVShowsLoaded;
+@property (nonatomic, getter=isMyListRadioLoaded) BOOL favoriteRadioShowsLoaded;
 
 @end
 
@@ -384,12 +384,12 @@
         [homeSectionInfo refreshWithRequestQueue:requestQueue completionBlock:^(NSError * _Nullable error) {
             // Refresh as data becomes available for better perceived loading times
             if (! error) {
-                if (homeSection == HomeSectionTVMyListShows) {
-                    self.myListTVLoaded = YES;
+                if (homeSection == HomeSectionTVFavoriteShows) {
+                    self.favoriteTVShowsLoaded = YES;
                     [self synchronizeHomeSections];
                 }
-                else if (homeSection == HomeSectionRadioMyListShows) {
-                    self.myListRadioLoaded = YES;
+                else if (homeSection == HomeSectionRadioFavoriteShows) {
+                    self.favoriteRadioShowsLoaded = YES;
                     [self synchronizeHomeSections];
                 }
                 [self.tableView reloadData];
@@ -428,21 +428,21 @@
                 [homeSectionInfos addObject:homeSectionInfo];
             }
         }
-        else if (homeSection.integerValue == HomeSectionTVMyListShows) {
+        else if (homeSection.integerValue == HomeSectionTVFavoriteShows) {
             HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:nil title:TitleForHomeSection(homeSection.integerValue)];
             if (homeSectionInfo.items.count != 0) {
                 [homeSectionInfos addObject:homeSectionInfo];
             }
-            else if (! self.myListTVLoaded) {
+            else if (! self.favoriteTVShowsLoaded) {
                 [homeSectionInfos addObject:homeSectionInfo];
             }
         }
-        else if (homeSection.integerValue == HomeSectionRadioMyListShows) {
+        else if (homeSection.integerValue == HomeSectionRadioFavoriteShows) {
             HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:self.radioChannel.uid title:TitleForHomeSection(homeSection.integerValue)];
             if (homeSectionInfo.items.count != 0) {
                 [homeSectionInfos addObject:homeSectionInfo];
             }
-            else if (! self.myListRadioLoaded) {
+            else if (! self.favoriteRadioShowsLoaded) {
                 [homeSectionInfos addObject:homeSectionInfo];
             }
         }
@@ -651,7 +651,7 @@
 
 - (void)preferencesStateDidChange:(NSNotification *)notification
 {
-    if ([self.homeSections containsObject:@(HomeSectionTVMyListShows)] || [self.homeSections containsObject:@(HomeSectionRadioMyListShows)]) {
+    if ([self.homeSections containsObject:@(HomeSectionTVFavoriteShows)] || [self.homeSections containsObject:@(HomeSectionRadioFavoriteShows)]) {
         NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
         if ([domains containsObject:PlayPreferenceDomain]) {
             [self refresh];

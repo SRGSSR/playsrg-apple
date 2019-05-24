@@ -4,14 +4,14 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "MyListViewController.h"
+#import "FavoritesViewController.h"
 
 #import "ApplicationConfiguration.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
 #import "ShowViewController.h"
-#import "MyList.h"
-#import "MyListTableViewCell.h"
+#import "FavoriteTableViewCell.h"
+#import "Favorites.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -21,7 +21,7 @@
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGUserData/SRGUserData.h>
 
-@interface MyListViewController () <MyListTableViewCellDelegate>
+@interface FavoritesViewController () <FavoriteTableViewCellDelegate>
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
 
@@ -35,7 +35,7 @@
 
 @end
 
-@implementation MyListViewController
+@implementation FavoritesViewController
 
 #pragma mark View lifecycle
 
@@ -43,7 +43,7 @@
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"My List", @"Title displayed at the top of the My List screen");
+    self.title = NSLocalizedString(@"Favorites", @"Title displayed at the top of the favorites screen");
 
     self.view.backgroundColor = UIColor.play_blackColor;
     
@@ -56,7 +56,7 @@
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
     
-    NSString *cellIdentifier = NSStringFromClass(MyListTableViewCell.class);
+    NSString *cellIdentifier = NSStringFromClass(FavoriteTableViewCell.class);
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
     
@@ -111,7 +111,7 @@
 {
     self.requestedShows = [NSArray array];
     
-    NSArray<NSString *> *showURNs = MyListShowURNs().allObjects;
+    NSArray<NSString *> *showURNs = FavoritesShowURNs().allObjects;
     NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
     
     @weakify(self)
@@ -166,7 +166,7 @@
 
 - (AnalyticsPageType)pageType
 {
-    return AnalyticsPageTypeMyList;
+    return AnalyticsPageTypeFavorites;
 }
 
 #pragma mark UI
@@ -235,7 +235,7 @@
                                                attributes:attributes];
     }
     else {
-        return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No content", @"Text displayed when no show has been added to My List")
+        return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No content", @"Text displayed when no show has been added to favorites")
                                                attributes:attributes];
     }
 }
@@ -251,7 +251,7 @@
                                                attributes:attributes];
     }
     else {
-        NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a show to add it to My List", @"Hint displayed when no show added to theMy List and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a show to add it to My List", @"Hint displayed when no show added to My List and the device does not support 3D touch");
+        NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a show to add it to favorites", @"Hint displayed when no show added to favorites and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a show to add it to favorites", @"Hint displayed when no show added to favorites and the device does not support 3D touch");
         return [[NSAttributedString alloc] initWithString:description
                                                attributes:attributes];
     }
@@ -283,17 +283,17 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
-#pragma mark MyListTableViewCellDelegate protocol
+#pragma mark FavoriteTableViewCellDelegate protocol
 
-- (void)myListTableViewCell:(MyListTableViewCell *)myListTableViewCell deleteShow:(SRGShow *)show
+- (void)favoriteTableViewCell:(FavoriteTableViewCell *)favoriteTableViewCell deleteShow:(SRGShow *)show
 {
-    MyListRemoveShows(@[show]);
+    FavoritesRemoveShows(@[show]);
     [self updateInterfaceForEditionAnimated:YES];
     
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.value = show.URN;
     labels.source = AnalyticsSourceSwipe;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemove labels:labels];
+    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteRemove labels:labels];
 }
 
 #pragma mark UITableViewDataSource protocol
@@ -305,7 +305,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(MyListTableViewCell.class) forIndexPath:indexPath];
+    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(FavoriteTableViewCell.class) forIndexPath:indexPath];
 }
 
 #pragma mark UITableViewDelegate protocol
@@ -316,7 +316,7 @@
     return (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 94.f : 110.f;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(MyListTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(FavoriteTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.show = self.shows[indexPath.row];
     cell.cellDelegate = self;
@@ -334,7 +334,7 @@
     
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.value = show.URN;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListOpenShow labels:labels];
+    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteOpen labels:labels];
 }
 
 #pragma mark Actions
@@ -360,8 +360,8 @@
         }
     }
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:deleteAllModeEnabled ? NSLocalizedString(@"Remove all content", @"Title of the confirmation pop-up displayed when the user is about to clean My List") : NSLocalizedString(@"Remove content", @"Title of the confirmation pop-up displayed when the user is about to remove selected entries from My List")
-                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"Are you sure you want to delete all items?", @"Confirmation message displayed when the user is about to clean My List") : NSLocalizedString(@"Are you sure you want to delete the selected items?", @"Confirmation message displayed when the user is about to remove selected entries from My List")
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:deleteAllModeEnabled ? NSLocalizedString(@"Remove all content", @"Title of the confirmation pop-up displayed when the user is about to clean all favorites") : NSLocalizedString(@"Remove content", @"Title of the confirmation pop-up displayed when the user is about to remove selected entries from favorites")
+                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"Are you sure you want to delete all items?", @"Confirmation message displayed when the user is about to clean all favorites") : NSLocalizedString(@"Are you sure you want to delete the selected items?", @"Confirmation message displayed when the user is about to remove selected entries from favorites")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (deleteAllModeEnabled) {
@@ -376,14 +376,14 @@
         // Avoid issues if the user switches off notifications while the alert is displayed
         NSArray *selectedRows = self.tableView.indexPathsForSelectedRows;
         if (deleteAllModeEnabled || selectedRows.count == self.shows.count) {
-            MyListRemoveShows(nil);
+            FavoritesRemoveShows(nil);
             
             self.shows = nil;
             [self reloadDataAnimated:YES];
             
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceSelection;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemoveAll labels:labels];
+            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteRemoveAll labels:labels];
         }
         else {
             NSMutableArray<SRGShow *> *showsToRemove = [NSMutableArray array];
@@ -391,13 +391,13 @@
                 [showsToRemove addObject:self.shows[selectedIndexPath.row]];
             }
             
-            MyListRemoveShows(showsToRemove.copy);
+            FavoritesRemoveShows(showsToRemove.copy);
             
             for (SRGShow *show in showsToRemove) {
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.value = show.URN;
                 labels.source = AnalyticsSourceSelection;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleMyListRemove labels:labels];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteRemove labels:labels];
             }
         }
         

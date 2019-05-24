@@ -10,7 +10,7 @@
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "MediaCollectionViewCell.h"
-#import "MyList.h"
+#import "Favorites.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayAppDelegate.h"
 #import "ShowHeaderView.h"
@@ -188,21 +188,21 @@
 {
     NSMutableArray<id<UIPreviewActionItem>> *previewActionItems = [NSMutableArray array];
     
-    BOOL inMyList = MyListContainsShow(self.show);
+    BOOL isFavorite = FavoritesContainsShow(self.show);
     
-    UIPreviewAction *myListAction = [UIPreviewAction actionWithTitle:inMyList ? NSLocalizedString(@"Remove from My List", @"Button label to remove a show from My List in the show preview window") : NSLocalizedString(@"Add to My List", @"Button label to add a show to My List in the show preview window") style:inMyList ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        MyListToggleShow(self.show);
+    UIPreviewAction *favoriteAction = [UIPreviewAction actionWithTitle:isFavorite ? NSLocalizedString(@"Remove from favorites", @"Button label to remove a show from favorites in the show preview window") : NSLocalizedString(@"Add to favorites", @"Button label to add a show to favorites in the show preview window") style:isFavorite ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        FavoritesToggleShow(self.show);
         
-        // Use !inMyList since inMyList status has been reversed
-        AnalyticsTitle analyticsTitle = (! inMyList) ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
+        // Use !isFavorite since favorite status has been reversed
+        AnalyticsTitle analyticsTitle = (! isFavorite) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.source = AnalyticsSourcePeekMenu;
         labels.value = self.show.URN;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
         
-        [Banner showMyList:! inMyList forItemWithName:self.show.title inViewController:nil /* Not 'self' since dismissed */];
+        [Banner showFavorite:! isFavorite forItemWithName:self.show.title inViewController:nil /* Not 'self' since dismissed */];
     }];
-    [previewActionItems addObject:myListAction];    
+    [previewActionItems addObject:favoriteAction];    
     
     NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
     if (sharingURL) {

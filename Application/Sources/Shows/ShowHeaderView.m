@@ -8,7 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "Banner.h"
-#import "MyList.h"
+#import "Favorites.h"
 #import "NSBundle+PlaySRG.h"
 #import "PushService.h"
 #import "UIImage+PlaySRG.h"
@@ -133,27 +133,27 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (void)updateMyListStatus
 {
-    BOOL inMyList = MyListContainsShow(self.show);
-    [self.myListImageButton setImage:inMyList ? [UIImage imageNamed:@"my_list_full_show_page-22"] : [UIImage imageNamed:@"my_list_show_page-22"] forState:UIControlStateNormal];
+    BOOL isFavorite = FavoritesContainsShow(self.show);
+    [self.myListImageButton setImage:isFavorite ? [UIImage imageNamed:@"my_list_full_show_page-22"] : [UIImage imageNamed:@"my_list_show_page-22"] forState:UIControlStateNormal];
     
     NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
                                   NSForegroundColorAttributeName : UIColor.whiteColor };
-    NSString *title = [inMyList ? NSLocalizedString(@"Remove from My List", @"My List show removal label in the show view") : NSLocalizedString(@"Add to My List", @"My List show insertion label in the show view") uppercaseString];
+    NSString *title = [isFavorite ? NSLocalizedString(@"Remove from favorites", @"Favorite show removal label in the show view") : NSLocalizedString(@"Add to favorites", @"Favorite show insertion label in the show view") uppercaseString];
     [self.myListLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
                                                                                attributes:attributes] forState:UIControlStateNormal];
 }
 
 - (void)updateSubscriptionStatus
 {
-    BOOL inMyList =  MyListContainsShow(self.show);
-    self.subscriptionButton.hidden = ! inMyList;
+    BOOL isFavorite =  FavoritesContainsShow(self.show);
+    self.subscriptionButton.hidden = ! isFavorite;
     
-    if (! inMyList) {
+    if (! isFavorite) {
         return;
     }
     
     if (PushService.sharedService.enabled) {
-        BOOL subscribed = MyListIsSubscribedToShow(self.show);
+        BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
         [self.subscriptionButton setImage:subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"]
                                  forState:UIControlStateNormal];
         self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Disable notifications for show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
@@ -184,26 +184,26 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (IBAction)toggleMyList:(id)sender
 {
-    MyListToggleShow(self.show);
-    BOOL inMyList = MyListContainsShow(self.show);
+    FavoritesToggleShow(self.show);
+    BOOL isFavorite = FavoritesContainsShow(self.show);
     
-    AnalyticsTitle analyticsTitle = inMyList? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
+    AnalyticsTitle analyticsTitle = isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.source = AnalyticsSourceButton;
     labels.value = self.show.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
     
-    [Banner showMyList:inMyList forItemWithName:self.show.title inView:self];
+    [Banner showFavorite:isFavorite forItemWithName:self.show.title inView:self];
 }
 
 - (IBAction)toggleSubscription:(id)sender
 {
-    BOOL toggled = MyListToggleSubscriptionForShow(self.show, self);
+    BOOL toggled = FavoritesToggleSubscriptionForShow(self.show, self);
     if (! toggled) {
         return;
     }
     
-    BOOL subscribed = MyListIsSubscribedToShow(self.show);
+    BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
     
     AnalyticsTitle analyticsTitle = (subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];

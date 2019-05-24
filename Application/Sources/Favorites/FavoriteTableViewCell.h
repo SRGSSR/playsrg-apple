@@ -12,18 +12,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class MyListTableViewCell;
+@class FavoriteTableViewCell;
 
-@protocol MyListTableViewCellDelegate <NSObject>
+@protocol FavoriteTableViewCellDelegate <NSObject>
 
-- (void)myListTableViewCell:(MyListTableViewCell *)myListTableViewCell deleteShow:(SRGShow *)show;
+- (void)favoriteTableViewCell:(FavoriteTableViewCell *)favoriteTableViewCell deleteShow:(SRGShow *)show;
 
 @end
 
-@interface MyListTableViewCell : MGSwipeTableCell <Previewing>
+@interface FavoriteTableViewCell : MGSwipeTableCell <Previewing>
 
 @property (nonatomic, nullable) SRGShow *show;
-@property (nonatomic, weak) id<MyListTableViewCellDelegate> cellDelegate;
+@property (nonatomic, weak) id<FavoriteTableViewCellDelegate> cellDelegate;
 
 @end
 

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My List View Controller-->
+        <!--Favorites View Controller-->
         <scene sceneID="NH9-t7-GtI">
             <objects>
-                <viewController storyboardIdentifier="MyListViewController" id="oLe-0e-7Ws" customClass="MyListViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoritesViewController" id="oLe-0e-7Ws" customClass="FavoritesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nx1-I1-Yjj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

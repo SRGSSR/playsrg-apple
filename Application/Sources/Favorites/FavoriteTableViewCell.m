@@ -4,11 +4,11 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "MyListTableViewCell.h"
+#import "FavoriteTableViewCell.h"
 
 #import "AnalyticsConstants.h"
 #import "Banner.h"
-#import "MyList.h"
+#import "Favorites.h"
 #import "NSBundle+PlaySRG.h"
 #import "PushService.h"
 #import "UIColor+PlaySRG.h"
@@ -20,7 +20,7 @@
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGUserData/SRGUserData.h>
 
-@interface MyListTableViewCell ()
+@interface FavoriteTableViewCell ()
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation MyListTableViewCell
+@implementation FavoriteTableViewCell
 
 #pragma mark Overrides
 
@@ -47,7 +47,7 @@
     @weakify(self)
     MGSwipeButton *deleteButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"delete-22"] backgroundColor:UIColor.redColor callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
         @strongify(self)
-        [self.cellDelegate myListTableViewCell:self deleteShow:self.show];
+        [self.cellDelegate favoriteTableViewCell:self deleteShow:self.show];
         return YES;
     }];
     deleteButton.tintColor = UIColor.whiteColor;
@@ -118,7 +118,7 @@
 - (void)updateSubscriptionStatus
 {
     if (PushService.sharedService.enabled) {
-        BOOL subscribed = MyListIsSubscribedToShow(self.show);
+        BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
         [self.subscriptionButton setImage:subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"]
                                  forState:UIControlStateNormal];
         self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Disable notifications for show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
@@ -140,12 +140,12 @@
 
 - (IBAction)toggleSubscription:(id)sender
 {
-    BOOL toggled = MyListToggleSubscriptionForShow(self.show, self);
+    BOOL toggled = FavoritesToggleSubscriptionForShow(self.show, self);
     if (! toggled) {
         return;
     }
     
-    BOOL subscribed = MyListIsSubscribedToShow(self.show);
+    BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
 
     AnalyticsTitle analyticsTitle = (subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];

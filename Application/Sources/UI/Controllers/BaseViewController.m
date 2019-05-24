@@ -10,12 +10,12 @@
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "Download.h"
+#import "Favorites.h"
 #import "GoogleCast.h"
 #import "HomeTopicViewController.h"
 #import "MediaPlayerViewController.h"
 #import "MediaPreviewViewController.h"
 #import "ModuleViewController.h"
-#import "MyList.h"
 #import "PlayErrors.h"
 #import "Previewing.h"
 #import "ShowViewController.h"
@@ -276,20 +276,20 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     else if ([previewObject isKindOfClass:SRGShow.class]) {
         SRGShow *show = previewObject;
         
-        BOOL inMyList = MyListContainsShow(show);
+        BOOL isFavorite = FavoritesContainsShow(show);
         
         alertController = [UIAlertController alertControllerWithTitle:show.title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        [alertController addAction:[UIAlertAction actionWithTitle:inMyList ? NSLocalizedString(@"Remove from My List", @"Button label to remove a show from My list in the show long-press menu") : NSLocalizedString(@"Add to My List", @"Button label to add a show to My List in the show long-press menu") style:inMyList ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            MyListToggleShow(show);
+        [alertController addAction:[UIAlertAction actionWithTitle:isFavorite ? NSLocalizedString(@"Remove from favorites", @"Button label to remove a show from favorites in the show long-press menu") : NSLocalizedString(@"Add to favorites", @"Button label to add a show to favorites in the show long-press menu") style:isFavorite ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            FavoritesToggleShow(show);
             
-            // Use !inMyList since inMyList status has been reversed
-            AnalyticsTitle analyticsTitle = (! inMyList) ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
+            // Use !isFavorite since favorite status has been reversed
+            AnalyticsTitle analyticsTitle = (! isFavorite) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceLongPress;
             labels.value = show.URN;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
             
-            [Banner showMyList:! inMyList forItemWithName:show.title inViewController:self];
+            [Banner showFavorite:! isFavorite forItemWithName:show.title inViewController:self];
         }]];
         
         NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:show];

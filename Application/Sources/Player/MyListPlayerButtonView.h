@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MyListPlayerButtonView : HLSNibView
 
-@property (nonatomic) BOOL inMyList;
+@property (nonatomic, getter=isFavorited) BOOL favorited;
 
 @end
 

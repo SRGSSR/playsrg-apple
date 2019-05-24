@@ -12,11 +12,11 @@
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "Download.h"
+#import "Favorites.h"
 #import "GoogleCast.h"
 #import "History.h"
 #import "LiveAccessView.h"
 #import "ModalTransition.h"
-#import "MyList.h"
 #import "MyListPlayerButtonView.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
@@ -1093,7 +1093,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)updateMyListStatusForShow:(SRGShow *)show
 {
-    self.myListButtonView.inMyList = MyListContainsShow(show);
+    self.myListButtonView.favorited = FavoritesContainsShow(show);
 }
 
 - (void)updateliveAccessViewContentForMediaType:(SRGMediaType)mediaType force:(BOOL)force
@@ -1789,18 +1789,18 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         return;
     }
     
-    MyListToggleShow(show);
+    FavoritesToggleShow(show);
     [self updateMyListStatusForShow:show];
     
-    BOOL inMyList = MyListContainsShow(show);
+    BOOL isFavorite = FavoritesContainsShow(show);
     
-    AnalyticsTitle analyticsTitle = inMyList ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
+    AnalyticsTitle analyticsTitle = isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.source = AnalyticsSourceButton;
     labels.value = show.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
     
-    [Banner showMyList:inMyList forItemWithName:show.title inViewController:self];
+    [Banner showFavorite:isFavorite forItemWithName:show.title inViewController:self];
 }
 
 #pragma mark Notifications

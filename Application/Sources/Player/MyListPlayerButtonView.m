@@ -36,12 +36,12 @@
 
 #pragma mark Getter and Setter
 
-- (void)setInMyList:(BOOL)inMyList
+- (void)setFavorited:(BOOL)favorited
 {
-    _inMyList = inMyList;
+    _favorited = favorited;
     
-    self.mainImageView.image = inMyList ? [UIImage imageNamed:@"my_list_full-34"] : [UIImage imageNamed:@"my_list-34"];
-    self.statusImageView.image = inMyList ? [UIImage imageNamed:@"my_list_added-10"] : [UIImage imageNamed:@"my_list_add-10"];
+    self.mainImageView.image = favorited ? [UIImage imageNamed:@"my_list_full-34"] : [UIImage imageNamed:@"my_list-34"];
+    self.statusImageView.image = favorited ? [UIImage imageNamed:@"my_list_added-10"] : [UIImage imageNamed:@"my_list_add-10"];
 }
 
 #pragma mark Accessibility
@@ -58,7 +58,7 @@
 
 - (NSString *)accessibilityLabel
 {
-    return self.inMyList ? PlaySRGAccessibilityLocalizedString(@"Remove from My List", @"Show My List removal label") : PlaySRGAccessibilityLocalizedString(@"Add to My List", @"Show My List creation label");
+    return self.favorited ? PlaySRGAccessibilityLocalizedString(@"Remove from My List", @"Show My List removal label") : PlaySRGAccessibilityLocalizedString(@"Add to My List", @"Show My List creation label");
 }
 
 @end
