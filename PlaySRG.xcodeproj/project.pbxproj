@@ -257,11 +257,6 @@
 		087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6671EDF1B7D00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
-		088048232290876400CF2991 /* MyListPlayerButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 088048222290876400CF2991 /* MyListPlayerButtonView.m */; };
-		088048242290876400CF2991 /* MyListPlayerButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 088048222290876400CF2991 /* MyListPlayerButtonView.m */; };
-		088048252290876400CF2991 /* MyListPlayerButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 088048222290876400CF2991 /* MyListPlayerButtonView.m */; };
-		088048262290876400CF2991 /* MyListPlayerButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 088048222290876400CF2991 /* MyListPlayerButtonView.m */; };
-		088048272290876400CF2991 /* MyListPlayerButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 088048222290876400CF2991 /* MyListPlayerButtonView.m */; };
 		088899452077627900242654 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 088899432077627900242654 /* TVChannel.m */; };
 		088899462077628300242654 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 088899432077627900242654 /* TVChannel.m */; };
 		088899472077628400242654 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 088899432077627900242654 /* TVChannel.m */; };
@@ -1637,8 +1632,6 @@
 		087A88341EAA610500525C2A /* LiveAccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveAccessView.m; sourceTree = "<group>"; };
 		087BC6611EDF1B7B00EED89B /* UILabel+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+PlaySRG.h"; sourceTree = "<group>"; };
 		087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+PlaySRG.m"; sourceTree = "<group>"; };
-		088048212290876400CF2991 /* MyListPlayerButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyListPlayerButtonView.h; sourceTree = "<group>"; };
-		088048222290876400CF2991 /* MyListPlayerButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyListPlayerButtonView.m; sourceTree = "<group>"; };
 		088899432077627900242654 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		088899442077627900242654 /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
 		088F6C591E4B72BF00FC792D /* LiveAccessButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveAccessButton.h; sourceTree = "<group>"; };
@@ -3274,8 +3267,6 @@
 				6FB3C1A51DBCE783008160B4 /* MediaPreviewViewController.h */,
 				6FB3C1A61DBCE783008160B4 /* MediaPreviewViewController.m */,
 				6FB3C1A71DBCE783008160B4 /* MediaPreviewViewController.storyboard */,
-				088048212290876400CF2991 /* MyListPlayerButtonView.h */,
-				088048222290876400CF2991 /* MyListPlayerButtonView.m */,
 				6F5F4FC11DB10CFD0011CCA3 /* RelatedContentView.h */,
 				6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */,
 				6F5F4FC31DB10CFD0011CCA3 /* RelatedContentView.xib */,
@@ -5346,7 +5337,6 @@
 				086F8D6922984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
 				6F6B642E21A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				E65FB20B1D66D69700820696 /* DailyVideosViewController.m in Sources */,
-				088048232290876400CF2991 /* MyListPlayerButtonView.m in Sources */,
 				6F06E0A41DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08AF9480217D27E40028B082 /* ActivityItemSource.m in Sources */,
 				6F12DB4621A3EFBF0054879D /* HistoryTableViewCell.m in Sources */,
@@ -5432,7 +5422,6 @@
 				6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA012201148250070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F628AEA1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
-				088048242290876400CF2991 /* MyListPlayerButtonView.m in Sources */,
 				081220C21DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1B20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				6F475FDD1EB37BC6003021EA /* RequestViewController.m in Sources */,
@@ -5575,7 +5564,6 @@
 				6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F628AEB1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
-				088048252290876400CF2991 /* MyListPlayerButtonView.m in Sources */,
 				081220C31DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1C20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				6F475FDE1EB37BC6003021EA /* RequestViewController.m in Sources */,
@@ -5718,7 +5706,6 @@
 				6FC1FA8B2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA014201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F628AEC1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
-				088048262290876400CF2991 /* MyListPlayerButtonView.m in Sources */,
 				081220C41DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1D20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				6F475FDF1EB37BC6003021EA /* RequestViewController.m in Sources */,
@@ -5861,7 +5848,6 @@
 				6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA015201148270070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F628AED1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
-				088048272290876400CF2991 /* MyListPlayerButtonView.m in Sources */,
 				081220C51DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1E20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				6F475FE01EB37BC6003021EA /* RequestViewController.m in Sources */,

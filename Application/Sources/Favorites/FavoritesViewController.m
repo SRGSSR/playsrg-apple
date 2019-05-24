@@ -264,7 +264,7 @@
         return [UIImage imageNamed:@"error-90"];
     }
     else {
-        return [UIImage imageNamed:@"my_list-90"];
+        return [UIImage imageNamed:@"favorite-90"];
     }
 }
 

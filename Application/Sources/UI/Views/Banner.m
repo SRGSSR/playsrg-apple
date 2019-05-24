@@ -102,7 +102,7 @@ static NSString *BannerShortenedName(NSString *name);
     
     NSString *messageFormatString = isFavorite ? NSLocalizedString(@"%@ has been added to favorites", @"Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application.") : NSLocalizedString(@"%@ has been removed from favorites", @"Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application.");
     NSString *message = [NSString stringWithFormat:messageFormatString, BannerShortenedName(name)];
-    UIImage *image = isFavorite ? [UIImage imageNamed:@"my_list_full-22"] : [UIImage imageNamed:@"my_list-22"];
+    UIImage *image = isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"];
     [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO inViewController:viewController];
 }
 

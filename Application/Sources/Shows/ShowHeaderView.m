@@ -26,8 +26,8 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UIButton *myListImageButton;
-@property (nonatomic, weak) IBOutlet UIButton *myListLabelButton;
+@property (nonatomic, weak) IBOutlet UIButton *favoriteImageButton;
+@property (nonatomic, weak) IBOutlet UIButton *favoriteLabelButton;
 @property (nonatomic, weak) IBOutlet UIButton *subscriptionButton;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 
@@ -82,7 +82,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     self.logoImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
                                                      withScale:ImageScaleLarge];
     
-    self.myListImageButton.accessibilityElementsHidden = YES;
+    self.favoriteImageButton.accessibilityElementsHidden = YES;
 }
 
 - (void)layoutSubviews
@@ -98,7 +98,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     
     if (newWindow) {
         // Ensure proper state when the view is reinserted
-        [self updateMyListStatus];
+        [self updateFavoriteStatus];
         [self updateSubscriptionStatus];
         
         [NSNotificationCenter.defaultCenter addObserver:self
@@ -125,21 +125,21 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     
     [self.logoImageView play_requestImageForObject:show withScale:ImageScaleLarge type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
     
-    [self updateMyListStatus];
+    [self updateFavoriteStatus];
     [self updateSubscriptionStatus];
 }
 
 #pragma mark UI
 
-- (void)updateMyListStatus
+- (void)updateFavoriteStatus
 {
     BOOL isFavorite = FavoritesContainsShow(self.show);
-    [self.myListImageButton setImage:isFavorite ? [UIImage imageNamed:@"my_list_full_show_page-22"] : [UIImage imageNamed:@"my_list_show_page-22"] forState:UIControlStateNormal];
+    [self.favoriteImageButton setImage:isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"] forState:UIControlStateNormal];
     
     NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
                                   NSForegroundColorAttributeName : UIColor.whiteColor };
     NSString *title = [isFavorite ? NSLocalizedString(@"Remove from favorites", @"Favorite show removal label in the show view") : NSLocalizedString(@"Add to favorites", @"Favorite show insertion label in the show view") uppercaseString];
-    [self.myListLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
+    [self.favoriteLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
                                                                                attributes:attributes] forState:UIControlStateNormal];
 }
 
@@ -182,7 +182,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 #pragma mark Actions
 
-- (IBAction)toggleMyList:(id)sender
+- (IBAction)toggleFavorite:(id)sender
 {
     FavoritesToggleShow(self.show);
     BOOL isFavorite = FavoritesContainsShow(self.show);
@@ -220,7 +220,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 {
     NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
     if ([domains containsObject:PlayPreferenceDomain]) {
-        [self updateMyListStatus];
+        [self updateFavoriteStatus];
         [self updateSubscriptionStatus];
     }
 }
