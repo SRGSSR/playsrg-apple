@@ -205,7 +205,7 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceSwipe;
  *  Actions
  */
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLive;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionMyList;
+OBJC_EXPORT AnalyticsType const AnalyticsTypeActionFavorites;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDownloads;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionHistory;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionSearch;
