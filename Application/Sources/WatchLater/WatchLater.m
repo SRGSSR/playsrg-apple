@@ -19,7 +19,7 @@ NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataStat
 
 BOOL WatchLaterCanStoreMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 {
-    return mediaMetadata.contentType != SRGContentTypeLivestream;
+    return mediaMetadata.contentType != SRGContentTypeLivestream && [mediaMetadata timeAvailabilityAtDate:NSDate.date] != SRGTimeAvailabilityNotAvailableAnymore;
 }
 
 BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
