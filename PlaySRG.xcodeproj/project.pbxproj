@@ -1216,11 +1216,11 @@
 		6FDF08F2218B126700B2AF2C /* UpdateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08CD218B126700B2AF2C /* UpdateInfo.m */; };
 		6FDF08F3218B126700B2AF2C /* UpdateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08CD218B126700B2AF2C /* UpdateInfo.m */; };
 		6FDF08F4218B126700B2AF2C /* UpdateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08CD218B126700B2AF2C /* UpdateInfo.m */; };
-		6FDF08FA218B126700B2AF2C /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* Favorite.m */; };
-		6FDF08FB218B126700B2AF2C /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* Favorite.m */; };
-		6FDF08FC218B126700B2AF2C /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* Favorite.m */; };
-		6FDF08FD218B126700B2AF2C /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* Favorite.m */; };
-		6FDF08FE218B126700B2AF2C /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* Favorite.m */; };
+		6FDF08FA218B126700B2AF2C /* DeprecatedFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */; };
+		6FDF08FB218B126700B2AF2C /* DeprecatedFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */; };
+		6FDF08FC218B126700B2AF2C /* DeprecatedFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */; };
+		6FDF08FD218B126700B2AF2C /* DeprecatedFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */; };
+		6FDF08FE218B126700B2AF2C /* DeprecatedFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */; };
 		6FE1B4971DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		6FE1B4981DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		6FE1B4991DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
@@ -2021,16 +2021,16 @@
 		6FDF08C6218B126700B2AF2C /* Recommendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recommendation.m; sourceTree = "<group>"; };
 		6FDF08C8218B126700B2AF2C /* Download+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Download+Private.h"; sourceTree = "<group>"; };
 		6FDF08CA218B126700B2AF2C /* Onboarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Onboarding.m; sourceTree = "<group>"; };
-		6FDF08CB218B126700B2AF2C /* Favorite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorite.h; sourceTree = "<group>"; };
+		6FDF08CB218B126700B2AF2C /* DeprecatedFavorite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeprecatedFavorite.h; sourceTree = "<group>"; };
 		6FDF08CC218B126700B2AF2C /* OnboardingPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnboardingPage.m; sourceTree = "<group>"; };
 		6FDF08CD218B126700B2AF2C /* UpdateInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateInfo.m; sourceTree = "<group>"; };
 		6FDF08CE218B126700B2AF2C /* Download.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Download.h; sourceTree = "<group>"; };
 		6FDF08D1218B126700B2AF2C /* Recommendation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recommendation.h; sourceTree = "<group>"; };
-		6FDF08D2218B126700B2AF2C /* Favorite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
+		6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeprecatedFavorite.m; sourceTree = "<group>"; };
 		6FDF08D3218B126700B2AF2C /* Onboarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Onboarding.h; sourceTree = "<group>"; };
 		6FDF08D4218B126700B2AF2C /* UpdateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfo.h; sourceTree = "<group>"; };
 		6FDF08D5218B126700B2AF2C /* OnboardingPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingPage.h; sourceTree = "<group>"; };
-		6FDF08D6218B126700B2AF2C /* Favorite+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Favorite+Private.h"; sourceTree = "<group>"; };
+		6FDF08D6218B126700B2AF2C /* DeprecatedFavorite+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DeprecatedFavorite+Private.h"; sourceTree = "<group>"; };
 		6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsConstants.h; sourceTree = "<group>"; };
 		6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsConstants.m; sourceTree = "<group>"; };
 		6FE1B9171FAC34D600A58F3B /* ContentInsets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentInsets.h; sourceTree = "<group>"; };
@@ -3177,9 +3177,9 @@
 				6FDF08CE218B126700B2AF2C /* Download.h */,
 				6FDF08C5218B126700B2AF2C /* Download.m */,
 				6FDF08C8218B126700B2AF2C /* Download+Private.h */,
-				6FDF08CB218B126700B2AF2C /* Favorite.h */,
-				6FDF08D2218B126700B2AF2C /* Favorite.m */,
-				6FDF08D6218B126700B2AF2C /* Favorite+Private.h */,
+				6FDF08CB218B126700B2AF2C /* DeprecatedFavorite.h */,
+				6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */,
+				6FDF08D6218B126700B2AF2C /* DeprecatedFavorite+Private.h */,
 				6FDF08D3218B126700B2AF2C /* Onboarding.h */,
 				6FDF08CA218B126700B2AF2C /* Onboarding.m */,
 				6FDF08D5218B126700B2AF2C /* OnboardingPage.h */,
@@ -5352,7 +5352,7 @@
 				6F556B381DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				6FA5D15D1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				6F475FCD1EB37BC6003021EA /* NavigationController.m in Sources */,
-				6FDF08FA218B126700B2AF2C /* Favorite.m in Sources */,
+				6FDF08FA218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,
 				08209308208F522A00711DE4 /* PushService.m in Sources */,
 				6F47603E1EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				6F4760091EB37BC6003021EA /* TitleHeaderView.m in Sources */,
@@ -5444,7 +5444,7 @@
 				6F475FCE1EB37BC6003021EA /* NavigationController.m in Sources */,
 				08C68F951D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41701F6FAB6E000533E7 /* Calendar.m in Sources */,
-				6FDF08FB218B126700B2AF2C /* Favorite.m in Sources */,
+				6FDF08FB218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,
 				6F47600A1EB37BC6003021EA /* TitleHeaderView.m in Sources */,
 				08AA55A51D49EF8E00C5026E /* ApplicationConfiguration.m in Sources */,
 				0852539822073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */,
@@ -5586,7 +5586,7 @@
 				6F475FCF1EB37BC6003021EA /* NavigationController.m in Sources */,
 				08C68F961D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41711F6FAB6E000533E7 /* Calendar.m in Sources */,
-				6FDF08FC218B126700B2AF2C /* Favorite.m in Sources */,
+				6FDF08FC218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,
 				6F47600B1EB37BC6003021EA /* TitleHeaderView.m in Sources */,
 				08AA55A61D49EF8E00C5026E /* ApplicationConfiguration.m in Sources */,
 				0852539922073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */,
@@ -5728,7 +5728,7 @@
 				6F475FD01EB37BC6003021EA /* NavigationController.m in Sources */,
 				08C68F971D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41721F6FAB6E000533E7 /* Calendar.m in Sources */,
-				6FDF08FD218B126700B2AF2C /* Favorite.m in Sources */,
+				6FDF08FD218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,
 				6F47600C1EB37BC6003021EA /* TitleHeaderView.m in Sources */,
 				08AA55A71D49EF8E00C5026E /* ApplicationConfiguration.m in Sources */,
 				0852539A22073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */,
@@ -5870,7 +5870,7 @@
 				6F475FD11EB37BC6003021EA /* NavigationController.m in Sources */,
 				08C68F981D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41731F6FAB6E000533E7 /* Calendar.m in Sources */,
-				6FDF08FE218B126700B2AF2C /* Favorite.m in Sources */,
+				6FDF08FE218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,
 				6F47600D1EB37BC6003021EA /* TitleHeaderView.m in Sources */,
 				08AA55A81D49EF8F00C5026E /* ApplicationConfiguration.m in Sources */,
 				0852539B22073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */,

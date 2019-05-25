@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "Favorite+Private.h"
+#import "DeprecatedFavorite+Private.h"
 
 #import "ApplicationConfiguration.h"
 #import "Download.h"
@@ -24,8 +24,8 @@ NSString * const FavoriteStateKey = @"FavoriteState";
 
 CGFloat const FavoriteBackupImageWidth = 150.f;
 
-static NSMutableDictionary<NSString *, Favorite *> *s_favoritesDictionary;
-static NSArray<Favorite *> *s_sortedFavorites;
+static NSMutableDictionary<NSString *, DeprecatedFavorite *> *s_favoritesDictionary;
+static NSArray<DeprecatedFavorite *> *s_sortedFavorites;
 
 @protocol Favoriting <NSObject>
 
@@ -55,7 +55,7 @@ static NSArray<Favorite *> *s_sortedFavorites;
 
 @end
 
-@interface Favorite ()
+@interface DeprecatedFavorite ()
 
 @property (nonatomic) id<Favoriting> object;
 @property (nonatomic) NSDate *creationDate;
@@ -98,7 +98,7 @@ static NSArray<Favorite *> *s_sortedFavorites;
 
 @end
 
-@implementation Favorite
+@implementation DeprecatedFavorite
 
 #pragma mark Class methods
 
@@ -107,15 +107,15 @@ static NSArray<Favorite *> *s_sortedFavorites;
     return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"favorites.plist"];
 }
 
-+ (NSDictionary<NSString *, Favorite *> *)loadFavoritesDictionary
++ (NSDictionary<NSString *, DeprecatedFavorite *> *)loadFavoritesDictionary
 {
-    NSDictionary<NSString *, Favorite *> *favoritesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self favoritesFilePath]];
+    NSDictionary<NSString *, DeprecatedFavorite *> *favoritesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self favoritesFilePath]];
     
     NSPredicate *isNotNSString= [NSPredicate predicateWithBlock:^BOOL(id _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
         return ![evaluatedObject isKindOfClass:NSString.class];
     }];
     NSPredicate *isNotFavorite = [NSPredicate predicateWithBlock:^BOOL(id _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return ![evaluatedObject isKindOfClass:Favorite.class];
+        return ![evaluatedObject isKindOfClass:DeprecatedFavorite.class];
     }];
     
     // Return the loaded dictionnary iff it contains expected objects
@@ -135,14 +135,14 @@ static NSArray<Favorite *> *s_sortedFavorites;
     return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"favoritesBackup.plist"];
 }
 
-+ (NSDictionary<NSString *, Favorite *> *)loadFavoritesBackupDictionary
++ (NSDictionary<NSString *, DeprecatedFavorite *> *)loadFavoritesBackupDictionary
 {
     NSMutableDictionary *favoritesBackupDictionary = [NSMutableDictionary dictionary];
     NSDictionary *backupFileDictionnary = [NSDictionary dictionaryWithContentsOfFile:[self favoritesBackupFilePath]];
     [backupFileDictionnary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:NSDictionary.class]) {
             NSDictionary *favoriteDictionary = (NSDictionary *)obj;
-            Favorite *favorite = [[Favorite alloc] initWithDictionary:favoriteDictionary];
+            DeprecatedFavorite *favorite = [[DeprecatedFavorite alloc] initWithDictionary:favoriteDictionary];
             if (favorite && [key isEqualToString:favorite.identifier]) {
                 favoritesBackupDictionary[key] = favorite;
             }
@@ -158,7 +158,7 @@ static NSArray<Favorite *> *s_sortedFavorites;
 + (void)saveFavoritesBackupDictionary
 {
     NSMutableDictionary *favoritesBackupDictionary = [NSMutableDictionary dictionary];
-    [s_favoritesDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, Favorite * _Nonnull favorite, BOOL * _Nonnull stop) {
+    [s_favoritesDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, DeprecatedFavorite * _Nonnull favorite, BOOL * _Nonnull stop) {
         favoritesBackupDictionary[key] = favorite.backupDictionary;
     }];
     
@@ -181,10 +181,10 @@ static NSArray<Favorite *> *s_sortedFavorites;
     }
 }
 
-+ (NSArray<Favorite *> *)favorites
++ (NSArray<DeprecatedFavorite *> *)favorites
 {
     if (! s_sortedFavorites) {
-        NSSortDescriptor *typeSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(Favorite.new, type) ascending:YES comparator:^NSComparisonResult(id _Nonnull object1, id _Nonnull object2) {
+        NSSortDescriptor *typeSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(DeprecatedFavorite.new, type) ascending:YES comparator:^NSComparisonResult(id _Nonnull object1, id _Nonnull object2) {
             NSInteger type1 = [object1 integerValue];
             NSInteger type2 = [object2 integerValue];
             if (type1 == type2) {
@@ -200,20 +200,20 @@ static NSArray<Favorite *> *s_sortedFavorites;
                 return NSOrderedSame;
             }
         }];
-        NSSortDescriptor *dateSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(Favorite.new, creationDate) ascending:NO];
+        NSSortDescriptor *dateSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(DeprecatedFavorite.new, creationDate) ascending:NO];
         s_sortedFavorites = [s_favoritesDictionary.allValues sortedArrayUsingDescriptors:@[typeSortDescriptor, dateSortDescriptor]];
     }
     return s_sortedFavorites;
 }
 
-+ (Favorite *)addFavoriteForObject:(id<Favoriting>)object
++ (DeprecatedFavorite *)addFavoriteForObject:(id<Favoriting>)object
 {
-    Favorite *favorite = [self favoriteForObject:object];
+    DeprecatedFavorite *favorite = [self favoriteForObject:object];
     if (favorite) {
         return favorite;
     }
     
-    favorite = [[Favorite alloc] initWithObject:object];
+    favorite = [[DeprecatedFavorite alloc] initWithObject:object];
     s_favoritesDictionary[object.favoriteIdentifier] = favorite;
     s_sortedFavorites = nil;            // Invalidate sorted favorite cache
     
@@ -230,9 +230,9 @@ static NSArray<Favorite *> *s_sortedFavorites;
 // Add a favorite object directly.
 // Not public. No notification. only use at launch
 // Use addFavoriteForObject:
-+ (BOOL)addFavorite:(Favorite *)favorite;
++ (BOOL)addFavorite:(DeprecatedFavorite *)favorite;
 {
-    Favorite *existingFavorite = s_favoritesDictionary[favorite.identifier];
+    DeprecatedFavorite *existingFavorite = s_favoritesDictionary[favorite.identifier];
     if (existingFavorite) {
         return NO;
     }
@@ -250,7 +250,7 @@ static NSArray<Favorite *> *s_sortedFavorites;
     return YES;
 }
 
-+ (void)removeFavorite:(Favorite *)favorite;
++ (void)removeFavorite:(DeprecatedFavorite *)favorite;
 {
     if (! favorite.identifier || ! s_favoritesDictionary[favorite.identifier]) {
         return;
@@ -267,19 +267,19 @@ static NSArray<Favorite *> *s_sortedFavorites;
                                                                 FavoriteStateKey : @NO}];
 }
 
-+ (Favorite *)toggleFavoriteForMedia:(SRGMedia *)media
++ (DeprecatedFavorite *)toggleFavoriteForMedia:(SRGMedia *)media
 {
-    return [Favorite toggleFavoriteForObject:media];
+    return [DeprecatedFavorite toggleFavoriteForObject:media];
 }
 
-+ (Favorite *)toggleFavoriteForShow:(SRGShow *)show
++ (DeprecatedFavorite *)toggleFavoriteForShow:(SRGShow *)show
 {
-    return [Favorite toggleFavoriteForObject:show];
+    return [DeprecatedFavorite toggleFavoriteForObject:show];
 }
 
-+ (Favorite *)toggleFavoriteForObject:(id<Favoriting>)object
++ (DeprecatedFavorite *)toggleFavoriteForObject:(id<Favoriting>)object
 {
-    Favorite *favorite = [self favoriteForObject:object];
+    DeprecatedFavorite *favorite = [self favoriteForObject:object];
     if (favorite) {
         [self removeFavorite:favorite];
         return nil;
@@ -289,23 +289,23 @@ static NSArray<Favorite *> *s_sortedFavorites;
     }
 }
 
-+ (Favorite *)favoriteForMedia:(SRGMedia *)media
++ (DeprecatedFavorite *)favoriteForMedia:(SRGMedia *)media
 {
-    return [Favorite favoriteForObject:media];
+    return [DeprecatedFavorite favoriteForObject:media];
 }
 
-+ (Favorite *)favoriteForShow:(SRGShow *)show
++ (DeprecatedFavorite *)favoriteForShow:(SRGShow *)show
 {
-    return [Favorite favoriteForObject:show];
+    return [DeprecatedFavorite favoriteForObject:show];
 }
 
-+ (Favorite *)favoriteForObject:(id<Favoriting>)object
++ (DeprecatedFavorite *)favoriteForObject:(id<Favoriting>)object
 {
     if (! object) {
         return nil;
     }
     
-    Favorite *favorite = s_favoritesDictionary[object.favoriteIdentifier];
+    DeprecatedFavorite *favorite = s_favoritesDictionary[object.favoriteIdentifier];
     
     // Update favorite with the object
     if (favorite && !favorite.object) {
@@ -318,14 +318,14 @@ static NSArray<Favorite *> *s_sortedFavorites;
 
 + (void)removeAllFavorites
 {
-    NSArray <Favorite *> *favorites = s_favoritesDictionary.allValues;
+    NSArray <DeprecatedFavorite *> *favorites = s_favoritesDictionary.allValues;
     
     [s_favoritesDictionary removeAllObjects];
     s_sortedFavorites = nil;
     
     [self saveFavoritesDictionary];
     
-    [favorites enumerateObjectsUsingBlock:^(Favorite * _Nonnull favorite, NSUInteger idx, BOOL * _Nonnull stop) {
+    [favorites enumerateObjectsUsingBlock:^(DeprecatedFavorite * _Nonnull favorite, NSUInteger idx, BOOL * _Nonnull stop) {
         [NSNotificationCenter.defaultCenter postNotificationName:FavoriteStateDidChangeNotification
                                                           object:nil
                                                         userInfo:@{ FavoriteObjectKey : favorite,
@@ -335,7 +335,7 @@ static NSArray<Favorite *> *s_sortedFavorites;
 
 + (void)migrate
 {
-    [Favorite.favorites enumerateObjectsUsingBlock:^(Favorite * _Nonnull favorite, NSUInteger idx, BOOL * _Nonnull stop) {
+    [DeprecatedFavorite.favorites enumerateObjectsUsingBlock:^(DeprecatedFavorite * _Nonnull favorite, NSUInteger idx, BOOL * _Nonnull stop) {
         [favorite migrate];
     }];
 }
@@ -455,7 +455,7 @@ static NSArray<Favorite *> *s_sortedFavorites;
             SRGSubdivision *subdivision = mediaComposition.mainSegment ?: mediaComposition.mainChapter;
             SRGMedia *media = [mediaComposition mediaForSubdivision:subdivision];
             [self updateWithObject:media];
-            [Favorite saveFavoritesDictionary];
+            [DeprecatedFavorite saveFavoritesDictionary];
         }
         else {
             self.object = nil;
@@ -463,7 +463,7 @@ static NSArray<Favorite *> *s_sortedFavorites;
     }
     else {
         [self updateWithObject:self.object];
-        [Favorite saveFavoritesDictionary];
+        [DeprecatedFavorite saveFavoritesDictionary];
     }
     
     // If we have a favorite show with an unknow showURN or an unknown transmission type, try to get new object now.
@@ -471,7 +471,7 @@ static NSArray<Favorite *> *s_sortedFavorites;
         [[SRGDataProvider.currentDataProvider showWithURN:self.showURN completionBlock:^(SRGShow * _Nullable show, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (! error && show) {
                 [self updateWithObject:show];
-                [Favorite saveFavoritesDictionary];
+                [DeprecatedFavorite saveFavoritesDictionary];
             }
         }] resume];
     }
@@ -480,7 +480,7 @@ static NSArray<Favorite *> *s_sortedFavorites;
         [[SRGDataProvider.currentDataProvider mediaWithURN:self.mediaURN completionBlock:^(SRGMedia * _Nullable media, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (! error && media) {
                 [self updateWithObject:media];
-                [Favorite saveFavoritesDictionary];
+                [DeprecatedFavorite saveFavoritesDictionary];
             }
         }] resume];
     }
@@ -605,7 +605,7 @@ static NSArray<Favorite *> *s_sortedFavorites;
             }
             
             [self updateWithObject:show];
-            [Favorite saveFavoritesDictionary];
+            [DeprecatedFavorite saveFavoritesDictionary];
             
             completionBlock(show, nil);
         };
@@ -632,7 +632,7 @@ static NSArray<Favorite *> *s_sortedFavorites;
                 [self updateWithObject:media];
             }
             
-            [Favorite saveFavoritesDictionary];
+            [DeprecatedFavorite saveFavoritesDictionary];
             
             completionBlock(self.object, nil);
         };
@@ -671,23 +671,23 @@ static NSArray<Favorite *> *s_sortedFavorites;
 
 #pragma mark Migration
 
-+ (NSArray<Favorite *> *)mediaFavorites
++ (NSArray<DeprecatedFavorite *> *)mediaFavorites
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(Favorite.new, type), @(FavoriteTypeMedia)];
-    NSArray<Favorite *> *favorites = [self.favorites filteredArrayUsingPredicate:predicate];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(DeprecatedFavorite.new, type), @(FavoriteTypeMedia)];
+    NSArray<DeprecatedFavorite *> *favorites = [self.favorites filteredArrayUsingPredicate:predicate];
     return favorites.reverseObjectEnumerator.allObjects;
 }
 
-+ (NSArray<Favorite *> *)showFavorites
++ (NSArray<DeprecatedFavorite *> *)showFavorites
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(Favorite.new, type), @(FavoriteTypeShow)];
-    NSArray<Favorite *> *favorites = [self.favorites filteredArrayUsingPredicate:predicate];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(DeprecatedFavorite.new, type), @(FavoriteTypeShow)];
+    NSArray<DeprecatedFavorite *> *favorites = [self.favorites filteredArrayUsingPredicate:predicate];
     return favorites.reverseObjectEnumerator.allObjects;
 }
 
-+ (void)finishMigrationForFavorites:(NSArray<Favorite *> *)favorites
++ (void)finishMigrationForFavorites:(NSArray<DeprecatedFavorite *> *)favorites
 {
-    [favorites enumerateObjectsUsingBlock:^(Favorite * _Nonnull favorite, NSUInteger idx, BOOL * _Nonnull stop) {
+    [favorites enumerateObjectsUsingBlock:^(DeprecatedFavorite * _Nonnull favorite, NSUInteger idx, BOOL * _Nonnull stop) {
         [s_favoritesDictionary removeObjectForKey:favorite.identifier];
     }];
     s_sortedFavorites = nil;            // Invalidate sorted favorite cache
@@ -979,7 +979,7 @@ __attribute__((constructor)) static void FavoriteInit(void)
      *  plist file without the related object. It then creates a light favorite object with just the information needed to display it.
      */
     @try {
-        s_favoritesDictionary = [[Favorite loadFavoritesDictionary] mutableCopy];
+        s_favoritesDictionary = [[DeprecatedFavorite loadFavoritesDictionary] mutableCopy];
     }
     @catch (NSException *exception) {
         PlayLogWarning(@"favorite", @"Download migration failed. Use backup dictionary instead");
@@ -987,10 +987,10 @@ __attribute__((constructor)) static void FavoriteInit(void)
     
     // If model objects changed, or the plist file is corrupt, we try to load lazy favorites from the backup file.
     if (s_favoritesDictionary.count == 0) {
-        NSDictionary *backupFavorite = [Favorite loadFavoritesBackupDictionary];
+        NSDictionary *backupFavorite = [DeprecatedFavorite loadFavoritesBackupDictionary];
         if (backupFavorite.count > 0) {
             s_favoritesDictionary = [backupFavorite mutableCopy];
-            [Favorite saveFavoritesDictionary];
+            [DeprecatedFavorite saveFavoritesDictionary];
         }
     }
     

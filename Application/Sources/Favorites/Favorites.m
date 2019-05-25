@@ -6,7 +6,7 @@
 
 #import "Favorites.h"
 
-#import "Favorite+Private.h"
+#import "DeprecatedFavorite+Private.h"
 #import "NSSet+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PushService+Private.h"
@@ -181,14 +181,14 @@ BOOL FavoritesIsSubscribedToShow(SRGShow *show)
 
 void FavoritesMigrate(void)
 {
-    NSArray<Favorite *> *favorites = [Favorite showFavorites];
+    NSArray<DeprecatedFavorite *> *favorites = [DeprecatedFavorite showFavorites];
     if (favorites.count != 0) {
-        for (Favorite *favorite in favorites) {
+        for (DeprecatedFavorite *favorite in favorites) {
             if (favorite.showURN && ! FavoritesContainsShowURN(favorite.showURN)) {
                 FavoritesAddShowURNWithDate(favorite.showURN, favorite.date ?: NSDate.date);
             }
         }
-        [Favorite finishMigrationForFavorites:favorites];
+        [DeprecatedFavorite finishMigrationForFavorites:favorites];
     }
     
     // Processes run once in the lifetime of the application

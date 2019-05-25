@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "Favorite.h"
+#import "DeprecatedFavorite.h"
 
 #import <Foundation/Foundation.h>
 
@@ -103,7 +103,7 @@ typedef NS_ENUM(NSInteger, FavoriteShowTransmission) {
     FavoriteShowTransmissionOnline
 };
 
-@interface Favorite (Private)
+@interface DeprecatedFavorite (Private)
 
 /**
  *  @name Common properties
@@ -236,37 +236,37 @@ typedef NS_ENUM(NSInteger, FavoriteShowTransmission) {
 
 @end
 
-@interface Favorite (Management)
+@interface DeprecatedFavorite (Management)
 
 /**
  *  Available favorites, sorted by date at which they were favorited (from the most recent to the oldest)
  */
-@property (class, nonatomic, readonly) NSArray<Favorite *> *favorites;
+@property (class, nonatomic, readonly) NSArray<DeprecatedFavorite *> *favorites;
 
 /**
  *  Return the favorite object corresponding to the media, if any
  */
-+ (nullable Favorite *)favoriteForMedia:(SRGMedia *)media;
++ (nullable DeprecatedFavorite *)favoriteForMedia:(SRGMedia *)media;
 
 /**
  *  Return the favorite object corresponding to the show, if any
  */
-+ (nullable Favorite *)favoriteForShow:(SRGShow *)show;
++ (nullable DeprecatedFavorite *)favoriteForShow:(SRGShow *)show;
 
 /**
  *  Add a media favorite if it didn't exist, remove it otherwise
  */
-+ (nullable Favorite *)toggleFavoriteForMedia:(SRGMedia *)media;
++ (nullable DeprecatedFavorite *)toggleFavoriteForMedia:(SRGMedia *)media;
 
 /**
  *  Add a show favorite if it didn't exist, remove it otherwise
  */
-+ (nullable Favorite *)toggleFavoriteForShow:(SRGShow *)show;
++ (nullable DeprecatedFavorite *)toggleFavoriteForShow:(SRGShow *)show;
 
 /**
  *  Remove an existing favorite
  */
-+ (void)removeFavorite:(Favorite *)favorite;
++ (void)removeFavorite:(DeprecatedFavorite *)favorite;
 
 /**
  *  Remove all favorites
@@ -276,7 +276,7 @@ typedef NS_ENUM(NSInteger, FavoriteShowTransmission) {
 /**
  *  Add favorite object directly
  */
-+ (BOOL)addFavorite:(Favorite *)favorite;
++ (BOOL)addFavorite:(DeprecatedFavorite *)favorite;
 
 /**
  *  Create favorite from a dictionary of its fields
@@ -285,22 +285,22 @@ typedef NS_ENUM(NSInteger, FavoriteShowTransmission) {
 
 @end
 
-@interface Favorite (WatchLaterMigration)
+@interface DeprecatedFavorite (WatchLaterMigration)
 
 /**
  *  Available media favorites, sorted by date at which they were favorited (from the oldest to the most recent)
  */
-@property (class, nonatomic, readonly) NSArray<Favorite *> *mediaFavorites;
+@property (class, nonatomic, readonly) NSArray<DeprecatedFavorite *> *mediaFavorites;
 
 /**
  *  Available show favorites, sorted by date at which they were favorited (from the oldest to the most recent)
  */
-@property (class, nonatomic, readonly) NSArray<Favorite *> *showFavorites;
+@property (class, nonatomic, readonly) NSArray<DeprecatedFavorite *> *showFavorites;
 
 /**
  *  Remove "old" favorites files (without notifying changes)
  */
-+ (void)finishMigrationForFavorites:(NSArray<Favorite *> *)favorites;
++ (void)finishMigrationForFavorites:(NSArray<DeprecatedFavorite *> *)favorites;
 
 @end
 
