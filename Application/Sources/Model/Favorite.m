@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "Favorite.h"
+#import "Favorite+Private.h"
 
 #import "ApplicationConfiguration.h"
 #import "Download.h"
