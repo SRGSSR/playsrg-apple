@@ -1569,7 +1569,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             labels.source = AnalyticsSourceButton;
             labels.value = sharingMedia.URN;
             labels.extraValue1 = analyticsExtraValue;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharing labels:labels];
+            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
             
             SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:sharingMedia.URN];
             if (subdivision) {

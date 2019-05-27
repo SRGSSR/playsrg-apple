@@ -29,24 +29,24 @@ NSString *AnalyticsNameForPageType(AnalyticsPageType pageType)
 }
 
 AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
-AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download";
+AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download_add";
 AnalyticsTitle const AnalyticsTitleDownloadRemove = @"download_remove";
 AnalyticsTitle const AnalyticsTitleDownloadRemoveAll = @"download_remove_all";
-AnalyticsTitle const AnalyticsTitleDownloadOpenMedia = @"play_download";
+AnalyticsTitle const AnalyticsTitleDownloadOpenMedia = @"download_open";
 AnalyticsTitle const AnalyticsTitleGoogleCast = @"google_cast";
 AnalyticsTitle const AnalyticsTitleHistoryRemove = @"history_remove";
 AnalyticsTitle const AnalyticsTitleHistoryRemoveAll = @"history_remove_all";
-AnalyticsTitle const AnalyticsTitleHistoryOpenMedia = @"play_history";
+AnalyticsTitle const AnalyticsTitleHistoryOpenMedia = @"history_open";
 AnalyticsTitle const AnalyticsTitleIdentity = @"identity";
-AnalyticsTitle const AnalyticsTitleNotificationOpen = @"open_notification";
-AnalyticsTitle const AnalyticsTitleNotificationPushOpen = @"open_push_notification";
+AnalyticsTitle const AnalyticsTitleNotificationOpen = @"notification_open";
+AnalyticsTitle const AnalyticsTitleNotificationPushOpen = @"push_notification_open";
 AnalyticsTitle const AnalyticsTitleOpenURL = @"open_url_ios";
 AnalyticsTitle const AnalyticsTitlePictureInPicture = @"picture_in_picture";
 AnalyticsTitle const AnalyticsTitleQuickActions = @"quick_actions_ios";
-AnalyticsTitle const AnalyticsTitleSharing = @"share";
-AnalyticsTitle const AnalyticsTitleSharingModule = @"share_module";
-AnalyticsTitle const AnalyticsTitleSharingShow = @"share_show";
-AnalyticsTitle const AnalyticsTitleSubscriptionAdd = @"subscription";
+AnalyticsTitle const AnalyticsTitleSharingMedia = @"media_share";
+AnalyticsTitle const AnalyticsTitleSharingModule = @"module_share";
+AnalyticsTitle const AnalyticsTitleSharingShow = @"show_share";
+AnalyticsTitle const AnalyticsTitleSubscriptionAdd = @"subscription_add";
 AnalyticsTitle const AnalyticsTitleSubscriptionRemove = @"subscription_remove";
 AnalyticsTitle const AnalyticsTitleFavoriteAdd = @"favorite_add";
 AnalyticsTitle const AnalyticsTitleFavoriteRemove = @"favorite_remove";

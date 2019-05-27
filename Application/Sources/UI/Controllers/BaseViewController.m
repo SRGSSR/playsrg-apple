@@ -239,7 +239,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
                     labels.source = AnalyticsSourceLongPress;
                     labels.value = media.URN;
                     labels.extraValue1 = AnalyticsTypeValueSharingContent;
-                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharing labels:labels];
+                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
                     
                     if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
                         [Banner showWithStyle:BannerStyleInfo

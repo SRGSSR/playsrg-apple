@@ -115,7 +115,7 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleQuickActions;
 /**
  *  Title for sharing-related events
  */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharing;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingMedia;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingModule;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingShow;
 
