@@ -398,6 +398,9 @@
                                                         </connections>
                                                     </view>
                                                 </subviews>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="wWw-SV-fkU" appends="YES" id="mr5-Vk-LPc"/>
+                                                </connections>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWz-P2-92a" userLabel="Line View">
                                                 <rect key="frame" x="10" y="527" width="996" height="11"/>
@@ -584,6 +587,11 @@
                 <tapGestureRecognizer id="fuf-om-cZ9" userLabel="My List Gesture Recognizer">
                     <connections>
                         <action selector="toggleMyList:" destination="HgT-ei-KY5" id="UCq-0f-6jP"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="wWw-SV-fkU">
+                    <connections>
+                        <action selector="openShow:" destination="HgT-ei-KY5" id="QJu-0z-hqM"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

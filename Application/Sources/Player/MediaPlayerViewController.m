@@ -28,6 +28,7 @@
 #import "PlayErrors.h"
 #import "Playlist.h"
 #import "RelatedContentView.h"
+#import "ShowViewController.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
@@ -1637,6 +1638,27 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self setDetailsExpanded:! self.detailsExpanded animated:YES];
 }
 
+- (IBAction)openShow:(id)sender
+{
+    SRGShow *show = [self mainShow];
+    if (! show) {
+        return;
+    }
+    
+    PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
+    RadioChannel *radioChannel = [self radioChannel];
+    if (radioChannel) {
+        appDelegate.sideMenuController.selectedMenuItemInfo = [MenuItemInfo menuItemInfoWithRadioChannel:radioChannel];
+    }
+    else {
+        appDelegate.sideMenuController.selectedMenuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVOverview];
+    }
+    
+    ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+    [appDelegate.sideMenuController pushViewController:showViewController animated:NO];
+    [appDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
+}
+
 - (IBAction)openRadioHome:(id)sender
 {
     RadioChannel *radioChannel = [self radioChannel];
@@ -1763,20 +1785,22 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (IBAction)toggleMyList:(UIGestureRecognizer *)gestureRecognizer
 {
     SRGShow *show = [self mainShow];
-    if (show) {
-        MyListToggleShow(show);
-        [self updateMyListStatusForShow:show];
-        
-        BOOL inMyList = MyListContainsShow(show);
-        
-        AnalyticsTitle analyticsTitle = inMyList ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = AnalyticsSourceButton;
-        labels.value = show.URN;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-        
-        [Banner showMyList:inMyList forItemWithName:show.title inViewController:self];
+    if (! show) {
+        return;
     }
+    
+    MyListToggleShow(show);
+    [self updateMyListStatusForShow:show];
+    
+    BOOL inMyList = MyListContainsShow(show);
+    
+    AnalyticsTitle analyticsTitle = inMyList ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
+    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+    labels.source = AnalyticsSourceButton;
+    labels.value = show.URN;
+    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
+    
+    [Banner showMyList:inMyList forItemWithName:show.title inViewController:self];
 }
 
 #pragma mark Notifications
