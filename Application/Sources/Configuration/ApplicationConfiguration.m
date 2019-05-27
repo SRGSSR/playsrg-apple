@@ -224,6 +224,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *whatsNewURL;
 @property (nonatomic) NSURL *impressumURL;
 @property (nonatomic) NSURL *termsAndConditionsURL;
+@property (nonatomic) NSURL *dataProtectionURL;
 @property (nonatomic) NSURL *betaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
@@ -488,6 +489,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *termsAndConditionsURLString = [self.remoteConfig configValueForKey:@"termsAndConditionsURL"].stringValue;
     self.termsAndConditionsURL = (termsAndConditionsURLString.length != 0) ? [NSURL URLWithString:termsAndConditionsURLString] : nil;
+    
+    NSString *dataProtectionURLString = [self.remoteConfig configValueForKey:@"dataProtectionURL"].stringValue;
+    self.dataProtectionURL = (dataProtectionURLString.length != 0) ? [NSURL URLWithString:dataProtectionURLString] : nil;
     
     FIRRemoteConfigValue *tvNumberOfLivePlaceholders = [self.remoteConfig configValueForKey:@"tvNumberOfLivePlaceholders"];
     self.tvNumberOfLivePlaceholders = (tvNumberOfLivePlaceholders.source != FIRRemoteConfigSourceStatic) ? MAX(tvNumberOfLivePlaceholders.numberValue.integerValue, 0) : 3;

@@ -37,6 +37,7 @@
 static NSString * const SettingsFeaturesButton = @"Button_Features";
 static NSString * const SettingsWhatsNewButton = @"Button_WhatsNew";
 static NSString * const SettingsTermsAndConditionsButton = @"Button_TermsAndConditions";
+static NSString * const SettingsDataProtectionButton = @"Button_DataProtection";
 static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
 static NSString * const SettingsSourceCodeButton = @"Button_Source code";
 
@@ -149,6 +150,16 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSURLRequest *request = [NSURLRequest requestWithURL:termsAndConditionsURL];
         WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeSystem];
         webViewController.title = PlaySRGSettingsLocalizedString(@"Terms and conditions", @"Title displayed at the top of the Terms and conditions view");
+        webViewController.tracked = NO;            // The website we display is already tracked.
+        [self.navigationController pushViewController:webViewController animated:YES];
+    }
+    else if ([specifier.key isEqualToString:SettingsDataProtectionButton]) {
+        NSURL *dataProtectionURL = ApplicationConfiguration.sharedApplicationConfiguration.dataProtectionURL;
+        NSAssert(dataProtectionURL, @"Button must not be displayed if no data protection URL has been specified");
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:dataProtectionURL];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeSystem];
+        webViewController.title = PlaySRGSettingsLocalizedString(@"Data protection", @"Title displayed at the top of the data protection view");
         webViewController.tracked = NO;            // The website we display is already tracked.
         [self.navigationController pushViewController:webViewController animated:YES];
     }
@@ -338,6 +349,10 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     
     if (! applicationConfiguration.termsAndConditionsURL) {
         [hiddenKeys addObject:SettingsTermsAndConditionsButton];
+    }
+    
+    if (! applicationConfiguration.dataProtectionURL) {
+        [hiddenKeys addObject:SettingsDataProtectionButton];
     }
     
     if (! applicationConfiguration.betaTestingURL) {
