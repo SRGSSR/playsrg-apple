@@ -1,5 +1,4 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'git@github.com:SRGSSR/srgpodspecs-ios.git'
 
 platform :ios, '9.0'
 inhibit_all_warnings!
