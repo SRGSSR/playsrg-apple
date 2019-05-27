@@ -43,6 +43,9 @@ open class SwiftMessagesBridge : NSObject {
         if sticky {
             config.duration = .forever
         }
+        else {
+            config.duration = .seconds(seconds: 4)
+        }
         
         // Set a presentation context (with a preference for navigation controllers). A context is required so that
         // the notification rotation behavior matches the one of the associated view controller.
