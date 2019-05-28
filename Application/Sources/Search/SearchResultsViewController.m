@@ -106,7 +106,7 @@ static NSString *TitleForSearchOption(SearchOption searchOption)
 
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
-    SRGPaginatedSearchResultMediaListCompletionBlock searchResultsMediasCompletionBlock = ^(NSArray<SRGSearchResultMedia *> * _Nullable searchResults, NSNumber * _Nonnull total, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+    SRGPaginatedMediaSearchCompletionBlock searchResultsMediasCompletionBlock = ^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregation, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         [self updateWithTotal:total];
         
         if (error) {
@@ -114,14 +114,13 @@ static NSString *TitleForSearchOption(SearchOption searchOption)
             return;
         }
         
-        if (searchResults.count == 0) {
+        if (mediaURNs.count == 0) {
             completionHandler(@[], page, nil, HTTPResponse, error);
             return;
         }
         
-        NSArray<NSString *> *URNs = [searchResults valueForKey:@keypath(SRGSearchResultMedia.new, URN)];
         NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
-        SRGPageRequest *mediasRequest = [[SRGDataProvider.currentDataProvider mediasWithURNs:URNs completionBlock:^(NSArray<SRGMedia *> * _Nullable medias, SRGPage * _Nonnull mediasPage, SRGPage * _Nullable mediasNextPage, NSHTTPURLResponse * _Nullable mediasHTTPResponse, NSError * _Nullable mediasError) {
+        SRGPageRequest *mediasRequest = [[SRGDataProvider.currentDataProvider mediasWithURNs:mediaURNs completionBlock:^(NSArray<SRGMedia *> * _Nullable medias, SRGPage * _Nonnull mediasPage, SRGPage * _Nullable mediasNextPage, NSHTTPURLResponse * _Nullable mediasHTTPResponse, NSError * _Nullable mediasError) {
             // Pagination must be based on the initial search results request, not on the media by URN retrieval (since
             // this last request returns the exact needed amount of medias, with no next page)
             completionHandler(medias, page, nextPage, mediasHTTPResponse, mediasError);
@@ -129,7 +128,7 @@ static NSString *TitleForSearchOption(SearchOption searchOption)
         [requestQueue addRequest:mediasRequest resume:YES];
     };
     
-    SRGPaginatedSearchResultShowListCompletionBlock searchResultShowsCompletionBlock = ^(NSArray<SRGSearchResultShow *> * _Nullable searchResults, NSNumber * _Nonnull total, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+    SRGPaginatedShowSearchCompletionBlock searchResultShowsCompletionBlock = ^(NSArray<NSString *> * _Nullable showURNs, NSNumber *total, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         [self updateWithTotal:total];
         
         if (error) {
@@ -137,14 +136,13 @@ static NSString *TitleForSearchOption(SearchOption searchOption)
             return;
         }
         
-        if (searchResults.count == 0) {
+        if (showURNs.count == 0) {
             completionHandler(@[], page, nil, HTTPResponse, error);
             return;
         }
         
-        NSArray<NSString *> *URNs = [searchResults valueForKey:@keypath(SRGSearchResultShow.new, URN)];
         NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
-        SRGPageRequest *showsRequest = [[SRGDataProvider.currentDataProvider showsWithURNs:URNs completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull showsPage, SRGPage * _Nullable showsNextPage, NSHTTPURLResponse * _Nullable showsHTTPResponse, NSError * _Nullable showsError) {
+        SRGPageRequest *showsRequest = [[SRGDataProvider.currentDataProvider showsWithURNs:showURNs completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull showsPage, SRGPage * _Nullable showsNextPage, NSHTTPURLResponse * _Nullable showsHTTPResponse, NSError * _Nullable showsError) {
             // See comment above
             completionHandler(shows, page, nextPage, showsHTTPResponse, showsError);
         }] requestWithPageSize:pageSize];
@@ -163,7 +161,10 @@ static NSString *TitleForSearchOption(SearchOption searchOption)
         }
             
         case SearchOptionVideos: {
-            SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider videosForVendor:vendor matchingQuery:self.searchText withCompletionBlock:searchResultsMediasCompletionBlock] requestWithPageSize:pageSize] requestWithPage:page];
+            SRGMediaSearchFilters *filters = [[SRGMediaSearchFilters alloc] init];
+            filters.mediaType = SRGMediaTypeVideo;
+            
+            SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider mediasForVendor:vendor matchingQuery:self.searchText withFilters:filters completionBlock:searchResultsMediasCompletionBlock] requestWithPageSize:pageSize] requestWithPage:page];
             [requestQueue addRequest:request resume:YES];
             break;
         }
@@ -175,7 +176,10 @@ static NSString *TitleForSearchOption(SearchOption searchOption)
         }
             
         case SearchOptionAudios: {
-            SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider audiosForVendor:vendor matchingQuery:self.searchText withCompletionBlock:searchResultsMediasCompletionBlock] requestWithPageSize:pageSize] requestWithPage:page];
+            SRGMediaSearchFilters *filters = [[SRGMediaSearchFilters alloc] init];
+            filters.mediaType = SRGMediaTypeAudio;
+            
+            SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider mediasForVendor:vendor matchingQuery:self.searchText withFilters:filters completionBlock:searchResultsMediasCompletionBlock] requestWithPageSize:pageSize] requestWithPage:page];
             [requestQueue addRequest:request resume:YES];
             break;
         }
