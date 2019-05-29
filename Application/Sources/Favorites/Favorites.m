@@ -14,7 +14,7 @@
 #import <libextobjc/libextobjc.h>
 #import <SRGUserData/SRGUserData.h>
 
-NSString * const PlayPreferenceDomain = @"play";
+NSString * const PlayPreferencesDomain = @"play";
 
 static NSString * const PlayFavoritesPath = @"favorites";
 static NSString * const PlayDatePath = @"date";
@@ -28,14 +28,14 @@ static NSString * const SubscriptionsToFavoritesMigrationDoneKey = @"Subscriptio
 BOOL FavoritesContainsShowURN(NSString *URN)
 {
     NSString *path = [PlayFavoritesPath stringByAppendingPathComponent:URN];
-    return [SRGUserData.currentUserData.preferences hasObjectAtPath:path inDomain:PlayPreferenceDomain];
+    return [SRGUserData.currentUserData.preferences hasObjectAtPath:path inDomain:PlayPreferencesDomain];
 }
 
 void FavoritesAddShowURNWithDate(NSString *URN, NSDate *date)
 {
     if (! FavoritesContainsShowURN(URN)) {
         NSString *path = [[PlayFavoritesPath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:PlayDatePath];
-        [SRGUserData.currentUserData.preferences setNumber:@(round(date.timeIntervalSince1970 * 1000.)) atPath:path inDomain:PlayPreferenceDomain];
+        [SRGUserData.currentUserData.preferences setNumber:@(round(date.timeIntervalSince1970 * 1000.)) atPath:path inDomain:PlayPreferencesDomain];
     }
 }
 
@@ -50,7 +50,7 @@ BOOL FavoritesIsSubscribedToShowURN(NSString * _Nonnull URN)
     }
     
     NSString *path = [[[PlayFavoritesPath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
-    return [SRGUserData.currentUserData.preferences numberAtPath:path inDomain:PlayPreferenceDomain].boolValue;
+    return [SRGUserData.currentUserData.preferences numberAtPath:path inDomain:PlayPreferencesDomain].boolValue;
 }
 
 // Force subscription, even if Push Notifications are disabled.
@@ -58,7 +58,7 @@ void FavoritesSubscribeToShowURN(NSString *URN)
 {
     if (FavoritesContainsShowURN(URN) && ! FavoritesIsSubscribedToShowURN(URN)) {
         NSString *path = [[[PlayFavoritesPath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
-        [SRGUserData.currentUserData.preferences setNumber:@YES atPath:path inDomain:PlayPreferenceDomain];
+        [SRGUserData.currentUserData.preferences setNumber:@YES atPath:path inDomain:PlayPreferencesDomain];
     }
 }
 
@@ -93,7 +93,7 @@ void FavoritesSetup(void)
     
     [NSNotificationCenter.defaultCenter addObserverForName:SRGPreferencesDidChangeNotification object:SRGUserData.currentUserData.preferences queue:nil usingBlock:^(NSNotification * _Nonnull notification) {
         NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
-        if ([domains containsObject:PlayPreferenceDomain]) {
+        if ([domains containsObject:PlayPreferencesDomain]) {
             FavoritesUpdatePushService();
         }
     }];
@@ -126,7 +126,7 @@ void FavoritesRemoveShows(NSArray<SRGShow *> *shows)
     for (NSString *URN in URNs) {
         [paths addObject:[PlayFavoritesPath stringByAppendingPathComponent:URN]];
     }
-    [SRGUserData.currentUserData.preferences removeObjectsAtPaths:paths.copy inDomain:PlayPreferenceDomain];
+    [SRGUserData.currentUserData.preferences removeObjectsAtPaths:paths.copy inDomain:PlayPreferencesDomain];
 }
 
 void FavoritesToggleShow(SRGShow *show)
@@ -141,7 +141,7 @@ void FavoritesToggleShow(SRGShow *show)
 
 NSSet<NSString *> *FavoritesShowURNs(void)
 {
-    NSArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences dictionaryAtPath:PlayFavoritesPath inDomain:PlayPreferenceDomain].allKeys;
+    NSArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences dictionaryAtPath:PlayFavoritesPath inDomain:PlayPreferencesDomain].allKeys;
     return URNs ? [NSSet setWithArray:URNs] : [NSSet set];
 }
 
@@ -167,7 +167,7 @@ BOOL FavoritesToggleSubscriptionForShow(SRGShow *show, UIView *view)
     
     BOOL subscribed = [PushService.sharedService isSubscribedToShowURN:show.URN];
     NSString *path = [[[PlayFavoritesPath stringByAppendingPathComponent:show.URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
-    [SRGUserData.currentUserData.preferences setNumber:@(subscribed) atPath:path inDomain:PlayPreferenceDomain];
+    [SRGUserData.currentUserData.preferences setNumber:@(subscribed) atPath:path inDomain:PlayPreferencesDomain];
     
     return YES;
 }

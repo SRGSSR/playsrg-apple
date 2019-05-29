@@ -653,7 +653,7 @@
 {
     if ([self.homeSections containsObject:@(HomeSectionTVFavoriteShows)] || [self.homeSections containsObject:@(HomeSectionRadioFavoriteShows)]) {
         NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
-        if ([domains containsObject:PlayPreferenceDomain]) {
+        if ([domains containsObject:PlayPreferencesDomain]) {
             [self refresh];
         }
     }

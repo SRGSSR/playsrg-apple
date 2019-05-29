@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  The deprecated `Favorite` collects all information associated with a favorite, and provides the interface to manage them
+ *  Deprecated favorites (previously stored in plists). Kept for migration purposes only.
  */
 @interface DeprecatedFavorite : NSObject <SRGImageMetadata>
 

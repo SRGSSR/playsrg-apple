@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Play domain for `SRGPreferences`.
  */
-OBJC_EXPORT NSString * const PlayPreferenceDomain;
+OBJC_EXPORT NSString * const PlayPreferencesDomain;
 
 
 /**

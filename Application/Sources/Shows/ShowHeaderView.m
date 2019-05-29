@@ -219,7 +219,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 - (void)preferencesStateDidChange:(NSNotification *)notification
 {
     NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
-    if ([domains containsObject:PlayPreferenceDomain]) {
+    if ([domains containsObject:PlayPreferencesDomain]) {
         [self updateFavoriteStatus];
         [self updateSubscriptionStatus];
     }

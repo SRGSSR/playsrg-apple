@@ -446,7 +446,7 @@
 {
     // Update the URN list. Unlike other media / shows list, there is no pagination in this one. A simple refresh is accepted.
     NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
-    if ([domains containsObject:PlayPreferenceDomain]) {
+    if ([domains containsObject:PlayPreferencesDomain]) {
         [self refresh];
     }
 }
