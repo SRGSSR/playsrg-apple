@@ -114,6 +114,7 @@ A wide list of parameters are available. Some parameters support multiple comma-
 * `playURL` (mandatory, string): The base URL of the Play portal, used when building sharing URLs.
 * `showURLPath` (optional, string, not used since 2.8): The (relative) path to the `playURL` when building show sharing URLs.
 * `sourceCodeURL` (optional, string); The URL where the application source code can be found.
+* `termsAndConditionsURL` (optional, string): The URL of the terms and conditions page.
 * `whatsNewURL` (mandatory, string): The URL at which the update information can be retrieved.
 
 ### General parameters
