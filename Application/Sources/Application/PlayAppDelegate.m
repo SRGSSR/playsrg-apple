@@ -9,7 +9,6 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
-#import "DeprecatedFavorite.h"
 #import "Download.h"
 #import "Favorites.h"
 #import "GoogleCast.h"
@@ -204,7 +203,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     FavoritesSetup();
     
     // Local objects migration
-    [DeprecatedFavorite migrate];
     WatchLaterMigrate();
     FavoritesMigrate();
     

@@ -2459,12 +2459,12 @@
 			children = (
 				086F8D5122984B29001BE2F4 /* Favorites.h */,
 				086F8D4D22984B29001BE2F4 /* Favorites.m */,
-				086F8D4F22984B29001BE2F4 /* FavoriteTableViewCell.h */,
-				086F8D5322984B29001BE2F4 /* FavoriteTableViewCell.m */,
-				086F8D5022984B29001BE2F4 /* FavoriteTableViewCell.xib */,
 				086F8D5422984B29001BE2F4 /* FavoritesViewController.h */,
 				086F8D4E22984B29001BE2F4 /* FavoritesViewController.m */,
 				086F8D5222984B29001BE2F4 /* FavoritesViewController.storyboard */,
+				086F8D4F22984B29001BE2F4 /* FavoriteTableViewCell.h */,
+				086F8D5322984B29001BE2F4 /* FavoriteTableViewCell.m */,
+				086F8D5022984B29001BE2F4 /* FavoriteTableViewCell.xib */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";

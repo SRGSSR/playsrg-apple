@@ -181,6 +181,8 @@ BOOL FavoritesIsSubscribedToShow(SRGShow *show)
 
 void FavoritesMigrate(void)
 {
+    [DeprecatedFavorite migrate];
+    
     NSArray<DeprecatedFavorite *> *favorites = [DeprecatedFavorite showFavorites];
     if (favorites.count != 0) {
         for (DeprecatedFavorite *favorite in favorites) {
