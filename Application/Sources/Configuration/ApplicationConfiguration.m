@@ -217,11 +217,10 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *middlewareURL;
 @property (nonatomic) NSURL *identityWebserviceURL;
 @property (nonatomic) NSURL *identityWebsiteURL;
-
 @property (nonatomic) NSURL *userDataServiceURL;
 
-@property (nonatomic) NSURL *feedbackURL;
 @property (nonatomic) NSURL *whatsNewURL;
+@property (nonatomic) NSURL *feedbackURL;
 @property (nonatomic) NSURL *impressumURL;
 @property (nonatomic) NSURL *termsAndConditionsURL;
 @property (nonatomic) NSURL *dataProtectionURL;
@@ -413,12 +412,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
     
-    NSString *feedbackURLString = [self.remoteConfig configValueForKey:@"feedbackURL"].stringValue;
-    NSURL *feedbackURL = (feedbackURLString.length != 0) ? [NSURL URLWithString:feedbackURLString] : nil;
-    if (! feedbackURL) {
-        return NO;
-    }
-    
     NSString *whatsNewURLString = [self.remoteConfig configValueForKey:@"whatsNewURL"].stringValue;
     NSURL *whatsNewURL = (whatsNewURLString.length != 0) ? [NSURL URLWithString:whatsNewURLString] : nil;
     if (! whatsNewURL) {
@@ -451,7 +444,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.playURL = playURL;
     self.middlewareURL = middlewareURL;
-    self.feedbackURL = feedbackURL;
     self.whatsNewURL = whatsNewURL;
     
     self.appStoreProductIdentifier = appStoreProductIdentifier;
@@ -477,6 +469,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *userDataServiceURLString = [self.remoteConfig configValueForKey:@"userDataServiceURL"].stringValue;
     self.userDataServiceURL = (userDataServiceURLString.length != 0) ? [NSURL URLWithString:userDataServiceURLString] : nil;
+    
+    NSString *feedbackURLString = [self.remoteConfig configValueForKey:@"feedbackURL"].stringValue;
+    self.feedbackURL = (feedbackURLString.length != 0) ? [NSURL URLWithString:feedbackURLString] : nil;
     
     NSString *impressumURLString = [self.remoteConfig configValueForKey:@"impressumURL"].stringValue;
     self.impressumURL = (impressumURLString.length != 0) ? [NSURL URLWithString:impressumURLString] : nil;
