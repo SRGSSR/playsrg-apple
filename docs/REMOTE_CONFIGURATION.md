@@ -108,6 +108,7 @@ A wide list of parameters are available. Some parameters support multiple comma-
 
 * `betaTestingURL` (optional, string): The URL of the page where beta testers can register.
 * `feedbackURL` (mandatory, string): The URL of the feedback form.
+* `dataProtectionURL` (optional, string): The URL of the data protection information page.
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed. 
 * `middlewareURL` (mandatory, string): The URL of the Play application middleware.
 * `playURL` (mandatory, string): The base URL of the Play portal, used when building sharing URLs.
