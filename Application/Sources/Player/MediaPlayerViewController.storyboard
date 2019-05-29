@@ -556,7 +556,7 @@
                         <action selector="pullDown:" destination="HgT-ei-KY5" id="Eku-5S-LqA"/>
                     </connections>
                 </panGestureRecognizer>
-                <tapGestureRecognizer id="fuf-om-cZ9" userLabel="My List Gesture Recognizer"/>
+                <tapGestureRecognizer id="fuf-om-cZ9" userLabel="Favorite Gesture Recognizer"/>
                 <tapGestureRecognizer id="wWw-SV-fkU">
                     <connections>
                         <action selector="openShow:" destination="HgT-ei-KY5" id="QJu-0z-hqM"/>

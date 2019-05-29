@@ -50,8 +50,8 @@
 
 @property (nonatomic, getter=isTopicsLoaded) BOOL topicsLoaded;
 @property (nonatomic, getter=isEventsLoaded) BOOL eventsLoaded;
-@property (nonatomic, getter=isMyListTVLoaded) BOOL favoriteTVShowsLoaded;
-@property (nonatomic, getter=isMyListRadioLoaded) BOOL favoriteRadioShowsLoaded;
+@property (nonatomic, getter=isFavoriteTVShowsLoaded) BOOL favoriteTVShowsLoaded;
+@property (nonatomic, getter=isFavoriteRadioShowsLoaded) BOOL favoriteRadioShowsLoaded;
 
 @end
 
