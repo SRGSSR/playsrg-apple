@@ -138,7 +138,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     
     NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
                                   NSForegroundColorAttributeName : UIColor.whiteColor };
-    NSString *title = [isFavorite ? NSLocalizedString(@"Remove from favorites", @"Favorite show removal label in the show view") : NSLocalizedString(@"Add to favorites", @"Favorite show insertion label in the show view") uppercaseString];
+    NSString *title = [isFavorite ? NSLocalizedString(@"In favorites", @"Favorite show added label in the show view") : NSLocalizedString(@"Add to favorites", @"Favorite show insertion label in the show view") uppercaseString];
     [self.favoriteLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
                                                                                attributes:attributes] forState:UIControlStateNormal];
 }
