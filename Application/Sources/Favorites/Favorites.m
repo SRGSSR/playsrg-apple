@@ -6,7 +6,7 @@
 
 #import "Favorites.h"
 
-#import "DeprecatedFavorite+Private.h"
+#import "DeprecatedFavorite.h"
 #import "NSSet+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PushService+Private.h"

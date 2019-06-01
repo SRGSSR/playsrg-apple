@@ -2030,7 +2030,6 @@
 		6FDF08D3218B126700B2AF2C /* Onboarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Onboarding.h; sourceTree = "<group>"; };
 		6FDF08D4218B126700B2AF2C /* UpdateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfo.h; sourceTree = "<group>"; };
 		6FDF08D5218B126700B2AF2C /* OnboardingPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingPage.h; sourceTree = "<group>"; };
-		6FDF08D6218B126700B2AF2C /* DeprecatedFavorite+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DeprecatedFavorite+Private.h"; sourceTree = "<group>"; };
 		6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsConstants.h; sourceTree = "<group>"; };
 		6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsConstants.m; sourceTree = "<group>"; };
 		6FE1B9171FAC34D600A58F3B /* ContentInsets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentInsets.h; sourceTree = "<group>"; };
@@ -3179,7 +3178,6 @@
 				6FDF08C8218B126700B2AF2C /* Download+Private.h */,
 				6FDF08CB218B126700B2AF2C /* DeprecatedFavorite.h */,
 				6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */,
-				6FDF08D6218B126700B2AF2C /* DeprecatedFavorite+Private.h */,
 				6FDF08D3218B126700B2AF2C /* Onboarding.h */,
 				6FDF08CA218B126700B2AF2C /* Onboarding.m */,
 				6FDF08D5218B126700B2AF2C /* OnboardingPage.h */,

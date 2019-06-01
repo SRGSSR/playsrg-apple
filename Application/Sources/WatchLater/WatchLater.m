@@ -6,7 +6,7 @@
 
 #import "WatchLater.h"
 
-#import "DeprecatedFavorite+Private.h"
+#import "DeprecatedFavorite.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGUserData/SRGUserData.h>
