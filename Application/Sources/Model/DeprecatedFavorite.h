@@ -14,11 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface DeprecatedFavorite : NSObject <SRGImageMetadata>
 
-/**
- *  Perform migration.
- */
-+ (void)migrate;
-
 @end
 
 NS_ASSUME_NONNULL_END

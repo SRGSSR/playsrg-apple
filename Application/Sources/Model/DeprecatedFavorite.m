@@ -333,13 +333,6 @@ static NSArray<DeprecatedFavorite *> *s_sortedFavorites;
     }];
 }
 
-+ (void)migrate
-{
-    [DeprecatedFavorite.favorites enumerateObjectsUsingBlock:^(DeprecatedFavorite * _Nonnull favorite, NSUInteger idx, BOOL * _Nonnull stop) {
-        [favorite migrate];
-    }];
-}
-
 #pragma mark Object lifecycle
 
 - (instancetype)initWithObject:(id)object
@@ -443,51 +436,6 @@ static NSArray<DeprecatedFavorite *> *s_sortedFavorites;
     self.imageURL = [object favoriteImageURLForDimension:SRGImageDimensionWidth withValue:FavoriteBackupImageWidth];
     self.imageTitle = object.favoriteImageTitle;
     self.imageCopyright = object.favoriteImageCopyright;
-}
-
-- (void)migrate
-{
-    // We only accept SRGShow and SRGMedia
-    if (! [self.object isKindOfClass:SRGShow.class]
-            && ! [self.object isKindOfClass:SRGMedia.class]) {
-        if ([self.object isKindOfClass:SRGMediaComposition.class]) {
-            SRGMediaComposition *mediaComposition = (SRGMediaComposition *)self.object;
-            SRGSubdivision *subdivision = mediaComposition.mainSegment ?: mediaComposition.mainChapter;
-            SRGMedia *media = [mediaComposition mediaForSubdivision:subdivision];
-            [self updateWithObject:media];
-            [DeprecatedFavorite saveFavoritesDictionary];
-        }
-        else {
-            self.object = nil;
-        }
-    }
-    else {
-        [self updateWithObject:self.object];
-        [DeprecatedFavorite saveFavoritesDictionary];
-    }
-    
-    // If we have a favorite show with an unknow showURN or an unknown transmission type, try to get new object now.
-    if (self.type == FavoriteTypeShow && (! self.showURN || self.showTransmission == FavoriteShowTransmissionUnknown)) {
-        [[SRGDataProvider.currentDataProvider showWithURN:self.showURN completionBlock:^(SRGShow * _Nullable show, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-            if (! error && show) {
-                [self updateWithObject:show];
-                [DeprecatedFavorite saveFavoritesDictionary];
-            }
-        }] resume];
-    }
-    // If we have a favorite show with an unknown media type, try to get new object now.
-    else if (self.type == FavoriteTypeMedia && (! self.mediaURN || self.mediaType == FavoriteMediaTypeUnknown)) {
-        [[SRGDataProvider.currentDataProvider mediaWithURN:self.mediaURN completionBlock:^(SRGMedia * _Nullable media, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-            if (! error && media) {
-                [self updateWithObject:media];
-                [DeprecatedFavorite saveFavoritesDictionary];
-            }
-        }] resume];
-    }
-    // If no object, try to get it now
-    else if (! self.object) {
-        [self objectForType:FavoriteTypeUnspecified available:NULL withCompletionBlock:^(id  _Nullable favoritedObject, NSError * _Nullable error) {}];
-    }
 }
 
 #pragma mark Getters
