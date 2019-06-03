@@ -235,7 +235,7 @@
                                                attributes:attributes];
     }
     else {
-        return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No content", @"Text displayed when no show has been added to favorites")
+        return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No favorites", @"Text displayed when no favorites are available")
                                                attributes:attributes];
     }
 }
@@ -251,7 +251,7 @@
                                                attributes:attributes];
     }
     else {
-        NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a show to add it to favorites", @"Hint displayed when no show added to favorites and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a show to add it to favorites", @"Hint displayed when no show added to favorites and the device does not support 3D touch");
+        NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on an item to add it to favorites", @"Hint displayed when no favorites are available and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold an item to add it to favorites", @"Hint displayed when no favorites are available and the device does not support 3D touch");
         return [[NSAttributedString alloc] initWithString:description
                                                attributes:attributes];
     }
@@ -360,7 +360,7 @@
         }
     }
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:deleteAllModeEnabled ? NSLocalizedString(@"Remove all content", @"Title of the confirmation pop-up displayed when the user is about to clean all favorites") : NSLocalizedString(@"Remove content", @"Title of the confirmation pop-up displayed when the user is about to remove selected entries from favorites")
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:deleteAllModeEnabled ? NSLocalizedString(@"Remove all favorites", @"Title of the confirmation pop-up displayed when the user is about to delete all favorite items") : NSLocalizedString(@"Remove favorites", @"Title of the confirmation pop-up displayed when the user is about to delete selected favorite items")
                                                                              message:deleteAllModeEnabled ? NSLocalizedString(@"Are you sure you want to delete all items?", @"Confirmation message displayed when the user is about to clean all favorites") : NSLocalizedString(@"Are you sure you want to delete the selected items?", @"Confirmation message displayed when the user is about to remove selected entries from favorites")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

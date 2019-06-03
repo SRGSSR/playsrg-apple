@@ -9,10 +9,10 @@
 "%@ views" = "%@ gesehen";
 
 /* Show My List creation label */
-"Add to My List" = "Add to My List";
+"Add to My List" = "Zu Meine Favoriten hinzufügen";
 
 /* Media watch later creation label */
-"Add to the watch later list" = "Add to the watch later list";
+"Add to the watch later list" = "Zu Später schauen hinzufügen";
 
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Alle anzeigen aus \"%@\"";
@@ -27,13 +27,13 @@
 "Delete" = "Löschen";
 
 /* Show unsubscription label */
-"Disable notifications for show" = "Disable notifications for show";
+"Disable notifications for show" = "Push-Mitteilungen deaktivieren";
 
 /* A download button label */
 "Download" = "Download";
 
 /* Show subscription label */
-"Enable notifications for show" = "Enable notifications for show";
+"Enable notifications for show" = "Push-Mitteilungen aktivieren";
 
 /* Introductory title for error notifications */
 "Error" = "Fehler";
@@ -97,10 +97,10 @@
 "Remove download" = "Download entfernen";
 
 /* Show My List removal label */
-"Remove from My List" = "Remove from My List";
+"Remove from My List" = "Aus Meine Favoriten entfernen";
 
 /* Media watch later removal label */
-"Remove from the watch later list" = "Remove from the watch later list";
+"Remove from the watch later list" = "Von Später schauen entfernen";
 
 /* A download button label */
 "Retry download" = "Erneut herunterladen";
