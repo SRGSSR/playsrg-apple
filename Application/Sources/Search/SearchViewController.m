@@ -6,56 +6,24 @@
 
 #import "SearchViewController.h"
 
-#import "SearchResultsViewController.h"
+#import "MediaCollectionViewCell.h"
+#import "ShowCollectionViewCell.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 #import <Masonry/Masonry.h>
 #import <SRGAnalytics/SRGAnalytics.h>
+#import <SRGAppearance/SRGAppearance.h>
 
 const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 
-@interface SearchViewController () <SearchResultsViewControllerDelegate>
+@interface SearchViewController ()
 
 @property (nonatomic, weak) UISearchBar *searchBar;
 
 @end
 
 @implementation SearchViewController
-
-#pragma mark Object lifecycle
-
-- (instancetype)initWithPreferredSearchOption:(SearchOption)searchOption
-{
-    NSArray<NSNumber *> *searchOptions = ApplicationConfiguration.sharedApplicationConfiguration.searchOptions;
-    NSAssert(searchOptions.count != 0, @"Search options must be available");
-    
-    if (! [searchOptions containsObject:@(searchOption)]) {
-        if (searchOption == SearchOptionTVShows && [searchOptions containsObject:@(SearchOptionVideos)]) {
-            searchOption = SearchOptionVideos;
-        }
-        else if (searchOption == SearchOptionRadioShows && [searchOptions containsObject:@(SearchOptionAudios)]) {
-            searchOption = SearchOptionAudios;
-        }
-        else {
-            searchOption = searchOptions.firstObject.integerValue;
-        }
-    }
-    
-    NSMutableArray<UIViewController *> *viewControllers = [NSMutableArray array];
-    for (NSNumber *searchOption in searchOptions) {
-        SearchResultsViewController *searchResultsViewController = [[SearchResultsViewController alloc] initWithSearchOption:searchOption.integerValue];
-        [viewControllers addObject:searchResultsViewController];
-    }
-    
-    NSUInteger index = [searchOptions indexOfObject:@(searchOption)];
-    return [super initWithViewControllers:[viewControllers copy] initialPage:index];
-}
-
-- (instancetype)init
-{
-    return [self initWithPreferredSearchOption:SearchOptionUnknown];
-}
 
 #pragma mark Getters and setters
 
@@ -70,12 +38,20 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 {
     [super viewDidLoad];
     
-    // Not in -init since made on self and the view controller list is created earlier in -init
-    for (SearchResultsViewController *searchResultsViewController in self.viewControllers) {
-        searchResultsViewController.delegate = self;
-    }
-    
     self.view.backgroundColor = UIColor.play_blackColor;
+    
+    self.collectionView.backgroundColor = UIColor.clearColor;
+    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    
+    self.emptyCollectionImage = [UIImage imageNamed:@"search-90"];
+    
+    NSString *mediaCellIdentifier = NSStringFromClass(MediaCollectionViewCell.class);
+    UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
+    [self.collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
+    
+    NSString *showCellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
+    UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
+    [self.collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
@@ -134,14 +110,68 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     return UIStatusBarStyleLightContent;
 }
 
+#pragma mark Overrides
+
+- (BOOL)shouldPerformRefreshRequest
+{
+    return (self.searchBar.text.length >= SearchViewControllerSearchTextMinimumLength);
+}
+
+- (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
+{
+    SRGPaginatedMediaSearchCompletionBlock searchResultsMediasCompletionBlock = ^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregation, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        if (error) {
+            completionHandler(nil, page, nil, HTTPResponse, error);
+            return;
+        }
+        
+        if (mediaURNs.count == 0) {
+            completionHandler(@[], page, nil, HTTPResponse, error);
+            return;
+        }
+        
+        NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
+        SRGPageRequest *mediasRequest = [[SRGDataProvider.currentDataProvider mediasWithURNs:mediaURNs completionBlock:^(NSArray<SRGMedia *> * _Nullable medias, SRGPage * _Nonnull mediasPage, SRGPage * _Nullable mediasNextPage, NSHTTPURLResponse * _Nullable mediasHTTPResponse, NSError * _Nullable mediasError) {
+            // Pagination must be based on the initial search results request, not on the media by URN retrieval (since
+            // this last request returns the exact needed amount of medias, with no next page)
+            completionHandler(medias, page, nextPage, mediasHTTPResponse, mediasError);
+        }] requestWithPageSize:pageSize];
+        [requestQueue addRequest:mediasRequest resume:YES];
+    };
+    
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    SRGVendor vendor = applicationConfiguration.vendor;
+    NSUInteger pageSize = applicationConfiguration.pageSize;
+    
+    // FIXME: Probably need to build the search text by replacing with changed
+    SRGPageRequest *mediaRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:vendor matchingQuery:self.searchBar.text withFilters:nil completionBlock:searchResultsMediasCompletionBlock] requestWithPageSize:pageSize] requestWithPage:page];
+    [requestQueue addRequest:mediaRequest resume:YES];
+}
+
+- (NSString *)emptyCollectionTitle
+{
+    return (self.searchBar.text.length < SearchViewControllerSearchTextMinimumLength) ? NSLocalizedString(@"No results", nil) : super.emptyCollectionTitle;
+}
+
+- (NSString *)emptyCollectionSubtitle
+{
+    return (self.searchBar.text.length < SearchViewControllerSearchTextMinimumLength) ? [NSString stringWithFormat:NSLocalizedString(@"Enter %@ characters or more to search", @"Placeholder text displayed in the search field when empty (with minimum number of characters freely specified)"), @(SearchViewControllerSearchTextMinimumLength)] : super.emptyCollectionSubtitle;
+}
+
 #pragma mark Helpers
+
+- (void)search
+{
+    [self clear];
+    [self refresh];
+}
 
 - (void)sendAnalytics
 {
     NSString *searchText = self.searchBar.text;
     if (searchText.length >= SearchViewControllerSearchTextMinimumLength) {
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.value = self.searchBar.text;
+        labels.value = searchText;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSearch labels:labels];
     }
 }
@@ -158,20 +188,68 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     return @[ AnalyticsNameForPageType(AnalyticsPageTypeSearch) ];
 }
 
-#pragma mark SearchResultsViewControllerDelegate protocol
+#pragma mark UICollectionViewDataSource protocol
 
-- (void)searchResultsViewControllerWasDragged:(SearchResultsViewController *)searchResultsViewController
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    [self.searchBar resignFirstResponder];
+    return [self shouldPerformRefreshRequest] ? self.items.count : 0.f;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MediaCollectionViewCell.class)
+                                                     forIndexPath:indexPath];
+}
+
+#pragma mark UICollectionViewDelegate protocol
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    MediaCollectionViewCell *mediaCell = (MediaCollectionViewCell *)cell;
+    mediaCell.media = self.items[indexPath.row];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SRGMedia *media = self.items[indexPath.row];
+    [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
+}
+
+#pragma mark UICollectionViewDelegateFlowLayout protocol
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    
+    if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+        CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 86.f : 100.f;
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, height);
+    }
+    // Grid layout
+    else {
+        CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 70.f : 100.f;
+        
+        static const CGFloat kItemWidth = 210.f;
+        return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
+    }
 }
 
 #pragma mark UISearchBarDelegate protocol
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    for (SearchResultsViewController *searchResultsViewController in self.viewControllers) {
-        [searchResultsViewController updateWithSearchText:searchText];
+    if (searchText.length < SearchViewControllerSearchTextMinimumLength) {
+        [self.collectionView reloadData];
     }
+    
+    // Perform the search with a delay to avoid triggering several search requests if updates are made in a row
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(search) object:nil];
+    
+    // No delay when the search text is too small. This also covers the case where the user clears the search criterium
+    // with the clear button
+    static NSTimeInterval kTypingSpeedThreshold = 0.3;
+    NSTimeInterval delay = (searchText.length < SearchViewControllerSearchTextMinimumLength) ? 0. : kTypingSpeedThreshold;
+    [self performSelector:@selector(search) withObject:nil afterDelay:delay];
     
     // Add a large delay to avoid sending search events when the user is typing fast
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(sendAnalytics) object:nil];
@@ -181,6 +259,17 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [self.searchBar resignFirstResponder];
+}
+
+#pragma mark UIScrollViewDelegate protocol
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [super scrollViewDidScroll:scrollView];
+    
+    if (scrollView.dragging && !scrollView.decelerating) {
+        [self.searchBar resignFirstResponder];
+    }
 }
 
 #pragma mark Actions

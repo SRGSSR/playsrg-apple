@@ -166,19 +166,6 @@ static MenuItem RadioMenuItemWithString(NSString *string)
     return s_menuItems[string].integerValue ?: MenuItemUnknown;
 }
 
-static SearchOption SearchOptionWithString(NSString *string)
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSString *, NSNumber *> *s_menuItems;
-    dispatch_once(&s_onceToken, ^{
-        s_menuItems = @{ @"tvShows" : @(SearchOptionTVShows),
-                         @"videos" : @(SearchOptionVideos),
-                         @"radioShows" : @(SearchOptionRadioShows),
-                         @"audios" : @(SearchOptionAudios) };
-    });
-    return s_menuItems[string].integerValue ?: SearchOptionUnknown;
-}
-
 void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller)
 {
     controller.serviceURL = SRGDataProvider.currentDataProvider.serviceURL;
@@ -540,22 +527,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     }
     self.topicSectionsWithSubtopics = [topicSectionsWithSubtopics copy];
     
-    NSMutableArray<NSNumber *> *searchOptions = [NSMutableArray array];
-    NSString *searchOptionIdentifiersString = [self.remoteConfig configValueForKey:@"searchOptions"].stringValue;
-    if (searchOptionIdentifiersString.length != 0) {
-        NSArray<NSString *> *searchOptionIdentifiers = [searchOptionIdentifiersString componentsSeparatedByString:@","];
-        for (NSString *identifier in searchOptionIdentifiers) {
-            SearchOption searchOption = SearchOptionWithString(identifier);
-            if (searchOption != SearchOptionUnknown) {
-                [searchOptions addObject:@(searchOption)];
-            }
-            else {
-                PlayLogWarning(@"configuration", @"Unknown search option identifier %@. Skipped.", identifier);
-            }
-        }
-    }
-    self.searchOptions = [searchOptions copy];
-    
     // The TV overview is always present as first item and not configurable
     NSMutableArray<NSNumber *> *tvMenuItems = [NSMutableArray arrayWithObject:@(MenuItemTVOverview)];
     NSString *tvMenuItemsString = [self.remoteConfig configValueForKey:@"tvMenuItems"].stringValue;
@@ -874,10 +845,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; searchOptions = %@; tvMenuItems = %@; tvHomeSections: = %@; radioChannels = %@; radioHomeSections = %@; radioMenuItems = %@>",
+    return [NSString stringWithFormat:@"<%@: %p; tvMenuItems = %@; tvHomeSections: = %@; radioChannels = %@; radioHomeSections = %@; radioMenuItems = %@>",
             self.class,
             self,
-            self.searchOptions,
             self.tvMenuItems,
             self.tvHomeSections,
             self.radioChannels,

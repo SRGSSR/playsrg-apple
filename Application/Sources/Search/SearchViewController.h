@@ -5,7 +5,7 @@
 //
 
 #import "ApplicationConfiguration.h"
-#import "PageViewController.h"
+#import "CollectionRequestViewController.h"
 
 #import <SRGAnalytics/SRGAnalytics.h>
 
@@ -13,17 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 OBJC_EXPORT const NSInteger SearchViewControllerSearchTextMinimumLength;
 
-@interface SearchViewController : PageViewController <UISearchBarDelegate, SRGAnalyticsViewTracking>
-
-/**
- *  Instantiate the search, starting with the provided search option if available. If not, use the closest match.
- */
-- (instancetype)initWithPreferredSearchOption:(SearchOption)searchOption;
-
-/**
- *  Instantiate the search, starting with the first search option available.
- */
-- (instancetype)init;
+@interface SearchViewController : CollectionRequestViewController <UISearchBarDelegate, SRGAnalyticsViewTracking>
 
 /**
  *  If set, a close button will be displayed, executing the block when tapped. The block must be set before the view

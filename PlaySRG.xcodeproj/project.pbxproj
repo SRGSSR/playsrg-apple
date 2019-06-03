@@ -1303,16 +1303,11 @@
 		E67FFA321D3E6847007BD7BA /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E67FFA361D3E684B007BD7BA /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
 		E67FFA371D3E684B007BD7BA /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E694A9DA1D65EFF300372DF0 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9D81D65EFF300372DF0 /* SearchResultsViewController.m */; };
-		E694A9DB1D65EFF300372DF0 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9D81D65EFF300372DF0 /* SearchResultsViewController.m */; };
-		E694A9DC1D65EFF300372DF0 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9D81D65EFF300372DF0 /* SearchResultsViewController.m */; };
-		E694A9DD1D65EFF300372DF0 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9D81D65EFF300372DF0 /* SearchResultsViewController.m */; };
-		E694A9DE1D65EFF300372DF0 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9D81D65EFF300372DF0 /* SearchResultsViewController.m */; };
-		E694A9DF1D65EFF300372DF0 /* SearchResultsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchResultsViewController.storyboard */; };
-		E694A9E01D65EFF300372DF0 /* SearchResultsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchResultsViewController.storyboard */; };
-		E694A9E11D65EFF300372DF0 /* SearchResultsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchResultsViewController.storyboard */; };
-		E694A9E21D65EFF300372DF0 /* SearchResultsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchResultsViewController.storyboard */; };
-		E694A9E31D65EFF300372DF0 /* SearchResultsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchResultsViewController.storyboard */; };
+		E694A9DF1D65EFF300372DF0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */; };
+		E694A9E01D65EFF300372DF0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */; };
+		E694A9E11D65EFF300372DF0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */; };
+		E694A9E21D65EFF300372DF0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */; };
+		E694A9E31D65EFF300372DF0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */; };
 		E694A9F51D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
 		E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
 		E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
@@ -2055,9 +2050,7 @@
 		E66BEC1B1DA7FCED00AD4450 /* MediaPlayerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MediaPlayerViewController.storyboard; sourceTree = "<group>"; };
 		E67BB6971D3E640C00E1FEA3 /* Mantle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mantle.framework; path = Carthage/Build/iOS/Mantle.framework; sourceTree = "<group>"; };
 		E68712311D65B3D600CE7142 /* Fingertips.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fingertips.framework; path = Carthage/Build/iOS/Fingertips.framework; sourceTree = "<group>"; };
-		E694A9D71D65EFF300372DF0 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
-		E694A9D81D65EFF300372DF0 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
-		E694A9D91D65EFF300372DF0 /* SearchResultsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchResultsViewController.storyboard; sourceTree = "<group>"; };
+		E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchViewController.storyboard; sourceTree = "<group>"; };
 		E694A9F21D65F02700372DF0 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		E694A9F31D65F02700372DF0 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		E694A9F41D65F02700372DF0 /* CalendarViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CalendarViewController.storyboard; sourceTree = "<group>"; };
@@ -3263,11 +3256,9 @@
 		E694A9D61D65EFF300372DF0 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				E694A9D71D65EFF300372DF0 /* SearchResultsViewController.h */,
-				E694A9D81D65EFF300372DF0 /* SearchResultsViewController.m */,
-				E694A9D91D65EFF300372DF0 /* SearchResultsViewController.storyboard */,
 				6F4C673B1EA6115C006A0A3B /* SearchViewController.h */,
 				6F4C673C1EA6115C006A0A3B /* SearchViewController.m */,
+				E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -3739,7 +3730,7 @@
 				081DAA261E0C1E9700018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F0C99B02121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				08280F0F2258EA4000AC978D /* WatchLaterViewController.storyboard in Resources */,
-				E694A9DF1D65EFF300372DF0 /* SearchResultsViewController.storyboard in Resources */,
+				E694A9DF1D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				6F0F88991ECF0CE50060A893 /* override_artwork_srf_musikwelle.pdf in Resources */,
 				0863210F2258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				081220AD1DD079BB00BF8326 /* DownloadTableViewCell.xib in Resources */,
@@ -3848,7 +3839,7 @@
 				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
 				08280F102258EA4000AC978D /* WatchLaterViewController.storyboard in Resources */,
 				6FF3B6952137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
-				E694A9E01D65EFF300372DF0 /* SearchResultsViewController.storyboard in Resources */,
+				E694A9E01D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				081220B11DD07B7A00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6F4760051EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				E64BA4001D4A588B002C10D5 /* WebViewController.storyboard in Resources */,
@@ -3949,7 +3940,7 @@
 				0837CEDD1D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				0804916B22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
 				6FCB57491EC2047B0015CAB7 /* override_artwork_rete_tre.pdf in Resources */,
-				E694A9E11D65EFF300372DF0 /* SearchResultsViewController.storyboard in Resources */,
+				E694A9E11D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				6F475FF21EB37BC6003021EA /* TabStripCell.xib in Resources */,
 				6F0F88371ECEE7800060A893 /* override_default_la2.pdf in Resources */,
 				6F93DE1520AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
@@ -4045,7 +4036,7 @@
 				08C6912B1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				E6DB5F311D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				0837CEE61D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
-				E694A9E21D65EFF300372DF0 /* SearchResultsViewController.storyboard in Resources */,
+				E694A9E21D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				6F475FF31EB37BC6003021EA /* TabStripCell.xib in Resources */,
 				081DAA281E0C1FC800018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
@@ -4145,7 +4136,7 @@
 				6FBF24482148238300E576A2 /* SRGDiagnostics.bundle in Resources */,
 				E6DB5F321D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				0837CEEF1D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
-				E694A9E31D65EFF300372DF0 /* SearchResultsViewController.storyboard in Resources */,
+				E694A9E31D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				6F628AF21F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.xib in Resources */,
 				0804917A22832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
 				6FA7EC3D20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
@@ -5309,7 +5300,6 @@
 				6F628AE91F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
 				6FA9ECBA20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */,
 				08564B1D1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
-				E694A9DA1D65EFF300372DF0 /* SearchResultsViewController.m in Sources */,
 				6F47607B1EB37D60003021EA /* UIImageView+PlaySRG.m in Sources */,
 				6F939F6F2090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				6F85E4B71EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
@@ -5468,7 +5458,6 @@
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B1E1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */,
-				E694A9DB1D65EFF300372DF0 /* SearchResultsViewController.m in Sources */,
 				6FDF08EC218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8B1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
@@ -5610,7 +5599,6 @@
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B1F1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */,
-				E694A9DC1D65EFF300372DF0 /* SearchResultsViewController.m in Sources */,
 				6FDF08ED218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8C1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
@@ -5752,7 +5740,6 @@
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B201D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */,
-				E694A9DD1D65EFF300372DF0 /* SearchResultsViewController.m in Sources */,
 				6FDF08EE218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F556B3B1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8D1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
@@ -5894,7 +5881,6 @@
 				6F06E0A81DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B211D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E51EB9D57400067D40 /* ChannelService.m in Sources */,
-				E694A9DE1D65EFF300372DF0 /* SearchResultsViewController.m in Sources */,
 				6FDF08EF218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F556B3C1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8E1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
