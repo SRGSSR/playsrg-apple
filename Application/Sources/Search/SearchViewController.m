@@ -16,6 +16,9 @@
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
+static NSString * const SearchShowsResultKey = @"shows";
+static NSString * const SearchMediasResultKey = @"medias";
+
 const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 
 @interface SearchViewController ()
@@ -131,7 +134,8 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
-    SRGPaginatedMediaSearchCompletionBlock searchResultsMediasCompletionBlock = ^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregation, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    SRGPageRequest *mediaRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:self.searchBar.text withFilters:nil completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregation, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (error) {
             completionHandler(nil, page, nil, HTTPResponse, error);
             return;
@@ -149,14 +153,7 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
             completionHandler(medias, page, nextPage, mediasHTTPResponse, mediasError);
         }] requestWithPageSize:pageSize];
         [requestQueue addRequest:mediasRequest resume:YES];
-    };
-    
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    SRGVendor vendor = applicationConfiguration.vendor;
-    NSUInteger pageSize = applicationConfiguration.pageSize;
-    
-    // FIXME: Probably need to build the search text by replacing with changed
-    SRGPageRequest *mediaRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:vendor matchingQuery:self.searchBar.text withFilters:nil completionBlock:searchResultsMediasCompletionBlock] requestWithPageSize:pageSize] requestWithPage:page];
+    }] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
     [requestQueue addRequest:mediaRequest resume:YES];
 }
 
