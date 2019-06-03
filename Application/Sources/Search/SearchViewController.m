@@ -8,7 +8,6 @@
 
 #import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
-#import "ShowCollectionViewCell.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -50,10 +49,6 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
     [self.collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
     
-    NSString *showCellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
-    UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
-    [self.collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
-    
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
     searchBar.placeholder = [NSString stringWithFormat:NSLocalizedString(@"Enter %@ characters or more", @"Placeholder text displayed in the search field when empty (must be not too longth)"), @(SearchViewControllerSearchTextMinimumLength)];
@@ -71,12 +66,23 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
         }];
     }
     
+    NSMutableArray<UIBarButtonItem *> *rightBarButtonItems = [NSMutableArray array];
+    
     if (self.closeBlock) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close button title")
-                                                                                  style:UIBarButtonItemStyleDone
-                                                                                 target:self
-                                                                                 action:@selector(close:)];
+        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close button title")
+                                                                               style:UIBarButtonItemStyleDone
+                                                                              target:self
+                                                                              action:@selector(close:)];
+        [rightBarButtonItems addObject:closeBarButtonItem];
     }
+    
+    UIBarButtonItem *filtersBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filters"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(editFilters:)];
+    [rightBarButtonItems addObject:filtersBarButtonItem];
+                                 
+    self.navigationItem.rightBarButtonItems = [rightBarButtonItems copy];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -275,6 +281,11 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 }
 
 #pragma mark Actions
+
+- (void)editFilters:(id)sender
+{
+    // TODO:
+}
 
 - (void)close:(id)sender
 {
