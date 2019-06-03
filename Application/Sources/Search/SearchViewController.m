@@ -8,6 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
+#import "SearchShowListCollectionViewCell.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -49,6 +50,10 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
     [self.collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
     
+    NSString *showListCellIdentifier = NSStringFromClass(SearchShowListCollectionViewCell.class);
+    UINib *showListCellNib = [UINib nibWithNibName:showListCellIdentifier bundle:nil];
+    [self.collectionView registerNib:showListCellNib forCellWithReuseIdentifier:showListCellIdentifier];
+    
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
     searchBar.placeholder = [NSString stringWithFormat:NSLocalizedString(@"Enter %@ characters or more", @"Placeholder text displayed in the search field when empty (must be not too longth)"), @(SearchViewControllerSearchTextMinimumLength)];
@@ -81,7 +86,7 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
                                                                             target:self
                                                                             action:@selector(editFilters:)];
     [rightBarButtonItems addObject:filtersBarButtonItem];
-                                 
+    
     self.navigationItem.rightBarButtonItems = [rightBarButtonItems copy];
 }
 
@@ -197,23 +202,44 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 
 #pragma mark UICollectionViewDataSource protocol
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 2;
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self shouldPerformRefreshRequest] ? self.items.count : 0.f;
+    if ([self shouldPerformRefreshRequest]) {
+        return (section == 0) ? 1 : self.items.count;
+    }
+    else {
+        return 0;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MediaCollectionViewCell.class)
-                                                     forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(SearchShowListCollectionViewCell.class)
+                                                         forIndexPath:indexPath];
+    }
+    else {
+        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MediaCollectionViewCell.class)
+                                                         forIndexPath:indexPath];
+    }
 }
 
 #pragma mark UICollectionViewDelegate protocol
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MediaCollectionViewCell *mediaCell = (MediaCollectionViewCell *)cell;
-    mediaCell.media = self.items[indexPath.row];
+    if (indexPath.section == 0) {
+        
+    }
+    else {
+        MediaCollectionViewCell *mediaCell = (MediaCollectionViewCell *)cell;
+        mediaCell.media = self.items[indexPath.row];
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -228,16 +254,21 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 {
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
-    if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 86.f : 100.f;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, height);
+    if (indexPath.section == 0) {
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 120.f);
     }
-    // Grid layout
     else {
-        CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 70.f : 100.f;
-        
-        static const CGFloat kItemWidth = 210.f;
-        return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
+        if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+            CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 86.f : 100.f;
+            return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, height);
+        }
+        // Grid layout
+        else {
+            CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 70.f : 100.f;
+            
+            static const CGFloat kItemWidth = 210.f;
+            return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
+        }
     }
 }
 
