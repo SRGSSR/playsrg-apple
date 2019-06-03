@@ -6,6 +6,7 @@
 
 #import "SearchViewController.h"
 
+#import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
 #import "ShowCollectionViewCell.h"
 #import "UIColor+PlaySRG.h"
@@ -66,7 +67,7 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     // this does not seem to work well enough. Using a search controller is not really an option here either.
     if (@available(iOS 11, *)) {
         [searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@42.);
+            make.height.equalTo(@50.);
         }];
     }
     
@@ -238,6 +239,7 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+    // Immediately return the view to an empty state when below the length threshold
     if (searchText.length < SearchViewControllerSearchTextMinimumLength) {
         [self.collectionView reloadData];
     }

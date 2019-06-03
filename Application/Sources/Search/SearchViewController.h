@@ -4,7 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "ApplicationConfiguration.h"
 #import "CollectionRequestViewController.h"
 
 #import <SRGAnalytics/SRGAnalytics.h>
