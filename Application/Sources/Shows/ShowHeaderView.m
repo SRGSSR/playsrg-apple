@@ -134,7 +134,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 - (void)updateFavoriteStatus
 {
     BOOL isFavorite = FavoritesContainsShow(self.show);
-    [self.favoriteImageButton setImage:isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"] forState:UIControlStateNormal];
+    [self.favoriteImageButton setImage:isFavorite ? [UIImage imageNamed:@"show_favorite_full-22"] : [UIImage imageNamed:@"show_favorite-22"] forState:UIControlStateNormal];
     
     NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
                                   NSForegroundColorAttributeName : UIColor.whiteColor };
