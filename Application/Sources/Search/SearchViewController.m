@@ -279,7 +279,8 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
     if (self.shows.count != 0 && indexPath.section == 0) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), 120.f);
+        CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 200.f : 220.f;
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
     }
     else {
         if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {

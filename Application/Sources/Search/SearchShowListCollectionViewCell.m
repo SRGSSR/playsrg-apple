@@ -10,6 +10,7 @@
 #import "ShowViewController.h"
 
 #import <CoconutKit/CoconutKit.h>
+#import <SRGAppearance/SRGAppearance.h>
 
 @interface SearchShowListCollectionViewCell ()
 
@@ -80,6 +81,22 @@
     SRGShow *show = self.shows[indexPath.row];
     ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
     [self.nearestViewController.navigationController pushViewController:showViewController animated:YES];
+}
+
+#pragma mark UICollectionViewDelegateFlowLayout protocol
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    CGFloat textHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 30.f : 50.f;
+    
+    CGFloat height = CGRectGetHeight(collectionView.frame);
+    return CGSizeMake(16.f / 9.f * (height - textHeight), height);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0.f, 10.f, 0.f, 10.f);
 }
 
 @end

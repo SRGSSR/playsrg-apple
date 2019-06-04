@@ -22,7 +22,7 @@
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="zkQ-TY-Cms">
                         <rect key="frame" x="0.0" y="0.0" width="501" height="134"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uSb-8B-Bug">
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uSb-8B-Bug">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -39,6 +39,9 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="uHt-j6-daz"/>
             <size key="customSize" width="501" height="134"/>
+            <connections>
+                <outlet property="collectionView" destination="zkQ-TY-Cms" id="ofu-0U-xzn"/>
+            </connections>
             <point key="canvasLocation" x="36.956521739130437" y="46.875"/>
         </collectionViewCell>
     </objects>
