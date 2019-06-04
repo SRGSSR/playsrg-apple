@@ -16,6 +16,7 @@ abstract_target 'PlaySRG' do
   pod 'PPBadgeView', '~> 2.1.0'
   pod 'SwiftMessages', '~> 7.0.0'
   pod 'UrbanAirship-iOS-SDK', '9.4.0'
+  pod 'XLForm', '~> 4.0.1'
   
   target 'Play SRF' do
   end

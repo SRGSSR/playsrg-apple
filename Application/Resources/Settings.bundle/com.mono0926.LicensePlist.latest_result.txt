@@ -458,6 +458,26 @@ name: UrbanAirship-iOS-SDK, nameSpecified:
 body: Copyright 2017 Urban…
 version: 9.4.0
 
+name: XLForm, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.0.1
+
+name: XLForm, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.0.1
+
+name: XLForm, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.0.1
+
+name: XLForm, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.0.1
+
+name: XLForm, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.0.1
+
 name: CoconutKit, nameSpecified: , owner: defagos, version: 3.3.7
 
 name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 5.8.4
