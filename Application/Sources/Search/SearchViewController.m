@@ -8,6 +8,8 @@
 
 #import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
+#import "NavigationController.h"
+#import "SearchFiltersViewController.h"
 #import "SearchShowListCollectionViewCell.h"
 #import "TitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
@@ -356,7 +358,9 @@
 
 - (void)editFilters:(id)sender
 {
-    // TODO:
+    SearchFiltersViewController *searchFiltersViewController = [[SearchFiltersViewController alloc] init];
+    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchFiltersViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (void)close:(id)sender
