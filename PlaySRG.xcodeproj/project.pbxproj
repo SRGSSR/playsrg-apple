@@ -1030,11 +1030,6 @@
 		6F87D9DB22A66E280061EC9E /* SearchSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87D9D822A66E280061EC9E /* SearchSettingsViewController.m */; };
 		6F87D9DC22A66E280061EC9E /* SearchSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87D9D822A66E280061EC9E /* SearchSettingsViewController.m */; };
 		6F87D9DD22A66E280061EC9E /* SearchSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F87D9D822A66E280061EC9E /* SearchSettingsViewController.m */; };
-		6F87D9DF22A66EC80061EC9E /* SearchSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F87D9DE22A66EC80061EC9E /* SearchSettingsViewController.storyboard */; };
-		6F87D9E022A66EC80061EC9E /* SearchSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F87D9DE22A66EC80061EC9E /* SearchSettingsViewController.storyboard */; };
-		6F87D9E122A66EC80061EC9E /* SearchSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F87D9DE22A66EC80061EC9E /* SearchSettingsViewController.storyboard */; };
-		6F87D9E222A66EC80061EC9E /* SearchSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F87D9DE22A66EC80061EC9E /* SearchSettingsViewController.storyboard */; };
-		6F87D9E322A66EC80061EC9E /* SearchSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F87D9DE22A66EC80061EC9E /* SearchSettingsViewController.storyboard */; };
 		6F8CAE902122C5DF005046BA /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */; };
 		6F8CAE912122C5F1005046BA /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */; };
 		6F8CAE922122C5FE005046BA /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */; };
@@ -1946,7 +1941,6 @@
 		6F861AF71DAE65A600C46102 /* SRGMediaPlayerDesignables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGMediaPlayerDesignables.m; sourceTree = "<group>"; };
 		6F87D9D722A66E280061EC9E /* SearchSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchSettingsViewController.h; sourceTree = "<group>"; };
 		6F87D9D822A66E280061EC9E /* SearchSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchSettingsViewController.m; sourceTree = "<group>"; };
-		6F87D9DE22A66EC80061EC9E /* SearchSettingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchSettingsViewController.storyboard; sourceTree = "<group>"; };
 		6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoconutKit.framework; path = Carthage/Build/iOS/Static/CoconutKit.framework; sourceTree = "<group>"; };
 		6F9122BD1DC8708400725EEB /* PlayErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayErrors.h; sourceTree = "<group>"; };
 		6F9122BE1DC8708400725EEB /* PlayErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayErrors.m; sourceTree = "<group>"; };
@@ -3284,7 +3278,6 @@
 			children = (
 				6F87D9D722A66E280061EC9E /* SearchSettingsViewController.h */,
 				6F87D9D822A66E280061EC9E /* SearchSettingsViewController.m */,
-				6F87D9DE22A66EC80061EC9E /* SearchSettingsViewController.storyboard */,
 				6F1F929C22A539D40026BFAC /* SearchShowListCollectionViewCell.h */,
 				6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */,
 				6F1F92A922A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib */,
@@ -3825,7 +3818,6 @@
 				6F5F4FC91DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				E65FB2101D66D69700820696 /* DailyVideosViewController.storyboard in Resources */,
 				6F0C99922121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
-				6F87D9DF22A66EC80061EC9E /* SearchSettingsViewController.storyboard in Resources */,
 				086BDE161EA63D3800965F45 /* AudioMiniPlayerView.xib in Resources */,
 				6F0F88961ECF0CE50060A893 /* override_artwork_tv_srf_info.pdf in Resources */,
 				6F4EA13D1EE034E200BEC4DA /* Accessibility.strings in Resources */,
@@ -3906,7 +3898,6 @@
 				6F1F92AB22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
 				6F0F888C1ECF0CDD0060A893 /* override_default_couleur3.pdf in Resources */,
 				6FD633E41FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
-				6F87D9E022A66EC80061EC9E /* SearchSettingsViewController.storyboard in Resources */,
 				6F0F88881ECF0CDD0060A893 /* override_artwork_espace2.pdf in Resources */,
 				E6E2DF2D1D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				08564B241D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
@@ -3979,7 +3970,6 @@
 				E694A9E11D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				6F475FF21EB37BC6003021EA /* TabStripCell.xib in Resources */,
 				6F0F88371ECEE7800060A893 /* override_default_la2.pdf in Resources */,
-				6F87D9E122A66EC80061EC9E /* SearchSettingsViewController.storyboard in Resources */,
 				6F93DE1520AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6F2961FE2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				081DAA291E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
@@ -4117,7 +4107,6 @@
 				E6E2DF2F1D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				6F93DE1620AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				086F8D6222984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
-				6F87D9E222A66EC80061EC9E /* SearchSettingsViewController.storyboard in Resources */,
 				0837CEE21D3FDAFA00A1E089 /* SRGSSRType_He.ttf in Resources */,
 				08C68FE31D38E04B00BB8AAA /* iTunesArtwork@2x in Resources */,
 				6F4C0A7E20DCBDD200069A85 /* HomeShowVerticalListTableViewCell.xib in Resources */,
@@ -4208,7 +4197,6 @@
 				08C690E11D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */,
 				6F6B643721A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				6F1A95EF216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
-				6F87D9E322A66EC80061EC9E /* SearchSettingsViewController.storyboard in Resources */,
 				E6E2DF301D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				6F12DB4F21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
 				082590F91F054ACF00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,

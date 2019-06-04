@@ -25,10 +25,10 @@
 
 - (instancetype)initWithSettings:(SRGMediaSearchSettings *)settings aggregations:(SRGMediaAggregations *)aggregations
 {
-    if (self = [super init]) {
+    XLFormDescriptor *form = [self formForAggregations:aggregations];
+    if (self = [super initWithForm:form]) {
         self.settings = settings;
         self.aggregations = aggregations;
-        self.form = [self formForAggregations:aggregations];
     }
     return self;
 }
@@ -80,6 +80,8 @@
 }
 
 #pragma mark Form setup
+
+// TODO: Bind tags to keyPaths where possible
 
 - (XLFormDescriptor *)formForAggregations:(SRGMediaAggregations *)aggregations
 {
