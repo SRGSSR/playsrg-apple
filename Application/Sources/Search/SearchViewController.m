@@ -22,7 +22,9 @@
 @interface SearchViewController ()
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
+
 @property (nonatomic) SRGMediaSearchSettings *settings;
+@property (nonatomic) SRGMediaAggregations *aggregations;
 
 @property (nonatomic, weak) UISearchBar *searchBar;
 
@@ -99,7 +101,7 @@
         [rightBarButtonItems addObject:closeBarButtonItem];
     }
     
-    // TODO: Icon
+    // TODO: Icon + hide when no aggregations are available
     UIBarButtonItem *filtersBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filters"
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:self
@@ -148,7 +150,9 @@
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     NSString *query = self.searchBar.text;
     
-    SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:nil completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregation, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+    SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:nil completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregations, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        self.aggregations = aggregations;
+        
         if (error) {
             completionHandler(nil, page, nil, HTTPResponse, error);
             return;
@@ -193,6 +197,7 @@
 - (void)search
 {
     self.shows = nil;
+    self.aggregations = nil;
     
     [self clear];
     [self refresh];
@@ -370,7 +375,7 @@
 
 - (void)editFilters:(id)sender
 {
-    SearchSettingsViewController *searchFiltersViewController = [[SearchSettingsViewController alloc] initWithSettings:self.settings];
+    SearchSettingsViewController *searchFiltersViewController = [[SearchSettingsViewController alloc] initWithSettings:self.settings aggregations:self.aggregations];
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchFiltersViewController];
     navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navigationController animated:YES completion:nil];

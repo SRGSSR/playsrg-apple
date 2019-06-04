@@ -10,9 +10,12 @@
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
+#import <libextobjc/libextobjc.h>
+
 @interface SearchSettingsViewController ()
 
 @property (nonatomic) SRGMediaSearchSettings *settings;
+@property (nonatomic) SRGMediaAggregations *aggregations;
 
 @end
 
@@ -20,10 +23,12 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithSettings:(SRGMediaSearchSettings *)settings
+- (instancetype)initWithSettings:(SRGMediaSearchSettings *)settings aggregations:(SRGMediaAggregations *)aggregations
 {
     if (self = [super init]) {
         self.settings = settings;
+        self.aggregations = aggregations;
+        self.form = [self formForAggregations:aggregations];
     }
     return self;
 }
@@ -34,7 +39,7 @@
 - (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
-    return [self initWithSettings:SRGMediaSearchSettings.new];
+    return [self initWithSettings:SRGMediaSearchSettings.new aggregations:nil];
 }
 
 #pragma clang diagnostic pop
@@ -72,6 +77,57 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+#pragma mark Form setup
+
+- (XLFormDescriptor *)formForAggregations:(SRGMediaAggregations *)aggregations
+{
+    XLFormDescriptor *form = [XLFormDescriptor formDescriptor];
+    
+    NSSortDescriptor *titleSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShowBucket.new, title) ascending:YES comparator:^NSComparisonResult(NSString * _Nonnull title1, NSString * _Nonnull title2) {
+        return [title1 localizedCaseInsensitiveCompare:title2];
+    }];
+    
+    // 1. General settings
+    XLFormSectionDescriptor *generalSection = [XLFormSectionDescriptor formSection];
+    [form addFormSection:generalSection];
+    
+    // 2. Context settings
+    XLFormSectionDescriptor *contextSection = [XLFormSectionDescriptor formSection];
+    [form addFormSection:contextSection];
+    
+    // - Show
+    NSMutableArray<XLFormOptionsObject *> *showSelectorOptions = [NSMutableArray array];
+    
+    NSArray<SRGShowBucket *> *showBuckets = [aggregations.showBuckets sortedArrayUsingDescriptors:@[titleSortDescriptor]];
+    for (SRGShowBucket *showBucket in showBuckets) {
+        [showSelectorOptions addObject:[XLFormOptionsObject formOptionsObjectWithValue:showBucket.URN displayText:showBucket.title]];
+    }
+    
+    XLFormRowDescriptor *showRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"showURN" rowType:XLFormRowDescriptorTypeMultipleSelector title:NSLocalizedString(@"Show", @"Show setting title")];
+    showRow.selectorTitle = NSLocalizedString(@"Show", @"Show setting title");
+    showRow.selectorOptions = [showSelectorOptions copy];
+    [contextSection addFormRow:showRow];
+    
+    // - Topic
+    NSMutableArray<XLFormOptionsObject *> *topicSelectorOptions = [NSMutableArray array];
+    
+    NSArray<SRGTopicBucket *> *topicBuckets = [aggregations.topicBuckets sortedArrayUsingDescriptors:@[titleSortDescriptor]];
+    for (SRGTopicBucket *topicBucket in topicBuckets) {
+        [topicSelectorOptions addObject:[XLFormOptionsObject formOptionsObjectWithValue:topicBucket.URN displayText:topicBucket.title]];
+    }
+    
+    XLFormRowDescriptor *topicRow = [XLFormRowDescriptor formRowDescriptorWithTag:@"topicURN" rowType:XLFormRowDescriptorTypeMultipleSelector title:NSLocalizedString(@"Topic", @"Topic setting title")];
+    topicRow.selectorTitle = NSLocalizedString(@"Topic", @"Topic setting title");
+    topicRow.selectorOptions = [topicSelectorOptions copy];
+    [contextSection addFormRow:topicRow];
+    
+    // 3. Simple attributes
+    XLFormSectionDescriptor *attributesSection = [XLFormSectionDescriptor formSection];
+    [form addFormSection:attributesSection];
+    
+    return form;
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

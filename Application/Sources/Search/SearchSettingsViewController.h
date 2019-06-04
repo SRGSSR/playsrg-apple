@@ -7,12 +7,13 @@
 #import "BaseViewController.h"
 
 #import <SRGDataProvider/SRGDataProvider.h>
+#import <XLForm/XLForm.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchSettingsViewController : BaseViewController
+@interface SearchSettingsViewController : XLFormViewController
 
-- (instancetype)initWithSettings:(SRGMediaSearchSettings *)settings;
+- (instancetype)initWithSettings:(SRGMediaSearchSettings *)settings aggregations:(nullable SRGMediaAggregations *)aggregations;
 
 @end
 
