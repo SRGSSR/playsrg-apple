@@ -293,6 +293,12 @@
         else {
             headerView.title = NSLocalizedString(@"Shows", @"Show search result header");
         }
+        
+        // iOS 11 bug: The header hides scroll indicators
+        // See https://stackoverflow.com/questions/46747960/ios11-uicollectionsectionheader-clipping-scroll-indicator
+        if (@available(iOS 11, *)) {
+            headerView.layer.zPosition = 0;
+        }
     }
 }
 
