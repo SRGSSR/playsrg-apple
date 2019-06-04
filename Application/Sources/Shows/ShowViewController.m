@@ -350,7 +350,7 @@
     UIView *barButtonItemView = [barButtonItem valueForKey:@"view"];
     if (barButtonItemView) {
         popoverPresentationController.sourceView = barButtonItemView;
-        popoverPresentationController.sourceRect = [barButtonItemView bounds];
+        popoverPresentationController.sourceRect = barButtonItemView.bounds;
     }
     
     [self presentViewController:activityViewController animated:YES completion:nil];

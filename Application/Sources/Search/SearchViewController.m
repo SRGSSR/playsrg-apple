@@ -375,10 +375,36 @@
 
 - (void)editFilters:(id)sender
 {
+    NSAssert([sender isKindOfClass:UIBarButtonItem.class], @"Bar button item expected");
+    
     SearchSettingsViewController *searchFiltersViewController = [[SearchSettingsViewController alloc] initWithSettings:self.settings aggregations:self.aggregations];
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchFiltersViewController];
-    navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:navigationController animated:YES completion:nil];
+    
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        navigationController.modalPresentationStyle = UIModalPresentationPopover;
+        
+        UIView *barButtonItemView = [sender valueForKey:@"view"];
+        if (barButtonItemView) {
+            UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
+            popoverPresentationController.backgroundColor = UIColor.play_blackColor;
+            popoverPresentationController.sourceView = barButtonItemView;
+            popoverPresentationController.sourceRect = barButtonItemView.bounds;
+        }
+        
+        [self presentViewController:navigationController animated:YES completion:nil];
+    }
+    else {
+        searchFiltersViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close button title")
+                                                                                                         style:UIBarButtonItemStyleDone
+                                                                                                        target:self
+                                                                                                        action:@selector(closeSettings:)];
+        [self presentViewController:navigationController animated:YES completion:nil];
+    }
+}
+
+- (IBAction)closeSettings:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)close:(id)sender

@@ -44,25 +44,13 @@
 
 #pragma clang diagnostic pop
 
-#pragma mark Getters and setters
-
-- (NSString *)title
-{
-    return NSLocalizedString(@"Search filters", @"Search filters page title");
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.play_blackColor;
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close button title")
-                                                                              style:UIBarButtonItemStyleDone
-                                                                             target:self
-                                                                             action:@selector(close:)];
+    self.view.backgroundColor = UIColor.play_popoverGrayColor;
 }
 
 #pragma mark Rotation
@@ -85,7 +73,7 @@
 
 - (XLFormDescriptor *)formForAggregations:(SRGMediaAggregations *)aggregations
 {
-    XLFormDescriptor *form = [XLFormDescriptor formDescriptor];
+    XLFormDescriptor *form = [XLFormDescriptor formDescriptorWithTitle:NSLocalizedString(@"Search filters", @"Search filters page title")];
     
     NSSortDescriptor *titleSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShowBucket.new, title) ascending:YES comparator:^NSComparisonResult(NSString * _Nonnull title1, NSString * _Nonnull title2) {
         return [title1 localizedCaseInsensitiveCompare:title2];
@@ -179,13 +167,6 @@
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     return @[ AnalyticsNameForPageType(AnalyticsPageTypeSearch) ];
-}
-
-#pragma mark Actions
-
-- (IBAction)close:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
