@@ -9,6 +9,7 @@
 #import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
 #import "SearchShowListCollectionViewCell.h"
+#import "TitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -54,6 +55,10 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     NSString *showListCellIdentifier = NSStringFromClass(SearchShowListCollectionViewCell.class);
     UINib *showListCellNib = [UINib nibWithNibName:showListCellIdentifier bundle:nil];
     [self.collectionView registerNib:showListCellNib forCellWithReuseIdentifier:showListCellIdentifier];
+    
+    NSString *headerIdentifier = NSStringFromClass(TitleHeaderView.class);
+    UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
+    [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
@@ -155,7 +160,7 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     }] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
     [requestQueue addRequest:mediaSearchRequest resume:YES];
     
-    // The main list with auomatic pagination management displays medias. We associate the companion show list request when
+    // The main list with automatic pagination management displays medias. We associate the companion show list request when
     // loading the first page only, so that both requests are bound together when loading initial search results. We use the
     // maximum page size and do not manage pagination for shows. This leads to simple code withoug impacting its usability.
     if (page.number == 0) {
@@ -250,6 +255,18 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     }
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        return [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                  withReuseIdentifier:NSStringFromClass(TitleHeaderView.class)
+                                                         forIndexPath:indexPath];
+    }
+    else {
+        return [super collectionView:collectionView viewForSupplementaryElementOfKind:kind atIndexPath:indexPath];
+    }
+}
+
 #pragma mark UICollectionViewDelegate protocol
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -261,6 +278,19 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     else {
         SearchShowListCollectionViewCell *showListCell = (SearchShowListCollectionViewCell *)cell;
         showListCell.shows = self.shows;
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([view isKindOfClass:TitleHeaderView.class]) {
+        TitleHeaderView *headerView = (TitleHeaderView *)view;
+        if (self.shows.count == 0 || indexPath.section != 0) {
+            headerView.title = NSLocalizedString(@"Medias", @"Media search result header");
+        }
+        else {
+            headerView.title = NSLocalizedString(@"Shows", @"Show search result header");
+        }
     }
 }
 
@@ -294,6 +324,16 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
             static const CGFloat kItemWidth = 210.f;
             return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
         }
+    }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    if (self.shows.count != 0 || self.items.count != 0) {
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
+    }
+    else {
+        return CGSizeZero;
     }
 }
 

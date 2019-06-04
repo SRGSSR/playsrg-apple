@@ -12,6 +12,10 @@
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
+// TODO: A show list wrapper object (which can be attached to the cell) is required if we want the following:
+//        - Show pagination
+//        - Content offset restoration
+
 @interface SearchShowListCollectionViewCell ()
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
