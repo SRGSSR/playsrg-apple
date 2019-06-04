@@ -16,4 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface SearchSettingsViewController (Unavailable)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
 NS_ASSUME_NONNULL_END

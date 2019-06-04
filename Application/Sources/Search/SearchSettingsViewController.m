@@ -4,13 +4,40 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "SearchFiltersViewController.h"
+#import "SearchSettingsViewController.h"
 
 #import "AnalyticsConstants.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-@implementation SearchFiltersViewController
+@interface SearchSettingsViewController ()
+
+@property (nonatomic) SRGMediaSearchSettings *settings;
+
+@end
+
+@implementation SearchSettingsViewController
+
+#pragma mark Object lifecycle
+
+- (instancetype)initWithSettings:(SRGMediaSearchSettings *)settings
+{
+    if (self = [super init]) {
+        self.settings = settings;
+    }
+    return self;
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
+- (instancetype)init
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return [self initWithSettings:SRGMediaSearchSettings.new];
+}
+
+#pragma clang diagnostic pop
 
 #pragma mark Getters and setters
 

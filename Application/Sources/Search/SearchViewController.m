@@ -9,7 +9,7 @@
 #import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
 #import "NavigationController.h"
-#import "SearchFiltersViewController.h"
+#import "SearchSettingsViewController.h"
 #import "SearchShowListCollectionViewCell.h"
 #import "TitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
@@ -22,11 +22,23 @@
 @interface SearchViewController ()
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
+@property (nonatomic) SRGMediaSearchSettings *settings;
+
 @property (nonatomic, weak) UISearchBar *searchBar;
 
 @end
 
 @implementation SearchViewController
+
+#pragma mark Object lifecycle
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.settings = [[SRGMediaSearchSettings alloc] init];
+    }
+    return self;
+}
 
 #pragma mark Getters and setters
 
@@ -358,7 +370,7 @@
 
 - (void)editFilters:(id)sender
 {
-    SearchFiltersViewController *searchFiltersViewController = [[SearchFiltersViewController alloc] init];
+    SearchSettingsViewController *searchFiltersViewController = [[SearchSettingsViewController alloc] initWithSettings:self.settings];
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchFiltersViewController];
     [self presentViewController:navigationController animated:YES completion:nil];
 }
