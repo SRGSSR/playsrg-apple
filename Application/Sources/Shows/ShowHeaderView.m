@@ -28,7 +28,8 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *favoriteImageButton;
 @property (nonatomic, weak) IBOutlet UIButton *favoriteLabelButton;
-@property (nonatomic, weak) IBOutlet UIButton *subscriptionButton;
+@property (nonatomic, weak) IBOutlet UIButton *subscriptionImageButton;
+@property (weak, nonatomic) IBOutlet UIButton *subscriptionLabelButton;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 
 @property (nonatomic) IBOutlet NSLayoutConstraint *logoImageViewRatio16_9Constraint; // Need to retain it, because active state removes it
@@ -83,6 +84,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
                                                      withScale:ImageScaleLarge];
     
     self.favoriteImageButton.accessibilityElementsHidden = YES;
+    self.subscriptionImageButton.accessibilityElementsHidden = YES;
 }
 
 - (void)layoutSubviews
@@ -138,7 +140,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     
     NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
                                   NSForegroundColorAttributeName : UIColor.whiteColor };
-    NSString *title = [isFavorite ? NSLocalizedString(@"Added to favorites", @"Favorite show added label in the show view") : NSLocalizedString(@"Add to favorites", @"Favorite show insertion label in the show view") uppercaseString];
+    NSString *title = [isFavorite ? NSLocalizedString(@"Favorites", @"Favorite show label when added ,in the show view") : NSLocalizedString(@"Add to favorites", @"Favorite show label to add it, in the show view") uppercaseString];
     [self.favoriteLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
                                                                                attributes:attributes] forState:UIControlStateNormal];
 }
@@ -146,7 +148,8 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 - (void)updateSubscriptionStatus
 {
     BOOL isFavorite =  FavoritesContainsShow(self.show);
-    self.subscriptionButton.hidden = ! isFavorite;
+    self.subscriptionImageButton.hidden = ! isFavorite;
+    self.subscriptionLabelButton.hidden = ! isFavorite;
     
     if (! isFavorite) {
         return;
@@ -154,13 +157,21 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     
     if (PushService.sharedService.enabled) {
         BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
-        [self.subscriptionButton setImage:subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"]
-                                 forState:UIControlStateNormal];
-        self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Disable notifications for show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
+        [self.subscriptionImageButton setImage:subscribed ? [UIImage imageNamed:@"show_subscription_full-22"] : [UIImage imageNamed:@"show_subscription-22"] forState:UIControlStateNormal];
+        
+        NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                      NSForegroundColorAttributeName : UIColor.whiteColor };
+        NSString *title = [subscribed ? NSLocalizedString(@"Notified", @"Subscription label when notification enabled in the show view") : NSLocalizedString(@"Be notified", @"Subscription label to be notified in the show view") uppercaseString];
+        [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
+                                                                                         attributes:attributes] forState:UIControlStateNormal];
     }
     else {
-        [self.subscriptionButton setImage:[UIImage imageNamed:@"subscription_disabled-22"] forState:UIControlStateNormal];
-        self.subscriptionButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
+        [self.subscriptionImageButton setImage:[UIImage imageNamed:@"show_subscription_disabled-22"] forState:UIControlStateNormal];
+        
+        NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                      NSForegroundColorAttributeName : UIColor.whiteColor };
+        [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:[NSLocalizedString(@"Be notified", @"Subscription label to be notified in the show view") uppercaseString]
+                                                                                         attributes:attributes] forState:UIControlStateNormal];
     }
 }
 

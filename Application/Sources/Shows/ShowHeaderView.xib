@@ -31,7 +31,7 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ick-GH-RRS">
+                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Ick-GH-RRS">
                             <rect key="frame" x="0.0" y="35" width="355" height="32"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMs-0z-bGJ" userLabel="Favorite Button">
@@ -47,29 +47,44 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oK4-Ec-OyU">
-                                    <rect key="frame" x="40" y="0.0" width="109" height="32"/>
+                                    <rect key="frame" x="34" y="0.0" width="109" height="32"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <state key="normal" title="Add to favorites"/>
                                     <connections>
                                         <action selector="toggleFavorite:" destination="7YI-iM-3v4" eventType="touchUpInside" id="Uuc-FX-KeN"/>
                                     </connections>
                                 </button>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZI-yr-xiA" userLabel="Spacer View">
-                                    <rect key="frame" x="157" y="0.0" width="158" height="32"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SN3-EK-n1t" userLabel="Spacer View">
+                                    <rect key="frame" x="145" y="0.0" width="10" height="32"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="10" id="Kj2-dk-qBD"/>
+                                    </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5g-cj-1Y4" userLabel="Subscription Button">
-                                    <rect key="frame" x="323" y="0.0" width="32" height="32"/>
+                                    <rect key="frame" x="157" y="0.0" width="32" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="0U7-ZJ-Q8S"/>
                                         <constraint firstAttribute="width" constant="32" id="d3Y-aQ-rYy"/>
                                     </constraints>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" image="subscription-22"/>
+                                    <state key="normal" image="show_subscription-22"/>
                                     <connections>
                                         <action selector="toggleSubscription:" destination="7YI-iM-3v4" eventType="touchUpInside" id="n15-4H-JtK"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3T-bJ-jqD">
+                                    <rect key="frame" x="191" y="0.0" width="74" height="32"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                    <state key="normal" title="Be notified"/>
+                                    <connections>
+                                        <action selector="toggleSubscription:" destination="7YI-iM-3v4" eventType="touchUpInside" id="Ggt-gB-Tqf"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZI-yr-xiA" userLabel="Spacer View">
+                                    <rect key="frame" x="267" y="0.0" width="88" height="32"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
                             </subviews>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="&lt;subtitle&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ART-wi-iC6">
@@ -97,7 +112,8 @@
                 <outlet property="logoImageView" destination="Sae-FF-dJE" id="WXs-zb-rU3"/>
                 <outlet property="logoImageViewRatio16_9Constraint" destination="5xa-GV-ZZN" id="VLL-5f-AhA"/>
                 <outlet property="logoImageViewRatioBigLandscapeScreenConstraint" destination="0Tw-a7-vPO" id="bRi-C2-kPH"/>
-                <outlet property="subscriptionButton" destination="q5g-cj-1Y4" id="xnd-MW-PN6"/>
+                <outlet property="subscriptionImageButton" destination="q5g-cj-1Y4" id="xnd-MW-PN6"/>
+                <outlet property="subscriptionLabelButton" destination="i3T-bJ-jqD" id="geE-zm-iA3"/>
                 <outlet property="subtitleLabel" destination="ART-wi-iC6" id="Wfq-IF-z7l"/>
                 <outlet property="titleLabel" destination="yyW-ox-kMV" id="I75-mY-TQP"/>
             </connections>
@@ -106,6 +122,6 @@
     </objects>
     <resources>
         <image name="show_favorite-22" width="22" height="22"/>
-        <image name="subscription-22" width="22" height="22"/>
+        <image name="show_subscription-22" width="22" height="22"/>
     </resources>
 </document>
