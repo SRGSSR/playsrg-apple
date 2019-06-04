@@ -400,10 +400,9 @@
         [self presentViewController:navigationController animated:YES completion:nil];
     }
     else {
-        searchFiltersViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close button title")
-                                                                                                         style:UIBarButtonItemStyleDone
-                                                                                                        target:self
-                                                                                                        action:@selector(closeSettings:)];
+        searchFiltersViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+                                                                                                                      target:self
+                                                                                                                      action:@selector(closeSettings:)];
         [self presentViewController:navigationController animated:YES completion:nil];
     }
 }
