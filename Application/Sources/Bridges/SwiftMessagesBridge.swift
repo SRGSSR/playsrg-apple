@@ -24,6 +24,8 @@ open class SwiftMessagesBridge : NSObject {
      *              for it (i.e. rotates consistently and appears under a parent navigation bar).
      */
     @objc static func show(_ message: String, accessibilityPrefix: String?, image: UIImage?, viewController: UIViewController?, backgroundColor: UIColor?, foregroundColor: UIColor?, sticky: Bool) {
+        SwiftMessages.hideAll()
+        
         let messageView = MessageView.viewFromNib(layout: .cardView)
         messageView.button?.isHidden = true
         messageView.bodyLabel?.font = UIFont.srg_mediumFont(withTextStyle: SRGAppearanceFontTextStyle.body.rawValue)
