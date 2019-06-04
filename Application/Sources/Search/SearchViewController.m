@@ -372,6 +372,7 @@
 {
     SearchSettingsViewController *searchFiltersViewController = [[SearchSettingsViewController alloc] initWithSettings:self.settings];
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchFiltersViewController];
+    navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 
