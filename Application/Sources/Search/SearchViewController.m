@@ -16,13 +16,11 @@
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-static NSString * const SearchShowsResultKey = @"shows";
-static NSString * const SearchMediasResultKey = @"medias";
-
 const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 
 @interface SearchViewController ()
 
+@property (nonatomic) NSArray<SRGShow *> *shows;
 @property (nonatomic, weak) UISearchBar *searchBar;
 
 @end
@@ -135,7 +133,9 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    SRGPageRequest *mediaRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:self.searchBar.text withFilters:nil completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregation, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+    NSString *query = self.searchBar.text;
+    
+    SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withFilters:nil completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregation, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (error) {
             completionHandler(nil, page, nil, HTTPResponse, error);
             return;
@@ -146,15 +146,33 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
             return;
         }
         
-        NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
         SRGPageRequest *mediasRequest = [[SRGDataProvider.currentDataProvider mediasWithURNs:mediaURNs completionBlock:^(NSArray<SRGMedia *> * _Nullable medias, SRGPage * _Nonnull mediasPage, SRGPage * _Nullable mediasNextPage, NSHTTPURLResponse * _Nullable mediasHTTPResponse, NSError * _Nullable mediasError) {
             // Pagination must be based on the initial search results request, not on the media by URN retrieval (since
             // this last request returns the exact needed amount of medias, with no next page)
             completionHandler(medias, page, nextPage, mediasHTTPResponse, mediasError);
-        }] requestWithPageSize:pageSize];
+        }] requestWithPageSize:applicationConfiguration.pageSize];
         [requestQueue addRequest:mediasRequest resume:YES];
     }] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
-    [requestQueue addRequest:mediaRequest resume:YES];
+    [requestQueue addRequest:mediaSearchRequest resume:YES];
+    
+    // The main list with auomatic pagination management displays medias. We associate the companion show list request when
+    // loading the first page only, so that both requests are bound together when loading initial search results. We use the
+    // maximum page size and do not manage pagination for shows. This leads to simple code withoug impacting its usability.
+    if (page.number == 0) {
+        static const NSUInteger kShowSearchPageSize = 20;
+        
+        SRGPageRequest *showSearchRequest = [[SRGDataProvider.currentDataProvider showsForVendor:applicationConfiguration.vendor matchingQuery:query mediaType:SRGMediaTypeNone withCompletionBlock:^(NSArray<NSString *> * _Nullable showURNs, NSNumber * _Nonnull total, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+            if (error || showURNs.count == 0) {
+                return;
+            }
+            
+            SRGPageRequest *showsRequest = [[SRGDataProvider.currentDataProvider showsWithURNs:showURNs completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                self.shows = shows;
+            }] requestWithPageSize:kShowSearchPageSize];
+            [requestQueue addRequest:showsRequest resume:YES];
+        }] requestWithPageSize:kShowSearchPageSize];
+        [requestQueue addRequest:showSearchRequest resume:YES];
+    }
 }
 
 - (NSString *)emptyCollectionTitle
@@ -171,6 +189,8 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 
 - (void)search
 {
+    self.shows = nil;
+    
     [self clear];
     [self refresh];
 }
@@ -201,27 +221,31 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return (self.shows.count == 0) ? 1 : 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if ([self shouldPerformRefreshRequest]) {
-        return (section == 0) ? 1 : self.items.count;
+    if (! [self shouldPerformRefreshRequest]) {
+        return 0;
+    }
+    
+    if (self.shows.count == 0 || section != 0) {
+        return self.items.count;
     }
     else {
-        return 0;
+        return 1;
     }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(SearchShowListCollectionViewCell.class)
+    if (self.shows.count == 0 || indexPath.section != 0) {
+        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MediaCollectionViewCell.class)
                                                          forIndexPath:indexPath];
     }
     else {
-        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MediaCollectionViewCell.class)
+        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(SearchShowListCollectionViewCell.class)
                                                          forIndexPath:indexPath];
     }
 }
@@ -230,19 +254,22 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        
-    }
-    else {
+    if (self.shows.count == 0 || indexPath.section != 0) {
         MediaCollectionViewCell *mediaCell = (MediaCollectionViewCell *)cell;
         mediaCell.media = self.items[indexPath.row];
+    }
+    else {
+        SearchShowListCollectionViewCell *showListCell = (SearchShowListCollectionViewCell *)cell;
+        showListCell.shows = self.shows;
     }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SRGMedia *media = self.items[indexPath.row];
-    [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
+    if (self.shows.count == 0 || indexPath.section != 0) {
+        SRGMedia *media = self.items[indexPath.row];
+        [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
+    }
 }
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol
@@ -251,7 +278,7 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 {
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
-    if (indexPath.section == 0) {
+    if (self.shows.count != 0 && indexPath.section == 0) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 120.f);
     }
     else {
@@ -273,11 +300,6 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    // Immediately return the view to an empty state when below the length threshold
-    if (searchText.length < SearchViewControllerSearchTextMinimumLength) {
-        [self.collectionView reloadData];
-    }
-    
     // Perform the search with a delay to avoid triggering several search requests if updates are made in a row
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(search) object:nil];
     
