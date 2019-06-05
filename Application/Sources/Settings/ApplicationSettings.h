@@ -53,6 +53,8 @@ OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
 OBJC_EXPORT NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void);
 OBJC_EXPORT NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void);
 
+OBJC_EXPORT void ApplicationSetSettingServiceURL(NSURL * _Nullable serviceURL);
+
 OBJC_EXPORT NSString * _Nullable ApplicationSettingSelectedLiveStreamURNForChannelUid(NSString * _Nullable channelUid);
 OBJC_EXPORT void ApplicationSettingSetSelectedLiveStreamURNForChannelUid(NSString * channelUid, NSString * _Nullable mediaURN);
 

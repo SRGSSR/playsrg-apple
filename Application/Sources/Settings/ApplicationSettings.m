@@ -114,6 +114,20 @@ NSURL *ApplicationSettingServiceURL(void)
 #endif
 }
 
+void ApplicationSetSettingServiceURL(NSURL *serviceURL)
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    if (serviceURL) {
+        [userDefaults setObject:serviceURL.absoluteString forKey:PlaySRGSettingServiceURL];
+    }
+    else {
+        [userDefaults removeObjectForKey:PlaySRGSettingServiceURL];
+    }
+    [userDefaults synchronize];
+#endif
+}
+
 NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
