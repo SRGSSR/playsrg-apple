@@ -12,10 +12,6 @@
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-// TODO: A show list wrapper object (which can be attached to the cell) is required if we want the following:
-//        - Show pagination
-//        - Content offset restoration
-
 @interface SearchShowListCollectionViewCell ()
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
@@ -28,8 +24,17 @@
 
 - (void)setShows:(NSArray *)shows
 {
+    NSArray<SRGShow *> *previousShows = _shows;
     _shows = shows;
+    
     [self.collectionView reloadData];
+    
+    // When a cell is reused to display a different show list, return to offset zero
+    if (! [previousShows isEqualToArray:shows]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView setContentOffset:CGPointZero animated:NO];
+        });
+    }
 }
 
 #pragma mark Overrides
