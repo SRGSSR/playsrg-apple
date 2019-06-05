@@ -81,7 +81,6 @@ PODS:
     - SwiftMessages/App (= 6.0.2)
   - SwiftMessages/App (6.0.2)
   - UrbanAirship-iOS-SDK (9.4.0)
-  - XLForm (4.0.1)
 
 DEPENDENCIES:
   - AutoCoding (~> 2.2.3)
@@ -95,7 +94,6 @@ DEPENDENCIES:
   - PPBadgeView (~> 2.1.0)
   - SwiftMessages (~> 6.0.2)
   - UrbanAirship-iOS-SDK (= 9.4.0)
-  - XLForm (~> 4.0.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -119,7 +117,6 @@ SPEC REPOS:
     - Protobuf
     - SwiftMessages
     - UrbanAirship-iOS-SDK
-    - XLForm
 
 SPEC CHECKSUMS:
   AutoCoding: 90ca3cbc0d77a37cfff75167d705b44148c5fc51
@@ -142,8 +139,7 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SwiftMessages: 8b3cc68dba2f1c91aac1a74c90b10287aac35371
   UrbanAirship-iOS-SDK: 25f155c0142b62e4a94ec21093d65c6e128f5213
-  XLForm: b8d47a9a00fb6166981cb40de7169d70d611e9be
 
-PODFILE CHECKSUM: 99d7b50ea9743145247ad1a7c42541d47b38556b
+PODFILE CHECKSUM: 47ca0a7438631315321b57cedf90ee810216cdad
 
 COCOAPODS: 1.6.1
