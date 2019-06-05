@@ -1,14 +1,14 @@
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Watch later\"" = "%@ has been added to \"Watch later\"";
 
-/* Message displayed at the top of the screen when adding a show to My List. Quotes are managed by the application. */
-"%@ has been added to My List" = "%@ has been added to My List";
+/* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
+"%@ has been added to favorites" = "%@ has been added to favorites";
 
 /* Message displayed at the top of the screen when removing an item from the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been removed from \"Watch later\"" = "%@ has been removed from \"Watch later\"";
 
-/* Message displayed at the top of the screen when removing a show from My List. Quotes are managed by the application. */
-"%@ has been removed from My List" = "%@ has been removed from My List";
+/* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
+"%@ has been removed from favorites" = "%@ has been removed from favorites";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ is idle.";
@@ -33,15 +33,18 @@
    Button label to add a download from the media preview window */
 "Add to downloads" = "Add to downloads";
 
-/* Button label to add a show to My List in the show long-press menu
-   Button label to add a show to My List in the show preview window
-   My List show insertion label in the show view */
-"Add to My List" = "Add to My List";
+/* Button label to add a show to favorites in the show long-press menu
+   Button label to add a show to favorites in the show preview window
+   Favorite show insertion label in the show view */
+"Add to favorites" = "Add to favorites";
+
+/* Favorite show added label in the show view */
+"Added to favorites" = "Added to favorites";
 
 /* Title of the first cell of a media list on homepage. */
 "All content" = "All content";
 
-/* Confirmation message displayed when the user is about to clean My List
+/* Confirmation message displayed when the user is about to clean all favorites
    Confirmation message displayed when the user is about to clean the watch later list
    Confirmation message displayed when the user is about to delete all download items
    Confirmation message displayed when the user is about to delete the whole history */
@@ -52,7 +55,7 @@
 
 /* Confirmation message displayed when the user is about to delete selected download items
    Confirmation message displayed when the user is about to delete selected history entries
-   Confirmation message displayed when the user is about to remove selected entries from My List
+   Confirmation message displayed when the user is about to remove selected entries from favorites
    Confirmation message displayed when the user is about to remove selected entries from the watch later list */
 "Are you sure you want to delete the selected items?" = "Are you sure you want to delete the selected items?";
 
@@ -133,6 +136,13 @@
 
 /* Short label identifying content which has expired. */
 "Expired" = "Expired";
+
+/* [Technical] Favorites page type for analytics measurements
+   Label in the left menu to present Favorites
+   Label used on a radio home page to present the favorite shows.
+   Label used on the TV home page to present the favorite shows.
+   Title displayed at the top of the favorites screen */
+"Favorites" = "Favorites";
 
 /* Title displayed at the top of the features list */
 "Features" = "Features";
@@ -236,26 +246,20 @@
 /* Menu section header label for user personal content */
 "My content" = "My content";
 
-/* [Technical] Subscriptions page type for analytics measurements
-   Label in the left menu to present My List
-   Label used on a radio home page to present the My List shows.
-   Label used on the TV home page to present the My List shows.
-   Title displayed at the top of the My List screen
-   Title displayed in the My List player button */
-"My List" = "My List";
-
 /* Text displayed when no data synchronization has been made yet */
 "Never" = "Never";
 
 /* Title of the button to proceed to the next onboarding page */
 "Next" = "Next";
 
-/* Text displayed when no media added to the watch later list
-   Text displayed when no show has been added to My List */
+/* Text displayed when no media added to the watch later list */
 "No content" = "No content";
 
 /* Text displayed when no downloads are available */
 "No downloads" = "No downloads";
+
+/* Text displayed when no favorites are available */
+"No favorites" = "No favorites";
 
 /* Message displayed if no Google Cast receiver is available */
 "No Google Cast receiver is available." = "No Google Cast receiver is available.";
@@ -357,15 +361,16 @@
 /* Title of the action view to choose a regional radio */
 "Regional radios" = "Regional radios";
 
-/* Title of the confirmation pop-up displayed when the user is about to clean My List
-   Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
+/* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
 "Remove all content" = "Remove all content";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete all download items */
 "Remove all downloads" = "Remove all downloads";
 
-/* Title of the confirmation pop-up displayed when the user is about to remove selected entries from My List
-   Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list */
+/* Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
+"Remove all favorites" = "Remove all favorites";
+
+/* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list */
 "Remove content" = "Remove content";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete a download */
@@ -373,6 +378,9 @@
 
 /* Title of the confirmation pop-up displayed when the user is about to delete selected download items */
 "Remove downloads" = "Remove downloads";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete selected favorite items */
+"Remove favorites" = "Remove favorites";
 
 /* Button label to remove a media from the watch later list, from the media long-press menu
    Button label to remove a media from the watch later list, from the media preview window */
@@ -382,10 +390,9 @@
    Button label to remove a download from the media preview window */
 "Remove from downloads" = "Remove from downloads";
 
-/* Button label to remove a show from My list in the show long-press menu
-   Button label to remove a show from My List in the show preview window
-   My List show removal label in the show view */
-"Remove from My List" = "Remove from My List";
+/* Button label to remove a show from favorites in the show long-press menu
+   Button label to remove a show from favorites in the show preview window */
+"Remove from favorites" = "Remove from favorites";
 
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
@@ -470,7 +477,7 @@
    Error message when a media cannot be opened via Handoff or a push notification */
 "The media cannot be opened." = "The media cannot be opened.";
 
-/* Name of the My List item, if no title or name to display
+/* Name of the favorite item, if no title or name to display
    Name of the subscription item, if no title or name to display
    Name of the watch later item, if no title or name to display */
 "The selected content" = "The selected content";
@@ -529,8 +536,8 @@
 /* Hint displayed when no media added to the watch later list and the device supports 3D touch */
 "You can press on a content to add it to this watch later list" = "You can press on a content to add it to the watch later list";
 
-/* Hint displayed when no show added to theMy List and the device supports 3D touch */
-"You can press on a show to add it to My List" = "You can press on a topic to add it to My List";
+/* Hint displayed when no favorites are available and the device supports 3D touch */
+"You can press on an item to add it to favorites" = "You can press on an item to add it to favorites";
 
 /* Hint displayed when no downloads are available and the device supports 3D touch */
 "You can press on an item to download it (not all items can be downloaded)" = "You can press on an item to download it (not all items are allowed to be downloaded)";
@@ -538,8 +545,8 @@
 /* Hint displayed when no media added to the watch later list and the device does not support 3D touch */
 "You can tap and hold a content to add it to this watch later list" = "You can tap and hold a content to add it to the watch later list";
 
-/* Hint displayed when no show added to My List and the device does not support 3D touch */
-"You can tap and hold a show to add it to My List" = "You can tap and hold a topic to add it to My List";
+/* Hint displayed when no favorites are available and the device does not support 3D touch */
+"You can tap and hold an item to add it to favorites" = "You can tap and hold an item to add it to favorites";
 
 /* Hint displayed when no downloads are available and the device does not support 3D touch */
 "You can tap and hold an item to download it (not all items can be downloaded)" = "You can tap and hold an item to download it (not all items are allowed to be downloaded)";

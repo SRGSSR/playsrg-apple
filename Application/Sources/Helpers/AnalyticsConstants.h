@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, AnalyticsPageType) {
     AnalyticsPageTypeSystem,
     AnalyticsPageTypeDownloads,
     AnalyticsPageTypeHistory,
-    AnalyticsPageTypeMyList,
+    AnalyticsPageTypeFavorites,
     AnalyticsPageTypeNotifications,
     AnalyticsPageTypeSearch,
     AnalyticsPageTypeOnboarding,
@@ -115,7 +115,7 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleQuickActions;
 /**
  *  Title for sharing-related events
  */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharing;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingMedia;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingModule;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingShow;
 
@@ -132,22 +132,22 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSubscriptionRemove;
 /**
  *  Title for events related to subscriptions
  */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListAdd;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteAdd;
 
 /**
- *  Title for events related to deletion of a subscription
+ *  Title for events related to deletion of a favorite
  */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListRemove;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemove;
 
 /**
- *  Title for events related to deletion of all subscriptions
+ *  Title for events related to deletion of all favorites
  */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListRemoveAll;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemoveAll;
 
 /**
- *  Title for events related to opening a show from My List
+ *  Title for events related to opening a show from favorites
  */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleMyListOpenShow;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteOpen;
 
 /**
  *  Title for events related to the search
@@ -205,7 +205,7 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceSwipe;
  *  Actions
  */
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLive;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionMyList;
+OBJC_EXPORT AnalyticsType const AnalyticsTypeActionFavorites;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDownloads;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionHistory;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionSearch;

@@ -10,11 +10,10 @@
 #import "ApplicationSettings.h"
 #import "Banner.h"
 #import "Download.h"
-#import "Favorite.h"
+#import "Favorites.h"
 #import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
-#import "MyList.h"
 #import "NavigationController.h"
 #import "PlayApplication.h"
 #import "PlayErrors.h"
@@ -201,12 +200,11 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     
     [PushService.sharedService setup];
     [self updateApplicationBadge];
-    MyListSetup();
+    FavoritesSetup();
     
     // Local objects migration
-    [Favorite migrate];
     WatchLaterMigrate();
-    MyListMigrate();
+    FavoritesMigrate();
     
     [self showNextAvailableOnboarding];
     
@@ -721,9 +719,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     MenuItemInfo *menuItemInfo = nil;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     
-    if ([shortcutItem.type isEqualToString:@"mylist"]) {
-        menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemMyList];
-        labels.type = AnalyticsTypeActionMyList;
+    if ([shortcutItem.type isEqualToString:@"favorites"]) {
+        menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemFavorites];
+        labels.type = AnalyticsTypeActionFavorites;
     }
     else if ([shortcutItem.type isEqualToString:@"downloads"]) {
         menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemDownloads];

@@ -18,7 +18,7 @@ NSString *AnalyticsNameForPageType(AnalyticsPageType pageType)
                      @(AnalyticsPageTypeSystem) : NSLocalizedString(@"System", @"[Technical] System page type for analytics measurements"),
                      @(AnalyticsPageTypeDownloads) : NSLocalizedString(@"Downloads", @"[Technical] Downloads page type for analytics measurements"),
                      @(AnalyticsPageTypeHistory) : NSLocalizedString(@"History", @"[Technical] History page type for analytics measurements"),
-                     @(AnalyticsPageTypeMyList) : NSLocalizedString(@"My List", @"[Technical] Subscriptions page type for analytics measurements"),
+                     @(AnalyticsPageTypeFavorites) : NSLocalizedString(@"Favorites", @"[Technical] Favorites page type for analytics measurements"),
                      @(AnalyticsPageTypeNotifications) : NSLocalizedString(@"Notifications", @"[Technical] Notifications page type for analytics measurements"),
                      @(AnalyticsPageTypeSearch) : NSLocalizedString(@"Search", @"[Technical] Search page type for analytics measurements"),
                      @(AnalyticsPageTypeOnboarding) : NSLocalizedString(@"Onboarding", @"[Technical] Onboarding page type for analytics measurements"),
@@ -29,29 +29,29 @@ NSString *AnalyticsNameForPageType(AnalyticsPageType pageType)
 }
 
 AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
-AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download";
+AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download_add";
 AnalyticsTitle const AnalyticsTitleDownloadRemove = @"download_remove";
 AnalyticsTitle const AnalyticsTitleDownloadRemoveAll = @"download_remove_all";
-AnalyticsTitle const AnalyticsTitleDownloadOpenMedia = @"play_download";
+AnalyticsTitle const AnalyticsTitleDownloadOpenMedia = @"download_open";
 AnalyticsTitle const AnalyticsTitleGoogleCast = @"google_cast";
 AnalyticsTitle const AnalyticsTitleHistoryRemove = @"history_remove";
 AnalyticsTitle const AnalyticsTitleHistoryRemoveAll = @"history_remove_all";
-AnalyticsTitle const AnalyticsTitleHistoryOpenMedia = @"play_history";
+AnalyticsTitle const AnalyticsTitleHistoryOpenMedia = @"history_open";
 AnalyticsTitle const AnalyticsTitleIdentity = @"identity";
-AnalyticsTitle const AnalyticsTitleNotificationOpen = @"open_notification";
-AnalyticsTitle const AnalyticsTitleNotificationPushOpen = @"open_push_notification";
+AnalyticsTitle const AnalyticsTitleNotificationOpen = @"notification_open";
+AnalyticsTitle const AnalyticsTitleNotificationPushOpen = @"push_notification_open";
 AnalyticsTitle const AnalyticsTitleOpenURL = @"open_url_ios";
 AnalyticsTitle const AnalyticsTitlePictureInPicture = @"picture_in_picture";
 AnalyticsTitle const AnalyticsTitleQuickActions = @"quick_actions_ios";
-AnalyticsTitle const AnalyticsTitleSharing = @"share";
-AnalyticsTitle const AnalyticsTitleSharingModule = @"share_module";
-AnalyticsTitle const AnalyticsTitleSharingShow = @"share_show";
-AnalyticsTitle const AnalyticsTitleSubscriptionAdd = @"subscription";
+AnalyticsTitle const AnalyticsTitleSharingMedia = @"media_share";
+AnalyticsTitle const AnalyticsTitleSharingModule = @"module_share";
+AnalyticsTitle const AnalyticsTitleSharingShow = @"show_share";
+AnalyticsTitle const AnalyticsTitleSubscriptionAdd = @"subscription_add";
 AnalyticsTitle const AnalyticsTitleSubscriptionRemove = @"subscription_remove";
-AnalyticsTitle const AnalyticsTitleMyListAdd = @"my_list_add";
-AnalyticsTitle const AnalyticsTitleMyListRemove = @"my_list_remove";
-AnalyticsTitle const AnalyticsTitleMyListRemoveAll = @"my_list_remove_all";
-AnalyticsTitle const AnalyticsTitleMyListOpenShow = @"my_list_open";
+AnalyticsTitle const AnalyticsTitleFavoriteAdd = @"favorite_add";
+AnalyticsTitle const AnalyticsTitleFavoriteRemove = @"favorite_remove";
+AnalyticsTitle const AnalyticsTitleFavoriteRemoveAll = @"favorite_remove_all";
+AnalyticsTitle const AnalyticsTitleFavoriteOpen = @"favorite_open";
 AnalyticsTitle const AnalyticsTitleSearch = @"search";
 AnalyticsTitle const AnalyticsTitleUserActivity = @"user_activity_ios";
 AnalyticsTitle const AnalyticsTitleWatchLaterAdd = @"watch_later_add";
@@ -72,7 +72,7 @@ AnalyticsSource const AnalyticsSourceSelection = @"selection";
 AnalyticsSource const AnalyticsSourceSwipe = @"swipe";
 
 AnalyticsType const AnalyticsTypeActionLive = @"openlive";
-AnalyticsType const AnalyticsTypeActionMyList = @"my_list_open";
+AnalyticsType const AnalyticsTypeActionFavorites = @"openfavorites";
 AnalyticsType const AnalyticsTypeActionDownloads = @"opendownloads";
 AnalyticsType const AnalyticsTypeActionHistory = @"openhistory";
 AnalyticsType const AnalyticsTypeActionSearch = @"opensearch";

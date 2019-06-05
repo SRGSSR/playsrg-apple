@@ -226,7 +226,7 @@
                 labels.source = AnalyticsSourcePeekMenu;
                 labels.value = self.media.URN;
                 labels.extraValue1 = AnalyticsTypeValueSharingContent;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharing labels:labels];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
                 
                 SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:self.media.URN];
                 if (subdivision) {

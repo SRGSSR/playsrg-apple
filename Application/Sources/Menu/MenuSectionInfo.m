@@ -36,7 +36,7 @@
     // My content section
     NSMutableArray<MenuItemInfo *> *myContentMenuItems = [NSMutableArray array];
     [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemHistory]];
-    [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemMyList]];
+    [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemFavorites]];
     [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemWatchLater]];
     [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemDownloads]];
     

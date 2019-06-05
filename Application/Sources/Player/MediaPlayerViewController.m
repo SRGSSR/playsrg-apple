@@ -12,12 +12,11 @@
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "Download.h"
+#import "Favorites.h"
 #import "GoogleCast.h"
 #import "History.h"
 #import "LiveAccessView.h"
 #import "ModalTransition.h"
-#import "MyList.h"
-#import "MyListPlayerButtonView.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -129,7 +128,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIStackView *showStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *showThumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *showLabel;
-@property (nonatomic, weak) IBOutlet MyListPlayerButtonView *myListButtonView;
+@property (nonatomic, weak) IBOutlet UIButton *favoriteButton;
 @property (nonatomic, weak) IBOutlet UIView *showBottomLineSpacerView;
 
 @property (nonatomic, weak) IBOutlet UIView *radioHomeView;
@@ -840,7 +839,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
         self.showLabel.text = show.title;
         
-        [self updateMyListStatusForShow:show];
+        [self updateFavoriteStatusForShow:show];
         
         self.showTopLineSpacerView.hidden = NO;
         [self.showStackView play_setHidden:NO];
@@ -1091,9 +1090,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.downloadButton.accessibilityLabel = downloadButtonAccessibilityLabel;
 }
 
-- (void)updateMyListStatusForShow:(SRGShow *)show
+- (void)updateFavoriteStatusForShow:(SRGShow *)show
 {
-    self.myListButtonView.inMyList = MyListContainsShow(show);
+    BOOL isFavorite = FavoritesContainsShow(show);
+    [self.favoriteButton setImage:isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"] forState:UIControlStateNormal];
+    
+    self.favoriteButton.accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite show removal label") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite show creation label");
 }
 
 - (void)updateliveAccessViewContentForMediaType:(SRGMediaType)mediaType force:(BOOL)force
@@ -1567,7 +1569,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             labels.source = AnalyticsSourceButton;
             labels.value = sharingMedia.URN;
             labels.extraValue1 = analyticsExtraValue;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharing labels:labels];
+            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
             
             SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:sharingMedia.URN];
             if (subdivision) {
@@ -1782,25 +1784,25 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
 }
 
-- (IBAction)toggleMyList:(UIGestureRecognizer *)gestureRecognizer
+- (IBAction)toggleFavorite:(UIGestureRecognizer *)gestureRecognizer
 {
     SRGShow *show = [self mainShow];
     if (! show) {
         return;
     }
     
-    MyListToggleShow(show);
-    [self updateMyListStatusForShow:show];
+    FavoritesToggleShow(show);
+    [self updateFavoriteStatusForShow:show];
     
-    BOOL inMyList = MyListContainsShow(show);
+    BOOL isFavorite = FavoritesContainsShow(show);
     
-    AnalyticsTitle analyticsTitle = inMyList ? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
+    AnalyticsTitle analyticsTitle = isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.source = AnalyticsSourceButton;
     labels.value = show.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
     
-    [Banner showMyList:inMyList forItemWithName:show.title inViewController:self];
+    [Banner showFavorite:isFavorite forItemWithName:show.title inViewController:self];
 }
 
 #pragma mark Notifications

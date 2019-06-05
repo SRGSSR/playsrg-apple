@@ -8,7 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "Banner.h"
-#import "MyList.h"
+#import "Favorites.h"
 #import "NSBundle+PlaySRG.h"
 #import "PushService.h"
 #import "UIImage+PlaySRG.h"
@@ -26,9 +26,10 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UIButton *myListImageButton;
-@property (nonatomic, weak) IBOutlet UIButton *myListLabelButton;
-@property (nonatomic, weak) IBOutlet UIButton *subscriptionButton;
+@property (nonatomic, weak) IBOutlet UIButton *favoriteImageButton;
+@property (nonatomic, weak) IBOutlet UIButton *favoriteLabelButton;
+@property (nonatomic, weak) IBOutlet UIButton *subscriptionImageButton;
+@property (weak, nonatomic) IBOutlet UIButton *subscriptionLabelButton;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 
 @property (nonatomic) IBOutlet NSLayoutConstraint *logoImageViewRatio16_9Constraint; // Need to retain it, because active state removes it
@@ -82,7 +83,8 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     self.logoImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
                                                      withScale:ImageScaleLarge];
     
-    self.myListImageButton.accessibilityElementsHidden = YES;
+    self.favoriteImageButton.accessibilityElementsHidden = YES;
+    self.subscriptionImageButton.accessibilityElementsHidden = YES;
 }
 
 - (void)layoutSubviews
@@ -98,7 +100,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     
     if (newWindow) {
         // Ensure proper state when the view is reinserted
-        [self updateMyListStatus];
+        [self updateFavoriteStatus];
         [self updateSubscriptionStatus];
         
         [NSNotificationCenter.defaultCenter addObserver:self
@@ -125,42 +127,51 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     
     [self.logoImageView play_requestImageForObject:show withScale:ImageScaleLarge type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
     
-    [self updateMyListStatus];
+    [self updateFavoriteStatus];
     [self updateSubscriptionStatus];
 }
 
 #pragma mark UI
 
-- (void)updateMyListStatus
+- (void)updateFavoriteStatus
 {
-    BOOL inMyList = MyListContainsShow(self.show);
-    [self.myListImageButton setImage:inMyList ? [UIImage imageNamed:@"my_list_full_show_page-22"] : [UIImage imageNamed:@"my_list_show_page-22"] forState:UIControlStateNormal];
+    BOOL isFavorite = FavoritesContainsShow(self.show);
+    [self.favoriteImageButton setImage:isFavorite ? [UIImage imageNamed:@"show_favorite_full-22"] : [UIImage imageNamed:@"show_favorite-22"] forState:UIControlStateNormal];
     
     NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
                                   NSForegroundColorAttributeName : UIColor.whiteColor };
-    NSString *title = [inMyList ? NSLocalizedString(@"Remove from My List", @"My List show removal label in the show view") : NSLocalizedString(@"Add to My List", @"My List show insertion label in the show view") uppercaseString];
-    [self.myListLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
+    NSString *title = [isFavorite ? NSLocalizedString(@"Favorites", @"Favorite show label when added ,in the show view") : NSLocalizedString(@"Add to favorites", @"Favorite show label to add it, in the show view") uppercaseString];
+    [self.favoriteLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
                                                                                attributes:attributes] forState:UIControlStateNormal];
 }
 
 - (void)updateSubscriptionStatus
 {
-    BOOL inMyList =  MyListContainsShow(self.show);
-    self.subscriptionButton.hidden = ! inMyList;
+    BOOL isFavorite =  FavoritesContainsShow(self.show);
+    self.subscriptionImageButton.hidden = ! isFavorite;
+    self.subscriptionLabelButton.hidden = ! isFavorite;
     
-    if (! inMyList) {
+    if (! isFavorite) {
         return;
     }
     
     if (PushService.sharedService.enabled) {
-        BOOL subscribed = MyListIsSubscribedToShow(self.show);
-        [self.subscriptionButton setImage:subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"]
-                                 forState:UIControlStateNormal];
-        self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Disable notifications for show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
+        BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
+        [self.subscriptionImageButton setImage:subscribed ? [UIImage imageNamed:@"show_subscription_full-22"] : [UIImage imageNamed:@"show_subscription-22"] forState:UIControlStateNormal];
+        
+        NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                      NSForegroundColorAttributeName : UIColor.whiteColor };
+        NSString *title = [subscribed ? NSLocalizedString(@"Notified", @"Subscription label when notification enabled in the show view") : NSLocalizedString(@"Be notified", @"Subscription label to be notified in the show view") uppercaseString];
+        [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
+                                                                                         attributes:attributes] forState:UIControlStateNormal];
     }
     else {
-        [self.subscriptionButton setImage:[UIImage imageNamed:@"subscription_disabled-22"] forState:UIControlStateNormal];
-        self.subscriptionButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
+        [self.subscriptionImageButton setImage:[UIImage imageNamed:@"show_subscription_disabled-22"] forState:UIControlStateNormal];
+        
+        NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                      NSForegroundColorAttributeName : UIColor.whiteColor };
+        [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:[NSLocalizedString(@"Be notified", @"Subscription label to be notified in the show view") uppercaseString]
+                                                                                         attributes:attributes] forState:UIControlStateNormal];
     }
 }
 
@@ -182,28 +193,28 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 #pragma mark Actions
 
-- (IBAction)toggleMyList:(id)sender
+- (IBAction)toggleFavorite:(id)sender
 {
-    MyListToggleShow(self.show);
-    BOOL inMyList = MyListContainsShow(self.show);
+    FavoritesToggleShow(self.show);
+    BOOL isFavorite = FavoritesContainsShow(self.show);
     
-    AnalyticsTitle analyticsTitle = inMyList? AnalyticsTitleMyListAdd : AnalyticsTitleMyListRemove;
+    AnalyticsTitle analyticsTitle = isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.source = AnalyticsSourceButton;
     labels.value = self.show.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
     
-    [Banner showMyList:inMyList forItemWithName:self.show.title inView:self];
+    [Banner showFavorite:isFavorite forItemWithName:self.show.title inView:self];
 }
 
 - (IBAction)toggleSubscription:(id)sender
 {
-    BOOL toggled = MyListToggleSubscriptionForShow(self.show, self);
+    BOOL toggled = FavoritesToggleSubscriptionForShow(self.show, self);
     if (! toggled) {
         return;
     }
     
-    BOOL subscribed = MyListIsSubscribedToShow(self.show);
+    BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
     
     AnalyticsTitle analyticsTitle = (subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -219,8 +230,8 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 - (void)preferencesStateDidChange:(NSNotification *)notification
 {
     NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
-    if ([domains containsObject:PlayPreferenceDomain]) {
-        [self updateMyListStatus];
+    if ([domains containsObject:PlayPreferencesDomain]) {
+        [self updateFavoriteStatus];
         [self updateSubscriptionStatus];
     }
 }

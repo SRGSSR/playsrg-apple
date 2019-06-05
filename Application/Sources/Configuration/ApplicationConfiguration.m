@@ -33,7 +33,7 @@ NSString *TitleForHomeSection(HomeSection homeSection)
                      @(HomeSectionTVScheduledLivestreams) : NSLocalizedString(@"Web livestreams", @"Label used on the home page to present scheduled livestream medias. Only on test versions."),
                      @(HomeSectionTVLiveCenter) : NSLocalizedString(@"Live center", @"Label used on the home page to present live center medias. Only on test versions."),
                      @(HomeSectionTVShowsAccess) : NSLocalizedString(@"Shows", @"Label used on the TV home page to present the shows AZ and shows by date access buttons."),
-                     @(HomeSectionTVMyListShows) : NSLocalizedString(@"My List", @"Label used on the TV home page to present the My List shows."),
+                     @(HomeSectionTVFavoriteShows) : NSLocalizedString(@"Favorites", @"Label used on the TV home page to present the favorite shows."),
                      @(HomeSectionRadioLive) : NSLocalizedString(@"Live radio", @"Label used on a radio home page to present the livestream"),
                      @(HomeSectionRadioLatestEpisodes) : NSLocalizedString(@"The latest episodes", @"Label used on a radio home page to present the latest audio episodes"),
                      @(HomeSectionRadioMostPopular) : NSLocalizedString(@"Most listened to", @"Label used on a radio home page to present the most listened / popular audio medias"),
@@ -41,7 +41,7 @@ NSString *TitleForHomeSection(HomeSection homeSection)
                      @(HomeSectionRadioLatestVideos) : NSLocalizedString(@"Latest videos", @"Label used on a radio home page to present the latest videos"),
                      @(HomeSectionRadioAllShows) : NSLocalizedString(@"Shows", @"Label used on a radio home page to present its associated shows"),
                      @(HomeSectionRadioShowsAccess) : NSLocalizedString(@"Shows", @"Label used on a radio home page to present the shows AZ and shows by date access buttons."),
-                     @(HomeSectionRadioMyListShows) : NSLocalizedString(@"My List", @"Label used on a radio home page to present the My List shows.") };
+                     @(HomeSectionRadioFavoriteShows) : NSLocalizedString(@"Favorites", @"Label used on a radio home page to present the favorite shows.") };
     });
     return s_names[@(homeSection)];
 }
@@ -100,7 +100,7 @@ static HomeSection HomeSectionWithString(NSString *string)
                             @"tvScheduledLivestreams" : @(HomeSectionTVScheduledLivestreams),
                             @"tvLiveCenter" : @(HomeSectionTVLiveCenter),
                             @"tvShowsAccess" : @(HomeSectionTVShowsAccess),
-                            @"tvMyListShows" : @(HomeSectionTVMyListShows),
+                            @"tvFavoriteShows" : @(HomeSectionTVFavoriteShows),
                             @"radioLive" : @(HomeSectionRadioLive),
                             @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
                             @"radioMostPopular" : @(HomeSectionRadioMostPopular),
@@ -108,7 +108,7 @@ static HomeSection HomeSectionWithString(NSString *string)
                             @"radioLatestVideos" : @(HomeSectionRadioLatestVideos),
                             @"radioAllShows" : @(HomeSectionRadioAllShows),
                             @"radioShowsAccess" : @(HomeSectionRadioShowsAccess),
-                            @"radioMyListShows" : @(HomeSectionRadioMyListShows) };
+                            @"radioFavoriteShows" : @(HomeSectionRadioFavoriteShows) };
     });
     return s_homeSections[string].integerValue ?: HomeSectionUnknown;
 }
@@ -130,7 +130,7 @@ NSString *TitleForMenuItem(MenuItem menuItem)
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_names = @{ @(MenuItemSearch) : NSLocalizedString(@"Search", @"Label in the left menu to present the search view"),
-                     @(MenuItemMyList) : NSLocalizedString(@"My List", @"Label in the left menu to present My List"),
+                     @(MenuItemFavorites) : NSLocalizedString(@"Favorites", @"Label in the left menu to present Favorites"),
                      @(MenuItemWatchLater) : NSLocalizedString(@"Watch later", @"Label in the left menu to present the watch later list"),
                      @(MenuItemDownloads) : NSLocalizedString(@"Downloads", @"Label in the left menu to present downloads"),
                      @(MenuItemHistory) : NSLocalizedString(@"History", @"Label in the left menu to present history"),

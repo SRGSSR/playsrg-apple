@@ -12,7 +12,7 @@
 #import "HistoryViewController.h"
 #import "HomeViewController.h"
 #import "MainNavigationController.h"
-#import "MyListViewController.h"
+#import "FavoritesViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "RadioShowsViewController.h"
@@ -366,8 +366,8 @@ static const CGFloat SideMenuOffset = -50.f;
                 break;
             }
                 
-            case MenuItemMyList: {
-                viewController = [[MyListViewController alloc] init];
+            case MenuItemFavorites: {
+                viewController = [[FavoritesViewController alloc] init];
                 break;
             }
                 

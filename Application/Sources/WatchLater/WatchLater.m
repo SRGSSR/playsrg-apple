@@ -6,7 +6,7 @@
 
 #import "WatchLater.h"
 
-#import "Favorite+Private.h"
+#import "DeprecatedFavorite.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGUserData/SRGUserData.h>
@@ -19,7 +19,7 @@ NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataStat
 
 BOOL WatchLaterCanStoreMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 {
-    return mediaMetadata.contentType != SRGContentTypeLivestream;
+    return mediaMetadata.contentType != SRGContentTypeLivestream && [mediaMetadata timeAvailabilityAtDate:NSDate.date] != SRGTimeAvailabilityNotAvailableAnymore;
 }
 
 BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
@@ -83,29 +83,29 @@ void WatchLaterMigrate(void)
     
     SRGPlaylist *watchLaterPlaylist = [SRGUserData.currentUserData.playlists playlistWithUid:SRGPlaylistUidWatchLater];
     if (watchLaterPlaylist) {
-        NSArray<Favorite *> *favorites = [Favorite mediaFavorites];
+        NSArray<DeprecatedFavorite *> *favorites = [DeprecatedFavorite mediaFavorites];
         
         if (favorites.count == 0) {
             return;
         }
         
         // Don't add livestreams to the watch later list.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(Favorite.new, mediaContentType), @(FavoriteMediaContentTypeLive)];
-        NSArray<Favorite *> *livestreamFavorites = [favorites filteredArrayUsingPredicate:predicate];
-        [Favorite finishMigrationForFavorites:livestreamFavorites];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(DeprecatedFavorite.new, mediaContentType), @(FavoriteMediaContentTypeLive)];
+        NSArray<DeprecatedFavorite *> *livestreamFavorites = [favorites filteredArrayUsingPredicate:predicate];
+        [DeprecatedFavorite finishMigrationForFavorites:livestreamFavorites];
         
-        NSMutableArray<Favorite *> *mutableFavorites = favorites.mutableCopy;
+        NSMutableArray<DeprecatedFavorite *> *mutableFavorites = favorites.mutableCopy;
         [mutableFavorites removeObjectsInArray:livestreamFavorites];
-        NSArray<Favorite *> *nonLivestreamFavorites = mutableFavorites.copy;
+        NSArray<DeprecatedFavorite *> *nonLivestreamFavorites = mutableFavorites.copy;
         
         __block NSUInteger remainingFavoritesCount = nonLivestreamFavorites.count;
         
-        for (Favorite *favorite in nonLivestreamFavorites) {
+        for (DeprecatedFavorite *favorite in nonLivestreamFavorites) {
             [SRGUserData.currentUserData.playlists savePlaylistEntryWithUid:favorite.mediaURN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
                 --remainingFavoritesCount;
                 if (remainingFavoritesCount == 0) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [Favorite finishMigrationForFavorites:nonLivestreamFavorites];
+                        [DeprecatedFavorite finishMigrationForFavorites:nonLivestreamFavorites];
                     });
                 }
             }];
