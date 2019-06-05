@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchSettingsViewController : UITableViewController
+@interface SearchSettingsViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
 
 - (instancetype)initWithSettings:(SRGMediaSearchSettings *)settings aggregations:(nullable SRGMediaAggregations *)aggregations;
 
