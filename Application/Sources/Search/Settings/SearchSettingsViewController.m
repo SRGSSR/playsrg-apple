@@ -63,6 +63,9 @@
     
     self.view.backgroundColor = UIColor.play_popoverGrayColor;
     
+    self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = UIColor.clearColor;
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
 }
@@ -140,7 +143,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
