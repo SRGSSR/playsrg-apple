@@ -161,7 +161,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
         
         NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
                                       NSForegroundColorAttributeName : UIColor.whiteColor };
-        NSString *title = [subscribed ? NSLocalizedString(@"Notified", @"Subscription label when notification enabled in the show view") : NSLocalizedString(@"Be notified", @"Subscription label to be notified in the show view") uppercaseString];
+        NSString *title = [subscribed ? NSLocalizedString(@"Notified", @"Subscription label when notification enabled in the show view") : NSLocalizedString(@"Notify me", @"Subscription label to be notified in the show view") uppercaseString];
         [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
                                                                                          attributes:attributes] forState:UIControlStateNormal];
     }
@@ -170,7 +170,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
         
         NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
                                       NSForegroundColorAttributeName : UIColor.whiteColor };
-        [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:[NSLocalizedString(@"Be notified", @"Subscription label to be notified in the show view") uppercaseString]
+        [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:[NSLocalizedString(@"Notify me", @"Subscription label to be notified in the show view") uppercaseString]
                                                                                          attributes:attributes] forState:UIControlStateNormal];
     }
 }
