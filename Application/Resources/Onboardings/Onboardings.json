@@ -1,25 +1,19 @@
 [
   {
-    "uid": "subscription",
-    "title": "Subscriptions",
-    "pages": [
-      {
-        "uid": "subscribe",
-        "title": "Subscribe to the shows you like",
-        "text": "Use the bell icon to receive show notifications.",
+      "uid": "account",
+      "title": "Account",
+      "pages": [
+          {
+              "uid": "account_creation",
+              "title": "Account",
+              "text": "Open an account to enable more features.",
+              "color": "#af001d"
+          },
+          {
+        "uid": "account",
+        "title": "Account advantage",
+        "text": "With an account you can find your favorites, your history and resume playback on another device.",
         "color": "#c9002b"
-      },
-      {
-        "uid": "notify",
-        "title": "Receive notifications",
-        "text": "You will be notified when a new episode is available.",
-        "color": "#af001d"
-      },
-      {
-        "uid": "manage",
-        "title": "Manage your subscriptions",
-        "text": "Add or cancel subscriptions at any time.",
-        "color": "#8b0019"
       }
     ]
   },
@@ -31,44 +25,109 @@
         "uid": "resume",
         "title": "Resume playback",
         "text": "When reopening a content previously watched, playback resumes where you left off.",
+        "color": "#8b0019"
+      },
+      {
+        "uid": "history",
+        "title": "History",
+        "text": "Access your playback history.",
+        "color": "#af001d"
+      }
+    ]
+  },
+  {
+    "uid": "resume_playback_account",
+    "title": "Resume playback",
+    "pages": [
+      {
+        "uid": "resume",
+        "title": "Resume playback",
+        "text": "When reopening a content previously watched, playback resumes where you left off.",
+        "color": "#8b0019"
+      },
+      {
+        "uid": "history",
+        "title": "History",
+        "text": "Access your playback history.",
+        "color": "#af001d"
+      },
+      {
+        "uid": "account",
+        "title": "Account",
+        "text": "With an account you can find your history and resume playback on another device.",
         "color": "#c9002b"
       }
     ]
   },
   {
-      "uid": "account",
-      "title": "Account",
-      "pages": [
-          {
-              "uid": "account",
-              "title": "Account",
-              "text": "Open an account to enable more features.",
-              "color": "#c9002b"
-          },
-          {
-              "uid": "resume",
-              "title": "Synchronize playback",
-              "text": "With an account you can resume playback on another device.",
-              "color": "#af001d"
-          },
-          {
-              "uid": "history",
-              "title": "History",
-              "text": "Access your playback history.",
-              "color": "#8b0019"
-          }
-      ]
+    "uid": "favorites",
+    "title": "Favorites",
+    "pages": [
+      {
+        "uid": "favorites",
+        "title": "Favorites",
+        "text": "Favorite your preferred shows.",
+        "color": "#8b0019"
+      },
+      {
+        "uid": "notifications",
+        "title": "Receive notifications",
+        "text": "You will be notified when a new episode is available.",
+        "color": "#af001d"
+      }]
   },
   {
-      "uid": "history",
-      "title": "History",
-      "pages": [
-          {
-              "uid": "history",
-              "title": "History",
-              "text": "Access your playback history.",
-              "color": "#c9002b"
-          }
-      ]
+    "uid": "favorites_account",
+    "title": "Favorites",
+    "pages": [
+      {
+        "uid": "favorites",
+        "title": "Favorites",
+        "text": "Favorite your prefered shows.",
+        "color": "#8b0019"
+      },
+      {
+        "uid": "notifications",
+        "title": "Receive notifications",
+        "text": "You will be notified when a new episode is available.",
+        "color": "#af001d"
+      },
+      {
+        "uid": "account",
+        "title": "Account",
+        "text": "With an account you can find your favorites and be notified on another device.",
+        "color": "#c9002b"
+      }
+    ]
+  },
+  {
+    "uid": "watch_later",
+    "title": "Watch later",
+    "pages": [
+      {
+        "uid": "watch_later",
+        "title": "Watch later",
+        "text": "Bookmark a content to comsume it later.",
+        "color": "#af001d"
+      }]
+  }
+,
+  {
+    "uid": "watch_later_account",
+    "title": "Watch later",
+    "pages": [
+      {
+        "uid": "watch_later",
+        "title": "Watch later",
+        "text": "Bookmark a content to comsume it later.",
+        "color": "#af001d"
+      },
+      {
+        "uid": "account",
+        "title": "Account",
+        "text": "With an account you can find your contents on another device.",
+        "color": "#c9002b"
+      }
+    ]
   }
 ]

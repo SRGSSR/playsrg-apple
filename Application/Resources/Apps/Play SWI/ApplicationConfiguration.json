@@ -26,5 +26,5 @@
   "moduleDefaultTextColor": "#969696",
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
-  "hiddenOnboardings": "account"
+  "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account"
 }
