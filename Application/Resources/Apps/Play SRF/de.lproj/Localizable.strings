@@ -35,11 +35,8 @@
 
 /* Button label to add a show to favorites in the show long-press menu
    Button label to add a show to favorites in the show preview window
-   Favorite show insertion label in the show view */
+   Favorite show label to add it, in the show view */
 "Add to favorites" = "Zu den Favoriten hinzufügen";
-
-/* Favorite show added label in the show view */
-"Added to favorites" = "Added to favorites";
 
 /* Title of the first cell of a media list on homepage. */
 "All content" = "Alle anzeigen";
@@ -138,6 +135,7 @@
 "Expired" = "Abgelaufen";
 
 /* [Technical] Favorites page type for analytics measurements
+   Favorite show label when added ,in the show view
    Label in the left menu to present Favorites
    Label used on a radio home page to present the favorite shows.
    Label used on the TV home page to present the favorite shows.
@@ -285,6 +283,12 @@
 
 /* Message displayed at the top of the screen when enabling push notifications. Quotes around the content placeholder managed by the application. */
 "Notifications have been enabled for %@" = "%@ wurde zu den Push-Mitteilungen hinzugefügt";
+
+/* Subscription label when notification enabled in the show view */
+"Notified" = "Notified";
+
+/* Subscription label to be notified in the show view */
+"Notify me" = "Notify me";
 
 /* Title of the button displayed at the end of an onboarding
    Title of the button when the user subscribed to all TV and radio shows */

@@ -8,8 +8,9 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ vues";
 
-/* Show My List creation label */
-"Add to My List" = "Ajouter à \"Ma liste\"";
+/* Favorite show label when not in favorites, in the player view
+   Favorite show label when not in favorites, in the show view */
+"Add to favorites" = "Ajouter aux favoris";
 
 /* Media watch later creation label */
 "Add to the watch later list" = "Ajouter à \"Plus tard\"";
@@ -96,8 +97,9 @@
 /* A download button label */
 "Remove download" = "Supprimer le téléchargement";
 
-/* Show My List removal label */
-"Remove from My List" = "Retirer de \"Ma liste\"";
+/* Favorite show label when in favorites, in the player view
+   Favorite show label when in favorites, in the show view */
+"Remove from favorites" = "Supprimer des favoris";
 
 /* Media watch later removal label */
 "Remove from the watch later list" = "Retirer de \"Plus tard\"";

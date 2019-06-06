@@ -1,3 +1,19 @@
+/* Account onboarding name */
+/* Account onboarding, 1st page title */
+/* Resume playback onboarding, 3rd page title */
+/* Favorites onboarding, 3rd page title */
+/* Watch later onboarding, 2nd page title */
+"Account" = "Conto";
+
+/* Account onboarding, 1st page description */
+"Open an account to enable more features." = "Avrir in conto per profitar da dapli pussaivladads.";
+
+/* Account onboarding, 2nd page title */
+"Benefits" = "Benefits";
+
+/* Account onboarding, 2nd page description */
+"Find your content and resume playback on any of your devices." = "Find your content and resume playback on any of your devices.";
+
 /* Resume playback onboarding name */
 /* Resume playback onboarding, 1st page title */
 "Resume playback" = "Cuntinuar consumaziun";
@@ -5,45 +21,37 @@
 /* Resume playback onboarding, 1st page description */
 "When reopening a content previously watched, playback resumes where you left off." = "Cun rechargiar il cuntegn, cuntinuà la consumaziun davent dalla davosa posiziun consumada.";
 
-/* Subscriptions onboarding name */
-"Subscriptions" = "Abunaments";
-
-/* Subscriptions onboarding, 1st page title */
-"Subscribe to the shows you like" = "Abunescha la show che interessescha tai";
-
-/* Subscriptions onboarding, 1st page description */
-"Use the bell icon to receive show notifications." = "Dovrà il icon da zain per retschaiver notificaziuns tar novs cuntegns.";
-
-/* Subscriptions onboarding, 2nd page title */
-"Receive notifications" = "Retschaiver notificaziuns";
-
-/* Subscriptions onboarding, 2nd page description */
-"You will be notified when a new episode is available." = "Ti retschaivas notificaziuns sche nov cuntegns stattan a disposiziun.";
-
-/* Subscriptions onboarding, 3rd page title */
-"Manage your subscriptions" = "Administrar ils abunaments";
-
-/* Subscriptions onboarding, 3rd page description */
-"Add or cancel subscriptions at any time." = "Aschuntà ni stizzà abunaments da tut temp.";
-
-/* History onboarding name */
-/* History onboarding, 1st page title */
-/* Account onboarding, 3rd page title */
+/* Resume playback onboarding, 2nd page title */
 "History" = "Cronologia";
 
-/* History onboarding, 1st page description */
-/* Account onboarding, 3rd page description */
+/* Resume playback onboarding, 2nd page description */
 "Access your playback history." = "Tar tia cronologia.";
 
-/* Account onboarding name */
-/* Account onboarding, 1st page title */
-"Account" = "Conto";
+/* Resume playback onboarding, 3rd page description */
+"Resume playback on any of your devices." = "Resume playback on any of your devices.";
 
-/* Account onboarding, 1st page description */
-"Open an account to enable more features." = "Avrir in conto per profitar da dapli pussaivladads.";
+/* Favorites onboarding name */
+/* Favorites onboarding, 1st page title */
+"Favorites" = "Favurits";
 
-/* Account onboarding, 2nd page title */
-"Synchronize playback" = "Sincronisar il playback.";
+/* Favorites onboarding, 1st page description */
+"Bookmark the shows you like." = "Bookmark the shows you like.";
 
-/* Account onboarding, 2nd page description */
-"With an account you can resume playback on another device." = "Cun in conto pudais tadlar e guardar vinavant sin in auter apparat.";
+/* Favorites onboarding, 2nd page title */
+"Receive notifications" = "Retschaiver notificaziuns";
+
+/* Favorites onboarding, 2nd page description */
+"You will be notified when a new episode is available." = "Ti retschaivas notificaziuns sche nov cuntegns stattan a disposiziun.";
+
+/* Favorites onboarding, 3rd page description */
+"Find your favorite shows on any of your devices." = "Find your favorite shows on any of your devices.";
+
+/* Watch later onboarding name */
+/* Watch later onboarding, 1st page title */
+"Watch later" = "Watch later";
+
+/* Watch later onboarding, 1st page description */
+"Save any content to watch it at a later time." = "Save any content to watch it at a later time.";
+
+/* Watch later onboarding, 2nd page description */
+"Watch the content later on any of your devices." = "Watch the content later on any of your devices.";
