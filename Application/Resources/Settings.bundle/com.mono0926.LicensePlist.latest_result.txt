@@ -456,25 +456,25 @@ name: Masonry, nameSpecified: , owner: SRGSSR, version: 07e577b
 
 name: paper-onboarding, nameSpecified: , owner: SRGSSR, version: 78f3f00
 
-name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 5dde191
+name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: cb45a8a
 
 name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 7b7c51e
 
-name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 4443a1c
+name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 3536b6f
 
 name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
 name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 206b090
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 1.14_b5
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 19c3867
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: ba81171
 
-name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: b1c87a6
+name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: b2513de
 
-name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 2318934
+name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 1b14b62
 
-name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 00ec8a4
+name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: f64fc17
 
 name: tagcommander-ios, nameSpecified: , owner: SRGSSR, version: 4.3.1_4.3.1
 

@@ -2,8 +2,8 @@ github "defagos/CoconutKit" "c82d2b91de5a74806c1dc1150d2ee08d8ba76a1e"
 github "Flipboard/FLEX" ~> 2.4.0
 github "mapbox/Fingertips" "cdffabac5506103a2c7cc5aedeed4021df2501da"
 github "SRGSSR/DZNEmptyDataSet" "14b19b3614f93ebe9701cdfae5f1f1423b926a3e"
-github "SRGSSR/srgletterbox-ios" "1.14_b5"
-github "SRGSSR/srguserdata-ios" "00ec8a49eb720e329f116b7722be9eca993eb29f"
+github "SRGSSR/srgletterbox-ios" "19c38673c57b78d1bb7a9ca14e782aac30adcd93"
+github "SRGSSR/srguserdata-ios" "f64fc178fef90d75f9f83fbc150b92918ed39f7c"
 
 # The title margin had to be fixed, on forked repository first. We should probably submit a pull request.
 github "SRGSSR/paper-onboarding" "78f3f004a5651a6faf3d673a3f2f877dc146acb9"
