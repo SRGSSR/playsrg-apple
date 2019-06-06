@@ -543,6 +543,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (BOOL)accessibilityPerformEscape
 {
     [self dismissViewControllerAnimated:YES completion:^{
+        [Banner hideAll]; // Avoids view retain, and video playback.
         [StoreReview requestReview];
     }];
     return YES;
@@ -1713,6 +1714,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (IBAction)close:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:^{
+        [Banner hideAll]; // Avoids view retain, and video playback.
         [StoreReview requestReview];
     }];
 }
@@ -1737,6 +1739,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 // whether the transition ended or was cancelled
                 self.interactiveTransition = nil;
                 
+                [Banner hideAll]; // Avoids view retain, and video playback.
                 [StoreReview requestReview];
             }];
             break;
