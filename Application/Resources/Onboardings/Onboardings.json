@@ -11,8 +11,8 @@
           },
           {
         "uid": "account",
-        "title": "Account advantage",
-        "text": "With an account you can find your favorites, your history and resume playback on another device.",
+        "title": "Benefits",
+        "text": "Find your content and resume playback on any of your devices.",
         "color": "#c9002b"
       }
     ]
@@ -54,7 +54,7 @@
       {
         "uid": "account",
         "title": "Account",
-        "text": "With an account you can find your history and resume playback on another device.",
+        "text": "Resume playback on any of your devices.",
         "color": "#c9002b"
       }
     ]
@@ -66,7 +66,7 @@
       {
         "uid": "favorites",
         "title": "Favorites",
-        "text": "Favorite your preferred shows.",
+        "text": "Bookmark the shows you like.",
         "color": "#8b0019"
       },
       {
@@ -83,7 +83,7 @@
       {
         "uid": "favorites",
         "title": "Favorites",
-        "text": "Favorite your prefered shows.",
+        "text": "Bookmark the shows you like.",
         "color": "#8b0019"
       },
       {
@@ -95,7 +95,7 @@
       {
         "uid": "account",
         "title": "Account",
-        "text": "With an account you can find your favorites and be notified on another device.",
+        "text": "Find your favorite shows on any of your devices.",
         "color": "#c9002b"
       }
     ]
@@ -107,7 +107,7 @@
       {
         "uid": "watch_later",
         "title": "Watch later",
-        "text": "Bookmark a content to comsume it later.",
+        "text": "Save any content to watch it at a later time.",
         "color": "#af001d"
       }]
   }
@@ -119,13 +119,13 @@
       {
         "uid": "watch_later",
         "title": "Watch later",
-        "text": "Bookmark a content to comsume it later.",
+        "text": "Save any content to watch it at a later time.",
         "color": "#af001d"
       },
       {
         "uid": "account",
         "title": "Account",
-        "text": "With an account you can find your contents on another device.",
+        "text": "Watch the content later on any of your devices.",
         "color": "#c9002b"
       }
     ]
