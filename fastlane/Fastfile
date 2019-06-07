@@ -195,13 +195,6 @@ platform :ios do
     hockey_public_identifier = options[:hockey_public_identifier]
     hockey_api_token = options[:hockey_api_token]
 
-    # Remove dependency with UIImagePickerController and NSPhotoLibraryUsageDescription AppStore rejection
-    carthage(
-      command: "build",
-      platform: "iOS",
-      configuration: "ReleaseDefault HockeySDK-iOS"
-    )
-
     build_lane(
       configuration: "AppStore",
       scheme: scheme,
