@@ -285,10 +285,10 @@
 "Notifications have been enabled for %@" = "Les notifications ont été activées pour %@";
 
 /* Subscription label when notification enabled in the show view */
-"Notified" = "Notified";
+"Notified" = "Notifié";
 
 /* Subscription label to be notified in the show view */
-"Notify me" = "Notify me";
+"Notify me" = "Être notifié";
 
 /* Title of the button displayed at the end of an onboarding
    Title of the button when the user subscribed to all TV and radio shows */
