@@ -37,5 +37,5 @@
   "continuousPlaybackBackgroundTransitionDuration": 0,
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
-  "hiddenOnboardings": "history"
+  "hiddenOnboardings": "favorites,resume_playback,watch_later"
 }

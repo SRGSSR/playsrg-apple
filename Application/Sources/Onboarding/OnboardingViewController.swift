@@ -193,11 +193,11 @@ import SRGAppearance
     }
     
     @IBAction private func close(_ sender: UIButton) {
-        if (self.onboarding.uid == "subscription") {
+        if (self.onboarding.uid == "favorites" || self.onboarding.uid == "favorites_account") {
             PushService.shared?.presentSystemAlertForPushNotifications()
         }
         self.dismiss(animated: true, completion: {
-            if (self.onboarding.uid == "account" || self.onboarding.uid == "history") {
+            if (self.onboarding.uid == "account") {
                 let playAppDelegate = UIApplication.shared.delegate as! PlayAppDelegate
                 playAppDelegate.sideMenuController.displayMenuHeader(animated: true)
             }

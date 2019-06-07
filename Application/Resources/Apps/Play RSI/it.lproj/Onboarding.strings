@@ -1,3 +1,19 @@
+/* Account onboarding name */
+/* Account onboarding, 1st page title */
+/* Resume playback onboarding, 3rd page title */
+/* Favorites onboarding, 3rd page title */
+/* Watch later onboarding, 2nd page title */
+"Account" = "Account";
+
+/* Account onboarding, 1st page description */
+"Open an account to enable more features." = "Aprire un account per attivare altre funzioni.";
+
+/* Account onboarding, 2nd page title */
+"Benefits" = "Benefits";
+
+/* Account onboarding, 2nd page description */
+"Find your content and resume playback on any of your devices." = "Find your content and resume playback on any of your devices.";
+
 /* Resume playback onboarding name */
 /* Resume playback onboarding, 1st page title */
 "Resume playback" = "Riprendere la riproduzione";
@@ -5,45 +21,37 @@
 /* Resume playback onboarding, 1st page description */
 "When reopening a content previously watched, playback resumes where you left off." = "Riaprendo un contenuto scelto in precedenza, la riproduzione viene riavviata da dove era stata interrotta.";
 
-/* Subscriptions onboarding name */
-"Subscriptions" = "Abbonamenti";
-
-/* Subscriptions onboarding, 1st page title */
-"Subscribe to the shows you like" = "Abbonati ai programmi che preferisci";
-
-/* Subscriptions onboarding, 1st page description */
-"Use the bell icon to receive show notifications." = "Premi l'icona \"campanella\" per ricevere la notifica alla pubblicazione del programma.";
-
-/* Subscriptions onboarding, 2nd page title */
-"Receive notifications" = "Ricevi le notifiche";
-
-/* Subscriptions onboarding, 2nd page description */
-"You will be notified when a new episode is available." = "Riceverai una notifica ogni volta che un nuovo episodio sarà disponibile.";
-
-/* Subscriptions onboarding, 3rd page title */
-"Manage your subscriptions" = "Gestisci i tuoi abbonamenti";
-
-/* Subscriptions onboarding, 3rd page description */
-"Add or cancel subscriptions at any time." = "Aggiungi o togli in ogni momento abbonamenti a programmi preferiti.";
-
-/* History onboarding name */
-/* History onboarding, 1st page title */
-/* Account onboarding, 3rd page title */
+/* Resume playback onboarding, 2nd page title */
 "History" = "Cronologia";
 
-/* History onboarding, 1st page description */
-/* Account onboarding, 3rd page description */
+/* Resume playback onboarding, 2nd page description */
 "Access your playback history." = "Accedere alla cronologia di riproduzione.";
 
-/* Account onboarding name */
-/* Account onboarding, 1st page title */
-"Account" = "Account";
+/* Resume playback onboarding, 3rd page description */
+"Resume playback on any of your devices." = "Resume playback on any of your devices.";
 
-/* Account onboarding, 1st page description */
-"Open an account to enable more features." = "Aprire un account per attivare altre funzioni.";
+/* Favorites onboarding name */
+/* Favorites onboarding, 1st page title */
+"Favorites" = "Preferiti";
 
-/* Account onboarding, 2nd page title */
-"Synchronize playback" = "Sincronizzare la riproduzione";
+/* Favorites onboarding, 1st page description */
+"Bookmark the shows you like." = "Bookmark the shows you like.";
 
-/* Account onboarding, 2nd page description */
-"With an account you can resume playback on another device." = "Con un account è possibile riprendere la riproduzione su un altro dispositivo.";
+/* Favorites onboarding, 2nd page title */
+"Receive notifications" = "Ricevi le notifiche";
+
+/* Favorites onboarding, 2nd page description */
+"You will be notified when a new episode is available." = "Riceverai una notifica ogni volta che un nuovo episodio sarà disponibile.";
+
+/* Favorites onboarding, 3rd page description */
+"Find your favorite shows on any of your devices." = "Find your favorite shows on any of your devices.";
+
+/* Watch later onboarding name */
+/* Watch later onboarding, 1st page title */
+"Watch later" = "Guardare dopo";
+
+/* Watch later onboarding, 1st page description */
+"Save any content to watch it at a later time." = "Save any content to watch it at a later time.";
+
+/* Watch later onboarding, 2nd page description */
+"Watch the content later on any of your devices." = "Watch the content later on any of your devices.";

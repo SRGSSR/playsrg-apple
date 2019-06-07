@@ -68,4 +68,12 @@ open class SwiftMessagesBridge : NSObject {
         //         UIApplication instance)
         SwiftMessages.show(config: config, view: messageView)
     }
+    
+    /**
+    *  Hide all notification messages.
+    *
+    */
+    @objc static func hideAll() {
+        SwiftMessages.hideAll()
+    }
 }

@@ -61,6 +61,11 @@ static NSString *BannerShortenedName(NSString *name);
     [SwiftMessagesBridge show:message accessibilityPrefix:accessibilityPrefix image:image viewController:viewController backgroundColor:backgroundColor foregroundColor:foregroundColor sticky:sticky];
 }
 
++ (void)hideAll
+{
+    [SwiftMessagesBridge hideAll];
+}
+
 @end
 
 @implementation Banner (Convenience)

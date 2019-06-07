@@ -543,6 +543,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (BOOL)accessibilityPerformEscape
 {
     [self dismissViewControllerAnimated:YES completion:^{
+        [Banner hideAll]; // Avoids view retain, and video playback.
         [StoreReview requestReview];
     }];
     return YES;
@@ -1095,7 +1096,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     BOOL isFavorite = FavoritesContainsShow(show);
     [self.favoriteButton setImage:isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"] forState:UIControlStateNormal];
     
-    self.favoriteButton.accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite show removal label") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite show creation label");
+    self.favoriteButton.accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite show label when in favorites, in the player view") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite show label when not in favorites, in the player view");
 }
 
 - (void)updateliveAccessViewContentForMediaType:(SRGMediaType)mediaType force:(BOOL)force
@@ -1713,6 +1714,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (IBAction)close:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:^{
+        [Banner hideAll]; // Avoids view retain, and video playback.
         [StoreReview requestReview];
     }];
 }
@@ -1737,6 +1739,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 // whether the transition ended or was cancelled
                 self.interactiveTransition = nil;
                 
+                [Banner hideAll]; // Avoids view retain, and video playback.
                 [StoreReview requestReview];
             }];
             break;

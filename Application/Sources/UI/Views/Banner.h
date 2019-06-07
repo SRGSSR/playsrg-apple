@@ -43,6 +43,11 @@ typedef NS_ENUM(NSInteger, BannerStyle) {
  */
 + (void)showWithStyle:(BannerStyle)style message:(nullable NSString *)message image:(nullable UIImage *)image sticky:(BOOL)sticky inViewController:(nullable UIViewController *)viewController;
 
+/**
+ *  Hide all banners.
+ */
++ (void)hideAll;
+
 @end
 
 @interface Banner (Convenience)
