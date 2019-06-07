@@ -77,9 +77,9 @@ PODS:
   - nanopb/encode (0.3.901)
   - PPBadgeView (2.1.0)
   - Protobuf (3.6.1)
-  - SwiftMessages (6.0.2):
-    - SwiftMessages/App (= 6.0.2)
-  - SwiftMessages/App (6.0.2)
+  - SwiftMessages (7.0.0):
+    - SwiftMessages/App (= 7.0.0)
+  - SwiftMessages/App (7.0.0)
   - UrbanAirship-iOS-SDK (9.4.0)
 
 DEPENDENCIES:
@@ -92,7 +92,7 @@ DEPENDENCIES:
   - InAppSettingsKit (~> 2.10.0)
   - MGSwipeTableCell (~> 1.6.8)
   - PPBadgeView (~> 2.1.0)
-  - SwiftMessages (~> 6.0.2)
+  - SwiftMessages (~> 7.0.0)
   - UrbanAirship-iOS-SDK (= 9.4.0)
 
 SPEC REPOS:
@@ -137,9 +137,9 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   PPBadgeView: 167006b3497ebb6222942313a6b827e79791aae6
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  SwiftMessages: 8b3cc68dba2f1c91aac1a74c90b10287aac35371
+  SwiftMessages: a952f7a9103d9aeab93730a2861d2d8fcdd8758f
   UrbanAirship-iOS-SDK: 25f155c0142b62e4a94ec21093d65c6e128f5213
 
-PODFILE CHECKSUM: 47ca0a7438631315321b57cedf90ee810216cdad
+PODFILE CHECKSUM: 2e126e9820d0309667fbe2a3aa6511c0c2f28e77
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.1

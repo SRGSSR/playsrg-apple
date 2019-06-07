@@ -13,7 +13,7 @@ abstract_target 'PlaySRG' do
   pod 'InAppSettingsKit', '~> 2.10.0'
   pod 'MGSwipeTableCell', '~> 1.6.8'
   pod 'PPBadgeView', '~> 2.1.0'
-  pod 'SwiftMessages', '~> 6.0.2'
+  pod 'SwiftMessages', '~> 7.0.0'
   pod 'UrbanAirship-iOS-SDK', '9.4.0'
   
   target 'Play SRF' do

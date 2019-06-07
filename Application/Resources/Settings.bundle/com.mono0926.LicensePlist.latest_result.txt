@@ -400,23 +400,23 @@ version: 3.6.1
 
 name: SwiftMessages, nameSpecified: 
 body: Copyright (c) 2016 S…
-version: 6.0.2
+version: 7.0.0
 
 name: SwiftMessages, nameSpecified: 
 body: Copyright (c) 2016 S…
-version: 6.0.2
+version: 7.0.0
 
 name: SwiftMessages, nameSpecified: 
 body: Copyright (c) 2016 S…
-version: 6.0.2
+version: 7.0.0
 
 name: SwiftMessages, nameSpecified: 
 body: Copyright (c) 2016 S…
-version: 6.0.2
+version: 7.0.0
 
 name: SwiftMessages, nameSpecified: 
 body: Copyright (c) 2016 S…
-version: 6.0.2
+version: 7.0.0
 
 name: UrbanAirship-iOS-SDK, nameSpecified: 
 body: Copyright 2017 Urban…
