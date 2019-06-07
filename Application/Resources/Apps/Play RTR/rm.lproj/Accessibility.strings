@@ -13,7 +13,7 @@
 "Add to favorites" = "Agiunscher a favurits";
 
 /* Media watch later creation label */
-"Add to the watch later list" = "Add to the watch later list";
+"Add to the watch later list" = "Agiuntar a la glista per guardar pli tard";
 
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Mussar tut \"%@\"";
@@ -28,13 +28,13 @@
 "Delete" = "Stizzar";
 
 /* Show unsubscription label */
-"Disable notifications for show" = "Disable notifications for show";
+"Disable notifications for show" = "Deactivar las notificaziuns per mussar";
 
 /* A download button label */
 "Download" = "Telechargiar";
 
 /* Show subscription label */
-"Enable notifications for show" = "Enable notifications for show";
+"Enable notifications for show" = "Activar notificaziuns per mussar";
 
 /* Introductory title for error notifications */
 "Error" = "Errur";
@@ -102,7 +102,7 @@
 "Remove from favorites" = "Allontanar da favurits";
 
 /* Media watch later removal label */
-"Remove from the watch later list" = "Remove from the watch later list";
+"Remove from the watch later list" = "pigliar davent da la glista \"Guardar pli tard\"";
 
 /* A download button label */
 "Retry download" = "Turnar da telechargiar";

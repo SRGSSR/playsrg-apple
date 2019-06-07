@@ -1,11 +1,11 @@
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been added to \"Watch later\"" = "%@ has been added to \"Watch later\"";
+"%@ has been added to \"Watch later\"" = "%@ è vegnì aschuntà a \"guardar pli tard\"";
 
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
 "%@ has been added to favorites" = "%@ è vegnì aschuntà a mes favurits";
 
 /* Message displayed at the top of the screen when removing an item from the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been removed from \"Watch later\"" = "%@ has been removed from \"Watch later\"";
+"%@ has been removed from \"Watch later\"" = "%@ è vegnì allontanà da \"guardar pli tard\"";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
 "%@ has been removed from favorites" = "%@ è vegnì allontanà da mes favurits";
@@ -27,7 +27,7 @@
 
 /* Button label to add a media to the watch later list, from the media long-press menu
    Button label to add a media to the watch later list, from the media preview window */
-"Add to \"Watch later\"" = "Add to \"Watch later\"";
+"Add to \"Watch later\"" = "Agiuntar a \"guardar pli tard\"";
 
 /* Button label to add a download from the media long-press menu
    Button label to add a download from the media preview window */
@@ -251,7 +251,7 @@
 "Next" = "Proxim";
 
 /* Text displayed when no media added to the watch later list */
-"No content" = "No content";
+"No content" = "Nagin cuntegn";
 
 /* Text displayed when no downloads are available */
 "No downloads" = "Naginas telechargiadas";
@@ -279,16 +279,16 @@
 "Notifications" = "Notificaziuns";
 
 /* Message at the top of the screen displayed when disabling push notifications. Quotes around the content placeholder are managed by the application. */
-"Notifications have been disabled for %@" = "Notifications have been disabled for %@";
+"Notifications have been disabled for %@" = "Las notificaziuns èn deactivadas per %@";
 
 /* Message displayed at the top of the screen when enabling push notifications. Quotes around the content placeholder managed by the application. */
-"Notifications have been enabled for %@" = "Notifications have been enabled for %@";
+"Notifications have been enabled for %@" = "Las notificaziuns èn activadas per %@";
 
 /* Subscription label when notification enabled in the show view */
-"Notified" = "Notified";
+"Notified" = "Notifitgà";
 
 /* Subscription label to be notified in the show view */
-"Notify me" = "Notify me";
+"Notify me" = "Trametta messadi a mai";
 
 /* Title of the button displayed at the end of an onboarding
    Title of the button when the user subscribed to all TV and radio shows */
@@ -366,7 +366,7 @@
 "Regional radios" = "Radios regiunals";
 
 /* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
-"Remove all content" = "Remove all content";
+"Remove all content" = "Piglia davent tut il cuntegn";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete all download items */
 "Remove all downloads" = "Allontanar tut las telechargiadas";
@@ -375,7 +375,7 @@
 "Remove all favorites" = "Allontanar tut ils favurits";
 
 /* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list */
-"Remove content" = "Remove content";
+"Remove content" = "Pigliar davent cuntegn";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete a download */
 "Remove download" = "Allontanar telechargiada";
@@ -388,7 +388,7 @@
 
 /* Button label to remove a media from the watch later list, from the media long-press menu
    Button label to remove a media from the watch later list, from the media preview window */
-"Remove from \"Watch later\"" = "Remove from \"Watch later\"";
+"Remove from \"Watch later\"" = "Pigliar davent da \"guardar pli tard\"";
 
 /* Button label to remove a download from the media long-press menu
    Button label to remove a download from the media preview window */
@@ -526,7 +526,7 @@
 
 /* Label in the left menu to present the watch later list
    Title displayed at the top of the watch later list screen */
-"Watch later" = "Watch later";
+"Watch later" = "Guardar pli tard";
 
 /* Label used on the home page to present scheduled livestream medias. Only on test versions. */
 "Web livestreams" = "Web direct";
@@ -538,7 +538,7 @@
 "You can manage this feature in the settings at any time." = "Vus paudais puspe activar questa funcziun.";
 
 /* Hint displayed when no media added to the watch later list and the device supports 3D touch */
-"You can press on a content to add it to this watch later list" = "You can press on a content to add it to this watch later list";
+"You can press on a content to add it to this watch later list" = "Vus pudais smatgar sin in cutegn per l'agiuntar a la glista per guardar pli tard";
 
 /* Hint displayed when no favorites are available and the device supports 3D touch */
 "You can press on an item to add it to favorites" = "Smatgar sin in element per aschuntar a Vos favurits";
@@ -547,7 +547,7 @@
 "You can press on an item to download it (not all items can be downloaded)" = "Smatgar sin in element per telechargiar quel (betg tut po vegnir telechargià)";
 
 /* Hint displayed when no media added to the watch later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to this watch later list" = "You can tap and hold a content to add it to this watch later list";
+"You can tap and hold a content to add it to this watch later list" = "Vus pudais smatgar e tegnair in cutegn per l'agiuntar a questa glista per guardar pli tard";
 
 /* Hint displayed when no favorites are available and the device does not support 3D touch */
 "You can tap and hold an item to add it to favorites" = "Vus pudais smatgar e tegnair Voss det sin in element per metter en Voss favurits";
