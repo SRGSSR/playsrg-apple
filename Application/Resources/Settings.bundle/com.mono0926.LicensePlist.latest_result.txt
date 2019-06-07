@@ -348,6 +348,26 @@ name: nanopb, nameSpecified:
 body: Copyright (c) 2011 P…
 version: 0.3.901
 
+name: paper-onboarding, nameSpecified: 
+body: The MIT License (MIT…
+version: 6.1.3
+
+name: paper-onboarding, nameSpecified: 
+body: The MIT License (MIT…
+version: 6.1.3
+
+name: paper-onboarding, nameSpecified: 
+body: The MIT License (MIT…
+version: 6.1.3
+
+name: paper-onboarding, nameSpecified: 
+body: The MIT License (MIT…
+version: 6.1.3
+
+name: paper-onboarding, nameSpecified: 
+body: The MIT License (MIT…
+version: 6.1.3
+
 name: PPBadgeView, nameSpecified: 
 body: MIT License
 
@@ -438,49 +458,47 @@ name: UrbanAirship-iOS-SDK, nameSpecified:
 body: Copyright 2017 Urban…
 version: 9.4.0
 
-name: CoconutKit, nameSpecified: , owner: defagos, version: c82d2b9
+name: CoconutKit, nameSpecified: , owner: defagos, version: 3.3.7
 
 name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 5.8.4
 
-name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: 14b19b3
+name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
 
-name: FXReachability, nameSpecified: , owner: SRGSSR, version: 6dbc63c
+name: FXReachability, nameSpecified: , owner: SRGSSR, version: 1.3.2_srg3
 
 name: libextobjc, nameSpecified: , owner: SRGSSR, version: 0.6_srg1
 
-name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: fb680a6
+name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: 1.0_srg3
 
 name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
-name: Masonry, nameSpecified: , owner: SRGSSR, version: 07e577b
+name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: paper-onboarding, nameSpecified: , owner: SRGSSR, version: 78f3f00
+name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 3.7
 
-name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 7e75b75
+name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 1.1.10
 
-name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 7b7c51e
-
-name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 3536b6f
+name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 6.5.1
 
 name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
-name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 206b090
+name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: b26b372
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 1.14
 
-name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: ba81171
+name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 1.0.9
 
-name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: a4f363f
+name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 2.6
 
-name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 1b14b62
+name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
-name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 3b3d3d3
+name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 1.1
 
 name: tagcommander-ios, nameSpecified: , owner: SRGSSR, version: 4.3.1_4.3.1
 
-name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: b0f3c75
+name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: v2.1.2_srg1
 
-name: YYWebImage, nameSpecified: , owner: SRGSSR, version: bbbf16c
+name: YYWebImage, nameSpecified: , owner: SRGSSR, version: 1.0.5_srg1
 
 add-version-numbers: true
 

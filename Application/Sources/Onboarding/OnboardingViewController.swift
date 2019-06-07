@@ -5,7 +5,7 @@
 //
 
 import Masonry
-import PaperOnboarding
+import paper_onboarding
 import SRGAppearance
 
 @objc(OnboardingViewController) public class OnboardingViewController : BaseViewController, PaperOnboardingDataSource, PaperOnboardingDelegate {

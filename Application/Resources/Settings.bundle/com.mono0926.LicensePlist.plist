@@ -24,7 +24,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/CoconutKit</string>
 			<key>Title</key>
-			<string>CoconutKit (c82d2b9)</string>
+			<string>CoconutKit (3.3.7)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -40,7 +40,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/DZNEmptyDataSet</string>
 			<key>Title</key>
-			<string>DZNEmptyDataSet (14b19b3)</string>
+			<string>DZNEmptyDataSet (v1.8.1_srg1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -104,7 +104,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FXReachability</string>
 			<key>Title</key>
-			<string>FXReachability (6dbc63c)</string>
+			<string>FXReachability (1.3.2_srg3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -160,7 +160,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/MAKVONotificationCenter</string>
 			<key>Title</key>
-			<string>MAKVONotificationCenter (fb680a6)</string>
+			<string>MAKVONotificationCenter (1.0_srg3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -176,7 +176,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Masonry</string>
 			<key>Title</key>
-			<string>Masonry (07e577b)</string>
+			<string>Masonry (v1.1.0_srg1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -200,7 +200,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/paper-onboarding</string>
 			<key>Title</key>
-			<string>paper-onboarding (78f3f00)</string>
+			<string>paper-onboarding (6.1.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -224,7 +224,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-ios</string>
 			<key>Title</key>
-			<string>srganalytics-ios (7e75b75)</string>
+			<string>srganalytics-ios (3.7)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -232,7 +232,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgappearance-ios</string>
 			<key>Title</key>
-			<string>srgappearance-ios (7b7c51e)</string>
+			<string>srgappearance-ios (1.1.10)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -240,7 +240,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-ios</string>
 			<key>Title</key>
-			<string>srgdataprovider-ios (3536b6f)</string>
+			<string>srgdataprovider-ios (6.5.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -256,7 +256,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-ios</string>
 			<key>Title</key>
-			<string>srgidentity-ios (206b090)</string>
+			<string>srgidentity-ios (1.0.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -264,7 +264,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-ios</string>
 			<key>Title</key>
-			<string>srgletterbox-ios (b26b372)</string>
+			<string>srgletterbox-ios (1.14)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -272,7 +272,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srglogger-ios</string>
 			<key>Title</key>
-			<string>srglogger-ios (ba81171)</string>
+			<string>srglogger-ios (1.0.9)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -280,7 +280,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-ios</string>
 			<key>Title</key>
-			<string>srgmediaplayer-ios (a4f363f)</string>
+			<string>srgmediaplayer-ios (2.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -288,7 +288,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgnetwork-ios</string>
 			<key>Title</key>
-			<string>srgnetwork-ios (1b14b62)</string>
+			<string>srgnetwork-ios (1.0.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -296,7 +296,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srguserdata-ios</string>
 			<key>Title</key>
-			<string>srguserdata-ios (3b3d3d3)</string>
+			<string>srguserdata-ios (1.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -312,7 +312,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/UICKeyChainStore</string>
 			<key>Title</key>
-			<string>UICKeyChainStore (b0f3c75)</string>
+			<string>UICKeyChainStore (v2.1.2_srg1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -328,7 +328,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/YYWebImage</string>
 			<key>Title</key>
-			<string>YYWebImage (bbbf16c)</string>
+			<string>YYWebImage (1.0.5_srg1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

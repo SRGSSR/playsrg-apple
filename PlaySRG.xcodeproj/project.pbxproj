@@ -910,11 +910,6 @@
 		6F5392AB2248CF740002BF87 /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392A82248CF470002BF87 /* UICKeyChainStore.framework */; };
 		6F5392AC2248CF8C0002BF87 /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392A82248CF470002BF87 /* UICKeyChainStore.framework */; };
 		6F5392AD2248CF9D0002BF87 /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392A82248CF470002BF87 /* UICKeyChainStore.framework */; };
-		6F5392B52248D3500002BF87 /* PaperOnboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392B42248D34F0002BF87 /* PaperOnboarding.framework */; };
-		6F5392B62248D3820002BF87 /* PaperOnboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392B42248D34F0002BF87 /* PaperOnboarding.framework */; };
-		6F5392B72248D3950002BF87 /* PaperOnboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392B42248D34F0002BF87 /* PaperOnboarding.framework */; };
-		6F5392B82248D3A90002BF87 /* PaperOnboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392B42248D34F0002BF87 /* PaperOnboarding.framework */; };
-		6F5392B92248D3BE0002BF87 /* PaperOnboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392B42248D34F0002BF87 /* PaperOnboarding.framework */; };
 		6F5392BF2248DB6F0002BF87 /* YYWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392BE2248DB6F0002BF87 /* YYWebImage.framework */; };
 		6F5392C02248DB850002BF87 /* YYWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392BE2248DB6F0002BF87 /* YYWebImage.framework */; };
 		6F5392C12248DB960002BF87 /* YYWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392BE2248DB6F0002BF87 /* YYWebImage.framework */; };
@@ -1900,7 +1895,6 @@
 		6F4EA1411EE0351B00BEC4DA /* NSBundle+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+PlaySRG.h"; sourceTree = "<group>"; };
 		6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/Static/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		6F5392A82248CF470002BF87 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UICKeyChainStore.framework; path = Carthage/Build/iOS/Static/UICKeyChainStore.framework; sourceTree = "<group>"; };
-		6F5392B42248D34F0002BF87 /* PaperOnboarding.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PaperOnboarding.framework; path = Carthage/Build/iOS/Static/PaperOnboarding.framework; sourceTree = "<group>"; };
 		6F5392BE2248DB6F0002BF87 /* YYWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YYWebImage.framework; path = Carthage/Build/iOS/Static/YYWebImage.framework; sourceTree = "<group>"; };
 		6F5392DA2248FF490002BF87 /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = Carthage/Build/iOS/Static/Masonry.framework; sourceTree = "<group>"; };
 		6F556B361DDC419800B5DEA2 /* SettingsBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsBaseViewController.h; sourceTree = "<group>"; };
@@ -2096,7 +2090,6 @@
 			files = (
 				6F5392DB2248FF4A0002BF87 /* Masonry.framework in Frameworks */,
 				6F5392BF2248DB6F0002BF87 /* YYWebImage.framework in Frameworks */,
-				6F5392B52248D3500002BF87 /* PaperOnboarding.framework in Frameworks */,
 				6F5392A92248CF470002BF87 /* UICKeyChainStore.framework in Frameworks */,
 				6F5392992248C33E0002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
 				6F340F45220DA7E900778CA3 /* SRGUserData.framework in Frameworks */,
@@ -2132,7 +2125,6 @@
 			files = (
 				6F5392DC2248FF620002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C02248DB850002BF87 /* YYWebImage.framework in Frameworks */,
-				6F5392B62248D3820002BF87 /* PaperOnboarding.framework in Frameworks */,
 				6F5392AA2248CF5B0002BF87 /* UICKeyChainStore.framework in Frameworks */,
 				6F53929A2248C35B0002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
 				6F340F46220DA7FC00778CA3 /* SRGUserData.framework in Frameworks */,
@@ -2168,7 +2160,6 @@
 			files = (
 				6F5392DD2248FF790002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C12248DB960002BF87 /* YYWebImage.framework in Frameworks */,
-				6F5392B72248D3950002BF87 /* PaperOnboarding.framework in Frameworks */,
 				6F5392AB2248CF740002BF87 /* UICKeyChainStore.framework in Frameworks */,
 				6F53929B2248C36C0002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
 				6F340F47220DA80B00778CA3 /* SRGUserData.framework in Frameworks */,
@@ -2204,7 +2195,6 @@
 			files = (
 				6F5392DE2248FF970002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C22248DBA70002BF87 /* YYWebImage.framework in Frameworks */,
-				6F5392B82248D3A90002BF87 /* PaperOnboarding.framework in Frameworks */,
 				6F5392AC2248CF8C0002BF87 /* UICKeyChainStore.framework in Frameworks */,
 				6F53929C2248C3810002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
 				6F340F48220DA81900778CA3 /* SRGUserData.framework in Frameworks */,
@@ -2240,7 +2230,6 @@
 			files = (
 				6F5392DF2248FFAB0002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C32248DBB80002BF87 /* YYWebImage.framework in Frameworks */,
-				6F5392B92248D3BE0002BF87 /* PaperOnboarding.framework in Frameworks */,
 				6F5392AD2248CF9D0002BF87 /* UICKeyChainStore.framework in Frameworks */,
 				6F53929D2248C3940002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
 				6F340F49220DA83300778CA3 /* SRGUserData.framework in Frameworks */,
@@ -3218,7 +3207,6 @@
 				6F0C992B2121F9E100073AB6 /* MAKVONotificationCenter.framework */,
 				E67BB6971D3E640C00E1FEA3 /* Mantle.framework */,
 				6F5392DA2248FF490002BF87 /* Masonry.framework */,
-				6F5392B42248D34F0002BF87 /* PaperOnboarding.framework */,
 				6F0C99252121F9E000073AB6 /* SRGAnalytics_DataProvider.framework */,
 				080731B5222453EC00AF9C83 /* SRGAnalytics_Identity.framework */,
 				6F0C99282121F9E000073AB6 /* SRGAnalytics_MediaPlayer.framework */,
