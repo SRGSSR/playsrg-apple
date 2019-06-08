@@ -11,6 +11,8 @@
 #import "UIWindow+PlaySRG.h"
 
 #import <FXReachability/FXReachability.h>
+#import <InAppSettingsKit/IASKSettingsReader.h>
+#import <InAppSettingsKit/IASKSpecifier.h>
 #import <libextobjc/libextobjc.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 
@@ -218,4 +220,24 @@ void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo *menuItemInf
                                                 forKey:PlaySRGSettingLastOpenHomepageUid];
         [NSUserDefaults.standardUserDefaults synchronize];
     }
+}
+
+NSURL * ApplicationSettingServiceURLForTitle(NSString *title)
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    IASKSettingsReader *settingsReader = [[IASKSettingsReader alloc] initWithFile:@"Root.inApp.server"];
+    IASKSpecifier *specifier = [settingsReader specifierForKey:PlaySRGSettingServiceURL];
+    NSInteger index = [[specifier multipleTitles] indexOfObjectPassingTest:^BOOL(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        return [obj caseInsensitiveCompare:title] == NSOrderedSame;
+    }];
+    if (index != NSNotFound) {
+        NSString *URLString = [[specifier multipleValues] objectAtIndex:index];
+        return [NSURL URLWithString:URLString];
+    }
+    else {
+        return nil;
+    }
+#else
+    return nil;
+#endif
 }

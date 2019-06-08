@@ -261,16 +261,18 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     if ([URLComponents.host.lowercaseString isEqualToString:@"open"]) {
         
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-        NSString *serviceURLString = [self valueFromURLComponents:URLComponents withParameterName:@"service-url"];
-        NSURL *serviceURL = (serviceURLString) ? [NSURL URLWithString:serviceURLString] : nil;
-        if (serviceURL && ! [serviceURL isEqual:ApplicationSettingServiceURL()]) {
-            ApplicationSetSettingServiceURL(serviceURL);
-            
-            [Banner showWithStyle:BannerStyleInfo
-                          message:NSLocalizedString(@"Application server changed", @"Notification message when the server URL changed due to a scheme URL.")
-                            image:[UIImage imageNamed:@"settings-22"]
-                           sticky:NO
-                 inViewController:nil];
+        NSString *server = [self valueFromURLComponents:URLComponents withParameterName:@"server"];
+        if (server) {
+            NSURL *serviceURL = ApplicationSettingServiceURLForTitle(server);
+            if (serviceURL && ! [serviceURL isEqual:ApplicationSettingServiceURL()]) {
+                ApplicationSetSettingServiceURL(serviceURL);
+                
+                [Banner showWithStyle:BannerStyleInfo
+                              message:[NSString stringWithFormat:NSLocalizedString(@"Application server changed to %@", @"Notification message when the server URL changed due to a scheme URL."), server.capitalizedString]
+                                image:[UIImage imageNamed:@"settings-22"]
+                               sticky:NO
+                     inViewController:nil];
+            }
         }
 #endif
         

@@ -50,10 +50,10 @@ OBJC_EXPORT SRGQuality ApplicationSettingPreferredQuality(void);
 OBJC_EXPORT SRGLetterboxPlaybackSettings *ApplicationSettingPlaybackSettings(void);
 
 OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
+OBJC_EXPORT void ApplicationSetSettingServiceURL(NSURL * _Nullable serviceURL);
+
 OBJC_EXPORT NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void);
 OBJC_EXPORT NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void);
-
-OBJC_EXPORT void ApplicationSetSettingServiceURL(NSURL * _Nullable serviceURL);
 
 OBJC_EXPORT NSString * _Nullable ApplicationSettingSelectedLiveStreamURNForChannelUid(NSString * _Nullable channelUid);
 OBJC_EXPORT void ApplicationSettingSetSelectedLiveStreamURNForChannelUid(NSString * channelUid, NSString * _Nullable mediaURN);
@@ -62,5 +62,7 @@ OBJC_EXPORT SRGMedia * _Nullable ApplicationSettingSelectedLivestreamMediaForCha
 
 OBJC_EXPORT MenuItemInfo * ApplicationSettingLastOpenHomepageMenuItemInfo(void);
 OBJC_EXPORT void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo * _Nullable menuItem);
+
+OBJC_EXPORT NSURL * _Nullable ApplicationSettingServiceURLForTitle(NSString *title);
 
 NS_ASSUME_NONNULL_END
