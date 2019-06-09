@@ -222,13 +222,13 @@ void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo *menuItemInf
     }
 }
 
-NSURL * ApplicationSettingServiceURLForTitle(NSString *title)
+NSURL * ApplicationSettingServiceURLForKey(NSString *key)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     IASKSettingsReader *settingsReader = [[IASKSettingsReader alloc] initWithFile:@"Root.inApp.server"];
     IASKSpecifier *specifier = [settingsReader specifierForKey:PlaySRGSettingServiceURL];
     NSInteger index = [[specifier multipleTitles] indexOfObjectPassingTest:^BOOL(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        return [obj caseInsensitiveCompare:title] == NSOrderedSame;
+        return [obj caseInsensitiveCompare:key] == NSOrderedSame;
     }];
     if (index != NSNotFound) {
         NSString *URLString = [[specifier multipleValues] objectAtIndex:index];

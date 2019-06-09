@@ -263,7 +263,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
         NSString *server = [self valueFromURLComponents:URLComponents withParameterName:@"server"];
         if (server) {
-            NSURL *serviceURL = ApplicationSettingServiceURLForTitle(server);
+            NSURL *serviceURL = ApplicationSettingServiceURLForKey(server);
             if (serviceURL && ! [serviceURL isEqual:ApplicationSettingServiceURL()]) {
                 ApplicationSetSettingServiceURL(serviceURL);
                 

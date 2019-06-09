@@ -63,6 +63,6 @@ OBJC_EXPORT SRGMedia * _Nullable ApplicationSettingSelectedLivestreamMediaForCha
 OBJC_EXPORT MenuItemInfo * ApplicationSettingLastOpenHomepageMenuItemInfo(void);
 OBJC_EXPORT void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo * _Nullable menuItem);
 
-OBJC_EXPORT NSURL * _Nullable ApplicationSettingServiceURLForTitle(NSString *title);
+OBJC_EXPORT NSURL * _Nullable ApplicationSettingServiceURLForKey(NSString *key);
 
 NS_ASSUME_NONNULL_END
