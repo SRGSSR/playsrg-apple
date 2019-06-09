@@ -20,7 +20,7 @@
   "topicSectionsWithSubtopics": "latest",
   "minimumSocialViewCount": 50,
   "impressumURL": "http://www.srf.ch/play/tv/hilfe",
-  "termsAndConditionsURL": "https://www.srf.ch/hilfe/rechtliches/datenschutzerklaerung",
+  "dataProtectionURL": "https://www.srf.ch/hilfe/rechtliches/datenschutzerklaerung",
   "tvMenuItems": "showAZ,byDate",
   "radioMenuItems": "showAZ",
   "whatsNewURL": "https://pastebin.com/raw/nmGqYFny",
