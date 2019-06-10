@@ -9,10 +9,10 @@
 "Open an account to enable more features." = "Aprire un account per attivare altre funzioni.";
 
 /* Account onboarding, 2nd page title */
-"Benefits" = "Benefits";
+"Benefits" = "I tuoi vantaggi";
 
 /* Account onboarding, 2nd page description */
-"Find your content and resume playback on any of your devices." = "Find your content and resume playback on any of your devices.";
+"Find your content and resume playback on any of your devices." = "Ritrova il tuo contenuto e riprendi a vederlo o ascoltarlo con ogni tuo apparecchio.";
 
 /* Resume playback onboarding name */
 /* Resume playback onboarding, 1st page title */
@@ -28,14 +28,14 @@
 "Access your playback history." = "Accedere alla cronologia di riproduzione.";
 
 /* Resume playback onboarding, 3rd page description */
-"Resume playback on any of your devices." = "Resume playback on any of your devices.";
+"Resume playback on any of your devices." = "Riprendi il playback con ogni tuo apparecchio.";
 
 /* Favorites onboarding name */
 /* Favorites onboarding, 1st page title */
 "Favorites" = "Preferiti";
 
 /* Favorites onboarding, 1st page description */
-"Bookmark the shows you like." = "Bookmark the shows you like.";
+"Bookmark the shows you like." = "Aggiungi un segnalibro al programma che preferisci.";
 
 /* Favorites onboarding, 2nd page title */
 "Receive notifications" = "Ricevi le notifiche";
@@ -44,14 +44,14 @@
 "You will be notified when a new episode is available." = "Riceverai una notifica ogni volta che un nuovo episodio sarà disponibile.";
 
 /* Favorites onboarding, 3rd page description */
-"Find your favorite shows on any of your devices." = "Find your favorite shows on any of your devices.";
+"Find your favorite shows on any of your devices." = "Ritrova i tuoi programmi preferiti su ogni tuo apparecchio.";
 
 /* Watch later onboarding name */
 /* Watch later onboarding, 1st page title */
 "Watch later" = "Guardare dopo";
 
 /* Watch later onboarding, 1st page description */
-"Save any content to watch it at a later time." = "Save any content to watch it at a later time.";
+"Save any content to watch it at a later time." = "Aggiungi un segnalibro per ogni contenuto che desideri guardare o ascoltare più tardi.";
 
 /* Watch later onboarding, 2nd page description */
-"Watch the content later on any of your devices." = "Watch the content later on any of your devices.";
+"Watch the content later on any of your devices." = "Consuma il contenuto più tardi su ogni tuo apparecchio.";
