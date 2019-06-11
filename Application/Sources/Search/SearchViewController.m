@@ -101,12 +101,14 @@
         [rightBarButtonItems addObject:closeBarButtonItem];
     }
     
+#if 0
     // TODO: Icon + hide when no aggregations are available
     UIBarButtonItem *filtersBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filters"
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(editFilters:)];
     [rightBarButtonItems addObject:filtersBarButtonItem];
+#endif
     
     self.navigationItem.rightBarButtonItems = [rightBarButtonItems copy];
 }
