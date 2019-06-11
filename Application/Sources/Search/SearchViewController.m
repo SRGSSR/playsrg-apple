@@ -205,19 +205,6 @@
     [self refresh];
 }
 
-- (void)sendAnalytics
-{
-    // TODO: Always send? Even if empty?
-#if 0
-    NSString *searchText = self.searchBar.text;
-    if (searchText.length >= SearchViewControllerSearchTextMinimumLength) {
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.value = searchText;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSearch labels:labels];
-    }
-#endif
-}
-
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -357,10 +344,6 @@
     // Add a delay for when the user is typing fast
     static NSTimeInterval kTypingSpeedThreshold = 0.3;
     [self performSelector:@selector(search) withObject:nil afterDelay:kTypingSpeedThreshold];
-    
-    // Add a large delay to avoid sending search events when the user is typing fast
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(sendAnalytics) object:nil];
-    [self performSelector:@selector(sendAnalytics) withObject:nil afterDelay:3.];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
