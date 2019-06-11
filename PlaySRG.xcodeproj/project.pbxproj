@@ -4180,7 +4180,6 @@
 				0837CED31D3FDAF900A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				08D0E0EB1E9D29F700AB8298 /* HomeRadioLiveTableViewCell.xib in Resources */,
 				0804916A22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
-				084784D92184DEC600E5A74F /* parse_play_url.js in Resources */,
 				6F7C89D020AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				6F4C0A7C20DCBDD200069A85 /* HomeShowVerticalListTableViewCell.xib in Resources */,
 				6FD2CBC41DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
