@@ -162,7 +162,9 @@ import SRGAppearance
                                   titleColor: .white,
                                   descriptionColor: .white,
                                   titleFont: UIFont.srg_mediumFont(withSize: titleFontSize),
-                                  descriptionFont: UIFont.srg_mediumFont(withSize: subtitleFontSize))
+                                  descriptionFont: UIFont.srg_mediumFont(withSize: subtitleFontSize),
+                                  descriptionLabelPadding: 30.0,
+                                  titleLabelPadding: 15.0)
     }
     
     // MARK: PaperOnboardingDelegate protocol
