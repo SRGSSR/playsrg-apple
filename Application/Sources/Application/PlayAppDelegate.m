@@ -259,6 +259,23 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 {
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     if ([URLComponents.host.lowercaseString isEqualToString:@"open"]) {
+        
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+        NSString *server = [self valueFromURLComponents:URLComponents withParameterName:@"server"];
+        if (server) {
+            NSURL *serviceURL = ApplicationSettingServiceURLForKey(server);
+            if (serviceURL && ! [serviceURL isEqual:ApplicationSettingServiceURL()]) {
+                ApplicationSettingSetServiceURL(serviceURL);
+                
+                [Banner showWithStyle:BannerStyleInfo
+                              message:[NSString stringWithFormat:NSLocalizedString(@"Application server changed to '%@'", @"Notification message when the server URL changed due to a scheme URL."), ApplicationSettingServiceNameForKey(server)]
+                                image:[UIImage imageNamed:@"settings-22"]
+                               sticky:NO
+                     inViewController:nil];
+            }
+        }
+#endif
+        
         NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
         
         NSString *mediaURN = [self valueFromURLComponents:URLComponents withParameterName:@"media"];
