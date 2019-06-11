@@ -6698,7 +6698,7 @@
 			baseConfigurationReference = 6F1EBE1A222EBB7D003E0722 /* Play SRF.appstore.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
-				APP_LINKS_DOMAIN = "applinks:www.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:*.srf.ch";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
@@ -6753,7 +6753,7 @@
 			baseConfigurationReference = 6F1EBE0C222EBB7C003E0722 /* Play RTS.appstore.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
-				APP_LINKS_DOMAIN = "applinks:www.rts.ch";
+				APP_LINKS_DOMAIN = "applinks:*.rts.ch";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
@@ -6808,7 +6808,7 @@
 			baseConfigurationReference = 6F1EBE19222EBB7D003E0722 /* Play RSI.appstore.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
-				APP_LINKS_DOMAIN = "applinks:www.rsi.ch";
+				APP_LINKS_DOMAIN = "applinks:*.rsi.ch";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
@@ -6863,7 +6863,7 @@
 			baseConfigurationReference = 6F1EBE17222EBB7D003E0722 /* Play RTR.appstore.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
-				APP_LINKS_DOMAIN = "applinks:www.rtr.ch";
+				APP_LINKS_DOMAIN = "applinks:*.rtr.ch";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
@@ -6917,7 +6917,7 @@
 			baseConfigurationReference = 6F1EBE1E222EBB7E003E0722 /* Play SWI.appstore.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
-				APP_LINKS_DOMAIN = "applinks:play.swissinfo.ch";
+				APP_LINKS_DOMAIN = "applinks:*.swissinfo.ch";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
