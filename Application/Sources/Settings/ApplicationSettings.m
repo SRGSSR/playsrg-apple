@@ -44,13 +44,14 @@ NSValueTransformer *SettingUserLocationTransformer(void)
 }
 __attribute__((constructor)) static void ApplicationSettingsInit(void)
 {
-    [NSUserDefaults.standardUserDefaults registerDefaults:@{ PlaySRGSettingAlternateRadioHomepageDesignEnabled : @NO,
-                                                             PlaySRGSettingHDOverCellularEnabled : @YES,
-                                                             PlaySRGSettingOriginalImagesOnlyEnabled : @NO,
-                                                             PlaySRGSettingPresenterModeEnabled : @NO,
-                                                             PlaySRGSettingStandaloneEnabled : @NO,
-                                                             PlaySRGSettingAutoplayEnabled : @YES }];
-    [NSUserDefaults.standardUserDefaults synchronize];
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults registerDefaults:@{ PlaySRGSettingAlternateRadioHomepageDesignEnabled : @NO,
+                                      PlaySRGSettingHDOverCellularEnabled : @YES,
+                                      PlaySRGSettingOriginalImagesOnlyEnabled : @NO,
+                                      PlaySRGSettingPresenterModeEnabled : @NO,
+                                      PlaySRGSettingStandaloneEnabled : @NO,
+                                      PlaySRGSettingAutoplayEnabled : @YES }];
+    [userDefaults synchronize];
 }
 
 BOOL ApplicationSettingAlternateRadioHomepageDesignEnabled(void)
@@ -102,15 +103,13 @@ NSURL *ApplicationSettingServiceURL(void)
         completionHandler(YES);
     }, @"SettingServiceURLReset2", nil);
     
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     if (! settingServiceURLReset) {
-        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
         [userDefaults removeObjectForKey:PlaySRGSettingServiceURL];
         [userDefaults synchronize];
     }
     
-    NSString *URLString = [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingServiceURL];
-    NSURL *URL = URLString ? [NSURL URLWithString:URLString] : nil;
-    return URL ?: SRGIntegrationLayerProductionServiceURL();
+    return [userDefaults URLForKey:PlaySRGSettingServiceURL] ?: SRGIntegrationLayerProductionServiceURL();
 #else
     return SRGIntegrationLayerProductionServiceURL();
 #endif
@@ -120,12 +119,9 @@ void ApplicationSettingSetServiceURL(NSURL *serviceURL)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    if (serviceURL) {
-        [userDefaults setObject:serviceURL.absoluteString forKey:PlaySRGSettingServiceURL];
-    }
-    else {
-        [userDefaults removeObjectForKey:PlaySRGSettingServiceURL];
-    }
+    // Do not use `-setURL:forKey:`, as the method archives the value, preventing InAppSettingsKit from comparing it
+    // to a selectable value. `-URLForKey:` can be used when reading, though.
+    [userDefaults setObject:serviceURL.absoluteString forKey:PlaySRGSettingServiceURL];
     [userDefaults synchronize];
 #endif
 }
@@ -178,13 +174,14 @@ NSString *ApplicationSettingSelectedLiveStreamURNForChannelUid(NSString *channel
 void ApplicationSettingSetSelectedLiveStreamURNForChannelUid(NSString *channelUid, NSString *mediaURN)
 {
     if (channelUid) {
-        NSDictionary *selectedLiveStreamURNForChannels = [NSUserDefaults.standardUserDefaults dictionaryForKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
+        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;;
+        
+        NSDictionary *selectedLiveStreamURNForChannels = [userDefaults dictionaryForKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
         NSMutableDictionary *mutableSelectedLiveStreamURNForChannels = selectedLiveStreamURNForChannels.mutableCopy ?: NSMutableDictionary.new;
         mutableSelectedLiveStreamURNForChannels[channelUid] = mediaURN;
         
-        [NSUserDefaults.standardUserDefaults setObject:mutableSelectedLiveStreamURNForChannels.copy
-                                                forKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
-        [NSUserDefaults.standardUserDefaults synchronize];
+        [userDefaults setObject:mutableSelectedLiveStreamURNForChannels.copy forKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
+        [userDefaults synchronize];
     }
 }
 
@@ -216,13 +213,14 @@ void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo *menuItemInf
     // Save only radio home page or set to nil if it's the TV home page
     if (menuItemInfo.radioChannel || menuItemInfo.menuItem == MenuItemTVOverview
             || menuItemInfo.menuItem == MenuItemTVByDate || menuItemInfo.menuItem == MenuItemTVShowAZ) {
-        [NSUserDefaults.standardUserDefaults setObject:menuItemInfo.radioChannel.uid
-                                                forKey:PlaySRGSettingLastOpenHomepageUid];
-        [NSUserDefaults.standardUserDefaults synchronize];
+        
+        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+        [userDefaults setObject:menuItemInfo.radioChannel.uid forKey:PlaySRGSettingLastOpenHomepageUid];
+        [userDefaults synchronize];
     }
 }
 
-NSURL * ApplicationSettingServiceURLForKey(NSString *key)
+NSURL *ApplicationSettingServiceURLForKey(NSString *key)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     IASKSettingsReader *settingsReader = [[IASKSettingsReader alloc] initWithFile:@"Root.inApp.server"];
