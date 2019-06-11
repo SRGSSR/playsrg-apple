@@ -265,7 +265,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         if (server) {
             NSURL *serviceURL = ApplicationSettingServiceURLForKey(server);
             if (serviceURL && ! [serviceURL isEqual:ApplicationSettingServiceURL()]) {
-                ApplicationSetSettingServiceURL(serviceURL);
+                ApplicationSettingSetServiceURL(serviceURL);
                 
                 [Banner showWithStyle:BannerStyleInfo
                               message:[NSString stringWithFormat:NSLocalizedString(@"Application server changed to %@", @"Notification message when the server URL changed due to a scheme URL."), server.capitalizedString]

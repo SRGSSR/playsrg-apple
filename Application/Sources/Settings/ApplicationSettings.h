@@ -50,7 +50,7 @@ OBJC_EXPORT SRGQuality ApplicationSettingPreferredQuality(void);
 OBJC_EXPORT SRGLetterboxPlaybackSettings *ApplicationSettingPlaybackSettings(void);
 
 OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
-OBJC_EXPORT void ApplicationSetSettingServiceURL(NSURL * _Nullable serviceURL);
+OBJC_EXPORT void ApplicationSettingSetServiceURL(NSURL * _Nullable serviceURL);
 
 OBJC_EXPORT NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void);
 OBJC_EXPORT NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void);

@@ -116,7 +116,7 @@ NSURL *ApplicationSettingServiceURL(void)
 #endif
 }
 
-void ApplicationSetSettingServiceURL(NSURL *serviceURL)
+void ApplicationSettingSetServiceURL(NSURL *serviceURL)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
