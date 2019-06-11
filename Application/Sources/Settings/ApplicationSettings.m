@@ -222,11 +222,11 @@ void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo *menuItemInf
 
 NSURL *ApplicationSettingServiceURLForKey(NSString *key)
 {
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     IASKSettingsReader *settingsReader = [[IASKSettingsReader alloc] initWithFile:@"Root.inApp.server"];
     IASKSpecifier *specifier = [settingsReader specifierForKey:PlaySRGSettingServiceURL];
-    NSInteger index = [[specifier multipleTitles] indexOfObjectPassingTest:^BOOL(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        return [obj caseInsensitiveCompare:key] == NSOrderedSame;
+    
+    NSInteger index = [[specifier multipleTitles] indexOfObjectPassingTest:^BOOL(NSString * _Nonnull string, NSUInteger idx, BOOL * _Nonnull stop) {
+        return [string caseInsensitiveCompare:key] == NSOrderedSame;
     }];
     if (index != NSNotFound) {
         NSString *URLString = [[specifier multipleValues] objectAtIndex:index];
@@ -235,7 +235,15 @@ NSURL *ApplicationSettingServiceURLForKey(NSString *key)
     else {
         return nil;
     }
-#else
-    return nil;
-#endif
+}
+
+NSString *ApplicationSettingServiceNameForKey(NSString *key)
+{
+    IASKSettingsReader *settingsReader = [[IASKSettingsReader alloc] initWithFile:@"Root.inApp.server"];
+    IASKSpecifier *specifier = [settingsReader specifierForKey:PlaySRGSettingServiceURL];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString * _Nullable string, NSDictionary<NSString *,id> * _Nullable bindings) {
+        return [string caseInsensitiveCompare:key] == NSOrderedSame;
+    }];
+    return [[specifier multipleTitles] filteredArrayUsingPredicate:predicate].firstObject;
 }

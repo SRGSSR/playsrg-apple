@@ -64,5 +64,6 @@ OBJC_EXPORT MenuItemInfo * ApplicationSettingLastOpenHomepageMenuItemInfo(void);
 OBJC_EXPORT void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo * _Nullable menuItem);
 
 OBJC_EXPORT NSURL * _Nullable ApplicationSettingServiceURLForKey(NSString *key);
+OBJC_EXPORT NSString * _Nullable ApplicationSettingServiceNameForKey(NSString *key);
 
 NS_ASSUME_NONNULL_END
