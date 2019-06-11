@@ -11,6 +11,8 @@ Available actions are:
 
 In all cases, an optional `&channel-id=[channel_id]` parameter can be added, which also resets the homepage to the specified radio channel homepage. If this parameter is not specified or does not match a valid channel, the homepage is reset to the TV one instead.
 
+For a `Debug`, `Nightly` or a `Beta` build, `&server=[server_title]` parameter can be added to force a server selection update. The available server list can be found in the application section Settings / Advanced features / Server.
+
 ### URL generation
 
 An [online tool](https://play-mmf.herokuapp.com/deeplink/index.html) is available for QR code generation of URLs with supported custom schemes.
