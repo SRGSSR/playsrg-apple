@@ -474,27 +474,27 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 3.7
+name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 3.7.1
 
 name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 1.1.10
 
-name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 6.5.1
+name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 6.5.2
 
 name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
-name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
+name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0.2
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 1.14
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 1.14.1
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 1.0.9
 
 name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 2.6
 
-name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
+name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 1.0.2
 
-name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 1.1
+name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 1.1.1
 
-name: tagcommander-ios, nameSpecified: , owner: SRGSSR, version: 4.3.1_4.3.1
+name: tagcommander-ios, nameSpecified: , owner: SRGSSR, version: 4.3.3_4.3.1
 
 name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: v2.1.2_srg1
 
