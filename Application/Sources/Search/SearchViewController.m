@@ -305,7 +305,7 @@
     if ([view isKindOfClass:TitleHeaderView.class]) {
         TitleHeaderView *headerView = (TitleHeaderView *)view;
         if (self.shows.count == 0 || indexPath.section != 0) {
-            headerView.title = NSLocalizedString(@"Medias", @"Media search result header");
+            headerView.title = (self.items != 0) ? NSLocalizedString(@"Medias", @"Media search result header") : nil;
         }
         else {
             headerView.title = NSLocalizedString(@"Shows", @"Show search result header");
