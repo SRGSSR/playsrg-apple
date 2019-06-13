@@ -19,6 +19,8 @@
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
+const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
+
 @interface SearchViewController ()
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
@@ -76,7 +78,7 @@
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
-    searchBar.placeholder = [NSString stringWithFormat:NSLocalizedString(@"Search", @"Placeholder text displayed in the search field when empty")];
+    searchBar.placeholder = [NSString stringWithFormat:NSLocalizedString(@"Enter %@ characters or more", @"Placeholder text displayed in the search field when empty (must be not too longth)"), @(SearchViewControllerSearchTextMinimumLength)];
     searchBar.tintColor = UIColor.play_redColor;
     searchBar.barTintColor = UIColor.clearColor;      // Avoid search bar glitch when revealed by pop in navigation controller
     self.navigationItem.titleView = searchBar;
@@ -147,6 +149,11 @@
 
 #pragma mark Overrides
 
+- (BOOL)shouldPerformRefreshRequest
+{
+    return (self.searchBar.text.length >= SearchViewControllerSearchTextMinimumLength);
+}
+
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
@@ -194,6 +201,16 @@
     }
 }
 
+- (NSString *)emptyCollectionTitle
+{
+    return (self.searchBar.text.length < SearchViewControllerSearchTextMinimumLength) ? NSLocalizedString(@"No results", nil) : super.emptyCollectionTitle;
+}
+
+- (NSString *)emptyCollectionSubtitle
+{
+    return (self.searchBar.text.length < SearchViewControllerSearchTextMinimumLength) ? [NSString stringWithFormat:NSLocalizedString(@"Enter %@ characters or more to search", @"Placeholder text displayed in the search field when empty (with minimum number of characters freely specified)"), @(SearchViewControllerSearchTextMinimumLength)] : super.emptyCollectionSubtitle;
+}
+
 #pragma mark Helpers
 
 - (void)search
@@ -226,6 +243,10 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    if (! [self shouldPerformRefreshRequest]) {
+        return 0;
+    }
+    
     if (self.shows.count == 0 || section != 0) {
         return self.items.count;
     }
@@ -341,9 +362,11 @@
     // Perform the search with a delay to avoid triggering several search requests if updates are made in a row
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(search) object:nil];
     
-    // Add a delay for when the user is typing fast
+    // No delay when the search text is too small. This also covers the case where the user clears the search criterium
+    // with the clear button
     static NSTimeInterval kTypingSpeedThreshold = 0.3;
-    [self performSelector:@selector(search) withObject:nil afterDelay:kTypingSpeedThreshold];
+    NSTimeInterval delay = (searchText.length < SearchViewControllerSearchTextMinimumLength) ? 0. : kTypingSpeedThreshold;
+    [self performSelector:@selector(search) withObject:nil afterDelay:delay];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
