@@ -19,8 +19,6 @@
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
-
 @interface SearchViewController ()
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
@@ -78,7 +76,7 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
-    searchBar.placeholder = [NSString stringWithFormat:NSLocalizedString(@"Enter %@ characters or more", @"Placeholder text displayed in the search field when empty (must be not too longth)"), @(SearchViewControllerSearchTextMinimumLength)];
+    searchBar.placeholder = NSLocalizedString(@"Search", @"Placeholder text displayed in the search field when empty (must be not too long)");
     searchBar.tintColor = UIColor.play_redColor;
     searchBar.barTintColor = UIColor.clearColor;      // Avoid search bar glitch when revealed by pop in navigation controller
     self.navigationItem.titleView = searchBar;
@@ -151,7 +149,7 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
 
 - (BOOL)shouldPerformRefreshRequest
 {
-    return (self.searchBar.text.length >= SearchViewControllerSearchTextMinimumLength);
+    return (self.searchBar.text.length != 0);
 }
 
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
@@ -201,14 +199,9 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     }
 }
 
-- (NSString *)emptyCollectionTitle
-{
-    return (self.searchBar.text.length < SearchViewControllerSearchTextMinimumLength) ? NSLocalizedString(@"No results", nil) : super.emptyCollectionTitle;
-}
-
 - (NSString *)emptyCollectionSubtitle
 {
-    return (self.searchBar.text.length < SearchViewControllerSearchTextMinimumLength) ? [NSString stringWithFormat:NSLocalizedString(@"Enter %@ characters or more to search", @"Placeholder text displayed in the search field when empty (with minimum number of characters freely specified)"), @(SearchViewControllerSearchTextMinimumLength)] : super.emptyCollectionSubtitle;
+    return (self.searchBar.text.length == 0) ? NSLocalizedString(@"Enter something to start searching", @"Placeholder text displayed in the search field when empty") : super.emptyCollectionSubtitle;
 }
 
 #pragma mark Helpers
@@ -365,7 +358,7 @@ const NSInteger SearchViewControllerSearchTextMinimumLength = 3;
     // No delay when the search text is too small. This also covers the case where the user clears the search criterium
     // with the clear button
     static NSTimeInterval kTypingSpeedThreshold = 0.3;
-    NSTimeInterval delay = (searchText.length < SearchViewControllerSearchTextMinimumLength) ? 0. : kTypingSpeedThreshold;
+    NSTimeInterval delay = (searchText.length == 0) ? 0. : kTypingSpeedThreshold;
     [self performSelector:@selector(search) withObject:nil afterDelay:delay];
 }
 

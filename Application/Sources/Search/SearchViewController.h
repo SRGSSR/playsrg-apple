@@ -10,8 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-OBJC_EXPORT const NSInteger SearchViewControllerSearchTextMinimumLength;
-
 @interface SearchViewController : CollectionRequestViewController <UISearchBarDelegate, SRGAnalyticsViewTracking>
 
 /**
