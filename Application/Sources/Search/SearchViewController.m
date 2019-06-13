@@ -28,6 +28,8 @@
 
 @property (nonatomic, weak) UISearchBar *searchBar;
 
+@property (nonatomic) SRGRequestQueue *showsRequestQueue;
+
 @end
 
 @implementation SearchViewController
@@ -180,10 +182,17 @@
     [requestQueue addRequest:mediaSearchRequest resume:YES];
     
     // The main list with automatic pagination management displays medias. We associate the companion show list request when
-    // loading the first page only, so that both requests are bound together when loading initial search results. We use the
-    // maximum page size and do not manage pagination for shows. This leads to simple code withoug impacting its usability.
+    // loading the first page only, so that both requests are made together when loading initial search results. We use the
+    // maximum page size and do not manage pagination for shows. This leads to simple code withoug impacting its usability
+    // (the user can still refine the search to get better results, and there are not so many shows anyway).
     if (page.number == 0) {
         static const NSUInteger kShowSearchPageSize = 20;
+        
+        self.showsRequestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+            if (finished) {
+                [self.collectionView reloadData];
+            }
+        }];
         
         SRGPageRequest *showSearchRequest = [[SRGDataProvider.currentDataProvider showsForVendor:applicationConfiguration.vendor matchingQuery:query mediaType:SRGMediaTypeNone withCompletionBlock:^(NSArray<NSString *> * _Nullable showURNs, NSNumber * _Nonnull total, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (error || showURNs.count == 0) {
@@ -193,10 +202,15 @@
             SRGPageRequest *showsRequest = [[SRGDataProvider.currentDataProvider showsWithURNs:showURNs completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                 self.shows = shows;
             }] requestWithPageSize:kShowSearchPageSize];
-            [requestQueue addRequest:showsRequest resume:YES];
+            [self.showsRequestQueue addRequest:showsRequest resume:YES];
         }] requestWithPageSize:kShowSearchPageSize];
-        [requestQueue addRequest:showSearchRequest resume:YES];
+        [self.showsRequestQueue addRequest:showSearchRequest resume:YES];
     }
+}
+
+- (void)didCancelRefreshRequest
+{
+    [self.showsRequestQueue cancel];
 }
 
 - (NSString *)emptyCollectionSubtitle
