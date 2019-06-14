@@ -109,7 +109,10 @@ NSURL *ApplicationSettingServiceURL(void)
         [userDefaults synchronize];
     }
     
-    return [userDefaults URLForKey:PlaySRGSettingServiceURL] ?: SRGIntegrationLayerProductionServiceURL();
+    // Do not use `-URLForKey:`, as the method transform the string to a file URL.
+    NSString *URLString = [userDefaults stringForKey:PlaySRGSettingServiceURL];
+    NSURL *URL = URLString ? [NSURL URLWithString:URLString] : nil;
+    return URL ?: SRGIntegrationLayerProductionServiceURL();
 #else
     return SRGIntegrationLayerProductionServiceURL();
 #endif
@@ -120,7 +123,7 @@ void ApplicationSettingSetServiceURL(NSURL *serviceURL)
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     // Do not use `-setURL:forKey:`, as the method archives the value, preventing InAppSettingsKit from comparing it
-    // to a selectable value. `-URLForKey:` can be used when reading, though.
+    // to a selectable value. `-URLForKey:` can't be used when reading, though.
     [userDefaults setObject:serviceURL.absoluteString forKey:PlaySRGSettingServiceURL];
     [userDefaults synchronize];
 #endif
