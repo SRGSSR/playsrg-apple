@@ -28,7 +28,7 @@
 "Delete" = "Delete";
 
 /* Show unsubscription label */
-"Disable notifications for show" = "Disable notifications for show";
+"Disable notifications for show" = "Disable notifications for topic";
 
 /* A download button label */
 "Download" = "Download";
@@ -76,7 +76,7 @@
 "Opens in Safari." = "Opens in Safari.";
 
 /* Show cell hint */
-"Opens show details." = "Opens show details.";
+"Opens show details." = "Opens topic details.";
 
 /* Livestream play action hint */
 "Plays livestream." = "Plays livestream.";
