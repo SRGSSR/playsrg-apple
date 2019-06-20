@@ -35,7 +35,7 @@
 "Favorites" = "Favorites";
 
 /* Favorites onboarding, 1st page description */
-"Bookmark the shows you like." = "Bookmark the shows you like.";
+"Bookmark the shows you like." = "Bookmark the topics you like.";
 
 /* Favorites onboarding, 2nd page title */
 "Receive notifications" = "Receive notifications";
@@ -44,7 +44,7 @@
 "You will be notified when a new episode is available." = "You will be notified when a new content is available.";
 
 /* Favorites onboarding, 3rd page description */
-"Find your favorite shows on any of your devices." = "Find your favorite shows on any of your devices.";
+"Find your favorite shows on any of your devices." = "Find your favorite topics on any of your devices.";
 
 /* Watch later onboarding name */
 /* Watch later onboarding, 1st page title */

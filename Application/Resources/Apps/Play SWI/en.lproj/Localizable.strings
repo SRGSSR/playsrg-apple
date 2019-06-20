@@ -488,7 +488,7 @@
 
 /* Error message when a show cannot be opened via Handoff
    Error message when a show cannot be opened via Handoff or a push notification */
-"The show cannot be opened." = "The show cannot be opened.";
+"The show cannot be opened." = "The topic cannot be opened.";
 
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "This content is not allowed to be played with Google Cast.";
