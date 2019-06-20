@@ -19,19 +19,23 @@ A wide list of parameters are available. Some parameters support multiple comma-
 ### Homepage
 
 * `radioHomeSections` (optional, string, multiple): The sections to be displayed on the radio homepages, in the order they must appear. Available values are:
+   * `radioAllShows`: All available shows.
    * `radioLatest`: The latest audios.
    * `radioLatestEpisodes`: The latest episodes.
+   * `radioLatestVideos`: The latest videos.
    * `radioLive`: Access to the livestreams.
    * `radioMostPopular`: The most popular audios.
-   * `radioLatestVideos`: The latest videos.
-   * `radioAllShows`: All available shows.
+   * `radioMyListShows`: Shows from "My list".
+   * `radioShowsAccess`: A-Z and By date access buttons.
 * `radioFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured media lists will not display any header on the radio homepages.
 * `tvHomeSections` (optional, string, multiple): The sections to be displayed on the TV homepage, in the order they must appear. Available values are:
    * `tvEvents`: Event modules. 
    * `tvLatest`: The latest medias.
    * `tvLive`: Access to the livestreams.
    * `tvLiveCenter`: Access to SwissTXT livestreams.
+   * `tvMyListShows`: Shows from "My list".
    * `tvScheduledLivestreams`: Access to scheduled livestreams.
+   * `tvShowsAccess`: A-Z and By date access buttons.
    * `tvSoonExpiring`: Soon expiring videos.
    * `tvTopics`: Topics.
    * `tvTrending`: Trending medias and editorial picks. See `tvTrendingEpisodesOnly` and `tvTrendingEditorialLimit` options.
@@ -103,12 +107,14 @@ A wide list of parameters are available. Some parameters support multiple comma-
 ### URLs
 
 * `betaTestingURL` (optional, string): The URL of the page where beta testers can register.
-* `feedbackURL` (mandatory, string): The URL of the feedback form.
+* `feedbackURL` (optional, string): The URL of the feedback form. Optional since version 2.9.1.
+* `dataProtectionURL` (optional, string): The URL of the data protection information page.
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed. 
 * `middlewareURL` (mandatory, string): The URL of the Play application middleware.
 * `playURL` (mandatory, string): The base URL of the Play portal, used when building sharing URLs.
 * `showURLPath` (optional, string, not used since 2.8): The (relative) path to the `playURL` when building show sharing URLs.
 * `sourceCodeURL` (optional, string); The URL where the application source code can be found.
+* `termsAndConditionsURL` (optional, string): The URL of the terms and conditions page.
 * `whatsNewURL` (mandatory, string): The URL at which the update information can be retrieved.
 
 ### General parameters

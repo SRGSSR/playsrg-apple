@@ -7,15 +7,11 @@
 #import "HistoryViewController.h"
 
 #import "ApplicationConfiguration.h"
-#import "Banner.h"
 #import "History.h"
 #import "HistoryTableViewCell.h"
-#import "MediaPlayerViewController.h"
-#import "MediaPreviewViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
-#import "ShowViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -57,8 +53,8 @@
     [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
     
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(historyDidChange:)
-                                               name:SRGHistoryDidChangeNotification
+                                           selector:@selector(historyEntriesDidChange:)
+                                               name:SRGHistoryEntriesDidChangeNotification
                                              object:SRGUserData.currentUserData.history];
     
     [self updateInterfaceForEditionAnimated:NO];
@@ -80,16 +76,11 @@
 
 #pragma mark Overrides
 
-// TODO: Probably provide a subclassing hook instead of having -refresh overridden. Refreshes can also be probably initiated
-//       on a background thread
 - (void)refresh
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO", @keypath(SRGHistoryEntry.new, discarded)];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGHistoryEntry.new, date) ascending:NO];
-    NSArray<SRGHistoryEntry *> *historyEntries = [SRGUserData.currentUserData.history historyEntriesMatchingPredicate:predicate sortedWithDescriptors:@[sortDescriptor]];
-    self.mediaURNs = [historyEntries valueForKeyPath:@keypath(SRGHistoryEntry.new, uid)] ?: @[];
-    
-    [super refresh];
+    [self updateMediaURNsWithCompletionBlock:^(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs) {
+        [super refresh];
+    }];
 }
 
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
@@ -109,6 +100,27 @@
 - (AnalyticsPageType)pageType
 {
     return AnalyticsPageTypeHistory;
+}
+
+#pragma mark Data
+
+- (void)updateMediaURNsWithCompletionBlock:(void (^)(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs))completionBlock
+{
+    NSParameterAssert(completionBlock);
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGHistoryEntry.new, date) ascending:NO];
+    [SRGUserData.currentUserData.history historyEntriesMatchingPredicate:nil sortedWithDescriptors:@[sortDescriptor] completionBlock:^(NSArray<SRGHistoryEntry *> * _Nullable historyEntries, NSError * _Nullable error) {
+        if (error) {
+            return;
+        }
+        
+        NSArray<NSString *> *mediaURNs = [historyEntries valueForKeyPath:@keypath(SRGHistoryEntry.new, uid)] ?: @[];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray<NSString *> *previousMediaURNs = self.mediaURNs;
+            self.mediaURNs = mediaURNs;
+            completionBlock(mediaURNs, previousMediaURNs);
+        });
+    }];
 }
 
 #pragma mark UI
@@ -141,13 +153,7 @@
     [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:@[media.URN] completionBlock:^(NSError * _Nonnull error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (! error) {
-                NSInteger mediaIndex = [self.items indexOfObject:media];
-                [self hideItem:media];
-                
-                [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:mediaIndex inSection:0] ]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-                [self.tableView reloadEmptyDataSet];
-                
+                [self hideItems:@[media]];
                 [self updateInterfaceForEditionAnimated:YES];
             }
         });
@@ -261,21 +267,11 @@
             
             [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:URNs completionBlock:^(NSError * _Nonnull error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSMutableArray<SRGMedia *> *mediasToRemove = [NSMutableArray array];
-                    for (NSIndexPath *selectedIndexPath in selectedRows) {
-                        SRGMedia *media = self.items[selectedIndexPath.row];
-                        [mediasToRemove addObject:media];
+                    if (! error) {
+                        NSArray<SRGMedia *> *medias = [self.items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K IN %@", @keypath(SRGMedia.new, URN), URNs]];
+                        [self hideItems:medias];
+                        [self updateInterfaceForEditionAnimated:YES];
                     }
-                    
-                    for (SRGMedia *media in mediasToRemove) {
-                        [self hideItem:media];
-                    }
-                    
-                    [self.tableView deleteRowsAtIndexPaths:selectedRows
-                                          withRowAnimation:UITableViewRowAnimationAutomatic];
-                    [self.tableView reloadEmptyDataSet];
-                    
-                    [self updateInterfaceForEditionAnimated:YES];
                 });
             }];
         }
@@ -321,13 +317,17 @@
 
 #pragma mark Notifications
 
-- (void)historyDidChange:(NSNotification *)notification
+- (void)historyEntriesDidChange:(NSNotification *)notification
 {
-    NSArray<NSString *> *previousURNs = notification.userInfo[SRGHistoryPreviousUidsKey];
-    NSArray<NSString *> *URNs = notification.userInfo[SRGHistoryUidsKey];
-    if (URNs.count == 0 || previousURNs.count == 0) {
-        [self refresh];
-    }
+    // Update the URN list. If we had no media retrieval with pagination, a simple diff could then be used to animate between
+    // the previous list and the new one. Since we have pagination here, we can only automatially perform a refresh if a single
+    // page of content is or was displayed (because other pages after it depend on the first page).
+    [self updateMediaURNsWithCompletionBlock:^(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs) {
+        NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
+        if (! [previousURNs isEqual:self.mediaURNs] && (previousURNs.count <= pageSize || self.mediaURNs.count <= pageSize)) {
+            [self refresh];
+        }
+    }];
 }
 
 @end

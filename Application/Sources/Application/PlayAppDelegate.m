@@ -10,7 +10,8 @@
 #import "ApplicationSettings.h"
 #import "Banner.h"
 #import "Download.h"
-#import "Favorite.h"
+#import "Favorites.h"
+#import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
 #import "NavigationController.h"
@@ -25,12 +26,11 @@
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 #import "UpdateInfo.h"
+#import "WatchLater.h"
 #import "WebViewController.h"
 
-#import <AirshipKit/AirshipKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <Firebase/Firebase.h>
-#import <GoogleCast/GoogleCast.h>
 #import <libextobjc/libextobjc.h>
 #import <Mantle/Mantle.h>
 #import <SRGAnalytics_Identity/SRGAnalytics_Identity.h>
@@ -38,6 +38,7 @@
 #import <SRGIdentity/SRGIdentity.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 #import <SRGUserData/SRGUserData.h>
+#import <UrbanAirship-iOS-SDK/AirshipKit.h>
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 #import <Fingertips/Fingertips.h>
@@ -106,30 +107,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     
     NSURL *storeFileURL = [HLSApplicationLibraryDirectoryURL() URLByAppendingPathComponent:@"PlayData.sqlite"];
     SRGUserData.currentUserData = [[SRGUserData alloc] initWithStoreFileURL:storeFileURL
-                                                          historyServiceURL:applicationConfiguration.historyServiceURL
+                                                                 serviceURL:applicationConfiguration.userDataServiceURL
                                                             identityService:SRGIdentityService.currentIdentityService];
     
-    // Setup Google Cast
-    GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:applicationConfiguration.googleCastReceiverIdentifier];
-    GCKCastOptions *options = [[GCKCastOptions alloc] initWithDiscoveryCriteria:discoveryCriteria];
-    [GCKCastContext setSharedInstanceWithOptions:options];
-    [GCKCastContext sharedInstance].useDefaultExpandedMediaControls = YES;
-    
-    GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
-    styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
-    styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
-    styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
-    styleAttributes.muteOffImage = [UIImage imageNamed:@"player_mute-22"];
-    styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute-22"];
-    styleAttributes.pauseImage = [UIImage imageNamed:@"pause-50"];
-    styleAttributes.playImage = [UIImage imageNamed:@"play-50"];
-    styleAttributes.stopImage = [UIImage imageNamed:@"stop-50"];
-    // The subtitlesTrackImage property is buggy (the original icon is displayed when highlighted)
-    
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(googleCastStateDidChange:)
-                                               name:kGCKCastStateDidChangeNotification
-                                             object:nil];
+    GoogleCastSetup();
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(playbackDidContinueAutomatically:)
@@ -148,26 +129,13 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         self.window.accessibilityIgnoresInvertColors = YES;
     }
     
-    [SRGNetworkActivityManagement enable];
-    
-    // Analytics setup
-    SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
-                                                                                                       container:applicationConfiguration.analyticsContainer
-                                                                                             comScoreVirtualSite:applicationConfiguration.comScoreVirtualSite
-                                                                                             netMetrixIdentifier:applicationConfiguration.netMetrixIdentifier];
-    [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
-                                              identityService:SRGIdentityService.currentIdentityService];
-    
+    [self setupAnalytics];
     [self setupDataProvider];
-    
-    [UIImage play_setUseOriginalImagesOnly:ApplicationSettingOriginalImagesOnlyEnabled()];
     
     // Letterbox service setup for picture and picture
     SRGLetterboxService.sharedService.mirroredOnExternalScreen = ApplicationSettingPresenterModeEnabled();
-    
     // Use appropriate voice over language for the whole application
     application.accessibilityLanguage = applicationConfiguration.voiceOverLanguageCode;
-    
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
     [defaults addObserver:self forKeyPath:PlaySRGSettingServiceURL options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld  context:s_kvoContext];
@@ -178,9 +146,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 #ifndef DEBUG
     [self setupHockey];
 #endif
-    
-    // Local objects migration
-    [Favorite migrate];
     
     // 3D touch dynamic shortcut items. If search options are available, append a search option as last item. Dynamic shortcut
     // items are persisted between application launches, do not add them several times
@@ -235,6 +200,11 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     
     [PushService.sharedService setup];
     [self updateApplicationBadge];
+    FavoritesSetup();
+    
+    // Local objects migration
+    WatchLaterMigrate();
+    FavoritesMigrate();
     
     [self showNextAvailableOnboarding];
     
@@ -272,6 +242,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         shouldNotPerformAdditionalDelegateHandling = NO;
         [self handleShortcutItem:launchedShortcutItem];
     }
+    
     return shouldNotPerformAdditionalDelegateHandling;
 }
 
@@ -288,6 +259,23 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 {
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     if ([URLComponents.host.lowercaseString isEqualToString:@"open"]) {
+        
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+        NSString *server = [self valueFromURLComponents:URLComponents withParameterName:@"server"];
+        if (server) {
+            NSURL *serviceURL = ApplicationSettingServiceURLForKey(server);
+            if (serviceURL && ! [serviceURL isEqual:ApplicationSettingServiceURL()]) {
+                ApplicationSettingSetServiceURL(serviceURL);
+                
+                [Banner showWithStyle:BannerStyleInfo
+                              message:[NSString stringWithFormat:NSLocalizedString(@"Application server changed to '%@'", @"Notification message when the server URL changed due to a scheme URL."), ApplicationSettingServiceNameForKey(server)]
+                                image:[UIImage imageNamed:@"settings-22"]
+                               sticky:NO
+                     inViewController:nil];
+            }
+        }
+#endif
+        
         NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
         
         NSString *mediaURN = [self valueFromURLComponents:URLComponents withParameterName:@"media"];
@@ -334,9 +322,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 }
 
 // https://support.urbanairship.com/hc/en-us/articles/213492483-iOS-Badging-and-Auto-Badging
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     [self updateApplicationBadge];
+    completionHandler(UIBackgroundFetchResultNoData);
 }
 
 #pragma mark Custom URL scheme support
@@ -471,6 +460,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 
 - (void)setupDataProvider
 {
+    [SRGNetworkActivityManagement enable];
+    [UIImage play_setUseOriginalImagesOnly:ApplicationSettingOriginalImagesOnlyEnabled()];
+    
     NSURL *serviceURL = ApplicationSettingServiceURL();
     SRGDataProvider *dataProvider = [[SRGDataProvider alloc] initWithServiceURL:serviceURL];
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -508,6 +500,18 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }
 #endif
     SRGDataProvider.currentDataProvider = dataProvider;
+}
+
+- (void)setupAnalytics
+{
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    
+    SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
+                                                                                                       container:applicationConfiguration.analyticsContainer
+                                                                                             comScoreVirtualSite:applicationConfiguration.comScoreVirtualSite
+                                                                                             netMetrixIdentifier:applicationConfiguration.netMetrixIdentifier];
+    [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
+                                              identityService:SRGIdentityService.currentIdentityService];
 }
 
 // Reset the app view controller hierachy to display the specified menu item, executing the provided completion block when done.
@@ -759,12 +763,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 }
 
 #pragma mark Notifications
-
-- (void)googleCastStateDidChange:(NSNotification *)notification
-{
-    GCKCastState castState = [notification.userInfo[kGCKNotificationKeyCastState] integerValue];
-    SRGLetterboxService.sharedService.nowPlayingInfoAndCommandsEnabled = (castState != GCKCastStateConnected);
-}
 
 - (void)playbackDidContinueAutomatically:(NSNotification *)notification
 {

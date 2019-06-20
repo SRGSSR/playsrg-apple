@@ -195,13 +195,6 @@ platform :ios do
     hockey_public_identifier = options[:hockey_public_identifier]
     hockey_api_token = options[:hockey_api_token]
 
-    # Remove dependency with UIImagePickerController and NSPhotoLibraryUsageDescription AppStore rejection
-    carthage(
-      command: "build",
-      platform: "iOS",
-      configuration: "ReleaseDefault HockeySDK-iOS"
-    )
-
     build_lane(
       configuration: "AppStore",
       scheme: scheme,
@@ -303,7 +296,7 @@ platform :ios do
         pretty: "- %s"
     )
     # HAX: strip emoji from changelog
-    changelog = changelog.sub(/[\u{1F300}-\u{1F6FF}]/, '')
+    changelog = (changelog) ? changelog.sub(/[\u{1F300}-\u{1F6FF}]/, '') : "No change log found for this build."
     Actions.lane_context[SharedValues::FL_CHANGELOG] = changelog
     changelog
   end

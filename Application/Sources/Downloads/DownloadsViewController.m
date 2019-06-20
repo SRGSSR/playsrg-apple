@@ -11,11 +11,8 @@
 #import "Download.h"
 #import "DownloadFooterSectionView.h"
 #import "DownloadTableViewCell.h"
-#import "MediaPlayerViewController.h"
-#import "MediaPreviewViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
-#import "ShowViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 

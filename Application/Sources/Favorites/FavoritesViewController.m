@@ -6,42 +6,36 @@
 
 #import "FavoritesViewController.h"
 
-#import "Banner.h"
-#import "Favorite.h"
-#import "FavoriteTableViewCell.h"
-#import "MediaPlayerViewController.h"
-#import "MediaPreviewViewController.h"
+#import "ApplicationConfiguration.h"
+#import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
-#import "PlayErrors.h"
 #import "ShowViewController.h"
+#import "FavoriteTableViewCell.h"
+#import "Favorites.h"
 #import "UIColor+PlaySRG.h"
+#import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
+#import <libextobjc/libextobjc.h>
 #import <SRGAppearance/SRGAppearance.h>
+#import <SRGDataProvider/SRGDataProvider.h>
+#import <SRGUserData/SRGUserData.h>
 
-@interface FavoritesViewController ()
+@interface FavoritesViewController () <FavoriteTableViewCellDelegate>
 
-@property (nonatomic) NSArray<Favorite *> *favorites;
+@property (nonatomic) NSArray<SRGShow *> *shows;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) UIRefreshControl *refreshControl;
 
 @property (nonatomic) UIBarButtonItem *defaultLeftBarButtonItem;
 
+@property (nonatomic) NSError *lastRequestError;
+@property (nonatomic) NSArray<SRGShow *> *requestedShows;
+
 @end
 
 @implementation FavoritesViewController
-
-#pragma mark Object lifecycle
-
-- (instancetype)init
-{
-    if (self = [super init]) {
-        self.favorites = Favorite.favorites;
-    }
-    return self;
-}
 
 #pragma mark View lifecycle
 
@@ -50,7 +44,7 @@
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"Favorites", @"Title displayed at the top of the favorites screen");
-    
+
     self.view.backgroundColor = UIColor.play_blackColor;
     
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
@@ -75,9 +69,9 @@
     [self updateInterfaceForEditionAnimated:NO];
     
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(favoriteStateDidChange:)
-                                               name:FavoriteStateDidChangeNotification
-                                             object:nil];
+                                           selector:@selector(preferencesStateDidChange:)
+                                               name:SRGPreferencesDidChangeNotification
+                                             object:SRGUserData.currentUserData.preferences];
 }
 
 - (void)viewWillLayoutSubviews
@@ -113,8 +107,50 @@
 
 #pragma mark Overrides
 
-- (void)refresh
+- (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue
 {
+    self.requestedShows = [NSArray array];
+    
+    NSArray<NSString *> *showURNs = FavoritesShowURNs().allObjects;
+    NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
+    
+    @weakify(self)
+    __block SRGFirstPageRequest *firstRequest = [[SRGDataProvider.currentDataProvider showsWithURNs:showURNs completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        @strongify(self)
+        
+        if (error) {
+            [requestQueue reportError:error];
+            return;
+        }
+        
+        self.requestedShows = [self.requestedShows arrayByAddingObjectsFromArray:shows];
+        if (nextPage) {
+            SRGPageRequest *nextRequest = [firstRequest requestWithPage:nextPage];
+            [requestQueue addRequest:nextRequest resume:YES];
+        }
+        else {
+            firstRequest = nil;
+        }
+    }] requestWithPageSize:pageSize];
+    [requestQueue addRequest:firstRequest resume:YES];
+}
+
+- (void)refreshDidStart
+{
+    self.lastRequestError = nil;
+}
+
+- (void)refreshDidFinishWithError:(NSError *)error
+{
+    self.lastRequestError = error;
+    
+    if (! error) {
+        NSSortDescriptor *titleSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, title) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+        NSSortDescriptor *transmissionSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, transmission) ascending:YES];
+        self.shows = [self.requestedShows sortedArrayUsingDescriptors:@[titleSortDescriptor, transmissionSortDescriptor]];
+    }
+    self.requestedShows = nil;
+    
     // Avoid stopping scrolling
     // See http://stackoverflow.com/a/31681037/760435
     if (self.refreshControl.refreshing) {
@@ -143,7 +179,7 @@
 
 - (void)updateInterfaceForEditionAnimated:(BOOL)animated
 {
-    if (self.favorites.count != 0) {
+    if (self.shows.count != 0) {
         UIBarButtonItem *rightBarButtonItem = ! self.tableView.editing ? self.editButtonItem : [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button")
                                                                                                                                 style:UIBarButtonItemStylePlain
                                                                                                                                target:self
@@ -169,24 +205,67 @@
 
 #pragma mark DZNEmptyDataSetSource protocol
 
+- (UIView *)customViewForEmptyDataSet:(UIScrollView *)scrollView
+{
+    if (self.loading) {
+        // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
+        // stretched
+        UIImageView *loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
+        loadingImageView.contentMode = UIViewContentModeCenter;
+        return loadingImageView;
+    }
+    else {
+        return nil;
+    }
+}
+
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
-                                  NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
-    return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No favorites", @"Text displayed when no favorites are available") attributes:attributes];
+    // Remark: No test for self.loading since a custom view is used in such cases
+    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
+                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
+    
+    if (self.lastRequestError) {
+        // Multiple errors. Pick the first ones
+        NSError *error = self.lastRequestError;
+        if ([error hasCode:SRGNetworkErrorMultiple withinDomain:SRGNetworkErrorDomain]) {
+            error = [error.userInfo[SRGNetworkErrorsKey] firstObject];
+        }
+        return [[NSAttributedString alloc] initWithString:error.localizedDescription
+                                               attributes:attributes];
+    }
+    else {
+        return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No favorites", @"Text displayed when no favorites are available")
+                                               attributes:attributes];
+    }
 }
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on an item to add it to favorites", @"Hint displayed when no favorites are available and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold an item to add it to favorites", @"Hint displayed when no favorites are available and the device does not support 3D touch");
-    return [[NSAttributedString alloc] initWithString:description
-                                           attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
-                                                         NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
+    // Remark: No test for self.loading since a custom view is used in such cases
+    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
+    
+    if (self.lastRequestError) {
+        return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it")
+                                               attributes:attributes];
+    }
+    else {
+        NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on an item to add it to favorites", @"Hint displayed when no favorites are available and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold an item to add it to favorites", @"Hint displayed when no favorites are available and the device does not support 3D touch");
+        return [[NSAttributedString alloc] initWithString:description
+                                               attributes:attributes];
+    }
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return [UIImage imageNamed:@"favorite-90"];
+    // Remark: No test for self.loading since a custom view is used in such cases
+    if (self.lastRequestError) {
+        return [UIImage imageNamed:@"error-90"];
+    }
+    else {
+        return [UIImage imageNamed:@"favorite-90"];
+    }
 }
 
 - (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
@@ -204,11 +283,24 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
+#pragma mark FavoriteTableViewCellDelegate protocol
+
+- (void)favoriteTableViewCell:(FavoriteTableViewCell *)favoriteTableViewCell deleteShow:(SRGShow *)show
+{
+    FavoritesRemoveShows(@[show]);
+    [self updateInterfaceForEditionAnimated:YES];
+    
+    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+    labels.value = show.URN;
+    labels.source = AnalyticsSourceSwipe;
+    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteRemove labels:labels];
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.favorites.count;
+    return self.shows.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -226,7 +318,8 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(FavoriteTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.favorite = self.favorites[indexPath.row];
+    cell.show = self.shows[indexPath.row];
+    cell.cellDelegate = self;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -235,31 +328,13 @@
         return;
     }
     
-    Favorite *favorite = self.favorites[indexPath.row];
-    [favorite objectForType:FavoriteTypeUnspecified available:NULL withCompletionBlock:^(id  _Nullable favoritedObject, NSError * _Nullable error) {
-        if (error) {
-            [Banner showError:error inViewController:self];
-            return;
-        }
-        
-        if ([favoritedObject isKindOfClass:SRGMedia.class]) {
-            SRGMedia *media = favoritedObject;
-            [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
-            
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.value = favorite.mediaURN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteOpenMedia labels:labels];
-        }
-        else if ([favoritedObject isKindOfClass:SRGShow.class]) {
-            SRGShow *show = favoritedObject;
-            ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
-            [self.navigationController pushViewController:showViewController animated:YES];
-            
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.value = favorite.showURN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteOpenShow labels:labels];
-        }
-    }];
+    SRGShow *show = self.shows[indexPath.row];
+    ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+    [self.navigationController pushViewController:showViewController animated:YES];
+    
+    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+    labels.value = show.URN;
+    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteOpen labels:labels];
 }
 
 #pragma mark Actions
@@ -269,7 +344,7 @@
     [self refresh];
 }
 
-- (void)removeFavorites:(id)sender
+- (void)removeSubscriptions:(id)sender
 {
     NSArray *selectedRows = self.tableView.indexPathsForSelectedRows;
     
@@ -286,7 +361,7 @@
     }
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:deleteAllModeEnabled ? NSLocalizedString(@"Remove all favorites", @"Title of the confirmation pop-up displayed when the user is about to delete all favorite items") : NSLocalizedString(@"Remove favorites", @"Title of the confirmation pop-up displayed when the user is about to delete selected favorite items")
-                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"Are you sure you want to delete all items?", @"Confirmation message displayed when the user is about to delete all favorite items") : NSLocalizedString(@"Are you sure you want to delete the selected items?", @"Confirmation message displayed when the user is about to delete selected favorite items")
+                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"Are you sure you want to delete all items?", @"Confirmation message displayed when the user is about to clean all favorites") : NSLocalizedString(@"Are you sure you want to delete the selected items?", @"Confirmation message displayed when the user is about to remove selected entries from favorites")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (deleteAllModeEnabled) {
@@ -298,10 +373,12 @@
         }
     }]];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of a delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        // Avoid issues if the user switches off notifications while the alert is displayed
         NSArray *selectedRows = self.tableView.indexPathsForSelectedRows;
-        if (deleteAllModeEnabled || selectedRows.count == self.favorites.count) {
-            [Favorite removeAllFavorites];
-            self.favorites = nil;
+        if (deleteAllModeEnabled || selectedRows.count == self.shows.count) {
+            FavoritesRemoveShows(nil);
+            
+            self.shows = nil;
             [self reloadDataAnimated:YES];
             
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -309,16 +386,16 @@
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteRemoveAll labels:labels];
         }
         else {
-            NSMutableArray<Favorite *> *favoritesToRemove = [NSMutableArray array];
+            NSMutableArray<SRGShow *> *showsToRemove = [NSMutableArray array];
             for (NSIndexPath *selectedIndexPath in selectedRows) {
-                [favoritesToRemove addObject:self.favorites[selectedIndexPath.row]];
+                [showsToRemove addObject:self.shows[selectedIndexPath.row]];
             }
             
-            for (Favorite *favorite in favoritesToRemove) {
-                [Favorite removeFavorite:favorite];
-                
+            FavoritesRemoveShows(showsToRemove.copy);
+            
+            for (SRGShow *show in showsToRemove) {
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.value = (favorite.type == FavoriteTypeShow) ? favorite.showURN : favorite.mediaURN;
+                labels.value = show.URN;
                 labels.source = AnalyticsSourceSelection;
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteRemove labels:labels];
             }
@@ -351,7 +428,7 @@
     UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]
                                                                             style:UIBarButtonItemStylePlain
                                                                            target:self
-                                                                           action:@selector(removeFavorites:)];
+                                                                           action:@selector(removeSubscriptions:)];
     deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Delete", @"Delete button label");
     
     UIBarButtonItem *leftBarButtonItem = editing ? deleteBarButtonItem : self.defaultLeftBarButtonItem;
@@ -365,33 +442,12 @@
 
 #pragma mark Notifications
 
-- (void)favoriteStateDidChange:(NSNotification *)notification
+- (void)preferencesStateDidChange:(NSNotification *)notification
 {
-    Favorite *favorite = notification.userInfo[FavoriteObjectKey];
-    BOOL added = [notification.userInfo[FavoriteStateKey] boolValue];
-    
-    if ((added && self.favorites.count + 1 == Favorite.favorites.count)
-            || (! added && self.favorites.count - 1 == Favorite.favorites.count)) {
-        [self.tableView beginUpdates];
-        if (added) {
-            self.favorites = Favorite.favorites;
-            NSInteger favoriteIndex = [self.favorites indexOfObject:favorite];
-            [self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:favoriteIndex inSection:0] ]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-        else {
-            NSInteger favoriteIndex = [self.favorites indexOfObject:favorite];
-            self.favorites = Favorite.favorites;
-            [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:favoriteIndex inSection:0] ]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-        [self.tableView endUpdates];
-        
-        [self updateInterfaceForEditionAnimated:YES];
-    }
-    else {
-        self.favorites = Favorite.favorites;
-        [self reloadDataAnimated:YES];
+    // Update the URN list. Unlike other media / shows list, there is no pagination in this one. A simple refresh is accepted.
+    NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
+    if ([domains containsObject:PlayPreferencesDomain]) {
+        [self refresh];
     }
 }
 

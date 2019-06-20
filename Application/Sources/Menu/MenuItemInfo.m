@@ -75,8 +75,8 @@
             break;
         }
             
-        case MenuItemSubscriptions: {
-            image = [UIImage imageNamed:@"subscriptions-22"];
+        case MenuItemWatchLater: {
+            image = [UIImage imageNamed:@"watch_later-22"];
             break;
         }
             

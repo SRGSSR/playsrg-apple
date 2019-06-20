@@ -11,7 +11,7 @@
 #import "ApplicationSettings.h"
 #import "Banner.h"
 #import "Download.h"
-#import "Favorite.h"
+#import "Favorites.h"
 #import "History.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
@@ -24,6 +24,7 @@
 
 #import <FLEX/FLEX.h>
 #import <HockeySDK/HockeySDK.h>
+#import <InAppSettingsKit/IASKSettingsReader.h>
 #import <libextobjc/libextobjc.h>
 #import <SafariServices/SafariServices.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -36,6 +37,7 @@
 static NSString * const SettingsFeaturesButton = @"Button_Features";
 static NSString * const SettingsWhatsNewButton = @"Button_WhatsNew";
 static NSString * const SettingsTermsAndConditionsButton = @"Button_TermsAndConditions";
+static NSString * const SettingsDataProtectionButton = @"Button_DataProtection";
 static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
 static NSString * const SettingsSourceCodeButton = @"Button_Source code";
 
@@ -110,9 +112,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                                                name:SRGIdentityServiceUserDidLogoutNotification
                                              object:SRGIdentityService.currentIdentityService];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(historyDidFinishSynchronization:)
-                                               name:SRGHistoryDidFinishSynchronizationNotification
-                                             object:SRGUserData.currentUserData.history];
+                                           selector:@selector(userDataDidFinishSynchronization:)
+                                               name:SRGUserDataDidStartSynchronizationNotification
+                                             object:SRGUserData.currentUserData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -148,6 +150,16 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSURLRequest *request = [NSURLRequest requestWithURL:termsAndConditionsURL];
         WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeSystem];
         webViewController.title = PlaySRGSettingsLocalizedString(@"Terms and conditions", @"Title displayed at the top of the Terms and conditions view");
+        webViewController.tracked = NO;            // The website we display is already tracked.
+        [self.navigationController pushViewController:webViewController animated:YES];
+    }
+    else if ([specifier.key isEqualToString:SettingsDataProtectionButton]) {
+        NSURL *dataProtectionURL = ApplicationConfiguration.sharedApplicationConfiguration.dataProtectionURL;
+        NSAssert(dataProtectionURL, @"Button must not be displayed if no data protection URL has been specified");
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:dataProtectionURL];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeSystem];
+        webViewController.title = PlaySRGSettingsLocalizedString(@"Data protection", @"Title displayed at the top of the data protection view");
         webViewController.tracked = NO;            // The website we display is already tracked.
         [self.navigationController pushViewController:webViewController animated:YES];
     }
@@ -211,8 +223,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             
             [self.requestQueue reportError:error];
             [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
-                if (! [PushService.sharedService isSubscribedToShow:show]) {
-                    [PushService.sharedService toggleSubscriptionForShow:show];
+                if (! FavoritesIsSubscribedToShow(show)) {
+                    FavoritesAddShow(show);
+                    FavoritesToggleSubscriptionForShow(show, nil);
                 }
             }];
         }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
@@ -224,8 +237,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                 
                 [self.requestQueue reportError:error];
                 [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if (! [PushService.sharedService isSubscribedToShow:show]) {
-                        [PushService.sharedService toggleSubscriptionForShow:show];
+                    if (! FavoritesIsSubscribedToShow(show)) {
+                        FavoritesAddShow(show);
+                        FavoritesToggleSubscriptionForShow(show, nil);
                     }
                 }];
             }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
@@ -245,7 +259,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsClearAllContentsButton]) {
         [self clearWebCache];
         [UIImage srg_clearVectorImageCache];
-        [Favorite removeAllFavorites];
         [Download removeAllDownloads];
     }
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -260,8 +273,8 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     NSString *key = [settingsViewController.settingsReader keyForSection:section];
     if ([key isEqualToString:SettingsInformationGroup]) {
         if (SRGIdentityService.currentIdentityService.isLoggedIn) {
-            NSDate *historyLocalSynchronizationDate = SRGUserData.currentUserData.user.historyLocalSynchronizationDate;
-            NSString *dateString = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:historyLocalSynchronizationDate] ?: NSLocalizedString(@"Never", @"Text displayed when no data synchronization has been made yet");
+            NSDate *synchronizationDate = SRGUserData.currentUserData.user.synchronizationDate;
+            NSString *dateString = synchronizationDate ? [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:synchronizationDate] : NSLocalizedString(@"Never", @"Text displayed when no data synchronization has been made yet");
             return [NSString stringWithFormat:NSLocalizedString(@"Last synchronization: %@", @"Introductory text for the most recent data synchronization date"), dateString];
         }
         return nil;
@@ -338,6 +351,10 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [hiddenKeys addObject:SettingsTermsAndConditionsButton];
     }
     
+    if (! applicationConfiguration.dataProtectionURL) {
+        [hiddenKeys addObject:SettingsDataProtectionButton];
+    }
+    
     if (! applicationConfiguration.betaTestingURL) {
         [hiddenKeys addObject:SettingsBetaTestingButton];
     }
@@ -391,7 +408,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [self.tableView reloadData];
 }
 
-- (void)historyDidFinishSynchronization:(NSNotification *)notification
+- (void)userDataDidFinishSynchronization:(NSNotification *)notification
 {
     [self.tableView reloadData];
 }

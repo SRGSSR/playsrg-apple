@@ -38,21 +38,6 @@
                                             isLiveEvent:PlayIsSwissTXTURN(object.URN)];
 }
 
-- (void)play_displayDurationLabelForFavorite:(Favorite *)favorite
-{
-    if (favorite.type != FavoriteTypeMedia) {
-        self.text = nil;
-        self.hidden = YES;
-        return;
-    }
-    
-    BOOL isLivestreamOrScheduledLivestream = (favorite.mediaContentType == FavoriteMediaContentTypeLive || favorite.mediaContentType == FavoriteMediaContentTypeScheduledLive);
-    [self play_displayDurationLabelWithTimeAvailability:[favorite timeAvailabilityAtDate:NSDate.date]
-                                               duration:favorite.duration
-                      isLivestreamOrScheduledLivestream:isLivestreamOrScheduledLivestream
-                                            isLiveEvent:PlayIsSwissTXTURN(favorite.mediaURN)];
-}
-
 - (void)play_displayAvailabilityLabelForMediaMetadata:(id<SRGMediaMetadata>)object
 {
     self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];

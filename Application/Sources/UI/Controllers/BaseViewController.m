@@ -10,7 +10,7 @@
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "Download.h"
-#import "Favorite.h"
+#import "Favorites.h"
 #import "GoogleCast.h"
 #import "HomeTopicViewController.h"
 #import "MediaPlayerViewController.h"
@@ -18,10 +18,10 @@
 #import "ModuleViewController.h"
 #import "PlayErrors.h"
 #import "Previewing.h"
-#import "PushService.h"
 #import "ShowViewController.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIViewController+PlaySRG_Private.h"
+#import "WatchLater.h"
 
 #import <objc/runtime.h>
 #import <libextobjc/libextobjc.h>
@@ -177,23 +177,25 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     if ([previewObject isKindOfClass:SRGMedia.class]) {
         SRGMedia *media = previewObject;
         
-        Favorite *favorite = [Favorite favoriteForMedia:media];
-        BOOL favorited = (favorite != nil);
-        
         NSString *message = (media.show.title && ! [media.title containsString:media.show.title]) ? media.show.title : nil;
         alertController = [UIAlertController alertControllerWithTitle:media.title message:message preferredStyle:UIAlertControllerStyleActionSheet];
-        [alertController addAction:[UIAlertAction actionWithTitle:favorited ? NSLocalizedString(@"Remove from favorites", @"Button label to remove a favorite from the media long-press menu") : NSLocalizedString(@"Add to favorites", @"Button label to add a favorite from the media long-press menu") style:favorited ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [Favorite toggleFavoriteForMedia:media];
-            
-            // Use !favorited since favorited status has been reversed
-            AnalyticsTitle analyticsTitle = (! favorited) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceLongPress;
-            labels.value = media.URN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-            
-            [Banner showFavorite:! favorited forItemWithName:media.title inViewController:self];
-        }]];
+        
+        if (WatchLaterCanStoreMediaMetadata(media)) {
+            BOOL inWatchLaterList = WatchLaterContainsMediaMetadata(media);
+            [alertController addAction:[UIAlertAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Watch later\"", @"Button label to remove a media from the watch later list, from the media long-press menu") : NSLocalizedString(@"Add to \"Watch later\"", @"Button label to add a media to the watch later list, from the media long-press menu") style:inWatchLaterList ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                WatchLaterToggleMediaMetadata(media, ^(BOOL added, NSError * _Nullable error) {
+                    if (! error) {
+                        AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
+                        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                        labels.source = AnalyticsSourceLongPress;
+                        labels.value = media.URN;
+                        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
+                        
+                        [Banner showWatchLaterAdded:added forItemWithName:media.title inViewController:self];
+                    }
+                });
+            }]];
+        }
         
         BOOL downloadable = [Download canDownloadMedia:media];
         if (downloadable) {
@@ -214,29 +216,6 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
                 labels.value = media.URN;
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
             }]];
-        }
-        
-        PushService *pushService = PushService.sharedService;
-        if (pushService && media.contentType != SRGContentTypeLivestream) {
-            SRGShow *show = media.show;
-            if (show) {
-                BOOL subscribed = [pushService isSubscribedToShow:show];
-                [alertController addAction:[UIAlertAction actionWithTitle:subscribed ? NSLocalizedString(@"Unsubscribe from show", @"Button label to unsubscribe from a show") : NSLocalizedString(@"Subscribe to show", @"Button label to unsubscribe to a show") style:subscribed ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    BOOL toggled = [pushService toggleSubscriptionForShow:show inViewController:self];
-                    if (! toggled) {
-                        return ;
-                    }
-                    
-                    // Use !subscribed since the status has been reversed
-                    AnalyticsTitle analyticsTitle = (! subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
-                    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                    labels.source = AnalyticsSourceLongPress;
-                    labels.value = show.URN;
-                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-                    
-                    [Banner showSubscription:! subscribed forShowWithName:show.title inViewController:self];
-                }]];
-            }
         }
         
         NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:media atTime:kCMTimeZero];
@@ -260,7 +239,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
                     labels.source = AnalyticsSourceLongPress;
                     labels.value = media.URN;
                     labels.extraValue1 = AnalyticsTypeValueSharingContent;
-                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharing labels:labels];
+                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
                     
                     if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
                         [Banner showWithStyle:BannerStyleInfo
@@ -297,42 +276,21 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     else if ([previewObject isKindOfClass:SRGShow.class]) {
         SRGShow *show = previewObject;
         
-        Favorite *favorite = [Favorite favoriteForShow:show];
-        BOOL favorited = (favorite != nil);
+        BOOL isFavorite = FavoritesContainsShow(show);
         
         alertController = [UIAlertController alertControllerWithTitle:show.title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        [alertController addAction:[UIAlertAction actionWithTitle:favorited ? NSLocalizedString(@"Remove from favorites", @"Button label to remove a favorite from the show long-press menu") : NSLocalizedString(@"Add to favorites", @"Button label to add a favorite from the show long-press menu") style:favorited ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [Favorite toggleFavoriteForShow:show];
+        [alertController addAction:[UIAlertAction actionWithTitle:isFavorite ? NSLocalizedString(@"Remove from favorites", @"Button label to remove a show from favorites in the show long-press menu") : NSLocalizedString(@"Add to favorites", @"Button label to add a show to favorites in the show long-press menu") style:isFavorite ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            FavoritesToggleShow(show);
             
-            // Use !favorited since favorited status has been reversed
-            AnalyticsTitle analyticsTitle = (! favorited) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
+            // Use !isFavorite since favorite status has been reversed
+            AnalyticsTitle analyticsTitle = (! isFavorite) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceLongPress;
             labels.value = show.URN;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
             
-            [Banner showFavorite:! favorited forItemWithName:show.title inViewController:self];
+            [Banner showFavorite:! isFavorite forItemWithName:show.title inViewController:self];
         }]];
-        
-        PushService *pushService = PushService.sharedService;
-        if (pushService) {
-            BOOL subscribed = [pushService isSubscribedToShow:show];
-            [alertController addAction:[UIAlertAction actionWithTitle:subscribed ? NSLocalizedString(@"Unsubscribe from show", @"Button label to unsubscribe from a show") : NSLocalizedString(@"Subscribe to show", @"Button label to unsubscribe to a show") style:subscribed ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                BOOL toggled = [pushService toggleSubscriptionForShow:show inViewController:self];
-                if (! toggled) {
-                    return;
-                }
-                
-                // Use !subscribed since the status has been reversed
-                AnalyticsTitle analyticsTitle = (! subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = AnalyticsSourceLongPress;
-                labels.value = show.URN;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-                
-                [Banner showSubscription:! subscribed forShowWithName:show.title inViewController:self];
-            }]];
-        }
         
         NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:show];
         if (sharingURL) {

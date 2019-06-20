@@ -82,6 +82,16 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Data protection</string>
+			<key>Key</key>
+			<string>Button_DataProtection</string>
+			<key>IASKTextAlignment</key>
+			<string>IASKUITextAlignmentLeft</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 			<key>Title</key>
 			<string>Licenses</string>

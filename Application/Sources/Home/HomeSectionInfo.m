@@ -8,11 +8,14 @@
 
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
+#import "Favorites.h"
 #import "HomeMediaListTableViewCell.h"
 #import "HomeRadioLiveTableViewCell.h"
-#import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowListTableViewCell.h"
+#import "HomeShowsAccessTableViewCell.h"
+#import "HomeShowVerticalListTableViewCell.h"
 
+#import <libextobjc/libextobjc.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 
 @interface HomeSectionInfo ()
@@ -63,10 +66,13 @@
         return ApplicationSettingAlternateRadioHomepageDesignEnabled() ? HomeMediaListTableViewCell.class : HomeRadioLiveTableViewCell.class;
     }
     else if (self.homeSection == HomeSectionRadioAllShows) {
-        return HomeShowListTableViewCell.class;
+        return HomeShowVerticalListTableViewCell.class;
     }
     else if (self.homeSection == HomeSectionTVShowsAccess || self.homeSection == HomeSectionRadioShowsAccess) {
         return HomeShowsAccessTableViewCell.class;
+    }
+    else if (self.homeSection == HomeSectionTVFavoriteShows || self.homeSection == HomeSectionRadioFavoriteShows) {
+        return HomeShowListTableViewCell.class;
     }
     else {
         return HomeMediaListTableViewCell.class;
@@ -75,8 +81,11 @@
 
 - (BOOL)canOpenList
 {
-    return self.homeSection != HomeSectionTVLive && self.homeSection != HomeSectionRadioLive && self.homeSection != HomeSectionRadioAllShows
-        && self.homeSection != HomeSectionTVShowsAccess && self.homeSection != HomeSectionRadioShowsAccess && ! [self isPlaceholder];
+    return self.homeSection != HomeSectionTVLive && self.homeSection != HomeSectionRadioLive
+        && self.homeSection != HomeSectionRadioAllShows
+        && self.homeSection != HomeSectionTVShowsAccess && self.homeSection != HomeSectionRadioShowsAccess
+        && self.homeSection != HomeSectionTVFavoriteShows && self.homeSection != HomeSectionRadioFavoriteShows
+        && ! [self isPlaceholder];
 }
 
 - (BOOL)isPlaceholder
@@ -111,6 +120,15 @@
             return [SRGDataProvider.currentDataProvider tvTrendingMediasForVendor:vendor withLimit:@(pageSize) editorialLimit:applicationConfiguration.tvTrendingEditorialLimit episodesOnly:applicationConfiguration.tvTrendingEpisodesOnly completionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                 paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
             }];
+            break;
+        }
+            
+        case HomeSectionTVFavoriteShows: {
+            return [[SRGDataProvider.currentDataProvider showsWithURNs:FavoritesShowURNs().allObjects completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGShow.new, transmission), @(SRGTransmissionTV)];
+                NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, title) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+                paginatedItemListCompletionBlock([[shows filteredArrayUsingPredicate:predicate] sortedArrayUsingDescriptors:@[sortDescriptor]], page, nextPage, HTTPResponse, error);
+            }] requestWithPageSize:50];
             break;
         }
             
@@ -174,6 +192,15 @@
                     paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
                 }];
             }
+            break;
+        }
+            
+        case HomeSectionRadioFavoriteShows: {
+            return [[SRGDataProvider.currentDataProvider showsWithURNs:FavoritesShowURNs().allObjects completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGShow.new, transmission), @(SRGTransmissionRadio)];
+                NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, title) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+                paginatedItemListCompletionBlock([[shows filteredArrayUsingPredicate:predicate] sortedArrayUsingDescriptors:@[sortDescriptor]], page, nextPage, HTTPResponse, error);
+            }] requestWithPageSize:50];
             break;
         }
             

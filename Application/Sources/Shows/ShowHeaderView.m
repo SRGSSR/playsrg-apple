@@ -8,7 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "Banner.h"
-#import "Favorite.h"
+#import "Favorites.h"
 #import "NSBundle+PlaySRG.h"
 #import "PushService.h"
 #import "UIImage+PlaySRG.h"
@@ -16,6 +16,7 @@
 
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
+#import <SRGUserData/SRGUserData.h>
 
 // Choose the good aspect ratio for the logo image view, depending of the screen size
 static const UILayoutPriority LogoImageViewAspectRatioConstraintNormalPriority = 900;
@@ -25,9 +26,11 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UIButton *favoriteImageButton;
+@property (nonatomic, weak) IBOutlet UIButton *favoriteLabelButton;
+@property (nonatomic, weak) IBOutlet UIButton *subscriptionImageButton;
+@property (weak, nonatomic) IBOutlet UIButton *subscriptionLabelButton;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
-@property (nonatomic, weak) IBOutlet UIButton *favoriteButton;
-@property (nonatomic, weak) IBOutlet UIButton *subscriptionButton;
 
 @property (nonatomic) IBOutlet NSLayoutConstraint *logoImageViewRatio16_9Constraint; // Need to retain it, because active state removes it
 @property (nonatomic) IBOutlet NSLayoutConstraint *logoImageViewRatioBigLandscapeScreenConstraint; // Need to retain it, because active state removes it
@@ -79,6 +82,9 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     // Accommodate all kinds of usages
     self.logoImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
                                                      withScale:ImageScaleLarge];
+    
+    self.favoriteImageButton.accessibilityElementsHidden = YES;
+    self.subscriptionImageButton.accessibilityElementsHidden = YES;
 }
 
 - (void)layoutSubviews
@@ -93,15 +99,17 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     [super willMoveToWindow:newWindow];
     
     if (newWindow) {
+        // Ensure proper state when the view is reinserted
+        [self updateFavoriteStatus];
+        [self updateSubscriptionStatus];
+        
         [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(favoriteStateDidChange:)
-                                                   name:FavoriteStateDidChangeNotification
-                                                 object:nil];
+                                               selector:@selector(preferencesStateDidChange:)
+                                                   name:SRGPreferencesDidChangeNotification
+                                                 object:SRGUserData.currentUserData.preferences];
     }
     else {
-        [NSNotificationCenter.defaultCenter removeObserver:self
-                                                      name:FavoriteStateDidChangeNotification
-                                                    object:nil];
+        [NSNotificationCenter.defaultCenter removeObserver:self name:SRGPreferencesDidChangeNotification object:SRGUserData.currentUserData.preferences];
     }
 }
 
@@ -127,27 +135,47 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (void)updateFavoriteStatus
 {
-    Favorite *favorite = [Favorite favoriteForShow:self.show];
-    BOOL isFavorite = (favorite != nil);
-    [self.favoriteButton setImage:isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"]
-                         forState:UIControlStateNormal];
-    self.favoriteButton.accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove favorite", @"Show favorite removal label") : PlaySRGAccessibilityLocalizedString(@"Favorite", @"Show favorite creation label");
+    BOOL isFavorite = FavoritesContainsShow(self.show);
+    [self.favoriteImageButton setImage:isFavorite ? [UIImage imageNamed:@"show_favorite_full-22"] : [UIImage imageNamed:@"show_favorite-22"] forState:UIControlStateNormal];
+    
+    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                  NSForegroundColorAttributeName : UIColor.whiteColor };
+    NSString *title = [isFavorite ? NSLocalizedString(@"Favorites", @"Favorite show label when added ,in the show view") : NSLocalizedString(@"Add to favorites", @"Favorite show label to add it, in the show view") uppercaseString];
+    [self.favoriteLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
+                                                                               attributes:attributes] forState:UIControlStateNormal];
+    self.favoriteLabelButton.accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite show label when in favorites, in the show view") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite show label when not in favorites, in the show view");
 }
 
 - (void)updateSubscriptionStatus
 {
-    PushService *pushService = PushService.sharedService;
-    if (! pushService) {
-        self.subscriptionButton.hidden = YES;
+    BOOL isFavorite =  FavoritesContainsShow(self.show);
+    self.subscriptionImageButton.hidden = ! isFavorite;
+    self.subscriptionLabelButton.hidden = ! isFavorite;
+    
+    if (! isFavorite) {
         return;
     }
     
-    self.subscriptionButton.hidden = NO;
-    
-    BOOL subscribed = [pushService isSubscribedToShow:self.show];
-    [self.subscriptionButton setImage:subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"]
-                             forState:UIControlStateNormal];
-    self.subscriptionButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Unsubscribe from show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Subscribe to show", @"Show subscription label");
+    if (PushService.sharedService.enabled) {
+        BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
+        [self.subscriptionImageButton setImage:subscribed ? [UIImage imageNamed:@"show_subscription_full-22"] : [UIImage imageNamed:@"show_subscription-22"] forState:UIControlStateNormal];
+        
+        NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                      NSForegroundColorAttributeName : UIColor.whiteColor };
+        NSString *title = [subscribed ? NSLocalizedString(@"Notified", @"Subscription label when notification enabled in the show view") : NSLocalizedString(@"Notify me", @"Subscription label to be notified in the show view") uppercaseString];
+        [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
+                                                                                         attributes:attributes] forState:UIControlStateNormal];
+        self.subscriptionLabelButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Disable notifications for show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
+    }
+    else {
+        [self.subscriptionImageButton setImage:[UIImage imageNamed:@"show_subscription_disabled-22"] forState:UIControlStateNormal];
+        
+        NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                      NSForegroundColorAttributeName : UIColor.whiteColor };
+        [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:[NSLocalizedString(@"Notify me", @"Subscription label to be notified in the show view") uppercaseString]
+                                                                                         attributes:attributes] forState:UIControlStateNormal];
+        self.subscriptionLabelButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
+    }
 }
 
 - (void)updateAspectRatioWithSize:(CGSize)size
@@ -170,33 +198,26 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (IBAction)toggleFavorite:(id)sender
 {
-    Favorite *favorite = [Favorite toggleFavoriteForShow:self.show];
-    [self updateFavoriteStatus];
+    FavoritesToggleShow(self.show);
+    BOOL isFavorite = FavoritesContainsShow(self.show);
     
-    AnalyticsTitle analyticsTitle = (favorite) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
+    AnalyticsTitle analyticsTitle = isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.source = AnalyticsSourceButton;
     labels.value = self.show.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
     
-    [Banner showFavorite:(favorite != nil) forItemWithName:self.show.title inView:self];
+    [Banner showFavorite:isFavorite forItemWithName:self.show.title inView:self];
 }
 
 - (IBAction)toggleSubscription:(id)sender
 {
-    PushService *pushService = PushService.sharedService;
-    if (! pushService) {
-        return;
-    }
-    
-    BOOL toggled = [pushService toggleSubscriptionForShow:self.show inView:self];
+    BOOL toggled = FavoritesToggleSubscriptionForShow(self.show, self);
     if (! toggled) {
         return;
     }
     
-    [self updateSubscriptionStatus];
-    
-    BOOL subscribed = [pushService isSubscribedToShow:self.show];
+    BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
     
     AnalyticsTitle analyticsTitle = (subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -209,9 +230,13 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 #pragma mark Notifications
 
-- (void)favoriteStateDidChange:(NSNotification *)notification
+- (void)preferencesStateDidChange:(NSNotification *)notification
 {
-    [self updateFavoriteStatus];
+    NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
+    if ([domains containsObject:PlayPreferencesDomain]) {
+        [self updateFavoriteStatus];
+        [self updateSubscriptionStatus];
+    }
 }
 
 @end

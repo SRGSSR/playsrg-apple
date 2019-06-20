@@ -33,13 +33,15 @@ NSString *TitleForHomeSection(HomeSection homeSection)
                      @(HomeSectionTVScheduledLivestreams) : NSLocalizedString(@"Web livestreams", @"Label used on the home page to present scheduled livestream medias. Only on test versions."),
                      @(HomeSectionTVLiveCenter) : NSLocalizedString(@"Live center", @"Label used on the home page to present live center medias. Only on test versions."),
                      @(HomeSectionTVShowsAccess) : NSLocalizedString(@"Shows", @"Label used on the TV home page to present the shows AZ and shows by date access buttons."),
+                     @(HomeSectionTVFavoriteShows) : NSLocalizedString(@"Favorites", @"Label used on the TV home page to present the favorite shows."),
                      @(HomeSectionRadioLive) : NSLocalizedString(@"Live radio", @"Label used on a radio home page to present the livestream"),
                      @(HomeSectionRadioLatestEpisodes) : NSLocalizedString(@"The latest episodes", @"Label used on a radio home page to present the latest audio episodes"),
                      @(HomeSectionRadioMostPopular) : NSLocalizedString(@"Most listened to", @"Label used on a radio home page to present the most listened / popular audio medias"),
                      @(HomeSectionRadioLatest) : NSLocalizedString(@"The latest audios", @"Label used on a radio home page to present the latest audios"),
                      @(HomeSectionRadioLatestVideos) : NSLocalizedString(@"Latest videos", @"Label used on a radio home page to present the latest videos"),
                      @(HomeSectionRadioAllShows) : NSLocalizedString(@"Shows", @"Label used on a radio home page to present its associated shows"),
-                     @(HomeSectionRadioShowsAccess) : NSLocalizedString(@"Shows", @"Label used on a radio home page to present the shows AZ and shows by date access buttons.") };
+                     @(HomeSectionRadioShowsAccess) : NSLocalizedString(@"Shows", @"Label used on a radio home page to present the shows AZ and shows by date access buttons."),
+                     @(HomeSectionRadioFavoriteShows) : NSLocalizedString(@"Favorites", @"Label used on a radio home page to present the favorite shows.") };
     });
     return s_names[@(homeSection)];
 }
@@ -98,13 +100,15 @@ static HomeSection HomeSectionWithString(NSString *string)
                             @"tvScheduledLivestreams" : @(HomeSectionTVScheduledLivestreams),
                             @"tvLiveCenter" : @(HomeSectionTVLiveCenter),
                             @"tvShowsAccess" : @(HomeSectionTVShowsAccess),
+                            @"tvFavoriteShows" : @(HomeSectionTVFavoriteShows),
                             @"radioLive" : @(HomeSectionRadioLive),
                             @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
                             @"radioMostPopular" : @(HomeSectionRadioMostPopular),
                             @"radioLatest" : @(HomeSectionRadioLatest),
                             @"radioLatestVideos" : @(HomeSectionRadioLatestVideos),
                             @"radioAllShows" : @(HomeSectionRadioAllShows),
-                            @"radioShowsAccess" : @(HomeSectionRadioShowsAccess) };
+                            @"radioShowsAccess" : @(HomeSectionRadioShowsAccess),
+                            @"radioFavoriteShows" : @(HomeSectionRadioFavoriteShows) };
     });
     return s_homeSections[string].integerValue ?: HomeSectionUnknown;
 }
@@ -126,8 +130,8 @@ NSString *TitleForMenuItem(MenuItem menuItem)
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_names = @{ @(MenuItemSearch) : NSLocalizedString(@"Search", @"Label in the left menu to present the search view"),
-                     @(MenuItemFavorites) : NSLocalizedString(@"Favorites", @"Label in the left menu to present favorites"),
-                     @(MenuItemSubscriptions) : NSLocalizedString(@"Subscriptions", @"Label in the left menu to present subscriptions"),
+                     @(MenuItemFavorites) : NSLocalizedString(@"Favorites", @"Label in the left menu to present Favorites"),
+                     @(MenuItemWatchLater) : NSLocalizedString(@"Watch later", @"Label in the left menu to present the watch later list"),
                      @(MenuItemDownloads) : NSLocalizedString(@"Downloads", @"Label in the left menu to present downloads"),
                      @(MenuItemHistory) : NSLocalizedString(@"History", @"Label in the left menu to present history"),
                      @(MenuItemTVOverview) : NSLocalizedString(@"Overview", @"Label in the left menu to present the main TV view"),
@@ -213,14 +217,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *middlewareURL;
 @property (nonatomic) NSURL *identityWebserviceURL;
 @property (nonatomic) NSURL *identityWebsiteURL;
+@property (nonatomic) NSURL *userDataServiceURL;
 
-@property (nonatomic) NSURL *historyServiceURL;
-@property (nonatomic) NSTimeInterval historySynchronizationInterval;
-
-@property (nonatomic) NSURL *feedbackURL;
 @property (nonatomic) NSURL *whatsNewURL;
+@property (nonatomic) NSURL *feedbackURL;
 @property (nonatomic) NSURL *impressumURL;
 @property (nonatomic) NSURL *termsAndConditionsURL;
+@property (nonatomic) NSURL *dataProtectionURL;
 @property (nonatomic) NSURL *betaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
@@ -409,12 +412,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
     
-    NSString *feedbackURLString = [self.remoteConfig configValueForKey:@"feedbackURL"].stringValue;
-    NSURL *feedbackURL = (feedbackURLString.length != 0) ? [NSURL URLWithString:feedbackURLString] : nil;
-    if (! feedbackURL) {
-        return NO;
-    }
-    
     NSString *whatsNewURLString = [self.remoteConfig configValueForKey:@"whatsNewURL"].stringValue;
     NSURL *whatsNewURL = (whatsNewURLString.length != 0) ? [NSURL URLWithString:whatsNewURLString] : nil;
     if (! whatsNewURL) {
@@ -447,7 +444,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.playURL = playURL;
     self.middlewareURL = middlewareURL;
-    self.feedbackURL = feedbackURL;
     self.whatsNewURL = whatsNewURL;
     
     self.appStoreProductIdentifier = appStoreProductIdentifier;
@@ -471,11 +467,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     NSString *identityWebsiteURLString = [self.remoteConfig configValueForKey:@"identityWebsiteURL"].stringValue;
     self.identityWebsiteURL = (identityWebsiteURLString.length != 0) ? [NSURL URLWithString:identityWebsiteURLString] : nil;
     
-    NSString *historyServiceURLString = [self.remoteConfig configValueForKey:@"historyServiceURL"].stringValue;
-    self.historyServiceURL = (historyServiceURLString.length != 0) ? [NSURL URLWithString:historyServiceURLString] : nil;
+    NSString *userDataServiceURLString = [self.remoteConfig configValueForKey:@"userDataServiceURL"].stringValue;
+    self.userDataServiceURL = (userDataServiceURLString.length != 0) ? [NSURL URLWithString:userDataServiceURLString] : nil;
     
-    FIRRemoteConfigValue *historySynchronizationInterval = [self.remoteConfig configValueForKey:@"historySynchronizationInterval"];
-    self.historySynchronizationInterval = (historySynchronizationInterval.stringValue.length > 0) ? fmax(historySynchronizationInterval.numberValue.doubleValue, 10.) : 30.;
+    NSString *feedbackURLString = [self.remoteConfig configValueForKey:@"feedbackURL"].stringValue;
+    self.feedbackURL = (feedbackURLString.length != 0) ? [NSURL URLWithString:feedbackURLString] : nil;
     
     NSString *impressumURLString = [self.remoteConfig configValueForKey:@"impressumURL"].stringValue;
     self.impressumURL = (impressumURLString.length != 0) ? [NSURL URLWithString:impressumURLString] : nil;
@@ -488,6 +484,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *termsAndConditionsURLString = [self.remoteConfig configValueForKey:@"termsAndConditionsURL"].stringValue;
     self.termsAndConditionsURL = (termsAndConditionsURLString.length != 0) ? [NSURL URLWithString:termsAndConditionsURLString] : nil;
+    
+    NSString *dataProtectionURLString = [self.remoteConfig configValueForKey:@"dataProtectionURL"].stringValue;
+    self.dataProtectionURL = (dataProtectionURLString.length != 0) ? [NSURL URLWithString:dataProtectionURLString] : nil;
     
     FIRRemoteConfigValue *tvNumberOfLivePlaceholders = [self.remoteConfig configValueForKey:@"tvNumberOfLivePlaceholders"];
     self.tvNumberOfLivePlaceholders = (tvNumberOfLivePlaceholders.source != FIRRemoteConfigSourceStatic) ? MAX(tvNumberOfLivePlaceholders.numberValue.integerValue, 0) : 3;

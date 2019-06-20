@@ -5,7 +5,7 @@
 //
 
 import Masonry
-import PaperOnboarding
+import paper_onboarding
 import SRGAppearance
 
 @objc(OnboardingViewController) public class OnboardingViewController : BaseViewController, PaperOnboardingDataSource, PaperOnboardingDelegate {
@@ -162,7 +162,9 @@ import SRGAppearance
                                   titleColor: .white,
                                   descriptionColor: .white,
                                   titleFont: UIFont.srg_mediumFont(withSize: titleFontSize),
-                                  descriptionFont: UIFont.srg_mediumFont(withSize: subtitleFontSize))
+                                  descriptionFont: UIFont.srg_mediumFont(withSize: subtitleFontSize),
+                                  descriptionLabelPadding: 30.0,
+                                  titleLabelPadding: 15.0)
     }
     
     // MARK: PaperOnboardingDelegate protocol
@@ -193,11 +195,11 @@ import SRGAppearance
     }
     
     @IBAction private func close(_ sender: UIButton) {
-        if (self.onboarding.uid == "subscription") {
+        if (self.onboarding.uid == "favorites" || self.onboarding.uid == "favorites_account") {
             PushService.shared?.presentSystemAlertForPushNotifications()
         }
         self.dismiss(animated: true, completion: {
-            if (self.onboarding.uid == "account" || self.onboarding.uid == "history") {
+            if (self.onboarding.uid == "account") {
                 let playAppDelegate = UIApplication.shared.delegate as! PlayAppDelegate
                 playAppDelegate.sideMenuController.displayMenuHeader(animated: true)
             }

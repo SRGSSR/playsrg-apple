@@ -9,16 +9,16 @@
   "middlewareURL": "https://playfff.herokuapp.com",
   "feedbackURL": "https://play.typeform.com/to/rarQYT",
   "searchOptions": "tvShows,videos,radioShows,audios",
-  "tvHomeSections": "tvTrending,tvLive,tvEvents,tvTopics",
+  "tvHomeSections": "tvTrending,tvLive,tvFavoriteShows,tvEvents,tvTopics",
   "tvTrendingEpisodesOnly": true,
   "tvFeaturedHomeSectionHeaderHidden": true,
   "tvNumberOfLivePlaceholders": 3,
-  "radioHomeSections": "radioLive,radioShowsAccess,radioLatestEpisodes,radioMostPopular,radioLatest",
+  "radioHomeSections": "radioLive,radioFavoriteShows,radioShowsAccess,radioLatestEpisodes,radioMostPopular,radioLatest",
   "radioFeaturedHomeSectionHeaderHidden": true,
   "topicSections": "latest,mostPopular",
   "topicSectionsWithSubtopics": "latest",
   "minimumSocialViewCount": 50,
-  "termsAndConditionsURL": "https://www.rtr.ch/general/cundiziuns-d-utilisaziun-e-decl-davart-la-protecziun-da-datas",
+  "dataProtectionURL": "https://www.rtr.ch/general/cundiziuns-d-utilisaziun-e-decl-davart-la-protecziun-da-datas",
   "whatsNewURL": "https://pastebin.com/raw/rmJY7QL7",
   "tvMenuItems": "showAZ,byDate",
   "radioMenuItems": "showAZ",
@@ -28,5 +28,5 @@
   "moduleDefaultTextColor": "#969696",
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
-  "hiddenOnboardings": "account"
+  "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account"
 }

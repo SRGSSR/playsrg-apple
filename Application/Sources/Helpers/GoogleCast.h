@@ -4,12 +4,14 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
-#import <GoogleCast/GoogleCast.h>
 #import <SRGDataProvider/SRGDataProvider.h>
-#import <SRGLetterbox/SRGLetterbox.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+/**
+ *  Call to setup Google Cast.
+ */
+OBJC_EXPORT void GoogleCastSetup(void);
 
 /**
  *  Return `YES` iff Google Cast is possible for the specified media composition.

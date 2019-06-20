@@ -9,11 +9,10 @@
 #import "ActivityItemSource.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
-#import "Favorite.h"
 #import "MediaCollectionViewCell.h"
+#import "Favorites.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayAppDelegate.h"
-#import "PushService.h"
 #import "ShowHeaderView.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
@@ -140,7 +139,7 @@
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     SRGPaginatedEpisodeCompositionCompletionBlock completionBlock = ^(SRGEpisodeComposition * _Nullable episodeComposition, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGMedia.new, contentType), @(SRGContentTypeEpisode)];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ || %K == %@", @keypath(SRGMedia.new, contentType), @(SRGContentTypeEpisode), @keypath(SRGMedia.new, contentType), @(SRGContentTypeScheduledLivestream)];
         
         NSMutableArray *medias = [NSMutableArray array];
         for (SRGEpisode *episode in episodeComposition.episodes) {
@@ -189,43 +188,21 @@
 {
     NSMutableArray<id<UIPreviewActionItem>> *previewActionItems = [NSMutableArray array];
     
-    Favorite *favorite = [Favorite favoriteForShow:self.show];
-    BOOL favorited = (favorite != nil);
+    BOOL isFavorite = FavoritesContainsShow(self.show);
     
-    UIPreviewAction *favoriteAction = [UIPreviewAction actionWithTitle:favorited ? NSLocalizedString(@"Remove from favorites", @"Button label to remove a favorite from the show preview window") : NSLocalizedString(@"Add to favorites", @"Button label to add a favorite from the show preview window") style:favorited ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        [Favorite toggleFavoriteForShow:self.show];
+    UIPreviewAction *favoriteAction = [UIPreviewAction actionWithTitle:isFavorite ? NSLocalizedString(@"Remove from favorites", @"Button label to remove a show from favorites in the show preview window") : NSLocalizedString(@"Add to favorites", @"Button label to add a show to favorites in the show preview window") style:isFavorite ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        FavoritesToggleShow(self.show);
         
-        // Use !favorited since favorited status has been reversed
-        AnalyticsTitle analyticsTitle = (! favorited) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
+        // Use !isFavorite since favorite status has been reversed
+        AnalyticsTitle analyticsTitle = (! isFavorite) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.source = AnalyticsSourcePeekMenu;
         labels.value = self.show.URN;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
         
-        [Banner showFavorite:! favorited forItemWithName:self.show.title inViewController:nil /* Not 'self' since dismissed */];
+        [Banner showFavorite:! isFavorite forItemWithName:self.show.title inViewController:nil /* Not 'self' since dismissed */];
     }];
-    [previewActionItems addObject:favoriteAction];
-    
-    PushService *pushService = PushService.sharedService;
-    if (pushService) {
-        BOOL subscribed = [pushService isSubscribedToShow:self.show];
-        UIPreviewAction *subscriptionAction = [UIPreviewAction actionWithTitle:subscribed ? NSLocalizedString(@"Unsubscribe from show", @"Button label to unsubscribe from a show") : NSLocalizedString(@"Subscribe to show", @"Button label to unsubscribe to a show") style:subscribed ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-            BOOL toggled = [pushService toggleSubscriptionForShow:self.show inViewController:nil /* Not 'self' since dismissed */];
-            if (! toggled) {
-                return;
-            }
-            
-            // Use !subscribed since the status has been reversed
-            AnalyticsTitle analyticsTitle = (! subscribed) ? AnalyticsTitleSubscriptionAdd : AnalyticsTitleSubscriptionRemove;
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourcePeekMenu;
-            labels.value = self.show.URN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-            
-            [Banner showSubscription:! subscribed forShowWithName:self.show.title inViewController:nil /* Not 'self' since dismissed */];
-        }];
-        [previewActionItems addObject:subscriptionAction];
-    }
+    [previewActionItems addObject:favoriteAction];    
     
     NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
     if (sharingURL) {
@@ -314,10 +291,16 @@
     }
     
     NSString *broadcastInformationMessage = self.show.broadcastInformation.message;
-    self.emptyCollectionTitle = broadcastInformationMessage;
-    [self.collectionView reloadEmptyDataSet];
+    if (broadcastInformationMessage) {
+        self.emptyCollectionTitle = broadcastInformationMessage;
+        self.emptyCollectionSubtitle = @"";
+    }
+    else {
+        self.emptyCollectionTitle = nil;
+        self.emptyCollectionSubtitle = nil;
+    }
     
-    self.refreshControlDisabled = (broadcastInformationMessage != nil);
+    [self.collectionView reloadEmptyDataSet];
 }
 
 #pragma mark Actions

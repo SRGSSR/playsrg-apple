@@ -10,16 +10,16 @@
 #import "Download.h"
 #import "NSTimer+PlaySRG.h"
 
+#import <GoogleCast/GoogleCast.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 #import <SRGUserData/SRGUserData.h>
 
 static NSMutableDictionary<NSString *, NSNumber *> *s_cachedProgresses;
-static NSMutableDictionary<NSString *, NSString *> *s_tasks;
 static NSTimer *s_trackerTimer;
 
 #pragma mark Helpers
 
-static float HistoryPlaybackProgress(NSTimeInterval playbackPosition, double durationInSeconds)
+float HistoryPlaybackProgress(NSTimeInterval playbackPosition, double durationInSeconds)
 {
     NSTimeInterval durationWithToleranceInSeconds = fmax(durationInSeconds - ApplicationConfigurationEffectiveEndTolerance(durationInSeconds), 0.f);
     if (durationWithToleranceInSeconds == 0.f) {
@@ -40,7 +40,7 @@ SRGPosition *HistoryResumePlaybackPositionForMedia(SRGMedia *media)
     // Allow faster seek to an earlier position, but not to a later position (playback for a history entry should not resume with
     // content the user has not seen yet)
     SRGHistoryEntry *historyEntry = [SRGUserData.currentUserData.history historyEntryWithUid:media.URN];
-    if (historyEntry && ! historyEntry.discarded) {
+    if (historyEntry) {
         return [SRGPosition positionBeforeTime:historyEntry.lastPlaybackTime];
     }
     else {
@@ -68,34 +68,59 @@ static SRGMedia *HistoryChapterMedia(SRGLetterboxController *controller)
 __attribute__((constructor)) static void HistoryPlayerTrackerInit(void)
 {
     s_cachedProgresses = [NSMutableDictionary dictionary];
-    s_tasks = [NSMutableDictionary dictionary];
-    
     s_trackerTimer = [NSTimer play_timerWithTimeInterval:1. repeats:YES block:^(NSTimer * _Nonnull timer) {
-        SRGLetterboxController *letterboxController = SRGLetterboxService.sharedService.controller;
-        if (letterboxController.playbackState != SRGMediaPlayerPlaybackStatePlaying) {
-            return;
-        }
-        
-        SRGMedia *chapterMedia = HistoryChapterMedia(letterboxController);
-        if (! chapterMedia || chapterMedia.contentType == SRGContentTypeLivestream) {
-            return;
-        }
-        
-        CMTime currentTime = letterboxController.currentTime;
-        CMTime chapterPlaybackTime = (chapterMedia.contentType != SRGContentTypeScheduledLivestream && CMTIME_IS_VALID(currentTime)) ? currentTime : kCMTimeZero;
         NSString *deviceUid = UIDevice.currentDevice.name;
         
-        // Save the segment position.
-        SRGSubdivision *subdivision = letterboxController.subdivision;
-        if ([subdivision isKindOfClass:SRGSegment.class]) {
-            SRGSegment *segment = (SRGSegment *)subdivision;
-            CMTime segmentPlaybackTime = CMTimeMaximum(CMTimeSubtract(chapterPlaybackTime, CMTimeMakeWithSeconds(segment.markIn / 1000., NSEC_PER_SEC)), kCMTimeZero);
-            [SRGUserData.currentUserData.history saveHistoryEntryForUid:segment.URN withLastPlaybackTime:segmentPlaybackTime deviceUid:deviceUid completionBlock:nil];
+        GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
+        if (session) {
+            GCKRemoteMediaClient *remoteMediaClient = session.remoteMediaClient;
+            GCKMediaStatus *mediaStatus = remoteMediaClient.mediaStatus;
+            if (mediaStatus.playerState != GCKMediaPlayerStatePlaying) {
+                return;
+            }
+            
+            // Only for on-demand streams
+            GCKMediaInformation *mediaInformation = mediaStatus.mediaInformation;
+            if (mediaInformation.streamType != GCKMediaStreamTypeBuffered) {
+                return;
+            }
+            
+            NSString *URN = mediaInformation.contentID;
+            if (! URN) {
+                return;
+            }
+            
+            // Use approximate value. The value in GCKMediaStatus is updated from time to time. The approximateStreamPosition
+            // interpolates between known values to get a smoother progress
+            NSTimeInterval streamPosition = remoteMediaClient.approximateStreamPosition;
+            [SRGUserData.currentUserData.history saveHistoryEntryWithUid:URN lastPlaybackTime:CMTimeMakeWithSeconds(streamPosition, NSEC_PER_SEC) deviceUid:deviceUid completionBlock:nil];
         }
-        
-        // Save the main full-length position (update after the segment so that full-length entries are always more recent than corresponding
-        // segment entries)
-        [SRGUserData.currentUserData.history saveHistoryEntryForUid:chapterMedia.URN withLastPlaybackTime:chapterPlaybackTime deviceUid:deviceUid completionBlock:nil];
+        else {
+            SRGLetterboxController *letterboxController = SRGLetterboxService.sharedService.controller;
+            if (letterboxController.playbackState != SRGMediaPlayerPlaybackStatePlaying) {
+                return;
+            }
+            
+            SRGMedia *chapterMedia = HistoryChapterMedia(letterboxController);
+            if (! chapterMedia || chapterMedia.contentType == SRGContentTypeLivestream) {
+                return;
+            }
+            
+            CMTime currentTime = letterboxController.currentTime;
+            CMTime chapterPlaybackTime = (chapterMedia.contentType != SRGContentTypeScheduledLivestream && CMTIME_IS_VALID(currentTime)) ? currentTime : kCMTimeZero;
+            
+            // Save the segment position.
+            SRGSubdivision *subdivision = letterboxController.subdivision;
+            if ([subdivision isKindOfClass:SRGSegment.class]) {
+                SRGSegment *segment = (SRGSegment *)subdivision;
+                CMTime segmentPlaybackTime = CMTimeMaximum(CMTimeSubtract(chapterPlaybackTime, CMTimeMakeWithSeconds(segment.markIn / 1000., NSEC_PER_SEC)), kCMTimeZero);
+                [SRGUserData.currentUserData.history saveHistoryEntryWithUid:segment.URN lastPlaybackTime:segmentPlaybackTime deviceUid:deviceUid completionBlock:nil];
+            }
+            
+            // Save the main full-length position (update after the segment so that full-length entries are always more recent than corresponding
+            // segment entries)
+            [SRGUserData.currentUserData.history saveHistoryEntryWithUid:chapterMedia.URN lastPlaybackTime:chapterPlaybackTime deviceUid:deviceUid completionBlock:nil];
+        }
     }];
 }
 
@@ -109,8 +134,7 @@ static BOOL HistoryIsProgressForMediaMetadataTracked(id<SRGMediaMetadata> mediaM
 static float HistoryPlaybackProgressForMediaMetadataHistoryEntry(SRGHistoryEntry *historyEntry, id<SRGMediaMetadata> mediaMetadata)
 {
     NSCParameterAssert(historyEntry);
-    
-    return ! historyEntry.discarded ? HistoryPlaybackProgress(CMTimeGetSeconds(historyEntry.lastPlaybackTime), mediaMetadata.duration / 1000.) : 0.f;
+    return HistoryPlaybackProgress(CMTimeGetSeconds(historyEntry.lastPlaybackTime), mediaMetadata.duration / 1000.);
 }
 
 float HistoryPlaybackProgressForMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
@@ -124,19 +148,14 @@ float HistoryPlaybackProgressForMediaMetadata(id<SRGMediaMetadata> mediaMetadata
     }
 }
 
-void HistoryPlaybackProgressForMediaMetadataAsync(id<SRGMediaMetadata> mediaMetadata, void (^update)(float progress))
+NSString *HistoryPlaybackProgressForMediaMetadataAsync(id<SRGMediaMetadata> mediaMetadata, void (^update)(float progress))
 {
     if (! HistoryIsProgressForMediaMetadataTracked(mediaMetadata)) {
         update(0.f);
-        return;
+        return nil;
     }
     
-    NSString *taskHandle = s_tasks[mediaMetadata.URN];
-    if (taskHandle) {
-        [SRGUserData.currentUserData.history cancelTaskWithHandle:taskHandle];
-    }
-    
-    s_tasks[mediaMetadata.URN] = [SRGUserData.currentUserData.history historyEntryWithUid:mediaMetadata.URN completionBlock:^(SRGHistoryEntry * _Nullable historyEntry, NSError * _Nullable error) {
+    NSString *handle = [SRGUserData.currentUserData.history historyEntryWithUid:mediaMetadata.URN completionBlock:^(SRGHistoryEntry * _Nullable historyEntry, NSError * _Nullable error) {
         if (error) {
             return;
         }
@@ -145,68 +164,19 @@ void HistoryPlaybackProgressForMediaMetadataAsync(id<SRGMediaMetadata> mediaMeta
         
         dispatch_async(dispatch_get_main_queue(), ^{
             s_cachedProgresses[mediaMetadata.URN] = (progress > 0.f) ? @(progress) : nil;
-            s_tasks[mediaMetadata.URN] = nil;
-            
             update(progress);
         });
     }];
     
     NSNumber *cachedProgress = s_cachedProgresses[mediaMetadata.URN];
     update(cachedProgress.floatValue);
+    
+    return handle;
 }
 
-#pragma mark Favorite functions
-
-static BOOL HistoryIsProgressForFavoriteTracked(Favorite *favorite)
+void HistoryPlaybackProgressAsyncCancel(NSString *handle)
 {
-    return favorite && favorite.type == FavoriteTypeMedia && favorite.duration > 0. && favorite.mediaContentType != FavoriteMediaContentTypeLive && favorite.mediaContentType != FavoriteMediaContentTypeScheduledLive;
-}
-
-static float HistoryPlaybackProgressForFavoriteHistoryEntry(SRGHistoryEntry *historyEntry, Favorite *favorite)
-{
-    NSCParameterAssert(historyEntry);
-    
-    return ! historyEntry.discarded ? HistoryPlaybackProgress(CMTimeGetSeconds(historyEntry.lastPlaybackTime), favorite.duration / 1000.) : 0.f;
-}
-
-float HistoryPlaybackProgressForFavorite(Favorite *favorite)
-{
-    if (HistoryIsProgressForFavoriteTracked(favorite)) {
-        SRGHistoryEntry *historyEntry = [SRGUserData.currentUserData.history historyEntryWithUid:favorite.mediaURN];
-        return historyEntry ? HistoryPlaybackProgressForFavoriteHistoryEntry(historyEntry, favorite) : 0.f;
+    if (handle) {
+        [SRGUserData.currentUserData.history cancelTaskWithHandle:handle];
     }
-    else {
-        return 0.f;
-    }
-}
-
-void HistoryPlaybackProgressForFavoriteAsync(Favorite *favorite, void (^update)(float progress))
-{
-    if (! HistoryIsProgressForFavoriteTracked(favorite)) {
-        update(0.f);
-        return;
-    }
-    
-    NSString *taskHandle = s_tasks[favorite.mediaURN];
-    if (taskHandle) {
-        [SRGUserData.currentUserData.history cancelTaskWithHandle:taskHandle];
-    }
-    
-    s_tasks[favorite.mediaURN] = [SRGUserData.currentUserData.history historyEntryWithUid:favorite.mediaURN completionBlock:^(SRGHistoryEntry * _Nullable historyEntry, NSError * _Nullable error) {
-        if (error) {
-            return;
-        }
-        
-        float progress = historyEntry ? HistoryPlaybackProgressForFavoriteHistoryEntry(historyEntry, favorite) : 0.f;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            s_cachedProgresses[favorite.mediaURN] = (progress > 0.f) ? @(progress) : nil;
-            s_tasks[favorite.mediaURN] = nil;
-            
-            update(progress);
-        });
-    }];
-    
-    NSNumber *cachedProgress = s_cachedProgresses[favorite.mediaURN];
-    update(cachedProgress.floatValue);
 }

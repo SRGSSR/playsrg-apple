@@ -10,14 +10,14 @@
   "middlewareURL": "https://playfff.herokuapp.com",
   "feedbackURL": "https://play.typeform.com/to/bR8TQq",
   "searchOptions": "videos",
-  "tvHomeSections": "tvTrending,tvTopics",
+  "tvHomeSections": "tvTrending,tvFavoriteShows,tvTopics",
   "tvTrendingEpisodesOnly": true,
   "tvTrendingEditorialLimit": 2,
   "tvFeaturedHomeSectionHeaderHidden": true,
   "topicSections": "latest,mostPopular",
   "topicSectionsWithSubtopics": "latest",
   "minimumSocialViewCount": 50,
-  "termsAndConditionsURL": "https://www.swissinfo.ch/eng/data-privacy-statement/133174",
+  "dataProtectionURL": "https://www.swissinfo.ch/eng/data-privacy-statement/133174",
   "whatsNewURL": "https://pastebin.com/raw/BRC1hPbt",
   "downloadsHintsHidden": true,
   "moreEpisodesHidden": true,
@@ -25,5 +25,5 @@
   "moduleDefaultTextColor": "#969696",
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
-  "hiddenOnboardings": "account"
+  "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account"
 }

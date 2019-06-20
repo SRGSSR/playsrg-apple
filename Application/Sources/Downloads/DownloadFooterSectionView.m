@@ -83,8 +83,8 @@
     
     NSString *totalFreeSpaceString = @"";
     NSError *error = nil;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSDictionary *dictionary = [NSFileManager.defaultManager attributesOfFileSystemForPath:[paths lastObject] error: &error];
+    NSArray<NSString *> *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSDictionary *dictionary = [NSFileManager.defaultManager attributesOfFileSystemForPath:paths.lastObject error:&error];
     
     static dispatch_once_t s_onceToken;
     static NSByteCountFormatter *s_byteCountFormatter;
@@ -93,7 +93,7 @@
         s_byteCountFormatter.zeroPadsFractionDigits = YES;
     });
     
-    if (dictionary && !error) {
+    if (dictionary && ! error) {
         NSNumber *totalFreeFileSystemSizeInBytes = [dictionary objectForKey:NSFileSystemFreeSize];
         self.totalFreeSpaceSize = [totalFreeFileSystemSizeInBytes unsignedLongLongValue];
         totalFreeSpaceString = [s_byteCountFormatter stringFromByteCount:self.totalFreeSpaceSize];

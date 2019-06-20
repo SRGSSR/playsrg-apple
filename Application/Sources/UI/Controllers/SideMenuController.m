@@ -9,21 +9,20 @@
 #import "ApplicationSettings.h"
 #import "CalendarViewController.h"
 #import "DownloadsViewController.h"
-#import "FavoritesViewController.h"
 #import "HistoryViewController.h"
 #import "HomeViewController.h"
 #import "MainNavigationController.h"
+#import "FavoritesViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "RadioShowsViewController.h"
 #import "SearchViewController.h"
 #import "SettingsViewController.h"
 #import "ShowsViewController.h"
-#import "SubscriptionsViewController.h"
 #import "UIDevice+PlaySRG.h"
+#import "WatchLaterViewController.h"
 #import "WebViewController.h"
 
-#import <ComScore/ComScore.h>
 #import <libextobjc/libextobjc.h>
 #import <Masonry/Masonry.h>
 
@@ -372,8 +371,8 @@ static const CGFloat SideMenuOffset = -50.f;
                 break;
             }
                 
-            case MenuItemSubscriptions: {
-                viewController = [[SubscriptionsViewController alloc] init];
+            case MenuItemWatchLater: {
+                viewController = [[WatchLaterViewController alloc] init];
                 break;
             }
                 
@@ -415,9 +414,9 @@ static const CGFloat SideMenuOffset = -50.f;
                 [queryItems addObject:[NSURLQueryItem queryItemWithName:@"type" value:isPad ? @"tablet" : @"phone"]];
                 [queryItems addObject:[NSURLQueryItem queryItemWithName:@"model" value:UIDevice.currentDevice.model]];
                 
-                NSString *visitorID = [CSComScore visitorID];
-                if (visitorID) {
-                    [queryItems addObject:[NSURLQueryItem queryItemWithName:@"cid" value:visitorID]];
+                NSString *tagCommanderUid = [NSUserDefaults.standardUserDefaults stringForKey:@"tc_unique_id"];
+                if (tagCommanderUid) {
+                    [queryItems addObject:[NSURLQueryItem queryItemWithName:@"cid" value:tagCommanderUid]];
                 }
                 
                 NSURL *feedbackURL = applicationConfiguration.feedbackURL;

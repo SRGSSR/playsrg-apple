@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, HomeSection) {
     HomeSectionTVScheduledLivestreams,
     HomeSectionTVLiveCenter,
     HomeSectionTVShowsAccess,
+    HomeSectionTVFavoriteShows,
     
     // Radio sections
     HomeSectionRadioLive,
@@ -37,7 +38,8 @@ typedef NS_ENUM(NSInteger, HomeSection) {
     HomeSectionRadioLatest,
     HomeSectionRadioLatestVideos,
     HomeSectionRadioAllShows,
-    HomeSectionRadioShowsAccess
+    HomeSectionRadioShowsAccess,
+    HomeSectionRadioFavoriteShows
 };
 
 typedef NS_ENUM(NSInteger, TopicSection) {
@@ -51,7 +53,7 @@ typedef NS_ENUM(NSInteger, MenuItem) {
     
     MenuItemSearch,
     MenuItemFavorites,
-    MenuItemSubscriptions,
+    MenuItemWatchLater,
     MenuItemDownloads,
     MenuItemHistory,
     
@@ -108,15 +110,13 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly) NSURL *middlewareURL;
 @property (nonatomic, readonly, nullable) NSURL *identityWebserviceURL;
 @property (nonatomic, readonly, nullable) NSURL *identityWebsiteURL;
+@property (nonatomic, readonly, nullable) NSURL *userDataServiceURL;
 
-@property (nonatomic, readonly, nullable) NSURL *historyServiceURL;
-@property (nonatomic, readonly) NSTimeInterval historySynchronizationInterval;
-
-@property (nonatomic, readonly) NSURL *feedbackURL;
 @property (nonatomic, readonly) NSURL *whatsNewURL;
-
+@property (nonatomic, readonly, nullable) NSURL *feedbackURL;
 @property (nonatomic, readonly, nullable) NSURL *impressumURL;
 @property (nonatomic, readonly, nullable) NSURL *termsAndConditionsURL;
+@property (nonatomic, readonly, nullable) NSURL *dataProtectionURL;
 @property (nonatomic, readonly, nullable) NSURL *betaTestingURL;
 @property (nonatomic, readonly, nullable) NSURL *sourceCodeURL;
 

@@ -8,6 +8,13 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ views";
 
+/* Favorite show label when not in favorites, in the player view
+   Favorite show label when not in favorites, in the show view */
+"Add to favorites" = "Add to favorites";
+
+/* Media watch later creation label */
+"Add to the watch later list" = "Add to the watch later list";
+
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "All content for \"%@\"";
 
@@ -20,18 +27,17 @@
 /* Delete button label */
 "Delete" = "Delete";
 
+/* Show unsubscription label */
+"Disable notifications for show" = "Disable notifications for topic";
+
 /* A download button label */
 "Download" = "Download";
 
-/* In the player, show description label */
-"Episode of %@ show" = "Episode of %@ show";
+/* Show subscription label */
+"Enable notifications for show" = "Enable notifications for topic";
 
 /* Introductory title for error notifications */
 "Error" = "Error";
-
-/* Media favorite creation label
-   Show favorite creation label */
-"Favorite" = "Favourite";
 
 /* Introductory title for information notifications */
 "Information" = "Information";
@@ -69,9 +75,8 @@
 /* Hint for content opened in Safari */
 "Opens in Safari." = "Opens in Safari.";
 
-/* Show cell action hint
-   Show cell hint */
-"Opens show details." = "Opens show details.";
+/* Show cell hint */
+"Opens show details." = "Opens topic details.";
 
 /* Livestream play action hint */
 "Plays livestream." = "Plays livestream.";
@@ -92,9 +97,12 @@
 /* A download button label */
 "Remove download" = "Remove download";
 
-/* Media favorite removal label
-   Show favorite removal label */
-"Remove favorite" = "Remove favorite";
+/* Favorite show label when in favorites, in the player view
+   Favorite show label when in favorites, in the show view */
+"Remove from favorites" = "Remove from favorites";
+
+/* Media watch later removal label */
+"Remove from the watch later list" = "Remove from the watch later list";
 
 /* A download button label */
 "Retry download" = "Retry download";
@@ -113,12 +121,6 @@
 
 /* A download button label */
 "Stop downloading" = "Stop downloading";
-
-/* Show subscription label */
-"Subscribe to show" = "Subscribe to topic";
-
-/* Show unsubscription label */
-"Unsubscribe from show" = "Unsubscribe from topic";
 
 /* Introductory title for warning notifications */
 "Warning" = "Warning";

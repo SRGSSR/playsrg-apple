@@ -43,6 +43,11 @@ typedef NS_ENUM(NSInteger, BannerStyle) {
  */
 + (void)showWithStyle:(BannerStyle)style message:(nullable NSString *)message image:(nullable UIImage *)image sticky:(BOOL)sticky inViewController:(nullable UIViewController *)viewController;
 
+/**
+ *  Hide all banners.
+ */
++ (void)hideAll;
+
 @end
 
 @interface Banner (Convenience)
@@ -56,7 +61,7 @@ typedef NS_ENUM(NSInteger, BannerStyle) {
 + (void)showError:(nullable NSError *)error inViewController:(nullable UIViewController *)viewController;
 
 /**
- *  Show a banner telling the user that the specified item has been (un)favorited.
+ *  Show a banner telling the user that the specified item has been added or remvoed from favorites.
  *
  *  @discussion If no name is provided, a standard description will be used.
  */
@@ -70,6 +75,14 @@ typedef NS_ENUM(NSInteger, BannerStyle) {
  */
 + (void)showSubscription:(BOOL)subscribed forShowWithName:(nullable NSString *)name inView:(nullable UIView *)view;
 + (void)showSubscription:(BOOL)subscribed forShowWithName:(nullable NSString *)name inViewController:(nullable UIViewController *)viewController;
+
+/**
+ *  Show a banner telling the user that the specified item has been added to or removed from the watch later list.
+ *
+ *  @discussion If no name is provided, a standard description will be used.
+ */
++ (void)showWatchLaterAdded:(BOOL)added forItemWithName:(nullable NSString *)name inView:(nullable UIView *)view;
++ (void)showWatchLaterAdded:(BOOL)added forItemWithName:(nullable NSString *)name inViewController:(nullable UIViewController *)viewController;
 
 @end
 

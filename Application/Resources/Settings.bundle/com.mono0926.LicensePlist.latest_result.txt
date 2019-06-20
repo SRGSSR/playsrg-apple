@@ -173,6 +173,26 @@ name: FirebaseRemoteConfig, nameSpecified:
 body: Copyright 2018 Googl…
 version: 3.1.0
 
+name: FSCalendar, nameSpecified: 
+body: Copyright (c) 2013-2…
+version: 2.7.9
+
+name: FSCalendar, nameSpecified: 
+body: Copyright (c) 2013-2…
+version: 2.7.9
+
+name: FSCalendar, nameSpecified: 
+body: Copyright (c) 2013-2…
+version: 2.7.9
+
+name: FSCalendar, nameSpecified: 
+body: Copyright (c) 2013-2…
+version: 2.7.9
+
+name: FSCalendar, nameSpecified: 
+body: Copyright (c) 2013-2…
+version: 2.7.9
+
 name: google-cast-sdk, nameSpecified: 
 body: https://developers.g…
 version: 4.3.5
@@ -238,9 +258,75 @@ body:
                    …
 version: 5.3.7
 
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 0.3.901
+name: HockeySDK, nameSpecified: 
+body: ## Licenses
+
+The Hoc…
+version: 5.1.4
+
+name: HockeySDK, nameSpecified: 
+body: ## Licenses
+
+The Hoc…
+version: 5.1.4
+
+name: HockeySDK, nameSpecified: 
+body: ## Licenses
+
+The Hoc…
+version: 5.1.4
+
+name: HockeySDK, nameSpecified: 
+body: ## Licenses
+
+The Hoc…
+version: 5.1.4
+
+name: HockeySDK, nameSpecified: 
+body: ## Licenses
+
+The Hoc…
+version: 5.1.4
+
+name: InAppSettingsKit, nameSpecified: 
+body: Copyright (c) 2009-2…
+version: 2.10
+
+name: InAppSettingsKit, nameSpecified: 
+body: Copyright (c) 2009-2…
+version: 2.10
+
+name: InAppSettingsKit, nameSpecified: 
+body: Copyright (c) 2009-2…
+version: 2.10
+
+name: InAppSettingsKit, nameSpecified: 
+body: Copyright (c) 2009-2…
+version: 2.10
+
+name: InAppSettingsKit, nameSpecified: 
+body: Copyright (c) 2009-2…
+version: 2.10
+
+name: MGSwipeTableCell, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.6.8
+
+name: MGSwipeTableCell, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.6.8
+
+name: MGSwipeTableCell, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.6.8
+
+name: MGSwipeTableCell, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.6.8
+
+name: MGSwipeTableCell, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.6.8
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
@@ -257,6 +343,30 @@ version: 0.3.901
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
 version: 0.3.901
+
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 0.3.901
+
+name: paper-onboarding, nameSpecified: 
+body: The MIT License (MIT…
+version: 6.1.3
+
+name: paper-onboarding, nameSpecified: 
+body: The MIT License (MIT…
+version: 6.1.3
+
+name: paper-onboarding, nameSpecified: 
+body: The MIT License (MIT…
+version: 6.1.3
+
+name: paper-onboarding, nameSpecified: 
+body: The MIT License (MIT…
+version: 6.1.3
+
+name: paper-onboarding, nameSpecified: 
+body: The MIT License (MIT…
+version: 6.1.3
 
 name: PPBadgeView, nameSpecified: 
 body: MIT License
@@ -307,62 +417,88 @@ version: 3.6.1
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
 version: 3.6.1
+
+name: SwiftMessages, nameSpecified: 
+body: Copyright (c) 2016 S…
+version: 7.0.0
+
+name: SwiftMessages, nameSpecified: 
+body: Copyright (c) 2016 S…
+version: 7.0.0
+
+name: SwiftMessages, nameSpecified: 
+body: Copyright (c) 2016 S…
+version: 7.0.0
+
+name: SwiftMessages, nameSpecified: 
+body: Copyright (c) 2016 S…
+version: 7.0.0
+
+name: SwiftMessages, nameSpecified: 
+body: Copyright (c) 2016 S…
+version: 7.0.0
+
+name: UrbanAirship-iOS-SDK, nameSpecified: 
+body: Copyright 2017 Urban…
+version: 9.4.0
+
+name: UrbanAirship-iOS-SDK, nameSpecified: 
+body: Copyright 2017 Urban…
+version: 9.4.0
+
+name: UrbanAirship-iOS-SDK, nameSpecified: 
+body: Copyright 2017 Urban…
+version: 9.4.0
+
+name: UrbanAirship-iOS-SDK, nameSpecified: 
+body: Copyright 2017 Urban…
+version: 9.4.0
+
+name: UrbanAirship-iOS-SDK, nameSpecified: 
+body: Copyright 2017 Urban…
+version: 9.4.0
 
 name: CoconutKit, nameSpecified: , owner: defagos, version: 3.3.7
 
-name: ComScore-iOS-SDK, nameSpecified: , owner: comScore, version: 92f3489
+name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 5.8.4
 
-name: DZNEmptyDataSet, nameSpecified: , owner: dzenbot, version: d210f5a
+name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
 
-name: FSCalendar, nameSpecified: , owner: WenchaoD, version: 2.7.9
-
-name: FXReachability, nameSpecified: , owner: SRGSSR, version: 1.3.2_srg2
-
-name: HockeySDK-iOS, nameSpecified: , owner: bitstadium, version: 5.1.4
-
-name: InAppSettingsKit, nameSpecified: , owner: futuretap, version: 2.10
-
-name: ios-library, nameSpecified: , owner: urbanairship, version: 9.4.0
+name: FXReachability, nameSpecified: , owner: SRGSSR, version: 1.3.2_srg3
 
 name: libextobjc, nameSpecified: , owner: SRGSSR, version: 0.6_srg1
 
-name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: 1.0_srg2
+name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: 1.0_srg3
 
 name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
-name: Masonry, nameSpecified: , owner: SnapKit, version: v1.1.0
+name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: MGSwipeTableCell, nameSpecified: , owner: MortimerGoro, version: 1.6.8
+name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 3.7.1
 
-name: paper-onboarding, nameSpecified: , owner: SRGSSR, version: ebf6bbd
+name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 1.1.10
 
-name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 3.6.3
-
-name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 1.1.9
-
-name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 6.5
+name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 6.5.2
 
 name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
-name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0
+name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0.2
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 1.13
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 1.14.1
 
-name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 1.0.8
+name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 1.0.9
 
-name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 2.5.6
+name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 2.6
 
-name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 1.0
+name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 1.0.2
 
-name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 1.0
+name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 1.1.1
 
-name: SwiftMessages, nameSpecified: , owner: SwiftKickMobile, version: 6.0.2
+name: tagcommander-ios, nameSpecified: , owner: SRGSSR, version: 4.3.3_4.3.1
 
-name: tagcommander-ios, nameSpecified: , owner: SRGSSR, version: 4.1.5_4.1.3
+name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: v2.1.2_srg1
 
-name: UICKeyChainStore, nameSpecified: , owner: kishikawakatsumi, version: v2.1.2
-
-name: YYWebImage, nameSpecified: , owner: ibireme, version: 1.0.5
+name: YYWebImage, nameSpecified: , owner: SRGSSR, version: 1.0.5_srg1
 
 add-version-numbers: true
 

@@ -33,8 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, null_resettable) NSString *emptyCollectionTitle;
 
 /**
- *  The subtitle displayed when the collection is empty. If nil and pull-to-refresh is available (see
- *  `refreshControlDisabled`), a default "Pull to reload" text is displayed
+ *  The subtitle displayed when the collection is empty. If nil, a default "Pull to reload" text is displayed
  */
 @property (nonatomic, copy, null_resettable) NSString *emptyCollectionSubtitle;
 
@@ -45,11 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
  *              layouts are similar.
  */
 @property (nonatomic, copy, nullable) UIImage *emptyCollectionImage;
-
-/**
- *  Set to `YES` to disable pull-to-refresh. Default is `NO`.
- */
-@property (nonatomic, getter=isRefreshControlDisabled) BOOL refreshControlDisabled;
 
 @end
 

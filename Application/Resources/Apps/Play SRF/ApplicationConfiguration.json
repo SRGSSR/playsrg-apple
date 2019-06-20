@@ -10,17 +10,17 @@
   "middlewareURL": "https://playfff.herokuapp.com",
   "feedbackURL": "https://play.typeform.com/to/Vp8UPe",
   "searchOptions": "tvShows,videos,radioShows,audios",
-  "tvHomeSections": "tvTrending,tvLive,tvEvents,tvTopics",
+  "tvHomeSections": "tvTrending,tvLive,tvFavoriteShows,tvEvents,tvTopics",
   "tvTrendingEpisodesOnly": true,
   "tvFeaturedHomeSectionHeaderHidden": true,
   "tvNumberOfLivePlaceholders": 3,
-  "radioHomeSections": "radioLive,radioShowsAccess,radioLatestEpisodes,radioMostPopular,radioLatest",
+  "radioHomeSections": "radioLive,radioFavoriteShows,radioShowsAccess,radioLatestEpisodes,radioMostPopular,radioLatest",
   "radioFeaturedHomeSectionHeaderHidden": true,
   "topicSections": "latest,mostPopular",
   "topicSectionsWithSubtopics": "latest",
   "minimumSocialViewCount": 50,
   "impressumURL": "http://www.srf.ch/play/tv/hilfe",
-  "termsAndConditionsURL": "https://www.srf.ch/hilfe/rechtliches/datenschutzerklaerung",
+  "dataProtectionURL": "https://www.srf.ch/hilfe/rechtliches/datenschutzerklaerung",
   "tvMenuItems": "showAZ,byDate",
   "radioMenuItems": "showAZ",
   "whatsNewURL": "https://pastebin.com/raw/nmGqYFny",
@@ -30,5 +30,5 @@
   "moduleDefaultTextColor": "#969696",
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
-  "hiddenOnboardings": "account"
+  "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account"
 }
