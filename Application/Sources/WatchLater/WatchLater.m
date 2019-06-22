@@ -84,7 +84,6 @@ void WatchLaterMigrate(void)
     SRGPlaylist *watchLaterPlaylist = [SRGUserData.currentUserData.playlists playlistWithUid:SRGPlaylistUidWatchLater];
     if (watchLaterPlaylist) {
         NSArray<DeprecatedFavorite *> *favorites = [DeprecatedFavorite mediaFavorites];
-        
         if (favorites.count == 0) {
             return;
         }
