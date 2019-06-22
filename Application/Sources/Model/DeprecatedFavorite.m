@@ -361,14 +361,14 @@ static NSArray<DeprecatedFavorite *> *s_sortedFavorites;
 
 + (NSArray<DeprecatedFavorite *> *)mediaFavorites
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(DeprecatedFavorite.new, type), @(FavoriteTypeMedia)];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K != nil", @keypath(DeprecatedFavorite.new, type), @(FavoriteTypeMedia), @keypath(DeprecatedFavorite.new, mediaURN)];
     NSArray<DeprecatedFavorite *> *favorites = [self.favorites filteredArrayUsingPredicate:predicate];
     return favorites.reverseObjectEnumerator.allObjects;
 }
 
 + (NSArray<DeprecatedFavorite *> *)showFavorites
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(DeprecatedFavorite.new, type), @(FavoriteTypeShow)];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K != nil", @keypath(DeprecatedFavorite.new, type), @(FavoriteTypeShow), @keypath(DeprecatedFavorite.new, showURN)];
     NSArray<DeprecatedFavorite *> *favorites = [self.favorites filteredArrayUsingPredicate:predicate];
     return favorites.reverseObjectEnumerator.allObjects;
 }
