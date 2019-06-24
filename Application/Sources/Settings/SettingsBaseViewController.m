@@ -69,14 +69,26 @@
 
 - (CGFloat)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView heightForHeaderForSection:(NSInteger)section
 {
-    BOOL hasTitle = [settingsViewController.settingsReader titleForSection:section].length != 0;
+    BOOL hasTitle = [self tableView:tableView titleForHeaderInSection:section].length != 0;
     if (section == 0) {
         return hasTitle ? 75.f : 15.f;
     }
     else {
         
-        return hasTitle ? 60.f : 0.f;
+        return hasTitle ? 60.f : 0.1f;
     }
+}
+
+- (UIView *)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView viewForFooterForSection:(NSInteger)section
+{
+    // We must return a view for the footer so that the height delegate method gets called
+    return [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectZero];
+}
+
+- (CGFloat)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView heightForFooterForSection:(NSInteger)section
+{
+    BOOL hasFooter = [self tableView:tableView titleForFooterInSection:section].length != 0;
+    return hasFooter ? 0.f : 0.1f;
 }
 
 #pragma mark UITableViewDelegate protocol
