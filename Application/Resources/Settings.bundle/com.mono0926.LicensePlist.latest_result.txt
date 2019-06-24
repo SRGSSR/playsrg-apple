@@ -484,7 +484,7 @@ name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
 name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0.2
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: af9f5ab
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 22fe57d
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 1.0.9
 
