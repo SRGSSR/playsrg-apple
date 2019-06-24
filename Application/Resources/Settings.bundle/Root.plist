@@ -30,7 +30,7 @@
 			<key>Title</key>
 			<string>Playback</string>
 			<key>FooterText</key>
-			<string>When enabled, video playback continues even when you close the application.</string>
+			<string>When enabled, video playback continues even when you leave the application.</string>
 		</dict>
 		<dict>
 			<key>Type</key>
