@@ -9,6 +9,7 @@
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
+#import "InAppSettingsKit/IASKSettingsReader.h"
 #import <SRGAppearance/SRGAppearance.h>
 
 @implementation SettingsBaseViewController
@@ -68,7 +69,14 @@
 
 - (CGFloat)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView heightForHeaderForSection:(NSInteger)section
 {
-    return (section == 0) ? 60.f : 75.f;
+    BOOL hasTitle = [settingsViewController.settingsReader titleForSection:section].length != 0;
+    if (section == 0) {
+        return hasTitle ? 75.f : 15.f;
+    }
+    else {
+        
+        return hasTitle ? 60.f : 0.f;
+    }
 }
 
 #pragma mark UITableViewDelegate protocol

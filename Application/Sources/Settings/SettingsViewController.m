@@ -41,9 +41,6 @@ static NSString * const SettingsDataProtectionButton = @"Button_DataProtection";
 static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
 static NSString * const SettingsSourceCodeButton = @"Button_Source code";
 
-// Playback settings group
-static NSString * const SettingsPlaybackGroup = @"Group_Playback";
-
 // Information group
 static NSString * const SettingsInformationGroup = @"Group_Information";
 
@@ -339,7 +336,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     if (! applicationConfiguration.continuousPlaybackAvailable) {
-        [hiddenKeys addObject:SettingsPlaybackGroup];
         [hiddenKeys addObject:PlaySRGSettingAutoplayEnabled];
     }
     

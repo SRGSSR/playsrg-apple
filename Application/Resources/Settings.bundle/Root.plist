@@ -28,7 +28,25 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string></string>
+			<string>Playback</string>
+			<key>FooterText</key>
+			<string>When enabled, video playback continues even when you close the application.</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Video background playback</string>
+			<key>Key</key>
+			<string>PlaySRGSettingBackgroundVideoPlaybackEnabled</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Information</string>
 		</dict>
 		<dict>
 			<key>Type</key>

@@ -22,6 +22,7 @@ NSString * const PlaySRGSettingOriginalImagesOnlyEnabled = @"PlaySRGSettingOrigi
 NSString * const PlaySRGSettingPresenterModeEnabled = @"PlaySRGSettingPresenterModeEnabled";
 NSString * const PlaySRGSettingStandaloneEnabled = @"PlaySRGSettingStandaloneEnabled";
 NSString * const PlaySRGSettingAutoplayEnabled = @"PlaySRGSettingAutoplayEnabled";
+NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled = @"PlaySRGSettingBackgroundVideoPlaybackEnabled";
 
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
 NSString * const PlaySRGSettingLastOpenHomepageUid = @"PlaySRGSettingLastOpenHomepageUid";
@@ -50,7 +51,8 @@ __attribute__((constructor)) static void ApplicationSettingsInit(void)
                                       PlaySRGSettingOriginalImagesOnlyEnabled : @NO,
                                       PlaySRGSettingPresenterModeEnabled : @NO,
                                       PlaySRGSettingStandaloneEnabled : @NO,
-                                      PlaySRGSettingAutoplayEnabled : @YES }];
+                                      PlaySRGSettingAutoplayEnabled : @YES,
+                                      PlaySRGSettingBackgroundVideoPlaybackEnabled : @NO }];
     [userDefaults synchronize];
 }
 
@@ -166,6 +168,11 @@ NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void)
     else {
         return SRGLetterboxContinuousPlaybackDisabled;
     }
+}
+
+BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
+{
+    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
 }
 
 NSString *ApplicationSettingSelectedLiveStreamURNForChannelUid(NSString *channelUid)
