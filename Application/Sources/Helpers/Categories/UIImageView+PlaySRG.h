@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImageView *)play_loadingImageView48WithTintColor:(nullable UIColor *)tintColor;
 + (UIImageView *)play_loadingImageView90WithTintColor:(nullable UIColor *)tintColor;
 
+- (void)play_startAnimatingLoading90WithTintColor:(nullable UIColor *)tintColor;
+
 /**
  *  Standard downloading indicators
  */

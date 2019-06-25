@@ -66,6 +66,13 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
     return [images copy];
 }
 
+#pragma mark Loading animation
+
+- (void)play_startAnimatingLoading90WithTintColor:(UIColor *)tintColor
+{
+    [self play_startAnimatingWithImagesNamed:@"loading-90" withTintColor:tintColor];
+}
+
 #pragma mark Downloading animation
 
 - (void)play_startAnimatingDownloading22WithTintColor:(nullable UIColor *)tintColor

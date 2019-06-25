@@ -9,6 +9,7 @@
 #import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
 #import "NavigationController.h"
+#import "SearchLoadingCollectionViewCell.h"
 #import "SearchSettingsViewController.h"
 #import "SearchShowListCollectionViewCell.h"
 #import "UIColor+PlaySRG.h"
@@ -70,6 +71,10 @@
     NSString *showListCellIdentifier = NSStringFromClass(SearchShowListCollectionViewCell.class);
     UINib *showListCellNib = [UINib nibWithNibName:showListCellIdentifier bundle:nil];
     [self.collectionView registerNib:showListCellNib forCellWithReuseIdentifier:showListCellIdentifier];
+    
+    NSString *loadingCellIdentifier = NSStringFromClass(SearchLoadingCollectionViewCell.class);
+    UINib *loadingCellNib = [UINib nibWithNibName:loadingCellIdentifier bundle:nil];
+    [self.collectionView registerNib:loadingCellNib forCellWithReuseIdentifier:loadingCellIdentifier];
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
@@ -249,7 +254,10 @@
         return 0;
     }
     
-    if (self.shows.count == 0 || section != 0) {
+    if (self.shows.count != 0 && self.items.count == 0 && self.isLoading && section != 0) {
+        return 1;
+    }
+    else if (self.shows.count == 0 || section != 0) {
         return self.items.count;
     }
     else {
@@ -259,7 +267,11 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.shows.count == 0 || indexPath.section != 0) {
+    if (self.shows.count != 0 && self.items.count == 0 && self.isLoading && indexPath.section != 0) {
+        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(SearchLoadingCollectionViewCell.class)
+                                                         forIndexPath:indexPath];
+    }
+    else if (self.shows.count == 0 || indexPath.section != 0) {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MediaCollectionViewCell.class)
                                                          forIndexPath:indexPath];
     }
@@ -273,19 +285,46 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.shows.count == 0 || indexPath.section != 0) {
+    if ([cell isKindOfClass:MediaCollectionViewCell.class]) {
         MediaCollectionViewCell *mediaCell = (MediaCollectionViewCell *)cell;
         mediaCell.media = self.items[indexPath.row];
     }
-    else {
+    else if ([cell isKindOfClass:SearchShowListCollectionViewCell.class]) {
         SearchShowListCollectionViewCell *showListCell = (SearchShowListCollectionViewCell *)cell;
         showListCell.shows = self.shows;
     }
+    else if ([cell isKindOfClass:SearchLoadingCollectionViewCell.class]) {
+        SearchLoadingCollectionViewCell *loadingCell = (SearchLoadingCollectionViewCell *)cell;
+        [loadingCell startAnimating];
+    }
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    if ([cell isKindOfClass:SearchLoadingCollectionViewCell.class]) {
+        SearchLoadingCollectionViewCell *loadingCell = (SearchLoadingCollectionViewCell *)cell;
+        [loadingCell startAnimating];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    if ([cell isKindOfClass:SearchLoadingCollectionViewCell.class]) {
+        SearchLoadingCollectionViewCell *loadingCell = (SearchLoadingCollectionViewCell *)cell;
+        [loadingCell startAnimating];
+    }
+}
+
+
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.shows.count == 0 || indexPath.section != 0) {
+    if (self.shows.count != 0 && self.items.count == 0 && self.isLoading && indexPath.section != 0) {
+        return;
+    }
+    else if (self.shows.count == 0 || indexPath.section != 0) {
         SRGMedia *media = self.items[indexPath.row];
         [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
     }
