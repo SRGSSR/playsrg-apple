@@ -74,8 +74,7 @@
         return hasTitle ? 75.f : 15.f;
     }
     else {
-        
-        return hasTitle ? 60.f : 0.1f;
+        return hasTitle ? 60.f : 0.1f /* Cannot use 0 = automatic dimension */;
     }
 }
 
@@ -88,7 +87,7 @@
 - (CGFloat)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView heightForFooterForSection:(NSInteger)section
 {
     BOOL hasFooter = [self tableView:tableView titleForFooterInSection:section].length != 0;
-    return hasFooter ? 0.f : 0.1f;
+    return hasFooter ? UITableViewAutomaticDimension : 0.1f /* Cannot use 0 = automatic dimension */;
 }
 
 #pragma mark UITableViewDelegate protocol
