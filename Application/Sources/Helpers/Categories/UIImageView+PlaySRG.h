@@ -18,16 +18,19 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImageView *)play_loadingImageView48WithTintColor:(nullable UIColor *)tintColor;
 + (UIImageView *)play_loadingImageView90WithTintColor:(nullable UIColor *)tintColor;
 
+/**
+ *  Standard loading animations
+ */
 - (void)play_startAnimatingLoading90WithTintColor:(nullable UIColor *)tintColor;
 
 /**
- *  Standard downloading indicators
+ *  Standard download animations
  */
 - (void)play_startAnimatingDownloading22WithTintColor:(nullable UIColor *)tintColor;
 - (void)play_startAnimatingDownloading48WithTintColor:(nullable UIColor *)tintColor;
 
 /**
- *  Stop the animation
+ *  Stop an animation
  */
 - (void)play_stopAnimating;
 

@@ -254,7 +254,7 @@
         return 0;
     }
     
-    if (self.shows.count != 0 && self.items.count == 0 && self.isLoading && section != 0) {
+    if (self.shows.count != 0 && self.items.count == 0 && self.loading && section != 0) {
         return 1;
     }
     else if (self.shows.count == 0 || section != 0) {
@@ -267,7 +267,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.shows.count != 0 && self.items.count == 0 && self.isLoading && indexPath.section != 0) {
+    if (self.shows.count != 0 && self.items.count == 0 && self.loading && indexPath.section != 0) {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(SearchLoadingCollectionViewCell.class)
                                                          forIndexPath:indexPath];
     }
@@ -317,11 +317,9 @@
     }
 }
 
-
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.shows.count != 0 && self.items.count == 0 && self.isLoading && indexPath.section != 0) {
+    if (self.shows.count != 0 && self.items.count == 0 && self.loading && indexPath.section != 0) {
         return;
     }
     else if (self.shows.count == 0 || indexPath.section != 0) {
