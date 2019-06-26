@@ -140,6 +140,8 @@
 
 - (void)didCancelRefreshRequest
 {
+    [super didCancelRefreshRequest];
+    
     [self endRefreshing];
 }
 

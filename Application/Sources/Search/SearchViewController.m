@@ -220,6 +220,8 @@
 
 - (void)didCancelRefreshRequest
 {
+    [super didCancelRefreshRequest];
+    
     [self.showsRequestQueue cancel];
 }
 

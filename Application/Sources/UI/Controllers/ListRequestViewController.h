@@ -87,7 +87,7 @@ typedef void (^ListRequestCompletionBlock)(NSArray * _Nullable items, NSHTTPURLR
 /**
  *  Called when the refresh request has been cancelled.
  */
-- (void)didCancelRefreshRequest;
+- (void)didCancelRefreshRequest NS_REQUIRES_SUPER;
 
 /**
  *  When `-refresh` or `-loadNextPage` are called, this method is called to retrieve the request to be called for a specific
