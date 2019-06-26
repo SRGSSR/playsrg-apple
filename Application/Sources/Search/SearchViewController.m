@@ -299,22 +299,11 @@
     }
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Highlighting disable loading animation. Remove it
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    if ([cell isKindOfClass:SearchLoadingCollectionViewCell.class]) {
-        SearchLoadingCollectionViewCell *loadingCell = (SearchLoadingCollectionViewCell *)cell;
-        [loadingCell startAnimating];
-    }
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    if ([cell isKindOfClass:SearchLoadingCollectionViewCell.class]) {
-        SearchLoadingCollectionViewCell *loadingCell = (SearchLoadingCollectionViewCell *)cell;
-        [loadingCell startAnimating];
-    }
+    return ! [cell isKindOfClass:SearchLoadingCollectionViewCell.class];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
