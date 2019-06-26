@@ -228,7 +228,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.originalPosition = position;
         self.fromPushNotification = fromPushNotification;
         
-        // Force at init the correct Letterbox controller. In the `viewDidLoad:`, link it to the Letterbox view.
+        // Force the correct Letterbox controller. It will be linked to the Letterbox view in `-viewDidLoad`
         self.letterboxController = controller;
     }
     return self;
@@ -378,6 +378,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationWillEnterForeground:)
                                                name:UIApplicationWillEnterForegroundNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(applicationDidBecomeActive:)
+                                               name:UIApplicationDidBecomeActiveNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(reachabilityDidChange:)
@@ -1332,7 +1336,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didCancelContinuousPlaybackWithUpcomingMedia:(SRGMedia *)upcomingMedia
 {
-    // Processes run once in the lifetime of the application
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Keep autoplay?", @"Title of the alert view to keep autoplay permanently")
@@ -1877,6 +1880,30 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (self.letterboxController.mediaComposition) {
         [self srg_trackPageView];
         self.fromPushNotification = NO;
+    }
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+    // Offer the user to enable background playback when returning from background while displaying a video. For simplicity,
+    // we do not check whether playback was actually running before entering background (this would require a dedicated
+    // state, which seems superfluous)
+    if (! ApplicationSettingBackgroundVideoPlaybackEnabled() && self.letterboxController.media.mediaType == SRGMediaTypeVideo) {
+        PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+            NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable background video playback?", @"Title of the alert view to opt-in for background video playback")
+                                                                                     message:NSLocalizedString(@"You can manage this feature in the settings at any time.", @"Description of the alert view to opt-in for background video playback")
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Later", @"Label for the button for deciding to opt-in for background video playback at a later time") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                completionHandler(YES);
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Enable", @"Label for the button keeping autoplay enabled") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [userDefaults setBool:YES forKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
+                [userDefaults synchronize];
+                completionHandler(YES);
+            }]];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }, @"BackgroundVideoPlaybackAsked", nil);
     }
 }
 
