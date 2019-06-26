@@ -229,6 +229,21 @@
     [self refresh];
 }
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return (self.shows.count == 0) ? 1 : 2;
+}
+
+- (BOOL)isLoadingItemsInSection:(NSInteger)section
+{
+    return self.shows.count != 0 && self.items.count == 0 && self.loading && section != 0;
+}
+
+- (BOOL)isDisplayingMediasInSection:(NSInteger)section
+{
+    return self.shows.count == 0 || section != 0;
+}
+
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -243,21 +258,16 @@
 
 #pragma mark UICollectionViewDataSource protocol
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return (self.shows.count == 0) ? 1 : 2;
-}
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (! [self shouldPerformRefreshRequest]) {
         return 0;
     }
     
-    if (self.shows.count != 0 && self.items.count == 0 && self.loading && section != 0) {
+    if ([self isLoadingItemsInSection:section]) {
         return 1;
     }
-    else if (self.shows.count == 0 || section != 0) {
+    else if ([self isDisplayingMediasInSection:section]) {
         return self.items.count;
     }
     else {
@@ -267,11 +277,11 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.shows.count != 0 && self.items.count == 0 && self.loading && indexPath.section != 0) {
+    if ([self isLoadingItemsInSection:indexPath.section]) {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(SearchLoadingCollectionViewCell.class)
                                                          forIndexPath:indexPath];
     }
-    else if (self.shows.count == 0 || indexPath.section != 0) {
+    else if ([self isDisplayingMediasInSection:indexPath.section]) {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MediaCollectionViewCell.class)
                                                          forIndexPath:indexPath];
     }
@@ -308,10 +318,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.shows.count != 0 && self.items.count == 0 && self.loading && indexPath.section != 0) {
-        return;
-    }
-    else if (self.shows.count == 0 || indexPath.section != 0) {
+    if ([self isDisplayingMediasInSection:indexPath.section]) {
         SRGMedia *media = self.items[indexPath.row];
         [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
     }
@@ -323,14 +330,10 @@
 {
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
-    if (self.shows.count != 0 && self.items.count == 0 && self.loading && indexPath.section != 0) {
+    if ([self isLoadingItemsInSection:indexPath.section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 200.f);
     }
-    else if (self.shows.count != 0 && indexPath.section == 0) {
-        CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 200.f : 220.f;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
-    }
-    else {
+    else if ([self isDisplayingMediasInSection:indexPath.section]) {
         if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
             CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 86.f : 100.f;
             return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, height);
@@ -342,6 +345,10 @@
             static const CGFloat kItemWidth = 210.f;
             return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
         }
+    }
+    else {
+        CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 200.f : 220.f;
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
     }
 }
 
