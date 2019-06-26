@@ -323,7 +323,10 @@
 {
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
-    if (self.shows.count != 0 && indexPath.section == 0) {
+    if (self.shows.count != 0 && self.items.count == 0 && self.loading && indexPath.section != 0) {
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 200.f);
+    }
+    else if (self.shows.count != 0 && indexPath.section == 0) {
         CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 200.f : 220.f;
         return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
     }
