@@ -363,7 +363,7 @@
     // with the clear button
     static NSTimeInterval kTypingSpeedThreshold = 0.3;
     NSTimeInterval delay = (searchText.length == 0) ? 0. : kTypingSpeedThreshold;
-    [self performSelector:@selector(search) withObject:nil afterDelay:delay];
+    [self performSelector:@selector(search) withObject:nil afterDelay:delay inModes:@[ NSRunLoopCommonModes ]];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
