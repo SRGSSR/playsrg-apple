@@ -12,6 +12,7 @@
 #import "SearchLoadingCollectionViewCell.h"
 #import "SearchSettingsViewController.h"
 #import "SearchShowListCollectionViewCell.h"
+#import "TitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -75,6 +76,10 @@
     NSString *loadingCellIdentifier = NSStringFromClass(SearchLoadingCollectionViewCell.class);
     UINib *loadingCellNib = [UINib nibWithNibName:loadingCellIdentifier bundle:nil];
     [self.collectionView registerNib:loadingCellNib forCellWithReuseIdentifier:loadingCellIdentifier];
+    
+    NSString *headerIdentifier = NSStringFromClass(TitleHeaderView.class);
+    UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
+    [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
@@ -291,6 +296,18 @@
     }
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        return [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                  withReuseIdentifier:NSStringFromClass(TitleHeaderView.class)
+                                                         forIndexPath:indexPath];
+    }
+    else {
+        return [super collectionView:collectionView viewForSupplementaryElementOfKind:kind atIndexPath:indexPath];
+    }
+}
+
 #pragma mark UICollectionViewDelegate protocol
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -314,6 +331,25 @@
     // Highlighting disable loading animation. Remove it
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     return ! [cell isKindOfClass:SearchLoadingCollectionViewCell.class];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([view isKindOfClass:TitleHeaderView.class]) {
+        TitleHeaderView *headerView = (TitleHeaderView *)view;
+        if ([self isDisplayingMediasInSection:indexPath.section]) {
+            headerView.title = (self.items != 0) ? NSLocalizedString(@"Medias", @"Media search result header") : nil;
+        }
+        else {
+            headerView.title = NSLocalizedString(@"Shows", @"Show search result header");
+        }
+        
+        // iOS 11 bug: The header hides scroll indicators
+        // See https://stackoverflow.com/questions/46747960/ios11-uicollectionsectionheader-clipping-scroll-indicator
+        if (@available(iOS 11, *)) {
+            headerView.layer.zPosition = 0;
+        }
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -349,6 +385,16 @@
     else {
         CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 200.f : 220.f;
         return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
+    }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    if (self.shows.count != 0 || self.items.count != 0) {
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
+    }
+    else {
+        return CGSizeZero;
     }
 }
 
