@@ -257,7 +257,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 ApplicationSettingSetServiceURL(serviceURL);
                 
                 [Banner showWithStyle:BannerStyleInfo
-                              message:[NSString stringWithFormat:NSLocalizedString(@"Application server changed to '%@'", @"Notification message when the server URL changed due to a scheme URL."), ApplicationSettingServiceNameForKey(server)]
+                              message:[NSString stringWithFormat:NSLocalizedString(@"Server changed to '%@'", @"Notification message when the server URL changed due to a scheme URL."), ApplicationSettingServiceNameForKey(server)]
                                 image:[UIImage imageNamed:@"settings-22"]
                                sticky:NO
                      inViewController:nil];
