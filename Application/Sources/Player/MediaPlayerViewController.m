@@ -735,8 +735,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             SRGProgram *nextProgram = channel.nextProgram;
             if (nextProgram) {
                 self.nextProgramLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-                NSString *nextProgramFormat = [NSString stringWithFormat:@"> %@", NSLocalizedString(@"At %1$@: %2$@", @"Introductory text for next program information")];
-                self.nextProgramLabel.text = nextProgram ? [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeFormatter stringFromDate:nextProgram.startDate], nextProgram.title] : nil;
+                NSString *nextProgramFormat = NSLocalizedString(@"At %1$@: %2$@", @"Introductory text for next program information");
+                self.nextProgramLabel.text = nextProgram ? [NSString stringWithFormat:@"> %@", [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeFormatter stringFromDate:nextProgram.startDate], nextProgram.title]] : nil;
                 self.nextProgramLabel.accessibilityLabel = nextProgram ? [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:nextProgram.startDate], nextProgram.title] : nil;
             }
             else {

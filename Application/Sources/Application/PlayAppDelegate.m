@@ -147,17 +147,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     [self setupHockey];
 #endif
     
-    // 3D touch dynamic shortcut items. If search options are available, append a search option as last item. Dynamic shortcut
-    // items are persisted between application launches, do not add them several times
-    UIApplicationShortcutIcon *icon = [UIApplicationShortcutIcon iconWithTemplateImageName:@"search-35"];
-    UIApplicationShortcutItem *searchShortcutItem = [[UIApplicationShortcutItem alloc] initWithType:@"search" localizedTitle:NSLocalizedString(@"Search", @"Search short label") localizedSubtitle:nil icon:icon userInfo:nil];
-    if (ApplicationConfiguration.sharedApplicationConfiguration.searchOptions.count != 0
-            && ! [UIApplication.sharedApplication.shortcutItems containsObject:searchShortcutItem]) {
-        NSMutableArray<UIApplicationShortcutItem *> *shortcutItems = [UIApplication.sharedApplication.shortcutItems mutableCopy];
-        [shortcutItems addObject:searchShortcutItem];
-        UIApplication.sharedApplication.shortcutItems = [shortcutItems copy];
-    }
-    
     // Clean downloaded folder
     [Download removeUnusedDownloadedFiles];
     
@@ -268,7 +257,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 ApplicationSettingSetServiceURL(serviceURL);
                 
                 [Banner showWithStyle:BannerStyleInfo
-                              message:[NSString stringWithFormat:NSLocalizedString(@"Application server changed to '%@'", @"Notification message when the server URL changed due to a scheme URL."), ApplicationSettingServiceNameForKey(server)]
+                              message:[NSString stringWithFormat:NSLocalizedString(@"Server changed to '%@'", @"Notification message when the server URL changed due to a scheme URL."), ApplicationSettingServiceNameForKey(server)]
                                 image:[UIImage imageNamed:@"settings-22"]
                                sticky:NO
                      inViewController:nil];

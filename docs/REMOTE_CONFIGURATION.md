@@ -80,11 +80,6 @@ A wide list of parameters are available. Some parameters support multiple comma-
 
 ### Functionalities
 
-* `searchOptions` (optional, string, multiple): The categories which can be searched, and the order in which they must appear. If none is provided, search will be disabled throughout the application. Available values are:
-   * `audios`: Audios.
-   * `radioShows`: Radio shows.
-   * `tvShows`: TV shows.
-   * `videos`: Videos.
 * `downloadsHintsHidden` (optional, boolean): If set to `true`, hints will not be displayed in lists for medias which can be downloaded.
 * `moreEpisodesHidden` (optional, boolean): If set to `true`, the option to display more episodes for a media will not be available from the long-press and peek menus.
 * `topicSections` (optional, string, multiple): The sections to be displayed when opening a topic. If none is provided, latest medias are displayed. Available values are:

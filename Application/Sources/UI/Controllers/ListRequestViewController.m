@@ -162,6 +162,8 @@ static void commonInit(ListRequestViewController *self);
 
 - (void)clear
 {
+    [self.requestQueue cancel];
+    
     [self refreshDidStart];
     
     self.loadedItems = nil;

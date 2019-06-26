@@ -166,6 +166,11 @@
 
 #pragma mark Accessibility
 
+- (BOOL)isAccessibilityElement
+{
+    return YES;
+}
+
 - (NSString *)accessibilityLabel
 {
     if (self.media.contentType == SRGContentTypeLivestream) {

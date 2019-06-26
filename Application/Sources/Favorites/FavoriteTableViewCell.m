@@ -113,6 +113,13 @@
     [self updateSubscriptionStatus];
 }
 
+#pragma mark Accessibility
+
+- (BOOL)isAccessibilityElement
+{
+    return YES;
+}
+
 #pragma mark UI
 
 - (void)updateSubscriptionStatus

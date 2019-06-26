@@ -59,9 +59,6 @@
 /* Introductory text for next program information */
 "At %1$@: %2$@" = "A las %1$@: %2$@";
 
-/* Tab name for audio results in the search */
-"Audios" = "Audios";
-
 /* Message title displayed when subscribing to all TV and radio shows
    Message title displayed when the user subscribed to all TV and radio shows */
 "Automatic subscriptions" = "Abunaments automatics";
@@ -121,12 +118,6 @@
 
 /* Question displayed at the top of an alert asking the user to enable notifications */
 "Enable notifications?" = "Activar las notificaziuns?";
-
-/* Placeholder text displayed in the search field when empty (must be not too longth) */
-"Enter %@ characters or more" = "En %@ caracters u dapli";
-
-/* Placeholder text displayed in the search field when empty (with minimum number of characters freely specified) */
-"Enter %@ characters or more to search" = "Inditgai almain %@ segns per chattar";
 
 /* Label used on the home page to present events while loading. It appears if no network connection available and no cache available. */
 "Events" = "Eveniments";
@@ -350,9 +341,6 @@
 /* Title displayed at the top of the radio show list */
 "Radio programmes A-Z" = "Emissiuns da radio dad A fin Z";
 
-/* Tab name for radio show results in the search */
-"Radio shows" = "Emissiuns da radio";
-
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Receptur ord funcziun.";
 
@@ -401,11 +389,20 @@
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
 
+/* Media search result header */
+"Results" = "Results";
+
 /* [Technical] Search page type for analytics measurements
    Label in the left menu to present the search view
-   Search page title
-   Search short label */
+   Placeholder text displayed in the search field when empty (must be not too long)
+   Search page title */
 "Search" = "Tschertga";
+
+/* Search filters page title */
+"Search filters" = "Search filters";
+
+/* Notification message when the server URL changed due to a scheme URL. */
+"Server changed to '%@'" = "Server changed to '%@'";
 
 /* Label in the left menu to present settings */
 "Settings" = "Configurar";
@@ -423,7 +420,8 @@
 
 /* Label used on a radio home page to present its associated shows
    Label used on a radio home page to present the shows AZ and shows by date access buttons.
-   Label used on the TV home page to present the shows AZ and shows by date access buttons. */
+   Label used on the TV home page to present the shows AZ and shows by date access buttons.
+   Show search result header */
 "Shows" = "Emissiuns";
 
 /* Title of the button to skip updating the application */
@@ -515,14 +513,11 @@
 /* Title displayed at the top of the screen where TV episodes can be accessed by date */
 "TV programmes by date" = "Emissiuns da TV tenor data";
 
-/* Tab name for TV show results in the search */
-"TV shows" = "Emissiuns da TV";
+/* Message displayed when there is no search criterium entered */
+"Type to start searching" = "Type to start searching";
 
 /* Title of the button to update the application */
 "Update" = "Update";
-
-/* Tab name for video results in the search */
-"Videos" = "Videos";
 
 /* Label in the left menu to present the watch later list
    Title displayed at the top of the watch later list screen */

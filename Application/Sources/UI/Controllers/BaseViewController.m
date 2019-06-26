@@ -254,7 +254,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
                 
                 UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
                 popoverPresentationController.sourceView = sourceView;
-                popoverPresentationController.sourceRect = [sourceView bounds];
+                popoverPresentationController.sourceRect = sourceView.bounds;
                 
                 [self presentViewController:activityViewController animated:YES completion:nil];
             }]];
@@ -327,7 +327,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
                 
                 UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
                 popoverPresentationController.sourceView = sourceView;
-                popoverPresentationController.sourceRect = [sourceView bounds];
+                popoverPresentationController.sourceRect = sourceView.bounds;
                 
                 [self presentViewController:activityViewController animated:YES completion:nil];
             }]];
@@ -347,7 +347,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     
     UIPopoverPresentationController *popoverPresentationController = alertController.popoverPresentationController;
     popoverPresentationController.sourceView = sourceView;
-    popoverPresentationController.sourceRect = [sourceView bounds];
+    popoverPresentationController.sourceRect = sourceView.bounds;
     
     [self presentViewController:alertController animated:YES completion:nil];
 }

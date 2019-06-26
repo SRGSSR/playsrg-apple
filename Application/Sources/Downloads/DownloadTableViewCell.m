@@ -154,6 +154,11 @@
 
 #pragma mark Accessibility
 
+- (BOOL)isAccessibilityElement
+{
+    return YES;
+}
+
 - (NSString *)accessibilityLabel
 {
     NSMutableString *accessibilityLabel = [self.download.title mutableCopy];
