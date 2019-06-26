@@ -227,7 +227,7 @@
 
 - (NSString *)emptyCollectionSubtitle
 {
-    return (self.searchBar.text.length == 0) ? NSLocalizedString(@"Enter something to start searching", @"Placeholder text displayed in the search field when empty") : super.emptyCollectionSubtitle;
+    return (self.searchBar.text.length == 0) ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
 }
 
 #pragma mark Helpers
