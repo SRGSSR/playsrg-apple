@@ -10,7 +10,6 @@
 #import "MediaCollectionViewCell.h"
 #import "NavigationController.h"
 #import "SearchLoadingCollectionViewCell.h"
-#import "SearchSettingsViewController.h"
 #import "SearchShowListCollectionViewCell.h"
 #import "TitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
@@ -107,15 +106,6 @@
                                                                               action:@selector(close:)];
         [rightBarButtonItems addObject:closeBarButtonItem];
     }
-    
-#if 0
-    // TODO: Icon + hide when no aggregations are available
-    UIBarButtonItem *filtersBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filters"
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(editFilters:)];
-    [rightBarButtonItems addObject:filtersBarButtonItem];
-#endif
     
     self.navigationItem.rightBarButtonItems = [rightBarButtonItems copy];
     
@@ -436,34 +426,6 @@
 }
 
 #pragma mark Actions
-
-- (void)editFilters:(id)sender
-{
-    NSAssert([sender isKindOfClass:UIBarButtonItem.class], @"Bar button item expected");
-    
-    SearchSettingsViewController *searchFiltersViewController = [[SearchSettingsViewController alloc] initWithSettings:self.settings aggregations:self.aggregations];
-    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchFiltersViewController];
-    
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        navigationController.modalPresentationStyle = UIModalPresentationPopover;
-        
-        UIView *barButtonItemView = [sender valueForKey:@"view"];
-        if (barButtonItemView) {
-            UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
-            popoverPresentationController.backgroundColor = UIColor.play_blackColor;
-            popoverPresentationController.sourceView = barButtonItemView;
-            popoverPresentationController.sourceRect = barButtonItemView.bounds;
-        }
-        
-        [self presentViewController:navigationController animated:YES completion:nil];
-    }
-    else {
-        searchFiltersViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                                                                                                      target:self
-                                                                                                                      action:@selector(closeSettings:)];
-        [self presentViewController:navigationController animated:YES completion:nil];
-    }
-}
 
 - (IBAction)closeSettings:(id)sender
 {
