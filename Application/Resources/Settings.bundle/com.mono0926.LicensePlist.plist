@@ -224,7 +224,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-ios</string>
 			<key>Title</key>
-			<string>srganalytics-ios (6945bfe)</string>
+			<string>srganalytics-ios (f4abf60)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -240,7 +240,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-ios</string>
 			<key>Title</key>
-			<string>srgdataprovider-ios (cd63269)</string>
+			<string>srgdataprovider-ios (3b59178)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -264,7 +264,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-ios</string>
 			<key>Title</key>
-			<string>srgletterbox-ios (93207d1)</string>
+			<string>srgletterbox-ios (7281a42)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
