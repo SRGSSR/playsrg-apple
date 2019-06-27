@@ -1900,6 +1900,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Enable", @"Label for the button keeping autoplay enabled") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [userDefaults setBool:YES forKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
                 [userDefaults synchronize];
+                self.letterboxController.backgroundVideoPlaybackEnabled = YES;
                 completionHandler(YES);
             }]];
             [self presentViewController:alertController animated:YES completion:nil];
