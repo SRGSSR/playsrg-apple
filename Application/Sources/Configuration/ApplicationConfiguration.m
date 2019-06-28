@@ -6,6 +6,7 @@
 
 #import "ApplicationConfiguration.h"
 
+#import "ApplicationSettings.h"
 #import "PlayLogger.h"
 #import "UIColor+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
@@ -170,6 +171,7 @@ void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *con
 {
     controller.serviceURL = SRGDataProvider.currentDataProvider.serviceURL;
     controller.globalParameters = SRGDataProvider.currentDataProvider.globalParameters;
+    controller.backgroundVideoPlaybackEnabled = ApplicationSettingBackgroundVideoPlaybackEnabled();
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     controller.endTolerance = applicationConfiguration.endTolerance;
