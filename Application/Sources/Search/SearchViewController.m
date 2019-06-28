@@ -382,7 +382,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (self.shows.count != 0 || self.items.count != 0) {
+    if (self.shows.count != 0) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
     }
     else {
