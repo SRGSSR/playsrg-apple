@@ -1,6 +1,7 @@
 "Advanced features" = "Advanced features";
 "Alternate radio homepage design" = "Alternative homepage design";
 "Autoplay" = "Autoplay";
+"Background video playback" = "Background video playback";
 "Become a beta tester" = "Become a beta tester";
 "By default, the application loads high-definition medias over cellular networks. To avoid possible extra costs, this option could be disable and the highest quality will be played only on Wi-Fi networks." = "High-definition medias are played over cellular networks by default. To avoid possible extra costs, disable this option so that high-definition medias are only played when connected to a Wi-Fi network.";
 "Check for updates" = "Check for updates";
@@ -36,3 +37,4 @@
 "User location" = "User location";
 "What's new" = "What's new";
 "When enabled, more content is automatically played after playback of the current content ends." = "When enabled, more content is automatically played after playback of the current content ends.";
+"When enabled, video playback continues even when you leave the application." = "When enabled, video playback continues even when you leave the application.";

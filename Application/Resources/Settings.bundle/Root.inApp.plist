@@ -56,7 +56,7 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Video background playback</string>
+			<string>Background video playback</string>
 			<key>Key</key>
 			<string>PlaySRGSettingBackgroundVideoPlaybackEnabled</string>
 		</dict>
