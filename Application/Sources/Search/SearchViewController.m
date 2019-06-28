@@ -330,7 +330,7 @@
     if ([view isKindOfClass:TitleHeaderView.class]) {
         TitleHeaderView *headerView = (TitleHeaderView *)view;
         if ([self isDisplayingMediasInSection:indexPath.section]) {
-            headerView.title = (self.items != 0) ? NSLocalizedString(@"Results", @"Media search result header") : nil;
+            headerView.title = (self.items != 0) ? NSLocalizedString(@"Videos and audios", @"Header for video and audio search results") : nil;
         }
         else {
             headerView.title = NSLocalizedString(@"Shows", @"Show search result header");
