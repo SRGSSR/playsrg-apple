@@ -167,6 +167,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 @property (nonatomic) NSTimer *userInterfaceUpdateTimer;
 
+@property (nonatomic) BOOL shouldDisplayBackgroundVideoPlaybackPrompt;
+
 @end
 
 @implementation MediaPlayerViewController
@@ -375,6 +377,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                            selector:@selector(playbackDidFail:)
                                                name:SRGLetterboxPlaybackDidFailNotification
                                              object:self.letterboxController];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(applicationWillResignActive:)
+                                               name:UIApplicationWillResignActiveNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(applicationDidEnterBackground:)
+                                               name:UIApplicationDidEnterBackgroundNotification
+                                             object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationWillEnterForeground:)
                                                name:UIApplicationWillEnterForegroundNotification
@@ -1875,6 +1885,31 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.closeButton.accessibilityHint = nil;
 }
 
+- (void)applicationWillResignActive:(NSNotification *)notification
+{
+    // Based on conditions just before sending the app to the background, determine whether we should consider prompting the
+    // user for background video playback (this guess might change depending on how the app has been found to be sent to the
+    // background, see below)
+    if (! ApplicationSettingBackgroundVideoPlaybackEnabled()
+            && self.letterboxController.media.mediaType == SRGMediaTypeVideo
+            && self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
+        self.shouldDisplayBackgroundVideoPlaybackPrompt = YES;
+    }
+}
+
+- (void)applicationDidEnterBackground:(NSNotification *)notification
+{
+    // Don't prompt for backround playback if the device was simply locked
+    if (self.shouldDisplayBackgroundVideoPlaybackPrompt) {
+        // To determine whether a background entry is due to the lock screen being enabled or not, we need to wait a little bit.
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (UIDevice.play_isLocked) {
+                self.shouldDisplayBackgroundVideoPlaybackPrompt = NO;
+            }
+        });
+    }
+}
+
 - (void)applicationWillEnterForeground:(NSNotification *)notification
 {
     if (self.letterboxController.mediaComposition) {
@@ -1885,10 +1920,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    // Offer the user to enable background playback when returning from background while displaying a video. For simplicity,
-    // we do not check whether playback was actually running before entering background (this would require a dedicated
-    // state, which seems superfluous)
-    if (! ApplicationSettingBackgroundVideoPlaybackEnabled() && self.letterboxController.media.mediaType == SRGMediaTypeVideo) {
+    // Display the prompt if this makes sense (only once)
+    if (self.shouldDisplayBackgroundVideoPlaybackPrompt) {
+        self.shouldDisplayBackgroundVideoPlaybackPrompt = NO;
+        
         PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
             NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable background video playback?", @"Title of the alert view to opt-in for background video playback")

@@ -20,9 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 OBJC_EXPORT void PlayApplicationRunOnce(void (^block)(void (^completionHandler)(BOOL success)), NSString *key, id _Nullable object);
 
 /**
- *  Function to get a run once block after.
+ *  Function to get the object associated with a block having been run once, if any.
  *
- *  @param key    The key used to run once a block
+ *  @param key The key used identifiying the block that was executed.
  */
 OBJC_EXPORT _Nullable id PlayApplicationRunOnceObjectForKey(NSString *key);
 
