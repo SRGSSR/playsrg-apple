@@ -108,11 +108,6 @@
     }
     
     self.navigationItem.rightBarButtonItems = [rightBarButtonItems copy];
-    
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(accessibilityVoiceOverStatusChanged:)
-                                               name:UIAccessibilityVoiceOverStatusChanged
-                                             object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -387,7 +382,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (UIAccessibilityIsVoiceOverRunning() && (self.shows.count != 0 || self.items.count != 0)) {
+    if (self.shows.count != 0 || self.items.count != 0) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
     }
     else {
@@ -436,13 +431,6 @@
 {
     NSAssert(self.closeBlock, @"Close must only be available if a close block has been defined");
     self.closeBlock();
-}
-
-#pragma mark Notifications
-
-- (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
-{
-    [self.collectionView reloadData];
 }
 
 @end
