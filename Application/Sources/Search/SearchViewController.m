@@ -11,7 +11,7 @@
 #import "NavigationController.h"
 #import "SearchLoadingCollectionViewCell.h"
 #import "SearchShowListCollectionViewCell.h"
-#import "TitleHeaderView.h"
+#import "TransparentTitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -76,7 +76,7 @@
     UINib *loadingCellNib = [UINib nibWithNibName:loadingCellIdentifier bundle:nil];
     [self.collectionView registerNib:loadingCellNib forCellWithReuseIdentifier:loadingCellIdentifier];
     
-    NSString *headerIdentifier = NSStringFromClass(TitleHeaderView.class);
+    NSString *headerIdentifier = NSStringFromClass(TransparentTitleHeaderView.class);
     UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
@@ -302,7 +302,7 @@
 {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         return [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                  withReuseIdentifier:NSStringFromClass(TitleHeaderView.class)
+                                                  withReuseIdentifier:NSStringFromClass(TransparentTitleHeaderView.class)
                                                          forIndexPath:indexPath];
     }
     else {
@@ -337,8 +337,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
-    if ([view isKindOfClass:TitleHeaderView.class]) {
-        TitleHeaderView *headerView = (TitleHeaderView *)view;
+    if ([view isKindOfClass:TransparentTitleHeaderView.class]) {
+        TransparentTitleHeaderView *headerView = (TransparentTitleHeaderView *)view;
         if ([self isDisplayingMediasInSection:indexPath.section]) {
             headerView.title = (self.items != 0) ? NSLocalizedString(@"Videos and audios", @"Header for video and audio search results") : nil;
         }

@@ -8,7 +8,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TitleHeaderView : UICollectionReusableView
+/**
+ *  Translucent header view for use in collections.
+ */
+@interface TranslucentTitleHeaderView : UICollectionReusableView
 
 @property (nonatomic) NSString *title;
 

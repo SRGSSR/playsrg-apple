@@ -10,7 +10,7 @@
 #import "PageViewController.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
-#import "TitleHeaderView.h"
+#import "TranslucentTitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -86,7 +86,7 @@
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:cellIdentifier];
     
-    NSString *headerIdentifier = NSStringFromClass(TitleHeaderView.class);
+    NSString *headerIdentifier = NSStringFromClass(TranslucentTitleHeaderView.class);
     UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
@@ -247,7 +247,7 @@
 {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         return [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                  withReuseIdentifier:NSStringFromClass(TitleHeaderView.class)
+                                                  withReuseIdentifier:NSStringFromClass(TranslucentTitleHeaderView.class)
                                                          forIndexPath:indexPath];
     }
     else {
@@ -265,8 +265,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
-    if ([view isKindOfClass:TitleHeaderView.class]) {
-        TitleHeaderView *headerView = (TitleHeaderView *)view;
+    if ([view isKindOfClass:TranslucentTitleHeaderView.class]) {
+        TranslucentTitleHeaderView *headerView = (TranslucentTitleHeaderView *)view;
         headerView.title = self.indexLetters[indexPath.section];
     }
 }
@@ -333,8 +333,8 @@
     id element = notification.userInfo[UIAccessibilityFocusedElementKey];
     
     // Filter only focus notifications related to the receiver
-    if ([element isKindOfClass:TitleHeaderView.class] && [element isDescendantOfView:self.view]) {
-        TitleHeaderView *headerView = element;
+    if ([element isKindOfClass:TranslucentTitleHeaderView.class] && [element isDescendantOfView:self.view]) {
+        TranslucentTitleHeaderView *headerView = element;
         NSParameterAssert(headerView.title);
         
         NSInteger section = [self.indexLetters indexOfObject:headerView.title];
