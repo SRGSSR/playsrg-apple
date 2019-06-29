@@ -11,7 +11,7 @@
 #import "NavigationController.h"
 #import "SearchLoadingCollectionViewCell.h"
 #import "SearchShowListCollectionViewCell.h"
-#import "TitleHeaderView.h"
+#import "TransparentTitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -76,7 +76,7 @@
     UINib *loadingCellNib = [UINib nibWithNibName:loadingCellIdentifier bundle:nil];
     [self.collectionView registerNib:loadingCellNib forCellWithReuseIdentifier:loadingCellIdentifier];
     
-    NSString *headerIdentifier = NSStringFromClass(TitleHeaderView.class);
+    NSString *headerIdentifier = NSStringFromClass(TransparentTitleHeaderView.class);
     UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
@@ -236,9 +236,14 @@
     return (self.shows.count == 0) ? 1 : 2;
 }
 
-- (BOOL)isLoadingItemsInSection:(NSInteger)section
+- (BOOL)isLoadingObjectsInSection:(NSInteger)section
 {
     return self.shows.count != 0 && self.items.count == 0 && self.loading && section != 0;
+}
+
+- (BOOL)isDisplayingObjectsInSection:(NSInteger)section
+{
+    return (section == 0 && self.shows.count != 0) || (section == 1 && self.items.count != 0);
 }
 
 - (BOOL)isDisplayingMediasInSection:(NSInteger)section
@@ -266,7 +271,7 @@
         return 0;
     }
     
-    if ([self isLoadingItemsInSection:section]) {
+    if ([self isLoadingObjectsInSection:section]) {
         return 1;
     }
     else if ([self isDisplayingMediasInSection:section]) {
@@ -279,7 +284,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self isLoadingItemsInSection:indexPath.section]) {
+    if ([self isLoadingObjectsInSection:indexPath.section]) {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(SearchLoadingCollectionViewCell.class)
                                                          forIndexPath:indexPath];
     }
@@ -297,7 +302,7 @@
 {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         return [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                  withReuseIdentifier:NSStringFromClass(TitleHeaderView.class)
+                                                  withReuseIdentifier:NSStringFromClass(TransparentTitleHeaderView.class)
                                                          forIndexPath:indexPath];
     }
     else {
@@ -332,8 +337,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
-    if ([view isKindOfClass:TitleHeaderView.class]) {
-        TitleHeaderView *headerView = (TitleHeaderView *)view;
+    if ([view isKindOfClass:TransparentTitleHeaderView.class]) {
+        TransparentTitleHeaderView *headerView = (TransparentTitleHeaderView *)view;
         if ([self isDisplayingMediasInSection:indexPath.section]) {
             headerView.title = (self.items != 0) ? NSLocalizedString(@"Videos and audios", @"Header for video and audio search results") : nil;
         }
@@ -363,7 +368,7 @@
 {
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
-    if ([self isLoadingItemsInSection:indexPath.section]) {
+    if ([self isLoadingObjectsInSection:indexPath.section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 200.f);
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
@@ -387,7 +392,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (self.shows.count != 0) {
+    if ([self isDisplayingObjectsInSection:section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
     }
     else {
