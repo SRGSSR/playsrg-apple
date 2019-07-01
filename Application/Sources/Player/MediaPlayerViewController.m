@@ -1891,6 +1891,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     // user for background video playback (this guess might change depending on how the app has been found to be sent to the
     // background, see below)
     if (! ApplicationSettingBackgroundVideoPlaybackEnabled()
+            && ! self.letterboxController.pictureInPictureActive
             && self.letterboxController.media.mediaType == SRGMediaTypeVideo
             && self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
         self.shouldDisplayBackgroundVideoPlaybackPrompt = YES;
@@ -1938,7 +1939,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 self.letterboxController.backgroundVideoPlaybackEnabled = YES;
                 completionHandler(YES);
             }]];
-            [self presentViewController:alertController animated:YES completion:nil];
+            
+            UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+            [topViewController presentViewController:alertController animated:YES completion:nil];
         }, @"BackgroundVideoPlaybackAsked", nil);
     }
 }
