@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param object An optional object which must be associated with the key. If both do not match for some future
  *                call, the block will be called again
  */
-OBJC_EXPORT void PlayApplicationRunOnce(void (^block)(void (^completionHandler)(BOOL success)), NSString *key, id _Nullable object);
+OBJC_EXPORT void PlayApplicationRunOnce(void (NS_NOESCAPE ^block)(void (^completionHandler)(BOOL success)), NSString *key, id _Nullable object);
 
 /**
  *  Function to get the object associated with a block having been run once, if any.
