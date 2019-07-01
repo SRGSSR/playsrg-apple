@@ -459,7 +459,7 @@
 "The content cannot be opened." = "Der Inhalt kann nicht geöffnet werden.";
 
 /* Message displayed when some content (media, show, etc.) has been copied to the clipboard */
-"The content has been copied to the clipboard." = "Kopiert.\n";
+"The content has been copied to the clipboard." = "Kopiert.";
 
 /* Button label to share the entire episode being played. */
 "The entire episode" = "Ganze Sendung";
