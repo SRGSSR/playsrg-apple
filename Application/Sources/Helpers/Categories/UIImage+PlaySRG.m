@@ -24,7 +24,6 @@ typedef NSURL * _Nullable (^SRGDataProviderURLOverridingBlock)(NSString *uid, NS
 
 CGSize SizeForImageScale(ImageScale imageScale)
 {
-    // FIXME: Probably need to round to nearest supported size in the data provider library
     static NSDictionary *s_widths;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
@@ -42,7 +41,7 @@ CGSize SizeForImageScale(ImageScale imageScale)
     
     // Use 2x maximum as scale. Sufficient for a good result without having to load very large images
     CGFloat width = [s_widths[@(imageScale)] floatValue] * fminf(UIScreen.mainScreen.scale, 2.f);
-    return CGSizeMake(width, width * 9.f / 16.f);
+    return CGSizeMake(width, roundf(width * 9.f / 16.f));
 }
 
 NSString *FilePathForImagePlaceholder(ImagePlaceholder imagePlaceholder)
