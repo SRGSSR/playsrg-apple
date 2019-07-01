@@ -67,7 +67,7 @@
 
 + (UIColor *)play_blackDurationLabelBackgroundColor
 {
-    return [UIColor colorWithWhite:0.f alpha:0.75f];
+    return UIColor.blackColor;
 }
 
 @end

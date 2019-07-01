@@ -62,7 +62,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.clearColor;
+    self.backgroundColor = UIColor.play_blackColor;
     
     self.mediaView.alpha = 0.f;
     self.placeholderView.alpha = 1.f;
@@ -203,10 +203,19 @@
         return;
     }
     
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
+        backgroundColor = self.module.backgroundColor;
+    }
+    self.backgroundColor = backgroundColor;
+    
     self.mediaView.alpha = 1.f;
     self.placeholderView.alpha = 0.f;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
+    self.titleLabel.backgroundColor = backgroundColor;
+    self.titleLabel.text = self.media.title;
+    
     self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     self.editorialLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     
@@ -214,8 +223,6 @@
     
     SRGAppearanceFontTextStyle subtitleTextStyle = self.featured ? SRGAppearanceFontTextStyleBody : SRGAppearanceFontTextStyleSubtitle;
     ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
-    
-    self.titleLabel.text = self.media.title;
     
     if (self.media.contentType != SRGContentTypeLivestream) {
         NSString *showTitle = self.media.show.title;
@@ -238,6 +245,7 @@
     else {
         self.subtitleLabel.text = nil;
     }
+    self.subtitleLabel.backgroundColor = backgroundColor;
     
     [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
     

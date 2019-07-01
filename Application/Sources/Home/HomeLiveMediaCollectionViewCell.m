@@ -65,7 +65,8 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.clearColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = backgroundColor;
     
     self.mediaView.alpha = 0.f;
     self.placeholderView.alpha = 1.f;
@@ -76,6 +77,9 @@
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMedia)
                                                             withScale:ImageScaleMedium];
     
+    self.titleLabel.backgroundColor = backgroundColor;
+    
+    self.subtitleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
