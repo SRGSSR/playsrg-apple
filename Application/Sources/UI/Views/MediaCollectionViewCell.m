@@ -54,10 +54,14 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = backgroundColor;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     
+    self.titleLabel.backgroundColor = backgroundColor;
+    
+    self.subtitleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;

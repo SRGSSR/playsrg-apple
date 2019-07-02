@@ -38,7 +38,10 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = backgroundColor;
+    
+    self.titleLabel.backgroundColor = backgroundColor;
     
     self.showView.hidden = YES;
     self.placeholderView.hidden = NO;

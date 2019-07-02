@@ -70,10 +70,18 @@
 {
     [super awakeFromNib];
     
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = backgroundColor;
+    self.selectedBackgroundView.backgroundColor = backgroundColor;
+    
     [self.nowLiveLabels enumerateObjectsUsingBlock:^(UILabel * _Nonnull label, NSUInteger idx, BOOL * _Nonnull stop) {
+        label.backgroundColor = backgroundColor;
         label.textColor = UIColor.play_lightGrayColor;
     }];
     
+    self.titleLabel.backgroundColor = backgroundColor;
+    
+    self.subtitleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.mainView.hidden = YES;
@@ -89,8 +97,6 @@
     
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMedia)
                                                             withScale:ImageScaleSmall];
-    self.backgroundColor = UIColor.play_blackColor;
-    self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
     
     self.livestreamButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
     self.livestreamButton.layer.cornerRadius = 4.f;

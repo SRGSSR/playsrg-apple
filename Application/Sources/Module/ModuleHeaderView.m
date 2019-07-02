@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "NSBundle+PlaySRG.h"
+#import "UIColor+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
@@ -67,7 +68,11 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.clearColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = backgroundColor;
+    
+    self.titleLabel.backgroundColor = backgroundColor;
+    self.subtitleLabel.backgroundColor = backgroundColor;
     
     // Accommodate all kinds of usages
     self.logoImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)

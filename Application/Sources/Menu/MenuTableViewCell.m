@@ -50,7 +50,11 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.backgroundColor = UIColor.blackColor;
+    
+    UIColor *backgroundColor = UIColor.blackColor;
+    self.backgroundColor = backgroundColor;
+    
+    self.titleLabel.backgroundColor = backgroundColor;
 }
 
 - (void)prepareForReuse
