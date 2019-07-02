@@ -44,8 +44,8 @@
 {
     [super awakeFromNib];
     
-    self.mainView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.mainView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     self.showsAtoZButtonPlaceholderView.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
     self.showsAtoZButtonPlaceholderView.layer.cornerRadius = 4.f;
@@ -109,13 +109,13 @@
 - (void)reloadData
 {
     if (! self.dataAvailable) {
-        self.mainView.alpha = 0.f;
-        self.placeholderView.alpha = 1.f;
+        self.mainView.hidden = YES;
+        self.placeholderView.hidden = NO;
         return;
     }
     
-    self.mainView.alpha = 1.f;
-    self.placeholderView.alpha = 0.f;
+    self.mainView.hidden = NO;
+    self.placeholderView.hidden = YES;
     
     self.showsAtoZButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.showsByDateButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];

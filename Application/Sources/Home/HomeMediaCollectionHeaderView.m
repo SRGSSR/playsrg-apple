@@ -56,8 +56,8 @@
     
     self.backgroundColor = UIColor.play_blackColor;
     
-    self.headerView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.headerView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
@@ -127,13 +127,13 @@
 - (void)reloadData
 {
     if (! self.isDataAvailable) {
-        self.headerView.alpha = 0.f;
-        self.placeholderView.alpha = 1.f;
+        self.headerView.hidden = YES;
+        self.placeholderView.hidden = NO;
         return;
     }
     
-    self.headerView.alpha = 1.f;
-    self.placeholderView.alpha = 0.f;
+    self.headerView.hidden = NO;
+    self.placeholderView.hidden = YES;
     
     UIColor *backgroundColor = UIColor.clearColor;
     UIColor *titleTextColor = UIColor.whiteColor;

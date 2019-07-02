@@ -76,8 +76,8 @@
     
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
-    self.mainView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.mainView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
@@ -254,15 +254,15 @@
     if (! self.dataAvailable) {
         self.mediaView.isAccessibilityElement = NO;
         
-        self.mainView.alpha = 0.f;
-        self.placeholderView.alpha = 1.f;
+        self.mainView.hidden = YES;
+        self.placeholderView.hidden = NO;
         return;
     }
     
     self.mediaView.isAccessibilityElement = YES;
     
-    self.mainView.alpha = 1.f;
-    self.placeholderView.alpha = 0.f;
+    self.mainView.hidden = NO;
+    self.placeholderView.hidden = YES;
     
     self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     

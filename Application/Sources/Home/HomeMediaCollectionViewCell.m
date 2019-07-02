@@ -64,8 +64,8 @@
     
     self.backgroundColor = UIColor.play_blackColor;
     
-    self.mediaView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.mediaView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMedia)
@@ -99,8 +99,8 @@
     
     self.featured = NO;
     
-    self.mediaView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.mediaView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     self.youthProtectionColorImageView.hidden = YES;
     
@@ -198,8 +198,8 @@
 - (void)reloadData
 {
     if (! self.media) {
-        self.mediaView.alpha = 0.f;
-        self.placeholderView.alpha = 1.f;
+        self.mediaView.hidden = YES;
+        self.placeholderView.hidden = NO;
         return;
     }
     
@@ -209,8 +209,8 @@
     }
     self.backgroundColor = backgroundColor;
     
-    self.mediaView.alpha = 1.f;
-    self.placeholderView.alpha = 0.f;
+    self.mediaView.hidden = NO;
+    self.placeholderView.hidden = YES;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
     self.titleLabel.backgroundColor = backgroundColor;
