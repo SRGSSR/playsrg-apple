@@ -29,13 +29,13 @@ CGSize SizeForImageScale(ImageScale imageScale)
     dispatch_once(&s_onceToken, ^{
         if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
             s_widths = @{ @(ImageScaleSmall) : @(200.f),
-                          @(ImageScaleMedium) : @(350.f),
-                          @(ImageScaleLarge) : @(500.f)};
+                          @(ImageScaleMedium) : @(340.f),
+                          @(ImageScaleLarge) : @(400.f)};
         }
         else {
             s_widths = @{ @(ImageScaleSmall) : @(200.f),
                           @(ImageScaleMedium) : @(500.f),
-                          @(ImageScaleLarge) : @(1000.f)};
+                          @(ImageScaleLarge) : @(800.f)};
         }
     });
     
