@@ -114,10 +114,10 @@
 "Downloads" = "Downloads";
 
 /* Label for the button keeping autoplay enabled */
-"Enable" = "Enable";
+"Enable" = "Aktivieren";
 
 /* Title of the alert view to opt-in for background video playback */
-"Enable background video playback?" = "Enable background video playback?";
+"Enable background video playback?" = "Video-Wiedergabe im Hintergrund aktivieren? ";
 
 /* Title of a button to propose the user to enable notifications in the system settings */
 "Enable in system settings" = "In den Einstellungen aktvieren";
@@ -182,7 +182,7 @@
 "Last synchronization: %@" = "Letzte Synchronisierung: %@";
 
 /* Label for the button for deciding to opt-in for background video playback at a later time */
-"Later" = "Later";
+"Later" = "Später";
 
 /* Label used on a radio home page to present the latest videos
    Label used on the home page to present the latest videos */
@@ -406,7 +406,7 @@
 "Search" = "Suche";
 
 /* Notification message when the server URL changed due to a scheme URL. */
-"Server changed to '%@'" = "Server changed to '%@'";
+"Server changed to '%@'" = "Server geändert auf '%@'";
 
 /* Label in the left menu to present settings */
 "Settings" = "Einstellungen";
@@ -518,13 +518,13 @@
 "TV programmes by date" = "TV-Sendungen nach Datum";
 
 /* Message displayed when there is no search criterium entered */
-"Type to start searching" = "Type to start searching";
+"Type to start searching" = "Suchbegriff eingeben";
 
 /* Title of the button to update the application */
 "Update" = "Updaten";
 
 /* Header for video and audio search results */
-"Videos and audios" = "Videos and audios";
+"Videos and audios" = "Video und Audio";
 
 /* Label in the left menu to present the watch later list
    Title displayed at the top of the watch later list screen */
@@ -538,7 +538,7 @@
 
 /* Description of the alert view to keep autoplay permanently
    Description of the alert view to opt-in for background video playback */
-"You can manage this feature in the settings at any time." = "You can manage this feature in the settings at any time.";
+"You can manage this feature in the settings at any time." = "Sie können Autoplay in den Einstellungen wieder anpassen.";
 
 /* Hint displayed when no media added to the watch later list and the device supports 3D touch */
 "You can press on a content to add it to this watch later list" = "Drücken Sie fest auf eine Sendung, um sie zu Später schauen hinzuzufügen.";

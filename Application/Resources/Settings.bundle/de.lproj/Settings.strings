@@ -1,7 +1,7 @@
 "Advanced features" = "Erweiterte Funktionen";
 "Alternate radio homepage design" = "Alternatives Radio Homepage Design";
 "Autoplay" = "Autoplay";
-"Background video playback" = "Background video playback";
+"Background video playback" = "Hintergrundwiedergabe";
 "Become a beta tester" = "Beta-Tester werden";
 "By default, the application loads high-definition medias over cellular networks. To avoid possible extra costs, this option could be disable and the highest quality will be played only on Wi-Fi networks." = "Standardmässig werden Videos immer in der bestmöglichen Qualität geladen. Um Kosten zu vermeiden, können Sie aber das Abspielen in höchster Qualität (High Definition) in Mobilfunknetzen unterbinden. Sie benötigen dann ein WLAN-Netzwerk, um Videos in HD abzuspielen.";
 "Check for updates" = "Nach neuen Updates suchen";
@@ -37,4 +37,4 @@
 "User location" = "User location";
 "What's new" = "Neue Funktionen";
 "When enabled, more content is automatically played after playback of the current content ends." = "Die Wiedergabe spielt am Ende des Inhalts automatisch das nächste Video oder Audio ab.";
-"When enabled, video playback continues even when you leave the application." = "When enabled, video playback continues even when you leave the application.";
+"When enabled, video playback continues even when you leave the application." = "Die Videos werden ohne Unterbrechung im Hintergrund abgespielt, auch wenn eine andere App geöffnet ist.";

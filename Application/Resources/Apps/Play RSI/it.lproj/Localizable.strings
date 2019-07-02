@@ -114,10 +114,10 @@
 "Downloads" = "Download";
 
 /* Label for the button keeping autoplay enabled */
-"Enable" = "Enable";
+"Enable" = "Attivare";
 
 /* Title of the alert view to opt-in for background video playback */
-"Enable background video playback?" = "Enable background video playback?";
+"Enable background video playback?" = "Attivare la lettura dei video in secondo piano?";
 
 /* Title of a button to propose the user to enable notifications in the system settings */
 "Enable in system settings" = "Attivare nelle impostazioni di sistema";
@@ -182,7 +182,7 @@
 "Last synchronization: %@" = "Ultima sincronizzazione: %@";
 
 /* Label for the button for deciding to opt-in for background video playback at a later time */
-"Later" = "Later";
+"Later" = "Dopo";
 
 /* Label used on a radio home page to present the latest videos
    Label used on the home page to present the latest videos */
@@ -406,7 +406,7 @@
 "Search" = "Ricerca";
 
 /* Notification message when the server URL changed due to a scheme URL. */
-"Server changed to '%@'" = "Server changed to '%@'";
+"Server changed to '%@'" = "Server modificato in '%@'";
 
 /* Label in the left menu to present settings */
 "Settings" = "Impostazioni";
@@ -518,13 +518,13 @@
 "TV programmes by date" = "Trasmissioni per data";
 
 /* Message displayed when there is no search criterium entered */
-"Type to start searching" = "Type to start searching";
+"Type to start searching" = "Iniziare a scrivere per avviare la ricerca";
 
 /* Title of the button to update the application */
 "Update" = "Aggiorna";
 
 /* Header for video and audio search results */
-"Videos and audios" = "Videos and audios";
+"Videos and audios" = "Video e audio";
 
 /* Label in the left menu to present the watch later list
    Title displayed at the top of the watch later list screen */
