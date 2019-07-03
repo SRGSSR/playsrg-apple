@@ -117,7 +117,7 @@
 "Enable" = "Enable";
 
 /* Title of the alert view to opt-in for background video playback */
-"Enable background video playback?" = "Activer la lecture vidéo en arrière-plan?";
+"Enable background video playback?" = "Enable background video playback?";
 
 /* Title of a button to propose the user to enable notifications in the system settings */
 "Enable in system settings" = "Enable in system settings";
