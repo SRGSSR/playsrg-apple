@@ -22,27 +22,12 @@
 @interface SearchViewController ()
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
-
-@property (nonatomic) SRGMediaSearchSettings *settings;
-@property (nonatomic) SRGMediaAggregations *aggregations;
-
 @property (nonatomic, weak) UISearchBar *searchBar;
-
 @property (nonatomic) SRGRequestQueue *showsRequestQueue;
 
 @end
 
 @implementation SearchViewController
-
-#pragma mark Object lifecycle
-
-- (instancetype)init
-{
-    if (self = [super init]) {
-        self.settings = [[SRGMediaSearchSettings alloc] init];
-    }
-    return self;
-}
 
 #pragma mark Getters and setters
 
@@ -154,9 +139,10 @@
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     NSString *query = self.searchBar.text;
     
-    SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:self.settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregations, NSArray<SRGSearchSuggestion *> * suggestions, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-        self.aggregations = aggregations;
-        
+    SRGMediaSearchSettings *settings = [[SRGMediaSearchSettings alloc] init];
+    settings.aggregationsEnabled = NO;
+    
+    SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregations, NSArray<SRGSearchSuggestion *> * suggestions, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (error) {
             completionHandler(nil, page, nil, HTTPResponse, error);
             return;
@@ -225,7 +211,6 @@
 - (void)search
 {
     self.shows = nil;
-    self.aggregations = nil;
     
     [self clear];
     [self refresh];
