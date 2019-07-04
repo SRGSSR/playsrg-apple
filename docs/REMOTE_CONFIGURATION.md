@@ -93,6 +93,7 @@ A wide list of parameters are available. Some parameters support multiple comma-
 * `continuousPlaybackBackgroundTransitionDuration` (optional, number): Duration in seconds for continuous playback when the application runs in background. If empty, continuous playback is disabled; if equal to 0, upcoming media playback starts immediately.
 * `hiddenOnboardings` (optional, string, multiple): Identifier list of onboardings which must be hidden.
 * `logoutMenuEnabled` (optional, boolean): If set to `true`, a menu will be presented when the user is logging out, allowing to keep or discard local data.
+* `searchSettingsDisabled` (optional, boolean): If set to `true`, the search view requests won't add any settings.
 
 ### History
 

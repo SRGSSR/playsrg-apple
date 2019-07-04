@@ -264,6 +264,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=isLogoutMenuEnabled) BOOL logoutMenuEnabled;
 
+@property (nonatomic, getter=areSearchSettingsDisabled) BOOL searchSettingsDisabled;
+
 @property (nonatomic) NSDictionary<NSString *, NSDictionary *> *topicHeaders;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -671,6 +673,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.endToleranceRatio = (endToleranceRatio.stringValue.length > 0) ? fmaxf(endToleranceRatio.numberValue.floatValue, 0.f) : 0.f;
     
     self.hiddenOnboardingUids = [[self.remoteConfig configValueForKey:@"hiddenOnboardings"].stringValue componentsSeparatedByString:@","];
+    
+    self.searchSettingsDisabled = [self.remoteConfig configValueForKey:@"searchSettingsDisabled"].boolValue;
     
     self.prefersDRM = [self.remoteConfig configValueForKey:@"prefersDRM"].boolValue;
     self.logoutMenuEnabled = [self.remoteConfig configValueForKey:@"logoutMenuEnabled"].boolValue;

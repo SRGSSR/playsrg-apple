@@ -139,9 +139,8 @@
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     NSString *query = self.searchBar.text;
     
-    // TODO: Remove vendor test and use ApplicationConfiguration.json.
     SRGMediaSearchSettings *settings = nil;
-    if (applicationConfiguration.vendor != SRGVendorSWI) {
+    if (! applicationConfiguration.searchSettingsDisabled) {
         settings = [[SRGMediaSearchSettings alloc] init];
         settings.aggregationsEnabled = NO;
     }
