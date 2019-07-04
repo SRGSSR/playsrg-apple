@@ -169,7 +169,7 @@
     // loading the first page only, so that both requests are made together when loading initial search results. We use the
     // maximum page size and do not manage pagination for shows. This leads to simple code withoug impacting its usability
     // (the user can still refine the search to get better results, and there are not so many shows anyway).
-    if (page.number == 0) {
+    if (page.number == 0 && ! applicationConfiguration.showsSearchDisabled) {
         static const NSUInteger kShowSearchPageSize = 20;
         
         self.showsRequestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {

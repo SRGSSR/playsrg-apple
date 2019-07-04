@@ -158,6 +158,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, getter=isLogoutMenuEnabled) BOOL logoutMenuEnabled;
 
 @property (nonatomic, readonly, getter=areSearchSettingsDisabled) BOOL searchSettingsDisabled;
+@property (nonatomic, readonly, getter=isShowsSearchDisabled) BOOL showsSearchDisabled;
 
 - (nullable RadioChannel *)radioChannelForUid:(NSString *)uid;
 - (nullable TVChannel *)tvChannelForUid:(NSString *)uid;

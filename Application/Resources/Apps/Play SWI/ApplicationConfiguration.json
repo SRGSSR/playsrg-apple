@@ -26,5 +26,6 @@
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
   "searchSettingsDisabled": true,
+  "showsSearchDisabled": true,
   "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account"
 }
