@@ -139,8 +139,12 @@
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     NSString *query = self.searchBar.text;
     
-    SRGMediaSearchSettings *settings = [[SRGMediaSearchSettings alloc] init];
-    settings.aggregationsEnabled = NO;
+    // TODO: Remove vendor test and use ApplicationConfiguration.json.
+    SRGMediaSearchSettings *settings = nil;
+    if (applicationConfiguration.vendor != SRGVendorSWI) {
+        settings = [[SRGMediaSearchSettings alloc] init];
+        settings.aggregationsEnabled = NO;
+    }
     
     SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregations, NSArray<SRGSearchSuggestion *> * suggestions, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (error) {
