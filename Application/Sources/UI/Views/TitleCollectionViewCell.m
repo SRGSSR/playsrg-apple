@@ -31,6 +31,13 @@
     self.titleLabel.font = [UIFont srg_regularFontWithTextStyle:UIFontTextStyleBody];
 }
 
+- (void)setHighlighted:(BOOL)highlighted
+{
+    super.highlighted = highlighted;
+    
+    self.titleLabel.textColor = highlighted ? UIColor.lightGrayColor : UIColor.whiteColor;
+}
+
 #pragma mark Getters and setters
 
 - (void)setTitle:(NSString *)title
