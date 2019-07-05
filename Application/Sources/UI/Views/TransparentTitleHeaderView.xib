@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzr-J1-4az">
-                    <rect key="frame" x="9" y="16.5" width="508" height="24"/>
+                    <rect key="frame" x="16" y="16.5" width="494" height="24"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -25,8 +25,8 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="dzr-J1-4az" firstAttribute="centerY" secondItem="UHp-tl-zKd" secondAttribute="centerY" id="7au-sA-wyd"/>
-                <constraint firstItem="dzr-J1-4az" firstAttribute="leading" secondItem="UHp-tl-zKd" secondAttribute="leading" constant="9" id="APH-xI-iqT"/>
-                <constraint firstAttribute="trailing" secondItem="dzr-J1-4az" secondAttribute="trailing" constant="9" id="m59-HD-igJ"/>
+                <constraint firstItem="dzr-J1-4az" firstAttribute="leading" secondItem="UHp-tl-zKd" secondAttribute="leading" constant="16" id="APH-xI-iqT"/>
+                <constraint firstAttribute="trailing" secondItem="dzr-J1-4az" secondAttribute="trailing" constant="16" id="m59-HD-igJ"/>
             </constraints>
             <connections>
                 <outlet property="titleLabel" destination="dzr-J1-4az" id="PVb-eT-BIP"/>
