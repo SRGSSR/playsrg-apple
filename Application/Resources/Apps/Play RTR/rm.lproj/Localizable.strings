@@ -114,10 +114,10 @@
 "Downloads" = "Telechargiadas";
 
 /* Label for the button keeping autoplay enabled */
-"Enable" = "Enable";
+"Enable" = "Activar";
 
 /* Title of the alert view to opt-in for background video playback */
-"Enable background video playback?" = "Enable background video playback?";
+"Enable background video playback?" = "Activar da laschar ir video davostiers?";
 
 /* Title of a button to propose the user to enable notifications in the system settings */
 "Enable in system settings" = "Activar en las preferenzas dals sistem";
@@ -182,7 +182,7 @@
 "Last synchronization: %@" = "Ultima sincronisaziun: %@";
 
 /* Label for the button for deciding to opt-in for background video playback at a later time */
-"Later" = "Later";
+"Later" = "Pli tard";
 
 /* Label used on a radio home page to present the latest videos
    Label used on the home page to present the latest videos */
@@ -406,7 +406,7 @@
 "Search" = "Tschertga";
 
 /* Notification message when the server URL changed due to a scheme URL. */
-"Server changed to '%@'" = "Server changed to '%@'";
+"Server changed to '%@'" = "Midà server tar '%@'";
 
 /* Label in the left menu to present settings */
 "Settings" = "Configurar";
@@ -518,13 +518,13 @@
 "TV programmes by date" = "Emissiuns da TV tenor data";
 
 /* Message displayed when there is no search criterium entered */
-"Type to start searching" = "Type to start searching";
+"Type to start searching" = "Tutgar per tschertgar";
 
 /* Title of the button to update the application */
 "Update" = "Update";
 
 /* Header for video and audio search results */
-"Videos and audios" = "Videos and audios";
+"Videos and audios" = "Videos ed audios";
 
 /* Label in the left menu to present the watch later list
    Title displayed at the top of the watch later list screen */
