@@ -22,27 +22,12 @@
 @interface SearchViewController ()
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
-
-@property (nonatomic) SRGMediaSearchSettings *settings;
-@property (nonatomic) SRGMediaAggregations *aggregations;
-
 @property (nonatomic, weak) UISearchBar *searchBar;
-
 @property (nonatomic) SRGRequestQueue *showsRequestQueue;
 
 @end
 
 @implementation SearchViewController
-
-#pragma mark Object lifecycle
-
-- (instancetype)init
-{
-    if (self = [super init]) {
-        self.settings = [[SRGMediaSearchSettings alloc] init];
-    }
-    return self;
-}
 
 #pragma mark Getters and setters
 
@@ -154,9 +139,13 @@
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     NSString *query = self.searchBar.text;
     
-    SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:self.settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregations, NSArray<SRGSearchSuggestion *> * suggestions, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-        self.aggregations = aggregations;
-        
+    SRGMediaSearchSettings *settings = nil;
+    if (! applicationConfiguration.searchSettingsDisabled) {
+        settings = [[SRGMediaSearchSettings alloc] init];
+        settings.aggregationsEnabled = NO;
+    }
+    
+    SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregations, NSArray<SRGSearchSuggestion *> * suggestions, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (error) {
             completionHandler(nil, page, nil, HTTPResponse, error);
             return;
@@ -180,7 +169,7 @@
     // loading the first page only, so that both requests are made together when loading initial search results. We use the
     // maximum page size and do not manage pagination for shows. This leads to simple code withoug impacting its usability
     // (the user can still refine the search to get better results, and there are not so many shows anyway).
-    if (page.number == 0) {
+    if (page.number == 0 && ! applicationConfiguration.showsSearchDisabled) {
         static const NSUInteger kShowSearchPageSize = 20;
         
         self.showsRequestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
@@ -225,7 +214,6 @@
 - (void)search
 {
     self.shows = nil;
-    self.aggregations = nil;
     
     [self clear];
     [self refresh];
