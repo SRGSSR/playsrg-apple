@@ -121,10 +121,9 @@
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
     
-    ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
-    
     self.titleLabel.text = self.show.title;
     
+    ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
     [self.thumbnailImageView play_requestImageForObject:self.show withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
 }
 

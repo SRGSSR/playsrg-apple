@@ -19,6 +19,8 @@
 
 @interface ShowCollectionViewCell ()
 
+@property (nonatomic) SRGShow *show;
+
 @property (nonatomic, weak) IBOutlet UIView *showView;
 @property (nonatomic, weak) IBOutlet UIView *placeholderView;
 @property (nonatomic, weak) IBOutlet UIImageView *placeholderImageView;
@@ -84,9 +86,9 @@
 
 #pragma mark Getters and setters
 
-- (void)setShow:(SRGShow *)show
+- (void)setShow:(SRGShow *)show featured:(BOOL)featured
 {
-    _show = show;
+    self.show = show;
     
     if (! show) {
         self.showView.alpha = 0.f;
@@ -100,7 +102,8 @@
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = show.title;
     
-    [self.thumbnailImageView play_requestImageForObject:show withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];    
+    ImageScale imageScale = featured ? ImageScaleMedium : ImageScaleSmall;
+    [self.thumbnailImageView play_requestImageForObject:show withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
 }
 
 #pragma mark Previewing protocol

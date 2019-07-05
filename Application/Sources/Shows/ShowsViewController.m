@@ -260,7 +260,8 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(ShowCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *indexLetter = self.indexLetters[indexPath.section];
-    cell.show = self.showsAlphabeticalMap[indexLetter][indexPath.row];
+    SRGShow *show = self.showsAlphabeticalMap[indexLetter][indexPath.row];
+    [cell setShow:show featured:NO];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath

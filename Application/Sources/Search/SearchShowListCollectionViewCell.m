@@ -82,7 +82,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(ShowCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.show = self.shows[indexPath.row];
+    [cell setShow:self.shows[indexPath.row] featured:YES];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

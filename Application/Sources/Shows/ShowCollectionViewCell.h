@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ShowCollectionViewCell : UICollectionViewCell <Previewing>
 
-@property (nonatomic, nullable) SRGShow *show;
+- (void)setShow:(SRGShow *)show featured:(BOOL)featured;
 
 @end
 
