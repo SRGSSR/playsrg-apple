@@ -106,7 +106,7 @@
 {
     [super viewWillAppear:animated];
     
-    if ([self play_isMovingToParentViewController]) {
+    if ([self shouldDisplayMostSearchedShows]) {
         [self.searchBar becomeFirstResponder];
     }
 }
@@ -205,7 +205,7 @@
 
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
-    if ([self isSearchTextEmpty]) {
+    if ([self shouldDisplayMostSearchedShows]) {
         [self prepareMostSearchedShowsRefreshWithRequestQueue:requestQueue page:page completionHandler:completionHandler];
     }
     else {
@@ -222,12 +222,12 @@
 
 - (NSString *)emptyCollectionTitle
 {
-    return [self isSearchTextEmpty] ? NSLocalizedString(@"Search", @"Title displayed when there is no search criterium entered") : super.emptyCollectionTitle;
+    return [self shouldDisplayMostSearchedShows] ? NSLocalizedString(@"Search", @"Title displayed when there is no search criterium entered") : super.emptyCollectionTitle;
 }
 
 - (NSString *)emptyCollectionSubtitle
 {
-    return [self isSearchTextEmpty] ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
+    return [self shouldDisplayMostSearchedShows] ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
 }
 
 #pragma mark Helpers
@@ -241,14 +241,15 @@
     [self refresh];
 }
 
-- (BOOL)isSearchTextEmpty
+- (BOOL)shouldDisplayMostSearchedShows
 {
-    return self.searchBar.text.length == 0;
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    return ! applicationConfiguration.showsSearchDisabled && self.searchBar.text.length == 0;
 }
 
 - (BOOL)isDisplayingMostSearchedShows
 {
-    return [self isSearchTextEmpty] && self.items.count != 0;
+    return [self shouldDisplayMostSearchedShows] && self.items.count != 0;
 }
 
 - (BOOL)isLoadingObjectsInSection:(NSInteger)section
@@ -282,7 +283,7 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    if ([self isSearchTextEmpty]) {
+    if ([self shouldDisplayMostSearchedShows]) {
         return 1;
     }
     else {
@@ -292,7 +293,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if ([self isSearchTextEmpty]) {
+    if ([self shouldDisplayMostSearchedShows]) {
         return self.items.count;
     }
     else if ([self isLoadingObjectsInSection:section]) {
@@ -308,7 +309,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self isSearchTextEmpty]) {
+    if ([self shouldDisplayMostSearchedShows]) {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(TitleCollectionViewCell.class)
                                                          forIndexPath:indexPath];
     }
@@ -373,7 +374,7 @@
     if ([view isKindOfClass:TransparentTitleHeaderView.class]) {
         TransparentTitleHeaderView *headerView = (TransparentTitleHeaderView *)view;
         
-        if ([self isSearchTextEmpty]) {
+        if ([self shouldDisplayMostSearchedShows]) {
             headerView.title = NSLocalizedString(@"Most searched shows", @"Most searched shows header");
         }
         else if ([self isDisplayingMediasInSection:indexPath.section]) {
@@ -393,7 +394,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self isSearchTextEmpty]) {
+    if ([self shouldDisplayMostSearchedShows]) {
         SRGShow *show = self.items[indexPath.row];
         ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
         [self.navigationController pushViewController:showViewController animated:YES];
@@ -410,7 +411,7 @@
 {
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
-    if ([self isSearchTextEmpty]) {
+    if ([self shouldDisplayMostSearchedShows]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
