@@ -11,6 +11,8 @@
 #import "NavigationController.h"
 #import "SearchLoadingCollectionViewCell.h"
 #import "SearchShowListCollectionViewCell.h"
+#import "ShowViewController.h"
+#import "TitleCollectionViewCell.h"
 #import "TransparentTitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -22,6 +24,7 @@
 @interface SearchViewController ()
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
+
 @property (nonatomic, weak) UISearchBar *searchBar;
 @property (nonatomic) SRGRequestQueue *showsRequestQueue;
 
@@ -52,6 +55,10 @@
     NSString *mediaCellIdentifier = NSStringFromClass(MediaCollectionViewCell.class);
     UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
     [self.collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
+    
+    NSString *titleCellIdentifier = NSStringFromClass(TitleCollectionViewCell.class);
+    UINib *titleCellNib = [UINib nibWithNibName:titleCellIdentifier bundle:nil];
+    [self.collectionView registerNib:titleCellNib forCellWithReuseIdentifier:titleCellIdentifier];
     
     NSString *showListCellIdentifier = NSStringFromClass(SearchShowListCollectionViewCell.class);
     UINib *showListCellNib = [UINib nibWithNibName:showListCellIdentifier bundle:nil];
@@ -129,12 +136,7 @@
 
 #pragma mark Overrides
 
-- (BOOL)shouldPerformRefreshRequest
-{
-    return (self.searchBar.text.length != 0);
-}
-
-- (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
+- (void)prepareSearchResultsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     NSString *query = self.searchBar.text;
@@ -192,21 +194,30 @@
     }
 }
 
+- (void)prepareMostSearchedShowsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
+{
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    SRGRequest *request = [SRGDataProvider.currentDataProvider mostSearchedShowsForVendor:applicationConfiguration.vendor withCompletionBlock:^(NSArray<SRGShow *> * _Nullable shows, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        completionHandler(shows, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+    }];
+    [requestQueue addRequest:request resume:YES];
+}
+
+- (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
+{
+    if ([self isSearchTextEmpty]) {
+        [self prepareMostSearchedShowsRefreshWithRequestQueue:requestQueue page:page completionHandler:completionHandler];
+    }
+    else {
+        [self prepareSearchResultsRefreshWithRequestQueue:requestQueue page:page completionHandler:completionHandler];
+    }
+}
+
 - (void)didCancelRefreshRequest
 {
     [super didCancelRefreshRequest];
     
     [self.showsRequestQueue cancel];
-}
-
-- (NSString *)emptyCollectionTitle
-{
-    return (self.searchBar.text.length == 0) ? NSLocalizedString(@"Search", @"Title displayed when there is no search criterium entered") : super.emptyCollectionTitle;
-}
-
-- (NSString *)emptyCollectionSubtitle
-{
-    return (self.searchBar.text.length == 0) ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
 }
 
 #pragma mark Helpers
@@ -220,9 +231,14 @@
     [self refresh];
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+- (BOOL)isSearchTextEmpty
 {
-    return (self.shows.count == 0) ? 1 : 2;
+    return self.searchBar.text.length == 0;
+}
+
+- (BOOL)isDisplayingMostSearchedShows
+{
+    return [self isSearchTextEmpty] && self.items.count != 0;
 }
 
 - (BOOL)isLoadingObjectsInSection:(NSInteger)section
@@ -254,13 +270,22 @@
 
 #pragma mark UICollectionViewDataSource protocol
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    if ([self isSearchTextEmpty]) {
+        return 1;
+    }
+    else {
+        return (self.shows.count == 0) ? 1 : 2;
+    }
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (! [self shouldPerformRefreshRequest]) {
-        return 0;
+    if ([self isSearchTextEmpty]) {
+        return self.items.count;
     }
-    
-    if ([self isLoadingObjectsInSection:section]) {
+    else if ([self isLoadingObjectsInSection:section]) {
         return 1;
     }
     else if ([self isDisplayingMediasInSection:section]) {
@@ -273,7 +298,11 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self isLoadingObjectsInSection:indexPath.section]) {
+    if ([self isSearchTextEmpty]) {
+        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(TitleCollectionViewCell.class)
+                                                         forIndexPath:indexPath];
+    }
+    else if ([self isLoadingObjectsInSection:indexPath.section]) {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(SearchLoadingCollectionViewCell.class)
                                                          forIndexPath:indexPath];
     }
@@ -303,7 +332,12 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([cell isKindOfClass:MediaCollectionViewCell.class]) {
+    if ([cell isKindOfClass:TitleCollectionViewCell.class]) {
+        TitleCollectionViewCell *titleCell = (TitleCollectionViewCell *)cell;
+        SRGShow *show = self.items[indexPath.row];
+        titleCell.title = show.title;
+    }
+    else if ([cell isKindOfClass:MediaCollectionViewCell.class]) {
         MediaCollectionViewCell *mediaCell = (MediaCollectionViewCell *)cell;
         mediaCell.media = self.items[indexPath.row];
     }
@@ -328,7 +362,11 @@
 {
     if ([view isKindOfClass:TransparentTitleHeaderView.class]) {
         TransparentTitleHeaderView *headerView = (TransparentTitleHeaderView *)view;
-        if ([self isDisplayingMediasInSection:indexPath.section]) {
+        
+        if ([self isSearchTextEmpty]) {
+            headerView.title = NSLocalizedString(@"Most searched shows", @"Most searched shows header");
+        }
+        else if ([self isDisplayingMediasInSection:indexPath.section]) {
             headerView.title = (self.items != 0) ? NSLocalizedString(@"Videos and audios", @"Header for video and audio search results") : nil;
         }
         else {
@@ -345,7 +383,12 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self isDisplayingMediasInSection:indexPath.section]) {
+    if ([self isSearchTextEmpty]) {
+        SRGShow *show = self.items[indexPath.row];
+        ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+        [self.navigationController pushViewController:showViewController animated:YES];
+    }
+    else if ([self isDisplayingMediasInSection:indexPath.section]) {
         SRGMedia *media = self.items[indexPath.row];
         [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
     }
@@ -357,7 +400,10 @@
 {
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
-    if ([self isLoadingObjectsInSection:indexPath.section]) {
+    if ([self isSearchTextEmpty]) {
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
+    }
+    else if ([self isLoadingObjectsInSection:indexPath.section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 200.f);
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
@@ -381,7 +427,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if ([self isDisplayingObjectsInSection:section]) {
+    if ([self isDisplayingMostSearchedShows] || [self isDisplayingObjectsInSection:section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
     }
     else {
