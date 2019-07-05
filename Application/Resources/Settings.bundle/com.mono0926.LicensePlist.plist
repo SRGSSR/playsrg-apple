@@ -224,7 +224,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-ios</string>
 			<key>Title</key>
-			<string>srganalytics-ios (08ab55b)</string>
+			<string>srganalytics-ios (3.7.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -240,7 +240,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-ios</string>
 			<key>Title</key>
-			<string>srgdataprovider-ios (74e2103)</string>
+			<string>srgdataprovider-ios (6.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -264,7 +264,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-ios</string>
 			<key>Title</key>
-			<string>srgletterbox-ios (136168c)</string>
+			<string>srgletterbox-ios (1.14.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -280,7 +280,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-ios</string>
 			<key>Title</key>
-			<string>srgmediaplayer-ios (f47e1ee)</string>
+			<string>srgmediaplayer-ios (2.7)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -296,7 +296,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srguserdata-ios</string>
 			<key>Title</key>
-			<string>srguserdata-ios (82b1ce7)</string>
+			<string>srguserdata-ios (1.1.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
