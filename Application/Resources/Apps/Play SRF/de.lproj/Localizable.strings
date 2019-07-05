@@ -238,6 +238,9 @@
 /* Short title for the most recent video topic list */
 "Most recent" = "Neuste Videos";
 
+/* Most searched shows header */
+"Most searched shows" = "Meistgesuchte Sendungen";
+
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mein Konto";
 

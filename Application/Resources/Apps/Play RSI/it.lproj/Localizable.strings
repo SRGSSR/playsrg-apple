@@ -238,6 +238,9 @@
 /* Short title for the most recent video topic list */
 "Most recent" = "I più recenti";
 
+/* Most searched shows header */
+"Most searched shows" = "Programmi più ricercati";
+
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Il mio account";
 
