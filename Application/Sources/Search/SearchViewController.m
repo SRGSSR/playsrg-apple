@@ -220,6 +220,16 @@
     [self.showsRequestQueue cancel];
 }
 
+- (NSString *)emptyCollectionTitle
+{
+    return [self isSearchTextEmpty] ? NSLocalizedString(@"Search", @"Title displayed when there is no search criterium entered") : super.emptyCollectionTitle;
+}
+
+- (NSString *)emptyCollectionSubtitle
+{
+    return [self isSearchTextEmpty] ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
+}
+
 #pragma mark Helpers
 
 - (void)search
