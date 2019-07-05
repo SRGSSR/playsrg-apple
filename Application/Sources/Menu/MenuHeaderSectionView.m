@@ -64,6 +64,10 @@
 {
     [super awakeFromNib];
     
+    UIColor *backgroundColor = UIColor.blackColor;
+    self.backgroundColor = backgroundColor;
+    
+    self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.textColor = UIColor.play_lightGrayColor;
 }
 

@@ -49,21 +49,21 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = backgroundColor;
     
     UIView *colorView = [[UIView alloc] init];
-    colorView.backgroundColor = UIColor.play_blackColor;
+    colorView.backgroundColor = backgroundColor;
     self.selectedBackgroundView = colorView;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     
+    self.titleLabel.backgroundColor = backgroundColor;
+    self.subtitleLabel.backgroundColor = backgroundColor;
+    
     self.durationLabelBackgroundColor = self.durationLabel.backgroundColor;
     
     self.youthProtectionColorImageView.hidden = YES;
-    
-    self.media360ImageView.layer.shadowOpacity = 0.3f;
-    self.media360ImageView.layer.shadowRadius = 2.f;
-    self.media360ImageView.layer.shadowOffset = CGSizeMake(0.f, 1.f);
     
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     

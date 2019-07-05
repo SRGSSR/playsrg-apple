@@ -54,10 +54,10 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.clearColor;
+    self.backgroundColor = UIColor.play_blackColor;
     
-    self.headerView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.headerView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
@@ -127,21 +127,25 @@
 - (void)reloadData
 {
     if (! self.isDataAvailable) {
-        self.headerView.alpha = 0.f;
-        self.placeholderView.alpha = 1.f;
+        self.headerView.hidden = YES;
+        self.placeholderView.hidden = NO;
         return;
     }
     
-    self.headerView.alpha = 1.f;
-    self.placeholderView.alpha = 0.f;
+    self.headerView.hidden = NO;
+    self.placeholderView.hidden = YES;
     
+    UIColor *backgroundColor = UIColor.clearColor;
     UIColor *titleTextColor = UIColor.whiteColor;
     UIColor *thumbnailImageViewBackgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     if (self.homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
+        backgroundColor = self.homeSectionInfo.module.backgroundColor;
         titleTextColor = self.homeSectionInfo.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
         thumbnailImageViewBackgroundColor = self.homeSectionInfo.module.backgroundColor;
     }
+    self.backgroundColor = backgroundColor;
     
+    self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.textColor = titleTextColor;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];

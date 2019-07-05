@@ -37,8 +37,10 @@
 {
     [super awakeFromNib];
     
-    self.mainView.backgroundColor = UIColor.play_blackColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.mainView.backgroundColor = backgroundColor;
     
+    self.centerLabel.backgroundColor = backgroundColor;
     self.centerLabel.textColor = UIColor.whiteColor;
     self.centerLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
 }

@@ -65,10 +65,11 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.clearColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = backgroundColor;
     
-    self.mediaView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.mediaView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
@@ -76,6 +77,9 @@
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMedia)
                                                             withScale:ImageScaleMedium];
     
+    self.titleLabel.backgroundColor = backgroundColor;
+    
+    self.subtitleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
@@ -95,8 +99,9 @@
     self.featured = NO;
     self.channel = nil;
     
-    self.mediaView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.mediaView.hidden = YES;
+    self.placeholderView.hidden = NO;
+    
     self.progressView.progress = 1.f;
     
     self.blockingOverlayView.hidden = YES;
@@ -204,13 +209,13 @@
 - (void)reloadData
 {
     if (! self.channel) {
-        self.mediaView.alpha = 0.f;
-        self.placeholderView.alpha = 1.f;
+        self.mediaView.hidden = YES;
+        self.placeholderView.hidden = NO;
         return;
     }
     
-    self.mediaView.alpha = 1.f;
-    self.placeholderView.alpha = 0.f;
+    self.mediaView.hidden = NO;
+    self.placeholderView.hidden = YES;
     
     self.logoImageView.image = self.channel.play_banner22Image;
     

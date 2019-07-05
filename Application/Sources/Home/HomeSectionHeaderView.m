@@ -56,12 +56,12 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 
 #pragma mark Getters and setters
 
-- (void)setHomeSectionInfo:(HomeSectionInfo * _Nullable)homeSectionInfo featured:(BOOL)featured;
+- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured;
 {
     self.homeSectionInfo = homeSectionInfo;
     self.featured = featured;
     
-    UIColor *backgroundColor = UIColor.clearColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
     UIColor *titleTextColor = UIColor.play_lightGrayColor;
     if (homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
         backgroundColor = homeSectionInfo.module.backgroundColor;
@@ -70,7 +70,10 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     
     self.moduleBackgroundView.backgroundColor = backgroundColor;
     
+    self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.textColor = titleTextColor;
+    
+    self.navigationButton.backgroundColor = backgroundColor;
     self.navigationButton.tintColor = titleTextColor;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
@@ -84,6 +87,8 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    self.backgroundColor = UIColor.play_blackColor;
     
     self.titleLabel.textColor = UIColor.play_lightGrayColor;
     self.titleLabel.userInteractionEnabled = YES;

@@ -36,11 +36,14 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = backgroundColor;
     
     UIView *colorView = [[UIView alloc] init];
-    colorView.backgroundColor = UIColor.play_blackColor;
+    colorView.backgroundColor = backgroundColor;
     self.selectedBackgroundView = colorView;
+    
+    self.titleLabel.backgroundColor = backgroundColor;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     

@@ -38,10 +38,13 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = backgroundColor;
     
-    self.showView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.titleLabel.backgroundColor = backgroundColor;
+    
+    self.showView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
@@ -54,8 +57,8 @@
 {
     [super prepareForReuse];
     
-    self.showView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.showView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     [self.thumbnailImageView play_resetImage];
 }
@@ -91,13 +94,13 @@
     self.show = show;
     
     if (! show) {
-        self.showView.alpha = 0.f;
-        self.placeholderView.alpha = 1.f;
+        self.showView.hidden = YES;
+        self.placeholderView.hidden = NO;
         return;
     }
     
-    self.showView.alpha = 1.f;
-    self.placeholderView.alpha = 0.f;
+    self.showView.hidden = NO;
+    self.placeholderView.hidden = YES;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = show.title;
