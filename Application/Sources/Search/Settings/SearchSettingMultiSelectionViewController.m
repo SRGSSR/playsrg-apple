@@ -117,7 +117,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
-    selectorCell.name = self.items[indexPath.row].name;
+    selectorCell.name = [NSString stringWithFormat:@"%@ (%@)", self.items[indexPath.row].name, [NSNumberFormatter localizedStringFromNumber:@(self.items[indexPath.row].count) numberStyle:NSNumberFormatterDecimalStyle]];
     selectorCell.accessoryType = ([self.selectedvalues containsObject:self.items[indexPath.row].value]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 }
 
