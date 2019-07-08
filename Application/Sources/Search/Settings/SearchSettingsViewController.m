@@ -130,8 +130,8 @@
     static dispatch_once_t s_onceToken;
     static NSDictionary<NSNumber *, NSNumber *> *s_rows;
     dispatch_once(&s_onceToken, ^{
-        s_rows = @{ @0 : @3,
-                    @1 : @2,
+        s_rows = @{ @0 : @2,
+                    @1 : @1,
                     @2 : @2 };
     });
     
@@ -143,11 +143,9 @@
     static dispatch_once_t s_onceToken;
     static NSDictionary<NSNumber *, NSDictionary<NSNumber *, Class> *> *s_cellClasses;
     dispatch_once(&s_onceToken, ^{
-        s_cellClasses = @{ @0 : @{ @0 : SearchSettingSegmentCell.class,
-                                   @1 : SearchSettingSelectorCell.class,
-                                   @2 : SearchSettingSegmentCell.class },
-                           @1 : @{ @0 : SearchSettingSelectorCell.class,
+        s_cellClasses = @{ @0 : @{ @0 : SearchSettingSelectorCell.class,
                                    @1 : SearchSettingSelectorCell.class },
+                           @1 : @{ @0 : SearchSettingSegmentCell.class },
                            @2 : @{ @0 : SearchSettingSwitchCell.class,
                                    @1 : SearchSettingSwitchCell.class } };
     });
@@ -166,7 +164,51 @@
         }
             
         case 1: {
-            
+            switch (indexPath.row) {
+                case 0: {
+                    SearchSettingSegmentCell *segmentCell = (SearchSettingSegmentCell *)cell;
+                    [segmentCell setName:NSLocalizedString(@"Duration", @"Duration setting name in search settings") items:@[ NSLocalizedString(@"All", @"All option"), NSLocalizedString(@"< 5 min", @"Less than 5 min option"), NSLocalizedString(@"> 30 min", @"More than 3 min option") ] reader:^NSInteger{
+                        if (! self.settings.minimumDurationInMinutes && ! self.settings.maximumDurationInMinutes) {
+                            return 0;
+                        }
+                        else if (self.settings.maximumDurationInMinutes) {
+                            return 1;
+                        }
+                        else {
+                            return 2;
+                        }
+                    } writer:^(NSInteger index) {
+                        switch (index) {
+                            case 0: {
+                                self.settings.minimumDurationInMinutes = nil;
+                                self.settings.maximumDurationInMinutes = nil;
+                                break;
+                            }
+                                
+                            case 1: {
+                                self.settings.minimumDurationInMinutes = nil;
+                                self.settings.maximumDurationInMinutes = @(5);
+                                break;
+                            }
+                                
+                            case 2: {
+                                self.settings.minimumDurationInMinutes = @(30);
+                                self.settings.maximumDurationInMinutes = nil;
+                                break;
+                            }
+                                
+                            default: {
+                                break;
+                            }
+                        }
+                    }];
+                    break;
+                }
+                    
+                default: {
+                    break;
+                }
+            }
             break;
         }
             
@@ -174,13 +216,21 @@
             switch (indexPath.row) {
                 case 0: {
                     SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
-                    [switchCell setObject:self.settings key:@keypath(SRGMediaSearchSettings.new, downloadAvailable) name:NSLocalizedString(@"Available for download", @"Download availability toggle name in search settings")];
+                    [switchCell setName:NSLocalizedString(@"Available for download", @"Download availability toggle name in search settings") reader:^BOOL{
+                        return self.settings.downloadAvailable;
+                    } writer:^(BOOL value) {
+                        self.settings.downloadAvailable = @(value);
+                    }];
                     break;
                 }
                     
                 case 1: {
                     SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
-                    [switchCell setObject:self.settings key:@keypath(SRGMediaSearchSettings.new, playableAbroad) name:NSLocalizedString(@"Playable abroad", @"Abroad playability toggle name in search settings")];
+                    [switchCell setName:NSLocalizedString(@"Playable abroad", @"Abroad playability toggle name in search settings") reader:^BOOL{
+                        return self.settings.playableAbroad;
+                    } writer:^(BOOL value) {
+                        self.settings.playableAbroad = @(value);
+                    }];
                     break;
                 }
                     

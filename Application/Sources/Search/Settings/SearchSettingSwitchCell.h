@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchSettingSwitchCell : UITableViewCell
 
-- (void)setObject:(id)object key:(NSString *)key name:(NSString *)name;
+- (void)setName:(NSString *)name reader:(BOOL (^)(void))reader writer:(void (^)(BOOL value))writer;
 
 @end
 

@@ -10,6 +10,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchSettingSegmentCell : UITableViewCell
 
+- (void)setName:(NSString *)name items:(NSArray<NSString *> *)items reader:(NSInteger (^)(void))reader writer:(void (^)(NSInteger index))writer;
+
 @end
 
 NS_ASSUME_NONNULL_END

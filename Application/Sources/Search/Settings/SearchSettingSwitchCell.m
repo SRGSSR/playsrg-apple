@@ -12,11 +12,10 @@
 
 @interface SearchSettingSwitchCell ()
 
-@property (nonatomic) BOOL *pValue;
-
-@property (nonatomic) id object;
-@property (nonatomic, copy) NSString *key;
 @property (nonatomic, copy) NSString *name;
+
+@property (nonatomic, copy) BOOL (^reader)(void);
+@property (nonatomic, copy) void (^writer)(BOOL value);
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UISwitch *valueSwitch;
@@ -27,11 +26,12 @@
 
 #pragma mark Getters and setters
 
-- (void)setObject:(id)object key:(NSString *)key name:(NSString *)name
+- (void)setName:(NSString *)name reader:(BOOL (^)(void))reader writer:(void (^)(BOOL))writer
 {
-    self.object = object;
-    self.key = key;
     self.name = name;
+    
+    self.reader = reader;
+    self.writer = writer;
     
     [self reloadData];
 }
@@ -55,14 +55,16 @@
 - (void)reloadData
 {
     self.nameLabel.text = self.name;
-    self.valueSwitch.on = [[self.object valueForKey:self.key] boolValue];
+    self.valueSwitch.on = self.reader ? self.reader() : NO;
 }
 
 #pragma mark Actions
 
 - (IBAction)valueChanged:(id)sender
 {
-    [self.object setValue:@(self.valueSwitch.on) forKey:self.key];
+    if (self.writer) {
+        self.writer(self.valueSwitch.on);
+    }
 }
 
 @end
