@@ -116,6 +116,14 @@
 - (void)refreshDidFinishWithError:(NSError *)error
 {}
 
+#pragma mark Updates
+
+- (void)updateResults
+{
+    [self.delegate searchSettingsViewController:self didUpdateSettings:self.settings];
+    [self refresh];
+}
+
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -211,6 +219,7 @@
                                 break;
                             }
                         }
+                        [self updateResults];
                     }];
                     break;
                 }
@@ -227,9 +236,10 @@
                 case 0: {
                     SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
                     [switchCell setName:NSLocalizedString(@"Available for download", @"Download availability toggle name in search settings") reader:^BOOL{
-                        return self.settings.downloadAvailable;
+                        return self.settings.downloadAvailable.boolValue;
                     } writer:^(BOOL value) {
                         self.settings.downloadAvailable = @(value);
+                        [self updateResults];
                     }];
                     break;
                 }
@@ -237,9 +247,10 @@
                 case 1: {
                     SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
                     [switchCell setName:NSLocalizedString(@"Playable abroad", @"Abroad playability toggle name in search settings") reader:^BOOL{
-                        return self.settings.playableAbroad;
+                        return self.settings.playableAbroad.boolValue;
                     } writer:^(BOOL value) {
                         self.settings.playableAbroad = @(value);
+                        [self updateResults];
                     }];
                     break;
                 }
