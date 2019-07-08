@@ -132,7 +132,7 @@
     dispatch_once(&s_onceToken, ^{
         s_rows = @{ @0 : @3,
                     @1 : @2,
-                    @2 : @3 };
+                    @2 : @2 };
     });
     
     return s_rows[@(section)].integerValue;
@@ -149,8 +149,7 @@
                            @1 : @{ @0 : SearchSettingSelectorCell.class,
                                    @1 : SearchSettingSelectorCell.class },
                            @2 : @{ @0 : SearchSettingSwitchCell.class,
-                                   @1 : SearchSettingSwitchCell.class,
-                                   @2 : SearchSettingSwitchCell.class } };
+                                   @1 : SearchSettingSwitchCell.class } };
     });
     Class cellClass = s_cellClasses[@(indexPath.section)][@(indexPath.row)];
     return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(cellClass) forIndexPath:indexPath];
@@ -160,7 +159,42 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    switch (indexPath.section) {
+        case 0: {
+            
+            break;
+        }
+            
+        case 1: {
+            
+            break;
+        }
+            
+        case 2: {
+            switch (indexPath.row) {
+                case 0: {
+                    SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
+                    [switchCell setObject:self.settings key:@keypath(SRGMediaSearchSettings.new, downloadAvailable) name:NSLocalizedString(@"Available for download", @"Download availability toggle name in search settings")];
+                    break;
+                }
+                    
+                case 1: {
+                    SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
+                    [switchCell setObject:self.settings key:@keypath(SRGMediaSearchSettings.new, playableAbroad) name:NSLocalizedString(@"Playable abroad", @"Abroad playability toggle name in search settings")];
+                    break;
+                }
+                    
+                default: {
+                    break;
+                }
+            }
+            break;
+        }
+            
+        default: {
+            break;
+        }
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
