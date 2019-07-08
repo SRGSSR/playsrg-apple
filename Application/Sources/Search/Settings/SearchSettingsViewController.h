@@ -4,15 +4,25 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "BaseViewController.h"
+#import "RequestViewController.h"
 
 #import <SRGDataProvider/SRGDataProvider.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchSettingsViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
+@class SearchSettingsViewController;
 
-- (instancetype)initWithSettings:(SRGMediaSearchSettings *)settings;
+@protocol SearchSettingsViewControllerDelegate <NSObject>
+
+- (void)searchSettingsViewController:(SearchSettingsViewController *)searchSettingsViewController didUpdateSettings:(nullable SRGMediaSearchSettings *)settings;
+
+@end
+
+@interface SearchSettingsViewController : RequestViewController <UITableViewDataSource, UITableViewDelegate>
+
+- (instancetype)initWithQuery:(nullable NSString *)query settings:(nullable SRGMediaSearchSettings *)settings;
+
+@property (nonatomic, weak) id<SearchSettingsViewControllerDelegate> delegate;
 
 @end
 

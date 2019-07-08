@@ -22,7 +22,7 @@
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-@interface SearchViewController ()
+@interface SearchViewController () <SearchSettingsViewControllerDelegate>
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
 
@@ -287,6 +287,16 @@
     return self.shows.count == 0 || section != 0;
 }
 
+#pragma mark SearchSettingsViewControllerDelegate protocol
+
+- (void)searchSettingsViewController:(SearchSettingsViewController *)searchSettingsViewController didUpdateSettings:(SRGMediaSearchSettings *)settings
+{
+    self.settings = [settings copy];
+    self.settings.aggregationsEnabled = NO;
+    
+    [self search];
+}
+
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -469,7 +479,7 @@
 #pragma mark UISearchBarDelegate protocol
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
+{    
     // Perform the search with a delay to avoid triggering several search requests if updates are made in a row
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(search) object:nil];
     
@@ -502,7 +512,9 @@
 {
     NSAssert([sender isKindOfClass:UIBarButtonItem.class], @"Bar button item expected");
     
-    SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithSettings:self.settings];
+    SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.searchBar.text settings:self.settings];
+    searchSettingsViewController.delegate = self;
+    
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController];
     
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {

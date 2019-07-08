@@ -7,6 +7,7 @@
 #import "SearchSettingsViewController.h"
 
 #import "AnalyticsConstants.h"
+#import "ApplicationConfiguration.h"
 #import "SearchSettingSelectorCell.h"
 #import "SearchSettingSegmentCell.h"
 #import "SearchSettingSwitchCell.h"
@@ -17,7 +18,10 @@
 
 @interface SearchSettingsViewController ()
 
+@property (nonatomic, copy) NSString *query;
 @property (nonatomic) SRGMediaSearchSettings *settings;
+
+@property (nonatomic) SRGMediaAggregations *aggregations;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
@@ -27,10 +31,12 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithSettings:(SRGMediaSearchSettings *)settings
+- (instancetype)initWithQuery:(NSString *)query settings:(SRGMediaSearchSettings *)settings
 {
     if (self = [super init]) {
-        self.settings = settings;
+        self.query = query;
+        self.settings = [settings copy] ?: [[SRGMediaSearchSettings alloc] init];
+        self.settings.aggregationsEnabled = YES;
     }
     return self;
 }
@@ -41,7 +47,7 @@
 - (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
-    return [self initWithSettings:SRGMediaSearchSettings.new];
+    return [self initWithQuery:nil settings:SRGMediaSearchSettings.new];
 }
 
 #pragma clang diagnostic pop
@@ -81,6 +87,24 @@
 {
     return UIStatusBarStyleLightContent;
 }
+
+#pragma mark Overrides
+
+- (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue
+{
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    SRGBaseRequest *request = [SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:self.query withSettings:self.settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber * _Nonnull total, SRGMediaAggregations * _Nullable aggregations, NSArray<SRGSearchSuggestion *> * _Nullable suggestions, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        self.aggregations = aggregations;
+        [self.tableView reloadData];
+    }];
+    [requestQueue addRequest:request resume:YES];
+}
+
+- (void)refreshDidStart
+{}
+
+- (void)refreshDidFinishWithError:(NSError *)error
+{}
 
 #pragma mark SRGAnalyticsViewTracking protocol
 
