@@ -536,8 +536,8 @@
     }
     else {
         searchSettingsViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                                                                                                      target:self
-                                                                                                                      action:@selector(closeSettings:)];
+                                                                                                                       target:self
+                                                                                                                       action:@selector(closeSettings:)];
         [self presentViewController:navigationController animated:YES completion:nil];
     }
 }

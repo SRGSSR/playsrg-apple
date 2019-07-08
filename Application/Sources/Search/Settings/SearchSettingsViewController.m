@@ -76,6 +76,11 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         self.query = query;
         self.settings = [settings copy] ?: [[SRGMediaSearchSettings alloc] init];
         self.settings.aggregationsEnabled = YES;
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
+                                                                                 style:UIBarButtonItemStylePlain
+                                                                                target:self
+                                                                                action:@selector(resetSettings:)];
     }
     return self;
 }
@@ -173,6 +178,14 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                       @3 : NSLocalizedString(@"Properties", @"Settings section header") };
     });
     return s_titles[@(section)];
+}
+
+#pragma mark Actions
+
+- (IBAction)resetSettings:(id)sender
+{
+    self.settings = [[SRGMediaSearchSettings alloc] init];
+    [self updateResults];
 }
 
 #pragma mark Updates
