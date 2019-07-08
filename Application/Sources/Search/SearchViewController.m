@@ -479,7 +479,7 @@
 #pragma mark UISearchBarDelegate protocol
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{    
+{
     // Perform the search with a delay to avoid triggering several search requests if updates are made in a row
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(search) object:nil];
     
