@@ -177,6 +177,16 @@
 		0837CEEE1D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0837CEC11D3FD6E600A1E089 /* SRGSSRType_Md.ttf */; };
 		0837CEEF1D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0837CEC21D3FD6E600A1E089 /* SRGSSRType_Rg.ttf */; };
 		0837CEF01D3FDAFA00A1E089 /* SRGSSRType_Serif_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0837CEC31D3FD6E600A1E089 /* SRGSSRType_Serif_Rg.ttf */; };
+		084F94B022D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */; };
+		084F94B122D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */; };
+		084F94B222D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */; };
+		084F94B322D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */; };
+		084F94B422D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */; };
+		084F94B522D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084F94AF22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard */; };
+		084F94B622D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084F94AF22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard */; };
+		084F94B722D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084F94AF22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard */; };
+		084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084F94AF22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard */; };
+		084F94B922D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084F94AF22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard */; };
 		0852539722073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */; };
 		0852539822073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */; };
 		0852539922073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */; };
@@ -1667,6 +1677,9 @@
 		0837CEC11D3FD6E600A1E089 /* SRGSSRType_Md.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SRGSSRType_Md.ttf; sourceTree = "<group>"; };
 		0837CEC21D3FD6E600A1E089 /* SRGSSRType_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SRGSSRType_Rg.ttf; sourceTree = "<group>"; };
 		0837CEC31D3FD6E600A1E089 /* SRGSSRType_Serif_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SRGSSRType_Serif_Rg.ttf; sourceTree = "<group>"; };
+		084F94AD22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingMultiSelectionViewController.h; sourceTree = "<group>"; };
+		084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingMultiSelectionViewController.m; sourceTree = "<group>"; };
+		084F94AF22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchSettingMultiSelectionViewController.storyboard; sourceTree = "<group>"; };
 		0852539522073D5200BCF0B1 /* UIApplication+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+PlaySRG.h"; sourceTree = "<group>"; };
 		0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+PlaySRG.m"; sourceTree = "<group>"; };
 		08564B1B1D41111A00381549 /* HomeSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSectionHeaderView.h; sourceTree = "<group>"; };
@@ -3280,6 +3293,9 @@
 		6FF7BB8E22A78DE400FA758A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				084F94AD22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.h */,
+				084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */,
+				084F94AF22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard */,
 				6FF7BB8F22A78DE400FA758A /* SearchSettingSegmentCell.h */,
 				6FF7BB9322A78DE400FA758A /* SearchSettingSegmentCell.m */,
 				6FF7BB9122A78DE400FA758A /* SearchSettingSelectorCell.h */,
@@ -3943,6 +3959,7 @@
 				08D0E0E91E9D21C100AB8298 /* HomeRadioLiveTableViewCell.xib in Resources */,
 				6F0F88A51ECF0CE50060A893 /* override_default_tv_srf2.pdf in Resources */,
 				6FD2CBC31DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
+				084F94B522D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6F0F889D1ECF0CE50060A893 /* override_artwork_srf4.pdf in Resources */,
 				6FA9ECC620C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				6F47600E1EB37BC6003021EA /* TranslucentTitleHeaderView.xib in Resources */,
@@ -4032,6 +4049,7 @@
 				08DD9D5F1FFE6EF800115906 /* ModuleHeaderView.xib in Resources */,
 				6F6B643421A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				E6AE51341D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
+				084F94B622D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6F1938321EFBFE9E0017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F0C99AC2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
 				6F0F88851ECF0CDD0060A893 /* override_artwork_couleur3.pdf in Resources */,
@@ -4106,6 +4124,7 @@
 				6FF3B6962137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
 				6F0F885A1ECF0BA40060A893 /* override_artwork_la1.pdf in Resources */,
 				6FA7EC3B20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
+				084F94B722D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				0837CED71D3FDAFA00A1E089 /* SRGSSRType_Bd.ttf in Resources */,
 				6FCB574B1EC2047B0015CAB7 /* override_default_rete_due.pdf in Resources */,
 				6F1A95ED216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
@@ -4196,6 +4215,7 @@
 				086F8D6722984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */,
 				6F4760071EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				081220B71DD07B7B00BF8326 /* DownloadsViewController.storyboard in Resources */,
+				084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6F1F92AD22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
 				6F12DB5821A3EFBF0054879D /* HistoryViewController.storyboard in Resources */,
 				6F0C99952121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
@@ -4341,6 +4361,7 @@
 				08C690861D38E3E600BB8AAA /* iTunesArtwork in Resources */,
 				E6AE51371D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
 				E6DB5F251D66E0950057094B /* ShowsViewController.storyboard in Resources */,
+				084F94B922D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				E66BEC251DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				08280F132258EA4000AC978D /* WatchLaterViewController.storyboard in Resources */,
 				6F340F4F220DA87700778CA3 /* SRGUserData.bundle in Resources */,
@@ -5416,6 +5437,7 @@
 				6F47607C1EB37D60003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6FC1FA882292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				08EB37AD1D48B1D20080EDE4 /* MenuTableViewCell.m in Sources */,
+				084F94B022D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */,
 				086F8D5A22984B29001BE2F4 /* FavoritesViewController.m in Sources */,
 				6F4760791EB37D60003021EA /* UIDevice+PlaySRG.m in Sources */,
 				6F475FE11EB37BC6003021EA /* ModalTransition.m in Sources */,
@@ -5589,6 +5611,7 @@
 				08A3ED031FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				6FC8866C1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
 				6F32275F216F2FEC006A785D /* MenuAccountHeaderView.m in Sources */,
+				084F94B122D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */,
 				0827DA1F1F0D36E200A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F7218141DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F1484C01EF7B09400830E7B /* RadioShowsViewController.m in Sources */,
@@ -5739,6 +5762,7 @@
 				08A3ED041FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				6FC8866D1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
 				6F322760216F2FEC006A785D /* MenuAccountHeaderView.m in Sources */,
+				084F94B222D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */,
 				0827DA201F0D36E200A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F7218151DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F1484C11EF7B09400830E7B /* RadioShowsViewController.m in Sources */,
@@ -5889,6 +5913,7 @@
 				08A3ED051FA2619200A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				6FC8866E1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
 				6F322761216F2FEC006A785D /* MenuAccountHeaderView.m in Sources */,
+				084F94B322D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */,
 				0827DA211F0D36E400A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F7218161DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F1484C21EF7B09400830E7B /* RadioShowsViewController.m in Sources */,
@@ -6039,6 +6064,7 @@
 				08A3ED061FA2619300A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				6FC8866F1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
 				6F322762216F2FEC006A785D /* MenuAccountHeaderView.m in Sources */,
+				084F94B422D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */,
 				0827DA221F0D36E400A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F7218171DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F1484C31EF7B09400830E7B /* RadioShowsViewController.m in Sources */,
