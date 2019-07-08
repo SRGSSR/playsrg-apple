@@ -43,8 +43,6 @@
     [super awakeFromNib];
     
     self.backgroundColor = UIColor.play_popoverGrayColor;
-    
-    self.nameLabel.font = [UIFont srg_mediumFontWithTextStyle:UIFontTextStyleBody];
     self.nameLabel.textColor = UIColor.whiteColor;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -55,6 +53,8 @@
 - (void)reloadData
 {
     self.nameLabel.text = self.name;
+    self.nameLabel.font = [UIFont srg_mediumFontWithTextStyle:UIFontTextStyleBody];
+    
     self.valueSwitch.on = self.reader ? self.reader() : NO;
 }
 

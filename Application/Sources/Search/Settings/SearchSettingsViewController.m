@@ -89,6 +89,15 @@
     return UIStatusBarStyleLightContent;
 }
 
+#pragma mark Accessibility
+
+- (void)updateForContentSizeCategory
+{
+    [super updateForContentSizeCategory];
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark Overrides
 
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue

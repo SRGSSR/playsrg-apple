@@ -45,8 +45,6 @@
     [super awakeFromNib];
     
     self.backgroundColor = UIColor.play_popoverGrayColor;
-    
-    self.nameLabel.font = [UIFont srg_mediumFontWithTextStyle:UIFontTextStyleBody];
     self.nameLabel.textColor = UIColor.whiteColor;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -57,6 +55,7 @@
 - (void)reloadData
 {
     self.nameLabel.text = self.name;
+    self.nameLabel.font = [UIFont srg_mediumFontWithTextStyle:UIFontTextStyleBody];
     
     [self.segmentedControl removeAllSegments];
     [self.items enumerateObjectsUsingBlock:^(NSString * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
