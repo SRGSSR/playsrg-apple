@@ -23,63 +23,68 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchSettingSegmentCell" id="eDE-Ev-IJg" customClass="SearchSettingSegmentCell">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchSettingSegmentCell" rowHeight="91" id="eDE-Ev-IJg" customClass="SearchSettingSegmentCell">
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eDE-Ev-IJg" id="K6U-uy-tdW">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="90.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;name&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dw7-jo-KWu">
-                                                    <rect key="frame" x="20" y="11.5" width="233" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Gz1-gU-2sa">
-                                                    <rect key="frame" x="273" y="8" width="121" height="29"/>
-                                                    <segments>
-                                                        <segment title="First"/>
-                                                        <segment title="Second"/>
-                                                    </segments>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <connections>
-                                                        <action selector="valueChanged:" destination="eDE-Ev-IJg" eventType="valueChanged" id="BVb-jG-8mY"/>
-                                                    </connections>
-                                                </segmentedControl>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="v06-sV-cAK">
+                                                    <rect key="frame" x="20" y="12" width="374" height="66.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="&lt;name&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3b-Ar-Hec">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f3d-ck-gBK">
+                                                            <rect key="frame" x="0.0" y="32.5" width="374" height="35"/>
+                                                            <segments>
+                                                                <segment title="First"/>
+                                                                <segment title="Second"/>
+                                                            </segments>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <connections>
+                                                                <action selector="valueChanged:" destination="eDE-Ev-IJg" eventType="valueChanged" id="VC6-os-jnf"/>
+                                                            </connections>
+                                                        </segmentedControl>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Gz1-gU-2sa" firstAttribute="centerY" secondItem="K6U-uy-tdW" secondAttribute="centerY" id="Bh5-KP-EAL"/>
-                                                <constraint firstItem="Dw7-jo-KWu" firstAttribute="leading" secondItem="K6U-uy-tdW" secondAttribute="leading" constant="20" id="Uif-Up-yfG"/>
-                                                <constraint firstItem="Gz1-gU-2sa" firstAttribute="leading" secondItem="Dw7-jo-KWu" secondAttribute="trailing" constant="20" id="hWJ-Mv-zaZ"/>
-                                                <constraint firstItem="Dw7-jo-KWu" firstAttribute="centerY" secondItem="K6U-uy-tdW" secondAttribute="centerY" id="mfr-ux-hDl"/>
-                                                <constraint firstAttribute="trailing" secondItem="Gz1-gU-2sa" secondAttribute="trailing" constant="20" id="nSN-8z-qyb"/>
+                                                <constraint firstItem="v06-sV-cAK" firstAttribute="top" secondItem="K6U-uy-tdW" secondAttribute="top" constant="12" id="0tZ-ei-BRf"/>
+                                                <constraint firstItem="v06-sV-cAK" firstAttribute="leading" secondItem="K6U-uy-tdW" secondAttribute="leading" constant="20" id="7wR-A8-lYr"/>
+                                                <constraint firstAttribute="bottom" secondItem="v06-sV-cAK" secondAttribute="bottom" constant="12" id="JBj-za-gQF"/>
+                                                <constraint firstAttribute="trailing" secondItem="v06-sV-cAK" secondAttribute="trailing" constant="20" id="Oul-js-v37"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.050000000000000003" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="nameLabel" destination="Dw7-jo-KWu" id="eyV-Pv-N1i"/>
-                                            <outlet property="segmentedControl" destination="Gz1-gU-2sa" id="LOj-sd-spC"/>
+                                            <outlet property="nameLabel" destination="K3b-Ar-Hec" id="71U-dw-ggA"/>
+                                            <outlet property="segmentedControl" destination="f3d-ck-gBK" id="CSs-VG-WKv"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchSettingSelectorCell" id="4kd-Q5-hs5" customClass="SearchSettingSelectorCell">
-                                        <rect key="frame" x="0.0" y="99.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="146.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4kd-Q5-hs5" id="bmX-cv-NgC">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;name&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GA2-xI-QGG">
-                                                    <rect key="frame" x="20" y="11.5" width="374" height="20.5"/>
+                                                    <rect key="frame" x="20" y="12" width="374" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="GA2-xI-QGG" firstAttribute="centerY" secondItem="bmX-cv-NgC" secondAttribute="centerY" id="DtV-rs-vqb"/>
+                                                <constraint firstAttribute="bottom" secondItem="GA2-xI-QGG" secondAttribute="bottom" constant="12" id="GQK-ei-8Yf"/>
                                                 <constraint firstAttribute="trailing" secondItem="GA2-xI-QGG" secondAttribute="trailing" constant="20" id="Mwm-m2-u93"/>
                                                 <constraint firstItem="GA2-xI-QGG" firstAttribute="leading" secondItem="bmX-cv-NgC" secondAttribute="leading" constant="20" id="PtX-Qj-5XA"/>
+                                                <constraint firstItem="GA2-xI-QGG" firstAttribute="top" secondItem="bmX-cv-NgC" secondAttribute="top" constant="12" id="t9h-0f-3W0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -88,14 +93,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchSettingSwitchCell" id="fk7-Wt-ctv" customClass="SearchSettingSwitchCell">
-                                        <rect key="frame" x="0.0" y="143.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="190.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fk7-Wt-ctv" id="TVB-Fp-Nq4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;name&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USe-mV-TrW">
-                                                    <rect key="frame" x="20" y="11.5" width="305" height="21"/>
+                                                    <rect key="frame" x="20" y="12" width="305" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -108,10 +113,11 @@
                                                 </switch>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="USe-mV-TrW" firstAttribute="top" secondItem="TVB-Fp-Nq4" secondAttribute="top" constant="12" id="BpP-17-MWc"/>
                                                 <constraint firstAttribute="trailing" secondItem="TtL-Lt-gKC" secondAttribute="trailing" constant="20" id="LXf-qJ-NA0"/>
                                                 <constraint firstItem="USe-mV-TrW" firstAttribute="leading" secondItem="TVB-Fp-Nq4" secondAttribute="leading" constant="20" id="OsT-VC-c4a"/>
-                                                <constraint firstItem="TtL-Lt-gKC" firstAttribute="centerY" secondItem="TVB-Fp-Nq4" secondAttribute="centerY" id="gDN-hh-0ir"/>
-                                                <constraint firstItem="USe-mV-TrW" firstAttribute="centerY" secondItem="TVB-Fp-Nq4" secondAttribute="centerY" id="qKH-Fo-2Yf"/>
+                                                <constraint firstAttribute="bottom" secondItem="USe-mV-TrW" secondAttribute="bottom" constant="12" id="b7u-UT-HZC"/>
+                                                <constraint firstItem="TtL-Lt-gKC" firstAttribute="centerY" secondItem="USe-mV-TrW" secondAttribute="centerY" id="hVU-px-kXt"/>
                                                 <constraint firstItem="TtL-Lt-gKC" firstAttribute="leading" secondItem="USe-mV-TrW" secondAttribute="trailing" constant="20" id="vWn-ef-s9o"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -140,7 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oej-0f-3Wi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="281" y="-251"/>
+            <point key="canvasLocation" x="279.71014492753625" y="-251.11607142857142"/>
         </scene>
     </scenes>
 </document>

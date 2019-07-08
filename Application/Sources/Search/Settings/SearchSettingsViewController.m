@@ -69,6 +69,7 @@
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = UIColor.clearColor;
+    self.tableView.estimatedRowHeight = 44.f;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
