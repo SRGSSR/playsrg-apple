@@ -8,9 +8,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchSettingSegmentCell : UITableViewCell
+@interface SearchSettingsHeaderView : UITableViewHeaderFooterView
 
-- (void)setItems:(NSArray<NSString *> *)items reader:(NSInteger (^)(void))reader writer:(void (^)(NSInteger index))writer;
+@property (nonatomic, copy) NSString *title;
 
 @end
 

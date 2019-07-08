@@ -1226,6 +1226,16 @@
 		6FD633EC1FFD151000875BE5 /* MiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633E91FFD151000875BE5 /* MiniPlayerView.m */; };
 		6FD633ED1FFD151000875BE5 /* MiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633E91FFD151000875BE5 /* MiniPlayerView.m */; };
 		6FD633EE1FFD151000875BE5 /* MiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633E91FFD151000875BE5 /* MiniPlayerView.m */; };
+		6FD88F7722D3618F008859EF /* SearchSettingsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */; };
+		6FD88F7822D3618F008859EF /* SearchSettingsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */; };
+		6FD88F7922D3618F008859EF /* SearchSettingsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */; };
+		6FD88F7A22D3618F008859EF /* SearchSettingsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */; };
+		6FD88F7B22D3618F008859EF /* SearchSettingsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */; };
+		6FD88F7C22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */; };
+		6FD88F7D22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */; };
+		6FD88F7E22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */; };
+		6FD88F7F22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */; };
+		6FD88F8022D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */; };
 		6FDF08D7218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
 		6FDF08D8218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
 		6FDF08D9218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
@@ -2083,6 +2093,9 @@
 		6FD633DD1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleCastMiniPlayerView.xib; sourceTree = "<group>"; };
 		6FD633E81FFD151000875BE5 /* MiniPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiniPlayerView.h; sourceTree = "<group>"; };
 		6FD633E91FFD151000875BE5 /* MiniPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiniPlayerView.m; sourceTree = "<group>"; };
+		6FD88F7422D3618F008859EF /* SearchSettingsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingsHeaderView.h; sourceTree = "<group>"; };
+		6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingsHeaderView.m; sourceTree = "<group>"; };
+		6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchSettingsHeaderView.xib; sourceTree = "<group>"; };
 		6FDF08C5218B126700B2AF2C /* Download.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Download.m; sourceTree = "<group>"; };
 		6FDF08C6218B126700B2AF2C /* Recommendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recommendation.m; sourceTree = "<group>"; };
 		6FDF08C8218B126700B2AF2C /* Download+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Download+Private.h"; sourceTree = "<group>"; };
@@ -3271,6 +3284,9 @@
 				6FF7BB9322A78DE400FA758A /* SearchSettingSegmentCell.m */,
 				6FF7BB9122A78DE400FA758A /* SearchSettingSelectorCell.h */,
 				6FF7BB9622A78DE400FA758A /* SearchSettingSelectorCell.m */,
+				6FD88F7422D3618F008859EF /* SearchSettingsHeaderView.h */,
+				6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */,
+				6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */,
 				6FF7BB9222A78DE400FA758A /* SearchSettingsViewController.h */,
 				6FF7BB9522A78DE400FA758A /* SearchSettingsViewController.m */,
 				6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */,
@@ -3833,6 +3849,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD88F7C22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				08C690551D38E0BE00BB8AAA /* iTunesArtwork@2x in Resources */,
 				086F8D6422984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */,
 				E6DB5F2E1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
@@ -3955,6 +3972,7 @@
 				082590F31F054ACD00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				6F32275A216F2FEC006A785D /* MenuAccountHeaderView.xib in Resources */,
 				6F8181AC22CF396B005AFC46 /* TitleCollectionViewCell.xib in Resources */,
+				6FD88F7D22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				6F0F888E1ECF0CDD0060A893 /* override_default_la1ere.pdf in Resources */,
 				6F475FF11EB37BC6003021EA /* TabStripCell.xib in Resources */,
 				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
@@ -4113,6 +4131,7 @@
 				6F12DB5721A3EFBF0054879D /* HistoryViewController.storyboard in Resources */,
 				6F4EA1341EE034B000BEC4DA /* Accessibility.strings in Resources */,
 				08564B251D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
+				6FD88F7E22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				0832BF1722BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
 				E6E2DF2E1D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				6FA9ECC820C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
@@ -4211,6 +4230,7 @@
 				E6E2DF2F1D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				6F93DE1620AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				086F8D6222984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
+				6FD88F7F22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				0837CEE21D3FDAFA00A1E089 /* SRGSSRType_He.ttf in Resources */,
 				08C68FE31D38E04B00BB8AAA /* iTunesArtwork@2x in Resources */,
 				6F4C0A7E20DCBDD200069A85 /* HomeShowVerticalListTableViewCell.xib in Resources */,
@@ -4303,6 +4323,7 @@
 				08C6908B1D38E3E600BB8AAA /* iTunesArtwork@2x in Resources */,
 				08C690E11D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */,
 				6F6B643721A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
+				6FD88F8022D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				6F1A95EF216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
 				6F92B44222C75872001C7C40 /* TransparentTitleHeaderView.xib in Resources */,
 				E6E2DF301D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
@@ -5423,6 +5444,7 @@
 				6F0A7EFF20AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				6F8144142008FA970075F52F /* GoogleCast.m in Sources */,
 				08C68F8F1D38DEA100BB8AAA /* main.m in Sources */,
+				6FD88F7722D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F475FB41EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FE686E11EB9D57400067D40 /* ChannelService.m in Sources */,
 				08DD9D5C1FFE6EDB00115906 /* ModuleHeaderView.m in Sources */,
@@ -5533,6 +5555,7 @@
 				086F8D6A22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
 				E6E2DF1B1D6ACA8B00791EDE /* ShowViewController.m in Sources */,
 				6F475FEC1EB37BC6003021EA /* TabStripCell.m in Sources */,
+				6FD88F7822D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B642F21A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633DF1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				089EA019201148F40070E11A /* TimerTarget.m in Sources */,
@@ -5682,6 +5705,7 @@
 				086F8D6B22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
 				E6E2DF1C1D6ACA8B00791EDE /* ShowViewController.m in Sources */,
 				6F475FED1EB37BC6003021EA /* TabStripCell.m in Sources */,
+				6FD88F7922D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B643021A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633E01FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				089EA01A201148F50070E11A /* TimerTarget.m in Sources */,
@@ -5831,6 +5855,7 @@
 				086F8D6C22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
 				E6E2DF1D1D6ACA8B00791EDE /* ShowViewController.m in Sources */,
 				6F475FEE1EB37BC6003021EA /* TabStripCell.m in Sources */,
+				6FD88F7A22D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B643121A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633E11FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				089EA01B201148F50070E11A /* TimerTarget.m in Sources */,
@@ -5980,6 +6005,7 @@
 				086F8D6D22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
 				E6E2DF1E1D6ACA8B00791EDE /* ShowViewController.m in Sources */,
 				6F475FEF1EB37BC6003021EA /* TabStripCell.m in Sources */,
+				6FD88F7B22D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B643221A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633E21FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				089EA01C201148F60070E11A /* TimerTarget.m in Sources */,

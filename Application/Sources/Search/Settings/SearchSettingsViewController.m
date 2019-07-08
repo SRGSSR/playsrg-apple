@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "SearchSettingsHeaderView.h"
 #import "SearchSettingSelectorCell.h"
 #import "SearchSettingSegmentCell.h"
 #import "SearchSettingSwitchCell.h"
@@ -69,10 +70,15 @@
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = UIColor.clearColor;
+    self.tableView.separatorColor = UIColor.clearColor;
     self.tableView.estimatedRowHeight = 44.f;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    NSString *headerIdentifier = NSStringFromClass(SearchSettingsHeaderView.class);
+    UINib *headerViewNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
+    [self.tableView registerNib:headerViewNib forHeaderFooterViewReuseIdentifier:headerIdentifier];
 }
 
 #pragma mark Rotation
@@ -116,6 +122,20 @@
 - (void)refreshDidFinishWithError:(NSError *)error
 {}
 
+#pragma mark UI
+
+- (NSString *)titleForSection:(NSInteger)section
+{
+    static dispatch_once_t s_onceToken;
+    static NSDictionary<NSNumber *, NSString *> *s_titles;
+    dispatch_once(&s_onceToken, ^{
+        s_titles = @{ @1 : NSLocalizedString(@"Period", @"Settings section header"),
+                      @2 : NSLocalizedString(@"Duration", @"Settings section header"),
+                      @3 : NSLocalizedString(@"Properties", @"Settings section header") };
+    });
+    return s_titles[@(section)];
+}
+
 #pragma mark Updates
 
 - (void)updateResults
@@ -140,7 +160,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -149,8 +169,9 @@
     static NSDictionary<NSNumber *, NSNumber *> *s_rows;
     dispatch_once(&s_onceToken, ^{
         s_rows = @{ @0 : @2,
-                    @1 : @1,
-                    @2 : @2 };
+                    @1 : @0,
+                    @2 : @1,
+                    @3 : @2 };
     });
     
     return s_rows[@(section)].integerValue;
@@ -163,8 +184,8 @@
     dispatch_once(&s_onceToken, ^{
         s_cellClasses = @{ @0 : @{ @0 : SearchSettingSelectorCell.class,
                                    @1 : SearchSettingSelectorCell.class },
-                           @1 : @{ @0 : SearchSettingSegmentCell.class },
-                           @2 : @{ @0 : SearchSettingSwitchCell.class,
+                           @2 : @{ @0 : SearchSettingSegmentCell.class },
+                           @3 : @{ @0 : SearchSettingSwitchCell.class,
                                    @1 : SearchSettingSwitchCell.class } };
     });
     Class cellClass = s_cellClasses[@(indexPath.section)][@(indexPath.row)];
@@ -183,13 +204,13 @@
             break;
         }
             
-        case 1: {
+        case 2: {
             switch (indexPath.row) {
                 case 0: {
                     SearchSettingSegmentCell *segmentCell = (SearchSettingSegmentCell *)cell;
                     
                     @weakify(self)
-                    [segmentCell setName:NSLocalizedString(@"Duration", @"Duration setting name in search settings") items:@[ NSLocalizedString(@"All", @"All option"), NSLocalizedString(@"< 5 min", @"Less than 5 min option"), NSLocalizedString(@"> 30 min", @"More than 3 min option") ] reader:^NSInteger{
+                    [segmentCell setItems:@[ NSLocalizedString(@"All", @"All option"), NSLocalizedString(@"< 5 min", @"Less than 5 min option"), NSLocalizedString(@"> 30 min", @"More than 3 min option") ] reader:^NSInteger{
                         if (! settings.minimumDurationInMinutes && ! settings.maximumDurationInMinutes) {
                             return 0;
                         }
@@ -237,7 +258,7 @@
             break;
         }
             
-        case 2: {
+        case 3: {
             switch (indexPath.row) {
                 case 0: {
                     SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
@@ -285,6 +306,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    NSString *title = [self titleForSection:section];
+    return title.length != 0 ? 60.f : 0.f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    SearchSettingsHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(SearchSettingsHeaderView.class)];
+    headerView.title = [self titleForSection:section];
+    return headerView;
 }
 
 @end
