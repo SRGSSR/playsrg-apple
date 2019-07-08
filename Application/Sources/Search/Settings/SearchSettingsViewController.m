@@ -175,6 +175,8 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    SRGMediaSearchSettings *settings = self.settings;
+    
     switch (indexPath.section) {
         case 0: {
             
@@ -185,33 +187,37 @@
             switch (indexPath.row) {
                 case 0: {
                     SearchSettingSegmentCell *segmentCell = (SearchSettingSegmentCell *)cell;
+                    
+                    @weakify(self)
                     [segmentCell setName:NSLocalizedString(@"Duration", @"Duration setting name in search settings") items:@[ NSLocalizedString(@"All", @"All option"), NSLocalizedString(@"< 5 min", @"Less than 5 min option"), NSLocalizedString(@"> 30 min", @"More than 3 min option") ] reader:^NSInteger{
-                        if (! self.settings.minimumDurationInMinutes && ! self.settings.maximumDurationInMinutes) {
+                        if (! settings.minimumDurationInMinutes && ! settings.maximumDurationInMinutes) {
                             return 0;
                         }
-                        else if (self.settings.maximumDurationInMinutes) {
+                        else if (settings.maximumDurationInMinutes) {
                             return 1;
                         }
                         else {
                             return 2;
                         }
                     } writer:^(NSInteger index) {
+                        @strongify(self)
+                        
                         switch (index) {
                             case 0: {
-                                self.settings.minimumDurationInMinutes = nil;
-                                self.settings.maximumDurationInMinutes = nil;
+                                settings.minimumDurationInMinutes = nil;
+                                settings.maximumDurationInMinutes = nil;
                                 break;
                             }
                                 
                             case 1: {
-                                self.settings.minimumDurationInMinutes = nil;
-                                self.settings.maximumDurationInMinutes = @(5);
+                                settings.minimumDurationInMinutes = nil;
+                                settings.maximumDurationInMinutes = @5;
                                 break;
                             }
                                 
                             case 2: {
-                                self.settings.minimumDurationInMinutes = @(30);
-                                self.settings.maximumDurationInMinutes = nil;
+                                settings.minimumDurationInMinutes = @30;
+                                settings.maximumDurationInMinutes = nil;
                                 break;
                             }
                                 
@@ -235,10 +241,14 @@
             switch (indexPath.row) {
                 case 0: {
                     SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
+                    
+                    @weakify(self)
                     [switchCell setName:NSLocalizedString(@"Available for download", @"Download availability toggle name in search settings") reader:^BOOL{
-                        return self.settings.downloadAvailable.boolValue;
+                        return settings.downloadAvailable.boolValue;
                     } writer:^(BOOL value) {
-                        self.settings.downloadAvailable = @(value);
+                        @strongify(self)
+                        
+                        settings.downloadAvailable = @(value);
                         [self updateResults];
                     }];
                     break;
@@ -246,10 +256,14 @@
                     
                 case 1: {
                     SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
+                    
+                    @weakify(self)
                     [switchCell setName:NSLocalizedString(@"Playable abroad", @"Abroad playability toggle name in search settings") reader:^BOOL{
-                        return self.settings.playableAbroad.boolValue;
+                        return settings.playableAbroad.boolValue;
                     } writer:^(BOOL value) {
-                        self.settings.playableAbroad = @(value);
+                        @strongify(self)
+                        
+                        settings.playableAbroad = @(value);
                         [self updateResults];
                     }];
                     break;
