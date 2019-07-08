@@ -72,6 +72,7 @@
     self.tableView.backgroundColor = UIColor.clearColor;
     self.tableView.separatorColor = UIColor.clearColor;
     self.tableView.estimatedRowHeight = 44.f;
+    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -169,7 +170,7 @@
     static NSDictionary<NSNumber *, NSNumber *> *s_rows;
     dispatch_once(&s_onceToken, ^{
         s_rows = @{ @0 : @2,
-                    @1 : @0,
+                    @1 : @4,
                     @2 : @1,
                     @3 : @2 };
     });
@@ -184,6 +185,10 @@
     dispatch_once(&s_onceToken, ^{
         s_cellClasses = @{ @0 : @{ @0 : SearchSettingSelectorCell.class,
                                    @1 : SearchSettingSelectorCell.class },
+                           @1 : @{ @0 : SearchSettingSelectorCell.class,
+                                   @1 : SearchSettingSelectorCell.class,
+                                   @2 : SearchSettingSelectorCell.class,
+                                   @3 : SearchSettingSelectorCell.class },
                            @2 : @{ @0 : SearchSettingSegmentCell.class },
                            @3 : @{ @0 : SearchSettingSwitchCell.class,
                                    @1 : SearchSettingSwitchCell.class } };
@@ -201,6 +206,37 @@
     switch (indexPath.section) {
         case 0: {
             
+            break;
+        }
+            
+        case 1: {
+            SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
+            
+            switch (indexPath.row) {
+                case 0: {
+                    selectorCell.name = NSLocalizedString(@"The last 24 hours", @"Period setting option");
+                    break;
+                }
+                    
+                case 1: {
+                    selectorCell.name = NSLocalizedString(@"The last 3 days", @"Period setting option");
+                    break;
+                }
+                    
+                case 2: {
+                    selectorCell.name = NSLocalizedString(@"The last week", @"Period setting option");
+                    break;
+                }
+                    
+                case 3: {
+                    selectorCell.name = NSLocalizedString(@"The last month", @"Period setting option");
+                    break;
+                }
+                    
+                default: {
+                    break;
+                }
+            }
             break;
         }
             

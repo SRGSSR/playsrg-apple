@@ -18,6 +18,15 @@
 
 @implementation SearchSettingSelectorCell
 
+#pragma mark Getters and setters
+
+- (void)setName:(NSString *)name
+{
+    _name = name;
+    
+    self.nameLabel.text = name;
+}
+
 #pragma mark Overrides
 
 - (void)awakeFromNib
@@ -29,7 +38,6 @@
     self.nameLabel.font = [UIFont srg_mediumFontWithTextStyle:UIFontTextStyleBody];
     self.nameLabel.textColor = UIColor.whiteColor;
     
-    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     self.selectionStyle = UITableViewCellSelectionStyleDefault;
 }
 
