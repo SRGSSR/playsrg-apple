@@ -42,8 +42,7 @@
     if (self = [super init]) {
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         if (! applicationConfiguration.searchSettingsDisabled) {
-            self.settings = [[SRGMediaSearchSettings alloc] init];
-            self.settings.aggregationsEnabled = NO;
+            self.settings = [self defaultMediaSearchSettings];
         }
     }
     return self;
@@ -54,6 +53,13 @@
 - (NSString *)title
 {
     return NSLocalizedString(@"Search", @"Search page title");
+}
+
+- (SRGMediaSearchSettings *)defaultMediaSearchSettings
+{
+    SRGMediaSearchSettings *mediaSearchSettings = [[SRGMediaSearchSettings alloc] init];
+    mediaSearchSettings.aggregationsEnabled = NO;
+    return mediaSearchSettings;
 }
 
 #pragma mark View lifecycle
@@ -264,7 +270,7 @@
 - (BOOL)shouldDisplayMostSearchedShows
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    return ! applicationConfiguration.showsSearchDisabled && self.searchBar.text.length == 0;
+    return ! applicationConfiguration.showsSearchDisabled && self.searchBar.text.length == 0 && [self.settings isEqual:[self defaultMediaSearchSettings]];
 }
 
 - (BOOL)isDisplayingMostSearchedShows
