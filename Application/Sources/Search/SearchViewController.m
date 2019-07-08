@@ -10,6 +10,7 @@
 #import "MediaCollectionViewCell.h"
 #import "NavigationController.h"
 #import "SearchLoadingCollectionViewCell.h"
+#import "SearchSettingsViewController.h"
 #import "SearchShowListCollectionViewCell.h"
 #import "ShowViewController.h"
 #import "TitleCollectionViewCell.h"
@@ -28,9 +29,25 @@
 @property (nonatomic, weak) UISearchBar *searchBar;
 @property (nonatomic) SRGRequestQueue *showsRequestQueue;
 
+@property (nonatomic) SRGMediaSearchSettings *settings;
+
 @end
 
 @implementation SearchViewController
+
+#pragma mark Object lifecycle
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        if (! applicationConfiguration.searchSettingsDisabled) {
+            self.settings = [[SRGMediaSearchSettings alloc] init];
+            self.settings.aggregationsEnabled = NO;
+        }
+    }
+    return self;
+}
 
 #pragma mark Getters and setters
 
@@ -99,6 +116,15 @@
         [rightBarButtonItems addObject:closeBarButtonItem];
     }
     
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    if (! applicationConfiguration.searchSettingsDisabled) {
+        UIBarButtonItem *settingsBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings"
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(editSettings:)];
+        [rightBarButtonItems addObject:settingsBarButtonItem];
+    }
+    
     self.navigationItem.rightBarButtonItems = [rightBarButtonItems copy];
 }
 
@@ -138,16 +164,10 @@
 
 - (void)prepareSearchResultsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     NSString *query = self.searchBar.text;
     
-    SRGMediaSearchSettings *settings = nil;
-    if (! applicationConfiguration.searchSettingsDisabled) {
-        settings = [[SRGMediaSearchSettings alloc] init];
-        settings.aggregationsEnabled = NO;
-    }
-    
-    SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregations, NSArray<SRGSearchSuggestion *> * suggestions, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:self.settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregations, NSArray<SRGSearchSuggestion *> * suggestions, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (error) {
             completionHandler(nil, page, nil, HTTPResponse, error);
             return;
@@ -477,6 +497,34 @@
 }
 
 #pragma mark Actions
+
+- (void)editSettings:(id)sender
+{
+    NSAssert([sender isKindOfClass:UIBarButtonItem.class], @"Bar button item expected");
+    
+    SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithSettings:self.settings];
+    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController];
+    
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        navigationController.modalPresentationStyle = UIModalPresentationPopover;
+        
+        UIView *barButtonItemView = [sender valueForKey:@"view"];
+        if (barButtonItemView) {
+            UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
+            popoverPresentationController.backgroundColor = UIColor.play_blackColor;
+            popoverPresentationController.sourceView = barButtonItemView;
+            popoverPresentationController.sourceRect = barButtonItemView.bounds;
+        }
+        
+        [self presentViewController:navigationController animated:YES completion:nil];
+    }
+    else {
+        searchSettingsViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+                                                                                                                      target:self
+                                                                                                                      action:@selector(closeSettings:)];
+        [self presentViewController:navigationController animated:YES completion:nil];
+    }
+}
 
 - (IBAction)closeSettings:(id)sender
 {
