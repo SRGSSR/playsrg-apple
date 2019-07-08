@@ -291,9 +291,7 @@
 
 - (void)searchSettingsViewController:(SearchSettingsViewController *)searchSettingsViewController didUpdateSettings:(SRGMediaSearchSettings *)settings
 {
-    self.settings = [settings copy];
-    self.settings.aggregationsEnabled = NO;
-    
+    self.settings = settings;
     [self search];
 }
 

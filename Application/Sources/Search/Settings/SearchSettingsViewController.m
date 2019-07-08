@@ -17,6 +17,44 @@
 
 #import <libextobjc/libextobjc.h>
 
+static NSInteger const kLastDay = 1;
+static NSInteger const kLastThreeDays = 3;
+static NSInteger const kLastWeek = 7;
+static NSInteger const kLastMonth = 30;
+
+typedef NS_ENUM(NSInteger, SearchSettingPeriod) {
+    SearchSettingPeriodNone = 0,
+    SearchSettingPeriodLastDay,
+    SearchSettingPeriodLastThreeDays,
+    SearchSettingPeriodLastWeek,
+    SearchSettingPeriodLastMonth
+};
+
+static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings *settings)
+{
+    NSDate *afterDate = settings.afterDate;
+    if (! afterDate) {
+        return SearchSettingPeriodNone;
+    }
+    
+    NSDateComponents *components = [NSCalendar.currentCalendar components:NSCalendarUnitDay fromDate:settings.afterDate toDate:NSDate.date options:0];
+    if (components.day >= kLastMonth) {
+        return SearchSettingPeriodLastMonth;
+    }
+    else if (components.day >= kLastWeek) {
+        return SearchSettingPeriodLastWeek;
+    }
+    else if (components.day >= kLastThreeDays) {
+        return SearchSettingPeriodLastThreeDays;
+    }
+    else if (components.day >= kLastDay) {
+        return SearchSettingPeriodLastDay;
+    }
+    else {
+        return SearchSettingPeriodNone;
+    }
+}
+
 @interface SearchSettingsViewController ()
 
 @property (nonatomic, copy) NSString *query;
@@ -141,7 +179,10 @@
 
 - (void)updateResults
 {
-    [self.delegate searchSettingsViewController:self didUpdateSettings:self.settings];
+    SRGMediaSearchSettings *settings = [self.settings copy];
+    settings.aggregationsEnabled = NO;
+    [self.delegate searchSettingsViewController:self didUpdateSettings:settings];
+    
     [self refresh];
 }
 
@@ -211,25 +252,30 @@
             
         case 1: {
             SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
+            SearchSettingPeriod searchPeriod = SearchSettingPeriodForSettings(self.settings);
             
             switch (indexPath.row) {
                 case 0: {
                     selectorCell.name = NSLocalizedString(@"The last 24 hours", @"Period setting option");
+                    selectorCell.accessoryType = (searchPeriod == SearchSettingPeriodLastDay) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
                     break;
                 }
                     
                 case 1: {
                     selectorCell.name = NSLocalizedString(@"The last 3 days", @"Period setting option");
+                    selectorCell.accessoryType = (searchPeriod == SearchSettingPeriodLastThreeDays) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
                     break;
                 }
                     
                 case 2: {
                     selectorCell.name = NSLocalizedString(@"The last week", @"Period setting option");
+                    selectorCell.accessoryType = (searchPeriod == SearchSettingPeriodLastWeek) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
                     break;
                 }
                     
                 case 3: {
                     selectorCell.name = NSLocalizedString(@"The last month", @"Period setting option");
+                    selectorCell.accessoryType = (searchPeriod == SearchSettingPeriodLastMonth) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
                     break;
                 }
                     
@@ -342,6 +388,58 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    switch (indexPath.section) {
+        case 0: {
+            
+            break;
+        }
+            
+        case 1: {
+            SearchSettingPeriod period = SearchSettingPeriodForSettings(self.settings);
+            
+            switch (indexPath.row) {
+                case 0: {
+                    NSDateComponents *components = [[NSDateComponents alloc] init];
+                    components.day = -kLastDay;
+                    self.settings.afterDate = (period != SearchSettingPeriodLastDay) ? [NSCalendar.currentCalendar dateByAddingComponents:components toDate:NSDate.date options:0] : nil;
+                    break;
+                }
+                    
+                case 1: {
+                    NSDateComponents *components = [[NSDateComponents alloc] init];
+                    components.day = -kLastThreeDays;
+                    self.settings.afterDate = (period != SearchSettingPeriodLastThreeDays) ? [NSCalendar.currentCalendar dateByAddingComponents:components toDate:NSDate.date options:0] : nil;
+                    break;
+                }
+                    
+                case 2: {
+                    NSDateComponents *components = [[NSDateComponents alloc] init];
+                    components.day = -kLastWeek;
+                    self.settings.afterDate = (period != SearchSettingPeriodLastWeek) ? [NSCalendar.currentCalendar dateByAddingComponents:components toDate:NSDate.date options:0] : nil;
+                    break;
+                }
+                    
+                case 3: {
+                    NSDateComponents *components = [[NSDateComponents alloc] init];
+                    components.day = -kLastMonth;
+                    self.settings.afterDate = (period != SearchSettingPeriodLastMonth) ? [NSCalendar.currentCalendar dateByAddingComponents:components toDate:NSDate.date options:0] : nil;
+                    break;
+                }
+                    
+                default: {
+                    break;
+                }
+            }
+            [self.tableView reloadData];
+            [self updateResults];
+            break;
+        }
+            
+        default: {
+            break;
+        }
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

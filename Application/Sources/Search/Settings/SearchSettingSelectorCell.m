@@ -33,6 +33,7 @@
 {
     [super awakeFromNib];
     
+    self.tintColor = UIColor.whiteColor;
     self.backgroundColor = UIColor.play_popoverGrayColor;
     
     self.nameLabel.font = [UIFont srg_mediumFontWithTextStyle:UIFontTextStyleBody];
