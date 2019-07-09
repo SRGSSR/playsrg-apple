@@ -10,6 +10,7 @@
 #import "TableLoadMoreFooterView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
+#import "UIScrollView+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -115,6 +116,11 @@
     // the user with errors
     else if (self.items.count == 0) {
         [self.tableView reloadEmptyDataSet];
+    }
+    
+    // Returns immediately to the top when the list is empty
+    if (self.items.count == 0) {
+        [self.tableView play_scrollToTopAnimated:NO];
     }
 }
 

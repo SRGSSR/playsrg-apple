@@ -1246,6 +1246,11 @@
 		6FD88F7E22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */; };
 		6FD88F7F22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */; };
 		6FD88F8022D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */; };
+		6FD88F8322D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */; };
+		6FD88F8422D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */; };
+		6FD88F8522D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */; };
+		6FD88F8622D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */; };
+		6FD88F8722D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */; };
 		6FDF08D7218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
 		6FDF08D8218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
 		6FDF08D9218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
@@ -2109,6 +2114,8 @@
 		6FD88F7422D3618F008859EF /* SearchSettingsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingsHeaderView.h; sourceTree = "<group>"; };
 		6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingsHeaderView.m; sourceTree = "<group>"; };
 		6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchSettingsHeaderView.xib; sourceTree = "<group>"; };
+		6FD88F8122D476CF008859EF /* UIScrollView+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+PlaySRG.h"; sourceTree = "<group>"; };
+		6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PlaySRG.m"; sourceTree = "<group>"; };
 		6FDF08C5218B126700B2AF2C /* Download.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Download.m; sourceTree = "<group>"; };
 		6FDF08C6218B126700B2AF2C /* Recommendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recommendation.m; sourceTree = "<group>"; };
 		6FDF08C8218B126700B2AF2C /* Download+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Download+Private.h"; sourceTree = "<group>"; };
@@ -3060,6 +3067,8 @@
 				6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */,
 				087BC6611EDF1B7B00EED89B /* UILabel+PlaySRG.h */,
 				087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */,
+				6FD88F8122D476CF008859EF /* UIScrollView+PlaySRG.h */,
+				6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */,
 				6F4760721EB37D60003021EA /* UIStackView+PlaySRG.h */,
 				6F4760731EB37D60003021EA /* UIStackView+PlaySRG.m */,
 				6F85E4B51EEA8F9B00552256 /* UIView+PlaySRG.h */,
@@ -5393,6 +5402,7 @@
 				08EB37AC1D48B1D20080EDE4 /* MenuSectionInfo.m in Sources */,
 				0832BF1022BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				E6E2DF261D6AD32800791EDE /* ShowHeaderView.m in Sources */,
+				6FD88F8322D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F80E9C221A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				E6DB5F281D66E1550057094B /* ShowCollectionViewCell.m in Sources */,
 				08AA55BB1D49EFBD00C5026E /* HomeTableViewCell.m in Sources */,
@@ -5675,6 +5685,7 @@
 				6F4760001EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F962FAB1FD5149F00EA42C1 /* MainNavigationController.m in Sources */,
 				089C157C1D4A2CDE00EA2F10 /* MenuHeaderSectionView.m in Sources */,
+				6FD88F8422D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				0837CEAB1D3FAEE100A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
 				6F475FBA1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08D8218B126700B2AF2C /* Download.m in Sources */,
@@ -5826,6 +5837,7 @@
 				6F4760011EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F962FAC1FD5149F00EA42C1 /* MainNavigationController.m in Sources */,
 				089C157D1D4A2CDE00EA2F10 /* MenuHeaderSectionView.m in Sources */,
+				6FD88F8522D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				0837CEAD1D3FAEE200A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
 				6F475FBB1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08D9218B126700B2AF2C /* Download.m in Sources */,
@@ -5977,6 +5989,7 @@
 				6F4760021EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F962FAD1FD5149F00EA42C1 /* MainNavigationController.m in Sources */,
 				089C157E1D4A2CDE00EA2F10 /* MenuHeaderSectionView.m in Sources */,
+				6FD88F8622D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				0837CEAF1D3FAEE200A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
 				6F475FBC1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08DA218B126700B2AF2C /* Download.m in Sources */,
@@ -6128,6 +6141,7 @@
 				6F4760031EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F962FAE1FD5149F00EA42C1 /* MainNavigationController.m in Sources */,
 				089C157F1D4A2CDE00EA2F10 /* MenuHeaderSectionView.m in Sources */,
+				6FD88F8722D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				0837CEB11D3FAEE300A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
 				6F475FBD1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08DB218B126700B2AF2C /* Download.m in Sources */,

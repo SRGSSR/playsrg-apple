@@ -10,6 +10,7 @@
 #import "CollectionLoadMoreFooterView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
+#import "UIScrollView+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -142,6 +143,11 @@
     else if (self.items.count == 0) {
         [self.collectionView reloadEmptyDataSet];
         [self.collectionView.collectionViewLayout invalidateLayout];
+    }
+    
+    // Returns immediately to the top when the list is empty
+    if (self.items.count == 0) {
+        [self.collectionView play_scrollToTopAnimated:NO];
     }
 }
 
