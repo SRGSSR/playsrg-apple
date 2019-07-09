@@ -27,7 +27,7 @@
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
 
-@property (nonatomic, weak) UISearchBar *searchBar;
+@property (nonatomic) UISearchController *searchController;
 @property (nonatomic) SRGRequestQueue *showsRequestQueue;
 
 @property (nonatomic) SRGMediaSearchSettings *settings;
@@ -46,6 +46,10 @@
         if (! applicationConfiguration.searchSettingsDisabled) {
             self.settings = self.defaultMediaSearchSettings;
         }
+        
+        self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+        self.searchController.searchResultsUpdater = self;
+        self.searchController.dimsBackgroundDuringPresentation = NO;
     }
     return self;
 }
@@ -97,24 +101,35 @@
     UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
-    UISearchBar *searchBar = [[UISearchBar alloc] init];
+    UISearchBar *searchBar = self.searchController.searchBar;
     searchBar.delegate = self;
     searchBar.placeholder = NSLocalizedString(@"Search", @"Placeholder text displayed in the search field when empty (must be not too long)");
-    searchBar.tintColor = UIColor.play_redColor;
-    searchBar.barTintColor = UIColor.clearColor;      // Avoid search bar glitch when revealed by pop in navigation controller
-    self.navigationItem.titleView = searchBar;
-    self.searchBar = searchBar;
+    searchBar.tintColor = UIColor.whiteColor;
+    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
-    // The search bar height has changed on iOS 11 and breaks centering with neighboring buttons when used as title view.
-    // Setting its height to 42 (!) fixes the issue. Apple recommends using a custom view with internal constraints, but
-    // this does not seem to work well enough. Using a search controller is not really an option here either.
     if (@available(iOS 11, *)) {
-        [searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@50.);
-        }];
+        self.navigationItem.searchController = self.searchController;
+        self.navigationItem.hidesSearchBarWhenScrolling = NO;
+        self.definesPresentationContext = YES;
+    }
+    else {
+        searchBar.barTintColor = UIColor.clearColor;      // Avoid search bar glitch when revealed by pop in navigation controller
+        self.navigationItem.titleView = searchBar;
     }
     
-    [self updateBarButtonItems];
+    if (self.closeBlock) {
+        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close-22"]
+                                                                               style:UIBarButtonItemStyleDone
+                                                                              target:self
+                                                                              action:@selector(close:)];
+        closeBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on search view");
+        self.navigationItem.leftBarButtonItem = closeBarButtonItem;
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    
+    [self updateSearchSettingsButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -122,7 +137,7 @@
     [super viewWillAppear:animated];
     
     if ([self shouldDisplayMostSearchedShows]) {
-        [self.searchBar becomeFirstResponder];
+        [self.searchController.searchBar becomeFirstResponder];
     }
 }
 
@@ -131,7 +146,7 @@
     [super viewWillDisappear:animated];
     
     if ([self play_isMovingFromParentViewController]) {
-        [self.searchBar resignFirstResponder];
+        [self.searchController.searchBar resignFirstResponder];
     }
 }
 
@@ -153,7 +168,7 @@
 
 - (void)prepareSearchResultsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
-    NSString *query = self.searchBar.text;
+    NSString *query = self.searchController.searchBar.text;
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:self.settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregations, NSArray<SRGSearchSuggestion *> * suggestions, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
@@ -241,26 +256,19 @@
 
 #pragma mark UI
 
-- (void)updateBarButtonItems
-{    
-    if (self.closeBlock) {
-        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close-22"]
-                                                                 landscapeImagePhone:nil
-                                                                               style:UIBarButtonItemStyleDone
-                                                                              target:self
-                                                                              action:@selector(close:)];
-        closeBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on search view");
-        self.navigationItem.leftBarButtonItem = closeBarButtonItem;
-    }
-    
+- (void)updateSearchSettingsButton
+{
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    
+    UISearchBar *searchBar = self.searchController.searchBar;
     if (! applicationConfiguration.searchSettingsDisabled) {
+        searchBar.showsBookmarkButton = YES;
+        
         UIImage *image = [self.settings isEqual:self.defaultMediaSearchSettings] ? [UIImage imageNamed:@"filter_off-22"] : [UIImage imageNamed:@"filter_on-22"];
-        UIBarButtonItem *settingsBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image
-                                                                                  style:UIBarButtonItemStylePlain
-                                                                                 target:self
-                                                                                 action:@selector(editSettings:)];
-        self.navigationItem.rightBarButtonItem = settingsBarButtonItem;
+        [searchBar setImage:image forSearchBarIcon:UISearchBarIconBookmark state:UIControlStateNormal];
+    }
+    else {
+        searchBar.showsBookmarkButton = NO;
     }
 }
 
@@ -278,7 +286,7 @@
 - (BOOL)shouldDisplayMostSearchedShows
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    return ! applicationConfiguration.showsSearchDisabled && self.searchBar.text.length == 0 && [self.settings isEqual:self.defaultMediaSearchSettings];
+    return ! applicationConfiguration.showsSearchDisabled && self.searchController.searchBar.text.length == 0 && [self.settings isEqual:self.defaultMediaSearchSettings];
 }
 
 - (BOOL)isDisplayingMostSearchedShows
@@ -307,8 +315,22 @@
 {
     self.settings = settings;
     
-    [self updateBarButtonItems];
+    [self updateSearchSettingsButton];
     [self search];
+}
+
+#pragma mark UISearchResultsUpdating protocol
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    // Perform the search with a delay to avoid triggering several search requests if updates are made in a row
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(search) object:nil];
+    
+    // No delay when the search text is too small. This also covers the case where the user clears the search criterium
+    // with the clear button
+    static NSTimeInterval kTypingSpeedThreshold = 0.3;
+    NSTimeInterval delay = (searchController.searchBar.text.length == 0) ? 0. : kTypingSpeedThreshold;
+    [self performSelector:@selector(search) withObject:nil afterDelay:delay inModes:@[ NSRunLoopCommonModes ]];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -492,41 +514,14 @@
 
 #pragma mark UISearchBarDelegate protocol
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    // Perform the search with a delay to avoid triggering several search requests if updates are made in a row
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(search) object:nil];
-    
-    // No delay when the search text is too small. This also covers the case where the user clears the search criterium
-    // with the clear button
-    static NSTimeInterval kTypingSpeedThreshold = 0.3;
-    NSTimeInterval delay = (searchText.length == 0) ? 0. : kTypingSpeedThreshold;
-    [self performSelector:@selector(search) withObject:nil afterDelay:delay inModes:@[ NSRunLoopCommonModes ]];
-}
-
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [self.searchBar resignFirstResponder];
+    [self.searchController.searchBar resignFirstResponder];
 }
 
-#pragma mark UIScrollViewDelegate protocol
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
 {
-    [super scrollViewDidScroll:scrollView];
-    
-    if (scrollView.dragging && !scrollView.decelerating) {
-        [self.searchBar resignFirstResponder];
-    }
-}
-
-#pragma mark Actions
-
-- (void)editSettings:(id)sender
-{
-    NSAssert([sender isKindOfClass:UIBarButtonItem.class], @"Bar button item expected");
-    
-    SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.searchBar.text settings:self.settings];
+    SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.searchController.searchBar.text settings:self.settings];
     searchSettingsViewController.delegate = self;
     
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController
@@ -537,6 +532,7 @@
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         navigationController.modalPresentationStyle = UIModalPresentationPopover;
         
+#if 0
         UIView *barButtonItemView = [sender valueForKey:@"view"];
         if (barButtonItemView) {
             UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
@@ -545,21 +541,30 @@
             popoverPresentationController.sourceRect = barButtonItemView.bounds;
             popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
         }
+#endif
         
         [self presentViewController:navigationController animated:YES completion:nil];
     }
     else {
-        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close-22"]
-                                                                 landscapeImagePhone:nil
-                                                                               style:UIBarButtonItemStyleDone
-                                                                              target:self
-                                                                              action:@selector(closeSettings:)];
-        closeBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on search settings view");
-        searchSettingsViewController.navigationItem.leftBarButtonItem = closeBarButtonItem;
-        
+        searchSettingsViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+                                                                                                                       target:self
+                                                                                                                       action:@selector(closeSettings:)];
         [self presentViewController:navigationController animated:YES completion:nil];
     }
 }
+
+#pragma mark UIScrollViewDelegate protocol
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [super scrollViewDidScroll:scrollView];
+    
+    if (scrollView.dragging && !scrollView.decelerating) {
+        [self.searchController.searchBar resignFirstResponder];
+    }
+}
+
+#pragma mark Actions
 
 - (IBAction)closeSettings:(id)sender
 {
