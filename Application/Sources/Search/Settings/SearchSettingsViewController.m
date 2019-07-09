@@ -186,6 +186,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 - (IBAction)resetSettings:(id)sender
 {
     self.settings = [[SRGMediaSearchSettings alloc] init];
+    [self.tableView reloadData];
     [self updateResults];
 }
 
