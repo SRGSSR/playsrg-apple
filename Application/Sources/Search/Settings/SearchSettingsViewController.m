@@ -116,14 +116,19 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    NSString *headerIdentifier = NSStringFromClass(SearchSettingsHeaderView.class);
+    UINib *headerViewNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
+    [self.tableView registerNib:headerViewNib forHeaderFooterViewReuseIdentifier:headerIdentifier];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Apply", @"Title of the search settings button to apply settings")
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(close:)];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(resetSettings:)];
-    
-    NSString *headerIdentifier = NSStringFromClass(SearchSettingsHeaderView.class);
-    UINib *headerViewNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
-    [self.tableView registerNib:headerViewNib forHeaderFooterViewReuseIdentifier:headerIdentifier];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -186,21 +191,6 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                       @3 : NSLocalizedString(@"Properties", @"Settings section header") };
     });
     return s_titles[@(section)];
-}
-
-#pragma mark Actions
-
-- (IBAction)resetSettings:(id)sender
-{
-    self.settings = [[SRGMediaSearchSettings alloc] init];
-    [self updateResults];
-    
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        [self.tableView reloadData];
-    }
-    else {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
 }
 
 #pragma mark Updates
@@ -537,4 +527,25 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         [self updateResults];
     }
 }
+
+#pragma mark Actions
+
+- (IBAction)close:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)resetSettings:(id)sender
+{
+    self.settings = [[SRGMediaSearchSettings alloc] init];
+    [self updateResults];
+    
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        [self.tableView reloadData];
+    }
+    else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 @end

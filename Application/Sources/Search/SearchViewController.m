@@ -556,9 +556,6 @@
         [self presentViewController:navigationController animated:YES completion:nil];
     }
     else {
-        searchSettingsViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                                                                                                       target:self
-                                                                                                                       action:@selector(closeSettings:)];
         [self presentViewController:navigationController animated:YES completion:nil];
     }
 }
@@ -575,11 +572,6 @@
 }
 
 #pragma mark Actions
-
-- (IBAction)closeSettings:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 - (void)close:(id)sender
 {
