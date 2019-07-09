@@ -530,7 +530,10 @@
     SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.searchBar.text settings:self.settings];
     searchSettingsViewController.delegate = self;
     
-    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController];
+    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController
+                                                                                                tintColor:UIColor.whiteColor
+                                                                                          backgroundColor:UIColor.play_popoverGrayColor
+                                                                                           statusBarStyle:UIStatusBarStyleLightContent];
     
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         navigationController.modalPresentationStyle = UIModalPresentationPopover;
