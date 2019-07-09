@@ -99,9 +99,16 @@
     UISearchBar *searchBar = self.searchController.searchBar;
     searchBar.delegate = self;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    searchBar.scopeButtonTitles = @[ NSLocalizedString(@"All", @"All medias scope button"),
-                                     NSLocalizedString(@"Videos", @"Videos scope button"),
-                                     NSLocalizedString(@"Audios", @"Audios scope button") ];
+    
+    // iOS 10 and below: Media type selection is made on the settings page
+    if (@available(iOS 11, *)) {
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        if (! applicationConfiguration.searchSettingsDisabled) {
+            searchBar.scopeButtonTitles = @[ NSLocalizedString(@"All", @"All medias scope button"),
+                                             NSLocalizedString(@"Videos", @"Videos scope button"),
+                                             NSLocalizedString(@"Audios", @"Audios scope button") ];
+        }
+    }
     
     // Required for proper search bar behavior
     self.definesPresentationContext = YES;
@@ -139,6 +146,7 @@
 {
     [super viewWillAppear:animated];
     
+    // FIXME: Does not work anymore, probably because of UISearchController. Use active property?
     if ([self shouldDisplayMostSearchedShows]) {
         [self.searchController.searchBar becomeFirstResponder];
     }
@@ -168,6 +176,11 @@
 }
 
 #pragma mark Overrides
+
+- (BOOL)shouldPerformRefreshRequest
+{
+    return [self shouldDisplayMostSearchedShows] ? YES : (self.searchController.searchBar.text.length > 0);
+}
 
 - (void)prepareSearchResultsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
@@ -249,12 +262,12 @@
 
 - (NSString *)emptyCollectionTitle
 {
-    return [self shouldDisplayMostSearchedShows] ? NSLocalizedString(@"Search", @"Title displayed when there is no search criterium entered") : super.emptyCollectionTitle;
+    return (self.searchController.searchBar.text.length == 0) ? NSLocalizedString(@"Search", @"Title displayed when there is no search criterium entered") : super.emptyCollectionTitle;
 }
 
 - (NSString *)emptyCollectionSubtitle
 {
-    return [self shouldDisplayMostSearchedShows] ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
+    return (self.searchController.searchBar.text.length == 0) ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
 }
 
 #pragma mark UI
@@ -290,24 +303,32 @@
 
 - (BOOL)hasAdvancedSettings
 {
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    if (applicationConfiguration.searchSettingsDisabled) {
+        return NO;
+    }
+    
     SRGMediaSearchSettings *defaultSettingsAll = [[SRGMediaSearchSettings alloc] init];
     defaultSettingsAll.aggregationsEnabled = NO;
     if ([defaultSettingsAll isEqual:self.settings]) {
         return NO;
     }
     
-    SRGMediaSearchSettings *defaultSettingsVideo = [[SRGMediaSearchSettings alloc] init];
-    defaultSettingsVideo.aggregationsEnabled = NO;
-    defaultSettingsVideo.mediaType = SRGMediaTypeVideo;
-    if ([defaultSettingsVideo isEqual:self.settings]) {
-        return NO;
-    }
-    
-    SRGMediaSearchSettings *defaultSettingsAudio = [[SRGMediaSearchSettings alloc] init];
-    defaultSettingsAudio.aggregationsEnabled = NO;
-    defaultSettingsAudio.mediaType = SRGMediaTypeAudio;
-    if ([defaultSettingsAudio isEqual:self.settings]) {
-        return NO;
+    // iOS 10 and below: Media type selection is made on the settings page
+    if (@available(iOS 11, *)) {
+        SRGMediaSearchSettings *defaultSettingsVideo = [[SRGMediaSearchSettings alloc] init];
+        defaultSettingsVideo.aggregationsEnabled = NO;
+        defaultSettingsVideo.mediaType = SRGMediaTypeVideo;
+        if ([defaultSettingsVideo isEqual:self.settings]) {
+            return NO;
+        }
+        
+        SRGMediaSearchSettings *defaultSettingsAudio = [[SRGMediaSearchSettings alloc] init];
+        defaultSettingsAudio.aggregationsEnabled = NO;
+        defaultSettingsAudio.mediaType = SRGMediaTypeAudio;
+        if ([defaultSettingsAudio isEqual:self.settings]) {
+            return NO;
+        }
     }
     
     return YES;
@@ -363,16 +384,23 @@
                           @2 : @(SRGMediaTypeAudio) };
     });
     
-    SRGMediaType mediaType = [s_mediaTypes[@(searchController.searchBar.selectedScopeButtonIndex)] integerValue];
-    
     // The delegate method is also called when entering or exiting search, in which case no refresh is required
     // since the text did not change.
-    if ([searchText isEqualToString:self.previousSearchText] && mediaType == self.settings.mediaType) {
+    // iOS 10 and below: Media type selection is made on the settings page
+    if (@available(iOS 11, *)) {
+        SRGMediaType mediaType = [s_mediaTypes[@(searchController.searchBar.selectedScopeButtonIndex)] integerValue];
+        
+        if ([searchText isEqualToString:self.previousSearchText] && mediaType == self.settings.mediaType) {
+            return;
+        }
+        
+        self.settings.mediaType = mediaType;
+    }
+    else if ([searchText isEqualToString:self.previousSearchText]) {
         return;
     }
     
     self.previousSearchText = searchText;
-    self.settings.mediaType = mediaType;
     
     // Perform the search with a delay to avoid triggering several search requests if updates are made in a row
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(search) object:nil];
