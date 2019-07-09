@@ -186,8 +186,14 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 - (IBAction)resetSettings:(id)sender
 {
     self.settings = [[SRGMediaSearchSettings alloc] init];
-    [self.tableView reloadData];
     [self updateResults];
+    
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        [self.tableView reloadData];
+    }
+    else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark Updates
