@@ -120,10 +120,12 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     UINib *headerViewNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.tableView registerNib:headerViewNib forHeaderFooterViewReuseIdentifier:headerIdentifier];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Apply", @"Title of the search settings button to apply settings")
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(close:)];
+    if (! self.popoverPresentationController) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Apply", @"Title of the search settings button to apply settings")
+                                                                                 style:UIBarButtonItemStylePlain
+                                                                                target:self
+                                                                                action:@selector(close:)];
+    }
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
                                                                               style:UIBarButtonItemStylePlain
