@@ -109,14 +109,21 @@
     searchBar.tintColor = UIColor.whiteColor;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
+    // Required for proper search bar behavior
+    self.definesPresentationContext = YES;
+    
     if (@available(iOS 11, *)) {
+        searchBar.tintColor = UIColor.whiteColor;
+        
         self.navigationItem.searchController = self.searchController;
         self.navigationItem.hidesSearchBarWhenScrolling = NO;
-        self.definesPresentationContext = YES;
     }
     else {
+        searchBar.tintColor = UIColor.grayColor;
         searchBar.barTintColor = UIColor.clearColor;      // Avoid search bar glitch when revealed by pop in navigation controller
+        
         self.navigationItem.titleView = searchBar;
+        self.searchController.hidesNavigationBarDuringPresentation = NO;
     }
     
     if (self.closeBlock) {
