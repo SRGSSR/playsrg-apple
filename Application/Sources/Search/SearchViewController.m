@@ -30,6 +30,7 @@
 @property (nonatomic) SRGRequestQueue *showsRequestQueue;
 
 @property (nonatomic) SRGMediaSearchSettings *settings;
+@property (nonatomic, readonly) SRGMediaSearchSettings *defaultMediaSearchSettings;
 
 @end
 
@@ -42,7 +43,7 @@
     if (self = [super init]) {
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         if (! applicationConfiguration.searchSettingsDisabled) {
-            self.settings = [self defaultMediaSearchSettings];
+            self.settings = self.defaultMediaSearchSettings;
         }
     }
     return self;
@@ -112,26 +113,7 @@
         }];
     }
     
-    NSMutableArray<UIBarButtonItem *> *rightBarButtonItems = [NSMutableArray array];
-    
-    if (self.closeBlock) {
-        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close button title")
-                                                                               style:UIBarButtonItemStyleDone
-                                                                              target:self
-                                                                              action:@selector(close:)];
-        [rightBarButtonItems addObject:closeBarButtonItem];
-    }
-    
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    if (! applicationConfiguration.searchSettingsDisabled) {
-        UIBarButtonItem *settingsBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings"
-                                                                                  style:UIBarButtonItemStylePlain
-                                                                                 target:self
-                                                                                 action:@selector(editSettings:)];
-        [rightBarButtonItems addObject:settingsBarButtonItem];
-    }
-    
-    self.navigationItem.rightBarButtonItems = [rightBarButtonItems copy];
+    [self updateBarButtonItems];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -256,6 +238,33 @@
     return [self shouldDisplayMostSearchedShows] ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
 }
 
+#pragma mark UI
+
+- (void)updateBarButtonItems
+{
+    NSMutableArray<UIBarButtonItem *> *rightBarButtonItems = [NSMutableArray array];
+    
+    if (self.closeBlock) {
+        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close button title")
+                                                                               style:UIBarButtonItemStyleDone
+                                                                              target:self
+                                                                              action:@selector(close:)];
+        [rightBarButtonItems addObject:closeBarButtonItem];
+    }
+    
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    if (! applicationConfiguration.searchSettingsDisabled) {
+        UIImage *image = [self.settings isEqual:self.defaultMediaSearchSettings] ? [UIImage imageNamed:@"filter_off-22"] : [UIImage imageNamed:@"filter_on-22"];
+        UIBarButtonItem *settingsBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(editSettings:)];
+        [rightBarButtonItems addObject:settingsBarButtonItem];
+    }
+    
+    self.navigationItem.rightBarButtonItems = [rightBarButtonItems copy];
+}
+
 #pragma mark Helpers
 
 - (void)search
@@ -270,7 +279,7 @@
 - (BOOL)shouldDisplayMostSearchedShows
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    return ! applicationConfiguration.showsSearchDisabled && self.searchBar.text.length == 0 && [self.settings isEqual:[self defaultMediaSearchSettings]];
+    return ! applicationConfiguration.showsSearchDisabled && self.searchBar.text.length == 0 && [self.settings isEqual:self.defaultMediaSearchSettings];
 }
 
 - (BOOL)isDisplayingMostSearchedShows
@@ -298,6 +307,8 @@
 - (void)searchSettingsViewController:(SearchSettingsViewController *)searchSettingsViewController didUpdateSettings:(SRGMediaSearchSettings *)settings
 {
     self.settings = settings;
+    
+    [self updateBarButtonItems];
     [self search];
 }
 
@@ -530,6 +541,7 @@
             popoverPresentationController.backgroundColor = UIColor.play_blackColor;
             popoverPresentationController.sourceView = barButtonItemView;
             popoverPresentationController.sourceRect = barButtonItemView.bounds;
+            popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
         }
         
         [self presentViewController:navigationController animated:YES completion:nil];
