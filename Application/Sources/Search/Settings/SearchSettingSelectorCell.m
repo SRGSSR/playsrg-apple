@@ -42,4 +42,11 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
+{
+    [super setUserInteractionEnabled:userInteractionEnabled];
+    
+    self.nameLabel.enabled = userInteractionEnabled;
+}
+
 @end

@@ -271,11 +271,17 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
             switch (indexPath.row) {
                 case 0: {
                     selectorCell.name = NSLocalizedString(@"Categories", @"Categories search setting option");
+                    BOOL enabled = (self.aggregations.topicBuckets.count > 0);
+                    selectorCell.userInteractionEnabled = enabled;
+                    selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
                     break;
                 }
                     
                 case 1: {
                     selectorCell.name = NSLocalizedString(@"Shows", @"Shows search setting option");
+                    BOOL enabled = (self.aggregations.showBuckets.count > 0);
+                    selectorCell.userInteractionEnabled = enabled;
+                    selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
                     break;
                 }
                     
@@ -283,8 +289,6 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                     break;
                 }
             }
-            
-            selectorCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
         }
             
@@ -433,14 +437,14 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
             
             switch (indexPath.row) {
                 case 0: {
-                    multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Categories", @"Categories search setting option")
+                    multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Categories", @"Categories search setting option list view title")
                                                                                                               items:self.aggregations.topicBuckets
                                                                                                      selectedValues:self.settings.topicURNs];
                     break;
                 }
                     
                 case 1: {
-                    multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Shows", @"Shows search setting option")
+                    multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Shows", @"Shows search setting option list view title")
                                                                                                               items:self.aggregations.showBuckets
                                                                                                      selectedValues:self.settings.showURNs];
                     break;
