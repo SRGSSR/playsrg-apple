@@ -1251,6 +1251,11 @@
 		6FD88F8522D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */; };
 		6FD88F8622D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */; };
 		6FD88F8722D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */; };
+		6FD88F8A22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */; };
+		6FD88F8B22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */; };
+		6FD88F8C22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */; };
+		6FD88F8D22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */; };
+		6FD88F8E22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */; };
 		6FDF08D7218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
 		6FDF08D8218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
 		6FDF08D9218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
@@ -2116,6 +2121,8 @@
 		6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchSettingsHeaderView.xib; sourceTree = "<group>"; };
 		6FD88F8122D476CF008859EF /* UIScrollView+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+PlaySRG.h"; sourceTree = "<group>"; };
 		6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PlaySRG.m"; sourceTree = "<group>"; };
+		6FD88F8822D4BC41008859EF /* UISearchBar+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+PlaySRG.h"; sourceTree = "<group>"; };
+		6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+PlaySRG.m"; sourceTree = "<group>"; };
 		6FDF08C5218B126700B2AF2C /* Download.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Download.m; sourceTree = "<group>"; };
 		6FDF08C6218B126700B2AF2C /* Recommendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recommendation.m; sourceTree = "<group>"; };
 		6FDF08C8218B126700B2AF2C /* Download+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Download+Private.h"; sourceTree = "<group>"; };
@@ -3069,6 +3076,8 @@
 				087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */,
 				6FD88F8122D476CF008859EF /* UIScrollView+PlaySRG.h */,
 				6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */,
+				6FD88F8822D4BC41008859EF /* UISearchBar+PlaySRG.h */,
+				6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */,
 				6F4760721EB37D60003021EA /* UIStackView+PlaySRG.h */,
 				6F4760731EB37D60003021EA /* UIStackView+PlaySRG.m */,
 				6F85E4B51EEA8F9B00552256 /* UIView+PlaySRG.h */,
@@ -5531,6 +5540,7 @@
 				6F475FB91EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				0837CEA91D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
 				6F47607D1EB37D60003021EA /* UIViewController+PlaySRG.m in Sources */,
+				6FD88F8A22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F475FBE1EB37BC6003021EA /* DataViewController.m in Sources */,
 				6F12DB5021A3EFBF0054879D /* HistoryViewController.m in Sources */,
 				6FDF08E6218B126700B2AF2C /* Onboarding.m in Sources */,
@@ -5659,6 +5669,7 @@
 				087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F47603F1EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */,
+				6FD88F8B22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F53220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF77E20CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D5E1FFE6EF800115906 /* ModuleHeaderView.m in Sources */,
@@ -5811,6 +5822,7 @@
 				087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F4760401EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */,
+				6FD88F8C22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F54220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78020CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D621FFE6EF900115906 /* ModuleHeaderView.m in Sources */,
@@ -5963,6 +5975,7 @@
 				087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F4760411EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				E694A9F81D65F02700372DF0 /* CalendarViewController.m in Sources */,
+				6FD88F8D22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F55220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78220CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D661FFE6EF900115906 /* ModuleHeaderView.m in Sources */,
@@ -6115,6 +6128,7 @@
 				087BC6671EDF1B7D00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F4760421EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				E694A9F91D65F02700372DF0 /* CalendarViewController.m in Sources */,
+				6FD88F8E22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F56220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78420CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D6A1FFE6EFA00115906 /* ModuleHeaderView.m in Sources */,

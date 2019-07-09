@@ -77,11 +77,6 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         self.query = query;
         self.settings = [settings copy] ?: [[SRGMediaSearchSettings alloc] init];
         self.settings.aggregationsEnabled = YES;
-        
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
-                                                                                  style:UIBarButtonItemStylePlain
-                                                                                 target:self
-                                                                                 action:@selector(resetSettings:)];
     }
     return self;
 }
@@ -121,9 +116,21 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(resetSettings:)];
+    
     NSString *headerIdentifier = NSStringFromClass(SearchSettingsHeaderView.class);
     UINib *headerViewNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.tableView registerNib:headerViewNib forHeaderFooterViewReuseIdentifier:headerIdentifier];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.tableView flashScrollIndicators];
 }
 
 #pragma mark Rotation

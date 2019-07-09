@@ -17,6 +17,7 @@
 #import "TitleCollectionViewCell.h"
 #import "TransparentTitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
+#import "UISearchBar+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 #import <Masonry/Masonry.h>
@@ -543,16 +544,14 @@
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         navigationController.modalPresentationStyle = UIModalPresentationPopover;
         
-#if 0
-        UIView *barButtonItemView = [sender valueForKey:@"view"];
-        if (barButtonItemView) {
+        UIButton *bookmarkButton = searchBar.play_bookmarkButton;
+        if (bookmarkButton) {
             UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
             popoverPresentationController.backgroundColor = UIColor.play_popoverGrayColor;
-            popoverPresentationController.sourceView = barButtonItemView;
-            popoverPresentationController.sourceRect = barButtonItemView.bounds;
+            popoverPresentationController.sourceView = bookmarkButton;
+            popoverPresentationController.sourceRect = bookmarkButton.bounds;
             popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
         }
-#endif
         
         [self presentViewController:navigationController animated:YES completion:nil];
     }
