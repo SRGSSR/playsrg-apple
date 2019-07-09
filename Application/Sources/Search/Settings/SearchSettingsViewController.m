@@ -543,7 +543,11 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (IBAction)resetSettings:(id)sender
 {
+    SRGMediaType previousMediaType = self.settings.mediaType;
+    
     self.settings = [[SRGMediaSearchSettings alloc] init];
+    self.settings.mediaType = previousMediaType;
+    
     [self updateResults];
     
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {

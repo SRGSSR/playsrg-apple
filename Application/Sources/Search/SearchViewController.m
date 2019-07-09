@@ -33,7 +33,6 @@
 @property (nonatomic) SRGRequestQueue *showsRequestQueue;
 
 @property (nonatomic) SRGMediaSearchSettings *settings;
-@property (nonatomic, readonly) SRGMediaSearchSettings *defaultMediaSearchSettings;
 
 @end
 
@@ -46,7 +45,8 @@
     if (self = [super init]) {
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         if (! applicationConfiguration.searchSettingsDisabled) {
-            self.settings = self.defaultMediaSearchSettings;
+            self.settings = [[SRGMediaSearchSettings alloc] init];
+            self.settings.aggregationsEnabled = NO;
         }
         
         self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
@@ -61,13 +61,6 @@
 - (NSString *)title
 {
     return NSLocalizedString(@"Search", @"Search page title");
-}
-
-- (SRGMediaSearchSettings *)defaultMediaSearchSettings
-{
-    SRGMediaSearchSettings *mediaSearchSettings = [[SRGMediaSearchSettings alloc] init];
-    mediaSearchSettings.aggregationsEnabled = NO;
-    return mediaSearchSettings;
 }
 
 #pragma mark View lifecycle
@@ -106,6 +99,9 @@
     UISearchBar *searchBar = self.searchController.searchBar;
     searchBar.delegate = self;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    searchBar.scopeButtonTitles = @[ NSLocalizedString(@"All", @"All medias scope button"),
+                                     NSLocalizedString(@"Videos", @"Videos scope button"),
+                                     NSLocalizedString(@"Audios", @"Audios scope button") ];
     
     // Required for proper search bar behavior
     self.definesPresentationContext = YES;
@@ -271,7 +267,7 @@
     if (! applicationConfiguration.searchSettingsDisabled) {
         searchBar.showsBookmarkButton = YES;
         
-        UIImage *image = [self.settings isEqual:self.defaultMediaSearchSettings] ? [UIImage imageNamed:@"filter_off-22"] : [UIImage imageNamed:@"filter_on-22"];
+        UIImage *image = [self hasAdvancedSettings] ? [UIImage imageNamed:@"filter_on-22"] : [UIImage imageNamed:@"filter_off-22"];
         [searchBar setImage:image forSearchBarIcon:UISearchBarIconBookmark state:UIControlStateNormal];
     }
     else {
@@ -283,6 +279,8 @@
 
 - (void)search
 {
+    [self updateSearchSettingsButton];
+    
     self.shows = nil;
     [self.showsRequestQueue cancel];
     
@@ -290,10 +288,35 @@
     [self refresh];
 }
 
+- (BOOL)hasAdvancedSettings
+{
+    SRGMediaSearchSettings *defaultSettingsAll = [[SRGMediaSearchSettings alloc] init];
+    defaultSettingsAll.aggregationsEnabled = NO;
+    if ([defaultSettingsAll isEqual:self.settings]) {
+        return NO;
+    }
+    
+    SRGMediaSearchSettings *defaultSettingsVideo = [[SRGMediaSearchSettings alloc] init];
+    defaultSettingsVideo.aggregationsEnabled = NO;
+    defaultSettingsVideo.mediaType = SRGMediaTypeVideo;
+    if ([defaultSettingsVideo isEqual:self.settings]) {
+        return NO;
+    }
+    
+    SRGMediaSearchSettings *defaultSettingsAudio = [[SRGMediaSearchSettings alloc] init];
+    defaultSettingsAudio.aggregationsEnabled = NO;
+    defaultSettingsAudio.mediaType = SRGMediaTypeAudio;
+    if ([defaultSettingsAudio isEqual:self.settings]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (BOOL)shouldDisplayMostSearchedShows
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    return ! applicationConfiguration.showsSearchDisabled && self.searchController.searchBar.text.length == 0 && [self.settings isEqual:self.defaultMediaSearchSettings];
+    return ! applicationConfiguration.showsSearchDisabled && self.searchController.searchBar.text.length == 0 && ! [self hasAdvancedSettings];
 }
 
 - (BOOL)isDisplayingMostSearchedShows
@@ -332,13 +355,24 @@
 {
     NSString *searchText = searchController.searchBar.text;
     
+    static dispatch_once_t s_onceToken;
+    static NSDictionary<NSNumber *, NSNumber *> *s_mediaTypes;
+    dispatch_once(&s_onceToken, ^{
+        s_mediaTypes = @{ @0 : @(SRGMediaTypeNone),
+                          @1 : @(SRGMediaTypeVideo),
+                          @2 : @(SRGMediaTypeAudio) };
+    });
+    
+    SRGMediaType mediaType = [s_mediaTypes[@(searchController.searchBar.selectedScopeButtonIndex)] integerValue];
+    
     // The delegate method is also called when entering or exiting search, in which case no refresh is required
     // since the text did not change.
-    if ([searchText isEqualToString:self.previousSearchText]) {
+    if ([searchText isEqualToString:self.previousSearchText] && mediaType == self.settings.mediaType) {
         return;
     }
     
     self.previousSearchText = searchText;
+    self.settings.mediaType = mediaType;
     
     // Perform the search with a delay to avoid triggering several search requests if updates are made in a row
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(search) object:nil];
@@ -534,6 +568,14 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [self.searchController.searchBar resignFirstResponder];
+}
+
+// `UISearchController` header documents the `-updateSearchResultsForSearchController:` to be called when the scope
+// changes, but in practice this does not work. The generated documentation does not say so and is therefore correct,
+// see https://developer.apple.com/documentation/uikit/uisearchresultsupdating/1618658-updatesearchresultsforsearchcont?language=objc
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    [self updateSearchResultsForSearchController:self.searchController];
 }
 
 - (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
