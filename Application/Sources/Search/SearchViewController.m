@@ -538,7 +538,7 @@
         UIView *barButtonItemView = [sender valueForKey:@"view"];
         if (barButtonItemView) {
             UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
-            popoverPresentationController.backgroundColor = UIColor.play_blackColor;
+            popoverPresentationController.backgroundColor = UIColor.play_popoverGrayColor;
             popoverPresentationController.sourceView = barButtonItemView;
             popoverPresentationController.sourceRect = barButtonItemView.bounds;
             popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;

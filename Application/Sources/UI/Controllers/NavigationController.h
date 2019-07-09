@@ -15,7 +15,29 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface NavigationController : UINavigationController
 
+/**
+ *  Create a navigation controller with standard customizable look-and-feel.
+ *
+ *  @param tintColor       The tint color applied to the title and icons.
+ *  @param backgroundColor The background color to be applied. If none standard blur is applied, otherwise the navigation
+ *                         bar is opaque.
+ *  @param statusBarStyle  The style of the status bar when the navigation controller is displayed.
+ */
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
+                                 tintColor:(nullable UIColor *)tintColor
+                           backgroundColor:(nullable UIColor *)backgroundColor
+                            statusBarStyle:(UIStatusBarStyle)statusBarStyle NS_DESIGNATED_INITIALIZER;
+
+/**
+ *  Create a navigation controller, optionally branded for a radio channel. If none is provided, a default look-and-feel
+ *  is applied.
+ */
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController radioChannel:(nullable RadioChannel *)radioChannel;
+
+/**
+ *  Create a navigation controller with standard look-and-feel.
+ */
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController;
 
 @end
 
