@@ -495,10 +495,10 @@
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
     if ([self shouldDisplayMostSearchedShows]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, 44.f);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), 200.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, 200.f);
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
         if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
@@ -519,10 +519,10 @@
     }
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if ([self isDisplayingMostSearchedShows] || [self isDisplayingObjectsInSection:section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, 44.f);
     }
     else {
         return CGSizeZero;
