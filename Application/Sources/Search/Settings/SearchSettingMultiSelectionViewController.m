@@ -14,7 +14,8 @@
 
 @implementation SRGBucket (SearchSettingsBucket)
 
-- (NSString *)title {
+- (NSString *)title
+{
     return [self respondsToSelector:@selector(title)] ? [self performSelector:@selector(title)] : nil;
 }
 

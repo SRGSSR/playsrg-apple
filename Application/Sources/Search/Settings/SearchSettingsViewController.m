@@ -56,7 +56,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
 }
 
-@interface SearchSettingsViewController ()
+@interface SearchSettingsViewController () <SearchSettingsMultiSelectionViewControllerDelegate>
 
 @property (nonatomic, copy) NSString *query;
 @property (nonatomic) SRGMediaSearchSettings *settings;
