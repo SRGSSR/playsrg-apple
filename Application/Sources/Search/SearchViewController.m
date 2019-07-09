@@ -105,8 +105,6 @@
     
     UISearchBar *searchBar = self.searchController.searchBar;
     searchBar.delegate = self;
-    searchBar.placeholder = NSLocalizedString(@"Search", @"Placeholder text displayed in the search field when empty (must be not too long)");
-    searchBar.tintColor = UIColor.whiteColor;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
     // Required for proper search bar behavior
