@@ -9,6 +9,7 @@
 #import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
 #import "NavigationController.h"
+#import "NSBundle+PlaySRG.h"
 #import "SearchLoadingCollectionViewCell.h"
 #import "SearchSettingsViewController.h"
 #import "SearchShowListCollectionViewCell.h"
@@ -241,15 +242,15 @@
 #pragma mark UI
 
 - (void)updateBarButtonItems
-{
-    NSMutableArray<UIBarButtonItem *> *rightBarButtonItems = [NSMutableArray array];
-    
+{    
     if (self.closeBlock) {
-        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close button title")
+        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close-22"]
+                                                                 landscapeImagePhone:nil
                                                                                style:UIBarButtonItemStyleDone
                                                                               target:self
                                                                               action:@selector(close:)];
-        [rightBarButtonItems addObject:closeBarButtonItem];
+        closeBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on search view");
+        self.navigationItem.leftBarButtonItem = closeBarButtonItem;
     }
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
@@ -259,10 +260,8 @@
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
                                                                                  action:@selector(editSettings:)];
-        [rightBarButtonItems addObject:settingsBarButtonItem];
+        self.navigationItem.rightBarButtonItem = settingsBarButtonItem;
     }
-    
-    self.navigationItem.rightBarButtonItems = [rightBarButtonItems copy];
 }
 
 #pragma mark Helpers
@@ -550,9 +549,14 @@
         [self presentViewController:navigationController animated:YES completion:nil];
     }
     else {
-        searchSettingsViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                                                                                                       target:self
-                                                                                                                       action:@selector(closeSettings:)];
+        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close-22"]
+                                                                 landscapeImagePhone:nil
+                                                                               style:UIBarButtonItemStyleDone
+                                                                              target:self
+                                                                              action:@selector(closeSettings:)];
+        closeBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on search settings view");
+        searchSettingsViewController.navigationItem.leftBarButtonItem = closeBarButtonItem;
+        
         [self presentViewController:navigationController animated:YES completion:nil];
     }
 }

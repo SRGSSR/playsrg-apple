@@ -78,10 +78,10 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         self.settings = [settings copy] ?: [[SRGMediaSearchSettings alloc] init];
         self.settings.aggregationsEnabled = YES;
         
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
-                                                                                 style:UIBarButtonItemStylePlain
-                                                                                target:self
-                                                                                action:@selector(resetSettings:)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(resetSettings:)];
     }
     return self;
 }
