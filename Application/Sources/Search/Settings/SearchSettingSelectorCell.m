@@ -39,7 +39,7 @@
     self.nameLabel.font = [UIFont srg_mediumFontWithTextStyle:UIFontTextStyleBody];
     self.nameLabel.textColor = UIColor.whiteColor;
     
-    self.selectionStyle = UITableViewCellSelectionStyleDefault;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 @end
