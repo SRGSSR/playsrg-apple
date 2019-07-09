@@ -26,6 +26,7 @@
 @interface SearchViewController () <SearchSettingsViewControllerDelegate>
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
+@property (nonatomic, copy) NSString *previousSearchText;
 
 @property (nonatomic) UISearchController *searchController;
 @property (nonatomic) SRGRequestQueue *showsRequestQueue;
@@ -323,6 +324,16 @@
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
+    NSString *searchText = searchController.searchBar.text;
+    
+    // The delegate method is also called when entering or exiting search, in which case no refresh is required
+    // since the text did not change.
+    if ([searchText isEqualToString:self.previousSearchText]) {
+        return;
+    }
+    
+    self.previousSearchText = searchText;
+    
     // Perform the search with a delay to avoid triggering several search requests if updates are made in a row
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(search) object:nil];
     
