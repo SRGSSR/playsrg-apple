@@ -390,11 +390,20 @@
 // This method is also triggered when the search gets the focus
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    // No delay when the search text is too small. This also covers the case where the user clears the search criterium
-    // with the clear button
-    static NSTimeInterval kTypingSpeedThreshold = 0.3;
-    NSTimeInterval delay = (searchController.searchBar.text.length == 0) ? 0. : kTypingSpeedThreshold;
-    [self performSelector:@selector(search) withObject:nil afterDelay:delay inModes:@[ NSRunLoopCommonModes ]];
+    NSString *query = searchController.searchBar.text;
+    
+    // Instantaneous search trigger if the query did not change, e.g. selected scope index changed
+    if ([query isEqualToString:self.query]) {
+        [self search];
+    }
+    // Add delay when typing, i.e. when the query changes
+    else {
+        // No delay when the search text is too small. This also covers the case where the user clears the search criterium
+        // with the clear button
+        static NSTimeInterval kTypingSpeedThreshold = 0.3;
+        NSTimeInterval delay = (searchController.searchBar.text.length == 0) ? 0. : kTypingSpeedThreshold;
+        [self performSelector:@selector(search) withObject:nil afterDelay:delay inModes:@[ NSRunLoopCommonModes ]];
+    }
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
