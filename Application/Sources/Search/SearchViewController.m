@@ -142,18 +142,6 @@
     [self updateSearchSettingsButton];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    if (! [self shouldDisplayMostSearchedShows]) {
-        // See https://stackoverflow.com/questions/27951965/cannot-set-searchbar-as-firstresponder
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.searchController.searchBar becomeFirstResponder];
-        });
-    }
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
