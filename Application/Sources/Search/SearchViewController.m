@@ -166,11 +166,6 @@
 
 #pragma mark Overrides
 
-- (BOOL)shouldPerformRefreshRequest
-{
-    return [self shouldDisplayMostSearchedShows] || (self.query.length > 0);
-}
-
 - (void)prepareSearchResultsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     NSString *query = self.query;
@@ -298,31 +293,19 @@
                           @2 : @(SRGMediaTypeAudio) };
     });
     
-    // If no change was made to the search criteria, does not trigger any search
-    if (@available(iOS 11, *)) {
-        SRGMediaType mediaType = [s_mediaTypes[@(self.searchController.searchBar.selectedScopeButtonIndex)] integerValue];
-        
-        if ([query isEqualToString:self.query] && mediaType == self.settings.mediaType) {
-            return;
-        }
-        
-        self.settings.mediaType = mediaType;
-    }
-    else if ([query isEqualToString:self.query]) {
-        return;
+    // Reset settings when the search query is cleared
+    if (query.length == 0 && self.query.length != 0) {
+        self.settings = [self defaultSettings];
     }
     
     self.query = query;
-    
-    // Reset settings when the search query is cleared
-    if (query.length == 0) {
-        self.settings = [self defaultSettings];
-    }
+    self.settings.mediaType = [s_mediaTypes[@(self.searchController.searchBar.selectedScopeButtonIndex)] integerValue];
     
     self.shows = nil;
     [self.showsRequestQueue cancel];
     
     [self updateSearchSettingsButton];
+    
     [self clear];
     [self refresh];
 }
