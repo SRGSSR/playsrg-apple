@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface TransparentTitleHeaderView : UICollectionReusableView
 
-@property (nonatomic) NSString *title;
+@property (nonatomic, copy, nullable) NSString *title;
 
 @end
 

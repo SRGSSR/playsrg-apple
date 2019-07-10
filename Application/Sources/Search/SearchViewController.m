@@ -513,7 +513,25 @@
             headerView.title = NSLocalizedString(@"Most searched shows", @"Most searched shows header");
         }
         else if ([self isDisplayingMediasInSection:indexPath.section]) {
-            headerView.title = (self.items != 0) ? NSLocalizedString(@"Videos and audios", @"Header for video and audio search results") : nil;
+            if (self.items != 0) {
+                ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+                if (applicationConfiguration.searchSettingsDisabled) {
+                    headerView.title = NSLocalizedString(@"Videos", @"Header for video search results");
+                }
+                else {
+                    static dispatch_once_t s_onceToken;
+                    static NSDictionary<NSNumber *, NSString *> *s_titles;
+                    dispatch_once(&s_onceToken, ^{
+                        s_titles = @{ @(SRGMediaTypeNone) : NSLocalizedString(@"Videos and audios", @"Header for video and audio search results"),
+                                      @(SRGMediaTypeVideo) : NSLocalizedString(@"Videos", @"Header for video search results"),
+                                      @(SRGMediaTypeAudio) : NSLocalizedString(@"Audios", @"Header for audio search results") };
+                    });
+                    headerView.title = s_titles[@(self.settings.mediaType)];
+                }
+            }
+            else {
+                headerView.title = nil;
+            }
         }
         else {
             headerView.title = NSLocalizedString(@"Shows", @"Show search result header");
