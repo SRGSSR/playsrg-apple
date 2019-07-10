@@ -45,8 +45,7 @@
     if (self = [super init]) {
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         if (! applicationConfiguration.searchSettingsDisabled) {
-            self.settings = [[SRGMediaSearchSettings alloc] init];
-            self.settings.aggregationsEnabled = NO;
+            self.settings = [self defaultSettings];
         }
         
         self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
@@ -280,6 +279,13 @@
 
 #pragma mark Helpers
 
+- (SRGMediaSearchSettings *)defaultSettings
+{
+    SRGMediaSearchSettings *settings = [[SRGMediaSearchSettings alloc] init];
+    settings.aggregationsEnabled = NO;
+    return settings;
+}
+
 - (void)search
 {
     NSString *query = self.searchController.searchBar.text;
@@ -307,6 +313,11 @@
     }
     
     self.query = query;
+    
+    // Reset settings when the search query is cleared
+    if (query.length == 0) {
+        self.settings = [self defaultSettings];
+    }
     
     self.shows = nil;
     [self.showsRequestQueue cancel];
