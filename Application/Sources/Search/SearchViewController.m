@@ -214,6 +214,7 @@
 - (void)search
 {
     self.shows = nil;
+    [self.showsRequestQueue cancel];
     
     [self clear];
     [self refresh];
