@@ -648,17 +648,18 @@
     UISearchBar *searchBar = searchController.searchBar;
     NSString *query = searchBar.text;
     
-    // Instantaneous search triggered if the query did not change, e.g. selected scope index changed
-    if ([query isEqualToString:self.query]) {
-        [self search];
-    }
     // Add delay when typing, i.e. when the query changes
-    else {
+    if (! [query isEqualToString:self.query]) {
         // No delay when the search text is too small. This also covers the case where the user clears the search criterium
         // with the clear button
         static NSTimeInterval kTypingSpeedThreshold = 0.3;
         NSTimeInterval delay = (searchBar.text.length == 0) ? 0. : kTypingSpeedThreshold;
         [self performSelector:@selector(search) withObject:nil afterDelay:delay inModes:@[ NSRunLoopCommonModes ]];
+    }
+    // Instantaneous search triggered if the query did not change, e.g. selected scope index changed
+    else if ([self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex] != self.settings.mediaType
+             ) {
+        [self search];
     }
 }
 
