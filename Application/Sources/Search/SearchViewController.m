@@ -166,6 +166,12 @@
 
 #pragma mark Overrides
 
+- (BOOL)shouldPerformRefreshRequest
+{
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    return ! applicationConfiguration.searchSettingsDisabled || self.query.length > 0;
+}
+
 - (void)prepareSearchResultsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     NSString *query = self.query;
@@ -276,9 +282,15 @@
 
 - (SRGMediaSearchSettings *)defaultSettings
 {
-    SRGMediaSearchSettings *settings = [[SRGMediaSearchSettings alloc] init];
-    settings.aggregationsEnabled = NO;
-    return settings;
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    if (! applicationConfiguration.searchSettingsDisabled) {
+        SRGMediaSearchSettings *settings = [[SRGMediaSearchSettings alloc] init];
+        settings.aggregationsEnabled = NO;
+        return settings;
+    }
+    else {
+        return nil;
+    }
 }
 
 - (void)search
