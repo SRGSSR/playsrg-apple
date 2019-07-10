@@ -20,6 +20,8 @@
 @property (nonatomic) NSError *lastRequestError;
 @property (nonatomic, weak) UIRefreshControl *refreshControl;
 
+@property (nonatomic) UIImageView *loadingImageView;        // strong
+
 @end
 
 @implementation CollectionRequestViewController
@@ -68,6 +70,11 @@
     [refreshControl addTarget:self action:@selector(collectionRequestViewController_refresh:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView insertSubview:refreshControl atIndex:0];
     self.refreshControl = refreshControl;
+    
+    // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
+    // stretched
+    self.loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
+    self.loadingImageView.contentMode = UIViewContentModeCenter;
 }
 
 - (void)viewWillLayoutSubviews
@@ -186,11 +193,7 @@
 - (UIView *)customViewForEmptyDataSet:(UIScrollView *)scrollView
 {
     if (self.loading) {
-        // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
-        // stretched
-        UIImageView *loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
-        loadingImageView.contentMode = UIViewContentModeCenter;
-        return loadingImageView;
+        return self.loadingImageView;
     }
     else {
         return nil;
