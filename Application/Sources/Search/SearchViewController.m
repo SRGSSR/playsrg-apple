@@ -304,7 +304,10 @@
     }
     
     self.query = query;
-    self.settings.mediaType = [self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex];
+    
+    if (@available(iOS 11, *)) {
+        self.settings.mediaType = [self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex];
+    }
     
     self.shows = nil;
     [self.showsRequestQueue cancel];

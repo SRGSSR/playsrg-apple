@@ -230,10 +230,18 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     static dispatch_once_t s_onceToken;
     static NSDictionary<NSNumber *, NSNumber *> *s_rows;
     dispatch_once(&s_onceToken, ^{
-        s_rows = @{ @0 : @2,
-                    @1 : @4,
-                    @2 : @1,
-                    @3 : @2 };
+        if (@available(iOS 11, *)) {
+            s_rows = @{ @0 : @2,
+                        @1 : @4,
+                        @2 : @1,
+                        @3 : @2 };
+        }
+        else {
+            s_rows = @{ @0 : @3,
+                        @1 : @4,
+                        @2 : @1,
+                        @3 : @2 };
+        }
     });
     
     return s_rows[@(section)].integerValue;
@@ -244,15 +252,29 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     static dispatch_once_t s_onceToken;
     static NSDictionary<NSNumber *, NSDictionary<NSNumber *, Class> *> *s_cellClasses;
     dispatch_once(&s_onceToken, ^{
-        s_cellClasses = @{ @0 : @{ @0 : SearchSettingSelectorCell.class,
-                                   @1 : SearchSettingSelectorCell.class },
-                           @1 : @{ @0 : SearchSettingSelectorCell.class,
-                                   @1 : SearchSettingSelectorCell.class,
-                                   @2 : SearchSettingSelectorCell.class,
-                                   @3 : SearchSettingSelectorCell.class },
-                           @2 : @{ @0 : SearchSettingSegmentCell.class },
-                           @3 : @{ @0 : SearchSettingSwitchCell.class,
-                                   @1 : SearchSettingSwitchCell.class } };
+        if (@available(iOS 11, *)) {
+            s_cellClasses = @{ @0 : @{ @0 : SearchSettingSelectorCell.class,
+                                       @1 : SearchSettingSelectorCell.class },
+                               @1 : @{ @0 : SearchSettingSelectorCell.class,
+                                       @1 : SearchSettingSelectorCell.class,
+                                       @2 : SearchSettingSelectorCell.class,
+                                       @3 : SearchSettingSelectorCell.class },
+                               @2 : @{ @0 : SearchSettingSegmentCell.class },
+                               @3 : @{ @0 : SearchSettingSwitchCell.class,
+                                       @1 : SearchSettingSwitchCell.class } };
+        }
+        else {
+            s_cellClasses = @{ @0 : @{ @0 : SearchSettingSegmentCell.class,
+                                       @1 : SearchSettingSelectorCell.class,
+                                       @2 : SearchSettingSelectorCell.class },
+                               @1 : @{ @0 : SearchSettingSelectorCell.class,
+                                       @1 : SearchSettingSelectorCell.class,
+                                       @2 : SearchSettingSelectorCell.class,
+                                       @3 : SearchSettingSelectorCell.class },
+                               @2 : @{ @0 : SearchSettingSegmentCell.class },
+                               @3 : @{ @0 : SearchSettingSwitchCell.class,
+                                       @1 : SearchSettingSwitchCell.class } };
+        }
     });
     Class cellClass = s_cellClasses[@(indexPath.section)][@(indexPath.row)];
     return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(cellClass) forIndexPath:indexPath];
@@ -268,25 +290,73 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         case 0: {
             SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
             
-            switch (indexPath.row) {
-                case 0: {
-                    selectorCell.name = NSLocalizedString(@"Categories", @"Categories search setting option");
-                    BOOL enabled = (self.aggregations.topicBuckets.count > 0);
-                    selectorCell.userInteractionEnabled = enabled;
-                    selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
-                    break;
+            if (@available(iOS 11, *)) {
+                switch (indexPath.row) {
+                    case 0: {
+                        selectorCell.name = NSLocalizedString(@"Categories", @"Categories search setting option");
+                        BOOL enabled = (self.aggregations.topicBuckets.count > 0);
+                        selectorCell.userInteractionEnabled = enabled;
+                        selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+                        break;
+                    }
+                        
+                    case 1: {
+                        selectorCell.name = NSLocalizedString(@"Shows", @"Shows search setting option");
+                        BOOL enabled = (self.aggregations.showBuckets.count > 0);
+                        selectorCell.userInteractionEnabled = enabled;
+                        selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+                        break;
+                    }
+                        
+                    default: {
+                        break;
+                    }
                 }
-                    
-                case 1: {
-                    selectorCell.name = NSLocalizedString(@"Shows", @"Shows search setting option");
-                    BOOL enabled = (self.aggregations.showBuckets.count > 0);
-                    selectorCell.userInteractionEnabled = enabled;
-                    selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
-                    break;
-                }
-                    
-                default: {
-                    break;
+            }
+            else {
+                switch (indexPath.row) {
+                    case 0: {
+                        SearchSettingSegmentCell *segmentCell = (SearchSettingSegmentCell *)cell;
+                        
+                        static dispatch_once_t s_onceToken;
+                        static NSDictionary<NSNumber *, NSNumber *> *s_mediaTypes;
+                        dispatch_once(&s_onceToken, ^{
+                            s_mediaTypes = @{ @0 : @(SRGMediaTypeNone),
+                                              @1 : @(SRGMediaTypeVideo),
+                                              @2 : @(SRGMediaTypeAudio) };
+                        });
+                        
+                        @weakify(self)
+                        [segmentCell setItems:@[ NSLocalizedString(@"All", @"All option"), NSLocalizedString(@"Videos", @"Videos option"), NSLocalizedString(@"Audios", @"Audios option") ] reader:^NSInteger{
+                            return [s_mediaTypes allKeysForObject:@(settings.mediaType)].firstObject.integerValue;
+                        } writer:^(NSInteger index) {
+                            @strongify(self)
+                            
+                            settings.mediaType = [s_mediaTypes[@(index)] integerValue];
+                            [self updateResults];
+                        }];
+                        break;
+                    }
+                        
+                    case 1: {
+                        selectorCell.name = NSLocalizedString(@"Categories", @"Categories search setting option");
+                        BOOL enabled = (self.aggregations.topicBuckets.count > 0);
+                        selectorCell.userInteractionEnabled = enabled;
+                        selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+                        break;
+                    }
+                        
+                    case 2: {
+                        selectorCell.name = NSLocalizedString(@"Shows", @"Shows search setting option");
+                        BOOL enabled = (self.aggregations.showBuckets.count > 0);
+                        selectorCell.userInteractionEnabled = enabled;
+                        selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+                        break;
+                    }
+                        
+                    default: {
+                        break;
+                    }
                 }
             }
             break;
@@ -435,28 +505,56 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         case 0: {
             SearchSettingMultiSelectionViewController *multiSelectionViewController = nil;
             
-            switch (indexPath.row) {
-                case 0: {
-                    multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Categories", @"Categories search setting option list view title")
-                                                                                                              items:self.aggregations.topicBuckets
-                                                                                                     selectedValues:self.settings.topicURNs];
-                    break;
-                }
-                    
-                case 1: {
-                    multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Shows", @"Shows search setting option list view title")
-                                                                                                              items:self.aggregations.showBuckets
-                                                                                                     selectedValues:self.settings.showURNs];
-                    break;
-                }
-                    
-                default: {
-                    break;
+            if (@available(iOS 11, *)) {
+                switch (indexPath.row) {
+                    case 0: {
+                        multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Categories", @"Categories search setting option list view title")
+                                                                                                                  items:self.aggregations.topicBuckets
+                                                                                                         selectedValues:self.settings.topicURNs];
+                        multiSelectionViewController.delegate = self;
+                        [self.navigationController pushViewController:multiSelectionViewController animated:YES];
+                        break;
+                    }
+                        
+                    case 1: {
+                        multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Shows", @"Shows search setting option list view title")
+                                                                                                                  items:self.aggregations.showBuckets
+                                                                                                         selectedValues:self.settings.showURNs];
+                        multiSelectionViewController.delegate = self;
+                        [self.navigationController pushViewController:multiSelectionViewController animated:YES];
+                        break;
+                    }
+                        
+                    default: {
+                        break;
+                    }
                 }
             }
-            
-            multiSelectionViewController.delegate = self;
-            [self.navigationController pushViewController:multiSelectionViewController animated:YES];
+            else {
+                switch (indexPath.row) {
+                    case 1: {
+                        multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Categories", @"Categories search setting option list view title")
+                                                                                                                  items:self.aggregations.topicBuckets
+                                                                                                         selectedValues:self.settings.topicURNs];
+                        multiSelectionViewController.delegate = self;
+                        [self.navigationController pushViewController:multiSelectionViewController animated:YES];
+                        break;
+                    }
+                        
+                    case 2: {
+                        multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Shows", @"Shows search setting option list view title")
+                                                                                                                  items:self.aggregations.showBuckets
+                                                                                                         selectedValues:self.settings.showURNs];
+                        multiSelectionViewController.delegate = self;
+                        [self.navigationController pushViewController:multiSelectionViewController animated:YES];
+                        break;
+                    }
+                        
+                    default: {
+                        break;
+                    }
+                }
+            }
             break;
         }
             
@@ -546,7 +644,10 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     SRGMediaType previousMediaType = self.settings.mediaType;
     
     self.settings = [[SRGMediaSearchSettings alloc] init];
-    self.settings.mediaType = previousMediaType;
+    
+    if (@available(iOS 11, *)) {
+        self.settings.mediaType = previousMediaType;
+    }
     
     [self updateResults];
     
