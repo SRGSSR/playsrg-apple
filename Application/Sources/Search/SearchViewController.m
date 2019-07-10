@@ -142,13 +142,15 @@
     [self updateSearchSettingsButton];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     
-    // FIXME: Does not work anymore, probably because of UISearchController. Use active property?
-    if ([self shouldDisplayMostSearchedShows]) {
-        [self.searchController.searchBar becomeFirstResponder];
+    if (! [self shouldDisplayMostSearchedShows]) {
+        // See https://stackoverflow.com/questions/27951965/cannot-set-searchbar-as-firstresponder
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.searchController.searchBar becomeFirstResponder];
+        });
     }
 }
 
