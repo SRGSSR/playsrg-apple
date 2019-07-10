@@ -293,7 +293,11 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
             if (@available(iOS 11, *)) {
                 switch (indexPath.row) {
                     case 0: {
-                        selectorCell.name = NSLocalizedString(@"Categories", @"Categories search setting option");
+                        NSString *name = NSLocalizedString(@"Categories", @"Categories search setting option");
+                        if (self.settings.topicURNs.count > 0) {
+                            name = [NSString stringWithFormat:@"%@ (%lu selected)", name, (unsigned long)self.settings.topicURNs.count];
+                        }
+                        selectorCell.name = name;
                         BOOL enabled = (self.aggregations.topicBuckets.count > 0);
                         selectorCell.userInteractionEnabled = enabled;
                         selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
@@ -301,7 +305,11 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                     }
                         
                     case 1: {
-                        selectorCell.name = NSLocalizedString(@"Shows", @"Shows search setting option");
+                        NSString *name = NSLocalizedString(@"Shows", @"Shows search setting option");
+                        if (self.settings.showURNs.count > 0) {
+                            name = [NSString stringWithFormat:@"%@ (%lu selected)", name, self.settings.showURNs.count];
+                        }
+                        selectorCell.name = name;
                         BOOL enabled = (self.aggregations.showBuckets.count > 0);
                         selectorCell.userInteractionEnabled = enabled;
                         selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
@@ -630,6 +638,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         self.settings.showURNs = selectedItems;
         [self updateResults];
     }
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark Actions
