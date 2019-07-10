@@ -295,15 +295,8 @@
 
 - (void)search
 {
-    NSString *query = self.searchController.searchBar.text;
-    
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSNumber *, NSNumber *> *s_mediaTypes;
-    dispatch_once(&s_onceToken, ^{
-        s_mediaTypes = @{ @0 : @(SRGMediaTypeNone),
-                          @1 : @(SRGMediaTypeVideo),
-                          @2 : @(SRGMediaTypeAudio) };
-    });
+    UISearchBar *searchBar = self.searchController.searchBar;
+    NSString *query = searchBar.text;
     
     // Reset settings when the search query is cleared
     if (query.length == 0 && self.query.length != 0) {
@@ -311,7 +304,7 @@
     }
     
     self.query = query;
-    self.settings.mediaType = [s_mediaTypes[@(self.searchController.searchBar.selectedScopeButtonIndex)] integerValue];
+    self.settings.mediaType = [self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex];
     
     self.shows = nil;
     [self.showsRequestQueue cancel];
@@ -320,6 +313,18 @@
     
     [self clear];
     [self refresh];
+}
+
+- (SRGMediaType)mediaTypeForScopeButtonIndex:(NSInteger)index
+{
+    static dispatch_once_t s_onceToken;
+    static NSDictionary<NSNumber *, NSNumber *> *s_mediaTypes;
+    dispatch_once(&s_onceToken, ^{
+        s_mediaTypes = @{ @0 : @(SRGMediaTypeNone),
+                          @1 : @(SRGMediaTypeVideo),
+                          @2 : @(SRGMediaTypeAudio) };
+    });
+    return [s_mediaTypes[@(index)] integerValue];
 }
 
 - (BOOL)hasAdvancedSettings
@@ -389,27 +394,6 @@
     
     [self updateSearchSettingsButton];
     [self search];
-}
-
-#pragma mark UISearchResultsUpdating protocol
-
-// This method is also triggered when the search gets the focus
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
-{
-    NSString *query = searchController.searchBar.text;
-    
-    // Instantaneous search trigger if the query did not change, e.g. selected scope index changed
-    if ([query isEqualToString:self.query]) {
-        [self search];
-    }
-    // Add delay when typing, i.e. when the query changes
-    else {
-        // No delay when the search text is too small. This also covers the case where the user clears the search criterium
-        // with the clear button
-        static NSTimeInterval kTypingSpeedThreshold = 0.3;
-        NSTimeInterval delay = (searchController.searchBar.text.length == 0) ? 0. : kTypingSpeedThreshold;
-        [self performSelector:@selector(search) withObject:nil afterDelay:delay inModes:@[ NSRunLoopCommonModes ]];
-    }
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -650,6 +634,28 @@
     }
     else {
         [self presentViewController:navigationController animated:YES completion:nil];
+    }
+}
+
+#pragma mark UISearchResultsUpdating protocol
+
+// This method is also triggered when the search gets the focus
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    UISearchBar *searchBar = searchController.searchBar;
+    NSString *query = searchBar.text;
+    
+    // Instantaneous search triggered if the query did not change, e.g. selected scope index changed
+    if ([query isEqualToString:self.query]) {
+        [self search];
+    }
+    // Add delay when typing, i.e. when the query changes
+    else {
+        // No delay when the search text is too small. This also covers the case where the user clears the search criterium
+        // with the clear button
+        static NSTimeInterval kTypingSpeedThreshold = 0.3;
+        NSTimeInterval delay = (searchBar.text.length == 0) ? 0. : kTypingSpeedThreshold;
+        [self performSelector:@selector(search) withObject:nil afterDelay:delay inModes:@[ NSRunLoopCommonModes ]];
     }
 }
 
