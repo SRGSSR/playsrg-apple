@@ -27,7 +27,7 @@
 @interface SearchViewController () <SearchSettingsViewControllerDelegate>
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
-@property (nonatomic, copy) NSString *previousSearchText;
+@property (nonatomic, copy) NSString *query;
 
 @property (nonatomic) UISearchController *searchController;
 @property (nonatomic) SRGRequestQueue *showsRequestQueue;
@@ -169,12 +169,12 @@
 
 - (BOOL)shouldPerformRefreshRequest
 {
-    return [self shouldDisplayMostSearchedShows] ? YES : (self.searchController.searchBar.text.length > 0);
+    return [self shouldDisplayMostSearchedShows] ? YES : (self.query.length > 0);
 }
 
 - (void)prepareSearchResultsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
-    NSString *query = self.searchController.searchBar.text;
+    NSString *query = self.query;
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:self.settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregations, NSArray<SRGSearchSuggestion *> * suggestions, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
@@ -252,12 +252,12 @@
 
 - (NSString *)emptyCollectionTitle
 {
-    return (self.searchController.searchBar.text.length == 0) ? NSLocalizedString(@"Search", @"Title displayed when there is no search criterium entered") : super.emptyCollectionTitle;
+    return (self.query.length == 0) ? NSLocalizedString(@"Search", @"Title displayed when there is no search criterium entered") : super.emptyCollectionTitle;
 }
 
 - (NSString *)emptyCollectionSubtitle
 {
-    return (self.searchController.searchBar.text.length == 0) ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
+    return (self.query.length == 0) ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
 }
 
 #pragma mark UI
@@ -282,11 +282,36 @@
 
 - (void)search
 {
-    [self updateSearchSettingsButton];
+    NSString *query = self.searchController.searchBar.text;
+    
+    static dispatch_once_t s_onceToken;
+    static NSDictionary<NSNumber *, NSNumber *> *s_mediaTypes;
+    dispatch_once(&s_onceToken, ^{
+        s_mediaTypes = @{ @0 : @(SRGMediaTypeNone),
+                          @1 : @(SRGMediaTypeVideo),
+                          @2 : @(SRGMediaTypeAudio) };
+    });
+    
+    // If no change was made to the search criteria, does not trigger any search
+    if (@available(iOS 11, *)) {
+        SRGMediaType mediaType = [s_mediaTypes[@(self.searchController.searchBar.selectedScopeButtonIndex)] integerValue];
+        
+        if ([query isEqualToString:self.query] && mediaType == self.settings.mediaType) {
+            return;
+        }
+        
+        self.settings.mediaType = mediaType;
+    }
+    else if ([query isEqualToString:self.query]) {
+        return;
+    }
+    
+    self.query = query;
     
     self.shows = nil;
     [self.showsRequestQueue cancel];
     
+    [self updateSearchSettingsButton];
     [self clear];
     [self refresh];
 }
@@ -327,7 +352,7 @@
 - (BOOL)shouldDisplayMostSearchedShows
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    return ! applicationConfiguration.showsSearchDisabled && self.searchController.searchBar.text.length == 0 && ! [self hasAdvancedSettings];
+    return ! applicationConfiguration.showsSearchDisabled && self.query.length == 0 && ! [self hasAdvancedSettings];
 }
 
 - (BOOL)isDisplayingMostSearchedShows
@@ -362,39 +387,9 @@
 
 #pragma mark UISearchResultsUpdating protocol
 
+// This method is also triggered when the search gets the focus
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    NSString *searchText = searchController.searchBar.text;
-    
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSNumber *, NSNumber *> *s_mediaTypes;
-    dispatch_once(&s_onceToken, ^{
-        s_mediaTypes = @{ @0 : @(SRGMediaTypeNone),
-                          @1 : @(SRGMediaTypeVideo),
-                          @2 : @(SRGMediaTypeAudio) };
-    });
-    
-    // The delegate method is also called when entering or exiting search, in which case no refresh is required
-    // since the text did not change.
-    // iOS 10 and below: Media type selection is made on the settings page
-    if (@available(iOS 11, *)) {
-        SRGMediaType mediaType = [s_mediaTypes[@(searchController.searchBar.selectedScopeButtonIndex)] integerValue];
-        
-        if ([searchText isEqualToString:self.previousSearchText] && mediaType == self.settings.mediaType) {
-            return;
-        }
-        
-        self.settings.mediaType = mediaType;
-    }
-    else if ([searchText isEqualToString:self.previousSearchText]) {
-        return;
-    }
-    
-    self.previousSearchText = searchText;
-    
-    // Perform the search with a delay to avoid triggering several search requests if updates are made in a row
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(search) object:nil];
-    
     // No delay when the search text is too small. This also covers the case where the user clears the search criterium
     // with the clear button
     static NSTimeInterval kTypingSpeedThreshold = 0.3;
@@ -616,7 +611,7 @@
 
 - (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
 {
-    SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.searchController.searchBar.text settings:self.settings];
+    SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.query settings:self.settings];
     searchSettingsViewController.delegate = self;
     
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController
