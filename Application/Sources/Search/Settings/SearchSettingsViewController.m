@@ -120,17 +120,17 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     UINib *headerViewNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.tableView registerNib:headerViewNib forHeaderFooterViewReuseIdentifier:headerIdentifier];
     
-    if (! self.popoverPresentationController) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Apply", @"Title of the search settings button to apply settings")
-                                                                                 style:UIBarButtonItemStylePlain
-                                                                                target:self
-                                                                                action:@selector(close:)];
-    }
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(resetSettings:)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
-                                                                              style:UIBarButtonItemStylePlain
-                                                                             target:self
-                                                                             action:@selector(resetSettings:)];
+    if (! self.popoverPresentationController) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Apply", @"Title of the search settings button to apply settings")
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(close:)];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
