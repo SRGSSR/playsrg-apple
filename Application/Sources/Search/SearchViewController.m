@@ -168,7 +168,7 @@
 
 - (BOOL)shouldPerformRefreshRequest
 {
-    return [self shouldDisplayMostSearchedShows] ? YES : (self.query.length > 0);
+    return [self shouldDisplayMostSearchedShows] || (self.query.length > 0);
 }
 
 - (void)prepareSearchResultsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
