@@ -28,7 +28,6 @@
     self.backgroundColor = backgroundColor;
     
     self.titleLabel.backgroundColor = backgroundColor;
-    self.titleLabel.font = [UIFont srg_regularFontWithTextStyle:UIFontTextStyleBody];
 }
 
 - (void)setHighlighted:(BOOL)highlighted
@@ -43,6 +42,8 @@
 - (void)setTitle:(NSString *)title
 {
     _title = title;
+    
+    self.titleLabel.font = [UIFont srg_regularFontWithTextStyle:UIFontTextStyleBody];
     self.titleLabel.text = title;
 }
 
