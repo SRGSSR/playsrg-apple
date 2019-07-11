@@ -66,6 +66,13 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
     return [images copy];
 }
 
+#pragma mark Loading animation
+
+- (void)play_startAnimatingLoading90WithTintColor:(UIColor *)tintColor
+{
+    [self play_startAnimatingWithImagesNamed:@"loading-90" withTintColor:tintColor];
+}
+
 #pragma mark Downloading animation
 
 - (void)play_startAnimatingDownloading22WithTintColor:(nullable UIColor *)tintColor
@@ -135,7 +142,7 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
         if (self.image) {
             [self yy_setImageWithURL:URL placeholder:self.image options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
         }
-        // If no image is already displayed, check if the image we want to display is already available from the cahce.
+        // If no image is already displayed, check if the image we want to display is already available from the cache.
         // If this is the case, use it as placeholder, avoiding an intermediate step which would lead to flickering
         else {
             YYWebImageManager *webImageManager = YYWebImageManager.sharedManager;

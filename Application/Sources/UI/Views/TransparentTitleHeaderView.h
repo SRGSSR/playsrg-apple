@@ -4,16 +4,16 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "Previewing.h"
-
-#import <SRGDataProvider/SRGDataProvider.h>
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ShowCollectionViewCell : UICollectionViewCell <Previewing>
+/**
+ *  Transparent header view for use in collections.
+ */
+@interface TransparentTitleHeaderView : UICollectionReusableView
 
-- (void)setShow:(SRGShow *)show featured:(BOOL)featured;
+@property (nonatomic) NSString *title;
 
 @end
 

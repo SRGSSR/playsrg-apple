@@ -4,16 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "Previewing.h"
-
-#import <SRGDataProvider/SRGDataProvider.h>
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ShowCollectionViewCell : UICollectionViewCell <Previewing>
+@interface SearchLoadingCollectionViewCell : UICollectionViewCell
 
-- (void)setShow:(SRGShow *)show featured:(BOOL)featured;
+- (void)startAnimating;
 
 @end
 

@@ -269,10 +269,12 @@
     
     void (^firstRadioLiveBlock)(void) = ^{
         RadioChannel *radioChannel = ApplicationConfiguration.sharedApplicationConfiguration.radioChannels.firstObject;
-        [[SRGDataProvider.currentDataProvider radioLivestreamsForVendor:vendor channelUid:radioChannel.uid withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-            self.media = ApplicationSettingSelectedLivestreamMediaForChannelUid(radioChannel.uid, medias) ?: medias.firstObject;
-            [self reloadData];
-        }] resume];
+        if (radioChannel) {
+            [[SRGDataProvider.currentDataProvider radioLivestreamsForVendor:vendor channelUid:radioChannel.uid withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                self.media = ApplicationSettingSelectedLivestreamMediaForChannelUid(radioChannel.uid, medias) ?: medias.firstObject;
+                [self reloadData];
+            }] resume];
+        }
     };
     
     NSString *lastPlayedRadioLiveURN = [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingLastPlayedRadioLiveURN];

@@ -23,7 +23,12 @@
   "moreEpisodesHidden": true,
   "moduleDefaultLinkColor": "#D2D2D2",
   "moduleDefaultTextColor": "#969696",
+  "continuousPlaybackPlayerViewTransitionDuration": 5,
+  "continuousPlaybackForegroundTransitionDuration": 0,
+  "continuousPlaybackBackgroundTransitionDuration": 0,
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
+  "searchSettingsDisabled": true,
+  "showsSearchDisabled": true,
   "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account"
 }

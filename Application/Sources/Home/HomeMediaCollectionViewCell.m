@@ -62,10 +62,10 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.clearColor;
+    self.backgroundColor = UIColor.play_blackColor;
     
-    self.mediaView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.mediaView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMedia)
@@ -83,10 +83,6 @@
     
     self.youthProtectionColorImageView.hidden = YES;
     
-    self.media360ImageView.layer.shadowOpacity = 0.3f;
-    self.media360ImageView.layer.shadowRadius = 2.f;
-    self.media360ImageView.layer.shadowOffset = CGSizeMake(0.f, 1.f);
-    
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
     self.downloadStatusImageView.tintColor = UIColor.play_lightGrayColor;
@@ -103,8 +99,8 @@
     
     self.featured = NO;
     
-    self.mediaView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.mediaView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     self.youthProtectionColorImageView.hidden = YES;
     
@@ -202,15 +198,24 @@
 - (void)reloadData
 {
     if (! self.media) {
-        self.mediaView.alpha = 0.f;
-        self.placeholderView.alpha = 1.f;
+        self.mediaView.hidden = YES;
+        self.placeholderView.hidden = NO;
         return;
     }
     
-    self.mediaView.alpha = 1.f;
-    self.placeholderView.alpha = 0.f;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
+        backgroundColor = self.module.backgroundColor;
+    }
+    self.backgroundColor = backgroundColor;
+    
+    self.mediaView.hidden = NO;
+    self.placeholderView.hidden = YES;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
+    self.titleLabel.backgroundColor = backgroundColor;
+    self.titleLabel.text = self.media.title;
+    
     self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     self.editorialLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     
@@ -218,8 +223,6 @@
     
     SRGAppearanceFontTextStyle subtitleTextStyle = self.featured ? SRGAppearanceFontTextStyleBody : SRGAppearanceFontTextStyleSubtitle;
     ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
-    
-    self.titleLabel.text = self.media.title;
     
     if (self.media.contentType != SRGContentTypeLivestream) {
         NSString *showTitle = self.media.show.title;
@@ -242,6 +245,7 @@
     else {
         self.subtitleLabel.text = nil;
     }
+    self.subtitleLabel.backgroundColor = backgroundColor;
     
     [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
     

@@ -34,16 +34,22 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = backgroundColor;
     
     UIView *colorView = [[UIView alloc] init];
-    colorView.backgroundColor = UIColor.play_blackColor;
+    colorView.backgroundColor = backgroundColor;
     self.selectedBackgroundView = colorView;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     
+    self.subtitleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
+    
+    self.dateLabel.backgroundColor = backgroundColor;
     self.dateLabel.textColor = UIColor.play_lightGrayColor;
+    
+    self.unreadLabel.backgroundColor = backgroundColor;
     self.unreadLabel.textColor = UIColor.play_notificationRedColor;
     
     @weakify(self)

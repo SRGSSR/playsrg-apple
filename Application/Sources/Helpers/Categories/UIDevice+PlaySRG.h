@@ -20,6 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIDevice (PlaySRG)
 
 /**
+ *  Return YES when the device is locked.
+ */
+@property (class, nonatomic, readonly) BOOL play_isLocked;
+
+/**
  *  The type of the current device.
  */
 @property (class, nonatomic, readonly) DeviceType play_deviceType;

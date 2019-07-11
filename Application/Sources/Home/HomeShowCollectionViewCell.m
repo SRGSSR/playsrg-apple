@@ -39,8 +39,8 @@
     
     self.backgroundColor = UIColor.clearColor;
     
-    self.showView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.showView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
@@ -57,8 +57,8 @@
     
     self.featured = NO;
     
-    self.showView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.showView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     [self.thumbnailImageView play_resetImage];
 }
@@ -111,20 +111,19 @@
 - (void)reloadData
 {
     if (! self.show) {
-        self.showView.alpha = 0.f;
-        self.placeholderView.alpha = 1.f;
+        self.showView.hidden = YES;
+        self.placeholderView.hidden = NO;
         return;
     }
     
-    self.showView.alpha = 1.f;
-    self.placeholderView.alpha = 0.f;
+    self.showView.hidden = NO;
+    self.placeholderView.hidden = YES;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
     
-    ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
-    
     self.titleLabel.text = self.show.title;
     
+    ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
     [self.thumbnailImageView play_requestImageForObject:self.show withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
 }
 

@@ -29,6 +29,12 @@
 			<string>Playback</string>
 			<key>Key</key>
 			<string>Group_Playback</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Key</key>
+			<string>Group_Autoplay</string>
 			<key>FooterText</key>
 			<string>When enabled, more content is automatically played after playback of the current content ends.</string>
 		</dict>
@@ -39,6 +45,20 @@
 			<string>Autoplay</string>
 			<key>Key</key>
 			<string>PlaySRGSettingAutoplayEnabled</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>FooterText</key>
+			<string>When enabled, video playback continues even when you leave the application.</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Background video playback</string>
+			<key>Key</key>
+			<string>PlaySRGSettingBackgroundVideoPlaybackEnabled</string>
 		</dict>
 		<dict>
 			<key>Type</key>

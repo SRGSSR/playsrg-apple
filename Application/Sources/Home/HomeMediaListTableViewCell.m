@@ -144,7 +144,7 @@ static const CGFloat HomeStandardMargin = 10.f;
 {
     [super setHomeSectionInfo:homeSectionInfo featured:featured];
     
-    UIColor *backgroundColor = UIColor.clearColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
     if (homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
         backgroundColor = homeSectionInfo.module.backgroundColor;
     }

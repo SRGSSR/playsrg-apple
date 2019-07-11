@@ -202,6 +202,14 @@
 			<key>UIApplicationShortcutItemType</key>
 			<string>history</string>
 		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>search-35</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Search</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>search</string>
+		</dict>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

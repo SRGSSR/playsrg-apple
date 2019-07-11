@@ -45,6 +45,11 @@
     return [UIColor srg_colorFromHexadecimalString:@"#979797"];
 }
 
++ (UIColor *)play_popoverGrayColor
+{
+    return [UIColor srg_colorFromHexadecimalString:@"#323232"];
+}
+
 + (UIColor *)play_grayButtonBackgroundColor
 {
     return [UIColor srg_colorFromHexadecimalString:@"#232323"];

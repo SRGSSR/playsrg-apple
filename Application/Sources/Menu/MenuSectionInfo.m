@@ -27,11 +27,9 @@
     NSMutableArray<MenuSectionInfo *> *sectionInfos = [NSMutableArray array];
     
     // General section
-    if (applicationConfiguration.searchOptions.count != 0) {
-        [sectionInfos addObject:[[MenuSectionInfo alloc] initWithTitle:NSLocalizedString(@"General", @"General menu section header label")
-                                                         menuItemInfos:@[[MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch]]
-                                                            headerless:YES]];
-    }
+    [sectionInfos addObject:[[MenuSectionInfo alloc] initWithTitle:NSLocalizedString(@"General", @"General menu section header label")
+                                                     menuItemInfos:@[[MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch]]
+                                                        headerless:YES]];
     
     // My content section
     NSMutableArray<MenuItemInfo *> *myContentMenuItems = [NSMutableArray array];

@@ -59,9 +59,6 @@
 /* Introductory text for next program information */
 "At %1$@: %2$@" = "At %1$@: %2$@";
 
-/* Tab name for audio results in the search */
-"Audios" = "Audios";
-
 /* Message title displayed when subscribing to all TV and radio shows
    Message title displayed when the user subscribed to all TV and radio shows */
 "Automatic subscriptions" = "Automatic subscriptions";
@@ -116,17 +113,17 @@
    Title displayed at the top of the downloads screen */
 "Downloads" = "Downloads";
 
+/* Label for the button keeping autoplay enabled */
+"Enable" = "Enable";
+
+/* Title of the alert view to opt-in for background video playback */
+"Enable background video playback?" = "Enable background video playback?";
+
 /* Title of a button to propose the user to enable notifications in the system settings */
 "Enable in system settings" = "Enable in system settings";
 
 /* Question displayed at the top of an alert asking the user to enable notifications */
 "Enable notifications?" = "Enable notifications?";
-
-/* Placeholder text displayed in the search field when empty (must be not too longth) */
-"Enter %@ characters or more" = "Enter %@ characters or more";
-
-/* Placeholder text displayed in the search field when empty (with minimum number of characters freely specified) */
-"Enter %@ characters or more to search" = "Enter %@ characters or more to search";
 
 /* Label used on the home page to present events while loading. It appears if no network connection available and no cache available. */
 "Events" = "Events";
@@ -183,6 +180,9 @@
 
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Last synchronization: %@";
+
+/* Label for the button for deciding to opt-in for background video playback at a later time */
+"Later" = "Later";
 
 /* Label used on a radio home page to present the latest videos
    Label used on the home page to present the latest videos */
@@ -350,9 +350,6 @@
 /* Title displayed at the top of the radio show list */
 "Radio programmes A-Z" = "Radio programmes A-Z";
 
-/* Tab name for radio show results in the search */
-"Radio shows" = "Radio shows";
-
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Receiver is idle.";
 
@@ -403,9 +400,13 @@
 
 /* [Technical] Search page type for analytics measurements
    Label in the left menu to present the search view
+   Placeholder text displayed in the search field when empty (must be not too long)
    Search page title
-   Search short label */
+   Title displayed when there is no search criterium entered */
 "Search" = "Search";
+
+/* Notification message when the server URL changed due to a scheme URL. */
+"Server changed to '%@'" = "Server changed to '%@'";
 
 /* Label in the left menu to present settings */
 "Settings" = "Settings";
@@ -423,7 +424,8 @@
 
 /* Label used on a radio home page to present its associated shows
    Label used on a radio home page to present the shows AZ and shows by date access buttons.
-   Label used on the TV home page to present the shows AZ and shows by date access buttons. */
+   Label used on the TV home page to present the shows AZ and shows by date access buttons.
+   Show search result header */
 "Shows" = "Shows";
 
 /* Title of the button to skip updating the application */
@@ -515,14 +517,14 @@
 /* Title displayed at the top of the screen where TV episodes can be accessed by date */
 "TV programmes by date" = "TV programmes by date";
 
-/* Tab name for TV show results in the search */
-"TV shows" = "TV shows";
+/* Message displayed when there is no search criterium entered */
+"Type to start searching" = "Type to start searching";
 
 /* Title of the button to update the application */
 "Update" = "Update";
 
-/* Tab name for video results in the search */
-"Videos" = "Videos";
+/* Header for video and audio search results */
+"Videos and audios" = "Videos and audios";
 
 /* Label in the left menu to present the watch later list
    Title displayed at the top of the watch later list screen */
@@ -534,7 +536,8 @@
 /* Title displayed at the top of the What's new view */
 "What's new" = "What's new";
 
-/* Description of the alert view to keep autoplay permanently */
+/* Description of the alert view to keep autoplay permanently
+   Description of the alert view to opt-in for background video playback */
 "You can manage this feature in the settings at any time." = "You can manage this feature in the settings at any time.";
 
 /* Hint displayed when no media added to the watch later list and the device supports 3D touch */

@@ -9,6 +9,7 @@
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
+#import "InAppSettingsKit/IASKSettingsReader.h"
 #import <SRGAppearance/SRGAppearance.h>
 
 @implementation SettingsBaseViewController
@@ -68,7 +69,25 @@
 
 - (CGFloat)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView heightForHeaderForSection:(NSInteger)section
 {
-    return (section == 0) ? 60.f : 75.f;
+    BOOL hasTitle = [self tableView:tableView titleForHeaderInSection:section].length != 0;
+    if (section == 0) {
+        return hasTitle ? 75.f : 15.f;
+    }
+    else {
+        return hasTitle ? 60.f : 0.1f /* Cannot use 0 = automatic dimension */;
+    }
+}
+
+- (UIView *)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView viewForFooterForSection:(NSInteger)section
+{
+    // We must return a view for the footer so that the height delegate method gets called
+    return [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectZero];
+}
+
+- (CGFloat)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView heightForFooterForSection:(NSInteger)section
+{
+    BOOL hasFooter = [self tableView:tableView titleForFooterInSection:section].length != 0;
+    return hasFooter ? UITableViewAutomaticDimension : 0.1f /* Cannot use 0 = automatic dimension */;
 }
 
 #pragma mark UITableViewDelegate protocol

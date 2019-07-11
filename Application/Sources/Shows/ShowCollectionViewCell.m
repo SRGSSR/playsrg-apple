@@ -19,6 +19,8 @@
 
 @interface ShowCollectionViewCell ()
 
+@property (nonatomic) SRGShow *show;
+
 @property (nonatomic, weak) IBOutlet UIView *showView;
 @property (nonatomic, weak) IBOutlet UIView *placeholderView;
 @property (nonatomic, weak) IBOutlet UIImageView *placeholderImageView;
@@ -36,10 +38,13 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = backgroundColor;
     
-    self.showView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.titleLabel.backgroundColor = backgroundColor;
+    
+    self.showView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
@@ -52,8 +57,8 @@
 {
     [super prepareForReuse];
     
-    self.showView.alpha = 0.f;
-    self.placeholderView.alpha = 1.f;
+    self.showView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     [self.thumbnailImageView play_resetImage];
 }
@@ -84,23 +89,24 @@
 
 #pragma mark Getters and setters
 
-- (void)setShow:(SRGShow *)show
+- (void)setShow:(SRGShow *)show featured:(BOOL)featured
 {
-    _show = show;
+    self.show = show;
     
     if (! show) {
-        self.showView.alpha = 0.f;
-        self.placeholderView.alpha = 1.f;
+        self.showView.hidden = YES;
+        self.placeholderView.hidden = NO;
         return;
     }
     
-    self.showView.alpha = 1.f;
-    self.placeholderView.alpha = 0.f;
+    self.showView.hidden = NO;
+    self.placeholderView.hidden = YES;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = show.title;
     
-    [self.thumbnailImageView play_requestImageForObject:show withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];    
+    ImageScale imageScale = featured ? ImageScaleMedium : ImageScaleSmall;
+    [self.thumbnailImageView play_requestImageForObject:show withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
 }
 
 #pragma mark Previewing protocol

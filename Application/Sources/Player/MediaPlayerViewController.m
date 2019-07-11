@@ -167,6 +167,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 @property (nonatomic) NSTimer *userInterfaceUpdateTimer;
 
+@property (nonatomic) BOOL shouldDisplayBackgroundVideoPlaybackPrompt;
+
 @end
 
 @implementation MediaPlayerViewController
@@ -228,7 +230,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.originalPosition = position;
         self.fromPushNotification = fromPushNotification;
         
-        // Force at init the correct Letterbox controller. In the `viewDidLoad:`, link it to the Letterbox view.
+        // Force the correct Letterbox controller. It will be linked to the Letterbox view in `-viewDidLoad`
         self.letterboxController = controller;
     }
     return self;
@@ -376,8 +378,20 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                                name:SRGLetterboxPlaybackDidFailNotification
                                              object:self.letterboxController];
     [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(applicationWillResignActive:)
+                                               name:UIApplicationWillResignActiveNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(applicationDidEnterBackground:)
+                                               name:UIApplicationDidEnterBackgroundNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationWillEnterForeground:)
                                                name:UIApplicationWillEnterForegroundNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(applicationDidBecomeActive:)
+                                               name:UIApplicationDidBecomeActiveNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(reachabilityDidChange:)
@@ -735,8 +749,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             SRGProgram *nextProgram = channel.nextProgram;
             if (nextProgram) {
                 self.nextProgramLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-                NSString *nextProgramFormat = [NSString stringWithFormat:@"> %@", NSLocalizedString(@"At %1$@: %2$@", @"Introductory text for next program information")];
-                self.nextProgramLabel.text = nextProgram ? [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeFormatter stringFromDate:nextProgram.startDate], nextProgram.title] : nil;
+                NSString *nextProgramFormat = NSLocalizedString(@"At %1$@: %2$@", @"Introductory text for next program information");
+                self.nextProgramLabel.text = nextProgram ? [NSString stringWithFormat:@"> %@", [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeFormatter stringFromDate:nextProgram.startDate], nextProgram.title]] : nil;
                 self.nextProgramLabel.accessibilityLabel = nextProgram ? [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:nextProgram.startDate], nextProgram.title] : nil;
             }
             else {
@@ -1332,7 +1346,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didCancelContinuousPlaybackWithUpcomingMedia:(SRGMedia *)upcomingMedia
 {
-    // Processes run once in the lifetime of the application
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Keep autoplay?", @"Title of the alert view to keep autoplay permanently")
@@ -1872,11 +1885,64 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.closeButton.accessibilityHint = nil;
 }
 
+- (void)applicationWillResignActive:(NSNotification *)notification
+{
+    // Based on conditions just before sending the app to the background, determine whether we should consider prompting the
+    // user for background video playback (this guess might change depending on how the app has been found to be sent to the
+    // background, see below)
+    if (! ApplicationSettingBackgroundVideoPlaybackEnabled()
+            && ! self.letterboxController.pictureInPictureActive
+            && self.letterboxController.media.mediaType == SRGMediaTypeVideo
+            && self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
+        self.shouldDisplayBackgroundVideoPlaybackPrompt = YES;
+    }
+}
+
+- (void)applicationDidEnterBackground:(NSNotification *)notification
+{
+    // Don't prompt for backround playback if the device was simply locked
+    if (self.shouldDisplayBackgroundVideoPlaybackPrompt) {
+        // To determine whether a background entry is due to the lock screen being enabled or not, we need to wait a little bit.
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (UIDevice.play_isLocked) {
+                self.shouldDisplayBackgroundVideoPlaybackPrompt = NO;
+            }
+        });
+    }
+}
+
 - (void)applicationWillEnterForeground:(NSNotification *)notification
 {
     if (self.letterboxController.mediaComposition) {
         [self srg_trackPageView];
         self.fromPushNotification = NO;
+    }
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+    // Display the prompt if this makes sense (only once)
+    if (self.shouldDisplayBackgroundVideoPlaybackPrompt) {
+        self.shouldDisplayBackgroundVideoPlaybackPrompt = NO;
+        
+        PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+            NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable background video playback?", @"Title of the alert view to opt-in for background video playback")
+                                                                                     message:NSLocalizedString(@"You can manage this feature in the settings at any time.", @"Description of the alert view to opt-in for background video playback")
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Later", @"Label for the button for deciding to opt-in for background video playback at a later time") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                completionHandler(YES);
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Enable", @"Label for the button keeping autoplay enabled") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [userDefaults setBool:YES forKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
+                [userDefaults synchronize];
+                self.letterboxController.backgroundVideoPlaybackEnabled = YES;
+                completionHandler(YES);
+            }]];
+            
+            UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+            [topViewController presentViewController:alertController animated:YES completion:nil];
+        }, @"BackgroundVideoPlaybackAsked", nil);
     }
 }
 

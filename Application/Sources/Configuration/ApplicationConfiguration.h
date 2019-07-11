@@ -69,16 +69,6 @@ typedef NS_ENUM(NSInteger, MenuItem) {
     MenuItemHelp
 };
 
-typedef NS_ENUM(NSInteger, SearchOption) {
-    SearchOptionUnknown,
-    
-    SearchOptionTVShows,
-    SearchOptionVideos,
-    
-    SearchOptionRadioShows,
-    SearchOptionAudios
-};
-
 OBJC_EXPORT NSString *TitleForHomeSection(HomeSection homeSection);
 OBJC_EXPORT NSString *TitleForMenuItem(MenuItem menuItem);
 OBJC_EXPORT NSString *TitleForTopicSection(TopicSection topicSection);
@@ -127,8 +117,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly) UIColor *moduleDefaultLinkColor;
 @property (nonatomic, readonly) UIColor *moduleDefaultTextColor;
 
-@property (nonatomic, readonly) NSArray<NSNumber *> *searchOptions;                     // wrap `SearchOption` values
-
 @property (nonatomic, readonly) NSArray<NSNumber *> *tvMenuItems;                       // wrap `MenuItem` values
 @property (nonatomic, readonly) NSArray<NSNumber *> *tvHomeSections;
 
@@ -168,6 +156,9 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly) BOOL prefersDRM;
 
 @property (nonatomic, readonly, getter=isLogoutMenuEnabled) BOOL logoutMenuEnabled;
+
+@property (nonatomic, readonly, getter=areSearchSettingsDisabled) BOOL searchSettingsDisabled;
+@property (nonatomic, readonly, getter=isShowsSearchDisabled) BOOL showsSearchDisabled;
 
 - (nullable RadioChannel *)radioChannelForUid:(NSString *)uid;
 - (nullable TVChannel *)tvChannelForUid:(NSString *)uid;

@@ -6,6 +6,7 @@
 
 #import "ApplicationConfiguration.h"
 
+#import "ApplicationSettings.h"
 #import "PlayLogger.h"
 #import "UIColor+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
@@ -166,23 +167,11 @@ static MenuItem RadioMenuItemWithString(NSString *string)
     return s_menuItems[string].integerValue ?: MenuItemUnknown;
 }
 
-static SearchOption SearchOptionWithString(NSString *string)
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSString *, NSNumber *> *s_menuItems;
-    dispatch_once(&s_onceToken, ^{
-        s_menuItems = @{ @"tvShows" : @(SearchOptionTVShows),
-                         @"videos" : @(SearchOptionVideos),
-                         @"radioShows" : @(SearchOptionRadioShows),
-                         @"audios" : @(SearchOptionAudios) };
-    });
-    return s_menuItems[string].integerValue ?: SearchOptionUnknown;
-}
-
 void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller)
 {
     controller.serviceURL = SRGDataProvider.currentDataProvider.serviceURL;
     controller.globalParameters = SRGDataProvider.currentDataProvider.globalParameters;
+    controller.backgroundVideoPlaybackEnabled = ApplicationSettingBackgroundVideoPlaybackEnabled();
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     controller.endTolerance = applicationConfiguration.endTolerance;
@@ -274,6 +263,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) BOOL prefersDRM;
 
 @property (nonatomic, getter=isLogoutMenuEnabled) BOOL logoutMenuEnabled;
+
+@property (nonatomic, getter=areSearchSettingsDisabled) BOOL searchSettingsDisabled;
+@property (nonatomic, getter=isShowsSearchDisabled) BOOL showsSearchDisabled;
 
 @property (nonatomic) NSDictionary<NSString *, NSDictionary *> *topicHeaders;
 
@@ -540,22 +532,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     }
     self.topicSectionsWithSubtopics = [topicSectionsWithSubtopics copy];
     
-    NSMutableArray<NSNumber *> *searchOptions = [NSMutableArray array];
-    NSString *searchOptionIdentifiersString = [self.remoteConfig configValueForKey:@"searchOptions"].stringValue;
-    if (searchOptionIdentifiersString.length != 0) {
-        NSArray<NSString *> *searchOptionIdentifiers = [searchOptionIdentifiersString componentsSeparatedByString:@","];
-        for (NSString *identifier in searchOptionIdentifiers) {
-            SearchOption searchOption = SearchOptionWithString(identifier);
-            if (searchOption != SearchOptionUnknown) {
-                [searchOptions addObject:@(searchOption)];
-            }
-            else {
-                PlayLogWarning(@"configuration", @"Unknown search option identifier %@. Skipped.", identifier);
-            }
-        }
-    }
-    self.searchOptions = [searchOptions copy];
-    
     // The TV overview is always present as first item and not configurable
     NSMutableArray<NSNumber *> *tvMenuItems = [NSMutableArray arrayWithObject:@(MenuItemTVOverview)];
     NSString *tvMenuItemsString = [self.remoteConfig configValueForKey:@"tvMenuItems"].stringValue;
@@ -698,6 +674,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.endToleranceRatio = (endToleranceRatio.stringValue.length > 0) ? fmaxf(endToleranceRatio.numberValue.floatValue, 0.f) : 0.f;
     
     self.hiddenOnboardingUids = [[self.remoteConfig configValueForKey:@"hiddenOnboardings"].stringValue componentsSeparatedByString:@","];
+    
+    self.searchSettingsDisabled = [self.remoteConfig configValueForKey:@"searchSettingsDisabled"].boolValue;
+    self.showsSearchDisabled = [self.remoteConfig configValueForKey:@"showsSearchDisabled"].boolValue;
     
     self.prefersDRM = [self.remoteConfig configValueForKey:@"prefersDRM"].boolValue;
     self.logoutMenuEnabled = [self.remoteConfig configValueForKey:@"logoutMenuEnabled"].boolValue;
@@ -874,10 +853,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; searchOptions = %@; tvMenuItems = %@; tvHomeSections: = %@; radioChannels = %@; radioHomeSections = %@; radioMenuItems = %@>",
+    return [NSString stringWithFormat:@"<%@: %p; tvMenuItems = %@; tvHomeSections: = %@; radioChannels = %@; radioHomeSections = %@; radioMenuItems = %@>",
             self.class,
             self,
-            self.searchOptions,
             self.tvMenuItems,
             self.tvHomeSections,
             self.radioChannels,

@@ -326,14 +326,12 @@
 {
     NSMutableArray<UIBarButtonItem *> *rightBarButtonItems = [NSMutableArray array];
     
-    if (ApplicationConfiguration.sharedApplicationConfiguration.searchOptions.count != 0) {
-        UIBarButtonItem *searchBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search-22"]
-                                                                                style:UIBarButtonItemStylePlain
-                                                                               target:self
-                                                                               action:@selector(search:)];
-        searchBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Search", @"Search button label");
-        [rightBarButtonItems addObject:searchBarButtonItem];
-    }
+    UIBarButtonItem *searchBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search-22"]
+                                                                            style:UIBarButtonItemStylePlain
+                                                                           target:self
+                                                                           action:@selector(search:)];
+    searchBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Search", @"Search button label");
+    [rightBarButtonItems addObject:searchBarButtonItem];
     
     [PushService.sharedService updateApplicationBadge];
     
@@ -616,8 +614,7 @@
 
 - (void)search:(id)sender
 {
-    SearchOption preferredSearchOption = self.radioChannel ? SearchOptionRadioShows : SearchOptionTVShows;
-    SearchViewController *searchViewController = [[SearchViewController alloc] initWithPreferredSearchOption:preferredSearchOption];
+    SearchViewController *searchViewController = [[SearchViewController alloc] init];
     
     @weakify(self)
     searchViewController.closeBlock = ^{

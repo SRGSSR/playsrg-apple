@@ -1,6 +1,7 @@
 "Advanced features" = "Fonctionnalités avancées";
 "Alternate radio homepage design" = "Design alternatif de l'accueil radio";
 "Autoplay" = "Lecture automatique";
+"Background video playback" = "Lecture vidéo en arrière-plan";
 "Become a beta tester" = "Devenez bêta-testeur";
 "By default, the application loads high-definition medias over cellular networks. To avoid possible extra costs, this option could be disable and the highest quality will be played only on Wi-Fi networks." = "Par défaut, l’application charge le contenu haute définition sur les réseaux cellulaires. Pour éviter les coûts supplémentaires éventuels, cette option peut être désactivée et la meilleure qualité sera jouée uniquement sur les réseaux Wi-Fi.";
 "Check for updates" = "Vérifier les mises-à-jour";
@@ -36,3 +37,4 @@
 "User location" = "Géolocalisation";
 "What's new" = "Nouveautés";
 "When enabled, more content is automatically played after playback of the current content ends." = "Lorsque cette fonctionnalité est activée, la lecture continue automatiquement avec un autre contenu lorsque le contenu lu actuellement se termine.";
+"When enabled, video playback continues even when you leave the application." = "Lorsque cette fonctionnalité est activée, la lecture vidéo se poursuit même quand vous sortez de l'application.";
