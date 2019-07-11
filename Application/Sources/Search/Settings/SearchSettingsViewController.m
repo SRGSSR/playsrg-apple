@@ -134,6 +134,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                                                                                  target:self
                                                                                  action:@selector(close:)];
     }
+    
+    self.preferredContentSize = CGSizeMake(375.f, 600.f);
 }
 
 - (void)viewDidAppear:(BOOL)animated
