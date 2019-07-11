@@ -41,6 +41,9 @@
 {
     [super awakeFromNib];
     
+    [self.segmentedControl setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
+                                         forState:UIControlStateNormal];
+    
     self.backgroundColor = UIColor.play_popoverGrayColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }

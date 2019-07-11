@@ -98,6 +98,12 @@
     UISearchBar *searchBar = self.searchController.searchBar;
     searchBar.delegate = self;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    searchBar.play_textField.font = [UIFont srg_regularFontWithSize:18.f];
+    [searchBar setScopeBarButtonTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
+                                           forState:UIControlStateNormal];
+    
+    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
+                                                                                               forState:UIControlStateNormal];
     
     // iOS 10 and below: Media type selection is made on the settings page
     if (@available(iOS 11, *)) {

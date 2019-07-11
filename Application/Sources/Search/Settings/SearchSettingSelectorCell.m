@@ -36,7 +36,7 @@
     self.tintColor = UIColor.whiteColor;
     self.backgroundColor = UIColor.play_popoverGrayColor;
     
-    self.nameLabel.font = [UIFont srg_mediumFontWithTextStyle:UIFontTextStyleBody];
+    self.nameLabel.font = [UIFont srg_regularFontWithTextStyle:UIFontTextStyleBody];
     self.nameLabel.textColor = UIColor.whiteColor;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
