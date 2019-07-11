@@ -42,6 +42,13 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    self.userInteractionEnabled = YES;
+}
+
 - (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
 {
     [super setUserInteractionEnabled:userInteractionEnabled];
