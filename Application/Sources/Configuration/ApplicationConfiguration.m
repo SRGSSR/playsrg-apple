@@ -265,6 +265,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, getter=isLogoutMenuEnabled) BOOL logoutMenuEnabled;
 
 @property (nonatomic, getter=areSearchSettingsDisabled) BOOL searchSettingsDisabled;
+@property (nonatomic, getter=isSearchSettingSubtitlesDisabled) BOOL searchSettingSubtitlesDisabled;
 @property (nonatomic, getter=isShowsSearchDisabled) BOOL showsSearchDisabled;
 
 @property (nonatomic) NSDictionary<NSString *, NSDictionary *> *topicHeaders;
@@ -676,6 +677,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.hiddenOnboardingUids = [[self.remoteConfig configValueForKey:@"hiddenOnboardings"].stringValue componentsSeparatedByString:@","];
     
     self.searchSettingsDisabled = [self.remoteConfig configValueForKey:@"searchSettingsDisabled"].boolValue;
+    self.searchSettingSubtitlesDisabled = [self.remoteConfig configValueForKey:@"searchSettingSubtitlesDisabled"].boolValue;
     self.showsSearchDisabled = [self.remoteConfig configValueForKey:@"showsSearchDisabled"].boolValue;
     
     self.prefersDRM = [self.remoteConfig configValueForKey:@"prefersDRM"].boolValue;

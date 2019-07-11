@@ -42,8 +42,9 @@ static SearchSettingRowType const SearchSettingRowTypeLastThreeDays = @"last_thr
 static SearchSettingRowType const SearchSettingRowTypeLastWeek = @"last_week";
 static SearchSettingRowType const SearchSettingRowTypeLastMonth = @"last_month";
 static SearchSettingRowType const SearchSettingRowTypeDuration = @"duration";
+static SearchSettingRowType const SearchSettingRowTypeSubtitlesAvailable = @"subtitles_available";
 static SearchSettingRowType const SearchSettingRowTypeDownloadAvailable = @"download_available";
-static SearchSettingRowType const SearchSettingRowTypePlayableAbroard = @"playable_abroad";
+static SearchSettingRowType const SearchSettingRowTypePlayableAbroad = @"playable_abroad";
 
 typedef NS_ENUM(NSInteger, SearchSettingPeriod) {
     SearchSettingPeriodNone = 0,
@@ -235,70 +236,64 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (NSArray<NSString *> *)sectionTypesForTableView:(UITableView *)tableView
 {
-    static dispatch_once_t s_onceToken;
-    static NSArray<NSString *> *s_types;
-    dispatch_once(&s_onceToken, ^{
-        if (SearchSettingsViewController.displaysMediaTypeSelection) {
-            s_types = @[ SearchSettingSectionTypeGeneral,
-                         SearchSettingSectionTypeMediaType,
-                         SearchSettingSectionTypePeriod,
-                         SearchSettingSectionTypeDuration,
-                         SearchSettingSectionTypeProperties ];
-        }
-        else {
-            s_types = @[ SearchSettingSectionTypeGeneral,
-                         SearchSettingSectionTypePeriod,
-                         SearchSettingSectionTypeDuration,
-                         SearchSettingSectionTypeProperties ];
-        }
-    });
-    return s_types;
+    if (SearchSettingsViewController.displaysMediaTypeSelection) {
+        return @[ SearchSettingSectionTypeGeneral,
+                  SearchSettingSectionTypeMediaType,
+                  SearchSettingSectionTypePeriod,
+                  SearchSettingSectionTypeDuration,
+                  SearchSettingSectionTypeProperties ];
+    }
+    else {
+        return @[ SearchSettingSectionTypeGeneral,
+                  SearchSettingSectionTypePeriod,
+                  SearchSettingSectionTypeDuration,
+                  SearchSettingSectionTypeProperties ];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSectionWithType:(NSString *)type
 {
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSString *, NSString *> *s_titles;
-    dispatch_once(&s_onceToken, ^{
-        s_titles = @{ SearchSettingSectionTypeMediaType: NSLocalizedString(@"Type", @"Settings section header"),
-                      SearchSettingSectionTypePeriod : NSLocalizedString(@"Period", @"Settings section header"),
-                      SearchSettingSectionTypeDuration : NSLocalizedString(@"Duration", @"Settings section header"),
-                      SearchSettingSectionTypeProperties : NSLocalizedString(@"Properties", @"Settings section header") };
-    });
-    return s_titles[type];
+    NSDictionary<NSString *, NSString *> *titles = @{ SearchSettingSectionTypeMediaType: NSLocalizedString(@"Type", @"Settings section header"),
+                                                      SearchSettingSectionTypePeriod : NSLocalizedString(@"Period", @"Settings section header"),
+                                                      SearchSettingSectionTypeDuration : NSLocalizedString(@"Duration", @"Settings section header"),
+                                                      SearchSettingSectionTypeProperties : NSLocalizedString(@"Properties", @"Settings section header") };
+    return titles[type];
 }
 
 - (NSArray<NSString *> *)tableView:(UITableView *)tableView rowTypesInSectionWithType:(NSString *)type
 {
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSString *, NSArray<NSString *> *> *s_types;
-    dispatch_once(&s_onceToken, ^{
-        s_types = @{ SearchSettingSectionTypeGeneral : @[ SearchSettingRowTypeTopics, SearchSettingRowTypeShows ],
-                     SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
-                     SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeLastDay, SearchSettingRowTypeLastThreeDays, SearchSettingRowTypeLastWeek, SearchSettingRowTypeLastMonth ],
-                     SearchSettingSectionTypeDuration : @[ SearchSettingRowTypeDuration ],
-                     SearchSettingSectionTypeProperties : @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroard ] };
-    });
-    return s_types[type];
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    
+    NSArray<NSString *> *properties = nil;
+    if (applicationConfiguration.searchSettingSubtitlesDisabled) {
+        properties = @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
+    }
+    else {
+        properties = @[ SearchSettingRowTypeSubtitlesAvailable, SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
+    }
+    
+    NSDictionary<NSString *, NSArray<NSString *> *> *types = @{ SearchSettingSectionTypeGeneral : @[ SearchSettingRowTypeTopics, SearchSettingRowTypeShows ],
+                                                                SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
+                                                                SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeLastDay, SearchSettingRowTypeLastThreeDays, SearchSettingRowTypeLastWeek, SearchSettingRowTypeLastMonth ],
+                                                                SearchSettingSectionTypeDuration : @[ SearchSettingRowTypeDuration ],
+                                                                SearchSettingSectionTypeProperties : properties };
+    return types[type];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowWithType:(NSString *)type atIndexPath:(NSIndexPath *)indexPath
 {
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSString *, Class> *s_cellClasses;
-    dispatch_once(&s_onceToken, ^{
-        s_cellClasses = @{ SearchSettingRowTypeTopics : SearchSettingSelectorCell.class,
-                           SearchSettingRowTypeShows : SearchSettingSelectorCell.class,
-                           SearchSettingRowTypeMediaType : SearchSettingSegmentCell.class,
-                           SearchSettingRowTypeLastDay : SearchSettingSelectorCell.class,
-                           SearchSettingRowTypeLastThreeDays : SearchSettingSelectorCell.class,
-                           SearchSettingRowTypeLastWeek : SearchSettingSelectorCell.class,
-                           SearchSettingRowTypeLastMonth : SearchSettingSelectorCell.class,
-                           SearchSettingRowTypeDuration : SearchSettingSegmentCell.class,
-                           SearchSettingRowTypeDownloadAvailable : SearchSettingSwitchCell.class,
-                           SearchSettingRowTypePlayableAbroard : SearchSettingSwitchCell.class };
-    });
-    Class cellClass = s_cellClasses[type];
+    NSDictionary<NSString *, Class> *cellClasses = @{ SearchSettingRowTypeTopics : SearchSettingSelectorCell.class,
+                                                      SearchSettingRowTypeShows : SearchSettingSelectorCell.class,
+                                                      SearchSettingRowTypeMediaType : SearchSettingSegmentCell.class,
+                                                      SearchSettingRowTypeLastDay : SearchSettingSelectorCell.class,
+                                                      SearchSettingRowTypeLastThreeDays : SearchSettingSelectorCell.class,
+                                                      SearchSettingRowTypeLastWeek : SearchSettingSelectorCell.class,
+                                                      SearchSettingRowTypeLastMonth : SearchSettingSelectorCell.class,
+                                                      SearchSettingRowTypeDuration : SearchSettingSegmentCell.class,
+                                                      SearchSettingRowTypeSubtitlesAvailable : SearchSettingSwitchCell.class,
+                                                      SearchSettingRowTypeDownloadAvailable : SearchSettingSwitchCell.class,
+                                                      SearchSettingRowTypePlayableAbroad : SearchSettingSwitchCell.class };
+    Class cellClass = cellClasses[type];
     NSAssert(cellClass, @"Type must be valid");
     return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(cellClass) forIndexPath:indexPath];
 }
@@ -423,6 +418,19 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
             [self updateResults];
         }];
     }
+    else if ([type isEqualToString:SearchSettingRowTypeSubtitlesAvailable]) {
+        SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
+        
+        @weakify(self)
+        [switchCell setName:NSLocalizedString(@"Subtitles", @"Download availability toggle name in search settings") reader:^BOOL{
+            return settings.subtitlesAvailable.boolValue;
+        } writer:^(BOOL value) {
+            @strongify(self)
+            
+            settings.subtitlesAvailable = @(value);
+            [self updateResults];
+        }];
+    }
     else if ([type isEqualToString:SearchSettingRowTypeDownloadAvailable]) {
         SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
         
@@ -436,7 +444,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
             [self updateResults];
         }];
     }
-    else if ([type isEqualToString:SearchSettingRowTypePlayableAbroard]) {
+    else if ([type isEqualToString:SearchSettingRowTypePlayableAbroad]) {
         SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
         
         @weakify(self)

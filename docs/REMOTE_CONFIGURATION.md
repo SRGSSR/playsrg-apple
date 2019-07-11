@@ -92,7 +92,11 @@ A wide list of parameters are available. Some parameters support multiple comma-
 * `continuousPlaybackForegroundTransitionDuration` (optional, number): Duration in seconds for continuous playback when the application runs in foreground and the player view is not displayed. If empty, continuous playback is disabled; if equal to 0, upcoming media playback starts immediately.
 * `continuousPlaybackBackgroundTransitionDuration` (optional, number): Duration in seconds for continuous playback when the application runs in background. If empty, continuous playback is disabled; if equal to 0, upcoming media playback starts immediately.
 * `hiddenOnboardings` (optional, string, multiple): Identifier list of onboardings which must be hidden.
+
+### Search
+
 * `searchSettingsDisabled` (optional, boolean): Set to `true` to disable support for search settings.
+* `searchSettingSubtitlesDisabled` (optional, boolean): Set to `true` to disable the subtitle search setting.
 * `showsSearchDisabled ` (optional, boolean): Set to `true` to disable show search results.
 
 ### History
