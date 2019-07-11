@@ -84,8 +84,6 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 #pragma mark Class methods
 
-// TODO: Flash scroll indicators
-
 // TODO: Common with SearchViewController implementation
 + (BOOL)displaysMediaTypeSelection
 {
@@ -191,6 +189,10 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     SRGBaseRequest *request = [SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:self.query withSettings:self.settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber * _Nonnull total, SRGMediaAggregations * _Nullable aggregations, NSArray<SRGSearchSuggestion *> * _Nullable suggestions, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         self.aggregations = aggregations;
         [self.tableView reloadData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView flashScrollIndicators];
+        });
     }];
     [requestQueue addRequest:request resume:YES];
 }
