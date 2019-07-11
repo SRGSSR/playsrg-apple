@@ -48,4 +48,14 @@
     return YES;
 }
 
+- (NSString *)accessibilityLabel
+{
+    return self.titleLabel.text;
+}
+
+- (UIAccessibilityTraits)accessibilityTraits
+{
+    return UIAccessibilityTraitHeader;
+}
+
 @end
