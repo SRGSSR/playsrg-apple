@@ -202,6 +202,11 @@
 		08564B251D41112800381549 /* HomeSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08564B221D41112800381549 /* HomeSectionHeaderView.xib */; };
 		08564B261D41112800381549 /* HomeSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08564B221D41112800381549 /* HomeSectionHeaderView.xib */; };
 		08564B271D41112800381549 /* HomeSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08564B221D41112800381549 /* HomeSectionHeaderView.xib */; };
+		0859ADC622D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859ADC522D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m */; };
+		0859ADC722D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859ADC522D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m */; };
+		0859ADC822D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859ADC522D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m */; };
+		0859ADC922D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859ADC522D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m */; };
+		0859ADCA22D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0859ADC522D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m */; };
 		08602BF72213786B0081D166 /* HomeShowsAccessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08602BF42213786A0081D166 /* HomeShowsAccessTableViewCell.m */; };
 		08602BF82213786B0081D166 /* HomeShowsAccessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08602BF42213786A0081D166 /* HomeShowsAccessTableViewCell.m */; };
 		08602BF92213786B0081D166 /* HomeShowsAccessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08602BF42213786A0081D166 /* HomeShowsAccessTableViewCell.m */; };
@@ -1695,6 +1700,8 @@
 		08564B1B1D41111A00381549 /* HomeSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSectionHeaderView.h; sourceTree = "<group>"; };
 		08564B1C1D41111A00381549 /* HomeSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSectionHeaderView.m; sourceTree = "<group>"; };
 		08564B221D41112800381549 /* HomeSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSectionHeaderView.xib; sourceTree = "<group>"; };
+		0859ADC422D72F4F00511F7F /* SearchSettingsMultiSelectionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchSettingsMultiSelectionItem.h; sourceTree = "<group>"; };
+		0859ADC522D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchSettingsMultiSelectionItem.m; sourceTree = "<group>"; };
 		08602BF42213786A0081D166 /* HomeShowsAccessTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeShowsAccessTableViewCell.m; sourceTree = "<group>"; };
 		08602BF52213786B0081D166 /* HomeShowsAccessTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeShowsAccessTableViewCell.xib; sourceTree = "<group>"; };
 		08602BF62213786B0081D166 /* HomeShowsAccessTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeShowsAccessTableViewCell.h; sourceTree = "<group>"; };
@@ -3321,6 +3328,8 @@
 				6FD88F7422D3618F008859EF /* SearchSettingsHeaderView.h */,
 				6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */,
 				6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */,
+				0859ADC422D72F4F00511F7F /* SearchSettingsMultiSelectionItem.h */,
+				0859ADC522D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m */,
 				6FF7BB9222A78DE400FA758A /* SearchSettingsViewController.h */,
 				6FF7BB9522A78DE400FA758A /* SearchSettingsViewController.m */,
 				6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */,
@@ -5539,6 +5548,7 @@
 				6FDF08DC218B126700B2AF2C /* Recommendation.m in Sources */,
 				6F475FB91EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				0837CEA91D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
+				0859ADC622D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
 				6F47607D1EB37D60003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6FD88F8A22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F475FBE1EB37BC6003021EA /* DataViewController.m in Sources */,
@@ -5557,6 +5567,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0859ADC722D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
 				082590F21F054ACD00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106A20443230009FE197 /* PlayApplication.m in Sources */,
 				6F962F9D1FD5144200EA42C1 /* SideMenuController.m in Sources */,
@@ -5710,6 +5721,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0859ADC822D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
 				082590F41F054ACE00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106B20443230009FE197 /* PlayApplication.m in Sources */,
 				6F962F9E1FD5144200EA42C1 /* SideMenuController.m in Sources */,
@@ -5863,6 +5875,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0859ADC922D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
 				082590F61F054ACE00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106C20443230009FE197 /* PlayApplication.m in Sources */,
 				6F962F9F1FD5144200EA42C1 /* SideMenuController.m in Sources */,
@@ -6016,6 +6029,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0859ADCA22D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
 				082590F81F054ACF00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106D20443230009FE197 /* PlayApplication.m in Sources */,
 				6F962FA01FD5144200EA42C1 /* SideMenuController.m in Sources */,

@@ -57,6 +57,18 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
 }
 
+@interface SRGTopicBucket (SearchSettings)
+
+@property (nonatomic, readonly) SearchSettingsMultiSelectionItem *multiSelectionItem;
+
+@end
+
+@interface SRGShowBucket (SearchSettings)
+
+@property (nonatomic, readonly) SearchSettingsMultiSelectionItem *multiSelectionItem;
+
+@end
+
 @interface SearchSettingsViewController () <SearchSettingsMultiSelectionViewControllerDelegate>
 
 @property (nonatomic, copy) NSString *query;
@@ -530,7 +542,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                 switch (indexPath.row) {
                     case 0: {
                         multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Categories", @"Categories search setting option list view title")
-                                                                                                                  items:self.aggregations.topicBuckets
+                                                                                                             identifier:NSStringFromClass(SRGTopicBucket.class)
+                                                                                                                  items:[self.aggregations.topicBuckets valueForKey:@keypath(SRGTopicBucket.new, multiSelectionItem)]
                                                                                                          selectedValues:self.settings.topicURNs];
                         multiSelectionViewController.delegate = self;
                         [self.navigationController pushViewController:multiSelectionViewController animated:YES];
@@ -539,7 +552,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                         
                     case 1: {
                         multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Shows", @"Shows search setting option list view title")
-                                                                                                                  items:self.aggregations.showBuckets
+                                                                                                             identifier:NSStringFromClass(SRGShowBucket.class)
+                                                                                                                  items:[self.aggregations.showBuckets valueForKey:@keypath(SRGShowBucket.new, multiSelectionItem)]
                                                                                                          selectedValues:self.settings.showURNs];
                         multiSelectionViewController.delegate = self;
                         [self.navigationController pushViewController:multiSelectionViewController animated:YES];
@@ -555,7 +569,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                 switch (indexPath.row) {
                     case 1: {
                         multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Categories", @"Categories search setting option list view title")
-                                                                                                                  items:self.aggregations.topicBuckets
+                                                                                                             identifier:NSStringFromClass(SRGTopicBucket.class)
+                                                                                                                  items:[self.aggregations.topicBuckets valueForKey:@keypath(SRGTopicBucket.new, multiSelectionItem)]
                                                                                                          selectedValues:self.settings.topicURNs];
                         multiSelectionViewController.delegate = self;
                         [self.navigationController pushViewController:multiSelectionViewController animated:YES];
@@ -564,7 +579,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                         
                     case 2: {
                         multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Shows", @"Shows search setting option list view title")
-                                                                                                                  items:self.aggregations.showBuckets
+                                                                                                             identifier:NSStringFromClass(SRGShowBucket.class)
+                                                                                                                  items:[self.aggregations.showBuckets valueForKey:@keypath(SRGShowBucket.new, multiSelectionItem)]
                                                                                                          selectedValues:self.settings.showURNs];
                         multiSelectionViewController.delegate = self;
                         [self.navigationController pushViewController:multiSelectionViewController animated:YES];
@@ -641,14 +657,14 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 #pragma mark SearchSettingsMultiSelectionViewControllerDelegate protocol
 
-- (void)searchSettingsViewController:(SearchSettingMultiSelectionViewController *)searchSettingsViewController didUpdateSelectedItems:(nullable NSArray<NSString *> *)selectedItems forItemClass:(Class)itemClass
+- (void)searchSettingMultiSelectionViewController:(SearchSettingMultiSelectionViewController *)searchSettingMultiSelectionViewController didUpdateSelectedValues:(NSArray<NSString *> *)selectedValues
 {
-    if (itemClass == SRGTopicBucket.class) {
-        self.settings.topicURNs = selectedItems;
+    if ([searchSettingMultiSelectionViewController.identifier isEqualToString:NSStringFromClass(SRGTopicBucket.class)]) {
+        self.settings.topicURNs = selectedValues;
         [self updateResults];
     }
-    else if (itemClass == SRGShowBucket.class) {
-        self.settings.showURNs = selectedItems;
+    else if ([searchSettingMultiSelectionViewController.identifier isEqualToString:NSStringFromClass(SRGShowBucket.class)]) {
+        self.settings.showURNs = selectedValues;
         [self updateResults];
     }
     
@@ -680,6 +696,24 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+@end
+
+@implementation SRGTopicBucket (SearchSettings)
+
+- (SearchSettingsMultiSelectionItem *)multiSelectionItem
+{
+    return [[SearchSettingsMultiSelectionItem alloc] initWithName:self.title value:self.URN count:self.count];
+}
+
+@end
+
+@implementation SRGShowBucket (SearchSettings)
+
+- (SearchSettingsMultiSelectionItem *)multiSelectionItem
+{
+    return [[SearchSettingsMultiSelectionItem alloc] initWithName:self.title value:self.URN count:self.count];
 }
 
 @end

@@ -5,30 +5,23 @@
 //
 
 #import "DataViewController.h"
-
-#import <SRGDataProvider/SRGDataProvider.h>
+#import "SearchSettingsMultiSelectionItem.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-@protocol SearchSettingsMultiSelectionItem <NSObject>
-
-@property (nonatomic, readonly, copy) NSString *name;
-@property (nonatomic, readonly) NSUInteger count;
-@property (nonatomic, readonly, copy) NSString *value;
-
-@end
 
 @class SearchSettingMultiSelectionViewController;
 
 @protocol SearchSettingsMultiSelectionViewControllerDelegate <NSObject>
 
-- (void)searchSettingsViewController:(SearchSettingMultiSelectionViewController *)searchSettingsViewController didUpdateSelectedItems:(nullable NSArray<NSString *> *)selectedItems forItemClass:(Class)itemClass;
+- (void)searchSettingMultiSelectionViewController:(SearchSettingMultiSelectionViewController *)searchSettingMultiSelectionViewController didUpdateSelectedValues:(nullable NSArray<NSString *> *)selectedValues;
 
 @end
 
 @interface SearchSettingMultiSelectionViewController : DataViewController <UITableViewDataSource, UITableViewDelegate>
 
-- (instancetype)initWithTitle:(NSString *)title items:(NSArray<id <SearchSettingsMultiSelectionItem>> *)items selectedValues:(nullable NSArray<NSString *> *)selectedvalues;
+- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(nullable NSArray<NSString *> *)selectedvalues;
+
+@property (nonatomic, readonly, copy) NSString *identifier;
 
 @property (nonatomic, weak) id<SearchSettingsMultiSelectionViewControllerDelegate> delegate;
 
@@ -37,14 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SearchSettingMultiSelectionViewController (Unavailable)
 
 - (instancetype)init NS_UNAVAILABLE;
-
-@end
-
-@interface SRGTopicBucket (SearchSettingsMultiSelection) <SearchSettingsMultiSelectionItem>
-
-@end
-
-@interface SRGShowBucket (SearchSettingsMultiSelection) <SearchSettingsMultiSelectionItem>
 
 @end
 

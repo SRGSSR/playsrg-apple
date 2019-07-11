@@ -23,7 +23,8 @@
 
 @interface SearchSettingMultiSelectionViewController ()
 
-@property (nonatomic) NSArray<id <SearchSettingsMultiSelectionItem>> *items;
+@property (nonatomic, copy) NSString *identifier;
+@property (nonatomic) NSArray<SearchSettingsMultiSelectionItem *> *items;
 @property (nonatomic) NSArray<NSString *> *selectedvalues;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -34,10 +35,11 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithTitle:(NSString *)title items:(NSArray<id <SearchSettingsMultiSelectionItem>> *)items selectedValues:(NSArray<NSString *> *)selectedvalues
+- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(nullable NSArray<NSString *> *)selectedvalues
 {
     if (self = [super init]) {
         self.title = title;
+        self.identifier = identifier;
         self.items = items;
         self.selectedvalues = selectedvalues;
     }
@@ -50,7 +52,7 @@
 - (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
-    return [self initWithTitle:@"" items:@[] selectedValues:nil];
+    return [self initWithTitle:@"" identifier:@"" items:@[] selectedValues:nil];
 }
 
 #pragma clang diagnostic pop
@@ -126,7 +128,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    id <SearchSettingsMultiSelectionItem> item = self.items[indexPath.row];
+    SearchSettingsMultiSelectionItem *item = self.items[indexPath.row];
     if ([self.selectedvalues containsObject:item.value]) {
         NSMutableArray *selectedvalues = self.selectedvalues.mutableCopy;
         [selectedvalues removeObject:item.value];
@@ -136,9 +138,7 @@
         NSMutableArray *selectedvalues = self.selectedvalues ? self.selectedvalues.mutableCopy : @[].mutableCopy;
         [selectedvalues addObject:item.value];
         
-        // keep values order
-        // TODO: Safer valueForKey
-        NSArray<NSString *> *itemValues = [self.items valueForKey:@"value"];
+        NSArray<NSString *> *itemValues = [self.items valueForKey:@keypath(SearchSettingsMultiSelectionItem.new, value)];
         [selectedvalues sortUsingComparator:^NSComparisonResult(NSString *value1, NSString *value2) {
             return [@([itemValues indexOfObject:value1]) compare:@([itemValues indexOfObject:value2])];
         }];
@@ -146,38 +146,10 @@
     }
     
     if (self.delegate) {
-        [self.delegate searchSettingsViewController:self didUpdateSelectedItems:self.selectedvalues.copy forItemClass:self.items[0].class];
+        [self.delegate searchSettingMultiSelectionViewController:self didUpdateSelectedValues:self.selectedvalues.copy];
     }
     
     [self.tableView reloadData];
-}
-
-@end
-
-@implementation SRGTopicBucket (SearchSettingsMultiSelection)
-
-- (NSString *)name
-{
-    return self.title;
-}
-
-- (NSString *)value
-{
-    return self.URN;
-}
-
-@end
-
-@implementation SRGShowBucket (SearchSettingsMultiSelection)
-
-- (NSString *)name
-{
-    return self.title;
-}
-
-- (NSString *)value
-{
-    return self.URN;
 }
 
 @end
