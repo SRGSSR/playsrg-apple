@@ -106,6 +106,34 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 #pragma mark Class methods
 
++ (BOOL)containsAdvancedSettings:(SRGMediaSearchSettings *)settings
+{
+    if (! settings) {
+        return NO;
+    }
+    
+    SRGMediaSearchSettings *defaultSettingsAll = [[SRGMediaSearchSettings alloc] init];
+    if ([defaultSettingsAll isEqual:settings]) {
+        return NO;
+    }
+    
+    if (! self.displaysMediaTypeSelection) {
+        SRGMediaSearchSettings *defaultSettingsVideo = [[SRGMediaSearchSettings alloc] init];
+        defaultSettingsVideo.mediaType = SRGMediaTypeVideo;
+        if ([defaultSettingsVideo isEqual:settings]) {
+            return NO;
+        }
+        
+        SRGMediaSearchSettings *defaultSettingsAudio = [[SRGMediaSearchSettings alloc] init];
+        defaultSettingsAudio.mediaType = SRGMediaTypeAudio;
+        if ([defaultSettingsAudio isEqual:settings]) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
 + (BOOL)displaysMediaTypeSelection
 {
     // Media type selection is displayed as scope buttons on the main search view for iOS 11 and above. Built-in
@@ -174,16 +202,14 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     UINib *headerViewNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.tableView registerNib:headerViewNib forHeaderFooterViewReuseIdentifier:headerIdentifier];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(resetSettings:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Apply", @"Title of the search settings button to apply settings")
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(close:)];
     
     self.preferredContentSize = CGSizeMake(375.f, 600.f);
+    
+    [self updateResetButton];
 }
 
 #pragma mark Rotation
@@ -212,7 +238,6 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         self.popoverPresentationController.sourceRect = self.popoverPresentationController.sourceView.bounds;
     }];
 }
-
 
 #pragma mark Status bar
 
@@ -254,7 +279,23 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     settings.aggregationsEnabled = NO;
     [self.delegate searchSettingsViewController:self didUpdateSettings:settings];
     
+    [self updateResetButton];
     [self refresh];
+}
+
+#pragma mark UI
+
+- (void)updateResetButton
+{
+    if ([SearchSettingsViewController containsAdvancedSettings:self.settings]) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
+                                                                                 style:UIBarButtonItemStylePlain
+                                                                                target:self
+                                                                                action:@selector(resetSettings:)];
+    }
+    else {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
 }
 
 #pragma mark Type-based table view methods

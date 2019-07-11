@@ -38,6 +38,39 @@
 
 @implementation SearchViewController
 
+#pragma mark Class methods
+
++ (BOOL)containsAdvancedSettings:(SRGMediaSearchSettings *)settings
+{
+    if (! settings) {
+        return NO;
+    }
+    
+    SRGMediaSearchSettings *defaultSettingsAll = [[SRGMediaSearchSettings alloc] init];
+    defaultSettingsAll.aggregationsEnabled = NO;
+    if ([defaultSettingsAll isEqual:settings]) {
+        return NO;
+    }
+    
+    if (! SearchSettingsViewController.displaysMediaTypeSelection) {
+        SRGMediaSearchSettings *defaultSettingsVideo = [[SRGMediaSearchSettings alloc] init];
+        defaultSettingsVideo.aggregationsEnabled = NO;
+        defaultSettingsVideo.mediaType = SRGMediaTypeVideo;
+        if ([defaultSettingsVideo isEqual:settings]) {
+            return NO;
+        }
+        
+        SRGMediaSearchSettings *defaultSettingsAudio = [[SRGMediaSearchSettings alloc] init];
+        defaultSettingsAudio.aggregationsEnabled = NO;
+        defaultSettingsAudio.mediaType = SRGMediaTypeAudio;
+        if ([defaultSettingsAudio isEqual:settings]) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
 #pragma mark Object lifecycle
 
 - (instancetype)init
@@ -273,7 +306,7 @@
     if (! applicationConfiguration.searchSettingsDisabled) {
         searchBar.showsBookmarkButton = YES;
         
-        UIImage *image = [self hasAdvancedSettings] ? [UIImage imageNamed:@"filter_on-22"] : [UIImage imageNamed:@"filter_off-22"];
+        UIImage *image = [SearchViewController containsAdvancedSettings:self.settings] ? [UIImage imageNamed:@"filter_on-22"] : [UIImage imageNamed:@"filter_off-22"];
         [searchBar setImage:image forSearchBarIcon:UISearchBarIconBookmark state:UIControlStateNormal];
     }
     else {
@@ -308,39 +341,6 @@
     }
 }
 
-- (BOOL)hasAdvancedSettings
-{
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    if (applicationConfiguration.searchSettingsDisabled) {
-        return NO;
-    }
-    
-    SRGMediaSearchSettings *defaultSettingsAll = [[SRGMediaSearchSettings alloc] init];
-    defaultSettingsAll.aggregationsEnabled = NO;
-    if ([defaultSettingsAll isEqual:self.settings]) {
-        return NO;
-    }
-    
-    // If media type selection is made from this view controller, we need to treat media types as basic settings
-    if (! SearchSettingsViewController.displaysMediaTypeSelection) {
-        SRGMediaSearchSettings *defaultSettingsVideo = [[SRGMediaSearchSettings alloc] init];
-        defaultSettingsVideo.aggregationsEnabled = NO;
-        defaultSettingsVideo.mediaType = SRGMediaTypeVideo;
-        if ([defaultSettingsVideo isEqual:self.settings]) {
-            return NO;
-        }
-        
-        SRGMediaSearchSettings *defaultSettingsAudio = [[SRGMediaSearchSettings alloc] init];
-        defaultSettingsAudio.aggregationsEnabled = NO;
-        defaultSettingsAudio.mediaType = SRGMediaTypeAudio;
-        if ([defaultSettingsAudio isEqual:self.settings]) {
-            return NO;
-        }
-    }
-    
-    return YES;
-}
-
 #pragma mark Search
 
 - (void)search
@@ -373,7 +373,7 @@
 - (BOOL)shouldDisplayMostSearchedShows
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    return ! applicationConfiguration.showsSearchDisabled && self.query.length == 0 && ! [self hasAdvancedSettings];
+    return ! applicationConfiguration.showsSearchDisabled && self.query.length == 0 && ! [SearchViewController containsAdvancedSettings:self.settings];
 }
 
 - (BOOL)isDisplayingMostSearchedShows
