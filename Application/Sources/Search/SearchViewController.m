@@ -34,6 +34,8 @@
 
 @property (nonatomic) SRGMediaSearchSettings *settings;
 
+@property (nonatomic, weak) UIPopoverPresentationController *settingsPopoverPresentationController;
+
 @end
 
 @implementation SearchViewController
@@ -156,6 +158,24 @@
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & UIViewController.play_supportedInterfaceOrientations;
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        self.popoverPresentationController.sourceRect = self.searchController.searchBar.play_bookmarkButton.bounds;
+    }];
+}
+
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
+    
+    [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        self.popoverPresentationController.sourceRect = self.searchController.searchBar.play_bookmarkButton.bounds;
+    }];
 }
 
 #pragma mark Status bar
@@ -639,24 +659,19 @@
                                                                                                 tintColor:UIColor.whiteColor
                                                                                           backgroundColor:UIColor.play_popoverGrayColor
                                                                                            statusBarStyle:UIStatusBarStyleLightContent];
+    navigationController.modalPresentationStyle = UIModalPresentationPopover;
     
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        navigationController.modalPresentationStyle = UIModalPresentationPopover;
-        
-        UIButton *bookmarkButton = searchBar.play_bookmarkButton;
-        if (bookmarkButton) {
-            UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
-            popoverPresentationController.backgroundColor = UIColor.play_popoverGrayColor;
-            popoverPresentationController.sourceView = bookmarkButton;
-            popoverPresentationController.sourceRect = bookmarkButton.bounds;
-            popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
-        }
-        
-        [self presentViewController:navigationController animated:YES completion:nil];
-    }
-    else {
-        [self presentViewController:navigationController animated:YES completion:nil];
-    }
+    UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
+    popoverPresentationController.backgroundColor = UIColor.play_popoverGrayColor;
+    popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    
+    UIButton *bookmarkButton = searchBar.play_bookmarkButton;
+    popoverPresentationController.sourceView = bookmarkButton;
+    popoverPresentationController.sourceRect = bookmarkButton.bounds;
+    
+    self.settingsPopoverPresentationController = popoverPresentationController;
+    
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark UISearchResultsUpdating protocol

@@ -137,15 +137,10 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(resetSettings:)];
-    
-    // iOS 11 and above: Could simply use self.popoverPresentationController since ancestors are better taken into account.
-    //                   For iOS 9 and 10 compatibility, se use the following condition instead
-    if (! self.navigationController.popoverPresentationController) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Apply", @"Title of the search settings button to apply settings")
-                                                                                  style:UIBarButtonItemStylePlain
-                                                                                 target:self
-                                                                                 action:@selector(close:)];
-    }
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Apply", @"Title of the search settings button to apply settings")
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(close:)];
     
     self.preferredContentSize = CGSizeMake(375.f, 600.f);
 }
