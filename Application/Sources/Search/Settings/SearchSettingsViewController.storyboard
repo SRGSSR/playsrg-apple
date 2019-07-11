@@ -88,31 +88,22 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;name&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USe-mV-TrW">
-                                                    <rect key="frame" x="20" y="12" width="305" height="19.5"/>
+                                                    <rect key="frame" x="20" y="12" width="374" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TtL-Lt-gKC">
-                                                    <rect key="frame" x="345" y="6.5" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="valueChanged:" destination="fk7-Wt-ctv" eventType="valueChanged" id="i3a-Ua-Ehg"/>
-                                                    </connections>
-                                                </switch>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="USe-mV-TrW" firstAttribute="top" secondItem="TVB-Fp-Nq4" secondAttribute="top" constant="12" id="BpP-17-MWc"/>
-                                                <constraint firstAttribute="trailing" secondItem="TtL-Lt-gKC" secondAttribute="trailing" constant="20" id="LXf-qJ-NA0"/>
                                                 <constraint firstItem="USe-mV-TrW" firstAttribute="leading" secondItem="TVB-Fp-Nq4" secondAttribute="leading" constant="20" id="OsT-VC-c4a"/>
                                                 <constraint firstAttribute="bottom" secondItem="USe-mV-TrW" secondAttribute="bottom" constant="12" id="b7u-UT-HZC"/>
-                                                <constraint firstItem="TtL-Lt-gKC" firstAttribute="centerY" secondItem="USe-mV-TrW" secondAttribute="centerY" id="hVU-px-kXt"/>
-                                                <constraint firstItem="TtL-Lt-gKC" firstAttribute="leading" secondItem="USe-mV-TrW" secondAttribute="trailing" constant="20" id="vWn-ef-s9o"/>
+                                                <constraint firstAttribute="trailing" secondItem="USe-mV-TrW" secondAttribute="trailing" constant="20" id="mZq-9J-c7a"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <connections>
                                             <outlet property="nameLabel" destination="USe-mV-TrW" id="YBd-M9-SI7"/>
-                                            <outlet property="valueSwitch" destination="TtL-Lt-gKC" id="8sc-BT-shk"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

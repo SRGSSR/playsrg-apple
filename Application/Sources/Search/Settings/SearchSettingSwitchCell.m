@@ -18,7 +18,8 @@
 @property (nonatomic, copy) void (^writer)(BOOL value);
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (nonatomic, weak) IBOutlet UISwitch *valueSwitch;
+
+@property (nonatomic, readonly) UISwitch *valueSwitch;
 
 @end
 
@@ -36,6 +37,11 @@
     [self reloadData];
 }
 
+- (UISwitch *)valueSwitch
+{
+    return (UISwitch *)self.accessoryView;
+}
+
 #pragma mark Overrides
 
 - (void)awakeFromNib
@@ -44,6 +50,12 @@
     
     self.backgroundColor = UIColor.play_popoverGrayColor;
     self.nameLabel.textColor = UIColor.whiteColor;
+    
+    // Setting a `UISwitch` as accessory view of a cell works just as expected with VoiceOver
+    // See https://stackoverflow.com/a/24517965/760435
+    UISwitch *valueSwitch = [[UISwitch alloc] init];
+    [valueSwitch addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
+    self.accessoryView = valueSwitch;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
@@ -60,7 +72,7 @@
 
 #pragma mark Actions
 
-- (IBAction)valueChanged:(id)sender
+- (void)valueChanged:(id)sender
 {
     if (self.writer) {
         self.writer(self.valueSwitch.on);
