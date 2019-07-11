@@ -34,8 +34,6 @@
 
 @property (nonatomic) SRGMediaSearchSettings *settings;
 
-@property (nonatomic, weak) UIPopoverPresentationController *settingsPopoverPresentationController;
-
 @end
 
 @implementation SearchViewController
@@ -158,24 +156,6 @@
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & UIViewController.play_supportedInterfaceOrientations;
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
-    [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        self.popoverPresentationController.sourceRect = self.searchController.searchBar.play_bookmarkButton.bounds;
-    }];
-}
-
-- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
-    
-    [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        self.popoverPresentationController.sourceRect = self.searchController.searchBar.play_bookmarkButton.bounds;
-    }];
 }
 
 #pragma mark Status bar
@@ -654,8 +634,6 @@
     UIButton *bookmarkButton = searchBar.play_bookmarkButton;
     popoverPresentationController.sourceView = bookmarkButton;
     popoverPresentationController.sourceRect = bookmarkButton.bounds;
-    
-    self.settingsPopoverPresentationController = popoverPresentationController;
     
     [self presentViewController:navigationController animated:YES completion:nil];
 }
