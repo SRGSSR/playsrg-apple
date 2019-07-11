@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "NSArray+PlaySRG.h"
 #import "SearchSettingsHeaderView.h"
 #import "SearchSettingSelectorCell.h"
 #import "SearchSettingSegmentCell.h"
@@ -293,24 +294,32 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
             if (@available(iOS 11, *)) {
                 switch (indexPath.row) {
                     case 0: {
+                        NSArray<NSString *> *topicBucketURNs = [self.aggregations.topicBuckets valueForKeyPath:@keypath(SRGTopicBucket.new, URN)];
+                        NSArray<NSString *> *topicURNs = [self.settings.topicURNs play_arrayByIntersectingWithArray:topicBucketURNs];
+                        
                         NSString *name = NSLocalizedString(@"Categories", @"Categories search setting option");
-                        if (self.settings.topicURNs.count > 0) {
-                            name = [NSString stringWithFormat:@"%@ (%lu selected)", name, (unsigned long)self.settings.topicURNs.count];
+                        if (topicURNs.count > 0) {
+                            name = [NSString stringWithFormat:@"%@ (%@ selected)", name, @(topicURNs.count)];
                         }
                         selectorCell.name = name;
-                        BOOL enabled = (self.aggregations.topicBuckets.count > 0);
+                        
+                        BOOL enabled = (topicBucketURNs.count > 0);
                         selectorCell.userInteractionEnabled = enabled;
                         selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
                         break;
                     }
                         
                     case 1: {
+                        NSArray<NSString *> *showBucketURNs = [self.aggregations.showBuckets valueForKeyPath:@keypath(SRGShowBucket.new, URN)];
+                        NSArray<NSString *> *showURNs = [self.settings.showURNs play_arrayByIntersectingWithArray:showBucketURNs];
+                        
                         NSString *name = NSLocalizedString(@"Shows", @"Shows search setting option");
-                        if (self.settings.showURNs.count > 0) {
-                            name = [NSString stringWithFormat:@"%@ (%lu selected)", name, self.settings.showURNs.count];
+                        if (showURNs.count > 0) {
+                            name = [NSString stringWithFormat:@"%@ (%@ selected)", name, @(showURNs.count)];
                         }
                         selectorCell.name = name;
-                        BOOL enabled = (self.aggregations.showBuckets.count > 0);
+                        
+                        BOOL enabled = (showBucketURNs.count > 0);
                         selectorCell.userInteractionEnabled = enabled;
                         selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
                         break;

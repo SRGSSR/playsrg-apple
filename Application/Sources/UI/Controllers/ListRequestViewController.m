@@ -6,6 +6,7 @@
 
 #import "ListRequestViewController.h"
 
+#import "NSArray+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
@@ -50,9 +51,7 @@ static void commonInit(ListRequestViewController *self);
 - (NSArray *)items
 {
     if (! self.cachedItems) {
-        NSMutableArray *items = [self.loadedItems mutableCopy];
-        [items removeObjectsInArray:self.hiddenItems];
-        self.cachedItems = [items copy];
+        self.cachedItems = [self.loadedItems play_arrayByRemovingObjectsInArray:self.hiddenItems];
     }
     return self.cachedItems;
 }

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<ObjectType> *)play_arrayByInsertingObject:(ObjectType)object atIndex:(NSUInteger)index;
 - (NSArray<ObjectType> *)play_arrayByRemovingObjectAtIndex:(NSUInteger)index;
+- (NSArray<ObjectType> *)play_arrayByRemovingObjectsInArray:(NSArray<ObjectType> *)array;
+- (NSArray<ObjectType> *)play_arrayByIntersectingWithArray:(NSArray<ObjectType> *)array;
 
 @end
 
