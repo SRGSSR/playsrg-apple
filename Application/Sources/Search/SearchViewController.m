@@ -40,6 +40,22 @@
 
 @implementation SearchViewController
 
+#pragma mark Class methods
+
++ (BOOL)displaysMediaTypeSelection
+{
+    // Media type selection is displayed as scope buttons on the main search view for iOS 11 and above. Prior to iOS 10
+    // integration of a `UISearchBar` in the navigation bar is not supported (this can be achieved with table view headers
+    // instead). As we have a collection view here (with headers already), we decided to display the media selection on the
+    // settings page instead for iOS 9 and 10 users.
+    if (@available(iOS 11, *)) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
 #pragma mark Object lifecycle
 
 - (instancetype)init
@@ -103,7 +119,7 @@
     [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
                                                                                                forState:UIControlStateNormal];
     
-    if ([self displaysMediaTypeSelection]) {
+    if (SearchViewController.displaysMediaTypeSelection) {
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         if (! applicationConfiguration.searchSettingsDisabled) {
             searchBar.scopeButtonTitles = @[ NSLocalizedString(@"All", @"All medias scope button"),
@@ -301,20 +317,6 @@
 
 #pragma mark Settings management
 
-- (BOOL)displaysMediaTypeSelection
-{
-    // Media type selection is displayed as scope buttons on the main search view for iOS 11 and above. Prior to iOS 10
-    // integration of a `UISearchBar` in the navigation bar is not supported (this can be achieved with table view headers
-    // instead). As we have a collection view here (with headers already), we decided to display the media selection on the
-    // settings page instead for iOS 9 and 10 users.
-    if (@available(iOS 11, *)) {
-        return YES;
-    }
-    else {
-        return NO;
-    }
-}
-
 - (SRGMediaType)mediaTypeForScopeButtonIndex:(NSInteger)index
 {
     static dispatch_once_t s_onceToken;
@@ -354,7 +356,7 @@
     }
     
     // If media type selection is made from this view controller, we need to treat media types as basic settings
-    if ([self displaysMediaTypeSelection]) {
+    if (SearchViewController.displaysMediaTypeSelection) {
         SRGMediaSearchSettings *defaultSettingsVideo = [[SRGMediaSearchSettings alloc] init];
         defaultSettingsVideo.aggregationsEnabled = NO;
         defaultSettingsVideo.mediaType = SRGMediaTypeVideo;
@@ -387,7 +389,7 @@
     
     self.query = query;
     
-    if ([self displaysMediaTypeSelection]) {
+    if (SearchViewController.displaysMediaTypeSelection) {
         self.settings.mediaType = [self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex];
     }
     
