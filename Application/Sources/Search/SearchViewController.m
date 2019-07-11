@@ -40,22 +40,6 @@
 
 @implementation SearchViewController
 
-#pragma mark Class methods
-
-+ (BOOL)displaysMediaTypeSelection
-{
-    // Media type selection is displayed as scope buttons on the main search view for iOS 11 and above. Prior to iOS 10
-    // integration of a `UISearchBar` in the navigation bar is not supported (this can be achieved with table view headers
-    // instead). As we have a collection view here (with headers already), we decided to display the media selection on the
-    // settings page instead for iOS 9 and 10 users.
-    if (@available(iOS 11, *)) {
-        return YES;
-    }
-    else {
-        return NO;
-    }
-}
-
 #pragma mark Object lifecycle
 
 - (instancetype)init
@@ -119,7 +103,7 @@
     [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
                                                                                                forState:UIControlStateNormal];
     
-    if (SearchViewController.displaysMediaTypeSelection) {
+    if (! SearchSettingsViewController.displaysMediaTypeSelection) {
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         if (! applicationConfiguration.searchSettingsDisabled) {
             searchBar.scopeButtonTitles = @[ NSLocalizedString(@"All", @"All medias scope button"),
@@ -356,7 +340,7 @@
     }
     
     // If media type selection is made from this view controller, we need to treat media types as basic settings
-    if (SearchViewController.displaysMediaTypeSelection) {
+    if (! SearchSettingsViewController.displaysMediaTypeSelection) {
         SRGMediaSearchSettings *defaultSettingsVideo = [[SRGMediaSearchSettings alloc] init];
         defaultSettingsVideo.aggregationsEnabled = NO;
         defaultSettingsVideo.mediaType = SRGMediaTypeVideo;
@@ -389,7 +373,7 @@
     
     self.query = query;
     
-    if (SearchViewController.displaysMediaTypeSelection) {
+    if (! SearchSettingsViewController.displaysMediaTypeSelection) {
         self.settings.mediaType = [self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex];
     }
     

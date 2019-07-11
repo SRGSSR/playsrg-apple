@@ -84,12 +84,14 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 #pragma mark Class methods
 
-// TODO: Common with SearchViewController implementation
 + (BOOL)displaysMediaTypeSelection
 {
+    // Media type selection is displayed as scope buttons on the main search view for iOS 11 and above. Built-in
+    // support for search bar with scope buttons is namely available since iOS 11 only.
     if (@available(iOS 11, *)) {
         return NO;
     }
+    // For simplicity, we display media type selection on the settings page for iOS versions prior to iOS 10.
     else {
         return YES;
     }
