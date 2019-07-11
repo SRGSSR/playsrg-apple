@@ -427,7 +427,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         } writer:^(BOOL value) {
             @strongify(self)
             
-            settings.subtitlesAvailable = @(value);
+            settings.subtitlesAvailable = value ? @(value) : nil;
             [self updateResults];
         }];
     }
@@ -440,7 +440,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         } writer:^(BOOL value) {
             @strongify(self)
             
-            settings.downloadAvailable = @(value);
+            settings.downloadAvailable = value ? @(value) : nil;
             [self updateResults];
         }];
     }
@@ -453,7 +453,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         } writer:^(BOOL value) {
             @strongify(self)
             
-            settings.playableAbroad = @(value);
+            settings.playableAbroad = value ? @(value) : nil;
             [self updateResults];
         }];
     }
