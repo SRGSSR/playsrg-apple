@@ -43,11 +43,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        if (! applicationConfiguration.searchSettingsDisabled) {
-            self.settings = [self defaultSettings];
-        }
-        
+        self.settings = [self defaultSettings];
         self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
         self.searchController.searchResultsUpdater = self;
         self.searchController.dimsBackgroundDuringPresentation = NO;
@@ -105,8 +101,7 @@
     [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
                                                                                                forState:UIControlStateNormal];
     
-    // iOS 10 and below: Media type selection is made on the settings page
-    if (@available(iOS 11, *)) {
+    if ([self displaysMediaTypeSelection]) {
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         if (! applicationConfiguration.searchSettingsDisabled) {
             searchBar.scopeButtonTitles = @[ NSLocalizedString(@"All", @"All medias scope button"),
@@ -175,7 +170,7 @@
 - (BOOL)shouldPerformRefreshRequest
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    return ! applicationConfiguration.searchSettingsDisabled || self.query.length > 0;
+    return ! applicationConfiguration.showsSearchDisabled || self.query.length > 0;
 }
 
 - (void)prepareSearchResultsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
@@ -284,44 +279,20 @@
     }
 }
 
-#pragma mark Helpers
+#pragma mark Settings management
 
-- (SRGMediaSearchSettings *)defaultSettings
+- (BOOL)displaysMediaTypeSelection
 {
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    if (! applicationConfiguration.searchSettingsDisabled) {
-        SRGMediaSearchSettings *settings = [[SRGMediaSearchSettings alloc] init];
-        settings.aggregationsEnabled = NO;
-        return settings;
+    // Media type selection is displayed as scope buttons on the main search view for iOS 11 and above. Prior to iOS 10
+    // integration of a `UISearchBar` in the navigation bar is not supported (this can be achieved with table view headers
+    // instead). As we have a collection view here (with headers already), we decided to display the media selection on the
+    // settings page instead for iOS 9 and 10 users.
+    if (@available(iOS 11, *)) {
+        return YES;
     }
     else {
-        return nil;
+        return NO;
     }
-}
-
-- (void)search
-{
-    UISearchBar *searchBar = self.searchController.searchBar;
-    NSString *query = searchBar.text;
-    
-    // Reset settings when the search query is cleared
-    if (query.length == 0 && self.query.length != 0) {
-        self.settings = [self defaultSettings];
-    }
-    
-    self.query = query;
-    
-    if (@available(iOS 11, *)) {
-        self.settings.mediaType = [self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex];
-    }
-    
-    self.shows = nil;
-    [self.showsRequestQueue cancel];
-    
-    [self updateSearchSettingsButton];
-    
-    [self clear];
-    [self refresh];
 }
 
 - (SRGMediaType)mediaTypeForScopeButtonIndex:(NSInteger)index
@@ -334,6 +305,19 @@
                           @2 : @(SRGMediaTypeAudio) };
     });
     return [s_mediaTypes[@(index)] integerValue];
+}
+
+- (SRGMediaSearchSettings *)defaultSettings
+{
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    if (! applicationConfiguration.searchSettingsDisabled) {
+        SRGMediaSearchSettings *settings = [[SRGMediaSearchSettings alloc] init];
+        settings.aggregationsEnabled = NO;
+        return settings;
+    }
+    else {
+        return nil;
+    }
 }
 
 - (BOOL)hasAdvancedSettings
@@ -349,8 +333,8 @@
         return NO;
     }
     
-    // iOS 10 and below: Media type selection is made on the settings page
-    if (@available(iOS 11, *)) {
+    // If media type selection is made from this view controller, we need to treat media types as basic settings
+    if ([self displaysMediaTypeSelection]) {
         SRGMediaSearchSettings *defaultSettingsVideo = [[SRGMediaSearchSettings alloc] init];
         defaultSettingsVideo.aggregationsEnabled = NO;
         defaultSettingsVideo.mediaType = SRGMediaTypeVideo;
@@ -368,6 +352,35 @@
     
     return YES;
 }
+
+#pragma mark Search
+
+- (void)search
+{
+    UISearchBar *searchBar = self.searchController.searchBar;
+    NSString *query = searchBar.text;
+    
+    // Reset settings when the search query is cleared
+    if (query.length == 0 && self.query.length != 0) {
+        self.settings = [self defaultSettings];
+    }
+    
+    self.query = query;
+    
+    if ([self displaysMediaTypeSelection]) {
+        self.settings.mediaType = [self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex];
+    }
+    
+    self.shows = nil;
+    [self.showsRequestQueue cancel];
+    
+    [self updateSearchSettingsButton];
+    
+    [self clear];
+    [self refresh];
+}
+
+#pragma mark Content visibility
 
 - (BOOL)shouldDisplayMostSearchedShows
 {
@@ -648,7 +661,8 @@
 
 #pragma mark UISearchResultsUpdating protocol
 
-// This method is also triggered when the search gets the focus
+// This method is also triggered when the search bar gets or loses the focus. We only perform a search when needed to
+// avoid unnecessary refreshes.
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
     UISearchBar *searchBar = searchController.searchBar;
@@ -662,9 +676,8 @@
         NSTimeInterval delay = (searchBar.text.length == 0) ? 0. : kTypingSpeedThreshold;
         [self performSelector:@selector(search) withObject:nil afterDelay:delay inModes:@[ NSRunLoopCommonModes ]];
     }
-    // Instantaneous search triggered if the query did not change, e.g. selected scope index changed
-    else if ([self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex] != self.settings.mediaType
-             ) {
+    // Instantaneous search triggered when the selected scope button changed
+    else if ([self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex] != self.settings.mediaType) {
         [self search];
     }
 }
