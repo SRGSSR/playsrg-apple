@@ -163,6 +163,10 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     self.tableView.estimatedRowHeight = 44.f;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
+    // Remove the space at the top of the grouped table view
+    // See https://stackoverflow.com/a/18938763/760435
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.tableView.bounds.size.width, 0.01f)];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
