@@ -21,6 +21,7 @@
 #import "UISearchBar+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
+#import <libextobjc/libextobjc.h>
 #import <Masonry/Masonry.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -243,7 +244,9 @@
     if (page.number == 0 && ! applicationConfiguration.showsSearchDisabled) {
         static const NSUInteger kShowSearchPageSize = 20;
         
+        @weakify(self)
         self.showsRequestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+            @strongify(self)
             if (finished) {
                 [self.collectionView reloadData];
             }
