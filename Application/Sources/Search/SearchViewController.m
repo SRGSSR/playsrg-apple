@@ -8,14 +8,15 @@
 
 #import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
+#import "MostSearchedShowsHeaderView.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
+#import "SearchHeaderView.h"
 #import "SearchLoadingCollectionViewCell.h"
 #import "SearchSettingsViewController.h"
 #import "SearchShowListCollectionViewCell.h"
 #import "ShowViewController.h"
 #import "TitleCollectionViewCell.h"
-#import "TransparentTitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
 #import "UISearchBar+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -120,9 +121,13 @@
     UINib *loadingCellNib = [UINib nibWithNibName:loadingCellIdentifier bundle:nil];
     [self.collectionView registerNib:loadingCellNib forCellWithReuseIdentifier:loadingCellIdentifier];
     
-    NSString *headerIdentifier = NSStringFromClass(TransparentTitleHeaderView.class);
-    UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
-    [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
+    NSString *mostSearchedShowsHeaderIdentifier = NSStringFromClass(MostSearchedShowsHeaderView.class);
+    UINib *mostSearchedShowsHeaderNib = [UINib nibWithNibName:mostSearchedShowsHeaderIdentifier bundle:nil];
+    [self.collectionView registerNib:mostSearchedShowsHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:mostSearchedShowsHeaderIdentifier];
+    
+    NSString *searchHeaderIdentifier = NSStringFromClass(SearchHeaderView.class);
+    UINib *searchHeaderNib = [UINib nibWithNibName:searchHeaderIdentifier bundle:nil];
+    [self.collectionView registerNib:searchHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:searchHeaderIdentifier];
     
     UISearchBar *searchBar = self.searchController.searchBar;
     searchBar.delegate = self;
@@ -469,9 +474,16 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        return [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                  withReuseIdentifier:NSStringFromClass(TransparentTitleHeaderView.class)
-                                                         forIndexPath:indexPath];
+        if ([self isDisplayingMostSearchedShows]) {
+            return [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                      withReuseIdentifier:NSStringFromClass(MostSearchedShowsHeaderView.class)
+                                                             forIndexPath:indexPath];
+        }
+        else {
+            return [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                      withReuseIdentifier:NSStringFromClass(SearchHeaderView.class)
+                                                             forIndexPath:indexPath];
+        }
     }
     else {
         return [super collectionView:collectionView viewForSupplementaryElementOfKind:kind atIndexPath:indexPath];
@@ -510,13 +522,14 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
-    if ([view isKindOfClass:TransparentTitleHeaderView.class]) {
-        TransparentTitleHeaderView *headerView = (TransparentTitleHeaderView *)view;
+    if ([view isKindOfClass:SearchHeaderView.class]) {
+        SearchHeaderView *headerView = (SearchHeaderView *)view;
+        headerView.title = NSLocalizedString(@"Most searched shows", @"Most searched shows header");
+    }
+    else if ([view isKindOfClass:MostSearchedShowsHeaderView.class]) {
+        MostSearchedShowsHeaderView *headerView = (MostSearchedShowsHeaderView *)view;
         
-        if ([self shouldDisplayMostSearchedShows]) {
-            headerView.title = NSLocalizedString(@"Most searched shows", @"Most searched shows header");
-        }
-        else if ([self isDisplayingMediasInSection:indexPath.section]) {
+        if ([self isDisplayingMediasInSection:indexPath.section]) {
             if (self.items != 0) {
                 ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
                 if (applicationConfiguration.searchSettingsDisabled) {
@@ -540,12 +553,12 @@
         else {
             headerView.title = NSLocalizedString(@"Shows", @"Show search result header");
         }
-        
-        // iOS 11 bug: The header hides scroll indicators
-        // See https://stackoverflow.com/questions/46747960/ios11-uicollectionsectionheader-clipping-scroll-indicator
-        if (@available(iOS 11, *)) {
-            headerView.layer.zPosition = 0;
-        }
+    }
+    
+    // iOS 11 bug: The header hides scroll indicators
+    // See https://stackoverflow.com/questions/46747960/ios11-uicollectionsectionheader-clipping-scroll-indicator
+    if (@available(iOS 11, *)) {
+        view.layer.zPosition = 0;
     }
 }
 

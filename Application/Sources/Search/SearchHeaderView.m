@@ -4,19 +4,19 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "TransparentTitleHeaderView.h"
+#import "SearchHeaderView.h"
 
 #import "UIColor+PlaySRG.h"
 
 #import <SRGAppearance/SRGAppearance.h>
 
-@interface TransparentTitleHeaderView ()
+@interface SearchHeaderView ()
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
 @end
 
-@implementation TransparentTitleHeaderView
+@implementation SearchHeaderView
 
 #pragma mark Overrides
 

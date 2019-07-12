@@ -699,6 +699,26 @@
 		6F12DB5721A3EFBF0054879D /* HistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F12DB4521A3EFBF0054879D /* HistoryViewController.storyboard */; };
 		6F12DB5821A3EFBF0054879D /* HistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F12DB4521A3EFBF0054879D /* HistoryViewController.storyboard */; };
 		6F12DB5921A3EFBF0054879D /* HistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F12DB4521A3EFBF0054879D /* HistoryViewController.storyboard */; };
+		6F12E4D522D866E600BC1718 /* MostSearchedShowsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4D322D866E600BC1718 /* MostSearchedShowsHeaderView.xib */; };
+		6F12E4D622D866E600BC1718 /* MostSearchedShowsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4D422D866E600BC1718 /* MostSearchedShowsHeaderView.m */; };
+		6F12E4D722D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4D422D866E600BC1718 /* MostSearchedShowsHeaderView.m */; };
+		6F12E4D822D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4D322D866E600BC1718 /* MostSearchedShowsHeaderView.xib */; };
+		6F12E4D922D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4D422D866E600BC1718 /* MostSearchedShowsHeaderView.m */; };
+		6F12E4DA22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4D322D866E600BC1718 /* MostSearchedShowsHeaderView.xib */; };
+		6F12E4DB22D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4D422D866E600BC1718 /* MostSearchedShowsHeaderView.m */; };
+		6F12E4DC22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4D322D866E600BC1718 /* MostSearchedShowsHeaderView.xib */; };
+		6F12E4DD22D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4D422D866E600BC1718 /* MostSearchedShowsHeaderView.m */; };
+		6F12E4DE22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4D322D866E600BC1718 /* MostSearchedShowsHeaderView.xib */; };
+		6F12E4E222D8676600BC1718 /* SearchHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4DF22D8676300BC1718 /* SearchHeaderView.m */; };
+		6F12E4E322D8676600BC1718 /* SearchHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4DF22D8676300BC1718 /* SearchHeaderView.m */; };
+		6F12E4E422D8676600BC1718 /* SearchHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4DF22D8676300BC1718 /* SearchHeaderView.m */; };
+		6F12E4E522D8676600BC1718 /* SearchHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4DF22D8676300BC1718 /* SearchHeaderView.m */; };
+		6F12E4E622D8676600BC1718 /* SearchHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4DF22D8676300BC1718 /* SearchHeaderView.m */; };
+		6F12E4E722D8676600BC1718 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */; };
+		6F12E4E822D8676600BC1718 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */; };
+		6F12E4E922D8676600BC1718 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */; };
+		6F12E4EA22D8676600BC1718 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */; };
+		6F12E4EB22D8676600BC1718 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */; };
 		6F1484BF1EF7B09400830E7B /* RadioShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1484BE1EF7B09400830E7B /* RadioShowsViewController.m */; };
 		6F1484C01EF7B09400830E7B /* RadioShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1484BE1EF7B09400830E7B /* RadioShowsViewController.m */; };
 		6F1484C11EF7B09400830E7B /* RadioShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1484BE1EF7B09400830E7B /* RadioShowsViewController.m */; };
@@ -1070,16 +1090,6 @@
 		6F9122C11DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6F9122C21DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6F9122C31DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
-		6F92B43922C75872001C7C40 /* TransparentTitleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92B43722C7586F001C7C40 /* TransparentTitleHeaderView.m */; };
-		6F92B43A22C75872001C7C40 /* TransparentTitleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92B43722C7586F001C7C40 /* TransparentTitleHeaderView.m */; };
-		6F92B43B22C75872001C7C40 /* TransparentTitleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92B43722C7586F001C7C40 /* TransparentTitleHeaderView.m */; };
-		6F92B43C22C75872001C7C40 /* TransparentTitleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92B43722C7586F001C7C40 /* TransparentTitleHeaderView.m */; };
-		6F92B43D22C75872001C7C40 /* TransparentTitleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92B43722C7586F001C7C40 /* TransparentTitleHeaderView.m */; };
-		6F92B43E22C75872001C7C40 /* TransparentTitleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F92B43822C7586F001C7C40 /* TransparentTitleHeaderView.xib */; };
-		6F92B43F22C75872001C7C40 /* TransparentTitleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F92B43822C7586F001C7C40 /* TransparentTitleHeaderView.xib */; };
-		6F92B44022C75872001C7C40 /* TransparentTitleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F92B43822C7586F001C7C40 /* TransparentTitleHeaderView.xib */; };
-		6F92B44122C75872001C7C40 /* TransparentTitleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F92B43822C7586F001C7C40 /* TransparentTitleHeaderView.xib */; };
-		6F92B44222C75872001C7C40 /* TransparentTitleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F92B43822C7586F001C7C40 /* TransparentTitleHeaderView.xib */; };
 		6F93963120CA5AF9003ECC1B /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93962420CA5AE1003ECC1B /* NotificationService.m */; };
 		6F93963220CA5AF9003ECC1B /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93962420CA5AE1003ECC1B /* NotificationService.m */; };
 		6F93963320CA5AFA003ECC1B /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93962420CA5AE1003ECC1B /* NotificationService.m */; };
@@ -1885,6 +1895,12 @@
 		6F12DB4321A3EFBF0054879D /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
 		6F12DB4421A3EFBF0054879D /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		6F12DB4521A3EFBF0054879D /* HistoryViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HistoryViewController.storyboard; sourceTree = "<group>"; };
+		6F12E4D222D866E500BC1718 /* MostSearchedShowsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MostSearchedShowsHeaderView.h; sourceTree = "<group>"; };
+		6F12E4D322D866E600BC1718 /* MostSearchedShowsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MostSearchedShowsHeaderView.xib; sourceTree = "<group>"; };
+		6F12E4D422D866E600BC1718 /* MostSearchedShowsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MostSearchedShowsHeaderView.m; sourceTree = "<group>"; };
+		6F12E4DF22D8676300BC1718 /* SearchHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHeaderView.m; sourceTree = "<group>"; };
+		6F12E4E022D8676300BC1718 /* SearchHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHeaderView.h; sourceTree = "<group>"; };
+		6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchHeaderView.xib; sourceTree = "<group>"; };
 		6F1484BD1EF7B09400830E7B /* RadioShowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioShowsViewController.h; sourceTree = "<group>"; };
 		6F1484BE1EF7B09400830E7B /* RadioShowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioShowsViewController.m; sourceTree = "<group>"; };
 		6F19382D1EFBFE7F0017B1D1 /* ApplicationConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApplicationConfiguration.json; sourceTree = "<group>"; };
@@ -2038,9 +2054,6 @@
 		6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoconutKit.framework; path = Carthage/Build/iOS/Static/CoconutKit.framework; sourceTree = "<group>"; };
 		6F9122BD1DC8708400725EEB /* PlayErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayErrors.h; sourceTree = "<group>"; };
 		6F9122BE1DC8708400725EEB /* PlayErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayErrors.m; sourceTree = "<group>"; };
-		6F92B43622C7586F001C7C40 /* TransparentTitleHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentTitleHeaderView.h; sourceTree = "<group>"; };
-		6F92B43722C7586F001C7C40 /* TransparentTitleHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentTitleHeaderView.m; sourceTree = "<group>"; };
-		6F92B43822C7586F001C7C40 /* TransparentTitleHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransparentTitleHeaderView.xib; sourceTree = "<group>"; };
 		6F93962420CA5AE1003ECC1B /* NotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		6F93962520CA5AE1003ECC1B /* NotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
 		6F939F6D2090A1B200D3B0C6 /* NSArray+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+PlaySRG.h"; sourceTree = "<group>"; };
@@ -3033,9 +3046,6 @@
 				6F475FAF1EB37BC6003021EA /* TranslucentTitleHeaderView.h */,
 				6F475FB01EB37BC6003021EA /* TranslucentTitleHeaderView.m */,
 				6F475FB11EB37BC6003021EA /* TranslucentTitleHeaderView.xib */,
-				6F92B43622C7586F001C7C40 /* TransparentTitleHeaderView.h */,
-				6F92B43722C7586F001C7C40 /* TransparentTitleHeaderView.m */,
-				6F92B43822C7586F001C7C40 /* TransparentTitleHeaderView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3424,6 +3434,12 @@
 			isa = PBXGroup;
 			children = (
 				6FF7BB8E22A78DE400FA758A /* Settings */,
+				6F12E4D222D866E500BC1718 /* MostSearchedShowsHeaderView.h */,
+				6F12E4D422D866E600BC1718 /* MostSearchedShowsHeaderView.m */,
+				6F12E4D322D866E600BC1718 /* MostSearchedShowsHeaderView.xib */,
+				6F12E4E022D8676300BC1718 /* SearchHeaderView.h */,
+				6F12E4DF22D8676300BC1718 /* SearchHeaderView.m */,
+				6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */,
 				0832BF0D22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.h */,
 				0832BF0E22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m */,
 				0832BF0F22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib */,
@@ -3899,7 +3915,6 @@
 				0837CECB1D3FD6E600A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				6F3A47B51DD19A8500C79E67 /* SRFResources.xcassets in Resources */,
 				6F628AEE1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.xib in Resources */,
-				6F92B43E22C75872001C7C40 /* TransparentTitleHeaderView.xib in Resources */,
 				6F1938361EFBFEBC0017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F340F4B220DA86B00778CA3 /* SRGUserData.bundle in Resources */,
 				6F1F92AA22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
@@ -3938,6 +3953,7 @@
 				0837CEC41D3FD6E600A1E089 /* FontAwesome.otf in Resources */,
 				6FB0BB4020AEF5D1007C5D87 /* Onboarding.strings in Resources */,
 				08C690DD1D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */,
+				6F12E4E722D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				08C691281D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				6F0F88981ECF0CE50060A893 /* override_artwork_virus.pdf in Resources */,
 				6F0C99972121FBD800073AB6 /* SRGAppearance.bundle in Resources */,
@@ -3959,6 +3975,7 @@
 				6F0F889B1ECF0CE50060A893 /* override_artwork_srf3.pdf in Resources */,
 				6F58664A1DD226EE005DAFE4 /* Settings.bundle in Resources */,
 				08C690501D38E0BE00BB8AAA /* iTunesArtwork in Resources */,
+				6F12E4D522D866E600BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				6FF3B6942137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
 				086F8D5F22984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				08DD9D5A1FFE6EDB00115906 /* ModuleHeaderView.xib in Resources */,
@@ -4021,6 +4038,7 @@
 				6F475FF11EB37BC6003021EA /* TabStripCell.xib in Resources */,
 				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
 				08280F102258EA4000AC978D /* WatchLaterViewController.storyboard in Resources */,
+				6F12E4D822D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				6FF3B6952137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
 				6FF7BBB322A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				E694A9E01D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
@@ -4028,6 +4046,7 @@
 				6F4760051EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				E64BA4001D4A588B002C10D5 /* WebViewController.storyboard in Resources */,
 				6FBF24452148238300E576A2 /* SRGDiagnostics.bundle in Resources */,
+				6F12E4E822D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				081220AF1DD07B7A00BF8326 /* DownloadsViewController.storyboard in Resources */,
 				0837CECF1D3FDAF900A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				6F93DE1420AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
@@ -4037,7 +4056,6 @@
 				08EB37BE1D48B2BC0080EDE4 /* MenuViewController.storyboard in Resources */,
 				6F0C99B12121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				6FA9ECC720C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
-				6F92B43F22C75872001C7C40 /* TransparentTitleHeaderView.xib in Resources */,
 				6F0F88871ECF0CDD0060A893 /* override_artwork_la1ere.pdf in Resources */,
 				0837CED51D3FDAF900A1E089 /* SRGSSRType_Serif_Rg.ttf in Resources */,
 				6F2961FD2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
@@ -4128,9 +4146,9 @@
 				0837CEDD1D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				0804916B22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
 				6FCB57491EC2047B0015CAB7 /* override_artwork_rete_tre.pdf in Resources */,
+				6F12E4DA22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				E694A9E11D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				6F475FF21EB37BC6003021EA /* TabStripCell.xib in Resources */,
-				6F92B44022C75872001C7C40 /* TransparentTitleHeaderView.xib in Resources */,
 				6F0F88371ECEE7800060A893 /* override_default_la2.pdf in Resources */,
 				6F93DE1520AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6F2961FE2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
@@ -4153,6 +4171,7 @@
 				6FA7EC3B20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				084F94B722D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				0837CED71D3FDAFA00A1E089 /* SRGSSRType_Bd.ttf in Resources */,
+				6F12E4E922D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				6FCB574B1EC2047B0015CAB7 /* override_default_rete_due.pdf in Resources */,
 				6F1A95ED216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
 				6F628AF01F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.xib in Resources */,
@@ -4251,7 +4270,6 @@
 				6FF7BBB522A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				6F3B33B01EEEB20400D60789 /* MenuHeaderSectionView.xib in Resources */,
 				0837CEE11D3FDAFA00A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
-				6F92B44122C75872001C7C40 /* TransparentTitleHeaderView.xib in Resources */,
 				082590F71F054ACE00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				0837CEE01D3FDAFA00A1E089 /* SRGSSRType_Bd.ttf in Resources */,
 				6F340F4E220DA87600778CA3 /* SRGUserData.bundle in Resources */,
@@ -4260,9 +4278,11 @@
 				6F0F883F1ECEE78C0060A893 /* override_default_rtr_srf1.pdf in Resources */,
 				0837CEE71D3FDAFA00A1E089 /* SRGSSRType_Serif_Rg.ttf in Resources */,
 				6F0F88411ECEE78C0060A893 /* override_default_rtr_srf2.pdf in Resources */,
+				6F12E4DC22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				6FF3B6972137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
 				6F7C89D220AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				6FBF24472148238300E576A2 /* SRGDiagnostics.bundle in Resources */,
+				6F12E4EA22D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				6FB3C1B01DBCE783008160B4 /* MediaPreviewViewController.storyboard in Resources */,
 				6F0C99902121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
 				6FA9ECC320C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */,
@@ -4357,6 +4377,7 @@
 				08DD9D6B1FFE6EFA00115906 /* ModuleHeaderView.xib in Resources */,
 				081220BB1DD07B7B00BF8326 /* DownloadsViewController.storyboard in Resources */,
 				6F0C99912121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
+				6F12E4EB22D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				0837CEEA1D3FDAFA00A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				6F7C89D320AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				6F4C0A7F20DCBDD200069A85 /* HomeShowVerticalListTableViewCell.xib in Resources */,
@@ -4372,7 +4393,6 @@
 				6F6B643721A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				6FD88F8022D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				6F1A95EF216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
-				6F92B44222C75872001C7C40 /* TransparentTitleHeaderView.xib in Resources */,
 				E6E2DF301D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				6F12DB4F21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
 				082590F91F054ACF00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
@@ -4383,6 +4403,7 @@
 				6F0A7F0920AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6F8181AF22CF396B005AFC46 /* TitleCollectionViewCell.xib in Resources */,
 				08C690901D38E3E600BB8AAA /* LaunchScreen.xib in Resources */,
+				6F12E4DE22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				6F32275D216F2FEC006A785D /* MenuAccountHeaderView.xib in Resources */,
 				6F58664E1DD226EE005DAFE4 /* Settings.bundle in Resources */,
 				08C690861D38E3E600BB8AAA /* iTunesArtwork in Resources */,
@@ -5417,6 +5438,7 @@
 				E66BEC1C1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6F475FC31EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6F475FFF1EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
+				6F12E4E222D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				08EB37AC1D48B1D20080EDE4 /* MenuSectionInfo.m in Sources */,
 				0832BF1022BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				E6E2DF261D6AD32800791EDE /* ShowHeaderView.m in Sources */,
@@ -5430,7 +5452,6 @@
 				E6E2DF1A1D6ACA8B00791EDE /* ShowViewController.m in Sources */,
 				6F475FDC1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				6F475FF51EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
-				6F92B43922C75872001C7C40 /* TransparentTitleHeaderView.m in Sources */,
 				6F0A416F1F6FAB6E000533E7 /* Calendar.m in Sources */,
 				6F475FD21EB37BC6003021EA /* PageViewController.m in Sources */,
 				6F4C673E1EA6115C006A0A3B /* SearchViewController.m in Sources */,
@@ -5559,6 +5580,7 @@
 				6FC8866B1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
 				089EA018201148D70070E11A /* TimerTarget.m in Sources */,
 				089EA011201148180070E11A /* NSTimer+PlaySRG.m in Sources */,
+				6F12E4D622D866E600BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
 				0852539722073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5601,6 +5623,7 @@
 				6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA012201148250070E11A /* NSTimer+PlaySRG.m in Sources */,
+				6F12E4D722D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
 				6F628AEA1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
 				081220C21DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1B20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
@@ -5622,7 +5645,6 @@
 				6FA5D15E1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				08C691361D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
 				6F0A7F0020AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
-				6F92B43A22C75872001C7C40 /* TransparentTitleHeaderView.m in Sources */,
 				6F475FCE1EB37BC6003021EA /* NavigationController.m in Sources */,
 				08C68F951D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41701F6FAB6E000533E7 /* Calendar.m in Sources */,
@@ -5646,6 +5668,7 @@
 				0827DA1F1F0D36E200A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F7218141DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F1484C01EF7B09400830E7B /* RadioShowsViewController.m in Sources */,
+				6F12E4E322D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				6F80E9C321A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91A1FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6F93DE0E20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
@@ -5755,6 +5778,7 @@
 				6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
+				6F12E4D922D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
 				6F628AEB1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
 				081220C31DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1C20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
@@ -5776,7 +5800,6 @@
 				6FA5D15F1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				08C691371D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
 				6F0A7F0120AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
-				6F92B43B22C75872001C7C40 /* TransparentTitleHeaderView.m in Sources */,
 				6F475FCF1EB37BC6003021EA /* NavigationController.m in Sources */,
 				08C68F961D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41711F6FAB6E000533E7 /* Calendar.m in Sources */,
@@ -5800,6 +5823,7 @@
 				0827DA201F0D36E200A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F7218151DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F1484C11EF7B09400830E7B /* RadioShowsViewController.m in Sources */,
+				6F12E4E422D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				6F80E9C421A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91B1FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6F93DE0F20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
@@ -5909,6 +5933,7 @@
 				6F475FB71EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FC1FA8B2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA014201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
+				6F12E4DB22D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
 				6F628AEC1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
 				081220C41DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1D20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
@@ -5930,7 +5955,6 @@
 				6FA5D1601F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				08C691381D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
 				6F0A7F0220AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
-				6F92B43C22C75872001C7C40 /* TransparentTitleHeaderView.m in Sources */,
 				6F475FD01EB37BC6003021EA /* NavigationController.m in Sources */,
 				08C68F971D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41721F6FAB6E000533E7 /* Calendar.m in Sources */,
@@ -5954,6 +5978,7 @@
 				0827DA211F0D36E400A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F7218161DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F1484C21EF7B09400830E7B /* RadioShowsViewController.m in Sources */,
+				6F12E4E522D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				6F80E9C521A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91C1FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6F93DE1020AE985C00B71572 /* OnboardingsViewController.m in Sources */,
@@ -6063,6 +6088,7 @@
 				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA015201148270070E11A /* NSTimer+PlaySRG.m in Sources */,
+				6F12E4DD22D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
 				6F628AED1F149ABA0085A9E3 /* HomeLiveMediaCollectionViewCell.m in Sources */,
 				081220C51DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1E20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
@@ -6084,7 +6110,6 @@
 				6FA5D1611F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				08C691391D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
 				6F0A7F0320AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
-				6F92B43D22C75872001C7C40 /* TransparentTitleHeaderView.m in Sources */,
 				6F475FD11EB37BC6003021EA /* NavigationController.m in Sources */,
 				08C68F981D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41731F6FAB6E000533E7 /* Calendar.m in Sources */,
@@ -6108,6 +6133,7 @@
 				0827DA221F0D36E400A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F7218171DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F1484C31EF7B09400830E7B /* RadioShowsViewController.m in Sources */,
+				6F12E4E622D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				6F80E9C621A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91D1FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6F93DE1120AE985C00B71572 /* OnboardingsViewController.m in Sources */,
