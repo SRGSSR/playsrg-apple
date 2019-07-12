@@ -202,7 +202,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     UINib *headerViewNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.tableView registerNib:headerViewNib forHeaderFooterViewReuseIdentifier:headerIdentifier];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Apply", @"Title of the search settings button to apply settings")
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"OK", @"Title of the search settings button to apply settings")
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(close:)];
