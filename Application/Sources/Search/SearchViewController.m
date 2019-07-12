@@ -242,7 +242,7 @@
     // maximum page size and do not manage pagination for shows. This leads to simple code withoug impacting its usability
     // (the user can still refine the search to get better results, and there are not so many shows anyway).
     if (page.number == 0 && ! applicationConfiguration.showsSearchDisabled) {
-        static const NSUInteger kShowSearchPageSize = 20;
+        static const NSUInteger kShowSearchPageSize = 50;
         
         @weakify(self)
         self.showsRequestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
