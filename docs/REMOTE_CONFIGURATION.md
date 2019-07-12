@@ -96,7 +96,7 @@ A wide list of parameters are available. Some parameters support multiple comma-
 ### Search
 
 * `searchSettingsDisabled` (optional, boolean): Set to `true` to disable support for search settings.
-* `searchSettingSubtitlesEnabled` (optional, boolean): Set to `true` to enable the subtitle search setting.
+* `searchSettingSubtitledEnabled` (optional, boolean): Set to `true` to enable the subtitled option in the search settings.
 * `showsSearchDisabled ` (optional, boolean): Set to `true` to disable show search results.
 
 ### History

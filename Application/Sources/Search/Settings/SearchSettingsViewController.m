@@ -42,7 +42,7 @@ static SearchSettingRowType const SearchSettingRowTypeLastThreeDays = @"last_thr
 static SearchSettingRowType const SearchSettingRowTypeLastWeek = @"last_week";
 static SearchSettingRowType const SearchSettingRowTypeLastMonth = @"last_month";
 static SearchSettingRowType const SearchSettingRowTypeDuration = @"duration";
-static SearchSettingRowType const SearchSettingRowTypeSubtitlesAvailable = @"subtitles_available";
+static SearchSettingRowType const SearchSettingRowTypeSubtitled = @"subtitled";
 static SearchSettingRowType const SearchSettingRowTypeDownloadAvailable = @"download_available";
 static SearchSettingRowType const SearchSettingRowTypePlayableAbroad = @"playable_abroad";
 
@@ -331,8 +331,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
     NSArray<NSString *> *properties = nil;
-    if (applicationConfiguration.searchSettingSubtitlesEnabled) {
-        properties = @[ SearchSettingRowTypeSubtitlesAvailable, SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
+    if (applicationConfiguration.searchSettingSubtitledEnabled) {
+        properties = @[ SearchSettingRowTypeSubtitled, SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
     }
     else {
         properties = @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
@@ -356,7 +356,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                                                       SearchSettingRowTypeLastWeek : SearchSettingSelectorCell.class,
                                                       SearchSettingRowTypeLastMonth : SearchSettingSelectorCell.class,
                                                       SearchSettingRowTypeDuration : SearchSettingSegmentCell.class,
-                                                      SearchSettingRowTypeSubtitlesAvailable : SearchSettingSwitchCell.class,
+                                                      SearchSettingRowTypeSubtitled : SearchSettingSwitchCell.class,
                                                       SearchSettingRowTypeDownloadAvailable : SearchSettingSwitchCell.class,
                                                       SearchSettingRowTypePlayableAbroad : SearchSettingSwitchCell.class };
     Class cellClass = cellClasses[type];
@@ -374,7 +374,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         NSArray<NSString *> *topicBucketURNs = [self.aggregations.topicBuckets valueForKeyPath:@keypath(SRGTopicBucket.new, URN)];
         NSArray<NSString *> *topicURNs = [self.settings.topicURNs play_arrayByIntersectingWithArray:topicBucketURNs];
         
-        NSString *name = NSLocalizedString(@"Categories", @"Categories search setting option");
+        NSString *name = NSLocalizedString(@"Topics", @"Categories search setting option");
         if (topicURNs.count > 0) {
             name = [NSString stringWithFormat:@"%@ (%@ selected)", name, @(topicURNs.count)];
         }
@@ -484,11 +484,11 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
             [self updateResults];
         }];
     }
-    else if ([type isEqualToString:SearchSettingRowTypeSubtitlesAvailable]) {
+    else if ([type isEqualToString:SearchSettingRowTypeSubtitled]) {
         SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
         
         @weakify(self)
-        [switchCell setName:NSLocalizedString(@"Subtitles", @"Download availability toggle name in search settings") reader:^BOOL{
+        [switchCell setName:NSLocalizedString(@"Subtitled", @"Name of the search setting to filter subtitled content") reader:^BOOL{
             return settings.subtitlesAvailable.boolValue;
         } writer:^(BOOL value) {
             @strongify(self)
@@ -501,7 +501,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
         
         @weakify(self)
-        [switchCell setName:NSLocalizedString(@"Available for download", @"Download availability toggle name in search settings") reader:^BOOL{
+        [switchCell setName:NSLocalizedString(@"Downloadable", @"Name of the search setting to filter downloadable content") reader:^BOOL{
             return settings.downloadAvailable.boolValue;
         } writer:^(BOOL value) {
             @strongify(self)
@@ -514,7 +514,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
         
         @weakify(self)
-        [switchCell setName:NSLocalizedString(@"Playable abroad", @"Abroad playability toggle name in search settings") reader:^BOOL{
+        [switchCell setName:NSLocalizedString(@"Playable abroad", @"Name of the search setting to filter content playable abroard") reader:^BOOL{
             return settings.playableAbroad.boolValue;
         } writer:^(BOOL value) {
             @strongify(self)
@@ -528,7 +528,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 - (void)tableView:(UITableView *)tableView didSelectRowWithType:(NSString *)type
 {
     if ([type isEqualToString:SearchSettingRowTypeTopics]) {
-        SearchSettingMultiSelectionViewController *multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Categories", @"Categories search setting option list view title")
+        SearchSettingMultiSelectionViewController *multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Topics", @"Topics search setting option list view title")
                                                                                                                                         identifier:NSStringFromClass(SRGTopicBucket.class)
                                                                                                                                              items:[self.aggregations.topicBuckets valueForKey:@keypath(SRGTopicBucket.new, multiSelectionItem)]
                                                                                                                                     selectedValues:self.settings.topicURNs];
