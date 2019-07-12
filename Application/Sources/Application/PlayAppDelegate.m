@@ -510,24 +510,18 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         canOpen = YES;
         
         NSString *mediaType = [self valueFromURLComponents:URLComponents withParameterName:@"mediaType"];
-        SearchOption searchOption = SearchOptionUnknown;
-        if ([mediaType isEqualToString:@"video"]) {
-            searchOption = SearchOptionVideos;
+        NSNumber *mediaTypeOption = nil;
+        if ([mediaType isEqualToString:@"video"] || [pageURN containsString:@":tv:"]) {
+            mediaTypeOption = @(SRGMediaTypeVideo);
         }
-        else if ([mediaType isEqualToString:@"audio"]) {
-            searchOption = SearchOptionAudios;
-        }
-        else if ([pageURN containsString:@":radio:"] || channelUid) {
-            searchOption = SearchOptionRadioShows;
-        }
-        else if ([pageURN containsString:@":tv:"]) {
-            searchOption = SearchOptionTVShows;
+        else if ([mediaType isEqualToString:@"audio"] || [pageURN containsString:@":radio:"]) {
+            mediaTypeOption = @(SRGMediaTypeAudio);
         }
         
         NSString *query = [self valueFromURLComponents:URLComponents withParameterName:@"query"];
         
         NSMutableDictionary *options = @{}.mutableCopy;
-        options[MenuItemOptionSearchOptionKey] = @(searchOption);
+        options[MenuItemOptionSearchMediaTypeOptionKey] = mediaTypeOption;
         options[MenuItemOptionSearchQueryKey] = query;
         menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch options:options.copy];
     }

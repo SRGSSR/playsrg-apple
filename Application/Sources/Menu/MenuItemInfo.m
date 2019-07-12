@@ -8,7 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 
-MenuItemOptionKey const MenuItemOptionSearchOptionKey = @"MenuItemOptionSearchOption";
+MenuItemOptionKey const MenuItemOptionSearchMediaTypeOptionKey = @"MenuItemOptionSearchMediaTypeOptionKey";
 MenuItemOptionKey const MenuItemOptionSearchQueryKey = @"MenuItemOptionSearchQuery";
 MenuItemOptionKey const MenuItemOptionShowAZIndexKey = @"MenuItemOptionShowAZIndex";
 
