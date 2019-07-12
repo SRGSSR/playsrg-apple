@@ -428,13 +428,14 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     
     id<UIViewControllerPreviewing> previewingViewController = nil;
     
-    // 3D Touch support available, use it
+    // Register for 3D Touch support if available
     // Warning: FLEX lies about 3D touch support. When running the app in the simulator with FLEX linked, the following
     //          condition is always true
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
         previewingViewController = s_registerForPreviewingWithDelegate_sourceView(self, _cmd, previewingDelegate, sourceView);
     }
-    // No 3D Touch support available. Register for a long press if the view controller wants to support it
+    
+    // Register for long-press support if the view controller wants to support it as well (through the dedicated protocol).
     if ([self conformsToProtocol:@protocol(LegacyPreviewingSupport)]) {
         UIGestureRecognizer *longPressGestureRecognizer = hls_getAssociatedObject(sourceView, s_longPressGestureRecognizerKey);
         if (longPressGestureRecognizer) {
@@ -445,6 +446,7 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
         [sourceView addGestureRecognizer:longPressGestureRecognizer];
         hls_setAssociatedObject(sourceView, s_longPressGestureRecognizerKey, longPressGestureRecognizer, HLS_ASSOCIATION_WEAK_NONATOMIC);
     }
+    
     return previewingViewController;
 }
 
