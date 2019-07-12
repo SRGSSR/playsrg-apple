@@ -300,7 +300,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 #pragma mark Type-based table view methods
 
-- (NSArray<NSString *> *)sectionTypesForTableView:(UITableView *)tableView
+- (NSArray<SearchSettingSectionType> *)sectionTypesForTableView:(UITableView *)tableView
 {
     if (SearchSettingsViewController.displaysMediaTypeSelection) {
         return @[ SearchSettingSectionTypeGeneral,
@@ -317,54 +317,54 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSectionWithType:(NSString *)type
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSectionWithType:(SearchSettingSectionType)type
 {
-    NSDictionary<NSString *, NSString *> *titles = @{ SearchSettingSectionTypeMediaType: NSLocalizedString(@"Type", @"Settings section header"),
-                                                      SearchSettingSectionTypePeriod : NSLocalizedString(@"Period", @"Settings section header"),
-                                                      SearchSettingSectionTypeDuration : NSLocalizedString(@"Duration", @"Settings section header"),
-                                                      SearchSettingSectionTypeProperties : NSLocalizedString(@"Properties", @"Settings section header") };
+    NSDictionary<SearchSettingSectionType, NSString *> *titles = @{ SearchSettingSectionTypeMediaType: NSLocalizedString(@"Type", @"Settings section header"),
+                                                                    SearchSettingSectionTypePeriod : NSLocalizedString(@"Period", @"Settings section header"),
+                                                                    SearchSettingSectionTypeDuration : NSLocalizedString(@"Duration", @"Settings section header"),
+                                                                    SearchSettingSectionTypeProperties : NSLocalizedString(@"Properties", @"Settings section header") };
     return titles[type];
 }
 
-- (NSArray<NSString *> *)tableView:(UITableView *)tableView rowTypesInSectionWithType:(NSString *)type
+- (NSArray<SearchSettingRowType> *)tableView:(UITableView *)tableView rowTypesInSectionWithType:(SearchSettingSectionType)type
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
-    NSArray<NSString *> *properties = nil;
+    NSArray<SearchSettingRowType> *propertiesRowTypes = nil;
     if (applicationConfiguration.searchSettingSubtitledEnabled) {
-        properties = @[ SearchSettingRowTypeSubtitled, SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
+        propertiesRowTypes = @[ SearchSettingRowTypeSubtitled, SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
     }
     else {
-        properties = @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
+        propertiesRowTypes = @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
     }
     
-    NSDictionary<NSString *, NSArray<NSString *> *> *types = @{ SearchSettingSectionTypeGeneral : @[ SearchSettingRowTypeTopics, SearchSettingRowTypeShows ],
-                                                                SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
-                                                                SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeLastDay, SearchSettingRowTypeLastThreeDays, SearchSettingRowTypeLastWeek, SearchSettingRowTypeLastMonth ],
-                                                                SearchSettingSectionTypeDuration : @[ SearchSettingRowTypeDuration ],
-                                                                SearchSettingSectionTypeProperties : properties };
+    NSDictionary<SearchSettingSectionType, NSArray<SearchSettingRowType> *> *types = @{ SearchSettingSectionTypeGeneral : @[ SearchSettingRowTypeTopics, SearchSettingRowTypeShows ],
+                                                                                        SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
+                                                                                        SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeLastDay, SearchSettingRowTypeLastThreeDays, SearchSettingRowTypeLastWeek, SearchSettingRowTypeLastMonth ],
+                                                                                        SearchSettingSectionTypeDuration : @[ SearchSettingRowTypeDuration ],
+                                                                                        SearchSettingSectionTypeProperties : propertiesRowTypes };
     return types[type];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowWithType:(NSString *)type atIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowWithType:(SearchSettingRowType)type atIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary<NSString *, Class> *cellClasses = @{ SearchSettingRowTypeTopics : SearchSettingSelectorCell.class,
-                                                      SearchSettingRowTypeShows : SearchSettingSelectorCell.class,
-                                                      SearchSettingRowTypeMediaType : SearchSettingSegmentCell.class,
-                                                      SearchSettingRowTypeLastDay : SearchSettingSelectorCell.class,
-                                                      SearchSettingRowTypeLastThreeDays : SearchSettingSelectorCell.class,
-                                                      SearchSettingRowTypeLastWeek : SearchSettingSelectorCell.class,
-                                                      SearchSettingRowTypeLastMonth : SearchSettingSelectorCell.class,
-                                                      SearchSettingRowTypeDuration : SearchSettingSegmentCell.class,
-                                                      SearchSettingRowTypeSubtitled : SearchSettingSwitchCell.class,
-                                                      SearchSettingRowTypeDownloadAvailable : SearchSettingSwitchCell.class,
-                                                      SearchSettingRowTypePlayableAbroad : SearchSettingSwitchCell.class };
+    NSDictionary<SearchSettingRowType, Class> *cellClasses = @{ SearchSettingRowTypeTopics : SearchSettingSelectorCell.class,
+                                                                SearchSettingRowTypeShows : SearchSettingSelectorCell.class,
+                                                                SearchSettingRowTypeMediaType : SearchSettingSegmentCell.class,
+                                                                SearchSettingRowTypeLastDay : SearchSettingSelectorCell.class,
+                                                                SearchSettingRowTypeLastThreeDays : SearchSettingSelectorCell.class,
+                                                                SearchSettingRowTypeLastWeek : SearchSettingSelectorCell.class,
+                                                                SearchSettingRowTypeLastMonth : SearchSettingSelectorCell.class,
+                                                                SearchSettingRowTypeDuration : SearchSettingSegmentCell.class,
+                                                                SearchSettingRowTypeSubtitled : SearchSettingSwitchCell.class,
+                                                                SearchSettingRowTypeDownloadAvailable : SearchSettingSwitchCell.class,
+                                                                SearchSettingRowTypePlayableAbroad : SearchSettingSwitchCell.class };
     Class cellClass = cellClasses[type];
     NSAssert(cellClass, @"Type must be valid");
     return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(cellClass) forIndexPath:indexPath];
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell withType:(NSString *)type
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell withType:(SearchSettingRowType)type
 {
     SRGMediaSearchSettings *settings = self.settings;
     
@@ -525,7 +525,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowWithType:(NSString *)type
+- (void)tableView:(UITableView *)tableView didSelectRowWithType:(SearchSettingRowType)type
 {
     if ([type isEqualToString:SearchSettingRowTypeTopics]) {
         SearchSettingMultiSelectionViewController *multiSelectionViewController = [[SearchSettingMultiSelectionViewController alloc] initWithTitle:NSLocalizedString(@"Topics", @"Topics search setting option list view title")
@@ -594,14 +594,14 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSString *sectionType = [self sectionTypesForTableView:tableView][section];
+    SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][section];
     return [self tableView:tableView rowTypesInSectionWithType:sectionType].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *sectionType = [self sectionTypesForTableView:tableView][indexPath.section];
-    NSString *rowType = [self tableView:tableView rowTypesInSectionWithType:sectionType][indexPath.row];
+    SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][indexPath.section];
+    SearchSettingRowType rowType = [self tableView:tableView rowTypesInSectionWithType:sectionType][indexPath.row];
     return [self tableView:tableView cellForRowWithType:rowType atIndexPath:indexPath];
 }
 
@@ -609,8 +609,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *sectionType = [self sectionTypesForTableView:tableView][indexPath.section];
-    NSString *rowType = [self tableView:tableView rowTypesInSectionWithType:sectionType][indexPath.row];
+    SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][indexPath.section];
+    SearchSettingRowType rowType = [self tableView:tableView rowTypesInSectionWithType:sectionType][indexPath.row];
     return [self tableView:tableView willDisplayCell:cell withType:rowType];
 }
 
@@ -618,14 +618,14 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *sectionType = [self sectionTypesForTableView:tableView][indexPath.section];
-    NSString *rowType = [self tableView:tableView rowTypesInSectionWithType:sectionType][indexPath.row];
+    SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][indexPath.section];
+    SearchSettingRowType rowType = [self tableView:tableView rowTypesInSectionWithType:sectionType][indexPath.row];
     return [self tableView:tableView didSelectRowWithType:rowType];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    NSString *sectionType = [self sectionTypesForTableView:tableView][section];
+    SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][section];
     NSString *title = [self tableView:tableView titleForHeaderInSectionWithType:sectionType];
     return title.length != 0 ? 60.f : 0.f;
 }
@@ -634,7 +634,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 {
     SearchSettingsHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(SearchSettingsHeaderView.class)];
     
-    NSString *sectionType = [self sectionTypesForTableView:tableView][section];
+    SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][section];
     headerView.title = [self tableView:tableView titleForHeaderInSectionWithType:sectionType];
     
     return headerView;
