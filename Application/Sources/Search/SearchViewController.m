@@ -525,11 +525,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
-    if ([view isKindOfClass:SearchHeaderView.class]) {
+    if ([view isKindOfClass:MostSearchedShowsHeaderView.class]) {
         SearchHeaderView *headerView = (SearchHeaderView *)view;
         headerView.title = NSLocalizedString(@"Most searched shows", @"Most searched shows header");
     }
-    else if ([view isKindOfClass:MostSearchedShowsHeaderView.class]) {
+    else if ([view isKindOfClass:SearchHeaderView.class]) {
         MostSearchedShowsHeaderView *headerView = (MostSearchedShowsHeaderView *)view;
         
         if ([self isDisplayingMediasInSection:indexPath.section]) {
