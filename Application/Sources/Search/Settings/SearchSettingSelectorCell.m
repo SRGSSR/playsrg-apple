@@ -34,9 +34,12 @@
 {
     [super awakeFromNib];
     
-    self.tintColor = UIColor.whiteColor;
-    self.backgroundColor = UIColor.play_popoverGrayColor;
+    UIColor *backgroundColor = UIColor.play_popoverGrayColor;
+    self.backgroundColor = backgroundColor;
     
+    self.tintColor = UIColor.whiteColor;
+    
+    self.nameLabel.backgroundColor = backgroundColor;
     self.nameLabel.textColor = UIColor.whiteColor;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;

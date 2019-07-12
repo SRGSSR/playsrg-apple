@@ -48,7 +48,10 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_popoverGrayColor;
+    UIColor *backgroundColor = UIColor.play_popoverGrayColor;
+    self.backgroundColor = backgroundColor;
+    
+    self.nameLabel.backgroundColor = backgroundColor;
     self.nameLabel.textColor = UIColor.whiteColor;
     
     // Setting a `UISwitch` as accessory view of a cell works just as expected with VoiceOver
