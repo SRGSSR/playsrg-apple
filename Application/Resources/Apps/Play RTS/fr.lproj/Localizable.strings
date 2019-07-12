@@ -22,6 +22,12 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ vues";
 
+/* Less than 5 min option */
+"< 5 min" = "< 5 min";
+
+/* More than 3 min option */
+"> 30 min" = "> 30 min";
+
 /* Short title displayed in home page shows section. */
 "A to Z" = "De A à Z";
 
@@ -38,8 +44,15 @@
    Favorite show label to add it, in the show view */
 "Add to favorites" = "Ajouter aux favoris";
 
+/* All medias scope button
+   All option */
+"All" = "Tout";
+
 /* Title of the first cell of a media list on homepage. */
 "All content" = "Tout le contenu";
+
+/* Title of the search settings button to apply settings */
+"Apply" = "Appliquer";
 
 /* Confirmation message displayed when the user is about to clean all favorites
    Confirmation message displayed when the user is about to clean the watch later list
@@ -58,6 +71,11 @@
 
 /* Introductory text for next program information */
 "At %1$@: %2$@" = "Prochainement à %1$@ : %2$@";
+
+/* Audios option
+   Audios scope button
+   Header for audio search results */
+"Audios" = "Audios";
 
 /* Message title displayed when subscribing to all TV and radio shows
    Message title displayed when the user subscribed to all TV and radio shows */
@@ -83,7 +101,7 @@
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Choisissez une radio régionale";
 
-/* Close button title */
+/* No comment provided by engineer. */
 "Close" = "Fermer";
 
 /* Text displayed on live cells when no program time information is available */
@@ -108,10 +126,16 @@
 /* Introductory title displayed at the top of the onboarding list */
 "Discover" = "Découvrez l'application";
 
+/* Name of the search setting to filter downloadable content */
+"Downloadable" = "Téléchargeable";
+
 /* [Technical] Downloads page type for analytics measurements
    Label in the left menu to present downloads
    Title displayed at the top of the downloads screen */
 "Downloads" = "Téléchargements";
+
+/* Settings section header */
+"Duration" = "Durée";
 
 /* Label for the button keeping autoplay enabled */
 "Enable" = "Activer";
@@ -239,7 +263,7 @@
 "Most recent" = "Les plus récentes";
 
 /* Most searched shows header */
-"Most searched shows" = "Emissions les plus recherchées";
+"Most searched shows" = "Émissions les plus recherchées";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mon compte";
@@ -320,6 +344,12 @@
    Label in the left menu to present the main TV view */
 "Overview" = "Accueil";
 
+/* Settings section header */
+"Period" = "Période";
+
+/* Name of the search setting to filter content playable abroard */
+"Playable abroad" = "Jouable à l'étranger";
+
 /* Notification message when a media is paused due to Handoff activity. */
 "Playback has resumed on another device." = "La lecture a repris sur un autre appareil.";
 
@@ -342,6 +372,9 @@
    Label in the left menu to present programmes by date
    Title displayed at the top of the screen where (radio) episodes can be accessed by date */
 "Programmes by date" = "Émissions par date";
+
+/* Settings section header */
+"Properties" = "Propriétés";
 
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Tirer vers le bas pour recharger";
@@ -401,12 +434,17 @@
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
 
+/* Title of the reset search settings button */
+"Reset" = "Effacer";
+
 /* [Technical] Search page type for analytics measurements
    Label in the left menu to present the search view
-   Placeholder text displayed in the search field when empty (must be not too long)
    Search page title
    Title displayed when there is no search criterium entered */
 "Search" = "Recherche";
+
+/* Search filters page title */
+"Search filters" = "Filtres";
 
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Serveur réglé sur '%@'";
@@ -428,7 +466,9 @@
 /* Label used on a radio home page to present its associated shows
    Label used on a radio home page to present the shows AZ and shows by date access buttons.
    Label used on the TV home page to present the shows AZ and shows by date access buttons.
-   Show search result header */
+   Show search result header
+   Shows search setting option
+   Shows search setting option list view title */
 "Shows" = "Émissions";
 
 /* Title of the button to skip updating the application */
@@ -448,6 +488,9 @@
 
 /* Message description displayed when subscribing to all TV and radio shows */
 "Subscribing to all TV and radio shows…" = "En cours d'abonnement à toutes les émissions TV et radio…";
+
+/* Name of the search setting to filter subtitled content */
+"Subtitled" = "Sous-titré";
 
 /* [Technical] System page type for analytics measurements */
 "System" = "Système";
@@ -476,6 +519,18 @@
 /* Message displayed if the Google Cast receiver cannot play videos */
 "The Google Cast receiver cannot play videos." = "Le récepteur Google Cast ne peut pas lire les vidéos.";
 
+/* Period setting option */
+"The last 24 hours" = "Les dernières 24 heures";
+
+/* Period setting option */
+"The last 3 days" = "Les derniers 3 jours";
+
+/* Period setting option */
+"The last month" = "Le dernier mois";
+
+/* Period setting option */
+"The last week" = "La dernière semaine";
+
 /* Label used on a radio home page to present the latest audios */
 "The latest audios" = "Derniers audios";
 
@@ -501,7 +556,9 @@
 /* Title of the button to go back to the current date */
 "Today" = "Aujourd'hui";
 
-/* Label used on the home page to present topics while loading. It appears if no network connection available and no cache available. */
+/* Categories search setting option
+   Label used on the home page to present topics while loading. It appears if no network connection available and no cache available.
+   Topics search setting option list view title */
 "Topics" = "Catégories";
 
 /* Total space size, display at the bottom of download list */
@@ -520,11 +577,19 @@
 /* Title displayed at the top of the screen where TV episodes can be accessed by date */
 "TV programmes by date" = "Émissions TV par date";
 
+/* Settings section header */
+"Type" = "Type";
+
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Saisissez un critère pour commencer la recherche";
 
 /* Title of the button to update the application */
 "Update" = "Mettre à jour";
+
+/* Header for video search results
+   Videos option
+   Videos scope button */
+"Videos" = "Vidéos";
 
 /* Header for video and audio search results */
 "Videos and audios" = "Vidéos et audios";

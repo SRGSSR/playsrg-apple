@@ -22,6 +22,12 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ visualisaziuns";
 
+/* Less than 5 min option */
+"< 5 min" = "< 5 min";
+
+/* More than 3 min option */
+"> 30 min" = "> 30 min";
+
 /* Short title displayed in home page shows section. */
 "A to Z" = "Dad A fin Z";
 
@@ -38,8 +44,15 @@
    Favorite show label to add it, in the show view */
 "Add to favorites" = "Agiunscher a favurits";
 
+/* All medias scope button
+   All option */
+"All" = "All";
+
 /* Title of the first cell of a media list on homepage. */
 "All content" = "Entir cuntegn";
+
+/* Title of the search settings button to apply settings */
+"Apply" = "Apply";
 
 /* Confirmation message displayed when the user is about to clean all favorites
    Confirmation message displayed when the user is about to clean the watch later list
@@ -58,6 +71,11 @@
 
 /* Introductory text for next program information */
 "At %1$@: %2$@" = "A las %1$@: %2$@";
+
+/* Audios option
+   Audios scope button
+   Header for audio search results */
+"Audios" = "Audios";
 
 /* Message title displayed when subscribing to all TV and radio shows
    Message title displayed when the user subscribed to all TV and radio shows */
@@ -83,7 +101,7 @@
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Selecziunà tes radio regiunal";
 
-/* Close button title */
+/* No comment provided by engineer. */
 "Close" = "Serrar";
 
 /* Text displayed on live cells when no program time information is available */
@@ -108,10 +126,16 @@
 /* Introductory title displayed at the top of the onboarding list */
 "Discover" = "Scuvrir";
 
+/* Name of the search setting to filter downloadable content */
+"Downloadable" = "Downloadable";
+
 /* [Technical] Downloads page type for analytics measurements
    Label in the left menu to present downloads
    Title displayed at the top of the downloads screen */
 "Downloads" = "Telechargiadas";
+
+/* Settings section header */
+"Duration" = "Duration";
 
 /* Label for the button keeping autoplay enabled */
 "Enable" = "Activar";
@@ -320,6 +344,12 @@
    Label in the left menu to present the main TV view */
 "Overview" = "Survista";
 
+/* Settings section header */
+"Period" = "Period";
+
+/* Name of the search setting to filter content playable abroard */
+"Playable abroad" = "Playable abroad";
+
 /* Notification message when a media is paused due to Handoff activity. */
 "Playback has resumed on another device." = "Playback è sin Voss auter apparat.";
 
@@ -342,6 +372,9 @@
    Label in the left menu to present programmes by date
    Title displayed at the top of the screen where (radio) episodes can be accessed by date */
 "Programmes by date" = "Emissiuns tenor data";
+
+/* Settings section header */
+"Properties" = "Properties";
 
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Trair giu per rechargiar";
@@ -401,12 +434,17 @@
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
 
+/* Title of the reset search settings button */
+"Reset" = "Reset";
+
 /* [Technical] Search page type for analytics measurements
    Label in the left menu to present the search view
-   Placeholder text displayed in the search field when empty (must be not too long)
    Search page title
    Title displayed when there is no search criterium entered */
 "Search" = "Tschertga";
+
+/* Search filters page title */
+"Search filters" = "Search filters";
 
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Midà server tar '%@'";
@@ -428,7 +466,9 @@
 /* Label used on a radio home page to present its associated shows
    Label used on a radio home page to present the shows AZ and shows by date access buttons.
    Label used on the TV home page to present the shows AZ and shows by date access buttons.
-   Show search result header */
+   Show search result header
+   Shows search setting option
+   Shows search setting option list view title */
 "Shows" = "Emissiuns";
 
 /* Title of the button to skip updating the application */
@@ -448,6 +488,9 @@
 
 /* Message description displayed when subscribing to all TV and radio shows */
 "Subscribing to all TV and radio shows…" = "Aboneschà las shows da radio e televisiun...";
+
+/* Name of the search setting to filter subtitled content */
+"Subtitled" = "Subtitled";
 
 /* [Technical] System page type for analytics measurements */
 "System" = "Sistem";
@@ -476,6 +519,18 @@
 /* Message displayed if the Google Cast receiver cannot play videos */
 "The Google Cast receiver cannot play videos." = "Receptur Google Cast na po laschar ir videos.";
 
+/* Period setting option */
+"The last 24 hours" = "The last 24 hours";
+
+/* Period setting option */
+"The last 3 days" = "The last 3 days";
+
+/* Period setting option */
+"The last month" = "The last month";
+
+/* Period setting option */
+"The last week" = "The last week";
+
 /* Label used on a radio home page to present the latest audios */
 "The latest audios" = "Ils pli novs audios";
 
@@ -501,7 +556,9 @@
 /* Title of the button to go back to the current date */
 "Today" = "Oz";
 
-/* Label used on the home page to present topics while loading. It appears if no network connection available and no cache available. */
+/* Categories search setting option
+   Label used on the home page to present topics while loading. It appears if no network connection available and no cache available.
+   Topics search setting option list view title */
 "Topics" = "Themas";
 
 /* Total space size, display at the bottom of download list */
@@ -520,11 +577,19 @@
 /* Title displayed at the top of the screen where TV episodes can be accessed by date */
 "TV programmes by date" = "Emissiuns da TV tenor data";
 
+/* Settings section header */
+"Type" = "Type";
+
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Tutgar per tschertgar";
 
 /* Title of the button to update the application */
 "Update" = "Update";
+
+/* Header for video search results
+   Videos option
+   Videos scope button */
+"Videos" = "Videos";
 
 /* Header for video and audio search results */
 "Videos and audios" = "Videos ed audios";
