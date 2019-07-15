@@ -155,6 +155,17 @@
     [self updateSearchSettingsButton];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if ([self play_isMovingToParentViewController]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.searchController.searchBar becomeFirstResponder];
+        });
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
