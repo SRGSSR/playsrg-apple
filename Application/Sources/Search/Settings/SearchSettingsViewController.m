@@ -19,6 +19,7 @@
 #import "UIViewController+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
+#import <SRGAppearance/SRGAppearance.h>
 
 static NSInteger const kLastDay = 1;
 static NSInteger const kLastThreeDays = 3;
@@ -156,12 +157,12 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = UIColor.clearColor;
     self.tableView.separatorColor = UIColor.clearColor;
-    self.tableView.estimatedRowHeight = 44.f;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
     // Remove the space at the top of the grouped table view
     // See https://stackoverflow.com/a/18938763/760435
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.tableView.bounds.size.width, 0.01f)];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.tableView.bounds.size.width, 0.01f)];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -568,11 +569,25 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 #pragma mark UITableViewDelegate protocol
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
+        return 55.f;
+    }
+    else if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategorySmall) == NSOrderedDescending) {
+        return 50.f;
+    }
+    else {
+        return 45.f;
+    }
+}
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][indexPath.section];
     SearchSettingRowType rowType = [self tableView:tableView rowTypesInSectionWithType:sectionType][indexPath.row];
-    return [self tableView:tableView willDisplayCell:cell withType:rowType];
+    [self tableView:tableView willDisplayCell:cell withType:rowType];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -581,14 +596,22 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     
     SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][indexPath.section];
     SearchSettingRowType rowType = [self tableView:tableView rowTypesInSectionWithType:sectionType][indexPath.row];
-    return [self tableView:tableView didSelectRowWithType:rowType];
+    [self tableView:tableView didSelectRowWithType:rowType];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][section];
     NSString *title = [self tableView:tableView titleForHeaderInSectionWithType:sectionType];
-    return title.length != 0 ? 60.f : 0.f;
+    if (title.length != 0) {
+        return 50.f;
+    }
+    else if (section != 0) {
+        return 0.01f;
+    }
+    else {
+        return 0.f;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -599,6 +622,11 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     headerView.title = [self tableView:tableView titleForHeaderInSectionWithType:sectionType];
     
     return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01f;
 }
 
 #pragma mark SearchSettingsMultiSelectionViewControllerDelegate protocol
