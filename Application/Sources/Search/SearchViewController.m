@@ -149,7 +149,7 @@
         self.navigationItem.leftBarButtonItem = closeBarButtonItem;
     }
     else {
-        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.leftBarButtonItem = nil;
     }
     
     [self updateSearchSettingsButton];
@@ -308,6 +308,12 @@
         
         UIImage *image = [SearchViewController containsAdvancedSettings:self.settings] ? [UIImage imageNamed:@"filter_on-22"] : [UIImage imageNamed:@"filter_off-22"];
         [filtersButton setImage:image forState:UIControlStateNormal];
+        
+        // Ensure the frame is correct prior to iOS 11
+        if (@available(iOS 11, *)) {}
+        else {
+            [filtersButton sizeToFit];
+        }
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:filtersButton];
     }
