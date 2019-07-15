@@ -171,14 +171,10 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     UINib *headerViewNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.tableView registerNib:headerViewNib forHeaderFooterViewReuseIdentifier:headerIdentifier];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"OK", @"Title of the search settings button to apply settings")
-                                                                              style:UIBarButtonItemStylePlain
-                                                                             target:self
-                                                                             action:@selector(close:)];
-    
     self.preferredContentSize = CGSizeMake(375.f, 600.f);
     
-    [self updateResetButton];
+    [self updateLeftBarButtonnItems];
+    [self updateRightBarButtonItems];
 }
 
 #pragma mark Rotation
@@ -240,6 +236,16 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     [requestQueue addRequest:request resume:YES];
 }
 
+- (void)refreshDidStart
+{
+    [self updateRightBarButtonItems];
+}
+
+- (void)refreshDidFinishWithError:(NSError *)error
+{
+    [self updateRightBarButtonItems];
+}
+
 #pragma mark Updates
 
 - (void)updateResults
@@ -248,13 +254,13 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     settings.aggregationsEnabled = NO;
     [self.delegate searchSettingsViewController:self didUpdateSettings:settings];
     
-    [self updateResetButton];
+    [self updateLeftBarButtonnItems];
     [self refresh];
 }
 
 #pragma mark UI
 
-- (void)updateResetButton
+- (void)updateLeftBarButtonnItems
 {
     if ([SearchSettingsViewController containsAdvancedSettings:self.settings]) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
@@ -264,6 +270,24 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
     else {
         self.navigationItem.leftBarButtonItem = nil;
+    }
+}
+
+- (void)updateRightBarButtonItems
+{
+    UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"OK", @"Title of the search settings button to apply settings")
+                                                                           style:UIBarButtonItemStylePlain
+                                                                          target:self
+                                                                          action:@selector(close:)];
+    
+    if (self.loading) {
+        UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [activityIndicatorView startAnimating];
+        UIBarButtonItem *activityBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:activityIndicatorView];
+        self.navigationItem.rightBarButtonItems = @[ closeBarButtonItem, activityBarButtonItem ];
+    }
+    else {
+        self.navigationItem.rightBarButtonItems = @[ closeBarButtonItem ];
     }
 }
 
