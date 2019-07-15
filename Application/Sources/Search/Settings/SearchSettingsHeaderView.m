@@ -45,7 +45,7 @@
 
 - (BOOL)isAccessibilityElement
 {
-    return YES;
+    return self.title.length != 0;
 }
 
 - (NSString *)accessibilityLabel
