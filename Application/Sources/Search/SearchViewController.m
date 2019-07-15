@@ -11,6 +11,7 @@
 #import "MostSearchedShowsHeaderView.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
+#import "SearchBar.h"
 #import "SearchHeaderView.h"
 #import "SearchLoadingCollectionViewCell.h"
 #import "SearchSettingsViewController.h"
@@ -112,6 +113,7 @@
     [self.collectionView registerNib:searchHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:searchHeaderIdentifier];
     
     UISearchBar *searchBar = self.searchController.searchBar;
+    object_setClass(searchBar, SearchBar.class);
     searchBar.delegate = self;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     searchBar.play_textField.font = [UIFont srg_regularFontWithSize:18.f];
