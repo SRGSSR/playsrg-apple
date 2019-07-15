@@ -11,6 +11,7 @@
 #import "UIViewController+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
+#import <SRGAppearance/SRGAppearance.h>
 
 @implementation SRGBucket (SearchSettingsBucket)
 
@@ -68,7 +69,6 @@
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = UIColor.clearColor;
     self.tableView.separatorColor = UIColor.clearColor;
-    self.tableView.estimatedRowHeight = 44.f;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
     self.tableView.dataSource = self;
@@ -116,6 +116,20 @@
 }
 
 #pragma mark UITableViewDelegate protocol
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
+        return 55.f;
+    }
+    else if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategorySmall) == NSOrderedDescending) {
+        return 50.f;
+    }
+    else {
+        return 45.f;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
