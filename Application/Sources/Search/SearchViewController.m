@@ -164,6 +164,16 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    if ([self play_isMovingFromParentViewController]) {
+        // Dismiss to avoid retain cycle if the search was entered once, see https://stackoverflow.com/a/33619501/760435
+        [self.searchController dismissViewControllerAnimated:NO completion:nil];
+    }
+}
+
 #pragma mark Rotation
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
