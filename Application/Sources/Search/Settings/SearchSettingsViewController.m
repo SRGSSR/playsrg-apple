@@ -178,11 +178,6 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     
     self.preferredContentSize = CGSizeMake(375.f, 600.f);
     
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(keyboardDidHide:)
-                                               name:UIKeyboardDidHideNotification
-                                             object:nil];
-    
     [self updateResetButton];
 }
 
@@ -659,13 +654,6 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     [self updateResults];
     
     [self.tableView reloadData];
-}
-
-#pragma mark Notifications
-
-- (void)keyboardDidHide:(NSNotification *)notification
-{
-    self.popoverPresentationController.sourceRect = self.popoverPresentationController.sourceView.bounds;
 }
 
 @end
