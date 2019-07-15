@@ -140,7 +140,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (NSString *)title
 {
-    return NSLocalizedString(@"Search filters", @"Search filters page title");
+    return NSLocalizedString(@"Filters", @"Search filters page title");
 }
 
 #pragma mark View lifecycle
