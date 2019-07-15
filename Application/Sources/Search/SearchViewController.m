@@ -282,9 +282,7 @@
 
 - (void)updateSearchSettingsButton
 {
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    
-    if (! applicationConfiguration.searchSettingsDisabled) {
+    if (self.settings) {
         UIImage *image = [SearchViewController containsAdvancedSettings:self.settings] ? [UIImage imageNamed:@"filter_on-22"] : [UIImage imageNamed:@"filter_off-22"];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image
                                                                                   style:UIBarButtonItemStylePlain
