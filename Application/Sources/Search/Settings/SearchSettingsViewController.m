@@ -623,22 +623,10 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (IBAction)resetSettings:(id)sender
 {
-    SRGMediaType previousMediaType = self.settings.mediaType;
-    
     self.settings = [[SRGMediaSearchSettings alloc] init];
-    
-    if (@available(iOS 11, *)) {
-        self.settings.mediaType = previousMediaType;
-    }
-    
     [self updateResults];
     
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        [self.tableView reloadData];
-    }
-    else {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
+    [self.tableView reloadData];
 }
 
 @end
