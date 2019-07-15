@@ -281,7 +281,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSectionWithType:(SearchSettingSectionType)type
 {
-    NSDictionary<SearchSettingSectionType, NSString *> *titles = @{ SearchSettingSectionTypePeriod : NSLocalizedString(@"Period", @"Settings section header"),
+    NSDictionary<SearchSettingSectionType, NSString *> *titles = @{ SearchSettingSectionTypeMediaType : NSLocalizedString(@"Content", @"Settings section header"),
+                                                                    SearchSettingSectionTypePeriod : NSLocalizedString(@"Period", @"Settings section header"),
                                                                     SearchSettingSectionTypeDuration : NSLocalizedString(@"Duration", @"Settings section header"),
                                                                     SearchSettingSectionTypeProperties : NSLocalizedString(@"Properties", @"Settings section header") };
     return titles[type];
