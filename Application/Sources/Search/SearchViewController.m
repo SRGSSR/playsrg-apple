@@ -283,11 +283,23 @@
 - (void)updateSearchSettingsButton
 {
     if (self.settings) {
+        UIButton *filtersButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [filtersButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
+        
+        filtersButton.titleLabel.font = [UIFont srg_mediumFontWithSize:16.f];
+        [filtersButton setTitle:NSLocalizedString(@"Filters", @"Filters button title") forState:UIControlStateNormal];
+        [filtersButton setTitleColor:UIColor.grayColor forState:UIControlStateHighlighted];
+        
+        // See https://stackoverflow.com/a/25559946/760435
+        static const CGFloat kInset = 2.f;
+        filtersButton.imageEdgeInsets = UIEdgeInsetsMake(0.f, -kInset, 0.f, kInset);
+        filtersButton.titleEdgeInsets = UIEdgeInsetsMake(0.f, kInset, 0.f, -kInset);
+        filtersButton.contentEdgeInsets = UIEdgeInsetsMake(0.f, kInset, 0.f, kInset);
+        
         UIImage *image = [SearchViewController containsAdvancedSettings:self.settings] ? [UIImage imageNamed:@"filter_on-22"] : [UIImage imageNamed:@"filter_off-22"];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image
-                                                                                  style:UIBarButtonItemStylePlain
-                                                                                 target:self
-                                                                                 action:@selector(showSettings:)];
+        [filtersButton setImage:image forState:UIControlStateNormal];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:filtersButton];
     }
     else {
         self.navigationItem.rightBarButtonItem = nil;
@@ -596,9 +608,8 @@
     popoverPresentationController.backgroundColor = UIColor.play_popoverGrayColor;
     popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
     
-    UIButton *bookmarkButton = [sender valueForKey:@"view"];
-    popoverPresentationController.sourceView = bookmarkButton;
-    popoverPresentationController.sourceRect = bookmarkButton.bounds;
+    popoverPresentationController.sourceView = sender;
+    popoverPresentationController.sourceRect = [sender bounds];
     
     [self presentViewController:navigationController animated:YES completion:nil];
 }
