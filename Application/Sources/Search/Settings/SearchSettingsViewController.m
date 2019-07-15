@@ -108,43 +108,9 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 + (BOOL)containsAdvancedSettings:(SRGMediaSearchSettings *)settings
 {
-    if (! settings) {
-        return NO;
-    }
-    
+    NSParameterAssert(settings);
     SRGMediaSearchSettings *defaultSettingsAll = [[SRGMediaSearchSettings alloc] init];
-    if ([defaultSettingsAll isEqual:settings]) {
-        return NO;
-    }
-    
-    if (! self.displaysMediaTypeSelection) {
-        SRGMediaSearchSettings *defaultSettingsVideo = [[SRGMediaSearchSettings alloc] init];
-        defaultSettingsVideo.mediaType = SRGMediaTypeVideo;
-        if ([defaultSettingsVideo isEqual:settings]) {
-            return NO;
-        }
-        
-        SRGMediaSearchSettings *defaultSettingsAudio = [[SRGMediaSearchSettings alloc] init];
-        defaultSettingsAudio.mediaType = SRGMediaTypeAudio;
-        if ([defaultSettingsAudio isEqual:settings]) {
-            return NO;
-        }
-    }
-    
-    return YES;
-}
-
-+ (BOOL)displaysMediaTypeSelection
-{
-    // Media type selection is displayed as scope buttons on the main search view for iOS 11 and above. Built-in
-    // support for search bar with scope buttons is namely available since iOS 11 only.
-    if (@available(iOS 11, *)) {
-        return NO;
-    }
-    // For simplicity, we display media type selection on the settings page for iOS versions prior to iOS 10.
-    else {
-        return YES;
-    }
+    return ! [defaultSettingsAll isEqual:settings];
 }
 
 #pragma mark Object lifecycle
@@ -302,19 +268,11 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (NSArray<SearchSettingSectionType> *)sectionTypesForTableView:(UITableView *)tableView
 {
-    if (SearchSettingsViewController.displaysMediaTypeSelection) {
-        return @[ SearchSettingSectionTypeGeneral,
-                  SearchSettingSectionTypeMediaType,
-                  SearchSettingSectionTypePeriod,
-                  SearchSettingSectionTypeDuration,
-                  SearchSettingSectionTypeProperties ];
-    }
-    else {
-        return @[ SearchSettingSectionTypeGeneral,
-                  SearchSettingSectionTypePeriod,
-                  SearchSettingSectionTypeDuration,
-                  SearchSettingSectionTypeProperties ];
-    }
+    return @[ SearchSettingSectionTypeGeneral,
+              SearchSettingSectionTypeMediaType,
+              SearchSettingSectionTypePeriod,
+              SearchSettingSectionTypeDuration,
+              SearchSettingSectionTypeProperties ];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSectionWithType:(SearchSettingSectionType)type

@@ -50,27 +50,7 @@
     
     SRGMediaSearchSettings *defaultSettingsAll = [[SRGMediaSearchSettings alloc] init];
     defaultSettingsAll.aggregationsEnabled = NO;
-    if ([defaultSettingsAll isEqual:settings]) {
-        return NO;
-    }
-    
-    if (! SearchSettingsViewController.displaysMediaTypeSelection) {
-        SRGMediaSearchSettings *defaultSettingsVideo = [[SRGMediaSearchSettings alloc] init];
-        defaultSettingsVideo.aggregationsEnabled = NO;
-        defaultSettingsVideo.mediaType = SRGMediaTypeVideo;
-        if ([defaultSettingsVideo isEqual:settings]) {
-            return NO;
-        }
-        
-        SRGMediaSearchSettings *defaultSettingsAudio = [[SRGMediaSearchSettings alloc] init];
-        defaultSettingsAudio.aggregationsEnabled = NO;
-        defaultSettingsAudio.mediaType = SRGMediaTypeAudio;
-        if ([defaultSettingsAudio isEqual:settings]) {
-            return NO;
-        }
-    }
-    
-    return YES;
+    return ! [defaultSettingsAll isEqual:settings];
 }
 
 #pragma mark Object lifecycle
@@ -82,6 +62,7 @@
         self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
         self.searchController.searchResultsUpdater = self;
         self.searchController.dimsBackgroundDuringPresentation = NO;
+        self.searchController.hidesNavigationBarDuringPresentation = NO;
     }
     return self;
 }
@@ -134,20 +115,6 @@
     searchBar.delegate = self;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     searchBar.play_textField.font = [UIFont srg_regularFontWithSize:18.f];
-    [searchBar setScopeBarButtonTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
-                                           forState:UIControlStateNormal];
-    
-    [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
-                                                                                               forState:UIControlStateNormal];
-    
-    if (! SearchSettingsViewController.displaysMediaTypeSelection) {
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        if (! applicationConfiguration.searchSettingsDisabled) {
-            searchBar.scopeButtonTitles = @[ NSLocalizedString(@"All", @"All medias scope button"),
-                                             NSLocalizedString(@"Videos", @"Videos scope button"),
-                                             NSLocalizedString(@"Audios", @"Audios scope button") ];
-        }
-    }
     
     // Required for proper search bar behavior
     self.definesPresentationContext = YES;
@@ -310,15 +277,15 @@
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
-    UISearchBar *searchBar = self.searchController.searchBar;
     if (! applicationConfiguration.searchSettingsDisabled) {
-        searchBar.showsBookmarkButton = YES;
-        
         UIImage *image = [SearchViewController containsAdvancedSettings:self.settings] ? [UIImage imageNamed:@"filter_on-22"] : [UIImage imageNamed:@"filter_off-22"];
-        [searchBar setImage:image forSearchBarIcon:UISearchBarIconBookmark state:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(showSettings:)];
     }
     else {
-        searchBar.showsBookmarkButton = NO;
+        self.navigationItem.rightBarButtonItem = nil;
     }
 }
 
@@ -362,10 +329,6 @@
     }
     
     self.query = query;
-    
-    if (! SearchSettingsViewController.displaysMediaTypeSelection) {
-        self.settings.mediaType = [self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex];
-    }
     
     self.shows = nil;
     [self.showsRequestQueue cancel];
@@ -634,7 +597,7 @@
     [self updateSearchResultsForSearchController:self.searchController];
 }
 
-- (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
+- (void)showSettings:(id)sender
 {
     SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.query settings:self.settings];
     searchSettingsViewController.delegate = self;
@@ -649,7 +612,7 @@
     popoverPresentationController.backgroundColor = UIColor.play_popoverGrayColor;
     popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
     
-    UIButton *bookmarkButton = searchBar.play_bookmarkButton;
+    UIButton *bookmarkButton = [sender valueForKey:@"view"];
     popoverPresentationController.sourceView = bookmarkButton;
     popoverPresentationController.sourceRect = bookmarkButton.bounds;
     
