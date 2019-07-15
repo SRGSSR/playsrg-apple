@@ -10,7 +10,6 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface HomeShowCollectionViewCell ()
@@ -76,7 +75,7 @@
 {
     [super traitCollectionDidChange:previousTraitCollection];
     
-    [self.nearestViewController registerForPreviewingWithDelegate:self.nearestViewController sourceView:self];
+    [self play_registerForPreview];
 }
 
 #pragma mark Accessibility

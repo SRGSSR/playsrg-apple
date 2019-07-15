@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  *      return `NO`
  *    - Peek-and-pop standard management
  */
-@interface BaseViewController : HLSViewController <LegacyPreviewingSupport, SRGAnalyticsViewTracking, UIViewControllerPreviewingDelegate>
+@interface BaseViewController : HLSViewController <PreviewingDelegate, SRGAnalyticsViewTracking>
 
 @end
 

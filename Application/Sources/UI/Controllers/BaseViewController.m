@@ -39,6 +39,13 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
 
 @implementation BaseViewController
 
+#pragma mark Getters and setters
+
+- (UIViewController *)previewContextViewController
+{
+    return self;
+}
+
 #pragma mark Stubs
 
 - (AnalyticsPageType)pageType
@@ -160,8 +167,9 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
 
 #pragma mark 3D Touch fallback
 
-- (void)showPreviewForSourceView:(UIView *)sourceView
+- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
 {
+    UIView *sourceView = gestureRecognizer.view;
     if (! [sourceView conformsToProtocol:@protocol(Previewing)]) {
         return;
     }

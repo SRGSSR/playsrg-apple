@@ -14,7 +14,6 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <libextobjc/libextobjc.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -87,7 +86,7 @@
 {
     [super traitCollectionDidChange:previousTraitCollection];
     
-    [self.nearestViewController registerForPreviewingWithDelegate:self.nearestViewController sourceView:self];
+    [self play_registerForPreview];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated

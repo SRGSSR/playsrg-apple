@@ -8,6 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
+#import "MostSearchedShowCollectionViewCell.h"
 #import "MostSearchedShowsHeaderView.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
@@ -17,7 +18,6 @@
 #import "SearchSettingsViewController.h"
 #import "SearchShowListCollectionViewCell.h"
 #import "ShowViewController.h"
-#import "TitleCollectionViewCell.h"
 #import "UIColor+PlaySRG.h"
 #import "UISearchBar+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -92,9 +92,9 @@
     UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
     [self.collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
     
-    NSString *titleCellIdentifier = NSStringFromClass(TitleCollectionViewCell.class);
-    UINib *titleCellNib = [UINib nibWithNibName:titleCellIdentifier bundle:nil];
-    [self.collectionView registerNib:titleCellNib forCellWithReuseIdentifier:titleCellIdentifier];
+    NSString *mostSearchedShowCellIdentifier = NSStringFromClass(MostSearchedShowCollectionViewCell.class);
+    UINib *mostSearchedShowCellNib = [UINib nibWithNibName:mostSearchedShowCellIdentifier bundle:nil];
+    [self.collectionView registerNib:mostSearchedShowCellNib forCellWithReuseIdentifier:mostSearchedShowCellIdentifier];
     
     NSString *showListCellIdentifier = NSStringFromClass(SearchShowListCollectionViewCell.class);
     UINib *showListCellNib = [UINib nibWithNibName:showListCellIdentifier bundle:nil];
@@ -116,6 +116,7 @@
     self.searchController.searchResultsUpdater = self;
     self.searchController.dimsBackgroundDuringPresentation = NO;
     self.searchController.hidesNavigationBarDuringPresentation = NO;
+    self.searchController.delegate = self;
     
     UISearchBar *searchBar = self.searchController.searchBar;
     object_setClass(searchBar, SearchBar.class);
@@ -304,6 +305,14 @@
     return [super isLoading] || self.showsRequestQueue.running;
 }
 
+- (UIViewController *)previewContextViewController
+{
+    // The search results controller must be used as previewing context, see https://stackoverflow.com/a/42261971/760435.
+    // If no search results controller is used (`-[UISearchController initWithSearchResultsController:]` called with `nil`),
+    // the search controller must be used instead.
+    return self.searchController.active ? self.searchController : super.previewContextViewController;
+}
+
 #pragma mark UI
 
 - (void)updateSearchSettingsButton
@@ -448,7 +457,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self shouldDisplayMostSearchedShows]) {
-        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(TitleCollectionViewCell.class)
+        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MostSearchedShowCollectionViewCell.class)
                                                          forIndexPath:indexPath];
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
@@ -488,10 +497,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([cell isKindOfClass:TitleCollectionViewCell.class]) {
-        TitleCollectionViewCell *titleCell = (TitleCollectionViewCell *)cell;
+    if ([cell isKindOfClass:MostSearchedShowCollectionViewCell.class]) {
+        MostSearchedShowCollectionViewCell *mostSearchedShowCell = (MostSearchedShowCollectionViewCell *)cell;
         SRGShow *show = self.items[indexPath.row];
-        titleCell.title = show.title;
+        mostSearchedShowCell.show = show;
     }
     else if ([cell isKindOfClass:MediaCollectionViewCell.class]) {
         MediaCollectionViewCell *mediaCell = (MediaCollectionViewCell *)cell;
@@ -644,6 +653,14 @@
     popoverPresentationController.sourceRect = [sender bounds];
     
     [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+#pragma mark UISearchControllerDelegate protocol
+
+- (void)didPresentSearchController:(UISearchController *)searchController
+{
+    // Refresh preview registrations when the search controller has been displayed, see https://stackoverflow.com/a/42261971/760435.
+    [UIView play_updatePreviewRegistrationsInView:self.view];
 }
 
 #pragma mark UISearchResultsUpdating protocol

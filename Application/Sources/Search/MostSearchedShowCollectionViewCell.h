@@ -6,11 +6,13 @@
 
 #import "Previewing.h"
 
+#import <SRGDataProvider/SRGDataProvider.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PreviewingDelegate : NSObject <PreviewingDelegate>
+@interface MostSearchedShowCollectionViewCell : UICollectionViewCell <Previewing>
 
-- (instancetype)initWithRealDelegate:(id<PreviewingDelegate>)realDelegate;
+@property (nonatomic) SRGShow *show;
 
 @end
 

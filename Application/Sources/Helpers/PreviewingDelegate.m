@@ -12,7 +12,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 @interface PreviewingDelegate ()
 
-@property (nonatomic, weak) id<UIViewControllerPreviewingDelegate> realDelegate;
+@property (nonatomic, weak) id<PreviewingDelegate> realDelegate;
 
 @end
 
@@ -20,12 +20,24 @@ static void *s_kvoContext = &s_kvoContext;
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRealDelegate:(id<UIViewControllerPreviewingDelegate>)realDelegate
+- (instancetype)initWithRealDelegate:(id<PreviewingDelegate>)realDelegate
 {
     if (self = [super init]) {
         self.realDelegate = realDelegate;
     }
     return self;
+}
+
+#pragma mark PreviewingDelegate protocol
+
+- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
+{
+    [self.realDelegate handleLongPress:gestureRecognizer];
+}
+
+- (UIViewController *)previewContextViewController
+{
+    return self.realDelegate.previewContextViewController;
 }
 
 #pragma mark UIViewControllerPreviewingDelegate protocol

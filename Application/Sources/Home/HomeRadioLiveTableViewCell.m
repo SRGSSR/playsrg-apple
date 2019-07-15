@@ -158,7 +158,7 @@
 {
     [super traitCollectionDidChange:previousTraitCollection];
     
-    [self.nearestViewController registerForPreviewingWithDelegate:self.nearestViewController sourceView:self];
+    [self play_registerForPreview];
 }
 
 #pragma mark Accessibility

@@ -4,19 +4,19 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "TitleCollectionViewCell.h"
+#import "MostSearchedShowCollectionViewCell.h"
 
 #import "UIColor+PlaySRG.h"
 
 #import <SRGAppearance/SRGAppearance.h>
 
-@interface TitleCollectionViewCell ()
+@interface MostSearchedShowCollectionViewCell ()
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
 @end
 
-@implementation TitleCollectionViewCell
+@implementation MostSearchedShowCollectionViewCell
 
 #pragma mark Overrides
 
@@ -37,14 +37,28 @@
     self.titleLabel.textColor = highlighted ? UIColor.lightGrayColor : UIColor.whiteColor;
 }
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+    
+    [self play_registerForPreview];
+}
+
 #pragma mark Getters and setters
 
-- (void)setTitle:(NSString *)title
+- (void)setShow:(SRGShow *)show
 {
-    _title = title;
+    _show = show;
     
     self.titleLabel.font = [UIFont srg_regularFontWithTextStyle:UIFontTextStyleBody];
-    self.titleLabel.text = title;
+    self.titleLabel.text = show.title;
+}
+
+#pragma mark Previewing protocol
+
+- (id)previewObject
+{
+    return self.show;
 }
 
 @end
