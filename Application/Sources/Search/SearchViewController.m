@@ -64,11 +64,6 @@
             self.settings = [[SRGMediaSearchSettings alloc] init];
             self.settings.aggregationsEnabled = NO;
         }
-        
-        self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-        self.searchController.searchResultsUpdater = self;
-        self.searchController.dimsBackgroundDuringPresentation = NO;
-        self.searchController.hidesNavigationBarDuringPresentation = NO;
     }
     return self;
 }
@@ -116,6 +111,11 @@
     NSString *searchHeaderIdentifier = NSStringFromClass(SearchHeaderView.class);
     UINib *searchHeaderNib = [UINib nibWithNibName:searchHeaderIdentifier bundle:nil];
     [self.collectionView registerNib:searchHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:searchHeaderIdentifier];
+    
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.hidesNavigationBarDuringPresentation = NO;
     
     UISearchBar *searchBar = self.searchController.searchBar;
     object_setClass(searchBar, SearchBar.class);
