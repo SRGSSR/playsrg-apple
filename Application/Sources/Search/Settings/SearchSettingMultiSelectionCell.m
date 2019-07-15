@@ -4,19 +4,19 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "SearchSettingSelectorCell.h"
+#import "SearchSettingMultiSelectionCell.h"
 
 #import "UIColor+PlaySRG.h"
 
 #import <SRGAppearance/SRGAppearance.h>
 
-@interface SearchSettingSelectorCell ()
+@interface SearchSettingMultiSelectionCell ()
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 
 @end
 
-@implementation SearchSettingSelectorCell
+@implementation SearchSettingMultiSelectionCell
 
 #pragma mark Getters and setters
 
@@ -24,7 +24,7 @@
 {
     _name = name;
     
-    self.nameLabel.font = [UIFont srg_regularFontWithTextStyle:UIFontTextStyleBody];
+    self.nameLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     self.nameLabel.text = name;
 }
 
@@ -41,8 +41,20 @@
     
     self.nameLabel.backgroundColor = backgroundColor;
     self.nameLabel.textColor = UIColor.whiteColor;
+}
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
     
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.userInteractionEnabled = YES;
+}
+
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
+{
+    [super setUserInteractionEnabled:userInteractionEnabled];
+    
+    self.nameLabel.enabled = userInteractionEnabled;
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "ApplicationConfiguration.h"
 #import "NSArray+PlaySRG.h"
 #import "SearchSettingsHeaderView.h"
+#import "SearchSettingMultiSelectionCell.h"
 #import "SearchSettingSelectorCell.h"
 #import "SearchSettingSegmentCell.h"
 #import "SearchSettingSwitchCell.h"
@@ -308,8 +309,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowWithType:(SearchSettingRowType)type atIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary<SearchSettingRowType, Class> *cellClasses = @{ SearchSettingRowTypeTopics : SearchSettingSelectorCell.class,
-                                                                SearchSettingRowTypeShows : SearchSettingSelectorCell.class,
+    NSDictionary<SearchSettingRowType, Class> *cellClasses = @{ SearchSettingRowTypeTopics : SearchSettingMultiSelectionCell.class,
+                                                                SearchSettingRowTypeShows : SearchSettingMultiSelectionCell.class,
                                                                 SearchSettingRowTypeMediaType : SearchSettingSegmentCell.class,
                                                                 SearchSettingRowTypeLastDay : SearchSettingSelectorCell.class,
                                                                 SearchSettingRowTypeLastThreeDays : SearchSettingSelectorCell.class,
