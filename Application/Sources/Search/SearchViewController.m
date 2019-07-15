@@ -299,6 +299,11 @@
     return (applicationConfiguration.showsSearchDisabled && self.query.length == 0) ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
 }
 
+- (BOOL)isLoading
+{
+    return [super isLoading] || self.showsRequestQueue.running;
+}
+
 #pragma mark UI
 
 - (void)updateSearchSettingsButton
