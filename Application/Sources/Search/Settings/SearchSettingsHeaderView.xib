@@ -26,7 +26,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;label&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yn-mg-rHU">
-                            <rect key="frame" x="20" y="43" width="560" height="24"/>
+                            <rect key="frame" x="20" y="47" width="560" height="24"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                             <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -36,7 +36,7 @@
                         <constraint firstAttribute="trailing" secondItem="0yn-mg-rHU" secondAttribute="trailing" constant="20" id="Ly7-1n-aNX"/>
                         <constraint firstItem="t89-ZE-1qB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="SfC-Z7-8gI"/>
                         <constraint firstItem="t89-ZE-1qB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bBr-r7-iUx"/>
-                        <constraint firstAttribute="bottom" secondItem="0yn-mg-rHU" secondAttribute="bottom" constant="12" id="od5-ad-0SU"/>
+                        <constraint firstAttribute="bottom" secondItem="0yn-mg-rHU" secondAttribute="bottom" constant="8" id="od5-ad-0SU"/>
                         <constraint firstAttribute="trailing" secondItem="t89-ZE-1qB" secondAttribute="trailing" constant="12" id="sI3-CC-MX8"/>
                     </constraints>
                 </view>

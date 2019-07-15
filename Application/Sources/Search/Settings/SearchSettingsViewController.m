@@ -592,15 +592,30 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
-        return 55.f;
-    }
-    else if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategorySmall) == NSOrderedDescending) {
-        return 50.f;
+    SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][indexPath.section];
+    if (sectionType == SearchSettingSectionTypePeriod) {
+        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+        if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
+            return 45.f;
+        }
+        else if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategorySmall) == NSOrderedDescending) {
+            return 40.f;
+        }
+        else {
+            return 35.f;
+        }
     }
     else {
-        return 45.f;
+        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+        if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
+            return 55.f;
+        }
+        else if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategorySmall) == NSOrderedDescending) {
+            return 50.f;
+        }
+        else {
+            return 45.f;
+        }
     }
 }
 
@@ -628,7 +643,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         return 50.f;
     }
     else if (section != 0) {
-        return 0.01f;
+        return 4.f;
     }
     else {
         return 0.f;
@@ -647,7 +662,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.01f;
+    return 4.f;
 }
 
 #pragma mark SearchSettingsMultiSelectionViewControllerDelegate protocol
