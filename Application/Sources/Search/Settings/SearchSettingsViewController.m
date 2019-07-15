@@ -26,8 +26,9 @@ static NSInteger const kLastMonth = 30;
 
 typedef NSString * SearchSettingSectionType NS_STRING_ENUM;
 
-static SearchSettingSectionType const SearchSettingSectionTypeGeneral = @"general";
 static SearchSettingSectionType const SearchSettingSectionTypeMediaType = @"media_type";
+static SearchSettingSectionType const SearchSettingSectionTypeTopics = @"topics";
+static SearchSettingSectionType const SearchSettingSectionTypeShows = @"shows";
 static SearchSettingSectionType const SearchSettingSectionTypePeriod = @"period";
 static SearchSettingSectionType const SearchSettingSectionTypeDuration = @"duration";
 static SearchSettingSectionType const SearchSettingSectionTypeProperties = @"properties";
@@ -269,7 +270,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 - (NSArray<SearchSettingSectionType> *)sectionTypesForTableView:(UITableView *)tableView
 {
     return @[ SearchSettingSectionTypeMediaType,
-              SearchSettingSectionTypeGeneral,
+              SearchSettingSectionTypeShows,
+              SearchSettingSectionTypeTopics,
               SearchSettingSectionTypePeriod,
               SearchSettingSectionTypeDuration,
               SearchSettingSectionTypeProperties ];
@@ -295,8 +297,9 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         propertiesRowTypes = @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
     }
     
-    NSDictionary<SearchSettingSectionType, NSArray<SearchSettingRowType> *> *types = @{ SearchSettingSectionTypeGeneral : @[ SearchSettingRowTypeTopics, SearchSettingRowTypeShows ],
-                                                                                        SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
+    NSDictionary<SearchSettingSectionType, NSArray<SearchSettingRowType> *> *types = @{ SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
+                                                                                        SearchSettingSectionTypeTopics : @[ SearchSettingRowTypeTopics ],
+                                                                                        SearchSettingSectionTypeShows : @[ SearchSettingRowTypeShows ],
                                                                                         SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeLastDay, SearchSettingRowTypeLastThreeDays, SearchSettingRowTypeLastWeek, SearchSettingRowTypeLastMonth ],
                                                                                         SearchSettingSectionTypeDuration : @[ SearchSettingRowTypeDuration ],
                                                                                         SearchSettingSectionTypeProperties : propertiesRowTypes };
