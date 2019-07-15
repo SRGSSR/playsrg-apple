@@ -109,8 +109,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 + (BOOL)containsAdvancedSettings:(SRGMediaSearchSettings *)settings
 {
     NSParameterAssert(settings);
-    SRGMediaSearchSettings *defaultSettingsAll = [[SRGMediaSearchSettings alloc] init];
-    return ! [defaultSettingsAll isEqual:settings];
+    SRGMediaSearchSettings *basicSettings = [[SRGMediaSearchSettings alloc] init];
+    return ! [basicSettings isEqual:settings];
 }
 
 #pragma mark Object lifecycle

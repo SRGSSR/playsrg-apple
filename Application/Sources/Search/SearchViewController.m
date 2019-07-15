@@ -49,9 +49,9 @@
         return NO;
     }
     
-    SRGMediaSearchSettings *defaultSettingsAll = [[SRGMediaSearchSettings alloc] init];
-    defaultSettingsAll.aggregationsEnabled = NO;
-    return ! [defaultSettingsAll isEqual:settings];
+    SRGMediaSearchSettings *basicSettings = [[SRGMediaSearchSettings alloc] init];
+    basicSettings.aggregationsEnabled = NO;
+    return ! [basicSettings isEqual:settings];
 }
 
 #pragma mark Object lifecycle
@@ -59,7 +59,12 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.settings = [self defaultSettings];
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        if (! applicationConfiguration.searchSettingsDisabled) {
+            self.settings = [[SRGMediaSearchSettings alloc] init];
+            self.settings.aggregationsEnabled = NO;
+        }
+        
         self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
         self.searchController.searchResultsUpdater = self;
         self.searchController.dimsBackgroundDuringPresentation = NO;
@@ -305,32 +310,11 @@
     return [s_mediaTypes[@(index)] integerValue];
 }
 
-- (SRGMediaSearchSettings *)defaultSettings
-{
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    if (! applicationConfiguration.searchSettingsDisabled) {
-        SRGMediaSearchSettings *settings = [[SRGMediaSearchSettings alloc] init];
-        settings.aggregationsEnabled = NO;
-        return settings;
-    }
-    else {
-        return nil;
-    }
-}
-
 #pragma mark Search
 
 - (void)search
 {
-    UISearchBar *searchBar = self.searchController.searchBar;
-    NSString *query = searchBar.text;
-    
-    // Reset settings when the search query is cleared
-    if (query.length == 0 && self.query.length != 0) {
-        self.settings = [self defaultSettings];
-    }
-    
-    self.query = query;
+    self.query = self.searchController.searchBar.text;
     
     self.shows = nil;
     [self.showsRequestQueue cancel];
