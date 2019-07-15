@@ -145,9 +145,7 @@
         self.selectedvalues = selectedvalues.copy;
     }
     
-    if (self.delegate) {
-        [self.delegate searchSettingMultiSelectionViewController:self didUpdateSelectedValues:self.selectedvalues.copy];
-    }
+    [self.delegate searchSettingMultiSelectionViewController:self didUpdateSelectedValues:self.selectedvalues.copy];
     
     [self.tableView reloadData];
 }

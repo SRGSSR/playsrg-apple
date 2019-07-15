@@ -13,6 +13,7 @@
 @interface SearchSettingMultiSelectionCell ()
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *valuesLabel;
 
 @end
 
@@ -20,12 +21,13 @@
 
 #pragma mark Getters and setters
 
-- (void)setName:(NSString *)name
+- (void)setName:(NSString *)name values:(NSArray<NSString *> *)values
 {
-    _name = name;
-    
     self.nameLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     self.nameLabel.text = name;
+    
+    self.valuesLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.valuesLabel.text = [values componentsJoinedByString:@", "];
 }
 
 #pragma mark Overrides
@@ -41,6 +43,9 @@
     
     self.nameLabel.backgroundColor = backgroundColor;
     self.nameLabel.textColor = UIColor.whiteColor;
+    
+    self.valuesLabel.backgroundColor = backgroundColor;
+    self.valuesLabel.textColor = UIColor.grayColor;
 }
 
 - (void)prepareForReuse
@@ -55,6 +60,7 @@
     [super setUserInteractionEnabled:userInteractionEnabled];
     
     self.nameLabel.enabled = userInteractionEnabled;
+    self.valuesLabel.hidden = ! userInteractionEnabled;
 }
 
 @end

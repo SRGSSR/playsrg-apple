@@ -87,23 +87,33 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;name&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozp-x3-azV">
-                                                    <rect key="frame" x="20" y="12" width="374" height="19.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="&lt;name&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozp-x3-azV">
+                                                    <rect key="frame" x="20" y="12" width="64" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;values&gt;" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKK-IF-bYs">
+                                                    <rect key="frame" x="96" y="12" width="298" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ozp-x3-azV" firstAttribute="leading" secondItem="ZPh-29-Fjr" secondAttribute="leading" constant="20" id="05Z-Xp-KFb"/>
-                                                <constraint firstAttribute="trailing" secondItem="ozp-x3-azV" secondAttribute="trailing" constant="20" id="o0f-5A-8wy"/>
+                                                <constraint firstItem="MKK-IF-bYs" firstAttribute="leading" secondItem="ozp-x3-azV" secondAttribute="trailing" constant="12" id="K9m-eH-8X4"/>
+                                                <constraint firstItem="MKK-IF-bYs" firstAttribute="top" secondItem="ZPh-29-Fjr" secondAttribute="top" constant="12" id="M0S-hu-a3O"/>
+                                                <constraint firstAttribute="bottom" secondItem="MKK-IF-bYs" secondAttribute="bottom" constant="12" id="M0u-h3-WkB"/>
                                                 <constraint firstItem="ozp-x3-azV" firstAttribute="top" secondItem="ZPh-29-Fjr" secondAttribute="top" constant="12" id="qFI-WR-H99"/>
                                                 <constraint firstAttribute="bottom" secondItem="ozp-x3-azV" secondAttribute="bottom" constant="12" id="rou-sk-I8O"/>
+                                                <constraint firstAttribute="trailing" secondItem="MKK-IF-bYs" secondAttribute="trailing" constant="20" id="u6t-gB-ZeC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <connections>
                                             <outlet property="nameLabel" destination="ozp-x3-azV" id="Emk-EC-bum"/>
+                                            <outlet property="valuesLabel" destination="MKK-IF-bYs" id="qpY-b5-4pX"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchSettingSwitchCell" id="fk7-Wt-ctv" customClass="SearchSettingSwitchCell">

@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchSettingMultiSelectionCell : UITableViewCell
 
-@property (nonatomic, copy) NSString *name;
+- (void)setName:(nullable NSString *)name values:(nullable NSArray<NSString *> *)values;
 
 @end
 

@@ -332,36 +332,32 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     SRGMediaSearchSettings *settings = self.settings;
     
     if ([type isEqualToString:SearchSettingRowTypeTopics]) {
-        SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
+        SearchSettingMultiSelectionCell *multiSelectionCell = (SearchSettingMultiSelectionCell *)cell;
         
         NSArray<NSString *> *topicBucketURNs = [self.aggregations.topicBuckets valueForKeyPath:@keypath(SRGTopicBucket.new, URN)];
-        NSArray<NSString *> *topicURNs = [self.settings.topicURNs play_arrayByIntersectingWithArray:topicBucketURNs];
-        
-        NSString *name = NSLocalizedString(@"Topics", @"Categories search setting option");
-        if (topicURNs.count > 0) {
-            name = [NSString stringWithFormat:@"%@ (%@ selected)", name, @(topicURNs.count)];
-        }
-        selectorCell.name = name;
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGTopicBucket * _Nullable bucket, NSDictionary<NSString *,id> * _Nullable bindings) {
+            return [self.settings.topicURNs containsObject:bucket.URN];
+        }];
+        NSArray<NSString *> *topicNames = [[[self.aggregations.topicBuckets filteredArrayUsingPredicate:predicate] valueForKeyPath:@keypath(SRGTopicBucket.new, title)] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        [multiSelectionCell setName:NSLocalizedString(@"Topics", @"Categories search setting option") values:topicNames];
         
         BOOL enabled = (topicBucketURNs.count > 0);
-        selectorCell.userInteractionEnabled = enabled;
-        selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+        multiSelectionCell.userInteractionEnabled = enabled;
+        multiSelectionCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     }
     else if ([type isEqualToString:SearchSettingRowTypeShows]) {
-        SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
+        SearchSettingMultiSelectionCell *multiSelectionCell = (SearchSettingMultiSelectionCell *)cell;
         
         NSArray<NSString *> *showBucketURNs = [self.aggregations.showBuckets valueForKeyPath:@keypath(SRGShowBucket.new, URN)];
-        NSArray<NSString *> *showURNs = [self.settings.showURNs play_arrayByIntersectingWithArray:showBucketURNs];
-        
-        NSString *name = NSLocalizedString(@"Shows", @"Shows search setting option");
-        if (showURNs.count > 0) {
-            name = [NSString stringWithFormat:@"%@ (%@ selected)", name, @(showURNs.count)];
-        }
-        selectorCell.name = name;
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGShowBucket * _Nullable bucket, NSDictionary<NSString *,id> * _Nullable bindings) {
+            return [self.settings.showURNs containsObject:bucket.URN];
+        }];
+        NSArray<NSString *> *showNames = [[[self.aggregations.showBuckets filteredArrayUsingPredicate:predicate] valueForKeyPath:@keypath(SRGTopicBucket.new, title)] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        [multiSelectionCell setName:NSLocalizedString(@"Shows", @"Shows search setting option") values:showNames];
         
         BOOL enabled = (showBucketURNs.count > 0);
-        selectorCell.userInteractionEnabled = enabled;
-        selectorCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+        multiSelectionCell.userInteractionEnabled = enabled;
+        multiSelectionCell.accessoryType = enabled ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     }
     else if ([type isEqualToString:SearchSettingRowTypeMediaType]) {
         SearchSettingSegmentCell *segmentCell = (SearchSettingSegmentCell *)cell;
@@ -642,8 +638,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         self.settings.showURNs = selectedValues;
         [self updateResults];
     }
-    
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadData];
 }
 
 #pragma mark Actions
