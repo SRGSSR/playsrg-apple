@@ -29,16 +29,16 @@ static NSInteger const kLastMonth = 30;
 typedef NSString * SearchSettingSectionType NS_STRING_ENUM;
 
 static SearchSettingSectionType const SearchSettingSectionTypeMediaType = @"media_type";
-static SearchSettingSectionType const SearchSettingSectionTypeTopics = @"topics";
 static SearchSettingSectionType const SearchSettingSectionTypeShows = @"shows";
+static SearchSettingSectionType const SearchSettingSectionTypeTopics = @"topics";
 static SearchSettingSectionType const SearchSettingSectionTypePeriod = @"period";
 static SearchSettingSectionType const SearchSettingSectionTypeDuration = @"duration";
 static SearchSettingSectionType const SearchSettingSectionTypeProperties = @"properties";
 
 typedef NSString * SearchSettingRowType NS_STRING_ENUM;
 
-static SearchSettingRowType const SearchSettingRowTypeTopics = @"topics";
 static SearchSettingRowType const SearchSettingRowTypeShows = @"shows";
+static SearchSettingRowType const SearchSettingRowTypeTopics = @"topics";
 static SearchSettingRowType const SearchSettingRowTypeMediaType = @"media_type";
 static SearchSettingRowType const SearchSettingRowTypeLastDay = @"last_day";
 static SearchSettingRowType const SearchSettingRowTypeLastThreeDays = @"last_three_days";
@@ -325,8 +325,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
     
     NSDictionary<SearchSettingSectionType, NSArray<SearchSettingRowType> *> *types = @{ SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
-                                                                                        SearchSettingSectionTypeTopics : @[ SearchSettingRowTypeTopics ],
                                                                                         SearchSettingSectionTypeShows : @[ SearchSettingRowTypeShows ],
+                                                                                        SearchSettingSectionTypeTopics : @[ SearchSettingRowTypeTopics ],
                                                                                         SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeLastDay, SearchSettingRowTypeLastThreeDays, SearchSettingRowTypeLastWeek, SearchSettingRowTypeLastMonth ],
                                                                                         SearchSettingSectionTypeDuration : @[ SearchSettingRowTypeDuration ],
                                                                                         SearchSettingSectionTypeProperties : propertiesRowTypes };
@@ -335,8 +335,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowWithType:(SearchSettingRowType)type atIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary<SearchSettingRowType, Class> *cellClasses = @{ SearchSettingRowTypeTopics : SearchSettingMultiSelectionCell.class,
-                                                                SearchSettingRowTypeShows : SearchSettingMultiSelectionCell.class,
+    NSDictionary<SearchSettingRowType, Class> *cellClasses = @{ SearchSettingRowTypeShows : SearchSettingMultiSelectionCell.class,
+                                                                SearchSettingRowTypeTopics : SearchSettingMultiSelectionCell.class,
                                                                 SearchSettingRowTypeMediaType : SearchSettingSegmentCell.class,
                                                                 SearchSettingRowTypeLastDay : SearchSettingSelectorCell.class,
                                                                 SearchSettingRowTypeLastThreeDays : SearchSettingSelectorCell.class,
