@@ -149,8 +149,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
 {
     if ([viewControllerToCommit isKindOfClass:MediaPreviewViewController.class]) {
         MediaPreviewViewController *mediaPreviewViewController = (MediaPreviewViewController *)viewControllerToCommit;
-        UIView *sourceView = previewingContext.sourceView;
-        [sourceView.nearestViewController play_presentMediaPlayerFromLetterboxController:mediaPreviewViewController.letterboxController fromPushNotification:NO animated:YES completion:nil];
+        [self play_presentMediaPlayerFromLetterboxController:mediaPreviewViewController.letterboxController fromPushNotification:NO animated:YES completion:nil];
     }
     else if ([viewControllerToCommit isKindOfClass:ModuleViewController.class]
                 || [viewControllerToCommit isKindOfClass:ShowViewController.class]
