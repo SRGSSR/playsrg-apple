@@ -26,7 +26,7 @@
 
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic) NSArray<SearchSettingsMultiSelectionItem *> *items;
-@property (nonatomic) NSArray<NSString *> *selectedvalues;
+@property (nonatomic) NSArray<NSString *> *selectedValues;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
@@ -36,13 +36,13 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(nullable NSArray<NSString *> *)selectedvalues
+- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(nullable NSArray<NSString *> *)selectedValues
 {
     if (self = [super init]) {
         self.title = title;
         self.identifier = identifier;
         self.items = items;
-        self.selectedvalues = selectedvalues;
+        self.selectedValues = selectedValues;
     }
     return self;
 }
@@ -135,7 +135,7 @@
 {
     SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
     selectorCell.name = [NSString stringWithFormat:@"%@ (%@)", self.items[indexPath.row].name, [NSNumberFormatter localizedStringFromNumber:@(self.items[indexPath.row].count) numberStyle:NSNumberFormatterDecimalStyle]];
-    selectorCell.accessoryType = ([self.selectedvalues containsObject:self.items[indexPath.row].value]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    selectorCell.accessoryType = ([self.selectedValues containsObject:self.items[indexPath.row].value]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,23 +143,23 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     SearchSettingsMultiSelectionItem *item = self.items[indexPath.row];
-    if ([self.selectedvalues containsObject:item.value]) {
-        NSMutableArray *selectedvalues = self.selectedvalues.mutableCopy;
+    if ([self.selectedValues containsObject:item.value]) {
+        NSMutableArray *selectedvalues = self.selectedValues.mutableCopy;
         [selectedvalues removeObject:item.value];
-        self.selectedvalues = (selectedvalues.count > 0) ? selectedvalues.copy : nil;
+        self.selectedValues = (selectedvalues.count > 0) ? selectedvalues.copy : nil;
     }
     else {
-        NSMutableArray *selectedvalues = self.selectedvalues ? self.selectedvalues.mutableCopy : @[].mutableCopy;
+        NSMutableArray *selectedvalues = self.selectedValues ? self.selectedValues.mutableCopy : @[].mutableCopy;
         [selectedvalues addObject:item.value];
         
         NSArray<NSString *> *itemValues = [self.items valueForKey:@keypath(SearchSettingsMultiSelectionItem.new, value)];
         [selectedvalues sortUsingComparator:^NSComparisonResult(NSString *value1, NSString *value2) {
             return [@([itemValues indexOfObject:value1]) compare:@([itemValues indexOfObject:value2])];
         }];
-        self.selectedvalues = selectedvalues.copy;
+        self.selectedValues = selectedvalues.copy;
     }
     
-    [self.delegate searchSettingMultiSelectionViewController:self didUpdateSelectedValues:self.selectedvalues.copy];
+    [self.delegate searchSettingMultiSelectionViewController:self didUpdateSelectedValues:self.selectedValues.copy];
     
     [self.tableView reloadData];
 }

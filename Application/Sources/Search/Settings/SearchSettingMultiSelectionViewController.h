@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchSettingMultiSelectionViewController : DataViewController <UITableViewDataSource, UITableViewDelegate>
 
-- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(nullable NSArray<NSString *> *)selectedvalues;
+- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(nullable NSArray<NSString *> *)selectedValues;
 
 @property (nonatomic, readonly, copy) NSString *identifier;
 
