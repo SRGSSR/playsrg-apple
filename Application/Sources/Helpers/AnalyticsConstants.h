@@ -150,9 +150,14 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemoveAll;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteOpen;
 
 /**
- *  Title for events related to the search
+ *  Title for events related to opening a media or show from search result
  */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSearch;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSearchOpen;
+
+/**
+ *  Title for events related to opening a media or show from search teaser
+ */
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSearchTeaserOpen;
 
 /**
  *  Title for events related to opening a user activity

@@ -571,10 +571,20 @@
         SRGShow *show = self.items[indexPath.row];
         ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
         [self.navigationController pushViewController:showViewController animated:YES];
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.value = show.URN;
+        labels.type = AnalyticsTypeActionDisplayShow;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSearchTeaserOpen labels:labels];
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
         SRGMedia *media = self.items[indexPath.row];
         [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.value = media.URN;
+        labels.type = AnalyticsTypeActionPlayMedia;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSearchOpen labels:labels];
     }
 }
 
