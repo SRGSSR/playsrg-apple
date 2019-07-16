@@ -354,8 +354,9 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     
     UIPopoverPresentationController *popoverPresentationController = alertController.popoverPresentationController;
     popoverPresentationController.sourceView = sourceView;
-    popoverPresentationController.sourceRect = sourceView.bounds;
     
+    NSValue *previewAnchorRect = [sourceView respondsToSelector:@selector(previewAnchorRect)] ? [(id<Previewing>)sourceView previewAnchorRect] : nil;
+    popoverPresentationController.sourceRect = previewAnchorRect ? previewAnchorRect.CGRectValue : sourceView.bounds;
     [self presentViewController:alertController animated:YES completion:nil];
 }
 

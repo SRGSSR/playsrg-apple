@@ -327,6 +327,12 @@
     return (! self.editing) ? self.media : nil;
 }
 
+- (NSValue *)previewAnchorRect
+{
+    CGRect imageViewFrameInSelf = [self.thumbnailImageView convertRect:self.thumbnailImageView.bounds toView:self];
+    return [NSValue valueWithCGRect:imageViewFrameInSelf];
+}
+
 #pragma mark Notificationsfa
 
 - (void)downloadStateDidChange:(NSNotification *)notification

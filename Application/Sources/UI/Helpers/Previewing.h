@@ -18,6 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly) id previewObject;
 
+@optional
+
+/**
+ *  The rect where the long-press popover will be anchored in the source view. If `nil` or not implemented, the entire
+ *  source view rect is used.
+ */
+@property (nonatomic, readonly, nullable) NSValue *previewAnchorRect;
+
 @end
 
 @protocol PreviewingDelegate <UIViewControllerPreviewingDelegate>

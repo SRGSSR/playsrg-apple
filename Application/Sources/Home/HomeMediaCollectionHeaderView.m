@@ -164,6 +164,12 @@
     return self.homeSectionInfo.module ?: self.homeSectionInfo.topic;
 }
 
+- (NSValue *)previewAnchorRect
+{
+    CGRect imageViewFrameInSelf = [self.thumbnailImageView convertRect:self.thumbnailImageView.bounds toView:self];
+    return [NSValue valueWithCGRect:imageViewFrameInSelf];
+}
+
 #pragma mark Actions
 
 - (IBAction)openMediaList:(id)sender

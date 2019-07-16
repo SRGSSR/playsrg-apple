@@ -335,6 +335,12 @@
     return self.media;
 }
 
+- (NSValue *)previewAnchorRect
+{
+    CGRect imageViewFrameInSelf = [self.thumbnailImageView convertRect:self.thumbnailImageView.bounds toView:self];
+    return [NSValue valueWithCGRect:imageViewFrameInSelf];
+}
+
 #pragma mark Actions
 
 - (IBAction)selectLivestreamMedia:(id)sender
