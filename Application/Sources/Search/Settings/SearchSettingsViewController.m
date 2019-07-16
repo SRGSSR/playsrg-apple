@@ -173,7 +173,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     
     self.preferredContentSize = CGSizeMake(375.f, 600.f);
     
-    [self updateLeftBarButtonnItems];
+    [self updateLeftBarButtonItems];
     [self updateRightBarButtonItems];
 }
 
@@ -254,13 +254,13 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     settings.aggregationsEnabled = NO;
     [self.delegate searchSettingsViewController:self didUpdateSettings:settings];
     
-    [self updateLeftBarButtonnItems];
+    [self updateLeftBarButtonItems];
     [self refresh];
 }
 
 #pragma mark UI
 
-- (void)updateLeftBarButtonnItems
+- (void)updateLeftBarButtonItems
 {
     if ([SearchSettingsViewController containsAdvancedSettings:self.settings]) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reset", @"Title of the reset search settings button")
