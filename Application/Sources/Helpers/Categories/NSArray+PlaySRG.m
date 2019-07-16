@@ -29,15 +29,4 @@
     return [mutableArray copy];
 }
 
-- (NSArray *)play_arrayByIntersectingWithArray:(NSArray *)array
-{
-    if (! array) {
-        return @[];
-    }
-    
-    NSMutableOrderedSet *set = [NSMutableOrderedSet orderedSetWithArray:self];
-    [set intersectSet:[NSSet setWithArray:array]];
-    return set.array;
-}
-
 @end

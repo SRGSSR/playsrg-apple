@@ -13,15 +13,6 @@
 #import <libextobjc/libextobjc.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-@implementation SRGBucket (SearchSettingsBucket)
-
-- (NSString *)title
-{
-    return [self respondsToSelector:@selector(title)] ? [self performSelector:@selector(title)] : nil;
-}
-
-@end
-
 @interface SearchSettingMultiSelectionViewController ()
 
 @property (nonatomic, copy) NSString *identifier;
