@@ -20,8 +20,7 @@
 
 - (instancetype)initWithName:(NSString *)name value:(NSString *)value count:(NSInteger)count
 {
-    self = [super init];
-    if (self) {
+    if (self = [super init]) {
         self.name = name;
         self.value = value;
         self.count = count;

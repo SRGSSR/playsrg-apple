@@ -6,6 +6,7 @@
 
 #import "SearchSettingMultiSelectionViewController.h"
 
+#import "NSArray+PlaySRG.h"
 #import "SearchSettingSelectorCell.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -33,7 +34,7 @@
         self.title = title;
         self.identifier = identifier;
         self.items = items;
-        self.selectedValues = selectedValues;
+        self.selectedValues = selectedValues ?: @[];
     }
     return self;
 }
@@ -91,11 +92,6 @@
 
 #pragma mark UITableViewDataSource protocol
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.items.count;
@@ -122,11 +118,11 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(SearchSettingSelectorCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
-    selectorCell.name = [NSString stringWithFormat:@"%@ (%@)", self.items[indexPath.row].name, [NSNumberFormatter localizedStringFromNumber:@(self.items[indexPath.row].count) numberStyle:NSNumberFormatterDecimalStyle]];
-    selectorCell.accessoryType = ([self.selectedValues containsObject:self.items[indexPath.row].value]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    SearchSettingsMultiSelectionItem *item = self.items[indexPath.row];
+    cell.name = [NSString stringWithFormat:@"%@ (%@)", item.name, [NSNumberFormatter localizedStringFromNumber:@(item.count) numberStyle:NSNumberFormatterDecimalStyle]];
+    cell.accessoryType = [self.selectedValues containsObject:item.value] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -135,22 +131,13 @@
     
     SearchSettingsMultiSelectionItem *item = self.items[indexPath.row];
     if ([self.selectedValues containsObject:item.value]) {
-        NSMutableArray *selectedvalues = self.selectedValues.mutableCopy;
-        [selectedvalues removeObject:item.value];
-        self.selectedValues = (selectedvalues.count > 0) ? selectedvalues.copy : nil;
+        self.selectedValues = [self.selectedValues play_arrayByRemovingObjectsInArray:@[ item.value ]];
     }
     else {
-        NSMutableArray *selectedvalues = self.selectedValues ? self.selectedValues.mutableCopy : @[].mutableCopy;
-        [selectedvalues addObject:item.value];
-        
-        NSArray<NSString *> *itemValues = [self.items valueForKey:@keypath(SearchSettingsMultiSelectionItem.new, value)];
-        [selectedvalues sortUsingComparator:^NSComparisonResult(NSString *value1, NSString *value2) {
-            return [@([itemValues indexOfObject:value1]) compare:@([itemValues indexOfObject:value2])];
-        }];
-        self.selectedValues = selectedvalues.copy;
+        self.selectedValues = [self.selectedValues arrayByAddingObject:item.value];
     }
     
-    [self.delegate searchSettingMultiSelectionViewController:self didUpdateSelectedValues:self.selectedValues.copy];
+    [self.delegate searchSettingMultiSelectionViewController:self didUpdateSelectedValues:self.selectedValues];
     
     [self.tableView reloadData];
 }
