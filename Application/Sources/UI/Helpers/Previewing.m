@@ -20,6 +20,21 @@ static void *s_previewingHandleKey = &s_previewingHandleKey;
 
 @implementation UIView (Previewing)
 
+#pragma mark Class methods
+
++ (void)play_updatePreviewRegistrationsInView:(UIView *)view
+{
+    if (view.previewingHandle) {
+        [view play_registerForPreview];
+    }
+    
+    for (UIView *subview in view.subviews) {
+        [self play_updatePreviewRegistrationsInView:subview];
+    }
+}
+
+#pragma mark Getters and setters
+
 - (UIViewController *)previewContextViewController
 {
     return hls_getAssociatedObject(self, s_previewContextViewControllerKey);
@@ -52,16 +67,7 @@ static void *s_previewingHandleKey = &s_previewingHandleKey;
     return nil;
 }
 
-+ (void)play_updatePreviewRegistrationsInView:(UIView *)view
-{
-    if (view.previewingHandle) {
-        [view play_registerForPreview];
-    }
-    
-    for (UIView *subview in view.subviews) {
-        [self play_updatePreviewRegistrationsInView:subview];
-    }
-}
+#pragma mark Registration
 
 - (void)play_registerForPreview
 {

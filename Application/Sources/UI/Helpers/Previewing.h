@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Method which gets called when a long press is detected. This can be implemented as an alternative to 3D Touch,
- *  most notably on devices without 3D Touch support.
+ *  most notably on devices without 3D Touch support or if 3D Touch has been dissabled in the Accessibility settings.
  */
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer;
 
