@@ -9,6 +9,7 @@
 #import "NSArray+PlaySRG.h"
 #import "SearchSettingSelectorCell.h"
 #import "UIColor+PlaySRG.h"
+#import "UISearchBar+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
@@ -20,7 +21,10 @@
 @property (nonatomic) NSArray<SearchSettingsMultiSelectionItem *> *items;
 @property (nonatomic) NSArray<NSString *> *selectedValues;
 
+@property (nonatomic) NSArray<SearchSettingsMultiSelectionItem *> *filteredItems;
+
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -34,6 +38,7 @@
         self.title = title;
         self.identifier = identifier;
         self.items = items;
+        self.filteredItems = items;
         self.selectedValues = selectedValues ?: @[];
     }
     return self;
@@ -56,7 +61,8 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.play_popoverGrayColor;
+    UIColor *backgroundColor = UIColor.play_popoverGrayColor;
+    self.view.backgroundColor = backgroundColor;
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = UIColor.clearColor;
@@ -65,6 +71,24 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.emptyDataSetSource = self;
+    
+    self.searchBar.placeholder = NSLocalizedString(@"Search", @"Search placeholder text");
+    self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.searchBar.delegate = self;
+    
+    UITextField *searchTextField = self.searchBar.play_textField;
+    searchTextField.font = [UIFont srg_regularFontWithSize:18.f];
+    searchTextField.textColor = UIColor.whiteColor;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([self play_isMovingToParentViewController]) {
+        self.tableView.contentOffset = CGPointMake(0.f, CGRectGetHeight(self.searchBar.frame));
+    }
 }
 
 #pragma mark Rotation
@@ -90,11 +114,51 @@
     [self.tableView reloadData];
 }
 
+#pragma mark DZNEmptyDataSetSource protocol
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No results", @"Default text displayed when no results are available")
+                                           attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
+                                                         NSForegroundColorAttributeName : UIColor.whiteColor }];
+}
+
+#pragma mark UIScrollViewDelegate protocol
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.dragging && ! scrollView.decelerating) {
+        [self.searchBar resignFirstResponder];
+    }
+}
+
+#pragma mark UISearchBarDelegate protocol
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    NSString *query = searchBar.text;
+    if (query.length != 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SearchSettingsMultiSelectionItem * _Nullable item, NSDictionary<NSString *,id> * _Nullable bindings) {
+            return [item.name localizedCaseInsensitiveContainsString:query];
+        }];
+        self.filteredItems = [self.items filteredArrayUsingPredicate:predicate];
+    }
+    else {
+        self.filteredItems = self.items;
+    }
+    [self.tableView reloadData];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.items.count;
+    return self.filteredItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -120,7 +184,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(SearchSettingSelectorCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SearchSettingsMultiSelectionItem *item = self.items[indexPath.row];
+    SearchSettingsMultiSelectionItem *item = self.filteredItems[indexPath.row];
     cell.name = [NSString stringWithFormat:@"%@ (%@)", item.name, [NSNumberFormatter localizedStringFromNumber:@(item.count) numberStyle:NSNumberFormatterDecimalStyle]];
     cell.accessoryType = [self.selectedValues containsObject:item.value] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 }
@@ -129,7 +193,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    SearchSettingsMultiSelectionItem *item = self.items[indexPath.row];
+    SearchSettingsMultiSelectionItem *item = self.filteredItems[indexPath.row];
     if ([self.selectedValues containsObject:item.value]) {
         self.selectedValues = [self.selectedValues play_arrayByRemovingObjectsInArray:@[ item.value ]];
     }

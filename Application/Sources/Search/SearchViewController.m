@@ -120,9 +120,11 @@
     
     UISearchBar *searchBar = self.searchController.searchBar;
     object_setClass(searchBar, SearchBar.class);
-    searchBar.delegate = self;
+    
+    searchBar.placeholder = NSLocalizedString(@"Search", @"Search placeholder text");
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     searchBar.play_textField.font = [UIFont srg_regularFontWithSize:18.f];
+    searchBar.delegate = self;
     
     // Required for proper search bar behavior
     self.definesPresentationContext = YES;
@@ -705,7 +707,7 @@
 {
     [super scrollViewDidScroll:scrollView];
     
-    if (scrollView.dragging && !scrollView.decelerating) {
+    if (scrollView.dragging && ! scrollView.decelerating) {
         [self.searchController.searchBar resignFirstResponder];
     }
 }

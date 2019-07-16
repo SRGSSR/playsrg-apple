@@ -7,6 +7,8 @@
 #import "DataViewController.h"
 #import "SearchSettingsMultiSelectionItem.h"
 
+#import <DZNEmptyDataSet/DZNEmptyDataSet.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class SearchSettingMultiSelectionViewController;
@@ -17,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface SearchSettingMultiSelectionViewController : DataViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SearchSettingMultiSelectionViewController : DataViewController <DZNEmptyDataSetSource, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
 - (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(nullable NSArray<NSString *> *)selectedValues;
 
