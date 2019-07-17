@@ -15,13 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol SearchSettingsMultiSelectionViewControllerDelegate <NSObject>
 
-- (void)searchSettingMultiSelectionViewController:(SearchSettingMultiSelectionViewController *)searchSettingMultiSelectionViewController didUpdateSelectedValues:(nullable NSArray<NSString *> *)selectedValues;
+- (void)searchSettingMultiSelectionViewController:(SearchSettingMultiSelectionViewController *)searchSettingMultiSelectionViewController didUpdateSelectedValues:(NSSet<NSString *> *)selectedValues;
 
 @end
 
 @interface SearchSettingMultiSelectionViewController : DataViewController <DZNEmptyDataSetSource, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
-- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(nullable NSArray<NSString *> *)selectedValues;
+- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(NSSet<NSString *> *)selectedValues;
 
 @property (nonatomic, readonly, copy) NSString *identifier;
 

@@ -643,7 +643,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 #pragma mark SearchSettingsMultiSelectionViewControllerDelegate protocol
 
-- (void)searchSettingMultiSelectionViewController:(SearchSettingMultiSelectionViewController *)searchSettingMultiSelectionViewController didUpdateSelectedValues:(NSArray<NSString *> *)selectedValues
+- (void)searchSettingMultiSelectionViewController:(SearchSettingMultiSelectionViewController *)searchSettingMultiSelectionViewController didUpdateSelectedValues:(NSSet<NSString *> *)selectedValues
 {
     if ([searchSettingMultiSelectionViewController.identifier isEqualToString:NSStringFromClass(SRGTopicBucket.class)]) {
         self.settings.topicURNs = selectedValues;

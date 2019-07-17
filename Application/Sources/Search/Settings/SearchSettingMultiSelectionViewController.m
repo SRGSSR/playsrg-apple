@@ -6,7 +6,7 @@
 
 #import "SearchSettingMultiSelectionViewController.h"
 
-#import "NSArray+PlaySRG.h"
+#import "NSSet+PlaySRG.h"
 #import "SearchSettingSelectorCell.h"
 #import "UIColor+PlaySRG.h"
 #import "UISearchBar+PlaySRG.h"
@@ -19,7 +19,7 @@
 
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic) NSArray<SearchSettingsMultiSelectionItem *> *items;
-@property (nonatomic) NSArray<NSString *> *selectedValues;
+@property (nonatomic) NSSet<NSString *> *selectedValues;
 
 @property (nonatomic) NSArray<SearchSettingsMultiSelectionItem *> *filteredItems;
 
@@ -32,14 +32,14 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(nullable NSArray<NSString *> *)selectedValues
+- (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(NSSet<NSString *> *)selectedValues
 {
     if (self = [super init]) {
         self.title = title;
         self.identifier = identifier;
         self.items = items;
         self.filteredItems = items;
-        self.selectedValues = selectedValues ?: @[];
+        self.selectedValues = selectedValues;
     }
     return self;
 }
@@ -50,7 +50,7 @@
 - (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
-    return [self initWithTitle:@"" identifier:@"" items:@[] selectedValues:nil];
+    return [self initWithTitle:@"" identifier:@"" items:@[] selectedValues:NSSet.set];
 }
 
 #pragma clang diagnostic pop
@@ -186,10 +186,10 @@
     
     SearchSettingsMultiSelectionItem *item = self.filteredItems[indexPath.row];
     if ([self.selectedValues containsObject:item.value]) {
-        self.selectedValues = [self.selectedValues play_arrayByRemovingObjectsInArray:@[ item.value ]];
+        self.selectedValues = [self.selectedValues play_setByRemovingObjectsInSet:[NSSet setWithObject:item.value]];
     }
     else {
-        self.selectedValues = [self.selectedValues arrayByAddingObject:item.value];
+        self.selectedValues = [self.selectedValues setByAddingObject:item.value];
     }
     
     [self.delegate searchSettingMultiSelectionViewController:self didUpdateSelectedValues:self.selectedValues];
