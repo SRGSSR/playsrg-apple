@@ -54,6 +54,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="DVm-bs-AUs"/>
+                <outlet property="separatorView" destination="t89-ZE-1qB" id="8E5-Bh-Fm2"/>
                 <outlet property="titleLabel" destination="0yn-mg-rHU" id="eDa-Bc-y1w"/>
             </connections>
             <point key="canvasLocation" x="24" y="88.5"/>

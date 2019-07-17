@@ -13,6 +13,7 @@
 @interface SearchSettingsHeaderView ()
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UIView *separatorView;
 
 @end
 
@@ -26,6 +27,13 @@
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     self.titleLabel.text = title;
+}
+
+- (void)setSeparatorHidden:(BOOL)separatorHidden
+{
+    _separatorHidden = separatorHidden;
+    
+    self.separatorView.hidden = separatorHidden;
 }
 
 #pragma mark Overrides

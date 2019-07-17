@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SearchSettingsHeaderView : UITableViewHeaderFooterView
 
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, getter=isSeparatorHidden) BOOL separatorHidden;         // Default is NO
 
 @end
 

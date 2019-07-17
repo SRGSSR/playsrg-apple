@@ -631,6 +631,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     
     SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][section];
     headerView.title = [self tableView:tableView titleForHeaderInSectionWithType:sectionType];
+    headerView.separatorHidden = (section == 0);
     
     return headerView;
 }
