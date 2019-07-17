@@ -11,6 +11,8 @@
 
 #import <SRGAppearance/SRGAppearance.h>
 
+static const CGFloat kLayoutHorizontalInset = 10.f;
+
 @implementation MediasViewController
 
 #pragma mark View lifecycle
@@ -54,6 +56,11 @@
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
@@ -61,7 +68,7 @@
     // Table layout
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
         CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 86.f : 100.f;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, height);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, height);
     }
     // Grid layout
     else {
