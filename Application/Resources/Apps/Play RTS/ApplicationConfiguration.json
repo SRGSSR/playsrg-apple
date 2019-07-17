@@ -37,6 +37,5 @@
   "continuousPlaybackBackgroundTransitionDuration": 0,
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
-  "searchSettingSubtitledEnabled": true,
   "hiddenOnboardings": "favorites,resume_playback,watch_later"
 }

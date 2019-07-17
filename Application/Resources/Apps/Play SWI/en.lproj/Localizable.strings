@@ -44,15 +44,11 @@
    Favorite show label to add it, in the show view */
 "Add to favorites" = "Add to favorites";
 
-/* All medias scope button
-   All option */
+/* All option */
 "All" = "All";
 
 /* Title of the first cell of a media list on homepage. */
 "All content" = "All content";
-
-/* Title of the search settings button to apply settings */
-"Apply" = "Apply";
 
 /* Confirmation message displayed when the user is about to clean all favorites
    Confirmation message displayed when the user is about to clean the watch later list
@@ -73,7 +69,6 @@
 "At %1$@: %2$@" = "At %1$@: %2$@";
 
 /* Audios option
-   Audios scope button
    Header for audio search results */
 "Audios" = "Audios";
 
@@ -103,6 +98,9 @@
 
 /* No comment provided by engineer. */
 "Close" = "Close";
+
+/* Settings section header */
+"Content" = "Content";
 
 /* Text displayed on live cells when no program time information is available */
 "Currently" = "Currently";
@@ -168,6 +166,10 @@
 
 /* Label in the left menu to display the feedback form */
 "Feedback" = "Feedback";
+
+/* Filters button title
+   Search filters page title */
+"Filters" = "Filters";
 
 /* Explanation displayed in the alert asking the user to enable notifications */
 "For the application to inform you when a new episode is available, notifications must be enabled." = "For the application to inform you when a new episode is available, notifications must be enabled.";
@@ -318,7 +320,8 @@
 "Notify me" = "Notify me";
 
 /* Title of the button displayed at the end of an onboarding
-   Title of the button when the user subscribed to all TV and radio shows */
+   Title of the button when the user subscribed to all TV and radio shows
+   Title of the search settings button to apply settings */
 "OK" = "OK";
 
 /* Short introductory text for what is currently playing on the radio */
@@ -440,11 +443,9 @@
 /* [Technical] Search page type for analytics measurements
    Label in the left menu to present the search view
    Search page title
+   Search placeholder text
    Title displayed when there is no search criterium entered */
 "Search" = "Search";
-
-/* Search filters page title */
-"Search filters" = "Search filters";
 
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Server changed to '%@'";
@@ -488,9 +489,6 @@
 
 /* Message description displayed when subscribing to all TV and radio shows */
 "Subscribing to all TV and radio shows…" = "Subscribing to all TV and radio shows…";
-
-/* Name of the search setting to filter subtitled content */
-"Subtitled" = "Subtitled";
 
 /* [Technical] System page type for analytics measurements */
 "System" = "System";
@@ -577,9 +575,6 @@
 /* Title displayed at the top of the screen where TV episodes can be accessed by date */
 "TV programmes by date" = "TV programmes by date";
 
-/* Settings section header */
-"Type" = "Type";
-
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Type to start searching";
 
@@ -587,8 +582,7 @@
 "Update" = "Update";
 
 /* Header for video search results
-   Videos option
-   Videos scope button */
+   Videos option */
 "Videos" = "Videos";
 
 /* Header for video and audio search results */

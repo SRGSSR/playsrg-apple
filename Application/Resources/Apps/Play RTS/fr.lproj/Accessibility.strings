@@ -18,7 +18,8 @@
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Tout le contenu pour \"%@\"";
 
-/* Close button label on player view */
+/* Close button label on player view
+   Close button label on search view */
 "Close" = "Fermer";
 
 /* Player close button hint */

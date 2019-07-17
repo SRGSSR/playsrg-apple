@@ -18,7 +18,8 @@
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Mostra tutto \"%@\"";
 
-/* Close button label on player view */
+/* Close button label on player view
+   Close button label on search view */
 "Close" = "Chiudere";
 
 /* Player close button hint */
@@ -108,7 +109,7 @@
 "Retry download" = "Riprovare il download";
 
 /* Search button label */
-"Search" = "Cerca";
+"Search" = "Ricerca";
 
 /* Regional livestream selection hint */
 "Select regional radio" = "Selezionare radio regionale";
