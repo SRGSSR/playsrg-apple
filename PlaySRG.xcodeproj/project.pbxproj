@@ -6669,14 +6669,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE1C222EBB7E003E0722 /* Play SRF.debug.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
-				APP_LINKS_DOMAIN = "applinks:play-mmf.herokuapp.com";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "play-mmf.herokuapp.com";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6697,14 +6699,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE1A222EBB7D003E0722 /* Play SRF.appstore.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
-				APP_LINKS_DOMAIN = "applinks:*.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "*.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6724,14 +6728,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE0B222EBB7B003E0722 /* Play RTS.debug.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
-				APP_LINKS_DOMAIN = "applinks:play-mmf.herokuapp.com";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "play-mmf.herokuapp.com";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6752,14 +6758,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE0C222EBB7C003E0722 /* Play RTS.appstore.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
-				APP_LINKS_DOMAIN = "applinks:*.rts.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "*.rts.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6779,14 +6787,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE0F222EBB7C003E0722 /* Play RSI.debug.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
-				APP_LINKS_DOMAIN = "applinks:play-mmf.herokuapp.com";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "play-mmf.herokuapp.com";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6807,14 +6817,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE19222EBB7D003E0722 /* Play RSI.appstore.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
-				APP_LINKS_DOMAIN = "applinks:*.rsi.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "*.rsi.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6834,14 +6846,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE0E222EBB7C003E0722 /* Play RTR.debug.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
-				APP_LINKS_DOMAIN = "applinks:play-mmf.herokuapp.com";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "play-mmf.herokuapp.com";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6862,14 +6876,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE17222EBB7D003E0722 /* Play RTR.appstore.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
-				APP_LINKS_DOMAIN = "applinks:*.rtr.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "*.rtr.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6889,13 +6905,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE14222EBB7D003E0722 /* Play SWI.debug.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
-				APP_LINKS_DOMAIN = "applinks:play-mmf.herokuapp.com";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "play-mmf.herokuapp.com";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -6916,13 +6934,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE1E222EBB7E003E0722 /* Play SWI.appstore.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
-				APP_LINKS_DOMAIN = "applinks:*.swissinfo.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "*.swissinfo.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -7005,14 +7025,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE1B222EBB7D003E0722 /* Play SRF.beta.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
-				APP_LINKS_DOMAIN = "applinks:srgplayer-srf.stage.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "srgplayer-srf.stage.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -7032,14 +7054,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE0D222EBB7C003E0722 /* Play RTS.beta.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
-				APP_LINKS_DOMAIN = "applinks:srgplayer-rts.stage.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "srgplayer-rts.stage.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -7059,14 +7083,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE13222EBB7C003E0722 /* Play RSI.beta.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
-				APP_LINKS_DOMAIN = "applinks:srgplayer-rsi.stage.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "srgplayer-rsi.stage.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -7086,14 +7112,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE15222EBB7D003E0722 /* Play RTR.beta.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
-				APP_LINKS_DOMAIN = "applinks:srgplayer-rtr.stage.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "srgplayer-rtr.stage.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -7113,13 +7141,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE12222EBB7C003E0722 /* Play SWI.beta.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
-				APP_LINKS_DOMAIN = "applinks:srgplayer-swi.stage.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "srgplayer-swi.stage.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -7202,14 +7232,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE18222EBB7D003E0722 /* Play SRF.nightly.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
-				APP_LINKS_DOMAIN = "applinks:srgplayer-srf.test.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "srgplayer-srf.test.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -7231,14 +7263,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE11222EBB7C003E0722 /* Play RTS.nightly.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
-				APP_LINKS_DOMAIN = "applinks:srgplayer-rts.test.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "srgplayer-rts.test.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -7260,14 +7294,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE10222EBB7C003E0722 /* Play RSI.nightly.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
-				APP_LINKS_DOMAIN = "applinks:srgplayer-rsi.test.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "srgplayer-rsi.test.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -7289,14 +7325,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE1D222EBB7E003E0722 /* Play RTR.nightly.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
-				APP_LINKS_DOMAIN = "applinks:srgplayer-rtr.test.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "srgplayer-rtr.test.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -7318,13 +7356,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F1EBE16222EBB7D003E0722 /* Play SWI.nightly.xcconfig */;
 			buildSettings = {
+				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
-				APP_LINKS_DOMAIN = "applinks:srgplayer-swi.test.srf.ch";
+				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DOMAIN = "srgplayer-swi.test.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
