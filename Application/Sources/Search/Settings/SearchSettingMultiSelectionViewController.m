@@ -82,15 +82,6 @@
     searchTextField.textColor = UIColor.whiteColor;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if ([self play_isMovingToParentViewController]) {
-        self.tableView.contentOffset = CGPointMake(0.f, CGRectGetHeight(self.searchBar.frame));
-    }
-}
-
 #pragma mark Rotation
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
