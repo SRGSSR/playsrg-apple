@@ -29,17 +29,17 @@ static NSInteger const kLastMonth = 30;
 typedef NSString * SearchSettingSectionType NS_STRING_ENUM;
 
 static SearchSettingSectionType const SearchSettingSectionTypeMediaType = @"media_type";
-static SearchSettingSectionType const SearchSettingSectionTypeShows = @"shows";
 static SearchSettingSectionType const SearchSettingSectionTypeTopics = @"topics";
+static SearchSettingSectionType const SearchSettingSectionTypeShows = @"shows";
 static SearchSettingSectionType const SearchSettingSectionTypePeriod = @"period";
 static SearchSettingSectionType const SearchSettingSectionTypeDuration = @"duration";
 static SearchSettingSectionType const SearchSettingSectionTypeProperties = @"properties";
 
 typedef NSString * SearchSettingRowType NS_STRING_ENUM;
 
-static SearchSettingRowType const SearchSettingRowTypeShows = @"shows";
-static SearchSettingRowType const SearchSettingRowTypeTopics = @"topics";
 static SearchSettingRowType const SearchSettingRowTypeMediaType = @"media_type";
+static SearchSettingRowType const SearchSettingRowTypeTopics = @"topics";
+static SearchSettingRowType const SearchSettingRowTypeShows = @"shows";
 static SearchSettingRowType const SearchSettingRowTypeLastDay = @"last_day";
 static SearchSettingRowType const SearchSettingRowTypeLastThreeDays = @"last_three_days";
 static SearchSettingRowType const SearchSettingRowTypeLastWeek = @"last_week";
@@ -295,8 +295,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 - (NSArray<SearchSettingSectionType> *)sectionTypesForTableView:(UITableView *)tableView
 {
     return @[ SearchSettingSectionTypeMediaType,
-              SearchSettingSectionTypeShows,
               SearchSettingSectionTypeTopics,
+              SearchSettingSectionTypeShows,
               SearchSettingSectionTypePeriod,
               SearchSettingSectionTypeDuration,
               SearchSettingSectionTypeProperties ];
@@ -314,8 +314,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 - (NSArray<SearchSettingRowType> *)tableView:(UITableView *)tableView rowTypesInSectionWithType:(SearchSettingSectionType)type
 {
     NSDictionary<SearchSettingSectionType, NSArray<SearchSettingRowType> *> *types = @{ SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
-                                                                                        SearchSettingSectionTypeShows : @[ SearchSettingRowTypeShows ],
                                                                                         SearchSettingSectionTypeTopics : @[ SearchSettingRowTypeTopics ],
+                                                                                        SearchSettingSectionTypeShows : @[ SearchSettingRowTypeShows ],
                                                                                         SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeLastDay, SearchSettingRowTypeLastThreeDays, SearchSettingRowTypeLastWeek, SearchSettingRowTypeLastMonth ],
                                                                                         SearchSettingSectionTypeDuration : @[ SearchSettingRowTypeDuration ],
                                                                                         SearchSettingSectionTypeProperties : @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ] };
@@ -324,9 +324,9 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowWithType:(SearchSettingRowType)type atIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary<SearchSettingRowType, Class> *cellClasses = @{ SearchSettingRowTypeShows : SearchSettingMultiSelectionCell.class,
+    NSDictionary<SearchSettingRowType, Class> *cellClasses = @{ SearchSettingRowTypeMediaType : SearchSettingSegmentCell.class,
                                                                 SearchSettingRowTypeTopics : SearchSettingMultiSelectionCell.class,
-                                                                SearchSettingRowTypeMediaType : SearchSettingSegmentCell.class,
+                                                                SearchSettingRowTypeShows : SearchSettingMultiSelectionCell.class,
                                                                 SearchSettingRowTypeLastDay : SearchSettingSelectorCell.class,
                                                                 SearchSettingRowTypeLastThreeDays : SearchSettingSelectorCell.class,
                                                                 SearchSettingRowTypeLastWeek : SearchSettingSelectorCell.class,
