@@ -255,7 +255,6 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     
     [self updateLeftBarButtonItems];
     
-    [self cancel];
     [self refresh];
 }
 

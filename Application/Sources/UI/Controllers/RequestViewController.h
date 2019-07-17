@@ -28,11 +28,6 @@ typedef void (^RequestCompletionBlock)(NSError * _Nullable error);
 - (void)refresh;
 
 /**
- *  Cancel requesting the data.
- */
-- (void)cancel;
-
-/**
  *  Return YES when data is being loaded
  */
 @property (nonatomic, readonly, getter=isLoading) BOOL loading;
