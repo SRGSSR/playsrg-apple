@@ -325,7 +325,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.livestreamButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Select regional radio", @"Regional livestream selection hint");
     
-    self.radioHomeButton.backgroundColor = [UIColor play_lightGrayButtonBackgroundColor];
+    self.radioHomeButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
     self.radioHomeButton.layer.cornerRadius = 4.f;
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];

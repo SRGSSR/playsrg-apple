@@ -651,9 +651,10 @@
     SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.query settings:self.settings];
     searchSettingsViewController.delegate = self;
     
+    UIColor *backgroundColor = (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? UIColor.play_popoverGrayColor : nil;
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController
                                                                                                 tintColor:UIColor.whiteColor
-                                                                                          backgroundColor:UIColor.play_popoverGrayColor
+                                                                                          backgroundColor:backgroundColor
                                                                                            statusBarStyle:UIStatusBarStyleLightContent];
     navigationController.modalPresentationStyle = UIModalPresentationPopover;
     
