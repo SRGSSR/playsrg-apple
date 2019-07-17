@@ -47,7 +47,12 @@
 
 + (UIColor *)play_popoverGrayColor
 {
-    return [UIColor srg_colorFromHexadecimalString:@"#323232"];
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return [UIColor srg_colorFromHexadecimalString:@"#2d2d2d"];
+    }
+    else {
+        return [UIColor srg_colorFromHexadecimalString:@"#1a1a1a"];
+    }
 }
 
 + (UIColor *)play_grayButtonBackgroundColor
