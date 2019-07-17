@@ -19,6 +19,8 @@
 #import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
+static const CGFloat kLayoutHorizontalInset = 10.f;
+
 @interface ShowsViewController () {
 @private
     NSInteger _previousAccessibilityHeadingSection;
@@ -135,7 +137,7 @@
             make.bottom.equalTo(self.view).with.offset(-contentInsets.bottom);
         }
         
-        make.right.equalTo(self.collectionView.mas_right);
+        make.right.equalTo(self.view.mas_right);
         make.width.equalTo(@28.f);
     }];
 }
@@ -283,10 +285,15 @@
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     // 2 items per row on small layouts, max cell width of 210
-    CGFloat width = fminf(floorf((CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right - collectionViewLayout.minimumInteritemSpacing) / 2.f), 210.f);
+    CGFloat width = fminf(floorf((CGRectGetWidth(collectionView.frame) - collectionViewLayout.minimumInteritemSpacing - 2 * kLayoutHorizontalInset) / 2.f), 210.f);
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 30.f : 50.f;
@@ -296,7 +303,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
+    return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
 }
 
 #pragma mark Actions
