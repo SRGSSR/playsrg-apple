@@ -38,7 +38,7 @@ typedef void (^ListRequestCompletionBlock)(NSArray * _Nullable items, NSHTTPURLR
 - (void)loadNextPage;
 
 /**
- *  Clear the current page set, starting again with the first page
+ *  Clear the current page set, starting again with the first page. Cancel any running request as well.
  */
 - (void)clear;
 

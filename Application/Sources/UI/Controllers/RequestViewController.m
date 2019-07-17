@@ -44,7 +44,7 @@
         return;
     }
     
-    if (![self shouldPerformRefreshRequest]) {
+    if (! [self shouldPerformRefreshRequest]) {
         return;
     }
     
@@ -62,6 +62,14 @@
         }
     }];
     [self prepareRefreshWithRequestQueue:self.requestQueue];
+}
+
+- (void)cancel
+{
+    [self.requestQueue cancel];
+    
+    [self refreshDidStart];
+    [self refreshDidFinishWithError:nil];
 }
 
 #pragma mark Stubs

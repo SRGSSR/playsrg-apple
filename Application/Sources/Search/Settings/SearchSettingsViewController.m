@@ -254,6 +254,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     [self.delegate searchSettingsViewController:self didUpdateSettings:settings];
     
     [self updateLeftBarButtonItems];
+    
+    [self cancel];
     [self refresh];
 }
 
