@@ -474,17 +474,17 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 3.7.2
+name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: b0095c7
 
 name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 1.1.10
 
-name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 0602d8f
+name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: fefebeb
 
 name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
 name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0.2
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 1.14.2
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: b65b577
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 1.0.9
 
