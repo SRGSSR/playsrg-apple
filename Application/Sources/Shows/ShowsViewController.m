@@ -328,8 +328,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     //        need to take insets into account correctly in all cases.
     CGFloat contentInsetTop = ContentInsetsForScrollView(self.collectionView).top;
     CGFloat sectionHeaderHeight = CGRectGetHeight(sectionHeaderFrame);
-    CGFloat sectionInsetTop = ((UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout).sectionInset.top;
-    CGFloat newContentOffsetY = fminf(CGRectGetMinY(itemFrame) - sectionHeaderHeight - sectionInsetTop - contentInsetTop,
+    CGFloat newContentOffsetY = fminf(CGRectGetMinY(itemFrame) - sectionHeaderHeight - contentInsetTop,
                                       self.collectionView.contentSize.height - CGRectGetHeight(self.collectionView.frame));
     [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x, newContentOffsetY) animated:NO];
 }
