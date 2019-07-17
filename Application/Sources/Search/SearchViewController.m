@@ -323,7 +323,7 @@
         UIButton *filtersButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [filtersButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
         
-        filtersButton.titleLabel.font = [UIFont srg_mediumFontWithSize:16.f];
+        filtersButton.titleLabel.font = [UIFont srg_regularFontWithSize:16.f];
         [filtersButton setTitle:NSLocalizedString(@"Filters", @"Filters button title") forState:UIControlStateNormal];
         [filtersButton setTitleColor:UIColor.grayColor forState:UIControlStateHighlighted];
         
