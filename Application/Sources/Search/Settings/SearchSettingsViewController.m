@@ -45,7 +45,6 @@ static SearchSettingRowType const SearchSettingRowTypeLastThreeDays = @"last_thr
 static SearchSettingRowType const SearchSettingRowTypeLastWeek = @"last_week";
 static SearchSettingRowType const SearchSettingRowTypeLastMonth = @"last_month";
 static SearchSettingRowType const SearchSettingRowTypeDuration = @"duration";
-static SearchSettingRowType const SearchSettingRowTypeSubtitled = @"subtitled";
 static SearchSettingRowType const SearchSettingRowTypeDownloadAvailable = @"download_available";
 static SearchSettingRowType const SearchSettingRowTypePlayableAbroad = @"playable_abroad";
 
@@ -314,22 +313,12 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (NSArray<SearchSettingRowType> *)tableView:(UITableView *)tableView rowTypesInSectionWithType:(SearchSettingSectionType)type
 {
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    
-    NSArray<SearchSettingRowType> *propertiesRowTypes = nil;
-    if (applicationConfiguration.searchSettingSubtitledEnabled) {
-        propertiesRowTypes = @[ SearchSettingRowTypeSubtitled, SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
-    }
-    else {
-        propertiesRowTypes = @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
-    }
-    
     NSDictionary<SearchSettingSectionType, NSArray<SearchSettingRowType> *> *types = @{ SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
                                                                                         SearchSettingSectionTypeShows : @[ SearchSettingRowTypeShows ],
                                                                                         SearchSettingSectionTypeTopics : @[ SearchSettingRowTypeTopics ],
                                                                                         SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeLastDay, SearchSettingRowTypeLastThreeDays, SearchSettingRowTypeLastWeek, SearchSettingRowTypeLastMonth ],
                                                                                         SearchSettingSectionTypeDuration : @[ SearchSettingRowTypeDuration ],
-                                                                                        SearchSettingSectionTypeProperties : propertiesRowTypes };
+                                                                                        SearchSettingSectionTypeProperties : @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ] };
     return types[type];
 }
 
@@ -343,7 +332,6 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                                                                 SearchSettingRowTypeLastWeek : SearchSettingSelectorCell.class,
                                                                 SearchSettingRowTypeLastMonth : SearchSettingSelectorCell.class,
                                                                 SearchSettingRowTypeDuration : SearchSettingSegmentCell.class,
-                                                                SearchSettingRowTypeSubtitled : SearchSettingSwitchCell.class,
                                                                 SearchSettingRowTypeDownloadAvailable : SearchSettingSwitchCell.class,
                                                                 SearchSettingRowTypePlayableAbroad : SearchSettingSwitchCell.class };
     Class cellClass = cellClasses[type];
@@ -464,19 +452,6 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                     break;
                 }
             }
-            [self updateResults];
-        }];
-    }
-    else if ([type isEqualToString:SearchSettingRowTypeSubtitled]) {
-        SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
-        
-        @weakify(self)
-        [switchCell setName:NSLocalizedString(@"Subtitled", @"Name of the search setting to filter subtitled content") reader:^BOOL{
-            return settings.subtitlesAvailable.boolValue;
-        } writer:^(BOOL value) {
-            @strongify(self)
-            
-            settings.subtitlesAvailable = value ? @(value) : nil;
             [self updateResults];
         }];
     }
