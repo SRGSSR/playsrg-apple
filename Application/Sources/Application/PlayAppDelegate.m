@@ -209,7 +209,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     WatchLaterMigrate();
     FavoritesMigrate();
     
-    [self showNextAvailableOnboarding];
+    if (! launchOptions[UIApplicationLaunchOptionsUserActivityDictionaryKey]) {
+        [self showNextAvailableOnboarding];
+    }
     
     NSURL *whatsNewURL = applicationConfiguration.whatsNewURL;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
