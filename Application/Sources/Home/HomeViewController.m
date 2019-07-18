@@ -614,7 +614,7 @@
 
 - (void)search:(id)sender
 {
-    SearchViewController *searchViewController = [[SearchViewController alloc] init];
+    SearchViewController *searchViewController = [[SearchViewController alloc] initWithQuery:nil settings:nil];
     
     @weakify(self)
     searchViewController.closeBlock = ^{

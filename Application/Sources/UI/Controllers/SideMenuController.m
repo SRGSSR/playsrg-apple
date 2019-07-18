@@ -362,10 +362,12 @@ static const CGFloat SideMenuOffset = -50.f;
         UIViewController *viewController = nil;
         switch (selectedMenuItemInfo.menuItem) {
             case MenuItemSearch: {
-                // TODO: search query and mediaType option
-//                SRGMediaType mediaType = [selectedMenuItemInfo.options[MenuItemOptionSearchMediaTypeOptionKey] integerValue];
-//                NSString *query = selectedMenuItemInfo.options[MenuItemOptionSearchQueryKey];
-                viewController = [[SearchViewController alloc] init];
+                NSString *query = selectedMenuItemInfo.options[MenuItemOptionSearchQueryKey];
+                SRGMediaType mediaType = [selectedMenuItemInfo.options[MenuItemOptionSearchMediaTypeOptionKey] integerValue];
+                
+                SRGMediaSearchSettings *settings = [[SRGMediaSearchSettings alloc] init];
+                settings.mediaType = mediaType;
+                viewController = [[SearchViewController alloc] initWithQuery:query settings:settings];
                 break;
             }
                 

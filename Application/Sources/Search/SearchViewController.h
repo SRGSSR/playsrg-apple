@@ -13,10 +13,24 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SearchViewController : CollectionRequestViewController <SRGAnalyticsViewTracking, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
 /**
+ *  Create a search view controller with optional query and settings.
+ *
+ *  @param query     The started query.
+ *  @param settings  The started search filters. It's only set if the application can use it: `searchSettingsDisabled` value of `ApplicationConfiguration` used.
+ */
+- (instancetype)initWithQuery:(nullable NSString *)query settings:(nullable SRGMediaSearchSettings *)settings;
+
+/**
  *  If set, a close button will be displayed, executing the block when tapped. The block must be set before the view
  *  controller is displayed.
  */
 @property (nonatomic, copy, nullable) void (^closeBlock)(void);
+
+@end
+
+@interface SearchViewController (Unavailable)
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

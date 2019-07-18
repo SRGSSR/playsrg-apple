@@ -536,7 +536,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         }
     }
     
-    if (!menuItemInfo) {
+    if (! menuItemInfo) {
         menuItemInfo = MenuItemInfoForChannelUid(channelUid);
     }
     
