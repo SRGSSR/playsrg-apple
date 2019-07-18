@@ -352,7 +352,7 @@ static const CGFloat SideMenuOffset = -50.f;
 
 - (void)setSelectedMenuItemInfo:(MenuItemInfo *)selectedMenuItemInfo animated:(BOOL)animated
 {
-    if (! [self.selectedMenuItemInfo isEqual:selectedMenuItemInfo]) {
+    if (! [self.selectedMenuItemInfo isEqual:selectedMenuItemInfo] || selectedMenuItemInfo.options != nil) {
         _selectedMenuItemInfo = selectedMenuItemInfo;
         
         self.menuViewController.selectedMenuItemInfo = selectedMenuItemInfo;
