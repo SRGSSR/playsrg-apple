@@ -591,7 +591,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         || [userActivityType isEqualToString:NSUserActivityTypeBrowsingWeb];
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> *))restorationHandler
 {
     if ([userActivity.activityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".playing"]]) {
         NSString *mediaURN = userActivity.userInfo[@"URNString"];
@@ -645,6 +645,12 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     else {
         return NO;
     }
+}
+
+- (void)application:(UIApplication *)application didFailToContinueUserActivityWithType:(NSString *)userActivityType error:(NSError *)error
+{
+    PlayLogWarning(@"application", @"Could not retrieve user activity for %@. Reason: %@", userActivityType, error);
+    [Banner showError:error inViewController:nil];
 }
 
 #pragma mark Helpers
