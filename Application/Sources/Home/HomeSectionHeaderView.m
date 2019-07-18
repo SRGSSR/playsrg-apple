@@ -61,7 +61,7 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     self.homeSectionInfo = homeSectionInfo;
     self.featured = featured;
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
+    UIColor *backgroundColor = UIColor.clearColor;
     UIColor *titleTextColor = UIColor.play_lightGrayColor;
     if (homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
         backgroundColor = homeSectionInfo.module.backgroundColor;
@@ -70,14 +70,11 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     
     self.moduleBackgroundView.backgroundColor = backgroundColor;
     
-    self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.textColor = titleTextColor;
-    
-    self.navigationButton.tintColor = titleTextColor;
-    
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     self.titleLabel.text = ([HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:self.bounds featured:featured] > HomeSectionHeaderMinimumHeight) ? homeSectionInfo.title : nil;
     
+    self.navigationButton.tintColor = titleTextColor;
     self.navigationButton.hidden = ! [homeSectionInfo canOpenList] || ! self.titleLabel.text;
 }
 
@@ -87,10 +84,8 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.moduleBackgroundView.backgroundColor = backgroundColor;
+    self.moduleBackgroundView.backgroundColor = UIColor.clearColor;
     
-    self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.textColor = UIColor.play_lightGrayColor;
     self.titleLabel.userInteractionEnabled = YES;
     

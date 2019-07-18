@@ -12,23 +12,24 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" restorationIdentifier="HomeSectionHeaderView" id="Kq2-FP-Fs7" customClass="HomeSectionHeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="103"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLc-tN-O5S" userLabel="Module Background View">
-                    <rect key="frame" x="0.0" y="71" width="600" height="32"/>
+                    <rect key="frame" x="0.0" y="35" width="600" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" userLabel="Content View">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="103"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;label&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yn-mg-rHU">
-                            <rect key="frame" x="8" y="71" width="534" height="24"/>
+                            <rect key="frame" x="8" y="47" width="534" height="24"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                             <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1M-OM-I5D">
-                            <rect key="frame" x="554" y="62" width="42" height="42"/>
+                            <rect key="frame" x="554" y="38" width="42" height="42"/>
                             <color key="tintColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <inset key="contentEdgeInsets" minX="8" minY="8" maxX="10" maxY="10"/>
                             <state key="normal" image="list-24"/>
@@ -49,7 +50,7 @@
                 <constraint firstAttribute="bottom" secondItem="dLc-tN-O5S" secondAttribute="bottom" id="7cn-kY-oeq"/>
                 <constraint firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="9gV-9c-50Z"/>
                 <constraint firstItem="iN0-l3-epB" firstAttribute="trailing" secondItem="w1M-OM-I5D" secondAttribute="trailing" constant="4" id="JQV-jQ-ayU"/>
-                <constraint firstItem="dLc-tN-O5S" firstAttribute="top" secondItem="0yn-mg-rHU" secondAttribute="top" id="KTs-Qg-jml"/>
+                <constraint firstItem="dLc-tN-O5S" firstAttribute="top" secondItem="0yn-mg-rHU" secondAttribute="top" constant="-12" id="KTs-Qg-jml"/>
                 <constraint firstItem="iN0-l3-epB" firstAttribute="leading" secondItem="Kq2-FP-Fs7" secondAttribute="leading" id="RZ3-Si-LVw"/>
                 <constraint firstItem="0yn-mg-rHU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Yed-o3-sbn"/>
                 <constraint firstAttribute="trailing" secondItem="dLc-tN-O5S" secondAttribute="trailing" id="a5e-T8-foP"/>
@@ -66,7 +67,7 @@
                 <outlet property="navigationButton" destination="w1M-OM-I5D" id="E6X-H5-CBS"/>
                 <outlet property="titleLabel" destination="0yn-mg-rHU" id="eDa-Bc-y1w"/>
             </connections>
-            <point key="canvasLocation" x="24" y="76.911544227886068"/>
+            <point key="canvasLocation" x="24" y="88.5"/>
         </view>
     </objects>
     <resources>
