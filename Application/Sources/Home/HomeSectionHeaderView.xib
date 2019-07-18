@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,20 +16,20 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLc-tN-O5S" userLabel="Module Background View">
-                    <rect key="frame" x="0.0" y="31" width="600" height="48"/>
+                    <rect key="frame" x="0.0" y="35" width="600" height="44"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" userLabel="Content View">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;label&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yn-mg-rHU">
-                            <rect key="frame" x="8" y="43" width="534" height="24"/>
+                            <rect key="frame" x="8" y="47" width="534" height="24"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                             <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1M-OM-I5D">
-                            <rect key="frame" x="554" y="34" width="42" height="42"/>
+                            <rect key="frame" x="554" y="38" width="42" height="42"/>
                             <color key="tintColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <inset key="contentEdgeInsets" minX="8" minY="8" maxX="10" maxY="10"/>
                             <state key="normal" image="list-24"/>
@@ -41,7 +41,7 @@
                     <constraints>
                         <constraint firstItem="w1M-OM-I5D" firstAttribute="leading" secondItem="0yn-mg-rHU" secondAttribute="trailing" constant="12" id="Kud-3K-SFt"/>
                         <constraint firstItem="w1M-OM-I5D" firstAttribute="centerY" secondItem="0yn-mg-rHU" secondAttribute="centerY" id="cZB-p0-hxt"/>
-                        <constraint firstAttribute="bottom" secondItem="0yn-mg-rHU" secondAttribute="bottom" constant="12" id="od5-ad-0SU"/>
+                        <constraint firstAttribute="bottom" secondItem="0yn-mg-rHU" secondAttribute="bottom" constant="8" id="od5-ad-0SU"/>
                     </constraints>
                 </view>
             </subviews>

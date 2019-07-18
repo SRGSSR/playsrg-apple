@@ -75,7 +75,7 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     return self;
 }
 
-#pragma mark Getters and Setters
+#pragma mark Getters and setters
 
 - (NSString *)environmentIdentifier
 {

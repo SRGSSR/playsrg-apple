@@ -325,7 +325,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.livestreamButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Select regional radio", @"Regional livestream selection hint");
     
-    self.radioHomeButton.backgroundColor = [UIColor play_lightGrayButtonBackgroundColor];
+    self.radioHomeButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
     self.radioHomeButton.layer.cornerRadius = 4.f;
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];
@@ -781,14 +781,15 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         NSPredicate *socialViewsPredicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGSocialCount.new, type), @(SRGSocialCountTypeSRGView)];
         SRGSocialCount *socialCount = [media.socialCounts filteredArrayUsingPredicate:socialViewsPredicate].firstObject;
         if (socialCount && socialCount.value >= ApplicationConfiguration.sharedApplicationConfiguration.minimumSocialViewCount) {
+            NSString *viewCountString = [NSNumberFormatter localizedStringFromNumber:@(socialCount.value) numberStyle:NSNumberFormatterDecimalStyle];
             if (media.mediaType == SRGMediaTypeAudio) {
-                self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), @(socialCount.value)];
-                self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), @(socialCount.value)];
+                self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), viewCountString];
+                self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), viewCountString];
                 self.viewCountImageView.image = [UIImage imageNamed:@"view_count_audio-16"];
             }
             else {
-                self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), @(socialCount.value)];
-                self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), @(socialCount.value)];
+                self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), viewCountString];
+                self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), viewCountString];
                 self.viewCountImageView.image = [UIImage imageNamed:@"view_count_video-16"];
             }
             self.viewCountImageView.hidden = NO;

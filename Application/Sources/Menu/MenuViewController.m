@@ -12,6 +12,7 @@
 #import "MenuHeaderSectionView.h"
 #import "MenuTableViewCell.h"
 #import "NSBundle+PlaySRG.h"
+#import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 #import <SRGIdentity/SRGIdentity.h>
@@ -131,7 +132,7 @@
 
 - (void)scrollToTopAnimated:(BOOL)animated
 {
-    [self.tableView setContentOffset:CGPointMake(0, -self.tableView.contentInset.top) animated:animated];
+    [self.tableView play_scrollToTopAnimated:animated];
 }
 
 #pragma mark UIScrollViewDelegate protocol

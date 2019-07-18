@@ -56,7 +56,7 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 
 #pragma mark Getters and setters
 
-- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured;
+- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured
 {
     self.homeSectionInfo = homeSectionInfo;
     self.featured = featured;

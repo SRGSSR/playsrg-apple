@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchViewController : CollectionRequestViewController <UISearchBarDelegate, SRGAnalyticsViewTracking>
+@interface SearchViewController : CollectionRequestViewController <SRGAnalyticsViewTracking, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
 /**
  *  If set, a close button will be displayed, executing the block when tapped. The block must be set before the view

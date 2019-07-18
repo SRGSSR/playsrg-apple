@@ -19,7 +19,6 @@
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGUserData/SRGUserData.h>
@@ -148,7 +147,7 @@
 {
     [super traitCollectionDidChange:previousTraitCollection];
     
-    [self.nearestViewController registerForPreviewingWithDelegate:self.nearestViewController sourceView:self];
+    [self play_registerForPreview];
 }
 
 #pragma mark Accessibility
@@ -352,6 +351,12 @@
 - (id)previewObject
 {
     return self.media;
+}
+
+- (NSValue *)previewAnchorRect
+{
+    CGRect imageViewFrameInSelf = [self.thumbnailImageView convertRect:self.thumbnailImageView.bounds toView:self];
+    return [NSValue valueWithCGRect:imageViewFrameInSelf];
 }
 
 #pragma mark Notifications

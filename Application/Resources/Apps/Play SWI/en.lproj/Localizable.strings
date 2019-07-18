@@ -22,6 +22,12 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ views";
 
+/* Less than 5 min option */
+"< 5 min" = "< 5 min";
+
+/* More than 3 min option */
+"> 30 min" = "> 30 min";
+
 /* Short title displayed in home page shows section. */
 "A to Z" = "A to Z";
 
@@ -37,6 +43,9 @@
    Button label to add a show to favorites in the show preview window
    Favorite show label to add it, in the show view */
 "Add to favorites" = "Add to favorites";
+
+/* All option */
+"All" = "All";
 
 /* Title of the first cell of a media list on homepage. */
 "All content" = "All content";
@@ -58,6 +67,10 @@
 
 /* Introductory text for next program information */
 "At %1$@: %2$@" = "At %1$@: %2$@";
+
+/* Audios option
+   Header for audio search results */
+"Audios" = "Audios";
 
 /* Message title displayed when subscribing to all TV and radio shows
    Message title displayed when the user subscribed to all TV and radio shows */
@@ -83,8 +96,11 @@
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Choose a regional radio";
 
-/* Close button title */
+/* No comment provided by engineer. */
 "Close" = "Close";
+
+/* Settings section header */
+"Content" = "Content";
 
 /* Text displayed on live cells when no program time information is available */
 "Currently" = "Currently";
@@ -108,10 +124,16 @@
 /* Introductory title displayed at the top of the onboarding list */
 "Discover" = "Discover";
 
+/* Name of the search setting to filter downloadable content */
+"Downloadable" = "Downloadable";
+
 /* [Technical] Downloads page type for analytics measurements
    Label in the left menu to present downloads
    Title displayed at the top of the downloads screen */
 "Downloads" = "Downloads";
+
+/* Settings section header */
+"Duration" = "Duration";
 
 /* Label for the button keeping autoplay enabled */
 "Enable" = "Enable";
@@ -144,6 +166,10 @@
 
 /* Label in the left menu to display the feedback form */
 "Feedback" = "Feedback";
+
+/* Filters button title
+   Search filters page title */
+"Filters" = "Filters";
 
 /* Explanation displayed in the alert asking the user to enable notifications */
 "For the application to inform you when a new episode is available, notifications must be enabled." = "For the application to inform you when a new episode is available, notifications must be enabled.";
@@ -238,6 +264,9 @@
 /* Short title for the most recent video topic list */
 "Most recent" = "Most recent";
 
+/* Most searched shows header */
+"Most searched shows" = "Most searched topics";
+
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "My account";
 
@@ -291,7 +320,8 @@
 "Notify me" = "Notify me";
 
 /* Title of the button displayed at the end of an onboarding
-   Title of the button when the user subscribed to all TV and radio shows */
+   Title of the button when the user subscribed to all TV and radio shows
+   Title of the search settings button to apply settings */
 "OK" = "OK";
 
 /* Short introductory text for what is currently playing on the radio */
@@ -317,6 +347,12 @@
    Label in the left menu to present the main TV view */
 "Overview" = "Overview";
 
+/* Settings section header */
+"Period" = "Period";
+
+/* Name of the search setting to filter content playable abroard */
+"Playable abroad" = "Playable abroad";
+
 /* Notification message when a media is paused due to Handoff activity. */
 "Playback has resumed on another device." = "Playback has resumed on another device.";
 
@@ -339,6 +375,9 @@
    Label in the left menu to present programmes by date
    Title displayed at the top of the screen where (radio) episodes can be accessed by date */
 "Programmes by date" = "Programmes by date";
+
+/* Settings section header */
+"Properties" = "Properties";
 
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Pull to refresh";
@@ -398,10 +437,13 @@
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
 
+/* Title of the reset search settings button */
+"Reset" = "Reset";
+
 /* [Technical] Search page type for analytics measurements
    Label in the left menu to present the search view
-   Placeholder text displayed in the search field when empty (must be not too long)
    Search page title
+   Search placeholder text
    Title displayed when there is no search criterium entered */
 "Search" = "Search";
 
@@ -425,7 +467,9 @@
 /* Label used on a radio home page to present its associated shows
    Label used on a radio home page to present the shows AZ and shows by date access buttons.
    Label used on the TV home page to present the shows AZ and shows by date access buttons.
-   Show search result header */
+   Show search result header
+   Shows search setting option
+   Shows search setting option list view title */
 "Shows" = "Shows";
 
 /* Title of the button to skip updating the application */
@@ -473,6 +517,18 @@
 /* Message displayed if the Google Cast receiver cannot play videos */
 "The Google Cast receiver cannot play videos." = "The Google Cast receiver cannot play videos.";
 
+/* Period setting option */
+"The last 24 hours" = "The last 24 hours";
+
+/* Period setting option */
+"The last 3 days" = "The last 3 days";
+
+/* Period setting option */
+"The last month" = "The last month";
+
+/* Period setting option */
+"The last week" = "The last week";
+
 /* Label used on a radio home page to present the latest audios */
 "The latest audios" = "The latest audios";
 
@@ -498,7 +554,9 @@
 /* Title of the button to go back to the current date */
 "Today" = "Today";
 
-/* Label used on the home page to present topics while loading. It appears if no network connection available and no cache available. */
+/* Categories search setting option
+   Label used on the home page to present topics while loading. It appears if no network connection available and no cache available.
+   Topics search setting option list view title */
 "Topics" = "Topics";
 
 /* Total space size, display at the bottom of download list */
@@ -522,6 +580,10 @@
 
 /* Title of the button to update the application */
 "Update" = "Update";
+
+/* Header for video search results
+   Videos option */
+"Videos" = "Videos";
 
 /* Header for video and audio search results */
 "Videos and audios" = "Videos and audios";

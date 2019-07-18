@@ -18,7 +18,8 @@
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Mussar tut \"%@\"";
 
-/* Close button label on player view */
+/* Close button label on player view
+   Close button label on search view */
 "Close" = "Serrar";
 
 /* Player close button hint */

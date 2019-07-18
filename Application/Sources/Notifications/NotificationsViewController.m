@@ -8,6 +8,7 @@
 
 #import "Banner.h"
 #import "NSArray+PlaySRG.h"
+#import "NSBundle+PlaySRG.h"
 #import "Notification.h"
 #import "PlayErrors.h"
 #import "PushService.h"
@@ -65,10 +66,13 @@
     [self.tableView insertSubview:refreshControl atIndex:0];
     self.refreshControl = refreshControl;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close button title")
-                                                                              style:UIBarButtonItemStyleDone
-                                                                             target:self
-                                                                             action:@selector(close:)];
+    UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close-22"]
+                                                             landscapeImagePhone:nil
+                                                                           style:UIBarButtonItemStyleDone
+                                                                          target:self
+                                                                          action:@selector(close:)];
+    closeBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on search view");
+    self.navigationItem.leftBarButtonItem = closeBarButtonItem;
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationDidBecomeActive:)

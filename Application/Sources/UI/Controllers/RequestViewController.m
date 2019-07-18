@@ -40,11 +40,7 @@
 
 - (void)refresh
 {
-    if (self.loading) {
-        return;
-    }
-    
-    if (![self shouldPerformRefreshRequest]) {
+    if (! [self shouldPerformRefreshRequest]) {
         return;
     }
     

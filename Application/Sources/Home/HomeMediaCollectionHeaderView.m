@@ -13,7 +13,6 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface HomeMediaCollectionHeaderView ()
@@ -82,7 +81,7 @@
 {
     [super traitCollectionDidChange:previousTraitCollection];
     
-    [self.nearestViewController registerForPreviewingWithDelegate:self.nearestViewController sourceView:self];
+    [self play_registerForPreview];
 }
 
 #pragma mark Accessibility
@@ -163,6 +162,12 @@
 - (id)previewObject
 {
     return self.homeSectionInfo.module ?: self.homeSectionInfo.topic;
+}
+
+- (NSValue *)previewAnchorRect
+{
+    CGRect imageViewFrameInSelf = [self.thumbnailImageView convertRect:self.thumbnailImageView.bounds toView:self];
+    return [NSValue valueWithCGRect:imageViewFrameInSelf];
 }
 
 #pragma mark Actions

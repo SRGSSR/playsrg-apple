@@ -9,11 +9,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Transparent header view for use in collections.
+ *  Simple search bar without cancel button.
+ *
+ *  See https://stackoverflow.com/a/9727189/760435
  */
-@interface TransparentTitleHeaderView : UICollectionReusableView
-
-@property (nonatomic) NSString *title;
+@interface SearchBar : UISearchBar
 
 @end
 

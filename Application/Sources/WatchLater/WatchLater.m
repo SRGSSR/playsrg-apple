@@ -7,6 +7,7 @@
 #import "WatchLater.h"
 
 #import "DeprecatedFavorite.h"
+#import "NSArray+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGUserData/SRGUserData.h>
@@ -93,10 +94,7 @@ void WatchLaterMigrate(void)
         NSArray<DeprecatedFavorite *> *livestreamFavorites = [favorites filteredArrayUsingPredicate:predicate];
         [DeprecatedFavorite finishMigrationForFavorites:livestreamFavorites];
         
-        NSMutableArray<DeprecatedFavorite *> *mutableFavorites = favorites.mutableCopy;
-        [mutableFavorites removeObjectsInArray:livestreamFavorites];
-        NSArray<DeprecatedFavorite *> *nonLivestreamFavorites = mutableFavorites.copy;
-        
+        NSArray<DeprecatedFavorite *> *nonLivestreamFavorites = [favorites play_arrayByRemovingObjectsInArray:livestreamFavorites];
         __block NSUInteger remainingFavoritesCount = nonLivestreamFavorites.count;
         
         for (DeprecatedFavorite *favorite in nonLivestreamFavorites) {

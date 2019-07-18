@@ -39,6 +39,13 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
 
 @implementation BaseViewController
 
+#pragma mark Getters and setters
+
+- (UIViewController *)previewContextViewController
+{
+    return self;
+}
+
 #pragma mark Stubs
 
 - (AnalyticsPageType)pageType
@@ -149,8 +156,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
 {
     if ([viewControllerToCommit isKindOfClass:MediaPreviewViewController.class]) {
         MediaPreviewViewController *mediaPreviewViewController = (MediaPreviewViewController *)viewControllerToCommit;
-        UIView *sourceView = previewingContext.sourceView;
-        [sourceView.nearestViewController play_presentMediaPlayerFromLetterboxController:mediaPreviewViewController.letterboxController fromPushNotification:NO animated:YES completion:nil];
+        [self play_presentMediaPlayerFromLetterboxController:mediaPreviewViewController.letterboxController fromPushNotification:NO animated:YES completion:nil];
     }
     else if ([viewControllerToCommit isKindOfClass:ModuleViewController.class]
                 || [viewControllerToCommit isKindOfClass:ShowViewController.class]
@@ -161,8 +167,9 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
 
 #pragma mark 3D Touch fallback
 
-- (void)showPreviewForSourceView:(UIView *)sourceView
+- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
 {
+    UIView *sourceView = gestureRecognizer.view;
     if (! [sourceView conformsToProtocol:@protocol(Previewing)]) {
         return;
     }
@@ -347,8 +354,9 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     
     UIPopoverPresentationController *popoverPresentationController = alertController.popoverPresentationController;
     popoverPresentationController.sourceView = sourceView;
-    popoverPresentationController.sourceRect = sourceView.bounds;
     
+    NSValue *previewAnchorRect = [sourceView respondsToSelector:@selector(previewAnchorRect)] ? [(id<Previewing>)sourceView previewAnchorRect] : nil;
+    popoverPresentationController.sourceRect = previewAnchorRect ? previewAnchorRect.CGRectValue : sourceView.bounds;
     [self presentViewController:alertController animated:YES completion:nil];
 }
 

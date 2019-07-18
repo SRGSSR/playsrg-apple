@@ -13,7 +13,7 @@
 
 @interface NavigationController ()
 
-@property (nonatomic) RadioChannel *radioChannel;
+@property (nonatomic) UIStatusBarStyle statusBarStyle;
 
 @end
 
@@ -23,20 +23,27 @@
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController radioChannel:(RadioChannel *)radioChannel
 {
+    UIStatusBarStyle statusBarStyle = radioChannel.hasDarkStatusBar ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
+    return [self initWithRootViewController:rootViewController tintColor:radioChannel.titleColor backgroundColor:radioChannel.color statusBarStyle:statusBarStyle];
+}
+
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
+                                 tintColor:(UIColor *)tintColor
+                           backgroundColor:(UIColor *)backgroundColor
+                            statusBarStyle:(UIStatusBarStyle)statusBarStyle
+{
     if (self = [super initWithRootViewController:rootViewController]) {
-        self.radioChannel = radioChannel;
-        
+        self.statusBarStyle = statusBarStyle;
         self.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
         
         UINavigationBar *navigationBar = self.navigationBar;
         navigationBar.barStyle = UIBarStyleBlack;
         
-        // Apply radio channel colors with a small shadow for better readability
-        UIColor *radioChannelColor = radioChannel.color;
-        if (radioChannel.color) {
+        // Apply background colors with a small shadow for better readability
+        if (backgroundColor) {
             navigationBar.layer.shadowOpacity = 1.f;
             
-            navigationBar.barTintColor = radioChannelColor;
+            navigationBar.barTintColor = backgroundColor;
             navigationBar.translucent = NO;
         }
         // Use standard blur with no shadow (which would break the blur).
@@ -47,14 +54,14 @@
             navigationBar.translucent = YES;
         }
         
-        UIColor *tintColor = radioChannel.titleColor ?: UIColor.whiteColor;
-        navigationBar.tintColor = tintColor;
+        UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
+        navigationBar.tintColor = foregroundColor;
         navigationBar.titleTextAttributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithSize:18.f],
-                                               NSForegroundColorAttributeName : tintColor };
+                                               NSForegroundColorAttributeName : foregroundColor };
         
         for (NSNumber *controlState in @[ @(UIControlStateNormal), @(UIControlStateHighlighted), @(UIControlStateDisabled), @(UIControlStateSelected), @(UIControlStateSelected | UIControlStateHighlighted) ]) {
             [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f],
-                                                                                                                   NSForegroundColorAttributeName : tintColor }
+                                                                                                                   NSForegroundColorAttributeName : foregroundColor }
                                                                                                        forState:controlState.integerValue];
         }
     }
@@ -63,7 +70,7 @@
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
 {
-    return [self initWithRootViewController:rootViewController radioChannel:nil];
+    return [self initWithRootViewController:rootViewController tintColor:nil backgroundColor:nil statusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma clang diagnostic push
@@ -92,12 +99,7 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    if (self.radioChannel) {
-        return self.radioChannel.darkStatusBar ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
-    }
-    else {
-        return [self.topViewController preferredStatusBarStyle];
-    }
+    return self.statusBarStyle;
 }
 
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation

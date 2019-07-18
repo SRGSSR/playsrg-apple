@@ -10,6 +10,7 @@
 #import "TableLoadMoreFooterView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
+#import "UIScrollView+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -18,6 +19,8 @@
 
 @property (nonatomic) NSError *lastRequestError;
 @property (nonatomic, weak) UIRefreshControl *refreshControl;
+
+@property (nonatomic) UIImageView *loadingImageView;        // strong
 
 @property (nonatomic) NSArray *previouslySelectedItems;
 
@@ -67,6 +70,11 @@
     [refreshControl addTarget:self action:@selector(tableRequestViewController_refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
     self.refreshControl = refreshControl;
+    
+    // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
+    // stretched
+    self.loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
+    self.loadingImageView.contentMode = UIViewContentModeCenter;
 }
 
 - (void)viewWillLayoutSubviews
@@ -115,6 +123,11 @@
     // the user with errors
     else if (self.items.count == 0) {
         [self.tableView reloadEmptyDataSet];
+    }
+    
+    // Returns immediately to the top when the list is empty
+    if (self.items.count == 0) {
+        [self.tableView play_scrollToTopAnimated:NO];
     }
 }
 
@@ -214,11 +227,7 @@
 - (UIView *)customViewForEmptyDataSet:(UIScrollView *)scrollView
 {
     if (self.loading) {
-        // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
-        // stretched
-        UIImageView *loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
-        loadingImageView.contentMode = UIViewContentModeCenter;
-        return loadingImageView;
+        return self.loadingImageView;
     }
     else {
         return nil;

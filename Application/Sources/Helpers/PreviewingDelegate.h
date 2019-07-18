@@ -4,13 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <UIKit/UIKit.h>
+#import "Previewing.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PreviewingDelegate : NSObject <UIViewControllerPreviewingDelegate>
+@interface PreviewingDelegate : NSObject <PreviewingDelegate>
 
-- (instancetype)initWithRealDelegate:(id<UIViewControllerPreviewingDelegate>)realDelegate;
+- (instancetype)initWithRealDelegate:(id<PreviewingDelegate>)realDelegate;
 
 @end
 
