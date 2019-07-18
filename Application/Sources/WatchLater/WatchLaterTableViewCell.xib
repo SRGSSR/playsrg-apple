@@ -116,7 +116,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="AX7-S7-GNv" userLabel="Subtitle Stack View">
-                                        <rect key="frame" x="0.0" y="24.5" width="435.5" height="22"/>
+                                        <rect key="frame" x="0.0" y="20.5" width="435.5" height="22"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="downloadable-22" translatesAutoresizingMaskIntoConstraints="NO" id="YBz-Mz-5VT">
                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -141,7 +141,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="AX7-S7-GNv" firstAttribute="trailing" secondItem="qbT-jA-SKS" secondAttribute="trailing" id="1K2-5o-gyv"/>
-                                    <constraint firstItem="AX7-S7-GNv" firstAttribute="top" secondItem="qbT-jA-SKS" secondAttribute="bottom" constant="4" id="5hk-2K-nSu"/>
+                                    <constraint firstItem="AX7-S7-GNv" firstAttribute="top" secondItem="qbT-jA-SKS" secondAttribute="bottom" id="5hk-2K-nSu"/>
                                     <constraint firstAttribute="trailing" secondItem="qbT-jA-SKS" secondAttribute="trailing" id="675-8P-iAP"/>
                                     <constraint firstItem="qbT-jA-SKS" firstAttribute="leading" secondItem="s1l-H7-GFf" secondAttribute="leading" id="G7u-bC-56B"/>
                                     <constraint firstItem="AX7-S7-GNv" firstAttribute="leading" secondItem="qbT-jA-SKS" secondAttribute="leading" id="hnK-Gb-byi"/>

@@ -125,7 +125,7 @@
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="blL-K8-zBb" userLabel="Subtitle Stack View">
-                                <rect key="frame" x="0.0" y="146" width="210" height="22"/>
+                                <rect key="frame" x="0.0" y="141" width="210" height="22"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="downloadable-22" translatesAutoresizingMaskIntoConstraints="NO" id="4nc-Va-lWw" userLabel="Download Status Image View">
                                         <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -158,7 +158,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="blL-K8-zBb" firstAttribute="top" secondItem="OO0-yH-uvq" secondAttribute="bottom" constant="5" id="0Sj-Ze-MsW"/>
+                            <constraint firstItem="blL-K8-zBb" firstAttribute="top" secondItem="OO0-yH-uvq" secondAttribute="bottom" id="0Sj-Ze-MsW"/>
                             <constraint firstItem="3Zs-DP-WoR" firstAttribute="trailing" secondItem="i6n-Nf-jOh" secondAttribute="trailing" id="1Co-1P-2GL"/>
                             <constraint firstItem="blL-K8-zBb" firstAttribute="trailing" secondItem="OO0-yH-uvq" secondAttribute="trailing" id="3ba-FD-pcq"/>
                             <constraint firstItem="OO0-yH-uvq" firstAttribute="leading" secondItem="ibC-3k-6VL" secondAttribute="leading" id="4bV-iN-PkM"/>

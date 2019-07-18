@@ -96,7 +96,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="5j8-iE-ECf" userLabel="Subtitle Stack View">
-                                        <rect key="frame" x="0.0" y="24.5" width="435.5" height="22"/>
+                                        <rect key="frame" x="0.0" y="20.5" width="435.5" height="22"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="downloadable-22" translatesAutoresizingMaskIntoConstraints="NO" id="TM2-Y3-cHc">
                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -124,7 +124,7 @@
                                     <constraint firstItem="5j8-iE-ECf" firstAttribute="trailing" secondItem="fVk-qC-VaO" secondAttribute="trailing" id="NJU-tV-rhG"/>
                                     <constraint firstItem="fVk-qC-VaO" firstAttribute="leading" secondItem="ksZ-Pc-dfN" secondAttribute="leading" id="P4b-QV-HEv"/>
                                     <constraint firstItem="5j8-iE-ECf" firstAttribute="leading" secondItem="fVk-qC-VaO" secondAttribute="leading" id="mjZ-mR-h6R"/>
-                                    <constraint firstItem="5j8-iE-ECf" firstAttribute="top" secondItem="fVk-qC-VaO" secondAttribute="bottom" constant="4" id="nih-k8-mnH"/>
+                                    <constraint firstItem="5j8-iE-ECf" firstAttribute="top" secondItem="fVk-qC-VaO" secondAttribute="bottom" id="nih-k8-mnH"/>
                                     <constraint firstItem="fVk-qC-VaO" firstAttribute="top" secondItem="ksZ-Pc-dfN" secondAttribute="top" id="vCN-zd-1rQ"/>
                                 </constraints>
                             </view>
