@@ -93,7 +93,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xav-sZ-yHT">
                                 <rect key="frame" x="142" y="95" width="63" height="18"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youth_protection_yellow-18" translatesAutoresizingMaskIntoConstraints="NO" id="zAw-Tr-08f">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="18" placeholderIntrinsicHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="zAw-Tr-08f">
                                         <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
@@ -220,6 +220,5 @@
         <image name="360_media-25" width="25" height="25"/>
         <image name="downloadable-22" width="22" height="22"/>
         <image name="geoblocked-25" width="25" height="25"/>
-        <image name="youth_protection_yellow-18" width="18" height="18"/>
     </resources>
 </document>
