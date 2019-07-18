@@ -73,13 +73,12 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.textColor = titleTextColor;
     
-    self.navigationButton.backgroundColor = backgroundColor;
     self.navigationButton.tintColor = titleTextColor;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     self.titleLabel.text = ([HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:self.bounds featured:featured] > HomeSectionHeaderMinimumHeight) ? homeSectionInfo.title : nil;
     
-    self.navigationButton.hidden = ![homeSectionInfo canOpenList] || (self.titleLabel.text == nil);
+    self.navigationButton.hidden = ! [homeSectionInfo canOpenList] || ! self.titleLabel.text;
 }
 
 #pragma mark Overrides

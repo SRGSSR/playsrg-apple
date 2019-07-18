@@ -211,7 +211,7 @@
             [self updateStatusHeaderViewLayoutWithMessage:serviceMessage];
             self.serviceMessage = serviceMessage;
         }
-        else if ((!serviceMessage || HTTPResponse.statusCode == 404) && self.serviceMessage) {
+        else if ((! serviceMessage || HTTPResponse.statusCode == 404) && self.serviceMessage) {
             [self updateStatusHeaderViewLayoutWithMessage:nil];
             self.serviceMessage = nil;
         }
