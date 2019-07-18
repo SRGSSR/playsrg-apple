@@ -87,8 +87,10 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
+    self.moduleBackgroundView.backgroundColor = backgroundColor;
     
+    self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.textColor = UIColor.play_lightGrayColor;
     self.titleLabel.userInteractionEnabled = YES;
     
