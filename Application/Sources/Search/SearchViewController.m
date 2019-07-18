@@ -182,7 +182,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     [super viewDidAppear:animated];
     
-    if ([self play_isMovingToParentViewController]) {
+    if ([self play_isMovingToParentViewController] && self.query.length == 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.searchController.searchBar becomeFirstResponder];
         });
