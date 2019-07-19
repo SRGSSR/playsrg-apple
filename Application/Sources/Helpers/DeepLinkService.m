@@ -20,7 +20,6 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
 
 @interface DeepLinkService ()
 
-@property (nonatomic) BOOL needAnUpdate;
 @property (nonatomic, weak) SRGRequest *request;
 
 @end
@@ -44,17 +43,12 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
 - (instancetype)init
 {
     if (self = [super init]) {
-        
-        self.needAnUpdate = YES;
-        
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(reachabilityDidChange:)
                                                    name:FXReachabilityStatusDidChangeNotification
                                                  object:nil];
-        
-        // Register for foreground notifications
         [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(enterForeground:)
+                                               selector:@selector(applicationWillEnterForeground:)
                                                    name:UIApplicationWillEnterForegroundNotification
                                                  object:nil];
         
@@ -87,11 +81,11 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
 {
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     
-    NSString *javascriptFilePath = [self parsePlayUrlFilePath];
-    NSString *javascript = [NSString stringWithContentsOfFile:javascriptFilePath encoding:NSUTF8StringEncoding error:nil];
+    NSString *javaScriptFilePath = [self parsePlayURLFilePath];
+    NSString *javaScript = [NSString stringWithContentsOfFile:javaScriptFilePath encoding:NSUTF8StringEncoding error:NULL];
     JSContext *context = [[JSContext alloc] init];
-    [context evaluateScript:javascript];
-    JSValue * evaluate = [context objectForKeyedSubscript:@"parseForPlayApp"];
+    [context evaluateScript:javaScript];
+    JSValue *evaluate = [context objectForKeyedSubscript:@"parseForPlayApp"];
     
     NSMutableDictionary *queryItems = [NSMutableDictionary dictionary];
     [URLComponents.queryItems enumerateObjectsUsingBlock:^(NSURLQueryItem * _Nonnull queryItem, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -99,10 +93,10 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
             [queryItems setObject:queryItem.value forKey:queryItem.name];
         }
     }];
-    JSValue * result = [evaluate callWithArguments:@[ URLComponents.host ?: NSNull.null,
-                                                      URLComponents.path ?: NSNull.null,
-                                                      queryItems.copy,
-                                                      URLComponents.fragment ?: NSNull.null ]];
+    JSValue *result = [evaluate callWithArguments:@[ URLComponents.host ?: NSNull.null,
+                                                     URLComponents.path ?: NSNull.null,
+                                                     queryItems.copy,
+                                                     URLComponents.fragment ?: NSNull.null ]];
     NSURL *playURL = [NSURL URLWithString:result.toString];
     
     if ([playURL.host.lowercaseString isEqualToString:@"redirect"]) {
@@ -119,17 +113,17 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
     return playURL;
 }
 
-- (NSString *)parsePlayUrlFilePath
+- (NSString *)parsePlayURLFilePath
 {
-    if ([NSFileManager.defaultManager fileExistsAtPath:[self libraryParsePlayUrlFilePath]]) {
-        return [self libraryParsePlayUrlFilePath];
+    if ([NSFileManager.defaultManager fileExistsAtPath:[self libraryParsePlayURLFilePath]]) {
+        return [self libraryParsePlayURLFilePath];
     }
     else {
-        return  [NSBundle.mainBundle pathForResource:@"parse_play_url" ofType:@"js"];
+        return [NSBundle.mainBundle pathForResource:@"parse_play_url" ofType:@"js"];
     }
 }
 
-- (NSString *)libraryParsePlayUrlFilePath
+- (NSString *)libraryParsePlayURLFilePath
 {
     return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"parse_play_url.js"];
 }
@@ -138,17 +132,16 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
 
 - (void)updateDeepLinkScript
 {
-    if (self.needAnUpdate && [FXReachability sharedInstance].reachable && !self.request.running) {
+    if ([FXReachability sharedInstance].reachable && !self.request.running) {
         NSURL *middlewareURL = ApplicationConfiguration.sharedApplicationConfiguration.middlewareURL;
         NSURL *URL = [NSURL URLWithString:@"api/v1/deeplink/parse_play_url.js" relativeToURL:middlewareURL];
         
         SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (data) {
                 NSError *writeError = nil;
-                [data writeToFile:[self libraryParsePlayUrlFilePath] options:NSDataWritingAtomic error:&writeError];
+                [data writeToFile:[self libraryParsePlayURLFilePath] options:NSDataWritingAtomic error:&writeError];
                 if (writeError) {
-                    PlayLogError(@"DeepLink", @"Could not save parse_play_url.js file. Reason: %@", writeError);
-                    NSAssert(NO, @"Could not save parse_play_url.js file. Not safe. See error above.");
+                    PlayLogError(@"DeepLink", @"Could not save deep linking parsing JavaScript file. Reason: %@", writeError);
                 }
             }
         }];
@@ -166,9 +159,8 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
     }
 }
 
-- (void)enterForeground:(NSNotification *)notification
+- (void)applicationWillEnterForeground:(NSNotification *)notification
 {
-    self.needAnUpdate = YES;
     [self updateDeepLinkScript];
 }
 
