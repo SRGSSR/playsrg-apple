@@ -211,16 +211,15 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     // Call last to continue with the reload process, based on the sorted data
     [super refreshDidFinishWithError:error];
     
-    if (self.indexLetters.count > 0 && self.initialAlphabeticalIndex) {
-        NSInteger section = [self.indexLetters indexOfObject:self.initialAlphabeticalIndex.uppercaseString];
-        if (section != NSNotFound) {
-            // TODO: fix that it doesn't take care of the sticky section header and transparent navigation bar.
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:section]
-                                        atScrollPosition:UICollectionViewScrollPositionTop
-                                                animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.indexLetters.count > 0 && self.initialAlphabeticalIndex) {
+            NSUInteger sectionIndex = [self.indexLetters indexOfObject:self.initialAlphabeticalIndex.uppercaseString];
+            if (sectionIndex != NSNotFound) {
+                [self scrollToSectionWithIndex:sectionIndex animated:NO];
+            }
+            self.initialAlphabeticalIndex = nil;
         }
-        self.initialAlphabeticalIndex = nil;
-    }
+    });
 }
 
 - (BOOL)srg_isTrackedAutomatically
@@ -237,6 +236,26 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (AnalyticsPageType)pageType
 {
     return self.radioChannel != nil ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
+}
+
+#pragma mark Scrolling
+
+- (void)scrollToSectionWithIndex:(NSUInteger)index animated:(BOOL)animated
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
+    
+    // -scrollToItemAtIndexPath:atScrollPosition:animated: doesn't take care of the sticky section header and transparent navigation bar
+    CGRect sectionHeaderFrame = [self.collectionView layoutAttributesForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath].frame;
+    CGRect itemFrame = [self.collectionView layoutAttributesForItemAtIndexPath:indexPath].frame;
+    
+    // FIXME: Incorrect behavior: When scrolling to the top or bottom of the index, the cell boundary should be exact. Behavior
+    //        is incorrect at the bottom on < iOS 11 (also in production), incorrect at the top as well on iOS 11. We probably
+    //        need to take insets into account correctly in all cases.
+    CGFloat contentInsetTop = ContentInsetsForScrollView(self.collectionView).top;
+    CGFloat sectionHeaderHeight = CGRectGetHeight(sectionHeaderFrame);
+    CGFloat newContentOffsetY = fminf(CGRectGetMinY(itemFrame) - sectionHeaderHeight - contentInsetTop,
+                                      self.collectionView.contentSize.height - CGRectGetHeight(self.collectionView.frame));
+    [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x, newContentOffsetY) animated:animated];
 }
 
 #pragma mark UICollectionViewDataSource protocol
@@ -330,20 +349,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     }
     
     BDKCollectionIndexView *collectionIndexView = sender;
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:collectionIndexView.currentIndex];
-    
-    // -scrollToItemAtIndexPath:atScrollPosition:animated: doesn't take care of the sticky section header and transparent navigation bar
-    CGRect sectionHeaderFrame = [self.collectionView layoutAttributesForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath].frame;
-    CGRect itemFrame = [self.collectionView layoutAttributesForItemAtIndexPath:indexPath].frame;
-    
-    // FIXME: Incorrect behavior: When scrolling to the top or bottom of the index, the cell boundary should be exact. Behavior
-    //        is incorrect at the bottom on < iOS 11 (also in production), incorrect at the top as well on iOS 11. We probably
-    //        need to take insets into account correctly in all cases.
-    CGFloat contentInsetTop = ContentInsetsForScrollView(self.collectionView).top;
-    CGFloat sectionHeaderHeight = CGRectGetHeight(sectionHeaderFrame);
-    CGFloat newContentOffsetY = fminf(CGRectGetMinY(itemFrame) - sectionHeaderHeight - contentInsetTop,
-                                      self.collectionView.contentSize.height - CGRectGetHeight(self.collectionView.frame));
-    [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x, newContentOffsetY) animated:NO];
+    [self scrollToSectionWithIndex:collectionIndexView.currentIndex animated:NO];
 }
 
 #pragma mark Notifications
