@@ -500,7 +500,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         NSString *dateString = [self valueFromURLComponents:URLComponents withParameterName:@"date"];
         NSDate *date = nil;
         if (dateString) {
-            date =  [NSDateFormatter.play_schemeURLOptionFormatter dateFromString:dateString];
+            date =  [NSDateFormatter.play_URLOptionDateFormatter dateFromString:dateString];
         }
         if ([pageURN containsString:@":radio:"] && !radioChannel) {
             radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannels].firstObject;

@@ -7,7 +7,6 @@
 #import "DeepLinkService.h"
 
 #import "ApplicationConfiguration.h"
-
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayLogger.h"
 
@@ -108,7 +107,7 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
     
     if ([playURL.host.lowercaseString isEqualToString:@"redirect"]) {
         SRGDiagnosticReport *report = [[SRGDiagnosticsService serviceWithName:DeepLinkDiagnosticsServiceName] reportWithName:URL.absoluteString];
-        [report setString:[[NSDateFormatter play_backendDateFormatter] stringFromDate:NSDate.date] forKey:@"clientTime"];
+        [report setString:[[NSDateFormatter play_rfc3339DateFormatter] stringFromDate:NSDate.date] forKey:@"clientTime"];
         [report setString:NSBundle.mainBundle.bundleIdentifier forKey:@"clientId"];
         [report setString:[context objectForKeyedSubscript:@"parsePlayUrlVersion"].toString forKey:@"jsVersion"];
         [report setString:URL.absoluteString forKey:@"url"];

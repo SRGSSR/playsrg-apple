@@ -46,14 +46,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeTimeAccessibilityFormatter;
 
 /**
- *  Use to decode scheme url option for a shows by date page.
+ *  Formatter for URL date options.
  */
-+ (NSDateFormatter *)play_schemeURLOptionFormatter;
++ (NSDateFormatter *)play_URLOptionDateFormatter;
 
 /**
- *  Use to decode or encode dates from / for the middleware.
+ *  RFC 3339 date formatter.
  */
-+ (NSDateFormatter *)play_backendDateFormatter;
++ (NSDateFormatter *)play_rfc3339DateFormatter;
 
 @end
 

@@ -98,7 +98,7 @@
     return s_dateFormatter;
 }
 
-+ (NSDateFormatter *)play_schemeURLOptionFormatter
++ (NSDateFormatter *)play_URLOptionDateFormatter
 {
     static NSDateFormatter *s_dateFormatter;
     static dispatch_once_t s_onceToken;
@@ -109,7 +109,7 @@
     return s_dateFormatter;
 }
 
- + (NSDateFormatter *)play_backendDateFormatter
+ + (NSDateFormatter *)play_rfc3339DateFormatter
 {
     static NSDateFormatter *s_dateFormatter;
     static dispatch_once_t s_onceToken;
