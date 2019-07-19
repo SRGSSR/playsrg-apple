@@ -78,12 +78,14 @@
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    
+    SRGDay *day = [SRGDay dayFromDate:self.date];
     if (self.radioChannel) {
-        SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider radioEpisodesForVendor:applicationConfiguration.vendor date:self.date channelUid:self.radioChannel.uid withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
+        SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider radioEpisodesForVendor:applicationConfiguration.vendor day:day channelUid:self.radioChannel.uid withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
         [requestQueue addRequest:request resume:YES];
     }
     else {
-        SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider tvEpisodesForVendor:applicationConfiguration.vendor date:self.date withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
+        SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider tvEpisodesForVendor:applicationConfiguration.vendor day:day withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
         [requestQueue addRequest:request resume:YES];
     }
 }
