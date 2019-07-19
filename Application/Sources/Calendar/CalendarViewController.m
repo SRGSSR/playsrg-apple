@@ -37,7 +37,7 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel date:(nullable NSDate *)date
+- (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel date:(NSDate *)date
 {
     if (self = [super init]) {
         self.radioChannel = radioChannel;
@@ -117,7 +117,7 @@
     
     [self updateFonts];
     
-    NSDate *date = (self.initialDate && [self.initialDate isEarlierThanDate:self.calendar.today]) ? self.initialDate : self.calendar.today;
+    NSDate *date = [self.initialDate isEarlierThanDate:self.calendar.today] ? self.initialDate : self.calendar.today;
     [self showMediasForDate:date animated:NO];
     
     [NSNotificationCenter.defaultCenter addObserver:self
@@ -281,7 +281,7 @@
     
     // Hidden if in the same page as today and current date is not today
     BOOL hidden = [NSCalendar.currentCalendar compareDate:calendar.currentPage toDate:calendar.today toUnitGranularity:unitGranularity] == NSOrderedSame
-        && [calendar.today isEqual:dailyMediasViewController.date];
+        && [calendar.today isEqualToDate:dailyMediasViewController.date];
     [self setNavigationBarItemsHidden:hidden];
 }
 

@@ -301,10 +301,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         }
 #endif
         
-        NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
-        
         NSString *mediaURN = [self valueFromURLComponents:URLComponents withParameterName:@"media"];
         if (mediaURN) {
+            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
             NSInteger startTime = [[self valueFromURLComponents:URLComponents withParameterName:@"start-time"] integerValue];
             BOOL canOpen = [self openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
@@ -324,6 +323,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         NSString *showURN = [self valueFromURLComponents:URLComponents withParameterName:@"show"];
         if (showURN) {
+            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
             BOOL canOpen = [self openShowWithURN:showURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
                 
@@ -342,6 +342,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         NSString *pageURN = [self valueFromURLComponents:URLComponents withParameterName:@"page"];
         if (pageURN) {
+            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
             BOOL canOpen = [self openPageWithURN:pageURN channelUid:channelUid URLComponents:URLComponents fromPushNotification:NO completionBlock:^{
                 [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
                 

@@ -4,25 +4,25 @@ Play applications can be opened with a custom URL scheme having the following fo
 
 ## Actions
 
-The application supports Apple universal links. Replacing the `http`or `https`scheme with the application scheme can convert a web url to a scheme url:
+The application supports Apple universal links. Replacing the `http`or `https` scheme of a Play website URL with the corresponding application scheme yields a link which can be opened with the application:
 
-* `[scheme]://[play_website_url_without_the_original_scheme]`.
+`[scheme]://[play_website_url_without_the_original_scheme]`
 
-Here ar all available actions:
+The available actions are:
 
-* Open a media within the player: `[scheme]://open?media=[media_urn]`. An optional `&start-time=[start_time]` parameter can be added, to start the VOD / AOD playback at the position in second.
+* Open a media within the player: `[scheme]://open?media=[media_urn]`. An optional `&start-time=[start_time]` parameter can be added to start VOD / AOD playback at the specified position in second.
 * Open a show page: `[scheme]://open?show=[show_urn]`.
 * Open a topic page: `[scheme]://open?topic=[topic_urn]`.
 * Open a module page: `[scheme]://open?module=[module_urn]`.
 * Open a page: `[scheme]://open?page=[page_urn]`.
 	* Home page: `urn:[bu]:page:[transmission]:home`.
-	* Search page: `urn:[bu]:page:[transmission]:search` or `urn:[bu]:page:search`. An optional `query` parameter with the search query, and an optional `mediaType` parameter with `video` or `audio` values, exist.
-	* Shows A to Z page: `urn:[bu]:page:[transmission]:az`. An optional `index` parameter with one character exists.
-	* Shows by dates page: `urn:[bu]:page:[transmission]:bydate`. An optional `date` parameter with `yyyy-MM-dd` format exists.
+	* Search page: `urn:[bu]:page:[transmission]:search` or `urn:[bu]:page:search`. Optional `query` and `mediaType` (with `video` or `audio` values) parameters can be provided.
+	* Shows A to Z page: `urn:[bu]:page:[transmission]:az`. An optional `index` single character parameter can be provided to open the page at the specified index.
+	* Shows by date page: `urn:[bu]:page:[transmission]:bydate`. An optional `date` parameter with the `yyyy-MM-dd` format can be provided.
 
-In all cases, an optional `&channel-id=[channel_id]` parameter can be added, which also resets the homepage to the specified radio channel homepage. If this parameter is not specified or does not match a valid channel, the homepage is reset to the TV one instead.
+For media, show and page links, an optional `&channel-id=[channel_id]` parameter can be added, which resets the homepage to the specified radio channel homepage. If this parameter is not specified or does not match a valid channel, the homepage is reset to the TV one instead.
 
-For a `Debug`, `Nightly` or a `Beta` build, `&server=[server_title]` parameter can be added to force a server selection update. The available server list can be found in the application section Settings / Advanced features / Server.
+For a `Debug`, `Nightly` or a `Beta` build, `&server=[server_title]` parameter can be added to force a server selection update. The available server list can be found under *Settings* > *Advanced features* > *Server*.
 
 ### URL generation
 
