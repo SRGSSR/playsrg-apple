@@ -107,11 +107,17 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 #pragma mark Class methods
 
++ (SRGMediaSearchSettings *)defaultSettings
+{
+    SRGMediaSearchSettings *defaultSettings = [[SRGMediaSearchSettings alloc] init];
+    defaultSettings.beforeDay = SRGDay.today;
+    return defaultSettings;
+}
+
 + (BOOL)containsAdvancedSettings:(SRGMediaSearchSettings *)settings
 {
     NSParameterAssert(settings);
-    SRGMediaSearchSettings *basicSettings = [[SRGMediaSearchSettings alloc] init];
-    return ! [basicSettings isEqual:settings];
+    return ! [self.defaultSettings isEqual:settings];
 }
 
 #pragma mark Object lifecycle
@@ -120,7 +126,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 {
     if (self = [super init]) {
         self.query = query;
-        self.settings = [settings copy] ?: [[SRGMediaSearchSettings alloc] init];
+        self.settings = [settings copy] ?: SearchSettingsViewController.defaultSettings;
         self.settings.aggregationsEnabled = YES;
     }
     return self;
@@ -657,7 +663,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (IBAction)resetSettings:(id)sender
 {
-    self.settings = [[SRGMediaSearchSettings alloc] init];
+    self.settings = SearchSettingsViewController.defaultSettings;
     [self updateResults];
     
     [self.tableView reloadData];

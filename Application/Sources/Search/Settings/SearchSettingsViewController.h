@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SearchSettingsViewController : RequestViewController <UITableViewDataSource, UITableViewDelegate>
 
 /**
+ *  The default settings (including aggregations).
+ */
+@property (class, nonatomic, readonly) SRGMediaSearchSettings *defaultSettings;
+
+/**
  *  Instantiate a setting screen with allowed values matching a given query and / or an existing setting set.
  */
 - (instancetype)initWithQuery:(nullable NSString *)query settings:(nullable SRGMediaSearchSettings *)settings;
