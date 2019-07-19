@@ -478,7 +478,7 @@ name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 8dbe4e5
 
 name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 1.1.10
 
-name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: ef3eec3
+name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: ab315a3
 
 name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 

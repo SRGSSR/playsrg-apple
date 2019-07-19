@@ -158,7 +158,7 @@
     
     NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
     
-    SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider latestEpisodesForShowWithURN:self.show.URN maximumPublicationMonth:nil completionBlock:completionBlock] requestWithPageSize:pageSize] requestWithPage:page];
+    SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider latestEpisodesForShowWithURN:self.show.URN maximumPublicationDay:nil completionBlock:completionBlock] requestWithPageSize:pageSize] requestWithPage:page];
     [requestQueue addRequest:request resume:YES];
 }
 
