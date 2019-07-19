@@ -11,6 +11,8 @@
 
 #import <SRGAppearance/SRGAppearance.h>
 
+static const CGFloat kLayoutHorizontalInset = 10.f;
+
 @interface HomeShowVerticalListTableViewCell ()
 
 @property (nonatomic, weak) IBOutlet UIView *wrapperView;
@@ -25,7 +27,7 @@
 + (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds collectionViewLayout:(UICollectionViewFlowLayout *)collectionViewLayout
 {
     // 2 items per row on small layouts, max cell width of 210
-    CGFloat width = fminf(floorf((CGRectGetWidth(bounds) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right - collectionViewLayout.minimumInteritemSpacing) / 2.f), 210.f);
+    CGFloat width = fminf(floorf((CGRectGetWidth(bounds) - collectionViewLayout.minimumInteritemSpacing - 2 * kLayoutHorizontalInset) / 2.f), 210.f);
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 30.f : 50.f;
@@ -45,10 +47,10 @@
     });
     
     CGSize itemSize = [self itemSizeForHomeSectionInfo:homeSectionInfo bounds:bounds collectionViewLayout:s_collectionViewLayout];
-    NSInteger numberOfItemsPerRow = floorf((CGRectGetWidth(bounds) - s_collectionViewLayout.sectionInset.left - s_collectionViewLayout.sectionInset.right + s_collectionViewLayout.minimumInteritemSpacing) / (itemSize.width + s_collectionViewLayout.minimumInteritemSpacing));
+    NSInteger numberOfItemsPerRow = floorf((CGRectGetWidth(bounds) - 2 * kLayoutHorizontalInset + s_collectionViewLayout.minimumInteritemSpacing) / (itemSize.width + s_collectionViewLayout.minimumInteritemSpacing));
     NSInteger numberOfItems = (homeSectionInfo.items.count != 0) ? homeSectionInfo.items.count : 4;
     NSInteger numberOfLines = MAX(ceilf((float)numberOfItems / numberOfItemsPerRow), 1);
-    return itemSize.height * numberOfLines + s_collectionViewLayout.sectionInset.top + s_collectionViewLayout.sectionInset.bottom + (numberOfLines - 1) * s_collectionViewLayout.minimumLineSpacing;
+    return itemSize.height * numberOfLines + (numberOfLines - 1) * s_collectionViewLayout.minimumLineSpacing;
 }
 
 - (void)awakeFromNib
@@ -121,6 +123,11 @@
 }
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0.f, kLayoutHorizontalInset, 0.f, kLayoutHorizontalInset);
+}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {

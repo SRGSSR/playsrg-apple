@@ -108,6 +108,8 @@
     self.progressView.hidden = YES;
     
     [self.thumbnailImageView play_resetImage];
+    
+    self.backgroundColor = UIColor.play_blackColor;
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow
@@ -196,17 +198,17 @@
 
 - (void)reloadData
 {
-    if (! self.media) {
-        self.mediaView.hidden = YES;
-        self.placeholderView.hidden = NO;
-        return;
-    }
-    
     UIColor *backgroundColor = UIColor.play_blackColor;
     if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
         backgroundColor = self.module.backgroundColor;
     }
     self.backgroundColor = backgroundColor;
+    
+    if (! self.media) {
+        self.mediaView.hidden = YES;
+        self.placeholderView.hidden = NO;
+        return;
+    }
     
     self.mediaView.hidden = NO;
     self.placeholderView.hidden = YES;

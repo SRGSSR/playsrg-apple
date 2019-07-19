@@ -27,6 +27,8 @@
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
+static const CGFloat kLayoutHorizontalInset = 10.f;
+
 @interface SearchViewController () <SearchSettingsViewControllerDelegate>
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
@@ -592,22 +594,33 @@
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    // Media grid layout
+    if ([self isDisplayingMediasInSection:section] && self.traitCollection.horizontalSizeClass != UIUserInterfaceSizeClassCompact) {
+        return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+    }
+    else {
+        return UIEdgeInsetsZero;
+    }
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
     if ([self shouldDisplayMostSearchedShows]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, 44.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, 200.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 200.f);
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
         if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
             CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 86.f : 100.f;
-            return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, height);
+            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, height);
         }
-        // Grid layout
+        // Media grid layout
         else {
             CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 70.f : 100.f;
             
@@ -624,7 +637,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if ([self isDisplayingMostSearchedShows] || [self isDisplayingObjectsInSection:section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, 44.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
     }
     else {
         return CGSizeZero;

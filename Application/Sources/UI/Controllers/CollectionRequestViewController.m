@@ -289,7 +289,7 @@
     
     // Only display a load more footer at the collection bottom if there is more content to load
     if (section == numberOfSections - 1 && self.canLoadMoreItems && !self.lastRequestError && [self shouldPerformRefreshRequest]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, 60.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 60.f);
     }
     else {
         return CGSizeZero;
