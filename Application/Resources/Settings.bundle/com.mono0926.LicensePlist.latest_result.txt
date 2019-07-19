@@ -474,7 +474,7 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: b0095c7
+name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 8dbe4e5
 
 name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 1.1.10
 
@@ -484,11 +484,11 @@ name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
 name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0.2
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: b65b577
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: c831c22
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 1.0.9
 
-name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 2.7
+name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 27c3549
 
 name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 1.0.2
 
