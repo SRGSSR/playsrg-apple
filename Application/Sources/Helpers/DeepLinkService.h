@@ -9,14 +9,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Service responsible for retrieving the deeplink convert file, and convert web urls to scheme urls.
+ *  Service responsible for retrieving the deep link convert file, and convert web urls to scheme urls.
  */
-@interface DeeplinkService : NSObject
+@interface DeepLinkService : NSObject
 
 /**
  *  Service singleton.
  */
-@property (class, nonatomic, readonly) DeeplinkService *sharedService;
+@property (class, nonatomic, readonly) DeepLinkService *sharedService;
 
 - (nullable NSURL *)schemeURLFromWebURL:(NSURL *)URL;
 

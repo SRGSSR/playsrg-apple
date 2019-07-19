@@ -10,7 +10,7 @@
 #import "ApplicationSettings.h"
 #import "Banner.h"
 #import "CalendarViewController.h"
-#import "DeeplinkService.h"
+#import "DeepLinkService.h"
 #import "Download.h"
 #import "Favorites.h"
 #import "GoogleCast.h"
@@ -269,17 +269,17 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     if (self.openingAlertController) {
         [self.openingAlertController dismissViewControllerAnimated:NO completion:nil];
     }
-    self.openingAlertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Open a link", @"Alert title on the waiting to open a link alert view (deeplink, scheme url…)")
-                                                                      message:NSLocalizedString(@"Please wait…", @"Alert description on the waiting to open a link alert view (deeplink, scheme url…)")
+    self.openingAlertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Open a link", @"Alert title on the waiting to open a link alert view (deep link, scheme url…)")
+                                                                      message:NSLocalizedString(@"Please wait…", @"Alert description on the waiting to open a link alert view (deep link, scheme url…)")
                                                                preferredStyle:UIAlertControllerStyleAlert];
     [self.window.play_topViewController presentViewController:self.openingAlertController animated:YES completion:nil];
 
-    AnalyticsSource analyticsSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeeplink : AnalyticsSourceSchemeURL;
+    AnalyticsSource analyticsSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeepLink : AnalyticsSourceSchemeURL;
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     if (! [URLComponents.host.lowercaseString isEqualToString:@"open"]) {
-        NSURL *deeplinkURL = [DeeplinkService.sharedService schemeURLFromWebURL:URL];
-        if (deeplinkURL) {
-            URLComponents = [NSURLComponents componentsWithURL:deeplinkURL resolvingAgainstBaseURL:NO];
+        NSURL *deepLinkURL = [DeepLinkService.sharedService schemeURLFromWebURL:URL];
+        if (deepLinkURL) {
+            URLComponents = [NSURLComponents componentsWithURL:deepLinkURL resolvingAgainstBaseURL:NO];
         }
     }
     
@@ -769,7 +769,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                      code:PlayErrorCodeNotFound
-                                     localizedDescription:NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff, deeplink or a push notification")];
+                                     localizedDescription:NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff, deep linking or a push notification")];
                 [Banner showError:error inViewController:nil];
             }
         }] resume];
@@ -791,7 +791,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                      code:PlayErrorCodeNotFound
-                                     localizedDescription:NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff, deeplink or a push notification")];
+                                     localizedDescription:NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff, deep linking or a push notification")];
                 [Banner showError:error inViewController:nil];
             }
         }] resume];
@@ -810,7 +810,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
-                                 localizedDescription:NSLocalizedString(@"The page cannot be opened.", @"Error message when a topic cannot be opened via Handoff, deeplink or a push notification")];
+                                 localizedDescription:NSLocalizedString(@"The page cannot be opened.", @"Error message when a topic cannot be opened via Handoff, deep linking or a push notification")];
             [Banner showError:error inViewController:nil];
         }
     }] resume];
@@ -828,7 +828,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
-                                 localizedDescription:NSLocalizedString(@"The page cannot be opened.", @"Error message when an event module cannot be opened via Handoff, deeplink or a push notification")];
+                                 localizedDescription:NSLocalizedString(@"The page cannot be opened.", @"Error message when an event module cannot be opened via Handoff, deep linking or a push notification")];
             [Banner showError:error inViewController:nil];
         }
     }] resume];

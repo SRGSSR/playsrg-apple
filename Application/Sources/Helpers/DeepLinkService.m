@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "DeeplinkService.h"
+#import "DeepLinkService.h"
 
 #import "ApplicationConfiguration.h"
 
@@ -17,25 +17,25 @@
 #import <SRGDiagnostics/SRGDiagnostics.h>
 #import <SRGNetwork/SRGNetwork.h>
 
-NSString * const DeeplinkDiagnosticsServiceName = @"DeeplinkDiagnosticsServiceName";
+NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceName";
 
-@interface DeeplinkService ()
+@interface DeepLinkService ()
 
 @property (nonatomic) BOOL needAnUpdate;
 @property (nonatomic, weak) SRGRequest *request;
 
 @end
 
-@implementation DeeplinkService
+@implementation DeepLinkService
 
 #pragma mark Class methods
 
-+ (DeeplinkService *)sharedService
++ (DeepLinkService *)sharedService
 {
     static dispatch_once_t s_onceToken;
-    static DeeplinkService *s_sharedService;
+    static DeepLinkService *s_sharedService;
     dispatch_once(&s_onceToken, ^{
-        s_sharedService = [[DeeplinkService alloc] init];
+        s_sharedService = [[DeepLinkService alloc] init];
     });
     return s_sharedService;
 }
@@ -59,7 +59,7 @@ NSString * const DeeplinkDiagnosticsServiceName = @"DeeplinkDiagnosticsServiceNa
                                                    name:UIApplicationWillEnterForegroundNotification
                                                  object:nil];
         
-        [SRGDiagnosticsService serviceWithName:DeeplinkDiagnosticsServiceName].submissionBlock = ^(NSDictionary * _Nonnull JSONDictionary, void (^ _Nonnull completionBlock)(BOOL)) {
+        [SRGDiagnosticsService serviceWithName:DeepLinkDiagnosticsServiceName].submissionBlock = ^(NSDictionary * _Nonnull JSONDictionary, void (^ _Nonnull completionBlock)(BOOL)) {
             NSURL *middlewareURL = ApplicationConfiguration.sharedApplicationConfiguration.middlewareURL;
             NSURL *diagnosticsServiceURL = [NSURL URLWithString:@"api/v1/deeplink/report" relativeToURL:middlewareURL];
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:diagnosticsServiceURL];
@@ -69,7 +69,7 @@ NSString * const DeeplinkDiagnosticsServiceName = @"DeeplinkDiagnosticsServiceNa
             
             [[[SRGRequest dataRequestWithURLRequest:request session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                 BOOL success = (error == nil);
-                PlayLogInfo(@"diagnostics", @"%@ report %@: %@", DeeplinkDiagnosticsServiceName, success ? @"sent" : @"not sent", JSONDictionary);
+                PlayLogInfo(@"diagnostics", @"%@ report %@: %@", DeepLinkDiagnosticsServiceName, success ? @"sent" : @"not sent", JSONDictionary);
                 completionBlock(success);
             }] requestWithOptions:SRGRequestOptionBackgroundCompletionEnabled] resume];
         };
@@ -79,7 +79,7 @@ NSString * const DeeplinkDiagnosticsServiceName = @"DeeplinkDiagnosticsServiceNa
 
 - (void)setup
 {
-    [self updateDeeplinkScript];
+    [self updateDeepLinkScript];
 }
 
 #pragma mark Getters and setters
@@ -107,7 +107,7 @@ NSString * const DeeplinkDiagnosticsServiceName = @"DeeplinkDiagnosticsServiceNa
     NSURL *playURL = [NSURL URLWithString:result.toString];
     
     if ([playURL.host.lowercaseString isEqualToString:@"redirect"]) {
-        SRGDiagnosticReport *report = [[SRGDiagnosticsService serviceWithName:DeeplinkDiagnosticsServiceName] reportWithName:URL.absoluteString];
+        SRGDiagnosticReport *report = [[SRGDiagnosticsService serviceWithName:DeepLinkDiagnosticsServiceName] reportWithName:URL.absoluteString];
         [report setString:[[NSDateFormatter play_backendDateFormatter] stringFromDate:NSDate.date] forKey:@"clientTime"];
         [report setString:NSBundle.mainBundle.bundleIdentifier forKey:@"clientId"];
         [report setString:[context objectForKeyedSubscript:@"parsePlayUrlVersion"].toString forKey:@"jsVersion"];
@@ -137,7 +137,7 @@ NSString * const DeeplinkDiagnosticsServiceName = @"DeeplinkDiagnosticsServiceNa
 
 #pragma mark Data retrieval
 
-- (void)updateDeeplinkScript
+- (void)updateDeepLinkScript
 {
     if (self.needAnUpdate && [FXReachability sharedInstance].reachable && !self.request.running) {
         NSURL *middlewareURL = ApplicationConfiguration.sharedApplicationConfiguration.middlewareURL;
@@ -148,7 +148,7 @@ NSString * const DeeplinkDiagnosticsServiceName = @"DeeplinkDiagnosticsServiceNa
                 NSError *writeError = nil;
                 [data writeToFile:[self libraryParsePlayUrlFilePath] options:NSDataWritingAtomic error:&writeError];
                 if (writeError) {
-                    PlayLogError(@"Deeplink", @"Could not save parse_play_url.js file. Reason: %@", writeError);
+                    PlayLogError(@"DeepLink", @"Could not save parse_play_url.js file. Reason: %@", writeError);
                     NSAssert(NO, @"Could not save parse_play_url.js file. Not safe. See error above.");
                 }
             }
@@ -163,19 +163,19 @@ NSString * const DeeplinkDiagnosticsServiceName = @"DeeplinkDiagnosticsServiceNa
 - (void)reachabilityDidChange:(NSNotification *)notification
 {
     if ([FXReachability sharedInstance].reachable) {
-        [self updateDeeplinkScript];
+        [self updateDeepLinkScript];
     }
 }
 
 - (void)enterForeground:(NSNotification *)notification
 {
     self.needAnUpdate = YES;
-    [self updateDeeplinkScript];
+    [self updateDeepLinkScript];
 }
 
 @end
 
-__attribute__((constructor)) static void DeeplinkServiceInit(void)
+__attribute__((constructor)) static void DeepLinkServiceInit(void)
 {
-    [DeeplinkService.sharedService setup];
+    [DeepLinkService.sharedService setup];
 }
