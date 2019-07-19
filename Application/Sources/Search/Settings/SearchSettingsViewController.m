@@ -109,9 +109,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 + (SRGMediaSearchSettings *)defaultSettings
 {
-    SRGMediaSearchSettings *defaultSettings = [[SRGMediaSearchSettings alloc] init];
-    defaultSettings.beforeDay = SRGDay.today;
-    return defaultSettings;
+    return [[SRGMediaSearchSettings alloc] init];
 }
 
 + (BOOL)containsAdvancedSettings:(SRGMediaSearchSettings *)settings
@@ -508,22 +506,54 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         [self.navigationController pushViewController:multiSelectionViewController animated:YES];
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastDay]) {
-        self.settings.afterDay = (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastDay) ? [SRGDay dayByAddingDays:-1 months:0 years:0 toDay:SRGDay.today] : nil;
+        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastDay) {
+            SRGDay *today = SRGDay.today;
+            self.settings.afterDay = [SRGDay dayByAddingDays:-1 months:0 years:0 toDay:today];
+            self.settings.beforeDay = today;
+        }
+        else {
+            self.settings.afterDay = nil;
+            self.settings.beforeDay = nil;
+        }
         [self.tableView reloadData];
         [self updateResults];
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastThreeDays]) {
-        self.settings.afterDay = (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastThreeDays) ? [SRGDay dayByAddingDays:-3 months:0 years:0 toDay:SRGDay.today] : nil;
+        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastThreeDays) {
+            SRGDay *today = SRGDay.today;
+            self.settings.afterDay = [SRGDay dayByAddingDays:-3 months:0 years:0 toDay:today];
+            self.settings.beforeDay = today;
+        }
+        else {
+            self.settings.afterDay = nil;
+            self.settings.beforeDay = nil;
+        }
         [self.tableView reloadData];
         [self updateResults];
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastWeek]) {
-        self.settings.afterDay = (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastWeek) ? [SRGDay dayByAddingDays:-7 months:0 years:0 toDay:SRGDay.today] : nil;
+        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastWeek) {
+            SRGDay *today = SRGDay.today;
+            self.settings.afterDay = [SRGDay dayByAddingDays:-7 months:0 years:0 toDay:today];
+            self.settings.beforeDay = today;
+        }
+        else {
+            self.settings.afterDay = nil;
+            self.settings.beforeDay = nil;
+        }
         [self.tableView reloadData];
         [self updateResults];
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastMonth]) {
-        self.settings.afterDay = (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastMonth) ? [SRGDay dayByAddingDays:0 months:-1 years:0 toDay:SRGDay.today] : nil;
+        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastMonth) {
+            SRGDay *today = SRGDay.today;
+            self.settings.afterDay = [SRGDay dayByAddingDays:0 months:-1 years:0 toDay:today];
+            self.settings.beforeDay = today;
+        }
+        else {
+            self.settings.afterDay = nil;
+            self.settings.beforeDay = nil;
+        }
         [self.tableView reloadData];
         [self updateResults];
     }
