@@ -22,8 +22,8 @@ OBJC_EXPORT MenuItemOptionKey const MenuItemOptionShowAZIndexKey;               
 + (MenuItemInfo *)menuItemInfoWithMenuItem:(MenuItem)menuItem;
 + (MenuItemInfo *)menuItemInfoWithRadioChannel:(RadioChannel *)radioChannel;
 
-+ (MenuItemInfo *)menuItemInfoWithMenuItem:(MenuItem)menuItem options:(nullable NSDictionary<NSString *, id> *)options;
-+ (MenuItemInfo *)menuItemInfoWithRadioChannel:(RadioChannel *)radioChannel options:(nullable NSDictionary<NSString *, id> *)options;
++ (MenuItemInfo *)menuItemInfoWithMenuItem:(MenuItem)menuItem options:(nullable NSDictionary<MenuItemOptionKey, id> *)options;
++ (MenuItemInfo *)menuItemInfoWithRadioChannel:(RadioChannel *)radioChannel options:(nullable NSDictionary<MenuItemOptionKey, id> *)options;
 
 - (instancetype)initWithMenuItem:(MenuItem)menuItem title:(NSString *)title uid:(nullable NSString *)uid options:(nullable NSDictionary<NSString *, id> *)options NS_DESIGNATED_INITIALIZER;
 

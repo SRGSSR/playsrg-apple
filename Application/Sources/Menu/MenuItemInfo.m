@@ -8,7 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 
-MenuItemOptionKey const MenuItemOptionSearchMediaTypeOptionKey = @"MenuItemOptionSearchMediaTypeOptionKey";
+MenuItemOptionKey const MenuItemOptionSearchMediaTypeOptionKey = @"MenuItemOptionSearchMediaTypeOption";
 MenuItemOptionKey const MenuItemOptionSearchQueryKey = @"MenuItemOptionSearchQuery";
 MenuItemOptionKey const MenuItemOptionShowAZIndexKey = @"MenuItemOptionShowAZIndex";
 
@@ -18,7 +18,7 @@ MenuItemOptionKey const MenuItemOptionShowAZIndexKey = @"MenuItemOptionShowAZInd
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *uid;
 
-@property (nonatomic, nullable) NSDictionary<MenuItemOptionKey, id> *options;
+@property (nonatomic) NSDictionary<MenuItemOptionKey, id> *options;
 
 @end
 
@@ -33,7 +33,7 @@ MenuItemOptionKey const MenuItemOptionShowAZIndexKey = @"MenuItemOptionShowAZInd
                                           options:nil];
 }
 
-+ (MenuItemInfo *)menuItemInfoWithMenuItem:(MenuItem)menuItem options:(NSDictionary<NSString *, id> *)options
++ (MenuItemInfo *)menuItemInfoWithMenuItem:(MenuItem)menuItem options:(NSDictionary<MenuItemOptionKey, id> *)options
 {
     return [[MenuItemInfo alloc] initWithMenuItem:menuItem
                                             title:TitleForMenuItem(menuItem)
@@ -48,7 +48,7 @@ MenuItemOptionKey const MenuItemOptionShowAZIndexKey = @"MenuItemOptionShowAZInd
                                           options:nil];
 }
 
-+ (MenuItemInfo *)menuItemInfoWithRadioChannel:(RadioChannel *)radioChannel options:(NSDictionary<NSString *, id> *)options
++ (MenuItemInfo *)menuItemInfoWithRadioChannel:(RadioChannel *)radioChannel options:(NSDictionary<MenuItemOptionKey, id> *)options
 {
     return [[MenuItemInfo alloc] initWithMenuItem:MenuItemRadio
                                             title:radioChannel.name
@@ -56,7 +56,7 @@ MenuItemOptionKey const MenuItemOptionShowAZIndexKey = @"MenuItemOptionShowAZInd
                                           options:options];
 }
 
-- (instancetype)initWithMenuItem:(MenuItem)menuItem title:(NSString *)title uid:(NSString *)uid options:(NSDictionary<NSString *, id> *)options
+- (instancetype)initWithMenuItem:(MenuItem)menuItem title:(NSString *)title uid:(NSString *)uid options:(NSDictionary<MenuItemOptionKey, id> *)options
 {
     if (self = [super init]) {
         self.menuItem = menuItem;
@@ -67,7 +67,7 @@ MenuItemOptionKey const MenuItemOptionShowAZIndexKey = @"MenuItemOptionShowAZInd
     return self;
 }
 
-- (instancetype)initWithMenuItem:(MenuItem)menuItem title:(NSString *)title options:(NSDictionary<NSString *, id> *)options
+- (instancetype)initWithMenuItem:(MenuItem)menuItem title:(NSString *)title options:(NSDictionary<MenuItemOptionKey, id> *)options
 {
     return [self initWithMenuItem:menuItem title:title uid:nil options:options];
 }

@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Create a search view controller with optional query and settings.
  *
- *  @param query     The started query.
- *  @param settings  The started search filters. It's only set if the application can use it: `searchSettingsDisabled` value of `ApplicationConfiguration` used.
+ *  @param query     The query.
+ *  @param settings  The search settings. Only set if the application can use them (@see `searchSettingsDisabled` in `ApplicationConfiguration`).
  */
 - (instancetype)initWithQuery:(nullable NSString *)query settings:(nullable SRGMediaSearchSettings *)settings;
 
