@@ -69,7 +69,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 
 @interface PlayAppDelegate ()
 
-@property (nonatomic) UIAlertController *openingAlertController;
+@property (nonatomic) UIAlertController *waitAlertController;
 
 @end
 
@@ -266,14 +266,14 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 // Open [scheme]://[play website url] ("parse_play_url.js" try to transformed to scheme urls)
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-    if (self.openingAlertController) {
-        [self.openingAlertController dismissViewControllerAnimated:NO completion:nil];
+    if (self.waitAlertController) {
+        [self.waitAlertController dismissViewControllerAnimated:NO completion:nil];
     }
-    self.openingAlertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Open a link", @"Alert title on the waiting to open a link alert view (deep link, scheme url…)")
-                                                                      message:NSLocalizedString(@"Please wait…", @"Alert description on the waiting to open a link alert view (deep link, scheme url…)")
-                                                               preferredStyle:UIAlertControllerStyleAlert];
-    [self.window.play_topViewController presentViewController:self.openingAlertController animated:YES completion:nil];
-
+    self.waitAlertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Opening link", @"Alert title of the alert displayed when waiting to open a link (deep link, scheme url…)")
+                                                                   message:NSLocalizedString(@"Please wait…", @"Alert description of the alert displayed when waiting to open a link (deep link, scheme url…)")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [self.window.play_topViewController presentViewController:self.waitAlertController animated:YES completion:nil];
+    
     AnalyticsSource analyticsSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeepLink : AnalyticsSourceSchemeURL;
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     if (! [URLComponents.host.lowercaseString isEqualToString:@"open"]) {
@@ -306,7 +306,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
             NSInteger startTime = [[self valueFromURLComponents:URLComponents withParameterName:@"start-time"] integerValue];
             BOOL canOpen = [self openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
-                [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
+                [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
                 
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -325,7 +325,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         if (showURN) {
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
             BOOL canOpen = [self openShowWithURN:showURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
-                [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
+                [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
                 
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -344,7 +344,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         if (pageURN) {
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
             BOOL canOpen = [self openPageWithURN:pageURN channelUid:channelUid URLComponents:URLComponents fromPushNotification:NO completionBlock:^{
-                [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
+                [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
                 
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -362,7 +362,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         NSString *topicURN = [self valueFromURLComponents:URLComponents withParameterName:@"topic"];
         if (topicURN) {
             BOOL canOpen = [self openTopicWithURN:topicURN fromPushNotification:NO completionBlock:^{
-                [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
+                [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
                 
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -380,7 +380,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         NSString *moduleURN = [self valueFromURLComponents:URLComponents withParameterName:@"module"];
         if (moduleURN) {
             BOOL canOpen = [self openModuleWithURN:moduleURN fromPushNotification:NO completionBlock:^{
-                [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
+                [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
                 
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -395,7 +395,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             }
         }
         
-        [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
+        [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
         
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.source = analyticsSource;
@@ -406,7 +406,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         return YES;
     }
     
-    [self.openingAlertController dismissViewControllerAnimated:YES completion:nil];
+    [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
     
     return NO;
 }
@@ -588,8 +588,8 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 - (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType
 {
     return [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".playing"]]
-        || [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".displaying"]]
-        || [userActivityType isEqualToString:NSUserActivityTypeBrowsingWeb];
+    || [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".displaying"]]
+    || [userActivityType isEqualToString:NSUserActivityTypeBrowsingWeb];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> *))restorationHandler
@@ -822,7 +822,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGModule.new, URN), moduleURN];
         SRGModule *module = [modules filteredArrayUsingPredicate:predicate].firstObject;
         if (module) {
-             ModuleViewController *moduleViewController = [[ModuleViewController alloc] initWithModule:module];
+            ModuleViewController *moduleViewController = [[ModuleViewController alloc] initWithModule:module];
             [self.sideMenuController pushViewController:moduleViewController animated:YES];
         }
         else {
