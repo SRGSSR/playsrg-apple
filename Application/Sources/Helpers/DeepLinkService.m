@@ -103,7 +103,7 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
         SRGDiagnosticReport *report = [[SRGDiagnosticsService serviceWithName:DeepLinkDiagnosticsServiceName] reportWithName:URL.absoluteString];
         [report setString:[[NSDateFormatter play_rfc3339DateFormatter] stringFromDate:NSDate.date] forKey:@"clientTime"];
         [report setString:NSBundle.mainBundle.bundleIdentifier forKey:@"clientId"];
-        [report setString:[context objectForKeyedSubscript:@"parsePlayUrlVersion"].toString forKey:@"jsVersion"];
+        [report setNumber:[context objectForKeyedSubscript:@"parsePlayUrlVersion"].toNumber forKey:@"jsVersion"];
         [report setString:URL.absoluteString forKey:@"url"];
         [report finish];
         
