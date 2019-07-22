@@ -291,7 +291,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         if (mediaURN) {
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
             NSInteger startTime = [[self valueFromURLComponents:URLComponents withParameterName:@"start-time"] integerValue];
-            BOOL canOpen = [self openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
+            [self openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionPlayMedia;
@@ -299,16 +299,13 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
-            
-            if (canOpen) {
-                return YES;
-            }
+            return YES;
         }
         
         NSString *showURN = [self valueFromURLComponents:URLComponents withParameterName:@"show"];
         if (showURN) {
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
-            BOOL canOpen = [self openShowWithURN:showURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
+            [self openShowWithURN:showURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayShow;
@@ -316,16 +313,13 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
-            
-            if (canOpen) {
-                return YES;
-            }
+            return YES;
         }
         
         NSString *pageURN = [self valueFromURLComponents:URLComponents withParameterName:@"page"];
         if (pageURN) {
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
-            BOOL canOpen = [self openPageWithURN:pageURN channelUid:channelUid URLComponents:URLComponents fromPushNotification:NO completionBlock:^{
+            [self openPageWithURN:pageURN channelUid:channelUid URLComponents:URLComponents fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
@@ -333,15 +327,12 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
-            
-            if (canOpen) {
-                return YES;
-            }
+            return YES;
         }
         
         NSString *topicURN = [self valueFromURLComponents:URLComponents withParameterName:@"topic"];
         if (topicURN) {
-            BOOL canOpen = [self openTopicWithURN:topicURN fromPushNotification:NO completionBlock:^{
+            [self openTopicWithURN:topicURN fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
@@ -349,15 +340,12 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
-            
-            if (canOpen) {
-                return YES;
-            }
+            return YES;
         }
         
         NSString *moduleURN = [self valueFromURLComponents:URLComponents withParameterName:@"module"];
         if (moduleURN) {
-            BOOL canOpen = [self openModuleWithURN:moduleURN fromPushNotification:NO completionBlock:^{
+            [self openModuleWithURN:moduleURN fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
@@ -365,10 +353,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
-            
-            if (canOpen) {
-                return YES;
-            }
+            return YES;
         }
         
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -412,7 +397,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     return queryItem.value;
 }
 
-- (BOOL)openMediaWithURN:(NSString *)mediaURN startTime:(NSInteger)startTime channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openMediaWithURN:(NSString *)mediaURN startTime:(NSInteger)startTime channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(mediaURN);
     
@@ -424,11 +409,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;
     }];
-    
-    return YES;
 }
 
-- (BOOL)openShowWithURN:(NSString *)showURN channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openShowWithURN:(NSString *)showURN channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(showURN);
     
@@ -439,15 +422,11 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;
     }];
-    
-    return YES;
 }
 
-- (BOOL)openPageWithURN:(NSString *)pageURN channelUid:(NSString *)channelUid URLComponents:(NSURLComponents *)URLComponents fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openPageWithURN:(NSString *)pageURN channelUid:(NSString *)channelUid URLComponents:(NSURLComponents *)URLComponents fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(pageURN);
-    
-    BOOL canOpen = NO;
     
     RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:channelUid];
     NSString *pageUid = [pageURN componentsSeparatedByString:@":"].lastObject;
@@ -455,8 +434,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     MenuItemInfo *menuItemInfo = nil;
     UIViewController *pageViewController = nil;
     if ([pageUid isEqualToString:@"az"]) {
-        canOpen = YES;
-        
         NSString *index = [self valueFromURLComponents:URLComponents withParameterName:@"index"];
         if ([pageURN containsString:@":radio:"] && !radioChannel) {
             NSDictionary *options = (index != nil) ? @{ MenuItemOptionShowAZIndexKey : index } : nil;
@@ -467,12 +444,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         }
     }
     else if ([pageUid isEqualToString:@"bydate"]) {
-        canOpen = YES;
-        
         NSString *dateString = [self valueFromURLComponents:URLComponents withParameterName:@"date"];
         NSDate *date = nil;
         if (dateString) {
-            date =  [NSDateFormatter.play_URLOptionDateFormatter dateFromString:dateString];
+            date = [NSDateFormatter.play_URLOptionDateFormatter dateFromString:dateString];
         }
         if ([pageURN containsString:@":radio:"] && !radioChannel) {
             radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannels].firstObject;
@@ -482,8 +457,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         pageViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:date];
     }
     else if ([pageUid isEqualToString:@"search"]) {
-        canOpen = YES;
-        
         NSString *mediaType = [self valueFromURLComponents:URLComponents withParameterName:@"mediaType"];
         NSNumber *mediaTypeOption = nil;
         if ([mediaType isEqualToString:@"video"] || [pageURN containsString:@":tv:"]) {
@@ -501,8 +474,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch options:options.copy];
     }
     else if ([pageUid isEqualToString:@"home"]) {
-        canOpen = YES;
-        
         if ([pageURN containsString:@":radio:"] && !radioChannel) {
             radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannels].firstObject;
             channelUid = radioChannel.uid;
@@ -521,11 +492,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;
     }];
-    
-    return canOpen;
 }
 
-- (BOOL)openTopicWithURN:(NSString *)topicURN fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openTopicWithURN:(NSString *)topicURN fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(topicURN);
     
@@ -536,11 +505,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;
     }];
-    
-    return YES;
 }
 
-- (BOOL)openModuleWithURN:(NSString *)moduleURN fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openModuleWithURN:(NSString *)moduleURN fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(moduleURN);
     
@@ -551,8 +518,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;
     }];
-    
-    return YES;
 }
 
 #pragma mark Handoff
