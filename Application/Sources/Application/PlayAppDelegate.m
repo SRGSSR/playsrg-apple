@@ -435,13 +435,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     UIViewController *pageViewController = nil;
     if ([pageUid isEqualToString:@"az"]) {
         NSString *index = [self valueFromURLComponents:URLComponents withParameterName:@"index"];
-        if ([pageURN containsString:@":radio:"] && !radioChannel) {
-            NSDictionary *options = (index != nil) ? @{ MenuItemOptionShowAZIndexKey : index } : nil;
-            menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemRadioShowAZ options:options];
-        }
-        else {
-            pageViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:index];
-        }
+        pageViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:index];
     }
     else if ([pageUid isEqualToString:@"bydate"]) {
         NSString *dateString = [self valueFromURLComponents:URLComponents withParameterName:@"date"];
@@ -449,24 +443,20 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         if (dateString) {
             date = [NSDateFormatter.play_URLOptionDateFormatter dateFromString:dateString];
         }
-        if ([pageURN containsString:@":radio:"] && !radioChannel) {
-            radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannels].firstObject;
-            channelUid = radioChannel.uid;
-        }
-        
         pageViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:date];
     }
     else if ([pageUid isEqualToString:@"search"]) {
-        NSString *mediaType = [self valueFromURLComponents:URLComponents withParameterName:@"mediaType"];
-        NSNumber *mediaTypeOption = nil;
-        if ([mediaType isEqualToString:@"video"] || [pageURN containsString:@":tv:"]) {
-            mediaTypeOption = @(SRGMediaTypeVideo);
-        }
-        else if ([mediaType isEqualToString:@"audio"] || [pageURN containsString:@":radio:"]) {
-            mediaTypeOption = @(SRGMediaTypeAudio);
-        }
-        
         NSString *query = [self valueFromURLComponents:URLComponents withParameterName:@"query"];
+        
+        static NSDictionary<NSString *, NSNumber *> *s_mediaTypes;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_mediaTypes = @{ @"video" : @(SRGMediaTypeVideo),
+                              @"audio" : @(SRGMediaTypeAudio) };
+        });
+
+        NSString *mediaType = [self valueFromURLComponents:URLComponents withParameterName:@"mediaType"];
+        NSNumber *mediaTypeOption = (mediaType) ? s_mediaTypes[mediaType] : nil;
         
         NSMutableDictionary *options = [NSMutableDictionary dictionary];
         options[MenuItemOptionSearchMediaTypeOptionKey] = mediaTypeOption;
@@ -474,12 +464,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch options:options.copy];
     }
     else if ([pageUid isEqualToString:@"home"]) {
-        if ([pageURN containsString:@":radio:"] && !radioChannel) {
-            radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannels].firstObject;
-            channelUid = radioChannel.uid;
-        }
+        menuItemInfo = MenuItemInfoForChannelUid(channelUid);
     }
     
+    // Fallback to home page
     if (! menuItemInfo) {
         menuItemInfo = MenuItemInfoForChannelUid(channelUid);
     }
