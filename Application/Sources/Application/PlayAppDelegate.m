@@ -67,12 +67,6 @@ static void *s_kvoContext = &s_kvoContext;
 
 static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 
-@interface PlayAppDelegate ()
-
-@property (nonatomic) UIAlertController *waitAlertController;
-
-@end
-
 @implementation PlayAppDelegate
 
 #pragma mark Getters and setters
@@ -266,14 +260,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 // Open [scheme]://[play website url] ("parse_play_url.js" try to transformed to scheme urls)
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-    if (self.waitAlertController) {
-        [self.waitAlertController dismissViewControllerAnimated:NO completion:nil];
-    }
-    self.waitAlertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Opening link", @"Alert title of the alert displayed when waiting to open a link (deep link, scheme url…)")
-                                                                   message:NSLocalizedString(@"Please wait…", @"Alert description of the alert displayed when waiting to open a link (deep link, scheme url…)")
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    [self.window.play_topViewController presentViewController:self.waitAlertController animated:YES completion:nil];
-    
     AnalyticsSource analyticsSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeepLink : AnalyticsSourceSchemeURL;
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     if (! [URLComponents.host.lowercaseString isEqualToString:@"open"]) {
@@ -306,8 +292,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
             NSInteger startTime = [[self valueFromURLComponents:URLComponents withParameterName:@"start-time"] integerValue];
             BOOL canOpen = [self openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
-                [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
-                
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionPlayMedia;
@@ -325,8 +309,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         if (showURN) {
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
             BOOL canOpen = [self openShowWithURN:showURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
-                [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
-                
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayShow;
@@ -344,8 +326,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         if (pageURN) {
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
             BOOL canOpen = [self openPageWithURN:pageURN channelUid:channelUid URLComponents:URLComponents fromPushNotification:NO completionBlock:^{
-                [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
-                
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
@@ -362,8 +342,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         NSString *topicURN = [self valueFromURLComponents:URLComponents withParameterName:@"topic"];
         if (topicURN) {
             BOOL canOpen = [self openTopicWithURN:topicURN fromPushNotification:NO completionBlock:^{
-                [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
-                
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
@@ -380,8 +358,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         NSString *moduleURN = [self valueFromURLComponents:URLComponents withParameterName:@"module"];
         if (moduleURN) {
             BOOL canOpen = [self openModuleWithURN:moduleURN fromPushNotification:NO completionBlock:^{
-                [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
-                
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
@@ -395,8 +371,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             }
         }
         
-        [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
-        
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.source = analyticsSource;
         labels.type = AnalyticsTypeActionOpenPlayApp;
@@ -405,8 +379,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         return YES;
     }
-    
-    [self.waitAlertController dismissViewControllerAnimated:YES completion:nil];
     
     return NO;
 }
