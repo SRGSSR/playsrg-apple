@@ -487,7 +487,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         NSString *index = [self valueFromURLComponents:URLComponents withParameterName:@"index"];
         if ([pageURN containsString:@":radio:"] && !radioChannel) {
-            NSDictionary *options = (index) ? @{ MenuItemOptionShowAZIndexKey : index } : nil;
+            NSDictionary *options = (index != nil) ? @{ MenuItemOptionShowAZIndexKey : index } : nil;
             menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemRadioShowAZ options:options];
         }
         else {
@@ -523,7 +523,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         NSString *query = [self valueFromURLComponents:URLComponents withParameterName:@"query"];
         
-        NSMutableDictionary *options = @{}.mutableCopy;
+        NSMutableDictionary *options = [NSMutableDictionary dictionary];
         options[MenuItemOptionSearchMediaTypeOptionKey] = mediaTypeOption;
         options[MenuItemOptionSearchQueryKey] = query;
         menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch options:options.copy];
@@ -588,8 +588,8 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 - (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType
 {
     return [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".playing"]]
-    || [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".displaying"]]
-    || [userActivityType isEqualToString:NSUserActivityTypeBrowsingWeb];
+        || [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".displaying"]]
+        || [userActivityType isEqualToString:NSUserActivityTypeBrowsingWeb];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> *))restorationHandler
