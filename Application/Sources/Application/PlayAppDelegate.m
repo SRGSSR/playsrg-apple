@@ -252,11 +252,15 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     completionHandler(handledShortcutItem);
 }
 
+// See URL_SCHEMES.md
 // Open [scheme]://open?media=[media_urn] (optional query parameters: channel-id=[channel_id], start-time=[start_position_seconds])
 // Open [scheme]://open?show=[show_urn] (optional query parameter: channel-id=[channel_id])
-// Open [scheme]://open?page=[page_urn] (optional query parameters: channel-id=[channel_id], and other per pages. See URL_SCHEMES.md)
 // Open [scheme]://open?topic=[topic_urn]
 // Open [scheme]://open?module=[module_urn]
+// Open [scheme]://open?page-id=[home] (optional query parameters: channel-id=[channel_id])
+// Open [scheme]://open?page-id=[az] (optional query parameters: channel-id=[channel_id], index=[index_letter])
+// Open [scheme]://open?page-id=[bydate] (optional query parameters: channel-id=[channel_id], date=[date] with format yyyy-MM-dd)
+// Open [scheme]://open?page-id=[search] (optional query parameters: query=[query], mediaType=[audio|video])
 // Open [scheme]://[play website url] ("parsePlayUrl.js" try to transformed to scheme urls)
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
@@ -316,20 +320,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             return YES;
         }
         
-        NSString *pageURN = [self valueFromURLComponents:URLComponents withParameterName:@"page"];
-        if (pageURN) {
-            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
-            [self openPageWithURN:pageURN channelUid:channelUid URLComponents:URLComponents fromPushNotification:NO completionBlock:^{
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = analyticsSource;
-                labels.type = AnalyticsTypeActionDisplayPage;
-                labels.value = pageURN;
-                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
-            }];
-            return YES;
-        }
-        
         NSString *topicURN = [self valueFromURLComponents:URLComponents withParameterName:@"topic"];
         if (topicURN) {
             [self openTopicWithURN:topicURN fromPushNotification:NO completionBlock:^{
@@ -350,6 +340,20 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
                 labels.value = moduleURN;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+            }];
+            return YES;
+        }
+        
+        NSString *pageUid = [self valueFromURLComponents:URLComponents withParameterName:@"page-id"];
+        if (pageUid) {
+            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
+            [self openPageWithUid:pageUid channelUid:channelUid URLComponents:URLComponents fromPushNotification:NO completionBlock:^{
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.source = analyticsSource;
+                labels.type = AnalyticsTypeActionDisplayPage;
+                labels.value = pageUid;
                 labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
@@ -424,12 +428,11 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }];
 }
 
-- (void)openPageWithURN:(NSString *)pageURN channelUid:(NSString *)channelUid URLComponents:(NSURLComponents *)URLComponents fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openPageWithUid:(NSString *)pageUid channelUid:(NSString *)channelUid URLComponents:(NSURLComponents *)URLComponents fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
-    NSParameterAssert(pageURN);
+    NSParameterAssert(pageUid);
     
     RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:channelUid];
-    NSString *pageUid = [pageURN componentsSeparatedByString:@":"].lastObject;
     
     MenuItemInfo *menuItemInfo = nil;
     UIViewController *pageViewController = nil;

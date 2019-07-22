@@ -14,11 +14,11 @@ The available actions are:
 * Open a show page: `[scheme]://open?show=[show_urn]`.
 * Open a topic page: `[scheme]://open?topic=[topic_urn]`.
 * Open a module page: `[scheme]://open?module=[module_urn]`.
-* Open a page: `[scheme]://open?page=[page_urn]`.
-	* Home page: `urn:[bu]:page:[transmission]:home`.
-	* Search page: `urn:[bu]:page:[transmission]:search` or `urn:[bu]:page:search`. Optional `query` and `mediaType` (with `video` or `audio` values) parameters can be provided.
-	* Shows A to Z page: `urn:[bu]:page:[transmission]:az`. An optional `index` single character parameter can be provided to open the page at the specified index.
-	* Shows by date page: `urn:[bu]:page:[transmission]:bydate`. An optional `date` parameter with the `yyyy-MM-dd` format can be provided.
+* Open a page: `[scheme]://open?page-id=[page_id]`.
+	* Home page: `home`.
+	* Search page: `search`. Optional `query` and `mediaType` (with `video` or `audio` values) parameters can be provided.
+	* Shows A to Z page: `az`. An optional `index` single character parameter can be provided to open the page at the specified index.
+	* Shows by date page: `bydate`. An optional `date` parameter with the `yyyy-MM-dd` format can be provided.
 
 For media, show and page links, an optional `&channel-id=[channel_id]` parameter can be added, which resets the homepage to the specified radio channel homepage. If this parameter is not specified or does not match a valid channel, the homepage is reset to the TV one instead.
 
