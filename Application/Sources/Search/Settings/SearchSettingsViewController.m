@@ -21,11 +21,6 @@
 #import <libextobjc/libextobjc.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-static NSInteger const kLastDay = 1;
-static NSInteger const kLastThreeDays = 3;
-static NSInteger const kLastWeek = 7;
-static NSInteger const kLastMonth = 30;
-
 typedef NSString * SearchSettingSectionType NS_STRING_ENUM;
 
 static SearchSettingSectionType const SearchSettingSectionTypeMediaType = @"media_type";
@@ -58,22 +53,26 @@ typedef NS_ENUM(NSInteger, SearchSettingPeriod) {
 
 static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings *settings)
 {
-    NSDate *afterDate = settings.afterDate;
-    if (! afterDate) {
+    SRGDay *afterDay = settings.afterDay;
+    if (! afterDay) {
         return SearchSettingPeriodNone;
     }
     
-    NSDateComponents *components = [NSCalendar.currentCalendar components:NSCalendarUnitDay fromDate:settings.afterDate toDate:NSDate.date options:0];
-    if (components.day >= kLastMonth) {
+    SRGDay *today = SRGDay.today;
+    
+    NSDateComponents *monthComponents = [SRGDay components:NSCalendarUnitMonth fromDay:afterDay toDay:today];
+    if (monthComponents.month >= 1) {
         return SearchSettingPeriodLastMonth;
     }
-    else if (components.day >= kLastWeek) {
+    
+    NSDateComponents *dayComponents = [SRGDay components:NSCalendarUnitDay fromDay:afterDay toDay:today];
+    if (dayComponents.day >= 7) {
         return SearchSettingPeriodLastWeek;
     }
-    else if (components.day >= kLastThreeDays) {
+    else if (dayComponents.day >= 3) {
         return SearchSettingPeriodLastThreeDays;
     }
-    else if (components.day >= kLastDay) {
+    else if (dayComponents.day >= 1) {
         return SearchSettingPeriodLastDay;
     }
     else {
@@ -108,11 +107,15 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 #pragma mark Class methods
 
++ (SRGMediaSearchSettings *)defaultSettings
+{
+    return [[SRGMediaSearchSettings alloc] init];
+}
+
 + (BOOL)containsAdvancedSettings:(SRGMediaSearchSettings *)settings
 {
     NSParameterAssert(settings);
-    SRGMediaSearchSettings *basicSettings = [[SRGMediaSearchSettings alloc] init];
-    return ! [basicSettings isEqual:settings];
+    return ! [self.defaultSettings isEqual:settings];
 }
 
 #pragma mark Object lifecycle
@@ -121,7 +124,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 {
     if (self = [super init]) {
         self.query = query;
-        self.settings = [settings copy] ?: [[SRGMediaSearchSettings alloc] init];
+        self.settings = [settings copy] ?: SearchSettingsViewController.defaultSettings;
         self.settings.aggregationsEnabled = YES;
     }
     return self;
@@ -503,30 +506,54 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         [self.navigationController pushViewController:multiSelectionViewController animated:YES];
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastDay]) {
-        NSDateComponents *components = [[NSDateComponents alloc] init];
-        components.day = -kLastDay;
-        self.settings.afterDate = (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastDay) ? [NSCalendar.currentCalendar dateByAddingComponents:components toDate:NSDate.date options:0] : nil;
+        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastDay) {
+            SRGDay *today = SRGDay.today;
+            self.settings.afterDay = [SRGDay dayByAddingDays:-1 months:0 years:0 toDay:today];
+            self.settings.beforeDay = today;
+        }
+        else {
+            self.settings.afterDay = nil;
+            self.settings.beforeDay = nil;
+        }
         [self.tableView reloadData];
         [self updateResults];
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastThreeDays]) {
-        NSDateComponents *components = [[NSDateComponents alloc] init];
-        components.day = -kLastThreeDays;
-        self.settings.afterDate = (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastThreeDays) ? [NSCalendar.currentCalendar dateByAddingComponents:components toDate:NSDate.date options:0] : nil;
+        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastThreeDays) {
+            SRGDay *today = SRGDay.today;
+            self.settings.afterDay = [SRGDay dayByAddingDays:-3 months:0 years:0 toDay:today];
+            self.settings.beforeDay = today;
+        }
+        else {
+            self.settings.afterDay = nil;
+            self.settings.beforeDay = nil;
+        }
         [self.tableView reloadData];
         [self updateResults];
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastWeek]) {
-        NSDateComponents *components = [[NSDateComponents alloc] init];
-        components.day = -kLastWeek;
-        self.settings.afterDate = (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastWeek) ? [NSCalendar.currentCalendar dateByAddingComponents:components toDate:NSDate.date options:0] : nil;
+        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastWeek) {
+            SRGDay *today = SRGDay.today;
+            self.settings.afterDay = [SRGDay dayByAddingDays:-7 months:0 years:0 toDay:today];
+            self.settings.beforeDay = today;
+        }
+        else {
+            self.settings.afterDay = nil;
+            self.settings.beforeDay = nil;
+        }
         [self.tableView reloadData];
         [self updateResults];
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastMonth]) {
-        NSDateComponents *components = [[NSDateComponents alloc] init];
-        components.day = -kLastMonth;
-        self.settings.afterDate = (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastMonth) ? [NSCalendar.currentCalendar dateByAddingComponents:components toDate:NSDate.date options:0] : nil;
+        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastMonth) {
+            SRGDay *today = SRGDay.today;
+            self.settings.afterDay = [SRGDay dayByAddingDays:0 months:-1 years:0 toDay:today];
+            self.settings.beforeDay = today;
+        }
+        else {
+            self.settings.afterDay = nil;
+            self.settings.beforeDay = nil;
+        }
         [self.tableView reloadData];
         [self updateResults];
     }
@@ -666,7 +693,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (IBAction)resetSettings:(id)sender
 {
-    self.settings = [[SRGMediaSearchSettings alloc] init];
+    self.settings = SearchSettingsViewController.defaultSettings;
     [self updateResults];
     
     [self.tableView reloadData];
