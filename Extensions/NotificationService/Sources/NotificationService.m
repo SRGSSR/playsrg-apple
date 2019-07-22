@@ -13,9 +13,9 @@
 @interface NotificationService ()
 
 @property (nonatomic, copy) void (^contentHandler)(UNNotificationContent *contentToDeliver);
-@property (nonatomic) UNMutableNotificationContent *originalNotificationContent;
+@property (nonatomic) UNNotificationContent *notificationContent;
 
-@property (nonatomic, strong) NSURLSessionDownloadTask *downloadTask;
+@property (nonatomic) NSURLSessionDownloadTask *downloadTask;
 
 @end
 
@@ -25,32 +25,47 @@
 
 - (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler
 {
+    UNNotificationContent *notificationContent = request.content;
+    
+    // Keep references for expiration method implementation
+    self.notificationContent = notificationContent;
     self.contentHandler = contentHandler;
-    self.originalNotificationContent = [request.content mutableCopy];
     
     Notification *notification = [[Notification alloc] initWithRequest:request];
     [Notification saveNotification:notification read:NO];
     
     if (notification.imageURL) {
-        self.downloadTask = [self imageDownloadTaskForNotification:notification];
+        self.downloadTask = [self imageDownloadTaskForNotification:notification withCompletion:^(UNNotificationAttachment * _Nullable attachment) {
+            if (attachment) {
+                UNMutableNotificationContent *mutableNotificationContent = notificationContent.mutableCopy;
+                mutableNotificationContent.attachments = @[attachment];
+                contentHandler(mutableNotificationContent.copy);
+            }
+            else {
+                contentHandler(notificationContent);
+            }
+        }];
         [self.downloadTask resume];
-    } else {
-        self.contentHandler(self.originalNotificationContent);
+    }
+    else {
+        contentHandler(notificationContent);
     }
 }
 
 - (void)serviceExtensionTimeWillExpire
 {
     [self.downloadTask cancel];
-    self.contentHandler(self.originalNotificationContent);
+    self.contentHandler(self.notificationContent);
 }
 
 #pragma mark UNNotificationAttachment for image
 
 // Inspired by UAMediaAttachmentExtension from AirShip
 
-- (NSURLSessionDownloadTask *)imageDownloadTaskForNotification:(Notification *)notification
+- (NSURLSessionDownloadTask *)imageDownloadTaskForNotification:(Notification *)notification withCompletion:(void (^)(UNNotificationAttachment * _Nullable attachment))completion
 {
+    NSParameterAssert(completion);
+    
     static CGFloat s_imageWidth;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
@@ -67,34 +82,24 @@
     });
     
     NSURL *scaledImageURL = [notification imageURLForDimension:SRGImageDimensionWidth withValue:s_imageWidth type:SRGImageTypeDefault];
-    
     return [[NSURLSession sharedSession] downloadTaskWithURL:scaledImageURL completionHandler:^(NSURL *temporaryFileLocation, NSURLResponse *response, NSError *error) {
-                if (error) {
-                    self.contentHandler(self.originalNotificationContent);
-                    return;
-                }
-                
-                NSString *mimeType = nil;
-                if ([response isKindOfClass:NSHTTPURLResponse.class]) {
-                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                    mimeType = httpResponse.allHeaderFields[@"Content-Type"];
-                }
+        if (error) {
+            completion(nil);
+            return;
+        }
         
-                UNNotificationAttachment *attachment = [self attachmentWithTemporaryFileLocation:temporaryFileLocation
-                                                                                     originalURL:notification.imageURL
-                                                                                        mimeType:mimeType
-                                                                                         options:nil];
+        NSString *mimeType = nil;
+        if ([response isKindOfClass:NSHTTPURLResponse.class]) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            mimeType = httpResponse.allHeaderFields[@"Content-Type"];
+        }
         
-                // A nil attachment may indicate an unrecognized file type
-                if (! attachment) {
-                    self.contentHandler(self.originalNotificationContent);
-                    return;
-                }
-                
-                self.originalNotificationContent.attachments = @[attachment];
-                
-                self.contentHandler(self.originalNotificationContent);
-            }];
+        UNNotificationAttachment *attachment = [self attachmentWithTemporaryFileLocation:temporaryFileLocation
+                                                                             originalURL:notification.imageURL
+                                                                                mimeType:mimeType
+                                                                                 options:nil];
+        completion(attachment);
+    }];
 }
 
 - (UNNotificationAttachment *)attachmentWithTemporaryFileLocation:(NSURL *)location
