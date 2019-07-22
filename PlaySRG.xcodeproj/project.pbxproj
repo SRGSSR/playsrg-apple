@@ -117,6 +117,11 @@
 		08280F182258F02400AC978D /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
 		08280F192258F02400AC978D /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
 		08280F1A2258F02400AC978D /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
+		0828BB3A22E62831009617A7 /* parsePlayUrl.js in Resources */ = {isa = PBXBuildFile; fileRef = 0828BB3922E62831009617A7 /* parsePlayUrl.js */; };
+		0828BB3B22E62831009617A7 /* parsePlayUrl.js in Resources */ = {isa = PBXBuildFile; fileRef = 0828BB3922E62831009617A7 /* parsePlayUrl.js */; };
+		0828BB3C22E62831009617A7 /* parsePlayUrl.js in Resources */ = {isa = PBXBuildFile; fileRef = 0828BB3922E62831009617A7 /* parsePlayUrl.js */; };
+		0828BB3D22E62831009617A7 /* parsePlayUrl.js in Resources */ = {isa = PBXBuildFile; fileRef = 0828BB3922E62831009617A7 /* parsePlayUrl.js */; };
+		0828BB3E22E62831009617A7 /* parsePlayUrl.js in Resources */ = {isa = PBXBuildFile; fileRef = 0828BB3922E62831009617A7 /* parsePlayUrl.js */; };
 		0832BF1022BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0832BF0E22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m */; };
 		0832BF1122BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0832BF0E22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m */; };
 		0832BF1222BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0832BF0E22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m */; };
@@ -237,11 +242,6 @@
 		086321112258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086320FA2258C6CF00C719A6 /* WatchLaterTableViewCell.xib */; };
 		086321122258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086320FA2258C6CF00C719A6 /* WatchLaterTableViewCell.xib */; };
 		086321132258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086320FA2258C6CF00C719A6 /* WatchLaterTableViewCell.xib */; };
-		0865F618223C7684007DE03B /* parse_play_url.js in Resources */ = {isa = PBXBuildFile; fileRef = 0865F617223C7684007DE03B /* parse_play_url.js */; };
-		0865F619223C7684007DE03B /* parse_play_url.js in Resources */ = {isa = PBXBuildFile; fileRef = 0865F617223C7684007DE03B /* parse_play_url.js */; };
-		0865F61A223C7684007DE03B /* parse_play_url.js in Resources */ = {isa = PBXBuildFile; fileRef = 0865F617223C7684007DE03B /* parse_play_url.js */; };
-		0865F61B223C7684007DE03B /* parse_play_url.js in Resources */ = {isa = PBXBuildFile; fileRef = 0865F617223C7684007DE03B /* parse_play_url.js */; };
-		0865F61C223C7684007DE03B /* parse_play_url.js in Resources */ = {isa = PBXBuildFile; fileRef = 0865F617223C7684007DE03B /* parse_play_url.js */; };
 		086BDE151EA63D3800965F45 /* AudioMiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 086BDE131EA63D3800965F45 /* AudioMiniPlayerView.m */; };
 		086BDE161EA63D3800965F45 /* AudioMiniPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086BDE141EA63D3800965F45 /* AudioMiniPlayerView.xib */; };
 		086BDE171EA63D5A00965F45 /* AudioMiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 086BDE131EA63D3800965F45 /* AudioMiniPlayerView.m */; };
@@ -1714,6 +1714,7 @@
 		08280F0E2258EA4000AC978D /* WatchLaterViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WatchLaterViewController.storyboard; sourceTree = "<group>"; };
 		08280F142258F02300AC978D /* WatchLater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchLater.m; sourceTree = "<group>"; };
 		08280F152258F02300AC978D /* WatchLater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLater.h; sourceTree = "<group>"; };
+		0828BB3922E62831009617A7 /* parsePlayUrl.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = parsePlayUrl.js; sourceTree = "<group>"; };
 		0832BF0D22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchLoadingCollectionViewCell.h; sourceTree = "<group>"; };
 		0832BF0E22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchLoadingCollectionViewCell.m; sourceTree = "<group>"; };
 		0832BF0F22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchLoadingCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1747,7 +1748,6 @@
 		086320F82258C6CF00C719A6 /* WatchLaterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLaterViewController.h; sourceTree = "<group>"; };
 		086320F92258C6CF00C719A6 /* WatchLaterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLaterTableViewCell.h; sourceTree = "<group>"; };
 		086320FA2258C6CF00C719A6 /* WatchLaterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchLaterTableViewCell.xib; sourceTree = "<group>"; };
-		0865F617223C7684007DE03B /* parse_play_url.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = parse_play_url.js; sourceTree = "<group>"; };
 		086BDE121EA63D3800965F45 /* AudioMiniPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioMiniPlayerView.h; sourceTree = "<group>"; };
 		086BDE131EA63D3800965F45 /* AudioMiniPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioMiniPlayerView.m; sourceTree = "<group>"; };
 		086BDE141EA63D3800965F45 /* AudioMiniPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioMiniPlayerView.xib; sourceTree = "<group>"; };
@@ -2611,7 +2611,7 @@
 		0865F616223C7684007DE03B /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				0865F617223C7684007DE03B /* parse_play_url.js */,
+				0828BB3922E62831009617A7 /* parsePlayUrl.js */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -4046,12 +4046,12 @@
 				E66BEC211DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F0F88A41ECF0CE50060A893 /* override_default_srf3.pdf in Resources */,
 				6F2961FC2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
+				0828BB3A22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				6F5F4FC91DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				E65FB2101D66D69700820696 /* DailyMediasViewController.storyboard in Resources */,
 				6F0C99922121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				086BDE161EA63D3800965F45 /* AudioMiniPlayerView.xib in Resources */,
 				6F0F88961ECF0CE50060A893 /* override_artwork_tv_srf_info.pdf in Resources */,
-				0865F618223C7684007DE03B /* parse_play_url.js in Resources */,
 				6F4EA13D1EE034E200BEC4DA /* Accessibility.strings in Resources */,
 				08602BFC2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				6F0F88A11ECF0CE50060A893 /* override_default_virus.pdf in Resources */,
@@ -4105,7 +4105,6 @@
 				081220B11DD07B7A00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6F4760051EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				E64BA4001D4A588B002C10D5 /* WebViewController.storyboard in Resources */,
-				0865F619223C7684007DE03B /* parse_play_url.js in Resources */,
 				6FBF24452148238300E576A2 /* SRGDiagnostics.bundle in Resources */,
 				6F12E4E822D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				081220AF1DD07B7A00BF8326 /* DownloadsViewController.storyboard in Resources */,
@@ -4156,6 +4155,7 @@
 				08DD9D5F1FFE6EF800115906 /* ModuleHeaderView.xib in Resources */,
 				6F6B643421A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				E6AE51341D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
+				0828BB3B22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				084F94B622D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6F1938321EFBFE9E0017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F0C99AC2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
@@ -4282,10 +4282,10 @@
 				6F5F4FCB1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				E65FB2121D66D69700820696 /* DailyMediasViewController.storyboard in Resources */,
 				086BDE1A1EA63D5B00965F45 /* AudioMiniPlayerView.xib in Resources */,
-				0865F61A223C7684007DE03B /* parse_play_url.js in Resources */,
 				08BAABDF1E76141F007644D7 /* HomeMediasViewController.storyboard in Resources */,
 				6FCB574A1EC2047B0015CAB7 /* override_artwork_rete_uno.pdf in Resources */,
 				0837CEDC1D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
+				0828BB3C22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				08D0E0ED1E9D29F800AB8298 /* HomeRadioLiveTableViewCell.xib in Resources */,
 				6F4C0A7D20DCBDD200069A85 /* HomeShowVerticalListTableViewCell.xib in Resources */,
 				08C68FAA1D38DF8300BB8AAA /* iTunesArtwork in Resources */,
@@ -4362,6 +4362,7 @@
 				086F8D6222984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				6FD88F7F22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				0837CEE21D3FDAFA00A1E089 /* SRGSSRType_He.ttf in Resources */,
+				0828BB3D22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				08C68FE31D38E04B00BB8AAA /* iTunesArtwork@2x in Resources */,
 				6F4C0A7E20DCBDD200069A85 /* HomeShowVerticalListTableViewCell.xib in Resources */,
 				6FD633E61FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
@@ -4390,7 +4391,6 @@
 				086321122258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				0837CEE51D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				08D0E0EF1E9D29F800AB8298 /* HomeRadioLiveTableViewCell.xib in Resources */,
-				0865F61B223C7684007DE03B /* parse_play_url.js in Resources */,
 				6F2961FF2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				6F6B643621A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				08C68FE81D38E04B00BB8AAA /* LaunchScreen.xib in Resources */,
@@ -4451,7 +4451,6 @@
 				08EB37C11D48B2BD0080EDE4 /* MenuViewController.storyboard in Resources */,
 				0837CEF01D3FDAFA00A1E089 /* SRGSSRType_Serif_Rg.ttf in Resources */,
 				6FB3C1B11DBCE783008160B4 /* MediaPreviewViewController.storyboard in Resources */,
-				0865F61C223C7684007DE03B /* parse_play_url.js in Resources */,
 				08602C002213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				0837CEE81D3FDAFA00A1E089 /* FontAwesome.otf in Resources */,
 				08C6908B1D38E3E600BB8AAA /* iTunesArtwork@2x in Resources */,
@@ -4464,6 +4463,7 @@
 				082590F91F054ACF00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				08564B271D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
 				6FD633E71FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
+				0828BB3E22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				0837CEEB1D3FDAFA00A1E089 /* SRGSSRType_He.ttf in Resources */,
 				08DADF9020D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				6F0A7F0920AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,

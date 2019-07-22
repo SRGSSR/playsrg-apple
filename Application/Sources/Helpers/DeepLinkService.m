@@ -119,13 +119,13 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
         return [self libraryParsePlayURLFilePath];
     }
     else {
-        return [NSBundle.mainBundle pathForResource:@"parse_play_url" ofType:@"js"];
+        return [NSBundle.mainBundle pathForResource:@"parsePlayUrl" ofType:@"js"];
     }
 }
 
 - (NSString *)libraryParsePlayURLFilePath
 {
-    return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"parse_play_url.js"];
+    return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"parsePlayUrl.js"];
 }
 
 #pragma mark Data retrieval
@@ -134,7 +134,7 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
 {
     if ([FXReachability sharedInstance].reachable && !self.request.running) {
         NSURL *middlewareURL = ApplicationConfiguration.sharedApplicationConfiguration.middlewareURL;
-        NSURL *URL = [NSURL URLWithString:@"api/v1/deeplink/parse_play_url.js" relativeToURL:middlewareURL];
+        NSURL *URL = [NSURL URLWithString:@"api/v1/deeplink/parsePlayUrl.js" relativeToURL:middlewareURL];
         
         SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (data) {

@@ -1,8 +1,7 @@
-// parse_play_url
+// parsePlayUrl
 
-var parsePlayUrlVersion = 14;
-var parsePlayUrlBuild = "7F6FC6B8E485DE76BB9CBE5780BC6B48C9D917DC";
-var parsePlayUrlBuildDate = "2019-07-20T22:25:48+02:00";
+var parsePlayUrlVersion = 15;
+var parsePlayUrlBuild = "mmf";
 
 var parsePlayUrl = function(urlString) {
 	var url = urlString;
@@ -20,7 +19,7 @@ var parsePlayUrl = function(urlString) {
 	}
 
 	return parseForPlayApp(url.hostname, url.pathname, queryParams, url.hash);
-}
+};
 
 
 var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
@@ -474,30 +473,12 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 	 *  Catch search urls
 	 *
 	 *  Ex: https://www.rsi.ch/play/ricerca?query=federer%20finale
-	 *
-	 *  Ex: https://www.rtr.ch/play/tv/retschertga?query=federer%2520tennis
-	 *  Ex: https://www.rtr.ch/play/tv/retschertga?query=federer%2520tennis#radio
-	 *  Ex: https://www.rtr.ch/play/radio/retschertga?query=federer%2520tennis
-	 *  Ex: https://www.rtr.ch/play/radio/retschertga?query=federer%2520tennis#tv
+	 *  Ex: https://www.rtr.ch/play/retschertga?query=Federer%20tennis&mediaType=video
 	 */
 	if (pathname.endsWith("/suche") || pathname.endsWith("/recherche") || pathname.endsWith("/ricerca") || pathname.endsWith("/retschertga") || pathname.endsWith("/search")) {
 		var query = queryParams["query"];
 		var mediaType = queryParams["mediaType"];
 		var transmission = null;
-		if (pathname.includes("/tv/")) {
-			transmission = "tv";
-			query = decodeURIComponent(query);
-			if (anchor == "#radio") {
-				transmission = "radio";
-			}
-		}
-		else if (pathname.includes("/radio/")) {
-			transmission = "radio";
-			query = decodeURIComponent(query);
-			if (anchor == "#tv") {
-				transmission = "tv";
-			}
-		}
 		if (mediaType) {
 			mediaType = mediaType.toLowerCase();
 			if (mediaType != "video" && mediaType != "audio") {
@@ -522,7 +503,7 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 
 		var topicId = null;
 
-		var tvTopics = {"rts":{"documentaires":"623","series":"1353","tataki":"54537","prime-time":"47040","sport":"1095","info":"1081","kids":"2743","webcreation":"45703"},"rtr":{"uffants":"dfb7ae6d-cb73-431b-a817-b1663ec2f58a","battaporta":"2d48ba80-566c-4359-9e8d-8d9b2d570e0a","rtr-social":"50bb90d6-41af-4bbd-b92c-6ef5db16a9b3","archiv":"c50140e7-5740-4c44-abd0-0f7d9ea68da7","actualitad":"20e7478f-1ea1-49c3-81c2-5f157d6ff092","cuntrasts":"7d7f21be-6727-4939-9126-5bca25eb3a49"},"swi":{"politics":"4","society":"6","business":"1","sci--tech":"5","culture":"2"},"srf":{"news":"a709c610-b275-4c0c-a496-cba304c36712","wissen--ratgeber":"b58dcf14-96ac-4046-8676-fd8a942c0e88","dokumentationen":"516421f0-ec89-43ba-823b-1b5ceec262f3","audiodeskription":"4acf86dd-7ff7-45d3-baf8-33375340d976","religion":"9a79b1de-cde8-4528-b304-d1ae1363f52f","kinder":"1d7d9cfb-6682-4d5b-9e36-322e8fa93c03","filme--serien":"fa793c13-bebc-41b9-9710-bf8a34192c15","kultur":"882cb264-cf81-4a9c-b660-d42519b7ce28","gesellschaft":"63f937e4-859e-42c4-a430-bdb74dd09645","sport":"649e36d7-ff57-41c8-9c1b-7892daf15e78","unterhaltung":"641223fa-f112-4d98-8aec-cb22262a1182","politik":"bb7b21e0-1056-4e28-bac3-c610393b5b0f","jugend":"a2d97206-0b85-4226-8afe-06e86ebd05b2","gebaerdensprache":"593eb926-d892-41ba-8b1f-eccbcfd7f15f"},"rsi":{"news":"7","giovani":"5","film-e-telefilm":"3","la-tua-storia":"1","quiz-e-tempo-libero":"4","musica":"100","oltre-la-tv":"9","sport":"8","documentari":"40","kids":"11"}};
+		/* INJECT TVTOPICS OBJECT */
 
 		if (typeof tvTopics !== 'undefined' && lastPathComponent.length > 0) {
 			topicId = tvTopics[bu][lastPathComponent];
@@ -550,7 +531,7 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 
 		var eventId = null;
 
-		var tvEvents = {};
+		/* INJECT TVEVENTS OBJECT */
 
 		if (typeof tvEvents !== 'undefined' && lastPathComponent.length > 0) {
 			eventId = tvEvents[bu][lastPathComponent];
@@ -629,8 +610,14 @@ var openPage = function(server, bu, page, channelId, options) {
 	if (! page) {
 		page = "tv:home";
 	}
+
+	var pageUid = page.split(":").slice(-1)[0];
+
+	if (page.startsWith("radio:") && ! channelId) {
+		channelId = primaryChannelUidForBu(bu);
+	}
 	
-	var redirect = schemeForBu(bu) + "://open?page=urn:" + bu + ":page:" + page;
+	var redirect = schemeForBu(bu) + "://open?page=urn:" + bu + ":page:" + page + "&page-id=" + pageUid;
 	if (channelId) {
 		redirect = redirect + "&channel-id=" + channelId;
 	}
@@ -645,6 +632,25 @@ var openPage = function(server, bu, page, channelId, options) {
 		redirect = redirect + "&server=" + encodeURIComponent(server);
 	}
 	return redirect;
+};
+
+var primaryChannelUidForBu = function(bu) {
+	switch (bu) {
+		case "srf":
+			return "69e8ac16-4327-4af4-b873-fd5cd6e895a7";
+			break;
+		case "rts":
+			return "a9e7621504c6959e35c3ecbe7f6bed0446cdf8da";
+			break;
+		case "rsi":
+			return "rete-uno";
+			break;
+		case "rtr":
+			return "12fb886e-b7aa-4e55-beb2-45dbc619f3c4";
+			break;
+		default:
+			return null;
+	}
 };
 
 var schemeForBu = function(bu) {
