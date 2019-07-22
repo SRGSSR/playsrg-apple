@@ -31,31 +31,31 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 	// Get BU
 	var bu = null;
 	switch (true) {
-	case hostname.endsWith("tp.srgssr.ch") || hostname.endsWith("player.rts.ch") || hostname.endsWith("player.rsi.ch") || hostname.endsWith("player.rtr.ch") || hostname.endsWith("player.swissinfo.ch") || hostname.endsWith("player.srf.ch"):
-		bu = "tp";
-		break;
-	case hostname.includes("rts.ch") || hostname.includes("srgplayer-rts") || (hostname.includes("play-mmf") && pathname.startsWith("/rts/")):
-		bu = "rts";
-		break;
-	case hostname.includes("rsi.ch") || hostname.includes("srgplayer-rsi") || (hostname.includes("play-mmf") && pathname.startsWith("/rsi/")):
-		bu = "rsi";
-		break;
-	case hostname.includes("rtr.ch") || hostname.includes("srgplayer-rtr") || (hostname.includes("play-mmf") && pathname.startsWith("/rtr/")):
-		bu = "rtr";
-		break;
-	case hostname.includes("swissinfo.ch") || hostname.includes("srgplayer-swi") || (hostname.includes("play-mmf") && pathname.startsWith("/swi/")):
-		bu = "swi";
-		break;
-	case hostname.includes("srf.ch") || hostname.includes("srgplayer-srf") || (hostname.includes("play-mmf") && pathname.startsWith("/srf/")):
-		bu = "srf";
-		break;
-	case hostname.includes("play-mmf") && pathname.startsWith("/mmf/"):
-		bu = "mmf";
-		break;
+		case hostname.endsWith("tp.srgssr.ch") || hostname.endsWith("player.rts.ch") || hostname.endsWith("player.rsi.ch") || hostname.endsWith("player.rtr.ch") || hostname.endsWith("player.swissinfo.ch") || hostname.endsWith("player.srf.ch"):
+			bu = "tp";
+			break;
+		case hostname.includes("rts.ch") || hostname.includes("srgplayer-rts") || (hostname.includes("play-mmf") && pathname.startsWith("/rts/")):
+			bu = "rts";
+			break;
+		case hostname.includes("rsi.ch") || hostname.includes("srgplayer-rsi") || (hostname.includes("play-mmf") && pathname.startsWith("/rsi/")):
+			bu = "rsi";
+			break;
+		case hostname.includes("rtr.ch") || hostname.includes("srgplayer-rtr") || (hostname.includes("play-mmf") && pathname.startsWith("/rtr/")):
+			bu = "rtr";
+			break;
+		case hostname.includes("swissinfo.ch") || hostname.includes("srgplayer-swi") || (hostname.includes("play-mmf") && pathname.startsWith("/swi/")):
+			bu = "swi";
+			break;
+		case hostname.includes("srf.ch") || hostname.includes("srgplayer-srf") || (hostname.includes("play-mmf") && pathname.startsWith("/srf/")):
+			bu = "srf";
+			break;
+		case hostname.includes("play-mmf") && pathname.startsWith("/mmf/"):
+			bu = "mmf";
+			break;
 	}
 
 	if (! bu) {
-		console.log("This hostname URL is not part of Play SRG URLs.");
+		console.log("This URL is not a Play SRG URL.");
 		return null;
 	}
 
@@ -95,6 +95,7 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 			}
 		}
 	}
+
 	/**
 	 *  Catch special case: Play MMF
 	 *
@@ -131,9 +132,9 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 		}
 
 		if (mediaId) {
-				var mediaType = (pathname.startsWith("/video")) ? "video" : "audio";
-				return openMedia(server, bu, mediaType, mediaId, null);
-			}
+			var mediaType = (pathname.startsWith("/video")) ? "video" : "audio";
+			return openMedia(server, bu, mediaType, mediaId, null);
+		}
 		else if (pathname.startsWith("/video")) {
 			// Returns default TV homepage
 			return openPage(server, bu, "tv:home", null, null);
@@ -161,8 +162,7 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 			// Returns default radio homepage
 			return openPage(server, bu, "radio:home", channelId, null);
 		}
-	 }
-
+	}
 
 	if (! pathname.startsWith("/play")) {
 		console.log("No /play path in url.");
@@ -176,12 +176,12 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 	 */
 	var mediaType = null;
 	switch (true) {
-	case pathname.includes("/video/"):
-		mediaType = "video";
-		break;
-	case pathname.includes("/audio/"):
-		mediaType = "audio";
-		break;
+		case pathname.includes("/video/"):
+			mediaType = "video";
+			break;
+		case pathname.includes("/audio/"):
+			mediaType = "audio";
+			break;
 	}
 
 	if (mediaType) {
@@ -201,12 +201,12 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 	 *  Ex: https://www.rts.ch/play/tv/redirect/detail/9938530
 	 */
 	switch (true) {
-	case pathname.includes("/tv/redirect/detail/"):
-		mediaType = "video";
-		break;
-	case pathname.includes("/radio/redirect/detail/"):
-		mediaType = "audio";
-		break;
+		case pathname.includes("/tv/redirect/detail/"):
+			mediaType = "video";
+			break;
+		case pathname.includes("/radio/redirect/detail/"):
+			mediaType = "audio";
+			break;
 	}
 
 	if (mediaType) {
@@ -335,12 +335,12 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 	 */
 	var showTransmission = null;
 	switch (true) {
-	case pathname.includes("/tv/sendung") || pathname.includes("/tv/emission") || pathname.includes("/tv/programma") || pathname.includes("/tv/emissiuns"):
-		showTransmission = "tv";
-		break;
-	case pathname.includes("/radio/sendung") || pathname.includes("/radio/emission") || pathname.includes("/radio/programma") || pathname.includes("/radio/emissiuns"):
-		showTransmission = "radio";
-		break;
+		case pathname.includes("/tv/sendung") || pathname.includes("/tv/emission") || pathname.includes("/tv/programma") || pathname.includes("/tv/emissiuns"):
+			showTransmission = "tv";
+			break;
+		case pathname.includes("/radio/sendung") || pathname.includes("/radio/emission") || pathname.includes("/radio/programma") || pathname.includes("/radio/emissiuns"):
+			showTransmission = "radio";
+			break;
 	}
 
 	if (showTransmission) {
@@ -359,12 +359,12 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 	 *  Ex: https://www.rts.ch/play/tv/quicklink/6176
 	 */
 	switch (true) {
-	case pathname.includes("/tv/quicklink/"):
-		showTransmission = "tv";
-		break;
-	case pathname.includes("/radio/quicklink/"):
-		showTransmission = "radio";
-		break;
+		case pathname.includes("/tv/quicklink/"):
+			showTransmission = "tv";
+			break;
+		case pathname.includes("/radio/quicklink/"):
+			showTransmission = "radio";
+			break;
 	}
 
 	if (showTransmission) {
@@ -517,7 +517,7 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 	if (pathname.endsWith("/tv/themen") || pathname.endsWith("/tv/categories") || pathname.endsWith("/tv/categorie") || pathname.endsWith("/tv/tematicas") || pathname.endsWith("/tv/topics")) {
 		return openPage(server, bu, "tv:home", null, null);
 	}
-	if (pathname.includes("/tv/themen") || pathname.includes("/tv/categories") || pathname.includes("/tv/categorie") || pathname.includes("/tv/tematicas") || pathname.includes("/tv/topics")) {
+	else if (pathname.includes("/tv/themen") || pathname.includes("/tv/categories") || pathname.includes("/tv/categorie") || pathname.includes("/tv/tematicas") || pathname.includes("/tv/topics")) {
 		var lastPathComponent = pathname.split("/").slice(-1)[0]; 
 
 		var topicId = null;
@@ -545,7 +545,7 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 	if (pathname.endsWith("/tv/event")) {
 		return openPage(server, bu, "tv:home", null, null);
 	}
-	if (pathname.includes("/tv/event")) {
+	else if (pathname.includes("/tv/event")) {
 		var lastPathComponent = pathname.split("/").slice(-1)[0]; 
 
 		var eventId = null;
