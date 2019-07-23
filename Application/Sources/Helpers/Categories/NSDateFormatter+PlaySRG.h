@@ -45,6 +45,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeTimeAccessibilityFormatter;
 
+/**
+ *  Formatter for URL date options.
+ */
++ (NSDateFormatter *)play_URLOptionDateFormatter;
+
+/**
+ *  RFC 3339 date formatter.
+ */
++ (NSDateFormatter *)play_rfc3339DateFormatter;
+
 @end
 
 NS_ASSUME_NONNULL_END

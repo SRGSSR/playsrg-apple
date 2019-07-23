@@ -352,7 +352,7 @@ static const CGFloat SideMenuOffset = -50.f;
 
 - (void)setSelectedMenuItemInfo:(MenuItemInfo *)selectedMenuItemInfo animated:(BOOL)animated
 {
-    if (! [self.selectedMenuItemInfo isEqual:selectedMenuItemInfo]) {
+    if (! [self.selectedMenuItemInfo isEqual:selectedMenuItemInfo] || selectedMenuItemInfo.options != nil) {
         _selectedMenuItemInfo = selectedMenuItemInfo;
         
         self.menuViewController.selectedMenuItemInfo = selectedMenuItemInfo;
@@ -362,7 +362,12 @@ static const CGFloat SideMenuOffset = -50.f;
         UIViewController *viewController = nil;
         switch (selectedMenuItemInfo.menuItem) {
             case MenuItemSearch: {
-                viewController = [[SearchViewController alloc] init];
+                NSString *query = selectedMenuItemInfo.options[MenuItemOptionSearchQueryKey];
+                SRGMediaType mediaType = [selectedMenuItemInfo.options[MenuItemOptionSearchMediaTypeOptionKey] integerValue];
+                
+                SRGMediaSearchSettings *settings = [[SRGMediaSearchSettings alloc] init];
+                settings.mediaType = mediaType;
+                viewController = [[SearchViewController alloc] initWithQuery:query settings:settings];
                 break;
             }
                 
@@ -392,12 +397,14 @@ static const CGFloat SideMenuOffset = -50.f;
             }
                 
             case MenuItemTVByDate: {
-                viewController = [[CalendarViewController alloc] init];
+                NSDate *date = selectedMenuItemInfo.options[MenuItemOptionShowByDateDateKey];
+                viewController = [[CalendarViewController alloc] initWithRadioChannel:nil date:date];
                 break;
             }
                 
             case MenuItemTVShowAZ: {
-                viewController = [[ShowsViewController alloc] init];
+                NSString *index = selectedMenuItemInfo.options[MenuItemOptionShowAZIndexKey];
+                viewController = [[ShowsViewController alloc] initWithRadioChannel:nil alphabeticalIndex:index];
                 break;
             }
                 
@@ -458,10 +465,10 @@ static const CGFloat SideMenuOffset = -50.f;
                 NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioChannels;
                 NSAssert(radioChannels.count > 0, @"Radio channels expected");
                 if (radioChannels.count > 1) {
-                    viewController = [[RadioShowsViewController alloc] initWithRadioChannels:radioChannels];
+                    viewController = [[RadioShowsViewController alloc] initWithRadioChannels:radioChannels alphabeticalIndex:selectedMenuItemInfo.options[MenuItemOptionShowAZIndexKey]];
                 }
                 else {
-                    viewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannels.firstObject];
+                    viewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannels.firstObject alphabeticalIndex:selectedMenuItemInfo.options[MenuItemOptionShowAZIndexKey]];
                 }
                 break;
             }

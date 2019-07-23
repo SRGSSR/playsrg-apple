@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Instantiate for shows belonging to the specified radio channel. If no channel is provided, TV shows will be
- *  displayed instead.
+ *  displayed instead. The alphabetical index is ingored if not in the loaded index list.
  */
-- (instancetype)initWithRadioChannel:(nullable RadioChannel *)radioChannel;
+- (instancetype)initWithRadioChannel:(nullable RadioChannel *)radioChannel alphabeticalIndex:(nullable NSString *)alphabeticalIndex;
 
 @end
 

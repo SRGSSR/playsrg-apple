@@ -197,6 +197,7 @@ typedef NSString * AnalyticsValue NS_STRING_ENUM;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceAutomatic;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceButton;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceClose;
+OBJC_EXPORT AnalyticsSource const AnalyticsSourceDeepLink;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceHandoff;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceLongPress;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotification;
@@ -217,12 +218,14 @@ OBJC_EXPORT AnalyticsType const AnalyticsTypeActionSearch;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionPlayMedia;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplay;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayShow;
+OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayPage;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionCancel;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionNotificationAlert;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayLogin;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionCancelLogin;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLogin;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLogout;
+OBJC_EXPORT AnalyticsType const AnalyticsTypeActionOpenPlayApp;
 
 /**
  *  Values

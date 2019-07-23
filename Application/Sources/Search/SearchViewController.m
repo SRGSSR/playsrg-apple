@@ -63,16 +63,29 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 #pragma mark Object lifecycle
 
-- (instancetype)init
+- (instancetype)initWithQuery:(NSString *)query settings:(SRGMediaSearchSettings *)settings
 {
     if (self = [super init]) {
+        self.query = query;
+        
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         if (! applicationConfiguration.searchSettingsDisabled) {
-            self.settings = SearchViewController.defaultSettings;
+            self.settings = settings ?: SearchViewController.defaultSettings;
         }
     }
     return self;
 }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
+- (instancetype)init
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return [self initWithQuery:nil settings:nil];
+}
+
+#pragma clang diagnostic pop
 
 #pragma mark Getters and setters
 
@@ -131,6 +144,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     searchBar.play_textField.font = [UIFont srg_regularFontWithSize:18.f];
     searchBar.delegate = self;
+    searchBar.text = self.query;
     
     // Required for proper search bar behavior
     self.definesPresentationContext = YES;
@@ -168,7 +182,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     [super viewDidAppear:animated];
     
-    if ([self play_isMovingToParentViewController]) {
+    if ([self play_isMovingToParentViewController] && self.query.length == 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.searchController.searchBar becomeFirstResponder];
         });
