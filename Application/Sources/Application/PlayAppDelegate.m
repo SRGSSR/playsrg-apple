@@ -322,7 +322,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         NSString *topicURN = [self valueFromURLComponents:URLComponents withParameterName:@"topic"];
         if (topicURN) {
-            [self openTopicWithURN:topicURN fromPushNotification:NO completionBlock:^{
+            [self openTopicWithURN:topicURN completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
@@ -335,7 +335,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         NSString *moduleURN = [self valueFromURLComponents:URLComponents withParameterName:@"module"];
         if (moduleURN) {
-            [self openModuleWithURN:moduleURN fromPushNotification:NO completionBlock:^{
+            [self openModuleWithURN:moduleURN completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
@@ -349,7 +349,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         NSString *pageUid = [self valueFromURLComponents:URLComponents withParameterName:@"page-id"];
         if (pageUid) {
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
-            [self openPageWithUid:pageUid channelUid:channelUid URLComponents:URLComponents fromPushNotification:NO completionBlock:^{
+            [self openPageWithUid:pageUid channelUid:channelUid URLComponents:URLComponents completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
@@ -424,13 +424,13 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }];
 }
 
-- (void)openShowListAtIndex:(NSString *)index withChannelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openShowListAtIndex:(NSString *)index withChannelUid:(NSString *)channelUid completionBlock:(void (^)(void))completionBlock
 {
     RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:channelUid];
     if (radioChannel) {
         MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
         [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
-            [self openShowListWithRadioChannel:radioChannel atIndex:index fromPushNotification:fromPushNotification];
+            [self openShowListWithRadioChannel:radioChannel atIndex:index];
             completionBlock ? completionBlock() : nil;
         }];
     }
@@ -440,13 +440,13 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }
 }
 
-- (void)openCalendarAtDate:(NSDate *)date withChannelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openCalendarAtDate:(NSDate *)date withChannelUid:(NSString *)channelUid completionBlock:(void (^)(void))completionBlock
 {
     RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:channelUid];
     if (radioChannel) {
         MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
         [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
-            [self openCalendarAtDate:date withRadioChannel:radioChannel fromPushNotification:fromPushNotification];
+            [self openCalendarAtDate:date withRadioChannel:radioChannel];
             completionBlock ? completionBlock() : nil;
         }];
     }
@@ -459,7 +459,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }
 }
 
-- (void)openSearchWithQuery:(NSString *)query mediaType:(SRGMediaType)mediaType fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openSearchWithQuery:(NSString *)query mediaType:(SRGMediaType)mediaType completionBlock:(void (^)(void))completionBlock
 {
     NSMutableDictionary *options = [NSMutableDictionary dictionary];
     options[MenuItemOptionSearchMediaTypeOptionKey] = @(mediaType);
@@ -469,24 +469,24 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
 }
 
-- (void)openHomeWithChannelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openHomeWithChannelUid:(NSString *)channelUid completionBlock:(void (^)(void))completionBlock
 {
     MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
 }
 
-- (void)openPageWithUid:(NSString *)pageUid channelUid:(NSString *)channelUid URLComponents:(NSURLComponents *)URLComponents fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openPageWithUid:(NSString *)pageUid channelUid:(NSString *)channelUid URLComponents:(NSURLComponents *)URLComponents completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(pageUid);
     
     if ([pageUid isEqualToString:@"az"]) {
         NSString *index = [self valueFromURLComponents:URLComponents withParameterName:@"index"];
-        [self openShowListAtIndex:index withChannelUid:channelUid fromPushNotification:fromPushNotification completionBlock:completionBlock];
+        [self openShowListAtIndex:index withChannelUid:channelUid completionBlock:completionBlock];
     }
     else if ([pageUid isEqualToString:@"bydate"]) {
         NSString *dateString = [self valueFromURLComponents:URLComponents withParameterName:@"date"];
         NSDate *date = dateString ? [NSDateFormatter.play_URLOptionDateFormatter dateFromString:dateString] : nil;
-        [self openCalendarAtDate:date withChannelUid:channelUid fromPushNotification:fromPushNotification completionBlock:completionBlock];
+        [self openCalendarAtDate:date withChannelUid:channelUid completionBlock:completionBlock];
     }
     else if ([pageUid isEqualToString:@"search"]) {
         NSString *query = [self valueFromURLComponents:URLComponents withParameterName:@"query"];
@@ -501,31 +501,31 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         NSString *mediaTypeName = [self valueFromURLComponents:URLComponents withParameterName:@"mediaType"];
         SRGMediaType mediaType = s_mediaTypes[mediaTypeName].integerValue;
         
-        [self openSearchWithQuery:query mediaType:mediaType fromPushNotification:fromPushNotification completionBlock:completionBlock];
+        [self openSearchWithQuery:query mediaType:mediaType completionBlock:completionBlock];
     }
     else if ([pageUid isEqualToString:@"home"]) {
-        [self openHomeWithChannelUid:channelUid fromPushNotification:fromPushNotification completionBlock:completionBlock];
+        [self openHomeWithChannelUid:channelUid completionBlock:completionBlock];
     }
 }
 
-- (void)openTopicWithURN:(NSString *)topicURN fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openTopicWithURN:(NSString *)topicURN completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(topicURN);
     
     MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVOverview];
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
-        [self openTopicURN:topicURN fromPushNotification:fromPushNotification];
+        [self openTopicURN:topicURN];
         completionBlock ? completionBlock() : nil;
     }];
 }
 
-- (void)openModuleWithURN:(NSString *)moduleURN fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openModuleWithURN:(NSString *)moduleURN completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(moduleURN);
     
     MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVOverview];
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
-        [self openModuleURN:moduleURN fromPushNotification:fromPushNotification];
+        [self openModuleURN:moduleURN];
         completionBlock ? completionBlock() : nil;
     }];
 }
@@ -745,7 +745,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }
 }
 
-- (void)openTopicURN:(NSString *)topicURN fromPushNotification:(BOOL)fromPushNotification
+- (void)openTopicURN:(NSString *)topicURN
 {
     [[SRGDataProvider.currentDataProvider tvTopicsForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor withCompletionBlock:^(NSArray<SRGTopic *> * _Nullable topics, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGTopic.new, URN), topicURN];
@@ -763,7 +763,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }] resume];
 }
 
-- (void)openModuleURN:(NSString *)moduleURN fromPushNotification:(BOOL)fromPushNotification
+- (void)openModuleURN:(NSString *)moduleURN
 {
     [[SRGDataProvider.currentDataProvider modulesForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor type:SRGModuleTypeEvent withCompletionBlock:^(NSArray<SRGModule *> * _Nullable modules, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGModule.new, URN), moduleURN];
@@ -781,13 +781,13 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }] resume];
 }
 
-- (void)openShowListWithRadioChannel:(RadioChannel *)radioChannel atIndex:(NSString *)index fromPushNotification:(BOOL)fromPushNotification
+- (void)openShowListWithRadioChannel:(RadioChannel *)radioChannel atIndex:(NSString *)index
 {
     ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:index];
     [self.sideMenuController pushViewController:showsViewController animated:YES];
 }
 
-- (void)openCalendarAtDate:(NSDate *)date withRadioChannel:(RadioChannel *)radioChannel fromPushNotification:(BOOL)fromPushNotification
+- (void)openCalendarAtDate:(NSDate *)date withRadioChannel:(RadioChannel *)radioChannel
 {
     CalendarViewController *calendarViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:date];
     [self.sideMenuController pushViewController:calendarViewController animated:YES];
