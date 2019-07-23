@@ -10,6 +10,11 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
+static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
+{
+    return (__bridge NSString *)UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (__bridge CFStringRef _Nonnull)MIMEType, NULL);
+}
+
 @interface NotificationService ()
 
 @property (nonatomic, copy) void (^contentHandler)(UNNotificationContent *contentToDeliver);
@@ -87,20 +92,13 @@
         }
 
         NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
-        NSString *MIMEType = HTTPResponse.allHeaderFields[@"Content-Type"];
+        NSString *MIMEType = HTTPResponse.MIMEType;
         if (! MIMEType) {
             completion(nil);
             return;
         }
         
-        static dispatch_once_t s_onceToken;
-        static NSDictionary<NSString *, NSString *> *s_UTIs;
-        dispatch_once(&s_onceToken, ^{
-            s_UTIs = @{ @"image/jpeg" : @"public.jpeg",
-                        @"image/png" : @"public.png" };
-        });
-        
-        NSString *UTI = s_UTIs[MIMEType];
+        NSString *UTI = NotificationServiceUTIFromMIMEType(MIMEType);
         if (! UTI) {
             completion(nil);
             return;
