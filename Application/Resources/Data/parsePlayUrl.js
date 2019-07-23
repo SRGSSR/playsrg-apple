@@ -1,9 +1,9 @@
 // parsePlayUrl
 
-var parsePlayUrlVersion = 15;
+var parsePlayUrlVersion = 16;
 var parsePlayUrlBuild = "mmf";
 
-var parsePlayUrl = function(urlString) {
+function parsePlayUrl(urlString) {
 	var url = urlString;
 	try {
 		url = new URL(urlString);
@@ -19,10 +19,9 @@ var parsePlayUrl = function(urlString) {
 	}
 
 	return parseForPlayApp(url.hostname, url.pathname, queryParams, url.hash);
-};
+}
 
-
-var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
+function parseForPlayApp(hostname, pathname, queryParams, anchor) {
 
 	// fix path issue
 	pathname = pathname.replace("//", "/");
@@ -559,8 +558,7 @@ var parseForPlayApp = function(hostname, pathname, queryParams, anchor) {
 	console.log("Can't parse Play URL. Redirect.");
 	return schemeForBu(bu) + "://redirect";
 };
-
-var openMedia = function(server, bu, mediaType, mediaId, startTime) {
+function openMedia(server, bu, mediaType, mediaId, startTime) {
 	var redirect = schemeForBu(bu) + "://open?media=urn:" + bu + ":" + mediaType + ":" + mediaId;
 	if (startTime) {
 		redirect = redirect + "&start-time=" + startTime;
@@ -569,9 +567,9 @@ var openMedia = function(server, bu, mediaType, mediaId, startTime) {
 		redirect = redirect + "&server=" + encodeURIComponent(server);
 	}
 	return redirect;
-};
+}
 
-var openMediaURN = function(server, bu, mediaURN, startTime) {
+function openMediaURN(server, bu, mediaURN, startTime) {
 	var redirect = schemeForBu(bu) + "://open?media=" + mediaURN;
 	if (startTime) {
 		redirect = redirect + "&start-time=" + startTime;
@@ -580,33 +578,33 @@ var openMediaURN = function(server, bu, mediaURN, startTime) {
 		redirect = redirect + "&server=" + encodeURIComponent(server);
 	}
 	return redirect;
-};
+}
 
-var openShow = function(server, bu, showTransmission, showId) {
+function openShow(server, bu, showTransmission, showId) {
 	var redirect = schemeForBu(bu) + "://open?show=urn:" + bu + ":show:" + showTransmission + ":" + showId;
 	if (server) {
 		redirect = redirect + "&server=" + encodeURIComponent(server);
 	}
 	return redirect;
-};
+}
 
-var openTopic = function(server, bu, topicTransmission, topicId) {
+function openTopic(server, bu, topicTransmission, topicId) {
 	var redirect = schemeForBu(bu) + "://open?topic=urn:" + bu + ":topic:" + topicTransmission + ":" + topicId;
 	if (server) {
 		redirect = redirect + "&server=" + encodeURIComponent(server);
 	}
 	return redirect;
-};
+}
 
-var openModule = function(server, bu, moduleType, moduleId) {
+function openModule(server, bu, moduleType, moduleId) {
 	var redirect = schemeForBu(bu) + "://open?module=urn:" + bu + ":module:" + moduleType + ":" + moduleId;
 	if (server) {
 		redirect = redirect + "&server=" + encodeURIComponent(server);
 	}
 	return redirect;
-};
+}
 
-var openPage = function(server, bu, page, channelId, options) {
+function openPage(server, bu, page, channelId, options) {
 	if (! page) {
 		page = "tv:home";
 	}
@@ -632,9 +630,9 @@ var openPage = function(server, bu, page, channelId, options) {
 		redirect = redirect + "&server=" + encodeURIComponent(server);
 	}
 	return redirect;
-};
+}
 
-var primaryChannelUidForBu = function(bu) {
+function primaryChannelUidForBu(bu) {
 	switch (bu) {
 		case "srf":
 			return "69e8ac16-4327-4af4-b873-fd5cd6e895a7";
@@ -651,9 +649,9 @@ var primaryChannelUidForBu = function(bu) {
 		default:
 			return null;
 	}
-};
+}
 
-var schemeForBu = function(bu) {
+function schemeForBu(bu) {
 	switch (bu) {
 		case "srf":
 			return "playsrf";
@@ -677,9 +675,9 @@ var schemeForBu = function(bu) {
 		default:
 			return null;
 	}
-};
+}
 
-var serverForUrl = function(hostname, pathname, queryParams) {
+function serverForUrl(hostname, pathname, queryParams) {
 	var server = "production";
 	if (hostname.includes("stage")) {
 		server = "stage";
@@ -709,4 +707,4 @@ var serverForUrl = function(hostname, pathname, queryParams) {
 		}
 	}
 	return server;
-};
+}
