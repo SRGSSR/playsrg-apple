@@ -86,13 +86,12 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
     
     NSURL *scaledImageURL = [notification imageURLForDimension:SRGImageDimensionWidth withValue:s_imageWidth type:SRGImageTypeDefault];
     return [[NSURLSession sharedSession] downloadTaskWithURL:scaledImageURL completionHandler:^(NSURL *temporaryFileURL, NSURLResponse *response, NSError *error) {
-        if (error || ! [response isKindOfClass:NSHTTPURLResponse.class]) {
+        if (error) {
             completion(nil);
             return;
         }
-
-        NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
-        NSString *MIMEType = HTTPResponse.MIMEType;
+        
+        NSString *MIMEType = response.MIMEType;
         if (! MIMEType) {
             completion(nil);
             return;
