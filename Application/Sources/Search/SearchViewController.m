@@ -47,9 +47,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 + (BOOL)containsAdvancedSettings:(SRGMediaSearchSettings *)settings
 {
-    if (! settings) {
-        return NO;
-    }
+    NSParameterAssert(settings);
     
     SRGMediaSearchSettings *defaultSettings = SearchSettingsViewController.defaultSettings;
     defaultSettings.aggregationsEnabled = NO;

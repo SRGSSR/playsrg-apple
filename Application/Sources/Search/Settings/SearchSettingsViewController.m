@@ -252,7 +252,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (void)updateResults
 {
-    SRGMediaSearchSettings *settings = [self.settings copy];
+    SRGMediaSearchSettings *settings = [self.settings copy] ?: SearchSettingsViewController.defaultSettings;
     settings.aggregationsEnabled = NO;
     [self.delegate searchSettingsViewController:self didUpdateSettings:settings];
     
