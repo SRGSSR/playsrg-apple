@@ -14,7 +14,7 @@ var parsePlayUrl = function(urlString) {
 	}
 
 	var queryParams = {};
-	for (let queryItem of url.searchParams) {
+	for (var queryItem of url.searchParams) {
 		queryParams[queryItem[0]] = queryItem[1];
 	}
 
