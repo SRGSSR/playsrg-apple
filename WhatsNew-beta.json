@@ -85,5 +85,6 @@
   "2.9.3-306": "- The search has been unified and now returns show as well as media results on a single page.\n- The player opens faster, especially on older devices.\n- Lock screen video playback on iOS 12.3 and above has been fixed. Background playback abilities have been extended to video as well via a new option available from the application settings.\n- Accessibility in media lists has been fixed.",
   "2.9.3-307": "- Faster search (no aggregation result).\n- Better show image in search result.\n- Tiny performance improvement on homepages, especially on older devices.\n- Update romansh translations.",
   "2.9.3-308": "- Fix potentially incorrect show search results.",
-  "2.9.4-309": "- Advanced search with filtering capabilities.\n- Deep linking support (Beta to stage Play web portal, Nightly to test Play web portal).\n- Thumbnail display in notifications."
+  "2.9.4-309": "- Advanced search with filtering capabilities.\n- Deep linking support (Beta to stage Play web portal, Nightly to test Play web portal).\n- Thumbnail display in notifications.",
+  "2.9.4-310": "- Fix filters incorrectly set when opening the search from the left menu."
 }
