@@ -51,14 +51,9 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         return NO;
     }
     
-    return ! [SearchViewController.defaultSettings isEqual:settings];
-}
-
-+ (SRGMediaSearchSettings *)defaultSettings
-{
     SRGMediaSearchSettings *defaultSettings = SearchSettingsViewController.defaultSettings;
     defaultSettings.aggregationsEnabled = NO;
-    return defaultSettings;
+    return ! [defaultSettings isEqual:settings];
 }
 
 #pragma mark Object lifecycle
@@ -70,7 +65,8 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         if (! applicationConfiguration.searchSettingsDisabled) {
-            self.settings = settings ?: SearchViewController.defaultSettings;
+            self.settings = settings ?: SearchSettingsViewController.defaultSettings;
+            self.settings.aggregationsEnabled = NO;
         }
     }
     return self;
