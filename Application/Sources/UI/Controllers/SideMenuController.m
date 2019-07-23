@@ -403,7 +403,8 @@ static const CGFloat SideMenuOffset = -50.f;
             }
                 
             case MenuItemTVShowAZ: {
-                viewController = [[ShowsViewController alloc] init];
+                NSString *index = selectedMenuItemInfo.options[MenuItemOptionShowAZIndexKey];
+                viewController = [[ShowsViewController alloc] initWithRadioChannel:nil alphabeticalIndex:index];
                 break;
             }
                 

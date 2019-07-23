@@ -261,7 +261,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 // Open [scheme]://open?page-id=[az] (optional query parameters: channel-id=[channel_id], index=[index_letter])
 // Open [scheme]://open?page-id=[bydate] (optional query parameters: channel-id=[channel_id], date=[date] with format yyyy-MM-dd)
 // Open [scheme]://open?page-id=[search] (optional query parameters: query=[query], mediaType=[audio|video])
-// Open [scheme]://[play website url] ("parsePlayUrl.js" try to transformed to scheme urls)
+// Open [scheme]://[play website url] (use "parsePlayUrl.js" to attempt transforming the URL)
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
     AnalyticsSource analyticsSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeepLink : AnalyticsSourceSchemeURL;
@@ -435,7 +435,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         }];
     }
     else {
-        MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVShowAZ options:nil];
+        NSMutableDictionary *options = [NSMutableDictionary dictionary];
+        options[MenuItemOptionShowAZIndexKey] = index;
+        
+        MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVShowAZ options:options.copy];
         [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
     }
 }
