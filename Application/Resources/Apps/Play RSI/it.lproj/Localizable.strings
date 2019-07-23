@@ -45,7 +45,7 @@
 "Add to favorites" = "Aggiungere ai preferiti";
 
 /* All option */
-"All" = "All";
+"All" = "Tutto";
 
 /* Title of the first cell of a media list on homepage. */
 "All content" = "Mostra tutto";
@@ -70,7 +70,7 @@
 
 /* Audios option
    Header for audio search results */
-"Audios" = "Audios";
+"Audios" = "Audio";
 
 /* Message title displayed when subscribing to all TV and radio shows
    Message title displayed when the user subscribed to all TV and radio shows */
@@ -100,7 +100,7 @@
 "Close" = "Chiudi";
 
 /* Settings section header */
-"Content" = "Content";
+"Content" = "Contenuto";
 
 /* Text displayed on live cells when no program time information is available */
 "Currently" = "Attualmente";
@@ -125,7 +125,7 @@
 "Discover" = "Scopri";
 
 /* Name of the search setting to filter downloadable content */
-"Downloadable" = "Downloadable";
+"Downloadable" = "Scaricabile";
 
 /* [Technical] Downloads page type for analytics measurements
    Label in the left menu to present downloads
@@ -133,7 +133,7 @@
 "Downloads" = "Download";
 
 /* Settings section header */
-"Duration" = "Duration";
+"Duration" = "Durata";
 
 /* Label for the button keeping autoplay enabled */
 "Enable" = "Attivare";
@@ -169,7 +169,7 @@
 
 /* Filters button title
    Search filters page title */
-"Filters" = "Filters";
+"Filters" = "Filtri";
 
 /* Explanation displayed in the alert asking the user to enable notifications */
 "For the application to inform you when a new episode is available, notifications must be enabled." = "Affinché l'app possa informarvi quando è disponibile un nuovo episodio, è necessario attivare le notifiche.";
@@ -348,10 +348,10 @@
 "Overview" = "Home";
 
 /* Settings section header */
-"Period" = "Period";
+"Period" = "Periodo";
 
 /* Name of the search setting to filter content playable abroard */
-"Playable abroad" = "Playable abroad";
+"Playable abroad" = "Disponibile all'estero";
 
 /* Notification message when a media is paused due to Handoff activity. */
 "Playback has resumed on another device." = "La riproduzione è stata ripresa su altro dispositivo.";
@@ -377,7 +377,7 @@
 "Programmes by date" = "Trasmissioni per data";
 
 /* Settings section header */
-"Properties" = "Properties";
+"Properties" = "Proprietà";
 
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Scorrere verso il basso per ricaricare";
@@ -518,16 +518,16 @@
 "The Google Cast receiver cannot play videos." = "Il ricevitore Google Cast non può riprodurre video.";
 
 /* Period setting option */
-"The last 24 hours" = "The last 24 hours";
+"The last 24 hours" = "Le ultime 24 ore";
 
 /* Period setting option */
-"The last 3 days" = "The last 3 days";
+"The last 3 days" = "Gli ultimi 3 giorni";
 
 /* Period setting option */
-"The last month" = "The last month";
+"The last month" = "L'ultimo mese";
 
 /* Period setting option */
-"The last week" = "The last week";
+"The last week" = "L'ultima settimana";
 
 /* Label used on a radio home page to present the latest audios */
 "The latest audios" = "Gli audio più recenti";
@@ -583,7 +583,7 @@
 
 /* Header for video search results
    Videos option */
-"Videos" = "Videos";
+"Videos" = "Video";
 
 /* Header for video and audio search results */
 "Videos and audios" = "Video e audio";

@@ -45,7 +45,7 @@
 "Add to favorites" = "Zu den Favoriten hinzufügen";
 
 /* All option */
-"All" = "All";
+"All" = "Alle";
 
 /* Title of the first cell of a media list on homepage. */
 "All content" = "Alle anzeigen";
@@ -100,7 +100,7 @@
 "Close" = "Schliessen";
 
 /* Settings section header */
-"Content" = "Content";
+"Content" = "Inhalt";
 
 /* Text displayed on live cells when no program time information is available */
 "Currently" = "Aktuell auf Sendung";
@@ -125,7 +125,7 @@
 "Discover" = "Entdecken";
 
 /* Name of the search setting to filter downloadable content */
-"Downloadable" = "Downloadable";
+"Downloadable" = "Als Download verfügbar";
 
 /* [Technical] Downloads page type for analytics measurements
    Label in the left menu to present downloads
@@ -133,7 +133,7 @@
 "Downloads" = "Downloads";
 
 /* Settings section header */
-"Duration" = "Duration";
+"Duration" = "Dauer";
 
 /* Label for the button keeping autoplay enabled */
 "Enable" = "Aktivieren";
@@ -169,7 +169,7 @@
 
 /* Filters button title
    Search filters page title */
-"Filters" = "Filters";
+"Filters" = "Filter";
 
 /* Explanation displayed in the alert asking the user to enable notifications */
 "For the application to inform you when a new episode is available, notifications must be enabled." = "Damit Play SRF Sie über neue Episoden informieren kann, müssen Push-Mitteilungen aktiviert werden.";
@@ -348,10 +348,10 @@
 "Overview" = "Startseite";
 
 /* Settings section header */
-"Period" = "Period";
+"Period" = "Zeitraum";
 
 /* Name of the search setting to filter content playable abroard */
-"Playable abroad" = "Playable abroad";
+"Playable abroad" = "Im Ausland verfügbar";
 
 /* Notification message when a media is paused due to Handoff activity. */
 "Playback has resumed on another device." = "Die Wiedergabe wurde auf einem anderen Gerät fortgesetzt.";
@@ -377,7 +377,7 @@
 "Programmes by date" = "Sendungen nach Datum";
 
 /* Settings section header */
-"Properties" = "Properties";
+"Properties" = "Eigenschaften";
 
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Herunterziehen, um Seite nochmals zu laden";
@@ -438,7 +438,7 @@
 "Replay" = "Replay";
 
 /* Title of the reset search settings button */
-"Reset" = "Reset";
+"Reset" = "Zurücksetzen";
 
 /* [Technical] Search page type for analytics measurements
    Label in the left menu to present the search view
@@ -518,16 +518,16 @@
 "The Google Cast receiver cannot play videos." = "Der Google Cast Empfänger kann keine Videos abspielen.";
 
 /* Period setting option */
-"The last 24 hours" = "The last 24 hours";
+"The last 24 hours" = "Letzte 24 Stunden";
 
 /* Period setting option */
-"The last 3 days" = "The last 3 days";
+"The last 3 days" = "Letzte 3 Tage";
 
 /* Period setting option */
-"The last month" = "The last month";
+"The last month" = "Letzter Monat";
 
 /* Period setting option */
-"The last week" = "The last week";
+"The last week" = "Letzte Woche";
 
 /* Label used on a radio home page to present the latest audios */
 "The latest audios" = "Die neusten Audios";
