@@ -11,6 +11,7 @@
 MenuItemOptionKey const MenuItemOptionSearchMediaTypeOptionKey = @"MenuItemOptionSearchMediaTypeOption";
 MenuItemOptionKey const MenuItemOptionSearchQueryKey = @"MenuItemOptionSearchQuery";
 MenuItemOptionKey const MenuItemOptionShowAZIndexKey = @"MenuItemOptionShowAZIndex";
+MenuItemOptionKey const MenuItemOptionShowByDateDateKey = @"MenuItemOptionShowByDateDate";
 
 @interface MenuItemInfo ()
 

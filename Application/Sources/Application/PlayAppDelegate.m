@@ -409,8 +409,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
         CMTime time = (startTime > 0) ? CMTimeMakeWithSeconds(startTime, NSEC_PER_SEC) : kCMTimeZero;
         [self playURN:mediaURN media:nil atPosition:[SRGPosition positionAtTime:time] fromPushNotification:fromPushNotification completion:nil];
-        
-        // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;
     }];
 }
@@ -422,31 +420,73 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
         [self openShowURN:showURN show:nil fromPushNotification:fromPushNotification];
-        
-        // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;
     }];
+}
+
+- (void)openShowListAtIndex:(NSString *)index withChannelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+{
+    RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:channelUid];
+    if (radioChannel) {
+        MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
+        [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
+            [self openShowListWithRadioChannel:radioChannel atIndex:index fromPushNotification:fromPushNotification];
+            completionBlock ? completionBlock() : nil;
+        }];
+    }
+    else {
+        MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVShowAZ options:nil];
+        [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
+    }
+}
+
+- (void)openCalendarAtDate:(NSDate *)date withChannelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+{
+    RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:channelUid];
+    if (radioChannel) {
+        MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
+        [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
+            [self openCalendarAtDate:date withRadioChannel:radioChannel fromPushNotification:fromPushNotification];
+            completionBlock ? completionBlock() : nil;
+        }];
+    }
+    else {
+        NSMutableDictionary *options = [NSMutableDictionary dictionary];
+        options[MenuItemOptionShowByDateDateKey] = date;
+        
+        MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVByDate options:options.copy];
+        [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
+    }
+}
+
+- (void)openSearchWithQuery:(NSString *)query mediaType:(SRGMediaType)mediaType fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+{
+    NSMutableDictionary *options = [NSMutableDictionary dictionary];
+    options[MenuItemOptionSearchMediaTypeOptionKey] = @(mediaType);
+    options[MenuItemOptionSearchQueryKey] = query;
+    
+    MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch options:options.copy];
+    [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
+}
+
+- (void)openHomeWithChannelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+{
+    MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
+    [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
 }
 
 - (void)openPageWithUid:(NSString *)pageUid channelUid:(NSString *)channelUid URLComponents:(NSURLComponents *)URLComponents fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(pageUid);
     
-    RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:channelUid];
-    
-    MenuItemInfo *menuItemInfo = nil;
-    UIViewController *pageViewController = nil;
     if ([pageUid isEqualToString:@"az"]) {
         NSString *index = [self valueFromURLComponents:URLComponents withParameterName:@"index"];
-        pageViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:index];
+        [self openShowListAtIndex:index withChannelUid:channelUid fromPushNotification:fromPushNotification completionBlock:completionBlock];
     }
     else if ([pageUid isEqualToString:@"bydate"]) {
         NSString *dateString = [self valueFromURLComponents:URLComponents withParameterName:@"date"];
-        NSDate *date = nil;
-        if (dateString) {
-            date = [NSDateFormatter.play_URLOptionDateFormatter dateFromString:dateString];
-        }
-        pageViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:date];
+        NSDate *date = dateString ? [NSDateFormatter.play_URLOptionDateFormatter dateFromString:dateString] : nil;
+        [self openCalendarAtDate:date withChannelUid:channelUid fromPushNotification:fromPushNotification completionBlock:completionBlock];
     }
     else if ([pageUid isEqualToString:@"search"]) {
         NSString *query = [self valueFromURLComponents:URLComponents withParameterName:@"query"];
@@ -457,32 +497,15 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             s_mediaTypes = @{ @"video" : @(SRGMediaTypeVideo),
                               @"audio" : @(SRGMediaTypeAudio) };
         });
-
-        NSString *mediaType = [self valueFromURLComponents:URLComponents withParameterName:@"mediaType"];
-        NSNumber *mediaTypeOption = (mediaType) ? s_mediaTypes[mediaType] : nil;
         
-        NSMutableDictionary *options = [NSMutableDictionary dictionary];
-        options[MenuItemOptionSearchMediaTypeOptionKey] = mediaTypeOption;
-        options[MenuItemOptionSearchQueryKey] = query;
-        menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch options:options.copy];
+        NSString *mediaTypeName = [self valueFromURLComponents:URLComponents withParameterName:@"mediaType"];
+        SRGMediaType mediaType = s_mediaTypes[mediaTypeName].integerValue;
+        
+        [self openSearchWithQuery:query mediaType:mediaType fromPushNotification:fromPushNotification completionBlock:completionBlock];
     }
     else if ([pageUid isEqualToString:@"home"]) {
-        menuItemInfo = MenuItemInfoForChannelUid(channelUid);
+        [self openHomeWithChannelUid:channelUid fromPushNotification:fromPushNotification completionBlock:completionBlock];
     }
-    
-    // Fallback to home page
-    if (! menuItemInfo) {
-        menuItemInfo = MenuItemInfoForChannelUid(channelUid);
-    }
-    
-    [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
-        if (pageViewController) {
-            [self.sideMenuController pushViewController:pageViewController animated:YES];
-        }
-        
-        // Call completion when the opening process has been initiated
-        completionBlock ? completionBlock() : nil;
-    }];
 }
 
 - (void)openTopicWithURN:(NSString *)topicURN fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
@@ -492,8 +515,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVOverview];
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
         [self openTopicURN:topicURN fromPushNotification:fromPushNotification];
-        
-        // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;
     }];
 }
@@ -505,8 +526,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVOverview];
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
         [self openModuleURN:moduleURN fromPushNotification:fromPushNotification];
-        
-        // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;
     }];
 }
@@ -760,6 +779,18 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             [Banner showError:error inViewController:nil];
         }
     }] resume];
+}
+
+- (void)openShowListWithRadioChannel:(RadioChannel *)radioChannel atIndex:(NSString *)index fromPushNotification:(BOOL)fromPushNotification
+{
+    ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:index];
+    [self.sideMenuController pushViewController:showsViewController animated:YES];
+}
+
+- (void)openCalendarAtDate:(NSDate *)date withRadioChannel:(RadioChannel *)radioChannel fromPushNotification:(BOOL)fromPushNotification
+{
+    CalendarViewController *calendarViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:date];
+    [self.sideMenuController pushViewController:calendarViewController animated:YES];
 }
 
 #pragma mark What's new

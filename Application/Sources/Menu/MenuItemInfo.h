@@ -15,7 +15,8 @@ typedef NSString * MenuItemOptionKey NS_STRING_ENUM;
 
 OBJC_EXPORT MenuItemOptionKey const MenuItemOptionSearchMediaTypeOptionKey;                     // Key to access the search media type option key, as an `NSNUmber`.
 OBJC_EXPORT MenuItemOptionKey const MenuItemOptionSearchQueryKey;                               // Key to access the search query key, as a `NSString`.
-OBJC_EXPORT MenuItemOptionKey const MenuItemOptionShowAZIndexKey;                               // Key to access the alphabetical index key, as a `NSString`.
+OBJC_EXPORT MenuItemOptionKey const MenuItemOptionShowAZIndexKey;                               // Key to access the A-Z index key, as a `NSString`.
+OBJC_EXPORT MenuItemOptionKey const MenuItemOptionShowByDateDateKey;                            // Key to access the "show by date" date key, as an `NSDate`.
 
 @interface MenuItemInfo : NSObject
 

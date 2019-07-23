@@ -397,7 +397,8 @@ static const CGFloat SideMenuOffset = -50.f;
             }
                 
             case MenuItemTVByDate: {
-                viewController = [[CalendarViewController alloc] init];
+                NSDate *date = selectedMenuItemInfo.options[MenuItemOptionShowByDateDateKey];
+                viewController = [[CalendarViewController alloc] initWithRadioChannel:nil date:date];
                 break;
             }
                 
