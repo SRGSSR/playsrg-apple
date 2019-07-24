@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Instantiate a setting screen with allowed values matching a given query and / or an existing setting set.
  */
-- (instancetype)initWithQuery:(nullable NSString *)query settings:(nullable SRGMediaSearchSettings *)settings;
+- (instancetype)initWithQuery:(nullable NSString *)query settings:(SRGMediaSearchSettings *)settings;
 
 /**
  *  The delegate.
