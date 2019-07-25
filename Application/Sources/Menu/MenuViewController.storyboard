@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="SRGSSRType_Rg.ttf">
-            <string>SRGSSRType-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Menu View Controller-->
         <scene sceneID="c8w-N3-17z">
@@ -77,31 +71,18 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;version&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNo-MO-BUu" userLabel="Version Label">
-                                <rect key="frame" x="20" y="641" width="345" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="TZM-Qw-2Vo"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SRGSSRType-Regular" family="SRG SSR Type" pointSize="11"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="BqA-U9-apX" secondAttribute="trailing" id="6Zj-72-Lwc"/>
                             <constraint firstItem="BqA-U9-apX" firstAttribute="bottom" secondItem="XA6-y3-JdL" secondAttribute="bottom" id="6hM-5o-MGw"/>
                             <constraint firstItem="BqA-U9-apX" firstAttribute="leading" secondItem="XA6-y3-JdL" secondAttribute="leading" id="IZL-lq-QJk"/>
-                            <constraint firstItem="Ibw-Ta-l4f" firstAttribute="trailing" secondItem="eNo-MO-BUu" secondAttribute="trailing" constant="10" id="ZV9-mZ-khM"/>
                             <constraint firstItem="Ibw-Ta-l4f" firstAttribute="top" secondItem="BqA-U9-apX" secondAttribute="top" id="eZG-qL-FN6"/>
-                            <constraint firstItem="eNo-MO-BUu" firstAttribute="leading" secondItem="Ibw-Ta-l4f" secondAttribute="leading" constant="20" id="fIZ-Pb-MIL"/>
-                            <constraint firstItem="Ibw-Ta-l4f" firstAttribute="bottom" secondItem="eNo-MO-BUu" secondAttribute="bottom" constant="8" id="w2n-aV-thz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ibw-Ta-l4f"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="BqA-U9-apX" id="Hpc-4E-CD7"/>
-                        <outlet property="versionLabel" destination="eNo-MO-BUu" id="G56-CJ-xoW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bwb-ep-GsA" userLabel="First Responder" sceneMemberID="firstResponder"/>

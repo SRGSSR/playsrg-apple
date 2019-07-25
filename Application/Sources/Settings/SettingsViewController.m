@@ -39,7 +39,8 @@ static NSString * const SettingsWhatsNewButton = @"Button_WhatsNew";
 static NSString * const SettingsTermsAndConditionsButton = @"Button_TermsAndConditions";
 static NSString * const SettingsDataProtectionButton = @"Button_DataProtection";
 static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
-static NSString * const SettingsSourceCodeButton = @"Button_Source code";
+static NSString * const SettingsSourceCodeButton = @"Button_SourceCode";
+static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersion";
 
 // Autoplay group
 static NSString * const SettingsAutoplayGroup = @"Group_Autoplay";
@@ -287,6 +288,34 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         return (specifier.footerText.length != 0) ? [specifier.footerText stringByAppendingFormat:@"\n\n%@", prefersDRMText] : prefersDRMText;
     }
 #endif
+    else {
+        return nil;
+    }
+}
+
+- (CGFloat)tableView:(UITableView*)tableView heightForSpecifier:(IASKSpecifier *)specifier
+{
+    if ([specifier.key isEqualToString:SettingsApplicationVersionCell]) {
+        return 44.f;
+    }
+    else {
+        return 0.f;
+    }
+}
+
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForSpecifier:(IASKSpecifier *)specifier
+{
+    if ([specifier.key isEqualToString:SettingsApplicationVersionCell]) {
+        static NSString * const kApplicationVersionCellIdentifier = @"Cell_ApplicationVersion";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kApplicationVersionCellIdentifier];
+        if (! cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kApplicationVersionCellIdentifier];
+        }
+        cell.textLabel.text = specifier.title;
+        cell.detailTextLabel.text = NSBundle.mainBundle.play_friendlyVersionNumber;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
     else {
         return nil;
     }

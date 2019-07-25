@@ -97,6 +97,7 @@
     cell.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.02f];
     cell.textLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     cell.textLabel.textColor = UIColor.whiteColor;
+    cell.detailTextLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     cell.tintColor = UIColor.whiteColor;
 }
 

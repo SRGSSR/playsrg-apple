@@ -33,10 +33,7 @@ OBJC_EXPORT NSString *PlaySRGNonLocalizedString(NSString *string);
 
 @interface NSBundle (PlaySRG)
 
-/**
- *  Return `YES` iff the application bundle corresponds to a TestFlight release.
- */
-@property(nonatomic, readonly, getter=isTestFlightDistribution) BOOL testFlightDistribution;
+@property (nonatomic, readonly) NSString *play_friendlyVersionNumber;
 
 @end
 
