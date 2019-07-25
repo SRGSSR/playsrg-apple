@@ -3570,6 +3570,7 @@
 				08C68D871D38D6F400BB8AAA /* Resources */,
 				085F7DCB1FA4E6890010AF34 /* Restore original icons */,
 				08C3ADF9222B018700BB7AF7 /* Update Play MMF service URL */,
+				6F0108D022E96E96002DC778 /* Insert Version In Settings Bundle */,
 				6F19381D1EFA9AF60017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22E20935AB100474EBB /* Copy Urban Airship Configuration File */,
 				E67BB69A1D3E640C00E1FEA3 /* Embed Frameworks */,
@@ -3602,6 +3603,7 @@
 				08C68DBE1D38D70D00BB8AAA /* Resources */,
 				085F7DCA1FA4E67B0010AF34 /* Restore original icons */,
 				08C3ADFA222B06FA00BB7AF7 /* Update Play MMF service URL */,
+				6F0108D222E97D37002DC778 /* Insert Version In Settings Bundle */,
 				6F19381E1EFA9D4C0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */,
 				E67FFA291D3E6840007BD7BA /* Embed Frameworks */,
@@ -3633,6 +3635,7 @@
 				08C68DF51D38D72000BB8AAA /* Resources */,
 				085F7DC91FA4E6670010AF34 /* Restore original icons */,
 				08C3ADFB222B073400BB7AF7 /* Update Play MMF service URL */,
+				6F0108D322E97D47002DC778 /* Insert Version In Settings Bundle */,
 				6F1938201EFA9D590017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22F20935ABE00474EBB /* Copy Urban Airship Configuration File */,
 				E67FFA2E1D3E6844007BD7BA /* Embed Frameworks */,
@@ -3664,6 +3667,7 @@
 				08C68E2C1D38D73000BB8AAA /* Resources */,
 				085F7DC71FA4DD510010AF34 /* Restore original icons */,
 				08C3ADFC222B075100BB7AF7 /* Update Play MMF service URL */,
+				6F0108D422E97D5B002DC778 /* Insert Version In Settings Bundle */,
 				6F1938211EFA9D5D0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23020935ADE00474EBB /* Copy Urban Airship Configuration File */,
 				E67FFA331D3E6847007BD7BA /* Embed Frameworks */,
@@ -3695,6 +3699,7 @@
 				08C68E631D38D73C00BB8AAA /* Resources */,
 				085F7DC81FA4E6570010AF34 /* Restore original icons */,
 				08C3ADFD222B077600BB7AF7 /* Update Play MMF service URL */,
+				6F0108D522E97D69002DC778 /* Insert Version In Settings Bundle */,
 				6F1938221EFA9D600017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23120935AE700474EBB /* Copy Urban Airship Configuration File */,
 				E67FFA381D3E684B007BD7BA /* Embed Frameworks */,
@@ -4635,7 +4640,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
 		};
 		085F7DC71FA4DD510010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4705,7 +4710,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5029,6 +5034,96 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6F0108D022E96E96002DC778 /* Insert Version In Settings Bundle */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Insert Version In Settings Bundle";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n    /usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\n    if [ \"$?\" -ne \"0\" ]; then\n        break\n    fi\n\n    key=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\n    if [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n        /usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\n        exit 0\n    fi\n\n    i=$((i+1))\ndone\n";
+		};
+		6F0108D222E97D37002DC778 /* Insert Version In Settings Bundle */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Insert Version In Settings Bundle";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
+		};
+		6F0108D322E97D47002DC778 /* Insert Version In Settings Bundle */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Insert Version In Settings Bundle";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
+		};
+		6F0108D422E97D5B002DC778 /* Insert Version In Settings Bundle */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Insert Version In Settings Bundle";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
+		};
+		6F0108D522E97D69002DC778 /* Insert Version In Settings Bundle */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Insert Version In Settings Bundle";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
+		};
 		6F19381D1EFA9AF60017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -5205,7 +5300,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"";
+			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"\n";
 		};
 		6FE3C7C31F74EEA500D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;

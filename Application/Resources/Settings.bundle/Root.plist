@@ -56,6 +56,16 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Application version</string>
+			<key>Key</key>
+			<string>PlaySRGSettingApplicationVersion</string>
+			<key>DefaultValue</key>
+			<string>application_version</string>
+		</dict>
 	</array>
 </dict>
 </plist>
