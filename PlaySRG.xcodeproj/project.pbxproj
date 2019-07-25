@@ -5050,7 +5050,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n    /usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\n    if [ \"$?\" -ne \"0\" ]; then\n        break\n    fi\n\n    key=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\n    if [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n        /usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\n        exit 0\n    fi\n\n    i=$((i+1))\ndone\n";
+			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n    /usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\n    if [ \"$?\" -ne \"0\" ]; then\n        break\n    fi\n\n    key=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\n    if [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n        /usr/libexec/PlistBuddy -c \"Add :PreferenceSpecifiers:$i:DefaultValue string ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\n        exit 0\n    fi\n\n    i=$((i+1))\ndone\n";
 		};
 		6F0108D222E97D37002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5068,7 +5068,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
+			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Add :PreferenceSpecifiers:$i:DefaultValue string ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
 		};
 		6F0108D322E97D47002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5086,7 +5086,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
+			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Add :PreferenceSpecifiers:$i:DefaultValue string ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
 		};
 		6F0108D422E97D5B002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5104,7 +5104,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
+			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Add :PreferenceSpecifiers:$i:DefaultValue string ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
 		};
 		6F0108D522E97D69002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5122,7 +5122,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
+			shellScript = "PLIST_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.plist\"\n\ni=0\nwhile true\ndo\n/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:\" \"$PLIST_FILE\" &> /dev/null\nif [ \"$?\" -ne \"0\" ]; then\nbreak\nfi\n\nkey=`/usr/libexec/PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Key\" \"$PLIST_FILE\" 2> /dev/null`\nif [ \"$key\" == \"PlaySRGSettingApplicationVersion\" ]; then\n/usr/libexec/PlistBuddy -c \"Add :PreferenceSpecifiers:$i:DefaultValue string ${BUNDLE_SHORT_VERSION} (${CURRENT_PROJECT_VERSION})\" \"$PLIST_FILE\"\nexit 0\nfi\n\ni=$((i+1))\ndone\n";
 		};
 		6F19381D1EFA9AF60017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;

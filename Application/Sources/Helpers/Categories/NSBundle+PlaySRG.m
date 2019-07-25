@@ -29,7 +29,19 @@ NSString *PlaySRGNonLocalizedString(NSString *string)
 
 @implementation NSBundle (PlaySRG)
 
-- (BOOL)isTestFlightDistribution
+- (NSString *)play_friendlyVersionNumber
+{
+    NSString *versionString = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSString *bundleVersion = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleVersion"];
+    
+    NSString *version = [NSString stringWithFormat:@"%@ (%@)", versionString, bundleVersion];
+    if ([self play_isTestFlightDistribution]) {
+        version = [version stringByAppendingString:@" - TestFlight"];
+    }
+    return version;
+}
+
+- (BOOL)play_isTestFlightDistribution
 {
 #if !defined(DEBUG) && !defined(NIGHTLY) && !defined(BETA)
     return (self.appStoreReceiptURL.path && [self.appStoreReceiptURL.path rangeOfString:@"sandboxReceipt"].location != NSNotFound);
