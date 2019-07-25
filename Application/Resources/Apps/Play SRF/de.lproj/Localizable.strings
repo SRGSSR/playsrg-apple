@@ -42,7 +42,7 @@
 /* Button label to add a show to favorites in the show long-press menu
    Button label to add a show to favorites in the show preview window
    Favorite show label to add it, in the show view */
-"Add to favorites" = "Zu den Favoriten hinzufügen";
+"Add to favorites" = "Zu Favoriten hinzufügen";
 
 /* All option */
 "All" = "Alle";
@@ -100,7 +100,7 @@
 "Close" = "Schliessen";
 
 /* Settings section header */
-"Content" = "Inhalt";
+"Content" = "Medientyp";
 
 /* Text displayed on live cells when no program time information is available */
 "Currently" = "Aktuell auf Sendung";
