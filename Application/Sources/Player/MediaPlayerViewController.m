@@ -28,6 +28,7 @@
 #import "Playlist.h"
 #import "RelatedContentView.h"
 #import "ShowViewController.h"
+#import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
@@ -99,6 +100,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIView *livestreamView;                     // Regional radio selector
 @property (nonatomic, weak) IBOutlet UIButton *livestreamButton;
 @property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
+
+@property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *availabilibityLabel;
@@ -722,6 +725,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         SRGLetterboxController *letterboxController = self.letterboxController;
         SRGChannel *channel = letterboxController.channel;
         if (channel) {
+            self.logoImageView.image = channel.play_banner22Image;
+            
             [self.channelInfoStackView play_setHidden:NO];
             
             SRGProgram *currentProgram = channel.currentProgram;
@@ -760,6 +765,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
         else {
             self.titleLabel.text = media.title;
+            self.logoImageView.image = nil;
             
             [self reloadDetailsWithShow:nil];
             [self.channelInfoStackView play_setHidden:YES];
