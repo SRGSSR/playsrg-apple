@@ -104,6 +104,7 @@ NSString *PlayRelativeTimeAccessibilityDate(NSDate *date)
         s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
         s_dateComponentsFormatter.allowedUnits = NSCalendarUnitHour | NSCalendarUnitMinute;
         s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleSpellOut;
+        s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorNone;
     });
     
     NSDateComponents * components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute
