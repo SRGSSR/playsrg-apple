@@ -750,7 +750,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 
                 self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
                 self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
-                self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:currentProgram.endDate]];
+                self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), [NSString play_relativeTimeAccessibilityStringFromDate:currentProgram.startDate], [NSString play_relativeTimeAccessibilityStringFromDate:currentProgram.endDate]];
                 
                 [self reloadDetailsWithShow:currentProgram.show];
             }
@@ -768,7 +768,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 self.nextProgramLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
                 NSString *nextProgramFormat = NSLocalizedString(@"At %1$@: %2$@", @"Introductory text for next program information");
                 self.nextProgramLabel.text = nextProgram ? [NSString stringWithFormat:@"> %@", [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeFormatter stringFromDate:nextProgram.startDate], nextProgram.title]] : nil;
-                self.nextProgramLabel.accessibilityLabel = nextProgram ? [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:nextProgram.startDate], nextProgram.title] : nil;
+                self.nextProgramLabel.accessibilityLabel = nextProgram ? [NSString stringWithFormat:nextProgramFormat, [NSString play_relativeTimeAccessibilityStringFromDate:nextProgram.startDate], nextProgram.title] : nil;
             }
             else {
                 self.nextProgramLabel.text = nil;
