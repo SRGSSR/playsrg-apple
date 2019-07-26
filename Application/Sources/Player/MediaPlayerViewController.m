@@ -101,6 +101,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIButton *livestreamButton;
 @property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
 
+@property (nonatomic, weak) IBOutlet UIStackView *logoStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
@@ -725,7 +726,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         SRGLetterboxController *letterboxController = self.letterboxController;
         SRGChannel *channel = letterboxController.channel;
         if (channel) {
-            self.logoImageView.image = channel.play_banner22Image;
+            // Display channel logos only for TV, as they would be redundant for the radio layout
+            if (channel.transmission == SRGTransmissionTV) {
+                [self.logoStackView play_setHidden:NO];
+                self.logoImageView.image = channel.play_banner22Image;
+            }
+            else {
+                [self.logoStackView play_setHidden:YES];
+            }
             
             [self.channelInfoStackView play_setHidden:NO];
             
@@ -734,7 +742,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 self.titleLabel.text = currentProgram.title;
                 
                 self.channelLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-                self.channelLabel.text = channel.title;
+                self.channelLabel.text = (channel.transmission != SRGTransmissionTV) ? channel.title : nil;
                 
                 self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
                 self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
@@ -764,6 +772,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             }
         }
         else {
+            [self.logoStackView play_setHidden:YES];
+            
             self.titleLabel.text = media.title;
             self.logoImageView.image = nil;
             

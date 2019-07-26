@@ -519,6 +519,7 @@
                         <outlet property="livestreamButtonImageView" destination="SWT-Kh-dsw" id="8Tc-Ht-E8t"/>
                         <outlet property="livestreamView" destination="drV-Ca-Mf5" id="1v8-ix-Ovc"/>
                         <outlet property="logoImageView" destination="UTu-5E-zIg" id="Jyv-yV-LKw"/>
+                        <outlet property="logoStackView" destination="jym-bi-kal" id="ZHO-Hi-T5O"/>
                         <outlet property="mediaInfoStackView" destination="44Z-TF-U9J" id="MCN-kL-Vf4"/>
                         <outlet property="nextProgramLabel" destination="TWK-yS-nud" id="1Me-Wn-V7J"/>
                         <outlet property="playerAspectRatio16_9Constraint" destination="sHT-jJ-Lxy" id="sae-Wk-L16"/>
