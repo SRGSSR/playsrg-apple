@@ -38,11 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateAndTimeAccessibilityFormatter;
 
 /**
- *  Same as `play_relativeDateAndTimeFormatter` but for accessibility
- */
-@property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateAccessibilityFormatter;
-
-/**
  *  Formatter for URL date options.
  */
 + (NSDateFormatter *)play_URLOptionDateFormatter;
