@@ -105,7 +105,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UILabel *availabilibityLabel;
+@property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
@@ -717,7 +717,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     
-    [self.availabilibityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
+    [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
     
     // Livestream: Display channel information when available
     if (media.contentType == SRGContentTypeLivestream) {
