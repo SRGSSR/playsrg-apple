@@ -28,6 +28,7 @@
 #import "Playlist.h"
 #import "RelatedContentView.h"
 #import "ShowViewController.h"
+#import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
@@ -100,8 +101,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIButton *livestreamButton;
 @property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
 
+@property (nonatomic, weak) IBOutlet UIStackView *logoStackView;
+@property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
+
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UILabel *availabilibityLabel;
+@property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
@@ -324,6 +328,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.livestreamButtonImageView.tintColor = UIColor.whiteColor;
     
     self.livestreamButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Select regional radio", @"Regional livestream selection hint");
+    
+    self.logoImageView.isAccessibilityElement = YES;
+    self.logoImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
     
     self.radioHomeButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
     self.radioHomeButton.layer.cornerRadius = 4.f;
@@ -713,7 +720,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     
-    [self.availabilibityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
+    [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
     
     // Livestream: Display channel information when available
     if (media.contentType == SRGContentTypeLivestream) {
@@ -722,6 +729,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         SRGLetterboxController *letterboxController = self.letterboxController;
         SRGChannel *channel = letterboxController.channel;
         if (channel) {
+            // Display channel logos only for TV, as they would be redundant for the radio layout
+            if (channel.transmission == SRGTransmissionTV) {
+                [self.logoStackView play_setHidden:NO];
+                self.logoImageView.image = channel.play_banner22Image;
+                self.logoImageView.accessibilityLabel = channel.title;
+            }
+            else {
+                [self.logoStackView play_setHidden:YES];
+            }
+            
             [self.channelInfoStackView play_setHidden:NO];
             
             SRGProgram *currentProgram = channel.currentProgram;
@@ -729,11 +746,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 self.titleLabel.text = currentProgram.title;
                 
                 self.channelLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-                self.channelLabel.text = channel.title;
+                self.channelLabel.text = (channel.transmission != SRGTransmissionTV) ? channel.title : nil;
                 
                 self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
                 self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
-                self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:currentProgram.endDate]];
+                self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), [NSString play_relativeTimeAccessibilityStringFromDate:currentProgram.startDate], [NSString play_relativeTimeAccessibilityStringFromDate:currentProgram.endDate]];
                 
                 [self reloadDetailsWithShow:currentProgram.show];
             }
@@ -751,7 +768,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 self.nextProgramLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
                 NSString *nextProgramFormat = NSLocalizedString(@"At %1$@: %2$@", @"Introductory text for next program information");
                 self.nextProgramLabel.text = nextProgram ? [NSString stringWithFormat:@"> %@", [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeFormatter stringFromDate:nextProgram.startDate], nextProgram.title]] : nil;
-                self.nextProgramLabel.accessibilityLabel = nextProgram ? [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:nextProgram.startDate], nextProgram.title] : nil;
+                self.nextProgramLabel.accessibilityLabel = nextProgram ? [NSString stringWithFormat:nextProgramFormat, [NSString play_relativeTimeAccessibilityStringFromDate:nextProgram.startDate], nextProgram.title] : nil;
             }
             else {
                 self.nextProgramLabel.text = nil;
@@ -759,7 +776,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             }
         }
         else {
+            [self.logoStackView play_setHidden:YES];
+            
             self.titleLabel.text = media.title;
+            self.logoImageView.image = nil;
             
             [self reloadDetailsWithShow:nil];
             [self.channelInfoStackView play_setHidden:YES];

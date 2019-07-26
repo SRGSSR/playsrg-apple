@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Use only short time formatting
+ *
+ * @discussion See `+play_relativeTimeAccessibilityStringFromDate:` in `NSString+PlaySRG.h` for accessibility label.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeTimeFormatter;
 
@@ -34,16 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  Same as `play_relativeDateAndTimeFormatter` but for accessibility
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateAndTimeAccessibilityFormatter;
-
-/**
- *  Same as `play_relativeDateAndTimeFormatter` but for accessibility
- */
-@property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateAccessibilityFormatter;
-
-/**
- *  Same as `play_relativeDateAndTimeFormatter` but for accessibility
- */
-@property (class, nonatomic, readonly) NSDateFormatter *play_relativeTimeAccessibilityFormatter;
 
 /**
  *  Formatter for URL date options.
