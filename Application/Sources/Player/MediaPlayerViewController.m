@@ -329,6 +329,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.livestreamButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Select regional radio", @"Regional livestream selection hint");
     
+    self.logoImageView.isAccessibilityElement = YES;
+    self.logoImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
+    
     self.radioHomeButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
     self.radioHomeButton.layer.cornerRadius = 4.f;
     self.radioHomeButton.layer.masksToBounds = YES;
@@ -730,6 +733,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             if (channel.transmission == SRGTransmissionTV) {
                 [self.logoStackView play_setHidden:NO];
                 self.logoImageView.image = channel.play_banner22Image;
+                self.logoImageView.accessibilityLabel = channel.title;
             }
             else {
                 [self.logoStackView play_setHidden:YES];
