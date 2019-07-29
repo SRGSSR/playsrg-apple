@@ -751,7 +751,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 
                 self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
                 self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
-                self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), PlayAccessibilityShortTimeFromDate(currentProgram.startDate), PlayAccessibilityShortTimeFromDate(currentProgram.endDate)];
+                self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), PlayAccessibilityShortTimeFromDate(currentProgram.startDate), PlayAccessibilityShortTimeFromDate(currentProgram.endDate)];
                 
                 [self reloadDetailsWithShow:currentProgram.show];
             }

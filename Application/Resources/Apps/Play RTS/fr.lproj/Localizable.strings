@@ -177,9 +177,6 @@
 /* Total free space size, display at the bottom of download list */
 "Free space: %@" = "Capacité disponible : %@";
 
-/* Text to inform a program time information, like the current program */
-"From %1$@ to %2$@" = "De %1$@ à %2$@";
-
 /* General menu section header label */
 "General" = "Général";
 
@@ -499,9 +496,6 @@
 /* Button label to share the content being played at time (hours / minutes / seconds). */
 "The content at %@" = "Le contenu à %@";
 
-/* Error message when an external URN (media or show) from a scheme can't be opened */
-"The content cannot be opened." = "Le contenu ne peut être ouvert.";
-
 /* Message displayed when some content (media, show, etc.) has been copied to the clipboard */
 "The content has been copied to the clipboard." = "Le contenu a été copié dans le presse-papier.";
 
@@ -536,8 +530,12 @@
 "The latest episodes" = "Dernières émissions";
 
 /* Error message when a media cannot be opened via Handoff
-   Error message when a media cannot be opened via Handoff or a push notification */
+   Error message when a media cannot be opened via Handoff, deep linking or a push notification */
 "The media cannot be opened." = "Le contenu ne peut être ouvert.";
+
+/* Error message when a topic cannot be opened via Handoff, deep linking or a push notification
+   Error message when an event module cannot be opened via Handoff, deep linking or a push notification */
+"The page cannot be opened." = "La page ne peut être ouverte.";
 
 /* Name of the favorite item, if no title or name to display
    Name of the subscription item, if no title or name to display
@@ -545,7 +543,7 @@
 "The selected content" = "Le contenu sélectionné";
 
 /* Error message when a show cannot be opened via Handoff
-   Error message when a show cannot be opened via Handoff or a push notification */
+   Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "L'émission ne peut pas être ouverte.";
 
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */

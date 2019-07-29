@@ -21,7 +21,7 @@ NSString *PlayAccessibilityRelativeDateAndTimeFromDate(NSDate *date)
     NSString *dateString = [s_dateFormatter stringFromDate:date];
     
     NSString *timeString = PlayAccessibilityShortTimeFromDate(date);
-    return [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ at %@", @"Date at time label to spell a date and time value."), dateString, timeString];
+    return [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%1$@ at %2$@", @"Date at time label to spell a date and time value."), dateString, timeString];
 }
 
 NSString *PlayAccessibilityShortTimeFromDate(NSDate *date)

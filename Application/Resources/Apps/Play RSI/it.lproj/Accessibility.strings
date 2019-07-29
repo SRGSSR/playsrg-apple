@@ -1,5 +1,5 @@
 /* Date at time label to spell a date and time value. */
-"%@ at %@" = "%@ a %@";
+"%1$@ at %2$@" = "%1$@ a %2$@";
 
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ ascolti";
@@ -42,6 +42,9 @@
 
 /* Introductory title for error notifications */
 "Error" = "Errore";
+
+/* Text to inform a program time information, like the current program */
+"From %1$@ to %2$@" = "Dalle %1$@ alle %2$@";
 
 /* Introductory title for information notifications */
 "Information" = "Informazioni";
