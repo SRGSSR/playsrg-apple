@@ -23,19 +23,4 @@ OBJC_EXPORT NSString *PlayHumanReadableFormattedDuration(NSTimeInterval duration
  */
 OBJC_EXPORT NSString *PlayShortFormattedDuration(NSTimeInterval duration);
 
-/**
- *  Formats a relative date and time, i.e. returns today / yesterday for dates near today in a human readable way for accessibilty.
- *
- *  @discussion Same as `+play_relativeDateAndTimeFormatter` in `NSDateFormatter+PlaySRG.h` but for accessibility purposes.
- */
-OBJC_EXPORT NSString *PlayRelativeDateAndTimeAccessibilityDate(NSDate *date);
-
-/**
- *  Formats only short time (hours and minutes) in a human readable way for accessibilty.
- *
- *  @discussion Same as `+play_relativeTimeFormatter` in `NSDateFormatter+PlaySRG.h` but for accessibility purposes.
- */
-OBJC_EXPORT NSString *PlayRelativeTimeAccessibilityDate(NSDate *date);
-
-
 NS_ASSUME_NONNULL_END

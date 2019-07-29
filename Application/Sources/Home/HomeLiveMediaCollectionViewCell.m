@@ -11,7 +11,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSTimer+PlaySRG.h"
-#import "PlayDateComponentsFormatter.h"
+#import "PlayDurationFormatter.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"

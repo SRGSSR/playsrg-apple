@@ -13,7 +13,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
-#import "PlayDateComponentsFormatter.h"
+#import "PlayDurationFormatter.h"
 #import "SRGMedia+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
