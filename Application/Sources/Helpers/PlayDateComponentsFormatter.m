@@ -90,7 +90,15 @@ NSString *PlayShortFormattedDuration(NSTimeInterval duration)
 
 NSString *PlayRelativeDateAndTimeAccessibilityDate(NSDate *date)
 {
-    NSString *dateString = [NSDateFormatter.play_relativeDateAccessibilityFormatter stringFromDate:date];
+    static NSDateFormatter *s_dateFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateFormatter = [[NSDateFormatter alloc] init];
+        s_dateFormatter.dateStyle = kCFDateFormatterLongStyle;
+        s_dateFormatter.timeStyle = NSDateFormatterNoStyle;
+        s_dateFormatter.doesRelativeDateFormatting = YES;
+    });
+    NSString *dateString = [s_dateFormatter stringFromDate:date];
     NSString *timeString = PlayRelativeTimeAccessibilityDate(date);
     
     return [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ at %@", @"Date at time label to spell a date and time value."), dateString, timeString];
@@ -109,6 +117,5 @@ NSString *PlayRelativeTimeAccessibilityDate(NSDate *date)
     
     NSDateComponents * components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute
                                                                     fromDate:date];
-    
     return [s_dateComponentsFormatter stringFromDateComponents:components];
 }
