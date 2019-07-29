@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "PlayDateComponentsFormatter.h"
+#import "PlayDurationFormatter.h"
 
 NSString *PlayFormattedDuration(NSTimeInterval duration)
 {

@@ -11,31 +11,28 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSDateFormatter (PlaySRG)
 
 /**
- *  Use absolute time formatting.
+ *  Absolute time formatting.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_timeFormatter;
 
 /**
- *  Use relative date and time formatting, i.e. displays today / yesterday for dates near today
+ *  Relative date and time formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today.
+ *
+ * @discussion Use `PlayAccessibilityRelativeDateAndTimeFromDate` for accessibility-oriented formatting.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateAndTimeFormatter;
 
 /**
- *  Use only relative date formatting, i.e. displays today / yesterday for dates near today
+ *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateFormatter;
 
 /**
- *  Use only short time formatting
+ *  Short time formatting.
  *
- * @discussion See `+play_relativeTimeAccessibilityStringFromDate:` in `NSString+PlaySRG.h` for accessibility label.
+ * @discussion Use `PlayAccessibilityShortTimeFromDate` for accessibility-oriented formatting.
  */
-@property (class, nonatomic, readonly) NSDateFormatter *play_relativeTimeFormatter;
-
-/**
- *  Same as `play_relativeDateAndTimeFormatter` but for accessibility
- */
-@property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateAndTimeAccessibilityFormatter;
+@property (class, nonatomic, readonly) NSDateFormatter *play_shortTimeFormatter;
 
 /**
  *  Formatter for URL date options.

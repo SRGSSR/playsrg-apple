@@ -39,7 +39,7 @@
 {
     [super viewDidLoad];
     
-    self.dateFormatter = NSDateFormatter.play_relativeTimeFormatter;
+    self.dateFormatter = NSDateFormatter.play_shortTimeFormatter;
     
     self.view.backgroundColor = UIColor.play_blackColor;
     

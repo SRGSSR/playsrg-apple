@@ -1,3 +1,6 @@
+/* Date at time label to spell a date and time value. */
+"%@ at %@" = "%@ las %@";
+
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ tadlà";
 
