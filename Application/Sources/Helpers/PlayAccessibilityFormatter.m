@@ -19,12 +19,12 @@ NSString *PlayAccessibilityRelativeDateAndTime(NSDate *date)
         s_dateFormatter.doesRelativeDateFormatting = YES;
     });
     NSString *dateString = [s_dateFormatter stringFromDate:date];
-    NSString *timeString = PlayAccessibilityRelativeTime(date);
+    NSString *timeString = PlayAccessibilityShortTime(date);
     
     return [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ at %@", @"Date at time label to spell a date and time value."), dateString, timeString];
 }
 
-NSString *PlayAccessibilityRelativeTime(NSDate *date)
+NSString *PlayAccessibilityShortTime(NSDate *date)
 {
     static NSDateComponentsFormatter *s_dateComponentsFormatter;
     static dispatch_once_t s_onceToken;
@@ -35,7 +35,7 @@ NSString *PlayAccessibilityRelativeTime(NSDate *date)
         s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorNone;
     });
     
-    NSDateComponents * components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute
-                                                                    fromDate:date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute
+                                                                   fromDate:date];
     return [s_dateComponentsFormatter stringFromDateComponents:components];
 }

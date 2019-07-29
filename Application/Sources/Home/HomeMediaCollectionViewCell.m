@@ -232,7 +232,7 @@
                                                                                          attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:subtitleTextStyle] }];
             
             BOOL displayTime = ([self.media blockingReasonAtDate:NSDate.date] == SRGBlockingReasonStartDate) && self.media.play_today;
-            NSDateFormatter *dateFormatter = self.featured ? NSDateFormatter.play_relativeDateAndTimeFormatter : (displayTime ? NSDateFormatter.play_relativeTimeFormatter : NSDateFormatter.play_relativeDateFormatter);
+            NSDateFormatter *dateFormatter = self.featured ? NSDateFormatter.play_relativeDateAndTimeFormatter : (displayTime ? NSDateFormatter.play_shortTimeFormatter : NSDateFormatter.play_relativeDateFormatter);
             [subtitle appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:self.media.date].play_localizedUppercaseFirstLetterString
                                                                              attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithTextStyle:subtitleTextStyle] }]];
             

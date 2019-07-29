@@ -16,23 +16,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) NSDateFormatter *play_timeFormatter;
 
 /**
- *  Relative date and time formatting, i.e. displays today / yesterday for dates near today.
+ *  Relative date and time formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today.
  *
  * @discussion Use `PlayAccessibilityRelativeDateAndTime` for accessibility-oriented formatting.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateAndTimeFormatter;
 
 /**
- *  Relative date formatting, i.e. displays today / yesterday for dates near today.
+ *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateFormatter;
 
 /**
  *  Short time formatting.
  *
- * @discussion Use `PlayAccessibilityRelativeTime` for accessibility-oriented formatting.
+ * @discussion Use `PlayAccessibilityShortTime` for accessibility-oriented formatting.
  */
-@property (class, nonatomic, readonly) NSDateFormatter *play_relativeTimeFormatter;
+@property (class, nonatomic, readonly) NSDateFormatter *play_shortTimeFormatter;
 
 /**
  *  Formatter for URL date options.
