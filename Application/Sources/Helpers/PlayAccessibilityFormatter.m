@@ -8,7 +8,7 @@
 
 #import "NSBundle+PlaySRG.h"
 
-NSString *PlayAccessibilityRelativeDateAndTime(NSDate *date)
+NSString *PlayAccessibilityRelativeDateAndTimeFromDate(NSDate *date)
 {
     static NSDateFormatter *s_dateFormatter;
     static dispatch_once_t s_onceToken;
@@ -19,12 +19,12 @@ NSString *PlayAccessibilityRelativeDateAndTime(NSDate *date)
         s_dateFormatter.doesRelativeDateFormatting = YES;
     });
     NSString *dateString = [s_dateFormatter stringFromDate:date];
-    NSString *timeString = PlayAccessibilityShortTime(date);
     
+    NSString *timeString = PlayAccessibilityShortTimeFromDate(date);
     return [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ at %@", @"Date at time label to spell a date and time value."), dateString, timeString];
 }
 
-NSString *PlayAccessibilityShortTime(NSDate *date)
+NSString *PlayAccessibilityShortTimeFromDate(NSDate *date)
 {
     static NSDateComponentsFormatter *s_dateComponentsFormatter;
     static dispatch_once_t s_onceToken;

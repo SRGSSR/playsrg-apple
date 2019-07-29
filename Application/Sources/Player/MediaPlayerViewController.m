@@ -751,7 +751,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 
                 self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
                 self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
-                self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), PlayAccessibilityShortTime(currentProgram.startDate), PlayAccessibilityShortTime(currentProgram.endDate)];
+                self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), PlayAccessibilityShortTimeFromDate(currentProgram.startDate), PlayAccessibilityShortTimeFromDate(currentProgram.endDate)];
                 
                 [self reloadDetailsWithShow:currentProgram.show];
             }
@@ -769,7 +769,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 self.nextProgramLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
                 NSString *nextProgramFormat = NSLocalizedString(@"At %1$@: %2$@", @"Introductory text for next program information");
                 self.nextProgramLabel.text = nextProgram ? [NSString stringWithFormat:@"> %@", [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_shortTimeFormatter stringFromDate:nextProgram.startDate], nextProgram.title]] : nil;
-                self.nextProgramLabel.accessibilityLabel = nextProgram ? [NSString stringWithFormat:nextProgramFormat, PlayAccessibilityShortTime(nextProgram.startDate), nextProgram.title] : nil;
+                self.nextProgramLabel.accessibilityLabel = nextProgram ? [NSString stringWithFormat:nextProgramFormat, PlayAccessibilityShortTimeFromDate(nextProgram.startDate), nextProgram.title] : nil;
             }
             else {
                 self.nextProgramLabel.text = nil;
@@ -795,7 +795,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         
         self.dateLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
-        self.dateLabel.accessibilityLabel = PlayAccessibilityRelativeDateAndTime(media.date);
+        self.dateLabel.accessibilityLabel = PlayAccessibilityRelativeDateAndTimeFromDate(media.date);
         
         self.viewCountLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         

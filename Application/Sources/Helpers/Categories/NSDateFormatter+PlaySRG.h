@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Relative date and time formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today.
  *
- * @discussion Use `PlayAccessibilityRelativeDateAndTime` for accessibility-oriented formatting.
+ * @discussion Use `PlayAccessibilityRelativeDateAndTimeFromDate` for accessibility-oriented formatting.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateAndTimeFormatter;
 
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Short time formatting.
  *
- * @discussion Use `PlayAccessibilityShortTime` for accessibility-oriented formatting.
+ * @discussion Use `PlayAccessibilityShortTimeFromDate` for accessibility-oriented formatting.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_shortTimeFormatter;
 
