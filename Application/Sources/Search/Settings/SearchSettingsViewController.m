@@ -15,6 +15,7 @@
 #import "SearchSettingSegmentCell.h"
 #import "SearchSettingSwitchCell.h"
 #import "SearchSettingMultiSelectionViewController.h"
+#import "SRGDay+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -61,25 +62,22 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
     
     SRGDay *today = SRGDay.today;
-    SRGDay *firstDayOfThisWeek = [SRGDay startDayForRangeOfUnit:NSCalendarUnitWeekOfYear day:today];
     
     NSDateComponents *settingsRangeComponents = [SRGDay components:NSCalendarUnitDay fromDay:fromDay toDay:toDay];
     if (settingsRangeComponents.day == 6) {
-        NSDateComponents *weekOfYearComponents = [SRGDay components:NSCalendarUnitWeekOfYear fromDay:fromDay toDay:firstDayOfThisWeek];
-        if (weekOfYearComponents.weekOfYear == 1) {
-            return SearchSettingPeriodLastWeek;
-        }
-        else if (weekOfYearComponents.weekOfYear == 0) {
+        if ([today isBetweenDay:fromDay andDay:toDay]) {
             return SearchSettingPeriodThisWeek;
+        }
+        else if ([[SRGDay dayByAddingDays:-7 months:0 years:0 toDay:today] isBetweenDay:fromDay andDay:toDay]) {
+            return SearchSettingPeriodLastWeek;
         }
     }
     else if (settingsRangeComponents.day == 0) {
-        NSDateComponents *dayComponents = [SRGDay components:NSCalendarUnitDay fromDay:fromDay toDay:today];
-        if (dayComponents.day == 1) {
-            return SearchSettingPeriodYesterday;
-        }
-        else if (dayComponents.day == 0) {
+        if ([today isEqual:fromDay]) {
             return SearchSettingPeriodToday;
+        }
+        else if ([[SRGDay dayByAddingDays:-1 months:0 years:0 toDay:today] isEqual:fromDay]) {
+            return SearchSettingPeriodYesterday;
         }
     }
     
