@@ -204,6 +204,9 @@
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Ultima sincronisaziun: %@";
 
+/* Period setting option */
+"Last week" = "Last week";
+
 /* Label for the button for deciding to opt-in for background video playback at a later time */
 "Later" = "Pli tard";
 
@@ -537,7 +540,11 @@
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Il cuntegn n'è betg lubì da Google Cast.";
 
-/* Title of the button to go back to the current date */
+/* Period setting option */
+"This week" = "This week";
+
+/* Period setting option
+   Title of the button to go back to the current date */
 "Today" = "Oz";
 
 /* Categories search setting option
@@ -583,6 +590,9 @@
 
 /* Title displayed at the top of the What's new view */
 "What's new" = "Il nov";
+
+/* Period setting option */
+"Yesterday" = "Yesterday";
 
 /* Description of the alert view to keep autoplay permanently
    Description of the alert view to opt-in for background video playback */
