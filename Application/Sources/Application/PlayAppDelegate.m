@@ -261,6 +261,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 // Open [scheme]://open?page-id=[az] (optional query parameters: channel-id=[channel_id], index=[index_letter])
 // Open [scheme]://open?page-id=[bydate] (optional query parameters: channel-id=[channel_id], date=[date] with format yyyy-MM-dd)
 // Open [scheme]://open?page-id=[search] (optional query parameters: query=[query], mediaType=[audio|video])
+// Open [scheme]://open?url=[url]
 // Open [scheme]://[play website url] (use "parsePlayUrl.js" to attempt transforming the URL)
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
