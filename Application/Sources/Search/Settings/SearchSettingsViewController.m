@@ -65,10 +65,10 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     
     NSDateComponents *settingsRangeComponents = [SRGDay components:NSCalendarUnitDay fromDay:fromDay toDay:toDay];
     if (settingsRangeComponents.day == 6) {
-        if ([today isBetweenDay:fromDay andDay:toDay]) {
+        if ([today play_isBetweenDay:fromDay andDay:toDay]) {
             return SearchSettingPeriodThisWeek;
         }
-        else if ([[SRGDay dayByAddingDays:-7 months:0 years:0 toDay:today] isBetweenDay:fromDay andDay:toDay]) {
+        else if ([[SRGDay dayByAddingDays:-7 months:0 years:0 toDay:today] play_isBetweenDay:fromDay andDay:toDay]) {
             return SearchSettingPeriodLastWeek;
         }
     }
@@ -417,7 +417,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastWeek]) {
         SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
-        selectorCell.name = NSLocalizedString(@"The last week", @"Period setting option");
+        selectorCell.name = NSLocalizedString(@"Last week", @"Period setting option");
         selectorCell.accessoryType = (SearchSettingPeriodForSettings(self.settings) == SearchSettingPeriodLastWeek) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     }
     else if ([type isEqualToString:SearchSettingRowTypeDuration]) {
@@ -537,7 +537,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
     else if ([type isEqualToString:SearchSettingRowTypeThisWeek]) {
         if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodThisWeek) {
-            SRGDay *firstDayOfThisWeek = [SRGDay startDayForRangeOfUnit:NSCalendarUnitWeekOfYear day:SRGDay.today];
+            SRGDay *firstDayOfThisWeek = [SRGDay startDayForUnit:NSCalendarUnitWeekOfYear containingDay:SRGDay.today];
             self.settings.fromDay = firstDayOfThisWeek;
             self.settings.toDay = [SRGDay dayByAddingDays:6 months:0 years:0 toDay:firstDayOfThisWeek];
         }
@@ -550,9 +550,9 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastWeek]) {
         if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastWeek) {
-            SRGDay *firstDayOfLastsWeek = [SRGDay dayByAddingDays:-7 months:0 years:0 toDay:[SRGDay startDayForRangeOfUnit:NSCalendarUnitWeekOfYear day:SRGDay.today]];
-            self.settings.fromDay = firstDayOfLastsWeek;
-            self.settings.toDay = [SRGDay dayByAddingDays:6 months:0 years:0 toDay:firstDayOfLastsWeek];
+            SRGDay *firstDayOfLastWeek = [SRGDay dayByAddingDays:-7 months:0 years:0 toDay:[SRGDay startDayForUnit:NSCalendarUnitWeekOfYear containingDay:SRGDay.today]];
+            self.settings.fromDay = firstDayOfLastWeek;
+            self.settings.toDay = [SRGDay dayByAddingDays:6 months:0 years:0 toDay:firstDayOfLastWeek];
         }
         else {
             self.settings.fromDay = nil;

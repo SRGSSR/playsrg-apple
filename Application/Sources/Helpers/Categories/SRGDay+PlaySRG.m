@@ -8,7 +8,7 @@
 
 @implementation SRGDay (PlaySRG)
 
-- (BOOL)isBetweenDay:(SRGDay *)fromDay andDay:(SRGDay *)toDay
+- (BOOL)play_isBetweenDay:(SRGDay *)fromDay andDay:(SRGDay *)toDay
 {
     return ([self compare:fromDay] != NSOrderedAscending && [self compare:toDay] != NSOrderedDescending);
 }

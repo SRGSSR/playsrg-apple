@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*
  *  Returns `YES` if the receiver is between (included) `fromDay` and `toDay`.
  */
-- (BOOL)isBetweenDay:(SRGDay *)fromDay andDay:(SRGDay *)toDay;
+- (BOOL)play_isBetweenDay:(SRGDay *)fromDay andDay:(SRGDay *)toDay;
 
 @end
 
