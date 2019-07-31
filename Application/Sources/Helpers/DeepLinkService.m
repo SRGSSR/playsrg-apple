@@ -93,13 +93,14 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
             [queryItems setObject:queryItem.value forKey:queryItem.name];
         }
     }];
-    JSValue *result = [evaluate callWithArguments:@[ URLComponents.host ?: NSNull.null,
+    JSValue *result = [evaluate callWithArguments:@[ URLComponents.scheme ?: NSNull.null,
+                                                     URLComponents.host ?: NSNull.null,
                                                      URLComponents.path ?: NSNull.null,
                                                      queryItems.copy,
                                                      URLComponents.fragment ?: NSNull.null ]];
     NSURL *playURL = [NSURL URLWithString:result.toString];
     
-    if ([playURL.host.lowercaseString isEqualToString:@"redirect"]) {
+    if ([playURL.host.lowercaseString isEqualToString:@"unsupported"]) {
         SRGDiagnosticReport *report = [[SRGDiagnosticsService serviceWithName:DeepLinkDiagnosticsServiceName] reportWithName:URL.absoluteString];
         [report setString:[[NSDateFormatter play_rfc3339DateFormatter] stringFromDate:NSDate.date] forKey:@"clientTime"];
         [report setString:NSBundle.mainBundle.bundleIdentifier forKey:@"clientId"];
