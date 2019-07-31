@@ -511,18 +511,6 @@
 /* Message displayed if the Google Cast receiver cannot play videos */
 "The Google Cast receiver cannot play videos." = "Receptur Google Cast na po laschar ir videos.";
 
-/* Period setting option */
-"The last 24 hours" = "Las davosas 24 uras";
-
-/* Period setting option */
-"The last 3 days" = "Ils davos 3 dis";
-
-/* Period setting option */
-"The last month" = "Il davos mais";
-
-/* Period setting option */
-"The last week" = "La davos'emna";
-
 /* Label used on a radio home page to present the latest audios */
 "The latest audios" = "Ils pli novs audios";
 
