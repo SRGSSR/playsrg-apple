@@ -15,6 +15,7 @@
 #import "SearchSettingSegmentCell.h"
 #import "SearchSettingSwitchCell.h"
 #import "SearchSettingMultiSelectionViewController.h"
+#import "SRGDay+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -35,49 +36,52 @@ typedef NSString * SearchSettingRowType NS_STRING_ENUM;
 static SearchSettingRowType const SearchSettingRowTypeMediaType = @"media_type";
 static SearchSettingRowType const SearchSettingRowTypeTopics = @"topics";
 static SearchSettingRowType const SearchSettingRowTypeShows = @"shows";
-static SearchSettingRowType const SearchSettingRowTypeLastDay = @"last_day";
-static SearchSettingRowType const SearchSettingRowTypeLastThreeDays = @"last_three_days";
+static SearchSettingRowType const SearchSettingRowTypeToday = @"today";
+static SearchSettingRowType const SearchSettingRowTypeYesterday = @"yesterday";
+static SearchSettingRowType const SearchSettingRowTypeThisWeek = @"this_week";
 static SearchSettingRowType const SearchSettingRowTypeLastWeek = @"last_week";
-static SearchSettingRowType const SearchSettingRowTypeLastMonth = @"last_month";
 static SearchSettingRowType const SearchSettingRowTypeDuration = @"duration";
 static SearchSettingRowType const SearchSettingRowTypeDownloadAvailable = @"download_available";
 static SearchSettingRowType const SearchSettingRowTypePlayableAbroad = @"playable_abroad";
 
 typedef NS_ENUM(NSInteger, SearchSettingPeriod) {
     SearchSettingPeriodNone = 0,
-    SearchSettingPeriodLastDay,
-    SearchSettingPeriodLastThreeDays,
-    SearchSettingPeriodLastWeek,
-    SearchSettingPeriodLastMonth
+    SearchSettingPeriodToday,
+    SearchSettingPeriodYesterday,
+    SearchSettingPeriodThisWeek,
+    SearchSettingPeriodLastWeek
 };
 
 static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings *settings)
 {
-    SRGDay *afterDay = settings.afterDay;
-    if (! afterDay) {
+    SRGDay *fromDay = settings.fromDay;
+    SRGDay *toDay = settings.toDay;
+
+    if (! fromDay || ! toDay) {
         return SearchSettingPeriodNone;
     }
     
     SRGDay *today = SRGDay.today;
     
-    NSDateComponents *monthComponents = [SRGDay components:NSCalendarUnitMonth fromDay:afterDay toDay:today];
-    if (monthComponents.month >= 1) {
-        return SearchSettingPeriodLastMonth;
+    NSDateComponents *settingsRangeComponents = [SRGDay components:NSCalendarUnitDay fromDay:fromDay toDay:toDay];
+    if (settingsRangeComponents.day == 6) {
+        if ([today play_isBetweenDay:fromDay andDay:toDay]) {
+            return SearchSettingPeriodThisWeek;
+        }
+        else if ([[SRGDay dayByAddingDays:-7 months:0 years:0 toDay:today] play_isBetweenDay:fromDay andDay:toDay]) {
+            return SearchSettingPeriodLastWeek;
+        }
+    }
+    else if (settingsRangeComponents.day == 0) {
+        if ([today isEqual:fromDay]) {
+            return SearchSettingPeriodToday;
+        }
+        else if ([[SRGDay dayByAddingDays:-1 months:0 years:0 toDay:today] isEqual:fromDay]) {
+            return SearchSettingPeriodYesterday;
+        }
     }
     
-    NSDateComponents *dayComponents = [SRGDay components:NSCalendarUnitDay fromDay:afterDay toDay:today];
-    if (dayComponents.day >= 7) {
-        return SearchSettingPeriodLastWeek;
-    }
-    else if (dayComponents.day >= 3) {
-        return SearchSettingPeriodLastThreeDays;
-    }
-    else if (dayComponents.day >= 1) {
-        return SearchSettingPeriodLastDay;
-    }
-    else {
-        return SearchSettingPeriodNone;
-    }
+    return SearchSettingPeriodNone;
 }
 
 @interface SRGTopicBucket (SearchSettings)
@@ -320,7 +324,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     NSDictionary<SearchSettingSectionType, NSArray<SearchSettingRowType> *> *types = @{ SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
                                                                                         SearchSettingSectionTypeTopics : @[ SearchSettingRowTypeTopics ],
                                                                                         SearchSettingSectionTypeShows : @[ SearchSettingRowTypeShows ],
-                                                                                        SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeLastDay, SearchSettingRowTypeLastThreeDays, SearchSettingRowTypeLastWeek, SearchSettingRowTypeLastMonth ],
+                                                                                        SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeToday, SearchSettingRowTypeYesterday, SearchSettingRowTypeThisWeek, SearchSettingRowTypeLastWeek ],
                                                                                         SearchSettingSectionTypeDuration : @[ SearchSettingRowTypeDuration ],
                                                                                         SearchSettingSectionTypeProperties : @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ] };
     return types[type];
@@ -331,10 +335,10 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     NSDictionary<SearchSettingRowType, Class> *cellClasses = @{ SearchSettingRowTypeMediaType : SearchSettingSegmentCell.class,
                                                                 SearchSettingRowTypeTopics : SearchSettingMultiSelectionCell.class,
                                                                 SearchSettingRowTypeShows : SearchSettingMultiSelectionCell.class,
-                                                                SearchSettingRowTypeLastDay : SearchSettingSelectorCell.class,
-                                                                SearchSettingRowTypeLastThreeDays : SearchSettingSelectorCell.class,
+                                                                SearchSettingRowTypeToday : SearchSettingSelectorCell.class,
+                                                                SearchSettingRowTypeYesterday : SearchSettingSelectorCell.class,
+                                                                SearchSettingRowTypeThisWeek : SearchSettingSelectorCell.class,
                                                                 SearchSettingRowTypeLastWeek : SearchSettingSelectorCell.class,
-                                                                SearchSettingRowTypeLastMonth : SearchSettingSelectorCell.class,
                                                                 SearchSettingRowTypeDuration : SearchSettingSegmentCell.class,
                                                                 SearchSettingRowTypeDownloadAvailable : SearchSettingSwitchCell.class,
                                                                 SearchSettingRowTypePlayableAbroad : SearchSettingSwitchCell.class };
@@ -396,25 +400,25 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
             [self updateResults];
         }];
     }
-    else if ([type isEqualToString:SearchSettingRowTypeLastDay]) {
+    else if ([type isEqualToString:SearchSettingRowTypeToday]) {
         SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
-        selectorCell.name = NSLocalizedString(@"The last 24 hours", @"Period setting option");
-        selectorCell.accessoryType = (SearchSettingPeriodForSettings(self.settings) == SearchSettingPeriodLastDay) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        selectorCell.name = NSLocalizedString(@"Today", @"Period setting option");
+        selectorCell.accessoryType = (SearchSettingPeriodForSettings(self.settings) == SearchSettingPeriodToday) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     }
-    else if ([type isEqualToString:SearchSettingRowTypeLastThreeDays]) {
+    else if ([type isEqualToString:SearchSettingRowTypeYesterday]) {
         SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
-        selectorCell.name = NSLocalizedString(@"The last 3 days", @"Period setting option");
-        selectorCell.accessoryType = (SearchSettingPeriodForSettings(self.settings) == SearchSettingPeriodLastThreeDays) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        selectorCell.name = NSLocalizedString(@"Yesterday", @"Period setting option");
+        selectorCell.accessoryType = (SearchSettingPeriodForSettings(self.settings) == SearchSettingPeriodYesterday) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    }
+    else if ([type isEqualToString:SearchSettingRowTypeThisWeek]) {
+        SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
+        selectorCell.name = NSLocalizedString(@"This week", @"Period setting option");
+        selectorCell.accessoryType = (SearchSettingPeriodForSettings(self.settings) == SearchSettingPeriodThisWeek) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastWeek]) {
         SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
-        selectorCell.name = NSLocalizedString(@"The last week", @"Period setting option");
+        selectorCell.name = NSLocalizedString(@"Last week", @"Period setting option");
         selectorCell.accessoryType = (SearchSettingPeriodForSettings(self.settings) == SearchSettingPeriodLastWeek) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-    }
-    else if ([type isEqualToString:SearchSettingRowTypeLastMonth]) {
-        SearchSettingSelectorCell *selectorCell = (SearchSettingSelectorCell *)cell;
-        selectorCell.name = NSLocalizedString(@"The last month", @"Period setting option");
-        selectorCell.accessoryType = (SearchSettingPeriodForSettings(self.settings) == SearchSettingPeriodLastMonth) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     }
     else if ([type isEqualToString:SearchSettingRowTypeDuration]) {
         SearchSettingSegmentCell *segmentCell = (SearchSettingSegmentCell *)cell;
@@ -505,54 +509,54 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         multiSelectionViewController.delegate = self;
         [self.navigationController pushViewController:multiSelectionViewController animated:YES];
     }
-    else if ([type isEqualToString:SearchSettingRowTypeLastDay]) {
-        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastDay) {
+    else if ([type isEqualToString:SearchSettingRowTypeToday]) {
+        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodToday) {
             SRGDay *today = SRGDay.today;
-            self.settings.afterDay = [SRGDay dayByAddingDays:-1 months:0 years:0 toDay:today];
-            self.settings.beforeDay = today;
+            self.settings.fromDay = today;
+            self.settings.toDay = today;
         }
         else {
-            self.settings.afterDay = nil;
-            self.settings.beforeDay = nil;
+            self.settings.fromDay = nil;
+            self.settings.toDay = nil;
         }
         [self.tableView reloadData];
         [self updateResults];
     }
-    else if ([type isEqualToString:SearchSettingRowTypeLastThreeDays]) {
-        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastThreeDays) {
-            SRGDay *today = SRGDay.today;
-            self.settings.afterDay = [SRGDay dayByAddingDays:-3 months:0 years:0 toDay:today];
-            self.settings.beforeDay = today;
+    else if ([type isEqualToString:SearchSettingRowTypeYesterday]) {
+        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodYesterday) {
+            SRGDay *yesterday = [SRGDay dayByAddingDays:-1 months:0 years:0 toDay:SRGDay.today];
+            self.settings.fromDay = yesterday;
+            self.settings.toDay = yesterday;
         }
         else {
-            self.settings.afterDay = nil;
-            self.settings.beforeDay = nil;
+            self.settings.fromDay = nil;
+            self.settings.toDay = nil;
+        }
+        [self.tableView reloadData];
+        [self updateResults];
+    }
+    else if ([type isEqualToString:SearchSettingRowTypeThisWeek]) {
+        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodThisWeek) {
+            SRGDay *firstDayOfThisWeek = [SRGDay startDayForUnit:NSCalendarUnitWeekOfYear containingDay:SRGDay.today];
+            self.settings.fromDay = firstDayOfThisWeek;
+            self.settings.toDay = [SRGDay dayByAddingDays:6 months:0 years:0 toDay:firstDayOfThisWeek];
+        }
+        else {
+            self.settings.fromDay = nil;
+            self.settings.toDay = nil;
         }
         [self.tableView reloadData];
         [self updateResults];
     }
     else if ([type isEqualToString:SearchSettingRowTypeLastWeek]) {
         if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastWeek) {
-            SRGDay *today = SRGDay.today;
-            self.settings.afterDay = [SRGDay dayByAddingDays:-7 months:0 years:0 toDay:today];
-            self.settings.beforeDay = today;
+            SRGDay *firstDayOfLastWeek = [SRGDay dayByAddingDays:-7 months:0 years:0 toDay:[SRGDay startDayForUnit:NSCalendarUnitWeekOfYear containingDay:SRGDay.today]];
+            self.settings.fromDay = firstDayOfLastWeek;
+            self.settings.toDay = [SRGDay dayByAddingDays:6 months:0 years:0 toDay:firstDayOfLastWeek];
         }
         else {
-            self.settings.afterDay = nil;
-            self.settings.beforeDay = nil;
-        }
-        [self.tableView reloadData];
-        [self updateResults];
-    }
-    else if ([type isEqualToString:SearchSettingRowTypeLastMonth]) {
-        if (SearchSettingPeriodForSettings(self.settings) != SearchSettingPeriodLastMonth) {
-            SRGDay *today = SRGDay.today;
-            self.settings.afterDay = [SRGDay dayByAddingDays:0 months:-1 years:0 toDay:today];
-            self.settings.beforeDay = today;
-        }
-        else {
-            self.settings.afterDay = nil;
-            self.settings.beforeDay = nil;
+            self.settings.fromDay = nil;
+            self.settings.toDay = nil;
         }
         [self.tableView reloadData];
         [self updateResults];

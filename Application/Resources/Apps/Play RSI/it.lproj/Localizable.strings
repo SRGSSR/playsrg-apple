@@ -511,18 +511,6 @@
 /* Message displayed if the Google Cast receiver cannot play videos */
 "The Google Cast receiver cannot play videos." = "Il ricevitore Google Cast non può riprodurre video.";
 
-/* Period setting option */
-"The last 24 hours" = "Le ultime 24 ore";
-
-/* Period setting option */
-"The last 3 days" = "Gli ultimi 3 giorni";
-
-/* Period setting option */
-"The last month" = "L'ultimo mese";
-
-/* Period setting option */
-"The last week" = "L'ultima settimana";
-
 /* Label used on a radio home page to present the latest audios */
 "The latest audios" = "Gli audio più recenti";
 
