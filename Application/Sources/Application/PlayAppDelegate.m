@@ -360,6 +360,20 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             return YES;
         }
         
+        NSString *URLString = [self valueFromURLComponents:URLComponents withParameterName:@"url"];
+        NSURL *URL = (URLString) ? [NSURL URLWithString:URLString] : nil;
+        if (URL) {
+            [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:^(BOOL success) {
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.source = analyticsSource;
+                labels.type = AnalyticsTypeActionDisplayURL;
+                labels.value = URLString;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+            }];
+            return YES;
+        }
+        
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.source = analyticsSource;
         labels.type = AnalyticsTypeActionOpenPlayApp;
