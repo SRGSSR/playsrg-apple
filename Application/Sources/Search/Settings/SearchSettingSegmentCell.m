@@ -44,6 +44,17 @@
     [self.segmentedControl setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
                                          forState:UIControlStateNormal];
     
+    [self.segmentedControl setTitleTextAttributes:@{ NSForegroundColorAttributeName : UIColor.whiteColor }
+                                         forState:UIControlStateNormal];
+    [self.segmentedControl setTitleTextAttributes:@{ NSForegroundColorAttributeName : UIColor.blackColor }
+                                         forState:UIControlStateSelected];
+    
+    // Ensure the text is readable with the new iOS 13 segment control appearance
+    if (@available(iOS 13, *)) {
+        [self.segmentedControl setTitleTextAttributes:@{ NSForegroundColorAttributeName : UIColor.darkGrayColor }
+                                             forState:UIControlStateHighlighted];
+    }
+    
     self.backgroundColor = UIColor.play_popoverGrayColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
