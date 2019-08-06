@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
                                  tintColor:(nullable UIColor *)tintColor
                            backgroundColor:(nullable UIColor *)backgroundColor
-                            statusBarStyle:(UIStatusBarStyle)statusBarStyle NS_DESIGNATED_INITIALIZER;
+                            statusBarStyle:(UIStatusBarStyle)statusBarStyle;
 
 /**
  *  Create a navigation controller, optionally branded for a radio channel. If none is provided, a default look-and-feel
