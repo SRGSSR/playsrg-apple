@@ -224,6 +224,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                                                                                                   action:@selector(closeWhatsNew:)];
                 
                 NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
+                navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
                 [self.window.play_topViewController presentViewController:navigationController animated:YES completion:^{
                     completionHandler(YES);
                 }];
@@ -906,6 +907,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 - (void)showStorePage
 {
     SKStoreProductViewController *productViewController = [[SKStoreProductViewController  alloc] init];
+    productViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     productViewController.delegate = self;
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
@@ -930,6 +932,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     Onboarding *onboarding = [Onboarding.onboardings filteredArrayUsingPredicate:predicate].firstObject;
     if (onboarding) {
         OnboardingViewController *onboardingViewController = [[OnboardingViewController alloc] initWithOnboarding:onboarding];
+        onboardingViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.window.play_topViewController presentViewController:onboardingViewController animated:YES completion:^{
             NSArray<NSString *> *updatedReadOnboardingUids = [readOnboardingUids arrayByAddingObject:onboarding.uid];
             [NSUserDefaults.standardUserDefaults setObject:updatedReadOnboardingUids forKey:kReadOnboardingUidsKey];

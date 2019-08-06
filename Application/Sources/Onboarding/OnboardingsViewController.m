@@ -100,6 +100,7 @@
     
     Onboarding *onboarding = self.onboardings[indexPath.row];
     OnboardingViewController *onboardingViewController = [[OnboardingViewController alloc] initWithOnboarding:onboarding];
+    onboardingViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:onboardingViewController animated:YES completion:nil];
 }
 

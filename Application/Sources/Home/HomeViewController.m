@@ -623,6 +623,7 @@
     };
     
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchViewController];
+    navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 

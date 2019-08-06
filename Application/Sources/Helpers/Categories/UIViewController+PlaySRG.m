@@ -220,6 +220,7 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     }
     else {
         MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithURN:URN position:position fromPushNotification:fromPushNotification];
+        mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
         letterboxController.playlistDataSource = SharedPlaylistForURN(URN);
         [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
@@ -248,6 +249,7 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     }
     else {
         MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:position fromPushNotification:fromPushNotification];
+        mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
         letterboxController.playlistDataSource = SharedPlaylistForURN(media.URN);
         [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
@@ -266,6 +268,7 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     }
     
     MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithController:letterboxController position:nil fromPushNotification:fromPushNotification];
+    mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     letterboxController.playlistDataSource = SharedPlaylistForURN(letterboxController.URN);
     [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
 }
