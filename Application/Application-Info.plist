@@ -169,6 +169,8 @@
 	</dict>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>The application uses Bluetooth for Google Cast receiver discovery.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>The application uses Bluetooth for Google Cast receiver discovery.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The application uses the microphone for Google Cast receiver discovery.</string>
 	<key>NSUserActivityTypes</key>
