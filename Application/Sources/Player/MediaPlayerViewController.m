@@ -1793,7 +1793,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             
         case UIGestureRecognizerStateEnded: {
             CGFloat velocity = [panGestureRecognizer velocityInView:self.view].y;
-            if (velocity > 0.f || (velocity == 0.f && progress > 0.5f)) {
+            if ((progress <= 0.5f && velocity > 1000.f) || (progress > 0.5f && velocity > -1000.f)) {
                 [self.interactiveTransition finishInteractiveTransition];
             }
             else {
