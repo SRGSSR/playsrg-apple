@@ -205,7 +205,7 @@
 "Last synchronization: %@" = "Ultima sincronizzazione: %@";
 
 /* Period setting option */
-"Last week" = "Last week";
+"Last week" = "Ultima settimana";
 
 /* Label for the button for deciding to opt-in for background video playback at a later time */
 "Later" = "Dopo";
@@ -526,7 +526,7 @@
 
 /* Error message when a topic cannot be opened via Handoff, deep linking or a push notification
    Error message when an event module cannot be opened via Handoff, deep linking or a push notification */
-"The page cannot be opened." = "The page cannot be opened.";
+"The page cannot be opened." = "La pagina non può essere aperta.";
 
 /* Name of the favorite item, if no title or name to display
    Name of the subscription item, if no title or name to display
@@ -541,7 +541,7 @@
 "This content is not allowed to be played with Google Cast." = "Non è permesso riprodurre questo contenuto con Google Cast.";
 
 /* Period setting option */
-"This week" = "This week";
+"This week" = "Questa settimana";
 
 /* Period setting option
    Title of the button to go back to the current date */
@@ -592,7 +592,7 @@
 "What's new" = "Novità";
 
 /* Period setting option */
-"Yesterday" = "Yesterday";
+"Yesterday" = "Ieri";
 
 /* Description of the alert view to keep autoplay permanently
    Description of the alert view to opt-in for background video playback */
