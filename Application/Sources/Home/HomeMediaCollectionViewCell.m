@@ -136,6 +136,13 @@
     }
 }
 
+- (void)didMoveToWindow
+{
+    [super didMoveToWindow];
+    
+    [self play_registerForPreview];
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];

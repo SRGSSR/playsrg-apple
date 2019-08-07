@@ -62,6 +62,13 @@
     [self.thumbnailImageView play_resetImage];
 }
 
+- (void)didMoveToWindow
+{
+    [super didMoveToWindow];
+    
+    [self play_registerForPreview];
+}
+
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
 {
     [super traitCollectionDidChange:previousTraitCollection];

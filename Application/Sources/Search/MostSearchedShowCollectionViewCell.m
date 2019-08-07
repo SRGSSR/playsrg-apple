@@ -37,6 +37,13 @@
     self.titleLabel.textColor = highlighted ? UIColor.lightGrayColor : UIColor.whiteColor;
 }
 
+- (void)didMoveToWindow
+{
+    [super didMoveToWindow];
+    
+    [self play_registerForPreview];
+}
+
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
 {
     [super traitCollectionDidChange:previousTraitCollection];
