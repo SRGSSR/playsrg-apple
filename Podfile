@@ -34,3 +34,12 @@ abstract_target 'PlaySRG' do
 
   project 'PlaySRG.xcodeproj', 'Debug' => :debug, 'Nightly' => :release, 'Beta' => :release, 'AppStore' => :release
 end
+
+# Fix deployment target warnings. See https://stackoverflow.com/questions/37160688/set-deployment-target-for-cocoapodss-pod
+post_install do |lib|
+  lib.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+          config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+      end
+  end
+end
