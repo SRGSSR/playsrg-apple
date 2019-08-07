@@ -261,6 +261,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 // Open [scheme]://open?page-id=[az] (optional query parameters: channel-id=[channel_id], index=[index_letter])
 // Open [scheme]://open?page-id=[bydate] (optional query parameters: channel-id=[channel_id], date=[date] with format yyyy-MM-dd)
 // Open [scheme]://open?page-id=[search] (optional query parameters: query=[query], mediaType=[audio|video])
+// Open [scheme]://open?url=[url]
 // Open [scheme]://[play website url] (use "parsePlayUrl.js" to attempt transforming the URL)
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
@@ -354,6 +355,20 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
                 labels.value = pageUid;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+            }];
+            return YES;
+        }
+        
+        NSString *URLString = [self valueFromURLComponents:URLComponents withParameterName:@"url"];
+        NSURL *URL = (URLString) ? [NSURL URLWithString:URLString] : nil;
+        if (URL) {
+            [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:^(BOOL success) {
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.source = analyticsSource;
+                labels.type = AnalyticsTypeActionDisplayURL;
+                labels.value = URLString;
                 labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];

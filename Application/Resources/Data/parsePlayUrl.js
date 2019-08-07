@@ -1,6 +1,6 @@
 // parsePlayUrl
 
-var parsePlayUrlVersion = 16;
+var parsePlayUrlVersion = 18;
 var parsePlayUrlBuild = "mmf";
 
 function parsePlayUrl(urlString) {
@@ -18,10 +18,10 @@ function parsePlayUrl(urlString) {
 		queryParams[queryItem[0]] = queryItem[1];
 	}
 
-	return parseForPlayApp(url.hostname, url.pathname, queryParams, url.hash);
+	return parseForPlayApp(url.protocol.replace(':', ''), url.hostname, url.pathname, queryParams, url.hash.replace('#', ''));
 }
 
-function parseForPlayApp(hostname, pathname, queryParams, anchor) {
+function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 
 	// fix path issue
 	pathname = pathname.replace("//", "/");
@@ -49,6 +49,9 @@ function parseForPlayApp(hostname, pathname, queryParams, anchor) {
 			break;
 		case hostname.includes("play-mmf") && pathname.startsWith("/mmf/"):
 			bu = "mmf";
+			break;
+		case hostname.includes("radioswisspop.ch") || hostname.includes("radioswissclassic.ch") || hostname.includes("radioswissjazz.ch"):
+			bu = "radioswiss";
 			break;
 	}
 
@@ -91,6 +94,31 @@ function parseForPlayApp(hostname, pathname, queryParams, anchor) {
 				var startTime = queryParams["start"];  
 				return openMediaURN(server, redirectBu, mediaURN, startTime);
 			}
+		}
+	}
+
+	/**
+	 *  Catch special case: radio swiss
+	 *
+	 *  Ex: http://www.radioswisspop.ch/de/webplayer
+	 *  Ex: http://www.radioswissclassic.ch/fr/webplayer
+	 *  Ex: http://www.radioswissjazz.ch/it/webplayer
+	 */
+	if (bu == "radioswiss") {
+		var redirectBu = null;
+		switch (true) {
+			case pathname.startsWith("/de"):
+				redirectBu = "srf";
+				break;
+			case pathname.startsWith("/fr"):
+				redirectBu = "rts";
+				break;
+			case pathname.startsWith("/it"):
+				redirectBu = "rsi";
+				break;
+		}
+		if (redirectBu) {
+			return openURL(server, redirectBu, scheme, hostname, pathname, queryParams, anchor);
 		}
 	}
 
@@ -555,8 +583,8 @@ function parseForPlayApp(hostname, pathname, queryParams, anchor) {
 	}
 
 	// Redirect fallback.
-	console.log("Can't parse Play URL. Redirect.");
-	return schemeForBu(bu) + "://redirect";
+	console.log("Can't parse Play URL. Unsupported URL.");
+	return schemeForBu(bu) + "://unsupported?server=" + server;
 };
 function openMedia(server, bu, mediaType, mediaId, startTime) {
 	var redirect = schemeForBu(bu) + "://open?media=urn:" + bu + ":" + mediaType + ":" + mediaId;
@@ -626,6 +654,35 @@ function openPage(server, bu, page, channelId, options) {
 			}
 		});
 	}
+	if (server) {
+		redirect = redirect + "&server=" + encodeURIComponent(server);
+	}
+	return redirect;
+}
+
+function openURL(server, bu, scheme, hostname, pathname, queryParams, anchor) {
+	if (! scheme) {
+		scheme = "http";
+	}
+
+	var queryParamsString = "";
+	if (queryParams) {
+		for (var key in queryParams) {
+			queryParamsString = queryParamsString + "&" + key + "=" + encodeURIComponent(queryParams[key]);
+		}
+	}
+	if (queryParamsString.length > 0) {
+		queryParamsString = queryParamsString.replace('&','?');
+	}
+
+	var anchorString = "";
+	if (anchor) {
+		anchorString = "#" + anchor;
+	}
+
+	var url = scheme + "://" + hostname + pathname + queryParamsString + anchorString;
+
+	var redirect = schemeForBu(bu) + "://open?url=" + encodeURIComponent(url);
 	if (server) {
 		redirect = redirect + "&server=" + encodeURIComponent(server);
 	}

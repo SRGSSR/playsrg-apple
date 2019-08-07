@@ -219,6 +219,7 @@ OBJC_EXPORT AnalyticsType const AnalyticsTypeActionPlayMedia;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplay;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayShow;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayPage;
+OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayURL;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionCancel;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionNotificationAlert;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayLogin;

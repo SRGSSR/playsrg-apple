@@ -82,6 +82,7 @@ AnalyticsType const AnalyticsTypeActionPlayMedia = @"play_media";
 AnalyticsType const AnalyticsTypeActionDisplay = @"display";
 AnalyticsType const AnalyticsTypeActionDisplayShow = @"display_show";
 AnalyticsType const AnalyticsTypeActionDisplayPage = @"display_page";
+AnalyticsType const AnalyticsTypeActionDisplayURL = @"display_url";
 AnalyticsType const AnalyticsTypeActionCancel = @"cancel";
 AnalyticsType const AnalyticsTypeActionNotificationAlert = @"notification_alert";
 AnalyticsType const AnalyticsTypeActionDisplayLogin = @"display_login";
