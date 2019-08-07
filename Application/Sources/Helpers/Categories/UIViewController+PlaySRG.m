@@ -329,6 +329,7 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
     if (! [topViewController isKindOfClass:GCKUIExpandedMediaControlsViewController.class]) {
         GCKUIExpandedMediaControlsViewController *mediaControlsViewController = [GCKCastContext sharedInstance].defaultExpandedMediaControlsViewController;
+        mediaControlsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         mediaControlsViewController.hideStreamPositionControlsForLiveContent = YES;
         [self presentViewController:mediaControlsViewController animated:animated completion:completion];
     }

@@ -193,25 +193,25 @@ name: FSCalendar, nameSpecified:
 body: Copyright (c) 2013-2…
 version: 2.7.9
 
-name: google-cast-sdk, nameSpecified: 
+name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.3.5
+version: 4.4.3
 
-name: google-cast-sdk, nameSpecified: 
+name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.3.5
+version: 4.4.3
 
-name: google-cast-sdk, nameSpecified: 
+name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.3.5
+version: 4.4.3
 
-name: google-cast-sdk, nameSpecified: 
+name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.3.5
+version: 4.4.3
 
-name: google-cast-sdk, nameSpecified: 
+name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.3.5
+version: 4.4.3
 
 name: GoogleAppMeasurement, nameSpecified: 
 body: Copyright 2018 Googl…

@@ -36,10 +36,10 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - Protobuf (~> 3.5)
   - FSCalendar (2.7.9)
-  - google-cast-sdk (4.3.5):
-    - google-cast-sdk/Core (= 4.3.5)
+  - google-cast-sdk-no-bluetooth (4.4.3):
+    - google-cast-sdk-no-bluetooth/Core (= 4.4.3)
     - Protobuf (~> 3.0)
-  - google-cast-sdk/Core (4.3.5):
+  - google-cast-sdk-no-bluetooth/Core (4.4.3):
     - Protobuf (~> 3.0)
   - GoogleAppMeasurement (5.4.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
@@ -88,7 +88,7 @@ DEPENDENCIES:
   - BDKCollectionIndexView (~> 2.0.0)
   - Firebase/RemoteConfig (~> 5.15.0)
   - FSCalendar (= 2.7.9)
-  - google-cast-sdk (~> 4.3.4)
+  - google-cast-sdk-no-bluetooth (~> 4.4.3)
   - HockeySDK (~> 5.1.4)
   - InAppSettingsKit (~> 2.10.0)
   - MGSwipeTableCell (~> 1.6.8)
@@ -108,7 +108,7 @@ SPEC REPOS:
     - FirebaseInstanceID
     - FirebaseRemoteConfig
     - FSCalendar
-    - google-cast-sdk
+    - google-cast-sdk-no-bluetooth
     - GoogleAppMeasurement
     - GoogleUtilities
     - HockeySDK
@@ -131,7 +131,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
   FirebaseRemoteConfig: 7e11c65f0769c09bff6947997c209515058c5318
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
-  google-cast-sdk: 462e10c781ea8ad480d2e16200bb8584ef067e07
+  google-cast-sdk-no-bluetooth: 47664d8b121ff8826065cccc97a6468971a80852
   GoogleAppMeasurement: 98b71f5e04142793729a5ef23e5b96651ff4b70f
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
@@ -144,6 +144,6 @@ SPEC CHECKSUMS:
   SwiftMessages: a952f7a9103d9aeab93730a2861d2d8fcdd8758f
   UrbanAirship-iOS-SDK: 25f155c0142b62e4a94ec21093d65c6e128f5213
 
-PODFILE CHECKSUM: dbe04714cc0a9bf970b90e88c39f20a86b91493d
+PODFILE CHECKSUM: 5a5bba4cede9363007b6b0685c6394b42edfb0cc
 
 COCOAPODS: 1.8.0.beta.1
