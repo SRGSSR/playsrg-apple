@@ -453,6 +453,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
+    [self updatePlayerViewAspectRatioWithSize:self.view.frame.size];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -544,13 +545,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
         self.transitioning = NO;
     }];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    [self updatePlayerViewAspectRatioWithSize:self.view.frame.size];
 }
 
 #pragma mark Accessibility
