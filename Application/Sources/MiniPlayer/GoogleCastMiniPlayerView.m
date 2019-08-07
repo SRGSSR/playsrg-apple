@@ -7,6 +7,7 @@
 #import "GoogleCastMiniPlayerView.h"
 
 #import "NSBundle+PlaySRG.h"
+#import "UIWindow+PlaySRG.h"
 
 #import <SRGAppearance/SRGAppearance.h>
 
@@ -142,7 +143,10 @@
     GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
     GCKMediaInformation *mediaInformation = session.remoteMediaClient.mediaStatus.mediaInformation;
     if (mediaInformation) {
-        [[GCKCastContext sharedInstance] presentDefaultExpandedMediaControls];
+        // Do not use -[GCKCastContext presentDefaultExpandedMediaControls] so that we can control the presentation style
+        GCKUIExpandedMediaControlsViewController *mediaControlsViewController = [GCKCastContext sharedInstance].defaultExpandedMediaControlsViewController;
+        mediaControlsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        [UIApplication.sharedApplication.keyWindow.play_topViewController presentViewController:mediaControlsViewController animated:YES completion:nil];
     }
     else {
         [[GCKCastContext sharedInstance] presentCastDialog];
