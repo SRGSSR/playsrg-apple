@@ -276,6 +276,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
         
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a media from the start from the long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:nil fromPushNotification:NO];
+            mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
             [self presentViewController:mediaPlayerViewController animated:YES completion:nil];
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Label of the button to close the media long-press menu") style:UIAlertActionStyleCancel handler:nil]];
