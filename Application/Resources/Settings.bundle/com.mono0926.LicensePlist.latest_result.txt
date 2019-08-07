@@ -458,7 +458,7 @@ name: UrbanAirship-iOS-SDK, nameSpecified:
 body: Copyright 2017 Urban…
 version: 9.4.0
 
-name: CoconutKit, nameSpecified: , owner: defagos, version: 3.3.7
+name: CoconutKit, nameSpecified: , owner: defagos, version: 3229706
 
 name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 5.8.4
 
