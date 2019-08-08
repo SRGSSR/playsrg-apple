@@ -23,7 +23,13 @@
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController radioChannel:(RadioChannel *)radioChannel
 {
-    UIStatusBarStyle statusBarStyle = radioChannel.hasDarkStatusBar ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
+    UIStatusBarStyle darkStatusBarStyle = UIStatusBarStyleDefault;
+#ifdef __IPHONE_13_0
+    if (@available(iOS 13, *)) {
+        darkStatusBarStyle = UIStatusBarStyleDarkContent;
+    }
+#endif
+    UIStatusBarStyle statusBarStyle = radioChannel.hasDarkStatusBar ? darkStatusBarStyle : UIStatusBarStyleLightContent;
     return [self initWithRootViewController:rootViewController tintColor:radioChannel.titleColor backgroundColor:radioChannel.color statusBarStyle:statusBarStyle];
 }
 
