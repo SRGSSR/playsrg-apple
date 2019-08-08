@@ -35,6 +35,7 @@
 "Test" = "Test";
 "This section is only available in nightly and beta versions, and won't appear in the production version." = "Cette section n’est disponible que dans les versions nightly et beta, et n'apparaîtra pas en production.";
 "User location" = "Géolocalisation";
+"Version" = "Version";
 "What's new" = "Nouveautés";
 "When enabled, more content is automatically played after playback of the current content ends." = "Lorsque cette fonctionnalité est activée, la lecture continue automatiquement avec un autre contenu lorsque le contenu lu actuellement se termine.";
 "When enabled, video playback continues even when you leave the application." = "Lorsque cette fonctionnalité est activée, la lecture vidéo se poursuit même quand vous sortez de l'application.";
