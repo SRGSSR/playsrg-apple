@@ -98,7 +98,7 @@ DEPENDENCIES:
   - UrbanAirship-iOS-SDK (= 9.4.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AutoCoding
     - BDKCollectionIndexView
     - Firebase
@@ -146,4 +146,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 8d759c661bd21a8c3152df7c1d0ed99e1e686227
 
-COCOAPODS: 1.7.1
+COCOAPODS: 1.8.0.beta.1
