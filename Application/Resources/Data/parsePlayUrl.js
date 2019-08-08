@@ -1,6 +1,6 @@
 // parsePlayUrl
 
-var parsePlayUrlVersion = 18;
+var parsePlayUrlVersion = 19;
 var parsePlayUrlBuild = "mmf";
 
 function parsePlayUrl(urlString) {
@@ -533,7 +533,7 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 		/* INJECT TVTOPICS OBJECT */
 
 		if (typeof tvTopics !== 'undefined' && lastPathComponent.length > 0) {
-			topicId = tvTopics[bu][lastPathComponent];
+			topicId = tvTopics[server][bu][lastPathComponent];
 		}
 
 		if (topicId) {
@@ -561,7 +561,7 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 		/* INJECT TVEVENTS OBJECT */
 
 		if (typeof tvEvents !== 'undefined' && lastPathComponent.length > 0) {
-			eventId = tvEvents[bu][lastPathComponent];
+			eventId = tvEvents[server][bu][lastPathComponent];
 		}
 
 		if (eventId) {
