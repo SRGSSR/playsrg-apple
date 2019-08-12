@@ -2,5 +2,5 @@ github "defagos/CoconutKit" "3229706277c93d1ef060bc019c5975b4751c45be"
 github "Flipboard/FLEX" ~> 2.4.0
 github "mapbox/Fingertips" "cdffabac5506103a2c7cc5aedeed4021df2501da"
 github "SRGSSR/DZNEmptyDataSet" "dc83d71d805e92f4582808b68989df4f403b788a"
-github "SRGSSR/srgletterbox-ios" "239b6deff4500d74597db44af6972f439cf745f4"
+github "SRGSSR/srgletterbox-ios" "6724611d319b378c4e91f0f3a64cb5a60bdcc73e"
 github "SRGSSR/srguserdata-ios" "1abf226a583c41901e5c148bf37876da41af9a69"
