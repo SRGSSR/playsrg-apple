@@ -173,6 +173,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic) NSTimer *userInterfaceUpdateTimer;
 
 @property (nonatomic) BOOL shouldDisplayBackgroundVideoPlaybackPrompt;
+@property (nonatomic) BOOL displayBackgroundVideoPlaybackPrompt;
 
 @end
 
@@ -1916,13 +1917,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
-    // Don't prompt for backround playback if the device was simply locked
     if (self.shouldDisplayBackgroundVideoPlaybackPrompt) {
         // To determine whether a background entry is due to the lock screen being enabled or not, we need to wait a little bit.
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (UIDevice.play_isLocked) {
-                self.shouldDisplayBackgroundVideoPlaybackPrompt = NO;
-            }
+            // Don't prompt for backround playback if the device was simply locked
+            self.displayBackgroundVideoPlaybackPrompt = ! UIDevice.play_isLocked;
         });
     }
 }
@@ -1938,8 +1937,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
     // Display the prompt if this makes sense (only once)
-    if (self.shouldDisplayBackgroundVideoPlaybackPrompt) {
-        self.shouldDisplayBackgroundVideoPlaybackPrompt = NO;
+    if (self.displayBackgroundVideoPlaybackPrompt) {
+        self.displayBackgroundVideoPlaybackPrompt = NO;
         
         PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
             NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
@@ -1960,6 +1959,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             [topViewController presentViewController:alertController animated:YES completion:nil];
         }, @"BackgroundVideoPlaybackAsked", nil);
     }
+    self.shouldDisplayBackgroundVideoPlaybackPrompt = NO;
 }
 
 - (void)reachabilityDidChange:(NSNotification *)notification
