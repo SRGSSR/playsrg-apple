@@ -193,25 +193,25 @@ name: FSCalendar, nameSpecified:
 body: Copyright (c) 2013-2…
 version: 2.7.9
 
-name: google-cast-sdk, nameSpecified: 
+name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.3.5
+version: 4.4.3
 
-name: google-cast-sdk, nameSpecified: 
+name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.3.5
+version: 4.4.3
 
-name: google-cast-sdk, nameSpecified: 
+name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.3.5
+version: 4.4.3
 
-name: google-cast-sdk, nameSpecified: 
+name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.3.5
+version: 4.4.3
 
-name: google-cast-sdk, nameSpecified: 
+name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.3.5
+version: 4.4.3
 
 name: GoogleAppMeasurement, nameSpecified: 
 body: Copyright 2018 Googl…
@@ -458,11 +458,11 @@ name: UrbanAirship-iOS-SDK, nameSpecified:
 body: Copyright 2017 Urban…
 version: 9.4.0
 
-name: CoconutKit, nameSpecified: , owner: defagos, version: 3.3.7
+name: CoconutKit, nameSpecified: , owner: defagos, version: 3229706
 
 name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 5.8.4
 
-name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
+name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: dc83d71
 
 name: FXReachability, nameSpecified: , owner: SRGSSR, version: 1.3.2_srg3
 
@@ -472,9 +472,9 @@ name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: 1.0_srg3
 
 name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
-name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
+name: Masonry, nameSpecified: , owner: SRGSSR, version: 35eda76
 
-name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 2c5b10f
+name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 1f899e2
 
 name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: 1.1.10
 
@@ -482,21 +482,21 @@ name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: b4cff29
 
 name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
-name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0.3
+name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 4f80d01
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: fb35ee6
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 6724611
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 1.1
 
-name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 2.7.1
+name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 34dee40
 
 name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 1.0.3
 
-name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 1.1.2
+name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 1abf226
 
 name: tagcommander-ios, nameSpecified: , owner: SRGSSR, version: 4.3.3_4.3.1
 
-name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: v2.1.2_srg1
+name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: 19f173c
 
 name: YYWebImage, nameSpecified: , owner: SRGSSR, version: 1.0.5_srg1
 

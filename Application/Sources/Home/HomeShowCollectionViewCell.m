@@ -71,6 +71,13 @@
     }
 }
 
+- (void)didMoveToWindow
+{
+    [super didMoveToWindow];
+    
+    [self play_registerForPreview];
+}
+
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
 {
     [super traitCollectionDidChange:previousTraitCollection];
