@@ -453,7 +453,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
-    [self updatePlayerViewAspectRatioWithSize:self.view.frame.size];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -512,6 +511,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     [super viewWillLayoutSubviews];
     
+    [self updatePlayerViewAspectRatioWithSize:self.view.frame.size];
     [self updateDetailsAppearance];
 }
 
