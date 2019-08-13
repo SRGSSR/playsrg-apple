@@ -157,16 +157,16 @@
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
-    // Fix calendar rotation issues on iPad (none on iPhone, and this would remove rotation animations)
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        [self.calendar reloadData];
-    }
-    
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
         if (UIDevice.play_deviceType == DeviceTypePhonePlus && size.width > size.height) {
             [self.calendar setScope:FSCalendarScopeWeek animated:NO];
         }
-    } completion:nil];
+        
+        // This makes the calendar animation look nicer
+        [self.calendar reloadData];
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self.calendar reloadData];
+    }];
 }
 
 #pragma mark Accessibility
