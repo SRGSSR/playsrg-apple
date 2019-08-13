@@ -1919,7 +1919,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     if (self.shouldDisplayBackgroundVideoPlaybackPrompt) {
         // To determine whether a background entry is due to the lock screen being enabled or not, we need to wait a little bit.
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             // Don't prompt for backround playback if the device was simply locked
             self.displayBackgroundVideoPlaybackPrompt = ! UIDevice.play_isLocked;
         });
@@ -1940,6 +1940,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (self.displayBackgroundVideoPlaybackPrompt) {
         self.displayBackgroundVideoPlaybackPrompt = NO;
         
+        UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+        if (topViewController != self) {
+            return;
+        }
+        
         PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
             NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable background video playback?", @"Title of the alert view to opt-in for background video playback")
@@ -1955,7 +1960,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 completionHandler(YES);
             }]];
             
-            UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
             [topViewController presentViewController:alertController animated:YES completion:nil];
         }, @"BackgroundVideoPlaybackAsked", nil);
     }
