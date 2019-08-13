@@ -1940,6 +1940,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (self.displayBackgroundVideoPlaybackPrompt) {
         self.displayBackgroundVideoPlaybackPrompt = NO;
         
+        UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+        if (topViewController != self) {
+            return;
+        }
+        
         PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
             NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable background video playback?", @"Title of the alert view to opt-in for background video playback")
@@ -1955,7 +1960,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 completionHandler(YES);
             }]];
             
-            UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
             [topViewController presentViewController:alertController animated:YES completion:nil];
         }, @"BackgroundVideoPlaybackAsked", nil);
     }
