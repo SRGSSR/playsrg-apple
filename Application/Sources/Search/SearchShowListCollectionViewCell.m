@@ -95,6 +95,10 @@
     labels.value = show.URN;
     labels.type = AnalyticsTypeActionDisplayShow;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSearchOpen labels:labels];
+    
+    [[SRGDataProvider.currentDataProvider increaseSearchResultsViewCountForShow:show withCompletionBlock:^(SRGShowStatisticsOverview * _Nullable showStatisticsOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        // Nothing
+    }] resume];
 }
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol
