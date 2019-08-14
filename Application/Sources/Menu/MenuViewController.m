@@ -12,6 +12,7 @@
 #import "MenuHeaderSectionView.h"
 #import "MenuTableViewCell.h"
 #import "NSBundle+PlaySRG.h"
+#import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 #import <SRGIdentity/SRGIdentity.h>
@@ -21,7 +22,6 @@
 @property (nonatomic) NSArray<MenuSectionInfo *> *sectionInfos;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UILabel *versionLabel;
 
 @end
 
@@ -63,19 +63,6 @@
     
     Class headerClass = MenuHeaderSectionView.class;
     [self.tableView registerClass:MenuHeaderSectionView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(headerClass)];
-    
-    NSString *bundleDisplayName = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleDisplayName"];
-    NSString *versionString = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    NSString *bundleVersion = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleVersion"];
-    
-    // Fixed font size
-    self.versionLabel.alpha = 0.f;
-
-    NSString *versionDescription = [NSString stringWithFormat:@"%@ - v. %@ (%@)", bundleDisplayName, versionString, bundleVersion];
-    if (NSBundle.mainBundle.testFlightDistribution) {
-        versionDescription = [versionDescription stringByAppendingString:@" - TestFlight"];
-    }
-    self.versionLabel.text = versionDescription;
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
@@ -131,21 +118,7 @@
 
 - (void)scrollToTopAnimated:(BOOL)animated
 {
-    [self.tableView setContentOffset:CGPointMake(0, -self.tableView.contentInset.top) animated:animated];
-}
-
-#pragma mark UIScrollViewDelegate protocol
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    // The version label is hidden and displayed if we scroll the view further than its bottom
-    [UIView animateWithDuration:0.1 animations:^{
-        static const CGFloat kOffsetThreshold = 120.f;
-        
-        UIEdgeInsets contentInsets = ContentInsetsForScrollView(scrollView);
-        BOOL offsetThresholdReached = (scrollView.contentOffset.y + CGRectGetHeight(scrollView.frame) - contentInsets.top - contentInsets.bottom > fmaxf(scrollView.contentSize.height, CGRectGetHeight(scrollView.frame)) + kOffsetThreshold);
-        self.versionLabel.alpha = offsetThresholdReached ? 1.f : 0.f;
-    }];
+    [self.tableView play_scrollToTopAnimated:animated];
 }
 
 #pragma mark UITableViewDataSource protocol

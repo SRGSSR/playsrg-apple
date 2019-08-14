@@ -54,7 +54,12 @@
 {
     NSURL *URL = self.relatedContent.URL;
     if (URL) {
-        [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:nil];
+        if (! [UIApplication.sharedApplication.delegate application:UIApplication.sharedApplication
+                                                            openURL:URL
+                                                            options:@{ UIApplicationOpenURLOptionsOpenInPlaceKey : @NO,
+                                                                       UIApplicationOpenURLOptionsSourceApplicationKey : NSBundle.mainBundle.bundleIdentifier }]) {
+            [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:nil];
+        }
     }
 }
 

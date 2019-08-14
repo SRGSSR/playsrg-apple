@@ -1,3 +1,6 @@
+/* Date at time label to spell a date and time value. */
+"%1$@ at %2$@" = "%1$@ um %2$@";
+
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ gehört";
 
@@ -18,7 +21,8 @@
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Alle anzeigen aus \"%@\"";
 
-/* Close button label on player view */
+/* Close button label on player view
+   Close button label on search view */
 "Close" = "Schliessen";
 
 /* Player close button hint */
@@ -38,6 +42,9 @@
 
 /* Introductory title for error notifications */
 "Error" = "Fehler";
+
+/* Text to inform a program time information, like the current program */
+"From %1$@ to %2$@" = "Von %1$@ bis %2$@";
 
 /* Introductory title for information notifications */
 "Information" = "Information";
@@ -108,7 +115,7 @@
 "Retry download" = "Erneut herunterladen";
 
 /* Search button label */
-"Search" = "Suchen";
+"Search" = "Suche";
 
 /* Regional livestream selection hint */
 "Select regional radio" = "Wählen Sie Ihr Regionaljournal";

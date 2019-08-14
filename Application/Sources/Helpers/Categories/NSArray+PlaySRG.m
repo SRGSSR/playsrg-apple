@@ -10,16 +10,23 @@
 
 - (NSArray *)play_arrayByInsertingObject:(id)object atIndex:(NSUInteger)index
 {
-    NSMutableArray *array = [self mutableCopy];
-    [array insertObject:object atIndex:index];
-    return [array copy];
+    NSMutableArray *mutableArray = [self mutableCopy];
+    [mutableArray insertObject:object atIndex:index];
+    return [mutableArray copy];
 }
 
 - (NSArray *)play_arrayByRemovingObjectAtIndex:(NSUInteger)index
 {
-    NSMutableArray *array = [self mutableCopy];
-    [array removeObjectAtIndex:index];
-    return [array copy];
+    NSMutableArray *mutableArray = [self mutableCopy];
+    [mutableArray removeObjectAtIndex:index];
+    return [mutableArray copy];
+}
+
+- (NSArray *)play_arrayByRemovingObjectsInArray:(NSArray *)array
+{
+    NSMutableArray *mutableArray = [self mutableCopy];
+    [mutableArray removeObjectsInArray:array];
+    return [mutableArray copy];
 }
 
 @end

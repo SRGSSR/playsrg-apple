@@ -18,6 +18,7 @@
     void (^openCompletion)(NSURL *) = ^(NSURL *URL) {
         if ([URL.scheme isEqualToString:@"https"] || [URL.scheme isEqualToString:@"http"]) {
             SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:URL];
+            safariViewController.modalPresentationStyle = UIModalPresentationFullScreen;
             if (@available(iOS 10, *)) {
                 safariViewController.preferredBarTintColor = UIColor.play_blackColor;
                 safariViewController.preferredControlTintColor = UIColor.whiteColor;

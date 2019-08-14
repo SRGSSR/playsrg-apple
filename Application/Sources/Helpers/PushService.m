@@ -75,7 +75,7 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     return self;
 }
 
-#pragma mark Getters and Setters
+#pragma mark Getters and setters
 
 - (NSString *)environmentIdentifier
 {
@@ -285,9 +285,10 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     
     if (notificationContent.notificationInfo[@"media"]) {
         NSString *mediaURN = notificationContent.notificationInfo[@"media"];
+        NSInteger startTime = [notificationContent.notificationInfo[@"startTime"] integerValue];
         UIApplication *application = UIApplication.sharedApplication;
         PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
-        [appDelegate openMediaWithURN:mediaURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
+        [appDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = notificationContent.notificationInfo[@"show"] ?: AnalyticsSourceNotificationPush;
             labels.type = notificationContent.notificationInfo[@"type"] ?: AnalyticsTypeActionPlayMedia;

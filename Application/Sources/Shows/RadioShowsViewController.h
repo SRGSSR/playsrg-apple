@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RadioShowsViewController : PageViewController <SRGAnalyticsViewTracking>
 
-- (instancetype)initWithRadioChannels:(NSArray<RadioChannel *> *)radioChannels;
+- (instancetype)initWithRadioChannels:(NSArray<RadioChannel *> *)radioChannels alphabeticalIndex:(nullable NSString *)alphabeticalIndex;
 
 @end
 

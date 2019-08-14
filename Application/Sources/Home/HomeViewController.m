@@ -211,7 +211,7 @@
             [self updateStatusHeaderViewLayoutWithMessage:serviceMessage];
             self.serviceMessage = serviceMessage;
         }
-        else if ((!serviceMessage || HTTPResponse.statusCode == 404) && self.serviceMessage) {
+        else if ((! serviceMessage || HTTPResponse.statusCode == 404) && self.serviceMessage) {
             [self updateStatusHeaderViewLayoutWithMessage:nil];
             self.serviceMessage = nil;
         }
@@ -614,7 +614,7 @@
 
 - (void)search:(id)sender
 {
-    SearchViewController *searchViewController = [[SearchViewController alloc] init];
+    SearchViewController *searchViewController = [[SearchViewController alloc] initWithQuery:nil settings:nil];
     
     @weakify(self)
     searchViewController.closeBlock = ^{
@@ -623,6 +623,7 @@
     };
     
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchViewController];
+    navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 

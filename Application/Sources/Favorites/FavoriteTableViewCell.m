@@ -14,7 +14,6 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <libextobjc/libextobjc.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -83,13 +82,18 @@
     }
 }
 
-
+- (void)didMoveToWindow
+{
+    [super didMoveToWindow];
+    
+    [self play_registerForPreview];
+}
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
 {
     [super traitCollectionDidChange:previousTraitCollection];
     
-    [self.nearestViewController registerForPreviewingWithDelegate:self.nearestViewController sourceView:self];
+    [self play_registerForPreview];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
@@ -144,6 +148,12 @@
 - (id)previewObject
 {
     return (! self.editing) ? self.show : nil;
+}
+
+- (NSValue *)previewAnchorRect
+{
+    CGRect imageViewFrameInSelf = [self.thumbnailImageView convertRect:self.thumbnailImageView.bounds toView:self];
+    return [NSValue valueWithCGRect:imageViewFrameInSelf];
 }
 
 #pragma mark Actions

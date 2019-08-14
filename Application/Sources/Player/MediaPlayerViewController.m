@@ -21,13 +21,15 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
 #import "NSTimer+PlaySRG.h"
+#import "PlayAccessibilityFormatter.h"
 #import "PlayAppDelegate.h"
 #import "PlayApplication.h"
-#import "PlayDateComponentsFormatter.h"
+#import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
 #import "Playlist.h"
 #import "RelatedContentView.h"
 #import "ShowViewController.h"
+#import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
@@ -100,8 +102,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIButton *livestreamButton;
 @property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
 
+@property (nonatomic, weak) IBOutlet UIStackView *logoStackView;
+@property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
+
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UILabel *availabilibityLabel;
+@property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
@@ -168,6 +173,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic) NSTimer *userInterfaceUpdateTimer;
 
 @property (nonatomic) BOOL shouldDisplayBackgroundVideoPlaybackPrompt;
+@property (nonatomic) BOOL displayBackgroundVideoPlaybackPrompt;
 
 @end
 
@@ -325,7 +331,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.livestreamButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Select regional radio", @"Regional livestream selection hint");
     
-    self.radioHomeButton.backgroundColor = [UIColor play_lightGrayButtonBackgroundColor];
+    self.logoImageView.isAccessibilityElement = YES;
+    self.logoImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
+    
+    self.radioHomeButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
     self.radioHomeButton.layer.cornerRadius = 4.f;
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];
@@ -503,6 +512,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     [super viewWillLayoutSubviews];
     
+    [self updatePlayerViewAspectRatioWithSize:self.view.frame.size];
     [self updateDetailsAppearance];
 }
 
@@ -536,13 +546,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
         self.transitioning = NO;
     }];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    [self updatePlayerViewAspectRatioWithSize:self.view.frame.size];
 }
 
 #pragma mark Accessibility
@@ -713,7 +716,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     
-    [self.availabilibityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
+    [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
     
     // Livestream: Display channel information when available
     if (media.contentType == SRGContentTypeLivestream) {
@@ -722,6 +725,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         SRGLetterboxController *letterboxController = self.letterboxController;
         SRGChannel *channel = letterboxController.channel;
         if (channel) {
+            // Display channel logos only for TV, as they would be redundant for the radio layout
+            if (channel.transmission == SRGTransmissionTV) {
+                [self.logoStackView play_setHidden:NO];
+                self.logoImageView.image = channel.play_banner22Image;
+                self.logoImageView.accessibilityLabel = channel.title;
+            }
+            else {
+                [self.logoStackView play_setHidden:YES];
+            }
+            
             [self.channelInfoStackView play_setHidden:NO];
             
             SRGProgram *currentProgram = channel.currentProgram;
@@ -729,11 +742,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 self.titleLabel.text = currentProgram.title;
                 
                 self.channelLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-                self.channelLabel.text = channel.title;
+                self.channelLabel.text = (channel.transmission != SRGTransmissionTV) ? channel.title : nil;
                 
                 self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
                 self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
-                self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:currentProgram.endDate]];
+                self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), PlayAccessibilityShortTimeFromDate(currentProgram.startDate), PlayAccessibilityShortTimeFromDate(currentProgram.endDate)];
                 
                 [self reloadDetailsWithShow:currentProgram.show];
             }
@@ -750,8 +763,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             if (nextProgram) {
                 self.nextProgramLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
                 NSString *nextProgramFormat = NSLocalizedString(@"At %1$@: %2$@", @"Introductory text for next program information");
-                self.nextProgramLabel.text = nextProgram ? [NSString stringWithFormat:@"> %@", [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeFormatter stringFromDate:nextProgram.startDate], nextProgram.title]] : nil;
-                self.nextProgramLabel.accessibilityLabel = nextProgram ? [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_relativeTimeAccessibilityFormatter stringFromDate:nextProgram.startDate], nextProgram.title] : nil;
+                self.nextProgramLabel.text = nextProgram ? [NSString stringWithFormat:@"> %@", [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_shortTimeFormatter stringFromDate:nextProgram.startDate], nextProgram.title]] : nil;
+                self.nextProgramLabel.accessibilityLabel = nextProgram ? [NSString stringWithFormat:nextProgramFormat, PlayAccessibilityShortTimeFromDate(nextProgram.startDate), nextProgram.title] : nil;
             }
             else {
                 self.nextProgramLabel.text = nil;
@@ -759,7 +772,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             }
         }
         else {
+            [self.logoStackView play_setHidden:YES];
+            
             self.titleLabel.text = media.title;
+            self.logoImageView.image = nil;
             
             [self reloadDetailsWithShow:nil];
             [self.channelInfoStackView play_setHidden:YES];
@@ -774,21 +790,22 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         
         self.dateLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
-        self.dateLabel.accessibilityLabel = [NSDateFormatter.play_relativeDateAndTimeAccessibilityFormatter stringFromDate:media.date];
+        self.dateLabel.accessibilityLabel = PlayAccessibilityRelativeDateAndTimeFromDate(media.date);
         
         self.viewCountLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         
         NSPredicate *socialViewsPredicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGSocialCount.new, type), @(SRGSocialCountTypeSRGView)];
         SRGSocialCount *socialCount = [media.socialCounts filteredArrayUsingPredicate:socialViewsPredicate].firstObject;
         if (socialCount && socialCount.value >= ApplicationConfiguration.sharedApplicationConfiguration.minimumSocialViewCount) {
+            NSString *viewCountString = [NSNumberFormatter localizedStringFromNumber:@(socialCount.value) numberStyle:NSNumberFormatterDecimalStyle];
             if (media.mediaType == SRGMediaTypeAudio) {
-                self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), @(socialCount.value)];
-                self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), @(socialCount.value)];
+                self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), viewCountString];
+                self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), viewCountString];
                 self.viewCountImageView.image = [UIImage imageNamed:@"view_count_audio-16"];
             }
             else {
-                self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), @(socialCount.value)];
-                self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), @(socialCount.value)];
+                self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), viewCountString];
+                self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), viewCountString];
                 self.viewCountImageView.image = [UIImage imageNamed:@"view_count_video-16"];
             }
             self.viewCountImageView.hidden = NO;
@@ -1771,7 +1788,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             
         case UIGestureRecognizerStateEnded: {
             CGFloat velocity = [panGestureRecognizer velocityInView:self.view].y;
-            if (velocity > 0.f || (velocity == 0.f && progress > 0.5f)) {
+            if ((progress <= 0.5f && velocity > 1000.f) || (progress > 0.5f && velocity > -1000.f)) {
                 [self.interactiveTransition finishInteractiveTransition];
             }
             else {
@@ -1900,13 +1917,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
-    // Don't prompt for backround playback if the device was simply locked
     if (self.shouldDisplayBackgroundVideoPlaybackPrompt) {
         // To determine whether a background entry is due to the lock screen being enabled or not, we need to wait a little bit.
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (UIDevice.play_isLocked) {
-                self.shouldDisplayBackgroundVideoPlaybackPrompt = NO;
-            }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // Don't prompt for backround playback if the device was simply locked
+            self.displayBackgroundVideoPlaybackPrompt = ! UIDevice.play_isLocked;
         });
     }
 }
@@ -1922,8 +1937,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
     // Display the prompt if this makes sense (only once)
-    if (self.shouldDisplayBackgroundVideoPlaybackPrompt) {
-        self.shouldDisplayBackgroundVideoPlaybackPrompt = NO;
+    if (self.displayBackgroundVideoPlaybackPrompt) {
+        self.displayBackgroundVideoPlaybackPrompt = NO;
+        
+        UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+        if (topViewController != self) {
+            return;
+        }
         
         PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
             NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
@@ -1940,10 +1960,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 completionHandler(YES);
             }]];
             
-            UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
             [topViewController presentViewController:alertController animated:YES completion:nil];
         }, @"BackgroundVideoPlaybackAsked", nil);
     }
+    self.shouldDisplayBackgroundVideoPlaybackPrompt = NO;
 }
 
 - (void)reachabilityDidChange:(NSNotification *)notification

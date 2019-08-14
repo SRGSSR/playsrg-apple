@@ -19,7 +19,6 @@
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGUserData/SRGUserData.h>
@@ -90,6 +89,8 @@
     [super willMoveToWindow:newWindow];
     
     if (newWindow) {
+        [self updateActiveConstraints];
+        
         // Ensure proper state when the view is reinserted
         [self updateDownloadStatus];
         
@@ -108,35 +109,20 @@
     }
 }
 
-// Work around iOS autolayout bug (uninstalled constraints still active and conflicting at runtime)
-// See http://stackoverflow.com/a/27697726/760435
-// and http://stackoverflow.com/questions/26023201/why-do-i-get-an-autolayout-error-on-a-constraint-that-should-not-be-installed-fo
-//
-// This is visible in layouts which are quite different and for which uninstalled constraints, still
-// active, will incorrectly conflict at runtime.
-//
-// To fix:
-//   - Create an outlet collection for each size class for which a specialization has been defined
-//   - In IB, associate each constraint which is not installed for all size classes with the corresponding outlet
-//     collection(s)
-//   - Implement the following method to disable those constraints manually
-//   - Run. If conflicts still remain, lower priorities of remaining conflicting constraints
+- (void)didMoveToWindow
+{
+    [super didMoveToWindow];
+    
+    [self play_registerForPreview];
+}
+
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
 {
     [super traitCollectionDidChange:previousTraitCollection];
     
-    if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        for (NSLayoutConstraint *layoutConstraint in self.allSizeLayoutConstraints) {
-            layoutConstraint.active = NO;
-        }
-    }
-    else {
-        for (NSLayoutConstraint *layoutConstraint in self.compactRegularLayoutConstraints) {
-            layoutConstraint.active = NO;
-        }
-    }
+    [self updateActiveConstraints];
     
-    [self.nearestViewController registerForPreviewingWithDelegate:self.nearestViewController sourceView:self];
+    [self play_registerForPreview];
 }
 
 #pragma mark Accessibility
@@ -242,6 +228,33 @@
 
 #pragma mark UI
 
+// Work around iOS autolayout bug (uninstalled constraints still active and conflicting at runtime)
+// See http://stackoverflow.com/a/27697726/760435
+// and http://stackoverflow.com/questions/26023201/why-do-i-get-an-autolayout-error-on-a-constraint-that-should-not-be-installed-fo
+//
+// This is visible in layouts which are quite different and for which uninstalled constraints, still
+// active, will incorrectly conflict at runtime.
+//
+// To fix:
+//   - Create an outlet collection for each size class for which a specialization has been defined
+//   - In IB, associate each constraint which is not installed for all size classes with the corresponding outlet
+//     collection(s)
+//   - Implement the following method to disable those constraints manually
+//   - Run. If conflicts still remain, lower priorities of remaining conflicting constraints
+- (void)updateActiveConstraints
+{
+    if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+        for (NSLayoutConstraint *layoutConstraint in self.allSizeLayoutConstraints) {
+            layoutConstraint.active = NO;
+        }
+    }
+    else {
+        for (NSLayoutConstraint *layoutConstraint in self.compactRegularLayoutConstraints) {
+            layoutConstraint.active = NO;
+        }
+    }
+}
+
 - (void)updateDownloadStatus
 {
     Download *download = [Download downloadForMedia:self.media];
@@ -311,6 +324,12 @@
 - (id)previewObject
 {
     return self.media;
+}
+
+- (NSValue *)previewAnchorRect
+{
+    CGRect imageViewFrameInSelf = [self.thumbnailImageView convertRect:self.thumbnailImageView.bounds toView:self];
+    return [NSValue valueWithCGRect:imageViewFrameInSelf];
 }
 
 #pragma mark Notifications

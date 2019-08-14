@@ -33,7 +33,7 @@ OBJC_EXPORT NSString *PlaySRGNonLocalizedString(NSString *string);
 
 @interface NSBundle (PlaySRG)
 
-@property(nonatomic, readonly, getter=isTestFlightDistribution) BOOL testFlightDistribution;
+@property (nonatomic, readonly) NSString *play_friendlyVersionNumber;
 
 @end
 

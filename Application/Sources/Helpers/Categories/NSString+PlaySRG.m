@@ -6,7 +6,11 @@
 
 #import "NSString+PlaySRG.h"
 
+#import "NSDateFormatter+PlaySRG.h"
+
 @implementation NSString (PlaySRG)
+
+#pragma mark Getters and setters
 
 - (NSString *)play_localizedUppercaseFirstLetterString
 {

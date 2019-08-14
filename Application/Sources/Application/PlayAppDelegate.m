@@ -9,12 +9,17 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
+#import "CalendarViewController.h"
+#import "DeepLinkService.h"
 #import "Download.h"
 #import "Favorites.h"
 #import "GoogleCast.h"
 #import "History.h"
+#import "HomeTopicViewController.h"
 #import "MediaPlayerViewController.h"
+#import "ModuleViewController.h"
 #import "NavigationController.h"
+#import "NSDateFormatter+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PlayErrors.h"
 #import "Playlist.h"
@@ -22,6 +27,8 @@
 #import "Play-Swift-Bridge.h"
 #import "PushService.h"
 #import "ShowViewController.h"
+#import "ShowsViewController.h"
+#import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
@@ -33,6 +40,7 @@
 #import <Firebase/Firebase.h>
 #import <libextobjc/libextobjc.h>
 #import <Mantle/Mantle.h>
+#import <SafariServices/SafariServices.h>
 #import <SRGAnalytics_Identity/SRGAnalytics_Identity.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGIdentity/SRGIdentity.h>
@@ -195,7 +203,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     WatchLaterMigrate();
     FavoritesMigrate();
     
-    [self showNextAvailableOnboarding];
+    if (! launchOptions[UIApplicationLaunchOptionsUserActivityDictionaryKey]) {
+        [self showNextAvailableOnboarding];
+    }
     
     NSURL *whatsNewURL = applicationConfiguration.whatsNewURL;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
@@ -214,6 +224,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                                                                                                   action:@selector(closeWhatsNew:)];
                 
                 NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
+                navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
                 [self.window.play_topViewController presentViewController:navigationController animated:YES completion:^{
                     completionHandler(YES);
                 }];
@@ -242,11 +253,28 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     completionHandler(handledShortcutItem);
 }
 
-// Open [scheme]://open?media=[media_urn] (optional &channel-id=[channel_id])
-// Open [scheme]://open?show=[show_urn] (optional &channel-id=[channel_id])
+// See URL_SCHEMES.md
+// Open [scheme]://open?media=[media_urn] (optional query parameters: channel-id=[channel_id], start-time=[start_position_seconds])
+// Open [scheme]://open?show=[show_urn] (optional query parameter: channel-id=[channel_id])
+// Open [scheme]://open?topic=[topic_urn]
+// Open [scheme]://open?module=[module_urn]
+// Open [scheme]://open?page-id=[home] (optional query parameters: channel-id=[channel_id])
+// Open [scheme]://open?page-id=[az] (optional query parameters: channel-id=[channel_id], index=[index_letter])
+// Open [scheme]://open?page-id=[bydate] (optional query parameters: channel-id=[channel_id], date=[date] with format yyyy-MM-dd)
+// Open [scheme]://open?page-id=[search] (optional query parameters: query=[query], mediaType=[audio|video])
+// Open [scheme]://open?url=[url]
+// Open [scheme]://[play website url] (use "parsePlayUrl.js" to attempt transforming the URL)
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
+    AnalyticsSource analyticsSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeepLink : AnalyticsSourceSchemeURL;
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
+    if (! [URLComponents.host.lowercaseString isEqualToString:@"open"]) {
+        NSURL *deepLinkURL = [DeepLinkService.sharedService schemeURLFromWebURL:URL];
+        if (deepLinkURL) {
+            URLComponents = [NSURLComponents componentsWithURL:deepLinkURL resolvingAgainstBaseURL:NO];
+        }
+    }
+    
     if ([URLComponents.host.lowercaseString isEqualToString:@"open"]) {
         
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -265,15 +293,16 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         }
 #endif
         
-        NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
-        
         NSString *mediaURN = [self valueFromURLComponents:URLComponents withParameterName:@"media"];
         if (mediaURN) {
-            [self openMediaWithURN:mediaURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
+            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
+            NSInteger startTime = [[self valueFromURLComponents:URLComponents withParameterName:@"start-time"] integerValue];
+            [self openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = AnalyticsSourceSchemeURL;
+                labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionPlayMedia;
                 labels.value = mediaURN;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
             return YES;
@@ -281,24 +310,79 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         NSString *showURN = [self valueFromURLComponents:URLComponents withParameterName:@"show"];
         if (showURN) {
+            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
             [self openShowWithURN:showURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = AnalyticsSourceSchemeURL;
+                labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayShow;
                 labels.value = showURN;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
             return YES;
         }
         
-        // TODO: [scheme]://open?radio=uid, [scheme]://open?date=01-01-2016 …
+        NSString *topicURN = [self valueFromURLComponents:URLComponents withParameterName:@"topic"];
+        if (topicURN) {
+            [self openTopicWithURN:topicURN completionBlock:^{
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.source = analyticsSource;
+                labels.type = AnalyticsTypeActionDisplayPage;
+                labels.value = topicURN;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+            }];
+            return YES;
+        }
         
-        NSError *error = [NSError errorWithDomain:PlayErrorDomain
-                                             code:PlayErrorCodeNotFound
-                             localizedDescription:NSLocalizedString(@"The content cannot be opened.", @"Error message when an external URN (media or show) from a scheme can't be opened")];
-        [Banner showError:error inViewController:nil];
+        NSString *moduleURN = [self valueFromURLComponents:URLComponents withParameterName:@"module"];
+        if (moduleURN) {
+            [self openModuleWithURN:moduleURN completionBlock:^{
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.source = analyticsSource;
+                labels.type = AnalyticsTypeActionDisplayPage;
+                labels.value = moduleURN;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+            }];
+            return YES;
+        }
         
-        return NO;
+        NSString *pageUid = [self valueFromURLComponents:URLComponents withParameterName:@"page-id"];
+        if (pageUid) {
+            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
+            [self openPageWithUid:pageUid channelUid:channelUid URLComponents:URLComponents completionBlock:^{
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.source = analyticsSource;
+                labels.type = AnalyticsTypeActionDisplayPage;
+                labels.value = pageUid;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+            }];
+            return YES;
+        }
+        
+        NSString *URLString = [self valueFromURLComponents:URLComponents withParameterName:@"url"];
+        NSURL *URL = (URLString) ? [NSURL URLWithString:URLString] : nil;
+        if (URL) {
+            [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:^(BOOL success) {
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.source = analyticsSource;
+                labels.type = AnalyticsTypeActionDisplayURL;
+                labels.value = URLString;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+            }];
+            return YES;
+        }
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.source = analyticsSource;
+        labels.type = AnalyticsTypeActionOpenPlayApp;
+        labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+        
+        return YES;
     }
     
     return NO;
@@ -333,34 +417,136 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     return queryItem.value;
 }
 
-- (BOOL)openMediaWithURN:(NSString *)mediaURN channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openMediaWithURN:(NSString *)mediaURN startTime:(NSInteger)startTime channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(mediaURN);
     
     MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
-        [self playURN:mediaURN media:nil atPosition:nil fromPushNotification:fromPushNotification completion:nil];
-        
-        // Call completion when the opening process has been initiated
+        CMTime time = (startTime > 0) ? CMTimeMakeWithSeconds(startTime, NSEC_PER_SEC) : kCMTimeZero;
+        [self playURN:mediaURN media:nil atPosition:[SRGPosition positionAtTime:time] fromPushNotification:fromPushNotification completion:nil];
         completionBlock ? completionBlock() : nil;
     }];
-    
-    return YES;
 }
 
-- (BOOL)openShowWithURN:(NSString *)showURN channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openShowWithURN:(NSString *)showURN channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(showURN);
     
     MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
         [self openShowURN:showURN show:nil fromPushNotification:fromPushNotification];
-        
-        // Call completion when the opening process has been initiated
         completionBlock ? completionBlock() : nil;
     }];
+}
+
+- (void)openShowListAtIndex:(NSString *)index withChannelUid:(NSString *)channelUid completionBlock:(void (^)(void))completionBlock
+{
+    RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:channelUid];
+    if (radioChannel) {
+        MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
+        [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
+            [self openShowListWithRadioChannel:radioChannel atIndex:index];
+            completionBlock ? completionBlock() : nil;
+        }];
+    }
+    else {
+        NSMutableDictionary *options = [NSMutableDictionary dictionary];
+        options[MenuItemOptionShowAZIndexKey] = index;
+        
+        MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVShowAZ options:options.copy];
+        [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
+    }
+}
+
+- (void)openCalendarAtDate:(NSDate *)date withChannelUid:(NSString *)channelUid completionBlock:(void (^)(void))completionBlock
+{
+    RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:channelUid];
+    if (radioChannel) {
+        MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
+        [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
+            [self openCalendarAtDate:date withRadioChannel:radioChannel];
+            completionBlock ? completionBlock() : nil;
+        }];
+    }
+    else {
+        NSMutableDictionary *options = [NSMutableDictionary dictionary];
+        options[MenuItemOptionShowByDateDateKey] = date;
+        
+        MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVByDate options:options.copy];
+        [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
+    }
+}
+
+- (void)openSearchWithQuery:(NSString *)query mediaType:(SRGMediaType)mediaType completionBlock:(void (^)(void))completionBlock
+{
+    NSMutableDictionary *options = [NSMutableDictionary dictionary];
+    options[MenuItemOptionSearchMediaTypeOptionKey] = @(mediaType);
+    options[MenuItemOptionSearchQueryKey] = query;
     
-    return YES;
+    MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemSearch options:options.copy];
+    [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
+}
+
+- (void)openHomeWithChannelUid:(NSString *)channelUid completionBlock:(void (^)(void))completionBlock
+{
+    MenuItemInfo *menuItemInfo = MenuItemInfoForChannelUid(channelUid);
+    [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
+}
+
+- (void)openPageWithUid:(NSString *)pageUid channelUid:(NSString *)channelUid URLComponents:(NSURLComponents *)URLComponents completionBlock:(void (^)(void))completionBlock
+{
+    NSParameterAssert(pageUid);
+    
+    if ([pageUid isEqualToString:@"az"]) {
+        NSString *index = [self valueFromURLComponents:URLComponents withParameterName:@"index"];
+        [self openShowListAtIndex:index withChannelUid:channelUid completionBlock:completionBlock];
+    }
+    else if ([pageUid isEqualToString:@"bydate"]) {
+        NSString *dateString = [self valueFromURLComponents:URLComponents withParameterName:@"date"];
+        NSDate *date = dateString ? [NSDateFormatter.play_URLOptionDateFormatter dateFromString:dateString] : nil;
+        [self openCalendarAtDate:date withChannelUid:channelUid completionBlock:completionBlock];
+    }
+    else if ([pageUid isEqualToString:@"search"]) {
+        NSString *query = [self valueFromURLComponents:URLComponents withParameterName:@"query"];
+        
+        static NSDictionary<NSString *, NSNumber *> *s_mediaTypes;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_mediaTypes = @{ @"video" : @(SRGMediaTypeVideo),
+                              @"audio" : @(SRGMediaTypeAudio) };
+        });
+        
+        NSString *mediaTypeName = [self valueFromURLComponents:URLComponents withParameterName:@"mediaType"];
+        SRGMediaType mediaType = s_mediaTypes[mediaTypeName].integerValue;
+        
+        [self openSearchWithQuery:query mediaType:mediaType completionBlock:completionBlock];
+    }
+    else if ([pageUid isEqualToString:@"home"]) {
+        [self openHomeWithChannelUid:channelUid completionBlock:completionBlock];
+    }
+}
+
+- (void)openTopicWithURN:(NSString *)topicURN completionBlock:(void (^)(void))completionBlock
+{
+    NSParameterAssert(topicURN);
+    
+    MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVOverview];
+    [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
+        [self openTopicURN:topicURN];
+        completionBlock ? completionBlock() : nil;
+    }];
+}
+
+- (void)openModuleWithURN:(NSString *)moduleURN completionBlock:(void (^)(void))completionBlock
+{
+    NSParameterAssert(moduleURN);
+    
+    MenuItemInfo *menuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVOverview];
+    [self resetWithMenuItemInfo:menuItemInfo completionBlock:^{
+        [self openModuleURN:moduleURN];
+        completionBlock ? completionBlock() : nil;
+    }];
 }
 
 #pragma mark Handoff
@@ -368,10 +554,11 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 - (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType
 {
     return [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".playing"]]
-        || [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".displaying"]];
+        || [userActivityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".displaying"]]
+        || [userActivityType isEqualToString:NSUserActivityTypeBrowsingWeb];
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> *))restorationHandler
 {
     if ([userActivity.activityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".playing"]]) {
         NSString *mediaURN = userActivity.userInfo[@"URNString"];
@@ -419,9 +606,18 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         return (showURN != nil);
     }
+    else if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+        return [self application:UIApplication.sharedApplication openURL:userActivity.webpageURL options:@{}];
+    }
     else {
         return NO;
     }
+}
+
+- (void)application:(UIApplication *)application didFailToContinueUserActivityWithType:(NSString *)userActivityType error:(NSError *)error
+{
+    PlayLogWarning(@"application", @"Could not retrieve user activity for %@. Reason: %@", userActivityType, error);
+    [Banner showError:error inViewController:nil];
 }
 
 #pragma mark Helpers
@@ -539,7 +735,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                      code:PlayErrorCodeNotFound
-                                     localizedDescription:NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff or a push notification")];
+                                     localizedDescription:NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff, deep linking or a push notification")];
                 [Banner showError:error inViewController:nil];
             }
         }] resume];
@@ -561,11 +757,59 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                      code:PlayErrorCodeNotFound
-                                     localizedDescription:NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff or a push notification")];
+                                     localizedDescription:NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff, deep linking or a push notification")];
                 [Banner showError:error inViewController:nil];
             }
         }] resume];
     }
+}
+
+- (void)openTopicURN:(NSString *)topicURN
+{
+    [[SRGDataProvider.currentDataProvider tvTopicsForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor withCompletionBlock:^(NSArray<SRGTopic *> * _Nullable topics, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGTopic.new, URN), topicURN];
+        SRGTopic *topic = [topics filteredArrayUsingPredicate:predicate].firstObject;
+        if (topic) {
+            HomeTopicViewController *homeTopicViewController = [[HomeTopicViewController alloc] initWithTopic:topic];
+            [self.sideMenuController pushViewController:homeTopicViewController animated:YES];
+        }
+        else {
+            NSError *error = [NSError errorWithDomain:PlayErrorDomain
+                                                 code:PlayErrorCodeNotFound
+                                 localizedDescription:NSLocalizedString(@"The page cannot be opened.", @"Error message when a topic cannot be opened via Handoff, deep linking or a push notification")];
+            [Banner showError:error inViewController:nil];
+        }
+    }] resume];
+}
+
+- (void)openModuleURN:(NSString *)moduleURN
+{
+    [[SRGDataProvider.currentDataProvider modulesForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor type:SRGModuleTypeEvent withCompletionBlock:^(NSArray<SRGModule *> * _Nullable modules, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGModule.new, URN), moduleURN];
+        SRGModule *module = [modules filteredArrayUsingPredicate:predicate].firstObject;
+        if (module) {
+            ModuleViewController *moduleViewController = [[ModuleViewController alloc] initWithModule:module];
+            [self.sideMenuController pushViewController:moduleViewController animated:YES];
+        }
+        else {
+            NSError *error = [NSError errorWithDomain:PlayErrorDomain
+                                                 code:PlayErrorCodeNotFound
+                                 localizedDescription:NSLocalizedString(@"The page cannot be opened.", @"Error message when an event module cannot be opened via Handoff, deep linking or a push notification")];
+            [Banner showError:error inViewController:nil];
+        }
+    }] resume];
+}
+
+- (void)openShowListWithRadioChannel:(RadioChannel *)radioChannel atIndex:(NSString *)index
+{
+    ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:index];
+    [self.sideMenuController pushViewController:showsViewController animated:YES];
+}
+
+- (void)openCalendarAtDate:(NSDate *)date withRadioChannel:(RadioChannel *)radioChannel
+{
+    CalendarViewController *calendarViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:date];
+    [self.sideMenuController pushViewController:calendarViewController animated:YES];
 }
 
 #pragma mark What's new
@@ -663,6 +907,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 - (void)showStorePage
 {
     SKStoreProductViewController *productViewController = [[SKStoreProductViewController  alloc] init];
+    productViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     productViewController.delegate = self;
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
@@ -687,6 +932,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     Onboarding *onboarding = [Onboarding.onboardings filteredArrayUsingPredicate:predicate].firstObject;
     if (onboarding) {
         OnboardingViewController *onboardingViewController = [[OnboardingViewController alloc] initWithOnboarding:onboarding];
+        onboardingViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.window.play_topViewController presentViewController:onboardingViewController animated:YES completion:^{
             NSArray<NSString *> *updatedReadOnboardingUids = [readOnboardingUids arrayByAddingObject:onboarding.uid];
             [NSUserDefaults.standardUserDefaults setObject:updatedReadOnboardingUids forKey:kReadOnboardingUidsKey];
@@ -858,4 +1104,3 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid)
     }
     return [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVOverview];
 }
-

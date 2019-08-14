@@ -7,7 +7,7 @@
 #import "CalendarViewController.h"
 
 #import "Calendar.h"
-#import "DailyVideosViewController.h"
+#import "DailyMediasViewController.h"
 #import "MediaCollectionViewCell.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
@@ -20,6 +20,7 @@
 @interface CalendarViewController ()
 
 @property (nonatomic) RadioChannel *radioChannel;
+@property (nonatomic) NSDate *initialDate;
 
 @property (nonatomic, weak) UIPageViewController *pageViewController;
 
@@ -36,10 +37,11 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel
+- (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel date:(NSDate *)date
 {
     if (self = [super init]) {
         self.radioChannel = radioChannel;
+        self.initialDate = date;
         
         UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
@@ -65,7 +67,7 @@
 
 - (instancetype)init
 {
-    return [self initWithRadioChannel:nil];
+    return [self initWithRadioChannel:nil date:nil];
 }
 
 #pragma mark View lifecycle
@@ -115,7 +117,8 @@
     
     [self updateFonts];
     
-    [self showVideosForDate:self.calendar.today animated:NO];
+    NSDate *date = [self.initialDate isEarlierThanDate:self.calendar.today] ? self.initialDate : self.calendar.today;
+    [self showMediasForDate:date animated:NO];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
@@ -154,16 +157,16 @@
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
-    // Fix calendar rotation issues on iPad (none on iPhone, and this would remove rotation animations)
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        [self.calendar reloadData];
-    }
-    
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
         if (UIDevice.play_deviceType == DeviceTypePhonePlus && size.width > size.height) {
             [self.calendar setScope:FSCalendarScopeWeek animated:NO];
         }
-    } completion:nil];
+        
+        // This makes the calendar animation look nicer
+        [self.calendar reloadData];
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self.calendar reloadData];
+    }];
 }
 
 #pragma mark Accessibility
@@ -198,16 +201,16 @@
 
 #pragma mark Content
 
-- (void)showVideosForDate:(NSDate *)date animated:(BOOL)animated
+- (void)showMediasForDate:(NSDate *)date animated:(BOOL)animated
 {
     // Always scroll to the date, but does not switch the view controller if it hasn't changed
     [self.calendar selectDate:date];
     
-    DailyVideosViewController *currentDailyVideosViewController = (DailyVideosViewController *)self.pageViewController.viewControllers.firstObject;
+    DailyMediasViewController *currentDailyMediasViewController = (DailyMediasViewController *)self.pageViewController.viewControllers.firstObject;
     
     UIPageViewControllerNavigationDirection navigationDirection = UIPageViewControllerNavigationDirectionForward;
-    if (currentDailyVideosViewController) {
-        NSComparisonResult dateComparisonResult = [NSCalendar.currentCalendar compareDate:date toDate:currentDailyVideosViewController.date toUnitGranularity:NSCalendarUnitDay];
+    if (currentDailyMediasViewController) {
+        NSComparisonResult dateComparisonResult = [NSCalendar.currentCalendar compareDate:date toDate:currentDailyMediasViewController.date toUnitGranularity:NSCalendarUnitDay];
         if (dateComparisonResult == NSOrderedSame) {
             return;
         }
@@ -216,8 +219,8 @@
         }
     }
     
-    DailyVideosViewController *newDailyVideosViewController = [[DailyVideosViewController alloc] initWithDate:date radioChannel:self.radioChannel];
-    [self.pageViewController setViewControllers:@[newDailyVideosViewController] direction:navigationDirection animated:animated completion:nil];
+    DailyMediasViewController *newDailyMediasViewController = [[DailyMediasViewController alloc] initWithDate:date radioChannel:self.radioChannel];
+    [self.pageViewController setViewControllers:@[newDailyMediasViewController] direction:navigationDirection animated:animated completion:nil];
     
     [self setNavigationBarItemsHidden:[date isEqualToDate:self.calendar.today]];
 }
@@ -268,17 +271,17 @@
     if (@available(iOS 10, *)) {
         [self.selectionFeedbackGenerator selectionChanged];
     }
-    [self showVideosForDate:date animated:YES];
+    [self showMediasForDate:date animated:YES];
 }
 
 - (void)calendarCurrentPageDidChange:(FSCalendar *)calendar
 {
-    DailyVideosViewController *dailyVideosViewController = (DailyVideosViewController *)self.pageViewController.viewControllers.firstObject;
+    DailyMediasViewController *dailyMediasViewController = (DailyMediasViewController *)self.pageViewController.viewControllers.firstObject;
     NSCalendarUnit unitGranularity = (calendar.scope == FSCalendarScopeMonth) ? NSCalendarUnitMonth : NSCalendarUnitWeekOfYear;
     
     // Hidden if in the same page as today and current date is not today
     BOOL hidden = [NSCalendar.currentCalendar compareDate:calendar.currentPage toDate:calendar.today toUnitGranularity:unitGranularity] == NSOrderedSame
-        && [calendar.today isEqual:dailyVideosViewController.date];
+        && [calendar.today isEqualToDate:dailyMediasViewController.date];
     [self setNavigationBarItemsHidden:hidden];
 }
 
@@ -314,7 +317,7 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    DailyVideosViewController *currentDailyVideosViewController = self.pageViewController.viewControllers.firstObject;
+    DailyMediasViewController *currentDailyMediasViewController = self.pageViewController.viewControllers.firstObject;
     
     // Disable the gesture altogether when VoiceOver is running
     if (UIAccessibilityIsVoiceOverRunning()) {
@@ -347,7 +350,7 @@
     // collection is bouncing at its top). If implemented with less care, pull-to-refresh would have been possible
     // only when the calendar is in monthly view, which is impractical on small screens
     else {
-        UICollectionView *collectionView = currentDailyVideosViewController.collectionView;
+        UICollectionView *collectionView = currentDailyMediasViewController.collectionView;
         UIEdgeInsets contentInsets = ContentInsetsForScrollView(collectionView);
         return velocity.y > 0 && (collectionView.contentOffset.y == -contentInsets.top);
     }
@@ -355,8 +358,8 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(nonnull UIGestureRecognizer *)otherGestureRecognizer
 {
-    DailyVideosViewController *currentDailyVideosViewController = self.pageViewController.viewControllers.firstObject;
-    UICollectionView *collectionView = currentDailyVideosViewController.collectionView;
+    DailyMediasViewController *currentDailyMediasViewController = self.pageViewController.viewControllers.firstObject;
+    UICollectionView *collectionView = currentDailyMediasViewController.collectionView;
     return otherGestureRecognizer.view == collectionView;
 }
 
@@ -367,31 +370,31 @@
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.day = -1;
     
-    DailyVideosViewController *currentDailyVideosViewController = (DailyVideosViewController *)viewController;
-    NSDate *date = [NSCalendar.currentCalendar dateByAddingComponents:dateComponents toDate:currentDailyVideosViewController.date options:0];
-    return [[DailyVideosViewController alloc] initWithDate:date radioChannel:self.radioChannel];
+    DailyMediasViewController *currentDailyMediasViewController = (DailyMediasViewController *)viewController;
+    NSDate *date = [NSCalendar.currentCalendar dateByAddingComponents:dateComponents toDate:currentDailyMediasViewController.date options:0];
+    return [[DailyMediasViewController alloc] initWithDate:date radioChannel:self.radioChannel];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    DailyVideosViewController *currentDailyVideosViewController = (DailyVideosViewController *)viewController;
-    if ([currentDailyVideosViewController.date isEqualToDate:self.calendar.today]) {
+    DailyMediasViewController *currentDailyMediasViewController = (DailyMediasViewController *)viewController;
+    if ([currentDailyMediasViewController.date isEqualToDate:self.calendar.today]) {
         return nil;
     }
     
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.day = 1;
     
-    NSDate *date = [NSCalendar.currentCalendar dateByAddingComponents:dateComponents toDate:currentDailyVideosViewController.date options:0];
-    return [[DailyVideosViewController alloc] initWithDate:date radioChannel:self.radioChannel];
+    NSDate *date = [NSCalendar.currentCalendar dateByAddingComponents:dateComponents toDate:currentDailyMediasViewController.date options:0];
+    return [[DailyMediasViewController alloc] initWithDate:date radioChannel:self.radioChannel];
 }
 
 #pragma mark UIPageViewControllerDelegate protocol
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers
 {
-    DailyVideosViewController *newDailyVideosViewController = (DailyVideosViewController *)pendingViewControllers.firstObject;
-    [self.calendar selectDate:newDailyVideosViewController.date];
+    DailyMediasViewController *newDailyMediasViewController = (DailyMediasViewController *)pendingViewControllers.firstObject;
+    [self.calendar selectDate:newDailyMediasViewController.date];
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed
@@ -399,13 +402,13 @@
     NSDate *date = nil;
     
     if (!completed) {
-        DailyVideosViewController *previousDailyVideosViewController = (DailyVideosViewController *)previousViewControllers.firstObject;
-        date = previousDailyVideosViewController.date;
+        DailyMediasViewController *previousDailyMediasViewController = (DailyMediasViewController *)previousViewControllers.firstObject;
+        date = previousDailyMediasViewController.date;
         [self.calendar selectDate:date];
     }
     else {
-        DailyVideosViewController *currentDailyVideosViewController = (DailyVideosViewController *)pageViewController.viewControllers.firstObject;
-        date = currentDailyVideosViewController.date;
+        DailyMediasViewController *currentDailyMediasViewController = (DailyMediasViewController *)pageViewController.viewControllers.firstObject;
+        date = currentDailyMediasViewController.date;
     }
     
     [self setNavigationBarItemsHidden:[date isEqualToDate:self.calendar.today]];
@@ -415,7 +418,7 @@
 
 - (void)goToToday:(id)sender
 {
-    [self showVideosForDate:self.calendar.today animated:YES];
+    [self showMediasForDate:self.calendar.today animated:YES];
 }
 
 #pragma mark Notifications

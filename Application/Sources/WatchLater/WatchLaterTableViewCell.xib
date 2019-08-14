@@ -61,7 +61,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QL0-5r-zPn">
                                         <rect key="frame" x="81.5" y="61" width="63" height="18"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youth_protection_yellow-18" translatesAutoresizingMaskIntoConstraints="NO" id="oX7-g0-Bs7">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="18" placeholderIntrinsicHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="oX7-g0-Bs7">
                                                 <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </imageView>
@@ -116,7 +116,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="AX7-S7-GNv" userLabel="Subtitle Stack View">
-                                        <rect key="frame" x="0.0" y="24.5" width="435.5" height="22"/>
+                                        <rect key="frame" x="0.0" y="20.5" width="435.5" height="22"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="downloadable-22" translatesAutoresizingMaskIntoConstraints="NO" id="YBz-Mz-5VT">
                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -141,7 +141,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="AX7-S7-GNv" firstAttribute="trailing" secondItem="qbT-jA-SKS" secondAttribute="trailing" id="1K2-5o-gyv"/>
-                                    <constraint firstItem="AX7-S7-GNv" firstAttribute="top" secondItem="qbT-jA-SKS" secondAttribute="bottom" constant="4" id="5hk-2K-nSu"/>
+                                    <constraint firstItem="AX7-S7-GNv" firstAttribute="top" secondItem="qbT-jA-SKS" secondAttribute="bottom" id="5hk-2K-nSu"/>
                                     <constraint firstAttribute="trailing" secondItem="qbT-jA-SKS" secondAttribute="trailing" id="675-8P-iAP"/>
                                     <constraint firstItem="qbT-jA-SKS" firstAttribute="leading" secondItem="s1l-H7-GFf" secondAttribute="leading" id="G7u-bC-56B"/>
                                     <constraint firstItem="AX7-S7-GNv" firstAttribute="leading" secondItem="qbT-jA-SKS" secondAttribute="leading" id="hnK-Gb-byi"/>
@@ -179,6 +179,5 @@
         <image name="360_media-25" width="25" height="25"/>
         <image name="downloadable-22" width="22" height="22"/>
         <image name="geoblocked-25" width="25" height="25"/>
-        <image name="youth_protection_yellow-18" width="18" height="18"/>
     </resources>
 </document>

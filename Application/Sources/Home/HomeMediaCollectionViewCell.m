@@ -13,13 +13,12 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
-#import "PlayDateComponentsFormatter.h"
+#import "PlayDurationFormatter.h"
 #import "SRGMedia+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGUserData/SRGUserData.h>
@@ -109,6 +108,8 @@
     self.progressView.hidden = YES;
     
     [self.thumbnailImageView play_resetImage];
+    
+    self.backgroundColor = UIColor.play_blackColor;
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow
@@ -135,6 +136,13 @@
     }
 }
 
+- (void)didMoveToWindow
+{
+    [super didMoveToWindow];
+    
+    [self play_registerForPreview];
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -148,7 +156,7 @@
 {
     [super traitCollectionDidChange:previousTraitCollection];
     
-    [self.nearestViewController registerForPreviewingWithDelegate:self.nearestViewController sourceView:self];
+    [self play_registerForPreview];
 }
 
 #pragma mark Accessibility
@@ -197,17 +205,17 @@
 
 - (void)reloadData
 {
-    if (! self.media) {
-        self.mediaView.hidden = YES;
-        self.placeholderView.hidden = NO;
-        return;
-    }
-    
     UIColor *backgroundColor = UIColor.play_blackColor;
     if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
         backgroundColor = self.module.backgroundColor;
     }
     self.backgroundColor = backgroundColor;
+    
+    if (! self.media) {
+        self.mediaView.hidden = YES;
+        self.placeholderView.hidden = NO;
+        return;
+    }
     
     self.mediaView.hidden = NO;
     self.placeholderView.hidden = YES;
@@ -231,7 +239,7 @@
                                                                                          attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:subtitleTextStyle] }];
             
             BOOL displayTime = ([self.media blockingReasonAtDate:NSDate.date] == SRGBlockingReasonStartDate) && self.media.play_today;
-            NSDateFormatter *dateFormatter = self.featured ? NSDateFormatter.play_relativeDateAndTimeFormatter : (displayTime ? NSDateFormatter.play_relativeTimeFormatter : NSDateFormatter.play_relativeDateFormatter);
+            NSDateFormatter *dateFormatter = self.featured ? NSDateFormatter.play_relativeDateAndTimeFormatter : (displayTime ? NSDateFormatter.play_shortTimeFormatter : NSDateFormatter.play_relativeDateFormatter);
             [subtitle appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:self.media.date].play_localizedUppercaseFirstLetterString
                                                                              attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithTextStyle:subtitleTextStyle] }]];
             
@@ -352,6 +360,12 @@
 - (id)previewObject
 {
     return self.media;
+}
+
+- (NSValue *)previewAnchorRect
+{
+    CGRect imageViewFrameInSelf = [self.thumbnailImageView convertRect:self.thumbnailImageView.bounds toView:self];
+    return [NSValue valueWithCGRect:imageViewFrameInSelf];
 }
 
 #pragma mark Notifications

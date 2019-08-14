@@ -10,6 +10,7 @@
 #import "CollectionLoadMoreFooterView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
+#import "UIScrollView+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -18,6 +19,8 @@
 
 @property (nonatomic) NSError *lastRequestError;
 @property (nonatomic, weak) UIRefreshControl *refreshControl;
+
+@property (nonatomic) UIImageView *loadingImageView;        // strong
 
 @end
 
@@ -67,6 +70,11 @@
     [refreshControl addTarget:self action:@selector(collectionRequestViewController_refresh:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView insertSubview:refreshControl atIndex:0];
     self.refreshControl = refreshControl;
+    
+    // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
+    // stretched
+    self.loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
+    self.loadingImageView.contentMode = UIViewContentModeCenter;
 }
 
 - (void)viewWillLayoutSubviews
@@ -82,6 +90,13 @@
 }
 
 #pragma mark Responsiveness
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
 
 - (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
@@ -136,6 +151,11 @@
         [self.collectionView reloadEmptyDataSet];
         [self.collectionView.collectionViewLayout invalidateLayout];
     }
+    
+    // Returns immediately to the top when the list is empty
+    if (self.items.count == 0) {
+        [self.collectionView play_scrollToTopAnimated:NO];
+    }
 }
 
 - (void)didCancelRefreshRequest
@@ -173,11 +193,7 @@
 - (UIView *)customViewForEmptyDataSet:(UIScrollView *)scrollView
 {
     if (self.loading) {
-        // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
-        // stretched
-        UIImageView *loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
-        loadingImageView.contentMode = UIViewContentModeCenter;
-        return loadingImageView;
+        return self.loadingImageView;
     }
     else {
         return nil;
@@ -273,7 +289,7 @@
     
     // Only display a load more footer at the collection bottom if there is more content to load
     if (section == numberOfSections - 1 && self.canLoadMoreItems && !self.lastRequestError && [self shouldPerformRefreshRequest]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - collectionViewLayout.sectionInset.left - collectionViewLayout.sectionInset.right, 60.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 60.f);
     }
     else {
         return CGSizeZero;

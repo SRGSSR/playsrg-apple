@@ -134,9 +134,17 @@
 			<key>Title</key>
 			<string>Source code</string>
 			<key>Key</key>
-			<string>Button_Source code</string>
+			<string>Button_SourceCode</string>
 			<key>IASKTextAlignment</key>
 			<string>IASKUITextAlignmentLeft</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKCustomViewSpecifier</string>
+			<key>Title</key>
+			<string>Version</string>
+			<key>Key</key>
+			<string>Cell_ApplicationVersion</string>
 		</dict>
 		<dict>
 			<key>Type</key>

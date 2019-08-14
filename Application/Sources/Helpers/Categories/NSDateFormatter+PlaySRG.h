@@ -11,39 +11,38 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSDateFormatter (PlaySRG)
 
 /**
- *  Use absolute time formatting.
+ *  Absolute time formatting.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_timeFormatter;
 
 /**
- *  Use relative date and time formatting, i.e. displays today / yesterday for dates near today
+ *  Relative date and time formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today.
+ *
+ * @discussion Use `PlayAccessibilityRelativeDateAndTimeFromDate` for accessibility-oriented formatting.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateAndTimeFormatter;
 
 /**
- *  Use only relative date formatting, i.e. displays today / yesterday for dates near today
+ *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateFormatter;
 
 /**
- *  Use only short time formatting
+ *  Short time formatting.
+ *
+ * @discussion Use `PlayAccessibilityShortTimeFromDate` for accessibility-oriented formatting.
  */
-@property (class, nonatomic, readonly) NSDateFormatter *play_relativeTimeFormatter;
+@property (class, nonatomic, readonly) NSDateFormatter *play_shortTimeFormatter;
 
 /**
- *  Same as `play_relativeDateAndTimeFormatter` but for accessibility
+ *  Formatter for URL date options.
  */
-@property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateAndTimeAccessibilityFormatter;
++ (NSDateFormatter *)play_URLOptionDateFormatter;
 
 /**
- *  Same as `play_relativeDateAndTimeFormatter` but for accessibility
+ *  RFC 3339 date formatter.
  */
-@property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateAccessibilityFormatter;
-
-/**
- *  Same as `play_relativeDateAndTimeFormatter` but for accessibility
- */
-@property (class, nonatomic, readonly) NSDateFormatter *play_relativeTimeAccessibilityFormatter;
++ (NSDateFormatter *)play_rfc3339DateFormatter;
 
 @end
 

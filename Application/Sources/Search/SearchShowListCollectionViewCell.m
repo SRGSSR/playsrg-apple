@@ -90,6 +90,15 @@
     SRGShow *show = self.shows[indexPath.row];
     ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
     [self.nearestViewController.navigationController pushViewController:showViewController animated:YES];
+    
+    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+    labels.value = show.URN;
+    labels.type = AnalyticsTypeActionDisplayShow;
+    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSearchOpen labels:labels];
+    
+    [[SRGDataProvider.currentDataProvider increaseSearchResultsViewCountForShow:show withCompletionBlock:^(SRGShowStatisticsOverview * _Nullable showStatisticsOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        // Nothing
+    }] resume];
 }
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol

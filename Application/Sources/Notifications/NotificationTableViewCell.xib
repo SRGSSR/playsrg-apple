@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,10 +22,10 @@
                         <rect key="frame" x="20" y="11" width="593" height="114"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAK-I2-QMD" userLabel="Left View">
-                                <rect key="frame" x="0.0" y="0.0" width="150" height="114"/>
+                                <rect key="frame" x="0.0" y="0.0" width="149.5" height="114"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="O9k-VG-xpa">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="84"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="149.5" height="84"/>
                                         <color key="backgroundColor" red="0.27554744479999999" green="0.27554744479999999" blue="0.27554744479999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="84" id="2O9-yA-iQA"/>
@@ -43,19 +41,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tm-NT-fHy" userLabel="Media Info View">
-                                <rect key="frame" x="158" y="0.0" width="435" height="114"/>
+                                <rect key="frame" x="157.5" y="0.0" width="435.5" height="114"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlX-Wz-dTg">
-                                        <rect key="frame" x="0.0" y="0.0" width="435" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="435.5" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdD-8c-dQp" userLabel="Title Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="420" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="420.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="●" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLK-VE-EvR" userLabel="Dot Label">
-                                                <rect key="frame" x="420" y="0.0" width="15" height="20.5"/>
+                                                <rect key="frame" x="420.5" y="0.0" width="15" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -63,13 +61,13 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="&lt;subtitle&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqB-Va-2ut" userLabel="Subtitle Label">
-                                        <rect key="frame" x="0.0" y="24.5" width="435" height="18"/>
+                                        <rect key="frame" x="0.0" y="22.5" width="435.5" height="18"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="&lt;date&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOr-sf-Q4r" userLabel="Date Label">
-                                        <rect key="frame" x="0.0" y="46.5" width="435" height="18"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="435.5" height="18"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -79,7 +77,7 @@
                                 <constraints>
                                     <constraint firstItem="rqB-Va-2ut" firstAttribute="trailing" secondItem="BlX-Wz-dTg" secondAttribute="trailing" id="C7v-wI-Bvx"/>
                                     <constraint firstItem="KOr-sf-Q4r" firstAttribute="leading" secondItem="rqB-Va-2ut" secondAttribute="leading" id="CwY-vt-XkL"/>
-                                    <constraint firstItem="rqB-Va-2ut" firstAttribute="top" secondItem="BlX-Wz-dTg" secondAttribute="bottom" constant="4" id="RQL-g0-czu"/>
+                                    <constraint firstItem="rqB-Va-2ut" firstAttribute="top" secondItem="BlX-Wz-dTg" secondAttribute="bottom" constant="2" id="RQL-g0-czu"/>
                                     <constraint firstItem="BlX-Wz-dTg" firstAttribute="top" secondItem="3tm-NT-fHy" secondAttribute="top" id="bRn-9K-jwx"/>
                                     <constraint firstItem="BlX-Wz-dTg" firstAttribute="leading" secondItem="3tm-NT-fHy" secondAttribute="leading" id="dKM-6T-RsQ"/>
                                     <constraint firstItem="rqB-Va-2ut" firstAttribute="leading" secondItem="BlX-Wz-dTg" secondAttribute="leading" id="mFg-S3-NTU"/>

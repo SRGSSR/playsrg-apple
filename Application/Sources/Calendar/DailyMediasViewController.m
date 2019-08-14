@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "DailyVideosViewController.h"
+#import "DailyMediasViewController.h"
 
 #import "ApplicationConfiguration.h"
 #import "NSDateFormatter+PlaySRG.h"
@@ -12,7 +12,7 @@
 #import "UIDevice+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-@interface DailyVideosViewController ()
+@interface DailyMediasViewController ()
 
 @property (nonatomic) NSDate *date;
 
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation DailyVideosViewController
+@implementation DailyMediasViewController
 
 #pragma mark Object lifecycle
 
@@ -39,7 +39,7 @@
 {
     [super viewDidLoad];
     
-    self.dateFormatter = NSDateFormatter.play_relativeTimeFormatter;
+    self.dateFormatter = NSDateFormatter.play_shortTimeFormatter;
     
     self.view.backgroundColor = UIColor.play_blackColor;
     
@@ -78,12 +78,14 @@
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    
+    SRGDay *day = [SRGDay dayFromDate:self.date];
     if (self.radioChannel) {
-        SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider radioEpisodesForVendor:applicationConfiguration.vendor date:self.date channelUid:self.radioChannel.uid withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
+        SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider radioEpisodesForVendor:applicationConfiguration.vendor day:day channelUid:self.radioChannel.uid withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
         [requestQueue addRequest:request resume:YES];
     }
     else {
-        SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider tvEpisodesForVendor:applicationConfiguration.vendor date:self.date withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
+        SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider tvEpisodesForVendor:applicationConfiguration.vendor day:day withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
         [requestQueue addRequest:request resume:YES];
     }
 }
