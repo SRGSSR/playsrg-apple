@@ -673,6 +673,8 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (void)showSettings:(id)sender
 {
+    [self.searchController.searchBar resignFirstResponder];
+    
     SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.query settings:self.settings];
     searchSettingsViewController.delegate = self;
     
