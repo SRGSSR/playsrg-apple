@@ -552,7 +552,12 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
             if (self.items != 0) {
                 ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
                 if (applicationConfiguration.searchSettingsDisabled) {
-                    headerView.title = NSLocalizedString(@"Videos", @"Header for video search results");
+                    if (applicationConfiguration.radioChannels.count == 0) {
+                        headerView.title = NSLocalizedString(@"Videos", @"Header for video search results");
+                    }
+                    else {
+                        headerView.title = NSLocalizedString(@"Videos and audios", @"Header for video and audio search results");
+                    }
                 }
                 else {
                     static dispatch_once_t s_onceToken;
