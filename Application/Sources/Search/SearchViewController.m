@@ -47,7 +47,9 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 + (BOOL)containsAdvancedSettings:(SRGMediaSearchSettings *)settings
 {
-    NSParameterAssert(settings);
+    if (! settings) {
+        return NO;
+    }
     
     SRGMediaSearchSettings *defaultSettings = SearchSettingsViewController.defaultSettings;
     defaultSettings.aggregationsEnabled = NO;
@@ -62,6 +64,8 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         self.query = query;
         
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        // A BU supporting aggregation but not displaying search settings can lead to longer reponse times.
+        // (@see `mediasForVendor:matchingQuery:withSettings:completionBlock:` in `SRGDataProvider`).
         if (! applicationConfiguration.searchSettingsDisabled) {
             self.settings = settings ?: SearchSettingsViewController.defaultSettings;
             self.settings.aggregationsEnabled = NO;
@@ -333,7 +337,8 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (void)updateSearchSettingsButton
 {
-    if (self.settings) {
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    if (! applicationConfiguration.searchSettingsDisabled) {
         UIButton *filtersButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [filtersButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -680,7 +685,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     [self.searchController.searchBar resignFirstResponder];
     
-    SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.query settings:self.settings];
+    SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.query settings:self.settings ?: SearchSettingsViewController.defaultSettings];
     searchSettingsViewController.delegate = self;
     
     UIColor *backgroundColor = (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? UIColor.play_popoverGrayColor : nil;
