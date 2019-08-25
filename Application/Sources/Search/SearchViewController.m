@@ -368,20 +368,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     }
 }
 
-#pragma mark Settings management
-
-- (SRGMediaType)mediaTypeForScopeButtonIndex:(NSInteger)index
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSNumber *, NSNumber *> *s_mediaTypes;
-    dispatch_once(&s_onceToken, ^{
-        s_mediaTypes = @{ @0 : @(SRGMediaTypeNone),
-                          @1 : @(SRGMediaTypeVideo),
-                          @2 : @(SRGMediaTypeAudio) };
-    });
-    return [s_mediaTypes[@(index)] integerValue];
-}
-
 #pragma mark Search
 
 - (void)search
@@ -732,10 +718,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         static NSTimeInterval kTypingSpeedThreshold = 0.3;
         NSTimeInterval delay = (searchBar.text.length == 0) ? 0. : kTypingSpeedThreshold;
         [self performSelector:@selector(search) withObject:nil afterDelay:delay inModes:@[ NSRunLoopCommonModes ]];
-    }
-    // Instantaneous search triggered when the selected scope button changed
-    else if ([self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex] != self.settings.mediaType) {
-        [self search];
     }
 }
 
