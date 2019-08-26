@@ -42,6 +42,7 @@
 #import <Mantle/Mantle.h>
 #import <SafariServices/SafariServices.h>
 #import <SRGAnalytics_Identity/SRGAnalytics_Identity.h>
+#import <SRGAppearance/SRGAppearance.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGIdentity/SRGIdentity.h>
 #import <SRGLetterbox/SRGLetterbox.h>
@@ -234,6 +235,12 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             completionHandler(YES);
         }
     }, @"LastWhatsNewURLRead", whatsNewURL.absoluteString);
+    
+    // Processes run once in the lifetime of the application
+    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+        [UIImage srg_clearVectorImageCache];
+        completionHandler(YES);
+    }, @"ClearVectorImageCache", nil);
     
     // Open the application via 3D touch shortcut if needed
     BOOL shouldNotPerformAdditionalDelegateHandling = YES;
