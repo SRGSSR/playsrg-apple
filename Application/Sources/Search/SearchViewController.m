@@ -64,7 +64,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         self.query = query;
         
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        // A BU supporting aggregation but not displaying search settings can lead to longer reponse times.
+        // A BU supporting aggregation but not displaying search settings can lead to longer response times.
         // (@see `mediasForVendor:matchingQuery:withSettings:completionBlock:` in `SRGDataProvider`).
         if (! applicationConfiguration.searchSettingsDisabled) {
             self.settings = settings ?: SearchSettingsViewController.defaultSettings;
