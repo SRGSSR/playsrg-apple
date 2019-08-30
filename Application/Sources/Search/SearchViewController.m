@@ -63,12 +63,15 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     if (self = [super init]) {
         self.query = query;
         
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         // A BU supporting aggregation but not displaying search settings can lead to longer response times.
-        // (@see `mediasForVendor:matchingQuery:withSettings:completionBlock:` in `SRGDataProvider`).
+        // (@see `-mediasForVendor:matchingQuery:withSettings:completionBlock:` in `SRGDataProvider`).
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         if (! applicationConfiguration.searchSettingsDisabled) {
             self.settings = settings ?: SearchSettingsViewController.defaultSettings;
             self.settings.aggregationsEnabled = NO;
+        }
+        else {
+            self.settings = nil;
         }
     }
     return self;
