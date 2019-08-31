@@ -53,6 +53,14 @@ OBJC_EXPORT NSString * NotificationTypeString(NotificationType notificationType)
 + (void)saveNotification:(Notification *)notification read:(BOOL)read;
 
 /**
+ *  Mark a notification with a media as read, if exist.
+ *
+ *  @discussion Return `NO` and do nothing if no notification exists for the URN, or notification is already flagged as read.
+ *  Otherwise, returns `YES`.
+ */
++ (BOOL)flagMediaNotificationAsReadForURN:(NSString *)URN;
+
+/**
  *  Remove a notification.
  */
 + (void)removeNotification:(Notification *)notification;

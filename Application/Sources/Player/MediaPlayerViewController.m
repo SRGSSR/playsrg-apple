@@ -17,6 +17,7 @@
 #import "History.h"
 #import "LiveAccessView.h"
 #import "ModalTransition.h"
+#import "Notification.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -27,6 +28,7 @@
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
 #import "Playlist.h"
+#import "PushService.h"
 #import "RelatedContentView.h"
 #import "ShowViewController.h"
 #import "SRGChannel+PlaySRG.h"
@@ -185,6 +187,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGLetterboxService *service = SRGLetterboxService.sharedService;
     
+    if ([Notification flagMediaNotificationAsReadForURN:URN]) {
+        [PushService.sharedService updateApplicationBadge];
+    }
+    
     // If an equivalent view controller was dismissed for picture in picture of the same media, simply restore it
     if (service.controller.pictureInPictureActive && [service.pictureInPictureDelegate isKindOfClass:self.class] && [service.controller.URN isEqual:URN]) {
         return (MediaPlayerViewController *)service.pictureInPictureDelegate;
@@ -208,6 +214,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (instancetype)initWithMedia:(SRGMedia *)media position:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification
 {
     SRGLetterboxService *service = SRGLetterboxService.sharedService;
+    
+    if ([Notification flagMediaNotificationAsReadForURN:media.URN]) {
+        [PushService.sharedService updateApplicationBadge];
+    }
     
     // If an equivalent view controller was dismissed for picture in picture of the same media, simply restore it
     if (service.controller.pictureInPictureActive && [service.pictureInPictureDelegate isKindOfClass:self.class] && [service.controller.URN isEqual:media.URN]) {
@@ -238,6 +248,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         
         // Force the correct Letterbox controller. It will be linked to the Letterbox view in `-viewDidLoad`
         self.letterboxController = controller;
+        
+        if ([Notification flagMediaNotificationAsReadForURN:controller.URN]) {
+            [PushService.sharedService updateApplicationBadge];
+        }
     }
     return self;
 }
@@ -1346,6 +1360,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             [letterboxView setUserInterfaceHidden:! UIAccessibilityIsVoiceOverRunning() animated:YES];
         });
     }
+    
+    if ([Notification flagMediaNotificationAsReadForURN:subdivision.URN]) {
+        [PushService.sharedService updateApplicationBadge];
+    }
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didEngageInContinuousPlaybackWithUpcomingMedia:(SRGMedia *)upcomingMedia
@@ -1359,6 +1377,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? controller.playlistDataSource : nil;
     labels.extraValue1 = playlist.recommendationUid;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
+    
+    if ([Notification flagMediaNotificationAsReadForURN:upcomingMedia.URN]) {
+        [PushService.sharedService updateApplicationBadge];
+    }
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didCancelContinuousPlaybackWithUpcomingMedia:(SRGMedia *)upcomingMedia

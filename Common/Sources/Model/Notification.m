@@ -99,6 +99,16 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
     [self saveNotifications:notifications];
 }
 
++ (BOOL)flagMediaNotificationAsReadForURN:(NSString *)URN
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(Notification.new, mediaURN), URN];
+    NSArray<Notification *> *unreadMediaNotifications = [[self unreadNotifications] filteredArrayUsingPredicate:predicate];
+    for (Notification *notification in unreadMediaNotifications) {
+        [self saveNotification:notification read:YES];
+    }
+    return unreadMediaNotifications.count != 0;
+}
+
 + (void)removeNotification:(Notification *)notification
 {
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Notification * _Nullable otherNotification, NSDictionary<NSString *,id> * _Nullable bindings) {
