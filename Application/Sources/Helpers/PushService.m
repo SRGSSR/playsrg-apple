@@ -70,6 +70,11 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
             return nil;
         }
         
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(metadataDidChange:)
+                                                   name:SRGLetterboxMetadataDidChangeNotification
+                                                 object:nil];
+        
         self.configuration = configuration;
     }
     return self;
@@ -340,6 +345,17 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
     }
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceDidReceiveNotification object:self];
     completionHandler(UIBackgroundFetchResultNewData);
+}
+
+#pragma mark Notifications
+
+- (void)metadataDidChange:(NSNotification *)notification
+{
+    SRGLetterboxController *controller = notification.object;
+    
+    if ([Notification flagNotificationAsReadForMediaWithURN:controller.URN]) {
+        [PushService.sharedService updateApplicationBadge];
+    }
 }
 
 @end

@@ -99,7 +99,7 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
     [self saveNotifications:notifications];
 }
 
-+ (BOOL)flagMediaNotificationAsReadForURN:(NSString *)URN
++ (BOOL)flagNotificationAsReadForMediaWithURN:(NSString *)URN
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(Notification.new, mediaURN), URN];
     NSArray<Notification *> *unreadMediaNotifications = [[self unreadNotifications] filteredArrayUsingPredicate:predicate];
