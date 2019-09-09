@@ -261,28 +261,34 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 }
 
 // See URL_SCHEMES.md
-// Open [scheme]://open?media=[media_urn] (optional query parameters: channel-id=[channel_id], start-time=[start_position_seconds])
-// Open [scheme]://open?show=[show_urn] (optional query parameter: channel-id=[channel_id])
-// Open [scheme]://open?topic=[topic_urn]
-// Open [scheme]://open?module=[module_urn]
-// Open [scheme]://open?page-id=[home] (optional query parameters: channel-id=[channel_id])
-// Open [scheme]://open?page-id=[az] (optional query parameters: channel-id=[channel_id], index=[index_letter])
-// Open [scheme]://open?page-id=[bydate] (optional query parameters: channel-id=[channel_id], date=[date] with format yyyy-MM-dd)
-// Open [scheme]://open?page-id=[search] (optional query parameters: query=[query], mediaType=[audio|video])
-// Open [scheme]://open?url=[url]
-// Open [scheme]://[play website url] (use "parsePlayUrl.js" to attempt transforming the URL)
+// Open [scheme]://media/[media_urn] (optional query parameters: channel_id=[channel_id], start_time=[start_position_seconds])
+// Open [scheme]://show/[show_urn] (optional query parameter: channel_id=[channel_id])
+// Open [scheme]://topic/[topic_urn]
+// Open [scheme]://module/[module_urn]
+// Open [scheme]://home (optional query parameters: channel_id=[channel_id])
+// Open [scheme]://az (optional query parameters: channel_id=[channel_id], index=[index_letter])
+// Open [scheme]://bydate (optional query parameters: channel_id=[channel_id], date=[date] with format yyyy-MM-dd)
+// Open [scheme]://search (optional query parameters: query=[query], media_type=[audio|video])
+// Open [scheme]://link?url=[url]
+// Open [scheme]://[play_website_url] (use "parsePlayUrl.js" to attempt transforming the URL)
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
     AnalyticsSource analyticsSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeepLink : AnalyticsSourceSchemeURL;
-    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
-    if (! [URLComponents.host.lowercaseString isEqualToString:@"open"]) {
+    
+    NSArray<DeeplinkAction> *supportedActions = @[ DeeplinkActionMedia, DeeplinkActionShow, DeeplinkActionTopic, DeeplinkActionModule,
+                                                   DeeplinkActionHome, DeeplinkActionAZ, DeeplinkActionByDate, DeeplinkActionSearch,
+                                                   DeeplinkActionLink ];
+    
+    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:YES];
+    if (! [supportedActions containsObject:URLComponents.host.lowercaseString]) {
         NSURL *deepLinkURL = [DeepLinkService.sharedService schemeURLFromWebURL:URL];
         if (deepLinkURL) {
-            URLComponents = [NSURLComponents componentsWithURL:deepLinkURL resolvingAgainstBaseURL:NO];
+            URLComponents = [NSURLComponents componentsWithURL:deepLinkURL resolvingAgainstBaseURL:YES];
         }
     }
     
-    if ([URLComponents.host.lowercaseString isEqualToString:@"open"]) {
+    if ([supportedActions containsObject:URLComponents.host.lowercaseString]) {
+        DeeplinkAction action = URLComponents.host.lowercaseString;
         
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
         NSString *server = [self valueFromURLComponents:URLComponents withParameterName:@"server"];
@@ -300,10 +306,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         }
 #endif
         
-        NSString *mediaURN = [self valueFromURLComponents:URLComponents withParameterName:@"media"];
-        if (mediaURN) {
-            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
-            NSInteger startTime = [[self valueFromURLComponents:URLComponents withParameterName:@"start-time"] integerValue];
+        NSString *mediaURN = URLComponents.path.lastPathComponent;
+        if ([action isEqualToString:DeeplinkActionMedia] && mediaURN) {
+            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel_id"];
+            NSInteger startTime = [[self valueFromURLComponents:URLComponents withParameterName:@"start_time"] integerValue];
             [self openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -315,9 +321,9 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             return YES;
         }
         
-        NSString *showURN = [self valueFromURLComponents:URLComponents withParameterName:@"show"];
-        if (showURN) {
-            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
+        NSString *showURN = URLComponents.path.lastPathComponent;
+        if ([action isEqualToString:DeeplinkActionShow] && showURN) {
+            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel_id"];
             [self openShowWithURN:showURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -329,8 +335,8 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             return YES;
         }
         
-        NSString *topicURN = [self valueFromURLComponents:URLComponents withParameterName:@"topic"];
-        if (topicURN) {
+        NSString *topicURN = URLComponents.path.lastPathComponent;
+        if ([action isEqualToString:DeeplinkActionTopic] && topicURN) {
             [self openTopicWithURN:topicURN completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -342,8 +348,8 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             return YES;
         }
         
-        NSString *moduleURN = [self valueFromURLComponents:URLComponents withParameterName:@"module"];
-        if (moduleURN) {
+        NSString *moduleURN = URLComponents.path.lastPathComponent;
+        if ([action isEqualToString:DeeplinkActionModule] && moduleURN) {
             [self openModuleWithURN:moduleURN completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -355,14 +361,14 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             return YES;
         }
         
-        NSString *pageUid = [self valueFromURLComponents:URLComponents withParameterName:@"page-id"];
-        if (pageUid) {
-            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel-id"];
-            [self openPageWithUid:pageUid channelUid:channelUid URLComponents:URLComponents completionBlock:^{
+        NSArray<DeeplinkAction> *pageActions = @[ DeeplinkActionHome, DeeplinkActionAZ, DeeplinkActionByDate, DeeplinkActionSearch ];
+        if ([pageActions containsObject:action]) {
+            NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel_id"];
+            [self openPageWithAction:action channelUid:channelUid URLComponents:URLComponents completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
-                labels.value = pageUid;
+                labels.value = action;
                 labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
@@ -371,7 +377,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         NSString *URLString = [self valueFromURLComponents:URLComponents withParameterName:@"url"];
         NSURL *URL = (URLString) ? [NSURL URLWithString:URLString] : nil;
-        if (URL) {
+        if ([action isEqualToString:DeeplinkActionLink] && URL) {
             [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:^(BOOL success) {
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -501,20 +507,20 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     [self resetWithMenuItemInfo:menuItemInfo completionBlock:completionBlock];
 }
 
-- (void)openPageWithUid:(NSString *)pageUid channelUid:(NSString *)channelUid URLComponents:(NSURLComponents *)URLComponents completionBlock:(void (^)(void))completionBlock
+- (void)openPageWithAction:(DeeplinkAction)action channelUid:(NSString *)channelUid URLComponents:(NSURLComponents *)URLComponents completionBlock:(void (^)(void))completionBlock
 {
-    NSParameterAssert(pageUid);
+    NSParameterAssert(action);
     
-    if ([pageUid isEqualToString:@"az"]) {
+    if ([action isEqualToString:DeeplinkActionAZ]) {
         NSString *index = [self valueFromURLComponents:URLComponents withParameterName:@"index"];
         [self openShowListAtIndex:index withChannelUid:channelUid completionBlock:completionBlock];
     }
-    else if ([pageUid isEqualToString:@"bydate"]) {
+    else if ([action isEqualToString:DeeplinkActionByDate]) {
         NSString *dateString = [self valueFromURLComponents:URLComponents withParameterName:@"date"];
         NSDate *date = dateString ? [NSDateFormatter.play_URLOptionDateFormatter dateFromString:dateString] : nil;
         [self openCalendarAtDate:date withChannelUid:channelUid completionBlock:completionBlock];
     }
-    else if ([pageUid isEqualToString:@"search"]) {
+    else if ([action isEqualToString:DeeplinkActionSearch]) {
         NSString *query = [self valueFromURLComponents:URLComponents withParameterName:@"query"];
         
         static NSDictionary<NSString *, NSNumber *> *s_mediaTypes;
@@ -524,12 +530,12 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                               @"audio" : @(SRGMediaTypeAudio) };
         });
         
-        NSString *mediaTypeName = [self valueFromURLComponents:URLComponents withParameterName:@"mediaType"];
+        NSString *mediaTypeName = [self valueFromURLComponents:URLComponents withParameterName:@"media_type"];
         SRGMediaType mediaType = s_mediaTypes[mediaTypeName].integerValue;
         
         [self openSearchWithQuery:query mediaType:mediaType completionBlock:completionBlock];
     }
-    else if ([pageUid isEqualToString:@"home"]) {
+    else if ([action isEqualToString:DeeplinkActionHome]) {
         [self openHomeWithChannelUid:channelUid completionBlock:completionBlock];
     }
 }

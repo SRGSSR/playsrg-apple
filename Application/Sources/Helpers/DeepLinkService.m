@@ -18,6 +18,16 @@
 
 NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceName";
 
+DeeplinkAction const DeeplinkActionMedia = @"media";
+DeeplinkAction const DeeplinkActionShow = @"show";
+DeeplinkAction const DeeplinkActionTopic = @"topic";
+DeeplinkAction const DeeplinkActionModule = @"module";
+DeeplinkAction const DeeplinkActionHome = @"home";
+DeeplinkAction const DeeplinkActionAZ = @"az";
+DeeplinkAction const DeeplinkActionByDate = @"bydate";
+DeeplinkAction const DeeplinkActionSearch = @"search";
+DeeplinkAction const DeeplinkActionLink = @"link";
+
 @interface DeepLinkService ()
 
 @property (nonatomic, weak) SRGRequest *request;
@@ -135,7 +145,7 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
 {
     if ([FXReachability sharedInstance].reachable && !self.request.running) {
         NSURL *middlewareURL = ApplicationConfiguration.sharedApplicationConfiguration.middlewareURL;
-        NSURL *URL = [NSURL URLWithString:@"api/v1/deeplink/parsePlayUrl.js" relativeToURL:middlewareURL];
+        NSURL *URL = [NSURL URLWithString:@"api/v2/deeplink/parsePlayUrl.js" relativeToURL:middlewareURL];
         
         SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (data) {
