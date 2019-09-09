@@ -307,7 +307,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 #endif
         
         NSString *mediaURN = URLComponents.path.lastPathComponent;
-        if ([DeeplinkActionMedia isEqualToString:action] && mediaURN) {
+        if ([action isEqualToString:DeeplinkActionMedia] && mediaURN) {
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel_id"];
             NSInteger startTime = [[self valueFromURLComponents:URLComponents withParameterName:@"start_time"] integerValue];
             [self openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
@@ -322,7 +322,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         }
         
         NSString *showURN = URLComponents.path.lastPathComponent;
-        if ([DeeplinkActionShow isEqualToString:action] && showURN) {
+        if ([action isEqualToString:DeeplinkActionShow] && showURN) {
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel_id"];
             [self openShowWithURN:showURN channelUid:channelUid fromPushNotification:NO completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -336,7 +336,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         }
         
         NSString *topicURN = URLComponents.path.lastPathComponent;
-        if ([DeeplinkActionTopic isEqualToString:action] && topicURN) {
+        if ([action isEqualToString:DeeplinkActionTopic] && topicURN) {
             [self openTopicWithURN:topicURN completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -349,7 +349,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         }
         
         NSString *moduleURN = URLComponents.path.lastPathComponent;
-        if ([DeeplinkActionModule isEqualToString:action] && moduleURN) {
+        if ([action isEqualToString:DeeplinkActionModule] && moduleURN) {
             [self openModuleWithURN:moduleURN completionBlock:^{
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
@@ -377,7 +377,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
         
         NSString *URLString = [self valueFromURLComponents:URLComponents withParameterName:@"url"];
         NSURL *URL = (URLString) ? [NSURL URLWithString:URLString] : nil;
-        if ([DeeplinkActionLink isEqualToString:action] && URL) {
+        if ([action isEqualToString:DeeplinkActionLink] && URL) {
             [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:^(BOOL success) {
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = analyticsSource;
