@@ -89,5 +89,6 @@
   "2.9.4-310": "- Fix filters incorrectly set when opening the search from the left menu.",
   "2.9.4-311": "- New search period filters in search.\n- Channel logo in TV livestream player page.\n- Application version in settings view and iOS Settings application.\n- Date and time spelling improvements for accessibility.",
   "2.9.4-312": "- The player track selection interface has been updated.\n- iOS 13 preliminary support.",
-  "2.9.5-313": "- New RTS TV logos."
+  "2.9.5-313": "- New RTS TV logos.",
+  "2.9.6-314": "- Search filters popup on iPad tiny update.\n- New Play scheme URL supported."
 }
