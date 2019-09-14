@@ -5224,7 +5224,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/libexec/PlistBuddy -c \"Add :CFBundleURLTypes:0:CFBundleURLSchemes: string srfplayer${MARKETING_VERSION_SUFFIX}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Info.plist\"";
+			shellScript = "/usr/libexec/PlistBuddy -c \"Add :CFBundleURLTypes:0:CFBundleURLSchemes: string srfplayer${MARKETING_VERSION_SUFFIX}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Info.plist\"\n";
 		};
 		6FE1B4A01DCBC8270094D5BA /* Embed Debugging Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6829,7 +6829,7 @@
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = JA876HZNN2;
 				DOMAIN = "*.srf.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6888,7 +6888,7 @@
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = 8779C367VK;
 				DOMAIN = "*.rts.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6947,7 +6947,7 @@
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = Y7342J76KH;
 				DOMAIN = "*.rsi.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7006,7 +7006,7 @@
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "*.rtr.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7063,7 +7063,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = R36WF3S37T;
 				DOMAIN = "*.swissinfo.ch";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7569,7 +7569,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = JA876HZNN2;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7796,7 +7796,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = 8779C367VK;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -8023,7 +8023,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = Y7342J76KH;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -8250,7 +8250,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -8475,7 +8475,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = R36WF3S37T;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
