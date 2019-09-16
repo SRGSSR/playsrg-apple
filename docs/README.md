@@ -31,7 +31,7 @@ Depending on the business unit, some functionalities might not be available (e.g
 
 ## Compatibility
 
-The project runs on iOS 9 and above and must be opened with the latest Xcode version (currently Xcode 10).
+The project runs on iOS 9 and above and must be opened with the latest Xcode version.
 
 ## Contributing
 
