@@ -2617,13 +2617,6 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		0865F60F223C7506007DE03B /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		0865F616223C7684007DE03B /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -2697,7 +2690,6 @@
 				E65311E31D3E6FD100B4B8BB /* Frameworks */,
 				45D67F958D75253E27BCDE9C /* Pods */,
 				08C68D501D38D49600BB8AAA /* Products */,
-				0865F60F223C7506007DE03B /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
