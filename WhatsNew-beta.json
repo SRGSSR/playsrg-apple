@@ -91,5 +91,6 @@
   "2.9.4-312": "- The player track selection interface has been updated.\n- iOS 13 preliminary support.",
   "2.9.5-313": "- New RTS TV logos.",
   "2.9.6-314": "- Search filters popup on iPad tiny update.\n- New Play scheme URL supported.",
-  "2.9.6-315": "- Dark mode support for iOS 13 (always)."
+  "2.9.6-315": "- Dark mode support for iOS 13 (always).",
+  "2.9.6-316": "- AppStore release for iOS 13."
 }
