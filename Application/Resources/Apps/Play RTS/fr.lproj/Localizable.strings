@@ -490,6 +490,9 @@
 /* Message description displayed when subscribing to all TV and radio shows */
 "Subscribing to all TV and radio shows…" = "En cours d'abonnement à toutes les émissions TV et radio…";
 
+/* Name of the search setting to filter subtitled content */
+"Subtitled" = "Sous-titré";
+
 /* [Technical] System page type for analytics measurements */
 "System" = "Système";
 
