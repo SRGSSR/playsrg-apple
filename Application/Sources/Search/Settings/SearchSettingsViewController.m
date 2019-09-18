@@ -325,7 +325,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
     NSArray<SearchSettingRowType> *propertiesRowTypes = nil;
-    if (applicationConfiguration.searchSettingSubtitledEnabled) {
+    if (! applicationConfiguration.searchSettingSubtitledHidden) {
         propertiesRowTypes = @[ SearchSettingRowTypeSubtitled, SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
     }
     else {
