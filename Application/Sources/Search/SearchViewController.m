@@ -47,7 +47,9 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 + (BOOL)containsAdvancedSettings:(SRGMediaSearchSettings *)settings
 {
-    NSParameterAssert(settings);
+    if (! settings) {
+        return NO;
+    }
     
     SRGMediaSearchSettings *defaultSettings = SearchSettingsViewController.defaultSettings;
     defaultSettings.aggregationsEnabled = NO;
@@ -61,10 +63,15 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     if (self = [super init]) {
         self.query = query;
         
+        // A BU supporting aggregation but not displaying search settings can lead to longer response times.
+        // (@see `-mediasForVendor:matchingQuery:withSettings:completionBlock:` in `SRGDataProvider`).
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         if (! applicationConfiguration.searchSettingsDisabled) {
             self.settings = settings ?: SearchSettingsViewController.defaultSettings;
             self.settings.aggregationsEnabled = NO;
+        }
+        else {
+            self.settings = nil;
         }
     }
     return self;
@@ -333,7 +340,8 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (void)updateSearchSettingsButton
 {
-    if (self.settings) {
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    if (! applicationConfiguration.searchSettingsDisabled) {
         UIButton *filtersButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [filtersButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -361,20 +369,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     else {
         self.navigationItem.rightBarButtonItem = nil;
     }
-}
-
-#pragma mark Settings management
-
-- (SRGMediaType)mediaTypeForScopeButtonIndex:(NSInteger)index
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSNumber *, NSNumber *> *s_mediaTypes;
-    dispatch_once(&s_onceToken, ^{
-        s_mediaTypes = @{ @0 : @(SRGMediaTypeNone),
-                          @1 : @(SRGMediaTypeVideo),
-                          @2 : @(SRGMediaTypeAudio) };
-    });
-    return [s_mediaTypes[@(index)] integerValue];
 }
 
 #pragma mark Search
@@ -552,7 +546,12 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
             if (self.items != 0) {
                 ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
                 if (applicationConfiguration.searchSettingsDisabled) {
-                    headerView.title = NSLocalizedString(@"Videos", @"Header for video search results");
+                    if (applicationConfiguration.radioChannels.count == 0) {
+                        headerView.title = NSLocalizedString(@"Videos", @"Header for video search results");
+                    }
+                    else {
+                        headerView.title = NSLocalizedString(@"Videos and audios", @"Header for video and audio search results");
+                    }
                 }
                 else {
                     static dispatch_once_t s_onceToken;
@@ -673,7 +672,9 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (void)showSettings:(id)sender
 {
-    SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.query settings:self.settings];
+    [self.searchController.searchBar resignFirstResponder];
+    
+    SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.query settings:self.settings ?: SearchSettingsViewController.defaultSettings];
     searchSettingsViewController.delegate = self;
     
     UIColor *backgroundColor = (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? UIColor.play_popoverGrayColor : nil;
@@ -720,10 +721,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         static NSTimeInterval kTypingSpeedThreshold = 0.3;
         NSTimeInterval delay = (searchBar.text.length == 0) ? 0. : kTypingSpeedThreshold;
         [self performSelector:@selector(search) withObject:nil afterDelay:delay inModes:@[ NSRunLoopCommonModes ]];
-    }
-    // Instantaneous search triggered when the selected scope button changed
-    else if ([self mediaTypeForScopeButtonIndex:searchBar.selectedScopeButtonIndex] != self.settings.mediaType) {
-        [self search];
     }
 }
 
