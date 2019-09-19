@@ -41,6 +41,7 @@ static SearchSettingRowType const SearchSettingRowTypeYesterday = @"yesterday";
 static SearchSettingRowType const SearchSettingRowTypeThisWeek = @"this_week";
 static SearchSettingRowType const SearchSettingRowTypeLastWeek = @"last_week";
 static SearchSettingRowType const SearchSettingRowTypeDuration = @"duration";
+static SearchSettingRowType const SearchSettingRowTypeSubtitled = @"subtitled";
 static SearchSettingRowType const SearchSettingRowTypeDownloadAvailable = @"download_available";
 static SearchSettingRowType const SearchSettingRowTypePlayableAbroad = @"playable_abroad";
 
@@ -321,12 +322,22 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (NSArray<SearchSettingRowType> *)tableView:(UITableView *)tableView rowTypesInSectionWithType:(SearchSettingSectionType)type
 {
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    
+    NSArray<SearchSettingRowType> *propertiesRowTypes = nil;
+    if (! applicationConfiguration.searchSettingSubtitledHidden) {
+        propertiesRowTypes = @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad, SearchSettingRowTypeSubtitled ];
+    }
+    else {
+        propertiesRowTypes = @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
+    }
+    
     NSDictionary<SearchSettingSectionType, NSArray<SearchSettingRowType> *> *types = @{ SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
                                                                                         SearchSettingSectionTypeTopics : @[ SearchSettingRowTypeTopics ],
                                                                                         SearchSettingSectionTypeShows : @[ SearchSettingRowTypeShows ],
                                                                                         SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeToday, SearchSettingRowTypeYesterday, SearchSettingRowTypeThisWeek, SearchSettingRowTypeLastWeek ],
                                                                                         SearchSettingSectionTypeDuration : @[ SearchSettingRowTypeDuration ],
-                                                                                        SearchSettingSectionTypeProperties : @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ] };
+                                                                                        SearchSettingSectionTypeProperties : propertiesRowTypes };
     return types[type];
 }
 
@@ -340,6 +351,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                                                                 SearchSettingRowTypeThisWeek : SearchSettingSelectorCell.class,
                                                                 SearchSettingRowTypeLastWeek : SearchSettingSelectorCell.class,
                                                                 SearchSettingRowTypeDuration : SearchSettingSegmentCell.class,
+                                                                SearchSettingRowTypeSubtitled : SearchSettingSwitchCell.class,
                                                                 SearchSettingRowTypeDownloadAvailable : SearchSettingSwitchCell.class,
                                                                 SearchSettingRowTypePlayableAbroad : SearchSettingSwitchCell.class };
     Class cellClass = cellClasses[type];
@@ -460,6 +472,19 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
                     break;
                 }
             }
+            [self updateResults];
+        }];
+    }
+    else if ([type isEqualToString:SearchSettingRowTypeSubtitled]) {
+        SearchSettingSwitchCell *switchCell = (SearchSettingSwitchCell *)cell;
+        
+        @weakify(self)
+        [switchCell setName:NSLocalizedString(@"Subtitled", @"Name of the search setting to filter subtitled content") reader:^BOOL{
+            return settings.subtitlesAvailable.boolValue;
+        } writer:^(BOOL value) {
+            @strongify(self)
+            
+            settings.subtitlesAvailable = value ? @(value) : nil;
             [self updateResults];
         }];
     }
