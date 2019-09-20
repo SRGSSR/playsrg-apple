@@ -13,6 +13,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
+#import "SRGMedia+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -29,6 +30,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
+@property (nonatomic, weak) IBOutlet UILabel *subtitlesAvailableLabel;
+@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionAvailableLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *downloadStatusImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *media360ImageView;
@@ -69,6 +72,11 @@
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
+    [self.subtitlesAvailableLabel play_setSubtitlesAvailableLabel];
+    [self.audioDescriptionAvailableLabel play_setAudioDescriptionAvailableLabel];
+    
+    self.subtitlesAvailableLabel.hidden = YES;
+    self.audioDescriptionAvailableLabel.hidden = YES;
     self.youthProtectionColorImageView.hidden = YES;
     
     self.blockingOverlayViewColor = self.blockingOverlayView.backgroundColor;
@@ -93,6 +101,8 @@
 {
     [super prepareForReuse];
     
+    self.subtitlesAvailableLabel.hidden = YES;
+    self.audioDescriptionAvailableLabel.hidden = YES;
     self.youthProtectionColorImageView.hidden = YES;
     
     self.blockingOverlayView.hidden = YES;
@@ -237,6 +247,12 @@
     [self.durationLabel play_displayDurationLabelForMediaMetadata:media];
     
     self.media360ImageView.hidden = (media.presentation != SRGPresentation360);
+    
+    BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
+    
+    self.subtitlesAvailableLabel.hidden = (!self.media.play_subtilesAvailable || downloaded);
+    
+    self.audioDescriptionAvailableLabel.hidden = (!self.media.play_audioDescriptionAvailable || downloaded);
     
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);

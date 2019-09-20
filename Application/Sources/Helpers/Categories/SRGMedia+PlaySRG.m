@@ -6,6 +6,8 @@
 
 #import "SRGMedia+PlaySRG.h"
 
+#import <libextobjc/libextobjc.h>
+
 @implementation SRGMedia (PlaySRG)
 
 - (BOOL)play_isToday
@@ -27,6 +29,18 @@
     else {
         return nil;
     }
+}
+
+- (BOOL)play_isSubtilesAvailable
+{
+    return [self subtitleInformationsForSource:self.recommendedSubtitleInformationSource].count != 0;
+}
+
+- (BOOL)play_isAudioDescriptionAvailable
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGAudioTrack.new, type), @(SRGAudioTrackTypeAudioDescription)];
+    NSArray<SRGAudioTrack *> *audioTracks = [self audioTracksForSource:self.recommendedAudioTrackSource];
+    return [audioTracks filteredArrayUsingPredicate:predicate].count != 0;
 }
 
 @end

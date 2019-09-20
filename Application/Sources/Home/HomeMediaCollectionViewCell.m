@@ -38,6 +38,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
+@property (nonatomic, weak) IBOutlet UILabel *subtitlesAvailableLabel;
+@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionAvailableLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *downloadStatusImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *media360ImageView;
@@ -80,6 +82,11 @@
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
+    [self.subtitlesAvailableLabel play_setSubtitlesAvailableLabel];
+    [self.audioDescriptionAvailableLabel play_setAudioDescriptionAvailableLabel];
+    
+    self.subtitlesAvailableLabel.hidden = YES;
+    self.audioDescriptionAvailableLabel.hidden = YES;
     self.youthProtectionColorImageView.hidden = YES;
     
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
@@ -101,6 +108,8 @@
     self.mediaView.hidden = YES;
     self.placeholderView.hidden = NO;
     
+    self.subtitlesAvailableLabel.hidden = YES;
+    self.audioDescriptionAvailableLabel.hidden = YES;
     self.youthProtectionColorImageView.hidden = YES;
     
     self.blockingOverlayView.hidden = YES;
@@ -258,6 +267,12 @@
     [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
     
     self.media360ImageView.hidden = (self.media.presentation != SRGPresentation360);
+    
+    BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
+    
+    self.subtitlesAvailableLabel.hidden = (!self.media.play_subtilesAvailable || downloaded);
+    
+    self.audioDescriptionAvailableLabel.hidden = (!self.media.play_audioDescriptionAvailable || downloaded);
     
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);

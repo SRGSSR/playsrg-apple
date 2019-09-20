@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -64,28 +62,33 @@
                         <rect key="frame" x="5" y="54" width="25" height="25"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5b-T7-VxL">
-                        <rect key="frame" x="81.5" y="61" width="63" height="18"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="P5b-T7-VxL">
+                        <rect key="frame" x="27" y="61" width="117.5" height="18"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="18" placeholderIntrinsicHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NRG-7r-BpG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="18" placeholderIntrinsicHeight="18" image="youth_protection_yellow-18" translatesAutoresizingMaskIntoConstraints="NO" id="NRG-7r-BpG">
                                 <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8sF-D9-R8m" userLabel="Spacer View">
-                                <rect key="frame" x="18" y="0.0" width="4" height="18"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="4" id="9e6-Oz-nmE"/>
-                                </constraints>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" AD " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcC-zv-vWK">
+                                <rect key="frame" x="22" y="0.0" width="24" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ST " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jlk-qE-P3B">
+                                <rect key="frame" x="50" y="0.0" width="22.5" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text=" 00:00 " textAlignment="natural" lineBreakMode="wordWrap" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyH-au-0BM" userLabel="Time Label">
-                                <rect key="frame" x="22" y="0.0" width="41" height="18"/>
+                                <rect key="frame" x="76.5" y="0.0" width="41" height="18"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="JWf-KC-pYt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
@@ -165,6 +168,7 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="audioDescriptionAvailableLabel" destination="xcC-zv-vWK" id="O7o-S5-Cwo"/>
                 <outlet property="blockingOverlayView" destination="eXQ-vI-0FF" id="kHQ-fy-5qB"/>
                 <outlet property="blockingReasonImageView" destination="rxP-Xq-syp" id="La6-lb-DYl"/>
                 <outlet property="downloadStatusImageView" destination="m53-Px-eX9" id="ogI-wz-1bJ"/>
@@ -172,6 +176,7 @@
                 <outlet property="media360ImageView" destination="NJ6-Ou-tus" id="FWC-xm-cgz"/>
                 <outlet property="progressView" destination="x7e-gr-cUo" id="lxb-bq-U36"/>
                 <outlet property="subtitleLabel" destination="Wce-v1-6RF" id="BSr-nB-NY6"/>
+                <outlet property="subtitlesAvailableLabel" destination="Jlk-qE-P3B" id="0oI-Vn-ahp"/>
                 <outlet property="thumbnailImageView" destination="oyt-0M-2Tn" id="ScS-wz-5Ur"/>
                 <outlet property="titleLabel" destination="XHz-8o-wrG" id="qcw-Le-shV"/>
                 <outlet property="youthProtectionColorImageView" destination="NRG-7r-BpG" id="GFd-S0-08f"/>
@@ -189,5 +194,6 @@
         <image name="360_media-25" width="25" height="25"/>
         <image name="downloadable-22" width="22" height="22"/>
         <image name="geoblocked-25" width="25" height="25"/>
+        <image name="youth_protection_yellow-18" width="18" height="18"/>
     </resources>
 </document>

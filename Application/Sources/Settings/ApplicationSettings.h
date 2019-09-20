@@ -69,4 +69,6 @@ OBJC_EXPORT void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo 
 OBJC_EXPORT NSURL * _Nullable ApplicationSettingServiceURLForKey(NSString *key);
 OBJC_EXPORT NSString * _Nullable ApplicationSettingServiceNameForKey(NSString *key);
 
+OBJC_EXPORT BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void);
+
 NS_ASSUME_NONNULL_END

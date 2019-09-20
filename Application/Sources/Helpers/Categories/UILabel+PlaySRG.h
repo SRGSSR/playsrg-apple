@@ -27,6 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)play_displayAvailabilityLabelForMediaMetadata:(id<SRGMediaMetadata>)object;
 
+/**
+ *  Use it to set a subtitles available label
+ */
+- (void)play_setSubtitlesAvailableLabel;
+
+/**
+ *  Use it to set an audio description available label
+ */
+- (void)play_setAudioDescriptionAvailableLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

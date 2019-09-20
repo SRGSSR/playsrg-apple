@@ -68,6 +68,16 @@
     }
 }
 
+- (void)play_setSubtitlesAvailableLabel
+{
+    [self play_setMediaLabelWithString:NSLocalizedString(@"ST", @"Subtitles short label on media cells")];
+}
+
+- (void)play_setAudioDescriptionAvailableLabel
+{
+    [self play_setMediaLabelWithString:NSLocalizedString(@"AD", @"Audio description short label on media cells")];
+}
+
 #pragma mark Private
 
 - (void)play_displayDurationLabelWithTimeAvailability:(SRGTimeAvailability)timeAvailability duration:(NSTimeInterval)duration isLivestreamOrScheduledLivestream:(BOOL)isLivestreamOrScheduledLivestream isLiveEvent:(BOOL)isLiveEvent
@@ -110,6 +120,13 @@
     
     self.attributedText = attributedText.copy;
     self.hidden = NO;
+}
+
+- (void)play_setMediaLabelWithString:(NSString *)string
+{
+    self.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
+    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+    self.text = [NSString stringWithFormat:@"  %@  ", string].uppercaseString;
 }
 
 @end
