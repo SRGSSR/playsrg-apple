@@ -30,14 +30,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/ComScore-iOS-watchOS-tvOS</string>
-			<key>Title</key>
-			<string>ComScore-iOS-watchOS-tvOS (5.8.4)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/DZNEmptyDataSet</string>
 			<key>Title</key>
 			<string>DZNEmptyDataSet (v1.8.1_srg1)</string>
@@ -224,7 +216,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-ios</string>
 			<key>Title</key>
-			<string>srganalytics-ios (3.7.5)</string>
+			<string>srganalytics-ios (f54b632)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -264,7 +256,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-ios</string>
 			<key>Title</key>
-			<string>srgletterbox-ios (1.14.5)</string>
+			<string>srgletterbox-ios (308387e)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

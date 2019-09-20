@@ -83,6 +83,8 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
+    [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
+    
     // TODO: Remove in 2019 when DRMs are widely available
     [SRGLetterboxController setPrefersDRM:applicationConfiguration.prefersDRM];
     
