@@ -117,6 +117,69 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     return [levels reverseObjectEnumerator].allObjects;
 }
 
+#pragma mark UIContextMenuInteractionDelegate protocol
+
+- (UIContextMenuConfiguration *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configurationForMenuAtLocation:(CGPoint)location API_AVAILABLE(ios(13.0))
+{
+    UIView *sourceView = interaction.view;
+    if (! [sourceView conformsToProtocol:@protocol(Previewing)]) {
+        return nil;
+    }
+    
+    id previewObject = [(id<Previewing>)sourceView previewObject];
+    if (! previewObject) {
+        return nil;
+    }
+    
+    if ([previewObject isKindOfClass:SRGMedia.class]) {
+        return [UIContextMenuConfiguration configurationWithIdentifier:nil previewProvider:^UIViewController * _Nullable{
+            return [[MediaPreviewViewController alloc] initWithMedia:previewObject];
+        } actionProvider:^UIMenu * _Nullable(NSArray<UIMenuElement *> * _Nonnull suggestedActions) {
+            return nil;
+        }];
+    }
+    else if ([previewObject isKindOfClass:SRGModule.class]) {
+        return [UIContextMenuConfiguration configurationWithIdentifier:nil previewProvider:^UIViewController * _Nullable{
+            return [[ModuleViewController alloc] initWithModule:previewObject];
+        } actionProvider:^UIMenu * _Nullable(NSArray<UIMenuElement *> * _Nonnull suggestedActions) {
+            return nil;
+        }];
+    }
+    else if ([previewObject isKindOfClass:SRGShow.class]) {
+        return [UIContextMenuConfiguration configurationWithIdentifier:nil previewProvider:^UIViewController * _Nullable{
+            return [[ShowViewController alloc] initWithShow:previewObject fromPushNotification:NO];
+        } actionProvider:^UIMenu * _Nullable(NSArray<UIMenuElement *> * _Nonnull suggestedActions) {
+            return nil;
+        }];
+    }
+    else if ([previewObject isKindOfClass:SRGTopic.class]) {
+        return [UIContextMenuConfiguration configurationWithIdentifier:nil previewProvider:^UIViewController * _Nullable{
+            return [[HomeTopicViewController alloc] initWithTopic:previewObject];
+        } actionProvider:^UIMenu * _Nullable(NSArray<UIMenuElement *> * _Nonnull suggestedActions) {
+            return nil;
+        }];
+    }
+    else {
+        return nil;
+    }
+}
+
+- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator API_AVAILABLE(ios(13.0))
+{
+    UIViewController *viewController = animator.previewViewController;
+    [animator addCompletion:^{
+        if ([viewController isKindOfClass:MediaPreviewViewController.class]) {
+            MediaPreviewViewController *mediaPreviewViewController = (MediaPreviewViewController *)viewController;
+            [self play_presentMediaPlayerFromLetterboxController:mediaPreviewViewController.letterboxController fromPushNotification:NO animated:YES completion:nil];
+        }
+        else if ([viewController isKindOfClass:ModuleViewController.class]
+                    || [viewController isKindOfClass:ShowViewController.class]
+                    || [viewController isKindOfClass:HomeTopicViewController.class]) {
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+    }];
+}
+
 #pragma mark UIViewControllerPreviewingDelegate protocol
 
 - (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location

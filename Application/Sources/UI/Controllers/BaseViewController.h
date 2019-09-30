@@ -19,10 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
  *  This class atuomatically provides:
  *    - Automatic page view tracking (using the view controller title as page title by default. Override if a different page
  *      title is required). Subclasses can also disable automatic tracking by implementing `-srg_isTrackedAutomatically` to
- *      return `NO`
- *    - Peek-and-pop standard management
+ *      return `NO`.
+ *    - Standard content preview and context menu management (long-press / 3D touch).
  */
-@interface BaseViewController : HLSViewController <PreviewingDelegate, SRGAnalyticsViewTracking>
+@interface BaseViewController : HLSViewController <PreviewingDelegate, SRGAnalyticsViewTracking, UIContextMenuInteractionDelegate>
 
 @end
 
