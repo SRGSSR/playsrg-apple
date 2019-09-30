@@ -37,13 +37,46 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     }
 }
 
+// Inner class conforming to `UIPopoverPresentationControllerDelegate` to avoid having `BaseViewController` conform to
+// it.
+@interface BaseViewControllerPresentationControllerDelegate : NSObject <UIPopoverPresentationControllerDelegate>
+
+@end
+
+@implementation BaseViewControllerPresentationControllerDelegate
+
+#pragma mark UIPopoverPresentationControllerDelegate protocol
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection
+{
+    return UIModalPresentationFormSheet;
+}
+
+@end
+
+@interface BaseViewController ()
+
+@property (nonatomic, readonly) BaseViewControllerPresentationControllerDelegate *presentationControllerDelegate;
+
+@end
+
 @implementation BaseViewController
+
+@synthesize presentationControllerDelegate = _presentationControllerDelegate;
 
 #pragma mark Getters and setters
 
 - (UIViewController *)previewContextViewController
 {
     return self;
+}
+
+- (BaseViewControllerPresentationControllerDelegate *)presentationControllerDelegate
+{
+    if (! _presentationControllerDelegate) {
+        _presentationControllerDelegate = [[BaseViewControllerPresentationControllerDelegate alloc] init];
+    }
+    return _presentationControllerDelegate;
 }
 
 #pragma mark Stubs
@@ -153,6 +186,11 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
                          inViewController:self];
                 }
             };
+            
+            UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
+            popoverPresentationController.sourceView = self.view;
+            popoverPresentationController.delegate = self.presentationControllerDelegate;
+            
             [self presentViewController:activityViewController animated:YES completion:nil];
         }];
         [menuActions addObject:shareAction];
@@ -203,6 +241,10 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
                          inViewController:self];
                 }
             };
+            
+            UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
+            popoverPresentationController.sourceView = self.view;
+            popoverPresentationController.delegate = self.presentationControllerDelegate;
             
             [self presentViewController:activityViewController animated:YES completion:nil];
         }];
@@ -264,6 +306,11 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
                          inViewController:self];
                 }
             };
+            
+            UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
+            popoverPresentationController.sourceView = self.view;
+            popoverPresentationController.delegate = self.presentationControllerDelegate;
+            
             [self presentViewController:activityViewController animated:YES completion:nil];
         }];
         [menuActions addObject:shareAction];
@@ -512,8 +559,6 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
                     }
                 };
                 
-                activityViewController.modalPresentationStyle = UIModalPresentationPopover;
-                
                 UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
                 popoverPresentationController.sourceView = sourceView;
                 popoverPresentationController.sourceRect = sourceView.bounds;
@@ -582,7 +627,6 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
                              inViewController:self];
                     }
                 };
-                
                 [self presentViewController:activityViewController animated:YES completion:nil];
             }]];
         }
@@ -636,8 +680,6 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
                              inViewController:self];
                     }
                 };
-                
-                activityViewController.modalPresentationStyle = UIModalPresentationPopover;
                 
                 UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
                 popoverPresentationController.sourceView = sourceView;
