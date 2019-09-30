@@ -196,7 +196,7 @@
         FavoritesToggleShow(self.show);
         
         // Use !isFavorite since favorite status has been reversed
-        AnalyticsTitle analyticsTitle = (! isFavorite) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
+        AnalyticsTitle analyticsTitle = ! isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.source = AnalyticsSourcePeekMenu;
         labels.value = self.show.URN;

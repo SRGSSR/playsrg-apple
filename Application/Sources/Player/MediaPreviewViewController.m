@@ -196,7 +196,7 @@
             }
             
             // Use !downloaded since the status has been reversed
-            AnalyticsTitle analyticsTitle = (! downloaded) ? AnalyticsTitleDownloadAdd : AnalyticsTitleDownloadRemove;
+            AnalyticsTitle analyticsTitle = ! downloaded ? AnalyticsTitleDownloadAdd : AnalyticsTitleDownloadRemove;
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourcePeekMenu;
             labels.value = self.media.URN;
