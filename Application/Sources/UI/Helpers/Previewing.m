@@ -71,14 +71,19 @@ static void *s_previewingHandleKey = &s_previewingHandleKey;
 
 - (void)play_registerForPreview
 {
-    UIViewController<PreviewingDelegate> *previewingDelegate = [self play_previewingDelegate];
-    if (self.previewingHandle) {
-        [self.previewContextViewController unregisterForPreviewingWithContext:self.previewingHandle];
+    if (@available(iOS 13, *)) {
+        
     }
-    
-    UIViewController *previewContextViewController = previewingDelegate.previewContextViewController;
-    self.previewingHandle = [previewContextViewController registerForPreviewingWithDelegate:previewingDelegate sourceView:self];
-    self.previewContextViewController = previewContextViewController;
+    else {
+        UIViewController<PreviewingDelegate> *previewingDelegate = [self play_previewingDelegate];
+        if (self.previewingHandle) {
+            [self.previewContextViewController unregisterForPreviewingWithContext:self.previewingHandle];
+        }
+        
+        UIViewController *previewContextViewController = previewingDelegate.previewContextViewController;
+        self.previewingHandle = [previewContextViewController registerForPreviewingWithDelegate:previewingDelegate sourceView:self];
+        self.previewContextViewController = previewContextViewController;
+    }
 }
 
 @end
