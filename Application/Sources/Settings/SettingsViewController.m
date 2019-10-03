@@ -118,16 +118,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                                              object:SRGUserData.currentUserData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    // Apply settings on exit
-    if ([self play_isMovingFromParentViewController]) {
-        SRGLetterboxService.sharedService.mirroredOnExternalScreen = ApplicationSettingPresenterModeEnabled();
-    }
-}
-
 #pragma mark IASKSettingsDelegate protocol
 
 - (void)settingsViewController:(IASKAppSettingsViewController *)sender buttonTappedForSpecifier:(IASKSpecifier *)specifier
@@ -414,11 +404,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     NSNumber *originalImagesOnlyEnabled = notification.userInfo[PlaySRGSettingOriginalImagesOnlyEnabled];
     if (originalImagesOnlyEnabled) {
         [UIImage play_setUseOriginalImagesOnly:originalImagesOnlyEnabled.boolValue];
-    }
-    
-    NSNumber *presenterModeEnabled = notification.userInfo[PlaySRGSettingPresenterModeEnabled];
-    if (presenterModeEnabled) {
-        SRGLetterboxService.sharedService.mirroredOnExternalScreen = presenterModeEnabled.boolValue;
     }
 }
 

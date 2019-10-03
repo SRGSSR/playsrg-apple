@@ -38,6 +38,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <Firebase/Firebase.h>
+#import <InAppSettingsKit/IASKSettingsReader.h>
 #import <libextobjc/libextobjc.h>
 #import <Mantle/Mantle.h>
 #import <SafariServices/SafariServices.h>
@@ -75,6 +76,17 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 - (SideMenuController *)sideMenuController
 {
     return (SideMenuController *)self.window.rootViewController;
+}
+
+- (void)setPresenterModeEnabled:(BOOL)presenterModeEnabled
+{
+    SRGLetterboxService.sharedService.mirroredOnExternalScreen = presenterModeEnabled;
+    
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    NSAssert([self.window isKindOfClass:MBFingerTipWindow.class], @"MBFingerTipWindow expected");
+    MBFingerTipWindow *window = (MBFingerTipWindow *)self.window;
+    window.alwaysShowTouches = presenterModeEnabled;
+#endif
 }
 
 #pragma mark Application lifecycle
@@ -127,12 +139,18 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                                            selector:@selector(playbackDidContinueAutomatically:)
                                                name:SRGLetterboxPlaybackDidContinueAutomaticallyNotification
                                              object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(settingDidChange:)
+                                               name:kIASKAppSettingChanged
+                                             object:nil];
     
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     self.window = [[MBFingerTipWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
 #else
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
 #endif
+    
+    [self setPresenterModeEnabled:ApplicationSettingPresenterModeEnabled()];
     
     self.window.backgroundColor = UIColor.blackColor;
     
@@ -143,8 +161,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     [self setupAnalytics];
     [self setupDataProvider];
     
-    // Letterbox service setup for picture and picture
-    SRGLetterboxService.sharedService.mirroredOnExternalScreen = ApplicationSettingPresenterModeEnabled();
     // Use appropriate voice over language for the whole application
     application.accessibilityLanguage = applicationConfiguration.voiceOverLanguageCode;
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -1073,6 +1089,14 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     labels.source = unexpectedLogout ? AnalyticsSourceAutomatic : AnalyticsSourceButton;
     labels.type = AnalyticsTypeActionLogout;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleIdentity labels:labels];
+}
+
+- (void)settingDidChange:(NSNotification *)notification
+{
+    NSNumber *presenterModeEnabled = notification.userInfo[PlaySRGSettingPresenterModeEnabled];
+    if (presenterModeEnabled) {
+        [self setPresenterModeEnabled:presenterModeEnabled.boolValue];
+    }
 }
 
 #pragma mark KVO
