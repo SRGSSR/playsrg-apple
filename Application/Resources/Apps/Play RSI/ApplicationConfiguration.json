@@ -11,7 +11,7 @@
   "feedbackURL": "https://play.typeform.com/to/yrmKKf",
   "searchOptions": "tvShows,videos,radioShows,audios",
   "tvHomeSections": "tvTrending,tvLive,tvFavoriteShows,tvEvents,tvTopics",
-  "tvTrendingEpisodesOnly": true,
+  "tvTrendingEpisodesOnly": false,
   "tvFeaturedHomeSectionHeaderHidden": true,
   "tvNumberOfLivePlaceholders": 2,
   "radioHomeSections": "radioLive,radioFavoriteShows,radioShowsAccess,radioMostPopular,radioLatest",
