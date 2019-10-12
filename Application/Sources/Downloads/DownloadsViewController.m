@@ -168,7 +168,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsMake(5.f, 0.f, 10.f, 0.f);
+    return UIEdgeInsetsMake(10.f, 0.f, 5.f, 0.f);
 }
 
 #pragma mark DZNEmptyDataSetSource protocol
