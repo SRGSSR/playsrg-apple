@@ -52,16 +52,29 @@ NS_ASSUME_NONNULL_BEGIN
  *  If the view controller implements the `PlaylistDataSource` protocol, an associated playlist will be attached
  *  accordingly.
  *
+ *  On iOS 13 and above, AirPlay suggestions can be enabled so that the system, based on the user behavior, might offer
+ *  a casting suggestion (https://developer.apple.com/videos/play/wwdc2019/501). On iOS 12 and below, this parameter is
+ *  ignored.
+ *
  *  The completion block is called when the media player has been presented (it will be called immediately if the
  *  player is readily visible).
  */
-- (void)play_presentMediaPlayerWithMedia:(SRGMedia *)media position:(nullable SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(nullable void (^)(void))completion;
+- (void)play_presentMediaPlayerWithMedia:(SRGMedia *)media
+                                position:(nullable SRGPosition *)position
+                      airPlaySuggestions:(BOOL)airPlaySuggestions
+                    fromPushNotification:(BOOL)fromPushNotification
+                                animated:(BOOL)animated
+                              completion:(nullable void (^)(void))completion;
 
 /**
  *  Same as `-play_presentMediaPlayerWithMedia:atPosition:fromPushNotification:animated:completion:`, but resuming from
  *  a Letterbox controller. Google Cast playback starts at the same position the controller was at.
  */
-- (void)play_presentMediaPlayerFromLetterboxController:(SRGLetterboxController *)letterboxController fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(nullable void (^)(void))completion;
+- (void)play_presentMediaPlayerFromLetterboxController:(SRGLetterboxController *)letterboxController
+                                withAirPlaySuggestions:(BOOL)airPlaySuggestions
+                                  fromPushNotification:(BOOL)fromPushNotification
+                                              animated:(BOOL)animated
+                                            completion:(nullable void (^)(void))completion;
 
 @end
 

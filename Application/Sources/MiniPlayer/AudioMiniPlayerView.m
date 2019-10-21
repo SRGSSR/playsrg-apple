@@ -382,7 +382,7 @@
         return;
     }
     
-    [self.nearestViewController play_presentMediaPlayerWithMedia:self.media position:nil fromPushNotification:NO animated:YES completion:nil];
+    [self.nearestViewController play_presentMediaPlayerWithMedia:self.media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
 }
 
 #pragma mark Notifications

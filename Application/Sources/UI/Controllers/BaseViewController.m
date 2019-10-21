@@ -156,7 +156,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
 {
     if ([viewControllerToCommit isKindOfClass:MediaPreviewViewController.class]) {
         MediaPreviewViewController *mediaPreviewViewController = (MediaPreviewViewController *)viewControllerToCommit;
-        [self play_presentMediaPlayerFromLetterboxController:mediaPreviewViewController.letterboxController fromPushNotification:NO animated:YES completion:nil];
+        [self play_presentMediaPlayerFromLetterboxController:mediaPreviewViewController.letterboxController withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:nil];
     }
     else if ([viewControllerToCommit isKindOfClass:ModuleViewController.class]
                 || [viewControllerToCommit isKindOfClass:ShowViewController.class]
@@ -275,9 +275,22 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
         }
         
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a media from the start from the long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:nil fromPushNotification:NO];
-            mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-            [self presentViewController:mediaPlayerViewController animated:YES completion:nil];
+            void (^openPlayer)(void) = ^{
+                MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:nil fromPushNotification:NO];
+                mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+                [self presentViewController:mediaPlayerViewController animated:YES completion:nil];
+            };
+            
+            if (@available(iOS 13, *)) {
+                [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
+                    if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
+                        openPlayer();
+                    }
+                }];
+            }
+            else {
+                openPlayer();
+            }
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Label of the button to close the media long-press menu") style:UIAlertActionStyleCancel handler:nil]];
     }

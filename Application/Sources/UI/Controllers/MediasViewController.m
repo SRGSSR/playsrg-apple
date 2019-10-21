@@ -51,7 +51,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SRGMedia *media = self.items[indexPath.row];
-    [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
+    [self play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
 }
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol

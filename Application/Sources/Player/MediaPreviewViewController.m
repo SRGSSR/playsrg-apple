@@ -274,7 +274,7 @@
         self.shouldRestoreServicePlayback = NO;
         
         UIView *sourceView = self.play_previewingContext.sourceView;
-        [sourceView.nearestViewController play_presentMediaPlayerFromLetterboxController:self.letterboxController fromPushNotification:NO animated:YES completion:nil];
+        [sourceView.nearestViewController play_presentMediaPlayerFromLetterboxController:self.letterboxController withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:nil];
     }];
     [previewActionItems addObject:openAction];
     

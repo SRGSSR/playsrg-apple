@@ -411,7 +411,7 @@
 - (IBAction)openLiveRadio:(id)sender
 {
     if (self.media) {
-        [self.nearestViewController play_presentMediaPlayerWithMedia:self.media position:nil fromPushNotification:NO animated:YES completion:nil];
+        [self.nearestViewController play_presentMediaPlayerWithMedia:self.media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }
 

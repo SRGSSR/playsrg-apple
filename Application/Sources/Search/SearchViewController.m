@@ -594,7 +594,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
         SRGMedia *media = self.items[indexPath.row];
-        [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
+        [self play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
         
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.value = media.URN;

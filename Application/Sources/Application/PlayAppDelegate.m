@@ -775,12 +775,12 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 - (void)playURN:(NSString *)mediaURN media:(SRGMedia *)media atPosition:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification completion:(void (^)(void))completion
 {
     if (media) {
-        [self.sideMenuController play_presentMediaPlayerWithMedia:media position:position fromPushNotification:fromPushNotification animated:YES completion:completion];
+        [self.sideMenuController play_presentMediaPlayerWithMedia:media position:position airPlaySuggestions:YES fromPushNotification:fromPushNotification animated:YES completion:completion];
     }
     else {
         [[SRGDataProvider.currentDataProvider mediaWithURN:mediaURN completionBlock:^(SRGMedia * _Nullable media, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (media) {
-                [self.sideMenuController play_presentMediaPlayerWithMedia:media position:position fromPushNotification:fromPushNotification animated:YES completion:completion];
+                [self.sideMenuController play_presentMediaPlayerWithMedia:media position:position airPlaySuggestions:YES fromPushNotification:fromPushNotification animated:YES completion:completion];
             }
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain

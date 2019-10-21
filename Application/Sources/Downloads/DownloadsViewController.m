@@ -241,7 +241,7 @@
     
     Download *download = self.downloads[indexPath.row];
     if (download.media) {
-        [self play_presentMediaPlayerWithMedia:download.media position:nil fromPushNotification:NO animated:YES completion:nil];
+        [self play_presentMediaPlayerWithMedia:download.media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
         
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.value = download.URN;

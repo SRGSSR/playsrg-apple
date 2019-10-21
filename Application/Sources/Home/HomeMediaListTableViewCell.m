@@ -267,7 +267,7 @@ static const CGFloat HomeStandardMargin = 10.f;
             ApplicationSettingSetSelectedLiveStreamURNForChannelUid(self.homeSectionInfo.identifier, media.URN);
         }
         
-        [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
+        [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }
 
