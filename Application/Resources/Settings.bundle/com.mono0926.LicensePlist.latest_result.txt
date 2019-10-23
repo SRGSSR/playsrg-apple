@@ -258,36 +258,6 @@ body:
                    …
 version: 5.3.7
 
-name: HockeySDK, nameSpecified: 
-body: ## Licenses
-
-The Hoc…
-version: 5.1.4
-
-name: HockeySDK, nameSpecified: 
-body: ## Licenses
-
-The Hoc…
-version: 5.1.4
-
-name: HockeySDK, nameSpecified: 
-body: ## Licenses
-
-The Hoc…
-version: 5.1.4
-
-name: HockeySDK, nameSpecified: 
-body: ## Licenses
-
-The Hoc…
-version: 5.1.4
-
-name: HockeySDK, nameSpecified: 
-body: ## Licenses
-
-The Hoc…
-version: 5.1.4
-
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
 version: 2.10
@@ -457,6 +427,8 @@ version: 9.4.0
 name: UrbanAirship-iOS-SDK, nameSpecified: 
 body: Copyright 2017 Urban…
 version: 9.4.0
+
+name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 2.5.0
 
 name: CoconutKit, nameSpecified: , owner: defagos, version: 3.3.8
 

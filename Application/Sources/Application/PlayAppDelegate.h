@@ -8,13 +8,12 @@
 
 #import "AnalyticsConstants.h"
 
-#import <HockeySDK/HockeySDK.h>
 #import <StoreKit/StoreKit.h>
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PlayAppDelegate : UIResponder <BITHockeyManagerDelegate, BITUpdateManagerDelegate, SKStoreProductViewControllerDelegate, UIApplicationDelegate>
+@interface PlayAppDelegate : UIResponder <SKStoreProductViewControllerDelegate, UIApplicationDelegate>
 
 @property (nonatomic) UIWindow *window;
 

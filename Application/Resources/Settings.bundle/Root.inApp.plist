@@ -220,14 +220,6 @@
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
-			<string>Install previous version</string>
-			<key>Key</key>
-			<string>Button_InstallPreviousVersion</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
-			<key>Title</key>
 			<string>Subscribe to all shows</string>
 			<key>Key</key>
 			<string>Button_SubscribeToAllShows</string>
