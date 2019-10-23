@@ -26,3 +26,6 @@ xcuserdata
 /Pods
 
 /Scripts/generate-icons-caches
+
+/vendor
+/.bundle

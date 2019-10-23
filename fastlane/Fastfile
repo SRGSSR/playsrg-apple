@@ -43,16 +43,15 @@ platform :ios do
     end
   end
 
-  desc "For each BUs, build a new nightly on HockeyApp, with a new build number, greater than the old nightly build number"
+  desc "For each BUs, build a new nightly on App Center, with a new build number, greater than the old nightly build number"
   lane :nightlies do
 
     schemes = ["Play SWI", "Play RTS", "Play SRF", "Play RSI", "Play RTR"]
-    hockeyapp_nightly_identifiers = [ENV['PLAY_SWI_NIGHTLY_HOCKEY_IDENTIFIER'], ENV['PLAY_RTS_NIGHTLY_HOCKEY_IDENTIFIER'], ENV['PLAY_SRF_NIGHTLY_HOCKEY_IDENTIFIER'], ENV['PLAY_RSI_NIGHTLY_HOCKEY_IDENTIFIER'], ENV['PLAY_RTR_NIGHTLY_HOCKEY_IDENTIFIER']]
-    hockeyapp_nightly_tokens = [ENV['PLAY_SWI_NIGHTLY_HOCKEY_TOKEN'], ENV['PLAY_RTS_NIGHTLY_HOCKEY_TOKEN'], ENV['PLAY_SRF_NIGHTLY_HOCKEY_TOKEN'], ENV['PLAY_RSI_NIGHTLY_HOCKEY_TOKEN'], ENV['PLAY_RTR_NIGHTLY_HOCKEY_TOKEN']]
+    appcenter_nightly_names = [ENV['PLAY_SWI_NIGHTLY_APPCENTER_APPNAME'], ENV['PLAY_RTS_NIGHTLY_APPCENTER_APPNAME'], ENV['PLAY_SRF_NIGHTLY_APPCENTER_APPNAME'], ENV['PLAY_RSI_NIGHTLY_APPCENTER_APPNAME'], ENV['PLAY_RTR_NIGHTLY_APPCENTER_APPNAME']]
 
-    hockeyAppBuildNumber = getHockeyAppNightlyBuildNumber
+    appCenterBuildNumber = getAppCenterBuildNumber
     increment_build_number(
-      build_number: hockeyAppBuildNumber + 1
+      build_number: appCenterBuildNumber + 1
     )
 
     changelog = default_changelog_for_nightlies
@@ -63,7 +62,7 @@ platform :ios do
     marketing_version_suffix = "-nightly"
     if (branch_name.include? 'feature/')
     	bundle_display_name_suffix = " 🌿"
-    	marketing_version_suffix = marketing_version_suffix + '-' + branch_name.sub('feature/', '').strip
+    	marketing_version_suffix = marketing_version_suffix + '+' + branch_name.sub('feature/', '').strip
     end
 
     schemes.each_index do |index|
@@ -75,9 +74,9 @@ platform :ios do
         marketing_version_suffix: marketing_version_suffix
       )
 
-      hockey_lane(
-        api_token: hockeyapp_nightly_tokens[index],
-        public_identifier: hockeyapp_nightly_identifiers[index],
+      appcenter_lane(
+        appname: appcenter_nightly_names[index],
+        destinations: ENV['PLAY_NIGHTLY_APPCENTER_DESTINATIONS'],
         notes: changelog
       )
 
@@ -85,18 +84,15 @@ platform :ios do
 
     end
 
-    merakiPushApps
-
     saveLastNightliesSuccessGitCommitHash
 
   end
 
-  desc "For each BUs, build a new beta on HockeyApp with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number"
+  desc "For each BUs, build a new beta on App Center with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number"
   lane :betas do
 
     schemes = ["Play SWI", "Play RTS", "Play SRF", "Play RSI", "Play RTR"]
-    hockeyapp_beta_identifiers = [ENV['PLAY_SWI_BETA_HOCKEY_IDENTIFIER'], ENV['PLAY_RTS_BETA_HOCKEY_IDENTIFIER'], ENV['PLAY_SRF_BETA_HOCKEY_IDENTIFIER'], ENV['PLAY_RSI_BETA_HOCKEY_IDENTIFIER'], ENV['PLAY_RTR_BETA_HOCKEY_IDENTIFIER']]
-    hockeyapp_beta_tokens = [ENV['PLAY_SWI_BETA_HOCKEY_TOKEN'], ENV['PLAY_RTS_BETA_HOCKEY_TOKEN'], ENV['PLAY_SRF_BETA_HOCKEY_TOKEN'], ENV['PLAY_RSI_BETA_HOCKEY_TOKEN'], ENV['PLAY_RTR_BETA_HOCKEY_TOKEN']]
+    appcenter_beta_names = [ENV['PLAY_SWI_BETA_APPCENTER_APPNAME'], ENV['PLAY_RTS_BETA_APPCENTER_APPNAME'], ENV['PLAY_SRF_BETA_APPCENTER_APPNAME'], ENV['PLAY_RSI_BETA_APPCENTER_APPNAME'], ENV['PLAY_RTR_BETA_APPCENTER_APPNAME']]
 
     build_number = get_build_number
     marketing_version = getMarketingVersion
@@ -113,17 +109,16 @@ platform :ios do
         marketing_version_suffix: "-beta"
       )
 
-      hockey_lane(
-        api_token: hockeyapp_beta_tokens[index],
-        public_identifier: hockeyapp_beta_identifiers[index],
-        notes: whatsNewForBeta
+      appcenter_lane(
+        appname: appcenter_beta_names[index],
+        destinations: ENV['PLAY_BETA_APPCENTER_DESTINATIONS'],
+        notes: whatsNewForBeta,
+        notify_testers: true
       )
 
       clean_build_artifacts
 
     end
-
-    merakiPushApps
 
     #Tag the new beta, bump build number and push to the repo only if we're not in a release process
     
@@ -144,56 +139,50 @@ platform :ios do
 
   end
 
-  desc "SWI: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp."
+  desc "SWI: Upload a new TestFlight build with the current build number and send the dSYM on App Center."
   lane :swiTestFlight do
     testflight_lane(
       scheme: "Play SWI",
-      hockey_api_token: ENV['PLAY_SWI_HOCKEY_TOKEN'],
-      hockey_public_identifier: ENV['PLAY_SWI_HOCKEY_IDENTIFIER']
+      appcenter_appstore_name: ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME']
     )
   end
 
-  desc "SRF: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp."
+  desc "SRF: Upload a new TestFlight build with the current build number and send the dSYM on App Center."
   lane :srfTestFlight do
     testflight_lane(
       scheme: "Play SRF",
-      hockey_api_token: ENV['PLAY_SRF_HOCKEY_TOKEN'],
-      hockey_public_identifier: ENV['PLAY_SRF_HOCKEY_IDENTIFIER']
+      appcenter_appstore_name: ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME']
     )
   end
 
-  desc "RTS: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp."
+  desc "RTS: Upload a new TestFlight build with the current build number and send the dSYM on App Center."
   lane :rtsTestFlight do
     testflight_lane(
       scheme: "Play RTS",
-      hockey_api_token: ENV['PLAY_RTS_HOCKEY_TOKEN'],
-      hockey_public_identifier: ENV['PLAY_RTS_HOCKEY_IDENTIFIER']
+      appcenter_appstore_name: ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME']
     )
   end
 
-  desc "RSI: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp."
+  desc "RSI: Upload a new TestFlight build with the current build number and send the dSYM on App Center."
   lane :rsiTestFlight do
     testflight_lane(
       scheme: "Play RSI",
-      hockey_api_token: ENV['PLAY_RSI_HOCKEY_TOKEN'],
-      hockey_public_identifier: ENV['PLAY_RSI_HOCKEY_IDENTIFIER']
+      appcenter_appstore_name: ENV['PLAY_RSI_APPSTORE_APPCENTER_APPNAME']
     )
   end
 
-  desc "RTR: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp."
+  desc "RTR: Upload a new TestFlight build with the current build number and send the dSYM on App Center."
   lane :rtrTestFlight do
     testflight_lane(
       scheme: "Play RTR",
-      hockey_api_token: ENV['PLAY_RTR_HOCKEY_TOKEN'],
-      hockey_public_identifier: ENV['PLAY_RTR_HOCKEY_IDENTIFIER']
+      appcenter_appstore_name: ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME']
     )
   end
 
-  desc "Build, upload to TestFlight, send dSYM to HockeyApp"
+  desc "Build, upload to TestFlight, send dSYM to App Center"
   private_lane :testflight_lane do |options|
     scheme = options[:scheme]
-    hockey_public_identifier = options[:hockey_public_identifier]
-    hockey_api_token = options[:hockey_api_token]
+    appcenter_appstore_name = options[:appcenter_appstore_name]
 
     build_lane(
       configuration: "AppStore",
@@ -205,11 +194,11 @@ platform :ios do
       skip_waiting_for_build_processing: true
     )
 
-    hockey_lane(
-      api_token: hockey_api_token,
-      public_identifier: hockey_public_identifier,
-      upload_dsym_only: true,
-      notes: 'Build uploaded on iTunes Connect (via fastlane).'
+    appcenter_lane(
+      appname: appcenter_appstore_name,
+      destinations: ENV['PLAY_APPSTORE_APPCENTER_DESTINATIONS'],
+      notes: 'Build uploaded on AppStore Connect (via fastlane).',
+      upload_dsym_only: true
     )
 
     clean_build_artifacts
@@ -252,34 +241,23 @@ platform :ios do
     )
   end
 
-  desc "Upload a build on HockeyApp"
-  private_lane :hockey_lane do |options|
-    public_identifier = options[:public_identifier]
-    api_token = options[:api_token]
-    upload_dsym_only = options[:upload_dsym_only] ? options[:upload_dsym_only] : false
+  desc "Upload a build on App Center"
+  private_lane :appcenter_lane do |options|
+    appname = options[:appname]
+    destinations = options[:destinations]
     notes = options[:notes]
+    notify_testers = options[:notify_testers] ? options[:notify_testers] : false
+    upload_dsym_only = options[:upload_dsym_only] ? options[:upload_dsym_only] : false
 
-    repository_url = sh "git config --get remote.origin.url"
-    if repository_url.include? "git@"
-      repository_url.slice! "git@"
-      repository_url = repository_url.tr(":", "/")
-      repository_url = "https://" + repository_url
-    end
-
-    build_server_url = ENV['BUILD_URL']
-    if build_server_url == nil
-        build_server_url = `hostname`.strip
-    end
-
-    hockey(
-      api_token: api_token,
-      public_identifier: public_identifier,
-      notify: '0',
-      notes: notes,
-      commit_sha: last_git_commit[:commit_hash],
-      repository_url: repository_url,
-      build_server_url: build_server_url,
-      upload_dsym_only: upload_dsym_only
+    appcenter_upload(
+      api_token: ENV['PLAY_APPCENTER_TOKEN'],
+      owner_type: "organization",
+      owner_name: ENV['PLAY_APPCENTER_OWNER'],
+      app_name: appname,
+      release_notes: notes,
+      destination_type: "group",
+      destinations: destinations,
+      notify_testers: notify_testers
     )
   end
 
@@ -301,11 +279,11 @@ platform :ios do
     changelog
   end
 
-  desc "Return current nightly build number on Hockey App"
-  private_lane :getHockeyAppNightlyBuildNumber do
-    hockeyAppBuildNumber = (sh "scripts/hockeyapp-build-number.sh -t #{ENV['HOCKEY_API_TOKEN']} #{ENV['PLAY_SWI_NIGHTLY_HOCKEY_IDENTIFIER']} #{ENV['PLAY_RTS_NIGHTLY_HOCKEY_IDENTIFIER']} #{ENV['PLAY_SRF_NIGHTLY_HOCKEY_IDENTIFIER']} #{ENV['PLAY_RSI_NIGHTLY_HOCKEY_IDENTIFIER']} #{ENV['PLAY_RTR_NIGHTLY_HOCKEY_IDENTIFIER']}")
-    hockeyAppBuildNumber = Integer(hockeyAppBuildNumber.lines.map(&:chomp).last)
-    hockeyAppBuildNumber
+  desc "Return current build number on App Center"
+  private_lane :getAppCenterBuildNumber do
+    appCenterBuildNumber = (sh "scripts/appcenter-build-number.sh -t #{ENV['PLAY_APPCENTER_TOKEN']} #{ENV['PLAY_SWI_NIGHTLY_APPCENTER_SECRET']} #{ENV['PLAY_RTS_NIGHTLY_APPCENTER_SECRET']} #{ENV['PLAY_SRF_NIGHTLY_APPCENTER_SECRET']} #{ENV['PLAY_RSI_NIGHTLY_APPCENTER_SECRET']} #{ENV['PLAY_RTR_NIGHTLY_APPCENTER_SECRET']}")
+    appCenterBuildNumber = Integer(appCenterBuildNumber.lines.map(&:chomp).last)
+    appCenterBuildNumber
   end
 
   desc "Save the git commit hash in a local text file for nightlies"
@@ -355,14 +333,6 @@ platform :ios do
     lane_context.delete(SharedValues::SIGH_UUID)
     lane_context.delete(SharedValues::SIGH_NAME)
     lane_context.delete(SharedValues::SIGH_PROFILE_TYPE)
-  end
-
-  desc "Try to push new apps on registered devices with Meraki"
-  private_lane :merakiPushApps do
-    file = File.open("../Configuration/Scripts/merakiPushApps.sh", "r")
-    merakiPushApps = file.read
-    file.close
-    sh merakiPushApps
   end
 
   # desc "A dev lane to test ruby scripts"
