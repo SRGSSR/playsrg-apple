@@ -659,11 +659,10 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 - (void)setupAppCenter
 {
     NSString *appCenterSecret = [NSBundle.mainBundle objectForInfoDictionaryKey:@"AppCenterSecret"];
-    if (! appCenterSecret) {
+    if (appCenterSecret.length == 0) {
         return;
     }
     
-    // TODO: Distribution SDK for nightly and beta builds only?
     [MSCrashes setUserConfirmationHandler:^BOOL(NSArray<MSErrorReport *> * _Nonnull errorReports) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"The application unexpectedly quit", nil)
                                                                                  message:NSLocalizedString(@"Do you want to send an anonymous crash report so we can fix the issue?", nil)
