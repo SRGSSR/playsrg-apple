@@ -7178,6 +7178,7 @@
 			baseConfigurationReference = 6F1EBE1B222EBB7D003E0722 /* Play SRF.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7385,6 +7386,7 @@
 			baseConfigurationReference = 6F1EBE18222EBB7D003E0722 /* Play SRF.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
