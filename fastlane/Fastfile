@@ -196,7 +196,6 @@ platform :ios do
 
     appcenter_lane(
       appname: appcenter_appstore_name,
-      destinations: ENV['PLAY_APPSTORE_APPCENTER_DESTINATIONS'],
       notes: 'Build uploaded on AppStore Connect (via fastlane).',
       upload_dsym_only: true
     )
@@ -257,7 +256,8 @@ platform :ios do
       release_notes: notes,
       destination_type: "group",
       destinations: destinations,
-      notify_testers: notify_testers
+      notify_testers: notify_testers,
+      upload_dsym_only: upload_dsym_only
     )
   end
 
