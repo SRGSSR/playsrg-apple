@@ -22,8 +22,8 @@
 #import "UIViewController+PlaySRG.h"
 #import "WebViewController.h"
 
+#import <AppCenterDistribute/AppCenterDistribute.h>
 #import <FLEX/FLEX.h>
-#import <HockeySDK/HockeySDK.h>
 #import <InAppSettingsKit/IASKSettingsReader.h>
 #import <libextobjc/libextobjc.h>
 #import <SafariServices/SafariServices.h>
@@ -53,7 +53,6 @@ static NSString * const SettingsAdvancedFeaturesGroup = @"Group_AdvancedFeatures
 static NSString * const SettingsServerSettingsButton = @"Button_ServerSettings";
 static NSString * const SettingsUserLocationSettingsButton = @"Button_UserLocationSettings";
 static NSString * const SettingsCheckForUpdatesButton = @"Button_CheckForUpdates";
-static NSString * const SettingsInstallPreviousVersionButton = @"Button_InstallPreviousVersion";
 static NSString * const SettingsSubscribeToAllShowsButton = @"Button_SubscribeToAllShows";
 static NSString * const SettingsSystemSettingsButton = @"Button_SystemSettings";
 
@@ -77,6 +76,16 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 @end
 
 // **
+
+/**
+ *  Private App Center implementation details.
+ */
+@interface MSDistribute (Private)
+
++ (id)sharedInstance;
+- (void)startUpdate;
+
+@end
 
 @interface SettingsViewController () <SFSafariViewControllerDelegate>
 
@@ -167,22 +176,18 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsCheckForUpdatesButton]) {
-        [[BITHockeyManager sharedHockeyManager].updateManager showUpdateView];
-    }
-    else if ([specifier.key isEqualToString:SettingsInstallPreviousVersionButton]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Previous versions", @"Message title displayed when the user wants to install a previous version")
-                                                                                 message:NSLocalizedString(@"You may have to uninstall the application if the restored version crashes at launch.\n\nPrevious versions can be found under the \"History\" tab on the next screen.", @"Message description displayed when the user wants to install a previous version")
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"I understand", @"Title of the button to install a previous version") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSString *hockeyIdentifier = [NSBundle.mainBundle objectForInfoDictionaryKey:@"HockeyIdentifier"];
-            NSString *stringURL = [NSString stringWithFormat:@"https://rink.hockeyapp.net/apps/%@", hockeyIdentifier];
-            SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:stringURL]];
-            safariViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-            safariViewController.modalPresentationCapturesStatusBarAppearance = YES;
-            safariViewController.delegate = self;
-            [self presentViewController:safariViewController animated:YES completion:nil];
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+        // Clear internal App Center timestamp to force a new update request
+        [NSUserDefaults.standardUserDefaults removeObjectForKey:@"MSPostponedTimestamp"];
+        [[MSDistribute sharedInstance] startUpdate];
+        
+        // Display version history
+        NSString *appCenterURLString = [NSBundle.mainBundle.infoDictionary objectForKey:@"AppCenterURL"];
+        NSURL *appCenterURL = (appCenterURLString.length > 0) ? [NSURL URLWithString:appCenterURLString] : nil;
+        if (appCenterURL) {
+            SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:appCenterURL];
+            UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
+            [rootViewController presentViewController:safariViewController animated:YES completion:nil];
+        }
     }
     else if ([specifier.key isEqualToString:SettingsSubscribeToAllShowsButton]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Automatic subscriptions", @"Message title displayed when subscribing to all TV and radio shows")
@@ -335,7 +340,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:PlaySRGSettingOriginalImagesOnlyEnabled];
     [hiddenKeys addObject:PlaySRGSettingAlternateRadioHomepageDesignEnabled];
     [hiddenKeys addObject:SettingsCheckForUpdatesButton];
-    [hiddenKeys addObject:SettingsInstallPreviousVersionButton];
     [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
     [hiddenKeys addObject:SettingsSystemSettingsButton];
     [hiddenKeys addObject:SettingsResetGroup];
@@ -346,9 +350,8 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:SettingsDeveloperGroup];
     [hiddenKeys addObject:SettingsFLEXButton];
 #else
-    if (! [BITHockeyManager sharedHockeyManager].updateManager) {
+    if (! MSDistribute.isEnabled) {
         [hiddenKeys addObject:SettingsCheckForUpdatesButton];
-        [hiddenKeys addObject:SettingsInstallPreviousVersionButton];
     }
     
     if (! PushService.sharedService.enabled) {

@@ -1336,6 +1336,26 @@
 		6FDF08FC218B126700B2AF2C /* DeprecatedFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */; };
 		6FDF08FD218B126700B2AF2C /* DeprecatedFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */; };
 		6FDF08FE218B126700B2AF2C /* DeprecatedFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */; };
+		6FE01B062360358D008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
+		6FE01B072360358D008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
+		6FE01B082360358D008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
+		6FE01B09236035AB008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
+		6FE01B0A236035AB008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
+		6FE01B0B236035AB008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
+		6FE01B0C23603DB7008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
+		6FE01B0D23603DB7008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
+		6FE01B0E23603DB7008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
+		6FE01B0F23603DCE008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
+		6FE01B1023603DCE008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
+		6FE01B1123603DCE008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
+		6FE01B1223603DDF008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
+		6FE01B1323603DDF008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
+		6FE01B1423603DDF008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
+		6FE01B1623603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
+		6FE01B1723603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
+		6FE01B1823603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
+		6FE01B1923603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
+		6FE01B1A23603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
 		6FE1B4971DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		6FE1B4981DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		6FE1B4991DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
@@ -2203,6 +2223,10 @@
 		6FDF08D3218B126700B2AF2C /* Onboarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Onboarding.h; sourceTree = "<group>"; };
 		6FDF08D4218B126700B2AF2C /* UpdateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfo.h; sourceTree = "<group>"; };
 		6FDF08D5218B126700B2AF2C /* OnboardingPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingPage.h; sourceTree = "<group>"; };
+		6FE01B032360358C008EBB27 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Carthage/Build/iOS/AppCenter.framework; sourceTree = "<group>"; };
+		6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Carthage/Build/iOS/AppCenterCrashes.framework; sourceTree = "<group>"; };
+		6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterDistribute.framework; path = Carthage/Build/iOS/AppCenterDistribute.framework; sourceTree = "<group>"; };
+		6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AppCenterDistributeResources.bundle; path = Carthage/Build/iOS/AppCenterDistribute.framework/AppCenterDistributeResources.bundle; sourceTree = "<group>"; };
 		6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsConstants.h; sourceTree = "<group>"; };
 		6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsConstants.m; sourceTree = "<group>"; };
 		6FE1B9171FAC34D600A58F3B /* ContentInsets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentInsets.h; sourceTree = "<group>"; };
@@ -2274,6 +2298,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE01B062360358D008EBB27 /* AppCenter.framework in Frameworks */,
+				6FE01B072360358D008EBB27 /* AppCenterCrashes.framework in Frameworks */,
+				6FE01B082360358D008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F5392DB2248FF4A0002BF87 /* Masonry.framework in Frameworks */,
 				6F5392BF2248DB6F0002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392A92248CF470002BF87 /* UICKeyChainStore.framework in Frameworks */,
@@ -2309,6 +2336,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE01B09236035AB008EBB27 /* AppCenter.framework in Frameworks */,
+				6FE01B0A236035AB008EBB27 /* AppCenterCrashes.framework in Frameworks */,
+				6FE01B0B236035AB008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F5392DC2248FF620002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C02248DB850002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AA2248CF5B0002BF87 /* UICKeyChainStore.framework in Frameworks */,
@@ -2344,6 +2374,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE01B0C23603DB7008EBB27 /* AppCenter.framework in Frameworks */,
+				6FE01B0D23603DB7008EBB27 /* AppCenterCrashes.framework in Frameworks */,
+				6FE01B0E23603DB7008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F5392DD2248FF790002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C12248DB960002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AB2248CF740002BF87 /* UICKeyChainStore.framework in Frameworks */,
@@ -2379,6 +2412,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE01B0F23603DCE008EBB27 /* AppCenter.framework in Frameworks */,
+				6FE01B1023603DCE008EBB27 /* AppCenterCrashes.framework in Frameworks */,
+				6FE01B1123603DCE008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F5392DE2248FF970002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C22248DBA70002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AC2248CF8C0002BF87 /* UICKeyChainStore.framework in Frameworks */,
@@ -2414,6 +2450,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE01B1223603DDF008EBB27 /* AppCenter.framework in Frameworks */,
+				6FE01B1323603DDF008EBB27 /* AppCenterCrashes.framework in Frameworks */,
+				6FE01B1423603DDF008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F5392DF2248FFAB0002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C32248DBB80002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AD2248CF9D0002BF87 /* UICKeyChainStore.framework in Frameworks */,
@@ -3424,6 +3463,10 @@
 		E65311E31D3E6FD100B4B8BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FE01B032360358C008EBB27 /* AppCenter.framework */,
+				6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */,
+				6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */,
+				6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */,
 				6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */,
 				E60178511D635E130000362E /* ComScore.framework */,
 				08B6F7E5210CF8660097EF8B /* CoreData.framework */,
@@ -4014,6 +4057,7 @@
 				6F0F88951ECF0CE50060A893 /* override_artwork_tv_srf1.pdf in Resources */,
 				0837CEC51D3FD6E600A1E089 /* SRGSSRType_Bd.ttf in Resources */,
 				6F12DB5521A3EFBF0054879D /* HistoryViewController.storyboard in Resources */,
+				6FE01B1623603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6F0C99A12121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				0837CEAA1D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
 				6F0F88A61ECF0CE50060A893 /* override_default_srf4.pdf in Resources */,
@@ -4112,6 +4156,7 @@
 				6F0F888E1ECF0CDD0060A893 /* override_default_la1ere.pdf in Resources */,
 				6F475FF11EB37BC6003021EA /* TabStripCell.xib in Resources */,
 				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
+				6FE01B1723603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				08280F102258EA4000AC978D /* WatchLaterViewController.storyboard in Resources */,
 				6F12E4D822D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				6FF3B6952137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
@@ -4286,6 +4331,7 @@
 				6F0F88361ECEE7800060A893 /* override_default_la1.pdf in Resources */,
 				0804917822832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
 				08DADF8E20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
+				6FE01B1823603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				E6AE51351D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
 				E6DB5F231D66E0950057094B /* ShowsViewController.storyboard in Resources */,
 				6FF7BBB422A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
@@ -4426,6 +4472,7 @@
 				6F0F88741ECF0CD70060A893 /* override_artwork_rtr_srf_info.pdf in Resources */,
 				6F0F88751ECF0CD70060A893 /* override_artwork_rtr_srf2.pdf in Resources */,
 				E694A9FD1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
+				6FE01B1923603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4518,6 +4565,7 @@
 				6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */,
 				6F0C99B42121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				6FA9ECCA20C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
+				6FE01B1A23603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6F3B33B11EEEB20400D60789 /* MenuHeaderSectionView.xib in Resources */,
 				6F0C999B2121FBD800073AB6 /* SRGAppearance.bundle in Resources */,
 				6FF3B6982137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
@@ -4977,7 +5025,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play SRF/Pods-PlaySRG-Play SRF-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages/SwiftMessages.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UrbanAirship-iOS-SDK/AirshipResources.bundle",
@@ -4986,7 +5033,6 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftMessages.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AirshipResources.bundle",
@@ -5023,7 +5069,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages/SwiftMessages.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UrbanAirship-iOS-SDK/AirshipResources.bundle",
@@ -5032,7 +5077,6 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftMessages.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AirshipResources.bundle",
@@ -5411,7 +5455,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RSI/Pods-PlaySRG-Play RSI-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages/SwiftMessages.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UrbanAirship-iOS-SDK/AirshipResources.bundle",
@@ -5420,7 +5463,6 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftMessages.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AirshipResources.bundle",
@@ -5439,7 +5481,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play SWI/Pods-PlaySRG-Play SWI-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages/SwiftMessages.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UrbanAirship-iOS-SDK/AirshipResources.bundle",
@@ -5448,7 +5489,6 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftMessages.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AirshipResources.bundle",
@@ -5557,7 +5597,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages/SwiftMessages.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UrbanAirship-iOS-SDK/AirshipResources.bundle",
@@ -5566,7 +5605,6 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftMessages.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AirshipResources.bundle",
@@ -7140,6 +7178,7 @@
 			baseConfigurationReference = 6F1EBE1B222EBB7D003E0722 /* Play SRF.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7169,6 +7208,7 @@
 			baseConfigurationReference = 6F1EBE0D222EBB7C003E0722 /* Play RTS.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7198,6 +7238,7 @@
 			baseConfigurationReference = 6F1EBE13222EBB7C003E0722 /* Play RSI.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7227,6 +7268,7 @@
 			baseConfigurationReference = 6F1EBE15222EBB7D003E0722 /* Play RTR.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7256,6 +7298,7 @@
 			baseConfigurationReference = 6F1EBE12222EBB7C003E0722 /* Play SWI.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7347,6 +7390,7 @@
 			baseConfigurationReference = 6F1EBE18222EBB7D003E0722 /* Play SRF.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7378,6 +7422,7 @@
 			baseConfigurationReference = 6F1EBE11222EBB7C003E0722 /* Play RTS.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7409,6 +7454,7 @@
 			baseConfigurationReference = 6F1EBE10222EBB7C003E0722 /* Play RSI.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7440,6 +7486,7 @@
 			baseConfigurationReference = 6F1EBE1D222EBB7E003E0722 /* Play RTR.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7471,6 +7518,7 @@
 			baseConfigurationReference = 6F1EBE16222EBB7D003E0722 /* Play SWI.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

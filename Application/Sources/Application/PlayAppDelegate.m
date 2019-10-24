@@ -36,6 +36,9 @@
 #import "WatchLater.h"
 #import "WebViewController.h"
 
+#import <AppCenter/AppCenter.h>
+#import <AppCenterCrashes/AppCenterCrashes.h>
+#import <AppCenterDistribute/AppCenterDistribute.h>
 #import <AVFoundation/AVFoundation.h>
 #import <Firebase/Firebase.h>
 #import <InAppSettingsKit/IASKSettingsReader.h>
@@ -171,7 +174,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     
     // Various setups
 #ifndef DEBUG
-    [self setupHockey];
+    [self setupAppCenter];
 #endif
     
     // Clean downloaded folder
@@ -653,15 +656,31 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 
 #pragma mark Helpers
 
-- (void)setupHockey
+- (void)setupAppCenter
 {
-    NSString *hockeyIdentifier = [NSBundle.mainBundle objectForInfoDictionaryKey:@"HockeyIdentifier"];
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:hockeyIdentifier delegate:self];
-    [[BITHockeyManager sharedHockeyManager] startManager];
+    NSString *appCenterSecret = [NSBundle.mainBundle objectForInfoDictionaryKey:@"AppCenterSecret"];
+    if (appCenterSecret.length == 0) {
+        return;
+    }
     
-#if defined(BETA) || defined(NIGHTLY)
-    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
-#endif
+    [MSCrashes setUserConfirmationHandler:^BOOL(NSArray<MSErrorReport *> * _Nonnull errorReports) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"The application unexpectedly quit", nil)
+                                                                                 message:NSLocalizedString(@"Do you want to send an anonymous crash report so we can fix the issue?", nil)
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Don't send", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [MSCrashes notifyWithUserConfirmation:MSUserConfirmationDontSend];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [MSCrashes notifyWithUserConfirmation:MSUserConfirmationSend];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Always send", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [MSCrashes notifyWithUserConfirmation:MSUserConfirmationAlways];
+        }]];
+        [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        return YES;
+    }];
+    [MSAppCenter start:appCenterSecret withServices:@[ MSCrashes.class, MSDistribute.class ]];
 }
 
 - (void)updateApplicationBadge
@@ -970,13 +989,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
             [NSUserDefaults.standardUserDefaults synchronize];
         }];
     }
-}
-
-#pragma mark BITUpdateManagerDelegate protocol
-
-- (UIViewController *)viewControllerForHockeyManager:(BITHockeyManager *)hockeyManager componentManager:(BITHockeyBaseManager *)componentManager
-{
-    return self.sideMenuController;
 }
 
 #pragma mark SKStoreProductViewControllerDelegate protocol

@@ -20,37 +20,37 @@ or alternatively using `brew cask install fastlane`
 ```
 fastlane ios nightlies
 ```
-For each BUs, build a new nightly on HockeyApp, with a new build number, greater than the old nightly build number
+For each BUs, build a new nightly on App Center, with a new build number, greater than the old nightly build number
 ### ios betas
 ```
 fastlane ios betas
 ```
-For each BUs, build a new beta on HockeyApp with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
+For each BUs, build a new beta on App Center with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
 ### ios swiTestFlight
 ```
 fastlane ios swiTestFlight
 ```
-SWI: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp.
+SWI: Upload a new TestFlight build with the current build number and send the dSYM on App Center.
 ### ios srfTestFlight
 ```
 fastlane ios srfTestFlight
 ```
-SRF: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp.
+SRF: Upload a new TestFlight build with the current build number and send the dSYM on App Center.
 ### ios rtsTestFlight
 ```
 fastlane ios rtsTestFlight
 ```
-RTS: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp.
+RTS: Upload a new TestFlight build with the current build number and send the dSYM on App Center.
 ### ios rsiTestFlight
 ```
 fastlane ios rsiTestFlight
 ```
-RSI: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp.
+RSI: Upload a new TestFlight build with the current build number and send the dSYM on App Center.
 ### ios rtrTestFlight
 ```
 fastlane ios rtrTestFlight
 ```
-RTR: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp.
+RTR: Upload a new TestFlight build with the current build number and send the dSYM on App Center.
 
 ----
 

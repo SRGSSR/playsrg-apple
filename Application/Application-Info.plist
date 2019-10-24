@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AppCenterSecret</key>
+	<string>${APPCENTER_SECRET}</string>
+	<key>AppCenterURL</key>
+	<string>${APPCENTER_URL}</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>The application should not use your location. Please don’t allow.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -40,13 +44,12 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>$(URL_SCHEME)</string>
+				<string>appcenter-${APPCENTER_SECRET}</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
-	<key>HockeyIdentifier</key>
-	<string>${HOCKEYAPP_IDENTIFIER}</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
