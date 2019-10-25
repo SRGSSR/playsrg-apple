@@ -11,17 +11,13 @@
 
 # This is the minimum version number required.
 # Update this, if you use features of a newer version
-fastlane_version "1.95.0"
+fastlane_version "2.96.0"
 
 default_platform :ios
 
 platform :ios do
 
   before_all do |lane|
-
-    if lane.to_s != "devLane"
-      ensure_git_status_clean
-    end
 
     # For betas, before all, check if we have a beta release description
     if lane.to_s == "betas"
@@ -35,7 +31,7 @@ platform :ios do
       end
     end
 
-    if lane.to_s != "devLane"
+    if (lane.to_s != "devLane") && (!lane.to_s.downcase.include? "dsym")
       ensure_git_status_clean
       Dir.chdir("..") do
         sh "make bootstrap"
@@ -139,50 +135,69 @@ platform :ios do
 
   end
 
-  desc "SWI: Upload a new TestFlight build with the current build number and send the dSYM on App Center."
-  lane :swiTestFlight do
+  desc "SWI: Upload a new build (bitcode) on AppStore Connect with the current build number."
+  lane :swiAppStoreUpload do
     testflight_lane(
-      scheme: "Play SWI",
-      appcenter_appstore_name: ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME']
+      scheme: "Play SWI"
     )
   end
 
-  desc "SRF: Upload a new TestFlight build with the current build number and send the dSYM on App Center."
-  lane :srfTestFlight do
+  desc "SRF: Upload a new build (bitcode) on AppStore Connect with the current build number."
+  lane :srfAppStoreUpload do
     testflight_lane(
-      scheme: "Play SRF",
-      appcenter_appstore_name: ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME']
+      scheme: "Play SRF"
     )
   end
 
-  desc "RTS: Upload a new TestFlight build with the current build number and send the dSYM on App Center."
-  lane :rtsTestFlight do
+  desc "RTS: Upload a new build (bitcode) on AppStore Connect with the current build number."
+  lane :rtsAppStoreUpload do
     testflight_lane(
-      scheme: "Play RTS",
-      appcenter_appstore_name: ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME']
+      scheme: "Play RTS"
     )
   end
 
-  desc "RSI: Upload a new TestFlight build with the current build number and send the dSYM on App Center."
-  lane :rsiTestFlight do
+  desc "RSI: Upload a new build (bitcode) on AppStore Connect with the current build number."
+  lane :rsiAppStoreUpload do
     testflight_lane(
-      scheme: "Play RSI",
-      appcenter_appstore_name: ENV['PLAY_RSI_APPSTORE_APPCENTER_APPNAME']
+      scheme: "Play RSI"
     )
   end
 
-  desc "RTR: Upload a new TestFlight build with the current build number and send the dSYM on App Center."
-  lane :rtrTestFlight do
+  desc "RTR: Upload a new build (bitcode) on AppStore Connect with the current build number."
+  lane :rtrAppStoreUpload do
     testflight_lane(
-      scheme: "Play RTR",
-      appcenter_appstore_name: ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME']
+      scheme: "Play RTR"
     )
   end
 
-  desc "Build, upload to TestFlight, send dSYM to App Center"
+  desc "SWI: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters."
+  lane :swiDSYMs do |options|
+    updateDSYMs(options, ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME'])
+  end
+
+  desc "SFR: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters"
+  lane :srfDSYMs do |options|
+    updateDSYMs(options, ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME'])
+  end
+
+  desc "RTS: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters"
+  lane :rtsDSYMs do |options|
+    updateDSYMs(options, ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME'])
+  end
+
+  desc "RSI: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters"
+  lane :rsiDSYMs do |options|
+    updateDSYMs(options, ENV['PLAY_RSI_APPSTORE_APPCENTER_APPNAME'])
+  end
+
+  desc "RTR: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters"
+  lane :rtrDSYMs do |options|
+    updateDSYMs(options, ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'])
+  end
+
+  desc "Build, upload to TestFlight"
   private_lane :testflight_lane do |options|
     scheme = options[:scheme]
-    appcenter_appstore_name = options[:appcenter_appstore_name]
 
     build_lane(
       configuration: "AppStore",
@@ -192,12 +207,6 @@ platform :ios do
 
     pilot(
       skip_waiting_for_build_processing: true
-    )
-
-    appcenter_lane(
-      appname: appcenter_appstore_name,
-      notes: 'Build uploaded on AppStore Connect (via fastlane).',
-      upload_dsym_only: true
     )
 
     clean_build_artifacts
@@ -246,19 +255,30 @@ platform :ios do
     destinations = options[:destinations]
     notes = options[:notes]
     notify_testers = options[:notify_testers] ? options[:notify_testers] : false
-    upload_dsym_only = options[:upload_dsym_only] ? options[:upload_dsym_only] : false
+    upload_dsym = options[:upload_dsym]
 
-    appcenter_upload(
-      api_token: ENV['PLAY_APPCENTER_TOKEN'],
-      owner_type: "organization",
-      owner_name: ENV['PLAY_APPCENTER_OWNER'],
-      app_name: appname,
-      release_notes: notes,
-      destination_type: "group",
-      destinations: destinations,
-      notify_testers: notify_testers,
-      upload_dsym_only: upload_dsym_only
-    )
+    if upload_dsym
+      appcenter_upload(
+        api_token: ENV['PLAY_APPCENTER_TOKEN'],
+        owner_type: "organization",
+        owner_name: ENV['PLAY_APPCENTER_OWNER'],
+        app_name: appname,
+        release_notes: notes,
+        upload_dsym_only: true,
+        dsym: upload_dsym
+      )
+    else
+      appcenter_upload(
+        api_token: ENV['PLAY_APPCENTER_TOKEN'],
+        owner_type: "organization",
+        owner_name: ENV['PLAY_APPCENTER_OWNER'],
+        app_name: appname,
+        release_notes: notes,
+        destination_type: "group",
+        destinations: destinations,
+        notify_testers: notify_testers,
+      )
+    end
   end
 
   desc "Returns a default changelog for nightlies"
@@ -344,11 +364,33 @@ platform :ios do
   #       message: "Bump build number to " + build_number,
   #       ignore: /.+/
   #   )
-
   # end
 
+  def updateDSYMs (options, appcenter_app_name)
+    min_version = options[:min_version]
+    version = options[:version]
+
+    if min_version
+      download_dsyms(min_version: min_version)
+    elsif version
+      download_dsyms(version: version)
+    else
+      download_dsyms(version: "latest")
+    end
+
+    lane_context[SharedValues::DSYM_PATHS].each { |dSYM|
+      appcenter_lane(
+        appname: appcenter_app_name,
+        notes: 'DSYMs from AppStore Connect (via fastlane).',
+        upload_dsym: dSYM
+      )
+    }
+
+    clean_build_artifacts
+  end
+
   after_all do |lane|
-    if lane.to_s != "devLane"
+    if (lane.to_s != "devLane") && (!lane.to_s.downcase.include? "dsym")
       reset_git_repo(skip_clean: true)
     end
 
@@ -358,7 +400,7 @@ platform :ios do
   end
 
   error do |lane, exception|
-    if lane.to_s != "devLane"
+    if (lane.to_s != "devLane") && (!lane.to_s.downcase.include? "dsym")
       clean_build_artifacts
       reset_git_repo(skip_clean: true, force: true)
     end
