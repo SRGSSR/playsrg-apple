@@ -179,12 +179,12 @@ BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
 
 BOOL ApplicationSettingDisplaySubtitlesAvailability(void)
 {
-    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingDisplaySubtitlesAvailability];
+    return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingDisplaySubtitlesAvailability];
 }
 
 BOOL ApplicationSettingAudioDescriptionAvailability(void)
 {
-    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingDisplayAudioDescriptionAvailability];
+    return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingDisplayAudioDescriptionAvailability];
 }
 
 NSString *ApplicationSettingSelectedLiveStreamURNForChannelUid(NSString *channelUid)
