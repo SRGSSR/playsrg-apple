@@ -23,6 +23,8 @@ NSString * const PlaySRGSettingPresenterModeEnabled = @"PlaySRGSettingPresenterM
 NSString * const PlaySRGSettingStandaloneEnabled = @"PlaySRGSettingStandaloneEnabled";
 NSString * const PlaySRGSettingAutoplayEnabled = @"PlaySRGSettingAutoplayEnabled";
 NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled = @"PlaySRGSettingBackgroundVideoPlaybackEnabled";
+NSString * const PlaySRGSettingDisplaySubtitlesAvailability = @"PlaySRGSettingDisplaySubtitlesAvailability";
+NSString * const PlaySRGSettingDisplayAudioDescriptionAvailability = @"PlaySRGSettingDisplayAudioDescriptionAvailability";
 
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
 NSString * const PlaySRGSettingLastOpenHomepageUid = @"PlaySRGSettingLastOpenHomepageUid";
@@ -173,6 +175,16 @@ NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void)
 BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
 {
     return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
+}
+
+BOOL ApplicationSettingDisplaySubtitlesAvailability(void)
+{
+    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingDisplaySubtitlesAvailability];
+}
+
+BOOL ApplicationSettingAudioDescriptionAvailability(void)
+{
+    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingDisplayAudioDescriptionAvailability];
 }
 
 NSString *ApplicationSettingSelectedLiveStreamURNForChannelUid(NSString *channelUid)

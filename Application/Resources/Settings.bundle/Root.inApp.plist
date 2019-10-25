@@ -64,6 +64,32 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Key</key>
+			<string>Group_Display</string>
+			<key>Title</key>
+			<string>Display</string>
+			<key>FooterText</key>
+			<string>When enabled, lists display more available content properties.</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Subtitles availability</string>
+			<key>Key</key>
+			<string>PlaySRGSettingDisplaySubtitlesAvailability</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Audio description availability</string>
+			<key>Key</key>
+			<string>PlaySRGSettingDisplayAudioDescriptionAvailability</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Key</key>
 			<string>Group_Information</string>
 			<key>Title</key>
 			<string>Information</string>
@@ -84,7 +110,7 @@
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
-			<string>What&apos;s new</string>
+			<string>What's new</string>
 			<key>Key</key>
 			<string>Button_WhatsNew</string>
 			<key>IASKTextAlignment</key>
@@ -154,7 +180,7 @@
 			<key>Key</key>
 			<string>Group_AdvancedFeatures</string>
 			<key>FooterText</key>
-			<string>This section is only available in nightly and beta versions, and won&apos;t appear in the production version.</string>
+			<string>This section is only available in nightly and beta versions, and won't appear in the production version.</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -240,7 +266,7 @@
 			<key>Key</key>
 			<string>Group_Reset</string>
 			<key>FooterText</key>
-			<string>This section is only available in nightly and beta versions, and won&apos;t appear in the production version.</string>
+			<string>This section is only available in nightly and beta versions, and won't appear in the production version.</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -274,7 +300,7 @@
 			<key>Key</key>
 			<string>Group_Developer</string>
 			<key>FooterText</key>
-			<string>This section is only available in nightly and beta versions, and won&apos;t appear in the production version.</string>
+			<string>This section is only available in nightly and beta versions, and won't appear in the production version.</string>
 		</dict>
 		<dict>
 			<key>Type</key>

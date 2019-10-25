@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSettings.h"
 #import "Banner.h"
 #import "Download.h"
 #import "History.h"
@@ -215,9 +216,9 @@
     
     BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
     
-    self.subtitlesAvailableLabel.hidden = (!self.media.play_subtilesAvailable || downloaded);
+    self.subtitlesAvailableLabel.hidden = (!ApplicationSettingDisplaySubtitlesAvailability() || !self.media.play_subtilesAvailable || downloaded);
     
-    self.audioDescriptionAvailableLabel.hidden = (!self.media.play_audioDescriptionAvailable || downloaded);
+    self.audioDescriptionAvailableLabel.hidden = (!ApplicationSettingAudioDescriptionAvailability() || !self.media.play_audioDescriptionAvailable || downloaded);
     
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
