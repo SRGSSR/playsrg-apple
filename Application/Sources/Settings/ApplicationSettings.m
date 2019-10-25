@@ -6,6 +6,7 @@
 
 #import "ApplicationSettings.h"
 
+#import "ApplicationConfiguration.h"
 #import "MediaPlayerViewController.h"
 #import "PlayApplication.h"
 #import "UIWindow+PlaySRG.h"
@@ -23,6 +24,7 @@ NSString * const PlaySRGSettingPresenterModeEnabled = @"PlaySRGSettingPresenterM
 NSString * const PlaySRGSettingStandaloneEnabled = @"PlaySRGSettingStandaloneEnabled";
 NSString * const PlaySRGSettingAutoplayEnabled = @"PlaySRGSettingAutoplayEnabled";
 NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled = @"PlaySRGSettingBackgroundVideoPlaybackEnabled";
+
 NSString * const PlaySRGSettingDisplaySubtitlesAvailability = @"PlaySRGSettingDisplaySubtitlesAvailability";
 NSString * const PlaySRGSettingDisplayAudioDescriptionAvailability = @"PlaySRGSettingDisplayAudioDescriptionAvailability";
 
@@ -179,11 +181,19 @@ BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
 
 BOOL ApplicationSettingDisplaySubtitlesAvailability(void)
 {
+    if (ApplicationConfiguration.sharedApplicationConfiguration.subtitlesAvailabilityHidden) {
+        return NO;
+    }
+    
     return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingDisplaySubtitlesAvailability];
 }
 
 BOOL ApplicationSettingAudioDescriptionAvailability(void)
 {
+    if (ApplicationConfiguration.sharedApplicationConfiguration.audioDescriptionAvailabilityHidden) {
+        return NO;
+    }
+    
     return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingDisplayAudioDescriptionAvailability];
 }
 
