@@ -51,31 +51,36 @@ RSI: Upload a new build (bitcode) on AppStore Connect with the current build num
 fastlane ios rtrAppStoreUpload
 ```
 RTR: Upload a new build (bitcode) on AppStore Connect with the current build number.
+### ios dSYMs
+```
+fastlane ios dSYMs
+```
+Send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters.
 ### ios swiDSYMs
 ```
 fastlane ios swiDSYMs
 ```
-SWI: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+SWI: Send latest dSYMs to App Center, with same parameters.
 ### ios srfDSYMs
 ```
 fastlane ios srfDSYMs
 ```
-SFR: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters
+SFR: Send latest dSYMs to App Center, with same parameters.
 ### ios rtsDSYMs
 ```
 fastlane ios rtsDSYMs
 ```
-RTS: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters
+RTS: Send latest dSYMs to App Center, with same parameters.
 ### ios rsiDSYMs
 ```
 fastlane ios rsiDSYMs
 ```
-RSI: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters
+RSI: Send latest dSYMs to App Center, with same parameters.
 ### ios rtrDSYMs
 ```
 fastlane ios rtrDSYMs
 ```
-RTR: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters
+RTR: Send latest dSYMs to App Center, with same parameters.
 
 ----
 

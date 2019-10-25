@@ -170,27 +170,47 @@ platform :ios do
     )
   end
 
-  desc "SWI: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters."
+  desc "Send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters."
+  lane :dSYMs do |options|
+    min_version = options[:min_version]
+    version = options[:version]
+
+    options = '';
+    if min_version
+      options += ' min_version:' + min_version
+    end
+    if version
+      options += ' version:' + version
+    end
+
+    sh 'bundle exec fastlane ios swiDSYMs' + options
+    sh 'bundle exec fastlane ios srfDSYMs' + options
+    sh 'bundle exec fastlane ios rtsDSYMs' + options
+    sh 'bundle exec fastlane ios rsiDSYMs' + options
+    sh 'bundle exec fastlane ios rtrDSYMs' + options
+  end
+
+  desc "SWI: Send latest dSYMs to App Center, with same parameters."
   lane :swiDSYMs do |options|
     updateDSYMs(options, ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME'])
   end
 
-  desc "SFR: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters"
+  desc "SFR: Send latest dSYMs to App Center, with same parameters."
   lane :srfDSYMs do |options|
     updateDSYMs(options, ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME'])
   end
 
-  desc "RTS: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters"
+  desc "RTS: Send latest dSYMs to App Center, with same parameters."
   lane :rtsDSYMs do |options|
     updateDSYMs(options, ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME'])
   end
 
-  desc "RSI: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters"
+  desc "RSI: Send latest dSYMs to App Center, with same parameters."
   lane :rsiDSYMs do |options|
     updateDSYMs(options, ENV['PLAY_RSI_APPSTORE_APPCENTER_APPNAME'])
   end
 
-  desc "RTR: Get and send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters"
+  desc "RTR: Send latest dSYMs to App Center, with same parameters."
   lane :rtrDSYMs do |options|
     updateDSYMs(options, ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'])
   end
@@ -221,15 +241,6 @@ platform :ios do
     marketing_version_suffix = options[:marketing_version_suffix] ? options[:marketing_version_suffix] : ""
 
     output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME] + '/'
-
-    # resetProvisioningProfileContext
-
-    # app_identifier = getAppIdentifier(scheme: scheme, configuration: configuration)
-    # get_provisioning_profile(app_identifier: app_identifier, force: true, development: true, output_path:output_directory)
-    # get_provisioning_profile(app_identifier: app_identifier, force: true, output_path:output_directory)
-    # notification_service_extension_identifier = app_identifier + ".notification-service-extension"
-    # get_provisioning_profile(app_identifier: notification_service_extension_identifier, force: true, development: true, output_path:output_directory)
-    # get_provisioning_profile(app_identifier: notification_service_extension_identifier, force: true, output_path:output_directory)
 
     team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
 
@@ -345,16 +356,6 @@ platform :ios do
     whatsNew ? whatsNew : ''
   end
 
-  desc "Reset provisioning profile context to prepare a new build"
-  private_lane :resetProvisioningProfileContext do
-    lane_context.delete(SharedValues::SIGH_PROFILE_PATHS)
-    lane_context.delete(SharedValues::SIGH_PROFILE_PATH)
-    lane_context.delete(SharedValues::SIGH_UDID)
-    lane_context.delete(SharedValues::SIGH_UUID)
-    lane_context.delete(SharedValues::SIGH_NAME)
-    lane_context.delete(SharedValues::SIGH_PROFILE_TYPE)
-  end
-
   # desc "A dev lane to test ruby scripts"
   # lane :devLane do
     
@@ -378,13 +379,15 @@ platform :ios do
       download_dsyms(version: "latest")
     end
 
-    lane_context[SharedValues::DSYM_PATHS].each { |dSYM|
-      appcenter_lane(
-        appname: appcenter_app_name,
-        notes: 'DSYMs from AppStore Connect (via fastlane).',
-        upload_dsym: dSYM
-      )
-    }
+    if lane_context[SharedValues::DSYM_PATHS]
+      lane_context[SharedValues::DSYM_PATHS].each { |dSYM|
+        appcenter_lane(
+          appname: appcenter_app_name,
+          notes: 'DSYMs from AppStore Connect (via fastlane).',
+          upload_dsym: dSYM
+        )
+      }
+    end
 
     clean_build_artifacts
   end
