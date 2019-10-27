@@ -1,9 +1,6 @@
 #!/bin/bash -e -x
 
-# Script originally borrowed from RTSKit (https://bitbucket.org/rtsmb/rtskit), with a few changes
-#
 # Requirements:
-# brew install imagemagick ghostscript
 # brew install imagemagick ghostscript
 
 PYTHON_NIGHTLIES_TAG="---->"
