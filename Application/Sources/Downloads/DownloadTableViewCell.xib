@@ -84,12 +84,33 @@
                             <constraint firstItem="TM2-Y3-cHc" firstAttribute="centerY" secondItem="5j8-iE-ECf" secondAttribute="centerY" id="AsL-Cu-qe6"/>
                         </constraints>
                     </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="nC0-9c-cwd" userLabel="Label Stack View">
+                        <rect key="frame" x="169.5" y="46.5" width="453.5" height="14"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="&lt;webFirst&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Zj-Mk-vl7" userLabel="Web First Label">
+                                <rect key="frame" x="0.0" y="0.0" width="64" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="ftD-xr-ysC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V4N-TA-uVf" userLabel="Space View">
+                                <rect key="frame" x="70" y="0.0" width="383.5" height="14"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="MeE-eL-S8U" firstAttribute="bottom" secondItem="Bra-g0-jx8" secondAttribute="bottom" id="6xU-L8-x0u"/>
+                    <constraint firstItem="nC0-9c-cwd" firstAttribute="trailing" secondItem="5j8-iE-ECf" secondAttribute="trailing" id="7hY-HC-1sX"/>
+                    <constraint firstItem="nC0-9c-cwd" firstAttribute="leading" secondItem="5j8-iE-ECf" secondAttribute="leading" id="CT4-jw-76a"/>
                     <constraint firstItem="wmN-wN-Xz3" firstAttribute="bottom" secondItem="Bra-g0-jx8" secondAttribute="bottom" constant="-5" id="Chd-Gk-Rz9"/>
                     <constraint firstItem="qiI-HV-VRc" firstAttribute="trailing" secondItem="Bra-g0-jx8" secondAttribute="trailing" constant="-5" id="H3S-2r-ts2"/>
                     <constraint firstItem="fVk-qC-VaO" firstAttribute="top" secondItem="fDp-L2-Fyb" secondAttribute="top" id="NT1-BS-qdL"/>
+                    <constraint firstItem="nC0-9c-cwd" firstAttribute="top" secondItem="5j8-iE-ECf" secondAttribute="bottom" constant="4" id="OlO-lu-zWW"/>
                     <constraint firstItem="Bra-g0-jx8" firstAttribute="top" secondItem="fDp-L2-Fyb" secondAttribute="top" id="Pbw-UE-LDd"/>
                     <constraint firstItem="wmN-wN-Xz3" firstAttribute="leading" secondItem="Bra-g0-jx8" secondAttribute="leading" constant="5" id="VJ8-gy-QoI"/>
                     <constraint firstAttribute="trailing" secondItem="fVk-qC-VaO" secondAttribute="trailing" constant="10" id="VhA-hD-Ohd"/>
@@ -113,6 +134,7 @@
                 <outlet property="subtitleLabel" destination="waz-M0-pDU" id="4fy-Uc-GAx"/>
                 <outlet property="thumbnailImageView" destination="Bra-g0-jx8" id="urp-YA-072"/>
                 <outlet property="titleLabel" destination="fVk-qC-VaO" id="bdo-cz-anR"/>
+                <outlet property="webFirstLabel" destination="3Zj-Mk-vl7" id="GAu-2E-oRU"/>
                 <outlet property="youthProtectionColorImageView" destination="waL-Kb-K7H" id="TRC-5B-kk3"/>
             </connections>
             <point key="canvasLocation" x="634.5" y="152"/>

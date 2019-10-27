@@ -25,6 +25,8 @@ OBJC_EXPORT BOOL PlayIsSwissTXTURN(NSString *URN);
 
 @property (nonatomic, readonly, getter=play_isAudioDescriptionAvailable) BOOL play_audioDescriptionAvailable;
 
+@property (nonatomic, readonly, getter=play_isWebFirst) BOOL play_webFirst;
+
 @end
 
 NS_ASSUME_NONNULL_END

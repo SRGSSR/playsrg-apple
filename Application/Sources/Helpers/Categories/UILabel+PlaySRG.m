@@ -78,6 +78,15 @@
     [self play_setMediaLabelWithString:NSLocalizedString(@"AD", @"Audio description short label on media cells")];
 }
 
+- (void)play_setWebFirstLabel
+{
+    self.backgroundColor = UIColor.srg_blueColor;
+    self.layer.cornerRadius = 4.f;
+    self.layer.masksToBounds = YES;
+    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+    self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"WEB FIRST", @"Web first label on media cells")].uppercaseString;
+}
+
 #pragma mark Private
 
 - (void)play_displayDurationLabelWithTimeAvailability:(SRGTimeAvailability)timeAvailability duration:(NSTimeInterval)duration isLivestreamOrScheduledLivestream:(BOOL)isLivestreamOrScheduledLivestream isLiveEvent:(BOOL)isLiveEvent

@@ -110,6 +110,24 @@
                             <constraint firstItem="YBz-Mz-5VT" firstAttribute="centerY" secondItem="AX7-S7-GNv" secondAttribute="centerY" id="Z5O-Oz-IPO"/>
                         </constraints>
                     </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="74a-hy-s6B" userLabel="Label Stack View">
+                        <rect key="frame" x="169.5" y="46.5" width="453.5" height="14"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="&lt;webFirst&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZW-fS-hgM" userLabel="Web First Label">
+                                <rect key="frame" x="0.0" y="0.0" width="64" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="15h-6c-CeC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Io-hM-riw" userLabel="Space View">
+                                <rect key="frame" x="70" y="0.0" width="383.5" height="14"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="i07-Yc-Mid" firstAttribute="trailing" secondItem="MvB-4F-fho" secondAttribute="trailing" id="2tA-BL-d4d"/>
@@ -120,6 +138,8 @@
                     <constraint firstItem="AX7-S7-GNv" firstAttribute="top" secondItem="qbT-jA-SKS" secondAttribute="bottom" id="Dj7-Eq-cF2"/>
                     <constraint firstItem="Lwe-Gf-yaL" firstAttribute="trailing" secondItem="MvB-4F-fho" secondAttribute="trailing" id="FVf-FF-TI6"/>
                     <constraint firstItem="4f6-rt-gM6" firstAttribute="trailing" secondItem="MvB-4F-fho" secondAttribute="trailing" constant="-5" id="Gnv-kB-8le"/>
+                    <constraint firstItem="74a-hy-s6B" firstAttribute="leading" secondItem="AX7-S7-GNv" secondAttribute="leading" id="IFk-uX-3dh"/>
+                    <constraint firstItem="74a-hy-s6B" firstAttribute="trailing" secondItem="AX7-S7-GNv" secondAttribute="trailing" id="Jo9-Dd-6N6"/>
                     <constraint firstItem="qbT-jA-SKS" firstAttribute="top" secondItem="BV9-8p-XEm" secondAttribute="top" id="XMn-PA-D5N"/>
                     <constraint firstItem="qbT-jA-SKS" firstAttribute="trailing" secondItem="AX7-S7-GNv" secondAttribute="trailing" id="YGv-uI-KgW"/>
                     <constraint firstItem="MvB-4F-fho" firstAttribute="top" secondItem="BV9-8p-XEm" secondAttribute="top" id="dGe-z9-Uoh"/>
@@ -129,6 +149,7 @@
                     <constraint firstAttribute="trailing" secondItem="qbT-jA-SKS" secondAttribute="trailing" constant="10" id="qJW-n2-JLJ"/>
                     <constraint firstItem="i07-Yc-Mid" firstAttribute="leading" secondItem="MvB-4F-fho" secondAttribute="leading" id="qeX-0x-brF"/>
                     <constraint firstItem="i07-Yc-Mid" firstAttribute="bottom" secondItem="MvB-4F-fho" secondAttribute="bottom" id="rip-kE-J8D"/>
+                    <constraint firstItem="74a-hy-s6B" firstAttribute="top" secondItem="AX7-S7-GNv" secondAttribute="bottom" constant="4" id="sWg-hO-Sp2"/>
                     <constraint firstItem="MvB-4F-fho" firstAttribute="leading" secondItem="BV9-8p-XEm" secondAttribute="leading" constant="10" id="tFJ-2M-OeQ"/>
                     <constraint firstItem="qbT-jA-SKS" firstAttribute="leading" secondItem="MvB-4F-fho" secondAttribute="trailing" constant="10" id="zkW-LU-qKn"/>
                 </constraints>
@@ -147,6 +168,7 @@
                 <outlet property="subtitlesAvailableLabel" destination="ors-G5-FDz" id="IIa-AF-R2g"/>
                 <outlet property="thumbnailImageView" destination="MvB-4F-fho" id="sRu-Vd-kWT"/>
                 <outlet property="titleLabel" destination="qbT-jA-SKS" id="Gpa-0a-eig"/>
+                <outlet property="webFirstLabel" destination="bZW-fS-hgM" id="SGS-AR-8IV"/>
                 <outlet property="youthProtectionColorImageView" destination="b3Z-3m-KDE" id="F3L-md-bUp"/>
             </connections>
             <point key="canvasLocation" x="634.5" y="152"/>

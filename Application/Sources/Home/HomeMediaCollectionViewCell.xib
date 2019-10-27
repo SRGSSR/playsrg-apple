@@ -146,6 +146,24 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vjf-fU-FEg" userLabel="Label Stack View">
+                                <rect key="frame" x="0.0" y="167" width="210" height="14"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="&lt;webFirst&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-dQ-uk0" userLabel="Web First Label">
+                                        <rect key="frame" x="0.0" y="0.0" width="64" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="His-xm-O7c"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32z-NP-zeU" userLabel="Space View">
+                                        <rect key="frame" x="70" y="0.0" width="140" height="14"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text=" Editorial " textAlignment="natural" lineBreakMode="wordWrap" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oz7-rT-faq" userLabel="Editorial Label">
                                 <rect key="frame" x="0.0" y="5" width="53" height="18"/>
                                 <color key="backgroundColor" red="0.74901960779999999" green="0.14901960780000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -169,11 +187,13 @@
                             <constraint firstItem="lwo-fA-qQ1" firstAttribute="bottom" secondItem="i6n-Nf-jOh" secondAttribute="bottom" id="Da8-TO-479"/>
                             <constraint firstItem="lwo-fA-qQ1" firstAttribute="trailing" secondItem="i6n-Nf-jOh" secondAttribute="trailing" id="Dry-Zw-FCx"/>
                             <constraint firstItem="3Zs-DP-WoR" firstAttribute="bottom" secondItem="i6n-Nf-jOh" secondAttribute="bottom" id="Dwa-oe-zkU"/>
+                            <constraint firstItem="vjf-fU-FEg" firstAttribute="trailing" secondItem="blL-K8-zBb" secondAttribute="trailing" id="FQf-MD-4FN"/>
                             <constraint firstAttribute="trailing" secondItem="OO0-yH-uvq" secondAttribute="trailing" id="Ihl-bA-XG6"/>
                             <constraint firstItem="i6n-Nf-jOh" firstAttribute="leading" secondItem="ibC-3k-6VL" secondAttribute="leading" id="Ns5-DO-VFZ"/>
                             <constraint firstItem="OO0-yH-uvq" firstAttribute="top" secondItem="i6n-Nf-jOh" secondAttribute="bottom" constant="5" id="Pyz-uY-c4N"/>
                             <constraint firstItem="lwo-fA-qQ1" firstAttribute="top" secondItem="i6n-Nf-jOh" secondAttribute="top" id="Rxc-ML-Wxw"/>
                             <constraint firstItem="3Zs-DP-WoR" firstAttribute="leading" secondItem="i6n-Nf-jOh" secondAttribute="leading" id="THy-6i-ciD"/>
+                            <constraint firstItem="blL-K8-zBb" firstAttribute="bottom" secondItem="vjf-fU-FEg" secondAttribute="top" constant="-4" id="ZMm-n1-ZTy"/>
                             <constraint firstItem="Oz7-rT-faq" firstAttribute="leading" secondItem="i6n-Nf-jOh" secondAttribute="leading" id="bEL-Wh-zxz"/>
                             <constraint firstAttribute="trailing" secondItem="i6n-Nf-jOh" secondAttribute="trailing" id="bYj-Xx-b0I"/>
                             <constraint firstItem="lwo-fA-qQ1" firstAttribute="leading" secondItem="i6n-Nf-jOh" secondAttribute="leading" id="cQY-Zi-w0Y"/>
@@ -181,6 +201,7 @@
                             <constraint firstItem="i6n-Nf-jOh" firstAttribute="top" secondItem="Oz7-rT-faq" secondAttribute="top" constant="-5" id="hSD-8r-HyF"/>
                             <constraint firstItem="nTU-QL-FSe" firstAttribute="leading" secondItem="i6n-Nf-jOh" secondAttribute="leading" constant="5" id="iCi-rV-t7e"/>
                             <constraint firstItem="i6n-Nf-jOh" firstAttribute="top" secondItem="ibC-3k-6VL" secondAttribute="top" id="oMi-ep-6Dq"/>
+                            <constraint firstItem="vjf-fU-FEg" firstAttribute="leading" secondItem="blL-K8-zBb" secondAttribute="leading" id="oxN-ek-Bva"/>
                             <constraint firstItem="blL-K8-zBb" firstAttribute="leading" secondItem="OO0-yH-uvq" secondAttribute="leading" id="vC5-TK-ZbK"/>
                             <constraint firstItem="Xav-sZ-yHT" firstAttribute="bottom" secondItem="i6n-Nf-jOh" secondAttribute="bottom" constant="-5" id="weG-Gx-A5N"/>
                         </constraints>
@@ -214,6 +235,7 @@
                 <outlet property="subtitlesAvailableLabel" destination="J1w-Er-Gh8" id="Z5K-Tc-bU3"/>
                 <outlet property="thumbnailImageView" destination="i6n-Nf-jOh" id="anm-mn-vI8"/>
                 <outlet property="titleLabel" destination="OO0-yH-uvq" id="Mly-C6-vRF"/>
+                <outlet property="webFirstLabel" destination="QLK-dQ-uk0" id="gCs-NL-Z9i"/>
                 <outlet property="youthProtectionColorImageView" destination="zAw-Tr-08f" id="NT8-uv-Z5t"/>
                 <outletCollection property="titleVerticalSpacingConstraints" destination="qQD-DO-jIS" id="Gnb-PO-ofL"/>
                 <outletCollection property="titleVerticalSpacingConstraints" destination="Pyz-uY-c4N" id="tbF-DJ-yg5"/>

@@ -110,10 +110,29 @@
                             <constraint firstItem="YBz-Mz-5VT" firstAttribute="centerY" secondItem="AX7-S7-GNv" secondAttribute="centerY" id="Z5O-Oz-IPO"/>
                         </constraints>
                     </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="f2D-cW-RJh" userLabel="Label Stack View">
+                        <rect key="frame" x="169.5" y="46.5" width="453.5" height="14"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="&lt;webFirst&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnZ-cz-H0h" userLabel="Web First Label">
+                                <rect key="frame" x="0.0" y="0.0" width="64" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="pb4-Bq-i9e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ijd-vn-jPO" userLabel="Space View">
+                                <rect key="frame" x="70" y="0.0" width="383.5" height="14"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Lwe-Gf-yaL" firstAttribute="bottom" secondItem="MvB-4F-fho" secondAttribute="bottom" id="17r-II-uZI"/>
                     <constraint firstItem="MvB-4F-fho" firstAttribute="leading" secondItem="BV9-8p-XEm" secondAttribute="leading" constant="10" id="9B1-Ky-YB0"/>
+                    <constraint firstItem="f2D-cW-RJh" firstAttribute="leading" secondItem="AX7-S7-GNv" secondAttribute="leading" id="9aX-bc-ToU"/>
                     <constraint firstItem="i07-Yc-Mid" firstAttribute="trailing" secondItem="MvB-4F-fho" secondAttribute="trailing" id="Aby-hS-R1K"/>
                     <constraint firstItem="yJ4-nV-bkC" firstAttribute="leading" secondItem="MvB-4F-fho" secondAttribute="leading" constant="5" id="AqS-mU-RZu"/>
                     <constraint firstItem="Lwe-Gf-yaL" firstAttribute="trailing" secondItem="MvB-4F-fho" secondAttribute="trailing" id="BMZ-LH-vca"/>
@@ -128,8 +147,10 @@
                     <constraint firstItem="qbT-jA-SKS" firstAttribute="top" secondItem="BV9-8p-XEm" secondAttribute="top" id="ePE-xX-2Oh"/>
                     <constraint firstItem="AX7-S7-GNv" firstAttribute="top" secondItem="qbT-jA-SKS" secondAttribute="bottom" id="g9a-HX-a8Q"/>
                     <constraint firstItem="AX7-S7-GNv" firstAttribute="leading" secondItem="qbT-jA-SKS" secondAttribute="leading" id="gOd-FV-KCf"/>
+                    <constraint firstItem="f2D-cW-RJh" firstAttribute="trailing" secondItem="AX7-S7-GNv" secondAttribute="trailing" id="ggG-qh-UrR"/>
                     <constraint firstItem="yJ4-nV-bkC" firstAttribute="bottom" secondItem="MvB-4F-fho" secondAttribute="bottom" constant="-5" id="lbH-Cw-SiJ"/>
                     <constraint firstItem="qbT-jA-SKS" firstAttribute="leading" secondItem="MvB-4F-fho" secondAttribute="trailing" constant="10" id="nWp-oZ-uj6"/>
+                    <constraint firstItem="f2D-cW-RJh" firstAttribute="top" secondItem="AX7-S7-GNv" secondAttribute="bottom" constant="4" id="r2m-B8-hrF"/>
                     <constraint firstItem="jzx-SE-F2u" firstAttribute="bottom" secondItem="MvB-4F-fho" secondAttribute="bottom" constant="-5" id="wHZ-OY-Y07"/>
                 </constraints>
             </tableViewCellContentView>
@@ -147,6 +168,7 @@
                 <outlet property="subtitlesAvailableLabel" destination="7cU-pI-8se" id="dwZ-fJ-9nC"/>
                 <outlet property="thumbnailImageView" destination="MvB-4F-fho" id="sRu-Vd-kWT"/>
                 <outlet property="titleLabel" destination="qbT-jA-SKS" id="Gpa-0a-eig"/>
+                <outlet property="webFirstLabel" destination="rnZ-cz-H0h" id="Lrw-Hj-czM"/>
                 <outlet property="youthProtectionColorImageView" destination="oKo-WU-Ezt" id="v7P-B1-D6g"/>
             </connections>
             <point key="canvasLocation" x="634.5" y="152"/>

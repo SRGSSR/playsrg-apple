@@ -43,6 +43,12 @@
     return [audioTracks filteredArrayUsingPredicate:predicate].count != 0;
 }
 
+- (BOOL)play_isWebFirst
+{
+    NSDate *date = NSDate.date;
+    return [self.date compare:date] == NSOrderedDescending && [self timeAvailabilityAtDate:date] == SRGTimeAvailabilityAvailable && self.contentType == SRGContentTypeEpisode;
+}
+
 @end
 
 #pragma mark Functions

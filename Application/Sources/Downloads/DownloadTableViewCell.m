@@ -11,6 +11,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
+#import "SRGMedia+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -31,6 +32,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *downloadStatusImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *media360ImageView;
+@property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
@@ -62,7 +64,10 @@
     
     self.durationLabelBackgroundColor = self.durationLabel.backgroundColor;
     
+    [self.webFirstLabel play_setWebFirstLabel];
+    
     self.youthProtectionColorImageView.hidden = YES;
+    self.webFirstLabel.hidden = YES;
     
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
@@ -91,6 +96,7 @@
     [super prepareForReuse];
     
     self.youthProtectionColorImageView.hidden = YES;
+    self.webFirstLabel.hidden = YES;
     
     self.progressView.hidden = YES;
     
@@ -215,6 +221,8 @@
     [self.durationLabel play_displayDurationLabelForMediaMetadata:download];
     
     self.media360ImageView.hidden = (download.presentation != SRGPresentation360);
+    
+    self.webFirstLabel.hidden = ! download.media.play_isWebFirst;
     
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(download.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);

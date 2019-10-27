@@ -37,6 +37,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)play_setAudioDescriptionAvailableLabel;
 
+/**
+ *  Use it to set a web first label
+*/
+- (void)play_setWebFirstLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

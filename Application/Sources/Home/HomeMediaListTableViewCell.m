@@ -61,31 +61,31 @@ static const CGFloat HomeStandardMargin = 10.f;
     static NSDictionary<NSString *, NSNumber *> *s_standardTextHeigths;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_featuredTextHeigths = @{ UIContentSizeCategoryExtraSmall : @80,
-                                   UIContentSizeCategorySmall : @80,
+        s_featuredTextHeigths = @{ UIContentSizeCategoryExtraSmall : @95,
+                                   UIContentSizeCategorySmall : @95,
+                                   UIContentSizeCategoryMedium : @100,
+                                   UIContentSizeCategoryLarge : @105,
+                                   UIContentSizeCategoryExtraLarge : @110,
+                                   UIContentSizeCategoryExtraExtraLarge : @115,
+                                   UIContentSizeCategoryExtraExtraExtraLarge : @125,
+                                   UIContentSizeCategoryAccessibilityMedium : @125,
+                                   UIContentSizeCategoryAccessibilityLarge : @125,
+                                   UIContentSizeCategoryAccessibilityExtraLarge : @125,
+                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @125,
+                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @125 };
+        
+        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @85,
+                                   UIContentSizeCategorySmall : @85,
                                    UIContentSizeCategoryMedium : @85,
                                    UIContentSizeCategoryLarge : @90,
                                    UIContentSizeCategoryExtraLarge : @95,
                                    UIContentSizeCategoryExtraExtraLarge : @100,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @110,
-                                   UIContentSizeCategoryAccessibilityMedium : @110,
-                                   UIContentSizeCategoryAccessibilityLarge : @110,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @110,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @110,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @110 };
-        
-        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @70,
-                                   UIContentSizeCategorySmall : @70,
-                                   UIContentSizeCategoryMedium : @70,
-                                   UIContentSizeCategoryLarge : @75,
-                                   UIContentSizeCategoryExtraLarge : @80,
-                                   UIContentSizeCategoryExtraExtraLarge : @85,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @98,
-                                   UIContentSizeCategoryAccessibilityMedium : @98,
-                                   UIContentSizeCategoryAccessibilityLarge : @98,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @98,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @98,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @98 };
+                                   UIContentSizeCategoryExtraExtraExtraLarge : @113,
+                                   UIContentSizeCategoryAccessibilityMedium : @113,
+                                   UIContentSizeCategoryAccessibilityLarge : @113,
+                                   UIContentSizeCategoryAccessibilityExtraLarge : @113,
+                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @113,
+                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @113 };
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
