@@ -52,9 +52,9 @@ static NSString * const SettingsInformationGroup = @"Group_Information";
 static NSString * const SettingsAdvancedFeaturesGroup = @"Group_AdvancedFeatures";
 static NSString * const SettingsServerSettingsButton = @"Button_ServerSettings";
 static NSString * const SettingsUserLocationSettingsButton = @"Button_UserLocationSettings";
-static NSString * const SettingsCheckForUpdatesButton = @"Button_CheckForUpdates";
 static NSString * const SettingsSubscribeToAllShowsButton = @"Button_SubscribeToAllShows";
 static NSString * const SettingsSystemSettingsButton = @"Button_SystemSettings";
+static NSString * const SettingsVersionsAndReleaseNotes = @"Button_VersionsAndReleaseNotes";
 
 // Reset group
 static NSString * const SettingsResetGroup = @"Group_Reset";
@@ -175,7 +175,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         
         [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:nil];
     }
-    else if ([specifier.key isEqualToString:SettingsCheckForUpdatesButton]) {
+    else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {
         // Clear internal App Center timestamp to force a new update request
         [NSUserDefaults.standardUserDefaults removeObjectForKey:@"MSPostponedTimestamp"];
         [[MSDistribute sharedInstance] startUpdate];
@@ -339,7 +339,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:PlaySRGSettingStandaloneEnabled];
     [hiddenKeys addObject:PlaySRGSettingOriginalImagesOnlyEnabled];
     [hiddenKeys addObject:PlaySRGSettingAlternateRadioHomepageDesignEnabled];
-    [hiddenKeys addObject:SettingsCheckForUpdatesButton];
+    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
     [hiddenKeys addObject:SettingsSystemSettingsButton];
     [hiddenKeys addObject:SettingsResetGroup];
@@ -351,7 +351,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:SettingsFLEXButton];
 #else
     if (! MSDistribute.isEnabled) {
-        [hiddenKeys addObject:SettingsCheckForUpdatesButton];
+        [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     }
     
     if (! PushService.sharedService.enabled) {

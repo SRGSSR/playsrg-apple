@@ -212,9 +212,9 @@
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
-			<string>Check for updates</string>
+			<string>Versions and release notes</string>
 			<key>Key</key>
-			<string>Button_CheckForUpdates</string>
+			<string>Button_VersionsAndReleaseNotes</string>
 		</dict>
 		<dict>
 			<key>Type</key>
