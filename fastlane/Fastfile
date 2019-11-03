@@ -371,12 +371,17 @@ platform :ios do
     min_version = options[:min_version]
     version = options[:version]
 
+    directory = 'export/' + lane_context[SharedValues::LANE_NAME]
+    FileUtils.mkdir_p(directory) if !File.directory?(directory)
+
+    output_directory = 'fastlane/' + directory
+
     if min_version
-      download_dsyms(min_version: min_version)
+      download_dsyms(min_version: min_version, output_directory: output_directory)
     elsif version
-      download_dsyms(version: version)
+      download_dsyms(version: version, output_directory: output_directory)
     else
-      download_dsyms(version: "latest")
+      download_dsyms(version: "latest", output_directory: output_directory)
     end
 
     if lane_context[SharedValues::DSYM_PATHS]
