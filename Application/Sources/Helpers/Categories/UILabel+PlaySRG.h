@@ -28,17 +28,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)play_displayAvailabilityLabelForMediaMetadata:(id<SRGMediaMetadata>)object;
 
 /**
- *  Use it to set a subtitles available label
+ *  Call to display the standard subtitle availability label.
  */
 - (void)play_setSubtitlesAvailableLabel;
 
 /**
- *  Use it to set an audio description available label
+ *  Call to display the standard audio description availability label.
  */
 - (void)play_setAudioDescriptionAvailableLabel;
 
 /**
- *  Use it to set a web first label
+ *  Call to display the standard "web first" label.
 */
 - (void)play_setWebFirstLabel;
 

@@ -218,13 +218,10 @@
     
     self.media360ImageView.hidden = (media.presentation != SRGPresentation360);
     
-    BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
-    
-    self.subtitlesAvailableLabel.hidden = (! ApplicationSettingDisplaySubtitlesAvailability() || ! self.media.play_subtilesAvailable || downloaded);
-    
-    self.audioDescriptionAvailableLabel.hidden = (! ApplicationSettingAudioDescriptionAvailability() || ! self.media.play_audioDescriptionAvailable || downloaded);
-    
-    self.webFirstLabel.hidden = ! self.media.play_isWebFirst;
+    BOOL downloaded = [Download downloadForMedia:media].state == DownloadStateDownloaded;
+    self.subtitlesAvailableLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtilesAvailable || downloaded);
+    self.audioDescriptionAvailableLabel.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
+    self.webFirstLabel.hidden = ! media.play_isWebFirst;
     
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);

@@ -25,8 +25,8 @@ NSString * const PlaySRGSettingStandaloneEnabled = @"PlaySRGSettingStandaloneEna
 NSString * const PlaySRGSettingAutoplayEnabled = @"PlaySRGSettingAutoplayEnabled";
 NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled = @"PlaySRGSettingBackgroundVideoPlaybackEnabled";
 
-NSString * const PlaySRGSettingDisplaySubtitlesAvailability = @"PlaySRGSettingDisplaySubtitlesAvailability";
-NSString * const PlaySRGSettingDisplayAudioDescriptionAvailability = @"PlaySRGSettingDisplayAudioDescriptionAvailability";
+NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed = @"PlaySRGSettingSubtitleAvailabilityDisplayed";
+NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed = @"PlaySRGSettingAudioDescriptionAvailabilityDisplayed";
 
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
 NSString * const PlaySRGSettingLastOpenHomepageUid = @"PlaySRGSettingLastOpenHomepageUid";
@@ -179,22 +179,22 @@ BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
     return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
 }
 
-BOOL ApplicationSettingDisplaySubtitlesAvailability(void)
+BOOL ApplicationSettingSubtitleAvailabilityDisplayed(void)
 {
-    if (ApplicationConfiguration.sharedApplicationConfiguration.subtitlesAvailabilityHidden) {
+    if (ApplicationConfiguration.sharedApplicationConfiguration.subtitleAvailabilityHidden) {
         return NO;
     }
     
-    return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingDisplaySubtitlesAvailability];
+    return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingSubtitleAvailabilityDisplayed];
 }
 
-BOOL ApplicationSettingAudioDescriptionAvailability(void)
+BOOL ApplicationSettingAudioDescriptionAvailabilityDisplayed(void)
 {
     if (ApplicationConfiguration.sharedApplicationConfiguration.audioDescriptionAvailabilityHidden) {
         return NO;
     }
     
-    return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingDisplayAudioDescriptionAvailability];
+    return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAudioDescriptionAvailabilityDisplayed];
 }
 
 NSString *ApplicationSettingSelectedLiveStreamURNForChannelUid(NSString *channelUid)

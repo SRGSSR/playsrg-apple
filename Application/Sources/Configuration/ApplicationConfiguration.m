@@ -220,7 +220,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, getter=areMoreEpisodesHidden) BOOL moreEpisodesHidden;
 @property (nonatomic, getter=areModuleColorsDisabled) BOOL moduleColorsDisabled;
 
-@property (nonatomic, getter=isSubtitlesAvailabilityHidden) BOOL subtitlesAvailabilityHidden;
+@property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
 
 @property (nonatomic) UIColor *moduleDefaultLinkColor;
@@ -494,7 +494,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.moreEpisodesHidden = [self.remoteConfig configValueForKey:@"moreEpisodesHidden"].boolValue;
     self.moduleColorsDisabled = [self.remoteConfig configValueForKey:@"moduleColorsDisabled"].boolValue;
     
-    self.subtitlesAvailabilityHidden = [self.remoteConfig configValueForKey:@"subtitlesAvailabilityHidden"].boolValue;
+    self.subtitleAvailabilityHidden = [self.remoteConfig configValueForKey:@"subtitleAvailabilityHidden"].boolValue;
     self.audioDescriptionAvailabilityHidden = [self.remoteConfig configValueForKey:@"audioDescriptionAvailabilityHidden"].boolValue;
     
     NSString *tvHomeSectionsString = [self.remoteConfig configValueForKey:@"tvHomeSections"].stringValue;

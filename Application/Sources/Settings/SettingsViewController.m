@@ -368,15 +368,15 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [hiddenKeys addObject:PlaySRGSettingAutoplayEnabled];
     }
     
-    if (applicationConfiguration.subtitlesAvailabilityHidden) {
-        [hiddenKeys addObject:PlaySRGSettingDisplaySubtitlesAvailability];
+    if (applicationConfiguration.subtitleAvailabilityHidden) {
+        [hiddenKeys addObject:PlaySRGSettingSubtitleAvailabilityDisplayed];
     }
     
     if (applicationConfiguration.audioDescriptionAvailabilityHidden) {
-        [hiddenKeys addObject:PlaySRGSettingDisplayAudioDescriptionAvailability];
+        [hiddenKeys addObject:PlaySRGSettingAudioDescriptionAvailabilityDisplayed];
     }
     
-    if (applicationConfiguration.subtitlesAvailabilityHidden && applicationConfiguration.audioDescriptionAvailabilityHidden) {
+    if (applicationConfiguration.subtitleAvailabilityHidden && applicationConfiguration.audioDescriptionAvailabilityHidden) {
         [hiddenKeys addObject:SettingsDisplayGroup];
     }
     

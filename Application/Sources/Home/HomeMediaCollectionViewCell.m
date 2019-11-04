@@ -6,9 +6,9 @@
 
 #import "HomeMediaCollectionViewCell.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
-#import "AnalyticsConstants.h"
 #import "Download.h"
 #import "History.h"
 #import "NSBundle+PlaySRG.h"
@@ -274,11 +274,8 @@
     self.media360ImageView.hidden = (self.media.presentation != SRGPresentation360);
     
     BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
-    
-    self.subtitlesAvailableLabel.hidden = (! ApplicationSettingDisplaySubtitlesAvailability() || ! self.media.play_subtilesAvailable || downloaded);
-    
-    self.audioDescriptionAvailableLabel.hidden = (! ApplicationSettingAudioDescriptionAvailability() || ! self.media.play_audioDescriptionAvailable || downloaded);
-    
+    self.subtitlesAvailableLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! self.media.play_subtilesAvailable || downloaded);
+    self.audioDescriptionAvailableLabel.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! self.media.play_audioDescriptionAvailable || downloaded);
     self.webFirstLabel.hidden = ! self.media.play_isWebFirst;
     
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);

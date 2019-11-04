@@ -68,15 +68,15 @@
 			<key>Title</key>
 			<string>Display</string>
 			<key>FooterText</key>
-			<string>When enabled, lists display more available content properties. Options are enabled if VoiceOver is active.</string>
+			<string>Overridden when VoiceOver is active.</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Subtitles availability</string>
+			<string>Subtitle availability</string>
 			<key>Key</key>
-			<string>PlaySRGSettingDisplaySubtitlesAvailability</string>
+			<string>PlaySRGSettingSubtitleAvailabilityDisplayed</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -84,7 +84,7 @@
 			<key>Title</key>
 			<string>Audio description availability</string>
 			<key>Key</key>
-			<string>PlaySRGSettingDisplayAudioDescriptionAvailability</string>
+			<string>PlaySRGSettingAudioDescriptionAvailabilityDisplayed</string>
 		</dict>
 		<dict>
 			<key>Type</key>
