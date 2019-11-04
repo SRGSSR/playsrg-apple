@@ -184,10 +184,10 @@
         if (self.media.channel) {
             [accessibilityLabel appendFormat:@", %@", self.media.channel.title];
         }
-        return [accessibilityLabel copy];
+        return accessibilityLabel.copy;
     }
     else {
-        NSMutableString *accessibilityLabel = [self.media.title mutableCopy];
+        NSMutableString *accessibilityLabel = self.media.title.mutableCopy;
         
         if (self.media.show.title && ! [self.media.title containsString:self.media.show.title]) {
             [accessibilityLabel appendFormat:@", %@", self.media.show.title];
@@ -198,7 +198,7 @@
             [accessibilityLabel appendFormat:@". %@", youthProtectionAccessibilityLabel];
         }
         
-        return [accessibilityLabel copy];
+        return accessibilityLabel.copy;
     }
 }
 
@@ -223,7 +223,7 @@
                                                                                          attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle] }];
             [subtitle appendAttributedString:[[NSAttributedString alloc] initWithString:[NSDateFormatter.play_relativeDateFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString
                                                                              attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle] }]];
-            self.subtitleLabel.attributedText = [subtitle copy];
+            self.subtitleLabel.attributedText = subtitle.copy;
         }
         else {
             self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];

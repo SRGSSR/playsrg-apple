@@ -94,7 +94,7 @@ static void commonInit(LiveAccessView *self);
         }
         
         self.mediaType = mediaType;
-        self.medias = [livestreamMedias copy];
+        self.medias = livestreamMedias.copy;
         
         for (SRGMedia *media in livestreamMedias) {
             LiveAccessButton *liveAccessButton = [LiveAccessButton buttonWithType:UIButtonTypeCustom];

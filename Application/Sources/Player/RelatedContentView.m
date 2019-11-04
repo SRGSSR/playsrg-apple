@@ -47,7 +47,7 @@
                                                                                              NSForegroundColorAttributeName : UIColor.play_lightGrayColor }]];
     }
     
-    self.textLabel.attributedText = [attributedText copy];
+    self.textLabel.attributedText = attributedText.copy;
 }
 
 - (IBAction)openLink:(id)sender

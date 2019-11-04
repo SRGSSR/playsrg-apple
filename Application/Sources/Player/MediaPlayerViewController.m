@@ -1264,7 +1264,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [levels addObject:showTitle];
     }
     
-    return [levels copy];
+    return levels.copy;
 }
 
 - (BOOL)srg_isOpenedFromPushNotification

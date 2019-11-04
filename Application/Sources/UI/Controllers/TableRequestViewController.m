@@ -194,7 +194,7 @@
     [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger idx, BOOL * _Nonnull stop) {
         [items addObject:self.items[indexPath.row]];
     }];
-    return [items copy];
+    return items.copy;
 }
 
 - (void)selectItems:(NSArray *)items

@@ -385,7 +385,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [hiddenKeys addObject:SettingsSourceCodeButton];
     }
     
-    self.hiddenKeys = [hiddenKeys copy];
+    self.hiddenKeys = hiddenKeys.copy;
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

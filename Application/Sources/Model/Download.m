@@ -86,7 +86,7 @@ static NSArray<Download *> *s_sortedDownloads;
     }
     
     @try {
-        s_downloadsDictionary = [[self loadDownloadsDictionary] mutableCopy];
+        s_downloadsDictionary = [self loadDownloadsDictionary].mutableCopy;
     }
     @catch (NSException *exception) {
         PlayLogWarning(@"download", @"Download migration failed. Use backup dictionary instead");
@@ -97,7 +97,7 @@ static NSArray<Download *> *s_sortedDownloads;
     if (s_downloadsDictionary.count == 0) {
         NSDictionary *backupDownload = [self loadDownloadsBackupDictionary];
         if (backupDownload.count > 0) {
-            s_downloadsDictionary = [backupDownload mutableCopy];
+            s_downloadsDictionary = backupDownload.mutableCopy;
             [self saveDownloadsDictionary];
         }
     }

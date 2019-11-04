@@ -41,7 +41,7 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
 {
     NSArray<UIImage *> *images = [self animatedImageNamed:name withTintColor:tintColor];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:images.firstObject];
-    imageView.animationImages = [images copy];
+    imageView.animationImages = images.copy;
     imageView.animationDuration = duration;
     [imageView startAnimating];
     return imageView;
@@ -63,7 +63,7 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
     }
     
     NSAssert(images.count != 0, @"Invalid asset %@", name);
-    return [images copy];
+    return images.copy;
 }
 
 #pragma mark Loading animation

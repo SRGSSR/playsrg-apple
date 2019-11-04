@@ -369,7 +369,7 @@
         }
     }
     
-    self.navigationItem.rightBarButtonItems = [rightBarButtonItems copy];
+    self.navigationItem.rightBarButtonItems = rightBarButtonItems.copy;
 }
 
 #pragma mark Section management
@@ -449,7 +449,7 @@
             [homeSectionInfos addObject:homeSectionInfo];
         }
     }
-    self.homeSectionInfos = [homeSectionInfos copy];
+    self.homeSectionInfos = homeSectionInfos.copy;
 }
 
 - (HomeSectionInfo *)infoForHomeSection:(HomeSection)homeSection withObject:(id)object title:(NSString *)title

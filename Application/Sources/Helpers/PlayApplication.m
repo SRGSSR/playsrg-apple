@@ -22,7 +22,7 @@ void PlayApplicationRunOnce(void (NS_NOESCAPE ^block)(void (^completionHandler)(
         void (^completionHandler)(BOOL success) = ^(BOOL success) {
             if (success) {
                 runOnceDictionary[key] = object ?: @YES;
-                [userDefaults setObject:[runOnceDictionary copy] forKey:PlayApplicationRunOnceDictionaryKey];
+                [userDefaults setObject:runOnceDictionary.copy forKey:PlayApplicationRunOnceDictionaryKey];
                 [userDefaults synchronize];
             }
         };

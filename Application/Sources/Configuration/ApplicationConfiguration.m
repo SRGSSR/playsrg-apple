@@ -515,7 +515,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             }
         }
     }
-    self.topicSections = [topicSections copy];
+    self.topicSections = topicSections.copy;
     
     NSMutableArray<NSNumber *> *topicSectionsWithSubtopics = [NSMutableArray array];
     NSString *topicSectionsWithSubtopicsString = [self.remoteConfig configValueForKey:@"topicSectionsWithSubtopics"].stringValue;
@@ -531,7 +531,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             }
         }
     }
-    self.topicSectionsWithSubtopics = [topicSectionsWithSubtopics copy];
+    self.topicSectionsWithSubtopics = topicSectionsWithSubtopics.copy;
     
     // The TV overview is always present as first item and not configurable
     NSMutableArray<NSNumber *> *tvMenuItems = [NSMutableArray arrayWithObject:@(MenuItemTVOverview)];
@@ -548,7 +548,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             }
         }
     }
-    self.tvMenuItems = [tvMenuItems copy];
+    self.tvMenuItems = tvMenuItems.copy;
     
     NSString *radioHomeSectionsString = [self.remoteConfig configValueForKey:@"radioHomeSections"].stringValue;
     self.radioHomeSections = [self homeSectionsFromString:radioHomeSectionsString];
@@ -575,7 +575,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
                     
                     NSMutableDictionary *mutableRadioChannelDictionary = [radioChannelDictionary mutableCopy];
                     mutableRadioChannelDictionary[@"homeSections"] = homeSections;
-                    RadioChannel *radioChannel = [[RadioChannel alloc] initWithDictionary:[mutableRadioChannelDictionary copy]];
+                    RadioChannel *radioChannel = [[RadioChannel alloc] initWithDictionary:mutableRadioChannelDictionary.copy];
                     if (radioChannel) {
                         [radioChannels addObject:radioChannel];
                     }
@@ -592,7 +592,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             PlayLogWarning(@"configuration", @"Radio channel configuration is not valid. A JSON array is required.");
         }
     }
-    self.radioChannels = [radioChannels copy];
+    self.radioChannels = radioChannels.copy;
     
     NSMutableArray<NSNumber *> *radioMenuItems = [NSMutableArray array];
     NSString *radioMenuItemIdentifiersString = [self.remoteConfig configValueForKey:@"radioMenuItems"].stringValue;
@@ -608,7 +608,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             }
         }
     }
-    self.radioMenuItems = [radioMenuItems copy];
+    self.radioMenuItems = radioMenuItems.copy;
     
     NSMutableArray<TVChannel *> *tvChannels = [NSMutableArray array];
     if ([self.remoteConfig configValueForKey:@"tvChannels"].stringValue.length) {
@@ -634,7 +634,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             PlayLogWarning(@"configuration", @"TV channel configuration is not valid. A JSON array is required.");
         }
     }
-    self.tvChannels = [tvChannels copy];
+    self.tvChannels = tvChannels.copy;
     
     FIRRemoteConfigValue *pageSize = [self.remoteConfig configValueForKey:@"pageSize"];
     self.pageSize = (pageSize.source != FIRRemoteConfigSourceStatic) ? MAX(pageSize.numberValue.unsignedIntegerValue, 1) : 20;
@@ -657,7 +657,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             PlayLogWarning(@"configuration", @"Topic header configuration is not valid. A JSON array is required.");
         }
     }
-    self.topicHeaders = [topicHeaders copy];
+    self.topicHeaders = topicHeaders.copy;
     
     FIRRemoteConfigValue *continuousPlaybackPlayerViewTransitionDuration = [self.remoteConfig configValueForKey:@"continuousPlaybackPlayerViewTransitionDuration"];
     self.continuousPlaybackPlayerViewTransitionDuration = (continuousPlaybackPlayerViewTransitionDuration.stringValue.length > 0) ? fmax(continuousPlaybackPlayerViewTransitionDuration.numberValue.doubleValue, 0.) : SRGLetterboxContinuousPlaybackDisabled;
@@ -841,7 +841,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             }
         }
     }
-    return [homeSections copy];
+    return homeSections.copy;
 }
 
 #pragma mark Notifications

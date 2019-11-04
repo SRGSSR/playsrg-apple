@@ -157,14 +157,14 @@
         if (self.channel.currentProgram) {
             [accessibilityLabel appendFormat:@", %@", self.channel.currentProgram.title];
         }
-        return [accessibilityLabel copy];
+        return accessibilityLabel.copy;
     }
     else {
-        NSMutableString *accessibilityLabel = [self.media.title mutableCopy];
+        NSMutableString *accessibilityLabel = self.media.title.mutableCopy;
         if (self.media.show.title && ! [self.media.title containsString:self.media.show.title]) {
             [accessibilityLabel appendFormat:@", %@", self.media.show.title];
         }
-        return [accessibilityLabel copy];
+        return accessibilityLabel.copy;
     }
 }
 

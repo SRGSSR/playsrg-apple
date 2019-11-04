@@ -188,7 +188,7 @@
     }];
     [previewActionItems addObject:openAction];
     
-    return [previewActionItems copy];
+    return previewActionItems.copy;
 }
 
 #pragma mark UI

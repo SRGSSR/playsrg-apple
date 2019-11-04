@@ -167,7 +167,7 @@
 
 - (NSString *)accessibilityLabel
 {
-    NSMutableString *accessibilityLabel = [self.download.title mutableCopy];
+    NSMutableString *accessibilityLabel = self.download.title.mutableCopy;
     
     SRGShow *show = self.download.media.show;
     if (show.title && ! [show.title isEqualToString:self.download.title]) {
@@ -179,7 +179,7 @@
         [accessibilityLabel appendFormat:@". %@", youthProtectionAccessibilityLabel];
     }
     
-    return [accessibilityLabel copy];
+    return accessibilityLabel.copy;
 }
 
 - (NSString *)accessibilityHint

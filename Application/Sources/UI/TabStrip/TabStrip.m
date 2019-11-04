@@ -224,7 +224,7 @@ static void commonInit(TabStrip *self);
             [items addObject:item];
         }
     }
-    return [items copy];
+    return items.copy;
 }
 
 - (CGRect)indicatorViewFrameForIndex:(NSInteger)index
@@ -384,7 +384,7 @@ static void commonInit(TabStrip *self);
     PageItem *item3 = [[PageItem alloc] initWithTitle:@"Page 3" image:nil];
     [items addObject:item3];
     
-    self.items = [items copy];
+    self.items = items.copy;
     [self.collectionView reloadData];
 }
 

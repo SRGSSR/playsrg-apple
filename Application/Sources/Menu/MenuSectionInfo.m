@@ -39,7 +39,7 @@
     [myContentMenuItems addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemDownloads]];
     
     [sectionInfos addObject:[[MenuSectionInfo alloc] initWithTitle:NSLocalizedString(@"My content", @"Menu section header label for user personal content")
-                                                     menuItemInfos:[myContentMenuItems copy]
+                                                     menuItemInfos:myContentMenuItems.copy
                                                         headerless:YES]];
     
     // TV section
@@ -59,7 +59,7 @@
         
         if (menuItemInfos.count != 0) {
             [sectionInfos addObject:[[MenuSectionInfo alloc] initWithTitle:NSLocalizedString(@"TV", @"TV menu section header label")
-                                                             menuItemInfos:[menuItemInfos copy]
+                                                             menuItemInfos:menuItemInfos.copy
                                                                 headerless:NO]];
         }
     }
@@ -87,7 +87,7 @@
         
         if (menuItemInfos.count != 0) {
             [sectionInfos addObject:[[MenuSectionInfo alloc] initWithTitle:NSLocalizedString(@"Radio", @"Radio menu section header label")
-                                                             menuItemInfos:[menuItemInfos copy]
+                                                             menuItemInfos:menuItemInfos.copy
                                                                 headerless:NO]];
         }
     }
@@ -104,10 +104,10 @@
         [otherItemInfos addObject:[MenuItemInfo menuItemInfoWithMenuItem:MenuItemHelp]];
     }
     [sectionInfos addObject:[[MenuSectionInfo alloc] initWithTitle:NSLocalizedString(@"Miscellaneous", @"Miscellaneous menu section header label")
-                                                     menuItemInfos:[otherItemInfos copy]
+                                                     menuItemInfos:otherItemInfos.copy
                                                         headerless:YES]];
     
-    return [sectionInfos copy];
+    return sectionInfos.copy;
 }
 
 #pragma Object lifecycle

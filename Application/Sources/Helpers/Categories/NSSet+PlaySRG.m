@@ -12,9 +12,9 @@
 
 - (NSSet *)play_setByRemovingObjectsInSet:(NSSet *)set
 {
-    NSMutableSet *mutableSet = [self mutableCopy];
+    NSMutableSet *mutableSet = self.mutableCopy;
     [mutableSet minusSet:set];
-    return [mutableSet copy];
+    return mutableSet.copy;
 }
 
 @end

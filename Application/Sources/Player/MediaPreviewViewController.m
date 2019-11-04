@@ -278,7 +278,7 @@
     }];
     [previewActionItems addObject:openAction];
     
-    return [previewActionItems copy];
+    return previewActionItems.copy;
 }
 
 #pragma mark Data
@@ -371,7 +371,7 @@
         [levels addObject:showTitle];
     }
     
-    return [levels copy];
+    return levels.copy;
 }
 
 #pragma mark Notifications

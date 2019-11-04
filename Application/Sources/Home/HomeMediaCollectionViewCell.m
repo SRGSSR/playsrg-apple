@@ -168,7 +168,7 @@
 
 - (NSString *)accessibilityLabel
 {
-    NSMutableString *accessibilityLabel = [self.media.title mutableCopy];
+    NSMutableString *accessibilityLabel = self.media.title.mutableCopy;
     
     if (self.media.show.title && ! [self.media.title containsString:self.media.show.title]) {
         [accessibilityLabel appendFormat:@", %@", self.media.show.title];
@@ -179,7 +179,7 @@
         [accessibilityLabel appendFormat:@". %@", youthProtectionAccessibilityLabel];
     }
     
-    return [accessibilityLabel copy];
+    return accessibilityLabel.copy;
 }
 
 - (NSString *)accessibilityHint
@@ -243,7 +243,7 @@
             [subtitle appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:self.media.date].play_localizedUppercaseFirstLetterString
                                                                              attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithTextStyle:subtitleTextStyle] }]];
             
-            self.subtitleLabel.attributedText = [subtitle copy];
+            self.subtitleLabel.attributedText = subtitle.copy;
         }
         else {
             self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:subtitleTextStyle];

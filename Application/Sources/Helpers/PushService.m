@@ -135,7 +135,7 @@ NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNoti
         }
     }
     
-    return [URNs copy];
+    return URNs.copy;
 }
 
 - (BOOL)isEnabled
