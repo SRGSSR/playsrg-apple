@@ -117,6 +117,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *viewCountLabel;
 @property (nonatomic, weak) IBOutlet UIButton *detailsButton;
 @property (nonatomic, weak) IBOutlet UILabel *summaryLabel;
+
+@property (nonatomic, weak) IBOutlet UIStackView *propertiesStackView;
+@property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
+@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionAvailableLabel;
+@property (nonatomic, weak) IBOutlet UILabel *subtitlesAvailableLabel;
+
 @property (nonatomic, weak) IBOutlet UIView *youthProtectionColorSpacerView;
 @property (nonatomic, weak) IBOutlet UIStackView *youthProtectionColorStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
@@ -317,6 +323,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     // Start with an empty summary label, so that height calculations correctly detect when a summary has been assigned
     self.summaryLabel.text = nil;
+    
+    [self.webFirstLabel play_setWebFirstLabel];
+    [self.audioDescriptionAvailableLabel play_setAudioDescriptionAvailableLabel];
+    [self.subtitlesAvailableLabel play_setSubtitlesAvailableLabel];
     
     // Ensure consistent initial layout constraint priorities
     self.playerBottomConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
