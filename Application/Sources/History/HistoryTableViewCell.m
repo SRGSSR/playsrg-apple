@@ -254,7 +254,7 @@
     self.media360ImageView.hidden = (media.presentation != SRGPresentation360);
     
     BOOL downloaded = [Download downloadForMedia:media].state == DownloadStateDownloaded;
-    self.subtitlesAvailableLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtilesAvailable || downloaded);
+    self.subtitlesAvailableLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtitlesAvailable || downloaded);
     self.audioDescriptionAvailableLabel.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
     self.webFirstLabel.hidden = ! self.media.play_isWebFirst;
     

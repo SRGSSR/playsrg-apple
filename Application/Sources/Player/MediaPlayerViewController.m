@@ -34,6 +34,7 @@
 #import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
+#import "SRGResource+PlaySRG.h"
 #import "StoreReview.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
@@ -118,6 +119,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIButton *detailsButton;
 @property (nonatomic, weak) IBOutlet UILabel *summaryLabel;
 
+@property (nonatomic, weak) IBOutlet UIView *propertiesTopLineSpacerView;
 @property (nonatomic, weak) IBOutlet UIStackView *propertiesStackView;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
 @property (nonatomic, weak) IBOutlet UILabel *audioDescriptionAvailableLabel;
@@ -829,15 +831,33 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self reloadDetailsWithShow:media.show];
     }
     
+    SRGResource *resource = self.letterboxController.resource;
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     // Display 🔒 in the title if the stream is protected with a DRM.
-    if (self.letterboxController.resource.DRMs.count > 0) {
+    if (resource.DRMs.count > 0) {
         self.titleLabel.text = (self.titleLabel.text != nil) ? [@"🔒 " stringByAppendingString:self.titleLabel.text] : @"🔒";
     }
 #endif
     
     self.summaryLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.summaryLabel.text = media.play_fullSummary;
+    
+    BOOL downloaded = [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded;
+    BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
+    BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
+    BOOL isWebFirst = mainChapterMedia.play_webFirst;
+    if (hasSubtitles || hasAudioDescription || isWebFirst) {
+        [self.propertiesStackView play_setHidden:NO];
+        self.propertiesTopLineSpacerView.hidden = NO;
+        
+        self.subtitlesAvailableLabel.hidden = ! hasSubtitles;
+        self.audioDescriptionAvailableLabel.hidden = ! hasAudioDescription;
+        self.webFirstLabel.hidden = ! isWebFirst;
+    }
+    else {
+        [self.propertiesStackView play_setHidden:YES];
+        self.propertiesTopLineSpacerView.hidden = YES;
+    }
     
     [self updateRadioHomeButton];
     self.radioHomeButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];

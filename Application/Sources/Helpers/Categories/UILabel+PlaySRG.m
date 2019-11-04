@@ -102,7 +102,7 @@
     else if (isLivestreamOrScheduledLivestream) {
         [self play_displayDurationLabelForLive];
     }
-    else if(isLiveEvent) {
+    else if (isLiveEvent) {
         [self play_displayDurationLabelWithName:NSLocalizedString(@"Replay", @"Short label identifying a replay sport event. Display in uppercase.") bulletColor:[UIColor srg_blueColor]];
     }
     else if (duration != 0.) {

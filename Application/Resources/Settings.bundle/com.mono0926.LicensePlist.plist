@@ -8,7 +8,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/appcenter-sdk-apple</string>
 			<key>Title</key>
-			<string>appcenter-sdk-apple (2.5.1)</string>
+			<string>appcenter-sdk-apple (2.5.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -40,7 +40,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/ComScore-iOS-watchOS-tvOS</string>
 			<key>Title</key>
-			<string>ComScore-iOS-watchOS-tvOS (6.0.0)</string>
+			<string>ComScore-iOS-watchOS-tvOS (5.8.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -224,7 +224,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-ios</string>
 			<key>Title</key>
-			<string>srganalytics-ios (3b61d43)</string>
+			<string>srganalytics-ios (74a88fd)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -232,7 +232,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgappearance-ios</string>
 			<key>Title</key>
-			<string>srgappearance-ios (f2a5f02)</string>
+			<string>srgappearance-ios (6d49d72)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -240,7 +240,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-ios</string>
 			<key>Title</key>
-			<string>srgdataprovider-ios (d6d865d)</string>
+			<string>srgdataprovider-ios (6d10a8e)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -256,7 +256,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-ios</string>
 			<key>Title</key>
-			<string>srgidentity-ios (a7d0843)</string>
+			<string>srgidentity-ios (8e4d983)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -264,7 +264,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-ios</string>
 			<key>Title</key>
-			<string>srgletterbox-ios (0dec788)</string>
+			<string>srgletterbox-ios (f933cd1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -272,7 +272,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srglogger-ios</string>
 			<key>Title</key>
-			<string>srglogger-ios (5df2c55)</string>
+			<string>srglogger-ios (7b08e40)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -280,7 +280,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-ios</string>
 			<key>Title</key>
-			<string>srgmediaplayer-ios (56c0bd3)</string>
+			<string>srgmediaplayer-ios (943b889)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -288,7 +288,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgnetwork-ios</string>
 			<key>Title</key>
-			<string>srgnetwork-ios (295b641)</string>
+			<string>srgnetwork-ios (a4f32bf)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

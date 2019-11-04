@@ -564,6 +564,7 @@
                         <outlet property="playerView" destination="yDa-0T-uNV" id="Hkl-v6-yZ2"/>
                         <outlet property="programTimeLabel" destination="azC-dB-UH4" id="6rV-J5-4MC"/>
                         <outlet property="propertiesStackView" destination="3ln-Rh-6yE" id="K95-zc-cc0"/>
+                        <outlet property="propertiesTopLineSpacerView" destination="iQk-RU-8Cd" id="wBO-lC-hSG"/>
                         <outlet property="pullDownGestureRecognizer" destination="bXa-UN-Lpw" id="u5Z-M7-fvd"/>
                         <outlet property="radioHomeButton" destination="gwq-4e-QPr" id="wqf-bW-ZEU"/>
                         <outlet property="radioHomeButtonImageView" destination="KRj-ZA-GgL" id="DQI-JP-ysE"/>
