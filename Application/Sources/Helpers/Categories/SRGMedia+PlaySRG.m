@@ -31,16 +31,16 @@
     }
 }
 
-- (BOOL)play_isSubtilesAvailable
+- (BOOL)play_areSubtitlesAvailable
 {
-    return [self subtitleInformationsForSource:self.recommendedSubtitleInformationSource].count != 0;
+    return [self subtitleVariantsForSource:self.recommendedSubtitleVariantSource].count != 0;
 }
 
 - (BOOL)play_isAudioDescriptionAvailable
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGAudioTrack.new, type), @(SRGAudioTrackTypeAudioDescription)];
-    NSArray<SRGAudioTrack *> *audioTracks = [self audioTracksForSource:self.recommendedAudioTrackSource];
-    return [audioTracks filteredArrayUsingPredicate:predicate].count != 0;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGVariant.new, type), @(SRGVariantTypeAudioDescription)];
+    NSArray<SRGVariant *> *audioVariants = [self audioVariantsForSource:self.recommendedAudioVariantSource];
+    return [audioVariants filteredArrayUsingPredicate:predicate].count != 0;
 }
 
 - (BOOL)play_isWebFirst

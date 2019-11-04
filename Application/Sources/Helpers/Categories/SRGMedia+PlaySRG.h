@@ -21,7 +21,7 @@ OBJC_EXPORT BOOL PlayIsSwissTXTURN(NSString *URN);
 // Return a concatenation of lead and summary, iff summary not contains the lead, to avoid duplicate information. 
 @property (nonatomic, readonly, nullable) NSString *play_fullSummary;
 
-@property (nonatomic, readonly, getter=play_isSubtilesAvailable) BOOL play_subtilesAvailable;
+@property (nonatomic, readonly, getter=play_areSubtitlesAvailable) BOOL play_subtilesAvailable;
 
 @property (nonatomic, readonly, getter=play_isAudioDescriptionAvailable) BOOL play_audioDescriptionAvailable;
 
