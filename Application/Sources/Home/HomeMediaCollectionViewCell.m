@@ -313,7 +313,7 @@
         BOOL downloadsHintsHidden = ApplicationConfiguration.sharedApplicationConfiguration.downloadsHintsHidden;
         
         [self.downloadStatusImageView play_stopAnimating];
-        self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable-22"];
+        self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable-16"];
         
         self.downloadStatusImageView.hidden = downloadsHintsHidden ? YES : ! [Download canDownloadMedia:self.media];
         return;
@@ -332,26 +332,26 @@
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended: {
             [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable_stop-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable_stop-16"];
             break;
         }
             
         case DownloadStateDownloading: {
-            [self.downloadStatusImageView play_startAnimatingDownloading22WithTintColor:imageColor];
+            [self.downloadStatusImageView play_startAnimatingDownloading16WithTintColor:imageColor];
             downloadImage = self.downloadStatusImageView.image;
             break;
         }
             
         case DownloadStateDownloaded: {
             [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable_full-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable_full-16"];
             break;
         }
             
         case DownloadStateDownloadable:
         case DownloadStateRemoved: {
             [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable-16"];
             break;
         }
             

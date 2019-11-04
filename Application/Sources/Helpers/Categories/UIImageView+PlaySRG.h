@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Standard download animations
  */
+- (void)play_startAnimatingDownloading16WithTintColor:(nullable UIColor *)tintColor;
 - (void)play_startAnimatingDownloading22WithTintColor:(nullable UIColor *)tintColor;
 - (void)play_startAnimatingDownloading48WithTintColor:(nullable UIColor *)tintColor;
 

@@ -75,6 +75,11 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
 
 #pragma mark Downloading animation
 
+- (void)play_startAnimatingDownloading16WithTintColor:(nullable UIColor *)tintColor
+{
+    [self play_startAnimatingWithImagesNamed:@"downloading-16" withTintColor:tintColor];
+}
+
 - (void)play_startAnimatingDownloading22WithTintColor:(nullable UIColor *)tintColor
 {
     [self play_startAnimatingWithImagesNamed:@"downloading-22" withTintColor:tintColor];

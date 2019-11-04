@@ -102,18 +102,17 @@
                         <size key="shadowOffset" width="0.0" height="1"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="EDl-2o-9XW" userLabel="Subtitle Stack View">
-                        <rect key="frame" x="159.5" y="18" width="362.5" height="22"/>
+                        <rect key="frame" x="159.5" y="18" width="362.5" height="18"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="downloadable-22" translatesAutoresizingMaskIntoConstraints="NO" id="m53-Px-eX9" userLabel="Download Status Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="downloadable-16" translatesAutoresizingMaskIntoConstraints="NO" id="m53-Px-eX9" userLabel="Download Status Image View">
+                                <rect key="frame" x="0.0" y="0.0" width="16" height="18"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="FxH-Xs-RcJ"/>
-                                    <constraint firstAttribute="width" priority="999" constant="22" id="SjQ-oz-4go"/>
+                                    <constraint firstAttribute="width" priority="999" constant="16" id="SjQ-oz-4go"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;subtitle&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wce-v1-6RF">
-                                <rect key="frame" x="28" y="0.0" width="334.5" height="22"/>
+                                <rect key="frame" x="22" y="0.0" width="340.5" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -121,7 +120,7 @@
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="9dp-GV-cjN" userLabel="Label Stack View">
-                        <rect key="frame" x="159.5" y="44" width="362.5" height="14"/>
+                        <rect key="frame" x="159.5" y="40" width="362.5" height="14"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="&lt;webFirst&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8i-Ip-zcM" userLabel="Web First Label">
                                 <rect key="frame" x="0.0" y="0.0" width="64" height="14"/>
@@ -214,7 +213,7 @@
     </objects>
     <resources>
         <image name="360_media-25" width="25" height="25"/>
-        <image name="downloadable-22" width="22" height="22"/>
+        <image name="downloadable-16" width="16" height="16"/>
         <image name="geoblocked-25" width="25" height="25"/>
         <image name="youth_protection_yellow-18" width="18" height="18"/>
     </resources>
