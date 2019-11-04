@@ -73,17 +73,27 @@
     [self play_setMediaLabelWithString:NSLocalizedString(@"ST", @"Subtitles short label on media cells")];
 }
 
+- (void)play_setSubtitlesAvailableBadge
+{
+    [self play_setMediaBadgeWithString:NSLocalizedString(@"ST", @"Subtitles short label on media cells")];
+}
+
 - (void)play_setAudioDescriptionAvailableLabel
 {
     [self play_setMediaLabelWithString:NSLocalizedString(@"AD", @"Audio description short label on media cells")];
 }
 
-- (void)play_setWebFirstLabel
+- (void)play_setAudioDescriptionAvailableBadge
+{
+    [self play_setMediaBadgeWithString:NSLocalizedString(@"AD", @"Audio description short label on media cells")];
+}
+
+- (void)play_setWebFirstBadge
 {
     self.backgroundColor = UIColor.srg_blueColor;
-    self.layer.cornerRadius = 4.f;
+    self.layer.cornerRadius = 2.f;
     self.layer.masksToBounds = YES;
-    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+    self.font = [UIFont srg_mediumFontWithSize:11.f];
     self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"WEB FIRST", @"Web first label on media cells")].uppercaseString;
 }
 
@@ -136,6 +146,16 @@
     self.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     self.text = [NSString stringWithFormat:@"  %@  ", string].uppercaseString;
+}
+
+- (void)play_setMediaBadgeWithString:(NSString *)string
+{
+    self.backgroundColor = UIColor.whiteColor;
+    self.layer.cornerRadius = 2.f;
+    self.layer.masksToBounds = YES;
+    self.font = [UIFont srg_mediumFontWithSize:11.f];
+    self.text = [NSString stringWithFormat:@"  %@  ", string].uppercaseString;
+    self.textColor = UIColor.blackColor;
 }
 
 @end

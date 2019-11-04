@@ -326,9 +326,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     // Start with an empty summary label, so that height calculations correctly detect when a summary has been assigned
     self.summaryLabel.text = nil;
     
-    [self.webFirstLabel play_setWebFirstLabel];
-    [self.audioDescriptionAvailableLabel play_setAudioDescriptionAvailableLabel];
-    [self.subtitlesAvailableLabel play_setSubtitlesAvailableLabel];
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.audioDescriptionAvailableLabel play_setAudioDescriptionAvailableBadge];
+    [self.subtitlesAvailableLabel play_setSubtitlesAvailableBadge];
     
     // Ensure consistent initial layout constraint priorities
     self.playerBottomConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
@@ -572,7 +572,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (BOOL)accessibilityPerformEscape
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        [Banner hideAll]; // Avoids view retain, and video playback.
+        [Banner hideAll];           // Avoids view retain, preventing playback from stopping.
         [StoreReview requestReview];
     }];
     return YES;

@@ -72,7 +72,7 @@
     
     [self.subtitlesAvailableLabel play_setSubtitlesAvailableLabel];
     [self.audioDescriptionAvailableLabel play_setAudioDescriptionAvailableLabel];
-    [self.webFirstLabel play_setWebFirstLabel];
+    [self.webFirstLabel play_setWebFirstBadge];
     
     self.subtitlesAvailableLabel.hidden = YES;
     self.audioDescriptionAvailableLabel.hidden = YES;

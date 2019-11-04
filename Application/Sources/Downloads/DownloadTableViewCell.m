@@ -64,7 +64,7 @@
     
     self.durationLabelBackgroundColor = self.durationLabel.backgroundColor;
     
-    [self.webFirstLabel play_setWebFirstLabel];
+    [self.webFirstLabel play_setWebFirstBadge];
     
     self.youthProtectionColorImageView.hidden = YES;
     self.webFirstLabel.hidden = YES;
