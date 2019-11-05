@@ -157,7 +157,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bicanal-14" translatesAutoresizingMaskIntoConstraints="NO" id="fxx-wp-NGG">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multiaudio-14" translatesAutoresizingMaskIntoConstraints="NO" id="fxx-wp-NGG">
                                         <rect key="frame" x="128.5" y="0.0" width="14" height="14"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
@@ -223,7 +223,6 @@
                 <constraint firstAttribute="trailing" secondItem="ibC-3k-6VL" secondAttribute="trailing" id="r1Y-SE-bey"/>
             </constraints>
             <connections>
-                <outlet property="audioBicanalImageView" destination="fxx-wp-NGG" id="wVx-Gr-sK5"/>
                 <outlet property="audioDescriptionAvailableLabel" destination="8tv-sE-AgH" id="Usl-z6-Z5s"/>
                 <outlet property="blockingOverlayView" destination="lwo-fA-qQ1" id="6Sy-jv-iMg"/>
                 <outlet property="blockingReasonImageView" destination="noH-ah-5Oj" id="kpX-uc-aqH"/>
@@ -232,6 +231,7 @@
                 <outlet property="editorialLabel" destination="Oz7-rT-faq" id="wDP-Ur-dd8"/>
                 <outlet property="media360ImageView" destination="nTU-QL-FSe" id="ini-4Y-PZc"/>
                 <outlet property="mediaView" destination="ibC-3k-6VL" id="p2D-Kg-VUU"/>
+                <outlet property="multiAudioImageView" destination="fxx-wp-NGG" id="wVx-Gr-sK5"/>
                 <outlet property="placeholderImageView" destination="X0z-j2-ewR" id="yoW-Hf-Ui6"/>
                 <outlet property="placeholderView" destination="iq7-pu-lug" id="oGH-6U-j6a"/>
                 <outlet property="progressView" destination="3Zs-DP-WoR" id="wPV-AO-Dj0"/>
@@ -249,9 +249,9 @@
     </objects>
     <resources>
         <image name="360_media-25" width="25" height="25"/>
-        <image name="bicanal-14" width="14" height="14"/>
         <image name="downloadable-16" width="16" height="16"/>
         <image name="geoblocked-25" width="25" height="25"/>
+        <image name="multiaudio-14" width="14" height="14"/>
         <image name="youth_protection_yellow-18" width="18" height="18"/>
     </resources>
 </document>

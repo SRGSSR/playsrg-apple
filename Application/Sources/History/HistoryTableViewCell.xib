@@ -118,7 +118,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bicanal-14" translatesAutoresizingMaskIntoConstraints="NO" id="6Bc-yN-2Pd">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multiaudio-14" translatesAutoresizingMaskIntoConstraints="NO" id="6Bc-yN-2Pd">
                                 <rect key="frame" x="128.5" y="0.0" width="14" height="14"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
@@ -160,13 +160,13 @@
             <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
             <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
-                <outlet property="audioBicanalImageView" destination="6Bc-yN-2Pd" id="qya-U2-eeP"/>
                 <outlet property="audioDescriptionAvailableLabel" destination="c1V-B9-NQ9" id="Ndj-U0-D2R"/>
                 <outlet property="blockingOverlayView" destination="i07-Yc-Mid" id="pUE-1M-SM4"/>
                 <outlet property="blockingReasonImageView" destination="EWw-mH-C5O" id="29C-M0-xB1"/>
                 <outlet property="downloadStatusImageView" destination="YBz-Mz-5VT" id="cQL-VD-Xe7"/>
                 <outlet property="durationLabel" destination="82K-0x-Ycd" id="kp8-xd-Gte"/>
                 <outlet property="media360ImageView" destination="yJ4-nV-bkC" id="fJr-e5-Kr8"/>
+                <outlet property="multiAudioImageView" destination="6Bc-yN-2Pd" id="qya-U2-eeP"/>
                 <outlet property="progressView" destination="Lwe-Gf-yaL" id="zL3-wa-8jD"/>
                 <outlet property="subtitleLabel" destination="Fzj-y3-kYr" id="cte-CG-dPv"/>
                 <outlet property="subtitlesAvailableLabel" destination="ors-G5-FDz" id="IIa-AF-R2g"/>
@@ -180,9 +180,9 @@
     </objects>
     <resources>
         <image name="360_media-25" width="25" height="25"/>
-        <image name="bicanal-14" width="14" height="14"/>
         <image name="downloadable-16" width="16" height="16"/>
         <image name="geoblocked-25" width="25" height="25"/>
+        <image name="multiaudio-14" width="14" height="14"/>
         <image name="youth_protection_yellow-18" width="18" height="18"/>
     </resources>
 </document>

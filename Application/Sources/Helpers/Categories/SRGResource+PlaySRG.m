@@ -22,7 +22,7 @@
     return [audioVariants filteredArrayUsingPredicate:predicate].count != 0;
 }
 
-- (BOOL)play_isAudioBicanal
+- (BOOL)play_isMultiAudio
 {
     NSArray<SRGVariant *> *audioVariants = [self audioVariantsForSource:self.recommendedAudioVariantSource];
     NSArray<NSLocale *> *locales = [audioVariants valueForKey:@keypath(SRGVariant.new, locale)];

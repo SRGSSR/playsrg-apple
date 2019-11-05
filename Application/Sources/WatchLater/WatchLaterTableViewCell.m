@@ -37,7 +37,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
 @property (nonatomic, weak) IBOutlet UILabel *audioDescriptionAvailableLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitlesAvailableLabel;
-@property (nonatomic, weak) IBOutlet UIImageView *audioBicanalImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *multiAudioImageView;
 
 @property (nonatomic, weak) IBOutlet UIView *blockingOverlayView;
 @property (nonatomic, weak) IBOutlet UIImageView *blockingReasonImageView;
@@ -83,7 +83,7 @@
     self.webFirstLabel.hidden = YES;
     self.audioDescriptionAvailableLabel.hidden = YES;
     self.subtitlesAvailableLabel.hidden = YES;
-    self.audioBicanalImageView.hidden = YES;
+    self.multiAudioImageView.hidden = YES;
 
     self.blockingOverlayViewColor = self.blockingOverlayView.backgroundColor;
     self.durationLabelBackgroundColor = self.durationLabel.backgroundColor;
@@ -111,7 +111,7 @@
     self.webFirstLabel.hidden = YES;
     self.audioDescriptionAvailableLabel.hidden = YES;
     self.subtitlesAvailableLabel.hidden = YES;
-    self.audioBicanalImageView.hidden = YES;
+    self.multiAudioImageView.hidden = YES;
 
     self.blockingOverlayView.hidden = YES;
     self.progressView.hidden = YES;
@@ -260,7 +260,7 @@
     self.webFirstLabel.hidden = ! media.play_webFirst;
     self.audioDescriptionAvailableLabel.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
     self.subtitlesAvailableLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtitlesAvailable || downloaded);
-    self.audioBicanalImageView.hidden = ! self.media.play_audioBicanal;
+    self.multiAudioImageView.hidden = ! self.media.play_multiAudio;
 
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);

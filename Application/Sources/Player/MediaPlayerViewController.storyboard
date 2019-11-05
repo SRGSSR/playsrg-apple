@@ -277,7 +277,7 @@
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bicanal-14" translatesAutoresizingMaskIntoConstraints="NO" id="aeL-66-EET">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multiaudio-14" translatesAutoresizingMaskIntoConstraints="NO" id="aeL-66-EET">
                                                                 <rect key="frame" x="125.5" y="0.0" width="14" height="14"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </imageView>
@@ -537,7 +537,6 @@
                         <viewLayoutGuide key="safeArea" id="cxL-OK-uak"/>
                     </view>
                     <connections>
-                        <outlet property="audioBicanalImageView" destination="aeL-66-EET" id="jnS-8h-Ajc"/>
                         <outlet property="audioDescriptionAvailableLabel" destination="NxI-Zo-553" id="vev-MV-5Eb"/>
                         <outlet property="availabilityLabel" destination="5B6-wH-ilY" id="PQH-MM-Ffr"/>
                         <outlet property="channelInfoStackView" destination="aiH-rN-Erx" id="IsT-Kk-daa"/>
@@ -562,6 +561,7 @@
                         <outlet property="logoImageView" destination="UTu-5E-zIg" id="Jyv-yV-LKw"/>
                         <outlet property="logoStackView" destination="jym-bi-kal" id="ZHO-Hi-T5O"/>
                         <outlet property="mediaInfoStackView" destination="44Z-TF-U9J" id="MCN-kL-Vf4"/>
+                        <outlet property="multiAudioImageView" destination="aeL-66-EET" id="jnS-8h-Ajc"/>
                         <outlet property="nextProgramLabel" destination="TWK-yS-nud" id="1Me-Wn-V7J"/>
                         <outlet property="playerAspectRatio16_9Constraint" destination="sHT-jJ-Lxy" id="sae-Wk-L16"/>
                         <outlet property="playerAspectRatioBigLandscapeScreenConstraint" destination="d4e-DG-s50" id="Xip-HB-R7g"/>
@@ -627,12 +627,12 @@
     </scenes>
     <resources>
         <image name="arrow_down-22" width="22" height="22"/>
-        <image name="bicanal-14" width="14" height="14"/>
         <image name="close-48" width="48" height="48"/>
         <image name="downloadable-48" width="48" height="48"/>
         <image name="expand_22" width="22" height="22"/>
         <image name="favorite-22" width="22" height="22"/>
         <image name="home-22" width="22" height="22"/>
+        <image name="multiaudio-14" width="14" height="14"/>
         <image name="share-48" width="48" height="48"/>
         <image name="view_count_video-16" width="16" height="16"/>
         <image name="watch_later-48" width="48" height="48"/>

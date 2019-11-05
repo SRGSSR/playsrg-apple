@@ -124,7 +124,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
 @property (nonatomic, weak) IBOutlet UILabel *audioDescriptionAvailableLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitlesAvailableLabel;
-@property (nonatomic, weak) IBOutlet UIImageView *audioBicanalImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *multiAudioImageView;
 
 @property (nonatomic, weak) IBOutlet UIView *youthProtectionColorSpacerView;
 @property (nonatomic, weak) IBOutlet UIStackView *youthProtectionColorStackView;
@@ -331,9 +331,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.audioDescriptionAvailableLabel play_setAudioDescriptionAvailableBadge];
     [self.subtitlesAvailableLabel play_setSubtitlesAvailableBadge];
     
-    self.audioBicanalImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio original version", @"Accessibility label for the audio bi canal badge");
-    self.audioBicanalImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
-    self.audioBicanalImageView.isAccessibilityElement = YES;
+    self.multiAudioImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio original version", @"Accessibility label for the multi audio badge");
+    self.multiAudioImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
+    self.multiAudioImageView.isAccessibilityElement = YES;
     
     // Ensure consistent initial layout constraint priorities
     self.playerBottomConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
@@ -851,15 +851,15 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     BOOL isWebFirst = mainChapterMedia.play_webFirst;
     BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
     BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
-    BOOL hasAudioBicanal = resource.play_audioBicanal && ! downloaded;
-    if (isWebFirst || hasSubtitles || hasAudioDescription || hasAudioBicanal) {
+    BOOL hasMultiAudio = resource.play_multiAudio && ! downloaded;
+    if (isWebFirst || hasSubtitles || hasAudioDescription || hasMultiAudio) {
         [self.propertiesStackView play_setHidden:NO];
         self.propertiesTopLineSpacerView.hidden = NO;
         
         self.webFirstLabel.hidden = ! isWebFirst;
         self.subtitlesAvailableLabel.hidden = ! hasSubtitles;
         self.audioDescriptionAvailableLabel.hidden = ! hasAudioDescription;
-        self.audioBicanalImageView.hidden = ! hasAudioBicanal;
+        self.multiAudioImageView.hidden = ! hasMultiAudio;
     }
     else {
         [self.propertiesStackView play_setHidden:YES];
