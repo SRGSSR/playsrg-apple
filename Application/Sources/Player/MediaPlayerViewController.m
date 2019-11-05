@@ -331,6 +331,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.audioDescriptionAvailableLabel play_setAudioDescriptionAvailableBadge];
     [self.subtitlesAvailableLabel play_setSubtitlesAvailableBadge];
     
+    self.audioBicanalImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio original version", @"Accessibility label for the audio bi canal badge");
+    self.audioBicanalImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
+    self.audioBicanalImageView.isAccessibilityElement = YES;
+    
     // Ensure consistent initial layout constraint priorities
     self.playerBottomConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
     self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelNormalPriority;
