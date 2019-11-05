@@ -49,6 +49,13 @@
     return [self.date compare:date] == NSOrderedDescending && [self timeAvailabilityAtDate:date] == SRGTimeAvailabilityAvailable && self.contentType == SRGContentTypeEpisode;
 }
 
+- (BOOL)play_isAudioBicanal
+{
+    NSArray<SRGVariant *> *audioVariants = [self audioVariantsForSource:self.recommendedAudioVariantSource];
+    NSArray<NSLocale *> *locales = [audioVariants valueForKey:@keypath(SRGVariant.new, locale)];
+    return [NSSet setWithArray:locales].count > 1;
+}
+
 @end
 
 #pragma mark Functions

@@ -45,6 +45,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
 @property (nonatomic, weak) IBOutlet UILabel *audioDescriptionAvailableLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitlesAvailableLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *audioBicanalImageView;
 
 @property (nonatomic, weak) IBOutlet UIView *blockingOverlayView;
 @property (nonatomic, weak) IBOutlet UIImageView *blockingReasonImageView;
@@ -92,6 +93,7 @@
     self.webFirstLabel.hidden = YES;
     self.audioDescriptionAvailableLabel.hidden = YES;
     self.subtitlesAvailableLabel.hidden = YES;
+    self.audioBicanalImageView.hidden = YES;
 
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
@@ -116,6 +118,7 @@
     self.webFirstLabel.hidden = YES;
     self.audioDescriptionAvailableLabel.hidden = YES;
     self.subtitlesAvailableLabel.hidden = YES;
+    self.audioBicanalImageView.hidden = YES;
     
     self.blockingOverlayView.hidden = YES;
     
@@ -274,9 +277,10 @@
     self.media360ImageView.hidden = (self.media.presentation != SRGPresentation360);
     
     BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
-    self.webFirstLabel.hidden = ! self.media.play_isWebFirst;
+    self.webFirstLabel.hidden = ! self.media.play_webFirst;
     self.audioDescriptionAvailableLabel.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! self.media.play_audioDescriptionAvailable || downloaded);
     self.subtitlesAvailableLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! self.media.play_subtitlesAvailable || downloaded);
+    self.audioBicanalImageView.hidden = ! self.media.play_audioBicanal;
 
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);

@@ -24,6 +24,7 @@ OBJC_EXPORT BOOL PlayIsSwissTXTURN(NSString *URN);
 @property (nonatomic, readonly, getter=play_areSubtitlesAvailable) BOOL play_subtitlesAvailable;
 @property (nonatomic, readonly, getter=play_isAudioDescriptionAvailable) BOOL play_audioDescriptionAvailable;
 @property (nonatomic, readonly, getter=play_isWebFirst) BOOL play_webFirst;
+@property (nonatomic, readonly, getter=play_isAudioBicanal) BOOL play_audioBicanal;
 
 @end
 

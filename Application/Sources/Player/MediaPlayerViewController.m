@@ -124,6 +124,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
 @property (nonatomic, weak) IBOutlet UILabel *audioDescriptionAvailableLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitlesAvailableLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *audioBicanalImageView;
 
 @property (nonatomic, weak) IBOutlet UIView *youthProtectionColorSpacerView;
 @property (nonatomic, weak) IBOutlet UIStackView *youthProtectionColorStackView;
@@ -843,16 +844,18 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.summaryLabel.text = media.play_fullSummary;
     
     BOOL downloaded = [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded;
+    BOOL isWebFirst = mainChapterMedia.play_webFirst;
     BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
     BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
-    BOOL isWebFirst = mainChapterMedia.play_webFirst;
-    if (hasSubtitles || hasAudioDescription || isWebFirst) {
+    BOOL hasAudioBicanal = resource.play_audioBicanal && ! downloaded;
+    if (isWebFirst || hasSubtitles || hasAudioDescription || hasAudioBicanal) {
         [self.propertiesStackView play_setHidden:NO];
         self.propertiesTopLineSpacerView.hidden = NO;
         
+        self.webFirstLabel.hidden = ! isWebFirst;
         self.subtitlesAvailableLabel.hidden = ! hasSubtitles;
         self.audioDescriptionAvailableLabel.hidden = ! hasAudioDescription;
-        self.webFirstLabel.hidden = ! isWebFirst;
+        self.audioBicanalImageView.hidden = ! hasAudioBicanal;
     }
     else {
         [self.propertiesStackView play_setHidden:YES];
