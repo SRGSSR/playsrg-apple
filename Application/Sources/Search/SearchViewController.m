@@ -176,6 +176,11 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         self.navigationItem.leftBarButtonItem = nil;
     }
     
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(accessibilityVoiceOverStatusChanged:)
+                                               name:UIAccessibilityVoiceOverStatusChanged
+                                             object:nil];
+    
     [self updateSearchSettingsButton];
 }
 
@@ -741,6 +746,13 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     NSAssert(self.closeBlock, @"Close must only be available if a close block has been defined");
     self.closeBlock();
+}
+
+#pragma mark Notifications
+
+- (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
+{
+    [self.collectionView reloadData];
 }
 
 @end
