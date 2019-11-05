@@ -100,7 +100,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="f2D-cW-RJh" userLabel="Label Stack View">
                         <rect key="frame" x="169.5" y="42.5" width="453.5" height="14"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="&lt;webFirst&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnZ-cz-H0h" userLabel="Web First Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;webFirst&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnZ-cz-H0h" userLabel="Web First Label">
                                 <rect key="frame" x="0.0" y="0.0" width="64" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="pb4-Bq-i9e"/>
