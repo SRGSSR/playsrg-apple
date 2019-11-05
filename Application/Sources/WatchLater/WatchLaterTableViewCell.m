@@ -258,7 +258,7 @@
     self.audioDescriptionAvailableLabel.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
     self.subtitlesAvailableLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtitlesAvailable || downloaded);
 
-    self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
+    self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
     
     SRGBlockingReason blockingReason = [media blockingReasonAtDate:NSDate.date];
