@@ -256,7 +256,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-ios</string>
 			<key>Title</key>
-			<string>srgidentity-ios (1.0.5)</string>
+			<string>srgidentity-ios (8e4d983)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -264,7 +264,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-ios</string>
 			<key>Title</key>
-			<string>srgletterbox-ios (597b08f)</string>
+			<string>srgletterbox-ios (f933cd1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -272,7 +272,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srglogger-ios</string>
 			<key>Title</key>
-			<string>srglogger-ios (1.1)</string>
+			<string>srglogger-ios (7b08e40)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

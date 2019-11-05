@@ -454,11 +454,11 @@ name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 5e3cf5a
 
 name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
 
-name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 1.0.5
+name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 8e4d983
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 597b08f
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: f933cd1
 
-name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 1.1
+name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 7b08e40
 
 name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 943b889
 
