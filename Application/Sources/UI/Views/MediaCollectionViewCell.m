@@ -31,12 +31,12 @@
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
-@property (nonatomic, weak) IBOutlet UILabel *subtitlesAvailableLabel;
-@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionAvailableLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *downloadStatusImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *media360ImageView;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
+@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionAvailableLabel;
+@property (nonatomic, weak) IBOutlet UILabel *subtitlesAvailableLabel;
 
 @property (nonatomic, weak) IBOutlet UIView *blockingOverlayView;
 @property (nonatomic, weak) IBOutlet UIImageView *blockingReasonImageView;
@@ -70,14 +70,14 @@
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
-    [self.subtitlesAvailableLabel play_setSubtitlesAvailableLabel];
-    [self.audioDescriptionAvailableLabel play_setAudioDescriptionAvailableLabel];
     [self.webFirstLabel play_setWebFirstBadge];
+    [self.audioDescriptionAvailableLabel play_setAudioDescriptionAvailableBadge];
+    [self.subtitlesAvailableLabel play_setSubtitlesAvailableBadge];
     
-    self.subtitlesAvailableLabel.hidden = YES;
-    self.audioDescriptionAvailableLabel.hidden = YES;
     self.youthProtectionColorImageView.hidden = YES;
     self.webFirstLabel.hidden = YES;
+    self.audioDescriptionAvailableLabel.hidden = YES;
+    self.subtitlesAvailableLabel.hidden = YES;
     
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
@@ -88,11 +88,11 @@
 {
     [super prepareForReuse];
     
-    self.subtitlesAvailableLabel.hidden = YES;
-    self.audioDescriptionAvailableLabel.hidden = YES;
     self.youthProtectionColorImageView.hidden = YES;
     self.webFirstLabel.hidden = YES;
-    
+    self.audioDescriptionAvailableLabel.hidden = YES;
+    self.subtitlesAvailableLabel.hidden = YES;
+
     self.blockingOverlayView.hidden = YES;
     self.progressView.hidden = YES;
     
@@ -219,10 +219,10 @@
     self.media360ImageView.hidden = (media.presentation != SRGPresentation360);
     
     BOOL downloaded = [Download downloadForMedia:media].state == DownloadStateDownloaded;
-    self.subtitlesAvailableLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtitlesAvailable || downloaded);
-    self.audioDescriptionAvailableLabel.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
     self.webFirstLabel.hidden = ! media.play_isWebFirst;
-    
+    self.audioDescriptionAvailableLabel.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
+    self.subtitlesAvailableLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtitlesAvailable || downloaded);
+
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
     

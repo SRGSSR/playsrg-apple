@@ -68,22 +68,10 @@
     }
 }
 
-- (void)play_setSubtitlesAvailableLabel
-{
-    [self play_setMediaLabelWithString:NSLocalizedString(@"ST", @"Subtitles short label on media cells")];
-    self.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Subtitled", @"Accessibility label for the subtitled badge");
-}
-
 - (void)play_setSubtitlesAvailableBadge
 {
     [self play_setMediaBadgeWithString:NSLocalizedString(@"ST", @"Subtitles short label on media cells")];
     self.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Subtitled", @"Accessibility label for the subtitled badge");
-}
-
-- (void)play_setAudioDescriptionAvailableLabel
-{
-    [self play_setMediaLabelWithString:NSLocalizedString(@"AD", @"Audio description short label on media cells")];
-    self.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio described", @"Accessibility label for the audio description badge");
 }
 
 - (void)play_setAudioDescriptionAvailableBadge
@@ -143,13 +131,6 @@
     
     self.attributedText = attributedText.copy;
     self.hidden = NO;
-}
-
-- (void)play_setMediaLabelWithString:(NSString *)string
-{
-    self.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
-    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
-    self.text = [NSString stringWithFormat:@"  %@  ", string].uppercaseString;
 }
 
 - (void)play_setMediaBadgeWithString:(NSString *)string

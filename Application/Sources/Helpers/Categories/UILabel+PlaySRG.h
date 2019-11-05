@@ -28,19 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)play_displayAvailabilityLabelForMediaMetadata:(id<SRGMediaMetadata>)object;
 
 /**
- *  Call to display the standard subtitle availability label.
- */
-- (void)play_setSubtitlesAvailableLabel;
-
-/**
 *  Call to display the standard subtitle availability badge.
 */
 - (void)play_setSubtitlesAvailableBadge;
-
-/**
- *  Call to display the standard audio description availability label.
- */
-- (void)play_setAudioDescriptionAvailableLabel;
 
 /**
  *  Call to display the standard audio description availability badge.
