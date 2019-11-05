@@ -627,3 +627,5 @@
 
 /* Title displayed at the top of the feedback view */
 "Your feedback" = "Feedback geben";
+
+"ST" = "UT";
