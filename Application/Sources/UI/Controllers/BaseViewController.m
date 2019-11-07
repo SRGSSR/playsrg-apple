@@ -412,7 +412,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     [animator addCompletion:^{
         if ([viewController isKindOfClass:MediaPreviewViewController.class]) {
             MediaPreviewViewController *mediaPreviewViewController = (MediaPreviewViewController *)viewController;
-            [self play_presentMediaPlayerFromLetterboxController:mediaPreviewViewController.letterboxController fromPushNotification:NO animated:YES completion:nil];
+            [self play_presentMediaPlayerFromLetterboxController:mediaPreviewViewController.letterboxController withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:nil];
         }
         else if ([viewController isKindOfClass:ModuleViewController.class]
                     || [viewController isKindOfClass:ShowViewController.class]
