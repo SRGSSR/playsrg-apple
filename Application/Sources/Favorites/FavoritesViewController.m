@@ -121,8 +121,10 @@
     NSArray<NSString *> *showURNs = FavoritesShowURNs().allObjects;
     NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
     
+    __block SRGFirstPageRequest *firstRequest = nil;
+    
     @weakify(self)
-    __block SRGFirstPageRequest *firstRequest = [[SRGDataProvider.currentDataProvider showsWithURNs:showURNs completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+    firstRequest = [[SRGDataProvider.currentDataProvider showsWithURNs:showURNs completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         @strongify(self)
         
         if (error) {
