@@ -331,7 +331,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.audioDescriptionLabel play_setAudioDescriptionAvailableBadge];
     [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     
-    self.multiAudioImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio original version", @"Accessibility label for the multi audio badge");
+    self.multiAudioImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Original version", @"Accessibility label for the multi audio badge");
     self.multiAudioImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
     self.multiAudioImageView.isAccessibilityElement = YES;
     
