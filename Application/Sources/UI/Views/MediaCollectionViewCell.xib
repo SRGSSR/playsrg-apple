@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="oyt-0M-2Tn">
-                        <rect key="frame" x="0.0" y="0.0" width="522" height="293.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="149.5" height="84"/>
                         <color key="backgroundColor" red="0.27554744482040405" green="0.27554744482040405" blue="0.27554744482040405" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="228.5" id="KzQ-DI-Kge">
@@ -35,10 +37,10 @@
                         </variation>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXQ-vI-0FF">
-                        <rect key="frame" x="0.0" y="0.0" width="522" height="293.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="149.5" height="84"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="geoblocked-25" translatesAutoresizingMaskIntoConstraints="NO" id="rxP-Xq-syp" userLabel="Blocking Reason Image View">
-                                <rect key="frame" x="236" y="122" width="50" height="50"/>
+                                <rect key="frame" x="62" y="29.5" width="25" height="25"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                         </subviews>
@@ -49,7 +51,7 @@
                         </constraints>
                     </view>
                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="x7e-gr-cUo">
-                        <rect key="frame" x="0.0" y="292.5" width="522" height="2"/>
+                        <rect key="frame" x="0.0" y="83" width="149.5" height="2"/>
                         <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="tZ1-YP-Gpy"/>
@@ -57,11 +59,11 @@
                         <color key="trackTintColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </progressView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="360_media-25" translatesAutoresizingMaskIntoConstraints="NO" id="NJ6-Ou-tus">
-                        <rect key="frame" x="5" y="238.5" width="50" height="50"/>
+                        <rect key="frame" x="5" y="54" width="25" height="25"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="P5b-T7-VxL">
-                        <rect key="frame" x="454" y="270.5" width="63" height="18"/>
+                        <rect key="frame" x="81.5" y="61" width="63" height="18"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="18" placeholderIntrinsicHeight="18" image="youth_protection_yellow-18" translatesAutoresizingMaskIntoConstraints="NO" id="NRG-7r-BpG">
                                 <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
@@ -81,24 +83,24 @@
                         </subviews>
                     </stackView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="&lt;title&gt;" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHz-8o-wrG" userLabel="Title Label">
-                        <rect key="frame" x="0.0" y="298.5" width="522" height="18"/>
+                        <rect key="frame" x="159.5" y="0.0" width="362.5" height="18"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                         <size key="shadowOffset" width="0.0" height="1"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="EDl-2o-9XW" userLabel="Subtitle Stack View">
-                        <rect key="frame" x="0.0" y="316.5" width="522" height="32"/>
+                        <rect key="frame" x="159.5" y="18" width="362.5" height="18"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="downloadable-16" translatesAutoresizingMaskIntoConstraints="NO" id="m53-Px-eX9" userLabel="Download Status Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="16" height="32"/>
+                                <rect key="frame" x="0.0" y="0.0" width="16" height="18"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="16" id="SjQ-oz-4go"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;subtitle&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wce-v1-6RF">
-                                <rect key="frame" x="22" y="0.0" width="500" height="32"/>
+                                <rect key="frame" x="22" y="0.0" width="340.5" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -106,7 +108,7 @@
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="9dp-GV-cjN" userLabel="Properties Stack View">
-                        <rect key="frame" x="0.0" y="352.5" width="522" height="14"/>
+                        <rect key="frame" x="159.5" y="40" width="362.5" height="14"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;webFirst&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8i-Ip-zcM" userLabel="Web First Label">
                                 <rect key="frame" x="0.0" y="0.0" width="64" height="14"/>
@@ -126,12 +128,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multiaudio-14" translatesAutoresizingMaskIntoConstraints="NO" id="AXj-4K-Jcr">
-                                <rect key="frame" x="128.5" y="0.0" width="28" height="14"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DEV-lU-Fsm" userLabel="Space View">
-                                <rect key="frame" x="162.5" y="0.0" width="359.5" height="14"/>
+                                <rect key="frame" x="128.5" y="0.0" width="234" height="14"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -196,7 +194,6 @@
                 <outlet property="downloadStatusImageView" destination="m53-Px-eX9" id="ogI-wz-1bJ"/>
                 <outlet property="durationLabel" destination="hyH-au-0BM" id="slY-eL-fUN"/>
                 <outlet property="media360ImageView" destination="NJ6-Ou-tus" id="FWC-xm-cgz"/>
-                <outlet property="multiAudioImageView" destination="AXj-4K-Jcr" id="52c-07-hs6"/>
                 <outlet property="progressView" destination="x7e-gr-cUo" id="lxb-bq-U36"/>
                 <outlet property="subtitleLabel" destination="Wce-v1-6RF" id="BSr-nB-NY6"/>
                 <outlet property="subtitlesLabel" destination="Jlk-qE-P3B" id="0oI-Vn-ahp"/>
@@ -218,7 +215,6 @@
         <image name="360_media-25" width="25" height="25"/>
         <image name="downloadable-16" width="16" height="16"/>
         <image name="geoblocked-25" width="25" height="25"/>
-        <image name="multiaudio-14" width="14" height="14"/>
         <image name="youth_protection_yellow-18" width="18" height="18"/>
     </resources>
 </document>
