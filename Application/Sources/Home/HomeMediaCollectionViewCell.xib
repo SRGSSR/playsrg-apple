@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -66,7 +64,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="210" height="118"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="geoblocked-25" translatesAutoresizingMaskIntoConstraints="NO" id="noH-ah-5Oj" userLabel="Blocking Reason Image View">
-                                        <rect key="frame" x="92.5" y="46.5" width="25" height="25"/>
+                                        <rect key="frame" x="80" y="34" width="50" height="50"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
@@ -85,7 +83,7 @@
                                 <color key="trackTintColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </progressView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="360_media-25" translatesAutoresizingMaskIntoConstraints="NO" id="nTU-QL-FSe">
-                                <rect key="frame" x="5" y="88" width="25" height="25"/>
+                                <rect key="frame" x="5" y="63" width="50" height="50"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Xav-sZ-yHT">
@@ -116,17 +114,17 @@
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="blL-K8-zBb" userLabel="Subtitle Stack View">
-                                <rect key="frame" x="0.0" y="141" width="210" height="18"/>
+                                <rect key="frame" x="0.0" y="141" width="210" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="downloadable-16" translatesAutoresizingMaskIntoConstraints="NO" id="4nc-Va-lWw" userLabel="Download Status Image View">
-                                        <rect key="frame" x="0.0" y="0.0" width="16" height="18"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="16" height="32"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="999" constant="16" id="bv6-hn-4eZ"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;subtitle&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jq0-qt-jfU">
-                                        <rect key="frame" x="22" y="0.0" width="188" height="18"/>
+                                        <rect key="frame" x="22" y="0.0" width="188" height="32"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -134,7 +132,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vjf-fU-FEg" userLabel="Properties Stack View">
-                                <rect key="frame" x="0.0" y="163" width="210" height="14"/>
+                                <rect key="frame" x="0.0" y="177" width="210" height="14"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;webFirst&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLK-dQ-uk0" userLabel="Web First Label">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="14"/>
@@ -158,11 +156,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multiaudio-14" translatesAutoresizingMaskIntoConstraints="NO" id="fxx-wp-NGG">
-                                        <rect key="frame" x="128.5" y="0.0" width="14" height="14"/>
+                                        <rect key="frame" x="128.5" y="0.0" width="28" height="14"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32z-NP-zeU" userLabel="Space View">
-                                        <rect key="frame" x="148.5" y="0.0" width="61.5" height="14"/>
+                                        <rect key="frame" x="162.5" y="0.0" width="47.5" height="14"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -223,7 +221,7 @@
                 <constraint firstAttribute="trailing" secondItem="ibC-3k-6VL" secondAttribute="trailing" id="r1Y-SE-bey"/>
             </constraints>
             <connections>
-                <outlet property="audioDescriptionAvailableLabel" destination="8tv-sE-AgH" id="Usl-z6-Z5s"/>
+                <outlet property="audioDescriptionLabel" destination="8tv-sE-AgH" id="Usl-z6-Z5s"/>
                 <outlet property="blockingOverlayView" destination="lwo-fA-qQ1" id="6Sy-jv-iMg"/>
                 <outlet property="blockingReasonImageView" destination="noH-ah-5Oj" id="kpX-uc-aqH"/>
                 <outlet property="downloadStatusImageView" destination="4nc-Va-lWw" id="1SY-1V-cVi"/>
@@ -236,7 +234,7 @@
                 <outlet property="placeholderView" destination="iq7-pu-lug" id="oGH-6U-j6a"/>
                 <outlet property="progressView" destination="3Zs-DP-WoR" id="wPV-AO-Dj0"/>
                 <outlet property="subtitleLabel" destination="Jq0-qt-jfU" id="931-pl-Wqw"/>
-                <outlet property="subtitlesAvailableLabel" destination="J1w-Er-Gh8" id="Z5K-Tc-bU3"/>
+                <outlet property="subtitlesLabel" destination="J1w-Er-Gh8" id="Z5K-Tc-bU3"/>
                 <outlet property="thumbnailImageView" destination="i6n-Nf-jOh" id="anm-mn-vI8"/>
                 <outlet property="titleLabel" destination="OO0-yH-uvq" id="Mly-C6-vRF"/>
                 <outlet property="webFirstLabel" destination="QLK-dQ-uk0" id="gCs-NL-Z9i"/>

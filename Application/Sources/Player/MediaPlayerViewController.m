@@ -122,8 +122,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIView *propertiesTopLineSpacerView;
 @property (nonatomic, weak) IBOutlet UIStackView *propertiesStackView;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
-@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionAvailableLabel;
-@property (nonatomic, weak) IBOutlet UILabel *subtitlesAvailableLabel;
+@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionLabel;
+@property (nonatomic, weak) IBOutlet UILabel *subtitlesLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *multiAudioImageView;
 
 @property (nonatomic, weak) IBOutlet UIView *youthProtectionColorSpacerView;
@@ -328,8 +328,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.summaryLabel.text = nil;
     
     [self.webFirstLabel play_setWebFirstBadge];
-    [self.audioDescriptionAvailableLabel play_setAudioDescriptionAvailableBadge];
-    [self.subtitlesAvailableLabel play_setSubtitlesAvailableBadge];
+    [self.audioDescriptionLabel play_setAudioDescriptionAvailableBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     
     self.multiAudioImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio original version", @"Accessibility label for the multi audio badge");
     self.multiAudioImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
@@ -851,14 +851,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     BOOL isWebFirst = mainChapterMedia.play_webFirst;
     BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
     BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
-    BOOL hasMultiAudio = resource.play_multiAudio && ! downloaded;
+    BOOL hasMultiAudio = resource.play_multiAudioAvailable && ! downloaded;
     if (isWebFirst || hasSubtitles || hasAudioDescription || hasMultiAudio) {
         [self.propertiesStackView play_setHidden:NO];
         self.propertiesTopLineSpacerView.hidden = NO;
         
         self.webFirstLabel.hidden = ! isWebFirst;
-        self.subtitlesAvailableLabel.hidden = ! hasSubtitles;
-        self.audioDescriptionAvailableLabel.hidden = ! hasAudioDescription;
+        self.subtitlesLabel.hidden = ! hasSubtitles;
+        self.audioDescriptionLabel.hidden = ! hasAudioDescription;
         self.multiAudioImageView.hidden = ! hasMultiAudio;
     }
     else {

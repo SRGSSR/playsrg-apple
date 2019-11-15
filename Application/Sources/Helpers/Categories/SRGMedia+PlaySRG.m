@@ -43,17 +43,17 @@
     return [audioVariants filteredArrayUsingPredicate:predicate].count != 0;
 }
 
-- (BOOL)play_isWebFirst
-{
-    NSDate *date = NSDate.date;
-    return [self.date compare:date] == NSOrderedDescending && [self timeAvailabilityAtDate:date] == SRGTimeAvailabilityAvailable && self.contentType == SRGContentTypeEpisode;
-}
-
-- (BOOL)play_isMultiAudio
+- (BOOL)play_isMultiAudioAvailable
 {
     NSArray<SRGVariant *> *audioVariants = [self audioVariantsForSource:self.recommendedAudioVariantSource];
     NSArray<NSLocale *> *locales = [audioVariants valueForKey:@keypath(SRGVariant.new, locale)];
     return [NSSet setWithArray:locales].count > 1;
+}
+
+- (BOOL)play_isWebFirst
+{
+    NSDate *date = NSDate.date;
+    return [self.date compare:date] == NSOrderedDescending && [self timeAvailabilityAtDate:date] == SRGTimeAvailabilityAvailable && self.contentType == SRGContentTypeEpisode;
 }
 
 @end
