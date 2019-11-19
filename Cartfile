@@ -3,5 +3,5 @@ github "Flipboard/FLEX" "6d489e72c52401839386ee41aeefe1f5105c212e"
 github "mapbox/Fingertips" "cdffabac5506103a2c7cc5aedeed4021df2501da"
 github "microsoft/appcenter-sdk-apple" ~> 2.5.0
 github "SRGSSR/DZNEmptyDataSet" "v1.8.1_srg1"
-github "SRGSSR/srgletterbox-ios" "f933cd1b34a851a4ae53040524ebc71886b87e29"
+github "SRGSSR/srgletterbox-ios" "0dec788a6251dbf9983e1dacebe377847596d85f"
 github "SRGSSR/srguserdata-ios" "1.1.4"
