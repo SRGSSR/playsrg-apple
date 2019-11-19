@@ -213,6 +213,11 @@
             [accessibilityLabel appendFormat:@". %@", youthProtectionAccessibilityLabel];
         }
         
+        BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
+        if (self.media.play_audioDescriptionAvailable && ! downloaded) {
+            [accessibilityLabel appendFormat:@". %@", PlaySRGAccessibilityLocalizedString(@"Audio described", @"Accessibility label for a media cell with audio description")];
+        }
+        
         return accessibilityLabel.copy;
     }
 }
