@@ -122,8 +122,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIView *propertiesTopLineSpacerView;
 @property (nonatomic, weak) IBOutlet UIStackView *propertiesStackView;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
-@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitlesLabel;
+@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *multiAudioImageView;
 
 @property (nonatomic, weak) IBOutlet UIView *youthProtectionColorSpacerView;
@@ -328,8 +328,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.summaryLabel.text = nil;
     
     [self.webFirstLabel play_setWebFirstBadge];
-    [self.audioDescriptionLabel play_setAudioDescriptionAvailableBadge];
     [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    [self.audioDescriptionLabel play_setAudioDescriptionAvailableBadge];
     
     self.multiAudioImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Original version", @"Accessibility label for the multi audio badge");
     self.multiAudioImageView.accessibilityTraits = UIAccessibilityTraitStaticText;

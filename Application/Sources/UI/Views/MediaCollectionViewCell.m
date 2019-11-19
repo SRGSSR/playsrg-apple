@@ -35,8 +35,8 @@
 @property (nonatomic, weak) IBOutlet UIImageView *downloadStatusImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *media360ImageView;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
-@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitlesLabel;
+@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionLabel;
 
 @property (nonatomic, weak) IBOutlet UIView *blockingOverlayView;
 @property (nonatomic, weak) IBOutlet UIImageView *blockingReasonImageView;
@@ -71,13 +71,13 @@
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
     [self.webFirstLabel play_setWebFirstBadge];
-    [self.audioDescriptionLabel play_setAudioDescriptionAvailableBadge];
     [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    [self.audioDescriptionLabel play_setAudioDescriptionAvailableBadge];
     
     self.youthProtectionColorImageView.hidden = YES;
     self.webFirstLabel.hidden = YES;
-    self.audioDescriptionLabel.hidden = YES;
     self.subtitlesLabel.hidden = YES;
+    self.audioDescriptionLabel.hidden = YES;
 
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
@@ -90,8 +90,8 @@
     
     self.youthProtectionColorImageView.hidden = YES;
     self.webFirstLabel.hidden = YES;
-    self.audioDescriptionLabel.hidden = YES;
     self.subtitlesLabel.hidden = YES;
+    self.audioDescriptionLabel.hidden = YES;
 
     self.blockingOverlayView.hidden = YES;
     self.progressView.hidden = YES;
@@ -220,8 +220,8 @@
     
     BOOL downloaded = [Download downloadForMedia:media].state == DownloadStateDownloaded;
     self.webFirstLabel.hidden = ! media.play_webFirst;
-    self.audioDescriptionLabel.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
     self.subtitlesLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtitlesAvailable || downloaded);
+    self.audioDescriptionLabel.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
 
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
