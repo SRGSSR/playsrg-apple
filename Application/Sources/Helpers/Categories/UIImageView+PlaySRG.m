@@ -6,6 +6,7 @@
 
 #import "UIImageView+PlaySRG.h"
 
+#import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "UIImage+PlaySRG.h"
 

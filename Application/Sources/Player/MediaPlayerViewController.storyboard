@@ -271,18 +271,17 @@
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" AD " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NxI-Zo-553">
-                                                                <rect key="frame" x="96.5" y="0.0" width="24" height="14"/>
-                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="audio_description-14" translatesAutoresizingMaskIntoConstraints="NO" id="79J-t3-C9N">
+                                                                <rect key="frame" x="96.5" y="0.0" width="14" height="14"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </imageView>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multiaudio-14" translatesAutoresizingMaskIntoConstraints="NO" id="aeL-66-EET">
-                                                                <rect key="frame" x="125.5" y="0.0" width="14" height="14"/>
+                                                                <rect key="frame" x="115.5" y="0.0" width="14" height="14"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </imageView>
                                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="zCx-cc-RwF" userLabel="Spacer View">
-                                                                <rect key="frame" x="144.5" y="0.0" width="241.5" height="14"/>
+                                                                <rect key="frame" x="134.5" y="0.0" width="251.5" height="14"/>
                                                             </view>
                                                         </subviews>
                                                         <constraints>
@@ -537,7 +536,7 @@
                         <viewLayoutGuide key="safeArea" id="cxL-OK-uak"/>
                     </view>
                     <connections>
-                        <outlet property="audioDescriptionLabel" destination="NxI-Zo-553" id="vev-MV-5Eb"/>
+                        <outlet property="audioDescriptionImageView" destination="79J-t3-C9N" id="ndT-i5-Ol6"/>
                         <outlet property="availabilityLabel" destination="5B6-wH-ilY" id="PQH-MM-Ffr"/>
                         <outlet property="channelInfoStackView" destination="aiH-rN-Erx" id="IsT-Kk-daa"/>
                         <outlet property="channelLabel" destination="3Pv-nN-gHG" id="wwG-rc-fVp"/>
@@ -627,6 +626,7 @@
     </scenes>
     <resources>
         <image name="arrow_down-22" width="22" height="22"/>
+        <image name="audio_description-14" width="14" height="14"/>
         <image name="close-48" width="48" height="48"/>
         <image name="downloadable-48" width="48" height="48"/>
         <image name="expand_22" width="22" height="22"/>

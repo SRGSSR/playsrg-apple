@@ -33,11 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)play_setSubtitlesAvailableBadge;
 
 /**
- *  Call to display the standard audio description availability badge.
- */
-- (void)play_setAudioDescriptionAvailableBadge;
-
-/**
  *  Call to display the standard "web first" badge.
 */
 - (void)play_setWebFirstBadge;

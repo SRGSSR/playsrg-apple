@@ -122,14 +122,13 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" AD " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcC-zv-vWK">
-                                <rect key="frame" x="98.5" y="0.0" width="24" height="14"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="audio_description-14" translatesAutoresizingMaskIntoConstraints="NO" id="L4G-le-Fga">
+                                <rect key="frame" x="98.5" y="0.0" width="14" height="14"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DEV-lU-Fsm" userLabel="Space View">
-                                <rect key="frame" x="128.5" y="0.0" width="234" height="14"/>
+                                <rect key="frame" x="118.5" y="0.0" width="244" height="14"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -188,7 +187,7 @@
                 </mask>
             </variation>
             <connections>
-                <outlet property="audioDescriptionLabel" destination="xcC-zv-vWK" id="O7o-S5-Cwo"/>
+                <outlet property="audioDescriptionImageView" destination="L4G-le-Fga" id="JIK-QS-Q8I"/>
                 <outlet property="blockingOverlayView" destination="eXQ-vI-0FF" id="kHQ-fy-5qB"/>
                 <outlet property="blockingReasonImageView" destination="rxP-Xq-syp" id="La6-lb-DYl"/>
                 <outlet property="downloadStatusImageView" destination="m53-Px-eX9" id="ogI-wz-1bJ"/>
@@ -213,6 +212,7 @@
     </objects>
     <resources>
         <image name="360_media-25" width="25" height="25"/>
+        <image name="audio_description-14" width="14" height="14"/>
         <image name="downloadable-16" width="16" height="16"/>
         <image name="geoblocked-25" width="25" height="25"/>
         <image name="youth_protection_yellow-18" width="18" height="18"/>

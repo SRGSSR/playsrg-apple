@@ -74,12 +74,6 @@
     self.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Subtitled", @"Accessibility label for the subtitled badge");
 }
 
-- (void)play_setAudioDescriptionAvailableBadge
-{
-    [self play_setMediaBadgeWithString:NSLocalizedString(@"AD", @"Audio description short label on media cells")];
-    self.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio described", @"Accessibility label for the audio description badge");
-}
-
 - (void)play_setWebFirstBadge
 {
     self.backgroundColor = UIColor.srg_blueColor;

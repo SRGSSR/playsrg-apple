@@ -123,7 +123,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIStackView *propertiesStackView;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitlesLabel;
-@property (nonatomic, weak) IBOutlet UILabel *audioDescriptionLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *audioDescriptionImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *multiAudioImageView;
 
 @property (nonatomic, weak) IBOutlet UIView *youthProtectionColorSpacerView;
@@ -329,7 +329,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     [self.webFirstLabel play_setWebFirstBadge];
     [self.subtitlesLabel play_setSubtitlesAvailableBadge];
-    [self.audioDescriptionLabel play_setAudioDescriptionAvailableBadge];
     
     self.multiAudioImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Original version", @"Accessibility label for the multi audio badge");
     self.multiAudioImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
@@ -858,7 +857,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         
         self.webFirstLabel.hidden = ! isWebFirst;
         self.subtitlesLabel.hidden = ! hasSubtitles;
-        self.audioDescriptionLabel.hidden = ! hasAudioDescription;
+        self.audioDescriptionImageView.hidden = ! hasAudioDescription;
         self.multiAudioImageView.hidden = ! hasMultiAudio;
     }
     else {
