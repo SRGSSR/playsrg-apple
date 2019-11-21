@@ -56,6 +56,10 @@
                                            selector:@selector(historyEntriesDidChange:)
                                                name:SRGHistoryEntriesDidChangeNotification
                                              object:SRGUserData.currentUserData.history];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(accessibilityVoiceOverStatusChanged:)
+                                               name:UIAccessibilityVoiceOverStatusChanged
+                                             object:nil];
     
     [self updateInterfaceForEditionAnimated:NO];
 }
@@ -328,6 +332,11 @@
             [self refresh];
         }
     }];
+}
+
+- (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
+{
+    [self.tableView reloadData];
 }
 
 @end

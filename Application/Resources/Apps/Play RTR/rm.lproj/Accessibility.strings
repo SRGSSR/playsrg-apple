@@ -21,6 +21,9 @@
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Mussar tut \"%@\"";
 
+/* Accessibility label for the audio description badge */
+"Audio described" = "Audio described";
+
 /* Close button label on player view
    Close button label on search view */
 "Close" = "Serrar";
@@ -85,6 +88,9 @@
 /* Show cell hint */
 "Opens show details." = "Arva detagls da program.";
 
+/* Accessibility label for the multi audio badge */
+"Original version" = "Original version";
+
 /* Livestream play action hint */
 "Plays livestream." = "Livestream va.";
 
@@ -128,6 +134,9 @@
 
 /* A download button label */
 "Stop downloading" = "Interrumper il download";
+
+/* Accessibility label for the subtitled badge */
+"Subtitled" = "Subtitled";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attenziun";

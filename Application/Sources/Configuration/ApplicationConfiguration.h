@@ -114,6 +114,9 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, getter=areMoreEpisodesHidden) BOOL moreEpisodesHidden;
 @property (nonatomic, readonly, getter=areModuleColorsDisabled) BOOL moduleColorsDisabled;
 
+@property (nonatomic, readonly, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
+@property (nonatomic, readonly, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+
 @property (nonatomic, readonly) UIColor *moduleDefaultLinkColor;
 @property (nonatomic, readonly) UIColor *moduleDefaultTextColor;
 

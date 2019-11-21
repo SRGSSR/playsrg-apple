@@ -176,6 +176,11 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         self.navigationItem.leftBarButtonItem = nil;
     }
     
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(accessibilityVoiceOverStatusChanged:)
+                                               name:UIAccessibilityVoiceOverStatusChanged
+                                             object:nil];
+    
     [self updateSearchSettingsButton];
 }
 
@@ -633,7 +638,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         }
         // Media grid layout
         else {
-            CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 70.f : 100.f;
+            CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 90.f : 120.f;
             
             static const CGFloat kItemWidth = 210.f;
             return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
@@ -741,6 +746,13 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     NSAssert(self.closeBlock, @"Close must only be available if a close block has been defined");
     self.closeBlock();
+}
+
+#pragma mark Notifications
+
+- (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
+{
+    [self.collectionView reloadData];
 }
 
 @end

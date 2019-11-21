@@ -59,6 +59,10 @@
                                            selector:@selector(watchLaterDidChange:)
                                                name:WatchLaterDidChangeNotification
                                              object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(accessibilityVoiceOverStatusChanged:)
+                                               name:UIAccessibilityVoiceOverStatusChanged
+                                             object:nil];
     
     [self updateInterfaceForEditionAnimated:NO];
 }
@@ -344,6 +348,11 @@
             [self updateInterfaceForEditionAnimated:YES];
         }
     }
+}
+
+- (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
+{
+    [self.tableView reloadData];
 }
 
 @end

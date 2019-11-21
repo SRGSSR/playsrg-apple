@@ -45,6 +45,9 @@ static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersi
 // Autoplay group
 static NSString * const SettingsAutoplayGroup = @"Group_Autoplay";
 
+// Display group
+static NSString * const SettingsDisplayGroup = @"Group_Display";
+
 // Information group
 static NSString * const SettingsInformationGroup = @"Group_Information";
 
@@ -363,6 +366,18 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     if (! applicationConfiguration.continuousPlaybackAvailable) {
         [hiddenKeys addObject:SettingsAutoplayGroup];
         [hiddenKeys addObject:PlaySRGSettingAutoplayEnabled];
+    }
+    
+    if (applicationConfiguration.subtitleAvailabilityHidden) {
+        [hiddenKeys addObject:PlaySRGSettingSubtitleAvailabilityDisplayed];
+    }
+    
+    if (applicationConfiguration.audioDescriptionAvailabilityHidden) {
+        [hiddenKeys addObject:PlaySRGSettingAudioDescriptionAvailabilityDisplayed];
+    }
+    
+    if (applicationConfiguration.subtitleAvailabilityHidden && applicationConfiguration.audioDescriptionAvailabilityHidden) {
+        [hiddenKeys addObject:SettingsDisplayGroup];
     }
     
     if (Onboarding.onboardings.count == 0) {

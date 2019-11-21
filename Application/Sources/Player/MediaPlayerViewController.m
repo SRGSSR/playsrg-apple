@@ -34,6 +34,7 @@
 #import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
+#import "SRGResource+PlaySRG.h"
 #import "StoreReview.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
@@ -117,6 +118,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *viewCountLabel;
 @property (nonatomic, weak) IBOutlet UIButton *detailsButton;
 @property (nonatomic, weak) IBOutlet UILabel *summaryLabel;
+
+@property (nonatomic, weak) IBOutlet UIView *propertiesTopLineSpacerView;
+@property (nonatomic, weak) IBOutlet UIStackView *propertiesStackView;
+@property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
+@property (nonatomic, weak) IBOutlet UILabel *subtitlesLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *audioDescriptionImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *multiAudioImageView;
+
 @property (nonatomic, weak) IBOutlet UIView *youthProtectionColorSpacerView;
 @property (nonatomic, weak) IBOutlet UIStackView *youthProtectionColorStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
@@ -317,6 +326,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     // Start with an empty summary label, so that height calculations correctly detect when a summary has been assigned
     self.summaryLabel.text = nil;
+    
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    
+    self.multiAudioImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Original version", @"Accessibility label for the multi audio badge");
+    self.multiAudioImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
+    self.multiAudioImageView.isAccessibilityElement = YES;
     
     // Ensure consistent initial layout constraint priorities
     self.playerBottomConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
@@ -560,7 +576,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (BOOL)accessibilityPerformEscape
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        [Banner hideAll]; // Avoids view retain, and video playback.
+        [Banner hideAll];           // Avoids view retain, preventing playback from stopping.
         [StoreReview requestReview];
     }];
     return YES;
@@ -819,15 +835,35 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self reloadDetailsWithShow:media.show];
     }
     
+    SRGResource *resource = self.letterboxController.resource;
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     // Display 🔒 in the title if the stream is protected with a DRM.
-    if (self.letterboxController.resource.DRMs.count > 0) {
+    if (resource.DRMs.count > 0) {
         self.titleLabel.text = (self.titleLabel.text != nil) ? [@"🔒 " stringByAppendingString:self.titleLabel.text] : @"🔒";
     }
 #endif
     
     self.summaryLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.summaryLabel.text = media.play_fullSummary;
+    
+    BOOL downloaded = [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded;
+    BOOL isWebFirst = mainChapterMedia.play_webFirst;
+    BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
+    BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
+    BOOL hasMultiAudio = resource.play_multiAudioAvailable && ! downloaded;
+    if (isWebFirst || hasSubtitles || hasAudioDescription || hasMultiAudio) {
+        [self.propertiesStackView play_setHidden:NO];
+        self.propertiesTopLineSpacerView.hidden = NO;
+        
+        self.webFirstLabel.hidden = ! isWebFirst;
+        self.subtitlesLabel.hidden = ! hasSubtitles;
+        self.audioDescriptionImageView.hidden = ! hasAudioDescription;
+        self.multiAudioImageView.hidden = ! hasMultiAudio;
+    }
+    else {
+        [self.propertiesStackView play_setHidden:YES];
+        self.propertiesTopLineSpacerView.hidden = YES;
+    }
     
     [self updateRadioHomeButton];
     self.radioHomeButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];

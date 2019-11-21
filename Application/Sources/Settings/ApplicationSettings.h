@@ -35,6 +35,8 @@ OBJC_EXPORT NSString * const PlaySRGSettingPresenterModeEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingStandaloneEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingAutoplayEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled;
+OBJC_EXPORT NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed;
+OBJC_EXPORT NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed;
 
 OBJC_EXPORT NSString * const PlaySRGSettingLastLoggedInEmailAddress;
 OBJC_EXPORT NSString * const PlaySRGSettingLastOpenHomepageUid;
@@ -58,6 +60,9 @@ OBJC_EXPORT NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuratio
 
 OBJC_EXPORT BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void);
 
+OBJC_EXPORT BOOL ApplicationSettingSubtitleAvailabilityDisplayed(void);
+OBJC_EXPORT BOOL ApplicationSettingAudioDescriptionAvailabilityDisplayed(void);
+
 OBJC_EXPORT NSString * _Nullable ApplicationSettingSelectedLiveStreamURNForChannelUid(NSString * _Nullable channelUid);
 OBJC_EXPORT void ApplicationSettingSetSelectedLiveStreamURNForChannelUid(NSString * channelUid, NSString * _Nullable mediaURN);
 
@@ -68,5 +73,7 @@ OBJC_EXPORT void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo 
 
 OBJC_EXPORT NSURL * _Nullable ApplicationSettingServiceURLForKey(NSString *key);
 OBJC_EXPORT NSString * _Nullable ApplicationSettingServiceNameForKey(NSString *key);
+
+OBJC_EXPORT BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void);
 
 NS_ASSUME_NONNULL_END

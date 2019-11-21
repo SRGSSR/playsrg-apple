@@ -11,6 +11,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
+#import "SRGMedia+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -31,6 +32,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *downloadStatusImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *media360ImageView;
+@property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
@@ -62,7 +64,10 @@
     
     self.durationLabelBackgroundColor = self.durationLabel.backgroundColor;
     
+    [self.webFirstLabel play_setWebFirstBadge];
+    
     self.youthProtectionColorImageView.hidden = YES;
+    self.webFirstLabel.hidden = YES;
     
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
@@ -91,6 +96,7 @@
     [super prepareForReuse];
     
     self.youthProtectionColorImageView.hidden = YES;
+    self.webFirstLabel.hidden = YES;
     
     self.progressView.hidden = YES;
     
@@ -216,6 +222,8 @@
     
     self.media360ImageView.hidden = (download.presentation != SRGPresentation360);
     
+    self.webFirstLabel.hidden = ! download.media.play_isWebFirst;
+    
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(download.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
     
@@ -243,12 +251,12 @@
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended: {
             [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable_stop-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable_stop-16"];
             break;
         }
             
         case DownloadStateDownloading: {
-            [self.downloadStatusImageView play_startAnimatingDownloading22WithTintColor:tintColor];
+            [self.downloadStatusImageView play_startAnimatingDownloading16WithTintColor:tintColor];
             NSProgress *progress = ([Download currentlyKnownProgressForDownload:self.download]) ?: [NSProgress progressWithTotalUnitCount:10]; // Display 0% if nothing
             self.subtitleLabel.text = [progress localizedDescription];
             downloadImage = self.downloadStatusImageView.image;
@@ -258,14 +266,14 @@
         case DownloadStateDownloaded: {
             [self.downloadStatusImageView play_stopAnimating];
             self.subtitleLabel.text = [NSByteCountFormatter stringFromByteCount:self.download.size countStyle:NSByteCountFormatterCountStyleFile];
-            downloadImage = [UIImage imageNamed:@"downloadable_full-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable_full-16"];
             break;
         }
             
         case DownloadStateDownloadable:
         case DownloadStateRemoved: {
             [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable-16"];
             break;
         }
             

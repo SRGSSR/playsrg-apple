@@ -50,7 +50,7 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
         return 62.f;
     }
     else {
-        return 70.f;
+        return 65.f;
     }
 }
 

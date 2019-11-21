@@ -26,6 +26,11 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     NSString *cellIdentifier = NSStringFromClass(MediaCollectionViewCell.class);
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:cellIdentifier];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(accessibilityVoiceOverStatusChanged:)
+                                               name:UIAccessibilityVoiceOverStatusChanged
+                                             object:nil];
 }
 
 #pragma mark UICollectionViewDataSource protocol
@@ -72,11 +77,18 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     }
     // Grid layout
     else {
-        CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 70.f : 100.f;
+        CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 90.f : 120.f;
         
         static const CGFloat kItemWidth = 210.f;
         return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
     }
+}
+
+#pragma mark Notifications
+
+- (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
+{
+    [self.collectionView reloadData];
 }
 
 @end

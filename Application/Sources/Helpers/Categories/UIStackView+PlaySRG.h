@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIStackView (PlaySRG)
 
 /**
- *  Set the stack and all its arranged subviews as hidden. The state of the views is not preserved for later
+ *  Set the stack and all its arranged subviews as hidden or visible. The state of the views is not preserved for later
  *  restoration.
  *
  *  This avoids constraints breaking because a stack with item spacing is hidden within another stack (its width

@@ -21,6 +21,9 @@
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Tout le contenu pour \"%@\"";
 
+/* Accessibility label for the audio description badge */
+"Audio described" = "Audiodécrit";
+
 /* Close button label on player view
    Close button label on search view */
 "Close" = "Fermer";
@@ -85,6 +88,9 @@
 /* Show cell hint */
 "Opens show details." = "Affiche le détail du programme.";
 
+/* Accessibility label for the multi audio badge */
+"Original version" = "Version originale";
+
 /* Livestream play action hint */
 "Plays livestream." = "Joue le direct.";
 
@@ -128,6 +134,9 @@
 
 /* A download button label */
 "Stop downloading" = "Arrêter le téléchargement";
+
+/* Accessibility label for the subtitled badge */
+"Subtitled" = "Sous-titré";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attention";

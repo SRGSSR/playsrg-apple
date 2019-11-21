@@ -313,6 +313,7 @@
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
 {
     [self updateAppearanceForSize:self.view.frame.size];
+    [self.collectionView reloadData];
 }
 
 @end
