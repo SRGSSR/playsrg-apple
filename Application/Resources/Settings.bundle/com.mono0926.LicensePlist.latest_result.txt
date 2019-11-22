@@ -438,25 +438,25 @@ name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
 
 name: FXReachability, nameSpecified: , owner: SRGSSR, version: f20cd62
 
-name: libextobjc, nameSpecified: , owner: SRGSSR, version: 0.6_srg1
+name: libextobjc, nameSpecified: , owner: SRGSSR, version: 33fa355
 
-name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: 1.0_srg3
+name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: acf9ce3
 
 name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: e2418e5
+name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: e7e3ddf
 
 name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: f2a5f02
 
 name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 817abf6
 
-name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 1.0.1
+name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: da94b0d
 
 name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: a7d0843
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 437c263
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: d8ae470
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 5df2c55
 
@@ -464,7 +464,7 @@ name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 56c0bd3
 
 name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 295b641
 
-name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 1.1.4
+name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: f5e0f98
 
 name: tagcommander-src-ios, nameSpecified: , owner: SRGSSR, version: 4.3.3_4.3.1_srg1
 
