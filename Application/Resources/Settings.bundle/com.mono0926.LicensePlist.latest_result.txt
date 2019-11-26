@@ -446,25 +446,25 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: e7e3ddf
+name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: f71e208
 
 name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: f2a5f02
 
 name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 817abf6
 
-name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: da94b0d
+name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 04b877a
 
-name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: a7d0843
+name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: fe3e36d
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: d8ae470
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: 34da445
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 5df2c55
 
-name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 56c0bd3
+name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 54557b4
 
 name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 295b641
 
-name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: f5e0f98
+name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: cff2e67
 
 name: tagcommander-src-ios, nameSpecified: , owner: SRGSSR, version: 4.3.3_4.3.1_srg1
 
