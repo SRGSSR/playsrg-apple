@@ -195,23 +195,23 @@ version: 2.7.9
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.4.4
+version: 4.4.6
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.4.4
+version: 4.4.6
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.4.4
+version: 4.4.6
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.4.4
+version: 4.4.6
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.4.4
+version: 4.4.6
 
 name: GoogleAppMeasurement, nameSpecified: 
 body: Copyright 2018 Googl…
