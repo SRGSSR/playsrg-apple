@@ -485,7 +485,7 @@
 "Soon" = "In Kürze";
 
 /* Subtitles short label on media cells */
-"ST" = "ST";
+"ST" = "UT";
 
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Noch %@ online";
