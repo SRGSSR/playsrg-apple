@@ -601,7 +601,7 @@
 "Watch later" = "Plus tard";
 
 /* Web first label on media cells */
-"WEB FIRST" = "EXCLU WEB";
+"WEB FIRST" = "EXCLU";
 
 /* Label used on the home page to present scheduled livestream medias. Only on test versions. */
 "Web livestreams" = "Direct Web";
