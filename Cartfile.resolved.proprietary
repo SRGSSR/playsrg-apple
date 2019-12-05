@@ -14,7 +14,7 @@ github "SRGSSR/srgcontentprotection-ios" "f7791bcb98ce9ecc2431dd1ffe5cb46be7addf
 github "SRGSSR/srgdataprovider-ios" "817abf66089996adeb445883dfc28daae805d3b6"
 github "SRGSSR/srgdiagnostics-ios" "04b877a190f9bde426f0e4f61b263a5955d5e1b7"
 github "SRGSSR/srgidentity-ios" "fe3e36d2c0f062b539518e98b946c01f79225e23"
-github "SRGSSR/srgletterbox-ios" "34da4457cda36be7291aefa61cc4f8fc048cc8cb"
+github "SRGSSR/srgletterbox-ios" "bc81a62c20df4ae305e854d8d08b62c76e409a03"
 github "SRGSSR/srglogger-ios" "5df2c5599a2664cd23683fdec225567d8d3ec1ba"
 github "SRGSSR/srgmediaplayer-ios" "54557b40052c2c7cde954ea70a90ef12030359c9"
 github "SRGSSR/srgnetwork-ios" "295b641dada5c26ef615bf88d7a3f99609175f00"

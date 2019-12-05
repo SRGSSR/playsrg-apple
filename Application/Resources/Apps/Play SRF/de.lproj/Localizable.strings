@@ -51,7 +51,7 @@
 "All content" = "Alle anzeigen";
 
 /* No comment provided by engineer. */
-"Always send" = "Always send";
+"Always send" = "Immer senden";
 
 /* Confirmation message displayed when the user is about to clean all favorites
    Confirmation message displayed when the user is about to clean the watch later list
@@ -128,10 +128,10 @@
 "Discover" = "Entdecken";
 
 /* No comment provided by engineer. */
-"Do you want to send an anonymous crash report so we can fix the issue?" = "Do you want to send an anonymous crash report so we can fix the issue?";
+"Do you want to send an anonymous crash report so we can fix the issue?" = "Wollen Sie einen anonymen Absturzreport senden, damit wir das Problem lösen können?";
 
 /* No comment provided by engineer. */
-"Don't send" = "Don't send";
+"Don't send" = "Nicht senden";
 
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Als Download verfügbar";
@@ -451,7 +451,7 @@
 "Search" = "Suche";
 
 /* No comment provided by engineer. */
-"Send" = "Send";
+"Send" = "Senden";
 
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Server geändert auf '%@'";
@@ -506,7 +506,7 @@
 "System" = "System";
 
 /* No comment provided by engineer. */
-"The application unexpectedly quit" = "The application unexpectedly quit";
+"The application unexpectedly quit" = "Die App wurde unterwartet beendet";
 
 /* Button label to share the content being played. */
 "The content" = "Ganzer Beitrag";
@@ -601,7 +601,7 @@
 "Watch later" = "Später schauen";
 
 /* Web first label on media cells */
-"WEB FIRST" = "WEB FIRST";
+"WEB FIRST" = "VORAB";
 
 /* Label used on the home page to present scheduled livestream medias. Only on test versions. */
 "Web livestreams" = "Live Streams";

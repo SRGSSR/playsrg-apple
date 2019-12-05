@@ -51,7 +51,7 @@
 "All content" = "Mostra tutto";
 
 /* No comment provided by engineer. */
-"Always send" = "Always send";
+"Always send" = "Inviare sempre";
 
 /* Confirmation message displayed when the user is about to clean all favorites
    Confirmation message displayed when the user is about to clean the watch later list
@@ -128,10 +128,10 @@
 "Discover" = "Scopri";
 
 /* No comment provided by engineer. */
-"Do you want to send an anonymous crash report so we can fix the issue?" = "Do you want to send an anonymous crash report so we can fix the issue?";
+"Do you want to send an anonymous crash report so we can fix the issue?" = "Desidera inviare una segnalazione (anonima) su questo problema così da permetterci di risolverlo?";
 
 /* No comment provided by engineer. */
-"Don't send" = "Don't send";
+"Don't send" = "Non inviare";
 
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Scaricabile";
@@ -451,7 +451,7 @@
 "Search" = "Ricerca";
 
 /* No comment provided by engineer. */
-"Send" = "Send";
+"Send" = "Inviare";
 
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Server modificato in '%@'";
@@ -506,7 +506,7 @@
 "System" = "Sistema";
 
 /* No comment provided by engineer. */
-"The application unexpectedly quit" = "The application unexpectedly quit";
+"The application unexpectedly quit" = "L'applicazione si è chiusa inaspettatamente";
 
 /* Button label to share the content being played. */
 "The content" = "Il contenuto";

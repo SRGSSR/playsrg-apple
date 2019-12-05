@@ -1,7 +1,7 @@
 "Advanced features" = "Erweiterte Funktionen";
 "Alternate radio homepage design" = "Alternatives Radio Homepage Design";
-"Always visible when VoiceOver is active." = "Always visible when VoiceOver is active.";
-"Audio description availability" = "Audio description availability";
+"Always visible when VoiceOver is active." = "Immer sichtbar wenn VoiceOver aktiviert ist.";
+"Audio description availability" = "Audiodeskription verfügbar";
 "Autoplay" = "Autoplay";
 "Background video playback" = "Hintergrundwiedergabe";
 "Become a beta tester" = "Beta-Tester werden";
@@ -13,7 +13,7 @@
 "Data protection" = "Datenschutzerklärung";
 "Default (IP-based location)" = "Default (IP-based location)";
 "Developer" = "Entwickler";
-"Display" = "Display";
+"Display" = "Anzeigen";
 "Enable / disable FLEX" = "Flex aktivieren/deaktivieren";
 "Features" = "Funktionen";
 "HD over cellular networks" = "HD in Mobilfunknetzen zulassen";
@@ -34,7 +34,7 @@
 "Stage" = "Stage";
 "Standalone playback" = "Standalone playback";
 "Subscribe to all shows" = "Push-Mitteilungen für alle Sendungen aktivieren";
-"Subtitle availability" = "Subtitle availability";
+"Subtitle availability" = "Untertitel verfügbar";
 "Terms and conditions" = "Datenschutzerklärung";
 "Test" = "Test";
 "This section is only available in nightly and beta versions, and won't appear in the production version." = "Die erweiterten Funktionen sind nur in Nightlies oder Betas sichtbar.";

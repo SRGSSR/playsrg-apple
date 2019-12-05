@@ -22,7 +22,7 @@
 "All content for \"%@\"" = "Alle anzeigen aus \"%@\"";
 
 /* Accessibility label for the audio description badge */
-"Audio described" = "Audio described";
+"Audio described" = "Audiodeskription";
 
 /* Close button label on player view
    Close button label on search view */
@@ -89,7 +89,7 @@
 "Opens show details." = "Öffnet Sendungs-Detailseite";
 
 /* Accessibility label for the multi audio badge */
-"Original version" = "Original version";
+"Original version" = "Originalsprache";
 
 /* Livestream play action hint */
 "Plays livestream." = "Spielt Livestream ab.";
@@ -136,7 +136,7 @@
 "Stop downloading" = "Download beenden";
 
 /* Accessibility label for the subtitled badge */
-"Subtitled" = "Subtitled";
+"Subtitled" = "Untertitelt";
 
 /* Introductory title for warning notifications */
 "Warning" = "Warnung";
