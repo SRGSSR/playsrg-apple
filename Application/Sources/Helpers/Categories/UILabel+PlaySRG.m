@@ -129,7 +129,7 @@
 
 - (void)play_setMediaBadgeWithString:(NSString *)string
 {
-    self.backgroundColor = UIColor.whiteColor;
+    self.backgroundColor = UIColor.play_whiteBadgeColor;
     self.layer.cornerRadius = 2.f;
     self.layer.masksToBounds = YES;
     self.font = [UIFont srg_mediumFontWithSize:11.f];

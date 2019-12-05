@@ -72,6 +72,7 @@
     
     [self.webFirstLabel play_setWebFirstBadge];
     [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
     
     self.audioDescriptionImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio described", @"Accessibility label for the audio description badge");
     

@@ -75,4 +75,9 @@
     return [UIColor colorWithWhite:0.f alpha:0.75f];
 }
 
++ (UIColor *)play_whiteBadgeColor
+{
+    return [UIColor srg_colorFromHexadecimalString:@"#e4e4e4"];
+}
+
 @end

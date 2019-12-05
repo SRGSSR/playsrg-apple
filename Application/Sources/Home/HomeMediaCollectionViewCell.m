@@ -86,6 +86,7 @@
     
     [self.webFirstLabel play_setWebFirstBadge];
     [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
     
     self.youthProtectionColorImageView.hidden = YES;
     self.webFirstLabel.hidden = YES;
