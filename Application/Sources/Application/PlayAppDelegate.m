@@ -57,17 +57,6 @@
 #import <Fingertips/Fingertips.h>
 #endif
 
-// ** Private SRGLetterbox setter for DRM slow rollout.
-// TODO: Remove in 2019
-
-@interface SRGLetterboxController (Private_SRGLetterbox)
-
-@property (class, nonatomic) BOOL prefersDRM;
-
-@end
-
-// **
-
 static void *s_kvoContext = &s_kvoContext;
 
 static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
@@ -99,9 +88,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
     [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
-    
-    // TODO: Remove in 2019 when DRMs are widely available
-    [SRGLetterboxController setPrefersDRM:applicationConfiguration.prefersDRM];
     
     // The configuration file, copied at build time in the main product bundle, will have the standard Firebase
     // configuration filename

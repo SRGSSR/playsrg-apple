@@ -69,17 +69,6 @@ static NSString * const SettingsClearAllContentsButton = @"Button_ClearAllConten
 static NSString * const SettingsDeveloperGroup = @"Group_Developer";
 static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
-// ** Private SRGLetterbox setter for DRM slow rollout.
-// TODO: Remove in 2019
-
-@interface SRGLetterboxController (Private_SRGLetterbox)
-
-@property (class, nonatomic) BOOL prefersDRM;
-
-@end
-
-// **
-
 /**
  *  Private App Center implementation details.
  */
@@ -278,14 +267,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         }
         return nil;
     }
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    else if ([key isEqualToString:SettingsAdvancedFeaturesGroup]) {
-        IASKSpecifier *specifier = [settingsViewController.settingsReader specifierForKey:SettingsAdvancedFeaturesGroup];
-        NSString *prefersDRMState = SRGLetterboxController.prefersDRM ? PlaySRGNonLocalizedString(@"ON") : PlaySRGNonLocalizedString(@"OFF");
-        NSString *prefersDRMText = [NSString stringWithFormat:NSLocalizedString(@"Prefers DRM streams: %@.", @"Introductory text for DRM status information in the app settings"), prefersDRMState];
-        return (specifier.footerText.length != 0) ? [specifier.footerText stringByAppendingFormat:@"\n\n%@", prefersDRMText] : prefersDRMText;
-    }
-#endif
     else {
         return nil;
     }

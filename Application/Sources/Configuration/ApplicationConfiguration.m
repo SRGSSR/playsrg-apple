@@ -263,8 +263,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) NSArray<NSString *> *hiddenOnboardingUids;
 
-@property (nonatomic) BOOL prefersDRM;
-
 @property (nonatomic, getter=isLogoutMenuEnabled) BOOL logoutMenuEnabled;
 
 @property (nonatomic, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;
@@ -686,7 +684,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.searchSettingSubtitledHidden = [self.remoteConfig configValueForKey:@"searchSettingSubtitledHidden"].boolValue;
     self.showsSearchHidden = [self.remoteConfig configValueForKey:@"showsSearchHidden"].boolValue;
     
-    self.prefersDRM = [self.remoteConfig configValueForKey:@"prefersDRM"].boolValue;
     self.logoutMenuEnabled = [self.remoteConfig configValueForKey:@"logoutMenuEnabled"].boolValue;
     
     [NSNotificationCenter.defaultCenter postNotificationName:ApplicationConfigurationDidChangeNotification
