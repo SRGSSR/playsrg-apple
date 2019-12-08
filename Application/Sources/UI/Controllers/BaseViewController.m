@@ -8,6 +8,7 @@
 
 #import "ActivityItemSource.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSettings.h"
 #import "Banner.h"
 #import "Download.h"
 #import "Favorites.h"
@@ -115,6 +116,22 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     
     // Reverse levels since built in reverse order
     return [levels reverseObjectEnumerator].allObjects;
+}
+
+- (SRGAnalyticsPageViewLabels *)srg_pageViewLabels
+{
+    static NSString *s_userSettings;
+    NSString *userSettings = ApplicationUserSettingsAnalytics();
+    if (! [userSettings isEqualToString:s_userSettings]) {
+        s_userSettings = userSettings;
+        
+        SRGAnalyticsPageViewLabels *pageViewLabels = [[SRGAnalyticsPageViewLabels alloc] init];
+        pageViewLabels.customInfo = @{ AnalyticsLabelUserSettings : userSettings };
+        return pageViewLabels;
+    }
+    else {
+        return nil;
+    }
 }
 
 #pragma mark UIViewControllerPreviewingDelegate protocol

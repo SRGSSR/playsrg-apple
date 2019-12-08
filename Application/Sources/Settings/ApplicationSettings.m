@@ -9,6 +9,7 @@
 #import "ApplicationConfiguration.h"
 #import "MediaPlayerViewController.h"
 #import "PlayApplication.h"
+#import "PushService.h"
 #import "UIWindow+PlaySRG.h"
 
 #import <FXReachability/FXReachability.h>
@@ -47,6 +48,12 @@ NSValueTransformer *SettingUserLocationTransformer(void)
     });
     return s_transformer;
 }
+
+NSString *UserSettingsValueFromBoolean(BOOL boolean)
+{
+    return boolean ? @"1" : @"0";
+}
+
 __attribute__((constructor)) static void ApplicationSettingsInit(void)
 {
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
@@ -279,3 +286,33 @@ NSString *ApplicationSettingServiceNameForKey(NSString *key)
     }];
     return [[specifier multipleTitles] filteredArrayUsingPredicate:predicate].firstObject;
 }
+
+NSString *ApplicationUserSettingsAnalytics(void)
+{
+    NSDictionary<NSString *, NSString *> *settings = @{
+        @"playback_hd_over_cellular": UserSettingsValueFromBoolean([NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingHDOverCellularEnabled]),
+        @"playback_autoplay": UserSettingsValueFromBoolean([NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAutoplayEnabled]),
+        @"playback_background_video": UserSettingsValueFromBoolean(ApplicationSettingBackgroundVideoPlaybackEnabled()),
+        @"app_accessibility": UserSettingsValueFromBoolean(UIAccessibilityIsVoiceOverRunning()),
+        @"app_push_notification": UserSettingsValueFromBoolean(PushService.sharedService.isEnabled),
+    };
+    
+    if (! ApplicationConfiguration.sharedApplicationConfiguration.subtitleAvailabilityHidden) {
+        settings = [settings dictionaryBySettingObject:UserSettingsValueFromBoolean(ApplicationSettingSubtitleAvailabilityDisplayed())
+                                                forKey:@"app_display_subtitle_availability"];
+    }
+    
+    if (! ApplicationConfiguration.sharedApplicationConfiguration.audioDescriptionAvailabilityHidden) {
+        settings = [settings dictionaryBySettingObject:UserSettingsValueFromBoolean(ApplicationSettingAudioDescriptionAvailabilityDisplayed())
+                                                forKey:@"app_display_audio_description_availability"];
+    }
+    
+    NSMutableArray<NSString *> *settingsArray = NSMutableArray.array;
+    [settings enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+        [settingsArray addObject:[NSString stringWithFormat:@"%@(%@)", key, obj]];
+    }];
+    [settingsArray sortUsingSelector:@selector(caseInsensitiveCompare:)];
+    return [settingsArray componentsJoinedByString:@";"];
+}
+
+

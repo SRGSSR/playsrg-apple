@@ -235,4 +235,9 @@ OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContent;
 OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContentAtTime;
 OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingCurrentClip;
 
+/**
+ *  Label
+ */
+OBJC_EXPORT NSString * const AnalyticsLabelUserSettings;
+
 NS_ASSUME_NONNULL_END

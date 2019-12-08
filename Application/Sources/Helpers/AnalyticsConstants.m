@@ -94,3 +94,5 @@ AnalyticsType const AnalyticsTypeActionOpenPlayApp = @"open_play_app";
 AnalyticsValue const AnalyticsTypeValueSharingContent = @"content";
 AnalyticsValue const AnalyticsTypeValueSharingContentAtTime = @"content_at_time";
 AnalyticsValue const AnalyticsTypeValueSharingCurrentClip = @"current_clip";
+
+NSString * const AnalyticsLabelUserSettings = @"user_settings";
