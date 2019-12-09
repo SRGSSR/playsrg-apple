@@ -156,8 +156,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly) NSArray<NSString *> *hiddenOnboardingUids;
 
-@property (nonatomic, readonly) BOOL prefersDRM;
-
 @property (nonatomic, readonly, getter=isLogoutMenuEnabled) BOOL logoutMenuEnabled;
 
 @property (nonatomic, readonly, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;

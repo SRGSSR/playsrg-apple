@@ -76,7 +76,7 @@ A wide list of parameters are available. Some parameters support multiple comma-
 ### Player
 
 * `minimumSocialViewCount` (optional, number): The threshold under which social view counts will not be displayed. If omitted, 0.
-* `prefersDRM` (optional, boolean): Set to `true` to favor DRM streams over non-DRM ones. If omitted, `false`.
+* `prefersDRM` (optional, boolean, **ended: 2.9.6**): Set to `true` to favor DRM streams over non-DRM ones. If omitted, `false`.
 
 ### Functionalities
 
