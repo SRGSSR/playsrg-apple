@@ -22,7 +22,7 @@
 "All content for \"%@\"" = "Mussar tut \"%@\"";
 
 /* Accessibility label for the audio description badge */
-"Audio described" = "Audio described";
+"Audio described" = "Audio descrit";
 
 /* Close button label on player view
    Close button label on search view */
@@ -89,7 +89,7 @@
 "Opens show details." = "Arva detagls da program.";
 
 /* Accessibility label for the multi audio badge */
-"Original version" = "Original version";
+"Original version" = "Versiun originala";
 
 /* Livestream play action hint */
 "Plays livestream." = "Livestream va.";
@@ -136,7 +136,7 @@
 "Stop downloading" = "Interrumper il download";
 
 /* Accessibility label for the subtitled badge */
-"Subtitled" = "Subtitled";
+"Subtitled" = "Suttitels";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attenziun";

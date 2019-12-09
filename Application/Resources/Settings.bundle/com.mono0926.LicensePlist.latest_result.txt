@@ -456,7 +456,7 @@ name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 04b877a
 
 name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: fe3e36d
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: cacddbf
+name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: cd512da
 
 name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 5df2c55
 
