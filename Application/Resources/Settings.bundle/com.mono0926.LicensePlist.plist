@@ -8,7 +8,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/appcenter-sdk-apple</string>
 			<key>Title</key>
-			<string>appcenter-sdk-apple (2.5.1)</string>
+			<string>appcenter-sdk-apple (2.5.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -224,7 +224,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-ios</string>
 			<key>Title</key>
-			<string>srganalytics-ios (e35742e)</string>
+			<string>srganalytics-ios (72beedb)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -256,7 +256,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-ios</string>
 			<key>Title</key>
-			<string>srgidentity-ios (fe3e36d)</string>
+			<string>srgidentity-ios (3e9e9a1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -264,7 +264,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-ios</string>
 			<key>Title</key>
-			<string>srgletterbox-ios (cd512da)</string>
+			<string>srgletterbox-ios (a28e900)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -296,7 +296,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srguserdata-ios</string>
 			<key>Title</key>
-			<string>srguserdata-ios (cff2e67)</string>
+			<string>srguserdata-ios (64f0c6f)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
