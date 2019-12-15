@@ -224,7 +224,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
 			<key>Title</key>
-			<string>srganalytics-apple (c3997a0)</string>
+			<string>srganalytics-apple (0ddf6c3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -264,7 +264,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-apple</string>
 			<key>Title</key>
-			<string>srgidentity-apple (8bcc183)</string>
+			<string>srgidentity-apple (d10c201)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -272,7 +272,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>srgletterbox-apple (8c826c5)</string>
+			<string>srgletterbox-apple (8d93a4e)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -304,7 +304,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srguserdata-apple</string>
 			<key>Title</key>
-			<string>srguserdata-apple (a89d439)</string>
+			<string>srguserdata-apple (a0dcb4b)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
