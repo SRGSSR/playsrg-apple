@@ -96,3 +96,11 @@ AnalyticsValue const AnalyticsTypeValueSharingContentAtTime = @"content_at_time"
 AnalyticsValue const AnalyticsTypeValueSharingCurrentClip = @"current_clip";
 
 NSString * const AnalyticsLabelUserSettings = @"user_settings";
+
+NSString * const AnalyticsUserSettingAppAccessibility = @"app_accessibility";
+NSString * const AnalyticsUserSettingAppPushNotification = @"app_push_notification";
+NSString * const AnalyticsUserSettingAppDisplaySubtitleAvailability = @"app_display_subtitle_availability";
+NSString * const AnalyticsUserSettingAppDisplayAudioDescriptionAvailability = @"app_display_audio_description_availability";
+NSString * const AnalyticsUserSettingPlaybackHdOverCellular = @"playback_hd_over_cellular";
+NSString * const AnalyticsUserSettingPlaybackAutoplay = @"playback_autoplay";
+NSString * const AnalyticsUserSettingPlaybackBackgroundVideo = @"playback_background_video";

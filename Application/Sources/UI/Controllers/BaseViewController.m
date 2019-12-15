@@ -121,7 +121,7 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
 - (SRGAnalyticsPageViewLabels *)srg_pageViewLabels
 {
     static NSString *s_userSettings;
-    NSString *userSettings = ApplicationUserSettingsAnalytics();
+    NSString *userSettings = ApplicationAnalyticsUserSettings();
     if (! [userSettings isEqualToString:s_userSettings]) {
         s_userSettings = userSettings;
         

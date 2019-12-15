@@ -6,6 +6,7 @@
 
 #import "ApplicationSettings.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "MediaPlayerViewController.h"
 #import "PlayApplication.h"
@@ -251,7 +252,7 @@ void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo *menuItemInf
 {
     // Save only radio home page or set to nil if it's the TV home page
     if (menuItemInfo.radioChannel || menuItemInfo.menuItem == MenuItemTVOverview
-            || menuItemInfo.menuItem == MenuItemTVByDate || menuItemInfo.menuItem == MenuItemTVShowAZ) {
+        || menuItemInfo.menuItem == MenuItemTVByDate || menuItemInfo.menuItem == MenuItemTVShowAZ) {
         
         NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
         [userDefaults setObject:menuItemInfo.radioChannel.uid forKey:PlaySRGSettingLastOpenHomepageUid];
@@ -287,24 +288,24 @@ NSString *ApplicationSettingServiceNameForKey(NSString *key)
     return [[specifier multipleTitles] filteredArrayUsingPredicate:predicate].firstObject;
 }
 
-NSString *ApplicationUserSettingsAnalytics(void)
+NSString *ApplicationAnalyticsUserSettings(void)
 {
     NSDictionary<NSString *, NSString *> *settings = @{
-        @"playback_hd_over_cellular": UserSettingsValueFromBoolean([NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingHDOverCellularEnabled]),
-        @"playback_autoplay": UserSettingsValueFromBoolean([NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAutoplayEnabled]),
-        @"playback_background_video": UserSettingsValueFromBoolean(ApplicationSettingBackgroundVideoPlaybackEnabled()),
-        @"app_accessibility": UserSettingsValueFromBoolean(UIAccessibilityIsVoiceOverRunning()),
-        @"app_push_notification": UserSettingsValueFromBoolean(PushService.sharedService.isEnabled),
+        AnalyticsUserSettingPlaybackHdOverCellular : UserSettingsValueFromBoolean([NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingHDOverCellularEnabled]),
+        AnalyticsUserSettingPlaybackAutoplay : UserSettingsValueFromBoolean([NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAutoplayEnabled]),
+        AnalyticsUserSettingPlaybackBackgroundVideo : UserSettingsValueFromBoolean(ApplicationSettingBackgroundVideoPlaybackEnabled()),
+        AnalyticsUserSettingAppAccessibility : UserSettingsValueFromBoolean(UIAccessibilityIsVoiceOverRunning()),
+        AnalyticsUserSettingAppPushNotification : UserSettingsValueFromBoolean(PushService.sharedService.isEnabled),
     };
     
     if (! ApplicationConfiguration.sharedApplicationConfiguration.subtitleAvailabilityHidden) {
         settings = [settings dictionaryBySettingObject:UserSettingsValueFromBoolean(ApplicationSettingSubtitleAvailabilityDisplayed())
-                                                forKey:@"app_display_subtitle_availability"];
+                                                forKey:AnalyticsUserSettingAppDisplaySubtitleAvailability];
     }
     
     if (! ApplicationConfiguration.sharedApplicationConfiguration.audioDescriptionAvailabilityHidden) {
         settings = [settings dictionaryBySettingObject:UserSettingsValueFromBoolean(ApplicationSettingAudioDescriptionAvailabilityDisplayed())
-                                                forKey:@"app_display_audio_description_availability"];
+                                                forKey:AnalyticsUserSettingAppDisplayAudioDescriptionAvailability];
     }
     
     NSMutableArray<NSString *> *settingsArray = NSMutableArray.array;

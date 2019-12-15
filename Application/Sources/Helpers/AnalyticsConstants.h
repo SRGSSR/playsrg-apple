@@ -236,8 +236,21 @@ OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContentAtTime;
 OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingCurrentClip;
 
 /**
- *  Label
+ *  Labels
  */
 OBJC_EXPORT NSString * const AnalyticsLabelUserSettings;
+
+/**
+ *  User settings
+ */
+OBJC_EXPORT NSString * const AnalyticsUserSettingAppAccessibility;
+OBJC_EXPORT NSString * const AnalyticsUserSettingAppPushNotification;
+OBJC_EXPORT NSString * const AnalyticsUserSettingAppDisplaySubtitleAvailability;
+OBJC_EXPORT NSString * const AnalyticsUserSettingAppDisplayAudioDescriptionAvailability;
+OBJC_EXPORT NSString * const AnalyticsUserSettingPlaybackHdOverCellular;
+OBJC_EXPORT NSString * const AnalyticsUserSettingPlaybackAutoplay;
+OBJC_EXPORT NSString * const AnalyticsUserSettingPlaybackBackgroundVideo;
+
+
 
 NS_ASSUME_NONNULL_END
