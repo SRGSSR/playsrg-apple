@@ -8,7 +8,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/appcenter-sdk-apple</string>
 			<key>Title</key>
-			<string>appcenter-sdk-apple (2.5.2)</string>
+			<string>appcenter-sdk-apple (2.5.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -222,81 +222,89 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/srganalytics-ios</string>
+			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
 			<key>Title</key>
-			<string>srganalytics-ios (72beedb)</string>
+			<string>srganalytics-apple (c3997a0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/srgappearance-ios</string>
+			<string>com.mono0926.LicensePlist/srgappearance-apple</string>
 			<key>Title</key>
-			<string>srgappearance-ios (f2a5f02)</string>
+			<string>srgappearance-apple (285f889)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/srgdataprovider-ios</string>
+			<string>com.mono0926.LicensePlist/srgcontentprotection-apple</string>
 			<key>Title</key>
-			<string>srgdataprovider-ios (817abf6)</string>
+			<string>srgcontentprotection-apple (f3ab2a9)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/srgdiagnostics-ios</string>
+			<string>com.mono0926.LicensePlist/srgdataprovider-apple</string>
 			<key>Title</key>
-			<string>srgdiagnostics-ios (04b877a)</string>
+			<string>srgdataprovider-apple (7172a85)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/srgidentity-ios</string>
+			<string>com.mono0926.LicensePlist/srgdiagnostics-apple</string>
 			<key>Title</key>
-			<string>srgidentity-ios (3e9e9a1)</string>
+			<string>srgdiagnostics-apple (f4bdc73)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/srgletterbox-ios</string>
+			<string>com.mono0926.LicensePlist/srgidentity-apple</string>
 			<key>Title</key>
-			<string>srgletterbox-ios (a28e900)</string>
+			<string>srgidentity-apple (8bcc183)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/srglogger-ios</string>
+			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>srglogger-ios (5df2c55)</string>
+			<string>srgletterbox-apple (8c826c5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/srgmediaplayer-ios</string>
+			<string>com.mono0926.LicensePlist/srglogger-apple</string>
 			<key>Title</key>
-			<string>srgmediaplayer-ios (54557b4)</string>
+			<string>srglogger-apple (40946ee)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/srgnetwork-ios</string>
+			<string>com.mono0926.LicensePlist/srgmediaplayer-apple</string>
 			<key>Title</key>
-			<string>srgnetwork-ios (295b641)</string>
+			<string>srgmediaplayer-apple (e84137a)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/srguserdata-ios</string>
+			<string>com.mono0926.LicensePlist/srgnetwork-apple</string>
 			<key>Title</key>
-			<string>srguserdata-ios (64f0c6f)</string>
+			<string>srgnetwork-apple (e4f9627)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/srguserdata-apple</string>
+			<key>Title</key>
+			<string>srguserdata-apple (a89d439)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

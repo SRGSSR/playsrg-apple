@@ -428,7 +428,7 @@ name: UrbanAirship-iOS-SDK, nameSpecified:
 body: Copyright 2017 Urban…
 version: 9.4.0
 
-name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 2.5.2
+name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 2.5.3
 
 name: CoconutKit, nameSpecified: , owner: defagos, version: 3.3.8
 
@@ -446,27 +446,29 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-ios, nameSpecified: , owner: SRGSSR, version: 72beedb
+name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: c3997a0
 
-name: srgappearance-ios, nameSpecified: , owner: SRGSSR, version: f2a5f02
+name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 285f889
 
-name: srgdataprovider-ios, nameSpecified: , owner: SRGSSR, version: 817abf6
+name: srgcontentprotection-apple, nameSpecified: , owner: SRGSSR, version: f3ab2a9
 
-name: srgdiagnostics-ios, nameSpecified: , owner: SRGSSR, version: 04b877a
+name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 7172a85
 
-name: srgidentity-ios, nameSpecified: , owner: SRGSSR, version: 3e9e9a1
+name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: f4bdc73
 
-name: srgletterbox-ios, nameSpecified: , owner: SRGSSR, version: a28e900
+name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 8bcc183
 
-name: srglogger-ios, nameSpecified: , owner: SRGSSR, version: 5df2c55
+name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 8c826c5
 
-name: srgmediaplayer-ios, nameSpecified: , owner: SRGSSR, version: 54557b4
+name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 40946ee
 
-name: srgnetwork-ios, nameSpecified: , owner: SRGSSR, version: 295b641
+name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: e84137a
 
-name: srguserdata-ios, nameSpecified: , owner: SRGSSR, version: 64f0c6f
+name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: e4f9627
 
-name: tagcommander-src-ios, nameSpecified: , owner: SRGSSR, version: 4.3.3_4.3.1_srg1
+name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: a89d439
+
+name: tagcommander-src-apple, nameSpecified: , owner: SRGSSR, version: 4.3.3_4.3.1_srg1
 
 name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: v2.1.2_srg1
 
