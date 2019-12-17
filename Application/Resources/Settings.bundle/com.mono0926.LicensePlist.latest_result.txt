@@ -436,43 +436,43 @@ name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 6.0.0
 
 name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
 
-name: FXReachability, nameSpecified: , owner: SRGSSR, version: f20cd62
+name: FXReachability, nameSpecified: , owner: SRGSSR, version: 1.3.2_srg4
 
-name: libextobjc, nameSpecified: , owner: SRGSSR, version: 33fa355
+name: libextobjc, nameSpecified: , owner: SRGSSR, version: 0.6_srg2
 
-name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: acf9ce3
+name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: 1.0_srg4
 
 name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 0ddf6c3
+name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 4.0.0
 
-name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 285f889
+name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: srgcontentprotection-apple, nameSpecified: , owner: SRGSSR, version: f3ab2a9
+name: srgcontentprotection-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 7172a85
+name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 7.0.0
 
-name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: f4bdc73
+name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: d10c201
+name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 8d93a4e
+name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 40946ee
+name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: e84137a
+name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: 3.0.0
 
-name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: e4f9627
+name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: a0dcb4b
+name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: tagcommander-src-apple, nameSpecified: , owner: SRGSSR, version: 4.5.4_4.4.1_srg2
+name: tagcommander-apple, nameSpecified: , owner: SRGSSR, version: 4.5.4_4.4.1_srg1
 
 name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: v2.1.2_srg1
 
-name: YYWebImage, nameSpecified: , owner: SRGSSR, version: 9c00257
+name: YYWebImage, nameSpecified: , owner: SRGSSR, version: 1.0.5_srg2
 
 add-version-numbers: true
 
