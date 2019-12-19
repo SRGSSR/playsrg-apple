@@ -20,37 +20,67 @@ or alternatively using `brew cask install fastlane`
 ```
 fastlane ios nightlies
 ```
-For each BUs, build a new nightly on HockeyApp, with a new build number, greater than the old nightly build number
+For each BUs, build a new nightly on App Center, with a new build number, greater than the old nightly build number
 ### ios betas
 ```
 fastlane ios betas
 ```
-For each BUs, build a new beta on HockeyApp with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
-### ios swiTestFlight
+For each BUs, build a new beta on App Center with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
+### ios swiAppStoreUpload
 ```
-fastlane ios swiTestFlight
+fastlane ios swiAppStoreUpload
 ```
-SWI: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp.
-### ios srfTestFlight
+SWI: Upload a new build (bitcode) on AppStore Connect with the current build number.
+### ios srfAppStoreUpload
 ```
-fastlane ios srfTestFlight
+fastlane ios srfAppStoreUpload
 ```
-SRF: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp.
-### ios rtsTestFlight
+SRF: Upload a new build (bitcode) on AppStore Connect with the current build number.
+### ios rtsAppStoreUpload
 ```
-fastlane ios rtsTestFlight
+fastlane ios rtsAppStoreUpload
 ```
-RTS: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp.
-### ios rsiTestFlight
+RTS: Upload a new build (bitcode) on AppStore Connect with the current build number.
+### ios rsiAppStoreUpload
 ```
-fastlane ios rsiTestFlight
+fastlane ios rsiAppStoreUpload
 ```
-RSI: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp.
-### ios rtrTestFlight
+RSI: Upload a new build (bitcode) on AppStore Connect with the current build number.
+### ios rtrAppStoreUpload
 ```
-fastlane ios rtrTestFlight
+fastlane ios rtrAppStoreUpload
 ```
-RTR: Upload a new TestFlight build with the current build number and send the dSYM on HockeyApp.
+RTR: Upload a new build (bitcode) on AppStore Connect with the current build number.
+### ios dSYMs
+```
+fastlane ios dSYMs
+```
+Send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+### ios swiDSYMs
+```
+fastlane ios swiDSYMs
+```
+SWI: Send latest dSYMs to App Center, with same parameters.
+### ios srfDSYMs
+```
+fastlane ios srfDSYMs
+```
+SFR: Send latest dSYMs to App Center, with same parameters.
+### ios rtsDSYMs
+```
+fastlane ios rtsDSYMs
+```
+RTS: Send latest dSYMs to App Center, with same parameters.
+### ios rsiDSYMs
+```
+fastlane ios rsiDSYMs
+```
+RSI: Send latest dSYMs to App Center, with same parameters.
+### ios rtrDSYMs
+```
+fastlane ios rtrDSYMs
+```
+RTR: Send latest dSYMs to App Center, with same parameters.
 
 ----
 

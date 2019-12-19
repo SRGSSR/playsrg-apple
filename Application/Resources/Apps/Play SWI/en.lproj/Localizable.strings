@@ -50,6 +50,9 @@
 /* Title of the first cell of a media list on homepage. */
 "All content" = "All content";
 
+/* No comment provided by engineer. */
+"Always send" = "Always send";
+
 /* Confirmation message displayed when the user is about to clean all favorites
    Confirmation message displayed when the user is about to clean the watch later list
    Confirmation message displayed when the user is about to delete all download items
@@ -124,6 +127,12 @@
 /* Introductory title displayed at the top of the onboarding list */
 "Discover" = "Discover";
 
+/* No comment provided by engineer. */
+"Do you want to send an anonymous crash report so we can fix the issue?" = "Do you want to send an anonymous crash report so we can fix the issue?";
+
+/* No comment provided by engineer. */
+"Don't send" = "Don't send";
+
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Downloadable";
 
@@ -188,9 +197,6 @@
    Label in the left menu to present history
    Title displayed at the top of the history screen */
 "History" = "History";
-
-/* Title of the button to install a previous version */
-"I understand" = "I understand";
 
 /* Image copyright introductory label */
 "Image credit: %@" = "Image credit: %@";
@@ -362,9 +368,6 @@
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Previous";
 
-/* Message title displayed when the user wants to install a previous version */
-"Previous versions" = "Previous versions";
-
 /* [Technical] Title for programmes A-Z analytics measurements
    [Technical] Title for programmes A-Z page view analytics measurements
    Label in the left menu to present shows A to Z (radio or TV)
@@ -447,6 +450,9 @@
    Title displayed when there is no search criterium entered */
 "Search" = "Search";
 
+/* No comment provided by engineer. */
+"Send" = "Send";
+
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Server changed to '%@'";
 
@@ -478,6 +484,9 @@
 /* Short label identifying content which will be available soon. */
 "Soon" = "Soon";
 
+/* Subtitles short label on media cells */
+"ST" = "ST";
+
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Still available for %@";
 
@@ -490,8 +499,14 @@
 /* Message description displayed when subscribing to all TV and radio shows */
 "Subscribing to all TV and radio shows…" = "Subscribing to all TV and radio shows…";
 
+/* Name of the search setting to filter subtitled content */
+"Subtitled" = "Subtitled";
+
 /* [Technical] System page type for analytics measurements */
 "System" = "System";
+
+/* No comment provided by engineer. */
+"The application unexpectedly quit" = "The application unexpectedly quit";
 
 /* Button label to share the content being played. */
 "The content" = "The video";
@@ -585,6 +600,9 @@
    Title displayed at the top of the watch later list screen */
 "Watch later" = "Watch later";
 
+/* Web first label on media cells */
+"WEB FIRST" = "WEB FIRST";
+
 /* Label used on the home page to present scheduled livestream medias. Only on test versions. */
 "Web livestreams" = "Web livestreams";
 
@@ -618,9 +636,6 @@
 
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "You have been automatically logged out. Login again to keep your data synchronized across devices.";
-
-/* Message description displayed when the user wants to install a previous version */
-"You may have to uninstall the application if the restored version crashes at launch.\n\nPrevious versions can be found under the \"History\" tab on the next screen." = "You may have to uninstall the application if the restored version crashes at launch.  Previous versions can be found under the \"History\" tab on the next screen.";
 
 /* Title displayed at the top of the feedback view */
 "Your feedback" = "Your feedback";

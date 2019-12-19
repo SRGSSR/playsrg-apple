@@ -8,11 +8,13 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSettings.h"
 #import "Download.h"
 #import "History.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
+#import "SRGMedia+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -32,6 +34,9 @@
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *downloadStatusImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *media360ImageView;
+@property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
+@property (nonatomic, weak) IBOutlet UILabel *subtitlesLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *audioDescriptionImageView;
 
 @property (nonatomic, weak) IBOutlet UIView *blockingOverlayView;
 @property (nonatomic, weak) IBOutlet UIImageView *blockingReasonImageView;
@@ -69,8 +74,15 @@
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
+
     self.youthProtectionColorImageView.hidden = YES;
-    
+    self.webFirstLabel.hidden = YES;
+    self.subtitlesLabel.hidden = YES;
+    self.audioDescriptionImageView.hidden = YES;
+
     self.blockingOverlayViewColor = self.blockingOverlayView.backgroundColor;
     self.durationLabelBackgroundColor = self.durationLabel.backgroundColor;
     
@@ -94,7 +106,10 @@
     [super prepareForReuse];
     
     self.youthProtectionColorImageView.hidden = YES;
-    
+    self.webFirstLabel.hidden = YES;
+    self.subtitlesLabel.hidden = YES;
+    self.audioDescriptionImageView.hidden = YES;
+
     self.blockingOverlayView.hidden = YES;
     self.progressView.hidden = YES;
     
@@ -184,10 +199,10 @@
         if (self.media.channel) {
             [accessibilityLabel appendFormat:@", %@", self.media.channel.title];
         }
-        return [accessibilityLabel copy];
+        return accessibilityLabel.copy;
     }
     else {
-        NSMutableString *accessibilityLabel = [self.media.title mutableCopy];
+        NSMutableString *accessibilityLabel = self.media.title.mutableCopy;
         
         if (self.media.show.title && ! [self.media.title containsString:self.media.show.title]) {
             [accessibilityLabel appendFormat:@", %@", self.media.show.title];
@@ -198,7 +213,12 @@
             [accessibilityLabel appendFormat:@". %@", youthProtectionAccessibilityLabel];
         }
         
-        return [accessibilityLabel copy];
+        BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
+        if (self.media.play_audioDescriptionAvailable && ! downloaded) {
+            [accessibilityLabel appendFormat:@". %@", PlaySRGAccessibilityLocalizedString(@"Audio described", @"Accessibility label for a media cell with audio description")];
+        }
+        
+        return accessibilityLabel.copy;
     }
 }
 
@@ -223,7 +243,7 @@
                                                                                          attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle] }];
             [subtitle appendAttributedString:[[NSAttributedString alloc] initWithString:[NSDateFormatter.play_relativeDateFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString
                                                                              attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle] }]];
-            self.subtitleLabel.attributedText = [subtitle copy];
+            self.subtitleLabel.attributedText = subtitle.copy;
         }
         else {
             self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
@@ -238,7 +258,12 @@
     
     self.media360ImageView.hidden = (media.presentation != SRGPresentation360);
     
-    self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
+    BOOL downloaded = [Download downloadForMedia:media].state == DownloadStateDownloaded;
+    self.webFirstLabel.hidden = ! media.play_webFirst;
+    self.subtitlesLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtitlesAvailable || downloaded);
+    self.audioDescriptionImageView.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
+
+    self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
     
     SRGBlockingReason blockingReason = [media blockingReasonAtDate:NSDate.date];
@@ -270,7 +295,7 @@
         BOOL downloadsHintsHidden = ApplicationConfiguration.sharedApplicationConfiguration.downloadsHintsHidden;
         
         [self.downloadStatusImageView play_stopAnimating];
-        self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable-22"];
+        self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable-16"];
         
         self.downloadStatusImageView.hidden = downloadsHintsHidden ? YES : ! [Download canDownloadMedia:self.media];
         return;
@@ -285,26 +310,26 @@
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended: {
             [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable_stop-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable_stop-16"];
             break;
         }
             
         case DownloadStateDownloading: {
-            [self.downloadStatusImageView play_startAnimatingDownloading22WithTintColor:tintColor];
+            [self.downloadStatusImageView play_startAnimatingDownloading16WithTintColor:tintColor];
             downloadImage = self.downloadStatusImageView.image;
             break;
         }
             
         case DownloadStateDownloaded: {
             [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable_full-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable_full-16"];
             break;
         }
             
         case DownloadStateDownloadable:
         case DownloadStateRemoved: {
             [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable-16"];
             break;
         }
             

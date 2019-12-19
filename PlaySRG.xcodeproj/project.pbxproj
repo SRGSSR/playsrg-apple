@@ -1075,6 +1075,11 @@
 		6F7218151DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
 		6F7218161DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
 		6F7218171DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
+		6F7C35B523708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */; };
+		6F7C35B623708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */; };
+		6F7C35B723708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */; };
+		6F7C35B823708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */; };
+		6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */; };
 		6F7C89CF20AAFC6100255A54 /* Onboardings.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */; };
 		6F7C89D020AAFC6100255A54 /* Onboardings.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */; };
 		6F7C89D120AAFC6100255A54 /* Onboardings.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */; };
@@ -1336,6 +1341,26 @@
 		6FDF08FC218B126700B2AF2C /* DeprecatedFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */; };
 		6FDF08FD218B126700B2AF2C /* DeprecatedFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */; };
 		6FDF08FE218B126700B2AF2C /* DeprecatedFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08D2218B126700B2AF2C /* DeprecatedFavorite.m */; };
+		6FE01B062360358D008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
+		6FE01B072360358D008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
+		6FE01B082360358D008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
+		6FE01B09236035AB008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
+		6FE01B0A236035AB008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
+		6FE01B0B236035AB008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
+		6FE01B0C23603DB7008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
+		6FE01B0D23603DB7008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
+		6FE01B0E23603DB7008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
+		6FE01B0F23603DCE008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
+		6FE01B1023603DCE008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
+		6FE01B1123603DCE008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
+		6FE01B1223603DDF008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
+		6FE01B1323603DDF008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
+		6FE01B1423603DDF008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
+		6FE01B1623603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
+		6FE01B1723603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
+		6FE01B1823603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
+		6FE01B1923603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
+		6FE01B1A23603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
 		6FE1B4971DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		6FE1B4981DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		6FE1B4991DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
@@ -2083,6 +2108,8 @@
 		6F6B642D21A70FAA00E207FC /* HomeStatusHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeStatusHeaderView.xib; sourceTree = "<group>"; };
 		6F7218111DBE75AC00575072 /* PreviewingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewingDelegate.h; sourceTree = "<group>"; };
 		6F7218121DBE75AC00575072 /* PreviewingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewingDelegate.m; sourceTree = "<group>"; };
+		6F7C35B323708E8A00259BE7 /* SRGResource+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGResource+PlaySRG.h"; sourceTree = "<group>"; };
+		6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGResource+PlaySRG.m"; sourceTree = "<group>"; };
 		6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Onboardings.xcassets; sourceTree = "<group>"; };
 		6F7CE6EF1DD6021700FA4A6D /* PlayLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayLogger.h; sourceTree = "<group>"; };
 		6F7EEBDC22DC40B7005E5A97 /* SearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchBar.h; sourceTree = "<group>"; };
@@ -2203,6 +2230,10 @@
 		6FDF08D3218B126700B2AF2C /* Onboarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Onboarding.h; sourceTree = "<group>"; };
 		6FDF08D4218B126700B2AF2C /* UpdateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfo.h; sourceTree = "<group>"; };
 		6FDF08D5218B126700B2AF2C /* OnboardingPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingPage.h; sourceTree = "<group>"; };
+		6FE01B032360358C008EBB27 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Carthage/Build/iOS/AppCenter.framework; sourceTree = "<group>"; };
+		6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Carthage/Build/iOS/AppCenterCrashes.framework; sourceTree = "<group>"; };
+		6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterDistribute.framework; path = Carthage/Build/iOS/AppCenterDistribute.framework; sourceTree = "<group>"; };
+		6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AppCenterDistributeResources.bundle; path = Carthage/Build/iOS/AppCenterDistribute.framework/AppCenterDistributeResources.bundle; sourceTree = "<group>"; };
 		6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsConstants.h; sourceTree = "<group>"; };
 		6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsConstants.m; sourceTree = "<group>"; };
 		6FE1B9171FAC34D600A58F3B /* ContentInsets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentInsets.h; sourceTree = "<group>"; };
@@ -2274,6 +2305,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE01B062360358D008EBB27 /* AppCenter.framework in Frameworks */,
+				6FE01B072360358D008EBB27 /* AppCenterCrashes.framework in Frameworks */,
+				6FE01B082360358D008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F5392DB2248FF4A0002BF87 /* Masonry.framework in Frameworks */,
 				6F5392BF2248DB6F0002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392A92248CF470002BF87 /* UICKeyChainStore.framework in Frameworks */,
@@ -2309,6 +2343,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE01B09236035AB008EBB27 /* AppCenter.framework in Frameworks */,
+				6FE01B0A236035AB008EBB27 /* AppCenterCrashes.framework in Frameworks */,
+				6FE01B0B236035AB008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F5392DC2248FF620002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C02248DB850002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AA2248CF5B0002BF87 /* UICKeyChainStore.framework in Frameworks */,
@@ -2344,6 +2381,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE01B0C23603DB7008EBB27 /* AppCenter.framework in Frameworks */,
+				6FE01B0D23603DB7008EBB27 /* AppCenterCrashes.framework in Frameworks */,
+				6FE01B0E23603DB7008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F5392DD2248FF790002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C12248DB960002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AB2248CF740002BF87 /* UICKeyChainStore.framework in Frameworks */,
@@ -2379,6 +2419,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE01B0F23603DCE008EBB27 /* AppCenter.framework in Frameworks */,
+				6FE01B1023603DCE008EBB27 /* AppCenterCrashes.framework in Frameworks */,
+				6FE01B1123603DCE008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F5392DE2248FF970002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C22248DBA70002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AC2248CF8C0002BF87 /* UICKeyChainStore.framework in Frameworks */,
@@ -2414,6 +2457,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE01B1223603DDF008EBB27 /* AppCenter.framework in Frameworks */,
+				6FE01B1323603DDF008EBB27 /* AppCenterCrashes.framework in Frameworks */,
+				6FE01B1423603DDF008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F5392DF2248FFAB0002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C32248DBB80002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AD2248CF9D0002BF87 /* UICKeyChainStore.framework in Frameworks */,
@@ -3137,6 +3183,8 @@
 				6FB0AEFB217F4975009D707A /* SRGMediaComposition+PlaySRG.m */,
 				6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */,
 				6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */,
+				6F7C35B323708E8A00259BE7 /* SRGResource+PlaySRG.h */,
+				6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */,
 				0852539522073D5200BCF0B1 /* UIApplication+PlaySRG.h */,
 				0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */,
 				6F47601F1EB37BD1003021EA /* UICollectionView+PlaySRG.h */,
@@ -3424,6 +3472,10 @@
 		E65311E31D3E6FD100B4B8BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FE01B032360358C008EBB27 /* AppCenter.framework */,
+				6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */,
+				6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */,
+				6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */,
 				6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */,
 				E60178511D635E130000362E /* ComScore.framework */,
 				08B6F7E5210CF8660097EF8B /* CoreData.framework */,
@@ -4014,6 +4066,7 @@
 				6F0F88951ECF0CE50060A893 /* override_artwork_tv_srf1.pdf in Resources */,
 				0837CEC51D3FD6E600A1E089 /* SRGSSRType_Bd.ttf in Resources */,
 				6F12DB5521A3EFBF0054879D /* HistoryViewController.storyboard in Resources */,
+				6FE01B1623603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6F0C99A12121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				0837CEAA1D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
 				6F0F88A61ECF0CE50060A893 /* override_default_srf4.pdf in Resources */,
@@ -4112,6 +4165,7 @@
 				6F0F888E1ECF0CDD0060A893 /* override_default_la1ere.pdf in Resources */,
 				6F475FF11EB37BC6003021EA /* TabStripCell.xib in Resources */,
 				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
+				6FE01B1723603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				08280F102258EA4000AC978D /* WatchLaterViewController.storyboard in Resources */,
 				6F12E4D822D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				6FF3B6952137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
@@ -4286,6 +4340,7 @@
 				6F0F88361ECEE7800060A893 /* override_default_la1.pdf in Resources */,
 				0804917822832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
 				08DADF8E20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
+				6FE01B1823603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				E6AE51351D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
 				E6DB5F231D66E0950057094B /* ShowsViewController.storyboard in Resources */,
 				6FF7BBB422A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
@@ -4426,6 +4481,7 @@
 				6F0F88741ECF0CD70060A893 /* override_artwork_rtr_srf_info.pdf in Resources */,
 				6F0F88751ECF0CD70060A893 /* override_artwork_rtr_srf2.pdf in Resources */,
 				E694A9FD1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
+				6FE01B1923603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4518,6 +4574,7 @@
 				6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */,
 				6F0C99B42121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				6FA9ECCA20C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
+				6FE01B1A23603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6F3B33B11EEEB20400D60789 /* MenuHeaderSectionView.xib in Resources */,
 				6F0C999B2121FBD800073AB6 /* SRGAppearance.bundle in Resources */,
 				6FF3B6982137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
@@ -4977,16 +5034,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play SRF/Pods-PlaySRG-Play SRF-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages/SwiftMessages.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UrbanAirship-iOS-SDK/AirshipResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.4_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.4_static/GoogleCast.framework/GoogleCastUIResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftMessages.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AirshipResources.bundle",
@@ -5023,16 +5078,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages/SwiftMessages.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UrbanAirship-iOS-SDK/AirshipResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.4_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.4_static/GoogleCast.framework/GoogleCastUIResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftMessages.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AirshipResources.bundle",
@@ -5411,16 +5464,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RSI/Pods-PlaySRG-Play RSI-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages/SwiftMessages.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UrbanAirship-iOS-SDK/AirshipResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.4_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.4_static/GoogleCast.framework/GoogleCastUIResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftMessages.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AirshipResources.bundle",
@@ -5439,16 +5490,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play SWI/Pods-PlaySRG-Play SWI-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages/SwiftMessages.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UrbanAirship-iOS-SDK/AirshipResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.4_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.4_static/GoogleCast.framework/GoogleCastUIResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftMessages.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AirshipResources.bundle",
@@ -5557,16 +5606,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SwiftMessages/SwiftMessages.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UrbanAirship-iOS-SDK/AirshipResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.4_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.4_static/GoogleCast.framework/GoogleCastUIResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftMessages.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AirshipResources.bundle",
@@ -5640,6 +5687,7 @@
 				6FB3C1A81DBCE783008160B4 /* MediaPreviewViewController.m in Sources */,
 				082590F01F054A6A00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6FDF08D7218B126700B2AF2C /* Download.m in Sources */,
+				6F7C35B523708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				6F93DE1A20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				086F8D5522984B29001BE2F4 /* Favorites.m in Sources */,
 				6F962F9C1FD5144200EA42C1 /* SideMenuController.m in Sources */,
@@ -5878,6 +5926,7 @@
 				08209309208F522B00711DE4 /* PushService.m in Sources */,
 				6F475FE21EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F901D38DEA100BB8AAA /* main.m in Sources */,
+				6F7C35B623708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220AE1DD07B7A00BF8326 /* DownloadsViewController.m in Sources */,
 				087A88381EAA82D100525C2A /* LiveAccessView.m in Sources */,
 				08EB37AE1D48B2B00080EDE4 /* MenuViewController.m in Sources */,
@@ -6039,6 +6088,7 @@
 				0820930A208F522B00711DE4 /* PushService.m in Sources */,
 				6F475FE31EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F911D38DEA100BB8AAA /* main.m in Sources */,
+				6F7C35B723708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220B21DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087A88371EAA82D100525C2A /* LiveAccessView.m in Sources */,
 				08EB37B21D48B2B10080EDE4 /* MenuViewController.m in Sources */,
@@ -6200,6 +6250,7 @@
 				0820930B208F522B00711DE4 /* PushService.m in Sources */,
 				6F475FE41EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F921D38DEA100BB8AAA /* main.m in Sources */,
+				6F7C35B823708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220B61DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087A88391EAA82D200525C2A /* LiveAccessView.m in Sources */,
 				08EB37B61D48B2B10080EDE4 /* MenuViewController.m in Sources */,
@@ -6361,6 +6412,7 @@
 				0820930C208F522B00711DE4 /* PushService.m in Sources */,
 				6F475FE51EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F931D38DEA100BB8AAA /* main.m in Sources */,
+				6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220BA1DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087A883A1EAA82D200525C2A /* LiveAccessView.m in Sources */,
 				08EB37BA1D48B2B20080EDE4 /* MenuViewController.m in Sources */,
@@ -6687,7 +6739,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 317;
+				CURRENT_PROJECT_VERSION = 322;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -6706,7 +6758,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 2.9.6;
+				MARKETING_VERSION = 2.9.7;
 				MARKETING_VERSION_SUFFIX = "-debug";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -6755,7 +6807,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 317;
+				CURRENT_PROJECT_VERSION = 322;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6768,7 +6820,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 2.9.6;
+				MARKETING_VERSION = 2.9.7;
 				MARKETING_VERSION_SUFFIX = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -7110,7 +7162,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 317;
+				CURRENT_PROJECT_VERSION = 322;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -7124,7 +7176,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 2.9.6;
+				MARKETING_VERSION = 2.9.7;
 				MARKETING_VERSION_SUFFIX = "-beta";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -7140,6 +7192,7 @@
 			baseConfigurationReference = 6F1EBE1B222EBB7D003E0722 /* Play SRF.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7169,6 +7222,7 @@
 			baseConfigurationReference = 6F1EBE0D222EBB7C003E0722 /* Play RTS.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7198,6 +7252,7 @@
 			baseConfigurationReference = 6F1EBE13222EBB7C003E0722 /* Play RSI.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7227,6 +7282,7 @@
 			baseConfigurationReference = 6F1EBE15222EBB7D003E0722 /* Play RTR.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7256,6 +7312,7 @@
 			baseConfigurationReference = 6F1EBE12222EBB7C003E0722 /* Play SWI.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7317,7 +7374,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 317;
+				CURRENT_PROJECT_VERSION = 322;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -7331,7 +7388,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 2.9.6;
+				MARKETING_VERSION = 2.9.7;
 				MARKETING_VERSION_SUFFIX = "-nightly";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -7347,6 +7404,7 @@
 			baseConfigurationReference = 6F1EBE18222EBB7D003E0722 /* Play SRF.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7378,6 +7436,7 @@
 			baseConfigurationReference = 6F1EBE11222EBB7C003E0722 /* Play RTS.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7409,6 +7468,7 @@
 			baseConfigurationReference = 6F1EBE10222EBB7C003E0722 /* Play RSI.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7440,6 +7500,7 @@
 			baseConfigurationReference = 6F1EBE1D222EBB7E003E0722 /* Play RTR.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7471,6 +7532,7 @@
 			baseConfigurationReference = 6F1EBE16222EBB7D003E0722 /* Play SWI.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
+				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

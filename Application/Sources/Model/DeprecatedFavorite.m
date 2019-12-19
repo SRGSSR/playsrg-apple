@@ -426,7 +426,7 @@ __attribute__((constructor)) static void FavoriteInit(void)
      *  plist file without the related object. It then creates a light favorite object with just the information needed to display it.
      */
     @try {
-        s_favoritesDictionary = [[DeprecatedFavorite loadFavoritesDictionary] mutableCopy];
+        s_favoritesDictionary = [DeprecatedFavorite loadFavoritesDictionary].mutableCopy;
     }
     @catch (NSException *exception) {
         PlayLogWarning(@"favorite", @"Favorite migration failed. Use backup dictionary instead");
@@ -436,7 +436,7 @@ __attribute__((constructor)) static void FavoriteInit(void)
     if (s_favoritesDictionary.count == 0) {
         NSDictionary *backupFavorite = [DeprecatedFavorite loadFavoritesBackupDictionary];
         if (backupFavorite.count > 0) {
-            s_favoritesDictionary = [backupFavorite mutableCopy];
+            s_favoritesDictionary = backupFavorite.mutableCopy;
             [DeprecatedFavorite saveFavoritesDictionary];
         }
     }

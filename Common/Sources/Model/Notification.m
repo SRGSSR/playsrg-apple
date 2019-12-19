@@ -204,7 +204,7 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
     dictionary[@"media"] = self.mediaURN;
     dictionary[@"show"] = self.showURN;
     dictionary[@"channelId"] = self.channelUid;
-    return [dictionary copy];
+    return dictionary.copy;
 }
 
 #pragma mark SRGImageMetadata protocol

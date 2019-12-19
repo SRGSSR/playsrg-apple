@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) UIColor *play_lightGrayButtonBackgroundColor;
 @property (class, nonatomic, readonly) UIColor *play_grayThumbnailImageViewBackgroundColor;
 @property (class, nonatomic, readonly) UIColor *play_blackDurationLabelBackgroundColor;
+@property (class, nonatomic, readonly) UIColor *play_whiteBadgeColor;
 
 @end
 

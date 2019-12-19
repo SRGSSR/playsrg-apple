@@ -42,7 +42,7 @@
         [viewControllers addObject:[[HomeMediasViewController alloc] initWithHomeSectionInfo:subTopicSectionInfo]];
     }
     
-    if (self = [super initWithViewControllers:[viewControllers copy]]) {
+    if (self = [super initWithViewControllers:viewControllers.copy]) {
         self.title = topic.title;
     }
     return self;

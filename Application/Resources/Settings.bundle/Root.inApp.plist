@@ -64,6 +64,32 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Key</key>
+			<string>Group_Display</string>
+			<key>Title</key>
+			<string>Display</string>
+			<key>FooterText</key>
+			<string>Always visible when VoiceOver is active.</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Subtitle availability</string>
+			<key>Key</key>
+			<string>PlaySRGSettingSubtitleAvailabilityDisplayed</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Audio description availability</string>
+			<key>Key</key>
+			<string>PlaySRGSettingAudioDescriptionAvailabilityDisplayed</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Key</key>
 			<string>Group_Information</string>
 			<key>Title</key>
 			<string>Information</string>
@@ -212,17 +238,9 @@
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
-			<string>Check for updates</string>
+			<string>Versions and release notes</string>
 			<key>Key</key>
-			<string>Button_CheckForUpdates</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
-			<key>Title</key>
-			<string>Install previous version</string>
-			<key>Key</key>
-			<string>Button_InstallPreviousVersion</string>
+			<string>Button_VersionsAndReleaseNotes</string>
 		</dict>
 		<dict>
 			<key>Type</key>

@@ -23,7 +23,7 @@
         [viewControllers addObject:showsViewController];
     }
     
-    if (self = [super initWithViewControllers:[viewControllers copy]]) {
+    if (self = [super initWithViewControllers:viewControllers.copy]) {
         self.title = NSLocalizedString(@"Radio programmes A-Z", @"Title displayed at the top of the radio show list");
     }
     return self;

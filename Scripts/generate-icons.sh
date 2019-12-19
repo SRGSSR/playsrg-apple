@@ -43,7 +43,6 @@ fi
 
 CONTENTS_JSON="${SOURCE_APPICON_PATH}/Contents.json"
 
-#for ICON in ${ICONARRAY[@]};
 echo "Processing Icons..."
 ICON_COUNT=$(jq -r '.images | length-1' "${CONTENTS_JSON}")
 for i in $(jot - 0 ${ICON_COUNT});
@@ -72,8 +71,6 @@ do
         continue
     fi
 
-    #TARGET_ICON_PATH="${CODESIGNING_FOLDER_PATH}/App${ICON}"
-    #SOURCE_ICON_PATH=""
     SCRIPT_DIR=`dirname $BASH_SOURCE`
     CACHE_APPICON_PATH="${SCRIPT_DIR}/generate-icons-caches"
 
@@ -83,35 +80,28 @@ do
 
     if [ "${CONFIGURATION}" == "Beta" ]; then
         TITLE="Beta"
-        APP_NAME="Beta"
     elif [ "${CONFIGURATION}" == "Nightly" ]; then
-	    TITLE="Nite"
-        APP_NAME="Nite"
+	    TITLE="Nightly"
     elif [ "${CONFIGURATION}" == "Debug" ]; then
         TITLE="Debug"
-        APP_NAME="Dbg"
     else
         TITLE="Dev"
-        APP_NAME="Dev"
     fi
 
     SCRIPT_ICON_PATH="${CACHE_APPICON_PATH}/${TITLE}-${filename}"
 
     if [ "$LAST_RUN" != "$CURRENT_RUN" ] || [! -e "${SCRIPT_ICON_PATH}"]; then
-        #BUSINESS_UNIT=`echo ${PRODUCT_NAME} | sed 's/Play //g'`
-        #SOURCE_ICON_PATH="${SRCROOT}/Application/Resources/Apps/Play ${BUSINESS_UNIT}/${BUSINESS_UNIT}Resources.xcassets/AppIcon.appiconset/${ICON}"
-
         WIDTH=`identify -format %w "${SOURCE_ICON_PATH}"`
-        HEIGHT=`echo "${WIDTH}/4.2" | bc`
+        HEIGHT=`echo "${WIDTH}/6" | bc`
 
         if [ "${BUILD_NUMBER}" != "" ]; then
-            CAPTION="${APP_NAME} (${BUILD_NUMBER})"
+            CAPTION="${TITLE}-${BUILD_NUMBER}"
         else
-            CAPTION="${APP_NAME}"
+            CAPTION="${TITLE}"
         fi
 
         echo $PYTHON_NIGHTLIES_TAG "Making app icon ${CAPTION} | ${filename}"
-        convert -background '#0008' -fill white -gravity center -size ${WIDTH}x${HEIGHT} caption:"${CAPTION}" "${SOURCE_ICON_PATH}" +swap -gravity south -composite "${SCRIPT_ICON_PATH}"
+        convert -background '#0005' -fill white -gravity center -size ${WIDTH}x${HEIGHT} caption:"${CAPTION}" "${SOURCE_ICON_PATH}" +swap -gravity south -composite "${SCRIPT_ICON_PATH}"
     fi
 
     SOURCE_ICON_PATH="${SCRIPT_ICON_PATH}"

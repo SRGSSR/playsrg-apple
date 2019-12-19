@@ -11,7 +11,7 @@
   "feedbackURL": "https://play.typeform.com/to/yrmKKf",
   "searchOptions": "tvShows,videos,radioShows,audios",
   "tvHomeSections": "tvTrending,tvLive,tvFavoriteShows,tvEvents,tvTopics",
-  "tvTrendingEpisodesOnly": true,
+  "tvTrendingEpisodesOnly": false,
   "tvFeaturedHomeSectionHeaderHidden": true,
   "tvNumberOfLivePlaceholders": 2,
   "radioHomeSections": "radioLive,radioFavoriteShows,radioShowsAccess,radioMostPopular,radioLatest",
@@ -33,5 +33,8 @@
   "continuousPlaybackBackgroundTransitionDuration": 0,
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
-  "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account"
+  "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account",
+  "searchSettingSubtitledHidden": true,
+  "subtitleAvailabilityHidden": true,
+  "audioDescriptionAvailabilityHidden": true
 }

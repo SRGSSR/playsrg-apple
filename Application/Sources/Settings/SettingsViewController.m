@@ -22,8 +22,8 @@
 #import "UIViewController+PlaySRG.h"
 #import "WebViewController.h"
 
+#import <AppCenterDistribute/AppCenterDistribute.h>
 #import <FLEX/FLEX.h>
-#import <HockeySDK/HockeySDK.h>
 #import <InAppSettingsKit/IASKSettingsReader.h>
 #import <libextobjc/libextobjc.h>
 #import <SafariServices/SafariServices.h>
@@ -45,6 +45,9 @@ static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersi
 // Autoplay group
 static NSString * const SettingsAutoplayGroup = @"Group_Autoplay";
 
+// Display group
+static NSString * const SettingsDisplayGroup = @"Group_Display";
+
 // Information group
 static NSString * const SettingsInformationGroup = @"Group_Information";
 
@@ -52,10 +55,9 @@ static NSString * const SettingsInformationGroup = @"Group_Information";
 static NSString * const SettingsAdvancedFeaturesGroup = @"Group_AdvancedFeatures";
 static NSString * const SettingsServerSettingsButton = @"Button_ServerSettings";
 static NSString * const SettingsUserLocationSettingsButton = @"Button_UserLocationSettings";
-static NSString * const SettingsCheckForUpdatesButton = @"Button_CheckForUpdates";
-static NSString * const SettingsInstallPreviousVersionButton = @"Button_InstallPreviousVersion";
 static NSString * const SettingsSubscribeToAllShowsButton = @"Button_SubscribeToAllShows";
 static NSString * const SettingsSystemSettingsButton = @"Button_SystemSettings";
+static NSString * const SettingsVersionsAndReleaseNotes = @"Button_VersionsAndReleaseNotes";
 
 // Reset group
 static NSString * const SettingsResetGroup = @"Group_Reset";
@@ -67,16 +69,15 @@ static NSString * const SettingsClearAllContentsButton = @"Button_ClearAllConten
 static NSString * const SettingsDeveloperGroup = @"Group_Developer";
 static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
-// ** Private SRGLetterbox setter for DRM slow rollout.
-// TODO: Remove in 2019
+/**
+ *  Private App Center implementation details.
+ */
+@interface MSDistribute (Private)
 
-@interface SRGLetterboxController (Private_SRGLetterbox)
-
-@property (class, nonatomic) BOOL prefersDRM;
++ (id)sharedInstance;
+- (void)startUpdate;
 
 @end
-
-// **
 
 @interface SettingsViewController () <SFSafariViewControllerDelegate>
 
@@ -116,16 +117,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                                            selector:@selector(userDataDidFinishSynchronization:)
                                                name:SRGUserDataDidStartSynchronizationNotification
                                              object:SRGUserData.currentUserData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    // Apply settings on exit
-    if ([self play_isMovingFromParentViewController]) {
-        SRGLetterboxService.sharedService.mirroredOnExternalScreen = ApplicationSettingPresenterModeEnabled();
-    }
 }
 
 #pragma mark IASKSettingsDelegate protocol
@@ -176,23 +167,19 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         
         [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:nil];
     }
-    else if ([specifier.key isEqualToString:SettingsCheckForUpdatesButton]) {
-        [[BITHockeyManager sharedHockeyManager].updateManager showUpdateView];
-    }
-    else if ([specifier.key isEqualToString:SettingsInstallPreviousVersionButton]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Previous versions", @"Message title displayed when the user wants to install a previous version")
-                                                                                 message:NSLocalizedString(@"You may have to uninstall the application if the restored version crashes at launch.\n\nPrevious versions can be found under the \"History\" tab on the next screen.", @"Message description displayed when the user wants to install a previous version")
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"I understand", @"Title of the button to install a previous version") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSString *hockeyIdentifier = [NSBundle.mainBundle objectForInfoDictionaryKey:@"HockeyIdentifier"];
-            NSString *stringURL = [NSString stringWithFormat:@"https://rink.hockeyapp.net/apps/%@", hockeyIdentifier];
-            SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:stringURL]];
-            safariViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-            safariViewController.modalPresentationCapturesStatusBarAppearance = YES;
-            safariViewController.delegate = self;
-            [self presentViewController:safariViewController animated:YES completion:nil];
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+    else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {
+        // Clear internal App Center timestamp to force a new update request
+        [NSUserDefaults.standardUserDefaults removeObjectForKey:@"MSPostponedTimestamp"];
+        [[MSDistribute sharedInstance] startUpdate];
+        
+        // Display version history
+        NSString *appCenterURLString = [NSBundle.mainBundle.infoDictionary objectForKey:@"AppCenterURL"];
+        NSURL *appCenterURL = (appCenterURLString.length > 0) ? [NSURL URLWithString:appCenterURLString] : nil;
+        if (appCenterURL) {
+            SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:appCenterURL];
+            UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
+            [rootViewController presentViewController:safariViewController animated:YES completion:nil];
+        }
     }
     else if ([specifier.key isEqualToString:SettingsSubscribeToAllShowsButton]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Automatic subscriptions", @"Message title displayed when subscribing to all TV and radio shows")
@@ -280,14 +267,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         }
         return nil;
     }
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    else if ([key isEqualToString:SettingsAdvancedFeaturesGroup]) {
-        IASKSpecifier *specifier = [settingsViewController.settingsReader specifierForKey:SettingsAdvancedFeaturesGroup];
-        NSString *prefersDRMState = SRGLetterboxController.prefersDRM ? PlaySRGNonLocalizedString(@"ON") : PlaySRGNonLocalizedString(@"OFF");
-        NSString *prefersDRMText = [NSString stringWithFormat:NSLocalizedString(@"Prefers DRM streams: %@.", @"Introductory text for DRM status information in the app settings"), prefersDRMState];
-        return (specifier.footerText.length != 0) ? [specifier.footerText stringByAppendingFormat:@"\n\n%@", prefersDRMText] : prefersDRMText;
-    }
-#endif
     else {
         return nil;
     }
@@ -344,8 +323,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:PlaySRGSettingStandaloneEnabled];
     [hiddenKeys addObject:PlaySRGSettingOriginalImagesOnlyEnabled];
     [hiddenKeys addObject:PlaySRGSettingAlternateRadioHomepageDesignEnabled];
-    [hiddenKeys addObject:SettingsCheckForUpdatesButton];
-    [hiddenKeys addObject:SettingsInstallPreviousVersionButton];
+    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
     [hiddenKeys addObject:SettingsSystemSettingsButton];
     [hiddenKeys addObject:SettingsResetGroup];
@@ -356,9 +334,8 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:SettingsDeveloperGroup];
     [hiddenKeys addObject:SettingsFLEXButton];
 #else
-    if (! [BITHockeyManager sharedHockeyManager].updateManager) {
-        [hiddenKeys addObject:SettingsCheckForUpdatesButton];
-        [hiddenKeys addObject:SettingsInstallPreviousVersionButton];
+    if (! MSDistribute.isEnabled) {
+        [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     }
     
     if (! PushService.sharedService.enabled) {
@@ -370,6 +347,18 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     if (! applicationConfiguration.continuousPlaybackAvailable) {
         [hiddenKeys addObject:SettingsAutoplayGroup];
         [hiddenKeys addObject:PlaySRGSettingAutoplayEnabled];
+    }
+    
+    if (applicationConfiguration.subtitleAvailabilityHidden) {
+        [hiddenKeys addObject:PlaySRGSettingSubtitleAvailabilityDisplayed];
+    }
+    
+    if (applicationConfiguration.audioDescriptionAvailabilityHidden) {
+        [hiddenKeys addObject:PlaySRGSettingAudioDescriptionAvailabilityDisplayed];
+    }
+    
+    if (applicationConfiguration.subtitleAvailabilityHidden && applicationConfiguration.audioDescriptionAvailabilityHidden) {
+        [hiddenKeys addObject:SettingsDisplayGroup];
     }
     
     if (Onboarding.onboardings.count == 0) {
@@ -392,7 +381,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [hiddenKeys addObject:SettingsSourceCodeButton];
     }
     
-    self.hiddenKeys = [hiddenKeys copy];
+    self.hiddenKeys = hiddenKeys.copy;
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -414,11 +403,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     NSNumber *originalImagesOnlyEnabled = notification.userInfo[PlaySRGSettingOriginalImagesOnlyEnabled];
     if (originalImagesOnlyEnabled) {
         [UIImage play_setUseOriginalImagesOnly:originalImagesOnlyEnabled.boolValue];
-    }
-    
-    NSNumber *presenterModeEnabled = notification.userInfo[PlaySRGSettingPresenterModeEnabled];
-    if (presenterModeEnabled) {
-        SRGLetterboxService.sharedService.mirroredOnExternalScreen = presenterModeEnabled.boolValue;
     }
 }
 

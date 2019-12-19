@@ -1,8 +1,8 @@
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been added to \"Watch later\"" = "%@ è vegnì aschuntà a \"guardar pli tard\"";
+"%@ has been added to \"Watch later\"" = "%@ è vegnì agiuntà a \"guardar pli tard\"";
 
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
-"%@ has been added to favorites" = "%@ è vegnì aschuntà a mes favurits";
+"%@ has been added to favorites" = "%@ è vegnì agiuntà a mes favurits";
 
 /* Message displayed at the top of the screen when removing an item from the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been removed from \"Watch later\"" = "%@ è vegnì allontanà da \"guardar pli tard\"";
@@ -49,6 +49,9 @@
 
 /* Title of the first cell of a media list on homepage. */
 "All content" = "Entir cuntegn";
+
+/* No comment provided by engineer. */
+"Always send" = "Trametter adina";
 
 /* Confirmation message displayed when the user is about to clean all favorites
    Confirmation message displayed when the user is about to clean the watch later list
@@ -124,6 +127,12 @@
 /* Introductory title displayed at the top of the onboarding list */
 "Discover" = "Scuvrir";
 
+/* No comment provided by engineer. */
+"Do you want to send an anonymous crash report so we can fix the issue?" = "Vulais trametter in  rapport anonim, per che nus possian schliar il problem?";
+
+/* No comment provided by engineer. */
+"Don't send" = "Betg trametter";
+
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Stgargiabel";
 
@@ -188,9 +197,6 @@
    Label in the left menu to present history
    Title displayed at the top of the history screen */
 "History" = "Cronologia";
-
-/* Title of the button to install a previous version */
-"I understand" = "Jeu capeschel";
 
 /* Image copyright introductory label */
 "Image credit: %@" = "Maletg:%@";
@@ -362,9 +368,6 @@
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Precedent";
 
-/* Message title displayed when the user wants to install a previous version */
-"Previous versions" = "Versiun precedenta";
-
 /* [Technical] Title for programmes A-Z analytics measurements
    [Technical] Title for programmes A-Z page view analytics measurements
    Label in the left menu to present shows A to Z (radio or TV)
@@ -447,6 +450,9 @@
    Title displayed when there is no search criterium entered */
 "Search" = "Tschertga";
 
+/* No comment provided by engineer. */
+"Send" = "Trametter";
+
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Midà server tar '%@'";
 
@@ -478,6 +484,9 @@
 /* Short label identifying content which will be available soon. */
 "Soon" = "Proximamain";
 
+/* Subtitles short label on media cells */
+"ST" = "ST";
+
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Anc accessibel per %@";
 
@@ -490,8 +499,14 @@
 /* Message description displayed when subscribing to all TV and radio shows */
 "Subscribing to all TV and radio shows…" = "Aboneschà las shows da radio e televisiun...";
 
+/* Name of the search setting to filter subtitled content */
+"Subtitled" = "Suttitels";
+
 /* [Technical] System page type for analytics measurements */
 "System" = "Sistem";
+
+/* No comment provided by engineer. */
+"The application unexpectedly quit" = "L‘applicaziun è serrada nunspetgadamain";
 
 /* Button label to share the content being played. */
 "The content" = "Il cuntegn";
@@ -585,6 +600,9 @@
    Title displayed at the top of the watch later list screen */
 "Watch later" = "Guardar pli tard";
 
+/* Web first label on media cells */
+"WEB FIRST" = "WEB l‘emprim";
+
 /* Label used on the home page to present scheduled livestream medias. Only on test versions. */
 "Web livestreams" = "Web direct";
 
@@ -618,9 +636,6 @@
 
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "Vus essas vegni deconnectà automaticamain. Per mantegnair la sincronisaziun da las datas sur tut ils apparats far anc ina giada il login.";
-
-/* Message description displayed when the user wants to install a previous version */
-"You may have to uninstall the application if the restored version crashes at launch.\n\nPrevious versions can be found under the \"History\" tab on the next screen." = "En cass da errurs / crashs a la partenza stos ti deinstallar la applicaziun.\nPli veglias versiuns anflas el tab sin questa visualisaziun.";
 
 /* Title displayed at the top of the feedback view */
 "Your feedback" = "Voss resun";

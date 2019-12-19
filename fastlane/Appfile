@@ -4,41 +4,75 @@ team_id "#{ENV['DEFAULT_TEAM_ID']}"
 
 for_platform :ios do
 
-	for_lane :srfTestFlight do
-	  app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
-	  itunes_connect_id "#{ENV['SRF_ITUNES_CONNECT_ID']}"
-	  apple_dev_portal_id "#{ENV['SRF_APPLE_DEV_PORTAL_ID']}"
-	  team_id "#{ENV['SRF_TEAM_ID']}"
-	end
-
-	for_lane :rtsTestFlight do
-		app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
-	 	itunes_connect_id"#{ENV['RTS_ITUNES_CONNECT_ID']}"
-	 	apple_dev_portal_id "#{ENV['RTS_APPLE_DEV_PORTAL_ID']}"
-	 	team_id "#{ENV['RTS_TEAM_ID']}"
-	end
-
-	for_lane :rsiTestFlight do
-		app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
-		itunes_connect_id "#{ENV['RSI_ITUNES_CONNECT_ID']}"
-	 	apple_dev_portal_id "#{ENV['RSI_APPLE_DEV_PORTAL_ID']}"
-	 	team_id "#{ENV['RSI_TEAM_ID']}"
-	end
-
-	for_lane :rtrTestFlight do
-		app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
-		itunes_connect_id "#{ENV['RTR_ITUNES_CONNECT_ID']}"
-	 	apple_dev_portal_id "#{ENV['RTR_APPLE_DEV_PORTAL_ID']}"
-	 	team_id "#{ENV['RTR_TEAM_ID']}"
-	end
-
-	for_lane :swiTestFlight do
+	for_lane :swiAppStoreUpload do
 		app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
 	 	itunes_connect_id "#{ENV['SWI_ITUNES_CONNECT_ID']}"
 	 	apple_dev_portal_id "#{ENV['SWI_APPLE_DEV_PORTAL_ID']}"
 	 	team_id "#{ENV['SWI_TEAM_ID']}"
 	end
 
+	for_lane :swiDSYMs do
+		app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
+	 	itunes_connect_id "#{ENV['SWI_ITUNES_CONNECT_ID']}"
+	 	apple_dev_portal_id "#{ENV['SWI_APPLE_DEV_PORTAL_ID']}"
+	 	team_id "#{ENV['SWI_TEAM_ID']}"
+	end
+
+	for_lane :srfAppStoreUpload do
+	  app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
+	  itunes_connect_id "#{ENV['SRF_ITUNES_CONNECT_ID']}"
+	  apple_dev_portal_id "#{ENV['SRF_APPLE_DEV_PORTAL_ID']}"
+	  team_id "#{ENV['SRF_TEAM_ID']}"
+	end
+
+	for_lane :srfDSYMs do
+	  app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
+	  itunes_connect_id "#{ENV['SRF_ITUNES_CONNECT_ID']}"
+	  apple_dev_portal_id "#{ENV['SRF_APPLE_DEV_PORTAL_ID']}"
+	  team_id "#{ENV['SRF_TEAM_ID']}"
+	end
+
+	for_lane :rtsAppStoreUpload do
+		app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
+	 	itunes_connect_id"#{ENV['RTS_ITUNES_CONNECT_ID']}"
+	 	apple_dev_portal_id "#{ENV['RTS_APPLE_DEV_PORTAL_ID']}"
+	 	team_id "#{ENV['RTS_TEAM_ID']}"
+	end
+
+	for_lane :rtsDSYMs do
+		app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
+	 	itunes_connect_id"#{ENV['RTS_ITUNES_CONNECT_ID']}"
+	 	apple_dev_portal_id "#{ENV['RTS_APPLE_DEV_PORTAL_ID']}"
+	 	team_id "#{ENV['RTS_TEAM_ID']}"
+	end
+
+	for_lane :rsiAppStoreUpload do
+		app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
+		itunes_connect_id "#{ENV['RSI_ITUNES_CONNECT_ID']}"
+	 	apple_dev_portal_id "#{ENV['RSI_APPLE_DEV_PORTAL_ID']}"
+	 	team_id "#{ENV['RSI_TEAM_ID']}"
+	end
+
+	for_lane :rsiDSYMs do
+		app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
+		itunes_connect_id "#{ENV['RSI_ITUNES_CONNECT_ID']}"
+	 	apple_dev_portal_id "#{ENV['RSI_APPLE_DEV_PORTAL_ID']}"
+	 	team_id "#{ENV['RSI_TEAM_ID']}"
+	end
+
+	for_lane :rtrAppStoreUpload do
+		app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
+		itunes_connect_id "#{ENV['RTR_ITUNES_CONNECT_ID']}"
+	 	apple_dev_portal_id "#{ENV['RTR_APPLE_DEV_PORTAL_ID']}"
+	 	team_id "#{ENV['RTR_TEAM_ID']}"
+	end
+
+	for_lane :rtrDSYMs do
+		app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
+		itunes_connect_id "#{ENV['RTR_ITUNES_CONNECT_ID']}"
+	 	apple_dev_portal_id "#{ENV['RTR_APPLE_DEV_PORTAL_ID']}"
+	 	team_id "#{ENV['RTR_TEAM_ID']}"
+	end
 end
 
 # you can even provide different app identifiers, Apple IDs and team names per lane:

@@ -36,8 +36,12 @@
 #import "WatchLater.h"
 #import "WebViewController.h"
 
+#import <AppCenter/AppCenter.h>
+#import <AppCenterCrashes/AppCenterCrashes.h>
+#import <AppCenterDistribute/AppCenterDistribute.h>
 #import <AVFoundation/AVFoundation.h>
 #import <Firebase/Firebase.h>
+#import <InAppSettingsKit/IASKSettingsReader.h>
 #import <libextobjc/libextobjc.h>
 #import <Mantle/Mantle.h>
 #import <SafariServices/SafariServices.h>
@@ -53,17 +57,6 @@
 #import <Fingertips/Fingertips.h>
 #endif
 
-// ** Private SRGLetterbox setter for DRM slow rollout.
-// TODO: Remove in 2019
-
-@interface SRGLetterboxController (Private_SRGLetterbox)
-
-@property (class, nonatomic) BOOL prefersDRM;
-
-@end
-
-// **
-
 static void *s_kvoContext = &s_kvoContext;
 
 static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
@@ -77,14 +70,24 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     return (SideMenuController *)self.window.rootViewController;
 }
 
+- (void)setPresenterModeEnabled:(BOOL)presenterModeEnabled
+{
+    SRGLetterboxService.sharedService.mirroredOnExternalScreen = presenterModeEnabled;
+    
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    NSAssert([self.window isKindOfClass:MBFingerTipWindow.class], @"MBFingerTipWindow expected");
+    MBFingerTipWindow *window = (MBFingerTipWindow *)self.window;
+    window.alwaysShowTouches = presenterModeEnabled;
+#endif
+}
+
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
-    // TODO: Remove in 2019 when DRMs are widely available
-    [SRGLetterboxController setPrefersDRM:applicationConfiguration.prefersDRM];
+    [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
     
     // The configuration file, copied at build time in the main product bundle, will have the standard Firebase
     // configuration filename
@@ -125,12 +128,18 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
                                            selector:@selector(playbackDidContinueAutomatically:)
                                                name:SRGLetterboxPlaybackDidContinueAutomaticallyNotification
                                              object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(settingDidChange:)
+                                               name:kIASKAppSettingChanged
+                                             object:nil];
     
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     self.window = [[MBFingerTipWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
 #else
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
 #endif
+    
+    [self setPresenterModeEnabled:ApplicationSettingPresenterModeEnabled()];
     
     self.window.backgroundColor = UIColor.blackColor;
     
@@ -141,8 +150,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     [self setupAnalytics];
     [self setupDataProvider];
     
-    // Letterbox service setup for picture and picture
-    SRGLetterboxService.sharedService.mirroredOnExternalScreen = ApplicationSettingPresenterModeEnabled();
     // Use appropriate voice over language for the whole application
     application.accessibilityLanguage = applicationConfiguration.voiceOverLanguageCode;
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -153,7 +160,7 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     
     // Various setups
 #ifndef DEBUG
-    [self setupHockey];
+    [self setupAppCenter];
 #endif
     
     // Clean downloaded folder
@@ -635,15 +642,31 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 
 #pragma mark Helpers
 
-- (void)setupHockey
+- (void)setupAppCenter
 {
-    NSString *hockeyIdentifier = [NSBundle.mainBundle objectForInfoDictionaryKey:@"HockeyIdentifier"];
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:hockeyIdentifier delegate:self];
-    [[BITHockeyManager sharedHockeyManager] startManager];
+    NSString *appCenterSecret = [NSBundle.mainBundle objectForInfoDictionaryKey:@"AppCenterSecret"];
+    if (appCenterSecret.length == 0) {
+        return;
+    }
     
-#if defined(BETA) || defined(NIGHTLY)
-    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
-#endif
+    [MSCrashes setUserConfirmationHandler:^BOOL(NSArray<MSErrorReport *> * _Nonnull errorReports) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"The application unexpectedly quit", nil)
+                                                                                 message:NSLocalizedString(@"Do you want to send an anonymous crash report so we can fix the issue?", nil)
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Don't send", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [MSCrashes notifyWithUserConfirmation:MSUserConfirmationDontSend];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [MSCrashes notifyWithUserConfirmation:MSUserConfirmationSend];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Always send", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [MSCrashes notifyWithUserConfirmation:MSUserConfirmationAlways];
+        }]];
+        [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+        return YES;
+    }];
+    [MSAppCenter start:appCenterSecret withServices:@[ MSCrashes.class, MSDistribute.class ]];
 }
 
 - (void)updateApplicationBadge
@@ -738,12 +761,12 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
 - (void)playURN:(NSString *)mediaURN media:(SRGMedia *)media atPosition:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification completion:(void (^)(void))completion
 {
     if (media) {
-        [self.sideMenuController play_presentMediaPlayerWithMedia:media position:position fromPushNotification:fromPushNotification animated:YES completion:completion];
+        [self.sideMenuController play_presentMediaPlayerWithMedia:media position:position airPlaySuggestions:YES fromPushNotification:fromPushNotification animated:YES completion:completion];
     }
     else {
         [[SRGDataProvider.currentDataProvider mediaWithURN:mediaURN completionBlock:^(SRGMedia * _Nullable media, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (media) {
-                [self.sideMenuController play_presentMediaPlayerWithMedia:media position:position fromPushNotification:fromPushNotification animated:YES completion:completion];
+                [self.sideMenuController play_presentMediaPlayerWithMedia:media position:position airPlaySuggestions:YES fromPushNotification:fromPushNotification animated:YES completion:completion];
             }
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
@@ -954,13 +977,6 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     }
 }
 
-#pragma mark BITUpdateManagerDelegate protocol
-
-- (UIViewController *)viewControllerForHockeyManager:(BITHockeyManager *)hockeyManager componentManager:(BITHockeyBaseManager *)componentManager
-{
-    return self.sideMenuController;
-}
-
 #pragma mark SKStoreProductViewControllerDelegate protocol
 
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
@@ -1071,6 +1087,14 @@ static MenuItemInfo *MenuItemInfoForChannelUid(NSString *channelUid);
     labels.source = unexpectedLogout ? AnalyticsSourceAutomatic : AnalyticsSourceButton;
     labels.type = AnalyticsTypeActionLogout;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleIdentity labels:labels];
+}
+
+- (void)settingDidChange:(NSNotification *)notification
+{
+    NSNumber *presenterModeEnabled = notification.userInfo[PlaySRGSettingPresenterModeEnabled];
+    if (presenterModeEnabled) {
+        [self setPresenterModeEnabled:presenterModeEnabled.boolValue];
+    }
 }
 
 #pragma mark KVO

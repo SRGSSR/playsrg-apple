@@ -50,6 +50,9 @@
 /* Title of the first cell of a media list on homepage. */
 "All content" = "Alle anzeigen";
 
+/* No comment provided by engineer. */
+"Always send" = "Immer senden";
+
 /* Confirmation message displayed when the user is about to clean all favorites
    Confirmation message displayed when the user is about to clean the watch later list
    Confirmation message displayed when the user is about to delete all download items
@@ -94,7 +97,7 @@
 
 /* Information message of the action view to choose a regional radio
    Title displayed on the regional radio selection button */
-"Choose a regional radio" = "Wählen Sie ihr Regionaljournal";
+"Choose a regional radio" = "Wählen Sie Ihr Regionaljournal";
 
 /* No comment provided by engineer. */
 "Close" = "Schliessen";
@@ -123,6 +126,12 @@
 
 /* Introductory title displayed at the top of the onboarding list */
 "Discover" = "Entdecken";
+
+/* No comment provided by engineer. */
+"Do you want to send an anonymous crash report so we can fix the issue?" = "Wollen Sie einen anonymen Absturzreport senden, damit wir das Problem lösen können?";
+
+/* No comment provided by engineer. */
+"Don't send" = "Nicht senden";
 
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Als Download verfügbar";
@@ -188,9 +197,6 @@
    Label in the left menu to present history
    Title displayed at the top of the history screen */
 "History" = "Zuletzt gesehen";
-
-/* Title of the button to install a previous version */
-"I understand" = "Verstanden";
 
 /* Image copyright introductory label */
 "Image credit: %@" = "Bild: %@";
@@ -362,9 +368,6 @@
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Zurück";
 
-/* Message title displayed when the user wants to install a previous version */
-"Previous versions" = "Frühere Versionen";
-
 /* [Technical] Title for programmes A-Z analytics measurements
    [Technical] Title for programmes A-Z page view analytics measurements
    Label in the left menu to present shows A to Z (radio or TV)
@@ -447,6 +450,9 @@
    Title displayed when there is no search criterium entered */
 "Search" = "Suche";
 
+/* No comment provided by engineer. */
+"Send" = "Senden";
+
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Server geändert auf '%@'";
 
@@ -478,6 +484,9 @@
 /* Short label identifying content which will be available soon. */
 "Soon" = "In Kürze";
 
+/* Subtitles short label on media cells */
+"ST" = "UT";
+
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Noch %@ online";
 
@@ -490,8 +499,14 @@
 /* Message description displayed when subscribing to all TV and radio shows */
 "Subscribing to all TV and radio shows…" = "Push-Mitteilungen für alle Sendungen aktivieren.";
 
+/* Name of the search setting to filter subtitled content */
+"Subtitled" = "Mit Untertiteln";
+
 /* [Technical] System page type for analytics measurements */
 "System" = "System";
+
+/* No comment provided by engineer. */
+"The application unexpectedly quit" = "Die App wurde unterwartet beendet";
 
 /* Button label to share the content being played. */
 "The content" = "Ganzer Beitrag";
@@ -585,6 +600,9 @@
    Title displayed at the top of the watch later list screen */
 "Watch later" = "Später schauen";
 
+/* Web first label on media cells */
+"WEB FIRST" = "VORAB";
+
 /* Label used on the home page to present scheduled livestream medias. Only on test versions. */
 "Web livestreams" = "Live Streams";
 
@@ -618,9 +636,6 @@
 
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "Sie wurden automatisch abgemeldet. Melden Sie sich erneut an, um Ihre Daten zu synchronisieren.";
-
-/* Message description displayed when the user wants to install a previous version */
-"You may have to uninstall the application if the restored version crashes at launch.\n\nPrevious versions can be found under the \"History\" tab on the next screen." = "Sie müssen die Anwendung möglicherweise deinstallieren, wenn die wiederhergestellte Version beim Start abstürzt.  \n\nFrühere Versionen finden Sie unter der Registerkarte \"Verlauf\" auf dem nächsten Bildschirm.";
 
 /* Title displayed at the top of the feedback view */
 "Your feedback" = "Feedback geben";

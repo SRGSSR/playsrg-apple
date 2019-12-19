@@ -127,7 +127,7 @@ static void commonInit(ListRequestViewController *self);
                 strongLoadPage(nextPage);
             }
             else {
-                self.loadedItems = [loadingItems copy];
+                self.loadedItems = loadingItems.copy;
                 self.cachedItems = nil;         // Invalidate cache
                 
                 self.nextPage = loadingNextPage;

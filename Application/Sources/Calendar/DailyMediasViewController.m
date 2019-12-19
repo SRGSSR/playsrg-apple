@@ -48,6 +48,11 @@
     self.collectionView.alwaysBounceVertical = YES;
     
     [self updateAppearanceForSize:self.view.frame.size];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(accessibilityVoiceOverStatusChanged:)
+                                               name:UIAccessibilityVoiceOverStatusChanged
+                                             object:nil];
 }
 
 #pragma mark Rotation
@@ -102,6 +107,13 @@
     }
     
     [self.collectionView reloadEmptyDataSet];
+}
+
+#pragma mark Notifications
+
+- (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
+{
+    [self.collectionView reloadData];
 }
 
 @end

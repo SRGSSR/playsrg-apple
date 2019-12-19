@@ -36,10 +36,10 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - Protobuf (~> 3.5)
   - FSCalendar (2.7.9)
-  - google-cast-sdk-no-bluetooth (4.4.4):
-    - google-cast-sdk-no-bluetooth/Core (= 4.4.4)
+  - google-cast-sdk-no-bluetooth (4.4.6):
+    - google-cast-sdk-no-bluetooth/Core (= 4.4.6)
     - Protobuf (~> 3.0)
-  - google-cast-sdk-no-bluetooth/Core (4.4.4):
+  - google-cast-sdk-no-bluetooth/Core (4.4.6):
     - Protobuf (~> 3.0)
   - GoogleAppMeasurement (5.4.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
@@ -65,9 +65,6 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.3.7):
     - GoogleUtilities/Logger
-  - HockeySDK (5.1.4):
-    - HockeySDK/DefaultLib (= 5.1.4)
-  - HockeySDK/DefaultLib (5.1.4)
   - InAppSettingsKit (2.10)
   - MGSwipeTableCell (1.6.8)
   - nanopb (0.3.901):
@@ -88,8 +85,7 @@ DEPENDENCIES:
   - BDKCollectionIndexView (~> 2.0.0)
   - Firebase/RemoteConfig (~> 5.15.0)
   - FSCalendar (= 2.7.9)
-  - google-cast-sdk-no-bluetooth (~> 4.4.4)
-  - HockeySDK (~> 5.1.4)
+  - google-cast-sdk-no-bluetooth (~> 4.4.6)
   - InAppSettingsKit (~> 2.10.0)
   - MGSwipeTableCell (~> 1.6.8)
   - paper-onboarding (~> 6.1.3)
@@ -111,7 +107,6 @@ SPEC REPOS:
     - google-cast-sdk-no-bluetooth
     - GoogleAppMeasurement
     - GoogleUtilities
-    - HockeySDK
     - InAppSettingsKit
     - MGSwipeTableCell
     - nanopb
@@ -131,10 +126,9 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
   FirebaseRemoteConfig: 7e11c65f0769c09bff6947997c209515058c5318
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
-  google-cast-sdk-no-bluetooth: e0af19280673fba052f7fc3ddde6116c733ce505
+  google-cast-sdk-no-bluetooth: 0b2f106f07592fe08bb78851bfd20a89e1cb613b
   GoogleAppMeasurement: 98b71f5e04142793729a5ef23e5b96651ff4b70f
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
-  HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   InAppSettingsKit: d965e29be941eb19857271e4625de3fba6e23c9f
   MGSwipeTableCell: dc4eca3212ed38a563b27d6aa7b3c01ce656c1e2
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
@@ -144,6 +138,6 @@ SPEC CHECKSUMS:
   SwiftMessages: a952f7a9103d9aeab93730a2861d2d8fcdd8758f
   UrbanAirship-iOS-SDK: 25f155c0142b62e4a94ec21093d65c6e128f5213
 
-PODFILE CHECKSUM: 705feaa025ff3ea934f9686b064e4a36b5a74b58
+PODFILE CHECKSUM: 822ebd54cd880a64fb2476f9641220bf38f07e53
 
-COCOAPODS: 1.8.0.beta.1
+COCOAPODS: 1.8.3

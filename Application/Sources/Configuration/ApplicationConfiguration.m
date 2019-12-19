@@ -220,6 +220,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, getter=areMoreEpisodesHidden) BOOL moreEpisodesHidden;
 @property (nonatomic, getter=areModuleColorsDisabled) BOOL moduleColorsDisabled;
 
+@property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
+@property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+
 @property (nonatomic) UIColor *moduleDefaultLinkColor;
 @property (nonatomic) UIColor *moduleDefaultTextColor;
 
@@ -260,12 +263,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) NSArray<NSString *> *hiddenOnboardingUids;
 
-@property (nonatomic) BOOL prefersDRM;
-
 @property (nonatomic, getter=isLogoutMenuEnabled) BOOL logoutMenuEnabled;
 
-@property (nonatomic, getter=areSearchSettingsDisabled) BOOL searchSettingsDisabled;
-@property (nonatomic, getter=isShowsSearchDisabled) BOOL showsSearchDisabled;
+@property (nonatomic, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;
+@property (nonatomic, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
+@property (nonatomic, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
 @property (nonatomic) NSDictionary<NSString *, NSDictionary *> *topicHeaders;
 
@@ -490,6 +492,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.moreEpisodesHidden = [self.remoteConfig configValueForKey:@"moreEpisodesHidden"].boolValue;
     self.moduleColorsDisabled = [self.remoteConfig configValueForKey:@"moduleColorsDisabled"].boolValue;
     
+    self.subtitleAvailabilityHidden = [self.remoteConfig configValueForKey:@"subtitleAvailabilityHidden"].boolValue;
+    self.audioDescriptionAvailabilityHidden = [self.remoteConfig configValueForKey:@"audioDescriptionAvailabilityHidden"].boolValue;
+    
     NSString *tvHomeSectionsString = [self.remoteConfig configValueForKey:@"tvHomeSections"].stringValue;
     self.tvHomeSections = [self homeSectionsFromString:tvHomeSectionsString];
     
@@ -514,7 +519,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             }
         }
     }
-    self.topicSections = [topicSections copy];
+    self.topicSections = topicSections.copy;
     
     NSMutableArray<NSNumber *> *topicSectionsWithSubtopics = [NSMutableArray array];
     NSString *topicSectionsWithSubtopicsString = [self.remoteConfig configValueForKey:@"topicSectionsWithSubtopics"].stringValue;
@@ -530,7 +535,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             }
         }
     }
-    self.topicSectionsWithSubtopics = [topicSectionsWithSubtopics copy];
+    self.topicSectionsWithSubtopics = topicSectionsWithSubtopics.copy;
     
     // The TV overview is always present as first item and not configurable
     NSMutableArray<NSNumber *> *tvMenuItems = [NSMutableArray arrayWithObject:@(MenuItemTVOverview)];
@@ -547,7 +552,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             }
         }
     }
-    self.tvMenuItems = [tvMenuItems copy];
+    self.tvMenuItems = tvMenuItems.copy;
     
     NSString *radioHomeSectionsString = [self.remoteConfig configValueForKey:@"radioHomeSections"].stringValue;
     self.radioHomeSections = [self homeSectionsFromString:radioHomeSectionsString];
@@ -574,7 +579,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
                     
                     NSMutableDictionary *mutableRadioChannelDictionary = [radioChannelDictionary mutableCopy];
                     mutableRadioChannelDictionary[@"homeSections"] = homeSections;
-                    RadioChannel *radioChannel = [[RadioChannel alloc] initWithDictionary:[mutableRadioChannelDictionary copy]];
+                    RadioChannel *radioChannel = [[RadioChannel alloc] initWithDictionary:mutableRadioChannelDictionary.copy];
                     if (radioChannel) {
                         [radioChannels addObject:radioChannel];
                     }
@@ -591,7 +596,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             PlayLogWarning(@"configuration", @"Radio channel configuration is not valid. A JSON array is required.");
         }
     }
-    self.radioChannels = [radioChannels copy];
+    self.radioChannels = radioChannels.copy;
     
     NSMutableArray<NSNumber *> *radioMenuItems = [NSMutableArray array];
     NSString *radioMenuItemIdentifiersString = [self.remoteConfig configValueForKey:@"radioMenuItems"].stringValue;
@@ -607,7 +612,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             }
         }
     }
-    self.radioMenuItems = [radioMenuItems copy];
+    self.radioMenuItems = radioMenuItems.copy;
     
     NSMutableArray<TVChannel *> *tvChannels = [NSMutableArray array];
     if ([self.remoteConfig configValueForKey:@"tvChannels"].stringValue.length) {
@@ -633,7 +638,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             PlayLogWarning(@"configuration", @"TV channel configuration is not valid. A JSON array is required.");
         }
     }
-    self.tvChannels = [tvChannels copy];
+    self.tvChannels = tvChannels.copy;
     
     FIRRemoteConfigValue *pageSize = [self.remoteConfig configValueForKey:@"pageSize"];
     self.pageSize = (pageSize.source != FIRRemoteConfigSourceStatic) ? MAX(pageSize.numberValue.unsignedIntegerValue, 1) : 20;
@@ -656,7 +661,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             PlayLogWarning(@"configuration", @"Topic header configuration is not valid. A JSON array is required.");
         }
     }
-    self.topicHeaders = [topicHeaders copy];
+    self.topicHeaders = topicHeaders.copy;
     
     FIRRemoteConfigValue *continuousPlaybackPlayerViewTransitionDuration = [self.remoteConfig configValueForKey:@"continuousPlaybackPlayerViewTransitionDuration"];
     self.continuousPlaybackPlayerViewTransitionDuration = (continuousPlaybackPlayerViewTransitionDuration.stringValue.length > 0) ? fmax(continuousPlaybackPlayerViewTransitionDuration.numberValue.doubleValue, 0.) : SRGLetterboxContinuousPlaybackDisabled;
@@ -675,10 +680,10 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.hiddenOnboardingUids = [[self.remoteConfig configValueForKey:@"hiddenOnboardings"].stringValue componentsSeparatedByString:@","];
     
-    self.searchSettingsDisabled = [self.remoteConfig configValueForKey:@"searchSettingsDisabled"].boolValue;
-    self.showsSearchDisabled = [self.remoteConfig configValueForKey:@"showsSearchDisabled"].boolValue;
+    self.searchSettingsHidden = [self.remoteConfig configValueForKey:@"searchSettingsHidden"].boolValue;
+    self.searchSettingSubtitledHidden = [self.remoteConfig configValueForKey:@"searchSettingSubtitledHidden"].boolValue;
+    self.showsSearchHidden = [self.remoteConfig configValueForKey:@"showsSearchHidden"].boolValue;
     
-    self.prefersDRM = [self.remoteConfig configValueForKey:@"prefersDRM"].boolValue;
     self.logoutMenuEnabled = [self.remoteConfig configValueForKey:@"logoutMenuEnabled"].boolValue;
     
     [NSNotificationCenter.defaultCenter postNotificationName:ApplicationConfigurationDidChangeNotification
@@ -839,7 +844,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             }
         }
     }
-    return [homeSections copy];
+    return homeSections.copy;
 }
 
 #pragma mark Notifications

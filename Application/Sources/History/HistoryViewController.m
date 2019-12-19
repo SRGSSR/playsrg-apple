@@ -56,6 +56,10 @@
                                            selector:@selector(historyEntriesDidChange:)
                                                name:SRGHistoryEntriesDidChangeNotification
                                              object:SRGUserData.currentUserData.history];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(accessibilityVoiceOverStatusChanged:)
+                                               name:UIAccessibilityVoiceOverStatusChanged
+                                             object:nil];
     
     [self updateInterfaceForEditionAnimated:NO];
 }
@@ -143,7 +147,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsMake(5.f, 0.f, 10.f, 0.f);
+    return UIEdgeInsetsMake(10.f, 0.f, 5.f, 0.f);
 }
 
 #pragma mark HistoryTableViewCellDelegate protocol
@@ -203,7 +207,7 @@
     }
     
     SRGMedia *media = self.items[indexPath.row];
-    [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
+    [self play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.value = media.URN;
@@ -328,6 +332,11 @@
             [self refresh];
         }
     }];
+}
+
+- (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
+{
+    [self.tableView reloadData];
 }
 
 @end

@@ -76,7 +76,7 @@ A wide list of parameters are available. Some parameters support multiple comma-
 ### Player
 
 * `minimumSocialViewCount` (optional, number): The threshold under which social view counts will not be displayed. If omitted, 0.
-* `prefersDRM` (optional, boolean): Set to `true` to favor DRM streams over non-DRM ones. If omitted, `false`.
+* `prefersDRM` (optional, boolean, **ended: 2.9.6**): Set to `true` to favor DRM streams over non-DRM ones. If omitted, `false`.
 
 ### Functionalities
 
@@ -95,8 +95,9 @@ A wide list of parameters are available. Some parameters support multiple comma-
 
 ### Search
 
-* `searchSettingsDisabled` (optional, boolean): Set to `true` to disable support for search settings.
-* `showsSearchDisabled ` (optional, boolean): Set to `true` to disable show search results.
+* `searchSettingsHidden` (optional, boolean): Set to `true` to hide support for search settings.
+* `searchSettingSubtitledHidden` (optional, boolean): Set to `true` to hide the subtitled option in the search settings.
+* `showsSearchHidden ` (optional, boolean): Set to `true` to hide show search results.
 
 ### History
 
@@ -122,6 +123,9 @@ A wide list of parameters are available. Some parameters support multiple comma-
 * `pageSize` (optional, number): The page size to use for media lists in general, 20 if not set.
 * `tvNumberOfLivePlaceholders` (optional, number): Used as a hint to display a better number of TV live placeholders while content is being loaded. Should match the expected number of TV channels. If not set, defaults to 3.
 * `voiceOverLanguageCode` (optional, string): The code of the language associated with the application. If set, this language is used when reading texts for accessibility purposes, otherwise the device language is used.
+* `subtitleAvailabilityHidden` (optional, boolean): Set to `true` to hide the subtitle availability setting.
+* `audioDescriptionAvailabilityHidden` (optional, boolean): Set to `true` to hide audio description availability setting.
+
 
 ### Analytics
 

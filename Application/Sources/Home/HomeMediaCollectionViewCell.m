@@ -6,8 +6,9 @@
 
 #import "HomeMediaCollectionViewCell.h"
 
-#import "ApplicationConfiguration.h"
 #import "AnalyticsConstants.h"
+#import "ApplicationConfiguration.h"
+#import "ApplicationSettings.h"
 #import "Download.h"
 #import "History.h"
 #import "NSBundle+PlaySRG.h"
@@ -41,6 +42,9 @@
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *downloadStatusImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *media360ImageView;
+@property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
+@property (nonatomic, weak) IBOutlet UILabel *subtitlesLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *audioDescriptionImageView;
 
 @property (nonatomic, weak) IBOutlet UIView *blockingOverlayView;
 @property (nonatomic, weak) IBOutlet UIImageView *blockingReasonImageView;
@@ -80,8 +84,15 @@
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
-    self.youthProtectionColorImageView.hidden = YES;
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
     
+    self.youthProtectionColorImageView.hidden = YES;
+    self.webFirstLabel.hidden = YES;
+    self.subtitlesLabel.hidden = YES;
+    self.audioDescriptionImageView.hidden = YES;
+
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
     self.downloadStatusImageView.tintColor = UIColor.play_lightGrayColor;
@@ -102,6 +113,9 @@
     self.placeholderView.hidden = NO;
     
     self.youthProtectionColorImageView.hidden = YES;
+    self.webFirstLabel.hidden = YES;
+    self.subtitlesLabel.hidden = YES;
+    self.audioDescriptionImageView.hidden = YES;
     
     self.blockingOverlayView.hidden = YES;
     
@@ -168,7 +182,7 @@
 
 - (NSString *)accessibilityLabel
 {
-    NSMutableString *accessibilityLabel = [self.media.title mutableCopy];
+    NSMutableString *accessibilityLabel = self.media.title.mutableCopy;
     
     if (self.media.show.title && ! [self.media.title containsString:self.media.show.title]) {
         [accessibilityLabel appendFormat:@", %@", self.media.show.title];
@@ -179,7 +193,12 @@
         [accessibilityLabel appendFormat:@". %@", youthProtectionAccessibilityLabel];
     }
     
-    return [accessibilityLabel copy];
+    BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
+    if (self.media.play_audioDescriptionAvailable && ! downloaded) {
+        [accessibilityLabel appendFormat:@". %@", PlaySRGAccessibilityLocalizedString(@"Audio described", @"Accessibility label for a media cell with audio description")];
+    }
+    
+    return accessibilityLabel.copy;
 }
 
 - (NSString *)accessibilityHint
@@ -243,7 +262,7 @@
             [subtitle appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:self.media.date].play_localizedUppercaseFirstLetterString
                                                                              attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithTextStyle:subtitleTextStyle] }]];
             
-            self.subtitleLabel.attributedText = [subtitle copy];
+            self.subtitleLabel.attributedText = subtitle.copy;
         }
         else {
             self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:subtitleTextStyle];
@@ -259,6 +278,11 @@
     
     self.media360ImageView.hidden = (self.media.presentation != SRGPresentation360);
     
+    BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
+    self.webFirstLabel.hidden = ! self.media.play_webFirst;
+    self.subtitlesLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! self.media.play_subtitlesAvailable || downloaded);
+    self.audioDescriptionImageView.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! self.media.play_audioDescriptionAvailable || downloaded);
+
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
     
@@ -294,7 +318,7 @@
         BOOL downloadsHintsHidden = ApplicationConfiguration.sharedApplicationConfiguration.downloadsHintsHidden;
         
         [self.downloadStatusImageView play_stopAnimating];
-        self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable-22"];
+        self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable-16"];
         
         self.downloadStatusImageView.hidden = downloadsHintsHidden ? YES : ! [Download canDownloadMedia:self.media];
         return;
@@ -313,26 +337,26 @@
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended: {
             [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable_stop-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable_stop-16"];
             break;
         }
             
         case DownloadStateDownloading: {
-            [self.downloadStatusImageView play_startAnimatingDownloading22WithTintColor:imageColor];
+            [self.downloadStatusImageView play_startAnimatingDownloading16WithTintColor:imageColor];
             downloadImage = self.downloadStatusImageView.image;
             break;
         }
             
         case DownloadStateDownloaded: {
             [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable_full-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable_full-16"];
             break;
         }
             
         case DownloadStateDownloadable:
         case DownloadStateRemoved: {
             [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable-22"];
+            downloadImage = [UIImage imageNamed:@"downloadable-16"];
             break;
         }
             

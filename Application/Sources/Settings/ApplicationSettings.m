@@ -6,6 +6,7 @@
 
 #import "ApplicationSettings.h"
 
+#import "ApplicationConfiguration.h"
 #import "MediaPlayerViewController.h"
 #import "PlayApplication.h"
 #import "UIWindow+PlaySRG.h"
@@ -23,6 +24,9 @@ NSString * const PlaySRGSettingPresenterModeEnabled = @"PlaySRGSettingPresenterM
 NSString * const PlaySRGSettingStandaloneEnabled = @"PlaySRGSettingStandaloneEnabled";
 NSString * const PlaySRGSettingAutoplayEnabled = @"PlaySRGSettingAutoplayEnabled";
 NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled = @"PlaySRGSettingBackgroundVideoPlaybackEnabled";
+
+NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed = @"PlaySRGSettingSubtitleAvailabilityDisplayed";
+NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed = @"PlaySRGSettingAudioDescriptionAvailabilityDisplayed";
 
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
 NSString * const PlaySRGSettingLastOpenHomepageUid = @"PlaySRGSettingLastOpenHomepageUid";
@@ -173,6 +177,24 @@ NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void)
 BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
 {
     return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
+}
+
+BOOL ApplicationSettingSubtitleAvailabilityDisplayed(void)
+{
+    if (ApplicationConfiguration.sharedApplicationConfiguration.subtitleAvailabilityHidden) {
+        return NO;
+    }
+    
+    return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingSubtitleAvailabilityDisplayed];
+}
+
+BOOL ApplicationSettingAudioDescriptionAvailabilityDisplayed(void)
+{
+    if (ApplicationConfiguration.sharedApplicationConfiguration.audioDescriptionAvailabilityHidden) {
+        return NO;
+    }
+    
+    return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAudioDescriptionAvailabilityDisplayed];
 }
 
 NSString *ApplicationSettingSelectedLiveStreamURNForChannelUid(NSString *channelUid)

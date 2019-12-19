@@ -68,6 +68,21 @@
     }
 }
 
+- (void)play_setSubtitlesAvailableBadge
+{
+    [self play_setMediaBadgeWithString:NSLocalizedString(@"ST", @"Subtitles short label on media cells")];
+    self.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Subtitled", @"Accessibility label for the subtitled badge");
+}
+
+- (void)play_setWebFirstBadge
+{
+    self.backgroundColor = UIColor.srg_blueColor;
+    self.layer.cornerRadius = 2.f;
+    self.layer.masksToBounds = YES;
+    self.font = [UIFont srg_mediumFontWithSize:11.f];
+    self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"WEB FIRST", @"Web first label on media cells")].uppercaseString;
+}
+
 #pragma mark Private
 
 - (void)play_displayDurationLabelWithTimeAvailability:(SRGTimeAvailability)timeAvailability duration:(NSTimeInterval)duration isLivestreamOrScheduledLivestream:(BOOL)isLivestreamOrScheduledLivestream isLiveEvent:(BOOL)isLiveEvent
@@ -83,7 +98,7 @@
     else if (isLivestreamOrScheduledLivestream) {
         [self play_displayDurationLabelForLive];
     }
-    else if(isLiveEvent) {
+    else if (isLiveEvent) {
         [self play_displayDurationLabelWithName:NSLocalizedString(@"Replay", @"Short label identifying a replay sport event. Display in uppercase.") bulletColor:[UIColor srg_blueColor]];
     }
     else if (duration != 0.) {
@@ -110,6 +125,16 @@
     
     self.attributedText = attributedText.copy;
     self.hidden = NO;
+}
+
+- (void)play_setMediaBadgeWithString:(NSString *)string
+{
+    self.backgroundColor = UIColor.play_whiteBadgeColor;
+    self.layer.cornerRadius = 2.f;
+    self.layer.masksToBounds = YES;
+    self.font = [UIFont srg_mediumFontWithSize:11.f];
+    self.text = [NSString stringWithFormat:@"  %@  ", string].uppercaseString;
+    self.textColor = UIColor.blackColor;
 }
 
 @end

@@ -427,7 +427,7 @@ static const CGFloat SideMenuOffset = -50.f;
                 
                 NSURL *feedbackURL = applicationConfiguration.feedbackURL;
                 NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:feedbackURL resolvingAgainstBaseURL:NO];
-                URLComponents.queryItems = [queryItems copy];
+                URLComponents.queryItems = queryItems.copy;
                 
                 NSURLRequest *request = [NSURLRequest requestWithURL:URLComponents.URL];
                 viewController = [[WebViewController alloc] initWithRequest:request customizationBlock:^(WKWebView *webView) {

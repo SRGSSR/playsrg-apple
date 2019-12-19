@@ -149,85 +149,34 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
 
 #pragma mark Media player presentation
 
-- (void)play_presentMediaPlayerWithMedia:(SRGMedia *)media position:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
+- (void)play_presentMediaPlayerWithMedia:(SRGMedia *)media position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
 {
     if (! position) {
         position = HistoryResumePlaybackPositionForMedia(media);
     }
     GCKCastSession *castSession = [GCKCastContext sharedInstance].sessionManager.currentCastSession;
     if (castSession) {
-        [self play_presentGoogleCastPlayerWithMedia:media standalone:YES atPosition:position fromPushNotification:fromPushNotification animated:animated completion:completion];
+        [self play_presentGoogleCastPlayerWithMedia:media standalone:YES position:position airPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification animated:animated completion:completion];
     }
     else {
-        [self play_presentNativeMediaPlayerWithMedia:media atPosition:position fromPushNotification:fromPushNotification animated:animated responder:self completion:completion];
+        [self play_presentNativeMediaPlayerWithMedia:media position:position airPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification animated:animated completion:completion];
     }
 }
 
-- (void)play_presentMediaPlayerFromLetterboxController:(SRGLetterboxController *)letterboxController fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
+- (void)play_presentMediaPlayerFromLetterboxController:(SRGLetterboxController *)letterboxController withAirPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
 {
     GCKCastSession *castSession = [GCKCastContext sharedInstance].sessionManager.currentCastSession;
     if (castSession) {
-        [self play_presentGoogleCastPlayerFromLetterboxController:letterboxController fromPushNotification:fromPushNotification animated:animated completion:completion];
+        [self play_presentGoogleCastPlayerFromLetterboxController:letterboxController withAirPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification animated:animated completion:completion];
     }
     else {
-        [self play_presentNativeMediaPlayerFromLetterboxController:letterboxController fromPushNotification:fromPushNotification animated:animated responder:self completion:completion];
+        [self play_presentNativeMediaPlayerFromLetterboxController:letterboxController withAirPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification animated:animated completion:completion];
     }
 }
 
 #pragma mark Implementation helpers
 
-- (void)play_presentMediaPlayerWithMedia:(SRGMedia *)media atPosition:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated responder:(UIResponder *)responder completion:(void (^)(void))completion
-{
-    GCKCastSession *castSession = [GCKCastContext sharedInstance].sessionManager.currentCastSession;
-    if (castSession) {
-        [self play_presentGoogleCastPlayerWithMedia:media standalone:YES atPosition:position fromPushNotification:fromPushNotification animated:animated completion:completion];
-    }
-    else {
-        [self play_presentNativeMediaPlayerWithMedia:media atPosition:position fromPushNotification:fromPushNotification animated:animated responder:responder completion:completion];
-    }
-}
-
-- (void)play_presentMediaPlayerFromLetterboxController:(SRGLetterboxController *)letterboxController fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated responder:(UIResponder *)responder completion:(void (^)(void))completion
-{
-    GCKCastSession *castSession = [GCKCastContext sharedInstance].sessionManager.currentCastSession;
-    if (castSession) {
-        [self play_presentGoogleCastPlayerFromLetterboxController:letterboxController fromPushNotification:fromPushNotification animated:animated completion:completion];
-    }
-    else {
-        [self play_presentNativeMediaPlayerFromLetterboxController:letterboxController fromPushNotification:fromPushNotification animated:animated responder:responder completion:completion];
-    }
-}
-
-- (void)play_presentNativeMediaPlayerWithURN:(NSString *)URN atPosition:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated responder:(UIResponder *)responder completion:(void (^)(void))completion
-{
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
-    if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {
-        MediaPlayerViewController *mediaPlayerViewController = (MediaPlayerViewController *)topViewController;
-        SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
-        letterboxController.playlistDataSource = SharedPlaylistForURN(URN);
-        
-        if ([letterboxController.URN isEqual:URN] && letterboxController.playbackState != SRGMediaPlayerPlaybackStateIdle
-                && letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
-                && letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
-            [letterboxController seekToPosition:position withCompletionHandler:^(BOOL finished) {
-                [letterboxController play];
-            }];
-        }
-        else {
-            [letterboxController playURN:URN atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
-        }
-        completion ? completion() : nil;
-    }
-    else {
-        MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithURN:URN position:position fromPushNotification:fromPushNotification];
-        mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
-        letterboxController.playlistDataSource = SharedPlaylistForURN(URN);
-        [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
-    }
-}
-
-- (void)play_presentNativeMediaPlayerWithMedia:(SRGMedia *)media atPosition:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated responder:(UIResponder *)responder completion:(void (^)(void))completion
+- (void)play_presentNativeMediaPlayerWithMedia:(SRGMedia *)media position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
 {
     UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
     if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {
@@ -248,15 +197,33 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
         completion ? completion() : nil;
     }
     else {
-        MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:position fromPushNotification:fromPushNotification];
-        mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
-        letterboxController.playlistDataSource = SharedPlaylistForURN(media.URN);
-        [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
+        void (^openPlayer)(void) = ^{
+            MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:position fromPushNotification:fromPushNotification];
+            mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+            SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
+            letterboxController.playlistDataSource = SharedPlaylistForURN(media.URN);
+            [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
+        };
+        
+        if (@available(iOS 13, *)) {
+            if (airPlaySuggestions) {
+                [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
+                    if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
+                        openPlayer();
+                    }
+                }];
+            }
+            else {
+                openPlayer();
+            }
+        }
+        else {
+            openPlayer();
+        }
     }
 }
 
-- (void)play_presentNativeMediaPlayerFromLetterboxController:(SRGLetterboxController *)letterboxController fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated responder:(UIResponder *)responder completion:(void (^)(void))completion
+- (void)play_presentNativeMediaPlayerFromLetterboxController:(SRGLetterboxController *)letterboxController withAirPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
 {
     UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
     if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {
@@ -267,10 +234,28 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
         }
     }
     
-    MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithController:letterboxController position:nil fromPushNotification:fromPushNotification];
-    mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    letterboxController.playlistDataSource = SharedPlaylistForURN(letterboxController.URN);
-    [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
+    void (^openPlayer)(void) = ^{
+        MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithController:letterboxController position:nil fromPushNotification:fromPushNotification];
+        mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        letterboxController.playlistDataSource = SharedPlaylistForURN(letterboxController.URN);
+        [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
+    };
+    
+    if (@available(iOS 13, *)) {
+        if (airPlaySuggestions) {
+            [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
+                if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
+                    openPlayer();
+                }
+            }];
+        }
+        else {
+            openPlayer();
+        }
+    }
+    else {
+        openPlayer();
+    }
 }
 
 // The completion block returns cast errors only. To know whether playback could correctly start, check the started boolean
@@ -335,37 +320,11 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     }
 }
 
-- (void)play_presentGoogleCastPlayerWithURN:(NSString *)URN standalone:(BOOL)standalone atPosition:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
-{
-    [[SRGDataProvider.currentDataProvider mediaCompositionForURN:URN standalone:standalone withCompletionBlock:^(SRGMediaComposition * _Nullable mediaComposition, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-        void (^presentNativePlayer)(NSString *) = ^(NSString *message) {
-            [self play_presentNativeMediaPlayerWithURN:URN atPosition:position fromPushNotification:fromPushNotification animated:animated responder:self completion:^{
-                [Banner showWithStyle:BannerStyleInfo message:message image:nil sticky:NO inViewController:nil /* self is being covered */];
-                completion ? completion() : nil;
-            }];
-        };
-        
-        if (error) {
-            presentNativePlayer(nil);
-            return;
-        }
-        
-        [self play_prepareGoogleCastPlaybackWithMediaComposition:mediaComposition position:position completion:^(BOOL started, NSError * _Nullable error) {
-            if (started) {
-                [self play_presentGoogleCastControlsAnimated:animated completion:completion];
-            }
-            else {
-                presentNativePlayer(error.localizedDescription);
-            }
-        }];
-    }] resume];
-}
-
-- (void)play_presentGoogleCastPlayerWithMedia:(SRGMedia *)media standalone:(BOOL)standalone atPosition:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
+- (void)play_presentGoogleCastPlayerWithMedia:(SRGMedia *)media standalone:(BOOL)standalone position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
 {
     [[SRGDataProvider.currentDataProvider mediaCompositionForURN:media.URN standalone:standalone withCompletionBlock:^(SRGMediaComposition * _Nullable mediaComposition, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         void (^presentNativePlayer)(NSString *) = ^(NSString *message) {
-            [self play_presentNativeMediaPlayerWithMedia:media atPosition:position fromPushNotification:fromPushNotification animated:animated responder:self completion:^{
+            [self play_presentNativeMediaPlayerWithMedia:media position:position airPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification animated:animated completion:^{
                 [Banner showWithStyle:BannerStyleInfo message:message image:nil sticky:NO inViewController:nil /* self is being covered */];
                 completion ? completion() : nil;
             }];
@@ -387,7 +346,7 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     }] resume];
 }
 
-- (void)play_presentGoogleCastPlayerFromLetterboxController:(SRGLetterboxController *)letterboxController fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
+- (void)play_presentGoogleCastPlayerFromLetterboxController:(SRGLetterboxController *)letterboxController withAirPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
 {
     SRGPosition *position = [SRGPosition positionAtTime:letterboxController.currentTime];
     [self play_prepareGoogleCastPlaybackWithMediaComposition:letterboxController.mediaComposition position:position completion:^(BOOL started, NSError * _Nullable error) {
@@ -395,7 +354,7 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
             [self play_presentGoogleCastControlsAnimated:animated completion:completion];
         }
         else {
-            [self play_presentNativeMediaPlayerFromLetterboxController:letterboxController fromPushNotification:fromPushNotification animated:animated responder:self completion:^{
+            [self play_presentNativeMediaPlayerFromLetterboxController:letterboxController withAirPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification animated:animated completion:^{
                 [Banner showWithStyle:BannerStyleInfo message:error.localizedDescription image:nil sticky:NO inViewController:nil /* self is being covered */];
                 completion ? completion() : nil;
             }];

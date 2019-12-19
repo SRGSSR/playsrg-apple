@@ -6,6 +6,7 @@
 
 #import "UIImageView+PlaySRG.h"
 
+#import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "UIImage+PlaySRG.h"
 
@@ -41,7 +42,7 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
 {
     NSArray<UIImage *> *images = [self animatedImageNamed:name withTintColor:tintColor];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:images.firstObject];
-    imageView.animationImages = [images copy];
+    imageView.animationImages = images.copy;
     imageView.animationDuration = duration;
     [imageView startAnimating];
     return imageView;
@@ -63,7 +64,7 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
     }
     
     NSAssert(images.count != 0, @"Invalid asset %@", name);
-    return [images copy];
+    return images.copy;
 }
 
 #pragma mark Loading animation
@@ -74,6 +75,11 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
 }
 
 #pragma mark Downloading animation
+
+- (void)play_startAnimatingDownloading16WithTintColor:(nullable UIColor *)tintColor
+{
+    [self play_startAnimatingWithImagesNamed:@"downloading-16" withTintColor:tintColor];
+}
 
 - (void)play_startAnimatingDownloading22WithTintColor:(nullable UIColor *)tintColor
 {

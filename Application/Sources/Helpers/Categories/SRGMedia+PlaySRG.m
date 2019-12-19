@@ -6,6 +6,8 @@
 
 #import "SRGMedia+PlaySRG.h"
 
+#import <libextobjc/libextobjc.h>
+
 @implementation SRGMedia (PlaySRG)
 
 - (BOOL)play_isToday
@@ -27,6 +29,31 @@
     else {
         return nil;
     }
+}
+
+- (BOOL)play_areSubtitlesAvailable
+{
+    return [self subtitleVariantsForSource:self.recommendedSubtitleVariantSource].count != 0;
+}
+
+- (BOOL)play_isAudioDescriptionAvailable
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGVariant.new, type), @(SRGVariantTypeAudioDescription)];
+    NSArray<SRGVariant *> *audioVariants = [self audioVariantsForSource:self.recommendedAudioVariantSource];
+    return [audioVariants filteredArrayUsingPredicate:predicate].count != 0;
+}
+
+- (BOOL)play_isMultiAudioAvailable
+{
+    NSArray<SRGVariant *> *audioVariants = [self audioVariantsForSource:self.recommendedAudioVariantSource];
+    NSArray<NSLocale *> *locales = [audioVariants valueForKey:@keypath(SRGVariant.new, locale)];
+    return [NSSet setWithArray:locales].count > 1;
+}
+
+- (BOOL)play_isWebFirst
+{
+    NSDate *date = NSDate.date;
+    return [self.date compare:date] == NSOrderedDescending && [self timeAvailabilityAtDate:date] == SRGTimeAvailabilityAvailable && self.contentType == SRGContentTypeEpisode;
 }
 
 @end

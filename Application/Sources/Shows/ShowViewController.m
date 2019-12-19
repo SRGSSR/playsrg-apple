@@ -153,7 +153,7 @@
             [self updateAppearanceForSize:self.view.frame.size];
         }
         
-        completionHandler([medias copy], page, nextPage, HTTPResponse, error);
+        completionHandler(medias.copy, page, nextPage, HTTPResponse, error);
     };
     
     NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
@@ -259,7 +259,7 @@
     }];
     [previewActionItems addObject:openAction];
     
-    return [previewActionItems copy];
+    return previewActionItems.copy;
 }
 
 #pragma mark UIResponder (ActivityContinuation)
@@ -429,6 +429,7 @@
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
 {
     [self updateAppearanceForSize:self.view.frame.size];
+    [self.collectionView reloadData];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

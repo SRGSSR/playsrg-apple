@@ -202,14 +202,14 @@
         if (currentProgram && (! currentDate || [currentProgram play_containsDate:currentDate])) {
             [accessibilityLabel appendFormat:@", %@", currentProgram.title];
         }
-        return [accessibilityLabel copy];
+        return accessibilityLabel.copy;
     }
     else {
         NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.media.title];
         if (self.media.show.title && ! [self.media.title containsString:self.media.show.title]) {
             [accessibilityLabel appendFormat:@", %@", self.media.show.title];
         }
-        return [accessibilityLabel copy];
+        return accessibilityLabel.copy;
     }
 }
 
@@ -382,7 +382,7 @@
         return;
     }
     
-    [self.nearestViewController play_presentMediaPlayerWithMedia:self.media position:nil fromPushNotification:NO animated:YES completion:nil];
+    [self.nearestViewController play_presentMediaPlayerWithMedia:self.media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
 }
 
 #pragma mark Notifications

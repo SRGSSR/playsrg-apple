@@ -66,7 +66,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         // A BU supporting aggregation but not displaying search settings can lead to longer response times.
         // (@see `-mediasForVendor:matchingQuery:withSettings:completionBlock:` in `SRGDataProvider`).
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        if (! applicationConfiguration.searchSettingsDisabled) {
+        if (! applicationConfiguration.searchSettingsHidden) {
             self.settings = settings ?: SearchSettingsViewController.defaultSettings;
             self.settings.aggregationsEnabled = NO;
         }
@@ -176,6 +176,11 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         self.navigationItem.leftBarButtonItem = nil;
     }
     
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(accessibilityVoiceOverStatusChanged:)
+                                               name:UIAccessibilityVoiceOverStatusChanged
+                                             object:nil];
+    
     [self updateSearchSettingsButton];
 }
 
@@ -228,7 +233,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (BOOL)shouldPerformRefreshRequest
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    return ! applicationConfiguration.showsSearchDisabled || self.query.length > 0;
+    return ! applicationConfiguration.showsSearchHidden || self.query.length > 0;
 }
 
 - (void)prepareSearchResultsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
@@ -260,7 +265,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     // loading the first page only, so that both requests are made together when loading initial search results. We use the
     // maximum page size and do not manage pagination for shows. This leads to simple code withoug impacting its usability
     // (the user can still refine the search to get better results, and there are not so many shows anyway).
-    if (page.number == 0 && ! applicationConfiguration.showsSearchDisabled && query.length > 0) {
+    if (page.number == 0 && ! applicationConfiguration.showsSearchHidden && query.length > 0) {
         static const NSUInteger kShowSearchPageSize = 50;
         
         @weakify(self)
@@ -314,13 +319,13 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (NSString *)emptyCollectionTitle
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    return (applicationConfiguration.showsSearchDisabled && self.query.length == 0) ? NSLocalizedString(@"Search", @"Title displayed when there is no search criterium entered") : super.emptyCollectionTitle;
+    return (applicationConfiguration.showsSearchHidden && self.query.length == 0) ? NSLocalizedString(@"Search", @"Title displayed when there is no search criterium entered") : super.emptyCollectionTitle;
 }
 
 - (NSString *)emptyCollectionSubtitle
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    return (applicationConfiguration.showsSearchDisabled && self.query.length == 0) ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
+    return (applicationConfiguration.showsSearchHidden && self.query.length == 0) ? NSLocalizedString(@"Type to start searching", @"Message displayed when there is no search criterium entered") : super.emptyCollectionSubtitle;
 }
 
 - (BOOL)isLoading
@@ -341,7 +346,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (void)updateSearchSettingsButton
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    if (! applicationConfiguration.searchSettingsDisabled) {
+    if (! applicationConfiguration.searchSettingsHidden) {
         UIButton *filtersButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [filtersButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -391,7 +396,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (BOOL)shouldDisplayMostSearchedShows
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    return ! applicationConfiguration.showsSearchDisabled && self.query.length == 0 && ! [SearchViewController containsAdvancedSettings:self.settings];
+    return ! applicationConfiguration.showsSearchHidden && self.query.length == 0 && ! [SearchViewController containsAdvancedSettings:self.settings];
 }
 
 - (BOOL)isDisplayingMostSearchedShows
@@ -545,7 +550,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         if ([self isDisplayingMediasInSection:indexPath.section]) {
             if (self.items != 0) {
                 ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-                if (applicationConfiguration.searchSettingsDisabled) {
+                if (applicationConfiguration.searchSettingsHidden) {
                     if (applicationConfiguration.radioChannels.count == 0) {
                         headerView.title = NSLocalizedString(@"Videos", @"Header for video search results");
                     }
@@ -594,7 +599,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
         SRGMedia *media = self.items[indexPath.row];
-        [self play_presentMediaPlayerWithMedia:media position:nil fromPushNotification:NO animated:YES completion:nil];
+        [self play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
         
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.value = media.URN;
@@ -633,7 +638,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         }
         // Media grid layout
         else {
-            CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 70.f : 100.f;
+            CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 90.f : 120.f;
             
             static const CGFloat kItemWidth = 210.f;
             return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
@@ -741,6 +746,13 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     NSAssert(self.closeBlock, @"Close must only be available if a close block has been defined");
     self.closeBlock();
+}
+
+#pragma mark Notifications
+
+- (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
+{
+    [self.collectionView reloadData];
 }
 
 @end

@@ -181,7 +181,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     // Separate all shows according to their first letter (beware of special characters and emojis)
     NSMutableDictionary<NSString *, NSMutableArray<SRGShow *> *> *showsAlphabeticalMap = [NSMutableDictionary dictionary];
     [self.items enumerateObjectsUsingBlock:^(SRGShow *  _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSMutableString *firstLetter = [[show.title substringToIndex:1].uppercaseString mutableCopy];
+        NSMutableString *firstLetter = [show.title substringToIndex:1].uppercaseString.mutableCopy;
         if (!firstLetter) {
             return;
         }
@@ -203,7 +203,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         [showsForIndexLetter addObject:show];
     }];
     
-    self.showsAlphabeticalMap = [showsAlphabeticalMap copy];
+    self.showsAlphabeticalMap = showsAlphabeticalMap.copy;
     self.indexLetters = [showsAlphabeticalMap.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     self.collectionIndexView.indexTitles = self.indexLetters;

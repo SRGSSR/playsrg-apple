@@ -114,6 +114,9 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, getter=areMoreEpisodesHidden) BOOL moreEpisodesHidden;
 @property (nonatomic, readonly, getter=areModuleColorsDisabled) BOOL moduleColorsDisabled;
 
+@property (nonatomic, readonly, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
+@property (nonatomic, readonly, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+
 @property (nonatomic, readonly) UIColor *moduleDefaultLinkColor;
 @property (nonatomic, readonly) UIColor *moduleDefaultTextColor;
 
@@ -153,12 +156,11 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly) NSArray<NSString *> *hiddenOnboardingUids;
 
-@property (nonatomic, readonly) BOOL prefersDRM;
-
 @property (nonatomic, readonly, getter=isLogoutMenuEnabled) BOOL logoutMenuEnabled;
 
-@property (nonatomic, readonly, getter=areSearchSettingsDisabled) BOOL searchSettingsDisabled;
-@property (nonatomic, readonly, getter=isShowsSearchDisabled) BOOL showsSearchDisabled;
+@property (nonatomic, readonly, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;
+@property (nonatomic, readonly, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
+@property (nonatomic, readonly, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
 - (nullable RadioChannel *)radioChannelForUid:(NSString *)uid;
 - (nullable TVChannel *)tvChannelForUid:(NSString *)uid;

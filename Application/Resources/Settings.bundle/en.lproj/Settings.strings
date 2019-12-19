@@ -1,5 +1,7 @@
 "Advanced features" = "Advanced features";
 "Alternate radio homepage design" = "Alternative homepage design";
+"Always visible when VoiceOver is active." = "Always visible when VoiceOver is active.";
+"Audio description availability" = "Audio description availability";
 "Autoplay" = "Autoplay";
 "Background video playback" = "Background video playback";
 "Become a beta tester" = "Become a beta tester";
@@ -11,6 +13,7 @@
 "Data protection" = "Data protection";
 "Default (IP-based location)" = "Default (IP-based location)";
 "Developer" = "Developer";
+"Display" = "Display";
 "Enable / disable FLEX" = "Enable / disable FLEX";
 "Features" = "Features";
 "HD over cellular networks" = "Allow HD over cellular networks";
@@ -31,6 +34,7 @@
 "Stage" = "Stage";
 "Standalone playback" = "Standalone playback";
 "Subscribe to all shows" = "Subscribe to all topics";
+"Subtitle availability" = "Subtitle availability";
 "Terms and conditions" = "Terms and conditions";
 "Test" = "Test";
 "This section is only available in nightly and beta versions, and won't appear in the production version." = "This section is only available in nightly and beta versions, and won't appear in the production version.";

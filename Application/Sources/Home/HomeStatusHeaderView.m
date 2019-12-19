@@ -68,7 +68,7 @@
             [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", NSLocalizedString(@"Learn more", @"Label inviting the user to learn more information about an issue")]
                                                                                    attributes:@{ NSFontAttributeName : [UIFont srg_boldFontWithTextStyle:SRGAppearanceFontTextStyleBody] }]];
         }
-        self.messageLabel.attributedText = [attributedText copy];
+        self.messageLabel.attributedText = attributedText.copy;
     }
     else {
         self.messageLabel.attributedText = nil;

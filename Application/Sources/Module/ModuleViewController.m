@@ -188,7 +188,7 @@
     }];
     [previewActionItems addObject:openAction];
     
-    return [previewActionItems copy];
+    return previewActionItems.copy;
 }
 
 #pragma mark UI
@@ -313,6 +313,7 @@
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
 {
     [self updateAppearanceForSize:self.view.frame.size];
+    [self.collectionView reloadData];
 }
 
 @end

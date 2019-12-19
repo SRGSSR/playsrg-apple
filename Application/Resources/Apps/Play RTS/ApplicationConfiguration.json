@@ -37,5 +37,8 @@
   "continuousPlaybackBackgroundTransitionDuration": 0,
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
-  "hiddenOnboardings": "favorites,resume_playback,watch_later"
+  "hiddenOnboardings": "favorites,resume_playback,watch_later",
+  "searchSettingSubtitledHidden": true,
+  "subtitleAvailabilityHidden": true,
+  "audioDescriptionAvailabilityHidden": true
 }
