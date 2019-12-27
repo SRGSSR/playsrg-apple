@@ -41,7 +41,7 @@ A wide list of parameters are available. Some parameters support multiple comma-
    * `tvTrending`: Trending medias and editorial picks. See `tvTrendingEpisodesOnly` and `tvTrendingEditorialLimit` options.
    * `tvMostPopular`: The most popular videos.
 * `tvTrendingEpisodesOnly` (optional, boolean): If set to `true`, `tvTrending` only returns episodes.
-* `tvTrendingEditorialLimit` (optional, number): The maximum number of editorial recommendations returns by `tvTrending`. If not set, all are returned.
+* `tvTrendingEditorialLimit` (optional, number): The maximum number of editorial recommendations returned by `tvTrending`. If not set, all are returned.
 * `tvFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured media lists will not display any header on the TV homepage.
 * `moduleColorsDisabled` (optional, boolean): If set to `true`, module lists won't display colors.
 * `moduleDefaultLinkColor` (mandatory, string):  Hex color of title medias in module lists.
