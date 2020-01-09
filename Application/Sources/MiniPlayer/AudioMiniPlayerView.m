@@ -132,6 +132,14 @@
                                                name:UIApplicationDidBecomeActiveNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(applicationDidEnterBackground:)
+                                               name:UIApplicationDidEnterBackgroundNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(applicationWillEnterForeground:)
+                                               name:UIApplicationWillEnterForegroundNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(contentSizeCategoryDidChange:)
                                                name:UIContentSizeCategoryDidChangeNotification
                                              object:nil];
@@ -422,6 +430,16 @@
     if (! self.media) {
         [self loadLatestMedia];
     }
+}
+
+- (void)applicationDidEnterBackground:(NSNotification *)notification
+{
+    [self registerForUserInterfaceUpdatesWithController:self.controller];
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification
+{
+    [self unregisterUserInterfaceUpdatesWithController:self.controller];
 }
 
 - (void)contentSizeCategoryDidChange:(NSNotification *)notification
