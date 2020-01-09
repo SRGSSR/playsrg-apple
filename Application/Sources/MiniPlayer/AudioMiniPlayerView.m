@@ -87,7 +87,7 @@
 - (void)setController:(SRGLetterboxController *)controller
 {
     if (_controller) {
-        [self unregisterUserInterfaceUpdatesWithController:controller];
+        [self unregisterUserInterfaceUpdatesWithController:_controller];
         
         [NSNotificationCenter.defaultCenter removeObserver:self
                                                       name:SRGLetterboxMetadataDidChangeNotification
