@@ -6,7 +6,7 @@
 
 #import "ChannelService.h"
 
-#import "NSTimer+PlaySRG.h"
+#import "SmartTimer.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <FXReachability/FXReachability.h>
@@ -21,7 +21,7 @@
 // data is used to return existing channel information as fast as possible, and when errors have been encountered.
 @property (nonatomic) NSMutableDictionary<NSString *, SRGChannel *> *channels;
 
-@property (nonatomic) NSTimer *updateTimer;
+@property (nonatomic) SmartTimer *updateTimer;
 @property (nonatomic) SRGRequestQueue *requestQueue;
 
 @end
@@ -55,7 +55,7 @@
         self.channels = [NSMutableDictionary dictionary];
         
         @weakify(self)
-        self.updateTimer = [NSTimer play_timerWithTimeInterval:30. repeats:YES block:^(NSTimer * _Nonnull timer) {
+        self.updateTimer = [SmartTimer timerWithTimeInterval:30. repeats:YES background:NO queue:NULL block:^{
             @strongify(self)
             [self updateChannels];
         }];
@@ -76,10 +76,11 @@
 
 #pragma mark Getters and setters
 
-- (void)setUpdateTimer:(NSTimer *)updateTimer
+- (void)setUpdateTimer:(SmartTimer *)updateTimer
 {
     [_updateTimer invalidate];
     _updateTimer = updateTimer;
+    [updateTimer resume];
 }
 
 #pragma mark Registration

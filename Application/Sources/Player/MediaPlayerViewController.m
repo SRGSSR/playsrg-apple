@@ -20,7 +20,6 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
-#import "NSTimer+PlaySRG.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlayAppDelegate.h"
 #import "PlayApplication.h"
@@ -29,6 +28,7 @@
 #import "Playlist.h"
 #import "RelatedContentView.h"
 #import "ShowViewController.h"
+#import "SmartTimer.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
@@ -179,7 +179,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 @property (nonatomic) ModalTransition *interactiveTransition;
 
-@property (nonatomic) NSTimer *userInterfaceUpdateTimer;
+@property (nonatomic) SmartTimer *userInterfaceUpdateTimer;
 
 @property (nonatomic) BOOL shouldDisplayBackgroundVideoPlaybackPrompt;
 @property (nonatomic) BOOL displayBackgroundVideoPlaybackPrompt;
@@ -259,10 +259,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 #pragma mark Getters and setters
 
-- (void)setUserInterfaceUpdateTimer:(NSTimer *)userInterfaceUpdateTimer
+- (void)setUserInterfaceUpdateTimer:(SmartTimer *)userInterfaceUpdateTimer
 {
     [_userInterfaceUpdateTimer invalidate];
     _userInterfaceUpdateTimer = userInterfaceUpdateTimer;
+    [userInterfaceUpdateTimer resume];
 }
 
 - (void)setLetterboxController:(SRGLetterboxController *)letterboxController
@@ -442,7 +443,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                              object:nil];
     
     @weakify(self)
-    self.userInterfaceUpdateTimer = [NSTimer play_timerWithTimeInterval:0.2 repeats:YES block:^(NSTimer * _Nonnull timer) {
+    self.userInterfaceUpdateTimer = [SmartTimer timerWithTimeInterval:1. repeats:YES background:NO queue:NULL block:^{
         @strongify(self)
         [self updateGoogleCastButton];
         
