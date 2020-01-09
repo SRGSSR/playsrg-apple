@@ -309,7 +309,6 @@
     @weakify(self)
     self.periodicTimeObserver = [controller addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(1., NSEC_PER_SEC) queue:NULL usingBlock:^(CMTime time) {
         @strongify(self)
-        
         [self reloadData];
     }];
     [self reloadData];
