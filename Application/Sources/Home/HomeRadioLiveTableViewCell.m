@@ -12,7 +12,7 @@
 #import "MediaPlayerViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
-#import "NSTimer+PlaySRG.h"
+#import "SmartTimer.h"
 #import "SRGProgram+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -53,7 +53,7 @@
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
-@property (nonatomic) NSTimer *updateTimer;
+@property (nonatomic) SmartTimer *updateTimer;
 
 @end
 
@@ -142,7 +142,7 @@
         [self registerForChannelUpdatesWithMedia:self.media];
         
         @weakify(self)
-        self.updateTimer = [NSTimer play_timerWithTimeInterval:1. repeats:YES block:^(NSTimer * _Nonnull timer) {
+        self.updateTimer = [SmartTimer timerWithTimeInterval:1. repeats:YES background:NO queue:NULL block:^{
             @strongify(self)
             [self reloadData];
         }];
@@ -216,10 +216,11 @@
     [self registerForChannelUpdatesWithMedia:media];
 }
 
-- (void)setUpdateTimer:(NSTimer *)updateTimer
+- (void)setUpdateTimer:(SmartTimer *)updateTimer
 {
     [_updateTimer invalidate];
     _updateTimer = updateTimer;
+    [updateTimer resume];
 }
 
 #pragma mark Channel updates

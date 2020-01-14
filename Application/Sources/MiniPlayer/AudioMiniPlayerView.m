@@ -87,7 +87,7 @@
 - (void)setController:(SRGLetterboxController *)controller
 {
     if (_controller) {
-        [self unregisterUserInterfaceUpdatesWithController:controller];
+        [self unregisterUserInterfaceUpdatesWithController:_controller];
         
         [NSNotificationCenter.defaultCenter removeObserver:self
                                                       name:SRGLetterboxMetadataDidChangeNotification
@@ -130,6 +130,14 @@
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationDidBecomeActive:)
                                                name:UIApplicationDidBecomeActiveNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(applicationDidEnterBackground:)
+                                               name:UIApplicationDidEnterBackgroundNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(applicationWillEnterForeground:)
+                                               name:UIApplicationWillEnterForegroundNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(contentSizeCategoryDidChange:)
@@ -309,7 +317,6 @@
     @weakify(self)
     self.periodicTimeObserver = [controller addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(1., NSEC_PER_SEC) queue:NULL usingBlock:^(CMTime time) {
         @strongify(self)
-        
         [self reloadData];
     }];
     [self reloadData];
@@ -423,6 +430,16 @@
     if (! self.media) {
         [self loadLatestMedia];
     }
+}
+
+- (void)applicationDidEnterBackground:(NSNotification *)notification
+{
+    [self registerForUserInterfaceUpdatesWithController:self.controller];
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification
+{
+    [self unregisterUserInterfaceUpdatesWithController:self.controller];
 }
 
 - (void)contentSizeCategoryDidChange:(NSNotification *)notification
