@@ -81,6 +81,10 @@ static void commonInit(ListRequestViewController *self);
 
 - (void)refresh
 {
+    if (self.loading) {
+        return;
+    }
+    
     if (! [self shouldPerformRefreshRequest]) {
         [self didCancelRefreshRequest];
         return;
