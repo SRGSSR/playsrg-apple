@@ -611,13 +611,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    // Media grid layout
-    if ([self isDisplayingMediasInSection:section] && self.traitCollection.horizontalSizeClass != UIUserInterfaceSizeClassCompact) {
-        return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
-    }
-    else {
-        return UIEdgeInsetsZero;
-    }
+    return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
