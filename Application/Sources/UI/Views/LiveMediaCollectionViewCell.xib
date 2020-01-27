@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -130,7 +130,7 @@
                                         <rect key="frame" x="0.0" y="25" width="333" height="2"/>
                                         <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="Zyc-Tu-TDI"/>
+                                            <constraint firstAttribute="height" priority="999" constant="1" id="Zyc-Tu-TDI"/>
                                         </constraints>
                                         <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </progressView>
@@ -190,6 +190,7 @@
                 <outlet property="blockingReasonImageView" destination="jKI-W0-rA0" id="h8b-NV-v1Q"/>
                 <outlet property="durationLabel" destination="h4c-O2-2Ys" id="mvx-96-Avf"/>
                 <outlet property="logoImageView" destination="WqR-Gg-ZwJ" id="7Wb-bP-RHx"/>
+                <outlet property="logoStackView" destination="brJ-7K-RUg" id="2bo-gE-s8K"/>
                 <outlet property="mediaView" destination="ibC-3k-6VL" id="p2D-Kg-VUU"/>
                 <outlet property="placeholderImageView" destination="X0z-j2-ewR" id="yoW-Hf-Ui6"/>
                 <outlet property="placeholderView" destination="iq7-pu-lug" id="oGH-6U-j6a"/>
