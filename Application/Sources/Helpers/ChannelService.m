@@ -59,7 +59,7 @@
             @strongify(self)
             [self updateChannels];
         }];
-        self.requestQueue = [[SRGRequestQueue alloc] init];
+        [self updateChannels];
         
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(reachabilityDidChange:)
@@ -103,9 +103,12 @@
         block(channel);
     }
     
-    self.medias[channelKey] = media;
+    // Only force an update the first time a media is added. Other updates will occur perodically afterwards.
+    if (! self.medias[channelKey]) {
+        [self updateChannelWithMedia:media];
+    }
     
-    [self updateChannelWithMedia:media];
+    self.medias[channelKey] = media;
 }
 
 - (void)unregisterObserver:(id)observer forMedia:(SRGMedia *)media
