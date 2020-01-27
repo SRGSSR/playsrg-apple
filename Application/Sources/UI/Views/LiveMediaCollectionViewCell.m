@@ -30,10 +30,6 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 @property (nonatomic) SRGChannel *channel;
 
-@property (nonatomic, weak) IBOutlet UIView *mediaView;
-@property (nonatomic, weak) IBOutlet UIView *placeholderView;
-@property (nonatomic, weak) IBOutlet UIImageView *placeholderImageView;
-
 @property (nonatomic, weak) IBOutlet UIStackView *logoStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
@@ -94,14 +90,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     UIColor *backgroundColor = UIColor.play_blackColor;
     self.backgroundColor = backgroundColor;
     
-    self.mediaView.hidden = YES;
-    self.placeholderView.hidden = NO;
-    
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
-    
-    // Accommodate all kinds of usages (medium or small)
-    self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMedia)
-                                                            withScale:ImageScaleMedium];
     
     self.titleLabel.backgroundColor = backgroundColor;
     
@@ -123,9 +112,6 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     self.media = nil;
     
     self.channel = nil;
-    
-    self.mediaView.hidden = YES;
-    self.placeholderView.hidden = NO;
     
     self.progressView.hidden = NO;
     self.progressView.progress = 1.f;
@@ -232,15 +218,6 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 - (void)reloadData
 {
-    if (! self.media || (self.media.contentType == SRGContentTypeLivestream && ! self.channel)) {
-        self.mediaView.hidden = YES;
-        self.placeholderView.hidden = NO;
-        return;
-    }
-    
-    self.mediaView.hidden = NO;
-    self.placeholderView.hidden = YES;
-    
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     
