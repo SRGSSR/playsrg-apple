@@ -12,6 +12,8 @@
 #import <FXReachability/FXReachability.h>
 #import <libextobjc/libextobjc.h>
 
+NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceDidUpdateChannelsNotification";
+
 @interface ChannelService ()
 
 @property (nonatomic) NSMutableDictionary<NSString *, NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *> *registrations;
@@ -167,7 +169,11 @@
 
 - (void)updateChannels
 {
-    self.requestQueue = [[SRGRequestQueue alloc] init];
+    self.requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+        if (finished && ! error) {
+            [NSNotificationCenter.defaultCenter postNotificationName:ChannelServiceDidUpdateChannelsNotification object:self];
+        }
+    }];
     
     for (SRGMedia *media in self.medias.allValues) {
         [self updateChannelWithMedia:media];

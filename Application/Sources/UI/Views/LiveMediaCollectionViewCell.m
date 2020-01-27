@@ -51,6 +51,28 @@
 
 @implementation LiveMediaCollectionViewCell
 
+#pragma mark Class methods
+
++ (CGFloat)heightForMedia:(SRGMedia *)media withWidth:(CGFloat)width
+{
+    LiveMediaCollectionViewCell *cell = [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
+    cell.media = media;
+    
+    // Force autolayout with correct frame width so that the layout is accurate
+    cell.frame = CGRectMake(CGRectGetMinX(cell.frame), CGRectGetMinY(cell.frame), width, CGRectGetHeight(cell.frame));
+    [cell setNeedsLayout];
+    [cell layoutIfNeeded];
+    
+    // Return the minimum size which satisfies the constraints. Put a strong requirement on width and properly let the height
+    // adjust
+    // For an explanation, see http://titus.io/2015/01/13/a-better-way-to-autosize-in-ios-8.html
+    CGSize fittingSize = UILayoutFittingCompressedSize;
+    fittingSize.width = width;
+    return [cell systemLayoutSizeFittingSize:fittingSize
+               withHorizontalFittingPriority:UILayoutPriorityRequired
+                     verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height;
+}
+
 #pragma mark Getters and setters
 
 - (void)setUpdateTimer:(SmartTimer *)updateTimer

@@ -7,6 +7,7 @@
 #import "HomeLivestreamsViewController.h"
 
 #import "ApplicationSettings.h"
+#import "ChannelService.h"
 #import "LiveMediaCollectionViewCell.h"
 #import "PageViewController.h"
 #import "UIColor+PlaySRG.h"
@@ -71,9 +72,20 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     [self.collectionView registerNib:liveCellNib forCellWithReuseIdentifier:liveCellIdentifier];
     
     [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(channelServiceDidUpdateChannels:)
+                                               name:ChannelServiceDidUpdateChannelsNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusChanged
                                              object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 #pragma mark Rotation
@@ -196,8 +208,9 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     
     // Large cell table layout
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+        SRGMedia *media = self.items[indexPath.row];
         CGFloat width = CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset;
-        CGFloat height = width * 9 / 16 + 100.f;
+        CGFloat height = [LiveMediaCollectionViewCell heightForMedia:media withWidth:width];
         return CGSizeMake(width, height);
     }
     // Grid layout
@@ -210,6 +223,11 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 }
 
 #pragma mark Notifications
+
+- (void)channelServiceDidUpdateChannels:(NSNotification *)notification
+{
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
 
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
 {
