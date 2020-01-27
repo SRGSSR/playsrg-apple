@@ -133,7 +133,6 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 * `audioDescriptionAvailabilityHidden` (optional, boolean): Set to `true` to hide audio description availability setting.
 * `downloadsHintsHidden` (optional, boolean): If set to `true`, hints will not be displayed in lists for medias which can be downloaded.
-* `hiddenOnboardings` (optional, string, multiple): Identifier list of onboardings which must be hidden.
 * `historySynchronizationInterval` (optional, number): Duration in seconds for history synchronization. If omitted, defaults to 30 seconds. Miminum value is 10 seconds.
 * `minimumSocialViewCount` (optional, number): The threshold under which social view counts will not be displayed. If omitted, 0.
 * `moreEpisodesHidden` (optional, boolean): If set to `true`, the option to display more episodes for a media will not be available from the long-press and peek menus.
