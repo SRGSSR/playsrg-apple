@@ -47,10 +47,9 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
     * `name` (mandatory, string): The radio channel name.
     * `resourceUid` (mandatory, string): Local unique identifier for referencing resources related to the channel.
     * `color` (mandatory, string): The radio channel primary hex color. Used as navigation bar background color.
-    * `homeSections` (optional, string, multiple): The sections to be displayed on the radio channel homepage. See `audioHomeSections` for available values. If omitted, the global `audioHomeSections` setting is used instead (in which case this value is required).
+    * `homeSections` (optional, string, multiple): The sections to be displayed on the radio channel homepage. Refer to _Audio homepage_ for available values. If omitted, the global `audioHomeSections` setting is used instead (in which case this value is required).
     * `titleColor` (optional, string): Hex color of the text displayed within the navigation bar (should provide sufficient contrast with `color`). If omitted, white.
     * `hasDarkStatusBar` (optional, boolean): `true` iff the status bar should be dark for this channel. If omitted, `false`.
-    * `numberOfLivePlaceholders` (optional, number): The number of placeholders to be displayed while content is being loaded. By If omitted, 1.
 
 ## Video homepage
 
@@ -85,7 +84,6 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `moduleDefaultLinkColor` (mandatory, string):  Hex color of title medias in module lists.
 * `moduleDefaultTextColor` (mandatory, string):  Hex color of subtitle medias in module lists.
 * `tvFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured TV media lists will not display any header.
-* `tvNumberOfLivePlaceholders` (optional, number): Used as a hint to display a better number of TV live placeholders while content is being loaded. Should match the expected number of TV channels. If not set, defaults to 3.
 * `tvTrendingEpisodesOnly` (optional, boolean): If set to `true`, `tvTrending` only returns episodes.
 * `tvTrendingEditorialLimit` (optional, number): The maximum number of editorial recommendations returned by `tvTrending`. If not set, all are returned.
 

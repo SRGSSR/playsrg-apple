@@ -226,8 +226,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=isTvFeaturedHomeSectionHeaderHidden) BOOL tvFeaturedHomeSectionHeaderHidden;
 
-@property (nonatomic) NSInteger tvNumberOfLivePlaceholders;
-
 @property (nonatomic) NSInteger minimumSocialViewCount;
 
 @property (nonatomic) NSArray<NSNumber *> *topicSections;
@@ -469,9 +467,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *dataProtectionURLString = [self.remoteConfig configValueForKey:@"dataProtectionURL"].stringValue;
     self.dataProtectionURL = (dataProtectionURLString.length != 0) ? [NSURL URLWithString:dataProtectionURLString] : nil;
-    
-    FIRRemoteConfigValue *tvNumberOfLivePlaceholders = [self.remoteConfig configValueForKey:@"tvNumberOfLivePlaceholders"];
-    self.tvNumberOfLivePlaceholders = (tvNumberOfLivePlaceholders.source != FIRRemoteConfigSourceStatic) ? MAX(tvNumberOfLivePlaceholders.numberValue.integerValue, 0) : 3;
     
     FIRRemoteConfigValue *minimumSocialViewCount = [self.remoteConfig configValueForKey:@"minimumSocialViewCount"];
     self.minimumSocialViewCount = (minimumSocialViewCount.stringValue.length > 0) ? MAX(minimumSocialViewCount.numberValue.integerValue, 0) : NSIntegerMax;

@@ -131,9 +131,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, getter=isTvFeaturedHomeSectionHeaderHidden) BOOL tvFeaturedHomeSectionHeaderHidden;
 
-// The number of placeholders to be displayed while loading TV channels
-@property (nonatomic, readonly) NSInteger tvNumberOfLivePlaceholders;
-
 @property (nonatomic, readonly) NSInteger minimumSocialViewCount;                       // minimum value to display social view count
 
 @property (nonatomic, readonly) NSArray<NSNumber *> *topicSections;                     // wrap `TopicSection` values

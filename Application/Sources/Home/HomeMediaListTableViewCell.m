@@ -162,36 +162,7 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (! [self isEmpty]) {
-        return self.homeSectionInfo.items.count;
-    }
-    else {
-        static const NSInteger kDefaultNumberOfPlaceholders = 10;
-        
-        NSInteger numberOfItems = 0;
-        
-        switch (self.homeSectionInfo.homeSection) {
-            case HomeSectionTVLive: {
-                numberOfItems = ApplicationConfiguration.sharedApplicationConfiguration.tvNumberOfLivePlaceholders;
-                break;
-            }
-                
-            case HomeSectionRadioLive: {
-                NSString *identifier = self.homeSectionInfo.identifier;
-                if (identifier) {
-                    numberOfItems = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:identifier].numberOfLivePlaceholders;
-                }
-                break;
-            }
-                
-            default: {
-                numberOfItems = kDefaultNumberOfPlaceholders; /* sufficient number of placeholders to accommodate all layouts */
-                break;
-            }
-        }
-        
-        return (numberOfItems != 0) ? numberOfItems : kDefaultNumberOfPlaceholders;
-    }
+    return ! [self isEmpty] ? self.homeSectionInfo.items.count : 10 /* Display 10 placeholders */;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

@@ -19,7 +19,6 @@
 @property (nonatomic) UIColor *titleColor;
 @property (nonatomic, getter=hasDarkStatusBar) BOOL darkStatusBar;
 @property (nonatomic, getter=isBadgeStrokeHidden) BOOL badgeStrokeHidden;
-@property (nonatomic) NSInteger numberOfLivePlaceholders;
 @property (nonatomic) NSArray<NSNumber *> *homeSections;
 
 @end
@@ -77,14 +76,6 @@
         id badgeStrokeHiddenValue = dictionary[@"badgeStrokeHidden"];
         if ([badgeStrokeHiddenValue isKindOfClass:NSNumber.class]) {
             self.badgeStrokeHidden = [badgeStrokeHiddenValue boolValue];
-        }
-        
-        id numberOfLivePlaceholdersValue = dictionary[@"numberOfLivePlaceholders"];
-        if ([numberOfLivePlaceholdersValue isKindOfClass:NSNumber.class]) {
-            self.numberOfLivePlaceholders = [numberOfLivePlaceholdersValue integerValue];
-        }
-        else {
-            self.numberOfLivePlaceholders = 1;
         }
     }
     return self;

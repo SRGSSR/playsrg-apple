@@ -17,7 +17,6 @@
   "tvTrendingEpisodesOnly": false,
   "tvTrendingEditorialLimit": 3,
   "tvFeaturedHomeSectionHeaderHidden": true,
-  "tvNumberOfLivePlaceholders": 4,
   "audioHomeSections": "radioLatest,radioFavoriteShows,radioShowsAccess,radioLatestVideos,radioLatestEpisodes,radioMostPopular",
   "radioFeaturedHomeSectionHeaderHidden": true,
   "topicSections": "latest,mostPopular",

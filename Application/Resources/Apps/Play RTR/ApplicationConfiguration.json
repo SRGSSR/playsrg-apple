@@ -12,7 +12,6 @@
   "liveHomeSections": "tvLive,radioLive",
   "tvTrendingEpisodesOnly": true,
   "tvFeaturedHomeSectionHeaderHidden": true,
-  "tvNumberOfLivePlaceholders": 3,
   "audioHomeSections": "radioLatest,radioFavoriteShows,radioShowsAccess,radioLatestEpisodes,radioMostPopular",
   "radioFeaturedHomeSectionHeaderHidden": true,
   "topicSections": "latest,mostPopular",
