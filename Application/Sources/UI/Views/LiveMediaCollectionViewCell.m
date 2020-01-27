@@ -12,7 +12,6 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
 #import "PlayDurationFormatter.h"
-#import "SmartTimer.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
@@ -45,8 +44,6 @@
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
-@property (nonatomic) SmartTimer *updateTimer;
-
 @end
 
 @implementation LiveMediaCollectionViewCell
@@ -71,15 +68,6 @@
     return [cell systemLayoutSizeFittingSize:fittingSize
                withHorizontalFittingPriority:UILayoutPriorityRequired
                      verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height;
-}
-
-#pragma mark Getters and setters
-
-- (void)setUpdateTimer:(SmartTimer *)updateTimer
-{
-    [_updateTimer invalidate];
-    _updateTimer = updateTimer;
-    [updateTimer resume];
 }
 
 #pragma mark Overrides
@@ -139,17 +127,9 @@
     if (newWindow) {
         // Ensure proper state when the view is reinserted
         [self registerForChannelUpdatesWithMedia:self.media];
-        
-        @weakify(self)
-        self.updateTimer = [SmartTimer timerWithTimeInterval:5. repeats:YES background:NO queue:NULL block:^{
-            @strongify(self)
-            [self reloadData];
-        }];
     }
     else {
         [self unregisterChannelUpdatesWithMedia:self.media];
-        
-        self.updateTimer = nil;       // Invalidate timer
     }
 }
 
