@@ -68,8 +68,6 @@ typedef NS_ENUM(NSInteger, ApplicationSection) {
     ApplicationSectionRadioLive,
     ApplicationSectionLiveCenter,
     ApplicationSectionScheduledLivestreams
-    
-    // FIXME: cleanup icons related to unsused sections.
 };
 
 OBJC_EXPORT HomeSection HomeSectionForApplicationSection(ApplicationSection applicationSection);

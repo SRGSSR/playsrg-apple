@@ -14,20 +14,19 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 ## Available parameters
 
-A wide list of parameters are available. Some parameters support multiple comma-separated values.
+A wide list of parameters is available. Some parameters support multiple comma-separated values.
 
 ### Homepages (videos, audios, livestreams)
 
 * `videoHomeSections` (optional, string, multiple): The sections to be displayed on the videos homepage, in the order they must appear.
-* `audioHomeSections` (optional, string, multiple): for each radio channels, the sections to be displayed on their audio homepage in the order they must appear.
+* `audioHomeSections` (optional, string, multiple): The sections to be displayed on the audio homepage of a radio channel, in the order they must appear.
 * `liveHomeSections` (optional, string, multiple): The sections to be displayed on the live homepage, in the order they must appear.
-
-
 
 Available home section values are:
 
-* with radio channel uid support:
+* With radio channel uid support:
    * `radioAllShows`: All available shows.
+   * `radioFavoriteShows`: Radio shows added to the favorites.
    * `radioLatest`: The latest audios.
    * `radioLatestEpisodes`: The latest episodes.
    * `radioLatestVideos`: The latest videos.
@@ -36,13 +35,12 @@ Available home section values are:
    * `radioMyListShows`: Shows from "My list".
    * `radioShowsAccess`: A-Z and By date access buttons.
 
-* others:
-
-   * `tvEvents`: Event modules. 
+* Others:
+   * `tvEvents`: Event modules.
+   * `tvFavoriteShows`: TV shows added to the favorites.
    * `tvLatest`: The latest medias.
    * `tvLive`: Access to the livestreams.
    * `tvLiveCenter`: Access to SwissTXT livestreams.
-   * `tvMyListShows`: Shows from "My list".
    * `tvScheduledLivestreams`: Access to scheduled livestreams.
    * `tvShowsAccess`: A-Z and By date access buttons.
    * `tvSoonExpiring`: Soon expiring videos.
@@ -72,7 +70,7 @@ Here are content options:
    * `mostPopular`: The most popular medias
 * `topicSectionsWithSubtopics` (optional, string, multiple): The sections to be displayed when opening a topic with subtopics. If none is provided, only subtopics are displayed. Available values are the same as `topicSections`.
 
-Broadcast informations:
+Broadcast information:
 
 * `tvChannels` (optional, JSON): A JSON array of JSON dictionaries describing TV channel configuration, and made of the following keys:
     * `uid` (mandatory, string): The unique identifier of the TV channel.
