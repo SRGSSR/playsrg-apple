@@ -25,7 +25,6 @@
 @interface LibraryAccountHeaderView ()
 
 @property (nonatomic, weak) IBOutlet UIImageView *avatarImageView;
-@property (nonatomic, weak) IBOutlet UILabel *profileLabel;
 @property (nonatomic, weak) IBOutlet UILabel *accountLabel;
 
 @end
@@ -37,8 +36,6 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
-    self.profileLabel.text = NSLocalizedString(@"Profile", @"Text displayed in library view, for the account header").uppercaseString;
 
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(manageAccount:)];
     [self addGestureRecognizer:gestureRecognizer];
@@ -136,9 +133,6 @@
     else {
         [self.avatarImageView yy_setImageWithURL:nil placeholder:placeholderImage options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
     }
-    
-    self.profileLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    self.profileLabel.textColor = color;
     
     self.accountLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.accountLabel.textColor = color;
