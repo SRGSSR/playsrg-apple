@@ -24,6 +24,8 @@
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
+static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
+
 @interface LiveMediaCollectionViewCell ()
 
 @property (nonatomic) SRGChannel *channel;
@@ -55,6 +57,12 @@
     LiveMediaCollectionViewCell *cell = [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
     cell.media = media;
     
+    NSString *key = [NSString stringWithFormat:@"%@%@", cell.titleLabel.text, @(width)];
+    NSNumber *cachedHeight = s_cachedHeights[key];
+    if (cachedHeight) {
+        return cachedHeight.doubleValue;
+    }
+    
     // Force autolayout with correct frame width so that the layout is accurate
     cell.frame = CGRectMake(CGRectGetMinX(cell.frame), CGRectGetMinY(cell.frame), width, CGRectGetHeight(cell.frame));
     [cell setNeedsLayout];
@@ -65,9 +73,16 @@
     // For an explanation, see http://titus.io/2015/01/13/a-better-way-to-autosize-in-ios-8.html
     CGSize fittingSize = UILayoutFittingCompressedSize;
     fittingSize.width = width;
-    return [cell systemLayoutSizeFittingSize:fittingSize
-               withHorizontalFittingPriority:UILayoutPriorityRequired
-                     verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height;
+    CGFloat height = [cell systemLayoutSizeFittingSize:fittingSize
+                         withHorizontalFittingPriority:UILayoutPriorityRequired
+                               verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height;
+    
+    if (! s_cachedHeights) {
+        s_cachedHeights = [NSMutableDictionary dictionary];
+    }
+    s_cachedHeights[key] = @(height);
+    
+    return height;
 }
 
 #pragma mark Overrides
