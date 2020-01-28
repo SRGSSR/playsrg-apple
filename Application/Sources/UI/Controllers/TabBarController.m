@@ -6,6 +6,7 @@
 
 #import "TabBarController.h"
 
+#import "HomeLivestreamsViewController.h"
 #import "HomeViewController.h"
 #import "LibraryViewController.h"
 #import "LivestreamsViewController.h"
@@ -45,32 +46,49 @@ static const CGFloat MiniPlayerOffset = 5.f;
         NSMutableArray<UIViewController *> *viewControllers = NSMutableArray.array;
         NSMutableArray<UITabBarItem *> *tabBarItems = NSMutableArray.array;
 
-        UIViewController *viewController = [[HomeViewController alloc] initWithRadioChannel:nil];
-        [viewControllers addObject:viewController];
-        [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:viewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos]];
+        UIViewController *videosViewController = [[HomeViewController alloc] initWithRadioChannel:nil];
+        [viewControllers addObject:videosViewController];
+        [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos]];
         
+        UIViewController *audiosViewController = nil;
         NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioChannels;
-        if (radioChannels.count > 0) {
-            viewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
-            [viewControllers addObject:viewController];
-            [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:viewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios]];
+        if (radioChannels.count > 1) {
+            audiosViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
+        }
+        else if (radioChannels.count == 1) {
+            audiosViewController = [[HomeViewController alloc] initWithRadioChannel:radioChannels.firstObject];
+            audiosViewController.title = NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
         }
         
+        if (audiosViewController) {
+            [viewControllers addObject:audiosViewController];
+            [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:audiosViewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios]];
+        }
+        
+        UIViewController *livestreamsViewController = nil;
         NSArray<NSNumber *> *liveHomeSections = ApplicationConfiguration.sharedApplicationConfiguration.liveHomeSections;
-        if (liveHomeSections.count > 0) {
-            viewController = [[LivestreamsViewController alloc] initWithHomeSections:liveHomeSections];
-            [viewControllers addObject:viewController];
-            [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:viewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams]];
+        if (liveHomeSections.count > 1) {
+            livestreamsViewController = [[LivestreamsViewController alloc] initWithHomeSections:liveHomeSections];
+        }
+        else if (liveHomeSections.count == 1) {
+            HomeSectionInfo *homeSectionInfo = [[HomeSectionInfo alloc] initWithHomeSection:liveHomeSections.firstObject.integerValue];
+            livestreamsViewController = [[HomeLivestreamsViewController alloc] initWithHomeSectionInfo:homeSectionInfo];
+            livestreamsViewController.title = NSLocalizedString(@"Live", @"Title displayed at the top of the livestreams view");
         }
         
-        viewController = [[SearchViewController alloc] init];
-        [viewControllers addObject:viewController];
-        [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:viewController.title image:[UIImage imageNamed:@"search-24"] tag:TabBarItemIdentifierSearch]];
+        if (livestreamsViewController) {
+            [viewControllers addObject:livestreamsViewController];
+            [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:livestreamsViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams]];
+        }
         
-        viewController = [[LibraryViewController alloc] init];
-        [viewControllers addObject:viewController];
+        UIViewController *searchViewController = [[SearchViewController alloc] init];
+        [viewControllers addObject:searchViewController];
+        [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:searchViewController.title image:[UIImage imageNamed:@"search-24"] tag:TabBarItemIdentifierSearch]];
+        
+        UIViewController *profileViewController = [[LibraryViewController alloc] init];
+        [viewControllers addObject:profileViewController];
         NSString *libraryImageName = SRGIdentityService.currentIdentityService ? @"profile-24" : @"more-24";
-        [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:viewController.title image:[UIImage imageNamed:libraryImageName] tag:TabBarItemIdentifierLibrary]];
+        [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:libraryImageName] tag:TabBarItemIdentifierLibrary]];
         
         NSMutableArray<NavigationController *> *navigationControllers = NSMutableArray.array;
         [viewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -78,6 +96,11 @@ static const CGFloat MiniPlayerOffset = 5.f;
             navigationController.delegate = self;
             navigationController.tabBarItem = tabBarItems[idx];
             [navigationControllers addObject:navigationController];
+            
+            if ([viewController isKindOfClass:HomeViewController.class]) {
+                HomeViewController *homeViewController = (HomeViewController *)viewController;
+                [navigationController updateWithRadioChannel:homeViewController.radioChannel animated:NO];
+            }
         }];
         self.viewControllers = navigationControllers.copy;
         
