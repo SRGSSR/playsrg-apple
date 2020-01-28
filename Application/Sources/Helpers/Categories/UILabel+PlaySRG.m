@@ -26,7 +26,7 @@
 
 - (void)play_displayDurationLabelForLive
 {
-    [self play_displayDurationLabelWithName:NSLocalizedString(@"Live", @"Short label identifying a livestream. Display in uppercase.") bulletColor:UIColor.play_liveRedColor];
+    [self play_displayDurationLabelWithName:NSLocalizedString(@"Live", @"Short label identifying a livestream. Display in uppercase.")];
 }
 
 - (void)play_displayDurationLabelForMediaMetadata:(id<SRGMediaMetadata>)object
@@ -90,20 +90,20 @@
     self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     
     if (timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
-        [self play_displayDurationLabelWithName:NSLocalizedString(@"Soon", @"Short label identifying content which will be available soon.") bulletColor:isLivestreamOrScheduledLivestream ? UIColor.whiteColor : nil];
+        [self play_displayDurationLabelWithName:NSLocalizedString(@"Soon", @"Short label identifying content which will be available soon.")];
     }
     else if (timeAvailability == SRGTimeAvailabilityNotAvailableAnymore) {
-        [self play_displayDurationLabelWithName:NSLocalizedString(@"Expired", @"Short label identifying content which has expired.") bulletColor:nil];
+        [self play_displayDurationLabelWithName:NSLocalizedString(@"Expired", @"Short label identifying content which has expired.")];
     }
     else if (isLivestreamOrScheduledLivestream) {
         [self play_displayDurationLabelForLive];
     }
     else if (isLiveEvent) {
-        [self play_displayDurationLabelWithName:NSLocalizedString(@"Replay", @"Short label identifying a replay sport event. Display in uppercase.") bulletColor:[UIColor srg_blueColor]];
+        [self play_displayDurationLabelWithName:NSLocalizedString(@"Replay", @"Short label identifying a replay sport event. Display in uppercase.")];
     }
     else if (duration != 0.) {
         NSString *durationString = PlayFormattedDuration(duration / 1000.);
-        [self play_displayDurationLabelWithName:durationString bulletColor:nil];
+        [self play_displayDurationLabelWithName:durationString];
     }
     else {
         self.text = nil;
@@ -111,18 +111,11 @@
     }
 }
 
-- (void)play_displayDurationLabelWithName:(NSString *)name bulletColor:(UIColor *)bulletColor
+- (void)play_displayDurationLabelWithName:(NSString *)name
 {
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@  ", name].uppercaseString
                                                                                        attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption],
                                                                                                      NSForegroundColorAttributeName : UIColor.whiteColor }];
-    
-    if (bulletColor) {
-        [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:PlaySRGNonLocalizedString(@"●  ")
-                                                                               attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption],
-                                                                                             NSForegroundColorAttributeName : bulletColor }]];
-    }
-    
     self.attributedText = attributedText.copy;
     self.hidden = NO;
 }
