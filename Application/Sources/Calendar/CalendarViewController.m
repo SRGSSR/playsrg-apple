@@ -12,9 +12,11 @@
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
+#import "UIVisualEffectView+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
+#import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface CalendarViewController ()
@@ -77,6 +79,12 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = UIColor.play_blackColor;
+    
+    UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
+    [self.view insertSubview:blurView belowSubview:self.calendar];
+    [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.calendar);
+    }];
     
     self.calendar.dataSource = self;
     self.calendar.delegate = self;
@@ -158,7 +166,7 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
-        if (UIDevice.play_deviceType == DeviceTypePhonePlus && size.width > size.height) {
+        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && size.width > size.height) {
             [self.calendar setScope:FSCalendarScopeWeek animated:NO];
         }
         
@@ -325,7 +333,7 @@
     }
     
     CGSize size = self.view.frame.size;
-    if (UIDevice.play_deviceType == DeviceTypePhonePlus && size.width > size.height) {
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && size.width > size.height) {
         return NO;
     }
     

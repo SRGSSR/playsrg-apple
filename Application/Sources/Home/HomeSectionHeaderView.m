@@ -130,7 +130,7 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     if (self.homeSectionInfo.module) {
         viewController = [[ModuleViewController alloc] initWithModule:self.homeSectionInfo.module];
     }
-    else if (self.homeSectionInfo.topic && [self.homeSectionInfo.topic isKindOfClass:SRGTopic.class]) {
+    else if ([self.homeSectionInfo.topic isKindOfClass:SRGTopic.class]) {
         viewController = [[HomeTopicViewController alloc] initWithTopic:(SRGTopic *)self.homeSectionInfo.topic];
     }
     else {

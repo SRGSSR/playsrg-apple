@@ -182,6 +182,22 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/MaterialComponents</string>
+			<key>Title</key>
+			<string>MaterialComponents (101.1.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/MDFInternationalization</string>
+			<key>Title</key>
+			<string>MDFInternationalization (2.0.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/MGSwipeTableCell</string>
 			<key>Title</key>
 			<string>MGSwipeTableCell (1.6.8)</string>
@@ -206,14 +222,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/PPBadgeView</string>
-			<key>Title</key>
-			<string>PPBadgeView (2.1.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/Protobuf</string>
 			<key>Title</key>
 			<string>Protobuf (3.6.1)</string>
@@ -224,7 +232,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
 			<key>Title</key>
-			<string>srganalytics-apple (a2405d0)</string>
+			<string>srganalytics-apple (160b3cd)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -272,7 +280,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>srgletterbox-apple (2ddaa0a)</string>
+			<string>srgletterbox-apple (cf07630)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -288,7 +296,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-apple</string>
 			<key>Title</key>
-			<string>srgmediaplayer-apple (8e908e7)</string>
+			<string>srgmediaplayer-apple (3debbd5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

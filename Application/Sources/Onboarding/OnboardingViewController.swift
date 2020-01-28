@@ -80,7 +80,7 @@ import SRGAppearance
     // MARK: Rotation
     
     public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if (UIDevice.play_deviceType == .pad) {
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
             return .all
         }
         else {
@@ -198,12 +198,7 @@ import SRGAppearance
         if (self.onboarding.uid == "favorites" || self.onboarding.uid == "favorites_account") {
             PushService.shared?.presentSystemAlertForPushNotifications()
         }
-        self.dismiss(animated: true, completion: {
-            if (self.onboarding.uid == "account") {
-                let playAppDelegate = UIApplication.shared.delegate as! PlayAppDelegate
-                playAppDelegate.sideMenuController.displayMenuHeader(animated: true)
-            }
-        });
+        self.dismiss(animated: true, completion: nil);
     }
     
     @IBAction private func nextPage(_ sender: UIButton) {

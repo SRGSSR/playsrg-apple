@@ -7,31 +7,23 @@
 #import "PageViewController.h"
 
 #import "PlayLogger.h"
-#import "TabStrip.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
+#import "UIVisualEffectView+PlaySRG.h"
 
+#import "MaterialTabs.h"
 #import <Masonry/Masonry.h>
+#import <SRGAppearance/SRGAppearance.h>
 
-// Associated object keys
-static void *s_pageItemKey = &s_pageItemKey;
-
-@interface PageViewController ()
+@interface PageViewController () <MDCTabBarDelegate>
 
 @property (nonatomic, weak) UIPageViewController *pageViewController;
 
 @property (nonatomic) NSArray<UIViewController *> *viewControllers;
-@property (nonatomic) NSInteger initialPage;
+@property (nonatomic) NSUInteger initialPage;
 
-@property (nonatomic, weak) TabStrip *tabStrip;
+@property (nonatomic, weak) MDCTabBar *tabBar;
 @property (nonatomic, weak) UIVisualEffectView *blurView;
-
-@end
-
-@interface PageItem ()
-
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic) UIImage *image;
 
 @end
 
@@ -39,14 +31,14 @@ static void *s_pageItemKey = &s_pageItemKey;
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithViewControllers:(NSArray<UIViewController *> *)viewControllers initialPage:(NSInteger)initialPage
+- (instancetype)initWithViewControllers:(NSArray<UIViewController *> *)viewControllers initialPage:(NSUInteger)initialPage
 {
     NSAssert(viewControllers.count != 0, @"At least one view controller is required");
     
     if (self = [super init]) {
         self.viewControllers = viewControllers;
         
-        if (initialPage < 0 || initialPage >= viewControllers.count) {
+        if (initialPage >= viewControllers.count) {
             PlayLogWarning(@"pageViewController", @"Invalid page. Fixed to 0");
             initialPage = 0;
         }
@@ -55,6 +47,7 @@ static void *s_pageItemKey = &s_pageItemKey;
         UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                                                  options:@{ UIPageViewControllerOptionInterPageSpacingKey : @100.f }];
+        pageViewController.delegate = self;
         
         // Only allow scrolling if several pages are available
         if (viewControllers.count > 1) {
@@ -77,6 +70,7 @@ static void *s_pageItemKey = &s_pageItemKey;
 - (void)loadView
 {
     self.view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    self.view.backgroundColor = UIColor.play_blackColor;
     
     UIView *placeholderView = [[UIView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:placeholderView];
@@ -85,8 +79,7 @@ static void *s_pageItemKey = &s_pageItemKey;
     }];
     self.placeholderViews = @[placeholderView];
     
-    UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
     [self.view addSubview:blurView];
     [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_topLayoutGuide);          // Warning: Needs self.view to be set, otherwise leads to infinite recursion
@@ -96,24 +89,68 @@ static void *s_pageItemKey = &s_pageItemKey;
     }];
     self.blurView = blurView;
     
-    TabStrip *tabStrip = [[TabStrip alloc] initWithFrame:blurView.bounds];
-    [blurView.contentView addSubview:tabStrip];
-    [tabStrip mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(blurView.contentView).with.insets(UIEdgeInsetsMake(8.f, 0.f, 8.f, 0.f));
+    __block BOOL hasImage = NO;
+    
+    NSMutableArray<UITabBarItem *> *tabBarItems = [NSMutableArray array];
+    [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
+        UITabBarItem *tabBarItem = viewController.tabBarItem;
+        if (tabBarItem.image) {
+            hasImage = YES;
+        }
+        [tabBarItems addObject:tabBarItem];
     }];
-    self.tabStrip = tabStrip;
+    
+    MDCTabBar *tabBar = [[MDCTabBar alloc] initWithFrame:blurView.bounds];
+    tabBar.itemAppearance = hasImage ? MDCTabBarItemAppearanceImages : MDCTabBarItemAppearanceTitles;
+    tabBar.alignment = MDCTabBarAlignmentCenter;
+    tabBar.delegate = self;
+    tabBar.items = tabBarItems.copy;
+    
+    tabBar.tintColor = UIColor.whiteColor;
+    tabBar.unselectedItemTintColor = UIColor.play_grayColor;
+    tabBar.selectedItemTintColor = UIColor.whiteColor;
+    
+    UIFont *tabBarFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    tabBar.unselectedItemTitleFont = tabBarFont;
+    tabBar.selectedItemTitleFont = tabBarFont;
+    
+    // Use ripple effect without color, so that there is no Material-like highlighting (we are NOT adopting Material)
+    tabBar.enableRippleBehavior = YES;
+    tabBar.rippleColor = UIColor.clearColor;
+    
+    [blurView.contentView addSubview:tabBar];
+    [tabBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(blurView.contentView);
+    }];
+    self.tabBar = tabBar;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self.tabStrip setPageViewController:self withInitialSelectedIndex:self.initialPage];
-    
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.tabBar.selectedItem = self.tabBar.items[self.initialPage];
     
     UIViewController *initialViewController = self.viewControllers[self.initialPage];
     [self.pageViewController setViewControllers:@[initialViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    [self didDisplayViewController:initialViewController animated:NO];
+}
+
+#pragma mark Actions
+
+- (BOOL)switchToIndex:(NSUInteger)index animated:(BOOL)animated
+{
+    if (! [self displayPageAtIndex:index animated:animated]) {
+        return NO;
+    }
+    
+    if (self.tabBar) {
+        [self.tabBar setSelectedItem:self.tabBar.items[index] animated:animated];
+    }
+    else {
+        self.initialPage = index;
+    }
+    return YES;
 }
 
 #pragma mark Rotation
@@ -147,11 +184,43 @@ static void *s_pageItemKey = &s_pageItemKey;
     }
 }
 
+#pragma mark Display
+
+- (BOOL)displayPageAtIndex:(NSUInteger)index animated:(BOOL)animated
+{
+    if (index >= self.viewControllers.count) {
+        return NO;
+    }
+    
+    UIViewController *currentViewController = self.pageViewController.viewControllers.firstObject;
+    NSUInteger currentIndex = [self.viewControllers indexOfObject:currentViewController];
+    UIPageViewControllerNavigationDirection direction = (currentIndex < index) ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
+    
+    UIViewController *newViewController = self.viewControllers[index];
+    [self.pageViewController setViewControllers:@[newViewController] direction:direction animated:animated completion:nil];
+    
+    [self didDisplayViewController:newViewController animated:animated];
+    return YES;
+}
+
+#pragma mark Stubs
+
+- (void)didDisplayViewController:(UIViewController *)viewController animated:(BOOL)animated
+{}
+
 #pragma mark ContainerContentInsets protocol
 
 - (UIEdgeInsets)play_additionalContentInsets
 {
     return UIEdgeInsetsMake(CGRectGetHeight(self.blurView.frame), 0.f, 0.f, 0.f);
+}
+
+#pragma mark MDCTabBarDelegate protocol
+
+- (void)tabBar:(MDCTabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+    NSUInteger index = [tabBar.items indexOfObject:item];
+    [self displayPageAtIndex:index animated:YES];
 }
 
 #pragma mark UIPageViewControllerDataSource protocol
@@ -178,28 +247,16 @@ static void *s_pageItemKey = &s_pageItemKey;
     }
 }
 
-@end
+#pragma mark UIPageViewControllerDelegate protocol
 
-@implementation PageItem
-
-#pragma mark Description
-
-- (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed
 {
-    if (self = [super init]) {
-        self.title = title;
-        self.image = image;
+    if (completed) {
+        UIViewController *newViewController = pageViewController.viewControllers.firstObject;
+        NSUInteger currentIndex = [self.viewControllers indexOfObject:newViewController];
+        [self.tabBar setSelectedItem:self.tabBar.items[currentIndex] animated:YES];;
+        [self didDisplayViewController:newViewController animated:YES];
     }
-    return self;
-}
-
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"<%@: %p; title = %@; image = %@>",
-            self.class,
-            self,
-            self.title,
-            self.image];
 }
 
 @end
@@ -217,17 +274,6 @@ static void *s_pageItemKey = &s_pageItemKey;
     else {
         return nil;
     }
-}
-
-// Use KVO-compliant naming convention
-- (void)setPlay_pageItem:(PageItem *)pageItem
-{
-    objc_setAssociatedObject(self, s_pageItemKey, pageItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (PageItem *)play_pageItem
-{
-    return objc_getAssociatedObject(self, s_pageItemKey);
 }
 
 @end

@@ -55,11 +55,6 @@
     }
 }
 
-+ (UIColor *)play_grayButtonBackgroundColor
-{
-    return [UIColor srg_colorFromHexadecimalString:@"#232323"];
-}
-
 + (UIColor *)play_lightGrayButtonBackgroundColor
 {
     return [UIColor srg_colorFromHexadecimalString:@"#242424"];
@@ -78,6 +73,11 @@
 + (UIColor *)play_whiteBadgeColor
 {
     return [UIColor srg_colorFromHexadecimalString:@"#e4e4e4"];
+}
+
++ (UIColor *)play_blurTintColor
+{
+    return [UIColor colorWithWhite:0.11f alpha:0.73f];
 }
 
 @end

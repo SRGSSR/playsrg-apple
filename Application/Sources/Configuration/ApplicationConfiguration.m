@@ -24,25 +24,25 @@ NSString *TitleForHomeSection(HomeSection homeSection)
     static NSDictionary<NSNumber *, NSString *> *s_names;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(HomeSectionTVTrending) : NSLocalizedString(@"Trending videos", @"Label used on the home page to present trending TV videos"),
-                     @(HomeSectionTVLive) : NSLocalizedString(@"Live TV", @"Label used on the home page to present main TV channels"),
-                     @(HomeSectionTVEvents) : NSLocalizedString(@"Events", @"Label used on the home page to present events while loading. It appears if no network connection available and no cache available."),
-                     @(HomeSectionTVTopics) : NSLocalizedString(@"Topics", @"Label used on the home page to present topics while loading. It appears if no network connection available and no cache available."),
-                     @(HomeSectionTVLatest) : NSLocalizedString(@"Latest videos", @"Label used on the home page to present the latest videos"),
-                     @(HomeSectionTVMostPopular) : NSLocalizedString(@"Most popular", @"Label used on the home page to present the most seen / clicked / popular videos"),
-                     @(HomeSectionTVSoonExpiring) : NSLocalizedString(@"Available for a limited time", @"Label used on the home page to present the soon expiring videos"),
-                     @(HomeSectionTVScheduledLivestreams) : NSLocalizedString(@"Web livestreams", @"Label used on the home page to present scheduled livestream medias. Only on test versions."),
-                     @(HomeSectionTVLiveCenter) : NSLocalizedString(@"Live center", @"Label used on the home page to present live center medias. Only on test versions."),
-                     @(HomeSectionTVShowsAccess) : NSLocalizedString(@"Shows", @"Label used on the TV home page to present the shows AZ and shows by date access buttons."),
-                     @(HomeSectionTVFavoriteShows) : NSLocalizedString(@"Favorites", @"Label used on the TV home page to present the favorite shows."),
-                     @(HomeSectionRadioLive) : NSLocalizedString(@"Live radio", @"Label used on a radio home page to present the livestream"),
-                     @(HomeSectionRadioLatestEpisodes) : NSLocalizedString(@"The latest episodes", @"Label used on a radio home page to present the latest audio episodes"),
-                     @(HomeSectionRadioMostPopular) : NSLocalizedString(@"Most listened to", @"Label used on a radio home page to present the most listened / popular audio medias"),
-                     @(HomeSectionRadioLatest) : NSLocalizedString(@"The latest audios", @"Label used on a radio home page to present the latest audios"),
-                     @(HomeSectionRadioLatestVideos) : NSLocalizedString(@"Latest videos", @"Label used on a radio home page to present the latest videos"),
-                     @(HomeSectionRadioAllShows) : NSLocalizedString(@"Shows", @"Label used on a radio home page to present its associated shows"),
-                     @(HomeSectionRadioShowsAccess) : NSLocalizedString(@"Shows", @"Label used on a radio home page to present the shows AZ and shows by date access buttons."),
-                     @(HomeSectionRadioFavoriteShows) : NSLocalizedString(@"Favorites", @"Label used on a radio home page to present the favorite shows.") };
+        s_names = @{ @(HomeSectionTVTrending) : NSLocalizedString(@"Trending videos", @"Title label used to present trending TV videos"),
+                     @(HomeSectionTVLive) : NSLocalizedString(@"TV", @"Title label to present main TV livestreams"),
+                     @(HomeSectionTVEvents) : NSLocalizedString(@"Events", @"Title label used to present TV events while loading. It appears if no network connection available and no cache available."),
+                     @(HomeSectionTVTopics) : NSLocalizedString(@"Topics", @"Title label used to present TV topics while loading. It appears if no network connection available and no cache available."),
+                     @(HomeSectionTVLatest) : NSLocalizedString(@"Latest videos", @"Title label used to present the latest videos"),
+                     @(HomeSectionTVMostPopular) : NSLocalizedString(@"Most popular", @"Title label used to present the TV most seen / clicked / popular videos"),
+                     @(HomeSectionTVSoonExpiring) : NSLocalizedString(@"Available for a limited time", @"Title label used to present the soon expiring videos"),
+                     @(HomeSectionTVScheduledLivestreams) : NSLocalizedString(@"Event", @"Title label used to present scheduled livestream medias. Only on test versions."),
+                     @(HomeSectionTVLiveCenter) : NSLocalizedString(@"Sport", @"Title label used to present live center medias. Only on test versions."),
+                     @(HomeSectionTVShowsAccess) : NSLocalizedString(@"Shows", @"Title label used to present the TV shows AZ and TV shows by date access buttons."),
+                     @(HomeSectionTVFavoriteShows) : NSLocalizedString(@"Favorites", @"Title label used to present the TV favorite shows."),
+                     @(HomeSectionRadioLive) : NSLocalizedString(@"Radio", @"Title label to present main radio livestreams"),
+                     @(HomeSectionRadioLatestEpisodes) : NSLocalizedString(@"The latest episodes", @"Title label used to present the radio latest audio episodes"),
+                     @(HomeSectionRadioMostPopular) : NSLocalizedString(@"Most listened to", @"Title label used to present the radio most listened / popular audio medias"),
+                     @(HomeSectionRadioLatest) : NSLocalizedString(@"The latest audios", @"Title label used to present the radio latest audios"),
+                     @(HomeSectionRadioLatestVideos) : NSLocalizedString(@"Latest videos", @"Title label used to present the radio latest videos"),
+                     @(HomeSectionRadioAllShows) : NSLocalizedString(@"Shows", @"Title label used to present radio associated shows"),
+                     @(HomeSectionRadioShowsAccess) : NSLocalizedString(@"Shows", @"Title label used to present the radio shows AZ and radio shows by date access buttons."),
+                     @(HomeSectionRadioFavoriteShows) : NSLocalizedString(@"Favorites", @"Title label used to present the radio favorite shows.") };
     });
     return s_names[@(homeSection)];
 }
@@ -89,82 +89,74 @@ static SRGVendor DataProviderVendor(NSString *businessUnitIdentifier)
 static HomeSection HomeSectionWithString(NSString *string)
 {
     static dispatch_once_t s_onceToken;
-    static NSDictionary<NSString *, NSNumber *> *s_homeSections;
+    static NSDictionary<NSString *, NSNumber *> *s_sections;
     dispatch_once(&s_onceToken, ^{
-        s_homeSections = @{ @"tvTrending" : @(HomeSectionTVTrending),
-                            @"tvLive" : @(HomeSectionTVLive),
-                            @"tvEvents" : @(HomeSectionTVEvents),
-                            @"tvTopics" : @(HomeSectionTVTopics),
-                            @"tvLatest" : @(HomeSectionTVLatest),
-                            @"tvMostPopular" : @(HomeSectionTVMostPopular),
-                            @"tvSoonExpiring" : @(HomeSectionTVSoonExpiring),
-                            @"tvScheduledLivestreams" : @(HomeSectionTVScheduledLivestreams),
-                            @"tvLiveCenter" : @(HomeSectionTVLiveCenter),
-                            @"tvShowsAccess" : @(HomeSectionTVShowsAccess),
-                            @"tvFavoriteShows" : @(HomeSectionTVFavoriteShows),
-                            @"radioLive" : @(HomeSectionRadioLive),
-                            @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
-                            @"radioMostPopular" : @(HomeSectionRadioMostPopular),
-                            @"radioLatest" : @(HomeSectionRadioLatest),
-                            @"radioLatestVideos" : @(HomeSectionRadioLatestVideos),
-                            @"radioAllShows" : @(HomeSectionRadioAllShows),
-                            @"radioShowsAccess" : @(HomeSectionRadioShowsAccess),
-                            @"radioFavoriteShows" : @(HomeSectionRadioFavoriteShows) };
+        s_sections = @{ @"tvTrending" : @(HomeSectionTVTrending),
+                        @"tvLive" : @(HomeSectionTVLive),
+                        @"tvEvents" : @(HomeSectionTVEvents),
+                        @"tvTopics" : @(HomeSectionTVTopics),
+                        @"tvLatest" : @(HomeSectionTVLatest),
+                        @"tvMostPopular" : @(HomeSectionTVMostPopular),
+                        @"tvSoonExpiring" : @(HomeSectionTVSoonExpiring),
+                        @"tvScheduledLivestreams" : @(HomeSectionTVScheduledLivestreams),
+                        @"tvLiveCenter" : @(HomeSectionTVLiveCenter),
+                        @"tvShowsAccess" : @(HomeSectionTVShowsAccess),
+                        @"tvFavoriteShows" : @(HomeSectionTVFavoriteShows),
+                        @"radioLive" : @(HomeSectionRadioLive),
+                        @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
+                        @"radioMostPopular" : @(HomeSectionRadioMostPopular),
+                        @"radioLatest" : @(HomeSectionRadioLatest),
+                        @"radioLatestVideos" : @(HomeSectionRadioLatestVideos),
+                        @"radioAllShows" : @(HomeSectionRadioAllShows),
+                        @"radioShowsAccess" : @(HomeSectionRadioShowsAccess),
+                        @"radioFavoriteShows" : @(HomeSectionRadioFavoriteShows) };
     });
-    return s_homeSections[string].integerValue ?: HomeSectionUnknown;
+    NSNumber *section = s_sections[string];
+    return section ? section.integerValue : HomeSectionUnknown;
 }
 
 static TopicSection TopicSectionWithString(NSString *string)
 {
     static dispatch_once_t s_onceToken;
-    static NSDictionary<NSString *, NSNumber *> *s_topicSections;
+    static NSDictionary<NSString *, NSNumber *> *s_sections;
     dispatch_once(&s_onceToken, ^{
-        s_topicSections = @{ @"latest" : @(TopicSectionLatest),
-                             @"mostPopular" : @(TopicSectionMostPopular) };
+        s_sections = @{ @"latest" : @(TopicSectionLatest),
+                        @"mostPopular" : @(TopicSectionMostPopular) };
     });
-    return s_topicSections[string].integerValue ?: TopicSectionUnknown;
+    NSNumber *section = s_sections[string];
+    return section ? section.integerValue : TopicSectionUnknown;
 }
 
-NSString *TitleForMenuItem(MenuItem menuItem)
+HomeSection HomeSectionForApplicationSection(ApplicationSection applicationSection)
+{
+    static dispatch_once_t s_onceToken;
+    static NSDictionary<NSNumber *, NSNumber *> *s_sections;
+    dispatch_once(&s_onceToken, ^{
+        s_sections = @{ @(ApplicationSectionTVLive) : @(HomeSectionTVLive),
+                        @(ApplicationSectionRadioLive) : @(HomeSectionRadioLive),
+                        @(ApplicationSectionLiveCenter) : @(HomeSectionTVLiveCenter),
+                        @(ApplicationSectionScheduledLivestreams) : @(HomeSectionTVScheduledLivestreams) };
+    });
+    NSNumber *section = s_sections[@(applicationSection)];
+    return section ? section.integerValue : HomeSectionUnknown;
+}
+
+NSString *TitleForApplicationSection(ApplicationSection applicationSection)
 {
     static NSDictionary<NSNumber *, NSString *> *s_names;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(MenuItemSearch) : NSLocalizedString(@"Search", @"Label in the left menu to present the search view"),
-                     @(MenuItemFavorites) : NSLocalizedString(@"Favorites", @"Label in the left menu to present Favorites"),
-                     @(MenuItemWatchLater) : NSLocalizedString(@"Watch later", @"Label in the left menu to present the watch later list"),
-                     @(MenuItemDownloads) : NSLocalizedString(@"Downloads", @"Label in the left menu to present downloads"),
-                     @(MenuItemHistory) : NSLocalizedString(@"History", @"Label in the left menu to present history"),
-                     @(MenuItemTVOverview) : NSLocalizedString(@"Overview", @"Label in the left menu to present the main TV view"),
-                     @(MenuItemTVByDate) : NSLocalizedString(@"Programmes by date", @"Label in the left menu to present programmes by date"),
-                     @(MenuItemTVShowAZ) : NSLocalizedString(@"Programmes A-Z", @"Label in the left menu to present shows A to Z (radio or TV)"),
-                     @(MenuItemRadioShowAZ) : NSLocalizedString(@"Programmes A-Z", @"Label in the left menu to present shows A to Z (radio or TV)"),
-                     @(MenuItemFeedback) : NSLocalizedString(@"Feedback", @"Label in the left menu to display the feedback form"),
-                     @(MenuItemSettings) : NSLocalizedString(@"Settings", @"Label in the left menu to present settings"),
-                     @(MenuItemHelp) : NSLocalizedString(@"Help and copyright", @"Label in the left menu to present the help page") };
+        s_names = @{ @(ApplicationSectionDownloads) : NSLocalizedString(@"Downloads", @"Label to present downloads"),
+                     @(ApplicationSectionFavorites) : NSLocalizedString(@"Favorites", @"Label to present Favorites"),
+                     @(ApplicationSectionHistory) : NSLocalizedString(@"History", @"Label to present history"),
+                     @(ApplicationSectionNotifications) : NSLocalizedString(@"Notifications", @"Label to present the help page"),
+                     @(ApplicationSectionSearch) : NSLocalizedString(@"Search", @"Label to present the search view"),
+                     @(ApplicationSectionShowByDate) : NSLocalizedString(@"Programmes by date", @"Label to present programmes by date"),
+                     @(ApplicationSectionOverview) : NSLocalizedString(@"Overview", @"Label to present the main Videos / Audios views"),
+                     @(ApplicationSectionShowAZ) : NSLocalizedString(@"Programmes A-Z", @"Label to present shows A to Z (radio or TV)"),
+                     @(ApplicationSectionWatchLater) : NSLocalizedString(@"Watch later", @"Label to present the watch later list") };
     });
-    return s_names[@(menuItem)];
-}
-
-static MenuItem TVMenuItemWithString(NSString *string)
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSString *, NSNumber *> *s_menuItems;
-    dispatch_once(&s_onceToken, ^{
-        s_menuItems = @{ @"byDate" : @(MenuItemTVByDate),
-                         @"showAZ" : @(MenuItemTVShowAZ) };
-    });
-    return s_menuItems[string].integerValue ?: MenuItemUnknown;
-}
-
-static MenuItem RadioMenuItemWithString(NSString *string)
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSString *, NSNumber *> *s_menuItems;
-    dispatch_once(&s_onceToken, ^{
-        s_menuItems = @{ @"showAZ" : @(MenuItemRadioShowAZ) };
-    });
-    return s_menuItems[string].integerValue ?: MenuItemUnknown;
+    return s_names[@(applicationSection)];
 }
 
 void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller)
@@ -226,17 +218,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) UIColor *moduleDefaultLinkColor;
 @property (nonatomic) UIColor *moduleDefaultTextColor;
 
-@property (nonatomic) NSArray<NSNumber *> *searchOptions;
-
-@property (nonatomic) NSArray<NSNumber *> *tvMenuItems;
-@property (nonatomic) NSArray<NSNumber *> *tvHomeSections;
+@property (nonatomic) NSArray<NSNumber *> *videoHomeSections;
+@property (nonatomic) NSArray<NSNumber *> *liveHomeSections;
 
 @property (nonatomic) BOOL tvTrendingEpisodesOnly;
 @property (nonatomic) NSNumber *tvTrendingEditorialLimit;
 
 @property (nonatomic, getter=isTvFeaturedHomeSectionHeaderHidden) BOOL tvFeaturedHomeSectionHeaderHidden;
-
-@property (nonatomic) NSInteger tvNumberOfLivePlaceholders;
 
 @property (nonatomic) NSInteger minimumSocialViewCount;
 
@@ -244,13 +232,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSArray<NSNumber *> *topicSectionsWithSubtopics;
 
 @property (nonatomic) NSArray<RadioChannel *> *radioChannels;
-@property (nonatomic) NSArray<NSNumber *> *radioHomeSections;
+@property (nonatomic) NSArray<NSNumber *> *audioHomeSections;                           // wrap `HomeSection` values
 
 @property (nonatomic) NSArray<TVChannel *> *tvChannels;
 
 @property (nonatomic, getter=isRadioFeaturedHomeSectionHeaderHidden) BOOL radioFeaturedHomeSectionHeaderHidden;
-
-@property (nonatomic) NSArray<NSNumber *> *radioMenuItems;
 
 @property (nonatomic) NSUInteger pageSize;
 
@@ -482,9 +468,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     NSString *dataProtectionURLString = [self.remoteConfig configValueForKey:@"dataProtectionURL"].stringValue;
     self.dataProtectionURL = (dataProtectionURLString.length != 0) ? [NSURL URLWithString:dataProtectionURLString] : nil;
     
-    FIRRemoteConfigValue *tvNumberOfLivePlaceholders = [self.remoteConfig configValueForKey:@"tvNumberOfLivePlaceholders"];
-    self.tvNumberOfLivePlaceholders = (tvNumberOfLivePlaceholders.source != FIRRemoteConfigSourceStatic) ? MAX(tvNumberOfLivePlaceholders.numberValue.integerValue, 0) : 3;
-    
     FIRRemoteConfigValue *minimumSocialViewCount = [self.remoteConfig configValueForKey:@"minimumSocialViewCount"];
     self.minimumSocialViewCount = (minimumSocialViewCount.stringValue.length > 0) ? MAX(minimumSocialViewCount.numberValue.integerValue, 0) : NSIntegerMax;
     
@@ -495,8 +478,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.subtitleAvailabilityHidden = [self.remoteConfig configValueForKey:@"subtitleAvailabilityHidden"].boolValue;
     self.audioDescriptionAvailabilityHidden = [self.remoteConfig configValueForKey:@"audioDescriptionAvailabilityHidden"].boolValue;
     
-    NSString *tvHomeSectionsString = [self.remoteConfig configValueForKey:@"tvHomeSections"].stringValue;
-    self.tvHomeSections = [self homeSectionsFromString:tvHomeSectionsString];
+    NSString *videoHomeSectionsString = [self.remoteConfig configValueForKey:@"videoHomeSections"].stringValue;
+    self.videoHomeSections = [self homeSectionsFromString:videoHomeSectionsString];
+    
+    NSString *liveHomeSectionsString = [self.remoteConfig configValueForKey:@"liveHomeSections"].stringValue;
+    self.liveHomeSections = [self homeSectionsFromString:liveHomeSectionsString];
     
     self.tvTrendingEpisodesOnly = [self.remoteConfig configValueForKey:@"tvTrendingEpisodesOnly"].boolValue;
     
@@ -537,25 +523,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     }
     self.topicSectionsWithSubtopics = topicSectionsWithSubtopics.copy;
     
-    // The TV overview is always present as first item and not configurable
-    NSMutableArray<NSNumber *> *tvMenuItems = [NSMutableArray arrayWithObject:@(MenuItemTVOverview)];
-    NSString *tvMenuItemsString = [self.remoteConfig configValueForKey:@"tvMenuItems"].stringValue;
-    if (tvMenuItemsString.length != 0) {
-        NSArray<NSString *> *tvMenuItemIdentifiers = [tvMenuItemsString componentsSeparatedByString:@","];
-        for (NSString *identifier in tvMenuItemIdentifiers) {
-            MenuItem menuItem = TVMenuItemWithString(identifier);
-            if (menuItem != MenuItemUnknown) {
-                [tvMenuItems addObject:@(menuItem)];
-            }
-            else {
-                PlayLogWarning(@"configuration", @"Unknown TV menu item identifier %@. Skipped.", identifier);
-            }
-        }
-    }
-    self.tvMenuItems = tvMenuItems.copy;
-    
-    NSString *radioHomeSectionsString = [self.remoteConfig configValueForKey:@"radioHomeSections"].stringValue;
-    self.radioHomeSections = [self homeSectionsFromString:radioHomeSectionsString];
+    NSString *audioHomeSectionsString = [self.remoteConfig configValueForKey:@"audioHomeSections"].stringValue;
+    self.audioHomeSections = [self homeSectionsFromString:audioHomeSectionsString];
     
     self.radioFeaturedHomeSectionHeaderHidden = [self.remoteConfig configValueForKey:@"radioFeaturedHomeSectionHeaderHidden"].boolValue;
     
@@ -567,11 +536,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             for (id radioChannelDictionary in radioChannelsJSONObject) {
                 if ([radioChannelDictionary isKindOfClass:NSDictionary.class]) {
                     // Transform homeSections string to a homeSection array, or use the default one
-                    NSArray<NSNumber *> *homeSections = self.radioHomeSections;
+                    NSArray<NSNumber *> *homeSections = self.audioHomeSections;
                     
-                    id homeSectionsValue = radioChannelDictionary[@"homeSections"];
-                    if ([homeSectionsValue isKindOfClass:NSString.class]) {
-                        NSArray<NSNumber *> *homeSectionsOverrides = [self homeSectionsFromString:homeSectionsValue];
+                    id audioHomeSectionsValue = radioChannelDictionary[@"homeSections"];
+                    if ([audioHomeSectionsValue isKindOfClass:NSString.class]) {
+                        NSArray<NSNumber *> *homeSectionsOverrides = [self homeSectionsFromString:audioHomeSectionsValue];
                         if (homeSectionsOverrides.count != 0) {
                             homeSections = homeSectionsOverrides;
                         }
@@ -597,22 +566,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         }
     }
     self.radioChannels = radioChannels.copy;
-    
-    NSMutableArray<NSNumber *> *radioMenuItems = [NSMutableArray array];
-    NSString *radioMenuItemIdentifiersString = [self.remoteConfig configValueForKey:@"radioMenuItems"].stringValue;
-    if (radioMenuItemIdentifiersString.length != 0) {
-        NSArray<NSString *> *radioMenuItemIdentifiers = [radioMenuItemIdentifiersString componentsSeparatedByString:@","];
-        for (NSString *identifier in radioMenuItemIdentifiers) {
-            MenuItem menuItem = RadioMenuItemWithString(identifier);
-            if (menuItem != MenuItemUnknown) {
-                [radioMenuItems addObject:@(menuItem)];
-            }
-            else {
-                PlayLogWarning(@"configuration", @"Unknown radio menu item identifier %@. Skipped.", identifier);
-            }
-        }
-    }
-    self.radioMenuItems = radioMenuItems.copy;
     
     NSMutableArray<TVChannel *> *tvChannels = [NSMutableArray array];
     if ([self.remoteConfig configValueForKey:@"tvChannels"].stringValue.length) {
@@ -677,8 +630,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     FIRRemoteConfigValue *endToleranceRatio = [self.remoteConfig configValueForKey:@"endToleranceRatio"];
     self.endToleranceRatio = (endToleranceRatio.stringValue.length > 0) ? fmaxf(endToleranceRatio.numberValue.floatValue, 0.f) : 0.f;
-    
-    self.hiddenOnboardingUids = [[self.remoteConfig configValueForKey:@"hiddenOnboardings"].stringValue componentsSeparatedByString:@","];
     
     self.searchSettingsHidden = [self.remoteConfig configValueForKey:@"searchSettingsHidden"].boolValue;
     self.searchSettingSubtitledHidden = [self.remoteConfig configValueForKey:@"searchSettingSubtitledHidden"].boolValue;
@@ -858,14 +809,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; tvMenuItems = %@; tvHomeSections: = %@; radioChannels = %@; radioHomeSections = %@; radioMenuItems = %@>",
+    return [NSString stringWithFormat:@"<%@: %p; videoHomeSections = %@; liveHomeSections = %@; radioChannels = %@; audioHomeSections = %@>",
             self.class,
             self,
-            self.tvMenuItems,
-            self.tvHomeSections,
+            self.videoHomeSections,
+            self.liveHomeSections,
             self.radioChannels,
-            self.radioHomeSections,
-            self.radioMenuItems];
+            self.audioHomeSections];
 }
 
 @end

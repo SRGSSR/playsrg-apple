@@ -12,6 +12,8 @@
 #import <FXReachability/FXReachability.h>
 #import <libextobjc/libextobjc.h>
 
+NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceDidUpdateChannelsNotification";
+
 @interface ChannelService ()
 
 @property (nonatomic) NSMutableDictionary<NSString *, NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *> *registrations;
@@ -59,7 +61,7 @@
             @strongify(self)
             [self updateChannels];
         }];
-        self.requestQueue = [[SRGRequestQueue alloc] init];
+        [self updateChannels];
         
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(reachabilityDidChange:)
@@ -103,9 +105,12 @@
         block(channel);
     }
     
-    self.medias[channelKey] = media;
+    // Only force an update the first time a media is added. Other updates will occur perodically afterwards.
+    if (! self.medias[channelKey]) {
+        [self updateChannelWithMedia:media];
+    }
     
-    [self updateChannelWithMedia:media];
+    self.medias[channelKey] = media;
 }
 
 - (void)unregisterObserver:(id)observer forMedia:(SRGMedia *)media
@@ -164,7 +169,11 @@
 
 - (void)updateChannels
 {
-    self.requestQueue = [[SRGRequestQueue alloc] init];
+    self.requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+        if (finished && ! error) {
+            [NSNotificationCenter.defaultCenter postNotificationName:ChannelServiceDidUpdateChannelsNotification object:self];
+        }
+    }];
     
     for (SRGMedia *media in self.medias.allValues) {
         [self updateChannelWithMedia:media];

@@ -8,26 +8,24 @@
 
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
+#import "CalendarViewController.h"
 #import "Favorites.h"
+#import "GoogleCastBarButtonItem.h"
 #import "HomeSectionHeaderView.h"
 #import "HomeMediaListTableViewCell.h"
-#import "HomeRadioLiveTableViewCell.h"
 #import "HomeSectionInfo.h"
 #import "HomeShowListTableViewCell.h"
 #import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowVerticalListTableViewCell.h"
 #import "HomeStatusHeaderView.h"
 #import "NavigationController.h"
-#import "Notification.h"
-#import "NotificationsViewController.h"
 #import "NSBundle+PlaySRG.h"
-#import "PushService.h"
-#import "SearchViewController.h"
+#import "ShowsViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
+#import <CoconutKit/CoconutKit.h>
 #import <libextobjc/libextobjc.h>
-#import <PPBadgeView/PPBadgeView.h>
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGUserData/SRGUserData.h>
@@ -62,8 +60,15 @@
 - (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel
 {
     if (self = [super init]) {
-        self.homeSections = (radioChannel) ? radioChannel.homeSections : ApplicationConfiguration.sharedApplicationConfiguration.tvHomeSections;
+        self.homeSections = radioChannel ? radioChannel.homeSections : ApplicationConfiguration.sharedApplicationConfiguration.videoHomeSections;
         self.radioChannel = radioChannel;
+        
+        if (self.radioChannel) {
+            self.title = self.radioChannel.name;
+        }
+        else {
+            self.title = NSLocalizedString(@"Videos", @"Videos home page title");
+        }
         
         [self synchronizeHomeSections];
     }
@@ -75,19 +80,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    if (self.radioChannel) {
-        self.title = self.radioChannel.name;
-        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:RadioChannelNavigationBarImage(self.radioChannel)];
-    }
-    else {
-        self.title = NSLocalizedString(@"Overview", @"Home page title");
-        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_play-20"]];
-    }
-    
-    self.navigationItem.titleView.isAccessibilityElement = YES;
-    self.navigationItem.titleView.accessibilityTraits = UIAccessibilityTraitHeader;
-    self.navigationItem.titleView.accessibilityLabel = self.title;
     
     self.view.backgroundColor = UIColor.play_blackColor;
     
@@ -116,10 +108,6 @@
     UINib *homeShowVerticalListTableViewCellNib = [UINib nibWithNibName:showVerticalListCellIdentifier bundle:nil];
     [self.tableView registerNib:homeShowVerticalListTableViewCellNib forCellReuseIdentifier:showVerticalListCellIdentifier];
     
-    NSString *radioLiveCellIdentifier = NSStringFromClass(HomeRadioLiveTableViewCell.class);
-    UINib *homeRadioLiveTableViewCellNib = [UINib nibWithNibName:radioLiveCellIdentifier bundle:nil];
-    [self.tableView registerNib:homeRadioLiveTableViewCellNib forCellReuseIdentifier:radioLiveCellIdentifier];
-    
     NSString *showsAccessCellIdentifier = NSStringFromClass(HomeShowsAccessTableViewCell.class);
     UINib *homeShowsAccessTableViewCellNib = [UINib nibWithNibName:showsAccessCellIdentifier bundle:nil];
     [self.tableView registerNib:homeShowsAccessTableViewCellNib forCellReuseIdentifier:showsAccessCellIdentifier];
@@ -128,17 +116,14 @@
     UINib *homeSectionHeaderViewNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.tableView registerNib:homeSectionHeaderViewNib forHeaderFooterViewReuseIdentifier:headerIdentifier];
     
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    if (navigationBar) {
+        self.navigationItem.rightBarButtonItem = [[GoogleCastBarButtonItem alloc] initForNavigationBar:navigationBar];
+    }
+    
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusChanged
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(applicationDidBecomeActive:)
-                                               name:UIApplicationDidBecomeActiveNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(didReceiveNotification:)
-                                               name:PushServiceDidReceiveNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(preferencesStateDidChange:)
@@ -147,13 +132,6 @@
     
     [self updateStatusHeaderViewLayout];
     [self.tableView reloadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self updateBarButtonItems];
 }
 
 - (void)viewWillLayoutSubviews
@@ -320,56 +298,6 @@
     // Always set a header view. Setting it to nil when no message is displayed does not correctly update the table
     // view. Instead, use an invisible header with length close to 0
     self.tableView.tableHeaderView = headerView;
-}
-
-- (void)updateBarButtonItems
-{
-    NSMutableArray<UIBarButtonItem *> *rightBarButtonItems = [NSMutableArray array];
-    
-    UIBarButtonItem *searchBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search-22"]
-                                                                            style:UIBarButtonItemStylePlain
-                                                                           target:self
-                                                                           action:@selector(search:)];
-    searchBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Search", @"Search button label");
-    [rightBarButtonItems addObject:searchBarButtonItem];
-    
-    [PushService.sharedService updateApplicationBadge];
-    
-    if (@available(iOS 10, *)) {
-        if (PushService.sharedService.enabled) {
-            UIImage *notificationImage = [UIImage imageNamed:@"subscription_full-22"];
-            UIButton *notificationButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            notificationButton.frame = CGRectMake(0.f, 0.f, notificationImage.size.width, notificationImage.size.height);
-            [notificationButton setImage:notificationImage forState:UIControlStateNormal];
-            [notificationButton addTarget:self action:@selector(showNotifications:) forControlEvents:UIControlEventTouchUpInside];
-            
-            NSInteger badgeNumber = UIApplication.sharedApplication.applicationIconBadgeNumber;
-            if (badgeNumber != 0) {
-                NSString *badgeText = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
-                [notificationButton pp_addBadgeWithText:badgeText];
-                [notificationButton pp_moveBadgeWithX:-6.f Y:7.f];
-                [notificationButton pp_setBadgeHeight:14.f];
-                [notificationButton pp_setBadgeLabelAttributes:^(PPBadgeLabel *badgeLabel) {
-                    badgeLabel.font = [UIFont boldSystemFontOfSize:13.f];
-                    badgeLabel.backgroundColor = UIColor.play_notificationRedColor;
-                }];
-                
-                RadioChannel *radioChannel = self.radioChannel;
-                if (radioChannel && ! radioChannel.badgeStrokeHidden) {
-                    [notificationButton pp_setBadgeLabelAttributes:^(PPBadgeLabel *badgeLabel) {
-                        badgeLabel.layer.borderColor = radioChannel.titleColor.CGColor;
-                        badgeLabel.layer.borderWidth = 1.f;
-                    }];
-                }
-            }
-            
-            UIBarButtonItem *notificationsBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:notificationButton];
-            notificationsBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Notifications", @"Notifications button label");
-            [rightBarButtonItems addObject:notificationsBarButtonItem];
-        }
-    }
-    
-    self.navigationItem.rightBarButtonItems = rightBarButtonItems.copy;
 }
 
 #pragma mark Section management
@@ -598,6 +526,32 @@
     return 10e-6f;
 }
 
+#pragma mark PlayApplicationNavigation protocol
+
+- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
+{
+    BOOL sameChannel = (self.radioChannel == applicationSectionInfo.radioChannel) || [self.radioChannel isEqual:applicationSectionInfo.radioChannel];
+    if (! sameChannel) {
+        return NO;
+    }
+    
+    if (applicationSectionInfo.applicationSection == ApplicationSectionShowByDate) {
+        NSDate *date = applicationSectionInfo.options[ApplicationSectionOptionShowByDateDateKey];
+        CalendarViewController *calendarViewController = [[CalendarViewController alloc] initWithRadioChannel:applicationSectionInfo.radioChannel date:date];
+        [self.navigationController pushViewController:calendarViewController animated:NO];
+        return YES;
+    }
+    else if (applicationSectionInfo.applicationSection == ApplicationSectionShowAZ) {
+        NSString *index = applicationSectionInfo.options[ApplicationSectionOptionShowAZIndexKey];
+        ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:applicationSectionInfo.radioChannel alphabeticalIndex:index];
+        [self.navigationController pushViewController:showsViewController animated:NO];
+        return YES;
+    }
+    else {
+        return applicationSectionInfo.applicationSection == ApplicationSectionOverview;
+    }
+}
+
 #pragma mark Actions
 
 - (void)refresh:(id)sender
@@ -605,46 +559,11 @@
     [self refresh];
 }
 
-- (void)showNotifications:(id)sender
-{
-    NotificationsViewController *notificationsViewController = [[NotificationsViewController alloc] init];
-    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:notificationsViewController];
-    [self presentViewController:navigationController animated:YES completion:nil];
-}
-
-- (void)search:(id)sender
-{
-    SearchViewController *searchViewController = [[SearchViewController alloc] initWithQuery:nil settings:nil];
-    
-    @weakify(self)
-    searchViewController.closeBlock = ^{
-        @strongify(self);
-        [self dismissViewControllerAnimated:YES completion:nil];
-    };
-    
-    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchViewController];
-    navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:navigationController animated:YES completion:nil];
-}
-
 #pragma mark Notifications
 
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
 {
     [self.tableView reloadData];
-}
-
-- (void)applicationDidBecomeActive:(NSNotification *)notification
-{
-    // Ensure correct notification button availability after:
-    //   - Dismissal of the initial system alert (displayed once at most), asking the user to enable push notifications.
-    //   - Returning from system settings, where the user might have updated push notification authorizations.
-    [self updateBarButtonItems];
-}
-
-- (void)didReceiveNotification:(NSNotification *)notification
-{
-    [self updateBarButtonItems];
 }
 
 - (void)preferencesStateDidChange:(NSNotification *)notification

@@ -10,7 +10,6 @@
 #import "ApplicationSettings.h"
 #import "Favorites.h"
 #import "HomeMediaListTableViewCell.h"
-#import "HomeRadioLiveTableViewCell.h"
 #import "HomeShowListTableViewCell.h"
 #import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowVerticalListTableViewCell.h"
@@ -62,10 +61,7 @@
 
 - (Class)cellClass
 {
-    if (self.homeSection == HomeSectionRadioLive && ! ApplicationSettingAlternateRadioHomepageDesignEnabled()) {
-        return ApplicationSettingAlternateRadioHomepageDesignEnabled() ? HomeMediaListTableViewCell.class : HomeRadioLiveTableViewCell.class;
-    }
-    else if (self.homeSection == HomeSectionRadioAllShows) {
+    if (self.homeSection == HomeSectionRadioAllShows) {
         return HomeShowVerticalListTableViewCell.class;
     }
     else if (self.homeSection == HomeSectionTVShowsAccess || self.homeSection == HomeSectionRadioShowsAccess) {
@@ -192,12 +188,17 @@
                     paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
                 }];
             }
+            else {
+                return [SRGDataProvider.currentDataProvider radioLivestreamsForVendor:vendor contentProviders:SRGContentProvidersDefault withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                    paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+                }];
+            }
             break;
         }
             
         case HomeSectionRadioFavoriteShows: {
             return [[SRGDataProvider.currentDataProvider showsWithURNs:FavoritesShowURNs().allObjects completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGShow.new, transmission), @(SRGTransmissionRadio)];
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == %@", @keypath(SRGShow.new, transmission), @(SRGTransmissionRadio), @keypath(SRGShow.new, primaryChannelUid), self.identifier];
                 NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, title) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
                 paginatedItemListCompletionBlock([[shows filteredArrayUsingPredicate:predicate] sortedArrayUsingDescriptors:@[sortDescriptor]], page, nextPage, HTTPResponse, error);
             }] requestWithPageSize:50];

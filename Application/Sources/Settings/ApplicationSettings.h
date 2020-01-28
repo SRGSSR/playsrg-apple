@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "MenuItemInfo.h"
+#import "ApplicationConfiguration.h"
 
 #import <SRGLetterbox/SRGLetterbox.h>
 
@@ -28,7 +28,18 @@ typedef NS_ENUM(NSInteger, SettingUserLocation) {
     SettingUserLocationIgnored
 };
 
-OBJC_EXPORT NSString * const PlaySRGSettingAlternateRadioHomepageDesignEnabled;
+/**
+ *  Tab bar item identifier.
+ */
+typedef NS_ENUM(NSInteger, TabBarItemIdentifier) {
+    TabBarItemIdentifierNone,
+    TabBarItemIdentifierVideos = TabBarItemIdentifierNone,
+    TabBarItemIdentifierAudios,
+    TabBarItemIdentifierLivestreams,
+    TabBarItemIdentifierSearch,
+    TabBarItemIdentifierLibrary
+};
+
 OBJC_EXPORT NSString * const PlaySRGSettingHDOverCellularEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingOriginalImagesOnlyEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingPresenterModeEnabled;
@@ -39,8 +50,6 @@ OBJC_EXPORT NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed;
 OBJC_EXPORT NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed;
 
 OBJC_EXPORT NSString * const PlaySRGSettingLastLoggedInEmailAddress;
-OBJC_EXPORT NSString * const PlaySRGSettingLastOpenHomepageUid;
-OBJC_EXPORT NSString * const PlaySRGSettingLastPlayedRadioLiveURN;
 OBJC_EXPORT NSString * const PlaySRGSettingServiceURL;
 OBJC_EXPORT NSString * const PlaySRGSettingUserLocation;
 
@@ -68,8 +77,14 @@ OBJC_EXPORT void ApplicationSettingSetSelectedLiveStreamURNForChannelUid(NSStrin
 
 OBJC_EXPORT SRGMedia * _Nullable ApplicationSettingSelectedLivestreamMediaForChannelUid(NSString * _Nullable channelUid, NSArray<SRGMedia *> * _Nullable medias);
 
-OBJC_EXPORT MenuItemInfo * ApplicationSettingLastOpenHomepageMenuItemInfo(void);
-OBJC_EXPORT void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo * _Nullable menuItem);
+OBJC_EXPORT TabBarItemIdentifier ApplicationSettingLastOpenedTabBarItemIdentifier(void);
+OBJC_EXPORT void ApplicationSettingSetLastOpenedTabBarItemIdentifier(TabBarItemIdentifier tabBarItemIdentifier);
+
+OBJC_EXPORT RadioChannel * _Nullable ApplicationSettingLastOpenedRadioChannel(void);
+OBJC_EXPORT void ApplicationSettingSetLastOpenedRadioChannel(RadioChannel * radioChannel);
+
+OBJC_EXPORT HomeSection ApplicationSettingLastOpenedLivestreamHomeSection(void);
+OBJC_EXPORT void ApplicationSettingSetLastOpenedLivestreamHomeSection(HomeSection homeSection);
 
 OBJC_EXPORT NSURL * _Nullable ApplicationSettingServiceURLForKey(NSString *key);
 OBJC_EXPORT NSString * _Nullable ApplicationSettingServiceNameForKey(NSString *key);

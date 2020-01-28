@@ -51,17 +51,6 @@
     
     self.unreadLabel.backgroundColor = backgroundColor;
     self.unreadLabel.textColor = UIColor.play_notificationRedColor;
-    
-    @weakify(self)
-    MGSwipeButton *deleteButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"delete-22"] backgroundColor:UIColor.redColor callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
-        @strongify(self)
-        [Notification removeNotification:self.notification];
-        [self.cellDelegate notificationTableViewCell:self willDeleteNotification:self.notification];
-        return YES;
-    }];
-    deleteButton.tintColor = UIColor.whiteColor;
-    deleteButton.buttonWidth = 60.f;
-    self.rightButtons = @[deleteButton];
 }
 
 - (void)prepareForReuse
@@ -69,6 +58,27 @@
     [super prepareForReuse];
     
     [self.thumbnailImageView play_resetImage];
+}
+
+- (void)setDeletionDelegate:(id<NotificationTableViewDeletionDelegate>)deletionDelegate
+{
+    _deletionDelegate = deletionDelegate;
+    
+    if (deletionDelegate) {
+        @weakify(self)
+        MGSwipeButton *deleteButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"delete-22"] backgroundColor:UIColor.redColor callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+            @strongify(self)
+            [Notification removeNotification:self.notification];
+            [deletionDelegate notificationTableViewCell:self willDeleteNotification:self.notification];
+            return YES;
+        }];
+        deleteButton.tintColor = UIColor.whiteColor;
+        deleteButton.buttonWidth = 60.f;
+        self.rightButtons = @[ deleteButton ];
+    }
+    else {
+        self.rightButtons = @[];
+    }
 }
 
 #pragma mark Accessibility

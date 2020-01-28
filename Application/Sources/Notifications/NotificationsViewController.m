@@ -29,6 +29,54 @@
 
 @implementation NotificationsViewController
 
+#pragma mark Class methods
+
++ (void)openNotification:(Notification *)notification fromViewController:(UIViewController *)viewController
+{
+    [Notification saveNotification:notification read:YES];
+    
+    if (notification.mediaURN) {
+        [[SRGDataProvider.currentDataProvider mediaWithURN:notification.mediaURN completionBlock:^(SRGMedia * _Nullable media, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+            if (error) {
+                [Banner showError:error inViewController:viewController];
+                return;
+            }
+            
+            [viewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.source = notification.showURN ?: AnalyticsSourceNotification;
+                labels.type = NotificationTypeString(notification.type) ?: AnalyticsTypeActionPlayMedia;
+                labels.value = notification.mediaURN;
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationOpen labels:labels];
+            }];
+        }] resume];
+    }
+    else if (notification.showURN) {
+        [[SRGDataProvider.currentDataProvider showWithURN:notification.showURN completionBlock:^(SRGShow * _Nullable show, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+            if (error) {
+                [Banner showError:error inViewController:viewController];
+                return;
+            }
+            
+            ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+            [viewController.navigationController pushViewController:showViewController animated:YES];
+            
+            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+            labels.source = AnalyticsSourceNotification;
+            labels.type = NotificationTypeString(notification.type) ?: AnalyticsTypeActionDisplayShow;
+            labels.value = notification.showURN;
+            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationOpen labels:labels];
+        }] resume];
+    }
+    else {
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.source = AnalyticsSourceNotification;
+        labels.type = NotificationTypeString(notification.type) ?: AnalyticsTypeActionNotificationAlert;
+        labels.value = notification.body;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationOpen labels:labels];
+    }
+}
+
 #pragma mark Object lifecycle
 
 - (instancetype)init
@@ -65,14 +113,6 @@
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
     self.refreshControl = refreshControl;
-    
-    UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close-22"]
-                                                             landscapeImagePhone:nil
-                                                                           style:UIBarButtonItemStyleDone
-                                                                          target:self
-                                                                          action:@selector(close:)];
-    closeBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on search view");
-    self.navigationItem.leftBarButtonItem = closeBarButtonItem;
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationDidBecomeActive:)
@@ -215,7 +255,7 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
-#pragma mark NotificationTableViewCellDelegate protocol
+#pragma mark NotificationTableViewDeletionDelegate protocol
 
 - (void)notificationTableViewCell:(NotificationTableViewCell *)cell willDeleteNotification:(Notification *)notification
 {
@@ -251,55 +291,13 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(NotificationTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.notification = self.notifications[indexPath.row];
-    cell.cellDelegate = self;
+    cell.deletionDelegate = self;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Notification *notification = self.notifications[indexPath.row];
-    [Notification saveNotification:notification read:YES];
-    
-    if (notification.mediaURN) {
-        [[SRGDataProvider.currentDataProvider mediaWithURN:notification.mediaURN completionBlock:^(SRGMedia * _Nullable media, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-            if (error) {
-                [Banner showError:error inViewController:self];
-                return;
-            }
-            
-            [self play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:^{
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = notification.showURN ?: AnalyticsSourceNotification;
-                labels.type = NotificationTypeString(notification.type) ?: AnalyticsTypeActionPlayMedia;
-                labels.value = notification.mediaURN;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationOpen labels:labels];
-            }];
-        }] resume];
-    }
-    else if (notification.showURN) {
-        [[SRGDataProvider.currentDataProvider showWithURN:notification.showURN completionBlock:^(SRGShow * _Nullable show, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-            if (error) {
-                [Banner showError:error inViewController:self];
-                return;
-            }
-            
-            ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
-            [self.navigationController pushViewController:showViewController animated:YES];
-            
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceNotification;
-            labels.type = NotificationTypeString(notification.type) ?: AnalyticsTypeActionDisplayShow;
-            labels.value = notification.showURN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationOpen labels:labels];
-        }] resume];
-    }
-    else {
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = AnalyticsSourceNotification;
-        labels.type = NotificationTypeString(notification.type) ?: AnalyticsTypeActionNotificationAlert;
-        labels.value = notification.body;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationOpen labels:labels];
-    }
-    
+    [NotificationsViewController openNotification:notification fromViewController:self];
     [tableView reloadData];
 }
 
@@ -308,11 +306,6 @@
 - (void)refresh:(id)sender
 {
     [self refresh];
-}
-
-- (void)close:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark Notifications
@@ -334,6 +327,10 @@
 - (void)didReceiveNotification:(NSNotification *)notification
 {
     [self refresh];
+    
+    if (self.viewVisible) {
+        [PushService.sharedService resetApplicationBadge];
+    }
 }
 
 @end

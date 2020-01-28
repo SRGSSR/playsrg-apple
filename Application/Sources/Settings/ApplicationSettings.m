@@ -17,7 +17,6 @@
 #import <libextobjc/libextobjc.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 
-NSString * const PlaySRGSettingAlternateRadioHomepageDesignEnabled = @"PlaySRGSettingAlternateRadioHomepageDesignEnabled";
 NSString * const PlaySRGSettingHDOverCellularEnabled = @"PlaySRGSettingHDOverCellularEnabled";
 NSString * const PlaySRGSettingOriginalImagesOnlyEnabled = @"PlaySRGSettingOriginalImagesOnlyEnabled";
 NSString * const PlaySRGSettingPresenterModeEnabled = @"PlaySRGSettingPresenterModeEnabled";
@@ -29,8 +28,9 @@ NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed = @"PlaySRGSettingS
 NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed = @"PlaySRGSettingAudioDescriptionAvailabilityDisplayed";
 
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
-NSString * const PlaySRGSettingLastOpenHomepageUid = @"PlaySRGSettingLastOpenHomepageUid";
-NSString * const PlaySRGSettingLastPlayedRadioLiveURN = @"PlaySRGSettingLastPlayedRadioLiveURN";
+NSString * const PlaySRGSettingLastOpenedLiveSection = @"PlaySRGSettingLastOpenedLiveSection";
+NSString * const PlaySRGSettingLastOpenedRadioChannelUid = @"PlaySRGSettingLastOpenedRadioChannelUid";
+NSString * const PlaySRGSettingLastOpenedTabBarItem = @"PlaySRGSettingLastOpenedTabBarItem";
 NSString * const PlaySRGSettingSelectedLiveStreamURNForChannels = @"PlaySRGSettingSelectedLiveStreamURNForChannels";
 NSString * const PlaySRGSettingServiceURL = @"PlaySRGSettingServiceURL";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
@@ -47,22 +47,48 @@ NSValueTransformer *SettingUserLocationTransformer(void)
     });
     return s_transformer;
 }
+
+NSValueTransformer *SettingLiveSectionTransformer(void)
+{
+    static NSValueTransformer *s_transformer;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"tv" : @(HomeSectionTVLive),
+                                                                                         @"radio" : @(HomeSectionRadioLive),
+                                                                                         @"livecenter" : @(HomeSectionTVLiveCenter),
+                                                                                         @"scheduled_livestreams" : @(HomeSectionTVScheduledLivestreams) }
+                                                                         defaultValue:@(HomeSectionUnknown)
+                                                                  reverseDefaultValue:nil];
+    });
+    return s_transformer;
+}
+
+NSValueTransformer *TabBarItemIdentifierTransformer(void)
+{
+    static NSValueTransformer *s_transformer;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"videos" : @(TabBarItemIdentifierVideos),
+                                                                                         @"audios" : @(TabBarItemIdentifierAudios),
+                                                                                         @"livestreams" : @(TabBarItemIdentifierLivestreams),
+                                                                                         @"search" : @(TabBarItemIdentifierSearch),
+                                                                                         @"library" : @(TabBarItemIdentifierLibrary) }
+                                                                         defaultValue:@(TabBarItemIdentifierNone)
+                                                                  reverseDefaultValue:nil];
+    });
+    return s_transformer;
+}
+
 __attribute__((constructor)) static void ApplicationSettingsInit(void)
 {
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    [userDefaults registerDefaults:@{ PlaySRGSettingAlternateRadioHomepageDesignEnabled : @NO,
-                                      PlaySRGSettingHDOverCellularEnabled : @YES,
+    [userDefaults registerDefaults:@{ PlaySRGSettingHDOverCellularEnabled : @YES,
                                       PlaySRGSettingOriginalImagesOnlyEnabled : @NO,
                                       PlaySRGSettingPresenterModeEnabled : @NO,
                                       PlaySRGSettingStandaloneEnabled : @NO,
                                       PlaySRGSettingAutoplayEnabled : @YES,
                                       PlaySRGSettingBackgroundVideoPlaybackEnabled : @NO }];
     [userDefaults synchronize];
-}
-
-BOOL ApplicationSettingAlternateRadioHomepageDesignEnabled(void)
-{
-    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAlternateRadioHomepageDesignEnabled];
 }
 
 BOOL ApplicationSettingOriginalImagesOnlyEnabled(void)
@@ -228,28 +254,47 @@ SRGMedia *ApplicationSettingSelectedLivestreamMediaForChannelUid(NSString *chann
     return [medias filteredArrayUsingPredicate:predicate].firstObject;
 }
 
-MenuItemInfo *ApplicationSettingLastOpenHomepageMenuItemInfo(void)
+TabBarItemIdentifier ApplicationSettingLastOpenedTabBarItemIdentifier(void)
 {
-    NSString *lastOpenHomepageUid = [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingLastOpenHomepageUid];
-    RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:lastOpenHomepageUid];
-    if (radioChannel) {
-        return [MenuItemInfo menuItemInfoWithRadioChannel:radioChannel];
-    }
-    else {
-        return [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVOverview];
+    return [[TabBarItemIdentifierTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingLastOpenedTabBarItem]] integerValue];
+}
+
+void ApplicationSettingSetLastOpenedTabBarItemIdentifier(TabBarItemIdentifier tabBarItemIdentifier)
+{
+    if (tabBarItemIdentifier == TabBarItemIdentifierVideos || tabBarItemIdentifier == TabBarItemIdentifierAudios || tabBarItemIdentifier == TabBarItemIdentifierLivestreams) {
+        NSString *tabBarItemIdentifierString = [TabBarItemIdentifierTransformer() reverseTransformedValue:@(tabBarItemIdentifier)];
+        
+        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+        [userDefaults setObject:tabBarItemIdentifierString forKey:PlaySRGSettingLastOpenedTabBarItem];
+        [userDefaults synchronize];
     }
 }
 
-void ApplicationSettingSetLastOpenHomepageMenuItemInfo(MenuItemInfo *menuItemInfo)
+RadioChannel *ApplicationSettingLastOpenedRadioChannel(void)
 {
-    // Save only radio home page or set to nil if it's the TV home page
-    if (menuItemInfo.radioChannel || menuItemInfo.menuItem == MenuItemTVOverview
-            || menuItemInfo.menuItem == MenuItemTVByDate || menuItemInfo.menuItem == MenuItemTVShowAZ) {
-        
-        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-        [userDefaults setObject:menuItemInfo.radioChannel.uid forKey:PlaySRGSettingLastOpenHomepageUid];
-        [userDefaults synchronize];
-    }
+    NSString *radioChannelUid = [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingLastOpenedRadioChannelUid];
+    return radioChannelUid ? [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:radioChannelUid] : nil;
+}
+
+void ApplicationSettingSetLastOpenedRadioChannel(RadioChannel *radioChannel)
+{
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults setObject:radioChannel.uid forKey:PlaySRGSettingLastOpenedRadioChannelUid];
+    [userDefaults synchronize];
+}
+
+HomeSection ApplicationSettingLastOpenedLivestreamHomeSection(void)
+{
+    return [[SettingLiveSectionTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingLastOpenedLiveSection]] integerValue];
+}
+
+void ApplicationSettingSetLastOpenedLivestreamHomeSection(HomeSection homeSection)
+{
+    NSString *homeSectionString = [SettingLiveSectionTransformer() reverseTransformedValue:@(homeSection)];
+    
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults setObject:homeSectionString forKey:PlaySRGSettingLastOpenedLiveSection];
+    [userDefaults synchronize];
 }
 
 NSURL *ApplicationSettingServiceURLForKey(NSString *key)

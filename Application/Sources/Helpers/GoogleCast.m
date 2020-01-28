@@ -7,10 +7,16 @@
 #import "GoogleCast.h"
 
 #import "ApplicationConfiguration.h"
+#import "History.h"
 #import "PlayErrors.h"
+#import "UIViewController+PlaySRG.h"
+#import "UIWindow+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <GoogleCast/GoogleCast.h>
+
+NSString * const GoogleCastPlaybackDidStartNotification = @"GoogleCastPlaybackDidStartNotification";
+NSString * const GoogleCastMediaKey = @"GoogleCastMedia";
 
 @interface GoogleCastManager : NSObject
 
@@ -95,6 +101,50 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
     return YES;
 }
 
+BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPosition *position, NSError **pError)
+{
+    if (! GoogleCastIsPossible(mediaComposition, pError)) {
+        return NO;
+    }
+    
+    SRGChapter *mainChapter = mediaComposition.mainChapter;
+    
+    GCKMediaMetadata *metadata = [[GCKMediaMetadata alloc] init];
+    [metadata setString:mainChapter.title forKey:kGCKMetadataKeyTitle];
+    
+    NSString *subtitle = mainChapter.lead;
+    if (subtitle) {
+        [metadata setString:subtitle forKey:kGCKMetadataKeySubtitle];
+    }
+    
+    GCKMediaInformationBuilder *mediaInfoBuilder = [[GCKMediaInformationBuilder alloc] init];
+    mediaInfoBuilder.contentID = mediaComposition.chapterURN;
+    mediaInfoBuilder.streamType = GCKMediaStreamTypeNone;
+    mediaInfoBuilder.metadata = metadata;
+    mediaInfoBuilder.customData = @{ @"server" : SRGDataProvider.currentDataProvider.serviceURL.host };
+    
+    GCKCastSession *castSession = [GCKCastContext sharedInstance].sessionManager.currentCastSession;
+    GCKMediaLoadOptions *options = [[GCKMediaLoadOptions alloc] init];
+    
+    // Only apply playing position for on-demand streams. Does not work well with other kinds of streams.
+    CMTime time = position.time;
+    BOOL isLivestream = mainChapter.contentType == SRGContentTypeLivestream || mainChapter.contentType == SRGContentTypeScheduledLivestream;
+    if (! isLivestream && CMTIME_IS_VALID(time) && CMTIME_COMPARE_INLINE(time, !=, kCMTimeZero)) {
+        float progress = HistoryPlaybackProgress(CMTimeGetSeconds(time), mainChapter.duration / 1000.);
+        if (progress != 1.f) {
+            options.playPosition = CMTimeGetSeconds(time);
+        }
+    }
+    [castSession.remoteMediaClient loadMedia:[mediaInfoBuilder build] withOptions:options];
+    
+    SRGMedia *media = [mediaComposition mediaForSubdivision:mainChapter];
+    [NSNotificationCenter.defaultCenter postNotificationName:GoogleCastPlaybackDidStartNotification
+                                                      object:nil
+                                                    userInfo:@{ GoogleCastMediaKey : media }];
+    
+    return YES;
+}
+
 @implementation GoogleCastManager
 
 #pragma mark Object lifecycle
@@ -138,7 +188,21 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
 - (void)googleCastStateDidChange:(NSNotification *)notification
 {
     GCKCastState castState = [notification.userInfo[kGCKNotificationKeyCastState] integerValue];
-    SRGLetterboxService.sharedService.nowPlayingInfoAndCommandsEnabled = (castState != GCKCastStateConnected);
+    if (castState == GCKCastStateConnected) {
+        SRGLetterboxService *service = SRGLetterboxService.sharedService;
+        SRGLetterboxController *controller = service.controller;
+        
+        // Transfer local playback to Google Cast
+        if (controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
+            [UIApplication.sharedApplication.keyWindow.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
+                if (playerType == PlayerTypeGoogleCast) {
+                    [service disable];
+                    [controller reset];
+                }
+            }];
+        }
+    }
 }
+
 
 @end

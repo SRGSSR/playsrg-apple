@@ -18,28 +18,30 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, HomeSection) {
     HomeSectionUnknown,
     
-    // TV sections
+    // Video sections
     HomeSectionTVTrending,
-    HomeSectionTVLive,
     HomeSectionTVEvents,
     HomeSectionTVTopics,
     HomeSectionTVLatest,
     HomeSectionTVMostPopular,
     HomeSectionTVSoonExpiring,
-    HomeSectionTVScheduledLivestreams,
-    HomeSectionTVLiveCenter,
     HomeSectionTVShowsAccess,
     HomeSectionTVFavoriteShows,
     
-    // Radio sections
-    HomeSectionRadioLive,
+    // Audio sections
     HomeSectionRadioLatestEpisodes,
     HomeSectionRadioMostPopular,
     HomeSectionRadioLatest,
     HomeSectionRadioLatestVideos,
     HomeSectionRadioAllShows,
     HomeSectionRadioShowsAccess,
-    HomeSectionRadioFavoriteShows
+    HomeSectionRadioFavoriteShows,
+    
+    // Live sections
+    HomeSectionTVLive,
+    HomeSectionRadioLive,
+    HomeSectionTVLiveCenter,
+    HomeSectionTVScheduledLivestreams
 };
 
 typedef NS_ENUM(NSInteger, TopicSection) {
@@ -48,29 +50,30 @@ typedef NS_ENUM(NSInteger, TopicSection) {
     TopicSectionMostPopular
 };
 
-typedef NS_ENUM(NSInteger, MenuItem) {
-    MenuItemUnknown,
+typedef NS_ENUM(NSInteger, ApplicationSection) {
+    ApplicationSectionUnknown,
     
-    MenuItemSearch,
-    MenuItemFavorites,
-    MenuItemWatchLater,
-    MenuItemDownloads,
-    MenuItemHistory,
+    ApplicationSectionSearch,
+    ApplicationSectionFavorites,
+    ApplicationSectionWatchLater,
+    ApplicationSectionDownloads,
+    ApplicationSectionHistory,
+    ApplicationSectionNotifications,
     
-    MenuItemTVOverview,
-    MenuItemTVByDate,
-    MenuItemTVShowAZ,
+    ApplicationSectionOverview,
+    ApplicationSectionShowByDate,
+    ApplicationSectionShowAZ,
     
-    MenuItemRadio,
-    MenuItemRadioShowAZ,
-    
-    MenuItemFeedback,
-    MenuItemSettings,
-    MenuItemHelp
+    ApplicationSectionTVLive,
+    ApplicationSectionRadioLive,
+    ApplicationSectionLiveCenter,
+    ApplicationSectionScheduledLivestreams
 };
 
+OBJC_EXPORT HomeSection HomeSectionForApplicationSection(ApplicationSection applicationSection);
+
+OBJC_EXPORT NSString *TitleForApplicationSection(ApplicationSection applicationSection);
 OBJC_EXPORT NSString *TitleForHomeSection(HomeSection homeSection);
-OBJC_EXPORT NSString *TitleForMenuItem(MenuItem menuItem);
 OBJC_EXPORT NSString *TitleForTopicSection(TopicSection topicSection);
 
 OBJC_EXPORT void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller);
@@ -120,16 +123,13 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly) UIColor *moduleDefaultLinkColor;
 @property (nonatomic, readonly) UIColor *moduleDefaultTextColor;
 
-@property (nonatomic, readonly) NSArray<NSNumber *> *tvMenuItems;                       // wrap `MenuItem` values
-@property (nonatomic, readonly) NSArray<NSNumber *> *tvHomeSections;
+@property (nonatomic, readonly) NSArray<NSNumber *> *videoHomeSections;                 // wrap `HomeSection` values
+@property (nonatomic, readonly) NSArray<NSNumber *> *liveHomeSections;                  // wrap `HomeSection` values
 
 @property (nonatomic, readonly) BOOL tvTrendingEpisodesOnly;
 @property (nonatomic, readonly, nullable) NSNumber *tvTrendingEditorialLimit;
 
 @property (nonatomic, readonly, getter=isTvFeaturedHomeSectionHeaderHidden) BOOL tvFeaturedHomeSectionHeaderHidden;
-
-// The number of placeholders to be displayed while loading TV channels
-@property (nonatomic, readonly) NSInteger tvNumberOfLivePlaceholders;
 
 @property (nonatomic, readonly) NSInteger minimumSocialViewCount;                       // minimum value to display social view count
 
@@ -140,8 +140,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly) NSArray<TVChannel *> *tvChannels;
 
 @property (nonatomic, readonly, getter=isRadioFeaturedHomeSectionHeaderHidden) BOOL radioFeaturedHomeSectionHeaderHidden;
-
-@property (nonatomic, readonly) NSArray<NSNumber *> *radioMenuItems;                    // wrap `MenuItem` values
 
 @property (nonatomic, readonly) NSUInteger pageSize;                                    // page size to be used in general throughout the app
 

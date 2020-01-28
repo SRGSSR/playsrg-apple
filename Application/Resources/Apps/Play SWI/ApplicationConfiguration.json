@@ -9,8 +9,7 @@
   "playURL": "https://play.swissinfo.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
   "feedbackURL": "https://play.typeform.com/to/bR8TQq",
-  "searchOptions": "videos",
-  "tvHomeSections": "tvTrending,tvFavoriteShows,tvTopics",
+  "videoHomeSections": "tvTrending,tvFavoriteShows,tvTopics",
   "tvTrendingEpisodesOnly": true,
   "tvTrendingEditorialLimit": 2,
   "tvFeaturedHomeSectionHeaderHidden": true,
@@ -30,7 +29,6 @@
   "endToleranceRatio": 0.01,
   "searchSettingsHidden": true,
   "showsSearchHidden": true,
-  "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account",
   "searchSettingSubtitledHidden": true,
   "subtitleAvailabilityHidden": true,
   "audioDescriptionAvailabilityHidden": true

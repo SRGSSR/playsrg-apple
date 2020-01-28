@@ -103,6 +103,8 @@
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
         [self.collectionView.collectionViewLayout invalidateLayout];
         [self updateAppearanceForSize:size];
@@ -254,7 +256,7 @@
         else {
             UIApplication *application = UIApplication.sharedApplication;
             PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
-            [appDelegate.sideMenuController pushViewController:showViewController animated:YES];
+            [appDelegate.rootTabBarController pushViewController:showViewController animated:YES];
         }
     }];
     [previewActionItems addObject:openAction];

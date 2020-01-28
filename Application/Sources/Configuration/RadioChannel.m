@@ -19,7 +19,6 @@
 @property (nonatomic) UIColor *titleColor;
 @property (nonatomic, getter=hasDarkStatusBar) BOOL darkStatusBar;
 @property (nonatomic, getter=isBadgeStrokeHidden) BOOL badgeStrokeHidden;
-@property (nonatomic) NSInteger numberOfLivePlaceholders;
 @property (nonatomic) NSArray<NSNumber *> *homeSections;
 
 @end
@@ -78,14 +77,6 @@
         if ([badgeStrokeHiddenValue isKindOfClass:NSNumber.class]) {
             self.badgeStrokeHidden = [badgeStrokeHiddenValue boolValue];
         }
-        
-        id numberOfLivePlaceholdersValue = dictionary[@"numberOfLivePlaceholders"];
-        if ([numberOfLivePlaceholdersValue isKindOfClass:NSNumber.class]) {
-            self.numberOfLivePlaceholders = [numberOfLivePlaceholdersValue integerValue];
-        }
-        else {
-            self.numberOfLivePlaceholders = 1;
-        }
     }
     return self;
 }
@@ -137,16 +128,6 @@ UIImage *RadioChannelBanner22Image(RadioChannel *radioChannel)
 UIImage *RadioChannelLogo22Image(RadioChannel *radioChannel)
 {
     return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-22", radioChannel.resourceUid]] ?: [UIImage imageNamed:@"radioset-22"];
-}
-
-UIImage *RadioChannelLogo44Image(RadioChannel *radioChannel)
-{
-    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-44", radioChannel.resourceUid]] ?: [UIImage imageNamed:@"radioset-44"];
-}
-
-UIImage *RadioChannelNavigationBarImage(RadioChannel *radioChannel)
-{
-    return [UIImage imageNamed:[NSString stringWithFormat:@"navigation_bar_logo_%@-26", radioChannel.resourceUid]] ?: [UIImage imageNamed:@"logo_play-20"];
 }
 
 NSString *RadioChannelImageOverridePath(RadioChannel *radioChannel, NSString *type)

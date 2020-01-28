@@ -6,10 +6,8 @@
 
 #import "HomeMediaListTableViewCell.h"
 
-#import "ApplicationSettings.h"
-#import "HomeLiveMediaCollectionViewCell.h"
-#import "HomeMediaCollectionViewCell.h"
 #import "HomeMediaCollectionHeaderView.h"
+#import "HomeMediaCollectionViewCell.h"
 #import "MediaPlayerViewController.h"
 #import "SRGBaseTopic+PlaySRG.h"
 #import "UICollectionView+PlaySRG.h"
@@ -121,11 +119,7 @@ static const CGFloat HomeStandardMargin = 10.f;
     NSString *mediaCellIdentifier = NSStringFromClass(HomeMediaCollectionViewCell.class);
     UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
     [self.collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
-    
-    NSString *liveMediaCellIdentifier = NSStringFromClass(HomeLiveMediaCollectionViewCell.class);
-    UINib *liveMediaCellNib = [UINib nibWithNibName:liveMediaCellIdentifier bundle:nil];
-    [self.collectionView registerNib:liveMediaCellNib forCellWithReuseIdentifier:liveMediaCellIdentifier];
-    
+      
     NSString *headerViewIdentifier = NSStringFromClass(HomeMediaCollectionHeaderView.class);
     UINib *headerNib = [UINib nibWithNibName:headerViewIdentifier bundle:nil];
     [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewIdentifier];
@@ -154,21 +148,11 @@ static const CGFloat HomeStandardMargin = 10.f;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (homeSectionInfo) {
-            // Scroll to the latest radio regional live stream played.
-            if (homeSectionInfo.homeSection == HomeSectionRadioLive && ! [self isEmpty]) {
-                SRGMedia *media = ApplicationSettingSelectedLivestreamMediaForChannelUid(homeSectionInfo.identifier, homeSectionInfo.items);
-                NSInteger index = [homeSectionInfo.items indexOfObject:media];
-                if (index != NSNotFound) {
-                    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-                }
-            }
             // Restore position in rows when scrolling vertically and returning to a previously scrolled row
-            else {
-                CGPoint maxContentOffset = self.collectionView.play_maximumContentOffset;
-                CGPoint contentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
-                                                    homeSectionInfo.contentOffset.y);
-                [self.collectionView setContentOffset:contentOffset animated:NO];
-            }
+            CGPoint maxContentOffset = self.collectionView.play_maximumContentOffset;
+            CGPoint contentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
+                                                homeSectionInfo.contentOffset.y);
+            [self.collectionView setContentOffset:contentOffset animated:NO];
         }
         self.collectionView.scrollEnabled = (homeSectionInfo.items.count != 0);
     });
@@ -178,47 +162,12 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (! [self isEmpty]) {
-        return self.homeSectionInfo.items.count;
-    }
-    else {
-        static const NSInteger kDefaultNumberOfPlaceholders = 10;
-        
-        NSInteger numberOfItems = 0;
-        
-        switch (self.homeSectionInfo.homeSection) {
-            case HomeSectionTVLive: {
-                numberOfItems = ApplicationConfiguration.sharedApplicationConfiguration.tvNumberOfLivePlaceholders;
-                break;
-            }
-                
-            case HomeSectionRadioLive: {
-                NSString *identifier = self.homeSectionInfo.identifier;
-                if (identifier) {
-                    numberOfItems = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:identifier].numberOfLivePlaceholders;
-                }
-                break;
-            }
-                
-            default: {
-                numberOfItems = kDefaultNumberOfPlaceholders; /* sufficient number of placeholders to accommodate all layouts */
-                break;
-            }
-        }
-        
-        return (numberOfItems != 0) ? numberOfItems : kDefaultNumberOfPlaceholders;
-    }
+    return ! [self isEmpty] ? self.homeSectionInfo.items.count : 10 /* Display 10 placeholders */;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    HomeSection homeSection = self.homeSectionInfo.homeSection;
-    if (homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive) {
-        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(HomeLiveMediaCollectionViewCell.class) forIndexPath:indexPath];
-    }
-    else {
-        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(HomeMediaCollectionViewCell.class) forIndexPath:indexPath];
-    }
+    return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(HomeMediaCollectionViewCell.class) forIndexPath:indexPath];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -234,19 +183,10 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 #pragma mark UICollectionViewDelegate protocol
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(HomeMediaCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SRGMedia *media = ! [self isEmpty] ? self.homeSectionInfo.items[indexPath.row] : nil;
-    
-    HomeSection homeSection = self.homeSectionInfo.homeSection;
-    if (homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive) {
-        HomeLiveMediaCollectionViewCell *mediaCell = (HomeLiveMediaCollectionViewCell *)cell;
-        [mediaCell setMedia:media featured:self.featured];
-    }
-    else {
-        HomeMediaCollectionViewCell *mediaCell = (HomeMediaCollectionViewCell *)cell;
-        [mediaCell setMedia:media module:self.homeSectionInfo.module featured:self.featured];
-    }
+    [cell setMedia:media module:self.homeSectionInfo.module featured:self.featured];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
@@ -261,12 +201,6 @@ static const CGFloat HomeStandardMargin = 10.f;
 {
     if (! [self isEmpty]) {
         SRGMedia *media = self.homeSectionInfo.items[indexPath.row];
-        
-        // Radio channel logic to scroll to the latest radio live stream played.
-        if (self.homeSectionInfo.homeSection == HomeSectionRadioLive && ! [self isEmpty]) {
-            ApplicationSettingSetSelectedLiveStreamURNForChannelUid(self.homeSectionInfo.identifier, media.URN);
-        }
-        
         [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }

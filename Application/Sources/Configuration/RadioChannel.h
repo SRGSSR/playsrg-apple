@@ -16,8 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 OBJC_EXPORT UIImage *RadioChannelBanner22Image(RadioChannel * _Nullable radioChannel);
 OBJC_EXPORT UIImage *RadioChannelLogo22Image(RadioChannel * _Nullable radioChannel);
-OBJC_EXPORT UIImage *RadioChannelLogo44Image(RadioChannel * _Nullable radioChannel);
-OBJC_EXPORT UIImage *RadioChannelNavigationBarImage(RadioChannel * _Nullable radioChannel);
 
 /**
  *  Image overrides.
@@ -65,14 +63,9 @@ OBJC_EXPORT NSString * _Nullable RadioChannelImageOverridePath(RadioChannel * _N
 @property (nonatomic, readonly, getter=isBadgeStrokeHidden) BOOL badgeStrokeHidden;
 
 /**
- *  The number of placeholders to be displayed while content is being loaded.
- */
-@property (nonatomic, readonly) NSInteger numberOfLivePlaceholders;
-
-/**
  *  The home sections ordered list.
  */
-@property (nonatomic, readonly) NSArray<NSNumber *> *homeSections;              // wrap `HomeSection` values
+@property (nonatomic, readonly) NSArray<NSNumber *> *homeSections;                      // wrap `HomeSection` values
 
 @end
 

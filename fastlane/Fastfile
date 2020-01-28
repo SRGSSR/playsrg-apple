@@ -50,6 +50,8 @@ platform :ios do
       build_number: appCenterBuildNumber + 1
     )
 
+    notify_build_number_to_ci
+
     changelog = default_changelog_for_nightlies
 
     branch_name = sh "git branch | grep \\* | cut -d ' ' -f2"
@@ -93,6 +95,8 @@ platform :ios do
     build_number = get_build_number
     marketing_version = getMarketingVersion
     tag_version = marketing_version + '-' + build_number
+
+    notify_build_number_to_ci
 
     whatsNewForBeta = getWhatsNewForBeta(tag_version: tag_version)
 
@@ -358,7 +362,6 @@ platform :ios do
 
   # desc "A dev lane to test ruby scripts"
   # lane :devLane do
-    
   #   build_number = increment_build_number
   #   commit_version_bump(
   #       xcodeproj: "PlaySRG.xcodeproj",
@@ -366,6 +369,14 @@ platform :ios do
   #       ignore: /.+/
   #   )
   # end
+
+  # Share build number to the continus integration
+  def notify_build_number_to_ci
+    return unless ENV['TEAMCITY_VERSION']
+
+    displayed_build_number = getMarketingVersion + '-' + get_build_number
+    puts '##teamcity[buildNumber \'' + displayed_build_number + + '\']'
+  end
 
   def updateDSYMs (options, appcenter_app_name)
     min_version = options[:min_version]

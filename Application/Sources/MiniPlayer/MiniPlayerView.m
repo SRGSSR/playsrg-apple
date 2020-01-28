@@ -7,18 +7,23 @@
 #import "MiniPlayerView.h"
 
 #import "ApplicationConfiguration.h"
-#import "AudioMiniPlayerView.h"
+#import "MediaPlayerViewController.h"
+#import "PlayMiniPlayerView.h"
 #import "GoogleCastMiniPlayerView.h"
 #import "UIColor+PlaySRG.h"
+#import "UIVisualEffectView+PlaySRG.h"
 
 #import <GoogleCast/GoogleCast.h>
+#import <libextobjc/libextobjc.h>
+#import <MAKVONotificationCenter/MAKVONotificationCenter.h>
 #import <Masonry/Masonry.h>
 
 @interface MiniPlayerView ()
 
-@property (nonatomic, weak) AudioMiniPlayerView *audioMiniPlayerView;
+@property (nonatomic, weak) PlayMiniPlayerView *playMiniPlayerView;
 @property (nonatomic, weak) GoogleCastMiniPlayerView *googleCastMiniPlayerView;
 @property (nonatomic, getter=isActive) BOOL active;
+@property (nonatomic, getter=isMediaPlayerVisible) BOOL mediaPlayerVisible;
 
 @end
 
@@ -29,20 +34,24 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-        UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
         [self addSubview:blurView];
-        
         [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
         }];
         
-        AudioMiniPlayerView *audioMiniPlayerView = AudioMiniPlayerView.view;
-        [self addSubview:audioMiniPlayerView];
-        [audioMiniPlayerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        PlayMiniPlayerView *playMiniPlayerView = PlayMiniPlayerView.view;
+        [self addSubview:playMiniPlayerView];
+        [playMiniPlayerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
         }];
-        self.audioMiniPlayerView = audioMiniPlayerView;
+        self.playMiniPlayerView = playMiniPlayerView;
+        
+        @weakify(self)
+        [self.playMiniPlayerView addObserver:self keyPath:@keypath(PlayMiniPlayerView.new, media) options:0 block:^(MAKVONotification *notification) {
+            @strongify(self)
+            [self updateLayoutAnimated:YES];
+        }];
         
         GoogleCastMiniPlayerView *googleCastMiniPlayerView = GoogleCastMiniPlayerView.view;
         [self addSubview:googleCastMiniPlayerView];
@@ -52,9 +61,16 @@
         self.googleCastMiniPlayerView = googleCastMiniPlayerView;
         
         [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(mediaPlayerViewControllerVisibilityDidChange:)
+                                                   name:MediaPlayerViewControllerVisibilityDidChangeNotification
+                                                 object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(googleCastStateDidChange:)
                                                    name:kGCKCastStateDidChangeNotification
                                                  object:nil];
+        
+        self.layer.cornerRadius = 4.f;
+        self.layer.masksToBounds = YES;
         
         [self updateLayoutAnimated:NO];
     }
@@ -66,21 +82,21 @@
 - (void)updateLayoutAnimated:(BOOL)animated
 {
     BOOL isGoogleCastConnected = [GCKCastContext sharedInstance].sessionManager.connectionState == GCKConnectionStateConnected;
-    BOOL hasRadioChannels = ApplicationConfiguration.sharedApplicationConfiguration.radioChannels.count != 0;
+    BOOL hasMedia = self.playMiniPlayerView.media != nil;
     
-    self.active = isGoogleCastConnected || hasRadioChannels;
+    self.active = isGoogleCastConnected || (hasMedia && ! self.mediaPlayerVisible);
     
     void (^animations)(void) = ^{
         if (isGoogleCastConnected) {
-            self.audioMiniPlayerView.alpha = 0.f;
+            self.playMiniPlayerView.alpha = 0.f;
             self.googleCastMiniPlayerView.alpha = 1.f;
         }
-        else if (hasRadioChannels) {
-            self.audioMiniPlayerView.alpha = 1.f;
+        else if (hasMedia) {
+            self.playMiniPlayerView.alpha = 1.f;
             self.googleCastMiniPlayerView.alpha = 0.f;
         }
         else {
-            self.audioMiniPlayerView.alpha = 0.f;
+            self.playMiniPlayerView.alpha = 0.f;
             self.googleCastMiniPlayerView.alpha = 0.f;
         }
     };
@@ -94,6 +110,12 @@
 }
 
 #pragma mark Notifications
+
+- (void)mediaPlayerViewControllerVisibilityDidChange:(NSNotification *)notification
+{
+    self.mediaPlayerVisible = [notification.userInfo[MediaPlayerViewControllerVisibleKey] boolValue];
+    [self updateLayoutAnimated:YES];
+}
 
 - (void)googleCastStateDidChange:(NSNotification *)notification
 {

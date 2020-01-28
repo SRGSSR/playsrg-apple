@@ -132,36 +132,7 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (! [self isEmpty]) {
-        return self.homeSectionInfo.items.count;
-    }
-    else {
-        static const NSInteger kDefaultNumberOfPlaceholders = 10;
-        
-        NSInteger numberOfItems = 0;
-        
-        switch (self.homeSectionInfo.homeSection) {
-            case HomeSectionTVLive: {
-                numberOfItems = ApplicationConfiguration.sharedApplicationConfiguration.tvNumberOfLivePlaceholders;
-                break;
-            }
-                
-            case HomeSectionRadioLive: {
-                NSString *identifier = self.homeSectionInfo.identifier;
-                if (identifier) {
-                    numberOfItems = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:identifier].numberOfLivePlaceholders;
-                }
-                break;
-            }
-                
-            default: {
-                numberOfItems = kDefaultNumberOfPlaceholders; /* sufficient number of placeholders to accommodate all layouts */
-                break;
-            }
-        }
-        
-        return (numberOfItems != 0) ? numberOfItems : kDefaultNumberOfPlaceholders;
-    }
+    return ! [self isEmpty] ? self.homeSectionInfo.items.count : 10 /* Display 10 placeholders */;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -171,12 +142,10 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 #pragma mark UICollectionViewDelegate protocol
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(HomeShowCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SRGShow *show = ! [self isEmpty] ? self.homeSectionInfo.items[indexPath.row] : nil;
-    
-    HomeShowCollectionViewCell *showCell = (HomeShowCollectionViewCell *)cell;
-    [showCell setShow:show featured:self.featured];
+    [cell setShow:show featured:self.featured];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
