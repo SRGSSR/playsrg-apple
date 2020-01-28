@@ -92,6 +92,10 @@
     if (self.subtitle) {
         if (! self.navigationItem.titleView) {
             UIStackView *stackView = [[UIStackView alloc] init];
+            if (@available(iOS 11, *)) {}
+            else {
+                stackView.bounds = CGRectMake(0.f, 0.f, 180.f, CGRectGetHeight(navigationBar.frame));
+            }
             stackView.axis = UILayoutConstraintAxisVertical;
             self.navigationItem.titleView = stackView;
             
