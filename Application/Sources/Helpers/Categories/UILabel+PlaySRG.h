@@ -13,11 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UILabel (PlaySRG)
 
 /**
- *  Use it in a duration label, to set it as a live label
- */
-- (void)play_displayDurationLabelForLive;
-
-/**
  *  Use this method to display the correct duration label for an object conform to a media metadata
  */
 - (void)play_displayDurationLabelForMediaMetadata:(id<SRGMediaMetadata>)object;
