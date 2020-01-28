@@ -13,6 +13,16 @@
 #import "NSBundle+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
+#import <SRGAppearance/SRGAppearance.h>
+
+@interface RadioChannelsViewController ()
+
+@property (nonatomic, copy) NSString *subtitle;
+
+@property (nonatomic, weak) UILabel *navigationTitleLabel;
+@property (nonatomic, weak) UILabel *navigationSubtitleLabel;
+
+@end
 
 @implementation RadioChannelsViewController
 
@@ -45,6 +55,7 @@
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     if (navigationBar) {
         self.navigationItem.rightBarButtonItem = [[GoogleCastBarButtonItem alloc] initForNavigationBar:navigationBar];
+        [self updateNavigationBar:navigationBar];
     }
 }
 
@@ -55,11 +66,62 @@
     [super didDisplayViewController:viewController animated:animated];
     
     HomeViewController *homeViewController = (HomeViewController *)viewController;
-    ApplicationSettingSetLastOpenedRadioChannel(homeViewController.radioChannel);
+    RadioChannel *radioChannel = homeViewController.radioChannel;
+    self.subtitle = radioChannel.name;
+    
+    ApplicationSettingSetLastOpenedRadioChannel(radioChannel);
     
     if ([self.navigationController isKindOfClass:NavigationController.class]) {
         NavigationController *navigationController = (NavigationController *)self.navigationController;
-        [navigationController updateWithRadioChannel:homeViewController.radioChannel animated:animated];
+        [navigationController updateWithRadioChannel:radioChannel animated:animated];
+    }
+    
+    [self updateNavigationBar:self.navigationController.navigationBar];
+}
+
+#pragma mark Navigation bar
+
+- (void)updateNavigationBar:(UINavigationBar *)navigationBar
+{
+    if (! navigationBar) {
+        return;
+    }
+    
+    NSAssert(self.title != nil, @"Expect at title to be defined");
+    
+    if (self.subtitle) {
+        if (! self.navigationItem.titleView) {
+            UIStackView *stackView = [[UIStackView alloc] init];
+            stackView.axis = UILayoutConstraintAxisVertical;
+            self.navigationItem.titleView = stackView;
+            
+            UILabel *navigationTitleLabel = [[UILabel alloc] init];
+            navigationTitleLabel.textAlignment = NSTextAlignmentCenter;
+            navigationTitleLabel.alpha = 0.7f;
+            [stackView addArrangedSubview:navigationTitleLabel];
+            self.navigationTitleLabel = navigationTitleLabel;
+            
+            UILabel *navigationSubtitleLabel = [[UILabel alloc] init];
+            navigationSubtitleLabel.textAlignment = NSTextAlignmentCenter;
+            [stackView addArrangedSubview:navigationSubtitleLabel];
+            self.navigationSubtitleLabel = navigationSubtitleLabel;
+        }
+        
+        NSDictionary<NSAttributedStringKey, id> *attributes = navigationBar.titleTextAttributes;
+        UIFont *font = attributes[NSFontAttributeName] ?: [UIFont systemFontOfSize:18.f];
+        
+        NSMutableDictionary<NSAttributedStringKey, id> *leadAttributes = attributes.mutableCopy;
+        leadAttributes[NSFontAttributeName] = [UIFont fontWithName:font.fontName size:14.f];
+        
+        self.navigationTitleLabel.attributedText = [[NSAttributedString alloc] initWithString:self.title
+                                                                                   attributes:leadAttributes.copy];
+        self.navigationSubtitleLabel.attributedText = [[NSAttributedString alloc] initWithString:self.subtitle
+                                                                                      attributes:attributes];
+        
+        self.navigationItem.titleView.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", self.title, self.subtitle];
+    }
+    else {
+        self.navigationItem.titleView = nil;
     }
 }
 
