@@ -223,6 +223,17 @@
     [self displayPageAtIndex:index animated:YES];
 }
 
+#pragma mark Scrollable protocol
+
+- (void)scrollToTopAnimated:(BOOL)animated
+{
+    UIViewController *currentViewController = self.pageViewController.viewControllers.firstObject;
+    if ([currentViewController conformsToProtocol:@protocol(Scrollable)]) {
+        UIViewController<Scrollable> *scrollableCurrentViewController = (UIViewController<Scrollable> *)currentViewController;
+        [scrollableCurrentViewController scrollToTopAnimated:animated];
+    }
+}
+
 #pragma mark UIPageViewControllerDataSource protocol
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController

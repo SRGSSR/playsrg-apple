@@ -22,6 +22,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "ShowsViewController.h"
 #import "UIColor+PlaySRG.h"
+#import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
@@ -460,6 +461,39 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
+#pragma mark PlayApplicationNavigation protocol
+
+- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
+{
+    BOOL sameChannel = (self.radioChannel == applicationSectionInfo.radioChannel) || [self.radioChannel isEqual:applicationSectionInfo.radioChannel];
+    if (! sameChannel) {
+        return NO;
+    }
+    
+    if (applicationSectionInfo.applicationSection == ApplicationSectionShowByDate) {
+        NSDate *date = applicationSectionInfo.options[ApplicationSectionOptionShowByDateDateKey];
+        CalendarViewController *calendarViewController = [[CalendarViewController alloc] initWithRadioChannel:applicationSectionInfo.radioChannel date:date];
+        [self.navigationController pushViewController:calendarViewController animated:NO];
+        return YES;
+    }
+    else if (applicationSectionInfo.applicationSection == ApplicationSectionShowAZ) {
+        NSString *index = applicationSectionInfo.options[ApplicationSectionOptionShowAZIndexKey];
+        ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:applicationSectionInfo.radioChannel alphabeticalIndex:index];
+        [self.navigationController pushViewController:showsViewController animated:NO];
+        return YES;
+    }
+    else {
+        return applicationSectionInfo.applicationSection == ApplicationSectionOverview;
+    }
+}
+
+#pragma mark Scrollable protocol
+
+- (void)scrollToTopAnimated:(BOOL)animated
+{
+    [self.tableView play_scrollToTopAnimated:animated];
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -524,32 +558,6 @@
 {
     // Cannot use 0 for grouped table views (will be ignored), must use a very small value instead
     return 10e-6f;
-}
-
-#pragma mark PlayApplicationNavigation protocol
-
-- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
-{
-    BOOL sameChannel = (self.radioChannel == applicationSectionInfo.radioChannel) || [self.radioChannel isEqual:applicationSectionInfo.radioChannel];
-    if (! sameChannel) {
-        return NO;
-    }
-    
-    if (applicationSectionInfo.applicationSection == ApplicationSectionShowByDate) {
-        NSDate *date = applicationSectionInfo.options[ApplicationSectionOptionShowByDateDateKey];
-        CalendarViewController *calendarViewController = [[CalendarViewController alloc] initWithRadioChannel:applicationSectionInfo.radioChannel date:date];
-        [self.navigationController pushViewController:calendarViewController animated:NO];
-        return YES;
-    }
-    else if (applicationSectionInfo.applicationSection == ApplicationSectionShowAZ) {
-        NSString *index = applicationSectionInfo.options[ApplicationSectionOptionShowAZIndexKey];
-        ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:applicationSectionInfo.radioChannel alphabeticalIndex:index];
-        [self.navigationController pushViewController:showsViewController animated:NO];
-        return YES;
-    }
-    else {
-        return applicationSectionInfo.applicationSection == ApplicationSectionOverview;
-    }
 }
 
 #pragma mark Actions

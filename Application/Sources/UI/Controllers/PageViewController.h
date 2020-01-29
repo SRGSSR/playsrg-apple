@@ -5,6 +5,7 @@
 //
 
 #import "ContentInsets.h"
+#import "Scrollable.h"
 
 #import <CoconutKit/CoconutKit.h>
 
@@ -16,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  To use `PageViewController`, bind its `placeholderViews` property to a single view where pages will be displayed.
  */
-@interface PageViewController : HLSPlaceholderViewController <ContainerContentInsets, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface PageViewController : HLSPlaceholderViewController <ContainerContentInsets, Scrollable, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 /**
  *  Create an instance displaying the supplied view controllers, and starting at the specified page.

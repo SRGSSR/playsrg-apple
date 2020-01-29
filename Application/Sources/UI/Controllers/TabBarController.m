@@ -6,6 +6,7 @@
 
 #import "TabBarController.h"
 
+#import "ApplicationSettings.h"
 #import "HomeLivestreamsViewController.h"
 #import "HomeViewController.h"
 #import "LibraryViewController.h"
@@ -15,8 +16,8 @@
 #import "PlayApplicationNavigation.h"
 #import "PushService.h"
 #import "RadioChannelsViewController.h"
+#import "Scrollable.h"
 #import "SearchViewController.h"
-#import "ApplicationSettings.h"
 #import "UIColor+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
@@ -32,6 +33,8 @@ static const CGFloat MiniPlayerOffset = 5.f;
 
 @property (nonatomic, weak) MiniPlayerView *miniPlayerView;
 
+@property (nonatomic, weak) UIViewController *previousSelectedViewController;
+
 @end
 
 @implementation TabBarController
@@ -41,6 +44,8 @@ static const CGFloat MiniPlayerOffset = 5.f;
 - (instancetype)init
 {
     if (self = [super init]) {
+        self.delegate = self;
+        
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         
         NSMutableArray<UIViewController *> *viewControllers = NSMutableArray.array;
@@ -93,7 +98,6 @@ static const CGFloat MiniPlayerOffset = 5.f;
         NSMutableArray<NavigationController *> *navigationControllers = NSMutableArray.array;
         [viewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
             NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
-            navigationController.delegate = self;
             navigationController.tabBarItem = tabBarItems[idx];
             [navigationControllers addObject:navigationController];
             
@@ -340,6 +344,19 @@ static const CGFloat MiniPlayerOffset = 5.f;
         }
     }
     return NO;
+}
+
+#pragma mark UITabBarControllerDelegate protocol
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    if (self.previousSelectedViewController == viewController) {
+        if ([viewController conformsToProtocol:@protocol(Scrollable)]) {
+            UIViewController<Scrollable> *scrollableViewController = (UIViewController<Scrollable> *)viewController;
+            [scrollableViewController scrollToTopAnimated:YES];
+        }
+    }
+    self.previousSelectedViewController = viewController;
 }
 
 #pragma mark Notifications

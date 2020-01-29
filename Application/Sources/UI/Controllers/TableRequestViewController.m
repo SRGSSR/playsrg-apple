@@ -294,6 +294,13 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
+#pragma mark Scrollable protocol
+
+- (void)scrollToTopAnimated:(BOOL)animated
+{
+    [self.tableView play_scrollToTopAnimated:animated];
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

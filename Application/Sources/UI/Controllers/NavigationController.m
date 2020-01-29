@@ -175,4 +175,15 @@
     }
 }
 
+#pragma mark Scrollable protocol
+
+- (void)scrollToTopAnimated:(BOOL)animated
+{
+    UIViewController *topViewController = self.topViewController;
+    if ([topViewController conformsToProtocol:@protocol(Scrollable)]) {
+        UIViewController<Scrollable> *scrollableTopViewController = (UIViewController<Scrollable> *)topViewController;
+        [scrollableTopViewController scrollToTopAnimated:animated];
+    }
+}
+
 @end

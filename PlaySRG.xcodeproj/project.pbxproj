@@ -2136,6 +2136,7 @@
 		6FB0BB3C20AEF5C4007C5D87 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Onboarding.strings; sourceTree = "<group>"; };
 		6FB0BB3F20AEF5D1007C5D87 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Onboarding.strings; sourceTree = "<group>"; };
 		6FB0BB4220AEF5DC007C5D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Onboarding.strings; sourceTree = "<group>"; };
+		6FB340D823E1A21500BC83BF /* Scrollable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scrollable.h; sourceTree = "<group>"; };
 		6FB3C1A51DBCE783008160B4 /* MediaPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPreviewViewController.h; sourceTree = "<group>"; };
 		6FB3C1A61DBCE783008160B4 /* MediaPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPreviewViewController.m; sourceTree = "<group>"; };
 		6FB3C1A71DBCE783008160B4 /* MediaPreviewViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MediaPreviewViewController.storyboard; sourceTree = "<group>"; };
@@ -3115,6 +3116,7 @@
 				6F4091FF22DCF43D005F3850 /* Previewing.m */,
 				6FF4D4DE23D5B07E008B981A /* UIVisualEffectView+PlaySRG.h */,
 				6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */,
+				6FB340D823E1A21500BC83BF /* Scrollable.h */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";

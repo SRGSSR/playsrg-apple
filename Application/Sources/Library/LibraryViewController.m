@@ -19,6 +19,7 @@
 #import "SettingsViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
+#import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "WatchLaterViewController.h"
 
@@ -221,6 +222,13 @@
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
 {
     return [self openApplicationSectionInfo:applicationSectionInfo animated:NO];
+}
+
+#pragma mark Scrollable protocol
+
+- (void)scrollToTopAnimated:(BOOL)animated
+{
+    [self.tableView play_scrollToTopAnimated:animated];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

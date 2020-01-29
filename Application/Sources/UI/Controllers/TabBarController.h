@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TabBarController : UITabBarController <ContainerContentInsets, UINavigationControllerDelegate>
+@interface TabBarController : UITabBarController <ContainerContentInsets, UITabBarControllerDelegate>
 
 /**
  *  Open the application section.

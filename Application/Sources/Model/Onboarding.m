@@ -32,7 +32,7 @@
         NSData *data = [NSData dataWithContentsOfFile:filePath];
         
         id JSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-        if (! JSON || ! [JSON isKindOfClass:NSArray.class]) {
+        if (! [JSON isKindOfClass:NSArray.class]) {
             s_onboardings = @[];
             return;
         }
