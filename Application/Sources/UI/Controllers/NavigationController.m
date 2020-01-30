@@ -108,22 +108,35 @@
 {
     [self.panGestureRecognizer.view removeGestureRecognizer:self.panGestureRecognizer];
     
-    [self setNavigationBarPosition:self.originalNavigationBarYPosition animated:YES];
+    [self setNavigationBarPosition:self.originalNavigationBarYPosition snap:NO animated:YES];
 }
 
-- (void)setNavigationBarPosition:(CGFloat)position animated:(BOOL)animated
+- (void)setNavigationBarPosition:(CGFloat)position snap:(BOOL)snap animated:(BOOL)animated
 {
-    CGFloat navigationBarHeight = CGRectGetHeight(self.navigationBar.frame);
-    CGFloat progress = fmax(fmin((self.originalNavigationBarYPosition - position) / navigationBarHeight, 1.f), 0.f);
+    void (^animations)(void) = ^{
+        CGFloat navigationBarHeight = CGRectGetHeight(self.navigationBar.frame);
+        
+        // 0 = Entirely visible, 1 = Entirely collapsed
+        CGFloat progress = fmax(fmin((self.originalNavigationBarYPosition - position) / navigationBarHeight, 1.f), 0.f);
+        if (snap) {
+            progress = (progress <= 0.5f) ? 0.f : 1.f;
+        }
+        
+        self.navigationBar.frame = CGRectMake(CGRectGetMinX(self.navigationBar.frame), self.originalNavigationBarYPosition - progress * navigationBarHeight, CGRectGetWidth(self.navigationBar.frame), navigationBarHeight);
+        
+        // TODO: - Fix opacity (flickering without titleView)
+        UIView *navigationBarContentView = self.navigationBar.subviews.lastObject;
+        [navigationBarContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
+            view.alpha = 1.f - progress;
+        }];
+    };
     
-    self.navigationBar.frame = CGRectMake(CGRectGetMinX(self.navigationBar.frame), self.originalNavigationBarYPosition - progress * navigationBarHeight, CGRectGetWidth(self.navigationBar.frame), navigationBarHeight);
-    
-    // TODO: - Fix opacity (flickering without titleView)
-    //       - Snap to nearest 0 / 1 value
-    UIView *navigationBarContentView = self.navigationBar.subviews.lastObject;
-    [navigationBarContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
-        view.alpha = 1.f - progress;
-    }];
+    if (animated) {
+        [UIView animateWithDuration:0.1 animations:animations];
+    }
+    else {
+        animations();
+    }
 }
 
 #pragma mark UI updates
@@ -250,16 +263,14 @@
         }
             
         case UIGestureRecognizerStateChanged: {
-            [self setNavigationBarPosition:self.lastNavigationBarYPosition + yOffset animated:NO];
+            [self setNavigationBarPosition:self.lastNavigationBarYPosition + yOffset snap:NO animated:NO];
             break;
         }
             
+        case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateFailed:
         case UIGestureRecognizerStateCancelled: {
-            break;
-        }
-            
-        case UIGestureRecognizerStateEnded: {
+            [self setNavigationBarPosition:self.lastNavigationBarYPosition + yOffset snap:YES animated:YES];
             break;
         }
             
