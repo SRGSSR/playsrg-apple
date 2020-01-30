@@ -9,6 +9,7 @@
 #import "ApplicationSettings.h"
 #import "ChannelService.h"
 #import "LiveMediaCollectionViewCell.h"
+#import "NavigationController.h"
 #import "PageViewController.h"
 #import "SmartTimer.h"
 #import "UIColor+PlaySRG.h"
@@ -98,6 +99,11 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     [super viewWillAppear:animated];
     
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController enableHideBarOnSwipeWithScrollView:self.collectionView];
+    }
+    
     @weakify(self)
     self.updateTimer = [SmartTimer timerWithTimeInterval:5. repeats:YES background:NO queue:NULL block:^{
         @strongify(self)
@@ -108,6 +114,11 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController disableHideBarOnSwipeAnimated:YES];
+    }
     
     self.updateTimer = nil;       // Invalidate timer
 }
