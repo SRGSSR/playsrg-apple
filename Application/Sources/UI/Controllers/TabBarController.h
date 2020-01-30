@@ -6,12 +6,13 @@
 
 #import "ApplicationSectionInfo.h"
 #import "ContentInsets.h"
+#import "PlayApplicationNavigation.h"
 
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TabBarController : UITabBarController <ContainerContentInsets, UITabBarControllerDelegate>
+@interface TabBarController : UITabBarController <ContainerContentInsets, PlayApplicationNavigation, UITabBarControllerDelegate>
 
 /**
  *  Open the application section.
