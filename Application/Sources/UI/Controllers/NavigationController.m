@@ -16,11 +16,14 @@
 
 @property (nonatomic) UIStatusBarStyle statusBarStyle;
 
-
 @property (nonatomic, weak) UIPanGestureRecognizer *panGestureRecognizer;
+
+@property (nonatomic, readonly) UIView *contentLayoutView;
 
 @property (nonatomic) CGFloat lastNavigationBarYPosition;
 @property (nonatomic) CGFloat originalNavigationBarYPosition;
+@property (nonatomic) CGFloat originalContentViewYPosition;
+@property (nonatomic) CGFloat originalContentViewHeight;
 
 @end
 
@@ -66,6 +69,13 @@
 
 #pragma clang diagnostic pop
 
+#pragma mark Getters and setters
+
+- (UIView *)contentLayoutView
+{
+    return self.view.subviews.firstObject;
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLayoutSubviews
@@ -73,6 +83,8 @@
     [super viewDidLayoutSubviews];
     
     self.originalNavigationBarYPosition = CGRectGetMinY(self.navigationBar.frame);
+    self.originalContentViewYPosition = CGRectGetMinY(self.contentLayoutView.frame);
+    self.originalContentViewHeight = CGRectGetHeight(self.contentLayoutView.frame);
 }
 
 #pragma mark Status bar
@@ -122,9 +134,13 @@
             progress = (progress <= 0.5f) ? 0.f : 1.f;
         }
         
-        self.navigationBar.frame = CGRectMake(CGRectGetMinX(self.navigationBar.frame), self.originalNavigationBarYPosition - progress * navigationBarHeight, CGRectGetWidth(self.navigationBar.frame), navigationBarHeight);
+        CGFloat yOffset = progress * navigationBarHeight;
+        self.navigationBar.frame = CGRectMake(CGRectGetMinX(self.navigationBar.frame), self.originalNavigationBarYPosition - yOffset, CGRectGetWidth(self.navigationBar.frame), navigationBarHeight);
+        self.contentLayoutView.frame = CGRectMake(CGRectGetMinX(self.contentLayoutView.frame), self.originalContentViewYPosition - yOffset, CGRectGetWidth(self.contentLayoutView.frame), self.originalContentViewHeight + yOffset);
         
         // TODO: - Fix opacity (flickering without titleView)
+        //       - Fix navbar sometimes not opening with every pan (swipe up & down in a row; probably something with gesture
+        //         recognizer states; layout does not break, though)
         UIView *navigationBarContentView = self.navigationBar.subviews.lastObject;
         [navigationBarContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
             view.alpha = 1.f - progress;
