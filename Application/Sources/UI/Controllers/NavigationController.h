@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Standard navigation controller with Play look-and-feel and behavior.
  */
-@interface NavigationController : UINavigationController <PlayApplicationNavigation>
+@interface NavigationController : UINavigationController <PlayApplicationNavigation, UIGestureRecognizerDelegate>
 
 /**
  *  Create a navigation controller with standard customizable look-and-feel.
@@ -38,6 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Update the navigation bar, optionally branded for a radio channel. If none is provided, a default look-and-feel is applied.
 */
 - (void)updateWithRadioChannel:(nullable RadioChannel *)radioChannel animated:(BOOL)animated;
+
+- (void)enableHideBarOnSwipeWithScrollView:(UIScrollView *)scrollView;
+- (void)disableHideBarOnSwipe;
 
 @end
 

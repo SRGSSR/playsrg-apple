@@ -77,6 +77,22 @@
     return [self.topViewController preferredStatusBarUpdateAnimation];
 }
 
+#pragma mark Navigation bar
+
+- (void)enableHideBarOnSwipeWithScrollView:(UIScrollView *)scrollView
+{
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    panGestureRecognizer.maximumNumberOfTouches = 1;
+    panGestureRecognizer.delegate = self;
+    panGestureRecognizer.cancelsTouchesInView = NO;
+    [scrollView addGestureRecognizer:panGestureRecognizer];
+}
+
+- (void)disableHideBarOnSwipe
+{
+    
+}
+
 #pragma mark UI updates
 
 - (void)updateWithTintColor:(UIColor *)tintColor backgroundColor:(UIColor *)backgroundColor statusBarStyle:(UIStatusBarStyle)statusBarStyle
@@ -173,6 +189,26 @@
     else {
         return NO;
     }
+}
+
+#pragma mark UIGestureRecognizerDelegate protocol
+
+- (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    CGPoint velocity = [gestureRecognizer velocityInView:gestureRecognizer.view];
+    return fabs(velocity.y) > fabs(velocity.x);
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+#pragma mark Gesture reognizers
+
+- (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    NSLog(@"---> Pan");
 }
 
 @end
