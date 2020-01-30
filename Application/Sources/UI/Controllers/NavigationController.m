@@ -16,6 +16,12 @@
 
 @property (nonatomic) UIStatusBarStyle statusBarStyle;
 
+
+@property (nonatomic, weak) UIPanGestureRecognizer *panGestureRecognizer;
+
+@property (nonatomic) CGFloat lastNavigationBarYPosition;
+@property (nonatomic) CGFloat originalNavigationBarYPosition;
+
 @end
 
 @implementation NavigationController
@@ -60,6 +66,15 @@
 
 #pragma clang diagnostic pop
 
+#pragma mark View lifecycle
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    self.originalNavigationBarYPosition = CGRectGetMinY(self.navigationBar.frame);
+}
+
 #pragma mark Status bar
 
 - (BOOL)prefersStatusBarHidden
@@ -86,11 +101,29 @@
     panGestureRecognizer.delegate = self;
     panGestureRecognizer.cancelsTouchesInView = NO;
     [scrollView addGestureRecognizer:panGestureRecognizer];
+    self.panGestureRecognizer = panGestureRecognizer;
 }
 
-- (void)disableHideBarOnSwipe
+- (void)disableHideBarOnSwipeAnimated:(BOOL)animated
 {
+    [self.panGestureRecognizer.view removeGestureRecognizer:self.panGestureRecognizer];
     
+    [self setNavigationBarPosition:self.originalNavigationBarYPosition animated:YES];
+}
+
+- (void)setNavigationBarPosition:(CGFloat)position animated:(BOOL)animated
+{
+    CGFloat navigationBarHeight = CGRectGetHeight(self.navigationBar.frame);
+    CGFloat progress = fmax(fmin((self.originalNavigationBarYPosition - position) / navigationBarHeight, 1.f), 0.f);
+    
+    self.navigationBar.frame = CGRectMake(CGRectGetMinX(self.navigationBar.frame), self.originalNavigationBarYPosition - progress * navigationBarHeight, CGRectGetWidth(self.navigationBar.frame), navigationBarHeight);
+    
+    // TODO: - Fix opacity (flickering without titleView)
+    //       - Snap to nearest 0 / 1 value
+    UIView *navigationBarContentView = self.navigationBar.subviews.lastObject;
+    [navigationBarContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
+        view.alpha = 1.f - progress;
+    }];
 }
 
 #pragma mark UI updates
@@ -208,7 +241,32 @@
 
 - (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer
 {
-    NSLog(@"---> Pan");
+    CGFloat yOffset = [gestureRecognizer translationInView:gestureRecognizer.view].y;
+    
+    switch (gestureRecognizer.state) {
+        case UIGestureRecognizerStateBegan: {
+            self.lastNavigationBarYPosition = CGRectGetMinY(self.navigationBar.frame);
+            break;
+        }
+            
+        case UIGestureRecognizerStateChanged: {
+            [self setNavigationBarPosition:self.lastNavigationBarYPosition + yOffset animated:NO];
+            break;
+        }
+            
+        case UIGestureRecognizerStateFailed:
+        case UIGestureRecognizerStateCancelled: {
+            break;
+        }
+            
+        case UIGestureRecognizerStateEnded: {
+            break;
+        }
+            
+        default: {
+            break;
+        }
+    }
 }
 
 @end

@@ -151,13 +151,13 @@
     }
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidDisappear:animated];
+    [super viewWillDisappear:animated];
     
     if ([self.navigationController isKindOfClass:NavigationController.class]) {
         NavigationController *navigationController = (NavigationController *)self.navigationController;
-        [navigationController disableHideBarOnSwipe];
+        [navigationController disableHideBarOnSwipeAnimated:YES];
     }
 }
 
