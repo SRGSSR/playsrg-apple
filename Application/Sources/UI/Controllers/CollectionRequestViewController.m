@@ -8,6 +8,7 @@
 
 #import "Banner.h"
 #import "CollectionLoadMoreFooterView.h"
+#import "NavigationController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
@@ -87,6 +88,26 @@
     //       provide a way to update its layout without reloading it entirely, which is currently not the case and
     //       generates such gliches.
     [self.collectionView reloadEmptyDataSet];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController enableHideBarOnSwipeWithScrollView:self.collectionView];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController disableHideBarOnSwipeAnimated:YES];
+    }
 }
 
 #pragma mark Responsiveness

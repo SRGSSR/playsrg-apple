@@ -7,6 +7,7 @@
 #import "TableRequestViewController.h"
 
 #import "Banner.h"
+#import "NavigationController.h"
 #import "TableLoadMoreFooterView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -83,6 +84,26 @@
     
     // Force a layout update for the empty view to that it takes into account updated content insets appropriately.
     [self.tableView reloadEmptyDataSet];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController enableHideBarOnSwipeWithScrollView:self.tableView];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController disableHideBarOnSwipeAnimated:YES];
+    }
 }
 
 #pragma mark Accessibility
