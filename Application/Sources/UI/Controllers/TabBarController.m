@@ -32,8 +32,6 @@ static const CGFloat MiniPlayerOffset = 5.f;
 
 @property (nonatomic, weak) MiniPlayerView *miniPlayerView;
 
-@property (nonatomic, weak) UIViewController *previousSelectedViewController;
-
 @end
 
 @implementation TabBarController
@@ -347,15 +345,15 @@ static const CGFloat MiniPlayerOffset = 5.f;
 
 #pragma mark UITabBarControllerDelegate protocol
 
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if (self.previousSelectedViewController == viewController) {
+    if (viewController == self.selectedViewController) {
         if ([viewController conformsToProtocol:@protocol(Scrollable)]) {
             UIViewController<Scrollable> *scrollableViewController = (UIViewController<Scrollable> *)viewController;
             [scrollableViewController scrollToTopAnimated:YES];
         }
     }
-    self.previousSelectedViewController = viewController;
+    return YES;
 }
 
 #pragma mark Notifications

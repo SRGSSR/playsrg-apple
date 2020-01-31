@@ -179,10 +179,12 @@
 
 - (void)scrollToTopAnimated:(BOOL)animated
 {
-    UIViewController *topViewController = self.topViewController;
-    if ([topViewController conformsToProtocol:@protocol(Scrollable)]) {
-        UIViewController<Scrollable> *scrollableTopViewController = (UIViewController<Scrollable> *)topViewController;
-        [scrollableTopViewController scrollToTopAnimated:animated];
+    if (self.viewControllers.count == 1) {
+        UIViewController *rootViewController = self.viewControllers.firstObject;
+        if ([rootViewController conformsToProtocol:@protocol(Scrollable)]) {
+            UIViewController<Scrollable> *scrollableRootViewController = (UIViewController<Scrollable> *)rootViewController;
+            [scrollableRootViewController scrollToTopAnimated:animated];
+        }
     }
 }
 
