@@ -237,12 +237,12 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         CGFloat height = [LiveMediaCollectionViewCell heightForMedia:media withWidth:width];
         return CGSizeMake(width, height);
     }
-    // Grid layout
+    // 2 columns grid layout
     else {
         CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 90.f : 120.f;
         
-        static const CGFloat kItemWidth = 210.f;
-        return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
+        CGFloat width = (CGRectGetWidth(collectionView.frame) - 3 * kLayoutHorizontalInset) / 2.f;
+        return CGSizeMake(width, ceilf(width * 9.f / 16.f + minTextHeight));
     }
 }
 
