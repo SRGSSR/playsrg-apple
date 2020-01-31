@@ -141,9 +141,23 @@
         // TODO: - Fix opacity (flickering without titleView)
         //       - Fix navbar sometimes not opening with every pan (swipe up & down in a row; probably something with gesture
         //         recognizer states; layout does not break, though)
-        UIView *navigationBarContentView = self.navigationBar.subviews.lastObject;
-        [navigationBarContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
-            view.alpha = 1.f - progress;
+        //       - Scrolls to top
+        //       - Issue if dismissing a modal in landscape on iPhone
+        //       - Better API so that everything can work with pages
+        CGFloat alpha = 1.f - progress;
+        [self.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (idx == 0) {
+                return;
+            }
+            
+            if ([view isKindOfClass:UISearchBar.class]) {
+                view.alpha = alpha;
+            }
+            else {
+                [view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull subview, NSUInteger idx, BOOL * _Nonnull stop) {
+                    subview.alpha = alpha;
+                }];
+            }
         }];
     };
     
