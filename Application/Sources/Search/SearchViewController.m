@@ -167,9 +167,24 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     [self updateSearchSettingsButton];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController enableHideBarOnSwipeWithScrollView:self.collectionView];
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController disableHideBarOnSwipeAnimated:YES];
+    }
     
     if ([self play_isMovingFromParentViewController]) {
         [self.searchController.searchBar resignFirstResponder];

@@ -99,6 +99,11 @@
 {
     [super viewWillAppear:animated];
     
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController enableHideBarOnSwipeWithScrollView:self.tableView];
+    }
+    
     [PushService.sharedService resetApplicationBadge];
     
     // Ensure correct latest notifications displayed
@@ -108,6 +113,11 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController disableHideBarOnSwipeAnimated:YES];
+    }
     
     if ([self play_isMovingFromParentViewController]) {
         [PushService.sharedService resetApplicationBadge];
