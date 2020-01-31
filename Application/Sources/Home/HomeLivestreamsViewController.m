@@ -101,7 +101,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     
     if ([self.navigationController isKindOfClass:NavigationController.class]) {
         NavigationController *navigationController = (NavigationController *)self.navigationController;
-        [navigationController enableHideBarOnSwipeWithScrollView:self.collectionView];
+        [navigationController enableHideNavigationBarOnSwipeWithScrollView:self.collectionView];
     }
     
     @weakify(self)
@@ -250,6 +250,17 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         static const CGFloat kItemWidth = 210.f;
         return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
     }
+}
+
+#pragma mark UIScrollViewDelegate protocol
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController showNavigationBarAnimated:YES];
+    }
+    return YES;
 }
 
 #pragma mark Notifications

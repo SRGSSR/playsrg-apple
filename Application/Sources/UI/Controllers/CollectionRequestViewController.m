@@ -96,7 +96,7 @@
     
     if ([self.navigationController isKindOfClass:NavigationController.class]) {
         NavigationController *navigationController = (NavigationController *)self.navigationController;
-        [navigationController enableHideBarOnSwipeWithScrollView:self.collectionView];
+        [navigationController enableHideNavigationBarOnSwipeWithScrollView:self.collectionView];
     }
 }
 
@@ -317,6 +317,15 @@
             && scrollView.contentOffset.y > scrollView.contentSize.height - kNumberOfScreens * CGRectGetHeight(scrollView.frame)) {
         [self loadNextPage];
     }
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController showNavigationBarAnimated:YES];
+    }
+    return YES;
 }
 
 #pragma mark Actions

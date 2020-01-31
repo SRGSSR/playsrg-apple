@@ -39,8 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)updateWithRadioChannel:(nullable RadioChannel *)radioChannel animated:(BOOL)animated;
 
-- (void)enableHideBarOnSwipeWithScrollView:(UIScrollView *)scrollView;
-- (void)disableHideBarOnSwipeAnimated:(BOOL)animated;
+- (void)enableHideNavigationBarOnSwipeWithScrollView:(UIScrollView *)scrollView;
+- (void)showNavigationBarAnimated:(BOOL)animated;
+- (void)disableHideNavigationBarOnSwipeAnimated:(BOOL)animated;
 
 @end
 

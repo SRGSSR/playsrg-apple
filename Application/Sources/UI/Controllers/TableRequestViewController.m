@@ -92,7 +92,7 @@
     
     if ([self.navigationController isKindOfClass:NavigationController.class]) {
         NavigationController *navigationController = (NavigationController *)self.navigationController;
-        [navigationController enableHideBarOnSwipeWithScrollView:self.tableView];
+        [navigationController enableHideNavigationBarOnSwipeWithScrollView:self.tableView];
     }
 }
 
@@ -305,6 +305,27 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
+#pragma mark UIScrollViewDelegate protocol
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // Start loading the next page when less than a few screen heights from the bottom
+    static const NSInteger kNumberOfScreens = 4;
+    if (! self.loading && ! self.lastRequestError
+            && scrollView.contentOffset.y > scrollView.contentSize.height - kNumberOfScreens * CGRectGetHeight(scrollView.frame)) {
+        [self loadNextPage];
+    }
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController showNavigationBarAnimated:YES];
+    }
+    return YES;
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -317,18 +338,6 @@
 {
     HLSMissingMethodImplementation();
     return UITableViewCell.new;
-}
-
-#pragma mark UIScrollViewDelegate protocol
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    // Start loading the next page when less than a few screen heights from the bottom
-    static const NSInteger kNumberOfScreens = 4;
-    if (! self.loading && ! self.lastRequestError
-            && scrollView.contentOffset.y > scrollView.contentSize.height - kNumberOfScreens * CGRectGetHeight(scrollView.frame)) {
-        [self loadNextPage];
-    }
 }
 
 #pragma mark Actions

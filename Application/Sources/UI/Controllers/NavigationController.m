@@ -106,7 +106,7 @@
 
 #pragma mark Navigation bar
 
-- (void)enableHideBarOnSwipeWithScrollView:(UIScrollView *)scrollView
+- (void)enableHideNavigationBarOnSwipeWithScrollView:(UIScrollView *)scrollView
 {
     if (self.panGestureRecognizer) {
         [self.panGestureRecognizer.view removeGestureRecognizer:self.panGestureRecognizer];
@@ -120,11 +120,15 @@
     self.panGestureRecognizer = panGestureRecognizer;
 }
 
-- (void)disableHideBarOnSwipeAnimated:(BOOL)animated
+- (void)showNavigationBarAnimated:(BOOL)animated
+{
+    [self setNavigationBarPosition:self.originalNavigationBarYPosition snap:NO animated:YES];
+}
+
+- (void)disableHideNavigationBarOnSwipeAnimated:(BOOL)animated
 {
     [self.panGestureRecognizer.view removeGestureRecognizer:self.panGestureRecognizer];
-    
-    [self setNavigationBarPosition:self.originalNavigationBarYPosition snap:NO animated:YES];
+    [self showNavigationBarAnimated:animated];
 }
 
 - (void)setNavigationBarPosition:(CGFloat)position snap:(BOOL)snap animated:(BOOL)animated

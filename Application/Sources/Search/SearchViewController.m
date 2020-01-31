@@ -173,7 +173,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     
     if ([self.navigationController isKindOfClass:NavigationController.class]) {
         NavigationController *navigationController = (NavigationController *)self.navigationController;
-        [navigationController enableHideBarOnSwipeWithScrollView:self.collectionView];
+        [navigationController enableHideNavigationBarOnSwipeWithScrollView:self.collectionView];
     }
 }
 
@@ -661,6 +661,17 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     else {
         return CGSizeZero;
     }
+}
+
+#pragma mark UIScrollViewDelegate protocol
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController showNavigationBarAnimated:YES];
+    }
+    return YES;
 }
 
 #pragma mark UISearchBarDelegate protocol

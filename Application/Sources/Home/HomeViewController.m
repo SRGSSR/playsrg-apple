@@ -147,7 +147,7 @@
     
     if ([self.navigationController isKindOfClass:NavigationController.class]) {
         NavigationController *navigationController = (NavigationController *)self.navigationController;
-        [navigationController enableHideBarOnSwipeWithScrollView:self.tableView];
+        [navigationController enableHideNavigationBarOnSwipeWithScrollView:self.tableView];
     }
 }
 
@@ -468,6 +468,17 @@
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
     return VerticalOffsetForEmptyDataSet(scrollView);
+}
+
+#pragma mark UIScrollViewDelegate protocol
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    if ([self.navigationController isKindOfClass:NavigationController.class]) {
+        NavigationController *navigationController = (NavigationController *)self.navigationController;
+        [navigationController showNavigationBarAnimated:YES];
+    }
+    return YES;
 }
 
 #pragma mark UITableViewDataSource protocol
