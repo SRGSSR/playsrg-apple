@@ -100,16 +100,6 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    if ([self.navigationController isKindOfClass:NavigationController.class]) {
-        NavigationController *navigationController = (NavigationController *)self.navigationController;
-        [navigationController disableHideBarOnSwipeAnimated:YES];
-    }
-}
-
 #pragma mark Responsiveness
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator

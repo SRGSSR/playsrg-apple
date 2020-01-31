@@ -108,6 +108,10 @@
 
 - (void)enableHideBarOnSwipeWithScrollView:(UIScrollView *)scrollView
 {
+    if (self.panGestureRecognizer) {
+        [self.panGestureRecognizer.view removeGestureRecognizer:self.panGestureRecognizer];
+    }
+    
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     panGestureRecognizer.maximumNumberOfTouches = 1;
     panGestureRecognizer.delegate = self;
@@ -143,7 +147,6 @@
         //         recognizer states; layout does not break, though)
         //       - Scrolls to top
         //       - Issue if dismissing a modal in landscape on iPhone
-        //       - Better API so that everything can work with pages
         CGFloat alpha = 1.f - progress;
         [self.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
             if (idx == 0) {

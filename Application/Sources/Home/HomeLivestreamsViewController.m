@@ -115,11 +115,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     [super viewDidDisappear:animated];
     
-    if ([self.navigationController isKindOfClass:NavigationController.class]) {
-        NavigationController *navigationController = (NavigationController *)self.navigationController;
-        [navigationController disableHideBarOnSwipeAnimated:YES];
-    }
-    
     self.updateTimer = nil;       // Invalidate timer
 }
 

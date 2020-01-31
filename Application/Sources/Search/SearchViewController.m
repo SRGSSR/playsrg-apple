@@ -181,11 +181,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     [super viewWillDisappear:animated];
     
-    if ([self.navigationController isKindOfClass:NavigationController.class]) {
-        NavigationController *navigationController = (NavigationController *)self.navigationController;
-        [navigationController disableHideBarOnSwipeAnimated:YES];
-    }
-    
     if ([self play_isMovingFromParentViewController]) {
         [self.searchController.searchBar resignFirstResponder];
     }
