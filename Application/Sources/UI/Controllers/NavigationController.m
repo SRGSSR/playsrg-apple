@@ -18,6 +18,8 @@
 
 @property (nonatomic, weak) UIPanGestureRecognizer *panGestureRecognizer;
 
+@property (nonatomic) BOOL loadedOnce;
+
 @property (nonatomic, readonly) UIView *contentLayoutView;
 
 @property (nonatomic) CGFloat lastNavigationBarYPosition;
@@ -82,9 +84,19 @@
 {
     [super viewDidLayoutSubviews];
     
-    self.originalNavigationBarYPosition = CGRectGetMinY(self.navigationBar.frame);
-    self.originalContentViewYPosition = CGRectGetMinY(self.contentLayoutView.frame);
-    self.originalContentViewHeight = CGRectGetHeight(self.contentLayoutView.frame);
+    if (! self.loadedOnce) {
+        [self updateOriginalNavigationMetrics];
+        self.loadedOnce = YES;
+    }
+}
+
+#pragma mark Rotation
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [self updateOriginalNavigationMetrics];
 }
 
 #pragma mark Status bar
@@ -105,6 +117,13 @@
 }
 
 #pragma mark Navigation bar
+
+- (void)updateOriginalNavigationMetrics
+{
+    self.originalNavigationBarYPosition = CGRectGetMinY(self.navigationBar.frame);
+    self.originalContentViewYPosition = CGRectGetMinY(self.contentLayoutView.frame);
+    self.originalContentViewHeight = CGRectGetHeight(self.contentLayoutView.frame);
+}
 
 - (void)enableHideNavigationBarOnSwipeWithScrollView:(UIScrollView *)scrollView
 {
@@ -149,7 +168,6 @@
         // TODO: - Fix opacity (flickering without titleView)
         //       - Fix navbar sometimes not opening with every pan (swipe up & down in a row; probably something with gesture
         //         recognizer states; layout does not break, though)
-        //       - Scrolls to top
         //       - Issue if dismissing a modal in landscape on iPhone
         CGFloat alpha = 1.f - progress;
         [self.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
