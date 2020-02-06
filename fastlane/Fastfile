@@ -370,7 +370,7 @@ platform :ios do
   #   )
   # end
 
-  # Share build number to the continus integration
+  # Share build number to the continuous integration
   def notify_build_number_to_ci
     return unless ENV['TEAMCITY_VERSION']
 
