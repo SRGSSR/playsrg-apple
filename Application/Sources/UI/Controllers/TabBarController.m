@@ -288,6 +288,16 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
             }
         }];
         
+        CALayer *miniPlayerLayer = self.miniPlayerView.layer;
+        if (UIAccessibilityIsVoiceOverRunning()) {
+            miniPlayerLayer.cornerRadius = 0.f;
+            miniPlayerLayer.masksToBounds = NO;
+        }
+        else {
+            miniPlayerLayer.cornerRadius = 4.f;
+            miniPlayerLayer.masksToBounds = YES;
+        }
+        
         [self play_setNeedsContentInsetsUpdate];
     };
     
