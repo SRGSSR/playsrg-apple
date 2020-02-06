@@ -218,12 +218,6 @@
     return YES;
 }
 
-- (UIAccessibilityTraits)accessibilityTraits
-{
-    // Treat as header for quick navigation to the mini player
-    return UIAccessibilityTraitHeader;
-}
-
 - (NSString *)accessibilityLabel
 {
     if (! self.media) {
