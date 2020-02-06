@@ -31,7 +31,6 @@
 @property (nonatomic) SRGLetterboxController *controller;
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
-@property (nonatomic, assign) BOOL liveOnly;
 
 // FIXME: Do not use SRGPlaybackButton! To have it work requires exposing private implementation details (see below)
 //        and why this can work is difficult to understand (since a hidden action calling -togglePlayPause on the media
@@ -244,10 +243,7 @@
     }
     
     BOOL isLiveOnly = (self.controller.mediaPlayerController.streamType == SRGMediaPlayerStreamTypeLive);
-    if (self.liveOnly != isLiveOnly) {
-        self.playbackButton.pauseImage = isLiveOnly ? [UIImage imageNamed:@"stop-50"] : [UIImage imageNamed:@"pause-50"];
-        self.liveOnly = isLiveOnly;
-    }
+    self.playbackButton.pauseImage = isLiveOnly ? [UIImage imageNamed:@"stop-50"] : [UIImage imageNamed:@"pause-50"];
     
     [self updateProgress];
 }
