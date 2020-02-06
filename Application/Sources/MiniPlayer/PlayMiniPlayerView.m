@@ -6,6 +6,7 @@
 
 #import "PlayMiniPlayerView.h"
 
+#import "AccessibilityView.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
@@ -23,21 +24,19 @@
 #import <SRGLetterbox/SRGLetterbox.h>
 #import <libextobjc/libextobjc.h>
 
-@interface PlayMiniPlayerView ()
+@interface PlayMiniPlayerView () <AccessibilityViewDelegate, SRGPlaybackButtonDelegate>
 
 @property (nonatomic) SRGMedia *media;          // Latest media
 @property (nonatomic) SRGChannel *channel;      // Latest channel information, if any
 
 @property (nonatomic) SRGLetterboxController *controller;
 
+@property (nonatomic, weak) IBOutlet AccessibilityView *accessibilityView;
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
-// FIXME: Do not use SRGPlaybackButton! To have it work requires exposing private implementation details (see below)
-//        and why this can work is difficult to understand (since a hidden action calling -togglePlayPause on the media
-//        player controller exists and is used). Instead, write a Play SRG PlaybackButton. We could even think about moving
-//        this class to the Letterbox framework, but this requires some team discussion first.
 @property (nonatomic, weak) IBOutlet SRGPlaybackButton *playbackButton;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UIButton *closeButton;
 
 @property (nonatomic, weak) id periodicTimeObserver;
 
@@ -121,6 +120,9 @@
     self.progressView.progress = 0.f;
     self.progressView.progressTintColor = UIColor.redColor;
     
+    self.playbackButton.delegate = self;
+    self.closeButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label");
+    
     self.backgroundColor = UIColor.clearColor;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openFullScreenPlayer:)];
@@ -181,47 +183,9 @@
 
 #pragma mark Accessibility
 
-- (BOOL)isAccessibilityElement
+- (NSArray *)accessibilityElements
 {
-    return YES;
-}
-
-- (UIAccessibilityTraits)accessibilityTraits
-{
-    // Treat as header for quick navigation to the mini player
-    return UIAccessibilityTraitHeader;
-}
-
-- (NSString *)accessibilityLabel
-{
-    if (! self.media) {
-        return nil;
-    }
-    
-    NSString *format = (self.controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) ? PlaySRGAccessibilityLocalizedString(@"Now playing: %@", @"Mini player label") : PlaySRGAccessibilityLocalizedString(@"Recently played: %@", @"Mini player label");
-    
-    if (self.media.contentType == SRGContentTypeLivestream) {
-        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.channel.title];
-        SRGProgram *currentProgram = self.channel.currentProgram;
-        
-        NSDate *currentDate = self.controller.date;
-        if (currentProgram && (! currentDate || [currentProgram play_containsDate:currentDate])) {
-            [accessibilityLabel appendFormat:@", %@", currentProgram.title];
-        }
-        return accessibilityLabel.copy;
-    }
-    else {
-        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.media.title];
-        if (self.media.show.title && ! [self.media.title containsString:self.media.show.title]) {
-            [accessibilityLabel appendFormat:@", %@", self.media.show.title];
-        }
-        return accessibilityLabel.copy;
-    }
-}
-
-- (NSString *)accessibilityHint
-{
-    return PlaySRGAccessibilityLocalizedString(@"Plays the content.", @"Mini player action hint");
+    return @[ self.accessibilityView, self.playbackButton, self.closeButton ];
 }
 
 #pragma mark Data
@@ -242,12 +206,15 @@
         self.titleLabel.text = self.media.title;
     }
     
+    BOOL isLiveOnly = (self.controller.mediaPlayerController.streamType == SRGMediaPlayerStreamTypeLive);
+    self.playbackButton.pauseImage = isLiveOnly ? [UIImage imageNamed:@"stop-50"] : [UIImage imageNamed:@"pause-50"];
+    
     [self updateProgress];
 }
 
 - (void)updateProgress
 {
-    if (self.controller && [self.controller.media isEqual:self.media]) {
+    if ([self.controller.media isEqual:self.media]) {
         CMTimeRange timeRange = self.controller.timeRange;
         CMTime currentTime = self.controller.currentTime;
         
@@ -323,23 +290,60 @@
     [ChannelService.sharedService unregisterObserver:self forMedia:media];
 }
 
-#pragma mark Actions
+#pragma mark AccessibilityViewDelegate protocol
 
-// The button is an `SRGPlaybackButton` which automatically toggles play / pause
-- (IBAction)togglePlaybackButton:(id)sender
+- (NSString *)labelForAccessibilityView:(AccessibilityView *)accessibilityView
 {
     if (! self.media) {
+        return nil;
+    }
+    
+    NSString *format = (self.controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) ? PlaySRGAccessibilityLocalizedString(@"Now playing: %@", @"Mini player label") : PlaySRGAccessibilityLocalizedString(@"Recently played: %@", @"Mini player label");
+    
+    if (self.media.contentType == SRGContentTypeLivestream) {
+        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.channel.title];
+        SRGProgram *currentProgram = self.channel.currentProgram;
+        
+        NSDate *currentDate = self.controller.date;
+        if (currentProgram && (! currentDate || [currentProgram play_containsDate:currentDate])) {
+            [accessibilityLabel appendFormat:@", %@", currentProgram.title];
+        }
+        return accessibilityLabel.copy;
+    }
+    else {
+        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.media.title];
+        if (self.media.show.title && ! [self.media.title containsString:self.media.show.title]) {
+            [accessibilityLabel appendFormat:@", %@", self.media.show.title];
+        }
+        return accessibilityLabel.copy;
+    }
+}
+
+- (NSString *)hintForAccessibilityView:(AccessibilityView *)accessibilityView
+{
+    return PlaySRGAccessibilityLocalizedString(@"Opens the full screen player", @"Mini player action hint");
+}
+
+#pragma mark SRGPlaybackButtonDelegate protocol
+
+- (void)playbackButton:(SRGPlaybackButton *)playbackButton didPressInState:(SRGPlaybackButtonState)state
+{
+    SRGMedia *media = self.media;
+    if (! media) {
         return;
     }
     
-    // If a controller is readily available, use it
-    SRGMedia *media = self.media;
     SRGPosition *position = HistoryResumePlaybackPositionForMedia(media);
     SRGLetterboxController *controller = self.controller;
     
     // If a controller is readily available, use it
     if (controller) {
-        [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
+        if (! [media isEqual:controller.media]) {
+            [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
+        }
+        else {
+            [controller togglePlayPause];
+        }
     }
     // Otherwise use a fresh instance and enable it with the service. The mini player observes service controller changes
     // and will automatically be updated
@@ -355,6 +359,19 @@
         [self.nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }
+
+- (NSString *)playbackButton:(SRGPlaybackButton *)playbackButton accessibilityLabelForState:(SRGPlaybackButtonState)state
+{
+    if (state == SRGPlaybackButtonStatePause) {
+        BOOL isLiveOnly = (self.controller.mediaPlayerController.streamType == SRGMediaPlayerStreamTypeLive);
+        return isLiveOnly ? PlaySRGAccessibilityLocalizedString(@"Stop", @"Stop button label") : nil;
+    }
+    else {
+        return nil;
+    }
+}
+
+#pragma mark Actions
 
 - (IBAction)close:(id)sender
 {

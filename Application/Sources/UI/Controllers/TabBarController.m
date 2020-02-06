@@ -26,11 +26,12 @@
 #import <SRGIdentity/SRGIdentity.h>
 
 static const CGFloat MiniPlayerHeight = 50.f;
-static const CGFloat MiniPlayerOffset = 5.f;
+static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 @interface TabBarController ()
 
 @property (nonatomic, weak) MiniPlayerView *miniPlayerView;
+@property (nonatomic, readonly) CGFloat miniPlayerOffset;
 
 @end
 
@@ -120,6 +121,13 @@ static const CGFloat MiniPlayerOffset = 5.f;
     return self;
 }
 
+#pragma mark Getters and setters
+
+- (CGFloat)miniPlayerOffset
+{
+    return UIAccessibilityIsVoiceOverRunning() ? 0.f : MiniPlayerDefaultOffset;
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -157,6 +165,10 @@ static const CGFloat MiniPlayerOffset = 5.f;
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationDidBecomeActive:)
                                                name:UIApplicationDidBecomeActiveNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(accessibilityVoiceOverStatusChanged:)
+                                               name:UIAccessibilityVoiceOverStatusChanged
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(didReceiveNotification:)
@@ -239,16 +251,16 @@ static const CGFloat MiniPlayerOffset = 5.f;
     void (^animations)(void) = ^{
         [self.miniPlayerView mas_remakeConstraints:^(MASConstraintMaker *make) {
             if (@available(iOS 11, *)) {
-                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-MiniPlayerOffset);
+                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
             }
             else {
-                make.right.equalTo(self.view).with.offset(-MiniPlayerOffset);
+                make.right.equalTo(self.view).with.offset(-self.miniPlayerOffset);
             }
             
-            if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            if (! UIAccessibilityIsVoiceOverRunning() && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
                 // Use 1/3 of the space, minimum of 500 pixels. If the player cannot fit in 80% of the screen,
                 // use all available space.
-                CGFloat availableWidth = CGRectGetWidth(self.view.frame) - 2 * MiniPlayerOffset;
+                CGFloat availableWidth = CGRectGetWidth(self.view.frame) - 2 * self.miniPlayerOffset;
                 CGFloat width = fmaxf(availableWidth / 3.f, 500.f);
                 if (width > 0.8f * availableWidth) {
                     width = availableWidth;
@@ -257,24 +269,34 @@ static const CGFloat MiniPlayerOffset = 5.f;
             }
             else {
                 if (@available(iOS 11, *)) {
-                    make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).with.offset(MiniPlayerOffset);
-                    make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-MiniPlayerOffset);
+                    make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).with.offset(self.miniPlayerOffset);
+                    make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
                 }
                 else {
-                    make.left.equalTo(self.view).with.offset(MiniPlayerOffset);
-                    make.right.equalTo(self.view).with.offset(-MiniPlayerOffset);
+                    make.left.equalTo(self.view).with.offset(self.miniPlayerOffset);
+                    make.right.equalTo(self.view).with.offset(-self.miniPlayerOffset);
                 }
             }
             
             if (self.miniPlayerView.active) {
                 make.height.equalTo(@(MiniPlayerHeight));
-                make.bottom.equalTo(self.tabBar.mas_top).with.offset(-MiniPlayerOffset);
+                make.bottom.equalTo(self.tabBar.mas_top).with.offset(-self.miniPlayerOffset);
             }
             else {
                 make.height.equalTo(@0);
                 make.bottom.equalTo(self.tabBar.mas_top);
             }
         }];
+        
+        CALayer *miniPlayerLayer = self.miniPlayerView.layer;
+        if (UIAccessibilityIsVoiceOverRunning()) {
+            miniPlayerLayer.cornerRadius = 0.f;
+            miniPlayerLayer.masksToBounds = NO;
+        }
+        else {
+            miniPlayerLayer.cornerRadius = 4.f;
+            miniPlayerLayer.masksToBounds = YES;
+        }
         
         [self play_setNeedsContentInsetsUpdate];
     };
@@ -324,7 +346,7 @@ static const CGFloat MiniPlayerOffset = 5.f;
 
 - (UIEdgeInsets)play_additionalContentInsets
 {
-    return UIEdgeInsetsMake(0.f, 0.f, self.miniPlayerView.active ? (MiniPlayerHeight + MiniPlayerOffset) : 0.f, 0.f);
+    return UIEdgeInsetsMake(0.f, 0.f, self.miniPlayerView.active ? (MiniPlayerHeight + self.miniPlayerOffset) : 0.f, 0.f);
 }
 
 #pragma mark PlayApplicationNavigation protocol
@@ -364,6 +386,11 @@ static const CGFloat MiniPlayerOffset = 5.f;
     //   - Dismissal of the initial system alert (displayed once at most), asking the user to enable push notifications.
     //   - Returning from system settings, where the user might have updated push notification authorizations.
     [self updateLibraryTabBarItem];
+}
+
+- (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
+{
+    [self updateLayoutAnimated:YES];
 }
 
 - (void)didReceiveNotification:(NSNotification *)notification

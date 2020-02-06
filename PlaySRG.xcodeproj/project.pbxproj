@@ -949,6 +949,16 @@
 		6F4760981EB37DF2003021EA /* UIStackView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760731EB37D60003021EA /* UIStackView+PlaySRG.m */; };
 		6F4760991EB37DF2003021EA /* UIViewController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */; };
 		6F47609A1EB37DF2003021EA /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
+		6F4843CC23EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
+		6F4843CD23EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
+		6F4843CE23EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
+		6F4843CF23EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
+		6F4843D023EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
+		6F4843D323EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843D223EC4D4D00868F78 /* GoogleCastPlaybackButton.m */; };
+		6F4843D423EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843D223EC4D4D00868F78 /* GoogleCastPlaybackButton.m */; };
+		6F4843D523EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843D223EC4D4D00868F78 /* GoogleCastPlaybackButton.m */; };
+		6F4843D623EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843D223EC4D4D00868F78 /* GoogleCastPlaybackButton.m */; };
+		6F4843D723EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843D223EC4D4D00868F78 /* GoogleCastPlaybackButton.m */; };
 		6F4855A91E3A38D600B0141C /* SRGLetterboxDesignables.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4855A81E3A38D600B0141C /* SRGLetterboxDesignables.m */; };
 		6F488ACB22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F488ACA22EED363002B1150 /* PlayAccessibilityFormatter.m */; };
 		6F488ACC22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F488ACA22EED363002B1150 /* PlayAccessibilityFormatter.m */; };
@@ -2047,6 +2057,10 @@
 		6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PlaySRG.m"; sourceTree = "<group>"; };
 		6F4760761EB37D60003021EA /* UIWindow+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+PlaySRG.h"; sourceTree = "<group>"; };
 		6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+PlaySRG.m"; sourceTree = "<group>"; };
+		6F4843CA23EC3ADF00868F78 /* AccessibilityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccessibilityView.h; sourceTree = "<group>"; };
+		6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccessibilityView.m; sourceTree = "<group>"; };
+		6F4843D123EC4D4D00868F78 /* GoogleCastPlaybackButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleCastPlaybackButton.h; sourceTree = "<group>"; };
+		6F4843D223EC4D4D00868F78 /* GoogleCastPlaybackButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleCastPlaybackButton.m; sourceTree = "<group>"; };
 		6F4855A81E3A38D600B0141C /* SRGLetterboxDesignables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGLetterboxDesignables.m; sourceTree = "<group>"; };
 		6F488AC922EED363002B1150 /* PlayAccessibilityFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayAccessibilityFormatter.h; sourceTree = "<group>"; };
 		6F488ACA22EED363002B1150 /* PlayAccessibilityFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayAccessibilityFormatter.m; sourceTree = "<group>"; };
@@ -2659,6 +2673,8 @@
 				6FD633DB1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.h */,
 				6FD633DC1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m */,
 				6FD633DD1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib */,
+				6F4843D123EC4D4D00868F78 /* GoogleCastPlaybackButton.h */,
+				6F4843D223EC4D4D00868F78 /* GoogleCastPlaybackButton.m */,
 				6FD633E81FFD151000875BE5 /* MiniPlayerView.h */,
 				6FD633E91FFD151000875BE5 /* MiniPlayerView.m */,
 				086BDE121EA63D3800965F45 /* PlayMiniPlayerView.h */,
@@ -3124,6 +3140,8 @@
 		6F475FA81EB37BC6003021EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6F4843CA23EC3ADF00868F78 /* AccessibilityView.h */,
+				6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */,
 				6F475FB21EB37BC6003021EA /* Banner.h */,
 				6F475FB31EB37BC6003021EA /* Banner.m */,
 				6F475FA91EB37BC6003021EA /* CollectionLoadMoreFooterView.h */,
@@ -5657,6 +5675,7 @@
 				6F0A416F1F6FAB6E000533E7 /* Calendar.m in Sources */,
 				6F475FD21EB37BC6003021EA /* PageViewController.m in Sources */,
 				6F4C673E1EA6115C006A0A3B /* SearchViewController.m in Sources */,
+				6F4843D323EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F340F52220DA99B00778CA3 /* History.m in Sources */,
 				086320FB2258C6D000C719A6 /* WatchLaterViewController.m in Sources */,
 				0875852223A0025F00FA7207 /* LibraryViewController.m in Sources */,
@@ -5739,6 +5758,7 @@
 				E65FB20B1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6F06E0A41DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08AF9480217D27E40028B082 /* ActivityItemSource.m in Sources */,
+				6F4843CC23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6F12DB4621A3EFBF0054879D /* HistoryTableViewCell.m in Sources */,
 				6FA9ECBA20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */,
 				08564B1D1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
@@ -5832,6 +5852,8 @@
 				6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA012201148250070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4D722D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
+				6F4843CD23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
+				6F4843D423EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				081220C21DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1B20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				6F7EEBDF22DC40B7005E5A97 /* SearchBar.m in Sources */,
@@ -5992,6 +6014,8 @@
 				6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4D922D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
+				6F4843CE23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
+				6F4843D523EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				081220C31DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1C20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				6F7EEBE022DC40B7005E5A97 /* SearchBar.m in Sources */,
@@ -6152,6 +6176,8 @@
 				6FC1FA8B2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA014201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4DB22D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
+				6F4843CF23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
+				6F4843D623EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				081220C41DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1D20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				6F7EEBE122DC40B7005E5A97 /* SearchBar.m in Sources */,
@@ -6312,6 +6338,8 @@
 				6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				089EA015201148270070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4DD22D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
+				6F4843D023EC3ADF00868F78 /* AccessibilityView.m in Sources */,
+				6F4843D723EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				081220C51DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1E20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				6F7EEBE222DC40B7005E5A97 /* SearchBar.m in Sources */,
