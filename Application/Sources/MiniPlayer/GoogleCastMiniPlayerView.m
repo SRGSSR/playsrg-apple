@@ -7,6 +7,7 @@
 #import "GoogleCastMiniPlayerView.h"
 
 #import "AccessibilityView.h"
+#import "GoogleCastPlaybackButton.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
@@ -18,7 +19,7 @@
 
 @property (nonatomic, weak) IBOutlet AccessibilityView *accessibilityView;
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
-@property (nonatomic, weak) IBOutlet GCKUIMultistateButton *playbackButton;
+@property (nonatomic, weak) IBOutlet GoogleCastPlaybackButton *playbackButton;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
 @end
