@@ -466,7 +466,7 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 160b3cd
+name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 5492651
 
 name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
@@ -478,17 +478,17 @@ name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: b1c8d80
 
 name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 8f157cc
 
-name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: cf07630
+name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: ba6c8bb
 
 name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: 3277989
+name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: f577365
 
 name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: bb999ab
 
 name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: ae95383
 
-name: tagcommander-src-apple, nameSpecified: , owner: SRGSSR, version: dc4da5d
+name: tagcommander-apple, nameSpecified: , owner: SRGSSR, version: 4.5.4_4.4.1_srg1
 
 name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: v2.1.2_srg1
 
