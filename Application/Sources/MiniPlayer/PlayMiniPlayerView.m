@@ -254,7 +254,7 @@
 
 - (void)updateProgress
 {
-    if (self.controller && [self.controller.media isEqual:self.media]) {
+    if ([self.controller.media isEqual:self.media]) {
         CMTimeRange timeRange = self.controller.timeRange;
         CMTime currentTime = self.controller.currentTime;
         
