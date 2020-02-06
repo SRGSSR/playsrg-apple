@@ -56,7 +56,7 @@
     [self addGestureRecognizer:tapGestureRecognizer];
     
     [self.playbackButton setImage:[UIImage imageNamed:@"pause-50"] forButtonState:GCKUIButtonStatePlay];
-    [self.playbackButton setImage:[UIImage imageNamed:@"stop-50"] forButtonState:GCKUIButtonStatePlayLive];
+    [self.playbackButton setImage:[UIImage imageNamed:@"pause-50"] forButtonState:GCKUIButtonStatePlayLive];
     [self.playbackButton setImage:[UIImage imageNamed:@"play-50"] forButtonState:GCKUIButtonStatePause];
     
     [NSNotificationCenter.defaultCenter addObserver:self
