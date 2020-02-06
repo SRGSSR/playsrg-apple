@@ -176,7 +176,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
             styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute-22"];
             styleAttributes.pauseImage = [UIImage imageNamed:@"pause-50"];
             styleAttributes.playImage = [UIImage imageNamed:@"play-50"];
-            styleAttributes.stopImage = [UIImage imageNamed:@"stop-50"];
+            styleAttributes.stopImage = [UIImage imageNamed:@"pause-50"];
             // The subtitlesTrackImage property is buggy (the original icon is displayed when highlighted)
         });
     }
