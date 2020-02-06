@@ -24,7 +24,7 @@
 #import <SRGLetterbox/SRGLetterbox.h>
 #import <libextobjc/libextobjc.h>
 
-@interface PlayMiniPlayerView () <AccessibilityViewDelegate>
+@interface PlayMiniPlayerView () <AccessibilityViewDelegate, SRGPlaybackButtonDelegate>
 
 @property (nonatomic) SRGMedia *media;          // Latest media
 @property (nonatomic) SRGChannel *channel;      // Latest channel information, if any
@@ -120,42 +120,7 @@
     self.progressView.progress = 0.f;
     self.progressView.progressTintColor = UIColor.redColor;
     
-    @weakify(self)
-    self.playbackButton.action = ^{
-        @strongify(self)
-        
-        SRGMedia *media = self.media;
-        if (! media) {
-            return;
-        }
-        
-        SRGPosition *position = HistoryResumePlaybackPositionForMedia(media);
-        SRGLetterboxController *controller = self.controller;
-        
-        // If a controller is readily available, use it
-        if (controller) {
-            if (! [media isEqual:controller.media]) {
-                [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
-            }
-            else {
-                [controller togglePlayPause];
-            }
-        }
-        // Otherwise use a fresh instance and enable it with the service. The mini player observes service controller changes
-        // and will automatically be updated
-        else {
-            controller = [[SRGLetterboxController alloc] init];
-            ApplicationConfigurationApplyControllerSettings(controller);
-            [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
-            [SRGLetterboxService.sharedService enableWithController:controller pictureInPictureDelegate:nil];
-        }
-        
-        if (media.mediaType == SRGMediaTypeVideo && ! ApplicationSettingBackgroundVideoPlaybackEnabled()
-                && ! AVAudioSession.srg_isAirPlayActive && ! controller.pictureInPictureActive) {
-            [self.nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
-        }
-    };
-    
+    self.playbackButton.delegate = self;
     self.closeButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label");
     
     self.backgroundColor = UIColor.clearColor;
@@ -357,6 +322,53 @@
 - (NSString *)hintForAccessibilityView:(AccessibilityView *)accessibilityView
 {
     return PlaySRGAccessibilityLocalizedString(@"Opens the full screen player", @"Mini player action hint");
+}
+
+#pragma mark SRGPlaybackButtonDelegate protocol
+
+- (void)playbackButton:(SRGPlaybackButton *)playbackButton didPressInState:(SRGPlaybackButtonState)state
+{
+    SRGMedia *media = self.media;
+    if (! media) {
+        return;
+    }
+    
+    SRGPosition *position = HistoryResumePlaybackPositionForMedia(media);
+    SRGLetterboxController *controller = self.controller;
+    
+    // If a controller is readily available, use it
+    if (controller) {
+        if (! [media isEqual:controller.media]) {
+            [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
+        }
+        else {
+            [controller togglePlayPause];
+        }
+    }
+    // Otherwise use a fresh instance and enable it with the service. The mini player observes service controller changes
+    // and will automatically be updated
+    else {
+        controller = [[SRGLetterboxController alloc] init];
+        ApplicationConfigurationApplyControllerSettings(controller);
+        [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
+        [SRGLetterboxService.sharedService enableWithController:controller pictureInPictureDelegate:nil];
+    }
+    
+    if (media.mediaType == SRGMediaTypeVideo && ! ApplicationSettingBackgroundVideoPlaybackEnabled()
+            && ! AVAudioSession.srg_isAirPlayActive && ! controller.pictureInPictureActive) {
+        [self.nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
+    }
+}
+
+- (NSString *)playbackButton:(SRGPlaybackButton *)playbackButton accessibilityLabelForState:(SRGPlaybackButtonState)state
+{
+    if (state == SRGPlaybackButtonStatePause) {
+        BOOL isLiveOnly = (self.controller.mediaPlayerController.streamType == SRGMediaPlayerStreamTypeLive);
+        return isLiveOnly ? PlaySRGAccessibilityLocalizedString(@"Stop", @"Stop button label") : nil;
+    }
+    else {
+        return nil;
+    }
 }
 
 #pragma mark Actions
