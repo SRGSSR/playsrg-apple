@@ -32,10 +32,6 @@
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
-// FIXME: Do not use SRGPlaybackButton! To have it work requires exposing private implementation details (see below)
-//        and why this can work is difficult to understand (since a hidden action calling -togglePlayPause on the media
-//        player controller exists and is used). Instead, write a Play SRG PlaybackButton. We could even think about moving
-//        this class to the Letterbox framework, but this requires some team discussion first.
 @property (nonatomic, weak) IBOutlet SRGPlaybackButton *playbackButton;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
@@ -120,6 +116,42 @@
     
     self.progressView.progress = 0.f;
     self.progressView.progressTintColor = UIColor.redColor;
+    
+    @weakify(self)
+    self.playbackButton.action = ^{
+        @strongify(self)
+        
+        SRGMedia *media = self.media;
+        if (! media) {
+            return;
+        }
+        
+        SRGPosition *position = HistoryResumePlaybackPositionForMedia(media);
+        SRGLetterboxController *controller = self.controller;
+        
+        // If a controller is readily available, use it
+        if (controller) {
+            if (! [media isEqual:controller.media]) {
+                [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
+            }
+            else {
+                [controller togglePlayPause];
+            }
+        }
+        // Otherwise use a fresh instance and enable it with the service. The mini player observes service controller changes
+        // and will automatically be updated
+        else {
+            controller = [[SRGLetterboxController alloc] init];
+            ApplicationConfigurationApplyControllerSettings(controller);
+            [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
+            [SRGLetterboxService.sharedService enableWithController:controller pictureInPictureDelegate:nil];
+        }
+        
+        if (media.mediaType == SRGMediaTypeVideo && ! ApplicationSettingBackgroundVideoPlaybackEnabled()
+                && ! AVAudioSession.srg_isAirPlayActive && ! controller.pictureInPictureActive) {
+            [self.nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
+        }
+    };
     
     self.backgroundColor = UIColor.clearColor;
     
@@ -327,37 +359,6 @@
 }
 
 #pragma mark Actions
-
-// The button is an `SRGPlaybackButton` which automatically toggles play / pause
-- (IBAction)togglePlaybackButton:(id)sender
-{
-    if (! self.media) {
-        return;
-    }
-    
-    // If a controller is readily available, use it
-    SRGMedia *media = self.media;
-    SRGPosition *position = HistoryResumePlaybackPositionForMedia(media);
-    SRGLetterboxController *controller = self.controller;
-    
-    // If a controller is readily available, use it
-    if (controller) {
-        [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
-    }
-    // Otherwise use a fresh instance and enable it with the service. The mini player observes service controller changes
-    // and will automatically be updated
-    else {
-        controller = [[SRGLetterboxController alloc] init];
-        ApplicationConfigurationApplyControllerSettings(controller);
-        [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
-        [SRGLetterboxService.sharedService enableWithController:controller pictureInPictureDelegate:nil];
-    }
-    
-    if (media.mediaType == SRGMediaTypeVideo && ! ApplicationSettingBackgroundVideoPlaybackEnabled()
-            && ! AVAudioSession.srg_isAirPlayActive && ! controller.pictureInPictureActive) {
-        [self.nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
-    }
-}
 
 - (IBAction)close:(id)sender
 {
