@@ -6,6 +6,7 @@
 
 #import "PlayMiniPlayerView.h"
 
+#import "AccessibilityView.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
@@ -23,17 +24,19 @@
 #import <SRGLetterbox/SRGLetterbox.h>
 #import <libextobjc/libextobjc.h>
 
-@interface PlayMiniPlayerView ()
+@interface PlayMiniPlayerView () <AccessibilityViewDelegate>
 
 @property (nonatomic) SRGMedia *media;          // Latest media
 @property (nonatomic) SRGChannel *channel;      // Latest channel information, if any
 
 @property (nonatomic) SRGLetterboxController *controller;
 
+@property (nonatomic, weak) IBOutlet AccessibilityView *accessibilityView;
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
 @property (nonatomic, weak) IBOutlet SRGPlaybackButton *playbackButton;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UIButton *closeButton;
 
 @property (nonatomic, weak) id periodicTimeObserver;
 
@@ -153,6 +156,8 @@
         }
     };
     
+    self.closeButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label");
+    
     self.backgroundColor = UIColor.clearColor;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openFullScreenPlayer:)];
@@ -213,41 +218,9 @@
 
 #pragma mark Accessibility
 
-- (BOOL)isAccessibilityElement
+- (NSArray *)accessibilityElements
 {
-    return YES;
-}
-
-- (NSString *)accessibilityLabel
-{
-    if (! self.media) {
-        return nil;
-    }
-    
-    NSString *format = (self.controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) ? PlaySRGAccessibilityLocalizedString(@"Now playing: %@", @"Mini player label") : PlaySRGAccessibilityLocalizedString(@"Recently played: %@", @"Mini player label");
-    
-    if (self.media.contentType == SRGContentTypeLivestream) {
-        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.channel.title];
-        SRGProgram *currentProgram = self.channel.currentProgram;
-        
-        NSDate *currentDate = self.controller.date;
-        if (currentProgram && (! currentDate || [currentProgram play_containsDate:currentDate])) {
-            [accessibilityLabel appendFormat:@", %@", currentProgram.title];
-        }
-        return accessibilityLabel.copy;
-    }
-    else {
-        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.media.title];
-        if (self.media.show.title && ! [self.media.title containsString:self.media.show.title]) {
-            [accessibilityLabel appendFormat:@", %@", self.media.show.title];
-        }
-        return accessibilityLabel.copy;
-    }
-}
-
-- (NSString *)accessibilityHint
-{
-    return PlaySRGAccessibilityLocalizedString(@"Plays the content.", @"Mini player action hint");
+    return @[ self.accessibilityView, self.playbackButton, self.closeButton ];
 }
 
 #pragma mark Data
@@ -350,6 +323,40 @@
     }
     
     [ChannelService.sharedService unregisterObserver:self forMedia:media];
+}
+
+#pragma mark AccessibilityViewDelegate protocol
+
+- (NSString *)labelForAccessibilityView:(AccessibilityView *)accessibilityView
+{
+    if (! self.media) {
+        return nil;
+    }
+    
+    NSString *format = (self.controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) ? PlaySRGAccessibilityLocalizedString(@"Now playing: %@", @"Mini player label") : PlaySRGAccessibilityLocalizedString(@"Recently played: %@", @"Mini player label");
+    
+    if (self.media.contentType == SRGContentTypeLivestream) {
+        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.channel.title];
+        SRGProgram *currentProgram = self.channel.currentProgram;
+        
+        NSDate *currentDate = self.controller.date;
+        if (currentProgram && (! currentDate || [currentProgram play_containsDate:currentDate])) {
+            [accessibilityLabel appendFormat:@", %@", currentProgram.title];
+        }
+        return accessibilityLabel.copy;
+    }
+    else {
+        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.media.title];
+        if (self.media.show.title && ! [self.media.title containsString:self.media.show.title]) {
+            [accessibilityLabel appendFormat:@", %@", self.media.show.title];
+        }
+        return accessibilityLabel.copy;
+    }
+}
+
+- (NSString *)hintForAccessibilityView:(AccessibilityView *)accessibilityView
+{
+    return PlaySRGAccessibilityLocalizedString(@"Opens the full screen player", @"Mini player action hint");
 }
 
 #pragma mark Actions

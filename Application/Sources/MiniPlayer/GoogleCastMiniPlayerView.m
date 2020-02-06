@@ -6,15 +6,17 @@
 
 #import "GoogleCastMiniPlayerView.h"
 
+#import "AccessibilityView.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
 #import <SRGAppearance/SRGAppearance.h>
 
-@interface GoogleCastMiniPlayerView ()
+@interface GoogleCastMiniPlayerView () <AccessibilityViewDelegate>
 
 @property (nonatomic) GCKUIMediaController *controller;
 
+@property (nonatomic, weak) IBOutlet AccessibilityView *accessibilityView;
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 @property (nonatomic, weak) IBOutlet GCKUIMultistateButton *playbackButton;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
@@ -104,17 +106,19 @@
 
 #pragma mark Accessibility
 
-- (BOOL)isAccessibilityElement
+- (NSArray *)accessibilityElements
 {
-    return YES;
+    return @[ self.accessibilityView, self.playbackButton ];
 }
 
-- (NSString *)accessibilityLabel
+#pragma mark AccessibilityViewDelegate protocol
+
+- (NSString *)labelForAccessibilityView:(AccessibilityView *)accessibilityView
 {
     return self.titleLabel.text;
 }
 
-- (NSString *)accessibilityHint
+- (NSString *)hintForAccessibilityView:(AccessibilityView *)accessibilityView
 {
     return PlaySRGAccessibilityLocalizedString(@"Plays the content.", @"Mini player action hint");
 }

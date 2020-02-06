@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,6 +13,13 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="85"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snI-K6-KMs" customClass="AccessibilityView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="85"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="delegate" destination="QtE-Qc-n3m" id="vGX-GJ-IEe"/>
+                    </connections>
+                </view>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qN5-vf-sBc">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="2"/>
                     <constraints>
@@ -50,9 +57,13 @@
                 <constraint firstItem="In6-84-URr" firstAttribute="centerY" secondItem="9GF-X4-dH8" secondAttribute="centerY" id="4hb-cc-ubb"/>
                 <constraint firstAttribute="trailing" secondItem="UGV-sM-hOB" secondAttribute="trailing" constant="9" id="695-a8-VvR"/>
                 <constraint firstItem="In6-84-URr" firstAttribute="leading" secondItem="9GF-X4-dH8" secondAttribute="trailing" constant="10" id="ENj-NJ-v7M"/>
+                <constraint firstAttribute="trailing" secondItem="snI-K6-KMs" secondAttribute="trailing" id="KyZ-Ji-HU7"/>
+                <constraint firstItem="snI-K6-KMs" firstAttribute="top" secondItem="QtE-Qc-n3m" secondAttribute="top" id="S6I-k1-flK"/>
+                <constraint firstAttribute="bottom" secondItem="snI-K6-KMs" secondAttribute="bottom" id="YBq-Bh-7zX"/>
                 <constraint firstAttribute="trailing" secondItem="qN5-vf-sBc" secondAttribute="trailing" id="YxS-Yd-sBV"/>
                 <constraint firstItem="UGV-sM-hOB" firstAttribute="centerY" secondItem="9GF-X4-dH8" secondAttribute="centerY" id="h31-ZB-NiF"/>
                 <constraint firstItem="UGV-sM-hOB" firstAttribute="leading" secondItem="In6-84-URr" secondAttribute="trailing" constant="10" id="hvg-MT-o8k"/>
+                <constraint firstItem="snI-K6-KMs" firstAttribute="leading" secondItem="QtE-Qc-n3m" secondAttribute="leading" id="inx-Rb-1Fh"/>
                 <constraint firstItem="9GF-X4-dH8" firstAttribute="top" secondItem="QtE-Qc-n3m" secondAttribute="top" constant="6" id="wBG-6B-7zh"/>
                 <constraint firstItem="qN5-vf-sBc" firstAttribute="top" secondItem="QtE-Qc-n3m" secondAttribute="top" id="wS3-Ve-haF"/>
                 <constraint firstItem="qN5-vf-sBc" firstAttribute="leading" secondItem="QtE-Qc-n3m" secondAttribute="leading" id="xqG-n9-jHN"/>
@@ -63,6 +74,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="accessibilityView" destination="snI-K6-KMs" id="5s8-SA-eZJ"/>
                 <outlet property="playbackButton" destination="9GF-X4-dH8" id="Q6E-jd-ueY"/>
                 <outlet property="progressView" destination="qN5-vf-sBc" id="YNk-Lq-42l"/>
                 <outlet property="titleLabel" destination="In6-84-URr" id="Uqm-xM-U83"/>

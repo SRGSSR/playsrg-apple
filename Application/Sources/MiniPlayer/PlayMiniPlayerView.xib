@@ -9,86 +9,86 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PlayMiniPlayerView">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+        <view contentMode="scaleToFill" id="Bfa-82-k4k" customClass="PlayMiniPlayerView">
+            <rect key="frame" x="0.0" y="0.0" width="633" height="68"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bfa-82-k4k">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
-                    <subviews>
-                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rm4-ky-aFv">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="2"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="KaD-pY-MXE"/>
-                            </constraints>
-                            <color key="trackTintColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </progressView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWC-hN-4pX" customClass="SRGPlaybackButton">
-                            <rect key="frame" x="9" y="6" width="42" height="42"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="iWC-hN-4pX" secondAttribute="height" multiplier="1:1" id="0gQ-FU-N68"/>
-                                <constraint firstAttribute="height" constant="42" id="2HM-YE-0Gu"/>
-                            </constraints>
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                            <state key="normal" image="play-50"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="image" keyPath="playImage" value="play-50"/>
-                                <userDefinedRuntimeAttribute type="image" keyPath="pauseImage" value="pause-50"/>
-                            </userDefinedRuntimeAttributes>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO5-25-JOn">
-                            <rect key="frame" x="61" y="18" width="478" height="18"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKg-8I-Eaj">
-                            <rect key="frame" x="549" y="6" width="42" height="42"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="42" id="8m0-BV-N7p"/>
-                                <constraint firstAttribute="width" secondItem="wKg-8I-Eaj" secondAttribute="height" multiplier="1:1" id="Ux0-a3-cpw"/>
-                            </constraints>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="close-22"/>
-                            <connections>
-                                <action selector="close:" destination="iN0-l3-epB" eventType="touchUpInside" id="2Ku-gc-YmP"/>
-                            </connections>
-                        </button>
-                    </subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVn-x1-1Al" customClass="AccessibilityView">
+                    <rect key="frame" x="0.0" y="0.0" width="633" height="68"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="oO5-25-JOn" firstAttribute="leading" secondItem="iWC-hN-4pX" secondAttribute="trailing" constant="10" id="BLW-a1-Fow"/>
-                        <constraint firstItem="Rm4-ky-aFv" firstAttribute="leading" secondItem="Bfa-82-k4k" secondAttribute="leading" id="Hpv-L9-Wj4"/>
-                        <constraint firstAttribute="trailing" secondItem="Rm4-ky-aFv" secondAttribute="trailing" id="MEC-bn-dJV"/>
-                        <constraint firstItem="Rm4-ky-aFv" firstAttribute="top" secondItem="Bfa-82-k4k" secondAttribute="top" id="ORv-Tg-jLV"/>
-                        <constraint firstItem="iWC-hN-4pX" firstAttribute="top" secondItem="Bfa-82-k4k" secondAttribute="top" constant="6" id="RKG-FW-KyD"/>
-                        <constraint firstItem="wKg-8I-Eaj" firstAttribute="leading" secondItem="oO5-25-JOn" secondAttribute="trailing" constant="10" id="WbO-HY-uOc"/>
-                        <constraint firstItem="iWC-hN-4pX" firstAttribute="leading" secondItem="Bfa-82-k4k" secondAttribute="leading" constant="9" id="pdP-0Y-hhH"/>
-                        <constraint firstItem="oO5-25-JOn" firstAttribute="centerY" secondItem="iWC-hN-4pX" secondAttribute="centerY" id="q2i-xD-Yq0"/>
-                        <constraint firstItem="wKg-8I-Eaj" firstAttribute="centerY" secondItem="oO5-25-JOn" secondAttribute="centerY" id="qlG-3T-HMU"/>
-                        <constraint firstAttribute="trailing" secondItem="wKg-8I-Eaj" secondAttribute="trailing" constant="9" id="xnB-eN-Rg0"/>
-                    </constraints>
+                    <connections>
+                        <outlet property="delegate" destination="Bfa-82-k4k" id="JMf-YW-33K"/>
+                    </connections>
                 </view>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rm4-ky-aFv">
+                    <rect key="frame" x="0.0" y="0.0" width="633" height="2"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="KaD-pY-MXE"/>
+                    </constraints>
+                    <color key="trackTintColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </progressView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWC-hN-4pX" customClass="SRGPlaybackButton">
+                    <rect key="frame" x="9" y="6" width="42" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="iWC-hN-4pX" secondAttribute="height" multiplier="1:1" id="0gQ-FU-N68"/>
+                        <constraint firstAttribute="height" constant="42" id="2HM-YE-0Gu"/>
+                    </constraints>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                    <state key="normal" image="play-50"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="playImage" value="play-50"/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="pauseImage" value="pause-50"/>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO5-25-JOn">
+                    <rect key="frame" x="61" y="18" width="511" height="18"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKg-8I-Eaj">
+                    <rect key="frame" x="582" y="6" width="42" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="8m0-BV-N7p"/>
+                        <constraint firstAttribute="width" secondItem="wKg-8I-Eaj" secondAttribute="height" multiplier="1:1" id="Ux0-a3-cpw"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="close-22"/>
+                    <connections>
+                        <action selector="close:" destination="Bfa-82-k4k" eventType="touchUpInside" id="6Ff-r3-t7I"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Bfa-82-k4k" secondAttribute="trailing" id="7ZG-n6-S2w"/>
-                <constraint firstAttribute="bottom" secondItem="Bfa-82-k4k" secondAttribute="bottom" id="CdI-Zf-ryo"/>
-                <constraint firstItem="Bfa-82-k4k" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hdK-pV-ahx"/>
-                <constraint firstItem="Bfa-82-k4k" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qac-zK-tI4"/>
+                <constraint firstItem="GVn-x1-1Al" firstAttribute="top" secondItem="Bfa-82-k4k" secondAttribute="top" id="6cE-re-lCW"/>
+                <constraint firstItem="oO5-25-JOn" firstAttribute="leading" secondItem="iWC-hN-4pX" secondAttribute="trailing" constant="10" id="BLW-a1-Fow"/>
+                <constraint firstItem="GVn-x1-1Al" firstAttribute="leading" secondItem="Bfa-82-k4k" secondAttribute="leading" id="BMC-Q2-rYe"/>
+                <constraint firstAttribute="trailing" secondItem="GVn-x1-1Al" secondAttribute="trailing" id="HfN-VP-e1S"/>
+                <constraint firstItem="Rm4-ky-aFv" firstAttribute="leading" secondItem="Bfa-82-k4k" secondAttribute="leading" id="Hpv-L9-Wj4"/>
+                <constraint firstAttribute="trailing" secondItem="Rm4-ky-aFv" secondAttribute="trailing" id="MEC-bn-dJV"/>
+                <constraint firstItem="Rm4-ky-aFv" firstAttribute="top" secondItem="Bfa-82-k4k" secondAttribute="top" id="ORv-Tg-jLV"/>
+                <constraint firstItem="iWC-hN-4pX" firstAttribute="top" secondItem="Bfa-82-k4k" secondAttribute="top" constant="6" id="RKG-FW-KyD"/>
+                <constraint firstItem="wKg-8I-Eaj" firstAttribute="leading" secondItem="oO5-25-JOn" secondAttribute="trailing" constant="10" id="WbO-HY-uOc"/>
+                <constraint firstItem="iWC-hN-4pX" firstAttribute="leading" secondItem="Bfa-82-k4k" secondAttribute="leading" constant="9" id="pdP-0Y-hhH"/>
+                <constraint firstAttribute="bottom" secondItem="GVn-x1-1Al" secondAttribute="bottom" id="pln-Zb-XXP"/>
+                <constraint firstItem="oO5-25-JOn" firstAttribute="centerY" secondItem="iWC-hN-4pX" secondAttribute="centerY" id="q2i-xD-Yq0"/>
+                <constraint firstItem="wKg-8I-Eaj" firstAttribute="centerY" secondItem="oO5-25-JOn" secondAttribute="centerY" id="qlG-3T-HMU"/>
+                <constraint firstAttribute="trailing" secondItem="wKg-8I-Eaj" secondAttribute="trailing" constant="9" id="xnB-eN-Rg0"/>
             </constraints>
-            <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="playbackButton" destination="iWC-hN-4pX" id="oIf-At-jhd"/>
-                <outlet property="progressView" destination="Rm4-ky-aFv" id="Y1o-ld-5KT"/>
-                <outlet property="titleLabel" destination="oO5-25-JOn" id="my1-v9-Sn0"/>
+                <outlet property="accessibilityView" destination="GVn-x1-1Al" id="lYr-CS-FCD"/>
+                <outlet property="closeButton" destination="wKg-8I-Eaj" id="hMX-gi-L44"/>
+                <outlet property="playbackButton" destination="iWC-hN-4pX" id="TVO-GV-Cpc"/>
+                <outlet property="progressView" destination="Rm4-ky-aFv" id="scO-yb-K84"/>
+                <outlet property="titleLabel" destination="oO5-25-JOn" id="1E0-1z-5Y9"/>
             </connections>
-            <point key="canvasLocation" x="331" y="-161"/>
+            <point key="canvasLocation" x="340" y="-30.584707646176913"/>
         </view>
     </objects>
     <resources>
