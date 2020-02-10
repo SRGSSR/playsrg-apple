@@ -111,11 +111,15 @@
     [super viewWillAppear:animated];
     
     if ([self play_isMovingToParentViewController]) {
-        // Height set to twice the video height (with 16/9 ratio) for regular sizes. Only display the video for
-        // compact layouts (currently iPhone Plus) since more readable
-        CGFloat width = CGRectGetWidth(self.view.frame);
-        CGFloat factor = (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ? 1.f : 2.f;
-        self.preferredContentSize = CGSizeMake(width, factor * 9.f / 16.f * width);
+        // Ajust preview size for better readability on phones. The default content size works fine on iPads.
+        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            CGSize screenSize = UIScreen.mainScreen.bounds.size;
+            BOOL isPortrait = screenSize.height > screenSize.width;
+            CGFloat factor = isPortrait ? 2.5f : 1.f;
+            
+            CGFloat width = CGRectGetWidth(self.view.frame);
+            self.preferredContentSize = CGSizeMake(width, factor * 9.f / 16.f * width);
+        }
         
         self.previousAudioSessionCategory = [AVAudioSession sharedInstance].category;
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -196,7 +200,7 @@
             }
             
             // Use !downloaded since the status has been reversed
-            AnalyticsTitle analyticsTitle = (! downloaded) ? AnalyticsTitleDownloadAdd : AnalyticsTitleDownloadRemove;
+            AnalyticsTitle analyticsTitle = ! downloaded ? AnalyticsTitleDownloadAdd : AnalyticsTitleDownloadRemove;
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourcePeekMenu;
             labels.value = self.media.URN;
