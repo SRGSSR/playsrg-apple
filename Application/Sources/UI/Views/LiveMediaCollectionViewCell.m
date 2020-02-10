@@ -18,7 +18,6 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
-#import "UIStackView+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGAnalytics/SRGAnalytics.h>
@@ -30,7 +29,6 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 @property (nonatomic) SRGChannel *channel;
 
-@property (nonatomic, weak) IBOutlet UIStackView *logoStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
@@ -244,7 +242,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     if (self.channel) {
         UIImage *logoImage = self.channel.play_banner22Image;
         self.logoImageView.image = logoImage;
-        [self.logoStackView play_setHidden:logoImage == nil];
+        self.logoImageView.hidden = logoImage == nil;
         
         SRGProgram *currentProgram = self.channel.currentProgram;
         if ([currentProgram play_containsDate:NSDate.date]) {
@@ -268,7 +266,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     }
     else {
         self.titleLabel.text = self.media.title;
-        [self.logoStackView play_setHidden:YES];
+        self.logoImageView.hidden = YES;
         
         NSString *showTitle = self.media.show.title;
         if (showTitle && ! [self.media.title containsString:showTitle]) {

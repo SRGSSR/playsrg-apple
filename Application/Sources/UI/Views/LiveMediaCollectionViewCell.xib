@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -47,11 +47,19 @@
                         <nil key="highlightedColor"/>
                         <size key="shadowOffset" width="0.0" height="1"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="apu-J9-gcq">
-                        <rect key="frame" x="0.0" y="190.5" width="333" height="151.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="apu-J9-gcq">
+                        <rect key="frame" x="0.0" y="195.5" width="333" height="146.5"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brJ-7K-RUg">
-                                <rect key="frame" x="0.0" y="0.0" width="333" height="22"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eTs-mo-49z">
+                                <rect key="frame" x="0.0" y="0.0" width="333" height="2"/>
+                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="999" constant="1" id="Zyc-Tu-TDI"/>
+                                </constraints>
+                                <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </progressView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="brJ-7K-RUg">
+                                <rect key="frame" x="0.0" y="6" width="333" height="22"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" placeholderIntrinsicWidth="53" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="WqR-Gg-ZwJ" userLabel="Logo Image View">
                                         <rect key="frame" x="0.0" y="0.0" width="53" height="22"/>
@@ -60,35 +68,23 @@
                                             <constraint firstAttribute="height" constant="22" id="gd9-XF-AwZ"/>
                                         </constraints>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zJH-qy-DWv" userLabel="Spacer View">
-                                        <rect key="frame" x="53" y="0.0" width="280" height="22"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="&lt;subtitle&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jq0-qt-jfU">
+                                        <rect key="frame" x="58" y="0.0" width="275" height="22"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eTs-mo-49z">
-                                <rect key="frame" x="0.0" y="25" width="333" height="2"/>
-                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="999" constant="1" id="Zyc-Tu-TDI"/>
-                                </constraints>
-                                <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </progressView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="&lt;subtitle&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jq0-qt-jfU">
-                                <rect key="frame" x="0.0" y="29" width="333" height="48.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="752" text="&lt;title&gt;" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OO0-yH-uvq" userLabel="Title Label">
-                                <rect key="frame" x="0.0" y="80.5" width="333" height="18"/>
+                                <rect key="frame" x="0.0" y="33" width="333" height="58.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4vE-qt-zMP" userLabel="Spacer View">
-                                <rect key="frame" x="0.0" y="101.5" width="333" height="50"/>
+                                <rect key="frame" x="0.0" y="96.5" width="333" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -107,7 +103,7 @@
                 <constraint firstItem="h4c-O2-2Ys" firstAttribute="bottom" secondItem="i6n-Nf-jOh" secondAttribute="bottom" constant="-5" id="buk-Hs-IPp"/>
                 <constraint firstItem="i6n-Nf-jOh" firstAttribute="leading" secondItem="l3i-Jq-Ob9" secondAttribute="leading" id="lAx-hN-QQR"/>
                 <constraint firstItem="h30-8X-Y91" firstAttribute="bottom" secondItem="i6n-Nf-jOh" secondAttribute="bottom" id="oni-PH-aiZ"/>
-                <constraint firstItem="apu-J9-gcq" firstAttribute="top" secondItem="i6n-Nf-jOh" secondAttribute="bottom" constant="3" id="ue2-xc-ZJA"/>
+                <constraint firstItem="apu-J9-gcq" firstAttribute="top" secondItem="i6n-Nf-jOh" secondAttribute="bottom" constant="8" id="ue2-xc-ZJA"/>
                 <constraint firstAttribute="trailing" secondItem="i6n-Nf-jOh" secondAttribute="trailing" id="x5M-k2-wS8"/>
                 <constraint firstItem="h30-8X-Y91" firstAttribute="trailing" secondItem="i6n-Nf-jOh" secondAttribute="trailing" id="zFu-fI-v1Y"/>
             </constraints>
@@ -117,7 +113,6 @@
                 <outlet property="blockingReasonImageView" destination="jKI-W0-rA0" id="h8b-NV-v1Q"/>
                 <outlet property="durationLabel" destination="h4c-O2-2Ys" id="mvx-96-Avf"/>
                 <outlet property="logoImageView" destination="WqR-Gg-ZwJ" id="7Wb-bP-RHx"/>
-                <outlet property="logoStackView" destination="brJ-7K-RUg" id="2bo-gE-s8K"/>
                 <outlet property="progressView" destination="eTs-mo-49z" id="h7i-d6-6Ix"/>
                 <outlet property="subtitleLabel" destination="Jq0-qt-jfU" id="931-pl-Wqw"/>
                 <outlet property="thumbnailImageView" destination="i6n-Nf-jOh" id="anm-mn-vI8"/>
