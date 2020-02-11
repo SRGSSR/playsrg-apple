@@ -67,23 +67,22 @@ static const CGFloat HomeStandardMargin = 10.f;
                                    UIContentSizeCategoryAccessibilityExtraExtraLarge : @55,
                                    UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @55 };
         
-        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @35,
-                                   UIContentSizeCategorySmall : @35,
-                                   UIContentSizeCategoryMedium : @35,
-                                   UIContentSizeCategoryLarge : @38,
-                                   UIContentSizeCategoryExtraLarge : @40,
-                                   UIContentSizeCategoryExtraExtraLarge : @43,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @49,
-                                   UIContentSizeCategoryAccessibilityMedium : @49,
-                                   UIContentSizeCategoryAccessibilityLarge : @49,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @49,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @49,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @49 };
+        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @30,
+                                   UIContentSizeCategorySmall : @30,
+                                   UIContentSizeCategoryMedium : @30,
+                                   UIContentSizeCategoryLarge : @33,
+                                   UIContentSizeCategoryExtraLarge : @35,
+                                   UIContentSizeCategoryExtraExtraLarge : @38,
+                                   UIContentSizeCategoryExtraExtraExtraLarge : @44,
+                                   UIContentSizeCategoryAccessibilityMedium : @44,
+                                   UIContentSizeCategoryAccessibilityLarge : @44,
+                                   UIContentSizeCategoryAccessibilityExtraLarge : @44,
+                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @44,
+                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @44 };
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = featured ? s_featuredTextHeigths[contentSizeCategory].floatValue : s_standardTextHeigths[contentSizeCategory].floatValue;
-    
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
