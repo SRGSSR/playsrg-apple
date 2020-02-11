@@ -393,15 +393,10 @@
 		08B6F7E9210CF87C0097EF8B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B6F7E5210CF8660097EF8B /* CoreData.framework */; };
 		08B6F7EA210CF8840097EF8B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B6F7E5210CF8660097EF8B /* CoreData.framework */; };
 		08BAABDA1E7613F0007644D7 /* HomeMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */; };
-		08BAABDB1E7613F0007644D7 /* HomeMediasViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08BAABD91E7613F0007644D7 /* HomeMediasViewController.storyboard */; };
 		08BAABDC1E76141E007644D7 /* HomeMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */; };
-		08BAABDD1E76141E007644D7 /* HomeMediasViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08BAABD91E7613F0007644D7 /* HomeMediasViewController.storyboard */; };
 		08BAABDE1E76141F007644D7 /* HomeMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */; };
-		08BAABDF1E76141F007644D7 /* HomeMediasViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08BAABD91E7613F0007644D7 /* HomeMediasViewController.storyboard */; };
 		08BAABE01E76141F007644D7 /* HomeMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */; };
-		08BAABE11E76141F007644D7 /* HomeMediasViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08BAABD91E7613F0007644D7 /* HomeMediasViewController.storyboard */; };
 		08BAABE21E761420007644D7 /* HomeMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */; };
-		08BAABE31E761420007644D7 /* HomeMediasViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08BAABD91E7613F0007644D7 /* HomeMediasViewController.storyboard */; };
 		08C68F8A1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C68ECC1D38DEA100BB8AAA /* PlayAppDelegate.m */; };
 		08C68F8B1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C68ECC1D38DEA100BB8AAA /* PlayAppDelegate.m */; };
 		08C68F8C1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C68ECC1D38DEA100BB8AAA /* PlayAppDelegate.m */; };
@@ -1831,7 +1826,6 @@
 		08B6F7E5210CF8660097EF8B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		08BAABD71E7613F0007644D7 /* HomeMediasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediasViewController.h; sourceTree = "<group>"; };
 		08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediasViewController.m; sourceTree = "<group>"; };
-		08BAABD91E7613F0007644D7 /* HomeMediasViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeMediasViewController.storyboard; sourceTree = "<group>"; };
 		08BDB5B1228D520000335898 /* PushService+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushService+Private.h"; sourceTree = "<group>"; };
 		08C33ED423CB5CBE00D422C1 /* PlayApplicationNavigation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayApplicationNavigation.h; sourceTree = "<group>"; };
 		08C68D891D38D6F400BB8AAA /* Play SRF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play SRF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2879,7 +2873,6 @@
 				E6AE51321D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib */,
 				08BAABD71E7613F0007644D7 /* HomeMediasViewController.h */,
 				08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */,
-				08BAABD91E7613F0007644D7 /* HomeMediasViewController.storyboard */,
 				08564B1B1D41111A00381549 /* HomeSectionHeaderView.h */,
 				08564B1C1D41111A00381549 /* HomeSectionHeaderView.m */,
 				08564B221D41112800381549 /* HomeSectionHeaderView.xib */,
@@ -4124,7 +4117,6 @@
 				08602BFC2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				6F0F88A11ECF0CE50060A893 /* override_default_virus.pdf in Resources */,
 				6F27F5D123CDD4E400156B1C /* HomeLivestreamsViewController.storyboard in Resources */,
-				08BAABDB1E7613F0007644D7 /* HomeMediasViewController.storyboard in Resources */,
 				08C6905A1D38E0BE00BB8AAA /* LaunchScreen.xib in Resources */,
 				6F4C0A7B20DCBDD200069A85 /* HomeShowVerticalListTableViewCell.xib in Resources */,
 				0887824F23AD61D500629312 /* LiveMediaCollectionViewCell.xib in Resources */,
@@ -4244,7 +4236,6 @@
 				6F0F88901ECF0CDD0060A893 /* override_default_rts_deux.pdf in Resources */,
 				6F0F888B1ECF0CDD0060A893 /* override_default_rts_info.pdf in Resources */,
 				6F12DB4C21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
-				08BAABDD1E76141E007644D7 /* HomeMediasViewController.storyboard in Resources */,
 				08C6901D1D38E08C00BB8AAA /* LaunchScreen.xib in Resources */,
 				0837CED31D3FDAF900A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				0804916A22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
@@ -4351,7 +4342,6 @@
 				6F5F4FCB1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				E65FB2121D66D69700820696 /* DailyMediasViewController.storyboard in Resources */,
 				086BDE1A1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
-				08BAABDF1E76141F007644D7 /* HomeMediasViewController.storyboard in Resources */,
 				6FCB574A1EC2047B0015CAB7 /* override_artwork_rete_uno.pdf in Resources */,
 				0837CEDC1D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				0828BB3C22E62831009617A7 /* parsePlayUrl.js in Resources */,
@@ -4453,7 +4443,6 @@
 				08754F44201BAFF500458F3A /* InfoPlist.strings in Resources */,
 				E65FB2131D66D69700820696 /* DailyMediasViewController.storyboard in Resources */,
 				086BDE1C1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
-				08BAABE11E76141F007644D7 /* HomeMediasViewController.storyboard in Resources */,
 				086321122258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				0837CEE51D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				6F2961FF2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
@@ -4553,7 +4542,6 @@
 				08C690811D38E3E600BB8AAA /* Localizable.strings in Resources */,
 				6F0C99962121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				086BDE1E1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
-				08BAABE31E761420007644D7 /* HomeMediasViewController.storyboard in Resources */,
 				0832BF1922BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
 				6FA9ECC420C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */,
 				0837CEEE1D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
