@@ -109,11 +109,7 @@
     tabBar.tintColor = UIColor.whiteColor;
     tabBar.unselectedItemTintColor = UIColor.play_grayColor;
     tabBar.selectedItemTintColor = UIColor.whiteColor;
-    
-    UIFont *tabBarFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    tabBar.unselectedItemTitleFont = tabBarFont;
-    tabBar.selectedItemTitleFont = tabBarFont;
-    
+        
     // Use ripple effect without color, so that there is no Material-like highlighting (we are NOT adopting Material)
     tabBar.enableRippleBehavior = YES;
     tabBar.rippleColor = UIColor.clearColor;
@@ -123,6 +119,8 @@
         make.edges.equalTo(blurView.contentView);
     }];
     self.tabBar = tabBar;
+    
+    [self updateFonts];
 }
 
 - (void)viewDidLoad
@@ -134,6 +132,44 @@
     UIViewController *initialViewController = self.viewControllers[self.initialPage];
     [self.pageViewController setViewControllers:@[initialViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     [self didDisplayViewController:initialViewController animated:NO];
+}
+
+#pragma mark Rotation
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return [super supportedInterfaceOrientations] & UIViewController.play_supportedInterfaceOrientations;
+}
+
+#pragma mark Status bar
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+#pragma mark Accessibility
+
+- (void)updateForContentSizeCategory
+{
+    [super updateForContentSizeCategory];
+    
+    [self updateFonts];
+}
+
+- (BOOL)accessibilityPerformEscape
+{
+    if (self.navigationController.viewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return YES;
+    }
+    else if (self.presentingViewController) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return YES;
+    }
+    else {
+        return NO;
+    }
 }
 
 #pragma mark Actions
@@ -153,37 +189,6 @@
     return YES;
 }
 
-#pragma mark Rotation
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    return [super supportedInterfaceOrientations] & UIViewController.play_supportedInterfaceOrientations;
-}
-
-#pragma mark Status bar
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-
-#pragma mark Accessibility
-
-- (BOOL)accessibilityPerformEscape
-{
-    if (self.navigationController.viewControllers.count > 1) {
-        [self.navigationController popViewControllerAnimated:YES];
-        return YES;
-    }
-    else if (self.presentingViewController) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-        return YES;
-    }
-    else {
-        return NO;
-    }
-}
-
 #pragma mark Display
 
 - (BOOL)displayPageAtIndex:(NSUInteger)index animated:(BOOL)animated
@@ -201,6 +206,15 @@
     
     [self didDisplayViewController:newViewController animated:animated];
     return YES;
+}
+
+#pragma mark UI
+
+- (void)updateFonts
+{
+    UIFont *tabBarFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.tabBar.unselectedItemTitleFont = tabBarFont;
+    self.tabBar.selectedItemTitleFont = tabBarFont;
 }
 
 #pragma mark Stubs
