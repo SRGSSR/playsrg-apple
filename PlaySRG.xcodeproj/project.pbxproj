@@ -1453,11 +1453,6 @@
 		E6DB5F1D1D66E0890057094B /* ShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F1A1D66E0890057094B /* ShowsViewController.m */; };
 		E6DB5F1E1D66E0890057094B /* ShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F1A1D66E0890057094B /* ShowsViewController.m */; };
 		E6DB5F1F1D66E0890057094B /* ShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F1A1D66E0890057094B /* ShowsViewController.m */; };
-		E6DB5F211D66E0950057094B /* ShowsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DB5F201D66E0950057094B /* ShowsViewController.storyboard */; };
-		E6DB5F221D66E0950057094B /* ShowsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DB5F201D66E0950057094B /* ShowsViewController.storyboard */; };
-		E6DB5F231D66E0950057094B /* ShowsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DB5F201D66E0950057094B /* ShowsViewController.storyboard */; };
-		E6DB5F241D66E0950057094B /* ShowsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DB5F201D66E0950057094B /* ShowsViewController.storyboard */; };
-		E6DB5F251D66E0950057094B /* ShowsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DB5F201D66E0950057094B /* ShowsViewController.storyboard */; };
 		E6DB5F281D66E1550057094B /* ShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F271D66E1550057094B /* ShowCollectionViewCell.m */; };
 		E6DB5F291D66E1550057094B /* ShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F271D66E1550057094B /* ShowCollectionViewCell.m */; };
 		E6DB5F2A1D66E1550057094B /* ShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F271D66E1550057094B /* ShowCollectionViewCell.m */; };
@@ -2215,7 +2210,6 @@
 		E6AE51321D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeMediaListTableViewCell.xib; sourceTree = "<group>"; };
 		E6DB5F191D66E0890057094B /* ShowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowsViewController.h; sourceTree = "<group>"; };
 		E6DB5F1A1D66E0890057094B /* ShowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowsViewController.m; sourceTree = "<group>"; };
-		E6DB5F201D66E0950057094B /* ShowsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShowsViewController.storyboard; sourceTree = "<group>"; };
 		E6DB5F261D66E1550057094B /* ShowCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowCollectionViewCell.h; sourceTree = "<group>"; };
 		E6DB5F271D66E1550057094B /* ShowCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowCollectionViewCell.m; sourceTree = "<group>"; };
 		E6DB5F2D1D66E1640057094B /* ShowCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -3533,7 +3527,6 @@
 				E6E2DF2B1D6AD33400791EDE /* ShowHeaderView.xib */,
 				E6DB5F191D66E0890057094B /* ShowsViewController.h */,
 				E6DB5F1A1D66E0890057094B /* ShowsViewController.m */,
-				E6DB5F201D66E0950057094B /* ShowsViewController.storyboard */,
 				E6E2DF171D6ACA8B00791EDE /* ShowViewController.h */,
 				E6E2DF181D6ACA8B00791EDE /* ShowViewController.m */,
 			);
@@ -4033,7 +4026,6 @@
 				08DD9D5A1FFE6EDB00115906 /* ModuleHeaderView.xib in Resources */,
 				082590F11F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				E6AE51331D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
-				E6DB5F211D66E0950057094B /* ShowsViewController.storyboard in Resources */,
 				E66BEC211DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F0F88A41ECF0CE50060A893 /* override_default_srf3.pdf in Resources */,
 				6F2961FC2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
@@ -4142,7 +4134,6 @@
 				6F1938321EFBFE9E0017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F0C99AC2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
 				6F0F88851ECF0CDD0060A893 /* override_artwork_couleur3.pdf in Resources */,
-				E6DB5F221D66E0950057094B /* ShowsViewController.storyboard in Resources */,
 				08602BFD2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				E66BEC221DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F5F4FCA1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
@@ -4247,7 +4238,6 @@
 				08DADF8E20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				6FE01B1823603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				E6AE51351D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
-				E6DB5F231D66E0950057094B /* ShowsViewController.storyboard in Resources */,
 				6FF7BBB422A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				E66BEC231DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6FCB57481EC2047B0015CAB7 /* override_artwork_rete_due.pdf in Resources */,
@@ -4336,7 +4326,6 @@
 				6F12DB4E21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
 				6F0A7F0820AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6F3A47B11DD19A6900C79E67 /* RTRResources.xcassets in Resources */,
-				E6DB5F241D66E0950057094B /* ShowsViewController.storyboard in Resources */,
 				6F1938331EFBFEA40017B1D1 /* ApplicationConfiguration.json in Resources */,
 				E66BEC241DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				0875852023A0025F00FA7207 /* LibraryViewController.storyboard in Resources */,
@@ -4425,7 +4414,6 @@
 				08C690861D38E3E600BB8AAA /* iTunesArtwork in Resources */,
 				E6AE51371D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
 				0875851223A0025F00FA7207 /* LibraryAccountHeaderView.xib in Resources */,
-				E6DB5F251D66E0950057094B /* ShowsViewController.storyboard in Resources */,
 				084F94B922D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				E66BEC251DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F340F4F220DA87700778CA3 /* SRGUserData.bundle in Resources */,
