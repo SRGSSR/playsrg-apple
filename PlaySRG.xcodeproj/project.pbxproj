@@ -694,11 +694,6 @@
 		6F12DB5221A3EFBF0054879D /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12DB4421A3EFBF0054879D /* HistoryViewController.m */; };
 		6F12DB5321A3EFBF0054879D /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12DB4421A3EFBF0054879D /* HistoryViewController.m */; };
 		6F12DB5421A3EFBF0054879D /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12DB4421A3EFBF0054879D /* HistoryViewController.m */; };
-		6F12DB5521A3EFBF0054879D /* HistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F12DB4521A3EFBF0054879D /* HistoryViewController.storyboard */; };
-		6F12DB5621A3EFBF0054879D /* HistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F12DB4521A3EFBF0054879D /* HistoryViewController.storyboard */; };
-		6F12DB5721A3EFBF0054879D /* HistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F12DB4521A3EFBF0054879D /* HistoryViewController.storyboard */; };
-		6F12DB5821A3EFBF0054879D /* HistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F12DB4521A3EFBF0054879D /* HistoryViewController.storyboard */; };
-		6F12DB5921A3EFBF0054879D /* HistoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F12DB4521A3EFBF0054879D /* HistoryViewController.storyboard */; };
 		6F12E4D522D866E600BC1718 /* MostSearchedShowsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4D322D866E600BC1718 /* MostSearchedShowsHeaderView.xib */; };
 		6F12E4D622D866E600BC1718 /* MostSearchedShowsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4D422D866E600BC1718 /* MostSearchedShowsHeaderView.m */; };
 		6F12E4D722D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12E4D422D866E600BC1718 /* MostSearchedShowsHeaderView.m */; };
@@ -1917,7 +1912,6 @@
 		6F12DB4221A3EFBF0054879D /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		6F12DB4321A3EFBF0054879D /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
 		6F12DB4421A3EFBF0054879D /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
-		6F12DB4521A3EFBF0054879D /* HistoryViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HistoryViewController.storyboard; sourceTree = "<group>"; };
 		6F12E4D222D866E500BC1718 /* MostSearchedShowsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MostSearchedShowsHeaderView.h; sourceTree = "<group>"; };
 		6F12E4D322D866E600BC1718 /* MostSearchedShowsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MostSearchedShowsHeaderView.xib; sourceTree = "<group>"; };
 		6F12E4D422D866E600BC1718 /* MostSearchedShowsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MostSearchedShowsHeaderView.m; sourceTree = "<group>"; };
@@ -3241,7 +3235,6 @@
 				6F12DB4221A3EFBF0054879D /* HistoryTableViewCell.xib */,
 				6F12DB4321A3EFBF0054879D /* HistoryViewController.h */,
 				6F12DB4421A3EFBF0054879D /* HistoryViewController.m */,
-				6F12DB4521A3EFBF0054879D /* HistoryViewController.storyboard */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -4022,7 +4015,6 @@
 				6F0A7F0520AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6F0F88951ECF0CE50060A893 /* override_artwork_tv_srf1.pdf in Resources */,
 				0837CEC51D3FD6E600A1E089 /* SRGSSRType_Bd.ttf in Resources */,
-				6F12DB5521A3EFBF0054879D /* HistoryViewController.storyboard in Resources */,
 				6FE01B1623603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6F0C99A12121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				0837CEAA1D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
@@ -4157,7 +4149,6 @@
 				E6E2DF2D1D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				08564B241D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
 				0837CED01D3FDAF900A1E089 /* SRGSSRType_He.ttf in Resources */,
-				6F12DB5621A3EFBF0054879D /* HistoryViewController.storyboard in Resources */,
 				08C690181D38E08C00BB8AAA /* iTunesArtwork@2x in Resources */,
 				6F0F888F1ECF0CDD0060A893 /* override_default_espace2.pdf in Resources */,
 				6F0F888A1ECF0CDD0060A893 /* override_artwork_option_musique.pdf in Resources */,
@@ -4264,7 +4255,6 @@
 				6F0C99AD2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
 				6FA9ECC220C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */,
 				6F12DB4D21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
-				6F12DB5721A3EFBF0054879D /* HistoryViewController.storyboard in Resources */,
 				6F4EA1341EE034B000BEC4DA /* Accessibility.strings in Resources */,
 				08564B251D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
 				6FD88F7E22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
@@ -4331,7 +4321,6 @@
 				6F4760071EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6F1F92AD22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
-				6F12DB5821A3EFBF0054879D /* HistoryViewController.storyboard in Resources */,
 				6F0C99952121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				6F0C99B32121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				0804917922832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
@@ -4435,7 +4424,6 @@
 				081220BD1DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				E64BA4041D4A5892002C10D5 /* WebViewController.storyboard in Resources */,
 				6F4760081EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
-				6F12DB5921A3EFBF0054879D /* HistoryViewController.storyboard in Resources */,
 				08DD9D6B1FFE6EFA00115906 /* ModuleHeaderView.xib in Resources */,
 				6F0C99912121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
 				6F12E4EB22D8676600BC1718 /* SearchHeaderView.xib in Resources */,
