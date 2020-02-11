@@ -71,7 +71,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     fittingSize.width = width;
     CGFloat height = [cell systemLayoutSizeFittingSize:fittingSize
                          withHorizontalFittingPriority:UILayoutPriorityRequired
-                               verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height;
+                               verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height + 20.f /* give more space to each item for better spacing */;
     
     if (! s_cachedHeights) {
         s_cachedHeights = [NSMutableDictionary dictionary];
