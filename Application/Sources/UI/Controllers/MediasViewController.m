@@ -72,8 +72,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     
     // Table layout
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 86.f : 100.f;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, height);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 94.f);
     }
     // Grid layout
     else {
