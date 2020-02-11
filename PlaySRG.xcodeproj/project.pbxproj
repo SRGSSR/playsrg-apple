@@ -454,25 +454,20 @@
 		08DADF8F20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 08DADF8B20D92D6400291AD1 /* placeholder_notification-180.pdf */; };
 		08DADF9020D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 08DADF8B20D92D6400291AD1 /* placeholder_notification-180.pdf */; };
 		08DD9D5A1FFE6EDB00115906 /* ModuleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DD9D541FFE6EDA00115906 /* ModuleHeaderView.xib */; };
-		08DD9D5B1FFE6EDB00115906 /* ModuleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DD9D571FFE6EDA00115906 /* ModuleViewController.storyboard */; };
 		08DD9D5C1FFE6EDB00115906 /* ModuleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D581FFE6EDA00115906 /* ModuleHeaderView.m */; };
 		08DD9D5D1FFE6EDB00115906 /* ModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D591FFE6EDA00115906 /* ModuleViewController.m */; };
 		08DD9D5E1FFE6EF800115906 /* ModuleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D581FFE6EDA00115906 /* ModuleHeaderView.m */; };
 		08DD9D5F1FFE6EF800115906 /* ModuleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DD9D541FFE6EDA00115906 /* ModuleHeaderView.xib */; };
 		08DD9D601FFE6EF800115906 /* ModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D591FFE6EDA00115906 /* ModuleViewController.m */; };
-		08DD9D611FFE6EF800115906 /* ModuleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DD9D571FFE6EDA00115906 /* ModuleViewController.storyboard */; };
 		08DD9D621FFE6EF900115906 /* ModuleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D581FFE6EDA00115906 /* ModuleHeaderView.m */; };
 		08DD9D631FFE6EF900115906 /* ModuleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DD9D541FFE6EDA00115906 /* ModuleHeaderView.xib */; };
 		08DD9D641FFE6EF900115906 /* ModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D591FFE6EDA00115906 /* ModuleViewController.m */; };
-		08DD9D651FFE6EF900115906 /* ModuleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DD9D571FFE6EDA00115906 /* ModuleViewController.storyboard */; };
 		08DD9D661FFE6EF900115906 /* ModuleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D581FFE6EDA00115906 /* ModuleHeaderView.m */; };
 		08DD9D671FFE6EF900115906 /* ModuleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DD9D541FFE6EDA00115906 /* ModuleHeaderView.xib */; };
 		08DD9D681FFE6EF900115906 /* ModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D591FFE6EDA00115906 /* ModuleViewController.m */; };
-		08DD9D691FFE6EF900115906 /* ModuleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DD9D571FFE6EDA00115906 /* ModuleViewController.storyboard */; };
 		08DD9D6A1FFE6EFA00115906 /* ModuleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D581FFE6EDA00115906 /* ModuleHeaderView.m */; };
 		08DD9D6B1FFE6EFA00115906 /* ModuleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DD9D541FFE6EDA00115906 /* ModuleHeaderView.xib */; };
 		08DD9D6C1FFE6EFA00115906 /* ModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D591FFE6EDA00115906 /* ModuleViewController.m */; };
-		08DD9D6D1FFE6EFA00115906 /* ModuleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DD9D571FFE6EDA00115906 /* ModuleViewController.storyboard */; };
 		08E4BDD220CB1DFE0079AD9D /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
 		08E4BDD320CB1E060079AD9D /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
 		08E4BDD420CB1E180079AD9D /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
@@ -1861,7 +1856,6 @@
 		08DD9D541FFE6EDA00115906 /* ModuleHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModuleHeaderView.xib; sourceTree = "<group>"; };
 		08DD9D551FFE6EDA00115906 /* ModuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleViewController.h; sourceTree = "<group>"; };
 		08DD9D561FFE6EDA00115906 /* ModuleHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleHeaderView.h; sourceTree = "<group>"; };
-		08DD9D571FFE6EDA00115906 /* ModuleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ModuleViewController.storyboard; sourceTree = "<group>"; };
 		08DD9D581FFE6EDA00115906 /* ModuleHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleHeaderView.m; sourceTree = "<group>"; };
 		08DD9D591FFE6EDA00115906 /* ModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleViewController.m; sourceTree = "<group>"; };
 		0B2F6A29ECF348EE38AA4211 /* Pods-PlaySRG-Play RTR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3001,7 +2995,6 @@
 				08DD9D541FFE6EDA00115906 /* ModuleHeaderView.xib */,
 				08DD9D551FFE6EDA00115906 /* ModuleViewController.h */,
 				08DD9D591FFE6EDA00115906 /* ModuleViewController.m */,
-				08DD9D571FFE6EDA00115906 /* ModuleViewController.storyboard */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -4094,7 +4087,6 @@
 				086F8D5F22984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				08DD9D5A1FFE6EDB00115906 /* ModuleHeaderView.xib in Resources */,
 				082590F11F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
-				08DD9D5B1FFE6EDB00115906 /* ModuleViewController.storyboard in Resources */,
 				E6AE51331D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
 				E6DB5F211D66E0950057094B /* ShowsViewController.storyboard in Resources */,
 				E66BEC211DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
@@ -4166,7 +4158,6 @@
 				0837CECF1D3FDAF900A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				6F93DE1420AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				0837CECE1D3FDAF900A1E089 /* SRGSSRType_Bd.ttf in Resources */,
-				08DD9D611FFE6EF800115906 /* ModuleViewController.storyboard in Resources */,
 				0837CEAC1D3FAEE100A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
 				6F0C99B12121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				6FA9ECC720C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
@@ -4341,7 +4332,6 @@
 				6F4760101EB37BC6003021EA /* TranslucentTitleHeaderView.xib in Resources */,
 				0837CEDB1D3FDAFA00A1E089 /* SRGSSRType_Lt.ttf in Resources */,
 				6F40920F22DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
-				08DD9D651FFE6EF900115906 /* ModuleViewController.storyboard in Resources */,
 				E6E2DF211D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */,
 				0837CEDA1D3FDAFA00A1E089 /* SRGSSRType_It.ttf in Resources */,
 				086F8D6622984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */,
@@ -4425,7 +4415,6 @@
 				E6DB5F241D66E0950057094B /* ShowsViewController.storyboard in Resources */,
 				6F1938331EFBFEA40017B1D1 /* ApplicationConfiguration.json in Resources */,
 				E66BEC241DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
-				08DD9D691FFE6EF900115906 /* ModuleViewController.storyboard in Resources */,
 				0875852023A0025F00FA7207 /* LibraryViewController.storyboard in Resources */,
 				6F5F4FCC1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				6F4EA1371EE034C500BEC4DA /* Accessibility.strings in Resources */,
@@ -4473,7 +4462,6 @@
 				6F1938381EFBFEC80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6FF7BBB622A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				6F1F92AE22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
-				08DD9D6D1FFE6EFA00115906 /* ModuleViewController.storyboard in Resources */,
 				081DAA2A1E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F93DE1720AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				08754F4F201BB02900458F3A /* InfoPlist.strings in Resources */,
