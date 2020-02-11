@@ -417,11 +417,6 @@
 		08C690861D38E3E600BB8AAA /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 08C690761D38E3E600BB8AAA /* iTunesArtwork */; };
 		08C6908B1D38E3E600BB8AAA /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 08C690771D38E3E600BB8AAA /* iTunesArtwork@2x */; };
 		08C690901D38E3E600BB8AAA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C690781D38E3E600BB8AAA /* LaunchScreen.xib */; };
-		08C690DD1D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C690DC1D38E5BE00BB8AAA /* HomeViewController.storyboard */; };
-		08C690DE1D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C690DC1D38E5BE00BB8AAA /* HomeViewController.storyboard */; };
-		08C690DF1D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C690DC1D38E5BE00BB8AAA /* HomeViewController.storyboard */; };
-		08C690E01D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C690DC1D38E5BE00BB8AAA /* HomeViewController.storyboard */; };
-		08C690E11D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C690DC1D38E5BE00BB8AAA /* HomeViewController.storyboard */; };
 		08C691281D39089700BB8AAA /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
 		08C691291D39089700BB8AAA /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
 		08C6912A1D39089700BB8AAA /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
@@ -1805,7 +1800,6 @@
 		08C690761D38E3E600BB8AAA /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		08C690771D38E3E600BB8AAA /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		08C690781D38E3E600BB8AAA /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		08C690DC1D38E5BE00BB8AAA /* HomeViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeViewController.storyboard; sourceTree = "<group>"; };
 		08C691271D39089700BB8AAA /* CommonImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CommonImages.xcassets; sourceTree = "<group>"; };
 		08C691321D391A1B00BB8AAA /* HomeMediaListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediaListTableViewCell.h; sourceTree = "<group>"; };
 		08C691331D391A1B00BB8AAA /* HomeMediaListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediaListTableViewCell.m; sourceTree = "<group>"; };
@@ -2836,7 +2830,6 @@
 				6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */,
 				08C68ECF1D38DEA100BB8AAA /* HomeViewController.h */,
 				08C68ED01D38DEA100BB8AAA /* HomeViewController.m */,
-				08C690DC1D38E5BE00BB8AAA /* HomeViewController.storyboard */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3998,7 +3991,6 @@
 				6FB3C1AD1DBCE783008160B4 /* MediaPreviewViewController.storyboard in Resources */,
 				0837CEC41D3FD6E600A1E089 /* FontAwesome.otf in Resources */,
 				6FB0BB4020AEF5D1007C5D87 /* Onboarding.strings in Resources */,
-				08C690DD1D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */,
 				6F12E4E722D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				08C691281D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				6F0F88981ECF0CE50060A893 /* override_artwork_virus.pdf in Resources */,
@@ -4107,7 +4099,6 @@
 				086F8D6022984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				08DADF8D20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				6F0F888D1ECF0CDD0060A893 /* override_default_rts_un.pdf in Resources */,
-				08C690DE1D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */,
 				6F1F92AB22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
 				6F0F888C1ECF0CDD0060A893 /* override_default_couleur3.pdf in Resources */,
 				6FD633E41FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
@@ -4225,7 +4216,6 @@
 				6FA9ECC820C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				0837CED91D3FDAFA00A1E089 /* SRGSSRType_He.ttf in Resources */,
 				08602BFE2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
-				08C690DF1D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */,
 				0887825123AD61D500629312 /* LiveMediaCollectionViewCell.xib in Resources */,
 				6F27F5D323CDD4E400156B1C /* HomeLivestreamsViewController.storyboard in Resources */,
 				6F0C999E2121FBD800073AB6 /* SRGAnalytics.bundle in Resources */,
@@ -4306,7 +4296,6 @@
 				08602BFF2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				6F0C99A42121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				6F0F883E1ECEE78C0060A893 /* override_default_radio_rtr.pdf in Resources */,
-				08C690E01D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */,
 				08564B261D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
 				E6E2DF2F1D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				6F93DE1620AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
@@ -4393,7 +4382,6 @@
 				08602C002213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				0837CEE81D3FDAFA00A1E089 /* FontAwesome.otf in Resources */,
 				08C6908B1D38E3E600BB8AAA /* iTunesArtwork@2x in Resources */,
-				08C690E11D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */,
 				0887825323AD61D500629312 /* LiveMediaCollectionViewCell.xib in Resources */,
 				6F6B643721A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				6FD88F8022D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
