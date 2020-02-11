@@ -272,6 +272,22 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x, newContentOffsetY) animated:animated];
 }
 
+#pragma mark Index
+
+- (void)setIndexHidden:(BOOL)hidden animated:(BOOL)animated
+{
+    void (^animations)(void) = ^{
+        self.collectionIndexView.alpha = hidden ? 0.f : 1.f;
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:0.2 animations:animations];
+    }
+    else {
+        animations();
+    }
+}
+
 #pragma mark UICollectionViewDataSource protocol
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -356,16 +372,19 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [UIView animateWithDuration:0.2 animations:^{
-        self.collectionIndexView.alpha = 0.f;
-    }];
+    [self setIndexHidden:YES animated:YES];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (! decelerate) {
+        [self setIndexHidden:NO animated:YES];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [UIView animateWithDuration:0.2 animations:^{
-        self.collectionIndexView.alpha = 1.f;
-    }];
+    [self setIndexHidden:NO animated:YES];
 }
 
 #pragma mark Actions
