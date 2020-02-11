@@ -147,7 +147,7 @@
 
 - (id)previewObject
 {
-    return (! self.editing) ? self.show : nil;
+    return ! self.editing ? self.show : nil;
 }
 
 - (NSValue *)previewAnchorRect

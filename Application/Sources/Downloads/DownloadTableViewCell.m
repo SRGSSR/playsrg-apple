@@ -309,7 +309,7 @@
 
 - (id)previewObject
 {
-    return (! self.editing) ? self.download.media : nil;
+    return ! self.editing ? self.download.media : nil;
 }
 
 - (NSValue *)previewAnchorRect

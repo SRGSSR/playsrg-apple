@@ -17,7 +17,6 @@
 
 #import <libextobjc/libextobjc.h>
 #import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
 #import <SRGUserData/SRGUserData.h>
 
 @interface WatchLaterViewController () <WatchLaterTableViewCellDelegate>
@@ -188,8 +187,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    return (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 94.f : 110.f;
+    return 94.f;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(WatchLaterTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
