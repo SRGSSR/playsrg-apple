@@ -1145,11 +1145,6 @@
 		6FA9ECBC20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */; };
 		6FA9ECBD20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */; };
 		6FA9ECBE20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */; };
-		6FA9ECC020C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECBF20C7AD8C00D3D6C2 /* NotificationsViewController.storyboard */; };
-		6FA9ECC120C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECBF20C7AD8C00D3D6C2 /* NotificationsViewController.storyboard */; };
-		6FA9ECC220C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECBF20C7AD8C00D3D6C2 /* NotificationsViewController.storyboard */; };
-		6FA9ECC320C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECBF20C7AD8C00D3D6C2 /* NotificationsViewController.storyboard */; };
-		6FA9ECC420C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECBF20C7AD8C00D3D6C2 /* NotificationsViewController.storyboard */; };
 		6FA9ECC620C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */; };
 		6FA9ECC720C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */; };
 		6FA9ECC820C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */; };
@@ -2094,7 +2089,6 @@
 		6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
 		6FA9ECB820C7AB3A00D3D6C2 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
 		6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
-		6FA9ECBF20C7AD8C00D3D6C2 /* NotificationsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NotificationsViewController.storyboard; sourceTree = "<group>"; };
 		6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		6FAAF76C20CAB25000BB58A3 /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
 		6FAAF77920CABA3A00BB58A3 /* Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notification.h; sourceTree = "<group>"; };
@@ -3244,7 +3238,6 @@
 			children = (
 				6FA9ECAA20C7AA1600D3D6C2 /* NotificationsViewController.h */,
 				6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */,
-				6FA9ECBF20C7AD8C00D3D6C2 /* NotificationsViewController.storyboard */,
 				6FA9ECB820C7AB3A00D3D6C2 /* NotificationTableViewCell.h */,
 				6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */,
 				6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */,
@@ -4005,7 +3998,6 @@
 				6F0F88991ECF0CE50060A893 /* override_artwork_srf_musikwelle.pdf in Resources */,
 				0863210F2258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				081220AD1DD079BB00BF8326 /* DownloadTableViewCell.xib in Resources */,
-				6FA9ECC020C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */,
 				6F4760041EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				E64BA3FB1D4A587E002C10D5 /* WebViewController.storyboard in Resources */,
 				08754F4B201BB01000458F3A /* InfoPlist.strings in Resources */,
@@ -4158,7 +4150,6 @@
 				6F40920E22DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
 				08C690131D38E08C00BB8AAA /* iTunesArtwork in Resources */,
 				6F58664B1DD226EE005DAFE4 /* Settings.bundle in Resources */,
-				6FA9ECC120C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */,
 				08C6900E1D38E08C00BB8AAA /* Localizable.strings in Resources */,
 				6F0C998E2121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
 				08DD9D5F1FFE6EF800115906 /* ModuleHeaderView.xib in Resources */,
@@ -4253,7 +4244,6 @@
 				6F3A47AF1DD19A5B00C79E67 /* RSIResources.xcassets in Resources */,
 				6F0C99942121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				6F0C99AD2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
-				6FA9ECC220C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */,
 				6F12DB4D21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
 				6F4EA1341EE034B000BEC4DA /* Accessibility.strings in Resources */,
 				08564B251D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
@@ -4341,7 +4331,6 @@
 				6F12E4EA22D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				6FB3C1B01DBCE783008160B4 /* MediaPreviewViewController.storyboard in Resources */,
 				6F0C99902121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
-				6FA9ECC320C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */,
 				08DD9D671FFE6EF900115906 /* ModuleHeaderView.xib in Resources */,
 				0804916C22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
 				0837CEDF1D3FDAFA00A1E089 /* FontAwesome.otf in Resources */,
@@ -4472,7 +4461,6 @@
 				6F0C99962121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				086BDE1E1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
 				0832BF1922BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
-				6FA9ECC420C7AD8C00D3D6C2 /* NotificationsViewController.storyboard in Resources */,
 				0837CEEE1D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				6F0C99A52121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				0804916D22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
