@@ -36,21 +36,56 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
-    BOOL isHomeFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
-    
-    if (featured && ! UIAccessibilityIsVoiceOverRunning() && isHomeFeaturedHeaderHidden) {
-        return 10.f;
-    }
-    else if (featured && UIAccessibilityIsVoiceOverRunning()) {
-        return 46.f;
-    }
-    else if (featured) {
-        return 62.f;
+    if (featured) {
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
+        BOOL isHomeFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
+        
+        if (! UIAccessibilityIsVoiceOverRunning() && isHomeFeaturedHeaderHidden) {
+            return 10.f;
+        }
+        else {
+            static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
+            static dispatch_once_t s_onceToken;
+            dispatch_once(&s_onceToken, ^{
+                s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @40,
+                                     UIContentSizeCategorySmall : @45,
+                                     UIContentSizeCategoryMedium : @45,
+                                     UIContentSizeCategoryLarge : @45,
+                                     UIContentSizeCategoryExtraLarge : @50,
+                                     UIContentSizeCategoryExtraExtraLarge : @55,
+                                     UIContentSizeCategoryExtraExtraExtraLarge : @55,
+                                     UIContentSizeCategoryAccessibilityMedium : @55,
+                                     UIContentSizeCategoryAccessibilityLarge : @55,
+                                     UIContentSizeCategoryAccessibilityExtraLarge : @55,
+                                     UIContentSizeCategoryAccessibilityExtraExtraLarge : @55,
+                                     UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @55 };
+            });
+            
+            NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+            return s_headerHeights[contentSizeCategory].floatValue;
+        }
     }
     else {
-        return 65.f;
+        static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @50,
+                                 UIContentSizeCategorySmall : @55,
+                                 UIContentSizeCategoryMedium : @60,
+                                 UIContentSizeCategoryLarge : @65,
+                                 UIContentSizeCategoryExtraLarge : @70,
+                                 UIContentSizeCategoryExtraExtraLarge : @75,
+                                 UIContentSizeCategoryExtraExtraExtraLarge : @80,
+                                 UIContentSizeCategoryAccessibilityMedium : @80,
+                                 UIContentSizeCategoryAccessibilityLarge : @80,
+                                 UIContentSizeCategoryAccessibilityExtraLarge : @80,
+                                 UIContentSizeCategoryAccessibilityExtraExtraLarge : @80,
+                                 UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @80 };
+        });
+        
+        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+        return s_headerHeights[contentSizeCategory].floatValue;
     }
 }
 
