@@ -72,10 +72,10 @@ static const CGFloat HomeStandardMargin = 10.f;
                                    UIContentSizeCategoryAccessibilityExtraExtraLarge : @125,
                                    UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @125 };
         
-        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @85,
-                                   UIContentSizeCategorySmall : @85,
-                                   UIContentSizeCategoryMedium : @85,
-                                   UIContentSizeCategoryLarge : @90,
+        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @75,
+                                   UIContentSizeCategorySmall : @75,
+                                   UIContentSizeCategoryMedium : @75,
+                                   UIContentSizeCategoryLarge : @75,
                                    UIContentSizeCategoryExtraLarge : @95,
                                    UIContentSizeCategoryExtraExtraLarge : @100,
                                    UIContentSizeCategoryExtraExtraExtraLarge : @113,
