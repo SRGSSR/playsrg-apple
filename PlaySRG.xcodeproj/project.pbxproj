@@ -1428,11 +1428,6 @@
 		E67FFA321D3E6847007BD7BA /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E67FFA361D3E684B007BD7BA /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
 		E67FFA371D3E684B007BD7BA /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E694A9DF1D65EFF300372DF0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */; };
-		E694A9E01D65EFF300372DF0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */; };
-		E694A9E11D65EFF300372DF0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */; };
-		E694A9E21D65EFF300372DF0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */; };
-		E694A9E31D65EFF300372DF0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */; };
 		E694A9F51D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
 		E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
 		E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
@@ -2216,7 +2211,6 @@
 		E66BEC1B1DA7FCED00AD4450 /* MediaPlayerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MediaPlayerViewController.storyboard; sourceTree = "<group>"; };
 		E67BB6971D3E640C00E1FEA3 /* Mantle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mantle.framework; path = Carthage/Build/iOS/Mantle.framework; sourceTree = "<group>"; };
 		E68712311D65B3D600CE7142 /* Fingertips.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fingertips.framework; path = Carthage/Build/iOS/Fingertips.framework; sourceTree = "<group>"; };
-		E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchViewController.storyboard; sourceTree = "<group>"; };
 		E694A9F21D65F02700372DF0 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		E694A9F31D65F02700372DF0 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		E694A9F41D65F02700372DF0 /* CalendarViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CalendarViewController.storyboard; sourceTree = "<group>"; };
@@ -3519,7 +3513,6 @@
 				6F1F92A922A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib */,
 				6F4C673B1EA6115C006A0A3B /* SearchViewController.h */,
 				6F4C673C1EA6115C006A0A3B /* SearchViewController.m */,
-				E694A9D91D65EFF300372DF0 /* SearchViewController.storyboard */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -3994,7 +3987,6 @@
 				081DAA261E0C1E9700018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F0C99B02121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				08280F0F2258EA4000AC978D /* WatchLaterViewController.storyboard in Resources */,
-				E694A9DF1D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				6F0F88991ECF0CE50060A893 /* override_artwork_srf_musikwelle.pdf in Resources */,
 				0863210F2258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				081220AD1DD079BB00BF8326 /* DownloadTableViewCell.xib in Resources */,
@@ -4107,7 +4099,6 @@
 				6FF3B6952137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
 				0875851E23A0025F00FA7207 /* LibraryViewController.storyboard in Resources */,
 				6FF7BBB322A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
-				E694A9E01D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				081220B11DD07B7A00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6F27F5D223CDD4E400156B1C /* HomeLivestreamsViewController.storyboard in Resources */,
 				6F4760051EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
@@ -4207,7 +4198,6 @@
 				6FCB57491EC2047B0015CAB7 /* override_artwork_rete_tre.pdf in Resources */,
 				6F12E4DA22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				0875851F23A0025F00FA7207 /* LibraryViewController.storyboard in Resources */,
-				E694A9E11D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				6F0F88371ECEE7800060A893 /* override_default_la2.pdf in Resources */,
 				6F93DE1520AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6F2961FE2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
@@ -4301,7 +4291,6 @@
 				08C6912B1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				E6DB5F311D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				0837CEE61D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
-				E694A9E21D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				081DAA281E0C1FC800018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6F0F88401ECEE78C0060A893 /* override_default_rtr_srf_info.pdf in Resources */,
@@ -4401,7 +4390,6 @@
 				6FBF24482148238300E576A2 /* SRGDiagnostics.bundle in Resources */,
 				E6DB5F321D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				0837CEEF1D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
-				E694A9E31D65EFF300372DF0 /* SearchViewController.storyboard in Resources */,
 				0804917A22832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
 				6FA7EC3D20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				6F1938381EFBFEC80017B1D1 /* ApplicationConfiguration.json in Resources */,

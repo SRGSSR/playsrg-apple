@@ -92,14 +92,29 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 #pragma mark View lifecycle
 
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
+    
+    UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.minimumInteritemSpacing = 0.f;
+    collectionViewLayout.minimumLineSpacing = 0.f;
+    
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
+    collectionView.backgroundColor = UIColor.clearColor;
+    collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    collectionView.alwaysBounceVertical = YES;
+    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:collectionView];
+    self.collectionView = collectionView;
+    
+    self.view = view;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = UIColor.play_blackColor;
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
     self.emptyCollectionImage = [UIImage imageNamed:@"search-90"];
     
@@ -626,8 +641,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
          if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-            CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 86.f : 100.f;
-            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, height);
+            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 94.f);
         }
         // Media grid layout
         else {
