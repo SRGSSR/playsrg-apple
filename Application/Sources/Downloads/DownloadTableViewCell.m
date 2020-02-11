@@ -222,7 +222,17 @@
     
     self.media360ImageView.hidden = (download.presentation != SRGPresentation360);
     
-    self.webFirstLabel.hidden = ! download.media.play_isWebFirst;
+    BOOL isWebFirst = download.media.play_isWebFirst;
+    self.webFirstLabel.hidden = ! isWebFirst;
+    
+    // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
+        self.titleLabel.numberOfLines = isWebFirst ? 1 : 2;
+    }
+    else {
+        self.titleLabel.numberOfLines = 2;
+    }
     
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(download.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
