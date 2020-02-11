@@ -277,11 +277,6 @@
 		086F8D6122984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086F8D5022984B29001BE2F4 /* FavoriteTableViewCell.xib */; };
 		086F8D6222984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086F8D5022984B29001BE2F4 /* FavoriteTableViewCell.xib */; };
 		086F8D6322984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086F8D5022984B29001BE2F4 /* FavoriteTableViewCell.xib */; };
-		086F8D6422984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086F8D5222984B29001BE2F4 /* FavoritesViewController.storyboard */; };
-		086F8D6522984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086F8D5222984B29001BE2F4 /* FavoritesViewController.storyboard */; };
-		086F8D6622984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086F8D5222984B29001BE2F4 /* FavoritesViewController.storyboard */; };
-		086F8D6722984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086F8D5222984B29001BE2F4 /* FavoritesViewController.storyboard */; };
-		086F8D6822984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086F8D5222984B29001BE2F4 /* FavoritesViewController.storyboard */; };
 		086F8D6922984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D5322984B29001BE2F4 /* FavoriteTableViewCell.m */; };
 		086F8D6A22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D5322984B29001BE2F4 /* FavoriteTableViewCell.m */; };
 		086F8D6B22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D5322984B29001BE2F4 /* FavoriteTableViewCell.m */; };
@@ -1761,7 +1756,6 @@
 		086F8D4F22984B29001BE2F4 /* FavoriteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteTableViewCell.h; sourceTree = "<group>"; };
 		086F8D5022984B29001BE2F4 /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
 		086F8D5122984B29001BE2F4 /* Favorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorites.h; sourceTree = "<group>"; };
-		086F8D5222984B29001BE2F4 /* FavoritesViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FavoritesViewController.storyboard; sourceTree = "<group>"; };
 		086F8D5322984B29001BE2F4 /* FavoriteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewCell.m; sourceTree = "<group>"; };
 		086F8D5422984B29001BE2F4 /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
 		08754F3E201BAFCC00458F3A /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2660,7 +2654,6 @@
 				086F8D4D22984B29001BE2F4 /* Favorites.m */,
 				086F8D5422984B29001BE2F4 /* FavoritesViewController.h */,
 				086F8D4E22984B29001BE2F4 /* FavoritesViewController.m */,
-				086F8D5222984B29001BE2F4 /* FavoritesViewController.storyboard */,
 				086F8D4F22984B29001BE2F4 /* FavoriteTableViewCell.h */,
 				086F8D5322984B29001BE2F4 /* FavoriteTableViewCell.m */,
 				086F8D5022984B29001BE2F4 /* FavoriteTableViewCell.xib */,
@@ -4006,7 +3999,6 @@
 			files = (
 				6FD88F7C22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				08C690551D38E0BE00BB8AAA /* iTunesArtwork@2x in Resources */,
-				086F8D6422984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */,
 				E6DB5F2E1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				0837CECB1D3FD6E600A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				6F3A47B51DD19A8500C79E67 /* SRFResources.xcassets in Resources */,
@@ -4158,7 +4150,6 @@
 				08DADF8D20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				6F0F888D1ECF0CDD0060A893 /* override_default_rts_un.pdf in Resources */,
 				08C690DE1D38E5BE00BB8AAA /* HomeViewController.storyboard in Resources */,
-				086F8D6522984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */,
 				6F1F92AB22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
 				6F0F888C1ECF0CDD0060A893 /* override_default_couleur3.pdf in Resources */,
 				6FD633E41FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
@@ -4314,7 +4305,6 @@
 				0837CEDB1D3FDAFA00A1E089 /* SRGSSRType_Lt.ttf in Resources */,
 				6F40920F22DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
 				0837CEDA1D3FDAFA00A1E089 /* SRGSSRType_It.ttf in Resources */,
-				086F8D6622984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */,
 				08280F112258EA4000AC978D /* WatchLaterViewController.storyboard in Resources */,
 				6F0C99992121FBD800073AB6 /* SRGAppearance.bundle in Resources */,
 				6F475FFC1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
@@ -4338,7 +4328,6 @@
 				6F0C99AE2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
 				6FA9ECC920C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */,
-				086F8D6722984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */,
 				6F4760071EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6F1F92AD22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
@@ -4490,7 +4479,6 @@
 				086F8D6322984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				086321132258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				6F5F4FCD1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
-				086F8D6822984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */,
 				6F0C99A02121FBD800073AB6 /* SRGAnalytics.bundle in Resources */,
 				08C690811D38E3E600BB8AAA /* Localizable.strings in Resources */,
 				6F0C99962121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
