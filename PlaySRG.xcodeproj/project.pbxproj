@@ -43,23 +43,18 @@
 		080731B92224546200AF9C83 /* SRGAnalytics_Identity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080731B5222453EC00AF9C83 /* SRGAnalytics_Identity.framework */; };
 		080731BA2224547A00AF9C83 /* SRGAnalytics_Identity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080731B5222453EC00AF9C83 /* SRGAnalytics_Identity.framework */; };
 		081220AA1DD079BB00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220AB1DD079BB00BF8326 /* DownloadsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 081220A61DD079BB00BF8326 /* DownloadsViewController.storyboard */; };
 		081220AC1DD079BB00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
 		081220AD1DD079BB00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
 		081220AE1DD07B7A00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220AF1DD07B7A00BF8326 /* DownloadsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 081220A61DD079BB00BF8326 /* DownloadsViewController.storyboard */; };
 		081220B01DD07B7A00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
 		081220B11DD07B7A00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
 		081220B21DD07B7B00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220B31DD07B7B00BF8326 /* DownloadsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 081220A61DD079BB00BF8326 /* DownloadsViewController.storyboard */; };
 		081220B41DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
 		081220B51DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
 		081220B61DD07B7B00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220B71DD07B7B00BF8326 /* DownloadsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 081220A61DD079BB00BF8326 /* DownloadsViewController.storyboard */; };
 		081220B81DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
 		081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
 		081220BA1DD07B7B00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220BB1DD07B7B00BF8326 /* DownloadsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 081220A61DD079BB00BF8326 /* DownloadsViewController.storyboard */; };
 		081220BC1DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
 		081220BD1DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
 		081220C11DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
@@ -1696,7 +1691,6 @@
 		080731B5222453EC00AF9C83 /* SRGAnalytics_Identity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGAnalytics_Identity.framework; path = Carthage/Build/iOS/Static/SRGAnalytics_Identity.framework; sourceTree = "<group>"; };
 		081220A41DD079BB00BF8326 /* DownloadsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadsViewController.h; sourceTree = "<group>"; };
 		081220A51DD079BB00BF8326 /* DownloadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadsViewController.m; sourceTree = "<group>"; };
-		081220A61DD079BB00BF8326 /* DownloadsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DownloadsViewController.storyboard; sourceTree = "<group>"; };
 		081220A71DD079BB00BF8326 /* DownloadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadTableViewCell.h; sourceTree = "<group>"; };
 		081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadTableViewCell.m; sourceTree = "<group>"; };
 		081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadTableViewCell.xib; sourceTree = "<group>"; };
@@ -2549,7 +2543,6 @@
 				081220C01DD0ADAC00BF8326 /* DownloadSession.m */,
 				081220A41DD079BB00BF8326 /* DownloadsViewController.h */,
 				081220A51DD079BB00BF8326 /* DownloadsViewController.m */,
-				081220A61DD079BB00BF8326 /* DownloadsViewController.storyboard */,
 				081220A71DD079BB00BF8326 /* DownloadTableViewCell.h */,
 				081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */,
 				081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */,
@@ -4032,7 +4025,6 @@
 				E64BA3FB1D4A587E002C10D5 /* WebViewController.storyboard in Resources */,
 				08754F4B201BB01000458F3A /* InfoPlist.strings in Resources */,
 				0832BF1522BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
-				081220AB1DD079BB00BF8326 /* DownloadsViewController.storyboard in Resources */,
 				0837CEC61D3FD6E600A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				6F40920D22DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
 				6F0A7F0520AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
@@ -4146,7 +4138,6 @@
 				E64BA4001D4A588B002C10D5 /* WebViewController.storyboard in Resources */,
 				6FBF24452148238300E576A2 /* SRGDiagnostics.bundle in Resources */,
 				6F12E4E822D8676600BC1718 /* SearchHeaderView.xib in Resources */,
-				081220AF1DD07B7A00BF8326 /* DownloadsViewController.storyboard in Resources */,
 				0837CECF1D3FDAF900A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				6F93DE1420AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				0837CECE1D3FDAF900A1E089 /* SRGSSRType_Bd.ttf in Resources */,
@@ -4256,7 +4247,6 @@
 				6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6FCB574C1EC2047B0015CAB7 /* override_default_rete_tre.pdf in Resources */,
 				086F8D6122984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
-				081220B31DD07B7B00BF8326 /* DownloadsViewController.storyboard in Resources */,
 				6F0A7F0720AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FB0BB3720AEF5A7007C5D87 /* Onboarding.strings in Resources */,
 				0837CED81D3FDAFA00A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
@@ -4350,7 +4340,6 @@
 				E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */,
 				086F8D6722984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */,
 				6F4760071EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
-				081220B71DD07B7B00BF8326 /* DownloadsViewController.storyboard in Resources */,
 				084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6F1F92AD22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
 				6F12DB5821A3EFBF0054879D /* HistoryViewController.storyboard in Resources */,
@@ -4459,7 +4448,6 @@
 				6F4760081EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				6F12DB5921A3EFBF0054879D /* HistoryViewController.storyboard in Resources */,
 				08DD9D6B1FFE6EFA00115906 /* ModuleHeaderView.xib in Resources */,
-				081220BB1DD07B7B00BF8326 /* DownloadsViewController.storyboard in Resources */,
 				6F0C99912121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
 				6F12E4EB22D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				0837CEEA1D3FDAFA00A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
