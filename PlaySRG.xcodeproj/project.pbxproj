@@ -1503,11 +1503,6 @@
 		E6E2DF1C1D6ACA8B00791EDE /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2DF181D6ACA8B00791EDE /* ShowViewController.m */; };
 		E6E2DF1D1D6ACA8B00791EDE /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2DF181D6ACA8B00791EDE /* ShowViewController.m */; };
 		E6E2DF1E1D6ACA8B00791EDE /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2DF181D6ACA8B00791EDE /* ShowViewController.m */; };
-		E6E2DF1F1D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6E2DF191D6ACA8B00791EDE /* ShowViewController.storyboard */; };
-		E6E2DF201D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6E2DF191D6ACA8B00791EDE /* ShowViewController.storyboard */; };
-		E6E2DF211D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6E2DF191D6ACA8B00791EDE /* ShowViewController.storyboard */; };
-		E6E2DF221D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6E2DF191D6ACA8B00791EDE /* ShowViewController.storyboard */; };
-		E6E2DF231D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6E2DF191D6ACA8B00791EDE /* ShowViewController.storyboard */; };
 		E6E2DF261D6AD32800791EDE /* ShowHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2DF251D6AD32800791EDE /* ShowHeaderView.m */; };
 		E6E2DF271D6AD32800791EDE /* ShowHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2DF251D6AD32800791EDE /* ShowHeaderView.m */; };
 		E6E2DF281D6AD32800791EDE /* ShowHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2DF251D6AD32800791EDE /* ShowHeaderView.m */; };
@@ -2262,7 +2257,6 @@
 		E6DB5F2D1D66E1640057094B /* ShowCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowCollectionViewCell.xib; sourceTree = "<group>"; };
 		E6E2DF171D6ACA8B00791EDE /* ShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowViewController.h; sourceTree = "<group>"; };
 		E6E2DF181D6ACA8B00791EDE /* ShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowViewController.m; sourceTree = "<group>"; };
-		E6E2DF191D6ACA8B00791EDE /* ShowViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShowViewController.storyboard; sourceTree = "<group>"; };
 		E6E2DF241D6AD32800791EDE /* ShowHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowHeaderView.h; sourceTree = "<group>"; };
 		E6E2DF251D6AD32800791EDE /* ShowHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowHeaderView.m; sourceTree = "<group>"; };
 		E6E2DF2B1D6AD33400791EDE /* ShowHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowHeaderView.xib; sourceTree = "<group>"; };
@@ -3584,7 +3578,6 @@
 				E6DB5F201D66E0950057094B /* ShowsViewController.storyboard */,
 				E6E2DF171D6ACA8B00791EDE /* ShowViewController.h */,
 				E6E2DF181D6ACA8B00791EDE /* ShowViewController.m */,
-				E6E2DF191D6ACA8B00791EDE /* ShowViewController.storyboard */,
 			);
 			path = Shows;
 			sourceTree = "<group>";
@@ -4118,7 +4111,6 @@
 				6F1A95EB216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
 				0875851D23A0025F00FA7207 /* LibraryViewController.storyboard in Resources */,
 				0837CEC91D3FD6E600A1E089 /* SRGSSRType_Lt.ttf in Resources */,
-				E6E2DF1F1D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */,
 				0837CEC81D3FD6E600A1E089 /* SRGSSRType_It.ttf in Resources */,
 				6F475FFA1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
 				6F0F889C1ECF0CE50060A893 /* override_artwork_tv_srf2.pdf in Resources */,
@@ -4228,7 +4220,6 @@
 				6FB0BB3D20AEF5C4007C5D87 /* Onboarding.strings in Resources */,
 				6F47600F1EB37BC6003021EA /* TranslucentTitleHeaderView.xib in Resources */,
 				0837CED21D3FDAF900A1E089 /* SRGSSRType_Lt.ttf in Resources */,
-				E6E2DF201D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */,
 				6F0C99932121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				0887825023AD61D500629312 /* LiveMediaCollectionViewCell.xib in Resources */,
 				0837CED11D3FDAF900A1E089 /* SRGSSRType_It.ttf in Resources */,
@@ -4332,7 +4323,6 @@
 				6F4760101EB37BC6003021EA /* TranslucentTitleHeaderView.xib in Resources */,
 				0837CEDB1D3FDAFA00A1E089 /* SRGSSRType_Lt.ttf in Resources */,
 				6F40920F22DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
-				E6E2DF211D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */,
 				0837CEDA1D3FDAFA00A1E089 /* SRGSSRType_It.ttf in Resources */,
 				086F8D6622984B29001BE2F4 /* FavoritesViewController.storyboard in Resources */,
 				08280F112258EA4000AC978D /* WatchLaterViewController.storyboard in Resources */,
@@ -4437,7 +4427,6 @@
 				0875851123A0025F00FA7207 /* LibraryAccountHeaderView.xib in Resources */,
 				0837CEE41D3FDAFA00A1E089 /* SRGSSRType_Lt.ttf in Resources */,
 				6F0C999A2121FBD800073AB6 /* SRGAppearance.bundle in Resources */,
-				E6E2DF221D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */,
 				0837CEE31D3FDAFA00A1E089 /* SRGSSRType_It.ttf in Resources */,
 				6F40921022DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
 				6F475FFD1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
@@ -4528,7 +4517,6 @@
 				0837CEED1D3FDAFA00A1E089 /* SRGSSRType_Lt.ttf in Resources */,
 				6FD2CBC71DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
 				6F4760121EB37BC6003021EA /* TranslucentTitleHeaderView.xib in Resources */,
-				E6E2DF231D6ACA8B00791EDE /* ShowViewController.storyboard in Resources */,
 				6FB0BB4320AEF5DC007C5D87 /* Onboarding.strings in Resources */,
 				6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */,
 				6F0C99B42121FBD800073AB6 /* SRGLogger.bundle in Resources */,
