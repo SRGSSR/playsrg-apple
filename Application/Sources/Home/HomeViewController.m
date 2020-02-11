@@ -49,9 +49,6 @@
 
 @property (nonatomic, getter=isTopicsLoaded) BOOL topicsLoaded;
 @property (nonatomic, getter=isEventsLoaded) BOOL eventsLoaded;
-@property (nonatomic, getter=isFavoriteTVShowsLoaded) BOOL favoriteTVShowsLoaded;
-@property (nonatomic, getter=isFavoriteRadioShowsLoaded) BOOL favoriteRadioShowsLoaded;
-
 @end
 
 @implementation HomeViewController
@@ -311,14 +308,6 @@
         [homeSectionInfo refreshWithRequestQueue:requestQueue completionBlock:^(NSError * _Nullable error) {
             // Refresh as data becomes available for better perceived loading times
             if (! error) {
-                if (homeSection == HomeSectionTVFavoriteShows) {
-                    self.favoriteTVShowsLoaded = YES;
-                    [self synchronizeHomeSections];
-                }
-                else if (homeSection == HomeSectionRadioFavoriteShows) {
-                    self.favoriteRadioShowsLoaded = YES;
-                    [self synchronizeHomeSections];
-                }
                 [self.tableView reloadData];
             }
         }];
@@ -357,21 +346,11 @@
         }
         else if (homeSection.integerValue == HomeSectionTVFavoriteShows) {
             HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:nil title:TitleForHomeSection(homeSection.integerValue)];
-            if (homeSectionInfo.items.count != 0) {
-                [homeSectionInfos addObject:homeSectionInfo];
-            }
-            else if (! self.favoriteTVShowsLoaded) {
-                [homeSectionInfos addObject:homeSectionInfo];
-            }
+            [homeSectionInfos addObject:homeSectionInfo];
         }
         else if (homeSection.integerValue == HomeSectionRadioFavoriteShows) {
             HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:self.radioChannel.uid title:TitleForHomeSection(homeSection.integerValue)];
-            if (homeSectionInfo.items.count != 0) {
-                [homeSectionInfos addObject:homeSectionInfo];
-            }
-            else if (! self.favoriteRadioShowsLoaded) {
-                [homeSectionInfos addObject:homeSectionInfo];
-            }
+            [homeSectionInfos addObject:homeSectionInfo];
         }
         else {
             HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:self.radioChannel.uid title:TitleForHomeSection(homeSection.integerValue)];
@@ -526,7 +505,12 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[indexPath.section];
-    return [homeSectionInfo.cellClass heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:(indexPath.section == 0)];
+    if (! homeSectionInfo.hidden) {
+        return [homeSectionInfo.cellClass heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:(indexPath.section == 0)];
+    }
+    else {
+        return 0.f;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(HomeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -538,15 +522,25 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[section];
-    return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:(section == 0)];
+    if (! homeSectionInfo.hidden) {
+        return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:(section == 0)];
+    }
+    else {
+        return 0.f;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[section];
-    HomeSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(HomeSectionHeaderView.class)];
-    [headerView setHomeSectionInfo:homeSectionInfo featured:(section == 0)];
-    return headerView;
+    if (! homeSectionInfo.hidden) {
+        HomeSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(HomeSectionHeaderView.class)];
+        [headerView setHomeSectionInfo:homeSectionInfo featured:(section == 0)];
+        return headerView;
+    }
+    else {
+        return nil;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(HomeSectionHeaderView *)headerView forSection:(NSInteger)section

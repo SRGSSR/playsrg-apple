@@ -84,6 +84,18 @@
         && ! [self isPlaceholder];
 }
 
+- (BOOL)isHidden
+{
+    // Favorites: Can be hidden when no item is available
+    if (self.homeSection == HomeSectionTVFavoriteShows || self.homeSection == HomeSectionRadioFavoriteShows) {
+        return self.items.count == 0;
+    }
+    // All other rows: Even when empty, a placeholder is displayed instead
+    else {
+        return NO;
+    }
+}
+
 - (BOOL)isPlaceholder
 {
     return (self.homeSection == HomeSectionTVTopics || self.homeSection == HomeSectionTVEvents) && ! self.object;

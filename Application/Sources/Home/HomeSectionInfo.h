@@ -25,6 +25,7 @@ typedef void (^SRGItemListCompletionBlock)(NSArray * _Nullable items, NSHTTPURLR
 @property (nonatomic, readonly) BOOL canOpenList;
 
 @property (nonatomic, readonly, nullable) id object;
+@property (nonatomic, readonly, getter=isHidden) BOOL hidden;
 
 @property (nonatomic, readonly, copy, nullable) NSString *identifier;
 @property (nonatomic, readonly, nullable) SRGModule *module;
