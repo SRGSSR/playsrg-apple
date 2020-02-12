@@ -216,7 +216,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 - (void)reloadData
 {
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
+    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     
     SRGBlockingReason blockingReason = [self.media blockingReasonAtDate:NSDate.date];
@@ -232,7 +232,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
         self.titleLabel.textColor = UIColor.play_lightGrayColor;
     }
     
-    SRGAppearanceFontTextStyle subtitleTextStyle = SRGAppearanceFontTextStyleBody;
+    SRGAppearanceFontTextStyle subtitleTextStyle = SRGAppearanceFontTextStyleSubtitle;
     ImageScale imageScale = ImageScaleMedium;
     
     self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:subtitleTextStyle];
