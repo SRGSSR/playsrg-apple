@@ -12,11 +12,6 @@
 		0801E07D1D4A4A810008021E /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
 		0801E07E1D4A4A810008021E /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
 		0801E07F1D4A4A810008021E /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
-		0804916922831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0804916722831DEE00E4CEC2 /* HomeShowListTableViewCell.xib */; };
-		0804916A22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0804916722831DEE00E4CEC2 /* HomeShowListTableViewCell.xib */; };
-		0804916B22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0804916722831DEE00E4CEC2 /* HomeShowListTableViewCell.xib */; };
-		0804916C22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0804916722831DEE00E4CEC2 /* HomeShowListTableViewCell.xib */; };
-		0804916D22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0804916722831DEE00E4CEC2 /* HomeShowListTableViewCell.xib */; };
 		0804916E22831DEF00E4CEC2 /* HomeShowListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0804916822831DEF00E4CEC2 /* HomeShowListTableViewCell.m */; };
 		0804916F22831DEF00E4CEC2 /* HomeShowListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0804916822831DEF00E4CEC2 /* HomeShowListTableViewCell.m */; };
 		0804917022831DEF00E4CEC2 /* HomeShowListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0804916822831DEF00E4CEC2 /* HomeShowListTableViewCell.m */; };
@@ -1636,7 +1631,6 @@
 		0801E0791D4A4A810008021E /* RadioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannel.h; sourceTree = "<group>"; };
 		0801E07A1D4A4A810008021E /* RadioChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioChannel.m; sourceTree = "<group>"; };
 		0804916622831DEE00E4CEC2 /* HomeShowListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeShowListTableViewCell.h; sourceTree = "<group>"; };
-		0804916722831DEE00E4CEC2 /* HomeShowListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeShowListTableViewCell.xib; sourceTree = "<group>"; };
 		0804916822831DEF00E4CEC2 /* HomeShowListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeShowListTableViewCell.m; sourceTree = "<group>"; };
 		0804917322832C5C00E4CEC2 /* HomeShowCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeShowCollectionViewCell.h; sourceTree = "<group>"; };
 		0804917422832C5C00E4CEC2 /* HomeShowCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeShowCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -2800,7 +2794,6 @@
 				0804917422832C5C00E4CEC2 /* HomeShowCollectionViewCell.xib */,
 				0804916622831DEE00E4CEC2 /* HomeShowListTableViewCell.h */,
 				0804916822831DEF00E4CEC2 /* HomeShowListTableViewCell.m */,
-				0804916722831DEE00E4CEC2 /* HomeShowListTableViewCell.xib */,
 				08602BF62213786B0081D166 /* HomeShowsAccessTableViewCell.h */,
 				08602BF42213786A0081D166 /* HomeShowsAccessTableViewCell.m */,
 				08602BF52213786B0081D166 /* HomeShowsAccessTableViewCell.xib */,
@@ -3985,7 +3978,6 @@
 				6F0F88971ECF0CE50060A893 /* override_artwork_srf1.pdf in Resources */,
 				08564B231D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
 				08DADF8C20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
-				0804916922831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
 				0837CEC71D3FD6E600A1E089 /* SRGSSRType_He.ttf in Resources */,
 				6F93DE1320AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6F0F88A01ECF0CE50060A893 /* override_default_srf1.pdf in Resources */,
@@ -4122,7 +4114,6 @@
 				6F12DB4C21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
 				08C6901D1D38E08C00BB8AAA /* LaunchScreen.xib in Resources */,
 				0837CED31D3FDAF900A1E089 /* SRGSSRType_Md.ttf in Resources */,
-				0804916A22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
 				6F7C89D020AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				6F4C0A7C20DCBDD200069A85 /* HomeShowVerticalListTableViewCell.xib in Resources */,
 				6FD2CBC41DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
@@ -4149,7 +4140,6 @@
 				6F0F885B1ECF0BA40060A893 /* override_artwork_la2.pdf in Resources */,
 				6F0C998F2121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
 				0837CEDD1D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
-				0804916B22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
 				6FCB57491EC2047B0015CAB7 /* override_artwork_rete_tre.pdf in Resources */,
 				6F12E4DA22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				0875851F23A0025F00FA7207 /* LibraryViewController.storyboard in Resources */,
@@ -4271,7 +4261,6 @@
 				6FB3C1B01DBCE783008160B4 /* MediaPreviewViewController.storyboard in Resources */,
 				6F0C99902121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
 				08DD9D671FFE6EF900115906 /* ModuleHeaderView.xib in Resources */,
-				0804916C22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
 				0837CEDF1D3FDAFA00A1E089 /* FontAwesome.otf in Resources */,
 				08602BFF2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				6F0C99A42121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
@@ -4391,7 +4380,6 @@
 				0832BF1922BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
 				0837CEEE1D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				6F0C99A52121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
-				0804916D22831DEF00E4CEC2 /* HomeShowListTableViewCell.xib in Resources */,
 				0875852123A0025F00FA7207 /* LibraryViewController.storyboard in Resources */,
 				6F0C99AF2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
 				0837CEED1D3FDAFA00A1E089 /* SRGSSRType_Lt.ttf in Resources */,

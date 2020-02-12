@@ -107,12 +107,11 @@
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
     
-    Class mediaCellClass = HomeMediaListTableViewCell.class;
-    [self.tableView registerClass:mediaCellClass forCellReuseIdentifier:NSStringFromClass(mediaCellClass)];
+    Class mediaListCellClass = HomeMediaListTableViewCell.class;
+    [self.tableView registerClass:mediaListCellClass forCellReuseIdentifier:NSStringFromClass(mediaListCellClass)];
     
-    NSString *showCellIdentifier = NSStringFromClass(HomeShowListTableViewCell.class);
-    UINib *homeShowListTableViewCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
-    [self.tableView registerNib:homeShowListTableViewCellNib forCellReuseIdentifier:showCellIdentifier];
+    Class showListCellClass = HomeShowListTableViewCell.class;
+    [self.tableView registerClass:showListCellClass forCellReuseIdentifier:NSStringFromClass(showListCellClass)];
     
     NSString *showVerticalListCellIdentifier = NSStringFromClass(HomeShowVerticalListTableViewCell.class);
     UINib *homeShowVerticalListTableViewCellNib = [UINib nibWithNibName:showVerticalListCellIdentifier bundle:nil];
