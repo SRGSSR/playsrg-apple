@@ -50,9 +50,6 @@
     view.backgroundColor = UIColor.play_blackColor;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
-    collectionViewLayout.minimumInteritemSpacing = 0.f;
-    collectionViewLayout.minimumLineSpacing = 0.f;
-    
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
     collectionView.backgroundColor = UIColor.clearColor;
     collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
