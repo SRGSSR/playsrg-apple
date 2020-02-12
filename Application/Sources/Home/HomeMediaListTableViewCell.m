@@ -91,34 +91,51 @@ static const CGFloat HomeStandardMargin = 10.f;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
-- (void)awakeFromNib
+#pragma mark Object lifecycle
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    [super awakeFromNib];
-    
-    self.backgroundColor = UIColor.clearColor;
-    self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.collectionView.alwaysBounceHorizontal = YES;
-    self.collectionView.directionalLockEnabled = YES;
-    // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
-    self.collectionView.scrollsToTop = NO;
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    
-    // Remark: The collection view is nested in a dummy view to workaround an accessibility bug
-    //         See https://stackoverflow.com/a/38798448/760435
-    self.wrapperView.accessibilityElements = @[self.collectionView];
-    
-    NSString *mediaCellIdentifier = NSStringFromClass(HomeMediaCollectionViewCell.class);
-    UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
-    [self.collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
-      
-    NSString *headerViewIdentifier = NSStringFromClass(HomeMediaCollectionHeaderView.class);
-    UINib *headerNib = [UINib nibWithNibName:headerViewIdentifier bundle:nil];
-    [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewIdentifier];
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = UIColor.clearColor;
+        self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
+        
+        UIView *wrapperView = [[UIView alloc] initWithFrame:self.contentView.bounds];
+        wrapperView.backgroundColor = UIColor.clearColor;
+        wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.contentView addSubview:wrapperView];
+        self.wrapperView = wrapperView;
+        
+        UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:wrapperView.bounds collectionViewLayout:collectionViewLayout];
+        collectionView.backgroundColor = UIColor.clearColor;
+        collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+        collectionView.alwaysBounceHorizontal = YES;
+        collectionView.directionalLockEnabled = YES;
+        // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
+        collectionView.scrollsToTop = NO;
+        collectionView.delegate = self;
+        collectionView.dataSource = self;
+        [wrapperView addSubview:collectionView];
+        self.collectionView = collectionView;
+        
+        // Remark: The collection view is nested in a dummy view to workaround an accessibility bug
+        //         See https://stackoverflow.com/a/38798448/760435
+        wrapperView.accessibilityElements = @[collectionView];
+        
+        NSString *mediaCellIdentifier = NSStringFromClass(HomeMediaCollectionViewCell.class);
+        UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
+        [collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
+          
+        NSString *headerViewIdentifier = NSStringFromClass(HomeMediaCollectionHeaderView.class);
+        UINib *headerNib = [UINib nibWithNibName:headerViewIdentifier bundle:nil];
+        [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewIdentifier];
+    }
+    return self;
 }
+
+#pragma mark Overrides
 
 - (void)layoutSubviews
 {

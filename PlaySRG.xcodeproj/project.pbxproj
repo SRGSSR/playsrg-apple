@@ -1433,11 +1433,6 @@
 		E6AE511A1D3F54AA00572CE4 /* HomeSectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AE51171D3F54AA00572CE4 /* HomeSectionInfo.m */; };
 		E6AE511B1D3F54AA00572CE4 /* HomeSectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AE51171D3F54AA00572CE4 /* HomeSectionInfo.m */; };
 		E6AE511C1D3F54AA00572CE4 /* HomeSectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AE51171D3F54AA00572CE4 /* HomeSectionInfo.m */; };
-		E6AE51331D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AE51321D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib */; };
-		E6AE51341D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AE51321D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib */; };
-		E6AE51351D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AE51321D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib */; };
-		E6AE51361D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AE51321D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib */; };
-		E6AE51371D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AE51321D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib */; };
 		E6DB5F1B1D66E0890057094B /* ShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F1A1D66E0890057094B /* ShowsViewController.m */; };
 		E6DB5F1C1D66E0890057094B /* ShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F1A1D66E0890057094B /* ShowsViewController.m */; };
 		E6DB5F1D1D66E0890057094B /* ShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F1A1D66E0890057094B /* ShowsViewController.m */; };
@@ -2195,7 +2190,6 @@
 		E6971AEC1D4B300C008CA703 /* PlayApplicationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayApplicationError.m; sourceTree = "<group>"; };
 		E6AE51161D3F54AA00572CE4 /* HomeSectionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSectionInfo.h; sourceTree = "<group>"; };
 		E6AE51171D3F54AA00572CE4 /* HomeSectionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSectionInfo.m; sourceTree = "<group>"; };
-		E6AE51321D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeMediaListTableViewCell.xib; sourceTree = "<group>"; };
 		E6DB5F191D66E0890057094B /* ShowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowsViewController.h; sourceTree = "<group>"; };
 		E6DB5F1A1D66E0890057094B /* ShowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowsViewController.m; sourceTree = "<group>"; };
 		E6DB5F261D66E1550057094B /* ShowCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowCollectionViewCell.h; sourceTree = "<group>"; };
@@ -2794,7 +2788,6 @@
 				0837CEA81D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.xib */,
 				08C691321D391A1B00BB8AAA /* HomeMediaListTableViewCell.h */,
 				08C691331D391A1B00BB8AAA /* HomeMediaListTableViewCell.m */,
-				E6AE51321D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib */,
 				08BAABD71E7613F0007644D7 /* HomeMediasViewController.h */,
 				08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */,
 				08564B1B1D41111A00381549 /* HomeSectionHeaderView.h */,
@@ -4010,7 +4003,6 @@
 				086F8D5F22984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				08DD9D5A1FFE6EDB00115906 /* ModuleHeaderView.xib in Resources */,
 				082590F11F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
-				E6AE51331D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
 				E66BEC211DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F0F88A41ECF0CE50060A893 /* override_default_srf3.pdf in Resources */,
 				6F2961FC2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
@@ -4110,7 +4102,6 @@
 				6F0C998E2121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
 				08DD9D5F1FFE6EF800115906 /* ModuleHeaderView.xib in Resources */,
 				6F6B643421A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
-				E6AE51341D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
 				0828BB3B22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				084F94B622D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6F1938321EFBFE9E0017B1D1 /* ApplicationConfiguration.json in Resources */,
@@ -4217,7 +4208,6 @@
 				0804917822832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
 				08DADF8E20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				6FE01B1823603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
-				E6AE51351D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
 				6FF7BBB422A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				E66BEC231DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6FCB57481EC2047B0015CAB7 /* override_artwork_rete_due.pdf in Resources */,
@@ -4299,7 +4289,6 @@
 				08C68FF71D38E04B00BB8AAA /* Localizable.strings in Resources */,
 				6F58664D1DD226EE005DAFE4 /* Settings.bundle in Resources */,
 				08C68FDE1D38E04B00BB8AAA /* iTunesArtwork in Resources */,
-				E6AE51361D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
 				0832BF1822BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
 				6F12DB4E21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
 				6F0A7F0820AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
@@ -4388,7 +4377,6 @@
 				6F12E4DE22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				6F58664E1DD226EE005DAFE4 /* Settings.bundle in Resources */,
 				08C690861D38E3E600BB8AAA /* iTunesArtwork in Resources */,
-				E6AE51371D3FD0ED00572CE4 /* HomeMediaListTableViewCell.xib in Resources */,
 				0875851223A0025F00FA7207 /* LibraryAccountHeaderView.xib in Resources */,
 				084F94B922D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				E66BEC251DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
