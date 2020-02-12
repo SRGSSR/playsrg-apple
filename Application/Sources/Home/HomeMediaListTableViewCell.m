@@ -91,6 +91,14 @@ static const CGFloat HomeStandardMargin = 10.f;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    // Clear the collection
+    [self.collectionView reloadData];
+}
+
 #pragma mark Object lifecycle
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

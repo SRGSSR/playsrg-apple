@@ -111,6 +111,14 @@ static const CGFloat HomeStandardMargin = 10.f;
     [self.collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
 }
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    // Clear the collection
+    [self.collectionView reloadData];
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
