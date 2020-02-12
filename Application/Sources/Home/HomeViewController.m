@@ -113,9 +113,8 @@
     Class showListCellClass = HomeShowListTableViewCell.class;
     [self.tableView registerClass:showListCellClass forCellReuseIdentifier:NSStringFromClass(showListCellClass)];
     
-    NSString *showVerticalListCellIdentifier = NSStringFromClass(HomeShowVerticalListTableViewCell.class);
-    UINib *homeShowVerticalListTableViewCellNib = [UINib nibWithNibName:showVerticalListCellIdentifier bundle:nil];
-    [self.tableView registerNib:homeShowVerticalListTableViewCellNib forCellReuseIdentifier:showVerticalListCellIdentifier];
+    Class showVerticallListCellClass = HomeShowVerticalListTableViewCell.class;
+    [self.tableView registerClass:showVerticallListCellClass forCellReuseIdentifier:NSStringFromClass(showVerticallListCellClass)];
     
     NSString *showsAccessCellIdentifier = NSStringFromClass(HomeShowsAccessTableViewCell.class);
     UINib *homeShowsAccessTableViewCellNib = [UINib nibWithNibName:showsAccessCellIdentifier bundle:nil];

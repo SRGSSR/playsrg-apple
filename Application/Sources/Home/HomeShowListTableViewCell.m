@@ -16,8 +16,8 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 @interface HomeShowListTableViewCell ()
 
-@property (nonatomic, weak) IBOutlet UIView *wrapperView;
-@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, weak) UIView *wrapperView;
+@property (nonatomic, weak) UICollectionView *collectionView;
 
 @end
 
