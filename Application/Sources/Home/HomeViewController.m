@@ -561,12 +561,6 @@
     [headerView setHomeSectionInfo:self.homeSectionInfos[section] featured:(section == 0)];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    // Cannot use 0 for grouped table views (will be ignored), must use a very small value instead
-    return 10e-6f;
-}
-
 #pragma mark Actions
 
 - (void)refresh:(id)sender
