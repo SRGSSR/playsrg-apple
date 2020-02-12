@@ -70,18 +70,18 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
         static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
-            s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @50,
-                                 UIContentSizeCategorySmall : @55,
-                                 UIContentSizeCategoryMedium : @60,
-                                 UIContentSizeCategoryLarge : @65,
-                                 UIContentSizeCategoryExtraLarge : @70,
-                                 UIContentSizeCategoryExtraExtraLarge : @75,
-                                 UIContentSizeCategoryExtraExtraExtraLarge : @80,
-                                 UIContentSizeCategoryAccessibilityMedium : @80,
-                                 UIContentSizeCategoryAccessibilityLarge : @80,
-                                 UIContentSizeCategoryAccessibilityExtraLarge : @80,
-                                 UIContentSizeCategoryAccessibilityExtraExtraLarge : @80,
-                                 UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @80 };
+            s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @30,
+                                 UIContentSizeCategorySmall : @35,
+                                 UIContentSizeCategoryMedium : @40,
+                                 UIContentSizeCategoryLarge : @45,
+                                 UIContentSizeCategoryExtraLarge : @40,
+                                 UIContentSizeCategoryExtraExtraLarge : @45,
+                                 UIContentSizeCategoryExtraExtraExtraLarge : @50,
+                                 UIContentSizeCategoryAccessibilityMedium : @50,
+                                 UIContentSizeCategoryAccessibilityLarge : @50,
+                                 UIContentSizeCategoryAccessibilityExtraLarge : @50,
+                                 UIContentSizeCategoryAccessibilityExtraExtraLarge : @50,
+                                 UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @50 };
         });
         
         NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
