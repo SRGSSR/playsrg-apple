@@ -635,7 +635,25 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
     if ([self shouldDisplayMostSearchedShows]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+        static NSDictionary<NSString *, NSNumber *> *s_height;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_height = @{ UIContentSizeCategoryExtraSmall : @28,
+                          UIContentSizeCategorySmall : @32,
+                          UIContentSizeCategoryMedium : @36,
+                          UIContentSizeCategoryLarge : @40,
+                          UIContentSizeCategoryExtraLarge : @44,
+                          UIContentSizeCategoryExtraExtraLarge : @48,
+                          UIContentSizeCategoryExtraExtraExtraLarge : @52,
+                          UIContentSizeCategoryAccessibilityMedium : @52,
+                          UIContentSizeCategoryAccessibilityLarge : @52,
+                          UIContentSizeCategoryAccessibilityExtraLarge : @52,
+                          UIContentSizeCategoryAccessibilityExtraExtraLarge : @52,
+                          UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @52 };
+        });
+        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+        CGFloat height = s_height[contentSizeCategory].floatValue;
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, height);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 200.f);
@@ -652,6 +670,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
             return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
         }
     }
+    // Search show list
     else {
         CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 200.f : 220.f;
         return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
