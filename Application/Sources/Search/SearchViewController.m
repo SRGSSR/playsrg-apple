@@ -122,10 +122,9 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     NSString *mostSearchedShowCellIdentifier = NSStringFromClass(MostSearchedShowCollectionViewCell.class);
     UINib *mostSearchedShowCellNib = [UINib nibWithNibName:mostSearchedShowCellIdentifier bundle:nil];
     [self.collectionView registerNib:mostSearchedShowCellNib forCellWithReuseIdentifier:mostSearchedShowCellIdentifier];
-    
-    NSString *showListCellIdentifier = NSStringFromClass(SearchShowListCollectionViewCell.class);
-    UINib *showListCellNib = [UINib nibWithNibName:showListCellIdentifier bundle:nil];
-    [self.collectionView registerNib:showListCellNib forCellWithReuseIdentifier:showListCellIdentifier];
+
+    Class showListCellClass = SearchShowListCollectionViewCell.class;
+    [self.collectionView registerClass:showListCellClass forCellWithReuseIdentifier:NSStringFromClass(showListCellClass)];
     
     NSString *loadingCellIdentifier = NSStringFromClass(SearchLoadingCollectionViewCell.class);
     UINib *loadingCellNib = [UINib nibWithNibName:loadingCellIdentifier bundle:nil];

@@ -719,11 +719,6 @@
 		6F1F92A022A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */; };
 		6F1F92A122A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */; };
 		6F1F92A222A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */; };
-		6F1F92AA22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F92A922A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib */; };
-		6F1F92AB22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F92A922A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib */; };
-		6F1F92AC22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F92A922A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib */; };
-		6F1F92AD22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F92A922A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib */; };
-		6F1F92AE22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F92A922A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib */; };
 		6F27F5CB23CDCE3500156B1C /* HomeLivestreamsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F27F5CA23CDCE3500156B1C /* HomeLivestreamsViewController.m */; };
 		6F27F5CC23CDCE3500156B1C /* HomeLivestreamsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F27F5CA23CDCE3500156B1C /* HomeLivestreamsViewController.m */; };
 		6F27F5CD23CDCE3500156B1C /* HomeLivestreamsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F27F5CA23CDCE3500156B1C /* HomeLivestreamsViewController.m */; };
@@ -1899,7 +1894,6 @@
 		6F1EBE1E222EBB7E003E0722 /* Play SWI.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.appstore.xcconfig"; sourceTree = "<group>"; };
 		6F1F929C22A539D40026BFAC /* SearchShowListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchShowListCollectionViewCell.h; sourceTree = "<group>"; };
 		6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchShowListCollectionViewCell.m; sourceTree = "<group>"; };
-		6F1F92A922A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchShowListCollectionViewCell.xib; sourceTree = "<group>"; };
 		6F27F5C923CDCE3500156B1C /* HomeLivestreamsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeLivestreamsViewController.h; sourceTree = "<group>"; };
 		6F27F5CA23CDCE3500156B1C /* HomeLivestreamsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeLivestreamsViewController.m; sourceTree = "<group>"; };
 		6F2961FB2006186000CAB0E4 /* placeholder_media_list-180.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "placeholder_media_list-180.pdf"; sourceTree = "<group>"; };
@@ -3462,7 +3456,6 @@
 				0832BF0F22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib */,
 				6F1F929C22A539D40026BFAC /* SearchShowListCollectionViewCell.h */,
 				6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */,
-				6F1F92A922A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib */,
 				6F4C673B1EA6115C006A0A3B /* SearchViewController.h */,
 				6F4C673C1EA6115C006A0A3B /* SearchViewController.m */,
 			);
@@ -3934,7 +3927,6 @@
 				6F3A47B51DD19A8500C79E67 /* SRFResources.xcassets in Resources */,
 				6F1938361EFBFEBC0017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F340F4B220DA86B00778CA3 /* SRGUserData.bundle in Resources */,
-				6F1F92AA22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
 				081DAA261E0C1E9700018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F0C99B02121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				6F0F88991ECF0CE50060A893 /* override_artwork_srf_musikwelle.pdf in Resources */,
@@ -4066,7 +4058,6 @@
 				086F8D6022984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				08DADF8D20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				6F0F888D1ECF0CDD0060A893 /* override_default_rts_un.pdf in Resources */,
-				6F1F92AB22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
 				6F0F888C1ECF0CDD0060A893 /* override_default_couleur3.pdf in Resources */,
 				6FD633E41FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
 				6F0F88881ECF0CDD0060A893 /* override_artwork_espace2.pdf in Resources */,
@@ -4159,7 +4150,6 @@
 				6F1A95ED216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
 				6F340F4D220DA87600778CA3 /* SRGUserData.bundle in Resources */,
 				0837CEAE1D3FAEE200A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
-				6F1F92AC22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
 				0837CEDE1D3FDAFA00A1E089 /* SRGSSRType_Serif_Rg.ttf in Resources */,
 				086321112258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				6FB3C1AF1DBCE783008160B4 /* MediaPreviewViewController.storyboard in Resources */,
@@ -4229,7 +4219,6 @@
 				E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */,
 				6F4760071EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
-				6F1F92AD22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
 				6F0C99952121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				6F0C99B32121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				0804917922832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
@@ -4317,7 +4306,6 @@
 				6FA7EC3D20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				6F1938381EFBFEC80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6FF7BBB622A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
-				6F1F92AE22A55EDA0026BFAC /* SearchShowListCollectionViewCell.xib in Resources */,
 				081DAA2A1E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F93DE1720AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				08754F4F201BB02900458F3A /* InfoPlist.strings in Resources */,
