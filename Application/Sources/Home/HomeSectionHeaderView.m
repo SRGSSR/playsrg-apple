@@ -12,7 +12,6 @@
 #import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
-#import "UIColor+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -97,7 +96,7 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     self.featured = featured;
     
     UIColor *backgroundColor = UIColor.clearColor;
-    UIColor *titleTextColor = UIColor.play_lightGrayColor;
+    UIColor *titleTextColor = UIColor.whiteColor;
     if (homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
         backgroundColor = homeSectionInfo.module.backgroundColor;
         titleTextColor = homeSectionInfo.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
@@ -121,13 +120,13 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     
     self.moduleBackgroundView.backgroundColor = UIColor.clearColor;
     
-    self.titleLabel.textColor = UIColor.play_lightGrayColor;
+    self.titleLabel.textColor = UIColor.whiteColor;
     self.titleLabel.userInteractionEnabled = YES;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMediaList:)];
     [self.titleLabel addGestureRecognizer:tapGestureRecognizer];
     
-    self.navigationButton.tintColor = UIColor.play_lightGrayColor;
+    self.navigationButton.tintColor = UIColor.whiteColor;
 }
 
 #pragma mark Accessibility
