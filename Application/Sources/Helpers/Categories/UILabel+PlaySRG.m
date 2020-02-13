@@ -74,7 +74,7 @@
     self.backgroundColor = UIColor.srg_blueColor;
     self.layer.cornerRadius = 2.f;
     self.layer.masksToBounds = YES;
-    self.font = [UIFont srg_mediumFontWithSize:11.f];
+    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"WEB FIRST", @"Web first label on media cells")].uppercaseString;
 }
 
@@ -124,7 +124,7 @@
     self.backgroundColor = UIColor.play_whiteBadgeColor;
     self.layer.cornerRadius = 2.f;
     self.layer.masksToBounds = YES;
-    self.font = [UIFont srg_mediumFontWithSize:11.f];
+    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     self.text = [NSString stringWithFormat:@"  %@  ", string].uppercaseString;
     self.textColor = UIColor.blackColor;
 }
