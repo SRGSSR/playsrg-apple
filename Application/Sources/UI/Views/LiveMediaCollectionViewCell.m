@@ -151,7 +151,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 - (BOOL)isAccessibilityElement
 {
-    return self.channel != nil;
+    return YES;
 }
 
 - (NSString *)accessibilityLabel
