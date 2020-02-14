@@ -18,7 +18,6 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
-#import "UIStackView+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGAnalytics/SRGAnalytics.h>
@@ -30,7 +29,6 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 @property (nonatomic) SRGChannel *channel;
 
-@property (nonatomic, weak) IBOutlet UIStackView *logoStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
@@ -53,7 +51,8 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     LiveMediaCollectionViewCell *cell = [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
     cell.media = media;
     
-    NSString *key = [NSString stringWithFormat:@"%@%@", cell.titleLabel.text, @(width)];
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    NSString *key = [NSString stringWithFormat:@"%@%@%@", cell.titleLabel.text, contentSizeCategory, @(width)];
     NSNumber *cachedHeight = s_cachedHeights[key];
     if (cachedHeight) {
         return cachedHeight.doubleValue;
@@ -152,7 +151,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 - (BOOL)isAccessibilityElement
 {
-    return self.channel != nil;
+    return YES;
 }
 
 - (NSString *)accessibilityLabel
@@ -218,7 +217,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 - (void)reloadData
 {
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
+    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     
     SRGBlockingReason blockingReason = [self.media blockingReasonAtDate:NSDate.date];
@@ -234,7 +233,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
         self.titleLabel.textColor = UIColor.play_lightGrayColor;
     }
     
-    SRGAppearanceFontTextStyle subtitleTextStyle = SRGAppearanceFontTextStyleBody;
+    SRGAppearanceFontTextStyle subtitleTextStyle = SRGAppearanceFontTextStyleSubtitle;
     ImageScale imageScale = ImageScaleMedium;
     
     self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:subtitleTextStyle];
@@ -244,7 +243,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     if (self.channel) {
         UIImage *logoImage = self.channel.play_banner22Image;
         self.logoImageView.image = logoImage;
-        [self.logoStackView play_setHidden:logoImage == nil];
+        self.logoImageView.hidden = (logoImage == nil);
         
         SRGProgram *currentProgram = self.channel.currentProgram;
         if ([currentProgram play_containsDate:NSDate.date]) {
@@ -268,7 +267,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     }
     else {
         self.titleLabel.text = self.media.title;
-        [self.logoStackView play_setHidden:YES];
+        self.logoImageView.hidden = YES;
         
         NSString *showTitle = self.media.show.title;
         if (showTitle && ! [self.media.title containsString:showTitle]) {
