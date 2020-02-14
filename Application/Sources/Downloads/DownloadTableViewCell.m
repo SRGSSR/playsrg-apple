@@ -27,6 +27,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
+@property (nonatomic, weak) IBOutlet UIView *thumbnailWrapperView;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
@@ -57,7 +58,9 @@
     colorView.backgroundColor = backgroundColor;
     self.selectedBackgroundView = colorView;
     
-    self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.layer.cornerRadius = 4.f;
+    self.thumbnailWrapperView.layer.masksToBounds = YES;
     
     self.titleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.backgroundColor = backgroundColor;

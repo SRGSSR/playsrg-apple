@@ -50,6 +50,8 @@
                                                             withScale:ImageScaleMedium];
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailImageView.layer.cornerRadius = 4.f;
+    self.thumbnailImageView.layer.masksToBounds = YES;
 }
 
 - (void)prepareForReuse

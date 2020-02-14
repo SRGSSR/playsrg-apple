@@ -45,6 +45,8 @@
     self.titleLabel.backgroundColor = backgroundColor;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailImageView.layer.cornerRadius = 4.f;
+    self.thumbnailImageView.layer.masksToBounds = YES;
     
     @weakify(self)
     MGSwipeButton *deleteButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"delete-22"] backgroundColor:UIColor.redColor callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {

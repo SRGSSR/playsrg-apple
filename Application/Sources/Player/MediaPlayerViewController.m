@@ -320,6 +320,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.view.backgroundColor = UIColor.play_blackColor;
     
     self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.showThumbnailImageView.layer.cornerRadius = 4.f;
+    self.showThumbnailImageView.layer.masksToBounds = YES;
     
     self.pullDownGestureRecognizer.delegate = self;
     

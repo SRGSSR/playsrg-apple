@@ -62,6 +62,8 @@
                                                             withScale:ImageScaleMedium];
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailImageView.layer.cornerRadius = 4.f;
+    self.thumbnailImageView.layer.masksToBounds = YES;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMediaList:)];
     [self.headerView addGestureRecognizer:tapGestureRecognizer];
