@@ -51,7 +51,8 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     LiveMediaCollectionViewCell *cell = [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
     cell.media = media;
     
-    NSString *key = [NSString stringWithFormat:@"%@%@", cell.titleLabel.text, @(width)];
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    NSString *key = [NSString stringWithFormat:@"%@%@%@", cell.titleLabel.text, contentSizeCategory, @(width)];
     NSNumber *cachedHeight = s_cachedHeights[key];
     if (cachedHeight) {
         return cachedHeight.doubleValue;
@@ -242,7 +243,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     if (self.channel) {
         UIImage *logoImage = self.channel.play_banner22Image;
         self.logoImageView.image = logoImage;
-        self.logoImageView.hidden = logoImage == nil;
+        self.logoImageView.hidden = (logoImage == nil);
         
         SRGProgram *currentProgram = self.channel.currentProgram;
         if ([currentProgram play_containsDate:NSDate.date]) {
