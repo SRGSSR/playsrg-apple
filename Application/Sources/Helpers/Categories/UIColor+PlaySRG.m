@@ -45,7 +45,7 @@
     return [UIColor srg_colorFromHexadecimalString:@"#979797"];
 }
 
-+ (UIColor *)play_popoverGrayColor
++ (UIColor *)play_popoverGrayBackgroundColor
 {
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         return [UIColor srg_colorFromHexadecimalString:@"#2d2d2d"];
@@ -55,7 +55,7 @@
     }
 }
 
-+ (UIColor *)play_lightGrayButtonBackgroundColor
++ (UIColor *)play_cardGrayBackgroundColor
 {
     return [UIColor srg_colorFromHexadecimalString:@"#242424"];
 }

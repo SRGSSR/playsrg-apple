@@ -710,7 +710,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.query settings:self.settings ?: SearchSettingsViewController.defaultSettings];
     searchSettingsViewController.delegate = self;
     
-    UIColor *backgroundColor = (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? UIColor.play_popoverGrayColor : nil;
+    UIColor *backgroundColor = (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? UIColor.play_popoverGrayBackgroundColor : nil;
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController
                                                                                                 tintColor:UIColor.whiteColor
                                                                                           backgroundColor:backgroundColor
@@ -718,7 +718,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     navigationController.modalPresentationStyle = UIModalPresentationPopover;
     
     UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
-    popoverPresentationController.backgroundColor = UIColor.play_popoverGrayColor;
+    popoverPresentationController.backgroundColor = UIColor.play_popoverGrayBackgroundColor;
     popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
     
     popoverPresentationController.sourceView = sender;

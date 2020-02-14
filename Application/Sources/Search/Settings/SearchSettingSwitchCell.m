@@ -48,7 +48,7 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_popoverGrayColor;
+    UIColor *backgroundColor = UIColor.play_popoverGrayBackgroundColor;
     self.backgroundColor = backgroundColor;
     
     self.nameLabel.backgroundColor = backgroundColor;

@@ -36,7 +36,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_popoverGrayColor;
+    self.backgroundColor = UIColor.play_popoverGrayBackgroundColor;
     
     self.tintColor = UIColor.whiteColor;
     

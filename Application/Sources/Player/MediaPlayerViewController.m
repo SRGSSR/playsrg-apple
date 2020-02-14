@@ -343,7 +343,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.playerBottomConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
     self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelNormalPriority;
     
-    self.livestreamButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
+    self.livestreamButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.livestreamButton.layer.cornerRadius = 4.f;
     self.livestreamButton.layer.masksToBounds = YES;
     [self.livestreamButton setTitle:NSLocalizedString(@"Choose a regional radio", @"Title displayed on the regional radio selection button") forState:UIControlStateNormal];
@@ -355,7 +355,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.logoImageView.isAccessibilityElement = YES;
     self.logoImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
     
-    self.radioHomeButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
+    self.radioHomeButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.radioHomeButton.layer.cornerRadius = 4.f;
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];

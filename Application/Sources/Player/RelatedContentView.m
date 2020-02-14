@@ -26,7 +26,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
+    self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.layer.cornerRadius = 4.f;
 }
 
