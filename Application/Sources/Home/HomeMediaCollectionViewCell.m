@@ -279,9 +279,19 @@
     self.media360ImageView.hidden = (self.media.presentation != SRGPresentation360);
     
     BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
-    self.webFirstLabel.hidden = ! self.media.play_webFirst;
-    self.subtitlesLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! self.media.play_subtitlesAvailable || downloaded);
-    self.audioDescriptionImageView.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! self.media.play_audioDescriptionAvailable || downloaded);
+    
+    BOOL isWebFirst = self.media.play_webFirst;
+    self.webFirstLabel.hidden = ! isWebFirst;
+    
+    BOOL hasSubtitles = ApplicationSettingSubtitleAvailabilityDisplayed() && self.media.play_subtitlesAvailable && ! downloaded;
+    self.subtitlesLabel.hidden = ! hasSubtitles;
+    
+    BOOL hasAudioDescription = ApplicationSettingAudioDescriptionAvailabilityDisplayed() && self.media.play_audioDescriptionAvailable && ! downloaded;
+    self.audioDescriptionImageView.hidden = ! hasAudioDescription;
+    
+    // If a badge is displayed, use less space for the title so that the cell layout needs the same vertical space. This
+    // avoids the need for large cells since badges are more the exception than the rule.
+    self.titleLabel.numberOfLines = (isWebFirst || hasSubtitles || hasAudioDescription) ? 1 : 2;
 
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);

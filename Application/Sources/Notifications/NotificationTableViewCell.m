@@ -105,6 +105,15 @@
     self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:notification.date];
     self.dateLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
     
+    // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
+        self.subtitleLabel.numberOfLines = 1;
+    }
+    else {
+        self.subtitleLabel.numberOfLines = 2;
+    }
+    
     ImagePlaceholder imagePlaceholder = ImagePlaceholderNotification;
     if (notification.mediaURN) {
         imagePlaceholder = ImagePlaceholderMedia;

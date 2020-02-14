@@ -16,8 +16,8 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 @interface HomeShowListTableViewCell ()
 
-@property (nonatomic, weak) IBOutlet UIView *wrapperView;
-@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, weak) UIView *wrapperView;
+@property (nonatomic, weak) UICollectionView *collectionView;
 
 @end
 
@@ -67,49 +67,73 @@ static const CGFloat HomeStandardMargin = 10.f;
                                    UIContentSizeCategoryAccessibilityExtraExtraLarge : @55,
                                    UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @55 };
         
-        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @35,
-                                   UIContentSizeCategorySmall : @35,
-                                   UIContentSizeCategoryMedium : @35,
-                                   UIContentSizeCategoryLarge : @38,
-                                   UIContentSizeCategoryExtraLarge : @40,
-                                   UIContentSizeCategoryExtraExtraLarge : @43,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @49,
-                                   UIContentSizeCategoryAccessibilityMedium : @49,
-                                   UIContentSizeCategoryAccessibilityLarge : @49,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @49,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @49,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @49 };
+        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @30,
+                                   UIContentSizeCategorySmall : @30,
+                                   UIContentSizeCategoryMedium : @30,
+                                   UIContentSizeCategoryLarge : @33,
+                                   UIContentSizeCategoryExtraLarge : @35,
+                                   UIContentSizeCategoryExtraExtraLarge : @38,
+                                   UIContentSizeCategoryExtraExtraExtraLarge : @44,
+                                   UIContentSizeCategoryAccessibilityMedium : @44,
+                                   UIContentSizeCategoryAccessibilityLarge : @44,
+                                   UIContentSizeCategoryAccessibilityExtraLarge : @44,
+                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @44,
+                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @44 };
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = featured ? s_featuredTextHeigths[contentSizeCategory].floatValue : s_standardTextHeigths[contentSizeCategory].floatValue;
-    
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
-- (void)awakeFromNib
+#pragma mark Object lifecycle
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    [super awakeFromNib];
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = UIColor.clearColor;
+        self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
+        
+        UIView *wrapperView = [[UIView alloc] initWithFrame:self.contentView.bounds];
+        wrapperView.backgroundColor = UIColor.clearColor;
+        wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.contentView addSubview:wrapperView];
+        self.wrapperView = wrapperView;
+        
+        UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:wrapperView.bounds collectionViewLayout:collectionViewLayout];
+        collectionView.backgroundColor = UIColor.clearColor;
+        collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+        collectionView.alwaysBounceHorizontal = YES;
+        collectionView.directionalLockEnabled = YES;
+        // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
+        collectionView.scrollsToTop = NO;
+        collectionView.delegate = self;
+        collectionView.dataSource = self;
+        [wrapperView addSubview:collectionView];
+        self.collectionView = collectionView;
+        
+        // Remark: The collection view is nested in a dummy view to workaround an accessibility bug
+        //         See https://stackoverflow.com/a/38798448/760435
+        wrapperView.accessibilityElements = @[collectionView];
+        
+        NSString *showCellIdentifier = NSStringFromClass(HomeShowCollectionViewCell.class);
+        UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
+        [self.collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
+    }
+    return self;
+}
+
+#pragma mark Overrides
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
     
-    self.backgroundColor = UIColor.clearColor;
-    self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.collectionView.alwaysBounceHorizontal = YES;
-    self.collectionView.directionalLockEnabled = YES;
-    // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
-    self.collectionView.scrollsToTop = NO;
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    
-    // Remark: The collection view is nested in a dummy view to workaround an accessibility bug
-    //         See https://stackoverflow.com/a/38798448/760435
-    self.wrapperView.accessibilityElements = @[self.collectionView];
-    
-    NSString *showCellIdentifier = NSStringFromClass(HomeShowCollectionViewCell.class);
-    UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
-    [self.collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
+    // Clear the collection
+    [self.collectionView reloadData];
 }
 
 - (void)layoutSubviews

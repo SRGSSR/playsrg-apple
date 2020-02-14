@@ -12,22 +12,24 @@
 #import <SRGAppearance/SRGAppearance.h>
 
 static const CGFloat kLayoutHorizontalInset = 10.f;
+static const CGFloat kLayoutMinimumInteritemSpacing = 10.f;
+static const CGFloat kLayoutMinimumLineSpacing = 10.f;
 
 @interface HomeShowVerticalListTableViewCell ()
 
-@property (nonatomic, weak) IBOutlet UIView *wrapperView;
-@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, weak) UIView *wrapperView;
+@property (nonatomic, weak) UICollectionView *collectionView;
 
 @end
 
 @implementation HomeShowVerticalListTableViewCell
 
-#pragma mark Class methods
+#pragma mark Overrides
 
-+ (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds collectionViewLayout:(UICollectionViewFlowLayout *)collectionViewLayout
++ (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds
 {
     // 2 items per row on small layouts, max cell width of 210
-    CGFloat width = fminf(floorf((CGRectGetWidth(bounds) - collectionViewLayout.minimumInteritemSpacing - 2 * kLayoutHorizontalInset) / 2.f), 210.f);
+    CGFloat width = fminf(floorf((CGRectGetWidth(bounds) - kLayoutMinimumInteritemSpacing - 2 * kLayoutHorizontalInset) / 2.f), 210.f);
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 30.f : 50.f;
@@ -35,46 +37,53 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     return CGSizeMake(width, ceilf(width * 9.f / 16.f + minTextHeight));
 }
 
-#pragma mark Overrides
-
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
-    static UICollectionViewFlowLayout *s_collectionViewLayout;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        HomeShowVerticalListTableViewCell *headerView = [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
-        s_collectionViewLayout = (UICollectionViewFlowLayout *)headerView.collectionView.collectionViewLayout;
-    });
-    
-    CGSize itemSize = [self itemSizeForHomeSectionInfo:homeSectionInfo bounds:bounds collectionViewLayout:s_collectionViewLayout];
-    NSInteger numberOfItemsPerRow = floorf((CGRectGetWidth(bounds) - 2 * kLayoutHorizontalInset + s_collectionViewLayout.minimumInteritemSpacing) / (itemSize.width + s_collectionViewLayout.minimumInteritemSpacing));
+    CGSize itemSize = [self itemSizeForHomeSectionInfo:homeSectionInfo bounds:bounds];
+    NSInteger numberOfItemsPerRow = floorf((CGRectGetWidth(bounds) - 2 * kLayoutHorizontalInset + kLayoutMinimumInteritemSpacing) / (itemSize.width + kLayoutMinimumInteritemSpacing));
     NSInteger numberOfItems = (homeSectionInfo.items.count != 0) ? homeSectionInfo.items.count : 4;
     NSInteger numberOfLines = MAX(ceilf((float)numberOfItems / numberOfItemsPerRow), 1);
-    return itemSize.height * numberOfLines + (numberOfLines - 1) * s_collectionViewLayout.minimumLineSpacing;
+    return itemSize.height * numberOfLines + (numberOfLines - 1) * kLayoutMinimumLineSpacing;
 }
 
-- (void)awakeFromNib
+#pragma mark Object lifecycle
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    [super awakeFromNib];
-    
-    self.backgroundColor = UIColor.clearColor;
-    self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.collectionView.alwaysBounceHorizontal = NO;
-    // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
-    self.collectionView.scrollsToTop = NO;
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    
-    // Remark: The collection view is nested in a dummy view to workaround an accessibility bug
-    //         See https://stackoverflow.com/a/38798448/760435
-    self.wrapperView.accessibilityElements = @[self.collectionView];
-    
-    NSString *showCellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
-    UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
-    [self.collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = UIColor.clearColor;
+        self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
+        
+        UIView *wrapperView = [[UIView alloc] initWithFrame:self.contentView.bounds];
+        wrapperView.backgroundColor = UIColor.clearColor;
+        wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.contentView addSubview:wrapperView];
+        self.wrapperView = wrapperView;
+        
+        UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        collectionViewLayout.minimumLineSpacing = kLayoutMinimumLineSpacing;
+        collectionViewLayout.minimumInteritemSpacing = kLayoutMinimumInteritemSpacing;
+        
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:wrapperView.bounds collectionViewLayout:collectionViewLayout];
+        collectionView.backgroundColor = UIColor.clearColor;
+        collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+        // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
+        collectionView.scrollsToTop = NO;
+        collectionView.delegate = self;
+        collectionView.dataSource = self;
+        [wrapperView addSubview:collectionView];
+        self.collectionView = collectionView;
+        
+        // Remark: The collection view is nested in a dummy view to workaround an accessibility bug
+        //         See https://stackoverflow.com/a/38798448/760435
+        wrapperView.accessibilityElements = @[collectionView];
+        
+        NSString *showCellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
+        UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
+        [self.collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
+    }
+    return self;
 }
 
 - (void)layoutSubviews
@@ -131,7 +140,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [HomeShowVerticalListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds collectionViewLayout:collectionViewLayout];
+    return [HomeShowVerticalListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds];
 }
 
 @end

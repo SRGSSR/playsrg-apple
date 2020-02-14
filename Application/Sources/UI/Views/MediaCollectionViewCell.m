@@ -226,9 +226,24 @@
     self.media360ImageView.hidden = (media.presentation != SRGPresentation360);
     
     BOOL downloaded = [Download downloadForMedia:media].state == DownloadStateDownloaded;
-    self.webFirstLabel.hidden = ! media.play_webFirst;
-    self.subtitlesLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtitlesAvailable || downloaded);
-    self.audioDescriptionImageView.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
+    
+    BOOL isWebFirst = media.play_webFirst;
+    self.webFirstLabel.hidden = ! isWebFirst;
+    
+    BOOL hasSubtitles = ApplicationSettingSubtitleAvailabilityDisplayed() && media.play_subtitlesAvailable && ! downloaded;
+    self.subtitlesLabel.hidden = ! hasSubtitles;
+    
+    BOOL hasAudioDescription = ApplicationSettingAudioDescriptionAvailabilityDisplayed() && media.play_audioDescriptionAvailable && ! downloaded;
+    self.audioDescriptionImageView.hidden = ! hasAudioDescription;
+    
+    // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
+        self.titleLabel.numberOfLines = (isWebFirst || hasSubtitles || hasAudioDescription) ? 1 : 2;
+    }
+    else {
+        self.titleLabel.numberOfLines = 2;
+    }
 
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);

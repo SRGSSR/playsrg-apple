@@ -12,7 +12,6 @@
 #import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
-#import "UIColor+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -36,21 +35,56 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
-    BOOL isHomeFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
-    
-    if (featured && ! UIAccessibilityIsVoiceOverRunning() && isHomeFeaturedHeaderHidden) {
-        return 10.f;
-    }
-    else if (featured && UIAccessibilityIsVoiceOverRunning()) {
-        return 46.f;
-    }
-    else if (featured) {
-        return 62.f;
+    if (featured) {
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
+        BOOL isHomeFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
+        
+        if (! UIAccessibilityIsVoiceOverRunning() && isHomeFeaturedHeaderHidden) {
+            return 10.f;
+        }
+        else {
+            static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
+            static dispatch_once_t s_onceToken;
+            dispatch_once(&s_onceToken, ^{
+                s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @40,
+                                     UIContentSizeCategorySmall : @45,
+                                     UIContentSizeCategoryMedium : @45,
+                                     UIContentSizeCategoryLarge : @45,
+                                     UIContentSizeCategoryExtraLarge : @50,
+                                     UIContentSizeCategoryExtraExtraLarge : @55,
+                                     UIContentSizeCategoryExtraExtraExtraLarge : @55,
+                                     UIContentSizeCategoryAccessibilityMedium : @55,
+                                     UIContentSizeCategoryAccessibilityLarge : @55,
+                                     UIContentSizeCategoryAccessibilityExtraLarge : @55,
+                                     UIContentSizeCategoryAccessibilityExtraExtraLarge : @55,
+                                     UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @55 };
+            });
+            
+            NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+            return s_headerHeights[contentSizeCategory].floatValue;
+        }
     }
     else {
-        return 65.f;
+        static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @30,
+                                 UIContentSizeCategorySmall : @35,
+                                 UIContentSizeCategoryMedium : @40,
+                                 UIContentSizeCategoryLarge : @45,
+                                 UIContentSizeCategoryExtraLarge : @40,
+                                 UIContentSizeCategoryExtraExtraLarge : @45,
+                                 UIContentSizeCategoryExtraExtraExtraLarge : @50,
+                                 UIContentSizeCategoryAccessibilityMedium : @50,
+                                 UIContentSizeCategoryAccessibilityLarge : @50,
+                                 UIContentSizeCategoryAccessibilityExtraLarge : @50,
+                                 UIContentSizeCategoryAccessibilityExtraExtraLarge : @50,
+                                 UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @50 };
+        });
+        
+        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+        return s_headerHeights[contentSizeCategory].floatValue;
     }
 }
 
@@ -62,7 +96,7 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     self.featured = featured;
     
     UIColor *backgroundColor = UIColor.clearColor;
-    UIColor *titleTextColor = UIColor.play_lightGrayColor;
+    UIColor *titleTextColor = UIColor.whiteColor;
     if (homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
         backgroundColor = homeSectionInfo.module.backgroundColor;
         titleTextColor = homeSectionInfo.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
@@ -86,13 +120,13 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     
     self.moduleBackgroundView.backgroundColor = UIColor.clearColor;
     
-    self.titleLabel.textColor = UIColor.play_lightGrayColor;
+    self.titleLabel.textColor = UIColor.whiteColor;
     self.titleLabel.userInteractionEnabled = YES;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMediaList:)];
     [self.titleLabel addGestureRecognizer:tapGestureRecognizer];
     
-    self.navigationButton.tintColor = UIColor.play_lightGrayColor;
+    self.navigationButton.tintColor = UIColor.whiteColor;
 }
 
 #pragma mark Accessibility

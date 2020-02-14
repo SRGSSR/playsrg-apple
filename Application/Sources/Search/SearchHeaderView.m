@@ -6,8 +6,6 @@
 
 #import "SearchHeaderView.h"
 
-#import "UIColor+PlaySRG.h"
-
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface SearchHeaderView ()
@@ -24,7 +22,7 @@
 {
     [super awakeFromNib];
     
-    self.titleLabel.textColor = UIColor.play_lightGrayColor;
+    self.titleLabel.textColor = UIColor.whiteColor;
 }
 
 #pragma mark Getters and setters

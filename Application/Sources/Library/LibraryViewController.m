@@ -269,13 +269,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self notificationAtIndexPath:indexPath]) {
-        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-        return (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 94.f : 110.f;
-    }
-    else {
-        return 50.f;
-    }
+    return [self notificationAtIndexPath:indexPath] ? 94.f : 50.f;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

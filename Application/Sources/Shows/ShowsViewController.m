@@ -71,20 +71,41 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 #pragma mark View lifecycle
 
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
+    
+    UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.minimumInteritemSpacing = 10.f;
+    collectionViewLayout.minimumLineSpacing = 10.f;
+    collectionViewLayout.sectionHeadersPinToVisibleBounds = YES;
+    
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
+    collectionView.backgroundColor = UIColor.clearColor;
+    collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    collectionView.showsVerticalScrollIndicator = NO;      // As in Contacts, no need for scroll indicators when an index is displayed
+    collectionView.alwaysBounceVertical = YES;
+    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:collectionView];
+    self.collectionView = collectionView;
+    
+    BDKCollectionIndexView *collectionIndexView = [[BDKCollectionIndexView alloc] initWithFrame:CGRectZero indexTitles:nil];
+    collectionIndexView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.7f];
+    collectionIndexView.tintColor = UIColor.play_lightGrayColor;
+    collectionIndexView.alpha = 1.f;
+    [collectionIndexView addTarget:self action:@selector(collectionIndexChanged:) forControlEvents:UIControlEventValueChanged];
+    [view addSubview:collectionIndexView];
+    self.collectionIndexView = collectionIndexView;
+    
+    self.view = view;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.play_blackColor;
-    
     self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.showsVerticalScrollIndicator = NO;      // As in Contacts, no need for scroll indicators when an index is displayed
-    self.collectionView.alwaysBounceVertical = YES;
-    
-    UICollectionViewFlowLayout *collectionViewFlowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    collectionViewFlowLayout.sectionHeadersPinToVisibleBounds = YES;
     
     NSString *cellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
@@ -93,13 +114,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     NSString *headerIdentifier = NSStringFromClass(TranslucentTitleHeaderView.class);
     UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
-    
-    // BDKCollectionIndexView can only be instantiated in code ;(
-    BDKCollectionIndexView *collectionIndexView = [[BDKCollectionIndexView alloc] initWithFrame:CGRectZero indexTitles:nil];
-    collectionIndexView.tintColor = UIColor.play_lightGrayColor;
-    [collectionIndexView addTarget:self action:@selector(collectionIndexChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:collectionIndexView];
-    self.collectionIndexView = collectionIndexView;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -258,6 +272,22 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x, newContentOffsetY) animated:animated];
 }
 
+#pragma mark Index
+
+- (void)setIndexHidden:(BOOL)hidden animated:(BOOL)animated
+{
+    void (^animations)(void) = ^{
+        self.collectionIndexView.alpha = hidden ? 0.f : 1.f;
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:0.2 animations:animations];
+    }
+    else {
+        animations();
+    }
+}
+
 #pragma mark UICollectionViewDataSource protocol
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -336,6 +366,25 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+}
+
+#pragma mark UIScrollViewDelegate protocol
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self setIndexHidden:YES animated:YES];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (! decelerate) {
+        [self setIndexHidden:NO animated:YES];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self setIndexHidden:NO animated:YES];
 }
 
 #pragma mark Actions

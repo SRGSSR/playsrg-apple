@@ -21,8 +21,8 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 @interface HomeMediaListTableViewCell ()
 
-@property (nonatomic, weak) IBOutlet UIView *wrapperView;
-@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, weak) UIView *wrapperView;
+@property (nonatomic, weak) UICollectionView *collectionView;
 
 @end
 
@@ -59,71 +59,91 @@ static const CGFloat HomeStandardMargin = 10.f;
     static NSDictionary<NSString *, NSNumber *> *s_standardTextHeigths;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_featuredTextHeigths = @{ UIContentSizeCategoryExtraSmall : @95,
-                                   UIContentSizeCategorySmall : @95,
-                                   UIContentSizeCategoryMedium : @100,
-                                   UIContentSizeCategoryLarge : @105,
-                                   UIContentSizeCategoryExtraLarge : @110,
-                                   UIContentSizeCategoryExtraExtraLarge : @115,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @125,
-                                   UIContentSizeCategoryAccessibilityMedium : @125,
-                                   UIContentSizeCategoryAccessibilityLarge : @125,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @125,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @125,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @125 };
+        s_featuredTextHeigths = @{ UIContentSizeCategoryExtraSmall : @79,
+                                   UIContentSizeCategorySmall : @81,
+                                   UIContentSizeCategoryMedium : @84,
+                                   UIContentSizeCategoryLarge : @89,
+                                   UIContentSizeCategoryExtraLarge : @94,
+                                   UIContentSizeCategoryExtraExtraLarge : @102,
+                                   UIContentSizeCategoryExtraExtraExtraLarge : @108,
+                                   UIContentSizeCategoryAccessibilityMedium : @108,
+                                   UIContentSizeCategoryAccessibilityLarge : @108,
+                                   UIContentSizeCategoryAccessibilityExtraLarge : @108,
+                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @108,
+                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @108 };
         
-        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @85,
-                                   UIContentSizeCategorySmall : @85,
-                                   UIContentSizeCategoryMedium : @85,
-                                   UIContentSizeCategoryLarge : @90,
-                                   UIContentSizeCategoryExtraLarge : @95,
-                                   UIContentSizeCategoryExtraExtraLarge : @100,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @113,
-                                   UIContentSizeCategoryAccessibilityMedium : @113,
-                                   UIContentSizeCategoryAccessibilityLarge : @113,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @113,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @113,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @113 };
+        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @63,
+                                   UIContentSizeCategorySmall : @65,
+                                   UIContentSizeCategoryMedium : @67,
+                                   UIContentSizeCategoryLarge : @70,
+                                   UIContentSizeCategoryExtraLarge : @75,
+                                   UIContentSizeCategoryExtraExtraLarge : @82,
+                                   UIContentSizeCategoryExtraExtraExtraLarge : @90,
+                                   UIContentSizeCategoryAccessibilityMedium : @90,
+                                   UIContentSizeCategoryAccessibilityLarge : @90,
+                                   UIContentSizeCategoryAccessibilityExtraLarge : @90,
+                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @90,
+                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @90 };
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = featured ? s_featuredTextHeigths[contentSizeCategory].floatValue : s_standardTextHeigths[contentSizeCategory].floatValue;
-    
-    // Live cells must display progress information and be slightly taller for this reason
-    if (homeSectionInfo.homeSection == HomeSectionTVLive || homeSectionInfo.homeSection == HomeSectionRadioLive) {
-        minTextHeight += featured ? 40.f : 36.f;
-    }
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
-- (void)awakeFromNib
+- (void)prepareForReuse
 {
-    [super awakeFromNib];
+    [super prepareForReuse];
     
-    self.backgroundColor = UIColor.clearColor;
-    self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.collectionView.alwaysBounceHorizontal = YES;
-    self.collectionView.directionalLockEnabled = YES;
-    // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
-    self.collectionView.scrollsToTop = NO;
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    
-    // Remark: The collection view is nested in a dummy view to workaround an accessibility bug
-    //         See https://stackoverflow.com/a/38798448/760435
-    self.wrapperView.accessibilityElements = @[self.collectionView];
-    
-    NSString *mediaCellIdentifier = NSStringFromClass(HomeMediaCollectionViewCell.class);
-    UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
-    [self.collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
-      
-    NSString *headerViewIdentifier = NSStringFromClass(HomeMediaCollectionHeaderView.class);
-    UINib *headerNib = [UINib nibWithNibName:headerViewIdentifier bundle:nil];
-    [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewIdentifier];
+    // Clear the collection
+    [self.collectionView reloadData];
 }
+
+#pragma mark Object lifecycle
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = UIColor.clearColor;
+        self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
+        
+        UIView *wrapperView = [[UIView alloc] initWithFrame:self.contentView.bounds];
+        wrapperView.backgroundColor = UIColor.clearColor;
+        wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.contentView addSubview:wrapperView];
+        self.wrapperView = wrapperView;
+        
+        UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:wrapperView.bounds collectionViewLayout:collectionViewLayout];
+        collectionView.backgroundColor = UIColor.clearColor;
+        collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+        collectionView.alwaysBounceHorizontal = YES;
+        collectionView.directionalLockEnabled = YES;
+        // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
+        collectionView.scrollsToTop = NO;
+        collectionView.delegate = self;
+        collectionView.dataSource = self;
+        [wrapperView addSubview:collectionView];
+        self.collectionView = collectionView;
+        
+        // Remark: The collection view is nested in a dummy view to workaround an accessibility bug
+        //         See https://stackoverflow.com/a/38798448/760435
+        wrapperView.accessibilityElements = @[collectionView];
+        
+        NSString *mediaCellIdentifier = NSStringFromClass(HomeMediaCollectionViewCell.class);
+        UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
+        [collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
+          
+        NSString *headerViewIdentifier = NSStringFromClass(HomeMediaCollectionHeaderView.class);
+        UINib *headerNib = [UINib nibWithNibName:headerViewIdentifier bundle:nil];
+        [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewIdentifier];
+    }
+    return self;
+}
+
+#pragma mark Overrides
 
 - (void)layoutSubviews
 {

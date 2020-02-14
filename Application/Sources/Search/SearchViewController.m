@@ -92,14 +92,26 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 #pragma mark View lifecycle
 
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
+    
+    UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
+    collectionView.backgroundColor = UIColor.clearColor;
+    collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    collectionView.alwaysBounceVertical = YES;
+    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:collectionView];
+    self.collectionView = collectionView;
+    
+    self.view = view;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = UIColor.play_blackColor;
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
     self.emptyCollectionImage = [UIImage imageNamed:@"search-90"];
     
@@ -110,10 +122,9 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     NSString *mostSearchedShowCellIdentifier = NSStringFromClass(MostSearchedShowCollectionViewCell.class);
     UINib *mostSearchedShowCellNib = [UINib nibWithNibName:mostSearchedShowCellIdentifier bundle:nil];
     [self.collectionView registerNib:mostSearchedShowCellNib forCellWithReuseIdentifier:mostSearchedShowCellIdentifier];
-    
-    NSString *showListCellIdentifier = NSStringFromClass(SearchShowListCollectionViewCell.class);
-    UINib *showListCellNib = [UINib nibWithNibName:showListCellIdentifier bundle:nil];
-    [self.collectionView registerNib:showListCellNib forCellWithReuseIdentifier:showListCellIdentifier];
+
+    Class showListCellClass = SearchShowListCollectionViewCell.class;
+    [self.collectionView registerClass:showListCellClass forCellWithReuseIdentifier:NSStringFromClass(showListCellClass)];
     
     NSString *loadingCellIdentifier = NSStringFromClass(SearchLoadingCollectionViewCell.class);
     UINib *loadingCellNib = [UINib nibWithNibName:loadingCellIdentifier bundle:nil];
@@ -611,7 +622,12 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+    if ([self shouldDisplayMostSearchedShows]) {
+        return UIEdgeInsetsZero;
+    }
+    else {
+        return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -619,15 +635,32 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     
     if ([self shouldDisplayMostSearchedShows]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+        static NSDictionary<NSString *, NSNumber *> *s_height;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_height = @{ UIContentSizeCategoryExtraSmall : @28,
+                          UIContentSizeCategorySmall : @32,
+                          UIContentSizeCategoryMedium : @36,
+                          UIContentSizeCategoryLarge : @40,
+                          UIContentSizeCategoryExtraLarge : @44,
+                          UIContentSizeCategoryExtraExtraLarge : @48,
+                          UIContentSizeCategoryExtraExtraExtraLarge : @52,
+                          UIContentSizeCategoryAccessibilityMedium : @52,
+                          UIContentSizeCategoryAccessibilityLarge : @52,
+                          UIContentSizeCategoryAccessibilityExtraLarge : @52,
+                          UIContentSizeCategoryAccessibilityExtraExtraLarge : @52,
+                          UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @52 };
+        });
+        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+        CGFloat height = s_height[contentSizeCategory].floatValue;
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, height);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 200.f);
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
          if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-            CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 86.f : 100.f;
-            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, height);
+            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 84.f);
         }
         // Media grid layout
         else {
@@ -637,6 +670,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
             return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
         }
     }
+    // Search show list
     else {
         CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 200.f : 220.f;
         return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
