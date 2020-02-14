@@ -53,7 +53,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;title&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5MF-YL-8iy" userLabel="Title Label">
-                                <rect key="frame" x="0.0" y="95" width="160" height="18"/>
+                                <rect key="frame" x="8" y="95" width="144" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -62,11 +62,11 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="5MF-YL-8iy" firstAttribute="leading" secondItem="zth-tC-rh1" secondAttribute="leading" id="6xJ-nY-hqs"/>
+                            <constraint firstItem="5MF-YL-8iy" firstAttribute="leading" secondItem="zth-tC-rh1" secondAttribute="leading" constant="8" id="6xJ-nY-hqs"/>
                             <constraint firstAttribute="trailing" secondItem="qtn-DI-ERs" secondAttribute="trailing" id="Yea-HG-Uqr"/>
                             <constraint firstItem="5MF-YL-8iy" firstAttribute="top" secondItem="qtn-DI-ERs" secondAttribute="bottom" constant="5" id="Yr8-WK-nU7"/>
                             <constraint firstItem="qtn-DI-ERs" firstAttribute="leading" secondItem="zth-tC-rh1" secondAttribute="leading" id="qLo-xt-lwz"/>
-                            <constraint firstAttribute="trailing" secondItem="5MF-YL-8iy" secondAttribute="trailing" id="tqr-Ye-Jg8"/>
+                            <constraint firstAttribute="trailing" secondItem="5MF-YL-8iy" secondAttribute="trailing" constant="8" id="tqr-Ye-Jg8"/>
                             <constraint firstItem="qtn-DI-ERs" firstAttribute="top" secondItem="zth-tC-rh1" secondAttribute="top" id="xK2-M5-car"/>
                         </constraints>
                     </view>

@@ -37,8 +37,11 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
+    UIColor *backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.backgroundColor = backgroundColor;
+    
+    self.layer.cornerRadius = 4.f;
+    self.layer.masksToBounds = YES;
     
     self.titleLabel.backgroundColor = backgroundColor;
     
@@ -50,8 +53,6 @@
                                                             withScale:ImageScaleMedium];
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailImageView.layer.cornerRadius = 4.f;
-    self.thumbnailImageView.layer.masksToBounds = YES;
 }
 
 - (void)prepareForReuse
