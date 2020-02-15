@@ -50,18 +50,20 @@ platform :ios do
       build_number: appCenterBuildNumber + 1
     )
 
-    notify_build_number_to_ci
-
     changelog = default_changelog_for_nightlies
 
     branch_name = sh "git branch | grep \\* | cut -d ' ' -f2"
 
     bundle_display_name_suffix = " 🌙"
     marketing_version_suffix = "-nightly"
+    build_name_suffix = ''
     if (branch_name.include? 'feature/')
     	bundle_display_name_suffix = " 🌿"
-    	marketing_version_suffix = marketing_version_suffix + '+' + branch_name.sub('feature/', '').strip
+      marketing_version_suffix = marketing_version_suffix + '+' + branch_name.sub('feature/', '').strip
+      build_name_suffix = '+' + branch_name.sub('feature/', '').strip
     end
+
+    notify_build_number_to_ci(build_name_suffix)
 
     schemes.each_index do |index|
 
@@ -96,7 +98,7 @@ platform :ios do
     marketing_version = getMarketingVersion
     tag_version = marketing_version + '-' + build_number
 
-    notify_build_number_to_ci
+    notify_build_number_to_ci(nil)
 
     whatsNewForBeta = getWhatsNewForBeta(tag_version: tag_version)
 
@@ -371,11 +373,15 @@ platform :ios do
   # end
 
   # Share build number to the continuous integration
-  def notify_build_number_to_ci
+  def notify_build_number_to_ci(suffix)
     return unless ENV['TEAMCITY_VERSION']
 
-    displayed_build_number = getMarketingVersion + '-' + get_build_number
-    puts '##teamcity[buildNumber \'' + displayed_build_number + + '\']'
+    suffix ||= ''
+
+    displayed_build_number = getMarketingVersion
+    displayed_build_number += '-' + get_build_number
+    displayed_build_number += suffix
+    puts '##teamcity[buildNumber \'' + displayed_build_number + '\']'
   end
 
   def updateDSYMs (options, appcenter_app_name)
