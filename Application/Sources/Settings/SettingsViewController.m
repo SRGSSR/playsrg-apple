@@ -451,7 +451,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
 - (NSString *)srg_pageViewTitle
 {
-    return PlaySRGNonLocalizedString(@"Settings");
+    return [self.file.lowercaseString containsString:@"license"] ? PlaySRGNonLocalizedString(@"Licenses") : PlaySRGNonLocalizedString(@"Settings");
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
