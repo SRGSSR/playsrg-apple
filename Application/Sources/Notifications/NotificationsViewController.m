@@ -207,9 +207,14 @@
     });
 }
 
+- (NSString *)srg_pageViewTitle
+{
+    return PlaySRGNonLocalizedString(@"Notifications");
+}
+
 - (AnalyticsPageType)pageType
 {
-    return AnalyticsPageTypeNotifications;
+    return AnalyticsPageTypeUser;
 }
 
 #pragma mark UI

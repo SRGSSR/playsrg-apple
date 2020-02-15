@@ -9,6 +9,7 @@
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "NSArray+PlaySRG.h"
+#import "NSBundle+PlaySRG.h"
 #import "SearchSettingsHeaderView.h"
 #import "SearchSettingMultiSelectionCell.h"
 #import "SearchSettingSelectorCell.h"
@@ -588,16 +589,16 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
 }
 
-#pragma mark SRGAnalyticsViewTracking protocol
+#pragma mark Overrides
 
 - (NSString *)srg_pageViewTitle
 {
-    return self.title;
+    return PlaySRGNonLocalizedString(@"Settings");
 }
 
-- (NSArray<NSString *> *)srg_pageViewLevels
+- (AnalyticsPageType)pageType
 {
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeSearch) ];
+    return AnalyticsPageTypeSearch;
 }
 
 #pragma mark UITableViewDataSource protocol

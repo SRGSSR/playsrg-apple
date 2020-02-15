@@ -116,9 +116,14 @@
     [super refreshDidFinishWithError:error];
 }
 
+- (NSString *)srg_pageViewTitle
+{
+    return PlaySRGNonLocalizedString(@"Watch later");
+}
+
 - (AnalyticsPageType)pageType
 {
-    return AnalyticsPageTypeWatchLater;
+    return AnalyticsPageTypeUser;
 }
 
 #pragma mark Data

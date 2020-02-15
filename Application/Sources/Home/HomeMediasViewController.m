@@ -6,6 +6,7 @@
 
 #import "HomeMediasViewController.h"
 
+#import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -86,27 +87,37 @@
     }
 }
 
-- (BOOL)srg_isTrackedAutomatically
+- (NSString *)srg_pageViewTitle
 {
-    // Only tracked if presented directly without containment
-    return ! self.play_pageViewController;
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
+    
+    if (radioChannel) {
+        return AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
+    }
+    else if (self.homeSectionInfo.topic)
+    {
+        return self.homeSectionInfo.topic.title;
+    }
+    else {
+        return AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
+    }
 }
 
-- (AnalyticsPageType)pageType
+- (NSArray<NSString *> *)srg_pageViewLevels
 {
-    switch (self.homeSectionInfo.homeSection) {
-        case HomeSectionRadioLatestEpisodes:
-        case HomeSectionRadioMostPopular:
-        case HomeSectionRadioLatest:
-        case HomeSectionRadioLatestVideos: {
-            return AnalyticsPageTypeRadio;
-            break;
-        }
-            
-        default: {
-            return AnalyticsPageTypeTV;
-            break;
-        }
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
+    
+    if (radioChannel) {
+        return @[ AnalyticsNameForPageType(AnalyticsPageTypeRadio), radioChannel.name ];
+    }
+    else if (self.homeSectionInfo.topic) {
+        AnalyticsPageType level1 = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
+        return @[ AnalyticsNameForPageType(level1), PlaySRGNonLocalizedString(@"Topic"), AnalyticsTitleForTopicSection(self.homeSectionInfo.topicSection) ];
+    }
+    else {
+        return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];
     }
 }
 

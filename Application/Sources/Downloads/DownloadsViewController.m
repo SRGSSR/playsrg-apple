@@ -144,9 +144,14 @@
     });
 }
 
+- (NSString *)srg_pageViewTitle
+{
+    return PlaySRGNonLocalizedString(@"Downloads");
+}
+
 - (AnalyticsPageType)pageType
 {
-    return AnalyticsPageTypeDownloads;
+    return AnalyticsPageTypeUser;
 }
 
 #pragma mark UI

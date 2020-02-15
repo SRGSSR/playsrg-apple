@@ -98,7 +98,7 @@ import SRGAppearance
     
     public override var pageType: AnalyticsPageType {
         get {
-            return .onboarding
+            return .application
         }
     }
     

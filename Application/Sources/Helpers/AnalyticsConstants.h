@@ -13,18 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 typedef NS_ENUM(NSInteger, AnalyticsPageType) {
     AnalyticsPageTypeNone = 0,
-    AnalyticsPageTypeTV,
+    AnalyticsPageTypeApplication,
+    AnalyticsPageTypeAudio,
+    AnalyticsPageTypeEvent,
+    AnalyticsPageTypeLive,
+    AnalyticsPageTypePlayer,
     AnalyticsPageTypeRadio,
-    AnalyticsPageTypeOnline,
-    AnalyticsPageTypeSystem,
-    AnalyticsPageTypeDownloads,
-    AnalyticsPageTypeHistory,
-    AnalyticsPageTypeFavorites,
-    AnalyticsPageTypeNotifications,
     AnalyticsPageTypeSearch,
-    AnalyticsPageTypeOnboarding,
+    AnalyticsPageTypeTV,
     AnalyticsPageTypeUser,
-    AnalyticsPageTypeWatchLater
+    AnalyticsPageTypeVideo
 };
 
 /**

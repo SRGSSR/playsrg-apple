@@ -8,11 +8,9 @@
 #import "PageViewController.h"
 #import "PlayApplicationNavigation.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LivestreamsViewController : PageViewController <PlayApplicationNavigation, SRGAnalyticsViewTracking>
+@interface LivestreamsViewController : PageViewController <PlayApplicationNavigation>
 
 - (instancetype)initWithHomeSections:(NSArray<NSNumber *> *)homeSections;
 

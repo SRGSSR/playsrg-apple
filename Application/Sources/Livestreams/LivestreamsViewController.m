@@ -58,18 +58,6 @@
     ApplicationSettingSetLastOpenedLivestreamHomeSection(homeViewController.homeSectionInfo.homeSection);
 }
 
-#pragma mark SRGAnalyticsViewTracking protocol
-
-- (NSString *)srg_pageViewTitle
-{
-    return NSLocalizedString(@"Live", @"[Technical] Title for livestreams analytics measurements");
-}
-
-- (NSArray<NSString *> *)srg_pageViewLevels
-{
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeRadio) ];
-}
-
 #pragma mark PlayApplicationNavigation protocol
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo

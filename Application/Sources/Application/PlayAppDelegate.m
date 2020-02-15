@@ -835,7 +835,7 @@ static void *s_kvoContext = &s_kvoContext;
         }
         
         NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeSystem];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeApplication];
         completionHandler(webViewController, nil);
     }] resume];
 }

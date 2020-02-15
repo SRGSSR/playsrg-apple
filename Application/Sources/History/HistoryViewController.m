@@ -112,9 +112,14 @@
     [super refreshDidFinishWithError:error];
 }
 
+- (NSString *)srg_pageViewTitle
+{
+    return PlaySRGNonLocalizedString(@"History");
+}
+
 - (AnalyticsPageType)pageType
 {
-    return AnalyticsPageTypeHistory;
+    return AnalyticsPageTypeUser;
 }
 
 #pragma mark Data

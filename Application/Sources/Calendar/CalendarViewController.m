@@ -9,6 +9,7 @@
 #import "Calendar.h"
 #import "DailyMediasViewController.h"
 #import "MediaCollectionViewCell.h"
+#import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -313,12 +314,17 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return NSLocalizedString(@"Programmes by date", @"[Technical] Title for programmes by date page view analytics measurements");
+    return PlaySRGNonLocalizedString(@"Calendar");
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];
+    if (self.radioChannel) {
+        return @[ AnalyticsNameForPageType(AnalyticsPageTypeRadio), self.radioChannel.name ];
+    }
+    else {
+        return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];
+    }
 }
 
 #pragma mark UIGestureRecognizerDelegate protocol

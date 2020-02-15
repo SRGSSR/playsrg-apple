@@ -7,6 +7,7 @@
 #import "ShowsViewController.h"
 
 #import "ApplicationConfiguration.h"
+#import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
@@ -236,20 +237,19 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     });
 }
 
-- (BOOL)srg_isTrackedAutomatically
-{
-    // Only tracked if standalone
-    return ! self.play_pageViewController;
-}
-
 - (NSString *)srg_pageViewTitle
 {
-    return NSLocalizedString(@"Programmes A-Z", @"[Technical] Title for programmes A-Z page view analytics measurements");
+    return PlaySRGNonLocalizedString(@"Shows");
 }
 
-- (AnalyticsPageType)pageType
+- (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return self.radioChannel != nil ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
+    if (self.radioChannel) {
+        return @[ AnalyticsNameForPageType(AnalyticsPageTypeRadio), self.radioChannel.name ];
+    }
+    else {
+        return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];
+    }
 }
 
 #pragma mark Scrolling

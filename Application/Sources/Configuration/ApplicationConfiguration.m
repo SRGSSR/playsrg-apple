@@ -7,6 +7,7 @@
 #import "ApplicationConfiguration.h"
 
 #import "ApplicationSettings.h"
+#import "NSBundle+PlaySRG.h"
 #import "PlayLogger.h"
 #import "UIColor+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
@@ -54,6 +55,47 @@ NSString *TitleForTopicSection(TopicSection topicSection)
     dispatch_once(&s_onceToken, ^{
         s_names = @{ @(TopicSectionLatest) : NSLocalizedString(@"Most recent", @"Short title for the most recent video topic list"),
                      @(TopicSectionMostPopular) : NSLocalizedString(@"Most popular", @"Short title for the most clicked video topic list") };
+    });
+    return s_names[@(topicSection)];
+}
+
+NSString *AnalyticsTitleForHomeSection(HomeSection homeSection)
+{
+    static NSDictionary<NSNumber *, NSString *> *s_names;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_names = @{ @(HomeSectionTVTrending) : PlaySRGNonLocalizedString(@"Trending"),
+                     @(HomeSectionTVLive) : PlaySRGNonLocalizedString(@"TV"),
+                     @(HomeSectionTVEvents) : PlaySRGNonLocalizedString(@"Events"),
+                     @(HomeSectionTVTopics) : PlaySRGNonLocalizedString(@"Topics"),
+                     @(HomeSectionTVLatest) : PlaySRGNonLocalizedString(@"Latest"),
+                     @(HomeSectionTVMostPopular) : PlaySRGNonLocalizedString(@"Popular"),
+                     @(HomeSectionTVSoonExpiring) : PlaySRGNonLocalizedString(@"Soon expiring"),
+                     @(HomeSectionTVScheduledLivestreams) : PlaySRGNonLocalizedString(@"Events"),
+                     @(HomeSectionTVLiveCenter) : PlaySRGNonLocalizedString(@"Sports"),
+                     @(HomeSectionTVShowsAccess) : PlaySRGNonLocalizedString(@""),
+                     @(HomeSectionTVFavoriteShows) : PlaySRGNonLocalizedString(@"Favorites"),
+                     @(HomeSectionRadioLive) : PlaySRGNonLocalizedString(@"Radio"),
+                     @(HomeSectionRadioLatestEpisodes) : PlaySRGNonLocalizedString(@"Latest episodes"),
+                     @(HomeSectionRadioMostPopular) : PlaySRGNonLocalizedString(@"Popular"),
+                     @(HomeSectionRadioLatest) : PlaySRGNonLocalizedString(@"Latest"),
+                     @(HomeSectionRadioLatestVideos) : PlaySRGNonLocalizedString(@"Latest videos"),
+                     @(HomeSectionRadioAllShows) : PlaySRGNonLocalizedString(@"Shows"),
+                     @(HomeSectionRadioShowsAccess) : PlaySRGNonLocalizedString(@""),
+                     @(HomeSectionRadioFavoriteShows) : PlaySRGNonLocalizedString(@"Favorites"),
+                     @(HomeSectionUnknown) : PlaySRGNonLocalizedString(@"") };
+    });
+    return s_names[@(homeSection)];
+}
+
+NSString *AnalyticsTitleForTopicSection(TopicSection topicSection)
+{
+    static NSDictionary<NSNumber *, NSString *> *s_names;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_names = @{ @(TopicSectionLatest) : PlaySRGNonLocalizedString(@"Latest"),
+                     @(TopicSectionMostPopular) : PlaySRGNonLocalizedString(@"Popular"),
+                     @(TopicSectionUnknown) : PlaySRGNonLocalizedString(@"") };
     });
     return s_names[@(topicSection)];
 }

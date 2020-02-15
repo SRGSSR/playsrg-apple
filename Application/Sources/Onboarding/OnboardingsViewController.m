@@ -65,9 +65,14 @@
 
 #pragma mark Overrides
 
+- (NSString *)srg_pageViewTitle
+{
+    return PlaySRGNonLocalizedString(@"Features");
+}
+
 - (AnalyticsPageType)pageType
 {
-    return AnalyticsPageTypeSystem;
+    return AnalyticsPageTypeApplication;
 }
 
 #pragma mark UITableViewDataSource protocol

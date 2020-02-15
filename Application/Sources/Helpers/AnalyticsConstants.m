@@ -12,18 +12,16 @@ NSString *AnalyticsNameForPageType(AnalyticsPageType pageType)
     static dispatch_once_t s_onceToken;
     static NSDictionary<NSNumber *, NSString *> *s_names;
     dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(AnalyticsPageTypeTV) : NSLocalizedString(@"TV", @"[Technical] TV page type for analytics measurements"),
-                     @(AnalyticsPageTypeRadio) : NSLocalizedString(@"Radio", @"[Technical] Radio page type for analytics measurements"),
-                     @(AnalyticsPageTypeOnline) : NSLocalizedString(@"Online", @"[Technical] Online page type for analytics measurements"),
-                     @(AnalyticsPageTypeSystem) : NSLocalizedString(@"System", @"[Technical] System page type for analytics measurements"),
-                     @(AnalyticsPageTypeDownloads) : NSLocalizedString(@"Downloads", @"[Technical] Downloads page type for analytics measurements"),
-                     @(AnalyticsPageTypeHistory) : NSLocalizedString(@"History", @"[Technical] History page type for analytics measurements"),
-                     @(AnalyticsPageTypeFavorites) : NSLocalizedString(@"Favorites", @"[Technical] Favorites page type for analytics measurements"),
-                     @(AnalyticsPageTypeNotifications) : NSLocalizedString(@"Notifications", @"[Technical] Notifications page type for analytics measurements"),
-                     @(AnalyticsPageTypeSearch) : NSLocalizedString(@"Search", @"[Technical] Search page type for analytics measurements"),
-                     @(AnalyticsPageTypeOnboarding) : NSLocalizedString(@"Onboarding", @"[Technical] Onboarding page type for analytics measurements"),
+        s_names = @{ @(AnalyticsPageTypeApplication) : PlaySRGNonLocalizedString(@"Application"),
+                     @(AnalyticsPageTypeAudio) : PlaySRGNonLocalizedString(@"Audio"),
+                     @(AnalyticsPageTypeEvent) : PlaySRGNonLocalizedString(@"Event"),
+                     @(AnalyticsPageTypeLive) : PlaySRGNonLocalizedString(@"Live"),
+                     @(AnalyticsPageTypePlayer) : PlaySRGNonLocalizedString(@"Player"),
+                     @(AnalyticsPageTypeRadio) : PlaySRGNonLocalizedString(@"Radio"),
+                     @(AnalyticsPageTypeSearch) : PlaySRGNonLocalizedString(@"Search"),
+                     @(AnalyticsPageTypeTV) : PlaySRGNonLocalizedString(@"TV"),
                      @(AnalyticsPageTypeUser) : PlaySRGNonLocalizedString(@"User"),
-                     @(AnalyticsPageTypeWatchLater) : PlaySRGNonLocalizedString(@"Watch later") };
+                     @(AnalyticsPageTypeVideo) : PlaySRGNonLocalizedString(@"Video") };
     });
     return s_names[@(pageType)];
 }

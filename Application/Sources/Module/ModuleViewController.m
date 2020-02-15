@@ -135,16 +135,16 @@
     [requestQueue addRequest:request resume:YES];
 }
 
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeTV;
-}
-
 - (NSString *)srg_pageViewTitle
 {
     // Since we sometimes reset the view controller title for display purposes, we need to reliably return the module title
     // as page title
     return self.module.title;
+}
+
+- (AnalyticsPageType)pageType
+{
+    return AnalyticsPageTypeEvent;
 }
 
 #pragma mark Peek and pop

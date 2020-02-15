@@ -328,42 +328,8 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    NSMutableArray<NSString *> *levels = [NSMutableArray array];
-    
-    // Climb up the view controller hierarchy and store levels in reverse order
-    UIViewController *parentViewController = self.parentViewController;
-    while (parentViewController) {
-        // Navigation. Always remove the last level (taken into account one iteration earlier)
-        if ([parentViewController isKindOfClass:UINavigationController.class]) {
-            UINavigationController *navigationController = (UINavigationController *)parentViewController;
-            NSArray<UIViewController *> *viewControllers = [[navigationController.viewControllers arrayByRemovingLastObject] reverseObjectEnumerator].allObjects;
-            NSMutableArray<NSString *> *titles = [NSMutableArray array];
-            [viewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
-                NSString *title = PageViewTitleForViewController(viewController);
-                if (title) {
-                    [titles addObject:title];
-                }
-            }];
-            [levels addObjectsFromArray:titles];
-        }
-        else {
-            NSString *title = PageViewTitleForViewController(parentViewController);
-            if (title) {
-                [levels addObject:parentViewController.title];
-            }
-        }
-        
-        parentViewController = parentViewController.parentViewController;
-    }
-    
-    // Add the top level (if any)
     NSString *pageType = AnalyticsNameForPageType(self.pageType);
-    if (pageType) {
-        [levels addObject:pageType];
-    }
-    
-    // Reverse levels since built in reverse order
-    return [levels reverseObjectEnumerator].allObjects;
+    return (pageType) ? @[ pageType ] : @[];
 }
 
 #pragma mark UIContextMenuInteractionDelegate protocol

@@ -129,18 +129,6 @@
     }
 }
 
-#pragma mark SRGAnalyticsViewTracking protocol
-
-- (NSString *)srg_pageViewTitle
-{
-    return NSLocalizedString(@"Audios", @"[Technical] Title for audio analytics measurements");
-}
-
-- (NSArray<NSString *> *)srg_pageViewLevels
-{
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeRadio) ];
-}
-
 #pragma mark PlayApplicationNavigation protocol
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo

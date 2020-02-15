@@ -48,16 +48,4 @@
     return self;
 }
 
-#pragma mark SRGAnalyticsViewTracking protocol
-
-- (NSString *)srg_pageViewTitle
-{
-    return self.title;
-}
-
-- (NSArray<NSString *> *)srg_pageViewLevels
-{
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];
-}
-
 @end

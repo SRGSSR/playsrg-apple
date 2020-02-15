@@ -186,9 +186,14 @@
     });
 }
 
+- (NSString *)srg_pageViewTitle
+{
+    return PlaySRGNonLocalizedString(@"Favorites");
+}
+
 - (AnalyticsPageType)pageType
 {
-    return AnalyticsPageTypeFavorites;
+    return AnalyticsPageTypeUser;
 }
 
 #pragma mark UI

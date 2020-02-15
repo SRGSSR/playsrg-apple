@@ -279,9 +279,19 @@
     });
 }
 
-- (AnalyticsPageType)pageType
+- (NSString *)srg_pageViewTitle
 {
-    return self.radioChannel ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
+    return PlaySRGNonLocalizedString(@"Home");
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    if (self.radioChannel) {
+        return @[ AnalyticsNameForPageType(AnalyticsPageTypeAudio), self.radioChannel.name ];
+    }
+    else {
+        return @[ AnalyticsNameForPageType(AnalyticsPageTypeVideo) ];
+    }
 }
 
 #pragma mark User interface

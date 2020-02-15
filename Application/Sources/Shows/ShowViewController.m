@@ -175,24 +175,17 @@
     [requestQueue addRequest:request resume:YES];
 }
 
-- (AnalyticsPageType)pageType
-{
-    if (self.show.transmission == SRGTransmissionRadio) {
-        return AnalyticsPageTypeRadio;
-    }
-    else if (self.show.transmission == SRGTransmissionOnline) {
-        return AnalyticsPageTypeOnline;
-    }
-    else {
-        return AnalyticsPageTypeTV;
-    }
-}
-
 - (NSString *)srg_pageViewTitle
 {
     // Since we sometimes reset the view controller title for display purposes, we need to reliably return the show title
     // as page title
     return self.show.title;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    AnalyticsPageType level1 = (self.show.transmission == SRGTransmissionRadio) ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
+    return @[ AnalyticsNameForPageType(level1), PlaySRGNonLocalizedString(@"Show") ];
 }
 
 #pragma mark Peek and pop

@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BaseViewController (Subclassing)
 
 /**
- *  The page type to be used for measurements
+ *  The page type to be used for measurements if `-srg_pageViewLevels` is not implemented
  */
 @property (nonatomic, readonly) AnalyticsPageType pageType;
 

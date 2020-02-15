@@ -9,6 +9,7 @@
 #import "ApplicationSettings.h"
 #import "ChannelService.h"
 #import "LiveMediaCollectionViewCell.h"
+#import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "SmartTimer.h"
 #import "UIColor+PlaySRG.h"
@@ -194,16 +195,20 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     }
 }
 
-- (BOOL)srg_isTrackedAutomatically
+- (NSString *)srg_pageViewTitle
 {
-    // Only tracked if presented directly without containment
-    return ! self.play_pageViewController;
+    return PlaySRGNonLocalizedString(@"Home");
 }
 
-- (AnalyticsPageType)pageType
+- (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO: Probably AnalyticsPageTypeLivestreams
-    return AnalyticsPageTypeTV;
+    NSString *level2 = AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
+    if (level2) {
+        return @[ AnalyticsNameForPageType(AnalyticsPageTypeLive), level2 ];
+    }
+    else {
+        return @[ AnalyticsNameForPageType(AnalyticsPageTypeLive) ];
+    }
 }
 
 #pragma mark UICollectionViewDataSource protocol

@@ -231,16 +231,16 @@
     [self.tableView play_scrollToTopAnimated:animated];
 }
 
-#pragma mark SRGAnalyticsViewTracking protocol
+#pragma mark Overrides
 
 - (NSString *)srg_pageViewTitle
 {
-    return NSLocalizedString(@"Library", @"[Technical] Title for library analytics measurements");
+    return PlaySRGNonLocalizedString(@"Home");
 }
 
-- (NSArray<NSString *> *)srg_pageViewLevels
+- (AnalyticsPageType)pageType
 {
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeUser) ];
+    return AnalyticsPageTypeUser;
 }
 
 #pragma mark UITableViewDataSource protocol
