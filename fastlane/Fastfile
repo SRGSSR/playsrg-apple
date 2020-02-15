@@ -45,7 +45,7 @@ platform :ios do
     schemes = ["Play SWI", "Play RTS", "Play SRF", "Play RSI", "Play RTR"]
     appcenter_nightly_names = [ENV['PLAY_SWI_NIGHTLY_APPCENTER_APPNAME'], ENV['PLAY_RTS_NIGHTLY_APPCENTER_APPNAME'], ENV['PLAY_SRF_NIGHTLY_APPCENTER_APPNAME'], ENV['PLAY_RSI_NIGHTLY_APPCENTER_APPNAME'], ENV['PLAY_RTR_NIGHTLY_APPCENTER_APPNAME']]
 
-    appCenterBuildNumber = getAppCenterBuildNumber
+    appCenterBuildNumber = latest_appcenter_build_number(appcenter_nightly_names)
     increment_build_number(
       build_number: appCenterBuildNumber + 1
     )
@@ -316,13 +316,6 @@ platform :ios do
     changelog
   end
 
-  desc "Return current build number on App Center"
-  private_lane :getAppCenterBuildNumber do
-    appCenterBuildNumber = (sh "scripts/appcenter-build-number.sh -t #{ENV['PLAY_APPCENTER_TOKEN']} #{ENV['PLAY_SWI_NIGHTLY_APPCENTER_SECRET']} #{ENV['PLAY_RTS_NIGHTLY_APPCENTER_SECRET']} #{ENV['PLAY_SRF_NIGHTLY_APPCENTER_SECRET']} #{ENV['PLAY_RSI_NIGHTLY_APPCENTER_SECRET']} #{ENV['PLAY_RTR_NIGHTLY_APPCENTER_SECRET']}")
-    appCenterBuildNumber = Integer(appCenterBuildNumber.lines.map(&:chomp).last)
-    appCenterBuildNumber
-  end
-
   desc "Save the git commit hash in a local text file for nightlies"
   private_lane :saveLastNightliesSuccessGitCommitHash do
     last = last_git_commit
@@ -382,6 +375,21 @@ platform :ios do
     displayed_build_number += '-' + get_build_number
     displayed_build_number += suffix
     puts '##teamcity[buildNumber \'' + displayed_build_number + '\']'
+  end
+
+  # Returns current build number on App Center
+  def latest_appcenter_build_number(app_names)
+    build_number = 0
+    app_names.each_index do |index|
+      number = Integer(appcenter_fetch_version_number(
+        api_token: ENV['PLAY_APPCENTER_TOKEN'],
+        owner_name: ENV['PLAY_APPCENTER_OWNER'],
+        app_name: app_names[index]
+      )['build_number'])
+
+      build_number = number unless build_number >= number
+    end
+    build_number
   end
 
   def updateDSYMs (options, appcenter_app_name)
