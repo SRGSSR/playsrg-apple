@@ -12,7 +12,7 @@ AllCops:
 # this would cause errors with long lanes
 Metrics/BlockLength:
   Enabled: true
-  ExcludedMethods: ['platform', 'for_platform']
+  ExcludedMethods: ['platform', 'for_platform', 'abstract_target']
 
 # Lane description and gem lines can be long
 Layout/LineLength:
