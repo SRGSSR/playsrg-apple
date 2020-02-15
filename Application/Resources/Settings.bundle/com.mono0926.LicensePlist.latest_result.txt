@@ -466,7 +466,7 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 8c08796
+name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: d970a8e
 
 name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
