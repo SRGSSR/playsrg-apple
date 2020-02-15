@@ -109,8 +109,8 @@
 - (void)play_displayDurationLabelWithName:(NSString *)name isLive:(BOOL)isLive
 {
     self.backgroundColor = isLive ? UIColor.play_liveRedColor : UIColor.play_blackDurationLabelBackgroundColor;
-    self.layer.cornerRadius = isLive ? 3.f : 0.f;
-    self.layer.masksToBounds = isLive ? YES : NO;
+    self.layer.cornerRadius = 3.f;
+    self.layer.masksToBounds = YES;
     
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@  ", name].uppercaseString
                                                                                        attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption],

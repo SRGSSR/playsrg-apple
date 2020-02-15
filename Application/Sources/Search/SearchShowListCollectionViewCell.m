@@ -70,6 +70,13 @@
 
 #pragma mark Overrides
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    self.shows = nil;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
