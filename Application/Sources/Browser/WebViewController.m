@@ -28,6 +28,7 @@ static void *s_kvoContext = &s_kvoContext;
 @property (nonatomic, copy) WebViewControllerCustomizationBlock customizationBlock;
 @property (nonatomic, copy) WKNavigationActionPolicy (^decisionHandler)(NSURL *URL);
 @property (nonatomic) AnalyticsPageType analyticsPageType;
+@property (nonatomic) NSString *analyticsPageTitle;
 
 @end
 
@@ -35,7 +36,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRequest:(NSURLRequest *)request customizationBlock:(WebViewControllerCustomizationBlock)customizationBlock decisionHandler:(WKNavigationActionPolicy (^)(NSURL *))decisionHandler analyticsPageType:(AnalyticsPageType)analyticsPageType
+- (instancetype)initWithRequest:(NSURLRequest *)request customizationBlock:(WebViewControllerCustomizationBlock)customizationBlock decisionHandler:(WKNavigationActionPolicy (^)(NSURL *))decisionHandler analyticsPageType:(AnalyticsPageType)analyticsPageType analyticsPageTitle:(NSString *)analyticsPageTitle
 {
     if (self = [super init]) {
         self.request = request;
@@ -43,6 +44,7 @@ static void *s_kvoContext = &s_kvoContext;
         self.decisionHandler = decisionHandler;
         self.tracked = YES;
         self.analyticsPageType = analyticsPageType;
+        self.analyticsPageTitle = analyticsPageTitle;
     }
     return self;
 }
@@ -132,6 +134,11 @@ static void *s_kvoContext = &s_kvoContext;
 }
 
 #pragma mark Overrides
+
+- (NSString *)srg_pageViewTitle
+{
+    return self.analyticsPageTitle;
+}
 
 - (AnalyticsPageType)pageType
 {

@@ -153,7 +153,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSAssert(helpAndCopyrightURL, @"Button must not be displayed if no Impressum URL has been specified");
         
         NSURLRequest *request = [NSURLRequest requestWithURL:helpAndCopyrightURL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeApplication];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeApplication analyticsPageTitle:PlaySRGNonLocalizedString(@"Help and copyright")];
         webViewController.title = PlaySRGSettingsLocalizedString(@"Help and copyright", @"Title displayed at the top of the help and copyright view");
         webViewController.tracked = NO;            // The website we display is already tracked.
         [self.navigationController pushViewController:webViewController animated:YES];
@@ -163,7 +163,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSAssert(termsAndConditionsURL, @"Button must not be displayed if no Terms and conditions URL has been specified");
         
         NSURLRequest *request = [NSURLRequest requestWithURL:termsAndConditionsURL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeApplication];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeApplication analyticsPageTitle:PlaySRGNonLocalizedString(@"Terms and conditions")];
         webViewController.title = PlaySRGSettingsLocalizedString(@"Terms and conditions", @"Title displayed at the top of the Terms and conditions view");
         webViewController.tracked = NO;            // The website we display is already tracked.
         [self.navigationController pushViewController:webViewController animated:YES];
@@ -173,7 +173,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSAssert(dataProtectionURL, @"Button must not be displayed if no data protection URL has been specified");
         
         NSURLRequest *request = [NSURLRequest requestWithURL:dataProtectionURL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeApplication];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeApplication analyticsPageTitle:PlaySRGNonLocalizedString(@"Data protection")];
         webViewController.title = PlaySRGSettingsLocalizedString(@"Data protection", @"Title displayed at the top of the data protection view");
         webViewController.tracked = NO;            // The website we display is already tracked.
         [self.navigationController pushViewController:webViewController animated:YES];
@@ -203,7 +203,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSURLRequest *request = [NSURLRequest requestWithURL:URLComponents.URL];
         WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:^(WKWebView *webView) {
             webView.scrollView.scrollEnabled = NO;
-        } decisionHandler:nil analyticsPageType:AnalyticsPageTypeUser];
+        } decisionHandler:nil analyticsPageType:AnalyticsPageTypeUser analyticsPageTitle:PlaySRGNonLocalizedString(@"Feedback")];
         webViewController.title = PlaySRGSettingsLocalizedString(@"Your feedback", @"Title displayed at the top of the feedback view");
         [self.navigationController pushViewController:webViewController animated:YES];
     }

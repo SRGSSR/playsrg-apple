@@ -19,6 +19,7 @@
 #import "MediaPlayerViewController.h"
 #import "ModuleViewController.h"
 #import "NavigationController.h"
+#import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PlayErrors.h"
@@ -835,7 +836,7 @@ static void *s_kvoContext = &s_kvoContext;
         }
         
         NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeApplication];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeApplication analyticsPageTitle:PlaySRGNonLocalizedString(@"What's new")];
         completionHandler(webViewController, nil);
     }] resume];
 }

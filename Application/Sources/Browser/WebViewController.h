@@ -23,7 +23,7 @@ typedef void (^WebViewControllerCustomizationBlock)(WKWebView *webView);
  *  Create an instance. The associated web view can be customized by implementing an optional customization block, called right after
  *  the web view has been created.
  */
-- (instancetype)initWithRequest:(NSURLRequest *)request customizationBlock:(nullable WebViewControllerCustomizationBlock)customizationBlock decisionHandler:(WKNavigationActionPolicy (^ _Nullable)(NSURL *))decisionHandler analyticsPageType:(AnalyticsPageType)analyticsPageType;
+- (instancetype)initWithRequest:(NSURLRequest *)request customizationBlock:(nullable WebViewControllerCustomizationBlock)customizationBlock decisionHandler:(WKNavigationActionPolicy (^ _Nullable)(NSURL *))decisionHandler analyticsPageType:(AnalyticsPageType)analyticsPageType analyticsPageTitle:(NSString *)analyticsPageTitle;
 
 /**
  *  Set to `NO` to disable automatic analytics tracking for page view events (mostly useful if the associated website performs the
