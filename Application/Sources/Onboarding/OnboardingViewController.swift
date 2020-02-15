@@ -102,6 +102,12 @@ import SRGAppearance
         }
     }
     
+    public override var subPageType: AnalyticsPageType {
+        get {
+            return .feature
+        }
+    }
+    
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         

@@ -22,7 +22,11 @@ typedef NS_ENUM(NSInteger, AnalyticsPageType) {
     AnalyticsPageTypeSearch,
     AnalyticsPageTypeTV,
     AnalyticsPageTypeUser,
-    AnalyticsPageTypeVideo
+    AnalyticsPageTypeVideo,
+    
+    AnalyticsPageTypeFeature,
+    AnalyticsPageTypeShow,
+    AnalyticsPageTypeTopic
 };
 
 /**

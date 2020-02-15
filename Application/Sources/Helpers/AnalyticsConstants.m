@@ -21,7 +21,11 @@ NSString *AnalyticsNameForPageType(AnalyticsPageType pageType)
                      @(AnalyticsPageTypeSearch) : PlaySRGNonLocalizedString(@"Search"),
                      @(AnalyticsPageTypeTV) : PlaySRGNonLocalizedString(@"TV"),
                      @(AnalyticsPageTypeUser) : PlaySRGNonLocalizedString(@"User"),
-                     @(AnalyticsPageTypeVideo) : PlaySRGNonLocalizedString(@"Video") };
+                     @(AnalyticsPageTypeVideo) : PlaySRGNonLocalizedString(@"Video"),
+                     
+                     @(AnalyticsPageTypeFeature) : PlaySRGNonLocalizedString(@"Feature"),
+                     @(AnalyticsPageTypeShow) : PlaySRGNonLocalizedString(@"Show"),
+                     @(AnalyticsPageTypeTopic) : PlaySRGNonLocalizedString(@"Topic") };
     });
     return s_names[@(pageType)];
 }

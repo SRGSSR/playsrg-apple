@@ -86,6 +86,11 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     return AnalyticsPageTypeNone;
 }
 
+- (AnalyticsPageType)subPageType
+{
+    return AnalyticsPageTypeNone;
+}
+
 #pragma mark Accessibility
 
 - (BOOL)accessibilityPerformEscape
@@ -328,8 +333,14 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    NSString *pageType = AnalyticsNameForPageType(self.pageType);
-    return (pageType) ? @[ pageType ] : @[];
+    NSString *analyticsName = AnalyticsNameForPageType(self.pageType);
+    if (analyticsName) {
+        NSString *subAnalyticsName = AnalyticsNameForPageType(self.subPageType);
+        return (subAnalyticsName) ? @[ analyticsName, subAnalyticsName ] : @[ analyticsName ];
+    }
+    else {
+        return @[];
+    }
 }
 
 #pragma mark UIContextMenuInteractionDelegate protocol

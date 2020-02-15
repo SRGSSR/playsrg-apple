@@ -6,7 +6,6 @@
 
 #import "HomeMediasViewController.h"
 
-#import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -114,7 +113,7 @@
     }
     else if (self.homeSectionInfo.topic) {
         AnalyticsPageType level1 = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
-        return @[ AnalyticsNameForPageType(level1), PlaySRGNonLocalizedString(@"Topic"), AnalyticsTitleForTopicSection(self.homeSectionInfo.topicSection) ];
+        return @[ AnalyticsNameForPageType(level1), AnalyticsNameForPageType(AnalyticsPageTypeTopic), AnalyticsTitleForTopicSection(self.homeSectionInfo.topicSection) ];
     }
     else {
         return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];
