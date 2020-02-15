@@ -211,13 +211,17 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSURL *sourceCodeURL = ApplicationConfiguration.sharedApplicationConfiguration.sourceCodeURL;
         NSAssert(sourceCodeURL, @"Button must not be displayed if no source code URL has been specified");
         
-        [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:nil];
+        [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:^(BOOL success) {
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:PlaySRGNonLocalizedString(@"Source code") levels:@[AnalyticsNameForPageType(AnalyticsPageTypeApplication)]];
+        }];
     }
     else if ([specifier.key isEqualToString:SettingsBetaTestingButton]) {
         NSURL *betaTestingURL = ApplicationConfiguration.sharedApplicationConfiguration.betaTestingURL;
         NSAssert(betaTestingURL, @"Button must not be displayed if no beta testing URL has been specified");
         
-        [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:nil];
+        [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:^(BOOL success) {
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:PlaySRGNonLocalizedString(@"Beta testing") levels:@[AnalyticsNameForPageType(AnalyticsPageTypeApplication)]];
+        }];
     }
     else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {
         // Clear internal App Center timestamp to force a new update request
