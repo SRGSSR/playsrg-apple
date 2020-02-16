@@ -143,7 +143,7 @@
     self.headerView.hidden = NO;
     self.placeholderView.hidden = YES;
     
-    UIColor *backgroundColor = UIColor.clearColor;
+    UIColor *backgroundColor = UIColor.play_blackColor;
     UIColor *titleTextColor = UIColor.whiteColor;
     UIColor *thumbnailImageViewBackgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     UIColor *headerBackgroundColor = UIColor.play_cardGrayBackgroundColor;
