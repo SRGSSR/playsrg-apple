@@ -96,7 +96,7 @@
     }
     else if (self.homeSectionInfo.topic)
     {
-        return self.homeSectionInfo.topic.title;
+        return ([self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class]) ? self.homeSectionInfo.parentTitle : self.homeSectionInfo.topic.title;
     }
     else {
         return AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
@@ -112,8 +112,9 @@
         return @[ AnalyticsNameForPageType(AnalyticsPageTypeRadio), radioChannel.name ];
     }
     else if (self.homeSectionInfo.topic) {
-        AnalyticsPageType level1 = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
-        return @[ AnalyticsNameForPageType(level1), AnalyticsNameForPageType(AnalyticsPageTypeTopic), AnalyticsTitleForTopicSection(self.homeSectionInfo.topicSection) ];
+        AnalyticsPageType level1PageType = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
+        NSString *level3 = ([self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class]) ? self.homeSectionInfo.topic.title : AnalyticsTitleForTopicSection(self.homeSectionInfo.topicSection);
+        return @[ AnalyticsNameForPageType(level1PageType), AnalyticsNameForPageType(AnalyticsPageTypeTopic), level3 ];
     }
     else {
         return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];

@@ -184,8 +184,8 @@
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    AnalyticsPageType level1 = (self.show.transmission == SRGTransmissionRadio) ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
-    return @[ AnalyticsNameForPageType(level1), AnalyticsNameForPageType(AnalyticsPageTypeShow) ];
+    AnalyticsPageType level1PageType = (self.show.transmission == SRGTransmissionRadio) ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
+    return @[ AnalyticsNameForPageType(level1PageType), AnalyticsNameForPageType(AnalyticsPageTypeShow) ];
 }
 
 #pragma mark Peek and pop

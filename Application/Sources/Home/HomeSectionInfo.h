@@ -35,6 +35,8 @@ typedef void (^SRGItemListCompletionBlock)(NSArray * _Nullable items, NSHTTPURLR
 @property (nonatomic, copy, nullable) NSString *title;
 @property (nonatomic) CGPoint contentOffset;
 
+@property (nonatomic, copy, nullable) NSString *parentTitle;
+
 @property (nonatomic, readonly, nullable) NSArray *items;
 
 - (void)refreshWithRequestQueue:(SRGRequestQueue *)requestQueue completionBlock:(nullable void (^)(NSError * _Nullable error))completionBlock;

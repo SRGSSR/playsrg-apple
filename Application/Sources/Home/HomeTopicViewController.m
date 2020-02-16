@@ -39,6 +39,7 @@
     for (SRGSubtopic *subtopic in topic.subtopics) {
         HomeSectionInfo *subTopicSectionInfo = [[HomeSectionInfo alloc] initWithHomeSection:HomeSectionTVTopics object:subtopic];
         subTopicSectionInfo.title = subtopic.title;
+        subTopicSectionInfo.parentTitle = topic.title;
         [viewControllers addObject:[[HomeMediasViewController alloc] initWithHomeSectionInfo:subTopicSectionInfo]];
     }
     
