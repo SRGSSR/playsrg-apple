@@ -36,7 +36,11 @@ static void *s_kvoContext = &s_kvoContext;
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRequest:(NSURLRequest *)request customizationBlock:(WebViewControllerCustomizationBlock)customizationBlock decisionHandler:(WKNavigationActionPolicy (^)(NSURL *))decisionHandler analyticsPageType:(AnalyticsPageType)analyticsPageType analyticsPageTitle:(NSString *)analyticsPageTitle
+- (instancetype)initWithRequest:(NSURLRequest *)request
+             customizationBlock:(WebViewControllerCustomizationBlock)customizationBlock
+                decisionHandler:(WKNavigationActionPolicy (^)(NSURL *))decisionHandler
+              analyticsPageType:(AnalyticsPageType)analyticsPageType
+             analyticsPageTitle:(NSString *)analyticsPageTitle
 {
     if (self = [super init]) {
         self.request = request;
