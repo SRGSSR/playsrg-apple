@@ -57,13 +57,14 @@
     self.headerView.hidden = YES;
     self.placeholderView.hidden = NO;
     
+    self.headerView.layer.cornerRadius = 4.f;
+    self.headerView.layer.masksToBounds = YES;
+    
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
                                                             withScale:ImageScaleMedium];
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailImageView.layer.cornerRadius = 4.f;
-    self.thumbnailImageView.layer.masksToBounds = YES;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMediaList:)];
     [self.headerView addGestureRecognizer:tapGestureRecognizer];
@@ -145,16 +146,18 @@
     UIColor *backgroundColor = UIColor.clearColor;
     UIColor *titleTextColor = UIColor.whiteColor;
     UIColor *thumbnailImageViewBackgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    UIColor *headerBackgroundColor = UIColor.play_cardGrayBackgroundColor;
+    
     if (self.homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
         backgroundColor = self.homeSectionInfo.module.backgroundColor;
         titleTextColor = self.homeSectionInfo.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
         thumbnailImageViewBackgroundColor = self.homeSectionInfo.module.backgroundColor;
+        headerBackgroundColor = [UIColor colorWithWhite:0.f alpha:0.1f];
     }
     self.backgroundColor = backgroundColor;
+    self.headerView.backgroundColor = headerBackgroundColor;
     
-    self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.textColor = titleTextColor;
-    
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = NSLocalizedString(@"All content", @"Title of the first cell of a media list on homepage.");
     
