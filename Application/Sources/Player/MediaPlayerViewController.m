@@ -1889,7 +1889,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.closeButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Closes the player and continue playing audio.", @"Player close button hint");
     }
     if (self.letterboxController.media.mediaType == SRGMediaTypeVideo && AVAudioSession.srg_isAirPlayActive && [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue] == SRGMediaPlayerPlaybackStatePlaying) {
-        self.closeButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Closes the player and continue playing audio with AirPlay.", @"Player close button hint");
+        self.closeButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Closes the player and continue playing video with AirPlay.", @"Player close button hint");
     }
     if (self.letterboxController.media.mediaType == SRGMediaTypeVideo && ApplicationSettingBackgroundVideoPlaybackEnabled() && [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue] == SRGMediaPlayerPlaybackStatePlaying) {
         self.closeButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Closes the player and continue playing in the background.", @"Player close button hint");
