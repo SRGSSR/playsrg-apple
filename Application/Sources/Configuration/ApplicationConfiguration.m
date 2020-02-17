@@ -7,7 +7,6 @@
 #import "ApplicationConfiguration.h"
 
 #import "ApplicationSettings.h"
-#import "NSBundle+PlaySRG.h"
 #import "PlayLogger.h"
 #import "UIColor+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
@@ -64,26 +63,26 @@ NSString *AnalyticsTitleForHomeSection(HomeSection homeSection)
     static NSDictionary<NSNumber *, NSString *> *s_names;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(HomeSectionTVTrending) : PlaySRGNonLocalizedString(@"Trending"),
-                     @(HomeSectionTVLive) : PlaySRGNonLocalizedString(@"TV"),
-                     @(HomeSectionTVEvents) : PlaySRGNonLocalizedString(@"Events"),
-                     @(HomeSectionTVTopics) : PlaySRGNonLocalizedString(@"Topics"),
-                     @(HomeSectionTVLatest) : PlaySRGNonLocalizedString(@"Latest"),
-                     @(HomeSectionTVMostPopular) : PlaySRGNonLocalizedString(@"Popular"),
-                     @(HomeSectionTVSoonExpiring) : PlaySRGNonLocalizedString(@"Soon expiring"),
-                     @(HomeSectionTVScheduledLivestreams) : PlaySRGNonLocalizedString(@"Events"),
-                     @(HomeSectionTVLiveCenter) : PlaySRGNonLocalizedString(@"Sports"),
-                     @(HomeSectionTVShowsAccess) : PlaySRGNonLocalizedString(@""),
-                     @(HomeSectionTVFavoriteShows) : PlaySRGNonLocalizedString(@"Favorites"),
-                     @(HomeSectionRadioLive) : PlaySRGNonLocalizedString(@"Radio"),
-                     @(HomeSectionRadioLatestEpisodes) : PlaySRGNonLocalizedString(@"Latest episodes"),
-                     @(HomeSectionRadioMostPopular) : PlaySRGNonLocalizedString(@"Popular"),
-                     @(HomeSectionRadioLatest) : PlaySRGNonLocalizedString(@"Latest"),
-                     @(HomeSectionRadioLatestVideos) : PlaySRGNonLocalizedString(@"Latest videos"),
-                     @(HomeSectionRadioAllShows) : PlaySRGNonLocalizedString(@"Shows"),
-                     @(HomeSectionRadioShowsAccess) : PlaySRGNonLocalizedString(@""),
-                     @(HomeSectionRadioFavoriteShows) : PlaySRGNonLocalizedString(@"Favorites"),
-                     @(HomeSectionUnknown) : PlaySRGNonLocalizedString(@"") };
+        s_names = @{ @(HomeSectionTVTrending) : @"Trending",
+                     @(HomeSectionTVLive) : @"TV",
+                     @(HomeSectionTVEvents) : @"Events",
+                     @(HomeSectionTVTopics) : @"Topics",
+                     @(HomeSectionTVLatest) : @"Latest",
+                     @(HomeSectionTVMostPopular) : @"Popular",
+                     @(HomeSectionTVSoonExpiring) : @"Soon expiring",
+                     @(HomeSectionTVScheduledLivestreams) : @"Events",
+                     @(HomeSectionTVLiveCenter) : @"Sports",
+                     @(HomeSectionTVShowsAccess) : @"",
+                     @(HomeSectionTVFavoriteShows) : @"Favorites",
+                     @(HomeSectionRadioLive) : @"Radio",
+                     @(HomeSectionRadioLatestEpisodes) : @"Latest episodes",
+                     @(HomeSectionRadioMostPopular) : @"Popular",
+                     @(HomeSectionRadioLatest) : @"Latest",
+                     @(HomeSectionRadioLatestVideos) : @"Latest videos",
+                     @(HomeSectionRadioAllShows) : @"Shows",
+                     @(HomeSectionRadioShowsAccess) : @"",
+                     @(HomeSectionRadioFavoriteShows) : @"Favorites",
+                     @(HomeSectionUnknown) : @"" };
     });
     return s_names[@(homeSection)];
 }
@@ -93,9 +92,9 @@ NSString *AnalyticsTitleForTopicSection(TopicSection topicSection)
     static NSDictionary<NSNumber *, NSString *> *s_names;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(TopicSectionLatest) : PlaySRGNonLocalizedString(@"Latest"),
-                     @(TopicSectionMostPopular) : PlaySRGNonLocalizedString(@"Popular"),
-                     @(TopicSectionUnknown) : PlaySRGNonLocalizedString(@"") };
+        s_names = @{ @(TopicSectionLatest) : @"Latest",
+                     @(TopicSectionMostPopular) : @"Popular",
+                     @(TopicSectionUnknown) : @"" };
     });
     return s_names[@(topicSection)];
 }
