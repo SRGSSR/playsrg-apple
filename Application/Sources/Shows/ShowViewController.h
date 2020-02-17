@@ -6,11 +6,12 @@
 
 #import "MediasViewController.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ShowViewController : MediasViewController <UIGestureRecognizerDelegate>
+@interface ShowViewController : MediasViewController <UIGestureRecognizerDelegate, SRGAnalyticsViewTracking>
 
 - (instancetype)initWithShow:(SRGShow *)show fromPushNotification:(BOOL)fromPushNotification NS_DESIGNATED_INITIALIZER;
 
