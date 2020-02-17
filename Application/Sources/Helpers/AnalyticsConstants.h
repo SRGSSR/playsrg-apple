@@ -18,7 +18,7 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelAudio;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelEvent;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelFeature;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelLive;
-OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPlayer;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPlay;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPreview;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelRadio;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelSearch;
@@ -27,6 +27,13 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelTopic;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelTV;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelUser;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelVideo;
+
+/**
+ *  @name Analytics standard page titles
+ */
+typedef NSString * AnalyticsPageTitle NS_STRING_ENUM;
+
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitlePlayer;
 
 /**
  *  @name Analytics event titles

@@ -12,7 +12,7 @@ AnalyticsPageLevel const AnalyticsPageLevelAudio = @"Audio";
 AnalyticsPageLevel const AnalyticsPageLevelEvent = @"Event";
 AnalyticsPageLevel const AnalyticsPageLevelFeature = @"Feature";
 AnalyticsPageLevel const AnalyticsPageLevelLive = @"Live";
-AnalyticsPageLevel const AnalyticsPageLevelPlayer = @"Player";
+AnalyticsPageLevel const AnalyticsPageLevelPlay = @"play";
 AnalyticsPageLevel const AnalyticsPageLevelPreview = @"Preview";
 AnalyticsPageLevel const AnalyticsPageLevelRadio = @"Radio";
 AnalyticsPageLevel const AnalyticsPageLevelSearch = @"Search";
@@ -21,6 +21,8 @@ AnalyticsPageLevel const AnalyticsPageLevelTopic = @"Topic";
 AnalyticsPageLevel const AnalyticsPageLevelTV = @"TV";
 AnalyticsPageLevel const AnalyticsPageLevelUser = @"User";
 AnalyticsPageLevel const AnalyticsPageLevelVideo = @"Video";
+
+AnalyticsPageTitle const AnalyticsPageTitlePlayer = @"player";
 
 AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
 AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download_add";

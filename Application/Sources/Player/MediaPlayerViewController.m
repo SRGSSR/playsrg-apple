@@ -1248,37 +1248,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 #pragma mark SRGAnalyticsViewTracking protocol
 
-- (BOOL)srg_isTrackedAutomatically
-{
-    // Tracking requires media composition information. The view event will be sent manually when appropriate
-    return NO;
-}
-
 - (NSString *)srg_pageViewTitle
 {
-    // Use the full-length when available
-    SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
-    return media.title;
+    return AnalyticsPageTitlePlayer;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    NSMutableArray<NSString *> *levels = [NSMutableArray arrayWithObject:AnalyticsPageLevelPlayer];
-    
-    // Use the full-length when available
-    SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
-    if (media.mediaType == SRGMediaTypeAudio) {
-        [levels addObject:AnalyticsPageLevelAudio];
-    }
-    else {
-        [levels addObject:AnalyticsPageLevelVideo];
-    }
-    SRGShow *show = self.letterboxController.mediaComposition.show ?: self.letterboxController.media.show;
-    if (show.title) {
-        [levels addObject:show.title];
-    }
-    
-    return levels.copy;
+    return @[ AnalyticsPageLevelPlay ];
 }
 
 - (BOOL)srg_isOpenedFromPushNotification
