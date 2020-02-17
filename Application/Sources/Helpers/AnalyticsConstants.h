@@ -9,29 +9,23 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Page types for analytics measurements
+ *  @name Analytics standard page levels
  */
-typedef NS_ENUM(NSInteger, AnalyticsPageType) {
-    AnalyticsPageTypeApplication = 0,
-    AnalyticsPageTypeAudio,
-    AnalyticsPageTypeEvent,
-    AnalyticsPageTypeLive,
-    AnalyticsPageTypePlayer,
-    AnalyticsPageTypeRadio,
-    AnalyticsPageTypeSearch,
-    AnalyticsPageTypeTV,
-    AnalyticsPageTypeUser,
-    AnalyticsPageTypeVideo,
-    
-    AnalyticsPageTypeFeature,
-    AnalyticsPageTypeShow,
-    AnalyticsPageTypeTopic
-};
+typedef NSString * AnalyticsPageLevel NS_STRING_ENUM;
 
-/**
- *  Return the standard name for a page type.
- */
-OBJC_EXPORT NSString * _Nullable AnalyticsNameForPageType(AnalyticsPageType pageType);
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelApplication;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelAudio;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelEvent;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelFeature;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelLive;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPlayer;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelRadio;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelSearch;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelShow;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelTopic;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelTV;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelUser;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelVideo;
 
 /**
  *  @name Analytics event titles
@@ -44,7 +38,7 @@ typedef NSString * AnalyticsTitle NS_STRING_ENUM;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleContinuousPlayback;
 
 /**
- *  Title for events related to downloads
+ *  Title for events related to addition of a new download
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadAdd;
 

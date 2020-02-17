@@ -6,7 +6,7 @@
 
 #import "SettingsViewController.h"
 
-#import "PlayAppDelegate.h"
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
@@ -16,6 +16,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "Onboarding.h"
+#import "PlayAppDelegate.h"
 #import "PushService.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
@@ -202,7 +203,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             webView.scrollView.scrollEnabled = NO;
         } decisionHandler:nil];
         webViewController.title = PlaySRGSettingsLocalizedString(@"Your feedback", @"Title displayed at the top of the feedback view");
-        webViewController.analyticsPageType = AnalyticsPageTypeUser;
+        webViewController.analyticsPageLevels = @[ AnalyticsPageLevelUser ];
         webViewController.analyticsPageTitle = @"Feedback";
         [self.navigationController pushViewController:webViewController animated:YES];
     }
@@ -211,7 +212,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSAssert(sourceCodeURL, @"Button must not be displayed if no source code URL has been specified");
         
         [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:PlaySRGNonLocalizedString(@"Source code") levels:@[AnalyticsNameForPageType(AnalyticsPageTypeApplication)]];
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:@"Source code" levels:@[ AnalyticsPageLevelApplication ]];
         }];
     }
     else if ([specifier.key isEqualToString:SettingsBetaTestingButton]) {
@@ -219,7 +220,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSAssert(betaTestingURL, @"Button must not be displayed if no beta testing URL has been specified");
         
         [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:PlaySRGNonLocalizedString(@"Beta testing") levels:@[AnalyticsNameForPageType(AnalyticsPageTypeApplication)]];
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:@"Beta testing" levels:@[ AnalyticsPageLevelApplication ]];
         }];
     }
     else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {
@@ -455,8 +456,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO:
-    return @[ @"Application" ];
+    return @[ AnalyticsPageLevelApplication ];
 }
 
 #pragma mark Actions

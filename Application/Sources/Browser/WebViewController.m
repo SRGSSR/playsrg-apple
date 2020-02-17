@@ -42,7 +42,6 @@ static void *s_kvoContext = &s_kvoContext;
         self.request = request;
         self.customizationBlock = customizationBlock;
         self.decisionHandler = decisionHandler;
-        self.analyticsPageType = AnalyticsPageTypeApplication;
     }
     return self;
 }
@@ -160,8 +159,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO:
-    return @[ ];
+    return self.analyticsPageLevels;
 }
 
 #pragma mark UIScrollViewDelegate protocol

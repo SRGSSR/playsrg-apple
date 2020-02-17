@@ -1263,15 +1263,15 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    NSMutableArray<NSString *> *levels = [NSMutableArray arrayWithObject:AnalyticsNameForPageType(AnalyticsPageTypePlayer)];
+    NSMutableArray<NSString *> *levels = [NSMutableArray arrayWithObject:AnalyticsPageLevelPlayer];
     
     // Use the full-length when available
     SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
     if (media.mediaType == SRGMediaTypeAudio) {
-        [levels addObject:AnalyticsNameForPageType(AnalyticsPageTypeAudio)];
+        [levels addObject:AnalyticsPageLevelAudio];
     }
     else {
-        [levels addObject:AnalyticsNameForPageType(AnalyticsPageTypeVideo)];
+        [levels addObject:AnalyticsPageLevelVideo];
     }
     SRGShow *show = self.letterboxController.mediaComposition.show ?: self.letterboxController.media.show;
     if (show.title) {

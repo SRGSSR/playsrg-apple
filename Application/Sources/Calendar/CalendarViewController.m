@@ -6,6 +6,7 @@
 
 #import "CalendarViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "Calendar.h"
 #import "DailyMediasViewController.h"
 #import "MediaCollectionViewCell.h"
@@ -319,12 +320,11 @@
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO:
     if (self.radioChannel) {
-        return @[ @"Radio", self.radioChannel.name ];
+        return @[ AnalyticsPageLevelRadio, self.radioChannel.name ];
     }
     else {
-        return @[ @"TV" ];
+        return @[ AnalyticsPageLevelTV ];
     }
 }
 

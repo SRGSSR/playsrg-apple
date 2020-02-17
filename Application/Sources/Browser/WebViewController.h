@@ -30,9 +30,9 @@ typedef void (^WebViewControllerCustomizationBlock)(WKWebView *webView);
                 decisionHandler:(WKNavigationActionPolicy (^ _Nullable)(NSURL *))decisionHandler;
 
 /**
- *  Page type. Defaults to `AnalyticsPageTypeApplication`.
+ *  Page levels. Defaults to `nil`.
  */
-@property (nonatomic) AnalyticsPageType analyticsPageType;
+@property (nonatomic, nullable) NSArray<AnalyticsPageLevel> *analyticsPageLevels;
 
 /**
  *  Page title. Must be set before view display.

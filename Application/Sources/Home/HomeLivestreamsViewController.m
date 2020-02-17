@@ -6,6 +6,7 @@
 
 #import "HomeLivestreamsViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationSettings.h"
 #import "ChannelService.h"
 #import "LiveMediaCollectionViewCell.h"
@@ -204,13 +205,12 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO
     NSString *level2 = AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
     if (level2) {
-        return @[ @"Live", level2 ];
+        return @[ AnalyticsPageLevelLive, level2 ];
     }
     else {
-        return @[ @"Live" ];
+        return @[ AnalyticsPageLevelLive ];
     }
 }
 

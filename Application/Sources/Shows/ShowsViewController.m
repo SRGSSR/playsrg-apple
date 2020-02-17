@@ -6,6 +6,7 @@
 
 #import "ShowsViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
@@ -362,12 +363,11 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO:
     if (self.radioChannel) {
-        return @[ @"Radio", self.radioChannel.name ];
+        return @[ AnalyticsPageLevelRadio, self.radioChannel.name ];
     }
     else {
-        return @[ @"TV" ];
+        return @[ AnalyticsPageLevelTV ];
     }
 }
 

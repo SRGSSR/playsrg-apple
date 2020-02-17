@@ -6,6 +6,7 @@
 
 #import "OnboardingsViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "Onboarding.h"
 #import "OnboardingTableViewCell.h"
 #import "Play-Swift-Bridge.h"
@@ -72,8 +73,7 @@
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO:
-    return @[ @"Application" ];
+    return @[ AnalyticsPageLevelApplication ];
 }
 
 #pragma mark UITableViewDataSource protocol

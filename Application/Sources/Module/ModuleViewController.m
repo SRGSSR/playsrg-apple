@@ -7,6 +7,7 @@
 #import "ModuleViewController.h"
 
 #import "ActivityItemSource.h"
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "MediaCollectionViewCell.h"
@@ -280,8 +281,7 @@
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO:
-    return @[ @"Event" ];
+    return @[ AnalyticsPageLevelEvent ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

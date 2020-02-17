@@ -7,28 +7,19 @@
 #import "AnalyticsConstants.h"
 #import "NSBundle+PlaySRG.h"
 
-NSString *AnalyticsNameForPageType(AnalyticsPageType pageType)
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSNumber *, NSString *> *s_names;
-    dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(AnalyticsPageTypeApplication) : PlaySRGNonLocalizedString(@"Application"),
-                     @(AnalyticsPageTypeAudio) : PlaySRGNonLocalizedString(@"Audio"),
-                     @(AnalyticsPageTypeEvent) : PlaySRGNonLocalizedString(@"Event"),
-                     @(AnalyticsPageTypeLive) : PlaySRGNonLocalizedString(@"Live"),
-                     @(AnalyticsPageTypePlayer) : PlaySRGNonLocalizedString(@"Player"),
-                     @(AnalyticsPageTypeRadio) : PlaySRGNonLocalizedString(@"Radio"),
-                     @(AnalyticsPageTypeSearch) : PlaySRGNonLocalizedString(@"Search"),
-                     @(AnalyticsPageTypeTV) : PlaySRGNonLocalizedString(@"TV"),
-                     @(AnalyticsPageTypeUser) : PlaySRGNonLocalizedString(@"User"),
-                     @(AnalyticsPageTypeVideo) : PlaySRGNonLocalizedString(@"Video"),
-                     
-                     @(AnalyticsPageTypeFeature) : PlaySRGNonLocalizedString(@"Feature"),
-                     @(AnalyticsPageTypeShow) : PlaySRGNonLocalizedString(@"Show"),
-                     @(AnalyticsPageTypeTopic) : PlaySRGNonLocalizedString(@"Topic") };
-    });
-    return s_names[@(pageType)];
-}
+AnalyticsPageLevel const AnalyticsPageLevelApplication = @"Application";
+AnalyticsPageLevel const AnalyticsPageLevelAudio = @"Audio";
+AnalyticsPageLevel const AnalyticsPageLevelEvent = @"Event";
+AnalyticsPageLevel const AnalyticsPageLevelFeature = @"Feature";
+AnalyticsPageLevel const AnalyticsPageLevelLive = @"Live";
+AnalyticsPageLevel const AnalyticsPageLevelPlayer = @"Player";
+AnalyticsPageLevel const AnalyticsPageLevelRadio = @"Radio";
+AnalyticsPageLevel const AnalyticsPageLevelSearch = @"Search";
+AnalyticsPageLevel const AnalyticsPageLevelShow = @"Show";
+AnalyticsPageLevel const AnalyticsPageLevelTopic = @"Topic";
+AnalyticsPageLevel const AnalyticsPageLevelTV = @"TV";
+AnalyticsPageLevel const AnalyticsPageLevelUser = @"User";
+AnalyticsPageLevel const AnalyticsPageLevelVideo = @"Video";
 
 AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
 AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download_add";

@@ -837,7 +837,7 @@ static void *s_kvoContext = &s_kvoContext;
         
         NSURLRequest *request = [NSURLRequest requestWithURL:URL];
         WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
-        webViewController.analyticsPageType = AnalyticsPageTypeApplication;
+        webViewController.analyticsPageLevels = @[ AnalyticsPageLevelApplication ];
         webViewController.analyticsPageTitle = @"What's new";
         
         completionHandler(webViewController, nil);

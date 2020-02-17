@@ -6,6 +6,7 @@
 
 #import "HomeMediasViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "PageViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -109,17 +110,16 @@
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
     
-    // TODO:
     if (radioChannel) {
-        return @[ @"Radio", radioChannel.name ];
+        return @[ AnalyticsPageLevelRadio, radioChannel.name ];
     }
     else if (self.homeSectionInfo.topic) {
-        NSString *level1 = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? @"Radio" : @"TV";
+        NSString *level1 = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelRadio : AnalyticsPageLevelTV;
         NSString *level3 = [self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class] ? self.homeSectionInfo.topic.title : AnalyticsTitleForTopicSection(self.homeSectionInfo.topicSection);
-        return @[ level1, @"Topic", level3 ];
+        return @[ level1, AnalyticsPageLevelTopic, level3 ];
     }
     else {
-        return @[ @"TV" ];
+        return @[ AnalyticsPageLevelTV ];
     }
 }
 

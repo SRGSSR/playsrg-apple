@@ -598,8 +598,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO:
-    return @[ @"Search" ];
+    return @[ AnalyticsPageLevelSearch ];
 }
 
 #pragma mark UITableViewDataSource protocol

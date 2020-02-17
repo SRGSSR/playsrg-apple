@@ -7,6 +7,7 @@
 #import "ShowViewController.h"
 
 #import "ActivityItemSource.h"
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "MediaCollectionViewCell.h"
@@ -388,9 +389,8 @@
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO:
-    NSString *level1 = (self.show.transmission == SRGTransmissionRadio) ? @"Radio" : @"TV";
-    return @[ level1, @"Show" ];
+    NSString *level1 = (self.show.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelRadio : AnalyticsPageLevelTV;
+    return @[ level1, AnalyticsPageLevelShow ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

@@ -363,12 +363,12 @@
     // Use the full-length when available
     SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
     if (media.mediaType == SRGMediaTypeAudio) {
-        [levels addObject:AnalyticsNameForPageType(AnalyticsPageTypeRadio)];
+        [levels addObject:AnalyticsPageLevelAudio];
     }
     else {
-        [levels addObject:AnalyticsNameForPageType(AnalyticsPageTypeTV)];
+        [levels addObject:AnalyticsPageLevelVideo];
     }
-    [levels addObject:@"preview"];
+    [levels addObject:@"Preview"];
     
     NSString *showTitle = self.letterboxController.mediaComposition.show.title;
     if (showTitle) {

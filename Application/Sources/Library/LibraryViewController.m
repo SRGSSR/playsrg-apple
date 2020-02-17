@@ -6,6 +6,7 @@
 
 #import "LibraryViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationSectionInfo.h"
 #import "DownloadsViewController.h"
 #import "FavoritesViewController.h"
@@ -240,8 +241,7 @@
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO:
-    return @[ @"User" ];
+    return @[ AnalyticsPageLevelUser ];
 }
 
 #pragma mark UITableViewDataSource protocol

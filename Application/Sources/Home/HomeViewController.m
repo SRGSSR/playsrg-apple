@@ -6,6 +6,7 @@
 
 #import "HomeViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "CalendarViewController.h"
@@ -488,10 +489,10 @@
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     if (self.radioChannel) {
-        return @[ @"Audio", self.radioChannel.name ];
+        return @[ AnalyticsPageLevelAudio, self.radioChannel.name ];
     }
     else {
-        return @[ @"Video" ];
+        return @[ AnalyticsPageLevelVideo ];
     }
 }
 
