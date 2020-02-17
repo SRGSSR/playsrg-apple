@@ -26,8 +26,15 @@
     if (self = [super init]) {
         self.homeSectionInfo = homeSectionInfo;
         
-        NSString *title = TitleForTopicSection(homeSectionInfo.topicSection) ?: homeSectionInfo.title ?: TitleForHomeSection(homeSectionInfo.homeSection);
+        NSString *title = nil;
+        if ([self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class]) {
+            title = homeSectionInfo.title;
+        }
+        else {
+            title = TitleForTopicSection(homeSectionInfo.topicSection) ?: TitleForHomeSection(homeSectionInfo.homeSection);
+        }
         self.title = title;
+        
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:nil tag:0];
     }
     return self;
