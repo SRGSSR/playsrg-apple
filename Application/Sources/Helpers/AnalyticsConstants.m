@@ -7,20 +7,20 @@
 #import "AnalyticsConstants.h"
 #import "NSBundle+PlaySRG.h"
 
-AnalyticsPageLevel const AnalyticsPageLevelApplication = @"Application";
-AnalyticsPageLevel const AnalyticsPageLevelAudio = @"Audio";
-AnalyticsPageLevel const AnalyticsPageLevelEvent = @"Event";
-AnalyticsPageLevel const AnalyticsPageLevelFeature = @"Feature";
-AnalyticsPageLevel const AnalyticsPageLevelLive = @"Live";
+AnalyticsPageLevel const AnalyticsPageLevelApplication = @"application";
+AnalyticsPageLevel const AnalyticsPageLevelAudio = @"audio";
+AnalyticsPageLevel const AnalyticsPageLevelEvent = @"event";
+AnalyticsPageLevel const AnalyticsPageLevelFeature = @"feature";
+AnalyticsPageLevel const AnalyticsPageLevelLive = @"live";
 AnalyticsPageLevel const AnalyticsPageLevelPlay = @"play";
-AnalyticsPageLevel const AnalyticsPageLevelPreview = @"Preview";
-AnalyticsPageLevel const AnalyticsPageLevelRadio = @"Radio";
-AnalyticsPageLevel const AnalyticsPageLevelSearch = @"Search";
-AnalyticsPageLevel const AnalyticsPageLevelShow = @"Show";
-AnalyticsPageLevel const AnalyticsPageLevelTopic = @"Topic";
-AnalyticsPageLevel const AnalyticsPageLevelTV = @"TV";
-AnalyticsPageLevel const AnalyticsPageLevelUser = @"User";
-AnalyticsPageLevel const AnalyticsPageLevelVideo = @"Video";
+AnalyticsPageLevel const AnalyticsPageLevelPreview = @"preview";
+AnalyticsPageLevel const AnalyticsPageLevelRadio = @"radio";
+AnalyticsPageLevel const AnalyticsPageLevelSearch = @"search";
+AnalyticsPageLevel const AnalyticsPageLevelShow = @"show";
+AnalyticsPageLevel const AnalyticsPageLevelTopic = @"topic";
+AnalyticsPageLevel const AnalyticsPageLevelTV = @"tv";
+AnalyticsPageLevel const AnalyticsPageLevelUser = @"user";
+AnalyticsPageLevel const AnalyticsPageLevelVideo = @"video";
 
 AnalyticsPageTitle const AnalyticsPageTitlePlayer = @"player";
 
