@@ -11,10 +11,11 @@
 #import "Scrollable.h"
 
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
+#import <SRGAnalytics/SRGAnalytics.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeViewController : RequestViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PlayApplicationNavigation, Scrollable, UITableViewDataSource, UITableViewDelegate>
+@interface HomeViewController : RequestViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PlayApplicationNavigation, Scrollable, SRGAnalyticsViewTracking, UITableViewDataSource, UITableViewDelegate>
 
 /**
  *  Instantiate for the home page belonging to the specified radio channel. If no channel is provided, the TV home page will be

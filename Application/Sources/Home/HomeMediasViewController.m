@@ -86,6 +86,8 @@
     }
 }
 
+#pragma mark SRGAnalyticsViewTracking protocol
+
 - (NSString *)srg_pageViewTitle
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
@@ -94,9 +96,8 @@
     if (radioChannel) {
         return AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
     }
-    else if (self.homeSectionInfo.topic)
-    {
-        return ([self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class]) ? self.homeSectionInfo.parentTitle : self.homeSectionInfo.topic.title;
+    else if (self.homeSectionInfo.topic) {
+        return [self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class] ? self.homeSectionInfo.parentTitle : self.homeSectionInfo.topic.title;
     }
     else {
         return AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
@@ -108,16 +109,17 @@
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
     
+    // TODO:
     if (radioChannel) {
-        return @[ AnalyticsNameForPageType(AnalyticsPageTypeRadio), radioChannel.name ];
+        return @[ @"Radio", radioChannel.name ];
     }
     else if (self.homeSectionInfo.topic) {
-        AnalyticsPageType level1PageType = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
-        NSString *level3 = ([self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class]) ? self.homeSectionInfo.topic.title : AnalyticsTitleForTopicSection(self.homeSectionInfo.topicSection);
-        return @[ AnalyticsNameForPageType(level1PageType), AnalyticsNameForPageType(AnalyticsPageTypeTopic), level3 ];
+        NSString *level1 = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? @"Radio" : @"TV";
+        NSString *level3 = [self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class] ? self.homeSectionInfo.topic.title : AnalyticsTitleForTopicSection(self.homeSectionInfo.topicSection);
+        return @[ level1, @"Topic", level3 ];
     }
     else {
-        return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];
+        return @[ @"TV" ];
     }
 }
 

@@ -4,9 +4,11 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "AnalyticsConstants.h"
 #import "BaseViewController.h"
 #import "ContentInsets.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
 #import <WebKit/WebKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -17,7 +19,7 @@ typedef void (^WebViewControllerCustomizationBlock)(WKWebView *webView);
 /**
  *  A basic web view controller class for in-app display.
  */
-@interface WebViewController : BaseViewController <ContentInsets, WKNavigationDelegate, UIScrollViewDelegate>
+@interface WebViewController : BaseViewController <ContentInsets, WKNavigationDelegate, SRGAnalyticsViewTracking, UIScrollViewDelegate>
 
 /**
  *  Create an instance. The associated web view can be customized by implementing an optional customization block, called right after
@@ -25,17 +27,19 @@ typedef void (^WebViewControllerCustomizationBlock)(WKWebView *webView);
  */
 - (instancetype)initWithRequest:(NSURLRequest *)request
              customizationBlock:(nullable WebViewControllerCustomizationBlock)customizationBlock
-                decisionHandler:(WKNavigationActionPolicy (^ _Nullable)(NSURL *))decisionHandler
-              analyticsPageType:(AnalyticsPageType)analyticsPageType
-             analyticsPageTitle:(NSString *)analyticsPageTitle;
+                decisionHandler:(WKNavigationActionPolicy (^ _Nullable)(NSURL *))decisionHandler;
 
 /**
- *  Set to `NO` to disable automatic analytics tracking for page view events (mostly useful if the associated website performs the
- *  tracking itself, so that double measurements can be avoided).
- *
- *  Default value is `YES`.
+ *  Page type. Defaults to `AnalyticsPageTypeApplication`.
  */
-@property (nonatomic, getter=isTracked) BOOL tracked;
+@property (nonatomic) AnalyticsPageType analyticsPageType;
+
+/**
+ *  Page title. Must be set before view display.
+ *
+ *  @discussion If `nil` no tracking is made.
+ */
+@property (nonatomic, copy, nullable) NSString *analyticsPageTitle;
 
 @end
 

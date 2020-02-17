@@ -6,6 +6,7 @@
 
 #import "NotificationsViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "Banner.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
@@ -207,16 +208,6 @@
     });
 }
 
-- (NSString *)srg_pageViewTitle
-{
-    return PlaySRGNonLocalizedString(@"Notifications");
-}
-
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeUser;
-}
-
 #pragma mark UI
 
 - (void)reloadDataAnimated:(BOOL)animated
@@ -286,6 +277,19 @@
                               withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView reloadEmptyDataSet];
     }
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return @"Notifications";
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    // TODO:
+    return @[ @"User" ];
 }
 
 #pragma mark UITableViewDataSource protocol

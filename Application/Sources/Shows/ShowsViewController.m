@@ -237,21 +237,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     });
 }
 
-- (NSString *)srg_pageViewTitle
-{
-    return PlaySRGNonLocalizedString(@"Shows");
-}
-
-- (NSArray<NSString *> *)srg_pageViewLevels
-{
-    if (self.radioChannel) {
-        return @[ AnalyticsNameForPageType(AnalyticsPageTypeRadio), self.radioChannel.name ];
-    }
-    else {
-        return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];
-    }
-}
-
 #pragma mark Scrolling
 
 - (void)scrollToSectionWithIndex:(NSUInteger)index animated:(BOOL)animated
@@ -366,6 +351,24 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return @"Shows";
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    // TODO:
+    if (self.radioChannel) {
+        return @[ @"Radio", self.radioChannel.name ];
+    }
+    else {
+        return @[ @"TV" ];
+    }
 }
 
 #pragma mark UIScrollViewDelegate protocol

@@ -6,6 +6,7 @@
 
 #import "SearchViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
 #import "MostSearchedShowCollectionViewCell.h"
@@ -324,16 +325,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     return self.searchController.active ? self.searchController : super.previewContextViewController;
 }
 
-- (NSString *)srg_pageViewTitle
-{
-    return PlaySRGNonLocalizedString(@"Home");
-}
-
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeSearch;
-}
-
 #pragma mark UI
 
 - (void)updateSearchSettingsButton
@@ -447,6 +438,19 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     
     [self updateSearchSettingsButton];
     [self search];
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return @"Home";
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    // TODO:
+    return @[ @"Search" ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

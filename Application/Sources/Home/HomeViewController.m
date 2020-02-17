@@ -279,21 +279,6 @@
     });
 }
 
-- (NSString *)srg_pageViewTitle
-{
-    return PlaySRGNonLocalizedString(@"Home");
-}
-
-- (NSArray<NSString *> *)srg_pageViewLevels
-{
-    if (self.radioChannel) {
-        return @[ AnalyticsNameForPageType(AnalyticsPageTypeAudio), self.radioChannel.name ];
-    }
-    else {
-        return @[ AnalyticsNameForPageType(AnalyticsPageTypeVideo) ];
-    }
-}
-
 #pragma mark User interface
 
 - (void)updateStatusHeaderViewLayout
@@ -491,6 +476,23 @@
 - (void)scrollToTopAnimated:(BOOL)animated
 {
     [self.tableView play_scrollToTopAnimated:animated];
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return @"Home";
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    if (self.radioChannel) {
+        return @[ @"Audio", self.radioChannel.name ];
+    }
+    else {
+        return @[ @"Video" ];
+    }
 }
 
 #pragma mark UITableViewDataSource protocol

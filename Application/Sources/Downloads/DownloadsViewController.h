@@ -8,10 +8,11 @@
 #import "DataViewController.h"
 
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
+#import <SRGAnalytics/SRGAnalytics.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DownloadsViewController : DataViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface DownloadsViewController : DataViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, SRGAnalyticsViewTracking, UITableViewDataSource, UITableViewDelegate>
 
 @end
 

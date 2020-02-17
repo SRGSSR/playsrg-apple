@@ -589,16 +589,17 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     }
 }
 
-#pragma mark Overrides
+#pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
 {
-    return PlaySRGNonLocalizedString(@"Settings");
+    return @"Settings";
 }
 
-- (AnalyticsPageType)pageType
+- (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return AnalyticsPageTypeSearch;
+    // TODO:
+    return @[ @"Search" ];
 }
 
 #pragma mark UITableViewDataSource protocol

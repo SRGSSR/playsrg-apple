@@ -7,6 +7,7 @@
 #import "BaseViewController.h"
 
 #import "ActivityItemSource.h"
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "Download.h"
@@ -25,17 +26,7 @@
 
 #import <objc/runtime.h>
 #import <libextobjc/libextobjc.h>
-
-NSString *PageViewTitleForViewController(UIViewController *viewController)
-{
-    if ([viewController conformsToProtocol:@protocol(SRGAnalyticsViewTracking)]) {
-        UIViewController<SRGAnalyticsViewTracking> *trackedViewController = (UIViewController<SRGAnalyticsViewTracking> *)viewController;
-        return trackedViewController.srg_pageViewTitle;
-    }
-    else {
-        return viewController.title;
-    }
-}
+#import <SRGAnalytics/SRGAnalytics.h>
 
 // Inner class conforming to `UIPopoverPresentationControllerDelegate` to avoid having `BaseViewController` conform to
 // it.
@@ -77,18 +68,6 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
         _presentationControllerDelegate = [[BaseViewControllerPresentationControllerDelegate alloc] init];
     }
     return _presentationControllerDelegate;
-}
-
-#pragma mark Stubs
-
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeNone;
-}
-
-- (AnalyticsPageType)subPageType
-{
-    return AnalyticsPageTypeNone;
 }
 
 #pragma mark Accessibility
@@ -322,25 +301,6 @@ NSString *PageViewTitleForViewController(UIViewController *viewController)
     }
     
     return [UIMenu menuWithTitle:@"" children:menuActions.copy];
-}
-
-#pragma mark SRGAnalyticsViewTracking protocol
-
-- (NSString *)srg_pageViewTitle
-{
-    return self.title;
-}
-
-- (NSArray<NSString *> *)srg_pageViewLevels
-{
-    NSString *analyticsName = AnalyticsNameForPageType(self.pageType);
-    if (analyticsName) {
-        NSString *subAnalyticsName = AnalyticsNameForPageType(self.subPageType);
-        return (subAnalyticsName) ? @[ analyticsName, subAnalyticsName ] : @[ analyticsName ];
-    }
-    else {
-        return @[];
-    }
 }
 
 #pragma mark UIContextMenuInteractionDelegate protocol

@@ -314,16 +314,17 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return PlaySRGNonLocalizedString(@"Calendar");
+    return @"Calendar";
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
+    // TODO:
     if (self.radioChannel) {
-        return @[ AnalyticsNameForPageType(AnalyticsPageTypeRadio), self.radioChannel.name ];
+        return @[ @"Radio", self.radioChannel.name ];
     }
     else {
-        return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];
+        return @[ @"TV" ];
     }
 }
 

@@ -6,6 +6,7 @@
 
 #import "WatchLaterViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
@@ -116,16 +117,6 @@
     [super refreshDidFinishWithError:error];
 }
 
-- (NSString *)srg_pageViewTitle
-{
-    return PlaySRGNonLocalizedString(@"Watch later");
-}
-
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeUser;
-}
-
 #pragma mark Data
 
 - (void)updateMediaURNsWithCompletionBlock:(void (^)(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs))completionBlock
@@ -170,23 +161,17 @@
     return UIEdgeInsetsMake(10.f, 0.f, 5.f, 0.f);
 }
 
-#pragma mark WatchLaterTableViewCellDelegate protocol
+#pragma mark SRGAnalyticsViewTracking protocol
 
-- (void)watchLaterTableViewCell:(WatchLaterTableViewCell *)watchLaterTableViewCell deletePlaylistEntryForMedia:(SRGMedia *)media
+- (NSString *)srg_pageViewTitle
 {
-    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (! error) {
-                [self hideItems:@[media]];
-                [self updateInterfaceForEditionAnimated:YES];
-                
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.value = media.URN;
-                labels.source = AnalyticsSourceSwipe;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterRemove labels:labels];
-            }
-        });
-    }];
+    return @"Watch later";
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    // TODO:
+    return @[ @"User" ];
 }
 
 #pragma mark UITableViewDataSource protocol
@@ -231,6 +216,25 @@
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.value = media.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterOpenMedia labels:labels];
+}
+
+#pragma mark WatchLaterTableViewCellDelegate protocol
+
+- (void)watchLaterTableViewCell:(WatchLaterTableViewCell *)watchLaterTableViewCell deletePlaylistEntryForMedia:(SRGMedia *)media
+{
+    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (! error) {
+                [self hideItems:@[media]];
+                [self updateInterfaceForEditionAnimated:YES];
+                
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.value = media.URN;
+                labels.source = AnalyticsSourceSwipe;
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterRemove labels:labels];
+            }
+        });
+    }];
 }
 
 #pragma mark Actions

@@ -6,6 +6,7 @@
 
 #import "HistoryViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "History.h"
 #import "HistoryTableViewCell.h"
@@ -112,16 +113,6 @@
     [super refreshDidFinishWithError:error];
 }
 
-- (NSString *)srg_pageViewTitle
-{
-    return PlaySRGNonLocalizedString(@"History");
-}
-
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeUser;
-}
-
 #pragma mark Data
 
 - (void)updateMediaURNsWithCompletionBlock:(void (^)(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs))completionBlock
@@ -183,6 +174,19 @@
     labels.value = media.URN;
     labels.source = AnalyticsSourceSwipe;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleHistoryRemove labels:labels];
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return @"History";
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    // TODO:
+    return @[ @"User" ];
 }
 
 #pragma mark UITableViewDataSource protocol

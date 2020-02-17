@@ -6,6 +6,7 @@
 
 #import "FavoritesViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
@@ -186,16 +187,6 @@
     });
 }
 
-- (NSString *)srg_pageViewTitle
-{
-    return PlaySRGNonLocalizedString(@"Favorites");
-}
-
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeUser;
-}
-
 #pragma mark UI
 
 - (void)reloadDataAnimated:(BOOL)animated
@@ -317,6 +308,19 @@
     labels.value = show.URN;
     labels.source = AnalyticsSourceSwipe;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteRemove labels:labels];
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return @"Favorites";
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    // TODO:
+    return @[ @"User" ];
 }
 
 #pragma mark UITableViewDataSource protocol

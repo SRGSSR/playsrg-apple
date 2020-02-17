@@ -96,18 +96,6 @@ import SRGAppearance
     
     // MARK: Overrides
     
-    public override var pageType: AnalyticsPageType {
-        get {
-            return .application
-        }
-    }
-    
-    public override var subPageType: AnalyticsPageType {
-        get {
-            return .feature
-        }
-    }
-    
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         

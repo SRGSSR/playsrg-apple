@@ -12,8 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Page types for analytics measurements
  */
 typedef NS_ENUM(NSInteger, AnalyticsPageType) {
-    AnalyticsPageTypeNone = 0,
-    AnalyticsPageTypeApplication,
+    AnalyticsPageTypeApplication = 0,
     AnalyticsPageTypeAudio,
     AnalyticsPageTypeEvent,
     AnalyticsPageTypeLive,

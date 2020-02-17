@@ -63,16 +63,17 @@
     return UIStatusBarStyleLightContent;
 }
 
-#pragma mark Overrides
+#pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
 {
-    return PlaySRGNonLocalizedString(@"Features");
+    return @"Features";
 }
 
-- (AnalyticsPageType)pageType
+- (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return AnalyticsPageTypeApplication;
+    // TODO:
+    return @[ @"Application" ];
 }
 
 #pragma mark UITableViewDataSource protocol

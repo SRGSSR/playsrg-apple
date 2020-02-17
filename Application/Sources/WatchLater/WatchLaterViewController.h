@@ -6,9 +6,11 @@
 
 #import "TableRequestViewController.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WatchLaterViewController : TableRequestViewController
+@interface WatchLaterViewController : TableRequestViewController <SRGAnalyticsViewTracking>
 
 @end
 

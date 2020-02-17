@@ -6,9 +6,11 @@
 
 #import "BaseViewController.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OnboardingsViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
+@interface OnboardingsViewController : BaseViewController <SRGAnalyticsViewTracking, UITableViewDataSource, UITableViewDelegate>
 
 @end
 

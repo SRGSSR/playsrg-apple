@@ -27,8 +27,6 @@ static void *s_kvoContext = &s_kvoContext;
 
 @property (nonatomic, copy) WebViewControllerCustomizationBlock customizationBlock;
 @property (nonatomic, copy) WKNavigationActionPolicy (^decisionHandler)(NSURL *URL);
-@property (nonatomic) AnalyticsPageType analyticsPageType;
-@property (nonatomic) NSString *analyticsPageTitle;
 
 @end
 
@@ -39,16 +37,12 @@ static void *s_kvoContext = &s_kvoContext;
 - (instancetype)initWithRequest:(NSURLRequest *)request
              customizationBlock:(WebViewControllerCustomizationBlock)customizationBlock
                 decisionHandler:(WKNavigationActionPolicy (^)(NSURL *))decisionHandler
-              analyticsPageType:(AnalyticsPageType)analyticsPageType
-             analyticsPageTitle:(NSString *)analyticsPageTitle
 {
     if (self = [super init]) {
         self.request = request;
         self.customizationBlock = customizationBlock;
         self.decisionHandler = decisionHandler;
-        self.tracked = YES;
-        self.analyticsPageType = analyticsPageType;
-        self.analyticsPageTitle = analyticsPageTitle;
+        self.analyticsPageType = AnalyticsPageTypeApplication;
     }
     return self;
 }
@@ -137,23 +131,6 @@ static void *s_kvoContext = &s_kvoContext;
     return UIStatusBarStyleLightContent;
 }
 
-#pragma mark Overrides
-
-- (NSString *)srg_pageViewTitle
-{
-    return self.analyticsPageTitle;
-}
-
-- (AnalyticsPageType)pageType
-{
-    return self.analyticsPageType;
-}
-
-- (BOOL)srg_isTrackedAutomatically
-{
-    return self.tracked;
-}
-
 #pragma mark ContentInsets protocol
 
 - (NSArray<UIScrollView *> *)play_contentScrollViews
@@ -172,6 +149,19 @@ static void *s_kvoContext = &s_kvoContext;
         }
     }
     return UIEdgeInsetsZero;
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return self.analyticsPageTitle;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    // TODO:
+    return @[ ];
 }
 
 #pragma mark UIScrollViewDelegate protocol

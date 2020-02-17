@@ -195,19 +195,22 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     }
 }
 
+#pragma mark SRGAnalyticsViewTracking protocol
+
 - (NSString *)srg_pageViewTitle
 {
-    return PlaySRGNonLocalizedString(@"Home");
+    return @"Home";
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
+    // TODO
     NSString *level2 = AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
     if (level2) {
-        return @[ AnalyticsNameForPageType(AnalyticsPageTypeLive), level2 ];
+        return @[ @"Live", level2 ];
     }
     else {
-        return @[ AnalyticsNameForPageType(AnalyticsPageTypeLive) ];
+        return @[ @"Live" ];
     }
 }
 

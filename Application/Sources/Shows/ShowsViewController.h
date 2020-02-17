@@ -7,9 +7,11 @@
 #import "CollectionRequestViewController.h"
 #import "RadioChannel.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ShowsViewController : CollectionRequestViewController
+@interface ShowsViewController : CollectionRequestViewController <SRGAnalyticsViewTracking>
 
 /**
  *  Instantiate for shows belonging to the specified radio channel. If no channel is provided, TV shows will be

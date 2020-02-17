@@ -135,18 +135,6 @@
     [requestQueue addRequest:request resume:YES];
 }
 
-- (NSString *)srg_pageViewTitle
-{
-    // Since we sometimes reset the view controller title for display purposes, we need to reliably return the module title
-    // as page title
-    return self.module.title;
-}
-
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeEvent;
-}
-
 #pragma mark Peek and pop
 
 - (NSArray<id<UIPreviewActionItem>> *)previewActionItems
@@ -281,6 +269,19 @@
 {
     CGFloat offset = [super verticalOffsetForEmptyDataSet:scrollView];
     return offset + [ModuleHeaderView heightForModule:self.module withSize:scrollView.frame.size] / 2.f;
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return self.module.title;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    // TODO:
+    return @[ @"Event" ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

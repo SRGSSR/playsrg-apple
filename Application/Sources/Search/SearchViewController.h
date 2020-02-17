@@ -7,9 +7,11 @@
 #import "CollectionRequestViewController.h"
 #import "PlayApplicationNavigation.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchViewController : CollectionRequestViewController <PlayApplicationNavigation, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
+@interface SearchViewController : CollectionRequestViewController <PlayApplicationNavigation, SRGAnalyticsViewTracking, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
 @end
 

@@ -175,19 +175,6 @@
     [requestQueue addRequest:request resume:YES];
 }
 
-- (NSString *)srg_pageViewTitle
-{
-    // Since we sometimes reset the view controller title for display purposes, we need to reliably return the show title
-    // as page title
-    return self.show.title;
-}
-
-- (NSArray<NSString *> *)srg_pageViewLevels
-{
-    AnalyticsPageType level1PageType = (self.show.transmission == SRGTransmissionRadio) ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
-    return @[ AnalyticsNameForPageType(level1PageType), AnalyticsNameForPageType(AnalyticsPageTypeShow) ];
-}
-
 #pragma mark Peek and pop
 
 - (NSArray<id<UIPreviewActionItem>> *)previewActionItems
@@ -390,6 +377,20 @@
     if (broadcastInformationURL) {
         [UIApplication.sharedApplication play_openURL:broadcastInformationURL withCompletionHandler:nil];
     }
+}
+
+#pragma mark SRGAnalyticsViewTracking protocols
+
+- (NSString *)srg_pageViewTitle
+{
+    return self.show.title;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    // TODO:
+    NSString *level1 = (self.show.transmission == SRGTransmissionRadio) ? @"Radio" : @"TV";
+    return @[ level1, @"Show" ];
 }
 
 #pragma mark UICollectionViewDataSource protocol
