@@ -98,7 +98,12 @@
         return AnalyticsPageTitleForHomeSection(self.homeSectionInfo.homeSection) ?: @"audio_page";
     }
     else if (self.homeSectionInfo.topic) {
-        return [self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class] ? self.homeSectionInfo.topic.title: AnalyticsPageTitleForTopicSection(self.homeSectionInfo.topicSection) ?: @"topic_page";
+        if ([self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class]) {
+            return self.homeSectionInfo.topic.title;
+        }
+        else {
+            return AnalyticsPageTitleForTopicSection(self.homeSectionInfo.topicSection) ?: @"topic_page";
+        }
     }
     else {
         return AnalyticsPageTitleForHomeSection(self.homeSectionInfo.homeSection) ?: @"video_page";
