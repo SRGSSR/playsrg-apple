@@ -77,8 +77,8 @@ OBJC_EXPORT NSString *TitleForApplicationSection(ApplicationSection applicationS
 OBJC_EXPORT NSString *TitleForHomeSection(HomeSection homeSection);
 OBJC_EXPORT NSString *TitleForTopicSection(TopicSection topicSection);
 
-OBJC_EXPORT _Nullable AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection);
-OBJC_EXPORT _Nullable AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection);
+OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection);
+OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection);
 
 OBJC_EXPORT void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller);
 OBJC_EXPORT NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval duration);

@@ -60,36 +60,42 @@ NSString *TitleForTopicSection(TopicSection topicSection)
 
 AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
 {
-    static NSDictionary<NSNumber *, NSString *> *s_names;
+    static NSDictionary<NSNumber *, NSString *> *s_titles;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(HomeSectionTVTrending) : AnalyticsPageTitleTrending,
-                     @(HomeSectionTVLive) : AnalyticsPageTitleTV,
-                     @(HomeSectionTVLatest) : AnalyticsPageTitleLatest,
-                     @(HomeSectionTVMostPopular) : AnalyticsPageTitleMostPopular,
-                     @(HomeSectionTVSoonExpiring) : AnalyticsPageTitleSoonExpiring,
-                     @(HomeSectionTVScheduledLivestreams) : AnalyticsPageTitleEvents,
-                     @(HomeSectionTVLiveCenter) : AnalyticsPageTitleSports,
-                     @(HomeSectionTVFavoriteShows) : AnalyticsPageTitleFavorites,
-                     @(HomeSectionRadioLive) : AnalyticsPageTitleRadio,
-                     @(HomeSectionRadioLatestEpisodes) : AnalyticsPageTitleLatestEpisodes,
-                     @(HomeSectionRadioMostPopular) : AnalyticsPageTitleMostPopular,
-                     @(HomeSectionRadioLatest) : AnalyticsPageTitleLatest,
-                     @(HomeSectionRadioLatestVideos) : AnalyticsPageTitleLatest,
-                     @(HomeSectionRadioFavoriteShows) : AnalyticsPageTitleFavorites };
+        s_titles = @{ @(HomeSectionTVTrending) : AnalyticsPageTitleTrending,
+                      @(HomeSectionTVLive) : AnalyticsPageTitleTV,
+                      @(HomeSectionTVLatest) : AnalyticsPageTitleLatest,
+                      @(HomeSectionTVMostPopular) : AnalyticsPageTitleMostPopular,
+                      @(HomeSectionTVSoonExpiring) : AnalyticsPageTitleSoonExpiring,
+                      @(HomeSectionTVScheduledLivestreams) : AnalyticsPageTitleEvents,
+                      @(HomeSectionTVLiveCenter) : AnalyticsPageTitleSports,
+                      @(HomeSectionTVFavoriteShows) : AnalyticsPageTitleFavorites,
+                      @(HomeSectionRadioLive) : AnalyticsPageTitleRadio,
+                      @(HomeSectionRadioLatestEpisodes) : AnalyticsPageTitleLatestEpisodes,
+                      @(HomeSectionRadioMostPopular) : AnalyticsPageTitleMostPopular,
+                      @(HomeSectionRadioLatest) : AnalyticsPageTitleLatest,
+                      @(HomeSectionRadioLatestVideos) : AnalyticsPageTitleLatest,
+                      @(HomeSectionRadioFavoriteShows) : AnalyticsPageTitleFavorites };
     });
-    return s_names[@(homeSection)];
+    
+    NSString *title = s_titles[@(homeSection)];
+    NSCAssert(title.length != 0, @"Section with missing page title. Please fix");
+    return title;
 }
 
 AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection)
 {
-    static NSDictionary<NSNumber *, NSString *> *s_names;
+    static NSDictionary<NSNumber *, NSString *> *s_titles;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(TopicSectionLatest) : AnalyticsPageTitleLatest,
-                     @(TopicSectionMostPopular) : AnalyticsPageTitleMostPopular };
+        s_titles = @{ @(TopicSectionLatest) : AnalyticsPageTitleLatest,
+                      @(TopicSectionMostPopular) : AnalyticsPageTitleMostPopular };
     });
-    return s_names[@(topicSection)];
+    
+    NSString *title = s_titles[@(topicSection)];
+    NSCAssert(title.length != 0, @"Section with missing page title. Please fix");
+    return title;
 }
 
 static NSString *AnalyticsBusinessUnitIdentifier(NSString *businessUnitIdentifier)

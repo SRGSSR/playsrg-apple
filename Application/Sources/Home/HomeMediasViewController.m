@@ -95,18 +95,18 @@
     RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
     
     if (radioChannel) {
-        return AnalyticsPageTitleForHomeSection(self.homeSectionInfo.homeSection) ?: @"audio_page";
+        return AnalyticsPageTitleForHomeSection(self.homeSectionInfo.homeSection);
     }
     else if (self.homeSectionInfo.topic) {
         if ([self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class]) {
             return self.homeSectionInfo.topic.title;
         }
         else {
-            return AnalyticsPageTitleForTopicSection(self.homeSectionInfo.topicSection) ?: @"topic_page";
+            return AnalyticsPageTitleForTopicSection(self.homeSectionInfo.topicSection);
         }
     }
     else {
-        return AnalyticsPageTitleForHomeSection(self.homeSectionInfo.homeSection) ?: @"video_page";
+        return AnalyticsPageTitleForHomeSection(self.homeSectionInfo.homeSection);
     }
 }
 
