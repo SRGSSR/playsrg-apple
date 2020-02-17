@@ -507,9 +507,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             [StoreReview requestReview];
         }
         
-        // Avoids view retain, preventing playback from stopping.
-        [Banner hideAll];
-        
         [self.livestreamMediasRequest cancel];
         
         [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
