@@ -368,7 +368,7 @@
     else {
         [levels addObject:AnalyticsPageLevelVideo];
     }
-    [levels addObject:@"Preview"];
+    [levels addObject:AnalyticsPageLevelPreview];
     
     NSString *showTitle = self.letterboxController.mediaComposition.show.title;
     if (showTitle) {

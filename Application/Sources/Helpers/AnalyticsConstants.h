@@ -19,6 +19,7 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelEvent;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelFeature;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelLive;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPlayer;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPreview;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelRadio;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelSearch;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelShow;

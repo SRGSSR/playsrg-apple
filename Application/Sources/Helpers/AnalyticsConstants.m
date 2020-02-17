@@ -13,6 +13,7 @@ AnalyticsPageLevel const AnalyticsPageLevelEvent = @"Event";
 AnalyticsPageLevel const AnalyticsPageLevelFeature = @"Feature";
 AnalyticsPageLevel const AnalyticsPageLevelLive = @"Live";
 AnalyticsPageLevel const AnalyticsPageLevelPlayer = @"Player";
+AnalyticsPageLevel const AnalyticsPageLevelPreview = @"Preview";
 AnalyticsPageLevel const AnalyticsPageLevelRadio = @"Radio";
 AnalyticsPageLevel const AnalyticsPageLevelSearch = @"Search";
 AnalyticsPageLevel const AnalyticsPageLevelShow = @"Show";
