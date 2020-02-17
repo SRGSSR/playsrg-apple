@@ -34,7 +34,6 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleBetaTesting;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDownloads;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleEvent;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleEvents;
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleExpiringSoon;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFavorites;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFeatures;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFeedback;
@@ -51,16 +50,14 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSettings;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShow;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsAZ;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSoonExpiring;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSourceCode;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSports;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTopic;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTrending;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTV;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWatchLater;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatIsNew;
-
-
-
-
 
 /**
  *  @name Analytics event titles

@@ -95,13 +95,13 @@
     RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
     
     if (radioChannel) {
-        return AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
+        return AnalyticsPageTitleForHomeSection(self.homeSectionInfo.homeSection) ?: @"audio_page";
     }
     else if (self.homeSectionInfo.topic) {
-        return [self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class] ? self.homeSectionInfo.topic.title: AnalyticsTitleForTopicSection(self.homeSectionInfo.topicSection);
+        return [self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class] ? self.homeSectionInfo.topic.title: AnalyticsPageTitleForTopicSection(self.homeSectionInfo.topicSection) ?: @"topic_page";
     }
     else {
-        return AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
+        return AnalyticsPageTitleForHomeSection(self.homeSectionInfo.homeSection) ?: @"video_page";
     }
 }
 
