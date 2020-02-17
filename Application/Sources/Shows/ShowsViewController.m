@@ -358,16 +358,16 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"Shows";
+    return AnalyticsPageTitleShowsAZ;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     if (self.radioChannel) {
-        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelRadio, self.radioChannel.name ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, self.radioChannel.name ];
     }
     else {
-        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelTV ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
     }
 }
 

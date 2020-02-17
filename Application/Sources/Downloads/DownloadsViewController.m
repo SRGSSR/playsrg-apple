@@ -219,7 +219,7 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"Downloads";
+    return AnalyticsPageTitleDownloads;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels

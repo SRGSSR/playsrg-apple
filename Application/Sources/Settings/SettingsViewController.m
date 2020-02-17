@@ -204,7 +204,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         } decisionHandler:nil];
         webViewController.title = PlaySRGSettingsLocalizedString(@"Your feedback", @"Title displayed at the top of the feedback view");
         webViewController.analyticsPageLevels = @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
-        webViewController.analyticsPageTitle = @"Feedback";
+        webViewController.analyticsPageTitle = AnalyticsPageTitleFeedback;
         [self.navigationController pushViewController:webViewController animated:YES];
     }
     else if ([specifier.key isEqualToString:SettingsSourceCodeButton]) {
@@ -451,7 +451,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
 - (NSString *)srg_pageViewTitle
 {
-    return [self.file containsString:@"LicensePlist"] ? @"Licenses" : @"Settings";
+    return [self.file containsString:@"LicensePlist"] ? AnalyticsPageTitleLicenses : AnalyticsPageTitleSettings;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels

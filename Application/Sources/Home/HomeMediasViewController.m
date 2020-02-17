@@ -98,7 +98,7 @@
         return AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
     }
     else if (self.homeSectionInfo.topic) {
-        return [self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class] ? self.homeSectionInfo.parentTitle : self.homeSectionInfo.topic.title;
+        return [self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class] ? self.homeSectionInfo.topic.title: AnalyticsTitleForTopicSection(self.homeSectionInfo.topicSection);
     }
     else {
         return AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
@@ -111,15 +111,15 @@
     RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
     
     if (radioChannel) {
-        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelRadio, radioChannel.name ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, radioChannel.name ];
     }
     else if (self.homeSectionInfo.topic) {
-        NSString *level1 = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelRadio : AnalyticsPageLevelTV;
-        NSString *level3 = [self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class] ? self.homeSectionInfo.topic.title : AnalyticsTitleForTopicSection(self.homeSectionInfo.topicSection);
-        return @[ level1, AnalyticsPageLevelTopic, level3 ];
+        NSString *level2 = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelAudio : AnalyticsPageLevelVideo;
+        NSString *level3 = [self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class] ? self.homeSectionInfo.parentTitle : self.homeSectionInfo.topic.title;
+        return @[ AnalyticsPageLevelPlay, level2, level3 ];
     }
     else {
-        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelTV ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
     }
 }
 

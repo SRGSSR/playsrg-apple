@@ -314,7 +314,7 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"Favorites";
+    return AnalyticsPageTitleFavorites;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels

@@ -343,39 +343,14 @@
 
 #pragma mark SRGAnalyticsViewTracking protocol
 
-- (BOOL)srg_isTrackedAutomatically
-{
-    // Tracking requires media composition information. The view event will be sent manually when appropriate
-    return NO;
-}
-
 - (NSString *)srg_pageViewTitle
 {
-    // Use the full-length when available
-    SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
-    return media.title;
+    return AnalyticsPageTitlePlayer;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    NSMutableArray<NSString *> *levels = [NSMutableArray array];
-    
-    // Use the full-length when available
-    SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
-    if (media.mediaType == SRGMediaTypeAudio) {
-        [levels addObject:AnalyticsPageLevelAudio];
-    }
-    else {
-        [levels addObject:AnalyticsPageLevelVideo];
-    }
-    [levels addObject:AnalyticsPageLevelPreview];
-    
-    NSString *showTitle = self.letterboxController.mediaComposition.show.title;
-    if (showTitle) {
-        [levels addObject:showTitle];
-    }
-    
-    return levels.copy;
+    return @ [ AnalyticsPageLevelPlay, AnalyticsPageLevelPreview ];
 }
 
 #pragma mark Notifications

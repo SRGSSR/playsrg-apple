@@ -200,18 +200,12 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"Home";
+    return AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    NSString *level2 = AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
-    if (level2) {
-        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelLive, level2 ];
-    }
-    else {
-        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelLive ];
-    }
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelLive ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

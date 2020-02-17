@@ -20,11 +20,8 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelFeature;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelLive;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPlay;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPreview;
-OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelRadio;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelSearch;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelShow;
-OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelTopic;
-OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelTV;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelUser;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelVideo;
 
@@ -33,7 +30,37 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelVideo;
  */
 typedef NSString * AnalyticsPageTitle NS_STRING_ENUM;
 
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleBetaTesting;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDownloads;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleEvent;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleEvents;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleExpiringSoon;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFavorites;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFeatures;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFeedback;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHistory;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHome;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatest;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicenses;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMostPopular;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleNotifications;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitlePlayer;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadio;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSettings;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShow;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsAZ;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSourceCode;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSports;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTopic;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTV;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWatchLater;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatIsNew;
+
+
+
+
 
 /**
  *  @name Analytics event titles

@@ -68,7 +68,7 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"Features";
+    return AnalyticsPageTitleFeatures;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels

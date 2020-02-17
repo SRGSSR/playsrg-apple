@@ -180,7 +180,7 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"History";
+    return AnalyticsPageTitleHistory;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels

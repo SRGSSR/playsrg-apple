@@ -389,8 +389,8 @@
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    NSString *level1 = (self.show.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelRadio : AnalyticsPageLevelTV;
-    return @[ level1, AnalyticsPageLevelShow ];
+    NSString *level1 = (self.show.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelAudio : AnalyticsPageLevelVideo;
+    return @[ AnalyticsPageLevelPlay, level1, AnalyticsPageLevelShow ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

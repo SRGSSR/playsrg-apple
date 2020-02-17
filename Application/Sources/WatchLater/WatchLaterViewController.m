@@ -165,7 +165,7 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"Watch later";
+    return AnalyticsPageTitleWatchLater;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels

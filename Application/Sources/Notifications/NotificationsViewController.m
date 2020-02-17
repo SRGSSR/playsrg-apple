@@ -283,7 +283,7 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"Notifications";
+    return AnalyticsPageTitleNotifications;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels

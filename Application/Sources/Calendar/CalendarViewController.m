@@ -315,16 +315,16 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"Calendar";
+    return AnalyticsPageTitleShowsCalendar;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     if (self.radioChannel) {
-        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelRadio, self.radioChannel.name ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, self.radioChannel.name ];
     }
     else {
-        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelTV ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
     }
 }
 

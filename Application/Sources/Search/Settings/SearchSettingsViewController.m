@@ -593,7 +593,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"Settings";
+    return AnalyticsPageTitleSettings;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels

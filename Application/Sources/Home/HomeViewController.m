@@ -483,7 +483,7 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"Home";
+    return AnalyticsPageTitleHome;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels

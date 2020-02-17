@@ -444,7 +444,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (NSString *)srg_pageViewTitle
 {
-    return @"Home";
+    return AnalyticsPageTitleHome;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
