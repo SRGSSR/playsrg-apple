@@ -489,10 +489,10 @@
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     if (self.radioChannel) {
-        return @[ AnalyticsPageLevelAudio, self.radioChannel.name ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, self.radioChannel.name ];
     }
     else {
-        return @[ AnalyticsPageLevelVideo ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
     }
 }
 

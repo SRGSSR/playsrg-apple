@@ -281,7 +281,7 @@
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return @[ AnalyticsPageLevelEvent ];
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelEvent ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

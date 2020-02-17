@@ -203,7 +203,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             webView.scrollView.scrollEnabled = NO;
         } decisionHandler:nil];
         webViewController.title = PlaySRGSettingsLocalizedString(@"Your feedback", @"Title displayed at the top of the feedback view");
-        webViewController.analyticsPageLevels = @[ AnalyticsPageLevelUser ];
+        webViewController.analyticsPageLevels = @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
         webViewController.analyticsPageTitle = @"Feedback";
         [self.navigationController pushViewController:webViewController animated:YES];
     }
@@ -212,7 +212,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSAssert(sourceCodeURL, @"Button must not be displayed if no source code URL has been specified");
         
         [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:@"Source code" levels:@[ AnalyticsPageLevelApplication ]];
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:@"Source code" levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
         }];
     }
     else if ([specifier.key isEqualToString:SettingsBetaTestingButton]) {
@@ -220,7 +220,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSAssert(betaTestingURL, @"Button must not be displayed if no beta testing URL has been specified");
         
         [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:@"Beta testing" levels:@[ AnalyticsPageLevelApplication ]];
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:@"Beta testing" levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
         }];
     }
     else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {
@@ -456,7 +456,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return @[ AnalyticsPageLevelApplication ];
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ];
 }
 
 #pragma mark Actions

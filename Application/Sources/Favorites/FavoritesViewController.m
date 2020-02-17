@@ -319,7 +319,7 @@
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return @[ AnalyticsPageLevelUser ];
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
 }
 
 #pragma mark UITableViewDataSource protocol

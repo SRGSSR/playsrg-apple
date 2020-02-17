@@ -111,7 +111,7 @@
     RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
     
     if (radioChannel) {
-        return @[ AnalyticsPageLevelRadio, radioChannel.name ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelRadio, radioChannel.name ];
     }
     else if (self.homeSectionInfo.topic) {
         NSString *level1 = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelRadio : AnalyticsPageLevelTV;
@@ -119,7 +119,7 @@
         return @[ level1, AnalyticsPageLevelTopic, level3 ];
     }
     else {
-        return @[ AnalyticsPageLevelTV ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelTV ];
     }
 }
 

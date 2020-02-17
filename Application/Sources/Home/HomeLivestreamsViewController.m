@@ -207,10 +207,10 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     NSString *level2 = AnalyticsTitleForHomeSection(self.homeSectionInfo.homeSection);
     if (level2) {
-        return @[ AnalyticsPageLevelLive, level2 ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelLive, level2 ];
     }
     else {
-        return @[ AnalyticsPageLevelLive ];
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelLive ];
     }
 }
 

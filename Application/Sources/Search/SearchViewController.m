@@ -449,7 +449,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return @[ AnalyticsPageLevelSearch ];
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelSearch ];
 }
 
 #pragma mark UICollectionViewDataSource protocol
