@@ -7,6 +7,8 @@
 #import "AnalyticsConstants.h"
 #import "NSBundle+PlaySRG.h"
 
+// See reference specifications at https://confluence.srg.beecollaboration.com/display/SRGPLAY/Play+SRG+simplified+page+view+analytics
+
 AnalyticsPageLevel const AnalyticsPageLevelApplication = @"application";
 AnalyticsPageLevel const AnalyticsPageLevelAudio = @"audio";
 AnalyticsPageLevel const AnalyticsPageLevelEvent = @"event";
@@ -21,7 +23,6 @@ AnalyticsPageLevel const AnalyticsPageLevelVideo = @"video";
 
 AnalyticsPageTitle const AnalyticsPageTitleBetaTesting = @"beta testing";
 AnalyticsPageTitle const AnalyticsPageTitleDownloads = @"downloads";
-AnalyticsPageTitle const AnalyticsPageTitleEvent = @"event";
 AnalyticsPageTitle const AnalyticsPageTitleEvents = @"events";
 AnalyticsPageTitle const AnalyticsPageTitleFavorites = @"favorites";
 AnalyticsPageTitle const AnalyticsPageTitleFeatures = @"features";
@@ -36,17 +37,15 @@ AnalyticsPageTitle const AnalyticsPageTitleNotifications = @"notifications";
 AnalyticsPageTitle const AnalyticsPageTitlePlayer = @"player";
 AnalyticsPageTitle const AnalyticsPageTitleRadio = @"radio";
 AnalyticsPageTitle const AnalyticsPageTitleSettings = @"settings";
-AnalyticsPageTitle const AnalyticsPageTitleShow = @"show";
 AnalyticsPageTitle const AnalyticsPageTitleShowsAZ = @"shows a-z";
 AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar = @"shows calendar";
 AnalyticsPageTitle const AnalyticsPageTitleSoonExpiring = @"soon expiring";
 AnalyticsPageTitle const AnalyticsPageTitleSourceCode = @"source code";
 AnalyticsPageTitle const AnalyticsPageTitleSports = @"sports";
-AnalyticsPageTitle const AnalyticsPageTitleTopic = @"topic";
 AnalyticsPageTitle const AnalyticsPageTitleTrending = @"trending";
 AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
 AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
-AnalyticsPageTitle const AnalyticsPageTitleWhatIsNew = @"what is new";
+AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
 
 AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
 AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download_add";

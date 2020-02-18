@@ -257,7 +257,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSURLRequest *request = [NSURLRequest requestWithURL:URL];
         WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
         webViewController.analyticsPageLevels = @[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ];
-        webViewController.analyticsPageTitle =  AnalyticsPageTitleWhatIsNew;
+        webViewController.analyticsPageTitle = AnalyticsPageTitleWhatsNew;
         
         completionHandler(webViewController, nil);
     }] resume];
@@ -341,7 +341,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSAssert(sourceCodeURL, @"Button must not be displayed if no source code URL has been specified");
         
         [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:@"Source code" levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleSourceCode levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
         }];
     }
     else if ([specifier.key isEqualToString:SettingsBetaTestingButton]) {
@@ -349,7 +349,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSAssert(betaTestingURL, @"Button must not be displayed if no beta testing URL has been specified");
         
         [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:@"Beta testing" levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleBetaTesting levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
         }];
     }
     else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {

@@ -350,7 +350,7 @@
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return @ [ AnalyticsPageLevelPlay, AnalyticsPageLevelPreview ];
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelPreview ];
 }
 
 #pragma mark Notifications
