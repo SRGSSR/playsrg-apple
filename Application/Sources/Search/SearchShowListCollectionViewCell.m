@@ -6,10 +6,12 @@
 
 #import "SearchShowListCollectionViewCell.h"
 
+#import "AnalyticsConstants.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
 
 #import <CoconutKit/CoconutKit.h>
+#import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface SearchShowListCollectionViewCell ()

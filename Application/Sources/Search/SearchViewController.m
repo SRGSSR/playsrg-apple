@@ -6,6 +6,7 @@
 
 #import "SearchViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "MediaCollectionViewCell.h"
 #import "MostSearchedShowCollectionViewCell.h"
@@ -443,12 +444,12 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (NSString *)srg_pageViewTitle
 {
-    return self.title;
+    return AnalyticsPageTitleHome;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeSearch) ];
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelSearch ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

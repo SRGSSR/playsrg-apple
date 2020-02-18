@@ -6,6 +6,7 @@
 
 #import "LibraryViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationSectionInfo.h"
 #import "DownloadsViewController.h"
 #import "FavoritesViewController.h"
@@ -235,12 +236,12 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return NSLocalizedString(@"Library", @"[Technical] Title for library analytics measurements");
+    return AnalyticsPageTitleHome;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeUser) ];
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
 }
 
 #pragma mark UITableViewDataSource protocol

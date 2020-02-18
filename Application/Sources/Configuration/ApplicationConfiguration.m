@@ -58,6 +58,46 @@ NSString *TitleForTopicSection(TopicSection topicSection)
     return s_names[@(topicSection)];
 }
 
+AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
+{
+    static NSDictionary<NSNumber *, NSString *> *s_titles;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_titles = @{ @(HomeSectionTVTrending) : AnalyticsPageTitleTrending,
+                      @(HomeSectionTVLive) : AnalyticsPageTitleTV,
+                      @(HomeSectionTVLatest) : AnalyticsPageTitleLatest,
+                      @(HomeSectionTVMostPopular) : AnalyticsPageTitleMostPopular,
+                      @(HomeSectionTVSoonExpiring) : AnalyticsPageTitleSoonExpiring,
+                      @(HomeSectionTVScheduledLivestreams) : AnalyticsPageTitleEvents,
+                      @(HomeSectionTVLiveCenter) : AnalyticsPageTitleSports,
+                      @(HomeSectionTVFavoriteShows) : AnalyticsPageTitleFavorites,
+                      @(HomeSectionRadioLive) : AnalyticsPageTitleRadio,
+                      @(HomeSectionRadioLatestEpisodes) : AnalyticsPageTitleLatestEpisodes,
+                      @(HomeSectionRadioMostPopular) : AnalyticsPageTitleMostPopular,
+                      @(HomeSectionRadioLatest) : AnalyticsPageTitleLatest,
+                      @(HomeSectionRadioLatestVideos) : AnalyticsPageTitleLatest,
+                      @(HomeSectionRadioFavoriteShows) : AnalyticsPageTitleFavorites };
+    });
+    
+    NSString *title = s_titles[@(homeSection)];
+    NSCAssert(title != nil, @"Section with missing page title. Please fix");
+    return title ?: @"";
+}
+
+AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection)
+{
+    static NSDictionary<NSNumber *, NSString *> *s_titles;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_titles = @{ @(TopicSectionLatest) : AnalyticsPageTitleLatest,
+                      @(TopicSectionMostPopular) : AnalyticsPageTitleMostPopular };
+    });
+    
+    NSString *title = s_titles[@(topicSection)];
+    NSCAssert(title != nil, @"Section with missing page title. Please fix");
+    return title ?: @"";
+}
+
 static NSString *AnalyticsBusinessUnitIdentifier(NSString *businessUnitIdentifier)
 {
     static NSDictionary<NSString *, SRGAnalyticsBusinessUnitIdentifier>  *s_businessUnitIdentifiers;

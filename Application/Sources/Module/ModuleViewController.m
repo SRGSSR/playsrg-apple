@@ -7,6 +7,7 @@
 #import "ModuleViewController.h"
 
 #import "ActivityItemSource.h"
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "MediaCollectionViewCell.h"
@@ -133,18 +134,6 @@
     NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
     SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider latestMediasForModuleWithURN:self.module.URN completionBlock:completionHandler] requestWithPageSize:pageSize] requestWithPage:page];
     [requestQueue addRequest:request resume:YES];
-}
-
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeTV;
-}
-
-- (NSString *)srg_pageViewTitle
-{
-    // Since we sometimes reset the view controller title for display purposes, we need to reliably return the module title
-    // as page title
-    return self.module.title;
 }
 
 #pragma mark Peek and pop
@@ -281,6 +270,18 @@
 {
     CGFloat offset = [super verticalOffsetForEmptyDataSet:scrollView];
     return offset + [ModuleHeaderView heightForModule:self.module withSize:scrollView.frame.size] / 2.f;
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return self.module.title;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo, AnalyticsPageLevelEvent ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

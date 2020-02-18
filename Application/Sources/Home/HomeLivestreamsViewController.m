@@ -6,6 +6,7 @@
 
 #import "HomeLivestreamsViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationSettings.h"
 #import "ChannelService.h"
 #import "LiveMediaCollectionViewCell.h"
@@ -194,16 +195,16 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     }
 }
 
-- (BOOL)srg_isTrackedAutomatically
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
 {
-    // Only tracked if presented directly without containment
-    return ! self.play_pageViewController;
+    return AnalyticsPageTitleForHomeSection(self.homeSectionInfo.homeSection);
 }
 
-- (AnalyticsPageType)pageType
+- (NSArray<NSString *> *)srg_pageViewLevels
 {
-    // TODO: Probably AnalyticsPageTypeLivestreams
-    return AnalyticsPageTypeTV;
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelLive ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

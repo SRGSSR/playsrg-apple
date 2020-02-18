@@ -6,7 +6,9 @@
 
 #import "ShowsViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
@@ -236,22 +238,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     });
 }
 
-- (BOOL)srg_isTrackedAutomatically
-{
-    // Only tracked if standalone
-    return ! self.play_pageViewController;
-}
-
-- (NSString *)srg_pageViewTitle
-{
-    return NSLocalizedString(@"Programmes A-Z", @"[Technical] Title for programmes A-Z page view analytics measurements");
-}
-
-- (AnalyticsPageType)pageType
-{
-    return self.radioChannel != nil ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
-}
-
 #pragma mark Scrolling
 
 - (void)scrollToSectionWithIndex:(NSUInteger)index animated:(BOOL)animated
@@ -366,6 +352,23 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return AnalyticsPageTitleShowsAZ;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    if (self.radioChannel) {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, self.radioChannel.name ];
+    }
+    else {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
+    }
 }
 
 #pragma mark UIScrollViewDelegate protocol

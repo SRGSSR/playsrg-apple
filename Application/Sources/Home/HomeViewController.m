@@ -6,6 +6,7 @@
 
 #import "HomeViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "CalendarViewController.h"
@@ -279,11 +280,6 @@
     });
 }
 
-- (AnalyticsPageType)pageType
-{
-    return self.radioChannel ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
-}
-
 #pragma mark User interface
 
 - (void)updateStatusHeaderViewLayout
@@ -481,6 +477,23 @@
 - (void)scrollToTopAnimated:(BOOL)animated
 {
     [self.tableView play_scrollToTopAnimated:animated];
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return AnalyticsPageTitleHome;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    if (self.radioChannel) {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, self.radioChannel.name ];
+    }
+    else {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
+    }
 }
 
 #pragma mark UITableViewDataSource protocol

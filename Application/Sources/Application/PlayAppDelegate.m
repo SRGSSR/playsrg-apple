@@ -18,7 +18,7 @@
 #import "HomeTopicViewController.h"
 #import "MediaPlayerViewController.h"
 #import "ModuleViewController.h"
-#import "NavigationController.h"
+#import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PlayErrors.h"
@@ -33,7 +33,6 @@
 #import "UIWindow+PlaySRG.h"
 #import "UpdateInfo.h"
 #import "WatchLater.h"
-#import "WebViewController.h"
 
 #import <AppCenter/AppCenter.h>
 #import <AppCenterCrashes/AppCenterCrashes.h>
@@ -183,34 +182,6 @@ static void *s_kvoContext = &s_kvoContext;
     // Local objects migration
     WatchLaterMigrate();
     FavoritesMigrate();
-    
-    NSURL *whatsNewURL = applicationConfiguration.whatsNewURL;
-    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
-        // Only display the "What's new" popup for application updates, not after the application installation
-        if (firstLaunchDone) {
-            [self loadWhatsNewWithCompletionHandler:^(UIViewController * _Nullable viewController, NSError * _Nullable error) {
-                if (error) {
-                    completionHandler(NO);
-                    return;
-                }
-                
-                viewController.title = NSLocalizedString(@"What's new", @"Title displayed at the top of the What's new view");
-                viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
-                                                                                                   style:UIBarButtonItemStyleDone
-                                                                                                  target:self
-                                                                                                  action:@selector(closeWhatsNew:)];
-                
-                NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
-                navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
-                [self.window.play_topViewController presentViewController:navigationController animated:YES completion:^{
-                    completionHandler(YES);
-                }];
-            }];
-        }
-        else {
-            completionHandler(YES);
-        }
-    }, @"LastWhatsNewURLRead", whatsNewURL.absoluteString);
     
     // Processes run once in the lifetime of the application
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
@@ -805,39 +776,6 @@ static void *s_kvoContext = &s_kvoContext;
 {
     CalendarViewController *calendarViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:date];
     [self.rootTabBarController pushViewController:calendarViewController animated:YES];
-}
-
-#pragma mark What's new
-
-- (void)loadWhatsNewWithCompletionHandler:(void (^)(UIViewController * _Nullable, NSError * _Nullable))completionHandler
-{
-    NSURL *whatsNewURL = ApplicationConfiguration.sharedApplicationConfiguration.whatsNewURL;
-    [[SRGRequest objectRequestWithURLRequest:[NSURLRequest requestWithURL:whatsNewURL] session:NSURLSession.sharedSession parser:^id _Nullable(NSData * _Nonnull data, NSError * _Nullable __autoreleasing * _Nullable pError) {
-        // FIXME: Ugly. Since we are using Pastebin, the missing html extension makes the page load incorrectly. We should:
-        //   1) Replace Pastebin
-        //   2) Load the what's new URL in the WebViewController directly
-        NSString *temporaryFileName = [NSUUID.UUID.UUIDString stringByAppendingPathExtension:@"html"];
-        NSString *temporaryFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:temporaryFileName];
-        NSURL *temporaryFileURL = [NSURL fileURLWithPath:temporaryFilePath];
-        [data writeToURL:temporaryFileURL atomically:YES];
-        
-        NSString *shortVersionString = [[NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] componentsSeparatedByString:@"-"].firstObject;
-        NSURLComponents *components = [[NSURLComponents alloc] initWithURL:temporaryFileURL resolvingAgainstBaseURL:NO];
-        components.queryItems = @[ [[NSURLQueryItem alloc] initWithName:@"build" value:[NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleVersion"]],
-                                   [[NSURLQueryItem alloc] initWithName:@"version" value:shortVersionString],
-                                   [[NSURLQueryItem alloc] initWithName:@"ios" value:UIDevice.currentDevice.systemVersion] ];
-        
-        return components.URL;
-    } completionBlock:^(NSURL * _Nullable URL, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            completionHandler(nil, error);
-            return;
-        }
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeSystem];
-        completionHandler(webViewController, nil);
-    }] resume];
 }
 
 #pragma mark Forced updates

@@ -6,6 +6,7 @@
 
 #import "FavoritesViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
@@ -186,11 +187,6 @@
     });
 }
 
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeFavorites;
-}
-
 #pragma mark UI
 
 - (void)reloadDataAnimated:(BOOL)animated
@@ -312,6 +308,18 @@
     labels.value = show.URN;
     labels.source = AnalyticsSourceSwipe;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteRemove labels:labels];
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return AnalyticsPageTitleFavorites;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
 }
 
 #pragma mark UITableViewDataSource protocol

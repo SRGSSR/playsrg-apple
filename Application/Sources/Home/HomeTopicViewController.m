@@ -37,27 +37,16 @@
     }
     
     for (SRGSubtopic *subtopic in topic.subtopics) {
-        HomeSectionInfo *subTopicSectionInfo = [[HomeSectionInfo alloc] initWithHomeSection:HomeSectionTVTopics object:subtopic];
-        subTopicSectionInfo.title = subtopic.title;
-        [viewControllers addObject:[[HomeMediasViewController alloc] initWithHomeSectionInfo:subTopicSectionInfo]];
+        HomeSectionInfo *subtopicSectionInfo = [[HomeSectionInfo alloc] initWithHomeSection:HomeSectionTVTopics object:subtopic];
+        subtopicSectionInfo.title = subtopic.title;
+        subtopicSectionInfo.parentTitle = topic.title;
+        [viewControllers addObject:[[HomeMediasViewController alloc] initWithHomeSectionInfo:subtopicSectionInfo]];
     }
     
     if (self = [super initWithViewControllers:viewControllers.copy]) {
         self.title = topic.title;
     }
     return self;
-}
-
-#pragma mark SRGAnalyticsViewTracking protocol
-
-- (NSString *)srg_pageViewTitle
-{
-    return self.title;
-}
-
-- (NSArray<NSString *> *)srg_pageViewLevels
-{
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];
 }
 
 @end

@@ -6,6 +6,7 @@
 
 #import "NotificationsViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "Banner.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
@@ -207,11 +208,6 @@
     });
 }
 
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeNotifications;
-}
-
 #pragma mark UI
 
 - (void)reloadDataAnimated:(BOOL)animated
@@ -281,6 +277,18 @@
                               withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView reloadEmptyDataSet];
     }
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return AnalyticsPageTitleNotifications;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
 }
 
 #pragma mark UITableViewDataSource protocol

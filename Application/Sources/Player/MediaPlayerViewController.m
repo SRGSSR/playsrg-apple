@@ -412,10 +412,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                                name:UIApplicationDidEnterBackgroundNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(applicationWillEnterForeground:)
-                                               name:UIApplicationWillEnterForegroundNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationDidBecomeActive:)
                                                name:UIApplicationDidBecomeActiveNotification
                                              object:nil];
@@ -471,13 +467,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     [super viewWillAppear:animated];
     
-    if (self.letterboxController.mediaComposition) {
-        // Do not send additional page view events when the interactive transition has been cancelled
-        if (! self.transitionCoordinator.cancelled) {
-            [self srg_trackPageView];
-        }
-    }
-    
     if (self.play_isMovingToParentViewController) {
         [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
                                                           object:self
@@ -530,8 +519,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     self.userActivity = nil;
-    
-    self.fromPushNotification = NO;
 }
 
 - (void)viewWillLayoutSubviews
@@ -1248,39 +1235,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 #pragma mark SRGAnalyticsViewTracking protocol
 
-- (BOOL)srg_isTrackedAutomatically
-{
-    // Tracking requires media composition information. The view event will be sent manually when appropriate
-    return NO;
-}
-
 - (NSString *)srg_pageViewTitle
 {
-    // Use the full-length when available
-    SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
-    return media.title;
+    return AnalyticsPageTitlePlayer;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    NSMutableArray<NSString *> *levels = [NSMutableArray array];
-    
-    // Use the full-length when available
-    SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
-    if (media.mediaType == SRGMediaTypeAudio) {
-        [levels addObject:AnalyticsNameForPageType(AnalyticsPageTypeRadio)];
-    }
-    else {
-        [levels addObject:AnalyticsNameForPageType(AnalyticsPageTypeTV)];
-    }
-    [levels addObject:@"detail"];
-    
-    NSString *showTitle = self.letterboxController.mediaComposition.show.title;
-    if (showTitle) {
-        [levels addObject:showTitle];
-    }
-    
-    return levels.copy;
+    return @[ AnalyticsPageLevelPlay ];
 }
 
 - (BOOL)srg_isOpenedFromPushNotification
@@ -1871,15 +1833,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self setUserInterfaceBehaviorForMedia:media animated:YES];
     }
     
-    // Notify page view when the full-length changes.
-    SRGMediaComposition *previousMediaComposition = notification.userInfo[SRGLetterboxPreviousMediaCompositionKey];
-    SRGMediaComposition *mediaComposition = notification.userInfo[SRGLetterboxMediaCompositionKey];
-    
-    if ([self isViewVisible] && mediaComposition && ! [previousMediaComposition.fullLengthMedia isEqual:mediaComposition.fullLengthMedia]) {
-        [self srg_trackPageView];
-        self.fromPushNotification = NO;
-    }
-    
     [self updateGoogleCastButton];
 }
 
@@ -1932,14 +1885,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             // Don't prompt for backround playback if the device was simply locked
             self.displayBackgroundVideoPlaybackPrompt = ! UIDevice.play_isLocked;
         });
-    }
-}
-
-- (void)applicationWillEnterForeground:(NSNotification *)notification
-{
-    if (self.letterboxController.mediaComposition) {
-        [self srg_trackPageView];
-        self.fromPushNotification = NO;
     }
 }
 

@@ -14,6 +14,7 @@
 
 #import <CoconutKit/CoconutKit.h>
 #import <GoogleCast/GoogleCast.h>
+#import <SRGAnalytics/SRGAnalytics.h>
 
 NSString * const GoogleCastPlaybackDidStartNotification = @"GoogleCastPlaybackDidStartNotification";
 NSString * const GoogleCastMediaKey = @"GoogleCastMedia";
@@ -163,6 +164,10 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
                                                selector:@selector(googleCastStateDidChange:)
                                                    name:kGCKCastStateDidChangeNotification
                                                  object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(applicationDidBecomeActive:)
+                                                   name:UIApplicationDidBecomeActiveNotification
+                                                 object:nil];
         
         // If the GoogleCastManager is created from the app delegate (which is the best way to ensure Google Cast is setup
         // early, so that accessing other related UI components works as expected), we can still apply styling slightly
@@ -204,5 +209,69 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
     }
 }
 
+// Perform manual tracking of Google cast views when the application returns from background
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    if ([topViewController isKindOfClass:GCKUIExpandedMediaControlsViewController.class]) {
+        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+    }
+    else if ([topViewController isKindOfClass:UINavigationController.class]) {
+        UINavigationController *navigationTopViewController = (UINavigationController *)topViewController;
+        UIViewController *rootViewController = navigationTopViewController.viewControllers.firstObject;
+        if ([rootViewController isKindOfClass:NSClassFromString(@"GCKUIDeviceConnectionViewController")]) {
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+        }
+    }
+}
+
+@end
+
+@interface GCKUICastButton (GoogleCast)
+
+- (void)openGoogleCastDeviceSelection:(id)sender;
+
+@end
+
+static id (*s_GCKUICastButton_initWithFrame)(id, SEL, CGRect) = NULL;
+static id (*s_GCKUICastButton_initWithCoder)(id, SEL, id) = NULL;
+
+static void commonInit(GCKUICastButton *self)
+{
+    [self addTarget:self action:@selector(openGoogleCastDeviceSelection:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+static id swizzled_initWithFrame(GCKUICastButton *self, SEL _cmd, CGRect frame)
+{
+    if ((self = s_GCKUICastButton_initWithFrame(self, _cmd, frame))) {
+        commonInit(self);
+    }
+    return self;
+}
+
+static id swizzled_initWithCoder(GCKUICastButton *self, SEL _cmd, NSCoder *decoder)
+{
+    if ((self = s_GCKUICastButton_initWithCoder(self, _cmd, decoder))) {
+        commonInit(self);
+    }
+    return self;
+}
+
+@implementation GCKUICastButton (GoogleCast)
+
+#pragma mark Class methods
+
++ (void)load
+{
+    HLSSwizzleSelector(self, @selector(initWithFrame:), swizzled_initWithFrame, &s_GCKUICastButton_initWithFrame);
+    HLSSwizzleSelector(self, @selector(initWithCoder:), swizzled_initWithCoder, &s_GCKUICastButton_initWithCoder);
+}
+
+#pragma mark Actions
+
+- (void)openGoogleCastDeviceSelection:(id)sender
+{
+    [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+}
 
 @end

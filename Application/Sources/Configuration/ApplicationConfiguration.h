@@ -4,21 +4,22 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "AnalyticsConstants.h"
+#import "RadioChannel.h"
+#import "TVChannel.h"
+
 #import <CoreMedia/CoreMedia.h>
 #import <Foundation/Foundation.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 
-#import "RadioChannel.h"
-#import "TVChannel.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, HomeSection) {
-    HomeSectionUnknown,
+    HomeSectionUnknown = 0,
     
-    // Video sections
+    // TV sections
     HomeSectionTVTrending,
     HomeSectionTVEvents,
     HomeSectionTVTopics,
@@ -28,7 +29,7 @@ typedef NS_ENUM(NSInteger, HomeSection) {
     HomeSectionTVShowsAccess,
     HomeSectionTVFavoriteShows,
     
-    // Audio sections
+    // Radio sections
     HomeSectionRadioLatestEpisodes,
     HomeSectionRadioMostPopular,
     HomeSectionRadioLatest,
@@ -45,13 +46,13 @@ typedef NS_ENUM(NSInteger, HomeSection) {
 };
 
 typedef NS_ENUM(NSInteger, TopicSection) {
-    TopicSectionUnknown,
+    TopicSectionUnknown = 0,
     TopicSectionLatest,
     TopicSectionMostPopular
 };
 
 typedef NS_ENUM(NSInteger, ApplicationSection) {
-    ApplicationSectionUnknown,
+    ApplicationSectionUnknown = 0,
     
     ApplicationSectionSearch,
     ApplicationSectionFavorites,
@@ -75,6 +76,9 @@ OBJC_EXPORT HomeSection HomeSectionForApplicationSection(ApplicationSection appl
 OBJC_EXPORT NSString *TitleForApplicationSection(ApplicationSection applicationSection);
 OBJC_EXPORT NSString *TitleForHomeSection(HomeSection homeSection);
 OBJC_EXPORT NSString *TitleForTopicSection(TopicSection topicSection);
+
+OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection);
+OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection);
 
 OBJC_EXPORT void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller);
 OBJC_EXPORT NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval duration);

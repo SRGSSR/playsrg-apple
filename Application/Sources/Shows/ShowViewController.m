@@ -7,6 +7,7 @@
 #import "ShowViewController.h"
 
 #import "ActivityItemSource.h"
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "MediaCollectionViewCell.h"
@@ -173,26 +174,6 @@
     
     SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider latestEpisodesForShowWithURN:self.show.URN maximumPublicationDay:nil completionBlock:completionBlock] requestWithPageSize:pageSize] requestWithPage:page];
     [requestQueue addRequest:request resume:YES];
-}
-
-- (AnalyticsPageType)pageType
-{
-    if (self.show.transmission == SRGTransmissionRadio) {
-        return AnalyticsPageTypeRadio;
-    }
-    else if (self.show.transmission == SRGTransmissionOnline) {
-        return AnalyticsPageTypeOnline;
-    }
-    else {
-        return AnalyticsPageTypeTV;
-    }
-}
-
-- (NSString *)srg_pageViewTitle
-{
-    // Since we sometimes reset the view controller title for display purposes, we need to reliably return the show title
-    // as page title
-    return self.show.title;
 }
 
 #pragma mark Peek and pop
@@ -397,6 +378,19 @@
     if (broadcastInformationURL) {
         [UIApplication.sharedApplication play_openURL:broadcastInformationURL withCompletionHandler:nil];
     }
+}
+
+#pragma mark SRGAnalyticsViewTracking protocols
+
+- (NSString *)srg_pageViewTitle
+{
+    return self.show.title;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    NSString *level1 = (self.show.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelAudio : AnalyticsPageLevelVideo;
+    return @[ AnalyticsPageLevelPlay, level1, AnalyticsPageLevelShow ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

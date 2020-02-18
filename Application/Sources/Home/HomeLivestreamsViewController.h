@@ -7,9 +7,11 @@
 #import "HomeSectionInfo.h"
 #import "MediasViewController.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeLivestreamsViewController : CollectionRequestViewController
+@interface HomeLivestreamsViewController : CollectionRequestViewController <SRGAnalyticsViewTracking>
 
 - (instancetype)initWithHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo;
 

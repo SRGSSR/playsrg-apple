@@ -6,6 +6,7 @@
 
 #import "HomeMediasViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "PageViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -25,8 +26,15 @@
     if (self = [super init]) {
         self.homeSectionInfo = homeSectionInfo;
         
-        NSString *title = TitleForTopicSection(homeSectionInfo.topicSection) ?: homeSectionInfo.title ?: TitleForHomeSection(homeSectionInfo.homeSection);
+        NSString *title = nil;
+        if ([homeSectionInfo.topic isKindOfClass:SRGSubtopic.class]) {
+            title = homeSectionInfo.title;
+        }
+        else {
+            title = TitleForTopicSection(homeSectionInfo.topicSection) ?: TitleForHomeSection(homeSectionInfo.homeSection);
+        }
         self.title = title;
+        
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:nil tag:0];
     }
     return self;
@@ -86,26 +94,48 @@
     }
 }
 
-- (BOOL)srg_isTrackedAutomatically
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
 {
-    // Only tracked if presented directly without containment
-    return ! self.play_pageViewController;
+    SRGBaseTopic *topic = self.homeSectionInfo.topic;
+    if (topic) {
+        if ([topic isKindOfClass:SRGSubtopic.class]) {
+            return topic.title;
+        }
+        else {
+            return AnalyticsPageTitleForTopicSection(self.homeSectionInfo.topicSection);
+        }
+    }
+    else {
+        return AnalyticsPageTitleForHomeSection(self.homeSectionInfo.homeSection);
+    }
 }
 
-- (AnalyticsPageType)pageType
+- (NSArray<NSString *> *)srg_pageViewLevels
 {
-    switch (self.homeSectionInfo.homeSection) {
-        case HomeSectionRadioLatestEpisodes:
-        case HomeSectionRadioMostPopular:
-        case HomeSectionRadioLatest:
-        case HomeSectionRadioLatestVideos: {
-            return AnalyticsPageTypeRadio;
-            break;
+    SRGBaseTopic *topic = self.homeSectionInfo.topic;
+    if (topic) {
+        NSString *level2 = (topic.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelAudio : AnalyticsPageLevelVideo;
+        
+        if ([topic isKindOfClass:SRGSubtopic.class]) {
+            NSString *parentTitle = self.homeSectionInfo.parentTitle;
+            NSAssert(parentTitle != nil, @"Parent information must have been filled for subtopics");
+            return @[ AnalyticsPageLevelPlay, level2, parentTitle ];
         }
-            
-        default: {
-            return AnalyticsPageTypeTV;
-            break;
+        else {
+            return @[ AnalyticsPageLevelPlay, level2, topic.title ];
+        }
+    }
+    else {
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
+        if (radioChannel) {
+            NSString *level2 = (self.homeSectionInfo.homeSection == HomeSectionRadioLatestVideos) ? AnalyticsPageLevelVideo : AnalyticsPageLevelAudio;
+            return @[ AnalyticsPageLevelPlay, level2, radioChannel.name ];
+        }
+        else {
+            return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
         }
     }
 }

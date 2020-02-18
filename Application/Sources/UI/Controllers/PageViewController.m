@@ -248,6 +248,13 @@
     }
 }
 
+#pragma mark SRGAnalyticsContainerViewTracking protocol
+
+- (NSArray<UIViewController *> *)srg_activeChildViewControllers
+{
+    return self.pageViewController ? @[self.pageViewController] : @[];
+}
+
 #pragma mark UIPageViewControllerDataSource protocol
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
