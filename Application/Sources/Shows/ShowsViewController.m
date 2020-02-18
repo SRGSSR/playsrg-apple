@@ -274,6 +274,11 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     }
 }
 
+- (void)automaticallyShowIndexAnimated
+{
+    [self setIndexHidden:NO animated:YES];
+}
+
 #pragma mark UICollectionViewDataSource protocol
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -375,18 +380,24 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(automaticallyShowIndexAnimated) object:nil];
     [self setIndexHidden:YES animated:YES];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (! decelerate) {
+    if (decelerate) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(automaticallyShowIndexAnimated) object:nil];
+        [self performSelector:@selector(automaticallyShowIndexAnimated) withObject:nil afterDelay:0.7 inModes:@[ NSRunLoopCommonModes ]];
+    }
+    else {
         [self setIndexHidden:NO animated:YES];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(automaticallyShowIndexAnimated) object:nil];
     [self setIndexHidden:NO animated:YES];
 }
 
