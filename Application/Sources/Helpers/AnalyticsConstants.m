@@ -31,6 +31,7 @@ AnalyticsPageTitle const AnalyticsPageTitleHistory = @"history";
 AnalyticsPageTitle const AnalyticsPageTitleHome = @"home";
 AnalyticsPageTitle const AnalyticsPageTitleLatest = @"latest";
 AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes = @"latest episodes";
+AnalyticsPageTitle const AnalyticsPageTitleLicense = @"license";
 AnalyticsPageTitle const AnalyticsPageTitleLicenses = @"licenses";
 AnalyticsPageTitle const AnalyticsPageTitleMostPopular = @"most popular";
 AnalyticsPageTitle const AnalyticsPageTitleNotifications = @"notifications";

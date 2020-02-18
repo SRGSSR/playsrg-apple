@@ -489,7 +489,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
 - (BOOL)srg_isTrackedAutomatically
 {
-    return [self.file isEqualToString:@"Root"] || [self.file isEqualToString:@"com.mono0926.LicensePlist"];
+    return [self.file isEqualToString:@"Root"] || [self.file containsString:@"com.mono0926.LicensePlist"];
 }
 
 - (NSString *)srg_pageViewTitle
@@ -501,7 +501,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         return AnalyticsPageTitleLicenses;
     }
     else {
-        return @"";
+        return AnalyticsPageTitleLicense;
     }
 }
 
