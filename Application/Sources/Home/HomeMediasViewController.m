@@ -27,7 +27,7 @@
         self.homeSectionInfo = homeSectionInfo;
         
         NSString *title = nil;
-        if ([self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class]) {
+        if ([homeSectionInfo.topic isKindOfClass:SRGSubtopic.class]) {
             title = homeSectionInfo.title;
         }
         else {
@@ -98,15 +98,10 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
-    
-    if (radioChannel) {
-        return AnalyticsPageTitleForHomeSection(self.homeSectionInfo.homeSection);
-    }
-    else if (self.homeSectionInfo.topic) {
-        if ([self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class]) {
-            return self.homeSectionInfo.topic.title;
+    SRGBaseTopic *topic = self.homeSectionInfo.topic;
+    if (topic) {
+        if ([topic isKindOfClass:SRGSubtopic.class]) {
+            return topic.title;
         }
         else {
             return AnalyticsPageTitleForTopicSection(self.homeSectionInfo.topicSection);
@@ -119,19 +114,29 @@
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
-    
-    if (radioChannel) {
-        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, radioChannel.name ];
-    }
-    else if (self.homeSectionInfo.topic) {
-        NSString *level2 = (self.homeSectionInfo.topic.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelAudio : AnalyticsPageLevelVideo;
-        NSString *level3 = [self.homeSectionInfo.topic isKindOfClass:SRGSubtopic.class] ? self.homeSectionInfo.parentTitle : self.homeSectionInfo.topic.title;
-        return @[ AnalyticsPageLevelPlay, level2, level3 ];
+    SRGBaseTopic *topic = self.homeSectionInfo.topic;
+    if (topic) {
+        NSString *level2 = (topic.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelAudio : AnalyticsPageLevelVideo;
+        
+        if ([topic isKindOfClass:SRGSubtopic.class]) {
+            NSString *parentTitle = self.homeSectionInfo.parentTitle;
+            NSAssert(parentTitle != nil, @"Parent information must have been filled for subtopics");
+            return @[ AnalyticsPageLevelPlay, level2, parentTitle ];
+        }
+        else {
+            return @[ AnalyticsPageLevelPlay, level2, topic.title ];
+        }
     }
     else {
-        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:self.homeSectionInfo.identifier];
+        if (radioChannel) {
+            NSString *level2 = (self.homeSectionInfo.homeSection == HomeSectionRadioLatestVideos) ? AnalyticsPageLevelVideo : AnalyticsPageLevelAudio;
+            return @[ AnalyticsPageLevelPlay, level2, radioChannel.name ];
+        }
+        else {
+            return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
+        }
     }
 }
 

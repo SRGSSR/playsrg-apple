@@ -10,7 +10,6 @@
 #import "ApplicationSettings.h"
 #import "ChannelService.h"
 #import "LiveMediaCollectionViewCell.h"
-#import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "SmartTimer.h"
 #import "UIColor+PlaySRG.h"

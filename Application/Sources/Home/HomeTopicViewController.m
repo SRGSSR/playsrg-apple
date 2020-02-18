@@ -37,10 +37,10 @@
     }
     
     for (SRGSubtopic *subtopic in topic.subtopics) {
-        HomeSectionInfo *subTopicSectionInfo = [[HomeSectionInfo alloc] initWithHomeSection:HomeSectionTVTopics object:subtopic];
-        subTopicSectionInfo.title = subtopic.title;
-        subTopicSectionInfo.parentTitle = topic.title;
-        [viewControllers addObject:[[HomeMediasViewController alloc] initWithHomeSectionInfo:subTopicSectionInfo]];
+        HomeSectionInfo *subtopicSectionInfo = [[HomeSectionInfo alloc] initWithHomeSection:HomeSectionTVTopics object:subtopic];
+        subtopicSectionInfo.title = subtopic.title;
+        subtopicSectionInfo.parentTitle = topic.title;
+        [viewControllers addObject:[[HomeMediasViewController alloc] initWithHomeSectionInfo:subtopicSectionInfo]];
     }
     
     if (self = [super initWithViewControllers:viewControllers.copy]) {
