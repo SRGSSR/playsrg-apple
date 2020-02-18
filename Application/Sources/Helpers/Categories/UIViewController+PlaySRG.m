@@ -276,6 +276,8 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
         // The top view controller might have changed if dismissal occurred
         UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
         [topViewController presentViewController:mediaControlsViewController animated:animated completion:completion];
+        
+        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     };
     
     if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {

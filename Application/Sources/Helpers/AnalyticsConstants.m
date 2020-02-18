@@ -13,6 +13,7 @@ AnalyticsPageLevel const AnalyticsPageLevelApplication = @"application";
 AnalyticsPageLevel const AnalyticsPageLevelAudio = @"audio";
 AnalyticsPageLevel const AnalyticsPageLevelEvent = @"event";
 AnalyticsPageLevel const AnalyticsPageLevelFeature = @"feature";
+AnalyticsPageLevel const AnalyticsPageLevelGoogleCast = @"google cast";
 AnalyticsPageLevel const AnalyticsPageLevelLive = @"live";
 AnalyticsPageLevel const AnalyticsPageLevelPlay = @"play";
 AnalyticsPageLevel const AnalyticsPageLevelPreview = @"preview";
@@ -22,6 +23,7 @@ AnalyticsPageLevel const AnalyticsPageLevelUser = @"user";
 AnalyticsPageLevel const AnalyticsPageLevelVideo = @"video";
 
 AnalyticsPageTitle const AnalyticsPageTitleBetaTesting = @"beta testing";
+AnalyticsPageTitle const AnalyticsPageTitleDevices = @"devices";
 AnalyticsPageTitle const AnalyticsPageTitleDownloads = @"downloads";
 AnalyticsPageTitle const AnalyticsPageTitleEvents = @"events";
 AnalyticsPageTitle const AnalyticsPageTitleFavorites = @"favorites";

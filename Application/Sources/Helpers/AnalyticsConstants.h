@@ -17,6 +17,7 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelApplication;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelAudio;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelEvent;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelFeature;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelGoogleCast;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelLive;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPlay;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPreview;
@@ -31,6 +32,7 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelVideo;
 typedef NSString * AnalyticsPageTitle NS_STRING_ENUM;
 
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleBetaTesting;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDevices;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDownloads;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleEvents;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFavorites;

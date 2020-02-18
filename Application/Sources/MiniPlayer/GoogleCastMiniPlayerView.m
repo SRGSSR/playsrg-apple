@@ -7,10 +7,12 @@
 #import "GoogleCastMiniPlayerView.h"
 
 #import "AccessibilityView.h"
+#import "AnalyticsConstants.h"
 #import "GoogleCastPlaybackButton.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface GoogleCastMiniPlayerView () <AccessibilityViewDelegate>
@@ -142,9 +144,11 @@
         GCKUIExpandedMediaControlsViewController *mediaControlsViewController = [GCKCastContext sharedInstance].defaultExpandedMediaControlsViewController;
         mediaControlsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         [UIApplication.sharedApplication.keyWindow.play_topViewController presentViewController:mediaControlsViewController animated:YES completion:nil];
+        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }
     else {
         [[GCKCastContext sharedInstance] presentCastDialog];
+        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }
 }
 
