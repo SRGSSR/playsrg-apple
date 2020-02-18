@@ -487,9 +487,22 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
 #pragma mark SRGAnalyticsViewTracking protocol
 
+- (BOOL)srg_isTrackedAutomatically
+{
+    return [self.file isEqualToString:@"Root"] || [self.file isEqualToString:@"com.mono0926.LicensePlist"];
+}
+
 - (NSString *)srg_pageViewTitle
 {
-    return [self.file containsString:@"LicensePlist"] ? AnalyticsPageTitleLicenses : AnalyticsPageTitleSettings;
+    if ([self.file isEqualToString:@"Root"]) {
+        return AnalyticsPageTitleSettings;
+    }
+    else if ([self.file isEqualToString:@"com.mono0926.LicensePlist"]) {
+        return AnalyticsPageTitleLicenses;
+    }
+    else {
+        return @"";
+    }
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
