@@ -31,13 +31,13 @@
 "Close" = "Chiudere";
 
 /* Player close button hint */
-"Closes the player and continue playing audio." = "Closes the player and continue playing audio.";
+"Closes the player and continue playing audio." = "Chiude il player ma continua a riprodurre l'audio.";
 
 /* Player close button hint */
-"Closes the player and continue playing in the background." = "Closes the player and continue playing in the background.";
+"Closes the player and continue playing in the background." = "Chiude il player ma continua la riproduzione in background";
 
 /* Player close button hint */
-"Closes the player and continue playing video with AirPlay." = "Closes the player and continue playing video with AirPlay.";
+"Closes the player and continue playing video with AirPlay." = "Chiude il player ma continua la riproduzione con AirPlay.";
 
 /* Delete button label */
 "Delete" = "Elimina";
@@ -85,7 +85,7 @@
 "Opens show details." = "Dettagli del programma.";
 
 /* Mini player action hint */
-"Opens the full screen player" = "Opens the full screen player";
+"Opens the full screen player" = "Player a schermo pieno";
 
 /* Accessibility label for the multi audio badge */
 "Original version" = "Versione originale";
@@ -126,7 +126,7 @@
 "Select regional radio" = "Selezionare radio regionale";
 
 /* Settings button label on home view */
-"Settings" = "Settings";
+"Settings" = "Impostazioni";
 
 /* Share button label on player view */
 "Share" = "Condividi";

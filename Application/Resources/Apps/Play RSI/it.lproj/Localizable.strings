@@ -162,7 +162,7 @@
 "Enable notifications?" = "Abilitare le notifiche?";
 
 /* Title label used to present scheduled livestream medias. Only on test versions. */
-"Event" = "Event";
+"Event" = "Evento";
 
 /* Title label used to present TV events while loading. It appears if no network connection available and no cache available. */
 "Events" = "Eventi";
@@ -245,7 +245,7 @@
 "Media not available yet" = "Media non disponibile";
 
 /* Title displayed at the top of the library view, if no identity service is available */
-"More" = "More";
+"More" = "Altro";
 
 /* Button label to open the show episode page from the long-press menu
    Button label to open the show episode page from the preview window
@@ -355,7 +355,7 @@
 "Previous" = "Precedente";
 
 /* Title displayed at the top of the library view, if identity service is available */
-"Profile" = "Profile";
+"Profile" = "Il mio profilo";
 
 /* [Technical] Title for programmes A-Z page view analytics measurements
    Label to present shows A to Z (radio or TV)

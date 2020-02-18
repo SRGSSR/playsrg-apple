@@ -153,13 +153,13 @@
 "Enable" = "Activer";
 
 /* Title of the alert view to opt-in for background video playback */
-"Enable background video playback?" = "Activer la lecture vidéo en arrière-plan?";
+"Enable background video playback?" = "Activer la lecture vidéo en arrière-plan ?";
 
 /* Title of a button to propose the user to enable notifications in the system settings */
 "Enable in system settings" = "Activer dans Réglages";
 
 /* Question displayed at the top of an alert asking the user to enable notifications */
-"Enable notifications?" = "Activer les notifications?";
+"Enable notifications?" = "Activer les notifications ?";
 
 /* Title label used to present scheduled livestream medias. Only on test versions. */
 "Event" = "Événement";
@@ -203,7 +203,7 @@
 "Keep" = "Garder";
 
 /* Title of the alert view to keep autoplay permanently */
-"Keep autoplay?" = "Garder la lecture automatique?";
+"Keep autoplay?" = "Garder la lecture automatique ?";
 
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Dernière synchronisation : %@";
@@ -253,7 +253,7 @@
 "More episodes" = "Plus d’épisodes";
 
 /* Title of the related content player section */
-"More on this subject" = "Sur ce sujet";
+"More on this subject" = "Pour aller plus loin";
 
 /* Title label used to present the radio most listened / popular audio medias */
 "Most listened to" = "Les plus écoutés";
