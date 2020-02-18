@@ -80,8 +80,8 @@ AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
     });
     
     NSString *title = s_titles[@(homeSection)];
-    NSCAssert(title.length != 0, @"Section with missing page title. Please fix");
-    return title;
+    NSCAssert(title != nil, @"Section with missing page title. Please fix");
+    return title ?: @"";
 }
 
 AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection)
@@ -94,8 +94,8 @@ AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection)
     });
     
     NSString *title = s_titles[@(topicSection)];
-    NSCAssert(title.length != 0, @"Section with missing page title. Please fix");
-    return title;
+    NSCAssert(title != nil, @"Section with missing page title. Please fix");
+    return title ?: @"";
 }
 
 static NSString *AnalyticsBusinessUnitIdentifier(NSString *businessUnitIdentifier)

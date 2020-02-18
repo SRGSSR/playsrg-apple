@@ -4,15 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "AnalyticsConstants.h"
+#import "RadioChannel.h"
+#import "TVChannel.h"
+
 #import <CoreMedia/CoreMedia.h>
 #import <Foundation/Foundation.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGLetterbox/SRGLetterbox.h>
-
-#import "AnalyticsConstants.h"
-#import "RadioChannel.h"
-#import "TVChannel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
