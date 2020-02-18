@@ -301,15 +301,17 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         [self play_setNeedsContentInsetsUpdate];
     };
     
-    if (animated) {
-        [self.view layoutIfNeeded];
-        [UIView animateWithDuration:0.2 animations:^{
-            animations();
+    if (self.view.window) {
+        if (animated) {
             [self.view layoutIfNeeded];
-        }];
-    }
-    else {
-        animations();
+            [UIView animateWithDuration:0.2 animations:^{
+                animations();
+                [self.view layoutIfNeeded];
+            }];
+        }
+        else {
+            animations();
+        }
     }
 }
 
