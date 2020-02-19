@@ -31,13 +31,13 @@
 "Close" = "Schliessen";
 
 /* Player close button hint */
-"Closes the player and continue playing audio." = "Closes the player and continue playing audio.";
+"Closes the player and continue playing audio." = "Schliesst den Player und lässt das Audio weiter abspielen.";
 
 /* Player close button hint */
-"Closes the player and continue playing in the background." = "Closes the player and continue playing in the background.";
+"Closes the player and continue playing in the background." = "Schliesst den Player und stoppt das Abspielen im Hintergrund.";
 
 /* Player close button hint */
-"Closes the player and continue playing video with AirPlay." = "Closes the player and continue playing video with AirPlay.";
+"Closes the player and continue playing video with AirPlay." = "Schliesst den Player und spielt das Video mit AirPlay weiter ab.";
 
 /* Delete button label */
 "Delete" = "Löschen";
@@ -85,7 +85,7 @@
 "Opens show details." = "Öffnet Sendungs-Detailseite";
 
 /* Mini player action hint */
-"Opens the full screen player" = "Opens the full screen player";
+"Opens the full screen player" = "Öffnet den Player";
 
 /* Accessibility label for the multi audio badge */
 "Original version" = "Originalsprache";
@@ -126,7 +126,7 @@
 "Select regional radio" = "Wählen Sie Ihr Regionaljournal";
 
 /* Settings button label on home view */
-"Settings" = "Settings";
+"Settings" = "Einstellungen";
 
 /* Share button label on player view */
 "Share" = "Inhalt teilen";

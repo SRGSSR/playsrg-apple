@@ -245,7 +245,7 @@
 "Media not available yet" = "Media betg disponibel";
 
 /* Title displayed at the top of the library view, if no identity service is available */
-"More" = "More";
+"More" = "Dapli";
 
 /* Button label to open the show episode page from the long-press menu
    Button label to open the show episode page from the preview window
@@ -355,7 +355,7 @@
 "Previous" = "Precedent";
 
 /* Title displayed at the top of the library view, if identity service is available */
-"Profile" = "Profile";
+"Profile" = "Profils";
 
 /* [Technical] Title for programmes A-Z page view analytics measurements
    Label to present shows A to Z (radio or TV)

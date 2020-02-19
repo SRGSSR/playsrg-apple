@@ -31,13 +31,13 @@
 "Close" = "Serrar";
 
 /* Player close button hint */
-"Closes the player and continue playing audio." = "Closes the player and continue playing audio.";
+"Closes the player and continue playing audio." = "Serrar il player e cuntinuar a tadlar l'audio.";
 
 /* Player close button hint */
-"Closes the player and continue playing in the background." = "Closes the player and continue playing in the background.";
+"Closes the player and continue playing in the background." = "Serrar il player e cuntinuar a tadlar l'audio davostiers.";
 
 /* Player close button hint */
-"Closes the player and continue playing video with AirPlay." = "Closes the player and continue playing video with AirPlay.";
+"Closes the player and continue playing video with AirPlay." = "Serrar il player e cuntinuar a guardar il video cun AirPlay.";
 
 /* Delete button label */
 "Delete" = "Stizzar";
@@ -85,7 +85,7 @@
 "Opens show details." = "Arva detagls da program.";
 
 /* Mini player action hint */
-"Opens the full screen player" = "Opens the full screen player";
+"Opens the full screen player" = "Avra il player sin l'entir visur";
 
 /* Accessibility label for the multi audio badge */
 "Original version" = "Versiun originala";
@@ -126,7 +126,7 @@
 "Select regional radio" = "Selecziunai radio regiunal";
 
 /* Settings button label on home view */
-"Settings" = "Settings";
+"Settings" = "Opziuns";
 
 /* Share button label on player view */
 "Share" = "Divida";
