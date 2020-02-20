@@ -668,7 +668,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     UIImage *closeButtonImage = (media.mediaType == SRGMediaTypeAudio || AVAudioSession.srg_isAirPlayActive || ApplicationSettingBackgroundVideoPlaybackEnabled()) ? [UIImage imageNamed:@"arrow_down-48"] : [UIImage imageNamed:@"close-48"];
     [self.closeButton setImage:closeButtonImage forState:UIControlStateNormal];
     
-    self.relatedContentsTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.relatedContentsTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
     self.relatedContentsTitleLabel.text = NSLocalizedString(@"More on this subject", @"Title of the related content player section");
     
     // Cleanup related content views first
@@ -855,7 +855,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     UIImage *youthProtectionColorImage = YouthProtectionImageForColor(media.youthProtectionColor);
     if (youthProtectionColorImage) {
         self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
-        self.youthProtectionColorLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.youthProtectionColorLabel.font = [UIFont srg_italicFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         self.youthProtectionColorLabel.text = SRGMessageForYouthProtectionColor(media.youthProtectionColor);
         self.youthProtectionColorSpacerView.hidden = NO;
         [self.youthProtectionColorStackView play_setHidden:NO];
