@@ -8,7 +8,6 @@
   "appStoreProductIdentifier": 920785201,
   "playURL": "https://play.swissinfo.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
-  "feedbackURL": "https://play.typeform.com/to/bR8TQq",
   "videoHomeSections": "tvTrending,tvFavoriteShows,tvTopics",
   "tvTrendingEpisodesOnly": true,
   "tvTrendingEditorialLimit": 2,

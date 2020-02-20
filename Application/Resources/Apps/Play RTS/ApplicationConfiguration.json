@@ -8,7 +8,6 @@
   "appStoreProductIdentifier": 920754415,
   "playURL": "https://www.rts.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
-  "feedbackURL": "https://play.typeform.com/to/rwxtud",
   "identityWebserviceURL": "https://hummingbird.rts.ch/api/profile",
   "identityWebsiteURL": "https://www.rts.ch/profile",
   "userDataServiceURL": "https://profil.rts.ch/api",

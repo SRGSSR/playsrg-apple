@@ -8,7 +8,6 @@
   "appStoreProductIdentifier": 920753497,
   "playURL": "https://www.rsi.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
-  "feedbackURL": "https://play.typeform.com/to/yrmKKf",
   "videoHomeSections": "tvTrending,tvShowsAccess,tvFavoriteShows,tvEvents,tvTopics",
   "liveHomeSections": "tvLive,radioLive",
   "tvTrendingEpisodesOnly": false,
