@@ -140,12 +140,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *nextProgramLabel;
 @property (nonatomic, weak) IBOutlet UILabel *channelLabel;
 
-@property (nonatomic, weak) IBOutlet UIView *showTopLineSpacerView;
+@property (nonatomic, weak) IBOutlet UIView *showWrapperView;
 @property (nonatomic, weak) IBOutlet UIStackView *showStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *showThumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *showLabel;
+@property (nonatomic, weak) IBOutlet UILabel *numberOfEpisodesLabel;
 @property (nonatomic, weak) IBOutlet UIButton *favoriteButton;
-@property (nonatomic, weak) IBOutlet UIView *showBottomLineSpacerView;
 
 @property (nonatomic, weak) IBOutlet UIView *radioHomeView;
 @property (nonatomic, weak) IBOutlet UIButton *radioHomeButton;
@@ -319,9 +319,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.view.backgroundColor = UIColor.play_blackColor;
     
+    self.showWrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.showWrapperView.layer.cornerRadius = 4.f;
+    self.showWrapperView.layer.masksToBounds = YES;
+    
     self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.showThumbnailImageView.layer.cornerRadius = 4.f;
-    self.showThumbnailImageView.layer.masksToBounds = YES;
     
     self.pullDownGestureRecognizer.delegate = self;
     
@@ -891,16 +893,17 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
         self.showLabel.text = show.title;
         
+        self.numberOfEpisodesLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        
+        NSInteger numberOfEpisodes = show.numberOfEpisodes;
+        self.numberOfEpisodesLabel.text = (numberOfEpisodes != 0) ? [NSString stringWithFormat:@"%@ episodes", @(show.numberOfEpisodes)] : nil;
+        
         [self updateFavoriteStatusForShow:show];
         
-        self.showTopLineSpacerView.hidden = NO;
         [self.showStackView play_setHidden:NO];
-        self.showBottomLineSpacerView.hidden = NO;
     }
     else {
-        self.showTopLineSpacerView.hidden = YES;
         [self.showStackView play_setHidden:YES];
-        self.showBottomLineSpacerView.hidden = YES;
     }
 }
 
