@@ -36,8 +36,6 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 @property (nonatomic) IBOutlet NSLayoutConstraint *logoImageViewRatio16_9Constraint; // Need to retain it, because active state removes it
 @property (nonatomic) IBOutlet NSLayoutConstraint *logoImageViewRatioBigLandscapeScreenConstraint; // Need to retain it, because active state removes it
 
-@property (nonatomic, assign) BOOL favoriteState;
-
 @end
 
 @implementation ShowHeaderView
@@ -88,8 +86,8 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     self.logoImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
                                                      withScale:ImageScaleLarge];
     
-    self.favoriteImageButton.accessibilityElementsHidden = YES;
-    self.subscriptionImageButton.accessibilityElementsHidden = YES;
+    self.favoriteImageButton.isAccessibilityElement = NO;
+    self.subscriptionImageButton.isAccessibilityElement = NO;
 }
 
 - (void)layoutSubviews
@@ -153,20 +151,18 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (void)updateSubscriptionStatus
 {
-    BOOL isFavorite =  FavoritesContainsShow(self.show);
-    self.subscriptionImageButton.hidden = ! isFavorite;
-    self.subscriptionLabelButton.hidden = ! isFavorite;
+    BOOL isFavorite = FavoritesContainsShow(self.show);
+    self.subscriptionImageButton.enabled = isFavorite;
+    self.subscriptionLabelButton.enabled = isFavorite;
     
-    if (! isFavorite) {
-        return;
-    }
+    UIColor *textColor = isFavorite ? UIColor.whiteColor : UIColor.grayColor;
     
     if (PushService.sharedService.enabled) {
         BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
         [self.subscriptionImageButton setImage:subscribed ? [UIImage imageNamed:@"show_subscription_full-22"] : [UIImage imageNamed:@"show_subscription-22"] forState:UIControlStateNormal];
         
         NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
-                                      NSForegroundColorAttributeName : UIColor.whiteColor };
+                                      NSForegroundColorAttributeName : textColor };
         NSString *title = [subscribed ? NSLocalizedString(@"Notified", @"Subscription label when notification enabled in the show view") : NSLocalizedString(@"Notify me", @"Subscription label to be notified in the show view") uppercaseString];
         [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
                                                                                          attributes:attributes] forState:UIControlStateNormal];
@@ -176,7 +172,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
         [self.subscriptionImageButton setImage:[UIImage imageNamed:@"show_subscription_disabled-22"] forState:UIControlStateNormal];
         
         NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
-                                      NSForegroundColorAttributeName : UIColor.whiteColor };
+                                      NSForegroundColorAttributeName : textColor };
         [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:[NSLocalizedString(@"Notify me", @"Subscription label to be notified in the show view") uppercaseString]
                                                                                          attributes:attributes] forState:UIControlStateNormal];
         self.subscriptionLabelButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
