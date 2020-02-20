@@ -162,14 +162,21 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jym-bi-kal">
                                                 <rect key="frame" x="10" y="78" width="386" height="50"/>
                                                 <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKh-XI-6iG" userLabel="Spacer View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="168" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UTu-5E-zIg">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
+                                                        <rect key="frame" x="168" y="0.0" width="50" height="50"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEy-WW-aPE" userLabel="Spacer View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="386" height="50"/>
+                                                        <rect key="frame" x="218" y="0.0" width="168" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="CKh-XI-6iG" firstAttribute="width" secondItem="PEy-WW-aPE" secondAttribute="width" id="bkS-ib-XGW"/>
+                                                </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PeJ-A5-wlQ" userLabel="Title Label">
                                                 <rect key="frame" x="10" y="136" width="386" height="20.5"/>
