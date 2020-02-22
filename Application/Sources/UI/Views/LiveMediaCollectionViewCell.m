@@ -48,36 +48,26 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 + (CGFloat)heightForMedia:(SRGMedia *)media withWidth:(CGFloat)width
 {
-    LiveMediaCollectionViewCell *cell = [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
-    cell.media = media;
+    static NSDictionary<NSString *, NSNumber *> *s_textHeigths;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_textHeigths = @{ UIContentSizeCategoryExtraSmall : @63,
+                           UIContentSizeCategorySmall : @65,
+                           UIContentSizeCategoryMedium : @67,
+                           UIContentSizeCategoryLarge : @70,
+                           UIContentSizeCategoryExtraLarge : @75,
+                           UIContentSizeCategoryExtraExtraLarge : @82,
+                           UIContentSizeCategoryExtraExtraExtraLarge : @90,
+                           UIContentSizeCategoryAccessibilityMedium : @90,
+                           UIContentSizeCategoryAccessibilityLarge : @90,
+                           UIContentSizeCategoryAccessibilityExtraLarge : @90,
+                           UIContentSizeCategoryAccessibilityExtraExtraLarge : @90,
+                           UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @90 };
+    });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    NSString *key = [NSString stringWithFormat:@"%@%@%@", cell.titleLabel.text, contentSizeCategory, @(width)];
-    NSNumber *cachedHeight = s_cachedHeights[key];
-    if (cachedHeight) {
-        return cachedHeight.doubleValue;
-    }
-    
-    // Force autolayout with correct frame width so that the layout is accurate
-    cell.frame = CGRectMake(CGRectGetMinX(cell.frame), CGRectGetMinY(cell.frame), width, CGRectGetHeight(cell.frame));
-    [cell setNeedsLayout];
-    [cell layoutIfNeeded];
-    
-    // Return the minimum size which satisfies the constraints. Put a strong requirement on width and properly let the height
-    // adjust
-    // For an explanation, see http://titus.io/2015/01/13/a-better-way-to-autosize-in-ios-8.html
-    CGSize fittingSize = UILayoutFittingCompressedSize;
-    fittingSize.width = width;
-    CGFloat height = [cell systemLayoutSizeFittingSize:fittingSize
-                         withHorizontalFittingPriority:UILayoutPriorityRequired
-                               verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height;
-    
-    if (! s_cachedHeights) {
-        s_cachedHeights = [NSMutableDictionary dictionary];
-    }
-    s_cachedHeights[key] = @(height);
-    
-    return height;
+    CGFloat minTextHeight = s_textHeigths[contentSizeCategory].floatValue;
+    return ceilf(width * 9.f / 16.f + minTextHeight);
 }
 
 #pragma mark Overrides
