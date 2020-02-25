@@ -243,7 +243,6 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     ApplicationSettingSetLastOpenedTabBarItemIdentifier(selectedViewController.tabBarItem.tag);
 }
 
-
 #pragma mark Layout
 
 - (void)updateLayoutAnimated:(BOOL)animated
@@ -301,17 +300,16 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         [self play_setNeedsContentInsetsUpdate];
     };
     
-    if (self.view.window) {
-        if (animated) {
-            [self.view layoutIfNeeded];
-            [UIView animateWithDuration:0.2 animations:^{
-                animations();
-                [self.view layoutIfNeeded];
-            }];
-        }
-        else {
+    // Only animate if the view is part of a view hierarchy
+    if (animated && self.view.window) {
+        [self.view layoutIfNeeded];
+        [UIView animateWithDuration:0.2 animations:^{
             animations();
-        }
+            [self.view layoutIfNeeded];
+        }];
+    }
+    else {
+        animations();
     }
 }
 

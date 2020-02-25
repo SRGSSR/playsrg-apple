@@ -11,7 +11,6 @@
 #import "ChannelService.h"
 #import "LiveMediaCollectionViewCell.h"
 #import "PageViewController.h"
-#import "SmartTimer.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -26,8 +25,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 @property (nonatomic) NSMutableArray<SRGMedia *> *pendingMedias;
 @property (nonatomic) ListRequestPageCompletionHandler completionHandler;
-
-@property (nonatomic) SmartTimer *updateTimer;
 
 @end
 
@@ -57,15 +54,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 }
 
 #pragma clang diagnostic pop
-
-#pragma mark Getters and setters
-
-- (void)setUpdateTimer:(SmartTimer *)updateTimer
-{
-    [_updateTimer invalidate];
-    _updateTimer = updateTimer;
-    [updateTimer resume];
-}
 
 #pragma mark View lifecycle
 
@@ -106,24 +94,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusChanged
                                              object:nil];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    @weakify(self)
-    self.updateTimer = [SmartTimer timerWithTimeInterval:5. repeats:YES background:NO queue:NULL block:^{
-        @strongify(self)
-        [self.collectionView reloadData];
-    }];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    self.updateTimer = nil;       // Invalidate timer
 }
 
 #pragma mark Rotation

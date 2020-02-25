@@ -270,29 +270,22 @@
 
 #pragma mark UI
 
-// Work around iOS autolayout bug (uninstalled constraints still active and conflicting at runtime)
-// See http://stackoverflow.com/a/27697726/760435
-// and http://stackoverflow.com/questions/26023201/why-do-i-get-an-autolayout-error-on-a-constraint-that-should-not-be-installed-fo
-//
-// This is visible in layouts which are quite different and for which uninstalled constraints, still
-// active, will incorrectly conflict at runtime.
-//
-// To fix:
-//   - Create an outlet collection for each size class for which a specialization has been defined
-//   - In IB, associate each constraint which is not installed for all size classes with the corresponding outlet
-//     collection(s)
-//   - Implement the following method to disable those constraints manually
-//   - Run. If conflicts still remain, lower priorities of remaining conflicting constraints
 - (void)updateActiveConstraints
 {
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
         for (NSLayoutConstraint *layoutConstraint in self.allSizeLayoutConstraints) {
-            layoutConstraint.active = NO;
+            layoutConstraint.priority = 100;
+        }
+        for (NSLayoutConstraint *layoutConstraint in self.compactRegularLayoutConstraints) {
+            layoutConstraint.priority = 999;
         }
     }
     else {
+        for (NSLayoutConstraint *layoutConstraint in self.allSizeLayoutConstraints) {
+            layoutConstraint.priority = 999;
+        }
         for (NSLayoutConstraint *layoutConstraint in self.compactRegularLayoutConstraints) {
-            layoutConstraint.active = NO;
+            layoutConstraint.priority = 100;
         }
     }
 }
