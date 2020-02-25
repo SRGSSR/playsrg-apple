@@ -73,7 +73,7 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
                                  UIContentSizeCategorySmall : @35,
                                  UIContentSizeCategoryMedium : @40,
                                  UIContentSizeCategoryLarge : @45,
-                                 UIContentSizeCategoryExtraLarge : @40,
+                                 UIContentSizeCategoryExtraLarge : @45,
                                  UIContentSizeCategoryExtraExtraLarge : @45,
                                  UIContentSizeCategoryExtraExtraExtraLarge : @50,
                                  UIContentSizeCategoryAccessibilityMedium : @50,
