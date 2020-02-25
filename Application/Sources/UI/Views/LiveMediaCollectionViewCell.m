@@ -226,7 +226,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     SRGAppearanceFontTextStyle subtitleTextStyle = SRGAppearanceFontTextStyleSubtitle;
     ImageScale imageScale = ImageScaleMedium;
     
-    self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:subtitleTextStyle];
+    self.subtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:subtitleTextStyle];
     
     [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
     
