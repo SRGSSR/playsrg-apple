@@ -791,7 +791,9 @@ static void *s_kvoContext = &s_kvoContext;
     version = [version componentsSeparatedByString:@"-"].firstObject;
 #endif
     URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"package" value:bundleIdentifier],
-                                  [NSURLQueryItem queryItemWithName:@"version" value:version] ];
+                                  [NSURLQueryItem queryItemWithName:@"version" value:version],
+                                  [NSURLQueryItem queryItemWithName:@"platform" value:UIDevice.currentDevice.systemName],
+                                  [NSURLQueryItem queryItemWithName:@"platform_version" value:UIDevice.currentDevice.systemVersion] ];
     
     [[SRGRequest objectRequestWithURLRequest:[NSURLRequest requestWithURL:URLComponents.URL] session:NSURLSession.sharedSession parser:^id _Nullable(NSData * _Nonnull data, NSError * _Nullable __autoreleasing * _Nullable pError) {
         NSDictionary *JSONDictionary = SRGNetworkJSONDictionaryParser(data, pError);
