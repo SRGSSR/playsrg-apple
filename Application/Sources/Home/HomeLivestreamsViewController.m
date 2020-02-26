@@ -36,6 +36,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     if (self = [super init]) {
         self.homeSectionInfo = homeSectionInfo;
+        self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
         
         NSString *title = TitleForHomeSection(homeSectionInfo.homeSection);
         self.title = title;
@@ -63,6 +64,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     view.backgroundColor = UIColor.play_blackColor;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     collectionViewLayout.minimumLineSpacing = 20.f;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
@@ -73,18 +75,16 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     [view addSubview:collectionView];
     self.collectionView = collectionView;
     
+    NSString *liveCellIdentifier = NSStringFromClass(LiveMediaCollectionViewCell.class);
+    UINib *liveCellNib = [UINib nibWithNibName:liveCellIdentifier bundle:nil];
+    [collectionView registerNib:liveCellNib forCellWithReuseIdentifier:liveCellIdentifier];
+    
     self.view = view;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
-    
-    NSString *liveCellIdentifier = NSStringFromClass(LiveMediaCollectionViewCell.class);
-    UINib *liveCellNib = [UINib nibWithNibName:liveCellIdentifier bundle:nil];
-    [self.collectionView registerNib:liveCellNib forCellWithReuseIdentifier:liveCellIdentifier];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(channelServiceDidUpdateChannels:)

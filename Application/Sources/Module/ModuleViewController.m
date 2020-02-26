@@ -46,6 +46,8 @@
     view.backgroundColor = UIColor.play_blackColor;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
     collectionView.backgroundColor = UIColor.clearColor;
     collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
@@ -53,6 +55,10 @@
     collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [view addSubview:collectionView];
     self.collectionView = collectionView;
+    
+    NSString *headerIdentifier = NSStringFromClass(ModuleHeaderView.class);
+    UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
+    [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
     self.view = view;
 }
@@ -70,10 +76,6 @@
         shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
         self.navigationItem.rightBarButtonItems = @[ shareButtonItem ];
     }
-    
-    NSString *headerIdentifier = NSStringFromClass(ModuleHeaderView.class);
-    UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
-    [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
     [self updateAppearanceForSize:self.view.frame.size];
     

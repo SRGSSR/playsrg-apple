@@ -61,6 +61,7 @@ static const CGFloat kLayoutMinimumLineSpacing = 10.f;
         self.wrapperView = wrapperView;
         
         UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         collectionViewLayout.minimumLineSpacing = kLayoutMinimumLineSpacing;
         collectionViewLayout.minimumInteritemSpacing = kLayoutMinimumInteritemSpacing;
         
@@ -81,7 +82,7 @@ static const CGFloat kLayoutMinimumLineSpacing = 10.f;
         
         NSString *showCellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
         UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
-        [self.collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
+        [collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
     }
     return self;
 }

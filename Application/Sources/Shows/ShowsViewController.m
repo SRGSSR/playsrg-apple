@@ -49,6 +49,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     if (self = [super init]) {
         self.radioChannel = radioChannel;
         self.initialAlphabeticalIndex = alphabeticalIndex;
+        self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
         
         if (@available(iOS 10, *)) {
             self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];      // Only available for iOS 10 and above
@@ -79,6 +80,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     view.backgroundColor = UIColor.play_blackColor;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     collectionViewLayout.minimumInteritemSpacing = 10.f;
     collectionViewLayout.minimumLineSpacing = 10.f;
     collectionViewLayout.sectionHeadersPinToVisibleBounds = YES;
@@ -100,22 +102,15 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     [view addSubview:collectionIndexView];
     self.collectionIndexView = collectionIndexView;
     
-    self.view = view;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
-    
     NSString *cellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:cellIdentifier];
+    [collectionView registerNib:cellNib forCellWithReuseIdentifier:cellIdentifier];
     
     NSString *headerIdentifier = NSStringFromClass(TranslucentTitleHeaderView.class);
     UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
-    [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
+    [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
+    
+    self.view = view;
 }
 
 - (void)viewWillAppear:(BOOL)animated
