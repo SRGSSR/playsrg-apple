@@ -619,20 +619,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     });
 }
 
-- (void)userActivityWasContinued:(NSUserActivity *)userActivity
-{
-    if ([userActivity isEqual:self.userActivity]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.letterboxController pause];
-            [Banner showWithStyle:BannerStyleInfo
-                          message:NSLocalizedString(@"Playback has resumed on another device.", @"Notification message when a media is paused due to Handoff activity.")
-                            image:nil
-                           sticky:NO
-                 inViewController:self];
-        });
-    }
-}
-
 #pragma mark Handoff
 
 - (void)synchronizeUserActivity:(NSUserActivity *)userActivity
