@@ -20,7 +20,7 @@ xcuserdata
 /fastlane/last-nightlies-success-git-commit-hash.txt
 /fastlane/Preview.html
 /fastlane/report.xml
-/fastlane/screenshots/**/*.png
+/fastlane/screenshots
 /fastlane/test_output
 
 /Pods
