@@ -1733,6 +1733,7 @@
 		08AF947E217D27E40028B082 /* ActivityItemSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityItemSource.h; sourceTree = "<group>"; };
 		08AF947F217D27E40028B082 /* ActivityItemSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityItemSource.m; sourceTree = "<group>"; };
 		08B6F7E5210CF8660097EF8B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		08B77A402409BDF200A3BC3B /* Play Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play Application.xcconfig"; sourceTree = "<group>"; };
 		08BAABD71E7613F0007644D7 /* HomeMediasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediasViewController.h; sourceTree = "<group>"; };
 		08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediasViewController.m; sourceTree = "<group>"; };
 		08BDB5B1228D520000335898 /* PushService+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushService+Private.h"; sourceTree = "<group>"; };
@@ -2944,6 +2945,7 @@
 		6F0136DF21395B8400B95405 /* Xcode */ = {
 			isa = PBXGroup;
 			children = (
+				08B77A402409BDF200A3BC3B /* Play Application.xcconfig */,
 				6F1EBE19222EBB7D003E0722 /* Play RSI.appstore.xcconfig */,
 				6F1EBE13222EBB7C003E0722 /* Play RSI.beta.xcconfig */,
 				6F1EBE0F222EBB7C003E0722 /* Play RSI.debug.xcconfig */,
@@ -6549,7 +6551,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Application/Sources/Bridges/Play-ObjectiveC-Bridge.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				URL_SCHEME = "$(URL_BASE_SCHEME)-debug";
 			};
@@ -6610,7 +6611,6 @@
 				MARKETING_VERSION_SUFFIX = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Application/Sources/Bridges/Play-ObjectiveC-Bridge.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				URL_SCHEME = "$(URL_BASE_SCHEME)";
 				VALIDATE_PRODUCT = YES;
@@ -6966,7 +6966,6 @@
 				MARKETING_VERSION_SUFFIX = "-beta";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Application/Sources/Bridges/Play-ObjectiveC-Bridge.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				URL_SCHEME = "$(URL_BASE_SCHEME)-beta";
 				VALIDATE_PRODUCT = YES;
@@ -7178,7 +7177,6 @@
 				MARKETING_VERSION_SUFFIX = "-nightly";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Application/Sources/Bridges/Play-ObjectiveC-Bridge.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				URL_SCHEME = "$(URL_BASE_SCHEME)-nightly";
 				VALIDATE_PRODUCT = YES;
