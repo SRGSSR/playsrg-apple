@@ -472,7 +472,7 @@ name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
 name: srgcontentprotection-apple, nameSpecified: , owner: SRGSSR, version: 4ae37fa
 
-name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 6f42a0b
+name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 02fa602
 
 name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: b1c8d80
 

@@ -9,7 +9,6 @@
 #import "HomeMediaCollectionHeaderView.h"
 #import "HomeMediaCollectionViewCell.h"
 #import "MediaPlayerViewController.h"
-#import "SRGBaseTopic+PlaySRG.h"
 #import "UICollectionView+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -242,7 +241,7 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (self.homeSectionInfo.module || self.homeSectionInfo.topic.imageURL) {
+    if (self.homeSectionInfo.module || self.homeSectionInfo.topic.title) {
         CGSize size = [self collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
         size.width += HomeStandardMargin;
         return size;
