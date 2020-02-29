@@ -377,6 +377,16 @@
 		08B77ACC240A7E3200A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
 		08B77ADA240A7E5000A3BC3B /* ApplicationScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */; };
 		08B77ADB240A7E5000A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
+		08B77AF0240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08B77AF1240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08B77AF2240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08B77AF3240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08B77AF4240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08B77AF5240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08B77AF6240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08B77AF7240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08B77AF8240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08B77AF9240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
 		08BAABDA1E7613F0007644D7 /* HomeMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */; };
 		08BAABDC1E76141E007644D7 /* HomeMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */; };
 		08BAABDE1E76141F007644D7 /* HomeMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */; };
@@ -1787,6 +1797,10 @@
 		08B77AC3240A78F200A3BC3B /* Play RSI screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RSI screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08B77AD4240A7E3200A3BC3B /* Play RTR screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RTR screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08B77AE3240A7E5000A3BC3B /* Play SWI screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SWI screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08B77AEE240A86FC00A3BC3B /* AccessibilityIdentifierConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessibilityIdentifierConstants.h; sourceTree = "<group>"; };
+		08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessibilityIdentifierConstants.m; sourceTree = "<group>"; };
+		08B77AFB240A8D0A00A3BC3B /* Screenshots-ObjectiveC-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Screenshots-ObjectiveC-Bridge.h"; sourceTree = "<group>"; };
+		08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Screenshots.xcconfig; sourceTree = "<group>"; };
 		08BAABD71E7613F0007644D7 /* HomeMediasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediasViewController.h; sourceTree = "<group>"; };
 		08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediasViewController.m; sourceTree = "<group>"; };
 		08BDB5B1228D520000335898 /* PushService+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushService+Private.h"; sourceTree = "<group>"; };
@@ -2753,6 +2767,7 @@
 		08B77A592409C48700A3BC3B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				08B77AFA240A8D0A00A3BC3B /* Bridges */,
 				08B77A5B2409C48700A3BC3B /* Helpers */,
 				08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */,
 			);
@@ -2765,6 +2780,14 @@
 				08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		08B77AFA240A8D0A00A3BC3B /* Bridges */ = {
+			isa = PBXGroup;
+			children = (
+				08B77AFB240A8D0A00A3BC3B /* Screenshots-ObjectiveC-Bridge.h */,
+			);
+			path = Bridges;
 			sourceTree = "<group>";
 		};
 		08C33ED323CB5C6500D422C1 /* Protocols */ = {
@@ -3094,6 +3117,7 @@
 				6F1EBE12222EBB7C003E0722 /* Play SWI.beta.xcconfig */,
 				6F1EBE14222EBB7D003E0722 /* Play SWI.debug.xcconfig */,
 				6F1EBE16222EBB7D003E0722 /* Play SWI.nightly.xcconfig */,
+				08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */,
 			);
 			path = Xcode;
 			sourceTree = "<group>";
@@ -3346,6 +3370,8 @@
 		6FAAF77B20CABA3A00BB58A3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				08B77AEE240A86FC00A3BC3B /* AccessibilityIdentifierConstants.h */,
+				08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */,
 				6FAAF78620CABC0D00BB58A3 /* NSFileManager+PlaySRG.h */,
 				6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */,
 			);
@@ -3975,23 +4001,28 @@
 					08B77A442409C06000A3BC3B = {
 						CreatedOnToolsVersion = 11.3.1;
 						DevelopmentTeam = VMGRRW6SG7;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 08C68D881D38D6F400BB8AAA;
 					};
 					08B77AA42409E0A300A3BC3B = {
 						DevelopmentTeam = VMGRRW6SG7;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 					};
 					08B77AB6240A78F200A3BC3B = {
 						DevelopmentTeam = VMGRRW6SG7;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 					};
 					08B77AC7240A7E3200A3BC3B = {
 						DevelopmentTeam = VMGRRW6SG7;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 					};
 					08B77AD6240A7E5000A3BC3B = {
 						DevelopmentTeam = VMGRRW6SG7;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 					};
 					08C68D881D38D6F400BB8AAA = {
@@ -5725,6 +5756,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B77A5D2409C48700A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77AF5240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				08B77A5E2409C48700A3BC3B /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5734,6 +5766,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B77AA82409E0A300A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77AF6240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				08B77AA92409E0A300A3BC3B /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5743,6 +5776,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B77ABA240A78F200A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77AF7240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				08B77ABB240A78F200A3BC3B /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5752,6 +5786,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B77ACB240A7E3200A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77AF8240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				08B77ACC240A7E3200A3BC3B /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5761,6 +5796,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B77ADA240A7E5000A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77AF9240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				08B77ADB240A7E5000A3BC3B /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5915,6 +5951,7 @@
 				6F40920022DCF43D005F3850 /* Previewing.m in Sources */,
 				6FDF08E6218B126700B2AF2C /* Onboarding.m in Sources */,
 				0821D53E227F5ED300FC091F /* DeepLinkService.m in Sources */,
+				08B77AF0240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				0875851823A0025F00FA7207 /* LibraryTableViewCell.m in Sources */,
 				081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */,
 				087584EF23A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
@@ -6063,6 +6100,7 @@
 				6FDF08EC218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8B1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
+				08B77AF1240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				0875851423A0025F00FA7207 /* LibraryAccountHeaderView.m in Sources */,
 				6F4760821EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F023A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
@@ -6224,6 +6262,7 @@
 				6FDF08ED218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8C1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
+				08B77AF2240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				0875851523A0025F00FA7207 /* LibraryAccountHeaderView.m in Sources */,
 				6F4760891EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F123A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
@@ -6385,6 +6424,7 @@
 				6FDF08EE218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F556B3B1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8D1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
+				08B77AF3240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				0875851623A0025F00FA7207 /* LibraryAccountHeaderView.m in Sources */,
 				6F4760901EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F223A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
@@ -6546,6 +6586,7 @@
 				6FDF08EF218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F556B3C1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8E1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
+				08B77AF4240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				0875851723A0025F00FA7207 /* LibraryAccountHeaderView.m in Sources */,
 				6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F323A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
@@ -6842,10 +6883,12 @@
 /* Begin XCBuildConfiguration section */
 		08B77A4D2409C06000A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -6854,6 +6897,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -6867,12 +6911,14 @@
 		};
 		08B77A4E2409C06000A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -6882,6 +6928,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
@@ -6894,12 +6941,14 @@
 		};
 		08B77A4F2409C06000A3BC3B /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -6909,6 +6958,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -6921,12 +6971,14 @@
 		};
 		08B77A502409C06000A3BC3B /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -6936,6 +6988,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -6948,10 +7001,12 @@
 		};
 		08B77AAD2409E0A300A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -6960,6 +7015,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -6973,12 +7029,14 @@
 		};
 		08B77AAE2409E0A300A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -6988,6 +7046,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
@@ -7000,12 +7059,14 @@
 		};
 		08B77AAF2409E0A300A3BC3B /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7015,6 +7076,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -7027,12 +7089,14 @@
 		};
 		08B77AB02409E0A300A3BC3B /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7042,6 +7106,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -7054,10 +7119,12 @@
 		};
 		08B77ABF240A78F200A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -7066,6 +7133,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -7079,12 +7147,14 @@
 		};
 		08B77AC0240A78F200A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7094,6 +7164,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
@@ -7106,12 +7177,14 @@
 		};
 		08B77AC1240A78F200A3BC3B /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7121,6 +7194,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -7133,12 +7207,14 @@
 		};
 		08B77AC2240A78F200A3BC3B /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7148,6 +7224,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -7160,10 +7237,12 @@
 		};
 		08B77AD0240A7E3200A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -7172,6 +7251,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -7185,12 +7265,14 @@
 		};
 		08B77AD1240A7E3200A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7200,6 +7282,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
@@ -7212,12 +7295,14 @@
 		};
 		08B77AD2240A7E3200A3BC3B /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7227,6 +7312,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -7239,12 +7325,14 @@
 		};
 		08B77AD3240A7E3200A3BC3B /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7254,6 +7342,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -7266,10 +7355,12 @@
 		};
 		08B77ADF240A7E5000A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -7278,6 +7369,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -7291,12 +7383,14 @@
 		};
 		08B77AE0240A7E5000A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7306,6 +7400,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
@@ -7318,12 +7413,14 @@
 		};
 		08B77AE1240A7E5000A3BC3B /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7333,6 +7430,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -7345,12 +7443,14 @@
 		};
 		08B77AE2240A7E5000A3BC3B /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7360,6 +7460,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";

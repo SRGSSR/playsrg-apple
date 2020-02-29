@@ -29,19 +29,19 @@ class ApplicationScreenshots: XCTestCase {
     func testSnapshots() {
         let tabBarsQuery = XCUIApplication().tabBars
         
-        let videosTabBarItemQuery = tabBarsQuery.buttons["videosTabBarItem"]
+        let videosTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.videosTabBarItem.rawValue]
         if videosTabBarItemQuery.exists {
             videosTabBarItemQuery.tap()
             snapshot("1-VideosHomeScreen")
         }
         
-        let audiosTabBarItemQuery =  tabBarsQuery.buttons["audiosTabBarItem"]
+        let audiosTabBarItemQuery =  tabBarsQuery.buttons[AccessibilityIdentifier.audiosTabBarItem.rawValue]
         if  audiosTabBarItemQuery.exists {
             audiosTabBarItemQuery.tap()
             snapshot("2-AudiosHomeScreen")
         }
         
-        let livestreamsTabBarItemQuery =  tabBarsQuery.buttons["livestreamsTabBarItem"]
+        let livestreamsTabBarItemQuery =  tabBarsQuery.buttons[AccessibilityIdentifier.livestreamsTabBarItem.rawValue]
         if  livestreamsTabBarItemQuery.exists {
             livestreamsTabBarItemQuery.tap()
             snapshot("3-LiveHomeScreen")
