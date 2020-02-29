@@ -51,7 +51,9 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
         UIViewController *videosViewController = [[HomeViewController alloc] initWithRadioChannel:nil];
         [viewControllers addObject:videosViewController];
-        [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos]];
+        UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos];
+        videosTabBarItem.accessibilityIdentifier = @"videosTabBarItem";
+        [tabBarItems addObject:videosTabBarItem];
         
         UIViewController *audiosViewController = nil;
         NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioChannels;
@@ -65,7 +67,9 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         if (audiosViewController) {
             [viewControllers addObject:audiosViewController];
-            [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:audiosViewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios]];
+            UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:audiosViewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios];
+            audiosTabBarItem.accessibilityIdentifier = @"audiosTabBarItem";
+            [tabBarItems addObject:audiosTabBarItem];
         }
         
         UIViewController *livestreamsViewController = nil;
@@ -81,17 +85,23 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         if (livestreamsViewController) {
             [viewControllers addObject:livestreamsViewController];
-            [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:livestreamsViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams]];
+            UITabBarItem *livestreamsTabBarItem = [[UITabBarItem alloc] initWithTitle:livestreamsViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
+            livestreamsTabBarItem.accessibilityIdentifier = @"livestreamsTabBarItem";
+            [tabBarItems addObject:livestreamsTabBarItem];
         }
         
         UIViewController *searchViewController = [[SearchViewController alloc] init];
         [viewControllers addObject:searchViewController];
-        [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:searchViewController.title image:[UIImage imageNamed:@"search-24"] tag:TabBarItemIdentifierSearch]];
+        UITabBarItem *searchTabBarItem = [[UITabBarItem alloc] initWithTitle:searchViewController.title image:[UIImage imageNamed:@"search-24"] tag:TabBarItemIdentifierSearch];
+        searchTabBarItem.accessibilityIdentifier = @"searchTabBarItem";
+        [tabBarItems addObject:searchTabBarItem];
         
         UIViewController *profileViewController = [[LibraryViewController alloc] init];
         [viewControllers addObject:profileViewController];
         NSString *libraryImageName = SRGIdentityService.currentIdentityService ? @"profile-24" : @"more-24";
-        [tabBarItems addObject:[[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:libraryImageName] tag:TabBarItemIdentifierLibrary]];
+        UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:libraryImageName] tag:TabBarItemIdentifierLibrary];
+        profileTabBarItem.accessibilityIdentifier = @"profileTabBarItem";
+        [tabBarItems addObject:profileTabBarItem];
         
         NSMutableArray<NavigationController *> *navigationControllers = NSMutableArray.array;
         [viewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {

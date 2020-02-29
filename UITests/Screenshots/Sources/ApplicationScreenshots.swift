@@ -29,13 +29,13 @@ class ApplicationScreenshots: XCTestCase {
     func testSnapshots() {
         let tabBarsQuery = XCUIApplication().tabBars
         
-        tabBarsQuery.buttons["Videos"].tap()
+        tabBarsQuery.buttons["videosTabBarItem"].tap()
         snapshot("1-VideosHomeScreen")
         
-        tabBarsQuery.buttons["Audios"].tap()
+        tabBarsQuery.buttons["audiosTabBarItem"].tap()
         snapshot("2-AudiosHomeScreen")
         
-        tabBarsQuery.buttons["Live"].tap()
+        tabBarsQuery.buttons["livestreamsTabBarItem"].tap()
         snapshot("3-LiveHomeScreen")
     }
 }
