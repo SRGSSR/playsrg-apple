@@ -371,6 +371,12 @@
 		08B77A5E2409C48700A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
 		08B77AA82409E0A300A3BC3B /* ApplicationScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */; };
 		08B77AA92409E0A300A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
+		08B77ABA240A78F200A3BC3B /* ApplicationScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */; };
+		08B77ABB240A78F200A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
+		08B77ACB240A7E3200A3BC3B /* ApplicationScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */; };
+		08B77ACC240A7E3200A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
+		08B77ADA240A7E5000A3BC3B /* ApplicationScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */; };
+		08B77ADB240A7E5000A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
 		08BAABDA1E7613F0007644D7 /* HomeMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */; };
 		08BAABDC1E76141E007644D7 /* HomeMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */; };
 		08BAABDE1E76141F007644D7 /* HomeMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */; };
@@ -1464,6 +1470,27 @@
 			remoteGlobalIDString = 08C68DBF1D38D70D00BB8AAA;
 			remoteInfo = "Play RTS";
 		};
+		08B77AC5240A792400A3BC3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C68D471D38D49600BB8AAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08C68DF61D38D72000BB8AAA;
+			remoteInfo = "Play RSI";
+		};
+		08B77AE5240A7E9E00A3BC3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C68D471D38D49600BB8AAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08C68E2D1D38D73000BB8AAA;
+			remoteInfo = "Play RTR";
+		};
+		08B77AE7240A7EA500A3BC3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C68D471D38D49600BB8AAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08C68E641D38D73C00BB8AAA;
+			remoteInfo = "Play SWI";
+		};
 		6F0CFB3820C94DF6006B2CE4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08C68D471D38D49600BB8AAA /* Project object */;
@@ -1757,6 +1784,9 @@
 		08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		08B77A5F2409CF2300A3BC3B /* Screenshots-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Screenshots-Info.plist"; sourceTree = "<group>"; };
 		08B77AB12409E0A300A3BC3B /* Play RTS screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RTS screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08B77AC3240A78F200A3BC3B /* Play RSI screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RSI screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08B77AD4240A7E3200A3BC3B /* Play RTR screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RTR screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08B77AE3240A7E5000A3BC3B /* Play SWI screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SWI screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08BAABD71E7613F0007644D7 /* HomeMediasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediasViewController.h; sourceTree = "<group>"; };
 		08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediasViewController.m; sourceTree = "<group>"; };
 		08BDB5B1228D520000335898 /* PushService+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushService+Private.h"; sourceTree = "<group>"; };
@@ -2213,6 +2243,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		08B77AAA2409E0A300A3BC3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08B77ABC240A78F200A3BC3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08B77ACD240A7E3200A3BC3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08B77ADC240A7E5000A3BC3B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2753,6 +2804,9 @@
 				6F0CFB7E20C94EE5006B2CE4 /* Play SWI notification service extension.appex */,
 				08B77A452409C06000A3BC3B /* Play SRF screenshots.xctest */,
 				08B77AB12409E0A300A3BC3B /* Play RTS screenshots.xctest */,
+				08B77AC3240A78F200A3BC3B /* Play RSI screenshots.xctest */,
+				08B77AD4240A7E3200A3BC3B /* Play RTR screenshots.xctest */,
+				08B77AE3240A7E5000A3BC3B /* Play SWI screenshots.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3607,6 +3661,60 @@
 			productReference = 08B77AB12409E0A300A3BC3B /* Play RTS screenshots.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		08B77AB6240A78F200A3BC3B /* Play RSI screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08B77ABE240A78F200A3BC3B /* Build configuration list for PBXNativeTarget "Play RSI screenshots" */;
+			buildPhases = (
+				08B77AB9240A78F200A3BC3B /* Sources */,
+				08B77ABC240A78F200A3BC3B /* Frameworks */,
+				08B77ABD240A78F200A3BC3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08B77AC6240A792400A3BC3B /* PBXTargetDependency */,
+			);
+			name = "Play RSI screenshots";
+			productName = "Play SRF screenshots";
+			productReference = 08B77AC3240A78F200A3BC3B /* Play RSI screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		08B77AC7240A7E3200A3BC3B /* Play RTR screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08B77ACF240A7E3200A3BC3B /* Build configuration list for PBXNativeTarget "Play RTR screenshots" */;
+			buildPhases = (
+				08B77ACA240A7E3200A3BC3B /* Sources */,
+				08B77ACD240A7E3200A3BC3B /* Frameworks */,
+				08B77ACE240A7E3200A3BC3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08B77AE6240A7E9E00A3BC3B /* PBXTargetDependency */,
+			);
+			name = "Play RTR screenshots";
+			productName = "Play SRF screenshots";
+			productReference = 08B77AD4240A7E3200A3BC3B /* Play RTR screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		08B77AD6240A7E5000A3BC3B /* Play SWI screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08B77ADE240A7E5000A3BC3B /* Build configuration list for PBXNativeTarget "Play SWI screenshots" */;
+			buildPhases = (
+				08B77AD9240A7E5000A3BC3B /* Sources */,
+				08B77ADC240A7E5000A3BC3B /* Frameworks */,
+				08B77ADD240A7E5000A3BC3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08B77AE8240A7EA500A3BC3B /* PBXTargetDependency */,
+			);
+			name = "Play SWI screenshots";
+			productName = "Play SRF screenshots";
+			productReference = 08B77AE3240A7E5000A3BC3B /* Play SWI screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		08C68D881D38D6F400BB8AAA /* Play SRF */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08C68DB31D38D6F400BB8AAA /* Build configuration list for PBXNativeTarget "Play SRF" */;
@@ -3874,6 +3982,18 @@
 						DevelopmentTeam = VMGRRW6SG7;
 						ProvisioningStyle = Automatic;
 					};
+					08B77AB6240A78F200A3BC3B = {
+						DevelopmentTeam = VMGRRW6SG7;
+						ProvisioningStyle = Automatic;
+					};
+					08B77AC7240A7E3200A3BC3B = {
+						DevelopmentTeam = VMGRRW6SG7;
+						ProvisioningStyle = Automatic;
+					};
+					08B77AD6240A7E5000A3BC3B = {
+						DevelopmentTeam = VMGRRW6SG7;
+						ProvisioningStyle = Automatic;
+					};
 					08C68D881D38D6F400BB8AAA = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = VMGRRW6SG7;
@@ -4027,6 +4147,9 @@
 				6F0CFB7D20C94EE5006B2CE4 /* Play SWI notification service extension */,
 				08B77A442409C06000A3BC3B /* Play SRF screenshots */,
 				08B77AA42409E0A300A3BC3B /* Play RTS screenshots */,
+				08B77AB6240A78F200A3BC3B /* Play RSI screenshots */,
+				08B77AC7240A7E3200A3BC3B /* Play RTR screenshots */,
+				08B77AD6240A7E5000A3BC3B /* Play SWI screenshots */,
 			);
 		};
 /* End PBXProject section */
@@ -4040,6 +4163,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		08B77AAB2409E0A300A3BC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08B77ABD240A78F200A3BC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08B77ACE240A7E3200A3BC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08B77ADD240A7E5000A3BC3B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5594,6 +5738,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		08B77AB9240A78F200A3BC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08B77ABA240A78F200A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77ABB240A78F200A3BC3B /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08B77ACA240A7E3200A3BC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08B77ACB240A7E3200A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77ACC240A7E3200A3BC3B /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08B77AD9240A7E5000A3BC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08B77ADA240A7E5000A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77ADB240A7E5000A3BC3B /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08C68D851D38D6F400BB8AAA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -6463,6 +6634,21 @@
 			target = 08C68DBF1D38D70D00BB8AAA /* Play RTS */;
 			targetProxy = 08B77AB32409E0D500A3BC3B /* PBXContainerItemProxy */;
 		};
+		08B77AC6240A792400A3BC3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08C68DF61D38D72000BB8AAA /* Play RSI */;
+			targetProxy = 08B77AC5240A792400A3BC3B /* PBXContainerItemProxy */;
+		};
+		08B77AE6240A7E9E00A3BC3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08C68E2D1D38D73000BB8AAA /* Play RTR */;
+			targetProxy = 08B77AE5240A7E9E00A3BC3B /* PBXContainerItemProxy */;
+		};
+		08B77AE8240A7EA500A3BC3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08C68E641D38D73C00BB8AAA /* Play SWI */;
+			targetProxy = 08B77AE7240A7EA500A3BC3B /* PBXContainerItemProxy */;
+		};
 		6F0CFB3920C94DF6006B2CE4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6F0CFB3120C94DF6006B2CE4 /* Play SRF notification service extension */;
@@ -6863,6 +7049,324 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play RTS";
+			};
+			name = Nightly;
+		};
+		08B77ABF240A78F200A3BC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RSI";
+			};
+			name = Debug;
+		};
+		08B77AC0240A78F200A3BC3B /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RSI";
+			};
+			name = AppStore;
+		};
+		08B77AC1240A78F200A3BC3B /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RSI";
+			};
+			name = Beta;
+		};
+		08B77AC2240A78F200A3BC3B /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RSI";
+			};
+			name = Nightly;
+		};
+		08B77AD0240A7E3200A3BC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTR";
+			};
+			name = Debug;
+		};
+		08B77AD1240A7E3200A3BC3B /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTR";
+			};
+			name = AppStore;
+		};
+		08B77AD2240A7E3200A3BC3B /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTR";
+			};
+			name = Beta;
+		};
+		08B77AD3240A7E3200A3BC3B /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTR";
+			};
+			name = Nightly;
+		};
+		08B77ADF240A7E5000A3BC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SWI";
+			};
+			name = Debug;
+		};
+		08B77AE0240A7E5000A3BC3B /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SWI";
+			};
+			name = AppStore;
+		};
+		08B77AE1240A7E5000A3BC3B /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SWI";
+			};
+			name = Beta;
+		};
+		08B77AE2240A7E5000A3BC3B /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SWI";
 			};
 			name = Nightly;
 		};
@@ -8874,6 +9378,39 @@
 				08B77AAE2409E0A300A3BC3B /* AppStore */,
 				08B77AAF2409E0A300A3BC3B /* Beta */,
 				08B77AB02409E0A300A3BC3B /* Nightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Nightly;
+		};
+		08B77ABE240A78F200A3BC3B /* Build configuration list for PBXNativeTarget "Play RSI screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08B77ABF240A78F200A3BC3B /* Debug */,
+				08B77AC0240A78F200A3BC3B /* AppStore */,
+				08B77AC1240A78F200A3BC3B /* Beta */,
+				08B77AC2240A78F200A3BC3B /* Nightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Nightly;
+		};
+		08B77ACF240A7E3200A3BC3B /* Build configuration list for PBXNativeTarget "Play RTR screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08B77AD0240A7E3200A3BC3B /* Debug */,
+				08B77AD1240A7E3200A3BC3B /* AppStore */,
+				08B77AD2240A7E3200A3BC3B /* Beta */,
+				08B77AD3240A7E3200A3BC3B /* Nightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Nightly;
+		};
+		08B77ADE240A7E5000A3BC3B /* Build configuration list for PBXNativeTarget "Play SWI screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08B77ADF240A7E5000A3BC3B /* Debug */,
+				08B77AE0240A7E5000A3BC3B /* AppStore */,
+				08B77AE1240A7E5000A3BC3B /* Beta */,
+				08B77AE2240A7E5000A3BC3B /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Nightly;

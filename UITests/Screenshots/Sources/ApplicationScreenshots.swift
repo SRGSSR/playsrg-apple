@@ -29,13 +29,22 @@ class ApplicationScreenshots: XCTestCase {
     func testSnapshots() {
         let tabBarsQuery = XCUIApplication().tabBars
         
-        tabBarsQuery.buttons["videosTabBarItem"].tap()
-        snapshot("1-VideosHomeScreen")
+        let videosTabBarItemQuery = tabBarsQuery.buttons["videosTabBarItem"]
+        if videosTabBarItemQuery.exists {
+            videosTabBarItemQuery.tap()
+            snapshot("1-VideosHomeScreen")
+        }
         
-        tabBarsQuery.buttons["audiosTabBarItem"].tap()
-        snapshot("2-AudiosHomeScreen")
+        let audiosTabBarItemQuery =  tabBarsQuery.buttons["audiosTabBarItem"]
+        if  audiosTabBarItemQuery.exists {
+            audiosTabBarItemQuery.tap()
+            snapshot("2-AudiosHomeScreen")
+        }
         
-        tabBarsQuery.buttons["livestreamsTabBarItem"].tap()
-        snapshot("3-LiveHomeScreen")
+        let livestreamsTabBarItemQuery =  tabBarsQuery.buttons["livestreamsTabBarItem"]
+        if  livestreamsTabBarItemQuery.exists {
+            livestreamsTabBarItemQuery.tap()
+            snapshot("3-LiveHomeScreen")
+        }
     }
 }
