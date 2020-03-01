@@ -257,33 +257,6 @@ platform :ios do
     end
   end
 
-  # Share build number to the continuous integration
-  def notify_build_number_to_ci(suffix)
-    return unless ENV['TEAMCITY_VERSION']
-
-    suffix ||= ''
-
-    displayed_build_number = xcode_marketing_version
-    displayed_build_number += '-' + get_build_number
-    displayed_build_number += suffix
-    puts '##teamcity[buildNumber \'' + displayed_build_number + '\']'
-  end
-
-  # Returns current build number on App Center
-  def latest_appcenter_build_number(app_names)
-    build_number = 0
-    app_names.each_index do |index|
-      number = Integer(appcenter_fetch_version_number(
-        api_token: ENV['PLAY_APPCENTER_TOKEN'],
-        owner_name: ENV['PLAY_APPCENTER_OWNER'],
-        app_name: app_names[index]
-      )['build_number'])
-
-      build_number = number unless build_number >= number
-    end
-    build_number
-  end
-
   after_all do |lane|
     reset_git_repo(skip_clean: true) if cleaned_lane_condition(lane)
 
@@ -459,6 +432,33 @@ def upload_appcenter_dsyms(appcenter_appname)
       upload_dsym: dsym
     )
   end
+end
+
+# Share build number to the continuous integration
+def notify_build_number_to_ci(suffix)
+  return unless ENV['TEAMCITY_VERSION']
+
+  suffix ||= ''
+
+  displayed_build_number = xcode_marketing_version
+  displayed_build_number += '-' + get_build_number
+  displayed_build_number += suffix
+  puts '##teamcity[buildNumber \'' + displayed_build_number + '\']'
+end
+
+# Returns current build number on App Center
+def latest_appcenter_build_number(app_names)
+  build_number = 0
+  app_names.each_index do |index|
+    number = Integer(appcenter_fetch_version_number(
+      api_token: ENV['PLAY_APPCENTER_TOKEN'],
+      owner_name: ENV['PLAY_APPCENTER_OWNER'],
+      app_name: app_names[index]
+    )['build_number'])
+
+    build_number = number unless build_number >= number
+  end
+  build_number
 end
 
 # Create screenshots for AppStoreConnect.
