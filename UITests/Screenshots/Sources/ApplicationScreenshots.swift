@@ -32,18 +32,21 @@ class ApplicationScreenshots: XCTestCase {
         let videosTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.videosTabBarItem.rawValue]
         if videosTabBarItemQuery.exists {
             videosTabBarItemQuery.tap()
+            sleep(10)
             snapshot("1-VideosHomeScreen")
         }
         
         let audiosTabBarItemQuery =  tabBarsQuery.buttons[AccessibilityIdentifier.audiosTabBarItem.rawValue]
         if  audiosTabBarItemQuery.exists {
             audiosTabBarItemQuery.tap()
+            sleep(10)
             snapshot("2-AudiosHomeScreen")
         }
         
         let livestreamsTabBarItemQuery =  tabBarsQuery.buttons[AccessibilityIdentifier.livestreamsTabBarItem.rawValue]
         if  livestreamsTabBarItemQuery.exists {
             livestreamsTabBarItemQuery.tap()
+            sleep(10)
             snapshot("3-LiveHomeScreen")
         }
     }
