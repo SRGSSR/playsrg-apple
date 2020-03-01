@@ -95,37 +95,27 @@ platform :ios do
 
   desc 'SWI: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :swiAppStoreUpload do
-    testflight_lane(
-      scheme: 'Play SWI'
-    )
+    testflight_lane(scheme: 'Play SWI')
   end
 
   desc 'SRF: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :srfAppStoreUpload do
-    testflight_lane(
-      scheme: 'Play SRF'
-    )
+    testflight_lane(scheme: 'Play SRF')
   end
 
   desc 'RTS: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :rtsAppStoreUpload do
-    testflight_lane(
-      scheme: 'Play RTS'
-    )
+    testflight_lane(scheme: 'Play RTS')
   end
 
   desc 'RSI: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :rsiAppStoreUpload do
-    testflight_lane(
-      scheme: 'Play RSI'
-    )
+    testflight_lane(scheme: 'Play RSI')
   end
 
   desc 'RTR: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :rtrAppStoreUpload do
-    testflight_lane(
-      scheme: 'Play RTR'
-    )
+    testflight_lane(scheme: 'Play RTR')
   end
 
   desc 'Send latest dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
@@ -167,6 +157,31 @@ platform :ios do
   desc 'RTR: Send latest dSYMs to App Center, with same parameters.'
   lane :rtrDSYMs do |options|
     update_dsyms(nil, ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
+  end
+
+  desc 'SWI: Make screenshots.'
+  lane :swiScreenshots do
+    screenshots('Play SWI screenshots')
+  end
+
+  desc 'SRF: Make screenshots.'
+  lane :srfScreenshots do
+    screenshots('Play SRF screenshots')
+  end
+
+  desc 'RTS: Make screenshots.'
+  lane :rtsScreenshots do
+    screenshots('Play RTS screenshots')
+  end
+
+  desc 'RSI: Make screenshots.'
+  lane :rsiScreenshots do
+    screenshots('Play RSI screenshots')
+  end
+
+  desc 'RTR: Make screenshots.'
+  lane :rtrScreenshots do
+    screenshots('Play RTR screenshots')
   end
 
   desc 'Build, upload to TestFlight'
@@ -439,6 +454,17 @@ def upload_appcenter_dsyms(appcenter_appname)
       upload_dsym: dsym
     )
   end
+end
+
+# Create screenshots for AppStoreConnect.
+def screenshots(scheme)
+  output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
+  Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
+
+  snapshot(
+    scheme: scheme,
+    output_directory: output_directory
+  )
 end
 
 # Beta workflow: tag the new beta, bump build number and push to the repo,

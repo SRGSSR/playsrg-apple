@@ -81,6 +81,31 @@ RSI: Send latest dSYMs to App Center, with same parameters.
 fastlane ios rtrDSYMs
 ```
 RTR: Send latest dSYMs to App Center, with same parameters.
+### ios swiScreenshots
+```
+fastlane ios swiScreenshots
+```
+SWI: Make screenshots.
+### ios srfScreenshots
+```
+fastlane ios srfScreenshots
+```
+SRF: Make screenshots.
+### ios rtsScreenshots
+```
+fastlane ios rtsScreenshots
+```
+RTS: Make screenshots.
+### ios rsiScreenshots
+```
+fastlane ios rsiScreenshots
+```
+RSI: Make screenshots.
+### ios rtrScreenshots
+```
+fastlane ios rtrScreenshots
+```
+RTR: Make screenshots.
 
 ----
 
