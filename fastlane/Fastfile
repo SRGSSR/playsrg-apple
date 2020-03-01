@@ -468,6 +468,7 @@ def screenshots(scheme, languages)
 
   snapshot(
     scheme: scheme,
+    clean: true,
     languages: languages,
     output_directory: output_directory
   )
