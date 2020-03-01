@@ -161,27 +161,27 @@ platform :ios do
 
   desc 'SWI: Make screenshots.'
   lane :swiScreenshots do
-    screenshots('Play SWI screenshots')
+    screenshots('Play SWI screenshots', ['en-US'])
   end
 
   desc 'SRF: Make screenshots.'
   lane :srfScreenshots do
-    screenshots('Play SRF screenshots')
+    screenshots('Play SRF screenshots', ['de-DE'])
   end
 
   desc 'RTS: Make screenshots.'
   lane :rtsScreenshots do
-    screenshots('Play RTS screenshots')
+    screenshots('Play RTS screenshots', ['fr-FR'])
   end
 
   desc 'RSI: Make screenshots.'
   lane :rsiScreenshots do
-    screenshots('Play RSI screenshots')
+    screenshots('Play RSI screenshots', ['it'])
   end
 
   desc 'RTR: Make screenshots.'
   lane :rtrScreenshots do
-    screenshots('Play RTR screenshots')
+    screenshots('Play RTR screenshots', ['de-DE'])
   end
 
   desc 'Build, upload to TestFlight'
@@ -457,12 +457,13 @@ def upload_appcenter_dsyms(appcenter_appname)
 end
 
 # Create screenshots for AppStoreConnect.
-def screenshots(scheme)
+def screenshots(scheme, languages)
   output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
   snapshot(
     scheme: scheme,
+    languages: languages,
     output_directory: output_directory
   )
 end
