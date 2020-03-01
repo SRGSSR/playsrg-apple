@@ -481,7 +481,8 @@ def upload_screenshots(platform)
     app_version: xcode_marketing_version,
     skip_binary_upload: true,
     skip_metadata: true,
-    overwrite_screenshots: true
+    overwrite_screenshots: true,
+    force: true # Don't stop to wait manual preview
   )
 end
 
