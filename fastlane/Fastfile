@@ -159,29 +159,34 @@ platform :ios do
     update_dsyms(nil, ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'SWI: Make screenshots.'
+  desc 'SWI: Make screenshots and overwrite on AppStoreConnect.'
   lane :swiScreenshots do
     screenshots('Play SWI screenshots', ['en-US'])
+    upload_screenshots(nil)
   end
 
-  desc 'SRF: Make screenshots.'
+  desc 'SRF: Make screenshots and overwrite on AppStoreConnect.'
   lane :srfScreenshots do
     screenshots('Play SRF screenshots', ['de-DE'])
+    upload_screenshots(nil)
   end
 
-  desc 'RTS: Make screenshots.'
+  desc 'RTS: Make screenshots and overwrite on AppStoreConnect.'
   lane :rtsScreenshots do
     screenshots('Play RTS screenshots', ['fr-FR'])
+    upload_screenshots(nil)
   end
 
-  desc 'RSI: Make screenshots.'
+  desc 'RSI: Make screenshots and overwrite on AppStoreConnect.'
   lane :rsiScreenshots do
     screenshots('Play RSI screenshots', ['it'])
+    upload_screenshots(nil)
   end
 
-  desc 'RTR: Make screenshots.'
+  desc 'RTR: Make screenshots and overwrite on AppStoreConnect.'
   lane :rtrScreenshots do
     screenshots('Play RTR screenshots', ['de-DE'])
+    upload_screenshots(nil)
   end
 
   desc 'Build, upload to TestFlight'
@@ -465,6 +470,18 @@ def screenshots(scheme, languages)
     scheme: scheme,
     languages: languages,
     output_directory: output_directory
+  )
+end
+
+def upload_screenshots(platform)
+  platform ||= 'ios'
+
+  deliver(
+    platform: platform,
+    app_version: xcode_marketing_version,
+    skip_binary_upload: true,
+    skip_metadata: true,
+    overwrite_screenshots: true
   )
 end
 

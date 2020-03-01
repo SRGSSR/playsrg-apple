@@ -85,27 +85,27 @@ RTR: Send latest dSYMs to App Center, with same parameters.
 ```
 fastlane ios swiScreenshots
 ```
-SWI: Make screenshots.
+SWI: Make screenshots and overwrite on AppStoreConnect.
 ### ios srfScreenshots
 ```
 fastlane ios srfScreenshots
 ```
-SRF: Make screenshots.
+SRF: Make screenshots and overwrite on AppStoreConnect.
 ### ios rtsScreenshots
 ```
 fastlane ios rtsScreenshots
 ```
-RTS: Make screenshots.
+RTS: Make screenshots and overwrite on AppStoreConnect.
 ### ios rsiScreenshots
 ```
 fastlane ios rsiScreenshots
 ```
-RSI: Make screenshots.
+RSI: Make screenshots and overwrite on AppStoreConnect.
 ### ios rtrScreenshots
 ```
 fastlane ios rtrScreenshots
 ```
-RTR: Make screenshots.
+RTR: Make screenshots and overwrite on AppStoreConnect.
 
 ----
 
