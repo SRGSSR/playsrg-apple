@@ -241,7 +241,7 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (self.homeSectionInfo.module || (! ApplicationConfiguration.sharedApplicationConfiguration.topicHomeHeadersHidden && self.homeSectionInfo.topic.imageTitle)) {
+    if (self.homeSectionInfo.module || (self.homeSectionInfo.topic && ! ApplicationConfiguration.sharedApplicationConfiguration.topicHomeHeadersHidden)) {
         CGSize size = [self collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
         size.width += HomeStandardMargin;
         return size;
