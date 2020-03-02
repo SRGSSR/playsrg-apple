@@ -317,6 +317,11 @@
 		087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6671EDF1B7D00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
+		087CDB74240DC3C100BDFAEA /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB6B240DC39100BDFAEA /* Configuration.plist */; };
+		087CDB76240DC3D100BDFAEA /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB6D240DC39100BDFAEA /* Configuration.plist */; };
+		087CDB77240DC3D300BDFAEA /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB71240DC39100BDFAEA /* Configuration.plist */; };
+		087CDB78240DC3D600BDFAEA /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB73240DC39100BDFAEA /* Configuration.plist */; };
+		087CDB79240DC3DB00BDFAEA /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB6F240DC39100BDFAEA /* Configuration.plist */; };
 		0887824A23AD61D500629312 /* LiveMediaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0887824823AD61D500629312 /* LiveMediaCollectionViewCell.m */; };
 		0887824B23AD61D500629312 /* LiveMediaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0887824823AD61D500629312 /* LiveMediaCollectionViewCell.m */; };
 		0887824C23AD61D500629312 /* LiveMediaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0887824823AD61D500629312 /* LiveMediaCollectionViewCell.m */; };
@@ -1770,6 +1775,11 @@
 		0875853523A3DEFC00FA7207 /* LivestreamsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LivestreamsViewController.m; sourceTree = "<group>"; };
 		087BC6611EDF1B7B00EED89B /* UILabel+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+PlaySRG.h"; sourceTree = "<group>"; };
 		087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+PlaySRG.m"; sourceTree = "<group>"; };
+		087CDB6B240DC39100BDFAEA /* Configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
+		087CDB6D240DC39100BDFAEA /* Configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
+		087CDB6F240DC39100BDFAEA /* Configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
+		087CDB71240DC39100BDFAEA /* Configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
+		087CDB73240DC39100BDFAEA /* Configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		0887824723AD61D400629312 /* LiveMediaCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveMediaCollectionViewCell.h; sourceTree = "<group>"; };
 		0887824823AD61D500629312 /* LiveMediaCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveMediaCollectionViewCell.m; sourceTree = "<group>"; };
 		0887824923AD61D500629312 /* LiveMediaCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveMediaCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -2723,6 +2733,66 @@
 			path = RadioChannels;
 			sourceTree = "<group>";
 		};
+		087CDB68240DC39100BDFAEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				087CDB69240DC39100BDFAEA /* Apps */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		087CDB69240DC39100BDFAEA /* Apps */ = {
+			isa = PBXGroup;
+			children = (
+				087CDB6C240DC39100BDFAEA /* Play RSI */,
+				087CDB70240DC39100BDFAEA /* Play RTR */,
+				087CDB72240DC39100BDFAEA /* Play RTS */,
+				087CDB6E240DC39100BDFAEA /* Play SRF */,
+				087CDB6A240DC39100BDFAEA /* Play SWI */,
+			);
+			path = Apps;
+			sourceTree = "<group>";
+		};
+		087CDB6A240DC39100BDFAEA /* Play SWI */ = {
+			isa = PBXGroup;
+			children = (
+				087CDB6B240DC39100BDFAEA /* Configuration.plist */,
+			);
+			path = "Play SWI";
+			sourceTree = "<group>";
+		};
+		087CDB6C240DC39100BDFAEA /* Play RSI */ = {
+			isa = PBXGroup;
+			children = (
+				087CDB6D240DC39100BDFAEA /* Configuration.plist */,
+			);
+			path = "Play RSI";
+			sourceTree = "<group>";
+		};
+		087CDB6E240DC39100BDFAEA /* Play SRF */ = {
+			isa = PBXGroup;
+			children = (
+				087CDB6F240DC39100BDFAEA /* Configuration.plist */,
+			);
+			path = "Play SRF";
+			sourceTree = "<group>";
+		};
+		087CDB70240DC39100BDFAEA /* Play RTR */ = {
+			isa = PBXGroup;
+			children = (
+				087CDB71240DC39100BDFAEA /* Configuration.plist */,
+			);
+			path = "Play RTR";
+			sourceTree = "<group>";
+		};
+		087CDB72240DC39100BDFAEA /* Play RTS */ = {
+			isa = PBXGroup;
+			children = (
+				087CDB73240DC39100BDFAEA /* Configuration.plist */,
+			);
+			path = "Play RTS";
+			sourceTree = "<group>";
+		};
 		08AA551A1D49EBF600C5026E /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -2758,6 +2828,7 @@
 		08B77A522409C1AB00A3BC3B /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
+				087CDB68240DC39100BDFAEA /* Resources */,
 				08B77A592409C48700A3BC3B /* Sources */,
 				08B77A5F2409CF2300A3BC3B /* Screenshots-Info.plist */,
 			);
@@ -4190,6 +4261,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				087CDB79240DC3DB00BDFAEA /* Configuration.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4197,6 +4269,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				087CDB78240DC3D600BDFAEA /* Configuration.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4204,6 +4277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				087CDB76240DC3D100BDFAEA /* Configuration.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4211,6 +4285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				087CDB77240DC3D300BDFAEA /* Configuration.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4218,6 +4293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				087CDB74240DC3C100BDFAEA /* Configuration.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
