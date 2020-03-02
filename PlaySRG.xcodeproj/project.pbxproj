@@ -332,11 +332,6 @@
 		088899472077628400242654 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 088899432077627900242654 /* TVChannel.m */; };
 		088899482077628400242654 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 088899432077627900242654 /* TVChannel.m */; };
 		088899492077628500242654 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 088899432077627900242654 /* TVChannel.m */; };
-		089EA00A201011FB0070E11A /* SRGBaseTopic+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA009201011FB0070E11A /* SRGBaseTopic+PlaySRG.m */; };
-		089EA00B201012180070E11A /* SRGBaseTopic+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA009201011FB0070E11A /* SRGBaseTopic+PlaySRG.m */; };
-		089EA00C2010121A0070E11A /* SRGBaseTopic+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA009201011FB0070E11A /* SRGBaseTopic+PlaySRG.m */; };
-		089EA00D2010121A0070E11A /* SRGBaseTopic+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA009201011FB0070E11A /* SRGBaseTopic+PlaySRG.m */; };
-		089EA00E2010121A0070E11A /* SRGBaseTopic+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA009201011FB0070E11A /* SRGBaseTopic+PlaySRG.m */; };
 		089EA011201148180070E11A /* NSTimer+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA010201148180070E11A /* NSTimer+PlaySRG.m */; };
 		089EA012201148250070E11A /* NSTimer+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA010201148180070E11A /* NSTimer+PlaySRG.m */; };
 		089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA010201148180070E11A /* NSTimer+PlaySRG.m */; };
@@ -1725,8 +1720,6 @@
 		0887824923AD61D500629312 /* LiveMediaCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveMediaCollectionViewCell.xib; sourceTree = "<group>"; };
 		088899432077627900242654 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		088899442077627900242654 /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
-		089EA008201011FB0070E11A /* SRGBaseTopic+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGBaseTopic+PlaySRG.h"; sourceTree = "<group>"; };
-		089EA009201011FB0070E11A /* SRGBaseTopic+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGBaseTopic+PlaySRG.m"; sourceTree = "<group>"; };
 		089EA00F201148170070E11A /* NSTimer+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+PlaySRG.h"; sourceTree = "<group>"; };
 		089EA010201148180070E11A /* NSTimer+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+PlaySRG.m"; sourceTree = "<group>"; };
 		089EA016201148D70070E11A /* TimerTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerTarget.m; sourceTree = "<group>"; };
@@ -3067,8 +3060,6 @@
 				6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */,
 				089EA00F201148170070E11A /* NSTimer+PlaySRG.h */,
 				089EA010201148180070E11A /* NSTimer+PlaySRG.m */,
-				089EA008201011FB0070E11A /* SRGBaseTopic+PlaySRG.h */,
-				089EA009201011FB0070E11A /* SRGBaseTopic+PlaySRG.m */,
 				6F0E8D961F14F62F002014C3 /* SRGChannel+PlaySRG.h */,
 				6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */,
 				08A3ED011FA2612B00A517EF /* SRGDataProvider+PlaySRG.h */,
@@ -5509,7 +5500,6 @@
 				6F4760791EB37D60003021EA /* UIDevice+PlaySRG.m in Sources */,
 				6F475FE11EB37BC6003021EA /* ModalTransition.m in Sources */,
 				6FD633EA1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
-				089EA00A201011FB0070E11A /* SRGBaseTopic+PlaySRG.m in Sources */,
 				082910B5239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6F7EEBDE22DC40B7005E5A97 /* SearchBar.m in Sources */,
 				E64BA3FA1D4A587E002C10D5 /* WebViewController.m in Sources */,
@@ -5689,7 +5679,6 @@
 				0875851923A0025F00FA7207 /* LibraryTableViewCell.m in Sources */,
 				6FB3C1A91DBCE783008160B4 /* MediaPreviewViewController.m in Sources */,
 				6F9122C01DC8708400725EEB /* PlayErrors.m in Sources */,
-				089EA00B201012180070E11A /* SRGBaseTopic+PlaySRG.m in Sources */,
 				081220B01DD07B7A00BF8326 /* DownloadTableViewCell.m in Sources */,
 				08A3ED031FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				6FC8866C1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
@@ -5851,7 +5840,6 @@
 				0875851A23A0025F00FA7207 /* LibraryTableViewCell.m in Sources */,
 				6FB3C1AA1DBCE783008160B4 /* MediaPreviewViewController.m in Sources */,
 				6F9122C11DC8708400725EEB /* PlayErrors.m in Sources */,
-				089EA00C2010121A0070E11A /* SRGBaseTopic+PlaySRG.m in Sources */,
 				081220B41DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */,
 				08A3ED041FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				6FC8866D1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
@@ -6013,7 +6001,6 @@
 				0875851B23A0025F00FA7207 /* LibraryTableViewCell.m in Sources */,
 				6FB3C1AB1DBCE783008160B4 /* MediaPreviewViewController.m in Sources */,
 				6F9122C21DC8708400725EEB /* PlayErrors.m in Sources */,
-				089EA00D2010121A0070E11A /* SRGBaseTopic+PlaySRG.m in Sources */,
 				081220B81DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */,
 				08A3ED051FA2619200A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				6FC8866E1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
@@ -6175,7 +6162,6 @@
 				0875851C23A0025F00FA7207 /* LibraryTableViewCell.m in Sources */,
 				6FB3C1AC1DBCE783008160B4 /* MediaPreviewViewController.m in Sources */,
 				6F9122C31DC8708400725EEB /* PlayErrors.m in Sources */,
-				089EA00E2010121A0070E11A /* SRGBaseTopic+PlaySRG.m in Sources */,
 				081220BC1DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */,
 				08A3ED061FA2619300A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				6FC8866F1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,

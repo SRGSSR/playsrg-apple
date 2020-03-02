@@ -12,6 +12,7 @@
   "tvTrendingEpisodesOnly": true,
   "tvTrendingEditorialLimit": 2,
   "tvFeaturedHomeSectionHeaderHidden": true,
+  "topicHomeHeadersHidden": true,
   "topicSections": "latest,mostPopular",
   "topicSectionsWithSubtopics": "latest",
   "minimumSocialViewCount": 50,

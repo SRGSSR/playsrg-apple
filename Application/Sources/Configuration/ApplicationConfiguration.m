@@ -271,6 +271,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSArray<NSNumber *> *topicSections;
 @property (nonatomic) NSArray<NSNumber *> *topicSectionsWithSubtopics;
 
+@property (nonatomic, getter=areTopicHomeHeadersHidden) BOOL topicHomeHeadersHidden;
+
 @property (nonatomic) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic) NSArray<NSNumber *> *audioHomeSections;                           // wrap `HomeSection` values
 
@@ -294,8 +296,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;
 @property (nonatomic, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
 @property (nonatomic, getter=isShowsSearchHidden) BOOL showsSearchHidden;
-
-@property (nonatomic) NSDictionary<NSString *, NSDictionary *> *topicHeaders;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 @property (nonatomic) NSURL *overridePlayURL;
@@ -563,6 +563,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     }
     self.topicSectionsWithSubtopics = topicSectionsWithSubtopics.copy;
     
+    self.topicHomeHeadersHidden = [self.remoteConfig configValueForKey:@"topicHomeHeadersHidden"].boolValue;
+    
     NSString *audioHomeSectionsString = [self.remoteConfig configValueForKey:@"audioHomeSections"].stringValue;
     self.audioHomeSections = [self homeSectionsFromString:audioHomeSectionsString];
     
@@ -636,26 +638,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     FIRRemoteConfigValue *pageSize = [self.remoteConfig configValueForKey:@"pageSize"];
     self.pageSize = (pageSize.source != FIRRemoteConfigSourceStatic) ? MAX(pageSize.numberValue.unsignedIntegerValue, 1) : 20;
     
-    NSMutableDictionary<NSString *, NSDictionary *> *topicHeaders = [NSMutableDictionary dictionary];
-    if ([self.remoteConfig configValueForKey:@"topicHeaders"].stringValue.length) {
-        NSData *topicHeadersJSONData = [self.remoteConfig configValueForKey:@"topicHeaders"].dataValue;
-        id topicHeadersJSONObject = [NSJSONSerialization JSONObjectWithData:topicHeadersJSONData options:0 error:NULL];
-        if ([topicHeadersJSONObject isKindOfClass:NSArray.class]) {
-            for (id topicHeaderDictionary in topicHeadersJSONObject) {
-                if ([topicHeaderDictionary isKindOfClass:NSDictionary.class] && topicHeaderDictionary[@"uid"] && topicHeaderDictionary[@"imageURL"]) {
-                    topicHeaders[topicHeaderDictionary[@"uid"]] = topicHeaderDictionary;
-                }
-                else {
-                    PlayLogWarning(@"configuration", @"Topic header configuration is not valid. A dictionary is required.");
-                }
-            }
-        }
-        else {
-            PlayLogWarning(@"configuration", @"Topic header configuration is not valid. A JSON array is required.");
-        }
-    }
-    self.topicHeaders = topicHeaders.copy;
-    
     FIRRemoteConfigValue *continuousPlaybackPlayerViewTransitionDuration = [self.remoteConfig configValueForKey:@"continuousPlaybackPlayerViewTransitionDuration"];
     self.continuousPlaybackPlayerViewTransitionDuration = (continuousPlaybackPlayerViewTransitionDuration.stringValue.length > 0) ? fmax(continuousPlaybackPlayerViewTransitionDuration.numberValue.doubleValue, 0.) : SRGLetterboxContinuousPlaybackDisabled;
     
@@ -716,21 +698,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     }
     
     return [self.tvChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(TVChannel.new, uid), uid]].firstObject;
-}
-
-- (NSURL *)imageURLForTopicUid:(NSString *)uid
-{
-    NSString *URLString = self.topicHeaders[uid][@"imageURL"];
-    return URLString ? [NSURL URLWithString:URLString] : nil;
-}
-
-- (NSString *)imageTitleForTopicUid:(NSString *)uid
-{
-    return self.topicHeaders[uid][@"imageTitle"];
-}
-- (NSString *)imageCopyrightForTopicUid:(NSString *)uid
-{
-    return self.topicHeaders[uid][@"imageCopyright"];
 }
 
 - (NSURL *)sharingURLForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata atTime:(CMTime)time;

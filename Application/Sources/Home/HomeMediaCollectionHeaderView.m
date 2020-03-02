@@ -9,7 +9,6 @@
 #import "HomeTopicViewController.h"
 #import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
-#import "SRGBaseTopic+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 

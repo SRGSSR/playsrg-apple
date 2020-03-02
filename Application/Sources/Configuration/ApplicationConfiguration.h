@@ -140,6 +140,8 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly) NSArray<NSNumber *> *topicSections;                     // wrap `TopicSection` values
 @property (nonatomic, readonly) NSArray<NSNumber *> *topicSectionsWithSubtopics;        // wrap `TopicSection` values
 
+@property (nonatomic, readonly, getter=areTopicHomeHeadersHidden) BOOL topicHomeHeadersHidden;
+
 @property (nonatomic, readonly) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic, readonly) NSArray<TVChannel *> *tvChannels;
 
@@ -166,10 +168,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 - (nullable RadioChannel *)radioChannelForUid:(NSString *)uid;
 - (nullable TVChannel *)tvChannelForUid:(NSString *)uid;
-
-- (nullable NSURL *)imageURLForTopicUid:(NSString *)uid;
-- (nullable NSString *)imageTitleForTopicUid:(NSString *)uid;
-- (nullable NSString *)imageCopyrightForTopicUid:(NSString *)uid;
 
 /**
  *  URLs to be used for sharing

@@ -21,7 +21,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 ## URLs
 
 * `betaTestingURL` (optional, string): The URL of the page where beta testers can register.
-* `feedbackURL` (optional, string): The URL of the feedback form. Optional since version 2.9.1.
+* `feedbackURL` (optional, string): The URL of the feedback form.
 * `dataProtectionURL` (optional, string): The URL of the data protection information page.
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed. 
 * `historyServiceURL` (optional, string): The URL of the history service.
@@ -68,11 +68,6 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 ### Topic configuration
 
-* `topicHeaders` (optional, JSON): A JSON array of JSON dictionaries describing topics headers, and made of the following keys:
-	 * `uid` (mandatory, string): The unique identifier of the topic.
-    * `imageURL` (mandatory, string): The topic image URL (compatible with image scaling syntax).
-    * `imageTitle` (optional, string): The image title.
-    * `imageCopyright` (optional, string): The image copyright.
 * `topicSections` (optional, string, multiple): The sections to be displayed when opening a topic. If none is provided, latest medias are displayed. Available values are:
    * `latest`: The latest medias.
    * `mostPopular`: The most popular medias
@@ -83,6 +78,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `moduleColorsDisabled` (optional, boolean): If set to `true`, module lists won't display colors.
 * `moduleDefaultLinkColor` (mandatory, string):  Hex color of title medias in module lists.
 * `moduleDefaultTextColor` (mandatory, string):  Hex color of subtitle medias in module lists.
+* `topicHomeHeadersHidden` (optional, boolean): If set to `true`, the quick access header item on home page topics swimlanes will not be displayed.
 * `tvFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured TV media lists will not display any header.
 * `tvTrendingEpisodesOnly` (optional, boolean): If set to `true`, `tvTrending` only returns episodes.
 * `tvTrendingEditorialLimit` (optional, number): The maximum number of editorial recommendations returned by `tvTrending`. If not set, all are returned.
