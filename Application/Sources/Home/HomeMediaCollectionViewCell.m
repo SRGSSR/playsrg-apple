@@ -71,6 +71,9 @@
     self.mediaView.hidden = YES;
     self.placeholderView.hidden = NO;
     
+    self.placeholderImageView.layer.cornerRadius = 4.f;
+    self.placeholderImageView.layer.masksToBounds = YES;
+    
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMedia)
                                                             withScale:ImageScaleMedium];

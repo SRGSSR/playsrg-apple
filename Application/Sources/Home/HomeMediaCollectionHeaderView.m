@@ -60,6 +60,9 @@
     self.headerView.layer.cornerRadius = 4.f;
     self.headerView.layer.masksToBounds = YES;
     
+    self.placeholderImageView.layer.cornerRadius = 4.f;
+    self.placeholderImageView.layer.masksToBounds = YES;
+    
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
                                                             withScale:ImageScaleMedium];
