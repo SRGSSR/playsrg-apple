@@ -26,7 +26,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oqp-Zo-rdi" userLabel="Label Placeholder View">
-                                <rect key="frame" x="0.0" y="95" width="160" height="18"/>
+                                <rect key="frame" x="8" y="95" width="102" height="18"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="DU5-p5-iUa"/>
@@ -35,10 +35,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Oqp-Zo-rdi" secondAttribute="trailing" id="07g-zz-zg1"/>
+                            <constraint firstAttribute="trailing" secondItem="Oqp-Zo-rdi" secondAttribute="trailing" constant="50" id="07g-zz-zg1"/>
                             <constraint firstAttribute="trailing" secondItem="nrq-fk-7N9" secondAttribute="trailing" id="VTd-8Z-1WD"/>
                             <constraint firstItem="nrq-fk-7N9" firstAttribute="top" secondItem="fvv-nZ-bjn" secondAttribute="top" id="ahQ-lx-8cl"/>
-                            <constraint firstItem="Oqp-Zo-rdi" firstAttribute="leading" secondItem="fvv-nZ-bjn" secondAttribute="leading" id="dHQ-tX-Pdq"/>
+                            <constraint firstItem="Oqp-Zo-rdi" firstAttribute="leading" secondItem="fvv-nZ-bjn" secondAttribute="leading" constant="8" id="dHQ-tX-Pdq"/>
                             <constraint firstItem="Oqp-Zo-rdi" firstAttribute="top" secondItem="nrq-fk-7N9" secondAttribute="bottom" constant="5" id="hEN-na-78G"/>
                             <constraint firstItem="nrq-fk-7N9" firstAttribute="leading" secondItem="fvv-nZ-bjn" secondAttribute="leading" id="vqJ-pE-oyw"/>
                         </constraints>
