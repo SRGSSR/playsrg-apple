@@ -9,8 +9,11 @@ devices([
         ])
 
 configuration('AppStore')
+clean(true)
 
 clear_previous_screenshots(true)
 
 localize_simulator(true)
 reinstall_app(true)
+
+launch_arguments(['SKIP_TV_EVENTS'])

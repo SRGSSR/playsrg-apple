@@ -521,6 +521,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     NSString *videoHomeSectionsString = [self.remoteConfig configValueForKey:@"videoHomeSections"].stringValue;
     self.videoHomeSections = [self homeSectionsFromString:videoHomeSectionsString];
     
+    if ([NSProcessInfo.processInfo.arguments containsObject:@"SKIP_TV_EVENTS"]) {
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSNumber * _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+            return evaluatedObject.integerValue != HomeSectionTVEvents;
+        }];
+        self.videoHomeSections = [self.videoHomeSections filteredArrayUsingPredicate:predicate];
+    }
+    
     NSString *liveHomeSectionsString = [self.remoteConfig configValueForKey:@"liveHomeSections"].stringValue;
     self.liveHomeSections = [self homeSectionsFromString:liveHomeSectionsString];
     
