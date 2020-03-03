@@ -355,7 +355,7 @@
 "Previous" = "Precedente";
 
 /* Title displayed at the top of the library view, if identity service is available */
-"Profile" = "Il mio profilo";
+"Profile" = "Profilo";
 
 /* [Technical] Title for programmes A-Z page view analytics measurements
    Label to present shows A to Z (radio or TV)
