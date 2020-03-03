@@ -63,6 +63,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 {
     if (self = [super init]) {
         self.settings = [self supportedMediaSearchSettingsFromSettings:nil];
+        self.emptyCollectionImage = [UIImage imageNamed:@"search-90"];
     }
     return self;
 }
@@ -99,6 +100,8 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     view.backgroundColor = UIColor.play_blackColor;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
     collectionView.backgroundColor = UIColor.clearColor;
     collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
@@ -107,37 +110,35 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     [view addSubview:collectionView];
     self.collectionView = collectionView;
     
+    NSString *mediaCellIdentifier = NSStringFromClass(MediaCollectionViewCell.class);
+    UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
+    [collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
+    
+    NSString *mostSearchedShowCellIdentifier = NSStringFromClass(MostSearchedShowCollectionViewCell.class);
+    UINib *mostSearchedShowCellNib = [UINib nibWithNibName:mostSearchedShowCellIdentifier bundle:nil];
+    [collectionView registerNib:mostSearchedShowCellNib forCellWithReuseIdentifier:mostSearchedShowCellIdentifier];
+
+    Class showListCellClass = SearchShowListCollectionViewCell.class;
+    [collectionView registerClass:showListCellClass forCellWithReuseIdentifier:NSStringFromClass(showListCellClass)];
+    
+    NSString *loadingCellIdentifier = NSStringFromClass(SearchLoadingCollectionViewCell.class);
+    UINib *loadingCellNib = [UINib nibWithNibName:loadingCellIdentifier bundle:nil];
+    [collectionView registerNib:loadingCellNib forCellWithReuseIdentifier:loadingCellIdentifier];
+    
+    NSString *mostSearchedShowsHeaderIdentifier = NSStringFromClass(MostSearchedShowsHeaderView.class);
+    UINib *mostSearchedShowsHeaderNib = [UINib nibWithNibName:mostSearchedShowsHeaderIdentifier bundle:nil];
+    [collectionView registerNib:mostSearchedShowsHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:mostSearchedShowsHeaderIdentifier];
+    
+    NSString *searchHeaderIdentifier = NSStringFromClass(SearchHeaderView.class);
+    UINib *searchHeaderNib = [UINib nibWithNibName:searchHeaderIdentifier bundle:nil];
+    [collectionView registerNib:searchHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:searchHeaderIdentifier];
+    
     self.view = view;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.emptyCollectionImage = [UIImage imageNamed:@"search-90"];
-    
-    NSString *mediaCellIdentifier = NSStringFromClass(MediaCollectionViewCell.class);
-    UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
-    [self.collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
-    
-    NSString *mostSearchedShowCellIdentifier = NSStringFromClass(MostSearchedShowCollectionViewCell.class);
-    UINib *mostSearchedShowCellNib = [UINib nibWithNibName:mostSearchedShowCellIdentifier bundle:nil];
-    [self.collectionView registerNib:mostSearchedShowCellNib forCellWithReuseIdentifier:mostSearchedShowCellIdentifier];
-
-    Class showListCellClass = SearchShowListCollectionViewCell.class;
-    [self.collectionView registerClass:showListCellClass forCellWithReuseIdentifier:NSStringFromClass(showListCellClass)];
-    
-    NSString *loadingCellIdentifier = NSStringFromClass(SearchLoadingCollectionViewCell.class);
-    UINib *loadingCellNib = [UINib nibWithNibName:loadingCellIdentifier bundle:nil];
-    [self.collectionView registerNib:loadingCellNib forCellWithReuseIdentifier:loadingCellIdentifier];
-    
-    NSString *mostSearchedShowsHeaderIdentifier = NSStringFromClass(MostSearchedShowsHeaderView.class);
-    UINib *mostSearchedShowsHeaderNib = [UINib nibWithNibName:mostSearchedShowsHeaderIdentifier bundle:nil];
-    [self.collectionView registerNib:mostSearchedShowsHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:mostSearchedShowsHeaderIdentifier];
-    
-    NSString *searchHeaderIdentifier = NSStringFromClass(SearchHeaderView.class);
-    UINib *searchHeaderNib = [UINib nibWithNibName:searchHeaderIdentifier bundle:nil];
-    [self.collectionView registerNib:searchHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:searchHeaderIdentifier];
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
@@ -710,7 +711,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.query settings:self.settings ?: SearchSettingsViewController.defaultSettings];
     searchSettingsViewController.delegate = self;
     
-    UIColor *backgroundColor = (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? UIColor.play_popoverGrayColor : nil;
+    UIColor *backgroundColor = (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? UIColor.play_popoverGrayBackgroundColor : nil;
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController
                                                                                                 tintColor:UIColor.whiteColor
                                                                                           backgroundColor:backgroundColor
@@ -718,7 +719,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     navigationController.modalPresentationStyle = UIModalPresentationPopover;
     
     UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
-    popoverPresentationController.backgroundColor = UIColor.play_popoverGrayColor;
+    popoverPresentationController.backgroundColor = UIColor.play_popoverGrayBackgroundColor;
     popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
     
     popoverPresentationController.sourceView = sender;

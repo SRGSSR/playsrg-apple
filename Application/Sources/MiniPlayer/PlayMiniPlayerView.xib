@@ -28,7 +28,7 @@
                     <color key="trackTintColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </progressView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWC-hN-4pX" customClass="SRGPlaybackButton">
-                    <rect key="frame" x="9" y="6" width="42" height="42"/>
+                    <rect key="frame" x="9" y="5" width="42" height="42"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="iWC-hN-4pX" secondAttribute="height" multiplier="1:1" id="0gQ-FU-N68"/>
                         <constraint firstAttribute="height" constant="42" id="2HM-YE-0Gu"/>
@@ -42,13 +42,16 @@
                     </userDefinedRuntimeAttributes>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO5-25-JOn">
-                    <rect key="frame" x="61" y="18" width="511" height="18"/>
+                    <rect key="frame" x="61" y="6" width="511" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="2PS-Sm-MbU"/>
+                    </constraints>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKg-8I-Eaj">
-                    <rect key="frame" x="582" y="6" width="42" height="42"/>
+                    <rect key="frame" x="582" y="5" width="42" height="42"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="8m0-BV-N7p"/>
                         <constraint firstAttribute="width" secondItem="wKg-8I-Eaj" secondAttribute="height" multiplier="1:1" id="Ux0-a3-cpw"/>
@@ -70,7 +73,7 @@
                 <constraint firstItem="Rm4-ky-aFv" firstAttribute="leading" secondItem="Bfa-82-k4k" secondAttribute="leading" id="Hpv-L9-Wj4"/>
                 <constraint firstAttribute="trailing" secondItem="Rm4-ky-aFv" secondAttribute="trailing" id="MEC-bn-dJV"/>
                 <constraint firstItem="Rm4-ky-aFv" firstAttribute="top" secondItem="Bfa-82-k4k" secondAttribute="top" id="ORv-Tg-jLV"/>
-                <constraint firstItem="iWC-hN-4pX" firstAttribute="top" secondItem="Bfa-82-k4k" secondAttribute="top" constant="6" id="RKG-FW-KyD"/>
+                <constraint firstItem="iWC-hN-4pX" firstAttribute="top" secondItem="Bfa-82-k4k" secondAttribute="top" constant="5" id="RKG-FW-KyD"/>
                 <constraint firstItem="wKg-8I-Eaj" firstAttribute="leading" secondItem="oO5-25-JOn" secondAttribute="trailing" constant="10" id="WbO-HY-uOc"/>
                 <constraint firstItem="iWC-hN-4pX" firstAttribute="leading" secondItem="Bfa-82-k4k" secondAttribute="leading" constant="9" id="pdP-0Y-hhH"/>
                 <constraint firstAttribute="bottom" secondItem="GVn-x1-1Al" secondAttribute="bottom" id="pln-Zb-XXP"/>

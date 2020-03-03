@@ -140,12 +140,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *nextProgramLabel;
 @property (nonatomic, weak) IBOutlet UILabel *channelLabel;
 
-@property (nonatomic, weak) IBOutlet UIView *showTopLineSpacerView;
+@property (nonatomic, weak) IBOutlet UIView *showWrapperView;
 @property (nonatomic, weak) IBOutlet UIStackView *showStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *showThumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *showLabel;
+@property (nonatomic, weak) IBOutlet UILabel *numberOfEpisodesLabel;
 @property (nonatomic, weak) IBOutlet UIButton *favoriteButton;
-@property (nonatomic, weak) IBOutlet UIView *showBottomLineSpacerView;
 
 @property (nonatomic, weak) IBOutlet UIView *radioHomeView;
 @property (nonatomic, weak) IBOutlet UIButton *radioHomeButton;
@@ -319,6 +319,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.view.backgroundColor = UIColor.play_blackColor;
     
+    self.showWrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.showWrapperView.layer.cornerRadius = 4.f;
+    self.showWrapperView.layer.masksToBounds = YES;
+    
     self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     
     self.pullDownGestureRecognizer.delegate = self;
@@ -341,7 +345,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.playerBottomConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
     self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelNormalPriority;
     
-    self.livestreamButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
+    self.livestreamButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.livestreamButton.layer.cornerRadius = 4.f;
     self.livestreamButton.layer.masksToBounds = YES;
     [self.livestreamButton setTitle:NSLocalizedString(@"Choose a regional radio", @"Title displayed on the regional radio selection button") forState:UIControlStateNormal];
@@ -353,7 +357,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.logoImageView.isAccessibilityElement = YES;
     self.logoImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
     
-    self.radioHomeButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
+    self.radioHomeButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.radioHomeButton.layer.cornerRadius = 4.f;
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];
@@ -504,9 +508,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             [SRGLetterboxService.sharedService disableForController:self.letterboxController];
             [StoreReview requestReview];
         }
-        
-        // Avoids view retain, preventing playback from stopping.
-        [Banner hideAll];
         
         [self.livestreamMediasRequest cancel];
         
@@ -669,7 +670,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     UIImage *closeButtonImage = (media.mediaType == SRGMediaTypeAudio || AVAudioSession.srg_isAirPlayActive || ApplicationSettingBackgroundVideoPlaybackEnabled()) ? [UIImage imageNamed:@"arrow_down-48"] : [UIImage imageNamed:@"close-48"];
     [self.closeButton setImage:closeButtonImage forState:UIControlStateNormal];
     
-    self.relatedContentsTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.relatedContentsTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
     self.relatedContentsTitleLabel.text = NSLocalizedString(@"More on this subject", @"Title of the related content player section");
     
     // Cleanup related content views first
@@ -856,7 +857,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     UIImage *youthProtectionColorImage = YouthProtectionImageForColor(media.youthProtectionColor);
     if (youthProtectionColorImage) {
         self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
-        self.youthProtectionColorLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.youthProtectionColorLabel.font = [UIFont srg_italicFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         self.youthProtectionColorLabel.text = SRGMessageForYouthProtectionColor(media.youthProtectionColor);
         self.youthProtectionColorSpacerView.hidden = NO;
         [self.youthProtectionColorStackView play_setHidden:NO];
@@ -892,16 +893,17 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
         self.showLabel.text = show.title;
         
+        self.numberOfEpisodesLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        
+        NSInteger numberOfEpisodes = show.numberOfEpisodes;
+        self.numberOfEpisodesLabel.text = (numberOfEpisodes != 0) ? [NSString stringWithFormat:@"%@ episodes", @(show.numberOfEpisodes)] : nil;
+        
         [self updateFavoriteStatusForShow:show];
         
-        self.showTopLineSpacerView.hidden = NO;
         [self.showStackView play_setHidden:NO];
-        self.showBottomLineSpacerView.hidden = NO;
     }
     else {
-        self.showTopLineSpacerView.hidden = YES;
         [self.showStackView play_setHidden:YES];
-        self.showBottomLineSpacerView.hidden = YES;
     }
 }
 

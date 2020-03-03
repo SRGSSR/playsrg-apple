@@ -37,6 +37,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *editorialLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
+@property (nonatomic, weak) IBOutlet UIView *thumbnailWrapperView;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
@@ -70,13 +71,18 @@
     self.mediaView.hidden = YES;
     self.placeholderView.hidden = NO;
     
+    self.placeholderImageView.layer.cornerRadius = 4.f;
+    self.placeholderImageView.layer.masksToBounds = YES;
+    
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMedia)
                                                             withScale:ImageScaleMedium];
     
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
-    self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.layer.cornerRadius = 4.f;
+    self.thumbnailWrapperView.layer.masksToBounds = YES;
     
     self.editorialLabel.backgroundColor = UIColor.play_redColor;
     self.editorialLabel.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"OUR PICK", @"Label on the editor or trending lists in the home page, for prefered contents. Known as the SRF-TIPP label. Display in uppercase.").uppercaseString];

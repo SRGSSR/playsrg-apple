@@ -42,6 +42,8 @@
     self.selectedBackgroundView = colorView;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailImageView.layer.cornerRadius = 4.f;
+    self.thumbnailImageView.layer.masksToBounds = YES;
     
     self.subtitleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;

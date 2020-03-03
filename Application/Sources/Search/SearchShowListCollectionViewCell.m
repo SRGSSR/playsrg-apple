@@ -31,6 +31,7 @@
         
         UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:collectionViewLayout];
         collectionView.backgroundColor = UIColor.clearColor;
         collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -46,7 +47,7 @@
         
         NSString *showCellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
         UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
-        [self.collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
+        [collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
     }
     return self;
 }
@@ -69,6 +70,13 @@
 }
 
 #pragma mark Overrides
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    self.shows = nil;
+}
 
 - (void)layoutSubviews
 {

@@ -36,7 +36,10 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.clearColor;
+    self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    
+    self.layer.cornerRadius = 4.f;
+    self.layer.masksToBounds = YES;
     
     self.showView.hidden = YES;
     self.placeholderView.hidden = NO;

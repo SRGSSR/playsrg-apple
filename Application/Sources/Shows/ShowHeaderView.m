@@ -36,8 +36,6 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 @property (nonatomic) IBOutlet NSLayoutConstraint *logoImageViewRatio16_9Constraint; // Need to retain it, because active state removes it
 @property (nonatomic) IBOutlet NSLayoutConstraint *logoImageViewRatioBigLandscapeScreenConstraint; // Need to retain it, because active state removes it
 
-@property (nonatomic, assign) BOOL favoriteState;
-
 @end
 
 @implementation ShowHeaderView
@@ -88,8 +86,8 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     self.logoImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
                                                      withScale:ImageScaleLarge];
     
-    self.favoriteImageButton.accessibilityElementsHidden = YES;
-    self.subscriptionImageButton.accessibilityElementsHidden = YES;
+    self.favoriteImageButton.isAccessibilityElement = NO;
+    self.subscriptionImageButton.isAccessibilityElement = NO;
 }
 
 - (void)layoutSubviews
@@ -153,13 +151,9 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (void)updateSubscriptionStatus
 {
-    BOOL isFavorite =  FavoritesContainsShow(self.show);
+    BOOL isFavorite = FavoritesContainsShow(self.show);
     self.subscriptionImageButton.hidden = ! isFavorite;
     self.subscriptionLabelButton.hidden = ! isFavorite;
-    
-    if (! isFavorite) {
-        return;
-    }
     
     if (PushService.sharedService.enabled) {
         BOOL subscribed = FavoritesIsSubscribedToShow(self.show);

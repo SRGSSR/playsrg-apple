@@ -47,24 +47,24 @@
     self.mainView.hidden = YES;
     self.placeholderView.hidden = NO;
     
-    self.showsAtoZButtonPlaceholderView.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
+    self.showsAtoZButtonPlaceholderView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.showsAtoZButtonPlaceholderView.layer.cornerRadius = 4.f;
     self.showsAtoZButtonPlaceholderView.layer.masksToBounds = YES;
     
-    self.showsByDateButtonPlaceholderView.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
+    self.showsByDateButtonPlaceholderView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.showsByDateButtonPlaceholderView.layer.cornerRadius = 4.f;
     self.showsByDateButtonPlaceholderView.layer.masksToBounds = YES;
 
     self.backgroundColor = UIColor.play_blackColor;
     self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
     
-    self.showsAtoZButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
+    self.showsAtoZButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.showsAtoZButton.layer.cornerRadius = 4.f;
     self.showsAtoZButton.layer.masksToBounds = YES;
     [self.showsAtoZButton setTitle:NSLocalizedString(@"A to Z", @"Short title displayed in home page shows section.") forState:UIControlStateNormal];
     self.showsAtoZButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Programmes A-Z", @"Title displayed in home page shows section.");
     
-    self.showsByDateButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
+    self.showsByDateButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.showsByDateButton.layer.cornerRadius = 4.f;
     self.showsByDateButton.layer.masksToBounds = YES;
     [self.showsByDateButton setTitle:NSLocalizedString(@"By date", @"Short title displayed in home page shows section.") forState:UIControlStateNormal];

@@ -160,7 +160,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.play_popoverGrayColor;
+    self.view.backgroundColor = UIColor.play_popoverGrayBackgroundColor;
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = UIColor.clearColor;
