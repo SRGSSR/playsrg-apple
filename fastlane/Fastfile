@@ -95,37 +95,27 @@ platform :ios do
 
   desc 'SWI: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :swiAppStoreUpload do
-    testflight_lane(
-      scheme: 'Play SWI'
-    )
+    testflight_lane(scheme: 'Play SWI')
   end
 
   desc 'SRF: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :srfAppStoreUpload do
-    testflight_lane(
-      scheme: 'Play SRF'
-    )
+    testflight_lane(scheme: 'Play SRF')
   end
 
   desc 'RTS: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :rtsAppStoreUpload do
-    testflight_lane(
-      scheme: 'Play RTS'
-    )
+    testflight_lane(scheme: 'Play RTS')
   end
 
   desc 'RSI: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :rsiAppStoreUpload do
-    testflight_lane(
-      scheme: 'Play RSI'
-    )
+    testflight_lane(scheme: 'Play RSI')
   end
 
   desc 'RTR: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :rtrAppStoreUpload do
-    testflight_lane(
-      scheme: 'Play RTR'
-    )
+    testflight_lane(scheme: 'Play RTR')
   end
 
   desc 'Send latest dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
@@ -167,6 +157,36 @@ platform :ios do
   desc 'RTR: Send latest dSYMs to App Center, with same parameters.'
   lane :rtrDSYMs do |options|
     update_dsyms(nil, ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
+  end
+
+  desc 'SWI: Make screenshots and overwrite on AppStoreConnect.'
+  lane :swiScreenshots do
+    screenshots('Play SWI screenshots', ['en-US'])
+    upload_screenshots(nil)
+  end
+
+  desc 'SRF: Make screenshots and overwrite on AppStoreConnect.'
+  lane :srfScreenshots do
+    screenshots('Play SRF screenshots', ['de-DE'])
+    upload_screenshots(nil)
+  end
+
+  desc 'RTS: Make screenshots and overwrite on AppStoreConnect.'
+  lane :rtsScreenshots do
+    screenshots('Play RTS screenshots', ['fr-FR'])
+    upload_screenshots(nil)
+  end
+
+  desc 'RSI: Make screenshots and overwrite on AppStoreConnect.'
+  lane :rsiScreenshots do
+    screenshots('Play RSI screenshots', ['it'])
+    upload_screenshots(nil)
+  end
+
+  desc 'RTR: Make screenshots and overwrite on AppStoreConnect.'
+  lane :rtrScreenshots do
+    screenshots('Play RTR screenshots', ['de-DE'])
+    upload_screenshots(nil)
   end
 
   desc 'Build, upload to TestFlight'
@@ -235,33 +255,6 @@ platform :ios do
         notify_testers: options[:notify_testers]
       )
     end
-  end
-
-  # Share build number to the continuous integration
-  def notify_build_number_to_ci(suffix)
-    return unless ENV['TEAMCITY_VERSION']
-
-    suffix ||= ''
-
-    displayed_build_number = xcode_marketing_version
-    displayed_build_number += '-' + get_build_number
-    displayed_build_number += suffix
-    puts '##teamcity[buildNumber \'' + displayed_build_number + '\']'
-  end
-
-  # Returns current build number on App Center
-  def latest_appcenter_build_number(app_names)
-    build_number = 0
-    app_names.each_index do |index|
-      number = Integer(appcenter_fetch_version_number(
-        api_token: ENV['PLAY_APPCENTER_TOKEN'],
-        owner_name: ENV['PLAY_APPCENTER_OWNER'],
-        app_name: app_names[index]
-      )['build_number'])
-
-      build_number = number unless build_number >= number
-    end
-    build_number
   end
 
   after_all do |lane|
@@ -439,6 +432,58 @@ def upload_appcenter_dsyms(appcenter_appname)
       upload_dsym: dsym
     )
   end
+end
+
+# Share build number to the continuous integration
+def notify_build_number_to_ci(suffix)
+  return unless ENV['TEAMCITY_VERSION']
+
+  suffix ||= ''
+
+  displayed_build_number = xcode_marketing_version
+  displayed_build_number += '-' + get_build_number
+  displayed_build_number += suffix
+  puts '##teamcity[buildNumber \'' + displayed_build_number + '\']'
+end
+
+# Returns current build number on App Center
+def latest_appcenter_build_number(app_names)
+  build_number = 0
+  app_names.each_index do |index|
+    number = Integer(appcenter_fetch_version_number(
+      api_token: ENV['PLAY_APPCENTER_TOKEN'],
+      owner_name: ENV['PLAY_APPCENTER_OWNER'],
+      app_name: app_names[index]
+    )['build_number'])
+
+    build_number = number unless build_number >= number
+  end
+  build_number
+end
+
+# Create screenshots for AppStoreConnect.
+def screenshots(scheme, languages)
+  output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
+  Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
+
+  snapshot(
+    scheme: scheme,
+    languages: languages,
+    output_directory: output_directory
+  )
+end
+
+def upload_screenshots(platform)
+  platform ||= 'ios'
+
+  deliver(
+    platform: platform,
+    app_version: xcode_marketing_version,
+    skip_binary_upload: true,
+    skip_metadata: true,
+    overwrite_screenshots: true,
+    force: true # Don't stop to wait manual preview
+  )
 end
 
 # Beta workflow: tag the new beta, bump build number and push to the repo,
