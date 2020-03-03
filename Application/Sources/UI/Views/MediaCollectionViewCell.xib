@@ -87,7 +87,7 @@
                             <constraint firstItem="oyt-0M-2Tn" firstAttribute="leading" secondItem="S07-N6-cnb" secondAttribute="leading" id="igt-id-fRt"/>
                             <constraint firstAttribute="trailing" secondItem="x7e-gr-cUo" secondAttribute="trailing" id="jH0-6t-Zpa"/>
                             <constraint firstItem="NJ6-Ou-tus" firstAttribute="leading" secondItem="S07-N6-cnb" secondAttribute="leading" constant="5" id="jNc-At-fJO"/>
-                            <constraint firstAttribute="height" constant="84" id="jaV-JW-oQv"/>
+                            <constraint firstAttribute="height" priority="999" constant="84" id="jaV-JW-oQv"/>
                             <constraint firstItem="eXQ-vI-0FF" firstAttribute="top" secondItem="oyt-0M-2Tn" secondAttribute="top" id="qHK-eu-coi"/>
                         </constraints>
                         <variation key="default">
