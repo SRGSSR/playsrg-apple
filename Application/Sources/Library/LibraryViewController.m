@@ -42,7 +42,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.title = SRGIdentityService.currentIdentityService ? NSLocalizedString(@"Profile", @"Title displayed at the top of the library view, if identity service is available") : NSLocalizedString(@"More", @"Title displayed at the top of the library view, if no identity service is available");
+        self.title = NSLocalizedString(@"Profile", @"Title displayed at the top of the profile view");
     }
     return self;
 }

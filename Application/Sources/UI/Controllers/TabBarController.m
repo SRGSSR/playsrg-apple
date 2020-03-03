@@ -24,7 +24,6 @@
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
 #import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
-#import <SRGIdentity/SRGIdentity.h>
 
 static const CGFloat MiniPlayerHeight = 50.f;
 static const CGFloat MiniPlayerDefaultOffset = 5.f;
@@ -49,7 +48,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         NSMutableArray<UIViewController *> *viewControllers = NSMutableArray.array;
         NSMutableArray<UITabBarItem *> *tabBarItems = NSMutableArray.array;
-
+        
         UIViewController *videosViewController = [[HomeViewController alloc] initWithRadioChannel:nil];
         [viewControllers addObject:videosViewController];
         UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos];
@@ -99,8 +98,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         UIViewController *profileViewController = [[LibraryViewController alloc] init];
         [viewControllers addObject:profileViewController];
-        NSString *libraryImageName = SRGIdentityService.currentIdentityService ? @"profile-24" : @"more-24";
-        UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:libraryImageName] tag:TabBarItemIdentifierLibrary];
+        UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile-24"] tag:TabBarItemIdentifierLibrary];
         profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
         [tabBarItems addObject:profileTabBarItem];
         
@@ -144,7 +142,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
     UITabBar.appearance.barStyle = UIBarStyleBlack;
     UITabBar.appearance.tintColor = UIColor.whiteColor;
     
