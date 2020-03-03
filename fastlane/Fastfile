@@ -162,7 +162,7 @@ platform :ios do
   desc 'SWI: Make screenshots and overwrite on AppStoreConnect.'
   lane :swiScreenshots do
     screenshots('Play SWI screenshots', ['en-US'])
-    # upload_screenshots(nil)
+    upload_screenshots(nil)
   end
 
   desc 'SRF: Make screenshots and overwrite on AppStoreConnect.'
