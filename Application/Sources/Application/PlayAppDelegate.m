@@ -187,7 +187,7 @@ static void *s_kvoContext = &s_kvoContext;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [UIImage srg_clearVectorImageCache];
         completionHandler(YES);
-    }, @"ClearVectorImageCache", nil);
+    }, @"ClearVectorImageCache2", nil);
     
     // Open the application via 3D touch shortcut if needed
     BOOL shouldNotPerformAdditionalDelegateHandling = YES;
