@@ -17,20 +17,17 @@ class ApplicationScreenshots: XCTestCase {
         
         continueAfterFailure = false
         
-        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
-            XCUIDevice.shared.orientation = UIDeviceOrientation.landscapeLeft
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            XCUIDevice.shared.orientation = .landscapeLeft
         }
         else {
-            XCUIDevice.shared.orientation = UIDeviceOrientation.portrait
+            XCUIDevice.shared.orientation = .portrait
         }
         
         let testBundle = Bundle(for: type(of: self))
         if let path = testBundle.path(forResource: "Configuration", ofType: "plist") {
             configuration = NSDictionary(contentsOfFile: path) ?? [:]
         }
-    }
-    
-    override func tearDown() {
     }
     
     func testSnapshots() {
