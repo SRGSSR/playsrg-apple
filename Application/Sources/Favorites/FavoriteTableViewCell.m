@@ -21,6 +21,7 @@
 
 @interface FavoriteTableViewCell ()
 
+@property (nonatomic, weak) IBOutlet UIView *wrapperView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UIButton *subscriptionButton;
@@ -35,18 +36,19 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.play_blackColor;
+    
+    UIColor *backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.wrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.wrapperView.layer.cornerRadius = 4.f;
+    self.wrapperView.layer.masksToBounds = YES;
     
     UIView *colorView = [[UIView alloc] init];
     colorView.backgroundColor = backgroundColor;
     self.selectedBackgroundView = colorView;
     
     self.titleLabel.backgroundColor = backgroundColor;
-    
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailImageView.layer.cornerRadius = 4.f;
-    self.thumbnailImageView.layer.masksToBounds = YES;
     
     @weakify(self)
     MGSwipeButton *deleteButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"delete-22"] backgroundColor:UIColor.redColor callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
