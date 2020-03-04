@@ -27,7 +27,7 @@
 
 // Used for regional radio overriding
 @property (nonatomic) NSMutableArray<SRGMedia *> *pendingMedias;
-@property (nonatomic, copy) SRGPaginatedItemListCompletionBlock pendingCompletionBlock;
+@property (nonatomic, copy) SRGMediaListCompletionBlock pendingCompletionBlock;
 
 @end
 
@@ -122,7 +122,7 @@
 
 #pragma mark Data
 
-- (void)refreshRadioLivestreamsWithRequestQueue:(SRGRequestQueue *)requestQueue vendor:(SRGVendor)vendor completionBlock:(SRGPaginatedItemListCompletionBlock)completionBlock
+- (void)refreshRadioLivestreamsForVendor:(SRGVendor)vendor withRequestQueue:(SRGRequestQueue *)requestQueue completionBlock:(SRGMediaListCompletionBlock)completionBlock
 {
     SRGBaseRequest *request = [SRGDataProvider.currentDataProvider radioLivestreamsForVendor:vendor contentProviders:SRGContentProvidersDefault withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable originalMedias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         [requestQueue reportError:error];
@@ -136,7 +136,7 @@
             
             void (^checkCompletion)(void) = ^{
                 if (self.pendingMedias.count == 0) {
-                    self.pendingCompletionBlock(medias.copy, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+                    self.pendingCompletionBlock(medias.copy, HTTPResponse, error);
                     self.pendingCompletionBlock = nil;
                     self.pendingMedias = nil;
                 }
@@ -169,9 +169,20 @@
         }
         // For other livestream types, do nothing
         else {
-            completionBlock(originalMedias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+            completionBlock(originalMedias, HTTPResponse, error);
         }
     }];
+    [requestQueue addRequest:request resume:YES];
+}
+
+- (void)refreshFavoriteShowsForVendor:(SRGVendor)vendor transmission:(SRGTransmission)transmission channelUid:(NSString *)channelUid withRequestQueue:(SRGRequestQueue *)requestQueue completionBlock:(SRGShowListCompletionBlock)completionBlock
+{
+    SRGBaseRequest *request = [[SRGDataProvider.currentDataProvider showsWithURNs:FavoritesShowURNs().allObjects completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        [requestQueue reportError:error];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == %@", @keypath(SRGShow.new, transmission), @(transmission), @keypath(SRGShow.new, primaryChannelUid), channelUid];
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, title) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+        completionBlock([[shows filteredArrayUsingPredicate:predicate] sortedArrayUsingDescriptors:@[sortDescriptor]], HTTPResponse, error);
+    }] requestWithPageSize:50];
     [requestQueue addRequest:request resume:YES];
 }
 
@@ -200,13 +211,10 @@
         }
             
         case HomeSectionTVFavoriteShows: {
-            SRGBaseRequest *request = [[SRGDataProvider.currentDataProvider showsWithURNs:FavoritesShowURNs().allObjects completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-                [requestQueue reportError:error];
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGShow.new, transmission), @(SRGTransmissionTV)];
-                NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, title) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
-                paginatedItemListCompletionBlock([[shows filteredArrayUsingPredicate:predicate] sortedArrayUsingDescriptors:@[sortDescriptor]], page, nextPage, HTTPResponse, error);
-            }] requestWithPageSize:50];
-            [requestQueue addRequest:request resume:YES];
+            [self refreshFavoriteShowsForVendor:vendor transmission:SRGTransmissionTV channelUid:self.identifier withRequestQueue:requestQueue completionBlock:^(NSArray<SRGShow *> * _Nullable shows, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                // Error reporting is done by the refresh method directly, do not report twice here
+                paginatedItemListCompletionBlock(shows, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+            }];
             break;
         }
             
@@ -306,7 +314,10 @@
                 [requestQueue addRequest:request resume:YES];
             }
             else {
-                [self refreshRadioLivestreamsWithRequestQueue:requestQueue vendor:vendor completionBlock:paginatedItemListCompletionBlock];
+                [self refreshRadioLivestreamsForVendor:vendor withRequestQueue:requestQueue completionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                    // Error reporting is done by the refresh method directly, do not report twice here
+                    paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+                }];
             }
             break;
         }
@@ -321,13 +332,10 @@
         }
             
         case HomeSectionRadioFavoriteShows: {
-            SRGBaseRequest *request = [[SRGDataProvider.currentDataProvider showsWithURNs:FavoritesShowURNs().allObjects completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-                [requestQueue reportError:error];
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == %@", @keypath(SRGShow.new, transmission), @(SRGTransmissionRadio), @keypath(SRGShow.new, primaryChannelUid), self.identifier];
-                NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, title) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
-                paginatedItemListCompletionBlock([[shows filteredArrayUsingPredicate:predicate] sortedArrayUsingDescriptors:@[sortDescriptor]], page, nextPage, HTTPResponse, error);
-            }] requestWithPageSize:50];
-            [requestQueue addRequest:request resume:YES];
+            [self refreshFavoriteShowsForVendor:vendor transmission:SRGTransmissionRadio channelUid:self.identifier withRequestQueue:requestQueue completionBlock:^(NSArray<SRGShow *> * _Nullable shows, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                // Error reporting is done by the refresh method directly, do not report twice here
+                paginatedItemListCompletionBlock(shows, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+            }];
             break;
         }
             
