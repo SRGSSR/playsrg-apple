@@ -177,13 +177,31 @@
 
 - (void)refreshFavoriteShowsForVendor:(SRGVendor)vendor transmission:(SRGTransmission)transmission channelUid:(NSString *)channelUid withRequestQueue:(SRGRequestQueue *)requestQueue completionBlock:(SRGShowListCompletionBlock)completionBlock
 {
-    SRGBaseRequest *request = [[SRGDataProvider.currentDataProvider showsWithURNs:FavoritesShowURNs().allObjects completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-        [requestQueue reportError:error];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == %@", @keypath(SRGShow.new, transmission), @(transmission), @keypath(SRGShow.new, primaryChannelUid), channelUid];
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, title) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
-        completionBlock([[shows filteredArrayUsingPredicate:predicate] sortedArrayUsingDescriptors:@[sortDescriptor]], HTTPResponse, error);
-    }] requestWithPageSize:50];
-    [requestQueue addRequest:request resume:YES];
+    NSArray<NSString *> *showURNs = FavoritesShowURNs().allObjects;
+    NSMutableArray<SRGShow *> *allShows = [NSMutableArray array];
+    
+    // We must retrieve all shows in all cases since there is no way to know which ones match the `transmission` and `channelUid` parameters
+    __block SRGFirstPageRequest *firstRequest = nil;
+    firstRequest = [[SRGDataProvider.currentDataProvider showsWithURNs:showURNs completionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        if (error) {
+            [requestQueue reportError:error];
+            return;
+        }
+        
+        [allShows addObjectsFromArray:shows];
+        
+        if (nextPage) {
+            SRGPageRequest *nextRequest = [firstRequest requestWithPage:nextPage];
+            [requestQueue addRequest:nextRequest resume:YES];
+        }
+        else {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == %@", @keypath(SRGShow.new, transmission), @(transmission), @keypath(SRGShow.new, primaryChannelUid), channelUid];
+            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, title) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+            completionBlock([[allShows filteredArrayUsingPredicate:predicate] sortedArrayUsingDescriptors:@[sortDescriptor]], HTTPResponse, error);
+            firstRequest = nil;
+        }
+    }] requestWithPageSize:50 /* Use largest page size */];
+    [requestQueue addRequest:firstRequest resume:YES];
 }
 
 - (void)refreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionBlock:(SRGPaginatedItemListCompletionBlock)completionBlock
@@ -194,6 +212,7 @@
     SRGVendor vendor = applicationConfiguration.vendor;
     
     SRGPaginatedItemListCompletionBlock paginatedItemListCompletionBlock = ^(NSArray * _Nullable items, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        // Keep previous items in case of an error
         if (items) {
             self.items = items;
         }
