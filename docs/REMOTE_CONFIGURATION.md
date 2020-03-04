@@ -108,10 +108,11 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 ### Home sections
 
-* `tvLive`: Access to the livestreams.
-* `radioLive`: Access to the livestreams.
-* `tvLiveCenter`: Access to SwissTXT livestreams.
-* `tvScheduledLivestreams`: Access to scheduled livestreams.
+* `tvLive`: TV livestreams.
+* `radioLive`: Radio livestreams.
+* `radioLiveSatellite`: Satellite radio livestreams.
+* `tvLiveCenter`: SwissTXT livestreams.
+* `tvScheduledLivestreams`: Scheduled livestreams.
 
 ## Search
 

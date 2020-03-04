@@ -136,7 +136,7 @@
             NSString *level2 = (self.homeSectionInfo.homeSection == HomeSectionRadioLatestVideos) ? AnalyticsPageLevelVideo : AnalyticsPageLevelAudio;
             return @[ AnalyticsPageLevelPlay, level2, radioChannel.name ];
         }
-        else if (self.homeSectionInfo.homeSection == HomeSectionTVLive || self.homeSectionInfo.homeSection == HomeSectionRadioLive
+        else if (self.homeSectionInfo.homeSection == HomeSectionTVLive || self.homeSectionInfo.homeSection == HomeSectionRadioLive || self.homeSectionInfo.homeSection == HomeSectionRadioLiveSatellite
                     || self.homeSectionInfo.homeSection == HomeSectionTVLiveCenter || self.homeSectionInfo.homeSection == HomeSectionTVScheduledLivestreams) {
             return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelLive ];
         }

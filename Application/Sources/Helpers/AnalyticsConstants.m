@@ -39,6 +39,7 @@ AnalyticsPageTitle const AnalyticsPageTitleMostPopular = @"most popular";
 AnalyticsPageTitle const AnalyticsPageTitleNotifications = @"notifications";
 AnalyticsPageTitle const AnalyticsPageTitlePlayer = @"player";
 AnalyticsPageTitle const AnalyticsPageTitleRadio = @"radio";
+AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite = @"satellite radio";
 AnalyticsPageTitle const AnalyticsPageTitleSettings = @"settings";
 AnalyticsPageTitle const AnalyticsPageTitleShowsAZ = @"shows a-z";
 AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar = @"shows calendar";

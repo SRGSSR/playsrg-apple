@@ -55,6 +55,7 @@ NSValueTransformer *SettingLiveSectionTransformer(void)
     dispatch_once(&s_onceToken, ^{
         s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"tv" : @(HomeSectionTVLive),
                                                                                          @"radio" : @(HomeSectionRadioLive),
+                                                                                         @"radioSatellite" : @(HomeSectionRadioLiveSatellite),
                                                                                          @"livecenter" : @(HomeSectionTVLiveCenter),
                                                                                          @"scheduled_livestreams" : @(HomeSectionTVScheduledLivestreams) }
                                                                          defaultValue:@(HomeSectionUnknown)

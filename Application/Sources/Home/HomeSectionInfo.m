@@ -77,7 +77,7 @@
 
 - (BOOL)canOpenList
 {
-    return self.homeSection != HomeSectionTVLive && self.homeSection != HomeSectionRadioLive
+    return self.homeSection != HomeSectionTVLive && self.homeSection != HomeSectionRadioLive && self.homeSection != HomeSectionRadioLiveSatellite
         && self.homeSection != HomeSectionRadioAllShows
         && self.homeSection != HomeSectionTVShowsAccess && self.homeSection != HomeSectionRadioShowsAccess
         && self.homeSection != HomeSectionTVFavoriteShows && self.homeSection != HomeSectionRadioFavoriteShows
@@ -205,6 +205,13 @@
                     paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
                 }];
             }
+            break;
+        }
+            
+        case HomeSectionRadioLiveSatellite: {
+            return [SRGDataProvider.currentDataProvider radioLivestreamsForVendor:vendor contentProviders:SRGContentProvidersSwissSatelliteRadio withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+            }];
             break;
         }
             
