@@ -48,6 +48,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         NSMutableArray<UITabBarItem *> *tabBarItems = NSMutableArray.array;
         
         UIViewController *videosViewController = [[HomeViewController alloc] initWithHomeSections:applicationConfiguration.videoHomeSections radioChannel:nil];
+        videosViewController.title = NSLocalizedString(@"Videos", @"Title displayed at the top of the video view");
         [viewControllers addObject:videosViewController];
         UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos];
         videosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierVideosTabBarItem;
@@ -74,6 +75,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         NSArray<NSNumber *> *liveHomeSections = ApplicationConfiguration.sharedApplicationConfiguration.liveHomeSections;
         if (liveHomeSections.count != 0) {
             UIViewController *liveHomeViewController = [[HomeViewController alloc] initWithHomeSections:liveHomeSections radioChannel:nil];
+            liveHomeViewController.title = NSLocalizedString(@"Live", @"Title displayed at the top of the livestream view");
             [viewControllers addObject:liveHomeViewController];
             UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveHomeViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
             liveTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
