@@ -14,10 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured;
 
-@property (nonatomic, readonly, nullable) HomeSectionInfo *homeSectionInfo;
+@property (nonatomic, nullable) HomeSectionInfo *homeSectionInfo;
 @property (nonatomic, readonly, getter=isFeatured) BOOL featured;
-
-- (void)setHomeSectionInfo:(nullable HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured;
 
 @end
 

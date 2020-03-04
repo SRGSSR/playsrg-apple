@@ -16,16 +16,11 @@
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
-
 @interface HomeSectionHeaderView ()
 
 @property (nonatomic, weak) IBOutlet UIView *moduleBackgroundView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *navigationButton;
-
-@property (nonatomic) HomeSectionInfo *homeSectionInfo;
-@property (nonatomic, getter=isFeatured) BOOL featured;
 
 @end
 
@@ -81,10 +76,9 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 
 #pragma mark Getters and setters
 
-- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured
+- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo
 {
-    self.homeSectionInfo = homeSectionInfo;
-    self.featured = featured;
+    _homeSectionInfo = homeSectionInfo;
     
     UIColor *backgroundColor = UIColor.clearColor;
     UIColor *titleTextColor = UIColor.whiteColor;
@@ -97,7 +91,7 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     
     self.titleLabel.textColor = titleTextColor;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
-    self.titleLabel.text = ([HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:self.bounds featured:featured] > HomeSectionHeaderMinimumHeight) ? homeSectionInfo.title : nil;
+    self.titleLabel.text = homeSectionInfo.title;
     
     self.navigationButton.tintColor = titleTextColor;
     self.navigationButton.hidden = ! [homeSectionInfo canOpenList] || ! self.titleLabel.text;

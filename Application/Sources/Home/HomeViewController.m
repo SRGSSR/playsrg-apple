@@ -32,6 +32,12 @@
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGUserData/SRGUserData.h>
 
+typedef NS_ENUM(NSInteger, HomeHeaderType) {
+    HomeHeaderTypeNone,         // No header
+    HomeHeaderTypeSpace,        // A space, no header view
+    HomeHeaderTypeView          // A header with underlying view
+};
+
 @interface HomeViewController ()
 
 @property (nonatomic) ApplicationSectionInfo *applicationSectionInfo;
@@ -379,13 +385,36 @@
     return homeSectionInfo;
 }
 
-- (BOOL)hasFeaturedSection:(NSUInteger)section
+- (BOOL)isFeaturedInSection:(NSUInteger)section
 {
     if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
         return YES;
     }
     else {
         return section == 0;
+    }
+}
+
+- (HomeHeaderType)headerTypeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo tableView:(UITableView *)tableView inSection:(NSUInteger)section
+{
+    if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
+        return HomeHeaderTypeView;
+    }
+    else {
+        if (section == 0) {
+            ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+            BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
+            BOOL isFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
+            if (! UIAccessibilityIsVoiceOverRunning() && isFeaturedHeaderHidden) {
+                return HomeHeaderTypeSpace;
+            }
+            else {
+                return HomeHeaderTypeView;
+            }
+        }
+        else {
+            return HomeHeaderTypeView;
+        }
     }
 }
 
@@ -543,7 +572,7 @@
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[indexPath.section];
     if (! homeSectionInfo.hidden) {
-        BOOL featured = [self hasFeaturedSection:indexPath.section];
+        BOOL featured = [self isFeaturedInSection:indexPath.section];
         return [homeSectionInfo.cellClass heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:featured];
     }
     else {
@@ -553,7 +582,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(HomeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BOOL featured = [self hasFeaturedSection:indexPath.section];
+    BOOL featured = [self isFeaturedInSection:indexPath.section];
     [cell setHomeSectionInfo:self.homeSectionInfos[indexPath.section] featured:featured];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
@@ -565,26 +594,22 @@
         return 0.f;
     }
     
-    // Live layout: Display sections everywhere
-    if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
-        return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:YES];
-    }
-    // Overview layout: Do not display headers for featured sections
-    else {
-        BOOL featured = [self hasFeaturedSection:section];
-        if (featured) {
-            ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-            BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
-            BOOL isFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
-            if (! UIAccessibilityIsVoiceOverRunning() && isFeaturedHeaderHidden) {
-                return 10.f;
-            }
-            else {
-                return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:YES];
-            }
+    HomeHeaderType headerType = [self headerTypeForHomeSectionInfo:homeSectionInfo tableView:tableView inSection:section];
+    switch (headerType) {
+        case HomeHeaderTypeSpace: {
+            return 10.f;
+            break;
         }
-        else {
-            return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:NO];
+            
+        case HomeHeaderTypeView: {
+            BOOL featured = [self isFeaturedInSection:section];
+            return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:featured];
+            break;
+        }
+        
+        default: {
+            return 0.f;
+            break;
         }
     }
 }
@@ -592,21 +617,19 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[section];
-    if (! homeSectionInfo.hidden) {
+    if (homeSectionInfo.hidden) {
+        return nil;
+    }
+    
+    HomeHeaderType headerType = [self headerTypeForHomeSectionInfo:homeSectionInfo tableView:tableView inSection:section];
+    if (headerType == HomeHeaderTypeView) {
         HomeSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(HomeSectionHeaderView.class)];
-        BOOL featured = [self hasFeaturedSection:section];
-        [headerView setHomeSectionInfo:homeSectionInfo featured:featured];
+        headerView.homeSectionInfo = homeSectionInfo;
         return headerView;
     }
     else {
         return nil;
     }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(HomeSectionHeaderView *)headerView forSection:(NSInteger)section
-{
-    BOOL featured = [self hasFeaturedSection:section];
-    [headerView setHomeSectionInfo:self.homeSectionInfos[section] featured:featured];
 }
 
 #pragma mark Actions
