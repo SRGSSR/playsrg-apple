@@ -90,10 +90,7 @@
 
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
-    SRGBaseRequest *request = [self.homeSectionInfo requestWithPage:page completionBlock:completionHandler];
-    if (request) {
-        [requestQueue addRequest:request resume:YES];
-    }
+    [self.homeSectionInfo refreshWithRequestQueue:requestQueue page:page completionBlock:completionHandler];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

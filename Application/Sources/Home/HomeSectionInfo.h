@@ -39,9 +39,7 @@ typedef void (^SRGItemListCompletionBlock)(NSArray * _Nullable items, NSHTTPURLR
 
 @property (nonatomic, readonly, nullable) NSArray *items;
 
-- (void)refreshWithRequestQueue:(SRGRequestQueue *)requestQueue completionBlock:(nullable void (^)(NSError * _Nullable error))completionBlock;
-
-- (nullable SRGBaseRequest *)requestWithPage:(nullable SRGPage *)page completionBlock:(SRGPaginatedItemListCompletionBlock)paginatedItemListCompletionBlock;
+- (void)refreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(nullable SRGPage *)page completionBlock:(SRGPaginatedItemListCompletionBlock)completionBlock;
 
 @end
 
