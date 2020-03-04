@@ -27,7 +27,9 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 @interface HomeLiveMediaCollectionViewCell ()
 
+@property (nonatomic) SRGMedia *media;
 @property (nonatomic) SRGChannel *channel;
+@property (nonatomic, getter=isFeatured) BOOL featured;
 
 @property (nonatomic, weak) IBOutlet UIView *mediaView;
 @property (nonatomic, weak) IBOutlet UIView *placeholderView;
@@ -117,9 +119,11 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     self.placeholderView.hidden = NO;
     
     [self unregisterChannelUpdatesWithMedia:self.media];
-    self.media = nil;
     
+    self.media = nil;
     self.channel = nil;
+    
+    self.featured = NO;
     
     self.progressView.hidden = NO;
     self.progressView.progress = 1.f;
@@ -188,12 +192,13 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 #pragma mark Data
 
-- (void)setMedia:(SRGMedia *)media
+- (void)setMedia:(SRGMedia *)media featured:(BOOL)featured
 {
     [self unregisterChannelUpdatesWithMedia:self.media];
     
-    _media = media;
+    self.media = media;
     self.channel = media.channel;
+    self.featured = featured;
     
     [self registerForChannelUpdatesWithMedia:media];
     [self reloadData];
@@ -235,7 +240,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     self.mediaView.hidden = NO;
     self.placeholderView.hidden = YES;
     
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
     self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     
     SRGBlockingReason blockingReason = [self.media blockingReasonAtDate:NSDate.date];
@@ -251,7 +256,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
         self.titleLabel.textColor = UIColor.play_lightGrayColor;
     }
     
-    SRGAppearanceFontTextStyle subtitleTextStyle = SRGAppearanceFontTextStyleSubtitle;
+    SRGAppearanceFontTextStyle subtitleTextStyle = self.featured ? SRGAppearanceFontTextStyleBody : SRGAppearanceFontTextStyleSubtitle;
     ImageScale imageScale = ImageScaleMedium;
     
     self.subtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:subtitleTextStyle];
