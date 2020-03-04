@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "LiveMediaCollectionViewCell.h"
+#import "HomeLiveMediaCollectionViewCell.h"
 
 #import "AnalyticsConstants.h"
 #import "ChannelService.h"
@@ -25,7 +25,7 @@
 
 static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
-@interface LiveMediaCollectionViewCell ()
+@interface HomeLiveMediaCollectionViewCell ()
 
 @property (nonatomic) SRGChannel *channel;
 
@@ -42,7 +42,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 @end
 
-@implementation LiveMediaCollectionViewCell
+@implementation HomeLiveMediaCollectionViewCell
 
 #pragma mark Class methods
 

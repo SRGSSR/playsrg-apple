@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LiveMediaCollectionViewCell : UICollectionViewCell <Previewing>
+@interface HomeLiveMediaCollectionViewCell : UICollectionViewCell <Previewing>
 
 + (CGFloat)heightForMedia:(SRGMedia *)media withWidth:(CGFloat)width;
 
