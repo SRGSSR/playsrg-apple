@@ -484,7 +484,7 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return TitleForApplicationSection(ApplicationSectionOverview);
+    return AnalyticsPageTitleHome;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
