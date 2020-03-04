@@ -372,11 +372,21 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == %@", @keypath(HomeSectionInfo.new, homeSection), @(homeSection),
                               @keypath(HomeSectionInfo.new, object), object];
     HomeSectionInfo *homeSectionInfo = [self.homeSectionInfos filteredArrayUsingPredicate:predicate].firstObject;
-    if (!homeSectionInfo) {
+    if (! homeSectionInfo) {
         homeSectionInfo = [[HomeSectionInfo alloc] initWithHomeSection:homeSection object:object];
     }
     homeSectionInfo.title = title;
     return homeSectionInfo;
+}
+
+- (BOOL)hasFeaturedSection:(NSUInteger)section
+{
+    if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
+        return YES;
+    }
+    else {
+        return section == 0;
+    }
 }
 
 #pragma mark ContentInsets protocol
@@ -533,7 +543,8 @@
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[indexPath.section];
     if (! homeSectionInfo.hidden) {
-        return [homeSectionInfo.cellClass heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:(indexPath.section == 0)];
+        BOOL featured = [self hasFeaturedSection:indexPath.section];
+        return [homeSectionInfo.cellClass heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:featured];
     }
     else {
         return 0.f;
@@ -542,18 +553,39 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(HomeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [cell setHomeSectionInfo:self.homeSectionInfos[indexPath.section] featured:(indexPath.section == 0)];
+    BOOL featured = [self hasFeaturedSection:indexPath.section];
+    [cell setHomeSectionInfo:self.homeSectionInfos[indexPath.section] featured:featured];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[section];
-    if (! homeSectionInfo.hidden) {
-        return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:(section == 0)];
-    }
-    else {
+    if (homeSectionInfo.hidden) {
         return 0.f;
+    }
+    
+    // Live layout: Display sections everywhere
+    if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
+        return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:YES];
+    }
+    // Overview layout: Do not display headers for featured sections
+    else {
+        BOOL featured = [self hasFeaturedSection:section];
+        if (featured) {
+            ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+            BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
+            BOOL isFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
+            if (! UIAccessibilityIsVoiceOverRunning() && isFeaturedHeaderHidden) {
+                return 10.f;
+            }
+            else {
+                return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:YES];
+            }
+        }
+        else {
+            return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:NO];
+        }
     }
 }
 
@@ -562,7 +594,8 @@
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[section];
     if (! homeSectionInfo.hidden) {
         HomeSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(HomeSectionHeaderView.class)];
-        [headerView setHomeSectionInfo:homeSectionInfo featured:(section == 0)];
+        BOOL featured = [self hasFeaturedSection:section];
+        [headerView setHomeSectionInfo:homeSectionInfo featured:featured];
         return headerView;
     }
     else {
@@ -572,7 +605,8 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(HomeSectionHeaderView *)headerView forSection:(NSInteger)section
 {
-    [headerView setHomeSectionInfo:self.homeSectionInfos[section] featured:(section == 0)];
+    BOOL featured = [self hasFeaturedSection:section];
+    [headerView setHomeSectionInfo:self.homeSectionInfos[section] featured:featured];
 }
 
 #pragma mark Actions
