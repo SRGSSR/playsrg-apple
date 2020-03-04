@@ -34,7 +34,8 @@
     
     NSMutableArray<UIViewController *> *viewControllers = [NSMutableArray array];
     for (RadioChannel *radioChannel in radioChannels) {
-        HomeViewController *viewController = [[HomeViewController alloc] initWithHomeSections:radioChannel.homeSections radioChannel:radioChannel];
+        ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
+        HomeViewController *viewController = [[HomeViewController alloc] initWithApplicationSectionInfo:applicationSectionInfo homeSections:radioChannel.homeSections];
         viewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:radioChannel.name image:RadioChannelLogo22Image(radioChannel) tag:0];
         [viewControllers addObject:viewController];
     }

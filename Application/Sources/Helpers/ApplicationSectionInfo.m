@@ -131,27 +131,6 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
             break;
         }
             
-        case ApplicationSectionOverview: {
-            return [UIImage imageNamed:@"home-22"];
-            break;
-        }
-            
-        case ApplicationSectionShowByDate: {
-            return [UIImage imageNamed:@"calendar-22"];
-            break;
-        }
-            
-        case ApplicationSectionShowAZ: {
-            return [UIImage imageNamed:@"atoz-22"];
-            break;
-        }
-            
-        case ApplicationSectionRadioLive: {
-            RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:self.uid];
-            return RadioChannelLogo22Image(radioChannel);
-            break;
-        }
-            
         default: {
             return nil;
             break;

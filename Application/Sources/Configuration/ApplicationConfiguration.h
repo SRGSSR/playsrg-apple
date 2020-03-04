@@ -62,16 +62,10 @@ typedef NS_ENUM(NSInteger, ApplicationSection) {
     ApplicationSectionNotifications,
     
     ApplicationSectionOverview,
+    ApplicationSectionLive,
     ApplicationSectionShowByDate,
-    ApplicationSectionShowAZ,
-    
-    ApplicationSectionTVLive,
-    ApplicationSectionRadioLive,
-    ApplicationSectionLiveCenter,
-    ApplicationSectionScheduledLivestreams
+    ApplicationSectionShowAZ
 };
-
-OBJC_EXPORT HomeSection HomeSectionForApplicationSection(ApplicationSection applicationSection);
 
 OBJC_EXPORT NSString *TitleForApplicationSection(ApplicationSection applicationSection);
 OBJC_EXPORT NSString *TitleForHomeSection(HomeSection homeSection);

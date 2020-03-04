@@ -47,7 +47,8 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         NSMutableArray<UIViewController *> *viewControllers = NSMutableArray.array;
         NSMutableArray<UITabBarItem *> *tabBarItems = NSMutableArray.array;
         
-        UIViewController *videosViewController = [[HomeViewController alloc] initWithHomeSections:applicationConfiguration.videoHomeSections radioChannel:nil];
+        ApplicationSectionInfo *videosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
+        UIViewController *videosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:videosApplicationSectionInfo homeSections:applicationConfiguration.videoHomeSections];
         videosViewController.title = NSLocalizedString(@"Videos", @"Title displayed at the top of the video view");
         [viewControllers addObject:videosViewController];
         UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos];
@@ -61,7 +62,8 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         }
         else if (radioChannels.count == 1) {
             RadioChannel *radioChannel = radioChannels.firstObject;
-            audiosViewController = [[HomeViewController alloc] initWithHomeSections:radioChannel.homeSections radioChannel:radioChannel];
+            ApplicationSectionInfo *audiosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
+            audiosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:audiosApplicationSectionInfo homeSections:radioChannel.homeSections];
             audiosViewController.title = NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
         }
         
@@ -74,7 +76,8 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         NSArray<NSNumber *> *liveHomeSections = ApplicationConfiguration.sharedApplicationConfiguration.liveHomeSections;
         if (liveHomeSections.count != 0) {
-            UIViewController *liveHomeViewController = [[HomeViewController alloc] initWithHomeSections:liveHomeSections radioChannel:nil];
+            ApplicationSectionInfo *liveApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionLive radioChannel:nil];
+            UIViewController *liveHomeViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:liveApplicationSectionInfo homeSections:liveHomeSections];
             liveHomeViewController.title = NSLocalizedString(@"Live", @"Title displayed at the top of the livestream view");
             [viewControllers addObject:liveHomeViewController];
             UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveHomeViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];

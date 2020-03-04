@@ -167,20 +167,6 @@ static TopicSection TopicSectionWithString(NSString *string)
     return section ? section.integerValue : TopicSectionUnknown;
 }
 
-HomeSection HomeSectionForApplicationSection(ApplicationSection applicationSection)
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSNumber *, NSNumber *> *s_sections;
-    dispatch_once(&s_onceToken, ^{
-        s_sections = @{ @(ApplicationSectionTVLive) : @(HomeSectionTVLive),
-                        @(ApplicationSectionRadioLive) : @(HomeSectionRadioLive),
-                        @(ApplicationSectionLiveCenter) : @(HomeSectionTVLiveCenter),
-                        @(ApplicationSectionScheduledLivestreams) : @(HomeSectionTVScheduledLivestreams) };
-    });
-    NSNumber *section = s_sections[@(applicationSection)];
-    return section ? section.integerValue : HomeSectionUnknown;
-}
-
 NSString *TitleForApplicationSection(ApplicationSection applicationSection)
 {
     static NSDictionary<NSNumber *, NSString *> *s_names;
@@ -193,6 +179,7 @@ NSString *TitleForApplicationSection(ApplicationSection applicationSection)
                      @(ApplicationSectionSearch) : NSLocalizedString(@"Search", @"Label to present the search view"),
                      @(ApplicationSectionShowByDate) : NSLocalizedString(@"Programmes by date", @"Label to present programmes by date"),
                      @(ApplicationSectionOverview) : NSLocalizedString(@"Overview", @"Label to present the main Videos / Audios views"),
+                     @(ApplicationSectionLive) : NSLocalizedString(@"Live", @"Label to present the live view"),
                      @(ApplicationSectionShowAZ) : NSLocalizedString(@"Programmes A-Z", @"Label to present shows A to Z (radio or TV)"),
                      @(ApplicationSectionWatchLater) : NSLocalizedString(@"Watch later", @"Label to present the watch later list") };
     });

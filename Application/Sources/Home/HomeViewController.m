@@ -34,8 +34,8 @@
 
 @interface HomeViewController ()
 
+@property (nonatomic) ApplicationSectionInfo *applicationSectionInfo;
 @property (nonatomic) NSArray<NSNumber *> *homeSections;
-@property (nonatomic) RadioChannel *radioChannel;
 
 @property (nonatomic) NSArray<HomeSectionInfo *> *homeSectionInfos;
 
@@ -56,22 +56,23 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithHomeSections:(NSArray<NSNumber *> *)homeSections radioChannel:(RadioChannel *)radioChannel
+- (instancetype)initWithApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo homeSections:(NSArray<NSNumber *> *)homeSections
 {
     if (self = [super init]) {
+        self.applicationSectionInfo = applicationSectionInfo;
         self.homeSections = homeSections;
-        self.radioChannel = radioChannel;
-        
-        if (self.radioChannel) {
-            self.title = self.radioChannel.name;
-        }
-        else {
-            self.title = TitleForApplicationSection(ApplicationSectionOverview);
-        }
+        self.title = applicationSectionInfo.title;
         
         [self synchronizeHomeSections];
     }
     return self;
+}
+
+#pragma mark Getters and setters
+
+- (RadioChannel *)radioChannel
+{
+    return self.applicationSectionInfo.radioChannel;
 }
 
 #pragma mark View lifecycle
@@ -483,13 +484,16 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return AnalyticsPageTitleHome;
+    return TitleForApplicationSection(ApplicationSectionOverview);
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     if (self.radioChannel) {
         return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, self.radioChannel.name ];
+    }
+    else if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelLive ];
     }
     else {
         return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
