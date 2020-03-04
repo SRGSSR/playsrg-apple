@@ -8,10 +8,8 @@
 
 #import "AccessibilityIdentifierConstants.h"
 #import "ApplicationSettings.h"
-#import "HomeLivestreamsViewController.h"
 #import "HomeViewController.h"
 #import "LibraryViewController.h"
-#import "LivestreamsViewController.h"
 #import "MiniPlayerView.h"
 #import "NavigationController.h"
 #import "PushService.h"
@@ -73,22 +71,13 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
             [tabBarItems addObject:audiosTabBarItem];
         }
         
-        UIViewController *livestreamsViewController = nil;
         NSArray<NSNumber *> *liveHomeSections = ApplicationConfiguration.sharedApplicationConfiguration.liveHomeSections;
-        if (liveHomeSections.count > 1) {
-            livestreamsViewController = [[LivestreamsViewController alloc] initWithHomeSections:liveHomeSections];
-        }
-        else if (liveHomeSections.count == 1) {
-            HomeSectionInfo *homeSectionInfo = [[HomeSectionInfo alloc] initWithHomeSection:liveHomeSections.firstObject.integerValue];
-            livestreamsViewController = [[HomeLivestreamsViewController alloc] initWithHomeSectionInfo:homeSectionInfo];
-            livestreamsViewController.title = NSLocalizedString(@"Live", @"Title displayed at the top of the livestreams view");
-        }
-        
-        if (livestreamsViewController) {
-            [viewControllers addObject:livestreamsViewController];
-            UITabBarItem *livestreamsTabBarItem = [[UITabBarItem alloc] initWithTitle:livestreamsViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
-            livestreamsTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
-            [tabBarItems addObject:livestreamsTabBarItem];
+        if (liveHomeSections.count != 0) {
+            UIViewController *liveHomeViewController = [[HomeViewController alloc] initWithHomeSections:liveHomeSections radioChannel:nil];
+            [viewControllers addObject:liveHomeViewController];
+            UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveHomeViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
+            liveTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
+            [tabBarItems addObject:liveTabBarItem];
         }
         
         UIViewController *searchViewController = [[SearchViewController alloc] init];
