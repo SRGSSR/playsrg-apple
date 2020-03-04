@@ -29,6 +29,10 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 @property (nonatomic) SRGChannel *channel;
 
+@property (nonatomic, weak) IBOutlet UIView *mediaView;
+@property (nonatomic, weak) IBOutlet UIView *placeholderView;
+@property (nonatomic, weak) IBOutlet UIImageView *placeholderImageView;
+
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
@@ -79,6 +83,16 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     UIColor *backgroundColor = UIColor.play_blackColor;
     self.backgroundColor = backgroundColor;
     
+    self.mediaView.hidden = YES;
+    self.placeholderView.hidden = NO;
+    
+    self.placeholderImageView.layer.cornerRadius = 4.f;
+    self.placeholderImageView.layer.masksToBounds = YES;
+    
+    // Accommodate all kinds of usages (medium or small)
+    self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMedia)
+                                                            withScale:ImageScaleMedium];
+    
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
     self.titleLabel.backgroundColor = backgroundColor;
@@ -98,6 +112,9 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 - (void)prepareForReuse
 {
     [super prepareForReuse];
+    
+    self.mediaView.hidden = YES;
+    self.placeholderView.hidden = NO;
     
     [self unregisterChannelUpdatesWithMedia:self.media];
     self.media = nil;
@@ -209,6 +226,15 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 - (void)reloadData
 {
+    if (! self.media) {
+        self.mediaView.hidden = YES;
+        self.placeholderView.hidden = NO;
+        return;
+    }
+    
+    self.mediaView.hidden = NO;
+    self.placeholderView.hidden = YES;
+    
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     
