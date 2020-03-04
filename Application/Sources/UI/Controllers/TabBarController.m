@@ -49,7 +49,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         NSMutableArray<UIViewController *> *viewControllers = NSMutableArray.array;
         NSMutableArray<UITabBarItem *> *tabBarItems = NSMutableArray.array;
         
-        UIViewController *videosViewController = [[HomeViewController alloc] initWithRadioChannel:nil];
+        UIViewController *videosViewController = [[HomeViewController alloc] initWithHomeSections:applicationConfiguration.videoHomeSections radioChannel:nil];
         [viewControllers addObject:videosViewController];
         UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos];
         videosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierVideosTabBarItem;
@@ -61,7 +61,8 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
             audiosViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
         }
         else if (radioChannels.count == 1) {
-            audiosViewController = [[HomeViewController alloc] initWithRadioChannel:radioChannels.firstObject];
+            RadioChannel *radioChannel = radioChannels.firstObject;
+            audiosViewController = [[HomeViewController alloc] initWithHomeSections:radioChannel.homeSections radioChannel:radioChannel];
             audiosViewController.title = NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
         }
         

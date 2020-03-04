@@ -18,10 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HomeViewController : RequestViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PlayApplicationNavigation, Scrollable, SRGAnalyticsViewTracking, UITableViewDataSource, UITableViewDelegate>
 
 /**
- *  Instantiate for the home page belonging to the specified radio channel. If no channel is provided, the TV home page will be
- *  displayed instead.
+ *  Instantiate a home displaying the provided sections, related to the specified radio channel (or TV in general if none
+ *  is provided).
  */
-- (instancetype)initWithRadioChannel:(nullable RadioChannel *)radioChannel NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithHomeSections:(NSArray<NSNumber *> *)homeSections radioChannel:(nullable RadioChannel *)radioChannel NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, readonly, nullable) RadioChannel *radioChannel;
 

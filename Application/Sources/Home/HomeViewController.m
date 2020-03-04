@@ -56,10 +56,10 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel
+- (instancetype)initWithHomeSections:(NSArray<NSNumber *> *)homeSections radioChannel:(RadioChannel *)radioChannel
 {
     if (self = [super init]) {
-        self.homeSections = radioChannel ? radioChannel.homeSections : ApplicationConfiguration.sharedApplicationConfiguration.videoHomeSections;
+        self.homeSections = homeSections;
         self.radioChannel = radioChannel;
         
         if (self.radioChannel) {
