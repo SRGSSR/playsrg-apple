@@ -56,13 +56,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         }
         
         _previousAccessibilityHeadingSection = -1;
-        
-        if (self.radioChannel) {
-            self.title = NSLocalizedString(@"Programmes A-Z", @"Title displayed at the top of a (radio) show list");
-        }
-        else {
-            self.title = NSLocalizedString(@"TV programmes A-Z", @"Title displayed at the top of the TV show list");
-        }
     }
     return self;
 }
@@ -70,6 +63,13 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (instancetype)init
 {
     return [self initWithRadioChannel:nil alphabeticalIndex:nil];
+}
+
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionShowAZ);
 }
 
 #pragma mark View lifecycle

@@ -30,6 +30,13 @@
 
 @implementation WatchLaterViewController
 
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionWatchLater);
+}
+
 #pragma mark View lifecycle
 
 - (void)loadView
@@ -53,8 +60,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = NSLocalizedString(@"Watch later", @"Title displayed at the top of the watch later list screen");
     
     self.emptyTableTitle = NSLocalizedString(@"No content", @"Text displayed when no media added to the watch later list");
     self.emptyTableSubtitle = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a content to add it to this watch later list", @"Hint displayed when no media added to the watch later list and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a content to add it to this watch later list", @"Hint displayed when no media added to the watch later list and the device does not support 3D touch");

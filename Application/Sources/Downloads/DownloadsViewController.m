@@ -7,6 +7,7 @@
 #import "DownloadsViewController.h"
 
 #import "AnalyticsConstants.h"
+#import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "Download.h"
 #import "DownloadFooterSectionView.h"
@@ -43,6 +44,13 @@
     return self;
 }
 
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionDownloads);
+}
+
 #pragma mark View lifecycle
 
 - (void)loadView
@@ -72,8 +80,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = NSLocalizedString(@"Downloads", @"Title displayed at the top of the downloads screen");
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;

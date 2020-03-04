@@ -72,7 +72,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (NSString *)title
 {
-    return NSLocalizedString(@"Search", @"Search page title");
+    return TitleForApplicationSection(ApplicationSectionSearch);
 }
 
 #pragma mark Helpers

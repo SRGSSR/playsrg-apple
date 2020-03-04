@@ -66,7 +66,7 @@
             self.title = self.radioChannel.name;
         }
         else {
-            self.title = NSLocalizedString(@"Videos", @"Videos home page title");
+            self.title = TitleForApplicationSection(ApplicationSectionOverview);
         }
         
         [self synchronizeHomeSections];

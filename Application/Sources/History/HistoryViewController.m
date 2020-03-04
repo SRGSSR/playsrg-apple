@@ -30,6 +30,13 @@
 
 @implementation HistoryViewController
 
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionHistory);
+}
+
 #pragma mark View lifecycle
 
 - (void)loadView
@@ -53,8 +60,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = NSLocalizedString(@"History", @"Title displayed at the top of the history screen");
     
     self.emptyTableTitle = NSLocalizedString(@"No history", @"Text displayed when no history is available");
     self.emptyTableSubtitle = NSLocalizedString(@"Recently played medias will be displayed here", @"Hint displayed when no history is available");
