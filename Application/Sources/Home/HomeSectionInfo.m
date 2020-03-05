@@ -195,7 +195,9 @@
             [requestQueue addRequest:nextRequest resume:YES];
         }
         else {
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == %@", @keypath(SRGShow.new, transmission), @(transmission), @keypath(SRGShow.new, primaryChannelUid), channelUid];
+            NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGShow * _Nullable show, NSDictionary<NSString *,id> * _Nullable bindings) {
+                return transmission == show.transmission && (! channelUid || [channelUid isEqualToString:show.primaryChannelUid]);
+            }];
             NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGShow.new, title) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
             completionBlock([[allShows filteredArrayUsingPredicate:predicate] sortedArrayUsingDescriptors:@[sortDescriptor]], HTTPResponse, error);
             firstRequest = nil;
