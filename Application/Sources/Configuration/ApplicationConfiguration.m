@@ -36,7 +36,7 @@ NSString *TitleForHomeSection(HomeSection homeSection)
                      @(HomeSectionTVShowsAccess) : NSLocalizedString(@"Shows", @"Title label used to present the TV shows AZ and TV shows by date access buttons."),
                      @(HomeSectionTVFavoriteShows) : NSLocalizedString(@"Favorites", @"Title label used to present the TV favorite shows."),
                      @(HomeSectionRadioLive) : NSLocalizedString(@"Radio", @"Title label to present main radio livestreams"),
-                     @(HomeSectionRadioLiveSatellite) : NSLocalizedString(@"Satellite radios", @"Title label to present satellite radios"),
+                     @(HomeSectionRadioLiveSatellite) : NSLocalizedString(@"Swiss Radio", @"Title label to present satellite radios"),
                      @(HomeSectionRadioLatestEpisodes) : NSLocalizedString(@"The latest episodes", @"Title label used to present the radio latest audio episodes"),
                      @(HomeSectionRadioMostPopular) : NSLocalizedString(@"Most listened to", @"Title label used to present the radio most listened / popular audio medias"),
                      @(HomeSectionRadioLatest) : NSLocalizedString(@"The latest audios", @"Title label used to present the radio latest audios"),

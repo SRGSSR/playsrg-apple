@@ -74,8 +74,7 @@
 /* Introductory text for next program information */
 "At %1$@: %2$@" = "Um %1$@: %2$@";
 
-/* [Technical] Title for audio analytics measurements
-   Audios option
+/* Audios option
    Header for audio search results
    Title displayed at the top of the audio view */
 "Audios" = "Audios";
@@ -103,9 +102,6 @@
 /* Information message of the action view to choose a regional radio
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Wählen Sie Ihr Regionaljournal";
-
-/* No comment provided by engineer. */
-"Close" = "Schliessen";
 
 /* Settings section header */
 "Content" = "Medientyp";
@@ -141,9 +137,7 @@
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Als Download verfügbar";
 
-/* [Technical] Downloads page type for analytics measurements
-   Label to present downloads
-   Title displayed at the top of the downloads screen */
+/* Label to present downloads */
 "Downloads" = "Downloads";
 
 /* Settings section header */
@@ -170,10 +164,8 @@
 /* Short label identifying content which has expired. */
 "Expired" = "Abgelaufen";
 
-/* [Technical] Favorites page type for analytics measurements
-   Favorite show label when added ,in the show view
+/* Favorite show label when added ,in the show view
    Label to present Favorites
-   Title displayed at the top of the favorites screen
    Title label used to present the radio favorite shows.
    Title label used to present the TV favorite shows. */
 "Favorites" = "Favoriten";
@@ -191,9 +183,7 @@
 /* Total free space size, display at the bottom of download list */
 "Free space: %@" = "Verfügbarer Speicher: %@";
 
-/* [Technical] History page type for analytics measurements
-   Label to present history
-   Title displayed at the top of the history screen */
+/* Label to present history */
 "History" = "Zuletzt gesehen";
 
 /* Image copyright introductory label */
@@ -224,15 +214,12 @@
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
 "less than 1 hour" = "< 1 Stunde";
 
-/* [Technical] Title for library analytics measurements */
-"Library" = "Library";
-
-/* [Technical] Title for livestreams analytics measurements
+/* Label to present the live view
    Short label identifying a livestream. Display in uppercase.
-   Title displayed at the top of the livestreams view */
+   Title displayed at the top of the livestream view */
 "Live" = "Live";
 
-/* Text displayed within the login / sign up library header when no user is displayed */
+/* Text displayed within the login / sign up profile header when no user is displayed */
 "Login / Sign up" = "Anmelden / Registrieren";
 
 /* Message title displayed when the user is forced to update the application. */
@@ -243,9 +230,6 @@
 
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Inhalt noch nicht verfügbar";
-
-/* Title displayed at the top of the library view, if no identity service is available */
-"More" = "More";
 
 /* Button label to open the show episode page from the long-press menu
    Button label to open the show episode page from the preview window
@@ -301,9 +285,7 @@
 /* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
 "Not available since %@" = "Nicht mehr verfügbar seit %@";
 
-/* [Technical] Notifications page type for analytics measurements
-   Label to present the help page
-   Title displayed at the top of the notifications screen */
+/* Label to present the help page */
 "Notifications" = "Push-Mitteilungen";
 
 /* Message at the top of the screen displayed when disabling push notifications. Quotes around the content placeholder are managed by the application. */
@@ -322,12 +304,6 @@
    Title of the button when the user subscribed to all TV and radio shows
    Title of the search settings button to apply settings */
 "OK" = "OK";
-
-/* [Technical] Onboarding page type for analytics measurements */
-"Onboarding" = "Onboarding";
-
-/* [Technical] Online page type for analytics measurements */
-"Online" = "Online";
 
 /* Button label to open a media from the start from the long-press menu
    Button label to open a media from the start from the preview window
@@ -348,23 +324,16 @@
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Im Ausland verfügbar";
 
-/* Notification message when a media is paused due to Handoff activity. */
-"Playback has resumed on another device." = "Die Wiedergabe wurde auf einem anderen Gerät fortgesetzt.";
-
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Zurück";
 
-/* Title displayed at the top of the library view, if identity service is available */
+/* Title displayed at the top of the profile view */
 "Profile" = "Profil";
 
-/* [Technical] Title for programmes A-Z page view analytics measurements
-   Label to present shows A to Z (radio or TV)
-   Title displayed at the top of a (radio) show list */
+/* Label to present shows A to Z (radio or TV) */
 "Programmes A-Z" = "Sendungen A bis Z";
 
-/* [Technical] Title for programmes by date page view analytics measurements
-   Label to present programmes by date
-   Title displayed at the top of the screen where (radio) episodes can be accessed by date */
+/* Label to present programmes by date */
 "Programmes by date" = "Sendungen nach Datum";
 
 /* Settings section header */
@@ -373,8 +342,7 @@
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Herunterziehen, um Seite nochmals zu laden";
 
-/* [Technical] Radio page type for analytics measurements
-   Title label to present main radio livestreams */
+/* Title label to present main radio livestreams */
 "Radio" = "Radio";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
@@ -431,9 +399,7 @@
 /* Title of the reset search settings button */
 "Reset" = "Zurücksetzen";
 
-/* [Technical] Search page type for analytics measurements
-   Label to present the search view
-   Search page title
+/* Label to present the search view
    Search placeholder text
    Title displayed when there is no search criterium entered */
 "Search" = "Suche";
@@ -492,13 +458,13 @@
 "Subscribed to all TV and radio shows." = "Push-Mitteilungen für alle Sendungen aktiviert.";
 
 /* Message description displayed when subscribing to all TV and radio shows */
-"Subscribing to all TV and radio shows…" = "Push-Mitteilungen für alle Sendungen aktivieren.";
+"Subscribing to all TV and radio shows…" = "Push-Mitteilungen für alle Sendungen werden aktiviert…";
 
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Mit Untertiteln";
 
-/* [Technical] System page type for analytics measurements */
-"System" = "System";
+/* Title label to present satellite radios */
+"Swiss Radio" = "Swiss Radio";
 
 /* No comment provided by engineer. */
 "The application unexpectedly quit" = "Die App wurde unterwartet beendet";
@@ -568,15 +534,8 @@
 /* Title label used to present trending TV videos */
 "Trending videos" = "Populäre Videos";
 
-/* [Technical] TV page type for analytics measurements
-   Title label to present main TV livestreams */
+/* Title label to present main TV livestreams */
 "TV" = "TV";
-
-/* Title displayed at the top of the TV show list */
-"TV programmes A-Z" = "TV-Sendungen A bis Z";
-
-/* Title displayed at the top of the screen where TV episodes can be accessed by date */
-"TV programmes by date" = "TV-Sendungen nach Datum";
 
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Suchbegriff eingeben";
@@ -585,15 +544,14 @@
 "Update" = "Updaten";
 
 /* Header for video search results
-   Videos home page title
+   Title displayed at the top of the video view
    Videos option */
 "Videos" = "Videos";
 
 /* Header for video and audio search results */
 "Videos and audios" = "Video und Audio";
 
-/* Label to present the watch later list
-   Title displayed at the top of the watch later list screen */
+/* Label to present the watch later list */
 "Watch later" = "Später schauen";
 
 /* Web first label on media cells */
