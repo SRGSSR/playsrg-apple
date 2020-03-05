@@ -56,7 +56,7 @@ NSValueTransformer *TabBarItemIdentifierTransformer(void)
                                                                                          @"audios" : @(TabBarItemIdentifierAudios),
                                                                                          @"livestreams" : @(TabBarItemIdentifierLivestreams),
                                                                                          @"search" : @(TabBarItemIdentifierSearch),
-                                                                                         @"library" : @(TabBarItemIdentifierLibrary) }
+                                                                                         @"profile" : @(TabBarItemIdentifierProfile) }
                                                                          defaultValue:@(TabBarItemIdentifierNone)
                                                                   reverseDefaultValue:nil];
     });

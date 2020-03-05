@@ -50,7 +50,7 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
                                                               options:@{ ApplicationSectionOptionNotificationKey : notification }];
 }
 
-+ (NSArray<ApplicationSectionInfo *> *)libraryApplicationSectionInfos
++ (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfos
 {
     NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
     if (@available(iOS 10, *)) {

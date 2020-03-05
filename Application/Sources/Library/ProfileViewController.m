@@ -4,18 +4,18 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "LibraryViewController.h"
+#import "ProfileViewController.h"
 
 #import "AnalyticsConstants.h"
 #import "ApplicationSectionInfo.h"
 #import "DownloadsViewController.h"
 #import "FavoritesViewController.h"
 #import "HistoryViewController.h"
-#import "LibraryAccountHeaderView.h"
-#import "LibraryTableViewCell.h"
 #import "NavigationController.h"
 #import "NotificationsViewController.h"
 #import "NSBundle+PlaySRG.h"
+#import "ProfileAccountHeaderView.h"
+#import "ProfileTableViewCell.h"
 #import "PushService.h"
 #import "SettingsViewController.h"
 #import "UIColor+PlaySRG.h"
@@ -27,7 +27,7 @@
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGIdentity/SRGIdentity.h>
 
-@interface LibraryViewController ()
+@interface ProfileViewController ()
 
 @property (nonatomic) NSArray<ApplicationSectionInfo *> *sectionInfos;
 
@@ -35,7 +35,7 @@
 
 @end
 
-@implementation LibraryViewController
+@implementation ProfileViewController
 
 #pragma mark Object lifecycle
 
@@ -61,7 +61,7 @@
     self.tableView.delegate = self;
     
     if (SRGIdentityService.currentIdentityService) {
-        self.tableView.tableHeaderView = [LibraryAccountHeaderView view];
+        self.tableView.tableHeaderView = [ProfileAccountHeaderView view];
     }
     
     NSString *cellIdentifier = NSStringFromClass(NotificationTableViewCell.class);
@@ -143,7 +143,7 @@
 
 - (void)reloadData
 {
-    self.sectionInfos = ApplicationSectionInfo.libraryApplicationSectionInfos;
+    self.sectionInfos = ApplicationSectionInfo.profileApplicationSectionInfos;
     [self.tableView reloadData];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -262,7 +262,7 @@
         return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(NotificationTableViewCell.class) forIndexPath:indexPath];
     }
     else {
-        return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(LibraryTableViewCell.class) forIndexPath:indexPath];
+        return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(ProfileTableViewCell.class) forIndexPath:indexPath];
     }
 }
 
@@ -281,8 +281,8 @@
         notificationTableViewCell.notification = notification;
     }
     else {
-        LibraryTableViewCell *libraryTableViewCell = (LibraryTableViewCell *)cell;
-        libraryTableViewCell.applicationSectionInfo = self.sectionInfos[indexPath.row];
+        ProfileTableViewCell *profileTableViewCell = (ProfileTableViewCell *)cell;
+        profileTableViewCell.applicationSectionInfo = self.sectionInfos[indexPath.row];
     }
 }
 

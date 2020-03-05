@@ -9,9 +9,9 @@
 #import "AccessibilityIdentifierConstants.h"
 #import "ApplicationSettings.h"
 #import "HomeViewController.h"
-#import "LibraryViewController.h"
 #import "MiniPlayerView.h"
 #import "NavigationController.h"
+#import "ProfileViewController.h"
 #import "PushService.h"
 #import "RadioChannelsViewController.h"
 #import "Scrollable.h"
@@ -91,9 +91,9 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         searchTabBarItem.accessibilityIdentifier = AccessibilityIdentifierSearchTabBarItem;
         [tabBarItems addObject:searchTabBarItem];
         
-        UIViewController *profileViewController = [[LibraryViewController alloc] init];
+        UIViewController *profileViewController = [[ProfileViewController alloc] init];
         [viewControllers addObject:profileViewController];
-        UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile-24"] tag:TabBarItemIdentifierLibrary];
+        UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile-24"] tag:TabBarItemIdentifierProfile];
         profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
         [tabBarItems addObject:profileTabBarItem];
         
@@ -317,18 +317,18 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     }
 }
 
-- (void)updateLibraryTabBarItem
+- (void)updateProfileTabBarItem
 {
     if (@available(iOS 10, *)) {
-        UITabBarItem *libraryTabBarItem = [self tabBarItemForIdentifier:TabBarItemIdentifierLibrary];
+        UITabBarItem *profileTabBarItem = [self tabBarItemForIdentifier:TabBarItemIdentifierProfile];
         NSInteger badgeNumber = UIApplication.sharedApplication.applicationIconBadgeNumber;
         
-        if (PushService.sharedService.enabled && libraryTabBarItem && badgeNumber != 0) {
-            libraryTabBarItem.badgeValue = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
-            libraryTabBarItem.badgeColor = UIColor.play_notificationRedColor;
+        if (PushService.sharedService.enabled && profileTabBarItem && badgeNumber != 0) {
+            profileTabBarItem.badgeValue = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
+            profileTabBarItem.badgeColor = UIColor.play_notificationRedColor;
         }
         else {
-            libraryTabBarItem.badgeValue = nil;
+            profileTabBarItem.badgeValue = nil;
         }
     }
 }
@@ -389,7 +389,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     // Ensure correct notification button availability after:
     //   - Dismissal of the initial system alert (displayed once at most), asking the user to enable push notifications.
     //   - Returning from system settings, where the user might have updated push notification authorizations.
-    [self updateLibraryTabBarItem];
+    [self updateProfileTabBarItem];
 }
 
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
@@ -399,12 +399,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (void)didReceiveNotification:(NSNotification *)notification
 {
-    [self updateLibraryTabBarItem];
+    [self updateProfileTabBarItem];
 }
 
 - (void)badgeDidChange:(NSNotification *)notification
 {
-    [self updateLibraryTabBarItem];
+    [self updateProfileTabBarItem];
 }
 
 @end

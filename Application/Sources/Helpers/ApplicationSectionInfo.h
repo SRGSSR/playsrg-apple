@@ -32,9 +32,9 @@ OBJC_EXPORT ApplicationSectionOptionKey const ApplicationSectionOptionShowByDate
 + (ApplicationSectionInfo *)applicationSectionInfoWithApplicationSection:(ApplicationSection)applicationSection radioChannel:(nullable RadioChannel *)radioChannel options:(nullable NSDictionary<ApplicationSectionOptionKey, id> *)options;
 
 /**
- *  Return the library section infos corresponding to the current configuration.
+ *  Return the profile section infos available for the current configuration.
  */
-@property (class, nonatomic, readonly) NSArray<ApplicationSectionInfo *> *libraryApplicationSectionInfos;
+@property (class, nonatomic, readonly) NSArray<ApplicationSectionInfo *> *profileApplicationSectionInfos;
 
 /**
  *  Properties.

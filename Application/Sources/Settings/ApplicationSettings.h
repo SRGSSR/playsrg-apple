@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, TabBarItemIdentifier) {
     TabBarItemIdentifierAudios,
     TabBarItemIdentifierLivestreams,
     TabBarItemIdentifierSearch,
-    TabBarItemIdentifierLibrary
+    TabBarItemIdentifierProfile
 };
 
 OBJC_EXPORT NSString * const PlaySRGSettingHDOverCellularEnabled;

@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "LibraryAccountHeaderView.h"
+#import "ProfileAccountHeaderView.h"
 
 #import "ApplicationSettings.h"
 #import "AnalyticsConstants.h"
@@ -22,14 +22,14 @@
 #import <SRGUserData/SRGUserData.h>
 #import <YYWebImage/YYWebImage.h>
 
-@interface LibraryAccountHeaderView ()
+@interface ProfileAccountHeaderView ()
 
 @property (nonatomic, weak) IBOutlet UIImageView *avatarImageView;
 @property (nonatomic, weak) IBOutlet UILabel *accountLabel;
 
 @end
 
-@implementation LibraryAccountHeaderView
+@implementation ProfileAccountHeaderView
 
 #pragma mark Overrides
 
@@ -141,7 +141,7 @@
         self.accountLabel.text = identityService.account.displayName ?: emailAddress ?: NSLocalizedString(@"My account", @"Text displayed when a user is logged in but no information has been retrieved yet");
     }
     else {
-        self.accountLabel.text = NSLocalizedString(@"Login / Sign up", @"Text displayed within the login / sign up library header when no user is displayed");
+        self.accountLabel.text = NSLocalizedString(@"Login / Sign up", @"Text displayed within the login / sign up profile header when no user is displayed");
     }
 }
 
