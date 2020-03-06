@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "Layout.h"
 #import "MediaCollectionViewCell.h"
 #import "MostSearchedShowCollectionViewCell.h"
 #import "MostSearchedShowsHeaderView.h"
@@ -664,12 +665,10 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
          if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
             return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 84.f);
         }
-        // Media grid layout
         else {
             CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 90.f : 120.f;
-            
-            static const CGFloat kItemWidth = 210.f;
-            return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
+            CGFloat itemWidth = GridLayoutItemWidth(210.f, CGRectGetWidth(collectionView.frame), kLayoutHorizontalInset, kLayoutHorizontalInset, collectionViewLayout.minimumInteritemSpacing);
+            return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
         }
     }
     // Search show list

@@ -6,6 +6,7 @@
 
 #import "HomeShowVerticalListTableViewCell.h"
 
+#import "Layout.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
 
@@ -28,13 +29,10 @@ static const CGFloat kLayoutMinimumLineSpacing = 10.f;
 
 + (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds
 {
-    // 2 items per row on small layouts, max cell width of 210
-    CGFloat width = fminf(floorf((CGRectGetWidth(bounds) - kLayoutMinimumInteritemSpacing - 2 * kLayoutHorizontalInset) / 2.f), 210.f);
-    
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 30.f : 50.f;
-    
-    return CGSizeMake(width, ceilf(width * 9.f / 16.f + minTextHeight));
+    CGFloat itemWidth = GridLayoutItemWidth(210.f, CGRectGetWidth(bounds), kLayoutHorizontalInset, kLayoutHorizontalInset, kLayoutMinimumInteritemSpacing);
+    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured

@@ -6,6 +6,7 @@
 
 #import "MediasViewController.h"
 
+#import "Layout.h"
 #import "MediaCollectionViewCell.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -77,9 +78,8 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     // Grid layout
     else {
         CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 90.f : 120.f;
-        
-        static const CGFloat kItemWidth = 210.f;
-        return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
+        CGFloat itemWidth = GridLayoutItemWidth(210.f, CGRectGetWidth(collectionView.frame), kLayoutHorizontalInset, kLayoutHorizontalInset, collectionViewLayout.minimumInteritemSpacing);
+        return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
     }
 }
 

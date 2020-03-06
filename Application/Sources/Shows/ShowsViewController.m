@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "ShowCollectionViewCell.h"
@@ -340,13 +341,10 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 2 items per row on small layouts, max cell width of 210
-    CGFloat width = fminf(floorf((CGRectGetWidth(collectionView.frame) - collectionViewLayout.minimumInteritemSpacing - 2 * kLayoutHorizontalInset) / 2.f), 210.f);
-    
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 30.f : 50.f;
-    
-    return CGSizeMake(width, ceilf(width * 9.f / 16.f + minTextHeight));
+    CGFloat itemWidth = GridLayoutItemWidth(210.f, CGRectGetWidth(collectionView.frame), kLayoutHorizontalInset, kLayoutHorizontalInset, collectionViewLayout.minimumInteritemSpacing);
+    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
