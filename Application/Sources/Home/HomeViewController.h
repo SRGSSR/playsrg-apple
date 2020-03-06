@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "ApplicationSectionInfo.h"
 #import "ContentInsets.h"
 #import "PlayApplicationNavigation.h"
 #import "RequestViewController.h"
@@ -18,11 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HomeViewController : RequestViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PlayApplicationNavigation, Scrollable, SRGAnalyticsViewTracking, UITableViewDataSource, UITableViewDelegate>
 
 /**
- *  Instantiate for the home page belonging to the specified radio channel. If no channel is provided, the TV home page will be
- *  displayed instead.
+ *  Instantiate a home for the specified application section, displayed the provided home sections.
  */
-- (instancetype)initWithRadioChannel:(nullable RadioChannel *)radioChannel NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithApplicationSectionInfo:(ApplicationSectionInfo *)applicationSection homeSections:(NSArray<NSNumber *> *)homeSections NS_DESIGNATED_INITIALIZER;
 
+/**
+ *  The associated radio channel, if any.
+ */
 @property (nonatomic, readonly, nullable) RadioChannel *radioChannel;
 
 @end

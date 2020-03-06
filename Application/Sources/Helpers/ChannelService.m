@@ -124,13 +124,8 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
     NSValue *observerKey = [NSValue valueWithNonretainedObject:observer];
     [channelRegistrations removeObjectForKey:observerKey];
     
-    // If no registration exists for a channel anymore, remove it from the channel retrieval service. Cached channel
-    // data is not discarded, though (if there is a single observer regularly registering and unregistering, like
-    // a collection view cell, not clearing the cache ensures channel information is readily available when registering)
-    if (channelRegistrations.count == 0) {
-        self.registrations[channelKey] = nil;
-        self.medias[channelKey] = nil;
-    }
+    // Keep registered channels for the lifetime of the app, do not remove associated entries (otherwise we might
+    // remove and add channels repeatedly, triggering an update each time)
 }
 
 #pragma mark Data retrieval

@@ -7,6 +7,7 @@
 #import "NotificationsViewController.h"
 
 #import "AnalyticsConstants.h"
+#import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
@@ -88,6 +89,13 @@
     return self;
 }
 
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionNotifications);
+}
+
 #pragma mark View lifecycle
 
 - (void)loadView
@@ -117,8 +125,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = NSLocalizedString(@"Notifications", @"Title displayed at the top of the notifications screen");
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;

@@ -50,7 +50,7 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
                                                               options:@{ ApplicationSectionOptionNotificationKey : notification }];
 }
 
-+ (NSArray<ApplicationSectionInfo *> *)libraryApplicationSectionInfos
++ (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfos
 {
     NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
     if (@available(iOS 10, *)) {
@@ -128,27 +128,6 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
             
         case ApplicationSectionNotifications: {
             return PushService.sharedService.enabled ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"];
-            break;
-        }
-            
-        case ApplicationSectionOverview: {
-            return [UIImage imageNamed:@"home-22"];
-            break;
-        }
-            
-        case ApplicationSectionShowByDate: {
-            return [UIImage imageNamed:@"calendar-22"];
-            break;
-        }
-            
-        case ApplicationSectionShowAZ: {
-            return [UIImage imageNamed:@"atoz-22"];
-            break;
-        }
-            
-        case ApplicationSectionRadioLive: {
-            RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:self.uid];
-            return RadioChannelLogo22Image(radioChannel);
             break;
         }
             

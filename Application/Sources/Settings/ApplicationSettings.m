@@ -28,7 +28,6 @@ NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed = @"PlaySRGSettingS
 NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed = @"PlaySRGSettingAudioDescriptionAvailabilityDisplayed";
 
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
-NSString * const PlaySRGSettingLastOpenedLiveSection = @"PlaySRGSettingLastOpenedLiveSection";
 NSString * const PlaySRGSettingLastOpenedRadioChannelUid = @"PlaySRGSettingLastOpenedRadioChannelUid";
 NSString * const PlaySRGSettingLastOpenedTabBarItem = @"PlaySRGSettingLastOpenedTabBarItem";
 NSString * const PlaySRGSettingSelectedLiveStreamURNForChannels = @"PlaySRGSettingSelectedLiveStreamURNForChannels";
@@ -48,21 +47,6 @@ NSValueTransformer *SettingUserLocationTransformer(void)
     return s_transformer;
 }
 
-NSValueTransformer *SettingLiveSectionTransformer(void)
-{
-    static NSValueTransformer *s_transformer;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"tv" : @(HomeSectionTVLive),
-                                                                                         @"radio" : @(HomeSectionRadioLive),
-                                                                                         @"livecenter" : @(HomeSectionTVLiveCenter),
-                                                                                         @"scheduled_livestreams" : @(HomeSectionTVScheduledLivestreams) }
-                                                                         defaultValue:@(HomeSectionUnknown)
-                                                                  reverseDefaultValue:nil];
-    });
-    return s_transformer;
-}
-
 NSValueTransformer *TabBarItemIdentifierTransformer(void)
 {
     static NSValueTransformer *s_transformer;
@@ -72,7 +56,7 @@ NSValueTransformer *TabBarItemIdentifierTransformer(void)
                                                                                          @"audios" : @(TabBarItemIdentifierAudios),
                                                                                          @"livestreams" : @(TabBarItemIdentifierLivestreams),
                                                                                          @"search" : @(TabBarItemIdentifierSearch),
-                                                                                         @"library" : @(TabBarItemIdentifierLibrary) }
+                                                                                         @"profile" : @(TabBarItemIdentifierProfile) }
                                                                          defaultValue:@(TabBarItemIdentifierNone)
                                                                   reverseDefaultValue:nil];
     });
@@ -280,20 +264,6 @@ void ApplicationSettingSetLastOpenedRadioChannel(RadioChannel *radioChannel)
 {
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     [userDefaults setObject:radioChannel.uid forKey:PlaySRGSettingLastOpenedRadioChannelUid];
-    [userDefaults synchronize];
-}
-
-HomeSection ApplicationSettingLastOpenedLivestreamHomeSection(void)
-{
-    return [[SettingLiveSectionTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingLastOpenedLiveSection]] integerValue];
-}
-
-void ApplicationSettingSetLastOpenedLivestreamHomeSection(HomeSection homeSection)
-{
-    NSString *homeSectionString = [SettingLiveSectionTransformer() reverseTransformedValue:@(homeSection)];
-    
-    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    [userDefaults setObject:homeSectionString forKey:PlaySRGSettingLastOpenedLiveSection];
     [userDefaults synchronize];
 }
 

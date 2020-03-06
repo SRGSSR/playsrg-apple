@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "LibraryTableViewCell.h"
+#import "ProfileTableViewCell.h"
 
 #import "DownloadSession.h"
 #import "PushService.h"
@@ -13,14 +13,14 @@
 
 #import <SRGAppearance/SRGAppearance.h>
 
-@interface LibraryTableViewCell ()
+@interface ProfileTableViewCell ()
 
 @property (nonatomic, weak) IBOutlet UIImageView *iconImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
 @end
 
-@implementation LibraryTableViewCell
+@implementation ProfileTableViewCell
 
 #pragma mark Getters and setters
 

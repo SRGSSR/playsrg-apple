@@ -16,16 +16,11 @@
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
-
 @interface HomeSectionHeaderView ()
 
 @property (nonatomic, weak) IBOutlet UIView *moduleBackgroundView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *navigationButton;
-
-@property (nonatomic) HomeSectionInfo *homeSectionInfo;
-@property (nonatomic, getter=isFeatured) BOOL featured;
 
 @end
 
@@ -36,34 +31,25 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
     if (featured) {
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
-        BOOL isHomeFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
+        static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @40,
+                                 UIContentSizeCategorySmall : @45,
+                                 UIContentSizeCategoryMedium : @45,
+                                 UIContentSizeCategoryLarge : @45,
+                                 UIContentSizeCategoryExtraLarge : @50,
+                                 UIContentSizeCategoryExtraExtraLarge : @55,
+                                 UIContentSizeCategoryExtraExtraExtraLarge : @55,
+                                 UIContentSizeCategoryAccessibilityMedium : @55,
+                                 UIContentSizeCategoryAccessibilityLarge : @55,
+                                 UIContentSizeCategoryAccessibilityExtraLarge : @55,
+                                 UIContentSizeCategoryAccessibilityExtraExtraLarge : @55,
+                                 UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @55 };
+        });
         
-        if (! UIAccessibilityIsVoiceOverRunning() && isHomeFeaturedHeaderHidden) {
-            return 10.f;
-        }
-        else {
-            static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
-            static dispatch_once_t s_onceToken;
-            dispatch_once(&s_onceToken, ^{
-                s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @40,
-                                     UIContentSizeCategorySmall : @45,
-                                     UIContentSizeCategoryMedium : @45,
-                                     UIContentSizeCategoryLarge : @45,
-                                     UIContentSizeCategoryExtraLarge : @50,
-                                     UIContentSizeCategoryExtraExtraLarge : @55,
-                                     UIContentSizeCategoryExtraExtraExtraLarge : @55,
-                                     UIContentSizeCategoryAccessibilityMedium : @55,
-                                     UIContentSizeCategoryAccessibilityLarge : @55,
-                                     UIContentSizeCategoryAccessibilityExtraLarge : @55,
-                                     UIContentSizeCategoryAccessibilityExtraExtraLarge : @55,
-                                     UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @55 };
-            });
-            
-            NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-            return s_headerHeights[contentSizeCategory].floatValue;
-        }
+        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+        return s_headerHeights[contentSizeCategory].floatValue;
     }
     else {
         static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
@@ -90,10 +76,9 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 
 #pragma mark Getters and setters
 
-- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured
+- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo
 {
-    self.homeSectionInfo = homeSectionInfo;
-    self.featured = featured;
+    _homeSectionInfo = homeSectionInfo;
     
     UIColor *backgroundColor = UIColor.clearColor;
     UIColor *titleTextColor = UIColor.whiteColor;
@@ -106,7 +91,7 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     
     self.titleLabel.textColor = titleTextColor;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
-    self.titleLabel.text = ([HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:self.bounds featured:featured] > HomeSectionHeaderMinimumHeight) ? homeSectionInfo.title : nil;
+    self.titleLabel.text = homeSectionInfo.title;
     
     self.navigationButton.tintColor = titleTextColor;
     self.navigationButton.hidden = ! [homeSectionInfo canOpenList] || ! self.titleLabel.text;

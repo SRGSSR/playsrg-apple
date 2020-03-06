@@ -4,11 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoconutKit/CoconutKit.h>
+#import "ApplicationSectionInfo.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LibraryAccountHeaderView : HLSNibView
+@interface ProfileTableViewCell : UITableViewCell
+
+@property (nonatomic) ApplicationSectionInfo *applicationSectionInfo;
 
 @end
 

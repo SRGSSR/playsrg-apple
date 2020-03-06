@@ -90,10 +90,7 @@
 
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
-    SRGBaseRequest *request = [self.homeSectionInfo requestWithPage:page completionBlock:completionHandler];
-    if (request) {
-        [requestQueue addRequest:request resume:YES];
-    }
+    [self.homeSectionInfo refreshWithRequestQueue:requestQueue page:page completionBlock:completionHandler];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -135,6 +132,10 @@
         if (radioChannel) {
             NSString *level2 = (self.homeSectionInfo.homeSection == HomeSectionRadioLatestVideos) ? AnalyticsPageLevelVideo : AnalyticsPageLevelAudio;
             return @[ AnalyticsPageLevelPlay, level2, radioChannel.name ];
+        }
+        else if (self.homeSectionInfo.homeSection == HomeSectionTVLive || self.homeSectionInfo.homeSection == HomeSectionRadioLive || self.homeSectionInfo.homeSection == HomeSectionRadioLiveSatellite
+                    || self.homeSectionInfo.homeSection == HomeSectionTVLiveCenter || self.homeSectionInfo.homeSection == HomeSectionTVScheduledLivestreams) {
+            return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelLive ];
         }
         else {
             return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];

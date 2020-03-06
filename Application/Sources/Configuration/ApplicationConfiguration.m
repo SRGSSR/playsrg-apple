@@ -36,6 +36,7 @@ NSString *TitleForHomeSection(HomeSection homeSection)
                      @(HomeSectionTVShowsAccess) : NSLocalizedString(@"Shows", @"Title label used to present the TV shows AZ and TV shows by date access buttons."),
                      @(HomeSectionTVFavoriteShows) : NSLocalizedString(@"Favorites", @"Title label used to present the TV favorite shows."),
                      @(HomeSectionRadioLive) : NSLocalizedString(@"Radio", @"Title label to present main radio livestreams"),
+                     @(HomeSectionRadioLiveSatellite) : NSLocalizedString(@"Swiss Radio", @"Title label to present satellite radios"),
                      @(HomeSectionRadioLatestEpisodes) : NSLocalizedString(@"The latest episodes", @"Title label used to present the radio latest audio episodes"),
                      @(HomeSectionRadioMostPopular) : NSLocalizedString(@"Most listened to", @"Title label used to present the radio most listened / popular audio medias"),
                      @(HomeSectionRadioLatest) : NSLocalizedString(@"The latest audios", @"Title label used to present the radio latest audios"),
@@ -72,6 +73,7 @@ AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
                       @(HomeSectionTVLiveCenter) : AnalyticsPageTitleSports,
                       @(HomeSectionTVFavoriteShows) : AnalyticsPageTitleFavorites,
                       @(HomeSectionRadioLive) : AnalyticsPageTitleRadio,
+                      @(HomeSectionRadioLiveSatellite) : AnalyticsPageTitleRadioSatellite,
                       @(HomeSectionRadioLatestEpisodes) : AnalyticsPageTitleLatestEpisodes,
                       @(HomeSectionRadioMostPopular) : AnalyticsPageTitleMostPopular,
                       @(HomeSectionRadioLatest) : AnalyticsPageTitleLatest,
@@ -143,6 +145,7 @@ static HomeSection HomeSectionWithString(NSString *string)
                         @"tvShowsAccess" : @(HomeSectionTVShowsAccess),
                         @"tvFavoriteShows" : @(HomeSectionTVFavoriteShows),
                         @"radioLive" : @(HomeSectionRadioLive),
+                        @"radioLiveSatellite" : @(HomeSectionRadioLiveSatellite),
                         @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
                         @"radioMostPopular" : @(HomeSectionRadioMostPopular),
                         @"radioLatest" : @(HomeSectionRadioLatest),
@@ -167,20 +170,6 @@ static TopicSection TopicSectionWithString(NSString *string)
     return section ? section.integerValue : TopicSectionUnknown;
 }
 
-HomeSection HomeSectionForApplicationSection(ApplicationSection applicationSection)
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSNumber *, NSNumber *> *s_sections;
-    dispatch_once(&s_onceToken, ^{
-        s_sections = @{ @(ApplicationSectionTVLive) : @(HomeSectionTVLive),
-                        @(ApplicationSectionRadioLive) : @(HomeSectionRadioLive),
-                        @(ApplicationSectionLiveCenter) : @(HomeSectionTVLiveCenter),
-                        @(ApplicationSectionScheduledLivestreams) : @(HomeSectionTVScheduledLivestreams) };
-    });
-    NSNumber *section = s_sections[@(applicationSection)];
-    return section ? section.integerValue : HomeSectionUnknown;
-}
-
 NSString *TitleForApplicationSection(ApplicationSection applicationSection)
 {
     static NSDictionary<NSNumber *, NSString *> *s_names;
@@ -193,6 +182,7 @@ NSString *TitleForApplicationSection(ApplicationSection applicationSection)
                      @(ApplicationSectionSearch) : NSLocalizedString(@"Search", @"Label to present the search view"),
                      @(ApplicationSectionShowByDate) : NSLocalizedString(@"Programmes by date", @"Label to present programmes by date"),
                      @(ApplicationSectionOverview) : NSLocalizedString(@"Overview", @"Label to present the main Videos / Audios views"),
+                     @(ApplicationSectionLive) : NSLocalizedString(@"Live", @"Label to present the live view"),
                      @(ApplicationSectionShowAZ) : NSLocalizedString(@"Programmes A-Z", @"Label to present shows A to Z (radio or TV)"),
                      @(ApplicationSectionWatchLater) : NSLocalizedString(@"Watch later", @"Label to present the watch later list") };
     });

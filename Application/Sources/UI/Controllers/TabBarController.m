@@ -8,12 +8,10 @@
 
 #import "AccessibilityIdentifierConstants.h"
 #import "ApplicationSettings.h"
-#import "HomeLivestreamsViewController.h"
 #import "HomeViewController.h"
-#import "LibraryViewController.h"
-#import "LivestreamsViewController.h"
 #import "MiniPlayerView.h"
 #import "NavigationController.h"
+#import "ProfileViewController.h"
 #import "PushService.h"
 #import "RadioChannelsViewController.h"
 #import "Scrollable.h"
@@ -49,7 +47,9 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         NSMutableArray<UIViewController *> *viewControllers = NSMutableArray.array;
         NSMutableArray<UITabBarItem *> *tabBarItems = NSMutableArray.array;
         
-        UIViewController *videosViewController = [[HomeViewController alloc] initWithRadioChannel:nil];
+        ApplicationSectionInfo *videosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
+        UIViewController *videosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:videosApplicationSectionInfo homeSections:applicationConfiguration.videoHomeSections];
+        videosViewController.title = NSLocalizedString(@"Videos", @"Title displayed at the top of the video view");
         [viewControllers addObject:videosViewController];
         UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos];
         videosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierVideosTabBarItem;
@@ -61,7 +61,9 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
             audiosViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
         }
         else if (radioChannels.count == 1) {
-            audiosViewController = [[HomeViewController alloc] initWithRadioChannel:radioChannels.firstObject];
+            RadioChannel *radioChannel = radioChannels.firstObject;
+            ApplicationSectionInfo *audiosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
+            audiosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:audiosApplicationSectionInfo homeSections:radioChannel.homeSections];
             audiosViewController.title = NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
         }
         
@@ -72,22 +74,15 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
             [tabBarItems addObject:audiosTabBarItem];
         }
         
-        UIViewController *livestreamsViewController = nil;
         NSArray<NSNumber *> *liveHomeSections = ApplicationConfiguration.sharedApplicationConfiguration.liveHomeSections;
-        if (liveHomeSections.count > 1) {
-            livestreamsViewController = [[LivestreamsViewController alloc] initWithHomeSections:liveHomeSections];
-        }
-        else if (liveHomeSections.count == 1) {
-            HomeSectionInfo *homeSectionInfo = [[HomeSectionInfo alloc] initWithHomeSection:liveHomeSections.firstObject.integerValue];
-            livestreamsViewController = [[HomeLivestreamsViewController alloc] initWithHomeSectionInfo:homeSectionInfo];
-            livestreamsViewController.title = NSLocalizedString(@"Live", @"Title displayed at the top of the livestreams view");
-        }
-        
-        if (livestreamsViewController) {
-            [viewControllers addObject:livestreamsViewController];
-            UITabBarItem *livestreamsTabBarItem = [[UITabBarItem alloc] initWithTitle:livestreamsViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
-            livestreamsTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
-            [tabBarItems addObject:livestreamsTabBarItem];
+        if (liveHomeSections.count != 0) {
+            ApplicationSectionInfo *liveApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionLive radioChannel:nil];
+            UIViewController *liveHomeViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:liveApplicationSectionInfo homeSections:liveHomeSections];
+            liveHomeViewController.title = NSLocalizedString(@"Live", @"Title displayed at the top of the livestream view");
+            [viewControllers addObject:liveHomeViewController];
+            UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveHomeViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
+            liveTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
+            [tabBarItems addObject:liveTabBarItem];
         }
         
         UIViewController *searchViewController = [[SearchViewController alloc] init];
@@ -96,9 +91,9 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         searchTabBarItem.accessibilityIdentifier = AccessibilityIdentifierSearchTabBarItem;
         [tabBarItems addObject:searchTabBarItem];
         
-        UIViewController *profileViewController = [[LibraryViewController alloc] init];
+        UIViewController *profileViewController = [[ProfileViewController alloc] init];
         [viewControllers addObject:profileViewController];
-        UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile-24"] tag:TabBarItemIdentifierLibrary];
+        UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile-24"] tag:TabBarItemIdentifierProfile];
         profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
         [tabBarItems addObject:profileTabBarItem];
         
@@ -322,18 +317,18 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     }
 }
 
-- (void)updateLibraryTabBarItem
+- (void)updateProfileTabBarItem
 {
     if (@available(iOS 10, *)) {
-        UITabBarItem *libraryTabBarItem = [self tabBarItemForIdentifier:TabBarItemIdentifierLibrary];
+        UITabBarItem *profileTabBarItem = [self tabBarItemForIdentifier:TabBarItemIdentifierProfile];
         NSInteger badgeNumber = UIApplication.sharedApplication.applicationIconBadgeNumber;
         
-        if (PushService.sharedService.enabled && libraryTabBarItem && badgeNumber != 0) {
-            libraryTabBarItem.badgeValue = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
-            libraryTabBarItem.badgeColor = UIColor.play_notificationRedColor;
+        if (PushService.sharedService.enabled && profileTabBarItem && badgeNumber != 0) {
+            profileTabBarItem.badgeValue = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
+            profileTabBarItem.badgeColor = UIColor.play_notificationRedColor;
         }
         else {
-            libraryTabBarItem.badgeValue = nil;
+            profileTabBarItem.badgeValue = nil;
         }
     }
 }
@@ -394,7 +389,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     // Ensure correct notification button availability after:
     //   - Dismissal of the initial system alert (displayed once at most), asking the user to enable push notifications.
     //   - Returning from system settings, where the user might have updated push notification authorizations.
-    [self updateLibraryTabBarItem];
+    [self updateProfileTabBarItem];
 }
 
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
@@ -404,12 +399,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (void)didReceiveNotification:(NSNotification *)notification
 {
-    [self updateLibraryTabBarItem];
+    [self updateProfileTabBarItem];
 }
 
 - (void)badgeDidChange:(NSNotification *)notification
 {
-    [self updateLibraryTabBarItem];
+    [self updateProfileTabBarItem];
 }
 
 @end

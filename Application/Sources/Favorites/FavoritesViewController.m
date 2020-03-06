@@ -40,6 +40,13 @@
 
 @implementation FavoritesViewController
 
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionFavorites);
+}
+
 #pragma mark View lifecycle
 
 - (void)loadView
@@ -69,8 +76,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = NSLocalizedString(@"Favorites", @"Title displayed at the top of the favorites screen");
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;

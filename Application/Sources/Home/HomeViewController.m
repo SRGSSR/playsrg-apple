@@ -32,10 +32,16 @@
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGUserData/SRGUserData.h>
 
+typedef NS_ENUM(NSInteger, HomeHeaderType) {
+    HomeHeaderTypeNone,         // No header
+    HomeHeaderTypeSpace,        // A space, no header view
+    HomeHeaderTypeView          // A header with underlying view
+};
+
 @interface HomeViewController ()
 
+@property (nonatomic) ApplicationSectionInfo *applicationSectionInfo;
 @property (nonatomic) NSArray<NSNumber *> *homeSections;
-@property (nonatomic) RadioChannel *radioChannel;
 
 @property (nonatomic) NSArray<HomeSectionInfo *> *homeSectionInfos;
 
@@ -56,22 +62,23 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel
+- (instancetype)initWithApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo homeSections:(NSArray<NSNumber *> *)homeSections
 {
     if (self = [super init]) {
-        self.homeSections = radioChannel ? radioChannel.homeSections : ApplicationConfiguration.sharedApplicationConfiguration.videoHomeSections;
-        self.radioChannel = radioChannel;
-        
-        if (self.radioChannel) {
-            self.title = self.radioChannel.name;
-        }
-        else {
-            self.title = NSLocalizedString(@"Videos", @"Videos home page title");
-        }
+        self.applicationSectionInfo = applicationSectionInfo;
+        self.homeSections = homeSections;
+        self.title = applicationSectionInfo.title;
         
         [self synchronizeHomeSections];
     }
     return self;
+}
+
+#pragma mark Getters and setters
+
+- (RadioChannel *)radioChannel
+{
+    return self.applicationSectionInfo.radioChannel;
 }
 
 #pragma mark View lifecycle
@@ -311,7 +318,7 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(HomeSectionInfo.new, homeSection), @(homeSection)];
     NSArray<HomeSectionInfo *> *homeSectionInfos = [self.homeSectionInfos filteredArrayUsingPredicate:predicate];
     for (HomeSectionInfo *homeSectionInfo in homeSectionInfos) {
-        [homeSectionInfo refreshWithRequestQueue:requestQueue completionBlock:^(NSError * _Nullable error) {
+        [homeSectionInfo refreshWithRequestQueue:requestQueue page:nil /* only the first page */ completionBlock:^(NSArray * _Nullable items, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             // Refresh as data becomes available for better perceived loading times
             if (! error) {
                 [self.tableView reloadData];
@@ -371,11 +378,44 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == %@", @keypath(HomeSectionInfo.new, homeSection), @(homeSection),
                               @keypath(HomeSectionInfo.new, object), object];
     HomeSectionInfo *homeSectionInfo = [self.homeSectionInfos filteredArrayUsingPredicate:predicate].firstObject;
-    if (!homeSectionInfo) {
+    if (! homeSectionInfo) {
         homeSectionInfo = [[HomeSectionInfo alloc] initWithHomeSection:homeSection object:object];
     }
     homeSectionInfo.title = title;
     return homeSectionInfo;
+}
+
+- (BOOL)isFeaturedInSection:(NSUInteger)section
+{
+    if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
+        return YES;
+    }
+    else {
+        return section == 0;
+    }
+}
+
+- (HomeHeaderType)headerTypeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo tableView:(UITableView *)tableView inSection:(NSUInteger)section
+{
+    if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
+        return HomeHeaderTypeView;
+    }
+    else {
+        if (section == 0) {
+            ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+            BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
+            BOOL isFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
+            if (! UIAccessibilityIsVoiceOverRunning() && isFeaturedHeaderHidden) {
+                return HomeHeaderTypeSpace;
+            }
+            else {
+                return HomeHeaderTypeView;
+            }
+        }
+        else {
+            return HomeHeaderTypeView;
+        }
+    }
 }
 
 #pragma mark ContentInsets protocol
@@ -491,6 +531,9 @@
     if (self.radioChannel) {
         return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, self.radioChannel.name ];
     }
+    else if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelLive ];
+    }
     else {
         return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
     }
@@ -529,7 +572,8 @@
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[indexPath.section];
     if (! homeSectionInfo.hidden) {
-        return [homeSectionInfo.cellClass heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:(indexPath.section == 0)];
+        BOOL featured = [self isFeaturedInSection:indexPath.section];
+        return [homeSectionInfo.cellClass heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:featured];
     }
     else {
         return 0.f;
@@ -538,37 +582,54 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(HomeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [cell setHomeSectionInfo:self.homeSectionInfos[indexPath.section] featured:(indexPath.section == 0)];
+    BOOL featured = [self isFeaturedInSection:indexPath.section];
+    [cell setHomeSectionInfo:self.homeSectionInfos[indexPath.section] featured:featured];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[section];
-    if (! homeSectionInfo.hidden) {
-        return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:(section == 0)];
-    }
-    else {
+    if (homeSectionInfo.hidden) {
         return 0.f;
+    }
+    
+    HomeHeaderType headerType = [self headerTypeForHomeSectionInfo:homeSectionInfo tableView:tableView inSection:section];
+    switch (headerType) {
+        case HomeHeaderTypeSpace: {
+            return 10.f;
+            break;
+        }
+            
+        case HomeHeaderTypeView: {
+            BOOL featured = [self isFeaturedInSection:section];
+            return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:featured];
+            break;
+        }
+        
+        default: {
+            return 0.f;
+            break;
+        }
     }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[section];
-    if (! homeSectionInfo.hidden) {
+    if (homeSectionInfo.hidden) {
+        return nil;
+    }
+    
+    HomeHeaderType headerType = [self headerTypeForHomeSectionInfo:homeSectionInfo tableView:tableView inSection:section];
+    if (headerType == HomeHeaderTypeView) {
         HomeSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(HomeSectionHeaderView.class)];
-        [headerView setHomeSectionInfo:homeSectionInfo featured:(section == 0)];
+        headerView.homeSectionInfo = homeSectionInfo;
         return headerView;
     }
     else {
         return nil;
     }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(HomeSectionHeaderView *)headerView forSection:(NSInteger)section
-{
-    [headerView setHomeSectionInfo:self.homeSectionInfos[section] featured:(section == 0)];
 }
 
 #pragma mark Actions

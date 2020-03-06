@@ -7,6 +7,7 @@
 #import "CalendarViewController.h"
 
 #import "AnalyticsConstants.h"
+#import "ApplicationConfiguration.h"
 #import "Calendar.h"
 #import "DailyMediasViewController.h"
 #import "MediaCollectionViewCell.h"
@@ -56,13 +57,6 @@
             self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];      // Only available for iOS 10 and above
         }
         
-        if (self.radioChannel) {
-            self.title = NSLocalizedString(@"Programmes by date", @"Title displayed at the top of the screen where (radio) episodes can be accessed by date");
-        }
-        else {
-            self.title = NSLocalizedString(@"TV programmes by date", @"Title displayed at the top of the screen where TV episodes can be accessed by date");
-        }
-        
         [self setInsetViewController:pageViewController atIndex:0];
         self.pageViewController = pageViewController;
     }
@@ -72,6 +66,13 @@
 - (instancetype)init
 {
     return [self initWithRadioChannel:nil date:nil];
+}
+
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionShowByDate);
 }
 
 #pragma mark View lifecycle

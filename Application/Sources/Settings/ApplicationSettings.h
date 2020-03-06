@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, TabBarItemIdentifier) {
     TabBarItemIdentifierAudios,
     TabBarItemIdentifierLivestreams,
     TabBarItemIdentifierSearch,
-    TabBarItemIdentifierLibrary
+    TabBarItemIdentifierProfile
 };
 
 OBJC_EXPORT NSString * const PlaySRGSettingHDOverCellularEnabled;
@@ -82,9 +82,6 @@ OBJC_EXPORT void ApplicationSettingSetLastOpenedTabBarItemIdentifier(TabBarItemI
 
 OBJC_EXPORT RadioChannel * _Nullable ApplicationSettingLastOpenedRadioChannel(void);
 OBJC_EXPORT void ApplicationSettingSetLastOpenedRadioChannel(RadioChannel * radioChannel);
-
-OBJC_EXPORT HomeSection ApplicationSettingLastOpenedLivestreamHomeSection(void);
-OBJC_EXPORT void ApplicationSettingSetLastOpenedLivestreamHomeSection(HomeSection homeSection);
 
 OBJC_EXPORT NSURL * _Nullable ApplicationSettingServiceURLForKey(NSString *key);
 OBJC_EXPORT NSString * _Nullable ApplicationSettingServiceNameForKey(NSString *key);
