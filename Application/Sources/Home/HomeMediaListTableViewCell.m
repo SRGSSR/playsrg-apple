@@ -47,17 +47,17 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
     CGFloat itemWidth = 0.f;
     
     if (featured) {
-        itemWidth = GridLayoutFeaturedItemWidth(CGRectGetWidth(bounds));
+        itemWidth = LayoutCollectionItemFeaturedWidth(CGRectGetWidth(bounds));
     }
     else {
         itemWidth = LayoutCollectionViewCellStandardWidth;
     }
     
     if (HomeSectionHasLiveContent(homeSectionInfo.homeSection)) {
-        return GridLayoutLiveMediaStandardItemSize(itemWidth);
+        return LayoutLiveMediaStandardCollectionItemSize(itemWidth);
     }
     else {
-        return GridLayoutMediaStandardItemSize(itemWidth, featured);
+        return LayoutMediaStandardCollectionItemSize(itemWidth, featured);
     }
 }
 

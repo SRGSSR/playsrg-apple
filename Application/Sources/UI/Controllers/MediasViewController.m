@@ -73,8 +73,8 @@
     }
     // Grid layout
     else {
-        CGFloat itemWidth = GridLayoutOptimalItemWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
-        return GridLayoutMediaStandardItemSize(itemWidth, NO);
+        CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
+        return LayoutMediaStandardCollectionItemSize(itemWidth, NO);
     }
 }
 

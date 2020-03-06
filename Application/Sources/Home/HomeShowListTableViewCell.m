@@ -36,12 +36,12 @@
     CGFloat itemWidth = 0.f;
     
     if (featured) {
-        itemWidth = GridLayoutFeaturedItemWidth(CGRectGetWidth(bounds));
+        itemWidth = LayoutCollectionItemFeaturedWidth(CGRectGetWidth(bounds));
     }
     else {
         itemWidth = LayoutCollectionViewCellStandardWidth;
     }
-    return GridLayoutShowStandardItemSize(itemWidth, featured);
+    return LayoutShowStandardCollectionItemSize(itemWidth, featured);
 }
 
 #pragma mark Object lifecycle

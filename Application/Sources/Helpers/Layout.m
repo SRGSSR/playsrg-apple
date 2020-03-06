@@ -6,7 +6,7 @@
 
 #import "Layout.h"
 
-CGFloat GridLayoutOptimalItemWidth(CGFloat itemApproximateWidth, CGFloat layoutWidth, CGFloat leadingInset, CGFloat trailingInset, CGFloat spacing)
+CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidth, CGFloat layoutWidth, CGFloat leadingInset, CGFloat trailingInset, CGFloat spacing)
 {
     CGFloat availableWidth = layoutWidth - leadingInset - trailingInset;
     if (availableWidth <= 0.f) {
@@ -18,7 +18,7 @@ CGFloat GridLayoutOptimalItemWidth(CGFloat itemApproximateWidth, CGFloat layoutW
     return (availableWidth - (numberOfItemsPerRow - 1) * spacing) / numberOfItemsPerRow;
 }
 
-CGFloat GridLayoutFeaturedItemWidth(CGFloat layoutWidth)
+CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth)
 {
     // Ensure cells never fill the entire width of the parent, so that the fact that content can be scrolled
     // is always obvious to the user
@@ -31,7 +31,7 @@ CGFloat GridLayoutFeaturedItemWidth(CGFloat layoutWidth)
     return fmin(layoutWidth * kHorizontalFillRatio, maxWidth);
 }
 
-CGSize GridLayoutMediaStandardItemSize(CGFloat itemWidth, BOOL large)
+CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
 {
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_largeTextHeights;
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_standardTextHeights;
@@ -69,7 +69,7 @@ CGSize GridLayoutMediaStandardItemSize(CGFloat itemWidth, BOOL large)
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
-CGSize GridLayoutLiveMediaStandardItemSize(CGFloat itemWidth)
+CGSize LayoutLiveMediaStandardCollectionItemSize(CGFloat itemWidth)
 {
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_textHeights;
     static dispatch_once_t s_onceToken;
@@ -93,7 +93,7 @@ CGSize GridLayoutLiveMediaStandardItemSize(CGFloat itemWidth)
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
-CGSize GridLayoutShowStandardItemSize(CGFloat itemWidth, BOOL large)
+CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
 {
     static NSDictionary<NSString *, NSNumber *> *s_largeTextHeights;
     static NSDictionary<NSString *, NSNumber *> *s_standardTextHeights;

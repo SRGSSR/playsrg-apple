@@ -32,7 +32,7 @@
 
 + (CGSize)itemSize
 {
-    return GridLayoutShowStandardItemSize(300.f, NO);
+    return LayoutShowStandardCollectionItemSize(300.f, NO);
 }
 
 #pragma mark Object lifecycle
