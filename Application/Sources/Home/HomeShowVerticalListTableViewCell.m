@@ -40,7 +40,7 @@ static const CGFloat kLayoutMinimumLineSpacing = 10.f;
 
 + (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds
 {
-    CGFloat itemWidth = GridLayoutOptimalItemWidth(210.f, CGRectGetWidth(bounds), kLayoutHorizontalInset, kLayoutHorizontalInset, kLayoutMinimumInteritemSpacing);
+    CGFloat itemWidth = GridLayoutOptimalItemWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(bounds), kLayoutHorizontalInset, kLayoutHorizontalInset, kLayoutMinimumInteritemSpacing);
     return GridLayoutShowStandardItemSize(itemWidth, NO);
 }
 

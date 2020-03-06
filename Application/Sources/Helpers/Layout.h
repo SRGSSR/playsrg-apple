@@ -10,10 +10,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Standard constants.
+ *  Standard corner radius constants.
  */
 static const CGFloat LayoutStandardLabelCornerRadius = 2.f;
 static const CGFloat LayoutStandardViewCornerRadius = 4.f;
+
+/**
+ *  Standard cell dimensions.
+ */
+static const CGFloat LayoutCollectionViewCellStandardWidth = 210.f;
+static const CGFloat LayoutTableViewCellStandardHeight = 84.f;
 
 /**
  *  Calculate the width to apply to items within a grid so that they approach some desired size, ensuring constant spacing

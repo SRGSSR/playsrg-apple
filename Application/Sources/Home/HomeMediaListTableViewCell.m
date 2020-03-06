@@ -60,7 +60,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         itemWidth = MIN(CGRectGetWidth(bounds) * kHorizontalFillRatio, maxWidth);
     }
     else {
-        itemWidth = 210.f;
+        itemWidth = LayoutCollectionViewCellStandardWidth;
     }
     
     if (HomeSectionHasLiveContent(homeSectionInfo.homeSection)) {

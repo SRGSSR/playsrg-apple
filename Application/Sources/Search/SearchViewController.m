@@ -661,10 +661,10 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
          if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 84.f);
+            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, LayoutTableViewCellStandardHeight);
         }
         else {
-            CGFloat itemWidth = GridLayoutOptimalItemWidth(210.f, CGRectGetWidth(collectionView.frame), kLayoutHorizontalInset, kLayoutHorizontalInset, collectionViewLayout.minimumInteritemSpacing);
+            CGFloat itemWidth = GridLayoutOptimalItemWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), kLayoutHorizontalInset, kLayoutHorizontalInset, collectionViewLayout.minimumInteritemSpacing);
             return GridLayoutMediaStandardItemSize(itemWidth, NO);
         }
     }

@@ -49,7 +49,7 @@ static const CGFloat HomeStandardMargin = 10.f;
         itemWidth = MIN(CGRectGetWidth(bounds) * kHorizontalFillRatio, maxWidth);
     }
     else {
-        itemWidth = 210.f;
+        itemWidth = LayoutCollectionViewCellStandardWidth;
     }
     return GridLayoutShowStandardItemSize(itemWidth, featured);
 }
