@@ -44,6 +44,8 @@
         
         UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+        collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
         
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:collectionViewLayout];
         collectionView.backgroundColor = UIColor.clearColor;

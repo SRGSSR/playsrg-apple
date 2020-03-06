@@ -7,6 +7,7 @@
 #import "HomeMediasViewController.h"
 
 #import "AnalyticsConstants.h"
+#import "Layout.h"
 #import "PageViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -60,6 +61,8 @@
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
     collectionView.backgroundColor = UIColor.clearColor;
