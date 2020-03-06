@@ -193,7 +193,7 @@ static const CGFloat HomeStandardMargin = 10.f;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeSection homeSection = self.homeSectionInfo.homeSection;
-    if (homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive || homeSection == HomeSectionRadioLiveSatellite) {
+    if (homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive || homeSection == HomeSectionRadioLiveSatellite || homeSection == HomeSectionTVLiveCenter || homeSection == HomeSectionTVScheduledLivestreams) {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(HomeLiveMediaCollectionViewCell.class) forIndexPath:indexPath];
     }
     else {
