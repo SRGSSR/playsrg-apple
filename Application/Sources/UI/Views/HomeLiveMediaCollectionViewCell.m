@@ -23,8 +23,6 @@
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
-
 @interface HomeLiveMediaCollectionViewCell ()
 
 @property (nonatomic) SRGChannel *channel;
@@ -47,32 +45,6 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 @end
 
 @implementation HomeLiveMediaCollectionViewCell
-
-#pragma mark Class methods
-
-+ (CGFloat)heightForMedia:(SRGMedia *)media withWidth:(CGFloat)width
-{
-    static NSDictionary<NSString *, NSNumber *> *s_textHeights;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_textHeights = @{ UIContentSizeCategoryExtraSmall : @63,
-                           UIContentSizeCategorySmall : @65,
-                           UIContentSizeCategoryMedium : @67,
-                           UIContentSizeCategoryLarge : @70,
-                           UIContentSizeCategoryExtraLarge : @75,
-                           UIContentSizeCategoryExtraExtraLarge : @82,
-                           UIContentSizeCategoryExtraExtraExtraLarge : @90,
-                           UIContentSizeCategoryAccessibilityMedium : @90,
-                           UIContentSizeCategoryAccessibilityLarge : @90,
-                           UIContentSizeCategoryAccessibilityExtraLarge : @90,
-                           UIContentSizeCategoryAccessibilityExtraExtraLarge : @90,
-                           UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @90 };
-    });
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = s_textHeights[contentSizeCategory].floatValue;
-    return ceilf(width * 9.f / 16.f + minTextHeight);
-}
 
 #pragma mark Overrides
 

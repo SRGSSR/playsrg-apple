@@ -7,6 +7,7 @@
 #import "HomeShowListTableViewCell.h"
 
 #import "HomeShowCollectionViewCell.h"
+#import "Layout.h"
 #import "ShowViewController.h"
 
 #import <CoconutKit/CoconutKit.h>
@@ -48,42 +49,7 @@ static const CGFloat HomeStandardMargin = 10.f;
     else {
         itemWidth = 210.f;
     }
-    
-    // Adjust height depending on font size settings. First section cells are different and require specific values
-    static NSDictionary<NSString *, NSNumber *> *s_featuredTextHeights;
-    static NSDictionary<NSString *, NSNumber *> *s_standardTextHeights;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_featuredTextHeights = @{ UIContentSizeCategoryExtraSmall : @28,
-                                   UIContentSizeCategorySmall : @28,
-                                   UIContentSizeCategoryMedium : @29,
-                                   UIContentSizeCategoryLarge : @31,
-                                   UIContentSizeCategoryExtraLarge : @33,
-                                   UIContentSizeCategoryExtraExtraLarge : @36,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @38,
-                                   UIContentSizeCategoryAccessibilityMedium : @38,
-                                   UIContentSizeCategoryAccessibilityLarge : @38,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @38,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @38,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @38 };
-        
-        s_standardTextHeights = @{ UIContentSizeCategoryExtraSmall : @26,
-                                   UIContentSizeCategorySmall : @26,
-                                   UIContentSizeCategoryMedium : @27,
-                                   UIContentSizeCategoryLarge : @29,
-                                   UIContentSizeCategoryExtraLarge : @31,
-                                   UIContentSizeCategoryExtraExtraLarge : @34,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @36,
-                                   UIContentSizeCategoryAccessibilityMedium : @36,
-                                   UIContentSizeCategoryAccessibilityLarge : @36,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @36,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @36,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @36 };
-    });
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = featured ? s_featuredTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
-    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
+    return GridLayoutShowStandardItemSize(itemWidth, featured);
 }
 
 #pragma mark Object lifecycle

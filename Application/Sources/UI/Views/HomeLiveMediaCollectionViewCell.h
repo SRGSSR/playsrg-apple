@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeLiveMediaCollectionViewCell : UICollectionViewCell <Previewing>
 
-+ (CGFloat)heightForMedia:(SRGMedia *)media withWidth:(CGFloat)width;
-
 @property (nonatomic, nullable) SRGMedia *media;
 
 @end

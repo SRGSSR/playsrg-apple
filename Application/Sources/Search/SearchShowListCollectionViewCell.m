@@ -7,6 +7,7 @@
 #import "SearchShowListCollectionViewCell.h"
 
 #import "AnalyticsConstants.h"
+#import "Layout.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
 
@@ -24,30 +25,14 @@
 
 #pragma mark Class methods
 
++ (CGFloat)height
+{
+    return self.itemSize.height;
+}
+
 + (CGSize)itemSize
 {
-    static NSDictionary<NSString *, NSNumber *> *s_textHeights;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_textHeights = @{ UIContentSizeCategoryExtraSmall : @26,
-                           UIContentSizeCategorySmall : @26,
-                           UIContentSizeCategoryMedium : @27,
-                           UIContentSizeCategoryLarge : @29,
-                           UIContentSizeCategoryExtraLarge : @31,
-                           UIContentSizeCategoryExtraExtraLarge : @34,
-                           UIContentSizeCategoryExtraExtraExtraLarge : @36,
-                           UIContentSizeCategoryAccessibilityMedium : @36,
-                           UIContentSizeCategoryAccessibilityLarge : @36,
-                           UIContentSizeCategoryAccessibilityExtraLarge : @36,
-                           UIContentSizeCategoryAccessibilityExtraExtraLarge : @36,
-                           UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @36 };
-    });
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = s_textHeights[contentSizeCategory].floatValue;
-    
-    static CGFloat kItemWidth = 300.f;
-    return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
+    return GridLayoutShowStandardItemSize(300.f, NO);
 }
 
 #pragma mark Object lifecycle

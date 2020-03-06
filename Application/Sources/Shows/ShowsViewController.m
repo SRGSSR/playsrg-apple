@@ -341,27 +341,8 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSDictionary<NSString *, NSNumber *> *s_textHeights;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_textHeights = @{ UIContentSizeCategoryExtraSmall : @26,
-                           UIContentSizeCategorySmall : @26,
-                           UIContentSizeCategoryMedium : @27,
-                           UIContentSizeCategoryLarge : @29,
-                           UIContentSizeCategoryExtraLarge : @31,
-                           UIContentSizeCategoryExtraExtraLarge : @34,
-                           UIContentSizeCategoryExtraExtraExtraLarge : @36,
-                           UIContentSizeCategoryAccessibilityMedium : @36,
-                           UIContentSizeCategoryAccessibilityLarge : @36,
-                           UIContentSizeCategoryAccessibilityExtraLarge : @36,
-                           UIContentSizeCategoryAccessibilityExtraExtraLarge : @36,
-                           UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @36 };
-    });
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = s_textHeights[contentSizeCategory].floatValue;
-    CGFloat itemWidth = GridLayoutItemWidth(210.f, CGRectGetWidth(collectionView.frame), kLayoutHorizontalInset, kLayoutHorizontalInset, collectionViewLayout.minimumInteritemSpacing);
-    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
+    CGFloat itemWidth = GridLayoutOptimalItemWidth(210.f, CGRectGetWidth(collectionView.frame), kLayoutHorizontalInset, kLayoutHorizontalInset, collectionViewLayout.minimumInteritemSpacing);
+    return GridLayoutShowStandardItemSize(itemWidth, NO);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section

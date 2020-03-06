@@ -19,6 +19,22 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param trailingInset        The trailing layout inset.
  *  @param spacing              The desired spacing.
  */
-OBJC_EXPORT CGFloat GridLayoutItemWidth(CGFloat itemApproximateWidth, CGFloat layoutWidth, CGFloat leadingInset, CGFloat trailingInset, CGFloat spacing);
+OBJC_EXPORT CGFloat GridLayoutOptimalItemWidth(CGFloat itemApproximateWidth, CGFloat layoutWidth, CGFloat leadingInset, CGFloat trailingInset, CGFloat spacing);
+
+/**
+ *  Standard media cell (16:9 artwork + text area) size for grid layouts, for a given item width.
+ *
+ *  @param itemWidth The width of the item.
+ *  @param large     Large layout (e.g. featured).
+ */
+OBJC_EXPORT CGSize GridLayoutMediaStandardItemSize(CGFloat itemWidth, BOOL large);
+
+/**
+ *  Standard media cell (16:9 artwork + text area) size for grid layouts, for a given item width.
+ *
+ *  @param itemWidth The width of the item.
+ *  @param large     Large layout (e.g. featured).
+ */
+OBJC_EXPORT CGSize GridLayoutShowStandardItemSize(CGFloat itemWidth, BOOL large);
 
 NS_ASSUME_NONNULL_END

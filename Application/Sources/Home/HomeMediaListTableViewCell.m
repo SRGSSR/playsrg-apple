@@ -9,6 +9,7 @@
 #import "HomeLiveMediaCollectionViewCell.h"
 #import "HomeMediaCollectionHeaderView.h"
 #import "HomeMediaCollectionViewCell.h"
+#import "Layout.h"
 #import "MediaPlayerViewController.h"
 #import "UICollectionView+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
@@ -53,42 +54,7 @@ static const CGFloat HomeStandardMargin = 10.f;
     else {
         itemWidth = 210.f;
     }
-    
-    // Adjust height depending on font size settings. First section cells are different and require specific values
-    static NSDictionary<NSString *, NSNumber *> *s_featuredTextHeights;
-    static NSDictionary<NSString *, NSNumber *> *s_standardTextHeights;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_featuredTextHeights = @{ UIContentSizeCategoryExtraSmall : @79,
-                                   UIContentSizeCategorySmall : @81,
-                                   UIContentSizeCategoryMedium : @84,
-                                   UIContentSizeCategoryLarge : @89,
-                                   UIContentSizeCategoryExtraLarge : @94,
-                                   UIContentSizeCategoryExtraExtraLarge : @102,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @108,
-                                   UIContentSizeCategoryAccessibilityMedium : @108,
-                                   UIContentSizeCategoryAccessibilityLarge : @108,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @108,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @108,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @108 };
-        
-        s_standardTextHeights = @{ UIContentSizeCategoryExtraSmall : @63,
-                                   UIContentSizeCategorySmall : @65,
-                                   UIContentSizeCategoryMedium : @67,
-                                   UIContentSizeCategoryLarge : @70,
-                                   UIContentSizeCategoryExtraLarge : @75,
-                                   UIContentSizeCategoryExtraExtraLarge : @82,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @90,
-                                   UIContentSizeCategoryAccessibilityMedium : @90,
-                                   UIContentSizeCategoryAccessibilityLarge : @90,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @90,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @90,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @90 };
-    });
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = featured ? s_featuredTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
-    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
+    return GridLayoutMediaStandardItemSize(itemWidth, featured);
 }
 
 - (void)prepareForReuse
