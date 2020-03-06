@@ -58,6 +58,30 @@ CGSize GridLayoutMediaStandardItemSize(CGFloat itemWidth, BOOL large)
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
+CGSize GridLayoutLiveMediaStandardItemSize(CGFloat itemWidth)
+{
+    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_textHeights;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_textHeights = @{ UIContentSizeCategoryExtraSmall : @58,
+                           UIContentSizeCategorySmall : @58,
+                           UIContentSizeCategoryMedium : @60,
+                           UIContentSizeCategoryLarge : @63,
+                           UIContentSizeCategoryExtraLarge : @68,
+                           UIContentSizeCategoryExtraExtraLarge : @75,
+                           UIContentSizeCategoryExtraExtraExtraLarge : @83,
+                           UIContentSizeCategoryAccessibilityMedium : @83,
+                           UIContentSizeCategoryAccessibilityLarge : @83,
+                           UIContentSizeCategoryAccessibilityExtraLarge : @83,
+                           UIContentSizeCategoryAccessibilityExtraExtraLarge : @83,
+                           UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @83 };
+    });
+    
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    CGFloat minTextHeight = s_textHeights[contentSizeCategory].floatValue;
+    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
+}
+
 CGSize GridLayoutShowStandardItemSize(CGFloat itemWidth, BOOL large)
 {
     // Adjust height depending on font size settings. First section cells are different and require specific values

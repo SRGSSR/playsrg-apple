@@ -20,6 +20,12 @@
 
 static const CGFloat HomeStandardMargin = 10.f;
 
+static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
+{
+    return homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive || homeSection == HomeSectionRadioLiveSatellite
+        || homeSection == HomeSectionTVLiveCenter || homeSection == HomeSectionTVScheduledLivestreams;
+}
+
 @interface HomeMediaListTableViewCell ()
 
 @property (nonatomic, weak) UIView *wrapperView;
@@ -56,7 +62,13 @@ static const CGFloat HomeStandardMargin = 10.f;
     else {
         itemWidth = 210.f;
     }
-    return GridLayoutMediaStandardItemSize(itemWidth, featured);
+    
+    if (HomeSectionHasLiveContent(homeSectionInfo.homeSection)) {
+        return GridLayoutLiveMediaStandardItemSize(itemWidth);
+    }
+    else {
+        return GridLayoutMediaStandardItemSize(itemWidth, featured);
+    }
 }
 
 #pragma mark Object lifecycle
@@ -160,8 +172,7 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    HomeSection homeSection = self.homeSectionInfo.homeSection;
-    if (homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive || homeSection == HomeSectionRadioLiveSatellite || homeSection == HomeSectionTVLiveCenter || homeSection == HomeSectionTVScheduledLivestreams) {
+    if (HomeSectionHasLiveContent(self.homeSectionInfo.homeSection)) {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(HomeLiveMediaCollectionViewCell.class) forIndexPath:indexPath];
     }
     else {

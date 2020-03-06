@@ -30,6 +30,13 @@ OBJC_EXPORT CGFloat GridLayoutOptimalItemWidth(CGFloat itemApproximateWidth, CGF
 OBJC_EXPORT CGSize GridLayoutMediaStandardItemSize(CGFloat itemWidth, BOOL large);
 
 /**
+ *  Live media cell (16:9 artwork + text area) size for grid layouts, for a given item width.
+ *
+ *  @param itemWidth The width of the item.
+ */
+OBJC_EXPORT CGSize GridLayoutLiveMediaStandardItemSize(CGFloat itemWidth);
+
+/**
  *  Standard media cell (16:9 artwork + text area) size for grid layouts, for a given item width.
  *
  *  @param itemWidth The width of the item.
