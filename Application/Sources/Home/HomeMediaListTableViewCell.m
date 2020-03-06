@@ -220,7 +220,7 @@ static const CGFloat HomeStandardMargin = 10.f;
     
     if ([cell isKindOfClass:HomeLiveMediaCollectionViewCell.class]) {
         HomeLiveMediaCollectionViewCell *liveMediaCell = (HomeLiveMediaCollectionViewCell *)cell;
-        [liveMediaCell setMedia:media featured:self.featured];
+        liveMediaCell.media = media;
     }
     else {
         HomeMediaCollectionViewCell *mediaCell = (HomeMediaCollectionViewCell *)cell;

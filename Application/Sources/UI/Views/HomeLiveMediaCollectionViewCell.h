@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (CGFloat)heightForMedia:(SRGMedia *)media withWidth:(CGFloat)width;
 
-- (void)setMedia:(SRGMedia *)media featured:(BOOL)featured;
+@property (nonatomic, nullable) SRGMedia *media;
 
 @end
 
