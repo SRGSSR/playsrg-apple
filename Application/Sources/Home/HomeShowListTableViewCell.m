@@ -36,15 +36,7 @@
     CGFloat itemWidth = 0.f;
     
     if (featured) {
-        // Ensure cells never fill the entire width of the parent, so that the fact that content can be scrolled
-        // is always obvious to the user
-        static const CGFloat kHorizontalFillRatio = 0.9f;
-        
-        // Do not make cells unnecessarily large, especially on iPhone Plus
-        UITraitCollection *traitCollection = UIApplication.sharedApplication.keyWindow.traitCollection;
-        CGFloat maxWidth = (traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ? 300.f : 650.f;
-        
-        itemWidth = MIN(CGRectGetWidth(bounds) * kHorizontalFillRatio, maxWidth);
+        itemWidth = GridLayoutFeaturedItemWidth(CGRectGetWidth(bounds));
     }
     else {
         itemWidth = LayoutCollectionViewCellStandardWidth;

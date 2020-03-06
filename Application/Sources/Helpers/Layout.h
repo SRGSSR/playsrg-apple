@@ -35,12 +35,20 @@ static const CGFloat LayoutStandardMargin = 10.f;
  *  between items.
  *
  *  @param itemApproximateWidth The desired approximate width for items. The returned width might be smaller or bigger.
- *  @param layoutWidth          The total available width.
+ *  @param layoutWidth          The total available width for layout.
  *  @param leadingInset         The leading layout inset.
  *  @param trailingInset        The trailing layout inset.
  *  @param spacing              The desired spacing.
  */
 OBJC_EXPORT CGFloat GridLayoutOptimalItemWidth(CGFloat itemApproximateWidth, CGFloat layoutWidth, CGFloat leadingInset, CGFloat trailingInset, CGFloat spacing);
+
+/**
+ *  Calcualte the width to apply to featured items, i.e. taking (almost) the full width of narrow layouts, and larger
+ *  than usual items on large layouts.
+ *
+ *  @param layoutWidth The total available width for layout.
+ */
+OBJC_EXPORT CGFloat GridLayoutFeaturedItemWidth(CGFloat layoutWidth);
 
 /**
  *  Standard media cell (16:9 artwork + text area) size for grid layouts, for a given item width.

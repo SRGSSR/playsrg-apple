@@ -18,24 +18,37 @@ CGFloat GridLayoutOptimalItemWidth(CGFloat itemApproximateWidth, CGFloat layoutW
     return (availableWidth - (numberOfItemsPerRow - 1) * spacing) / numberOfItemsPerRow;
 }
 
+CGFloat GridLayoutFeaturedItemWidth(CGFloat layoutWidth)
+{
+    // Ensure cells never fill the entire width of the parent, so that the fact that content can be scrolled
+    // is always obvious to the user
+    static const CGFloat kHorizontalFillRatio = 0.9f;
+    
+    // Do not make cells unnecessarily large
+    UITraitCollection *traitCollection = UIApplication.sharedApplication.keyWindow.traitCollection;
+    CGFloat maxWidth = (traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ? 300.f : 450.f;
+    
+    return fmin(layoutWidth * kHorizontalFillRatio, maxWidth);
+}
+
 CGSize GridLayoutMediaStandardItemSize(CGFloat itemWidth, BOOL large)
 {
-    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_featuredTextHeights;
+    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_largeTextHeights;
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_standardTextHeights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_featuredTextHeights = @{ UIContentSizeCategoryExtraSmall : @79,
-                                   UIContentSizeCategorySmall : @81,
-                                   UIContentSizeCategoryMedium : @84,
-                                   UIContentSizeCategoryLarge : @89,
-                                   UIContentSizeCategoryExtraLarge : @94,
-                                   UIContentSizeCategoryExtraExtraLarge : @102,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @108,
-                                   UIContentSizeCategoryAccessibilityMedium : @108,
-                                   UIContentSizeCategoryAccessibilityLarge : @108,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @108,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @108,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @108 };
+        s_largeTextHeights = @{ UIContentSizeCategoryExtraSmall : @79,
+                                UIContentSizeCategorySmall : @81,
+                                UIContentSizeCategoryMedium : @84,
+                                UIContentSizeCategoryLarge : @89,
+                                UIContentSizeCategoryExtraLarge : @94,
+                                UIContentSizeCategoryExtraExtraLarge : @102,
+                                UIContentSizeCategoryExtraExtraExtraLarge : @108,
+                                UIContentSizeCategoryAccessibilityMedium : @108,
+                                UIContentSizeCategoryAccessibilityLarge : @108,
+                                UIContentSizeCategoryAccessibilityExtraLarge : @108,
+                                UIContentSizeCategoryAccessibilityExtraExtraLarge : @108,
+                                UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @108 };
         
         s_standardTextHeights = @{ UIContentSizeCategoryExtraSmall : @63,
                                    UIContentSizeCategorySmall : @65,
@@ -52,7 +65,7 @@ CGSize GridLayoutMediaStandardItemSize(CGFloat itemWidth, BOOL large)
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = large ? s_featuredTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
+    CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
@@ -82,23 +95,22 @@ CGSize GridLayoutLiveMediaStandardItemSize(CGFloat itemWidth)
 
 CGSize GridLayoutShowStandardItemSize(CGFloat itemWidth, BOOL large)
 {
-    // Adjust height depending on font size settings. First section cells are different and require specific values
-    static NSDictionary<NSString *, NSNumber *> *s_featuredTextHeights;
+    static NSDictionary<NSString *, NSNumber *> *s_largeTextHeights;
     static NSDictionary<NSString *, NSNumber *> *s_standardTextHeights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_featuredTextHeights = @{ UIContentSizeCategoryExtraSmall : @28,
-                                   UIContentSizeCategorySmall : @28,
-                                   UIContentSizeCategoryMedium : @29,
-                                   UIContentSizeCategoryLarge : @31,
-                                   UIContentSizeCategoryExtraLarge : @33,
-                                   UIContentSizeCategoryExtraExtraLarge : @36,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @38,
-                                   UIContentSizeCategoryAccessibilityMedium : @38,
-                                   UIContentSizeCategoryAccessibilityLarge : @38,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @38,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @38,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @38 };
+        s_largeTextHeights = @{ UIContentSizeCategoryExtraSmall : @28,
+                                UIContentSizeCategorySmall : @28,
+                                UIContentSizeCategoryMedium : @29,
+                                UIContentSizeCategoryLarge : @31,
+                                UIContentSizeCategoryExtraLarge : @33,
+                                UIContentSizeCategoryExtraExtraLarge : @36,
+                                UIContentSizeCategoryExtraExtraExtraLarge : @38,
+                                UIContentSizeCategoryAccessibilityMedium : @38,
+                                UIContentSizeCategoryAccessibilityLarge : @38,
+                                UIContentSizeCategoryAccessibilityExtraLarge : @38,
+                                UIContentSizeCategoryAccessibilityExtraExtraLarge : @38,
+                                UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @38 };
         
         s_standardTextHeights = @{ UIContentSizeCategoryExtraSmall : @26,
                                    UIContentSizeCategorySmall : @26,
@@ -115,6 +127,6 @@ CGSize GridLayoutShowStandardItemSize(CGFloat itemWidth, BOOL large)
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = large ? s_featuredTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
+    CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
