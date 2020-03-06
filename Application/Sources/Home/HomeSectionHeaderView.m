@@ -33,18 +33,18 @@
     static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @30,
-                             UIContentSizeCategorySmall : @35,
-                             UIContentSizeCategoryMedium : @40,
-                             UIContentSizeCategoryLarge : @45,
-                             UIContentSizeCategoryExtraLarge : @45,
-                             UIContentSizeCategoryExtraExtraLarge : @45,
-                             UIContentSizeCategoryExtraExtraExtraLarge : @50,
-                             UIContentSizeCategoryAccessibilityMedium : @50,
-                             UIContentSizeCategoryAccessibilityLarge : @50,
-                             UIContentSizeCategoryAccessibilityExtraLarge : @50,
-                             UIContentSizeCategoryAccessibilityExtraExtraLarge : @50,
-                             UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @50 };
+        s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @25,
+                             UIContentSizeCategorySmall : @30,
+                             UIContentSizeCategoryMedium : @35,
+                             UIContentSizeCategoryLarge : @40,
+                             UIContentSizeCategoryExtraLarge : @40,
+                             UIContentSizeCategoryExtraExtraLarge : @40,
+                             UIContentSizeCategoryExtraExtraExtraLarge : @45,
+                             UIContentSizeCategoryAccessibilityMedium : @45,
+                             UIContentSizeCategoryAccessibilityLarge : @45,
+                             UIContentSizeCategoryAccessibilityExtraLarge : @45,
+                             UIContentSizeCategoryAccessibilityExtraExtraLarge : @45,
+                             UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @45 };
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
