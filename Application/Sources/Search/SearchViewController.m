@@ -635,8 +635,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    
     if ([self shouldDisplayMostSearchedShows]) {
         static NSDictionary<NSString *, NSNumber *> *s_height;
         static dispatch_once_t s_onceToken;
@@ -666,15 +664,32 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
             return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 84.f);
         }
         else {
-            CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 90.f : 120.f;
+            static NSDictionary<NSString *, NSNumber *> *s_textHeights;
+            static dispatch_once_t s_onceToken;
+            dispatch_once(&s_onceToken, ^{
+                s_textHeights = @{ UIContentSizeCategoryExtraSmall : @63,
+                                   UIContentSizeCategorySmall : @65,
+                                   UIContentSizeCategoryMedium : @67,
+                                   UIContentSizeCategoryLarge : @70,
+                                   UIContentSizeCategoryExtraLarge : @75,
+                                   UIContentSizeCategoryExtraExtraLarge : @82,
+                                   UIContentSizeCategoryExtraExtraExtraLarge : @90,
+                                   UIContentSizeCategoryAccessibilityMedium : @90,
+                                   UIContentSizeCategoryAccessibilityLarge : @90,
+                                   UIContentSizeCategoryAccessibilityExtraLarge : @90,
+                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @90,
+                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @90 };
+            });
+            NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+            CGFloat minTextHeight = s_textHeights[contentSizeCategory].floatValue;
             CGFloat itemWidth = GridLayoutItemWidth(210.f, CGRectGetWidth(collectionView.frame), kLayoutHorizontalInset, kLayoutHorizontalInset, collectionViewLayout.minimumInteritemSpacing);
             return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
         }
     }
     // Search show list
     else {
-        CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 200.f : 220.f;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
+        CGFloat itemHeight = SearchShowListCollectionViewCell.itemSize.height;
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), itemHeight);
     }
 }
 

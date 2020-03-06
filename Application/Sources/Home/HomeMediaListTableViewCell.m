@@ -55,11 +55,11 @@ static const CGFloat HomeStandardMargin = 10.f;
     }
     
     // Adjust height depending on font size settings. First section cells are different and require specific values
-    static NSDictionary<NSString *, NSNumber *> *s_featuredTextHeigths;
-    static NSDictionary<NSString *, NSNumber *> *s_standardTextHeigths;
+    static NSDictionary<NSString *, NSNumber *> *s_featuredTextHeights;
+    static NSDictionary<NSString *, NSNumber *> *s_standardTextHeights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_featuredTextHeigths = @{ UIContentSizeCategoryExtraSmall : @79,
+        s_featuredTextHeights = @{ UIContentSizeCategoryExtraSmall : @79,
                                    UIContentSizeCategorySmall : @81,
                                    UIContentSizeCategoryMedium : @84,
                                    UIContentSizeCategoryLarge : @89,
@@ -72,7 +72,7 @@ static const CGFloat HomeStandardMargin = 10.f;
                                    UIContentSizeCategoryAccessibilityExtraExtraLarge : @108,
                                    UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @108 };
         
-        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @63,
+        s_standardTextHeights = @{ UIContentSizeCategoryExtraSmall : @63,
                                    UIContentSizeCategorySmall : @65,
                                    UIContentSizeCategoryMedium : @67,
                                    UIContentSizeCategoryLarge : @70,
@@ -87,7 +87,7 @@ static const CGFloat HomeStandardMargin = 10.f;
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = featured ? s_featuredTextHeigths[contentSizeCategory].floatValue : s_standardTextHeigths[contentSizeCategory].floatValue;
+    CGFloat minTextHeight = featured ? s_featuredTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 

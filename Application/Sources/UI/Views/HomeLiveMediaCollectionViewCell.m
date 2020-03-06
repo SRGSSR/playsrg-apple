@@ -52,10 +52,10 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 + (CGFloat)heightForMedia:(SRGMedia *)media withWidth:(CGFloat)width
 {
-    static NSDictionary<NSString *, NSNumber *> *s_textHeigths;
+    static NSDictionary<NSString *, NSNumber *> *s_textHeights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_textHeigths = @{ UIContentSizeCategoryExtraSmall : @63,
+        s_textHeights = @{ UIContentSizeCategoryExtraSmall : @63,
                            UIContentSizeCategorySmall : @65,
                            UIContentSizeCategoryMedium : @67,
                            UIContentSizeCategoryLarge : @70,
@@ -70,7 +70,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = s_textHeigths[contentSizeCategory].floatValue;
+    CGFloat minTextHeight = s_textHeights[contentSizeCategory].floatValue;
     return ceilf(width * 9.f / 16.f + minTextHeight);
 }
 

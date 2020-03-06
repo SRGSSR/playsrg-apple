@@ -50,39 +50,39 @@ static const CGFloat HomeStandardMargin = 10.f;
     }
     
     // Adjust height depending on font size settings. First section cells are different and require specific values
-    static NSDictionary<NSString *, NSNumber *> *s_featuredTextHeigths;
-    static NSDictionary<NSString *, NSNumber *> *s_standardTextHeigths;
+    static NSDictionary<NSString *, NSNumber *> *s_featuredTextHeights;
+    static NSDictionary<NSString *, NSNumber *> *s_standardTextHeights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_featuredTextHeigths = @{ UIContentSizeCategoryExtraSmall : @40,
-                                   UIContentSizeCategorySmall : @40,
-                                   UIContentSizeCategoryMedium : @43,
-                                   UIContentSizeCategoryLarge : @45,
-                                   UIContentSizeCategoryExtraLarge : @48,
-                                   UIContentSizeCategoryExtraExtraLarge : @50,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @55,
-                                   UIContentSizeCategoryAccessibilityMedium : @55,
-                                   UIContentSizeCategoryAccessibilityLarge : @55,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @55,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @55,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @55 };
+        s_featuredTextHeights = @{ UIContentSizeCategoryExtraSmall : @28,
+                                   UIContentSizeCategorySmall : @28,
+                                   UIContentSizeCategoryMedium : @29,
+                                   UIContentSizeCategoryLarge : @31,
+                                   UIContentSizeCategoryExtraLarge : @33,
+                                   UIContentSizeCategoryExtraExtraLarge : @36,
+                                   UIContentSizeCategoryExtraExtraExtraLarge : @38,
+                                   UIContentSizeCategoryAccessibilityMedium : @38,
+                                   UIContentSizeCategoryAccessibilityLarge : @38,
+                                   UIContentSizeCategoryAccessibilityExtraLarge : @38,
+                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @38,
+                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @38 };
         
-        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @30,
-                                   UIContentSizeCategorySmall : @30,
-                                   UIContentSizeCategoryMedium : @30,
-                                   UIContentSizeCategoryLarge : @33,
-                                   UIContentSizeCategoryExtraLarge : @35,
-                                   UIContentSizeCategoryExtraExtraLarge : @38,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @44,
-                                   UIContentSizeCategoryAccessibilityMedium : @44,
-                                   UIContentSizeCategoryAccessibilityLarge : @44,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @44,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @44,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @44 };
+        s_standardTextHeights = @{ UIContentSizeCategoryExtraSmall : @26,
+                                   UIContentSizeCategorySmall : @26,
+                                   UIContentSizeCategoryMedium : @27,
+                                   UIContentSizeCategoryLarge : @29,
+                                   UIContentSizeCategoryExtraLarge : @31,
+                                   UIContentSizeCategoryExtraExtraLarge : @34,
+                                   UIContentSizeCategoryExtraExtraExtraLarge : @36,
+                                   UIContentSizeCategoryAccessibilityMedium : @36,
+                                   UIContentSizeCategoryAccessibilityLarge : @36,
+                                   UIContentSizeCategoryAccessibilityExtraLarge : @36,
+                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @36,
+                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @36 };
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = featured ? s_featuredTextHeigths[contentSizeCategory].floatValue : s_standardTextHeigths[contentSizeCategory].floatValue;
+    CGFloat minTextHeight = featured ? s_featuredTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
