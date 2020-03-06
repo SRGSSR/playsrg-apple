@@ -13,6 +13,7 @@
 #import "ShowViewController.h"
 #import "FavoriteTableViewCell.h"
 #import "Favorites.h"
+#import "Layout.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -223,7 +224,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsMake(10.f, 0.f, 5.f, 0.f);
+    return LayoutStandardTableViewPaddingInsets;
 }
 
 #pragma mark DZNEmptyDataSetSource protocol

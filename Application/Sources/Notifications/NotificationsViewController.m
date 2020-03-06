@@ -9,6 +9,7 @@
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
+#import "Layout.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
 #import "Notification.h"
@@ -231,7 +232,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsMake(5.f, 0.f, 10.f, 0.f);
+    return LayoutStandardTableViewPaddingInsets;
 }
 
 #pragma mark DZNEmptyDataSetSource protocol

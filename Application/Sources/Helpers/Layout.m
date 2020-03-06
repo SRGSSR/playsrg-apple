@@ -6,8 +6,6 @@
 
 #import "Layout.h"
 
-#import <UIKit/UIKit.h>
-
 CGFloat GridLayoutOptimalItemWidth(CGFloat itemApproximateWidth, CGFloat layoutWidth, CGFloat leadingInset, CGFloat trailingInset, CGFloat spacing)
 {
     CGFloat availableWidth = layoutWidth - leadingInset - trailingInset;

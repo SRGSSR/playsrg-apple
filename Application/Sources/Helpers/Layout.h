@@ -4,8 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoreGraphics/CoreGraphics.h>
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +19,11 @@ static const CGFloat LayoutStandardViewCornerRadius = 4.f;
  */
 static const CGFloat LayoutCollectionViewCellStandardWidth = 210.f;
 static const CGFloat LayoutTableViewCellStandardHeight = 84.f;
+
+/**
+ *  Standard table view padding.
+ */
+static const UIEdgeInsets LayoutStandardTableViewPaddingInsets = { 10.f, 0.f, 5.f, 0.f };
 
 /**
  *  Calculate the width to apply to items within a grid so that they approach some desired size, ensuring constant spacing
