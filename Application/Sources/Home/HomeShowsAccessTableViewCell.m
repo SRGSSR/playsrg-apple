@@ -33,12 +33,14 @@
 
 @implementation HomeShowsAccessTableViewCell
 
-#pragma mark Overrides
+#pragma mark Class overrides
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
     return 50.f;
 }
+
+#pragma mark Overrides
 
 - (void)awakeFromNib
 {

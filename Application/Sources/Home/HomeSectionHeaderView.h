@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeSectionHeaderView : UITableViewHeaderFooterView
 
-+ (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured;
+@property (class, nonatomic, readonly) CGFloat height;
 
 @property (nonatomic, nullable) HomeSectionInfo *homeSectionInfo;
 @property (nonatomic, readonly, getter=isFeatured) BOOL featured;

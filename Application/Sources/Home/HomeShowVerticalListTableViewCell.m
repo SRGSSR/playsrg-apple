@@ -25,7 +25,7 @@ static const CGFloat kLayoutMinimumLineSpacing = 10.f;
 
 @implementation HomeShowVerticalListTableViewCell
 
-#pragma mark Overrides
+#pragma mark Class overrides
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
@@ -35,6 +35,8 @@ static const CGFloat kLayoutMinimumLineSpacing = 10.f;
     NSInteger numberOfLines = MAX(ceilf((float)numberOfItems / numberOfItemsPerRow), 1);
     return itemSize.height * numberOfLines + (numberOfLines - 1) * kLayoutMinimumLineSpacing;
 }
+
+#pragma mark Class methods
 
 + (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds
 {

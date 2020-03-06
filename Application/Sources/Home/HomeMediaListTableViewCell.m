@@ -29,12 +29,14 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 @implementation HomeMediaListTableViewCell
 
-#pragma mark Overrides
+#pragma mark Class overrides
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
     return [self itemSizeForHomeSectionInfo:homeSectionInfo bounds:bounds featured:featured].height;
 }
+
+#pragma mark Class methods
 
 + (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
@@ -55,14 +57,6 @@ static const CGFloat HomeStandardMargin = 10.f;
         itemWidth = 210.f;
     }
     return GridLayoutMediaStandardItemSize(itemWidth, featured);
-}
-
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    
-    // Clear the collection
-    [self.collectionView reloadData];
 }
 
 #pragma mark Object lifecycle
@@ -115,6 +109,14 @@ static const CGFloat HomeStandardMargin = 10.f;
 }
 
 #pragma mark Overrides
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    // Clear the collection
+    [self.collectionView reloadData];
+}
 
 - (void)layoutSubviews
 {

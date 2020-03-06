@@ -24,12 +24,14 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 @implementation HomeShowListTableViewCell
 
-#pragma mark Overrides
+#pragma mark Class overrides
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
     return [self itemSizeForHomeSectionInfo:homeSectionInfo bounds:bounds featured:featured].height;
 }
+
+#pragma mark Class methods
 
 + (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {

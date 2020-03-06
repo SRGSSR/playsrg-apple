@@ -602,8 +602,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
         }
             
         case HomeHeaderTypeView: {
-            BOOL featured = [self isFeaturedInSection:section];
-            return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:featured];
+            return HomeSectionHeaderView.height;
             break;
         }
         
