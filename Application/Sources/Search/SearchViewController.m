@@ -639,7 +639,7 @@
         static NSDictionary<NSString *, NSNumber *> *s_height;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
-            s_height = @{ UIContentSizeCategoryExtraSmall : @28,
+            s_height = @{ UIContentSizeCategoryExtraSmall : @32,
                           UIContentSizeCategorySmall : @32,
                           UIContentSizeCategoryMedium : @36,
                           UIContentSizeCategoryLarge : @40,
