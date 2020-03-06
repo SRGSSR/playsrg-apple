@@ -63,18 +63,18 @@ CGSize GridLayoutLiveMediaStandardItemSize(CGFloat itemWidth)
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_textHeights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_textHeights = @{ UIContentSizeCategoryExtraSmall : @58,
-                           UIContentSizeCategorySmall : @58,
-                           UIContentSizeCategoryMedium : @60,
-                           UIContentSizeCategoryLarge : @63,
-                           UIContentSizeCategoryExtraLarge : @68,
-                           UIContentSizeCategoryExtraExtraLarge : @75,
-                           UIContentSizeCategoryExtraExtraExtraLarge : @83,
-                           UIContentSizeCategoryAccessibilityMedium : @83,
-                           UIContentSizeCategoryAccessibilityLarge : @83,
-                           UIContentSizeCategoryAccessibilityExtraLarge : @83,
-                           UIContentSizeCategoryAccessibilityExtraExtraLarge : @83,
-                           UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @83 };
+        s_textHeights = @{ UIContentSizeCategoryExtraSmall : @64,
+                           UIContentSizeCategorySmall : @66,
+                           UIContentSizeCategoryMedium : @68,
+                           UIContentSizeCategoryLarge : @70,
+                           UIContentSizeCategoryExtraLarge : @72,
+                           UIContentSizeCategoryExtraExtraLarge : @74,
+                           UIContentSizeCategoryExtraExtraExtraLarge : @76,
+                           UIContentSizeCategoryAccessibilityMedium : @76,
+                           UIContentSizeCategoryAccessibilityLarge : @76,
+                           UIContentSizeCategoryAccessibilityExtraLarge : @76,
+                           UIContentSizeCategoryAccessibilityExtraExtraLarge : @76,
+                           UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @76 };
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
