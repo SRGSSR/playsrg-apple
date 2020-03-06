@@ -146,26 +146,12 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // For compact layouts, display a single item with the full available collection width (up to a small margin)
-    if (self.featured
-            && [self collectionView:collectionView numberOfItemsInSection:indexPath.section] == 1
-            && self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, CGRectGetHeight(collectionView.frame));
-    }
-    else {
-        return [HomeShowListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds featured:self.featured];
-    }
+    return [HomeShowListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds featured:self.featured];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    // If a single item has been displayed, center it
-    if (self.featured && [self collectionView:collectionView numberOfItemsInSection:section] == 1) {
-        CGSize cellSize = [self collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:[NSIndexPath indexPathWithIndex:section]];
-        CGFloat margin = (CGRectGetWidth(collectionView.frame) - cellSize.width) / 2.f;
-        return UIEdgeInsetsMake(0.f, margin, 0.f, margin);
-    }
-    else if (self.homeSectionInfo.module) {
+    if (self.homeSectionInfo.module) {
         return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, LayoutStandardMargin);
     }
     else {
