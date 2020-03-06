@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ChannelService.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -58,7 +59,7 @@
     self.mediaView.hidden = YES;
     self.placeholderView.hidden = NO;
     
-    self.placeholderImageView.layer.cornerRadius = 4.f;
+    self.placeholderImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.placeholderImageView.layer.masksToBounds = YES;
     
     // Accommodate all kinds of usages (medium or small)
@@ -73,7 +74,7 @@
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailImageView.layer.cornerRadius = 4.f;
+    self.thumbnailImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailImageView.layer.masksToBounds = YES;
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;

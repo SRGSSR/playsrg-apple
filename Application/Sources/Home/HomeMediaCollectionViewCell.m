@@ -11,6 +11,7 @@
 #import "ApplicationSettings.h"
 #import "Download.h"
 #import "History.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -71,7 +72,7 @@
     self.mediaView.hidden = YES;
     self.placeholderView.hidden = NO;
     
-    self.placeholderImageView.layer.cornerRadius = 4.f;
+    self.placeholderImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.placeholderImageView.layer.masksToBounds = YES;
     
     // Accommodate all kinds of usages (medium or small)
@@ -81,7 +82,7 @@
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailWrapperView.layer.cornerRadius = 4.f;
+    self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
     self.editorialLabel.backgroundColor = UIColor.play_redColor;

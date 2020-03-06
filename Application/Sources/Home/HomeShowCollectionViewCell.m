@@ -6,6 +6,7 @@
 
 #import "HomeShowCollectionViewCell.h"
 
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -38,7 +39,7 @@
     
     self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     
-    self.layer.cornerRadius = 4.f;
+    self.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.layer.masksToBounds = YES;
     
     self.showView.hidden = YES;

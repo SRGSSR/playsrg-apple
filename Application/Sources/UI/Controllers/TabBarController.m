@@ -9,6 +9,7 @@
 #import "AccessibilityIdentifierConstants.h"
 #import "ApplicationSettings.h"
 #import "HomeViewController.h"
+#import "Layout.h"
 #import "MiniPlayerView.h"
 #import "NavigationController.h"
 #import "ProfileViewController.h"
@@ -297,7 +298,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
             miniPlayerLayer.masksToBounds = NO;
         }
         else {
-            miniPlayerLayer.cornerRadius = 4.f;
+            miniPlayerLayer.cornerRadius = LayoutStandardViewCornerRadius;
             miniPlayerLayer.masksToBounds = YES;
         }
         

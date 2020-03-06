@@ -7,6 +7,7 @@
 #import "HomeMediaCollectionHeaderView.h"
 
 #import "HomeTopicViewController.h"
+#import "Layout.h"
 #import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
@@ -57,10 +58,10 @@
     self.headerView.hidden = YES;
     self.placeholderView.hidden = NO;
     
-    self.headerView.layer.cornerRadius = 4.f;
+    self.headerView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.headerView.layer.masksToBounds = YES;
     
-    self.placeholderImageView.layer.cornerRadius = 4.f;
+    self.placeholderImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.placeholderImageView.layer.masksToBounds = YES;
     
     // Accommodate all kinds of usages (medium or small)

@@ -12,6 +12,7 @@
 #import "Banner.h"
 #import "Download.h"
 #import "History.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -63,7 +64,7 @@
     self.backgroundColor = backgroundColor;
     
     self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailWrapperView.layer.cornerRadius = 4.f;
+    self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
     self.titleLabel.backgroundColor = backgroundColor;
