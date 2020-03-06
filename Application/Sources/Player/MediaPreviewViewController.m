@@ -74,11 +74,11 @@
 {
     [super viewDidLoad];
     
-    // Will restore audio playback iff a controller attached to the service was actually playing audio before (ignore
+    // Will restore playback iff a controller attached to the service was actually playing content before (ignore
     // other running playback playback states, like stalled or seeking, since such cases are not really relevant and
     // cannot be restored anyway as is)
     SRGLetterboxController *serviceController = SRGLetterboxService.sharedService.controller;
-    if (serviceController.media.mediaType == SRGMediaTypeAudio && serviceController.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
+    if (serviceController.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
         [serviceController pause];
         self.shouldRestoreServicePlayback = YES;
     }
