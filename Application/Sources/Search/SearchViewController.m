@@ -29,8 +29,6 @@
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-static const CGFloat kLayoutHorizontalInset = 10.f;
-
 @interface SearchViewController () <SearchSettingsViewControllerDelegate>
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
@@ -629,7 +627,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         return UIEdgeInsetsZero;
     }
     else {
-        return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+        return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
     }
 }
 
@@ -654,17 +652,17 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         });
         NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
         CGFloat height = s_height[contentSizeCategory].floatValue;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, height);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, height);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 200.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 200.f);
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
          if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, LayoutTableViewCellStandardHeight);
+            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutTableViewCellStandardHeight);
         }
         else {
-            CGFloat itemWidth = GridLayoutOptimalItemWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), kLayoutHorizontalInset, kLayoutHorizontalInset, collectionViewLayout.minimumInteritemSpacing);
+            CGFloat itemWidth = GridLayoutOptimalItemWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
             return GridLayoutMediaStandardItemSize(itemWidth, NO);
         }
     }
@@ -677,7 +675,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if ([self isDisplayingMostSearchedShows] || [self isDisplayingObjectsInSection:section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 44.f);
     }
     else {
         return CGSizeZero;

@@ -13,8 +13,6 @@
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-static const CGFloat HomeStandardMargin = 10.f;
-
 @interface HomeShowListTableViewCell ()
 
 @property (nonatomic, weak) UIView *wrapperView;
@@ -158,7 +156,7 @@ static const CGFloat HomeStandardMargin = 10.f;
     if (self.featured
             && [self collectionView:collectionView numberOfItemsInSection:indexPath.section] == 1
             && self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * HomeStandardMargin, CGRectGetHeight(collectionView.frame));
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, CGRectGetHeight(collectionView.frame));
     }
     else {
         return [HomeShowListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds featured:self.featured];
@@ -174,10 +172,10 @@ static const CGFloat HomeStandardMargin = 10.f;
         return UIEdgeInsetsMake(0.f, margin, 0.f, margin);
     }
     else if (self.homeSectionInfo.module) {
-        return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, HomeStandardMargin);
+        return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, LayoutStandardMargin);
     }
     else {
-        return UIEdgeInsetsMake(0.f, HomeStandardMargin, 0.f, HomeStandardMargin);
+        return UIEdgeInsetsMake(0.f, LayoutStandardMargin, 0.f, LayoutStandardMargin);
     }
 }
 

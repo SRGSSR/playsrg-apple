@@ -18,8 +18,6 @@
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-static const CGFloat HomeStandardMargin = 10.f;
-
 static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 {
     return homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive || homeSection == HomeSectionRadioLiveSatellite
@@ -187,7 +185,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
     HomeMediaCollectionHeaderView *homeMediaCollectionHeaderView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                                                                                                       withReuseIdentifier:NSStringFromClass(HomeMediaCollectionHeaderView.class)
                                                                                                              forIndexPath:indexPath];
-    homeMediaCollectionHeaderView.leftEdgeInset = HomeStandardMargin;
+    homeMediaCollectionHeaderView.leftEdgeInset = LayoutStandardMargin;
     return homeMediaCollectionHeaderView;
 }
 
@@ -231,7 +229,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
     if (self.featured
             && [self collectionView:collectionView numberOfItemsInSection:indexPath.section] == 1
             && self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * HomeStandardMargin, CGRectGetHeight(collectionView.frame));
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, CGRectGetHeight(collectionView.frame));
     }
     else {
         return [HomeMediaListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds featured:self.featured];
@@ -242,7 +240,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 {
     if (self.homeSectionInfo.module || (self.homeSectionInfo.topic && ! ApplicationConfiguration.sharedApplicationConfiguration.topicHomeHeadersHidden)) {
         CGSize size = [self collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
-        size.width += HomeStandardMargin;
+        size.width += LayoutStandardMargin;
         return size;
     }
     else {
@@ -259,10 +257,10 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         return UIEdgeInsetsMake(0.f, margin, 0.f, margin);
     }
     else if (self.homeSectionInfo.module) {
-        return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, HomeStandardMargin);
+        return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, LayoutStandardMargin);
     }
     else {
-        return UIEdgeInsetsMake(0.f, HomeStandardMargin, 0.f, HomeStandardMargin);
+        return UIEdgeInsetsMake(0.f, LayoutStandardMargin, 0.f, LayoutStandardMargin);
     }
 }
 

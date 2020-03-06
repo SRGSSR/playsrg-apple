@@ -12,8 +12,6 @@
 
 #import <SRGAppearance/SRGAppearance.h>
 
-static const CGFloat kLayoutHorizontalInset = 10.f;
-
 @implementation MediasViewController
 
 #pragma mark View lifecycle
@@ -64,18 +62,18 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+    return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     // Table layout
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, LayoutTableViewCellStandardHeight);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutTableViewCellStandardHeight);
     }
     // Grid layout
     else {
-        CGFloat itemWidth = GridLayoutOptimalItemWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), kLayoutHorizontalInset, kLayoutHorizontalInset, collectionViewLayout.minimumInteritemSpacing);
+        CGFloat itemWidth = GridLayoutOptimalItemWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
         return GridLayoutMediaStandardItemSize(itemWidth, NO);
     }
 }

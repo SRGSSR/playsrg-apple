@@ -22,8 +22,6 @@
 #import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-static const CGFloat kLayoutHorizontalInset = 10.f;
-
 @interface ShowsViewController () {
 @private
     NSInteger _previousAccessibilityHeadingSection;
@@ -82,8 +80,8 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    collectionViewLayout.minimumInteritemSpacing = 10.f;
-    collectionViewLayout.minimumLineSpacing = 10.f;
+    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
+    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
     collectionViewLayout.sectionHeadersPinToVisibleBounds = YES;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
@@ -336,18 +334,18 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+    return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat itemWidth = GridLayoutOptimalItemWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), kLayoutHorizontalInset, kLayoutHorizontalInset, collectionViewLayout.minimumInteritemSpacing);
+    CGFloat itemWidth = GridLayoutOptimalItemWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
     return GridLayoutShowStandardItemSize(itemWidth, NO);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+    return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 44.f);
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

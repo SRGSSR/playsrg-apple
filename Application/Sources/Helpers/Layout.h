@@ -26,6 +26,11 @@ static const CGFloat LayoutTableViewCellStandardHeight = 84.f;
 static const UIEdgeInsets LayoutStandardTableViewPaddingInsets = { 10.f, 0.f, 5.f, 0.f };
 
 /**
+ *  Standard margin.
+ */
+static const CGFloat LayoutStandardMargin = 10.f;
+
+/**
  *  Calculate the width to apply to items within a grid so that they approach some desired size, ensuring constant spacing
  *  between items.
  *
