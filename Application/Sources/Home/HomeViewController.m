@@ -603,7 +603,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
         }
             
         case HomeHeaderTypeView: {
-            return HomeSectionHeaderView.height;
+            return LayoutStandardTableSectionHeaderHeight();
             break;
         }
         

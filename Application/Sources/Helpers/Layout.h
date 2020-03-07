@@ -51,6 +51,11 @@ OBJC_EXPORT CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidt
 OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth);
 
 /**
+ *  Return the standard height for table view headers.
+ */
+OBJC_EXPORT CGFloat LayoutStandardTableSectionHeaderHeight(void);
+
+/**
  *  Standard media cell (16:9 artwork + text area) size for collection layouts, for a given item width.
  *
  *  @param itemWidth The width of the item.
