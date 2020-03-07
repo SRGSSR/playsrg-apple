@@ -452,7 +452,7 @@ name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 2.5.3
 
 name: CoconutKit, nameSpecified: , owner: defagos, version: 3.3.8
 
-name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 6.0.0
+name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 6.2.0
 
 name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
 
@@ -466,7 +466,7 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 39b2338
+name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 9c534f0
 
 name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
@@ -478,7 +478,7 @@ name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: b1c8d80
 
 name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: c1a9215
 
-name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 1ace5ca
+name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 9e32cd6
 
 name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 

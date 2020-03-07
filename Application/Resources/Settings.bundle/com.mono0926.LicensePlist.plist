@@ -40,7 +40,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/ComScore-iOS-watchOS-tvOS</string>
 			<key>Title</key>
-			<string>ComScore-iOS-watchOS-tvOS (6.0.0)</string>
+			<string>ComScore-iOS-watchOS-tvOS (6.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -232,7 +232,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
 			<key>Title</key>
-			<string>srganalytics-apple (39b2338)</string>
+			<string>srganalytics-apple (9c534f0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -280,7 +280,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>srgletterbox-apple (1ace5ca)</string>
+			<string>srgletterbox-apple (9e32cd6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
