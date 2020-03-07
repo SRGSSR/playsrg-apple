@@ -636,25 +636,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self shouldDisplayMostSearchedShows]) {
-        static NSDictionary<NSString *, NSNumber *> *s_height;
-        static dispatch_once_t s_onceToken;
-        dispatch_once(&s_onceToken, ^{
-            s_height = @{ UIContentSizeCategoryExtraSmall : @32,
-                          UIContentSizeCategorySmall : @32,
-                          UIContentSizeCategoryMedium : @36,
-                          UIContentSizeCategoryLarge : @40,
-                          UIContentSizeCategoryExtraLarge : @44,
-                          UIContentSizeCategoryExtraExtraLarge : @48,
-                          UIContentSizeCategoryExtraExtraExtraLarge : @52,
-                          UIContentSizeCategoryAccessibilityMedium : @52,
-                          UIContentSizeCategoryAccessibilityLarge : @52,
-                          UIContentSizeCategoryAccessibilityExtraLarge : @52,
-                          UIContentSizeCategoryAccessibilityExtraExtraLarge : @52,
-                          UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @52 };
-        });
-        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-        CGFloat height = s_height[contentSizeCategory].floatValue;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, height);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutStandardSimpleTableCellHeight());
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 200.f);

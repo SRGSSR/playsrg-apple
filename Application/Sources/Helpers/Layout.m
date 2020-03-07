@@ -54,6 +54,28 @@ CGFloat LayoutStandardTableSectionHeaderHeight(void)
     return s_headerHeights[contentSizeCategory].floatValue;
 }
 
+CGFloat LayoutStandardSimpleTableCellHeight(void)
+{
+    static NSDictionary<NSString *, NSNumber *> *s_height;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_height = @{ UIContentSizeCategoryExtraSmall : @32,
+                      UIContentSizeCategorySmall : @32,
+                      UIContentSizeCategoryMedium : @36,
+                      UIContentSizeCategoryLarge : @40,
+                      UIContentSizeCategoryExtraLarge : @44,
+                      UIContentSizeCategoryExtraExtraLarge : @48,
+                      UIContentSizeCategoryExtraExtraExtraLarge : @52,
+                      UIContentSizeCategoryAccessibilityMedium : @52,
+                      UIContentSizeCategoryAccessibilityLarge : @52,
+                      UIContentSizeCategoryAccessibilityExtraLarge : @52,
+                      UIContentSizeCategoryAccessibilityExtraExtraLarge : @52,
+                      UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @52 };
+    });
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    return s_height[contentSizeCategory].floatValue;
+}
+
 CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
 {
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_largeTextHeights;

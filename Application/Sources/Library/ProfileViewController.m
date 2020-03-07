@@ -270,6 +270,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // FIXME:
     return [self notificationAtIndexPath:indexPath] ? 94.f : 50.f;
 }
 

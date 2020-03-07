@@ -56,6 +56,11 @@ OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth);
 OBJC_EXPORT CGFloat LayoutStandardTableSectionHeaderHeight(void);
 
 /**
+ *  Return the standard height for simple cells.
+ */
+OBJC_EXPORT CGFloat LayoutStandardSimpleTableCellHeight(void);
+
+/**
  *  Standard media cell (16:9 artwork + text area) size for collection layouts, for a given item width.
  *
  *  @param itemWidth The width of the item.
