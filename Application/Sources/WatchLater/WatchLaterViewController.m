@@ -195,7 +195,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 94.f;
+    return LayoutTableViewCellStandardHeight + LayoutStandardMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(WatchLaterTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

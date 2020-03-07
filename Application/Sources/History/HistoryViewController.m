@@ -210,7 +210,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 94.f;
+    return LayoutTableViewCellStandardHeight + LayoutStandardMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(HistoryTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

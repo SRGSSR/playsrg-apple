@@ -100,8 +100,7 @@
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
-    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
+    // Spacing configured via delegation since dynamic
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
     collectionView.backgroundColor = UIColor.clearColor;
@@ -630,6 +629,26 @@
     }
     else {
         return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    if ([self shouldDisplayMostSearchedShows]) {
+        return 0.f;
+    }
+    else {
+        return LayoutStandardMargin;
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    if ([self shouldDisplayMostSearchedShows]) {
+        return 0.f;
+    }
+    else {
+        return LayoutStandardMargin;
     }
 }
 
