@@ -1206,11 +1206,11 @@
 		6FCB574B1EC2047B0015CAB7 /* override_default_rete_due.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57451EC2047B0015CAB7 /* override_default_rete_due.pdf */; };
 		6FCB574C1EC2047B0015CAB7 /* override_default_rete_tre.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57461EC2047B0015CAB7 /* override_default_rete_tre.pdf */; };
 		6FCB574D1EC2047B0015CAB7 /* override_default_rete_uno.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57471EC2047B0015CAB7 /* override_default_rete_uno.pdf */; };
-		6FD2A35523C7628000456DCB /* SmartTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* SmartTimer.m */; };
-		6FD2A35623C7628000456DCB /* SmartTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* SmartTimer.m */; };
-		6FD2A35723C7628000456DCB /* SmartTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* SmartTimer.m */; };
-		6FD2A35823C7628000456DCB /* SmartTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* SmartTimer.m */; };
-		6FD2A35923C7628000456DCB /* SmartTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* SmartTimer.m */; };
+		6FD2A35523C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
+		6FD2A35623C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
+		6FD2A35723C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
+		6FD2A35823C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
+		6FD2A35923C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
 		6FD2CBC31DD19B0200B44958 /* placeholder_media-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CBC21DD19B0200B44958 /* placeholder_media-180.pdf */; };
 		6FD2CBC41DD19B0200B44958 /* placeholder_media-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CBC21DD19B0200B44958 /* placeholder_media-180.pdf */; };
 		6FD2CBC51DD19B0200B44958 /* placeholder_media-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CBC21DD19B0200B44958 /* placeholder_media-180.pdf */; };
@@ -2156,8 +2156,8 @@
 		6FCB57751EC204A80015CAB7 /* override_default_srf2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_srf2.pdf; sourceTree = "<group>"; };
 		6FCB57761EC204A80015CAB7 /* override_default_srf3.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_srf3.pdf; sourceTree = "<group>"; };
 		6FCB57771EC204A80015CAB7 /* override_default_srf4.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_srf4.pdf; sourceTree = "<group>"; };
-		6FD2A35323C7628000456DCB /* SmartTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartTimer.m; sourceTree = "<group>"; };
-		6FD2A35423C7628000456DCB /* SmartTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartTimer.h; sourceTree = "<group>"; };
+		6FD2A35323C7628000456DCB /* ForegroundTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForegroundTimer.m; sourceTree = "<group>"; };
+		6FD2A35423C7628000456DCB /* ForegroundTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForegroundTimer.h; sourceTree = "<group>"; };
 		6FD2CBC21DD19B0200B44958 /* placeholder_media-180.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "placeholder_media-180.pdf"; sourceTree = "<group>"; };
 		6FD633DB1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleCastMiniPlayerView.h; sourceTree = "<group>"; };
 		6FD633DC1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleCastMiniPlayerView.m; sourceTree = "<group>"; };
@@ -2624,6 +2624,8 @@
 				6FE1B9181FAC34D600A58F3B /* ContentInsets.m */,
 				0821D53C227F5ED300FC091F /* DeepLinkService.h */,
 				0821D53D227F5ED300FC091F /* DeepLinkService.m */,
+				6FD2A35423C7628000456DCB /* ForegroundTimer.h */,
+				6FD2A35323C7628000456DCB /* ForegroundTimer.m */,
 				6F8144122008FA970075F52F /* GoogleCast.h */,
 				6F8144132008FA970075F52F /* GoogleCast.m */,
 				6F9897CB2412582400B390A2 /* Layout.h */,
@@ -2646,8 +2648,6 @@
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
-				6FD2A35423C7628000456DCB /* SmartTimer.h */,
-				6FD2A35323C7628000456DCB /* SmartTimer.m */,
 				6F00875B219AA888004BD6FF /* StoreReview.h */,
 				6F00875C219AA888004BD6FF /* StoreReview.m */,
 				089EA017201148D70070E11A /* TimerTarget.h */,
@@ -5973,7 +5973,7 @@
 				08564B1D1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6F47607B1EB37D60003021EA /* UIImageView+PlaySRG.m in Sources */,
 				6F939F6F2090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
-				6FD2A35523C7628000456DCB /* SmartTimer.m in Sources */,
+				6FD2A35523C7628000456DCB /* ForegroundTimer.m in Sources */,
 				6F85E4B71EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
 				6F47607E1EB37D60003021EA /* UIWindow+PlaySRG.m in Sources */,
 				6FDF08F0218B126700B2AF2C /* UpdateInfo.m in Sources */,
@@ -6119,7 +6119,7 @@
 				6FF7BBA222A78DE400FA758A /* SearchSettingsViewController.m in Sources */,
 				082910AF239E90D200D168F4 /* TabBarController.m in Sources */,
 				6F4760851EB37DF1003021EA /* UIWindow+PlaySRG.m in Sources */,
-				6FD2A35623C7628000456DCB /* SmartTimer.m in Sources */,
+				6FD2A35623C7628000456DCB /* ForegroundTimer.m in Sources */,
 				E64BA3FC1D4A5887002C10D5 /* WebViewController.m in Sources */,
 				E6DB5F1C1D66E0890057094B /* ShowsViewController.m in Sources */,
 				6F1F929F22A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */,
@@ -6280,7 +6280,7 @@
 				6FF7BBA322A78DE400FA758A /* SearchSettingsViewController.m in Sources */,
 				082910B0239E90D200D168F4 /* TabBarController.m in Sources */,
 				6F47608C1EB37DF1003021EA /* UIWindow+PlaySRG.m in Sources */,
-				6FD2A35723C7628000456DCB /* SmartTimer.m in Sources */,
+				6FD2A35723C7628000456DCB /* ForegroundTimer.m in Sources */,
 				E64BA3FD1D4A5888002C10D5 /* WebViewController.m in Sources */,
 				E6DB5F1D1D66E0890057094B /* ShowsViewController.m in Sources */,
 				6F1F92A022A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */,
@@ -6441,7 +6441,7 @@
 				6FF7BBA422A78DE400FA758A /* SearchSettingsViewController.m in Sources */,
 				082910B1239E90D200D168F4 /* TabBarController.m in Sources */,
 				6F4760931EB37DF1003021EA /* UIWindow+PlaySRG.m in Sources */,
-				6FD2A35823C7628000456DCB /* SmartTimer.m in Sources */,
+				6FD2A35823C7628000456DCB /* ForegroundTimer.m in Sources */,
 				E64BA3FE1D4A5888002C10D5 /* WebViewController.m in Sources */,
 				E6DB5F1E1D66E0890057094B /* ShowsViewController.m in Sources */,
 				6F1F92A122A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */,
@@ -6602,7 +6602,7 @@
 				6FF7BBA522A78DE400FA758A /* SearchSettingsViewController.m in Sources */,
 				082910B2239E90D200D168F4 /* TabBarController.m in Sources */,
 				6F47609A1EB37DF2003021EA /* UIWindow+PlaySRG.m in Sources */,
-				6FD2A35923C7628000456DCB /* SmartTimer.m in Sources */,
+				6FD2A35923C7628000456DCB /* ForegroundTimer.m in Sources */,
 				E64BA3FF1D4A5888002C10D5 /* WebViewController.m in Sources */,
 				E6DB5F1F1D66E0890057094B /* ShowsViewController.m in Sources */,
 				6F1F92A222A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */,
