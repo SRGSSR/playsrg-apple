@@ -18,6 +18,7 @@
 @property (nonatomic, copy) void (^block)(ForegroundTimer *);
 
 @property (nonatomic) NSTimer *timer;
+@property (nonatomic) NSDate *fireDate;
 
 @end
 
@@ -90,14 +91,35 @@
 
 - (void)resume
 {
-    self.timer = [NSTimer play_timerWithTimeInterval:self.interval repeats:self.repeats block:^(NSTimer * _Nonnull timer) {
-        self.block(self);
-    }];
+    if (self.fireDate) {
+        NSTimeInterval interval = [NSDate.date timeIntervalSinceDate:self.fireDate];
+        if (interval >= 0) {
+            self.timer = [NSTimer play_timerWithTimeInterval:self.interval repeats:self.repeats block:^(NSTimer * _Nonnull timer) {
+                self.block(self);
+            }];
+            [self.timer fire];
+        }
+        else {
+            self.timer = [NSTimer play_timerWithTimeInterval:-interval repeats:NO block:^(NSTimer * _Nonnull timer) {
+                self.timer = [NSTimer play_timerWithTimeInterval:self.interval repeats:self.repeats block:^(NSTimer * _Nonnull timer) {
+                    self.block(self);
+                }];
+                [self.timer fire];
+            }];
+        }
+        self.fireDate = nil;
+    }
+    else {
+        self.timer = [NSTimer play_timerWithTimeInterval:self.interval repeats:self.repeats block:^(NSTimer * _Nonnull timer) {
+            self.block(self);
+        }];
+    }
 }
 
 - (void)suspend
 {
-    [self invalidate];
+    self.fireDate = self.timer.fireDate;
+    self.timer = nil;
 }
 
 #pragma mark Notifications
@@ -109,8 +131,6 @@
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification
 {
-    // This implementation is kept simple for the moment. We could namely determine whether the timer
-    // should be directly fired after returning from background, or schedule precisely when it should
     [self resume];
 }
 
