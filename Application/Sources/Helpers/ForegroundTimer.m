@@ -18,7 +18,7 @@
 @property (nonatomic, copy) void (^block)(ForegroundTimer *);
 
 @property (nonatomic) NSTimer *timer;
-@property (nonatomic) NSDate *fireDate;
+@property (nonatomic) NSDate *nextFireDate;
 
 @end
 
@@ -27,8 +27,8 @@
 #pragma mark Class methods
 
 + (ForegroundTimer *)timerWithTimeInterval:(NSTimeInterval)interval
-                              repeats:(BOOL)repeats
-                                block:(void (^)(ForegroundTimer * _Nonnull))block
+                                   repeats:(BOOL)repeats
+                                     block:(void (^)(ForegroundTimer * _Nonnull))block
 {
     return [[ForegroundTimer alloc] initWithTimeInterval:interval repeats:repeats block:block];
 }
@@ -91,23 +91,29 @@
 
 - (void)resume
 {
-    if (self.fireDate) {
-        NSTimeInterval interval = [NSDate.date timeIntervalSinceDate:self.fireDate];
+    if (self.nextFireDate) {
+        NSTimeInterval interval = [NSDate.date timeIntervalSinceDate:self.nextFireDate];
         if (interval >= 0) {
-            self.timer = [NSTimer play_timerWithTimeInterval:self.interval repeats:self.repeats block:^(NSTimer * _Nonnull timer) {
-                self.block(self);
-            }];
-            [self.timer fire];
+            self.block(self);
+            
+            if (self.repeats) {
+                self.timer = [NSTimer play_timerWithTimeInterval:self.interval repeats:YES block:^(NSTimer * _Nonnull timer) {
+                    self.block(self);
+                }];
+            }
         }
         else {
             self.timer = [NSTimer play_timerWithTimeInterval:-interval repeats:NO block:^(NSTimer * _Nonnull timer) {
-                self.timer = [NSTimer play_timerWithTimeInterval:self.interval repeats:self.repeats block:^(NSTimer * _Nonnull timer) {
-                    self.block(self);
-                }];
-                [self.timer fire];
+                self.block(self);
+                
+                if (self.repeats) {
+                    self.timer = [NSTimer play_timerWithTimeInterval:self.interval repeats:YES block:^(NSTimer * _Nonnull timer) {
+                        self.block(self);
+                    }];
+                }
             }];
         }
-        self.fireDate = nil;
+        self.nextFireDate = nil;
     }
     else {
         self.timer = [NSTimer play_timerWithTimeInterval:self.interval repeats:self.repeats block:^(NSTimer * _Nonnull timer) {
@@ -118,7 +124,7 @@
 
 - (void)suspend
 {
-    self.fireDate = self.timer.fireDate;
+    self.nextFireDate = self.timer.fireDate;
     self.timer = nil;
 }
 

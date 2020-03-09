@@ -9,7 +9,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  A timer class, similar to `NSTimer`, but only active in foreground (usual `NSTimer` can continue in background
+ *  A timer class, similar to `NSTimer`, but only active in foreground (the usual `NSTimer` can continue in background
  *  if background audio is active).
  */
 @interface ForegroundTimer : NSObject
@@ -18,8 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  Convenience constructor.
  */
 + (ForegroundTimer *)timerWithTimeInterval:(NSTimeInterval)interval
-                              repeats:(BOOL)repeats
-                                block:(void (^)(ForegroundTimer *timer))block;
+                                   repeats:(BOOL)repeats
+                                     block:(void (^)(ForegroundTimer *timer))block;
 
 /**
  *  Create a timer.
