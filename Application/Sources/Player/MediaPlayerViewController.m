@@ -333,8 +333,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     // Start with an empty summary label, so that height calculations correctly detect when a summary has been assigned
     self.summaryLabel.text = nil;
     
-    [self.webFirstLabel play_setWebFirstBadge];
-    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
     self.multiAudioImageView.tintColor = UIColor.play_whiteBadgeColor;
     
@@ -851,6 +849,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self.propertiesStackView play_setHidden:YES];
         self.propertiesTopLineSpacerView.hidden = YES;
     }
+    
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     
     [self updateRadioHomeButton];
     self.radioHomeButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];

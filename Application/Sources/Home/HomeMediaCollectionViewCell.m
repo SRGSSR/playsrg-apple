@@ -91,8 +91,6 @@
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
-    [self.webFirstLabel play_setWebFirstBadge];
-    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
     
     self.youthProtectionColorImageView.hidden = YES;
@@ -296,10 +294,12 @@
     BOOL hasAudioDescription = ApplicationSettingAudioDescriptionAvailabilityDisplayed() && self.media.play_audioDescriptionAvailable && ! downloaded;
     self.audioDescriptionImageView.hidden = ! hasAudioDescription;
     
-    // If a badge is displayed, use less space for the title so that the cell layout needs the same vertical space. This
-    // avoids the need for large cells since badges are more the exception than the rule.
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    
+    // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
     self.titleLabel.numberOfLines = (isWebFirst || hasSubtitles || hasAudioDescription) ? 1 : 2;
-
+    
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
     
