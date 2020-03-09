@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ChannelService.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -22,8 +23,6 @@
 #import <libextobjc/libextobjc.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
-
-static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 @interface HomeLiveMediaCollectionViewCell ()
 
@@ -48,32 +47,6 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
 
 @implementation HomeLiveMediaCollectionViewCell
 
-#pragma mark Class methods
-
-+ (CGFloat)heightForMedia:(SRGMedia *)media withWidth:(CGFloat)width
-{
-    static NSDictionary<NSString *, NSNumber *> *s_textHeigths;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_textHeigths = @{ UIContentSizeCategoryExtraSmall : @63,
-                           UIContentSizeCategorySmall : @65,
-                           UIContentSizeCategoryMedium : @67,
-                           UIContentSizeCategoryLarge : @70,
-                           UIContentSizeCategoryExtraLarge : @75,
-                           UIContentSizeCategoryExtraExtraLarge : @82,
-                           UIContentSizeCategoryExtraExtraExtraLarge : @90,
-                           UIContentSizeCategoryAccessibilityMedium : @90,
-                           UIContentSizeCategoryAccessibilityLarge : @90,
-                           UIContentSizeCategoryAccessibilityExtraLarge : @90,
-                           UIContentSizeCategoryAccessibilityExtraExtraLarge : @90,
-                           UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @90 };
-    });
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = s_textHeigths[contentSizeCategory].floatValue;
-    return ceilf(width * 9.f / 16.f + minTextHeight);
-}
-
 #pragma mark Overrides
 
 - (void)awakeFromNib
@@ -86,7 +59,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     self.mediaView.hidden = YES;
     self.placeholderView.hidden = NO;
     
-    self.placeholderImageView.layer.cornerRadius = 4.f;
+    self.placeholderImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.placeholderImageView.layer.masksToBounds = YES;
     
     // Accommodate all kinds of usages (medium or small)
@@ -101,7 +74,7 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedHeights;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailImageView.layer.cornerRadius = 4.f;
+    self.thumbnailImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailImageView.layer.masksToBounds = YES;
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;

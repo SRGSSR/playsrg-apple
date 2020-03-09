@@ -11,6 +11,7 @@
 #import "DownloadsViewController.h"
 #import "FavoritesViewController.h"
 #import "HistoryViewController.h"
+#import "Layout.h"
 #import "NavigationController.h"
 #import "NotificationsViewController.h"
 #import "NSBundle+PlaySRG.h"
@@ -270,7 +271,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self notificationAtIndexPath:indexPath] ? 94.f : 50.f;
+    if ([self notificationAtIndexPath:indexPath]) {
+        return LayoutTableViewCellStandardHeight + LayoutStandardMargin;
+    }
+    else {
+        return LayoutStandardSimpleTableCellHeight();
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

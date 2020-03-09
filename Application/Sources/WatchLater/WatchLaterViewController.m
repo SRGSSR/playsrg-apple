@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
@@ -163,7 +164,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsMake(10.f, 0.f, 5.f, 0.f);
+    return LayoutStandardTableViewPaddingInsets;
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -194,7 +195,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 94.f;
+    return LayoutTableViewCellStandardHeight + LayoutStandardMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(WatchLaterTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

@@ -10,8 +10,9 @@
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
-#import "MediaCollectionViewCell.h"
 #import "Favorites.h"
+#import "Layout.h"
+#import "MediaCollectionViewCell.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayAppDelegate.h"
 #import "ShowHeaderView.h"
@@ -52,6 +53,8 @@
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
     collectionView.backgroundColor = UIColor.clearColor;

@@ -9,6 +9,7 @@
 #import "AnalyticsConstants.h"
 #import "Banner.h"
 #import "Favorites.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PushService.h"
 #import "UIColor+PlaySRG.h"
@@ -40,7 +41,7 @@
     
     UIColor *backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.wrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
-    self.wrapperView.layer.cornerRadius = 4.f;
+    self.wrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.wrapperView.layer.masksToBounds = YES;
     
     UIView *colorView = [[UIView alloc] init];

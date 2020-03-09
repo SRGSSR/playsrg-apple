@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "Banner.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
@@ -40,7 +41,7 @@
     UIColor *backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.backgroundColor = backgroundColor;
     
-    self.layer.cornerRadius = 4.f;
+    self.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.layer.masksToBounds = YES;
     
     self.titleLabel.backgroundColor = backgroundColor;

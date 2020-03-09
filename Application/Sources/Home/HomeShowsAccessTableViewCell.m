@@ -8,6 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "CalendarViewController.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "ShowsViewController.h"
 #import "UIColor+PlaySRG.h"
@@ -33,12 +34,14 @@
 
 @implementation HomeShowsAccessTableViewCell
 
-#pragma mark Overrides
+#pragma mark Class overrides
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
     return 50.f;
 }
+
+#pragma mark Overrides
 
 - (void)awakeFromNib
 {
@@ -48,24 +51,24 @@
     self.placeholderView.hidden = NO;
     
     self.showsAtoZButtonPlaceholderView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
-    self.showsAtoZButtonPlaceholderView.layer.cornerRadius = 4.f;
+    self.showsAtoZButtonPlaceholderView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showsAtoZButtonPlaceholderView.layer.masksToBounds = YES;
     
     self.showsByDateButtonPlaceholderView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
-    self.showsByDateButtonPlaceholderView.layer.cornerRadius = 4.f;
+    self.showsByDateButtonPlaceholderView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showsByDateButtonPlaceholderView.layer.masksToBounds = YES;
 
     self.backgroundColor = UIColor.play_blackColor;
     self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
     
     self.showsAtoZButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
-    self.showsAtoZButton.layer.cornerRadius = 4.f;
+    self.showsAtoZButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showsAtoZButton.layer.masksToBounds = YES;
     [self.showsAtoZButton setTitle:NSLocalizedString(@"A to Z", @"Short title displayed in home page shows section.") forState:UIControlStateNormal];
     self.showsAtoZButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Programmes A-Z", @"Title displayed in home page shows section.");
     
     self.showsByDateButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
-    self.showsByDateButton.layer.cornerRadius = 4.f;
+    self.showsByDateButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showsByDateButton.layer.masksToBounds = YES;
     [self.showsByDateButton setTitle:NSLocalizedString(@"By date", @"Short title displayed in home page shows section.") forState:UIControlStateNormal];
     self.showsByDateButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Programmes by date", @"Title displayed in home page shows section.");

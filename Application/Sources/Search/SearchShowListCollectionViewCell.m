@@ -7,6 +7,7 @@
 #import "SearchShowListCollectionViewCell.h"
 
 #import "AnalyticsConstants.h"
+#import "Layout.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
 
@@ -22,6 +23,18 @@
 
 @implementation SearchShowListCollectionViewCell
 
+#pragma mark Class methods
+
++ (CGFloat)height
+{
+    return self.itemSize.height;
+}
+
++ (CGSize)itemSize
+{
+    return LayoutShowStandardCollectionItemSize(300.f, NO);
+}
+
 #pragma mark Object lifecycle
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -31,6 +44,8 @@
         
         UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+        collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
         
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:collectionViewLayout];
         collectionView.backgroundColor = UIColor.clearColor;
@@ -124,16 +139,12 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat textHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 30.f : 50.f;
-    
-    CGFloat height = CGRectGetHeight(collectionView.frame);
-    return CGSizeMake(16.f / 9.f * (height - textHeight), height);
+    return self.class.itemSize;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0.f, 10.f, 0.f, 10.f);
+    return UIEdgeInsetsMake(0.f, LayoutStandardMargin, 0.f, LayoutStandardMargin);
 }
 
 @end

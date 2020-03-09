@@ -6,6 +6,7 @@
 
 #import "UILabel+PlaySRG.h"
 
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayDurationFormatter.h"
@@ -72,7 +73,7 @@
 - (void)play_setWebFirstBadge
 {
     self.backgroundColor = UIColor.srg_blueColor;
-    self.layer.cornerRadius = 2.f;
+    self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"WEB FIRST", @"Web first label on media cells")].uppercaseString;
@@ -109,7 +110,7 @@
 - (void)play_displayDurationLabelWithName:(NSString *)name isLive:(BOOL)isLive
 {
     self.backgroundColor = isLive ? UIColor.play_liveRedColor : UIColor.play_blackDurationLabelBackgroundColor;
-    self.layer.cornerRadius = 3.f;
+    self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@  ", name].uppercaseString
@@ -122,7 +123,7 @@
 - (void)play_setMediaBadgeWithString:(NSString *)string
 {
     self.backgroundColor = UIColor.play_whiteBadgeColor;
-    self.layer.cornerRadius = 2.f;
+    self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     self.text = [NSString stringWithFormat:@"  %@  ", string].uppercaseString;

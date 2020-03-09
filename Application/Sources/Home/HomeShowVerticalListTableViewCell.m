@@ -6,14 +6,11 @@
 
 #import "HomeShowVerticalListTableViewCell.h"
 
+#import "Layout.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
 
 #import <SRGAppearance/SRGAppearance.h>
-
-static const CGFloat kLayoutHorizontalInset = 10.f;
-static const CGFloat kLayoutMinimumInteritemSpacing = 10.f;
-static const CGFloat kLayoutMinimumLineSpacing = 10.f;
 
 @interface HomeShowVerticalListTableViewCell ()
 
@@ -24,26 +21,23 @@ static const CGFloat kLayoutMinimumLineSpacing = 10.f;
 
 @implementation HomeShowVerticalListTableViewCell
 
-#pragma mark Overrides
-
-+ (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds
-{
-    // 2 items per row on small layouts, max cell width of 210
-    CGFloat width = fminf(floorf((CGRectGetWidth(bounds) - kLayoutMinimumInteritemSpacing - 2 * kLayoutHorizontalInset) / 2.f), 210.f);
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 30.f : 50.f;
-    
-    return CGSizeMake(width, ceilf(width * 9.f / 16.f + minTextHeight));
-}
+#pragma mark Class overrides
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
     CGSize itemSize = [self itemSizeForHomeSectionInfo:homeSectionInfo bounds:bounds];
-    NSInteger numberOfItemsPerRow = floorf((CGRectGetWidth(bounds) - 2 * kLayoutHorizontalInset + kLayoutMinimumInteritemSpacing) / (itemSize.width + kLayoutMinimumInteritemSpacing));
+    NSInteger numberOfItemsPerRow = floorf((CGRectGetWidth(bounds) - LayoutStandardMargin) / (itemSize.width + LayoutStandardMargin));
     NSInteger numberOfItems = (homeSectionInfo.items.count != 0) ? homeSectionInfo.items.count : 4;
     NSInteger numberOfLines = MAX(ceilf((float)numberOfItems / numberOfItemsPerRow), 1);
-    return itemSize.height * numberOfLines + (numberOfLines - 1) * kLayoutMinimumLineSpacing;
+    return itemSize.height * numberOfLines + (numberOfLines - 1) * LayoutStandardMargin;
+}
+
+#pragma mark Class methods
+
++ (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds
+{
+    CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(bounds), LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+    return LayoutShowStandardCollectionItemSize(itemWidth, NO);
 }
 
 #pragma mark Object lifecycle
@@ -62,8 +56,8 @@ static const CGFloat kLayoutMinimumLineSpacing = 10.f;
         
         UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        collectionViewLayout.minimumLineSpacing = kLayoutMinimumLineSpacing;
-        collectionViewLayout.minimumInteritemSpacing = kLayoutMinimumInteritemSpacing;
+        collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+        collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
         
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:wrapperView.bounds collectionViewLayout:collectionViewLayout];
         collectionView.backgroundColor = UIColor.clearColor;
@@ -136,7 +130,7 @@ static const CGFloat kLayoutMinimumLineSpacing = 10.f;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0.f, kLayoutHorizontalInset, 0.f, kLayoutHorizontalInset);
+    return UIEdgeInsetsMake(0.f, LayoutStandardMargin, 0.f, LayoutStandardMargin);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

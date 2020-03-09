@@ -6,6 +6,7 @@
 
 #import "HomeStatusHeaderView.h"
 
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
@@ -52,7 +53,7 @@
     self.messageLabel.textColor = UIColor.whiteColor;
     self.backgroundView.backgroundColor = UIColor.play_redColor;
     
-    self.backgroundView.layer.cornerRadius = 2.f;
+    self.backgroundView.layer.cornerRadius = LayoutStandardViewCornerRadius;
 }
 
 #pragma mark Getters and setters

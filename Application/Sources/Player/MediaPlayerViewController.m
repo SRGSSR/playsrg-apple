@@ -15,6 +15,7 @@
 #import "Favorites.h"
 #import "GoogleCast.h"
 #import "History.h"
+#import "Layout.h"
 #import "ModalTransition.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
@@ -320,7 +321,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.view.backgroundColor = UIColor.play_blackColor;
     
     self.showWrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
-    self.showWrapperView.layer.cornerRadius = 4.f;
+    self.showWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showWrapperView.layer.masksToBounds = YES;
     
     self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
@@ -332,8 +333,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     // Start with an empty summary label, so that height calculations correctly detect when a summary has been assigned
     self.summaryLabel.text = nil;
     
-    [self.webFirstLabel play_setWebFirstBadge];
-    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
     self.multiAudioImageView.tintColor = UIColor.play_whiteBadgeColor;
     
@@ -346,7 +345,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelNormalPriority;
     
     self.livestreamButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
-    self.livestreamButton.layer.cornerRadius = 4.f;
+    self.livestreamButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.livestreamButton.layer.masksToBounds = YES;
     [self.livestreamButton setTitle:NSLocalizedString(@"Choose a regional radio", @"Title displayed on the regional radio selection button") forState:UIControlStateNormal];
     
@@ -358,7 +357,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.logoImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
     
     self.radioHomeButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
-    self.radioHomeButton.layer.cornerRadius = 4.f;
+    self.radioHomeButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];
     
@@ -850,6 +849,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self.propertiesStackView play_setHidden:YES];
         self.propertiesTopLineSpacerView.hidden = YES;
     }
+    
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     
     [self updateRadioHomeButton];
     self.radioHomeButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];

@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "ShowCollectionViewCell.h"
@@ -20,8 +21,6 @@
 #import <libextobjc/libextobjc.h>
 #import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
-
-static const CGFloat kLayoutHorizontalInset = 10.f;
 
 @interface ShowsViewController () {
 @private
@@ -81,8 +80,8 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    collectionViewLayout.minimumInteritemSpacing = 10.f;
-    collectionViewLayout.minimumLineSpacing = 10.f;
+    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
+    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
     collectionViewLayout.sectionHeadersPinToVisibleBounds = YES;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
@@ -335,23 +334,18 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+    return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 2 items per row on small layouts, max cell width of 210
-    CGFloat width = fminf(floorf((CGRectGetWidth(collectionView.frame) - collectionViewLayout.minimumInteritemSpacing - 2 * kLayoutHorizontalInset) / 2.f), 210.f);
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 30.f : 50.f;
-    
-    return CGSizeMake(width, ceilf(width * 9.f / 16.f + minTextHeight));
+    CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
+    return LayoutShowStandardCollectionItemSize(itemWidth, NO);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+    return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 44.f);
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

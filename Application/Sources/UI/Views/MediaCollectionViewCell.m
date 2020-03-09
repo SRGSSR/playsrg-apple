@@ -12,6 +12,7 @@
 #import "Banner.h"
 #import "Download.h"
 #import "History.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -63,7 +64,7 @@
     self.backgroundColor = backgroundColor;
     
     self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailWrapperView.layer.cornerRadius = 4.f;
+    self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
     self.titleLabel.backgroundColor = backgroundColor;
@@ -73,8 +74,6 @@
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
-    [self.webFirstLabel play_setWebFirstBadge];
-    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
     
     self.audioDescriptionImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio described", @"Accessibility label for the audio description badge");
@@ -239,15 +238,23 @@
     BOOL hasAudioDescription = ApplicationSettingAudioDescriptionAvailabilityDisplayed() && media.play_audioDescriptionAvailable && ! downloaded;
     self.audioDescriptionImageView.hidden = ! hasAudioDescription;
     
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    
     // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
-        self.titleLabel.numberOfLines = (isWebFirst || hasSubtitles || hasAudioDescription) ? 1 : 2;
+    if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+        if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
+            self.titleLabel.numberOfLines = (isWebFirst || hasSubtitles || hasAudioDescription) ? 1 : 2;
+        }
+        else {
+            self.titleLabel.numberOfLines = 2;
+        }
     }
     else {
-        self.titleLabel.numberOfLines = 2;
+        self.titleLabel.numberOfLines = (isWebFirst || hasSubtitles || hasAudioDescription) ? 1 : 2;
     }
-
+    
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
     

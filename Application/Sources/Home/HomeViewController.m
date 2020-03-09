@@ -12,6 +12,7 @@
 #import "CalendarViewController.h"
 #import "Favorites.h"
 #import "GoogleCastBarButtonItem.h"
+#import "Layout.h"
 #import "HomeSectionHeaderView.h"
 #import "HomeMediaListTableViewCell.h"
 #import "HomeSectionInfo.h"
@@ -597,13 +598,12 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     HomeHeaderType headerType = [self headerTypeForHomeSectionInfo:homeSectionInfo tableView:tableView inSection:section];
     switch (headerType) {
         case HomeHeaderTypeSpace: {
-            return 10.f;
+            return LayoutStandardMargin;
             break;
         }
             
         case HomeHeaderTypeView: {
-            BOOL featured = [self isFeaturedInSection:section];
-            return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:featured];
+            return LayoutStandardTableSectionHeaderHeight();
             break;
         }
         

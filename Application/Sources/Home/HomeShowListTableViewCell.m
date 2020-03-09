@@ -7,12 +7,11 @@
 #import "HomeShowListTableViewCell.h"
 
 #import "HomeShowCollectionViewCell.h"
+#import "Layout.h"
 #import "ShowViewController.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
-
-static const CGFloat HomeStandardMargin = 10.f;
 
 @interface HomeShowListTableViewCell ()
 
@@ -23,67 +22,26 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 @implementation HomeShowListTableViewCell
 
-#pragma mark Overrides
+#pragma mark Class overrides
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
     return [self itemSizeForHomeSectionInfo:homeSectionInfo bounds:bounds featured:featured].height;
 }
 
+#pragma mark Class methods
+
 + (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
     CGFloat itemWidth = 0.f;
     
     if (featured) {
-        // Ensure cells never fill the entire width of the parent, so that the fact that content can be scrolled
-        // is always obvious to the user
-        static const CGFloat kHorizontalFillRatio = 0.9f;
-        
-        // Do not make cells unnecessarily large, especially on iPhone Plus
-        UITraitCollection *traitCollection = UIApplication.sharedApplication.keyWindow.traitCollection;
-        CGFloat maxWidth = (traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ? 300.f : 650.f;
-        
-        itemWidth = MIN(CGRectGetWidth(bounds) * kHorizontalFillRatio, maxWidth);
+        itemWidth = LayoutCollectionItemFeaturedWidth(CGRectGetWidth(bounds));
     }
     else {
-        itemWidth = 210.f;
+        itemWidth = LayoutCollectionViewCellStandardWidth;
     }
-    
-    // Adjust height depending on font size settings. First section cells are different and require specific values
-    static NSDictionary<NSString *, NSNumber *> *s_featuredTextHeigths;
-    static NSDictionary<NSString *, NSNumber *> *s_standardTextHeigths;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_featuredTextHeigths = @{ UIContentSizeCategoryExtraSmall : @40,
-                                   UIContentSizeCategorySmall : @40,
-                                   UIContentSizeCategoryMedium : @43,
-                                   UIContentSizeCategoryLarge : @45,
-                                   UIContentSizeCategoryExtraLarge : @48,
-                                   UIContentSizeCategoryExtraExtraLarge : @50,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @55,
-                                   UIContentSizeCategoryAccessibilityMedium : @55,
-                                   UIContentSizeCategoryAccessibilityLarge : @55,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @55,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @55,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @55 };
-        
-        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @30,
-                                   UIContentSizeCategorySmall : @30,
-                                   UIContentSizeCategoryMedium : @30,
-                                   UIContentSizeCategoryLarge : @33,
-                                   UIContentSizeCategoryExtraLarge : @35,
-                                   UIContentSizeCategoryExtraExtraLarge : @38,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @44,
-                                   UIContentSizeCategoryAccessibilityMedium : @44,
-                                   UIContentSizeCategoryAccessibilityLarge : @44,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @44,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @44,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @44 };
-    });
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = featured ? s_featuredTextHeigths[contentSizeCategory].floatValue : s_standardTextHeigths[contentSizeCategory].floatValue;
-    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
+    return LayoutShowStandardCollectionItemSize(itemWidth, featured);
 }
 
 #pragma mark Object lifecycle
@@ -102,6 +60,8 @@ static const CGFloat HomeStandardMargin = 10.f;
         
         UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+        collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
         
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:wrapperView.bounds collectionViewLayout:collectionViewLayout];
         collectionView.backgroundColor = UIColor.clearColor;
@@ -186,30 +146,16 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // For compact layouts, display a single item with the full available collection width (up to a small margin)
-    if (self.featured
-            && [self collectionView:collectionView numberOfItemsInSection:indexPath.section] == 1
-            && self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * HomeStandardMargin, CGRectGetHeight(collectionView.frame));
-    }
-    else {
-        return [HomeShowListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds featured:self.featured];
-    }
+    return [HomeShowListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds featured:self.featured];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    // If a single item has been displayed, center it
-    if (self.featured && [self collectionView:collectionView numberOfItemsInSection:section] == 1) {
-        CGSize cellSize = [self collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:[NSIndexPath indexPathWithIndex:section]];
-        CGFloat margin = (CGRectGetWidth(collectionView.frame) - cellSize.width) / 2.f;
-        return UIEdgeInsetsMake(0.f, margin, 0.f, margin);
-    }
-    else if (self.homeSectionInfo.module) {
-        return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, HomeStandardMargin);
+    if (self.homeSectionInfo.module) {
+        return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, LayoutStandardMargin);
     }
     else {
-        return UIEdgeInsetsMake(0.f, HomeStandardMargin, 0.f, HomeStandardMargin);
+        return UIEdgeInsetsMake(0.f, LayoutStandardMargin, 0.f, LayoutStandardMargin);
     }
 }
 

@@ -26,54 +26,6 @@
 
 @implementation HomeSectionHeaderView
 
-#pragma mark Class methods
-
-+ (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
-{
-    if (featured) {
-        static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
-        static dispatch_once_t s_onceToken;
-        dispatch_once(&s_onceToken, ^{
-            s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @40,
-                                 UIContentSizeCategorySmall : @45,
-                                 UIContentSizeCategoryMedium : @45,
-                                 UIContentSizeCategoryLarge : @45,
-                                 UIContentSizeCategoryExtraLarge : @50,
-                                 UIContentSizeCategoryExtraExtraLarge : @55,
-                                 UIContentSizeCategoryExtraExtraExtraLarge : @55,
-                                 UIContentSizeCategoryAccessibilityMedium : @55,
-                                 UIContentSizeCategoryAccessibilityLarge : @55,
-                                 UIContentSizeCategoryAccessibilityExtraLarge : @55,
-                                 UIContentSizeCategoryAccessibilityExtraExtraLarge : @55,
-                                 UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @55 };
-        });
-        
-        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-        return s_headerHeights[contentSizeCategory].floatValue;
-    }
-    else {
-        static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
-        static dispatch_once_t s_onceToken;
-        dispatch_once(&s_onceToken, ^{
-            s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @30,
-                                 UIContentSizeCategorySmall : @35,
-                                 UIContentSizeCategoryMedium : @40,
-                                 UIContentSizeCategoryLarge : @45,
-                                 UIContentSizeCategoryExtraLarge : @45,
-                                 UIContentSizeCategoryExtraExtraLarge : @45,
-                                 UIContentSizeCategoryExtraExtraExtraLarge : @50,
-                                 UIContentSizeCategoryAccessibilityMedium : @50,
-                                 UIContentSizeCategoryAccessibilityLarge : @50,
-                                 UIContentSizeCategoryAccessibilityExtraLarge : @50,
-                                 UIContentSizeCategoryAccessibilityExtraExtraLarge : @50,
-                                 UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @50 };
-        });
-        
-        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-        return s_headerHeights[contentSizeCategory].floatValue;
-    }
-}
-
 #pragma mark Getters and setters
 
 - (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo

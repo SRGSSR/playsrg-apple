@@ -15,11 +15,15 @@
 
 @implementation HomeTableViewCell
 
+#pragma mark Class methods
+
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
     NSAssert(NO, @"Must be implemented in subclasses");
     return 0.f;
 }
+
+#pragma mark Overrides
 
 - (void)prepareForReuse
 {
@@ -29,14 +33,12 @@
     self.featured = NO;
 }
 
-#pragma mark Getters
+#pragma mark Getters and setters
 
 - (BOOL)isEmpty
 {
     return self.homeSectionInfo.items.count == 0;
 }
-
-#pragma mark Setters
 
 - (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured
 {

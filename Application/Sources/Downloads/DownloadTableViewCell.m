@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "History.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -59,15 +60,13 @@
     self.selectedBackgroundView = colorView;
     
     self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailWrapperView.layer.cornerRadius = 4.f;
+    self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
     self.titleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.backgroundColor = backgroundColor;
     
     self.durationLabelBackgroundColor = self.durationLabel.backgroundColor;
-    
-    [self.webFirstLabel play_setWebFirstBadge];
     
     self.youthProtectionColorImageView.hidden = YES;
     self.webFirstLabel.hidden = YES;
@@ -228,6 +227,8 @@
     BOOL isWebFirst = download.media.play_isWebFirst;
     self.webFirstLabel.hidden = ! isWebFirst;
     
+    [self.webFirstLabel play_setWebFirstBadge];
+    
     // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
@@ -240,7 +241,7 @@
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(download.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
     
-    self.subtitleLabel.numberOfLines = (self.durationLabel.hidden) ? 3 : 1;
+    self.subtitleLabel.numberOfLines = self.durationLabel.hidden ? 3 : 1;
     
     [self.thumbnailImageView play_requestImageForObject:download.media withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia unavailabilityHandler:^{
         [self.thumbnailImageView play_requestImageForObject:download withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];

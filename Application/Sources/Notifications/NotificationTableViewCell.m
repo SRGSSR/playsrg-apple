@@ -6,6 +6,7 @@
 
 #import "NotificationTableViewCell.h"
 
+#import "Layout.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
@@ -42,7 +43,7 @@
     self.selectedBackgroundView = colorView;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailImageView.layer.cornerRadius = 4.f;
+    self.thumbnailImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailImageView.layer.masksToBounds = YES;
     
     self.subtitleLabel.backgroundColor = backgroundColor;

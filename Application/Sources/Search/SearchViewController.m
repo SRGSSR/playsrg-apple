@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "Layout.h"
 #import "MediaCollectionViewCell.h"
 #import "MostSearchedShowCollectionViewCell.h"
 #import "MostSearchedShowsHeaderView.h"
@@ -27,8 +28,6 @@
 #import <Masonry/Masonry.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
-
-static const CGFloat kLayoutHorizontalInset = 10.f;
 
 @interface SearchViewController () <SearchSettingsViewControllerDelegate>
 
@@ -101,6 +100,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    // Spacing configured via delegation since dynamic
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
     collectionView.backgroundColor = UIColor.clearColor;
@@ -628,61 +628,57 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         return UIEdgeInsetsZero;
     }
     else {
-        return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+        return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    if ([self shouldDisplayMostSearchedShows]) {
+        return 0.f;
+    }
+    else {
+        return LayoutStandardMargin;
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    if ([self shouldDisplayMostSearchedShows]) {
+        return 0.f;
+    }
+    else {
+        return LayoutStandardMargin;
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    
     if ([self shouldDisplayMostSearchedShows]) {
-        static NSDictionary<NSString *, NSNumber *> *s_height;
-        static dispatch_once_t s_onceToken;
-        dispatch_once(&s_onceToken, ^{
-            s_height = @{ UIContentSizeCategoryExtraSmall : @28,
-                          UIContentSizeCategorySmall : @32,
-                          UIContentSizeCategoryMedium : @36,
-                          UIContentSizeCategoryLarge : @40,
-                          UIContentSizeCategoryExtraLarge : @44,
-                          UIContentSizeCategoryExtraExtraLarge : @48,
-                          UIContentSizeCategoryExtraExtraExtraLarge : @52,
-                          UIContentSizeCategoryAccessibilityMedium : @52,
-                          UIContentSizeCategoryAccessibilityLarge : @52,
-                          UIContentSizeCategoryAccessibilityExtraLarge : @52,
-                          UIContentSizeCategoryAccessibilityExtraExtraLarge : @52,
-                          UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @52 };
-        });
-        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-        CGFloat height = s_height[contentSizeCategory].floatValue;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, height);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutStandardSimpleTableCellHeight());
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 200.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 200.f);
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
          if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 84.f);
+            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutTableViewCellStandardHeight);
         }
-        // Media grid layout
         else {
-            CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 90.f : 120.f;
-            
-            static const CGFloat kItemWidth = 210.f;
-            return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
+            CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
+            return LayoutMediaStandardCollectionItemSize(itemWidth, NO);
         }
     }
     // Search show list
     else {
-        CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 200.f : 220.f;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), SearchShowListCollectionViewCell.height);
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if ([self isDisplayingMostSearchedShows] || [self isDisplayingObjectsInSection:section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 44.f);
     }
     else {
         return CGSizeZero;
