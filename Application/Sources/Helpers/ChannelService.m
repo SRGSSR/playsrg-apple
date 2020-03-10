@@ -6,7 +6,7 @@
 
 #import "ChannelService.h"
 
-#import "SmartTimer.h"
+#import "ForegroundTimer.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <FXReachability/FXReachability.h>
@@ -23,7 +23,7 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 // data is used to return existing channel information as fast as possible, and when errors have been encountered.
 @property (nonatomic) NSMutableDictionary<NSString *, SRGChannel *> *channels;
 
-@property (nonatomic) SmartTimer *updateTimer;
+@property (nonatomic) ForegroundTimer *updateTimer;
 @property (nonatomic) SRGRequestQueue *requestQueue;
 
 @end
@@ -57,7 +57,7 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
         self.channels = [NSMutableDictionary dictionary];
         
         @weakify(self)
-        self.updateTimer = [SmartTimer timerWithTimeInterval:30. repeats:YES background:NO queue:NULL block:^{
+        self.updateTimer = [ForegroundTimer timerWithTimeInterval:30. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
             @strongify(self)
             [self updateChannels];
         }];
@@ -78,11 +78,10 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 
 #pragma mark Getters and setters
 
-- (void)setUpdateTimer:(SmartTimer *)updateTimer
+- (void)setUpdateTimer:(ForegroundTimer *)updateTimer
 {
     [_updateTimer invalidate];
     _updateTimer = updateTimer;
-    [updateTimer resume];
 }
 
 #pragma mark Registration
