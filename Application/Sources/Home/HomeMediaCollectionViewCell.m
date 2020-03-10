@@ -85,6 +85,8 @@
     self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
+    self.editorialLabel.layer.cornerRadius = LayoutStandardLabelCornerRadius;
+    self.editorialLabel.layer.masksToBounds = YES;
     self.editorialLabel.backgroundColor = UIColor.play_redColor;
     self.editorialLabel.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"OUR PICK", @"Label on the editor or trending lists in the home page, for prefered contents. Known as the SRF-TIPP label. Display in uppercase.").uppercaseString];
     self.editorialLabel.hidden = YES;
