@@ -156,7 +156,7 @@ static const CGFloat kBottomInset = 15.f;
     if (self.homeSectionInfo.module) {
         return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, LayoutStandardMargin);
     }
-    else if (self.homeSectionInfo.homeSection == HomeSectionTVFavoriteShows || self.homeSectionInfo.homeSection == HomeSectionRadioFavoriteShows) {
+    else if (self.homeSectionInfo.homeSection == HomeSectionTVFavoriteShows || self.homeSectionInfo.homeSection == HomeSectionRadioFavoriteShows || self.homeSectionInfo.homeSection == HomeSectionRadioAllShows) {
         return UIEdgeInsetsMake(0.f, LayoutStandardMargin, kBottomInset, LayoutStandardMargin);
     }
     else {
