@@ -13,6 +13,8 @@
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
+static const CGFloat kBottomInset = 15.f;
+
 @interface HomeShowListTableViewCell ()
 
 @property (nonatomic, weak) UIView *wrapperView;
@@ -26,7 +28,7 @@
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
-    return [self itemSizeForHomeSectionInfo:homeSectionInfo bounds:bounds featured:featured].height;
+    return [self itemSizeForHomeSectionInfo:homeSectionInfo bounds:bounds featured:featured].height + kBottomInset;
 }
 
 #pragma mark Class methods
@@ -153,6 +155,9 @@
 {
     if (self.homeSectionInfo.module) {
         return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, LayoutStandardMargin);
+    }
+    else if (self.homeSectionInfo.homeSection == HomeSectionTVFavoriteShows || self.homeSectionInfo.homeSection == HomeSectionRadioFavoriteShows || self.homeSectionInfo.homeSection == HomeSectionRadioAllShows) {
+        return UIEdgeInsetsMake(0.f, LayoutStandardMargin, kBottomInset, LayoutStandardMargin);
     }
     else {
         return UIEdgeInsetsMake(0.f, LayoutStandardMargin, 0.f, LayoutStandardMargin);
