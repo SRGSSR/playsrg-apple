@@ -23,8 +23,6 @@
   "whatsNewURL": "https://pastebin.com/raw/WUM7QS1W",
   "radioChannels": "[   {     \"uid\": \"rete-uno\",     \"name\": \"Rete Uno\",     \"resourceUid\": \"rete_uno\",     \"color\": \"#0074C2\"   },   {     \"uid\": \"rete-due\",     \"name\": \"Rete Due\",     \"resourceUid\": \"rete_due\",     \"color\": \"#05A73A\"   },   {     \"uid\": \"rete-tre\",     \"name\": \"Rete Tre\",     \"resourceUid\": \"rete_tre\",     \"color\": \"#A3BA1B\"   } ]",
   "tvChannels": "[   {     \"uid\": \"la1\",     \"name\": \"LA 1\",     \"resourceUid\": \"la1\"   },   {     \"uid\": \"la2\",     \"name\": \"LA 2\",     \"resourceUid\": \"la2\"   } ]",
-  "moduleDefaultLinkColor": "#D2D2D2",
-  "moduleDefaultTextColor": "#969696",
   "continuousPlaybackPlayerViewTransitionDuration": 5,
   "continuousPlaybackForegroundTransitionDuration": 0,
   "continuousPlaybackBackgroundTransitionDuration": 0,

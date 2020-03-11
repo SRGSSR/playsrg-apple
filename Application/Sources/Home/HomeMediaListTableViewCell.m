@@ -135,11 +135,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 {
     [super setHomeSectionInfo:homeSectionInfo featured:featured];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    if (homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        backgroundColor = homeSectionInfo.module.backgroundColor;
-    }
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.play_blackColor;
     
     [self.collectionView reloadData];
     

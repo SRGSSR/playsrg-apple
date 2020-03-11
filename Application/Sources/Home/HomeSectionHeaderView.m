@@ -31,15 +31,10 @@
 - (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo
 {
     _homeSectionInfo = homeSectionInfo;
+        
+    self.moduleBackgroundView.backgroundColor = UIColor.clearColor;
     
-    UIColor *backgroundColor = UIColor.clearColor;
     UIColor *titleTextColor = UIColor.whiteColor;
-    if (homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        backgroundColor = homeSectionInfo.module.backgroundColor;
-        titleTextColor = homeSectionInfo.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
-    }
-    
-    self.moduleBackgroundView.backgroundColor = backgroundColor;
     
     self.titleLabel.textColor = titleTextColor;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];

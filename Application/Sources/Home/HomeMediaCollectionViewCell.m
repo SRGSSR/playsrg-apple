@@ -232,9 +232,6 @@
 - (void)reloadData
 {
     UIColor *backgroundColor = UIColor.play_blackColor;
-    if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        backgroundColor = self.module.backgroundColor;
-    }
     self.backgroundColor = backgroundColor;
     
     if (! self.media) {
@@ -307,10 +304,6 @@
     
     UIColor *titleTextColor = UIColor.whiteColor;
     UIColor *subtitleTextColor = UIColor.play_lightGrayColor;
-    if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        titleTextColor = self.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
-        subtitleTextColor = self.module.textColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultTextColor;
-    }
     
     SRGBlockingReason blockingReason = [self.media blockingReasonAtDate:NSDate.date];
     if (blockingReason == SRGBlockingReasonNone || blockingReason == SRGBlockingReasonStartDate) {
@@ -346,10 +339,6 @@
     self.downloadStatusImageView.hidden = NO;
     
     UIColor *imageColor = UIColor.play_lightGrayColor;
-    if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        imageColor = self.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultTextColor;
-    }
-    
     UIImage *downloadImage = nil;
     
     switch (download.state) {

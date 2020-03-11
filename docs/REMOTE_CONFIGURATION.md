@@ -75,9 +75,6 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 ### User interface options
 
-* `moduleColorsDisabled` (optional, boolean): If set to `true`, module lists won't display colors.
-* `moduleDefaultLinkColor` (mandatory, string):  Hex color of title medias in module lists.
-* `moduleDefaultTextColor` (mandatory, string):  Hex color of subtitle medias in module lists.
 * `topicHomeHeadersHidden` (optional, boolean): If set to `true`, the quick access header item on home page topics swimlanes will not be displayed.
 * `tvFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured TV media lists will not display any header.
 * `tvTrendingEpisodesOnly` (optional, boolean): If set to `true`, `tvTrending` only returns episodes.

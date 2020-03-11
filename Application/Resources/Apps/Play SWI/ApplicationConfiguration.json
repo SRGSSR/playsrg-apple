@@ -20,8 +20,6 @@
   "whatsNewURL": "https://pastebin.com/raw/BRC1hPbt",
   "downloadsHintsHidden": true,
   "moreEpisodesHidden": true,
-  "moduleDefaultLinkColor": "#D2D2D2",
-  "moduleDefaultTextColor": "#969696",
   "continuousPlaybackPlayerViewTransitionDuration": 5,
   "continuousPlaybackForegroundTransitionDuration": 0,
   "continuousPlaybackBackgroundTransitionDuration": 0,
