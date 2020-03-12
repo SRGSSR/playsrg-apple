@@ -450,7 +450,7 @@ version: 9.4.0
 
 name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 2.5.3
 
-name: CoconutKit, nameSpecified: , owner: defagos, version: 3.3.8
+name: CoconutKit, nameSpecified: , owner: defagos, version: 3.4
 
 name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 6.2.0
 
