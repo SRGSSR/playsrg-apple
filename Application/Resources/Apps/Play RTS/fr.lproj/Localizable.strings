@@ -348,7 +348,7 @@
 "Pull to reload" = "Tirer vers le bas pour recharger";
 
 /* Title label to present main radio livestreams */
-"Radios channels" = "Chaînes radio";
+"Radio channels" = "Chaînes radio";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Le récepteur est en attente.";

@@ -26,7 +26,7 @@ NSString *TitleForHomeSection(HomeSection homeSection)
     dispatch_once(&s_onceToken, ^{
         s_names = @{ @(HomeSectionTVTrending) : NSLocalizedString(@"Trending videos", @"Title label used to present trending TV videos"),
                      @(HomeSectionTVLive) : NSLocalizedString(@"TV channels", @"Title label to present main TV livestreams"),
-                     @(HomeSectionTVEvents) : NSLocalizedString(@"Highlighting", @"Title label used to present TV event modules while loading. It appears if no network connection available and no cache available."),
+                     @(HomeSectionTVEvents) : NSLocalizedString(@"Highlights", @"Title label used to present TV event modules while loading. It appears if no network connection available and no cache available."),
                      @(HomeSectionTVTopics) : NSLocalizedString(@"Topics", @"Title label used to present TV topics while loading. It appears if no network connection available and no cache available."),
                      @(HomeSectionTVLatest) : NSLocalizedString(@"Latest videos", @"Title label used to present the latest videos"),
                      @(HomeSectionTVMostPopular) : NSLocalizedString(@"Most popular", @"Title label used to present the TV most seen / clicked / popular videos"),
@@ -35,7 +35,7 @@ NSString *TitleForHomeSection(HomeSection homeSection)
                      @(HomeSectionTVLiveCenter) : NSLocalizedString(@"Sport", @"Title label used to present live center medias. Only on test versions."),
                      @(HomeSectionTVShowsAccess) : NSLocalizedString(@"Shows", @"Title label used to present the TV shows AZ and TV shows by date access buttons."),
                      @(HomeSectionTVFavoriteShows) : NSLocalizedString(@"Favorites", @"Title label used to present the TV favorite shows."),
-                     @(HomeSectionRadioLive) : NSLocalizedString(@"Radios channels", @"Title label to present main radio livestreams"),
+                     @(HomeSectionRadioLive) : NSLocalizedString(@"Radio channels", @"Title label to present main radio livestreams"),
                      @(HomeSectionRadioLiveSatellite) : NSLocalizedString(@"Thematic radios", @"Title label to present Swiss satellite radios"),
                      @(HomeSectionRadioLatestEpisodes) : NSLocalizedString(@"The latest episodes", @"Title label used to present the radio latest audio episodes"),
                      @(HomeSectionRadioMostPopular) : NSLocalizedString(@"Most listened to", @"Title label used to present the radio most listened / popular audio medias"),
