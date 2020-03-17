@@ -1,3 +1,6 @@
+/* The amount of episodes available for a show */
+"%@ episodes" = "%@ episodes";
+
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Watch later\"" = "%@ è stato aggiunto alla lista \"Guardare dopo\"";
 
@@ -156,9 +159,6 @@
 "Enable notifications?" = "Abilitare le notifiche?";
 
 /* Title label used to present scheduled livestream medias. Only on test versions. */
-"Event" = "Evento";
-
-/* Title label used to present TV events while loading. It appears if no network connection available and no cache available. */
 "Events" = "Eventi";
 
 /* Short label identifying content which has expired. */
@@ -182,6 +182,9 @@
 
 /* Total free space size, display at the bottom of download list */
 "Free space: %@" = "Spazio libero: %@";
+
+/* Title label used to present TV event modules while loading. It appears if no network connection available and no cache available. */
+"Highlights" = "Highlights";
 
 /* Label to present history */
 "History" = "Cronologia";
@@ -214,10 +217,12 @@
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
 "less than 1 hour" = "meno di 1 ora";
 
-/* Label to present the live view
-   Short label identifying a livestream. Display in uppercase.
-   Title displayed at the top of the livestream view */
+/* Short label identifying a livestream. Display in uppercase. */
 "Live" = "Live";
+
+/* Label to present the Livestreams view
+   Title displayed at the top of the livestream view */
+"Livestreams" = "Livestreams";
 
 /* Text displayed within the login / sign up profile header when no user is displayed */
 "Login / Sign up" = "Login / Registrati";
@@ -343,7 +348,7 @@
 "Pull to reload" = "Scorrere verso il basso per ricaricare";
 
 /* Title label to present main radio livestreams */
-"Radio" = "Radio";
+"Radio channels" = "Radio channels";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Ricevitore inattivo.";
@@ -463,9 +468,6 @@
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Sottotitolato";
 
-/* Title label to present satellite radios */
-"Swiss Radio" = "Radio tematiche";
-
 /* No comment provided by engineer. */
 "The application unexpectedly quit" = "L'applicazione si è chiusa inaspettatamente";
 
@@ -513,6 +515,9 @@
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "Il programma non può essere aperto.";
 
+/* Title label to present Swiss satellite radios */
+"Thematic radios" = "Thematic radios";
+
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Non è permesso riprodurre questo contenuto con Google Cast.";
 
@@ -535,7 +540,7 @@
 "Trending videos" = "Video di tendenza";
 
 /* Title label to present main TV livestreams */
-"TV" = "TV";
+"TV channels" = "TV channels";
 
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Iniziare a scrivere per avviare la ricerca";
