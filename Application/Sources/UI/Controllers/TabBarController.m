@@ -79,7 +79,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         if (liveHomeSections.count != 0) {
             ApplicationSectionInfo *liveApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionLive radioChannel:nil];
             UIViewController *liveHomeViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:liveApplicationSectionInfo homeSections:liveHomeSections];
-            liveHomeViewController.title = NSLocalizedString(@"Live", @"Title displayed at the top of the livestream view");
+            liveHomeViewController.title = NSLocalizedString(@"Livestreams", @"Title displayed at the top of the livestream view");
             [viewControllers addObject:liveHomeViewController];
             UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveHomeViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
             liveTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
