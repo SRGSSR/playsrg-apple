@@ -899,7 +899,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         NSInteger numberOfEpisodes = show.numberOfEpisodes;
         if (numberOfEpisodes != 0) {
             NSString *numberOfEpisodesString = [NSNumberFormatter localizedStringFromNumber:@(numberOfEpisodes) numberStyle:NSNumberFormatterDecimalStyle];
-            self.numberOfEpisodesLabel.text = [NSString stringWithFormat:@"%@ episodes", numberOfEpisodesString];
+            self.numberOfEpisodesLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ episodes", @"The amount of episodes available for a show"), numberOfEpisodesString];
         }
         else {
             self.numberOfEpisodesLabel.text = nil;
