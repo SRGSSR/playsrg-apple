@@ -184,7 +184,7 @@
 "Free space: %@" = "Free space: %@";
 
 /* Title label used to present TV event modules while loading. It appears if no network connection available and no cache available. */
-"Highlighting" = "Highlighting";
+"Highlights" = "Highlights";
 
 /* Label to present history */
 "History" = "History";
