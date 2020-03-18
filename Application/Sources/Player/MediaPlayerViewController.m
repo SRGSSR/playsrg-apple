@@ -1255,9 +1255,15 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)letterboxViewWillAnimateUserInterface:(SRGLetterboxView *)letterboxView
 {
     [self.view layoutIfNeeded];
-    [letterboxView animateAlongsideUserInterfaceWithAnimations:^(BOOL hidden, BOOL minimal, CGFloat aspecRatio, CGFloat heightOffset) {
+    [letterboxView animateAlongsideUserInterfaceWithAnimations:^(BOOL hidden, BOOL minimal, CGFloat aspectRatio, CGFloat heightOffset) {
         self.topBarView.alpha = (minimal || ! hidden) ? 1.f : 0.f;
-        self.playerAspectRatioStandardConstraint = [self.playerAspectRatioStandardConstraint srg_replacementConstraintWithMultiplier:fminf(1.f / aspecRatio, 1.f) constant:heightOffset];
+        
+        // Calculate the minimum possible aspect ratio so that only a fraction of the vertical height is occupied by the player at most.
+        // Use it as limit value if needed
+        static CGFloat kVerticalFillRatio = 0.6f;
+        CGFloat minAspectRatio = CGRectGetWidth(self.view.frame) / (kVerticalFillRatio * CGRectGetHeight(self.view.frame));
+        self.playerAspectRatioStandardConstraint = [self.playerAspectRatioStandardConstraint srg_replacementConstraintWithMultiplier:1.f / fmaxf(aspectRatio, minAspectRatio) constant:heightOffset];
+        
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self play_setNeedsUpdateOfHomeIndicatorAutoHidden];
