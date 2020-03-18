@@ -163,7 +163,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *collapsedDetailsLabelsHeightConstraint;
 
 // Displaying segments (if any) is achieved by adding a small offset to the player aspect ratio constraint
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatio16_9Constraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioStandardConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioBigLandscapeScreenConstraint;
 
 @property (nonatomic, weak) IBOutlet UIGestureRecognizer *detailsGestureRecognizer;
@@ -982,11 +982,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular
             && self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular
             && isLandscape) {
-        self.playerAspectRatio16_9Constraint.priority = MediaPlayerViewAspectRatioConstraintLowPriority;
+        self.playerAspectRatioStandardConstraint.priority = MediaPlayerViewAspectRatioConstraintLowPriority;
         self.playerAspectRatioBigLandscapeScreenConstraint.priority = MediaPlayerViewAspectRatioConstraintNormalPriority;
     }
     else {
-        self.playerAspectRatio16_9Constraint.priority = MediaPlayerViewAspectRatioConstraintNormalPriority;
+        self.playerAspectRatioStandardConstraint.priority = MediaPlayerViewAspectRatioConstraintNormalPriority;
         self.playerAspectRatioBigLandscapeScreenConstraint.priority = MediaPlayerViewAspectRatioConstraintLowPriority;
     }
 }
@@ -1253,7 +1253,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.view layoutIfNeeded];
     [letterboxView animateAlongsideUserInterfaceWithAnimations:^(BOOL hidden, BOOL minimal, CGFloat aspecRatio, CGFloat heightOffset) {
         self.topBarView.alpha = (minimal || ! hidden) ? 1.f : 0.f;
-        self.playerAspectRatio16_9Constraint = [self.playerAspectRatio16_9Constraint srg_replacementConstraintWithMultiplier:fminf(1.f / aspecRatio, 1.f) constant:heightOffset];
+        self.playerAspectRatioStandardConstraint = [self.playerAspectRatioStandardConstraint srg_replacementConstraintWithMultiplier:fminf(1.f / aspecRatio, 1.f) constant:heightOffset];
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self play_setNeedsUpdateOfHomeIndicatorAutoHidden];

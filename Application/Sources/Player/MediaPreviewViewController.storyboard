@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Media Preview View Controller-->
+        <!--Delegate-->
         <scene sceneID="Xaj-Uy-aIg">
             <objects>
                 <viewController storyboardIdentifier="MediaPreviewViewController" id="HgT-ei-KY5" customClass="MediaPreviewViewController" sceneMemberID="viewController">
@@ -23,10 +23,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="QFO-s2-2n4" secondAttribute="height" multiplier="16:9" priority="999" id="oJS-Zt-KrI"/>
+                                    <constraint firstAttribute="height" secondItem="QFO-s2-2n4" secondAttribute="width" multiplier="9:16" priority="999" id="oJS-Zt-KrI"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="controller" destination="qOc-f6-dMI" id="dkC-dh-5Mc"/>
+                                    <outlet property="delegate" destination="HgT-ei-KY5" id="ts3-Qh-uCP"/>
                                 </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="fNQ-jq-hsS">
@@ -122,6 +123,7 @@
                         <outlet property="letterboxController" destination="qOc-f6-dMI" id="TbT-zL-jlx"/>
                         <outlet property="letterboxView" destination="QFO-s2-2n4" id="LPg-r5-Jk3"/>
                         <outlet property="mediaInfoStackView" destination="PDv-kL-NXg" id="y3x-kF-rHI"/>
+                        <outlet property="playerAspectRatioConstraint" destination="oJS-Zt-KrI" id="ZDg-Tc-Va2"/>
                         <outlet property="programTimeLabel" destination="GZm-fK-iM0" id="lsc-w7-XUV"/>
                         <outlet property="showLabel" destination="BR1-hk-zgn" id="w0a-cj-TyQ"/>
                         <outlet property="summaryLabel" destination="8se-zQ-uvl" id="A9v-JT-lv2"/>

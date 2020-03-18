@@ -51,6 +51,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *programTimeLabel;
 @property (nonatomic, weak) IBOutlet UILabel *channelLabel;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioConstraint;
+
 @property (nonatomic) BOOL shouldRestoreServicePlayback;
 @property (nonatomic, copy) NSString *previousAudioSessionCategory;
 
@@ -351,6 +353,17 @@
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelPreview ];
+}
+
+#pragma mark SRGLetterboxViewDelegate protocol
+
+- (void)letterboxViewWillAnimateUserInterface:(SRGLetterboxView *)letterboxView
+{
+    [self.view layoutIfNeeded];
+    [letterboxView animateAlongsideUserInterfaceWithAnimations:^(BOOL hidden, BOOL minimal, CGFloat aspecRatio, CGFloat heightOffset) {
+        self.playerAspectRatioConstraint = [self.playerAspectRatioConstraint srg_replacementConstraintWithMultiplier:fminf(1.f / aspecRatio, 1.f) constant:heightOffset];
+        [self.view layoutIfNeeded];
+    } completion:nil];
 }
 
 #pragma mark Notifications
