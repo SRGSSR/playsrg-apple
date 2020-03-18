@@ -163,7 +163,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 // Showing details is made by disabling the following height constraint property
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *collapsedDetailsLabelsHeightConstraint;
 
-// Displaying segments (if any) is achieved by adding a small offset to the player aspect ratio constraint
+// The aspect ratio constant is used to display the player with the best possible aspect ratio, taking into account
+// other frame changes into account (e.g. timeline display)
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioStandardConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioBigLandscapeScreenConstraint;
 
@@ -1278,7 +1279,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [UIDevice.currentDevice setValue:@(orientation) forKey:@keypath(UIDevice.new, orientation)];
     };
     
-    // On iPhones, full-screen transitions are always trigerred by rotation. Even when tapping on the full-screen button,
+    // On iPhones, full-screen transitions can be triggered by rotation. In such cases, when tapping on the full-screen button,
     // we force a rotation, which itself will perform the appropriate transition from or to full-screen
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && ! self.transitioning) {
         if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation)) {
@@ -1286,9 +1287,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             return;
         }
         else {
-            // Only rotate to landscape orientation automatically if better suited for content display
-            CGFloat viewAspectRatio = CGRectGetWidth(self.view.frame) / CGRectGetHeight(self.view.frame);
-            if ((viewAspectRatio <= 1.f && letterboxView.aspectRatio > 1.f) || (letterboxView.aspectRatio <= 1.f && viewAspectRatio > 1.f)) {
+            // Only force rotation from portrait to landscape orientation if the content is better watched in landscape orientation
+            if (letterboxView.aspectRatio > 1.f) {
                 rotate(s_previouslyUsedLandscapeDeviceOrientation);
                 return;
             }
