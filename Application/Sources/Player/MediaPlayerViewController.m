@@ -1261,20 +1261,28 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView toggleFullScreen:(BOOL)fullScreen animated:(BOOL)animated withCompletionHandler:(nonnull void (^)(BOOL))completionHandler
-{ 
+{
+    void (^rotate)(UIDeviceOrientation) = ^(UIDeviceOrientation orientation) {
+        // We interrupt the rotation attempt and trigger a rotation (which itself will toggle the expected full-screen display)
+        completionHandler(NO);
+        [UIDevice.currentDevice setValue:@(orientation) forKey:@keypath(UIDevice.new, orientation)];
+    };
+    
     // On iPhones, full-screen transitions are always trigerred by rotation. Even when tapping on the full-screen button,
     // we force a rotation, which itself will perform the appropriate transition from or to full-screen
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && ! self.transitioning) {
-        // We interrupt the rotation attempt and trigger a rotation (which itself will toggle the expected full-screen display)
-        completionHandler(NO);
-        
         if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation)) {
-            [UIDevice.currentDevice setValue:@(UIInterfaceOrientationPortrait) forKey:@keypath(UIDevice.new, orientation)];
+            rotate(UIDeviceOrientationPortrait);
+            return;
         }
         else {
-            [UIDevice.currentDevice setValue:@(s_previouslyUsedLandscapeDeviceOrientation) forKey:@keypath(UIDevice.new, orientation)];
+            // Only rotate to landscape orientation automatically if better suited for content display
+            CGFloat viewAspectRatio = CGRectGetWidth(self.view.frame) / CGRectGetHeight(self.view.frame);
+            if ((viewAspectRatio <= 1.f && letterboxView.aspectRatio > 1.f) || (letterboxView.aspectRatio <= 1.f && viewAspectRatio > 1.f)) {
+                rotate(s_previouslyUsedLandscapeDeviceOrientation);
+                return;
+            }
         }
-        return;
     }
     
     self.statusBarHidden = fullScreen;
