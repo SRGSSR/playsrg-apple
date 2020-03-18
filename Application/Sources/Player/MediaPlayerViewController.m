@@ -156,7 +156,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *relatedContentsTitleLabel;
 @property (nonatomic, weak) IBOutlet UIStackView *relatedContentsStackView;
 
-// Switching to and from full-screen is made by adjusting the priority of a constraint at the bottom of the player view
+// Switching to and from full-screen is made by adjusting the priority of constraints at the top and bottom of the player view
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerTopConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerBottomConstraint;
 
 // Showing details is made by disabling the following height constraint property
@@ -929,7 +930,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)setFullScreen:(BOOL)fullScreen
 {
     self.pullDownGestureRecognizer.enabled = ! fullScreen;
-    self.playerBottomConstraint.priority = fullScreen ? MediaPlayerBottomConstraintFullScreenPriority : MediaPlayerBottomConstraintNormalPriority;
+    
+    UILayoutPriority priority = fullScreen ? MediaPlayerBottomConstraintFullScreenPriority : MediaPlayerBottomConstraintNormalPriority;
+    self.playerTopConstraint.priority = priority;
+    self.playerBottomConstraint.priority = priority;
     
     [self setNeedsStatusBarAppearanceUpdate];
 }
