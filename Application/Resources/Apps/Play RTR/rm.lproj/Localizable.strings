@@ -222,7 +222,7 @@
 
 /* Label to present the Livestreams view
    Title displayed at the top of the livestream view */
-"Livestreams" = "Livestreams";
+"Livestreams" = "Live";
 
 /* Text displayed within the login / sign up profile header when no user is displayed */
 "Login / Sign up" = "Login";

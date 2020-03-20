@@ -1,5 +1,5 @@
 /* The amount of episodes available for a show */
-"%@ episodes" = "%@ episodes";
+"%@ episodes" = "%@ Sendungen";
 
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Watch later\"" = "%@ wurde zu Später schauen hinzugefügt";
@@ -159,7 +159,7 @@
 "Enable notifications?" = "Push-Mitteilungen aktivieren?";
 
 /* Title label used to present scheduled livestream medias. Only on test versions. */
-"Events" = "Video-Highlights";
+"Events" = "Events";
 
 /* Short label identifying content which has expired. */
 "Expired" = "Abgelaufen";
@@ -222,7 +222,7 @@
 
 /* Label to present the Livestreams view
    Title displayed at the top of the livestream view */
-"Livestreams" = "Livestreams";
+"Livestreams" = "Live";
 
 /* Text displayed within the login / sign up profile header when no user is displayed */
 "Login / Sign up" = "Anmelden / Registrieren";
@@ -348,7 +348,7 @@
 "Pull to reload" = "Herunterziehen, um Seite nochmals zu laden";
 
 /* Title label to present main radio livestreams */
-"Radio channels" = "Radio channels";
+"Radio channels" = "Radiosender";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Empfänger wartet.";
@@ -516,7 +516,7 @@
 "The show cannot be opened." = "Die Sendung kann nicht geöffnet werden.";
 
 /* Title label to present Swiss satellite radios */
-"Thematic radios" = "Thematic radios";
+"Thematic radios" = "Swiss Satellite Radio";
 
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Aus rechtlichen Gründen kann dieser Inhalt nicht mit Google Cast abgespielt werden.";
@@ -540,7 +540,7 @@
 "Trending videos" = "Populäre Videos";
 
 /* Title label to present main TV livestreams */
-"TV channels" = "TV channels";
+"TV channels" = "TV-Sender";
 
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Suchbegriff eingeben";
