@@ -468,7 +468,7 @@ name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
 name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: e970bea
 
-name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
+name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 6c773c1
 
 name: srgcontentprotection-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
@@ -478,7 +478,7 @@ name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
 name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 3d0282c
+name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 671039a
 
 name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
