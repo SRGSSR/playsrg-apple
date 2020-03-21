@@ -232,6 +232,9 @@
 - (void)reloadData
 {
     UIColor *backgroundColor = UIColor.play_blackColor;
+    if (self.module) {
+        backgroundColor = UIColor.clearColor;
+    }
     self.backgroundColor = backgroundColor;
     
     if (! self.media) {
