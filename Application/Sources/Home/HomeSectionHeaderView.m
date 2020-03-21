@@ -31,8 +31,12 @@
 - (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo
 {
     _homeSectionInfo = homeSectionInfo;
-        
-    self.moduleBackgroundView.backgroundColor = UIColor.clearColor;
+    
+    UIColor *moduleBackgroundViewColor = UIColor.clearColor;
+    if (homeSectionInfo.module) {
+        moduleBackgroundViewColor = [homeSectionInfo.module.backgroundColor colorWithAlphaComponent:.3f];
+    }
+    self.moduleBackgroundView.backgroundColor = moduleBackgroundViewColor;
     
     UIColor *titleTextColor = UIColor.whiteColor;
     

@@ -16,6 +16,7 @@
 #import "UIViewController+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
+#import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
@@ -26,6 +27,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 
 @interface HomeMediaListTableViewCell ()
 
+@property (nonatomic, weak) UIView *moduleBackgroundView;
 @property (nonatomic, weak) UIView *wrapperView;
 @property (nonatomic, weak) UICollectionView *collectionView;
 
@@ -69,6 +71,17 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         self.backgroundColor = UIColor.clearColor;
         self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
         
+        UIView *moduleBackgroundView = [[UIView alloc] initWithFrame:self.contentView.bounds];
+        moduleBackgroundView.backgroundColor = UIColor.clearColor;
+        [self.contentView addSubview:moduleBackgroundView];
+        [moduleBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top);
+            make.height.equalTo(self.contentView.mas_height).multipliedBy(.5f);
+            make.left.equalTo(self.contentView.mas_left);
+            make.right.equalTo(self.contentView.mas_right);
+        }];
+        self.moduleBackgroundView = moduleBackgroundView;
+        
         UIView *wrapperView = [[UIView alloc] initWithFrame:self.contentView.bounds];
         wrapperView.backgroundColor = UIColor.clearColor;
         wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -104,7 +117,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         NSString *liveMediaCellIdentifier = NSStringFromClass(HomeLiveMediaCollectionViewCell.class);
         UINib *liveMediaCellNib = [UINib nibWithNibName:liveMediaCellIdentifier bundle:nil];
         [collectionView registerNib:liveMediaCellNib forCellWithReuseIdentifier:liveMediaCellIdentifier];
-          
+        
         NSString *headerViewIdentifier = NSStringFromClass(HomeMediaCollectionHeaderView.class);
         UINib *headerNib = [UINib nibWithNibName:headerViewIdentifier bundle:nil];
         [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewIdentifier];
@@ -136,6 +149,12 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
     [super setHomeSectionInfo:homeSectionInfo featured:featured];
     
     self.backgroundColor = UIColor.play_blackColor;
+    
+    UIColor *moduleBackgroundViewColor = UIColor.clearColor;
+    if (homeSectionInfo.module) {
+        moduleBackgroundViewColor = [homeSectionInfo.module.backgroundColor colorWithAlphaComponent:.3f];
+    }
+    self.moduleBackgroundView.backgroundColor = moduleBackgroundViewColor;
     
     [self.collectionView reloadData];
     
