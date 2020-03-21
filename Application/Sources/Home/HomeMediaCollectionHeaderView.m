@@ -53,7 +53,8 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = UIColor.clearColor;
+    self.headerView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     
     self.headerView.hidden = YES;
     self.placeholderView.hidden = NO;
@@ -146,16 +147,11 @@
     
     self.headerView.hidden = NO;
     self.placeholderView.hidden = YES;
-        
-    self.backgroundColor = UIColor.play_blackColor;
-    self.headerView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     
     self.titleLabel.textColor = UIColor.whiteColor;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = NSLocalizedString(@"All content", @"Title of the first cell of a media list on homepage.");
-    
-    self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    
+        
     ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
     id<SRGImage> object = self.homeSectionInfo.module ?: self.homeSectionInfo.topic;
     [self.thumbnailImageView play_requestImageForObject:object withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
