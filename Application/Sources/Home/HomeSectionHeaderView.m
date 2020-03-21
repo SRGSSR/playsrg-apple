@@ -12,6 +12,7 @@
 #import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
+#import "SRGModule+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -34,7 +35,7 @@
     
     UIColor *moduleBackgroundViewColor = UIColor.clearColor;
     if (homeSectionInfo.module) {
-        moduleBackgroundViewColor = [homeSectionInfo.module.backgroundColor colorWithAlphaComponent:.3f];
+        moduleBackgroundViewColor = homeSectionInfo.module.play_backgroundColor;
     }
     self.moduleBackgroundView.backgroundColor = moduleBackgroundViewColor;
     

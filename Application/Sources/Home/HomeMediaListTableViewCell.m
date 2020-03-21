@@ -11,6 +11,7 @@
 #import "HomeMediaCollectionViewCell.h"
 #import "Layout.h"
 #import "MediaPlayerViewController.h"
+#import "SRGModule+PlaySRG.h"
 #import "UICollectionView+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -152,7 +153,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
     
     UIColor *moduleBackgroundViewColor = UIColor.clearColor;
     if (homeSectionInfo.module) {
-        moduleBackgroundViewColor = [homeSectionInfo.module.backgroundColor colorWithAlphaComponent:.3f];
+        moduleBackgroundViewColor = homeSectionInfo.module.play_backgroundColor;
     }
     self.moduleBackgroundView.backgroundColor = moduleBackgroundViewColor;
     
