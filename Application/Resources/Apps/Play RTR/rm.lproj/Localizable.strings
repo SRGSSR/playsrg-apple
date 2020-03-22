@@ -1,5 +1,5 @@
 /* The amount of episodes available for a show */
-"%@ episodes" = "%@ episodes";
+"%@ episodes" = "%@ episodas";
 
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Watch later\"" = "%@ è vegnì agiuntà a \"guardar pli tard\"";
@@ -348,7 +348,7 @@
 "Pull to reload" = "Trair giu per rechargiar";
 
 /* Title label to present main radio livestreams */
-"Radio channels" = "Radio channels";
+"Radio channels" = "Chanals da radio";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Receptur ord funcziun.";
@@ -516,7 +516,7 @@
 "The show cannot be opened." = "La preschentaziun na po betg vegnir averta.";
 
 /* Title label to present Swiss satellite radios */
-"Thematic radios" = "Thematic radios";
+"Thematic radios" = "Radios tematics";
 
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Il cuntegn n'è betg lubì da Google Cast.";
@@ -540,7 +540,7 @@
 "Trending videos" = "Videos da trend";
 
 /* Title label to present main TV livestreams */
-"TV channels" = "TV channels";
+"TV channels" = "Chanals da tv";
 
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Tutgar per tschertgar";
