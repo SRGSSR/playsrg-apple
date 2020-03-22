@@ -233,6 +233,7 @@
 {
     UIColor *backgroundColor = UIColor.play_blackColor;
     if (self.module) {
+        // Don't hide background color
         backgroundColor = UIColor.clearColor;
     }
     self.backgroundColor = backgroundColor;
