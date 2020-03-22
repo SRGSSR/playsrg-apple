@@ -39,13 +39,9 @@
     }
     self.moduleBackgroundView.backgroundColor = moduleBackgroundViewColor;
     
-    UIColor *titleTextColor = UIColor.whiteColor;
-    
-    self.titleLabel.textColor = titleTextColor;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     self.titleLabel.text = homeSectionInfo.title;
     
-    self.navigationButton.tintColor = titleTextColor;
     self.navigationButton.hidden = ! [homeSectionInfo canOpenList] || ! self.titleLabel.text;
 }
 

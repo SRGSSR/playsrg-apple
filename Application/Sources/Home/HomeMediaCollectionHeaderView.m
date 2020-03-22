@@ -71,6 +71,8 @@
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     
+    self.titleLabel.textColor = UIColor.whiteColor;
+    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMediaList:)];
     [self.headerView addGestureRecognizer:tapGestureRecognizer];
 }
@@ -148,7 +150,6 @@
     self.headerView.hidden = NO;
     self.placeholderView.hidden = YES;
     
-    self.titleLabel.textColor = UIColor.whiteColor;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = NSLocalizedString(@"All content", @"Title of the first cell of a media list on homepage.");
         

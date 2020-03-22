@@ -148,9 +148,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 - (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured
 {
     [super setHomeSectionInfo:homeSectionInfo featured:featured];
-    
-    self.backgroundColor = UIColor.play_blackColor;
-    
+        
     UIColor *moduleBackgroundViewColor = UIColor.clearColor;
     if (homeSectionInfo.module) {
         moduleBackgroundViewColor = homeSectionInfo.module.play_backgroundColor;
