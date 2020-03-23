@@ -61,6 +61,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="DVm-bs-AUs"/>
+                <outlet property="leadingTitleLabelLayoutConstraint" destination="Yed-o3-sbn" id="0lZ-2B-8aO"/>
                 <outlet property="moduleBackgroundView" destination="dLc-tN-O5S" id="QyF-xa-OhR"/>
                 <outlet property="navigationButton" destination="w1M-OM-I5D" id="E6X-H5-CBS"/>
                 <outlet property="titleLabel" destination="0yn-mg-rHU" id="eDa-Bc-y1w"/>

@@ -9,6 +9,7 @@
 #import "ApplicationConfiguration.h"
 #import "HomeMediasViewController.h"
 #import "HomeTopicViewController.h"
+#import "Layout.h"
 #import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
@@ -22,6 +23,8 @@
 @property (nonatomic, weak) IBOutlet UIView *moduleBackgroundView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *navigationButton;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadingTitleLabelLayoutConstraint;
 
 @end
 
@@ -55,6 +58,8 @@
     
     self.titleLabel.textColor = UIColor.whiteColor;
     self.titleLabel.userInteractionEnabled = YES;
+    
+    self.leadingTitleLabelLayoutConstraint.constant = LayoutStandardMargin;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMediaList:)];
     [self.titleLabel addGestureRecognizer:tapGestureRecognizer];
