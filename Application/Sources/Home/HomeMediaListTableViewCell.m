@@ -77,7 +77,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         [self.contentView addSubview:moduleBackgroundView];
         [moduleBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView.mas_top);
-            make.height.equalTo(self.contentView.mas_height).multipliedBy(.5f);
+            make.height.mas_equalTo(75.f);
             make.left.equalTo(self.contentView.mas_left);
             make.right.equalTo(self.contentView.mas_right);
         }];
