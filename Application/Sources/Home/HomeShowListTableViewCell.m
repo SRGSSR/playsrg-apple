@@ -13,6 +13,7 @@
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
+// Small margin to avoid overlap with the horizontal scrolling indicator
 static const CGFloat kBottomInset = 15.f;
 
 @interface HomeShowListTableViewCell ()

@@ -15,6 +15,9 @@
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
+// Small margin to avoid overlap with the horizontal scrolling indicator
+static const CGFloat kBottomInset = 15.f;
+
 @interface SearchShowListCollectionViewCell ()
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
@@ -27,7 +30,7 @@
 
 + (CGFloat)height
 {
-    return self.itemSize.height;
+    return self.itemSize.height + kBottomInset;
 }
 
 + (CGSize)itemSize
@@ -144,7 +147,7 @@
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0.f, LayoutStandardMargin, 0.f, LayoutStandardMargin);
+    return UIEdgeInsetsMake(0.f, LayoutStandardMargin, kBottomInset, LayoutStandardMargin);
 }
 
 @end

@@ -6,11 +6,16 @@
 
 #import "SearchHeaderView.h"
 
+#import "Layout.h"
+
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface SearchHeaderView ()
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTitleLabelLayoutConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTitleLabelLayoutConstraint;
 
 @end
 
@@ -23,6 +28,9 @@
     [super awakeFromNib];
     
     self.titleLabel.textColor = UIColor.whiteColor;
+    
+    self.leadingTitleLabelLayoutConstraint.constant = LayoutStandardMargin;
+    self.trailingTitleLabelLayoutConstraint.constant = LayoutStandardMargin;
 }
 
 #pragma mark Getters and setters
