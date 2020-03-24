@@ -62,7 +62,7 @@
 
 + (UIColor *)play_grayThumbnailImageViewBackgroundColor
 {
-    return [UIColor srg_colorFromHexadecimalString:@"#232323"];
+    return [UIColor srg_colorFromHexadecimalString:@"#202020"];
 }
 
 + (UIColor *)play_blackDurationLabelBackgroundColor
