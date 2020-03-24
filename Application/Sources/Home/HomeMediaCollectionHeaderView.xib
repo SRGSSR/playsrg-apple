@@ -41,7 +41,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ibC-3k-6VL" userLabel="Header View">
-                    <rect key="frame" x="0.0" y="0.0" width="210" height="182"/>
+                    <rect key="frame" x="0.0" y="0.0" width="210" height="195"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="i6n-Nf-jOh">
                             <rect key="frame" x="0.0" y="0.0" width="210" height="118"/>
@@ -69,7 +69,7 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="ibC-3k-6VL" secondAttribute="bottom" constant="28" id="4TY-8c-4VV"/>
+                <constraint firstAttribute="bottom" secondItem="ibC-3k-6VL" secondAttribute="bottom" constant="15" id="4TY-8c-4VV"/>
                 <constraint firstItem="ibC-3k-6VL" firstAttribute="top" secondItem="PBa-sF-HRV" secondAttribute="top" id="JOH-2i-Ufh"/>
                 <constraint firstItem="iq7-pu-lug" firstAttribute="top" secondItem="PBa-sF-HRV" secondAttribute="top" id="c6d-NH-Dbp"/>
                 <constraint firstAttribute="bottom" secondItem="iq7-pu-lug" secondAttribute="bottom" id="cQ1-i6-1ku"/>
