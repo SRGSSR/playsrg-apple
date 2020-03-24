@@ -231,11 +231,7 @@
 
 - (void)reloadData
 {
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    if (self.module) {
-        // Don't hide background color
-        backgroundColor = UIColor.clearColor;
-    }
+    UIColor *backgroundColor = (self.module != nil) ? UIColor.clearColor : UIColor.play_blackColor;
     self.backgroundColor = backgroundColor;
     
     if (! self.media) {

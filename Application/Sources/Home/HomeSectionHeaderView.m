@@ -24,7 +24,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *navigationButton;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadingTitleLabelLayoutConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTitleLabelLayoutConstraint;
 
 @end
 
@@ -36,11 +36,7 @@
 {
     _homeSectionInfo = homeSectionInfo;
     
-    UIColor *moduleBackgroundViewColor = UIColor.clearColor;
-    if (homeSectionInfo.module) {
-        moduleBackgroundViewColor = homeSectionInfo.module.play_backgroundColor;
-    }
-    self.moduleBackgroundView.backgroundColor = moduleBackgroundViewColor;
+    self.moduleBackgroundView.backgroundColor = homeSectionInfo.module.play_backgroundColor ?: UIColor.clearColor;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     self.titleLabel.text = homeSectionInfo.title;

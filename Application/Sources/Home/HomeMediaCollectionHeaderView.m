@@ -141,12 +141,7 @@
 
 - (void)reloadData
 {
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    if (self.homeSectionInfo.module) {
-        // Don't hide background color
-        backgroundColor = UIColor.clearColor;
-    }
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = (self.homeSectionInfo.module != nil) ? UIColor.clearColor : UIColor.play_blackColor;
     
     if (! self.isDataAvailable) {
         self.headerView.hidden = YES;
@@ -159,7 +154,7 @@
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = NSLocalizedString(@"All content", @"Title of the first cell of a media list on homepage.");
-        
+    
     ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
     id<SRGImage> object = self.homeSectionInfo.module ?: self.homeSectionInfo.topic;
     [self.thumbnailImageView play_requestImageForObject:object withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
