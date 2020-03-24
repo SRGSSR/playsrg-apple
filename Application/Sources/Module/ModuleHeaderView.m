@@ -96,7 +96,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     self.titleLabel.text = module.title;
     
     self.subtitleLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    self.subtitleLabel.text = module.lead ?: module.summary;
+    self.subtitleLabel.text = module.lead;
     
     [self.logoImageView play_requestImageForObject:module withScale:ImageScaleLarge type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
 }
