@@ -57,7 +57,7 @@
 
 + (UIColor *)play_cardGrayBackgroundColor
 {
-    return [UIColor srg_colorFromHexadecimalString:@"#242424"];
+    return [UIColor srg_colorFromHexadecimalString:@"#232323"];
 }
 
 + (UIColor *)play_grayThumbnailImageViewBackgroundColor
