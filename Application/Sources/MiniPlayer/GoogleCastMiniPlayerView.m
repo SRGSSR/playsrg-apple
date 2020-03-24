@@ -52,8 +52,6 @@
     self.progressView.progress = 0.f;
     self.progressView.progressTintColor = UIColor.redColor;
     
-    self.backgroundColor = UIColor.clearColor;
-    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openFullScreenPlayer:)];
     [self addGestureRecognizer:tapGestureRecognizer];
     

@@ -37,18 +37,16 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = UIColor.clearColor;
     
-    UIColor *backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    UIView *selectedBackgroundView = [[UIView alloc] init];
+    selectedBackgroundView.backgroundColor = UIColor.clearColor;
+    self.selectedBackgroundView = selectedBackgroundView;
+    
     self.wrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.wrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.wrapperView.layer.masksToBounds = YES;
     
-    UIView *colorView = [[UIView alloc] init];
-    colorView.backgroundColor = backgroundColor;
-    self.selectedBackgroundView = colorView;
-    
-    self.titleLabel.backgroundColor = backgroundColor;
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     
     @weakify(self)

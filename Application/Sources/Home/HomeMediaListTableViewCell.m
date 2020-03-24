@@ -73,7 +73,6 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
         
         UIView *moduleBackgroundView = [[UIView alloc] initWithFrame:self.contentView.bounds];
-        moduleBackgroundView.backgroundColor = UIColor.clearColor;
         [self.contentView addSubview:moduleBackgroundView];
         [moduleBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView.mas_top);
@@ -84,7 +83,6 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         self.moduleBackgroundView = moduleBackgroundView;
         
         UIView *wrapperView = [[UIView alloc] initWithFrame:self.contentView.bounds];
-        wrapperView.backgroundColor = UIColor.clearColor;
         wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.contentView addSubview:wrapperView];
         self.wrapperView = wrapperView;
@@ -149,7 +147,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 {
     [super setHomeSectionInfo:homeSectionInfo featured:featured];
     
-    self.moduleBackgroundView.backgroundColor = homeSectionInfo.module.play_backgroundColor ?: UIColor.clearColor;
+    self.moduleBackgroundView.backgroundColor = homeSectionInfo.module.play_backgroundColor;
     
     [self.collectionView reloadData];
     

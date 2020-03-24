@@ -60,16 +60,12 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.clearColor;
     
     self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
-    self.titleLabel.backgroundColor = backgroundColor;
-    
-    self.subtitleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;

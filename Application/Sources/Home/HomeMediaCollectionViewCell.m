@@ -67,7 +67,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = UIColor.clearColor;
     
     self.mediaView.hidden = YES;
     self.placeholderView.hidden = NO;
@@ -129,8 +129,6 @@
     self.progressView.hidden = YES;
     
     [self.thumbnailImageView play_resetImage];
-    
-    self.backgroundColor = UIColor.play_blackColor;
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow
@@ -231,9 +229,6 @@
 
 - (void)reloadData
 {
-    UIColor *backgroundColor = (self.module != nil) ? UIColor.clearColor : UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
-    
     if (! self.media) {
         self.mediaView.hidden = YES;
         self.placeholderView.hidden = NO;
@@ -244,7 +239,6 @@
     self.placeholderView.hidden = YES;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
-    self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.text = self.media.title;
     
     self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
@@ -276,7 +270,6 @@
     else {
         self.subtitleLabel.text = nil;
     }
-    self.subtitleLabel.backgroundColor = backgroundColor;
     
     [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
     

@@ -123,8 +123,6 @@
     self.playbackButton.delegate = self;
     self.closeButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label");
     
-    self.backgroundColor = UIColor.clearColor;
-    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openFullScreenPlayer:)];
     [self addGestureRecognizer:tapGestureRecognizer];
     

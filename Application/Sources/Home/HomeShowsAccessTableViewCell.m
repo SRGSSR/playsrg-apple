@@ -47,6 +47,9 @@
 {
     [super awakeFromNib];
     
+    self.backgroundColor = UIColor.play_blackColor;
+    self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
+    
     self.mainView.hidden = YES;
     self.placeholderView.hidden = NO;
     
@@ -57,9 +60,6 @@
     self.showsByDateButtonPlaceholderView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.showsByDateButtonPlaceholderView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showsByDateButtonPlaceholderView.layer.masksToBounds = YES;
-
-    self.backgroundColor = UIColor.play_blackColor;
-    self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
     
     self.showsAtoZButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.showsAtoZButton.layer.cornerRadius = LayoutStandardViewCornerRadius;

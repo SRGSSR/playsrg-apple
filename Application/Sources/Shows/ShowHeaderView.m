@@ -76,11 +76,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
-    
-    self.titleLabel.backgroundColor = backgroundColor;
-    self.subtitleLabel.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.clearColor;
     
     // Accommodate all kinds of usages
     self.logoImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)

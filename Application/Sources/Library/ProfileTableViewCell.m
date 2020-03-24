@@ -41,8 +41,7 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.clearColor;
     
     // Cell highlighting is custom
     self.selectionStyle = UITableViewCellSelectionStyleNone;

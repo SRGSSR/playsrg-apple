@@ -53,7 +53,6 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
     self.headerView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     
     self.headerView.hidden = YES;
@@ -141,8 +140,6 @@
 
 - (void)reloadData
 {
-    self.backgroundColor = (self.homeSectionInfo.module != nil) ? UIColor.clearColor : UIColor.play_blackColor;
-    
     if (! self.isDataAvailable) {
         self.headerView.hidden = YES;
         self.placeholderView.hidden = NO;

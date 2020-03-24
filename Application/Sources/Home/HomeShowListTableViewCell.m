@@ -55,7 +55,6 @@ static const CGFloat kBottomInset = 15.f;
         self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
         
         UIView *wrapperView = [[UIView alloc] initWithFrame:self.contentView.bounds];
-        wrapperView.backgroundColor = UIColor.clearColor;
         wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.contentView addSubview:wrapperView];
         self.wrapperView = wrapperView;

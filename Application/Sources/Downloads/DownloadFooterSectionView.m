@@ -23,10 +23,9 @@
 
 @implementation DownloadFooterSectionView
 
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
+    if (self = [super initWithCoder:aDecoder]) {
         self.totalFilesSize = 0;
         self.progresses = [NSMutableDictionary dictionary];
     }
@@ -37,10 +36,8 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.mainView.backgroundColor = backgroundColor;
+    self.mainView.backgroundColor = UIColor.clearColor;
     
-    self.centerLabel.backgroundColor = backgroundColor;
     self.centerLabel.textColor = UIColor.whiteColor;
     self.centerLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
 }

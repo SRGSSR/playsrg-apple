@@ -37,6 +37,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
     self.backgroundColor = UIColor.clearColor;
     
     // Cell highlighting is custom

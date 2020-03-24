@@ -36,7 +36,7 @@
 {
     _homeSectionInfo = homeSectionInfo;
     
-    self.moduleBackgroundView.backgroundColor = homeSectionInfo.module.play_backgroundColor ?: UIColor.clearColor;
+    self.moduleBackgroundView.backgroundColor = homeSectionInfo.module.play_backgroundColor;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     self.titleLabel.text = homeSectionInfo.title;
@@ -49,8 +49,6 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
-    self.moduleBackgroundView.backgroundColor = UIColor.clearColor;
     
     self.titleLabel.textColor = UIColor.whiteColor;
     self.titleLabel.userInteractionEnabled = YES;

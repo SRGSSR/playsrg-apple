@@ -6,8 +6,6 @@
 
 #import "MostSearchedShowCollectionViewCell.h"
 
-#import "UIColor+PlaySRG.h"
-
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface MostSearchedShowCollectionViewCell ()
@@ -24,10 +22,7 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
-    
-    self.titleLabel.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.clearColor;
 }
 
 - (void)setHighlighted:(BOOL)highlighted
