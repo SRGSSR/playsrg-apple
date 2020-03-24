@@ -53,7 +53,7 @@ OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth);
 /**
  *  Return the standard height for table view headers.
  */
-OBJC_EXPORT CGFloat LayoutStandardTableSectionHeaderHeight(void);
+OBJC_EXPORT CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor);
 
 /**
  *  Return the standard height for simple cells.

@@ -603,7 +603,8 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
         }
             
         case HomeHeaderTypeView: {
-            return LayoutStandardTableSectionHeaderHeight();
+            BOOL hasBackgroundColor = (homeSectionInfo.module && ! [homeSectionInfo.module.backgroundColor isEqual:UIColor.play_blackColor]);
+            return LayoutStandardTableSectionHeaderHeight(hasBackgroundColor);
             break;
         }
         

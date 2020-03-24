@@ -61,8 +61,7 @@
 {
     [super viewDidLoad];
     
-    UIColor *backgroundColor = UIColor.play_popoverGrayBackgroundColor;
-    self.view.backgroundColor = backgroundColor;
+    self.view.backgroundColor = UIColor.play_popoverGrayBackgroundColor;
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = UIColor.clearColor;

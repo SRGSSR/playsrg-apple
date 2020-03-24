@@ -21,7 +21,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="oyt-0M-2Tn">
                                 <rect key="frame" x="0.0" y="0.0" width="149.5" height="84"/>
-                                <color key="backgroundColor" red="0.27554744482040405" green="0.27554744482040405" blue="0.27554744482040405" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXQ-vI-0FF">
                                 <rect key="frame" x="0.0" y="0.0" width="149.5" height="84"/>

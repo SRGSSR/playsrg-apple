@@ -53,8 +53,7 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.clearColor;
     
     self.mediaView.hidden = YES;
     self.placeholderView.hidden = NO;
@@ -68,9 +67,6 @@
     
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
-    self.titleLabel.backgroundColor = backgroundColor;
-    
-    self.subtitleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;

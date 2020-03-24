@@ -9,9 +9,11 @@
 #import "ApplicationConfiguration.h"
 #import "HomeMediasViewController.h"
 #import "HomeTopicViewController.h"
+#import "Layout.h"
 #import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
+#import "SRGModule+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -21,6 +23,8 @@
 @property (nonatomic, weak) IBOutlet UIView *moduleBackgroundView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *navigationButton;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTitleLabelLayoutConstraint;
 
 @end
 
@@ -32,20 +36,11 @@
 {
     _homeSectionInfo = homeSectionInfo;
     
-    UIColor *backgroundColor = UIColor.clearColor;
-    UIColor *titleTextColor = UIColor.whiteColor;
-    if (homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        backgroundColor = homeSectionInfo.module.backgroundColor;
-        titleTextColor = homeSectionInfo.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
-    }
+    self.moduleBackgroundView.backgroundColor = homeSectionInfo.module.play_backgroundColor;
     
-    self.moduleBackgroundView.backgroundColor = backgroundColor;
-    
-    self.titleLabel.textColor = titleTextColor;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
     self.titleLabel.text = homeSectionInfo.title;
     
-    self.navigationButton.tintColor = titleTextColor;
     self.navigationButton.hidden = ! [homeSectionInfo canOpenList] || ! self.titleLabel.text;
 }
 
@@ -55,10 +50,10 @@
 {
     [super awakeFromNib];
     
-    self.moduleBackgroundView.backgroundColor = UIColor.clearColor;
-    
     self.titleLabel.textColor = UIColor.whiteColor;
     self.titleLabel.userInteractionEnabled = YES;
+    
+    self.leadingTitleLabelLayoutConstraint.constant = LayoutStandardMargin;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMediaList:)];
     [self.titleLabel addGestureRecognizer:tapGestureRecognizer];

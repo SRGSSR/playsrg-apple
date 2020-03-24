@@ -60,20 +60,16 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.clearColor;
     
-    UIView *colorView = [[UIView alloc] init];
-    colorView.backgroundColor = backgroundColor;
-    self.selectedBackgroundView = colorView;
+    UIView *selectedBackgroundView = [[UIView alloc] init];
+    selectedBackgroundView.backgroundColor = UIColor.clearColor;
+    self.selectedBackgroundView = selectedBackgroundView;
     
     self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
-    self.titleLabel.backgroundColor = backgroundColor;
-    
-    self.subtitleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;

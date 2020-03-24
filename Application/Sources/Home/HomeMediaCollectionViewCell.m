@@ -67,7 +67,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = UIColor.clearColor;
     
     self.mediaView.hidden = YES;
     self.placeholderView.hidden = NO;
@@ -129,8 +129,6 @@
     self.progressView.hidden = YES;
     
     [self.thumbnailImageView play_resetImage];
-    
-    self.backgroundColor = UIColor.play_blackColor;
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow
@@ -231,12 +229,6 @@
 
 - (void)reloadData
 {
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        backgroundColor = self.module.backgroundColor;
-    }
-    self.backgroundColor = backgroundColor;
-    
     if (! self.media) {
         self.mediaView.hidden = YES;
         self.placeholderView.hidden = NO;
@@ -247,7 +239,6 @@
     self.placeholderView.hidden = YES;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
-    self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.text = self.media.title;
     
     self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
@@ -279,7 +270,6 @@
     else {
         self.subtitleLabel.text = nil;
     }
-    self.subtitleLabel.backgroundColor = backgroundColor;
     
     [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
     
@@ -307,10 +297,6 @@
     
     UIColor *titleTextColor = UIColor.whiteColor;
     UIColor *subtitleTextColor = UIColor.play_lightGrayColor;
-    if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        titleTextColor = self.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
-        subtitleTextColor = self.module.textColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultTextColor;
-    }
     
     SRGBlockingReason blockingReason = [self.media blockingReasonAtDate:NSDate.date];
     if (blockingReason == SRGBlockingReasonNone || blockingReason == SRGBlockingReasonStartDate) {
@@ -346,10 +332,6 @@
     self.downloadStatusImageView.hidden = NO;
     
     UIColor *imageColor = UIColor.play_lightGrayColor;
-    if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        imageColor = self.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultTextColor;
-    }
-    
     UIImage *downloadImage = nil;
     
     switch (download.state) {

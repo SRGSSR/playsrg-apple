@@ -240,13 +240,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, getter=areMoreEpisodesHidden) BOOL moreEpisodesHidden;
-@property (nonatomic, getter=areModuleColorsDisabled) BOOL moduleColorsDisabled;
 
 @property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
-
-@property (nonatomic) UIColor *moduleDefaultLinkColor;
-@property (nonatomic) UIColor *moduleDefaultTextColor;
 
 @property (nonatomic) NSArray<NSNumber *> *videoHomeSections;
 @property (nonatomic) NSArray<NSNumber *> *liveHomeSections;
@@ -433,18 +429,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
     
-    NSString *moduleDefaultLinkColorString = [self.remoteConfig configValueForKey:@"moduleDefaultLinkColor"].stringValue;
-    UIColor *moduleDefaultLinkColor = (moduleDefaultLinkColorString.length != 0) ? [UIColor srg_colorFromHexadecimalString:moduleDefaultLinkColorString] : nil;
-    if (! moduleDefaultLinkColor) {
-        return NO;
-    }
-    
-    NSString *moduleDefaultTextColorString = [self.remoteConfig configValueForKey:@"moduleDefaultTextColor"].stringValue;
-    UIColor *moduleDefaultTextColor = (moduleDefaultTextColorString.length != 0) ? [UIColor srg_colorFromHexadecimalString:moduleDefaultTextColorString] : nil;
-    if (! moduleDefaultTextColor) {
-        return NO;
-    }
-    
     // Update mandatory values
     self.analyticsBusinessUnitIdentifier = analyticsBusinessUnitIdentifier;
     self.analyticsContainer = analyticsContainer.numberValue.integerValue;
@@ -457,9 +441,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.whatsNewURL = whatsNewURL;
     
     self.appStoreProductIdentifier = appStoreProductIdentifier;
-    
-    self.moduleDefaultLinkColor = moduleDefaultLinkColor;
-    self.moduleDefaultTextColor = moduleDefaultTextColor;
     
     //
     // Optional values
@@ -503,7 +484,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.downloadsHintsHidden = [self.remoteConfig configValueForKey:@"downloadsHintsHidden"].boolValue;
     self.moreEpisodesHidden = [self.remoteConfig configValueForKey:@"moreEpisodesHidden"].boolValue;
-    self.moduleColorsDisabled = [self.remoteConfig configValueForKey:@"moduleColorsDisabled"].boolValue;
     
     self.subtitleAvailabilityHidden = [self.remoteConfig configValueForKey:@"subtitleAvailabilityHidden"].boolValue;
     self.audioDescriptionAvailabilityHidden = [self.remoteConfig configValueForKey:@"audioDescriptionAvailabilityHidden"].boolValue;

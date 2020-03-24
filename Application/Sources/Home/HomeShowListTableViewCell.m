@@ -13,6 +13,7 @@
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
+// Small margin to avoid overlap with the horizontal scrolling indicator
 static const CGFloat kBottomInset = 15.f;
 
 @interface HomeShowListTableViewCell ()
@@ -55,7 +56,6 @@ static const CGFloat kBottomInset = 15.f;
         self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
         
         UIView *wrapperView = [[UIView alloc] initWithFrame:self.contentView.bounds];
-        wrapperView.backgroundColor = UIColor.clearColor;
         wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.contentView addSubview:wrapperView];
         self.wrapperView = wrapperView;

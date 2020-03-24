@@ -53,7 +53,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    self.headerView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     
     self.headerView.hidden = YES;
     self.placeholderView.hidden = NO;
@@ -69,6 +69,8 @@
                                                             withScale:ImageScaleMedium];
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    
+    self.titleLabel.textColor = UIColor.whiteColor;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMediaList:)];
     [self.headerView addGestureRecognizer:tapGestureRecognizer];
@@ -147,25 +149,8 @@
     self.headerView.hidden = NO;
     self.placeholderView.hidden = YES;
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    UIColor *titleTextColor = UIColor.whiteColor;
-    UIColor *thumbnailImageViewBackgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    UIColor *headerBackgroundColor = UIColor.play_cardGrayBackgroundColor;
-    
-    if (self.homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        backgroundColor = self.homeSectionInfo.module.backgroundColor;
-        titleTextColor = self.homeSectionInfo.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
-        thumbnailImageViewBackgroundColor = self.homeSectionInfo.module.backgroundColor;
-        headerBackgroundColor = [UIColor colorWithWhite:0.f alpha:0.1f];
-    }
-    self.backgroundColor = backgroundColor;
-    self.headerView.backgroundColor = headerBackgroundColor;
-    
-    self.titleLabel.textColor = titleTextColor;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = NSLocalizedString(@"All content", @"Title of the first cell of a media list on homepage.");
-    
-    self.thumbnailImageView.backgroundColor = thumbnailImageViewBackgroundColor;
     
     ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
     id<SRGImage> object = self.homeSectionInfo.module ?: self.homeSectionInfo.topic;

@@ -534,6 +534,8 @@
     else if ([previewObject isKindOfClass:SRGModule.class]) {
         SRGModule *module = previewObject;
         
+        alertController = [UIAlertController alertControllerWithTitle:module.title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
         NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForModule:module];
         if (sharingURL) {
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Share", @"Button label of the sharing choice in the module long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -567,6 +569,14 @@
                 [self presentViewController:activityViewController animated:YES completion:nil];
             }]];
         }
+        
+        if (self.navigationController) {
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a module from the from the long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                ModuleViewController *moduleViewController = [[ModuleViewController alloc] initWithModule:module];
+                [self.navigationController pushViewController:moduleViewController animated:YES];
+            }]];
+        }
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Label of the button to close the module long-press menu") style:UIAlertActionStyleCancel handler:nil]];
     }
     else if ([previewObject isKindOfClass:SRGShow.class]) {
         SRGShow *show = previewObject;

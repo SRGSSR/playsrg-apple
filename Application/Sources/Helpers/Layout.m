@@ -31,7 +31,7 @@ CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth)
     return fmin(layoutWidth * kHorizontalFillRatio, maxWidth);
 }
 
-CGFloat LayoutStandardTableSectionHeaderHeight(void)
+CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor)
 {
     static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
     static dispatch_once_t s_onceToken;
@@ -51,7 +51,11 @@ CGFloat LayoutStandardTableSectionHeaderHeight(void)
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    return s_headerHeights[contentSizeCategory].floatValue;
+    CGFloat headerHeight = s_headerHeights[contentSizeCategory].floatValue;
+    if (hasBackgroundColor) {
+        headerHeight += 6.f;
+    }
+    return headerHeight;
 }
 
 CGFloat LayoutStandardSimpleTableCellHeight(void)
