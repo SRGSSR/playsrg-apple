@@ -1263,7 +1263,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         // Use it as limit value if needed
         static CGFloat kVerticalFillRatio = 0.6f;
         CGFloat minAspectRatio = CGRectGetWidth(self.view.frame) / (kVerticalFillRatio * CGRectGetHeight(self.view.frame));
-        self.playerAspectRatioStandardConstraint = [self.playerAspectRatioStandardConstraint srg_replacementConstraintWithMultiplier:1.f / fmaxf(aspectRatio, minAspectRatio) constant:heightOffset];
+        CGFloat multiplier = 1.f / fmaxf(aspectRatio, minAspectRatio);
+        
+        self.playerAspectRatioStandardConstraint = [self.playerAspectRatioStandardConstraint srg_replacementConstraintWithMultiplier:multiplier constant:heightOffset];
+        self.playerAspectRatioBigLandscapeScreenConstraint = [self.playerAspectRatioBigLandscapeScreenConstraint srg_replacementConstraintWithMultiplier:multiplier constant:heightOffset];
         
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
