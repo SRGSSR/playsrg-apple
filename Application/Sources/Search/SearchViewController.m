@@ -6,7 +6,9 @@
 
 #import "SearchViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "Layout.h"
 #import "MediaCollectionViewCell.h"
 #import "MostSearchedShowCollectionViewCell.h"
 #import "MostSearchedShowsHeaderView.h"
@@ -26,8 +28,6 @@
 #import <Masonry/Masonry.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
-
-static const CGFloat kLayoutHorizontalInset = 10.f;
 
 @interface SearchViewController () <SearchSettingsViewControllerDelegate>
 
@@ -58,79 +58,87 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithQuery:(NSString *)query settings:(SRGMediaSearchSettings *)settings
+- (instancetype)init
 {
     if (self = [super init]) {
-        self.query = query;
-        
-        // A BU supporting aggregation but not displaying search settings can lead to longer response times.
-        // (@see `-mediasForVendor:matchingQuery:withSettings:completionBlock:` in `SRGDataProvider`).
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        if (! applicationConfiguration.searchSettingsHidden) {
-            self.settings = settings ?: SearchSettingsViewController.defaultSettings;
-            self.settings.aggregationsEnabled = NO;
-        }
-        else {
-            self.settings = nil;
-        }
+        self.settings = [self supportedMediaSearchSettingsFromSettings:nil];
+        self.emptyCollectionImage = [UIImage imageNamed:@"search-90"];
     }
     return self;
 }
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-implementations"
-
-- (instancetype)init
-{
-    [self doesNotRecognizeSelector:_cmd];
-    return [self initWithQuery:nil settings:nil];
-}
-
-#pragma clang diagnostic pop
 
 #pragma mark Getters and setters
 
 - (NSString *)title
 {
-    return NSLocalizedString(@"Search", @"Search page title");
+    return TitleForApplicationSection(ApplicationSectionSearch);
+}
+
+#pragma mark Helpers
+
+- (SRGMediaSearchSettings *)supportedMediaSearchSettingsFromSettings:(SRGMediaSearchSettings *)settings
+{
+    // A BU supporting aggregation but not displaying search settings can lead to longer response times.
+    // (@see `-mediasForVendor:matchingQuery:withSettings:completionBlock:` in `SRGDataProvider`).
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    if (! applicationConfiguration.searchSettingsHidden) {
+        SRGMediaSearchSettings *supportedSettings = settings ?: SearchSettingsViewController.defaultSettings;
+        supportedSettings.aggregationsEnabled = NO;
+        return supportedSettings;
+    }
+    else {
+        return nil;
+    }
 }
 
 #pragma mark View lifecycle
 
-- (void)viewDidLoad
+- (void)loadView
 {
-    [super viewDidLoad];
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    // Spacing configured via delegation since dynamic
     
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    
-    self.emptyCollectionImage = [UIImage imageNamed:@"search-90"];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
+    collectionView.backgroundColor = UIColor.clearColor;
+    collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    collectionView.alwaysBounceVertical = YES;
+    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:collectionView];
+    self.collectionView = collectionView;
     
     NSString *mediaCellIdentifier = NSStringFromClass(MediaCollectionViewCell.class);
     UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
-    [self.collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
+    [collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
     
     NSString *mostSearchedShowCellIdentifier = NSStringFromClass(MostSearchedShowCollectionViewCell.class);
     UINib *mostSearchedShowCellNib = [UINib nibWithNibName:mostSearchedShowCellIdentifier bundle:nil];
-    [self.collectionView registerNib:mostSearchedShowCellNib forCellWithReuseIdentifier:mostSearchedShowCellIdentifier];
-    
-    NSString *showListCellIdentifier = NSStringFromClass(SearchShowListCollectionViewCell.class);
-    UINib *showListCellNib = [UINib nibWithNibName:showListCellIdentifier bundle:nil];
-    [self.collectionView registerNib:showListCellNib forCellWithReuseIdentifier:showListCellIdentifier];
+    [collectionView registerNib:mostSearchedShowCellNib forCellWithReuseIdentifier:mostSearchedShowCellIdentifier];
+
+    Class showListCellClass = SearchShowListCollectionViewCell.class;
+    [collectionView registerClass:showListCellClass forCellWithReuseIdentifier:NSStringFromClass(showListCellClass)];
     
     NSString *loadingCellIdentifier = NSStringFromClass(SearchLoadingCollectionViewCell.class);
     UINib *loadingCellNib = [UINib nibWithNibName:loadingCellIdentifier bundle:nil];
-    [self.collectionView registerNib:loadingCellNib forCellWithReuseIdentifier:loadingCellIdentifier];
+    [collectionView registerNib:loadingCellNib forCellWithReuseIdentifier:loadingCellIdentifier];
     
     NSString *mostSearchedShowsHeaderIdentifier = NSStringFromClass(MostSearchedShowsHeaderView.class);
     UINib *mostSearchedShowsHeaderNib = [UINib nibWithNibName:mostSearchedShowsHeaderIdentifier bundle:nil];
-    [self.collectionView registerNib:mostSearchedShowsHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:mostSearchedShowsHeaderIdentifier];
+    [collectionView registerNib:mostSearchedShowsHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:mostSearchedShowsHeaderIdentifier];
     
     NSString *searchHeaderIdentifier = NSStringFromClass(SearchHeaderView.class);
     UINib *searchHeaderNib = [UINib nibWithNibName:searchHeaderIdentifier bundle:nil];
-    [self.collectionView registerNib:searchHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:searchHeaderIdentifier];
+    [collectionView registerNib:searchHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:searchHeaderIdentifier];
+    
+    self.view = view;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
@@ -164,35 +172,12 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
         self.searchController.hidesNavigationBarDuringPresentation = NO;
     }
     
-    if (self.closeBlock) {
-        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close-22"]
-                                                                               style:UIBarButtonItemStyleDone
-                                                                              target:self
-                                                                              action:@selector(close:)];
-        closeBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on search view");
-        self.navigationItem.leftBarButtonItem = closeBarButtonItem;
-    }
-    else {
-        self.navigationItem.leftBarButtonItem = nil;
-    }
-    
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusChanged
                                              object:nil];
     
     [self updateSearchSettingsButton];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    if ([self play_isMovingToParentViewController] && self.query.length == 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.searchController.searchBar becomeFirstResponder];
-        });
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -419,6 +404,33 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     return self.shows.count == 0 || section != 0;
 }
 
+#pragma mark PlayApplicationNavigation protocol
+
+- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
+{
+    if (applicationSectionInfo.applicationSection != ApplicationSectionSearch) {
+        return NO;
+    }
+    
+    SRGMediaSearchSettings *settings = [[SRGMediaSearchSettings alloc] init];
+    settings.mediaType = [applicationSectionInfo.options[ApplicationSectionOptionSearchMediaTypeOptionKey] integerValue];
+    
+    self.settings = [self supportedMediaSearchSettingsFromSettings:settings];
+    
+    NSString *query = applicationSectionInfo.options[ApplicationSectionOptionSearchQueryKey];
+    if (self.searchController) {
+        self.searchController.searchBar.text = query;
+        [self.searchController.searchBar resignFirstResponder];
+        
+        [self search];
+    }
+    else {
+        self.query = query;
+    }
+    
+    return YES;
+}
+
 #pragma mark SearchSettingsViewControllerDelegate protocol
 
 - (void)searchSettingsViewController:(SearchSettingsViewController *)searchSettingsViewController didUpdateSettings:(SRGMediaSearchSettings *)settings
@@ -433,12 +445,12 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (NSString *)srg_pageViewTitle
 {
-    return self.title;
+    return AnalyticsPageTitleHome;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeSearch) ];
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelSearch ];
 }
 
 #pragma mark UICollectionViewDataSource protocol
@@ -612,48 +624,61 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    // Media grid layout
-    if ([self isDisplayingMediasInSection:section] && self.traitCollection.horizontalSizeClass != UIUserInterfaceSizeClassCompact) {
-        return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+    if ([self shouldDisplayMostSearchedShows]) {
+        return UIEdgeInsetsZero;
     }
     else {
-        return UIEdgeInsetsZero;
+        return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    if ([self shouldDisplayMostSearchedShows]) {
+        return 0.f;
+    }
+    else {
+        return LayoutStandardMargin;
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    if ([self shouldDisplayMostSearchedShows]) {
+        return 0.f;
+    }
+    else {
+        return LayoutStandardMargin;
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    
     if ([self shouldDisplayMostSearchedShows]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutStandardSimpleTableCellHeight());
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 200.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 200.f);
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
-        if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-            CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 86.f : 100.f;
-            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, height);
+         if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutTableViewCellStandardHeight);
         }
-        // Media grid layout
         else {
-            CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 90.f : 120.f;
-            
-            static const CGFloat kItemWidth = 210.f;
-            return CGSizeMake(kItemWidth, ceilf(kItemWidth * 9.f / 16.f + minTextHeight));
+            CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
+            return LayoutMediaStandardCollectionItemSize(itemWidth, NO);
         }
     }
+    // Search show list
     else {
-        CGFloat height = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 200.f : 220.f;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), SearchShowListCollectionViewCell.height);
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if ([self isDisplayingMostSearchedShows] || [self isDisplayingObjectsInSection:section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 44.f);
     }
     else {
         return CGSizeZero;
@@ -682,7 +707,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     SearchSettingsViewController *searchSettingsViewController = [[SearchSettingsViewController alloc] initWithQuery:self.query settings:self.settings ?: SearchSettingsViewController.defaultSettings];
     searchSettingsViewController.delegate = self;
     
-    UIColor *backgroundColor = (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? UIColor.play_popoverGrayColor : nil;
+    UIColor *backgroundColor = (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? UIColor.play_popoverGrayBackgroundColor : nil;
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController
                                                                                                 tintColor:UIColor.whiteColor
                                                                                           backgroundColor:backgroundColor
@@ -690,7 +715,7 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     navigationController.modalPresentationStyle = UIModalPresentationPopover;
     
     UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
-    popoverPresentationController.backgroundColor = UIColor.play_popoverGrayColor;
+    popoverPresentationController.backgroundColor = UIColor.play_popoverGrayBackgroundColor;
     popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
     
     popoverPresentationController.sourceView = sender;
@@ -738,14 +763,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     if (scrollView.dragging && ! scrollView.decelerating) {
         [self.searchController.searchBar resignFirstResponder];
     }
-}
-
-#pragma mark Actions
-
-- (void)close:(id)sender
-{
-    NSAssert(self.closeBlock, @"Close must only be available if a close block has been defined");
-    self.closeBlock();
 }
 
 #pragma mark Notifications

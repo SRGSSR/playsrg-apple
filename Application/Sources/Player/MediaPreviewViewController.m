@@ -74,11 +74,11 @@
 {
     [super viewDidLoad];
     
-    // Will restore audio playback iff a controller attached to the service was actually playing audio before (ignore
+    // Will restore playback iff a controller attached to the service was actually playing content before (ignore
     // other running playback playback states, like stalled or seeking, since such cases are not really relevant and
     // cannot be restored anyway as is)
     SRGLetterboxController *serviceController = SRGLetterboxService.sharedService.controller;
-    if (serviceController.media.mediaType == SRGMediaTypeAudio && serviceController.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
+    if (serviceController.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
         [serviceController pause];
         self.shouldRestoreServicePlayback = YES;
     }
@@ -111,11 +111,15 @@
     [super viewWillAppear:animated];
     
     if ([self play_isMovingToParentViewController]) {
-        // Height set to twice the video height (with 16/9 ratio) for regular sizes. Only display the video for
-        // compact layouts (currently iPhone Plus) since more readable
-        CGFloat width = CGRectGetWidth(self.view.frame);
-        CGFloat factor = (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ? 1.f : 2.f;
-        self.preferredContentSize = CGSizeMake(width, factor * 9.f / 16.f * width);
+        // Ajust preview size for better readability on phones. The default content size works fine on iPads.
+        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            CGSize screenSize = UIScreen.mainScreen.bounds.size;
+            BOOL isPortrait = screenSize.height > screenSize.width;
+            CGFloat factor = isPortrait ? 2.5f : 1.f;
+            
+            CGFloat width = CGRectGetWidth(self.view.frame);
+            self.preferredContentSize = CGSizeMake(width, factor * 9.f / 16.f * width);
+        }
         
         self.previousAudioSessionCategory = [AVAudioSession sharedInstance].category;
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -196,7 +200,7 @@
             }
             
             // Use !downloaded since the status has been reversed
-            AnalyticsTitle analyticsTitle = (! downloaded) ? AnalyticsTitleDownloadAdd : AnalyticsTitleDownloadRemove;
+            AnalyticsTitle analyticsTitle = ! downloaded ? AnalyticsTitleDownloadAdd : AnalyticsTitleDownloadRemove;
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourcePeekMenu;
             labels.value = self.media.URN;
@@ -264,7 +268,7 @@
             else {
                 UIApplication *application = UIApplication.sharedApplication;
                 PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
-                [appDelegate.sideMenuController pushViewController:showViewController animated:YES];
+                [appDelegate.rootTabBarController pushViewController:showViewController animated:YES];
             }
         }];
         [previewActionItems addObject:showAction];
@@ -339,39 +343,14 @@
 
 #pragma mark SRGAnalyticsViewTracking protocol
 
-- (BOOL)srg_isTrackedAutomatically
-{
-    // Tracking requires media composition information. The view event will be sent manually when appropriate
-    return NO;
-}
-
 - (NSString *)srg_pageViewTitle
 {
-    // Use the full-length when available
-    SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
-    return media.title;
+    return AnalyticsPageTitlePlayer;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    NSMutableArray<NSString *> *levels = [NSMutableArray array];
-    
-    // Use the full-length when available
-    SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
-    if (media.mediaType == SRGMediaTypeAudio) {
-        [levels addObject:AnalyticsNameForPageType(AnalyticsPageTypeRadio)];
-    }
-    else {
-        [levels addObject:AnalyticsNameForPageType(AnalyticsPageTypeTV)];
-    }
-    [levels addObject:@"preview"];
-    
-    NSString *showTitle = self.letterboxController.mediaComposition.show.title;
-    if (showTitle) {
-        [levels addObject:showTitle];
-    }
-    
-    return levels.copy;
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelPreview ];
 }
 
 #pragma mark Notifications

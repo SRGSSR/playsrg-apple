@@ -6,7 +6,10 @@
 
 #import "ShowsViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "Layout.h"
+#import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
@@ -18,8 +21,6 @@
 #import <libextobjc/libextobjc.h>
 #import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
-
-static const CGFloat kLayoutHorizontalInset = 10.f;
 
 @interface ShowsViewController () {
 @private
@@ -47,19 +48,13 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     if (self = [super init]) {
         self.radioChannel = radioChannel;
         self.initialAlphabeticalIndex = alphabeticalIndex;
+        self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
         
         if (@available(iOS 10, *)) {
             self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];      // Only available for iOS 10 and above
         }
         
         _previousAccessibilityHeadingSection = -1;
-        
-        if (self.radioChannel) {
-            self.title = NSLocalizedString(@"Programmes A-Z", @"Title displayed at the top of a (radio) show list");
-        }
-        else {
-            self.title = NSLocalizedString(@"TV programmes A-Z", @"Title displayed at the top of the TV show list");
-        }
     }
     return self;
 }
@@ -69,37 +64,52 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     return [self initWithRadioChannel:nil alphabeticalIndex:nil];
 }
 
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionShowAZ);
+}
+
 #pragma mark View lifecycle
 
-- (void)viewDidLoad
+- (void)loadView
 {
-    [super viewDidLoad];
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
+    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+    collectionViewLayout.sectionHeadersPinToVisibleBounds = YES;
     
-    self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
+    collectionView.backgroundColor = UIColor.clearColor;
+    collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    collectionView.showsVerticalScrollIndicator = NO;      // As in Contacts, no need for scroll indicators when an index is displayed
+    collectionView.alwaysBounceVertical = YES;
+    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:collectionView];
+    self.collectionView = collectionView;
     
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.showsVerticalScrollIndicator = NO;      // As in Contacts, no need for scroll indicators when an index is displayed
-    self.collectionView.alwaysBounceVertical = YES;
-    
-    UICollectionViewFlowLayout *collectionViewFlowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    collectionViewFlowLayout.sectionHeadersPinToVisibleBounds = YES;
+    BDKCollectionIndexView *collectionIndexView = [[BDKCollectionIndexView alloc] initWithFrame:CGRectZero indexTitles:nil];
+    collectionIndexView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.7f];
+    collectionIndexView.tintColor = UIColor.play_lightGrayColor;
+    collectionIndexView.alpha = 1.f;
+    [collectionIndexView addTarget:self action:@selector(collectionIndexChanged:) forControlEvents:UIControlEventValueChanged];
+    [view addSubview:collectionIndexView];
+    self.collectionIndexView = collectionIndexView;
     
     NSString *cellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:cellIdentifier];
+    [collectionView registerNib:cellNib forCellWithReuseIdentifier:cellIdentifier];
     
     NSString *headerIdentifier = NSStringFromClass(TranslucentTitleHeaderView.class);
     UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
-    [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
+    [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
-    // BDKCollectionIndexView can only be instantiated in code ;(
-    BDKCollectionIndexView *collectionIndexView = [[BDKCollectionIndexView alloc] initWithFrame:CGRectZero indexTitles:nil];
-    collectionIndexView.tintColor = UIColor.play_lightGrayColor;
-    [collectionIndexView addTarget:self action:@selector(collectionIndexChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:collectionIndexView];
-    self.collectionIndexView = collectionIndexView;
+    self.view = view;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -222,22 +232,6 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     });
 }
 
-- (BOOL)srg_isTrackedAutomatically
-{
-    // Only tracked if standalone
-    return ! self.play_pageViewController;
-}
-
-- (NSString *)srg_pageViewTitle
-{
-    return NSLocalizedString(@"Programmes A-Z", @"[Technical] Title for programmes A-Z page view analytics measurements");
-}
-
-- (AnalyticsPageType)pageType
-{
-    return self.radioChannel != nil ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
-}
-
 #pragma mark Scrolling
 
 - (void)scrollToSectionWithIndex:(NSUInteger)index animated:(BOOL)animated
@@ -256,6 +250,27 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
     CGFloat newContentOffsetY = fminf(CGRectGetMinY(itemFrame) - sectionHeaderHeight - contentInsetTop,
                                       self.collectionView.contentSize.height - CGRectGetHeight(self.collectionView.frame));
     [self.collectionView setContentOffset:CGPointMake(self.collectionView.contentOffset.x, newContentOffsetY) animated:animated];
+}
+
+#pragma mark Index
+
+- (void)setIndexHidden:(BOOL)hidden animated:(BOOL)animated
+{
+    void (^animations)(void) = ^{
+        self.collectionIndexView.alpha = hidden ? 0.f : 1.f;
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:0.2 animations:animations];
+    }
+    else {
+        animations();
+    }
+}
+
+- (void)automaticallyShowIndexAnimated
+{
+    [self setIndexHidden:NO animated:YES];
 }
 
 #pragma mark UICollectionViewDataSource protocol
@@ -319,23 +334,60 @@ static const CGFloat kLayoutHorizontalInset = 10.f;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(10.f, kLayoutHorizontalInset, 10.f, kLayoutHorizontalInset);
+    return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 2 items per row on small layouts, max cell width of 210
-    CGFloat width = fminf(floorf((CGRectGetWidth(collectionView.frame) - collectionViewLayout.minimumInteritemSpacing - 2 * kLayoutHorizontalInset) / 2.f), 210.f);
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 30.f : 50.f;
-    
-    return CGSizeMake(width, ceilf(width * 9.f / 16.f + minTextHeight));
+    CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
+    return LayoutShowStandardCollectionItemSize(itemWidth, NO);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * kLayoutHorizontalInset, 44.f);
+    return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 44.f);
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return AnalyticsPageTitleShowsAZ;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    if (self.radioChannel) {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, self.radioChannel.name ];
+    }
+    else {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
+    }
+}
+
+#pragma mark UIScrollViewDelegate protocol
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(automaticallyShowIndexAnimated) object:nil];
+    [self setIndexHidden:YES animated:YES];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (decelerate) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(automaticallyShowIndexAnimated) object:nil];
+        [self performSelector:@selector(automaticallyShowIndexAnimated) withObject:nil afterDelay:0.7 inModes:@[ NSRunLoopCommonModes ]];
+    }
+    else {
+        [self setIndexHidden:NO animated:YES];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(automaticallyShowIndexAnimated) object:nil];
+    [self setIndexHidden:NO animated:YES];
 }
 
 #pragma mark Actions

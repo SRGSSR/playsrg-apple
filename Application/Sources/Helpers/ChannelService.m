@@ -6,11 +6,13 @@
 
 #import "ChannelService.h"
 
-#import "NSTimer+PlaySRG.h"
+#import "ForegroundTimer.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <FXReachability/FXReachability.h>
 #import <libextobjc/libextobjc.h>
+
+NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceDidUpdateChannelsNotification";
 
 @interface ChannelService ()
 
@@ -21,7 +23,7 @@
 // data is used to return existing channel information as fast as possible, and when errors have been encountered.
 @property (nonatomic) NSMutableDictionary<NSString *, SRGChannel *> *channels;
 
-@property (nonatomic) NSTimer *updateTimer;
+@property (nonatomic) ForegroundTimer *updateTimer;
 @property (nonatomic) SRGRequestQueue *requestQueue;
 
 @end
@@ -55,11 +57,11 @@
         self.channels = [NSMutableDictionary dictionary];
         
         @weakify(self)
-        self.updateTimer = [NSTimer play_timerWithTimeInterval:30. repeats:YES block:^(NSTimer * _Nonnull timer) {
+        self.updateTimer = [ForegroundTimer timerWithTimeInterval:30. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
             @strongify(self)
             [self updateChannels];
         }];
-        self.requestQueue = [[SRGRequestQueue alloc] init];
+        [self updateChannels];
         
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(reachabilityDidChange:)
@@ -76,7 +78,7 @@
 
 #pragma mark Getters and setters
 
-- (void)setUpdateTimer:(NSTimer *)updateTimer
+- (void)setUpdateTimer:(ForegroundTimer *)updateTimer
 {
     [_updateTimer invalidate];
     _updateTimer = updateTimer;
@@ -102,9 +104,12 @@
         block(channel);
     }
     
-    self.medias[channelKey] = media;
+    // Only force an update the first time a media is added. Other updates will occur perodically afterwards.
+    if (! self.medias[channelKey]) {
+        [self updateChannelWithMedia:media];
+    }
     
-    [self updateChannelWithMedia:media];
+    self.medias[channelKey] = media;
 }
 
 - (void)unregisterObserver:(id)observer forMedia:(SRGMedia *)media
@@ -118,13 +123,8 @@
     NSValue *observerKey = [NSValue valueWithNonretainedObject:observer];
     [channelRegistrations removeObjectForKey:observerKey];
     
-    // If no registration exists for a channel anymore, remove it from the channel retrieval service. Cached channel
-    // data is not discarded, though (if there is a single observer regularly registering and unregistering, like
-    // a collection view cell, not clearing the cache ensures channel information is readily available when registering)
-    if (channelRegistrations.count == 0) {
-        self.registrations[channelKey] = nil;
-        self.medias[channelKey] = nil;
-    }
+    // Keep registered channels for the lifetime of the app, do not remove associated entries (otherwise we might
+    // remove and add channels repeatedly, triggering an update each time)
 }
 
 #pragma mark Data retrieval
@@ -163,7 +163,11 @@
 
 - (void)updateChannels
 {
-    self.requestQueue = [[SRGRequestQueue alloc] init];
+    self.requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+        if (finished && ! error) {
+            [NSNotificationCenter.defaultCenter postNotificationName:ChannelServiceDidUpdateChannelsNotification object:self];
+        }
+    }];
     
     for (SRGMedia *media in self.medias.allValues) {
         [self updateChannelWithMedia:media];

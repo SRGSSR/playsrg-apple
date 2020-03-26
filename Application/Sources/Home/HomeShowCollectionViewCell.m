@@ -6,6 +6,7 @@
 
 #import "HomeShowCollectionViewCell.h"
 
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -36,7 +37,10 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.clearColor;
+    self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    
+    self.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.layer.masksToBounds = YES;
     
     self.showView.hidden = YES;
     self.placeholderView.hidden = NO;

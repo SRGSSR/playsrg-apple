@@ -17,13 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) UIColor *play_blackColor;
 @property (class, nonatomic, readonly) UIColor *play_lightGrayColor;
 @property (class, nonatomic, readonly) UIColor *play_grayColor;
-@property (class, nonatomic, readonly) UIColor *play_popoverGrayColor;
+@property (class, nonatomic, readonly) UIColor *play_popoverGrayBackgroundColor;
 
-@property (class, nonatomic, readonly) UIColor *play_grayButtonBackgroundColor;
-@property (class, nonatomic, readonly) UIColor *play_lightGrayButtonBackgroundColor;
+@property (class, nonatomic, readonly) UIColor *play_cardGrayBackgroundColor;
 @property (class, nonatomic, readonly) UIColor *play_grayThumbnailImageViewBackgroundColor;
 @property (class, nonatomic, readonly) UIColor *play_blackDurationLabelBackgroundColor;
 @property (class, nonatomic, readonly) UIColor *play_whiteBadgeColor;
+
+@property (class, nonatomic, readonly) UIColor *play_blurTintColor API_DEPRECATED("Use UIBlurEffectStyleSystemMaterialDark", ios(9.0, 12.0));
 
 @end
 

@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "History.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -27,6 +28,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
+@property (nonatomic, weak) IBOutlet UIView *thumbnailWrapperView;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
@@ -50,21 +52,17 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.clearColor;
     
-    UIView *colorView = [[UIView alloc] init];
-    colorView.backgroundColor = backgroundColor;
-    self.selectedBackgroundView = colorView;
+    UIView *selectedBackgroundView = [[UIView alloc] init];
+    selectedBackgroundView.backgroundColor = UIColor.clearColor;
+    self.selectedBackgroundView = selectedBackgroundView;
     
-    self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    
-    self.titleLabel.backgroundColor = backgroundColor;
-    self.subtitleLabel.backgroundColor = backgroundColor;
+    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.thumbnailWrapperView.layer.masksToBounds = YES;
     
     self.durationLabelBackgroundColor = self.durationLabel.backgroundColor;
-    
-    [self.webFirstLabel play_setWebFirstBadge];
     
     self.youthProtectionColorImageView.hidden = YES;
     self.webFirstLabel.hidden = YES;
@@ -222,12 +220,24 @@
     
     self.media360ImageView.hidden = (download.presentation != SRGPresentation360);
     
-    self.webFirstLabel.hidden = ! download.media.play_isWebFirst;
+    BOOL isWebFirst = download.media.play_isWebFirst;
+    self.webFirstLabel.hidden = ! isWebFirst;
+    
+    [self.webFirstLabel play_setWebFirstBadge];
+    
+    // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
+        self.titleLabel.numberOfLines = isWebFirst ? 1 : 2;
+    }
+    else {
+        self.titleLabel.numberOfLines = 2;
+    }
     
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(download.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
     
-    self.subtitleLabel.numberOfLines = (self.durationLabel.hidden) ? 3 : 1;
+    self.subtitleLabel.numberOfLines = self.durationLabel.hidden ? 3 : 1;
     
     [self.thumbnailImageView play_requestImageForObject:download.media withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia unavailabilityHandler:^{
         [self.thumbnailImageView play_requestImageForObject:download withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
@@ -299,7 +309,7 @@
 
 - (id)previewObject
 {
-    return (! self.editing) ? self.download.media : nil;
+    return ! self.editing ? self.download.media : nil;
 }
 
 - (NSValue *)previewAnchorRect

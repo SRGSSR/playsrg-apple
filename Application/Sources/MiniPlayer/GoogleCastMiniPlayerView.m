@@ -6,19 +6,22 @@
 
 #import "GoogleCastMiniPlayerView.h"
 
+#import "AccessibilityView.h"
+#import "AnalyticsConstants.h"
+#import "GoogleCastPlaybackButton.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-@interface GoogleCastMiniPlayerView ()
+@interface GoogleCastMiniPlayerView () <AccessibilityViewDelegate>
 
 @property (nonatomic) GCKUIMediaController *controller;
 
-@property (nonatomic, weak) IBOutlet UIImageView *arrowImageView;
-@property (nonatomic, weak) IBOutlet UIImageView *googleCastImageView;
+@property (nonatomic, weak) IBOutlet AccessibilityView *accessibilityView;
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
-@property (nonatomic, weak) IBOutlet GCKUIMultistateButton *playbackButton;
+@property (nonatomic, weak) IBOutlet GoogleCastPlaybackButton *playbackButton;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
 @end
@@ -49,8 +52,6 @@
     self.progressView.progress = 0.f;
     self.progressView.progressTintColor = UIColor.redColor;
     
-    self.backgroundColor = UIColor.clearColor;
-    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openFullScreenPlayer:)];
     [self addGestureRecognizer:tapGestureRecognizer];
     
@@ -79,13 +80,12 @@
 {
     // We don't bind properties to the controller (which would have been easier) since we want to display custom information
     // when those are empty.
-    // Remark: Do not use controlle.session which, probably because of a bug, is not updated to point at the current session
+    // Remark: Do not use controller.session which, probably because of a bug, is not updated to point at the current session
     //         if created before it. Its progress still reflects the one of the current session media, though.
     GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
     GCKMediaMetadata *metadata = session.remoteMediaClient.mediaStatus.mediaInformation.metadata;
     if (metadata) {
         self.titleLabel.text = [metadata stringForKey:kGCKMetadataKeyTitle];
-        self.playbackButton.hidden = NO;
     }
     else {
         NSString *deviceName = session.device.friendlyName;
@@ -95,7 +95,6 @@
         else {
             self.titleLabel.text = NSLocalizedString(@"Receiver is idle.", @"Title displayed when no media is being played on the connected Google Cast receiver (name unknown)");
         }
-        self.playbackButton.hidden = YES;
     }
 }
 
@@ -108,23 +107,19 @@
 
 #pragma mark Accessibility
 
-- (BOOL)isAccessibilityElement
+- (NSArray *)accessibilityElements
 {
-    return YES;
+    return @[ self.accessibilityView, self.playbackButton ];
 }
 
-- (UIAccessibilityTraits)accessibilityTraits
-{
-    // Treat as header for quick navigation to the mini player
-    return UIAccessibilityTraitHeader;
-}
+#pragma mark AccessibilityViewDelegate protocol
 
-- (NSString *)accessibilityLabel
+- (NSString *)labelForAccessibilityView:(AccessibilityView *)accessibilityView
 {
     return self.titleLabel.text;
 }
 
-- (NSString *)accessibilityHint
+- (NSString *)hintForAccessibilityView:(AccessibilityView *)accessibilityView
 {
     return PlaySRGAccessibilityLocalizedString(@"Plays the content.", @"Mini player action hint");
 }
@@ -147,9 +142,11 @@
         GCKUIExpandedMediaControlsViewController *mediaControlsViewController = [GCKCastContext sharedInstance].defaultExpandedMediaControlsViewController;
         mediaControlsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         [UIApplication.sharedApplication.keyWindow.play_topViewController presentViewController:mediaControlsViewController animated:YES completion:nil];
+        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }
     else {
         [[GCKCastContext sharedInstance] presentCastDialog];
+        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }
 }
 

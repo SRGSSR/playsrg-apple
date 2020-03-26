@@ -42,10 +42,8 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_popoverGrayColor;
-    self.contentView.backgroundColor = backgroundColor;
+    self.contentView.backgroundColor = UIColor.play_popoverGrayBackgroundColor;
     
-    self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.textColor = UIColor.whiteColor;
 }
 

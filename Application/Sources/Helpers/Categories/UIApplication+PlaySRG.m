@@ -35,7 +35,7 @@
         }
     };
     
-    if (@available(iOS 10.0, *)) {
+    if (@available(iOS 10, *)) {
         [self openURL:URL options:@{ UIApplicationOpenURLOptionUniversalLinksOnly : @YES } completionHandler:^(BOOL success) {
             if (success) {
                 completion ? completion(YES) : nil;

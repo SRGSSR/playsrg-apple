@@ -9,15 +9,14 @@
 #import "ApplicationConfiguration.h"
 #import "HomeMediasViewController.h"
 #import "HomeTopicViewController.h"
+#import "Layout.h"
 #import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
-#import "UIColor+PlaySRG.h"
+#import "SRGModule+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
-
-static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 
 @interface HomeSectionHeaderView ()
 
@@ -25,56 +24,23 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *navigationButton;
 
-@property (nonatomic) HomeSectionInfo *homeSectionInfo;
-@property (nonatomic, getter=isFeatured) BOOL featured;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTitleLabelLayoutConstraint;
 
 @end
 
 @implementation HomeSectionHeaderView
 
-#pragma mark Class methods
-
-+ (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
-{
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
-    BOOL isHomeFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
-    
-    if (featured && ! UIAccessibilityIsVoiceOverRunning() && isHomeFeaturedHeaderHidden) {
-        return 10.f;
-    }
-    else if (featured && UIAccessibilityIsVoiceOverRunning()) {
-        return 46.f;
-    }
-    else if (featured) {
-        return 62.f;
-    }
-    else {
-        return 65.f;
-    }
-}
-
 #pragma mark Getters and setters
 
-- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured
+- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo
 {
-    self.homeSectionInfo = homeSectionInfo;
-    self.featured = featured;
+    _homeSectionInfo = homeSectionInfo;
     
-    UIColor *backgroundColor = UIColor.clearColor;
-    UIColor *titleTextColor = UIColor.play_lightGrayColor;
-    if (homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        backgroundColor = homeSectionInfo.module.backgroundColor;
-        titleTextColor = homeSectionInfo.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
-    }
+    self.moduleBackgroundView.backgroundColor = homeSectionInfo.module.play_backgroundColor;
     
-    self.moduleBackgroundView.backgroundColor = backgroundColor;
-    
-    self.titleLabel.textColor = titleTextColor;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
-    self.titleLabel.text = ([HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:self.bounds featured:featured] > HomeSectionHeaderMinimumHeight) ? homeSectionInfo.title : nil;
+    self.titleLabel.text = homeSectionInfo.title;
     
-    self.navigationButton.tintColor = titleTextColor;
     self.navigationButton.hidden = ! [homeSectionInfo canOpenList] || ! self.titleLabel.text;
 }
 
@@ -84,15 +50,15 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
 {
     [super awakeFromNib];
     
-    self.moduleBackgroundView.backgroundColor = UIColor.clearColor;
-    
-    self.titleLabel.textColor = UIColor.play_lightGrayColor;
+    self.titleLabel.textColor = UIColor.whiteColor;
     self.titleLabel.userInteractionEnabled = YES;
+    
+    self.leadingTitleLabelLayoutConstraint.constant = LayoutStandardMargin;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMediaList:)];
     [self.titleLabel addGestureRecognizer:tapGestureRecognizer];
     
-    self.navigationButton.tintColor = UIColor.play_lightGrayColor;
+    self.navigationButton.tintColor = UIColor.whiteColor;
 }
 
 #pragma mark Accessibility
@@ -130,7 +96,7 @@ static const CGFloat HomeSectionHeaderMinimumHeight = 10.f;
     if (self.homeSectionInfo.module) {
         viewController = [[ModuleViewController alloc] initWithModule:self.homeSectionInfo.module];
     }
-    else if (self.homeSectionInfo.topic && [self.homeSectionInfo.topic isKindOfClass:SRGTopic.class]) {
+    else if ([self.homeSectionInfo.topic isKindOfClass:SRGTopic.class]) {
         viewController = [[HomeTopicViewController alloc] initWithTopic:(SRGTopic *)self.homeSectionInfo.topic];
     }
     else {

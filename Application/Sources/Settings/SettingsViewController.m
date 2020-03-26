@@ -6,7 +6,7 @@
 
 #import "SettingsViewController.h"
 
-#import "PlayAppDelegate.h"
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
@@ -20,6 +20,7 @@
 #import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
+#import "UIWindow+PlaySRG.h"
 #import "WebViewController.h"
 
 #import <AppCenterDistribute/AppCenterDistribute.h>
@@ -37,9 +38,11 @@
 static NSString * const SettingsFeaturesButton = @"Button_Features";
 static NSString * const SettingsWhatsNewButton = @"Button_WhatsNew";
 static NSString * const SettingsTermsAndConditionsButton = @"Button_TermsAndConditions";
+static NSString * const SettingsHelpAndCopyrightButton = @"Button_HelpAndCopyright";
 static NSString * const SettingsDataProtectionButton = @"Button_DataProtection";
-static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
+static NSString * const SettingsFeedbackButton = @"Button_Feedback";
 static NSString * const SettingsSourceCodeButton = @"Button_SourceCode";
+static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
 static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersion";
 
 // Autoplay group
@@ -97,6 +100,16 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     
     [self updateSettingsVisibility];
     
+    if (self.navigationController.viewControllers.firstObject == self) {
+        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close-22"]
+                                                                 landscapeImagePhone:nil
+                                                                               style:UIBarButtonItemStyleDone
+                                                                              target:self
+                                                                              action:@selector(close:)];
+        closeBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on settings view");
+        self.navigationItem.leftBarButtonItem = closeBarButtonItem;
+    }
+    
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(settingDidChange:)
                                                name:kIASKAppSettingChanged
@@ -119,13 +132,143 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                                              object:SRGUserData.currentUserData];
 }
 
+#pragma mark Helpers
+
+- (void)clearWebCache
+{
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    
+    YYImageCache *cache = YYWebImageManager.sharedManager.cache;
+    [cache.memoryCache removeAllObjects];
+    [cache.diskCache removeAllObjects];
+}
+
+- (void)updateSettingsVisibility
+{
+    NSMutableArray *hiddenKeys = [NSMutableArray array];
+    
+#if !defined(DEBUG) && !defined(NIGHTLY) && !defined(BETA)
+    [hiddenKeys addObject:SettingsAdvancedFeaturesGroup];
+    [hiddenKeys addObject:SettingsServerSettingsButton];
+    [hiddenKeys addObject:SettingsUserLocationSettingsButton];
+    [hiddenKeys addObject:PlaySRGSettingPresenterModeEnabled];
+    [hiddenKeys addObject:PlaySRGSettingStandaloneEnabled];
+    [hiddenKeys addObject:PlaySRGSettingOriginalImagesOnlyEnabled];
+    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
+    [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
+    [hiddenKeys addObject:SettingsSystemSettingsButton];
+    [hiddenKeys addObject:SettingsResetGroup];
+    [hiddenKeys addObject:SettingsClearWebCacheButton];
+    [hiddenKeys addObject:SettingsClearVectorImageCacheButton];
+    [hiddenKeys addObject:SettingsClearAllContentsButton];
+    
+    [hiddenKeys addObject:SettingsDeveloperGroup];
+    [hiddenKeys addObject:SettingsFLEXButton];
+#else
+    if (! MSDistribute.isEnabled) {
+        [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
+    }
+    
+    if (! PushService.sharedService.enabled) {
+        [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
+    }
+#endif
+    
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    if (! applicationConfiguration.continuousPlaybackAvailable) {
+        [hiddenKeys addObject:SettingsAutoplayGroup];
+        [hiddenKeys addObject:PlaySRGSettingAutoplayEnabled];
+    }
+    
+    if (applicationConfiguration.subtitleAvailabilityHidden) {
+        [hiddenKeys addObject:PlaySRGSettingSubtitleAvailabilityDisplayed];
+    }
+    
+    if (applicationConfiguration.audioDescriptionAvailabilityHidden) {
+        [hiddenKeys addObject:PlaySRGSettingAudioDescriptionAvailabilityDisplayed];
+    }
+    
+    if (applicationConfiguration.subtitleAvailabilityHidden && applicationConfiguration.audioDescriptionAvailabilityHidden) {
+        [hiddenKeys addObject:SettingsDisplayGroup];
+    }
+    
+    if (Onboarding.onboardings.count == 0) {
+        [hiddenKeys addObject:SettingsFeaturesButton];
+    }
+    
+    if (! applicationConfiguration.impressumURL) {
+        [hiddenKeys addObject:SettingsHelpAndCopyrightButton];
+    }
+    
+    if (! applicationConfiguration.termsAndConditionsURL) {
+        [hiddenKeys addObject:SettingsTermsAndConditionsButton];
+    }
+    
+    if (! applicationConfiguration.dataProtectionURL) {
+        [hiddenKeys addObject:SettingsDataProtectionButton];
+    }
+    
+    if (! applicationConfiguration.feedbackURL) {
+        [hiddenKeys addObject:SettingsFeedbackButton];
+    }
+    
+    if (! applicationConfiguration.sourceCodeURL) {
+        [hiddenKeys addObject:SettingsSourceCodeButton];
+    }
+    
+    if (! applicationConfiguration.betaTestingURL) {
+        [hiddenKeys addObject:SettingsBetaTestingButton];
+    }
+    
+    self.hiddenKeys = hiddenKeys.copy;
+}
+
+#pragma mark What's new
+
+/**
+ *  Load what's new information, calling the completion handler on completion. The caller is responsible of displaying the
+ *  view controller received in case of success.
+ */
+- (void)loadWhatsNewWithCompletionHandler:(void (^)(UIViewController * _Nullable, NSError * _Nullable))completionHandler
+{
+    NSURL *whatsNewURL = ApplicationConfiguration.sharedApplicationConfiguration.whatsNewURL;
+    [[SRGRequest objectRequestWithURLRequest:[NSURLRequest requestWithURL:whatsNewURL] session:NSURLSession.sharedSession parser:^id _Nullable(NSData * _Nonnull data, NSError * _Nullable __autoreleasing * _Nullable pError) {
+        // FIXME: Ugly. Since we are using Pastebin, the missing html extension makes the page load incorrectly. We should:
+        //   1) Replace Pastebin
+        //   2) Load the what's new URL in the WebViewController directly
+        NSString *temporaryFileName = [NSUUID.UUID.UUIDString stringByAppendingPathExtension:@"html"];
+        NSString *temporaryFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:temporaryFileName];
+        NSURL *temporaryFileURL = [NSURL fileURLWithPath:temporaryFilePath];
+        [data writeToURL:temporaryFileURL atomically:YES];
+        
+        NSString *shortVersionString = [[NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] componentsSeparatedByString:@"-"].firstObject;
+        NSURLComponents *components = [[NSURLComponents alloc] initWithURL:temporaryFileURL resolvingAgainstBaseURL:NO];
+        components.queryItems = @[ [[NSURLQueryItem alloc] initWithName:@"build" value:[NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleVersion"]],
+                                   [[NSURLQueryItem alloc] initWithName:@"version" value:shortVersionString],
+                                   [[NSURLQueryItem alloc] initWithName:@"ios" value:UIDevice.currentDevice.systemVersion] ];
+        
+        return components.URL;
+    } completionBlock:^(NSURL * _Nullable URL, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            completionHandler(nil, error);
+            return;
+        }
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
+        webViewController.analyticsPageLevels = @[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ];
+        webViewController.analyticsPageTitle = AnalyticsPageTitleWhatsNew;
+        
+        completionHandler(webViewController, nil);
+    }] resume];
+}
+
 #pragma mark IASKSettingsDelegate protocol
 
 - (void)settingsViewController:(IASKAppSettingsViewController *)sender buttonTappedForSpecifier:(IASKSpecifier *)specifier
 {
     if ([specifier.key isEqualToString:SettingsWhatsNewButton]) {
-        PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
-        [appDelegate loadWhatsNewWithCompletionHandler:^(UIViewController * _Nullable viewController, NSError * _Nullable error) {
+        [self loadWhatsNewWithCompletionHandler:^(UIViewController * _Nullable viewController, NSError * _Nullable error) {
             if (error) {
                 [Banner showError:error inViewController:self];
                 return;
@@ -135,14 +278,22 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             [self.navigationController pushViewController:viewController animated:YES];
         }];
     }
+    else if ([specifier.key isEqualToString:SettingsHelpAndCopyrightButton]) {
+        NSURL *helpAndCopyrightURL = ApplicationConfiguration.sharedApplicationConfiguration.impressumURL;
+        NSAssert(helpAndCopyrightURL, @"Button must not be displayed if no Impressum URL has been specified");
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:helpAndCopyrightURL];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
+        webViewController.title = PlaySRGSettingsLocalizedString(@"Help and copyright", @"Title displayed at the top of the help and copyright view");
+        [self.navigationController pushViewController:webViewController animated:YES];
+    }
     else if ([specifier.key isEqualToString:SettingsTermsAndConditionsButton]) {
         NSURL *termsAndConditionsURL = ApplicationConfiguration.sharedApplicationConfiguration.termsAndConditionsURL;
         NSAssert(termsAndConditionsURL, @"Button must not be displayed if no Terms and conditions URL has been specified");
         
         NSURLRequest *request = [NSURLRequest requestWithURL:termsAndConditionsURL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeSystem];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
         webViewController.title = PlaySRGSettingsLocalizedString(@"Terms and conditions", @"Title displayed at the top of the Terms and conditions view");
-        webViewController.tracked = NO;            // The website we display is already tracked.
         [self.navigationController pushViewController:webViewController animated:YES];
     }
     else if ([specifier.key isEqualToString:SettingsDataProtectionButton]) {
@@ -150,22 +301,56 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSAssert(dataProtectionURL, @"Button must not be displayed if no data protection URL has been specified");
         
         NSURLRequest *request = [NSURLRequest requestWithURL:dataProtectionURL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil analyticsPageType:AnalyticsPageTypeSystem];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
         webViewController.title = PlaySRGSettingsLocalizedString(@"Data protection", @"Title displayed at the top of the data protection view");
-        webViewController.tracked = NO;            // The website we display is already tracked.
         [self.navigationController pushViewController:webViewController animated:YES];
     }
-    else if ([specifier.key isEqualToString:SettingsBetaTestingButton]) {
-        NSURL *betaTestingURL = ApplicationConfiguration.sharedApplicationConfiguration.betaTestingURL;
-        NSAssert(betaTestingURL, @"Button must not be displayed if no beta testing URL has been specified");
+    else if ([specifier.key isEqualToString:SettingsFeedbackButton]) {
+        NSURL *feedbackURL = ApplicationConfiguration.sharedApplicationConfiguration.feedbackURL;
+        NSAssert(feedbackURL, @"Button must not be displayed if no feedback URL has been specified");
         
-        [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:nil];
+        NSMutableArray *queryItems = [NSMutableArray array];
+        [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform" value:@"iOS"]];
+        
+        NSString *appVersion = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        [queryItems addObject:[NSURLQueryItem queryItemWithName:@"version" value:appVersion]];
+        
+        BOOL isPad = UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad;
+        [queryItems addObject:[NSURLQueryItem queryItemWithName:@"type" value:isPad ? @"tablet" : @"phone"]];
+        [queryItems addObject:[NSURLQueryItem queryItemWithName:@"model" value:UIDevice.currentDevice.model]];
+        
+        NSString *tagCommanderUid = [NSUserDefaults.standardUserDefaults stringForKey:@"tc_unique_id"];
+        if (tagCommanderUid) {
+            [queryItems addObject:[NSURLQueryItem queryItemWithName:@"cid" value:tagCommanderUid]];
+        }
+        
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:feedbackURL resolvingAgainstBaseURL:NO];
+        URLComponents.queryItems = queryItems.copy;
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:URLComponents.URL];
+        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:^(WKWebView *webView) {
+            webView.scrollView.scrollEnabled = NO;
+        } decisionHandler:nil];
+        webViewController.title = PlaySRGSettingsLocalizedString(@"Your feedback", @"Title displayed at the top of the feedback view");
+        webViewController.analyticsPageLevels = @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
+        webViewController.analyticsPageTitle = AnalyticsPageTitleFeedback;
+        [self.navigationController pushViewController:webViewController animated:YES];
     }
     else if ([specifier.key isEqualToString:SettingsSourceCodeButton]) {
         NSURL *sourceCodeURL = ApplicationConfiguration.sharedApplicationConfiguration.sourceCodeURL;
         NSAssert(sourceCodeURL, @"Button must not be displayed if no source code URL has been specified");
         
-        [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:nil];
+        [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:^(BOOL success) {
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleSourceCode levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
+        }];
+    }
+    else if ([specifier.key isEqualToString:SettingsBetaTestingButton]) {
+        NSURL *betaTestingURL = ApplicationConfiguration.sharedApplicationConfiguration.betaTestingURL;
+        NSAssert(betaTestingURL, @"Button must not be displayed if no beta testing URL has been specified");
+        
+        [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:^(BOOL success) {
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleBetaTesting levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
+        }];
     }
     else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {
         // Clear internal App Center timestamp to force a new update request
@@ -177,8 +362,8 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSURL *appCenterURL = (appCenterURLString.length > 0) ? [NSURL URLWithString:appCenterURLString] : nil;
         if (appCenterURL) {
             SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:appCenterURL];
-            UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
-            [rootViewController presentViewController:safariViewController animated:YES completion:nil];
+            UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
+            [topViewController presentViewController:safariViewController animated:YES completion:nil];
         }
     }
     else if ([specifier.key isEqualToString:SettingsSubscribeToAllShowsButton]) {
@@ -272,7 +457,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
 }
 
-- (CGFloat)tableView:(UITableView*)tableView heightForSpecifier:(IASKSpecifier *)specifier
+- (CGFloat)tableView:(UITableView *)tableView heightForSpecifier:(IASKSpecifier *)specifier
 {
     if ([specifier.key isEqualToString:SettingsApplicationVersionCell]) {
         return 44.f;
@@ -282,7 +467,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
 }
 
-- (UITableViewCell*)tableView:(UITableView*)tableView cellForSpecifier:(IASKSpecifier *)specifier
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForSpecifier:(IASKSpecifier *)specifier
 {
     if ([specifier.key isEqualToString:SettingsApplicationVersionCell]) {
         static NSString * const kApplicationVersionCellIdentifier = @"Cell_ApplicationVersion";
@@ -300,100 +485,36 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
 }
 
-#pragma mark Helpers
-
-- (void)clearWebCache
-{
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    
-    YYImageCache *cache = YYWebImageManager.sharedManager.cache;
-    [cache.memoryCache removeAllObjects];
-    [cache.diskCache removeAllObjects];
-}
-
-- (void)updateSettingsVisibility
-{
-    NSMutableArray *hiddenKeys = [NSMutableArray array];
-    
-#if !defined(DEBUG) && !defined(NIGHTLY) && !defined(BETA)
-    [hiddenKeys addObject:SettingsAdvancedFeaturesGroup];
-    [hiddenKeys addObject:SettingsServerSettingsButton];
-    [hiddenKeys addObject:SettingsUserLocationSettingsButton];
-    [hiddenKeys addObject:PlaySRGSettingPresenterModeEnabled];
-    [hiddenKeys addObject:PlaySRGSettingStandaloneEnabled];
-    [hiddenKeys addObject:PlaySRGSettingOriginalImagesOnlyEnabled];
-    [hiddenKeys addObject:PlaySRGSettingAlternateRadioHomepageDesignEnabled];
-    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
-    [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
-    [hiddenKeys addObject:SettingsSystemSettingsButton];
-    [hiddenKeys addObject:SettingsResetGroup];
-    [hiddenKeys addObject:SettingsClearWebCacheButton];
-    [hiddenKeys addObject:SettingsClearVectorImageCacheButton];
-    [hiddenKeys addObject:SettingsClearAllContentsButton];
-    
-    [hiddenKeys addObject:SettingsDeveloperGroup];
-    [hiddenKeys addObject:SettingsFLEXButton];
-#else
-    if (! MSDistribute.isEnabled) {
-        [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
-    }
-    
-    if (! PushService.sharedService.enabled) {
-        [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
-    }
-#endif
-    
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    if (! applicationConfiguration.continuousPlaybackAvailable) {
-        [hiddenKeys addObject:SettingsAutoplayGroup];
-        [hiddenKeys addObject:PlaySRGSettingAutoplayEnabled];
-    }
-    
-    if (applicationConfiguration.subtitleAvailabilityHidden) {
-        [hiddenKeys addObject:PlaySRGSettingSubtitleAvailabilityDisplayed];
-    }
-    
-    if (applicationConfiguration.audioDescriptionAvailabilityHidden) {
-        [hiddenKeys addObject:PlaySRGSettingAudioDescriptionAvailabilityDisplayed];
-    }
-    
-    if (applicationConfiguration.subtitleAvailabilityHidden && applicationConfiguration.audioDescriptionAvailabilityHidden) {
-        [hiddenKeys addObject:SettingsDisplayGroup];
-    }
-    
-    if (Onboarding.onboardings.count == 0) {
-        [hiddenKeys addObject:SettingsFeaturesButton];
-    }
-    
-    if (! applicationConfiguration.termsAndConditionsURL) {
-        [hiddenKeys addObject:SettingsTermsAndConditionsButton];
-    }
-    
-    if (! applicationConfiguration.dataProtectionURL) {
-        [hiddenKeys addObject:SettingsDataProtectionButton];
-    }
-    
-    if (! applicationConfiguration.betaTestingURL) {
-        [hiddenKeys addObject:SettingsBetaTestingButton];
-    }
-    
-    if (! applicationConfiguration.sourceCodeURL) {
-        [hiddenKeys addObject:SettingsSourceCodeButton];
-    }
-    
-    self.hiddenKeys = hiddenKeys.copy;
-}
-
 #pragma mark SRGAnalyticsViewTracking protocol
 
-- (NSArray<NSString *> *)srg_pageViewLevels
+- (BOOL)srg_isTrackedAutomatically
 {
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeSystem) ];
+    return [self.file isEqualToString:@"Root"] || [self.file containsString:@"com.mono0926.LicensePlist"];
 }
 
 - (NSString *)srg_pageViewTitle
 {
-    return self.title;
+    if ([self.file isEqualToString:@"Root"]) {
+        return AnalyticsPageTitleSettings;
+    }
+    else if ([self.file isEqualToString:@"com.mono0926.LicensePlist"]) {
+        return AnalyticsPageTitleLicenses;
+    }
+    else {
+        return AnalyticsPageTitleLicense;
+    }
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ];
+}
+
+#pragma mark Actions
+
+- (void)close:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark Notifications

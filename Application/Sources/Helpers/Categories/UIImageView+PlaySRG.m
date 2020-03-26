@@ -48,7 +48,8 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
     return imageView;
 }
 
-+ (NSArray<UIImage *> *)animatedImageNamed:(NSString *)name withTintColor:(UIColor *)tintColor {
++ (NSArray<UIImage *> *)animatedImageNamed:(NSString *)name withTintColor:(UIColor *)tintColor
+{
     NSMutableArray<UIImage *> *images = [NSMutableArray array];
     
     NSInteger count = 0;

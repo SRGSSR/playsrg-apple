@@ -24,7 +24,7 @@
 {
     [super awakeFromNib];
     
-    self.titleLabel.textColor = UIColor.play_lightGrayColor;
+    self.titleLabel.textColor = UIColor.whiteColor;
 }
 
 #pragma mark Getters and setters

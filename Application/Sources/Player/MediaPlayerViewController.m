@@ -13,14 +13,14 @@
 #import "Banner.h"
 #import "Download.h"
 #import "Favorites.h"
+#import "ForegroundTimer.h"
 #import "GoogleCast.h"
 #import "History.h"
-#import "LiveAccessView.h"
+#import "Layout.h"
 #import "ModalTransition.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
-#import "NSTimer+PlaySRG.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlayAppDelegate.h"
 #import "PlayApplication.h"
@@ -55,6 +55,9 @@
 #import <SRGAnalytics_DataProvider/SRGAnalytics_DataProvider.h>
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGUserData/SRGUserData.h>
+
+NSString * const MediaPlayerViewControllerVisibilityDidChangeNotification = @"MediaPlayerViewControllerVisibilityDidChangeNotification";
+NSString * const MediaPlayerViewControllerVisibleKey = @"MediaPlayerViewControllerVisible";
 
 // Store the most recently used landscape orientation, also between player instantiations (so that the user last used
 // orientation is preferred)
@@ -138,12 +141,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *nextProgramLabel;
 @property (nonatomic, weak) IBOutlet UILabel *channelLabel;
 
-@property (nonatomic, weak) IBOutlet UIView *showTopLineSpacerView;
+@property (nonatomic, weak) IBOutlet UIView *showWrapperView;
 @property (nonatomic, weak) IBOutlet UIStackView *showStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *showThumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *showLabel;
+@property (nonatomic, weak) IBOutlet UILabel *numberOfEpisodesLabel;
 @property (nonatomic, weak) IBOutlet UIButton *favoriteButton;
-@property (nonatomic, weak) IBOutlet UIView *showBottomLineSpacerView;
 
 @property (nonatomic, weak) IBOutlet UIView *radioHomeView;
 @property (nonatomic, weak) IBOutlet UIButton *radioHomeButton;
@@ -152,8 +155,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIView *relatedContentsSpacerView;
 @property (nonatomic, weak) IBOutlet UILabel *relatedContentsTitleLabel;
 @property (nonatomic, weak) IBOutlet UIStackView *relatedContentsStackView;
-
-@property (nonatomic, weak) IBOutlet LiveAccessView *liveAccessView;
 
 // Switching to and from full-screen is made by adjusting the priority of a constraint at the bottom of the player view
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerBottomConstraint;
@@ -179,7 +180,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 @property (nonatomic) ModalTransition *interactiveTransition;
 
-@property (nonatomic) NSTimer *userInterfaceUpdateTimer;
+@property (nonatomic) ForegroundTimer *userInterfaceUpdateTimer;
 
 @property (nonatomic) BOOL shouldDisplayBackgroundVideoPlaybackPrompt;
 @property (nonatomic) BOOL displayBackgroundVideoPlaybackPrompt;
@@ -259,7 +260,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 #pragma mark Getters and setters
 
-- (void)setUserInterfaceUpdateTimer:(NSTimer *)userInterfaceUpdateTimer
+- (void)setUserInterfaceUpdateTimer:(ForegroundTimer *)userInterfaceUpdateTimer
 {
     [_userInterfaceUpdateTimer invalidate];
     _userInterfaceUpdateTimer = userInterfaceUpdateTimer;
@@ -318,6 +319,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.view.backgroundColor = UIColor.play_blackColor;
     
+    self.showWrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.showWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.showWrapperView.layer.masksToBounds = YES;
+    
     self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     
     self.pullDownGestureRecognizer.delegate = self;
@@ -327,8 +332,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     // Start with an empty summary label, so that height calculations correctly detect when a summary has been assigned
     self.summaryLabel.text = nil;
     
-    [self.webFirstLabel play_setWebFirstBadge];
-    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
     self.multiAudioImageView.tintColor = UIColor.play_whiteBadgeColor;
     
@@ -340,8 +343,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.playerBottomConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
     self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelNormalPriority;
     
-    self.livestreamButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
-    self.livestreamButton.layer.cornerRadius = 4.f;
+    self.livestreamButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.livestreamButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.livestreamButton.layer.masksToBounds = YES;
     [self.livestreamButton setTitle:NSLocalizedString(@"Choose a regional radio", @"Title displayed on the regional radio selection button") forState:UIControlStateNormal];
     
@@ -352,8 +355,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.logoImageView.isAccessibilityElement = YES;
     self.logoImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
     
-    self.radioHomeButton.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
-    self.radioHomeButton.layer.cornerRadius = 4.f;
+    self.radioHomeButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.radioHomeButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];
     
@@ -362,8 +365,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
         BOOL isLandscape = UIDeviceOrientationIsValidInterfaceOrientation(deviceOrientation) ? UIDeviceOrientationIsLandscape(deviceOrientation) : UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation);
-        self.statusBarHidden = isLandscape;
         
+        self.statusBarHidden = isLandscape;
         self.transitioning = isLandscape;
         [self.letterboxView setFullScreen:isLandscape animated:NO];
         self.transitioning = NO;
@@ -390,8 +393,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
     }
     
-    self.liveAccessView.letterboxController = self.letterboxController;
-    
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(mediaMetadataDidChange:)
                                                name:SRGLetterboxMetadataDidChangeNotification
@@ -413,10 +414,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                                name:UIApplicationDidEnterBackgroundNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(applicationWillEnterForeground:)
-                                               name:UIApplicationWillEnterForegroundNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationDidBecomeActive:)
                                                name:UIApplicationDidBecomeActiveNotification
                                              object:nil];
@@ -436,13 +433,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusChanged
                                              object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(googleCastStateDidChange:)
-                                               name:kGCKCastStateDidChangeNotification
-                                             object:nil];
     
     @weakify(self)
-    self.userInterfaceUpdateTimer = [NSTimer play_timerWithTimeInterval:0.2 repeats:YES block:^(NSTimer * _Nonnull timer) {
+    self.userInterfaceUpdateTimer = [ForegroundTimer timerWithTimeInterval:1. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
         @strongify(self)
         [self updateGoogleCastButton];
         
@@ -458,8 +451,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     // Force UI visibility for audios, start with no controls for videos
     SRGMedia *media = self.originalLetterboxController.media ?: self.originalMedia;
     [self setUserInterfaceBehaviorForMedia:media animated:NO];
-    
-    [SRGLetterboxService.sharedService enableWithController:self.letterboxController pictureInPictureDelegate:self];
     
     self.closeButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on player view");
     self.shareButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
@@ -478,11 +469,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     [super viewWillAppear:animated];
     
-    if (self.letterboxController.mediaComposition) {
-        // Do not send additional page view events when the interactive transition has been cancelled
-        if (! self.transitionCoordinator.cancelled) {
-            [self srg_trackPageView];
-        }
+    if (self.play_isMovingToParentViewController) {
+        [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
+                                                          object:self
+                                                        userInfo:@{ MediaPlayerViewControllerVisibleKey : @YES }];
+        
+        [SRGLetterboxService.sharedService enableWithController:self.letterboxController pictureInPictureDelegate:self];
     }
     
     self.userActivity = [[NSUserActivity alloc] initWithActivityType:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".playing"]];
@@ -507,23 +499,25 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.letterboxController cancelContinuousPlayback];
     
     if ([self play_isMovingFromParentViewController]) {
-        if (UIDevice.play_deviceType == DeviceTypePhoneOther) {
-            [UIDevice.currentDevice setValue:@(UIInterfaceOrientationPortrait) forKey:@keypath(UIDevice.new, orientation)];
-        }
-        
-        if (self.letterboxController.media.mediaType != SRGMediaTypeAudio && ! self.letterboxController.pictureInPictureActive) {
+        if (self.letterboxController.media.mediaType != SRGMediaTypeAudio
+                && ! self.letterboxController.pictureInPictureActive
+                && ! AVAudioSession.srg_isAirPlayActive
+                && ! ApplicationSettingBackgroundVideoPlaybackEnabled()) {
             [SRGLetterboxService.sharedService disableForController:self.letterboxController];
+            [StoreReview requestReview];
         }
         
         [self.livestreamMediasRequest cancel];
+        
+        [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
+                                                          object:self
+                                                        userInfo:@{ MediaPlayerViewControllerVisibleKey : @NO }];
     }
     else if (self.letterboxController.media.mediaType == SRGMediaTypeVideo) {
         [self.letterboxController pause];
     }
     
     self.userActivity = nil;
-    
-    self.fromPushNotification = NO;
 }
 
 - (void)viewWillLayoutSubviews
@@ -538,6 +532,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
     self.transitioning = YES;
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
@@ -555,7 +551,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 [self.letterboxView setUserInterfaceHidden:YES animated:NO /* will be animated with the view transition */];
             }
         }
-        [self updateLiveAccessButtonsVisibilityForFullScreen:self.letterboxView.fullScreen];
         [self updatePlayerViewAspectRatioWithSize:size];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
@@ -577,10 +572,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (BOOL)accessibilityPerformEscape
 {
-    [self dismissViewControllerAnimated:YES completion:^{
-        [Banner hideAll];           // Avoids view retain, preventing playback from stopping.
-        [StoreReview requestReview];
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
     return YES;
 }
 
@@ -624,20 +616,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self synchronizeUserActivity:userActivity];
     });
-}
-
-- (void)userActivityWasContinued:(NSUserActivity *)userActivity
-{
-    if ([userActivity isEqual:self.userActivity]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.letterboxController pause];
-            [Banner showWithStyle:BannerStyleInfo
-                          message:NSLocalizedString(@"Playback has resumed on another device.", @"Notification message when a media is paused due to Handoff activity.")
-                            image:nil
-                           sticky:NO
-                 inViewController:self];
-        });
-    }
 }
 
 #pragma mark Handoff
@@ -687,10 +665,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self updateAppearanceWithDetailsExpanded:self.detailsExpanded];
     [self reloadDetailsWithMedia:media mainChapterMedia:mainChapterMedia];
     
-    UIImage *closeButtonImage = (media.mediaType == SRGMediaTypeAudio) ? [UIImage imageNamed:@"arrow_down-48"] : [UIImage imageNamed:@"close-48"];
+    UIImage *closeButtonImage = (media.mediaType == SRGMediaTypeAudio || AVAudioSession.srg_isAirPlayActive || ApplicationSettingBackgroundVideoPlaybackEnabled()) ? [UIImage imageNamed:@"arrow_down-48"] : [UIImage imageNamed:@"close-48"];
     [self.closeButton setImage:closeButtonImage forState:UIControlStateNormal];
     
-    self.relatedContentsTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.relatedContentsTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
     self.relatedContentsTitleLabel.text = NSLocalizedString(@"More on this subject", @"Title of the related content player section");
     
     // Cleanup related content views first
@@ -722,8 +700,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     [self updateWatchLaterStatus];
-    
-    [self updateliveAccessViewContentForMediaType:media.mediaType force:NO];
 }
 
 // Details panel reloading
@@ -807,8 +783,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self.channelInfoStackView play_setHidden:YES];
         
         self.dateLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-        self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
-        self.dateLabel.accessibilityLabel = PlayAccessibilityRelativeDateAndTimeFromDate(media.date);
+        if (media.date) {
+            self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
+            self.dateLabel.accessibilityLabel = PlayAccessibilityRelativeDateAndTimeFromDate(media.date);
+        }
+        else {
+            self.dateLabel.text = nil;
+            self.dateLabel.accessibilityLabel = nil;
+        }
         
         self.viewCountLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         
@@ -867,13 +849,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.propertiesTopLineSpacerView.hidden = YES;
     }
     
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    
     [self updateRadioHomeButton];
     self.radioHomeButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     
     UIImage *youthProtectionColorImage = YouthProtectionImageForColor(media.youthProtectionColor);
     if (youthProtectionColorImage) {
         self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
-        self.youthProtectionColorLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.youthProtectionColorLabel.font = [UIFont srg_italicFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         self.youthProtectionColorLabel.text = SRGMessageForYouthProtectionColor(media.youthProtectionColor);
         self.youthProtectionColorSpacerView.hidden = NO;
         [self.youthProtectionColorStackView play_setHidden:NO];
@@ -909,16 +894,23 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
         self.showLabel.text = show.title;
         
+        self.numberOfEpisodesLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        
+        NSInteger numberOfEpisodes = show.numberOfEpisodes;
+        if (numberOfEpisodes != 0) {
+            NSString *numberOfEpisodesString = [NSNumberFormatter localizedStringFromNumber:@(numberOfEpisodes) numberStyle:NSNumberFormatterDecimalStyle];
+            self.numberOfEpisodesLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ episodes", @"The amount of episodes available for a show"), numberOfEpisodesString];
+        }
+        else {
+            self.numberOfEpisodesLabel.text = nil;
+        }
+        
         [self updateFavoriteStatusForShow:show];
         
-        self.showTopLineSpacerView.hidden = NO;
         [self.showStackView play_setHidden:NO];
-        self.showBottomLineSpacerView.hidden = NO;
     }
     else {
-        self.showTopLineSpacerView.hidden = YES;
         [self.showStackView play_setHidden:YES];
-        self.showBottomLineSpacerView.hidden = YES;
     }
 }
 
@@ -938,7 +930,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     self.pullDownGestureRecognizer.enabled = ! fullScreen;
     self.playerBottomConstraint.priority = fullScreen ? MediaPlayerBottomConstraintFullScreenPriority : MediaPlayerBottomConstraintNormalPriority;
-    [self updateLiveAccessButtonsVisibilityForFullScreen:fullScreen];
     
     [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -1168,37 +1159,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.favoriteButton.accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite show label when in favorites, in the player view") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite show label when not in favorites, in the player view");
 }
 
-- (void)updateliveAccessViewContentForMediaType:(SRGMediaType)mediaType force:(BOOL)force
-{
-    if (self.liveAccessView.mediaType == mediaType && ! force) {
-        [self.liveAccessView updateLiveAccessButtonsSelection];
-    }
-    else {
-        @weakify(self)
-        [self.liveAccessView refreshWithMediaType:mediaType withCompletionBlock:^(NSError * _Nullable error) {
-            @strongify(self)
-            [self updateLiveAccessButtonsVisibilityForFullScreen:self.letterboxView.fullScreen];
-        }];
-    }
-    
-    [self updateLiveAccessButtonsVisibilityForFullScreen:self.letterboxView.fullScreen];
-}
-
-- (void)updateLiveAccessButtonsVisibilityForFullScreen:(BOOL)fullScreen
-{
-    BOOL hidden = (self.liveAccessView.medias.count == 0)
-        || fullScreen
-        || ((self.liveAccessView.medias.count == 1) && [self.liveAccessView.medias.firstObject isEqual:self.letterboxController.media]);
-    self.liveAccessView.hidden = hidden;
-    
-    CGFloat height = hidden ? 0.f : LiveAccessView.height;
-    UIEdgeInsets insets = UIEdgeInsetsMake(0.f, 0.f, height, 0.f);
-    self.scrollView.contentInset = insets;
-    self.scrollView.scrollIndicatorInsets = insets;
-    
-    [self.view layoutIfNeeded];
-}
-
 - (void)updateGoogleCastButton
 {
     SRGBlockingReason blockingReason = [self.letterboxController.media blockingReasonAtDate:NSDate.date];
@@ -1260,6 +1220,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     RadioChannel *radioChannel = [self radioChannel];
     self.radioHomeView.hidden = (radioChannel == nil);
     self.radioHomeButtonImageView.image = RadioChannelLogo22Image(radioChannel);
+    self.radioHomeButton.titleEdgeInsets = UIEdgeInsetsMake(0.f, self.radioHomeButtonImageView.image.size.width + 2 * 10.f, 0.f, 10.f);
     
     // Avoid ugly animation when setting the title, see https://stackoverflow.com/a/22101732/760435
     [UIView performWithoutAnimation:^{
@@ -1270,39 +1231,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 #pragma mark SRGAnalyticsViewTracking protocol
 
-- (BOOL)srg_isTrackedAutomatically
-{
-    // Tracking requires media composition information. The view event will be sent manually when appropriate
-    return NO;
-}
-
 - (NSString *)srg_pageViewTitle
 {
-    // Use the full-length when available
-    SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
-    return media.title;
+    return AnalyticsPageTitlePlayer;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    NSMutableArray<NSString *> *levels = [NSMutableArray array];
-    
-    // Use the full-length when available
-    SRGMedia *media = self.letterboxController.fullLengthMedia ?: self.letterboxController.media;
-    if (media.mediaType == SRGMediaTypeAudio) {
-        [levels addObject:AnalyticsNameForPageType(AnalyticsPageTypeRadio)];
-    }
-    else {
-        [levels addObject:AnalyticsNameForPageType(AnalyticsPageTypeTV)];
-    }
-    [levels addObject:@"detail"];
-    
-    NSString *showTitle = self.letterboxController.mediaComposition.show.title;
-    if (showTitle) {
-        [levels addObject:showTitle];
-    }
-    
-    return levels.copy;
+    return @[ AnalyticsPageLevelPlay ];
 }
 
 - (BOOL)srg_isOpenedFromPushNotification
@@ -1718,15 +1654,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
     RadioChannel *radioChannel = [self radioChannel];
-    if (radioChannel) {
-        appDelegate.sideMenuController.selectedMenuItemInfo = [MenuItemInfo menuItemInfoWithRadioChannel:radioChannel];
-    }
-    else {
-        appDelegate.sideMenuController.selectedMenuItemInfo = [MenuItemInfo menuItemInfoWithMenuItem:MenuItemTVOverview];
-    }
+    
+    ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
+    [appDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     
     ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
-    [appDelegate.sideMenuController pushViewController:showViewController animated:NO];
+    [appDelegate.rootTabBarController pushViewController:showViewController animated:NO];
     [appDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
 }
 
@@ -1737,8 +1670,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         return;
     }
     
+    ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
+    
     PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
-    appDelegate.sideMenuController.selectedMenuItemInfo = [MenuItemInfo menuItemInfoWithRadioChannel:radioChannel];
+    [appDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     [appDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
 }
 
@@ -1764,8 +1699,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             else {
                 [self.letterboxController prepareToPlayMedia:media atPosition:nil withPreferredSettings:ApplicationSettingPlaybackSettings() completionHandler:nil];
             }
-            
-            [self updateliveAccessViewContentForMediaType:media.mediaType force:YES];
         }]];
     }];
     
@@ -1781,10 +1714,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (IBAction)close:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:^{
-        [Banner hideAll]; // Avoids view retain, and video playback.
-        [StoreReview requestReview];
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark Gesture recognizers
@@ -1806,9 +1736,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 // Only stop tracking the interactive transition at the very end. The completion block is called
                 // whether the transition ended or was cancelled
                 self.interactiveTransition = nil;
-                
-                [Banner hideAll]; // Avoids view retain, and video playback.
-                [StoreReview requestReview];
             }];
             break;
         }
@@ -1880,13 +1807,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)mediaMetadataDidChange:(NSNotification *)notification
 {
-    // Store last audio livestream associated with the mini player for restoration when the application is restarted
     SRGMedia *media = notification.userInfo[SRGLetterboxMediaKey];
-    if (media.contentType == SRGContentTypeLivestream && media.mediaType == SRGMediaTypeAudio) {
-        [NSUserDefaults.standardUserDefaults setObject:media.URN forKey:PlaySRGSettingLastPlayedRadioLiveURN];
-        [NSUserDefaults.standardUserDefaults synchronize];
-    }
-    
     if (media) {
         [self.userActivity becomeCurrent];
     }
@@ -1908,20 +1829,19 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self setUserInterfaceBehaviorForMedia:media animated:YES];
     }
     
-    // Notify page view when the full-length changes.
-    SRGMediaComposition *previousMediaComposition = notification.userInfo[SRGLetterboxPreviousMediaCompositionKey];
-    SRGMediaComposition *mediaComposition = notification.userInfo[SRGLetterboxMediaCompositionKey];
-    
-    if ([self isViewVisible] && mediaComposition && ! [previousMediaComposition.fullLengthMedia isEqual:mediaComposition.fullLengthMedia]) {
-        [self srg_trackPageView];
-        self.fromPushNotification = NO;
-    }
+    [self updateGoogleCastButton];
 }
 
 - (void)playbackStateDidChange:(NSNotification *)notification
 {
     if (self.letterboxController.media.mediaType == SRGMediaTypeAudio && [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue] == SRGMediaPlayerPlaybackStatePlaying) {
-        self.closeButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Closes the player while continuing to play audio.", @"Player close button hint");
+        self.closeButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Closes the player and continue playing audio.", @"Player close button hint");
+    }
+    if (self.letterboxController.media.mediaType == SRGMediaTypeVideo && AVAudioSession.srg_isAirPlayActive && [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue] == SRGMediaPlayerPlaybackStatePlaying) {
+        self.closeButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Closes the player and continue playing video with AirPlay.", @"Player close button hint");
+    }
+    if (self.letterboxController.media.mediaType == SRGMediaTypeVideo && ApplicationSettingBackgroundVideoPlaybackEnabled() && [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue] == SRGMediaPlayerPlaybackStatePlaying) {
+        self.closeButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Closes the player and continue playing in the background.", @"Player close button hint");
     }
     else {
         self.closeButton.accessibilityHint = nil;
@@ -1961,14 +1881,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             // Don't prompt for backround playback if the device was simply locked
             self.displayBackgroundVideoPlaybackPrompt = ! UIDevice.play_isLocked;
         });
-    }
-}
-
-- (void)applicationWillEnterForeground:(NSNotification *)notification
-{
-    if (self.letterboxController.mediaComposition) {
-        [self srg_trackPageView];
-        self.fromPushNotification = NO;
     }
 }
 
@@ -2028,26 +1940,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
 {
     [self updateDetailsAppearance];
-}
-
-- (void)googleCastStateDidChange:(NSNotification *)notification
-{
-    GCKCastState castState = [notification.userInfo[kGCKNotificationKeyCastState] integerValue];
-    if (castState == GCKCastStateConnected) {
-        NSError *castError = nil;
-        if (GoogleCastIsPossible(self.letterboxController.mediaComposition, &castError)) {
-            // Dismiss the player in all cases. We don't want the player to be accessible anymore once Google Cast is
-            // connected.
-            UIViewController *presentingViewController = self.presentingViewController;
-            [self dismissViewControllerAnimated:YES completion:^{
-                [self.letterboxController pause];
-                [presentingViewController play_presentMediaPlayerFromLetterboxController:self.letterboxController withAirPlaySuggestions:NO fromPushNotification:self.fromPushNotification animated:YES completion:nil];
-            }];
-        }
-        else if (castError) {
-            [Banner showWithStyle:BannerStyleInfo message:castError.localizedDescription image:nil sticky:NO inViewController:self];
-        }
-    }
 }
 
 @end

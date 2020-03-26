@@ -7,9 +7,9 @@
 #import "HomeMediaCollectionHeaderView.h"
 
 #import "HomeTopicViewController.h"
+#import "Layout.h"
 #import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
-#import "SRGBaseTopic+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
@@ -53,16 +53,24 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    self.headerView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     
     self.headerView.hidden = YES;
     self.placeholderView.hidden = NO;
+    
+    self.headerView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.headerView.layer.masksToBounds = YES;
+    
+    self.placeholderImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.placeholderImageView.layer.masksToBounds = YES;
     
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMediaList)
                                                             withScale:ImageScaleMedium];
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    
+    self.titleLabel.textColor = UIColor.whiteColor;
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMediaList:)];
     [self.headerView addGestureRecognizer:tapGestureRecognizer];
@@ -141,23 +149,8 @@
     self.headerView.hidden = NO;
     self.placeholderView.hidden = YES;
     
-    UIColor *backgroundColor = UIColor.clearColor;
-    UIColor *titleTextColor = UIColor.whiteColor;
-    UIColor *thumbnailImageViewBackgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    if (self.homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        backgroundColor = self.homeSectionInfo.module.backgroundColor;
-        titleTextColor = self.homeSectionInfo.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
-        thumbnailImageViewBackgroundColor = self.homeSectionInfo.module.backgroundColor;
-    }
-    self.backgroundColor = backgroundColor;
-    
-    self.titleLabel.backgroundColor = backgroundColor;
-    self.titleLabel.textColor = titleTextColor;
-    
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = NSLocalizedString(@"All content", @"Title of the first cell of a media list on homepage.");
-    
-    self.thumbnailImageView.backgroundColor = thumbnailImageViewBackgroundColor;
     
     ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
     id<SRGImage> object = self.homeSectionInfo.module ?: self.homeSectionInfo.topic;

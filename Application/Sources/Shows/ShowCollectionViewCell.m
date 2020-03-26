@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "Banner.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
@@ -37,10 +38,10 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     
-    self.titleLabel.backgroundColor = backgroundColor;
+    self.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.layer.masksToBounds = YES;
     
     self.showView.hidden = YES;
     self.placeholderView.hidden = NO;

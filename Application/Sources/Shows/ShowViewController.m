@@ -7,10 +7,12 @@
 #import "ShowViewController.h"
 
 #import "ActivityItemSource.h"
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
-#import "MediaCollectionViewCell.h"
 #import "Favorites.h"
+#import "Layout.h"
+#import "MediaCollectionViewCell.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayAppDelegate.h"
 #import "ShowHeaderView.h"
@@ -44,11 +46,34 @@
 
 #pragma mark View lifecycle
 
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
+    
+    UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
+    
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
+    collectionView.backgroundColor = UIColor.clearColor;
+    collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    collectionView.alwaysBounceVertical = YES;
+    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:collectionView];
+    self.collectionView = collectionView;
+    
+    NSString *headerIdentifier = NSStringFromClass(ShowHeaderView.class);
+    UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
+    [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
+    
+    self.view = view;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = UIColor.play_blackColor;
     
     NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
     if (sharingURL) {
@@ -59,14 +84,6 @@
         shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
         self.navigationItem.rightBarButtonItems = @[ shareButtonItem ];
     }
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.collectionView.alwaysBounceVertical = YES;
-    
-    NSString *headerIdentifier = NSStringFromClass(ShowHeaderView.class);
-    UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
-    [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
     [self updateAppearanceForSize:self.view.frame.size];
     
@@ -103,6 +120,8 @@
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
         [self.collectionView.collectionViewLayout invalidateLayout];
         [self updateAppearanceForSize:size];
@@ -162,26 +181,6 @@
     [requestQueue addRequest:request resume:YES];
 }
 
-- (AnalyticsPageType)pageType
-{
-    if (self.show.transmission == SRGTransmissionRadio) {
-        return AnalyticsPageTypeRadio;
-    }
-    else if (self.show.transmission == SRGTransmissionOnline) {
-        return AnalyticsPageTypeOnline;
-    }
-    else {
-        return AnalyticsPageTypeTV;
-    }
-}
-
-- (NSString *)srg_pageViewTitle
-{
-    // Since we sometimes reset the view controller title for display purposes, we need to reliably return the show title
-    // as page title
-    return self.show.title;
-}
-
 #pragma mark Peek and pop
 
 - (NSArray<id<UIPreviewActionItem>> *)previewActionItems
@@ -194,7 +193,7 @@
         FavoritesToggleShow(self.show);
         
         // Use !isFavorite since favorite status has been reversed
-        AnalyticsTitle analyticsTitle = (! isFavorite) ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
+        AnalyticsTitle analyticsTitle = ! isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.source = AnalyticsSourcePeekMenu;
         labels.value = self.show.URN;
@@ -254,7 +253,7 @@
         else {
             UIApplication *application = UIApplication.sharedApplication;
             PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
-            [appDelegate.sideMenuController pushViewController:showViewController animated:YES];
+            [appDelegate.rootTabBarController pushViewController:showViewController animated:YES];
         }
     }];
     [previewActionItems addObject:openAction];
@@ -384,6 +383,19 @@
     if (broadcastInformationURL) {
         [UIApplication.sharedApplication play_openURL:broadcastInformationURL withCompletionHandler:nil];
     }
+}
+
+#pragma mark SRGAnalyticsViewTracking protocols
+
+- (NSString *)srg_pageViewTitle
+{
+    return self.show.title;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    NSString *level1 = (self.show.transmission == SRGTransmissionRadio) ? AnalyticsPageLevelAudio : AnalyticsPageLevelVideo;
+    return @[ AnalyticsPageLevelPlay, level1, AnalyticsPageLevelShow ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

@@ -6,12 +6,11 @@
 
 #import "PageViewController.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeTopicViewController : PageViewController <SRGAnalyticsViewTracking>
+@interface HomeTopicViewController : PageViewController
 
 - (instancetype)initWithTopic:(SRGTopic *)topic;
 

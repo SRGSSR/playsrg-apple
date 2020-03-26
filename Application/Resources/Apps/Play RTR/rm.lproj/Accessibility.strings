@@ -21,15 +21,23 @@
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Mussar tut \"%@\"";
 
-/* Accessibility label for the audio description badge */
+/* Accessibility label for a media cell with audio description
+   Accessibility label for the audio description badge */
 "Audio described" = "Audio descrit";
 
-/* Close button label on player view
-   Close button label on search view */
+/* Close button label
+   Close button label on player view
+   Close button label on settings view */
 "Close" = "Serrar";
 
 /* Player close button hint */
-"Closes the player while continuing to play audio." = "Fermai player entant che l'audio cuntinuescha.";
+"Closes the player and continue playing audio." = "Serrar il player e cuntinuar a tadlar l'audio.";
+
+/* Player close button hint */
+"Closes the player and continue playing in the background." = "Serrar il player e cuntinuar a tadlar l'audio davostiers.";
+
+/* Player close button hint */
+"Closes the player and continue playing video with AirPlay." = "Serrar il player e cuntinuar a guardar il video cun AirPlay.";
 
 /* Delete button label */
 "Delete" = "Stizzar";
@@ -61,20 +69,8 @@
 /* Accessibility hint associated with the account header */
 "Manages account information" = "Organisescha las infurmaziuns da l'account";
 
-/* Menu button label */
-"Menu" = "Menu";
-
-/* Announcement made when the left menu is closed */
-"Menu closed" = "Menu serrà";
-
-/* Announcement made when the left menu is opened */
-"Menu open" = "Menu avert";
-
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mes conto";
-
-/* Notifications button label */
-"Notifications" = "Notificaziuns";
 
 /* Mini player label */
 "Now playing: %@" = "Uss va: %@";
@@ -88,11 +84,17 @@
 /* Show cell hint */
 "Opens show details." = "Arva detagls da program.";
 
+/* Mini player action hint */
+"Opens the full screen player" = "Avra il player sin l'entir visur";
+
 /* Accessibility label for the multi audio badge */
 "Original version" = "Versiun originala";
 
-/* Livestream play action hint */
-"Plays livestream." = "Livestream va.";
+/* Pause button label */
+"Pause" = "Pausa";
+
+/* Play button label */
+"Play" = "Laschar ir";
 
 /* Media cell hint
    Mini player action hint */
@@ -120,17 +122,20 @@
 /* A download button label */
 "Retry download" = "Turnar da telechargiar";
 
-/* Search button label */
-"Search" = "Tschertga";
-
 /* Regional livestream selection hint */
 "Select regional radio" = "Selecziunai radio regiunal";
+
+/* Settings button label on home view */
+"Settings" = "Opziuns";
 
 /* Share button label on player view */
 "Share" = "Divida";
 
 /* Homepage header action hint */
 "Shows all contents." = "Mussar tuts cuntegns.";
+
+/* Stop button label */
+"Stop" = "Stop";
 
 /* A download button label */
 "Stop downloading" = "Interrumper il download";

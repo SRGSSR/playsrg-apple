@@ -9,10 +9,13 @@
 #import "NotificationTableViewCell.h"
 
 #import <DZNEmptyDataSet/DZNEmptyDataSet.h>
+#import <SRGAnalytics/SRGAnalytics.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NotificationsViewController : DataViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, NotificationTableViewCellDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface NotificationsViewController : DataViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, NotificationTableViewDeletionDelegate, SRGAnalyticsViewTracking, UITableViewDataSource, UITableViewDelegate>
+
++ (void)openNotification:(Notification *)notification fromViewController:(UIViewController *)viewController;
 
 @end
 

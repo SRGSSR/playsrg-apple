@@ -5,60 +5,57 @@
 //
 
 #import "ContentInsets.h"
+#import "Scrollable.h"
 
 #import <CoconutKit/CoconutKit.h>
+#import <SRGAnalytics/SRGAnalytics.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Page item to be associated with a view controller.
- */
-@interface PageItem : NSObject
-
-/**
- *  Create a page item with the specified information.
- */
-- (instancetype)initWithTitle:(NSString *)title image:(nullable UIImage *)image;
-
-/**
- *  Item title.
- */
-@property (nonatomic, copy, readonly) NSString *title;
-
-/**
- *  Item image.
- */
-@property (nonatomic, readonly, nullable) UIImage *image;
-
-@end
-
-/**
  *  Abstract container class to display pages of contents, between which the user can change using a swipe or a tab strip.
- *  Tabs can be customized by associating a `PageItem` with a view controller.
+ *  Tabs can be customized by associating a `UITabBarItem` with a view controller.
  *
- *  To use `PageViewController`, bind its `placeholderViews` property to a single view where pages will be displayed, 
- *  and the `tabStrip` property to a view with the `TabStrip` class.
+ *  To use `PageViewController`, bind its `placeholderViews` property to a single view where pages will be displayed.
  */
-@interface PageViewController : HLSPlaceholderViewController <ContainerContentInsets, UIPageViewControllerDataSource>
+@interface PageViewController : HLSPlaceholderViewController <ContainerContentInsets, Scrollable, SRGAnalyticsContainerViewTracking, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 /**
  *  Create an instance displaying the supplied view controllers, and starting at the specified page.
  *
  *  @discussion If the page is not valid, the first page will be used instead.
  */
-- (instancetype)initWithViewControllers:(NSArray<UIViewController *> *)viewControllers initialPage:(NSInteger)initialPage NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithViewControllers:(NSArray<UIViewController *> *)viewControllers initialPage:(NSUInteger)initialPage NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Create an instance displaying the supplied view controllers, and starting with the first page.
- *
- *  @discussion If the page is not valid, the first page will be used instead.
  */
 - (instancetype)initWithViewControllers:(NSArray<UIViewController *> *)viewControllers;
+
+/**
+ *  Switch to a tab index.
+ *
+ *  @discussion If the index is not valid, nothing changes and the method returns `NO`. Otherwise `YES`.
+ */
+- (BOOL)switchToIndex:(NSUInteger)index animated:(BOOL)animated;
 
 /**
  *  The view controllers loaded as pages.
  */
 @property (nonatomic, readonly) NSArray<UIViewController *> *viewControllers;
+
+@end
+
+/**
+ *  Subclassing hooks.
+ */
+@interface PageViewController (Subclassing)
+
+/**
+ *  Called when the spcified view controller has been displayed, either because the user tapped on the corresponding
+ *  tab, or because `-switchToIndex:animated:` has been called.
+ */
+- (void)didDisplayViewController:(UIViewController *)viewController animated:(BOOL)animated NS_REQUIRES_SUPER;
 
 @end
 
@@ -68,14 +65,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  The parent page view controller, if any.
  */
 @property (nonatomic, readonly, nullable) PageViewController *play_pageViewController;
-
-/**
- *  Item information to be displayed by a page view controller.
- *
- *  @discussion If an image has been set, the title will not be displayed. It will still be used for accessibility
- *              purposes, though.
- */
-@property (nonatomic, nullable) PageItem *play_pageItem;
 
 @end
 

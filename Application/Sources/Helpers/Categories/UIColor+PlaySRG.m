@@ -45,7 +45,7 @@
     return [UIColor srg_colorFromHexadecimalString:@"#979797"];
 }
 
-+ (UIColor *)play_popoverGrayColor
++ (UIColor *)play_popoverGrayBackgroundColor
 {
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         return [UIColor srg_colorFromHexadecimalString:@"#2d2d2d"];
@@ -55,29 +55,29 @@
     }
 }
 
-+ (UIColor *)play_grayButtonBackgroundColor
++ (UIColor *)play_cardGrayBackgroundColor
 {
     return [UIColor srg_colorFromHexadecimalString:@"#232323"];
-}
-
-+ (UIColor *)play_lightGrayButtonBackgroundColor
-{
-    return [UIColor srg_colorFromHexadecimalString:@"#242424"];
 }
 
 + (UIColor *)play_grayThumbnailImageViewBackgroundColor
 {
-    return [UIColor srg_colorFromHexadecimalString:@"#232323"];
+    return [UIColor srg_colorFromHexadecimalString:@"#202020"];
 }
 
 + (UIColor *)play_blackDurationLabelBackgroundColor
 {
-    return [UIColor colorWithWhite:0.f alpha:0.75f];
+    return [UIColor colorWithWhite:0.f alpha:0.5f];
 }
 
 + (UIColor *)play_whiteBadgeColor
 {
     return [UIColor srg_colorFromHexadecimalString:@"#e4e4e4"];
+}
+
++ (UIColor *)play_blurTintColor
+{
+    return [UIColor colorWithWhite:0.11f alpha:0.73f];
 }
 
 @end

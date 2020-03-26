@@ -7,8 +7,10 @@
 #import "ModuleViewController.h"
 
 #import "ActivityItemSource.h"
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
+#import "Layout.h"
 #import "MediaCollectionViewCell.h"
 #import "ModuleHeaderView.h"
 #import "NSBundle+PlaySRG.h"
@@ -39,11 +41,34 @@
 
 #pragma mark View lifecycle
 
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
+    
+    UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
+    
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
+    collectionView.backgroundColor = UIColor.clearColor;
+    collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    collectionView.alwaysBounceVertical = YES;
+    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:collectionView];
+    self.collectionView = collectionView;
+    
+    NSString *headerIdentifier = NSStringFromClass(ModuleHeaderView.class);
+    UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
+    [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
+    
+    self.view = view;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = UIColor.play_blackColor;
     
     NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForModule:self.module];
     if (sharingURL) {
@@ -54,14 +79,6 @@
         shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
         self.navigationItem.rightBarButtonItems = @[ shareButtonItem ];
     }
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.collectionView.alwaysBounceVertical = YES;
-    
-    NSString *headerIdentifier = NSStringFromClass(ModuleHeaderView.class);
-    UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
-    [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
     [self updateAppearanceForSize:self.view.frame.size];
     
@@ -82,6 +99,8 @@
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         [self.collectionView.collectionViewLayout invalidateLayout];
         [self updateAppearanceForSize:size];
@@ -120,18 +139,6 @@
     NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
     SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider latestMediasForModuleWithURN:self.module.URN completionBlock:completionHandler] requestWithPageSize:pageSize] requestWithPage:page];
     [requestQueue addRequest:request resume:YES];
-}
-
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeTV;
-}
-
-- (NSString *)srg_pageViewTitle
-{
-    // Since we sometimes reset the view controller title for display purposes, we need to reliably return the module title
-    // as page title
-    return self.module.title;
 }
 
 #pragma mark Peek and pop
@@ -183,7 +190,7 @@
         UIApplication *application = UIApplication.sharedApplication;
         PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
         __kindof UIViewController *viewController = self.play_previewingContext.sourceView.nearestViewController;
-        UINavigationController *navigationController = [viewController isKindOfClass:UINavigationController.class] ? viewController : appDelegate.sideMenuController;
+        UINavigationController *navigationController = [viewController isKindOfClass:UINavigationController.class] ? viewController : appDelegate.rootTabBarController.selectedViewController;
         [navigationController pushViewController:self animated:YES];
     }];
     [previewActionItems addObject:openAction];
@@ -268,6 +275,18 @@
 {
     CGFloat offset = [super verticalOffsetForEmptyDataSet:scrollView];
     return offset + [ModuleHeaderView heightForModule:self.module withSize:scrollView.frame.size] / 2.f;
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return self.module.title;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo, AnalyticsPageLevelEvent ];
 }
 
 #pragma mark UICollectionViewDataSource protocol

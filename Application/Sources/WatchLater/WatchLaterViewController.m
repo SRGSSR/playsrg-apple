@@ -6,7 +6,9 @@
 
 #import "WatchLaterViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
@@ -17,7 +19,6 @@
 
 #import <libextobjc/libextobjc.h>
 #import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
 #import <SRGUserData/SRGUserData.h>
 
 @interface WatchLaterViewController () <WatchLaterTableViewCellDelegate>
@@ -30,18 +31,36 @@
 
 @implementation WatchLaterViewController
 
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionWatchLater);
+}
+
 #pragma mark View lifecycle
+
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
+        
+    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds];
+    tableView.backgroundColor = UIColor.clearColor;
+    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.allowsSelectionDuringEditing = YES;
+    tableView.allowsMultipleSelectionDuringEditing = YES;
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:tableView];
+    self.tableView = tableView;
+    
+    self.view = view;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = NSLocalizedString(@"Watch later", @"Title displayed at the top of the watch later list screen");
-    self.view.backgroundColor = UIColor.play_blackColor;
-    
-    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.tableView.allowsSelectionDuringEditing = YES;
-    self.tableView.allowsMultipleSelectionDuringEditing = YES;
     
     self.emptyTableTitle = NSLocalizedString(@"No content", @"Text displayed when no media added to the watch later list");
     self.emptyTableSubtitle = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a content to add it to this watch later list", @"Hint displayed when no media added to the watch later list and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a content to add it to this watch later list", @"Hint displayed when no media added to the watch later list and the device does not support 3D touch");
@@ -104,11 +123,6 @@
     [super refreshDidFinishWithError:error];
 }
 
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeWatchLater;
-}
-
 #pragma mark Data
 
 - (void)updateMediaURNsWithCompletionBlock:(void (^)(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs))completionBlock
@@ -150,26 +164,19 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsMake(10.f, 0.f, 5.f, 0.f);
+    return LayoutStandardTableViewPaddingInsets;
 }
 
-#pragma mark WatchLaterTableViewCellDelegate protocol
+#pragma mark SRGAnalyticsViewTracking protocol
 
-- (void)watchLaterTableViewCell:(WatchLaterTableViewCell *)watchLaterTableViewCell deletePlaylistEntryForMedia:(SRGMedia *)media
+- (NSString *)srg_pageViewTitle
 {
-    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (! error) {
-                [self hideItems:@[media]];
-                [self updateInterfaceForEditionAnimated:YES];
-                
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.value = media.URN;
-                labels.source = AnalyticsSourceSwipe;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterRemove labels:labels];
-            }
-        });
-    }];
+    return AnalyticsPageTitleWatchLater;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
 }
 
 #pragma mark UITableViewDataSource protocol
@@ -188,8 +195,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    return (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 94.f : 110.f;
+    return LayoutTableViewCellStandardHeight + LayoutStandardMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(WatchLaterTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -215,6 +221,25 @@
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.value = media.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterOpenMedia labels:labels];
+}
+
+#pragma mark WatchLaterTableViewCellDelegate protocol
+
+- (void)watchLaterTableViewCell:(WatchLaterTableViewCell *)watchLaterTableViewCell deletePlaylistEntryForMedia:(SRGMedia *)media
+{
+    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (! error) {
+                [self hideItems:@[media]];
+                [self updateInterfaceForEditionAnimated:YES];
+                
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.value = media.URN;
+                labels.source = AnalyticsSourceSwipe;
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterRemove labels:labels];
+            }
+        });
+    }];
 }
 
 #pragma mark Actions

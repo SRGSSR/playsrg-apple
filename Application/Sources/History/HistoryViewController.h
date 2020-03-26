@@ -7,9 +7,11 @@
 #import "ContentInsets.h"
 #import "TableRequestViewController.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HistoryViewController : TableRequestViewController
+@interface HistoryViewController : TableRequestViewController <SRGAnalyticsViewTracking>
 
 @end
 

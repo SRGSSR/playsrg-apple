@@ -6,11 +6,17 @@
 
 #import "SearchShowListCollectionViewCell.h"
 
+#import "AnalyticsConstants.h"
+#import "Layout.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
 
 #import <CoconutKit/CoconutKit.h>
+#import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
+
+// Small margin to avoid overlap with the horizontal scrolling indicator
+static const CGFloat kBottomInset = 15.f;
 
 @interface SearchShowListCollectionViewCell ()
 
@@ -19,6 +25,50 @@
 @end
 
 @implementation SearchShowListCollectionViewCell
+
+#pragma mark Class methods
+
++ (CGFloat)height
+{
+    return self.itemSize.height + kBottomInset;
+}
+
++ (CGSize)itemSize
+{
+    return LayoutShowStandardCollectionItemSize(300.f, NO);
+}
+
+#pragma mark Object lifecycle
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = UIColor.clearColor;
+        
+        UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+        collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
+        
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:collectionViewLayout];
+        collectionView.backgroundColor = UIColor.clearColor;
+        collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+        collectionView.alwaysBounceHorizontal = YES;
+        collectionView.directionalLockEnabled = YES;
+        // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
+        collectionView.scrollsToTop = NO;
+        collectionView.delegate = self;
+        collectionView.dataSource = self;
+        [self.contentView addSubview:collectionView];
+        self.collectionView = collectionView;
+        
+        NSString *showCellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
+        UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
+        [collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
+    }
+    return self;
+}
 
 #pragma mark Getters and setters
 
@@ -39,24 +89,11 @@
 
 #pragma mark Overrides
 
-- (void)awakeFromNib
+- (void)prepareForReuse
 {
-    [super awakeFromNib];
+    [super prepareForReuse];
     
-    self.backgroundColor = UIColor.clearColor;
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.collectionView.alwaysBounceHorizontal = YES;
-    self.collectionView.directionalLockEnabled = YES;
-    // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
-    self.collectionView.scrollsToTop = NO;
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    
-    NSString *showCellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
-    UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
-    [self.collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
+    self.shows = nil;
 }
 
 - (void)layoutSubviews
@@ -105,16 +142,12 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat textHeight = (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 30.f : 50.f;
-    
-    CGFloat height = CGRectGetHeight(collectionView.frame);
-    return CGSizeMake(16.f / 9.f * (height - textHeight), height);
+    return self.class.itemSize;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0.f, 10.f, 0.f, 10.f);
+    return UIEdgeInsetsMake(0.f, LayoutStandardMargin, kBottomInset, LayoutStandardMargin);
 }
 
 @end

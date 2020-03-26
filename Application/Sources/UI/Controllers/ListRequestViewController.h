@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Types
 typedef void (^ListRequestPageCompletionHandler)(NSArray * _Nullable items, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error);
-typedef void (^ListRequestCompletionBlock)(NSArray * _Nullable items, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error);
 
 /**
  *  Abstract base view controller class for custom view controllers retrieving paginated lists of objects. Subclasses must 

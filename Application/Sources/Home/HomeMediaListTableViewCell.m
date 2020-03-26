@@ -6,129 +6,132 @@
 
 #import "HomeMediaListTableViewCell.h"
 
-#import "ApplicationSettings.h"
 #import "HomeLiveMediaCollectionViewCell.h"
-#import "HomeMediaCollectionViewCell.h"
 #import "HomeMediaCollectionHeaderView.h"
+#import "HomeMediaCollectionViewCell.h"
+#import "Layout.h"
 #import "MediaPlayerViewController.h"
-#import "SRGBaseTopic+PlaySRG.h"
+#import "SRGModule+PlaySRG.h"
 #import "UICollectionView+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
+#import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
-static const CGFloat HomeStandardMargin = 10.f;
+static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
+{
+    return homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive || homeSection == HomeSectionRadioLiveSatellite
+        || homeSection == HomeSectionTVLiveCenter || homeSection == HomeSectionTVScheduledLivestreams;
+}
 
 @interface HomeMediaListTableViewCell ()
 
-@property (nonatomic, weak) IBOutlet UIView *wrapperView;
-@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, weak) UIView *moduleBackgroundView;
+@property (nonatomic, weak) UIView *wrapperView;
+@property (nonatomic, weak) UICollectionView *collectionView;
 
 @end
 
 @implementation HomeMediaListTableViewCell
 
-#pragma mark Overrides
+#pragma mark Class overrides
 
 + (CGFloat)heightForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
     return [self itemSizeForHomeSectionInfo:homeSectionInfo bounds:bounds featured:featured].height;
 }
 
+#pragma mark Class methods
+
 + (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds featured:(BOOL)featured
 {
     CGFloat itemWidth = 0.f;
     
     if (featured) {
-        // Ensure cells never fill the entire width of the parent, so that the fact that content can be scrolled
-        // is always obvious to the user
-        static const CGFloat kHorizontalFillRatio = 0.9f;
-        
-        // Do not make cells unnecessarily large, especially on iPhone Plus
-        UITraitCollection *traitCollection = UIApplication.sharedApplication.keyWindow.traitCollection;
-        CGFloat maxWidth = (traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ? 300.f : 650.f;
-        
-        itemWidth = MIN(CGRectGetWidth(bounds) * kHorizontalFillRatio, maxWidth);
+        itemWidth = LayoutCollectionItemFeaturedWidth(CGRectGetWidth(bounds));
     }
     else {
-        itemWidth = 210.f;
+        itemWidth = LayoutCollectionViewCellStandardWidth;
     }
     
-    // Adjust height depending on font size settings. First section cells are different and require specific values
-    static NSDictionary<NSString *, NSNumber *> *s_featuredTextHeigths;
-    static NSDictionary<NSString *, NSNumber *> *s_standardTextHeigths;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_featuredTextHeigths = @{ UIContentSizeCategoryExtraSmall : @95,
-                                   UIContentSizeCategorySmall : @95,
-                                   UIContentSizeCategoryMedium : @100,
-                                   UIContentSizeCategoryLarge : @105,
-                                   UIContentSizeCategoryExtraLarge : @110,
-                                   UIContentSizeCategoryExtraExtraLarge : @115,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @125,
-                                   UIContentSizeCategoryAccessibilityMedium : @125,
-                                   UIContentSizeCategoryAccessibilityLarge : @125,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @125,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @125,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @125 };
-        
-        s_standardTextHeigths = @{ UIContentSizeCategoryExtraSmall : @85,
-                                   UIContentSizeCategorySmall : @85,
-                                   UIContentSizeCategoryMedium : @85,
-                                   UIContentSizeCategoryLarge : @90,
-                                   UIContentSizeCategoryExtraLarge : @95,
-                                   UIContentSizeCategoryExtraExtraLarge : @100,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @113,
-                                   UIContentSizeCategoryAccessibilityMedium : @113,
-                                   UIContentSizeCategoryAccessibilityLarge : @113,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @113,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @113,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @113 };
-    });
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = featured ? s_featuredTextHeigths[contentSizeCategory].floatValue : s_standardTextHeigths[contentSizeCategory].floatValue;
-    
-    // Live cells must display progress information and be slightly taller for this reason
-    if (homeSectionInfo.homeSection == HomeSectionTVLive || homeSectionInfo.homeSection == HomeSectionRadioLive) {
-        minTextHeight += featured ? 40.f : 36.f;
+    if (HomeSectionHasLiveContent(homeSectionInfo.homeSection)) {
+        return LayoutLiveMediaStandardCollectionItemSize(itemWidth);
     }
-    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
+    else {
+        return LayoutMediaStandardCollectionItemSize(itemWidth, featured);
+    }
 }
 
-- (void)awakeFromNib
+#pragma mark Object lifecycle
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    [super awakeFromNib];
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = UIColor.clearColor;
+        self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
+        
+        UIView *moduleBackgroundView = [[UIView alloc] initWithFrame:self.contentView.bounds];
+        [self.contentView addSubview:moduleBackgroundView];
+        [moduleBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top);
+            make.height.mas_equalTo(75.f);
+            make.left.equalTo(self.contentView.mas_left);
+            make.right.equalTo(self.contentView.mas_right);
+        }];
+        self.moduleBackgroundView = moduleBackgroundView;
+        
+        UIView *wrapperView = [[UIView alloc] initWithFrame:self.contentView.bounds];
+        wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.contentView addSubview:wrapperView];
+        self.wrapperView = wrapperView;
+        
+        UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+        collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
+        
+        UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:wrapperView.bounds collectionViewLayout:collectionViewLayout];
+        collectionView.backgroundColor = UIColor.clearColor;
+        collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+        collectionView.alwaysBounceHorizontal = YES;
+        collectionView.directionalLockEnabled = YES;
+        // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
+        collectionView.scrollsToTop = NO;
+        collectionView.delegate = self;
+        collectionView.dataSource = self;
+        [wrapperView addSubview:collectionView];
+        self.collectionView = collectionView;
+        
+        // Remark: The collection view is nested in a dummy view to workaround an accessibility bug
+        //         See https://stackoverflow.com/a/38798448/760435
+        wrapperView.accessibilityElements = @[collectionView];
+        
+        NSString *mediaCellIdentifier = NSStringFromClass(HomeMediaCollectionViewCell.class);
+        UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
+        [collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
+        
+        NSString *liveMediaCellIdentifier = NSStringFromClass(HomeLiveMediaCollectionViewCell.class);
+        UINib *liveMediaCellNib = [UINib nibWithNibName:liveMediaCellIdentifier bundle:nil];
+        [collectionView registerNib:liveMediaCellNib forCellWithReuseIdentifier:liveMediaCellIdentifier];
+        
+        NSString *headerViewIdentifier = NSStringFromClass(HomeMediaCollectionHeaderView.class);
+        UINib *headerNib = [UINib nibWithNibName:headerViewIdentifier bundle:nil];
+        [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewIdentifier];
+    }
+    return self;
+}
+
+#pragma mark Overrides
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
     
-    self.backgroundColor = UIColor.clearColor;
-    self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.collectionView.alwaysBounceHorizontal = YES;
-    self.collectionView.directionalLockEnabled = YES;
-    // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
-    self.collectionView.scrollsToTop = NO;
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    
-    // Remark: The collection view is nested in a dummy view to workaround an accessibility bug
-    //         See https://stackoverflow.com/a/38798448/760435
-    self.wrapperView.accessibilityElements = @[self.collectionView];
-    
-    NSString *mediaCellIdentifier = NSStringFromClass(HomeMediaCollectionViewCell.class);
-    UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
-    [self.collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
-    
-    NSString *liveMediaCellIdentifier = NSStringFromClass(HomeLiveMediaCollectionViewCell.class);
-    UINib *liveMediaCellNib = [UINib nibWithNibName:liveMediaCellIdentifier bundle:nil];
-    [self.collectionView registerNib:liveMediaCellNib forCellWithReuseIdentifier:liveMediaCellIdentifier];
-    
-    NSString *headerViewIdentifier = NSStringFromClass(HomeMediaCollectionHeaderView.class);
-    UINib *headerNib = [UINib nibWithNibName:headerViewIdentifier bundle:nil];
-    [self.collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewIdentifier];
+    // Clear the collection
+    [self.collectionView reloadData];
 }
 
 - (void)layoutSubviews
@@ -144,31 +147,17 @@ static const CGFloat HomeStandardMargin = 10.f;
 {
     [super setHomeSectionInfo:homeSectionInfo featured:featured];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    if (homeSectionInfo.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        backgroundColor = homeSectionInfo.module.backgroundColor;
-    }
-    self.backgroundColor = backgroundColor;
+    self.moduleBackgroundView.backgroundColor = homeSectionInfo.module.play_backgroundColor;
     
     [self.collectionView reloadData];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (homeSectionInfo) {
-            // Scroll to the latest radio regional live stream played.
-            if (homeSectionInfo.homeSection == HomeSectionRadioLive && ! [self isEmpty]) {
-                SRGMedia *media = ApplicationSettingSelectedLivestreamMediaForChannelUid(homeSectionInfo.identifier, homeSectionInfo.items);
-                NSInteger index = [homeSectionInfo.items indexOfObject:media];
-                if (index != NSNotFound) {
-                    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-                }
-            }
             // Restore position in rows when scrolling vertically and returning to a previously scrolled row
-            else {
-                CGPoint maxContentOffset = self.collectionView.play_maximumContentOffset;
-                CGPoint contentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
-                                                    homeSectionInfo.contentOffset.y);
-                [self.collectionView setContentOffset:contentOffset animated:NO];
-            }
+            CGPoint maxContentOffset = self.collectionView.play_maximumContentOffset;
+            CGPoint contentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
+                                                homeSectionInfo.contentOffset.y);
+            [self.collectionView setContentOffset:contentOffset animated:NO];
         }
         self.collectionView.scrollEnabled = (homeSectionInfo.items.count != 0);
     });
@@ -178,42 +167,12 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (! [self isEmpty]) {
-        return self.homeSectionInfo.items.count;
-    }
-    else {
-        static const NSInteger kDefaultNumberOfPlaceholders = 10;
-        
-        NSInteger numberOfItems = 0;
-        
-        switch (self.homeSectionInfo.homeSection) {
-            case HomeSectionTVLive: {
-                numberOfItems = ApplicationConfiguration.sharedApplicationConfiguration.tvNumberOfLivePlaceholders;
-                break;
-            }
-                
-            case HomeSectionRadioLive: {
-                NSString *identifier = self.homeSectionInfo.identifier;
-                if (identifier) {
-                    numberOfItems = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:identifier].numberOfLivePlaceholders;
-                }
-                break;
-            }
-                
-            default: {
-                numberOfItems = kDefaultNumberOfPlaceholders; /* sufficient number of placeholders to accommodate all layouts */
-                break;
-            }
-        }
-        
-        return (numberOfItems != 0) ? numberOfItems : kDefaultNumberOfPlaceholders;
-    }
+    return ! [self isEmpty] ? self.homeSectionInfo.items.count : 10 /* Display 10 placeholders */;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    HomeSection homeSection = self.homeSectionInfo.homeSection;
-    if (homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive) {
+    if (HomeSectionHasLiveContent(self.homeSectionInfo.homeSection)) {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(HomeLiveMediaCollectionViewCell.class) forIndexPath:indexPath];
     }
     else {
@@ -228,7 +187,7 @@ static const CGFloat HomeStandardMargin = 10.f;
     HomeMediaCollectionHeaderView *homeMediaCollectionHeaderView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                                                                                                       withReuseIdentifier:NSStringFromClass(HomeMediaCollectionHeaderView.class)
                                                                                                              forIndexPath:indexPath];
-    homeMediaCollectionHeaderView.leftEdgeInset = HomeStandardMargin;
+    homeMediaCollectionHeaderView.leftEdgeInset = LayoutStandardMargin;
     return homeMediaCollectionHeaderView;
 }
 
@@ -238,10 +197,9 @@ static const CGFloat HomeStandardMargin = 10.f;
 {
     SRGMedia *media = ! [self isEmpty] ? self.homeSectionInfo.items[indexPath.row] : nil;
     
-    HomeSection homeSection = self.homeSectionInfo.homeSection;
-    if (homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive) {
-        HomeLiveMediaCollectionViewCell *mediaCell = (HomeLiveMediaCollectionViewCell *)cell;
-        [mediaCell setMedia:media featured:self.featured];
+    if ([cell isKindOfClass:HomeLiveMediaCollectionViewCell.class]) {
+        HomeLiveMediaCollectionViewCell *liveMediaCell = (HomeLiveMediaCollectionViewCell *)cell;
+        liveMediaCell.media = media;
     }
     else {
         HomeMediaCollectionViewCell *mediaCell = (HomeMediaCollectionViewCell *)cell;
@@ -261,12 +219,6 @@ static const CGFloat HomeStandardMargin = 10.f;
 {
     if (! [self isEmpty]) {
         SRGMedia *media = self.homeSectionInfo.items[indexPath.row];
-        
-        // Radio channel logic to scroll to the latest radio live stream played.
-        if (self.homeSectionInfo.homeSection == HomeSectionRadioLive && ! [self isEmpty]) {
-            ApplicationSettingSetSelectedLiveStreamURNForChannelUid(self.homeSectionInfo.identifier, media.URN);
-        }
-        
         [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }
@@ -275,22 +227,14 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // For compact layouts, display a single item with the full available collection width (up to a small margin)
-    if (self.featured
-            && [self collectionView:collectionView numberOfItemsInSection:indexPath.section] == 1
-            && self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * HomeStandardMargin, CGRectGetHeight(collectionView.frame));
-    }
-    else {
-        return [HomeMediaListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds featured:self.featured];
-    }
+    return [HomeMediaListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds featured:self.featured];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (self.homeSectionInfo.module || self.homeSectionInfo.topic.imageURL) {
+    if (self.homeSectionInfo.module || (self.homeSectionInfo.topic && ! ApplicationConfiguration.sharedApplicationConfiguration.topicHomeHeadersHidden)) {
         CGSize size = [self collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
-        size.width += HomeStandardMargin;
+        size.width += LayoutStandardMargin;
         return size;
     }
     else {
@@ -300,17 +244,11 @@ static const CGFloat HomeStandardMargin = 10.f;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    // If a single item has been displayed, center it
-    if (self.featured && [self collectionView:collectionView numberOfItemsInSection:section] == 1) {
-        CGSize cellSize = [self collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:[NSIndexPath indexPathWithIndex:section]];
-        CGFloat margin = (CGRectGetWidth(collectionView.frame) - cellSize.width) / 2.f;
-        return UIEdgeInsetsMake(0.f, margin, 0.f, margin);
-    }
-    else if (self.homeSectionInfo.module) {
-        return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, HomeStandardMargin);
+    if (self.homeSectionInfo.module) {
+        return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, LayoutStandardMargin);
     }
     else {
-        return UIEdgeInsetsMake(0.f, HomeStandardMargin, 0.f, HomeStandardMargin);
+        return UIEdgeInsetsMake(0.f, LayoutStandardMargin, 0.f, LayoutStandardMargin);
     }
 }
 

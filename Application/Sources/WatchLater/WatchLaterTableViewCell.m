@@ -11,6 +11,7 @@
 #import "ApplicationSettings.h"
 #import "Download.h"
 #import "History.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -29,6 +30,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
+@property (nonatomic, weak) IBOutlet UIView *thumbnailWrapperView;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
@@ -58,24 +60,20 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.clearColor;
     
-    UIView *colorView = [[UIView alloc] init];
-    colorView.backgroundColor = backgroundColor;
-    self.selectedBackgroundView = colorView;
+    UIView *selectedBackgroundView = [[UIView alloc] init];
+    selectedBackgroundView.backgroundColor = UIColor.clearColor;
+    self.selectedBackgroundView = selectedBackgroundView;
     
-    self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.thumbnailWrapperView.layer.masksToBounds = YES;
     
-    self.titleLabel.backgroundColor = backgroundColor;
-    
-    self.subtitleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
-    [self.webFirstLabel play_setWebFirstBadge];
-    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
 
     self.youthProtectionColorImageView.hidden = YES;
@@ -259,9 +257,27 @@
     self.media360ImageView.hidden = (media.presentation != SRGPresentation360);
     
     BOOL downloaded = [Download downloadForMedia:media].state == DownloadStateDownloaded;
-    self.webFirstLabel.hidden = ! media.play_webFirst;
-    self.subtitlesLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtitlesAvailable || downloaded);
-    self.audioDescriptionImageView.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
+    
+    BOOL isWebFirst = media.play_webFirst;
+    self.webFirstLabel.hidden = ! isWebFirst;
+    
+    BOOL hasSubtitles = ApplicationSettingSubtitleAvailabilityDisplayed() && media.play_subtitlesAvailable && ! downloaded;
+    self.subtitlesLabel.hidden = ! hasSubtitles;
+    
+    BOOL hasAudioDescription = ApplicationSettingAudioDescriptionAvailabilityDisplayed() && media.play_audioDescriptionAvailable && ! downloaded;
+    self.audioDescriptionImageView.hidden = ! hasAudioDescription;
+    
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    
+    // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
+    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
+        self.titleLabel.numberOfLines = (isWebFirst || hasSubtitles || hasAudioDescription) ? 1 : 2;
+    }
+    else {
+        self.titleLabel.numberOfLines = 2;
+    }
 
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
@@ -356,7 +372,7 @@
 
 - (id)previewObject
 {
-    return (! self.editing) ? self.media : nil;
+    return ! self.editing ? self.media : nil;
 }
 
 - (NSValue *)previewAnchorRect

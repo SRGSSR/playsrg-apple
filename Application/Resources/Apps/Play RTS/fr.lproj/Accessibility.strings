@@ -21,15 +21,23 @@
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Tout le contenu pour \"%@\"";
 
-/* Accessibility label for the audio description badge */
+/* Accessibility label for a media cell with audio description
+   Accessibility label for the audio description badge */
 "Audio described" = "Audiodécrit";
 
-/* Close button label on player view
-   Close button label on search view */
+/* Close button label
+   Close button label on player view
+   Close button label on settings view */
 "Close" = "Fermer";
 
 /* Player close button hint */
-"Closes the player while continuing to play audio." = "Ferme en continuant la lecture audio.";
+"Closes the player and continue playing audio." = "Ferme et continue la lecture audio.";
+
+/* Player close button hint */
+"Closes the player and continue playing in the background." = "Ferme et continue la lecture en arrière plan.";
+
+/* Player close button hint */
+"Closes the player and continue playing video with AirPlay." = "Ferme et continue la lecture vidéo en AirPlay.";
 
 /* Delete button label */
 "Delete" = "Supprimer";
@@ -61,20 +69,8 @@
 /* Accessibility hint associated with the account header */
 "Manages account information" = "gères les informations du compte";
 
-/* Menu button label */
-"Menu" = "Menu";
-
-/* Announcement made when the left menu is closed */
-"Menu closed" = "Menu fermé";
-
-/* Announcement made when the left menu is opened */
-"Menu open" = "Menu ouvert";
-
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mon compte";
-
-/* Notifications button label */
-"Notifications" = "Notifications";
 
 /* Mini player label */
 "Now playing: %@" = "A l'écoute : %@";
@@ -88,11 +84,17 @@
 /* Show cell hint */
 "Opens show details." = "Affiche le détail du programme.";
 
+/* Mini player action hint */
+"Opens the full screen player" = "Ouvre le lecteur en pleine page";
+
 /* Accessibility label for the multi audio badge */
 "Original version" = "Version originale";
 
-/* Livestream play action hint */
-"Plays livestream." = "Joue le direct.";
+/* Pause button label */
+"Pause" = "Pause";
+
+/* Play button label */
+"Play" = "Jouer";
 
 /* Media cell hint
    Mini player action hint */
@@ -120,17 +122,20 @@
 /* A download button label */
 "Retry download" = "Réessayer le téléchargement";
 
-/* Search button label */
-"Search" = "Recherche";
-
 /* Regional livestream selection hint */
 "Select regional radio" = "Sélectionner la radio régionale";
+
+/* Settings button label on home view */
+"Settings" = "Paramètres";
 
 /* Share button label on player view */
 "Share" = "Partager";
 
 /* Homepage header action hint */
 "Shows all contents." = "Affiche tout le contenu.";
+
+/* Stop button label */
+"Stop" = "Stop";
 
 /* A download button label */
 "Stop downloading" = "Arrêter le téléchargement";

@@ -17,28 +17,9 @@ static void lockComplete(CFNotificationCenterRef center, void *observer, CFStrin
 
 #pragma mark Class methods
 
-#pragma mark Class methods
-
 + (BOOL)play_isLocked
 {
     return s_locked;
-}
-
-+ (DeviceType)play_deviceType
-{
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        CGRect screenBounds = UIScreen.mainScreen.bounds;
-        CGFloat screenLength = fmaxf(CGRectGetWidth(screenBounds), CGRectGetHeight(screenBounds));
-        if (screenLength == 736.f) {
-            return DeviceTypePhonePlus;
-        }
-        else {
-            return DeviceTypePhoneOther;
-        }
-    }
-    else {
-        return DeviceTypePad;
-    }
 }
 
 #pragma mark Notifications
@@ -52,7 +33,7 @@ static void lockComplete(CFNotificationCenterRef center, void *observer, CFStrin
 
 #pragma mark Functions
 
-__attribute__((constructor)) static void SRGLetterboxUIDeviceInit(void)
+__attribute__((constructor)) static void PlayUIDeviceInit(void)
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         // Differentiate between device lock and application sent to the background

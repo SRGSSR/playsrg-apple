@@ -6,36 +6,43 @@
 
 #import "HomeViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
+#import "CalendarViewController.h"
 #import "Favorites.h"
+#import "GoogleCastBarButtonItem.h"
+#import "Layout.h"
 #import "HomeSectionHeaderView.h"
 #import "HomeMediaListTableViewCell.h"
-#import "HomeRadioLiveTableViewCell.h"
 #import "HomeSectionInfo.h"
 #import "HomeShowListTableViewCell.h"
 #import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowVerticalListTableViewCell.h"
 #import "HomeStatusHeaderView.h"
 #import "NavigationController.h"
-#import "Notification.h"
-#import "NotificationsViewController.h"
 #import "NSBundle+PlaySRG.h"
-#import "PushService.h"
-#import "SearchViewController.h"
+#import "ShowsViewController.h"
 #import "UIColor+PlaySRG.h"
+#import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
+#import <CoconutKit/CoconutKit.h>
 #import <libextobjc/libextobjc.h>
-#import <PPBadgeView/PPBadgeView.h>
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGUserData/SRGUserData.h>
 
+typedef NS_ENUM(NSInteger, HomeHeaderType) {
+    HomeHeaderTypeNone,         // No header
+    HomeHeaderTypeSpace,        // A space, no header view
+    HomeHeaderTypeView          // A header with underlying view
+};
+
 @interface HomeViewController ()
 
+@property (nonatomic) ApplicationSectionInfo *applicationSectionInfo;
 @property (nonatomic) NSArray<NSNumber *> *homeSections;
-@property (nonatomic) RadioChannel *radioChannel;
 
 @property (nonatomic) NSArray<HomeSectionInfo *> *homeSectionInfos;
 
@@ -50,75 +57,73 @@
 
 @property (nonatomic, getter=isTopicsLoaded) BOOL topicsLoaded;
 @property (nonatomic, getter=isEventsLoaded) BOOL eventsLoaded;
-@property (nonatomic, getter=isFavoriteTVShowsLoaded) BOOL favoriteTVShowsLoaded;
-@property (nonatomic, getter=isFavoriteRadioShowsLoaded) BOOL favoriteRadioShowsLoaded;
-
 @end
 
 @implementation HomeViewController
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel
+- (instancetype)initWithApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo homeSections:(NSArray<NSNumber *> *)homeSections
 {
     if (self = [super init]) {
-        self.homeSections = (radioChannel) ? radioChannel.homeSections : ApplicationConfiguration.sharedApplicationConfiguration.tvHomeSections;
-        self.radioChannel = radioChannel;
+        self.applicationSectionInfo = applicationSectionInfo;
+        self.homeSections = homeSections;
+        self.title = applicationSectionInfo.title;
         
         [self synchronizeHomeSections];
     }
     return self;
 }
 
+#pragma mark Getters and setters
+
+- (RadioChannel *)radioChannel
+{
+    return self.applicationSectionInfo.radioChannel;
+}
+
 #pragma mark View lifecycle
+
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
+        
+    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds style:UITableViewStyleGrouped];
+    tableView.backgroundColor = UIColor.clearColor;
+    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:tableView];
+    self.tableView = tableView;
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = UIColor.whiteColor;
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [tableView insertSubview:refreshControl atIndex:0];
+    self.refreshControl = refreshControl;
+    
+    self.view = view;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    if (self.radioChannel) {
-        self.title = self.radioChannel.name;
-        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:RadioChannelNavigationBarImage(self.radioChannel)];
-    }
-    else {
-        self.title = NSLocalizedString(@"Overview", @"Home page title");
-        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_play-20"]];
-    }
-    
-    self.navigationItem.titleView.isAccessibilityElement = YES;
-    self.navigationItem.titleView.accessibilityTraits = UIAccessibilityTraitHeader;
-    self.navigationItem.titleView.accessibilityLabel = self.title;
-    
-    self.view.backgroundColor = UIColor.play_blackColor;
-    
-    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = UIColor.whiteColor;
-    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:refreshControl atIndex:0];
-    self.refreshControl = refreshControl;
+    Class mediaListCellClass = HomeMediaListTableViewCell.class;
+    [self.tableView registerClass:mediaListCellClass forCellReuseIdentifier:NSStringFromClass(mediaListCellClass)];
     
-    NSString *mediaCellIdentifier = NSStringFromClass(HomeMediaListTableViewCell.class);
-    UINib *homeMediaListTableViewCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
-    [self.tableView registerNib:homeMediaListTableViewCellNib forCellReuseIdentifier:mediaCellIdentifier];
+    Class showListCellClass = HomeShowListTableViewCell.class;
+    [self.tableView registerClass:showListCellClass forCellReuseIdentifier:NSStringFromClass(showListCellClass)];
     
-    NSString *showCellIdentifier = NSStringFromClass(HomeShowListTableViewCell.class);
-    UINib *homeShowListTableViewCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
-    [self.tableView registerNib:homeShowListTableViewCellNib forCellReuseIdentifier:showCellIdentifier];
-    
-    NSString *showVerticalListCellIdentifier = NSStringFromClass(HomeShowVerticalListTableViewCell.class);
-    UINib *homeShowVerticalListTableViewCellNib = [UINib nibWithNibName:showVerticalListCellIdentifier bundle:nil];
-    [self.tableView registerNib:homeShowVerticalListTableViewCellNib forCellReuseIdentifier:showVerticalListCellIdentifier];
-    
-    NSString *radioLiveCellIdentifier = NSStringFromClass(HomeRadioLiveTableViewCell.class);
-    UINib *homeRadioLiveTableViewCellNib = [UINib nibWithNibName:radioLiveCellIdentifier bundle:nil];
-    [self.tableView registerNib:homeRadioLiveTableViewCellNib forCellReuseIdentifier:radioLiveCellIdentifier];
+    Class showVerticallListCellClass = HomeShowVerticalListTableViewCell.class;
+    [self.tableView registerClass:showVerticallListCellClass forCellReuseIdentifier:NSStringFromClass(showVerticallListCellClass)];
     
     NSString *showsAccessCellIdentifier = NSStringFromClass(HomeShowsAccessTableViewCell.class);
     UINib *homeShowsAccessTableViewCellNib = [UINib nibWithNibName:showsAccessCellIdentifier bundle:nil];
@@ -128,17 +133,14 @@
     UINib *homeSectionHeaderViewNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
     [self.tableView registerNib:homeSectionHeaderViewNib forHeaderFooterViewReuseIdentifier:headerIdentifier];
     
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    if (navigationBar) {
+        self.navigationItem.rightBarButtonItem = [[GoogleCastBarButtonItem alloc] initForNavigationBar:navigationBar];
+    }
+    
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusChanged
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(applicationDidBecomeActive:)
-                                               name:UIApplicationDidBecomeActiveNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(didReceiveNotification:)
-                                               name:PushServiceDidReceiveNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(preferencesStateDidChange:)
@@ -147,13 +149,6 @@
     
     [self updateStatusHeaderViewLayout];
     [self.tableView reloadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self updateBarButtonItems];
 }
 
 - (void)viewWillLayoutSubviews
@@ -293,11 +288,6 @@
     });
 }
 
-- (AnalyticsPageType)pageType
-{
-    return self.radioChannel ? AnalyticsPageTypeRadio : AnalyticsPageTypeTV;
-}
-
 #pragma mark User interface
 
 - (void)updateStatusHeaderViewLayout
@@ -322,56 +312,6 @@
     self.tableView.tableHeaderView = headerView;
 }
 
-- (void)updateBarButtonItems
-{
-    NSMutableArray<UIBarButtonItem *> *rightBarButtonItems = [NSMutableArray array];
-    
-    UIBarButtonItem *searchBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search-22"]
-                                                                            style:UIBarButtonItemStylePlain
-                                                                           target:self
-                                                                           action:@selector(search:)];
-    searchBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Search", @"Search button label");
-    [rightBarButtonItems addObject:searchBarButtonItem];
-    
-    [PushService.sharedService updateApplicationBadge];
-    
-    if (@available(iOS 10, *)) {
-        if (PushService.sharedService.enabled) {
-            UIImage *notificationImage = [UIImage imageNamed:@"subscription_full-22"];
-            UIButton *notificationButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            notificationButton.frame = CGRectMake(0.f, 0.f, notificationImage.size.width, notificationImage.size.height);
-            [notificationButton setImage:notificationImage forState:UIControlStateNormal];
-            [notificationButton addTarget:self action:@selector(showNotifications:) forControlEvents:UIControlEventTouchUpInside];
-            
-            NSInteger badgeNumber = UIApplication.sharedApplication.applicationIconBadgeNumber;
-            if (badgeNumber != 0) {
-                NSString *badgeText = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
-                [notificationButton pp_addBadgeWithText:badgeText];
-                [notificationButton pp_moveBadgeWithX:-6.f Y:7.f];
-                [notificationButton pp_setBadgeHeight:14.f];
-                [notificationButton pp_setBadgeLabelAttributes:^(PPBadgeLabel *badgeLabel) {
-                    badgeLabel.font = [UIFont boldSystemFontOfSize:13.f];
-                    badgeLabel.backgroundColor = UIColor.play_notificationRedColor;
-                }];
-                
-                RadioChannel *radioChannel = self.radioChannel;
-                if (radioChannel && ! radioChannel.badgeStrokeHidden) {
-                    [notificationButton pp_setBadgeLabelAttributes:^(PPBadgeLabel *badgeLabel) {
-                        badgeLabel.layer.borderColor = radioChannel.titleColor.CGColor;
-                        badgeLabel.layer.borderWidth = 1.f;
-                    }];
-                }
-            }
-            
-            UIBarButtonItem *notificationsBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:notificationButton];
-            notificationsBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Notifications", @"Notifications button label");
-            [rightBarButtonItems addObject:notificationsBarButtonItem];
-        }
-    }
-    
-    self.navigationItem.rightBarButtonItems = rightBarButtonItems.copy;
-}
-
 #pragma mark Section management
 
 - (void)refreshHomeSection:(HomeSection)homeSection withRequestQueue:(SRGRequestQueue *)requestQueue
@@ -379,17 +319,9 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(HomeSectionInfo.new, homeSection), @(homeSection)];
     NSArray<HomeSectionInfo *> *homeSectionInfos = [self.homeSectionInfos filteredArrayUsingPredicate:predicate];
     for (HomeSectionInfo *homeSectionInfo in homeSectionInfos) {
-        [homeSectionInfo refreshWithRequestQueue:requestQueue completionBlock:^(NSError * _Nullable error) {
+        [homeSectionInfo refreshWithRequestQueue:requestQueue page:nil /* only the first page */ completionBlock:^(NSArray * _Nullable items, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             // Refresh as data becomes available for better perceived loading times
             if (! error) {
-                if (homeSection == HomeSectionTVFavoriteShows) {
-                    self.favoriteTVShowsLoaded = YES;
-                    [self synchronizeHomeSections];
-                }
-                else if (homeSection == HomeSectionRadioFavoriteShows) {
-                    self.favoriteRadioShowsLoaded = YES;
-                    [self synchronizeHomeSections];
-                }
                 [self.tableView reloadData];
             }
         }];
@@ -428,21 +360,11 @@
         }
         else if (homeSection.integerValue == HomeSectionTVFavoriteShows) {
             HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:nil title:TitleForHomeSection(homeSection.integerValue)];
-            if (homeSectionInfo.items.count != 0) {
-                [homeSectionInfos addObject:homeSectionInfo];
-            }
-            else if (! self.favoriteTVShowsLoaded) {
-                [homeSectionInfos addObject:homeSectionInfo];
-            }
+            [homeSectionInfos addObject:homeSectionInfo];
         }
         else if (homeSection.integerValue == HomeSectionRadioFavoriteShows) {
             HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:self.radioChannel.uid title:TitleForHomeSection(homeSection.integerValue)];
-            if (homeSectionInfo.items.count != 0) {
-                [homeSectionInfos addObject:homeSectionInfo];
-            }
-            else if (! self.favoriteRadioShowsLoaded) {
-                [homeSectionInfos addObject:homeSectionInfo];
-            }
+            [homeSectionInfos addObject:homeSectionInfo];
         }
         else {
             HomeSectionInfo *homeSectionInfo = [self infoForHomeSection:homeSection.integerValue withObject:self.radioChannel.uid title:TitleForHomeSection(homeSection.integerValue)];
@@ -457,11 +379,44 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND %K == %@", @keypath(HomeSectionInfo.new, homeSection), @(homeSection),
                               @keypath(HomeSectionInfo.new, object), object];
     HomeSectionInfo *homeSectionInfo = [self.homeSectionInfos filteredArrayUsingPredicate:predicate].firstObject;
-    if (!homeSectionInfo) {
+    if (! homeSectionInfo) {
         homeSectionInfo = [[HomeSectionInfo alloc] initWithHomeSection:homeSection object:object];
     }
     homeSectionInfo.title = title;
     return homeSectionInfo;
+}
+
+- (BOOL)isFeaturedInSection:(NSUInteger)section
+{
+    if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
+        return YES;
+    }
+    else {
+        return section == 0;
+    }
+}
+
+- (HomeHeaderType)headerTypeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo tableView:(UITableView *)tableView inSection:(NSUInteger)section
+{
+    if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
+        return HomeHeaderTypeView;
+    }
+    else {
+        if (section == 0) {
+            ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+            BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
+            BOOL isFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
+            if (! UIAccessibilityIsVoiceOverRunning() && isFeaturedHeaderHidden) {
+                return HomeHeaderTypeSpace;
+            }
+            else {
+                return HomeHeaderTypeView;
+            }
+        }
+        else {
+            return HomeHeaderTypeView;
+        }
+    }
 }
 
 #pragma mark ContentInsets protocol
@@ -532,6 +487,59 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
+#pragma mark PlayApplicationNavigation protocol
+
+- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
+{
+    BOOL sameChannel = (self.radioChannel == applicationSectionInfo.radioChannel) || [self.radioChannel isEqual:applicationSectionInfo.radioChannel];
+    if (! sameChannel) {
+        return NO;
+    }
+    
+    if (applicationSectionInfo.applicationSection == ApplicationSectionShowByDate) {
+        NSDate *date = applicationSectionInfo.options[ApplicationSectionOptionShowByDateDateKey];
+        CalendarViewController *calendarViewController = [[CalendarViewController alloc] initWithRadioChannel:applicationSectionInfo.radioChannel date:date];
+        [self.navigationController pushViewController:calendarViewController animated:NO];
+        return YES;
+    }
+    else if (applicationSectionInfo.applicationSection == ApplicationSectionShowAZ) {
+        NSString *index = applicationSectionInfo.options[ApplicationSectionOptionShowAZIndexKey];
+        ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:applicationSectionInfo.radioChannel alphabeticalIndex:index];
+        [self.navigationController pushViewController:showsViewController animated:NO];
+        return YES;
+    }
+    else {
+        return applicationSectionInfo.applicationSection == ApplicationSectionOverview;
+    }
+}
+
+#pragma mark Scrollable protocol
+
+- (void)scrollToTopAnimated:(BOOL)animated
+{
+    [self.tableView play_scrollToTopAnimated:animated];
+}
+
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return AnalyticsPageTitleHome;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    if (self.radioChannel) {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, self.radioChannel.name ];
+    }
+    else if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelLive ];
+    }
+    else {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
+    }
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -564,38 +572,65 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[indexPath.section];
-    return [homeSectionInfo.cellClass heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:(indexPath.section == 0)];
+    if (! homeSectionInfo.hidden) {
+        BOOL featured = [self isFeaturedInSection:indexPath.section];
+        return [homeSectionInfo.cellClass heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:featured];
+    }
+    else {
+        return 0.f;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(HomeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [cell setHomeSectionInfo:self.homeSectionInfos[indexPath.section] featured:(indexPath.section == 0)];
+    BOOL featured = [self isFeaturedInSection:indexPath.section];
+    [cell setHomeSectionInfo:self.homeSectionInfos[indexPath.section] featured:featured];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[section];
-    return [HomeSectionHeaderView heightForHomeSectionInfo:homeSectionInfo bounds:tableView.bounds featured:(section == 0)];
+    if (homeSectionInfo.hidden) {
+        return 0.f;
+    }
+    
+    HomeHeaderType headerType = [self headerTypeForHomeSectionInfo:homeSectionInfo tableView:tableView inSection:section];
+    switch (headerType) {
+        case HomeHeaderTypeSpace: {
+            return LayoutStandardMargin;
+            break;
+        }
+            
+        case HomeHeaderTypeView: {
+            BOOL hasBackgroundColor = (homeSectionInfo.module && ! [homeSectionInfo.module.backgroundColor isEqual:UIColor.play_blackColor]);
+            return LayoutStandardTableSectionHeaderHeight(hasBackgroundColor);
+            break;
+        }
+        
+        default: {
+            return 0.f;
+            break;
+        }
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[section];
-    HomeSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(HomeSectionHeaderView.class)];
-    [headerView setHomeSectionInfo:homeSectionInfo featured:(section == 0)];
-    return headerView;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(HomeSectionHeaderView *)headerView forSection:(NSInteger)section
-{
-    [headerView setHomeSectionInfo:self.homeSectionInfos[section] featured:(section == 0)];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    // Cannot use 0 for grouped table views (will be ignored), must use a very small value instead
-    return 10e-6f;
+    if (homeSectionInfo.hidden) {
+        return nil;
+    }
+    
+    HomeHeaderType headerType = [self headerTypeForHomeSectionInfo:homeSectionInfo tableView:tableView inSection:section];
+    if (headerType == HomeHeaderTypeView) {
+        HomeSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(HomeSectionHeaderView.class)];
+        headerView.homeSectionInfo = homeSectionInfo;
+        return headerView;
+    }
+    else {
+        return nil;
+    }
 }
 
 #pragma mark Actions
@@ -605,46 +640,11 @@
     [self refresh];
 }
 
-- (void)showNotifications:(id)sender
-{
-    NotificationsViewController *notificationsViewController = [[NotificationsViewController alloc] init];
-    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:notificationsViewController];
-    [self presentViewController:navigationController animated:YES completion:nil];
-}
-
-- (void)search:(id)sender
-{
-    SearchViewController *searchViewController = [[SearchViewController alloc] initWithQuery:nil settings:nil];
-    
-    @weakify(self)
-    searchViewController.closeBlock = ^{
-        @strongify(self);
-        [self dismissViewControllerAnimated:YES completion:nil];
-    };
-    
-    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchViewController];
-    navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:navigationController animated:YES completion:nil];
-}
-
 #pragma mark Notifications
 
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
 {
     [self.tableView reloadData];
-}
-
-- (void)applicationDidBecomeActive:(NSNotification *)notification
-{
-    // Ensure correct notification button availability after:
-    //   - Dismissal of the initial system alert (displayed once at most), asking the user to enable push notifications.
-    //   - Returning from system settings, where the user might have updated push notification authorizations.
-    [self updateBarButtonItems];
-}
-
-- (void)didReceiveNotification:(NSNotification *)notification
-{
-    [self updateBarButtonItems];
 }
 
 - (void)preferencesStateDidChange:(NSNotification *)notification

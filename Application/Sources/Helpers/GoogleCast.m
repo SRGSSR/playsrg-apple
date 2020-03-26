@@ -7,10 +7,17 @@
 #import "GoogleCast.h"
 
 #import "ApplicationConfiguration.h"
+#import "History.h"
 #import "PlayErrors.h"
+#import "UIViewController+PlaySRG.h"
+#import "UIWindow+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <GoogleCast/GoogleCast.h>
+#import <SRGAnalytics/SRGAnalytics.h>
+
+NSString * const GoogleCastPlaybackDidStartNotification = @"GoogleCastPlaybackDidStartNotification";
+NSString * const GoogleCastMediaKey = @"GoogleCastMedia";
 
 @interface GoogleCastManager : NSObject
 
@@ -95,6 +102,50 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
     return YES;
 }
 
+BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPosition *position, NSError **pError)
+{
+    if (! GoogleCastIsPossible(mediaComposition, pError)) {
+        return NO;
+    }
+    
+    SRGChapter *mainChapter = mediaComposition.mainChapter;
+    
+    GCKMediaMetadata *metadata = [[GCKMediaMetadata alloc] init];
+    [metadata setString:mainChapter.title forKey:kGCKMetadataKeyTitle];
+    
+    NSString *subtitle = mainChapter.lead;
+    if (subtitle) {
+        [metadata setString:subtitle forKey:kGCKMetadataKeySubtitle];
+    }
+    
+    GCKMediaInformationBuilder *mediaInfoBuilder = [[GCKMediaInformationBuilder alloc] init];
+    mediaInfoBuilder.contentID = mediaComposition.chapterURN;
+    mediaInfoBuilder.streamType = GCKMediaStreamTypeNone;
+    mediaInfoBuilder.metadata = metadata;
+    mediaInfoBuilder.customData = @{ @"server" : SRGDataProvider.currentDataProvider.serviceURL.host };
+    
+    GCKCastSession *castSession = [GCKCastContext sharedInstance].sessionManager.currentCastSession;
+    GCKMediaLoadOptions *options = [[GCKMediaLoadOptions alloc] init];
+    
+    // Only apply playing position for on-demand streams. Does not work well with other kinds of streams.
+    CMTime time = position.time;
+    BOOL isLivestream = mainChapter.contentType == SRGContentTypeLivestream || mainChapter.contentType == SRGContentTypeScheduledLivestream;
+    if (! isLivestream && CMTIME_IS_VALID(time) && CMTIME_COMPARE_INLINE(time, !=, kCMTimeZero)) {
+        float progress = HistoryPlaybackProgress(CMTimeGetSeconds(time), mainChapter.duration / 1000.);
+        if (progress != 1.f) {
+            options.playPosition = CMTimeGetSeconds(time);
+        }
+    }
+    [castSession.remoteMediaClient loadMedia:[mediaInfoBuilder build] withOptions:options];
+    
+    SRGMedia *media = [mediaComposition mediaForSubdivision:mainChapter];
+    [NSNotificationCenter.defaultCenter postNotificationName:GoogleCastPlaybackDidStartNotification
+                                                      object:nil
+                                                    userInfo:@{ GoogleCastMediaKey : media }];
+    
+    return YES;
+}
+
 @implementation GoogleCastManager
 
 #pragma mark Object lifecycle
@@ -113,6 +164,10 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
                                                selector:@selector(googleCastStateDidChange:)
                                                    name:kGCKCastStateDidChangeNotification
                                                  object:nil];
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(applicationDidBecomeActive:)
+                                                   name:UIApplicationDidBecomeActiveNotification
+                                                 object:nil];
         
         // If the GoogleCastManager is created from the app delegate (which is the best way to ensure Google Cast is setup
         // early, so that accessing other related UI components works as expected), we can still apply styling slightly
@@ -126,7 +181,7 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
             styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute-22"];
             styleAttributes.pauseImage = [UIImage imageNamed:@"pause-50"];
             styleAttributes.playImage = [UIImage imageNamed:@"play-50"];
-            styleAttributes.stopImage = [UIImage imageNamed:@"stop-50"];
+            styleAttributes.stopImage = [UIImage imageNamed:@"pause-50"];
             // The subtitlesTrackImage property is buggy (the original icon is displayed when highlighted)
         });
     }
@@ -138,7 +193,85 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
 - (void)googleCastStateDidChange:(NSNotification *)notification
 {
     GCKCastState castState = [notification.userInfo[kGCKNotificationKeyCastState] integerValue];
-    SRGLetterboxService.sharedService.nowPlayingInfoAndCommandsEnabled = (castState != GCKCastStateConnected);
+    if (castState == GCKCastStateConnected) {
+        SRGLetterboxService *service = SRGLetterboxService.sharedService;
+        SRGLetterboxController *controller = service.controller;
+        
+        // Transfer local playback to Google Cast
+        if (controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
+            [UIApplication.sharedApplication.keyWindow.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
+                if (playerType == PlayerTypeGoogleCast) {
+                    [service disable];
+                    [controller reset];
+                }
+            }];
+        }
+    }
+}
+
+// Perform manual tracking of Google cast views when the application returns from background
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    if ([topViewController isKindOfClass:GCKUIExpandedMediaControlsViewController.class]) {
+        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+    }
+    else if ([topViewController isKindOfClass:UINavigationController.class]) {
+        UINavigationController *navigationTopViewController = (UINavigationController *)topViewController;
+        UIViewController *rootViewController = navigationTopViewController.viewControllers.firstObject;
+        if ([rootViewController isKindOfClass:NSClassFromString(@"GCKUIDeviceConnectionViewController")]) {
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+        }
+    }
+}
+
+@end
+
+@interface GCKUICastButton (GoogleCast)
+
+- (void)openGoogleCastDeviceSelection:(id)sender;
+
+@end
+
+static id (*s_GCKUICastButton_initWithFrame)(id, SEL, CGRect) = NULL;
+static id (*s_GCKUICastButton_initWithCoder)(id, SEL, id) = NULL;
+
+static void commonInit(GCKUICastButton *self)
+{
+    [self addTarget:self action:@selector(openGoogleCastDeviceSelection:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+static id swizzled_initWithFrame(GCKUICastButton *self, SEL _cmd, CGRect frame)
+{
+    if ((self = s_GCKUICastButton_initWithFrame(self, _cmd, frame))) {
+        commonInit(self);
+    }
+    return self;
+}
+
+static id swizzled_initWithCoder(GCKUICastButton *self, SEL _cmd, NSCoder *decoder)
+{
+    if ((self = s_GCKUICastButton_initWithCoder(self, _cmd, decoder))) {
+        commonInit(self);
+    }
+    return self;
+}
+
+@implementation GCKUICastButton (GoogleCast)
+
+#pragma mark Class methods
+
++ (void)load
+{
+    HLSSwizzleSelector(self, @selector(initWithFrame:), swizzled_initWithFrame, &s_GCKUICastButton_initWithFrame);
+    HLSSwizzleSelector(self, @selector(initWithCoder:), swizzled_initWithCoder, &s_GCKUICastButton_initWithCoder);
+}
+
+#pragma mark Actions
+
+- (void)openGoogleCastDeviceSelection:(id)sender
+{
+    [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
 }
 
 @end

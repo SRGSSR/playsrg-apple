@@ -7,12 +7,14 @@
 #import "HomeSectionInfo.h"
 #import "MediasViewController.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  View controller displaying a list of medias stemming from a home page.
  */
-@interface HomeMediasViewController : MediasViewController
+@interface HomeMediasViewController : MediasViewController <SRGAnalyticsViewTracking>
 
 - (instancetype)initWithHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo;
 

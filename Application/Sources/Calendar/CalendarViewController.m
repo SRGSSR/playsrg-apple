@@ -6,15 +6,20 @@
 
 #import "CalendarViewController.h"
 
+#import "AnalyticsConstants.h"
+#import "ApplicationConfiguration.h"
 #import "Calendar.h"
 #import "DailyMediasViewController.h"
 #import "MediaCollectionViewCell.h"
+#import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
+#import "UIVisualEffectView+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
+#import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface CalendarViewController ()
@@ -52,13 +57,6 @@
             self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];      // Only available for iOS 10 and above
         }
         
-        if (self.radioChannel) {
-            self.title = NSLocalizedString(@"Programmes by date", @"Title displayed at the top of the screen where (radio) episodes can be accessed by date");
-        }
-        else {
-            self.title = NSLocalizedString(@"TV programmes by date", @"Title displayed at the top of the screen where TV episodes can be accessed by date");
-        }
-        
         [self setInsetViewController:pageViewController atIndex:0];
         self.pageViewController = pageViewController;
     }
@@ -70,6 +68,13 @@
     return [self initWithRadioChannel:nil date:nil];
 }
 
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionShowByDate);
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -77,6 +82,12 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = UIColor.play_blackColor;
+    
+    UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
+    [self.view insertSubview:blurView belowSubview:self.calendar];
+    [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.calendar);
+    }];
     
     self.calendar.dataSource = self;
     self.calendar.delegate = self;
@@ -158,7 +169,7 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> _Nonnull context) {
-        if (UIDevice.play_deviceType == DeviceTypePhonePlus && size.width > size.height) {
+        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && size.width > size.height) {
             [self.calendar setScope:FSCalendarScopeWeek animated:NO];
         }
         
@@ -305,12 +316,17 @@
 
 - (NSString *)srg_pageViewTitle
 {
-    return NSLocalizedString(@"Programmes by date", @"[Technical] Title for programmes by date page view analytics measurements");
+    return AnalyticsPageTitleShowsCalendar;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeTV) ];
+    if (self.radioChannel) {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelAudio, self.radioChannel.name ];
+    }
+    else {
+        return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
+    }
 }
 
 #pragma mark UIGestureRecognizerDelegate protocol
@@ -325,7 +341,7 @@
     }
     
     CGSize size = self.view.frame.size;
-    if (UIDevice.play_deviceType == DeviceTypePhonePlus && size.width > size.height) {
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && size.width > size.height) {
         return NO;
     }
     

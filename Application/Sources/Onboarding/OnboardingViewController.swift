@@ -8,7 +8,7 @@ import Masonry
 import paper_onboarding
 import SRGAppearance
 
-@objc(OnboardingViewController) public class OnboardingViewController : BaseViewController, PaperOnboardingDataSource, PaperOnboardingDelegate {
+@objc(OnboardingViewController) public class OnboardingViewController : BaseViewController {
     
     final var onboarding: Onboarding!
     
@@ -80,7 +80,7 @@ import SRGAppearance
     // MARK: Rotation
     
     public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if (UIDevice.play_deviceType == .pad) {
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
             return .all
         }
         else {
@@ -95,12 +95,6 @@ import SRGAppearance
     }
     
     // MARK: Overrides
-    
-    public override var pageType: AnalyticsPageType {
-        get {
-            return .onboarding
-        }
-    }
     
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -138,7 +132,31 @@ import SRGAppearance
         }
     }
     
-    // MARK: PaperOnboardingDataSource protocol
+    // MARK: Actions
+    
+    @IBAction private func previousPage(_ sender: UIButton) {
+        self.paperOnboarding.currentIndex(self.paperOnboarding.currentIndex - 1, animated: true)
+    }
+    
+    @IBAction private func close(_ sender: UIButton) {
+        if (self.onboarding.uid == "favorites" || self.onboarding.uid == "favorites_account") {
+            PushService.shared?.presentSystemAlertForPushNotifications()
+        }
+        self.dismiss(animated: true, completion: nil);
+    }
+    
+    @IBAction private func nextPage(_ sender: UIButton) {
+        self.paperOnboarding.currentIndex(self.paperOnboarding.currentIndex + 1, animated: true)
+    }
+    
+    // MARK: Notifications
+    
+    @objc private func accessibilityVoiceOverStatusChanged(notification: NSNotification) {
+        self.updateUserInterface(index: self.paperOnboarding.currentIndex, animated: true)
+    }
+}
+
+extension OnboardingViewController : PaperOnboardingDataSource {
     
     public func onboardingItemsCount() -> Int {
         return self.onboarding.pages.count
@@ -166,8 +184,9 @@ import SRGAppearance
                                   descriptionLabelPadding: 30.0,
                                   titleLabelPadding: 15.0)
     }
-    
-    // MARK: PaperOnboardingDelegate protocol
+}
+
+extension OnboardingViewController : PaperOnboardingDelegate {
     
     public func onboardingWillTransitonToIndex(_ index: Int) {
         self.updateUserInterface(index: index, animated: true)
@@ -187,32 +206,15 @@ import SRGAppearance
         
         item.titleCenterConstraint?.constant = isTall ? 50.0 : 20.0
     }
+}
+
+extension OnboardingViewController : SRGAnalyticsViewTracking {
     
-    // MARK: Actions
-    
-    @IBAction private func previousPage(_ sender: UIButton) {
-        self.paperOnboarding.currentIndex(self.paperOnboarding.currentIndex - 1, animated: true)
+    public var srg_pageViewTitle: String {
+        return self.onboarding.title
     }
     
-    @IBAction private func close(_ sender: UIButton) {
-        if (self.onboarding.uid == "favorites" || self.onboarding.uid == "favorites_account") {
-            PushService.shared?.presentSystemAlertForPushNotifications()
-        }
-        self.dismiss(animated: true, completion: {
-            if (self.onboarding.uid == "account") {
-                let playAppDelegate = UIApplication.shared.delegate as! PlayAppDelegate
-                playAppDelegate.sideMenuController.displayMenuHeader(animated: true)
-            }
-        });
-    }
-    
-    @IBAction private func nextPage(_ sender: UIButton) {
-        self.paperOnboarding.currentIndex(self.paperOnboarding.currentIndex + 1, animated: true)
-    }
-    
-    // MARK: Notifications
-    
-    @objc private func accessibilityVoiceOverStatusChanged(notification: NSNotification) {
-        self.updateUserInterface(index: self.paperOnboarding.currentIndex, animated: true)
+    public var srg_pageViewLevels: [String]? {
+        return [ AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.feature.rawValue ]
     }
 }

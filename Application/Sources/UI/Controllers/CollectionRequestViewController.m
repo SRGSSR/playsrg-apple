@@ -260,6 +260,13 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
+#pragma mark Scrollable protocol
+
+- (void)scrollToTopAnimated:(BOOL)animated
+{
+    [self.collectionView play_scrollToTopAnimated:animated];
+}
+
 #pragma mark UICollectionViewDataSource protocol
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

@@ -7,10 +7,12 @@
 #import "DownloadsViewController.h"
 
 #import "AnalyticsConstants.h"
+#import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "Download.h"
 #import "DownloadFooterSectionView.h"
 #import "DownloadTableViewCell.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "UIColor+PlaySRG.h"
@@ -24,7 +26,7 @@
 
 @property (nonatomic) NSArray<Download *> *downloads;
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, weak) UIRefreshControl *refreshControl;
 
 @property (nonatomic) UIBarButtonItem *defaultLeftBarButtonItem;
@@ -43,21 +45,45 @@
     return self;
 }
 
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionDownloads);
+}
+
 #pragma mark View lifecycle
+
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
+        
+    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds];
+    tableView.backgroundColor = UIColor.clearColor;
+    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.allowsSelectionDuringEditing = YES;
+    tableView.allowsMultipleSelectionDuringEditing = YES;
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:tableView];
+    self.tableView = tableView;
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = UIColor.whiteColor;
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [tableView insertSubview:refreshControl atIndex:0];
+    self.refreshControl = refreshControl;
+    
+    self.view = view;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Downloads", @"Title displayed at the top of the downloads screen");
-    
-    self.view.backgroundColor = UIColor.play_blackColor;
-    
-    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.allowsSelectionDuringEditing = YES;
-    self.tableView.allowsMultipleSelectionDuringEditing = YES;
     
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
@@ -68,13 +94,6 @@
     
     NSString *footerIdentifier = NSStringFromClass(DownloadFooterSectionView.class);
     [self.tableView registerNib:[UINib nibWithNibName:footerIdentifier bundle:nil] forHeaderFooterViewReuseIdentifier:footerIdentifier];
-    self.tableView.estimatedSectionFooterHeight = 40.f;
-    
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = UIColor.whiteColor;
-    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:refreshControl atIndex:0];
-    self.refreshControl = refreshControl;
     
     [self updateInterfaceForEditionAnimated:NO];
     
@@ -132,11 +151,6 @@
     });
 }
 
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeDownloads;
-}
-
 #pragma mark UI
 
 - (void)reloadDataAnimated:(BOOL)animated
@@ -168,7 +182,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsMake(10.f, 0.f, 5.f, 0.f);
+    return LayoutStandardTableViewPaddingInsets;
 }
 
 #pragma mark DZNEmptyDataSetSource protocol
@@ -208,6 +222,18 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return AnalyticsPageTitleDownloads;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -224,8 +250,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    return (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 94.f : 110.f;
+    return LayoutTableViewCellStandardHeight + LayoutStandardMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(DownloadTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -262,13 +287,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return UITableViewAutomaticDimension + 40.f;
+    return self.downloads.count != 0 ? 40.f : 0.f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    DownloadFooterSectionView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(DownloadFooterSectionView.class)];
-    return footerView;
+    return [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(DownloadFooterSectionView.class)];
 }
 
 #pragma mark Actions

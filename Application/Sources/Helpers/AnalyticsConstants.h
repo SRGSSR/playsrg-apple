@@ -9,28 +9,56 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Page types for analytics measurements
+ *  @name Analytics standard page levels
  */
-typedef NS_ENUM(NSInteger, AnalyticsPageType) {
-    AnalyticsPageTypeNone = 0,
-    AnalyticsPageTypeTV,
-    AnalyticsPageTypeRadio,
-    AnalyticsPageTypeOnline,
-    AnalyticsPageTypeSystem,
-    AnalyticsPageTypeDownloads,
-    AnalyticsPageTypeHistory,
-    AnalyticsPageTypeFavorites,
-    AnalyticsPageTypeNotifications,
-    AnalyticsPageTypeSearch,
-    AnalyticsPageTypeOnboarding,
-    AnalyticsPageTypeUser,
-    AnalyticsPageTypeWatchLater
-};
+typedef NSString * AnalyticsPageLevel NS_STRING_ENUM;
+
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelApplication;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelAudio;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelEvent;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelFeature;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelGoogleCast;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelLive;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPlay;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPreview;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelSearch;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelShow;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelUser;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelVideo;
 
 /**
- *  Return the standard name for a page type.
+ *  @name Analytics standard page titles
  */
-OBJC_EXPORT NSString * _Nullable AnalyticsNameForPageType(AnalyticsPageType pageType);
+typedef NSString * AnalyticsPageTitle NS_STRING_ENUM;
+
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleBetaTesting;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDevices;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDownloads;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleEvents;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFavorites;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFeatures;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFeedback;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHistory;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHome;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatest;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicense;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicenses;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMostPopular;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleNotifications;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitlePlayer;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadio;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSettings;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsAZ;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSoonExpiring;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSourceCode;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSports;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTrending;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTV;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWatchLater;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
 
 /**
  *  @name Analytics event titles
@@ -43,7 +71,7 @@ typedef NSString * AnalyticsTitle NS_STRING_ENUM;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleContinuousPlayback;
 
 /**
- *  Title for events related to downloads
+ *  Title for events related to addition of a new download
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadAdd;
 

@@ -25,6 +25,7 @@ typedef void (^SRGItemListCompletionBlock)(NSArray * _Nullable items, NSHTTPURLR
 @property (nonatomic, readonly) BOOL canOpenList;
 
 @property (nonatomic, readonly, nullable) id object;
+@property (nonatomic, readonly, getter=isHidden) BOOL hidden;
 
 @property (nonatomic, readonly, copy, nullable) NSString *identifier;
 @property (nonatomic, readonly, nullable) SRGModule *module;
@@ -34,11 +35,11 @@ typedef void (^SRGItemListCompletionBlock)(NSArray * _Nullable items, NSHTTPURLR
 @property (nonatomic, copy, nullable) NSString *title;
 @property (nonatomic) CGPoint contentOffset;
 
+@property (nonatomic, copy, nullable) NSString *parentTitle;
+
 @property (nonatomic, readonly, nullable) NSArray *items;
 
-- (void)refreshWithRequestQueue:(SRGRequestQueue *)requestQueue completionBlock:(nullable void (^)(NSError * _Nullable error))completionBlock;
-
-- (nullable SRGBaseRequest *)requestWithPage:(nullable SRGPage *)page completionBlock:(SRGPaginatedItemListCompletionBlock)paginatedItemListCompletionBlock;
+- (void)refreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(nullable SRGPage *)page completionBlock:(SRGPaginatedItemListCompletionBlock)completionBlock;
 
 @end
 

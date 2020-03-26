@@ -1,3 +1,6 @@
+/* The amount of episodes available for a show */
+"%@ episodes" = "%@ episodas";
+
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Watch later\"" = "%@ è vegnì agiuntà a \"guardar pli tard\"";
 
@@ -32,15 +35,18 @@
 "A to Z" = "Dad A fin Z";
 
 /* Button label to add a media to the watch later list, from the media long-press menu
-   Button label to add a media to the watch later list, from the media preview window */
+   Button label to add a media to the watch later list, from the media preview window
+   Context menu action to add a media to the watch later list */
 "Add to \"Watch later\"" = "Agiuntar a \"guardar pli tard\"";
 
 /* Button label to add a download from the media long-press menu
-   Button label to add a download from the media preview window */
+   Button label to add a download from the media preview window
+   Context menu action to add a media to the downloads */
 "Add to downloads" = "Agiunscher a telechargiada";
 
 /* Button label to add a show to favorites in the show long-press menu
    Button label to add a show to favorites in the show preview window
+   Context menu action to add a show to favorites
    Favorite show label to add it, in the show view */
 "Add to favorites" = "Agiunscher a favurits";
 
@@ -72,7 +78,8 @@
 "At %1$@: %2$@" = "A las %1$@: %2$@";
 
 /* Audios option
-   Header for audio search results */
+   Header for audio search results
+   Title displayed at the top of the audio view */
 "Audios" = "Audios";
 
 /* Message title displayed when subscribing to all TV and radio shows
@@ -82,7 +89,7 @@
 /* Message description displayed when the user could not be subscribed to all TV and radio shows */
 "Automatic subscriptions failed. Please retry." = "Errur. Per plaschair empruvar anc ina giada.";
 
-/* Label used on the home page to present the soon expiring videos */
+/* Title label used to present the soon expiring videos */
 "Available for a limited time" = "Accessibel per in tschert temp";
 
 /* Short title displayed in home page shows section. */
@@ -98,9 +105,6 @@
 /* Information message of the action view to choose a regional radio
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Selecziunà tes radio regiunal";
-
-/* No comment provided by engineer. */
-"Close" = "Serrar";
 
 /* Settings section header */
 "Content" = "Cuntegn";
@@ -136,9 +140,7 @@
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Stgargiabel";
 
-/* [Technical] Downloads page type for analytics measurements
-   Label in the left menu to present downloads
-   Title displayed at the top of the downloads screen */
+/* Label to present downloads */
 "Downloads" = "Telechargiadas";
 
 /* Settings section header */
@@ -156,25 +158,20 @@
 /* Question displayed at the top of an alert asking the user to enable notifications */
 "Enable notifications?" = "Activar las notificaziuns?";
 
-/* Label used on the home page to present events while loading. It appears if no network connection available and no cache available. */
+/* Title label used to present scheduled livestream medias. Only on test versions. */
 "Events" = "Eveniments";
 
 /* Short label identifying content which has expired. */
 "Expired" = "Expirà";
 
-/* [Technical] Favorites page type for analytics measurements
-   Favorite show label when added ,in the show view
-   Label in the left menu to present Favorites
-   Label used on a radio home page to present the favorite shows.
-   Label used on the TV home page to present the favorite shows.
-   Title displayed at the top of the favorites screen */
+/* Favorite show label when added ,in the show view
+   Label to present Favorites
+   Title label used to present the radio favorite shows.
+   Title label used to present the TV favorite shows. */
 "Favorites" = "Favurits";
 
 /* Title displayed at the top of the features list */
 "Features" = "Funcziuns";
-
-/* Label in the left menu to display the feedback form */
-"Feedback" = "Resun";
 
 /* Filters button title
    Search filters page title */
@@ -186,16 +183,10 @@
 /* Total free space size, display at the bottom of download list */
 "Free space: %@" = "Spaci liber: %@";
 
-/* General menu section header label */
-"General" = "General";
+/* Title label used to present TV event modules while loading. It appears if no network connection available and no cache available. */
+"Highlights" = "Highlights";
 
-/* Label in the left menu to present the help page
-   Title displayed at the top of the help and copyright view */
-"Help and copyright" = "Agid ed impressum";
-
-/* [Technical] History page type for analytics measurements
-   Label in the left menu to present history
-   Title displayed at the top of the history screen */
+/* Label to present history */
 "History" = "Cronologia";
 
 /* Image copyright introductory label */
@@ -216,8 +207,8 @@
 /* Label for the button for deciding to opt-in for background video playback at a later time */
 "Later" = "Pli tard";
 
-/* Label used on a radio home page to present the latest videos
-   Label used on the home page to present the latest videos */
+/* Title label used to present the latest videos
+   Title label used to present the radio latest videos */
 "Latest videos" = "Ils pli novs videos";
 
 /* Label inviting the user to learn more information about an issue */
@@ -229,16 +220,11 @@
 /* Short label identifying a livestream. Display in uppercase. */
 "Live" = "Live";
 
-/* Label used on the home page to present live center medias. Only on test versions. */
-"Live center" = "Live center";
+/* Label to present the Livestreams view
+   Title displayed at the top of the livestream view */
+"Livestreams" = "Live";
 
-/* Label used on a radio home page to present the livestream */
-"Live radio" = "Live radio";
-
-/* Label used on the home page to present main TV channels */
-"Live TV" = "Live TV";
-
-/* Text displayed within the login / sign up menu header when no user is displayed */
+/* Text displayed within the login / sign up profile header when no user is displayed */
 "Login / Sign up" = "Login";
 
 /* Message title displayed when the user is forced to update the application. */
@@ -250,21 +236,19 @@
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Media betg disponibel";
 
-/* Miscellaneous menu section header label */
-"Miscellaneous" = "Divers";
-
 /* Button label to open the show episode page from the long-press menu
-   Button label to open the show episode page from the preview window */
+   Button label to open the show episode page from the preview window
+   Context menu action to open more episodes associated with a media */
 "More episodes" = "Dapli episodas";
 
 /* Title of the related content player section */
 "More on this subject" = "Dapli";
 
-/* Label used on a radio home page to present the most listened / popular audio medias */
+/* Title label used to present the radio most listened / popular audio medias */
 "Most listened to" = "Tadlà il pli savens";
 
-/* Label used on the home page to present the most seen / clicked / popular videos
-   Short title for the most clicked video topic list */
+/* Short title for the most clicked video topic list
+   Title label used to present the TV most seen / clicked / popular videos */
 "Most popular" = "Il pli tschertgà";
 
 /* Short title for the most recent video topic list */
@@ -275,9 +259,6 @@
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mes conto";
-
-/* Menu section header label for user personal content */
-"My content" = "Mes cuntegn";
 
 /* Text displayed when no data synchronization has been made yet */
 "Never" = "Mai";
@@ -309,8 +290,7 @@
 /* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
 "Not available since %@" = "Betg accessibel dapi %@";
 
-/* [Technical] Notifications page type for analytics measurements
-   Title displayed at the top of the notifications screen */
+/* Label to present the help page */
 "Notifications" = "Notificaziuns";
 
 /* Message at the top of the screen displayed when disabling push notifications. Quotes around the content placeholder are managed by the application. */
@@ -330,15 +310,6 @@
    Title of the search settings button to apply settings */
 "OK" = "OK";
 
-/* Short introductory text for what is currently playing on the radio */
-"On air" = "Uss en il radio";
-
-/* [Technical] Onboarding page type for analytics measurements */
-"Onboarding" = "Onboarding";
-
-/* [Technical] Online page type for analytics measurements */
-"Online" = "Online";
-
 /* Button label to open a media from the start from the long-press menu
    Button label to open a media from the start from the preview window
    Button label to open a module from the preview window
@@ -349,8 +320,7 @@
 /* Label on the editor or trending lists in the home page, for prefered contents. Known as the SRF-TIPP label. Display in uppercase. */
 "OUR PICK" = "RTR-TIP";
 
-/* Home page title
-   Label in the left menu to present the main TV view */
+/* Label to present the main Videos / Audios views */
 "Overview" = "Survista";
 
 /* Settings section header */
@@ -359,24 +329,16 @@
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Disponibel en l'exteriur";
 
-/* Notification message when a media is paused due to Handoff activity. */
-"Playback has resumed on another device." = "Playback è sin Voss auter apparat.";
-
-/* Introductory text for DRM status information in the app settings */
-"Prefers DRM streams: %@." = "Preferir streams DRM: %@.";
-
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Precedent";
 
-/* [Technical] Title for programmes A-Z analytics measurements
-   [Technical] Title for programmes A-Z page view analytics measurements
-   Label in the left menu to present shows A to Z (radio or TV)
-   Title displayed at the top of a (radio) show list */
+/* Title displayed at the top of the profile view */
+"Profile" = "Profils";
+
+/* Label to present shows A to Z (radio or TV) */
 "Programmes A-Z" = "Emissiuns dad A fin Z";
 
-/* [Technical] Title for programmes by date page view analytics measurements
-   Label in the left menu to present programmes by date
-   Title displayed at the top of the screen where (radio) episodes can be accessed by date */
+/* Label to present programmes by date */
 "Programmes by date" = "Emissiuns tenor data";
 
 /* Settings section header */
@@ -385,12 +347,8 @@
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Trair giu per rechargiar";
 
-/* [Technical] Radio page type for analytics measurements
-   Radio menu section header label */
-"Radio" = "Radio";
-
-/* Title displayed at the top of the radio show list */
-"Radio programmes A-Z" = "Emissiuns da radio dad A fin Z";
+/* Title label to present main radio livestreams */
+"Radio channels" = "Chanals da radio";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Receptur ord funcziun.";
@@ -426,15 +384,18 @@
 "Remove favorites" = "Allontanar favurits";
 
 /* Button label to remove a media from the watch later list, from the media long-press menu
-   Button label to remove a media from the watch later list, from the media preview window */
+   Button label to remove a media from the watch later list, from the media preview window
+   Context menu action to remove a media from the watch later list */
 "Remove from \"Watch later\"" = "Pigliar davent da \"guardar pli tard\"";
 
 /* Button label to remove a download from the media long-press menu
-   Button label to remove a download from the media preview window */
+   Button label to remove a download from the media preview window
+   Context menu action to remove a media from the downloads */
 "Remove from downloads" = "Allontanar da telechargiadas";
 
 /* Button label to remove a show from favorites in the show long-press menu
-   Button label to remove a show from favorites in the show preview window */
+   Button label to remove a show from favorites in the show preview window
+   Context menu action to remove a show from favorites */
 "Remove from favorites" = "Allontanar da favurits";
 
 /* Short label identifying a replay sport event. Display in uppercase. */
@@ -443,9 +404,7 @@
 /* Title of the reset search settings button */
 "Reset" = "Reset";
 
-/* [Technical] Search page type for analytics measurements
-   Label in the left menu to present the search view
-   Search page title
+/* Label to present the search view
    Search placeholder text
    Title displayed when there is no search criterium entered */
 "Search" = "Tschertga";
@@ -456,26 +415,30 @@
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Midà server tar '%@'";
 
-/* Label in the left menu to present settings */
+/* No comment provided by engineer. */
 "Settings" = "Configurar";
 
 /* Button label of the sharing choice in the media long-press menu
    Button label of the sharing choice in the media preview window
+   Button label of the sharing choice in the module long-press menu
    Button label of the sharing choice in the module preview window
    Button label of the sharing choice in the show long-press menu
    Button label of the sharing choice in the show preview window
+   Context menu action to share a media
+   Context menu action to share a module
+   Context menu action to share a show
    Title of the action view to choose a sharing action */
 "Share" = "Parter";
 
 /* Show more button label when a link is available for broadcast information. */
 "Show more" = "Dapli";
 
-/* Label used on a radio home page to present its associated shows
-   Label used on a radio home page to present the shows AZ and shows by date access buttons.
-   Label used on the TV home page to present the shows AZ and shows by date access buttons.
-   Show search result header
+/* Show search result header
    Shows search setting option
-   Shows search setting option list view title */
+   Shows search setting option list view title
+   Title label used to present radio associated shows
+   Title label used to present the radio shows AZ and radio shows by date access buttons.
+   Title label used to present the TV shows AZ and TV shows by date access buttons. */
 "Shows" = "Emissiuns";
 
 /* Title of the button to skip updating the application */
@@ -483,6 +446,9 @@
 
 /* Short label identifying content which will be available soon. */
 "Soon" = "Proximamain";
+
+/* Title label used to present live center medias. Only on test versions. */
+"Sport" = "Sport";
 
 /* Subtitles short label on media cells */
 "ST" = "ST";
@@ -501,9 +467,6 @@
 
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Suttitels";
-
-/* [Technical] System page type for analytics measurements */
-"System" = "Sistem";
 
 /* No comment provided by engineer. */
 "The application unexpectedly quit" = "L‘applicaziun è serrada nunspetgadamain";
@@ -529,10 +492,10 @@
 /* Message displayed if the Google Cast receiver cannot play videos */
 "The Google Cast receiver cannot play videos." = "Receptur Google Cast na po laschar ir videos.";
 
-/* Label used on a radio home page to present the latest audios */
+/* Title label used to present the radio latest audios */
 "The latest audios" = "Ils pli novs audios";
 
-/* Label used on a radio home page to present the latest audio episodes */
+/* Title label used to present the radio latest audio episodes */
 "The latest episodes" = "Las ultimas episodas";
 
 /* Error message when a media cannot be opened via Handoff
@@ -552,6 +515,9 @@
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "La preschentaziun na po betg vegnir averta.";
 
+/* Title label to present Swiss satellite radios */
+"Thematic radios" = "Radios tematics";
+
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Il cuntegn n'è betg lubì da Google Cast.";
 
@@ -563,25 +529,18 @@
 "Today" = "Oz";
 
 /* Categories search setting option
-   Label used on the home page to present topics while loading. It appears if no network connection available and no cache available.
+   Title label used to present TV topics while loading. It appears if no network connection available and no cache available.
    Topics search setting option list view title */
 "Topics" = "Themas";
 
 /* Total space size, display at the bottom of download list */
 "Total space used: %@" = "Spazi: %@";
 
-/* Label used on the home page to present trending TV videos */
+/* Title label used to present trending TV videos */
 "Trending videos" = "Videos da trend";
 
-/* [Technical] TV page type for analytics measurements
-   TV menu section header label */
-"TV" = "TV";
-
-/* Title displayed at the top of the TV show list */
-"TV programmes A-Z" = "Emissiuns da TV dad A fin Z";
-
-/* Title displayed at the top of the screen where TV episodes can be accessed by date */
-"TV programmes by date" = "Emissiuns da TV tenor data";
+/* Title label to present main TV livestreams */
+"TV channels" = "Chanals da tv";
 
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Tutgar per tschertgar";
@@ -590,21 +549,18 @@
 "Update" = "Update";
 
 /* Header for video search results
+   Title displayed at the top of the video view
    Videos option */
 "Videos" = "Videos";
 
 /* Header for video and audio search results */
 "Videos and audios" = "Videos ed audios";
 
-/* Label in the left menu to present the watch later list
-   Title displayed at the top of the watch later list screen */
+/* Label to present the watch later list */
 "Watch later" = "Guardar pli tard";
 
 /* Web first label on media cells */
 "WEB FIRST" = "WEB l‘emprim";
-
-/* Label used on the home page to present scheduled livestream medias. Only on test versions. */
-"Web livestreams" = "Web direct";
 
 /* Title displayed at the top of the What's new view */
 "What's new" = "Il nov";
@@ -636,6 +592,3 @@
 
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "Vus essas vegni deconnectà automaticamain. Per mantegnair la sincronisaziun da las datas sur tut ils apparats far anc ina giada il login.";
-
-/* Title displayed at the top of the feedback view */
-"Your feedback" = "Voss resun";

@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchShowListCollectionViewCell : UICollectionViewCell <UICollectionViewDataSource, UICollectionViewDelegate>
 
+@property (class, nonatomic, readonly) CGFloat height;
+
 @property (nonatomic, nullable) NSArray<SRGShow *> *shows;
 
 @end

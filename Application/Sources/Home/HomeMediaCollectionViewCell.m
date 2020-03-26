@@ -11,6 +11,7 @@
 #import "ApplicationSettings.h"
 #import "Download.h"
 #import "History.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -37,6 +38,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *editorialLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
+@property (nonatomic, weak) IBOutlet UIView *thumbnailWrapperView;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
@@ -65,10 +67,13 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = UIColor.clearColor;
     
     self.mediaView.hidden = YES;
     self.placeholderView.hidden = NO;
+    
+    self.placeholderImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.placeholderImageView.layer.masksToBounds = YES;
     
     // Accommodate all kinds of usages (medium or small)
     self.placeholderImageView.image = [UIImage play_vectorImageAtPath:FilePathForImagePlaceholder(ImagePlaceholderMedia)
@@ -76,16 +81,18 @@
     
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
-    self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.thumbnailWrapperView.layer.masksToBounds = YES;
     
+    self.editorialLabel.layer.cornerRadius = LayoutStandardLabelCornerRadius;
+    self.editorialLabel.layer.masksToBounds = YES;
     self.editorialLabel.backgroundColor = UIColor.play_redColor;
     self.editorialLabel.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"OUR PICK", @"Label on the editor or trending lists in the home page, for prefered contents. Known as the SRF-TIPP label. Display in uppercase.").uppercaseString];
     self.editorialLabel.hidden = YES;
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
-    [self.webFirstLabel play_setWebFirstBadge];
-    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
     
     self.youthProtectionColorImageView.hidden = YES;
@@ -122,8 +129,6 @@
     self.progressView.hidden = YES;
     
     [self.thumbnailImageView play_resetImage];
-    
-    self.backgroundColor = UIColor.play_blackColor;
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow
@@ -224,12 +229,6 @@
 
 - (void)reloadData
 {
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        backgroundColor = self.module.backgroundColor;
-    }
-    self.backgroundColor = backgroundColor;
-    
     if (! self.media) {
         self.mediaView.hidden = YES;
         self.placeholderView.hidden = NO;
@@ -240,7 +239,6 @@
     self.placeholderView.hidden = YES;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
-    self.titleLabel.backgroundColor = backgroundColor;
     self.titleLabel.text = self.media.title;
     
     self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
@@ -272,26 +270,33 @@
     else {
         self.subtitleLabel.text = nil;
     }
-    self.subtitleLabel.backgroundColor = backgroundColor;
     
     [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
     
     self.media360ImageView.hidden = (self.media.presentation != SRGPresentation360);
     
     BOOL downloaded = [Download downloadForMedia:self.media].state == DownloadStateDownloaded;
-    self.webFirstLabel.hidden = ! self.media.play_webFirst;
-    self.subtitlesLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! self.media.play_subtitlesAvailable || downloaded);
-    self.audioDescriptionImageView.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! self.media.play_audioDescriptionAvailable || downloaded);
-
+    
+    BOOL isWebFirst = self.media.play_webFirst;
+    self.webFirstLabel.hidden = ! isWebFirst;
+    
+    BOOL hasSubtitles = ApplicationSettingSubtitleAvailabilityDisplayed() && self.media.play_subtitlesAvailable && ! downloaded;
+    self.subtitlesLabel.hidden = ! hasSubtitles;
+    
+    BOOL hasAudioDescription = ApplicationSettingAudioDescriptionAvailabilityDisplayed() && self.media.play_audioDescriptionAvailable && ! downloaded;
+    self.audioDescriptionImageView.hidden = ! hasAudioDescription;
+    
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    
+    // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
+    self.titleLabel.numberOfLines = (isWebFirst || hasSubtitles || hasAudioDescription) ? 1 : 2;
+    
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
     
     UIColor *titleTextColor = UIColor.whiteColor;
     UIColor *subtitleTextColor = UIColor.play_lightGrayColor;
-    if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        titleTextColor = self.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultLinkColor;
-        subtitleTextColor = self.module.textColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultTextColor;
-    }
     
     SRGBlockingReason blockingReason = [self.media blockingReasonAtDate:NSDate.date];
     if (blockingReason == SRGBlockingReasonNone || blockingReason == SRGBlockingReasonStartDate) {
@@ -327,10 +332,6 @@
     self.downloadStatusImageView.hidden = NO;
     
     UIColor *imageColor = UIColor.play_lightGrayColor;
-    if (self.module && ! ApplicationConfiguration.sharedApplicationConfiguration.moduleColorsDisabled) {
-        imageColor = self.module.linkColor ?: ApplicationConfiguration.sharedApplicationConfiguration.moduleDefaultTextColor;
-    }
-    
     UIImage *downloadImage = nil;
     
     switch (download.state) {

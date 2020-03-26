@@ -6,6 +6,7 @@
 
 #import "NavigationController.h"
 
+#import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
@@ -21,55 +22,18 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithRootViewController:(UIViewController *)rootViewController radioChannel:(RadioChannel *)radioChannel
-{
-    UIStatusBarStyle darkStatusBarStyle = UIStatusBarStyleDefault;
-#ifdef __IPHONE_13_0
-    if (@available(iOS 13, *)) {
-        darkStatusBarStyle = UIStatusBarStyleDarkContent;
-    }
-#endif
-    UIStatusBarStyle statusBarStyle = radioChannel.hasDarkStatusBar ? darkStatusBarStyle : UIStatusBarStyleLightContent;
-    return [self initWithRootViewController:rootViewController tintColor:radioChannel.titleColor backgroundColor:radioChannel.color statusBarStyle:statusBarStyle];
-}
-
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
                                  tintColor:(UIColor *)tintColor
                            backgroundColor:(UIColor *)backgroundColor
                             statusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     if (self = [super initWithRootViewController:rootViewController]) {
-        self.statusBarStyle = statusBarStyle;
         self.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
         
         UINavigationBar *navigationBar = self.navigationBar;
         navigationBar.barStyle = UIBarStyleBlack;
         
-        // Apply background colors with a small shadow for better readability
-        if (backgroundColor) {
-            navigationBar.layer.shadowOpacity = 1.f;
-            
-            navigationBar.barTintColor = backgroundColor;
-            navigationBar.translucent = NO;
-        }
-        // Use standard blur with no shadow (which would break the blur).
-        else {
-            navigationBar.layer.shadowOpacity = 0.f;
-            
-            navigationBar.barTintColor = nil;
-            navigationBar.translucent = YES;
-        }
-        
-        UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
-        navigationBar.tintColor = foregroundColor;
-        navigationBar.titleTextAttributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithSize:18.f],
-                                               NSForegroundColorAttributeName : foregroundColor };
-        
-        for (NSNumber *controlState in @[ @(UIControlStateNormal), @(UIControlStateHighlighted), @(UIControlStateDisabled) ]) {
-            [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f],
-                                                                                                                   NSForegroundColorAttributeName : foregroundColor }
-                                                                                                       forState:controlState.integerValue];
-        }
+        [self updateWithTintColor:tintColor backgroundColor:backgroundColor statusBarStyle:statusBarStyle];
     }
     return self;
 }
@@ -113,6 +77,71 @@
     return [self.topViewController preferredStatusBarUpdateAnimation];
 }
 
+#pragma mark UI updates
+
+- (void)updateWithTintColor:(UIColor *)tintColor backgroundColor:(UIColor *)backgroundColor statusBarStyle:(UIStatusBarStyle)statusBarStyle
+{
+    self.statusBarStyle = statusBarStyle;
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+    UINavigationBar *navigationBar = self.navigationBar;
+    
+    // Apply background colors with a small shadow for better readability
+    if (backgroundColor) {
+        navigationBar.layer.shadowOpacity = 1.f;
+        
+        navigationBar.barTintColor = backgroundColor;
+        navigationBar.translucent = NO;
+    }
+    // Use standard blur with no shadow (which would break the blur).
+    else {
+        navigationBar.layer.shadowOpacity = 0.f;
+        
+        if (@available(iOS 13, *)) {
+            navigationBar.barTintColor = nil;
+        }
+        else {
+            navigationBar.barTintColor = UIColor.play_blurTintColor;
+        }
+        
+        navigationBar.translucent = YES;
+    }
+    
+    UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
+    navigationBar.tintColor = foregroundColor;
+    navigationBar.titleTextAttributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithSize:18.f],
+                                           NSForegroundColorAttributeName : foregroundColor };
+    
+    for (NSNumber *controlState in @[ @(UIControlStateNormal), @(UIControlStateHighlighted), @(UIControlStateDisabled) ]) {
+        [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
+                                                                                                   forState:controlState.integerValue];
+    }
+    
+    [navigationBar setNeedsDisplay];
+    
+    // See https://stackoverflow.com/a/39543669/760435
+    [navigationBar layoutIfNeeded];
+}
+
+- (void)updateWithRadioChannel:(RadioChannel *)radioChannel animated:(BOOL)animated
+{
+    void (^animations)(void) = ^{
+        UIStatusBarStyle darkStatusBarStyle = UIStatusBarStyleDefault;
+        if (@available(iOS 13, *)) {
+            darkStatusBarStyle = UIStatusBarStyleDarkContent;
+        }
+        UIStatusBarStyle statusBarStyle = radioChannel.hasDarkStatusBar ? darkStatusBarStyle : UIStatusBarStyleLightContent;
+        [self updateWithTintColor:radioChannel.titleColor backgroundColor:radioChannel.color statusBarStyle:statusBarStyle];
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:0.2 animations:animations];
+    }
+    else {
+        animations();
+    }
+}
+
 #pragma mark Accessibility
 
 - (BOOL)accessibilityPerformEscape
@@ -127,6 +156,35 @@
     }
     else {
         return NO;
+    }
+}
+
+#pragma mark PlayApplicationNavigation protocol
+
+- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
+{
+    [self popToRootViewControllerAnimated:NO];
+    
+    UIViewController *rootViewController = self.viewControllers[0];
+    if ([rootViewController conformsToProtocol:@protocol(PlayApplicationNavigation)]) {
+        UIViewController<PlayApplicationNavigation> *navigableRootViewController = (UIViewController<PlayApplicationNavigation> *)rootViewController;
+        return [navigableRootViewController openApplicationSectionInfo:applicationSectionInfo];
+    }
+    else {
+        return NO;
+    }
+}
+
+#pragma mark Scrollable protocol
+
+- (void)scrollToTopAnimated:(BOOL)animated
+{
+    if (self.viewControllers.count == 1) {
+        UIViewController *rootViewController = self.viewControllers.firstObject;
+        if ([rootViewController conformsToProtocol:@protocol(Scrollable)]) {
+            UIViewController<Scrollable> *scrollableRootViewController = (UIViewController<Scrollable> *)rootViewController;
+            [scrollableRootViewController scrollToTopAnimated:animated];
+        }
     }
 }
 

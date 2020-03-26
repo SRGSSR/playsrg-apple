@@ -9,6 +9,7 @@
 #import "AnalyticsConstants.h"
 #import "Banner.h"
 #import "Favorites.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PushService.h"
 #import "UIColor+PlaySRG.h"
@@ -21,6 +22,7 @@
 
 @interface FavoriteTableViewCell ()
 
+@property (nonatomic, weak) IBOutlet UIView *wrapperView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UIButton *subscriptionButton;
@@ -35,14 +37,15 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.clearColor;
     
-    UIView *colorView = [[UIView alloc] init];
-    colorView.backgroundColor = backgroundColor;
-    self.selectedBackgroundView = colorView;
+    UIView *selectedBackgroundView = [[UIView alloc] init];
+    selectedBackgroundView.backgroundColor = UIColor.clearColor;
+    self.selectedBackgroundView = selectedBackgroundView;
     
-    self.titleLabel.backgroundColor = backgroundColor;
+    self.wrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.wrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.wrapperView.layer.masksToBounds = YES;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     
@@ -147,7 +150,7 @@
 
 - (id)previewObject
 {
-    return (! self.editing) ? self.show : nil;
+    return ! self.editing ? self.show : nil;
 }
 
 - (NSValue *)previewAnchorRect

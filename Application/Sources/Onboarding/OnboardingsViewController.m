@@ -6,6 +6,7 @@
 
 #import "OnboardingsViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "Onboarding.h"
 #import "OnboardingTableViewCell.h"
 #import "Play-Swift-Bridge.h"
@@ -63,11 +64,16 @@
     return UIStatusBarStyleLightContent;
 }
 
-#pragma mark Overrides
+#pragma mark SRGAnalyticsViewTracking protocol
 
-- (AnalyticsPageType)pageType
+- (NSString *)srg_pageViewTitle
 {
-    return AnalyticsPageTypeSystem;
+    return AnalyticsPageTitleFeatures;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ];
 }
 
 #pragma mark UITableViewDataSource protocol

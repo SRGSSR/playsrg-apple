@@ -21,15 +21,23 @@
 /* Title of the first cell of a media list on homepage. */
 "All content for \"%@\"" = "Mostra tutto \"%@\"";
 
-/* Accessibility label for the audio description badge */
+/* Accessibility label for a media cell with audio description
+   Accessibility label for the audio description badge */
 "Audio described" = "Audiodescrizione";
 
-/* Close button label on player view
-   Close button label on search view */
+/* Close button label
+   Close button label on player view
+   Close button label on settings view */
 "Close" = "Chiudere";
 
 /* Player close button hint */
-"Closes the player while continuing to play audio." = "Chiude il player mentre si continua a riprodurre l'audio.";
+"Closes the player and continue playing audio." = "Chiude il player ma continua a riprodurre l'audio.";
+
+/* Player close button hint */
+"Closes the player and continue playing in the background." = "Chiude il player ma continua la riproduzione in background";
+
+/* Player close button hint */
+"Closes the player and continue playing video with AirPlay." = "Chiude il player ma continua la riproduzione con AirPlay.";
 
 /* Delete button label */
 "Delete" = "Elimina";
@@ -61,20 +69,8 @@
 /* Accessibility hint associated with the account header */
 "Manages account information" = "Gestire le informazioni sull'account";
 
-/* Menu button label */
-"Menu" = "Menu";
-
-/* Announcement made when the left menu is closed */
-"Menu closed" = "Menu chiuso";
-
-/* Announcement made when the left menu is opened */
-"Menu open" = "Menu aperto";
-
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Il mio account";
-
-/* Notifications button label */
-"Notifications" = "Notifiche";
 
 /* Mini player label */
 "Now playing: %@" = "In riproduzione: %@";
@@ -88,11 +84,17 @@
 /* Show cell hint */
 "Opens show details." = "Dettagli del programma.";
 
+/* Mini player action hint */
+"Opens the full screen player" = "Player a schermo pieno";
+
 /* Accessibility label for the multi audio badge */
 "Original version" = "Versione originale";
 
-/* Livestream play action hint */
-"Plays livestream." = "Play streaming live.";
+/* Pause button label */
+"Pause" = "Pausa";
+
+/* Play button label */
+"Play" = "Play";
 
 /* Media cell hint
    Mini player action hint */
@@ -120,17 +122,20 @@
 /* A download button label */
 "Retry download" = "Riprovare il download";
 
-/* Search button label */
-"Search" = "Ricerca";
-
 /* Regional livestream selection hint */
 "Select regional radio" = "Selezionare radio regionale";
+
+/* Settings button label on home view */
+"Settings" = "Impostazioni";
 
 /* Share button label on player view */
 "Share" = "Condividi";
 
 /* Homepage header action hint */
 "Shows all contents." = "Mostra tutti i contenuti.";
+
+/* Stop button label */
+"Stop" = "Stop";
 
 /* A download button label */
 "Stop downloading" = "Interrompere il download";

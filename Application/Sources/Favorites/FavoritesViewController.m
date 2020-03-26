@@ -6,12 +6,14 @@
 
 #import "FavoritesViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
 #import "ShowViewController.h"
 #import "FavoriteTableViewCell.h"
 #import "Favorites.h"
+#import "Layout.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -39,21 +41,45 @@
 
 @implementation FavoritesViewController
 
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionFavorites);
+}
+
 #pragma mark View lifecycle
+
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
+        
+    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds];
+    tableView.backgroundColor = UIColor.clearColor;
+    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.allowsSelectionDuringEditing = YES;
+    tableView.allowsMultipleSelectionDuringEditing = YES;
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:tableView];
+    self.tableView = tableView;
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = UIColor.whiteColor;
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [tableView insertSubview:refreshControl atIndex:0];
+    self.refreshControl = refreshControl;
+    
+    self.view = view;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Favorites", @"Title displayed at the top of the favorites screen");
-
-    self.view.backgroundColor = UIColor.play_blackColor;
-    
-    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.allowsSelectionDuringEditing = YES;
-    self.tableView.allowsMultipleSelectionDuringEditing = YES;
     
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
@@ -61,12 +87,6 @@
     NSString *cellIdentifier = NSStringFromClass(FavoriteTableViewCell.class);
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
-    
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = UIColor.whiteColor;
-    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:refreshControl atIndex:0];
-    self.refreshControl = refreshControl;
     
     // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
     // stretched
@@ -173,11 +193,6 @@
     });
 }
 
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeFavorites;
-}
-
 #pragma mark UI
 
 - (void)reloadDataAnimated:(BOOL)animated
@@ -209,7 +224,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsMake(10.f, 0.f, 5.f, 0.f);
+    return LayoutStandardTableViewPaddingInsets;
 }
 
 #pragma mark DZNEmptyDataSetSource protocol
@@ -301,6 +316,18 @@
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteRemove labels:labels];
 }
 
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return AnalyticsPageTitleFavorites;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -317,8 +344,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    return (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 94.f : 110.f;
+    return LayoutTableViewCellStandardHeight + LayoutStandardMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(FavoriteTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

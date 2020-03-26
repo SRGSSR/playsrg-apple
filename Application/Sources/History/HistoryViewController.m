@@ -6,9 +6,11 @@
 
 #import "HistoryViewController.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "History.h"
 #import "HistoryTableViewCell.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
@@ -17,7 +19,6 @@
 
 #import <libextobjc/libextobjc.h>
 #import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
 #import <SRGUserData/SRGUserData.h>
 
 @interface HistoryViewController () <HistoryTableViewCellDelegate>
@@ -30,19 +31,36 @@
 
 @implementation HistoryViewController
 
+#pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return TitleForApplicationSection(ApplicationSectionHistory);
+}
+
 #pragma mark View lifecycle
+
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
+        
+    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds];
+    tableView.backgroundColor = UIColor.clearColor;
+    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.allowsSelectionDuringEditing = YES;
+    tableView.allowsMultipleSelectionDuringEditing = YES;
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:tableView];
+    self.tableView = tableView;
+    
+    self.view = view;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = NSLocalizedString(@"History", @"Title displayed at the top of the history screen");
-    
-    self.view.backgroundColor = UIColor.play_blackColor;
-    
-    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.tableView.allowsSelectionDuringEditing = YES;
-    self.tableView.allowsMultipleSelectionDuringEditing = YES;
     
     self.emptyTableTitle = NSLocalizedString(@"No history", @"Text displayed when no history is available");
     self.emptyTableSubtitle = NSLocalizedString(@"Recently played medias will be displayed here", @"Hint displayed when no history is available");
@@ -101,11 +119,6 @@
     [super refreshDidFinishWithError:error];
 }
 
-- (AnalyticsPageType)pageType
-{
-    return AnalyticsPageTypeHistory;
-}
-
 #pragma mark Data
 
 - (void)updateMediaURNsWithCompletionBlock:(void (^)(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs))completionBlock
@@ -147,7 +160,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsMake(10.f, 0.f, 5.f, 0.f);
+    return LayoutStandardTableViewPaddingInsets;
 }
 
 #pragma mark HistoryTableViewCellDelegate protocol
@@ -169,6 +182,18 @@
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleHistoryRemove labels:labels];
 }
 
+#pragma mark SRGAnalyticsViewTracking protocol
+
+- (NSString *)srg_pageViewTitle
+{
+    return AnalyticsPageTitleHistory;
+}
+
+- (NSArray<NSString *> *)srg_pageViewLevels
+{
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -185,8 +210,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    return (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedAscending) ? 94.f : 110.f;
+    return LayoutTableViewCellStandardHeight + LayoutStandardMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(HistoryTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

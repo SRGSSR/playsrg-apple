@@ -7,26 +7,49 @@
 #import "AnalyticsConstants.h"
 #import "NSBundle+PlaySRG.h"
 
-NSString *AnalyticsNameForPageType(AnalyticsPageType pageType)
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSNumber *, NSString *> *s_names;
-    dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(AnalyticsPageTypeTV) : NSLocalizedString(@"TV", @"[Technical] TV page type for analytics measurements"),
-                     @(AnalyticsPageTypeRadio) : NSLocalizedString(@"Radio", @"[Technical] Radio page type for analytics measurements"),
-                     @(AnalyticsPageTypeOnline) : NSLocalizedString(@"Online", @"[Technical] Online page type for analytics measurements"),
-                     @(AnalyticsPageTypeSystem) : NSLocalizedString(@"System", @"[Technical] System page type for analytics measurements"),
-                     @(AnalyticsPageTypeDownloads) : NSLocalizedString(@"Downloads", @"[Technical] Downloads page type for analytics measurements"),
-                     @(AnalyticsPageTypeHistory) : NSLocalizedString(@"History", @"[Technical] History page type for analytics measurements"),
-                     @(AnalyticsPageTypeFavorites) : NSLocalizedString(@"Favorites", @"[Technical] Favorites page type for analytics measurements"),
-                     @(AnalyticsPageTypeNotifications) : NSLocalizedString(@"Notifications", @"[Technical] Notifications page type for analytics measurements"),
-                     @(AnalyticsPageTypeSearch) : NSLocalizedString(@"Search", @"[Technical] Search page type for analytics measurements"),
-                     @(AnalyticsPageTypeOnboarding) : NSLocalizedString(@"Onboarding", @"[Technical] Onboarding page type for analytics measurements"),
-                     @(AnalyticsPageTypeUser) : PlaySRGNonLocalizedString(@"User"),
-                     @(AnalyticsPageTypeWatchLater) : PlaySRGNonLocalizedString(@"Watch later") };
-    });
-    return s_names[@(pageType)];
-}
+// See reference specifications at https://confluence.srg.beecollaboration.com/display/SRGPLAY/Play+SRG+simplified+page+view+analytics
+
+AnalyticsPageLevel const AnalyticsPageLevelApplication = @"application";
+AnalyticsPageLevel const AnalyticsPageLevelAudio = @"audio";
+AnalyticsPageLevel const AnalyticsPageLevelEvent = @"event";
+AnalyticsPageLevel const AnalyticsPageLevelFeature = @"feature";
+AnalyticsPageLevel const AnalyticsPageLevelGoogleCast = @"google cast";
+AnalyticsPageLevel const AnalyticsPageLevelLive = @"live";
+AnalyticsPageLevel const AnalyticsPageLevelPlay = @"play";
+AnalyticsPageLevel const AnalyticsPageLevelPreview = @"preview";
+AnalyticsPageLevel const AnalyticsPageLevelSearch = @"search";
+AnalyticsPageLevel const AnalyticsPageLevelShow = @"show";
+AnalyticsPageLevel const AnalyticsPageLevelUser = @"user";
+AnalyticsPageLevel const AnalyticsPageLevelVideo = @"video";
+
+AnalyticsPageTitle const AnalyticsPageTitleBetaTesting = @"beta testing";
+AnalyticsPageTitle const AnalyticsPageTitleDevices = @"devices";
+AnalyticsPageTitle const AnalyticsPageTitleDownloads = @"downloads";
+AnalyticsPageTitle const AnalyticsPageTitleEvents = @"events";
+AnalyticsPageTitle const AnalyticsPageTitleFavorites = @"favorites";
+AnalyticsPageTitle const AnalyticsPageTitleFeatures = @"features";
+AnalyticsPageTitle const AnalyticsPageTitleFeedback = @"feedback";
+AnalyticsPageTitle const AnalyticsPageTitleHistory = @"history";
+AnalyticsPageTitle const AnalyticsPageTitleHome = @"home";
+AnalyticsPageTitle const AnalyticsPageTitleLatest = @"latest";
+AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes = @"latest episodes";
+AnalyticsPageTitle const AnalyticsPageTitleLicense = @"license";
+AnalyticsPageTitle const AnalyticsPageTitleLicenses = @"licenses";
+AnalyticsPageTitle const AnalyticsPageTitleMostPopular = @"most popular";
+AnalyticsPageTitle const AnalyticsPageTitleNotifications = @"notifications";
+AnalyticsPageTitle const AnalyticsPageTitlePlayer = @"player";
+AnalyticsPageTitle const AnalyticsPageTitleRadio = @"radio";
+AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite = @"satellite radio";
+AnalyticsPageTitle const AnalyticsPageTitleSettings = @"settings";
+AnalyticsPageTitle const AnalyticsPageTitleShowsAZ = @"shows a-z";
+AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar = @"shows calendar";
+AnalyticsPageTitle const AnalyticsPageTitleSoonExpiring = @"soon expiring";
+AnalyticsPageTitle const AnalyticsPageTitleSourceCode = @"source code";
+AnalyticsPageTitle const AnalyticsPageTitleSports = @"sports";
+AnalyticsPageTitle const AnalyticsPageTitleTrending = @"trending";
+AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
+AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
+AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
 
 AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
 AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download_add";

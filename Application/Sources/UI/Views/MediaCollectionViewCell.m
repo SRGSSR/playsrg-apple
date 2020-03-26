@@ -12,6 +12,7 @@
 #import "Banner.h"
 #import "Download.h"
 #import "History.h"
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
@@ -29,6 +30,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
+@property (nonatomic, weak) IBOutlet UIView *thumbnailWrapperView;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
@@ -58,20 +60,16 @@
 {
     [super awakeFromNib];
     
-    UIColor *backgroundColor = UIColor.play_blackColor;
-    self.backgroundColor = backgroundColor;
+    self.backgroundColor = UIColor.clearColor;
     
-    self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.thumbnailWrapperView.layer.masksToBounds = YES;
     
-    self.titleLabel.backgroundColor = backgroundColor;
-    
-    self.subtitleLabel.backgroundColor = backgroundColor;
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
-    [self.webFirstLabel play_setWebFirstBadge];
-    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
     
     self.audioDescriptionImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio described", @"Accessibility label for the audio description badge");
@@ -226,10 +224,33 @@
     self.media360ImageView.hidden = (media.presentation != SRGPresentation360);
     
     BOOL downloaded = [Download downloadForMedia:media].state == DownloadStateDownloaded;
-    self.webFirstLabel.hidden = ! media.play_webFirst;
-    self.subtitlesLabel.hidden = (! ApplicationSettingSubtitleAvailabilityDisplayed() || ! media.play_subtitlesAvailable || downloaded);
-    self.audioDescriptionImageView.hidden = (! ApplicationSettingAudioDescriptionAvailabilityDisplayed() || ! media.play_audioDescriptionAvailable || downloaded);
-
+    
+    BOOL isWebFirst = media.play_webFirst;
+    self.webFirstLabel.hidden = ! isWebFirst;
+    
+    BOOL hasSubtitles = ApplicationSettingSubtitleAvailabilityDisplayed() && media.play_subtitlesAvailable && ! downloaded;
+    self.subtitlesLabel.hidden = ! hasSubtitles;
+    
+    BOOL hasAudioDescription = ApplicationSettingAudioDescriptionAvailabilityDisplayed() && media.play_audioDescriptionAvailable && ! downloaded;
+    self.audioDescriptionImageView.hidden = ! hasAudioDescription;
+    
+    [self.webFirstLabel play_setWebFirstBadge];
+    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+    
+    // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
+    if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+        if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
+            self.titleLabel.numberOfLines = (isWebFirst || hasSubtitles || hasAudioDescription) ? 1 : 2;
+        }
+        else {
+            self.titleLabel.numberOfLines = 2;
+        }
+    }
+    else {
+        self.titleLabel.numberOfLines = (isWebFirst || hasSubtitles || hasAudioDescription) ? 1 : 2;
+    }
+    
     self.youthProtectionColorImageView.image = YouthProtectionImageForColor(self.media.youthProtectionColor);
     self.youthProtectionColorImageView.hidden = (self.youthProtectionColorImageView.image == nil);
     
@@ -255,29 +276,22 @@
 
 #pragma mark UI
 
-// Work around iOS autolayout bug (uninstalled constraints still active and conflicting at runtime)
-// See http://stackoverflow.com/a/27697726/760435
-// and http://stackoverflow.com/questions/26023201/why-do-i-get-an-autolayout-error-on-a-constraint-that-should-not-be-installed-fo
-//
-// This is visible in layouts which are quite different and for which uninstalled constraints, still
-// active, will incorrectly conflict at runtime.
-//
-// To fix:
-//   - Create an outlet collection for each size class for which a specialization has been defined
-//   - In IB, associate each constraint which is not installed for all size classes with the corresponding outlet
-//     collection(s)
-//   - Implement the following method to disable those constraints manually
-//   - Run. If conflicts still remain, lower priorities of remaining conflicting constraints
 - (void)updateActiveConstraints
 {
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
         for (NSLayoutConstraint *layoutConstraint in self.allSizeLayoutConstraints) {
-            layoutConstraint.active = NO;
+            layoutConstraint.priority = 100;
+        }
+        for (NSLayoutConstraint *layoutConstraint in self.compactRegularLayoutConstraints) {
+            layoutConstraint.priority = 999;
         }
     }
     else {
+        for (NSLayoutConstraint *layoutConstraint in self.allSizeLayoutConstraints) {
+            layoutConstraint.priority = 999;
+        }
         for (NSLayoutConstraint *layoutConstraint in self.compactRegularLayoutConstraints) {
-            layoutConstraint.active = NO;
+            layoutConstraint.priority = 100;
         }
     }
 }

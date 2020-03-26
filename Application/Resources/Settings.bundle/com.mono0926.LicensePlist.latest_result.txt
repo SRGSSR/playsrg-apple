@@ -278,6 +278,56 @@ name: InAppSettingsKit, nameSpecified:
 body: Copyright (c) 2009-2…
 version: 2.10
 
+name: MaterialComponents, nameSpecified: 
+body: 
+                   …
+version: 101.1.1
+
+name: MaterialComponents, nameSpecified: 
+body: 
+                   …
+version: 101.1.1
+
+name: MaterialComponents, nameSpecified: 
+body: 
+                   …
+version: 101.1.1
+
+name: MaterialComponents, nameSpecified: 
+body: 
+                   …
+version: 101.1.1
+
+name: MaterialComponents, nameSpecified: 
+body: 
+                   …
+version: 101.1.1
+
+name: MDFInternationalization, nameSpecified: 
+body: 
+                   …
+version: 2.0.0
+
+name: MDFInternationalization, nameSpecified: 
+body: 
+                   …
+version: 2.0.0
+
+name: MDFInternationalization, nameSpecified: 
+body: 
+                   …
+version: 2.0.0
+
+name: MDFInternationalization, nameSpecified: 
+body: 
+                   …
+version: 2.0.0
+
+name: MDFInternationalization, nameSpecified: 
+body: 
+                   …
+version: 2.0.0
+
 name: MGSwipeTableCell, nameSpecified: 
 body: The MIT License (MIT…
 version: 1.6.8
@@ -337,36 +387,6 @@ version: 6.1.3
 name: paper-onboarding, nameSpecified: 
 body: The MIT License (MIT…
 version: 6.1.3
-
-name: PPBadgeView, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 2.1.0
-
-name: PPBadgeView, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 2.1.0
-
-name: PPBadgeView, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 2.1.0
-
-name: PPBadgeView, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 2.1.0
-
-name: PPBadgeView, nameSpecified: 
-body: MIT License
-
-Copyrig…
-version: 2.1.0
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
@@ -430,9 +450,9 @@ version: 9.4.0
 
 name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 2.5.3
 
-name: CoconutKit, nameSpecified: , owner: defagos, version: 3.3.8
+name: CoconutKit, nameSpecified: , owner: defagos, version: 3.4
 
-name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 6.0.0
+name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 6.2.0
 
 name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
 
@@ -446,29 +466,29 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 4.0.0
+name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 4.1.0
 
 name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: srgcontentprotection-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
+name: srgcontentprotection-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 7.0.0
+name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 7.0.1
 
-name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
+name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
+name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
+name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 3.0.1
 
 name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: 3.0.0
+name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: 4.0.0
 
-name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
+name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
+name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: tagcommander-apple, nameSpecified: , owner: SRGSSR, version: 4.5.4_4.4.1_srg1
+name: tagcommander-apple, nameSpecified: , owner: SRGSSR, version: 4.5.4_4.4.1_srg3
 
 name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: v2.1.2_srg1
 

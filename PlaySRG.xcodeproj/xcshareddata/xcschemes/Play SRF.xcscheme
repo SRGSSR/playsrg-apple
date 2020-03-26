@@ -37,6 +37,16 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "08B77A442409C06000A3BC3B"
+               BuildableName = "Play SRF screenshots.xctest"
+               BlueprintName = "Play SRF screenshots"
+               ReferencedContainer = "container:PlaySRG.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

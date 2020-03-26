@@ -6,6 +6,7 @@
 
 #import "RequestViewController.h"
 
+#import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -21,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface SearchSettingsViewController : RequestViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SearchSettingsViewController : RequestViewController <SRGAnalyticsViewTracking, UITableViewDataSource, UITableViewDelegate>
 
 /**
  *  The default settings (including aggregations).

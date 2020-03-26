@@ -9,6 +9,7 @@
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "NSArray+PlaySRG.h"
+#import "NSBundle+PlaySRG.h"
 #import "SearchSettingsHeaderView.h"
 #import "SearchSettingMultiSelectionCell.h"
 #import "SearchSettingSelectorCell.h"
@@ -159,7 +160,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.play_popoverGrayColor;
+    self.view.backgroundColor = UIColor.play_popoverGrayBackgroundColor;
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = UIColor.clearColor;
@@ -592,12 +593,12 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (NSString *)srg_pageViewTitle
 {
-    return self.title;
+    return AnalyticsPageTitleSettings;
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
-    return @[ AnalyticsNameForPageType(AnalyticsPageTypeSearch) ];
+    return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelSearch ];
 }
 
 #pragma mark UITableViewDataSource protocol

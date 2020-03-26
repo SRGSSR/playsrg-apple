@@ -4,74 +4,76 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "AnalyticsConstants.h"
+#import "RadioChannel.h"
+#import "TVChannel.h"
+
 #import <CoreMedia/CoreMedia.h>
 #import <Foundation/Foundation.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 
-#import "RadioChannel.h"
-#import "TVChannel.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, HomeSection) {
-    HomeSectionUnknown,
+    HomeSectionUnknown = 0,
     
     // TV sections
     HomeSectionTVTrending,
-    HomeSectionTVLive,
     HomeSectionTVEvents,
     HomeSectionTVTopics,
     HomeSectionTVLatest,
     HomeSectionTVMostPopular,
     HomeSectionTVSoonExpiring,
-    HomeSectionTVScheduledLivestreams,
-    HomeSectionTVLiveCenter,
     HomeSectionTVShowsAccess,
     HomeSectionTVFavoriteShows,
     
     // Radio sections
-    HomeSectionRadioLive,
     HomeSectionRadioLatestEpisodes,
     HomeSectionRadioMostPopular,
     HomeSectionRadioLatest,
     HomeSectionRadioLatestVideos,
     HomeSectionRadioAllShows,
     HomeSectionRadioShowsAccess,
-    HomeSectionRadioFavoriteShows
+    HomeSectionRadioFavoriteShows,
+    
+    // Live sections
+    HomeSectionTVLive,
+    HomeSectionRadioLive,
+    HomeSectionRadioLiveSatellite,
+    HomeSectionTVLiveCenter,
+    HomeSectionTVScheduledLivestreams
 };
 
 typedef NS_ENUM(NSInteger, TopicSection) {
-    TopicSectionUnknown,
+    TopicSectionUnknown = 0,
     TopicSectionLatest,
     TopicSectionMostPopular
 };
 
-typedef NS_ENUM(NSInteger, MenuItem) {
-    MenuItemUnknown,
+typedef NS_ENUM(NSInteger, ApplicationSection) {
+    ApplicationSectionUnknown = 0,
     
-    MenuItemSearch,
-    MenuItemFavorites,
-    MenuItemWatchLater,
-    MenuItemDownloads,
-    MenuItemHistory,
+    ApplicationSectionSearch,
+    ApplicationSectionFavorites,
+    ApplicationSectionWatchLater,
+    ApplicationSectionDownloads,
+    ApplicationSectionHistory,
+    ApplicationSectionNotifications,
     
-    MenuItemTVOverview,
-    MenuItemTVByDate,
-    MenuItemTVShowAZ,
-    
-    MenuItemRadio,
-    MenuItemRadioShowAZ,
-    
-    MenuItemFeedback,
-    MenuItemSettings,
-    MenuItemHelp
+    ApplicationSectionOverview,
+    ApplicationSectionLive,
+    ApplicationSectionShowByDate,
+    ApplicationSectionShowAZ
 };
 
+OBJC_EXPORT NSString *TitleForApplicationSection(ApplicationSection applicationSection);
 OBJC_EXPORT NSString *TitleForHomeSection(HomeSection homeSection);
-OBJC_EXPORT NSString *TitleForMenuItem(MenuItem menuItem);
 OBJC_EXPORT NSString *TitleForTopicSection(TopicSection topicSection);
+
+OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection);
+OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection);
 
 OBJC_EXPORT void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller);
 OBJC_EXPORT NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval duration);
@@ -112,36 +114,29 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, readonly, getter=areMoreEpisodesHidden) BOOL moreEpisodesHidden;
-@property (nonatomic, readonly, getter=areModuleColorsDisabled) BOOL moduleColorsDisabled;
 
 @property (nonatomic, readonly, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, readonly, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
 
-@property (nonatomic, readonly) UIColor *moduleDefaultLinkColor;
-@property (nonatomic, readonly) UIColor *moduleDefaultTextColor;
-
-@property (nonatomic, readonly) NSArray<NSNumber *> *tvMenuItems;                       // wrap `MenuItem` values
-@property (nonatomic, readonly) NSArray<NSNumber *> *tvHomeSections;
+@property (nonatomic, readonly) NSArray<NSNumber *> *videoHomeSections;                 // wrap `HomeSection` values
+@property (nonatomic, readonly) NSArray<NSNumber *> *liveHomeSections;                  // wrap `HomeSection` values
 
 @property (nonatomic, readonly) BOOL tvTrendingEpisodesOnly;
 @property (nonatomic, readonly, nullable) NSNumber *tvTrendingEditorialLimit;
 
 @property (nonatomic, readonly, getter=isTvFeaturedHomeSectionHeaderHidden) BOOL tvFeaturedHomeSectionHeaderHidden;
 
-// The number of placeholders to be displayed while loading TV channels
-@property (nonatomic, readonly) NSInteger tvNumberOfLivePlaceholders;
-
 @property (nonatomic, readonly) NSInteger minimumSocialViewCount;                       // minimum value to display social view count
 
 @property (nonatomic, readonly) NSArray<NSNumber *> *topicSections;                     // wrap `TopicSection` values
 @property (nonatomic, readonly) NSArray<NSNumber *> *topicSectionsWithSubtopics;        // wrap `TopicSection` values
 
+@property (nonatomic, readonly, getter=areTopicHomeHeadersHidden) BOOL topicHomeHeadersHidden;
+
 @property (nonatomic, readonly) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic, readonly) NSArray<TVChannel *> *tvChannels;
 
 @property (nonatomic, readonly, getter=isRadioFeaturedHomeSectionHeaderHidden) BOOL radioFeaturedHomeSectionHeaderHidden;
-
-@property (nonatomic, readonly) NSArray<NSNumber *> *radioMenuItems;                    // wrap `MenuItem` values
 
 @property (nonatomic, readonly) NSUInteger pageSize;                                    // page size to be used in general throughout the app
 
@@ -164,10 +159,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 - (nullable RadioChannel *)radioChannelForUid:(NSString *)uid;
 - (nullable TVChannel *)tvChannelForUid:(NSString *)uid;
-
-- (nullable NSURL *)imageURLForTopicUid:(NSString *)uid;
-- (nullable NSString *)imageTitleForTopicUid:(NSString *)uid;
-- (nullable NSString *)imageCopyrightForTopicUid:(NSString *)uid;
 
 /**
  *  URLs to be used for sharing

@@ -7,6 +7,7 @@
 #import "DailyMediasViewController.h"
 
 #import "ApplicationConfiguration.h"
+#import "Layout.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
@@ -29,23 +30,37 @@
     if (self = [super init]) {
         self.date = date;
         self.radioChannel = radioChannel;
+        self.dateFormatter = NSDateFormatter.play_shortTimeFormatter;
     }
     return self;
 }
 
 #pragma mark View lifecycle
 
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.play_blackColor;
+    
+    UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
+    
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
+    collectionView.backgroundColor = UIColor.clearColor;
+    collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    collectionView.alwaysBounceVertical = YES;
+    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:collectionView];
+    self.collectionView = collectionView;
+    
+    self.view = view;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.dateFormatter = NSDateFormatter.play_shortTimeFormatter;
-    
-    self.view.backgroundColor = UIColor.play_blackColor;
-    
-    self.collectionView.backgroundColor = UIColor.clearColor;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.collectionView.alwaysBounceVertical = YES;
     
     [self updateAppearanceForSize:self.view.frame.size];
     
@@ -99,7 +114,7 @@
 
 - (void)updateAppearanceForSize:(CGSize)size
 {
-    if (UIDevice.play_deviceType == DeviceTypePhonePlus && size.width > size.height) {
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && size.width > size.height) {
         self.emptyCollectionImage = nil;
     }
     else {

@@ -6,6 +6,7 @@
 
 #import "RelatedContentView.h"
 
+#import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
@@ -26,8 +27,8 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_lightGrayButtonBackgroundColor;
-    self.layer.cornerRadius = 4.f;
+    self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.layer.cornerRadius = LayoutStandardViewCornerRadius;
 }
 
 #pragma mark Getters and setters
