@@ -16,9 +16,9 @@
 {
     UIColor *backgroundColor = self.backgroundColor;
     
-    // TODO: Remove when Play apps and web portal will use the same black background color
-    if ([backgroundColor isEqual:[UIColor srg_colorFromHexadecimalString:@"#1A1A1A"]]) {
-        backgroundColor = UIColor.play_blackColor;
+    // TODO: Remove #1A1A1A" test when Play apps and web portal will use the same black background color
+    if ([backgroundColor isEqual:[UIColor srg_colorFromHexadecimalString:@"#1A1A1A"]] || [backgroundColor isEqual:UIColor.play_blackColor]) {
+        backgroundColor = nil;
     }
     
     return [backgroundColor colorWithAlphaComponent:.3f];

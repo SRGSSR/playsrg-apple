@@ -23,6 +23,7 @@
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 #import "ShowsViewController.h"
+#import "SRGModule+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -603,8 +604,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
         }
             
         case HomeHeaderTypeView: {
-            BOOL hasBackgroundColor = (homeSectionInfo.module && ! [homeSectionInfo.module.backgroundColor isEqual:UIColor.play_blackColor]);
-            return LayoutStandardTableSectionHeaderHeight(hasBackgroundColor);
+            return LayoutStandardTableSectionHeaderHeight(homeSectionInfo.module.play_backgroundColor != nil);
             break;
         }
         
