@@ -9,6 +9,7 @@
 #import "HomeShowCollectionViewCell.h"
 #import "Layout.h"
 #import "ShowViewController.h"
+#import "UICollectionView+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -103,6 +104,24 @@ static const CGFloat kBottomInset = 15.f;
     [super reloadData];
     
     [self.collectionView reloadData];
+}
+
+#pragma mark Getters and setters
+
+- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured
+{
+    [super setHomeSectionInfo:homeSectionInfo featured:featured];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (homeSectionInfo) {
+            // Restore position in rows when scrolling vertically and returning to a previously scrolled row
+            CGPoint maxContentOffset = self.collectionView.play_maximumContentOffset;
+            CGPoint contentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
+                                                homeSectionInfo.contentOffset.y);
+            [self.collectionView setContentOffset:contentOffset animated:NO];
+        }
+        self.collectionView.scrollEnabled = (homeSectionInfo.items.count != 0);
+    });
 }
 
 #pragma mark UICollectionViewDataSource protocol
