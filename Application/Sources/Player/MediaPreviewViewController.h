@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MediaPreviewViewController : HLSViewController <SRGAnalyticsViewTracking>
+@interface MediaPreviewViewController : HLSViewController <SRGAnalyticsViewTracking, SRGLetterboxViewDelegate>
 
 - (instancetype)initWithMedia:(SRGMedia *)media;
 

@@ -156,14 +156,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *relatedContentsTitleLabel;
 @property (nonatomic, weak) IBOutlet UIStackView *relatedContentsStackView;
 
-// Switching to and from full-screen is made by adjusting the priority of a constraint at the bottom of the player view
+// Switching to and from full-screen is made by adjusting the priority of constraints at the top and bottom of the player view
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerTopConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerBottomConstraint;
 
 // Showing details is made by disabling the following height constraint property
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *collapsedDetailsLabelsHeightConstraint;
 
-// Displaying segments (if any) is achieved by adding a small offset to the player aspect ratio constraint
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatio16_9Constraint;
+// The aspect ratio constant is used to display the player with the best possible aspect ratio, taking into account
+// other frame changes into account (e.g. timeline display)
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioStandardConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioBigLandscapeScreenConstraint;
 
 @property (nonatomic, weak) IBOutlet UIGestureRecognizer *detailsGestureRecognizer;
@@ -929,7 +931,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)setFullScreen:(BOOL)fullScreen
 {
     self.pullDownGestureRecognizer.enabled = ! fullScreen;
-    self.playerBottomConstraint.priority = fullScreen ? MediaPlayerBottomConstraintFullScreenPriority : MediaPlayerBottomConstraintNormalPriority;
+    
+    UILayoutPriority priority = fullScreen ? MediaPlayerBottomConstraintFullScreenPriority : MediaPlayerBottomConstraintNormalPriority;
+    self.playerTopConstraint.priority = priority;
+    self.playerBottomConstraint.priority = priority;
     
     [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -982,11 +987,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular
             && self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular
             && isLandscape) {
-        self.playerAspectRatio16_9Constraint.priority = MediaPlayerViewAspectRatioConstraintLowPriority;
+        self.playerAspectRatioStandardConstraint.priority = MediaPlayerViewAspectRatioConstraintLowPriority;
         self.playerAspectRatioBigLandscapeScreenConstraint.priority = MediaPlayerViewAspectRatioConstraintNormalPriority;
     }
     else {
-        self.playerAspectRatio16_9Constraint.priority = MediaPlayerViewAspectRatioConstraintNormalPriority;
+        self.playerAspectRatioStandardConstraint.priority = MediaPlayerViewAspectRatioConstraintNormalPriority;
         self.playerAspectRatioBigLandscapeScreenConstraint.priority = MediaPlayerViewAspectRatioConstraintLowPriority;
     }
 }
@@ -1251,10 +1256,24 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)letterboxViewWillAnimateUserInterface:(SRGLetterboxView *)letterboxView
 {
     [self.view layoutIfNeeded];
-    [letterboxView animateAlongsideUserInterfaceWithAnimations:^(BOOL hidden, BOOL minimal, CGFloat timelineHeight) {
+    [letterboxView animateAlongsideUserInterfaceWithAnimations:^(BOOL hidden, BOOL minimal, CGFloat aspectRatio, CGFloat heightOffset) {
         self.topBarView.alpha = (minimal || ! hidden) ? 1.f : 0.f;
-        self.playerAspectRatio16_9Constraint.constant = timelineHeight;
-        self.playerAspectRatioBigLandscapeScreenConstraint.constant = timelineHeight;
+        
+        // Calculate the minimum possible aspect ratio so that only a fraction of the vertical height is occupied by the player at most.
+        // Use it as limit value if needed
+        static CGFloat kVerticalFillRatio = 0.6f;
+        CGFloat minAspectRatio = CGRectGetWidth(self.view.frame) / (kVerticalFillRatio * CGRectGetHeight(self.view.frame));
+        CGFloat multiplier = 1.f / fmaxf(aspectRatio, minAspectRatio);
+        
+        if (@available(iOS 10, *)) {
+            self.playerAspectRatioStandardConstraint = [self.playerAspectRatioStandardConstraint srg_replacementConstraintWithMultiplier:multiplier constant:heightOffset];
+            self.playerAspectRatioBigLandscapeScreenConstraint = [self.playerAspectRatioBigLandscapeScreenConstraint srg_replacementConstraintWithMultiplier:multiplier constant:heightOffset];
+        }
+        else {
+            self.playerAspectRatioStandardConstraint.constant = heightOffset;
+            self.playerAspectRatioBigLandscapeScreenConstraint.constant = heightOffset;
+        }
+        
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self play_setNeedsUpdateOfHomeIndicatorAutoHidden];
@@ -1262,20 +1281,27 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView toggleFullScreen:(BOOL)fullScreen animated:(BOOL)animated withCompletionHandler:(nonnull void (^)(BOOL))completionHandler
-{ 
-    // On iPhones, full-screen transitions are always trigerred by rotation. Even when tapping on the full-screen button,
-    // we force a rotation, which itself will perform the appropriate transition from or to full-screen
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && ! self.transitioning) {
+{
+    void (^rotate)(UIDeviceOrientation) = ^(UIDeviceOrientation orientation) {
         // We interrupt the rotation attempt and trigger a rotation (which itself will toggle the expected full-screen display)
         completionHandler(NO);
-        
+        [UIDevice.currentDevice setValue:@(orientation) forKey:@keypath(UIDevice.new, orientation)];
+    };
+    
+    // On iPhones, full-screen transitions can be triggered by rotation. In such cases, when tapping on the full-screen button,
+    // we force a rotation, which itself will perform the appropriate transition from or to full-screen
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && ! self.transitioning) {
         if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation)) {
-            [UIDevice.currentDevice setValue:@(UIInterfaceOrientationPortrait) forKey:@keypath(UIDevice.new, orientation)];
+            rotate(UIDeviceOrientationPortrait);
+            return;
         }
         else {
-            [UIDevice.currentDevice setValue:@(s_previouslyUsedLandscapeDeviceOrientation) forKey:@keypath(UIDevice.new, orientation)];
+            // Only force rotation from portrait to landscape orientation if the content is better watched in landscape orientation
+            if (letterboxView.aspectRatio > 1.f) {
+                rotate(s_previouslyUsedLandscapeDeviceOrientation);
+                return;
+            }
         }
-        return;
     }
     
     self.statusBarHidden = fullScreen;
