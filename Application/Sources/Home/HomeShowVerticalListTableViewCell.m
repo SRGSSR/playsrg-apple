@@ -80,6 +80,8 @@
     return self;
 }
 
+#pragma mark Overrides
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -87,11 +89,9 @@
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
-#pragma mark Getters and setters
-
-- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured
+- (void)reloadData
 {
-    [super setHomeSectionInfo:homeSectionInfo featured:featured];
+    [super reloadData];
     
     [self.collectionView reloadData];
 }

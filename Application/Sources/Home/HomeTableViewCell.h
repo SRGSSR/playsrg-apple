@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setHomeSectionInfo:(nullable HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured;
 
+- (void)reloadData NS_REQUIRES_SUPER;
 - (BOOL)isEmpty;
 
 @end
