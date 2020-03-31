@@ -126,19 +126,18 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 
 #pragma mark Overrides
 
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    
-    // Clear the collection
-    [self.collectionView reloadData];
-}
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
     [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
+- (void)reloadData
+{
+    [super reloadData];
+    
+    [self.collectionView reloadData];
 }
 
 #pragma mark Getters and setters
@@ -148,8 +147,6 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
     [super setHomeSectionInfo:homeSectionInfo featured:featured];
     
     self.moduleBackgroundView.backgroundColor = homeSectionInfo.module.play_backgroundColor;
-    
-    [self.collectionView reloadData];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (homeSectionInfo) {

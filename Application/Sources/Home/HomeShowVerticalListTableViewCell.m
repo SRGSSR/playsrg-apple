@@ -80,20 +80,13 @@
     return self;
 }
 
+#pragma mark Overrides
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
     [self.collectionView.collectionViewLayout invalidateLayout];
-}
-
-#pragma mark Getters and setters
-
-- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured
-{
-    [super setHomeSectionInfo:homeSectionInfo featured:featured];
-    
-    [self.collectionView reloadData];
 }
 
 #pragma mark UICollectionViewDataSource protocol

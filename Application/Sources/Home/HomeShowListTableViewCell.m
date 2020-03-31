@@ -91,14 +91,6 @@ static const CGFloat kBottomInset = 15.f;
 
 #pragma mark Overrides
 
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    
-    // Clear the collection
-    [self.collectionView reloadData];
-}
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -106,11 +98,9 @@ static const CGFloat kBottomInset = 15.f;
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
-#pragma mark Getters and setters
-
-- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured
+- (void)reloadData
 {
-    [super setHomeSectionInfo:homeSectionInfo featured:featured];
+    [super reloadData];
     
     [self.collectionView reloadData];
 }

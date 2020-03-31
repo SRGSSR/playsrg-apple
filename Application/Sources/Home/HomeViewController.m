@@ -321,10 +321,10 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     NSArray<HomeSectionInfo *> *homeSectionInfos = [self.homeSectionInfos filteredArrayUsingPredicate:predicate];
     for (HomeSectionInfo *homeSectionInfo in homeSectionInfos) {
         [homeSectionInfo refreshWithRequestQueue:requestQueue page:nil /* only the first page */ completionBlock:^(NSArray * _Nullable items, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-            // Refresh as data becomes available for better perceived loading times
-            if (! error) {
-                [self.tableView reloadData];
-            }
+            NSUInteger index = [self.homeSectionInfos indexOfObject:homeSectionInfo];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:index];
+            HomeTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            [cell reloadData];
         }];
     }
 }
