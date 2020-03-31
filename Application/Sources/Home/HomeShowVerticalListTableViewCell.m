@@ -89,6 +89,13 @@
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
+- (void)reloadData
+{
+    [super reloadData];
+    
+    [self.collectionView reloadData];
+}
+
 #pragma mark UICollectionViewDataSource protocol
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
