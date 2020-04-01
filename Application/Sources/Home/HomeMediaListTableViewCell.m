@@ -253,11 +253,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    // Delay content offset recording so that we don't record a content offset before restoring a content offset
-    // (which also is made with a slight delay)
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.homeSectionInfo.contentOffset = scrollView.contentOffset;
-    });
+    self.homeSectionInfo.contentOffset = scrollView.contentOffset;
 }
 
 @end
