@@ -429,7 +429,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsZero;
+    return LayoutStandardTableViewPaddingInsets;
 }
 
 #pragma mark DZNEmptyDataSetSource protocol
