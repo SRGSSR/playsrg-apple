@@ -72,16 +72,6 @@ static NSString * const SettingsClearAllContentsButton = @"Button_ClearAllConten
 static NSString * const SettingsDeveloperGroup = @"Group_Developer";
 static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
-/**
- *  Private App Center implementation details.
- */
-@interface MSDistribute (Private)
-
-+ (id)sharedInstance;
-- (void)startUpdate;
-
-@end
-
 @interface SettingsViewController () <SFSafariViewControllerDelegate>
 
 @property (nonatomic) SRGRequestQueue *requestQueue;
@@ -355,7 +345,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {
         // Clear internal App Center timestamp to force a new update request
         [NSUserDefaults.standardUserDefaults removeObjectForKey:@"MSPostponedTimestamp"];
-        [[MSDistribute sharedInstance] startUpdate];
+        [MSDistribute checkForUpdate];
         
         // Display version history
         NSString *appCenterURLString = [NSBundle.mainBundle.infoDictionary objectForKey:@"AppCenterURL"];
