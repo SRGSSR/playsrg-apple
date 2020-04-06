@@ -1873,9 +1873,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.closeButton.accessibilityHint = nil;
     }
     
-    if ([notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue] == SRGMediaPlayerPlaybackStatePreparing) {
-        [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
-    }
+    [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
 }
 
 - (void)playbackDidFail:(NSNotification *)notification
