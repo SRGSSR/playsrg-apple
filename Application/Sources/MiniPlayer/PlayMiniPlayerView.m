@@ -196,7 +196,7 @@
     
     // Display program information (if any) when the controller position is within the current program, otherwise channel
     // information.
-    NSDate *currentDate = self.controller.date;
+    NSDate *currentDate = self.controller.currentDate;
     if (currentProgram && (! currentDate || [currentProgram play_containsDate:currentDate])) {
         self.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Currently: %@", @"Title in the mini player for the live stream, if the current program is known."), currentProgram.title];
     }
@@ -302,7 +302,7 @@
         NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.channel.title];
         SRGProgram *currentProgram = self.channel.currentProgram;
         
-        NSDate *currentDate = self.controller.date;
+        NSDate *currentDate = self.controller.currentDate;
         if (currentProgram && (! currentDate || [currentProgram play_containsDate:currentDate])) {
             [accessibilityLabel appendFormat:@", %@", currentProgram.title];
         }

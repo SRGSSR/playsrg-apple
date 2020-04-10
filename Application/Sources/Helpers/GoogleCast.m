@@ -19,6 +19,12 @@
 NSString * const GoogleCastPlaybackDidStartNotification = @"GoogleCastPlaybackDidStartNotification";
 NSString * const GoogleCastMediaKey = @"GoogleCastMedia";
 
+@interface SRGPosition (Play_private)
+
+@property (nonatomic, readonly) CMTime time;
+
+@end
+
 @interface GoogleCastManager : NSObject
 
 @end
