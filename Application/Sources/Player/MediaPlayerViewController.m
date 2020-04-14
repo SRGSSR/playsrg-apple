@@ -1860,13 +1860,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)playbackStateDidChange:(NSNotification *)notification
 {
-    if (self.letterboxController.media.mediaType == SRGMediaTypeAudio && [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue] == SRGMediaPlayerPlaybackStatePlaying) {
+    SRGMediaType mediaType = self.letterboxController.media.mediaType;
+    SRGMediaPlayerPlaybackState playbackState = [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue];
+    
+    if (mediaType == SRGMediaTypeAudio && playbackState == SRGMediaPlayerPlaybackStatePlaying) {
         self.closeButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Closes the player and continue playing audio.", @"Player close button hint");
     }
-    if (self.letterboxController.media.mediaType == SRGMediaTypeVideo && AVAudioSession.srg_isAirPlayActive && [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue] == SRGMediaPlayerPlaybackStatePlaying) {
+    else if (mediaType == SRGMediaTypeVideo && AVAudioSession.srg_isAirPlayActive && playbackState == SRGMediaPlayerPlaybackStatePlaying) {
         self.closeButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Closes the player and continue playing video with AirPlay.", @"Player close button hint");
     }
-    if (self.letterboxController.media.mediaType == SRGMediaTypeVideo && ApplicationSettingBackgroundVideoPlaybackEnabled() && [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue] == SRGMediaPlayerPlaybackStatePlaying) {
+    else if (mediaType == SRGMediaTypeVideo && ApplicationSettingBackgroundVideoPlaybackEnabled() && playbackState == SRGMediaPlayerPlaybackStatePlaying) {
         self.closeButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Closes the player and continue playing in the background.", @"Player close button hint");
     }
     else {
