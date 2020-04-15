@@ -101,10 +101,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
     
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(settingDidChange:)
-                                               name:kIASKAppSettingChanged
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationConfigurationDidChange:)
                                                name:ApplicationConfigurationDidChangeNotification
                                              object:nil];
@@ -508,14 +504,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 }
 
 #pragma mark Notifications
-
-- (void)settingDidChange:(NSNotification *)notification
-{
-    NSNumber *originalImagesOnlyEnabled = notification.userInfo[PlaySRGSettingOriginalImagesOnlyEnabled];
-    if (originalImagesOnlyEnabled) {
-        [UIImage play_setUseOriginalImagesOnly:originalImagesOnlyEnabled.boolValue];
-    }
-}
 
 - (void)applicationConfigurationDidChange:(NSNotification *)notification
 {

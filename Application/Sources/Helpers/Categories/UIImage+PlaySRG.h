@@ -45,14 +45,6 @@ OBJC_EXPORT UIImage * _Nullable YouthProtectionImageForColor(SRGYouthProtectionC
 + (nullable UIImage *)play_imageForBlockingReason:(SRGBlockingReason)blockingReason;
 
 /**
- *  If set to `YES`, only original images available from the service will be used, otherwise some bad images might
- *  be fixed with local versions.
- *
- *  The default behavior is `NO`.
- */
-+ (void)play_setUseOriginalImagesOnly:(BOOL)useOriginalImagesOnly;
-
-/**
  *  Return an image generated from the vector image at the specified path.
  *
  *  @param filePath The path of the vector image to use.

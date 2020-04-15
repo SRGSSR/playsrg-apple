@@ -615,7 +615,6 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)setupDataProvider
 {
     [SRGNetworkActivityManagement enable];
-    [UIImage play_setUseOriginalImagesOnly:ApplicationSettingOriginalImagesOnlyEnabled()];
     
     NSURL *serviceURL = ApplicationSettingServiceURL();
     SRGDataProvider *dataProvider = [[SRGDataProvider alloc] initWithServiceURL:serviceURL];

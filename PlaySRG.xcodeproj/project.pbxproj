@@ -650,50 +650,6 @@
 		6F0EDA672448B0D800F0FED2 /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0EDA632448B0D700F0FED2 /* RefreshControl.m */; };
 		6F0EDA682448B0D800F0FED2 /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0EDA632448B0D700F0FED2 /* RefreshControl.m */; };
 		6F0EDA692448B0D800F0FED2 /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0EDA632448B0D700F0FED2 /* RefreshControl.m */; };
-		6F0F88361ECEE7800060A893 /* override_default_la1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88201ECEE69F0060A893 /* override_default_la1.pdf */; };
-		6F0F88371ECEE7800060A893 /* override_default_la2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88211ECEE69F0060A893 /* override_default_la2.pdf */; };
-		6F0F883D1ECEE78C0060A893 /* override_artwork_radio_rtr.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB574F1EC204900015CAB7 /* override_artwork_radio_rtr.pdf */; };
-		6F0F883E1ECEE78C0060A893 /* override_default_radio_rtr.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57501EC204900015CAB7 /* override_default_radio_rtr.pdf */; };
-		6F0F883F1ECEE78C0060A893 /* override_default_rtr_srf1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88241ECEE6B30060A893 /* override_default_rtr_srf1.pdf */; };
-		6F0F88401ECEE78C0060A893 /* override_default_rtr_srf_info.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88251ECEE6B30060A893 /* override_default_rtr_srf_info.pdf */; };
-		6F0F88411ECEE78C0060A893 /* override_default_rtr_srf2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88261ECEE6B30060A893 /* override_default_rtr_srf2.pdf */; };
-		6F0F885A1ECF0BA40060A893 /* override_artwork_la1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88581ECF0BA40060A893 /* override_artwork_la1.pdf */; };
-		6F0F885B1ECF0BA40060A893 /* override_artwork_la2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88591ECF0BA40060A893 /* override_artwork_la2.pdf */; };
-		6F0F88731ECF0CD70060A893 /* override_artwork_rtr_srf1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88681ECF0CCB0060A893 /* override_artwork_rtr_srf1.pdf */; };
-		6F0F88741ECF0CD70060A893 /* override_artwork_rtr_srf_info.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88691ECF0CCB0060A893 /* override_artwork_rtr_srf_info.pdf */; };
-		6F0F88751ECF0CD70060A893 /* override_artwork_rtr_srf2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F886A1ECF0CCB0060A893 /* override_artwork_rtr_srf2.pdf */; };
-		6F0F88841ECF0CDD0060A893 /* override_artwork_rts_info.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F885C1ECF0C240060A893 /* override_artwork_rts_info.pdf */; };
-		6F0F88851ECF0CDD0060A893 /* override_artwork_couleur3.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57541EC2049C0015CAB7 /* override_artwork_couleur3.pdf */; };
-		6F0F88861ECF0CDD0060A893 /* override_artwork_rts_un.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F885D1ECF0C240060A893 /* override_artwork_rts_un.pdf */; };
-		6F0F88871ECF0CDD0060A893 /* override_artwork_la1ere.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57561EC2049C0015CAB7 /* override_artwork_la1ere.pdf */; };
-		6F0F88881ECF0CDD0060A893 /* override_artwork_espace2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57551EC2049C0015CAB7 /* override_artwork_espace2.pdf */; };
-		6F0F88891ECF0CDD0060A893 /* override_artwork_rts_deux.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F885E1ECF0C240060A893 /* override_artwork_rts_deux.pdf */; };
-		6F0F888A1ECF0CDD0060A893 /* override_artwork_option_musique.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57571EC2049C0015CAB7 /* override_artwork_option_musique.pdf */; };
-		6F0F888B1ECF0CDD0060A893 /* override_default_rts_info.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F882A1ECEE6C10060A893 /* override_default_rts_info.pdf */; };
-		6F0F888C1ECF0CDD0060A893 /* override_default_couleur3.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57581EC2049C0015CAB7 /* override_default_couleur3.pdf */; };
-		6F0F888D1ECF0CDD0060A893 /* override_default_rts_un.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F882B1ECEE6C10060A893 /* override_default_rts_un.pdf */; };
-		6F0F888E1ECF0CDD0060A893 /* override_default_la1ere.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB575A1EC2049C0015CAB7 /* override_default_la1ere.pdf */; };
-		6F0F888F1ECF0CDD0060A893 /* override_default_espace2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57591EC2049C0015CAB7 /* override_default_espace2.pdf */; };
-		6F0F88901ECF0CDD0060A893 /* override_default_rts_deux.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F882C1ECEE6C10060A893 /* override_default_rts_deux.pdf */; };
-		6F0F88911ECF0CDD0060A893 /* override_default_option_musique.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB575B1EC2049C0015CAB7 /* override_default_option_musique.pdf */; };
-		6F0F88951ECF0CE50060A893 /* override_artwork_tv_srf1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88621ECF0CB20060A893 /* override_artwork_tv_srf1.pdf */; };
-		6F0F88961ECF0CE50060A893 /* override_artwork_tv_srf_info.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88631ECF0CB20060A893 /* override_artwork_tv_srf_info.pdf */; };
-		6F0F88971ECF0CE50060A893 /* override_artwork_srf1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57661EC204A80015CAB7 /* override_artwork_srf1.pdf */; };
-		6F0F88981ECF0CE50060A893 /* override_artwork_virus.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57651EC204A80015CAB7 /* override_artwork_virus.pdf */; };
-		6F0F88991ECF0CE50060A893 /* override_artwork_srf_musikwelle.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57671EC204A80015CAB7 /* override_artwork_srf_musikwelle.pdf */; };
-		6F0F889A1ECF0CE50060A893 /* override_artwork_srf2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57681EC204A80015CAB7 /* override_artwork_srf2.pdf */; };
-		6F0F889B1ECF0CE50060A893 /* override_artwork_srf3.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57691EC204A80015CAB7 /* override_artwork_srf3.pdf */; };
-		6F0F889C1ECF0CE50060A893 /* override_artwork_tv_srf2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88641ECF0CB20060A893 /* override_artwork_tv_srf2.pdf */; };
-		6F0F889D1ECF0CE50060A893 /* override_artwork_srf4.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB576A1EC204A80015CAB7 /* override_artwork_srf4.pdf */; };
-		6F0F889E1ECF0CE50060A893 /* override_default_tv_srf1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88301ECEE6CC0060A893 /* override_default_tv_srf1.pdf */; };
-		6F0F889F1ECF0CE50060A893 /* override_default_tv_srf_info.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88311ECEE6CC0060A893 /* override_default_tv_srf_info.pdf */; };
-		6F0F88A01ECF0CE50060A893 /* override_default_srf1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57711EC204A80015CAB7 /* override_default_srf1.pdf */; };
-		6F0F88A11ECF0CE50060A893 /* override_default_virus.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57701EC204A80015CAB7 /* override_default_virus.pdf */; };
-		6F0F88A21ECF0CE50060A893 /* override_default_srf_musikwelle.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57731EC204A80015CAB7 /* override_default_srf_musikwelle.pdf */; };
-		6F0F88A31ECF0CE50060A893 /* override_default_srf2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57751EC204A80015CAB7 /* override_default_srf2.pdf */; };
-		6F0F88A41ECF0CE50060A893 /* override_default_srf3.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57761EC204A80015CAB7 /* override_default_srf3.pdf */; };
-		6F0F88A51ECF0CE50060A893 /* override_default_tv_srf2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F88321ECEE6CC0060A893 /* override_default_tv_srf2.pdf */; };
-		6F0F88A61ECF0CE50060A893 /* override_default_srf4.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57771EC204A80015CAB7 /* override_default_srf4.pdf */; };
 		6F12DB4621A3EFBF0054879D /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12DB4121A3EFBF0054879D /* HistoryTableViewCell.m */; };
 		6F12DB4721A3EFBF0054879D /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12DB4121A3EFBF0054879D /* HistoryTableViewCell.m */; };
 		6F12DB4821A3EFBF0054879D /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F12DB4121A3EFBF0054879D /* HistoryTableViewCell.m */; };
@@ -1230,12 +1186,6 @@
 		6FC8866D1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866E1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866F1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
-		6FCB57481EC2047B0015CAB7 /* override_artwork_rete_due.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57421EC2047B0015CAB7 /* override_artwork_rete_due.pdf */; };
-		6FCB57491EC2047B0015CAB7 /* override_artwork_rete_tre.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57431EC2047B0015CAB7 /* override_artwork_rete_tre.pdf */; };
-		6FCB574A1EC2047B0015CAB7 /* override_artwork_rete_uno.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57441EC2047B0015CAB7 /* override_artwork_rete_uno.pdf */; };
-		6FCB574B1EC2047B0015CAB7 /* override_default_rete_due.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57451EC2047B0015CAB7 /* override_default_rete_due.pdf */; };
-		6FCB574C1EC2047B0015CAB7 /* override_default_rete_tre.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57461EC2047B0015CAB7 /* override_default_rete_tre.pdf */; };
-		6FCB574D1EC2047B0015CAB7 /* override_default_rete_uno.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB57471EC2047B0015CAB7 /* override_default_rete_uno.pdf */; };
 		6FD2A35523C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
 		6FD2A35623C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
 		6FD2A35723C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
@@ -1937,28 +1887,6 @@
 		6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGChannel+PlaySRG.m"; sourceTree = "<group>"; };
 		6F0EDA632448B0D700F0FED2 /* RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshControl.m; sourceTree = "<group>"; };
 		6F0EDA642448B0D800F0FED2 /* RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshControl.h; sourceTree = "<group>"; };
-		6F0F88201ECEE69F0060A893 /* override_default_la1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_la1.pdf; sourceTree = "<group>"; };
-		6F0F88211ECEE69F0060A893 /* override_default_la2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_la2.pdf; sourceTree = "<group>"; };
-		6F0F88241ECEE6B30060A893 /* override_default_rtr_srf1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_rtr_srf1.pdf; sourceTree = "<group>"; };
-		6F0F88251ECEE6B30060A893 /* override_default_rtr_srf_info.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_rtr_srf_info.pdf; sourceTree = "<group>"; };
-		6F0F88261ECEE6B30060A893 /* override_default_rtr_srf2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_rtr_srf2.pdf; sourceTree = "<group>"; };
-		6F0F882A1ECEE6C10060A893 /* override_default_rts_info.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_rts_info.pdf; sourceTree = "<group>"; };
-		6F0F882B1ECEE6C10060A893 /* override_default_rts_un.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_rts_un.pdf; sourceTree = "<group>"; };
-		6F0F882C1ECEE6C10060A893 /* override_default_rts_deux.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_rts_deux.pdf; sourceTree = "<group>"; };
-		6F0F88301ECEE6CC0060A893 /* override_default_tv_srf1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_tv_srf1.pdf; sourceTree = "<group>"; };
-		6F0F88311ECEE6CC0060A893 /* override_default_tv_srf_info.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_tv_srf_info.pdf; sourceTree = "<group>"; };
-		6F0F88321ECEE6CC0060A893 /* override_default_tv_srf2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_tv_srf2.pdf; sourceTree = "<group>"; };
-		6F0F88581ECF0BA40060A893 /* override_artwork_la1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_la1.pdf; sourceTree = "<group>"; };
-		6F0F88591ECF0BA40060A893 /* override_artwork_la2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_la2.pdf; sourceTree = "<group>"; };
-		6F0F885C1ECF0C240060A893 /* override_artwork_rts_info.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_rts_info.pdf; sourceTree = "<group>"; };
-		6F0F885D1ECF0C240060A893 /* override_artwork_rts_un.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_rts_un.pdf; sourceTree = "<group>"; };
-		6F0F885E1ECF0C240060A893 /* override_artwork_rts_deux.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_rts_deux.pdf; sourceTree = "<group>"; };
-		6F0F88621ECF0CB20060A893 /* override_artwork_tv_srf1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_tv_srf1.pdf; sourceTree = "<group>"; };
-		6F0F88631ECF0CB20060A893 /* override_artwork_tv_srf_info.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_tv_srf_info.pdf; sourceTree = "<group>"; };
-		6F0F88641ECF0CB20060A893 /* override_artwork_tv_srf2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_tv_srf2.pdf; sourceTree = "<group>"; };
-		6F0F88681ECF0CCB0060A893 /* override_artwork_rtr_srf1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_rtr_srf1.pdf; sourceTree = "<group>"; };
-		6F0F88691ECF0CCB0060A893 /* override_artwork_rtr_srf_info.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_rtr_srf_info.pdf; sourceTree = "<group>"; };
-		6F0F886A1ECF0CCB0060A893 /* override_artwork_rtr_srf2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_rtr_srf2.pdf; sourceTree = "<group>"; };
 		6F12DB4021A3EFBF0054879D /* HistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewCell.h; sourceTree = "<group>"; };
 		6F12DB4121A3EFBF0054879D /* HistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewCell.m; sourceTree = "<group>"; };
 		6F12DB4221A3EFBF0054879D /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -2174,34 +2102,6 @@
 		6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+PlaySRG.m"; sourceTree = "<group>"; };
 		6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGProgram+PlaySRG.h"; sourceTree = "<group>"; };
 		6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGProgram+PlaySRG.m"; sourceTree = "<group>"; };
-		6FCB57421EC2047B0015CAB7 /* override_artwork_rete_due.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_rete_due.pdf; sourceTree = "<group>"; };
-		6FCB57431EC2047B0015CAB7 /* override_artwork_rete_tre.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_rete_tre.pdf; sourceTree = "<group>"; };
-		6FCB57441EC2047B0015CAB7 /* override_artwork_rete_uno.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_rete_uno.pdf; sourceTree = "<group>"; };
-		6FCB57451EC2047B0015CAB7 /* override_default_rete_due.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_rete_due.pdf; sourceTree = "<group>"; };
-		6FCB57461EC2047B0015CAB7 /* override_default_rete_tre.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_rete_tre.pdf; sourceTree = "<group>"; };
-		6FCB57471EC2047B0015CAB7 /* override_default_rete_uno.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_rete_uno.pdf; sourceTree = "<group>"; };
-		6FCB574F1EC204900015CAB7 /* override_artwork_radio_rtr.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_radio_rtr.pdf; sourceTree = "<group>"; };
-		6FCB57501EC204900015CAB7 /* override_default_radio_rtr.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_radio_rtr.pdf; sourceTree = "<group>"; };
-		6FCB57541EC2049C0015CAB7 /* override_artwork_couleur3.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_couleur3.pdf; sourceTree = "<group>"; };
-		6FCB57551EC2049C0015CAB7 /* override_artwork_espace2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_espace2.pdf; sourceTree = "<group>"; };
-		6FCB57561EC2049C0015CAB7 /* override_artwork_la1ere.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_la1ere.pdf; sourceTree = "<group>"; };
-		6FCB57571EC2049C0015CAB7 /* override_artwork_option_musique.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_option_musique.pdf; sourceTree = "<group>"; };
-		6FCB57581EC2049C0015CAB7 /* override_default_couleur3.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_couleur3.pdf; sourceTree = "<group>"; };
-		6FCB57591EC2049C0015CAB7 /* override_default_espace2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_espace2.pdf; sourceTree = "<group>"; };
-		6FCB575A1EC2049C0015CAB7 /* override_default_la1ere.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_la1ere.pdf; sourceTree = "<group>"; };
-		6FCB575B1EC2049C0015CAB7 /* override_default_option_musique.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_option_musique.pdf; sourceTree = "<group>"; };
-		6FCB57651EC204A80015CAB7 /* override_artwork_virus.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_virus.pdf; sourceTree = "<group>"; };
-		6FCB57661EC204A80015CAB7 /* override_artwork_srf1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_srf1.pdf; sourceTree = "<group>"; };
-		6FCB57671EC204A80015CAB7 /* override_artwork_srf_musikwelle.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_srf_musikwelle.pdf; sourceTree = "<group>"; };
-		6FCB57681EC204A80015CAB7 /* override_artwork_srf2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_srf2.pdf; sourceTree = "<group>"; };
-		6FCB57691EC204A80015CAB7 /* override_artwork_srf3.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_srf3.pdf; sourceTree = "<group>"; };
-		6FCB576A1EC204A80015CAB7 /* override_artwork_srf4.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_artwork_srf4.pdf; sourceTree = "<group>"; };
-		6FCB57701EC204A80015CAB7 /* override_default_virus.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_virus.pdf; sourceTree = "<group>"; };
-		6FCB57711EC204A80015CAB7 /* override_default_srf1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_srf1.pdf; sourceTree = "<group>"; };
-		6FCB57731EC204A80015CAB7 /* override_default_srf_musikwelle.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_srf_musikwelle.pdf; sourceTree = "<group>"; };
-		6FCB57751EC204A80015CAB7 /* override_default_srf2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_srf2.pdf; sourceTree = "<group>"; };
-		6FCB57761EC204A80015CAB7 /* override_default_srf3.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_srf3.pdf; sourceTree = "<group>"; };
-		6FCB57771EC204A80015CAB7 /* override_default_srf4.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = override_default_srf4.pdf; sourceTree = "<group>"; };
 		6FD2A35323C7628000456DCB /* ForegroundTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForegroundTimer.m; sourceTree = "<group>"; };
 		6FD2A35423C7628000456DCB /* ForegroundTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForegroundTimer.h; sourceTree = "<group>"; };
 		6FD2CBC21DD19B0200B44958 /* placeholder_media-180.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "placeholder_media-180.pdf"; sourceTree = "<group>"; };
@@ -3063,7 +2963,6 @@
 				08C68F9E1D38DF8300BB8AAA /* LaunchScreen.xib */,
 				08C68F9A1D38DF8300BB8AAA /* Localizable.strings */,
 				6FB0BB3520AEF5A6007C5D87 /* Onboarding.strings */,
-				6FCB57411EC2047B0015CAB7 /* Overrides */,
 				6F3A47AE1DD19A5B00C79E67 /* RSIResources.xcassets */,
 			);
 			path = "Play RSI";
@@ -3080,7 +2979,6 @@
 				08C68FD41D38E04B00BB8AAA /* LaunchScreen.xib */,
 				08C68FD71D38E04B00BB8AAA /* Localizable.strings */,
 				6FB0BB3820AEF5B8007C5D87 /* Onboarding.strings */,
-				6FCB574E1EC204900015CAB7 /* Overrides */,
 				6F3A47B01DD19A6900C79E67 /* RTRResources.xcassets */,
 			);
 			path = "Play RTR";
@@ -3097,7 +2995,6 @@
 				08C690081D38E08C00BB8AAA /* LaunchScreen.xib */,
 				08C690041D38E08C00BB8AAA /* Localizable.strings */,
 				6FB0BB3B20AEF5C4007C5D87 /* Onboarding.strings */,
-				6FCB57531EC2049C0015CAB7 /* Overrides */,
 				6F3A47B21DD19A7B00C79E67 /* RTSResources.xcassets */,
 			);
 			path = "Play RTS";
@@ -3114,7 +3011,6 @@
 				08C6903C1D38E0BE00BB8AAA /* LaunchScreen.xib */,
 				08C690381D38E0BE00BB8AAA /* Localizable.strings */,
 				6FB0BB3E20AEF5D1007C5D87 /* Onboarding.strings */,
-				6FCB57641EC204A80015CAB7 /* Overrides */,
 				6F3A47B41DD19A8500C79E67 /* SRFResources.xcassets */,
 			);
 			path = "Play SRF";
@@ -3491,84 +3387,6 @@
 				6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		6FCB57411EC2047B0015CAB7 /* Overrides */ = {
-			isa = PBXGroup;
-			children = (
-				6F0F88581ECF0BA40060A893 /* override_artwork_la1.pdf */,
-				6F0F88591ECF0BA40060A893 /* override_artwork_la2.pdf */,
-				6FCB57421EC2047B0015CAB7 /* override_artwork_rete_due.pdf */,
-				6FCB57431EC2047B0015CAB7 /* override_artwork_rete_tre.pdf */,
-				6FCB57441EC2047B0015CAB7 /* override_artwork_rete_uno.pdf */,
-				6F0F88201ECEE69F0060A893 /* override_default_la1.pdf */,
-				6F0F88211ECEE69F0060A893 /* override_default_la2.pdf */,
-				6FCB57451EC2047B0015CAB7 /* override_default_rete_due.pdf */,
-				6FCB57461EC2047B0015CAB7 /* override_default_rete_tre.pdf */,
-				6FCB57471EC2047B0015CAB7 /* override_default_rete_uno.pdf */,
-			);
-			path = Overrides;
-			sourceTree = "<group>";
-		};
-		6FCB574E1EC204900015CAB7 /* Overrides */ = {
-			isa = PBXGroup;
-			children = (
-				6FCB574F1EC204900015CAB7 /* override_artwork_radio_rtr.pdf */,
-				6F0F88681ECF0CCB0060A893 /* override_artwork_rtr_srf1.pdf */,
-				6F0F886A1ECF0CCB0060A893 /* override_artwork_rtr_srf2.pdf */,
-				6F0F88691ECF0CCB0060A893 /* override_artwork_rtr_srf_info.pdf */,
-				6FCB57501EC204900015CAB7 /* override_default_radio_rtr.pdf */,
-				6F0F88241ECEE6B30060A893 /* override_default_rtr_srf1.pdf */,
-				6F0F88261ECEE6B30060A893 /* override_default_rtr_srf2.pdf */,
-				6F0F88251ECEE6B30060A893 /* override_default_rtr_srf_info.pdf */,
-			);
-			path = Overrides;
-			sourceTree = "<group>";
-		};
-		6FCB57531EC2049C0015CAB7 /* Overrides */ = {
-			isa = PBXGroup;
-			children = (
-				6FCB57541EC2049C0015CAB7 /* override_artwork_couleur3.pdf */,
-				6FCB57551EC2049C0015CAB7 /* override_artwork_espace2.pdf */,
-				6FCB57561EC2049C0015CAB7 /* override_artwork_la1ere.pdf */,
-				6FCB57571EC2049C0015CAB7 /* override_artwork_option_musique.pdf */,
-				6F0F885E1ECF0C240060A893 /* override_artwork_rts_deux.pdf */,
-				6F0F885C1ECF0C240060A893 /* override_artwork_rts_info.pdf */,
-				6F0F885D1ECF0C240060A893 /* override_artwork_rts_un.pdf */,
-				6FCB57581EC2049C0015CAB7 /* override_default_couleur3.pdf */,
-				6FCB57591EC2049C0015CAB7 /* override_default_espace2.pdf */,
-				6FCB575A1EC2049C0015CAB7 /* override_default_la1ere.pdf */,
-				6FCB575B1EC2049C0015CAB7 /* override_default_option_musique.pdf */,
-				6F0F882C1ECEE6C10060A893 /* override_default_rts_deux.pdf */,
-				6F0F882A1ECEE6C10060A893 /* override_default_rts_info.pdf */,
-				6F0F882B1ECEE6C10060A893 /* override_default_rts_un.pdf */,
-			);
-			path = Overrides;
-			sourceTree = "<group>";
-		};
-		6FCB57641EC204A80015CAB7 /* Overrides */ = {
-			isa = PBXGroup;
-			children = (
-				6FCB57671EC204A80015CAB7 /* override_artwork_srf_musikwelle.pdf */,
-				6FCB57661EC204A80015CAB7 /* override_artwork_srf1.pdf */,
-				6FCB57681EC204A80015CAB7 /* override_artwork_srf2.pdf */,
-				6FCB57691EC204A80015CAB7 /* override_artwork_srf3.pdf */,
-				6FCB576A1EC204A80015CAB7 /* override_artwork_srf4.pdf */,
-				6F0F88631ECF0CB20060A893 /* override_artwork_tv_srf_info.pdf */,
-				6F0F88621ECF0CB20060A893 /* override_artwork_tv_srf1.pdf */,
-				6F0F88641ECF0CB20060A893 /* override_artwork_tv_srf2.pdf */,
-				6FCB57651EC204A80015CAB7 /* override_artwork_virus.pdf */,
-				6FCB57731EC204A80015CAB7 /* override_default_srf_musikwelle.pdf */,
-				6FCB57711EC204A80015CAB7 /* override_default_srf1.pdf */,
-				6FCB57751EC204A80015CAB7 /* override_default_srf2.pdf */,
-				6FCB57761EC204A80015CAB7 /* override_default_srf3.pdf */,
-				6FCB57771EC204A80015CAB7 /* override_default_srf4.pdf */,
-				6F0F88311ECEE6CC0060A893 /* override_default_tv_srf_info.pdf */,
-				6F0F88301ECEE6CC0060A893 /* override_default_tv_srf1.pdf */,
-				6F0F88321ECEE6CC0060A893 /* override_default_tv_srf2.pdf */,
-				6FCB57701EC204A80015CAB7 /* override_default_virus.pdf */,
-			);
-			path = Overrides;
 			sourceTree = "<group>";
 		};
 		6FDF08C4218B126700B2AF2C /* Model */ = {
@@ -4354,7 +4172,6 @@
 				6F340F4B220DA86B00778CA3 /* SRGUserData.bundle in Resources */,
 				081DAA261E0C1E9700018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F0C99B02121FBD800073AB6 /* SRGLogger.bundle in Resources */,
-				6F0F88991ECF0CE50060A893 /* override_artwork_srf_musikwelle.pdf in Resources */,
 				0863210F2258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				081220AD1DD079BB00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6F4760041EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
@@ -4364,12 +4181,10 @@
 				0837CEC61D3FD6E600A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				6F40920D22DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
 				6F0A7F0520AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
-				6F0F88951ECF0CE50060A893 /* override_artwork_tv_srf1.pdf in Resources */,
 				0837CEC51D3FD6E600A1E089 /* SRGSSRType_Bd.ttf in Resources */,
 				6FE01B1623603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6F0C99A12121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				0837CEAA1D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
-				6F0F88A61ECF0CE50060A893 /* override_default_srf4.pdf in Resources */,
 				6F6B643321A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				6FD633E31FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
 				6F0C998D2121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
@@ -4382,22 +4197,15 @@
 				6FB0BB4020AEF5D1007C5D87 /* Onboarding.strings in Resources */,
 				6F12E4E722D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				08C691281D39089700BB8AAA /* CommonImages.xcassets in Resources */,
-				6F0F88981ECF0CE50060A893 /* override_artwork_virus.pdf in Resources */,
 				6F0C99972121FBD800073AB6 /* SRGAppearance.bundle in Resources */,
 				E6E2DF2C1D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
-				6F0F88971ECF0CE50060A893 /* override_artwork_srf1.pdf in Resources */,
 				08564B231D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
 				08DADF8C20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				0837CEC71D3FD6E600A1E089 /* SRGSSRType_He.ttf in Resources */,
 				6F93DE1320AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
-				6F0F88A01ECF0CE50060A893 /* override_default_srf1.pdf in Resources */,
 				6FBF24442148238300E576A2 /* SRGDiagnostics.bundle in Resources */,
-				6F0F889A1ECF0CE50060A893 /* override_artwork_srf2.pdf in Resources */,
 				08C6904B1D38E0BE00BB8AAA /* Localizable.strings in Resources */,
 				0804917622832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
-				6F0F889F1ECF0CE50060A893 /* override_default_tv_srf_info.pdf in Resources */,
-				6F0F889E1ECF0CE50060A893 /* override_default_tv_srf1.pdf in Resources */,
-				6F0F889B1ECF0CE50060A893 /* override_artwork_srf3.pdf in Resources */,
 				6F58664A1DD226EE005DAFE4 /* Settings.bundle in Resources */,
 				08C690501D38E0BE00BB8AAA /* iTunesArtwork in Resources */,
 				6F12E4D522D866E600BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
@@ -4406,36 +4214,28 @@
 				08DD9D5A1FFE6EDB00115906 /* ModuleHeaderView.xib in Resources */,
 				082590F11F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				E66BEC211DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
-				6F0F88A41ECF0CE50060A893 /* override_default_srf3.pdf in Resources */,
 				6F2961FC2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				0828BB3A22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				6F5F4FC91DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				6F0C99922121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				086BDE161EA63D3800965F45 /* PlayMiniPlayerView.xib in Resources */,
-				6F0F88961ECF0CE50060A893 /* override_artwork_tv_srf_info.pdf in Resources */,
 				6F4EA13D1EE034E200BEC4DA /* Accessibility.strings in Resources */,
 				08602BFC2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
-				6F0F88A11ECF0CE50060A893 /* override_default_virus.pdf in Resources */,
 				08C6905A1D38E0BE00BB8AAA /* LaunchScreen.xib in Resources */,
 				0887824F23AD61D500629312 /* HomeLiveMediaCollectionViewCell.xib in Resources */,
 				6F0C99AB2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
-				6F0F88A21ECF0CE50060A893 /* override_default_srf_musikwelle.pdf in Resources */,
 				0837CECA1D3FD6E600A1E089 /* SRGSSRType_Md.ttf in Resources */,
-				6F0F88A51ECF0CE50060A893 /* override_default_tv_srf2.pdf in Resources */,
 				6FD2CBC31DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
 				084F94B522D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
-				6F0F889D1ECF0CE50060A893 /* override_artwork_srf4.pdf in Resources */,
 				6FA9ECC620C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				6F47600E1EB37BC6003021EA /* TranslucentTitleHeaderView.xib in Resources */,
 				6F0C999C2121FBD800073AB6 /* SRGAnalytics.bundle in Resources */,
-				6F0F88A31ECF0CE50060A893 /* override_default_srf2.pdf in Resources */,
 				6F1A95EB216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
 				6F167F57248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib in Resources */,
 				0875851D23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				0837CEC91D3FD6E600A1E089 /* SRGSSRType_Lt.ttf in Resources */,
 				0837CEC81D3FD6E600A1E089 /* SRGSSRType_It.ttf in Resources */,
 				6F475FFA1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
-				6F0F889C1ECF0CE50060A893 /* override_artwork_tv_srf2.pdf in Resources */,
 				6FA7EC3920AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				6F12DB4B21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
 				E694A9FA1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
@@ -4453,7 +4253,6 @@
 				0837CED41D3FDAF900A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				082590F31F054ACD00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				6FD88F7D22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
-				6F0F888E1ECF0CDD0060A893 /* override_default_la1ere.pdf in Resources */,
 				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
 				6FE01B1723603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6F12E4D822D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
@@ -4471,7 +4270,6 @@
 				0837CEAC1D3FAEE100A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
 				6F0C99B12121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				6FA9ECC720C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
-				6F0F88871ECF0CDD0060A893 /* override_artwork_la1ere.pdf in Resources */,
 				0837CED51D3FDAF900A1E089 /* SRGSSRType_Serif_Rg.ttf in Resources */,
 				6F2961FD2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				6F4EA13A1EE034D500BEC4DA /* Accessibility.strings in Resources */,
@@ -4480,22 +4278,14 @@
 				0804917722832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
 				6FA7EC3A20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				6F167F58248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib in Resources */,
-				6F0F88891ECF0CDD0060A893 /* override_artwork_rts_deux.pdf in Resources */,
 				0837CECD1D3FDAF900A1E089 /* FontAwesome.otf in Resources */,
 				086F8D6022984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				08DADF8D20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
-				6F0F888D1ECF0CDD0060A893 /* override_default_rts_un.pdf in Resources */,
-				6F0F888C1ECF0CDD0060A893 /* override_default_couleur3.pdf in Resources */,
 				6FD633E41FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
-				6F0F88881ECF0CDD0060A893 /* override_artwork_espace2.pdf in Resources */,
 				E6E2DF2D1D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				08564B241D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
 				0837CED01D3FDAF900A1E089 /* SRGSSRType_He.ttf in Resources */,
 				08C690181D38E08C00BB8AAA /* iTunesArtwork@2x in Resources */,
-				6F0F888F1ECF0CDD0060A893 /* override_default_espace2.pdf in Resources */,
-				6F0F888A1ECF0CDD0060A893 /* override_artwork_option_musique.pdf in Resources */,
-				6F0F88911ECF0CDD0060A893 /* override_default_option_musique.pdf in Resources */,
-				6F0F88861ECF0CDD0060A893 /* override_artwork_rts_un.pdf in Resources */,
 				6F0C99982121FBD800073AB6 /* SRGAppearance.bundle in Resources */,
 				6F40920E22DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
 				08C690131D38E08C00BB8AAA /* iTunesArtwork in Resources */,
@@ -4508,19 +4298,15 @@
 				084F94B622D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6F1938321EFBFE9E0017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F0C99AC2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
-				6F0F88851ECF0CDD0060A893 /* override_artwork_couleur3.pdf in Resources */,
 				08602BFD2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				E66BEC221DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F5F4FCA1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				6F340F4C220DA87500778CA3 /* SRGUserData.bundle in Resources */,
 				6F0C99A22121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				0832BF1622BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
-				6F0F88841ECF0CDD0060A893 /* override_artwork_rts_info.pdf in Resources */,
 				6F1A95EC216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
 				086BDE181EA63D5A00965F45 /* PlayMiniPlayerView.xib in Resources */,
 				08754F48201BB00400458F3A /* InfoPlist.strings in Resources */,
-				6F0F88901ECF0CDD0060A893 /* override_default_rts_deux.pdf in Resources */,
-				6F0F888B1ECF0CDD0060A893 /* override_default_rts_info.pdf in Resources */,
 				6F12DB4C21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
 				08C6901D1D38E08C00BB8AAA /* LaunchScreen.xib in Resources */,
 				0837CED31D3FDAF900A1E089 /* SRGSSRType_Md.ttf in Resources */,
@@ -4546,34 +4332,27 @@
 				08C6912A1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				08DD9D631FFE6EF900115906 /* ModuleHeaderView.xib in Resources */,
 				E6DB5F301D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
-				6F0F885B1ECF0BA40060A893 /* override_artwork_la2.pdf in Resources */,
 				6F0C998F2121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
 				0837CEDD1D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
-				6FCB57491EC2047B0015CAB7 /* override_artwork_rete_tre.pdf in Resources */,
 				6F12E4DA22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				0875851F23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
-				6F0F88371ECEE7800060A893 /* override_default_la2.pdf in Resources */,
 				6F93DE1520AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6F2961FE2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				081DAA291E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B51DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6F0C99A32121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
-				6FCB574D1EC2047B0015CAB7 /* override_default_rete_uno.pdf in Resources */,
 				E64BA4031D4A5891002C10D5 /* WebViewController.storyboard in Resources */,
 				6F4760061EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */,
-				6FCB574C1EC2047B0015CAB7 /* override_default_rete_tre.pdf in Resources */,
 				086F8D6122984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				6F0A7F0720AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FB0BB3720AEF5A7007C5D87 /* Onboarding.strings in Resources */,
 				0837CED81D3FDAFA00A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				6FF3B6962137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
-				6F0F885A1ECF0BA40060A893 /* override_artwork_la1.pdf in Resources */,
 				6FA7EC3B20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				084F94B722D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				0837CED71D3FDAFA00A1E089 /* SRGSSRType_Bd.ttf in Resources */,
 				6F12E4E922D8676600BC1718 /* SearchHeaderView.xib in Resources */,
-				6FCB574B1EC2047B0015CAB7 /* override_default_rete_due.pdf in Resources */,
 				6F167F59248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib in Resources */,
 				6F1A95ED216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
 				6F340F4D220DA87600778CA3 /* SRGUserData.bundle in Resources */,
@@ -4603,19 +4382,16 @@
 				6F58664C1DD226EE005DAFE4 /* Settings.bundle in Resources */,
 				08C68FB41D38DF8300BB8AAA /* LaunchScreen.xib in Resources */,
 				0875851023A0025F00FA7207 /* ProfileAccountHeaderView.xib in Resources */,
-				6F0F88361ECEE7800060A893 /* override_default_la1.pdf in Resources */,
 				0804917822832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
 				08DADF8E20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				6FE01B1823603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6FF7BBB422A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				E66BEC231DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
-				6FCB57481EC2047B0015CAB7 /* override_artwork_rete_due.pdf in Resources */,
 				6F0C99B22121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				08C68FA51D38DF8300BB8AAA /* Localizable.strings in Resources */,
 				6F6B643521A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				6F5F4FCB1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				086BDE1A1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
-				6FCB574A1EC2047B0015CAB7 /* override_artwork_rete_uno.pdf in Resources */,
 				0837CEDC1D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				0828BB3C22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				08C68FAA1D38DF8300BB8AAA /* iTunesArtwork in Resources */,
@@ -4641,7 +4417,6 @@
 				0837CEE61D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				081DAA281E0C1FC800018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
-				6F0F88401ECEE78C0060A893 /* override_default_rtr_srf_info.pdf in Resources */,
 				6F0C99AE2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
 				6FA9ECC920C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */,
@@ -4656,9 +4431,7 @@
 				0837CEE01D3FDAFA00A1E089 /* SRGSSRType_Bd.ttf in Resources */,
 				6F340F4E220DA87600778CA3 /* SRGUserData.bundle in Resources */,
 				0837CEB01D3FAEE200A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
-				6F0F883F1ECEE78C0060A893 /* override_default_rtr_srf1.pdf in Resources */,
 				0837CEE71D3FDAFA00A1E089 /* SRGSSRType_Serif_Rg.ttf in Resources */,
-				6F0F88411ECEE78C0060A893 /* override_default_rtr_srf2.pdf in Resources */,
 				6F12E4DC22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				0887825223AD61D500629312 /* HomeLiveMediaCollectionViewCell.xib in Resources */,
 				6FF3B6972137DCD700F8A5E2 /* SRGContentProtection.bundle in Resources */,
@@ -4671,7 +4444,6 @@
 				0837CEDF1D3FDAFA00A1E089 /* FontAwesome.otf in Resources */,
 				08602BFF2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				6F0C99A42121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
-				6F0F883E1ECEE78C0060A893 /* override_default_radio_rtr.pdf in Resources */,
 				08564B261D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
 				E6E2DF2F1D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				6F93DE1620AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
@@ -4705,10 +4477,8 @@
 				6F1A95EE216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
 				6F0C999F2121FBD800073AB6 /* SRGAnalytics.bundle in Resources */,
 				6FA7EC3C20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
-				6F0F883D1ECEE78C0060A893 /* override_artwork_radio_rtr.pdf in Resources */,
 				6FB0BB3A20AEF5B8007C5D87 /* Onboarding.strings in Resources */,
 				6FD2CBC61DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
-				6F0F88731ECF0CD70060A893 /* override_artwork_rtr_srf1.pdf in Resources */,
 				6F4760111EB37BC6003021EA /* TranslucentTitleHeaderView.xib in Resources */,
 				0875851123A0025F00FA7207 /* ProfileAccountHeaderView.xib in Resources */,
 				0837CEE41D3FDAFA00A1E089 /* SRGSSRType_Lt.ttf in Resources */,
@@ -4716,8 +4486,6 @@
 				0837CEE31D3FDAFA00A1E089 /* SRGSSRType_It.ttf in Resources */,
 				6F40921022DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
 				6F475FFD1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
-				6F0F88741ECF0CD70060A893 /* override_artwork_rtr_srf_info.pdf in Resources */,
-				6F0F88751ECF0CD70060A893 /* override_artwork_rtr_srf2.pdf in Resources */,
 				E694A9FD1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
 				6FE01B1923603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 			);
