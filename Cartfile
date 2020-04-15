@@ -4,5 +4,5 @@ github "mapbox/Fingertips" "cdffabac5506103a2c7cc5aedeed4021df2501da"
 github "microsoft/appcenter-sdk-apple" ~> 3.1.0
 github "SRGSSR/DZNEmptyDataSet" "v1.8.1_srg1"
 github "SRGSSR/Masonry" "v1.1.0_srg1"
-github "SRGSSR/srgletterbox-apple" "69dfd368e11c620ab80726276c73cb1f77568d36"
+github "SRGSSR/srgletterbox-apple" "d90fb341b5a43bf5459f16c306a48e77c9d761d6"
 github "SRGSSR/srguserdata-apple" "2d4ac53032f5466055baa4b867d90b451c8f3ddb"
