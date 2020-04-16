@@ -10,6 +10,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ *  Return the program at the specified date, if any.
+ */
+OBJC_EXPORT SRGProgram * _Nullable SRGChannelServiceProgramAtDate(SRGProgramComposition *programComposition, NSDate *date);
+
+/**
  *  Notification sent when channels have been updated.
  */
 OBJC_EXPORT NSString * const ChannelServiceDidUpdateChannelsNotification;

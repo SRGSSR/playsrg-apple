@@ -27,7 +27,7 @@
 
 @interface HomeLiveMediaCollectionViewCell ()
 
-@property (nonatomic) SRGChannel *channel;
+@property (nonatomic) SRGProgramComposition *programComposition;
 
 @property (nonatomic, weak) IBOutlet UIView *mediaView;
 @property (nonatomic, weak) IBOutlet UIView *placeholderView;
@@ -96,7 +96,7 @@
     [self unregisterChannelUpdatesWithMedia:self.media];
     self.media = nil;
     
-    self.channel = nil;
+    self.programComposition = nil;
     
     self.progressView.hidden = NO;
     self.progressView.progress = 1.f;
@@ -143,12 +143,15 @@
 - (NSString *)accessibilityLabel
 {
     if (self.media.contentType == SRGContentTypeLivestream) {
-        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ live", @"Live content label, with a channel title"), self.channel.title];
+        SRGChannel *channel = self.programComposition.channel;
+        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ live", @"Live content label, with a channel title"), channel.title];
         if (! self.recentLabel.hidden) {
             [accessibilityLabel appendFormat:@", %@", PlaySRGAccessibilityLocalizedString(@"Last played", @"Label on recently played livestreams")];
         }
-        if (self.channel.currentProgram) {
-            [accessibilityLabel appendFormat:@", %@", self.channel.currentProgram.title];
+        
+        SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, NSDate.date);
+        if (currentProgram) {
+            [accessibilityLabel appendFormat:@", %@", currentProgram.title];
         }
         return accessibilityLabel.copy;
     }
@@ -173,7 +176,6 @@
     [self unregisterChannelUpdatesWithMedia:self.media];
     
     _media = media;
-    self.channel = media.channel;
     
     [self registerForChannelUpdatesWithMedia:media];
     [self reloadData];
@@ -188,8 +190,7 @@
     }
     
     [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGProgramComposition * _Nullable programComposition) {
-        // TODO: Store program list and use last item
-        self.channel = programComposition.channel ?: media.channel;
+        self.programComposition = programComposition;
         [self reloadData];
     }];
 }
@@ -243,12 +244,14 @@
     
     [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
     
-    if (self.channel) {
-        UIImage *logoImage = self.channel.play_banner22Image;
+    if (self.programComposition) {
+        SRGChannel *channel = self.programComposition.channel;
+        
+        UIImage *logoImage = channel.play_banner22Image;
         self.logoImageView.image = logoImage;
         self.logoImageView.hidden = (logoImage == nil);
         
-        SRGProgram *currentProgram = self.channel.currentProgram;
+        SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, NSDate.date);
         if ([currentProgram play_containsDate:NSDate.date]) {
             self.titleLabel.text = currentProgram.title;
             self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
@@ -257,15 +260,15 @@
             self.progressView.progress = fmaxf(fminf(progress, 1.f), 0.f);
             
             [self.thumbnailImageView play_requestImageForObject:currentProgram withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia unavailabilityHandler:^{
-                [self.thumbnailImageView play_requestImageForObject:self.channel withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
+                [self.thumbnailImageView play_requestImageForObject:channel withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
             }];
         }
         else {
-            self.titleLabel.text = self.channel.title;
+            self.titleLabel.text = channel.title;
             self.subtitleLabel.text = NSLocalizedString(@"Currently", @"Text displayed on live cells when no program time information is available");
             self.progressView.progress = 1.f;
             
-            [self.thumbnailImageView play_requestImageForObject:self.channel withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
+            [self.thumbnailImageView play_requestImageForObject:channel withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
         }
     }
     else {
