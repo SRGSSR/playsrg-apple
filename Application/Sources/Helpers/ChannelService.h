@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Return the program at the specified date, if any.
  */
+// TODO: Category method? Convenience method in data provider?
 OBJC_EXPORT SRGProgram * _Nullable SRGChannelServiceProgramAtDate(SRGProgramComposition *programComposition, NSDate *date);
 
 /**

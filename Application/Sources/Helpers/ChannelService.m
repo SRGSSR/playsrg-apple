@@ -7,6 +7,7 @@
 #import "ChannelService.h"
 
 #import "ForegroundTimer.h"
+#import "SRGProgram+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <FXReachability/FXReachability.h>
@@ -186,7 +187,7 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 SRGProgram *SRGChannelServiceProgramAtDate(SRGProgramComposition *programComposition, NSDate *date)
 {
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGProgram * _Nullable program, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return [program.startDate isEarlierThanOrEqualToDate:date] && [date isEarlierThanOrEqualToDate:program.endDate];
+        return [program play_containsDate:date];
     }];
     return [programComposition.programs filteredArrayUsingPredicate:predicate].firstObject;
 }

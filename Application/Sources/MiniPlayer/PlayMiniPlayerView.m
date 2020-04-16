@@ -26,8 +26,8 @@
 
 @interface PlayMiniPlayerView () <AccessibilityViewDelegate, SRGPlaybackButtonDelegate>
 
-@property (nonatomic) SRGMedia *media;          // Latest media
-@property (nonatomic) SRGChannel *channel;      // Latest channel information, if any
+@property (nonatomic) SRGMedia *media;                                // Latest media
+@property (nonatomic) SRGProgramComposition *programComposition;      // Latest program information, if any
 
 @property (nonatomic) SRGLetterboxController *controller;
 
@@ -73,8 +73,6 @@
 
 - (void)setMedia:(SRGMedia *)media
 {
-    self.channel = media.channel;
-    
     [self unregisterChannelUpdatesWithMedia:_media];
     _media = media;
     [self registerForChannelUpdatesWithMedia:media];
@@ -192,7 +190,7 @@
 {
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     
-    SRGProgram *currentProgram = self.channel.currentProgram;
+    SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, NSDate.date);
     
     // Display program information (if any) when the controller position is within the current program, otherwise channel
     // information.
@@ -232,12 +230,6 @@
     if (! [media isEqual:self.media]) {
         self.media = media;
     }
-    // Fix for inconsistent RTS data. A media from a media list does not have a channel oject, but a media created from a
-    // media composition has one. Use the one retrieved from the Letterbox metadata notification if available as fallback.
-    else if (! self.channel && media.channel) {
-        self.media = media;
-    }
-    
     [self reloadData];
 }
 
@@ -274,7 +266,7 @@
     }
     
     [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGProgramComposition * _Nullable programComposition) {
-        self.channel = programComposition.channel;
+        self.programComposition = programComposition;
         [self reloadData];
     }];
 }
@@ -299,11 +291,11 @@
     NSString *format = (self.controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) ? PlaySRGAccessibilityLocalizedString(@"Now playing: %@", @"Mini player label") : PlaySRGAccessibilityLocalizedString(@"Recently played: %@", @"Mini player label");
     
     if (self.media.contentType == SRGContentTypeLivestream) {
-        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.channel.title];
-        SRGProgram *currentProgram = self.channel.currentProgram;
+        SRGChannel *channel = self.programComposition.channel;
+        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, channel.title];
         
-        NSDate *currentDate = self.controller.currentDate;
-        if (currentProgram && (! currentDate || [currentProgram play_containsDate:currentDate])) {
+        SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, self.controller.currentDate ?: NSDate.date);
+        if (currentProgram) {
             [accessibilityLabel appendFormat:@", %@", currentProgram.title];
         }
         return accessibilityLabel.copy;
