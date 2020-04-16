@@ -273,8 +273,8 @@
         return;
     }
     
-    [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGChannel * _Nullable channel) {
-        self.channel = channel;
+    [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGProgramComposition * _Nullable programComposition) {
+        self.channel = programComposition.channel;
         [self reloadData];
     }];
 }

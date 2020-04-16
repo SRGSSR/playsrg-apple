@@ -187,8 +187,9 @@
         return;
     }
     
-    [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGChannel * _Nullable channel) {
-        self.channel = channel ?: media.channel;
+    [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGProgramComposition * _Nullable programComposition) {
+        // TODO: Store program list and use last item
+        self.channel = programComposition.channel ?: media.channel;
         [self reloadData];
     }];
 }

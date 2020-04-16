@@ -15,11 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 OBJC_EXPORT NSString * const ChannelServiceDidUpdateChannelsNotification;
 
 // Types
-typedef void (^ChannelServiceUpdateBlock)(SRGChannel * _Nullable channel);
+typedef void (^ChannelServiceUpdateBlock)(SRGProgramComposition * _Nullable programComposition);
 
 /**
- *  Service responsible for retrieving and broadcasting channel detailed information (with current and next program
- *  information). The service periodically retrieves channel data, caches it, and notifies registered observers.
+ *  Service responsible for retrieving and broadcasting channel detailed information (program information, mostly).
+ *  The service periodically retrieves channel data, caches it, and notifies registered observers.
  */
 @interface ChannelService : NSObject
 

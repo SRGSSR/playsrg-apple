@@ -21,7 +21,7 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 
 // Cache channels. This cache is never invalidated, but its data is likely rarely to be staled as it is regularly updated. Cached
 // data is used to return existing channel information as fast as possible, and when errors have been encountered.
-@property (nonatomic) NSMutableDictionary<NSString *, SRGChannel *> *channels;
+@property (nonatomic) NSMutableDictionary<NSString *, SRGProgramComposition *> *programCompositions;
 
 @property (nonatomic) ForegroundTimer *updateTimer;
 @property (nonatomic) SRGRequestQueue *requestQueue;
@@ -44,7 +44,7 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 
 + (NSString *)channelKeyWithMedia:(SRGMedia *)media
 {
-    return [NSString stringWithFormat:@"%@;%@;%@", @(media.channel.transmission), media.channel.uid, media.uid];
+    return [NSString stringWithFormat:@"%@;%@", @(media.channel.transmission), media.channel.uid];
 }
 
 #pragma mark Object lifecycle
@@ -54,7 +54,7 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
     if (self = [super init]) {
         self.registrations = [NSMutableDictionary dictionary];
         self.medias = [NSMutableDictionary dictionary];
-        self.channels = [NSMutableDictionary dictionary];
+        self.programCompositions = [NSMutableDictionary dictionary];
         
         @weakify(self)
         self.updateTimer = [ForegroundTimer timerWithTimeInterval:30. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
@@ -99,9 +99,9 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
     channelRegistrations[observerKey] = block;
     
     // Return data immediately available from the cache, but still trigger an update
-    SRGChannel *channel = self.channels[channelKey];
-    if (channel) {
-        block(channel);
+    SRGProgramComposition *programComposition = self.programCompositions[channelKey];
+    if (programComposition) {
+        block(programComposition);
     }
     
     // Only force an update the first time a media is added. Other updates will occur perodically afterwards.
@@ -132,31 +132,29 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 - (void)updateChannelWithMedia:(SRGMedia *)media
 {
     @weakify(self)
-    SRGChannelCompletionBlock completionBlock = ^(SRGChannel * _Nullable channel, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+    SRGPaginatedProgramCompositionCompletionBlock completionBlock = ^(SRGProgramComposition * _Nullable programComposition, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         @strongify(self)
         
         NSString *channelKey = [ChannelService channelKeyWithMedia:media];
-        if (channel) {
-            self.channels[channelKey] = channel;
+        if (programComposition) {
+            self.programCompositions[channelKey] = programComposition;
         }
         
         NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[channelKey];
         for (ChannelServiceUpdateBlock updateBlock in channelRegistrations.allValues) {
-            updateBlock(self.channels[channelKey]);
+            updateBlock(self.programCompositions[channelKey]);
         }
     };
     
-    SRGRequest *request = nil;
+    // TODO: Harcdoded or should be remotely configurable?
+    static const NSUInteger kPageSize = 50;
+    
+    SRGFirstPageRequest *request = nil;
     if (media.channel.transmission == SRGTransmissionRadio) {
-        if (media.vendor == SRGVendorSRF && ! [media.uid isEqualToString:media.channel.uid]) {
-            request = [SRGDataProvider.currentDataProvider radioChannelForVendor:media.vendor withUid:media.channel.uid livestreamUid:media.uid completionBlock:completionBlock];
-        }
-        else {
-            request = [SRGDataProvider.currentDataProvider radioChannelForVendor:media.vendor withUid:media.channel.uid livestreamUid:nil completionBlock:completionBlock];
-        }
+        request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:media.vendor channelUid:media.channel.uid completionBlock:completionBlock] requestWithPageSize:kPageSize];
     }
     else {
-        request = [SRGDataProvider.currentDataProvider tvChannelForVendor:media.vendor withUid:media.channel.uid completionBlock:completionBlock];
+        request = [[SRGDataProvider.currentDataProvider tvLatestProgramsForVendor:media.vendor channelUid:media.channel.uid completionBlock:completionBlock] requestWithPageSize:kPageSize];
     }
     [self.requestQueue addRequest:request resume:YES];
 }
