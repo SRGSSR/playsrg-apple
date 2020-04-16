@@ -8,6 +8,7 @@
 
 #import "Banner.h"
 #import "CollectionLoadMoreFooterView.h"
+#import "RefreshControl.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
@@ -64,9 +65,7 @@
     UINib *footerNib = [UINib nibWithNibName:footerIdentifier bundle:nil];
     [self.collectionView registerNib:footerNib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerIdentifier];
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = UIColor.whiteColor;
-    refreshControl.layer.zPosition = -1.f;          // Ensure the refresh control appears behind the cells, see http://stackoverflow.com/a/25829016/760435
+    RefreshControl *refreshControl = [[RefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(collectionRequestViewController_refresh:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView insertSubview:refreshControl atIndex:0];
     self.refreshControl = refreshControl;

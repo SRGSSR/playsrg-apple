@@ -14,6 +14,7 @@
 #import "FavoriteTableViewCell.h"
 #import "Favorites.h"
 #import "Layout.h"
+#import "RefreshControl.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -28,7 +29,7 @@
 @property (nonatomic) NSArray<SRGShow *> *shows;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) UIRefreshControl *refreshControl;
+@property (nonatomic, weak) RefreshControl *refreshControl;
 
 @property (nonatomic) UIImageView *loadingImageView;        // strong
 
@@ -65,8 +66,7 @@
     [view addSubview:tableView];
     self.tableView = tableView;
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = UIColor.whiteColor;
+    RefreshControl *refreshControl = [[RefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [tableView insertSubview:refreshControl atIndex:0];
     self.refreshControl = refreshControl;

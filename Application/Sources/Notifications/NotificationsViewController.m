@@ -15,6 +15,7 @@
 #import "Notification.h"
 #import "PlayErrors.h"
 #import "PushService.h"
+#import "RefreshControl.h"
 #import "ShowViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -26,7 +27,7 @@
 @property (nonatomic) NSArray<Notification *> *notifications;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) UIRefreshControl *refreshControl;
+@property (nonatomic, weak) RefreshControl *refreshControl;
 
 @end
 
@@ -114,8 +115,7 @@
     [view addSubview:tableView];
     self.tableView = tableView;
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = UIColor.whiteColor;
+    RefreshControl *refreshControl = [[RefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [tableView insertSubview:refreshControl atIndex:0];
     self.refreshControl = refreshControl;
