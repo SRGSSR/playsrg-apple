@@ -715,7 +715,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
     
     // Livestream: Display channel information when available
-    if (media.contentType == SRGContentTypeLivestream) {
+    SRGMedia *mainMedia = mainChapterMedia ?: media;
+    if (mainMedia.contentType == SRGContentTypeLivestream) {
         [self.mediaInfoStackView play_setHidden:YES];
         
         SRGLetterboxController *letterboxController = self.letterboxController;
@@ -1042,6 +1043,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     return nil;
 }
 
+- (SRGMedia *)mainMedia
+{
+    if (self.letterboxController.mediaComposition) {
+        return [self.letterboxController.mediaComposition mediaForSubdivision:self.letterboxController.mediaComposition.mainChapter];
+    }
+    else {
+        return self.letterboxController.media;
+    }
+}
+
 - (SRGShow *)mainShow
 {
     SRGMedia *mainChapterMedia = [self mainChapterMedia];
@@ -1176,13 +1187,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (BOOL)isLivestreamButtonHidden
 {
-    SRGMedia *media = self.letterboxController.media;
+    SRGMedia *media = [self mainMedia];
     return ! media || ! [self.livestreamMedias containsObject:media] || self.livestreamMedias.count < 2;
 }
 
 - (void)updateLivestreamButton
 {
-    SRGMedia *media = self.letterboxController.media;
+    SRGMedia *media = [self mainMedia];
     
     if (! media || media.contentType != SRGContentTypeLivestream || media.channel.transmission != SRGTransmissionRadio) {
         self.livestreamMedias = nil;
