@@ -624,11 +624,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)synchronizeUserActivity:(NSUserActivity *)userActivity
 {
-    SRGMedia *mainMedia = [self.letterboxController.mediaComposition mediaForSubdivision:self.letterboxController.mediaComposition.mainChapter];
-    if (mainMedia) {
-        userActivity.title = mainMedia.title;
-        if (mainMedia.endDate) {
-            userActivity.expirationDate = mainMedia.endDate;
+    SRGMedia *mainChapterMedia = [self mainChapterMedia];
+    if (mainChapterMedia) {
+        userActivity.title = mainChapterMedia.title;
+        if (mainChapterMedia.endDate) {
+            userActivity.expirationDate = mainChapterMedia.endDate;
         }
         
         NSNumber *position = nil;
@@ -642,12 +642,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         else {
             currentTime = kCMTimeZero;
         }
-        [userActivity addUserInfoEntriesFromDictionary:@{ @"URNString" : mainMedia.URN,
-                                                          @"SRGMediaData" : [NSKeyedArchiver archivedDataWithRootObject:mainMedia],
+        [userActivity addUserInfoEntriesFromDictionary:@{ @"URNString" : mainChapterMedia.URN,
+                                                          @"SRGMediaData" : [NSKeyedArchiver archivedDataWithRootObject:mainChapterMedia],
                                                           @"position" : position ?: [NSNull null],
                                                           @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
         userActivity.requiredUserInfoKeys = [NSSet setWithArray:userActivity.userInfo.allKeys];
-        userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:mainMedia atTime:currentTime];
+        userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:mainChapterMedia atTime:currentTime];
     }
     else {
         [userActivity resignCurrent];
