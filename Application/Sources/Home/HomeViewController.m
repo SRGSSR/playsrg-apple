@@ -37,7 +37,6 @@
 
 typedef NS_ENUM(NSInteger, HomeHeaderType) {
     HomeHeaderTypeNone,         // No header
-    HomeHeaderTypeSpace,        // A space, no header view
     HomeHeaderTypeView          // A header with underlying view
 };
 
@@ -408,7 +407,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
             BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
             BOOL isFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
             if (! UIAccessibilityIsVoiceOverRunning() && isFeaturedHeaderHidden) {
-                return HomeHeaderTypeSpace;
+                return HomeHeaderTypeNone;
             }
             else {
                 return HomeHeaderTypeView;
@@ -597,12 +596,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     }
     
     HomeHeaderType headerType = [self headerTypeForHomeSectionInfo:homeSectionInfo tableView:tableView inSection:section];
-    switch (headerType) {
-        case HomeHeaderTypeSpace: {
-            return LayoutStandardMargin;
-            break;
-        }
-            
+    switch (headerType) {    
         case HomeHeaderTypeView: {
             return LayoutStandardTableSectionHeaderHeight(homeSectionInfo.module.play_backgroundColor != nil);
             break;

@@ -21,14 +21,14 @@ static const CGFloat LayoutCollectionViewCellStandardWidth = 210.f;
 static const CGFloat LayoutTableViewCellStandardHeight = 84.f;
 
 /**
- *  Standard table view padding.
- */
-static const UIEdgeInsets LayoutStandardTableViewPaddingInsets = { 10.f, 0.f, 5.f, 0.f };
-
-/**
  *  Standard margin.
  */
 static const CGFloat LayoutStandardMargin = 10.f;
+
+/**
+ *  Standard table view padding.
+ */
+static const UIEdgeInsets LayoutStandardTableViewPaddingInsets = { LayoutStandardMargin, 0.f, 0.f, 0.f };
 
 /**
  *  Calculate the width to apply to items within a collection so that they approach some desired size, ensuring constant
