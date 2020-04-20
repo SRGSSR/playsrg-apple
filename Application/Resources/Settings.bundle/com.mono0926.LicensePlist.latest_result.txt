@@ -486,7 +486,7 @@ name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: a7beaf9
 
 name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: 4138001
 
-name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: 2d4ac53
+name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: ce4c2f2
 
 name: tagcommander-apple, nameSpecified: , owner: SRGSSR, version: 4.5.4_4.4.1_srg3
 

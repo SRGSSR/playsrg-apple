@@ -5,4 +5,4 @@ github "microsoft/appcenter-sdk-apple" ~> 3.1.0
 github "SRGSSR/DZNEmptyDataSet" "v1.8.1_srg1"
 github "SRGSSR/Masonry" "v1.1.0_srg1"
 github "SRGSSR/srgletterbox-apple" "8c80981db45a3c03267c921cf6dfe3155df9127c"
-github "SRGSSR/srguserdata-apple" "2d4ac53032f5466055baa4b867d90b451c8f3ddb"
+github "SRGSSR/srguserdata-apple" "ce4c2f228c7936d5f5c9270a29a9f6b4e0096e68"
