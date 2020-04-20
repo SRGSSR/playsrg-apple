@@ -624,11 +624,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)synchronizeUserActivity:(NSUserActivity *)userActivity
 {
-    SRGMedia *mainMedia = [self.letterboxController.mediaComposition mediaForSubdivision:self.letterboxController.mediaComposition.mainChapter];
-    if (mainMedia) {
-        userActivity.title = mainMedia.title;
-        if (mainMedia.endDate) {
-            userActivity.expirationDate = mainMedia.endDate;
+    SRGMedia *mainChapterMedia = [self mainChapterMedia];
+    if (mainChapterMedia) {
+        userActivity.title = mainChapterMedia.title;
+        if (mainChapterMedia.endDate) {
+            userActivity.expirationDate = mainChapterMedia.endDate;
         }
         
         NSNumber *position = nil;
@@ -642,12 +642,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         else {
             currentTime = kCMTimeZero;
         }
-        [userActivity addUserInfoEntriesFromDictionary:@{ @"URNString" : mainMedia.URN,
-                                                          @"SRGMediaData" : [NSKeyedArchiver archivedDataWithRootObject:mainMedia],
+        [userActivity addUserInfoEntriesFromDictionary:@{ @"URNString" : mainChapterMedia.URN,
+                                                          @"SRGMediaData" : [NSKeyedArchiver archivedDataWithRootObject:mainChapterMedia],
                                                           @"position" : position ?: [NSNull null],
                                                           @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
         userActivity.requiredUserInfoKeys = [NSSet setWithArray:userActivity.userInfo.allKeys];
-        userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:mainMedia atTime:currentTime];
+        userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:mainChapterMedia atTime:currentTime];
     }
     else {
         [userActivity resignCurrent];
@@ -715,7 +715,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
     
     // Livestream: Display channel information when available
-    if (media.contentType == SRGContentTypeLivestream) {
+    SRGMedia *mainMedia = mainChapterMedia ?: media;
+    if (mainMedia.contentType == SRGContentTypeLivestream) {
         [self.mediaInfoStackView play_setHidden:YES];
         
         SRGLetterboxController *letterboxController = self.letterboxController;
@@ -1042,6 +1043,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     return nil;
 }
 
+- (SRGMedia *)mainMedia
+{
+    if (self.letterboxController.mediaComposition) {
+        return [self.letterboxController.mediaComposition mediaForSubdivision:self.letterboxController.mediaComposition.mainChapter];
+    }
+    else {
+        return self.letterboxController.media;
+    }
+}
+
 - (SRGShow *)mainShow
 {
     SRGMedia *mainChapterMedia = [self mainChapterMedia];
@@ -1176,13 +1187,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (BOOL)isLivestreamButtonHidden
 {
-    SRGMedia *media = self.letterboxController.media;
+    SRGMedia *media = [self mainMedia];
     return ! media || ! [self.livestreamMedias containsObject:media] || self.livestreamMedias.count < 2;
 }
 
 - (void)updateLivestreamButton
 {
-    SRGMedia *media = self.letterboxController.media;
+    SRGMedia *media = [self mainMedia];
     
     if (! media || media.contentType != SRGContentTypeLivestream || media.channel.transmission != SRGTransmissionRadio) {
         self.livestreamMedias = nil;
