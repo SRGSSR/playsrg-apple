@@ -14,6 +14,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
+#import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -45,10 +46,7 @@
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     view.backgroundColor = UIColor.play_blackColor;
         
-    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds];
-    tableView.backgroundColor = UIColor.clearColor;
-    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;
     tableView.allowsMultipleSelectionDuringEditing = YES;
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

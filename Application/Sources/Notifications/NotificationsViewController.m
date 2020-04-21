@@ -17,6 +17,7 @@
 #import "PushService.h"
 #import "RefreshControl.h"
 #import "ShowViewController.h"
+#import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -26,7 +27,7 @@
 
 @property (nonatomic) NSArray<Notification *> *notifications;
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) TableView *tableView;
 @property (nonatomic, weak) RefreshControl *refreshControl;
 
 @end
@@ -105,10 +106,7 @@
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     view.backgroundColor = UIColor.play_blackColor;
         
-    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds];
-    tableView.backgroundColor = UIColor.clearColor;
-    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;
     tableView.allowsMultipleSelectionDuringEditing = YES;
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

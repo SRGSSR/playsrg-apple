@@ -25,6 +25,7 @@
 #import "RefreshControl.h"
 #import "ShowsViewController.h"
 #import "SRGModule+PlaySRG.h"
+#import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -54,7 +55,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
 @property (nonatomic) NSError *lastRequestError;
 
 @property (nonatomic, weak) RefreshControl *refreshControl;
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) TableView *tableView;
 
 @property (nonatomic, getter=isTopicsLoaded) BOOL topicsLoaded;
 @property (nonatomic, getter=isEventsLoaded) BOOL eventsLoaded;
@@ -90,10 +91,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     view.backgroundColor = UIColor.play_blackColor;
         
-    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds style:UITableViewStyleGrouped];
-    tableView.backgroundColor = UIColor.clearColor;
-    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    TableView *tableView = [[TableView alloc] initWithFrame:view.bounds style:UITableViewStyleGrouped];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [view addSubview:tableView];
     self.tableView = tableView;

@@ -1110,6 +1110,11 @@
 		6F93DE1C20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */; };
 		6F93DE1D20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */; };
 		6F93DE1E20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */; };
+		6F982B93244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
+		6F982B94244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
+		6F982B95244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
+		6F982B96244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
+		6F982B97244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
 		6F9897CD2412582400B390A2 /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9897CC2412582400B390A2 /* Layout.m */; };
 		6F9897CE2412582400B390A2 /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9897CC2412582400B390A2 /* Layout.m */; };
 		6F9897CF2412582400B390A2 /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9897CC2412582400B390A2 /* Layout.m */; };
@@ -2105,6 +2110,8 @@
 		6F93DE1220AE9A9900B71572 /* OnboardingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnboardingsViewController.storyboard; sourceTree = "<group>"; };
 		6F93DE1820AE9BE600B71572 /* OnboardingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnboardingTableViewCell.h; sourceTree = "<group>"; };
 		6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OnboardingTableViewCell.m; sourceTree = "<group>"; };
+		6F982B91244F1E1200C0386E /* TableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableView.h; sourceTree = "<group>"; };
+		6F982B92244F1E1200C0386E /* TableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableView.m; sourceTree = "<group>"; };
 		6F9897CB2412582400B390A2 /* Layout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
 		6F9897CC2412582400B390A2 /* Layout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Layout.m; sourceTree = "<group>"; };
 		6F9D2741203AD99C00FDE899 /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
@@ -3262,6 +3269,8 @@
 				6F0EDA632448B0D700F0FED2 /* RefreshControl.m */,
 				6FEC91A721A6B39A00AA50C8 /* TableLoadMoreFooterView.h */,
 				6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */,
+				6F982B91244F1E1200C0386E /* TableView.h */,
+				6F982B92244F1E1200C0386E /* TableView.m */,
 				6F475FAF1EB37BC6003021EA /* TranslucentTitleHeaderView.h */,
 				6F475FB01EB37BC6003021EA /* TranslucentTitleHeaderView.m */,
 				6F475FB11EB37BC6003021EA /* TranslucentTitleHeaderView.xib */,
@@ -6023,6 +6032,7 @@
 				08B2A53A2426511800C6EED3 /* SRGModule+PlaySRG.m in Sources */,
 				0859ADC622D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
 				6F47607D1EB37D60003021EA /* UIViewController+PlaySRG.m in Sources */,
+				6F982B93244F1E1200C0386E /* TableView.m in Sources */,
 				6FD88F8A22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F475FBE1EB37BC6003021EA /* DataViewController.m in Sources */,
 				6F12DB5021A3EFBF0054879D /* HistoryViewController.m in Sources */,
@@ -6176,6 +6186,7 @@
 				08564B1E1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FDF08EC218B126700B2AF2C /* OnboardingPage.m in Sources */,
+				6F982B94244F1E1200C0386E /* TableView.m in Sources */,
 				6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8B1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
 				08B77AF1240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
@@ -6339,6 +6350,7 @@
 				08564B1F1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FDF08ED218B126700B2AF2C /* OnboardingPage.m in Sources */,
+				6F982B95244F1E1200C0386E /* TableView.m in Sources */,
 				6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8C1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
 				08B77AF2240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
@@ -6502,6 +6514,7 @@
 				08564B201D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FDF08EE218B126700B2AF2C /* OnboardingPage.m in Sources */,
+				6F982B96244F1E1200C0386E /* TableView.m in Sources */,
 				6F556B3B1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8D1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
 				08B77AF3240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
@@ -6665,6 +6678,7 @@
 				08564B211D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E51EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FDF08EF218B126700B2AF2C /* OnboardingPage.m in Sources */,
+				6F982B97244F1E1200C0386E /* TableView.m in Sources */,
 				6F556B3C1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8E1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
 				08B77AF4240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
