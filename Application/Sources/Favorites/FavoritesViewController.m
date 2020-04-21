@@ -15,6 +15,7 @@
 #import "Favorites.h"
 #import "Layout.h"
 #import "RefreshControl.h"
+#import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -28,7 +29,7 @@
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) TableView *tableView;
 @property (nonatomic, weak) RefreshControl *refreshControl;
 
 @property (nonatomic) UIImageView *loadingImageView;        // strong
@@ -56,10 +57,7 @@
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     view.backgroundColor = UIColor.play_blackColor;
         
-    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds];
-    tableView.backgroundColor = UIColor.clearColor;
-    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;
     tableView.allowsMultipleSelectionDuringEditing = YES;
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

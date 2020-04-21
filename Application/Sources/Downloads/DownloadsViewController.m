@@ -16,6 +16,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "RefreshControl.h"
+#import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -27,7 +28,7 @@
 
 @property (nonatomic) NSArray<Download *> *downloads;
 
-@property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, weak) TableView *tableView;
 @property (nonatomic, weak) RefreshControl *refreshControl;
 
 @property (nonatomic) UIBarButtonItem *defaultLeftBarButtonItem;
@@ -60,10 +61,7 @@
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     view.backgroundColor = UIColor.play_blackColor;
         
-    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds];
-    tableView.backgroundColor = UIColor.clearColor;
-    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;
     tableView.allowsMultipleSelectionDuringEditing = YES;
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
