@@ -112,16 +112,14 @@ static const CGFloat kBottomInset = 15.f;
 {
     [super setHomeSectionInfo:homeSectionInfo featured:featured];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (homeSectionInfo) {
-            // Restore position in rows when scrolling vertically and returning to a previously scrolled row
-            CGPoint maxContentOffset = self.collectionView.play_maximumContentOffset;
-            CGPoint contentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
-                                                homeSectionInfo.contentOffset.y);
-            [self.collectionView setContentOffset:contentOffset animated:NO];
-        }
-        self.collectionView.scrollEnabled = (homeSectionInfo.items.count != 0);
-    });
+    if (homeSectionInfo) {
+        // Restore position in rows when scrolling vertically and returning to a previously scrolled row
+        CGPoint maxContentOffset = self.collectionView.play_maximumContentOffset;
+        CGPoint contentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
+                                            homeSectionInfo.contentOffset.y);
+        [self.collectionView setContentOffset:contentOffset animated:NO];
+    }
+    self.collectionView.scrollEnabled = (homeSectionInfo.items.count != 0);
 }
 
 #pragma mark UICollectionViewDataSource protocol
