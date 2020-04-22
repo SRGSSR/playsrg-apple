@@ -12,6 +12,7 @@
 #import "Layout.h"
 #import "MediaPlayerViewController.h"
 #import "SRGModule+PlaySRG.h"
+#import "SwimlaneCollectionViewLayout.h"
 #import "UICollectionView+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -87,7 +88,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         [self.contentView addSubview:wrapperView];
         self.wrapperView = wrapperView;
         
-        UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        SwimlaneCollectionViewLayout *collectionViewLayout = [[SwimlaneCollectionViewLayout alloc] init];
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
         collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;

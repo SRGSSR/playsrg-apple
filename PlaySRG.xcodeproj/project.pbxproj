@@ -1376,6 +1376,11 @@
 		6FF7BBB422A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */; };
 		6FF7BBB522A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */; };
 		6FF7BBB622A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */; };
+		6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
+		6FFCB62524504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
+		6FFCB62624504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
+		6FFCB62724504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
+		6FFCB62824504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
 		7ACE7CA000370D1208243956 /* libPods-PlaySRG-Play SRF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D6E859054BE4FCA7A62352E /* libPods-PlaySRG-Play SRF.a */; };
 		E1D8F87EB9409ADB326F446F /* libPods-PlaySRG-Play RTR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866AF638938EFA7338C23B03 /* libPods-PlaySRG-Play RTR.a */; };
 		E60178521D635E130000362E /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; };
@@ -2230,6 +2235,8 @@
 		6FF7BB9522A78DE400FA758A /* SearchSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingsViewController.m; sourceTree = "<group>"; };
 		6FF7BB9622A78DE400FA758A /* SearchSettingSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingSelectorCell.m; sourceTree = "<group>"; };
 		6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchSettingsViewController.storyboard; sourceTree = "<group>"; };
+		6FFCB62224504C6C00D16466 /* SwimlaneCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwimlaneCollectionViewLayout.h; sourceTree = "<group>"; };
+		6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwimlaneCollectionViewLayout.m; sourceTree = "<group>"; };
 		866AF638938EFA7338C23B03 /* libPods-PlaySRG-Play RTR.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaySRG-Play RTR.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BDBB65E7B9D845CB1576750 /* Pods-PlaySRG-Play RTS.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTS.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS.nightly.xcconfig"; sourceTree = "<group>"; };
 		A0923E657497DE17CE057F6E /* Pods-PlaySRG-Play RTR.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTR.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR.nightly.xcconfig"; sourceTree = "<group>"; };
@@ -3240,9 +3247,11 @@
 				6F475FA01EB37BC6003021EA /* ModalTransition.m */,
 				6F475FA11EB37BC6003021EA /* Previewing.h */,
 				6F4091FF22DCF43D005F3850 /* Previewing.m */,
+				6FB340D823E1A21500BC83BF /* Scrollable.h */,
+				6FFCB62224504C6C00D16466 /* SwimlaneCollectionViewLayout.h */,
+				6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */,
 				6FF4D4DE23D5B07E008B981A /* UIVisualEffectView+PlaySRG.h */,
 				6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */,
-				6FB340D823E1A21500BC83BF /* Scrollable.h */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -5895,6 +5904,7 @@
 				6F9D2743203AD99C00FDE899 /* Playlist.m in Sources */,
 				086321052258C6D000C719A6 /* WatchLaterTableViewCell.m in Sources */,
 				E66BEC1C1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
+				6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F475FC31EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6F475FFF1EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F12E4E222D8676600BC1718 /* SearchHeaderView.m in Sources */,
@@ -6182,6 +6192,7 @@
 				E65FB20C1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AA21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F4760831EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
+				6FFCB62524504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B1E1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -6346,6 +6357,7 @@
 				E65FB20D1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AB21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F47608A1EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
+				6FFCB62624504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B1F1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -6510,6 +6522,7 @@
 				E65FB20E1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AC21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F4760911EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
+				6FFCB62724504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B201D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -6674,6 +6687,7 @@
 				E65FB20F1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AD21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F4760981EB37DF2003021EA /* UIStackView+PlaySRG.m in Sources */,
+				6FFCB62824504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F06E0A81DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B211D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E51EB9D57400067D40 /* ChannelService.m in Sources */,

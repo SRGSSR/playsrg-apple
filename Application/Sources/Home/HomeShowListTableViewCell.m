@@ -9,6 +9,7 @@
 #import "HomeShowCollectionViewCell.h"
 #import "Layout.h"
 #import "ShowViewController.h"
+#import "SwimlaneCollectionViewLayout.h"
 #import "UICollectionView+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
@@ -61,7 +62,7 @@ static const CGFloat kBottomInset = 15.f;
         [self.contentView addSubview:wrapperView];
         self.wrapperView = wrapperView;
         
-        UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        SwimlaneCollectionViewLayout *collectionViewLayout = [[SwimlaneCollectionViewLayout alloc] init];
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
         collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
