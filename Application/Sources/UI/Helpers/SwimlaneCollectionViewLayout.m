@@ -6,9 +6,7 @@
 
 #import "SwimlaneCollectionViewLayout.h"
 
-#import "Layout.h"
-
-#import <libextobjc/libextobjc.h>
+#import "UICollectionView+PlaySRG.h"
 
 @implementation SwimlaneCollectionViewLayout
 
@@ -19,7 +17,7 @@
     NSAssert(self.scrollDirection == UICollectionViewScrollDirectionHorizontal, @"Swimlanes must be a horizontal layout");
     
     // Do not snap at the end
-    if (proposedContentOffset.x >= self.collectionView.contentSize.width - CGRectGetWidth(self.collectionView.frame)) {
+    if (proposedContentOffset.x >= self.collectionView.play_maximumContentOffset.x) {
         return proposedContentOffset;
     }
     
@@ -81,8 +79,8 @@
         proposedLayoutAttributes = layoutAttributes0;
     }
     
-    // Use twice the margin to snap not only sharp, but letting the previous item be seen (if any)
-    CGFloat snapXOffset = fmaxf(CGRectGetMinX(proposedLayoutAttributes.frame) - 2 * LayoutStandardMargin, 0.f);
+    // Use margin to snap not only sharp, but letting the previous item be seen (if any)
+    CGFloat snapXOffset = fmaxf(CGRectGetMinX(proposedLayoutAttributes.frame) - 2 * self.minimumInteritemSpacing, 0.f);
     return CGPointMake(snapXOffset, proposedContentOffset.y);
 }
 

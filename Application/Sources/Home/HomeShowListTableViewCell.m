@@ -10,7 +10,6 @@
 #import "Layout.h"
 #import "ShowViewController.h"
 #import "SwimlaneCollectionViewLayout.h"
-#import "UICollectionView+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -116,10 +115,7 @@ static const CGFloat kBottomInset = 15.f;
     
     if (homeSectionInfo) {
         // Restore position in rows when scrolling vertically and returning to a previously scrolled row
-        CGPoint maxContentOffset = self.collectionView.play_maximumContentOffset;
-        CGPoint proposedContentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
-                                                    homeSectionInfo.contentOffset.y);
-        CGPoint contentOffset = [self.collectionView.collectionViewLayout targetContentOffsetForProposedContentOffset:proposedContentOffset withScrollingVelocity:CGPointZero];
+        CGPoint contentOffset = [self.collectionView.collectionViewLayout targetContentOffsetForProposedContentOffset:homeSectionInfo.contentOffset withScrollingVelocity:CGPointZero];
         [self.collectionView setContentOffset:contentOffset animated:NO];
     }
     self.collectionView.scrollEnabled = (homeSectionInfo.items.count != 0);
