@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  The play background color to use for the module.
  */
-@property (nonatomic, readonly) UIColor *play_backgroundColor;
+@property (nonatomic, readonly, nullable) UIColor *play_backgroundColor;
 
 @end
 

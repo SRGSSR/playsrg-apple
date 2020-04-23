@@ -18,6 +18,10 @@
 @property (nonatomic, weak) IBOutlet UIView *backgroundView;
 @property (nonatomic, weak) IBOutlet UILabel *messageLabel;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *backgroundViewLeadingLayoutConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *backgroundViewTrailingLayoutConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *backgroundViewBottomLayoutConstraint;
+
 @end
 
 @implementation HomeStatusHeaderView
@@ -54,6 +58,10 @@
     self.backgroundView.backgroundColor = UIColor.play_redColor;
     
     self.backgroundView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    
+    self.backgroundViewLeadingLayoutConstraint.constant = LayoutStandardMargin;
+    self.backgroundViewTrailingLayoutConstraint.constant = LayoutStandardMargin;
+    self.backgroundViewBottomLayoutConstraint.constant = LayoutStandardMargin;
 }
 
 #pragma mark Getters and setters

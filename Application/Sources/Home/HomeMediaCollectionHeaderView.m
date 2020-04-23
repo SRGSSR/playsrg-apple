@@ -149,11 +149,12 @@
     self.headerView.hidden = NO;
     self.placeholderView.hidden = YES;
     
+    id<SRGImage, SRGMetadata> object = self.homeSectionInfo.module ?: self.homeSectionInfo.topic;
+    
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
-    self.titleLabel.text = NSLocalizedString(@"All content", @"Title of the first cell of a media list on homepage.");
+    self.titleLabel.text = object.lead ?: NSLocalizedString(@"All content", @"Title of the first cell of a media list on homepage.");
     
     ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
-    id<SRGImage> object = self.homeSectionInfo.module ?: self.homeSectionInfo.topic;
     [self.thumbnailImageView play_requestImageForObject:object withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList];
 }
 

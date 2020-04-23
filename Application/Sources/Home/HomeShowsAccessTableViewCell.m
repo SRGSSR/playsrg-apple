@@ -72,8 +72,23 @@
     self.showsByDateButton.layer.masksToBounds = YES;
     [self.showsByDateButton setTitle:NSLocalizedString(@"By date", @"Short title displayed in home page shows section.") forState:UIControlStateNormal];
     self.showsByDateButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Programmes by date", @"Title displayed in home page shows section.");
+}
+
+- (void)reloadData
+{
+    [super reloadData];
     
-    [self reloadData];
+    if (! self.dataAvailable) {
+        self.mainView.hidden = YES;
+        self.placeholderView.hidden = NO;
+        return;
+    }
+    
+    self.mainView.hidden = NO;
+    self.placeholderView.hidden = YES;
+    
+    self.showsAtoZButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.showsByDateButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
 }
 
 #pragma mark Accessibility
@@ -88,15 +103,6 @@
     return self.dataAvailable ? @[self.showsAtoZButton, self.showsByDateButton] : nil;
 }
 
-#pragma mark Getters and setters
-
-- (void)setHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo featured:(BOOL)featured
-{
-    [super setHomeSectionInfo:homeSectionInfo featured:featured];
-    
-    [self reloadData];
-}
-
 #pragma mark UI
 
 - (BOOL)isDataAvailable
@@ -107,21 +113,6 @@
     else {
         return YES;
     }
-}
-
-- (void)reloadData
-{
-    if (! self.dataAvailable) {
-        self.mainView.hidden = YES;
-        self.placeholderView.hidden = NO;
-        return;
-    }
-    
-    self.mainView.hidden = NO;
-    self.placeholderView.hidden = YES;
-    
-    self.showsAtoZButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    self.showsByDateButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
 }
 
 #pragma mark Actions

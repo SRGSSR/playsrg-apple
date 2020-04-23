@@ -448,7 +448,7 @@ name: UrbanAirship-iOS-SDK, nameSpecified:
 body: Copyright 2017 Urban…
 version: 9.4.0
 
-name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 2.5.3
+name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 3.1.1
 
 name: CoconutKit, nameSpecified: , owner: defagos, version: 3.4
 
@@ -466,19 +466,19 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.0
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 4.1.0
+name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 4.1.1
 
-name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
+name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.1.0
 
 name: srgcontentprotection-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 7.0.1
+name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 7.1.0
 
 name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
+name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 2.0.2
 
-name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 3.0.1
+name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 4.0.0
 
 name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
@@ -486,7 +486,7 @@ name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: 4.0.0
 
 name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
+name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: 2.0.2
 
 name: tagcommander-apple, nameSpecified: , owner: SRGSSR, version: 4.5.4_4.4.1_srg3
 

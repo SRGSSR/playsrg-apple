@@ -509,7 +509,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.086274509803921567" green="0.086274509803921567" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="yDa-0T-uNV" firstAttribute="top" secondItem="cxL-OK-uak" secondAttribute="top" id="5Mj-xI-GH3"/>
+                            <constraint firstItem="yDa-0T-uNV" firstAttribute="top" secondItem="cxL-OK-uak" secondAttribute="top" priority="900" id="5Mj-xI-GH3"/>
+                            <constraint firstAttribute="top" secondItem="yDa-0T-uNV" secondAttribute="top" priority="850" id="ESI-Dr-UyW"/>
                             <constraint firstItem="6iD-kT-jj5" firstAttribute="top" secondItem="cxL-OK-uak" secondAttribute="top" id="Fuv-m3-Pzn"/>
                             <constraint firstAttribute="bottom" secondItem="yDa-0T-uNV" secondAttribute="bottom" priority="850" id="GGg-eU-ikx"/>
                             <constraint firstItem="4mL-6P-GaC" firstAttribute="width" secondItem="PRe-mm-QIy" secondAttribute="width" constant="-8" id="Vka-c7-k3V"/>
@@ -551,9 +552,10 @@
                         <outlet property="multiAudioImageView" destination="aeL-66-EET" id="jnS-8h-Ajc"/>
                         <outlet property="nextProgramLabel" destination="TWK-yS-nud" id="1Me-Wn-V7J"/>
                         <outlet property="numberOfEpisodesLabel" destination="n6K-Dg-J9D" id="hyA-jm-904"/>
-                        <outlet property="playerAspectRatio16_9Constraint" destination="sHT-jJ-Lxy" id="sae-Wk-L16"/>
                         <outlet property="playerAspectRatioBigLandscapeScreenConstraint" destination="d4e-DG-s50" id="Xip-HB-R7g"/>
+                        <outlet property="playerAspectRatioStandardConstraint" destination="sHT-jJ-Lxy" id="sae-Wk-L16"/>
                         <outlet property="playerBottomConstraint" destination="GGg-eU-ikx" id="IsZ-oq-Jot"/>
+                        <outlet property="playerTopConstraint" destination="ESI-Dr-UyW" id="RCb-YM-KoD"/>
                         <outlet property="playerView" destination="yDa-0T-uNV" id="Hkl-v6-yZ2"/>
                         <outlet property="programTimeLabel" destination="azC-dB-UH4" id="6rV-J5-4MC"/>
                         <outlet property="propertiesStackView" destination="3ln-Rh-6yE" id="K95-zc-cc0"/>

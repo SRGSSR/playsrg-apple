@@ -22,7 +22,10 @@
 #import "HomeStatusHeaderView.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
+#import "RefreshControl.h"
 #import "ShowsViewController.h"
+#import "SRGModule+PlaySRG.h"
+#import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -35,7 +38,6 @@
 
 typedef NS_ENUM(NSInteger, HomeHeaderType) {
     HomeHeaderTypeNone,         // No header
-    HomeHeaderTypeSpace,        // A space, no header view
     HomeHeaderTypeView          // A header with underlying view
 };
 
@@ -52,8 +54,8 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
 
 @property (nonatomic) NSError *lastRequestError;
 
-@property (nonatomic, weak) UIRefreshControl *refreshControl;
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) RefreshControl *refreshControl;
+@property (nonatomic, weak) TableView *tableView;
 
 @property (nonatomic, getter=isTopicsLoaded) BOOL topicsLoaded;
 @property (nonatomic, getter=isEventsLoaded) BOOL eventsLoaded;
@@ -89,16 +91,12 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     view.backgroundColor = UIColor.play_blackColor;
         
-    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds style:UITableViewStyleGrouped];
-    tableView.backgroundColor = UIColor.clearColor;
-    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    TableView *tableView = [[TableView alloc] initWithFrame:view.bounds style:UITableViewStyleGrouped];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [view addSubview:tableView];
     self.tableView = tableView;
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = UIColor.whiteColor;
+    RefreshControl *refreshControl = [[RefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [tableView insertSubview:refreshControl atIndex:0];
     self.refreshControl = refreshControl;
@@ -320,10 +318,10 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     NSArray<HomeSectionInfo *> *homeSectionInfos = [self.homeSectionInfos filteredArrayUsingPredicate:predicate];
     for (HomeSectionInfo *homeSectionInfo in homeSectionInfos) {
         [homeSectionInfo refreshWithRequestQueue:requestQueue page:nil /* only the first page */ completionBlock:^(NSArray * _Nullable items, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-            // Refresh as data becomes available for better perceived loading times
-            if (! error) {
-                [self.tableView reloadData];
-            }
+            NSUInteger index = [self.homeSectionInfos indexOfObject:homeSectionInfo];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:index];
+            HomeTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            [cell reloadData];
         }];
     }
 }
@@ -407,7 +405,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
             BOOL isRadioChannel = ([applicationConfiguration radioChannelForUid:homeSectionInfo.identifier] != nil);
             BOOL isFeaturedHeaderHidden = isRadioChannel ? applicationConfiguration.radioFeaturedHomeSectionHeaderHidden : applicationConfiguration.tvFeaturedHomeSectionHeaderHidden;
             if (! UIAccessibilityIsVoiceOverRunning() && isFeaturedHeaderHidden) {
-                return HomeHeaderTypeSpace;
+                return HomeHeaderTypeNone;
             }
             else {
                 return HomeHeaderTypeView;
@@ -428,7 +426,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsZero;
+    return LayoutStandardTableViewPaddingInsets;
 }
 
 #pragma mark DZNEmptyDataSetSource protocol
@@ -596,15 +594,9 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     }
     
     HomeHeaderType headerType = [self headerTypeForHomeSectionInfo:homeSectionInfo tableView:tableView inSection:section];
-    switch (headerType) {
-        case HomeHeaderTypeSpace: {
-            return LayoutStandardMargin;
-            break;
-        }
-            
+    switch (headerType) {    
         case HomeHeaderTypeView: {
-            BOOL hasBackgroundColor = (homeSectionInfo.module && ! [homeSectionInfo.module.backgroundColor isEqual:UIColor.play_blackColor]);
-            return LayoutStandardTableSectionHeaderHeight(hasBackgroundColor);
+            return LayoutStandardTableSectionHeaderHeight(homeSectionInfo.module.play_backgroundColor != nil);
             break;
         }
         

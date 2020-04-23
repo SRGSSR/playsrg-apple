@@ -9,6 +9,7 @@
 #import "HomeShowCollectionViewCell.h"
 #import "Layout.h"
 #import "ShowViewController.h"
+#import "UICollectionView+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -91,19 +92,18 @@ static const CGFloat kBottomInset = 15.f;
 
 #pragma mark Overrides
 
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    
-    // Clear the collection
-    [self.collectionView reloadData];
-}
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
     [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
+- (void)reloadData
+{
+    [super reloadData];
+    
+    [self.collectionView reloadData];
 }
 
 #pragma mark Getters and setters
@@ -112,7 +112,16 @@ static const CGFloat kBottomInset = 15.f;
 {
     [super setHomeSectionInfo:homeSectionInfo featured:featured];
     
-    [self.collectionView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (homeSectionInfo) {
+            // Restore position in rows when scrolling vertically and returning to a previously scrolled row
+            CGPoint maxContentOffset = self.collectionView.play_maximumContentOffset;
+            CGPoint contentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
+                                                homeSectionInfo.contentOffset.y);
+            [self.collectionView setContentOffset:contentOffset animated:NO];
+        }
+        self.collectionView.scrollEnabled = (homeSectionInfo.items.count != 0);
+    });
 }
 
 #pragma mark UICollectionViewDataSource protocol
@@ -168,11 +177,7 @@ static const CGFloat kBottomInset = 15.f;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    // Delay content offset recording so that we don't record a content offset before restoring a content offset
-    // (which also is made with a slight delay)
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.homeSectionInfo.contentOffset = scrollView.contentOffset;
-    });
+    self.homeSectionInfo.contentOffset = scrollView.contentOffset;
 }
 
 @end

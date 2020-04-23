@@ -596,6 +596,9 @@ static void *s_kvoContext = &s_kvoContext;
         
         return YES;
     }];
+    
+    MSDistribute.updateTrack = MSUpdateTrackPrivate;
+    
     [MSAppCenter start:appCenterSecret withServices:@[ MSCrashes.class, MSDistribute.class ]];
 }
 

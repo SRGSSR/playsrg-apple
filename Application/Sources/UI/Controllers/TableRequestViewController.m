@@ -7,6 +7,7 @@
 #import "TableRequestViewController.h"
 
 #import "Banner.h"
+#import "RefreshControl.h"
 #import "TableLoadMoreFooterView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -18,7 +19,7 @@
 @interface TableRequestViewController ()
 
 @property (nonatomic) NSError *lastRequestError;
-@property (nonatomic, weak) UIRefreshControl *refreshControl;
+@property (nonatomic, weak) RefreshControl *refreshControl;
 
 @property (nonatomic) UIImageView *loadingImageView;        // strong
 
@@ -64,9 +65,7 @@
     UINib *footerNib = [UINib nibWithNibName:footerIdentifier bundle:nil];
     [self.tableView registerNib:footerNib forHeaderFooterViewReuseIdentifier:footerIdentifier];
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = UIColor.whiteColor;
-    refreshControl.layer.zPosition = -1.f;          // Ensure the refresh control appears behind the cells, see http://stackoverflow.com/a/25829016/760435
+    RefreshControl *refreshControl = [[RefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(tableRequestViewController_refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
     self.refreshControl = refreshControl;

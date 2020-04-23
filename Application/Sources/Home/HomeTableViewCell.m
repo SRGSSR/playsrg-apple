@@ -31,9 +31,14 @@
     
     self.homeSectionInfo = nil;
     self.featured = NO;
+    
+    [self reloadData];
 }
 
 #pragma mark Getters and setters
+
+- (void)reloadData
+{}
 
 - (BOOL)isEmpty
 {
@@ -44,6 +49,7 @@
 {
     self.featured = featured;
     self.homeSectionInfo = homeSectionInfo;
+    [self reloadData];
 }
 
 @end

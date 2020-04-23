@@ -22,6 +22,10 @@
 {
     [super viewDidLoad];
     
+    self.tableView.estimatedRowHeight = 0.f;
+    self.tableView.estimatedSectionHeaderHeight = 0.f;
+    self.tableView.estimatedSectionFooterHeight = 0.f;
+    
     self.view.backgroundColor = UIColor.play_blackColor;
     self.tableView.separatorColor = UIColor.play_grayColor;
     

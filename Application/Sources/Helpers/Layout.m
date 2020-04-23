@@ -39,15 +39,15 @@ CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor)
         s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @25,
                              UIContentSizeCategorySmall : @30,
                              UIContentSizeCategoryMedium : @35,
-                             UIContentSizeCategoryLarge : @40,
-                             UIContentSizeCategoryExtraLarge : @40,
-                             UIContentSizeCategoryExtraExtraLarge : @40,
-                             UIContentSizeCategoryExtraExtraExtraLarge : @45,
-                             UIContentSizeCategoryAccessibilityMedium : @45,
-                             UIContentSizeCategoryAccessibilityLarge : @45,
-                             UIContentSizeCategoryAccessibilityExtraLarge : @45,
-                             UIContentSizeCategoryAccessibilityExtraExtraLarge : @45,
-                             UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @45 };
+                             UIContentSizeCategoryLarge : @35,
+                             UIContentSizeCategoryExtraLarge : @35,
+                             UIContentSizeCategoryExtraExtraLarge : @35,
+                             UIContentSizeCategoryExtraExtraExtraLarge : @40,
+                             UIContentSizeCategoryAccessibilityMedium : @40,
+                             UIContentSizeCategoryAccessibilityLarge : @40,
+                             UIContentSizeCategoryAccessibilityExtraLarge : @40,
+                             UIContentSizeCategoryAccessibilityExtraExtraLarge : @40,
+                             UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @40 };
     });
     
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
