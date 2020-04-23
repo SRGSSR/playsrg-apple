@@ -18,6 +18,11 @@
 {
     NSAssert(self.scrollDirection == UICollectionViewScrollDirectionHorizontal, @"Swimlanes must be a horizontal layout");
     
+    // Do not snap at the end
+    if (proposedContentOffset.x >= self.collectionView.contentSize.width - CGRectGetWidth(self.collectionView.frame)) {
+        return proposedContentOffset;
+    }
+    
     // Extract attributes for all items which would be displayed at the proposed offset (sort them to have cells
     // and supplementary views correctly ordered altogether)
     CGRect proposedRect = CGRectMake(proposedContentOffset.x,
@@ -76,8 +81,9 @@
         proposedLayoutAttributes = layoutAttributes0;
     }
     
-    // Add the margin twice to snap not only sharp, but letting the previous item be seen (if any)
-    return CGPointMake(fmaxf(CGRectGetMinX(proposedLayoutAttributes.frame) - 2 * LayoutStandardMargin, 0.f), proposedContentOffset.y);
+    // Use twice the margin to snap not only sharp, but letting the previous item be seen (if any)
+    CGFloat snapXOffset = fmaxf(CGRectGetMinX(proposedLayoutAttributes.frame) - 2 * LayoutStandardMargin, 0.f);
+    return CGPointMake(snapXOffset, proposedContentOffset.y);
 }
 
 @end
