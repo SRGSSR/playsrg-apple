@@ -152,8 +152,9 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
     if (homeSectionInfo) {
         // Restore position in rows when scrolling vertically and returning to a previously scrolled row
         CGPoint maxContentOffset = self.collectionView.play_maximumContentOffset;
-        CGPoint contentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
-                                            homeSectionInfo.contentOffset.y);
+        CGPoint proposedContentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
+                                                    homeSectionInfo.contentOffset.y);
+        CGPoint contentOffset = [self.collectionView.collectionViewLayout targetContentOffsetForProposedContentOffset:proposedContentOffset withScrollingVelocity:CGPointZero];
         [self.collectionView setContentOffset:contentOffset animated:NO];
     }
     self.collectionView.scrollEnabled = (homeSectionInfo.items.count != 0);
