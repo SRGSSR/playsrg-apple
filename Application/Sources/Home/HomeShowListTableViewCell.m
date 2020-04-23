@@ -73,6 +73,7 @@ static const CGFloat kBottomInset = 15.f;
         collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
         collectionView.alwaysBounceHorizontal = YES;
         collectionView.directionalLockEnabled = YES;
+        collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
         // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
         collectionView.scrollsToTop = NO;
         collectionView.delegate = self;
