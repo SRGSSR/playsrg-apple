@@ -8,6 +8,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ *  Standard flow layout for use in swimlanes, implementing snapping at item boundaries.
+ *
+ *  @discussion Can be used in horizontal direction only.
+ */
 @interface SwimlaneCollectionViewLayout : UICollectionViewFlowLayout
 
 @end

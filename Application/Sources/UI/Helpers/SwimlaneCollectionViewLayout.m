@@ -42,14 +42,14 @@
         }
     }];
     
-    // Nothing displayed
+    // No item displayed in the rect
     if (layoutAttributesInProposedRect.count == 0) {
         return proposedContentOffset;
     }
     
     UICollectionViewLayoutAttributes *proposedLayoutAttributes = nil;
     
-    // Decide on which one of the first two items we should snap if more than two items
+    // Decide on which one of the first two items we should snap (if more than two items)
     UICollectionViewLayoutAttributes *layoutAttributes0 = layoutAttributesInProposedRect.firstObject;
     if (layoutAttributesInProposedRect.count > 1) {
         UICollectionViewLayoutAttributes *layoutAttributes1 = layoutAttributesInProposedRect[1];
@@ -79,7 +79,7 @@
         proposedLayoutAttributes = layoutAttributes0;
     }
     
-    // Use margin to snap not only sharp, but letting the previous item be seen (if any)
+    // Use twice the margin to snap not at item boundaries but a little before, so that previous items are slightly visible
     CGFloat snapXOffset = fmaxf(CGRectGetMinX(proposedLayoutAttributes.frame) - 2 * self.minimumInteritemSpacing, 0.f);
     return CGPointMake(snapXOffset, proposedContentOffset.y);
 }
