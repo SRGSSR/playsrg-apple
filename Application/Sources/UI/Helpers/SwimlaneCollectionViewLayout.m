@@ -77,7 +77,7 @@
     }
     
     // Add the margin twice to snap not only sharp, but letting the previous item be seen (if any)
-    return CGPointMake(CGRectGetMinX(proposedLayoutAttributes.frame) - 2 * LayoutStandardMargin, proposedContentOffset.y);
+    return CGPointMake(fmaxf(CGRectGetMinX(proposedLayoutAttributes.frame) - 2 * LayoutStandardMargin, 0.f), proposedContentOffset.y);
 }
 
 @end
