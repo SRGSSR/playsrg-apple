@@ -219,11 +219,14 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         if (homeSection == HomeSectionTVLive) {
             ApplicationSettingSetSetLastSelectedTVLivestreamURN(media.URN);
         }
-        else if (homeSection == HomeSectionRadioLive) {
+        else {
             ApplicationSettingSetSetLastSelectedRadioLivestreamURN(media.URN);
         }
-        
-        [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
+        [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
+            if (homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive) {
+                self.collectionView.contentOffset = CGPointMake(0.f, self.collectionView.contentOffset.y);
+            }
+        }];
     }
 }
 
