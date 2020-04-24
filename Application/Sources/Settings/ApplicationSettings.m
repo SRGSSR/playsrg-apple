@@ -31,6 +31,8 @@ NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLo
 NSString * const PlaySRGSettingLastOpenedRadioChannelUid = @"PlaySRGSettingLastOpenedRadioChannelUid";
 NSString * const PlaySRGSettingLastOpenedTabBarItem = @"PlaySRGSettingLastOpenedTabBarItem";
 NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLiveStreamURNForChannels";
+NSString * const PlaySRGSettingSelectedTVLivestreamURN = @"PlaySRGSettingSelectedTVLivestreamURN";
+NSString * const PlaySRGSettingSelectedRadioLivestreamURN = @"PlaySRGSettingSelectedRadioLivestreamURN";
 NSString * const PlaySRGSettingServiceURL = @"PlaySRGSettingServiceURL";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
 
@@ -216,7 +218,7 @@ NSString *ApplicationSettingSelectedLivestreamURNForChannelUid(NSString *channel
 void ApplicationSettingSetSelectedLivestreamURNForChannelUid(NSString *channelUid, NSString *mediaURN)
 {
     if (channelUid) {
-        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;;
+        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
         
         NSDictionary *selectedLivestreamURNForChannels = [userDefaults dictionaryForKey:PlaySRGSettingSelectedLivestreamURNForChannels];
         NSMutableDictionary *mutableSelectedLivestreamURNForChannels = selectedLivestreamURNForChannels.mutableCopy ?: NSMutableDictionary.new;
