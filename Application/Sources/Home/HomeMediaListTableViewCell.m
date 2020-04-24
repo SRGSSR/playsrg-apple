@@ -6,6 +6,7 @@
 
 #import "HomeMediaListTableViewCell.h"
 
+#import "ApplicationSettings.h"
 #import "HomeLiveMediaCollectionViewCell.h"
 #import "HomeMediaCollectionHeaderView.h"
 #import "HomeMediaCollectionViewCell.h"
@@ -213,6 +214,15 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 {
     if (! [self isEmpty]) {
         SRGMedia *media = self.homeSectionInfo.items[indexPath.row];
+        
+        HomeSection homeSection = self.homeSectionInfo.homeSection;
+        if (homeSection == HomeSectionTVLive) {
+            ApplicationSettingSetSetLastSelectedTVLivestreamURN(media.URN);
+        }
+        else if (homeSection == HomeSectionRadioLive) {
+            ApplicationSettingSetSetLastSelectedRadioLivestreamURN(media.URN);
+        }
+        
         [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }

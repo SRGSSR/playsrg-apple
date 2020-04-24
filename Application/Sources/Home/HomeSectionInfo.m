@@ -17,6 +17,23 @@
 #import <libextobjc/libextobjc.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 
+static NSArray<SRGMedia *> *HomeSectionReorderedMedias(NSArray<SRGMedia *> *medias, NSString *firstURN)
+{
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGMedia * _Nullable media, NSDictionary<NSString *,id> * _Nullable bindings) {
+        return [media.URN isEqualToString:firstURN];
+    }];
+    SRGMedia *firstMedia = [medias filteredArrayUsingPredicate:predicate].firstObject;
+    if (firstMedia) {
+        NSMutableArray<SRGMedia *> *reorderedMedias = medias.mutableCopy;
+        [reorderedMedias removeObject:firstMedia];
+        [reorderedMedias insertObject:firstMedia atIndex:0];
+        return reorderedMedias.copy;
+    }
+    else {
+        return medias;
+    }
+}
+
 @interface HomeSectionInfo ()
 
 @property (nonatomic) HomeSection homeSection;
@@ -242,7 +259,9 @@
         case HomeSectionTVLive: {
             SRGBaseRequest *request = [SRGDataProvider.currentDataProvider tvLivestreamsForVendor:vendor withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                 [requestQueue reportError:error];
-                paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+                
+                NSString *lastSelectedURN = ApplicationSettingLastSelectedTVLivestreamURN();
+                paginatedItemListCompletionBlock(HomeSectionReorderedMedias(medias, lastSelectedURN), [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
             }];
             [requestQueue addRequest:request resume:YES];
             break;
@@ -330,14 +349,17 @@
             if (self.identifier) {
                 SRGRequest *request = [SRGDataProvider.currentDataProvider radioLivestreamsForVendor:vendor channelUid:self.identifier withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                     [requestQueue reportError:error];
-                    paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+                    
+                    NSString *lastSelectedURN = ApplicationSettingLastSelectedRadioLivestreamURN();
+                    paginatedItemListCompletionBlock(HomeSectionReorderedMedias(medias, lastSelectedURN), [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
                 }];
                 [requestQueue addRequest:request resume:YES];
             }
             else {
                 [self refreshRadioLivestreamsForVendor:vendor withRequestQueue:requestQueue completionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                     // Error reporting is done by the refresh method directly, do not report twice here
-                    paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+                    NSString *lastSelectedURN = ApplicationSettingLastSelectedRadioLivestreamURN();
+                    paginatedItemListCompletionBlock(HomeSectionReorderedMedias(medias, lastSelectedURN), [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
                 }];
             }
             break;
