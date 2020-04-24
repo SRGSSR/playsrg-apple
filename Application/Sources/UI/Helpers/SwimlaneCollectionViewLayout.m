@@ -84,4 +84,9 @@
     return CGPointMake(snapXOffset, proposedContentOffset.y);
 }
 
+- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset
+{
+    return [self targetContentOffsetForProposedContentOffset:proposedContentOffset withScrollingVelocity:CGPointZero];
+}
+
 @end

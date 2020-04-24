@@ -115,7 +115,7 @@ static const CGFloat kBottomInset = 15.f;
     
     if (homeSectionInfo) {
         // Restore position in rows when scrolling vertically and returning to a previously scrolled row
-        CGPoint contentOffset = [self.collectionView.collectionViewLayout targetContentOffsetForProposedContentOffset:homeSectionInfo.contentOffset withScrollingVelocity:CGPointZero];
+        CGPoint contentOffset = [self.collectionView.collectionViewLayout targetContentOffsetForProposedContentOffset:homeSectionInfo.contentOffset];
         [self.collectionView setContentOffset:contentOffset animated:NO];
     }
     self.collectionView.scrollEnabled = (homeSectionInfo.items.count != 0);
