@@ -219,7 +219,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         if (homeSection == HomeSectionTVLive) {
             ApplicationSettingSetLastSelectedTVLivestreamURN(media.URN);
         }
-        else {
+        else if (homeSection == HomeSectionRadioLive) {
             ApplicationSettingSetLastSelectedRadioLivestreamURN(media.URN);
         }
         [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
