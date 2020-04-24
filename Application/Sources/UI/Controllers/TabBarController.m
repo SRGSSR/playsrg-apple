@@ -46,70 +46,82 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         
         NSMutableArray<UIViewController *> *viewControllers = NSMutableArray.array;
-        NSMutableArray<UITabBarItem *> *tabBarItems = NSMutableArray.array;
         
+        // Videos tab
         ApplicationSectionInfo *videosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
         UIViewController *videosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:videosApplicationSectionInfo homeSections:applicationConfiguration.videoHomeSections];
         videosViewController.title = NSLocalizedString(@"Videos", @"Title displayed at the top of the video view");
-        [viewControllers addObject:videosViewController];
+        
         UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos];
         videosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierVideosTabBarItem;
-        [tabBarItems addObject:videosTabBarItem];
         
-        UIViewController *audiosViewController = nil;
+        NavigationController *videosNavigationController = [[NavigationController alloc] initWithRootViewController:videosViewController];
+        videosNavigationController.tabBarItem = videosTabBarItem;
+        [viewControllers addObject:videosNavigationController];
+        
+        // Audios tab
         NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioChannels;
         if (radioChannels.count > 1) {
-            audiosViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
+            UIViewController *radioChannelsViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
+            
+            UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:radioChannelsViewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios];
+            audiosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierAudiosTabBarItem;
+            
+            NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:radioChannelsViewController];
+            audiosNavigationController.tabBarItem = audiosTabBarItem;
+            [viewControllers addObject:audiosNavigationController];
         }
         else if (radioChannels.count == 1) {
             RadioChannel *radioChannel = radioChannels.firstObject;
             ApplicationSectionInfo *audiosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
-            audiosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:audiosApplicationSectionInfo homeSections:radioChannel.homeSections];
+            UIViewController *audiosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:audiosApplicationSectionInfo homeSections:radioChannel.homeSections];
             audiosViewController.title = NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
-        }
-        
-        if (audiosViewController) {
-            [viewControllers addObject:audiosViewController];
+            
             UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:audiosViewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios];
             audiosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierAudiosTabBarItem;
-            [tabBarItems addObject:audiosTabBarItem];
+            
+            NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:audiosViewController];
+            audiosNavigationController.tabBarItem = audiosTabBarItem;
+            [audiosNavigationController updateWithRadioChannel:radioChannel animated:NO];
+            [viewControllers addObject:audiosNavigationController];
         }
         
+        // Live tab
         NSArray<NSNumber *> *liveHomeSections = ApplicationConfiguration.sharedApplicationConfiguration.liveHomeSections;
         if (liveHomeSections.count != 0) {
             ApplicationSectionInfo *liveApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionLive radioChannel:nil];
             UIViewController *liveHomeViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:liveApplicationSectionInfo homeSections:liveHomeSections];
             liveHomeViewController.title = NSLocalizedString(@"Livestreams", @"Title displayed at the top of the livestream view");
-            [viewControllers addObject:liveHomeViewController];
+            
             UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveHomeViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
             liveTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
-            [tabBarItems addObject:liveTabBarItem];
+            
+            NavigationController *liveNavigationController = [[NavigationController alloc] initWithRootViewController:liveHomeViewController];
+            liveNavigationController.tabBarItem = liveTabBarItem;
+            [viewControllers addObject:liveNavigationController];
         }
         
+        // Search tab
         UIViewController *searchViewController = [[SearchViewController alloc] init];
-        [viewControllers addObject:searchViewController];
+        
         UITabBarItem *searchTabBarItem = [[UITabBarItem alloc] initWithTitle:searchViewController.title image:[UIImage imageNamed:@"search-24"] tag:TabBarItemIdentifierSearch];
         searchTabBarItem.accessibilityIdentifier = AccessibilityIdentifierSearchTabBarItem;
-        [tabBarItems addObject:searchTabBarItem];
         
+        NavigationController *searchNavigationController = [[NavigationController alloc] initWithRootViewController:searchViewController];
+        searchNavigationController.tabBarItem = searchTabBarItem;
+        [viewControllers addObject:searchNavigationController];
+        
+        // Profile tab
         UIViewController *profileViewController = [[ProfileViewController alloc] init];
-        [viewControllers addObject:profileViewController];
+        
         UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile-24"] tag:TabBarItemIdentifierProfile];
         profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
-        [tabBarItems addObject:profileTabBarItem];
         
-        NSMutableArray<NavigationController *> *navigationControllers = NSMutableArray.array;
-        [viewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
-            NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
-            navigationController.tabBarItem = tabBarItems[idx];
-            [navigationControllers addObject:navigationController];
-            
-            if ([viewController isKindOfClass:HomeViewController.class]) {
-                HomeViewController *homeViewController = (HomeViewController *)viewController;
-                [navigationController updateWithRadioChannel:homeViewController.radioChannel animated:NO];
-            }
-        }];
-        self.viewControllers = navigationControllers.copy;
+        NavigationController *profileNavigationController = [[NavigationController alloc] initWithRootViewController:profileViewController];
+        profileNavigationController.tabBarItem = profileTabBarItem;
+        [viewControllers addObject:profileNavigationController];
+        
+        self.viewControllers = viewControllers.copy;
         
         if (@available(iOS 13, *)) {
             self.tabBar.barTintColor = nil;
