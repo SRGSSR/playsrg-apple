@@ -113,13 +113,15 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         // Profile tab
         UIViewController *profileViewController = [[ProfileViewController alloc] init];
+        NavigationController *profileNavigationController = [[NavigationController alloc] initWithRootViewController:profileViewController];
         
         UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile-24"] tag:TabBarItemIdentifierProfile];
         profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
         
-        NavigationController *profileNavigationController = [[NavigationController alloc] initWithRootViewController:profileViewController];
-        profileNavigationController.tabBarItem = profileTabBarItem;
-        [viewControllers addObject:profileNavigationController];
+        UISplitViewController *profileSplitViewController = [[UISplitViewController alloc] init];
+        profileSplitViewController.viewControllers = @[ profileNavigationController ];
+        profileSplitViewController.tabBarItem = profileTabBarItem;
+        [viewControllers addObject:profileSplitViewController];
         
         self.viewControllers = viewControllers.copy;
         

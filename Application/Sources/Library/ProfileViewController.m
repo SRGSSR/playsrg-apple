@@ -96,6 +96,12 @@
                                                                              action:@selector(settings:)];
     settingsBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Settings", @"Settings button label on home view");
     self.navigationItem.rightBarButtonItem = settingsBarButtonItem;
+    
+    [self reloadData];
+    
+    if (! self.splitViewController.collapsed) {
+        [self openApplicationSectionInfo:self.sectionInfos.firstObject animated:NO];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -199,7 +205,17 @@
     }
     
     if (viewController) {
-        [self.navigationController pushViewController:viewController animated:animated];
+        void (^show)(void) = ^{
+            // Use navigation for details. The split view takes care of moving view controllers when collapsing
+            NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
+            [self.splitViewController showDetailViewController:navigationController sender:@(animated)];
+        };
+        if (animated) {
+            show();
+        }
+        else {
+            [UIView performWithoutAnimation:show];
+        }
         return YES;
     }
     else {
