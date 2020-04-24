@@ -143,10 +143,10 @@
             };
             
             for (SRGMedia *originalMedia in originalMedias) {
-                NSString *selectedLiveStreamURN = ApplicationSettingSelectedLiveStreamURNForChannelUid(originalMedia.channel.uid);
+                NSString *selectedLivestreamURN = ApplicationSettingSelectedLivestreamURNForChannelUid(originalMedia.channel.uid);
                 
                 // If a regional stream has been selected by the user, replace the main channel media with it
-                if (selectedLiveStreamURN && ! [originalMedia.URN isEqual:selectedLiveStreamURN]) {
+                if (selectedLivestreamURN && ! [originalMedia.URN isEqual:selectedLivestreamURN]) {
                     [self.pendingMedias addObject:originalMedia];
                     
                     SRGRequest *request = [SRGDataProvider.currentDataProvider radioLivestreamsForVendor:vendor channelUid:originalMedia.channel.uid withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable channelMedias, NSHTTPURLResponse * _Nullable channelMediasHTTPResponse, NSError * _Nullable error) {
