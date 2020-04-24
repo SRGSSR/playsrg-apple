@@ -879,11 +879,6 @@
 		6F4760361EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
 		6F4760371EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
 		6F4760381EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
-		6F47603E1EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */; };
-		6F47603F1EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */; };
-		6F4760401EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */; };
-		6F4760411EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */; };
-		6F4760421EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */; };
 		6F4760781EB37D60003021EA /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
 		6F4760791EB37D60003021EA /* UIDevice+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606D1EB37D60003021EA /* UIDevice+PlaySRG.m */; };
 		6F47607A1EB37D60003021EA /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
@@ -2032,8 +2027,6 @@
 		6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayDurationFormatter.m; sourceTree = "<group>"; };
 		6F47601B1EB37BD1003021EA /* NSDateFormatter+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+PlaySRG.h"; sourceTree = "<group>"; };
 		6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+PlaySRG.m"; sourceTree = "<group>"; };
-		6F47601F1EB37BD1003021EA /* UICollectionView+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+PlaySRG.h"; sourceTree = "<group>"; };
-		6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+PlaySRG.m"; sourceTree = "<group>"; };
 		6F47606A1EB37D60003021EA /* UIColor+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PlaySRG.h"; sourceTree = "<group>"; };
 		6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PlaySRG.m"; sourceTree = "<group>"; };
 		6F47606C1EB37D60003021EA /* UIDevice+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+PlaySRG.h"; sourceTree = "<group>"; };
@@ -3320,8 +3313,6 @@
 				6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */,
 				0852539522073D5200BCF0B1 /* UIApplication+PlaySRG.h */,
 				0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */,
-				6F47601F1EB37BD1003021EA /* UICollectionView+PlaySRG.h */,
-				6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */,
 				6F47606A1EB37D60003021EA /* UIColor+PlaySRG.h */,
 				6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */,
 				6F47606C1EB37D60003021EA /* UIDevice+PlaySRG.h */,
@@ -6020,7 +6011,6 @@
 				6F475FCD1EB37BC6003021EA /* NavigationController.m in Sources */,
 				6FDF08FA218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,
 				08209308208F522A00711DE4 /* PushService.m in Sources */,
-				6F47603E1EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				6F4760091EB37BC6003021EA /* TranslucentTitleHeaderView.m in Sources */,
 				08C68F8A1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
 				6F40920822DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.m in Sources */,
@@ -6182,7 +6172,6 @@
 				6F7C35B623708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220AE1DD07B7A00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
-				6F47603F1EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				082910B6239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8B22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
@@ -6347,7 +6336,6 @@
 				6F7C35B723708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220B21DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
-				6F4760401EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				082910B7239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8C22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
@@ -6512,7 +6500,6 @@
 				6F7C35B823708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220B61DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
-				6F4760411EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				082910B8239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F81D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8D22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
@@ -6677,7 +6664,6 @@
 				6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220BA1DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6671EDF1B7D00EED89B /* UILabel+PlaySRG.m in Sources */,
-				6F4760421EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				082910B9239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F91D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8E22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,

@@ -6,8 +6,6 @@
 
 #import "SwimlaneCollectionViewLayout.h"
 
-#import "UICollectionView+PlaySRG.h"
-
 @implementation SwimlaneCollectionViewLayout
 
 #pragma mark Overrides
@@ -17,7 +15,7 @@
     NSAssert(self.scrollDirection == UICollectionViewScrollDirectionHorizontal, @"Swimlanes must be a horizontal layout");
     
     // Do not snap at the end
-    CGFloat maxX = self.collectionView.play_maximumContentOffset.x;
+    CGFloat maxX = fmaxf(self.collectionViewContentSize.width - CGRectGetWidth(self.collectionView.frame), 0.f);
     if (proposedContentOffset.x >= maxX) {
         return CGPointMake(maxX, proposedContentOffset.y);
     }
