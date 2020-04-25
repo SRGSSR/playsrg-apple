@@ -96,12 +96,6 @@
                                                                              action:@selector(settings:)];
     settingsBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Settings", @"Settings button label on home view");
     self.navigationItem.rightBarButtonItem = settingsBarButtonItem;
-    
-    [self reloadData];
-    
-    if (! self.splitViewController.collapsed) {
-        [self openApplicationSectionInfo:self.sectionInfos.firstObject animated:NO];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -112,6 +106,10 @@
     
     // Ensure correct latest notifications displayed
     [self reloadData];
+    
+    if ([self play_isMovingToParentViewController] && ! self.splitViewController.collapsed) {
+        [self openDefaultApplicationSectionAnimated:NO];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -172,6 +170,10 @@
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo animated:(BOOL)animated
 {
+    if (! applicationSectionInfo) {
+        return NO;
+    }
+    
     UIViewController *viewController = nil;
     switch (applicationSectionInfo.applicationSection) {
         case ApplicationSectionNotifications: {
@@ -221,6 +223,11 @@
     else {
         return NO;
     }
+}
+
+- (void)openDefaultApplicationSectionAnimated:(BOOL)animated
+{
+    [self openApplicationSectionInfo:self.sectionInfos.firstObject animated:NO];
 }
 
 #pragma mark ContentInsets protocol
