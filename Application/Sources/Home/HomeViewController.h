@@ -9,14 +9,14 @@
 #import "PlayApplicationNavigation.h"
 #import "RequestViewController.h"
 #import "RadioChannel.h"
-#import "Scrollable.h"
+#import "TabBarActionable.h"
 
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeViewController : RequestViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PlayApplicationNavigation, Scrollable, SRGAnalyticsViewTracking, UITableViewDataSource, UITableViewDelegate>
+@interface HomeViewController : RequestViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PlayApplicationNavigation, SRGAnalyticsViewTracking, TabBarActionable, UITableViewDataSource, UITableViewDelegate>
 
 /**
  *  Instantiate a home for the specified application section, displayed the provided home sections.

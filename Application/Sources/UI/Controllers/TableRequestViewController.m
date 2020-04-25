@@ -293,9 +293,9 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
-#pragma mark Scrollable protocol
+#pragma mark TabBarActionable protocol
 
-- (void)scrollToTopAnimated:(BOOL)animated
+- (void)performActiveTabActionAnimated:(BOOL)animated
 {
     [self.tableView play_scrollToTopAnimated:animated];
 }

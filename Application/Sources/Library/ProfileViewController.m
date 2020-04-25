@@ -300,13 +300,6 @@
     return [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:NO];
 }
 
-#pragma mark Scrollable protocol
-
-- (void)scrollToTopAnimated:(BOOL)animated
-{
-    [self.tableView play_scrollToTopAnimated:animated];
-}
-
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -317,6 +310,13 @@
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
+}
+
+#pragma mark TabBarActionable protocol
+
+- (void)performActiveTabActionAnimated:(BOOL)animated
+{
+    [self.tableView play_scrollToTopAnimated:animated];
 }
 
 #pragma mark UITableViewDataSource protocol

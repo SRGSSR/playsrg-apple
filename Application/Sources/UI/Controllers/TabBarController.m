@@ -15,9 +15,9 @@
 #import "ProfileViewController.h"
 #import "PushService.h"
 #import "RadioChannelsViewController.h"
-#import "Scrollable.h"
 #import "SearchViewController.h"
 #import "SplitViewController.h"
+#import "TabBarActionable.h"
 #import "UIColor+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
@@ -391,9 +391,9 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     if (viewController == self.selectedViewController) {
-        if ([viewController conformsToProtocol:@protocol(Scrollable)]) {
-            UIViewController<Scrollable> *scrollableViewController = (UIViewController<Scrollable> *)viewController;
-            [scrollableViewController scrollToTopAnimated:YES];
+        if ([viewController conformsToProtocol:@protocol(TabBarActionable)]) {
+            UIViewController<TabBarActionable> *actionableViewController = (UIViewController<TabBarActionable> *)viewController;
+            [actionableViewController performActiveTabActionAnimated:YES];
         }
     }
     return YES;
