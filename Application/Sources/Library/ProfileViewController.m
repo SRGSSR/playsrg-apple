@@ -223,6 +223,10 @@
         return NO;
     }
     
+    if (! self.splitViewController.collapsed && [applicationSectionInfo isEqual:self.currentSectionInfo]) {
+        return YES;
+    }
+    
     UIViewController *viewController = [self viewControllerForSectionInfo:applicationSectionInfo];
     if (viewController) {
         self.currentSectionInfo = applicationSectionInfo;
