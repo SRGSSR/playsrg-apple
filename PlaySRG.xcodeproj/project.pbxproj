@@ -475,6 +475,11 @@
 		6F00875F219AA888004BD6FF /* StoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00875C219AA888004BD6FF /* StoreReview.m */; };
 		6F008760219AA888004BD6FF /* StoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00875C219AA888004BD6FF /* StoreReview.m */; };
 		6F008761219AA888004BD6FF /* StoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00875C219AA888004BD6FF /* StoreReview.m */; };
+		6F0506E7245468EE0053253E /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0506E6245468EE0053253E /* SplitViewController.m */; };
+		6F0506E8245468EE0053253E /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0506E6245468EE0053253E /* SplitViewController.m */; };
+		6F0506E9245468EE0053253E /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0506E6245468EE0053253E /* SplitViewController.m */; };
+		6F0506EA245468EE0053253E /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0506E6245468EE0053253E /* SplitViewController.m */; };
+		6F0506EB245468EE0053253E /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0506E6245468EE0053253E /* SplitViewController.m */; };
 		6F06E0A41DB7791300220FC6 /* ApplicationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */; };
 		6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */; };
 		6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */; };
@@ -1880,6 +1885,8 @@
 		5CA73886C1B816E3660CB5E6 /* Pods-PlaySRG-Play SRF.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play SRF.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play SRF/Pods-PlaySRG-Play SRF.nightly.xcconfig"; sourceTree = "<group>"; };
 		6F00875B219AA888004BD6FF /* StoreReview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreReview.h; sourceTree = "<group>"; };
 		6F00875C219AA888004BD6FF /* StoreReview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreReview.m; sourceTree = "<group>"; };
+		6F0506E5245468EE0053253E /* SplitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
+		6F0506E6245468EE0053253E /* SplitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
 		6F05F254203C2F0200EEA894 /* UIViewController+PlaySRG_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PlaySRG_Private.h"; sourceTree = "<group>"; };
 		6F06E0A21DB7791300220FC6 /* ApplicationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationSettings.h; sourceTree = "<group>"; };
 		6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationSettings.m; sourceTree = "<group>"; };
@@ -3225,6 +3232,8 @@
 				6F475F9A1EB37BC6003021EA /* PageViewController.m */,
 				6F475F9C1EB37BC6003021EA /* RequestViewController.h */,
 				6F475F9D1EB37BC6003021EA /* RequestViewController.m */,
+				6F0506E5245468EE0053253E /* SplitViewController.h */,
+				6F0506E6245468EE0053253E /* SplitViewController.m */,
 				082910AC239E90D200D168F4 /* TabBarController.h */,
 				082910AD239E90D200D168F4 /* TabBarController.m */,
 				6F80E9C021A682E60027CA2F /* TableRequestViewController.h */,
@@ -5908,6 +5917,7 @@
 				08AA55BB1D49EFBD00C5026E /* HomeTableViewCell.m in Sources */,
 				0806E7B81D50D918002ED406 /* SettingsViewController.m in Sources */,
 				081220C11DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
+				6F0506E7245468EE0053253E /* SplitViewController.m in Sources */,
 				E6E2DF1A1D6ACA8B00791EDE /* ShowViewController.m in Sources */,
 				6F475FDC1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				6F475FF51EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
@@ -6191,6 +6201,7 @@
 				08C68F8B1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
 				08B77AF1240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				0875851423A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
+				6F0506E8245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760821EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F023A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760301EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
@@ -6355,6 +6366,7 @@
 				08C68F8C1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
 				08B77AF2240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				0875851523A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
+				6F0506E9245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760891EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F123A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760311EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
@@ -6519,6 +6531,7 @@
 				08C68F8D1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
 				08B77AF3240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				0875851623A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
+				6F0506EA245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760901EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F223A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760321EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
@@ -6683,6 +6696,7 @@
 				08C68F8E1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
 				08B77AF4240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				0875851723A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
+				6F0506EB245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F323A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760331EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,

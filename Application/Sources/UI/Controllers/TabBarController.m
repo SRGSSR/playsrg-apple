@@ -17,6 +17,7 @@
 #import "RadioChannelsViewController.h"
 #import "Scrollable.h"
 #import "SearchViewController.h"
+#import "SplitViewController.h"
 #import "UIColor+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
@@ -118,7 +119,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile-24"] tag:TabBarItemIdentifierProfile];
         profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
         
-        UISplitViewController *profileSplitViewController = [[UISplitViewController alloc] init];
+        SplitViewController *profileSplitViewController = [[SplitViewController alloc] init];
         profileSplitViewController.viewControllers = @[ profileNavigationController ];
         profileSplitViewController.tabBarItem = profileTabBarItem;
         [viewControllers addObject:profileSplitViewController];
