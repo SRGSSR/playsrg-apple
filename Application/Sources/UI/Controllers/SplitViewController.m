@@ -25,4 +25,18 @@
     return [self.viewControllers.firstObject preferredStatusBarUpdateAnimation];
 }
 
+#pragma mark PlayApplicationNavigation protocol
+
+- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
+{
+    UIViewController *primaryViewController = self.viewControllers.firstObject;
+    if ([primaryViewController conformsToProtocol:@protocol(PlayApplicationNavigation)]) {
+        UIViewController<PlayApplicationNavigation> *navigablePrimaryViewController = (UIViewController<PlayApplicationNavigation> *)primaryViewController;
+        return [navigablePrimaryViewController openApplicationSectionInfo:applicationSectionInfo];
+    }
+    else {
+        return NO;
+    }
+}
+
 @end

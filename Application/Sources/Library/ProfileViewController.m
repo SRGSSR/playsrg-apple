@@ -288,7 +288,7 @@
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
 {
-    return [self openApplicationSectionInfo:applicationSectionInfo interactive:NO];
+    return [self openApplicationSectionInfo:applicationSectionInfo interactive:YES];
 }
 
 #pragma mark Scrollable protocol
