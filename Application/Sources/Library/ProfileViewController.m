@@ -259,6 +259,10 @@
             self.splitViewController.viewControllers = viewControllers.copy;
             [self updateSelection];
         }
+        
+        if (! self.splitViewController.collapsed) {
+            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, viewController.view);
+        }
         return YES;
     }
     else {
