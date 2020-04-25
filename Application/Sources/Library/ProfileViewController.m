@@ -108,7 +108,7 @@
     // Ensure latest notifications are displayed
     [self reloadData];
     
-    if ([self play_isMovingToParentViewController]) {
+    if ([self play_isMovingToParentViewController] && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         [self openApplicationSectionInfo:self.sectionInfos.firstObject interactive:NO];
     }
 }
