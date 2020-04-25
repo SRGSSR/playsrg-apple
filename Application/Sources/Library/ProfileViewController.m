@@ -31,6 +31,7 @@
 @interface ProfileViewController ()
 
 @property (nonatomic) NSArray<ApplicationSectionInfo *> *sectionInfos;
+@property (nonatomic) ApplicationSectionInfo *currentSectionInfo;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
@@ -108,7 +109,7 @@
     [self reloadData];
     
     if ([self play_isMovingToParentViewController]) {
-        [self openApplicationSectionInfo:self.sectionInfos.firstObject animated:NO];
+        [self openApplicationSectionInfo:self.sectionInfos.firstObject interactive:NO];
     }
 }
 
@@ -152,6 +153,7 @@
     [self.tableView reloadData];
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateSelection];
         [self.tableView flashScrollIndicators];
     });
 }
@@ -215,7 +217,7 @@
     return [[NavigationController alloc] initWithRootViewController:viewController];
 }
 
-- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo animated:(BOOL)animated
+- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo interactive:(BOOL)interactive
 {
     if (! applicationSectionInfo) {
         return NO;
@@ -223,7 +225,9 @@
     
     UIViewController *viewController = [self viewControllerForSectionInfo:applicationSectionInfo];
     if (viewController) {
-        if (animated) {
+        self.currentSectionInfo = applicationSectionInfo;
+        
+        if (interactive) {
             [self.splitViewController showDetailViewController:viewController sender:self];
         }
         else {
@@ -240,12 +244,28 @@
                 return NO;
             }
             self.splitViewController.viewControllers = viewControllers.copy;
+            [self updateSelection];
         }
         return YES;
     }
     else {
         return NO;
     }
+}
+
+- (void)updateSelection
+{
+    if (! self.currentSectionInfo) {
+        return;
+    }
+    
+    NSUInteger index = [self.sectionInfos indexOfObject:self.currentSectionInfo];
+    if (index == NSNotFound) {
+        return;
+    }
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 #pragma mark ContentInsets protocol
@@ -264,7 +284,7 @@
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
 {
-    return [self openApplicationSectionInfo:applicationSectionInfo animated:NO];
+    return [self openApplicationSectionInfo:applicationSectionInfo interactive:NO];
 }
 
 #pragma mark Scrollable protocol
@@ -330,6 +350,7 @@
     else {
         ProfileTableViewCell *profileTableViewCell = (ProfileTableViewCell *)cell;
         profileTableViewCell.applicationSectionInfo = self.sectionInfos[indexPath.row];
+        profileTableViewCell.selectionStyle = self.splitViewController.collapsed ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleGray;
     }
 }
 
@@ -344,7 +365,7 @@
     }
     else {
         ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
-        [self openApplicationSectionInfo:applicationSectionInfo animated:YES];
+        [self openApplicationSectionInfo:applicationSectionInfo interactive:YES];
     }
 }
 
