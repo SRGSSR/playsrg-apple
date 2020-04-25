@@ -104,11 +104,11 @@
     
     [PushService.sharedService resetApplicationBadge];
     
-    // Ensure correct latest notifications displayed
+    // Ensure latest notifications are displayed
     [self reloadData];
     
-    if ([self play_isMovingToParentViewController] && ! self.splitViewController.collapsed) {
-        [self openDefaultApplicationSectionAnimated:NO];
+    if ([self play_isMovingToParentViewController]) {
+        [self openApplicationSectionInfo:self.sectionInfos.firstObject animated:NO];
     }
 }
 
@@ -168,10 +168,10 @@
     return applicationSectionInfo.options[ApplicationSectionOptionNotificationKey];
 }
 
-- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo animated:(BOOL)animated
+- (UIViewController *)viewControllerForSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
 {
     if (! applicationSectionInfo) {
-        return NO;
+        return nil;
     }
     
     UIViewController *viewController = nil;
@@ -206,28 +206,46 @@
         }
     }
     
+    if (! viewController) {
+        return nil;
+    }
+    
+    // Always wrap into a navigation controller. The split view takes care of moving view controllers between navigation
+    // controllers when collapsing or expanding
+    return [[NavigationController alloc] initWithRootViewController:viewController];
+}
+
+- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo animated:(BOOL)animated
+{
+    if (! applicationSectionInfo) {
+        return NO;
+    }
+    
+    UIViewController *viewController = [self viewControllerForSectionInfo:applicationSectionInfo];
     if (viewController) {
-        void (^show)(void) = ^{
-            // Use navigation for details. The split view takes care of moving view controllers when collapsing
-            NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
-            [self.splitViewController showDetailViewController:navigationController sender:@(animated)];
-        };
         if (animated) {
-            show();
+            [self.splitViewController showDetailViewController:viewController sender:self];
         }
         else {
-            [UIView performWithoutAnimation:show];
+            // Adding the details view controller on-the-fly avoids automatic collapsing (i.e. starting with the details
+            // on top of the primary) when starting in compact layout.
+            NSMutableArray<UIViewController *> *viewControllers = self.splitViewController.viewControllers.mutableCopy;
+            if (viewControllers.count == 1) {
+                [viewControllers addObject:viewController];
+            }
+            else if (viewControllers.count == 2) {
+                [viewControllers replaceObjectAtIndex:1 withObject:viewController];
+            }
+            else {
+                return NO;
+            }
+            self.splitViewController.viewControllers = viewControllers.copy;
         }
         return YES;
     }
     else {
         return NO;
     }
-}
-
-- (void)openDefaultApplicationSectionAnimated:(BOOL)animated
-{
-    [self openApplicationSectionInfo:self.sectionInfos.firstObject animated:NO];
 }
 
 #pragma mark ContentInsets protocol
