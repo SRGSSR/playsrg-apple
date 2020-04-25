@@ -109,7 +109,7 @@
     [self reloadData];
     
     if ([self play_isMovingToParentViewController] && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        [self openApplicationSectionInfo:self.sectionInfos.firstObject interactive:NO];
+        [self openApplicationSectionInfo:self.sectionInfos.firstObject interactive:NO animated:NO];
     }
 }
 
@@ -217,7 +217,7 @@
     return [[NavigationController alloc] initWithRootViewController:viewController];
 }
 
-- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo interactive:(BOOL)interactive
+- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo interactive:(BOOL)interactive animated:(BOOL)animated
 {
     if (! applicationSectionInfo) {
         return NO;
@@ -232,7 +232,16 @@
         self.currentSectionInfo = applicationSectionInfo;
         
         if (interactive) {
-            [self.splitViewController showDetailViewController:viewController sender:self];
+            void (^showDetail)(void) = ^{
+                [self.splitViewController showDetailViewController:viewController sender:self];
+            };
+            
+            if (animated) {
+                showDetail();
+            }
+            else {
+                [UIView performWithoutAnimation:showDetail];
+            }
         }
         else {
             // Adding the details view controller on-the-fly avoids automatic collapsing (i.e. starting with the details
@@ -288,7 +297,7 @@
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
 {
-    return [self openApplicationSectionInfo:applicationSectionInfo interactive:YES];
+    return [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:NO];
 }
 
 #pragma mark Scrollable protocol
@@ -369,7 +378,7 @@
     }
     else {
         ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
-        [self openApplicationSectionInfo:applicationSectionInfo interactive:YES];
+        [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:YES];
     }
 }
 
