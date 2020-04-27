@@ -11,6 +11,7 @@
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
+#import "ChannelService.h"
 #import "Download.h"
 #import "Favorites.h"
 #import "ForegroundTimer.h"
@@ -86,6 +87,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic) SRGPosition *originalPosition;                             // original position to start at
 
 @property (nonatomic) IBOutlet SRGLetterboxController *letterboxController;      // top object, strong
+
+@property (nonatomic) SRGProgramComposition *programComposition;
 
 @property (nonatomic, getter=isFromPushNotification) BOOL fromPushNotification;
 
@@ -481,7 +484,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     [super viewWillAppear:animated];
     
-    if (self.play_isMovingToParentViewController) {
+    if ([self play_isMovingToParentViewController]) {
+        [self registerForChannelUpdatesWithMedia:self.letterboxController.media];
+        
         [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
                                                           object:self
                                                         userInfo:@{ MediaPlayerViewControllerVisibleKey : @YES }];
@@ -511,6 +516,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.letterboxController cancelContinuousPlayback];
     
     if ([self play_isMovingFromParentViewController]) {
+        [self unregisterChannelUpdatesWithMedia:self.letterboxController.media];
+        
         if (self.letterboxController.media.mediaType != SRGMediaTypeAudio
                 && ! self.letterboxController.pictureInPictureActive
                 && ! AVAudioSession.srg_isAirPlayActive
@@ -864,6 +871,33 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     else {
         [self.showStackView play_setHidden:YES];
     }
+}
+
+#pragma mark Channel updates
+
+- (void)registerForChannelUpdatesWithMedia:(SRGMedia *)media
+{
+    if (! media) {
+        return;
+    }
+    
+    if (media.contentType != SRGContentTypeLivestream) {
+        return;
+    }
+    
+    [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGProgramComposition * _Nullable programComposition) {
+        self.programComposition = programComposition;
+        [self.programsTableView reloadData];
+    }];
+}
+
+- (void)unregisterChannelUpdatesWithMedia:(SRGMedia *)media
+{
+    if (! media) {
+        return;
+    }
+    
+    [ChannelService.sharedService unregisterObserver:self forMedia:media];
 }
 
 #pragma mark UI
@@ -1433,7 +1467,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.programComposition.programs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1445,7 +1479,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.textLabel.text = [NSString stringWithFormat:@"Program %@", @(indexPath.row + 1)];
+    SRGProgram *program = self.programComposition.programs[indexPath.row];
+    cell.textLabel.text = program.title;
 }
 
 #pragma mark UIViewControllerTransitioningDelegate protocol
@@ -1829,6 +1864,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     // Update the livestream button hidden state if media or URN changed
     if (! [media isEqual:previousMedia]) {
         [self updateLivestreamButton];
+        
+        [self unregisterChannelUpdatesWithMedia:previousMedia];
+        [self registerForChannelUpdatesWithMedia:media];
     }
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
