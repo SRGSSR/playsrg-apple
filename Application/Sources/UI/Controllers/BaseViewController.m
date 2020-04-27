@@ -359,6 +359,13 @@
     }];
 }
 
+- (UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(13.0))
+{
+    UIPreviewParameters *previewParameters = [[UIPreviewParameters alloc] init];
+    previewParameters.backgroundColor = self.view.backgroundColor;
+    return [[UITargetedPreview alloc] initWithView:interaction.view parameters:previewParameters];
+}
+
 #pragma mark UIViewControllerPreviewingDelegate protocol
 
 - (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
