@@ -1172,6 +1172,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         || [GCKCastContext sharedInstance].castState == GCKCastStateNoDevicesAvailable;
 }
 
+- (void)updateTimelineVisibilityForFullScreen:(BOOL)fullScreen animated:(BOOL)animated
+{
+    SRGMedia *media = [self mainMedia];
+    BOOL hidden = (media.contentType == SRGContentTypeLivestream && ! fullScreen);
+    [self.letterboxView setTimelineAlwaysHidden:hidden animated:animated];
+}
+
 - (BOOL)isLivestreamButtonHidden
 {
     SRGMedia *media = [self mainMedia];
@@ -1306,6 +1313,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     void (^animations)(void) = ^{
         [self setFullScreen:fullScreen];
+        [self updateTimelineVisibilityForFullScreen:fullScreen animated:NO];
     };
     
     void (^completion)(BOOL) = ^(BOOL finished) {
@@ -1890,6 +1898,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self setUserInterfaceBehaviorForMedia:media animated:YES];
     }
     
+    [self updateTimelineVisibilityForFullScreen:self.letterboxView.fullScreen animated:YES];
     [self updateGoogleCastButton];
 }
 
