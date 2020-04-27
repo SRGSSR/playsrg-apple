@@ -332,6 +332,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
+    // TODO: Proper cells
     [self.programsTableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"cell"];
     
     self.showWrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
@@ -1467,11 +1468,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    // TODO: Probably filter out entries whose URNs are common with the media composition segments
     return self.programComposition.programs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // TODO: Proper cells
     return [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 }
 
@@ -1481,6 +1484,17 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGProgram *program = self.programComposition.programs[indexPath.row];
     cell.textLabel.text = program.title;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // TODO: Rewrite properly, this is currently only an ugly hack. In particular, such offsets will be wrong
+    //       for all programs located before a program overlap
+    NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
+    if (segments.count > indexPath.row) {
+        NSUInteger segmentIndex = segments.count - 1 - indexPath.row;
+        [self.letterboxController switchToSubdivision:segments[segmentIndex] withCompletionHandler:nil];
+    }
 }
 
 #pragma mark UIViewControllerTransitioningDelegate protocol
