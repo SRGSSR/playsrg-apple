@@ -1,4 +1,4 @@
-github "Flipboard/FLEX" "6d489e72c52401839386ee41aeefe1f5105c212e"
+github "Flipboard/FLEX" "4.1.1"
 github "Mantle/Mantle" "2.1.0"
 github "SRGSSR/ComScore-iOS-watchOS-tvOS" "6.2.0"
 github "SRGSSR/DZNEmptyDataSet" "v1.8.1_srg1"
