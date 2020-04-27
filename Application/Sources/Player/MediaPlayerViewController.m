@@ -108,7 +108,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
-@property (nonatomic, weak) IBOutlet UIStackView *mediaInfoStackView;
 @property (nonatomic, weak) IBOutlet UIStackView *dateStackView;
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *viewCountImageView;
@@ -734,8 +733,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         
         self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
         self.titleLabel.text = media.title;
-        
-        [self.mediaInfoStackView play_setHidden:NO];
         
         self.dateLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         if (media.date) {

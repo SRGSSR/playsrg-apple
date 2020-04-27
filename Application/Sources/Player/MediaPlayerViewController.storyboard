@@ -547,7 +547,6 @@
                         <outlet property="livestreamButton" destination="HA6-0V-M1C" id="Rxi-AX-801"/>
                         <outlet property="livestreamButtonImageView" destination="Lud-EO-TIz" id="laS-wA-W8i"/>
                         <outlet property="livestreamView" destination="96L-N2-RWf" id="Hgh-N7-oCr"/>
-                        <outlet property="mediaInfoStackView" destination="44Z-TF-U9J" id="MCN-kL-Vf4"/>
                         <outlet property="metadataHeightConstraint" destination="BwQ-SB-v0l" id="5Ny-ML-8I4"/>
                         <outlet property="multiAudioImageView" destination="aeL-66-EET" id="jnS-8h-Ajc"/>
                         <outlet property="numberOfEpisodesLabel" destination="n6K-Dg-J9D" id="hyA-jm-904"/>
