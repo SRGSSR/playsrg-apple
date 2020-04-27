@@ -323,7 +323,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.view.backgroundColor = UIColor.play_blackColor;
     
     self.scrollView.hidden = YES;
-    self.livestreamView.hidden = YES;
+    self.channelView.hidden = YES;
     
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
@@ -715,14 +715,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     SRGMedia *mainMedia = mainChapterMedia ?: media;
     if (mainMedia.contentType == SRGContentTypeLivestream) {
         self.scrollView.hidden = YES;
-        self.livestreamView.hidden = NO;
+        self.channelView.hidden = NO;
         
         self.livestreamView.hidden = [self isLivestreamButtonHidden];
         self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     }
     else {
         self.scrollView.hidden = NO;
-        self.livestreamView.hidden = YES;
+        self.channelView.hidden = YES;
         
         [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
         
