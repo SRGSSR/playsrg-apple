@@ -142,18 +142,23 @@
 {
     [super updateForContentSizeCategory];
     
-    [self.tableView reloadData];
+    [self reloadTableView];
 }
 
 #pragma mark Data
 
+- (void)reloadTableView
+{
+    [self.tableView reloadData];
+    [self updateSelection];
+}
+
 - (void)reloadData
 {
     self.sectionInfos = ApplicationSectionInfo.profileApplicationSectionInfos;
-    [self.tableView reloadData];
+    [self reloadTableView];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateSelection];
         [self.tableView flashScrollIndicators];
     });
 }
@@ -378,7 +383,7 @@
         [NotificationsViewController openNotification:notification fromViewController:self];
         
         // Update the cell dot right away
-        [tableView reloadData];
+        [self reloadTableView];
     }
     else {
         ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
