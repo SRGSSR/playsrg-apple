@@ -147,13 +147,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 // Live appearance
 
-@property (nonatomic, weak) IBOutlet UIScrollView *liveScrollView;
+@property (nonatomic, weak) IBOutlet UIView *channelView;
+
+@property (nonatomic, weak) IBOutlet UIStackView *channelInfoStackView;
 
 @property (nonatomic, weak) IBOutlet UIView *livestreamView;                     // Regional radio selector
 @property (nonatomic, weak) IBOutlet UIButton *livestreamButton;
 @property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
 
-@property (nonatomic, weak) IBOutlet UIStackView *channelInfoStackView;
 @property (nonatomic, weak) IBOutlet UITableView *programsTableView;
 
 // Switching to and from full-screen is made by adjusting the priority of constraints at the top and bottom of the player view
@@ -322,7 +323,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.view.backgroundColor = UIColor.play_blackColor;
     
     self.scrollView.hidden = YES;
-    self.liveScrollView.hidden = YES;
+    self.livestreamView.hidden = YES;
     
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
@@ -714,14 +715,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     SRGMedia *mainMedia = mainChapterMedia ?: media;
     if (mainMedia.contentType == SRGContentTypeLivestream) {
         self.scrollView.hidden = YES;
-        self.liveScrollView.hidden = NO;
+        self.livestreamView.hidden = NO;
         
         self.livestreamView.hidden = [self isLivestreamButtonHidden];
         self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     }
     else {
         self.scrollView.hidden = NO;
-        self.liveScrollView.hidden = YES;
+        self.livestreamView.hidden = YES;
         
         [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
         
@@ -729,7 +730,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.titleLabel.text = media.title;
         
         [self.mediaInfoStackView play_setHidden:NO];
-        [self.channelInfoStackView play_setHidden:YES];
         
         self.dateLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         if (media.date) {
@@ -766,68 +766,68 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
         
         [self reloadDetailsWithShow:media.show];
-    }
-    
-    SRGResource *resource = self.letterboxController.resource;
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    // Display 🔒 in the title if the stream is protected with a DRM.
-    if (resource.DRMs.count > 0) {
-        self.titleLabel.text = (self.titleLabel.text != nil) ? [@"🔒 " stringByAppendingString:self.titleLabel.text] : @"🔒";
-    }
-#endif
-    
-    self.summaryLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    self.summaryLabel.text = media.play_fullSummary;
-    
-    BOOL downloaded = [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded;
-    BOOL isWebFirst = mainChapterMedia.play_webFirst;
-    BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
-    BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
-    BOOL hasMultiAudio = resource.play_multiAudioAvailable && ! downloaded;
-    if (isWebFirst || hasSubtitles || hasAudioDescription || hasMultiAudio) {
-        [self.propertiesStackView play_setHidden:NO];
-        self.propertiesTopLineSpacerView.hidden = NO;
         
-        self.webFirstLabel.hidden = ! isWebFirst;
-        self.subtitlesLabel.hidden = ! hasSubtitles;
-        self.audioDescriptionImageView.hidden = ! hasAudioDescription;
-        self.multiAudioImageView.hidden = ! hasMultiAudio;
-    }
-    else {
-        [self.propertiesStackView play_setHidden:YES];
-        self.propertiesTopLineSpacerView.hidden = YES;
-    }
-    
-    [self.webFirstLabel play_setWebFirstBadge];
-    [self.subtitlesLabel play_setSubtitlesAvailableBadge];
-    
-    [self updateRadioHomeButton];
-    self.radioHomeButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    
-    UIImage *youthProtectionColorImage = YouthProtectionImageForColor(media.youthProtectionColor);
-    if (youthProtectionColorImage) {
-        self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
-        self.youthProtectionColorLabel.font = [UIFont srg_italicFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-        self.youthProtectionColorLabel.text = SRGMessageForYouthProtectionColor(media.youthProtectionColor);
-        self.youthProtectionColorSpacerView.hidden = NO;
-        [self.youthProtectionColorStackView play_setHidden:NO];
-    }
-    else {
-        self.youthProtectionColorImageView.image = nil;
-        self.youthProtectionColorLabel.text = nil;
-        self.youthProtectionColorSpacerView.hidden = YES;
-        [self.youthProtectionColorStackView play_setHidden:YES];
-    }
-    
-    NSString *imageCopyright = media.imageCopyright;
-    if (imageCopyright) {
-        self.imageCopyrightLabel.font = [UIFont srg_italicFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-        self.imageCopyrightLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Image credit: %@", @"Image copyright introductory label"), imageCopyright];
-        self.imageCopyrightSpacerView.hidden = NO;
-    }
-    else {
-        self.imageCopyrightLabel.text = nil;
-        self.imageCopyrightSpacerView.hidden = YES;
+        SRGResource *resource = self.letterboxController.resource;
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+        // Display 🔒 in the title if the stream is protected with a DRM.
+        if (resource.DRMs.count > 0) {
+            self.titleLabel.text = (self.titleLabel.text != nil) ? [@"🔒 " stringByAppendingString:self.titleLabel.text] : @"🔒";
+        }
+#endif
+        
+        self.summaryLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.summaryLabel.text = media.play_fullSummary;
+        
+        BOOL downloaded = [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded;
+        BOOL isWebFirst = mainChapterMedia.play_webFirst;
+        BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
+        BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
+        BOOL hasMultiAudio = resource.play_multiAudioAvailable && ! downloaded;
+        if (isWebFirst || hasSubtitles || hasAudioDescription || hasMultiAudio) {
+            [self.propertiesStackView play_setHidden:NO];
+            self.propertiesTopLineSpacerView.hidden = NO;
+            
+            self.webFirstLabel.hidden = ! isWebFirst;
+            self.subtitlesLabel.hidden = ! hasSubtitles;
+            self.audioDescriptionImageView.hidden = ! hasAudioDescription;
+            self.multiAudioImageView.hidden = ! hasMultiAudio;
+        }
+        else {
+            [self.propertiesStackView play_setHidden:YES];
+            self.propertiesTopLineSpacerView.hidden = YES;
+        }
+        
+        [self.webFirstLabel play_setWebFirstBadge];
+        [self.subtitlesLabel play_setSubtitlesAvailableBadge];
+        
+        [self updateRadioHomeButton];
+        self.radioHomeButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        
+        UIImage *youthProtectionColorImage = YouthProtectionImageForColor(media.youthProtectionColor);
+        if (youthProtectionColorImage) {
+            self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
+            self.youthProtectionColorLabel.font = [UIFont srg_italicFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+            self.youthProtectionColorLabel.text = SRGMessageForYouthProtectionColor(media.youthProtectionColor);
+            self.youthProtectionColorSpacerView.hidden = NO;
+            [self.youthProtectionColorStackView play_setHidden:NO];
+        }
+        else {
+            self.youthProtectionColorImageView.image = nil;
+            self.youthProtectionColorLabel.text = nil;
+            self.youthProtectionColorSpacerView.hidden = YES;
+            [self.youthProtectionColorStackView play_setHidden:YES];
+        }
+        
+        NSString *imageCopyright = media.imageCopyright;
+        if (imageCopyright) {
+            self.imageCopyrightLabel.font = [UIFont srg_italicFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+            self.imageCopyrightLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Image credit: %@", @"Image copyright introductory label"), imageCopyright];
+            self.imageCopyrightSpacerView.hidden = NO;
+        }
+        else {
+            self.imageCopyrightLabel.text = nil;
+            self.imageCopyrightSpacerView.hidden = YES;
+        }
     }
     
     [self updateDownloadStatusForMedia:mainChapterMedia];
