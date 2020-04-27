@@ -102,18 +102,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIView *playerView;
 @property (nonatomic, weak) IBOutlet SRGLetterboxView *letterboxView;
 
-@property (nonatomic, weak) IBOutlet UIView *livestreamView;                     // Regional radio selector
-@property (nonatomic, weak) IBOutlet UIButton *livestreamButton;
-@property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
-
-@property (nonatomic, weak) IBOutlet UIStackView *logoStackView;
-@property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
-
-@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
+// Normal appearance (on-demand, scheduled livestream)
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
 @property (nonatomic, weak) IBOutlet UIStackView *mediaInfoStackView;
 @property (nonatomic, weak) IBOutlet UIStackView *dateStackView;
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
@@ -129,16 +123,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIImageView *audioDescriptionImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *multiAudioImageView;
 
-@property (nonatomic, weak) IBOutlet UIView *youthProtectionColorSpacerView;
-@property (nonatomic, weak) IBOutlet UIStackView *youthProtectionColorStackView;
-@property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
-@property (nonatomic, weak) IBOutlet UILabel *youthProtectionColorLabel;
-@property (nonatomic, weak) IBOutlet UIView *imageCopyrightSpacerView;
-@property (nonatomic, weak) IBOutlet UILabel *imageCopyrightLabel;
-
-@property (nonatomic, weak) IBOutlet UIStackView *channelInfoStackView;
-@property (nonatomic, weak) IBOutlet UITableView *programsTableView;
-
 @property (nonatomic, weak) IBOutlet UIView *showWrapperView;
 @property (nonatomic, weak) IBOutlet UIStackView *showStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *showThumbnailImageView;
@@ -153,6 +137,24 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIView *relatedContentsSpacerView;
 @property (nonatomic, weak) IBOutlet UILabel *relatedContentsTitleLabel;
 @property (nonatomic, weak) IBOutlet UIStackView *relatedContentsStackView;
+
+@property (nonatomic, weak) IBOutlet UIView *youthProtectionColorSpacerView;
+@property (nonatomic, weak) IBOutlet UIStackView *youthProtectionColorStackView;
+@property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
+@property (nonatomic, weak) IBOutlet UILabel *youthProtectionColorLabel;
+@property (nonatomic, weak) IBOutlet UIView *imageCopyrightSpacerView;
+@property (nonatomic, weak) IBOutlet UILabel *imageCopyrightLabel;
+
+// Live appearance
+
+@property (nonatomic, weak) IBOutlet UIScrollView *liveScrollView;
+
+@property (nonatomic, weak) IBOutlet UIView *livestreamView;                     // Regional radio selector
+@property (nonatomic, weak) IBOutlet UIButton *livestreamButton;
+@property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
+
+@property (nonatomic, weak) IBOutlet UIStackView *channelInfoStackView;
+@property (nonatomic, weak) IBOutlet UITableView *programsTableView;
 
 // Switching to and from full-screen is made by adjusting the priority of constraints at the top and bottom of the player view
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerTopConstraint;
@@ -319,6 +321,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.view.backgroundColor = UIColor.play_blackColor;
     
+    self.scrollView.hidden = YES;
+    self.liveScrollView.hidden = YES;
+    
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
     [self.programsTableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"cell"];
@@ -355,9 +360,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.livestreamButtonImageView.tintColor = UIColor.whiteColor;
     
     self.livestreamButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Select regional radio", @"Regional livestream selection hint");
-    
-    self.logoImageView.isAccessibilityElement = YES;
-    self.logoImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
     
     self.radioHomeButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.radioHomeButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
@@ -709,55 +711,21 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 // Details panel reloading
 - (void)reloadDetailsWithMedia:(SRGMedia *)media mainChapterMedia:(SRGMedia *)mainChapterMedia
 {
-    self.livestreamView.hidden = [self isLivestreamButtonHidden];
-    self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
-    
-    [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
-    
-    // Livestream: Display channel information when available
     SRGMedia *mainMedia = mainChapterMedia ?: media;
     if (mainMedia.contentType == SRGContentTypeLivestream) {
-        [self.mediaInfoStackView play_setHidden:YES];
+        self.scrollView.hidden = YES;
+        self.liveScrollView.hidden = NO;
         
-        SRGLetterboxController *letterboxController = self.letterboxController;
-        SRGChannel *channel = letterboxController.channel;
-        if (channel) {
-            // Display channel logos only for TV, as they would be redundant for the radio layout
-            if (channel.transmission == SRGTransmissionTV) {
-                [self.logoStackView play_setHidden:NO];
-                self.logoImageView.image = channel.play_banner22Image;
-                self.logoImageView.accessibilityLabel = channel.title;
-            }
-            else {
-                [self.logoStackView play_setHidden:YES];
-            }
-            
-            [self.channelInfoStackView play_setHidden:NO];
-            
-            SRGProgram *currentProgram = channel.currentProgram;
-            if ([self isSliderDateContainedInProgram:currentProgram]) {
-                self.titleLabel.text = currentProgram.title;
-                [self reloadDetailsWithShow:currentProgram.show];
-            }
-            else {
-                self.titleLabel.text = channel.title;
-                [self reloadDetailsWithShow:nil];
-            }            
-        }
-        else {
-            [self.logoStackView play_setHidden:YES];
-            
-            self.titleLabel.text = media.title;
-            self.logoImageView.image = nil;
-            
-            [self reloadDetailsWithShow:nil];
-            [self.channelInfoStackView play_setHidden:YES];
-        }
+        self.livestreamView.hidden = [self isLivestreamButtonHidden];
+        self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     }
-    // Other streams: Display media information
     else {
+        self.scrollView.hidden = NO;
+        self.liveScrollView.hidden = YES;
+        
+        [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
+        
+        self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
         self.titleLabel.text = media.title;
         
         [self.mediaInfoStackView play_setHidden:NO];
