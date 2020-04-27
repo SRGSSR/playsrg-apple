@@ -137,9 +137,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *imageCopyrightLabel;
 
 @property (nonatomic, weak) IBOutlet UIStackView *channelInfoStackView;
-@property (nonatomic, weak) IBOutlet UILabel *programTimeLabel;
-@property (nonatomic, weak) IBOutlet UILabel *nextProgramLabel;
-@property (nonatomic, weak) IBOutlet UILabel *channelLabel;
+@property (nonatomic, weak) IBOutlet UITableView *programsTableView;
 
 @property (nonatomic, weak) IBOutlet UIView *showWrapperView;
 @property (nonatomic, weak) IBOutlet UIStackView *showStackView;
@@ -320,6 +318,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [super viewDidLoad];
     
     self.view.backgroundColor = UIColor.play_blackColor;
+    
+    self.programsTableView.dataSource = self;
+    self.programsTableView.delegate = self;
+    [self.programsTableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"cell"];
     
     self.showWrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.showWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
@@ -737,36 +739,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             SRGProgram *currentProgram = channel.currentProgram;
             if ([self isSliderDateContainedInProgram:currentProgram]) {
                 self.titleLabel.text = currentProgram.title;
-                
-                self.channelLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-                self.channelLabel.text = (channel.transmission != SRGTransmissionTV) ? channel.title : nil;
-                
-                self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-                self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
-                self.programTimeLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information, like the current program"), PlayAccessibilityShortTimeFromDate(currentProgram.startDate), PlayAccessibilityShortTimeFromDate(currentProgram.endDate)];
-                
                 [self reloadDetailsWithShow:currentProgram.show];
             }
             else {
                 self.titleLabel.text = channel.title;
-                self.channelLabel.text = nil;
-                self.programTimeLabel.text = nil;
-                self.programTimeLabel.accessibilityLabel = nil;
-                
                 [self reloadDetailsWithShow:nil];
-            }
-            
-            SRGProgram *nextProgram = channel.nextProgram;
-            if (nextProgram) {
-                self.nextProgramLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-                NSString *nextProgramFormat = NSLocalizedString(@"At %1$@: %2$@", @"Introductory text for next program information");
-                self.nextProgramLabel.text = nextProgram ? [NSString stringWithFormat:@"> %@", [NSString stringWithFormat:nextProgramFormat, [NSDateFormatter.play_shortTimeFormatter stringFromDate:nextProgram.startDate], nextProgram.title]] : nil;
-                self.nextProgramLabel.accessibilityLabel = nextProgram ? [NSString stringWithFormat:nextProgramFormat, PlayAccessibilityShortTimeFromDate(nextProgram.startDate), nextProgram.title] : nil;
-            }
-            else {
-                self.nextProgramLabel.text = nil;
-                self.nextProgramLabel.accessibilityLabel = nil;
-            }
+            }            
         }
         else {
             [self.logoStackView play_setHidden:YES];
@@ -1475,6 +1453,25 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     else {
         return NO;
     }
+}
+
+#pragma mark UITableViewDataSource protocol
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+}
+
+#pragma mark UITableViewDelegate protocol
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.textLabel.text = [NSString stringWithFormat:@"Program %@", @(indexPath.row + 1)];
 }
 
 #pragma mark UIViewControllerTransitioningDelegate protocol

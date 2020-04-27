@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Delegate-->
+        <!--Media Player View Controller-->
         <scene sceneID="Xaj-Uy-aIg">
             <objects>
                 <viewController storyboardIdentifier="MediaPlayerViewController" id="HgT-ei-KY5" customClass="MediaPlayerViewController" sceneMemberID="viewController">
@@ -127,7 +127,7 @@
                                 <rect key="frame" x="0.0" y="277" width="414" height="619"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4mL-6P-GaC" userLabel="Info Stack View">
-                                        <rect key="frame" x="4" y="0.0" width="406" height="688.5"/>
+                                        <rect key="frame" x="4" y="0.0" width="406" height="740.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="drV-Ca-Mf5">
                                                 <rect key="frame" x="10" y="12" width="386" height="58"/>
@@ -339,37 +339,19 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="aiH-rN-Erx">
-                                                <rect key="frame" x="10" y="394" width="386" height="76"/>
+                                                <rect key="frame" x="10" y="394" width="386" height="128"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;programTime&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azC-dB-UH4">
-                                                        <rect key="frame" x="0.0" y="0.0" width="386" height="18"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;nextProgram&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWK-yS-nud">
-                                                        <rect key="frame" x="0.0" y="22" width="386" height="18"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                        <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CBK-g8-EU0" userLabel="Spacer View">
-                                                        <rect key="frame" x="0.0" y="44" width="386" height="10"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="89U-UX-XEC">
+                                                        <rect key="frame" x="0.0" y="0.0" width="386" height="128"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" priority="999" constant="10" id="iRp-ED-avB"/>
+                                                            <constraint firstAttribute="height" constant="128" id="Spo-Q2-XCo"/>
                                                         </constraints>
-                                                    </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;channel&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Pv-nN-gHG">
-                                                        <rect key="frame" x="0.0" y="58" width="386" height="18"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    </tableView>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RRr-yq-C32">
-                                                <rect key="frame" x="10" y="478" width="386" height="80"/>
+                                                <rect key="frame" x="10" y="530" width="386" height="80"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NWy-HJ-fcx" userLabel="Show Stack View">
                                                         <rect key="frame" x="0.0" y="0.0" width="378" height="80"/>
@@ -440,7 +422,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6z-kO-Hg8" userLabel="Radio Home View">
-                                                <rect key="frame" x="10" y="566" width="386" height="58"/>
+                                                <rect key="frame" x="10" y="618" width="386" height="58"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwq-4e-QPr" userLabel="Radio Home Button">
                                                         <rect key="frame" x="0.0" y="10" width="386" height="38"/>
@@ -470,14 +452,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4k-XC-bcU" userLabel="Spacer View">
-                                                <rect key="frame" x="10" y="632" width="386" height="10"/>
+                                                <rect key="frame" x="10" y="684" width="386" height="10"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="999" constant="10" id="HYL-ex-0MM"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JPp-bl-8B9" userLabel="Related Contents Stack View">
-                                                <rect key="frame" x="10" y="650" width="386" height="26.5"/>
+                                                <rect key="frame" x="10" y="702" width="386" height="26.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More on this subject" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-Ao-wDq">
                                                         <rect key="frame" x="0.0" y="0.0" width="386" height="20.5"/>
@@ -529,7 +511,6 @@
                         <outlet property="audioDescriptionImageView" destination="79J-t3-C9N" id="ndT-i5-Ol6"/>
                         <outlet property="availabilityLabel" destination="5B6-wH-ilY" id="PQH-MM-Ffr"/>
                         <outlet property="channelInfoStackView" destination="aiH-rN-Erx" id="IsT-Kk-daa"/>
-                        <outlet property="channelLabel" destination="3Pv-nN-gHG" id="wwG-rc-fVp"/>
                         <outlet property="closeButton" destination="URR-EB-goh" id="GT8-V7-lKB"/>
                         <outlet property="collapsedDetailsLabelsHeightConstraint" destination="O9i-0d-HTk" id="7MN-Zo-Xo2"/>
                         <outlet property="dateLabel" destination="eaZ-CL-kRu" id="akM-kX-bBk"/>
@@ -550,14 +531,13 @@
                         <outlet property="logoStackView" destination="jym-bi-kal" id="ZHO-Hi-T5O"/>
                         <outlet property="mediaInfoStackView" destination="44Z-TF-U9J" id="MCN-kL-Vf4"/>
                         <outlet property="multiAudioImageView" destination="aeL-66-EET" id="jnS-8h-Ajc"/>
-                        <outlet property="nextProgramLabel" destination="TWK-yS-nud" id="1Me-Wn-V7J"/>
                         <outlet property="numberOfEpisodesLabel" destination="n6K-Dg-J9D" id="hyA-jm-904"/>
                         <outlet property="playerAspectRatioBigLandscapeScreenConstraint" destination="d4e-DG-s50" id="Xip-HB-R7g"/>
                         <outlet property="playerAspectRatioStandardConstraint" destination="sHT-jJ-Lxy" id="sae-Wk-L16"/>
                         <outlet property="playerBottomConstraint" destination="GGg-eU-ikx" id="IsZ-oq-Jot"/>
                         <outlet property="playerTopConstraint" destination="ESI-Dr-UyW" id="RCb-YM-KoD"/>
                         <outlet property="playerView" destination="yDa-0T-uNV" id="Hkl-v6-yZ2"/>
-                        <outlet property="programTimeLabel" destination="azC-dB-UH4" id="6rV-J5-4MC"/>
+                        <outlet property="programsTableView" destination="89U-UX-XEC" id="hk4-nL-SH5"/>
                         <outlet property="propertiesStackView" destination="3ln-Rh-6yE" id="K95-zc-cc0"/>
                         <outlet property="propertiesTopLineSpacerView" destination="iQk-RU-8Cd" id="wBO-lC-hSG"/>
                         <outlet property="pullDownGestureRecognizer" destination="bXa-UN-Lpw" id="u5Z-M7-fvd"/>
