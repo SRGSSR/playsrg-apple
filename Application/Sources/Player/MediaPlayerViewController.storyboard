@@ -114,7 +114,7 @@
                                 <constraints>
                                     <constraint firstItem="JX5-nY-2fC" firstAttribute="leading" secondItem="yDa-0T-uNV" secondAttribute="leading" id="Dde-so-EWe"/>
                                     <constraint firstAttribute="trailing" secondItem="JX5-nY-2fC" secondAttribute="trailing" id="aJU-Bk-NN5"/>
-                                    <constraint firstAttribute="height" secondItem="yDa-0T-uNV" secondAttribute="width" multiplier="2:5" priority="1" id="d4e-DG-s50"/>
+                                    <constraint firstAttribute="height" secondItem="yDa-0T-uNV" secondAttribute="width" multiplier="2:5" priority="250" id="d4e-DG-s50"/>
                                     <constraint firstAttribute="height" secondItem="yDa-0T-uNV" secondAttribute="width" multiplier="9:16" priority="900" id="sHT-jJ-Lxy"/>
                                     <constraint firstItem="JX5-nY-2fC" firstAttribute="top" secondItem="yDa-0T-uNV" secondAttribute="top" id="zNQ-3R-Tgi"/>
                                     <constraint firstAttribute="bottom" secondItem="JX5-nY-2fC" secondAttribute="bottom" id="zwj-dJ-v91"/>
@@ -486,7 +486,7 @@
                                             <constraint firstAttribute="trailing" secondItem="Wbx-pt-wy2" secondAttribute="trailing" constant="10" id="3YC-CI-E24"/>
                                             <constraint firstItem="TRa-Gj-haE" firstAttribute="top" secondItem="Hdu-Mm-eGu" secondAttribute="top" id="5hL-P5-a1U"/>
                                             <constraint firstItem="Wbx-pt-wy2" firstAttribute="top" secondItem="TRa-Gj-haE" secondAttribute="bottom" id="9Zg-Sb-E5y"/>
-                                            <constraint firstAttribute="bottom" secondItem="Wbx-pt-wy2" secondAttribute="bottom" id="Hai-yj-JUv"/>
+                                            <constraint firstAttribute="bottom" secondItem="Wbx-pt-wy2" secondAttribute="bottom" priority="500" id="Hai-yj-JUv"/>
                                             <constraint firstItem="TRa-Gj-haE" firstAttribute="leading" secondItem="Hdu-Mm-eGu" secondAttribute="leading" id="RhH-L1-qt8"/>
                                             <constraint firstItem="Wbx-pt-wy2" firstAttribute="leading" secondItem="Hdu-Mm-eGu" secondAttribute="leading" constant="10" id="bPb-rM-yPa"/>
                                             <constraint firstAttribute="trailing" secondItem="TRa-Gj-haE" secondAttribute="trailing" id="cOw-IC-T8B"/>
@@ -498,6 +498,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Hdu-Mm-eGu" secondAttribute="trailing" constant="4" id="19D-sa-JDr"/>
                                     <constraint firstAttribute="bottom" secondItem="Hdu-Mm-eGu" secondAttribute="bottom" id="4Yi-5f-tgc"/>
                                     <constraint firstItem="Hdu-Mm-eGu" firstAttribute="leading" secondItem="GF7-rs-qgA" secondAttribute="leading" constant="4" id="8le-Fm-GMO"/>
+                                    <constraint firstAttribute="height" priority="850" id="BwQ-SB-v0l"/>
                                     <constraint firstItem="UOS-mh-sbP" firstAttribute="top" secondItem="GF7-rs-qgA" secondAttribute="top" id="DM8-4V-jtB"/>
                                     <constraint firstItem="4mL-6P-GaC" firstAttribute="width" secondItem="GF7-rs-qgA" secondAttribute="width" constant="-8" id="Gac-9Y-LxX"/>
                                     <constraint firstAttribute="trailing" secondItem="UOS-mh-sbP" secondAttribute="trailing" constant="4" id="OlL-UR-qDJ"/>
@@ -547,6 +548,7 @@
                         <outlet property="livestreamButtonImageView" destination="Lud-EO-TIz" id="laS-wA-W8i"/>
                         <outlet property="livestreamView" destination="96L-N2-RWf" id="Hgh-N7-oCr"/>
                         <outlet property="mediaInfoStackView" destination="44Z-TF-U9J" id="MCN-kL-Vf4"/>
+                        <outlet property="metadataHeightConstraint" destination="BwQ-SB-v0l" id="5Ny-ML-8I4"/>
                         <outlet property="multiAudioImageView" destination="aeL-66-EET" id="jnS-8h-Ajc"/>
                         <outlet property="numberOfEpisodesLabel" destination="n6K-Dg-J9D" id="hyA-jm-904"/>
                         <outlet property="playerAspectRatioBigLandscapeScreenConstraint" destination="d4e-DG-s50" id="Xip-HB-R7g"/>

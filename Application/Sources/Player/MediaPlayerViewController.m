@@ -161,6 +161,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerTopConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerBottomConstraint;
 
+// When in full-screen mode, this 0-height constraint is enabled to ensure metadata view height is 0 (its priority stays at a normal value).
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *metadataHeightConstraint;
+
 // Showing details is made by disabling the following height constraint property
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *collapsedDetailsLabelsHeightConstraint;
 
@@ -350,7 +353,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.multiAudioImageView.isAccessibilityElement = YES;
     
     // Ensure consistent initial layout constraint priorities
+    self.playerTopConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
     self.playerBottomConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
+    self.metadataHeightConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
+    
     self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelNormalPriority;
     
     self.livestreamButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
@@ -882,6 +888,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     UILayoutPriority priority = fullScreen ? MediaPlayerBottomConstraintFullScreenPriority : MediaPlayerBottomConstraintNormalPriority;
     self.playerTopConstraint.priority = priority;
     self.playerBottomConstraint.priority = priority;
+    
+    // Force metadata panel to a height of 0
+    self.metadataHeightConstraint.active = fullScreen;
     
     [self setNeedsStatusBarAppearanceUpdate];
 }
