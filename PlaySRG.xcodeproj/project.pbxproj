@@ -1101,6 +1101,11 @@
 		6FA5D15F1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */; };
 		6FA5D1601F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */; };
 		6FA5D1611F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */; };
+		6FA6C0632458064C00518DE6 /* SRGProgramComposition+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6C0622458064C00518DE6 /* SRGProgramComposition+PlaySRG.m */; };
+		6FA6C0642458064C00518DE6 /* SRGProgramComposition+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6C0622458064C00518DE6 /* SRGProgramComposition+PlaySRG.m */; };
+		6FA6C0652458064C00518DE6 /* SRGProgramComposition+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6C0622458064C00518DE6 /* SRGProgramComposition+PlaySRG.m */; };
+		6FA6C0662458064C00518DE6 /* SRGProgramComposition+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6C0622458064C00518DE6 /* SRGProgramComposition+PlaySRG.m */; };
+		6FA6C0672458064C00518DE6 /* SRGProgramComposition+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA6C0622458064C00518DE6 /* SRGProgramComposition+PlaySRG.m */; };
 		6FA7EC3920AB0FEB00A9C5FE /* Onboardings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */; };
 		6FA7EC3A20AB0FEB00A9C5FE /* Onboardings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */; };
 		6FA7EC3B20AB0FEB00A9C5FE /* Onboardings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */; };
@@ -2071,6 +2076,8 @@
 		6F9D2742203AD99C00FDE899 /* Playlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Playlist.m; sourceTree = "<group>"; };
 		6FA5D15B1F2077B10059E4E2 /* NSString+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PlaySRG.h"; sourceTree = "<group>"; };
 		6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PlaySRG.m"; sourceTree = "<group>"; };
+		6FA6C0612458064C00518DE6 /* SRGProgramComposition+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGProgramComposition+PlaySRG.h"; sourceTree = "<group>"; };
+		6FA6C0622458064C00518DE6 /* SRGProgramComposition+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGProgramComposition+PlaySRG.m"; sourceTree = "<group>"; };
 		6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Onboardings.json; sourceTree = "<group>"; };
 		6FA9ECAA20C7AA1600D3D6C2 /* NotificationsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
 		6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
@@ -3239,6 +3246,8 @@
 				08B2A5382426511700C6EED3 /* SRGModule+PlaySRG.m */,
 				6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */,
 				6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */,
+				6FA6C0612458064C00518DE6 /* SRGProgramComposition+PlaySRG.h */,
+				6FA6C0622458064C00518DE6 /* SRGProgramComposition+PlaySRG.m */,
 				6F7C35B323708E8A00259BE7 /* SRGResource+PlaySRG.h */,
 				6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */,
 				0852539522073D5200BCF0B1 /* UIApplication+PlaySRG.h */,
@@ -5733,6 +5742,7 @@
 				08A3ED021FA2612E00A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				0841E70622F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
 				6F9897CD2412582400B390A2 /* Layout.m in Sources */,
+				6FA6C0632458064C00518DE6 /* SRGProgramComposition+PlaySRG.m in Sources */,
 				08AA551D1D49EBF600C5026E /* ApplicationConfiguration.m in Sources */,
 				08C68F941D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6FDF08EB218B126700B2AF2C /* OnboardingPage.m in Sources */,
@@ -5928,6 +5938,7 @@
 				08C691361D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
 				6F0A7F0020AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				6F475FCE1EB37BC6003021EA /* NavigationController.m in Sources */,
+				6FA6C0642458064C00518DE6 /* SRGProgramComposition+PlaySRG.m in Sources */,
 				08C68F951D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41701F6FAB6E000533E7 /* Calendar.m in Sources */,
 				6FDF08FB218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,
@@ -6095,6 +6106,7 @@
 				08C691371D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
 				6F0A7F0120AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				6F475FCF1EB37BC6003021EA /* NavigationController.m in Sources */,
+				6FA6C0652458064C00518DE6 /* SRGProgramComposition+PlaySRG.m in Sources */,
 				08C68F961D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41711F6FAB6E000533E7 /* Calendar.m in Sources */,
 				6FDF08FC218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,
@@ -6262,6 +6274,7 @@
 				08C691381D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
 				6F0A7F0220AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				6F475FD01EB37BC6003021EA /* NavigationController.m in Sources */,
+				6FA6C0662458064C00518DE6 /* SRGProgramComposition+PlaySRG.m in Sources */,
 				08C68F971D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41721F6FAB6E000533E7 /* Calendar.m in Sources */,
 				6FDF08FD218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,
@@ -6429,6 +6442,7 @@
 				08C691391D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
 				6F0A7F0320AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				6F475FD11EB37BC6003021EA /* NavigationController.m in Sources */,
+				6FA6C0672458064C00518DE6 /* SRGProgramComposition+PlaySRG.m in Sources */,
 				08C68F981D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6F0A41731F6FAB6E000533E7 /* Calendar.m in Sources */,
 				6FDF08FE218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,

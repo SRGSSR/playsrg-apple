@@ -35,6 +35,7 @@
 #import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
+#import "SRGProgramComposition+PlaySRG.h"
 #import "SRGResource+PlaySRG.h"
 #import "StoreReview.h"
 #import "UIColor+PlaySRG.h"
@@ -89,6 +90,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic) IBOutlet SRGLetterboxController *letterboxController;      // top object, strong
 
 @property (nonatomic) SRGProgramComposition *programComposition;
+@property (nonatomic) NSArray<SRGProgram *> *programs;                           // program list matching segments available from the media composition
 
 @property (nonatomic, getter=isFromPushNotification) BOOL fromPushNotification;
 
@@ -486,6 +488,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [super viewWillAppear:animated];
     
     if ([self play_isMovingToParentViewController]) {
+        [self reloadPrograms];
         [self registerForChannelUpdatesWithMedia:self.letterboxController.media];
         
         [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
@@ -874,6 +877,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
 }
 
+- (void)reloadPrograms
+{
+    NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
+    self.programs = (segments != nil) ? [self.programComposition play_programsMatchingSegments:segments] : nil;
+    [self.programsTableView reloadData];
+}
+
 #pragma mark Channel updates
 
 - (void)registerForChannelUpdatesWithMedia:(SRGMedia *)media
@@ -888,7 +898,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
-        [self.programsTableView reloadData];
+        [self reloadPrograms];
     }];
 }
 
@@ -1476,8 +1486,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // TODO: Probably filter out entries whose URNs are common with the media composition segments
-    return self.programComposition.programs.count;
+    return self.programs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1490,19 +1499,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SRGProgram *program = self.programComposition.programs[indexPath.row];
+    SRGProgram *program = self.programs[indexPath.row];
     cell.textLabel.text = program.title;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: Rewrite properly, this is currently only an ugly hack. In particular, such offsets will be wrong
-    //       for all programs located before a program overlap
-    NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
-    if (segments.count > indexPath.row) {
-        NSUInteger segmentIndex = segments.count - 1 - indexPath.row;
-        [self.letterboxController switchToSubdivision:segments[segmentIndex] withCompletionHandler:nil];
-    }
+    SRGProgram *program = self.programs[indexPath.row];
+    [self.letterboxController switchToURN:program.mediaURN withCompletionHandler:nil];
 }
 
 #pragma mark UIViewControllerTransitioningDelegate protocol
@@ -1892,6 +1896,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
+    [self reloadPrograms];
     
     // When switching from video to audio or conversely, ensure the UI togglability is correct
     if (media.mediaType != previousMedia.mediaType) {
