@@ -353,7 +353,7 @@
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Le récepteur est en attente.";
 
-"Recently played" = "Joué récemment";
+"Recently played" = "Joué en dernier";
 
 /* Hint displayed when no history is available */
 "Recently played medias will be displayed here" = "Les contenus récemment consultés apparaîtront ici";
