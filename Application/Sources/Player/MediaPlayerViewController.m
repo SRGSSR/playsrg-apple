@@ -494,6 +494,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if ([self play_isMovingToParentViewController]) {
         [self registerForChannelUpdates];
         [self updateTimelineVisibilityForFullScreen:self.letterboxView.fullScreen animated:NO];
+        [self scrollToCurrentProgramAnimated:NO];
         
         [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
                                                           object:self
@@ -1264,6 +1265,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     else {
         animations();
+    }
+}
+
+- (void)scrollToCurrentProgramAnimated:(BOOL)animated
+{
+    NSString *subdivisionURN = self.letterboxController.subdivision.URN;
+    if (subdivisionURN) {
+        [self scrollToProgramWithMediaURN:subdivisionURN animated:animated];
     }
 }
 
