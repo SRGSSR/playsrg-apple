@@ -495,6 +495,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self registerForChannelUpdates];
         [self updateTimelineVisibilityForFullScreen:self.letterboxView.fullScreen animated:NO];
         [self scrollToCurrentProgramAnimated:NO];
+        [self updateSelectionForCurrentProgram];
         
         [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
                                                           object:self
@@ -887,6 +888,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
     self.programs = (segments != nil) ? [self.programComposition play_programsMatchingSegments:segments] : nil;
     [self.programsTableView reloadData];
+    [self updateSelectionForCurrentProgram];
 }
 
 #pragma mark Channel updates
@@ -1248,14 +1250,29 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }];
 }
 
+#pragma mar Program list
+
+- (NSIndexPath *)indexPathForProgramWithMediaURN:(NSString *)mediaURN
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGProgram.new, mediaURN), mediaURN];
+    SRGProgram *program = [self.programs filteredArrayUsingPredicate:predicate].firstObject;
+    if (! program) {
+        return nil;
+    }
+    
+    NSUInteger row = [self.programs indexOfObject:program];
+    return [NSIndexPath indexPathForRow:row inSection:0];
+}
+
 - (void)scrollToProgramWithMediaURN:(NSString *)mediaURN animated:(BOOL)animated
 {
+    if (! mediaURN) {
+        return;
+    }
+    
     void (^animations)(void) = ^{
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGProgram.new, mediaURN), mediaURN];
-        SRGProgram *program = [self.programs filteredArrayUsingPredicate:predicate].firstObject;
-        if (program) {
-            NSUInteger row = [self.programs indexOfObject:program];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        NSIndexPath *indexPath = [self indexPathForProgramWithMediaURN:mediaURN];
+        if (indexPath) {
             [self.programsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:animated];
         }
     };
@@ -1270,10 +1287,26 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)scrollToCurrentProgramAnimated:(BOOL)animated
 {
-    NSString *subdivisionURN = self.letterboxController.subdivision.URN;
-    if (subdivisionURN) {
-        [self scrollToProgramWithMediaURN:subdivisionURN animated:animated];
+    SRGSubdivision *subdivision = self.letterboxController.subdivision;
+    [self scrollToProgramWithMediaURN:subdivision.URN animated:animated];
+}
+
+- (void)updateSelectionForProgramWithMediaURN:(NSString *)mediaURN
+{
+    if (! mediaURN) {
+        return;
     }
+    
+    NSIndexPath *indexPath = [self indexPathForProgramWithMediaURN:mediaURN];
+    if (indexPath) {
+        [self.programsTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+}
+
+- (void)updateSelectionForCurrentProgram
+{
+    SRGSubdivision *subdivision = self.letterboxController.subdivision;
+    [self updateSelectionForProgramWithMediaURN:subdivision.URN];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -1376,11 +1409,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (interactive) {
         SRGMedia *media = subdivision ? [self.letterboxController.mediaComposition mediaForSubdivision:subdivision] : self.letterboxController.fullLengthMedia;
         [self reloadDataOverriddenWithMedia:media mainChapterMedia:[self mainChapterMedia]];
-        
-        NSString *subdivisionURN = subdivision.URN;
-        if (subdivisionURN) {
-            [self scrollToProgramWithMediaURN:subdivisionURN animated:YES];
-        }
+        [self scrollToProgramWithMediaURN:subdivision.URN animated:YES];
+        [self updateSelectionForProgramWithMediaURN:subdivision.URN];
     }
 }
 
@@ -1972,6 +2002,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGSegment *segment = notification.userInfo[SRGMediaPlayerSegmentKey];
     [self scrollToProgramWithMediaURN:segment.URN animated:YES];
+    [self updateSelectionForProgramWithMediaURN:segment.URN];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification
