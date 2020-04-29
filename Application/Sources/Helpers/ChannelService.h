@@ -37,6 +37,8 @@ typedef void (^ChannelServiceUpdateBlock)(SRGProgramComposition * _Nullable prog
 /**
  *  Register an observer to be notified of channel updates for a given media. The provided block is called when
  *  channel information is available.
+ *
+ *  @discussion If the media is not a livestream, this method does nothing.
  */
 - (void)registerObserver:(id)observer forChannelUpdatesWithMedia:(SRGMedia *)media block:(ChannelServiceUpdateBlock)block;
 
@@ -44,6 +46,11 @@ typedef void (^ChannelServiceUpdateBlock)(SRGProgramComposition * _Nullable prog
  *  Unregister the observer from channel notifications for the specified media.
  */
 - (void)unregisterObserver:(id)observer forMedia:(SRGMedia *)media;
+
+/**
+ *  Unregister the observer from all channel notifications.
+ */
+- (void)unregisterObserver:(id)observer;
 
 @end
 

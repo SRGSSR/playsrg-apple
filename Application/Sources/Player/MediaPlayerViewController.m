@@ -492,8 +492,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [super viewWillAppear:animated];
     
     if ([self play_isMovingToParentViewController]) {
-        [self reloadPrograms];
-        [self registerForChannelUpdatesWithMedia:self.letterboxController.media];
+        [self registerForChannelUpdates];
+        [self updateTimelineVisibilityForFullScreen:self.letterboxView.fullScreen animated:NO];
         
         [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
                                                           object:self
@@ -524,7 +524,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.letterboxController cancelContinuousPlayback];
     
     if ([self play_isMovingFromParentViewController]) {
-        [self unregisterChannelUpdatesWithMedia:self.letterboxController.media];
+        [self unregisterChannelUpdates];
         
         if (self.letterboxController.media.mediaType != SRGMediaTypeAudio
                 && ! self.letterboxController.pictureInPictureActive
@@ -881,7 +881,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
 }
 
-- (void)reloadPrograms
+- (void)reloadCurrentPrograms
 {
     NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
     self.programs = (segments != nil) ? [self.programComposition play_programsMatchingSegments:segments] : nil;
@@ -890,29 +890,23 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 #pragma mark Channel updates
 
-- (void)registerForChannelUpdatesWithMedia:(SRGMedia *)media
+- (void)registerForChannelUpdates
 {
-    if (! media) {
+    SRGMedia *mainMedia = [self mainMedia];
+    if (! mainMedia) {
         return;
     }
     
-    if (media.contentType != SRGContentTypeLivestream) {
-        return;
-    }
-    
-    [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGProgramComposition * _Nullable programComposition) {
+    [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:mainMedia block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
-        [self reloadPrograms];
+        [self reloadCurrentPrograms];
     }];
+    [self reloadCurrentPrograms];
 }
 
-- (void)unregisterChannelUpdatesWithMedia:(SRGMedia *)media
+- (void)unregisterChannelUpdates
 {
-    if (! media) {
-        return;
-    }
-    
-    [ChannelService.sharedService unregisterObserver:self forMedia:media];
+    [ChannelService.sharedService unregisterObserver:self];
 }
 
 #pragma mark UI
@@ -1920,12 +1914,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (! [media isEqual:previousMedia]) {
         [self updateLivestreamButton];
         
-        [self unregisterChannelUpdatesWithMedia:previousMedia];
-        [self registerForChannelUpdatesWithMedia:media];
+        [self unregisterChannelUpdates];
+        [self registerForChannelUpdates];
     }
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
-    [self reloadPrograms];
+    [self reloadCurrentPrograms];
     
     // When switching from video to audio or conversely, ensure the UI togglability is correct
     if (media.mediaType != previousMedia.mediaType) {

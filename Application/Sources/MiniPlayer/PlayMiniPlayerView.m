@@ -261,10 +261,6 @@
         return;
     }
     
-    if (media.contentType != SRGContentTypeLivestream) {
-        return;
-    }
-    
     [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
         [self reloadData];

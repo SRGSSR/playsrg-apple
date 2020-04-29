@@ -89,6 +89,10 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 
 - (void)registerObserver:(id)observer forChannelUpdatesWithMedia:(SRGMedia *)media block:(ChannelServiceUpdateBlock)block
 {
+    if (media.contentType != SRGContentTypeLivestream) {
+        return;
+    }
+    
     NSString *channelKey = [ChannelService channelKeyWithMedia:media];
     NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[channelKey];
     if (! channelRegistrations) {
@@ -123,6 +127,17 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
     
     NSValue *observerKey = [NSValue valueWithNonretainedObject:observer];
     [channelRegistrations removeObjectForKey:observerKey];
+    
+    // Keep registered channels for the lifetime of the app, do not remove associated entries (otherwise we might
+    // remove and add channels repeatedly, triggering an update each time)
+}
+
+- (void)unregisterObserver:(id)observer
+{
+    NSValue *observerKey = [NSValue valueWithNonretainedObject:observer];
+    for (NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *channelRegistrations in self.registrations.allValues) {
+        [channelRegistrations removeObjectForKey:observerKey];
+    }
     
     // Keep registered channels for the lifetime of the app, do not remove associated entries (otherwise we might
     // remove and add channels repeatedly, triggering an update each time)

@@ -185,7 +185,7 @@
 
 - (void)registerForChannelUpdatesWithMedia:(SRGMedia *)media
 {
-    if (! media || media.contentType != SRGContentTypeLivestream) {
+    if (! media) {
         return;
     }
     
