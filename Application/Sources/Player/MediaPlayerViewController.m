@@ -424,6 +424,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                                name:SRGLetterboxPlaybackDidFailNotification
                                              object:self.letterboxController];
     [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(segmentDidStart:)
+                                               name:SRGLetterboxSegmentDidStartNotification
+                                             object:self.letterboxController];
+    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationWillResignActive:)
                                                name:UIApplicationWillResignActiveNotification
                                              object:nil];
@@ -1249,6 +1253,26 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }];
 }
 
+- (void)scrollToProgramWithMediaURN:(NSString *)mediaURN animated:(BOOL)animated
+{
+    void (^animations)(void) = ^{
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGProgram.new, mediaURN), mediaURN];
+        SRGProgram *program = [self.programs filteredArrayUsingPredicate:predicate].firstObject;
+        if (program) {
+            NSUInteger row = [self.programs indexOfObject:program];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+            [self.programsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:animated];
+        }
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:0.1 animations:animations];
+    }
+    else {
+        animations();
+    }
+}
+
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -1349,6 +1373,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (interactive) {
         SRGMedia *media = subdivision ? [self.letterboxController.mediaComposition mediaForSubdivision:subdivision] : self.letterboxController.fullLengthMedia;
         [self reloadDataOverriddenWithMedia:media mainChapterMedia:[self mainChapterMedia]];
+        
+        NSString *subdivisionURN = subdivision.URN;
+        if (subdivisionURN) {
+            [self scrollToProgramWithMediaURN:subdivisionURN animated:YES];
+        }
     }
 }
 
@@ -1934,6 +1963,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.topBarView.alpha = 1.f;
     
     self.closeButton.accessibilityHint = nil;
+}
+
+- (void)segmentDidStart:(NSNotification *)notification
+{
+    SRGSegment *segment = notification.userInfo[SRGMediaPlayerSegmentKey];
+    [self scrollToProgramWithMediaURN:segment.URN animated:YES];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification
