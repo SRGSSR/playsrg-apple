@@ -252,12 +252,13 @@
         self.logoImageView.hidden = (logoImage == nil);
         
         SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, NSDate.date);
-        if ([currentProgram play_containsDate:NSDate.date]) {
+        if (currentProgram) {
             self.titleLabel.text = currentProgram.title;
             self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
             
             float progress = [NSDate.date timeIntervalSinceDate:currentProgram.startDate] / ([currentProgram.endDate timeIntervalSinceDate:currentProgram.startDate]);
             self.progressView.progress = fmaxf(fminf(progress, 1.f), 0.f);
+            self.progressView.hidden = NO;
             
             [self.thumbnailImageView play_requestImageForObject:currentProgram withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia unavailabilityHandler:^{
                 [self.thumbnailImageView play_requestImageForObject:channel withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
@@ -267,6 +268,7 @@
             self.titleLabel.text = channel.title;
             self.subtitleLabel.text = NSLocalizedString(@"Currently", @"Text displayed on live cells when no program time information is available");
             self.progressView.progress = 1.f;
+            self.progressView.hidden = NO;
             
             [self.thumbnailImageView play_requestImageForObject:channel withScale:imageScale type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
         }
@@ -290,9 +292,14 @@
             self.subtitleLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:self.media.date].play_localizedUppercaseFirstLetterString;
         }
         
-        if (self.media.contentType == SRGContentTypeScheduledLivestream && self.media.startDate && self.media.endDate && [self.media timeAvailabilityAtDate:NSDate.date] == SRGTimeAvailabilityAvailable) {
+        if (self.media.contentType == SRGContentTypeLivestream) {
+            self.progressView.progress = 1.f;
+            self.progressView.hidden = NO;
+        }
+        else if (self.media.contentType == SRGContentTypeScheduledLivestream && self.media.startDate && self.media.endDate && [self.media timeAvailabilityAtDate:NSDate.date] == SRGTimeAvailabilityAvailable) {
             float progress = [NSDate.date timeIntervalSinceDate:self.media.startDate] / ([self.media.endDate timeIntervalSinceDate:self.media.startDate]);
             self.progressView.progress = fmaxf(fminf(progress, 1.f), 0.f);
+            self.progressView.hidden = NO;
         }
         else {
             self.progressView.hidden = YES;
