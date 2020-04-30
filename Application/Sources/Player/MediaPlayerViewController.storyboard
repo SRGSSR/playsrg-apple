@@ -556,6 +556,7 @@
                         <outlet property="playerTopConstraint" destination="ESI-Dr-UyW" id="RCb-YM-KoD"/>
                         <outlet property="playerView" destination="yDa-0T-uNV" id="Hkl-v6-yZ2"/>
                         <outlet property="programsTableView" destination="Wbx-pt-wy2" id="CHH-OH-EYB"/>
+                        <outlet property="programsTitleLabel" destination="qzl-ND-r55" id="Xkq-tW-sBw"/>
                         <outlet property="propertiesStackView" destination="3ln-Rh-6yE" id="K95-zc-cc0"/>
                         <outlet property="propertiesTopLineSpacerView" destination="iQk-RU-8Cd" id="wBO-lC-hSG"/>
                         <outlet property="pullDownGestureRecognizer" destination="bXa-UN-Lpw" id="u5Z-M7-fvd"/>

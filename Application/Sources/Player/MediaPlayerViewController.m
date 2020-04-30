@@ -160,6 +160,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIButton *livestreamButton;
 @property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
 
+@property (nonatomic, weak) IBOutlet UILabel *programsTitleLabel;
 @property (nonatomic, weak) IBOutlet UITableView *programsTableView;
 
 // Switching to and from full-screen is made by adjusting the priority of constraints at the top and bottom of the player view
@@ -752,6 +753,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         
         self.livestreamView.hidden = [self isLivestreamButtonHidden];
         self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        
+        self.programsTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
+        self.programsTitleLabel.text = NSLocalizedString(@"Previously", @"Title displayed at the top of the previous program list");
     }
     else {
         self.scrollView.hidden = NO;
@@ -897,7 +901,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)reloadCurrentPrograms
 {
     NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
-    self.programs = (segments != nil) ? [self.programComposition play_programsMatchingSegments:segments] : nil;
+    self.programs = segments ? [self.programComposition play_programsMatchingSegments:segments] : nil;
+    
+    self.programsTitleLabel.hidden = (self.programs.count == 0);
+    
     [self.programsTableView reloadData];
     [self updateSelectionForCurrentProgram];
 }
