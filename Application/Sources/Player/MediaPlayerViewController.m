@@ -160,6 +160,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIButton *livestreamButton;
 @property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
 
+@property (nonatomic, weak) IBOutlet UIView *currentProgramView;
+@property (nonatomic, weak) IBOutlet UIButton *currentProgramStartOverButton;
+@property (nonatomic, weak) IBOutlet UILabel *currentProgramTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *currentProgramSubtitleLabel;
+@property (nonatomic, weak) IBOutlet UIButton *currentProgramFavoriteButton;
+@property (nonatomic, weak) IBOutlet UIView *currentProgramSpacerView;
+
 @property (nonatomic, weak) IBOutlet UILabel *programsTitleLabel;
 @property (nonatomic, weak) IBOutlet UITableView *programsTableView;
 
@@ -333,6 +340,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.scrollView.hidden = YES;
     self.channelView.hidden = YES;
+    
+    self.currentProgramView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.currentProgramView.layer.masksToBounds = YES;
     
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
@@ -898,13 +908,41 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
 }
 
-- (void)reloadCurrentPrograms
+- (void)reloadProgramInformation
 {
+    NSString *subdivisionURN = self.letterboxController.subdivision.URN;
+    SRGProgram *currentProgram = [self programWithMediaURN:subdivisionURN];
+    if (currentProgram) {
+        self.currentProgramView.hidden = NO;
+        self.currentProgramSpacerView.hidden = NO;
+        
+        RadioChannel *radioChannel = [self radioChannel];
+        self.currentProgramView.backgroundColor = radioChannel.color;
+        
+        UIColor *foregroundColor = radioChannel.titleColor;
+        self.currentProgramTitleLabel.textColor = foregroundColor;
+        self.currentProgramSubtitleLabel.textColor = foregroundColor;
+        self.currentProgramStartOverButton.tintColor = foregroundColor;
+        self.currentProgramFavoriteButton.tintColor = foregroundColor;
+        
+        self.currentProgramTitleLabel.text = currentProgram.title;
+        self.currentProgramTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
+        
+        self.currentProgramSubtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
+        self.currentProgramSubtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        
+        [self updateFavoriteStatusForShow:currentProgram.show];
+    }
+    else {
+        self.currentProgramView.hidden = YES;
+        self.currentProgramSpacerView.hidden = YES;
+    }
+ 
     NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
     self.programs = segments ? [self.programComposition play_programsMatchingSegments:segments] : nil;
     
     self.programsTitleLabel.hidden = (self.programs.count == 0);
-    
+ 
     [self.programsTableView reloadData];
     [self updateSelectionForCurrentProgram];
 }
@@ -920,9 +958,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:mainMedia block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
-        [self reloadCurrentPrograms];
+        [self reloadProgramInformation];
     }];
-    [self reloadCurrentPrograms];
+    [self reloadProgramInformation];
 }
 
 - (void)unregisterChannelUpdates
@@ -1073,13 +1111,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGMedia *mainChapterMedia = [self mainChapterMedia];
     if (mainChapterMedia.contentType == SRGContentTypeLivestream) {
-        SRGProgram *currentProgram = self.letterboxController.channel.currentProgram;
-        if ([self isSliderDateContainedInProgram:currentProgram]) {
-            return currentProgram.show;
-        }
-        else {
-            return nil;
-        }
+        NSString *subdivisionURN = self.letterboxController.subdivision.URN;
+        return [self programWithMediaURN:subdivisionURN].show;
     }
     else {
         return mainChapterMedia.show;
@@ -1186,9 +1219,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)updateFavoriteStatusForShow:(SRGShow *)show
 {
     BOOL isFavorite = FavoritesContainsShow(show);
-    [self.favoriteButton setImage:isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"] forState:UIControlStateNormal];
+    UIImage *image = isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"];
+    [self.favoriteButton setImage:image forState:UIControlStateNormal];
+    [self.currentProgramFavoriteButton setImage:image forState:UIControlStateNormal];
     
-    self.favoriteButton.accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite show label when in favorites, in the player view") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite show label when not in favorites, in the player view");
+    NSString *accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite show label when in favorites, in the player view") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite show label when not in favorites, in the player view");
+    self.favoriteButton.accessibilityLabel = accessibilityLabel;
+    self.currentProgramFavoriteButton.accessibilityLabel = accessibilityLabel;
 }
 
 - (void)updateGoogleCastButton
@@ -1270,10 +1307,19 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 #pragma mar Program list
 
+- (SRGProgram *)programWithMediaURN:(NSString *)mediaURN
+{
+    if (! mediaURN) {
+        return nil;
+    }
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGProgram.new, mediaURN), mediaURN];
+    return [self.programs filteredArrayUsingPredicate:predicate].firstObject;
+}
+
 - (NSIndexPath *)indexPathForProgramWithMediaURN:(NSString *)mediaURN
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGProgram.new, mediaURN), mediaURN];
-    SRGProgram *program = [self.programs filteredArrayUsingPredicate:predicate].firstObject;
+    SRGProgram *program = [self programWithMediaURN:mediaURN];
     if (! program) {
         return nil;
     }
@@ -1803,6 +1849,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self setDetailsExpanded:! self.detailsExpanded animated:YES];
 }
 
+- (IBAction)startOver:(id)sender
+{
+    [self.letterboxController startOverWithCompletionHandler:nil];
+}
+
 - (IBAction)openShow:(id)sender
 {
     SRGShow *show = [self mainShow];
@@ -1833,6 +1884,27 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
     [appDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     [appDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
+}
+
+- (IBAction)toggleFavorite:(id)sender
+{
+    SRGShow *show = [self mainShow];
+    if (! show) {
+        return;
+    }
+    
+    FavoritesToggleShow(show);
+    [self updateFavoriteStatusForShow:show];
+    
+    BOOL isFavorite = FavoritesContainsShow(show);
+    
+    AnalyticsTitle analyticsTitle = isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
+    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+    labels.source = AnalyticsSourceButton;
+    labels.value = show.URN;
+    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
+    
+    [Banner showFavorite:isFavorite forItemWithName:show.title inViewController:self];
 }
 
 - (IBAction)selectLivestreamMedia:(id)sender
@@ -1941,27 +2013,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
 }
 
-- (IBAction)toggleFavorite:(UIGestureRecognizer *)gestureRecognizer
-{
-    SRGShow *show = [self mainShow];
-    if (! show) {
-        return;
-    }
-    
-    FavoritesToggleShow(show);
-    [self updateFavoriteStatusForShow:show];
-    
-    BOOL isFavorite = FavoritesContainsShow(show);
-    
-    AnalyticsTitle analyticsTitle = isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = AnalyticsSourceButton;
-    labels.value = show.URN;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-    
-    [Banner showFavorite:isFavorite forItemWithName:show.title inViewController:self];
-}
-
 #pragma mark Notifications
 
 - (void)mediaMetadataDidChange:(NSNotification *)notification
@@ -1985,7 +2036,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
-    [self reloadCurrentPrograms];
+    [self reloadProgramInformation];
     
     // When switching from video to audio or conversely, ensure the UI togglability is correct
     if (media.mediaType != previousMedia.mediaType) {
