@@ -19,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *waveformImageView;
 
 @end
 
@@ -39,6 +40,8 @@
     
     self.titleLabel.textColor = UIColor.whiteColor;
     self.subtitleLabel.textColor = UIColor.whiteColor;
+    
+    self.waveformImageView.hidden = YES;
 }
 
 - (void)prepareForReuse
@@ -46,6 +49,20 @@
     [super prepareForReuse];
         
     [self.thumbnailImageView play_resetImage];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+    
+    if (selected) {
+        self.waveformImageView.hidden = NO;
+        [self.waveformImageView play_startAnimatingDownloading48WithTintColor:UIColor.whiteColor];
+    }
+    else {
+        self.waveformImageView.hidden = YES;
+        [self.waveformImageView play_stopAnimating];
+    }
 }
 
 #pragma mark Accessibility
