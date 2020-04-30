@@ -149,7 +149,7 @@
                             </stackView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text=" Recent " textAlignment="natural" lineBreakMode="wordWrap" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRl-5f-zCt" userLabel="Recent Label">
                                 <rect key="frame" x="5" y="5" width="46.5" height="18"/>
-                                <color key="backgroundColor" red="0.74901960779999999" green="0.14901960780000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="AY9-Tc-ybK"/>
                                 </constraints>

@@ -77,7 +77,7 @@
     
     self.recentLabel.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.recentLabel.layer.masksToBounds = YES;
-    self.recentLabel.backgroundColor = UIColor.play_redColor;
+    self.recentLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     self.recentLabel.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"Last played", @"Label on recently played livestreams").uppercaseString];
     self.recentLabel.hidden = YES;
     
