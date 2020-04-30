@@ -1309,9 +1309,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     else {
         NSIndexPath *indexPath = self.programsTableView.indexPathForSelectedRow;
-        [self.programsTableView deselectRowAtIndexPath:indexPath animated:NO];
+        if (indexPath){
+            [self.programsTableView deselectRowAtIndexPath:indexPath animated:NO];
+        }
     }
-    
 }
 
 - (void)updateSelectionForCurrentProgram
@@ -1568,6 +1569,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 }
 
 #pragma mark UITableViewDelegate protocol
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 46.f + LayoutStandardMargin;
+}
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ProgramTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {

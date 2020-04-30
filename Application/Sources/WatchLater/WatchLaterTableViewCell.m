@@ -381,7 +381,7 @@
     return [NSValue valueWithCGRect:imageViewFrameInSelf];
 }
 
-#pragma mark Notificationsfa
+#pragma mark Notifications
 
 - (void)downloadStateDidChange:(NSNotification *)notification
 {
