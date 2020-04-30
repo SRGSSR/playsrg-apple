@@ -745,6 +745,16 @@
 		6F3A47B31DD19A7B00C79E67 /* RTSResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B21DD19A7B00C79E67 /* RTSResources.xcassets */; };
 		6F3A47B51DD19A8500C79E67 /* SRFResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B41DD19A8500C79E67 /* SRFResources.xcassets */; };
 		6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B61DD19A9100C79E67 /* SWIResources.xcassets */; };
+		6F3B0221245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */; };
+		6F3B0222245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */; };
+		6F3B0223245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */; };
+		6F3B0224245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */; };
+		6F3B0225245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */; };
+		6F3B0227245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */; };
+		6F3B0228245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */; };
+		6F3B0229245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */; };
+		6F3B022A245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */; };
+		6F3B022B245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */; };
 		6F3E0A0123D055DD009B00C1 /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */; };
 		6F3E0A0223D055DD009B00C1 /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */; };
 		6F3E0A0323D055DD009B00C1 /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */; };
@@ -1947,6 +1957,9 @@
 		6F3A47B21DD19A7B00C79E67 /* RTSResources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RTSResources.xcassets; sourceTree = "<group>"; };
 		6F3A47B41DD19A8500C79E67 /* SRFResources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SRFResources.xcassets; sourceTree = "<group>"; };
 		6F3A47B61DD19A9100C79E67 /* SWIResources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SWIResources.xcassets; sourceTree = "<group>"; };
+		6F3B021F245AAE1B00C5A8D7 /* ProgramTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgramTableViewCell.h; sourceTree = "<group>"; };
+		6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProgramTableViewCell.m; sourceTree = "<group>"; };
+		6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramTableViewCell.xib; sourceTree = "<group>"; };
 		6F3E09FF23D055DD009B00C1 /* SettingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingTableViewCell.h; sourceTree = "<group>"; };
 		6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewCell.m; sourceTree = "<group>"; };
 		6F4091FF22DCF43D005F3850 /* Previewing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Previewing.m; sourceTree = "<group>"; };
@@ -3518,6 +3531,9 @@
 				6FB3C1A51DBCE783008160B4 /* MediaPreviewViewController.h */,
 				6FB3C1A61DBCE783008160B4 /* MediaPreviewViewController.m */,
 				6FB3C1A71DBCE783008160B4 /* MediaPreviewViewController.storyboard */,
+				6F3B021F245AAE1B00C5A8D7 /* ProgramTableViewCell.h */,
+				6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */,
+				6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */,
 				6F5F4FC11DB10CFD0011CCA3 /* RelatedContentView.h */,
 				6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */,
 				6F5F4FC31DB10CFD0011CCA3 /* RelatedContentView.xib */,
@@ -4188,6 +4204,7 @@
 				08754F4B201BB01000458F3A /* InfoPlist.strings in Resources */,
 				0832BF1522BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
 				0837CEC61D3FD6E600A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
+				6F3B0227245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F40920D22DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
 				6F0A7F0520AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				0837CEC51D3FD6E600A1E089 /* SRGSSRType_Bd.ttf in Resources */,
@@ -4271,6 +4288,7 @@
 				081220B11DD07B7A00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6F4760051EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				E64BA4001D4A588B002C10D5 /* WebViewController.storyboard in Resources */,
+				6F3B0228245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6FBF24452148238300E576A2 /* SRGDiagnostics.bundle in Resources */,
 				6F12E4E822D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				0837CECF1D3FDAF900A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
@@ -4354,6 +4372,7 @@
 				6F4760061EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				086F8D6122984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
+				6F3B0229245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F0A7F0720AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FB0BB3720AEF5A7007C5D87 /* Onboarding.strings in Resources */,
 				0837CED81D3FDAFA00A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
@@ -4437,6 +4456,7 @@
 				6FF7BBB522A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				0837CEE11D3FDAFA00A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				082590F71F054ACE00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
+				6F3B022A245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				0837CEE01D3FDAFA00A1E089 /* SRGSSRType_Bd.ttf in Resources */,
 				6F340F4E220DA87600778CA3 /* SRGUserData.bundle in Resources */,
 				0837CEB01D3FAEE200A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
@@ -4520,6 +4540,7 @@
 				6F4760081EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				08DD9D6B1FFE6EFA00115906 /* ModuleHeaderView.xib in Resources */,
 				6F0C99912121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
+				6F3B022B245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F12E4EB22D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				0837CEEA1D3FDAFA00A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				6F7C89D320AAFC6100255A54 /* Onboardings.xcassets in Resources */,
@@ -5818,6 +5839,7 @@
 				6F4843CC23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6F12DB4621A3EFBF0054879D /* HistoryTableViewCell.m in Sources */,
 				6FA9ECBA20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */,
+				6F3B0221245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				08564B1D1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6F47607B1EB37D60003021EA /* UIImageView+PlaySRG.m in Sources */,
 				6F939F6F2090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
@@ -5919,6 +5941,7 @@
 				6F7EEBDF22DC40B7005E5A97 /* SearchBar.m in Sources */,
 				6F3E0A0223D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
 				6F7EEBF422DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */,
+				6F3B0222245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6F475FDD1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0841E70722F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
 				086F8D6A22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
@@ -6087,6 +6110,7 @@
 				6F7EEBE022DC40B7005E5A97 /* SearchBar.m in Sources */,
 				6F3E0A0323D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
 				6F7EEBF522DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */,
+				6F3B0223245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6F475FDE1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0841E70822F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
 				086F8D6B22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
@@ -6255,6 +6279,7 @@
 				6F7EEBE122DC40B7005E5A97 /* SearchBar.m in Sources */,
 				6F3E0A0423D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
 				6F7EEBF622DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */,
+				6F3B0224245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6F475FDF1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0841E70922F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
 				086F8D6C22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
@@ -6423,6 +6448,7 @@
 				6F7EEBE222DC40B7005E5A97 /* SearchBar.m in Sources */,
 				6F3E0A0523D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
 				6F7EEBF722DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */,
+				6F3B0225245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6F475FE01EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0841E70A22F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
 				086F8D6D22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,

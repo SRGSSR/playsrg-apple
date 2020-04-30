@@ -28,6 +28,7 @@
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
 #import "Playlist.h"
+#import "ProgramTableViewCell.h"
 #import "RelatedContentView.h"
 #import "ShowViewController.h"
 #import "SRGChannel+PlaySRG.h"
@@ -334,8 +335,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
-    // TODO: Proper cells
-    [self.programsTableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"cell"];
+    
+    self.programsTableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    self.programsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    NSString *programCellIdentifier = NSStringFromClass(ProgramTableViewCell.class);
+    UINib *programCellNib = [UINib nibWithNibName:programCellIdentifier bundle:nil];
+    [self.programsTableView registerNib:programCellNib forCellReuseIdentifier:programCellIdentifier];
     
     self.showWrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.showWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
@@ -1553,16 +1559,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: Proper cells
-    return [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(ProgramTableViewCell.class) forIndexPath:indexPath];
 }
 
 #pragma mark UITableViewDelegate protocol
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(ProgramTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SRGProgram *program = self.programs[indexPath.row];
-    cell.textLabel.text = program.title;
+    cell.program = self.programs[indexPath.row];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
