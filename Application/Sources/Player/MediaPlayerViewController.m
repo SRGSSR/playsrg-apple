@@ -1276,6 +1276,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)scrollToProgramWithMediaURN:(NSString *)mediaURN animated:(BOOL)animated
 {
+    if (self.programsTableView.dragging) {
+        return;
+    }
+    
     if (! mediaURN) {
         return;
     }
