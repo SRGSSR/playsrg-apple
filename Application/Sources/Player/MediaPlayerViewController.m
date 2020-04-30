@@ -591,6 +591,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             }
         }
         [self updatePlayerViewAspectRatioWithSize:size];
+        [self scrollToCurrentProgramAnimated:NO];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
         if (UIDeviceOrientationIsLandscape(deviceOrientation)) {
@@ -1287,7 +1288,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     void (^animations)(void) = ^{
         NSIndexPath *indexPath = [self indexPathForProgramWithMediaURN:mediaURN];
         if (indexPath) {
-            [self.programsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:animated];
+            [self.programsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:animated];
         }
     };
     
