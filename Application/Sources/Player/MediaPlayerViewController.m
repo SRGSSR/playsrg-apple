@@ -918,9 +918,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.currentProgramSpacerView.hidden = NO;
         
         RadioChannel *radioChannel = [self radioChannel];
-        self.currentProgramView.backgroundColor = radioChannel.color;
+        self.currentProgramView.backgroundColor = radioChannel.color ?: UIColor.whiteColor;
         
-        UIColor *foregroundColor = radioChannel.titleColor;
+        UIColor *foregroundColor = radioChannel.titleColor ?: UIColor.blackColor;
         self.currentProgramTitleLabel.textColor = foregroundColor;
         self.currentProgramSubtitleLabel.textColor = foregroundColor;
         self.currentProgramStartOverButton.tintColor = foregroundColor;
