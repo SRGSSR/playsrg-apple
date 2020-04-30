@@ -619,6 +619,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [super updateForContentSizeCategory];
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
+    [self reloadProgramInformation];
 }
 
 - (BOOL)accessibilityPerformEscape
