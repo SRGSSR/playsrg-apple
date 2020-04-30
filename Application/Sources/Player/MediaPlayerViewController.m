@@ -434,6 +434,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                                name:SRGLetterboxSegmentDidStartNotification
                                              object:self.letterboxController];
     [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(segmentDidEnd:)
+                                               name:SRGLetterboxSegmentDidEndNotification
+                                             object:self.letterboxController];
+    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationWillResignActive:)
                                                name:UIApplicationWillResignActiveNotification
                                              object:nil];
@@ -1299,14 +1303,15 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)updateSelectionForProgramWithMediaURN:(NSString *)mediaURN
 {
-    if (! mediaURN) {
-        return;
-    }
-    
-    NSIndexPath *indexPath = [self indexPathForProgramWithMediaURN:mediaURN];
+    NSIndexPath *indexPath = mediaURN ? [self indexPathForProgramWithMediaURN:mediaURN] : nil;
     if (indexPath) {
         [self.programsTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
+    else {
+        NSIndexPath *indexPath = self.programsTableView.indexPathForSelectedRow;
+        [self.programsTableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
+    
 }
 
 - (void)updateSelectionForCurrentProgram
@@ -2007,6 +2012,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     SRGSegment *segment = notification.userInfo[SRGMediaPlayerSegmentKey];
     [self scrollToProgramWithMediaURN:segment.URN animated:YES];
     [self updateSelectionForProgramWithMediaURN:segment.URN];
+}
+
+- (void)segmentDidEnd:(NSNotification *)notification
+{
+    [self updateSelectionForProgramWithMediaURN:nil];
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification
