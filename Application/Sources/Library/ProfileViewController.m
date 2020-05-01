@@ -155,7 +155,7 @@
 
 - (void)reloadData
 {
-    self.sectionInfos = ApplicationSectionInfo.profileApplicationSectionInfos;
+    self.sectionInfos = [ApplicationSectionInfo profileApplicationSectionInfosWithNotificationPreview:self.splitViewController.collapsed];
     [self reloadTableView];
     
     dispatch_async(dispatch_get_main_queue(), ^{
