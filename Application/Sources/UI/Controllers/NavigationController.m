@@ -187,7 +187,7 @@
         }
     }
     else {
-        // Natively performed when a navigation controller is directly embedd in a tab bar controller, but here triggered
+        // Natively performed when a navigation controller is directly embedded in a tab bar controller, but here triggered
         // explicitly for all other kinds of embedding as well (e.g. tab bar -> split view -> navigation).
         [self popToRootViewControllerAnimated:animated];
     }
