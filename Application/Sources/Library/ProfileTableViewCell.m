@@ -78,6 +78,13 @@
     [self updateIconImageViewAnimation];
 }
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+    
+    [self updateIconImageViewAnimation];
+}
+
 #pragma mark User interface
 
 - (void)updateIconImageViewAnimation
