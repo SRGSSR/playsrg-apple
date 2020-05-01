@@ -12,12 +12,15 @@
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity
 {
-    NSAssert(self.scrollDirection == UICollectionViewScrollDirectionHorizontal, @"Swimlanes must be a horizontal layout");
+    NSAssert(self.scrollDirection == UICollectionViewScrollDirectionHorizontal, @"Currently only implemented for horizontal layout direction");
     
-    // Do not snap at the end
+    // If already at the beginning or the end, stays there
     CGFloat maxX = fmaxf(self.collectionViewContentSize.width - CGRectGetWidth(self.collectionView.frame), 0.f);
     if (proposedContentOffset.x >= maxX) {
         return CGPointMake(maxX, proposedContentOffset.y);
+    }
+    else if (proposedContentOffset.x <= 0.f) {
+        return CGPointMake(0.f, proposedContentOffset.y);
     }
     
     // Extract attributes for all items which would be displayed at the proposed offset (sort them to have cells
@@ -43,7 +46,7 @@
     
     // No item displayed in the rect
     if (layoutAttributesInProposedRect.count == 0) {
-        return CGPointMake(fminf(fmaxf(proposedContentOffset.x, 0.f), maxX), proposedContentOffset.y);
+        return proposedContentOffset;
     }
     
     UICollectionViewLayoutAttributes *proposedLayoutAttributes = nil;
