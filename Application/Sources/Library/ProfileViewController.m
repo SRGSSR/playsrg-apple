@@ -108,6 +108,8 @@
     // Ensure latest notifications are displayed
     [self reloadData];
     
+    // On iPad where split screen can be used, load the secondary view afterwards (if loaded too early it will be collapsed
+    // automatically onto the primary at startup for narrow layouts, which is not what we want).
     if ([self play_isMovingToParentViewController] && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         [self openApplicationSectionInfo:self.sectionInfos.firstObject interactive:NO animated:NO];
     }
@@ -228,6 +230,7 @@
         return NO;
     }
     
+    // Do not reload a section if already the current one
     if (! self.splitViewController.collapsed && [applicationSectionInfo isEqual:self.currentSectionInfo]) {
         return YES;
     }
@@ -265,6 +268,7 @@
             [self updateSelection];
         }
         
+        // Transfer the VoiceOver focus automatically, as is for example done in the Settings application.
         if (! self.splitViewController.collapsed) {
             UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, viewController.view);
         }
@@ -282,12 +286,16 @@
     }
     
     NSUInteger index = [self.sectionInfos indexOfObject:self.currentSectionInfo];
-    if (index == NSNotFound) {
-        return;
+    if (index != NSNotFound) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    else {
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        if (indexPath) {
+            [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        }
+    }
 }
 
 #pragma mark ContentInsets protocol
