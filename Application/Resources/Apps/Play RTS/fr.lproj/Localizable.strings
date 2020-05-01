@@ -198,6 +198,8 @@
 /* Title of the alert view to keep autoplay permanently */
 "Keep autoplay?" = "Garder la lecture automatique ?";
 
+"Last played" = "Joué en dernier";
+
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Dernière synchronisation : %@";
 
@@ -352,8 +354,6 @@
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Le récepteur est en attente.";
-
-"Recently played" = "Joué en dernier";
 
 /* Hint displayed when no history is available */
 "Recently played medias will be displayed here" = "Les contenus récemment consultés apparaîtront ici";
