@@ -11,6 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ *  Lightweight split view controller subclass with standard behavior.
+ */
 @interface SplitViewController : UISplitViewController <PlayApplicationNavigation, TabBarActionable>
 
 @end

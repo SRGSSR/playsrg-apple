@@ -299,7 +299,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsZero;
+    return SRGIdentityService.currentIdentityService ? UIEdgeInsetsZero : LayoutStandardTableViewPaddingInsets;
 }
 
 #pragma mark PlayApplicationNavigation protocol
