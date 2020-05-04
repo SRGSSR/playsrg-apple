@@ -2981,6 +2981,9 @@
 				6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */,
 				08C68ECF1D38DEA100BB8AAA /* HomeViewController.h */,
 				08C68ED01D38DEA100BB8AAA /* HomeViewController.m */,
+				0887824723AD61D400629312 /* HomeLiveMediaCollectionViewCell.h */,
+				0887824823AD61D500629312 /* HomeLiveMediaCollectionViewCell.m */,
+				0887824923AD61D500629312 /* HomeLiveMediaCollectionViewCell.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3224,9 +3227,6 @@
 				6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */,
 				6F88139323D85DD600A00826 /* GoogleCastBarButtonItem.h */,
 				6F88139423D85DD600A00826 /* GoogleCastBarButtonItem.m */,
-				0887824723AD61D400629312 /* HomeLiveMediaCollectionViewCell.h */,
-				0887824823AD61D500629312 /* HomeLiveMediaCollectionViewCell.m */,
-				0887824923AD61D500629312 /* HomeLiveMediaCollectionViewCell.xib */,
 				6F475FAC1EB37BC6003021EA /* MediaCollectionViewCell.h */,
 				6F475FAD1EB37BC6003021EA /* MediaCollectionViewCell.m */,
 				6F475FAE1EB37BC6003021EA /* MediaCollectionViewCell.xib */,
