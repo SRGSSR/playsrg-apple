@@ -434,7 +434,7 @@
                                         <rect key="frame" x="4" y="0.0" width="406" height="619"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TRa-Gj-haE" userLabel="Channel Info Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="406" height="188.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="406" height="142"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96L-N2-RWf">
                                                         <rect key="frame" x="10" y="12" width="386" height="58"/>
@@ -538,25 +538,12 @@
                                                             <outletCollection property="gestureRecognizers" destination="Aqt-OQ-HsC" appends="YES" id="yKE-zg-p6p"/>
                                                         </connections>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmc-vv-FdC">
-                                                        <rect key="frame" x="10" y="138" width="386" height="10"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="10" id="wmf-0A-Vkk"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;programs&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzl-ND-r55" userLabel="Programs Title">
-                                                        <rect key="frame" x="10" y="156" width="386" height="20.5"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <edgeInsets key="layoutMargins" top="12" left="10" bottom="12" right="10"/>
                                             </stackView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wbx-pt-wy2">
-                                                <rect key="frame" x="10" y="188.5" width="386" height="430.5"/>
+                                                <rect key="frame" x="10" y="142" width="386" height="477"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </tableView>
                                         </subviews>
@@ -613,7 +600,6 @@
                         <outlet property="closeButton" destination="URR-EB-goh" id="GT8-V7-lKB"/>
                         <outlet property="collapsedDetailsLabelsHeightConstraint" destination="O9i-0d-HTk" id="7MN-Zo-Xo2"/>
                         <outlet property="currentProgramFavoriteButton" destination="hBr-jC-7uQ" id="ffS-yK-1bo"/>
-                        <outlet property="currentProgramSpacerView" destination="kmc-vv-FdC" id="Pf4-ee-RIU"/>
                         <outlet property="currentProgramStartOverButton" destination="H2D-z2-dMr" id="pxz-pR-UJB"/>
                         <outlet property="currentProgramSubtitleLabel" destination="IIC-qR-rrp" id="uBX-DM-Vba"/>
                         <outlet property="currentProgramTitleLabel" destination="G8U-yX-Q0a" id="kSk-dP-6ET"/>
@@ -641,7 +627,6 @@
                         <outlet property="playerTopConstraint" destination="ESI-Dr-UyW" id="RCb-YM-KoD"/>
                         <outlet property="playerView" destination="yDa-0T-uNV" id="Hkl-v6-yZ2"/>
                         <outlet property="programsTableView" destination="Wbx-pt-wy2" id="CHH-OH-EYB"/>
-                        <outlet property="programsTitleLabel" destination="qzl-ND-r55" id="Xkq-tW-sBw"/>
                         <outlet property="propertiesStackView" destination="3ln-Rh-6yE" id="K95-zc-cc0"/>
                         <outlet property="propertiesTopLineSpacerView" destination="iQk-RU-8Cd" id="wBO-lC-hSG"/>
                         <outlet property="pullDownGestureRecognizer" destination="bXa-UN-Lpw" id="u5Z-M7-fvd"/>

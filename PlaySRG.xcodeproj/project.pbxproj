@@ -1191,6 +1191,16 @@
 		6FBF24462148238300E576A2 /* SRGDiagnostics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF24432148238300E576A2 /* SRGDiagnostics.bundle */; };
 		6FBF24472148238300E576A2 /* SRGDiagnostics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF24432148238300E576A2 /* SRGDiagnostics.bundle */; };
 		6FBF24482148238300E576A2 /* SRGDiagnostics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FBF24432148238300E576A2 /* SRGDiagnostics.bundle */; };
+		6FC0C695245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
+		6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
+		6FC0C697245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
+		6FC0C698245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
+		6FC0C699245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
+		6FC0C69A245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */; };
+		6FC0C69B245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */; };
+		6FC0C69C245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */; };
+		6FC0C69D245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */; };
+		6FC0C69E245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */; };
 		6FC1FA882292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
 		6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
 		6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
@@ -2039,6 +2049,7 @@
 		6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsBaseViewController.m; sourceTree = "<group>"; };
 		6F556DB020D1174100C3573A /* NotificationService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NotificationService-Info.plist"; sourceTree = "<group>"; };
 		6F5866491DD226EE005DAFE4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		6F5CAC86245FF04C0058F9B0 /* ProgramHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgramHeaderView.h; sourceTree = "<group>"; };
 		6F5F4FC11DB10CFD0011CCA3 /* RelatedContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedContentView.h; sourceTree = "<group>"; };
 		6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedContentView.m; sourceTree = "<group>"; };
 		6F5F4FC31DB10CFD0011CCA3 /* RelatedContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelatedContentView.xib; sourceTree = "<group>"; };
@@ -2118,6 +2129,8 @@
 		6FBA2ECF20D11A65005EB21D /* Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Application-Info.plist"; sourceTree = "<group>"; };
 		6FBF243D2148232A00E576A2 /* SRGDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGDiagnostics.framework; path = Carthage/Build/iOS/Static/SRGDiagnostics.framework; sourceTree = "<group>"; };
 		6FBF24432148238300E576A2 /* SRGDiagnostics.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGDiagnostics.bundle; path = Carthage/Build/iOS/Static/SRGDiagnostics.framework/SRGDiagnostics.bundle; sourceTree = "<group>"; };
+		6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramHeaderView.m; sourceTree = "<group>"; };
+		6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgramHeaderView.xib; sourceTree = "<group>"; };
 		6FC1FA862292E3460036CB34 /* NSSet+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+PlaySRG.h"; sourceTree = "<group>"; };
 		6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+PlaySRG.m"; sourceTree = "<group>"; };
 		6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGProgram+PlaySRG.h"; sourceTree = "<group>"; };
@@ -3534,6 +3547,9 @@
 				6F3B021F245AAE1B00C5A8D7 /* ProgramTableViewCell.h */,
 				6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */,
 				6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */,
+				6F5CAC86245FF04C0058F9B0 /* ProgramHeaderView.h */,
+				6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */,
+				6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */,
 				6F5F4FC11DB10CFD0011CCA3 /* RelatedContentView.h */,
 				6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */,
 				6F5F4FC31DB10CFD0011CCA3 /* RelatedContentView.xib */,
@@ -4190,6 +4206,7 @@
 			files = (
 				6FD88F7C22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				08C690551D38E0BE00BB8AAA /* iTunesArtwork@2x in Resources */,
+				6FC0C69A245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
 				E6DB5F2E1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				0837CECB1D3FD6E600A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				6F3A47B51DD19A8500C79E67 /* SRFResources.xcassets in Resources */,
@@ -4274,6 +4291,7 @@
 			files = (
 				6F3A47B31DD19A7B00C79E67 /* RTSResources.xcassets in Resources */,
 				08C691291D39089700BB8AAA /* CommonImages.xcassets in Resources */,
+				6FC0C69B245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
 				E6DB5F2F1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				6F0A7F0620AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				0837CED41D3FDAF900A1E089 /* SRGSSRType_Rg.ttf in Resources */,
@@ -4358,6 +4376,7 @@
 			files = (
 				08C6912A1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				08DD9D631FFE6EF900115906 /* ModuleHeaderView.xib in Resources */,
+				6FC0C69C245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
 				E6DB5F301D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				6F0C998F2121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
 				0837CEDD1D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
@@ -4442,6 +4461,7 @@
 			files = (
 				08C6912B1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				E6DB5F311D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
+				6FC0C69D245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
 				0837CEE61D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				081DAA281E0C1FC800018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
@@ -4526,6 +4546,7 @@
 			files = (
 				08C6912C1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				6FBF24482148238300E576A2 /* SRGDiagnostics.bundle in Resources */,
+				6FC0C69E245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
 				E6DB5F321D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				0837CEEF1D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				0804917A22832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
@@ -5883,6 +5904,7 @@
 				0821D53E227F5ED300FC091F /* DeepLinkService.m in Sources */,
 				08B77AF0240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				0875851823A0025F00FA7207 /* ProfileTableViewCell.m in Sources */,
+				6FC0C695245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */,
 				087584EF23A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6FAAF77C20CABA3A00BB58A3 /* Notification.m in Sources */,
@@ -5949,6 +5971,7 @@
 				6FD88F7822D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B642F21A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633DF1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				089EA019201148F40070E11A /* TimerTarget.m in Sources */,
 				6FAF43011EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
 				6F00875E219AA888004BD6FF /* StoreReview.m in Sources */,
@@ -6118,6 +6141,7 @@
 				6FD88F7922D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B643021A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633E01FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6FC0C697245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				089EA01A201148F50070E11A /* TimerTarget.m in Sources */,
 				6FAF43021EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
 				6F00875F219AA888004BD6FF /* StoreReview.m in Sources */,
@@ -6287,6 +6311,7 @@
 				6FD88F7A22D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B643121A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633E11FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6FC0C698245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				089EA01B201148F50070E11A /* TimerTarget.m in Sources */,
 				6FAF43031EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
 				6F008760219AA888004BD6FF /* StoreReview.m in Sources */,
@@ -6456,6 +6481,7 @@
 				6FD88F7B22D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B643221A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633E21FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6FC0C699245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				089EA01C201148F60070E11A /* TimerTarget.m in Sources */,
 				6FAF43041EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
 				6F008761219AA888004BD6FF /* StoreReview.m in Sources */,

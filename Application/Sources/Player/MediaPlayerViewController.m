@@ -28,6 +28,7 @@
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
 #import "Playlist.h"
+#import "ProgramHeaderView.h"
 #import "ProgramTableViewCell.h"
 #import "RelatedContentView.h"
 #import "ShowViewController.h"
@@ -165,9 +166,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UILabel *currentProgramTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *currentProgramSubtitleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *currentProgramFavoriteButton;
-@property (nonatomic, weak) IBOutlet UIView *currentProgramSpacerView;
 
-@property (nonatomic, weak) IBOutlet UILabel *programsTitleLabel;
 @property (nonatomic, weak) IBOutlet UITableView *programsTableView;
 
 // Switching to and from full-screen is made by adjusting the priority of constraints at the top and bottom of the player view
@@ -353,6 +352,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     NSString *programCellIdentifier = NSStringFromClass(ProgramTableViewCell.class);
     UINib *programCellNib = [UINib nibWithNibName:programCellIdentifier bundle:nil];
     [self.programsTableView registerNib:programCellNib forCellReuseIdentifier:programCellIdentifier];
+    
+    NSString *programHeaderIdentifier = NSStringFromClass(ProgramHeaderView.class);
+    UINib *programHeaderViewNib = [UINib nibWithNibName:programHeaderIdentifier bundle:nil];
+    [self.programsTableView registerNib:programHeaderViewNib forHeaderFooterViewReuseIdentifier:programHeaderIdentifier];
     
     self.showWrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.showWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
@@ -764,9 +767,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         
         self.livestreamView.hidden = [self isLivestreamButtonHidden];
         self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-        
-        self.programsTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
-        self.programsTitleLabel.text = NSLocalizedString(@"Previously", @"Title displayed at the top of the previous program list");
     }
     else {
         self.scrollView.hidden = NO;
@@ -915,7 +915,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     SRGProgram *currentProgram = [self programWithMediaURN:subdivisionURN];
     if (currentProgram) {
         self.currentProgramView.hidden = NO;
-        self.currentProgramSpacerView.hidden = NO;
         
         RadioChannel *radioChannel = [self radioChannel];
         self.currentProgramView.backgroundColor = radioChannel.color ?: UIColor.whiteColor;
@@ -936,20 +935,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     else {
         self.currentProgramView.hidden = YES;
-        self.currentProgramSpacerView.hidden = YES;
     }
  
     BOOL hadPrograms = (self.programs.count != 0);
     NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
     self.programs = segments ? [self.programComposition play_programsMatchingSegments:segments] : nil;
-    
-    BOOL hasPrograms = self.programs.count != 0;
-    self.programsTitleLabel.hidden = ! hasPrograms;
  
     [self.programsTableView reloadData];
     [self updateSelectionForCurrentProgram];
     
-    if (! hadPrograms && hasPrograms) {
+    if (! hadPrograms && self.programs.count != 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.programsTableView flashScrollIndicators];
         });
@@ -1651,6 +1646,28 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGProgram *program = self.programs[indexPath.row];
     [self.letterboxController switchToURN:program.mediaURN withCompletionHandler:nil];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (self.programs.count != 0) {
+        return 50.f;
+    }
+    else {
+        return 0.f;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (self.programs.count != 0) {
+        ProgramHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(ProgramHeaderView.class)];
+        headerView.title = NSLocalizedString(@"Previously", @"Header for the program section dislaying past programs");
+        return headerView;
+    }
+    else {
+        return nil;
+    }
 }
 
 #pragma mark UIViewControllerTransitioningDelegate protocol

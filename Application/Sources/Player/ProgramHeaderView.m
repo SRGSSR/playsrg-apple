@@ -4,17 +4,19 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "TranslucentTitleHeaderView.h"
+#import "ProgramHeaderView.h"
+
+#import "UIColor+PlaySRG.h"
 
 #import <SRGAppearance/SRGAppearance.h>
 
-@interface TranslucentTitleHeaderView ()
+@interface ProgramHeaderView ()
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
 @end
 
-@implementation TranslucentTitleHeaderView
+@implementation ProgramHeaderView
 
 #pragma mark Overrides
 
@@ -22,6 +24,7 @@
 {
     [super awakeFromNib];
     
+    self.contentView.backgroundColor = UIColor.play_blackColor;
     self.titleLabel.textColor = UIColor.whiteColor;
 }
 
