@@ -11,6 +11,7 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
+#import "ChannelService.h"
 #import "Download.h"
 #import "GoogleCast.h"
 #import "History.h"
@@ -37,6 +38,7 @@
 @interface MediaPreviewViewController ()
 
 @property (nonatomic) SRGMedia *media;
+@property (nonatomic) SRGProgramComposition *programComposition;
 
 @property (nonatomic) IBOutlet SRGLetterboxController *letterboxController;      // top object, strong
 @property (nonatomic, weak) IBOutlet SRGLetterboxView *letterboxView;
@@ -104,7 +106,6 @@
     [self.letterboxView setUserInterfaceHidden:YES animated:NO togglable:NO];
     [self.letterboxView setTimelineAlwaysHidden:YES animated:NO];
     
-    [self reloadData];
     [self updateFonts];
 }
 
@@ -121,6 +122,12 @@
             
             CGFloat width = CGRectGetWidth(self.view.frame);
             self.preferredContentSize = CGSizeMake(width, factor * 9.f / 16.f * width);
+            
+            [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:self.media block:^(SRGProgramComposition * _Nullable programComposition) {
+                self.programComposition = programComposition;
+                [self reloadData];
+            }];
+            [self reloadData];
         }
         
         self.previousAudioSessionCategory = [AVAudioSession sharedInstance].category;
@@ -137,6 +144,8 @@
     [super viewDidDisappear:animated];
     
     if ([self play_isMovingFromParentViewController]) {
+        [ChannelService.sharedService unregisterObserver:self];
+        
         // Restore playback on exit. Works well with cancelled peek, as well as with pop, without additional checks. Wait
         // a little bit since peek view dismissal occurs just before an action item has been selected. Moreover, having
         // a small delay sounds better.
@@ -291,33 +300,24 @@
 
 - (void)reloadData
 {
-    if (self.media.contentType == SRGContentTypeLivestream) {
-        [self.mediaInfoStackView play_setHidden:YES];
+    SRGChannel *channel = self.programComposition.channel;
+    if (channel) {
+        [self.channelInfoStackView play_setHidden:NO];
         
-        SRGChannel *channel = self.letterboxController.channel;
-        if (channel) {
-            [self.channelInfoStackView play_setHidden:NO];
+        SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, NSDate.date);
+        if (currentProgram) {
+            self.titleLabel.text = currentProgram.title;
             
-            SRGProgram *currentProgram = channel.currentProgram;
-            if (currentProgram) {
-                self.titleLabel.text = currentProgram.title;
-                
-                self.channelLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-                self.channelLabel.text = channel.title;
-                
-                self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-                self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
-            }
-            else {
-                self.titleLabel.text = channel.title;
-                self.channelLabel.text = nil;
-                self.programTimeLabel.text = nil;
-            }
+            self.channelLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+            self.channelLabel.text = channel.title;
+            
+            self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+            self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
         }
         else {
-            self.titleLabel.text = self.media.title;
-            
-            [self.channelInfoStackView play_setHidden:YES];
+            self.titleLabel.text = channel.title;
+            self.channelLabel.text = nil;
+            self.programTimeLabel.text = nil;
         }
     }
     else {

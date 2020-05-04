@@ -142,8 +142,8 @@
 
 - (NSString *)accessibilityLabel
 {
-    if (self.media.contentType == SRGContentTypeLivestream) {
-        SRGChannel *channel = self.programComposition.channel;
+    SRGChannel *channel = self.programComposition.channel;
+    if (channel) {
         NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ live", @"Live content label, with a channel title"), channel.title];
         if (! self.recentLabel.hidden) {
             [accessibilityLabel appendFormat:@", %@", PlaySRGAccessibilityLocalizedString(@"Last played", @"Label on recently played livestreams")];
@@ -244,9 +244,8 @@
     
     [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
     
-    if (self.programComposition) {
-        SRGChannel *channel = self.programComposition.channel;
-        
+    SRGChannel *channel = self.programComposition.channel;
+    if (channel) {
         UIImage *logoImage = channel.play_banner22Image;
         self.logoImageView.image = logoImage;
         self.logoImageView.hidden = (logoImage == nil);
