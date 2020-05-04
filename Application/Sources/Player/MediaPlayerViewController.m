@@ -939,13 +939,21 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.currentProgramSpacerView.hidden = YES;
     }
  
+    BOOL hadPrograms = (self.programs.count != 0);
     NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
     self.programs = segments ? [self.programComposition play_programsMatchingSegments:segments] : nil;
     
-    self.programsTitleLabel.hidden = (self.programs.count == 0);
+    BOOL hasPrograms = self.programs.count != 0;
+    self.programsTitleLabel.hidden = ! hasPrograms;
  
     [self.programsTableView reloadData];
     [self updateSelectionForCurrentProgram];
+    
+    if (! hadPrograms && hasPrograms) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.programsTableView flashScrollIndicators];
+        });
+    }
 }
 
 #pragma mark Channel updates
