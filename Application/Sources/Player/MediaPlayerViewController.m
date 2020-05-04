@@ -935,6 +935,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.currentProgramSubtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
         self.currentProgramSubtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         
+        self.currentProgramFavoriteButton.hidden = (currentProgram.show == nil);
         [self updateFavoriteStatusForShow:currentProgram.show];
     }
     else {
