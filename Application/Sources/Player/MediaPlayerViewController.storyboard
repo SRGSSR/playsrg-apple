@@ -466,7 +466,7 @@
                                                             <constraint firstAttribute="trailing" secondItem="HA6-0V-M1C" secondAttribute="trailing" priority="999" constant="-2" id="qir-I0-7qX"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jXJ-O2-0II">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jXJ-O2-0II" customClass="GradientView">
                                                         <rect key="frame" x="10" y="78" width="386" height="52"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="M7A-GT-jh5">

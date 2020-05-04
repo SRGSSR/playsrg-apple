@@ -16,6 +16,7 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *resourceUid;      // Local unique identifier for referencing resources in a common way
 @property (nonatomic) UIColor *color;
+@property (nonatomic) UIColor *color2;
 @property (nonatomic) UIColor *titleColor;
 @property (nonatomic, getter=hasDarkStatusBar) BOOL darkStatusBar;
 @property (nonatomic, getter=isBadgeStrokeHidden) BOOL badgeStrokeHidden;
@@ -53,6 +54,14 @@
         self.color = [UIColor srg_colorFromHexadecimalString:colorValue];
         if (! self.color) {
             return nil;
+        }
+        
+        id color2Value = dictionary[@"color2"];
+        if ([color2Value isKindOfClass:NSString.class]) {
+            self.color2 = [UIColor srg_colorFromHexadecimalString:color2Value] ?: self.color;
+        }
+        else {
+            self.color2 = self.color;
         }
         
         self.homeSections = dictionary[@"homeSections"];

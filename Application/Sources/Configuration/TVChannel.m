@@ -8,11 +8,16 @@
 
 #import "UIColor+PlaySRG.h"
 
+#import <SRGAppearance/SRGAppearance.h>
+
 @interface TVChannel ()
 
 @property (nonatomic, copy) NSString *uid;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *resourceUid;      // Local unique identifier for referencing resources in a common way
+@property (nonatomic) UIColor *color;
+@property (nonatomic) UIColor *color2;
+@property (nonatomic) UIColor *titleColor;
 
 @end
 
@@ -36,6 +41,30 @@
         self.resourceUid = dictionary[@"resourceUid"];
         if (! [self.resourceUid isKindOfClass:NSString.class]) {
             return nil;
+        }
+        
+        id colorValue = dictionary[@"color"];
+        if ([colorValue isKindOfClass:NSString.class]) {
+            self.color = [UIColor srg_colorFromHexadecimalString:colorValue] ?: UIColor.grayColor;
+        }
+        else {
+            self.color = UIColor.grayColor;
+        }
+        
+        id color2Value = dictionary[@"color2"];
+        if ([color2Value isKindOfClass:NSString.class]) {
+            self.color2 = [UIColor srg_colorFromHexadecimalString:color2Value] ?: self.color;
+        }
+        else {
+            self.color2 = self.color;
+        }
+        
+        id titleColorValue = dictionary[@"titleColor"];
+        if ([titleColorValue isKindOfClass:NSString.class]) {
+            self.titleColor = [UIColor srg_colorFromHexadecimalString:titleColorValue] ?: UIColor.whiteColor;
+        }
+        else {
+            self.titleColor = UIColor.whiteColor;
         }
     }
     return self;

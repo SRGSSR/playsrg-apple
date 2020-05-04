@@ -38,17 +38,22 @@ OBJC_EXPORT NSString * _Nullable RadioChannelImageOverridePath(RadioChannel * _N
 @property (nonatomic, readonly, copy) NSString *uid;
 
 /**
- *  The radio channel name.
+ *  The channel name.
  */
 @property (nonatomic, readonly, copy) NSString *name;
 
 /**
- *  The radio channel primary color.
+ *  The channel primary color.
  */
 @property (nonatomic, readonly) UIColor *color;
 
 /**
- *  The radio channel title color (white by default).
+ *  The channel secondary color.
+ */
+@property (nonatomic, readonly) UIColor *color2;
+
+/**
+ *  The channel title color (white by default).
  */
 @property (nonatomic, readonly) UIColor *titleColor;
 

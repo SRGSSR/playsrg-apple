@@ -1236,6 +1236,11 @@
 		6FD633EC1FFD151000875BE5 /* MiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633E91FFD151000875BE5 /* MiniPlayerView.m */; };
 		6FD633ED1FFD151000875BE5 /* MiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633E91FFD151000875BE5 /* MiniPlayerView.m */; };
 		6FD633EE1FFD151000875BE5 /* MiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633E91FFD151000875BE5 /* MiniPlayerView.m */; };
+		6FD68618246052A100B8018A /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD68617246052A100B8018A /* GradientView.m */; };
+		6FD68619246052A100B8018A /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD68617246052A100B8018A /* GradientView.m */; };
+		6FD6861A246052A100B8018A /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD68617246052A100B8018A /* GradientView.m */; };
+		6FD6861B246052A100B8018A /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD68617246052A100B8018A /* GradientView.m */; };
+		6FD6861C246052A100B8018A /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD68617246052A100B8018A /* GradientView.m */; };
 		6FD88F7722D3618F008859EF /* SearchSettingsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */; };
 		6FD88F7822D3618F008859EF /* SearchSettingsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */; };
 		6FD88F7922D3618F008859EF /* SearchSettingsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */; };
@@ -2143,6 +2148,8 @@
 		6FD633DD1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleCastMiniPlayerView.xib; sourceTree = "<group>"; };
 		6FD633E81FFD151000875BE5 /* MiniPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiniPlayerView.h; sourceTree = "<group>"; };
 		6FD633E91FFD151000875BE5 /* MiniPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiniPlayerView.m; sourceTree = "<group>"; };
+		6FD68616246052A100B8018A /* GradientView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		6FD68617246052A100B8018A /* GradientView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 		6FD88F7422D3618F008859EF /* SearchSettingsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingsHeaderView.h; sourceTree = "<group>"; };
 		6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingsHeaderView.m; sourceTree = "<group>"; };
 		6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchSettingsHeaderView.xib; sourceTree = "<group>"; };
@@ -3227,6 +3234,8 @@
 				6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */,
 				6F88139323D85DD600A00826 /* GoogleCastBarButtonItem.h */,
 				6F88139423D85DD600A00826 /* GoogleCastBarButtonItem.m */,
+				6FD68616246052A100B8018A /* GradientView.h */,
+				6FD68617246052A100B8018A /* GradientView.m */,
 				6F475FAC1EB37BC6003021EA /* MediaCollectionViewCell.h */,
 				6F475FAD1EB37BC6003021EA /* MediaCollectionViewCell.m */,
 				6F475FAE1EB37BC6003021EA /* MediaCollectionViewCell.xib */,
@@ -5760,6 +5769,7 @@
 				0832BF1022BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				082910AE239E90D200D168F4 /* TabBarController.m in Sources */,
 				E6E2DF261D6AD32800791EDE /* ShowHeaderView.m in Sources */,
+				6FD68618246052A100B8018A /* GradientView.m in Sources */,
 				6FD88F8322D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F80E9C221A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				E6DB5F281D66E1550057094B /* ShowCollectionViewCell.m in Sources */,
@@ -6010,6 +6020,7 @@
 				6F0EDA662448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F80E9C321A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91A1FAC34D600A58F3B /* ContentInsets.m in Sources */,
+				6FD68619246052A100B8018A /* GradientView.m in Sources */,
 				6F93DE0E20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
 				6F861AF91DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E123D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
@@ -6180,6 +6191,7 @@
 				6F0EDA672448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F80E9C421A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91B1FAC34D600A58F3B /* ContentInsets.m in Sources */,
+				6FD6861A246052A100B8018A /* GradientView.m in Sources */,
 				6F93DE0F20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
 				6F861AFA1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E223D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
@@ -6350,6 +6362,7 @@
 				6F0EDA682448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F80E9C521A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91C1FAC34D600A58F3B /* ContentInsets.m in Sources */,
+				6FD6861B246052A100B8018A /* GradientView.m in Sources */,
 				6F93DE1020AE985C00B71572 /* OnboardingsViewController.m in Sources */,
 				6F861AFB1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E323D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
@@ -6520,6 +6533,7 @@
 				6F0EDA692448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F80E9C621A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91D1FAC34D600A58F3B /* ContentInsets.m in Sources */,
+				6FD6861C246052A100B8018A /* GradientView.m in Sources */,
 				6F93DE1120AE985C00B71572 /* OnboardingsViewController.m in Sources */,
 				6F861AFC1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E423D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,

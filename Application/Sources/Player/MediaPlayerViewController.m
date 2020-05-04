@@ -16,6 +16,7 @@
 #import "Favorites.h"
 #import "ForegroundTimer.h"
 #import "GoogleCast.h"
+#import "GradientView.h"
 #import "History.h"
 #import "Layout.h"
 #import "ModalTransition.h"
@@ -161,7 +162,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIButton *livestreamButton;
 @property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
 
-@property (nonatomic, weak) IBOutlet UIView *currentProgramView;
+@property (nonatomic, weak) IBOutlet GradientView *currentProgramView;
 @property (nonatomic, weak) IBOutlet UIButton *currentProgramStartOverButton;
 @property (nonatomic, weak) IBOutlet UILabel *currentProgramTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *currentProgramSubtitleLabel;
@@ -318,6 +319,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     SRGMedia *media = self.letterboxController.subdivisionMedia ?: self.letterboxController.media;
     NSString *channelUid = self.letterboxController.channel.uid ?: media.channel.uid ?: media.show.primaryChannelUid;
     return [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
+}
+
+- (TVChannel *)tvChannel
+{
+    SRGMedia *media = self.letterboxController.subdivisionMedia ?: self.letterboxController.media;
+    NSString *channelUid = self.letterboxController.channel.uid ?: media.channel.uid ?: media.show.primaryChannelUid;
+    return [[ApplicationConfiguration sharedApplicationConfiguration] tvChannelForUid:channelUid];
 }
 
 #pragma mark Overrides
@@ -916,10 +924,30 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (currentProgram) {
         self.currentProgramView.hidden = NO;
         
-        RadioChannel *radioChannel = [self radioChannel];
-        self.currentProgramView.backgroundColor = radioChannel.color ?: UIColor.whiteColor;
+        UIColor *startColor = nil;
+        UIColor *endColor = nil;
+        UIColor *titleColor = nil;
         
-        UIColor *foregroundColor = radioChannel.titleColor ?: UIColor.blackColor;
+        RadioChannel *radioChannel = [self radioChannel];
+        if (radioChannel) {
+            startColor = radioChannel.color;
+            endColor = radioChannel.color2;
+            titleColor = radioChannel.titleColor;
+        }
+        else {
+            TVChannel *tvChannel = [self tvChannel];
+            if (tvChannel) {
+                startColor = tvChannel.color;
+                endColor = tvChannel.color2;
+                titleColor = tvChannel.titleColor;
+            }
+        }
+        
+        [self.currentProgramView updateWithStartColor:startColor atPoint:CGPointMake(0.f, 0.5f)
+                                             endColor:endColor atPoint:CGPointMake(1.f, 0.5f)
+                                             animated:NO];
+        
+        UIColor *foregroundColor = titleColor ?: UIColor.blackColor;
         self.currentProgramTitleLabel.textColor = foregroundColor;
         self.currentProgramSubtitleLabel.textColor = foregroundColor;
         self.currentProgramStartOverButton.tintColor = foregroundColor;

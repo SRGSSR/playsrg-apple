@@ -37,9 +37,24 @@ OBJC_EXPORT NSString * _Nullable TVChannelImageOverridePath(TVChannel * _Nullabl
 @property (nonatomic, readonly, copy) NSString *uid;
 
 /**
- *  The TV channel name.
+ *  The channel name.
  */
 @property (nonatomic, readonly, copy) NSString *name;
+
+/**
+ *  The channel primary color.
+ */
+@property (nonatomic, readonly) UIColor *color;
+
+/**
+ *  The channel secondary color.
+ */
+@property (nonatomic, readonly) UIColor *color2;
+
+/**
+ *  The channel title color (white by default).
+ */
+@property (nonatomic, readonly) UIColor *titleColor;
 
 @end
 
