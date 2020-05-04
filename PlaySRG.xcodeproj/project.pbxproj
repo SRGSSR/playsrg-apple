@@ -1241,6 +1241,11 @@
 		6FD6861A246052A100B8018A /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD68617246052A100B8018A /* GradientView.m */; };
 		6FD6861B246052A100B8018A /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD68617246052A100B8018A /* GradientView.m */; };
 		6FD6861C246052A100B8018A /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD68617246052A100B8018A /* GradientView.m */; };
+		6FD6861F2460670600B8018A /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6861E2460670600B8018A /* Channel.m */; };
+		6FD686202460670600B8018A /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6861E2460670600B8018A /* Channel.m */; };
+		6FD686212460670600B8018A /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6861E2460670600B8018A /* Channel.m */; };
+		6FD686222460670600B8018A /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6861E2460670600B8018A /* Channel.m */; };
+		6FD686232460670600B8018A /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6861E2460670600B8018A /* Channel.m */; };
 		6FD88F7722D3618F008859EF /* SearchSettingsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */; };
 		6FD88F7822D3618F008859EF /* SearchSettingsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */; };
 		6FD88F7922D3618F008859EF /* SearchSettingsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */; };
@@ -2150,6 +2155,8 @@
 		6FD633E91FFD151000875BE5 /* MiniPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiniPlayerView.m; sourceTree = "<group>"; };
 		6FD68616246052A100B8018A /* GradientView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		6FD68617246052A100B8018A /* GradientView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		6FD6861D2460670600B8018A /* Channel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
+		6FD6861E2460670600B8018A /* Channel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		6FD88F7422D3618F008859EF /* SearchSettingsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingsHeaderView.h; sourceTree = "<group>"; };
 		6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingsHeaderView.m; sourceTree = "<group>"; };
 		6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchSettingsHeaderView.xib; sourceTree = "<group>"; };
@@ -2772,6 +2779,8 @@
 			children = (
 				08AA551B1D49EBF600C5026E /* ApplicationConfiguration.h */,
 				08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */,
+				6FD6861D2460670600B8018A /* Channel.h */,
+				6FD6861E2460670600B8018A /* Channel.m */,
 				0801E0791D4A4A810008021E /* RadioChannel.h */,
 				0801E07A1D4A4A810008021E /* RadioChannel.m */,
 				088899442077627900242654 /* TVChannel.h */,
@@ -5922,6 +5931,7 @@
 				089EA018201148D70070E11A /* TimerTarget.m in Sources */,
 				089EA011201148180070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4D622D866E600BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
+				6FD6861F2460670600B8018A /* Channel.m in Sources */,
 				0852539722073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5974,6 +5984,7 @@
 				6F3E0A0223D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
 				6F7EEBF422DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */,
 				6F3B0222245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
+				6FD686202460670600B8018A /* Channel.m in Sources */,
 				6F475FDD1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0841E70722F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
 				086F8D6A22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
@@ -6145,6 +6156,7 @@
 				6F3E0A0323D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
 				6F7EEBF522DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */,
 				6F3B0223245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
+				6FD686212460670600B8018A /* Channel.m in Sources */,
 				6F475FDE1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0841E70822F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
 				086F8D6B22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
@@ -6316,6 +6328,7 @@
 				6F3E0A0423D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
 				6F7EEBF622DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */,
 				6F3B0224245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
+				6FD686222460670600B8018A /* Channel.m in Sources */,
 				6F475FDF1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0841E70922F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
 				086F8D6C22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,
@@ -6487,6 +6500,7 @@
 				6F3E0A0523D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
 				6F7EEBF722DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */,
 				6F3B0225245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
+				6FD686232460670600B8018A /* Channel.m in Sources */,
 				6F475FE01EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0841E70A22F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
 				086F8D6D22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */,

@@ -314,18 +314,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }];
 }
 
-- (RadioChannel *)radioChannel
+- (NSString *)channelUid
 {
     SRGMedia *media = self.letterboxController.subdivisionMedia ?: self.letterboxController.media;
-    NSString *channelUid = self.letterboxController.channel.uid ?: media.channel.uid ?: media.show.primaryChannelUid;
-    return [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
-}
-
-- (TVChannel *)tvChannel
-{
-    SRGMedia *media = self.letterboxController.subdivisionMedia ?: self.letterboxController.media;
-    NSString *channelUid = self.letterboxController.channel.uid ?: media.channel.uid ?: media.show.primaryChannelUid;
-    return [[ApplicationConfiguration sharedApplicationConfiguration] tvChannelForUid:channelUid];
+    return self.letterboxController.channel.uid ?: media.channel.uid ?: media.show.primaryChannelUid;
 }
 
 #pragma mark Overrides
@@ -924,30 +916,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (currentProgram) {
         self.currentProgramView.hidden = NO;
         
-        UIColor *startColor = nil;
-        UIColor *endColor = nil;
-        UIColor *titleColor = nil;
+        NSString *channelUid = [self channelUid];
+        Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
         
-        RadioChannel *radioChannel = [self radioChannel];
-        if (radioChannel) {
-            startColor = radioChannel.color;
-            endColor = radioChannel.color2;
-            titleColor = radioChannel.titleColor;
-        }
-        else {
-            TVChannel *tvChannel = [self tvChannel];
-            if (tvChannel) {
-                startColor = tvChannel.color;
-                endColor = tvChannel.color2;
-                titleColor = tvChannel.titleColor;
-            }
-        }
-        
-        [self.currentProgramView updateWithStartColor:startColor atPoint:CGPointMake(0.f, 0.5f)
-                                             endColor:endColor atPoint:CGPointMake(1.f, 0.5f)
+        [self.currentProgramView updateWithStartColor:channel.color atPoint:CGPointMake(0.f, 0.5f)
+                                             endColor:channel.color2 atPoint:CGPointMake(1.f, 0.5f)
                                              animated:NO];
         
-        UIColor *foregroundColor = titleColor ?: UIColor.blackColor;
+        UIColor *foregroundColor = channel.titleColor ?: UIColor.blackColor;
         self.currentProgramTitleLabel.textColor = foregroundColor;
         self.currentProgramSubtitleLabel.textColor = foregroundColor;
         self.currentProgramStartOverButton.tintColor = foregroundColor;
@@ -1325,7 +1301,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)updateRadioHomeButton
 {
-    RadioChannel *radioChannel = [self radioChannel];
+    NSString *channelUid = [self channelUid];
+    RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
+    
     self.radioHomeView.hidden = (radioChannel == nil);
     self.radioHomeButtonImageView.image = RadioChannelLogo22Image(radioChannel);
     self.radioHomeButton.titleEdgeInsets = UIEdgeInsetsMake(0.f, self.radioHomeButtonImageView.image.size.width + 2 * 10.f, 0.f, 10.f);
@@ -1915,10 +1893,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         return;
     }
     
-    PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
-    RadioChannel *radioChannel = [self radioChannel];
+    NSString *channelUid = [self channelUid];
+    RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
     
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
+    PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
     [appDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     
     ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
@@ -1928,7 +1907,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (IBAction)openRadioHome:(id)sender
 {
-    RadioChannel *radioChannel = [self radioChannel];
+    NSString *channelUid = [self channelUid];
+    RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
     if (! radioChannel) {
         return;
     }
