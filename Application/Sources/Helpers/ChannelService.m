@@ -45,7 +45,7 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 
 + (NSString *)channelKeyWithMedia:(SRGMedia *)media
 {
-    return [NSString stringWithFormat:@"%@;%@", @(media.channel.transmission), media.channel.uid];
+    return [NSString stringWithFormat:@"%@;%@;%@", @(media.channel.transmission), media.channel.uid, media.uid];
 }
 
 #pragma mark Object lifecycle
@@ -162,15 +162,20 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
         }
     };
     
-    // TODO: Harcdoded or should be remotely configurable?
+    // TODO: Hardcoded or should be remotely configurable?
     static const NSUInteger kPageSize = 50;
     
     SRGFirstPageRequest *request = nil;
     if (media.channel.transmission == SRGTransmissionRadio) {
-        request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:media.vendor channelUid:media.channel.uid completionBlock:completionBlock] requestWithPageSize:kPageSize];
+        if (media.vendor == SRGVendorSRF && ! [media.uid isEqualToString:media.channel.uid]) {
+            request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:media.vendor channelUid:media.channel.uid livestreamUid:media.uid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
+        }
+        else {
+            request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:media.vendor channelUid:media.channel.uid livestreamUid:nil fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
+        }
     }
     else {
-        request = [[SRGDataProvider.currentDataProvider tvLatestProgramsForVendor:media.vendor channelUid:media.channel.uid completionBlock:completionBlock] requestWithPageSize:kPageSize];
+        request = [[SRGDataProvider.currentDataProvider tvLatestProgramsForVendor:media.vendor channelUid:media.channel.uid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
     }
     [self.requestQueue addRequest:request resume:YES];
 }
