@@ -163,7 +163,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
 
 @property (nonatomic, weak) IBOutlet GradientView *currentProgramView;
-@property (nonatomic, weak) IBOutlet UIButton *currentProgramStartOverButton;
+@property (nonatomic, weak) IBOutlet UIView *currentProgramSpacerView;
 @property (nonatomic, weak) IBOutlet UILabel *currentProgramTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *currentProgramSubtitleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *currentProgramFavoriteButton;
@@ -926,7 +926,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         UIColor *foregroundColor = channel.titleColor ?: UIColor.blackColor;
         self.currentProgramTitleLabel.textColor = foregroundColor;
         self.currentProgramSubtitleLabel.textColor = foregroundColor;
-        self.currentProgramStartOverButton.tintColor = foregroundColor;
         self.currentProgramFavoriteButton.tintColor = foregroundColor;
         
         self.currentProgramTitleLabel.text = currentProgram.title;
@@ -935,7 +934,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.currentProgramSubtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
         self.currentProgramSubtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         
-        self.currentProgramFavoriteButton.hidden = (currentProgram.show == nil);
+        BOOL hidden = (currentProgram.show == nil);
+        self.currentProgramSpacerView.hidden = hidden;
+        self.currentProgramFavoriteButton.hidden = hidden;
+        
         [self updateFavoriteStatusForShow:currentProgram.show];
     }
     else {
@@ -1872,11 +1874,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (IBAction)toggleDetails:(id)sender
 {
     [self setDetailsExpanded:! self.detailsExpanded animated:YES];
-}
-
-- (IBAction)startOver:(id)sender
-{
-    [self.letterboxController startOverWithCompletionHandler:nil];
 }
 
 - (IBAction)openShow:(id)sender

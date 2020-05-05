@@ -472,17 +472,10 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="M7A-GT-jh5">
                                                                 <rect key="frame" x="10" y="0.0" width="366" height="52"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2D-z2-dMr">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U3Q-KF-Pj5" userLabel="Spacer View">
                                                                         <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" secondItem="H2D-z2-dMr" secondAttribute="height" multiplier="1:1" id="nRF-D5-Azo"/>
-                                                                        </constraints>
-                                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <state key="normal" image="start_over-22"/>
-                                                                        <connections>
-                                                                            <action selector="startOver:" destination="HgT-ei-KY5" eventType="touchUpInside" id="8yT-yo-uI4"/>
-                                                                        </connections>
-                                                                    </button>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </view>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1KY-X6-Yhh">
                                                                         <rect key="frame" x="67" y="0.0" width="232" height="52"/>
                                                                         <subviews>
@@ -523,6 +516,9 @@
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="U3Q-KF-Pj5" firstAttribute="width" secondItem="hBr-jC-7uQ" secondAttribute="width" id="GM8-xr-LBZ"/>
+                                                                </constraints>
                                                             </stackView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -600,7 +596,7 @@
                         <outlet property="closeButton" destination="URR-EB-goh" id="GT8-V7-lKB"/>
                         <outlet property="collapsedDetailsLabelsHeightConstraint" destination="O9i-0d-HTk" id="7MN-Zo-Xo2"/>
                         <outlet property="currentProgramFavoriteButton" destination="hBr-jC-7uQ" id="ffS-yK-1bo"/>
-                        <outlet property="currentProgramStartOverButton" destination="H2D-z2-dMr" id="pxz-pR-UJB"/>
+                        <outlet property="currentProgramSpacerView" destination="U3Q-KF-Pj5" id="LQr-Xr-Y3I"/>
                         <outlet property="currentProgramSubtitleLabel" destination="IIC-qR-rrp" id="uBX-DM-Vba"/>
                         <outlet property="currentProgramTitleLabel" destination="G8U-yX-Q0a" id="kSk-dP-6ET"/>
                         <outlet property="currentProgramView" destination="jXJ-O2-0II" id="9EU-sl-htH"/>
@@ -698,7 +694,6 @@
         <image name="home-22" width="22" height="22"/>
         <image name="multiaudio-14" width="14" height="14"/>
         <image name="share-48" width="48" height="48"/>
-        <image name="start_over-22" width="22" height="22"/>
         <image name="view_count_video-16" width="16" height="16"/>
         <image name="watch_later-48" width="48" height="48"/>
         <image name="youth_protection_yellow-18" width="18" height="18"/>
