@@ -10,8 +10,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchLoadingCollectionViewCell : UICollectionViewCell
 
-- (void)startAnimating;
-
 @end
 
 NS_ASSUME_NONNULL_END

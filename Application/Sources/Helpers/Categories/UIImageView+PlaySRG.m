@@ -70,42 +70,35 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
 
 #pragma mark Loading animation
 
-- (void)play_startAnimatingLoading90WithTintColor:(UIColor *)tintColor
+- (void)play_setLoadingAnimation90WithTintColor:(UIColor *)tintColor
 {
-    [self play_startAnimatingWithImagesNamed:@"loading-90" withTintColor:tintColor];
+    [self play_setAnimationImagesNamed:@"loading-90" withTintColor:tintColor];
 }
 
 #pragma mark Downloading animation
 
-- (void)play_startAnimatingDownloading16WithTintColor:(nullable UIColor *)tintColor
+- (void)play_setDownloadAnimation16WithTintColor:(nullable UIColor *)tintColor
 {
-    [self play_startAnimatingWithImagesNamed:@"downloading-16" withTintColor:tintColor];
+    [self play_setAnimationImagesNamed:@"downloading-16" withTintColor:tintColor];
 }
 
-- (void)play_startAnimatingDownloading22WithTintColor:(nullable UIColor *)tintColor
+- (void)play_setDownloadAnimation22WithTintColor:(nullable UIColor *)tintColor
 {
-    [self play_startAnimatingWithImagesNamed:@"downloading-22" withTintColor:tintColor];
+    [self play_setAnimationImagesNamed:@"downloading-22" withTintColor:tintColor];
 }
 
-- (void)play_startAnimatingDownloading48WithTintColor:(nullable UIColor *)tintColor
+- (void)play_setDownloadAnimation48WithTintColor:(nullable UIColor *)tintColor
 {
-    [self play_startAnimatingWithImagesNamed:@"downloading-48" withTintColor:tintColor];
+    [self play_setAnimationImagesNamed:@"downloading-48" withTintColor:tintColor];
 }
 
 #pragma mark Animation lifecycle
 
-- (void)play_startAnimatingWithImagesNamed:(NSString *)name withTintColor:(nullable UIColor *)tintColor
+- (void)play_setAnimationImagesNamed:(NSString *)name withTintColor:(UIColor *)tintColor
 {
     self.animationImages = [UIImageView animatedImageNamed:name withTintColor:tintColor];
     self.image = self.animationImages.firstObject;
     self.animationDuration = 1.;
-    [self startAnimating];
-}
-
-- (void)play_stopAnimating
-{
-    [self stopAnimating];
-    self.animationImages = nil;
 }
 
 #pragma mark Standard image loading

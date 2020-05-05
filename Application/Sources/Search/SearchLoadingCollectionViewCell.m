@@ -25,20 +25,8 @@
     [super awakeFromNib];
     
     self.backgroundColor = UIColor.clearColor;
-}
-
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    
-    [self.imageView play_stopAnimating];
-}
-
-#pragma mark Animation
-
-- (void)startAnimating
-{
-    [self.imageView play_startAnimatingLoading90WithTintColor:UIColor.play_lightGrayColor];
+    [self.imageView play_setLoadingAnimation90WithTintColor:UIColor.play_lightGrayColor];
+    [self.imageView startAnimating];
 }
 
 #pragma mark Accessibility

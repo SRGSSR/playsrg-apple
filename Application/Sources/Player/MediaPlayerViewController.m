@@ -1183,47 +1183,37 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.downloadButton.hidden = NO;
     
     Download *download = [Download downloadForMedia:media];
-    
-    UIImage *downloadButtonImage = nil;
-    NSString *downloadButtonAccessibilityLabel = nil;
-    
     switch (download.state) {
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended:{
-            [self.downloadButton.imageView play_stopAnimating];
-            
-            downloadButtonImage = [UIImage imageNamed:@"downloadable_stop-48"];
-            downloadButtonAccessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Retry download", @"A download button label");
+            [self.downloadButton.imageView stopAnimating];
+            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_stop-48"] forState:UIControlStateNormal];
+            self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Retry download", @"A download button label");
             break;
         }
             
         case DownloadStateDownloading: {
-            [self.downloadButton.imageView play_startAnimatingDownloading48WithTintColor:UIColor.whiteColor];
+            [self.downloadButton.imageView play_setDownloadAnimation48WithTintColor:UIColor.whiteColor];
+            [self.downloadButton.imageView startAnimating];
             
-            downloadButtonImage = self.downloadButton.imageView.image;
-            downloadButtonAccessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Stop downloading", @"A download button label");
+            self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Stop downloading", @"A download button label");
             break;
         }
             
         case DownloadStateDownloaded: {
-            [self.downloadButton.imageView play_stopAnimating];
-            
-            downloadButtonImage = [UIImage imageNamed:@"downloadable_full-48"];
-            downloadButtonAccessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove download", @"A download button label");
+            [self.downloadButton.imageView stopAnimating];
+            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_full-48"] forState:UIControlStateNormal];
+            self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove download", @"A download button label");
             break;
         }
             
         default: {
-            [self.downloadButton.imageView play_stopAnimating];
-            
-            downloadButtonImage = [UIImage imageNamed:@"downloadable-48"];
-            downloadButtonAccessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Download", @"A download button label");
+            [self.downloadButton.imageView stopAnimating];
+            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable-48"] forState:UIControlStateNormal];
+            self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Download", @"A download button label");
             break;
         }
     }
-    
-    [self.downloadButton setImage:downloadButtonImage forState:UIControlStateNormal];
-    self.downloadButton.accessibilityLabel = downloadButtonAccessibilityLabel;
 }
 
 - (void)updateFavoriteStatusForShow:(SRGShow *)show

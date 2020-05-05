@@ -307,56 +307,50 @@
 - (void)updateDownloadStatus
 {
     Download *download = [Download downloadForMedia:self.media];
-    if (!download) {
-        BOOL downloadsHintsHidden = ApplicationConfiguration.sharedApplicationConfiguration.downloadsHintsHidden;
-        
-        [self.downloadStatusImageView play_stopAnimating];
+    if (! download) {
+        [self.downloadStatusImageView stopAnimating];
         self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable-16"];
         
-        self.downloadStatusImageView.hidden = downloadsHintsHidden ? YES : ! [Download canDownloadMedia:self.media];
+        BOOL downloadsHintsHidden = ApplicationConfiguration.sharedApplicationConfiguration.downloadsHintsHidden;
+        self.downloadStatusImageView.hidden = downloadsHintsHidden || ! [Download canDownloadMedia:self.media];
         return;
     }
     
     self.downloadStatusImageView.hidden = NO;
     
-    UIImage *downloadImage = nil;
-    UIColor *tintColor = UIColor.play_lightGrayColor;
-    
     switch (download.state) {
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended: {
-            [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable_stop-16"];
+            [self.downloadStatusImageView stopAnimating];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_stop-16"];
             break;
         }
             
         case DownloadStateDownloading: {
-            [self.downloadStatusImageView play_startAnimatingDownloading16WithTintColor:tintColor];
-            downloadImage = self.downloadStatusImageView.image;
+            [self.downloadStatusImageView play_setDownloadAnimation16WithTintColor:UIColor.play_lightGrayColor];
+            [self.downloadStatusImageView startAnimating];
             break;
         }
             
         case DownloadStateDownloaded: {
-            [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable_full-16"];
+            [self.downloadStatusImageView stopAnimating];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_full-16"];
             break;
         }
             
         case DownloadStateDownloadable:
         case DownloadStateRemoved: {
-            [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable-16"];
+            [self.downloadStatusImageView stopAnimating];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable-16"];
             break;
         }
             
         default: {
-            [self.downloadStatusImageView play_stopAnimating];
+            [self.downloadStatusImageView stopAnimating];
+            self.downloadStatusImageView.image = nil;
             break;
         }
     }
-    
-    self.downloadStatusImageView.image = downloadImage;
-    self.downloadStatusImageView.tintColor = tintColor;
 }
 
 - (void)updateHistoryStatus

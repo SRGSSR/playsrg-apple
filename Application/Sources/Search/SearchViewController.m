@@ -537,10 +537,6 @@
         SearchShowListCollectionViewCell *showListCell = (SearchShowListCollectionViewCell *)cell;
         showListCell.shows = self.shows;
     }
-    else if ([cell isKindOfClass:SearchLoadingCollectionViewCell.class]) {
-        SearchLoadingCollectionViewCell *loadingCell = (SearchLoadingCollectionViewCell *)cell;
-        [loadingCell startAnimating];
-    }
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath

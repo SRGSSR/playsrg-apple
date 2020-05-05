@@ -41,6 +41,7 @@
     self.titleLabel.textColor = UIColor.whiteColor;
     self.subtitleLabel.textColor = UIColor.whiteColor;
     
+    [self.waveformImageView play_setDownloadAnimation48WithTintColor:UIColor.whiteColor];
     self.waveformImageView.hidden = YES;
 }
 
@@ -58,10 +59,10 @@
     self.waveformImageView.hidden = ! selected;
     
     if (self.playing) {
-        [self.waveformImageView play_startAnimatingDownloading48WithTintColor:UIColor.whiteColor];
+        [self.waveformImageView startAnimating];
     }
     else {
-        [self.waveformImageView play_stopAnimating];
+        [self.waveformImageView stopAnimating];
     }
 }
 
