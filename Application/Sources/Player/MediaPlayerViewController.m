@@ -911,28 +911,26 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)reloadProgramInformation
 {
+    NSString *channelUid = [self channelUid];
+    Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
+    
+    [self.currentProgramView updateWithStartColor:channel.color atPoint:CGPointMake(0.f, 0.5f)
+                                         endColor:channel.color2 atPoint:CGPointMake(1.f, 0.5f)
+                                         animated:NO];
+    
+    UIColor *foregroundColor = channel.titleColor ?: UIColor.blackColor;
+    self.currentProgramTitleLabel.textColor = foregroundColor;
+    self.currentProgramSubtitleLabel.textColor = foregroundColor;
+    self.currentProgramFavoriteButton.tintColor = foregroundColor;
+    
+    self.currentProgramTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
+    self.currentProgramSubtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    
     NSString *subdivisionURN = self.letterboxController.subdivision.URN;
     SRGProgram *currentProgram = [self programWithMediaURN:subdivisionURN];
     if (currentProgram) {
-        self.currentProgramView.hidden = NO;
-        
-        NSString *channelUid = [self channelUid];
-        Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
-        
-        [self.currentProgramView updateWithStartColor:channel.color atPoint:CGPointMake(0.f, 0.5f)
-                                             endColor:channel.color2 atPoint:CGPointMake(1.f, 0.5f)
-                                             animated:NO];
-        
-        UIColor *foregroundColor = channel.titleColor ?: UIColor.blackColor;
-        self.currentProgramTitleLabel.textColor = foregroundColor;
-        self.currentProgramSubtitleLabel.textColor = foregroundColor;
-        self.currentProgramFavoriteButton.tintColor = foregroundColor;
-        
         self.currentProgramTitleLabel.text = currentProgram.title;
-        self.currentProgramTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
-        
         self.currentProgramSubtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
-        self.currentProgramSubtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         
         BOOL hidden = (currentProgram.show == nil);
         self.currentProgramSpacerView.hidden = hidden;
@@ -941,9 +939,15 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self updateFavoriteStatusForShow:currentProgram.show];
     }
     else {
-        self.currentProgramView.hidden = YES;
+        self.currentProgramTitleLabel.text = channel.name;
+        self.currentProgramSubtitleLabel.text = nil;
+        
+        self.currentProgramSpacerView.hidden = YES;
+        self.currentProgramFavoriteButton.hidden = YES;
+        
+        [self updateFavoriteStatusForShow:nil];
     }
- 
+    
     BOOL hadPrograms = (self.programs.count != 0);
     NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
     self.programs = segments ? [self.programComposition play_programsMatchingSegments:segments] : nil;
