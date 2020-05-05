@@ -947,13 +947,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.programs = segments ? [self.programComposition play_programsMatchingSegments:segments] : nil;
  
     [self.programsTableView reloadData];
-    [self updateSelectionForCurrentProgram];
     
-    if (! hadPrograms && self.programs.count != 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateSelectionForCurrentProgram];
+        
+        if (! hadPrograms && self.programs.count != 0) {
             [self.programsTableView flashScrollIndicators];
-        });
-    }
+        }
+    });
 }
 
 #pragma mark Channel updates
@@ -1647,6 +1648,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ProgramTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.program = self.programs[indexPath.row];
+    cell.playing = (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -2100,6 +2102,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.closeButton.accessibilityHint = nil;
     }
     
+    [self reloadProgramInformation];
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
 }
 

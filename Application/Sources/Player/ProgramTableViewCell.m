@@ -47,7 +47,7 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-        
+    
     [self.thumbnailImageView play_resetImage];
 }
 
@@ -55,12 +55,12 @@
 {
     [super setSelected:selected animated:animated];
     
-    if (selected) {
-        self.waveformImageView.hidden = NO;
+    self.waveformImageView.hidden = ! selected;
+    
+    if (self.playing) {
         [self.waveformImageView play_startAnimatingDownloading48WithTintColor:UIColor.whiteColor];
     }
     else {
-        self.waveformImageView.hidden = YES;
         [self.waveformImageView play_stopAnimating];
     }
 }

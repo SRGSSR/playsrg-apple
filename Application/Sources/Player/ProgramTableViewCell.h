@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ProgramTableViewCell : UITableViewCell
 
 @property (nonatomic, nullable) SRGProgram *program;
+@property (nonatomic, getter=isPlaying) BOOL playing;
 
 @end
 
