@@ -1415,7 +1415,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.topBarView.alpha = (minimal || ! hidden) ? 1.f : 0.f;
         
         // Calculate the minimum possible aspect ratio so that only a fraction of the vertical height is occupied by the player at most.
-        // Use it as limit value if needed. Apply a smaller value to for radio (image less important, more space fpr metadata, especially
+        // Use it as limit value if needed. Apply a smaller value to for radio (image less important, more space for metadata, especially
         // when displaying a program list).
         SRGMedia *mainMedia = [self mainMedia];
         CGFloat verticalFillRatio = (mainMedia.mediaType == SRGMediaPlayerMediaTypeVideo) ? 0.5f : 0.4f;
