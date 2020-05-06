@@ -40,7 +40,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/ComScore-iOS-watchOS-tvOS</string>
 			<key>Title</key>
-			<string>ComScore-iOS-watchOS-tvOS (6.2.0)</string>
+			<string>ComScore-iOS-watchOS-tvOS (6.3.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -232,7 +232,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
 			<key>Title</key>
-			<string>srganalytics-apple (489edcf)</string>
+			<string>srganalytics-apple (6ffe2a4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -256,7 +256,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-apple</string>
 			<key>Title</key>
-			<string>srgdataprovider-apple (f76e108)</string>
+			<string>srgdataprovider-apple (962cd46)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -280,7 +280,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>srgletterbox-apple (94d4324)</string>
+			<string>srgletterbox-apple (efa0cab)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -296,7 +296,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-apple</string>
 			<key>Title</key>
-			<string>srgmediaplayer-apple (8b3545b)</string>
+			<string>srgmediaplayer-apple (d55fc67)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
