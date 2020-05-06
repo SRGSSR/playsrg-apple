@@ -14,8 +14,9 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *resourceUid;
 @property (nonatomic) UIColor *color;
-@property (nonatomic) UIColor *color2;
 @property (nonatomic) UIColor *titleColor;
+@property (nonatomic) UIColor *gradientStartColor;
+@property (nonatomic) UIColor *gradientEndColor;
 
 @end
 
@@ -49,20 +50,28 @@
             self.color = UIColor.grayColor;
         }
         
-        id color2Value = dictionary[@"color2"];
-        if ([color2Value isKindOfClass:NSString.class]) {
-            self.color2 = [UIColor srg_colorFromHexadecimalString:color2Value] ?: self.color;
-        }
-        else {
-            self.color2 = self.color;
-        }
-        
         id titleColorValue = dictionary[@"titleColor"];
         if ([titleColorValue isKindOfClass:NSString.class]) {
             self.titleColor = [UIColor srg_colorFromHexadecimalString:titleColorValue] ?: UIColor.whiteColor;
         }
         else {
             self.titleColor = UIColor.whiteColor;
+        }
+        
+        id gradientStartColorValue = dictionary[@"gradientStartColor"];
+        if ([gradientStartColorValue isKindOfClass:NSString.class]) {
+            self.gradientStartColor = [UIColor srg_colorFromHexadecimalString:gradientStartColorValue] ?: self.color;
+        }
+        else {
+            self.gradientStartColor = self.color;
+        }
+        
+        id gradientEndColorValue = dictionary[@"gradientEndColor"];
+        if ([gradientEndColorValue isKindOfClass:NSString.class]) {
+            self.gradientEndColor = [UIColor srg_colorFromHexadecimalString:gradientEndColorValue] ?: self.gradientStartColor;
+        }
+        else {
+            self.gradientEndColor = self.gradientStartColor;
         }
     }
     return self;
