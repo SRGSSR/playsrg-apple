@@ -182,6 +182,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 // The aspect ratio constant is used to display the player with the best possible aspect ratio, taking into account
 // other frame changes into account (e.g. timeline display)
+// TODO: When iOS 9 support is dropped, we can only keep one constraint with proper priority and vary its multiplier
+//       like we do currently.
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioStandardConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioBigLandscapeScreenConstraint;
 
@@ -1413,9 +1415,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.topBarView.alpha = (minimal || ! hidden) ? 1.f : 0.f;
         
         // Calculate the minimum possible aspect ratio so that only a fraction of the vertical height is occupied by the player at most.
-        // Use it as limit value if needed
-        static CGFloat kVerticalFillRatio = 0.6f;
-        CGFloat minAspectRatio = CGRectGetWidth(self.view.frame) / (kVerticalFillRatio * CGRectGetHeight(self.view.frame));
+        // Use it as limit value if needed. Apply a smaller value to for radio (image less important, more space fpr metadata, especially
+        // when displaying a program list).
+        SRGMedia *mainMedia = [self mainMedia];
+        CGFloat verticalFillRatio = (mainMedia.mediaType == SRGMediaPlayerMediaTypeVideo) ? 0.5f : 0.4f;
+        CGFloat minAspectRatio = CGRectGetWidth(self.view.frame) / (verticalFillRatio * CGRectGetHeight(self.view.frame));
         CGFloat multiplier = 1.f / fmaxf(aspectRatio, minAspectRatio);
         
         if (@available(iOS 10, *)) {
