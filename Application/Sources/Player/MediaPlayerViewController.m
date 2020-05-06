@@ -342,6 +342,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.scrollView.hidden = YES;
     self.channelView.hidden = YES;
     
+    self.currentProgramView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.currentProgramView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.currentProgramView.layer.masksToBounds = YES;
     
@@ -920,7 +921,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                          endColor:channel.gradientEndColor atPoint:CGPointMake(0.75f, 0.5f)
                                          animated:NO];
     
-    UIColor *foregroundColor = channel.titleColor ?: UIColor.blackColor;
+    UIColor *foregroundColor = channel.titleColor ?: UIColor.whiteColor;
     self.currentProgramTitleLabel.textColor = foregroundColor;
     self.currentProgramSubtitleLabel.textColor = foregroundColor;
     self.currentProgramFavoriteButton.tintColor = foregroundColor;
@@ -941,7 +942,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self updateFavoriteStatusForShow:currentProgram.show];
     }
     else {
-        self.currentProgramTitleLabel.text = channel.name;
+        self.currentProgramTitleLabel.text = channel.name ?: [self mainMedia].title;
         self.currentProgramSubtitleLabel.text = nil;
         
         self.currentProgramSpacerView.hidden = YES;
