@@ -9,7 +9,7 @@
 #import "HomeShowCollectionViewCell.h"
 #import "Layout.h"
 #import "ShowViewController.h"
-#import "UICollectionView+PlaySRG.h"
+#import "SwimlaneCollectionViewLayout.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
@@ -61,7 +61,7 @@ static const CGFloat kBottomInset = 15.f;
         [self.contentView addSubview:wrapperView];
         self.wrapperView = wrapperView;
         
-        UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        SwimlaneCollectionViewLayout *collectionViewLayout = [[SwimlaneCollectionViewLayout alloc] init];
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
         collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
@@ -72,6 +72,7 @@ static const CGFloat kBottomInset = 15.f;
         collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
         collectionView.alwaysBounceHorizontal = YES;
         collectionView.directionalLockEnabled = YES;
+        collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
         // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
         collectionView.scrollsToTop = NO;
         collectionView.delegate = self;
@@ -114,9 +115,7 @@ static const CGFloat kBottomInset = 15.f;
     
     if (homeSectionInfo) {
         // Restore position in rows when scrolling vertically and returning to a previously scrolled row
-        CGPoint maxContentOffset = self.collectionView.play_maximumContentOffset;
-        CGPoint contentOffset = CGPointMake(fmaxf(fminf(homeSectionInfo.contentOffset.x, maxContentOffset.x), 0.f),
-                                            homeSectionInfo.contentOffset.y);
+        CGPoint contentOffset = [self.collectionView.collectionViewLayout targetContentOffsetForProposedContentOffset:homeSectionInfo.contentOffset];
         [self.collectionView setContentOffset:contentOffset animated:NO];
     }
     self.collectionView.scrollEnabled = (homeSectionInfo.items.count != 0);

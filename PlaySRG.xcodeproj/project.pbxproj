@@ -879,11 +879,6 @@
 		6F4760361EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
 		6F4760371EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
 		6F4760381EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
-		6F47603E1EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */; };
-		6F47603F1EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */; };
-		6F4760401EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */; };
-		6F4760411EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */; };
-		6F4760421EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */; };
 		6F4760781EB37D60003021EA /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
 		6F4760791EB37D60003021EA /* UIDevice+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606D1EB37D60003021EA /* UIDevice+PlaySRG.m */; };
 		6F47607A1EB37D60003021EA /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
@@ -1376,6 +1371,11 @@
 		6FF7BBB422A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */; };
 		6FF7BBB522A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */; };
 		6FF7BBB622A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */; };
+		6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
+		6FFCB62524504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
+		6FFCB62624504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
+		6FFCB62724504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
+		6FFCB62824504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
 		7ACE7CA000370D1208243956 /* libPods-PlaySRG-Play SRF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D6E859054BE4FCA7A62352E /* libPods-PlaySRG-Play SRF.a */; };
 		E1D8F87EB9409ADB326F446F /* libPods-PlaySRG-Play RTR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866AF638938EFA7338C23B03 /* libPods-PlaySRG-Play RTR.a */; };
 		E60178521D635E130000362E /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; };
@@ -2027,8 +2027,6 @@
 		6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayDurationFormatter.m; sourceTree = "<group>"; };
 		6F47601B1EB37BD1003021EA /* NSDateFormatter+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+PlaySRG.h"; sourceTree = "<group>"; };
 		6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+PlaySRG.m"; sourceTree = "<group>"; };
-		6F47601F1EB37BD1003021EA /* UICollectionView+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+PlaySRG.h"; sourceTree = "<group>"; };
-		6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+PlaySRG.m"; sourceTree = "<group>"; };
 		6F47606A1EB37D60003021EA /* UIColor+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PlaySRG.h"; sourceTree = "<group>"; };
 		6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PlaySRG.m"; sourceTree = "<group>"; };
 		6F47606C1EB37D60003021EA /* UIDevice+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+PlaySRG.h"; sourceTree = "<group>"; };
@@ -2230,6 +2228,8 @@
 		6FF7BB9522A78DE400FA758A /* SearchSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingsViewController.m; sourceTree = "<group>"; };
 		6FF7BB9622A78DE400FA758A /* SearchSettingSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingSelectorCell.m; sourceTree = "<group>"; };
 		6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchSettingsViewController.storyboard; sourceTree = "<group>"; };
+		6FFCB62224504C6C00D16466 /* SwimlaneCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwimlaneCollectionViewLayout.h; sourceTree = "<group>"; };
+		6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwimlaneCollectionViewLayout.m; sourceTree = "<group>"; };
 		866AF638938EFA7338C23B03 /* libPods-PlaySRG-Play RTR.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaySRG-Play RTR.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BDBB65E7B9D845CB1576750 /* Pods-PlaySRG-Play RTS.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTS.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS.nightly.xcconfig"; sourceTree = "<group>"; };
 		A0923E657497DE17CE057F6E /* Pods-PlaySRG-Play RTR.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTR.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR.nightly.xcconfig"; sourceTree = "<group>"; };
@@ -3240,9 +3240,11 @@
 				6F475FA01EB37BC6003021EA /* ModalTransition.m */,
 				6F475FA11EB37BC6003021EA /* Previewing.h */,
 				6F4091FF22DCF43D005F3850 /* Previewing.m */,
+				6FB340D823E1A21500BC83BF /* Scrollable.h */,
+				6FFCB62224504C6C00D16466 /* SwimlaneCollectionViewLayout.h */,
+				6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */,
 				6FF4D4DE23D5B07E008B981A /* UIVisualEffectView+PlaySRG.h */,
 				6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */,
-				6FB340D823E1A21500BC83BF /* Scrollable.h */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -3311,8 +3313,6 @@
 				6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */,
 				0852539522073D5200BCF0B1 /* UIApplication+PlaySRG.h */,
 				0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */,
-				6F47601F1EB37BD1003021EA /* UICollectionView+PlaySRG.h */,
-				6F4760201EB37BD1003021EA /* UICollectionView+PlaySRG.m */,
 				6F47606A1EB37D60003021EA /* UIColor+PlaySRG.h */,
 				6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */,
 				6F47606C1EB37D60003021EA /* UIDevice+PlaySRG.h */,
@@ -5895,6 +5895,7 @@
 				6F9D2743203AD99C00FDE899 /* Playlist.m in Sources */,
 				086321052258C6D000C719A6 /* WatchLaterTableViewCell.m in Sources */,
 				E66BEC1C1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
+				6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F475FC31EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6F475FFF1EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F12E4E222D8676600BC1718 /* SearchHeaderView.m in Sources */,
@@ -6010,7 +6011,6 @@
 				6F475FCD1EB37BC6003021EA /* NavigationController.m in Sources */,
 				6FDF08FA218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,
 				08209308208F522A00711DE4 /* PushService.m in Sources */,
-				6F47603E1EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				6F4760091EB37BC6003021EA /* TranslucentTitleHeaderView.m in Sources */,
 				08C68F8A1D38DEA100BB8AAA /* PlayAppDelegate.m in Sources */,
 				6F40920822DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.m in Sources */,
@@ -6172,7 +6172,6 @@
 				6F7C35B623708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220AE1DD07B7A00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
-				6F47603F1EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				082910B6239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8B22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
@@ -6182,6 +6181,7 @@
 				E65FB20C1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AA21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F4760831EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
+				6FFCB62524504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B1E1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -6336,7 +6336,6 @@
 				6F7C35B723708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220B21DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
-				6F4760401EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				082910B7239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8C22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
@@ -6346,6 +6345,7 @@
 				E65FB20D1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AB21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F47608A1EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
+				6FFCB62624504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B1F1D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -6500,7 +6500,6 @@
 				6F7C35B823708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220B61DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
-				6F4760411EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				082910B8239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F81D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8D22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
@@ -6510,6 +6509,7 @@
 				E65FB20E1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AC21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F4760911EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
+				6FFCB62724504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B201D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -6664,7 +6664,6 @@
 				6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220BA1DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6671EDF1B7D00EED89B /* UILabel+PlaySRG.m in Sources */,
-				6F4760421EB37BD1003021EA /* UICollectionView+PlaySRG.m in Sources */,
 				082910B9239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F91D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8E22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
@@ -6674,6 +6673,7 @@
 				E65FB20F1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AD21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6F4760981EB37DF2003021EA /* UIStackView+PlaySRG.m in Sources */,
+				6FFCB62824504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F06E0A81DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				08564B211D41111A00381549 /* HomeSectionHeaderView.m in Sources */,
 				6FE686E51EB9D57400067D40 /* ChannelService.m in Sources */,

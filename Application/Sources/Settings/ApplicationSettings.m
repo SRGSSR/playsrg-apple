@@ -30,7 +30,7 @@ NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed = @"PlaySRG
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
 NSString * const PlaySRGSettingLastOpenedRadioChannelUid = @"PlaySRGSettingLastOpenedRadioChannelUid";
 NSString * const PlaySRGSettingLastOpenedTabBarItem = @"PlaySRGSettingLastOpenedTabBarItem";
-NSString * const PlaySRGSettingSelectedLiveStreamURNForChannels = @"PlaySRGSettingSelectedLiveStreamURNForChannels";
+NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLiveStreamURNForChannels";
 NSString * const PlaySRGSettingServiceURL = @"PlaySRGSettingServiceURL";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
 
@@ -207,22 +207,22 @@ BOOL ApplicationSettingAudioDescriptionAvailabilityDisplayed(void)
     return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAudioDescriptionAvailabilityDisplayed];
 }
 
-NSString *ApplicationSettingSelectedLiveStreamURNForChannelUid(NSString *channelUid)
+NSString *ApplicationSettingSelectedLivestreamURNForChannelUid(NSString *channelUid)
 {
-    NSDictionary *selectedLiveStreamURNForChannels = [NSUserDefaults.standardUserDefaults dictionaryForKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
-    return selectedLiveStreamURNForChannels[channelUid];
+    NSDictionary *selectedLivestreamURNForChannels = [NSUserDefaults.standardUserDefaults dictionaryForKey:PlaySRGSettingSelectedLivestreamURNForChannels];
+    return selectedLivestreamURNForChannels[channelUid];
 }
 
-void ApplicationSettingSetSelectedLiveStreamURNForChannelUid(NSString *channelUid, NSString *mediaURN)
+void ApplicationSettingSetSelectedLivestreamURNForChannelUid(NSString *channelUid, NSString *mediaURN)
 {
     if (channelUid) {
         NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;;
         
-        NSDictionary *selectedLiveStreamURNForChannels = [userDefaults dictionaryForKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
-        NSMutableDictionary *mutableSelectedLiveStreamURNForChannels = selectedLiveStreamURNForChannels.mutableCopy ?: NSMutableDictionary.new;
-        mutableSelectedLiveStreamURNForChannels[channelUid] = mediaURN;
+        NSDictionary *selectedLivestreamURNForChannels = [userDefaults dictionaryForKey:PlaySRGSettingSelectedLivestreamURNForChannels];
+        NSMutableDictionary *mutableSelectedLivestreamURNForChannels = selectedLivestreamURNForChannels.mutableCopy ?: NSMutableDictionary.new;
+        mutableSelectedLivestreamURNForChannels[channelUid] = mediaURN;
         
-        [userDefaults setObject:mutableSelectedLiveStreamURNForChannels.copy forKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
+        [userDefaults setObject:mutableSelectedLivestreamURNForChannels.copy forKey:PlaySRGSettingSelectedLivestreamURNForChannels];
         [userDefaults synchronize];
     }
 }
@@ -233,8 +233,8 @@ SRGMedia *ApplicationSettingSelectedLivestreamMediaForChannelUid(NSString *chann
         return nil;
     }
     
-    NSString *selectedLiveStreamURN = ApplicationSettingSelectedLiveStreamURNForChannelUid(channelUid);
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGMedia.new, URN), selectedLiveStreamURN];
+    NSString *selectedLivestreamURN = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGMedia.new, URN), selectedLivestreamURN];
     return [medias filteredArrayUsingPredicate:predicate].firstObject;
 }
 

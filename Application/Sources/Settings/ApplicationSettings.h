@@ -72,8 +72,8 @@ OBJC_EXPORT BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void);
 OBJC_EXPORT BOOL ApplicationSettingSubtitleAvailabilityDisplayed(void);
 OBJC_EXPORT BOOL ApplicationSettingAudioDescriptionAvailabilityDisplayed(void);
 
-OBJC_EXPORT NSString * _Nullable ApplicationSettingSelectedLiveStreamURNForChannelUid(NSString * _Nullable channelUid);
-OBJC_EXPORT void ApplicationSettingSetSelectedLiveStreamURNForChannelUid(NSString * channelUid, NSString * _Nullable mediaURN);
+OBJC_EXPORT NSString * _Nullable ApplicationSettingSelectedLivestreamURNForChannelUid(NSString * _Nullable channelUid);
+OBJC_EXPORT void ApplicationSettingSetSelectedLivestreamURNForChannelUid(NSString * channelUid, NSString * _Nullable mediaURN);
 
 OBJC_EXPORT SRGMedia * _Nullable ApplicationSettingSelectedLivestreamMediaForChannelUid(NSString * _Nullable channelUid, NSArray<SRGMedia *> * _Nullable medias);
 
