@@ -41,7 +41,7 @@
     self.titleLabel.textColor = UIColor.whiteColor;
     self.subtitleLabel.textColor = UIColor.whiteColor;
     
-    [self.waveformImageView play_setDownloadAnimation48WithTintColor:UIColor.whiteColor];
+    [self.waveformImageView play_setWaveformAnimation48WithTintColor:UIColor.whiteColor];
     self.waveformImageView.hidden = YES;
 }
 

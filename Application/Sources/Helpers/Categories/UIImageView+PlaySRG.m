@@ -68,28 +68,35 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
     return images.copy;
 }
 
-#pragma mark Loading animation
+#pragma mark Loading animations
 
 - (void)play_setLoadingAnimation90WithTintColor:(UIColor *)tintColor
 {
     [self play_setAnimationImagesNamed:@"loading-90" withTintColor:tintColor];
 }
 
-#pragma mark Downloading animation
+#pragma mark Downloading animations
 
-- (void)play_setDownloadAnimation16WithTintColor:(nullable UIColor *)tintColor
+- (void)play_setDownloadAnimation16WithTintColor:(UIColor *)tintColor
 {
     [self play_setAnimationImagesNamed:@"downloading-16" withTintColor:tintColor];
 }
 
-- (void)play_setDownloadAnimation22WithTintColor:(nullable UIColor *)tintColor
+- (void)play_setDownloadAnimation22WithTintColor:(UIColor *)tintColor
 {
     [self play_setAnimationImagesNamed:@"downloading-22" withTintColor:tintColor];
 }
 
-- (void)play_setDownloadAnimation48WithTintColor:(nullable UIColor *)tintColor
+- (void)play_setDownloadAnimation48WithTintColor:(UIColor *)tintColor
 {
     [self play_setAnimationImagesNamed:@"downloading-48" withTintColor:tintColor];
+}
+
+#pragma mark Waveform animation
+
+- (void)play_setWaveformAnimation48WithTintColor:(UIColor *)tintColor
+{
+    [self play_setAnimationImagesNamed:@"waveform-48" withTintColor:tintColor];
 }
 
 #pragma mark Animation lifecycle
