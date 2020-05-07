@@ -42,9 +42,6 @@
     [super awakeFromNib];
     
     self.backgroundColor = UIColor.clearColor;
-    
-    // Cell highlighting is custom
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)prepareForReuse
@@ -74,9 +71,16 @@
 {
     [super setHighlighted:highlighted animated:animated];
     
-    UIColor *color = highlighted ? UIColor.play_grayColor : UIColor.whiteColor;
+    UIColor *color = (highlighted && self.selectionStyle == UITableViewCellAccessoryNone) ? UIColor.play_grayColor : UIColor.whiteColor;
     self.titleLabel.textColor = color;
     self.iconImageView.tintColor = color;
+    
+    [self updateIconImageViewAnimation];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
     
     [self updateIconImageViewAnimation];
 }

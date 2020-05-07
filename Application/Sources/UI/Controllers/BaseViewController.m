@@ -346,6 +346,7 @@
 - (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator API_AVAILABLE(ios(13.0))
 {
     UIViewController *viewController = animator.previewViewController;
+    animator.preferredCommitStyle = UIContextMenuInteractionCommitStylePop;
     [animator addCompletion:^{
         if ([viewController isKindOfClass:MediaPreviewViewController.class]) {
             MediaPreviewViewController *mediaPreviewViewController = (MediaPreviewViewController *)viewController;

@@ -510,13 +510,6 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     }
 }
 
-#pragma mark Scrollable protocol
-
-- (void)scrollToTopAnimated:(BOOL)animated
-{
-    [self.tableView play_scrollToTopAnimated:animated];
-}
-
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -535,6 +528,13 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     else {
         return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
     }
+}
+
+#pragma mark TabBarActionable protocol
+
+- (void)performActiveTabActionAnimated:(BOOL)animated
+{
+    [self.tableView play_scrollToTopAnimated:animated];
 }
 
 #pragma mark UITableViewDataSource protocol
