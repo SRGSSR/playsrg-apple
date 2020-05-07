@@ -163,7 +163,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic, weak) IBOutlet UIImageView *livestreamButtonImageView;
 
 @property (nonatomic, weak) IBOutlet GradientView *currentProgramView;
-@property (nonatomic, weak) IBOutlet UIView *currentProgramSpacerView;
+@property (nonatomic, weak) IBOutlet UIButton *currentProgramMoreEpisodesButton;
 @property (nonatomic, weak) IBOutlet UILabel *currentProgramTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *currentProgramSubtitleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *currentProgramFavoriteButton;
@@ -345,6 +345,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.currentProgramView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.currentProgramView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.currentProgramView.layer.masksToBounds = YES;
+    
+    self.currentProgramMoreEpisodesButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"More episodes", @"A more episode button label");
     
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
@@ -922,6 +924,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                          animated:NO];
     
     UIColor *foregroundColor = channel.titleColor ?: UIColor.whiteColor;
+    self.currentProgramMoreEpisodesButton.tintColor = foregroundColor;
     self.currentProgramTitleLabel.textColor = foregroundColor;
     self.currentProgramSubtitleLabel.textColor = foregroundColor;
     self.currentProgramFavoriteButton.tintColor = foregroundColor;
@@ -936,7 +939,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.currentProgramSubtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
         
         BOOL hidden = (currentProgram.show == nil);
-        self.currentProgramSpacerView.hidden = hidden;
+        self.currentProgramMoreEpisodesButton.hidden = hidden;
         self.currentProgramFavoriteButton.hidden = hidden;
         
         [self updateFavoriteStatusForShow:currentProgram.show];
@@ -945,7 +948,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.currentProgramTitleLabel.text = channel.name ?: [self mainMedia].title;
         self.currentProgramSubtitleLabel.text = nil;
         
-        self.currentProgramSpacerView.hidden = YES;
+        self.currentProgramMoreEpisodesButton.hidden = YES;
         self.currentProgramFavoriteButton.hidden = YES;
         
         [self updateFavoriteStatusForShow:nil];

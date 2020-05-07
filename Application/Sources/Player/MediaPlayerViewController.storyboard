@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -442,10 +442,17 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="M7A-GT-jh5">
                                                                 <rect key="frame" x="10" y="0.0" width="366" height="52"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U3Q-KF-Pj5" userLabel="Spacer View">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4s-Yh-Ziw" userLabel="Current Program More Episodes Button">
                                                                         <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
-                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    </view>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" secondItem="l4s-Yh-Ziw" secondAttribute="height" multiplier="1:1" id="0yt-hQ-WQS"/>
+                                                                        </constraints>
+                                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <state key="normal" image="episodes-22"/>
+                                                                        <connections>
+                                                                            <action selector="openShow:" destination="HgT-ei-KY5" eventType="touchUpInside" id="VG6-qf-igE"/>
+                                                                        </connections>
+                                                                    </button>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1KY-X6-Yhh">
                                                                         <rect key="frame" x="67" y="0.0" width="232" height="52"/>
                                                                         <subviews>
@@ -487,7 +494,7 @@
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstItem="U3Q-KF-Pj5" firstAttribute="width" secondItem="hBr-jC-7uQ" secondAttribute="width" id="GM8-xr-LBZ"/>
+                                                                    <constraint firstItem="l4s-Yh-Ziw" firstAttribute="width" secondItem="hBr-jC-7uQ" secondAttribute="width" id="Pji-SZ-n4b"/>
                                                                 </constraints>
                                                             </stackView>
                                                         </subviews>
@@ -500,9 +507,6 @@
                                                             <constraint firstAttribute="trailing" secondItem="M7A-GT-jh5" secondAttribute="trailing" constant="10" id="Y9n-xC-LhS"/>
                                                             <constraint firstItem="M7A-GT-jh5" firstAttribute="top" secondItem="jXJ-O2-0II" secondAttribute="top" id="k0w-qE-zyd"/>
                                                         </constraints>
-                                                        <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="Aqt-OQ-HsC" appends="YES" id="yKE-zg-p6p"/>
-                                                        </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96L-N2-RWf">
                                                         <rect key="frame" x="10" y="72" width="386" height="58"/>
@@ -596,7 +600,7 @@
                         <outlet property="closeButton" destination="URR-EB-goh" id="GT8-V7-lKB"/>
                         <outlet property="collapsedDetailsLabelsHeightConstraint" destination="O9i-0d-HTk" id="7MN-Zo-Xo2"/>
                         <outlet property="currentProgramFavoriteButton" destination="hBr-jC-7uQ" id="ffS-yK-1bo"/>
-                        <outlet property="currentProgramSpacerView" destination="U3Q-KF-Pj5" id="LQr-Xr-Y3I"/>
+                        <outlet property="currentProgramMoreEpisodesButton" destination="l4s-Yh-Ziw" id="ajR-SM-u6J"/>
                         <outlet property="currentProgramSubtitleLabel" destination="IIC-qR-rrp" id="uBX-DM-Vba"/>
                         <outlet property="currentProgramTitleLabel" destination="G8U-yX-Q0a" id="kSk-dP-6ET"/>
                         <outlet property="currentProgramView" destination="jXJ-O2-0II" id="9EU-sl-htH"/>
@@ -675,11 +679,6 @@
                         <action selector="openShow:" destination="HgT-ei-KY5" id="QJu-0z-hqM"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="Aqt-OQ-HsC">
-                    <connections>
-                        <action selector="openShow:" destination="HgT-ei-KY5" id="Qyk-io-g1B"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-144.80000000000001" y="143.47826086956522"/>
         </scene>
@@ -689,6 +688,7 @@
         <image name="audio_description-14" width="14" height="14"/>
         <image name="close-48" width="48" height="48"/>
         <image name="downloadable-48" width="48" height="48"/>
+        <image name="episodes-22" width="22" height="22"/>
         <image name="expand_22" width="22" height="22"/>
         <image name="favorite-22" width="22" height="22"/>
         <image name="home-22" width="22" height="22"/>
