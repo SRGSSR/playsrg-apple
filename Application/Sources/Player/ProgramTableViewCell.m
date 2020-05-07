@@ -18,7 +18,9 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
+@property (nonatomic, weak) IBOutlet UIView *thumbnailWrapperView;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
+@property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 @property (nonatomic, weak) IBOutlet UIImageView *waveformImageView;
 
 @end
@@ -34,12 +36,14 @@
     self.backgroundColor = UIColor.clearColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
-    self.thumbnailImageView.layer.masksToBounds = YES;
+    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.thumbnailWrapperView.layer.masksToBounds = YES;
     
     self.titleLabel.textColor = UIColor.whiteColor;
     self.subtitleLabel.textColor = UIColor.whiteColor;
+    
+    self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
     [self.waveformImageView play_setWaveformAnimation48WithTintColor:UIColor.whiteColor];
     self.waveformImageView.hidden = YES;
@@ -48,6 +52,8 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
+    
+    self.progressView.hidden = YES;
     
     [self.thumbnailImageView play_resetImage];
 }
@@ -96,6 +102,17 @@
     self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
     
     [self.thumbnailImageView play_requestImageForObject:program withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
+}
+
+- (void)setProgress:(NSNumber *)progress
+{
+    if (progress) {
+        self.progressView.hidden = NO;
+        self.progressView.progress = progress.floatValue;
+    }
+    else {
+        self.progressView.hidden = YES;
+    }
 }
 
 @end

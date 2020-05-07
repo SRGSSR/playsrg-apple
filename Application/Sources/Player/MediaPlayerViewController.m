@@ -1408,6 +1408,25 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self updateSelectionForProgramWithMediaURN:subdivision.URN];
 }
 
+- (void)updateProgramProgress
+{
+    for (ProgramTableViewCell *cell in self.programsTableView.visibleCells) {
+        [self updateProgramProgressForCell:cell];
+    }
+}
+
+- (void)updateProgramProgressForCell:(ProgramTableViewCell *)cell
+{
+    SRGProgram *program = cell.program;
+    if ([program.mediaURN isEqualToString:self.letterboxController.subdivision.URN]) {
+        float progress = fmaxf(fminf([self.letterboxController.currentDate timeIntervalSinceDate:program.startDate] / [program.endDate timeIntervalSinceDate:program.startDate], 1.f), 0.f);
+        cell.progress = @(progress);
+    }
+    else {
+        cell.progress = nil;
+    }
+}
+
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -1514,6 +1533,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self updateSelectionForProgramWithMediaURN:subdivision.URN];
     }
     [self reloadProgramBackgroundAnimated:YES];
+    [self updateProgramProgress];
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didSelectSubdivision:(SRGSubdivision *)subdivision
@@ -1669,6 +1689,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     cell.program = self.programs[indexPath.row];
     cell.playing = (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
+    [self updateProgramProgressForCell:cell];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
