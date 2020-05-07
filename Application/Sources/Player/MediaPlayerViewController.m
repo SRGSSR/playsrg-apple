@@ -489,6 +489,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.userInterfaceUpdateTimer = [ForegroundTimer timerWithTimeInterval:1. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
         @strongify(self)
         [self updateGoogleCastButton];
+        [self reloadProgramBackgroundAnimated:YES];
         
         // Ensure a save is triggered when handoff is used, so that the current position is properly updated in the
         // transmitted information.
@@ -627,7 +628,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [super updateForContentSizeCategory];
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
-    [self reloadProgramInformation];
+    [self reloadProgramInformationAnimated:NO];
 }
 
 - (BOOL)accessibilityPerformEscape
@@ -914,14 +915,29 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
 }
 
-- (void)reloadProgramInformation
+- (void)reloadProgramBackgroundAnimated:(BOOL)animated
 {
     NSString *channelUid = [self channelUid];
     Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
     
-    [self.currentProgramView updateWithStartColor:channel.gradientStartColor atPoint:CGPointMake(0.25f, 0.5f)
-                                         endColor:channel.gradientEndColor atPoint:CGPointMake(0.75f, 0.5f)
-                                         animated:NO];
+    if (self.letterboxController.live) {
+        [self.currentProgramView updateWithStartColor:channel.gradientStartColor atPoint:CGPointMake(0.25f, 0.5f)
+                                             endColor:channel.gradientEndColor atPoint:CGPointMake(0.75f, 0.5f)
+                                             animated:animated];
+    }
+    else {
+        [self.currentProgramView updateWithStartColor:channel.gradientStartColor atPoint:CGPointMake(0.25f, 0.5f)
+                                             endColor:channel.gradientStartColor atPoint:CGPointMake(0.75f, 0.5f)
+                                             animated:animated];
+    }
+}
+
+- (void)reloadProgramInformationAnimated:(BOOL)animated
+{
+    [self reloadProgramBackgroundAnimated:animated];
+    
+    NSString *channelUid = [self channelUid];
+    Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
     
     UIColor *foregroundColor = channel.titleColor ?: UIColor.whiteColor;
     self.currentProgramMoreEpisodesButton.tintColor = foregroundColor;
@@ -980,9 +996,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:mainMedia block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
-        [self reloadProgramInformation];
+        [self reloadProgramInformationAnimated:YES];
     }];
-    [self reloadProgramInformation];
+    [self reloadProgramInformationAnimated:NO];
 }
 
 - (void)unregisterChannelUpdates
@@ -2066,7 +2082,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
-    [self reloadProgramInformation];
+    [self reloadProgramInformationAnimated:YES];
     
     // When switching from video to audio or conversely, ensure the UI togglability is correct
     if (media.mediaType != previousMedia.mediaType) {
@@ -2095,7 +2111,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.closeButton.accessibilityHint = nil;
     }
     
-    [self reloadProgramInformation];
+    [self reloadProgramInformationAnimated:YES];
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
 }
 
