@@ -489,7 +489,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.userInterfaceUpdateTimer = [ForegroundTimer timerWithTimeInterval:1. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
         @strongify(self)
         [self updateGoogleCastButton];
-        [self reloadProgramBackgroundAnimated:YES];
         
         // Ensure a save is triggered when handoff is used, so that the current position is properly updated in the
         // transmitted information.
@@ -1514,6 +1513,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self scrollToProgramWithMediaURN:subdivision.URN animated:YES];
         [self updateSelectionForProgramWithMediaURN:subdivision.URN];
     }
+    [self reloadProgramBackgroundAnimated:YES];
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didSelectSubdivision:(SRGSubdivision *)subdivision
