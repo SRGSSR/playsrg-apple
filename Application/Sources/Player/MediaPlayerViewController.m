@@ -1677,6 +1677,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.letterboxController switchToURN:program.mediaURN withCompletionHandler:nil];
 }
 
+#if 0
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (self.programs.count != 0) {
@@ -1698,6 +1700,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         return nil;
     }
 }
+
+#endif
 
 #pragma mark UIViewControllerTransitioningDelegate protocol
 
