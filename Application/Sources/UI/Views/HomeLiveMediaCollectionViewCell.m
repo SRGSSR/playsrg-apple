@@ -7,6 +7,7 @@
 #import "HomeLiveMediaCollectionViewCell.h"
 
 #import "AnalyticsConstants.h"
+#import "ApplicationSettings.h"
 #import "ChannelService.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
@@ -33,6 +34,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *placeholderImageView;
 
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
+@property (nonatomic, weak) IBOutlet UILabel *recentLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
@@ -72,6 +74,12 @@
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     self.thumbnailImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailImageView.layer.masksToBounds = YES;
+    
+    self.recentLabel.layer.cornerRadius = LayoutStandardLabelCornerRadius;
+    self.recentLabel.layer.masksToBounds = YES;
+    self.recentLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
+    self.recentLabel.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"Last played", @"Label on recently played livestreams").uppercaseString];
+    self.recentLabel.hidden = YES;
     
     self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
     
@@ -206,6 +214,10 @@
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+    
+    self.recentLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+    self.recentLabel.hidden = ! [self.media.URN isEqualToString:ApplicationSettingLastSelectedTVLivestreamURN()]
+        && ! [self.media.URN isEqualToString:ApplicationSettingLastSelectedRadioLivestreamURN()];
     
     SRGBlockingReason blockingReason = [self.media blockingReasonAtDate:NSDate.date];
     if (blockingReason == SRGBlockingReasonNone || blockingReason == SRGBlockingReasonStartDate) {
