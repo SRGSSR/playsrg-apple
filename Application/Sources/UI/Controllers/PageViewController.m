@@ -244,7 +244,7 @@
     return self.pageViewController ? @[self.pageViewController] : @[];
 }
 
-#pragma mark Scrollable protocol
+#pragma mark TabBarActionable protocol
 
 - (void)performActiveTabActionAnimated:(BOOL)animated
 {
