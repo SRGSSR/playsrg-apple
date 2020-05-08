@@ -433,8 +433,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdu-Mm-eGu">
                                         <rect key="frame" x="4" y="0.0" width="406" height="619"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TRa-Gj-haE" userLabel="Channel Info Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="406" height="142"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="TRa-Gj-haE" userLabel="Channel Info Stack View">
+                                                <rect key="frame" x="0.0" y="0.0" width="406" height="132"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jXJ-O2-0II" customClass="GradientView">
                                                         <rect key="frame" x="10" y="12" width="386" height="52"/>
@@ -509,10 +509,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96L-N2-RWf">
-                                                        <rect key="frame" x="10" y="72" width="386" height="58"/>
+                                                        <rect key="frame" x="10" y="82" width="386" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HA6-0V-M1C">
-                                                                <rect key="frame" x="-2" y="10" width="390" height="38"/>
+                                                                <rect key="frame" x="-2" y="0.0" width="390" height="38"/>
                                                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="42" maxY="0.0"/>
                                                                 <state key="normal" title="Selected livestream">
@@ -523,18 +523,18 @@
                                                                 </connections>
                                                             </button>
                                                             <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" image="arrow_down-22" translatesAutoresizingMaskIntoConstraints="NO" id="Lud-EO-TIz">
-                                                                <rect key="frame" x="350" y="18" width="22" height="22"/>
+                                                                <rect key="frame" x="350" y="8" width="22" height="22"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="HA6-0V-M1C" firstAttribute="top" secondItem="96L-N2-RWf" secondAttribute="top" priority="999" constant="10" id="4ML-3U-PhG"/>
-                                                            <constraint firstAttribute="height" priority="999" constant="58" id="4ZN-Rr-tkk"/>
+                                                            <constraint firstItem="HA6-0V-M1C" firstAttribute="top" secondItem="96L-N2-RWf" secondAttribute="top" priority="999" id="4ML-3U-PhG"/>
+                                                            <constraint firstAttribute="height" priority="999" constant="38" id="4ZN-Rr-tkk"/>
                                                             <constraint firstItem="Lud-EO-TIz" firstAttribute="centerY" secondItem="96L-N2-RWf" secondAttribute="centerY" id="4l4-Y1-fUE"/>
                                                             <constraint firstItem="HA6-0V-M1C" firstAttribute="leading" secondItem="96L-N2-RWf" secondAttribute="leading" priority="999" constant="-2" id="7hS-Nh-c45"/>
                                                             <constraint firstAttribute="trailing" secondItem="Lud-EO-TIz" secondAttribute="trailing" constant="14" id="TaF-sQ-n6o"/>
-                                                            <constraint firstAttribute="bottom" secondItem="HA6-0V-M1C" secondAttribute="bottom" priority="999" constant="10" id="Uqw-0r-yqJ"/>
+                                                            <constraint firstAttribute="bottom" secondItem="HA6-0V-M1C" secondAttribute="bottom" priority="999" id="Uqw-0r-yqJ"/>
                                                             <constraint firstAttribute="trailing" secondItem="HA6-0V-M1C" secondAttribute="trailing" priority="999" constant="-2" id="qir-I0-7qX"/>
                                                         </constraints>
                                                     </view>
@@ -543,7 +543,7 @@
                                                 <edgeInsets key="layoutMargins" top="12" left="10" bottom="12" right="10"/>
                                             </stackView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Wbx-pt-wy2">
-                                                <rect key="frame" x="10" y="142" width="386" height="477"/>
+                                                <rect key="frame" x="10" y="132" width="386" height="487"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </tableView>
                                         </subviews>

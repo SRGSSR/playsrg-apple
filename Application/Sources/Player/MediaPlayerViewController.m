@@ -1711,7 +1711,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (self.programs.count != 0) {
-        return 50.f;
+        return 62.f;
     }
     else {
         return 0.f;
