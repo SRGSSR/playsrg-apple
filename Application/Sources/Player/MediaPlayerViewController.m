@@ -396,11 +396,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.livestreamButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.livestreamButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.livestreamButton.layer.masksToBounds = YES;
-    [self.livestreamButton setTitle:NSLocalizedString(@"Choose a regional radio", @"Title displayed on the regional radio selection button") forState:UIControlStateNormal];
+    self.livestreamButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Select regional radio", @"Regional livestream selection hint");
     
     self.livestreamButtonImageView.tintColor = UIColor.whiteColor;
-    
-    self.livestreamButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Select regional radio", @"Regional livestream selection hint");
     
     self.radioHomeButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.radioHomeButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
@@ -775,6 +773,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.channelView.hidden = NO;
         
         self.livestreamView.hidden = [self isLivestreamButtonHidden];
+        
+        if ([mainMedia.channel.uid isEqualToString:mainMedia.uid]) {
+            [self.livestreamButton setTitle:NSLocalizedString(@"Choose a regional radio", @"Title displayed on the regional radio selection button") forState:UIControlStateNormal];
+        }
+        else {
+            [self.livestreamButton setTitle:mainMedia.title forState:UIControlStateNormal];
+        }
+        
         self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     }
     else {
