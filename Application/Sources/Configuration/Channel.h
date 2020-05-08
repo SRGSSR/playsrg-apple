@@ -50,6 +50,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly) UIColor *gradientEndColor;
 
+/**
+ *  Return `YES` iff the status bar should be dark for this channel.
+ */
+@property (nonatomic, readonly, getter=hasDarkStatusBar) BOOL darkStatusBar;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -17,6 +17,7 @@
 @property (nonatomic) UIColor *titleColor;
 @property (nonatomic) UIColor *gradientStartColor;
 @property (nonatomic) UIColor *gradientEndColor;
+@property (nonatomic, getter=hasDarkStatusBar) BOOL darkStatusBar;
 
 @end
 
@@ -72,6 +73,11 @@
         }
         else {
             self.gradientEndColor = self.gradientStartColor;
+        }
+        
+        id darkStatusBarValue = dictionary[@"hasDarkStatusBar"];
+        if ([darkStatusBarValue isKindOfClass:NSNumber.class]) {
+            self.darkStatusBar = [darkStatusBarValue boolValue];
         }
     }
     return self;

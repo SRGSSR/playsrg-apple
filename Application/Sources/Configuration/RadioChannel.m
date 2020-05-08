@@ -8,8 +8,6 @@
 
 @interface RadioChannel ()
 
-@property (nonatomic, getter=hasDarkStatusBar) BOOL darkStatusBar;
-@property (nonatomic, getter=isBadgeStrokeHidden) BOOL badgeStrokeHidden;
 @property (nonatomic) NSArray<NSNumber *> *homeSections;
 
 @end
@@ -24,16 +22,6 @@
         self.homeSections = dictionary[@"homeSections"];
         if (! [self.homeSections isKindOfClass:NSArray.class] || self.homeSections.count == 0) {
             return nil;
-        }
-        
-        id darkStatusBarValue = dictionary[@"hasDarkStatusBar"];
-        if ([darkStatusBarValue isKindOfClass:NSNumber.class]) {
-            self.darkStatusBar = [darkStatusBarValue boolValue];
-        }
-        
-        id badgeStrokeHiddenValue = dictionary[@"badgeStrokeHidden"];
-        if ([badgeStrokeHiddenValue isKindOfClass:NSNumber.class]) {
-            self.badgeStrokeHidden = [badgeStrokeHiddenValue boolValue];
         }
     }
     return self;

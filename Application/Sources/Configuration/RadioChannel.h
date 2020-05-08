@@ -28,16 +28,6 @@ OBJC_EXPORT NSString * _Nullable RadioChannelImageOverridePath(RadioChannel * _N
 @interface RadioChannel : Channel
 
 /**
- *  Return `YES` iff the status bar should be dark for this channel.
- */
-@property (nonatomic, readonly, getter=hasDarkStatusBar) BOOL darkStatusBar;
-
-/**
- *  Set to `YES` to hide the badge stroke (the badge stroke color matches title color). Default is `NO`.
- */
-@property (nonatomic, readonly, getter=isBadgeStrokeHidden) BOOL badgeStrokeHidden;
-
-/**
  *  The home sections ordered list.
  */
 @property (nonatomic, readonly) NSArray<NSNumber *> *homeSections;                      // wrap `HomeSection` values
