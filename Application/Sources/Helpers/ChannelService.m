@@ -162,7 +162,6 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
         }
     };
     
-    // TODO: Hardcoded or should be remotely configurable?
     static const NSUInteger kPageSize = 50;
     
     SRGFirstPageRequest *request = nil;
