@@ -200,7 +200,7 @@
 "Keep autoplay?" = "Mantenere l'autoplay attivo?";
 
 /* Label on recently played livestreams */
-"Last played" = "Last played";
+"Last played" = "Ultimo contenuto visionato";
 
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Ultima sincronizzazione: %@";

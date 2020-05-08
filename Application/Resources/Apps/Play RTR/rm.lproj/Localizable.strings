@@ -200,7 +200,7 @@
 "Keep autoplay?" = "Tegnair autoplay?";
 
 /* Label on recently played livestreams */
-"Last played" = "Last played";
+"Last played" = "Ultim guardà";
 
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Ultima sincronisaziun: %@";
