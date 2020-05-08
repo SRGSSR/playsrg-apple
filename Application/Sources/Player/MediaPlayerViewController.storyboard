@@ -523,7 +523,7 @@
                                                                 </connections>
                                                             </button>
                                                             <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" image="arrow_down-22" translatesAutoresizingMaskIntoConstraints="NO" id="Lud-EO-TIz">
-                                                                <rect key="frame" x="354" y="18" width="22" height="22"/>
+                                                                <rect key="frame" x="350" y="18" width="22" height="22"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </imageView>
                                                         </subviews>
@@ -533,7 +533,7 @@
                                                             <constraint firstAttribute="height" priority="999" constant="58" id="4ZN-Rr-tkk"/>
                                                             <constraint firstItem="Lud-EO-TIz" firstAttribute="centerY" secondItem="96L-N2-RWf" secondAttribute="centerY" id="4l4-Y1-fUE"/>
                                                             <constraint firstItem="HA6-0V-M1C" firstAttribute="leading" secondItem="96L-N2-RWf" secondAttribute="leading" priority="999" constant="-2" id="7hS-Nh-c45"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Lud-EO-TIz" secondAttribute="trailing" constant="10" id="TaF-sQ-n6o"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Lud-EO-TIz" secondAttribute="trailing" constant="14" id="TaF-sQ-n6o"/>
                                                             <constraint firstAttribute="bottom" secondItem="HA6-0V-M1C" secondAttribute="bottom" priority="999" constant="10" id="Uqw-0r-yqJ"/>
                                                             <constraint firstAttribute="trailing" secondItem="HA6-0V-M1C" secondAttribute="trailing" priority="999" constant="-2" id="qir-I0-7qX"/>
                                                         </constraints>
