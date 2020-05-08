@@ -352,6 +352,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     TableViewConfigure(self.programsTableView);
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
+    
+    // Remove the spaces at the top and bottom of the grouped table view
+    // See https://stackoverflow.com/a/18938763/760435
+    self.programsTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.programsTableView.bounds.size.width, 0.01f)];
+    self.programsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.programsTableView.bounds.size.width, 0.01f)];
             
     NSString *programCellIdentifier = NSStringFromClass(ProgramTableViewCell.class);
     UINib *programCellNib = [UINib nibWithNibName:programCellIdentifier bundle:nil];
@@ -1697,8 +1702,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.letterboxController switchToURN:program.mediaURN withCompletionHandler:nil];
 }
 
-#if 0
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (self.programs.count != 0) {
@@ -1713,15 +1716,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     if (self.programs.count != 0) {
         ProgramHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(ProgramHeaderView.class)];
-        headerView.title = NSLocalizedString(@"Previously", @"Header for the program section dislaying past programs");
+        headerView.title = NSLocalizedString(@"Program", @"Header for the program section");
         return headerView;
     }
     else {
         return nil;
     }
 }
-
-#endif
 
 #pragma mark UIViewControllerTransitioningDelegate protocol
 
