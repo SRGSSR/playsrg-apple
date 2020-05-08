@@ -41,6 +41,7 @@
 #import "SRGProgramComposition+PlaySRG.h"
 #import "SRGResource+PlaySRG.h"
 #import "StoreReview.h"
+#import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
@@ -348,16 +349,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.currentProgramMoreEpisodesButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"More episodes", @"A more episode button label");
     
+    TableViewConfigure(self.programsTableView);
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
-    
-    self.programsTableView.estimatedRowHeight = 0.f;
-    self.programsTableView.estimatedSectionHeaderHeight = 0.f;
-    self.programsTableView.estimatedSectionFooterHeight = 0.f;
-    
-    self.programsTableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.programsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+            
     NSString *programCellIdentifier = NSStringFromClass(ProgramTableViewCell.class);
     UINib *programCellNib = [UINib nibWithNibName:programCellIdentifier bundle:nil];
     [self.programsTableView registerNib:programCellNib forCellReuseIdentifier:programCellIdentifier];

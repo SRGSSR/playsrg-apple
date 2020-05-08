@@ -19,6 +19,7 @@
 #import "ProfileTableViewCell.h"
 #import "PushService.h"
 #import "SettingsViewController.h"
+#import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
@@ -57,8 +58,7 @@
     
     self.view.backgroundColor = UIColor.play_blackColor;
     
-    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    
+    TableViewConfigure(self.tableView);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
