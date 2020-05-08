@@ -440,7 +440,7 @@
                                                         <rect key="frame" x="10" y="12" width="386" height="52"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="M7A-GT-jh5">
-                                                                <rect key="frame" x="10" y="0.0" width="366" height="52"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="386" height="52"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4s-Yh-Ziw" userLabel="Current Program More Episodes Button">
                                                                         <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
@@ -454,26 +454,26 @@
                                                                         </connections>
                                                                     </button>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1KY-X6-Yhh">
-                                                                        <rect key="frame" x="67" y="0.0" width="232" height="52"/>
+                                                                        <rect key="frame" x="67" y="0.0" width="252" height="52"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abv-3a-RQ9" userLabel="Spacer View">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="232" height="7.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="252" height="7.5"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             </view>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="&lt;programTitle&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8U-yX-Q0a">
-                                                                                <rect key="frame" x="0.0" y="7.5" width="232" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="7.5" width="252" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="&lt;programSubtitle&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIC-qR-rrp">
-                                                                                <rect key="frame" x="0.0" y="28" width="232" height="16"/>
+                                                                                <rect key="frame" x="0.0" y="28" width="252" height="16"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYO-th-C0W" userLabel="Spacer View">
-                                                                                <rect key="frame" x="0.0" y="44" width="232" height="8"/>
+                                                                                <rect key="frame" x="0.0" y="44" width="252" height="8"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             </view>
                                                                         </subviews>
@@ -482,7 +482,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBr-jC-7uQ">
-                                                                        <rect key="frame" x="314" y="0.0" width="52" height="52"/>
+                                                                        <rect key="frame" x="334" y="0.0" width="52" height="52"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="hBr-jC-7uQ" secondAttribute="height" multiplier="1:1" id="Q29-vv-hjE"/>
                                                                         </constraints>
@@ -502,9 +502,9 @@
                                                         <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="52" id="FK5-wy-eDf"/>
-                                                            <constraint firstItem="M7A-GT-jh5" firstAttribute="leading" secondItem="jXJ-O2-0II" secondAttribute="leading" constant="10" id="N1H-SU-THc"/>
+                                                            <constraint firstItem="M7A-GT-jh5" firstAttribute="leading" secondItem="jXJ-O2-0II" secondAttribute="leading" id="N1H-SU-THc"/>
                                                             <constraint firstAttribute="bottom" secondItem="M7A-GT-jh5" secondAttribute="bottom" id="XOv-1o-HwA"/>
-                                                            <constraint firstAttribute="trailing" secondItem="M7A-GT-jh5" secondAttribute="trailing" constant="10" id="Y9n-xC-LhS"/>
+                                                            <constraint firstAttribute="trailing" secondItem="M7A-GT-jh5" secondAttribute="trailing" id="Y9n-xC-LhS"/>
                                                             <constraint firstItem="M7A-GT-jh5" firstAttribute="top" secondItem="jXJ-O2-0II" secondAttribute="top" id="k0w-qE-zyd"/>
                                                         </constraints>
                                                     </view>
