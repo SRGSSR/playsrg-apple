@@ -1935,8 +1935,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         return;
     }
     
-    ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+    NSString *channelUid = [self channelUid];
+    RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
+    
+    ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
     PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
+    [appDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
+    
+    ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
     [appDelegate.rootTabBarController pushViewController:showViewController animated:NO];
     [appDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
 }
