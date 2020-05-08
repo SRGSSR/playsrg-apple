@@ -351,6 +351,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
     
+    self.programsTableView.estimatedRowHeight = 0.f;
+    self.programsTableView.estimatedSectionHeaderHeight = 0.f;
+    self.programsTableView.estimatedSectionFooterHeight = 0.f;
+    
     self.programsTableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.programsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -1370,12 +1374,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     void (^animations)(void) = ^{
         NSIndexPath *indexPath = [self indexPathForProgramWithMediaURN:mediaURN];
         if (indexPath) {
-            [self.programsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:animated];
+            [self.programsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
         }
     };
     
     if (animated) {
-        [UIView animateWithDuration:0.1 animations:animations];
+        [UIView animateWithDuration:0.2 animations:animations];
     }
     else {
         animations();
