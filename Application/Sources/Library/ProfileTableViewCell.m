@@ -42,6 +42,10 @@
     [super awakeFromNib];
     
     self.backgroundColor = UIColor.clearColor;
+    
+    UIView *selectedBackgroundView = [[UIView alloc] init];
+    selectedBackgroundView.backgroundColor = [UIColor colorWithWhite:0.15f alpha:1.f];
+    self.selectedBackgroundView = selectedBackgroundView;
 }
 
 - (void)prepareForReuse

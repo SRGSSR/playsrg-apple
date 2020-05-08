@@ -380,7 +380,7 @@
     else {
         ProfileTableViewCell *profileTableViewCell = (ProfileTableViewCell *)cell;
         profileTableViewCell.applicationSectionInfo = self.sectionInfos[indexPath.row];
-        profileTableViewCell.selectionStyle = self.splitViewController.collapsed ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleGray;
+        profileTableViewCell.selectionStyle = self.splitViewController.collapsed ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleDefault;
     }
 }
 
