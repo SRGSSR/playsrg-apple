@@ -286,7 +286,7 @@
     
     NSString *format = (self.controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) ? PlaySRGAccessibilityLocalizedString(@"Now playing: %@", @"Mini player label") : PlaySRGAccessibilityLocalizedString(@"Recently played: %@", @"Mini player label");
     
-    SRGChannel *channel = self.programComposition.channel;
+    SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
         NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, channel.title];
         

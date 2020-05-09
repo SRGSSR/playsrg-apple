@@ -142,7 +142,7 @@
 
 - (NSString *)accessibilityLabel
 {
-    SRGChannel *channel = self.programComposition.channel;
+    SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
         NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ live", @"Live content label, with a channel title"), channel.title];
         if (! self.recentLabel.hidden) {
@@ -244,7 +244,7 @@
     
     [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
     
-    SRGChannel *channel = self.programComposition.channel;
+    SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
         UIImage *logoImage = channel.play_banner22Image;
         self.logoImageView.image = logoImage;

@@ -300,8 +300,9 @@
 
 - (void)reloadData
 {
-    SRGChannel *channel = self.programComposition.channel;
+    SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
+        [self.mediaInfoStackView play_setHidden:YES];
         [self.channelInfoStackView play_setHidden:NO];
         
         SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, NSDate.date);
