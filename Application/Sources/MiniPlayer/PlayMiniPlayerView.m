@@ -73,6 +73,10 @@
 
 - (void)setMedia:(SRGMedia *)media
 {
+    if (! [media.channel isEqual:self.programComposition.channel]) {
+        self.programComposition = nil;
+    }
+    
     [self unregisterChannelUpdatesWithMedia:_media];
     _media = media;
     [self registerForChannelUpdatesWithMedia:media];
