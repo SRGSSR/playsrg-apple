@@ -339,6 +339,10 @@
         if (! [media isEqual:controller.media]) {
             [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
         }
+        else if (state == SRGPlaybackButtonStatePause && controller.mediaPlayerController.streamType == SRGStreamTypeLive) {
+            [controller stop];
+            return;
+        }
         else {
             [controller togglePlayPause];
         }
