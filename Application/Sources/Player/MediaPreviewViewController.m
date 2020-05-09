@@ -300,7 +300,7 @@
 
 - (void)reloadData
 {
-    SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
+    SRGChannel *channel = self.programComposition.channel;
     if (channel) {
         [self.mediaInfoStackView play_setHidden:YES];
         [self.channelInfoStackView play_setHidden:NO];
