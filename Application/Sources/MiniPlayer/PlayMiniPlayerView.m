@@ -339,10 +339,6 @@
         if (! [media isEqual:controller.media]) {
             [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
         }
-        else if (state == SRGPlaybackButtonStatePause && controller.mediaPlayerController.streamType == SRGStreamTypeLive) {
-            [controller stop];
-            return;
-        }
         else {
             [controller togglePlayPause];
         }
@@ -356,7 +352,7 @@
         [SRGLetterboxService.sharedService enableWithController:controller pictureInPictureDelegate:nil];
     }
     
-    if (media.mediaType == SRGMediaTypeVideo && ! ApplicationSettingBackgroundVideoPlaybackEnabled()
+    if (state == SRGPlaybackButtonStatePlay && media.mediaType == SRGMediaTypeVideo && ! ApplicationSettingBackgroundVideoPlaybackEnabled()
             && ! AVAudioSession.srg_isAirPlayActive && ! controller.pictureInPictureActive) {
         [self.nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
