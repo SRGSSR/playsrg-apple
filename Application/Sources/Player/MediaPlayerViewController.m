@@ -1534,7 +1534,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
 }
 
-- (void)letterboxView:(SRGLetterboxView *)letterboxView didScrollWithSubdivision:(SRGSubdivision *)subdivision time:(CMTime)time interactive:(BOOL)interactive
+- (void)letterboxView:(SRGLetterboxView *)letterboxView didScrollWithSubdivision:(SRGSubdivision *)subdivision time:(CMTime)time date:(NSDate *)date interactive:(BOOL)interactive
 {
     if (interactive) {
         SRGMedia *media = subdivision ? [self.letterboxController.mediaComposition mediaForSubdivision:subdivision] : self.letterboxController.fullLengthMedia;
