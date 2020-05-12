@@ -1385,7 +1385,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     };
     
     if (animated) {
-        [UIView animateWithDuration:0.2 animations:animations];
+        [self.view layoutIfNeeded];
+        [UIView animateWithDuration:0.2 animations:^{
+            animations();
+            [self.view layoutIfNeeded];
+        }];
     }
     else {
         animations();
