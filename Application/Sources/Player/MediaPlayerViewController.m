@@ -958,8 +958,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.currentProgramTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
     self.currentProgramSubtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
     
-    NSString *subdivisionURN = self.letterboxController.subdivision.URN;
-    SRGProgram *currentProgram = [self programWithMediaURN:subdivisionURN];
+    SRGProgram *currentProgram = [self currentProgram];
     if (currentProgram) {
         self.currentProgramTitleLabel.text = currentProgram.title;
         self.currentProgramSubtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
@@ -995,11 +994,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (NSArray<ProgramSection *> *)updatedProgramSections
 {
-    NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
-    if (segments.count == 0) {
-        return @[];
-    }
-    
     // Find the date range corresponding to the DVR window, in the stream reference frame. We cannot display reliable
     // program information while this information is not available.
     CMTimeRange timeRange = self.letterboxController.timeRange;
@@ -1011,7 +1005,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     NSMutableArray<ProgramSection *> *programSections = [NSMutableArray array];
     
-    NSArray<SRGProgram *> *nextPrograms = [self.programComposition play_programsMatchingSegments:segments fromDate:endDate toDate:nil];
+    NSArray<SRGProgram *> *nextPrograms = [self.programComposition play_programsFromDate:endDate toDate:nil];
     if (nextPrograms.count != 0) {
         ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Next", @"Header for the next program section")
                                                                       programs:nextPrograms
@@ -1019,9 +1013,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [programSections addObject:programSection];
     }
     
-    NSArray<SRGProgram *> *programs = [self.programComposition play_programsMatchingSegments:segments fromDate:startDate toDate:endDate];
+    NSArray<SRGProgram *> *programs = [self.programComposition play_programsFromDate:startDate toDate:endDate];
     if (programs.count != 0) {
-        ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Available", @"Header for the program section")
+        ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Replay", @"Header for the replayable program section")
                                                                       programs:programs
                                                                    interactive:YES];
         [programSections addObject:programSection];
@@ -1194,8 +1188,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGMedia *mainChapterMedia = [self mainChapterMedia];
     if (mainChapterMedia.contentType == SRGContentTypeLivestream) {
-        NSString *subdivisionURN = self.letterboxController.subdivision.URN;
-        return [self programWithMediaURN:subdivisionURN].show;
+        return [self currentProgram].show;
     }
     else {
         return mainChapterMedia.show;
@@ -1382,14 +1375,29 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 #pragma mar Program list
 
-- (SRGProgram *)programWithMediaURN:(NSString *)mediaURN
+- (SRGProgram *)currentProgram
 {
-    if (! mediaURN) {
-        return nil;
+    NSString *subdivisionURN = self.letterboxController.subdivision.URN;
+    if (subdivisionURN) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGProgram.new, mediaURN), subdivisionURN];
+        SRGProgram *program = [self.programComposition.programs filteredArrayUsingPredicate:predicate].firstObject;
+        if (program) {
+            return program;
+        }
     }
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGProgram.new, mediaURN), mediaURN];
-    return [self.programComposition.programs filteredArrayUsingPredicate:predicate].firstObject;
+    NSDate *currentDate = self.letterboxController.currentDate;
+    if (currentDate) {
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGProgram * _Nullable program, NSDictionary<NSString *,id> * _Nullable bindings) {
+            return [program play_containsDate:currentDate];
+        }];
+        SRGProgram *program = [self.programComposition.programs filteredArrayUsingPredicate:predicate].firstObject;
+        if (program) {
+            return program;
+        }
+    }
+    
+    return nil;
 }
 
 - (NSIndexPath *)indexPathForProgramWithMediaURN:(NSString *)mediaURN
