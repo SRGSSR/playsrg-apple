@@ -1061,6 +1061,11 @@
 		6F8CAE922122C5FE005046BA /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */; };
 		6F8CAE932122C607005046BA /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */; };
 		6F8CAE942122C60F005046BA /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */; };
+		6F8FDBCB2473B40D00628DAE /* ProgramSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDBCA2473B40C00628DAE /* ProgramSection.m */; };
+		6F8FDBCC2473B40D00628DAE /* ProgramSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDBCA2473B40C00628DAE /* ProgramSection.m */; };
+		6F8FDBCD2473B40D00628DAE /* ProgramSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDBCA2473B40C00628DAE /* ProgramSection.m */; };
+		6F8FDBCE2473B40D00628DAE /* ProgramSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDBCA2473B40C00628DAE /* ProgramSection.m */; };
+		6F8FDBCF2473B40D00628DAE /* ProgramSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDBCA2473B40C00628DAE /* ProgramSection.m */; };
 		6F9122BF1DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6F9122C01DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6F9122C11DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
@@ -2091,6 +2096,8 @@
 		6F88139323D85DD600A00826 /* GoogleCastBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleCastBarButtonItem.h; sourceTree = "<group>"; };
 		6F88139423D85DD600A00826 /* GoogleCastBarButtonItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleCastBarButtonItem.m; sourceTree = "<group>"; };
 		6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoconutKit.framework; path = Carthage/Build/iOS/Static/CoconutKit.framework; sourceTree = "<group>"; };
+		6F8FDBC92473B40C00628DAE /* ProgramSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgramSection.h; sourceTree = "<group>"; };
+		6F8FDBCA2473B40C00628DAE /* ProgramSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProgramSection.m; sourceTree = "<group>"; };
 		6F9122BD1DC8708400725EEB /* PlayErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayErrors.h; sourceTree = "<group>"; };
 		6F9122BE1DC8708400725EEB /* PlayErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayErrors.m; sourceTree = "<group>"; };
 		6F93962420CA5AE1003ECC1B /* NotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
@@ -3562,12 +3569,14 @@
 				6FB3C1A51DBCE783008160B4 /* MediaPreviewViewController.h */,
 				6FB3C1A61DBCE783008160B4 /* MediaPreviewViewController.m */,
 				6FB3C1A71DBCE783008160B4 /* MediaPreviewViewController.storyboard */,
-				6F3B021F245AAE1B00C5A8D7 /* ProgramTableViewCell.h */,
-				6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */,
-				6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */,
 				6F5CAC86245FF04C0058F9B0 /* ProgramHeaderView.h */,
 				6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */,
 				6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */,
+				6F8FDBC92473B40C00628DAE /* ProgramSection.h */,
+				6F8FDBCA2473B40C00628DAE /* ProgramSection.m */,
+				6F3B021F245AAE1B00C5A8D7 /* ProgramTableViewCell.h */,
+				6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */,
+				6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */,
 				6F5F4FC11DB10CFD0011CCA3 /* RelatedContentView.h */,
 				6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */,
 				6F5F4FC31DB10CFD0011CCA3 /* RelatedContentView.xib */,
@@ -5864,6 +5873,7 @@
 				6FD88F7722D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F475FB41EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FE686E11EB9D57400067D40 /* ChannelService.m in Sources */,
+				6F8FDBCB2473B40D00628DAE /* ProgramSection.m in Sources */,
 				08DD9D5C1FFE6EDB00115906 /* ModuleHeaderView.m in Sources */,
 				081220AA1DD079BB00BF8326 /* DownloadsViewController.m in Sources */,
 				0804917B22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */,
@@ -6061,6 +6071,7 @@
 				08C68F901D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B623708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220AE1DD07B7A00BF8326 /* DownloadsViewController.m in Sources */,
+				6F8FDBCC2473B40D00628DAE /* ProgramSection.m in Sources */,
 				087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				082910B6239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */,
@@ -6233,6 +6244,7 @@
 				08C68F911D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B723708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220B21DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
+				6F8FDBCD2473B40D00628DAE /* ProgramSection.m in Sources */,
 				087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				082910B7239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */,
@@ -6405,6 +6417,7 @@
 				08C68F921D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B823708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220B61DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
+				6F8FDBCE2473B40D00628DAE /* ProgramSection.m in Sources */,
 				087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				082910B8239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F81D65F02700372DF0 /* CalendarViewController.m in Sources */,
@@ -6577,6 +6590,7 @@
 				08C68F931D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220BA1DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
+				6F8FDBCF2473B40D00628DAE /* ProgramSection.m in Sources */,
 				087BC6671EDF1B7D00EED89B /* UILabel+PlaySRG.m in Sources */,
 				082910B9239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				E694A9F91D65F02700372DF0 /* CalendarViewController.m in Sources */,
