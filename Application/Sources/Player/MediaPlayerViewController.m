@@ -995,22 +995,29 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (NSArray<ProgramSection *> *)updatedProgramSections
 {
-    // Find the date range corresponding to the DVR window, in the stream reference frame.
+    NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
+    if (segments.count == 0) {
+        return @[];
+    }
+    
+    // Find the date range corresponding to the DVR window, in the stream reference frame. We cannot display reliable
+    // program information while this information is not available.
     CMTimeRange timeRange = self.letterboxController.timeRange;
     NSDate *startDate = [self.letterboxController streamDateForTime:timeRange.start];
     NSDate *endDate = [self.letterboxController streamDateForTime:CMTimeRangeGetEnd(timeRange)];
-    
-    NSArray<SRGSegment *> *segments = self.letterboxController.mediaComposition.mainChapter.segments;
+    if (! startDate || ! endDate) {
+        return @[];
+    }
     
     NSMutableArray<ProgramSection *> *programSections = [NSMutableArray array];
     
-    NSArray<SRGProgram *> *nextPrograms = segments ? [self.programComposition play_programsMatchingSegments:segments fromDate:endDate toDate:nil] : nil;
+    NSArray<SRGProgram *> *nextPrograms = [self.programComposition play_programsMatchingSegments:segments fromDate:endDate toDate:nil];
     if (nextPrograms.count != 0) {
         ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Next", @"Header for the next program section") programs:nextPrograms];
         [programSections addObject:programSection];
     }
     
-    NSArray<SRGProgram *> *programs = segments ? [self.programComposition play_programsMatchingSegments:segments fromDate:startDate toDate:endDate] : nil;
+    NSArray<SRGProgram *> *programs = [self.programComposition play_programsMatchingSegments:segments fromDate:startDate toDate:endDate];
     if (programs.count != 0) {
         ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Available", @"Header for the program section") programs:programs];
         [programSections addObject:programSection];
