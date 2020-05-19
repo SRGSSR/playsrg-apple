@@ -10,6 +10,7 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic) NSArray<SRGProgram *> *programs;
+@property (nonatomic, getter=isInteractive) BOOL interactive;
 
 @end
 
@@ -17,13 +18,25 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithTitle:(NSString *)title programs:(NSArray<SRGProgram *> *)programs
+- (instancetype)initWithTitle:(NSString *)title programs:(NSArray<SRGProgram *> *)programs interactive:(BOOL)interactive
 {
     if (self = [super init]) {
         self.title = title;
         self.programs = programs;
+        self.interactive = interactive;
     }
     return self;
+}
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; title = %@; programs = %@>",
+            self.class,
+            self,
+            self.title,
+            self.programs];
 }
 
 @end

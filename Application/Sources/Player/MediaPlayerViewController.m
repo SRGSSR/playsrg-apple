@@ -1013,13 +1013,17 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     NSArray<SRGProgram *> *nextPrograms = [self.programComposition play_programsMatchingSegments:segments fromDate:endDate toDate:nil];
     if (nextPrograms.count != 0) {
-        ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Next", @"Header for the next program section") programs:nextPrograms];
+        ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Next", @"Header for the next program section")
+                                                                      programs:nextPrograms
+                                                                   interactive:NO];
         [programSections addObject:programSection];
     }
     
     NSArray<SRGProgram *> *programs = [self.programComposition play_programsMatchingSegments:segments fromDate:startDate toDate:endDate];
     if (programs.count != 0) {
-        ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Available", @"Header for the program section") programs:programs];
+        ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Available", @"Header for the program section")
+                                                                      programs:programs
+                                                                   interactive:YES];
         [programSections addObject:programSection];
     }
     
@@ -1747,13 +1751,17 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     ProgramSection *programSection = self.programSections[indexPath.section];
     cell.program = programSection.programs[indexPath.row];
     cell.playing = (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
+    cell.userInteractionEnabled = programSection.interactive;
     [self updateProgramProgressForCell:cell];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: No interaction with future sections (maybe add a config bool to the section object)
     ProgramSection *programSection = self.programSections[indexPath.section];
+    if (! programSection.interactive) {
+        return;
+    }
+    
     SRGProgram *program = programSection.programs[indexPath.row];
     [self.letterboxController switchToURN:program.mediaURN withCompletionHandler:nil];
 }
