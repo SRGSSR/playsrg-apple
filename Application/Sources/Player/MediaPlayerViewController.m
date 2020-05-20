@@ -1005,7 +1005,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     NSMutableArray<ProgramSection *> *programSections = [NSMutableArray array];
     
-    NSArray<SRGProgram *> *nextPrograms = [self.programComposition play_programsFromDate:endDate toDate:nil withMediaURNs:nil];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, startDate) ascending:NO];
+    NSArray<SRGProgram *> *nextPrograms = [[self.programComposition play_programsFromDate:endDate toDate:nil withMediaURNs:nil] sortedArrayUsingDescriptors:@[sortDescriptor]];
     if (nextPrograms.count != 0) {
         ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Next", @"Header for the next program section")
                                                                       programs:nextPrograms
@@ -1015,7 +1016,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGSegment.new, URN)];
     NSArray<NSString *> *mediaURNs = [self.letterboxController.mediaComposition.mainChapter.segments valueForKeyPath:keyPath] ?: @[];
-    NSArray<SRGProgram *> *programs = [self.programComposition play_programsFromDate:startDate toDate:endDate withMediaURNs:mediaURNs];
+    NSArray<SRGProgram *> *programs = [[self.programComposition play_programsFromDate:startDate toDate:endDate withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
     if (programs.count != 0) {
         ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Replay", @"Header for the replayable program section")
                                                                       programs:programs
@@ -1418,7 +1419,38 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     return nil;
 }
 
-- (void)scrollToProgramWithMediaURN:(NSString *)mediaURN animated:(BOOL)animated
+- (NSIndexPath *)nearestProgramIndexPathForDate:(NSDate *)date
+{
+    // Flatten all displayed programs, in ascending start date order
+    NSMutableArray<SRGProgram *> *programs = [NSMutableArray array];
+    [self.programSections enumerateObjectsUsingBlock:^(ProgramSection * _Nonnull programSection, NSUInteger idx, BOOL * _Nonnull stop) {
+        [programs addObjectsFromArray:programSection.programs];
+    }];
+    
+    if (programs.count == 0) {
+        return nil;
+    }
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, startDate) ascending:YES];
+    [programs sortUsingDescriptors:@[sortDescriptor]];
+    
+    // Find the nearest item in the list
+    __block NSUInteger nearestIndex = 0;
+    [programs enumerateObjectsUsingBlock:^(SRGProgram * _Nonnull program, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([date compare:program.startDate] == NSOrderedAscending) {
+            nearestIndex = (idx > 0) ? idx - 1 : 0;
+            *stop = YES;
+        }
+        else {
+            nearestIndex = idx;
+        }
+    }];
+    
+    SRGProgram *nearestProgram = programs[nearestIndex];
+    return [self indexPathForProgramWithMediaURN:nearestProgram.mediaURN];
+}
+
+- (void)scrollToProgramWithMediaURN:(NSString *)mediaURN date:(NSDate *)date animated:(BOOL)animated
 {
     if (self.programsTableView.dragging) {
         return;
@@ -1430,6 +1462,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     void (^animations)(void) = ^{
         NSIndexPath *indexPath = [self indexPathForProgramWithMediaURN:mediaURN];
+        if (! indexPath && date) {
+            indexPath = [self nearestProgramIndexPathForDate:date];
+        }
+        
         if (indexPath) {
             [self.programsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
         }
@@ -1450,7 +1486,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)scrollToCurrentProgramAnimated:(BOOL)animated
 {
     SRGSubdivision *subdivision = self.letterboxController.subdivision;
-    [self scrollToProgramWithMediaURN:subdivision.URN animated:animated];
+    [self scrollToProgramWithMediaURN:subdivision.URN date:self.letterboxController.currentDate animated:animated];
 }
 
 - (void)updateSelectionForProgramWithMediaURN:(NSString *)mediaURN
@@ -1594,7 +1630,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (interactive) {
         SRGMedia *media = subdivision ? [self.letterboxController.mediaComposition mediaForSubdivision:subdivision] : self.letterboxController.fullLengthMedia;
         [self reloadDataOverriddenWithMedia:media mainChapterMedia:[self mainChapterMedia]];
-        [self scrollToProgramWithMediaURN:subdivision.URN animated:YES];
+        [self scrollToProgramWithMediaURN:subdivision.URN date:date animated:YES];
         [self updateSelectionForProgramWithMediaURN:subdivision.URN];
     }
     [self reloadProgramBackgroundAnimated:YES];
@@ -2233,7 +2269,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)segmentDidStart:(NSNotification *)notification
 {
     SRGSegment *segment = notification.userInfo[SRGMediaPlayerSegmentKey];
-    [self scrollToProgramWithMediaURN:segment.URN animated:YES];
+    [self scrollToProgramWithMediaURN:segment.URN date:self.letterboxController.currentDate animated:YES];
     [self updateSelectionForProgramWithMediaURN:segment.URN];
 }
 
