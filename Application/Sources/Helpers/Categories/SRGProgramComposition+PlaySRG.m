@@ -8,7 +8,7 @@
 
 @implementation SRGProgramComposition (PlaySRG)
 
-- (NSArray<SRGProgram *> *)play_programsFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate
+- (NSArray<SRGProgram *> *)play_programsFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate withMediaURNs:(NSArray<NSString *> *)mediaURNs
 {
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGProgram * _Nullable program, NSDictionary<NSString *,id> * _Nullable bindings) {
         if (fromDate && [program.startDate compare:fromDate] == NSOrderedAscending) {
@@ -16,6 +16,10 @@
         }
         
         if (toDate && [toDate compare:program.startDate] == NSOrderedAscending) {
+            return NO;
+        }
+        
+        if (mediaURNs && ! [mediaURNs containsObject:program.mediaURN]) {
             return NO;
         }
         

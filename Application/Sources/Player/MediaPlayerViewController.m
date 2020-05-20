@@ -1005,7 +1005,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     NSMutableArray<ProgramSection *> *programSections = [NSMutableArray array];
     
-    NSArray<SRGProgram *> *nextPrograms = [self.programComposition play_programsFromDate:endDate toDate:nil];
+    NSArray<SRGProgram *> *nextPrograms = [self.programComposition play_programsFromDate:endDate toDate:nil withMediaURNs:nil];
     if (nextPrograms.count != 0) {
         ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Next", @"Header for the next program section")
                                                                       programs:nextPrograms
@@ -1013,7 +1013,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [programSections addObject:programSection];
     }
     
-    NSArray<SRGProgram *> *programs = [self.programComposition play_programsFromDate:startDate toDate:endDate];
+    NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGSegment.new, URN)];
+    NSArray<NSString *> *mediaURNs = [self.letterboxController.mediaComposition.mainChapter.segments valueForKeyPath:keyPath] ?: @[];
+    NSArray<SRGProgram *> *programs = [self.programComposition play_programsFromDate:startDate toDate:endDate withMediaURNs:mediaURNs];
     if (programs.count != 0) {
         ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Replay", @"Header for the replayable program section")
                                                                       programs:programs
