@@ -1421,10 +1421,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (NSIndexPath *)nearestProgramIndexPathForDate:(NSDate *)date
 {
-    // Flatten all displayed programs, in ascending start date order
+    // Flatten all reachable programs, in ascending start date order
     NSMutableArray<SRGProgram *> *programs = [NSMutableArray array];
     [self.programSections enumerateObjectsUsingBlock:^(ProgramSection * _Nonnull programSection, NSUInteger idx, BOOL * _Nonnull stop) {
-        [programs addObjectsFromArray:programSection.programs];
+        if (programSection.interactive) {
+            [programs addObjectsFromArray:programSection.programs];
+        }
     }];
     
     if (programs.count == 0) {
