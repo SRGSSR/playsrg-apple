@@ -280,7 +280,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>srgletterbox-apple (af0f6e1)</string>
+			<string>srgletterbox-apple (ff9d7bb)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -296,7 +296,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-apple</string>
 			<key>Title</key>
-			<string>srgmediaplayer-apple (1a4f3a6)</string>
+			<string>srgmediaplayer-apple (c0ead4d)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
