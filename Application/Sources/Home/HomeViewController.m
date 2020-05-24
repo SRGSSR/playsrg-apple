@@ -267,6 +267,8 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
 - (void)refreshDidStart
 {
     self.lastRequestError = nil;
+    
+    [self.tableView reloadData];
 }
 
 - (void)refreshDidFinishWithError:(NSError *)error
