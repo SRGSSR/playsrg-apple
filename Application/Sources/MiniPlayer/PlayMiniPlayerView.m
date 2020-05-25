@@ -200,7 +200,7 @@
         self.titleLabel.numberOfLines = 1;
         
         self.liveLabel.hidden = NO;
-        self.liveLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.liveLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         if (! self.controller || self.controller.live) {
             self.liveLabel.text = NSLocalizedString(@"Currently", @"Introductory text for what is currently on air, displayed on the mini player");
         }
