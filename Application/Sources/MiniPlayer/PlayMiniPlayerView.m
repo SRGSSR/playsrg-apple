@@ -40,6 +40,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *closeButton;
 
 @property (nonatomic, weak) id periodicTimeObserver;
+@property (nonatomic, weak) id channelRegistration;
 
 @end
 
@@ -78,7 +79,7 @@
         self.programComposition = nil;
     }
     
-    [self unregisterChannelUpdatesWithMedia:_media];
+    [self unregisterChannelUpdates];
     _media = media;
     [self registerForChannelUpdatesWithMedia:media];
 }
@@ -178,7 +179,7 @@
         [letterboxService removeObserver:self keyPath:@keypath(letterboxService.controller)];
         self.controller = nil;
         
-        [self unregisterChannelUpdatesWithMedia:self.media];
+        [self unregisterChannelUpdates];
     }
 }
 
@@ -297,23 +298,19 @@
 
 - (void)registerForChannelUpdatesWithMedia:(SRGMedia *)media
 {
-    if (! media) {
+    if (media.contentType != SRGContentTypeLivestream || ! media.channel) {
         return;
     }
     
-    [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGProgramComposition * _Nullable programComposition) {
+    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:media.channel vendor:media.vendor livestreamUid:media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
         [self reloadData];
     }];
 }
 
-- (void)unregisterChannelUpdatesWithMedia:(SRGMedia *)media
+- (void)unregisterChannelUpdates
 {
-    if (! media) {
-        return;
-    }
-    
-    [ChannelService.sharedService unregisterObserver:self forMedia:media];
+    [ChannelService.sharedService removeObserver:self.channelRegistration];
 }
 
 #pragma mark AccessibilityViewDelegate protocol

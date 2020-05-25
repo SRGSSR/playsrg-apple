@@ -45,6 +45,8 @@
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
+@property (nonatomic, weak) id channelRegistration;
+
 @end
 
 @implementation HomeLiveMediaCollectionViewCell
@@ -93,7 +95,7 @@
     self.mediaView.hidden = YES;
     self.placeholderView.hidden = NO;
     
-    [self unregisterChannelUpdatesWithMedia:self.media];
+    [self unregisterChannelUpdates];
     self.media = nil;
     
     self.programComposition = nil;
@@ -115,7 +117,7 @@
         [self registerForChannelUpdatesWithMedia:self.media];
     }
     else {
-        [self unregisterChannelUpdatesWithMedia:self.media];
+        [self unregisterChannelUpdates];
     }
 }
 
@@ -173,7 +175,7 @@
 
 - (void)setMedia:(SRGMedia *)media
 {
-    [self unregisterChannelUpdatesWithMedia:self.media];
+    [self unregisterChannelUpdates];
     
     _media = media;
     
@@ -185,23 +187,19 @@
 
 - (void)registerForChannelUpdatesWithMedia:(SRGMedia *)media
 {
-    if (! media) {
+    if (media.contentType != SRGContentTypeLivestream || ! media.channel) {
         return;
     }
     
-    [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGProgramComposition * _Nullable programComposition) {
+    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:media.channel vendor:media.vendor livestreamUid:media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
         [self reloadData];
     }];
 }
 
-- (void)unregisterChannelUpdatesWithMedia:(SRGMedia *)media
+- (void)unregisterChannelUpdates
 {
-    if (! media || media.contentType != SRGContentTypeLivestream) {
-        return;
-    }
-    
-    [ChannelService.sharedService unregisterObserver:self forMedia:media];
+    [ChannelService.sharedService removeObserver:self.channelRegistration];
 }
 
 #pragma mark UI

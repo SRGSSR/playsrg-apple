@@ -35,22 +35,15 @@ typedef void (^ChannelServiceUpdateBlock)(SRGProgramComposition * _Nullable prog
 @property (class, nonatomic, readonly) ChannelService *sharedService;
 
 /**
- *  Register an observer to be notified of channel updates for a given media. The provided block is called when
- *  channel information is available.
- *
- *  @discussion If the media is not a livestream, this method does nothing.
+ *  Register an observer to be notified of updates for a given channel. The provided block is called when channel information
+ *  is available.
  */
-- (void)registerObserver:(id)observer forChannelUpdatesWithMedia:(SRGMedia *)media block:(ChannelServiceUpdateBlock)block;
+- (id)addObserver:(id)observer forUpdatesWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block;
 
 /**
- *  Unregister the observer from channel notifications for the specified media.
+ *  Remove the specified observer.
  */
-- (void)unregisterObserver:(id)observer forMedia:(SRGMedia *)media;
-
-/**
- *  Unregister the observer from all channel notifications.
- */
-- (void)unregisterObserver:(id)observer;
+- (void)removeObserver:(nullable id)observer;
 
 @end
 

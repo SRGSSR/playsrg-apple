@@ -956,6 +956,11 @@
 		6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B3B1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B3C1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
+		6F56F9F4247C407000B2387B /* ChannelServiceSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F56F9F3247C407000B2387B /* ChannelServiceSetup.m */; };
+		6F56F9F5247C407000B2387B /* ChannelServiceSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F56F9F3247C407000B2387B /* ChannelServiceSetup.m */; };
+		6F56F9F6247C407000B2387B /* ChannelServiceSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F56F9F3247C407000B2387B /* ChannelServiceSetup.m */; };
+		6F56F9F7247C407100B2387B /* ChannelServiceSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F56F9F3247C407000B2387B /* ChannelServiceSetup.m */; };
+		6F56F9F8247C407100B2387B /* ChannelServiceSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F56F9F3247C407000B2387B /* ChannelServiceSetup.m */; };
 		6F58664A1DD226EE005DAFE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5866491DD226EE005DAFE4 /* Settings.bundle */; };
 		6F58664B1DD226EE005DAFE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5866491DD226EE005DAFE4 /* Settings.bundle */; };
 		6F58664C1DD226EE005DAFE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5866491DD226EE005DAFE4 /* Settings.bundle */; };
@@ -2063,6 +2068,8 @@
 		6F556B361DDC419800B5DEA2 /* SettingsBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsBaseViewController.h; sourceTree = "<group>"; };
 		6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsBaseViewController.m; sourceTree = "<group>"; };
 		6F556DB020D1174100C3573A /* NotificationService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NotificationService-Info.plist"; sourceTree = "<group>"; };
+		6F56F9F2247C407000B2387B /* ChannelServiceSetup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChannelServiceSetup.h; sourceTree = "<group>"; };
+		6F56F9F3247C407000B2387B /* ChannelServiceSetup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChannelServiceSetup.m; sourceTree = "<group>"; };
 		6F5866491DD226EE005DAFE4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		6F5CAC86245FF04C0058F9B0 /* ProgramHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgramHeaderView.h; sourceTree = "<group>"; };
 		6F5F4FC11DB10CFD0011CCA3 /* RelatedContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedContentView.h; sourceTree = "<group>"; };
@@ -2613,7 +2620,6 @@
 			isa = PBXGroup;
 			children = (
 				6F4760181EB37BD1003021EA /* Categories */,
-				08C33ED323CB5C6500D422C1 /* Protocols */,
 				08AF947E217D27E40028B082 /* ActivityItemSource.h */,
 				08AF947F217D27E40028B082 /* ActivityItemSource.m */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
@@ -2622,6 +2628,8 @@
 				087584CF23A0008500FA7207 /* ApplicationSectionInfo.m */,
 				6FE686DF1EB9D57400067D40 /* ChannelService.h */,
 				6FE686E01EB9D57400067D40 /* ChannelService.m */,
+				6F56F9F2247C407000B2387B /* ChannelServiceSetup.h */,
+				6F56F9F3247C407000B2387B /* ChannelServiceSetup.m */,
 				6FE1B9171FAC34D600A58F3B /* ContentInsets.h */,
 				6FE1B9181FAC34D600A58F3B /* ContentInsets.m */,
 				0821D53C227F5ED300FC091F /* DeepLinkService.h */,
@@ -2647,6 +2655,7 @@
 				6F7CE6EF1DD6021700FA4A6D /* PlayLogger.h */,
 				6F7218111DBE75AC00575072 /* PreviewingDelegate.h */,
 				6F7218121DBE75AC00575072 /* PreviewingDelegate.m */,
+				08C33ED323CB5C6500D422C1 /* Protocols */,
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
@@ -5783,6 +5792,7 @@
 				6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F475FC31EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6F475FFF1EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
+				6F56F9F4247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6F12E4E222D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				0832BF1022BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				082910AE239E90D200D168F4 /* TabBarController.m in Sources */,
@@ -6002,6 +6012,7 @@
 				6FD88F7822D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B642F21A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633DF1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6F56F9F5247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				089EA019201148F40070E11A /* TimerTarget.m in Sources */,
 				6FAF43011EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
@@ -6175,6 +6186,7 @@
 				6FD88F7922D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B643021A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633E01FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6F56F9F6247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C697245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				089EA01A201148F50070E11A /* TimerTarget.m in Sources */,
 				6FAF43021EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
@@ -6348,6 +6360,7 @@
 				6FD88F7A22D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B643121A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633E11FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6F56F9F7247C407100B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C698245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				089EA01B201148F50070E11A /* TimerTarget.m in Sources */,
 				6FAF43031EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
@@ -6521,6 +6534,7 @@
 				6FD88F7B22D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F6B643221A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */,
 				6FD633E21FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6F56F9F8247C407100B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C699245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				089EA01C201148F60070E11A /* TimerTarget.m in Sources */,
 				6FAF43041EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
