@@ -211,7 +211,7 @@
     
     self.liveLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
     self.liveLabel.hidden = isLiveLabelHidden;
-    self.liveLabel.text = self.controller.live ? NSLocalizedString(@"Currently", @"Introductory text for what is currently on air, and displayed on the mini player") : NSLocalizedString(@"Time-shifted", @"Introductory text for live content replayed with timeshift, and displayed on the mini player");
+    self.liveLabel.text = (! self.controller || self.controller.live) ? NSLocalizedString(@"Currently", @"Introductory text for what is currently on air, and displayed on the mini player") : NSLocalizedString(@"Time-shifted", @"Introductory text for live content replayed with timeshift, and displayed on the mini player");
     
     [self updateProgress];
 }
