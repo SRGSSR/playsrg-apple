@@ -195,7 +195,7 @@
 {
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     
-    SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
+    SRGChannel *channel = self.programComposition.channel;
     if (channel) {
         self.titleLabel.numberOfLines = 1;
         
@@ -326,7 +326,7 @@
     
     NSString *format = (self.controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) ? PlaySRGAccessibilityLocalizedString(@"Now playing: %@", @"Mini player label") : PlaySRGAccessibilityLocalizedString(@"Recently played: %@", @"Mini player label");
     
-    SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
+    SRGChannel *channel = self.programComposition.channel;
     if (channel) {
         NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, channel.title];
         
