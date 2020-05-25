@@ -86,10 +86,13 @@
     GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
     GCKMediaInformation *mediaInformation = session.remoteMediaClient.mediaStatus.mediaInformation;
     if (mediaInformation.streamType == GCKMediaStreamTypeLive) {
+        self.titleLabel.numberOfLines = 1;
+        
         self.liveLabel.hidden = NO;
         self.liveLabel.text = NSLocalizedString(@"Currently", @"Introductory text for what is currently on air, displayed on the mini player");
     }
     else {
+        self.titleLabel.numberOfLines = 2;
         self.liveLabel.hidden = YES;
     }
     
