@@ -48,21 +48,12 @@
                             <rect key="frame" x="0.0" y="0.0" width="511" height="7"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
-                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOi-hy-bFW">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="&lt;live&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwe-Iw-iYe">
                             <rect key="frame" x="0.0" y="7" width="511" height="18"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="&lt;live&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwe-Iw-iYe">
-                                    <rect key="frame" x="0.0" y="0.0" width="42" height="18"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kqr-vq-F4n" userLabel="Spacer View">
-                                    <rect key="frame" x="42" y="0.0" width="469" height="18"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </view>
-                            </subviews>
-                        </stackView>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO5-25-JOn">
                             <rect key="frame" x="0.0" y="25" width="511" height="18"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
@@ -117,7 +108,6 @@
                 <outlet property="accessibilityView" destination="GVn-x1-1Al" id="lYr-CS-FCD"/>
                 <outlet property="closeButton" destination="wKg-8I-Eaj" id="hMX-gi-L44"/>
                 <outlet property="liveLabel" destination="Uwe-Iw-iYe" id="GbK-Vu-wQ1"/>
-                <outlet property="liveStackView" destination="IOi-hy-bFW" id="rPM-s0-Wms"/>
                 <outlet property="playbackButton" destination="iWC-hN-4pX" id="TVO-GV-Cpc"/>
                 <outlet property="progressView" destination="Rm4-ky-aFv" id="scO-yb-K84"/>
                 <outlet property="titleLabel" destination="oO5-25-JOn" id="1E0-1z-5Y9"/>

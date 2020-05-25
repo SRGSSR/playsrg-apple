@@ -16,7 +16,6 @@
 #import "MediaPlayerViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
-#import "UIStackView+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -36,7 +35,6 @@
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
 @property (nonatomic, weak) IBOutlet SRGPlaybackButton *playbackButton;
-@property (nonatomic, weak) IBOutlet UIStackView *liveStackView;
 @property (nonatomic, weak) IBOutlet UILabel *liveLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *closeButton;
@@ -200,8 +198,8 @@
     SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
         self.titleLabel.numberOfLines = 1;
-        [self.liveStackView play_setHidden:NO];
         
+        self.liveLabel.hidden = NO;
         self.liveLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         if (! self.controller || self.controller.live) {
             self.liveLabel.text = NSLocalizedString(@"Currently", @"Introductory text for what is currently on air, displayed on the mini player");
@@ -215,7 +213,7 @@
     }
     else {
         self.titleLabel.numberOfLines = 2;
-        [self.liveStackView play_setHidden:YES];
+        self.liveLabel.hidden = YES;
     }
     
     NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
