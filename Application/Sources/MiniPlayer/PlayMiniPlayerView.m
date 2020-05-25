@@ -195,7 +195,8 @@
 {
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     
-    SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, self.controller.currentDate);
+    NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
+    SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, currentDate);
     if (currentProgram) {
         self.titleLabel.text = currentProgram.title;
     }
@@ -219,7 +220,7 @@
 - (void)updateProgress
 {
     if ([self.controller.media isEqual:self.media]) {
-        NSDate *currentDate = self.controller.currentDate;
+        NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
         SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, currentDate);
         if (currentProgram) {
             self.progressView.progress = fmaxf(fminf([currentDate timeIntervalSinceDate:currentProgram.startDate] / [currentProgram.endDate timeIntervalSinceDate:currentProgram.startDate], 1.f), 0.f);
