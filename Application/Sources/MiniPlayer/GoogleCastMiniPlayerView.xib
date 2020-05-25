@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -37,12 +37,35 @@
                     <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     <state key="normal" image="play-50"/>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In6-84-URr">
-                    <rect key="frame" x="61" y="18" width="498" height="18"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QfN-i0-1Lq">
+                    <rect key="frame" x="61" y="2" width="498" height="50"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xrj-4w-gWD" userLabel="Spacer View">
+                            <rect key="frame" x="0.0" y="0.0" width="498" height="7"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="&lt;live&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zad-dI-uig">
+                            <rect key="frame" x="0.0" y="7" width="498" height="18"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In6-84-URr">
+                            <rect key="frame" x="0.0" y="25" width="498" height="18"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ob-FL-G33" userLabel="Spacer View">
+                            <rect key="frame" x="0.0" y="43" width="498" height="7"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="0uB-U7-Qc8"/>
+                        <constraint firstItem="Xrj-4w-gWD" firstAttribute="height" secondItem="9Ob-FL-G33" secondAttribute="height" id="w2H-nF-gQ1"/>
+                    </constraints>
+                </stackView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google_cast_connected-22" translatesAutoresizingMaskIntoConstraints="NO" id="UGV-sM-hOB" userLabel="Google Cast Icon Image View">
                     <rect key="frame" x="569" y="16" width="22" height="22"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,15 +77,15 @@
             </subviews>
             <color key="backgroundColor" red="0.1647058824" green="0.16078431369999999" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="In6-84-URr" firstAttribute="centerY" secondItem="9GF-X4-dH8" secondAttribute="centerY" id="4hb-cc-ubb"/>
                 <constraint firstAttribute="trailing" secondItem="UGV-sM-hOB" secondAttribute="trailing" constant="9" id="695-a8-VvR"/>
-                <constraint firstItem="In6-84-URr" firstAttribute="leading" secondItem="9GF-X4-dH8" secondAttribute="trailing" constant="10" id="ENj-NJ-v7M"/>
                 <constraint firstAttribute="trailing" secondItem="snI-K6-KMs" secondAttribute="trailing" id="KyZ-Ji-HU7"/>
                 <constraint firstItem="snI-K6-KMs" firstAttribute="top" secondItem="QtE-Qc-n3m" secondAttribute="top" id="S6I-k1-flK"/>
                 <constraint firstAttribute="bottom" secondItem="snI-K6-KMs" secondAttribute="bottom" id="YBq-Bh-7zX"/>
                 <constraint firstAttribute="trailing" secondItem="qN5-vf-sBc" secondAttribute="trailing" id="YxS-Yd-sBV"/>
+                <constraint firstItem="QfN-i0-1Lq" firstAttribute="centerY" secondItem="9GF-X4-dH8" secondAttribute="centerY" id="aUs-qs-ClQ"/>
+                <constraint firstItem="QfN-i0-1Lq" firstAttribute="leading" secondItem="9GF-X4-dH8" secondAttribute="trailing" constant="10" id="caG-ug-QJn"/>
+                <constraint firstItem="UGV-sM-hOB" firstAttribute="leading" secondItem="QfN-i0-1Lq" secondAttribute="trailing" constant="10" id="dua-BY-ZBv"/>
                 <constraint firstItem="UGV-sM-hOB" firstAttribute="centerY" secondItem="9GF-X4-dH8" secondAttribute="centerY" id="h31-ZB-NiF"/>
-                <constraint firstItem="UGV-sM-hOB" firstAttribute="leading" secondItem="In6-84-URr" secondAttribute="trailing" constant="10" id="hvg-MT-o8k"/>
                 <constraint firstItem="snI-K6-KMs" firstAttribute="leading" secondItem="QtE-Qc-n3m" secondAttribute="leading" id="inx-Rb-1Fh"/>
                 <constraint firstItem="9GF-X4-dH8" firstAttribute="top" secondItem="QtE-Qc-n3m" secondAttribute="top" constant="6" id="wBG-6B-7zh"/>
                 <constraint firstItem="qN5-vf-sBc" firstAttribute="top" secondItem="QtE-Qc-n3m" secondAttribute="top" id="wS3-Ve-haF"/>
@@ -75,6 +98,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="accessibilityView" destination="snI-K6-KMs" id="5s8-SA-eZJ"/>
+                <outlet property="liveLabel" destination="Zad-dI-uig" id="iMg-cL-0VQ"/>
                 <outlet property="playbackButton" destination="9GF-X4-dH8" id="Q6E-jd-ueY"/>
                 <outlet property="progressView" destination="qN5-vf-sBc" id="YNk-Lq-42l"/>
                 <outlet property="titleLabel" destination="In6-84-URr" id="Uqm-xM-U83"/>
