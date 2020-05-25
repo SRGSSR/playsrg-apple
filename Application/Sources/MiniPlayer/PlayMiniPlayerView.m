@@ -194,13 +194,9 @@
 {
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     
-    SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, NSDate.date);
-    
-    // Display program information (if any) when the controller position is within the current program, otherwise channel
-    // information.
-    NSDate *currentDate = self.controller.currentDate;
-    if (currentProgram && (! currentDate || [currentProgram play_containsDate:currentDate])) {
-        self.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Currently: %@", @"Title in the mini player for the live stream, if the current program is known."), currentProgram.title];
+    SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, self.controller.currentDate);
+    if (currentProgram) {
+        self.titleLabel.text = currentProgram.title;
     }
     else {
         self.titleLabel.text = self.media.title;
