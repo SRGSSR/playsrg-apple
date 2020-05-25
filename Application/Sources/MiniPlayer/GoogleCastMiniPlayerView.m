@@ -127,12 +127,15 @@
 
 - (NSString *)labelForAccessibilityView:(AccessibilityView *)accessibilityView
 {
-    return self.titleLabel.text;
+    GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
+    GCKMediaPlayerState playerState = session.remoteMediaClient.mediaStatus.playerState;
+    NSString *format = (playerState == GCKMediaPlayerStatePlaying) ? PlaySRGAccessibilityLocalizedString(@"Now playing: %@", @"Mini player label") : PlaySRGAccessibilityLocalizedString(@"Recently played: %@", @"Mini player label");
+    return [NSString stringWithFormat:format, self.titleLabel.text];
 }
 
 - (NSString *)hintForAccessibilityView:(AccessibilityView *)accessibilityView
 {
-    return PlaySRGAccessibilityLocalizedString(@"Plays the content.", @"Mini player action hint");
+    return PlaySRGAccessibilityLocalizedString(@"Opens the full screen player", @"Mini player action hint");
 }
 
 #pragma mark GCKUIMediaControllerDelegate protocol
