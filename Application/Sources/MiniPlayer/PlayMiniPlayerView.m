@@ -74,7 +74,7 @@
 
 - (void)setMedia:(SRGMedia *)media
 {
-    if (media.contentType != SRGContentTypeLivestream || [media.channel isEqual:self.programComposition.channel]) {
+    if (media.contentType != SRGContentTypeLivestream || ! [media.channel isEqual:self.programComposition.channel]) {
         self.programComposition = nil;
     }
     
