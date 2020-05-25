@@ -197,7 +197,7 @@
 {
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     
-    SRGChannel *channel = self.programComposition.channel;
+    SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
         self.titleLabel.numberOfLines = 1;
         [self.liveStackView play_setHidden:NO];
