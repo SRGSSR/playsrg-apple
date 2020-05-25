@@ -271,9 +271,7 @@
 
 - (void)updateMetadataWithMedia:(SRGMedia *)media
 {
-    if (! [media isEqual:self.media]) {
-        self.media = media;
-    }
+    self.media = media;
     [self reloadData];
 }
 
