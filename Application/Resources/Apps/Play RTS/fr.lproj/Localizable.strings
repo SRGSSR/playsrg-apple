@@ -404,7 +404,7 @@
 "Remove from favorites" = "Supprimer des favoris";
 
 /* Short label identifying a replay sport event. Display in uppercase. */
-"Replay" = "Replay";
+"Replay" = "Rediffusion";
 
 /* Title of the reset search settings button */
 "Reset" = "Effacer";
@@ -528,6 +528,8 @@
 
 /* Period setting option */
 "This week" = "Cette semaine";
+
+"Time-shifted" = "En différé";
 
 /* Period setting option
    Title of the button to go back to the current date */
