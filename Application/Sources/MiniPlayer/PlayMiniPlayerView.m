@@ -35,6 +35,7 @@
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
 @property (nonatomic, weak) IBOutlet SRGPlaybackButton *playbackButton;
+@property (nonatomic, weak) IBOutlet UILabel *liveLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *closeButton;
 
@@ -204,6 +205,13 @@
     
     BOOL isLiveOnly = (self.controller.mediaPlayerController.streamType == SRGMediaPlayerStreamTypeLive);
     self.playbackButton.pauseImage = isLiveOnly ? [UIImage imageNamed:@"stop-50"] : [UIImage imageNamed:@"pause-50"];
+    
+    BOOL isLiveLabelHidden = (self.media.contentType != SRGContentTypeLivestream);
+    self.titleLabel.numberOfLines = isLiveLabelHidden ? 2 : 1;
+    
+    self.liveLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    self.liveLabel.hidden = isLiveLabelHidden;
+    self.liveLabel.text = self.controller.live ? NSLocalizedString(@"Currently", @"Introductory text for what is currently on air, and displayed on the mini player") : NSLocalizedString(@"Time-shifted", @"Introductory text for live content replayed with timeshift, and displayed on the mini player");
     
     [self updateProgress];
 }
