@@ -60,6 +60,9 @@
 /* Introductory title for information notifications */
 "Information" = "Infurmaziun";
 
+/* Label on recently played livestreams */
+"Last played" = "Ultim guardà";
+
 /* Accessibility introductory text for the logged in user */
 "Logged in user: %@" = "Utilisader annunzià: %@";
 

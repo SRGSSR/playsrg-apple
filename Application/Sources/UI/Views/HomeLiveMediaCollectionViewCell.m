@@ -144,6 +144,9 @@
 {
     if (self.media.contentType == SRGContentTypeLivestream) {
         NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ live", @"Live content label, with a channel title"), self.channel.title];
+        if (! self.recentLabel.hidden) {
+            [accessibilityLabel appendFormat:@", %@", PlaySRGAccessibilityLocalizedString(@"Last played", @"Label on recently played livestreams")];
+        }
         if (self.channel.currentProgram) {
             [accessibilityLabel appendFormat:@", %@", self.channel.currentProgram.title];
         }
