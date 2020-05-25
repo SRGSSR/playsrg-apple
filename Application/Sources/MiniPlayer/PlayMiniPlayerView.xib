@@ -117,6 +117,7 @@
                 <outlet property="accessibilityView" destination="GVn-x1-1Al" id="lYr-CS-FCD"/>
                 <outlet property="closeButton" destination="wKg-8I-Eaj" id="hMX-gi-L44"/>
                 <outlet property="liveLabel" destination="Uwe-Iw-iYe" id="GbK-Vu-wQ1"/>
+                <outlet property="liveStackView" destination="IOi-hy-bFW" id="rPM-s0-Wms"/>
                 <outlet property="playbackButton" destination="iWC-hN-4pX" id="TVO-GV-Cpc"/>
                 <outlet property="progressView" destination="Rm4-ky-aFv" id="scO-yb-K84"/>
                 <outlet property="titleLabel" destination="oO5-25-JOn" id="1E0-1z-5Y9"/>
