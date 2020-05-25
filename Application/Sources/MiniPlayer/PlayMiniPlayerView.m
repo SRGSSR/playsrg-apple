@@ -211,18 +211,37 @@
 - (void)updateProgress
 {
     if ([self.controller.media isEqual:self.media]) {
-        CMTimeRange timeRange = self.controller.timeRange;
-        CMTime currentTime = self.controller.currentTime;
-        
-        if (CMTIMERANGE_IS_VALID(timeRange) && ! CMTIMERANGE_IS_EMPTY(timeRange)) {
-            self.progressView.progress = CMTimeGetSeconds(CMTimeSubtract(currentTime, timeRange.start)) / CMTimeGetSeconds(timeRange.duration);
-            return;
+        NSDate *currentDate = self.controller.currentDate;
+        SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, currentDate);
+        if (currentProgram) {
+            self.progressView.progress = fmaxf(fminf([currentDate timeIntervalSinceDate:currentProgram.startDate] / [currentProgram.endDate timeIntervalSinceDate:currentProgram.startDate], 1.f), 0.f);
+            self.progressView.hidden = NO;
+        }
+        else if (self.media.contentType == SRGContentTypeLivestream) {
+            self.progressView.hidden = YES;
+        }
+        else {
+            CMTimeRange timeRange = self.controller.timeRange;
+            CMTime currentTime = self.controller.currentTime;
+            
+            if (CMTIMERANGE_IS_VALID(timeRange) && ! CMTIMERANGE_IS_EMPTY(timeRange)) {
+                self.progressView.progress = CMTimeGetSeconds(CMTimeSubtract(currentTime, timeRange.start)) / CMTimeGetSeconds(timeRange.duration);
+            }
+            else {
+                self.progressView.progress = HistoryPlaybackProgressForMediaMetadata(self.media);
+            }
+            self.progressView.hidden = NO;
         }
     }
-    
-    // For non-started playback, display a full progress bar for livestreams (matching the usual slider behavior starting
-    // at the end)
-    self.progressView.progress = (self.media.contentType == SRGContentTypeLivestream) ? 1.f : HistoryPlaybackProgressForMediaMetadata(self.media);
+    else {
+        if (self.media.contentType == SRGContentTypeLivestream) {
+            self.progressView.hidden = YES;
+        }
+        else {
+            self.progressView.progress = HistoryPlaybackProgressForMediaMetadata(self.media);
+            self.progressView.hidden = NO;
+        }
+    }
 }
 
 - (void)updateMetadataWithMedia:(SRGMedia *)media
