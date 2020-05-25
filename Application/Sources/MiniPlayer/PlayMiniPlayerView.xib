@@ -42,14 +42,14 @@
                     </userDefinedRuntimeAttributes>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cOr-X0-OJp">
-                    <rect key="frame" x="61" y="6" width="511" height="40"/>
+                    <rect key="frame" x="61" y="1" width="511" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vmg-4C-7ZW" userLabel="Spacer View">
-                            <rect key="frame" x="0.0" y="0.0" width="511" height="2"/>
+                            <rect key="frame" x="0.0" y="0.0" width="511" height="7"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOi-hy-bFW">
-                            <rect key="frame" x="0.0" y="2" width="511" height="18"/>
+                            <rect key="frame" x="0.0" y="7" width="511" height="18"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="&lt;live&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwe-Iw-iYe">
                                     <rect key="frame" x="0.0" y="0.0" width="42" height="18"/>
@@ -64,19 +64,19 @@
                             </subviews>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO5-25-JOn">
-                            <rect key="frame" x="0.0" y="20" width="511" height="18"/>
+                            <rect key="frame" x="0.0" y="25" width="511" height="18"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Cx-xZ-XT3" userLabel="Spacer View">
-                            <rect key="frame" x="0.0" y="38" width="511" height="2"/>
+                            <rect key="frame" x="0.0" y="43" width="511" height="7"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>
                     <constraints>
                         <constraint firstItem="8Cx-xZ-XT3" firstAttribute="height" secondItem="Vmg-4C-7ZW" secondAttribute="height" id="6U7-a2-Ye4"/>
-                        <constraint firstAttribute="height" constant="40" id="Kvb-PQ-LOM"/>
+                        <constraint firstAttribute="height" constant="50" id="Kvb-PQ-LOM"/>
                     </constraints>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKg-8I-Eaj">
