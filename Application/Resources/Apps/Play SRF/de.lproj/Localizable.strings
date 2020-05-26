@@ -1,5 +1,5 @@
 /* The amount of episodes available for a show */
-"%@ episodes" = "%@ Sendungen";
+"%@ episodes" = "%@ Folgen";
 
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Watch later\"" = "%@ wurde zu Später schauen hinzugefügt";
