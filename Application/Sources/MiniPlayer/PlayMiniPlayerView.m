@@ -81,7 +81,7 @@
     
     [self unregisterChannelUpdates];
     _media = media;
-    [self registerForChannelUpdatesWithMedia:media];
+    [self registerForChannelUpdatesWithFallbackMedia:media];
 }
 
 - (void)setController:(SRGLetterboxController *)controller
@@ -173,7 +173,7 @@
         
         [self reloadData];
         
-        [self registerForChannelUpdatesWithMedia:self.media];
+        [self registerForChannelUpdatesWithFallbackMedia:self.media];
     }
     else {
         [letterboxService removeObserver:self keyPath:@keypath(letterboxService.controller)];
@@ -296,13 +296,24 @@
 
 #pragma mark Channel updates
 
-- (void)registerForChannelUpdatesWithMedia:(SRGMedia *)media
+- (SRGMedia *)mainMedia
 {
-    if (media.contentType != SRGContentTypeLivestream || ! media.channel) {
+    if (self.controller.mediaComposition) {
+        return [self.controller.mediaComposition mediaForSubdivision:self.controller.mediaComposition.mainChapter];
+    }
+    else {
+        return self.controller.media;
+    }
+}
+
+- (void)registerForChannelUpdatesWithFallbackMedia:(SRGMedia *)fallbackMedia
+{
+    SRGMedia *mainMedia = [self mainMedia] ?: fallbackMedia;
+    if (mainMedia.contentType != SRGContentTypeLivestream || ! mainMedia.channel) {
         return;
     }
     
-    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:media.channel vendor:media.vendor livestreamUid:media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
+    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:mainMedia.channel vendor:mainMedia.vendor livestreamUid:mainMedia.uid block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
         [self reloadData];
     }];
