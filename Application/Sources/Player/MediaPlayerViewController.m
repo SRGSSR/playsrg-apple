@@ -1478,7 +1478,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
         
         if (indexPath) {
-            [self.programsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+            [self.programsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
         }
     };
     
