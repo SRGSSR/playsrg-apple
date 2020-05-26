@@ -179,6 +179,16 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
     }
 }
 
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; registrations = %@>",
+            self.class,
+            self,
+            self.registrations];
+}
+
 @end
 
 SRGProgram *SRGChannelServiceProgramAtDate(SRGProgramComposition *programComposition, NSDate *date)

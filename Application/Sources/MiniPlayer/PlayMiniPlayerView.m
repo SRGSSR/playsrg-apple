@@ -313,6 +313,7 @@
         return;
     }
     
+    [ChannelService.sharedService removeObserver:self.channelRegistration];
     self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:mainMedia.channel vendor:mainMedia.vendor livestreamUid:mainMedia.uid block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
         [self reloadData];
