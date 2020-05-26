@@ -11,6 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SRGProgramComposition (PlaySRG)
 
 /**
+*  Return the program at the specified date, if any.
+*/
+- (nullable SRGProgram *)play_programAtDate:(NSDate *)date;
+
+/**
  *  Returns only programs matching in a given date range. The range can be open or possibly half-open. If media URNs
  *  are provided, only matching programs will be returned.
  */

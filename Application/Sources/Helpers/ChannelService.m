@@ -190,11 +190,3 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 }
 
 @end
-
-SRGProgram *SRGChannelServiceProgramAtDate(SRGProgramComposition *programComposition, NSDate *date)
-{
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGProgram * _Nullable program, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return [program play_containsDate:date];
-    }];
-    return [programComposition.programs filteredArrayUsingPredicate:predicate].firstObject;
-}

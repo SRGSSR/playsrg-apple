@@ -6,7 +6,17 @@
 
 #import "SRGProgramComposition+PlaySRG.h"
 
+#import "SRGProgram+PlaySRG.h"
+
 @implementation SRGProgramComposition (PlaySRG)
+
+- (SRGProgram *)play_programAtDate:(NSDate *)date
+{
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGProgram * _Nullable program, NSDictionary<NSString *,id> * _Nullable bindings) {
+        return [program play_containsDate:date];
+    }];
+    return [self.programs filteredArrayUsingPredicate:predicate].firstObject;
+}
 
 - (NSArray<SRGProgram *> *)play_programsFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate withMediaURNs:(NSArray<NSString *> *)mediaURNs
 {

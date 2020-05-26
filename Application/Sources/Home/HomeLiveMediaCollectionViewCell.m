@@ -17,6 +17,7 @@
 #import "SRGChannel+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
+#import "SRGProgramComposition+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
@@ -151,7 +152,7 @@
             [accessibilityLabel appendFormat:@", %@", PlaySRGAccessibilityLocalizedString(@"Last played", @"Label on recently played livestreams")];
         }
         
-        SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, NSDate.date);
+        SRGProgram *currentProgram = [self.programComposition play_programAtDate:NSDate.date];
         if (currentProgram) {
             [accessibilityLabel appendFormat:@", %@", currentProgram.title];
         }
@@ -249,7 +250,7 @@
         self.logoImageView.image = logoImage;
         self.logoImageView.hidden = (logoImage == nil);
         
-        SRGProgram *currentProgram = SRGChannelServiceProgramAtDate(self.programComposition, NSDate.date);
+        SRGProgram *currentProgram = [self.programComposition play_programAtDate:NSDate.date];
         if (currentProgram) {
             self.titleLabel.text = currentProgram.title;
             self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
