@@ -403,6 +403,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     self.livestreamButtonImageView.tintColor = UIColor.whiteColor;
     
+    self.currentProgramView.accessibilityElements = @[ self.currentProgramTitleLabel, self.currentProgramMoreEpisodesButton, self.currentProgramFavoriteButton ];
+    
     self.radioHomeButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.radioHomeButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.radioHomeButton.layer.masksToBounds = YES;
