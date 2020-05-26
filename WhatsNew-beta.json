@@ -107,5 +107,6 @@
   "3.0.1-328": "- Allow Handoff with downloaded content.\n- Fixes an issue preventing the first item in lists to be accessed with VoiceOver.",
   "3.0.1-329": "- Fixes sometimes erratic scroll position when returning on a homepage.\n- Fixes double tap on tab which sometimes would not return to the top of a list.",
   "3.0.2-330": "- Latest TV / Radio livestream restoration on livestream tab.\n- Snap content and on horizontal swimlanes.\n- Split view for the iPad profile tab.\n- Fix the mini player when using with Picture in Picture on iPad.\n- Fix preview background color on iOS 13.\n- Fix scroll position coupling between swimlanes\n- Avoid displaying empty screen when no swimlanes have been loaded.",
-  "3.0.2-331": "- Fix profile view rotation on iPhone.\n- Improve empty home screens when no swimlanes have been loaded.\n- Improve VoiceOver for latest TV / Radio livestream items moved to the front on livestream tab."
+  "3.0.2-331": "- Fix profile view rotation on iPhone.\n- Improve empty home screens when no swimlanes have been loaded.\n- Improve VoiceOver for latest TV / Radio livestream items moved to the front on livestream tab.",
+  "3.0.2-332": "- AppStore release."
 }
