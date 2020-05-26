@@ -1704,8 +1704,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didLongPressSubdivision:(SRGSubdivision *)subdivision
 {
+    if ([self mainMedia].contentType == SRGContentTypeLivestream) {
+        return;
+    }
+        
     SRGMedia *media = [self.letterboxController.mediaComposition mediaForSubdivision:subdivision];
-    
     WatchLaterAddMediaMetadata(media, ^(NSError * _Nullable error) {
         if (! error) {
             [Banner showWatchLaterAdded:YES forItemWithName:media.title inViewController:self];
