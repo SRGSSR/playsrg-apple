@@ -495,6 +495,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.userInterfaceUpdateTimer = [ForegroundTimer timerWithTimeInterval:1. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
         @strongify(self)
         [self updateGoogleCastButton];
+        [self reloadPrograms];
         
         // Ensure a save is triggered when handoff is used, so that the current position is properly updated in the
         // transmitted information.
@@ -928,6 +929,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
 }
 
+#pragma mark Programs
+
 - (void)reloadProgramBackgroundAnimated:(BOOL)animated
 {
     NSString *channelUid = [self channelUid];
@@ -983,12 +986,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     BOOL hadPrograms = (self.programs.count != 0);
-    self.programs = [self updatedPrograms];
-    [self.programsTableView reloadData];
+    [self reloadPrograms];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateSelectionForCurrentProgram];
-        
         if (! hadPrograms && self.programs.count != 0) {
             [self.programsTableView flashScrollIndicators];
         }
@@ -1018,6 +1018,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [programs addObjectsFromArray:reachablePrograms];
     
     return programs.copy;
+}
+
+- (void)reloadPrograms
+{
+    self.programs = [self updatedPrograms];
+    [self.programsTableView reloadData];
+    [self updateSelectionForCurrentProgram];
 }
 
 #pragma mark Channel updates
