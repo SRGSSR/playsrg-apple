@@ -199,18 +199,20 @@
     
     SRGChannel *channel = self.programComposition.channel;
     if (channel) {
-        self.titleLabel.numberOfLines = 1;
-        
-        self.liveLabel.hidden = NO;
         self.liveLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         if (! self.controller || self.controller.live) {
+            self.titleLabel.numberOfLines = 1;
+            self.liveLabel.hidden = NO;
             self.liveLabel.text = NSLocalizedString(@"Currently", @"Introductory text for what is currently on air, displayed on the mini player");
         }
         else if (self.media.contentType == SRGContentTypeLivestream || self.media.contentType == SRGContentTypeScheduledLivestream) {
+            self.titleLabel.numberOfLines = 1;
+            self.liveLabel.hidden = NO;
             self.liveLabel.text = NSLocalizedString(@"Time-shifted", @"Introductory text for live content played with timeshift, displayed on the mini player");
         }
         else {
-            self.liveLabel.text = NSLocalizedString(@"Replay", @"Introductory text for live content replayed with timeshift, displayed on the mini player");
+            self.titleLabel.numberOfLines = 2;
+            self.liveLabel.hidden = YES;
         }
     }
     else {
