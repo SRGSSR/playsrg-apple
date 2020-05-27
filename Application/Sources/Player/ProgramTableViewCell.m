@@ -20,6 +20,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet UIView *thumbnailWrapperView;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
+@property (nonatomic, weak) IBOutlet UIView *disabledOverlayView;
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 @property (nonatomic, weak) IBOutlet UIImageView *waveformImageView;
 
@@ -40,9 +41,7 @@
     self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
-    self.titleLabel.textColor = UIColor.whiteColor;
-    self.subtitleLabel.textColor = UIColor.whiteColor;
-    
+    self.disabledOverlayView.hidden = YES;;
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
     [self.waveformImageView play_setWaveformAnimation48WithTintColor:UIColor.whiteColor];
@@ -98,10 +97,28 @@
     self.titleLabel.text = program.title;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     
-    self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
     self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
     
     [self.thumbnailImageView play_requestImageForObject:program withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
+    
+    if ([NSDate.date compare:program.startDate] == NSOrderedAscending) {
+        self.titleLabel.textColor = UIColor.play_grayColor;
+        
+        self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"At %1$@", @"Introductory text for next program information"), [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate]];
+        self.subtitleLabel.textColor = UIColor.play_grayColor;
+        
+        self.disabledOverlayView.hidden = NO;
+        self.userInteractionEnabled = NO;
+    }
+    else {
+        self.titleLabel.textColor = UIColor.whiteColor;
+        
+        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
+        self.subtitleLabel.textColor = UIColor.whiteColor;
+        
+        self.disabledOverlayView.hidden = YES;
+        self.userInteractionEnabled = YES;
+    }
 }
 
 - (void)setProgress:(NSNumber *)progress

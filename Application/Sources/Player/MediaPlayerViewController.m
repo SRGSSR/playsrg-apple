@@ -30,7 +30,6 @@
 #import "PlayErrors.h"
 #import "Playlist.h"
 #import "ProgramHeaderView.h"
-#import "ProgramSection.h"
 #import "ProgramTableViewCell.h"
 #import "RelatedContentView.h"
 #import "ShowViewController.h"
@@ -95,7 +94,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic) IBOutlet SRGLetterboxController *letterboxController;      // top object, strong
 
 @property (nonatomic) SRGProgramComposition *programComposition;
-@property (nonatomic) NSArray<ProgramSection *> *programSections;
+@property (nonatomic) NSArray<SRGProgram *> *programs;
 
 @property (nonatomic, getter=isFromPushNotification) BOOL fromPushNotification;
 
@@ -983,20 +982,20 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self updateFavoriteStatusForShow:nil];
     }
     
-    BOOL hadPrograms = (self.programSections.count != 0);
-    self.programSections = [self updatedProgramSections];
+    BOOL hadPrograms = (self.programs.count != 0);
+    self.programs = [self updatedPrograms];
     [self.programsTableView reloadData];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateSelectionForCurrentProgram];
         
-        if (! hadPrograms && self.programSections.count != 0) {
+        if (! hadPrograms && self.programs.count != 0) {
             [self.programsTableView flashScrollIndicators];
         }
     });
 }
 
-- (NSArray<ProgramSection *> *)updatedProgramSections
+- (NSArray<SRGProgram *> *)updatedPrograms
 {
     // Find the date range corresponding to the DVR window, in the stream reference frame. We cannot display reliable
     // program information while this information is not available.
@@ -1007,28 +1006,18 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         return @[];
     }
     
-    NSMutableArray<ProgramSection *> *programSections = [NSMutableArray array];
+    NSMutableArray<SRGProgram *> *programs = [NSMutableArray array];
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, startDate) ascending:NO];
     NSArray<SRGProgram *> *nextPrograms = [[self.programComposition play_programsFromDate:endDate toDate:nil withMediaURNs:nil] sortedArrayUsingDescriptors:@[sortDescriptor]];
-    if (nextPrograms.count != 0) {
-        ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Next", @"Header for the next program section")
-                                                                      programs:nextPrograms
-                                                                   interactive:NO];
-        [programSections addObject:programSection];
-    }
+    [programs addObjectsFromArray:nextPrograms];
     
     NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGSegment.new, URN)];
     NSArray<NSString *> *mediaURNs = [self.letterboxController.mediaComposition.mainChapter.segments valueForKeyPath:keyPath] ?: @[];
-    NSArray<SRGProgram *> *programs = [[self.programComposition play_programsFromDate:startDate toDate:endDate withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
-    if (programs.count != 0) {
-        ProgramSection *programSection = [[ProgramSection alloc] initWithTitle:NSLocalizedString(@"Replay", @"Header for the replayable program section")
-                                                                      programs:programs
-                                                                   interactive:YES];
-        [programSections addObject:programSection];
-    }
+    NSArray<SRGProgram *> *reachablePrograms = [[self.programComposition play_programsFromDate:startDate toDate:endDate withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    [programs addObjectsFromArray:reachablePrograms];
     
-    return programSections.copy;
+    return programs.copy;
 }
 
 #pragma mark Channel updates
@@ -1414,36 +1403,25 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (NSIndexPath *)indexPathForProgramWithMediaURN:(NSString *)mediaURN
 {
-    NSInteger section = 0;
-    for (ProgramSection *programSection in self.programSections) {
-        NSInteger row = 0;
-        for (SRGProgram *program in programSection.programs) {
-            if ([program.mediaURN isEqualToString:mediaURN]) {
-                return [NSIndexPath indexPathForRow:row inSection:section];
-            }
-            ++row;
-        }
-        ++section;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGProgram.new, mediaURN), mediaURN];
+    SRGProgram *program = [self.programs filteredArrayUsingPredicate:predicate].firstObject;
+    if (! program) {
+        return nil;
     }
-    return nil;
+    
+    NSUInteger index = [self.programs indexOfObject:program];
+    return [NSIndexPath indexPathForRow:index inSection:0];
 }
 
 - (NSIndexPath *)nearestProgramIndexPathForDate:(NSDate *)date
 {
-    // Flatten all reachable programs, in ascending start date order
-    NSMutableArray<SRGProgram *> *programs = [NSMutableArray array];
-    [self.programSections enumerateObjectsUsingBlock:^(ProgramSection * _Nonnull programSection, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (programSection.interactive) {
-            [programs addObjectsFromArray:programSection.programs];
-        }
-    }];
-    
-    if (programs.count == 0) {
+    if (self.programs.count == 0) {
         return nil;
     }
     
+    // Consider programs from the oldest to the newest one
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, startDate) ascending:YES];
-    [programs sortUsingDescriptors:@[sortDescriptor]];
+    NSArray<SRGProgram *> *programs = [self.programs sortedArrayUsingDescriptors:@[sortDescriptor]];
     
     // Find the nearest item in the list
     __block NSUInteger nearestIndex = 0;
@@ -1783,15 +1761,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 #pragma mark UITableViewDataSource protocol
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return self.programSections.count;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    ProgramSection *programSection = self.programSections[section];
-    return programSection.programs.count;
+    return self.programs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1808,41 +1780,30 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ProgramTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ProgramSection *programSection = self.programSections[indexPath.section];
-    cell.program = programSection.programs[indexPath.row];
+    cell.program = self.programs[indexPath.row];
     cell.playing = (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
-    cell.userInteractionEnabled = programSection.interactive;
     [self updateProgramProgressForCell:cell];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ProgramSection *programSection = self.programSections[indexPath.section];
-    if (! programSection.interactive) {
+    SRGProgram *program = self.programs[indexPath.row];
+    if ([NSDate.date compare:program.startDate] == NSOrderedAscending) {
         return;
     }
-    
-    SRGProgram *program = programSection.programs[indexPath.row];
     [self.letterboxController switchToURN:program.mediaURN withCompletionHandler:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    ProgramSection *programSection = self.programSections[section];
-    if (programSection.programs.count != 0) {
-        return 62.f;
-    }
-    else {
-        return 0.f;
-    }
+    return (self.programs.count != 0) ? 62.f : 0.f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    ProgramSection *programSection = self.programSections[section];
-    if (programSection.programs.count != 0) {
+    if (self.programs.count != 0) {
         ProgramHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(ProgramHeaderView.class)];
-        headerView.title = programSection.title;
+        headerView.title = NSLocalizedString(@"Program", @"Program list header");
         return headerView;
     }
     else {
