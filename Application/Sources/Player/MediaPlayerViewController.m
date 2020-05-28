@@ -1000,21 +1000,21 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     // Find the date range corresponding to the DVR window, in the stream reference frame. We cannot display reliable
     // program information while this information is not available.
     CMTimeRange timeRange = self.letterboxController.timeRange;
-    NSDate *startDate = [self.letterboxController streamDateForTime:timeRange.start];
-    NSDate *endDate = [self.letterboxController streamDateForTime:CMTimeRangeGetEnd(timeRange)];
-    if (! startDate || ! endDate) {
+    NSDate *startWallClockDate = PlayWallClockDate([self.letterboxController streamDateForTime:timeRange.start], self.letterboxController);
+    NSDate *endWallClockDate = PlayWallClockDate([self.letterboxController streamDateForTime:CMTimeRangeGetEnd(timeRange)], self.letterboxController);
+    if (! startWallClockDate || ! endWallClockDate) {
         return @[];
     }
     
     NSMutableArray<SRGProgram *> *programs = [NSMutableArray array];
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, startDate) ascending:NO];
-    NSArray<SRGProgram *> *nextPrograms = [[self.programComposition play_programsFromDate:endDate toDate:nil withMediaURNs:nil] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    NSArray<SRGProgram *> *nextPrograms = [[self.programComposition play_programsFromDate:endWallClockDate toDate:nil withMediaURNs:nil] sortedArrayUsingDescriptors:@[sortDescriptor]];
     [programs addObjectsFromArray:nextPrograms];
     
     NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGSegment.new, URN)];
     NSArray<NSString *> *mediaURNs = [self.letterboxController.mediaComposition.mainChapter.segments valueForKeyPath:keyPath] ?: @[];
-    NSArray<SRGProgram *> *reachablePrograms = [[self.programComposition play_programsFromDate:startDate toDate:endDate withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    NSArray<SRGProgram *> *reachablePrograms = [[self.programComposition play_programsFromDate:startWallClockDate toDate:endWallClockDate withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
     [programs addObjectsFromArray:reachablePrograms];
     
     return programs.copy;
@@ -1394,7 +1394,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
     }
     
-    NSDate *currentDate = self.letterboxController.currentDate;
+    NSDate *currentDate = PlayWallClockDate(self.letterboxController.currentDate, self.letterboxController);
     if (currentDate) {
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGProgram * _Nullable program, NSDictionary<NSString *,id> * _Nullable bindings) {
             return [program play_containsDate:currentDate];
@@ -1420,6 +1420,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     return [NSIndexPath indexPathForRow:index inSection:0];
 }
 
+// Beware: Requires a wall-clock date
 - (NSIndexPath *)nearestProgramIndexPathForDate:(NSDate *)date
 {
     if (self.programs.count == 0) {
@@ -1446,6 +1447,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     return [self indexPathForProgramWithMediaURN:nearestProgram.mediaURN];
 }
 
+// Beware: Requires a wall-clock date
 - (void)scrollToProgramWithMediaURN:(NSString *)mediaURN date:(NSDate *)date animated:(BOOL)animated
 {
     if (self.programsTableView.dragging) {
@@ -1482,7 +1484,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)scrollToCurrentProgramAnimated:(BOOL)animated
 {
     SRGSubdivision *subdivision = self.letterboxController.subdivision;
-    [self scrollToProgramWithMediaURN:subdivision.URN date:self.letterboxController.currentDate animated:animated];
+    [self scrollToProgramWithMediaURN:subdivision.URN date:PlayWallClockDate(self.letterboxController.currentDate, self.letterboxController) animated:animated];
 }
 
 - (void)updateSelectionForProgramWithMediaURN:(NSString *)mediaURN
@@ -1516,7 +1518,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGProgram *program = cell.program;
     if ([program.mediaURN isEqualToString:self.letterboxController.subdivision.URN]) {
-        float progress = fmaxf(fminf([self.letterboxController.currentDate timeIntervalSinceDate:program.startDate] / [program.endDate timeIntervalSinceDate:program.startDate], 1.f), 0.f);
+        NSDate *wallClockDate = PlayWallClockDate(self.letterboxController.currentDate, self.letterboxController);
+        float progress = fmaxf(fminf([wallClockDate timeIntervalSinceDate:program.startDate] / [program.endDate timeIntervalSinceDate:program.startDate], 1.f), 0.f);
         cell.progress = @(progress);
     }
     else {
@@ -1626,7 +1629,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (interactive) {
         SRGMedia *media = subdivision ? [self.letterboxController.mediaComposition mediaForSubdivision:subdivision] : self.letterboxController.fullLengthMedia;
         [self reloadDataOverriddenWithMedia:media mainChapterMedia:[self mainChapterMedia]];
-        [self scrollToProgramWithMediaURN:subdivision.URN date:date animated:YES];
+        [self scrollToProgramWithMediaURN:subdivision.URN date:PlayWallClockDate(date, letterboxView.controller) animated:YES];
         [self updateSelectionForProgramWithMediaURN:subdivision.URN];
     }
     [self reloadProgramBackgroundAnimated:YES];
@@ -2251,7 +2254,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)segmentDidStart:(NSNotification *)notification
 {
     SRGSegment *segment = notification.userInfo[SRGMediaPlayerSegmentKey];
-    [self scrollToProgramWithMediaURN:segment.URN date:self.letterboxController.currentDate animated:YES];
+    [self scrollToProgramWithMediaURN:segment.URN date:PlayWallClockDate(self.letterboxController.currentDate, self.letterboxController) animated:YES];
     [self updateSelectionForProgramWithMediaURN:segment.URN];
 }
 

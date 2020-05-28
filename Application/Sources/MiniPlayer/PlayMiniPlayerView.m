@@ -220,7 +220,7 @@
         self.liveLabel.hidden = YES;
     }
     
-    NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
+    NSDate *currentDate = PlayWallClockDate(self.controller.currentDate, self.controller) ?: NSDate.date;
     SRGProgram *currentProgram = [self.programComposition play_programAtDate:currentDate];
     if (currentProgram) {
         self.titleLabel.text = currentProgram.title;
@@ -238,7 +238,7 @@
 - (void)updateProgress
 {
     if ([self.controller.media isEqual:self.media]) {
-        NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
+        NSDate *currentDate = PlayWallClockDate(self.controller.currentDate, self.controller) ?: NSDate.date;
         SRGProgram *currentProgram = [self.programComposition play_programAtDate:currentDate];
         if (currentProgram) {
             self.progressView.progress = fmaxf(fminf([currentDate timeIntervalSinceDate:currentProgram.startDate] / [currentProgram.endDate timeIntervalSinceDate:currentProgram.startDate], 1.f), 0.f);
@@ -342,7 +342,7 @@
     if (channel) {
         NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, channel.title];
         
-        NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
+        NSDate *currentDate = PlayWallClockDate(self.controller.currentDate, self.controller) ?: NSDate.date;
         SRGProgram *currentProgram = [self.programComposition play_programAtDate:currentDate];
         if (currentProgram) {
             [accessibilityLabel appendFormat:@", %@", currentProgram.title];

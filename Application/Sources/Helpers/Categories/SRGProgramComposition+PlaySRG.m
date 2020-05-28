@@ -8,6 +8,11 @@
 
 #import "SRGProgram+PlaySRG.h"
 
+NSDate *PlayWallClockDate(NSDate *date, SRGLetterboxController *controller)
+{
+    return [date dateByAddingTimeInterval:-controller.resource.streamOffset / 1000.];
+}
+
 @implementation SRGProgramComposition (PlaySRG)
 
 - (SRGProgram *)play_programAtDate:(NSDate *)date
