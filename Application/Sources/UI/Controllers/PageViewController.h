@@ -5,7 +5,7 @@
 //
 
 #import "ContentInsets.h"
-#import "Scrollable.h"
+#import "TabBarActionable.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAnalytics/SRGAnalytics.h>
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  To use `PageViewController`, bind its `placeholderViews` property to a single view where pages will be displayed.
  */
-@interface PageViewController : HLSPlaceholderViewController <ContainerContentInsets, Scrollable, SRGAnalyticsContainerViewTracking, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface PageViewController : HLSPlaceholderViewController <ContainerContentInsets, SRGAnalyticsContainerViewTracking, TabBarActionable, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 /**
  *  Create an instance displaying the supplied view controllers, and starting at the specified page.

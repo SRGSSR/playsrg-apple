@@ -175,16 +175,21 @@
     }
 }
 
-#pragma mark Scrollable protocol
+#pragma mark TabBarActionable protocol
 
-- (void)scrollToTopAnimated:(BOOL)animated
+- (void)performActiveTabActionAnimated:(BOOL)animated
 {
     if (self.viewControllers.count == 1) {
         UIViewController *rootViewController = self.viewControllers.firstObject;
-        if ([rootViewController conformsToProtocol:@protocol(Scrollable)]) {
-            UIViewController<Scrollable> *scrollableRootViewController = (UIViewController<Scrollable> *)rootViewController;
-            [scrollableRootViewController scrollToTopAnimated:animated];
+        if ([rootViewController conformsToProtocol:@protocol(TabBarActionable)]) {
+            UIViewController<TabBarActionable> *actionableRootViewController = (UIViewController<TabBarActionable> *)rootViewController;
+            [actionableRootViewController performActiveTabActionAnimated:animated];
         }
+    }
+    else {
+        // Natively performed when a navigation controller is directly embedded in a tab bar controller, but here triggered
+        // explicitly for all other kinds of embedding as well (e.g. tab bar -> split view -> navigation).
+        [self popToRootViewControllerAnimated:animated];
     }
 }
 

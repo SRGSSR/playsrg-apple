@@ -346,6 +346,7 @@
 - (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator API_AVAILABLE(ios(13.0))
 {
     UIViewController *viewController = animator.previewViewController;
+    animator.preferredCommitStyle = UIContextMenuInteractionCommitStylePop;
     [animator addCompletion:^{
         if ([viewController isKindOfClass:MediaPreviewViewController.class]) {
             MediaPreviewViewController *mediaPreviewViewController = (MediaPreviewViewController *)viewController;
@@ -357,6 +358,13 @@
             [self.navigationController pushViewController:viewController animated:YES];
         }
     }];
+}
+
+- (UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(13.0))
+{
+    UIPreviewParameters *previewParameters = [[UIPreviewParameters alloc] init];
+    previewParameters.backgroundColor = self.view.backgroundColor;
+    return [[UITargetedPreview alloc] initWithView:interaction.view parameters:previewParameters];
 }
 
 #pragma mark UIViewControllerPreviewingDelegate protocol

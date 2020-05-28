@@ -31,6 +31,7 @@
 @interface ProfileViewController ()
 
 @property (nonatomic) NSArray<ApplicationSectionInfo *> *sectionInfos;
+@property (nonatomic) ApplicationSectionInfo *currentSectionInfo;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
@@ -104,8 +105,14 @@
     
     [PushService.sharedService resetApplicationBadge];
     
-    // Ensure correct latest notifications displayed
+    // Ensure latest notifications are displayed
     [self reloadData];
+    
+    // On iPad where split screen can be used, load the secondary view afterwards (if loaded too early it will be collapsed
+    // automatically onto the primary at startup for narrow layouts, which is not what we want).
+    if ([self play_isMovingToParentViewController] && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        [self openApplicationSectionInfo:self.sectionInfos.firstObject interactive:NO animated:NO];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -137,15 +144,21 @@
 {
     [super updateForContentSizeCategory];
     
-    [self.tableView reloadData];
+    [self reloadTableView];
 }
 
 #pragma mark Data
 
+- (void)reloadTableView
+{
+    [self.tableView reloadData];
+    [self updateSelection];
+}
+
 - (void)reloadData
 {
-    self.sectionInfos = ApplicationSectionInfo.profileApplicationSectionInfos;
-    [self.tableView reloadData];
+    self.sectionInfos = [ApplicationSectionInfo profileApplicationSectionInfosWithNotificationPreview:self.splitViewController.collapsed];
+    [self reloadTableView];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView flashScrollIndicators];
@@ -164,8 +177,12 @@
     return applicationSectionInfo.options[ApplicationSectionOptionNotificationKey];
 }
 
-- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo animated:(BOOL)animated
+- (UIViewController *)viewControllerForSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
 {
+    if (! applicationSectionInfo) {
+        return nil;
+    }
+    
     UIViewController *viewController = nil;
     switch (applicationSectionInfo.applicationSection) {
         case ApplicationSectionNotifications: {
@@ -198,12 +215,86 @@
         }
     }
     
+    if (! viewController) {
+        return nil;
+    }
+    
+    // Always wrap into a navigation controller. The split view takes care of moving view controllers between navigation
+    // controllers when collapsing or expanding
+    return [[NavigationController alloc] initWithRootViewController:viewController];
+}
+
+- (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo interactive:(BOOL)interactive animated:(BOOL)animated
+{
+    if (! applicationSectionInfo) {
+        return NO;
+    }
+    
+    // Do not reload a section if already the current one
+    if (! self.splitViewController.collapsed && [applicationSectionInfo isEqual:self.currentSectionInfo]) {
+        return YES;
+    }
+    
+    UIViewController *viewController = [self viewControllerForSectionInfo:applicationSectionInfo];
     if (viewController) {
-        [self.navigationController pushViewController:viewController animated:animated];
+        self.currentSectionInfo = applicationSectionInfo;
+        
+        if (interactive) {
+            void (^showDetail)(void) = ^{
+                [self.splitViewController showDetailViewController:viewController sender:self];
+            };
+            
+            if (animated) {
+                showDetail();
+            }
+            else {
+                [UIView performWithoutAnimation:showDetail];
+            }
+        }
+        else {
+            // Adding the details view controller on-the-fly avoids automatic collapsing (i.e. starting with the details
+            // on top of the primary) when starting in compact layout.
+            NSMutableArray<UIViewController *> *viewControllers = self.splitViewController.viewControllers.mutableCopy;
+            if (viewControllers.count == 1) {
+                [viewControllers addObject:viewController];
+            }
+            else if (viewControllers.count == 2) {
+                [viewControllers replaceObjectAtIndex:1 withObject:viewController];
+            }
+            else {
+                return NO;
+            }
+            self.splitViewController.viewControllers = viewControllers.copy;
+            [self updateSelection];
+        }
+        
+        // Transfer the VoiceOver focus automatically, as is for example done in the Settings application.
+        if (! self.splitViewController.collapsed) {
+            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, viewController.view);
+        }
         return YES;
     }
     else {
         return NO;
+    }
+}
+
+- (void)updateSelection
+{
+    if (! self.currentSectionInfo) {
+        return;
+    }
+    
+    NSUInteger index = [self.sectionInfos indexOfObject:self.currentSectionInfo];
+    if (index != NSNotFound) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+    else {
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        if (indexPath) {
+            [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        }
     }
 }
 
@@ -216,21 +307,14 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsZero;
+    return SRGIdentityService.currentIdentityService ? UIEdgeInsetsZero : LayoutStandardTableViewPaddingInsets;
 }
 
 #pragma mark PlayApplicationNavigation protocol
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
 {
-    return [self openApplicationSectionInfo:applicationSectionInfo animated:NO];
-}
-
-#pragma mark Scrollable protocol
-
-- (void)scrollToTopAnimated:(BOOL)animated
-{
-    [self.tableView play_scrollToTopAnimated:animated];
+    return [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:NO];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -243,6 +327,13 @@
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];
+}
+
+#pragma mark TabBarActionable protocol
+
+- (void)performActiveTabActionAnimated:(BOOL)animated
+{
+    [self.tableView play_scrollToTopAnimated:animated];
 }
 
 #pragma mark UITableViewDataSource protocol
@@ -289,6 +380,7 @@
     else {
         ProfileTableViewCell *profileTableViewCell = (ProfileTableViewCell *)cell;
         profileTableViewCell.applicationSectionInfo = self.sectionInfos[indexPath.row];
+        profileTableViewCell.selectionStyle = self.splitViewController.collapsed ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleDefault;
     }
 }
 
@@ -299,11 +391,11 @@
         [NotificationsViewController openNotification:notification fromViewController:self];
         
         // Update the cell dot right away
-        [tableView reloadData];
+        [self reloadTableView];
     }
     else {
         ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
-        [self openApplicationSectionInfo:applicationSectionInfo animated:YES];
+        [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:YES];
     }
 }
 

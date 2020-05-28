@@ -97,6 +97,7 @@
 
 /* Label of the button to close the media long-press menu
    Label of the button to close the media sharing menu
+   Label of the button to close the module long-press menu
    Label of the button to close the show long-press menu
    Title of a cancel button
    Title of the cancel button in the alert view when deleting a download in the player view */
@@ -197,6 +198,9 @@
 
 /* Title of the alert view to keep autoplay permanently */
 "Keep autoplay?" = "Mantenere l'autoplay attivo?";
+
+/* Label on recently played livestreams */
+"Last played" = "Ultimo contenuto visionato";
 
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Ultima sincronizzazione: %@";
@@ -312,6 +316,7 @@
 
 /* Button label to open a media from the start from the long-press menu
    Button label to open a media from the start from the preview window
+   Button label to open a module from the from the long-press menu
    Button label to open a module from the preview window
    Button label to open a show from the from the long-press menu
    Button label to open a show from the preview window */

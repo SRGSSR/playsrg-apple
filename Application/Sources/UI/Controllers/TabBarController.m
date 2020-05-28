@@ -15,8 +15,9 @@
 #import "ProfileViewController.h"
 #import "PushService.h"
 #import "RadioChannelsViewController.h"
-#import "Scrollable.h"
 #import "SearchViewController.h"
+#import "SplitViewController.h"
+#import "TabBarActionable.h"
 #import "UIColor+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
@@ -43,73 +44,28 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     if (self = [super init]) {
         self.delegate = self;
         
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        
         NSMutableArray<UIViewController *> *viewControllers = NSMutableArray.array;
-        NSMutableArray<UITabBarItem *> *tabBarItems = NSMutableArray.array;
         
-        ApplicationSectionInfo *videosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
-        UIViewController *videosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:videosApplicationSectionInfo homeSections:applicationConfiguration.videoHomeSections];
-        videosViewController.title = NSLocalizedString(@"Videos", @"Title displayed at the top of the video view");
-        [viewControllers addObject:videosViewController];
-        UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos];
-        videosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierVideosTabBarItem;
-        [tabBarItems addObject:videosTabBarItem];
+        UIViewController *videosTabViewController = [self videosTabViewController];
+        [viewControllers addObject:videosTabViewController];
         
-        UIViewController *audiosViewController = nil;
-        NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioChannels;
-        if (radioChannels.count > 1) {
-            audiosViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
-        }
-        else if (radioChannels.count == 1) {
-            RadioChannel *radioChannel = radioChannels.firstObject;
-            ApplicationSectionInfo *audiosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
-            audiosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:audiosApplicationSectionInfo homeSections:radioChannel.homeSections];
-            audiosViewController.title = NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
+        UIViewController *audiosTabViewController = [self audiosTabViewController];
+        if (audiosTabViewController) {
+            [viewControllers addObject:audiosTabViewController];
         }
         
-        if (audiosViewController) {
-            [viewControllers addObject:audiosViewController];
-            UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:audiosViewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios];
-            audiosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierAudiosTabBarItem;
-            [tabBarItems addObject:audiosTabBarItem];
+        UIViewController *livestreamsTabViewController = [self livestreamsTabViewController];
+        if (livestreamsTabViewController) {
+            [viewControllers addObject:livestreamsTabViewController];
         }
         
-        NSArray<NSNumber *> *liveHomeSections = ApplicationConfiguration.sharedApplicationConfiguration.liveHomeSections;
-        if (liveHomeSections.count != 0) {
-            ApplicationSectionInfo *liveApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionLive radioChannel:nil];
-            UIViewController *liveHomeViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:liveApplicationSectionInfo homeSections:liveHomeSections];
-            liveHomeViewController.title = NSLocalizedString(@"Livestreams", @"Title displayed at the top of the livestream view");
-            [viewControllers addObject:liveHomeViewController];
-            UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveHomeViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
-            liveTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
-            [tabBarItems addObject:liveTabBarItem];
-        }
+        UIViewController *searchTabViewController = [self searchTabViewController];
+        [viewControllers addObject:searchTabViewController];
         
-        UIViewController *searchViewController = [[SearchViewController alloc] init];
-        [viewControllers addObject:searchViewController];
-        UITabBarItem *searchTabBarItem = [[UITabBarItem alloc] initWithTitle:searchViewController.title image:[UIImage imageNamed:@"search-24"] tag:TabBarItemIdentifierSearch];
-        searchTabBarItem.accessibilityIdentifier = AccessibilityIdentifierSearchTabBarItem;
-        [tabBarItems addObject:searchTabBarItem];
+        UIViewController *profileTabViewController = [self profileTabViewController];
+        [viewControllers addObject:profileTabViewController];
         
-        UIViewController *profileViewController = [[ProfileViewController alloc] init];
-        [viewControllers addObject:profileViewController];
-        UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile-24"] tag:TabBarItemIdentifierProfile];
-        profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
-        [tabBarItems addObject:profileTabBarItem];
-        
-        NSMutableArray<NavigationController *> *navigationControllers = NSMutableArray.array;
-        [viewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
-            NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
-            navigationController.tabBarItem = tabBarItems[idx];
-            [navigationControllers addObject:navigationController];
-            
-            if ([viewController isKindOfClass:HomeViewController.class]) {
-                HomeViewController *homeViewController = (HomeViewController *)viewController;
-                [navigationController updateWithRadioChannel:homeViewController.radioChannel animated:NO];
-            }
-        }];
-        self.viewControllers = navigationControllers.copy;
+        self.viewControllers = viewControllers.copy;
         
         if (@available(iOS 13, *)) {
             self.tabBar.barTintColor = nil;
@@ -248,6 +204,107 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     ApplicationSettingSetLastOpenedTabBarItemIdentifier(selectedViewController.tabBarItem.tag);
 }
 
+#pragma mark View controllers
+
+- (UIViewController *)videosTabViewController
+{
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    
+    ApplicationSectionInfo *videosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
+    UIViewController *videosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:videosApplicationSectionInfo homeSections:applicationConfiguration.videoHomeSections];
+    videosViewController.title = NSLocalizedString(@"Videos", @"Title displayed at the top of the video view");
+    
+    UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos];
+    videosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierVideosTabBarItem;
+    
+    NavigationController *videosNavigationController = [[NavigationController alloc] initWithRootViewController:videosViewController];
+    videosNavigationController.tabBarItem = videosTabBarItem;
+    return videosNavigationController;
+}
+
+- (UIViewController *)audiosTabViewController
+{
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    
+    NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioChannels;
+    if (radioChannels.count > 1) {
+        UIViewController *radioChannelsViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
+        
+        UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:radioChannelsViewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios];
+        audiosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierAudiosTabBarItem;
+        
+        NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:radioChannelsViewController];
+        audiosNavigationController.tabBarItem = audiosTabBarItem;
+        return audiosNavigationController;
+    }
+    else if (radioChannels.count == 1) {
+        RadioChannel *radioChannel = radioChannels.firstObject;
+        ApplicationSectionInfo *audiosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
+        UIViewController *audiosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:audiosApplicationSectionInfo homeSections:radioChannel.homeSections];
+        audiosViewController.title = NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
+        
+        UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:audiosViewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios];
+        audiosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierAudiosTabBarItem;
+        
+        NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:audiosViewController];
+        audiosNavigationController.tabBarItem = audiosTabBarItem;
+        [audiosNavigationController updateWithRadioChannel:radioChannel animated:NO];
+        return audiosNavigationController;
+    }
+    else {
+        return nil;
+    }
+}
+
+- (UIViewController *)livestreamsTabViewController
+{
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    
+    NSArray<NSNumber *> *liveHomeSections = applicationConfiguration.liveHomeSections;
+    if (liveHomeSections.count != 0) {
+        ApplicationSectionInfo *liveApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionLive radioChannel:nil];
+        UIViewController *liveHomeViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:liveApplicationSectionInfo homeSections:liveHomeSections];
+        liveHomeViewController.title = NSLocalizedString(@"Livestreams", @"Title displayed at the top of the livestream view");
+        
+        UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveHomeViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
+        liveTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
+        
+        NavigationController *liveNavigationController = [[NavigationController alloc] initWithRootViewController:liveHomeViewController];
+        liveNavigationController.tabBarItem = liveTabBarItem;
+        return liveNavigationController;
+    }
+    else {
+        return nil;
+    }
+}
+
+- (UIViewController *)searchTabViewController
+{
+    UIViewController *searchViewController = [[SearchViewController alloc] init];
+    
+    UITabBarItem *searchTabBarItem = [[UITabBarItem alloc] initWithTitle:searchViewController.title image:[UIImage imageNamed:@"search-24"] tag:TabBarItemIdentifierSearch];
+    searchTabBarItem.accessibilityIdentifier = AccessibilityIdentifierSearchTabBarItem;
+    
+    NavigationController *searchNavigationController = [[NavigationController alloc] initWithRootViewController:searchViewController];
+    searchNavigationController.tabBarItem = searchTabBarItem;
+    return searchNavigationController;
+}
+
+- (UIViewController *)profileTabViewController
+{
+    UIViewController *profileViewController = [[ProfileViewController alloc] init];
+    NavigationController *profileNavigationController = [[NavigationController alloc] initWithRootViewController:profileViewController];
+    
+    UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile-24"] tag:TabBarItemIdentifierProfile];
+    profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
+    
+    SplitViewController *profileSplitViewController = [[SplitViewController alloc] init];
+    profileSplitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    profileSplitViewController.viewControllers = @[ profileNavigationController ];
+    profileSplitViewController.tabBarItem = profileTabBarItem;
+    return profileSplitViewController;
+}
+
 #pragma mark Layout
 
 - (void)updateLayoutAnimated:(BOOL)animated
@@ -375,9 +432,9 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     if (viewController == self.selectedViewController) {
-        if ([viewController conformsToProtocol:@protocol(Scrollable)]) {
-            UIViewController<Scrollable> *scrollableViewController = (UIViewController<Scrollable> *)viewController;
-            [scrollableViewController scrollToTopAnimated:YES];
+        if ([viewController conformsToProtocol:@protocol(TabBarActionable)]) {
+            UIViewController<TabBarActionable> *actionableViewController = (UIViewController<TabBarActionable> *)viewController;
+            [actionableViewController performActiveTabActionAnimated:YES];
         }
     }
     return YES;

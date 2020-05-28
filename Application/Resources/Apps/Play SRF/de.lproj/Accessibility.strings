@@ -60,6 +60,9 @@
 /* Introductory title for information notifications */
 "Information" = "Information";
 
+/* Label on recently played livestreams */
+"Last played" = "Zuletzt abgespielt";
+
 /* Accessibility introductory text for the logged in user */
 "Logged in user: %@" = "Angemeldeter Nutzer: %@";
 

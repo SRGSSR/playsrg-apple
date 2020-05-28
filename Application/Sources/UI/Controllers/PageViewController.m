@@ -237,22 +237,22 @@
     [self displayPageAtIndex:index animated:YES];
 }
 
-#pragma mark Scrollable protocol
-
-- (void)scrollToTopAnimated:(BOOL)animated
-{
-    UIViewController *currentViewController = self.pageViewController.viewControllers.firstObject;
-    if ([currentViewController conformsToProtocol:@protocol(Scrollable)]) {
-        UIViewController<Scrollable> *scrollableCurrentViewController = (UIViewController<Scrollable> *)currentViewController;
-        [scrollableCurrentViewController scrollToTopAnimated:animated];
-    }
-}
-
 #pragma mark SRGAnalyticsContainerViewTracking protocol
 
 - (NSArray<UIViewController *> *)srg_activeChildViewControllers
 {
     return self.pageViewController ? @[self.pageViewController] : @[];
+}
+
+#pragma mark TabBarActionable protocol
+
+- (void)performActiveTabActionAnimated:(BOOL)animated
+{
+    UIViewController *currentViewController = self.pageViewController.viewControllers.firstObject;
+    if ([currentViewController conformsToProtocol:@protocol(TabBarActionable)]) {
+        UIViewController<TabBarActionable> *actionableCurrentViewController = (UIViewController<TabBarActionable> *)currentViewController;
+        [actionableCurrentViewController performActiveTabActionAnimated:animated];
+    }
 }
 
 #pragma mark UIPageViewControllerDataSource protocol

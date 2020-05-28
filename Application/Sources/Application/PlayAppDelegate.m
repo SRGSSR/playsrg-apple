@@ -163,8 +163,8 @@ static void *s_kvoContext = &s_kvoContext;
     [Download removeUnusedDownloadedFiles];
     
     // Setup view controller hierarchy
-    self.window.rootViewController = [[TabBarController alloc] init];
     [self.window makeKeyAndVisible];
+    self.window.rootViewController = [[TabBarController alloc] init];
     
     [self checkForForcedUpdates];
     

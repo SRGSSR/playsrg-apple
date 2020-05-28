@@ -6,7 +6,7 @@
 
 #import "ContentInsets.h"
 #import "ListRequestViewController.h"
-#import "Scrollable.h"
+#import "TabBarActionable.h"
 
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    - Automatic display of a load more footer if more data is available
  *    - Clean display of empty tables, whether because of an error or because no items are available
  */
-@interface TableRequestViewController : ListRequestViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, Scrollable, UITableViewDataSource, UITableViewDelegate>
+@interface TableRequestViewController : ListRequestViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, TabBarActionable, UITableViewDataSource, UITableViewDelegate>
 
 /**
  *  The table view.

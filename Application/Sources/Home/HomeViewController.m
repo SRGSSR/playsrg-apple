@@ -267,6 +267,8 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
 - (void)refreshDidStart
 {
     self.lastRequestError = nil;
+    
+    [self.tableView reloadData];
 }
 
 - (void)refreshDidFinishWithError:(NSError *)error
@@ -433,31 +435,30 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
+    NSString *title = nil;
+    
     NSError *error = self.lastRequestError;
     if (error) {
         // Multiple errors. Pick the first ones
         if ([error hasCode:SRGNetworkErrorMultiple withinDomain:SRGNetworkErrorDomain]) {
             error = [error.userInfo[SRGNetworkErrorsKey] firstObject];
         }
-        return [[NSAttributedString alloc] initWithString:error.localizedDescription
-                                               attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
-                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
+        title = error.localizedDescription;
     }
     else {
-        return nil;
+        title = NSLocalizedString(@"No results", @"Default text displayed when no results are available");
     }
+    
+    return [[NSAttributedString alloc] initWithString:title
+                                           attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
+                                                         NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
 }
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
-    if (self.lastRequestError) {
-        return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it")
-                                               attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
-                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
-    }
-    else {
-        return nil;
-    }
+    return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it")
+                                           attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                                         NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
@@ -466,7 +467,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
         return [UIImage imageNamed:@"error-90"];
     }
     else {
-        return nil;
+        return [UIImage imageNamed:@"media-90"];
     }
 }
 
@@ -511,13 +512,6 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     }
 }
 
-#pragma mark Scrollable protocol
-
-- (void)scrollToTopAnimated:(BOOL)animated
-{
-    [self.tableView play_scrollToTopAnimated:animated];
-}
-
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -536,6 +530,13 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     else {
         return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelVideo ];
     }
+}
+
+#pragma mark TabBarActionable protocol
+
+- (void)performActiveTabActionAnimated:(BOOL)animated
+{
+    [self.tableView play_scrollToTopAnimated:animated];
 }
 
 #pragma mark UITableViewDataSource protocol
