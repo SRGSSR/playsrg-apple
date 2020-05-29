@@ -1331,6 +1331,11 @@
 		6FE1B91B1FAC34D600A58F3B /* ContentInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B9181FAC34D600A58F3B /* ContentInsets.m */; };
 		6FE1B91C1FAC34D600A58F3B /* ContentInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B9181FAC34D600A58F3B /* ContentInsets.m */; };
 		6FE1B91D1FAC34D600A58F3B /* ContentInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B9181FAC34D600A58F3B /* ContentInsets.m */; };
+		6FE2873C2481448C00358CFF /* SongsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE2873B2481448C00358CFF /* SongsViewController.m */; };
+		6FE2873D2481448C00358CFF /* SongsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE2873B2481448C00358CFF /* SongsViewController.m */; };
+		6FE2873E2481448C00358CFF /* SongsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE2873B2481448C00358CFF /* SongsViewController.m */; };
+		6FE2873F2481448C00358CFF /* SongsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE2873B2481448C00358CFF /* SongsViewController.m */; };
+		6FE287402481448C00358CFF /* SongsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE2873B2481448C00358CFF /* SongsViewController.m */; };
 		6FE686E11EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
 		6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
 		6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
@@ -2192,6 +2197,8 @@
 		6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsConstants.m; sourceTree = "<group>"; };
 		6FE1B9171FAC34D600A58F3B /* ContentInsets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentInsets.h; sourceTree = "<group>"; };
 		6FE1B9181FAC34D600A58F3B /* ContentInsets.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentInsets.m; sourceTree = "<group>"; };
+		6FE2873A2481448C00358CFF /* SongsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SongsViewController.h; sourceTree = "<group>"; };
+		6FE2873B2481448C00358CFF /* SongsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SongsViewController.m; sourceTree = "<group>"; };
 		6FE686DF1EB9D57400067D40 /* ChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelService.h; sourceTree = "<group>"; };
 		6FE686E01EB9D57400067D40 /* ChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelService.m; sourceTree = "<group>"; };
 		6FEC91A721A6B39A00AA50C8 /* TableLoadMoreFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableLoadMoreFooterView.h; sourceTree = "<group>"; };
@@ -3580,6 +3587,8 @@
 				6F5F4FC11DB10CFD0011CCA3 /* RelatedContentView.h */,
 				6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */,
 				6F5F4FC31DB10CFD0011CCA3 /* RelatedContentView.xib */,
+				6FE2873A2481448C00358CFF /* SongsViewController.h */,
+				6FE2873B2481448C00358CFF /* SongsViewController.m */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -5823,6 +5832,7 @@
 				6F7C35B523708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				6F93DE1A20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				086F8D5522984B29001BE2F4 /* Favorites.m in Sources */,
+				6FE2873C2481448C00358CFF /* SongsViewController.m in Sources */,
 				6F9122BF1DC8708400725EEB /* PlayErrors.m in Sources */,
 				6FE1B9191FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6F93DE0D20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
@@ -5983,6 +5993,7 @@
 				0806E7B91D50D918002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
+				6FE2873D2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA012201148250070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4D722D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
 				08B2A53B2426511800C6EED3 /* SRGModule+PlaySRG.m in Sources */,
@@ -6156,6 +6167,7 @@
 				0806E7BA1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
+				6FE2873E2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4D922D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
 				08B2A53C2426511800C6EED3 /* SRGModule+PlaySRG.m in Sources */,
@@ -6329,6 +6341,7 @@
 				0806E7BB1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB71EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FC1FA8B2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
+				6FE2873F2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA014201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4DB22D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
 				08B2A53D2426511800C6EED3 /* SRGModule+PlaySRG.m in Sources */,
@@ -6502,6 +6515,7 @@
 				0806E7BC1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
+				6FE287402481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA015201148270070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4DD22D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
 				08B2A53E2426511800C6EED3 /* SRGModule+PlaySRG.m in Sources */,
