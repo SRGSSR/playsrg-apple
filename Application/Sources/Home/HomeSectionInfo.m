@@ -13,6 +13,7 @@
 #import "HomeShowListTableViewCell.h"
 #import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowVerticalListTableViewCell.h"
+#import "HomeTopicAccessTableViewCell.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGDataProvider/SRGDataProvider.h>
@@ -85,6 +86,9 @@ static NSArray<SRGMedia *> *HomeSectionReorderedMedias(NSArray<SRGMedia *> *medi
     if (self.homeSection == HomeSectionRadioAllShows) {
         return HomeShowVerticalListTableViewCell.class;
     }
+    else if (self.homeSection == HomeSectionTVTopicsAccess) {
+        return HomeTopicAccessTableViewCell.class;
+    }
     else if (self.homeSection == HomeSectionTVShowsAccess || self.homeSection == HomeSectionRadioShowsAccess) {
         return HomeShowsAccessTableViewCell.class;
     }
@@ -99,7 +103,7 @@ static NSArray<SRGMedia *> *HomeSectionReorderedMedias(NSArray<SRGMedia *> *medi
 - (BOOL)canOpenList
 {
     return self.homeSection != HomeSectionTVLive && self.homeSection != HomeSectionRadioLive && self.homeSection != HomeSectionRadioLiveSatellite
-        && self.homeSection != HomeSectionRadioAllShows
+        && self.homeSection != HomeSectionTVTopicsAccess && self.homeSection != HomeSectionRadioAllShows
         && self.homeSection != HomeSectionTVShowsAccess && self.homeSection != HomeSectionRadioShowsAccess
         && self.homeSection != HomeSectionTVFavoriteShows && self.homeSection != HomeSectionRadioFavoriteShows
         && ! [self isPlaceholder];
@@ -297,6 +301,15 @@ static NSArray<SRGMedia *> *HomeSectionReorderedMedias(NSArray<SRGMedia *> *medi
                     [requestQueue addRequest:request resume:YES];
                 }
             }
+            break;
+        }
+            
+        case HomeSectionTVTopicsAccess: {
+            SRGBaseRequest *request = [SRGDataProvider.currentDataProvider tvTopicsForVendor:vendor withCompletionBlock:^(NSArray<SRGTopic *> * _Nullable topics, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                [requestQueue reportError:error];
+                paginatedItemListCompletionBlock(topics, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+            }];
+            [requestQueue addRequest:request resume:YES];
             break;
         }
             

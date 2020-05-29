@@ -20,6 +20,7 @@
 #import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowVerticalListTableViewCell.h"
 #import "HomeStatusHeaderView.h"
+#import "HomeTopicAccessTableViewCell.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 #import "RefreshControl.h"
@@ -122,6 +123,9 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     
     Class showVerticallListCellClass = HomeShowVerticalListTableViewCell.class;
     [self.tableView registerClass:showVerticallListCellClass forCellReuseIdentifier:NSStringFromClass(showVerticallListCellClass)];
+    
+    Class homeTopicsAccessCellClass = HomeTopicAccessTableViewCell.class;
+    [self.tableView registerClass:homeTopicsAccessCellClass forCellReuseIdentifier:NSStringFromClass(homeTopicsAccessCellClass)];
     
     NSString *showsAccessCellIdentifier = NSStringFromClass(HomeShowsAccessTableViewCell.class);
     UINib *homeShowsAccessTableViewCellNib = [UINib nibWithNibName:showsAccessCellIdentifier bundle:nil];

@@ -57,14 +57,15 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 ### Home sections
 
-* `tvEvents`: Event modules.
+* `tvEvents`: Event modules (expand into a row per event).
 * `tvFavoriteShows`: TV shows added to the favorites.
 * `tvLatest`: The latest medias.
+* `tvMostPopular`: The most popular videos.
 * `tvShowsAccess`: A-Z and By date access buttons.
 * `tvSoonExpiring`: Soon expiring videos.
-* `tvTopics`: Topics.
+* `tvTopics`: Topics (expand into a row per topic).
+* `tvTopicsAccess`: Topic access.
 * `tvTrending`: Trending medias and editorial picks. See `tvTrendingEpisodesOnly` and `tvTrendingEditorialLimit` options.
-* `tvMostPopular`: The most popular videos.
 
 ### Topic configuration
 
