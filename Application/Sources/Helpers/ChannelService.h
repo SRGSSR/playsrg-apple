@@ -10,7 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // Types
-typedef void (^ChannelServiceUpdateBlock)(SRGProgramComposition * _Nullable programComposition);
+typedef void (^ChannelProgramsUpdateBlock)(SRGProgramComposition * _Nullable programComposition);
+typedef void (^ChannelSongsUpdateBlock)(NSArray<SRGSong *> * _Nullable songs);
 
 /**
  *  Service responsible for retrieving and broadcasting channel detailed information (program information, mostly).
@@ -27,7 +28,8 @@ typedef void (^ChannelServiceUpdateBlock)(SRGProgramComposition * _Nullable prog
  *  Register an observer to be notified of updates for a given channel. The provided block is called when channel information
  *  is available.
  */
-- (id)addObserver:(id)observer forUpdatesWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block;
+- (nullable id)addObserver:(id)observer forProgramUpdatesWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor livestreamUid:(NSString *)livestreamUid block:(ChannelProgramsUpdateBlock)block;
+- (nullable id)addObserver:(id)observer forSongUpdatesWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor block:(ChannelSongsUpdateBlock)block;
 
 /**
  *  Remove the specified observer.
