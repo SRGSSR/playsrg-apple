@@ -16,7 +16,7 @@
 
 @interface ChannelService ()
 
-@property (nonatomic) NSMutableDictionary<ChannelServiceSetup *, NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *> *registrations;
+@property (nonatomic) NSMutableDictionary<ChannelServiceSetup *, NSMutableDictionary<NSString *, ChannelServiceUpdateBlock> *> *registrations;
 
 // Cache channels. This cache is never invalidated, but its data is likely rarely to be staled as it is regularly updated. Cached
 // data is used to return existing channel information as fast as possible, and when errors have been encountered.
@@ -82,7 +82,7 @@
 - (id)addObserver:(id)observer forUpdatesWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block
 {
     ChannelServiceSetup *setup = [[ChannelServiceSetup alloc] initWithChannel:channel vendor:vendor livestreamUid:livestreamUid];
-    NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[setup];
+    NSMutableDictionary<NSString *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[setup];
     if (! channelRegistrations) {
         channelRegistrations = [NSMutableDictionary dictionary];
         self.registrations[setup] = channelRegistrations;
@@ -111,7 +111,7 @@
         return;
     }
     
-    for (NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *channelRegistrations in self.registrations.allValues) {
+    for (NSMutableDictionary<NSString *, ChannelServiceUpdateBlock> *channelRegistrations in self.registrations.allValues) {
         [channelRegistrations removeObjectForKey:observer];
     }
     
@@ -131,7 +131,7 @@
             self.programCompositions[setup] = programComposition;
         }
         
-        NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[setup];
+        NSMutableDictionary<NSString *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[setup];
         for (ChannelServiceUpdateBlock updateBlock in channelRegistrations.allValues) {
             updateBlock(self.programCompositions[setup]);
         }
