@@ -6,18 +6,34 @@
 
 #import "SongsViewController.h"
 
+#import "ChannelService.h"
 #import "TableView.h"
-
-#import <SRGDataProvider/SRGDataProvider.h>
+#import "UIViewController+PlaySRG.h"
 
 @interface SongsViewController ()
+
+@property (nonatomic) SRGChannel *channel;
+@property (nonatomic) SRGVendor vendor;
 
 @property (nonatomic) NSArray<SRGSong *> *songs;
 @property (nonatomic, weak) TableView *tableView;
 
+@property (nonatomic) id channelRegistration;
+
 @end
 
 @implementation SongsViewController
+
+#pragma mark Object lifecycle
+
+- (instancetype)initWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor
+{
+    if (self = [super init]) {
+        self.channel = channel;
+        self.vendor = vendor;
+    }
+    return self;
+}
 
 #pragma mark View lifecycle
 
@@ -41,6 +57,29 @@
     [super viewDidLoad];
     
     [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"songCell"];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (self.play_isMovingToParentViewController) {
+        self.channelRegistration = [ChannelService.sharedService addObserver:self forSongUpdatesWithChannel:self.channel vendor:self.vendor block:^(NSArray<SRGSong *> * _Nullable songs) {
+            if (songs) {
+                self.songs = songs;
+                [self.tableView reloadData];
+            }
+        }];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    if (self.play_isMovingFromParentViewController) {
+        [ChannelService.sharedService removeObserver:self.channelRegistration];
+    }
 }
 
 #pragma mark UITableViewDataSource protocol

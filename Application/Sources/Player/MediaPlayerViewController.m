@@ -33,6 +33,7 @@
 #import "ProgramTableViewCell.h"
 #import "RelatedContentView.h"
 #import "ShowViewController.h"
+#import "SongsViewController.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
@@ -348,6 +349,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.currentProgramView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.currentProgramView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.currentProgramView.layer.masksToBounds = YES;
+    
+    UITapGestureRecognizer *songGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSongs:)];
+    [self.currentProgramView addGestureRecognizer:songGestureRecognizer];
     
     self.currentProgramMoreEpisodesButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"More episodes", @"A more episode button label");
     
@@ -2115,6 +2119,17 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
     
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)showSongs:(id)sender
+{
+    SRGMedia *mainMedia = [self mainMedia];
+    if (! mainMedia) {
+        return;
+    }
+    
+    SongsViewController *songsViewController = [[SongsViewController alloc] initWithChannel:mainMedia.channel vendor:mainMedia.vendor];
+    [self presentViewController:songsViewController animated:YES completion:nil];
 }
 
 - (IBAction)close:(id)sender
