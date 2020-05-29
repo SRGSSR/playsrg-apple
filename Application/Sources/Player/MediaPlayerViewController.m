@@ -1008,8 +1008,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     NSMutableArray<SRGProgram *> *programs = [NSMutableArray array];
     
-    // use end date as sort criterium so that programs containing others appear after. Makes more sense when displayed.
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, endDate) ascending:NO];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, startDate) ascending:NO];
     NSArray<SRGProgram *> *nextPrograms = [[self.programComposition play_programsFromDate:endWallClockDate toDate:nil withMediaURNs:nil] sortedArrayUsingDescriptors:@[sortDescriptor]];
     [programs addObjectsFromArray:nextPrograms];
     
