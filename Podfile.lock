@@ -68,14 +68,6 @@ PODS:
   - InAppSettingsKit (2.10)
   - MaterialComponents/AnimationTiming (109.5.0)
   - MaterialComponents/Availability (109.5.0)
-  - MaterialComponents/BottomSheet (109.5.0):
-    - MaterialComponents/Elevation
-    - MaterialComponents/private/KeyboardWatcher
-    - MaterialComponents/private/Math
-    - MaterialComponents/ShadowElevations
-    - MaterialComponents/ShadowLayer
-    - MaterialComponents/ShapeLibrary
-    - MaterialComponents/Shapes
   - MaterialComponents/Elevation (109.5.0):
     - MaterialComponents/Availability
     - MaterialComponents/private/Color
@@ -88,8 +80,6 @@ PODS:
   - MaterialComponents/private/Application (109.5.0)
   - MaterialComponents/private/Color (109.5.0):
     - MaterialComponents/Availability
-  - MaterialComponents/private/KeyboardWatcher (109.5.0):
-    - MaterialComponents/private/Application
   - MaterialComponents/private/Math (109.5.0)
   - MaterialComponents/Ripple (109.5.0):
     - MaterialComponents/AnimationTiming
@@ -99,13 +89,6 @@ PODS:
   - MaterialComponents/ShadowElevations (109.5.0)
   - MaterialComponents/ShadowLayer (109.5.0):
     - MaterialComponents/ShadowElevations
-  - MaterialComponents/ShapeLibrary (109.5.0):
-    - MaterialComponents/private/Math
-    - MaterialComponents/Shapes
-  - MaterialComponents/Shapes (109.5.0):
-    - MaterialComponents/private/Color
-    - MaterialComponents/private/Math
-    - MaterialComponents/ShadowLayer
   - MaterialComponents/Tabs (109.5.0):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Elevation
@@ -141,7 +124,6 @@ DEPENDENCIES:
   - FSCalendar (= 2.7.9)
   - google-cast-sdk-no-bluetooth (~> 4.4.6)
   - InAppSettingsKit (~> 2.10.0)
-  - MaterialComponents/BottomSheet (~> 109.5)
   - MaterialComponents/Tabs (~> 109.5)
   - MGSwipeTableCell (~> 1.6.8)
   - paper-onboarding (~> 6.1.3)
@@ -195,6 +177,6 @@ SPEC CHECKSUMS:
   SwiftMessages: a952f7a9103d9aeab93730a2861d2d8fcdd8758f
   UrbanAirship-iOS-SDK: 25f155c0142b62e4a94ec21093d65c6e128f5213
 
-PODFILE CHECKSUM: 079a21a9fca4f163b6f156226ff3b01c5979e8e5
+PODFILE CHECKSUM: 1237f01f386946c21d5efe0fe73a56a68aa0ec5e
 
 COCOAPODS: 1.9.3
