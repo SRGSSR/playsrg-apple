@@ -281,27 +281,27 @@ version: 2.10
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 101.1.1
+version: 109.5.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 101.1.1
+version: 109.5.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 101.1.1
+version: 109.5.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 101.1.1
+version: 109.5.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 101.1.1
+version: 109.5.0
 
 name: MDFInternationalization, nameSpecified: 
 body: 

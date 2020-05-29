@@ -66,25 +66,47 @@ PODS:
   - GoogleUtilities/UserDefaults (5.3.7):
     - GoogleUtilities/Logger
   - InAppSettingsKit (2.10)
-  - MaterialComponents/AnimationTiming (101.1.1)
-  - MaterialComponents/Elevation (101.1.1):
-    - MaterialComponents/private/Color
+  - MaterialComponents/AnimationTiming (109.5.0)
+  - MaterialComponents/Availability (109.5.0)
+  - MaterialComponents/BottomSheet (109.5.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/private/KeyboardWatcher
     - MaterialComponents/private/Math
-  - MaterialComponents/Ink (101.1.1):
-    - MaterialComponents/private/Color
-    - MaterialComponents/private/Math
-  - MaterialComponents/Palettes (101.1.1)
-  - MaterialComponents/private/Application (101.1.1)
-  - MaterialComponents/private/Color (101.1.1)
-  - MaterialComponents/private/Math (101.1.1)
-  - MaterialComponents/Ripple (101.1.1):
-    - MaterialComponents/AnimationTiming
-    - MaterialComponents/private/Color
-    - MaterialComponents/private/Math
-  - MaterialComponents/ShadowElevations (101.1.1)
-  - MaterialComponents/ShadowLayer (101.1.1):
     - MaterialComponents/ShadowElevations
-  - MaterialComponents/Tabs (101.1.1):
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+  - MaterialComponents/Elevation (109.5.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Ink (109.5.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Palettes (109.5.0)
+  - MaterialComponents/private/Application (109.5.0)
+  - MaterialComponents/private/Color (109.5.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/KeyboardWatcher (109.5.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (109.5.0)
+  - MaterialComponents/Ripple (109.5.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/ShadowElevations (109.5.0)
+  - MaterialComponents/ShadowLayer (109.5.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (109.5.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (109.5.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/Tabs (109.5.0):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Elevation
     - MaterialComponents/Ink
@@ -95,7 +117,7 @@ PODS:
     - MaterialComponents/ShadowLayer
     - MaterialComponents/Typography
     - MDFInternationalization
-  - MaterialComponents/Typography (101.1.1):
+  - MaterialComponents/Typography (109.5.0):
     - MaterialComponents/private/Application
     - MaterialComponents/private/Math
   - MDFInternationalization (2.0.0)
@@ -119,7 +141,8 @@ DEPENDENCIES:
   - FSCalendar (= 2.7.9)
   - google-cast-sdk-no-bluetooth (~> 4.4.6)
   - InAppSettingsKit (~> 2.10.0)
-  - MaterialComponents/Tabs (~> 101.1.1)
+  - MaterialComponents/BottomSheet (~> 109.5)
+  - MaterialComponents/Tabs (~> 109.5)
   - MGSwipeTableCell (~> 1.6.8)
   - paper-onboarding (~> 6.1.3)
   - SwiftMessages (~> 7.0.0)
@@ -163,7 +186,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 98b71f5e04142793729a5ef23e5b96651ff4b70f
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   InAppSettingsKit: d965e29be941eb19857271e4625de3fba6e23c9f
-  MaterialComponents: ee54e69c0956bd6e341933eee6f34dc6df08ee7a
+  MaterialComponents: 7698cdf7eacb5f192456dbbe597aa7a8857fa3ef
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MGSwipeTableCell: dc4eca3212ed38a563b27d6aa7b3c01ce656c1e2
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
@@ -172,6 +195,6 @@ SPEC CHECKSUMS:
   SwiftMessages: a952f7a9103d9aeab93730a2861d2d8fcdd8758f
   UrbanAirship-iOS-SDK: 25f155c0142b62e4a94ec21093d65c6e128f5213
 
-PODFILE CHECKSUM: 7bb3a88d688c3065339f4497ff001162c6eded18
+PODFILE CHECKSUM: 079a21a9fca4f163b6f156226ff3b01c5979e8e5
 
 COCOAPODS: 1.9.3
