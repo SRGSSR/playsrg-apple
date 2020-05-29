@@ -7,7 +7,9 @@
 #import "SongsViewController.h"
 
 #import "ChannelService.h"
+#import "SongTableViewCell.h"
 #import "TableView.h"
+#import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 @interface SongsViewController ()
@@ -40,7 +42,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.darkGrayColor;
+    view.backgroundColor = UIColor.play_cardGrayBackgroundColor;
         
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.dataSource = self;
@@ -56,7 +58,9 @@
 {
     [super viewDidLoad];
     
-    [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"songCell"];
+    NSString *cellIdentifier = NSStringFromClass(SongTableViewCell.class);
+    UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
+    [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -91,25 +95,32 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [tableView dequeueReusableCellWithIdentifier:@"songCell"];
+    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(SongTableViewCell.class)];
 }
 
 #pragma mark UITableViewDelegate protocol
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(SongTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SRGSong *song = self.songs[indexPath.row];
-    cell.textLabel.text = song.title;
+    cell.song = self.songs[indexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44.f;
+    return 80.f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    SRGSong *song = self.songs[indexPath.row];
+    
+    // TODO: Should be associated with the main screen player directly
+    SRGLetterboxController *controller = SRGLetterboxService.sharedService.controller;
+    [controller seekToPosition:[SRGPosition positionAtDate:song.date] withCompletionHandler:^(BOOL finished) {
+        [controller play];
+    }];
 }
 
 @end
