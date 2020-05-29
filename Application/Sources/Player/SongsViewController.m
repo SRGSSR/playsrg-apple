@@ -8,6 +8,7 @@
 
 #import "ChannelService.h"
 #import "SongTableViewCell.h"
+#import "SRGProgramComposition+PlaySRG.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -118,7 +119,7 @@
     
     // TODO: Should be associated with the main screen player directly
     SRGLetterboxController *controller = SRGLetterboxService.sharedService.controller;
-    [controller seekToPosition:[SRGPosition positionAtDate:song.date] withCompletionHandler:^(BOOL finished) {
+    [controller seekToPosition:[SRGPosition positionAtDate:PlayStreamDate(song.date, controller)] withCompletionHandler:^(BOOL finished) {
         [controller play];
     }];
 }

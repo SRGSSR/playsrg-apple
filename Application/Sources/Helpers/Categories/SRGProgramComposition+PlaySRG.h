@@ -12,7 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
  *  Calculate the wall-clock date corresponding to a date provided in a controller reference frame.
  */
 // TODO: Remove when offsets are not needed anymore
-OBJC_EXPORT NSDate *PlayWallClockDate(NSDate *date, SRGLetterboxController *controller);
+// TODO: Could be moved to Letterbox with documented rules (NSDate accepted or returned by the player = controller date
+//       and users must convert them)
+OBJC_EXPORT NSDate *PlayWallClockDate(NSDate *controllerDate, SRGLetterboxController *controller);
+OBJC_EXPORT NSDate *PlayStreamDate(NSDate *wallClockDate, SRGLetterboxController *controller);
 
 @interface SRGProgramComposition (PlaySRG)
 
