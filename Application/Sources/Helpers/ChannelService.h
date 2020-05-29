@@ -9,11 +9,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- *  Notification sent when channels have been updated.
- */
-OBJC_EXPORT NSString * const ChannelServiceDidUpdateChannelsNotification;
-
 // Types
 typedef void (^ChannelServiceUpdateBlock)(SRGProgramComposition * _Nullable programComposition);
 

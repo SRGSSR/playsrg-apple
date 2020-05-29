@@ -14,8 +14,6 @@
 #import <FXReachability/FXReachability.h>
 #import <libextobjc/libextobjc.h>
 
-NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceDidUpdateChannelsNotification";
-
 @interface ChannelService ()
 
 @property (nonatomic) NSMutableDictionary<ChannelServiceSetup *, NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *> *registrations;
@@ -159,11 +157,7 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 
 - (void)updateChannels
 {
-    self.requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-        if (finished && ! error) {
-            [NSNotificationCenter.defaultCenter postNotificationName:ChannelServiceDidUpdateChannelsNotification object:self];
-        }
-    }];
+    self.requestQueue = [[SRGRequestQueue alloc] init];
     
     for (ChannelServiceSetup *setup in self.registrations) {
         [self refreshWithSetup:setup];
