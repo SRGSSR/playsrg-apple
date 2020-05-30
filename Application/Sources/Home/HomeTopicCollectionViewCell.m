@@ -55,6 +55,11 @@
 
 #pragma mark Accessibility
 
+- (BOOL)isAccessibilityElement
+{
+    return YES;
+}
+
 - (NSString *)accessibilityLabel
 {
     return self.topic.title;
