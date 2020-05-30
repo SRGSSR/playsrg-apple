@@ -50,7 +50,7 @@
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = topic.title;
     
-    [self.imageView play_requestImageForObject:topic withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
+    [self.imageView play_requestImageForObject:topic withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderNone];
 }
 
 #pragma mark Accessibility
