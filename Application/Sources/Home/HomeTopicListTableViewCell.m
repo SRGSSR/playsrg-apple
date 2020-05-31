@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "HomeTopicAccessTableViewCell.h"
+#import "HomeTopicListTableViewCell.h"
 
 #import "HomeTopicCollectionViewCell.h"
 #import "HomeTopicViewController.h"
@@ -13,14 +13,14 @@
 
 static CGFloat kCellHeight = 100.f;
 
-@interface HomeTopicAccessTableViewCell ()
+@interface HomeTopicListTableViewCell ()
 
 @property (nonatomic, weak) UIView *wrapperView;
 @property (nonatomic, weak) UICollectionView *collectionView;
 
 @end
 
-@implementation HomeTopicAccessTableViewCell
+@implementation HomeTopicListTableViewCell
 
 #pragma mark Class overrides
 

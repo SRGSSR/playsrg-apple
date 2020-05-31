@@ -13,7 +13,7 @@
 #import "HomeShowListTableViewCell.h"
 #import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowVerticalListTableViewCell.h"
-#import "HomeTopicAccessTableViewCell.h"
+#import "HomeTopicListTableViewCell.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGDataProvider/SRGDataProvider.h>
@@ -87,7 +87,7 @@ static NSArray<SRGMedia *> *HomeSectionReorderedMedias(NSArray<SRGMedia *> *medi
         return HomeShowVerticalListTableViewCell.class;
     }
     else if (self.homeSection == HomeSectionTVTopicsAccess) {
-        return HomeTopicAccessTableViewCell.class;
+        return HomeTopicListTableViewCell.class;
     }
     else if (self.homeSection == HomeSectionTVShowsAccess || self.homeSection == HomeSectionRadioShowsAccess) {
         return HomeShowsAccessTableViewCell.class;

@@ -729,11 +729,11 @@
 		6F12E4E922D8676600BC1718 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */; };
 		6F12E4EA22D8676600BC1718 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */; };
 		6F12E4EB22D8676600BC1718 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */; };
-		6F167F4A248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m */; };
-		6F167F4B248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m */; };
-		6F167F4C248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m */; };
-		6F167F4D248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m */; };
-		6F167F4E248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m */; };
+		6F167F4A248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicListTableViewCell.m */; };
+		6F167F4B248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicListTableViewCell.m */; };
+		6F167F4C248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicListTableViewCell.m */; };
+		6F167F4D248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicListTableViewCell.m */; };
+		6F167F4E248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicListTableViewCell.m */; };
 		6F167F51248198DC00B8E7F1 /* HomeTopicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F50248198DC00B8E7F1 /* HomeTopicCollectionViewCell.m */; };
 		6F167F52248198DC00B8E7F1 /* HomeTopicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F50248198DC00B8E7F1 /* HomeTopicCollectionViewCell.m */; };
 		6F167F53248198DC00B8E7F1 /* HomeTopicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F50248198DC00B8E7F1 /* HomeTopicCollectionViewCell.m */; };
@@ -1970,8 +1970,8 @@
 		6F12E4DF22D8676300BC1718 /* SearchHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHeaderView.m; sourceTree = "<group>"; };
 		6F12E4E022D8676300BC1718 /* SearchHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHeaderView.h; sourceTree = "<group>"; };
 		6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchHeaderView.xib; sourceTree = "<group>"; };
-		6F167F48248197C700B8E7F1 /* HomeTopicAccessTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTopicAccessTableViewCell.h; sourceTree = "<group>"; };
-		6F167F49248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTopicAccessTableViewCell.m; sourceTree = "<group>"; };
+		6F167F48248197C700B8E7F1 /* HomeTopicListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTopicListTableViewCell.h; sourceTree = "<group>"; };
+		6F167F49248197C700B8E7F1 /* HomeTopicListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTopicListTableViewCell.m; sourceTree = "<group>"; };
 		6F167F4F248198DC00B8E7F1 /* HomeTopicCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTopicCollectionViewCell.h; sourceTree = "<group>"; };
 		6F167F50248198DC00B8E7F1 /* HomeTopicCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTopicCollectionViewCell.m; sourceTree = "<group>"; };
 		6F167F56248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTopicCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -3039,11 +3039,11 @@
 				6F6B642D21A70FAA00E207FC /* HomeStatusHeaderView.xib */,
 				08AA55B91D49EFBD00C5026E /* HomeTableViewCell.h */,
 				08AA55BA1D49EFBD00C5026E /* HomeTableViewCell.m */,
-				6F167F48248197C700B8E7F1 /* HomeTopicAccessTableViewCell.h */,
-				6F167F49248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m */,
 				6F167F4F248198DC00B8E7F1 /* HomeTopicCollectionViewCell.h */,
 				6F167F50248198DC00B8E7F1 /* HomeTopicCollectionViewCell.m */,
 				6F167F56248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib */,
+				6F167F48248197C700B8E7F1 /* HomeTopicListTableViewCell.h */,
+				6F167F49248197C700B8E7F1 /* HomeTopicListTableViewCell.m */,
 				6FAF42FD1EF7CD8A0074E033 /* HomeTopicViewController.h */,
 				6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */,
 				08C68ECF1D38DEA100BB8AAA /* HomeViewController.h */,
@@ -5984,7 +5984,7 @@
 				6F00875D219AA888004BD6FF /* StoreReview.m in Sources */,
 				08DD9D5D1FFE6EDB00115906 /* ModuleViewController.m in Sources */,
 				6F4760131EB37BC6003021EA /* Banner.m in Sources */,
-				6F167F4A248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m in Sources */,
+				6F167F4A248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
 				6F7218131DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F475FC81EB37BC6003021EA /* MediasViewController.m in Sources */,
 				6F47607C1EB37D60003021EA /* UIStackView+PlaySRG.m in Sources */,
@@ -6252,7 +6252,7 @@
 				6FD88F8422D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F9897CE2412582400B390A2 /* Layout.m in Sources */,
 				0837CEAB1D3FAEE100A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
-				6F167F4B248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m in Sources */,
+				6F167F4B248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
 				6F475FBA1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08D8218B126700B2AF2C /* Download.m in Sources */,
 				0832BF1122BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
@@ -6419,7 +6419,7 @@
 				6FD88F8522D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F9897CF2412582400B390A2 /* Layout.m in Sources */,
 				0837CEAD1D3FAEE200A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
-				6F167F4C248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m in Sources */,
+				6F167F4C248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
 				6F475FBB1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08D9218B126700B2AF2C /* Download.m in Sources */,
 				0832BF1222BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
@@ -6586,7 +6586,7 @@
 				6FD88F8622D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F9897D02412582400B390A2 /* Layout.m in Sources */,
 				0837CEAF1D3FAEE200A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
-				6F167F4D248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m in Sources */,
+				6F167F4D248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
 				6F475FBC1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08DA218B126700B2AF2C /* Download.m in Sources */,
 				0832BF1322BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
@@ -6753,7 +6753,7 @@
 				6FD88F8722D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F9897D12412582400B390A2 /* Layout.m in Sources */,
 				0837CEB11D3FAEE300A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
-				6F167F4E248197C700B8E7F1 /* HomeTopicAccessTableViewCell.m in Sources */,
+				6F167F4E248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
 				6F475FBD1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08DB218B126700B2AF2C /* Download.m in Sources */,
 				0832BF1422BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
