@@ -6,7 +6,7 @@
 
 #import "SongsViewController.h"
 
-#import "ChannelService.h"
+#import "ApplicationConfiguration.h"
 #import "SongTableViewCell.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "TableView.h"
@@ -17,11 +17,6 @@
 
 @property (nonatomic) SRGChannel *channel;
 @property (nonatomic) SRGVendor vendor;
-
-@property (nonatomic) NSArray<SRGSong *> *songs;
-@property (nonatomic, weak) TableView *tableView;
-
-@property (nonatomic) id channelRegistration;
 
 @end
 
@@ -64,34 +59,20 @@
     [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if (self.play_isMovingToParentViewController) {
-        self.channelRegistration = [ChannelService.sharedService addObserver:self forSongUpdatesWithChannel:self.channel vendor:self.vendor block:^(NSArray<SRGSong *> * _Nullable songs) {
-            if (songs) {
-                self.songs = songs;
-                [self.tableView reloadData];
-            }
-        }];
-    }
-}
+#pragma mark Overrides
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
-    [super viewDidDisappear:animated];
-    
-    if (self.play_isMovingFromParentViewController) {
-        [ChannelService.sharedService removeObserver:self.channelRegistration];
-    }
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    SRGPageRequest *request = [[SRGDataProvider.currentDataProvider radioSongsForVendor:applicationConfiguration.vendor channelUid:self.channel.uid withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize];
+    [requestQueue addRequest:request resume:YES];
 }
 
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.songs.count;
+    return self.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -103,7 +84,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(SongTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.song = self.songs[indexPath.row];
+    cell.song = self.items[indexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,7 +96,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    SRGSong *song = self.songs[indexPath.row];
+    SRGSong *song = self.items[indexPath.row];
     
     // TODO: Should be associated with the main screen player directly
     SRGLetterboxController *controller = SRGLetterboxService.sharedService.controller;
