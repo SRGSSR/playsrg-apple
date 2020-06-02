@@ -127,7 +127,7 @@
             self.preferredContentSize = CGSizeMake(width, factor * 9.f / 16.f * width);
             
             if (self.media.contentType == SRGContentTypeLivestream && self.media.channel) {
-                self.channelRegistration = [ChannelService.sharedService addObserver:self forProgramUpdatesWithChannel:self.media.channel vendor:self.media.vendor livestreamUid:self.media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
+                self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:self.media.channel vendor:self.media.vendor livestreamUid:self.media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
                     self.programComposition = programComposition;
                     [self reloadData];
                 }];

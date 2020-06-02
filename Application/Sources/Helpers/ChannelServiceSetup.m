@@ -37,8 +37,7 @@
     }
     
     ChannelServiceSetup *otherSetup = object;
-    return [self.channel isEqual:otherSetup.channel] && self.vendor == otherSetup.vendor
-        && (self.livestreamUid == otherSetup.livestreamUid || [self.livestreamUid isEqualToString:otherSetup.livestreamUid]);
+    return [self.channel isEqual:otherSetup.channel] && self.vendor == otherSetup.vendor && [self.livestreamUid isEqualToString:otherSetup.livestreamUid];
 }
 
 - (NSUInteger)hash

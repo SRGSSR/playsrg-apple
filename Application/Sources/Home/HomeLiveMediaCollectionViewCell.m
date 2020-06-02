@@ -193,7 +193,7 @@
     }
     
     [ChannelService.sharedService removeObserver:self.channelRegistration];
-    self.channelRegistration = [ChannelService.sharedService addObserver:self forProgramUpdatesWithChannel:media.channel vendor:media.vendor livestreamUid:media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
+    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:media.channel vendor:media.vendor livestreamUid:media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
         [self reloadData];
     }];
