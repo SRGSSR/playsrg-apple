@@ -23,6 +23,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
+#import "Play-Swift-Bridge.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlayAppDelegate.h"
 #import "PlayApplication.h"
@@ -33,7 +34,6 @@
 #import "ProgramTableViewCell.h"
 #import "RelatedContentView.h"
 #import "ShowViewController.h"
-#import "SongsViewController.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
@@ -350,9 +350,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.currentProgramView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.currentProgramView.layer.masksToBounds = YES;
     
-    UITapGestureRecognizer *songGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSongs:)];
-    [self.currentProgramView addGestureRecognizer:songGestureRecognizer];
-    
     self.currentProgramMoreEpisodesButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"More episodes", @"A more episode button label");
     
     TableViewConfigure(self.programsTableView);
@@ -631,6 +628,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }];
 }
 
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self updatePanelFor:newCollection];
+    } completion:nil];
+
+}
+
 #pragma mark Accessibility
 
 - (void)updateForContentSizeCategory
@@ -783,12 +790,15 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         
         self.livestreamView.hidden = [self isLivestreamButtonHidden];
         
-        if ([mainMedia.channel.uid isEqualToString:mainMedia.uid]) {
+        SRGChannel *channel = mainMedia.channel;
+        if ([channel.uid isEqualToString:mainMedia.uid]) {
             [self.livestreamButton setTitle:NSLocalizedString(@"Choose a regional radio", @"Title displayed on the regional radio selection button") forState:UIControlStateNormal];
         }
         else {
             [self.livestreamButton setTitle:mainMedia.title forState:UIControlStateNormal];
         }
+        
+        [self addSongPanelWithChannel:channel vendor:mainMedia.vendor];
         
         self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     }
@@ -810,6 +820,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             self.dateLabel.text = nil;
             self.dateLabel.accessibilityLabel = nil;
         }
+        
+        [self removeSongPanel];
         
         self.viewCountLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
         
@@ -2119,17 +2131,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
     
     [self presentViewController:alertController animated:YES completion:nil];
-}
-
-- (void)showSongs:(id)sender
-{
-    SRGMedia *mainMedia = [self mainMedia];
-    if (! mainMedia) {
-        return;
-    }
-    
-    SongsViewController *songsViewController = [[SongsViewController alloc] initWithChannel:mainMedia.channel vendor:mainMedia.vendor];
-    [self presentViewController:songsViewController animated:YES completion:nil];
 }
 
 - (IBAction)close:(id)sender

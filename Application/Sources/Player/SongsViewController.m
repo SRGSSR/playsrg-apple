@@ -8,6 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "ForegroundTimer.h"
+#import "Layout.h"
 #import "SongTableViewCell.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "TableView.h"
@@ -39,6 +40,11 @@
 }
 
 #pragma mark Getters and setters
+
+- (NSString *)title
+{
+    return NSLocalizedString(@"Songs", @"Song list title");
+}
 
 - (void)setUpdateTimer:(ForegroundTimer *)updateTimer
 {
@@ -97,6 +103,13 @@
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     SRGPageRequest *request = [[SRGDataProvider.currentDataProvider radioSongsForVendor:applicationConfiguration.vendor channelUid:self.channel.uid withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize];
     [requestQueue addRequest:request resume:YES];
+}
+
+#pragma mark ContentInsets protocol
+
+- (UIEdgeInsets)play_paddingContentInsets
+{
+    return LayoutStandardTableViewPaddingInsets;
 }
 
 #pragma mark UITableViewDataSource protocol
