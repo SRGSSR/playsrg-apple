@@ -7,16 +7,21 @@
 #import "SongsViewController.h"
 
 #import "ApplicationConfiguration.h"
+#import "ForegroundTimer.h"
 #import "SongTableViewCell.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
+#import <libextobjc/libextobjc.h>
+
 @interface SongsViewController ()
 
 @property (nonatomic) SRGChannel *channel;
 @property (nonatomic) SRGVendor vendor;
+
+@property (nonatomic) ForegroundTimer *updateTimer;
 
 @end
 
@@ -31,6 +36,14 @@
         self.vendor = vendor;
     }
     return self;
+}
+
+#pragma mark Getters and setters
+
+- (void)setUpdateTimer:(ForegroundTimer *)updateTimer
+{
+    [_updateTimer invalidate];
+    _updateTimer = updateTimer;
 }
 
 #pragma mark View lifecycle
@@ -57,6 +70,24 @@
     NSString *cellIdentifier = NSStringFromClass(SongTableViewCell.class);
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    @weakify(self)
+    self.updateTimer = [ForegroundTimer timerWithTimeInterval:30. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
+        @strongify(self)
+        [self refresh];
+    }];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    self.updateTimer = nil;
 }
 
 #pragma mark Overrides
