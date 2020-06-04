@@ -75,7 +75,8 @@
 
 - (NSString *)accessibilityHint
 {
-    return PlaySRGAccessibilityLocalizedString(@"Shows all contents.", @"Homepage header action hint");
+    HomeSectionInfo *homeSectionInfo = self.homeSectionInfo;
+    return [homeSectionInfo canOpenList] ? PlaySRGAccessibilityLocalizedString(@"Shows all contents.", @"Homepage header action hint") : nil;
 }
 
 - (UIAccessibilityTraits)accessibilityTraits
