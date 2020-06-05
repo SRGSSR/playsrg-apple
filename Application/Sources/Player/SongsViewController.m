@@ -144,7 +144,7 @@
     
     // TODO: Should be associated with the main screen player directly
     SRGLetterboxController *controller = SRGLetterboxService.sharedService.controller;
-    [controller seekToPosition:[SRGPosition positionAtDate:PlayStreamDate(song.date, controller)] withCompletionHandler:^(BOOL finished) {
+    [controller seekToPosition:[SRGPosition positionAtDate:song.date] withCompletionHandler:^(BOOL finished) {
         [controller play];
     }];
 }
