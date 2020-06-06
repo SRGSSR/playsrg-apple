@@ -798,7 +798,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             [self.livestreamButton setTitle:mainMedia.title forState:UIControlStateNormal];
         }
         
-        [self addSongPanelWithChannel:channel vendor:mainMedia.vendor];
+        [self addSongPanelWithChannel:channel];
         
         self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     }
@@ -1057,7 +1057,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     [ChannelService.sharedService removeObserver:self.channelRegistration];
-    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:mainMedia.channel vendor:mainMedia.vendor livestreamUid:mainMedia.uid block:^(SRGProgramComposition * _Nullable programComposition) {
+    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:mainMedia.channel livestreamUid:mainMedia.uid block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
         [self reloadProgramInformationAnimated:YES];
     }];

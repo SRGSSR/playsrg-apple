@@ -13,10 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SongsViewController : TableRequestViewController <ContentInsets>
 
-- (instancetype)initWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor;
+- (instancetype)initWithChannel:(SRGChannel *)channel;
 
 @property (nonatomic, readonly) SRGChannel *channel;
-@property (nonatomic, readonly) SRGVendor vendor;
 
 @end
 

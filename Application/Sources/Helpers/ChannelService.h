@@ -27,7 +27,7 @@ typedef void (^ChannelServiceUpdateBlock)(SRGProgramComposition * _Nullable prog
  *  Register an observer to be notified of updates for a given channel. The provided block is called when channel information
  *  is available.
  */
-- (id)addObserver:(id)observer forUpdatesWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block;
+- (id)addObserver:(id)observer forUpdatesWithChannel:(SRGChannel *)channel livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block;
 
 /**
  *  Remove the specified observer.

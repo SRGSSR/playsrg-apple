@@ -79,9 +79,9 @@
 
 #pragma mark Registration
 
-- (id)addObserver:(id)observer forUpdatesWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block
+- (id)addObserver:(id)observer forUpdatesWithChannel:(SRGChannel *)channel livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block
 {
-    ChannelServiceSetup *setup = [[ChannelServiceSetup alloc] initWithChannel:channel vendor:vendor livestreamUid:livestreamUid];
+    ChannelServiceSetup *setup = [[ChannelServiceSetup alloc] initWithChannel:channel livestreamUid:livestreamUid];
     NSMutableDictionary<NSString *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[setup];
     if (! channelRegistrations) {
         channelRegistrations = [NSMutableDictionary dictionary];
@@ -142,15 +142,15 @@
     SRGFirstPageRequest *request = nil;
     if (setup.channel.transmission == SRGTransmissionRadio) {
         // Regional livestreams. Currently only for SRF
-        if (setup.vendor == SRGVendorSRF && ! [setup.livestreamUid isEqualToString:setup.channel.uid]) {
-            request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:setup.vendor channelUid:setup.channel.uid livestreamUid:setup.livestreamUid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
+        if (setup.channel.vendor == SRGVendorSRF && ! [setup.livestreamUid isEqualToString:setup.channel.uid]) {
+            request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid livestreamUid:setup.livestreamUid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
         }
         else {
-            request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:setup.vendor channelUid:setup.channel.uid livestreamUid:nil fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
+            request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid livestreamUid:nil fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
         }
     }
     else {
-        request = [[SRGDataProvider.currentDataProvider tvLatestProgramsForVendor:setup.vendor channelUid:setup.channel.uid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
+        request = [[SRGDataProvider.currentDataProvider tvLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
     }
     [self.requestQueue addRequest:request resume:YES];
 }

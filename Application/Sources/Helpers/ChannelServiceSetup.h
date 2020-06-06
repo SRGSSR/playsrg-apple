@@ -14,15 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ChannelServiceSetup : NSObject <NSCopying>
 
 /**
- *  Setup for retrieval of updates for a given channel, vendor and livestream identifier.
+ *  Setup for retrieval of updates for a given channel and livestream identifier.
  */
-- (instancetype)initWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor livestreamUid:(NSString *)livestreamUid;
+- (instancetype)initWithChannel:(SRGChannel *)channel livestreamUid:(NSString *)livestreamUid;
 
 /**
  *  Associated data.
  */
 @property (nonatomic, readonly) SRGChannel *channel;
-@property (nonatomic, readonly) SRGVendor vendor;
 @property (nonatomic, readonly, copy) NSString *livestreamUid;
 
 @end

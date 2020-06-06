@@ -9,7 +9,6 @@
 @interface ChannelServiceSetup ()
 
 @property (nonatomic) SRGChannel *channel;
-@property (nonatomic) SRGVendor vendor;
 @property (nonatomic, copy) NSString *livestreamUid;
 
 @end
@@ -18,11 +17,10 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor livestreamUid:(NSString *)livestreamUid
+- (instancetype)initWithChannel:(SRGChannel *)channel livestreamUid:(NSString *)livestreamUid
 {
     if (self = [super init]) {
         self.channel = channel;
-        self.vendor = vendor;
         self.livestreamUid = livestreamUid;
     }
     return self;
@@ -37,19 +35,19 @@
     }
     
     ChannelServiceSetup *otherSetup = object;
-    return [self.channel isEqual:otherSetup.channel] && self.vendor == otherSetup.vendor && [self.livestreamUid isEqualToString:otherSetup.livestreamUid];
+    return [self.channel isEqual:otherSetup.channel] && [self.livestreamUid isEqualToString:otherSetup.livestreamUid];
 }
 
 - (NSUInteger)hash
 {
-    return [NSString stringWithFormat:@"%@_%@_%@_%@", self.channel.uid, @(self.channel.transmission), @(self.vendor), self.livestreamUid].hash;
+    return [NSString stringWithFormat:@"%@_%@", self.channel.URN, self.livestreamUid].hash;
 }
 
 #pragma mark NSCopying protocol
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    return [[ChannelServiceSetup alloc] initWithChannel:self.channel vendor:self.vendor livestreamUid:self.livestreamUid];
+    return [[ChannelServiceSetup alloc] initWithChannel:self.channel livestreamUid:self.livestreamUid];
 }
 
 #pragma mark Description

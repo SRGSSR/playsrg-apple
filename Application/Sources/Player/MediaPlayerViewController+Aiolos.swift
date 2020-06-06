@@ -11,16 +11,16 @@ private var panelKey: Void?
 
 extension MediaPlayerViewController {
 
-    @objc public func addSongPanel(channel: SRGChannel, vendor: SRGVendor) -> Void {
+    @objc public func addSongPanel(channel: SRGChannel) -> Void {
         if let contentNavigationController = self.panel?.contentViewController as? UINavigationController {
             if let songsViewController = contentNavigationController.viewControllers.first as? SongsViewController {
-                if songsViewController.channel == channel && songsViewController.vendor == vendor {
+                if songsViewController.channel == channel {
                     return
                 }
             }
         }
         
-        let panel = makePanelController(channel: channel, vendor: vendor)
+        let panel = makePanelController(channel: channel)
         panel.add(to: self)
         self.panel = panel
     }
@@ -49,8 +49,8 @@ private extension MediaPlayerViewController {
         }
     }
     
-    func makePanelController(channel: SRGChannel, vendor: SRGVendor) -> Panel {
-        let songsViewController = SongsViewController(channel: channel, vendor: vendor)
+    func makePanelController(channel: SRGChannel) -> Panel {
+        let songsViewController = SongsViewController(channel: channel)
         let contentNavigationController = NavigationController(rootViewController: songsViewController, tintColor: .white, backgroundColor: .play_cardGrayBackground, statusBarStyle: .default)
         
         let panelController = Panel(configuration: self.configuration(for: self.traitCollection))

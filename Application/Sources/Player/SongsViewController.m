@@ -20,7 +20,6 @@
 @interface SongsViewController ()
 
 @property (nonatomic) SRGChannel *channel;
-@property (nonatomic) SRGVendor vendor;
 
 @property (nonatomic) ForegroundTimer *updateTimer;
 
@@ -30,11 +29,10 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithChannel:(SRGChannel *)channel vendor:(SRGVendor)vendor
+- (instancetype)initWithChannel:(SRGChannel *)channel
 {
     if (self = [super init]) {
         self.channel = channel;
-        self.vendor = vendor;
     }
     return self;
 }
@@ -101,7 +99,7 @@
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    SRGPageRequest *request = [[SRGDataProvider.currentDataProvider radioSongsForVendor:applicationConfiguration.vendor channelUid:self.channel.uid withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize];
+    SRGPageRequest *request = [[SRGDataProvider.currentDataProvider radioSongsForVendor:self.channel.vendor channelUid:self.channel.uid withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize];
     [requestQueue addRequest:request resume:YES];
 }
 
