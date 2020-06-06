@@ -116,8 +116,9 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
                        placeholder:(ImagePlaceholder)placeholder
              unavailabilityHandler:(void (^)(void))unavailabilityHandler
 {
+    NSString *filePath = FilePathForImagePlaceholder(placeholder);
     CGSize size = SizeForImageScale(scale);
-    UIImage *placeholderImage = [UIImage srg_vectorImageAtPath:FilePathForImagePlaceholder(placeholder) withSize:size];
+    UIImage *placeholderImage = filePath ? [UIImage srg_vectorImageAtPath:filePath withSize:size] : nil;
     
     void (^handleUnavailableURL)(void) = ^{
         if (unavailabilityHandler) {

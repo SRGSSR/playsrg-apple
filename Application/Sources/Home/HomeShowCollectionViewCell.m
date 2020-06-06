@@ -129,8 +129,7 @@
     self.showView.hidden = NO;
     self.placeholderView.hidden = YES;
     
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
-    
+    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];    
     self.titleLabel.text = self.show.title;
     
     ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;

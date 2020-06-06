@@ -47,6 +47,11 @@ CGSize SizeForImageScale(ImageScale imageScale)
 NSString *FilePathForImagePlaceholder(ImagePlaceholder imagePlaceholder)
 {
     switch (imagePlaceholder) {
+        case ImagePlaceholderMedia: {
+            return [NSBundle.mainBundle pathForResource:@"placeholder_media-180" ofType:@"pdf"];
+            break;
+        }
+            
         case ImagePlaceholderMediaList: {
             return [NSBundle.mainBundle pathForResource:@"placeholder_media_list-180" ofType:@"pdf"];
             break;
@@ -58,7 +63,7 @@ NSString *FilePathForImagePlaceholder(ImagePlaceholder imagePlaceholder)
         }
             
         default: {
-            return [NSBundle.mainBundle pathForResource:@"placeholder_media-180" ofType:@"pdf"];
+            return nil;
             break;
         }
     }
@@ -150,12 +155,7 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
 
 + (UIImage *)play_vectorImageAtPath:(NSString *)filePath withScale:(ImageScale)imageScale
 {
-    return [self srg_vectorImageAtPath:filePath withSize:SizeForImageScale(imageScale)];
-}
-
-+ (NSURL *)play_URLForVectorImageAtPath:(NSString *)filePath withScale:(ImageScale)imageScale
-{
-    return [self srg_URLForVectorImageAtPath:filePath withSize:SizeForImageScale(imageScale)];
+    return filePath ? [self srg_vectorImageAtPath:filePath withSize:SizeForImageScale(imageScale)] : nil;
 }
 
 + (NSString *)overrideImagePathForUid:(NSString *)uid withType:(NSString *)type
