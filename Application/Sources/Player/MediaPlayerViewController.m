@@ -489,7 +489,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
-                                               name:UIAccessibilityVoiceOverStatusChanged
+                                               name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
     
     @weakify(self)
