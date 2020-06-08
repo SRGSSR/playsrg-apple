@@ -1,23 +1,3 @@
-name: Airship, nameSpecified: 
-body: Copyright 2010-2019 …
-version: 13.3.2
-
-name: Airship, nameSpecified: 
-body: Copyright 2010-2019 …
-version: 13.3.2
-
-name: Airship, nameSpecified: 
-body: Copyright 2010-2019 …
-version: 13.3.2
-
-name: Airship, nameSpecified: 
-body: Copyright 2010-2019 …
-version: 13.3.2
-
-name: Airship, nameSpecified: 
-body: Copyright 2010-2019 …
-version: 13.3.2
-
 name: AutoCoding, nameSpecified: 
 body: AutoCoding
 
@@ -459,6 +439,8 @@ name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 6.3.1
 name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
 
 name: FXReachability, nameSpecified: , owner: SRGSSR, version: 1.3.2_srg4
+
+name: ios-library, nameSpecified: , owner: urbanairship, version: 13.3.2
 
 name: libextobjc, nameSpecified: , owner: SRGSSR, version: 0.6_srg2
 

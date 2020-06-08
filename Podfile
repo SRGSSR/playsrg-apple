@@ -6,7 +6,6 @@ platform :ios, '12.0'
 inhibit_all_warnings!
 
 abstract_target 'PlaySRG' do
-  pod 'Airship/Core', '~> 13.3.2'
   pod 'AutoCoding', '~> 2.2.3'
   pod 'BDKCollectionIndexView', '~> 2.0.0'
   pod 'Firebase/RemoteConfig', '~> 5.15.0'

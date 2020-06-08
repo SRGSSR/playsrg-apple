@@ -14,14 +14,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/Airship</string>
-			<key>Title</key>
-			<string>Airship (13.3.2)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/appcenter-sdk-apple</string>
 			<key>Title</key>
 			<string>appcenter-sdk-apple (3.2.0)</string>
@@ -161,6 +153,14 @@
 			<string>com.mono0926.LicensePlist/InAppSettingsKit</string>
 			<key>Title</key>
 			<string>InAppSettingsKit (2.10)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/ios-library</string>
+			<key>Title</key>
+			<string>ios-library (13.3.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
