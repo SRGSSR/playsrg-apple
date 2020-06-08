@@ -12,9 +12,9 @@
 #import "PlayAppDelegate.h"
 #import "Notification.h"
 
+#import <Airship/AirshipLib.h>
 #import <CoconutKit/CoconutKit.h>
 #import <libextobjc/libextobjc.h>
-#import <UrbanAirship-iOS-SDK/AirshipKit.h>
 #import <UserNotifications/UserNotifications.h>
 
 NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNotification";
@@ -124,7 +124,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (NSSet<NSString *> *)subscribedShowURNs
 {
-    NSArray<NSString *> *tags = [UAirship push].tags;
+    NSArray<NSString *> *tags = [UAirship channel].tags;
     if (tags.count == 0) {
         return [NSSet set];
     }
@@ -168,8 +168,6 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     [UAirship push].defaultPresentationOptions = (UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
     [UAirship push].pushNotificationDelegate = self;
     [UAirship push].autobadgeEnabled = YES;
-    
-    [[UAirship inAppMessageManager] setEnabled:NO];
 }
 
 #pragma mark Badge management
@@ -227,7 +225,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     }
     
     for (NSString *URN in URNs) {
-        [[UAirship push] addTag:[self tagForShowURN:URN]];
+        [[UAirship channel] addTag:[self tagForShowURN:URN]];
     }
     [[UAirship push] updateRegistration];
 }
@@ -239,14 +237,14 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     }
     
     for (NSString *URN in URNs) {
-        [[UAirship push] removeTag:[self tagForShowURN:URN]];
+        [[UAirship channel] removeTag:[self tagForShowURN:URN]];
     }
     [[UAirship push] updateRegistration];
 }
 
 - (BOOL)isSubscribedToShowURN:(NSString *)URN
 {
-    return [[UAirship push].tags containsObject:[self tagForShowURN:URN]];
+    return [[UAirship channel].tags containsObject:[self tagForShowURN:URN]];
 }
 
 #pragma mark Actions

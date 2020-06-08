@@ -34,6 +34,7 @@
 #import "UpdateInfo.h"
 #import "WatchLater.h"
 
+#import <Airship/AirshipLib.h>
 #import <AppCenter/AppCenter.h>
 #import <AppCenterCrashes/AppCenterCrashes.h>
 #import <AppCenterDistribute/AppCenterDistribute.h>
@@ -49,7 +50,6 @@
 #import <SRGIdentity/SRGIdentity.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 #import <SRGUserData/SRGUserData.h>
-#import <UrbanAirship-iOS-SDK/AirshipKit.h>
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 #import <Fingertips/Fingertips.h>
