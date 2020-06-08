@@ -319,9 +319,12 @@
         ModuleHeaderView *headerView = (ModuleHeaderView *)view;
         headerView.module = self.module;
         
-        // iOS 11 bug: The header hides scroll indicators
+        // iOS 11 - 12 bug: The header hides scroll indicators
         // See https://stackoverflow.com/questions/46747960/ios11-uicollectionsectionheader-clipping-scroll-indicator
-        headerView.layer.zPosition = 0;
+        if (@available(iOS 13, *)) {}
+        else {
+            headerView.layer.zPosition = 0;
+        }
     }
 }
 
