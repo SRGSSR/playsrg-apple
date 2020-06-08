@@ -508,7 +508,7 @@ static void *s_kvoContext = &s_kvoContext;
     if ([userActivity.activityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".playing"]]) {
         NSString *mediaURN = userActivity.userInfo[@"URNString"];
         if (mediaURN) {
-            SRGMedia *media = [NSKeyedUnarchiver unarchiveObjectWithData:userActivity.userInfo[@"SRGMediaData"]];
+            SRGMedia *media = [NSKeyedUnarchiver unarchivedObjectOfClass:SRGMedia.class fromData:userActivity.userInfo[@"SRGMediaData"] error:NULL];
             NSNumber *position = [userActivity.userInfo[@"position"] isKindOfClass:NSNumber.class] ? userActivity.userInfo[@"position"] : nil;
             [self playURN:mediaURN media:media atPosition:[SRGPosition positionAtTimeInSeconds:position.integerValue] fromPushNotification:NO completion:nil];
             
@@ -530,7 +530,7 @@ static void *s_kvoContext = &s_kvoContext;
     else if ([userActivity.activityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".displaying"]]) {
         NSString *showURN = userActivity.userInfo[@"URNString"];
         if (showURN) {
-            SRGShow *show = [NSKeyedUnarchiver unarchiveObjectWithData:userActivity.userInfo[@"SRGShowData"]];
+            SRGShow *show = [NSKeyedUnarchiver unarchivedObjectOfClass:SRGShow.class fromData:userActivity.userInfo[@"SRGShowData"] error:NULL];
             
             RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:show.primaryChannelUid];
             ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel options:nil];

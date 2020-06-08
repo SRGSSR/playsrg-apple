@@ -710,7 +710,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             currentTime = kCMTimeZero;
         }
         [userActivity addUserInfoEntriesFromDictionary:@{ @"URNString" : mainChapterMedia.URN,
-                                                          @"SRGMediaData" : [NSKeyedArchiver archivedDataWithRootObject:mainChapterMedia],
+                                                          @"SRGMediaData" : [NSKeyedArchiver archivedDataWithRootObject:mainChapterMedia requiringSecureCoding:NO error:NULL],
                                                           @"position" : position ?: [NSNull null],
                                                           @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
         userActivity.requiredUserInfoKeys = [NSSet setWithArray:userActivity.userInfo.allKeys];

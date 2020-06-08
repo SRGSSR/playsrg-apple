@@ -269,7 +269,7 @@
     
     userActivity.title = self.show.title;
     [userActivity addUserInfoEntriesFromDictionary:@{ @"URNString" : self.show.URN,
-                                                      @"SRGShowData" : [NSKeyedArchiver archivedDataWithRootObject:self.show],
+                                                      @"SRGShowData" : [NSKeyedArchiver archivedDataWithRootObject:self.show requiringSecureCoding:NO error:NULL],
                                                       @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
     userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
 }
