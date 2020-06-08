@@ -109,15 +109,6 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     return NO;
 }
 
-#pragma mark Home indicator management
-
-- (void)play_setNeedsUpdateOfHomeIndicatorAutoHidden
-{
-    if ([self respondsToSelector:@selector(setNeedsUpdateOfHomeIndicatorAutoHidden)]) {
-        [self setNeedsUpdateOfHomeIndicatorAutoHidden];
-    }
-}
-
 #pragma mark Previewing
 
 - (void)setPlay_previewingContext:(id<UIViewControllerPreviewing>)previewingContext

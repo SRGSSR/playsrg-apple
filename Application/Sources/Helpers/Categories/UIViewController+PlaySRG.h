@@ -38,15 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)play_isMovingFromParentViewController;
 
 /**
- *  Same as `-setNeedsUpdateOfHomeIndicatorAutoHidden`, but fixing a UIKit crash. See http://www.openradar.me/35127134
- *  for more information. Does nothing on devices running on iOS 10 or earlier.
- *
- *  FIXME: Remove when possible. Might crash for people still running iOS 11 beta, see
- *         https://twitter.com/Javi/status/1064531698015133696.
- */
-- (void)play_setNeedsUpdateOfHomeIndicatorAutoHidden;
-
-/**
  *  The previewing context (peek) from which the view controller is presented, if any.
  */
 @property (nonatomic, readonly, nullable) id<UIViewControllerPreviewing> play_previewingContext;

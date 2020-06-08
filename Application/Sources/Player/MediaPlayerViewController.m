@@ -1552,7 +1552,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-        [self play_setNeedsUpdateOfHomeIndicatorAutoHidden];
+        [self setNeedsUpdateOfHomeIndicatorAutoHidden];
     }];
 }
 
@@ -1588,7 +1588,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     };
     
     void (^completion)(BOOL) = ^(BOOL finished) {
-        [self play_setNeedsUpdateOfHomeIndicatorAutoHidden];
+        [self setNeedsUpdateOfHomeIndicatorAutoHidden];
         completionHandler(finished);
     };
     
