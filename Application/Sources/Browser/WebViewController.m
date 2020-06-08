@@ -48,9 +48,6 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)dealloc
 {
-    // Avoid iOS 9 crash: https://stackoverflow.com/questions/35529080/wkwebview-crashes-on-deinit
-    self.webView.scrollView.delegate = nil;
-    
     self.webView = nil;             // Unregister KVO
 }
 
