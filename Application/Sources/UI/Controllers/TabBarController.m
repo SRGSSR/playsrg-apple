@@ -105,15 +105,9 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     
     // The mini player is not available for all BUs
     MiniPlayerView *miniPlayerView = [[MiniPlayerView alloc] initWithFrame:CGRectZero];
+    miniPlayerView.layer.shadowOpacity = 0.9f;
+    miniPlayerView.layer.shadowRadius = 5.f;
     [self.view insertSubview:miniPlayerView belowSubview:self.tabBar];
-    
-    // iOS 10 bug: Cannot apply a shadow to a blurred view without breaking the blur effect
-    // Probably related to radar 27189321.
-    // TODO: Remove when iOS 10 is not supported anymore
-    if (NSProcessInfo.processInfo.operatingSystemVersion.majorVersion != 10) {
-        miniPlayerView.layer.shadowOpacity = 0.9f;
-        miniPlayerView.layer.shadowRadius = 5.f;
-    }
     
     self.miniPlayerView = miniPlayerView;
     

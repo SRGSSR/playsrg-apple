@@ -39,7 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /**
- *  Content inset setup in view hierarchies, introduced with iOS 7 design, has been greatly improved with iOS 11.
  *  To be able to guarantee proper consistent behavior across iOS versions, and to provide a convenient formalism
  *  to precisely define content inset contributions in view controller hierarchies:
  *

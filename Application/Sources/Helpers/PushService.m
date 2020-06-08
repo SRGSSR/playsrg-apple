@@ -142,10 +142,9 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (BOOL)isEnabled
 {
-    // iOS 10 and above: Even if alerts have been disabled by the user, `UIApplication.registeredForRemoteNotifications`
-    // will still return `YES` if the target supports silent notifications (introduced with iOS 10 rich notifications).
-    // We nust retrieve the proper authorization status from iOS 10 `UNUserNotificationCenter`, providing finer-grained
-    // information covering these new use cases.
+    // Even if alerts have been disabled by the user, `UIApplication.registeredForRemoteNotifications` will still return
+    // `YES` if the target supports silent notifications. We must retrieve the proper authorization status from
+    // `UNUserNotificationCenter`, providing finer-grained information about notification settings.
     
     // Make asynchronous call synchronous
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);

@@ -49,7 +49,7 @@
         self.radioChannel = radioChannel;
         self.initialAlphabeticalIndex = alphabeticalIndex;
         self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
-        self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];      // Only available for iOS 10 and above
+        self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];
         
         _previousAccessibilityHeadingSection = -1;
     }
@@ -231,9 +231,6 @@
     CGRect sectionHeaderFrame = [self.collectionView layoutAttributesForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath].frame;
     CGRect itemFrame = [self.collectionView layoutAttributesForItemAtIndexPath:indexPath].frame;
     
-    // FIXME: Incorrect behavior: When scrolling to the top or bottom of the index, the cell boundary should be exact. Behavior
-    //        is incorrect at the bottom on < iOS 11 (also in production), incorrect at the top as well on iOS 11. We probably
-    //        need to take insets into account correctly in all cases.
     CGFloat contentInsetTop = ContentInsetsForScrollView(self.collectionView).top;
     CGFloat sectionHeaderHeight = CGRectGetHeight(sectionHeaderFrame);
     CGFloat newContentOffsetY = fminf(CGRectGetMinY(itemFrame) - sectionHeaderHeight - contentInsetTop,
