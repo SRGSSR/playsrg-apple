@@ -789,7 +789,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             [self.livestreamButton setTitle:mainMedia.title forState:UIControlStateNormal];
         }
         
-        if (! self.letterboxView.isFullScreen) {
+        if (! self.letterboxView.isFullScreen && mainChapterMedia.mediaType == SRGMediaTypeAudio) {
             [self addSongPanelWithChannel:channel];
         }
         
@@ -1588,7 +1588,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self setFullScreen:fullScreen];
         [self updateTimelineVisibilityForFullScreen:fullScreen animated:NO];
         
-        if (letterboxView.controller.mediaComposition.mainChapter.contentType == SRGContentTypeLivestream) {
+        SRGChapter *mainChapter = letterboxView.controller.mediaComposition.mainChapter;
+        if (mainChapter.contentType == SRGContentTypeLivestream && mainChapter.mediaType == SRGMediaTypeAudio) {
             fullScreen ? [self removeSongPanel] : [self addSongPanelWithChannel:letterboxView.controller.channel];
         }
     };
