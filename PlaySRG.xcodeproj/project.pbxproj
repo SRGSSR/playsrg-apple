@@ -337,11 +337,6 @@
 		089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA010201148180070E11A /* NSTimer+PlaySRG.m */; };
 		089EA014201148260070E11A /* NSTimer+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA010201148180070E11A /* NSTimer+PlaySRG.m */; };
 		089EA015201148270070E11A /* NSTimer+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA010201148180070E11A /* NSTimer+PlaySRG.m */; };
-		089EA018201148D70070E11A /* TimerTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA016201148D70070E11A /* TimerTarget.m */; };
-		089EA019201148F40070E11A /* TimerTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA016201148D70070E11A /* TimerTarget.m */; };
-		089EA01A201148F50070E11A /* TimerTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA016201148D70070E11A /* TimerTarget.m */; };
-		089EA01B201148F50070E11A /* TimerTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA016201148D70070E11A /* TimerTarget.m */; };
-		089EA01C201148F60070E11A /* TimerTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 089EA016201148D70070E11A /* TimerTarget.m */; };
 		08A3ED021FA2612E00A517EF /* SRGDataProvider+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */; };
 		08A3ED031FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */; };
 		08A3ED041FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */; };
@@ -1840,8 +1835,6 @@
 		088899442077627900242654 /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
 		089EA00F201148170070E11A /* NSTimer+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+PlaySRG.h"; sourceTree = "<group>"; };
 		089EA010201148180070E11A /* NSTimer+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+PlaySRG.m"; sourceTree = "<group>"; };
-		089EA016201148D70070E11A /* TimerTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerTarget.m; sourceTree = "<group>"; };
-		089EA017201148D70070E11A /* TimerTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerTarget.h; sourceTree = "<group>"; };
 		08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGDataProvider+PlaySRG.m"; sourceTree = "<group>"; };
 		08A3ED011FA2612B00A517EF /* SRGDataProvider+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGDataProvider+PlaySRG.h"; sourceTree = "<group>"; };
 		08AA551B1D49EBF600C5026E /* ApplicationConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationConfiguration.h; sourceTree = "<group>"; };
@@ -2660,6 +2653,7 @@
 			isa = PBXGroup;
 			children = (
 				6F4760181EB37BD1003021EA /* Categories */,
+				08C33ED323CB5C6500D422C1 /* Protocols */,
 				08AF947E217D27E40028B082 /* ActivityItemSource.h */,
 				08AF947F217D27E40028B082 /* ActivityItemSource.m */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
@@ -2695,14 +2689,11 @@
 				6F7CE6EF1DD6021700FA4A6D /* PlayLogger.h */,
 				6F7218111DBE75AC00575072 /* PreviewingDelegate.h */,
 				6F7218121DBE75AC00575072 /* PreviewingDelegate.m */,
-				08C33ED323CB5C6500D422C1 /* Protocols */,
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
 				6F00875B219AA888004BD6FF /* StoreReview.h */,
 				6F00875C219AA888004BD6FF /* StoreReview.m */,
-				089EA017201148D70070E11A /* TimerTarget.h */,
-				089EA016201148D70070E11A /* TimerTarget.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -6005,7 +5996,6 @@
 				087584EF23A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6FAAF77C20CABA3A00BB58A3 /* Notification.m in Sources */,
 				6FC8866B1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
-				089EA018201148D70070E11A /* TimerTarget.m in Sources */,
 				089EA011201148180070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4D622D866E600BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
 				6FD6861F2460670600B8018A /* Channel.m in Sources */,
@@ -6073,7 +6063,6 @@
 				6FD633DF1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				6F56F9F5247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
-				089EA019201148F40070E11A /* TimerTarget.m in Sources */,
 				6FAF43011EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
 				6F00875E219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F12DB4721A3EFBF0054879D /* HistoryTableViewCell.m in Sources */,
@@ -6249,7 +6238,6 @@
 				6FD633E01FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				6F56F9F6247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C697245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
-				089EA01A201148F50070E11A /* TimerTarget.m in Sources */,
 				6FAF43021EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
 				6F00875F219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F12DB4821A3EFBF0054879D /* HistoryTableViewCell.m in Sources */,
@@ -6425,7 +6413,6 @@
 				6FD633E11FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				6F56F9F7247C407100B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C698245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
-				089EA01B201148F50070E11A /* TimerTarget.m in Sources */,
 				6FAF43031EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
 				6F008760219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F12DB4921A3EFBF0054879D /* HistoryTableViewCell.m in Sources */,
@@ -6601,7 +6588,6 @@
 				6FD633E21FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				6F56F9F8247C407100B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C699245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
-				089EA01C201148F60070E11A /* TimerTarget.m in Sources */,
 				6FAF43041EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */,
 				6F008761219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F12DB4A21A3EFBF0054879D /* HistoryTableViewCell.m in Sources */,
