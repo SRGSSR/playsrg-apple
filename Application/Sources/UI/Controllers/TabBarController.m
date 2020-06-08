@@ -311,12 +311,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 {
     void (^animations)(void) = ^{
         [self.miniPlayerView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            if (@available(iOS 11, *)) {
-                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
-            }
-            else {
-                make.right.equalTo(self.view).with.offset(-self.miniPlayerOffset);
-            }
+            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
             
             if (! UIAccessibilityIsVoiceOverRunning() && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
                 // Use 1/3 of the space, minimum of 500 pixels. If the player cannot fit in 80% of the screen,
@@ -329,14 +324,8 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
                 make.width.equalTo(@(width));
             }
             else {
-                if (@available(iOS 11, *)) {
-                    make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).with.offset(self.miniPlayerOffset);
-                    make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
-                }
-                else {
-                    make.left.equalTo(self.view).with.offset(self.miniPlayerOffset);
-                    make.right.equalTo(self.view).with.offset(-self.miniPlayerOffset);
-                }
+                make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).with.offset(self.miniPlayerOffset);
+                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
             }
             
             if (self.miniPlayerView.active) {

@@ -138,10 +138,7 @@ static void *s_kvoContext = &s_kvoContext;
     [self setPresenterModeEnabled:ApplicationSettingPresenterModeEnabled()];
     
     self.window.backgroundColor = UIColor.blackColor;
-    
-    if (@available(iOS 11, *)) {
-        self.window.accessibilityIgnoresInvertColors = YES;
-    }
+    self.window.accessibilityIgnoresInvertColors = YES;
     
     [self setupAnalytics];
     [self setupDataProvider];

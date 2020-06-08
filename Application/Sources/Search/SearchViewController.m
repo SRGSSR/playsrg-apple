@@ -154,23 +154,13 @@
     searchBar.play_textField.font = [UIFont srg_regularFontWithSize:18.f];
     searchBar.delegate = self;
     searchBar.text = self.query;
+    searchBar.tintColor = UIColor.whiteColor;
     
     // Required for proper search bar behavior
     self.definesPresentationContext = YES;
     
-    if (@available(iOS 11, *)) {
-        searchBar.tintColor = UIColor.whiteColor;
-        
-        self.navigationItem.searchController = self.searchController;
-        self.navigationItem.hidesSearchBarWhenScrolling = NO;
-    }
-    else {
-        searchBar.tintColor = UIColor.grayColor;
-        searchBar.barTintColor = UIColor.clearColor;      // Avoid search bar glitch when revealed by pop in navigation controller
-        
-        self.navigationItem.titleView = searchBar;
-        self.searchController.hidesNavigationBarDuringPresentation = NO;
-    }
+    self.navigationItem.searchController = self.searchController;
+    self.navigationItem.hidesSearchBarWhenScrolling = NO;
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
@@ -347,12 +337,6 @@
         
         UIImage *image = [SearchViewController containsAdvancedSettings:self.settings] ? [UIImage imageNamed:@"filter_on-22"] : [UIImage imageNamed:@"filter_off-22"];
         [filtersButton setImage:image forState:UIControlStateNormal];
-        
-        // Ensure the frame is correct prior to iOS 11
-        if (@available(iOS 11, *)) {}
-        else {
-            [filtersButton sizeToFit];
-        }
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:filtersButton];
     }
@@ -588,9 +572,7 @@
     
     // iOS 11 bug: The header hides scroll indicators
     // See https://stackoverflow.com/questions/46747960/ios11-uicollectionsectionheader-clipping-scroll-indicator
-    if (@available(iOS 11, *)) {
-        view.layer.zPosition = 0;
-    }
+    view.layer.zPosition = 0;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

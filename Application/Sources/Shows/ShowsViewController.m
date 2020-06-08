@@ -139,16 +139,8 @@
     [super viewWillLayoutSubviews];
     
     [self.collectionIndexView mas_updateConstraints:^(MASConstraintMaker *make) {
-        if (@available(iOS 11, *)) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).with.offset(self.play_pageViewController.play_additionalContentInsets.top);
-            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-        }
-        else {
-            UIEdgeInsets contentInsets = ContentInsetsForViewController(self);
-            make.top.equalTo(self.view).with.offset(contentInsets.top);
-            make.bottom.equalTo(self.view).with.offset(-contentInsets.bottom);
-        }
-        
+        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).with.offset(self.play_pageViewController.play_additionalContentInsets.top);
+        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
         make.right.equalTo(self.view.mas_right);
         make.width.equalTo(@28.f);
     }];

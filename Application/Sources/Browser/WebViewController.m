@@ -80,15 +80,10 @@ static void *s_kvoContext = &s_kvoContext;
     webView.scrollView.delegate = self;
     [self.view insertSubview:webView atIndex:0];
     [webView mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (@available(iOS 11, *)) {
-            make.top.equalTo(self.view);
-            make.bottom.equalTo(self.view);
-            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-        }
-        else {
-            make.edges.equalTo(self.view);
-        }
+        make.top.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
     }];
     self.webView = webView;
     
@@ -141,13 +136,13 @@ static void *s_kvoContext = &s_kvoContext;
 - (UIEdgeInsets)play_paddingContentInsets
 {
     // Must adjust depending on the web page viewport-fit setting, see https://modelessdesign.com/backdrop/283
-    if (@available(iOS 11, *)) {
-        UIScrollView *scrollView = self.webView.scrollView;
-        if (scrollView.contentInsetAdjustmentBehavior == UIScrollViewContentInsetAdjustmentNever) {
-            return UIEdgeInsetsMake(self.topLayoutGuide.length, 0.f, self.bottomLayoutGuide.length, 0.f);
-        }
+    UIScrollView *scrollView = self.webView.scrollView;
+    if (scrollView.contentInsetAdjustmentBehavior == UIScrollViewContentInsetAdjustmentNever) {
+        return scrollView.safeAreaInsets;
     }
-    return UIEdgeInsetsZero;
+    else {
+        return UIEdgeInsetsZero;
+    }
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

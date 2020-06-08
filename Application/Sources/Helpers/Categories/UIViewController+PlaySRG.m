@@ -113,10 +113,8 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
 
 - (void)play_setNeedsUpdateOfHomeIndicatorAutoHidden
 {
-    if (@available(iOS 11, *)) {
-        if ([self respondsToSelector:@selector(setNeedsUpdateOfHomeIndicatorAutoHidden)]) {
-            [self setNeedsUpdateOfHomeIndicatorAutoHidden];
-        }
+    if ([self respondsToSelector:@selector(setNeedsUpdateOfHomeIndicatorAutoHidden)]) {
+        [self setNeedsUpdateOfHomeIndicatorAutoHidden];
     }
 }
 
