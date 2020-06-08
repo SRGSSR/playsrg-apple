@@ -367,12 +367,7 @@
 {
     [self.view layoutIfNeeded];
     [letterboxView animateAlongsideUserInterfaceWithAnimations:^(BOOL hidden, BOOL minimal, CGFloat aspecRatio, CGFloat heightOffset) {
-        if (@available(iOS 10, *)) {
-            self.playerAspectRatioConstraint = [self.playerAspectRatioConstraint srg_replacementConstraintWithMultiplier:fminf(1.f / aspecRatio, 1.f) constant:heightOffset];
-        }
-        else {
-            self.playerAspectRatioConstraint.constant = heightOffset;
-        }
+        self.playerAspectRatioConstraint = [self.playerAspectRatioConstraint srg_replacementConstraintWithMultiplier:fminf(1.f / aspecRatio, 1.f) constant:heightOffset];
         [self.view layoutIfNeeded];
     } completion:nil];
 }

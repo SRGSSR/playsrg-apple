@@ -1573,14 +1573,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         CGFloat minAspectRatio = CGRectGetWidth(self.view.frame) / (verticalFillRatio * CGRectGetHeight(self.view.frame));
         CGFloat multiplier = 1.f / fmaxf(aspectRatio, minAspectRatio);
         
-        if (@available(iOS 10, *)) {
-            self.playerAspectRatioStandardConstraint = [self.playerAspectRatioStandardConstraint srg_replacementConstraintWithMultiplier:multiplier constant:heightOffset];
-            self.playerAspectRatioBigLandscapeScreenConstraint = [self.playerAspectRatioBigLandscapeScreenConstraint srg_replacementConstraintWithMultiplier:multiplier constant:heightOffset];
-        }
-        else {
-            self.playerAspectRatioStandardConstraint.constant = heightOffset;
-            self.playerAspectRatioBigLandscapeScreenConstraint.constant = heightOffset;
-        }
+        self.playerAspectRatioStandardConstraint = [self.playerAspectRatioStandardConstraint srg_replacementConstraintWithMultiplier:multiplier constant:heightOffset];
+        self.playerAspectRatioBigLandscapeScreenConstraint = [self.playerAspectRatioBigLandscapeScreenConstraint srg_replacementConstraintWithMultiplier:multiplier constant:heightOffset];
         
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {

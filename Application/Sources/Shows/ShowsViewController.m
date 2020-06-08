@@ -49,10 +49,7 @@
         self.radioChannel = radioChannel;
         self.initialAlphabeticalIndex = alphabeticalIndex;
         self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
-        
-        if (@available(iOS 10, *)) {
-            self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];      // Only available for iOS 10 and above
-        }
+        self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];      // Only available for iOS 10 and above
         
         _previousAccessibilityHeadingSection = -1;
     }
@@ -388,9 +385,7 @@
 {
     NSAssert([sender isKindOfClass:BDKCollectionIndexView.class], @"Expect a collection index");
     
-    if (@available(iOS 10, *)) {
-        [self.selectionFeedbackGenerator selectionChanged];
-    }
+    [self.selectionFeedbackGenerator selectionChanged];
     
     BDKCollectionIndexView *collectionIndexView = sender;
     [self scrollToSectionWithIndex:collectionIndexView.currentIndex animated:NO];

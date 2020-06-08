@@ -47,15 +47,12 @@
     if (self = [super init]) {
         self.radioChannel = radioChannel;
         self.initialDate = date;
+        self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];
         
         UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                                                  options:@{ UIPageViewControllerOptionInterPageSpacingKey : @100.f }];
         pageViewController.delegate = self;
-        
-        if (@available(iOS 10, *)) {
-            self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];      // Only available for iOS 10 and above
-        }
         
         [self setInsetViewController:pageViewController atIndex:0];
         self.pageViewController = pageViewController;
@@ -279,9 +276,7 @@
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition
 {
-    if (@available(iOS 10, *)) {
-        [self.selectionFeedbackGenerator selectionChanged];
-    }
+    [self.selectionFeedbackGenerator selectionChanged];
     [self showMediasForDate:date animated:YES];
 }
 
