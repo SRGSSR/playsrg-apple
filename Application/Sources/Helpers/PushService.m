@@ -380,7 +380,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
                                                                               preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Enable in system settings", @"Title of a button to propose the user to enable notifications in the system settings") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                [UIApplication.sharedApplication openURL:URL];
+                [UIApplication.sharedApplication openURL:URL options:@{} completionHandler:nil];
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
             [viewController presentViewController:alertController animated:YES completion:nil];

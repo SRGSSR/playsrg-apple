@@ -224,7 +224,7 @@ static void *s_kvoContext = &s_kvoContext;
     else {
         NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:navigationAction.request.URL resolvingAgainstBaseURL:NO];
         if (! [URLComponents.scheme isEqualToString:@"http"] && ! [URLComponents.scheme isEqualToString:@"https"] && ! [URLComponents.scheme isEqualToString:@"file"]) {
-            [UIApplication.sharedApplication openURL:URLComponents.URL];
+            [UIApplication.sharedApplication openURL:URLComponents.URL options:@{} completionHandler:nil];
             decisionHandler(WKNavigationActionPolicyCancel);
         }
         else {

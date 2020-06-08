@@ -407,7 +407,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
     else if ([specifier.key isEqualToString:SettingsSystemSettingsButton]) {
         NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        [UIApplication.sharedApplication openURL:URL];
+        [UIApplication.sharedApplication openURL:URL options:@{} completionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsClearWebCacheButton]) {
         [self clearWebCache];
