@@ -721,15 +721,10 @@
 		6F2961FF2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list-180.pdf */; };
 		6F2962002006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list-180.pdf */; };
 		6F2AB1A92487C16A009D9FBC /* Aiolos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; };
-		6F2AB1AA2487C16B009D9FBC /* Aiolos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F2AB1AB2487C181009D9FBC /* Aiolos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; };
-		6F2AB1AC2487C181009D9FBC /* Aiolos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F2AB1AD2487C190009D9FBC /* Aiolos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; };
-		6F2AB1AE2487C190009D9FBC /* Aiolos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F2AB1AF2487C19C009D9FBC /* Aiolos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; };
-		6F2AB1B02487C19C009D9FBC /* Aiolos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F2AB1B12487C1A8009D9FBC /* Aiolos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; };
-		6F2AB1B22487C1A8009D9FBC /* Aiolos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F2AB1B42487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift */; };
 		6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift */; };
 		6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift */; };
@@ -987,25 +982,15 @@
 		6F5F4FCC1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5F4FC31DB10CFD0011CCA3 /* RelatedContentView.xib */; };
 		6F5F4FCD1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5F4FC31DB10CFD0011CCA3 /* RelatedContentView.xib */; };
 		6F5F7FE21F382E9D00C330EC /* TCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE01F382E9D00C330EC /* TCCore.framework */; };
-		6F5F7FE31F382E9D00C330EC /* TCCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE01F382E9D00C330EC /* TCCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F5F7FE41F382E9D00C330EC /* TCSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE11F382E9D00C330EC /* TCSDK.framework */; };
-		6F5F7FE51F382E9D00C330EC /* TCSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE11F382E9D00C330EC /* TCSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F5F7FE61F382EB700C330EC /* TCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE01F382E9D00C330EC /* TCCore.framework */; };
-		6F5F7FE71F382EB700C330EC /* TCCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE01F382E9D00C330EC /* TCCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F5F7FE81F382EB700C330EC /* TCSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE11F382E9D00C330EC /* TCSDK.framework */; };
-		6F5F7FE91F382EB700C330EC /* TCSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE11F382E9D00C330EC /* TCSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F5F7FEA1F382EBB00C330EC /* TCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE01F382E9D00C330EC /* TCCore.framework */; };
-		6F5F7FEB1F382EBB00C330EC /* TCCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE01F382E9D00C330EC /* TCCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F5F7FEC1F382EBB00C330EC /* TCSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE11F382E9D00C330EC /* TCSDK.framework */; };
-		6F5F7FED1F382EBB00C330EC /* TCSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE11F382E9D00C330EC /* TCSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F5F7FEE1F382EBF00C330EC /* TCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE01F382E9D00C330EC /* TCCore.framework */; };
-		6F5F7FEF1F382EBF00C330EC /* TCCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE01F382E9D00C330EC /* TCCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F5F7FF01F382EBF00C330EC /* TCSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE11F382E9D00C330EC /* TCSDK.framework */; };
-		6F5F7FF11F382EBF00C330EC /* TCSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE11F382E9D00C330EC /* TCSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F5F7FF21F382EC400C330EC /* TCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE01F382E9D00C330EC /* TCCore.framework */; };
-		6F5F7FF31F382EC400C330EC /* TCCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE01F382E9D00C330EC /* TCCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F5F7FF41F382EC400C330EC /* TCSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE11F382E9D00C330EC /* TCSDK.framework */; };
-		6F5F7FF51F382EC400C330EC /* TCSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5F7FE11F382E9D00C330EC /* TCSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F6B642E21A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B642C21A70FAA00E207FC /* HomeStatusHeaderView.m */; };
 		6F6B642F21A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B642C21A70FAA00E207FC /* HomeStatusHeaderView.m */; };
 		6F6B643021A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B642C21A70FAA00E207FC /* HomeStatusHeaderView.m */; };
@@ -1172,15 +1157,10 @@
 		6FAAF79020CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */; };
 		6FAAF79120CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */; };
 		6FADEF9F248E6EB900A5F948 /* AirshipCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; };
-		6FADEFA0248E6EB900A5F948 /* AirshipCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FADEFA1248E6EDE00A5F948 /* AirshipCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; };
-		6FADEFA2248E6EDE00A5F948 /* AirshipCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FADEFA3248E6EEF00A5F948 /* AirshipCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; };
-		6FADEFA4248E6EEF00A5F948 /* AirshipCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FADEFA5248E6EFD00A5F948 /* AirshipCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; };
-		6FADEFA6248E6EFD00A5F948 /* AirshipCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FADEFA7248E6F0A00A5F948 /* AirshipCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; };
-		6FADEFA8248E6F0A00A5F948 /* AirshipCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FAF43001EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
 		6FAF43011EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
 		6FAF43021EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
@@ -1424,15 +1404,10 @@
 		7ACE7CA000370D1208243956 /* libPods-PlaySRG-Play SRF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D6E859054BE4FCA7A62352E /* libPods-PlaySRG-Play SRF.a */; };
 		E1D8F87EB9409ADB326F446F /* libPods-PlaySRG-Play RTR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866AF638938EFA7338C23B03 /* libPods-PlaySRG-Play RTR.a */; };
 		E60178521D635E130000362E /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; };
-		E60178531D635E130000362E /* ComScore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E60178541D635E160000362E /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; };
-		E60178551D635E160000362E /* ComScore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E60178561D635E190000362E /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; };
-		E60178571D635E190000362E /* ComScore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E60178581D635E1D0000362E /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; };
-		E60178591D635E1D0000362E /* ComScore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E601785A1D635E210000362E /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; };
-		E601785B1D635E210000362E /* ComScore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E62459EE1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */; };
 		E62459EF1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */; };
 		E62459F01D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */; };
@@ -1464,15 +1439,10 @@
 		E66BEC241DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E66BEC1B1DA7FCED00AD4450 /* MediaPlayerViewController.storyboard */; };
 		E66BEC251DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E66BEC1B1DA7FCED00AD4450 /* MediaPlayerViewController.storyboard */; };
 		E67BB6981D3E640C00E1FEA3 /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
-		E67BB6991D3E640C00E1FEA3 /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E67FFA271D3E6840007BD7BA /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
-		E67FFA281D3E6840007BD7BA /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E67FFA2C1D3E6844007BD7BA /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
-		E67FFA2D1D3E6844007BD7BA /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E67FFA311D3E6847007BD7BA /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
-		E67FFA321D3E6847007BD7BA /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E67FFA361D3E684B007BD7BA /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
-		E67FFA371D3E684B007BD7BA /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E694A9F51D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
 		E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
 		E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
@@ -1660,12 +1630,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6F5F7FE31F382E9D00C330EC /* TCCore.framework in Embed Frameworks */,
-				E67BB6991D3E640C00E1FEA3 /* Mantle.framework in Embed Frameworks */,
-				E60178531D635E130000362E /* ComScore.framework in Embed Frameworks */,
-				6F2AB1AA2487C16B009D9FBC /* Aiolos.framework in Embed Frameworks */,
-				6FADEFA0248E6EB900A5F948 /* AirshipCore.framework in Embed Frameworks */,
-				6F5F7FE51F382E9D00C330EC /* TCSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1676,12 +1640,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6F5F7FE71F382EB700C330EC /* TCCore.framework in Embed Frameworks */,
-				E67FFA281D3E6840007BD7BA /* Mantle.framework in Embed Frameworks */,
-				E60178551D635E160000362E /* ComScore.framework in Embed Frameworks */,
-				6F2AB1AC2487C181009D9FBC /* Aiolos.framework in Embed Frameworks */,
-				6FADEFA2248E6EDE00A5F948 /* AirshipCore.framework in Embed Frameworks */,
-				6F5F7FE91F382EB700C330EC /* TCSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1692,12 +1650,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6F5F7FEB1F382EBB00C330EC /* TCCore.framework in Embed Frameworks */,
-				E67FFA2D1D3E6844007BD7BA /* Mantle.framework in Embed Frameworks */,
-				E60178571D635E190000362E /* ComScore.framework in Embed Frameworks */,
-				6F2AB1AE2487C190009D9FBC /* Aiolos.framework in Embed Frameworks */,
-				6FADEFA4248E6EEF00A5F948 /* AirshipCore.framework in Embed Frameworks */,
-				6F5F7FED1F382EBB00C330EC /* TCSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1708,12 +1660,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6F5F7FEF1F382EBF00C330EC /* TCCore.framework in Embed Frameworks */,
-				E67FFA321D3E6847007BD7BA /* Mantle.framework in Embed Frameworks */,
-				E60178591D635E1D0000362E /* ComScore.framework in Embed Frameworks */,
-				6F2AB1B02487C19C009D9FBC /* Aiolos.framework in Embed Frameworks */,
-				6FADEFA6248E6EFD00A5F948 /* AirshipCore.framework in Embed Frameworks */,
-				6F5F7FF11F382EBF00C330EC /* TCSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1724,12 +1670,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6F5F7FF31F382EC400C330EC /* TCCore.framework in Embed Frameworks */,
-				E67FFA371D3E684B007BD7BA /* Mantle.framework in Embed Frameworks */,
-				E601785B1D635E210000362E /* ComScore.framework in Embed Frameworks */,
-				6F2AB1B22487C1A8009D9FBC /* Aiolos.framework in Embed Frameworks */,
-				6FADEFA8248E6F0A00A5F948 /* AirshipCore.framework in Embed Frameworks */,
-				6F5F7FF51F382EC400C330EC /* TCSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
