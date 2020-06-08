@@ -11,7 +11,7 @@ private var panelKey: Void?
 
 extension MediaPlayerViewController {
 
-    @objc public func addSongPanel(channel: SRGChannel) -> Void {
+    @objc public func addSongPanel(channel: SRGChannel) {
         if let contentNavigationController = self.panel?.contentViewController as? UINavigationController {
             if let songsViewController = contentNavigationController.viewControllers.first as? SongsViewController {
                 if songsViewController.channel == channel {
@@ -25,12 +25,12 @@ extension MediaPlayerViewController {
         self.panel = panel
     }
     
-    @objc public func removeSongPanel() -> Void {
+    @objc public func removeSongPanel() {
         guard let panel = self.panel else { return }
         panel.removeFromParent(transition: .none, completion: nil)
     }
     
-    @objc public func updatePanel(for traitCollection: UITraitCollection) -> Void {
+    @objc public func updatePanel(for traitCollection: UITraitCollection) {
         guard let panel = self.panel else { return }
         panel.performWithoutAnimation {
             panel.configuration = self.configuration(for: traitCollection)
@@ -55,8 +55,6 @@ private extension MediaPlayerViewController {
         
         let panelController = Panel(configuration: self.configuration(for: self.traitCollection))
         panelController.sizeDelegate = self
-        panelController.resizeDelegate = self
-        panelController.gestureDelegate = self
         panelController.contentViewController = contentNavigationController
         
         return panelController
@@ -100,20 +98,5 @@ extension MediaPlayerViewController : PanelSizeDelegate {
                 // Height hardcoded for other modes
                 return CGSize(width: width, height: 0.0)
         }
-    }
-}
-
-extension MediaPlayerViewController : PanelResizeDelegate {
-    
-    public func panelDidStartResizing(_ panel: Panel) {
-        
-    }
-    
-    public func panel(_ panel: Panel, willResizeTo size: CGSize) {
-        
-    }
-    
-    public func panel(_ panel: Panel, willTransitionFrom oldMode: Panel.Configuration.Mode?, to newMode: Panel.Configuration.Mode, with coordinator: PanelTransitionCoordinator) {
-        
     }
 }
