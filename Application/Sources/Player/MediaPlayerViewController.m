@@ -73,10 +73,6 @@ static UIDeviceOrientation s_previouslyUsedLandscapeDeviceOrientation = UIDevice
 static const UILayoutPriority MediaPlayerBottomConstraintNormalPriority = 850;
 static const UILayoutPriority MediaPlayerBottomConstraintFullScreenPriority = 950;
 
-// Choose the good aspect ratio for the player view, depending of the screen size
-static const UILayoutPriority MediaPlayerViewAspectRatioConstraintNormalPriority = 900;
-static const UILayoutPriority MediaPlayerViewAspectRatioConstraintLowPriority = 700;
-
 // Provide a collapsed version only if the ratio between expanded and collapsed heights is above a given value
 // (it makes no sense to show a collapsed version if the expanded version is only slightly taller)
 static const CGFloat MediaPlayerDetailsLabelExpansionThresholdFactor = 1.4f;
@@ -184,10 +180,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 // The aspect ratio constant is used to display the player with the best possible aspect ratio, taking into account
 // other frame changes into account (e.g. timeline display)
-// TODO: When iOS 9 support is dropped, we can only keep one constraint with proper priority and vary its multiplier
-//       like we do currently.
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioStandardConstraint;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioBigLandscapeScreenConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerAspectRatioConstraint;
 
 @property (nonatomic, weak) IBOutlet UIGestureRecognizer *detailsGestureRecognizer;
 @property (nonatomic, weak) IBOutlet UIPanGestureRecognizer *pullDownGestureRecognizer;
@@ -590,7 +583,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     [super viewWillLayoutSubviews];
     
-    [self updatePlayerViewAspectRatioWithSize:self.view.frame.size];
     [self updateDetailsAppearance];
 }
 
@@ -617,7 +609,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 [self.letterboxView setUserInterfaceHidden:YES animated:NO /* will be animated with the view transition */];
             }
         }
-        [self updatePlayerViewAspectRatioWithSize:size];
         [self scrollToCurrentProgramAnimated:NO];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
@@ -1136,22 +1127,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
 }
 
-- (void)updatePlayerViewAspectRatioWithSize:(CGSize)size
-{
-    // Use the big landscape screen aspect ratio for player view in landscape orientation on iPad, 16:9 ratio otherwise.
-    BOOL isLandscape = (size.width > size.height);
-    if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular
-            && self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular
-            && isLandscape) {
-        self.playerAspectRatioStandardConstraint.priority = MediaPlayerViewAspectRatioConstraintLowPriority;
-        self.playerAspectRatioBigLandscapeScreenConstraint.priority = MediaPlayerViewAspectRatioConstraintNormalPriority;
-    }
-    else {
-        self.playerAspectRatioStandardConstraint.priority = MediaPlayerViewAspectRatioConstraintNormalPriority;
-        self.playerAspectRatioBigLandscapeScreenConstraint.priority = MediaPlayerViewAspectRatioConstraintLowPriority;
-    }
-}
-
 - (void)updateDetailsAppearance
 {
     // No need for a details button if not necessary or if the expanded version is only slightly taller than the collapsed one.
@@ -1573,8 +1548,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         CGFloat minAspectRatio = CGRectGetWidth(self.view.frame) / (verticalFillRatio * CGRectGetHeight(self.view.frame));
         CGFloat multiplier = 1.f / fmaxf(aspectRatio, minAspectRatio);
         
-        self.playerAspectRatioStandardConstraint = [self.playerAspectRatioStandardConstraint srg_replacementConstraintWithMultiplier:multiplier constant:heightOffset];
-        self.playerAspectRatioBigLandscapeScreenConstraint = [self.playerAspectRatioBigLandscapeScreenConstraint srg_replacementConstraintWithMultiplier:multiplier constant:heightOffset];
+        self.playerAspectRatioConstraint = [self.playerAspectRatioConstraint srg_replacementConstraintWithMultiplier:multiplier constant:heightOffset];
         
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {

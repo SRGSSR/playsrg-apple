@@ -115,7 +115,6 @@
                                 <constraints>
                                     <constraint firstItem="JX5-nY-2fC" firstAttribute="leading" secondItem="yDa-0T-uNV" secondAttribute="leading" id="Dde-so-EWe"/>
                                     <constraint firstAttribute="trailing" secondItem="JX5-nY-2fC" secondAttribute="trailing" id="aJU-Bk-NN5"/>
-                                    <constraint firstAttribute="height" secondItem="yDa-0T-uNV" secondAttribute="width" multiplier="2:5" priority="250" id="d4e-DG-s50"/>
                                     <constraint firstAttribute="height" secondItem="yDa-0T-uNV" secondAttribute="width" multiplier="9:16" priority="900" id="sHT-jJ-Lxy"/>
                                     <constraint firstItem="JX5-nY-2fC" firstAttribute="top" secondItem="yDa-0T-uNV" secondAttribute="top" id="zNQ-3R-Tgi"/>
                                     <constraint firstAttribute="bottom" secondItem="JX5-nY-2fC" secondAttribute="bottom" id="zwj-dJ-v91"/>
@@ -653,8 +652,7 @@
                         <outlet property="metadataHeightConstraint" destination="Zzw-0L-BQe" id="kTv-BV-f8P"/>
                         <outlet property="multiAudioImageView" destination="aeL-66-EET" id="jnS-8h-Ajc"/>
                         <outlet property="numberOfEpisodesLabel" destination="n6K-Dg-J9D" id="hyA-jm-904"/>
-                        <outlet property="playerAspectRatioBigLandscapeScreenConstraint" destination="d4e-DG-s50" id="Xip-HB-R7g"/>
-                        <outlet property="playerAspectRatioStandardConstraint" destination="sHT-jJ-Lxy" id="sae-Wk-L16"/>
+                        <outlet property="playerAspectRatioConstraint" destination="sHT-jJ-Lxy" id="sae-Wk-L16"/>
                         <outlet property="playerBottomConstraint" destination="GGg-eU-ikx" id="IsZ-oq-Jot"/>
                         <outlet property="playerTopConstraint" destination="ESI-Dr-UyW" id="RCb-YM-KoD"/>
                         <outlet property="playerView" destination="yDa-0T-uNV" id="Hkl-v6-yZ2"/>
