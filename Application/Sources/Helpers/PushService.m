@@ -146,24 +146,18 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     // will still return `YES` if the target supports silent notifications (introduced with iOS 10 rich notifications).
     // We nust retrieve the proper authorization status from iOS 10 `UNUserNotificationCenter`, providing finer-grained
     // information covering these new use cases.
-    if (@available(iOS 10, *)) {
-        // Make asynchronous call synchronous
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        
-        __block UNNotificationSettings *notificationSettings = nil;
-        [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
-            notificationSettings = settings;
-            dispatch_semaphore_signal(semaphore);
-        }];
-        
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        return notificationSettings.authorizationStatus == UNAuthorizationStatusAuthorized;
-    }
-    // Before iOS 10: `UIApplication.registeredForRemoteNotifications` accurately reflects whether the user has authorized
-    // notificartions or not.
-    else {
-        return UIApplication.sharedApplication.currentUserNotificationSettings.types != UIUserNotificationTypeNone;
-    }
+    
+    // Make asynchronous call synchronous
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    __block UNNotificationSettings *notificationSettings = nil;
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+        notificationSettings = settings;
+        dispatch_semaphore_signal(semaphore);
+    }];
+    
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return notificationSettings.authorizationStatus == UNAuthorizationStatusAuthorized;
 }
 
 #pragma mark Setup
@@ -171,9 +165,8 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 - (void)setup
 {
     [UAirship takeOff:self.configuration];
-    if (@available(iOS 10, *)) {
-        [UAirship push].defaultPresentationOptions = (UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
-    }
+    
+    [UAirship push].defaultPresentationOptions = (UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
     [UAirship push].pushNotificationDelegate = self;
     [UAirship push].autobadgeEnabled = YES;
     
@@ -276,15 +269,12 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (void)receivedNotificationResponse:(UANotificationResponse *)notificationResponse completionHandler:(void (^)(void))completionHandler
 {
-    if (@available(iOS 10, *)) {
-        if (notificationResponse.notificationContent.notification) {
-            Notification *notification = [[Notification alloc] initWithNotification:notificationResponse.notificationContent.notification];
-            [Notification saveNotification:notification read:YES];
-        }
+    if (notificationResponse.notificationContent.notification) {
+        Notification *notification = [[Notification alloc] initWithNotification:notificationResponse.notificationContent.notification];
+        [Notification saveNotification:notification read:YES];
     }
     
     UANotificationContent *notificationContent = notificationResponse.notificationContent;
-    
     NSString *channelUid = notificationContent.notificationInfo[@"channelId"];
     
     if (notificationContent.notificationInfo[@"media"]) {
@@ -324,11 +314,9 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (void)receivedForegroundNotification:(UANotificationContent *)notificationContent completionHandler:(void (^)(void))completionHandler
 {
-    if (@available(iOS 10, *)) {
-        if (notificationContent.notification) {
-            Notification *notification = [[Notification alloc] initWithNotification:notificationContent.notification];
-            [Notification saveNotification:notification read:NO];
-        }
+    if (notificationContent.notification) {
+        Notification *notification = [[Notification alloc] initWithNotification:notificationContent.notification];
+        [Notification saveNotification:notification read:NO];
     }
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceDidReceiveNotification object:self];
     completionHandler();
@@ -336,11 +324,9 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (void)receivedBackgroundNotification:(UANotificationContent *)notificationContent completionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-    if (@available(iOS 10, *)) {
-        if (notificationContent.notification) {
-            Notification *notification = [[Notification alloc] initWithNotification:notificationContent.notification];
-            [Notification saveNotification:notification read:NO];
-        }
+    if (notificationContent.notification) {
+        Notification *notification = [[Notification alloc] initWithNotification:notificationContent.notification];
+        [Notification saveNotification:notification read:NO];
     }
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceDidReceiveNotification object:self];
     completionHandler(UIBackgroundFetchResultNewData);

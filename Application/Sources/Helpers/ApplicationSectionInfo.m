@@ -53,16 +53,14 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
 + (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfosWithNotificationPreview:(BOOL)notificationPreview
 {
     NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
-    if (@available(iOS 10, *)) {
-        if (PushService.sharedService.enabled) {
-            [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionNotifications radioChannel:nil]];
-            
-            if (notificationPreview) {
-                NSArray<Notification *> *unreadNotifications = Notification.unreadNotifications;
-                NSArray<Notification *> *previewNotifications = [unreadNotifications subarrayWithRange:NSMakeRange(0, MIN(3, unreadNotifications.count))];
-                for (Notification *notification in previewNotifications) {
-                    [sectionInfos addObject:[self applicationSectionInfoWithNotification:notification]];
-                }
+    if (PushService.sharedService.enabled) {
+        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionNotifications radioChannel:nil]];
+        
+        if (notificationPreview) {
+            NSArray<Notification *> *unreadNotifications = Notification.unreadNotifications;
+            NSArray<Notification *> *previewNotifications = [unreadNotifications subarrayWithRange:NSMakeRange(0, MIN(3, unreadNotifications.count))];
+            for (Notification *notification in previewNotifications) {
+                [sectionInfos addObject:[self applicationSectionInfoWithNotification:notification]];
             }
         }
     }

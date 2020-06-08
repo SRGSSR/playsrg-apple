@@ -366,17 +366,15 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (void)updateProfileTabBarItem
 {
-    if (@available(iOS 10, *)) {
-        UITabBarItem *profileTabBarItem = [self tabBarItemForIdentifier:TabBarItemIdentifierProfile];
-        NSInteger badgeNumber = UIApplication.sharedApplication.applicationIconBadgeNumber;
-        
-        if (PushService.sharedService.enabled && profileTabBarItem && badgeNumber != 0) {
-            profileTabBarItem.badgeValue = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
-            profileTabBarItem.badgeColor = UIColor.play_notificationRedColor;
-        }
-        else {
-            profileTabBarItem.badgeValue = nil;
-        }
+    UITabBarItem *profileTabBarItem = [self tabBarItemForIdentifier:TabBarItemIdentifierProfile];
+    NSInteger badgeNumber = UIApplication.sharedApplication.applicationIconBadgeNumber;
+    
+    if (PushService.sharedService.enabled && profileTabBarItem && badgeNumber != 0) {
+        profileTabBarItem.badgeValue = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
+        profileTabBarItem.badgeColor = UIColor.play_notificationRedColor;
+    }
+    else {
+        profileTabBarItem.badgeValue = nil;
     }
 }
 
