@@ -15,6 +15,7 @@ extension MediaPlayerViewController {
         if let contentNavigationController = self.panel?.contentViewController as? UINavigationController {
             if let songsViewController = contentNavigationController.viewControllers.first as? SongsViewController {
                 if songsViewController.channel == channel {
+                    self.panel?.add(to: self)
                     return
                 }
             }
