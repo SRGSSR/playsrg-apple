@@ -12,10 +12,15 @@ private var panelKey: Void?
 extension MediaPlayerViewController {
 
     @objc public func addSongPanel(channel: SRGChannel) {
+        let songsViewStyle = ApplicationConfiguration.shared.channel(forUid: channel.uid)?.songsViewStyle ?? SongsViewStyle.none
+        if (songsViewStyle == .none) { return }
+        
+        let panelMode = songsViewStyle == .expanded ? _PanelMode.expanded : .compact
         if let contentNavigationController = self.panel?.contentViewController as? UINavigationController {
             if let songsViewController = contentNavigationController.viewControllers.first as? SongsViewController {
                 if songsViewController.channel == channel {
                     self.panel?.add(to: self)
+                    self.panel?.configuration.mode = panelMode
                     return
                 }
             }
@@ -23,6 +28,7 @@ extension MediaPlayerViewController {
         
         let panel = makePanelController(channel: channel)
         panel.add(to: self)
+        panel.configuration.mode = panelMode
         self.panel = panel
     }
     

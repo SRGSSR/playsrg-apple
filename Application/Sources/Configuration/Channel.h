@@ -8,6 +8,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ *  Songs view styles
+ */
+typedef NS_ENUM(NSInteger, SongsViewStyle) {
+    /**
+     *  Not displayed.
+     */
+    SongsViewStyleNone = 0,
+    /**
+     *  Collapsed when added to the view.
+     */
+    SongsViewStyleCollapsed,
+    /**
+     *  Expanded when added to the view.
+     */
+    SongsViewStyleExpanded
+};
+
 @interface Channel : NSObject
 
 /**
@@ -54,6 +72,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  Return `YES` iff the status bar should be dark for this channel.
  */
 @property (nonatomic, readonly, getter=hasDarkStatusBar) BOOL darkStatusBar;
+
+/**
+ *  The songs view style when added to the view.
+ */
+@property (nonatomic, readonly) SongsViewStyle songsViewStyle;
 
 @end
 

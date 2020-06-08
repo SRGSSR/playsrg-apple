@@ -8,6 +8,18 @@
 
 #import <SRGAppearance/SRGAppearance.h>
 
+static SongsViewStyle SongsViewStyleWithString(NSString *string)
+{
+    static dispatch_once_t s_onceToken;
+    static NSDictionary<NSString *, NSNumber *> *s_songsViewStyles;
+    dispatch_once(&s_onceToken, ^{
+        s_songsViewStyles = @{ @"collapsed" : @(SongsViewStyleCollapsed),
+                               @"expanded" : @(SongsViewStyleExpanded) };
+    });
+    NSNumber *songsViewStyle = s_songsViewStyles[string];
+    return songsViewStyle ? songsViewStyle.integerValue : SongsViewStyleNone;
+}
+
 @interface Channel ()
 
 @property (nonatomic, copy) NSString *uid;
@@ -18,6 +30,7 @@
 @property (nonatomic) UIColor *gradientStartColor;
 @property (nonatomic) UIColor *gradientEndColor;
 @property (nonatomic, getter=hasDarkStatusBar) BOOL darkStatusBar;
+@property (nonatomic) SongsViewStyle songsViewStyle;
 
 @end
 
@@ -78,6 +91,11 @@
         id darkStatusBarValue = dictionary[@"hasDarkStatusBar"];
         if ([darkStatusBarValue isKindOfClass:NSNumber.class]) {
             self.darkStatusBar = [darkStatusBarValue boolValue];
+        }
+        
+        id songsViewStyleValue = dictionary[@"songsViewStyle"];
+        if ([songsViewStyleValue isKindOfClass:NSString.class]) {
+            self.songsViewStyle = SongsViewStyleWithString(songsViewStyleValue);
         }
     }
     return self;

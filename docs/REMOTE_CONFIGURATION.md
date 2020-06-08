@@ -54,6 +54,9 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `gradientEndColor` (optional, string): The channel secondary hex color for a gradient. If omitted, same as `gradientStartColor`.
 * `titleColor` (optional, string): Hex color of the text displayed on top of colored areas (should provide sufficient contrast with `color`, `gradientStartColor ` and `gradientEndColor`). If omitted, white.
 * `hasDarkStatusBar` (optional, boolean): `true` iff the status bar should be dark for this channel. If omitted, `false`.
+* `songsViewStyle` (optional, string): The songs view style when added to the view. Never displayed if not set. Available values are:
+   * `collapsed`: Collapsed when added to the view.
+   * `expanded`: Expanded when added to the view.
 
 ## Video homepage
 
@@ -75,7 +78,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 
 * `topicSections` (optional, string, multiple): The sections to be displayed when opening a topic. If none is provided, latest medias are displayed. Available values are:
    * `latest`: The latest medias.
-   * `mostPopular`: The most popular medias
+   * `mostPopular`: The most popular medias.
 * `topicSectionsWithSubtopics` (optional, string, multiple): The sections to be displayed when opening a topic with subtopics. If none is provided, only subtopics are displayed. Available values are the same as `topicSections`.
 
 ### User interface options
