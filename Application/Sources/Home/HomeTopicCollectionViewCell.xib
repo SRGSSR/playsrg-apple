@@ -19,7 +19,7 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="2KT-CF-1NH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BC4-BH-A22" userLabel="Dimming View">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BC4-BH-A22" userLabel="Overlay View">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                         <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
@@ -50,6 +50,7 @@
             <size key="customSize" width="272" height="175"/>
             <connections>
                 <outlet property="imageView" destination="2KT-CF-1NH" id="lhl-Br-11H"/>
+                <outlet property="overlayView" destination="BC4-BH-A22" id="11J-kg-EiA"/>
                 <outlet property="titleLabel" destination="IFz-Vb-Lsd" id="1Q3-Ey-tCT"/>
             </connections>
             <point key="canvasLocation" x="-31.884057971014496" y="210.60267857142856"/>

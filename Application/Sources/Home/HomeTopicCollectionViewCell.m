@@ -17,6 +17,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UIView *overlayView;
 
 @end
 
@@ -49,6 +50,8 @@
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = topic.title;
+    
+    self.overlayView.hidden = (topic == nil);
     
     [self.imageView play_requestImageForObject:topic withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderNone];
 }
