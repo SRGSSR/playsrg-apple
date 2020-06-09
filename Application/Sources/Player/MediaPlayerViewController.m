@@ -624,7 +624,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self updatePanelFor:newCollection];
+        [self updatePanelFor:newCollection fullScreen:self.letterboxView.fullScreen];
     } completion:nil];
 
 }
@@ -1587,11 +1587,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     void (^animations)(void) = ^{
         [self setFullScreen:fullScreen];
         [self updateTimelineVisibilityForFullScreen:fullScreen animated:NO];
-        
-        SRGChapter *mainChapter = letterboxView.controller.mediaComposition.mainChapter;
-        if (mainChapter.contentType == SRGContentTypeLivestream && mainChapter.mediaType == SRGMediaTypeAudio) {
-            fullScreen ? [self removeSongPanel] : [self addSongPanelWithChannel:letterboxView.controller.channel];
-        }
+        [self updatePanelFor:self.traitCollection fullScreen:fullScreen];
     };
     
     void (^completion)(BOOL) = ^(BOOL finished) {

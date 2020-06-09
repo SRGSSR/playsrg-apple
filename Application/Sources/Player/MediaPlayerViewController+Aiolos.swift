@@ -12,35 +12,39 @@ private var panelKey: Void?
 extension MediaPlayerViewController {
 
     @objc public func addSongPanel(channel: SRGChannel) {
-        let songsViewStyle = ApplicationConfiguration.shared.channel(forUid: channel.uid)?.songsViewStyle ?? SongsViewStyle.none
-        if (songsViewStyle == .none) { return }
+        let songsViewStyle = ApplicationConfiguration.shared.channel(forUid: channel.uid)?.songsViewStyle ?? .none
+        if songsViewStyle == .none { return }
         
-        let panelMode = songsViewStyle == .expanded ? _PanelMode.expanded : .compact
         if let contentNavigationController = self.panel?.contentViewController as? UINavigationController {
             if let songsViewController = contentNavigationController.viewControllers.first as? SongsViewController {
                 if songsViewController.channel == channel {
-                    self.panel?.add(to: self)
-                    self.panel?.configuration.mode = panelMode
                     return
                 }
             }
         }
         
-        let panel = makePanelController(channel: channel)
+        let panel = makePanelController(channel: channel, mode: (songsViewStyle == .expanded) ? .expanded : .compact)
         panel.add(to: self)
-        panel.configuration.mode = panelMode
         self.panel = panel
     }
     
     @objc public func removeSongPanel() {
         guard let panel = self.panel else { return }
         panel.removeFromParent(transition: .none, completion: nil)
+        self.panel = nil
     }
     
-    @objc public func updatePanel(for traitCollection: UITraitCollection) {
+    @objc public func updatePanel(for traitCollection: UITraitCollection, fullScreen: Bool) {
         guard let panel = self.panel else { return }
-        panel.performWithoutAnimation {
-            panel.configuration = self.configuration(for: traitCollection)
+        
+        if fullScreen {
+            panel.removeFromParent(transition: .none, completion: nil)
+        }
+        else {
+            panel.add(to: self)
+            panel.performWithoutAnimation {
+                panel.configuration = self.configuration(for: traitCollection, mode: panel.configuration.mode)
+            }
         }
     }
 }
@@ -56,11 +60,11 @@ private extension MediaPlayerViewController {
         }
     }
     
-    func makePanelController(channel: SRGChannel) -> Panel {
+    func makePanelController(channel: SRGChannel, mode: Panel.Configuration.Mode) -> Panel {
         let songsViewController = SongsViewController(channel: channel)
         let contentNavigationController = NavigationController(rootViewController: songsViewController, tintColor: .white, backgroundColor: .play_cardGrayBackground, statusBarStyle: .default)
         
-        let panelController = Panel(configuration: self.configuration(for: self.traitCollection))
+        let panelController = Panel(configuration: self.configuration(for: self.traitCollection, mode: mode))
         panelController.sizeDelegate = self
         panelController.resizeDelegate = self
         panelController.contentViewController = contentNavigationController
@@ -68,7 +72,7 @@ private extension MediaPlayerViewController {
         return panelController
     }
     
-    func configuration(for traitCollection: UITraitCollection) -> Panel.Configuration {
+    func configuration(for traitCollection: UITraitCollection, mode: Panel.Configuration.Mode) -> Panel.Configuration {
         var configuration = Panel.Configuration.default
         
         if traitCollection.userInterfaceIdiom == .pad && traitCollection.horizontalSizeClass == .regular {
@@ -83,6 +87,7 @@ private extension MediaPlayerViewController {
         }
         
         configuration.supportedModes = [.compact, .expanded, .fullHeight]
+        configuration.mode = mode
         
         configuration.appearance.resizeHandle = .visible(foregroundColor: .white, backgroundColor: .play_cardGrayBackground)
         configuration.appearance.separatorColor = .clear
