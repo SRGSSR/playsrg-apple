@@ -34,7 +34,7 @@ extension MediaPlayerViewController {
         self.panel = nil
     }
     
-    @objc public func updatePanel(for traitCollection: UITraitCollection, fullScreen: Bool) {
+    @objc public func updateSongPanel(for traitCollection: UITraitCollection, fullScreen: Bool) {
         guard let panel = self.panel else { return }
         
         if fullScreen {
@@ -46,6 +46,11 @@ extension MediaPlayerViewController {
                 panel.configuration = self.configuration(for: traitCollection, mode: panel.configuration.mode)
             }
         }
+    }
+    
+    @objc public func reloadSongPanelSize() {
+        guard let panel = self.panel else { return }
+        panel.reloadSize()
     }
 }
 

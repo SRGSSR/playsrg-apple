@@ -610,6 +610,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             }
         }
         [self scrollToCurrentProgramAnimated:NO];
+        [self reloadSongPanelSize];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
         if (UIDeviceOrientationIsLandscape(deviceOrientation)) {
@@ -624,7 +625,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self updatePanelFor:newCollection fullScreen:self.letterboxView.fullScreen];
+        [self updateSongPanelFor:newCollection fullScreen:self.letterboxView.fullScreen];
     } completion:nil];
 
 }
@@ -1587,7 +1588,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     void (^animations)(void) = ^{
         [self setFullScreen:fullScreen];
         [self updateTimelineVisibilityForFullScreen:fullScreen animated:NO];
-        [self updatePanelFor:self.traitCollection fullScreen:fullScreen];
+        [self updateSongPanelFor:self.traitCollection fullScreen:fullScreen];
     };
     
     void (^completion)(BOOL) = ^(BOOL finished) {
