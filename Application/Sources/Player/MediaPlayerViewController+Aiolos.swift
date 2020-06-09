@@ -103,7 +103,12 @@ extension MediaPlayerViewController : PanelSizeDelegate {
             case .compact:
                 return CGSize(width: width, height: MediaPlayerViewController.compactHeight)
             case .expanded:
-                return CGSize(width: width, height: 400.0)
+                if let parent = panel.parent {
+                    return CGSize(width: width, height: parent.view.frame.height / 3.0)
+                }
+                else {
+                    return CGSize(width: width, height: 400.0)
+                }
             default:
                 // Height hardcoded for other modes
                 return CGSize(width: width, height: 0.0)

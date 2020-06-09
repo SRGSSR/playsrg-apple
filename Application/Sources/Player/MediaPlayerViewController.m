@@ -789,7 +789,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             [self.livestreamButton setTitle:mainMedia.title forState:UIControlStateNormal];
         }
         
-        if (! self.letterboxView.isFullScreen && mainChapterMedia.mediaType == SRGMediaTypeAudio) {
+        if (! self.letterboxView.fullScreen && mainChapterMedia.mediaType == SRGMediaTypeAudio) {
             [self addSongPanelWithChannel:channel];
         }
         
