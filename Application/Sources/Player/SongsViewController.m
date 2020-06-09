@@ -131,7 +131,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80.f;
+    CGFloat height = 70.f;
+    if (indexPath.row < self.items.count - 1) {
+        height += LayoutStandardMargin;
+    }
+    return height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

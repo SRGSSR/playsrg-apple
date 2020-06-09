@@ -80,6 +80,16 @@ CGFloat LayoutStandardSimpleTableCellHeight(void)
     return s_height[contentSizeCategory].floatValue;
 }
 
+CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, NSInteger row, NSInteger numberOfItems)
+{
+    if (row < numberOfItems - 1) {
+        return contentHeight + LayoutStandardMargin;
+    }
+    else {
+        return contentHeight;
+    }
+}
+
 CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
 {
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_largeTextHeights;
