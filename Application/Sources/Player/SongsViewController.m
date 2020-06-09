@@ -131,11 +131,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 70.f;
-    if (indexPath.row < self.items.count - 1) {
-        height += LayoutStandardMargin;
-    }
-    return height;
+    return LayoutTableTopAlignedCellHeight(70.f, LayoutStandardMargin, indexPath.row, self.items.count);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
