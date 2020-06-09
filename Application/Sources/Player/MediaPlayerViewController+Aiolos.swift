@@ -9,9 +9,10 @@ import Aiolos
 
 private var panelKey: Void?
 private var coveredScrollViewKey: Void?
-private var compactHeightKey: Void?
 
 extension MediaPlayerViewController {
+    
+    static let contentHeight: CGFloat = 64.0
 
     @objc public func addSongPanel(channel: SRGChannel, coveredScrollView: UIScrollView?) {
         let songsViewStyle = ApplicationConfiguration.shared.channel(forUid: channel.uid)?.songsViewStyle ?? .none
@@ -25,13 +26,10 @@ extension MediaPlayerViewController {
             }
         }
         
-        let contentHeight: CGFloat = 64.0
-        
         self.coveredScrollView = coveredScrollView
-        self.compactHeight = contentHeight + self.view.safeAreaInsets.bottom
         
         if let coveredScrollView = coveredScrollView {
-            let insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: contentHeight, right: 0.0)
+            let insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: MediaPlayerViewController.contentHeight, right: 0.0)
             coveredScrollView.contentInset = insets;
             coveredScrollView.scrollIndicatorInsets = insets;
         }
@@ -94,15 +92,7 @@ private extension MediaPlayerViewController {
     
     var compactHeight: CGFloat {
         get {
-            if let number = objc_getAssociatedObject(self, &compactHeightKey) as? NSNumber {
-                return CGFloat(number.doubleValue)
-            }
-            else {
-                return 0.0
-            }
-        }
-        set {
-            objc_setAssociatedObject(self, &compactHeightKey, NSNumber(value: Double(newValue)), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            return MediaPlayerViewController.contentHeight + self.view.safeAreaInsets.bottom
         }
     }
     

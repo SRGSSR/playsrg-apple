@@ -586,6 +586,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self updateDetailsAppearance];
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    [self reloadSongPanelSize];
+}
+
 #pragma mark Responsiveness
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -627,7 +634,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         [self updateSongPanelFor:newCollection fullScreen:self.letterboxView.fullScreen];
     } completion:nil];
-
 }
 
 #pragma mark Accessibility
