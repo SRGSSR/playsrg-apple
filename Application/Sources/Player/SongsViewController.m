@@ -99,7 +99,7 @@
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    SRGPageRequest *request = [[SRGDataProvider.currentDataProvider radioSongsForVendor:self.channel.vendor channelUid:self.channel.uid withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize];
+    SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider radioSongsForVendor:self.channel.vendor channelUid:self.channel.uid withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
     [requestQueue addRequest:request resume:YES];
 }
 
