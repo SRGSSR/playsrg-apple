@@ -8,10 +8,12 @@ import Foundation
 import Aiolos
 
 private var panelKey: Void?
+private var coveredScrollViewKey: Void?
+private var compactHeightKey: Void?
 
 extension MediaPlayerViewController {
 
-    @objc public func addSongPanel(channel: SRGChannel) {
+    @objc public func addSongPanel(channel: SRGChannel, coveredScrollView: UIScrollView?) {
         let songsViewStyle = ApplicationConfiguration.shared.channel(forUid: channel.uid)?.songsViewStyle ?? .none
         if songsViewStyle == .none { return }
         
@@ -23,6 +25,17 @@ extension MediaPlayerViewController {
             }
         }
         
+        let contentHeight: CGFloat = 64.0
+        
+        self.coveredScrollView = coveredScrollView
+        self.compactHeight = contentHeight + self.view.safeAreaInsets.bottom
+        
+        if let coveredScrollView = coveredScrollView {
+            let insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: contentHeight, right: 0.0)
+            coveredScrollView.contentInset = insets;
+            coveredScrollView.scrollIndicatorInsets = insets;
+        }
+        
         let panel = makePanelController(channel: channel, mode: (songsViewStyle == .expanded) ? .expanded : .compact)
         panel.add(to: self)
         self.panel = panel
@@ -32,6 +45,11 @@ extension MediaPlayerViewController {
         guard let panel = self.panel else { return }
         panel.removeFromParent(transition: .none, completion: nil)
         self.panel = nil
+        
+        if let coveredScrollView = self.coveredScrollView {
+            coveredScrollView.contentInset = .zero
+            coveredScrollView.scrollIndicatorInsets = .zero
+        }
     }
     
     @objc public func updateSongPanel(for traitCollection: UITraitCollection, fullScreen: Bool) {
@@ -56,12 +74,35 @@ extension MediaPlayerViewController {
 
 private extension MediaPlayerViewController {
     
+    var coveredScrollView: UIScrollView? {
+        get {
+            return objc_getAssociatedObject(self, &coveredScrollViewKey) as? UIScrollView
+        }
+        set {
+            objc_setAssociatedObject(self, &panelKey, coveredScrollViewKey, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
     var panel: Panel? {
         get {
             return objc_getAssociatedObject(self, &panelKey) as? Panel
         }
         set {
             objc_setAssociatedObject(self, &panelKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    var compactHeight: CGFloat {
+        get {
+            if let number = objc_getAssociatedObject(self, &compactHeightKey) as? NSNumber {
+                return CGFloat(number.doubleValue)
+            }
+            else {
+                return 0.0
+            }
+        }
+        set {
+            objc_setAssociatedObject(self, &compactHeightKey, NSNumber(value: Double(newValue)), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -104,14 +145,12 @@ private extension MediaPlayerViewController {
 
 extension MediaPlayerViewController : PanelSizeDelegate {
     
-    static let compactHeight: CGFloat = 80.0
-    
     public func panel(_ panel: Panel, sizeForMode mode: Panel.Configuration.Mode) -> CGSize {
         // Width ignored when for .bottom position, takes parent width
         let width: CGFloat = 400.0
         switch mode {
             case .compact:
-                return CGSize(width: width, height: MediaPlayerViewController.compactHeight)
+                return CGSize(width: width, height: self.compactHeight)
             case .expanded:
                 if let parent = panel.parent {
                     return CGSize(width: width, height: 0.45 * parent.view.frame.height)
@@ -138,7 +177,7 @@ extension MediaPlayerViewController : PanelResizeDelegate {
         guard let tableView = songsViewController.tableView else { return }
         
         UIView.animate(withDuration: 0.1) {
-            if size.height <= MediaPlayerViewController.compactHeight {
+            if size.height <= self.compactHeight {
                 tableView.alpha = 0.0
             }
             else {

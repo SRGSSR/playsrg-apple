@@ -791,7 +791,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
         
         if (! self.letterboxView.fullScreen && mainChapterMedia.mediaType == SRGMediaTypeAudio) {
-            [self addSongPanelWithChannel:channel];
+            [self addSongPanelWithChannel:channel coveredScrollView:self.programsTableView];
         }
         
         self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
