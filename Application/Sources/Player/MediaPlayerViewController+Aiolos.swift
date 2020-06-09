@@ -81,7 +81,7 @@ private extension MediaPlayerViewController {
         var configuration = Panel.Configuration.default
         
         if traitCollection.userInterfaceIdiom == .pad && traitCollection.horizontalSizeClass == .regular {
-            configuration.position = .trailingBottom
+            configuration.position = .leadingBottom
             configuration.positionLogic[.bottom] = .respectSafeArea
             configuration.margins = NSDirectionalEdgeInsets(top: 0.0, leading: 10.0, bottom: 0.0, trailing: 10.0)
         }
