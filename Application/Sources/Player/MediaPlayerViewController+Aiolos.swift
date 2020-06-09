@@ -92,7 +92,12 @@ private extension MediaPlayerViewController {
     
     var compactHeight: CGFloat {
         get {
-            return MediaPlayerViewController.contentHeight + self.view.safeAreaInsets.bottom
+            if let window = UIApplication.shared.keyWindow {
+                return MediaPlayerViewController.contentHeight + window.safeAreaInsets.bottom
+            }
+            else {
+                return MediaPlayerViewController.contentHeight
+            }
         }
     }
     
