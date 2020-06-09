@@ -127,7 +127,7 @@ private extension MediaPlayerViewController {
             configuration.margins = .zero
         }
         
-        configuration.supportedModes = [.compact, .expanded]
+        configuration.supportedModes = [.compact, .expanded, .fullHeight]
         configuration.mode = mode
         
         configuration.appearance.resizeHandle = .visible(foregroundColor: .white, backgroundColor: .play_cardGrayBackground)
