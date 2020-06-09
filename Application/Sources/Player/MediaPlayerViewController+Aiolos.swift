@@ -91,7 +91,7 @@ private extension MediaPlayerViewController {
             configuration.margins = .zero
         }
         
-        configuration.supportedModes = [.compact, .expanded, .fullHeight]
+        configuration.supportedModes = [.compact, .expanded]
         configuration.mode = mode
         
         configuration.appearance.resizeHandle = .visible(foregroundColor: .white, backgroundColor: .play_cardGrayBackground)
@@ -114,7 +114,7 @@ extension MediaPlayerViewController : PanelSizeDelegate {
                 return CGSize(width: width, height: MediaPlayerViewController.compactHeight)
             case .expanded:
                 if let parent = panel.parent {
-                    return CGSize(width: width, height: parent.view.frame.height / 3.0)
+                    return CGSize(width: width, height: 0.45 * parent.view.frame.height)
                 }
                 else {
                     return CGSize(width: width, height: 400.0)
