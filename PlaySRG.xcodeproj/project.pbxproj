@@ -725,11 +725,11 @@
 		6F2AB1AD2487C190009D9FBC /* Aiolos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; };
 		6F2AB1AF2487C19C009D9FBC /* Aiolos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; };
 		6F2AB1B12487C1A8009D9FBC /* Aiolos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2AB1A82487C16A009D9FBC /* Aiolos.framework */; };
-		6F2AB1B42487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift */; };
-		6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift */; };
-		6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift */; };
-		6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift */; };
-		6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift */; };
+		6F2AB1B42487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
+		6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
+		6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
+		6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
+		6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F340F45220DA7E900778CA3 /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F340F44220DA7E900778CA3 /* SRGUserData.framework */; };
 		6F340F46220DA7FC00778CA3 /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F340F44220DA7E900778CA3 /* SRGUserData.framework */; };
 		6F340F47220DA80B00778CA3 /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F340F44220DA7E900778CA3 /* SRGUserData.framework */; };
@@ -1957,7 +1957,7 @@
 		6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchShowListCollectionViewCell.m; sourceTree = "<group>"; };
 		6F2961FB2006186000CAB0E4 /* placeholder_media_list-180.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "placeholder_media_list-180.pdf"; sourceTree = "<group>"; };
 		6F2AB1A82487C16A009D9FBC /* Aiolos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Aiolos.framework; path = Carthage/Build/iOS/Aiolos.framework; sourceTree = "<group>"; };
-		6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaPlayerViewController+Aiolos.swift"; sourceTree = "<group>"; };
+		6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaPlayerViewController+SongPanel.swift"; sourceTree = "<group>"; };
 		6F340F44220DA7E900778CA3 /* SRGUserData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGUserData.framework; path = Carthage/Build/iOS/Static/SRGUserData.framework; sourceTree = "<group>"; };
 		6F340F4A220DA86B00778CA3 /* SRGUserData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGUserData.bundle; path = Carthage/Build/iOS/Static/SRGUserData.framework/SRGUserData.bundle; sourceTree = "<group>"; };
 		6F340F50220DA99B00778CA3 /* History.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
@@ -3566,7 +3566,7 @@
 		E66BEC181DA7FCC000AD4450 /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift */,
+				6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */,
 				E66BEC191DA7FCED00AD4450 /* MediaPlayerViewController.h */,
 				E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */,
 				E66BEC1B1DA7FCED00AD4450 /* MediaPlayerViewController.storyboard */,
@@ -5884,7 +5884,7 @@
 				6F0A7EFF20AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				6F8144142008FA970075F52F /* GoogleCast.m in Sources */,
 				6FE2876D2481687A00358CFF /* SongTableViewCell.m in Sources */,
-				6F2AB1B42487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */,
+				6F2AB1B42487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				08C68F8F1D38DEA100BB8AAA /* main.m in Sources */,
 				6FD88F7722D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F475FB41EB37BC6003021EA /* BaseViewController.m in Sources */,
@@ -6130,7 +6130,7 @@
 				6FDF08D8218B126700B2AF2C /* Download.m in Sources */,
 				0832BF1122BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				081DAA211E099DAE00018623 /* DownloadFooterSectionView.m in Sources */,
-				6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */,
+				6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD31EB37BC6003021EA /* PageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6305,7 +6305,7 @@
 				6FDF08D9218B126700B2AF2C /* Download.m in Sources */,
 				0832BF1222BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				081DAA221E099DAF00018623 /* DownloadFooterSectionView.m in Sources */,
-				6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */,
+				6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD41EB37BC6003021EA /* PageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6480,7 +6480,7 @@
 				6FDF08DA218B126700B2AF2C /* Download.m in Sources */,
 				0832BF1322BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				081DAA231E099DAF00018623 /* DownloadFooterSectionView.m in Sources */,
-				6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */,
+				6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD51EB37BC6003021EA /* PageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6655,7 +6655,7 @@
 				6FDF08DB218B126700B2AF2C /* Download.m in Sources */,
 				0832BF1422BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				081DAA241E099DB000018623 /* DownloadFooterSectionView.m in Sources */,
-				6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+Aiolos.swift in Sources */,
+				6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD61EB37BC6003021EA /* PageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithChannel:(SRGChannel *)channel;
 
 @property (nonatomic, readonly) SRGChannel *channel;
+@property (nonatomic, nullable) NSDateInterval *dateInterval;
 
 @end
 

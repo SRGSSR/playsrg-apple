@@ -28,10 +28,6 @@
     [super awakeFromNib];
     
     self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
-    
-    self.timeLabel.textColor = UIColor.whiteColor;
-    self.titleLabel.textColor = UIColor.whiteColor;
-    self.artistLabel.textColor = UIColor.play_grayColor;
 }
 
 #pragma mark Getters and setters
@@ -48,6 +44,24 @@
     
     self.artistLabel.text = song.artist.name;
     self.artistLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+}
+
+- (void)setEnabled:(BOOL)enabled
+{
+    if (enabled) {
+        self.timeLabel.textColor = UIColor.whiteColor;
+        self.titleLabel.textColor = UIColor.whiteColor;
+        self.artistLabel.textColor = UIColor.play_grayColor;
+        self.userInteractionEnabled = YES;
+        self.selectionStyle = UITableViewCellSelectionStyleDefault;
+    }
+    else {
+        self.timeLabel.textColor = UIColor.play_grayColor;
+        self.titleLabel.textColor = UIColor.play_grayColor;
+        self.artistLabel.textColor = UIColor.play_grayColor;
+        self.userInteractionEnabled = YES;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
 }
 
 @end

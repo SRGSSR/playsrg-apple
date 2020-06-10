@@ -68,6 +68,11 @@ extension MediaPlayerViewController {
         guard let panel = self.panel else { return }
         panel.reloadSize()
     }
+    
+    @objc public func reloadSongs(dateInterval: DateInterval?) {
+        guard let songsViewController = self.songsViewController() else { return }
+        songsViewController.dateInterval = dateInterval
+    }
 }
 
 private extension MediaPlayerViewController {
@@ -136,6 +141,12 @@ private extension MediaPlayerViewController {
         
         return configuration
     }
+    
+    func songsViewController() -> SongsViewController? {
+        guard let panel = self.panel else { return nil }
+        guard let contentNavigationController = panel.contentViewController as? UINavigationController else { return nil }
+        return contentNavigationController.viewControllers.first as? SongsViewController
+    }
 }
 
 extension MediaPlayerViewController : PanelSizeDelegate {
@@ -167,8 +178,7 @@ extension MediaPlayerViewController : PanelResizeDelegate {
     }
     
     public func panel(_ panel: Panel, willResizeTo size: CGSize) {
-        guard let contentNavigationController = panel.contentViewController as? UINavigationController else { return }
-        guard let songsViewController = contentNavigationController.viewControllers.first as? SongsViewController else { return }
+        guard let songsViewController = self.songsViewController() else { return }
         guard let tableView = songsViewController.tableView else { return }
         
         UIView.animate(withDuration: 0.1) {

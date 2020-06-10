@@ -20,7 +20,6 @@
 @interface SongsViewController ()
 
 @property (nonatomic) SRGChannel *channel;
-
 @property (nonatomic) ForegroundTimer *updateTimer;
 
 @end
@@ -42,6 +41,12 @@
 - (NSString *)title
 {
     return NSLocalizedString(@"Songs", @"Song list title");
+}
+
+- (void)setDateInterval:(NSDateInterval *)dateInterval
+{
+    _dateInterval = dateInterval;
+    [self.tableView reloadData];
 }
 
 - (void)setUpdateTimer:(ForegroundTimer *)updateTimer
@@ -126,7 +131,9 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(SongTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.song = self.items[indexPath.row];
+    SRGSong *song = self.items[indexPath.row];
+    cell.song = song;
+    cell.enabled = [self.dateInterval containsDate:song.date];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,6 +144,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    SongTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (! cell.enabled) {
+        return;
+    }
     
     SRGSong *song = self.items[indexPath.row];
     

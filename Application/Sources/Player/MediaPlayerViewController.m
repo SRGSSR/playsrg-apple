@@ -490,6 +490,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         @strongify(self)
         [self updateGoogleCastButton];
         [self reloadPrograms];
+        [self reloadSongsWithDateInterval:[self dateInterval]];
         
         // Ensure a save is triggered when handoff is used, so that the current position is properly updated in the
         // transmitted information.
@@ -1006,24 +1007,20 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (NSArray<SRGProgram *> *)updatedPrograms
 {
-    // Find the date range corresponding to the DVR window, in the stream reference frame. We cannot display reliable
-    // program information while this information is not available.
-    CMTimeRange timeRange = self.letterboxController.timeRange;
-    NSDate *startDate = [self.letterboxController streamDateForTime:timeRange.start];
-    NSDate *endDate = [self.letterboxController streamDateForTime:CMTimeRangeGetEnd(timeRange)];
-    if (! startDate || ! endDate) {
+    NSDateInterval *dateInterval = [self dateInterval];
+    if (! dateInterval) {
         return @[];
     }
     
     NSMutableArray<SRGProgram *> *programs = [NSMutableArray array];
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, startDate) ascending:NO];
-    NSArray<SRGProgram *> *nextPrograms = [[self.programComposition play_programsFromDate:endDate toDate:nil withMediaURNs:nil] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    NSArray<SRGProgram *> *nextPrograms = [[self.programComposition play_programsFromDate:dateInterval.endDate toDate:nil withMediaURNs:nil] sortedArrayUsingDescriptors:@[sortDescriptor]];
     [programs addObjectsFromArray:nextPrograms];
     
     NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGSegment.new, URN)];
     NSArray<NSString *> *mediaURNs = [self.letterboxController.mediaComposition.mainChapter.segments valueForKeyPath:keyPath] ?: @[];
-    NSArray<SRGProgram *> *reachablePrograms = [[self.programComposition play_programsFromDate:startDate toDate:endDate withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    NSArray<SRGProgram *> *reachablePrograms = [[self.programComposition play_programsFromDate:dateInterval.startDate toDate:dateInterval.endDate withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
     [programs addObjectsFromArray:reachablePrograms];
     
     return programs.copy;
@@ -1034,6 +1031,19 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.programs = [self updatedPrograms];
     [self.programsTableView reloadData];
     [self updateSelectionForCurrentProgram];
+}
+
+- (NSDateInterval *)dateInterval
+{
+    CMTimeRange timeRange = self.letterboxController.timeRange;
+    NSDate *startDate = [self.letterboxController streamDateForTime:timeRange.start];
+    NSDate *endDate = [self.letterboxController streamDateForTime:CMTimeRangeGetEnd(timeRange)];
+    if (startDate && endDate) {
+        return [[NSDateInterval alloc] initWithStartDate:startDate endDate:endDate];
+    }
+    else {
+        return nil;
+    }
 }
 
 #pragma mark Channel updates

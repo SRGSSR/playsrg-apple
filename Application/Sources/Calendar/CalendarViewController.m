@@ -295,9 +295,10 @@
 
 - (UIColor *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance titleDefaultColorForDate:(NSDate *)date
 {
-    BOOL isAvailable = [[self minimumDateForCalendar:calendar] compare:date] != NSOrderedDescending
-        && [date compare:[self maximumDateForCalendar:calendar]] != NSOrderedDescending;
-    return isAvailable ? UIColor.play_lightGrayColor : [UIColor.play_lightGrayColor colorWithAlphaComponent:0.4f];
+    NSDate *startDate = [self minimumDateForCalendar:calendar];
+    NSDate *endDate = [self maximumDateForCalendar:calendar];
+    NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:startDate endDate:endDate];
+    return [dateInterval containsDate:date] ? UIColor.play_lightGrayColor : [UIColor.play_lightGrayColor colorWithAlphaComponent:0.4f];
 }
 
 #pragma mark ContainerContentInsets protocol

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SongTableViewCell : UITableViewCell
 
 @property (nonatomic, nullable) SRGSong *song;
+@property (nonatomic, getter=isEnabled) BOOL enabled;
 
 @end
 
