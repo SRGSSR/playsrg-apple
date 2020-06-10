@@ -9,6 +9,7 @@ import Aiolos
 
 private var panelKey: Void?
 private var coveredScrollViewKey: Void?
+private var tapGestureRecognizerKey: Void?
 
 extension MediaPlayerViewController {
     
@@ -98,6 +99,15 @@ private extension MediaPlayerViewController {
         }
     }
     
+    var tapGestureRecognizer: UITapGestureRecognizer? {
+        get {
+            return objc_getAssociatedObject(self, &tapGestureRecognizerKey) as? UITapGestureRecognizer
+        }
+        set {
+            objc_setAssociatedObject(self, &tapGestureRecognizerKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
     var compactHeight: CGFloat {
         get {
             if let window = UIApplication.shared.keyWindow {
@@ -114,8 +124,9 @@ private extension MediaPlayerViewController {
         let contentNavigationController = NavigationController(rootViewController: songsViewController, tintColor: .white,
                                                                backgroundColor: .play_cardGrayBackground, separator: false, statusBarStyle: .default)
         
-        let gestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(togglePanel(_:)))
-        contentNavigationController.navigationBar.addGestureRecognizer(gestureRecognizer)
+        let tapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(togglePanel(_:)))
+        contentNavigationController.navigationBar.addGestureRecognizer(tapGestureRecognizer)
+        self.tapGestureRecognizer = tapGestureRecognizer
         
         let panelController = Panel(configuration: self.configuration(for: self.traitCollection, mode: mode))
         panelController.sizeDelegate = self
@@ -212,7 +223,7 @@ extension MediaPlayerViewController : PanelSizeDelegate {
 extension MediaPlayerViewController : PanelResizeDelegate {
     
     public func panelDidStartResizing(_ panel: Panel) {
-        
+        self.tapGestureRecognizer?.isEnabled = false
     }
     
     public func panel(_ panel: Panel, willResizeTo size: CGSize) {
@@ -221,6 +232,10 @@ extension MediaPlayerViewController : PanelResizeDelegate {
     }
     
     public func panel(_ panel: Panel, willTransitionFrom oldMode: Panel.Configuration.Mode?, to newMode: Panel.Configuration.Mode, with coordinator: PanelTransitionCoordinator) {
-        
+        coordinator.animateAlongsideTransition({
+            
+        }) { _ in
+            self.tapGestureRecognizer?.isEnabled = true
+        }
     }
 }
