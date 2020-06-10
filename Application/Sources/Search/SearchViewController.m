@@ -692,6 +692,7 @@
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController
                                                                                                 tintColor:UIColor.whiteColor
                                                                                           backgroundColor:backgroundColor
+                                                                                                separator:YES
                                                                                            statusBarStyle:UIStatusBarStyleLightContent];
     navigationController.modalPresentationStyle = UIModalPresentationPopover;
     

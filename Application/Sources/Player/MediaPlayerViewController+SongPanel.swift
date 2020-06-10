@@ -108,7 +108,8 @@ private extension MediaPlayerViewController {
     
     func makePanelController(channel: SRGChannel, mode: Panel.Configuration.Mode) -> Panel {
         let songsViewController = SongsViewController(channel: channel)
-        let contentNavigationController = NavigationController(rootViewController: songsViewController, tintColor: .white, backgroundColor: .play_cardGrayBackground, statusBarStyle: .default)
+        let contentNavigationController = NavigationController(rootViewController: songsViewController, tintColor: .white,
+                                                               backgroundColor: .play_cardGrayBackground, separator: false, statusBarStyle: .default)
         
         let gestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(togglePanel(_:)))
         contentNavigationController.navigationBar.addGestureRecognizer(gestureRecognizer)
