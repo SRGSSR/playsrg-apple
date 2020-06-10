@@ -110,6 +110,9 @@ private extension MediaPlayerViewController {
         let songsViewController = SongsViewController(channel: channel)
         let contentNavigationController = NavigationController(rootViewController: songsViewController, tintColor: .white, backgroundColor: .play_cardGrayBackground, statusBarStyle: .default)
         
+        let gestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(togglePanel(_:)))
+        contentNavigationController.navigationBar.addGestureRecognizer(gestureRecognizer)
+        
         let panelController = Panel(configuration: self.configuration(for: self.traitCollection, mode: mode))
         panelController.sizeDelegate = self
         panelController.resizeDelegate = self
@@ -146,6 +149,21 @@ private extension MediaPlayerViewController {
         guard let panel = self.panel else { return nil }
         guard let contentNavigationController = panel.contentViewController as? UINavigationController else { return nil }
         return contentNavigationController.viewControllers.first as? SongsViewController
+    }
+    
+    @objc func togglePanel(_ sender: UITapGestureRecognizer) {
+        guard let panel = self.panel else { return }
+        
+        switch panel.configuration.mode {
+            case .compact:
+                panel.configuration.mode = .expanded
+            case .expanded:
+                panel.configuration.mode = .compact
+            case .fullHeight:
+                panel.configuration.mode = .expanded
+            default:
+                ()
+        }
     }
 }
 
