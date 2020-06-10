@@ -34,9 +34,12 @@ extension MediaPlayerViewController {
             coveredScrollView.scrollIndicatorInsets = insets;
         }
         
-        let panel = makePanelController(channel: channel, mode: (songsViewStyle == .expanded) ? .expanded : .compact)
+        let collapsed = (songsViewStyle == .collapsed)
+        let panel = makePanelController(channel: channel, mode: collapsed ? .compact : .expanded)
         panel.add(to: self)
         self.panel = panel
+        
+        self.updateSongTableVisibility(hidden: collapsed, animated: false)
     }
     
     @objc public func removeSongPanel() {
@@ -146,6 +149,22 @@ private extension MediaPlayerViewController {
         return configuration
     }
     
+    func updateSongTableVisibility(hidden: Bool, animated: Bool) {
+        guard let songsViewController = self.songsViewController() else { return }
+        guard let tableView = songsViewController.tableView else { return }
+        
+        let animations: () -> Void = {
+            tableView.alpha = hidden ? 0.0 : 1.0
+        }
+        
+        if animated {
+            UIView.animate(withDuration: 0.1, animations: animations)
+        }
+        else {
+            animations()
+        }
+    }
+    
     func songsViewController() -> SongsViewController? {
         guard let panel = self.panel else { return nil }
         guard let contentNavigationController = panel.contentViewController as? UINavigationController else { return nil }
@@ -197,17 +216,8 @@ extension MediaPlayerViewController : PanelResizeDelegate {
     }
     
     public func panel(_ panel: Panel, willResizeTo size: CGSize) {
-        guard let songsViewController = self.songsViewController() else { return }
-        guard let tableView = songsViewController.tableView else { return }
-        
-        UIView.animate(withDuration: 0.1) {
-            if size.height <= self.compactHeight {
-                tableView.alpha = 0.0
-            }
-            else {
-                tableView.alpha = 1.0
-            }
-        }
+        let hidden = (size.height <= self.compactHeight)
+        self.updateSongTableVisibility(hidden: hidden, animated: true)
     }
     
     public func panel(_ panel: Panel, willTransitionFrom oldMode: Panel.Configuration.Mode?, to newMode: Panel.Configuration.Mode, with coordinator: PanelTransitionCoordinator) {
