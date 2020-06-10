@@ -48,6 +48,8 @@
 
 - (void)setEnabled:(BOOL)enabled
 {
+    _enabled = enabled;
+    
     if (enabled) {
         self.timeLabel.textColor = UIColor.whiteColor;
         self.titleLabel.textColor = UIColor.whiteColor;
