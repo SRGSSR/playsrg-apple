@@ -66,6 +66,11 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
 
 - (BOOL)play_isMovingToParentViewController
 {
+    id<UIViewControllerTransitionCoordinator> transitionCoordinator = self.transitionCoordinator;
+    if (transitionCoordinator.cancelled) {
+        return NO;
+    }
+    
     if (self.movingToParentViewController || self.beingPresented) {
         return YES;
     }
