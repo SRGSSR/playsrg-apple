@@ -152,8 +152,12 @@
 - (NSIndexPath *)indexPathForSongAtDate:(NSDate *)date
 {
     for (SRGSong *song in self.items) {
-        // FIXME: Use correct duration / end date retrieved from IL
-        NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:song.date duration:2 * 60.];
+        NSTimeInterval durationInSeconds = song.duration / 1000.;
+        if (durationInSeconds <= 0.) {
+            continue;
+        }
+        
+        NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:song.date duration:durationInSeconds];
         if ([dateInterval containsDate:date]) {
             NSUInteger row = [self.items indexOfObject:song];
             return [NSIndexPath indexPathForRow:row inSection:0];
