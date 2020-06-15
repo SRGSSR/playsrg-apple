@@ -245,7 +245,6 @@ extension MediaPlayerViewController : PanelResizeDelegate {
     
     public func panel(_ panel: Panel, willTransitionFrom oldMode: Panel.Configuration.Mode?, to newMode: Panel.Configuration.Mode, with coordinator: PanelTransitionCoordinator) {
         if let tableView = self.songTableView() {
-            tableView.reloadData()
             tableView.flashScrollIndicators()
             
             if (oldMode == .compact) {
