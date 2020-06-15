@@ -6,6 +6,7 @@
 
 #import "SongTableViewCell.h"
 
+#import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 
@@ -64,6 +65,23 @@
         self.userInteractionEnabled = YES;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+}
+
+#pragma mark Accessibility
+
+- (BOOL)isAccessibilityElement
+{
+    return YES;
+}
+
+- (NSString *)accessibilityLabel
+{
+    return [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@, by %@", @"Song description. Firt placeholder is song title, second is artist name"), self.song.title, self.song.artist.name];
+}
+
+- (NSString *)accessibilityHint
+{
+    return self.enabled ? PlaySRGAccessibilityLocalizedString(@"Plays the song.", @"Song cell hint") : nil;
 }
 
 @end
