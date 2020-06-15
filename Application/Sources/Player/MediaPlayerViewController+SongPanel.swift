@@ -249,7 +249,7 @@ extension MediaPlayerViewController : PanelResizeDelegate {
             tableView.flashScrollIndicators()
             
             if (oldMode == .compact) {
-                self.scrollToNearestSong(animated: false)
+                self.scrollToSong(at: self.letterboxController.currentDate, animated: false)
             }
         }
     }

@@ -10,8 +10,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MediaPlayerViewController (Private)
 
-- (void)scrollToNearestSongAnimated:(BOOL)animated;
-
 @property (nonatomic, readonly, weak) IBOutlet UITableView *programsTableView;
 @property (nonatomic, readonly) IBOutlet SRGLetterboxController *letterboxController;
 @property (nonatomic, readonly, nullable) NSDateInterval *dateInterval;
