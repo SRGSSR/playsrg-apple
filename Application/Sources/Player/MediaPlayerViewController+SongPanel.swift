@@ -161,9 +161,13 @@ private extension MediaPlayerViewController {
         return configuration
     }
     
+    func songTableView() -> UITableView? {
+        guard let songsViewController = self.songsViewController() else { return nil }
+        return songsViewController.tableView
+    }
+    
     func updateSongTableVisibility(hidden: Bool, animated: Bool) {
-        guard let songsViewController = self.songsViewController() else { return }
-        guard let tableView = songsViewController.tableView else { return }
+        guard let tableView = self.songTableView() else { return }
         
         let animations: () -> Void = {
             tableView.alpha = hidden ? 0.0 : 1.0
@@ -237,7 +241,9 @@ extension MediaPlayerViewController : PanelResizeDelegate {
     }
     
     public func panel(_ panel: Panel, willTransitionFrom oldMode: Panel.Configuration.Mode?, to newMode: Panel.Configuration.Mode, with coordinator: PanelTransitionCoordinator) {
-        
+        if let tableView = self.songTableView() {
+            tableView.flashScrollIndicators()
+        }
     }
 }
 
