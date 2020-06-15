@@ -131,6 +131,7 @@ private extension MediaPlayerViewController {
         let panelController = Panel(configuration: self.configuration(for: self.traitCollection, mode: mode))
         panelController.sizeDelegate = self
         panelController.resizeDelegate = self
+        panelController.accessibilityDelegate = self
         panelController.contentViewController = contentNavigationController
         
         return panelController
@@ -237,5 +238,24 @@ extension MediaPlayerViewController : PanelResizeDelegate {
         }) { _ in
             self.tapGestureRecognizer?.isEnabled = true
         }
+    }
+}
+
+extension MediaPlayerViewController : PanelAccessibilityDelegate {
+    
+    public func panel(_ panel: Panel, accessibilityLabelForResizeHandle resizeHandle: ResizeHandle) -> String {
+        return PlaySRGAccessibilityLocalizedString("Song panel", "Title of the songs panel");
+    }
+    
+    public func panel(_ panel: Panel, didActivateResizeHandle resizeHandle: ResizeHandle) -> Bool {
+        switch panel.configuration.mode {
+            case .compact:
+                panel.configuration.mode = .expanded
+            case .expanded, .fullHeight:
+                panel.configuration.mode = .compact
+            default:
+                ()
+        }
+        return true
     }
 }
