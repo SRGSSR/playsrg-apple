@@ -342,6 +342,16 @@
 		08A3ED041FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */; };
 		08A3ED051FA2619200A517EF /* SRGDataProvider+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */; };
 		08A3ED061FA2619300A517EF /* SRGDataProvider+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */; };
+		08AA47722497BD2800CAB3E8 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA47712497BD2800CAB3E8 /* Lottie.framework */; };
+		08AA47752497E6A900CAB3E8 /* waveform.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47742497E6A900CAB3E8 /* waveform.json */; };
+		08AA47762497E6A900CAB3E8 /* waveform.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47742497E6A900CAB3E8 /* waveform.json */; };
+		08AA47772497E6A900CAB3E8 /* waveform.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47742497E6A900CAB3E8 /* waveform.json */; };
+		08AA47782497E6A900CAB3E8 /* waveform.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47742497E6A900CAB3E8 /* waveform.json */; };
+		08AA47792497E6A900CAB3E8 /* waveform.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47742497E6A900CAB3E8 /* waveform.json */; };
+		08AA477C2497FB9600CAB3E8 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA47712497BD2800CAB3E8 /* Lottie.framework */; };
+		08AA477D2497FBAF00CAB3E8 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA47712497BD2800CAB3E8 /* Lottie.framework */; };
+		08AA477E2497FBB800CAB3E8 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA47712497BD2800CAB3E8 /* Lottie.framework */; };
+		08AA477F2497FBB900CAB3E8 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA47712497BD2800CAB3E8 /* Lottie.framework */; };
 		08AA551D1D49EBF600C5026E /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
 		08AA55A51D49EF8E00C5026E /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
 		08AA55A61D49EF8E00C5026E /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
@@ -1792,6 +1802,8 @@
 		089EA010201148180070E11A /* NSTimer+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+PlaySRG.m"; sourceTree = "<group>"; };
 		08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGDataProvider+PlaySRG.m"; sourceTree = "<group>"; };
 		08A3ED011FA2612B00A517EF /* SRGDataProvider+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGDataProvider+PlaySRG.h"; sourceTree = "<group>"; };
+		08AA47712497BD2800CAB3E8 /* Lottie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = Carthage/Build/iOS/Lottie.framework; sourceTree = "<group>"; };
+		08AA47742497E6A900CAB3E8 /* waveform.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waveform.json; sourceTree = "<group>"; };
 		08AA551B1D49EBF600C5026E /* ApplicationConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationConfiguration.h; sourceTree = "<group>"; };
 		08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationConfiguration.m; sourceTree = "<group>"; };
 		08AA55B91D49EFBD00C5026E /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
@@ -2285,6 +2297,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08AA477C2497FB9600CAB3E8 /* Lottie.framework in Frameworks */,
 				6FE01B062360358D008EBB27 /* AppCenter.framework in Frameworks */,
 				6FE01B072360358D008EBB27 /* AppCenterCrashes.framework in Frameworks */,
 				6FE01B082360358D008EBB27 /* AppCenterDistribute.framework in Frameworks */,
@@ -2325,6 +2338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08AA47722497BD2800CAB3E8 /* Lottie.framework in Frameworks */,
 				6FE01B09236035AB008EBB27 /* AppCenter.framework in Frameworks */,
 				6FE01B0A236035AB008EBB27 /* AppCenterCrashes.framework in Frameworks */,
 				6FE01B0B236035AB008EBB27 /* AppCenterDistribute.framework in Frameworks */,
@@ -2365,6 +2379,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08AA477D2497FBAF00CAB3E8 /* Lottie.framework in Frameworks */,
 				6FE01B0C23603DB7008EBB27 /* AppCenter.framework in Frameworks */,
 				6FE01B0D23603DB7008EBB27 /* AppCenterCrashes.framework in Frameworks */,
 				6FE01B0E23603DB7008EBB27 /* AppCenterDistribute.framework in Frameworks */,
@@ -2416,6 +2431,7 @@
 				6F340F48220DA81900778CA3 /* SRGUserData.framework in Frameworks */,
 				6F1A95F4216DFC5800DB15AA /* SRGIdentity.framework in Frameworks */,
 				6FBF24412148235800E576A2 /* SRGDiagnostics.framework in Frameworks */,
+				08AA477E2497FBB800CAB3E8 /* Lottie.framework in Frameworks */,
 				6FF3B6912137DCB300F8A5E2 /* SRGContentProtection.framework in Frameworks */,
 				08B6F7E9210CF87C0097EF8B /* CoreData.framework in Frameworks */,
 				6F8CAE932122C607005046BA /* CoconutKit.framework in Frameworks */,
@@ -2456,6 +2472,7 @@
 				6F340F49220DA83300778CA3 /* SRGUserData.framework in Frameworks */,
 				6F1A95F5216DFC6600DB15AA /* SRGIdentity.framework in Frameworks */,
 				6FBF24422148236400E576A2 /* SRGDiagnostics.framework in Frameworks */,
+				08AA477F2497FBB900CAB3E8 /* Lottie.framework in Frameworks */,
 				6FF3B6922137DCC000F8A5E2 /* SRGContentProtection.framework in Frameworks */,
 				08B6F7EA210CF8840097EF8B /* CoreData.framework in Frameworks */,
 				6F8CAE942122C60F005046BA /* CoconutKit.framework in Frameworks */,
@@ -2783,6 +2800,14 @@
 			path = "Play RTS";
 			sourceTree = "<group>";
 		};
+		08AA47732497E6A900CAB3E8 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				08AA47742497E6A900CAB3E8 /* waveform.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		08AA551A1D49EBF600C5026E /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -3096,10 +3121,11 @@
 		08C691121D3907E500BB8AAA /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				08DADF8B20D92D6400291AD1 /* placeholder_notification-180.pdf */,
+				08C691271D39089700BB8AAA /* CommonImages.xcassets */,
+				08AA47732497E6A900CAB3E8 /* Lottie */,
 				6F2961FB2006186000CAB0E4 /* placeholder_media_list-180.pdf */,
 				6FD2CBC21DD19B0200B44958 /* placeholder_media-180.pdf */,
-				08C691271D39089700BB8AAA /* CommonImages.xcassets */,
+				08DADF8B20D92D6400291AD1 /* placeholder_notification-180.pdf */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -3510,6 +3536,7 @@
 		E65311E31D3E6FD100B4B8BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08AA47712497BD2800CAB3E8 /* Lottie.framework */,
 				6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */,
 				6F2AB1A82487C16A009D9FBC /* Aiolos.framework */,
 				6FE01B032360358C008EBB27 /* AppCenter.framework */,
@@ -4300,6 +4327,7 @@
 				6F0C99922121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				086BDE161EA63D3800965F45 /* PlayMiniPlayerView.xib in Resources */,
 				6F4EA13D1EE034E200BEC4DA /* Accessibility.strings in Resources */,
+				08AA47752497E6A900CAB3E8 /* waveform.json in Resources */,
 				08602BFC2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				08C6905A1D38E0BE00BB8AAA /* LaunchScreen.xib in Resources */,
 				0887824F23AD61D500629312 /* HomeLiveMediaCollectionViewCell.xib in Resources */,
@@ -4386,6 +4414,7 @@
 				6F5F4FCA1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				6F340F4C220DA87500778CA3 /* SRGUserData.bundle in Resources */,
 				6F0C99A22121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
+				08AA47762497E6A900CAB3E8 /* waveform.json in Resources */,
 				0832BF1622BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
 				6F1A95EC216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
 				086BDE181EA63D5A00965F45 /* PlayMiniPlayerView.xib in Resources */,
@@ -4472,6 +4501,7 @@
 				08DADF8E20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				6FE01B1823603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6FF7BBB422A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
+				08AA47772497E6A900CAB3E8 /* waveform.json in Resources */,
 				E66BEC231DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F0C99B22121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				08C68FA51D38DF8300BB8AAA /* Localizable.strings in Resources */,
@@ -4558,6 +4588,7 @@
 				08DADF8F20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				08754F44201BAFF500458F3A /* InfoPlist.strings in Resources */,
 				086BDE1C1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
+				08AA47782497E6A900CAB3E8 /* waveform.json in Resources */,
 				086321122258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				0837CEE51D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				6F2961FF2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
@@ -4644,6 +4675,7 @@
 				086BDE1E1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
 				6F167F5B248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib in Resources */,
 				0832BF1922BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
+				08AA47792497E6A900CAB3E8 /* waveform.json in Resources */,
 				0837CEEE1D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				6F0C99A52121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				0875852123A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
@@ -5601,6 +5633,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/TCSDK.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Aiolos.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AirshipCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
 			);
 			name = "Copy Frameworks (Carthage)";
 			outputPaths = (
@@ -5621,6 +5654,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/TCSDK.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Aiolos.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AirshipCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
 			);
 			name = "Copy Frameworks (Carthage)";
 			outputPaths = (
@@ -5641,6 +5675,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/TCSDK.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Aiolos.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AirshipCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
 			);
 			name = "Copy Frameworks (Carthage)";
 			outputPaths = (
@@ -5661,6 +5696,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/TCSDK.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Aiolos.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AirshipCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
 			);
 			name = "Copy Frameworks (Carthage)";
 			outputPaths = (
@@ -5681,6 +5717,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/TCSDK.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Aiolos.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AirshipCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Lottie.framework",
 			);
 			name = "Copy Frameworks (Carthage)";
 			outputPaths = (

@@ -12,6 +12,8 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
+#import <Lottie/Lottie-Swift.h>
+#import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface ProgramTableViewCell ()
@@ -22,8 +24,9 @@
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UIView *disabledOverlayView;
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
-@property (nonatomic, weak) IBOutlet UIImageView *waveformImageView;
+@property (nonatomic, weak) IBOutlet UIView *waveformView;
 
+@property (nonatomic, strong) CompatibleAnimationView *waveformCompatibleAnimationView;
 @end
 
 @implementation ProgramTableViewCell
@@ -44,8 +47,18 @@
     self.disabledOverlayView.hidden = YES;
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
-    [self.waveformImageView play_setWaveformAnimation48WithTintColor:UIColor.whiteColor];
-    self.waveformImageView.hidden = YES;
+    self.waveformCompatibleAnimationView = [[CompatibleAnimationView alloc] initWithCompatibleAnimation:[[CompatibleAnimation alloc] initWithName:@"waveform" bundle:NSBundle.mainBundle]];
+    self.waveformCompatibleAnimationView.contentMode = UIViewContentModeScaleAspectFit;
+    self.waveformCompatibleAnimationView.tintColor = UIColor.whiteColor;
+    [self.waveformView addSubview:self.waveformCompatibleAnimationView];
+    
+    [self.waveformCompatibleAnimationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.waveformView);
+    }];
+    
+    self.waveformCompatibleAnimationView.loopAnimationCount = -1;
+    
+    self.waveformView.hidden = YES;
 }
 
 - (void)prepareForReuse
@@ -64,8 +77,9 @@
 {
     [super setSelected:selected animated:animated];
     
-    self.waveformImageView.hidden = ! selected;
-    [self updateWaveformAnimation];
+    self.waveformView.hidden = ! selected;
+
+    [self updateWaveformAnimation];    
 }
 
 #pragma mark Accessibility
@@ -140,10 +154,10 @@
 - (void)updateWaveformAnimation
 {
     if (self.playing) {
-        [self.waveformImageView startAnimating];
+        [self.waveformCompatibleAnimationView play];
     }
     else {
-        [self.waveformImageView stopAnimating];
+        [self.waveformCompatibleAnimationView pause];
     }
 }
 

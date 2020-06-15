@@ -444,6 +444,8 @@ name: ios-library, nameSpecified: , owner: urbanairship, version: 13.3.2
 
 name: libextobjc, nameSpecified: , owner: SRGSSR, version: 0.6_srg2
 
+name: lottie-ios, nameSpecified: , owner: airbnb, version: 3.1.8
+
 name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: 1.0_srg4
 
 name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.1

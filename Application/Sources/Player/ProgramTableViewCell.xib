@@ -93,13 +93,14 @@
                                         <rect key="frame" x="274.5" y="0.0" width="97.5" height="55"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="waveform-48-0" translatesAutoresizingMaskIntoConstraints="NO" id="15d-xV-dLl">
+                                    <view contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Kaa-ae-Z8d" userLabel="Waveform View">
                                         <rect key="frame" x="380" y="0.0" width="34" height="55"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="34" id="cG8-bA-YJ5"/>
+                                            <constraint firstAttribute="width" constant="34" id="XtU-QV-xJq"/>
                                         </constraints>
-                                    </imageView>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -127,12 +128,9 @@
                 <outlet property="thumbnailImageView" destination="00G-6b-2xe" id="DN0-SM-tuB"/>
                 <outlet property="thumbnailWrapperView" destination="lRC-kF-cFw" id="A9L-vK-yzF"/>
                 <outlet property="titleLabel" destination="33w-1y-RkN" id="j5s-tI-9aE"/>
-                <outlet property="waveformImageView" destination="15d-xV-dLl" id="USw-Er-X2l"/>
+                <outlet property="waveformView" destination="Kaa-ae-Z8d" id="7At-I9-fEj"/>
             </connections>
             <point key="canvasLocation" x="143.47826086956522" y="133.59375"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="waveform-48-0" width="48" height="48"/>
-    </resources>
 </document>

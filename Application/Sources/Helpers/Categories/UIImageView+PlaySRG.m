@@ -92,13 +92,6 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
     [self play_setAnimationImagesNamed:@"downloading-48" withTintColor:tintColor];
 }
 
-#pragma mark Waveform animation
-
-- (void)play_setWaveformAnimation48WithTintColor:(UIColor *)tintColor
-{
-    [self play_setAnimationImagesNamed:@"waveform-48" withTintColor:tintColor];
-}
-
 #pragma mark Animation lifecycle
 
 - (void)play_setAnimationImagesNamed:(NSString *)name withTintColor:(UIColor *)tintColor
