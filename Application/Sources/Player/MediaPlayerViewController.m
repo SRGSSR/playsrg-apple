@@ -615,7 +615,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             }
         }
         [self scrollToNearestProgramAnimated:NO];
+        
         [self reloadSongPanelSize];
+        [self scrollToNearestSongAnimated:NO];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
         if (UIDeviceOrientationIsLandscape(deviceOrientation)) {
