@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, nullable) SRGSong *song;
 @property (nonatomic, getter=isEnabled) BOOL enabled;
+@property (nonatomic, getter=isPlaying) BOOL playing;
 
 @end
 

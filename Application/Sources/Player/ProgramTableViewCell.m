@@ -62,13 +62,7 @@
     [super setSelected:selected animated:animated];
     
     self.waveformImageView.hidden = ! selected;
-    
-    if (self.playing) {
-        [self.waveformImageView startAnimating];
-    }
-    else {
-        [self.waveformImageView stopAnimating];
-    }
+    [self updateWaveformAnimation];
 }
 
 #pragma mark Accessibility
@@ -129,6 +123,24 @@
     }
     else {
         self.progressView.hidden = YES;
+    }
+}
+
+- (void)setPlaying:(BOOL)playing
+{
+    _playing = playing;
+    [self updateWaveformAnimation];
+}
+
+#pragma mark UI
+
+- (void)updateWaveformAnimation
+{
+    if (self.playing) {
+        [self.waveformImageView startAnimating];
+    }
+    else {
+        [self.waveformImageView stopAnimating];
     }
 }
 

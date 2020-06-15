@@ -21,6 +21,7 @@
 
 @property (nonatomic) SRGChannel *channel;
 @property (nonatomic) ForegroundTimer *updateTimer;
+@property (nonatomic, weak) SRGLetterboxController *letterboxController;
 
 @end
 
@@ -28,10 +29,11 @@
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithChannel:(SRGChannel *)channel
+- (instancetype)initWithChannel:(SRGChannel *)channel letterboxController:(SRGLetterboxController *)letterboxController
 {
     if (self = [super init]) {
         self.channel = channel;
+        self.letterboxController = letterboxController;
     }
     return self;
 }
@@ -47,6 +49,7 @@
 {
     _dateInterval = dateInterval;
     [self.tableView reloadData];
+    [self updateSelectionForCurrentSong];
 }
 
 - (void)setUpdateTimer:(ForegroundTimer *)updateTimer
@@ -108,6 +111,13 @@
     [requestQueue addRequest:request resume:YES];
 }
 
+- (void)refreshDidFinishWithError:(NSError *)error
+{
+    [super refreshDidFinishWithError:error];
+    
+    [self updateSelectionForCurrentSong];
+}
+
 #pragma mark UI
 
 - (void)scrollToSongAtDate:(NSDate *)date animated:(BOOL)animated
@@ -139,6 +149,19 @@
     }
 }
 
+- (NSIndexPath *)indexPathForSongAtDate:(NSDate *)date
+{
+    for (SRGSong *song in self.items) {
+        // FIXME: Use correct duration / end date retrieved from IL
+        NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:song.date duration:2 * 60.];
+        if ([dateInterval containsDate:date]) {
+            NSUInteger row = [self.items indexOfObject:song];
+            return [NSIndexPath indexPathForRow:row inSection:0];
+        }
+    }
+    return nil;
+}
+
 - (NSIndexPath *)nearestSongIndexPathForDate:(NSDate *)date
 {
     if (self.items.count == 0) {
@@ -166,6 +189,29 @@
     return [NSIndexPath indexPathForRow:row inSection:0];
 }
 
+- (void)updateSelectionForSongAtDate:(NSDate *)date
+{
+    if (! date) {
+        return;
+    }
+    
+    NSIndexPath *indexPath = [self indexPathForSongAtDate:date];
+    if (indexPath) {
+        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+    else {
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        if (indexPath){
+            [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        }
+    }
+}
+
+- (void)updateSelectionForCurrentSong
+{
+    [self updateSelectionForSongAtDate:self.letterboxController.currentDate];
+}
+
 #pragma mark ContentInsets protocol
 
 - (UIEdgeInsets)play_paddingContentInsets
@@ -191,6 +237,7 @@
 {
     SRGSong *song = self.items[indexPath.row];
     cell.song = song;
+    cell.playing = (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
     cell.enabled = [self.dateInterval containsDate:song.date];
 }
 
@@ -211,11 +258,8 @@
     }
     
     SRGSong *song = self.items[indexPath.row];
-    
-    // TODO: Should be associated with the main screen player directly
-    SRGLetterboxController *controller = SRGLetterboxService.sharedService.controller;
-    [controller seekToPosition:[SRGPosition positionAtDate:song.date] withCompletionHandler:^(BOOL finished) {
-        [controller play];
+    [self.letterboxController seekToPosition:[SRGPosition positionAtDate:song.date] withCompletionHandler:^(BOOL finished) {
+        [self.letterboxController play];
     }];
 }
 

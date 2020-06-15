@@ -9,6 +9,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
+#import "UIImageView+PlaySRG.h"
 
 #import <SRGAppearance/SRGAppearance.h>
 
@@ -19,6 +20,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *artistLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *waveformImageView;
 
 @property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray<NSLayoutConstraint *> *marginConstraints;
 
@@ -47,6 +49,9 @@ static const CGFloat SongTableViewMargin = 42.f;
 {
     // Add variable contribution depending on the number of lines required to properly display a song title
     // (maximum of 2 lines)
+    // Remark: We do not take the waveform into account. We namely do not want to change the height of the
+    //         cell whether or not the waveform is displayed. We therefore calculate the layout in the nominal
+    //         case, i.e. without waveform.
     UIFont *font = [self titleLabelFont];
     CGFloat textWidth = fmaxf(width - 2 * SongTableViewMargin, 0.f);
     CGRect boundingRect = [song.title boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX)
@@ -69,10 +74,22 @@ static const CGFloat SongTableViewMargin = 42.f;
     [super awakeFromNib];
     
     self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [self.marginConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
         constraint.constant = SongTableViewMargin;
     }];
+    
+    [self.waveformImageView play_setWaveformAnimation48WithTintColor:UIColor.whiteColor];
+    self.waveformImageView.hidden = YES;
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+    
+    self.waveformImageView.hidden = ! selected;
+    [self updateWaveformAnimation];
 }
 
 #pragma mark Getters and setters
@@ -100,15 +117,19 @@ static const CGFloat SongTableViewMargin = 42.f;
         self.titleLabel.textColor = UIColor.whiteColor;
         self.artistLabel.textColor = UIColor.play_grayColor;
         self.userInteractionEnabled = YES;
-        self.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
     else {
         self.timeLabel.textColor = UIColor.play_grayColor;
         self.titleLabel.textColor = UIColor.play_grayColor;
         self.artistLabel.textColor = UIColor.play_grayColor;
         self.userInteractionEnabled = YES;
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+}
+
+- (void)setPlaying:(BOOL)playing
+{
+    _playing = playing;
+    [self updateWaveformAnimation];
 }
 
 #pragma mark Accessibility
@@ -126,6 +147,18 @@ static const CGFloat SongTableViewMargin = 42.f;
 - (NSString *)accessibilityHint
 {
     return self.enabled ? PlaySRGAccessibilityLocalizedString(@"Plays the song.", @"Song cell hint") : nil;
+}
+
+#pragma mark UI
+
+- (void)updateWaveformAnimation
+{
+    if (self.playing) {
+        [self.waveformImageView startAnimating];
+    }
+    else {
+        [self.waveformImageView stopAnimating];
+    }
 }
 
 @end

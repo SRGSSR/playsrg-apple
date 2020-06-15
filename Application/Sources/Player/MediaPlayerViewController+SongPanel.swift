@@ -8,14 +8,13 @@ import Foundation
 import Aiolos
 
 private var panelKey: Void?
-private var coveredScrollViewKey: Void?
 private var tapGestureRecognizerKey: Void?
 
 extension MediaPlayerViewController {
     
     static let contentHeight: CGFloat = 64.0
 
-    @objc public func addSongPanel(channel: SRGChannel, coveredScrollView: UIScrollView?) {
+    @objc public func addSongPanel(channel: SRGChannel) {
         let songsViewStyle = ApplicationConfiguration.shared.channel(forUid: channel.uid)?.songsViewStyle ?? .none
         if songsViewStyle == .none { return }
         
@@ -27,12 +26,10 @@ extension MediaPlayerViewController {
             }
         }
         
-        self.coveredScrollView = coveredScrollView
-        
-        if let coveredScrollView = coveredScrollView {
+        if let programsTableView = self.programsTableView {
             let insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: MediaPlayerViewController.contentHeight, right: 0.0)
-            coveredScrollView.contentInset = insets;
-            coveredScrollView.scrollIndicatorInsets = insets;
+            programsTableView.contentInset = insets;
+            programsTableView.scrollIndicatorInsets = insets;
         }
         
         let collapsed = (songsViewStyle == .collapsed)
@@ -48,9 +45,9 @@ extension MediaPlayerViewController {
         panel.removeFromParent(transition: .none, completion: nil)
         self.panel = nil
         
-        if let coveredScrollView = self.coveredScrollView {
-            coveredScrollView.contentInset = .zero
-            coveredScrollView.scrollIndicatorInsets = .zero
+        if let programsTableView = self.programsTableView {
+            programsTableView.contentInset = .zero
+            programsTableView.scrollIndicatorInsets = .zero
         }
     }
     
@@ -73,27 +70,28 @@ extension MediaPlayerViewController {
         panel.reloadSize()
     }
     
-    @objc public func reloadSongs(dateInterval: DateInterval?) {
+    @objc public func reloadSongs() {
         guard let songsViewController = self.songsViewController() else { return }
-        songsViewController.dateInterval = dateInterval
+        songsViewController.dateInterval = self.dateInterval
     }
     
     @objc public func scrollToSong(at date: Date?, animated: Bool) {
         guard let songsViewController = self.songsViewController() else { return }
         songsViewController.scrollToSong(at: date, animated: animated)
     }
+    
+    @objc public func updateSelectionForSong(at date: Date?) {
+        guard let songsViewController = self.songsViewController() else { return }
+        songsViewController.updateSelectionForSong(at: date)
+    }
+    
+    @objc public func updateSelectionForCurrentSong() {
+        guard let songsViewController = self.songsViewController() else { return }
+        songsViewController.updateSelectionForCurrentSong()
+    }
 }
 
 private extension MediaPlayerViewController {
-    
-    var coveredScrollView: UIScrollView? {
-        get {
-            return objc_getAssociatedObject(self, &coveredScrollViewKey) as? UIScrollView
-        }
-        set {
-            objc_setAssociatedObject(self, &panelKey, coveredScrollViewKey, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
     
     var panel: Panel? {
         get {
@@ -125,7 +123,7 @@ private extension MediaPlayerViewController {
     }
     
     func makePanelController(channel: SRGChannel, mode: Panel.Configuration.Mode) -> Panel {
-        let songsViewController = SongsViewController(channel: channel)
+        let songsViewController = SongsViewController(channel: channel, letterboxController: self.letterboxController)
         let contentNavigationController = NavigationController(rootViewController: songsViewController, tintColor: .white,
                                                                backgroundColor: .play_cardGrayBackground, separator: false, statusBarStyle: .default)
         

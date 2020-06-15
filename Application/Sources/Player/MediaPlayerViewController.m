@@ -490,7 +490,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         @strongify(self)
         [self updateGoogleCastButton];
         [self reloadPrograms];
-        [self reloadSongsWithDateInterval:[self dateInterval]];
+        [self reloadSongs];
         
         // Ensure a save is triggered when handoff is used, so that the current position is properly updated in the
         // transmitted information.
@@ -525,9 +525,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if ([self play_isMovingToParentViewController]) {
         [self registerForChannelUpdates];
         [self updateTimelineVisibilityForFullScreen:self.letterboxView.fullScreen animated:NO];
+        
         [self scrollToNearestProgramAnimated:NO];
-        [self scrollToNearestSongAnimated:NO];
         [self updateSelectionForCurrentProgram];
+        
+        [self scrollToNearestSongAnimated:NO];
+        [self updateSelectionForCurrentSong];
         
         [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
                                                           object:self
@@ -792,7 +795,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
         
         if (! self.letterboxView.fullScreen && mainChapterMedia.mediaType == SRGMediaTypeAudio) {
-            [self addSongPanelWithChannel:channel coveredScrollView:self.programsTableView];
+            [self addSongPanelWithChannel:channel];
         }
         
         self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
@@ -1008,7 +1011,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (NSArray<SRGProgram *> *)updatedPrograms
 {
-    NSDateInterval *dateInterval = [self dateInterval];
+    NSDateInterval *dateInterval = self.dateInterval;
     if (! dateInterval) {
         return @[];
     }
@@ -1631,9 +1634,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if (interactive) {
         SRGMedia *media = subdivision ? [self.letterboxController.mediaComposition mediaForSubdivision:subdivision] : self.letterboxController.fullLengthMedia;
         [self reloadDataOverriddenWithMedia:media mainChapterMedia:[self mainChapterMedia]];
+        
         [self scrollToProgramWithMediaURN:subdivision.URN date:date animated:YES];
         [self updateSelectionForProgramWithMediaURN:subdivision.URN];
+        
         [self scrollToSongAt:date animated:YES];
+        [self updateSelectionForSongAt:date];
     }
     [self reloadProgramBackgroundAnimated:YES];
     [self updateProgramProgress];
@@ -2242,11 +2248,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.closeButton.accessibilityHint = nil;
     }
     
-    if (playbackState == SRGMediaPlayerPlaybackStatePlaying) {
-        [self scrollToNearestSongAnimated:YES];
-    }
-    
     [self reloadProgramInformationAnimated:YES];
+    [self reloadSongs];
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
 }
 
