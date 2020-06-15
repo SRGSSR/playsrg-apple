@@ -156,6 +156,9 @@
     if (self.playing) {
         [self.waveformCompatibleAnimationView play];
     }
+    else if (self.liveOnly) {
+        [self.waveformCompatibleAnimationView stop];
+    }
     else {
         [self.waveformCompatibleAnimationView pause];
     }
