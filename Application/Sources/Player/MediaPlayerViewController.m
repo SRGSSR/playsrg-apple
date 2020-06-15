@@ -2253,6 +2253,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self reloadProgramInformationAnimated:YES];
     [self reloadSongs];
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
+    
+    SRGMediaPlayerPlaybackState previousPlaybackState = [notification.userInfo[SRGMediaPlayerPreviousPlaybackStateKey] integerValue];
+    if (previousPlaybackState == SRGMediaPlayerPlaybackStateSeeking) {
+        [self scrollToNearestProgramAnimated:YES];
+        [self scrollToNearestSongAnimated:YES];
+    }
 }
 
 - (void)playbackDidFail:(NSNotification *)notification
