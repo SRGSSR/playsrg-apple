@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SongTableViewCell : UITableViewCell
 
++ (CGFloat)heightForSong:(nullable SRGSong *)song withCellWidth:(CGFloat)width;
+
 @property (nonatomic, nullable) SRGSong *song;
 @property (nonatomic, getter=isEnabled) BOOL enabled;
 

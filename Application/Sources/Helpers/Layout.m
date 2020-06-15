@@ -83,7 +83,7 @@ CGFloat LayoutStandardSimpleTableCellHeight(void)
 CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, NSInteger row, NSInteger numberOfItems)
 {
     if (row < numberOfItems - 1) {
-        return contentHeight + LayoutStandardMargin;
+        return contentHeight + spacing;
     }
     else {
         return contentHeight;

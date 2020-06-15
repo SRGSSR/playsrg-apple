@@ -138,24 +138,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSDictionary<NSString *, NSNumber *> *s_heights;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_heights = @{ UIContentSizeCategoryExtraSmall : @54,
-                       UIContentSizeCategorySmall : @58,
-                       UIContentSizeCategoryMedium : @62,
-                       UIContentSizeCategoryLarge : @66,
-                       UIContentSizeCategoryExtraLarge : @80,
-                       UIContentSizeCategoryExtraExtraLarge : @90,
-                       UIContentSizeCategoryExtraExtraExtraLarge : @100,
-                       UIContentSizeCategoryAccessibilityMedium : @100,
-                       UIContentSizeCategoryAccessibilityLarge : @100,
-                       UIContentSizeCategoryAccessibilityExtraLarge : @100,
-                       UIContentSizeCategoryAccessibilityExtraExtraLarge : @100,
-                       UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @100 };
-    });
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    return LayoutTableTopAlignedCellHeight(s_heights[contentSizeCategory].floatValue, LayoutStandardMargin, indexPath.row, self.items.count);
+    SRGSong *song = self.items[indexPath.row];
+    CGFloat height = [SongTableViewCell heightForSong:song withCellWidth:CGRectGetWidth(tableView.frame)];
+    return LayoutTableTopAlignedCellHeight(height, 20.f, indexPath.row, self.items.count);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
