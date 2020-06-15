@@ -77,6 +77,11 @@ extension MediaPlayerViewController {
         guard let songsViewController = self.songsViewController() else { return }
         songsViewController.dateInterval = dateInterval
     }
+    
+    @objc public func scrollToSong(at date: Date?, animated: Bool) {
+        guard let songsViewController = self.songsViewController() else { return }
+        songsViewController.scrollToSong(at: date, animated: animated)
+    }
 }
 
 private extension MediaPlayerViewController {
@@ -242,7 +247,12 @@ extension MediaPlayerViewController : PanelResizeDelegate {
     
     public func panel(_ panel: Panel, willTransitionFrom oldMode: Panel.Configuration.Mode?, to newMode: Panel.Configuration.Mode, with coordinator: PanelTransitionCoordinator) {
         if let tableView = self.songTableView() {
-            tableView.flashScrollIndicators()
+            DispatchQueue.main.async {
+                if (oldMode == .compact) {
+                    self.scrollToNearestSong(animated: true)
+                }
+                tableView.flashScrollIndicators()
+            }
         }
     }
 }

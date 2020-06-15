@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) SRGChannel *channel;
 @property (nonatomic, nullable) NSDateInterval *dateInterval;
 
+- (void)scrollToSongAtDate:(nullable NSDate *)date animated:(BOOL)animated;
+
 @end
 
 NS_ASSUME_NONNULL_END

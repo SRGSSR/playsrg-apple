@@ -1972,6 +1972,7 @@
 		6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramTableViewCell.xib; sourceTree = "<group>"; };
 		6F3E09FF23D055DD009B00C1 /* SettingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingTableViewCell.h; sourceTree = "<group>"; };
 		6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewCell.m; sourceTree = "<group>"; };
+		6F3E6A9224978FC8004B26D6 /* MediaPlayerViewController+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MediaPlayerViewController+Private.h"; sourceTree = "<group>"; };
 		6F4091FF22DCF43D005F3850 /* Previewing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Previewing.m; sourceTree = "<group>"; };
 		6F40920522DCFE2A005F3850 /* MostSearchedShowCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MostSearchedShowCollectionViewCell.h; sourceTree = "<group>"; };
 		6F40920622DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MostSearchedShowCollectionViewCell.m; sourceTree = "<group>"; };
@@ -3566,10 +3567,11 @@
 		E66BEC181DA7FCC000AD4450 /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */,
 				E66BEC191DA7FCED00AD4450 /* MediaPlayerViewController.h */,
 				E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */,
 				E66BEC1B1DA7FCED00AD4450 /* MediaPlayerViewController.storyboard */,
+				6F3E6A9224978FC8004B26D6 /* MediaPlayerViewController+Private.h */,
+				6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */,
 				6FB3C1A51DBCE783008160B4 /* MediaPreviewViewController.h */,
 				6FB3C1A61DBCE783008160B4 /* MediaPreviewViewController.m */,
 				6FB3C1A71DBCE783008160B4 /* MediaPreviewViewController.storyboard */,

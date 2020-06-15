@@ -9,6 +9,7 @@
 
 #import "BaseViewController.h"
 #import "MediaPlayerViewController.h"
+#import "MediaPlayerViewController+Private.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 #import "Onboarding.h"

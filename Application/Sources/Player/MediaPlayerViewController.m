@@ -525,7 +525,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     if ([self play_isMovingToParentViewController]) {
         [self registerForChannelUpdates];
         [self updateTimelineVisibilityForFullScreen:self.letterboxView.fullScreen animated:NO];
-        [self scrollToCurrentProgramAnimated:NO];
+        [self scrollToNearestProgramAnimated:NO];
+        [self scrollToNearestSongAnimated:NO];
         [self updateSelectionForCurrentProgram];
         
         [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
@@ -610,7 +611,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                 [self.letterboxView setUserInterfaceHidden:YES animated:NO /* will be animated with the view transition */];
             }
         }
-        [self scrollToCurrentProgramAnimated:NO];
+        [self scrollToNearestProgramAnimated:NO];
         [self reloadSongPanelSize];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
@@ -1482,7 +1483,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
 }
 
-- (void)scrollToCurrentProgramAnimated:(BOOL)animated
+- (void)scrollToNearestProgramAnimated:(BOOL)animated
 {
     SRGSubdivision *subdivision = self.letterboxController.subdivision;
     [self scrollToProgramWithMediaURN:subdivision.URN date:self.letterboxController.currentDate animated:animated];
@@ -1525,6 +1526,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     else {
         cell.progress = nil;
     }
+}
+
+#pragma mark Song list
+
+- (void)scrollToNearestSongAnimated:(BOOL)animated
+{
+    [self scrollToSongAt:self.letterboxController.currentDate animated:animated];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -1625,6 +1633,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self reloadDataOverriddenWithMedia:media mainChapterMedia:[self mainChapterMedia]];
         [self scrollToProgramWithMediaURN:subdivision.URN date:date animated:YES];
         [self updateSelectionForProgramWithMediaURN:subdivision.URN];
+        [self scrollToSongAt:date animated:YES];
     }
     [self reloadProgramBackgroundAnimated:YES];
     [self updateProgramProgress];
@@ -2231,6 +2240,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     else {
         self.closeButton.accessibilityHint = nil;
+    }
+    
+    if (playbackState == SRGMediaPlayerPlaybackStatePlaying) {
+        [self scrollToNearestSongAnimated:YES];
     }
     
     [self reloadProgramInformationAnimated:YES];

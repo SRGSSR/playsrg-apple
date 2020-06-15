@@ -108,6 +108,64 @@
     [requestQueue addRequest:request resume:YES];
 }
 
+#pragma mark UI
+
+- (void)scrollToSongAtDate:(NSDate *)date animated:(BOOL)animated
+{
+    if (! date) {
+        return;
+    }
+    
+    if (self.tableView.dragging) {
+        return;
+    }
+    
+    void (^animations)(void) = ^{
+        NSIndexPath *indexPath = [self nearestSongIndexPathForDate:date];
+        if (indexPath) {
+            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
+        }
+    };
+    
+    if (animated) {
+        [self.view layoutIfNeeded];
+        [UIView animateWithDuration:0.2 animations:^{
+            animations();
+            [self.view layoutIfNeeded];
+        }];
+    }
+    else {
+        animations();
+    }
+}
+
+- (NSIndexPath *)nearestSongIndexPathForDate:(NSDate *)date
+{
+    if (self.items.count == 0) {
+        return nil;
+    }
+    
+    // Consider songs from the oldest to the newest one
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGSong.new, date) ascending:YES];
+    NSArray<SRGSong *> *songs = [self.items sortedArrayUsingDescriptors:@[sortDescriptor]];
+    
+    // Find the nearest item in the list
+    __block NSUInteger nearestIndex = 0;
+    [songs enumerateObjectsUsingBlock:^(SRGSong * _Nonnull song, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([date compare:song.date] == NSOrderedAscending) {
+            nearestIndex = (idx > 0) ? idx - 1 : 0;
+            *stop = YES;
+        }
+        else {
+            nearestIndex = idx;
+        }
+    }];
+    
+    SRGSong *nearestSong = songs[nearestIndex];
+    NSUInteger row = [self.items indexOfObject:nearestSong];
+    return [NSIndexPath indexPathForRow:row inSection:0];
+}
+
 #pragma mark ContentInsets protocol
 
 - (UIEdgeInsets)play_paddingContentInsets
