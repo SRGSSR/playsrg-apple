@@ -224,7 +224,11 @@ extension MediaPlayerViewController : PanelSizeDelegate {
 extension MediaPlayerViewController : PanelResizeDelegate {
     
     public func panelDidStartResizing(_ panel: Panel) {
+        // Trick to avoid the tap gesture triggered at the same time as the resizing one for small finger movements.
         self.tapGestureRecognizer?.isEnabled = false
+        DispatchQueue.main.async {
+            self.tapGestureRecognizer?.isEnabled = true
+        }
     }
     
     public func panel(_ panel: Panel, willResizeTo size: CGSize) {
@@ -233,11 +237,7 @@ extension MediaPlayerViewController : PanelResizeDelegate {
     }
     
     public func panel(_ panel: Panel, willTransitionFrom oldMode: Panel.Configuration.Mode?, to newMode: Panel.Configuration.Mode, with coordinator: PanelTransitionCoordinator) {
-        coordinator.animateAlongsideTransition({
-            
-        }) { _ in
-            self.tapGestureRecognizer?.isEnabled = true
-        }
+        
     }
 }
 
