@@ -41,7 +41,7 @@
     self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
-    self.disabledOverlayView.hidden = YES;;
+    self.disabledOverlayView.hidden = YES;
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
     [self.waveformImageView play_setWaveformAnimation48WithTintColor:UIColor.whiteColor];
