@@ -24,9 +24,9 @@
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UIView *disabledOverlayView;
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
-@property (nonatomic, weak) IBOutlet UIView *waveformView;
+@property (nonatomic, weak) IBOutlet UIView *playingAnimationContainerView;
 
-@property (nonatomic, strong) CompatibleAnimationView *waveformCompatibleAnimationView;
+@property (nonatomic, strong) CompatibleAnimationView *playingAnimationView;
 
 @end
 
@@ -48,18 +48,17 @@
     self.disabledOverlayView.hidden = YES;
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
-    self.waveformCompatibleAnimationView = [[CompatibleAnimationView alloc] initWithCompatibleAnimation:[[CompatibleAnimation alloc] initWithName:@"waveform_audio" bundle:NSBundle.mainBundle]];
-    self.waveformCompatibleAnimationView.contentMode = UIViewContentModeScaleAspectFit;
-    self.waveformCompatibleAnimationView.tintColor = UIColor.whiteColor;
-    [self.waveformView addSubview:self.waveformCompatibleAnimationView];
+    self.playingAnimationView = [[CompatibleAnimationView alloc] initWithFrame:self.playingAnimationContainerView.bounds];
+    self.playingAnimationView.contentMode = UIViewContentModeScaleAspectFit;
+    self.playingAnimationView.tintColor = UIColor.whiteColor;
+    self.playingAnimationView.loopAnimationCount = -1;
     
-    [self.waveformCompatibleAnimationView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.waveformView);
+    [self.playingAnimationContainerView addSubview:self.playingAnimationView];
+    [self.playingAnimationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.playingAnimationContainerView);
     }];
     
-    self.waveformCompatibleAnimationView.loopAnimationCount = -1;
-    
-    self.waveformView.hidden = YES;
+    self.playingAnimationContainerView.hidden = YES;
 }
 
 - (void)prepareForReuse
@@ -69,7 +68,7 @@
     self.progressView.hidden = YES;
     
     self.videoContent = NO;
-    self.waveformView.hidden = YES;
+    self.playingAnimationContainerView.hidden = YES;
     
     [self.thumbnailImageView play_resetImage];
     
@@ -81,7 +80,7 @@
 {
     [super setSelected:selected animated:animated];
     
-    self.waveformView.hidden = ! selected;
+    self.playingAnimationContainerView.hidden = ! selected;
 
     [self updateWaveformAnimation];    
 }
@@ -152,7 +151,7 @@
     _videoContent = videoContent;
     
     NSString *waveFormName = videoContent ? @"waveform_video" : @"waveform_audio";
-    self.waveformCompatibleAnimationView.compatibleAnimation = [[CompatibleAnimation alloc] initWithName:waveFormName bundle:NSBundle.mainBundle];
+    self.playingAnimationView.compatibleAnimation = [[CompatibleAnimation alloc] initWithName:waveFormName bundle:NSBundle.mainBundle];
 }
 
 - (void)setPlaying:(BOOL)playing
@@ -166,13 +165,13 @@
 - (void)updateWaveformAnimation
 {
     if (self.playing) {
-        [self.waveformCompatibleAnimationView play];
+        [self.playingAnimationView play];
     }
     else if (self.liveOnly) {
-        [self.waveformCompatibleAnimationView stop];
+        [self.playingAnimationView stop];
     }
     else {
-        [self.waveformCompatibleAnimationView pause];
+        [self.playingAnimationView pause];
     }
 }
 
