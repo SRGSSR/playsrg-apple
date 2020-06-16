@@ -26,7 +26,7 @@
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 @property (nonatomic, weak) IBOutlet UIView *playingAnimationContainerView;
 
-@property (nonatomic, strong) CompatibleAnimationView *playingAnimationView;
+@property (nonatomic, weak) CompatibleAnimationView *playingAnimationView;
 
 @property (nonatomic, getter=isPlaying) BOOL playing;
 @property (nonatomic, getter=isLiveOnly) BOOL liveOnly;
@@ -52,16 +52,6 @@
     self.disabledOverlayView.hidden = YES;
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
-    self.playingAnimationView = [[CompatibleAnimationView alloc] initWithFrame:self.playingAnimationContainerView.bounds];
-    self.playingAnimationView.contentMode = UIViewContentModeScaleAspectFit;
-    self.playingAnimationView.tintColor = UIColor.whiteColor;
-    self.playingAnimationView.loopAnimationCount = -1;
-    
-    [self.playingAnimationContainerView addSubview:self.playingAnimationView];
-    [self.playingAnimationView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.playingAnimationContainerView);
-    }];
-    
     self.playingAnimationContainerView.hidden = YES;
 }
 
@@ -71,12 +61,11 @@
     
     self.progressView.hidden = YES;
     
-    self.videoContent = NO;
-    self.playingAnimationContainerView.hidden = YES;
-    
     [self.thumbnailImageView play_resetImage];
     
     self.playing = NO;
+    self.liveOnly = NO;
+    self.videoContent = NO;
     [self setSelected:NO animated:NO];
 }
 
@@ -170,6 +159,9 @@
         [self.playingAnimationView stop];
         return;
     }
+    else {
+        [self addPlayingAnimationView];
+    }
     
     if (self.playing) {
         [self.playingAnimationView play];
@@ -180,6 +172,24 @@
     else {
         [self.playingAnimationView pause];
     }
+}
+
+- (void)addPlayingAnimationView
+{
+    if (self.playingAnimationView) {
+        return;
+    }
+    
+    CompatibleAnimationView *playingAnimationView = [[CompatibleAnimationView alloc] initWithFrame:self.playingAnimationContainerView.bounds];
+    playingAnimationView.contentMode = UIViewContentModeScaleAspectFit;
+    playingAnimationView.tintColor = UIColor.whiteColor;
+    playingAnimationView.loopAnimationCount = -1;
+    
+    [self.playingAnimationContainerView addSubview:playingAnimationView];
+    [playingAnimationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.playingAnimationContainerView);
+    }];
+    self.playingAnimationView = playingAnimationView;
 }
 
 @end

@@ -26,7 +26,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 @property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray<NSLayoutConstraint *> *marginConstraints;
 
-@property (nonatomic, strong) CompatibleAnimationView *playingAnimationView;
+@property (nonatomic, weak) CompatibleAnimationView *playingAnimationView;
 
 @property (nonatomic, getter=isPlaying) BOOL playing;
 @property (nonatomic, getter=isLiveOnly) BOOL liveOnly;
@@ -84,16 +84,6 @@ static const CGFloat SongTableViewMargin = 42.f;
     self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.playingAnimationView = [[CompatibleAnimationView alloc] initWithFrame:self.playingAnimationContainerView.bounds];
-    self.playingAnimationView.contentMode = UIViewContentModeScaleAspectFit;
-    self.playingAnimationView.tintColor = UIColor.whiteColor;
-    self.playingAnimationView.loopAnimationCount = -1;
-    
-    [self.playingAnimationContainerView addSubview:self.playingAnimationView];
-    [self.playingAnimationView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.playingAnimationContainerView);
-    }];
-    
     self.playingAnimationContainerView.hidden = YES;
     
     [self.marginConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -106,6 +96,8 @@ static const CGFloat SongTableViewMargin = 42.f;
     [super prepareForReuse];
     
     self.playing = NO;
+    self.liveOnly = NO;
+    self.videoContent = NO;
     [self setSelected:NO animated:NO];
 }
 
@@ -188,6 +180,9 @@ static const CGFloat SongTableViewMargin = 42.f;
         [self.playingAnimationView stop];
         return;
     }
+    else {
+        [self addPlayingAnimationView];
+    }
     
     if (self.playing) {
         [self.playingAnimationView play];
@@ -198,6 +193,24 @@ static const CGFloat SongTableViewMargin = 42.f;
     else {
         [self.playingAnimationView pause];
     }
+}
+
+- (void)addPlayingAnimationView
+{
+    if (self.playingAnimationView) {
+        return;
+    }
+    
+    CompatibleAnimationView *playingAnimationView = [[CompatibleAnimationView alloc] initWithFrame:self.playingAnimationContainerView.bounds];
+    playingAnimationView.contentMode = UIViewContentModeScaleAspectFit;
+    playingAnimationView.tintColor = UIColor.whiteColor;
+    playingAnimationView.loopAnimationCount = -1;
+    
+    [self.playingAnimationContainerView addSubview:playingAnimationView];
+    [playingAnimationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.playingAnimationContainerView);
+    }];
+    self.playingAnimationView = playingAnimationView;
 }
 
 @end
