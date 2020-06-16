@@ -27,6 +27,7 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
 @property (nonatomic, copy) NSString *resourceUid;
 @property (nonatomic) UIColor *color;
 @property (nonatomic) UIColor *titleColor;
+@property (nonatomic) UIColor *gradientTitleColor;
 @property (nonatomic) UIColor *gradientStartColor;
 @property (nonatomic) UIColor *gradientEndColor;
 @property (nonatomic, getter=hasDarkStatusBar) BOOL darkStatusBar;
@@ -70,6 +71,14 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
         }
         else {
             self.titleColor = UIColor.whiteColor;
+        }
+        
+        id gradientTitleColorValue = dictionary[@"gradientTitleColor"];
+        if ([gradientTitleColorValue isKindOfClass:NSString.class]) {
+            self.gradientTitleColor = [UIColor srg_colorFromHexadecimalString:gradientTitleColorValue] ?: self.titleColor;
+        }
+        else {
+            self.gradientTitleColor = self.titleColor;
         }
         
         id gradientStartColorValue = dictionary[@"gradientStartColor"];

@@ -59,6 +59,11 @@ typedef NS_ENUM(NSInteger, SongsViewStyle) {
 @property (nonatomic, readonly) UIColor *titleColor;
 
 /**
+ *  The color displayed for title text on a gradient view.
+ */
+@property (nonatomic, readonly) UIColor *gradientTitleColor;
+
+/**
  *  The channel start color for a gradient view.
  */
 @property (nonatomic, readonly) UIColor *gradientStartColor;

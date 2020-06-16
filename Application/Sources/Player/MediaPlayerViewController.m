@@ -971,7 +971,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     NSString *channelUid = [self channelUid];
     Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
     
-    UIColor *foregroundColor = channel.titleColor ?: UIColor.whiteColor;
+    UIColor *foregroundColor = channel.gradientTitleColor;
     self.currentProgramMoreEpisodesButton.tintColor = foregroundColor;
     self.currentProgramTitleLabel.textColor = foregroundColor;
     self.currentProgramSubtitleLabel.textColor = foregroundColor;
