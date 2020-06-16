@@ -84,6 +84,14 @@ static const CGFloat SongTableViewMargin = 42.f;
     self.waveformImageView.hidden = YES;
 }
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    self.playing = NO;
+    [self setSelected:NO animated:NO];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

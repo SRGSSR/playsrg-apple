@@ -55,6 +55,9 @@
     self.progressView.hidden = YES;
     
     [self.thumbnailImageView play_resetImage];
+    
+    self.playing = NO;
+    [self setSelected:NO animated:NO];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
