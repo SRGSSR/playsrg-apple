@@ -28,6 +28,10 @@
 
 @property (nonatomic, strong) CompatibleAnimationView *playingAnimationView;
 
+@property (nonatomic, getter=isPlaying) BOOL playing;
+@property (nonatomic, getter=isLiveOnly) BOOL liveOnly;
+@property (nonatomic, getter=isVideoContent) BOOL videoContent;
+
 @end
 
 @implementation ProgramTableViewCell
@@ -82,7 +86,7 @@
     
     self.playingAnimationContainerView.hidden = ! selected;
 
-    [self updateWaveformAnimation];    
+    [self updateplayingAnimation];    
 }
 
 #pragma mark Accessibility
@@ -146,24 +150,22 @@
     }
 }
 
-- (void)setVideoContent:(BOOL)videoContent
+- (void)updatePlayingAnimationStateWithPlaying:(BOOL)playing liveOnly:(BOOL)liveOnly videoContent:(BOOL)videoContent
 {
-    _videoContent = videoContent;
+    self.liveOnly = liveOnly;
+    self.videoContent = videoContent;
+    self.playing = playing;
     
-    NSString *waveFormName = videoContent ? @"waveform_video" : @"waveform_audio";
-    self.playingAnimationView.compatibleAnimation = [[CompatibleAnimation alloc] initWithName:waveFormName bundle:NSBundle.mainBundle];
-}
-
-- (void)setPlaying:(BOOL)playing
-{
-    _playing = playing;
-    [self updateWaveformAnimation];
+    [self updateplayingAnimation];
 }
 
 #pragma mark UI
 
-- (void)updateWaveformAnimation
+- (void)updateplayingAnimation
 {
+    NSString *waveFormName = self.videoContent ? @"waveform_video" : @"waveform_audio";
+    self.playingAnimationView.compatibleAnimation = [[CompatibleAnimation alloc] initWithName:waveFormName bundle:NSBundle.mainBundle];
+
     if (self.playing) {
         [self.playingAnimationView play];
     }

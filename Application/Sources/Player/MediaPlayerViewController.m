@@ -1802,9 +1802,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ProgramTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.program = self.programs[indexPath.row];
-    cell.videoContent = (self.letterboxController.mediaComposition.mainChapter.mediaType == SRGMediaTypeVideo);
-    cell.liveOnly = (self.letterboxController.resource.streamType == SRGStreamTypeLive);
-    cell.playing = (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
+    [cell updatePlayingAnimationStateWithPlaying:(self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying)
+                                        liveOnly:(self.letterboxController.resource.streamType == SRGStreamTypeLive)
+                                    videoContent:(self.letterboxController.mediaComposition.mainChapter.mediaType == SRGMediaTypeVideo)];
     [self updateProgramProgressForCell:cell];
 }
 
