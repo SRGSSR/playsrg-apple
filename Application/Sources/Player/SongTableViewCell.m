@@ -184,6 +184,11 @@ static const CGFloat SongTableViewMargin = 42.f;
     NSString *waveFormName = self.videoContent ? @"waveform_video" : @"waveform_audio";
     self.playingAnimationView.compatibleAnimation = [[CompatibleAnimation alloc] initWithName:waveFormName bundle:NSBundle.mainBundle];
 
+    if (self.playingAnimationContainerView.hidden) {
+        [self.playingAnimationView stop];
+        return;
+    }
+    
     if (self.playing) {
         [self.playingAnimationView play];
     }
