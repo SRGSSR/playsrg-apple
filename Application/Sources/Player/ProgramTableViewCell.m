@@ -86,7 +86,7 @@
     
     self.playingAnimationContainerView.hidden = ! selected;
 
-    [self updateplayingAnimation];    
+    [self updatePlayingAnimation];    
 }
 
 #pragma mark Accessibility
@@ -150,18 +150,18 @@
     }
 }
 
+#pragma mark UI
+
 - (void)updatePlayingAnimationStateWithPlaying:(BOOL)playing liveOnly:(BOOL)liveOnly videoContent:(BOOL)videoContent
 {
     self.liveOnly = liveOnly;
     self.videoContent = videoContent;
     self.playing = playing;
     
-    [self updateplayingAnimation];
+    [self updatePlayingAnimation];
 }
 
-#pragma mark UI
-
-- (void)updateplayingAnimation
+- (void)updatePlayingAnimation
 {
     NSString *waveFormName = self.videoContent ? @"waveform_video" : @"waveform_audio";
     self.playingAnimationView.compatibleAnimation = [[CompatibleAnimation alloc] initWithName:waveFormName bundle:NSBundle.mainBundle];

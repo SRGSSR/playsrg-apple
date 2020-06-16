@@ -11,6 +11,8 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
+#import <Lottie/Lottie-Swift.h>
+#import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 static const CGFloat SongTableViewMargin = 42.f;
@@ -20,9 +22,15 @@ static const CGFloat SongTableViewMargin = 42.f;
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *artistLabel;
-@property (nonatomic, weak) IBOutlet UIImageView *waveformImageView;
+@property (nonatomic, weak) IBOutlet UIView *playingAnimationContainerView;
 
 @property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray<NSLayoutConstraint *> *marginConstraints;
+
+@property (nonatomic, strong) CompatibleAnimationView *playingAnimationView;
+
+@property (nonatomic, getter=isPlaying) BOOL playing;
+@property (nonatomic, getter=isLiveOnly) BOOL liveOnly;
+@property (nonatomic, getter=isVideoContent) BOOL videoContent;
 
 @end
 
@@ -76,12 +84,21 @@ static const CGFloat SongTableViewMargin = 42.f;
     self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    self.playingAnimationView = [[CompatibleAnimationView alloc] initWithFrame:self.playingAnimationContainerView.bounds];
+    self.playingAnimationView.contentMode = UIViewContentModeScaleAspectFit;
+    self.playingAnimationView.tintColor = UIColor.whiteColor;
+    self.playingAnimationView.loopAnimationCount = -1;
+    
+    [self.playingAnimationContainerView addSubview:self.playingAnimationView];
+    [self.playingAnimationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.playingAnimationContainerView);
+    }];
+    
+    self.playingAnimationContainerView.hidden = YES;
+    
     [self.marginConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
         constraint.constant = SongTableViewMargin;
     }];
-    
-//    [self.waveformImageView play_setWaveformAnimation48WithTintColor:UIColor.whiteColor];
-    self.waveformImageView.hidden = YES;
 }
 
 - (void)prepareForReuse
@@ -96,8 +113,8 @@ static const CGFloat SongTableViewMargin = 42.f;
 {
     [super setSelected:selected animated:animated];
     
-    self.waveformImageView.hidden = ! selected;
-    [self updateWaveformAnimation];
+    self.playingAnimationContainerView.hidden = ! selected;
+    [self updatePlayingAnimation];
 }
 
 #pragma mark Getters and setters
@@ -134,12 +151,6 @@ static const CGFloat SongTableViewMargin = 42.f;
     }
 }
 
-- (void)setPlaying:(BOOL)playing
-{
-    _playing = playing;
-    [self updateWaveformAnimation];
-}
-
 #pragma mark Accessibility
 
 - (BOOL)isAccessibilityElement
@@ -159,13 +170,28 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 #pragma mark UI
 
-- (void)updateWaveformAnimation
+- (void)updatePlayingAnimationStateWithPlaying:(BOOL)playing liveOnly:(BOOL)liveOnly videoContent:(BOOL)videoContent
 {
+    self.liveOnly = liveOnly;
+    self.videoContent = videoContent;
+    self.playing = playing;
+    
+    [self updatePlayingAnimation];
+}
+
+- (void)updatePlayingAnimation
+{
+    NSString *waveFormName = self.videoContent ? @"waveform_video" : @"waveform_audio";
+    self.playingAnimationView.compatibleAnimation = [[CompatibleAnimation alloc] initWithName:waveFormName bundle:NSBundle.mainBundle];
+
     if (self.playing) {
-        [self.waveformImageView startAnimating];
+        [self.playingAnimationView play];
+    }
+    else if (self.liveOnly) {
+        [self.playingAnimationView stop];
     }
     else {
-        [self.waveformImageView stopAnimating];
+        [self.playingAnimationView pause];
     }
 }
 

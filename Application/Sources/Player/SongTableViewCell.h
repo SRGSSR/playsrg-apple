@@ -15,7 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, nullable) SRGSong *song;
 @property (nonatomic, getter=isEnabled) BOOL enabled;
-@property (nonatomic, getter=isPlaying) BOOL playing;
+
+@property (nonatomic, getter=isPlaying, readonly) BOOL playing;
+@property (nonatomic, getter=isLiveOnly, readonly) BOOL liveOnly;
+@property (nonatomic, getter=isVideoContent, readonly) BOOL videoContent;
+
+- (void)updatePlayingAnimationStateWithPlaying:(BOOL)playing liveOnly:(BOOL)liveOnly videoContent:(BOOL)videoContent;
 
 @end
 
