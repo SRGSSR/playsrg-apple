@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nullable) NSNumber *progress;
 @property (nonatomic, getter=isPlaying) BOOL playing;
 @property (nonatomic, getter=isLiveOnly) BOOL liveOnly;
+@property (nonatomic, getter=isVideoContent) BOOL videoContent;
 
 @end
 

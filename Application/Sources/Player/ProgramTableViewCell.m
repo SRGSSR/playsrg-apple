@@ -27,6 +27,7 @@
 @property (nonatomic, weak) IBOutlet UIView *waveformView;
 
 @property (nonatomic, strong) CompatibleAnimationView *waveformCompatibleAnimationView;
+
 @end
 
 @implementation ProgramTableViewCell
@@ -47,7 +48,7 @@
     self.disabledOverlayView.hidden = YES;
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
-    self.waveformCompatibleAnimationView = [[CompatibleAnimationView alloc] initWithCompatibleAnimation:[[CompatibleAnimation alloc] initWithName:@"waveform" bundle:NSBundle.mainBundle]];
+    self.waveformCompatibleAnimationView = [[CompatibleAnimationView alloc] initWithCompatibleAnimation:[[CompatibleAnimation alloc] initWithName:@"waveform_audio" bundle:NSBundle.mainBundle]];
     self.waveformCompatibleAnimationView.contentMode = UIViewContentModeScaleAspectFit;
     self.waveformCompatibleAnimationView.tintColor = UIColor.whiteColor;
     [self.waveformView addSubview:self.waveformCompatibleAnimationView];
@@ -66,6 +67,9 @@
     [super prepareForReuse];
     
     self.progressView.hidden = YES;
+    
+    self.videoContent = NO;
+    self.waveformView.hidden = YES;
     
     [self.thumbnailImageView play_resetImage];
     
@@ -141,6 +145,14 @@
     else {
         self.progressView.hidden = YES;
     }
+}
+
+- (void)setVideoContent:(BOOL)videoContent
+{
+    _videoContent = videoContent;
+    
+    NSString *waveFormName = videoContent ? @"waveform_video" : @"waveform_audio";
+    self.waveformCompatibleAnimationView.compatibleAnimation = [[CompatibleAnimation alloc] initWithName:waveFormName bundle:NSBundle.mainBundle];
 }
 
 - (void)setPlaying:(BOOL)playing

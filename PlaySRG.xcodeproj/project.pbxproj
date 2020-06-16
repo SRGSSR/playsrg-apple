@@ -343,15 +343,20 @@
 		08A3ED051FA2619200A517EF /* SRGDataProvider+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */; };
 		08A3ED061FA2619300A517EF /* SRGDataProvider+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */; };
 		08AA47722497BD2800CAB3E8 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA47712497BD2800CAB3E8 /* Lottie.framework */; };
-		08AA47752497E6A900CAB3E8 /* waveform.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47742497E6A900CAB3E8 /* waveform.json */; };
-		08AA47762497E6A900CAB3E8 /* waveform.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47742497E6A900CAB3E8 /* waveform.json */; };
-		08AA47772497E6A900CAB3E8 /* waveform.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47742497E6A900CAB3E8 /* waveform.json */; };
-		08AA47782497E6A900CAB3E8 /* waveform.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47742497E6A900CAB3E8 /* waveform.json */; };
-		08AA47792497E6A900CAB3E8 /* waveform.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47742497E6A900CAB3E8 /* waveform.json */; };
 		08AA477C2497FB9600CAB3E8 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA47712497BD2800CAB3E8 /* Lottie.framework */; };
 		08AA477D2497FBAF00CAB3E8 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA47712497BD2800CAB3E8 /* Lottie.framework */; };
 		08AA477E2497FBB800CAB3E8 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA47712497BD2800CAB3E8 /* Lottie.framework */; };
 		08AA477F2497FBB900CAB3E8 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA47712497BD2800CAB3E8 /* Lottie.framework */; };
+		08AA47822498DACA00CAB3E8 /* waveform_audio.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47802498DACA00CAB3E8 /* waveform_audio.json */; };
+		08AA47832498DACB00CAB3E8 /* waveform_audio.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47802498DACA00CAB3E8 /* waveform_audio.json */; };
+		08AA47842498DACB00CAB3E8 /* waveform_audio.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47802498DACA00CAB3E8 /* waveform_audio.json */; };
+		08AA47852498DACB00CAB3E8 /* waveform_audio.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47802498DACA00CAB3E8 /* waveform_audio.json */; };
+		08AA47862498DACB00CAB3E8 /* waveform_audio.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47802498DACA00CAB3E8 /* waveform_audio.json */; };
+		08AA47872498DACB00CAB3E8 /* waveform_video.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47812498DACA00CAB3E8 /* waveform_video.json */; };
+		08AA47882498DACB00CAB3E8 /* waveform_video.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47812498DACA00CAB3E8 /* waveform_video.json */; };
+		08AA47892498DACB00CAB3E8 /* waveform_video.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47812498DACA00CAB3E8 /* waveform_video.json */; };
+		08AA478A2498DACB00CAB3E8 /* waveform_video.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47812498DACA00CAB3E8 /* waveform_video.json */; };
+		08AA478B2498DACB00CAB3E8 /* waveform_video.json in Resources */ = {isa = PBXBuildFile; fileRef = 08AA47812498DACA00CAB3E8 /* waveform_video.json */; };
 		08AA551D1D49EBF600C5026E /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
 		08AA55A51D49EF8E00C5026E /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
 		08AA55A61D49EF8E00C5026E /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
@@ -1803,7 +1808,8 @@
 		08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGDataProvider+PlaySRG.m"; sourceTree = "<group>"; };
 		08A3ED011FA2612B00A517EF /* SRGDataProvider+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGDataProvider+PlaySRG.h"; sourceTree = "<group>"; };
 		08AA47712497BD2800CAB3E8 /* Lottie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = Carthage/Build/iOS/Lottie.framework; sourceTree = "<group>"; };
-		08AA47742497E6A900CAB3E8 /* waveform.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waveform.json; sourceTree = "<group>"; };
+		08AA47802498DACA00CAB3E8 /* waveform_audio.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waveform_audio.json; sourceTree = "<group>"; };
+		08AA47812498DACA00CAB3E8 /* waveform_video.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waveform_video.json; sourceTree = "<group>"; };
 		08AA551B1D49EBF600C5026E /* ApplicationConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationConfiguration.h; sourceTree = "<group>"; };
 		08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationConfiguration.m; sourceTree = "<group>"; };
 		08AA55B91D49EFBD00C5026E /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
@@ -2803,7 +2809,8 @@
 		08AA47732497E6A900CAB3E8 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				08AA47742497E6A900CAB3E8 /* waveform.json */,
+				08AA47802498DACA00CAB3E8 /* waveform_audio.json */,
+				08AA47812498DACA00CAB3E8 /* waveform_video.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -4273,6 +4280,7 @@
 				E6DB5F2E1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				0837CECB1D3FD6E600A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				6F3A47B51DD19A8500C79E67 /* SRFResources.xcassets in Resources */,
+				08AA47872498DACB00CAB3E8 /* waveform_video.json in Resources */,
 				6FE28773248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6F1938361EFBFEBC0017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F340F4B220DA86B00778CA3 /* SRGUserData.bundle in Resources */,
@@ -4286,6 +4294,7 @@
 				0832BF1522BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
 				0837CEC61D3FD6E600A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				6F3B0227245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
+				08AA47822498DACA00CAB3E8 /* waveform_audio.json in Resources */,
 				6F40920D22DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
 				6F0A7F0520AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				0837CEC51D3FD6E600A1E089 /* SRGSSRType_Bd.ttf in Resources */,
@@ -4327,7 +4336,6 @@
 				6F0C99922121FBD800073AB6 /* SRGLetterbox.bundle in Resources */,
 				086BDE161EA63D3800965F45 /* PlayMiniPlayerView.xib in Resources */,
 				6F4EA13D1EE034E200BEC4DA /* Accessibility.strings in Resources */,
-				08AA47752497E6A900CAB3E8 /* waveform.json in Resources */,
 				08602BFC2213786B0081D166 /* HomeShowsAccessTableViewCell.xib in Resources */,
 				08C6905A1D38E0BE00BB8AAA /* LaunchScreen.xib in Resources */,
 				0887824F23AD61D500629312 /* HomeLiveMediaCollectionViewCell.xib in Resources */,
@@ -4360,6 +4368,7 @@
 				E6DB5F2F1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				6F0A7F0620AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				0837CED41D3FDAF900A1E089 /* SRGSSRType_Rg.ttf in Resources */,
+				08AA47882498DACB00CAB3E8 /* waveform_video.json in Resources */,
 				6FE28774248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				082590F31F054ACD00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				6FD88F7D22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
@@ -4373,6 +4382,7 @@
 				6F4760051EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				E64BA4001D4A588B002C10D5 /* WebViewController.storyboard in Resources */,
 				6F3B0228245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
+				08AA47832498DACB00CAB3E8 /* waveform_audio.json in Resources */,
 				6FBF24452148238300E576A2 /* SRGDiagnostics.bundle in Resources */,
 				6F12E4E822D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				0837CECF1D3FDAF900A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
@@ -4414,7 +4424,6 @@
 				6F5F4FCA1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				6F340F4C220DA87500778CA3 /* SRGUserData.bundle in Resources */,
 				6F0C99A22121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
-				08AA47762497E6A900CAB3E8 /* waveform.json in Resources */,
 				0832BF1622BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
 				6F1A95EC216DF98D00DB15AA /* SRGIdentity.bundle in Resources */,
 				086BDE181EA63D5A00965F45 /* PlayMiniPlayerView.xib in Resources */,
@@ -4447,6 +4456,7 @@
 				E6DB5F301D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				6F0C998F2121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
 				0837CEDD1D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
+				08AA47892498DACB00CAB3E8 /* waveform_video.json in Resources */,
 				6FE28775248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6F12E4DA22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				0875851F23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
@@ -4460,6 +4470,7 @@
 				6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				086F8D6122984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				6F3B0229245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
+				08AA47842498DACB00CAB3E8 /* waveform_audio.json in Resources */,
 				6F0A7F0720AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FB0BB3720AEF5A7007C5D87 /* Onboarding.strings in Resources */,
 				0837CED81D3FDAFA00A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
@@ -4501,7 +4512,6 @@
 				08DADF8E20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				6FE01B1823603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6FF7BBB422A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
-				08AA47772497E6A900CAB3E8 /* waveform.json in Resources */,
 				E66BEC231DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F0C99B22121FBD800073AB6 /* SRGLogger.bundle in Resources */,
 				08C68FA51D38DF8300BB8AAA /* Localizable.strings in Resources */,
@@ -4534,6 +4544,7 @@
 				0837CEE61D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				081DAA281E0C1FC800018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
+				08AA478A2498DACB00CAB3E8 /* waveform_video.json in Resources */,
 				6FE28776248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6F0C99AE2121FBD800073AB6 /* SRGDataProvider.bundle in Resources */,
 				6FA9ECC920C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
@@ -4547,6 +4558,7 @@
 				0837CEE11D3FDAFA00A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				082590F71F054ACE00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				6F3B022A245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
+				08AA47852498DACB00CAB3E8 /* waveform_audio.json in Resources */,
 				0837CEE01D3FDAFA00A1E089 /* SRGSSRType_Bd.ttf in Resources */,
 				6F340F4E220DA87600778CA3 /* SRGUserData.bundle in Resources */,
 				0837CEB01D3FAEE200A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
@@ -4588,7 +4600,6 @@
 				08DADF8F20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
 				08754F44201BAFF500458F3A /* InfoPlist.strings in Resources */,
 				086BDE1C1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
-				08AA47782497E6A900CAB3E8 /* waveform.json in Resources */,
 				086321122258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				0837CEE51D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				6F2961FF2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
@@ -4621,6 +4632,7 @@
 				E6DB5F321D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				0837CEEF1D3FDAFA00A1E089 /* SRGSSRType_Rg.ttf in Resources */,
 				0804917A22832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
+				08AA478B2498DACB00CAB3E8 /* waveform_video.json in Resources */,
 				6FE28777248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6FA7EC3D20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				6F1938381EFBFEC80017B1D1 /* ApplicationConfiguration.json in Resources */,
@@ -4634,6 +4646,7 @@
 				08DD9D6B1FFE6EFA00115906 /* ModuleHeaderView.xib in Resources */,
 				6F0C99912121FBD800073AB6 /* SRGMediaPlayer.bundle in Resources */,
 				6F3B022B245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
+				08AA47862498DACB00CAB3E8 /* waveform_audio.json in Resources */,
 				6F12E4EB22D8676600BC1718 /* SearchHeaderView.xib in Resources */,
 				0837CEEA1D3FDAFA00A1E089 /* SRGSSRType_BdIt.ttf in Resources */,
 				6F7C89D320AAFC6100255A54 /* Onboardings.xcassets in Resources */,
@@ -4675,7 +4688,6 @@
 				086BDE1E1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
 				6F167F5B248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib in Resources */,
 				0832BF1922BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
-				08AA47792497E6A900CAB3E8 /* waveform.json in Resources */,
 				0837CEEE1D3FDAFA00A1E089 /* SRGSSRType_Md.ttf in Resources */,
 				6F0C99A52121FBD800073AB6 /* SRGNetwork.bundle in Resources */,
 				0875852123A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,

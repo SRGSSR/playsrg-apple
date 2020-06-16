@@ -80,7 +80,7 @@ static const CGFloat SongTableViewMargin = 42.f;
         constraint.constant = SongTableViewMargin;
     }];
     
-    [self.waveformImageView play_setWaveformAnimation48WithTintColor:UIColor.whiteColor];
+//    [self.waveformImageView play_setWaveformAnimation48WithTintColor:UIColor.whiteColor];
     self.waveformImageView.hidden = YES;
 }
 
