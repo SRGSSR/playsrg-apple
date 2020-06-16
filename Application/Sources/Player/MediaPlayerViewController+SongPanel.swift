@@ -245,10 +245,14 @@ extension MediaPlayerViewController : PanelResizeDelegate {
     
     public func panel(_ panel: Panel, willTransitionFrom oldMode: Panel.Configuration.Mode?, to newMode: Panel.Configuration.Mode, with coordinator: PanelTransitionCoordinator) {
         if let tableView = self.songTableView() {
-            tableView.flashScrollIndicators()
-            
-            if (oldMode == .compact) {
-                self.scrollToSong(at: self.letterboxController.currentDate, animated: false)
+            coordinator.animateAlongsideTransition({
+                if (oldMode == .compact) {
+                    UIView.performWithoutAnimation {
+                        self.scrollToSong(at: self.letterboxController.currentDate, animated: false)
+                    }
+                }
+            }) { _ in
+                tableView.flashScrollIndicators()
             }
         }
     }
