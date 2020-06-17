@@ -982,7 +982,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     SRGProgram *currentProgram = [self currentProgram];
     if (currentProgram) {
-        self.currentProgramTitleLabel.text = currentProgram.title;
+        self.currentProgramTitleLabel.text = currentProgram.show.title ?: currentProgram.title;
         self.currentProgramSubtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
         
         BOOL hidden = (currentProgram.show == nil);
