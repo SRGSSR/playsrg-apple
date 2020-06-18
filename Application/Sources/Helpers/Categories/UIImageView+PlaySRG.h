@@ -31,9 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)play_setDownloadAnimation48WithTintColor:(nullable UIColor *)tintColor;
 
 /**
- *  Standard wafeform animations (must be managed with `-startAnimating` and `-stopAnimating`).
+ *  Standard playback animations (must be managed with `-startAnimating` and `-stopAnimating`).
  */
 - (void)play_setWaveformAnimation34WithTintColor:(nullable UIColor *)tintColor;
+- (void)play_setPlayAnimation34WithTintColor:(nullable UIColor *)tintColor;
 
 /**
  *  Request an image of the specified object. Use `SRGImageTypeDefault` for the default image.

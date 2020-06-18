@@ -49,9 +49,6 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="waveform-34-0" translatesAutoresizingMaskIntoConstraints="NO" id="5bF-f9-k2o">
                                 <rect key="frame" x="296" y="0.0" width="34" height="77"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="34" id="0wl-gO-6cy"/>
-                                </constraints>
                             </imageView>
                         </subviews>
                     </stackView>

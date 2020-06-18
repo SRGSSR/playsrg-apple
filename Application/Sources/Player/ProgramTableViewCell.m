@@ -118,6 +118,16 @@
     }
 }
 
+- (void)setMediaType:(SRGMediaType)mediaType
+{
+    if (mediaType == SRGMediaTypeVideo) {
+        [self.waveformImageView play_setPlayAnimation34WithTintColor:UIColor.whiteColor];
+    }
+    else {
+        [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
+    }
+}
+
 - (void)setProgress:(NSNumber *)progress
 {
     if (progress) {
