@@ -9,6 +9,7 @@
 #import "ApplicationConfiguration.h"
 #import "ForegroundTimer.h"
 #import "Layout.h"
+#import "MediaPlayerViewController+Private.h"
 #import "SongTableViewCell.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "TableView.h"
@@ -216,6 +217,13 @@
     [self updateSelectionForSongAtDate:self.letterboxController.currentDate];
 }
 
+- (void)updateProgressForDateInterval:(NSDateInterval *)dateInterval
+{
+    for (SongTableViewCell *cell in self.tableView.visibleCells) {
+        [cell updateProgressForDateInterval:dateInterval];
+    }
+}
+
 #pragma mark ContentInsets protocol
 
 - (UIEdgeInsets)play_paddingContentInsets
@@ -240,9 +248,11 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(SongTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SRGSong *song = self.items[indexPath.row];
-    cell.song = song;
-    cell.playing = (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
-    cell.enabled = [self.dateInterval containsDate:song.date];
+    BOOL playing = (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
+    [cell setSong:song playing:playing];
+    
+    NSDateInterval *dateInterval = MediaPlayerViewControllerDateInterval(self.letterboxController);
+    [cell updateProgressForDateInterval:dateInterval];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -255,11 +265,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    SongTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (! cell.enabled) {
-        return;
-    }
     
     // Add a tiny offset to for guaranteed start within the song
     SRGSong *song = self.items[indexPath.row];

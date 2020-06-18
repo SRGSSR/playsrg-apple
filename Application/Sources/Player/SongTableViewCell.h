@@ -13,9 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (CGFloat)heightForSong:(nullable SRGSong *)song withCellWidth:(CGFloat)width;
 
-@property (nonatomic, nullable) SRGSong *song;
-@property (nonatomic, getter=isEnabled) BOOL enabled;
-@property (nonatomic, getter=isPlaying) BOOL playing;
+- (void)setSong:(nullable SRGSong *)song playing:(BOOL)playing;
+- (void)updateProgressForDateInterval:(nullable NSDateInterval *)dateInterval;
 
 @end
 

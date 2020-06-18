@@ -89,6 +89,11 @@ extension MediaPlayerViewController {
         guard let songsViewController = self.songsViewController() else { return }
         songsViewController.updateSelectionForCurrentSong()
     }
+    
+    @objc public func updateSongProgress() {
+        guard let songsViewController = self.songsViewController() else { return }
+        songsViewController.updateProgress(for: MediaPlayerViewControllerDateInterval(self.letterboxController))
+    }
 }
 
 private extension MediaPlayerViewController {

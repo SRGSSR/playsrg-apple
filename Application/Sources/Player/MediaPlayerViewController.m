@@ -958,7 +958,7 @@ NSDateInterval *MediaPlayerViewControllerDateInterval(SRGLetterboxController *le
 
 #pragma mark Programs
 
-- (void)reloadProgramBackgroundAnimated:(BOOL)animated
+- (void)reloadCurrentProgramBackgroundAnimated:(BOOL)animated
 {
     NSString *channelUid = [self channelUid];
     Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
@@ -977,7 +977,7 @@ NSDateInterval *MediaPlayerViewControllerDateInterval(SRGLetterboxController *le
 
 - (void)reloadProgramInformationAnimated:(BOOL)animated
 {
-    [self reloadProgramBackgroundAnimated:animated];
+    [self reloadCurrentProgramBackgroundAnimated:animated];
     
     NSString *channelUid = [self channelUid];
     Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
@@ -1508,8 +1508,9 @@ NSDateInterval *MediaPlayerViewControllerDateInterval(SRGLetterboxController *le
     [self updateSelectionForProgramWithMediaURN:subdivision.URN];
 }
 
-- (void)updateProgramProgressWithMediaURN:(NSString *)mediaURN date:(NSDate *)date dateInterval:(NSDateInterval *)dateInterval
+- (void)updateProgramProgressWithMediaURN:(NSString *)mediaURN date:(NSDate *)date
 {
+    NSDateInterval *dateInterval = MediaPlayerViewControllerDateInterval(self.letterboxController);
     for (ProgramTableViewCell *cell in self.programsTableView.visibleCells) {
         [cell updateProgressForMediaURN:mediaURN date:date dateInterval:dateInterval];
     }
@@ -1623,11 +1624,13 @@ NSDateInterval *MediaPlayerViewControllerDateInterval(SRGLetterboxController *le
         [self scrollToSongAt:date animated:YES];
     }
     
+    [self reloadCurrentProgramBackgroundAnimated:YES];
+    
     [self updateSelectionForProgramWithMediaURN:subdivision.URN];
     [self updateSelectionForSongAt:date];
     
-    [self reloadProgramBackgroundAnimated:YES];
-    [self updateProgramProgressWithMediaURN:subdivision.URN date:date dateInterval:MediaPlayerViewControllerDateInterval(self.letterboxController)];
+    [self updateProgramProgressWithMediaURN:subdivision.URN date:date];
+    [self updateSongProgress];
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didSelectSubdivision:(SRGSubdivision *)subdivision
@@ -1784,9 +1787,10 @@ NSDateInterval *MediaPlayerViewControllerDateInterval(SRGLetterboxController *le
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ProgramTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    SRGProgram *program = self.programs[indexPath.row];
     SRGLetterboxController *letterboxController = self.letterboxController;
     BOOL playing = (letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
-    [cell setProgram:self.programs[indexPath.row] mediaType:letterboxController.mediaComposition.mainChapter.mediaType playing:playing];
+    [cell setProgram:program mediaType:letterboxController.mediaComposition.mainChapter.mediaType playing:playing];
     [cell updateProgressForMediaURN:letterboxController.subdivision.URN
                                date:letterboxController.currentDate
                        dateInterval:MediaPlayerViewControllerDateInterval(letterboxController)];

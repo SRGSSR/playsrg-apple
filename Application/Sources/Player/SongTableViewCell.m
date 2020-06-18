@@ -17,6 +17,9 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 @interface SongTableViewCell ()
 
+@property (nonatomic, nullable) SRGSong *song;
+@property (nonatomic, getter=isPlaying) BOOL playing;
+
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *artistLabel;
@@ -99,11 +102,12 @@ static const CGFloat SongTableViewMargin = 42.f;
     [self updateWaveformAnimation];
 }
 
-#pragma mark Getters and setters
+#pragma mark Attached data
 
-- (void)setSong:(SRGSong *)song
+- (void)setSong:(SRGSong *)song playing:(BOOL)playing
 {
-    _song = song;
+    self.song = song;
+    self.playing = playing;
     
     self.timeLabel.text = [NSDateFormatter.play_timeFormatter stringFromDate:song.date];
     self.timeLabel.font = [SongTableViewCell timeLabelFont];
@@ -113,13 +117,13 @@ static const CGFloat SongTableViewMargin = 42.f;
     
     self.artistLabel.text = song.artist.name;
     self.artistLabel.font = [SongTableViewCell artistLabelFont];
+    
+    [self updateWaveformAnimation];
 }
 
-- (void)setEnabled:(BOOL)enabled
+- (void)updateProgressForDateInterval:(NSDateInterval *)dateInterval
 {
-    _enabled = enabled;
-    
-    if (enabled) {
+    if ([dateInterval containsDate:self.song.date]) {
         self.timeLabel.textColor = UIColor.whiteColor;
         self.titleLabel.textColor = UIColor.whiteColor;
         self.artistLabel.textColor = UIColor.play_grayColor;
@@ -129,14 +133,8 @@ static const CGFloat SongTableViewMargin = 42.f;
         self.timeLabel.textColor = UIColor.play_grayColor;
         self.titleLabel.textColor = UIColor.play_grayColor;
         self.artistLabel.textColor = UIColor.play_grayColor;
-        self.userInteractionEnabled = YES;
+        self.userInteractionEnabled = NO;
     }
-}
-
-- (void)setPlaying:(BOOL)playing
-{
-    _playing = playing;
-    [self updateWaveformAnimation];
 }
 
 #pragma mark Accessibility
@@ -153,7 +151,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 - (NSString *)accessibilityHint
 {
-    return self.enabled ? PlaySRGAccessibilityLocalizedString(@"Plays the song.", @"Song cell hint") : nil;
+    return self.userInteractionEnabled ? PlaySRGAccessibilityLocalizedString(@"Plays the song.", @"Song cell hint") : nil;
 }
 
 #pragma mark UI

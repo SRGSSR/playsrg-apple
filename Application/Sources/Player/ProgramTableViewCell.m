@@ -85,7 +85,7 @@
     return PlaySRGAccessibilityLocalizedString(@"Plays from the beginning.", @"Program cell hint");
 }
 
-#pragma mark Getters and setters
+#pragma mark Attached data
 
 - (void)setProgram:(SRGProgram *)program mediaType:(SRGMediaType)mediaType playing:(BOOL)playing
 {
