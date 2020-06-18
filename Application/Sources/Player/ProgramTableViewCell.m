@@ -122,7 +122,7 @@
         self.progressView.hidden = YES;
     }
     
-    if ([program.startDate compare:dateInterval.startDate] == NSOrderedAscending) {
+    if (! dateInterval || [program.startDate compare:dateInterval.startDate] == NSOrderedAscending) {
         self.titleLabel.textColor = UIColor.play_grayColor;
         
         self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];

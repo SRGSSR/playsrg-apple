@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ProgramTableViewCell : UITableViewCell
 
 - (void)setProgram:(nullable SRGProgram *)program mediaType:(SRGMediaType)mediaType playing:(BOOL)playing;
-- (void)updateProgressForMediaURN:(nullable NSString *)mediaURN date:(NSDate *)date dateInterval:(NSDateInterval *)dateInterval;
+- (void)updateProgressForMediaURN:(nullable NSString *)mediaURN date:(NSDate *)date dateInterval:(nullable NSDateInterval *)dateInterval;
 
 @end
 
