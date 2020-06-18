@@ -1784,11 +1784,9 @@ NSDateInterval *MediaPlayerViewControllerDateInterval(SRGLetterboxController *le
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ProgramTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.program = self.programs[indexPath.row];
-    
     SRGLetterboxController *letterboxController = self.letterboxController;
-    cell.mediaType = letterboxController.mediaComposition.mainChapter.mediaType;
-    cell.playing = (letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
+    BOOL playing = (letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
+    [cell setProgram:self.programs[indexPath.row] mediaType:letterboxController.mediaComposition.mainChapter.mediaType playing:playing];
     [cell updateProgressForMediaURN:letterboxController.subdivision.URN
                                date:letterboxController.currentDate
                        dateInterval:MediaPlayerViewControllerDateInterval(letterboxController)];

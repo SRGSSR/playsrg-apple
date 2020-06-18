@@ -16,6 +16,9 @@
 
 @interface ProgramTableViewCell ()
 
+@property (nonatomic) SRGProgram *program;
+@property (nonatomic, getter=isPlaying) BOOL playing;
+
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet UIView *thumbnailWrapperView;
@@ -84,9 +87,10 @@
 
 #pragma mark Getters and setters
 
-- (void)setProgram:(SRGProgram *)program
+- (void)setProgram:(SRGProgram *)program mediaType:(SRGMediaType)mediaType playing:(BOOL)playing
 {
-    _program = program;
+    self.program = program;
+    self.playing = playing;
     
     self.titleLabel.text = program.title;
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
@@ -94,21 +98,14 @@
     self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
     
     [self.thumbnailImageView play_requestImageForObject:program withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
-}
-
-- (void)setMediaType:(SRGMediaType)mediaType
-{
+    
     if (mediaType == SRGMediaTypeVideo) {
         [self.waveformImageView play_setPlayAnimation34WithTintColor:UIColor.whiteColor];
     }
     else {
         [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
     }
-}
-
-- (void)setPlaying:(BOOL)playing
-{
-    _playing = playing;
+    
     [self updateWaveformAnimation];
 }
 

@@ -261,7 +261,7 @@
         return;
     }
     
-    // Add a tiny offset to for guaranteed start in the song
+    // Add a tiny offset to for guaranteed start within the song
     SRGSong *song = self.items[indexPath.row];
     NSDate *seekDate = [song.date dateByAddingTimeInterval:0.3];
     [self.letterboxController seekToPosition:[SRGPosition positionAtDate:seekDate] withCompletionHandler:^(BOOL finished) {

@@ -11,10 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ProgramTableViewCell : UITableViewCell
 
-@property (nonatomic, nullable) SRGProgram *program;
-@property (nonatomic) SRGMediaType mediaType;
-@property (nonatomic, getter=isPlaying) BOOL playing;
-
+- (void)setProgram:(SRGProgram *)program mediaType:(SRGMediaType)mediaType playing:(BOOL)playing;
 - (void)updateProgressForMediaURN:(nullable NSString *)mediaURN date:(NSDate *)date dateInterval:(NSDateInterval *)dateInterval;
 
 @end
