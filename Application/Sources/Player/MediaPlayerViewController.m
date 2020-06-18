@@ -81,6 +81,19 @@ static const CGFloat MediaPlayerDetailsLabelCollapsedHeight = 90.f;
 static const UILayoutPriority MediaPlayerDetailsLabelNormalPriority = 999;       // Cannot mutate priority of required installed constraints (throws an exception at runtime), so use lower priority
 static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
+NSDateInterval *MediaPlayerViewControllerDateInterval(SRGLetterboxController *letterboxController)
+{
+    CMTimeRange timeRange = letterboxController.timeRange;
+    NSDate *startDate = [letterboxController streamDateForTime:timeRange.start];
+    NSDate *endDate = [letterboxController streamDateForTime:CMTimeRangeGetEnd(timeRange)];
+    if (startDate && endDate) {
+        return [[NSDateInterval alloc] initWithStartDate:startDate endDate:endDate];
+    }
+    else {
+        return nil;
+    }
+}
+
 @interface MediaPlayerViewController ()
 
 @property (nonatomic) NSString *originalURN;                                     // original URN to be played (otherwise rely on Letterbox controller information)
@@ -489,8 +502,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.userInterfaceUpdateTimer = [ForegroundTimer timerWithTimeInterval:1. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
         @strongify(self)
         [self updateGoogleCastButton];
-        [self reloadPrograms];
-        [self reloadSongs];
         
         // Ensure a save is triggered when handoff is used, so that the current position is properly updated in the
         // transmitted information.
@@ -1002,7 +1013,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     BOOL hadPrograms = (self.programs.count != 0);
-    [self reloadPrograms];
+    self.programs = [self updatedPrograms];
+    
+    [self.programsTableView reloadData];
+    [self updateSelectionForCurrentProgram];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (! hadPrograms && self.programs.count != 0) {
@@ -1013,7 +1027,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (NSArray<SRGProgram *> *)updatedPrograms
 {
-    NSDateInterval *dateInterval = self.dateInterval;
+    NSDateInterval *dateInterval = MediaPlayerViewControllerDateInterval(self.letterboxController);
     if (! dateInterval) {
         return @[];
     }
@@ -1030,26 +1044,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [programs addObjectsFromArray:reachablePrograms];
     
     return programs.copy;
-}
-
-- (void)reloadPrograms
-{
-    self.programs = [self updatedPrograms];
-    [self.programsTableView reloadData];
-    [self updateSelectionForCurrentProgram];
-}
-
-- (NSDateInterval *)dateInterval
-{
-    CMTimeRange timeRange = self.letterboxController.timeRange;
-    NSDate *startDate = [self.letterboxController streamDateForTime:timeRange.start];
-    NSDate *endDate = [self.letterboxController streamDateForTime:CMTimeRangeGetEnd(timeRange)];
-    if (startDate && endDate) {
-        return [[NSDateInterval alloc] initWithStartDate:startDate endDate:endDate];
-    }
-    else {
-        return nil;
-    }
 }
 
 #pragma mark Channel updates
@@ -1514,22 +1508,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self updateSelectionForProgramWithMediaURN:subdivision.URN];
 }
 
-- (void)updateProgramProgress
+- (void)updateProgramProgressWithMediaURN:(NSString *)mediaURN date:(NSDate *)date dateInterval:(NSDateInterval *)dateInterval
 {
     for (ProgramTableViewCell *cell in self.programsTableView.visibleCells) {
-        [self updateProgramProgressForCell:cell];
-    }
-}
-
-- (void)updateProgramProgressForCell:(ProgramTableViewCell *)cell
-{
-    SRGProgram *program = cell.program;
-    if ([program.mediaURN isEqualToString:self.letterboxController.subdivision.URN]) {
-        float progress = fmaxf(fminf([self.letterboxController.currentDate timeIntervalSinceDate:program.startDate] / [program.endDate timeIntervalSinceDate:program.startDate], 1.f), 0.f);
-        cell.progress = @(progress);
-    }
-    else {
-        cell.progress = nil;
+        [cell updateProgressForMediaURN:mediaURN date:date dateInterval:dateInterval];
     }
 }
 
@@ -1638,13 +1620,14 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self reloadDataOverriddenWithMedia:media mainChapterMedia:[self mainChapterMedia]];
         
         [self scrollToProgramWithMediaURN:subdivision.URN date:date animated:YES];
-        [self updateSelectionForProgramWithMediaURN:subdivision.URN];
-        
         [self scrollToSongAt:date animated:YES];
-        [self updateSelectionForSongAt:date];
     }
+    
+    [self updateSelectionForProgramWithMediaURN:subdivision.URN];
+    [self updateSelectionForSongAt:date];
+    
     [self reloadProgramBackgroundAnimated:YES];
-    [self updateProgramProgress];
+    [self updateProgramProgressWithMediaURN:subdivision.URN date:date dateInterval:MediaPlayerViewControllerDateInterval(self.letterboxController)];
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didSelectSubdivision:(SRGSubdivision *)subdivision
@@ -1802,9 +1785,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ProgramTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.program = self.programs[indexPath.row];
-    cell.mediaType = self.letterboxController.mediaComposition.mainChapter.mediaType;
-    cell.playing = (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
-    [self updateProgramProgressForCell:cell];
+    
+    SRGLetterboxController *letterboxController = self.letterboxController;
+    cell.mediaType = letterboxController.mediaComposition.mainChapter.mediaType;
+    cell.playing = (letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
+    [cell updateProgressForMediaURN:letterboxController.subdivision.URN
+                               date:letterboxController.currentDate
+                       dateInterval:MediaPlayerViewControllerDateInterval(letterboxController)];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

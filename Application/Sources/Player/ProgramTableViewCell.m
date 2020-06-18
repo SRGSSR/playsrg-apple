@@ -55,9 +55,6 @@
     self.progressView.hidden = YES;
     
     [self.thumbnailImageView play_resetImage];
-    
-    self.playing = NO;
-    [self setSelected:NO animated:NO];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -97,8 +94,47 @@
     self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
     
     [self.thumbnailImageView play_requestImageForObject:program withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
+}
+
+- (void)setMediaType:(SRGMediaType)mediaType
+{
+    if (mediaType == SRGMediaTypeVideo) {
+        [self.waveformImageView play_setPlayAnimation34WithTintColor:UIColor.whiteColor];
+    }
+    else {
+        [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
+    }
+}
+
+- (void)setPlaying:(BOOL)playing
+{
+    _playing = playing;
+    [self updateWaveformAnimation];
+}
+
+#pragma mark Progress
+
+- (void)updateProgressForMediaURN:(NSString *)mediaURN date:(NSDate *)date dateInterval:(NSDateInterval *)dateInterval
+{
+    SRGProgram *program = self.program;
+    if ([program.mediaURN isEqualToString:mediaURN]) {
+        self.progressView.progress = fmaxf(fminf([date timeIntervalSinceDate:program.startDate] / [program.endDate timeIntervalSinceDate:program.startDate], 1.f), 0.f);
+        self.progressView.hidden = NO;
+    }
+    else {
+        self.progressView.hidden = YES;
+    }
     
-    if ([NSDate.date compare:program.startDate] == NSOrderedAscending) {
+    if ([program.startDate compare:dateInterval.startDate] == NSOrderedAscending) {
+        self.titleLabel.textColor = UIColor.play_grayColor;
+        
+        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
+        self.subtitleLabel.textColor = UIColor.play_grayColor;
+        
+        self.disabledOverlayView.hidden = NO;
+        self.userInteractionEnabled = NO;
+    }
+    else if ([dateInterval.endDate compare:program.startDate] == NSOrderedAscending) {
         self.titleLabel.textColor = UIColor.play_grayColor;
         
         self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"At %1$@", @"Introductory text for next program information"), [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate]];
@@ -116,33 +152,6 @@
         self.disabledOverlayView.hidden = YES;
         self.userInteractionEnabled = YES;
     }
-}
-
-- (void)setMediaType:(SRGMediaType)mediaType
-{
-    if (mediaType == SRGMediaTypeVideo) {
-        [self.waveformImageView play_setPlayAnimation34WithTintColor:UIColor.whiteColor];
-    }
-    else {
-        [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
-    }
-}
-
-- (void)setProgress:(NSNumber *)progress
-{
-    if (progress) {
-        self.progressView.hidden = NO;
-        self.progressView.progress = progress.floatValue;
-    }
-    else {
-        self.progressView.hidden = YES;
-    }
-}
-
-- (void)setPlaying:(BOOL)playing
-{
-    _playing = playing;
-    [self updateWaveformAnimation];
 }
 
 #pragma mark UI

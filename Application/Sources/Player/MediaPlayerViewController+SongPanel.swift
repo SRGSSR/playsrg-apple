@@ -72,7 +72,7 @@ extension MediaPlayerViewController {
     
     @objc public func reloadSongs() {
         guard let songsViewController = self.songsViewController() else { return }
-        songsViewController.dateInterval = self.dateInterval
+        songsViewController.dateInterval = MediaPlayerViewControllerDateInterval(self.letterboxController)
     }
     
     @objc public func scrollToSong(at date: Date?, animated: Bool) {
