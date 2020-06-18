@@ -22,7 +22,10 @@ static const CGFloat SongTableViewMargin = 42.f;
 @property (nonatomic, weak) IBOutlet UILabel *artistLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *waveformImageView;
 
-@property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray<NSLayoutConstraint *> *marginConstraints;
+@property (nonatomic, weak) IBOutlet UIView *rightMarginView;
+@property (nonatomic, weak) IBOutlet UIView *waveformView;
+
+@property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray<NSLayoutConstraint *> *marginWidthConstraints;
 
 @end
 
@@ -76,19 +79,23 @@ static const CGFloat SongTableViewMargin = 42.f;
     self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    [self.marginConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.marginWidthConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
         constraint.constant = SongTableViewMargin;
     }];
     
+    self.waveformView.hidden = YES;
+    self.rightMarginView.hidden = NO;
+    
     [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
-    self.waveformImageView.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
     
-    self.waveformImageView.hidden = ! selected;
+    self.waveformView.hidden = ! selected;
+    self.rightMarginView.hidden = selected;
+    
     [self updateWaveformAnimation];
 }
 
