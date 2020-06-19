@@ -134,7 +134,7 @@
     else if ([dateInterval.endDate compare:program.startDate] == NSOrderedAscending) {
         self.titleLabel.textColor = UIColor.play_grayColor;
         
-        self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"At %1$@", @"Introductory text for next program information"), [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate]];
+        self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Next at, %@", @"Introductory time for next program information"), [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate]];
         self.subtitleLabel.textColor = UIColor.play_grayColor;
         
         self.disabledOverlayView.hidden = NO;
