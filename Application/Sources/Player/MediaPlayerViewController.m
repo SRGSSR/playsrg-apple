@@ -36,6 +36,7 @@
 #import "ShowViewController.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
+#import "SRGLetterboxController+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
@@ -80,19 +81,6 @@ static const CGFloat MediaPlayerDetailsLabelCollapsedHeight = 90.f;
 
 static const UILayoutPriority MediaPlayerDetailsLabelNormalPriority = 999;       // Cannot mutate priority of required installed constraints (throws an exception at runtime), so use lower priority
 static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
-
-NSDateInterval *MediaPlayerViewControllerDateInterval(SRGLetterboxController *letterboxController)
-{
-    CMTimeRange timeRange = letterboxController.timeRange;
-    NSDate *startDate = [letterboxController streamDateForTime:timeRange.start];
-    NSDate *endDate = [letterboxController streamDateForTime:CMTimeRangeGetEnd(timeRange)];
-    if (startDate && endDate) {
-        return [[NSDateInterval alloc] initWithStartDate:startDate endDate:endDate];
-    }
-    else {
-        return nil;
-    }
-}
 
 @interface MediaPlayerViewController ()
 
@@ -1027,7 +1015,7 @@ NSDateInterval *MediaPlayerViewControllerDateInterval(SRGLetterboxController *le
 
 - (NSArray<SRGProgram *> *)updatedPrograms
 {
-    NSDateInterval *dateInterval = MediaPlayerViewControllerDateInterval(self.letterboxController);
+    NSDateInterval *dateInterval = self.letterboxController.play_dateInterval;
     if (! dateInterval) {
         return @[];
     }
@@ -1510,7 +1498,7 @@ NSDateInterval *MediaPlayerViewControllerDateInterval(SRGLetterboxController *le
 
 - (void)updateProgramProgressWithMediaURN:(NSString *)mediaURN date:(NSDate *)date
 {
-    NSDateInterval *dateInterval = MediaPlayerViewControllerDateInterval(self.letterboxController);
+    NSDateInterval *dateInterval = self.letterboxController.play_dateInterval;
     for (ProgramTableViewCell *cell in self.programsTableView.visibleCells) {
         [cell updateProgressForMediaURN:mediaURN date:date dateInterval:dateInterval];
     }
@@ -1793,7 +1781,7 @@ NSDateInterval *MediaPlayerViewControllerDateInterval(SRGLetterboxController *le
     [cell setProgram:program mediaType:letterboxController.mediaComposition.mainChapter.mediaType playing:playing];
     [cell updateProgressForMediaURN:letterboxController.subdivision.URN
                                date:letterboxController.currentDate
-                       dateInterval:MediaPlayerViewControllerDateInterval(letterboxController)];
+                       dateInterval:letterboxController.play_dateInterval];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -1026,6 +1026,11 @@
 		6F7EEBF522DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7EEBF222DC7AA6005E5A97 /* SearchSettingMultiSelectionCell.m */; };
 		6F7EEBF622DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7EEBF222DC7AA6005E5A97 /* SearchSettingMultiSelectionCell.m */; };
 		6F7EEBF722DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7EEBF222DC7AA6005E5A97 /* SearchSettingMultiSelectionCell.m */; };
+		6F7F2B06249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F2B05249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m */; };
+		6F7F2B07249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F2B05249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m */; };
+		6F7F2B08249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F2B05249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m */; };
+		6F7F2B09249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F2B05249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m */; };
+		6F7F2B0A249CD78E00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F2B05249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m */; };
 		6F80106920443230009FE197 /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
 		6F80106A20443230009FE197 /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
 		6F80106B20443230009FE197 /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
@@ -2072,6 +2077,8 @@
 		6F7EEBDD22DC40B7005E5A97 /* SearchBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchBar.m; sourceTree = "<group>"; };
 		6F7EEBF122DC7AA6005E5A97 /* SearchSettingMultiSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingMultiSelectionCell.h; sourceTree = "<group>"; };
 		6F7EEBF222DC7AA6005E5A97 /* SearchSettingMultiSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingMultiSelectionCell.m; sourceTree = "<group>"; };
+		6F7F2B04249CD78D00C37526 /* SRGLetterboxController+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGLetterboxController+PlaySRG.h"; sourceTree = "<group>"; };
+		6F7F2B05249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGLetterboxController+PlaySRG.m"; sourceTree = "<group>"; };
 		6F80106720443230009FE197 /* PlayApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayApplication.h; sourceTree = "<group>"; };
 		6F80106820443230009FE197 /* PlayApplication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayApplication.m; sourceTree = "<group>"; };
 		6F80E9C021A682E60027CA2F /* TableRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableRequestViewController.h; sourceTree = "<group>"; };
@@ -3291,6 +3298,8 @@
 				08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */,
 				0841E70422F0953A009D8304 /* SRGDay+PlaySRG.h */,
 				0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */,
+				6F7F2B04249CD78D00C37526 /* SRGLetterboxController+PlaySRG.h */,
+				6F7F2B05249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m */,
 				0827DA231F0D437400A31A42 /* SRGMedia+PlaySRG.h */,
 				0827DA241F0D437400A31A42 /* SRGMedia+PlaySRG.m */,
 				6FB0AEFA217F4975009D707A /* SRGMediaComposition+PlaySRG.h */,
@@ -5880,6 +5889,7 @@
 				6FF7BB9C22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F5F4FC41DB10CFD0011CCA3 /* RelatedContentView.m in Sources */,
 				6F1F929E22A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */,
+				6F7F2B06249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6FA9ECAC20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6FF7BBA622A78DE400FA758A /* SearchSettingSelectorCell.m in Sources */,
 				0801E07B1D4A4A810008021E /* RadioChannel.m in Sources */,
@@ -6060,6 +6070,7 @@
 				6F80E9C321A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91A1FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6FD68619246052A100B8018A /* GradientView.m in Sources */,
+				6F7F2B07249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6F93DE0E20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
 				6F861AF91DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E123D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
@@ -6235,6 +6246,7 @@
 				6F80E9C421A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91B1FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6FD6861A246052A100B8018A /* GradientView.m in Sources */,
+				6F7F2B08249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6F93DE0F20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
 				6F861AFA1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E223D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
@@ -6410,6 +6422,7 @@
 				6F80E9C521A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91C1FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6FD6861B246052A100B8018A /* GradientView.m in Sources */,
+				6F7F2B09249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6F93DE1020AE985C00B71572 /* OnboardingsViewController.m in Sources */,
 				6F861AFB1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E323D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
@@ -6585,6 +6598,7 @@
 				6F80E9C621A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91D1FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6FD6861C246052A100B8018A /* GradientView.m in Sources */,
+				6F7F2B0A249CD78E00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6F93DE1120AE985C00B71572 /* OnboardingsViewController.m in Sources */,
 				6F861AFC1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E423D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,

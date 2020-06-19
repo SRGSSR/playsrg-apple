@@ -9,8 +9,8 @@
 #import "ApplicationConfiguration.h"
 #import "ForegroundTimer.h"
 #import "Layout.h"
-#import "MediaPlayerViewController+Private.h"
 #import "SongTableViewCell.h"
+#import "SRGLetterboxController+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
@@ -250,9 +250,7 @@
     SRGSong *song = self.items[indexPath.row];
     BOOL playing = (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
     [cell setSong:song playing:playing];
-    
-    NSDateInterval *dateInterval = MediaPlayerViewControllerDateInterval(self.letterboxController);
-    [cell updateProgressForDateInterval:dateInterval];
+    [cell updateProgressForDateInterval:self.letterboxController.play_dateInterval];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

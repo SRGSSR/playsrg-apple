@@ -10,8 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-OBJC_EXPORT NSDateInterval * _Nullable MediaPlayerViewControllerDateInterval(SRGLetterboxController *letterboxController);
-
 @interface MediaPlayerViewController (Private)
 
 @property (nonatomic, readonly, weak) IBOutlet UITableView *programsTableView;
