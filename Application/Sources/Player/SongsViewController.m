@@ -46,13 +46,6 @@
     return NSLocalizedString(@"Songs", @"Song list title");
 }
 
-- (void)setDateInterval:(NSDateInterval *)dateInterval
-{
-    _dateInterval = dateInterval;
-    [self.tableView reloadData];
-    [self updateSelectionForCurrentSong];
-}
-
 - (void)setUpdateTimer:(ForegroundTimer *)updateTimer
 {
     [_updateTimer invalidate];
