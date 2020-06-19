@@ -466,7 +466,7 @@ name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 7f241d4
 
 name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
-name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: de500e7
+name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: 590c7a2
 
 name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
