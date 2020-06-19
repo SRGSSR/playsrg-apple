@@ -265,7 +265,7 @@
         }
         else {
             self.titleLabel.text = channel.title;
-            self.subtitleLabel.text = NSLocalizedString(@"Currently", @"Text displayed on live cells when no program time information is available");
+            self.subtitleLabel.text = nil;
             self.progressView.progress = 1.f;
             self.progressView.hidden = NO;
             

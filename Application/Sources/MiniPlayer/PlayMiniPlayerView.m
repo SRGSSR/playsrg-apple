@@ -203,7 +203,7 @@
         if (! self.controller || self.controller.live) {
             self.titleLabel.numberOfLines = 1;
             self.liveLabel.hidden = NO;
-            self.liveLabel.text = NSLocalizedString(@"Currently", @"Introductory text for what is currently on air, displayed on the mini player");
+            self.liveLabel.text = NSLocalizedString(@"Live", @"Introductory text for what is currently on air, displayed on the mini player");
         }
         else if (self.media.contentType == SRGContentTypeLivestream || self.media.contentType == SRGContentTypeScheduledLivestream) {
             self.titleLabel.numberOfLines = 1;
