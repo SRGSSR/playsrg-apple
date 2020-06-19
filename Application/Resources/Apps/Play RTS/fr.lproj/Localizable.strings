@@ -221,7 +221,8 @@
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
 "less than 1 hour" = "moins d'une heure";
 
-/* Short label identifying a livestream. Display in uppercase. */
+/* Introductory text for what is currently on air, displayed on the mini player
+   Short label identifying a livestream. Display in uppercase. */
 "Live" = "Direct";
 
 /* Label to present the Livestreams view
@@ -269,6 +270,9 @@
 
 /* Title of the button to proceed to the next onboarding page */
 "Next" = "Suivant";
+
+/* Introductory time for next program information */
+"Next at, %@" = "À suivre à %@";
 
 /* Text displayed when no media added to the watch later list */
 "No content" = "Aucun contenu";
@@ -345,6 +349,9 @@
 
 /* Label to present programmes by date */
 "Programmes by date" = "Émissions par date";
+
+/* Program list header */
+"Programs" = "Émissions";
 
 /* Settings section header */
 "Properties" = "Propriétés";
@@ -449,6 +456,9 @@
 /* Title of the button to skip updating the application */
 "Skip" = "Ignorer";
 
+/* Song list title */
+"Songs" = "Chansons";
+
 /* Short label identifying content which will be available soon. */
 "Soon" = "Prochainement";
 
@@ -529,6 +539,7 @@
 /* Period setting option */
 "This week" = "Cette semaine";
 
+/* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "En différé";
 
 /* Period setting option
@@ -536,6 +547,7 @@
 "Today" = "Aujourd'hui";
 
 /* Categories search setting option
+   Title label used to present TV topics
    Title label used to present TV topics while loading. It appears if no network connection available and no cache available.
    Topics search setting option list view title */
 "Topics" = "Catégories";

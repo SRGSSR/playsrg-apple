@@ -1,6 +1,9 @@
 /* Date at time label to spell a date and time value. */
 "%1$@ at %2$@" = "%1$@ at %2$@";
 
+/* Song description. Firt placeholder is song title, second is artist name */
+"%1$@, by %2$@" = "%1$@, by %2$@";
+
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ listenings";
 
@@ -54,7 +57,7 @@
 /* Introductory title for error notifications */
 "Error" = "Error";
 
-/* Text to inform a program time information, like the current program */
+/* Text to inform a program time information. Firt placeholder is the start time, second is the end time. */
 "From %1$@ to %2$@" = "%1$@ to %2$@";
 
 /* Introductory title for information notifications */
@@ -72,8 +75,14 @@
 /* Accessibility hint associated with the account header */
 "Manages account information" = "Manages account information";
 
+/* A more episode button label */
+"More episodes" = "More episodes";
+
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "My account";
+
+/* Text to inform the next program time information. */
+"Next at, %@" = "Next at, %@";
 
 /* Mini player label */
 "Now playing: %@" = "Now playing: %@";
@@ -90,6 +99,9 @@
 /* Mini player action hint */
 "Opens the full screen player" = "Opens the full screen player";
 
+/* Show cell hint */
+"Opens topic details." = "Opens topic details.";
+
 /* Accessibility label for the multi audio badge */
 "Original version" = "Original version";
 
@@ -99,9 +111,14 @@
 /* Play button label */
 "Play" = "Play";
 
-/* Media cell hint
-   Mini player action hint */
+/* Program cell hint */
+"Plays from the beginning." = "Plays from the beginning.";
+
+/* Media cell hint */
 "Plays the content." = "Plays the content.";
+
+/* Song cell hint */
+"Plays the song." = "Plays the song.";
 
 /* Title displayed in home page shows section. */
 "Programmes A-Z" = "Programmes A-Z";
@@ -136,6 +153,9 @@
 
 /* Homepage header action hint */
 "Shows all contents." = "Shows all contents.";
+
+/* Title of the songs panel */
+"Song panel" = "Song panel";
 
 /* Stop button label */
 "Stop" = "Stop";
