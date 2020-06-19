@@ -146,7 +146,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 - (NSString *)accessibilityLabel
 {
-    return [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@, by %@", @"Song description. Firt placeholder is song title, second is artist name"), self.song.title, self.song.artist.name];
+    return [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%1$@, by %2$@", @"Song description. Firt placeholder is song title, second is artist name"), self.song.title, self.song.artist.name];
 }
 
 - (NSString *)accessibilityHint
