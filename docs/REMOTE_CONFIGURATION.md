@@ -50,10 +50,8 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `name` (mandatory, string): The channel name.
 * `resourceUid` (mandatory, string): Local unique identifier for referencing resources related to the channel.
 * `color` (optional, string): The channel primary hex color. Used as navigation bar background color. If omitted, gray.
-* `gradientTitleColor` (optional, string): The channel color for displaying text on top of a gradient. If omitted, same as `titleColor`.
-* `gradientStartColor` (optional, string): The channel primary hex color for a gradient. If omitted, same as `color`.
-* `gradientEndColor` (optional, string): The channel secondary hex color for a gradient. If omitted, same as `gradientStartColor`.
-* `titleColor` (optional, string): Hex color of the text displayed on top of colored areas (should provide sufficient contrast with `color`, `gradientStartColor ` and `gradientEndColor`). If omitted, white.
+* `secondColor` (optional, string): The channel second hex color. Use for a gradient. If omitted, same as `color`.
+* `titleColor` (optional, string): Hex color of the text displayed on top of colored areas (should provide sufficient contrast with `color` and `secondColor`). If omitted, white.
 * `hasDarkStatusBar` (optional, boolean): `true` iff the status bar should be dark for this channel. If omitted, `false`.
 * `songsViewStyle` (optional, string): The songs view style when added to the view. Never displayed if not set. Available values are:
    * `collapsed`: Collapsed when added to the view.

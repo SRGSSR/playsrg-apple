@@ -26,10 +26,8 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *resourceUid;
 @property (nonatomic) UIColor *color;
+@property (nonatomic) UIColor *secondColor;
 @property (nonatomic) UIColor *titleColor;
-@property (nonatomic) UIColor *gradientTitleColor;
-@property (nonatomic) UIColor *gradientStartColor;
-@property (nonatomic) UIColor *gradientEndColor;
 @property (nonatomic, getter=hasDarkStatusBar) BOOL darkStatusBar;
 @property (nonatomic) SongsViewStyle songsViewStyle;
 
@@ -65,36 +63,20 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
             self.color = UIColor.grayColor;
         }
         
+        id secondColorValue = dictionary[@"secondColor"];
+        if ([secondColorValue isKindOfClass:NSString.class]) {
+            self.secondColor = [UIColor srg_colorFromHexadecimalString:secondColorValue] ?: self.color;
+        }
+        else {
+            self.secondColor = self.color;
+        }
+        
         id titleColorValue = dictionary[@"titleColor"];
         if ([titleColorValue isKindOfClass:NSString.class]) {
             self.titleColor = [UIColor srg_colorFromHexadecimalString:titleColorValue] ?: UIColor.whiteColor;
         }
         else {
             self.titleColor = UIColor.whiteColor;
-        }
-        
-        id gradientTitleColorValue = dictionary[@"gradientTitleColor"];
-        if ([gradientTitleColorValue isKindOfClass:NSString.class]) {
-            self.gradientTitleColor = [UIColor srg_colorFromHexadecimalString:gradientTitleColorValue] ?: self.titleColor;
-        }
-        else {
-            self.gradientTitleColor = self.titleColor;
-        }
-        
-        id gradientStartColorValue = dictionary[@"gradientStartColor"];
-        if ([gradientStartColorValue isKindOfClass:NSString.class]) {
-            self.gradientStartColor = [UIColor srg_colorFromHexadecimalString:gradientStartColorValue] ?: self.color;
-        }
-        else {
-            self.gradientStartColor = self.color;
-        }
-        
-        id gradientEndColorValue = dictionary[@"gradientEndColor"];
-        if ([gradientEndColorValue isKindOfClass:NSString.class]) {
-            self.gradientEndColor = [UIColor srg_colorFromHexadecimalString:gradientEndColorValue] ?: self.gradientStartColor;
-        }
-        else {
-            self.gradientEndColor = self.gradientStartColor;
         }
         
         id darkStatusBarValue = dictionary[@"hasDarkStatusBar"];

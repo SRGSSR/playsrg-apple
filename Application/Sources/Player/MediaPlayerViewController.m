@@ -952,13 +952,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
     
     if (self.letterboxController.live) {
-        [self.currentProgramView updateWithStartColor:channel.gradientStartColor atPoint:CGPointMake(0.25f, 0.5f)
-                                             endColor:channel.gradientEndColor atPoint:CGPointMake(0.75f, 0.5f)
+        [self.currentProgramView updateWithStartColor:channel.color atPoint:CGPointMake(0.25f, 0.5f)
+                                             endColor:channel.secondColor atPoint:CGPointMake(0.75f, 0.5f)
                                              animated:animated];
     }
     else {
-        [self.currentProgramView updateWithStartColor:channel.gradientStartColor atPoint:CGPointMake(0.25f, 0.5f)
-                                             endColor:channel.gradientStartColor atPoint:CGPointMake(0.75f, 0.5f)
+        [self.currentProgramView updateWithStartColor:channel.color atPoint:CGPointMake(0.25f, 0.5f)
+                                             endColor:channel.color atPoint:CGPointMake(0.75f, 0.5f)
                                              animated:animated];
     }
 }
@@ -970,7 +970,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     NSString *channelUid = [self channelUid];
     Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
     
-    UIColor *foregroundColor = channel.gradientTitleColor;
+    UIColor *foregroundColor = channel.titleColor;
     self.currentProgramMoreEpisodesButton.tintColor = foregroundColor;
     self.currentProgramTitleLabel.textColor = foregroundColor;
     self.currentProgramSubtitleLabel.textColor = foregroundColor;

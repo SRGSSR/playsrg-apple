@@ -54,24 +54,14 @@ typedef NS_ENUM(NSInteger, SongsViewStyle) {
 @property (nonatomic, readonly) UIColor *color;
 
 /**
+ *  The channel second color.
+ */
+@property (nonatomic, readonly) UIColor *secondColor;
+
+/**
  *  The channel title color.
  */
 @property (nonatomic, readonly) UIColor *titleColor;
-
-/**
- *  The color displayed for title text on a gradient view.
- */
-@property (nonatomic, readonly) UIColor *gradientTitleColor;
-
-/**
- *  The channel start color for a gradient view.
- */
-@property (nonatomic, readonly) UIColor *gradientStartColor;
-
-/**
- *  The channel end color for a gradient view.
- */
-@property (nonatomic, readonly) UIColor *gradientEndColor;
 
 /**
  *  Return `YES` iff the status bar should be dark for this channel.
