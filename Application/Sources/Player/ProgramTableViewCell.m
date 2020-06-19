@@ -9,6 +9,7 @@
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
+#import "PlayAccessibilityFormatter.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
@@ -18,6 +19,8 @@
 
 @property (nonatomic) SRGProgram *program;
 @property (nonatomic, getter=isPlaying) BOOL playing;
+
+@property (nonatomic) SRGTimeAvailability timeAvailability;
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
@@ -77,12 +80,19 @@
 
 - (NSString *)accessibilityLabel
 {
-    return self.program.title;
+    if (self.timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
+        NSString * timeLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"Next at, %@", @"Text to inform the next program time information."), PlayAccessibilityShortTimeFromDate(self.program.startDate)];
+        return [NSString stringWithFormat:@"%@, %@", self.program.title, timeLabel];
+    }
+    else {
+        NSString * timeLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information. Firt placeholder is the start time, second is the end time."), PlayAccessibilityShortTimeFromDate(self.program.startDate), PlayAccessibilityShortTimeFromDate(self.program.endDate)];
+        return [NSString stringWithFormat:@"%@, %@", self.program.title, timeLabel];
+    }
 }
 
 - (NSString *)accessibilityHint
 {
-    return PlaySRGAccessibilityLocalizedString(@"Plays from the beginning.", @"Program cell hint");
+    return (self.timeAvailability == SRGTimeAvailabilityAvailable) ? PlaySRGAccessibilityLocalizedString(@"Plays from the beginning.", @"Program cell hint") : nil;
 }
 
 #pragma mark Attached data
@@ -123,6 +133,8 @@
     }
     
     if (! dateInterval || [program.startDate compare:dateInterval.startDate] == NSOrderedAscending) {
+        self.timeAvailability = SRGTimeAvailabilityNotAvailableAnymore;
+        
         self.titleLabel.textColor = UIColor.play_grayColor;
         
         self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
@@ -132,6 +144,8 @@
         self.userInteractionEnabled = NO;
     }
     else if ([dateInterval.endDate compare:program.startDate] == NSOrderedAscending) {
+        self.timeAvailability = SRGTimeAvailabilityNotYetAvailable;
+        
         self.titleLabel.textColor = UIColor.play_grayColor;
         
         self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Next at, %@", @"Introductory time for next program information"), [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate]];
@@ -141,6 +155,8 @@
         self.userInteractionEnabled = NO;
     }
     else {
+        self.timeAvailability = SRGTimeAvailabilityAvailable;
+        
         self.titleLabel.textColor = UIColor.whiteColor;
         
         self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
