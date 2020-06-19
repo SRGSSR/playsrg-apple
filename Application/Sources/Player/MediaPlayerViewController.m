@@ -1802,7 +1802,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     if (self.programs.count != 0) {
         ProgramHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(ProgramHeaderView.class)];
-        headerView.title = NSLocalizedString(@"Program", @"Program list header");
+        headerView.title = NSLocalizedString(@"Programs", @"Program list header");
         return headerView;
     }
     else {
