@@ -43,7 +43,7 @@
 
 - (NSString *)title
 {
-    return NSLocalizedString(@"Songs", @"Song list title");
+    return NSLocalizedString(@"Music", @"Song list title");
 }
 
 - (void)setUpdateTimer:(ForegroundTimer *)updateTimer

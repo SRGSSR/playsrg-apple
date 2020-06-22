@@ -151,7 +151,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 - (NSString *)accessibilityHint
 {
-    return self.userInteractionEnabled ? PlaySRGAccessibilityLocalizedString(@"Plays the song.", @"Song cell hint") : nil;
+    return self.userInteractionEnabled ? PlaySRGAccessibilityLocalizedString(@"Plays the music.", @"Song cell hint") : nil;
 }
 
 #pragma mark UI
