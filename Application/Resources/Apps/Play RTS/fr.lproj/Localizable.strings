@@ -272,7 +272,7 @@
 "Next" = "Suivant";
 
 /* Introductory time for next program information */
-"Next at, %@" = "À suivre à %@";
+"Next, at %@" = "À suivre à %@";
 
 /* Text displayed when no media added to the watch later list */
 "No content" = "Aucun contenu";

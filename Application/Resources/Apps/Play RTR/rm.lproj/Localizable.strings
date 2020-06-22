@@ -272,7 +272,7 @@
 "Next" = "Proxim";
 
 /* Introductory time for next program information */
-"Next at, %@" = "Next at, %@";
+"Next, at %@" = "Next, at %@";
 
 /* Text displayed when no media added to the watch later list */
 "No content" = "Nagin cuntegn";

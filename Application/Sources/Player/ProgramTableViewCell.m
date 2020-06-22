@@ -81,11 +81,11 @@
 - (NSString *)accessibilityLabel
 {
     if (self.timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
-        NSString * timeLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"Next at, %@", @"Text to inform the next program time information."), PlayAccessibilityShortTimeFromDate(self.program.startDate)];
+        NSString *timeLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"Next, at %@", @"Text providing next program time information."), PlayAccessibilityShortTimeFromDate(self.program.startDate)];
         return [NSString stringWithFormat:@"%@, %@", self.program.title, timeLabel];
     }
     else {
-        NSString * timeLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text to inform a program time information. Firt placeholder is the start time, second is the end time."), PlayAccessibilityShortTimeFromDate(self.program.startDate), PlayAccessibilityShortTimeFromDate(self.program.endDate)];
+        NSString *timeLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityShortTimeFromDate(self.program.startDate), PlayAccessibilityShortTimeFromDate(self.program.endDate)];
         return [NSString stringWithFormat:@"%@, %@", self.program.title, timeLabel];
     }
 }
@@ -148,7 +148,7 @@
         
         self.titleLabel.textColor = UIColor.play_grayColor;
         
-        self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Next at, %@", @"Introductory time for next program information"), [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate]];
+        self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Next, at %@", @"Introductory time for next program information"), [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate]];
         self.subtitleLabel.textColor = UIColor.play_grayColor;
         
         self.disabledOverlayView.hidden = NO;
