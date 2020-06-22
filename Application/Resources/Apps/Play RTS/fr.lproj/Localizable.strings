@@ -74,9 +74,6 @@
    Confirmation message displayed when the user is about to remove selected entries from the watch later list */
 "Are you sure you want to delete the selected items?" = "Etes-vous sûr de vouloir supprimer les éléments sélectionnés ?";
 
-/* Introductory text for next program information */
-"At %1$@: %2$@" = "Prochainement à %1$@ : %2$@";
-
 /* Audios option
    Header for audio search results
    Title displayed at the top of the audio view */
@@ -109,12 +106,6 @@
 
 /* Settings section header */
 "Content" = "Contenu";
-
-/* Text displayed on live cells when no program time information is available */
-"Currently" = "En ce moment";
-
-/* Title in the mini player for the live stream, if the current program is known. */
-"Currently: %@" = "En direct : %@";
 
 /* Title of a delete button
    Title of the delete button in the alert view when deleting a download in the player view */
@@ -261,6 +252,9 @@
 
 /* Most searched shows header */
 "Most searched shows" = "Émissions les plus recherchées";
+
+/* Song list title */
+"Music" = "Musique";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mon compte";
@@ -456,9 +450,6 @@
 /* Title of the button to skip updating the application */
 "Skip" = "Ignorer";
 
-/* Song list title */
-"Songs" = "Chansons";
-
 /* Short label identifying content which will be available soon. */
 "Soon" = "Prochainement";
 
@@ -540,7 +531,7 @@
 "This week" = "Cette semaine";
 
 /* Introductory text for live content played with timeshift, displayed on the mini player */
-"Time-shifted" = "En différé";
+"Time-shifted" = "Différé";
 
 /* Period setting option
    Title of the button to go back to the current date */

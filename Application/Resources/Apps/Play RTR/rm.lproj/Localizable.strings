@@ -74,9 +74,6 @@
    Confirmation message displayed when the user is about to remove selected entries from the watch later list */
 "Are you sure you want to delete the selected items?" = "Vulais Vus propi stizzar il elements selectà?";
 
-/* Introductory text for next program information */
-"At %1$@: %2$@" = "A las %1$@: %2$@";
-
 /* Audios option
    Header for audio search results
    Title displayed at the top of the audio view */
@@ -109,12 +106,6 @@
 
 /* Settings section header */
 "Content" = "Cuntegn";
-
-/* Text displayed on live cells when no program time information is available */
-"Currently" = "Actualmain";
-
-/* Title in the mini player for the live stream, if the current program is known. */
-"Currently: %@" = "Actualmain: %@";
 
 /* Title of a delete button
    Title of the delete button in the alert view when deleting a download in the player view */
@@ -261,6 +252,9 @@
 
 /* Most searched shows header */
 "Most searched shows" = "Emissiuns las pli tschertgadas";
+
+/* Song list title */
+"Music" = "Music";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mes conto";
@@ -455,9 +449,6 @@
 
 /* Title of the button to skip updating the application */
 "Skip" = "Finir";
-
-/* Song list title */
-"Songs" = "Songs";
 
 /* Short label identifying content which will be available soon. */
 "Soon" = "Proximamain";

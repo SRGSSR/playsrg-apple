@@ -48,6 +48,9 @@
 /* Show unsubscription label */
 "Disable notifications for show" = "Disable notifications for topic";
 
+/* Accessibility label of the song list handle when open */
+"Display music" = "Display music";
+
 /* A download button label */
 "Download" = "Download";
 
@@ -57,8 +60,11 @@
 /* Introductory title for error notifications */
 "Error" = "Error";
 
-/* Text to inform a program time information. First placeholder is the start time, second is the end time. */
+/* Text providing program time information. First placeholder is the start time, second is the end time. */
 "From %1$@ to %2$@" = "%1$@ to %2$@";
+
+/* Accessibility label of the song list handle when closed */
+"Hide music" = "Hide music";
 
 /* Introductory title for information notifications */
 "Information" = "Information";
@@ -81,7 +87,7 @@
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "My account";
 
-/* Text to inform the next program time information. */
+/* Text providing next program time information. */
 "Next, at %@" = "Next, at %@";
 
 /* Mini player label */
@@ -118,7 +124,7 @@
 "Plays the content." = "Plays the content.";
 
 /* Song cell hint */
-"Plays the song." = "Plays the song.";
+"Plays the music." = "Plays the music.";
 
 /* Title displayed in home page shows section. */
 "Programmes A-Z" = "Programmes A-Z";
@@ -153,9 +159,6 @@
 
 /* Homepage header action hint */
 "Shows all contents." = "Shows all contents.";
-
-/* Title of the songs panel */
-"Song panel" = "Song panel";
 
 /* Stop button label */
 "Stop" = "Stop";
