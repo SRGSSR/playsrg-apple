@@ -344,9 +344,6 @@
 /* Label to present programmes by date */
 "Programmes by date" = "Trasmissioni per data";
 
-/* Program list header */
-"Programs" = "Programs";
-
 /* Settings section header */
 "Properties" = "Proprietà";
 
@@ -439,7 +436,8 @@
 /* Show more button label when a link is available for broadcast information. */
 "Show more" = "Ulteriori informazioni";
 
-/* Show search result header
+/* Program list header in livestream view
+   Show search result header
    Shows search setting option
    Shows search setting option list view title
    Title label used to present radio associated shows
