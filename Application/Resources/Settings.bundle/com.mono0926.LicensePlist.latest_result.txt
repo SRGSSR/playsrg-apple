@@ -430,7 +430,7 @@ version: 7.0.1
 
 name: Aiolos, nameSpecified: , owner: IdeasOnCanvas, version: 1.3.0
 
-name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 3.2.0
+name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 3.3.0
 
 name: CoconutKit, nameSpecified: , owner: defagos, version: 3.4
 
