@@ -11,7 +11,7 @@
   "identityWebserviceURL": "https://hummingbird.rts.ch/api/profile",
   "identityWebsiteURL": "https://www.rts.ch/profile",
   "userDataServiceURL": "https://profil.rts.ch/api",
-  "videoHomeSections": "tvTrending,tvShowsAccess,tvFavoriteShows,tvEvents,tvTopics",
+  "videoHomeSections": "tvTrending,tvTopicsAccess,tvShowsAccess,tvFavoriteShows,tvEvents,tvTopics",
   "liveHomeSections": "tvLive,radioLive",
   "tvTrendingEpisodesOnly": false,
   "tvTrendingEditorialLimit": 3,
