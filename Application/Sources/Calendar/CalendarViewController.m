@@ -47,15 +47,12 @@
     if (self = [super init]) {
         self.radioChannel = radioChannel;
         self.initialDate = date;
+        self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];
         
         UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                                                  options:@{ UIPageViewControllerOptionInterPageSpacingKey : @100.f }];
         pageViewController.delegate = self;
-        
-        if (@available(iOS 10, *)) {
-            self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];      // Only available for iOS 10 and above
-        }
         
         [self setInsetViewController:pageViewController atIndex:0];
         self.pageViewController = pageViewController;
@@ -133,7 +130,7 @@
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
-                                               name:UIAccessibilityVoiceOverStatusChanged
+                                               name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
     
     // Cannot use `-calendar:boundingRectWillChange:animated: since not called with end values.
@@ -279,9 +276,7 @@
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition
 {
-    if (@available(iOS 10, *)) {
-        [self.selectionFeedbackGenerator selectionChanged];
-    }
+    [self.selectionFeedbackGenerator selectionChanged];
     [self showMediasForDate:date animated:YES];
 }
 
@@ -300,9 +295,10 @@
 
 - (UIColor *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance titleDefaultColorForDate:(NSDate *)date
 {
-    BOOL isAvailable = [[self minimumDateForCalendar:calendar] compare:date] != NSOrderedDescending
-        && [date compare:[self maximumDateForCalendar:calendar]] != NSOrderedDescending;
-    return isAvailable ? UIColor.play_lightGrayColor : [UIColor.play_lightGrayColor colorWithAlphaComponent:0.4f];
+    NSDate *startDate = [self minimumDateForCalendar:calendar];
+    NSDate *endDate = [self maximumDateForCalendar:calendar];
+    NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:startDate endDate:endDate];
+    return [dateInterval containsDate:date] ? UIColor.play_lightGrayColor : [UIColor.play_lightGrayColor colorWithAlphaComponent:0.4f];
 }
 
 #pragma mark ContainerContentInsets protocol

@@ -2,7 +2,7 @@
 
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '9.0'
+platform :ios, '12.0'
 inhibit_all_warnings!
 
 abstract_target 'PlaySRG' do
@@ -12,11 +12,10 @@ abstract_target 'PlaySRG' do
   pod 'FSCalendar', '2.7.9'
   pod 'google-cast-sdk-no-bluetooth', '~> 4.4.6'
   pod 'InAppSettingsKit', '~> 2.10.0'
-  pod 'MaterialComponents/Tabs', '~> 101.1.1'
+  pod 'MaterialComponents/Tabs', '~> 109.5'
   pod 'MGSwipeTableCell', '~> 1.6.8'
-  pod 'paper-onboarding', '~> 6.1.3'
-  pod 'SwiftMessages', '~> 7.0.0'
-  pod 'UrbanAirship-iOS-SDK', '9.4.0'
+  pod 'paper-onboarding', '~> 6.1.5'
+  pod 'SwiftMessages', '~> 7.0.1'
 
   target 'Play SRF' do
   end

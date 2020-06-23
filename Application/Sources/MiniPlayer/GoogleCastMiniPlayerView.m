@@ -22,6 +22,7 @@
 @property (nonatomic, weak) IBOutlet AccessibilityView *accessibilityView;
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 @property (nonatomic, weak) IBOutlet GoogleCastPlaybackButton *playbackButton;
+@property (nonatomic, weak) IBOutlet UILabel *liveLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
 @end
@@ -83,7 +84,19 @@
     // Remark: Do not use controller.session which, probably because of a bug, is not updated to point at the current session
     //         if created before it. Its progress still reflects the one of the current session media, though.
     GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
-    GCKMediaMetadata *metadata = session.remoteMediaClient.mediaStatus.mediaInformation.metadata;
+    GCKMediaInformation *mediaInformation = session.remoteMediaClient.mediaStatus.mediaInformation;
+    if (mediaInformation.streamType == GCKMediaStreamTypeLive) {
+        self.titleLabel.numberOfLines = 1;
+        
+        self.liveLabel.hidden = NO;
+        self.liveLabel.text = NSLocalizedString(@"Live", @"Introductory text for what is currently on air, displayed on the mini player");
+    }
+    else {
+        self.titleLabel.numberOfLines = 2;
+        self.liveLabel.hidden = YES;
+    }
+    
+    GCKMediaMetadata *metadata = mediaInformation.metadata;
     if (metadata) {
         self.titleLabel.text = [metadata stringForKey:kGCKMetadataKeyTitle];
     }
@@ -102,6 +115,7 @@
 
 - (void)updateFonts
 {
+    self.liveLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
 }
 
@@ -116,12 +130,15 @@
 
 - (NSString *)labelForAccessibilityView:(AccessibilityView *)accessibilityView
 {
-    return self.titleLabel.text;
+    GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
+    GCKMediaPlayerState playerState = session.remoteMediaClient.mediaStatus.playerState;
+    NSString *format = (playerState == GCKMediaPlayerStatePlaying) ? PlaySRGAccessibilityLocalizedString(@"Now playing: %@", @"Mini player label") : PlaySRGAccessibilityLocalizedString(@"Recently played: %@", @"Mini player label");
+    return [NSString stringWithFormat:format, self.titleLabel.text];
 }
 
 - (NSString *)hintForAccessibilityView:(AccessibilityView *)accessibilityView
 {
-    return PlaySRGAccessibilityLocalizedString(@"Plays the content.", @"Mini player action hint");
+    return PlaySRGAccessibilityLocalizedString(@"Opens the full screen player", @"Mini player action hint");
 }
 
 #pragma mark GCKUIMediaControllerDelegate protocol

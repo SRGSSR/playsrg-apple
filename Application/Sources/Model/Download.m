@@ -121,23 +121,34 @@ static NSArray<Download *> *s_sortedDownloads;
 
 + (NSDictionary<NSString *, Download *> *)loadDownloadsDictionary
 {
-    NSDictionary<NSString *, Download *> *downloadsDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self downloadsFilePath]];
+    NSData *data = [NSData dataWithContentsOfFile:[self downloadsFilePath]];
+    NSDictionary<NSString *, Download *> *downloadsDictionary = [NSKeyedUnarchiver unarchivedObjectOfClass:NSDictionary.class fromData:data error:NULL];
+    if (! downloadsDictionary) {
+        return nil;
+    }
     
-    NSPredicate *isStringURN = [NSPredicate predicateWithBlock:^BOOL(id _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+    NSPredicate *isNotNSString = [NSPredicate predicateWithBlock:^BOOL(id _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
         return [evaluatedObject isKindOfClass:NSString.class];
     }];
-    NSPredicate *isDownload = [NSPredicate predicateWithBlock:^BOOL(id _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+    if ([downloadsDictionary.allKeys filteredArrayUsingPredicate:isNotNSString].count != 0) {
+        return nil;
+    }
+    
+    NSPredicate *isNotDownload = [NSPredicate predicateWithBlock:^BOOL(id _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
         return [evaluatedObject isKindOfClass:Download.class];
     }];
+    if ([downloadsDictionary.allValues filteredArrayUsingPredicate:isNotDownload].count != 0) {
+        return nil;
+    }
     
-    // Return the loaded dictionnary iff it contains expected objects
-    return ([downloadsDictionary.allKeys filteredArrayUsingPredicate:isStringURN].count ==
-            [downloadsDictionary.allValues filteredArrayUsingPredicate:isDownload].count) ? downloadsDictionary : nil;
+    return downloadsDictionary;
 }
 
 + (void)saveDownloadsDictionary
 {
-    [NSKeyedArchiver archiveRootObject:s_downloadsDictionary toFile:[self downloadsFilePath]];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:s_downloadsDictionary requiringSecureCoding:NO error:NULL];
+    [data writeToFile:[self downloadsFilePath] atomically:YES];
+    
     [self saveDownloadsBackupDictionary];
 }
 

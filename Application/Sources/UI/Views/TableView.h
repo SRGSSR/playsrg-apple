@@ -9,7 +9,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Common Play design for table views instantiated in code (with manual cell height).
+ *  Apply standard Play configuration to a given table view (with manual cell height).
+ */
+OBJC_EXPORT void TableViewConfigure(UITableView *tableView);
+
+/**
+ *  Properly configured Play standard table view for instantiation in code (with manual cell height).
  */
 @interface TableView : UITableView
 

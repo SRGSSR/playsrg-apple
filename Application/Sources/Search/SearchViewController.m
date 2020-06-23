@@ -142,7 +142,7 @@
     
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
-    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.obscuresBackgroundDuringPresentation = NO;
     self.searchController.hidesNavigationBarDuringPresentation = NO;
     self.searchController.delegate = self;
     
@@ -154,27 +154,17 @@
     searchBar.play_textField.font = [UIFont srg_regularFontWithSize:18.f];
     searchBar.delegate = self;
     searchBar.text = self.query;
+    searchBar.tintColor = UIColor.whiteColor;
     
     // Required for proper search bar behavior
     self.definesPresentationContext = YES;
     
-    if (@available(iOS 11, *)) {
-        searchBar.tintColor = UIColor.whiteColor;
-        
-        self.navigationItem.searchController = self.searchController;
-        self.navigationItem.hidesSearchBarWhenScrolling = NO;
-    }
-    else {
-        searchBar.tintColor = UIColor.grayColor;
-        searchBar.barTintColor = UIColor.clearColor;      // Avoid search bar glitch when revealed by pop in navigation controller
-        
-        self.navigationItem.titleView = searchBar;
-        self.searchController.hidesNavigationBarDuringPresentation = NO;
-    }
+    self.navigationItem.searchController = self.searchController;
+    self.navigationItem.hidesSearchBarWhenScrolling = NO;
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
-                                               name:UIAccessibilityVoiceOverStatusChanged
+                                               name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
     
     [self updateSearchSettingsButton];
@@ -347,12 +337,6 @@
         
         UIImage *image = [SearchViewController containsAdvancedSettings:self.settings] ? [UIImage imageNamed:@"filter_on-22"] : [UIImage imageNamed:@"filter_off-22"];
         [filtersButton setImage:image forState:UIControlStateNormal];
-        
-        // Ensure the frame is correct prior to iOS 11
-        if (@available(iOS 11, *)) {}
-        else {
-            [filtersButton sizeToFit];
-        }
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:filtersButton];
     }
@@ -537,10 +521,6 @@
         SearchShowListCollectionViewCell *showListCell = (SearchShowListCollectionViewCell *)cell;
         showListCell.shows = self.shows;
     }
-    else if ([cell isKindOfClass:SearchLoadingCollectionViewCell.class]) {
-        SearchLoadingCollectionViewCell *loadingCell = (SearchLoadingCollectionViewCell *)cell;
-        [loadingCell startAnimating];
-    }
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath
@@ -590,9 +570,10 @@
         }
     }
     
-    // iOS 11 bug: The header hides scroll indicators
+    // iOS 11 - 12 bug: The header hides scroll indicators
     // See https://stackoverflow.com/questions/46747960/ios11-uicollectionsectionheader-clipping-scroll-indicator
-    if (@available(iOS 11, *)) {
+    if (@available(iOS 13, *)) {}
+    else {
         view.layer.zPosition = 0;
     }
 }
@@ -711,6 +692,7 @@
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController
                                                                                                 tintColor:UIColor.whiteColor
                                                                                           backgroundColor:backgroundColor
+                                                                                                separator:YES
                                                                                            statusBarStyle:UIStatusBarStyleLightContent];
     navigationController.modalPresentationStyle = UIModalPresentationPopover;
     

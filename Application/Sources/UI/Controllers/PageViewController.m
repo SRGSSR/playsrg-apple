@@ -82,7 +82,7 @@
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
     [self.view addSubview:blurView];
     [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_topLayoutGuide);          // Warning: Needs self.view to be set, otherwise leads to infinite recursion
+        make.top.equalTo(self.view.mas_safeAreaLayoutGuide);
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
         make.height.equalTo(@60);

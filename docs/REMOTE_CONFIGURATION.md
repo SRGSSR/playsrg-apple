@@ -38,18 +38,24 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 ## Channel configuration
 
-* `tvChannels` (optional, JSON): A JSON array of JSON dictionaries describing TV channel configuration, and made of the following keys:
-    * `uid` (mandatory, string): The unique identifier of the TV channel.
-    * `name` (mandatory, string): The TV channel name.
-    * `resourceUid` (mandatory, string): Local unique identifier for referencing resources related to the channel.
-* `radioChannels` (optional, JSON): A JSON array of JSON dictionaries describing radio channel configuration, and made of the following keys:
-    * `uid` (mandatory, string): The unique identifier of the radio channel.
-    * `name` (mandatory, string): The radio channel name.
-    * `resourceUid` (mandatory, string): Local unique identifier for referencing resources related to the channel.
-    * `color` (mandatory, string): The radio channel primary hex color. Used as navigation bar background color.
-    * `homeSections` (optional, string, multiple): The sections to be displayed on the radio channel homepage. Refer to _Audio homepage_ for available values. If omitted, the global `audioHomeSections` setting is used instead (in which case this value is required).
-    * `titleColor` (optional, string): Hex color of the text displayed within the navigation bar (should provide sufficient contrast with `color`). If omitted, white.
-    * `hasDarkStatusBar` (optional, boolean): `true` iff the status bar should be dark for this channel. If omitted, `false`.
+TV and radio channels are configured with corresponding JSON dictionaries:
+
+* `tvChannels` (optional, JSON): A JSON array of JSON dictionaries describing TV channel configuration. Available common keys are listed below.
+* `radioChannels` (optional, JSON): A JSON array of JSON dictionaries describing radio channel configuration. Available common keys are listed below, with the additional following specific keys:
+    * `homeSections` (optional, string, multiple): The sections to be displayed on the channel homepage. Refer to _Audio homepage_ for available values. If omitted, the global `audioHomeSections` setting is used instead (in which case this value is required).
+
+The keys common to both TV and radio channels JSON dictionaries are:
+
+* `uid` (mandatory, string): The unique identifier of the channel.
+* `name` (mandatory, string): The channel name.
+* `resourceUid` (mandatory, string): Local unique identifier for referencing resources related to the channel.
+* `color` (optional, string): The channel primary hex color. Used as navigation bar background color. If omitted, gray.
+* `secondColor` (optional, string): The channel second hex color. Currently used for gradients. If omitted, same as `color`.
+* `titleColor` (optional, string): Hex color of the text displayed on top of colored areas (should provide sufficient contrast with `color` and `secondColor`). If omitted, white.
+* `hasDarkStatusBar` (optional, boolean): `true` iff the status bar should be dark for this channel. If omitted, `false`.
+* `songsViewStyle` (optional, string): The songs view style when added to the view. Never displayed if not set. Available values are:
+   * `collapsed`: Collapsed when added to the view.
+   * `expanded`: Expanded when added to the view.
 
 ## Video homepage
 
@@ -71,7 +77,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 * `topicSections` (optional, string, multiple): The sections to be displayed when opening a topic. If none is provided, latest medias are displayed. Available values are:
    * `latest`: The latest medias.
-   * `mostPopular`: The most popular medias
+   * `mostPopular`: The most popular medias.
 * `topicSectionsWithSubtopics` (optional, string, multiple): The sections to be displayed when opening a topic with subtopics. If none is provided, only subtopics are displayed. Available values are the same as `topicSections`.
 
 ### User interface options

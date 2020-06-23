@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -41,15 +41,35 @@
                         <userDefinedRuntimeAttribute type="image" keyPath="pauseImage" value="pause-50"/>
                     </userDefinedRuntimeAttributes>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO5-25-JOn">
-                    <rect key="frame" x="61" y="6" width="511" height="40"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cOr-X0-OJp">
+                    <rect key="frame" x="61" y="1" width="511" height="50"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vmg-4C-7ZW" userLabel="Spacer View">
+                            <rect key="frame" x="0.0" y="0.0" width="511" height="7"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="&lt;live&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwe-Iw-iYe">
+                            <rect key="frame" x="0.0" y="7" width="511" height="18"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO5-25-JOn">
+                            <rect key="frame" x="0.0" y="25" width="511" height="18"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Cx-xZ-XT3" userLabel="Spacer View">
+                            <rect key="frame" x="0.0" y="43" width="511" height="7"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="2PS-Sm-MbU"/>
+                        <constraint firstItem="8Cx-xZ-XT3" firstAttribute="height" secondItem="Vmg-4C-7ZW" secondAttribute="height" id="6U7-a2-Ye4"/>
+                        <constraint firstAttribute="height" constant="50" id="Kvb-PQ-LOM"/>
                     </constraints>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKg-8I-Eaj">
                     <rect key="frame" x="582" y="5" width="42" height="42"/>
                     <constraints>
@@ -66,19 +86,19 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="wKg-8I-Eaj" firstAttribute="leading" secondItem="cOr-X0-OJp" secondAttribute="trailing" constant="10" id="1bJ-Q6-CR6"/>
                 <constraint firstItem="GVn-x1-1Al" firstAttribute="top" secondItem="Bfa-82-k4k" secondAttribute="top" id="6cE-re-lCW"/>
-                <constraint firstItem="oO5-25-JOn" firstAttribute="leading" secondItem="iWC-hN-4pX" secondAttribute="trailing" constant="10" id="BLW-a1-Fow"/>
+                <constraint firstItem="cOr-X0-OJp" firstAttribute="centerY" secondItem="iWC-hN-4pX" secondAttribute="centerY" id="8uu-d5-SW6"/>
                 <constraint firstItem="GVn-x1-1Al" firstAttribute="leading" secondItem="Bfa-82-k4k" secondAttribute="leading" id="BMC-Q2-rYe"/>
+                <constraint firstItem="wKg-8I-Eaj" firstAttribute="centerY" secondItem="iWC-hN-4pX" secondAttribute="centerY" id="FVv-Bp-DjX"/>
                 <constraint firstAttribute="trailing" secondItem="GVn-x1-1Al" secondAttribute="trailing" id="HfN-VP-e1S"/>
                 <constraint firstItem="Rm4-ky-aFv" firstAttribute="leading" secondItem="Bfa-82-k4k" secondAttribute="leading" id="Hpv-L9-Wj4"/>
                 <constraint firstAttribute="trailing" secondItem="Rm4-ky-aFv" secondAttribute="trailing" id="MEC-bn-dJV"/>
                 <constraint firstItem="Rm4-ky-aFv" firstAttribute="top" secondItem="Bfa-82-k4k" secondAttribute="top" id="ORv-Tg-jLV"/>
                 <constraint firstItem="iWC-hN-4pX" firstAttribute="top" secondItem="Bfa-82-k4k" secondAttribute="top" constant="5" id="RKG-FW-KyD"/>
-                <constraint firstItem="wKg-8I-Eaj" firstAttribute="leading" secondItem="oO5-25-JOn" secondAttribute="trailing" constant="10" id="WbO-HY-uOc"/>
+                <constraint firstItem="cOr-X0-OJp" firstAttribute="leading" secondItem="iWC-hN-4pX" secondAttribute="trailing" constant="10" id="Yfl-3u-SOx"/>
                 <constraint firstItem="iWC-hN-4pX" firstAttribute="leading" secondItem="Bfa-82-k4k" secondAttribute="leading" constant="9" id="pdP-0Y-hhH"/>
                 <constraint firstAttribute="bottom" secondItem="GVn-x1-1Al" secondAttribute="bottom" id="pln-Zb-XXP"/>
-                <constraint firstItem="oO5-25-JOn" firstAttribute="centerY" secondItem="iWC-hN-4pX" secondAttribute="centerY" id="q2i-xD-Yq0"/>
-                <constraint firstItem="wKg-8I-Eaj" firstAttribute="centerY" secondItem="oO5-25-JOn" secondAttribute="centerY" id="qlG-3T-HMU"/>
                 <constraint firstAttribute="trailing" secondItem="wKg-8I-Eaj" secondAttribute="trailing" constant="9" id="xnB-eN-Rg0"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
@@ -87,6 +107,7 @@
             <connections>
                 <outlet property="accessibilityView" destination="GVn-x1-1Al" id="lYr-CS-FCD"/>
                 <outlet property="closeButton" destination="wKg-8I-Eaj" id="hMX-gi-L44"/>
+                <outlet property="liveLabel" destination="Uwe-Iw-iYe" id="GbK-Vu-wQ1"/>
                 <outlet property="playbackButton" destination="iWC-hN-4pX" id="TVO-GV-Cpc"/>
                 <outlet property="progressView" destination="Rm4-ky-aFv" id="scO-yb-K84"/>
                 <outlet property="titleLabel" destination="oO5-25-JOn" id="1E0-1z-5Y9"/>

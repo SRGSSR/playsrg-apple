@@ -1,6 +1,9 @@
 /* Date at time label to spell a date and time value. */
 "%1$@ at %2$@" = "%1$@ las %2$@";
 
+/* Song description. First placeholder is song title, second is artist name */
+"%1$@, by %2$@" = "%1$@, by %2$@";
+
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ tadlà";
 
@@ -54,8 +57,11 @@
 /* Introductory title for error notifications */
 "Error" = "Errur";
 
-/* Text to inform a program time information, like the current program */
+/* Text providing program time information. First placeholder is the start time, second is the end time. */
 "From %1$@ to %2$@" = "Davent da %1$@ enfin %2$@";
+
+/* Accessibility label of the song list handle when opened */
+"Hide music list" = "Hide music list";
 
 /* Introductory title for information notifications */
 "Information" = "Infurmaziun";
@@ -72,8 +78,14 @@
 /* Accessibility hint associated with the account header */
 "Manages account information" = "Organisescha las infurmaziuns da l'account";
 
+/* A more episode button label */
+"More episodes" = "More episodes";
+
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mes conto";
+
+/* Text providing next program time information. */
+"Next, at %@" = "Next, at %@";
 
 /* Mini player label */
 "Now playing: %@" = "Uss va: %@";
@@ -90,6 +102,9 @@
 /* Mini player action hint */
 "Opens the full screen player" = "Avra il player sin l'entir visur";
 
+/* Show cell hint */
+"Opens topic details." = "Opens topic details.";
+
 /* Accessibility label for the multi audio badge */
 "Original version" = "Versiun originala";
 
@@ -99,9 +114,14 @@
 /* Play button label */
 "Play" = "Laschar ir";
 
-/* Media cell hint
-   Mini player action hint */
+/* Program cell hint */
+"Plays from the beginning." = "Plays from the beginning.";
+
+/* Media cell hint */
 "Plays the content." = "Laschà ì il cuntegn.";
+
+/* Song cell hint */
+"Plays the music." = "Plays the music.";
 
 /* Title displayed in home page shows section. */
 "Programmes A-Z" = "Emissiuns dad A fin Z";
@@ -133,6 +153,9 @@
 
 /* Share button label on player view */
 "Share" = "Divida";
+
+/* Accessibility label of the song list handle when closed */
+"Show music list" = "Show music list";
 
 /* Homepage header action hint */
 "Shows all contents." = "Mussar tuts cuntegns.";

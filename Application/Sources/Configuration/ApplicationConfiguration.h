@@ -160,6 +160,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 - (nullable RadioChannel *)radioChannelForUid:(NSString *)uid;
 - (nullable TVChannel *)tvChannelForUid:(NSString *)uid;
+- (nullable __kindof Channel *)channelForUid:(NSString *)uid;
 
 /**
  *  URLs to be used for sharing

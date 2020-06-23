@@ -13,27 +13,28 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIImageView (PlaySRG)
 
 /**
- *  Standard loading indicators
+ *  Standard loading indicators (animation already started).
  */
 + (UIImageView *)play_loadingImageView48WithTintColor:(nullable UIColor *)tintColor;
 + (UIImageView *)play_loadingImageView90WithTintColor:(nullable UIColor *)tintColor;
 
 /**
- *  Standard loading animations
+ *  Standard loading animations (must be managed with `-startAnimating` and `-stopAnimating`).
  */
-- (void)play_startAnimatingLoading90WithTintColor:(nullable UIColor *)tintColor;
+- (void)play_setLoadingAnimation90WithTintColor:(nullable UIColor *)tintColor;
 
 /**
- *  Standard download animations
+ *  Standard download animations (must be managed with `-startAnimating` and `-stopAnimating`).
  */
-- (void)play_startAnimatingDownloading16WithTintColor:(nullable UIColor *)tintColor;
-- (void)play_startAnimatingDownloading22WithTintColor:(nullable UIColor *)tintColor;
-- (void)play_startAnimatingDownloading48WithTintColor:(nullable UIColor *)tintColor;
+- (void)play_setDownloadAnimation16WithTintColor:(nullable UIColor *)tintColor;
+- (void)play_setDownloadAnimation22WithTintColor:(nullable UIColor *)tintColor;
+- (void)play_setDownloadAnimation48WithTintColor:(nullable UIColor *)tintColor;
 
 /**
- *  Stop an animation
+ *  Standard playback animations (must be managed with `-startAnimating` and `-stopAnimating`).
  */
-- (void)play_stopAnimating;
+- (void)play_setWaveformAnimation34WithTintColor:(nullable UIColor *)tintColor;
+- (void)play_setPlayAnimation34WithTintColor:(nullable UIColor *)tintColor;
 
 /**
  *  Request an image of the specified object. Use `SRGImageTypeDefault` for the default image.

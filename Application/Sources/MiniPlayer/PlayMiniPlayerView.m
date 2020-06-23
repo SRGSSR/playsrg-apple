@@ -16,6 +16,7 @@
 #import "MediaPlayerViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
+#import "SRGProgramComposition+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -26,8 +27,8 @@
 
 @interface PlayMiniPlayerView () <AccessibilityViewDelegate, SRGPlaybackButtonDelegate>
 
-@property (nonatomic) SRGMedia *media;          // Latest media
-@property (nonatomic) SRGChannel *channel;      // Latest channel information, if any
+@property (nonatomic) SRGMedia *media;                                // Latest media
+@property (nonatomic) SRGProgramComposition *programComposition;      // Latest program information, if any
 
 @property (nonatomic) SRGLetterboxController *controller;
 
@@ -35,10 +36,12 @@
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
 @property (nonatomic, weak) IBOutlet SRGPlaybackButton *playbackButton;
+@property (nonatomic, weak) IBOutlet UILabel *liveLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *closeButton;
 
 @property (nonatomic, weak) id periodicTimeObserver;
+@property (nonatomic, weak) id channelRegistration;
 
 @end
 
@@ -73,11 +76,13 @@
 
 - (void)setMedia:(SRGMedia *)media
 {
-    self.channel = media.channel;
+    if (media.contentType != SRGContentTypeLivestream || ! [media.channel isEqual:self.programComposition.channel]) {
+        self.programComposition = nil;
+    }
     
-    [self unregisterChannelUpdatesWithMedia:_media];
+    [self unregisterChannelUpdates];
     _media = media;
-    [self registerForChannelUpdatesWithMedia:media];
+    [self registerForChannelUpdatesWithFallbackMedia:media];
 }
 
 - (void)setController:(SRGLetterboxController *)controller
@@ -169,13 +174,13 @@
         
         [self reloadData];
         
-        [self registerForChannelUpdatesWithMedia:self.media];
+        [self registerForChannelUpdatesWithFallbackMedia:self.media];
     }
     else {
         [letterboxService removeObserver:self keyPath:@keypath(letterboxService.controller)];
         self.controller = nil;
         
-        [self unregisterChannelUpdatesWithMedia:self.media];
+        [self unregisterChannelUpdates];
     }
 }
 
@@ -192,16 +197,36 @@
 {
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     
-    SRGProgram *currentProgram = self.channel.currentProgram;
-    
-    // Display program information (if any) when the controller position is within the current program, otherwise channel
-    // information.
-    NSDate *currentDate = self.controller.date;
-    if (currentProgram && (! currentDate || [currentProgram play_containsDate:currentDate])) {
-        self.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Currently: %@", @"Title in the mini player for the live stream, if the current program is known."), currentProgram.title];
+    SRGChannel *channel = self.programComposition.channel;
+    if (channel) {
+        self.liveLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        if (! self.controller || self.controller.live) {
+            self.titleLabel.numberOfLines = 1;
+            self.liveLabel.hidden = NO;
+            self.liveLabel.text = NSLocalizedString(@"Live", @"Introductory text for what is currently on air, displayed on the mini player");
+        }
+        else if (self.media.contentType == SRGContentTypeLivestream || self.media.contentType == SRGContentTypeScheduledLivestream) {
+            self.titleLabel.numberOfLines = 1;
+            self.liveLabel.hidden = NO;
+            self.liveLabel.text = NSLocalizedString(@"Time-shifted", @"Introductory text for live content played with timeshift, displayed on the mini player");
+        }
+        else {
+            self.titleLabel.numberOfLines = 2;
+            self.liveLabel.hidden = YES;
+        }
     }
     else {
-        self.titleLabel.text = self.media.title;
+        self.titleLabel.numberOfLines = 2;
+        self.liveLabel.hidden = YES;
+    }
+    
+    NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
+    SRGProgram *currentProgram = [self.programComposition play_programAtDate:currentDate];
+    if (currentProgram) {
+        self.titleLabel.text = currentProgram.title;
+    }
+    else {
+        self.titleLabel.text = channel.title ?: self.media.title;
     }
     
     BOOL isLiveOnly = (self.controller.mediaPlayerController.streamType == SRGMediaPlayerStreamTypeLive);
@@ -213,31 +238,42 @@
 - (void)updateProgress
 {
     if ([self.controller.media isEqual:self.media]) {
-        CMTimeRange timeRange = self.controller.timeRange;
-        CMTime currentTime = self.controller.currentTime;
-        
-        if (CMTIMERANGE_IS_VALID(timeRange) && ! CMTIMERANGE_IS_EMPTY(timeRange)) {
-            self.progressView.progress = CMTimeGetSeconds(CMTimeSubtract(currentTime, timeRange.start)) / CMTimeGetSeconds(timeRange.duration);
-            return;
+        NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
+        SRGProgram *currentProgram = [self.programComposition play_programAtDate:currentDate];
+        if (currentProgram) {
+            self.progressView.progress = fmaxf(fminf([currentDate timeIntervalSinceDate:currentProgram.startDate] / [currentProgram.endDate timeIntervalSinceDate:currentProgram.startDate], 1.f), 0.f);
+            self.progressView.hidden = NO;
+        }
+        else if (self.media.contentType == SRGContentTypeLivestream) {
+            self.progressView.hidden = YES;
+        }
+        else {
+            CMTimeRange timeRange = self.controller.timeRange;
+            CMTime currentTime = self.controller.currentTime;
+            
+            if (CMTIMERANGE_IS_VALID(timeRange) && ! CMTIMERANGE_IS_EMPTY(timeRange)) {
+                self.progressView.progress = CMTimeGetSeconds(CMTimeSubtract(currentTime, timeRange.start)) / CMTimeGetSeconds(timeRange.duration);
+            }
+            else {
+                self.progressView.progress = HistoryPlaybackProgressForMediaMetadata(self.media);
+            }
+            self.progressView.hidden = NO;
         }
     }
-    
-    // For non-started playback, display a full progress bar for livestreams (matching the usual slider behavior starting
-    // at the end)
-    self.progressView.progress = (self.media.contentType == SRGContentTypeLivestream) ? 1.f : HistoryPlaybackProgressForMediaMetadata(self.media);
+    else {
+        if (self.media.contentType == SRGContentTypeLivestream) {
+            self.progressView.hidden = YES;
+        }
+        else {
+            self.progressView.progress = HistoryPlaybackProgressForMediaMetadata(self.media);
+            self.progressView.hidden = NO;
+        }
+    }
 }
 
 - (void)updateMetadataWithMedia:(SRGMedia *)media
 {
-    if (! [media isEqual:self.media]) {
-        self.media = media;
-    }
-    // Fix for inconsistent RTS data. A media from a media list does not have a channel oject, but a media created from a
-    // media composition has one. Use the one retrieved from the Letterbox metadata notification if available as fallback.
-    else if (! self.channel && media.channel) {
-        self.media = media;
-    }
-    
+    self.media = media;
     [self reloadData];
 }
 
@@ -263,29 +299,33 @@
 
 #pragma mark Channel updates
 
-- (void)registerForChannelUpdatesWithMedia:(SRGMedia *)media
+- (SRGMedia *)mainMedia
 {
-    if (! media) {
+    if (self.controller.mediaComposition) {
+        return [self.controller.mediaComposition mediaForSubdivision:self.controller.mediaComposition.mainChapter];
+    }
+    else {
+        return self.controller.media;
+    }
+}
+
+- (void)registerForChannelUpdatesWithFallbackMedia:(SRGMedia *)fallbackMedia
+{
+    SRGMedia *mainMedia = [self mainMedia] ?: fallbackMedia;
+    if (mainMedia.contentType != SRGContentTypeLivestream || ! mainMedia.channel) {
         return;
     }
     
-    if (media.contentType != SRGContentTypeLivestream) {
-        return;
-    }
-    
-    [ChannelService.sharedService registerObserver:self forChannelUpdatesWithMedia:media block:^(SRGChannel * _Nullable channel) {
-        self.channel = channel;
+    [ChannelService.sharedService removeObserver:self.channelRegistration];
+    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:mainMedia.channel livestreamUid:mainMedia.uid block:^(SRGProgramComposition * _Nullable programComposition) {
+        self.programComposition = programComposition;
         [self reloadData];
     }];
 }
 
-- (void)unregisterChannelUpdatesWithMedia:(SRGMedia *)media
+- (void)unregisterChannelUpdates
 {
-    if (! media) {
-        return;
-    }
-    
-    [ChannelService.sharedService unregisterObserver:self forMedia:media];
+    [ChannelService.sharedService removeObserver:self.channelRegistration];
 }
 
 #pragma mark AccessibilityViewDelegate protocol
@@ -298,12 +338,13 @@
     
     NSString *format = (self.controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) ? PlaySRGAccessibilityLocalizedString(@"Now playing: %@", @"Mini player label") : PlaySRGAccessibilityLocalizedString(@"Recently played: %@", @"Mini player label");
     
-    if (self.media.contentType == SRGContentTypeLivestream) {
-        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, self.channel.title];
-        SRGProgram *currentProgram = self.channel.currentProgram;
+    SRGChannel *channel = self.programComposition.channel;
+    if (channel) {
+        NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, channel.title];
         
-        NSDate *currentDate = self.controller.date;
-        if (currentProgram && (! currentDate || [currentProgram play_containsDate:currentDate])) {
+        NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
+        SRGProgram *currentProgram = [self.programComposition play_programAtDate:currentDate];
+        if (currentProgram) {
             [accessibilityLabel appendFormat:@", %@", currentProgram.title];
         }
         return accessibilityLabel.copy;

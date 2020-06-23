@@ -12,9 +12,9 @@
 #import "PlayAppDelegate.h"
 #import "Notification.h"
 
+#import <Airship/AirshipLib.h>
 #import <CoconutKit/CoconutKit.h>
 #import <libextobjc/libextobjc.h>
-#import <UrbanAirship-iOS-SDK/AirshipKit.h>
 #import <UserNotifications/UserNotifications.h>
 
 NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNotification";
@@ -124,7 +124,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (NSSet<NSString *> *)subscribedShowURNs
 {
-    NSArray<NSString *> *tags = [UAirship push].tags;
+    NSArray<NSString *> *tags = [UAirship channel].tags;
     if (tags.count == 0) {
         return [NSSet set];
     }
@@ -142,28 +142,21 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (BOOL)isEnabled
 {
-    // iOS 10 and above: Even if alerts have been disabled by the user, `UIApplication.registeredForRemoteNotifications`
-    // will still return `YES` if the target supports silent notifications (introduced with iOS 10 rich notifications).
-    // We nust retrieve the proper authorization status from iOS 10 `UNUserNotificationCenter`, providing finer-grained
-    // information covering these new use cases.
-    if (@available(iOS 10, *)) {
-        // Make asynchronous call synchronous
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        
-        __block UNNotificationSettings *notificationSettings = nil;
-        [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
-            notificationSettings = settings;
-            dispatch_semaphore_signal(semaphore);
-        }];
-        
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        return notificationSettings.authorizationStatus == UNAuthorizationStatusAuthorized;
-    }
-    // Before iOS 10: `UIApplication.registeredForRemoteNotifications` accurately reflects whether the user has authorized
-    // notificartions or not.
-    else {
-        return UIApplication.sharedApplication.currentUserNotificationSettings.types != UIUserNotificationTypeNone;
-    }
+    // Even if alerts have been disabled by the user, `UIApplication.registeredForRemoteNotifications` will still return
+    // `YES` if the target supports silent notifications. We must retrieve the proper authorization status from
+    // `UNUserNotificationCenter`, providing finer-grained information about notification settings.
+    
+    // Make asynchronous call synchronous
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    __block UNNotificationSettings *notificationSettings = nil;
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+        notificationSettings = settings;
+        dispatch_semaphore_signal(semaphore);
+    }];
+    
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return notificationSettings.authorizationStatus == UNAuthorizationStatusAuthorized;
 }
 
 #pragma mark Setup
@@ -171,13 +164,10 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 - (void)setup
 {
     [UAirship takeOff:self.configuration];
-    if (@available(iOS 10, *)) {
-        [UAirship push].defaultPresentationOptions = (UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
-    }
+    
+    [UAirship push].defaultPresentationOptions = (UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
     [UAirship push].pushNotificationDelegate = self;
     [UAirship push].autobadgeEnabled = YES;
-    
-    [[UAirship inAppMessageManager] setEnabled:NO];
 }
 
 #pragma mark Badge management
@@ -235,7 +225,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     }
     
     for (NSString *URN in URNs) {
-        [[UAirship push] addTag:[self tagForShowURN:URN]];
+        [[UAirship channel] addTag:[self tagForShowURN:URN]];
     }
     [[UAirship push] updateRegistration];
 }
@@ -247,14 +237,14 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     }
     
     for (NSString *URN in URNs) {
-        [[UAirship push] removeTag:[self tagForShowURN:URN]];
+        [[UAirship channel] removeTag:[self tagForShowURN:URN]];
     }
     [[UAirship push] updateRegistration];
 }
 
 - (BOOL)isSubscribedToShowURN:(NSString *)URN
 {
-    return [[UAirship push].tags containsObject:[self tagForShowURN:URN]];
+    return [[UAirship channel].tags containsObject:[self tagForShowURN:URN]];
 }
 
 #pragma mark Actions
@@ -276,15 +266,12 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (void)receivedNotificationResponse:(UANotificationResponse *)notificationResponse completionHandler:(void (^)(void))completionHandler
 {
-    if (@available(iOS 10, *)) {
-        if (notificationResponse.notificationContent.notification) {
-            Notification *notification = [[Notification alloc] initWithNotification:notificationResponse.notificationContent.notification];
-            [Notification saveNotification:notification read:YES];
-        }
+    if (notificationResponse.notificationContent.notification) {
+        Notification *notification = [[Notification alloc] initWithNotification:notificationResponse.notificationContent.notification];
+        [Notification saveNotification:notification read:YES];
     }
     
     UANotificationContent *notificationContent = notificationResponse.notificationContent;
-    
     NSString *channelUid = notificationContent.notificationInfo[@"channelId"];
     
     if (notificationContent.notificationInfo[@"media"]) {
@@ -324,11 +311,9 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (void)receivedForegroundNotification:(UANotificationContent *)notificationContent completionHandler:(void (^)(void))completionHandler
 {
-    if (@available(iOS 10, *)) {
-        if (notificationContent.notification) {
-            Notification *notification = [[Notification alloc] initWithNotification:notificationContent.notification];
-            [Notification saveNotification:notification read:NO];
-        }
+    if (notificationContent.notification) {
+        Notification *notification = [[Notification alloc] initWithNotification:notificationContent.notification];
+        [Notification saveNotification:notification read:NO];
     }
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceDidReceiveNotification object:self];
     completionHandler();
@@ -336,11 +321,9 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (void)receivedBackgroundNotification:(UANotificationContent *)notificationContent completionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-    if (@available(iOS 10, *)) {
-        if (notificationContent.notification) {
-            Notification *notification = [[Notification alloc] initWithNotification:notificationContent.notification];
-            [Notification saveNotification:notification read:NO];
-        }
+    if (notificationContent.notification) {
+        Notification *notification = [[Notification alloc] initWithNotification:notificationContent.notification];
+        [Notification saveNotification:notification read:NO];
     }
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceDidReceiveNotification object:self];
     completionHandler(UIBackgroundFetchResultNewData);
@@ -380,7 +363,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
                                                                               preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Enable in system settings", @"Title of a button to propose the user to enable notifications in the system settings") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                [UIApplication.sharedApplication openURL:URL];
+                [UIApplication.sharedApplication openURL:URL options:@{} completionHandler:nil];
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
             [viewController presentViewController:alertController animated:YES completion:nil];

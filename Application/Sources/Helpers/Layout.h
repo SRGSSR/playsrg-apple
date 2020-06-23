@@ -28,7 +28,7 @@ static const CGFloat LayoutStandardMargin = 10.f;
 /**
  *  Standard table view padding.
  */
-static const UIEdgeInsets LayoutStandardTableViewPaddingInsets = { LayoutStandardMargin, 0.f, 0.f, 0.f };
+static const UIEdgeInsets LayoutStandardTableViewPaddingInsets = { LayoutStandardMargin, 0.f, LayoutStandardMargin, 0.f };
 
 /**
  *  Calculate the width to apply to items within a collection so that they approach some desired size, ensuring constant
@@ -56,9 +56,14 @@ OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth);
 OBJC_EXPORT CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor);
 
 /**
- *  Return the standard height for simple cells.
+ *  Return the standard height for simple table cells.
  */
 OBJC_EXPORT CGFloat LayoutStandardSimpleTableCellHeight(void);
+
+/**
+ *  Return the height for a top-aligned table cell with given spacing.
+ */
+OBJC_EXPORT CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, NSInteger row, NSInteger numberOfItems);
 
 /**
  *  Standard media cell (16:9 artwork + text area) size for collection layouts, for a given item width.

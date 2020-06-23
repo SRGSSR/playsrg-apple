@@ -6,22 +6,21 @@
 
 #import "ChannelService.h"
 
+#import "ChannelServiceSetup.h"
 #import "ForegroundTimer.h"
+#import "SRGProgram+PlaySRG.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <FXReachability/FXReachability.h>
 #import <libextobjc/libextobjc.h>
 
-NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceDidUpdateChannelsNotification";
-
 @interface ChannelService ()
 
-@property (nonatomic) NSMutableDictionary<NSString *, NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *> *registrations;
-@property (nonatomic) NSMutableDictionary<NSString *, SRGMedia *> *medias;
+@property (nonatomic) NSMutableDictionary<ChannelServiceSetup *, NSMutableDictionary<NSString *, ChannelServiceUpdateBlock> *> *registrations;
 
 // Cache channels. This cache is never invalidated, but its data is likely rarely to be staled as it is regularly updated. Cached
 // data is used to return existing channel information as fast as possible, and when errors have been encountered.
-@property (nonatomic) NSMutableDictionary<NSString *, SRGChannel *> *channels;
+@property (nonatomic) NSMutableDictionary<ChannelServiceSetup *, SRGProgramComposition *> *programCompositions;
 
 @property (nonatomic) ForegroundTimer *updateTimer;
 @property (nonatomic) SRGRequestQueue *requestQueue;
@@ -42,19 +41,13 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
     return s_sharedService;
 }
 
-+ (NSString *)channelKeyWithMedia:(SRGMedia *)media
-{
-    return [NSString stringWithFormat:@"%@;%@;%@", @(media.channel.transmission), media.channel.uid, media.uid];
-}
-
 #pragma mark Object lifecycle
 
 - (instancetype)init
 {
     if (self = [super init]) {
         self.registrations = [NSMutableDictionary dictionary];
-        self.medias = [NSMutableDictionary dictionary];
-        self.channels = [NSMutableDictionary dictionary];
+        self.programCompositions = [NSMutableDictionary dictionary];
         
         @weakify(self)
         self.updateTimer = [ForegroundTimer timerWithTimeInterval:30. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
@@ -86,42 +79,41 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 
 #pragma mark Registration
 
-- (void)registerObserver:(id)observer forChannelUpdatesWithMedia:(SRGMedia *)media block:(ChannelServiceUpdateBlock)block
+- (id)addObserver:(id)observer forUpdatesWithChannel:(SRGChannel *)channel livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block
 {
-    NSString *channelKey = [ChannelService channelKeyWithMedia:media];
-    NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[channelKey];
+    ChannelServiceSetup *setup = [[ChannelServiceSetup alloc] initWithChannel:channel livestreamUid:livestreamUid];
+    NSMutableDictionary<NSString *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[setup];
     if (! channelRegistrations) {
         channelRegistrations = [NSMutableDictionary dictionary];
-        self.registrations[channelKey] = channelRegistrations;
+        self.registrations[setup] = channelRegistrations;
     }
     
-    NSValue *observerKey = [NSValue valueWithNonretainedObject:observer];
-    channelRegistrations[observerKey] = block;
+    NSString *identifier = NSUUID.UUID.UUIDString;
+    channelRegistrations[identifier] = block;
     
     // Return data immediately available from the cache, but still trigger an update
-    SRGChannel *channel = self.channels[channelKey];
-    if (channel) {
-        block(channel);
+    SRGProgramComposition *programComposition = self.programCompositions[setup];
+    if (programComposition) {
+        block(programComposition);
     }
     
     // Only force an update the first time a media is added. Other updates will occur perodically afterwards.
-    if (! self.medias[channelKey]) {
-        [self updateChannelWithMedia:media];
+    if (channelRegistrations.count == 1) {
+        [self refreshWithSetup:setup];
     }
     
-    self.medias[channelKey] = media;
+    return identifier;
 }
 
-- (void)unregisterObserver:(id)observer forMedia:(SRGMedia *)media
+- (void)removeObserver:(id)observer
 {
-    NSString *channelKey = [ChannelService channelKeyWithMedia:media];
-    NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[channelKey];
-    if (! channelRegistrations) {
+    if (! observer) {
         return;
     }
     
-    NSValue *observerKey = [NSValue valueWithNonretainedObject:observer];
-    [channelRegistrations removeObjectForKey:observerKey];
+    for (NSMutableDictionary<NSString *, ChannelServiceUpdateBlock> *channelRegistrations in self.registrations.allValues) {
+        [channelRegistrations removeObjectForKey:observer];
+    }
     
     // Keep registered channels for the lifetime of the app, do not remove associated entries (otherwise we might
     // remove and add channels repeatedly, triggering an update each time)
@@ -129,48 +121,46 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
 
 #pragma mark Data retrieval
 
-- (void)updateChannelWithMedia:(SRGMedia *)media
+- (void)refreshWithSetup:(ChannelServiceSetup *)setup
 {
     @weakify(self)
-    SRGChannelCompletionBlock completionBlock = ^(SRGChannel * _Nullable channel, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+    SRGPaginatedProgramCompositionCompletionBlock completionBlock = ^(SRGProgramComposition * _Nullable programComposition, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         @strongify(self)
         
-        NSString *channelKey = [ChannelService channelKeyWithMedia:media];
-        if (channel) {
-            self.channels[channelKey] = channel;
+        if (programComposition) {
+            self.programCompositions[setup] = programComposition;
         }
         
-        NSMutableDictionary<NSValue *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[channelKey];
+        NSMutableDictionary<NSString *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[setup];
         for (ChannelServiceUpdateBlock updateBlock in channelRegistrations.allValues) {
-            updateBlock(self.channels[channelKey]);
+            updateBlock(self.programCompositions[setup]);
         }
     };
     
-    SRGRequest *request = nil;
-    if (media.channel.transmission == SRGTransmissionRadio) {
-        if (media.vendor == SRGVendorSRF && ! [media.uid isEqualToString:media.channel.uid]) {
-            request = [SRGDataProvider.currentDataProvider radioChannelForVendor:media.vendor withUid:media.channel.uid livestreamUid:media.uid completionBlock:completionBlock];
+    static const NSUInteger kPageSize = 50;
+    
+    SRGFirstPageRequest *request = nil;
+    if (setup.channel.transmission == SRGTransmissionRadio) {
+        // Regional livestreams. Currently only for SRF
+        if (setup.channel.vendor == SRGVendorSRF && ! [setup.livestreamUid isEqualToString:setup.channel.uid]) {
+            request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid livestreamUid:setup.livestreamUid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
         }
         else {
-            request = [SRGDataProvider.currentDataProvider radioChannelForVendor:media.vendor withUid:media.channel.uid livestreamUid:nil completionBlock:completionBlock];
+            request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid livestreamUid:nil fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
         }
     }
     else {
-        request = [SRGDataProvider.currentDataProvider tvChannelForVendor:media.vendor withUid:media.channel.uid completionBlock:completionBlock];
+        request = [[SRGDataProvider.currentDataProvider tvLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
     }
     [self.requestQueue addRequest:request resume:YES];
 }
 
 - (void)updateChannels
 {
-    self.requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-        if (finished && ! error) {
-            [NSNotificationCenter.defaultCenter postNotificationName:ChannelServiceDidUpdateChannelsNotification object:self];
-        }
-    }];
+    self.requestQueue = [[SRGRequestQueue alloc] init];
     
-    for (SRGMedia *media in self.medias.allValues) {
-        [self updateChannelWithMedia:media];
+    for (ChannelServiceSetup *setup in self.registrations) {
+        [self refreshWithSetup:setup];
     }
 }
 
@@ -181,6 +171,16 @@ NSString * const ChannelServiceDidUpdateChannelsNotification = @"ChannelServiceD
     if ([FXReachability sharedInstance].reachable) {
         [self updateChannels];
     }
+}
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; registrations = %@>",
+            self.class,
+            self,
+            self.registrations];
 }
 
 @end

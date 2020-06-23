@@ -128,7 +128,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
     GCKMediaLoadOptions *options = [[GCKMediaLoadOptions alloc] init];
     
     // Only apply playing position for on-demand streams. Does not work well with other kinds of streams.
-    CMTime time = position.time;
+    CMTime time = [position.mark timeForMediaPlayerController:nil];
     BOOL isLivestream = mainChapter.contentType == SRGContentTypeLivestream || mainChapter.contentType == SRGContentTypeScheduledLivestream;
     if (! isLivestream && CMTIME_IS_VALID(time) && CMTIME_COMPARE_INLINE(time, !=, kCMTimeZero)) {
         float progress = HistoryPlaybackProgress(CMTimeGetSeconds(time), mainChapter.duration / 1000.);

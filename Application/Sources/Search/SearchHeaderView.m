@@ -52,7 +52,7 @@
 
 - (NSString *)accessibilityLabel
 {
-    return self.titleLabel.text.lowercaseString;
+    return self.titleLabel.text;
 }
 
 - (UIAccessibilityTraits)accessibilityTraits

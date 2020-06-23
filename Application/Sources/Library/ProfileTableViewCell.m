@@ -48,13 +48,6 @@
     self.selectedBackgroundView = selectedBackgroundView;
 }
 
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    
-    [self.iconImageView play_stopAnimating];
-}
-
 - (void)willMoveToWindow:(UIWindow *)window
 {
     [super willMoveToWindow:window];
@@ -93,20 +86,15 @@
 
 - (void)updateIconImageViewAnimation
 {
-    [self.iconImageView play_stopAnimating];
-    
     if (self.applicationSectionInfo.applicationSection == ApplicationSectionDownloads) {
-        switch (DownloadSession.sharedDownloadSession.state) {
-            case DownloadSessionStateDownloading: {
-                [self.iconImageView play_startAnimatingDownloading22WithTintColor:self.iconImageView.tintColor];
-                break;
-            }
-                
-            default: {
-                break;
-            }
+        if (DownloadSession.sharedDownloadSession.state == DownloadSessionStateDownloading) {
+            [self.iconImageView play_setDownloadAnimation22WithTintColor:self.iconImageView.tintColor];
+            [self.iconImageView startAnimating];
         }
-        self.iconImageView.image = self.applicationSectionInfo.image;
+        else {
+            [self.iconImageView stopAnimating];
+            self.iconImageView.image = self.applicationSectionInfo.image;
+        }
     }
 }
 

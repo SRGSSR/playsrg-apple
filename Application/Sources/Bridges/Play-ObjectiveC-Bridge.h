@@ -8,10 +8,15 @@
 // Objective-C headers will be automatically exposed to all Swift source files.
 
 #import "BaseViewController.h"
+#import "MediaPlayerViewController.h"
+#import "MediaPlayerViewController+Private.h"
+#import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 #import "Onboarding.h"
 #import "PlayAppDelegate.h"
 #import "PushService.h"
+#import "SongsViewController.h"
+#import "SRGLetterboxController+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"

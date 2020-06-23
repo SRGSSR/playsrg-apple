@@ -66,6 +66,11 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
 
 - (BOOL)play_isMovingToParentViewController
 {
+    id<UIViewControllerTransitionCoordinator> transitionCoordinator = self.transitionCoordinator;
+    if (transitionCoordinator.cancelled) {
+        return NO;
+    }
+    
     if (self.movingToParentViewController || self.beingPresented) {
         return YES;
     }
@@ -107,17 +112,6 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     }
     
     return NO;
-}
-
-#pragma mark Home indicator management
-
-- (void)play_setNeedsUpdateOfHomeIndicatorAutoHidden
-{
-    if (@available(iOS 11, *)) {
-        if ([self respondsToSelector:@selector(setNeedsUpdateOfHomeIndicatorAutoHidden)]) {
-            [self setNeedsUpdateOfHomeIndicatorAutoHidden];
-        }
-    }
 }
 
 #pragma mark Previewing

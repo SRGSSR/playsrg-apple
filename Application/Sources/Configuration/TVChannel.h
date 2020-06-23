@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <UIKit/UIKit.h>
+#import "Channel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,22 +24,7 @@ OBJC_EXPORT NSString * _Nullable TVChannelImageOverridePath(TVChannel * _Nullabl
 /**
  *  Represent a TV channel in the application configuration.
  */
-@interface TVChannel : NSObject
-
-/**
- *  Create the TV channel from a dictionary. Return `nil` if the dictionary format is incorrect.
- */
-- (nullable instancetype)initWithDictionary:(NSDictionary *)dictionary NS_DESIGNATED_INITIALIZER;
-
-/**
- *  The unique identifier of the TV channel (`SRGChannel` uid).
- */
-@property (nonatomic, readonly, copy) NSString *uid;
-
-/**
- *  The TV channel name.
- */
-@property (nonatomic, readonly, copy) NSString *name;
+@interface TVChannel : Channel
 
 @end
 

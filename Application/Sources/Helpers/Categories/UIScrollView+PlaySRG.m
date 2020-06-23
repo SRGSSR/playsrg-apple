@@ -10,12 +10,7 @@
 
 - (void)play_scrollToTopAnimated:(BOOL)animated
 {
-    if (@available(iOS 11, *)) {
-        [self setContentOffset:CGPointMake(0.f, -self.adjustedContentInset.top) animated:animated];
-    }
-    else {
-        [self setContentOffset:CGPointMake(0.f, -self.contentInset.top) animated:animated];
-    }
+    [self setContentOffset:CGPointMake(0.f, -self.adjustedContentInset.top) animated:animated];
 }
 
 @end

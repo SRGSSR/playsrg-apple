@@ -49,10 +49,7 @@
         self.radioChannel = radioChannel;
         self.initialAlphabeticalIndex = alphabeticalIndex;
         self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
-        
-        if (@available(iOS 10, *)) {
-            self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];      // Only available for iOS 10 and above
-        }
+        self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];
         
         _previousAccessibilityHeadingSection = -1;
     }
@@ -139,16 +136,8 @@
     [super viewWillLayoutSubviews];
     
     [self.collectionIndexView mas_updateConstraints:^(MASConstraintMaker *make) {
-        if (@available(iOS 11, *)) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).with.offset(self.play_pageViewController.play_additionalContentInsets.top);
-            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-        }
-        else {
-            UIEdgeInsets contentInsets = ContentInsetsForViewController(self);
-            make.top.equalTo(self.view).with.offset(contentInsets.top);
-            make.bottom.equalTo(self.view).with.offset(-contentInsets.bottom);
-        }
-        
+        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).with.offset(self.play_pageViewController.play_additionalContentInsets.top);
+        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
         make.right.equalTo(self.view.mas_right);
         make.width.equalTo(@28.f);
     }];
@@ -242,9 +231,6 @@
     CGRect sectionHeaderFrame = [self.collectionView layoutAttributesForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath].frame;
     CGRect itemFrame = [self.collectionView layoutAttributesForItemAtIndexPath:indexPath].frame;
     
-    // FIXME: Incorrect behavior: When scrolling to the top or bottom of the index, the cell boundary should be exact. Behavior
-    //        is incorrect at the bottom on < iOS 11 (also in production), incorrect at the top as well on iOS 11. We probably
-    //        need to take insets into account correctly in all cases.
     CGFloat contentInsetTop = ContentInsetsForScrollView(self.collectionView).top;
     CGFloat sectionHeaderHeight = CGRectGetHeight(sectionHeaderFrame);
     CGFloat newContentOffsetY = fminf(CGRectGetMinY(itemFrame) - sectionHeaderHeight - contentInsetTop,
@@ -396,9 +382,7 @@
 {
     NSAssert([sender isKindOfClass:BDKCollectionIndexView.class], @"Expect a collection index");
     
-    if (@available(iOS 10, *)) {
-        [self.selectionFeedbackGenerator selectionChanged];
-    }
+    [self.selectionFeedbackGenerator selectionChanged];
     
     BDKCollectionIndexView *collectionIndexView = sender;
     [self scrollToSectionWithIndex:collectionIndexView.currentIndex animated:NO];

@@ -78,7 +78,7 @@
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
-                                               name:UIAccessibilityVoiceOverStatusChanged
+                                               name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
     
     [self updateInterfaceForEditionAnimated:NO];
@@ -193,7 +193,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return LayoutTableViewCellStandardHeight + LayoutStandardMargin;
+    return LayoutTableTopAlignedCellHeight(LayoutTableViewCellStandardHeight, LayoutStandardMargin, indexPath.row, self.items.count);
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(WatchLaterTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

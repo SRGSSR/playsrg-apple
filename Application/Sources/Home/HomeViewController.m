@@ -142,7 +142,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
-                                               name:UIAccessibilityVoiceOverStatusChanged
+                                               name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(preferencesStateDidChange:)

@@ -679,6 +679,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return [self.tvChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(TVChannel.new, uid), uid]].firstObject;
 }
 
+- (Channel *)channelForUid:(NSString *)uid
+{
+    return [self radioChannelForUid:uid] ?: [self tvChannelForUid:uid];
+}
+
 - (NSURL *)sharingURLForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata atTime:(CMTime)time;
 {
     if (PlayIsSwissTXTURN(mediaMetadata.URN)) {

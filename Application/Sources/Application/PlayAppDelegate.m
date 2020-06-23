@@ -34,6 +34,7 @@
 #import "UpdateInfo.h"
 #import "WatchLater.h"
 
+#import <Airship/AirshipLib.h>
 #import <AppCenter/AppCenter.h>
 #import <AppCenterCrashes/AppCenterCrashes.h>
 #import <AppCenterDistribute/AppCenterDistribute.h>
@@ -49,7 +50,6 @@
 #import <SRGIdentity/SRGIdentity.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 #import <SRGUserData/SRGUserData.h>
-#import <UrbanAirship-iOS-SDK/AirshipKit.h>
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 #import <Fingertips/Fingertips.h>
@@ -138,10 +138,7 @@ static void *s_kvoContext = &s_kvoContext;
     [self setPresenterModeEnabled:ApplicationSettingPresenterModeEnabled()];
     
     self.window.backgroundColor = UIColor.blackColor;
-    
-    if (@available(iOS 11, *)) {
-        self.window.accessibilityIgnoresInvertColors = YES;
-    }
+    self.window.accessibilityIgnoresInvertColors = YES;
     
     [self setupAnalytics];
     [self setupDataProvider];
@@ -176,7 +173,8 @@ static void *s_kvoContext = &s_kvoContext;
     }, @"FirstLaunchDone", nil);
     
     [PushService.sharedService setup];
-    [self updateApplicationBadge];
+    [PushService.sharedService updateApplicationBadge];
+    
     FavoritesSetup();
     
     // Local objects migration
@@ -351,13 +349,13 @@ static void *s_kvoContext = &s_kvoContext;
 // https://support.urbanairship.com/hc/en-us/articles/213492483-iOS-Badging-and-Auto-Badging
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [self updateApplicationBadge];
+    [PushService.sharedService updateApplicationBadge];
 }
 
 // https://support.urbanairship.com/hc/en-us/articles/213492483-iOS-Badging-and-Auto-Badging
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-    [self updateApplicationBadge];
+    [PushService.sharedService updateApplicationBadge];
     completionHandler(UIBackgroundFetchResultNoData);
 }
 
@@ -510,7 +508,7 @@ static void *s_kvoContext = &s_kvoContext;
     if ([userActivity.activityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".playing"]]) {
         NSString *mediaURN = userActivity.userInfo[@"URNString"];
         if (mediaURN) {
-            SRGMedia *media = [NSKeyedUnarchiver unarchiveObjectWithData:userActivity.userInfo[@"SRGMediaData"]];
+            SRGMedia *media = [NSKeyedUnarchiver unarchivedObjectOfClass:SRGMedia.class fromData:userActivity.userInfo[@"SRGMediaData"] error:NULL];
             NSNumber *position = [userActivity.userInfo[@"position"] isKindOfClass:NSNumber.class] ? userActivity.userInfo[@"position"] : nil;
             [self playURN:mediaURN media:media atPosition:[SRGPosition positionAtTimeInSeconds:position.integerValue] fromPushNotification:NO completion:nil];
             
@@ -532,7 +530,7 @@ static void *s_kvoContext = &s_kvoContext;
     else if ([userActivity.activityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".displaying"]]) {
         NSString *showURN = userActivity.userInfo[@"URNString"];
         if (showURN) {
-            SRGShow *show = [NSKeyedUnarchiver unarchiveObjectWithData:userActivity.userInfo[@"SRGShowData"]];
+            SRGShow *show = [NSKeyedUnarchiver unarchivedObjectOfClass:SRGShow.class fromData:userActivity.userInfo[@"SRGShowData"] error:NULL];
             
             RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:show.primaryChannelUid];
             ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel options:nil];
@@ -602,20 +600,9 @@ static void *s_kvoContext = &s_kvoContext;
     [MSAppCenter start:appCenterSecret withServices:@[ MSCrashes.class, MSDistribute.class ]];
 }
 
-- (void)updateApplicationBadge
-{
-    if (@available(iOS 10, *)) {
-        [PushService.sharedService updateApplicationBadge];
-    }
-    else {
-        [PushService.sharedService resetApplicationBadge];
-    }
-}
-
 - (void)setupDataProvider
 {
     [SRGNetworkActivityManagement enable];
-    [UIImage play_setUseOriginalImagesOnly:ApplicationSettingOriginalImagesOnlyEnabled()];
     
     NSURL *serviceURL = ApplicationSettingServiceURL();
     SRGDataProvider *dataProvider = [[SRGDataProvider alloc] initWithServiceURL:serviceURL];

@@ -105,15 +105,9 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     
     // The mini player is not available for all BUs
     MiniPlayerView *miniPlayerView = [[MiniPlayerView alloc] initWithFrame:CGRectZero];
+    miniPlayerView.layer.shadowOpacity = 0.9f;
+    miniPlayerView.layer.shadowRadius = 5.f;
     [self.view insertSubview:miniPlayerView belowSubview:self.tabBar];
-    
-    // iOS 10 bug: Cannot apply a shadow to a blurred view without breaking the blur effect
-    // Probably related to radar 27189321.
-    // TODO: Remove when iOS 10 is not supported anymore
-    if (NSProcessInfo.processInfo.operatingSystemVersion.majorVersion != 10) {
-        miniPlayerView.layer.shadowOpacity = 0.9f;
-        miniPlayerView.layer.shadowRadius = 5.f;
-    }
     
     self.miniPlayerView = miniPlayerView;
     
@@ -129,7 +123,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
-                                               name:UIAccessibilityVoiceOverStatusChanged
+                                               name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(didReceiveNotification:)
@@ -311,12 +305,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 {
     void (^animations)(void) = ^{
         [self.miniPlayerView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            if (@available(iOS 11, *)) {
-                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
-            }
-            else {
-                make.right.equalTo(self.view).with.offset(-self.miniPlayerOffset);
-            }
+            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
             
             if (! UIAccessibilityIsVoiceOverRunning() && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
                 // Use 1/3 of the space, minimum of 500 pixels. If the player cannot fit in 80% of the screen,
@@ -329,14 +318,8 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
                 make.width.equalTo(@(width));
             }
             else {
-                if (@available(iOS 11, *)) {
-                    make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).with.offset(self.miniPlayerOffset);
-                    make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
-                }
-                else {
-                    make.left.equalTo(self.view).with.offset(self.miniPlayerOffset);
-                    make.right.equalTo(self.view).with.offset(-self.miniPlayerOffset);
-                }
+                make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).with.offset(self.miniPlayerOffset);
+                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
             }
             
             if (self.miniPlayerView.active) {
@@ -377,17 +360,15 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (void)updateProfileTabBarItem
 {
-    if (@available(iOS 10, *)) {
-        UITabBarItem *profileTabBarItem = [self tabBarItemForIdentifier:TabBarItemIdentifierProfile];
-        NSInteger badgeNumber = UIApplication.sharedApplication.applicationIconBadgeNumber;
-        
-        if (PushService.sharedService.enabled && profileTabBarItem && badgeNumber != 0) {
-            profileTabBarItem.badgeValue = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
-            profileTabBarItem.badgeColor = UIColor.play_notificationRedColor;
-        }
-        else {
-            profileTabBarItem.badgeValue = nil;
-        }
+    UITabBarItem *profileTabBarItem = [self tabBarItemForIdentifier:TabBarItemIdentifierProfile];
+    NSInteger badgeNumber = UIApplication.sharedApplication.applicationIconBadgeNumber;
+    
+    if (PushService.sharedService.enabled && profileTabBarItem && badgeNumber != 0) {
+        profileTabBarItem.badgeValue = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
+        profileTabBarItem.badgeColor = UIColor.play_notificationRedColor;
+    }
+    else {
+        profileTabBarItem.badgeValue = nil;
     }
 }
 

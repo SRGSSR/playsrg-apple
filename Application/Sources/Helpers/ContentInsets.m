@@ -72,40 +72,20 @@ static void UpdateContentInsetsForViewController(UIViewController *viewControlle
     NSArray<UIScrollView *> *scrollViews = contentViewController.play_contentScrollViews;
     UIEdgeInsets paddingInsets = contentViewController.play_paddingContentInsets;
     
-    if (@available(iOS 11, *)) {
-        viewController.additionalSafeAreaInsets = ChildContentInsetsForViewController(viewController.parentViewController);
-        [scrollViews enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
-            scrollView.contentInset = paddingInsets;
-        }];
-    }
-    else {
-        UIEdgeInsets contentInsets = ContentInsetsForViewController(viewController);
-        [scrollViews enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
-            scrollView.contentInset = UIEdgeInsetsMake(contentInsets.top + paddingInsets.top,
-                                                       contentInsets.left + paddingInsets.left,
-                                                       contentInsets.bottom + paddingInsets.bottom,
-                                                       contentInsets.right + paddingInsets.right);
-            scrollView.scrollIndicatorInsets = contentInsets;
-        }];
-    }
+    contentViewController.additionalSafeAreaInsets = ChildContentInsetsForViewController(viewController.parentViewController);
+    [scrollViews enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
+        scrollView.contentInset = paddingInsets;
+    }];
 }
 
 UIEdgeInsets ContentInsetsForViewController(UIViewController *viewController)
 {
     UIEdgeInsets insets = ChildContentInsetsForViewController(viewController.parentViewController);
-    if (@available(iOS 11, *)) {
-        UIEdgeInsets safeAreaInsets = viewController.additionalSafeAreaInsets;
-        return UIEdgeInsetsMake(insets.top + safeAreaInsets.top,
-                                insets.left + safeAreaInsets.left,
-                                insets.bottom + safeAreaInsets.bottom,
-                                insets.right + safeAreaInsets.right);
-    }
-    else {
-        return UIEdgeInsetsMake(insets.top + viewController.topLayoutGuide.length,
-                                insets.left,
-                                insets.bottom + viewController.bottomLayoutGuide.length,
-                                insets.right);
-    }
+    UIEdgeInsets safeAreaInsets = viewController.additionalSafeAreaInsets;
+    return UIEdgeInsetsMake(insets.top + safeAreaInsets.top,
+                            insets.left + safeAreaInsets.left,
+                            insets.bottom + safeAreaInsets.bottom,
+                            insets.right + safeAreaInsets.right);
 }
 
 UIEdgeInsets ContentInsetsForScrollView(UIScrollView *scrollView)
@@ -119,18 +99,10 @@ UIEdgeInsets ContentInsetsForScrollView(UIScrollView *scrollView)
         }
     }
     
-    if (@available(iOS 11, *)) {
-        return UIEdgeInsetsMake(scrollView.adjustedContentInset.top + paddingInsets.top,
-                                scrollView.adjustedContentInset.left + paddingInsets.left,
-                                scrollView.adjustedContentInset.bottom + paddingInsets.bottom,
-                                scrollView.adjustedContentInset.right + paddingInsets.right);
-    }
-    else {
-        return UIEdgeInsetsMake(scrollView.contentInset.top + paddingInsets.top,
-                                scrollView.contentInset.left + paddingInsets.left,
-                                scrollView.contentInset.bottom + paddingInsets.bottom,
-                                scrollView.contentInset.right + paddingInsets.right);
-    }
+    return UIEdgeInsetsMake(scrollView.adjustedContentInset.top + paddingInsets.top,
+                            scrollView.adjustedContentInset.left + paddingInsets.left,
+                            scrollView.adjustedContentInset.bottom + paddingInsets.bottom,
+                            scrollView.adjustedContentInset.right + paddingInsets.right);
 }
 
 CGFloat VerticalOffsetForEmptyDataSet(UIScrollView *scrollView)
