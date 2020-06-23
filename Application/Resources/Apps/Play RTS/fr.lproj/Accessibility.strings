@@ -48,9 +48,6 @@
 /* Show unsubscription label */
 "Disable notifications for show" = "Désactiver les notifications pour l'émission";
 
-/* Accessibility label of the song list handle when open */
-"Display music" = "Afficher la musique";
-
 /* A download button label */
 "Download" = "Télécharger";
 
@@ -63,8 +60,8 @@
 /* Text providing program time information. First placeholder is the start time, second is the end time. */
 "From %1$@ to %2$@" = "De %1$@ à %2$@";
 
-/* Accessibility label of the song list handle when closed */
-"Hide music" = "Masquer la musique";
+/* Accessibility label of the song list handle when opened */
+"Hide music list" = "Masquer la liste musicale";
 
 /* Introductory title for information notifications */
 "Information" = "Information";
@@ -156,6 +153,9 @@
 
 /* Share button label on player view */
 "Share" = "Partager";
+
+/* Accessibility label of the song list handle when closed */
+"Show music list" = "Afficher la liste musicale";
 
 /* Homepage header action hint */
 "Shows all contents." = "Affiche tout le contenu.";
