@@ -251,7 +251,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
 #pragma mark IASKSettingsDelegate protocol
 
-- (void)settingsViewController:(IASKAppSettingsViewController *)sender buttonTappedForSpecifier:(IASKSpecifier *)specifier
+- (void)settingsViewController:(IASKAppSettingsViewController *)settingsViewController buttonTappedForSpecifier:(IASKSpecifier *)specifier
 {
     if ([specifier.key isEqualToString:SettingsWhatsNewButton]) {
         [self loadWhatsNewWithCompletionHandler:^(UIViewController * _Nullable viewController, NSError * _Nullable error) {
@@ -427,7 +427,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 #endif
 }
 
-- (NSString *)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView titleForFooterForSection:(NSInteger)section
+- (NSString *)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController titleForFooterInSection:(NSInteger)section specifier:(IASKSpecifier *)specifier
 {
     NSString *key = [settingsViewController.settingsReader keyForSection:section];
     if ([key isEqualToString:SettingsInformationGroup]) {
@@ -443,7 +443,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForSpecifier:(IASKSpecifier *)specifier
+- (CGFloat)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController heightForSpecifier:(IASKSpecifier *)specifier
 {
     if ([specifier.key isEqualToString:SettingsApplicationVersionCell]) {
         return 44.f;
@@ -453,11 +453,11 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForSpecifier:(IASKSpecifier *)specifier
+- (UITableViewCell *)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController cellForSpecifier:(IASKSpecifier *)specifier
 {
     if ([specifier.key isEqualToString:SettingsApplicationVersionCell]) {
         static NSString * const kApplicationVersionCellIdentifier = @"Cell_ApplicationVersion";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kApplicationVersionCellIdentifier];
+        UITableViewCell *cell = [settingsViewController.tableView dequeueReusableCellWithIdentifier:kApplicationVersionCellIdentifier];
         if (! cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kApplicationVersionCellIdentifier];
         }

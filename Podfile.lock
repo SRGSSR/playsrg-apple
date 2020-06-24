@@ -65,7 +65,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.3.7):
     - GoogleUtilities/Logger
-  - InAppSettingsKit (2.10)
+  - InAppSettingsKit (3.0.1)
   - MaterialComponents/AnimationTiming (109.5.0)
   - MaterialComponents/Availability (109.5.0)
   - MaterialComponents/Elevation (109.5.0):
@@ -122,7 +122,7 @@ DEPENDENCIES:
   - Firebase/RemoteConfig (~> 5.15.0)
   - FSCalendar (= 2.7.9)
   - google-cast-sdk-no-bluetooth (~> 4.4.6)
-  - InAppSettingsKit (~> 2.10.0)
+  - InAppSettingsKit (~> 3.0.1)
   - MaterialComponents/Tabs (~> 109.5)
   - MGSwipeTableCell (~> 1.6.8)
   - paper-onboarding (~> 6.1.5)
@@ -164,7 +164,7 @@ SPEC CHECKSUMS:
   google-cast-sdk-no-bluetooth: 0b2f106f07592fe08bb78851bfd20a89e1cb613b
   GoogleAppMeasurement: 98b71f5e04142793729a5ef23e5b96651ff4b70f
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
-  InAppSettingsKit: d965e29be941eb19857271e4625de3fba6e23c9f
+  InAppSettingsKit: 0d6cf327364085375cbfd8011fd6ae1c0d2c7d1c
   MaterialComponents: 7698cdf7eacb5f192456dbbe597aa7a8857fa3ef
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MGSwipeTableCell: dc4eca3212ed38a563b27d6aa7b3c01ce656c1e2
@@ -173,6 +173,6 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
 
-PODFILE CHECKSUM: 4b055098f6ca5e67a0131dfd464b366d589bc1b9
+PODFILE CHECKSUM: 93ecde6f871e5fa487173dc4f1b47f4165c5f6fb
 
 COCOAPODS: 1.9.3
