@@ -53,7 +53,6 @@ OBJC_EXPORT NSString * const PlaySRGSettingServiceURL;
 OBJC_EXPORT NSString * const PlaySRGSettingUserLocation;
 
 OBJC_EXPORT BOOL ApplicationSettingAlternateRadioHomepageDesignEnabled(void);
-OBJC_EXPORT BOOL ApplicationSettingOriginalImagesOnlyEnabled(void);
 OBJC_EXPORT BOOL ApplicationSettingPresenterModeEnabled(void);
 
 OBJC_EXPORT BOOL ApplicationSettingStandaloneEnabled(void);
