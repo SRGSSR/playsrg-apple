@@ -240,14 +240,6 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Original images only</string>
-			<key>Key</key>
-			<string>PlaySRGSettingOriginalImagesOnlyEnabled</string>
-		</dict>
-		<dict>
-			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
 			<string>Versions and release notes</string>

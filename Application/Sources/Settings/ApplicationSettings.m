@@ -18,7 +18,6 @@
 #import <SRGLetterbox/SRGLetterbox.h>
 
 NSString * const PlaySRGSettingHDOverCellularEnabled = @"PlaySRGSettingHDOverCellularEnabled";
-NSString * const PlaySRGSettingOriginalImagesOnlyEnabled = @"PlaySRGSettingOriginalImagesOnlyEnabled";
 NSString * const PlaySRGSettingPresenterModeEnabled = @"PlaySRGSettingPresenterModeEnabled";
 NSString * const PlaySRGSettingStandaloneEnabled = @"PlaySRGSettingStandaloneEnabled";
 NSString * const PlaySRGSettingAutoplayEnabled = @"PlaySRGSettingAutoplayEnabled";
@@ -69,17 +68,11 @@ __attribute__((constructor)) static void ApplicationSettingsInit(void)
 {
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     [userDefaults registerDefaults:@{ PlaySRGSettingHDOverCellularEnabled : @YES,
-                                      PlaySRGSettingOriginalImagesOnlyEnabled : @NO,
                                       PlaySRGSettingPresenterModeEnabled : @NO,
                                       PlaySRGSettingStandaloneEnabled : @NO,
                                       PlaySRGSettingAutoplayEnabled : @YES,
                                       PlaySRGSettingBackgroundVideoPlaybackEnabled : @NO }];
     [userDefaults synchronize];
-}
-
-BOOL ApplicationSettingOriginalImagesOnlyEnabled(void)
-{
-    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingOriginalImagesOnlyEnabled];
 }
 
 BOOL ApplicationSettingPresenterModeEnabled(void)

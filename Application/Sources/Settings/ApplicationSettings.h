@@ -41,7 +41,6 @@ typedef NS_ENUM(NSInteger, TabBarItemIdentifier) {
 };
 
 OBJC_EXPORT NSString * const PlaySRGSettingHDOverCellularEnabled;
-OBJC_EXPORT NSString * const PlaySRGSettingOriginalImagesOnlyEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingPresenterModeEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingStandaloneEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingAutoplayEnabled;
