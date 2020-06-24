@@ -16,6 +16,19 @@
 
 @implementation SettingsBaseViewController
 
+#pragma mark Object lifecycle
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.delegate = self;
+        
+        self.showDoneButton = NO;
+        self.showCreditsFooter = NO;
+    }
+    return self;
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -30,10 +43,6 @@
     self.tableView.separatorColor = UIColor.play_grayColor;
     
     self.neverShowPrivacySettings = YES;
-    self.delegate = self;
-    
-    self.showDoneButton = NO;
-    self.showCreditsFooter = NO;
 }
 
 #pragma mark Rotation
