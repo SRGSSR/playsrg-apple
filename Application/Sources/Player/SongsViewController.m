@@ -127,7 +127,10 @@
     void (^animations)(void) = ^{
         NSIndexPath *indexPath = [self nearestSongIndexPathForDate:date];
         if (indexPath) {
-            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
+            @try {
+                [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
+            }
+            @catch (NSException *exception) {}
         }
     };
     
