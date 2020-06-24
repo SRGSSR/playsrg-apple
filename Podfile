@@ -11,7 +11,7 @@ abstract_target 'PlaySRG' do
   pod 'Firebase/RemoteConfig', '~> 5.15.0'
   pod 'FSCalendar', '2.7.9'
   pod 'google-cast-sdk-no-bluetooth', '~> 4.4.6'
-  pod 'InAppSettingsKit', '~> 2.10.0'
+  pod 'InAppSettingsKit', '~> 3.0.1'
   pod 'MaterialComponents/Tabs', '~> 109.5'
   pod 'MGSwipeTableCell', '~> 1.6.8'
   pod 'paper-onboarding', '~> 6.1.5'

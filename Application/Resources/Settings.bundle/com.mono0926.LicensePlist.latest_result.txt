@@ -260,23 +260,23 @@ version: 5.3.7
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 2.10
+version: 3.0.1
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 2.10
+version: 3.0.1
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 2.10
+version: 3.0.1
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 2.10
+version: 3.0.1
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 2.10
+version: 3.0.1
 
 name: MaterialComponents, nameSpecified: 
 body: 
