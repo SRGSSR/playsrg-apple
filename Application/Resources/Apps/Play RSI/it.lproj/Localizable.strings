@@ -254,7 +254,7 @@
 "Most searched shows" = "Programmi più ricercati";
 
 /* Song list title */
-"Music" = "Music";
+"Music" = "Musica";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Il mio account";
@@ -266,7 +266,7 @@
 "Next" = "Prossimo";
 
 /* Introductory time for next program information */
-"Next, at %@" = "Next, at %@";
+"Next, at %@" = "Prossimo alle %@";
 
 /* Text displayed when no media added to the watch later list */
 "No content" = "Nessun contenuto";
@@ -529,7 +529,7 @@
 "This week" = "Questa settimana";
 
 /* Introductory text for live content played with timeshift, displayed on the mini player */
-"Time-shifted" = "Time-shifted";
+"Time-shifted" = "Differito";
 
 /* Period setting option
    Title of the button to go back to the current date */

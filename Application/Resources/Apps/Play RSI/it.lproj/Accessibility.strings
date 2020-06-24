@@ -2,7 +2,7 @@
 "%1$@ at %2$@" = "%1$@ a %2$@";
 
 /* Song description. First placeholder is song title, second is artist name */
-"%1$@, by %2$@" = "%1$@, by %2$@";
+"%1$@, by %2$@" = "%1$@, di %2$@";
 
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ ascolti";
@@ -61,7 +61,7 @@
 "From %1$@ to %2$@" = "Dalle %1$@ alle %2$@";
 
 /* Accessibility label of the song list handle when opened */
-"Hide music list" = "Hide music list";
+"Hide music list" = "Nascondere la lista dei brani";
 
 /* Introductory title for information notifications */
 "Information" = "Informazioni";
@@ -79,13 +79,13 @@
 "Manages account information" = "Gestire le informazioni sull'account";
 
 /* A more episode button label */
-"More episodes" = "More episodes";
+"More episodes" = "Più episodi";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Il mio account";
 
 /* Text providing next program time information. */
-"Next, at %@" = "Next, at %@";
+"Next, at %@" = "Prossimo alle %@";
 
 /* Mini player label */
 "Now playing: %@" = "In riproduzione: %@";
@@ -103,7 +103,7 @@
 "Opens the full screen player" = "Player a schermo pieno";
 
 /* Show cell hint */
-"Opens topic details." = "Opens topic details.";
+"Opens topic details." = "Dettagli della categoria.";
 
 /* Accessibility label for the multi audio badge */
 "Original version" = "Versione originale";
@@ -115,13 +115,13 @@
 "Play" = "Play";
 
 /* Program cell hint */
-"Plays from the beginning." = "Plays from the beginning.";
+"Plays from the beginning." = "Riprodurre dall'inizio.";
 
 /* Media cell hint */
 "Plays the content." = "Riprodurre il contenuto.";
 
 /* Song cell hint */
-"Plays the music." = "Plays the music.";
+"Plays the music." = "Riprodurre la musica.";
 
 /* Title displayed in home page shows section. */
 "Programmes A-Z" = "Trasmissioni dalla A alla Z";
@@ -155,7 +155,7 @@
 "Share" = "Condividi";
 
 /* Accessibility label of the song list handle when closed */
-"Show music list" = "Show music list";
+"Show music list" = "Mostrare la lista dei brani";
 
 /* Homepage header action hint */
 "Shows all contents." = "Mostra tutti i contenuti.";
