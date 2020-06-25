@@ -21,10 +21,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.delegate = self;
-        
         self.showDoneButton = NO;
-        self.showCreditsFooter = NO;
     }
     return self;
 }
@@ -42,7 +39,9 @@
     self.view.backgroundColor = UIColor.play_blackColor;
     self.tableView.separatorColor = UIColor.play_grayColor;
     
+    self.delegate = self;
     self.neverShowPrivacySettings = YES;
+    self.showCreditsFooter = NO;
 }
 
 #pragma mark Rotation
