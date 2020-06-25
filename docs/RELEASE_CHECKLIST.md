@@ -17,6 +17,7 @@
 | Build betas for AppCenter (with fastlane on TeamCity) ||||||
 | Check what's new in AppCenter betas ||||||
 | Write test ticket and alert testers on Slack ||||||
+| Update production remote configuration on Firebase ||||||
 | Build versions for iTunes Connect (with fastlane) ||||||
 | Wait until the binary has been validated on iTunes Connect ||||||
 | Get the binary DSYM and upload it on AppCenter (with fastlane) ||||||
