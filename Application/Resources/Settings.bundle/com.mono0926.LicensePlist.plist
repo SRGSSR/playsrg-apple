@@ -160,7 +160,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/ios-library</string>
 			<key>Title</key>
-			<string>ios-library (13.3.2)</string>
+			<string>ios-library (13.4.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -296,7 +296,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>srgletterbox-apple (014b782)</string>
+			<string>srgletterbox-apple (5cc4171)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

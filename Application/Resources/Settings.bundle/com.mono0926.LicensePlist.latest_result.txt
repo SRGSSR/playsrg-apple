@@ -440,7 +440,7 @@ name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
 
 name: FXReachability, nameSpecified: , owner: SRGSSR, version: 1.3.2_srg4
 
-name: ios-library, nameSpecified: , owner: urbanairship, version: 13.3.2
+name: ios-library, nameSpecified: , owner: urbanairship, version: 13.4.0
 
 name: libextobjc, nameSpecified: , owner: SRGSSR, version: 0.6_srg2
 
@@ -462,7 +462,7 @@ name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
 name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 4854ef4
 
-name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 014b782
+name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 5cc4171
 
 name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
