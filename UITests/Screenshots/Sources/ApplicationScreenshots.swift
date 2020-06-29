@@ -43,24 +43,37 @@ class ApplicationScreenshots: XCTestCase {
             snapshot("1-VideosHomeScreen")
         }
         
-        let audiosTabBarItemQuery =  tabBarsQuery.buttons[AccessibilityIdentifier.audiosTabBarItem.rawValue]
-        if  audiosTabBarItemQuery.exists {
+        let audiosTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.audiosTabBarItem.rawValue]
+        if audiosTabBarItemQuery.exists {
             audiosTabBarItemQuery.tap()
             
             sleep(10)
             snapshot("2-AudiosHomeScreen")
         }
         
-        let livestreamsTabBarItemQuery =  tabBarsQuery.buttons[AccessibilityIdentifier.livestreamsTabBarItem.rawValue]
-        if  livestreamsTabBarItemQuery.exists {
+        let livestreamsTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.livestreamsTabBarItem.rawValue]
+        if livestreamsTabBarItemQuery.exists {
             livestreamsTabBarItemQuery.tap()
             
             sleep(10)
             snapshot("3-LiveHomeScreen")
+            
+            let firstRadioCellQuery = application.tables.firstMatch.cells.element(boundBy: 1).collectionViews.cells.firstMatch
+            if firstRadioCellQuery.exists {
+                firstRadioCellQuery.tap()
+                
+                sleep(10)
+                snapshot("4-RadioLivePlayer")
+                
+                let closeButtonQuery = application.buttons[AccessibilityIdentifier.closeButton.rawValue];
+                if closeButtonQuery.exists {
+                    closeButtonQuery.tap()
+                }
+            }
         }
         
         let searchText = configuration["SearchText"]
-        let searchTabBarItemQuery =  tabBarsQuery.buttons[AccessibilityIdentifier.searchTabBarItem.rawValue]
+        let searchTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.searchTabBarItem.rawValue]
         if searchTabBarItemQuery.exists && searchText != nil {
             searchTabBarItemQuery.tap()
             
@@ -70,7 +83,7 @@ class ApplicationScreenshots: XCTestCase {
             application.typeText("\n")
             
             sleep(10)
-            snapshot("4-SearchScreen")
+            snapshot("5-SearchScreen")
         }
     }
 }

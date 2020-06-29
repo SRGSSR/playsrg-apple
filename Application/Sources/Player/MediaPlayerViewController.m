@@ -6,6 +6,7 @@
 
 #import "MediaPlayerViewController.h"
 
+#import "AccessibilityIdentifierConstants.h"
 #import "ActivityItemSource.h"
 #import "ApplicationSettings.h"
 #import "AnalyticsConstants.h"
@@ -505,6 +506,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self setUserInterfaceBehaviorForMedia:media animated:NO];
     
     self.closeButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on player view");
+    self.closeButton.accessibilityIdentifier = AccessibilityIdentifierCloseButton;
+    
     self.shareButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
     
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {

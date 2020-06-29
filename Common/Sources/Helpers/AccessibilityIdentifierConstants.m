@@ -11,3 +11,5 @@ AccessibilityIdentifier const AccessibilityIdentifierAudiosTabBarItem =  @"audio
 AccessibilityIdentifier const AccessibilityIdentifierLivestreamsTabBarItem = @"livestreamsTabBarItem";
 AccessibilityIdentifier const AccessibilityIdentifierSearchTabBarItem = @"searchTabBarItem";
 AccessibilityIdentifier const AccessibilityIdentifierProfileTabBarItem = @"profileTabBarItem";
+
+AccessibilityIdentifier const AccessibilityIdentifierCloseButton = @"closeButton";
