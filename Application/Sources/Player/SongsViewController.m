@@ -146,18 +146,27 @@
     }
 }
 
+- (NSIndexPath *)indexPathForSong:(SRGSong *)song
+{
+    NSUInteger row = [self.items indexOfObject:song];
+    return (row != NSNotFound) ? [NSIndexPath indexPathForRow:row inSection:0] : nil;
+}
+
 - (NSIndexPath *)indexPathForSongAtDate:(NSDate *)date
 {
     for (SRGSong *song in self.items) {
+        // When the duration of the song is unknown, rely on the playing flag.
         NSTimeInterval durationInSeconds = song.duration / 1000.;
         if (durationInSeconds <= 0.) {
+            if (song.playing && [date compare:song.date] != NSOrderedAscending) {
+                return [self indexPathForSong:song];
+            }
             continue;
         }
         
         NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:song.date duration:durationInSeconds];
         if ([dateInterval containsDate:date]) {
-            NSUInteger row = [self.items indexOfObject:song];
-            return [NSIndexPath indexPathForRow:row inSection:0];
+            return [self indexPathForSong:song];
         }
     }
     return nil;
