@@ -1387,18 +1387,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             return program;
         }
     }
-    
-    NSDate *currentDate = self.letterboxController.currentDate;
-    if (currentDate) {
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGProgram * _Nullable program, NSDictionary<NSString *,id> * _Nullable bindings) {
-            return [program play_containsDate:currentDate];
-        }];
-        SRGProgram *program = [self.programComposition.programs filteredArrayUsingPredicate:predicate].firstObject;
-        if (program) {
-            return program;
-        }
-    }
-    
     return nil;
 }
 
