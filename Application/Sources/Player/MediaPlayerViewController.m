@@ -1031,7 +1031,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGSegment.new, URN)];
     NSArray<NSString *> *mediaURNs = [self.letterboxController.mediaComposition.mainChapter.segments valueForKeyPath:keyPath] ?: @[];
-    NSArray<SRGProgram *> *reachablePrograms = [[self.programComposition play_programsFromDate:dateInterval.startDate toDate:dateInterval.endDate withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    NSDate *fromDate = (dateInterval.duration != 0.) ? dateInterval.startDate : nil;
+    NSArray<SRGProgram *> *reachablePrograms = [[self.programComposition play_programsFromDate:fromDate toDate:dateInterval.endDate withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
     [programs addObjectsFromArray:reachablePrograms];
     
     return programs.copy;
