@@ -76,6 +76,11 @@
     NSString *cellIdentifier = NSStringFromClass(SongTableViewCell.class);
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(playbackStateDidChange:)
+                                               name:SRGLetterboxPlaybackStateDidChangeNotification
+                                             object:self.letterboxController];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -275,6 +280,14 @@
     [self.letterboxController seekToPosition:[SRGPosition positionAtDate:seekDate] withCompletionHandler:^(BOOL finished) {
         [self.letterboxController play];
     }];
+}
+
+#pragma mark Notifications
+
+- (void)playbackStateDidChange:(NSNotification *)notification
+{
+    [self.tableView reloadData];
+    [self updateSelectionForCurrentSong];
 }
 
 @end
