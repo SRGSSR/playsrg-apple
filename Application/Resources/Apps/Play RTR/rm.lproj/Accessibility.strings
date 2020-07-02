@@ -2,7 +2,7 @@
 "%1$@ at %2$@" = "%1$@ las %2$@";
 
 /* Song description. First placeholder is song title, second is artist name */
-"%1$@, by %2$@" = "%1$@, by %2$@";
+"%1$@, by %2$@" = "%1$@ da %2$@";
 
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ tadlà";
@@ -61,7 +61,7 @@
 "From %1$@ to %2$@" = "Davent da %1$@ enfin %2$@";
 
 /* Accessibility label of the song list handle when opened */
-"Hide music list" = "Hide music list";
+"Hide music list" = "Zupper glista da musica";
 
 /* Introductory title for information notifications */
 "Information" = "Infurmaziun";
@@ -79,13 +79,13 @@
 "Manages account information" = "Organisescha las infurmaziuns da l'account";
 
 /* A more episode button label */
-"More episodes" = "More episodes";
+"More episodes" = "Dapli episodas";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mes conto";
 
 /* Text providing next program time information. */
-"Next, at %@" = "Next, at %@";
+"Next, at %@" = "Proxim a las %@";
 
 /* Mini player label */
 "Now playing: %@" = "Uss va: %@";
@@ -103,7 +103,7 @@
 "Opens the full screen player" = "Avra il player sin l'entir visur";
 
 /* Show cell hint */
-"Opens topic details." = "Opens topic details.";
+"Opens topic details." = "Detagls da la categoria.";
 
 /* Accessibility label for the multi audio badge */
 "Original version" = "Versiun originala";
@@ -115,13 +115,13 @@
 "Play" = "Laschar ir";
 
 /* Program cell hint */
-"Plays from the beginning." = "Plays from the beginning.";
+"Plays from the beginning." = "Cumenza a l'entschatta.";
 
 /* Media cell hint */
 "Plays the content." = "Laschà ì il cuntegn.";
 
 /* Song cell hint */
-"Plays the music." = "Plays the music.";
+"Plays the music." = "Lascha tadlar musica.";
 
 /* Title displayed in home page shows section. */
 "Programmes A-Z" = "Emissiuns dad A fin Z";
@@ -155,7 +155,7 @@
 "Share" = "Divida";
 
 /* Accessibility label of the song list handle when closed */
-"Show music list" = "Show music list";
+"Show music list" = "Mussa la glista da musica";
 
 /* Homepage header action hint */
 "Shows all contents." = "Mussar tuts cuntegns.";
