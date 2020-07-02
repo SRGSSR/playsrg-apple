@@ -254,7 +254,7 @@
 "Most searched shows" = "Emissiuns las pli tschertgadas";
 
 /* Song list title */
-"Music" = "Music";
+"Music" = "Musica";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mes conto";
@@ -266,7 +266,7 @@
 "Next" = "Proxim";
 
 /* Introductory time for next program information */
-"Next, at %@" = "Next, at %@";
+"Next, at %@" = "Proxim a las %@";
 
 /* Text displayed when no media added to the watch later list */
 "No content" = "Nagin cuntegn";
@@ -529,7 +529,7 @@
 "This week" = "Emna actuala";
 
 /* Introductory text for live content played with timeshift, displayed on the mini player */
-"Time-shifted" = "Time-shifted";
+"Time-shifted" = "Differì";
 
 /* Period setting option
    Title of the button to go back to the current date */
