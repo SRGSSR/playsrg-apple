@@ -115,7 +115,8 @@
     }
     
     if ([dateInterval containsDate:program.startDate]) {
-        self.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityShortTimeFromDate(self.program.startDate), PlayAccessibilityShortTimeFromDate(self.program.endDate)];
+        NSString *timeText = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityShortTimeFromDate(program.startDate), PlayAccessibilityShortTimeFromDate(program.endDate)];
+        self.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", timeText, program.title];
         self.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Plays from the beginning.", @"Program cell hint");
         
         self.titleLabel.textColor = UIColor.whiteColor;
@@ -127,7 +128,8 @@
         self.userInteractionEnabled = YES;
     }
     else if ([dateInterval.endDate compare:program.startDate] == NSOrderedAscending) {
-        self.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"Next, at %@", @"Text providing next program time information."), PlayAccessibilityShortTimeFromDate(self.program.startDate)];
+        NSString *timeText = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"Next, at %@", @"Text providing next program time information."), PlayAccessibilityShortTimeFromDate(program.startDate)];
+        self.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", timeText, program.title];
         self.accessibilityHint = nil;
         
         self.titleLabel.textColor = UIColor.play_grayColor;
@@ -139,7 +141,8 @@
         self.userInteractionEnabled = NO;
     }
     else {
-        self.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityShortTimeFromDate(self.program.startDate), PlayAccessibilityShortTimeFromDate(self.program.endDate)];
+        NSString *timeText = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityShortTimeFromDate(program.startDate), PlayAccessibilityShortTimeFromDate(program.endDate)];
+        self.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", timeText, program.title];
         self.accessibilityHint = nil;
         
         self.titleLabel.textColor = UIColor.whiteColor;
