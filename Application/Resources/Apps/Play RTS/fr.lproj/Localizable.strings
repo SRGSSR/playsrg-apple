@@ -235,7 +235,7 @@
 /* Button label to open the show episode page from the long-press menu
    Button label to open the show episode page from the preview window
    Context menu action to open more episodes associated with a media */
-"More episodes" = "Plus d’épisodes";
+"More episodes" = "Autres épisodes";
 
 /* Title of the related content player section */
 "More on this subject" = "Pour aller plus loin";
