@@ -101,7 +101,7 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
 
 - (void)play_setPlayAnimation34WithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"play-34" withTintColor:tintColor duration:2.1];
+    [self play_setAnimationImagesNamed:@"play-34" withTintColor:tintColor duration:1.56];
 }
 
 #pragma mark Animation lifecycle
