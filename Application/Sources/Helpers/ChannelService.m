@@ -144,7 +144,7 @@
         request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid livestreamUid:setup.livestreamUid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
     }
     else {
-        request = [[SRGDataProvider.currentDataProvider tvLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
+        request = [[SRGDataProvider.currentDataProvider tvLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid livestreamUid:setup.livestreamUid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
     }
     [self.requestQueue addRequest:request resume:YES];
 }
