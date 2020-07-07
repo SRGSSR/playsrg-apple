@@ -462,7 +462,7 @@ name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
 name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 4854ef4
 
-name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 6d2f8c6
+name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 3514859
 
 name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.0
 
