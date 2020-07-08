@@ -6,6 +6,7 @@
 
 #import "SongTableViewCell.h"
 
+#import "Banner.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
@@ -19,6 +20,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 @property (nonatomic, nullable) SRGSong *song;
 @property (nonatomic, getter=isPlaying) BOOL playing;
+@property (nonatomic, getter=isPlayable) BOOL playable;
 
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
@@ -90,6 +92,9 @@ static const CGFloat SongTableViewMargin = 42.f;
     self.rightMarginView.hidden = NO;
     
     [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
+    
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(copySongToPasteboard:)];
+    [self addGestureRecognizer:longPressGestureRecognizer];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -127,13 +132,13 @@ static const CGFloat SongTableViewMargin = 42.f;
         self.timeLabel.textColor = UIColor.whiteColor;
         self.titleLabel.textColor = UIColor.whiteColor;
         self.artistLabel.textColor = UIColor.play_grayColor;
-        self.userInteractionEnabled = YES;
+        self.playable = YES;
     }
     else {
         self.timeLabel.textColor = UIColor.play_grayColor;
         self.titleLabel.textColor = UIColor.play_grayColor;
         self.artistLabel.textColor = UIColor.play_grayColor;
-        self.userInteractionEnabled = NO;
+        self.playable = NO;
     }
 }
 
@@ -151,7 +156,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 - (NSString *)accessibilityHint
 {
-    return self.userInteractionEnabled ? PlaySRGAccessibilityLocalizedString(@"Plays the music.", @"Song cell hint") : nil;
+    return self.playable ? PlaySRGAccessibilityLocalizedString(@"Plays the music.", @"Song cell hint") : nil;
 }
 
 #pragma mark UI
@@ -163,6 +168,22 @@ static const CGFloat SongTableViewMargin = 42.f;
     }
     else {
         [self.waveformImageView stopAnimating];
+    }
+}
+
+#pragma mark Actions
+
+- (void)copySongToPasteboard:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        [pasteboard setString:[NSString stringWithFormat:@"%@, %@", self.song.title, self.song.artist.name]];
+        
+        [Banner showWithStyle:BannerStyleInfo
+                      message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when song title and artist name have been copied to the plasteboard")
+                        image:nil
+                       sticky:NO
+             inViewController:nil /* Not 'self' since dismissed */];
     }
 }
 
