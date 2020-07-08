@@ -10,7 +10,6 @@
 #import "ApplicationConfiguration.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
-#import "PageViewController.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
 #import "TranslucentTitleHeaderView.h"
@@ -136,7 +135,7 @@
     [super viewWillLayoutSubviews];
     
     [self.collectionIndexView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).with.offset(self.play_pageViewController.play_additionalContentInsets.top);
+        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
         make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
         make.right.equalTo(self.view.mas_right);
         make.width.equalTo(@28.f);
