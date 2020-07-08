@@ -58,6 +58,7 @@
 
 #import <FXReachability/FXReachability.h>
 #import <GoogleCast/GoogleCast.h>
+#import <Intents/Intents.h>
 #import <libextobjc/libextobjc.h>
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
 #import <Masonry/Masonry.h>
@@ -703,10 +704,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         if (mainChapterMedia.endDate) {
             userActivity.expirationDate = mainChapterMedia.endDate;
         }
+        BOOL isLiveStream = (mainChapterMedia.contentType == SRGContentTypeLivestream);
         
         NSNumber *position = nil;
         CMTime currentTime = self.letterboxController.currentTime;
-        if (CMTIME_IS_VALID(currentTime)
+        if (! isLiveStream && CMTIME_IS_VALID(currentTime)
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateIdle
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
@@ -721,6 +723,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                                           @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
         userActivity.requiredUserInfoKeys = [NSSet setWithArray:userActivity.userInfo.allKeys];
         userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:mainChapterMedia atTime:currentTime];
+        
+        if (isLiveStream) {
+            userActivity.eligibleForPrediction = YES;
+            userActivity.persistentIdentifier = mainChapterMedia.URN;
+            NSString * suggestedInvocationPhraseFormat = (mainChapterMedia.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen %@", @"Suggested invocation phrase to listen an audio") : NSLocalizedString(@"Watch %@", @"Suggested invocation phrase to watch a video");
+            userActivity.suggestedInvocationPhrase = [NSString stringWithFormat:suggestedInvocationPhraseFormat, mainChapterMedia.channel.title];
+        }
     }
     else {
         [userActivity resignCurrent];

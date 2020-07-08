@@ -20,6 +20,7 @@
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
+#import <Intents/Intents.h>
 #import <libextobjc/libextobjc.h>
 #import <SRGAppearance/SRGAppearance.h>
 
@@ -272,6 +273,11 @@
                                                       @"SRGShowData" : [NSKeyedArchiver archivedDataWithRootObject:self.show requiringSecureCoding:NO error:NULL],
                                                       @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
     userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
+    
+    userActivity.eligibleForPrediction = YES;
+    userActivity.persistentIdentifier = self.show.URN;
+    NSString * suggestedInvocationPhraseFormat = (self.show.transmission == SRGTransmissionRadio) ? NSLocalizedString(@"Listen %@", @"Suggested invocation phrase to listen a show") : NSLocalizedString(@"Watch %@", @"Suggested invocation phrase to watch a show");
+    userActivity.suggestedInvocationPhrase = [NSString stringWithFormat:suggestedInvocationPhraseFormat, self.show.title];
 }
 
 #pragma mark UI
