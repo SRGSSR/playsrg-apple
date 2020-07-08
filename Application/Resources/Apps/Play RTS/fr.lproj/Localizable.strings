@@ -481,7 +481,8 @@
 /* Button label to share the content being played at time (hours / minutes / seconds). */
 "The content at %@" = "Le contenu à %@";
 
-/* Message displayed when some content (media, show, etc.) has been copied to the clipboard */
+/* Message displayed when some content (media, show, etc.) has been copied to the clipboard
+   Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "Le contenu a été copié dans le presse-papier.";
 
 /* Button label to share the entire episode being played. */
