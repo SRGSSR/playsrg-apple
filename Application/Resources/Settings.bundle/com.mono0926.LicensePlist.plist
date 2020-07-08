@@ -248,7 +248,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
 			<key>Title</key>
-			<string>srganalytics-apple (26a0274)</string>
+			<string>srganalytics-apple (4.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -264,7 +264,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgcontentprotection-apple</string>
 			<key>Title</key>
-			<string>srgcontentprotection-apple (c08d0fb)</string>
+			<string>srgcontentprotection-apple (2.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -272,7 +272,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-apple</string>
 			<key>Title</key>
-			<string>srgdataprovider-apple (99a59d6)</string>
+			<string>srgdataprovider-apple (8.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -288,7 +288,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-apple</string>
 			<key>Title</key>
-			<string>srgidentity-apple (4854ef4)</string>
+			<string>srgidentity-apple (2.0.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -296,7 +296,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>srgletterbox-apple (8455ba8)</string>
+			<string>srgletterbox-apple (5.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -304,7 +304,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srglogger-apple</string>
 			<key>Title</key>
-			<string>srglogger-apple (2.0.0)</string>
+			<string>srglogger-apple (2.0.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -312,7 +312,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-apple</string>
 			<key>Title</key>
-			<string>srgmediaplayer-apple (5d956b9)</string>
+			<string>srgmediaplayer-apple (5.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -320,7 +320,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgnetwork-apple</string>
 			<key>Title</key>
-			<string>srgnetwork-apple (4138001)</string>
+			<string>srgnetwork-apple (2.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -328,7 +328,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srguserdata-apple</string>
 			<key>Title</key>
-			<string>srguserdata-apple (ce4c2f2)</string>
+			<string>srguserdata-apple (2.0.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
