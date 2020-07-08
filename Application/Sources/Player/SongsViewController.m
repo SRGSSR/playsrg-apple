@@ -274,6 +274,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    SongTableViewCell *songTableViewCell = (SongTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if (! songTableViewCell.playable) {
+        [self updateSelectionForCurrentSong];
+        return;
+    }
+    
     // Add a tiny offset to for guaranteed start within the song
     SRGSong *song = self.items[indexPath.row];
     NSDate *seekDate = [song.date dateByAddingTimeInterval:0.3];
