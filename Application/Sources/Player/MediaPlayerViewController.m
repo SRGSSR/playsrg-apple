@@ -1023,19 +1023,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         return @[];
     }
     
-    NSMutableArray<SRGProgram *> *programs = [NSMutableArray array];
-    
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, startDate) ascending:NO];
-    NSArray<SRGProgram *> *nextPrograms = [[self.programComposition play_programsFromDate:dateInterval.endDate toDate:nil withMediaURNs:nil] sortedArrayUsingDescriptors:@[sortDescriptor]];
-    [programs addObjectsFromArray:nextPrograms];
-    
     NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGSegment.new, URN)];
     NSArray<NSString *> *mediaURNs = [self.letterboxController.mediaComposition.mainChapter.segments valueForKeyPath:keyPath] ?: @[];
-    NSDate *fromDate = (dateInterval.duration != 0.) ? dateInterval.startDate : nil;
-    NSArray<SRGProgram *> *reachablePrograms = [[self.programComposition play_programsFromDate:fromDate toDate:dateInterval.endDate withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
-    [programs addObjectsFromArray:reachablePrograms];
     
-    return programs.copy;
+    NSDate *fromDate = (dateInterval.duration != 0.) ? dateInterval.startDate : nil;
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, startDate) ascending:NO];
+    return [[self.programComposition play_programsFromDate:fromDate toDate:nil withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 #pragma mark Channel updates

@@ -141,16 +141,10 @@
     
     SRGFirstPageRequest *request = nil;
     if (setup.channel.transmission == SRGTransmissionRadio) {
-        // Regional livestreams. Currently only for SRF
-        if (setup.channel.vendor == SRGVendorSRF && ! [setup.livestreamUid isEqualToString:setup.channel.uid]) {
-            request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid livestreamUid:setup.livestreamUid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
-        }
-        else {
-            request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid livestreamUid:nil fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
-        }
+        request = [[SRGDataProvider.currentDataProvider radioLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid livestreamUid:setup.livestreamUid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
     }
     else {
-        request = [[SRGDataProvider.currentDataProvider tvLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
+        request = [[SRGDataProvider.currentDataProvider tvLatestProgramsForVendor:setup.channel.vendor channelUid:setup.channel.uid livestreamUid:setup.livestreamUid fromDate:nil toDate:nil withCompletionBlock:completionBlock] requestWithPageSize:kPageSize];
     }
     [self.requestQueue addRequest:request resume:YES];
 }
