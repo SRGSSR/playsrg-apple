@@ -724,10 +724,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         userActivity.requiredUserInfoKeys = [NSSet setWithArray:userActivity.userInfo.allKeys];
         userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:mainChapterMedia atTime:currentTime];
         
-        if (isLiveStream) {
+        if (isLiveStream && mainChapterMedia.channel) {
             userActivity.eligibleForPrediction = YES;
             userActivity.persistentIdentifier = mainChapterMedia.URN;
-            NSString * suggestedInvocationPhraseFormat = (mainChapterMedia.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen %@", @"Suggested invocation phrase to listen an audio") : NSLocalizedString(@"Watch %@", @"Suggested invocation phrase to watch a video");
+            NSString *suggestedInvocationPhraseFormat = (mainChapterMedia.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen %@", @"Suggested invocation phrase to listen an audio") : NSLocalizedString(@"Watch %@", @"Suggested invocation phrase to watch a video");
             userActivity.suggestedInvocationPhrase = [NSString stringWithFormat:suggestedInvocationPhraseFormat, mainChapterMedia.channel.title];
         }
     }
