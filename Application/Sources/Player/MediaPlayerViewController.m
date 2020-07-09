@@ -609,11 +609,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             BOOL isLandscape = (size.width > size.height);
             [self.letterboxView setFullScreen:isLandscape animated:NO /* will be animated with the view transition */];
             
-            if (isLandscape && self.letterboxView.userInterfaceTogglable
-                    && ! UIAccessibilityIsVoiceOverRunning()
-                    && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePaused
-                    && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
-                [self.letterboxView setUserInterfaceHidden:YES animated:NO /* will be animated with the view transition */];
+            if (isLandscape) {
+                [self hidePlayerUserInterfaceAnimated:NO /* will be animated with the view transition */];
             }
         }
         [self scrollToNearestProgramAnimated:NO];
@@ -1081,6 +1078,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.metadataHeightConstraint.active = fullScreen;
     
     [self setNeedsStatusBarAppearanceUpdate];
+}
+
+- (void)hidePlayerUserInterfaceAnimated:(BOOL)animated
+{
+    if (self.letterboxView.userInterfaceTogglable
+            && ! UIAccessibilityIsVoiceOverRunning()
+            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePaused
+            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
+        [self.letterboxView setUserInterfaceHidden:YES animated:animated];
+    }
 }
 
 - (void)setDetailsExpanded:(BOOL)expanded animated:(BOOL)animated
@@ -1570,6 +1577,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self setFullScreen:fullScreen];
         [self updateTimelineVisibilityForFullScreen:fullScreen animated:NO];
         [self updateSongPanelFor:self.traitCollection fullScreen:fullScreen];
+        
+        if (fullScreen) {
+            [self hidePlayerUserInterfaceAnimated:NO];
+        }
     };
     
     void (^completion)(BOOL) = ^(BOOL finished) {
