@@ -396,12 +396,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
 
 - (BOOL)isFeaturedInSection:(NSUInteger)section
 {
-    if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
-        return YES;
-    }
-    else {
-        return section == 0;
-    }
+    return section == 0;
 }
 
 - (HomeHeaderType)headerTypeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo tableView:(UITableView *)tableView inSection:(NSUInteger)section
