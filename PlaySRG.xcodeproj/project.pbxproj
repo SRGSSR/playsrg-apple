@@ -1311,6 +1311,11 @@
 		6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
 		6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
 		6FE686E51EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
+		6FE9B54424B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */; };
+		6FE9B54524B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */; };
+		6FE9B54624B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */; };
+		6FE9B54724B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */; };
+		6FE9B54824B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */; };
 		6FEC91A921A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
 		6FEC91AA21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
 		6FEC91AB21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
@@ -2139,6 +2144,8 @@
 		6FE28772248168A100358CFF /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
 		6FE686DF1EB9D57400067D40 /* ChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelService.h; sourceTree = "<group>"; };
 		6FE686E01EB9D57400067D40 /* ChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelService.m; sourceTree = "<group>"; };
+		6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeLiveMediaVerticalListTableViewCell.m; sourceTree = "<group>"; };
+		6FE9B54324B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeLiveMediaVerticalListTableViewCell.h; sourceTree = "<group>"; };
 		6FEC91A721A6B39A00AA50C8 /* TableLoadMoreFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableLoadMoreFooterView.h; sourceTree = "<group>"; };
 		6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableLoadMoreFooterView.m; sourceTree = "<group>"; };
 		6FF3B68D2137DC8400F8A5E2 /* SRGContentProtection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGContentProtection.framework; path = Carthage/Build/iOS/Static/SRGContentProtection.framework; sourceTree = "<group>"; };
@@ -2903,6 +2910,11 @@
 		08C68ECE1D38DEA100BB8AAA /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0887824723AD61D400629312 /* HomeLiveMediaCollectionViewCell.h */,
+				0887824823AD61D500629312 /* HomeLiveMediaCollectionViewCell.m */,
+				0887824923AD61D500629312 /* HomeLiveMediaCollectionViewCell.xib */,
+				6FE9B54324B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.h */,
+				6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */,
 				082590ED1F054A6A00BB527C /* HomeMediaCollectionHeaderView.h */,
 				082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */,
 				082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */,
@@ -2942,9 +2954,6 @@
 				6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */,
 				08C68ECF1D38DEA100BB8AAA /* HomeViewController.h */,
 				08C68ED01D38DEA100BB8AAA /* HomeViewController.m */,
-				0887824723AD61D400629312 /* HomeLiveMediaCollectionViewCell.h */,
-				0887824823AD61D500629312 /* HomeLiveMediaCollectionViewCell.m */,
-				0887824923AD61D500629312 /* HomeLiveMediaCollectionViewCell.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -5789,6 +5798,7 @@
 				081220AA1DD079BB00BF8326 /* DownloadsViewController.m in Sources */,
 				0804917B22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */,
 				6FB0AEFC217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
+				6FE9B54424B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */,
 				6FF7BB9722A78DE400FA758A /* SearchSettingSwitchCell.m in Sources */,
 				E694A9F51D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6F80106920443230009FE197 /* PlayApplication.m in Sources */,
@@ -5971,6 +5981,7 @@
 				6F475FC91EB37BC6003021EA /* MediasViewController.m in Sources */,
 				6FE1B4981DCB84F00094D5BA /* AnalyticsConstants.m in Sources */,
 				6FF7BBA722A78DE400FA758A /* SearchSettingSelectorCell.m in Sources */,
+				6FE9B54524B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */,
 				6F5F4FC51DB10CFD0011CCA3 /* RelatedContentView.m in Sources */,
 				6F475FBF1EB37BC6003021EA /* DataViewController.m in Sources */,
 				0801E07C1D4A4A810008021E /* RadioChannel.m in Sources */,
@@ -6147,6 +6158,7 @@
 				6F475FCA1EB37BC6003021EA /* MediasViewController.m in Sources */,
 				6FE1B4991DCB84F00094D5BA /* AnalyticsConstants.m in Sources */,
 				6FF7BBA822A78DE400FA758A /* SearchSettingSelectorCell.m in Sources */,
+				6FE9B54624B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */,
 				6F5F4FC61DB10CFD0011CCA3 /* RelatedContentView.m in Sources */,
 				6F475FC01EB37BC6003021EA /* DataViewController.m in Sources */,
 				0801E07D1D4A4A810008021E /* RadioChannel.m in Sources */,
@@ -6323,6 +6335,7 @@
 				6F475FCB1EB37BC6003021EA /* MediasViewController.m in Sources */,
 				6FE1B49A1DCB84F00094D5BA /* AnalyticsConstants.m in Sources */,
 				6FF7BBA922A78DE400FA758A /* SearchSettingSelectorCell.m in Sources */,
+				6FE9B54724B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */,
 				6F5F4FC71DB10CFD0011CCA3 /* RelatedContentView.m in Sources */,
 				6F475FC11EB37BC6003021EA /* DataViewController.m in Sources */,
 				0801E07E1D4A4A810008021E /* RadioChannel.m in Sources */,
@@ -6499,6 +6512,7 @@
 				6F475FCC1EB37BC6003021EA /* MediasViewController.m in Sources */,
 				6FE1B49B1DCB84F00094D5BA /* AnalyticsConstants.m in Sources */,
 				6FF7BBAA22A78DE400FA758A /* SearchSettingSelectorCell.m in Sources */,
+				6FE9B54824B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */,
 				6F5F4FC81DB10CFD0011CCA3 /* RelatedContentView.m in Sources */,
 				6F475FC21EB37BC6003021EA /* DataViewController.m in Sources */,
 				0801E07F1D4A4A810008021E /* RadioChannel.m in Sources */,

@@ -9,6 +9,7 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Favorites.h"
+#import "HomeLiveMediaVerticalListTableViewCell.h"
 #import "HomeMediaListTableViewCell.h"
 #import "HomeShowListTableViewCell.h"
 #import "HomeShowsAccessTableViewCell.h"
@@ -94,6 +95,9 @@ static NSArray<SRGMedia *> *HomeSectionReorderedMedias(NSArray<SRGMedia *> *medi
     }
     else if (self.homeSection == HomeSectionTVFavoriteShows || self.homeSection == HomeSectionRadioFavoriteShows) {
         return HomeShowListTableViewCell.class;
+    }
+    else if (self.homeSection == HomeSectionTVLive || self.homeSection == HomeSectionRadioLive) {
+        return HomeLiveMediaVerticalListTableViewCell.class;
     }
     else {
         return HomeMediaListTableViewCell.class;
