@@ -30,8 +30,6 @@ NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLo
 NSString * const PlaySRGSettingLastOpenedRadioChannelUid = @"PlaySRGSettingLastOpenedRadioChannelUid";
 NSString * const PlaySRGSettingLastOpenedTabBarItem = @"PlaySRGSettingLastOpenedTabBarItem";
 NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLiveStreamURNForChannels";
-NSString * const PlaySRGSettingSelectedTVLivestreamURN = @"PlaySRGSettingSelectedTVLivestreamURN";
-NSString * const PlaySRGSettingSelectedRadioLivestreamURN = @"PlaySRGSettingSelectedRadioLivestreamURN";
 NSString * const PlaySRGSettingServiceURL = @"PlaySRGSettingServiceURL";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
 
@@ -200,30 +198,6 @@ BOOL ApplicationSettingAudioDescriptionAvailabilityDisplayed(void)
     }
     
     return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAudioDescriptionAvailabilityDisplayed];
-}
-
-NSString *ApplicationSettingLastSelectedTVLivestreamURN(void)
-{
-    return [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingSelectedTVLivestreamURN];
-}
-
-void ApplicationSettingSetLastSelectedTVLivestreamURN(NSString *mediaURN)
-{
-    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    [userDefaults setObject:mediaURN forKey:PlaySRGSettingSelectedTVLivestreamURN];
-    [userDefaults synchronize];
-}
-
-NSString *ApplicationSettingLastSelectedRadioLivestreamURN(void)
-{
-    return [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingSelectedRadioLivestreamURN];
-}
-
-void ApplicationSettingSetLastSelectedRadioLivestreamURN(NSString *mediaURN)
-{
-    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    [userDefaults setObject:mediaURN forKey:PlaySRGSettingSelectedRadioLivestreamURN];
-    [userDefaults synchronize];
 }
 
 NSString *ApplicationSettingSelectedLivestreamURNForChannelUid(NSString *channelUid)

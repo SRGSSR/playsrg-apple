@@ -121,20 +121,7 @@
 {
     if (! [self isEmpty]) {
         SRGMedia *media = self.homeSectionInfo.items[indexPath.row];
-        
-        HomeSection homeSection = self.homeSectionInfo.homeSection;
-        if (homeSection == HomeSectionTVLive) {
-            ApplicationSettingSetLastSelectedTVLivestreamURN(media.URN);
-        }
-        else if (homeSection == HomeSectionRadioLive) {
-            ApplicationSettingSetLastSelectedRadioLivestreamURN(media.URN);
-        }
-        [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
-            // Reset scrolling to the origin after playing a livestream, as the last played item is presented first
-            if (homeSection == HomeSectionTVLive || homeSection == HomeSectionRadioLive) {
-                self.collectionView.contentOffset = CGPointMake(0.f, self.collectionView.contentOffset.y);
-            }
-        }];
+        [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }
 
