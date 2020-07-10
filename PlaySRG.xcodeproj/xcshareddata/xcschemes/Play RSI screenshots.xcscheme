@@ -32,7 +32,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "&quot;${SRCROOT}/Scripts/satus-bar-screenshots.sh&quot;&#10;">
+               scriptText = "&quot;${SRCROOT}/Scripts/status-bar-screenshots.sh&quot;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
