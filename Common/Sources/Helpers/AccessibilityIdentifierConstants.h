@@ -19,4 +19,6 @@ OBJC_EXPORT AccessibilityIdentifier const AccessibilityIdentifierLivestreamsTabB
 OBJC_EXPORT AccessibilityIdentifier const AccessibilityIdentifierSearchTabBarItem;
 OBJC_EXPORT AccessibilityIdentifier const AccessibilityIdentifierProfileTabBarItem;
 
+OBJC_EXPORT AccessibilityIdentifier const AccessibilityIdentifierCloseButton;
+
 NS_ASSUME_NONNULL_END

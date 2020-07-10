@@ -10,18 +10,6 @@
 
 #import <SRGAppearance/SRGAppearance.h>
 
-// ** Private SRGDataProvider fixes for Play. See NSURL+SRGDataProvider.h for more information
-
-typedef NSURL * _Nullable (^SRGDataProviderURLOverridingBlock)(NSString *uid, NSString *type, SRGImageDimension dimension, CGFloat value);
-
-@interface NSURL (Private_SRGDataProvider)
-
-+ (void)srg_setImageURLOverridingBlock:(SRGDataProviderURLOverridingBlock)imageURLOverridingBlock;
-
-@end
-
-// **
-
 CGSize SizeForImageScale(ImageScale imageScale)
 {
     static NSDictionary *s_widths;
@@ -47,6 +35,11 @@ CGSize SizeForImageScale(ImageScale imageScale)
 NSString *FilePathForImagePlaceholder(ImagePlaceholder imagePlaceholder)
 {
     switch (imagePlaceholder) {
+        case ImagePlaceholderMedia: {
+            return [NSBundle.mainBundle pathForResource:@"placeholder_media-180" ofType:@"pdf"];
+            break;
+        }
+            
         case ImagePlaceholderMediaList: {
             return [NSBundle.mainBundle pathForResource:@"placeholder_media_list-180" ofType:@"pdf"];
             break;
@@ -58,7 +51,7 @@ NSString *FilePathForImagePlaceholder(ImagePlaceholder imagePlaceholder)
         }
             
         default: {
-            return [NSBundle.mainBundle pathForResource:@"placeholder_media-180" ofType:@"pdf"];
+            return nil;
             break;
         }
     }
@@ -123,39 +116,9 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
     }
 }
 
-+ (void)play_setUseOriginalImagesOnly:(BOOL)useOriginalImagesOnly
-{
-    if (! useOriginalImagesOnly) {
-        [NSURL srg_setImageURLOverridingBlock:^NSURL * _Nullable(NSString *uid, NSString *type, SRGImageDimension dimension, CGFloat value) {
-            NSString *overrideImagePath = [self overrideImagePathForUid:uid withType:type];
-            if (! overrideImagePath) {
-                return nil;
-            }
-            
-            CGFloat valueInPixels = value * UIScreen.mainScreen.scale;
-            CGSize size = CGSizeZero;
-            if ([type isEqualToString:@"artwork"]) {
-                size = CGSizeMake(valueInPixels, valueInPixels);
-            }
-            else {
-                size = (dimension == SRGImageDimensionWidth) ? CGSizeMake(valueInPixels, 9.f * valueInPixels / 16.f) : CGSizeMake(16.f * valueInPixels / 9.f, valueInPixels);
-            }
-            return [UIImage srg_URLForVectorImageAtPath:overrideImagePath withSize:size];
-        }];
-    }
-    else {
-        [NSURL srg_setImageURLOverridingBlock:nil];
-    }
-}
-
 + (UIImage *)play_vectorImageAtPath:(NSString *)filePath withScale:(ImageScale)imageScale
 {
-    return [self srg_vectorImageAtPath:filePath withSize:SizeForImageScale(imageScale)];
-}
-
-+ (NSURL *)play_URLForVectorImageAtPath:(NSString *)filePath withScale:(ImageScale)imageScale
-{
-    return [self srg_URLForVectorImageAtPath:filePath withSize:SizeForImageScale(imageScale)];
+    return filePath ? [self srg_vectorImageAtPath:filePath withSize:SizeForImageScale(imageScale)] : nil;
 }
 
 + (NSString *)overrideImagePathForUid:(NSString *)uid withType:(NSString *)type

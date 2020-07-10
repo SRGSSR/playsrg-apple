@@ -52,7 +52,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.clearColor;
+    self.backgroundColor = UIColor.play_blackColor;
     
     UIView *selectedBackgroundView = [[UIView alloc] init];
     selectedBackgroundView.backgroundColor = UIColor.clearColor;
@@ -251,7 +251,6 @@
 
 - (void)updateDownloadStatus
 {
-    UIImage *downloadImage = nil;
     UIColor *tintColor = (self.editing && (self.selected || self.highlighted)) ? UIColor.redColor : UIColor.play_lightGrayColor;
     
     self.subtitleLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:self.download.date].play_localizedUppercaseFirstLetterString;
@@ -260,40 +259,44 @@
     switch (self.download.state) {
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended: {
-            [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable_stop-16"];
+            [self.downloadStatusImageView stopAnimating];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_stop-16"];
+            self.downloadStatusImageView.tintColor = tintColor;
             break;
         }
             
         case DownloadStateDownloading: {
-            [self.downloadStatusImageView play_startAnimatingDownloading16WithTintColor:tintColor];
-            NSProgress *progress = ([Download currentlyKnownProgressForDownload:self.download]) ?: [NSProgress progressWithTotalUnitCount:10]; // Display 0% if nothing
+            NSProgress *progress = [Download currentlyKnownProgressForDownload:self.download] ?: [NSProgress progressWithTotalUnitCount:10]; // Display 0% if nothing
             self.subtitleLabel.text = [progress localizedDescription];
-            downloadImage = self.downloadStatusImageView.image;
+            
+            [self.downloadStatusImageView play_setDownloadAnimation16WithTintColor:tintColor];
+            [self.downloadStatusImageView startAnimating];
             break;
         }
             
         case DownloadStateDownloaded: {
-            [self.downloadStatusImageView play_stopAnimating];
             self.subtitleLabel.text = [NSByteCountFormatter stringFromByteCount:self.download.size countStyle:NSByteCountFormatterCountStyleFile];
-            downloadImage = [UIImage imageNamed:@"downloadable_full-16"];
+            
+            [self.downloadStatusImageView stopAnimating];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_full-16"];
+            self.downloadStatusImageView.tintColor = tintColor;
             break;
         }
             
         case DownloadStateDownloadable:
         case DownloadStateRemoved: {
-            [self.downloadStatusImageView play_stopAnimating];
-            downloadImage = [UIImage imageNamed:@"downloadable-16"];
+            [self.downloadStatusImageView stopAnimating];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable-16"];
+            self.downloadStatusImageView.tintColor = tintColor;
             break;
         }
             
         default: {
-            [self.downloadStatusImageView play_stopAnimating];
+            [self.downloadStatusImageView stopAnimating];
+            self.downloadStatusImageView.image = nil;
             break;
         }
     }
-    self.downloadStatusImageView.image = downloadImage;
-    self.downloadStatusImageView.tintColor = tintColor;
 }
 
 - (void)updateHistoryStatus

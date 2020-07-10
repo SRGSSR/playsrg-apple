@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <UIKit/UIKit.h>
+#import "Channel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,42 +25,7 @@ OBJC_EXPORT NSString * _Nullable RadioChannelImageOverridePath(RadioChannel * _N
 /**
  *  Represent a radio channel in the application configuration.
  */
-@interface RadioChannel : NSObject
-
-/**
- *  Create the radio channel from a dictionary. Return `nil` if the dictionary format is incorrect.
- */
-- (nullable instancetype)initWithDictionary:(NSDictionary *)dictionary NS_DESIGNATED_INITIALIZER;
-
-/**
- *  The unique identifier of the radio channel (`SRGChannel` uid).
- */
-@property (nonatomic, readonly, copy) NSString *uid;
-
-/**
- *  The radio channel name.
- */
-@property (nonatomic, readonly, copy) NSString *name;
-
-/**
- *  The radio channel primary color.
- */
-@property (nonatomic, readonly) UIColor *color;
-
-/**
- *  The radio channel title color (white by default).
- */
-@property (nonatomic, readonly) UIColor *titleColor;
-
-/**
- *  Return `YES` iff the status bar should be dark for this channel.
- */
-@property (nonatomic, readonly, getter=hasDarkStatusBar) BOOL darkStatusBar;
-
-/**
- *  Set to `YES` to hide the badge stroke (the badge stroke color matches title color). Default is `NO`.
- */
-@property (nonatomic, readonly, getter=isBadgeStrokeHidden) BOOL badgeStrokeHidden;
+@interface RadioChannel : Channel
 
 /**
  *  The home sections ordered list.

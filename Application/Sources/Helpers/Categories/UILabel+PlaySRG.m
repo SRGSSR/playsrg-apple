@@ -15,12 +15,6 @@
 
 #import <SRGAppearance/SRGAppearance.h>
 
-@interface UIFont (SRGLetterbox_Private)
-
-+ (UIFont *)srg_awesomeFontWithTextStyle:(NSString *)textStyle;
-
-@end
-
 @implementation UILabel (PlaySRG)
 
 #pragma mark Public

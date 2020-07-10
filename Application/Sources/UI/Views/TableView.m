@@ -6,20 +6,6 @@
 
 #import "TableView.h"
 
-static void commonInit(TableView *self)
-{
-    self.backgroundColor = UIColor.clearColor;
-    self.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    self.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    // The default when instantiated in a xib or storyboard. Avoid unreliable content size calculations
-    // when row heights are specified. We do not use automatic cell sizing, so this is best avoided by
-    // default.
-    self.estimatedRowHeight = 0.f;
-    self.estimatedSectionFooterHeight = 0.f;
-    self.estimatedSectionHeaderHeight = 0.f;
-}
-
 @implementation TableView
 
 #pragma mark Object lifecycle
@@ -27,7 +13,7 @@ static void commonInit(TableView *self)
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style
 {
     if (self = [super initWithFrame:frame style:style]) {
-        commonInit(self);
+        TableViewConfigure(self);
     }
     return self;
 }
@@ -35,9 +21,23 @@ static void commonInit(TableView *self)
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     if (self = [super initWithCoder:coder]) {
-        commonInit(self);
+        TableViewConfigure(self);
     }
     return self;
 }
 
 @end
+
+void TableViewConfigure(UITableView *tableView)
+{
+    tableView.backgroundColor = UIColor.clearColor;
+    tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    // Avoid unreliable content size calculations when row heights are specified (leads to glitches during scrolling or
+    // reloads). We do not use automatic cell sizing, so this is best avoided by default. This was the old default behavior,
+    // but newer versions of Xcode now enable automatic sizing by default.
+    tableView.estimatedRowHeight = 0.f;
+    tableView.estimatedSectionFooterHeight = 0.f;
+    tableView.estimatedSectionHeaderHeight = 0.f;
+}

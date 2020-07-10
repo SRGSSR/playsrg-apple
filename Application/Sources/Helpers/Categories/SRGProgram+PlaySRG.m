@@ -10,7 +10,8 @@
 
 - (BOOL)play_containsDate:(NSDate *)date
 {
-    return [self.startDate compare:date] != NSOrderedDescending && [date compare:self.endDate] != NSOrderedDescending;
+    NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:self.startDate endDate:self.endDate];
+    return [dateInterval containsDate:date];
 }
 
 @end

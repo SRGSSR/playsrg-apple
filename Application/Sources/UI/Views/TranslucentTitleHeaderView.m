@@ -6,8 +6,6 @@
 
 #import "TranslucentTitleHeaderView.h"
 
-#import "UIColor+PlaySRG.h"
-
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface TranslucentTitleHeaderView ()
@@ -46,7 +44,7 @@
 
 - (NSString *)accessibilityLabel
 {
-    return self.titleLabel.text.lowercaseString;
+    return self.titleLabel.text;
 }
 
 - (UIAccessibilityTraits)accessibilityTraits

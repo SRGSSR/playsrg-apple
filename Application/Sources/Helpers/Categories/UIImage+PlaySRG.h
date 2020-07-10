@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, ImageScale) {
 };
 
 typedef NS_ENUM(NSInteger, ImagePlaceholder) {
+    ImagePlaceholderNone,
     ImagePlaceholderMedia,
     ImagePlaceholderMediaList,
     ImagePlaceholderNotification
@@ -29,7 +30,7 @@ OBJC_EXPORT CGSize SizeForImageScale(ImageScale imageScale);
 /**
  *  Return the file path corresponding to an image placeholder.
  */
-OBJC_EXPORT NSString *FilePathForImagePlaceholder(ImagePlaceholder imagePlaceholder);
+OBJC_EXPORT NSString * _Nullable FilePathForImagePlaceholder(ImagePlaceholder imagePlaceholder);
 
 /**
  *  Youth protection image associated with a color, if any.
@@ -44,32 +45,14 @@ OBJC_EXPORT UIImage * _Nullable YouthProtectionImageForColor(SRGYouthProtectionC
 + (nullable UIImage *)play_imageForBlockingReason:(SRGBlockingReason)blockingReason;
 
 /**
- *  If set to `YES`, only original images available from the service will be used, otherwise some bad images might
- *  be fixed with local versions.
- *
- *  The default behavior is `NO`.
- */
-+ (void)play_setUseOriginalImagesOnly:(BOOL)useOriginalImagesOnly;
-
-/**
  *  Return an image generated from the vector image at the specified path.
  *
  *  @param filePath The path of the vector image to use.
  *  @param scale    The scale of the image to create.
  *
- *  @return The generated image, `nil` if generation failed.
+ *  @return The generated image, `nil` if generation failed or if the path is `nil`.
  */
-+ (nullable UIImage *)play_vectorImageAtPath:(NSString *)filePath withScale:(ImageScale)imageScale;
-
-/**
- *  Return the file URL of an image generated from the vector image at the specified path.
- *
- *  @param filePath The path of the vector image to use.
- *  @param scale    The scale of the image to create.
- *
- *  @return The generated image, `nil` if generation failed.
- */
-+ (nullable NSURL *)play_URLForVectorImageAtPath:(NSString *)filePath withScale:(ImageScale)imageScale;
++ (nullable UIImage *)play_vectorImageAtPath:(nullable NSString *)filePath withScale:(ImageScale)imageScale;
 
 @end
 

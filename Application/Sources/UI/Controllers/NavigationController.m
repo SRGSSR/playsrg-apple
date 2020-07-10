@@ -25,6 +25,7 @@
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
                                  tintColor:(UIColor *)tintColor
                            backgroundColor:(UIColor *)backgroundColor
+                                 separator:(BOOL)separator
                             statusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     if (self = [super initWithRootViewController:rootViewController]) {
@@ -33,14 +34,14 @@
         UINavigationBar *navigationBar = self.navigationBar;
         navigationBar.barStyle = UIBarStyleBlack;
         
-        [self updateWithTintColor:tintColor backgroundColor:backgroundColor statusBarStyle:statusBarStyle];
+        [self updateWithTintColor:tintColor backgroundColor:backgroundColor separator:separator statusBarStyle:statusBarStyle];
     }
     return self;
 }
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
 {
-    return [self initWithRootViewController:rootViewController tintColor:nil backgroundColor:nil statusBarStyle:UIStatusBarStyleLightContent];
+    return [self initWithRootViewController:rootViewController tintColor:nil backgroundColor:nil separator:YES statusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma clang diagnostic push
@@ -79,24 +80,18 @@
 
 #pragma mark UI updates
 
-- (void)updateWithTintColor:(UIColor *)tintColor backgroundColor:(UIColor *)backgroundColor statusBarStyle:(UIStatusBarStyle)statusBarStyle
+- (void)updateWithTintColor:(UIColor *)tintColor backgroundColor:(UIColor *)backgroundColor separator:(BOOL)separator statusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     self.statusBarStyle = statusBarStyle;
     [self setNeedsStatusBarAppearanceUpdate];
     
     UINavigationBar *navigationBar = self.navigationBar;
     
-    // Apply background colors with a small shadow for better readability
     if (backgroundColor) {
-        navigationBar.layer.shadowOpacity = 1.f;
-        
         navigationBar.barTintColor = backgroundColor;
         navigationBar.translucent = NO;
     }
-    // Use standard blur with no shadow (which would break the blur).
     else {
-        navigationBar.layer.shadowOpacity = 0.f;
-        
         if (@available(iOS 13, *)) {
             navigationBar.barTintColor = nil;
         }
@@ -106,6 +101,19 @@
         
         navigationBar.translucent = YES;
     }
+    
+    // See https://stackoverflow.com/a/19227158/760435
+    if (separator) {
+        [navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        navigationBar.shadowImage = nil;
+    }
+    else {
+        [navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        navigationBar.shadowImage = [UIImage new];
+    }
+    
+    // Add a shadow for solid background to improve readability
+    navigationBar.layer.shadowOpacity = (separator && backgroundColor != nil) ? 1.f : 0.f;
     
     UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
     navigationBar.tintColor = foregroundColor;
@@ -131,7 +139,7 @@
             darkStatusBarStyle = UIStatusBarStyleDarkContent;
         }
         UIStatusBarStyle statusBarStyle = radioChannel.hasDarkStatusBar ? darkStatusBarStyle : UIStatusBarStyleLightContent;
-        [self updateWithTintColor:radioChannel.titleColor backgroundColor:radioChannel.color statusBarStyle:statusBarStyle];
+        [self updateWithTintColor:radioChannel.titleColor backgroundColor:radioChannel.color separator:YES statusBarStyle:statusBarStyle];
     };
     
     if (animated) {

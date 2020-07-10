@@ -20,6 +20,7 @@
 #import "HomeShowsAccessTableViewCell.h"
 #import "HomeShowVerticalListTableViewCell.h"
 #import "HomeStatusHeaderView.h"
+#import "HomeTopicListTableViewCell.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 #import "RefreshControl.h"
@@ -123,6 +124,9 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     Class showVerticallListCellClass = HomeShowVerticalListTableViewCell.class;
     [self.tableView registerClass:showVerticallListCellClass forCellReuseIdentifier:NSStringFromClass(showVerticallListCellClass)];
     
+    Class topicListCellClass = HomeTopicListTableViewCell.class;
+    [self.tableView registerClass:topicListCellClass forCellReuseIdentifier:NSStringFromClass(topicListCellClass)];
+    
     NSString *showsAccessCellIdentifier = NSStringFromClass(HomeShowsAccessTableViewCell.class);
     UINib *homeShowsAccessTableViewCellNib = [UINib nibWithNibName:showsAccessCellIdentifier bundle:nil];
     [self.tableView registerNib:homeShowsAccessTableViewCellNib forCellReuseIdentifier:showsAccessCellIdentifier];
@@ -138,7 +142,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
-                                               name:UIAccessibilityVoiceOverStatusChanged
+                                               name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(preferencesStateDidChange:)
@@ -413,6 +417,9 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
                 return HomeHeaderTypeView;
             }
         }
+        else if (homeSectionInfo.homeSection == HomeSectionTVTopicsAccess) {
+            return ! UIAccessibilityIsVoiceOverRunning() ? HomeHeaderTypeNone : HomeHeaderTypeView;
+        }
         else {
             return HomeHeaderTypeView;
         }
@@ -589,22 +596,20 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    // Not zero, otherwise not applied
+    static CGFloat kZeroHeight = 0.0001f;
+    
     HomeSectionInfo *homeSectionInfo = self.homeSectionInfos[section];
     if (homeSectionInfo.hidden) {
-        return 0.f;
+        return kZeroHeight;
     }
     
     HomeHeaderType headerType = [self headerTypeForHomeSectionInfo:homeSectionInfo tableView:tableView inSection:section];
-    switch (headerType) {    
-        case HomeHeaderTypeView: {
-            return LayoutStandardTableSectionHeaderHeight(homeSectionInfo.module.play_backgroundColor != nil);
-            break;
-        }
-        
-        default: {
-            return 0.f;
-            break;
-        }
+    if (headerType == HomeHeaderTypeView) {
+        return LayoutStandardTableSectionHeaderHeight(homeSectionInfo.module.play_backgroundColor != nil);
+    }
+    else {
+        return kZeroHeight;
     }
 }
 

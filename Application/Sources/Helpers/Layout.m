@@ -60,24 +60,34 @@ CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor)
 
 CGFloat LayoutStandardSimpleTableCellHeight(void)
 {
-    static NSDictionary<NSString *, NSNumber *> *s_height;
+    static NSDictionary<NSString *, NSNumber *> *s_heights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_height = @{ UIContentSizeCategoryExtraSmall : @42,
-                      UIContentSizeCategorySmall : @42,
-                      UIContentSizeCategoryMedium : @46,
-                      UIContentSizeCategoryLarge : @50,
-                      UIContentSizeCategoryExtraLarge : @54,
-                      UIContentSizeCategoryExtraExtraLarge : @58,
-                      UIContentSizeCategoryExtraExtraExtraLarge : @62,
-                      UIContentSizeCategoryAccessibilityMedium : @62,
-                      UIContentSizeCategoryAccessibilityLarge : @62,
-                      UIContentSizeCategoryAccessibilityExtraLarge : @62,
-                      UIContentSizeCategoryAccessibilityExtraExtraLarge : @62,
-                      UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @62 };
+        s_heights = @{ UIContentSizeCategoryExtraSmall : @42,
+                       UIContentSizeCategorySmall : @42,
+                       UIContentSizeCategoryMedium : @46,
+                       UIContentSizeCategoryLarge : @50,
+                       UIContentSizeCategoryExtraLarge : @54,
+                       UIContentSizeCategoryExtraExtraLarge : @58,
+                       UIContentSizeCategoryExtraExtraExtraLarge : @62,
+                       UIContentSizeCategoryAccessibilityMedium : @62,
+                       UIContentSizeCategoryAccessibilityLarge : @62,
+                       UIContentSizeCategoryAccessibilityExtraLarge : @62,
+                       UIContentSizeCategoryAccessibilityExtraExtraLarge : @62,
+                       UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @62 };
     });
     NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    return s_height[contentSizeCategory].floatValue;
+    return s_heights[contentSizeCategory].floatValue;
+}
+
+CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, NSInteger row, NSInteger numberOfItems)
+{
+    if (row < numberOfItems - 1) {
+        return contentHeight + spacing;
+    }
+    else {
+        return contentHeight;
+    }
 }
 
 CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large)

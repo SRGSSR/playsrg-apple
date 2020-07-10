@@ -93,24 +93,34 @@ static NSArray<DeprecatedFavorite *> *s_sortedFavorites;
 
 + (NSDictionary<NSString *, DeprecatedFavorite *> *)loadFavoritesDictionary
 {
-    NSDictionary<NSString *, DeprecatedFavorite *> *favoritesDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:[self favoritesFilePath]];
+    NSData *data = [NSData dataWithContentsOfFile:[self favoritesFilePath]];
+    NSDictionary<NSString *, DeprecatedFavorite *> *favoritesDictionary = [NSKeyedUnarchiver unarchivedObjectOfClass:NSDictionary.class fromData:data error:NULL];
+    if (! favoritesDictionary) {
+        return nil;
+    }
     
     NSPredicate *isNotNSString= [NSPredicate predicateWithBlock:^BOOL(id _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return ![evaluatedObject isKindOfClass:NSString.class];
+        return ! [evaluatedObject isKindOfClass:NSString.class];
     }];
-    NSPredicate *isNotFavorite = [NSPredicate predicateWithBlock:^BOOL(id _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return ![evaluatedObject isKindOfClass:DeprecatedFavorite.class];
-    }];
+    if ([favoritesDictionary.allKeys filteredArrayUsingPredicate:isNotNSString].count != 0) {
+        return nil;
+    }
     
-    // Return the loaded dictionnary iff it contains expected objects
-    return (! [favoritesDictionary.allKeys filteredArrayUsingPredicate:isNotNSString].count &&
-            ! [favoritesDictionary.allValues filteredArrayUsingPredicate:isNotFavorite].count)
-    ? favoritesDictionary : nil;
+    NSPredicate *isNotFavorite = [NSPredicate predicateWithBlock:^BOOL(id _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        return ! [evaluatedObject isKindOfClass:DeprecatedFavorite.class];
+    }];
+    if ([favoritesDictionary.allValues filteredArrayUsingPredicate:isNotFavorite].count != 0) {
+        return nil;
+    }
+    
+    return favoritesDictionary;
 }
 
 + (void)saveFavoritesDictionary
 {
-    [NSKeyedArchiver archiveRootObject:s_favoritesDictionary toFile:[self favoritesFilePath]];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:s_favoritesDictionary requiringSecureCoding:NO error:NULL];
+    [data writeToFile:[self favoritesFilePath] atomically:YES];
+    
     [self saveFavoritesBackupDictionary];
 }
 

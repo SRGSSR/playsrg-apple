@@ -16,6 +16,16 @@
 
 @implementation SettingsBaseViewController
 
+#pragma mark Object lifecycle
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.showDoneButton = NO;
+    }
+    return self;
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -29,10 +39,8 @@
     self.view.backgroundColor = UIColor.play_blackColor;
     self.tableView.separatorColor = UIColor.play_grayColor;
     
-    self.neverShowPrivacySettings = YES;
     self.delegate = self;
-    
-    self.showDoneButton = NO;
+    self.neverShowPrivacySettings = YES;
     self.showCreditsFooter = NO;
 }
 
@@ -64,18 +72,18 @@
 
 #pragma mark IASKSettingsDelegate protocol
 
-- (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController *)sender
+- (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController *)settingsViewController
 {}
 
-- (UIView *)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView viewForHeaderForSection:(NSInteger)section
+- (UIView *)settingsViewController:(id<IASKViewController>)settingsViewController viewForHeaderInSection:(NSInteger)section specifier:(IASKSpecifier *)specifier
 {
     // We must return a view for the header so that the height delegate method gets called
     return [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectZero];
 }
 
-- (CGFloat)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView heightForHeaderForSection:(NSInteger)section
+- (CGFloat)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController heightForHeaderInSection:(NSInteger)section specifier:(IASKSpecifier *)specifier
 {
-    BOOL hasTitle = [self tableView:tableView titleForHeaderInSection:section].length != 0;
+    BOOL hasTitle = [self tableView:settingsViewController.tableView titleForHeaderInSection:section].length != 0;
     if (section == 0) {
         return hasTitle ? 75.f : 15.f;
     }
@@ -84,15 +92,15 @@
     }
 }
 
-- (UIView *)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView viewForFooterForSection:(NSInteger)section
+- (UIView *)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController viewForFooterInSection:(NSInteger)section specifier:(IASKSpecifier *)specifier
 {
     // We must return a view for the footer so that the height delegate method gets called
     return [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectZero];
 }
 
-- (CGFloat)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView heightForFooterForSection:(NSInteger)section
+- (CGFloat)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController heightForFooterInSection:(NSInteger)section specifier:(IASKSpecifier *)specifier
 {
-    BOOL hasFooter = [self tableView:tableView titleForFooterInSection:section].length != 0;
+    BOOL hasFooter = [self tableView:settingsViewController.tableView titleForFooterInSection:section].length != 0;
     return hasFooter ? UITableViewAutomaticDimension : 0.1f /* Cannot use 0 = automatic dimension */;
 }
 

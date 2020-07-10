@@ -73,7 +73,7 @@ import SRGAppearance
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(accessibilityVoiceOverStatusChanged(notification:)),
-                                               name: NSNotification.Name(rawValue: UIAccessibilityVoiceOverStatusChanged),
+                                               name: UIAccessibility.voiceOverStatusDidChangeNotification,
                                                object: nil)
     }
     

@@ -101,10 +101,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
     
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(settingDidChange:)
-                                               name:kIASKAppSettingChanged
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationConfigurationDidChange:)
                                                name:ApplicationConfigurationDidChangeNotification
                                              object:nil];
@@ -143,7 +139,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:SettingsUserLocationSettingsButton];
     [hiddenKeys addObject:PlaySRGSettingPresenterModeEnabled];
     [hiddenKeys addObject:PlaySRGSettingStandaloneEnabled];
-    [hiddenKeys addObject:PlaySRGSettingOriginalImagesOnlyEnabled];
     [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
     [hiddenKeys addObject:SettingsSystemSettingsButton];
@@ -255,7 +250,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
 #pragma mark IASKSettingsDelegate protocol
 
-- (void)settingsViewController:(IASKAppSettingsViewController *)sender buttonTappedForSpecifier:(IASKSpecifier *)specifier
+- (void)settingsViewController:(IASKAppSettingsViewController *)settingsViewController buttonTappedForSpecifier:(IASKSpecifier *)specifier
 {
     if ([specifier.key isEqualToString:SettingsWhatsNewButton]) {
         [self loadWhatsNewWithCompletionHandler:^(UIViewController * _Nullable viewController, NSError * _Nullable error) {
@@ -344,7 +339,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
     else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {
         // Clear internal App Center timestamp to force a new update request
-        [NSUserDefaults.standardUserDefaults removeObjectForKey:@"MSPostponedTimestamp"];
+        [NSUserDefaults.standardUserDefaults removeObjectForKey:@"MSAppCenterPostponedTimestamp"];
         [MSDistribute checkForUpdate];
         
         // Display version history
@@ -411,7 +406,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
     else if ([specifier.key isEqualToString:SettingsSystemSettingsButton]) {
         NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        [UIApplication.sharedApplication openURL:URL];
+        [UIApplication.sharedApplication openURL:URL options:@{} completionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsClearWebCacheButton]) {
         [self clearWebCache];
@@ -431,7 +426,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 #endif
 }
 
-- (NSString *)settingsViewController:(id<IASKViewController>)settingsViewController tableView:(UITableView *)tableView titleForFooterForSection:(NSInteger)section
+- (NSString *)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController titleForFooterInSection:(NSInteger)section specifier:(IASKSpecifier *)specifier
 {
     NSString *key = [settingsViewController.settingsReader keyForSection:section];
     if ([key isEqualToString:SettingsInformationGroup]) {
@@ -447,7 +442,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForSpecifier:(IASKSpecifier *)specifier
+- (CGFloat)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController heightForSpecifier:(IASKSpecifier *)specifier
 {
     if ([specifier.key isEqualToString:SettingsApplicationVersionCell]) {
         return 44.f;
@@ -457,11 +452,11 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForSpecifier:(IASKSpecifier *)specifier
+- (UITableViewCell *)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController cellForSpecifier:(IASKSpecifier *)specifier
 {
     if ([specifier.key isEqualToString:SettingsApplicationVersionCell]) {
         static NSString * const kApplicationVersionCellIdentifier = @"Cell_ApplicationVersion";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kApplicationVersionCellIdentifier];
+        UITableViewCell *cell = [settingsViewController.tableView dequeueReusableCellWithIdentifier:kApplicationVersionCellIdentifier];
         if (! cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kApplicationVersionCellIdentifier];
         }
@@ -508,14 +503,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 }
 
 #pragma mark Notifications
-
-- (void)settingDidChange:(NSNotification *)notification
-{
-    NSNumber *originalImagesOnlyEnabled = notification.userInfo[PlaySRGSettingOriginalImagesOnlyEnabled];
-    if (originalImagesOnlyEnabled) {
-        [UIImage play_setUseOriginalImagesOnly:originalImagesOnlyEnabled.boolValue];
-    }
-}
 
 - (void)applicationConfigurationDidChange:(NSNotification *)notification
 {

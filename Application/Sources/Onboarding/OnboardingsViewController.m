@@ -10,6 +10,7 @@
 #import "Onboarding.h"
 #import "OnboardingTableViewCell.h"
 #import "Play-Swift-Bridge.h"
+#import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -36,7 +37,7 @@
     
     self.view.backgroundColor = UIColor.play_blackColor;
     
-    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    TableViewConfigure(self.tableView);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
 }

@@ -1,6 +1,9 @@
 /* Date at time label to spell a date and time value. */
 "%1$@ at %2$@" = "%1$@ à %2$@";
 
+/* Song description. First placeholder is song title, second is artist name */
+"%1$@, by %2$@" = "%1$@, de %2$@";
+
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ écoutes";
 
@@ -54,8 +57,11 @@
 /* Introductory title for error notifications */
 "Error" = "Erreur";
 
-/* Text to inform a program time information, like the current program */
+/* Text providing program time information. First placeholder is the start time, second is the end time. */
 "From %1$@ to %2$@" = "De %1$@ à %2$@";
+
+/* Accessibility label of the song list handle when opened */
+"Hide music list" = "Masquer la liste musicale";
 
 /* Introductory title for information notifications */
 "Information" = "Information";
@@ -72,8 +78,14 @@
 /* Accessibility hint associated with the account header */
 "Manages account information" = "gères les informations du compte";
 
+/* A more episode button label */
+"More episodes" = "Autres épisodes";
+
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mon compte";
+
+/* Text providing next program time information. */
+"Next, at %@" = "À suivre à %@";
 
 /* Mini player label */
 "Now playing: %@" = "A l'écoute : %@";
@@ -90,6 +102,9 @@
 /* Mini player action hint */
 "Opens the full screen player" = "Ouvre le lecteur en pleine page";
 
+/* Show cell hint */
+"Opens topic details." = "Affiche le détail de la catégorie.";
+
 /* Accessibility label for the multi audio badge */
 "Original version" = "Version originale";
 
@@ -99,9 +114,14 @@
 /* Play button label */
 "Play" = "Jouer";
 
-/* Media cell hint
-   Mini player action hint */
+/* Program cell hint */
+"Plays from the beginning." = "Joue depuis le début.";
+
+/* Media cell hint */
 "Plays the content." = "Joue le contenu.";
+
+/* Song cell hint */
+"Plays the music." = "Joue la musique.";
 
 /* Title displayed in home page shows section. */
 "Programmes A-Z" = "Émissions de A à Z";
@@ -133,6 +153,9 @@
 
 /* Share button label on player view */
 "Share" = "Partager";
+
+/* Accessibility label of the song list handle when closed */
+"Show music list" = "Afficher la liste musicale";
 
 /* Homepage header action hint */
 "Shows all contents." = "Affiche tout le contenu.";

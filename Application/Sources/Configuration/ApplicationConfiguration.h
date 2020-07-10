@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, HomeSection) {
     HomeSectionTVTrending,
     HomeSectionTVEvents,
     HomeSectionTVTopics,
+    HomeSectionTVTopicsAccess,
     HomeSectionTVLatest,
     HomeSectionTVMostPopular,
     HomeSectionTVSoonExpiring,
@@ -159,6 +160,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 - (nullable RadioChannel *)radioChannelForUid:(NSString *)uid;
 - (nullable TVChannel *)tvChannelForUid:(NSString *)uid;
+- (nullable __kindof Channel *)channelForUid:(NSString *)uid;
 
 /**
  *  URLs to be used for sharing

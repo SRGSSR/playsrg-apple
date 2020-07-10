@@ -10,6 +10,7 @@
 #import "Layout.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
+#import "SwimlaneCollectionViewLayout.h"
 
 #import <CoconutKit/CoconutKit.h>
 #import <SRGAnalytics/SRGAnalytics.h>
@@ -45,7 +46,7 @@ static const CGFloat kBottomInset = 15.f;
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = UIColor.clearColor;
         
-        UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+        SwimlaneCollectionViewLayout *collectionViewLayout = [[SwimlaneCollectionViewLayout alloc] init];
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
         collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
@@ -56,6 +57,7 @@ static const CGFloat kBottomInset = 15.f;
         collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
         collectionView.alwaysBounceHorizontal = YES;
         collectionView.directionalLockEnabled = YES;
+        collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
         // Important. If > 1 view on-screen is found on iPhone with this property enabled, none will scroll to top
         collectionView.scrollsToTop = NO;
         collectionView.delegate = self;

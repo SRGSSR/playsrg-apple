@@ -15,7 +15,7 @@
     NSAssert(self.scrollDirection == UICollectionViewScrollDirectionHorizontal, @"Currently only implemented for horizontal layout direction");
     
     // If already at the beginning or the end, stays there
-    CGFloat maxX = fmaxf(self.collectionViewContentSize.width - CGRectGetWidth(self.collectionView.frame), 0.f);
+    CGFloat maxX = floorf(fmaxf(self.collectionViewContentSize.width - CGRectGetWidth(self.collectionView.frame), 0.f));
     if (proposedContentOffset.x >= maxX) {
         return CGPointMake(maxX, proposedContentOffset.y);
     }

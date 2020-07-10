@@ -74,9 +74,6 @@
    Confirmation message displayed when the user is about to remove selected entries from the watch later list */
 "Are you sure you want to delete the selected items?" = "Etes-vous sûr de vouloir supprimer les éléments sélectionnés ?";
 
-/* Introductory text for next program information */
-"At %1$@: %2$@" = "Prochainement à %1$@ : %2$@";
-
 /* Audios option
    Header for audio search results
    Title displayed at the top of the audio view */
@@ -109,12 +106,6 @@
 
 /* Settings section header */
 "Content" = "Contenu";
-
-/* Text displayed on live cells when no program time information is available */
-"Currently" = "En ce moment";
-
-/* Title in the mini player for the live stream, if the current program is known. */
-"Currently: %@" = "En direct : %@";
 
 /* Title of a delete button
    Title of the delete button in the alert view when deleting a download in the player view */
@@ -221,7 +212,8 @@
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
 "less than 1 hour" = "moins d'une heure";
 
-/* Short label identifying a livestream. Display in uppercase. */
+/* Introductory text for what is currently on air, displayed on the mini player
+   Short label identifying a livestream. Display in uppercase. */
 "Live" = "Direct";
 
 /* Label to present the Livestreams view
@@ -243,7 +235,7 @@
 /* Button label to open the show episode page from the long-press menu
    Button label to open the show episode page from the preview window
    Context menu action to open more episodes associated with a media */
-"More episodes" = "Plus d’épisodes";
+"More episodes" = "Autres épisodes";
 
 /* Title of the related content player section */
 "More on this subject" = "Pour aller plus loin";
@@ -261,6 +253,9 @@
 /* Most searched shows header */
 "Most searched shows" = "Émissions les plus recherchées";
 
+/* Song list title */
+"Music" = "Musique";
+
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mon compte";
 
@@ -269,6 +264,9 @@
 
 /* Title of the button to proceed to the next onboarding page */
 "Next" = "Suivant";
+
+/* Introductory time for next program information */
+"Next, at %@" = "À suivre à %@";
 
 /* Text displayed when no media added to the watch later list */
 "No content" = "Aucun contenu";
@@ -404,7 +402,7 @@
 "Remove from favorites" = "Supprimer des favoris";
 
 /* Short label identifying a replay sport event. Display in uppercase. */
-"Replay" = "Replay";
+"Replay" = "Rediffusion";
 
 /* Title of the reset search settings button */
 "Reset" = "Effacer";
@@ -438,7 +436,8 @@
 /* Show more button label when a link is available for broadcast information. */
 "Show more" = "En savoir plus";
 
-/* Show search result header
+/* Program list header in livestream view
+   Show search result header
    Shows search setting option
    Shows search setting option list view title
    Title label used to present radio associated shows
@@ -482,7 +481,8 @@
 /* Button label to share the content being played at time (hours / minutes / seconds). */
 "The content at %@" = "Le contenu à %@";
 
-/* Message displayed when some content (media, show, etc.) has been copied to the clipboard */
+/* Message displayed when some content (media, show, etc.) has been copied to the clipboard
+   Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "Le contenu a été copié dans le presse-papier.";
 
 /* Button label to share the entire episode being played. */
@@ -529,11 +529,15 @@
 /* Period setting option */
 "This week" = "Cette semaine";
 
+/* Introductory text for live content played with timeshift, displayed on the mini player */
+"Time-shifted" = "Différé";
+
 /* Period setting option
    Title of the button to go back to the current date */
 "Today" = "Aujourd'hui";
 
 /* Categories search setting option
+   Title label used to present TV topics
    Title label used to present TV topics while loading. It appears if no network connection available and no cache available.
    Topics search setting option list view title */
 "Topics" = "Catégories";

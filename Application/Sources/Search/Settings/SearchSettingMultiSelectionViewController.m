@@ -8,6 +8,7 @@
 
 #import "NSSet+PlaySRG.h"
 #import "SearchSettingSelectorCell.h"
+#import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UISearchBar+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -65,8 +66,7 @@
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = UIColor.clearColor;
-    self.tableView.separatorColor = UIColor.clearColor;
-    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    TableViewConfigure(self.tableView);
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;

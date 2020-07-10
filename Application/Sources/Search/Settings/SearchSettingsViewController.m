@@ -17,6 +17,7 @@
 #import "SearchSettingSwitchCell.h"
 #import "SearchSettingMultiSelectionViewController.h"
 #import "SRGDay+PlaySRG.h"
+#import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -164,10 +165,9 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = UIColor.clearColor;
-    self.tableView.separatorColor = UIColor.clearColor;
-    self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    TableViewConfigure(self.tableView);
     
-    // Remove the space at the top of the grouped table view
+    // Remove the spaces at the top and bottom of the grouped table view
     // See https://stackoverflow.com/a/18938763/760435
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.tableView.bounds.size.width, 0.01f)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.tableView.bounds.size.width, 0.01f)];

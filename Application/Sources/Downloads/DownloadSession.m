@@ -273,21 +273,6 @@ didFinishDownloadingToURL:(NSURL *)location
                         [task cancel];
                         
                         // Replace with a new one using the resume data
-                        // Remark: Does not work perfectly on iOS 10 because of a bug (e.g. resume will only work once in my tests),
-                        //         see https://forums.developer.apple.com/thread/63585 and http://stackoverflow.com/questions/39346231/resume-nsurlsession-on-ios10/39347461#39347461,
-                        //         which describe similar issues encountered with download resuming on iOS 10, some of
-                        //         them fixed by iOS 10.2 (but not all probably)
-                        //
-                        //         Current status:
-                        //           - iOS 9: Works perfectly
-                        //           - iOS 10.1: Resume does not work, download start again at 0
-                        //           - iOS 10.2: Resume works the first time, a second resume starts again at 0
-                        //
-                        //         This behavior is consistent with the one obtained with the HalfTunes sample app
-                        //         (see https://www.raywenderlich.com/110458/nsurlsession-tutorial-getting-started):
-                        //           - iOS 9: Works perfectly
-                        //           - iOS 10.1: Pause / resume does not work, download hangs
-                        //           - iOS 10.2: Resume works the first time, a second resume hangs
                         NSURLSessionDownloadTask *mediaFileTask = [self.session downloadTaskWithResumeData:resumeData];
                         self.downloads[@(mediaFileTask.taskIdentifier)] = download;
                         [mediaFileTask resume];

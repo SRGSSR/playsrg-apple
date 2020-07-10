@@ -89,7 +89,7 @@
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
-                                               name:UIAccessibilityVoiceOverStatusChanged
+                                               name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
 }
 
@@ -269,7 +269,7 @@
     
     userActivity.title = self.show.title;
     [userActivity addUserInfoEntriesFromDictionary:@{ @"URNString" : self.show.URN,
-                                                      @"SRGShowData" : [NSKeyedArchiver archivedDataWithRootObject:self.show],
+                                                      @"SRGShowData" : [NSKeyedArchiver archivedDataWithRootObject:self.show requiringSecureCoding:NO error:NULL],
                                                       @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
     userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
 }
@@ -428,9 +428,10 @@
         ShowHeaderView *headerView = (ShowHeaderView *)view;
         headerView.show = self.show;
         
-        // iOS 11 bug: The header hides scroll indicators
+        // iOS 11 - 12 bug: The header hides scroll indicators
         // See https://stackoverflow.com/questions/46747960/ios11-uicollectionsectionheader-clipping-scroll-indicator
-        if (@available(iOS 11, *)) {
+        if (@available(iOS 13, *)) {}
+        else {
             headerView.layer.zPosition = 0;
         }
     }

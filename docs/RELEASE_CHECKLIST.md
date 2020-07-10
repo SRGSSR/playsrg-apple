@@ -17,11 +17,12 @@
 | Build betas for AppCenter (with fastlane on TeamCity) ||||||
 | Check what's new in AppCenter betas ||||||
 | Write test ticket and alert testers on Slack ||||||
+| Update production remote configuration on Firebase ||||||
 | Build versions for iTunes Connect (with fastlane) ||||||
 | Wait until the binary has been validated on iTunes Connect ||||||
 | Get the binary DSYM and upload it on AppCenter (with fastlane) ||||||
 | Ask the BU to approve the version ||||||
-| Wait until successful Apple review ||||||
+| Obtain successful Apple review ||||||
 | Release to the store ||||||
 | Check that the application is available in production ||||||
 | Remove the _preprod_ flag from what's new information on Pastebin ||||||
