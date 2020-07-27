@@ -440,7 +440,7 @@ name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
 
 name: FXReachability, nameSpecified: , owner: SRGSSR, version: 1.3.2_srg4
 
-name: ios-library, nameSpecified: , owner: urbanairship, version: 13.4.0
+name: ios-library, nameSpecified: , owner: urbanairship, version: 13.5.1
 
 name: libextobjc, nameSpecified: , owner: SRGSSR, version: 0.6_srg2
 
