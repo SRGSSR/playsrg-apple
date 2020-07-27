@@ -27,6 +27,9 @@ platform :ios do
       end
     end
 
+    # Only used by FastLane actions
+    xcversion(version: '~> 11')
+
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
       Dir.chdir('..') { sh 'make bootstrap' }
