@@ -79,7 +79,7 @@
     else if (self.homeSection == HomeSectionTVFavoriteShows || self.homeSection == HomeSectionRadioFavoriteShows) {
         return HomeShowListTableViewCell.class;
     }
-    else if (self.homeSection == HomeSectionTVLive || self.homeSection == HomeSectionRadioLive) {
+    else if (self.homeSection == HomeSectionTVLive || self.homeSection == HomeSectionRadioLive || self.homeSection == HomeSectionRadioLiveSatellite) {
         return HomeLiveMediaVerticalListTableViewCell.class;
     }
     else {
