@@ -6,14 +6,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct SearchView: View {
     var body: some View {
-        Text("Play SRG TV").padding()
+        Text("Search")
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        SearchView()
     }
 }
