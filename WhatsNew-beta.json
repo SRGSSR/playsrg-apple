@@ -114,5 +114,6 @@
   "3.1.0-335": "- Fix crash when updating settings.",
   "3.1.0-336": "- Update german translation.",
   "3.1.0-337": "- Display waveform for song currently being played.\n- Display current show in show list for livestreams without timeshift.\n- Apply snapping in search results for shows.",
-  "3.1.0-338": "- UI improvement for video livestreams.\n- Long press to copy the song title and artist name."
+  "3.1.0-338": "- UI improvement for video livestreams.\n- Long press to copy the song title and artist name.",
+  "3.1.1-339": "- Always hide the playback controls after entering full screen.\n- Fix screen incorrectly turning off when watching videos with sound over AirPlay.\n- Fix issue leading to the loading indicator being displayed more than necessary.\n- iPad profile split view: Reset right navigation to its root when tapping again on left cells."
 }
