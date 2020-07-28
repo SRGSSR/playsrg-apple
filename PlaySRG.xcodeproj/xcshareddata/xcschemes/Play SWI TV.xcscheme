@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "08C68DF61D38D72000BB8AAA"
-               BuildableName = "Play RSI.app"
-               BlueprintName = "Play RSI"
+               BlueprintIdentifier = "6F331D4324D06C2600C096AB"
+               BuildableName = "Play SWI TV.app"
+               BlueprintName = "Play SWI TV"
                ReferencedContainer = "container:PlaySRG.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "08C68DF61D38D72000BB8AAA"
-            BuildableName = "Play RSI.app"
-            BlueprintName = "Play RSI"
+            BlueprintIdentifier = "6F331D4324D06C2600C096AB"
+            BuildableName = "Play SWI TV.app"
+            BlueprintName = "Play SWI TV"
             ReferencedContainer = "container:PlaySRG.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,18 +61,18 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "08C68DF61D38D72000BB8AAA"
-            BuildableName = "Play RSI.app"
-            BlueprintName = "Play RSI"
+            BlueprintIdentifier = "6F331D4324D06C2600C096AB"
+            BuildableName = "Play SWI TV.app"
+            BlueprintName = "Play SWI TV"
             ReferencedContainer = "container:PlaySRG.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Nightly">
+      buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "AppStore"
+      buildConfiguration = "Nightly"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
