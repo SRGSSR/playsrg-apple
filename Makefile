@@ -5,7 +5,7 @@ CONFIGURATION_COMMIT_SHA1=8c159681a5a4e181a364c07f9a6bebf89c362e71
 
 CARTHAGE_FOLDER=Carthage
 CARTHAGE_RESOLUTION_FLAGS=--new-resolver --no-build
-CARTHAGE_BUILD_FLAGS=--platform iOS --cache-builds --configuration Release-static
+CARTHAGE_BUILD_FLAGS=--platform iOS,tvOS --cache-builds --configuration Release-static
 
 CARTFILE_PRIVATE=Cartfile.private
 CARTFILE_RESOLVED=Cartfile.resolved
