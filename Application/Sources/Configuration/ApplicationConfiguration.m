@@ -283,6 +283,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;
 @property (nonatomic, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
+@property (nonatomic, getter=isSearchSortingCriteriumHidden) BOOL searchSortingCriteriumHidden;
 @property (nonatomic, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -636,6 +637,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.searchSettingsHidden = [self.remoteConfig configValueForKey:@"searchSettingsHidden"].boolValue;
     self.searchSettingSubtitledHidden = [self.remoteConfig configValueForKey:@"searchSettingSubtitledHidden"].boolValue;
+    self.searchSortingCriteriumHidden = [self.remoteConfig configValueForKey:@"searchSortingCriteriumHidden"].boolValue;
     self.showsSearchHidden = [self.remoteConfig configValueForKey:@"showsSearchHidden"].boolValue;
     
     self.logoutMenuEnabled = [self.remoteConfig configValueForKey:@"logoutMenuEnabled"].boolValue;

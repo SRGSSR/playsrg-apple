@@ -156,6 +156,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;
 @property (nonatomic, readonly, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
+@property (nonatomic, readonly, getter=isSearchSortingCriteriumHidden) BOOL searchSortingCriteriumHidden;
 @property (nonatomic, readonly, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
 - (nullable RadioChannel *)radioChannelForUid:(NSString *)uid;
