@@ -276,7 +276,7 @@
     
     userActivity.eligibleForPrediction = YES;
     userActivity.persistentIdentifier = self.show.URN;
-    NSString *suggestedInvocationPhraseFormat = (self.show.transmission == SRGTransmissionRadio) ? NSLocalizedString(@"Listen %@", @"Suggested invocation phrase to listen a show") : NSLocalizedString(@"Watch %@", @"Suggested invocation phrase to watch a show");
+    NSString *suggestedInvocationPhraseFormat = (self.show.transmission == SRGTransmissionRadio) ? NSLocalizedString(@"Listen to %@", @"Suggested invocation phrase to listen to a show") : NSLocalizedString(@"Watch %@", @"Suggested invocation phrase to watch a show");
     userActivity.suggestedInvocationPhrase = [NSString stringWithFormat:suggestedInvocationPhraseFormat, self.show.title];
 }
 

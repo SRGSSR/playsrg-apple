@@ -727,7 +727,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         if (isLiveStream && mainChapterMedia.channel) {
             userActivity.eligibleForPrediction = YES;
             userActivity.persistentIdentifier = mainChapterMedia.URN;
-            NSString *suggestedInvocationPhraseFormat = (mainChapterMedia.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen %@", @"Suggested invocation phrase to listen an audio") : NSLocalizedString(@"Watch %@", @"Suggested invocation phrase to watch a video");
+            NSString *suggestedInvocationPhraseFormat = (mainChapterMedia.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen to %@", @"Suggested invocation phrase to listen to an audio") : NSLocalizedString(@"Watch %@", @"Suggested invocation phrase to watch a video");
             userActivity.suggestedInvocationPhrase = [NSString stringWithFormat:suggestedInvocationPhraseFormat, mainChapterMedia.channel.title];
         }
     }
