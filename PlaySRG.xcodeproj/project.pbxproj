@@ -1411,6 +1411,11 @@
 		6FC8866D1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866E1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866F1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
+		6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FD1204A24D19268008CB2F8 /* SRFAssets.xcassets */; };
+		6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FD1205124D1927A008CB2F8 /* RTSAssets.xcassets */; };
+		6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FD1205824D19288008CB2F8 /* RSIAssets.xcassets */; };
+		6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FD1205F24D19294008CB2F8 /* RTRAssets.xcassets */; };
+		6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FD1206624D1929F008CB2F8 /* SWIAssets.xcassets */; };
 		6FD2A35523C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
 		6FD2A35623C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
 		6FD2A35723C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
@@ -2451,6 +2456,11 @@
 		6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+PlaySRG.m"; sourceTree = "<group>"; };
 		6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGProgram+PlaySRG.h"; sourceTree = "<group>"; };
 		6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGProgram+PlaySRG.m"; sourceTree = "<group>"; };
+		6FD1204A24D19268008CB2F8 /* SRFAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SRFAssets.xcassets; sourceTree = "<group>"; };
+		6FD1205124D1927A008CB2F8 /* RTSAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RTSAssets.xcassets; sourceTree = "<group>"; };
+		6FD1205824D19288008CB2F8 /* RSIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RSIAssets.xcassets; sourceTree = "<group>"; };
+		6FD1205F24D19294008CB2F8 /* RTRAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RTRAssets.xcassets; sourceTree = "<group>"; };
+		6FD1206624D1929F008CB2F8 /* SWIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SWIAssets.xcassets; sourceTree = "<group>"; };
 		6FD2A35323C7628000456DCB /* ForegroundTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForegroundTimer.m; sourceTree = "<group>"; };
 		6FD2A35423C7628000456DCB /* ForegroundTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForegroundTimer.h; sourceTree = "<group>"; };
 		6FD2CBC21DD19B0200B44958 /* placeholder_media-180.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "placeholder_media-180.pdf"; sourceTree = "<group>"; };
@@ -3826,6 +3836,11 @@
 			children = (
 				6F331CEA24D06B8400C096AB /* Assets.xcassets */,
 				6F4FCB0324D0703C002675EF /* LaunchScreen.storyboard */,
+				6FD1205824D19288008CB2F8 /* RSIAssets.xcassets */,
+				6FD1205F24D19294008CB2F8 /* RTRAssets.xcassets */,
+				6FD1205124D1927A008CB2F8 /* RTSAssets.xcassets */,
+				6FD1204A24D19268008CB2F8 /* SRFAssets.xcassets */,
+				6FD1206624D1929F008CB2F8 /* SWIAssets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -5332,6 +5347,7 @@
 				6F331E0E24D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
 				6F331E2224D0848D00C096AB /* SRGNetwork.bundle in Resources */,
 				6F4FCB0424D0703C002675EF /* LaunchScreen.storyboard in Resources */,
+				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
 				6F331DF424D0846200C096AB /* SRGContentProtection.bundle in Resources */,
 				6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */,
 				6F331E1D24D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */,
@@ -5357,6 +5373,7 @@
 				6F4FCB0D24D07054002675EF /* Assets.xcassets in Resources */,
 				6F331E1E24D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */,
 				6F331DF024D0846200C096AB /* SRGAnalytics.bundle in Resources */,
+				6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */,
 				6F331E0A24D0848D00C096AB /* SRGUserData.bundle in Resources */,
 				6F331E1924D0848D00C096AB /* SRGIdentity.bundle in Resources */,
 				6F4FCB0524D0703C002675EF /* LaunchScreen.storyboard in Resources */,
@@ -5369,6 +5386,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
 				6F331E0024D0846200C096AB /* SRGAppearance.bundle in Resources */,
 				6F331DFB24D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
 				6F331E1024D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
@@ -5402,6 +5420,7 @@
 				6F331E0C24D0848D00C096AB /* SRGUserData.bundle in Resources */,
 				6F331E1B24D0848D00C096AB /* SRGIdentity.bundle in Resources */,
 				6F4FCB0724D0703C002675EF /* LaunchScreen.storyboard in Resources */,
+				6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */,
 				6F331E1624D0848D00C096AB /* SRGLogger.bundle in Resources */,
 				6F331DED24D0846200C096AB /* SRGDataProvider.bundle in Resources */,
 			);
@@ -5411,6 +5430,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
 				6F331E0224D0846300C096AB /* SRGAppearance.bundle in Resources */,
 				6F331DFD24D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
 				6F331E1224D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
