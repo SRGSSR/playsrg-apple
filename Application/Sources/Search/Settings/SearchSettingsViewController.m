@@ -26,6 +26,7 @@
 
 typedef NSString * SearchSettingSectionType NS_STRING_ENUM;
 
+static SearchSettingSectionType const SearchSettingSectionTypeSortCriterium = @"sort_criterium";
 static SearchSettingSectionType const SearchSettingSectionTypeMediaType = @"media_type";
 static SearchSettingSectionType const SearchSettingSectionTypeTopics = @"topics";
 static SearchSettingSectionType const SearchSettingSectionTypeShows = @"shows";
@@ -35,6 +36,7 @@ static SearchSettingSectionType const SearchSettingSectionTypeProperties = @"pro
 
 typedef NSString * SearchSettingRowType NS_STRING_ENUM;
 
+static SearchSettingRowType const SearchSettingRowTypeSortCriterium = @"sort_criterium";
 static SearchSettingRowType const SearchSettingRowTypeMediaType = @"media_type";
 static SearchSettingRowType const SearchSettingRowTypeTopics = @"topics";
 static SearchSettingRowType const SearchSettingRowTypeShows = @"shows";
@@ -304,17 +306,25 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (NSArray<SearchSettingSectionType> *)sectionTypesForTableView:(UITableView *)tableView
 {
-    return @[ SearchSettingSectionTypeMediaType,
-              SearchSettingSectionTypeTopics,
-              SearchSettingSectionTypeShows,
-              SearchSettingSectionTypePeriod,
-              SearchSettingSectionTypeDuration,
-              SearchSettingSectionTypeProperties ];
+    NSMutableArray *sectionTypes = [NSMutableArray array];
+
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    if (! applicationConfiguration.searchSortingCriteriumHidden) {
+        [sectionTypes addObject:SearchSettingSectionTypeSortCriterium];
+    }
+    [sectionTypes addObjectsFromArray:@[ SearchSettingSectionTypeMediaType,
+                                         SearchSettingSectionTypeTopics,
+                                         SearchSettingSectionTypeShows,
+                                         SearchSettingSectionTypePeriod,
+                                         SearchSettingSectionTypeDuration,
+                                         SearchSettingSectionTypeProperties ]];
+    return sectionTypes.copy;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSectionWithType:(SearchSettingSectionType)type
 {
-    NSDictionary<SearchSettingSectionType, NSString *> *titles = @{ SearchSettingSectionTypeMediaType : NSLocalizedString(@"Content", @"Settings section header"),
+    NSDictionary<SearchSettingSectionType, NSString *> *titles = @{ SearchSettingSectionTypeSortCriterium : NSLocalizedString(@"Sort by", @"Settings section header"),
+                                                                    SearchSettingSectionTypeMediaType : NSLocalizedString(@"Content", @"Settings section header"),
                                                                     SearchSettingSectionTypePeriod : NSLocalizedString(@"Period", @"Settings section header"),
                                                                     SearchSettingSectionTypeDuration : NSLocalizedString(@"Duration", @"Settings section header"),
                                                                     SearchSettingSectionTypeProperties : NSLocalizedString(@"Properties", @"Settings section header") };
@@ -333,7 +343,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         propertiesRowTypes = @[ SearchSettingRowTypeDownloadAvailable, SearchSettingRowTypePlayableAbroad ];
     }
     
-    NSDictionary<SearchSettingSectionType, NSArray<SearchSettingRowType> *> *types = @{ SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
+    NSDictionary<SearchSettingSectionType, NSArray<SearchSettingRowType> *> *types = @{ SearchSettingSectionTypeSortCriterium : @[ SearchSettingRowTypeSortCriterium ],
+                                                                                        SearchSettingSectionTypeMediaType : @[ SearchSettingRowTypeMediaType ],
                                                                                         SearchSettingSectionTypeTopics : @[ SearchSettingRowTypeTopics ],
                                                                                         SearchSettingSectionTypeShows : @[ SearchSettingRowTypeShows ],
                                                                                         SearchSettingSectionTypePeriod : @[ SearchSettingRowTypeToday, SearchSettingRowTypeYesterday, SearchSettingRowTypeThisWeek, SearchSettingRowTypeLastWeek ],
@@ -344,7 +355,8 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowWithType:(SearchSettingRowType)type atIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary<SearchSettingRowType, Class> *cellClasses = @{ SearchSettingRowTypeMediaType : SearchSettingSegmentCell.class,
+    NSDictionary<SearchSettingRowType, Class> *cellClasses = @{ SearchSettingRowTypeSortCriterium : SearchSettingSegmentCell.class,
+                                                                SearchSettingRowTypeMediaType : SearchSettingSegmentCell.class,
                                                                 SearchSettingRowTypeTopics : SearchSettingMultiSelectionCell.class,
                                                                 SearchSettingRowTypeShows : SearchSettingMultiSelectionCell.class,
                                                                 SearchSettingRowTypeToday : SearchSettingSelectorCell.class,
@@ -410,6 +422,26 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
             @strongify(self)
             
             settings.mediaType = [s_mediaTypes[@(index)] integerValue];
+            [self updateResults];
+        }];
+    }
+    else if ([type isEqualToString:SearchSettingRowTypeSortCriterium]) {
+        SearchSettingSegmentCell *segmentCell = (SearchSettingSegmentCell *)cell;
+        
+        static dispatch_once_t s_onceToken;
+        static NSDictionary<NSNumber *, NSNumber *> *s_sortCriteria;
+        dispatch_once(&s_onceToken, ^{
+            s_sortCriteria = @{ @0 : @(SRGSortCriteriumDefault),
+                                @1 : @(SRGSortCriteriumDate) };
+        });
+        
+        @weakify(self)
+        [segmentCell setItems:@[ NSLocalizedString(@"Relevance", @"Sort by relevance option"), NSLocalizedString(@"Date", @"Sort by date option") ] reader:^NSInteger{
+            return [s_sortCriteria allKeysForObject:@(settings.sortCriterium)].firstObject.integerValue;
+        } writer:^(NSInteger index) {
+            @strongify(self)
+            
+            settings.sortCriterium = [s_sortCriteria[@(index)] integerValue];
             [self updateResults];
         }];
     }

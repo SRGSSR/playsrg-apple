@@ -122,6 +122,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 
 * `searchSettingsHidden` (optional, boolean): Set to `true` to hide support for search settings.
 * `searchSettingSubtitledHidden` (optional, boolean): Set to `true` to hide the subtitled option in the search settings.
+* `searchSortingCriteriumHidden` (optional, boolean): Set to `true` to hide the sorting criterium option in the search settings.
 * `showsSearchHidden ` (optional, boolean): Set to `true` to hide show search results.
 
 ## Continuous playback
