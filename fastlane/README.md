@@ -16,11 +16,16 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios nightlies
+### ios iOSnightlies
 ```
-fastlane ios nightlies
+fastlane ios iOSnightlies
 ```
-For each BUs, build a new nightly on App Center, with a new build number, greater than the old nightly build number
+For each BUs, build a new iOS nightly on App Center
+### ios tvOSnightlies
+```
+fastlane ios tvOSnightlies
+```
+For each BUs, build a new tvOS nightly on AppStore Connect and wait build processing.
 ### ios betas
 ```
 fastlane ios betas
