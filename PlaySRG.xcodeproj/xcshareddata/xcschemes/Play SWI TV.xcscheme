@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6F331D4324D06C2600C096AB"
-               BuildableName = "Play SWI TV.app"
+               BuildableName = "Play SWI.app"
                BlueprintName = "Play SWI TV"
                ReferencedContainer = "container:PlaySRG.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F331D4324D06C2600C096AB"
-            BuildableName = "Play SWI TV.app"
+            BuildableName = "Play SWI.app"
             BlueprintName = "Play SWI TV"
             ReferencedContainer = "container:PlaySRG.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F331D4324D06C2600C096AB"
-            BuildableName = "Play SWI TV.app"
+            BuildableName = "Play SWI.app"
             BlueprintName = "Play SWI TV"
             ReferencedContainer = "container:PlaySRG.xcodeproj">
          </BuildableReference>

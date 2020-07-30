@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6F331D1324D06BB800C096AB"
-               BuildableName = "Play RSI TV.app"
+               BuildableName = "Play RSI.app"
                BlueprintName = "Play RSI TV"
                ReferencedContainer = "container:PlaySRG.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F331D1324D06BB800C096AB"
-            BuildableName = "Play RSI TV.app"
+            BuildableName = "Play RSI.app"
             BlueprintName = "Play RSI TV"
             ReferencedContainer = "container:PlaySRG.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F331D1324D06BB800C096AB"
-            BuildableName = "Play RSI TV.app"
+            BuildableName = "Play RSI.app"
             BlueprintName = "Play RSI TV"
             ReferencedContainer = "container:PlaySRG.xcodeproj">
          </BuildableReference>
