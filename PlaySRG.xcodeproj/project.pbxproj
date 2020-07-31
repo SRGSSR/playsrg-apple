@@ -4600,6 +4600,7 @@
 				6F331CE124D06B8200C096AB /* Frameworks */,
 				6F331CE224D06B8200C096AB /* Resources */,
 				6F331E3324D0852100C096AB /* Embed Frameworks */,
+				088884C924D4A41300B2E0DD /* Copy Frameworks (Carthage) */,
 			);
 			buildRules = (
 			);
@@ -4618,6 +4619,7 @@
 				6F331CF924D06BA200C096AB /* Frameworks */,
 				6F331CFA24D06BA200C096AB /* Resources */,
 				6F331E3C24D0853800C096AB /* Embed Frameworks */,
+				088884C824D4A40D00B2E0DD /* Copy Frameworks (Carthage) */,
 			);
 			buildRules = (
 			);
@@ -4636,6 +4638,7 @@
 				6F331D1124D06BB800C096AB /* Frameworks */,
 				6F331D1224D06BB800C096AB /* Resources */,
 				6F331E4524D0854F00C096AB /* Embed Frameworks */,
+				088884C724D4A40700B2E0DD /* Copy Frameworks (Carthage) */,
 			);
 			buildRules = (
 			);
@@ -4654,6 +4657,7 @@
 				6F331D2924D06BC600C096AB /* Frameworks */,
 				6F331D2A24D06BC600C096AB /* Resources */,
 				6F331E4E24D0856100C096AB /* Embed Frameworks */,
+				088884C624D4A40100B2E0DD /* Copy Frameworks (Carthage) */,
 			);
 			buildRules = (
 			);
@@ -4672,6 +4676,7 @@
 				6F331D4124D06C2600C096AB /* Frameworks */,
 				6F331D4224D06C2600C096AB /* Resources */,
 				6F331E5724D0857400C096AB /* Embed Frameworks */,
+				088884C524D4847000B2E0DD /* Copy Frameworks (Carthage) */,
 			);
 			buildRules = (
 			);
@@ -5638,6 +5643,116 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
+		};
+		088884C524D4847000B2E0DD /* Copy Frameworks (Carthage) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/Mantle.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/ComScore.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/TCCore.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/TCSDK.framework",
+			);
+			name = "Copy Frameworks (Carthage)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		088884C624D4A40100B2E0DD /* Copy Frameworks (Carthage) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/Mantle.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/ComScore.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/TCCore.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/TCSDK.framework",
+			);
+			name = "Copy Frameworks (Carthage)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		088884C724D4A40700B2E0DD /* Copy Frameworks (Carthage) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/Mantle.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/ComScore.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/TCCore.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/TCSDK.framework",
+			);
+			name = "Copy Frameworks (Carthage)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		088884C824D4A40D00B2E0DD /* Copy Frameworks (Carthage) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/Mantle.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/ComScore.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/TCCore.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/TCSDK.framework",
+			);
+			name = "Copy Frameworks (Carthage)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		088884C924D4A41300B2E0DD /* Copy Frameworks (Carthage) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/Mantle.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/ComScore.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/TCCore.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/TCSDK.framework",
+			);
+			name = "Copy Frameworks (Carthage)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
