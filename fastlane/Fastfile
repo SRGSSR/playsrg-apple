@@ -71,7 +71,7 @@ platform :ios do
       clean_build_artifacts
     end
 
-    save_last_nightlies_success_git_commit_hash(nil)
+    save_last_nightlies_success_git_commit_hash(build_platform)
   end
 
   desc 'For each BUs, build a new tvOS nightly on AppStore Connect and wait build processing.'
@@ -79,7 +79,7 @@ platform :ios do
     build_platform = 'tvOS'
     appstore_platform = 'appletvos'
 
-    appstore_build_number = srg_latest_appcenter_build_number(
+    appstore_build_number = srg_latest_testflight_build_number(
       appstore_nightly_identifiers,
       appstore_platform
     )
@@ -107,6 +107,7 @@ platform :ios do
       )
 
       pilot(
+        app_identifier: appstore_nightly_identifiers[index],
         app_platform: appstore_platform,
         changelog: changelog,
         distribute_external: true,
@@ -123,7 +124,7 @@ platform :ios do
       clean_build_artifacts
     end
 
-    save_last_nightlies_success_git_commit_hash(nil)
+    save_last_nightlies_success_git_commit_hash(build_platform)
   end
 
   desc 'For each BUs, build a new beta on App Center with the current build number. If we\'re not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number'
@@ -595,7 +596,7 @@ def latest_appcenter_build_number(app_names)
 end
 
 # Returns current build number on AppStore Connect
-def srg_latest_appcenter_build_number(app_identifiers, app_platform)
+def srg_latest_testflight_build_number(app_identifiers, app_platform)
   build_number = 0
   app_identifiers.each_index do |index|
     number = latest_testflight_build_number(
