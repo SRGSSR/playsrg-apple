@@ -499,7 +499,7 @@ def bump_build_number_beta_workflow
 
   return if is_in_release_process
 
-  add_git_tag(tag: tag_version)
+  add_git_tag(tag: 'ios/' + tag_version)
   bump_build_number_commit
   push_to_git_remote
 end
