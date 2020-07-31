@@ -1113,11 +1113,6 @@
 		6F4FCAFC24D06FF7002675EF /* AudiosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE824D06B8200C096AB /* AudiosView.swift */; };
 		6F4FCAFD24D06FF8002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F4FCAFE24D06FF8002675EF /* AudiosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE824D06B8200C096AB /* AudiosView.swift */; };
-		6F4FCB0424D0703C002675EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F4FCB0324D0703C002675EF /* LaunchScreen.storyboard */; };
-		6F4FCB0524D0703C002675EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F4FCB0324D0703C002675EF /* LaunchScreen.storyboard */; };
-		6F4FCB0624D0703C002675EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F4FCB0324D0703C002675EF /* LaunchScreen.storyboard */; };
-		6F4FCB0724D0703C002675EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F4FCB0324D0703C002675EF /* LaunchScreen.storyboard */; };
-		6F4FCB0824D0703C002675EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F4FCB0324D0703C002675EF /* LaunchScreen.storyboard */; };
 		6F4FCB0924D07040002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
@@ -1361,6 +1356,11 @@
 		6FAF43021EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
 		6FAF43031EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
 		6FAF43041EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
+		6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB053E924D42066004B0CE1 /* LaunchScreen.storyboard */; };
+		6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB053F024D4207A004B0CE1 /* LaunchScreen.storyboard */; };
+		6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB053F224D42083004B0CE1 /* LaunchScreen.storyboard */; };
+		6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB053F424D4208C004B0CE1 /* LaunchScreen.storyboard */; };
+		6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB053F624D42095004B0CE1 /* LaunchScreen.storyboard */; };
 		6FB0AEFC217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0AEFB217F4975009D707A /* SRGMediaComposition+PlaySRG.m */; };
 		6FB0AEFD217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0AEFB217F4975009D707A /* SRGMediaComposition+PlaySRG.m */; };
 		6FB0AEFE217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB0AEFB217F4975009D707A /* SRGMediaComposition+PlaySRG.m */; };
@@ -2356,7 +2356,6 @@
 		6F4EA13C1EE034E200BEC4DA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		6F4EA13F1EE034EF00BEC4DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		6F4EA1411EE0351B00BEC4DA /* NSBundle+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+PlaySRG.h"; sourceTree = "<group>"; };
-		6F4FCB0324D0703C002675EF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/Static/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		6F5392A82248CF470002BF87 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UICKeyChainStore.framework; path = Carthage/Build/iOS/Static/UICKeyChainStore.framework; sourceTree = "<group>"; };
 		6F5392BE2248DB6F0002BF87 /* YYWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YYWebImage.framework; path = Carthage/Build/iOS/Static/YYWebImage.framework; sourceTree = "<group>"; };
@@ -2436,6 +2435,11 @@
 		6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AirshipCore.framework; path = Carthage/Build/iOS/AirshipCore.framework; sourceTree = "<group>"; };
 		6FAF42FD1EF7CD8A0074E033 /* HomeTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTopicViewController.h; sourceTree = "<group>"; };
 		6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTopicViewController.m; sourceTree = "<group>"; };
+		6FB053E924D42066004B0CE1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6FB053F024D4207A004B0CE1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6FB053F224D42083004B0CE1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6FB053F424D4208C004B0CE1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6FB053F624D42095004B0CE1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FB0AEFA217F4975009D707A /* SRGMediaComposition+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGMediaComposition+PlaySRG.h"; sourceTree = "<group>"; };
 		6FB0AEFB217F4975009D707A /* SRGMediaComposition+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGMediaComposition+PlaySRG.m"; sourceTree = "<group>"; };
 		6FB0BB3620AEF5A6007C5D87 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Onboarding.strings; sourceTree = "<group>"; };
@@ -3834,13 +3838,12 @@
 		6F4FCB1224D07077002675EF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6FB053E624D42022004B0CE1 /* Play RSI */,
+				6FB053E424D42021004B0CE1 /* Play RTR */,
+				6FB053E524D42021004B0CE1 /* Play RTS */,
+				6FB053E824D42022004B0CE1 /* Play SRF */,
+				6FB053E724D42022004B0CE1 /* Play SWI */,
 				6F331CEA24D06B8400C096AB /* Assets.xcassets */,
-				6F4FCB0324D0703C002675EF /* LaunchScreen.storyboard */,
-				6FD1205824D19288008CB2F8 /* RSIAssets.xcassets */,
-				6FD1205F24D19294008CB2F8 /* RTRAssets.xcassets */,
-				6FD1205124D1927A008CB2F8 /* RTSAssets.xcassets */,
-				6FD1204A24D19268008CB2F8 /* SRFAssets.xcassets */,
-				6FD1206624D1929F008CB2F8 /* SWIAssets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -3962,6 +3965,51 @@
 				6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6FB053E424D42021004B0CE1 /* Play RTR */ = {
+			isa = PBXGroup;
+			children = (
+				6FB053F024D4207A004B0CE1 /* LaunchScreen.storyboard */,
+				6FD1205F24D19294008CB2F8 /* RTRAssets.xcassets */,
+			);
+			path = "Play RTR";
+			sourceTree = "<group>";
+		};
+		6FB053E524D42021004B0CE1 /* Play RTS */ = {
+			isa = PBXGroup;
+			children = (
+				6FB053F224D42083004B0CE1 /* LaunchScreen.storyboard */,
+				6FD1205124D1927A008CB2F8 /* RTSAssets.xcassets */,
+			);
+			path = "Play RTS";
+			sourceTree = "<group>";
+		};
+		6FB053E624D42022004B0CE1 /* Play RSI */ = {
+			isa = PBXGroup;
+			children = (
+				6FB053E924D42066004B0CE1 /* LaunchScreen.storyboard */,
+				6FD1205824D19288008CB2F8 /* RSIAssets.xcassets */,
+			);
+			path = "Play RSI";
+			sourceTree = "<group>";
+		};
+		6FB053E724D42022004B0CE1 /* Play SWI */ = {
+			isa = PBXGroup;
+			children = (
+				6FB053F624D42095004B0CE1 /* LaunchScreen.storyboard */,
+				6FD1206624D1929F008CB2F8 /* SWIAssets.xcassets */,
+			);
+			path = "Play SWI";
+			sourceTree = "<group>";
+		};
+		6FB053E824D42022004B0CE1 /* Play SRF */ = {
+			isa = PBXGroup;
+			children = (
+				6FB053F424D4208C004B0CE1 /* LaunchScreen.storyboard */,
+				6FD1204A24D19268008CB2F8 /* SRFAssets.xcassets */,
+			);
+			path = "Play SRF";
 			sourceTree = "<group>";
 		};
 		6FDF08C4218B126700B2AF2C /* Model */ = {
@@ -5345,8 +5393,8 @@
 				6F331DFE24D0846200C096AB /* SRGAppearance.bundle in Resources */,
 				6F331DF924D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
 				6F331E0E24D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
+				6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F331E2224D0848D00C096AB /* SRGNetwork.bundle in Resources */,
-				6F4FCB0424D0703C002675EF /* LaunchScreen.storyboard in Resources */,
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
 				6F331DF424D0846200C096AB /* SRGContentProtection.bundle in Resources */,
 				6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */,
@@ -5367,6 +5415,7 @@
 				6F331DFF24D0846200C096AB /* SRGAppearance.bundle in Resources */,
 				6F331DFA24D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
 				6F331E0F24D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
+				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F331E2324D0848D00C096AB /* SRGNetwork.bundle in Resources */,
 				6F4FCB0924D07040002675EF /* Preview Assets.xcassets in Resources */,
 				6F331DF524D0846200C096AB /* SRGContentProtection.bundle in Resources */,
@@ -5376,7 +5425,6 @@
 				6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */,
 				6F331E0A24D0848D00C096AB /* SRGUserData.bundle in Resources */,
 				6F331E1924D0848D00C096AB /* SRGIdentity.bundle in Resources */,
-				6F4FCB0524D0703C002675EF /* LaunchScreen.storyboard in Resources */,
 				6F331E1424D0848D00C096AB /* SRGLogger.bundle in Resources */,
 				6F331DEB24D0846200C096AB /* SRGDataProvider.bundle in Resources */,
 			);
@@ -5389,6 +5437,7 @@
 				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
 				6F331E0024D0846200C096AB /* SRGAppearance.bundle in Resources */,
 				6F331DFB24D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
+				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F331E1024D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
 				6F331E2424D0848D00C096AB /* SRGNetwork.bundle in Resources */,
 				6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */,
@@ -5398,7 +5447,6 @@
 				6F331DF124D0846200C096AB /* SRGAnalytics.bundle in Resources */,
 				6F331E0B24D0848D00C096AB /* SRGUserData.bundle in Resources */,
 				6F331E1A24D0848D00C096AB /* SRGIdentity.bundle in Resources */,
-				6F4FCB0624D0703C002675EF /* LaunchScreen.storyboard in Resources */,
 				6F331E1524D0848D00C096AB /* SRGLogger.bundle in Resources */,
 				6F331DEC24D0846200C096AB /* SRGDataProvider.bundle in Resources */,
 			);
@@ -5411,6 +5459,7 @@
 				6F331E0124D0846300C096AB /* SRGAppearance.bundle in Resources */,
 				6F331DFC24D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
 				6F331E1124D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
+				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F331E2524D0848D00C096AB /* SRGNetwork.bundle in Resources */,
 				6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */,
 				6F331DF724D0846200C096AB /* SRGContentProtection.bundle in Resources */,
@@ -5419,7 +5468,6 @@
 				6F331DF224D0846200C096AB /* SRGAnalytics.bundle in Resources */,
 				6F331E0C24D0848D00C096AB /* SRGUserData.bundle in Resources */,
 				6F331E1B24D0848D00C096AB /* SRGIdentity.bundle in Resources */,
-				6F4FCB0724D0703C002675EF /* LaunchScreen.storyboard in Resources */,
 				6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */,
 				6F331E1624D0848D00C096AB /* SRGLogger.bundle in Resources */,
 				6F331DED24D0846200C096AB /* SRGDataProvider.bundle in Resources */,
@@ -5433,6 +5481,7 @@
 				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
 				6F331E0224D0846300C096AB /* SRGAppearance.bundle in Resources */,
 				6F331DFD24D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
+				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F331E1224D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
 				6F331E2624D0848D00C096AB /* SRGNetwork.bundle in Resources */,
 				6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */,
@@ -5442,7 +5491,6 @@
 				6F331DF324D0846200C096AB /* SRGAnalytics.bundle in Resources */,
 				6F331E0D24D0848D00C096AB /* SRGUserData.bundle in Resources */,
 				6F331E1C24D0848D00C096AB /* SRGIdentity.bundle in Resources */,
-				6F4FCB0824D0703C002675EF /* LaunchScreen.storyboard in Resources */,
 				6F331E1724D0848D00C096AB /* SRGLogger.bundle in Resources */,
 				6F331DEE24D0846200C096AB /* SRGDataProvider.bundle in Resources */,
 			);
