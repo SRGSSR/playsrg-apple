@@ -94,7 +94,8 @@ platform :ios do
     changelog = default_changelog_for_nightlies(build_platform)
 
     tvos_schemes.each_index do |index|
-      update_app_identifier_to_appstore(appstore_nightly_identifiers[index])
+      app_identifier = appstore_nightly_identifiers[index]
+      update_app_identifier_to_appstore(app_identifier)
 
       build_lane(
         configuration: 'Nightly',
@@ -107,7 +108,7 @@ platform :ios do
       )
 
       pilot(
-        app_identifier: appstore_nightly_identifiers[index],
+        app_identifier: app_identifier,
         app_platform: appstore_platform,
         changelog: changelog,
         distribute_external: true,
@@ -119,7 +120,7 @@ platform :ios do
       # Wait a bit before asking dSYMs. Not ready yet.
       sleep(90)
 
-      update_dsyms(appstore_platform, appcenter_nightly_names[index], nil) # todo
+      update_dsyms(app_identifier, appstore_platform, appcenter_tv_nightly_names[index], nil)
 
       clean_build_artifacts
     end
@@ -209,27 +210,27 @@ platform :ios do
 
   desc 'SWI: Send latest dSYMs to App Center, with same parameters.'
   lane :swiDSYMs do |options|
-    update_dsyms(nil, ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME'], options)
+    update_dsyms(nil, nil, ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
   desc 'SFR: Send latest dSYMs to App Center, with same parameters.'
   lane :srfDSYMs do |options|
-    update_dsyms(nil, ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME'], options)
+    update_dsyms(nil, nil, ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
   desc 'RTS: Send latest dSYMs to App Center, with same parameters.'
   lane :rtsDSYMs do |options|
-    update_dsyms(nil, ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME'], options)
+    update_dsyms(nil, nil, ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
   desc 'RSI: Send latest dSYMs to App Center, with same parameters.'
   lane :rsiDSYMs do |options|
-    update_dsyms(nil, ENV['PLAY_RSI_APPSTORE_APPCENTER_APPNAME'], options)
+    update_dsyms(nil, nil, ENV['PLAY_RSI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
   desc 'RTR: Send latest dSYMs to App Center, with same parameters.'
   lane :rtrDSYMs do |options|
-    update_dsyms(nil, ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
+    update_dsyms(nil, nil, ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
   desc 'SWI: Make screenshots and overwrite on AppStoreConnect.'
@@ -296,8 +297,7 @@ platform :ios do
 
     options = update_options_to_appstore(options)
 
-    team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
-    options[:team_id] = team_id
+    options[:team_id] = app_config.try_fetch_value(:team_id)
     destination = 'generic/platform=' + options[:platform]
     lane_name = lane_context[SharedValues::LANE_NAME]
     output_directory = 'fastlane/export/' + lane_name + '/'
@@ -373,6 +373,10 @@ def srg_xcversion(lane)
   end
 end
 
+def app_config
+  CredentialsManager::AppfileConfig
+end
+
 def cleaned_lane_condition(lane)
   (lane.to_s != 'devLane') && (!lane.to_s.downcase.include? 'dsym')
 end
@@ -392,6 +396,14 @@ def appcenter_nightly_names
    ENV['PLAY_SRF_NIGHTLY_APPCENTER_APPNAME'],
    ENV['PLAY_RSI_NIGHTLY_APPCENTER_APPNAME'],
    ENV['PLAY_RTR_NIGHTLY_APPCENTER_APPNAME']]
+end
+
+def appcenter_tv_nightly_names
+  [ENV['PLAY_SWI_TV_NIGHTLY_APPCENTER_APPNAME'],
+   ENV['PLAY_RTS_TV_NIGHTLY_APPCENTER_APPNAME'],
+   ENV['PLAY_SRF_TV_NIGHTLY_APPCENTER_APPNAME'],
+   ENV['PLAY_RSI_TV_NIGHTLY_APPCENTER_APPNAME'],
+   ENV['PLAY_RTR_TV_NIGHTLY_APPCENTER_APPNAME']]
 end
 
 def appcenter_beta_names
@@ -536,21 +548,24 @@ def update_app_identifier_to_appstore(app_identifier)
 end
 
 # Update dSYMs from AppStore to App Center.
-def update_dsyms(platform, appcenter_appname, options)
+def update_dsyms(app_identifier, platform, appcenter_appname, options)
+  app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'ios'
   output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
   min_version = options ? options[:min_version] : nil
   version = options ? options[:version] : nil
-  download_appstore_dsyms(platform, min_version, version, output_directory)
+  download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
   upload_appcenter_dsyms(appcenter_appname)
 end
 
-def download_appstore_dsyms(platform, min_version, version, output_directory)
+def download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
+  app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'ios'
   version ||= 'latest'
   download_dsyms(
+    app_identifier: app_identifier,
     platform: platform,
     min_version: min_version,
     version: !min_version ? version : nil,
