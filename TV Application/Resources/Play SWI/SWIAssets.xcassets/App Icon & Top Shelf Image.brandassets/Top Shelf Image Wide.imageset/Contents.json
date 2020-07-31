@@ -1,12 +1,8 @@
 {
   "images" : [
     {
-      "idiom" : "tv",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "tv",
-      "scale" : "2x"
+      "filename" : "TopShelf-SWI.pdf",
+      "idiom" : "tv"
     }
   ],
   "info" : {
