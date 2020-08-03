@@ -5,13 +5,22 @@
   },
   "layers" : [
     {
-      "filename" : "Front.imagestacklayer"
+      "filename" : "Layer 1.imagestacklayer"
     },
     {
-      "filename" : "Middle.imagestacklayer"
+      "filename" : "Layer 2.imagestacklayer"
     },
     {
-      "filename" : "Back.imagestacklayer"
+      "filename" : "Layer 3.imagestacklayer"
+    },
+    {
+      "filename" : "Layer 4.imagestacklayer"
     }
-  ]
+  ],
+  "properties" : {
+    "canvasSize" : {
+      "height" : 768,
+      "width" : 1280
+    }
+  }
 }
