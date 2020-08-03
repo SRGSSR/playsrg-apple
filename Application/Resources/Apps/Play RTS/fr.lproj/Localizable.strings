@@ -124,7 +124,7 @@
 "Discover" = "Découvrez l'application";
 
 /* User activity title when displaying a show page */
-"Display %@ show" = "Afficher les %@";
+"Display %@ episodes" = "Afficher les épisodes pour %@";
 
 /* No comment provided by engineer. */
 "Do you want to send an anonymous crash report so we can fix the issue?" = "Souhaitez-vous envoyer un rapport d'erreur afin que nous puissions corriger ce problème?";

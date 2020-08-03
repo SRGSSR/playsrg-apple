@@ -268,7 +268,7 @@
 {
     [super updateUserActivityState:userActivity];
     
-    userActivity.title = [NSString stringWithFormat:NSLocalizedString(@"Display %@ show", @"User activity title when displaying a show page"), self.show.title];
+    userActivity.title = [NSString stringWithFormat:NSLocalizedString(@"Display %@ episodes", @"User activity title when displaying a show page"), self.show.title];
     [userActivity addUserInfoEntriesFromDictionary:@{ @"URNString" : self.show.URN,
                                                       @"SRGShowData" : [NSKeyedArchiver archivedDataWithRootObject:self.show requiringSecureCoding:NO error:NULL],
                                                       @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
