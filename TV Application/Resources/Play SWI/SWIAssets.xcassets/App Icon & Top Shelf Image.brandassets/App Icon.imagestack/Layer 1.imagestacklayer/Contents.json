@@ -5,12 +5,12 @@
   },
   "properties" : {
     "frame-center" : {
-      "x" : 266,
+      "x" : 265,
       "y" : 120
     },
     "frame-size" : {
       "height" : 44,
-      "width" : 101
+      "width" : 102
     }
   }
 }
