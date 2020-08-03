@@ -19,15 +19,17 @@ default_platform :ios
 
 platform :ios do
   before_all do |lane|
+    platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
+
     # For betas, before all, check if we have a beta release description
     if lane.to_s == 'betas'
-      what_s_new = what_s_new_for_beta
+      what_s_new = what_s_new_for_beta(platform)
       if what_s_new.empty?
-        UI.user_error!('Whoops, WhatsNew-beta.json has no release note for ' + tag_version + '.')
+        UI.user_error!('Whoops, WhatsNew-beta.json has no release note for ' + tag_version(platform) + '.')
       end
     end
 
-    srg_xcversion(lane)
+    srg_xcversion(platform)
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
@@ -37,20 +39,16 @@ platform :ios do
 
   desc 'For each BUs, build a new iOS nightly on App Center'
   lane :iOSnightlies do
-    build_platform = 'iOS'
+    platform = 'iOS'
 
-    appcenter_build_number = latest_appcenter_build_number(
-      appcenter_nightly_names
-    )
-    increment_build_number(
-      build_number: appcenter_build_number + 1
-    )
+    build_number = latest_appcenter_build_number(appcenter_nightly_names)
+    xcode_override_build_number(platform, build_number + 1)
 
     branch_name = git_branch_name
 
-    notify_build_number_to_ci(nightly_build_name_suffix(branch_name))
+    notify_build_number_to_ci(platform, nightly_build_name_suffix(branch_name))
 
-    changelog = default_changelog_for_nightlies(build_platform)
+    changelog = default_changelog_for_nightlies(platform)
 
     ios_schemes.each_index do |index|
       build_lane(
@@ -59,7 +57,7 @@ platform :ios do
         display_name_suffix: nighlty_display_name_suffix(branch_name),
         version_suffix: nightly_version_suffix(branch_name),
         build_name_suffix: nightly_build_name_suffix(branch_name),
-        platform: build_platform
+        platform: platform
       )
 
       appcenter_lane(
@@ -71,27 +69,21 @@ platform :ios do
       clean_build_artifacts
     end
 
-    save_last_nightlies_success_git_commit_hash(build_platform)
+    save_last_nightlies_success_git_commit_hash(platform)
   end
 
   desc 'For each BUs, build a new tvOS nightly on AppStore Connect and wait build processing.'
   lane :tvOSnightlies do
-    build_platform = 'tvOS'
-    appstore_platform = 'appletvos'
+    platform = 'tvOS'
 
-    appstore_build_number = srg_latest_testflight_build_number(
-      appstore_nightly_identifiers,
-      appstore_platform
-    )
-    increment_build_number(
-      build_number: appstore_build_number + 1
-    )
+    build_number = srg_latest_testflight_build_number(appstore_nightly_identifiers, platform)
+    xcode_override_build_number(platform, build_number + 1)
 
     branch_name = git_branch_name
 
-    notify_build_number_to_ci(nightly_build_name_suffix(branch_name))
+    notify_build_number_to_ci(platform, nightly_build_name_suffix(branch_name))
 
-    changelog = default_changelog_for_nightlies(build_platform)
+    changelog = default_changelog_for_nightlies(platform)
 
     tvos_schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
@@ -103,13 +95,13 @@ platform :ios do
         display_name_suffix: nighlty_display_name_suffix(branch_name),
         version_suffix: nightly_version_suffix(branch_name),
         build_name_suffix: nightly_build_name_suffix(branch_name),
-        platform: build_platform,
+        platform: platform,
         export_to_appstore: true
       )
 
       pilot(
         app_identifier: app_identifier,
-        app_platform: appstore_platform,
+        app_platform: appstore_platform(platform),
         changelog: changelog,
         distribute_external: true,
         demo_account_required: false,
@@ -120,7 +112,7 @@ platform :ios do
       # Wait a bit before asking dSYMs. Not ready yet.
       sleep(90)
 
-      update_dsyms(app_identifier, appstore_platform, appcenter_tv_nightly_names[index], nil)
+      update_dsyms(app_identifier, platform, appcenter_tv_nightly_names[index], nil)
 
       clean_build_artifacts
     end
@@ -130,9 +122,9 @@ platform :ios do
 
   desc 'For each BUs, build a new beta on App Center with the current build number. If we\'re not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number'
   lane :betas do
-    build_platform = 'iOS'
+    platform = 'iOS'
 
-    notify_build_number_to_ci(nil)
+    notify_build_number_to_ci(platform, nil)
 
     ios_schemes.each_index do |index|
       build_lane(
@@ -140,20 +132,20 @@ platform :ios do
         scheme: ios_schemes[index],
         display_name_suffix: ' 🎯',
         version_suffix: '-beta',
-        platform: build_platform
+        platform: platform
       )
 
       appcenter_lane(
         appname: appcenter_beta_names[index],
         destinations: ENV['PLAY_BETA_APPCENTER_DESTINATIONS'],
-        notes: what_s_new_for_beta,
+        notes: what_s_new_for_beta(platform),
         notify_testers: true
       )
 
       clean_build_artifacts
     end
 
-    bump_build_number_beta_workflow
+    bump_build_number_beta_workflow(platform)
   end
 
   desc 'Upload a new build (bitcode) on AppStore Connect with the current build number.'
@@ -293,7 +285,7 @@ platform :ios do
     options[:version_suffix] ||= ''
     options[:build_name_suffix] ||= ''
     options[:platform] ||= 'iOS'
-    options[:version] = xcode_marketing_version
+    options[:version] = xcode_marketing_version(options[:platform])
 
     options = update_options_to_appstore(options)
 
@@ -364,13 +356,9 @@ platform :ios do
   end
 end
 
-def srg_xcversion(lane)
+def srg_xcversion(platform)
   # Only used by FastLane actions (not with command line script)
-  if lane.to_s.downcase.include? 'tvos'
-    xcversion(version: '~> 12')
-  else
-    xcversion(version: '~> 11')
-  end
+  xcversion(version: '~> ' + (platform == 'tvOS' ? '12' : '11'))
 end
 
 def app_config
@@ -424,18 +412,16 @@ def appstore_nightly_identifiers
 end
 
 # Returns current tag version
-def tag_version
-  build_number = get_build_number
-  marketing_version = xcode_marketing_version
-  marketing_version + '-' + build_number
+def tag_version(platform)
+  xcode_marketing_version(platform) + '-' + xcode_build_number(platform)
 end
 
 # Returns the what's new text from WhatsNew-beta.json file in the repository
-def what_s_new_for_beta
-  file = File.open('../WhatsNew-beta.json', 'r')
+def what_s_new_for_beta(platform)
+  file = File.open('../WhatsNew-beta.json', 'r') # TODO: by platform
   json = JSON.parse(file.read)
   file.close
-  what_s_new = json[tag_version]
+  what_s_new = json[tag_version(platform)]
   what_s_new || ''
 end
 
@@ -522,15 +508,35 @@ def last_nightlies_success_git_commit_hash(platform)
   nightlies_success_git_commit_hash
 end
 
-# Returns the marketing version, without suffix
-def xcode_marketing_version
-  marketing_version = nil
-  Dir.chdir('..') do
-    command = 'xcodebuild -showBuildSettings | grep "MARKETING_VERSION ="'
-    marketing_version = xcodebuid_grep_output sh command
-  end
-  marketing_version ['MARKETING_VERSION ='] = ''
-  marketing_version.gsub(/\s+/, '').chomp
+# Returns the marketing version for a platform, without suffix
+def xcode_marketing_version(platform)
+  get_xcconfig_value(
+    path: 'Xcode/Play ' + platform + '.xcconfig',
+    name: 'MARKETING_VERSION'
+  )
+end
+
+# Returns the build number for a platform
+def xcode_build_number(platform)
+  get_xcconfig_value(
+    path: 'Xcode/Play ' + platform + '.xcconfig',
+    name: 'CURRENT_PROJECT_VERSION'
+  )
+end
+
+# Override build number for a platform (current project version)
+def xcode_override_build_number(platform, build_number)
+  update_xcconfig_value(
+    path: 'Xcode/Play ' + platform + '.xcconfig',
+    name: 'CURRENT_PROJECT_VERSION',
+    value: build_number.to_s
+  )
+  build_number.to_s
+end
+
+def appstore_platform(platform)
+  appstore_platforms = { iOS: 'ios', tvOS: 'appletvos' }
+  appstore_platforms[platform]
 end
 
 # Returns clean xcodebuid grep output, without warning and errors
@@ -550,7 +556,7 @@ end
 # Update dSYMs from AppStore to App Center.
 def update_dsyms(app_identifier, platform, appcenter_appname, options)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
-  platform ||= 'ios'
+  platform ||= 'iOS'
   output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
@@ -562,11 +568,11 @@ end
 
 def download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
-  platform ||= 'ios'
+  platform ||= 'iOS'
   version ||= 'latest'
   download_dsyms(
     app_identifier: app_identifier,
-    platform: platform,
+    platform: appstore_platform(platform),
     min_version: min_version,
     version: !min_version ? version : nil,
     output_directory: output_directory
@@ -584,13 +590,13 @@ def upload_appcenter_dsyms(appcenter_appname)
 end
 
 # Share build number to the continuous integration
-def notify_build_number_to_ci(suffix)
+def notify_build_number_to_ci(platform, suffix)
   return unless ENV['TEAMCITY_VERSION']
 
   suffix ||= ''
 
-  displayed_build_number = xcode_marketing_version
-  displayed_build_number += '-' + get_build_number
+  displayed_build_number = xcode_marketing_version(platform)
+  displayed_build_number += '-' + xcode_build_number(platform)
   displayed_build_number += suffix
   puts '##teamcity[buildNumber \'' + displayed_build_number + '\']'
 end
@@ -611,11 +617,11 @@ def latest_appcenter_build_number(app_names)
 end
 
 # Returns current build number on AppStore Connect
-def srg_latest_testflight_build_number(app_identifiers, app_platform)
+def srg_latest_testflight_build_number(app_identifiers, platform)
   build_number = 0
   app_identifiers.each_index do |index|
     number = latest_testflight_build_number(
-      platform: app_platform,
+      platform: appstore_platform(platform),
       app_identifier: app_identifiers[index]
     )
 
@@ -637,11 +643,11 @@ def screenshots(scheme, languages)
 end
 
 def upload_screenshots(platform)
-  platform ||= 'ios'
+  platform ||= 'iOS'
 
   deliver(
-    platform: platform,
-    app_version: xcode_marketing_version,
+    platform: appstore_platform(platform),
+    app_version: xcode_marketing_version(platform),
     skip_binary_upload: true,
     skip_metadata: true,
     overwrite_screenshots: true,
@@ -660,7 +666,7 @@ end
 
 # Beta workflow: tag the new beta, bump build number and push to the repo,
 # only if we're not in a release process.
-def bump_build_number_beta_workflow
+def bump_build_number_beta_workflow(platform)
   branch_name = git_branch_name
   is_in_release_process = (branch_name.include? 'master')
   is_in_release_process ||= (branch_name.include? 'release/')
@@ -668,16 +674,17 @@ def bump_build_number_beta_workflow
 
   return if is_in_release_process
 
-  add_git_tag(tag: 'ios/' + tag_version)
-  bump_build_number_commit
+  add_git_tag(tag: platform.downcase + '/' + tag_version(platform))
+  bump_build_number_commit(platform)
   push_to_git_remote
 end
 
-def bump_build_number_commit
-  build_number = increment_build_number
+def bump_build_number_commit(platform)
+  build_number = xcode_override_build_number(platform, xcode_build_number(platform).to_i + 1)
   commit_version_bump(
     xcodeproj: 'PlaySRG.xcodeproj',
-    message: 'Bump build number to ' + build_number,
+    message: 'Bump ' + platform + ' build number to ' + build_number,
+    include: 'Xcode/Play ' + platform + '.xcconfig',
     ignore: /.+/
   )
 end
