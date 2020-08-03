@@ -123,6 +123,9 @@
 /* Introductory title displayed at the top of the onboarding list */
 "Discover" = "Découvrez l'application";
 
+/* User activity title when displaying a show page */
+"Display %@ show" = "Afficher les %@";
+
 /* No comment provided by engineer. */
 "Do you want to send an anonymous crash report so we can fix the issue?" = "Souhaitez-vous envoyer un rapport d'erreur afin que nous puissions corriger ce problème?";
 
@@ -211,6 +214,11 @@
 
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
 "less than 1 hour" = "moins d'une heure";
+
+/* Suggested invocation phrase to listen to a show
+   Suggested invocation phrase to listen to an audio
+   User activity title when listening to an audio */
+"Listen to %@" = "Écouter %@";
 
 /* Introductory text for what is currently on air, displayed on the mini player
    Short label identifying a livestream. Display in uppercase. */
@@ -564,6 +572,11 @@
 
 /* Header for video and audio search results */
 "Videos and audios" = "Vidéos et audios";
+
+/* Suggested invocation phrase to watch a show
+   Suggested invocation phrase to watch a video
+   User activity title when watching a video */
+"Watch %@" = "Regarder %@";
 
 /* Label to present the watch later list */
 "Watch later" = "Plus tard";
