@@ -700,7 +700,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGMedia *mainChapterMedia = [self mainChapterMedia];
     if (mainChapterMedia) {
-        userActivity.title = mainChapterMedia.title;
+        NSString *userActivityTitleFormat = (mainChapterMedia.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen to %@", @"User activity title when listening to an audio") : NSLocalizedString(@"Watch %@", @"User activity title when watching a video");
+        userActivity.title = [NSString stringWithFormat:userActivityTitleFormat, mainChapterMedia.title];
         if (mainChapterMedia.endDate) {
             userActivity.expirationDate = mainChapterMedia.endDate;
         }
