@@ -1970,6 +1970,8 @@
 		081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadTableViewCell.xib; sourceTree = "<group>"; };
 		081220BF1DD0ADAC00BF8326 /* DownloadSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadSession.h; sourceTree = "<group>"; };
 		081220C01DD0ADAC00BF8326 /* DownloadSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadSession.m; sourceTree = "<group>"; };
+		0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS.xcconfig"; sourceTree = "<group>"; };
+		0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play tvOS.xcconfig"; sourceTree = "<group>"; };
 		081DAA1C1E099A3A00018623 /* DownloadFooterSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFooterSectionView.h; sourceTree = "<group>"; };
 		081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadFooterSectionView.m; sourceTree = "<group>"; };
 		081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadFooterSectionView.xib; sourceTree = "<group>"; };
@@ -3630,6 +3632,7 @@
 			isa = PBXGroup;
 			children = (
 				08B77A402409BDF200A3BC3B /* Play Application.xcconfig */,
+				0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */,
 				6F1EBE19222EBB7D003E0722 /* Play RSI.appstore.xcconfig */,
 				6F1EBE13222EBB7C003E0722 /* Play RSI.beta.xcconfig */,
 				6F1EBE0F222EBB7C003E0722 /* Play RSI.debug.xcconfig */,
@@ -3650,6 +3653,7 @@
 				6F1EBE12222EBB7C003E0722 /* Play SWI.beta.xcconfig */,
 				6F1EBE14222EBB7D003E0722 /* Play SWI.debug.xcconfig */,
 				6F1EBE16222EBB7D003E0722 /* Play SWI.nightly.xcconfig */,
+				0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */,
 				08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */,
 			);
 			path = Xcode;
@@ -9330,6 +9334,7 @@
 		};
 		6F0CFB3B20C94DF6006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -9358,6 +9363,7 @@
 		};
 		6F0CFB3C20C94DF6006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
@@ -9423,6 +9429,7 @@
 		};
 		6F0CFB3D20C94DF6006B2CE4 /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
@@ -9488,6 +9495,7 @@
 		};
 		6F0CFB3E20C94DF6006B2CE4 /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
@@ -9553,6 +9561,7 @@
 		};
 		6F0CFB4F20C94E77006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -9581,6 +9590,7 @@
 		};
 		6F0CFB5020C94E77006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
@@ -9646,6 +9656,7 @@
 		};
 		6F0CFB5120C94E77006B2CE4 /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
@@ -9711,6 +9722,7 @@
 		};
 		6F0CFB5220C94E77006B2CE4 /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
@@ -9776,6 +9788,7 @@
 		};
 		6F0CFB6220C94E8E006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -9804,6 +9817,7 @@
 		};
 		6F0CFB6320C94E8E006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
@@ -9869,6 +9883,7 @@
 		};
 		6F0CFB6420C94E8E006B2CE4 /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
@@ -9934,6 +9949,7 @@
 		};
 		6F0CFB6520C94E8E006B2CE4 /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
@@ -9999,6 +10015,7 @@
 		};
 		6F0CFB7520C94EC8006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10027,6 +10044,7 @@
 		};
 		6F0CFB7620C94EC8006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
@@ -10092,6 +10110,7 @@
 		};
 		6F0CFB7720C94EC8006B2CE4 /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
@@ -10157,6 +10176,7 @@
 		};
 		6F0CFB7820C94EC8006B2CE4 /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
@@ -10222,6 +10242,7 @@
 		};
 		6F0CFB8820C94EE5006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10249,6 +10270,7 @@
 		};
 		6F0CFB8920C94EE5006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
@@ -10313,6 +10335,7 @@
 		};
 		6F0CFB8A20C94EE5006B2CE4 /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
@@ -10377,6 +10400,7 @@
 		};
 		6F0CFB8B20C94EE5006B2CE4 /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
@@ -10441,6 +10465,7 @@
 		};
 		6F331CF324D06B8400C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -10479,6 +10504,7 @@
 		};
 		6F331CF424D06B8400C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
@@ -10552,6 +10578,7 @@
 		};
 		6F331CF524D06B8400C096AB /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
@@ -10625,6 +10652,7 @@
 		};
 		6F331CF624D06B8400C096AB /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
@@ -10698,6 +10726,7 @@
 		};
 		6F331D0C24D06BA300C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -10736,6 +10765,7 @@
 		};
 		6F331D0D24D06BA300C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
@@ -10809,6 +10839,7 @@
 		};
 		6F331D0E24D06BA300C096AB /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
@@ -10882,6 +10913,7 @@
 		};
 		6F331D0F24D06BA300C096AB /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
@@ -10955,6 +10987,7 @@
 		};
 		6F331D2424D06BB800C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -10993,6 +11026,7 @@
 		};
 		6F331D2524D06BB800C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
@@ -11066,6 +11100,7 @@
 		};
 		6F331D2624D06BB800C096AB /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
@@ -11139,6 +11174,7 @@
 		};
 		6F331D2724D06BB800C096AB /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
@@ -11212,6 +11248,7 @@
 		};
 		6F331D3C24D06BC700C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -11250,6 +11287,7 @@
 		};
 		6F331D3D24D06BC700C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
@@ -11323,6 +11361,7 @@
 		};
 		6F331D3E24D06BC700C096AB /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
@@ -11396,6 +11435,7 @@
 		};
 		6F331D3F24D06BC700C096AB /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
@@ -11469,6 +11509,7 @@
 		};
 		6F331D5424D06C2700C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -11507,6 +11548,7 @@
 		};
 		6F331D5524D06C2700C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
@@ -11580,6 +11622,7 @@
 		};
 		6F331D5624D06C2700C096AB /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
@@ -11653,6 +11696,7 @@
 		};
 		6F331D5724D06C2700C096AB /* Nightly */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
