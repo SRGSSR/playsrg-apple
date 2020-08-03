@@ -1,10 +1,12 @@
 {
   "images" : [
     {
+      "filename" : "RTS_TOPSHELF@1x.png",
       "idiom" : "tv",
       "scale" : "1x"
     },
     {
+      "filename" : "RTS_TOPSHELF@2x.png",
       "idiom" : "tv",
       "scale" : "2x"
     }
