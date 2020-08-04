@@ -46,7 +46,7 @@ platform :ios do
     platform = 'iOS'
 
     build_number = latest_appcenter_build_number(appcenter_nightly_names)
-    xcode_override_build_number(platform, build_number + 1)
+    build_number = xcode_override_build_number(platform, build_number + 1)
 
     branch_name = git_branch_name
 
@@ -71,6 +71,8 @@ platform :ios do
       )
 
       clean_build_artifacts
+
+      UI.message ios_schemes[index] + ' (Nightly ' + build_number + ') delivered. ✅'
     end
 
     save_last_nightlies_success_git_commit_hash(platform)
@@ -81,7 +83,7 @@ platform :ios do
     platform = 'tvOS'
 
     build_number = srg_latest_testflight_build_number(appstore_nightly_identifiers, platform)
-    xcode_override_build_number(platform, build_number + 1)
+    build_number = xcode_override_build_number(platform, build_number + 1)
 
     branch_name = git_branch_name
 
@@ -113,12 +115,14 @@ platform :ios do
         groups: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS']
       )
 
-      # Wait a bit before asking dSYMs. Not ready yet.
+      UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
       sleep(90)
 
       update_dsyms(app_identifier, platform, appcenter_tv_nightly_names[index], nil)
 
       clean_build_artifacts
+
+      UI.message tvos_schemes[index] + ' (Nightly ' + build_number + ') delivered. ✅'
     end
 
     save_last_nightlies_success_git_commit_hash(platform)
