@@ -33,7 +33,9 @@ platform :ios do
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
+      Dir.chdir('..') { sh 'Scripts/carthage-xcode12beta3-fix-on.sh' }
       Dir.chdir('..') { sh 'make bootstrap' }
+      Dir.chdir('..') { sh 'Scripts/carthage-xcode12beta3-fix-off.sh' }
     end
   end
 
