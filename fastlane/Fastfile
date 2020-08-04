@@ -29,12 +29,16 @@ platform :ios do
       end
     end
 
-    srg_xcversion(platform)
+    # TODO: fix Carthage build with Xcode 12 (Mantle and Carthage issue). Use Xcode 11.
+    xcversion(version: '~> 11')
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
       Dir.chdir('..') { sh 'make bootstrap' }
     end
+
+    # Build project with desired Xcode version.
+    srg_xcversion(platform)
   end
 
   desc 'For each BUs, build a new iOS nightly on App Center'
