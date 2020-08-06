@@ -120,7 +120,8 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
     
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
-    self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
+    self.titleLabel.textColor = UIColor.whiteColor;
+    self.subtitleLabel.textColor = UIColor.whiteColor;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
     
@@ -266,14 +267,10 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
     SRGBlockingReason blockingReason = [self.media blockingReasonAtDate:NSDate.date];
     if (blockingReason == SRGBlockingReasonNone || blockingReason == SRGBlockingReasonStartDate) {
         self.blockingOverlayView.hidden = YES;
-        
-        self.titleLabel.textColor = UIColor.whiteColor;
     }
     else {
         self.blockingOverlayView.hidden = NO;
         self.blockingReasonImageView.image = [UIImage play_imageForBlockingReason:blockingReason];
-        
-        self.titleLabel.textColor = UIColor.play_lightGrayColor;
     }
     
     CGFloat subtitleFontSize = 11.f;
