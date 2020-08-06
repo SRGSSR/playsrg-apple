@@ -92,6 +92,8 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *topSpaceConstraint;
+
 @property (nonatomic, weak) id channelRegistration;
 
 @end
@@ -126,6 +128,13 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
     self.wrapperView.layer.masksToBounds = YES;
     
     self.blockingOverlayView.hidden = YES;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.topSpaceConstraint.constant = (CGRectGetWidth(self.frame) < 170.f) ? 4.f : 12.f;
 }
 
 - (void)prepareForReuse
@@ -267,10 +276,10 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
         self.titleLabel.textColor = UIColor.play_lightGrayColor;
     }
     
-    SRGAppearanceFontTextStyle subtitleTextStyle = SRGAppearanceFontTextStyleSubtitle;
+    CGFloat subtitleFontSize = 11.f;
     ImageScale imageScale = ImageScaleMedium;
     
-    self.subtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:subtitleTextStyle];
+    self.subtitleLabel.font = [UIFont srg_mediumFontWithSize:subtitleFontSize];
     
     SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
@@ -308,11 +317,11 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
         NSString *showTitle = self.media.show.title;
         if (showTitle && ! [self.media.title containsString:showTitle]) {
             NSMutableAttributedString *subtitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ - ", showTitle]
-                                                                                         attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:subtitleTextStyle] }];
+                                                                                         attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithSize:subtitleFontSize] }];
             
             NSDateFormatter *dateFormatter = NSDateFormatter.play_relativeDateAndTimeFormatter;
             [subtitle appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:self.media.date].play_localizedUppercaseFirstLetterString
-                                                                             attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithTextStyle:subtitleTextStyle] }]];
+                                                                             attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithSize:subtitleFontSize] }]];
             
             self.subtitleLabel.attributedText = subtitle.copy;
         }
