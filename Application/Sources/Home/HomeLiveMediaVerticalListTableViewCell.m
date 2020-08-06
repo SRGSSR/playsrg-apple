@@ -39,7 +39,7 @@
 + (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds
 {
     CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(bounds), LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
-    return LayoutMediaStandardCollectionItemSize(itemWidth, NO);
+    return LayoutLiveMediaStandardCollectionItemSize(itemWidth);
 }
 
 #pragma mark Object lifecycle

@@ -130,26 +130,7 @@ CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
 
 CGSize LayoutLiveMediaStandardCollectionItemSize(CGFloat itemWidth)
 {
-    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_textHeights;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_textHeights = @{ UIContentSizeCategoryExtraSmall : @64,
-                           UIContentSizeCategorySmall : @66,
-                           UIContentSizeCategoryMedium : @68,
-                           UIContentSizeCategoryLarge : @70,
-                           UIContentSizeCategoryExtraLarge : @72,
-                           UIContentSizeCategoryExtraExtraLarge : @74,
-                           UIContentSizeCategoryExtraExtraExtraLarge : @76,
-                           UIContentSizeCategoryAccessibilityMedium : @76,
-                           UIContentSizeCategoryAccessibilityLarge : @76,
-                           UIContentSizeCategoryAccessibilityExtraLarge : @76,
-                           UIContentSizeCategoryAccessibilityExtraExtraLarge : @76,
-                           UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @76 };
-    });
-    
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = s_textHeights[contentSizeCategory].floatValue;
-    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
+    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + 11.f));
 }
 
 CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)

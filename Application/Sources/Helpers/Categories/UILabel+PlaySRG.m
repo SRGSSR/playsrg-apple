@@ -15,6 +15,35 @@
 
 #import <SRGAppearance/SRGAppearance.h>
 
+static NSString *LabelFormattedDuration(NSTimeInterval duration)
+{
+    // Display days if > 24 hours
+    if (duration > 60. * 60. * 24.) {
+        static NSDateComponentsFormatter *s_dateComponentsFormatter;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitDay;
+            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        });
+        return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+    }
+    // Display hours if > 1 hour
+    else if (duration > 60. * 60.) {
+        static NSDateComponentsFormatter *s_dateComponentsFormatter;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitHour;
+            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        });
+        return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+    }
+    else {
+        return NSLocalizedString(@"less than 1 hour", @"Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view.");
+    }
+}
+
 @implementation UILabel (PlaySRG)
 
 #pragma mark Public
@@ -38,13 +67,13 @@
     if (timeAvailability == SRGTimeAvailabilityNotAvailableAnymore) {
         NSDate *endDate = object.endDate ?: [object.date dateByAddingTimeInterval:object.duration / 1000.];
         NSTimeInterval timeIntervalAfterEnd = [nowDate timeIntervalSinceDate:endDate];
-        text = [NSString stringWithFormat:NSLocalizedString(@"Not available since %@", @"Explains that a content has expired (days or hours ago). Displayed in the media player view."), PlayShortFormattedDuration(timeIntervalAfterEnd)];
+        text = [NSString stringWithFormat:NSLocalizedString(@"Not available since %@", @"Explains that a content has expired (days or hours ago). Displayed in the media player view."), LabelFormattedDuration(timeIntervalAfterEnd)];
     }
     else if (timeAvailability == SRGTimeAvailabilityAvailable && object.endDate && object.contentType != SRGContentTypeScheduledLivestream && object.contentType != SRGContentTypeLivestream) {
         NSDateComponents *monthsDateComponents = [NSCalendar.currentCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:object.endDate options:0];
         if (monthsDateComponents.day <= 30) {
             NSTimeInterval timeIntervalBeforeEnd = [object.endDate timeIntervalSinceDate:nowDate];
-            text = [NSString stringWithFormat:NSLocalizedString(@"Still available for %@", @"Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view."), PlayShortFormattedDuration(timeIntervalBeforeEnd)];
+            text = [NSString stringWithFormat:NSLocalizedString(@"Still available for %@", @"Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view."), LabelFormattedDuration(timeIntervalBeforeEnd)];
         }
     }
     

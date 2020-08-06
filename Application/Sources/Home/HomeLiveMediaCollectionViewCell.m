@@ -20,11 +20,58 @@
 #import "SRGProgramComposition+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
-#import "UILabel+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
+
+static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
+{
+    // Display days if > 24 hours
+    if (duration > 60. * 60. * 24.) {
+        static NSDateComponentsFormatter *s_dateComponentsFormatter;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitDay;
+            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        });
+        return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+    }
+    // Display hours if > 1 hour
+    else if (duration > 60. * 60.) {
+        static NSDateComponentsFormatter *s_dateComponentsFormatter;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitHour;
+            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        });
+        return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+    }
+    // Display hours if > 1 hour
+    else if (duration > 60. * 60.) {
+        static NSDateComponentsFormatter *s_dateComponentsFormatter;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitHour;
+            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        });
+        return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+    }
+    // Display minutes (1 minute being the smallest)
+    else {
+        static NSDateComponentsFormatter *s_dateComponentsFormatter;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitMinute;
+            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        });
+        return [s_dateComponentsFormatter stringFromTimeInterval:fmax(60., duration)];
+    }
+}
 
 @interface HomeLiveMediaCollectionViewCell ()
 
@@ -34,11 +81,11 @@
 @property (nonatomic, weak) IBOutlet UIView *placeholderView;
 @property (nonatomic, weak) IBOutlet UIImageView *placeholderImageView;
 
+@property (nonatomic, weak) IBOutlet UIView *wrapperView;
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
-@property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 
 @property (nonatomic, weak) IBOutlet UIView *blockingOverlayView;
 @property (nonatomic, weak) IBOutlet UIImageView *blockingReasonImageView;
@@ -74,10 +121,9 @@
     self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
-    self.thumbnailImageView.layer.masksToBounds = YES;
     
-    self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
+    self.wrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.wrapperView.layer.masksToBounds = YES;
     
     self.blockingOverlayView.hidden = YES;
 }
@@ -207,7 +253,6 @@
     self.placeholderView.hidden = YES;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
     
     SRGBlockingReason blockingReason = [self.media blockingReasonAtDate:NSDate.date];
     if (blockingReason == SRGBlockingReasonNone || blockingReason == SRGBlockingReasonStartDate) {
@@ -227,18 +272,17 @@
     
     self.subtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:subtitleTextStyle];
     
-    [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
-    
     SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
         UIImage *logoImage = channel.play_banner22Image;
         self.logoImageView.image = logoImage;
-        self.logoImageView.hidden = (logoImage == nil);
         
         SRGProgram *currentProgram = [self.programComposition play_programAtDate:NSDate.date];
         if (currentProgram) {
             self.titleLabel.text = currentProgram.title;
-            self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
+            
+            NSTimeInterval remainingTimeInterval = [currentProgram.endDate timeIntervalSinceDate:NSDate.date];
+            self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ remaining", "Text displayed on live cells telling how much time remains for a program currently on air"), RemainingTimeFormattedDuration(remainingTimeInterval)];
             
             float progress = [NSDate.date timeIntervalSinceDate:currentProgram.startDate] / ([currentProgram.endDate timeIntervalSinceDate:currentProgram.startDate]);
             self.progressView.progress = fmaxf(fminf(progress, 1.f), 0.f);
@@ -259,7 +303,7 @@
     }
     else {
         self.titleLabel.text = self.media.title;
-        self.logoImageView.hidden = YES;
+        self.logoImageView.image = (self.media.mediaType == SRGMediaTypeAudio) ? RadioChannelBanner22Image(nil) : TVChannelBanner22Image(nil);
         
         NSString *showTitle = self.media.show.title;
         if (showTitle && ! [self.media.title containsString:showTitle]) {
