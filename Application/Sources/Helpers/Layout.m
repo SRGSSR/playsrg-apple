@@ -33,7 +33,7 @@ CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth)
 
 CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor)
 {
-    static NSDictionary<NSString *, NSNumber *> *s_headerHeights;
+    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_headerHeights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @25,
@@ -50,7 +50,7 @@ CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor)
                              UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @40 };
     });
     
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat headerHeight = s_headerHeights[contentSizeCategory].floatValue;
     if (hasBackgroundColor) {
         headerHeight += 6.f;
@@ -60,7 +60,7 @@ CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor)
 
 CGFloat LayoutStandardSimpleTableCellHeight(void)
 {
-    static NSDictionary<NSString *, NSNumber *> *s_heights;
+    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_heights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_heights = @{ UIContentSizeCategoryExtraSmall : @42,
@@ -76,7 +76,7 @@ CGFloat LayoutStandardSimpleTableCellHeight(void)
                        UIContentSizeCategoryAccessibilityExtraExtraLarge : @62,
                        UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @62 };
     });
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     return s_heights[contentSizeCategory].floatValue;
 }
 
@@ -123,7 +123,7 @@ CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
                                    UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @90 };
     });
     
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
@@ -135,8 +135,8 @@ CGSize LayoutLiveMediaStandardCollectionItemSize(CGFloat itemWidth)
 
 CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
 {
-    static NSDictionary<NSString *, NSNumber *> *s_largeTextHeights;
-    static NSDictionary<NSString *, NSNumber *> *s_standardTextHeights;
+    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_largeTextHeights;
+    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_standardTextHeights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_largeTextHeights = @{ UIContentSizeCategoryExtraSmall : @28,
@@ -166,7 +166,7 @@ CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
                                    UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @36 };
     });
     
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }

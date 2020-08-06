@@ -659,7 +659,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 {
     SearchSettingSectionType sectionType = [self sectionTypesForTableView:tableView][indexPath.section];
     if (sectionType == SearchSettingSectionTypePeriod) {
-        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+        UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
         if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
             return 45.f;
         }
@@ -671,7 +671,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
         }
     }
     else {
-        NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+        UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
         if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
             return 55.f;
         }
