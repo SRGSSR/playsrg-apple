@@ -27,30 +27,8 @@
 
 static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 {
-    // Display days if > 24 hours
-    if (duration > 60. * 60. * 24.) {
-        static NSDateComponentsFormatter *s_dateComponentsFormatter;
-        static dispatch_once_t s_onceToken;
-        dispatch_once(&s_onceToken, ^{
-            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
-            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitDay;
-            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
-        });
-        return [s_dateComponentsFormatter stringFromTimeInterval:duration];
-    }
     // Display hours if > 1 hour
-    else if (duration > 60. * 60.) {
-        static NSDateComponentsFormatter *s_dateComponentsFormatter;
-        static dispatch_once_t s_onceToken;
-        dispatch_once(&s_onceToken, ^{
-            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
-            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitHour;
-            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
-        });
-        return [s_dateComponentsFormatter stringFromTimeInterval:duration];
-    }
-    // Display hours if > 1 hour
-    else if (duration > 60. * 60.) {
+    if (duration > 60. * 60.) {
         static NSDateComponentsFormatter *s_dateComponentsFormatter;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
