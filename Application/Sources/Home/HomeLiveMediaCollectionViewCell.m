@@ -27,8 +27,7 @@
 
 static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 {
-    // Display hours if > 1 hour
-    if (duration > 60. * 60.) {
+    if (duration >= 60. * 60.) {
         static NSDateComponentsFormatter *s_dateComponentsFormatter;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
@@ -38,7 +37,6 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
         });
         return [s_dateComponentsFormatter stringFromTimeInterval:duration];
     }
-    // Display minutes (1 minute being the smallest)
     else {
         static NSDateComponentsFormatter *s_dateComponentsFormatter;
         static dispatch_once_t s_onceToken;
@@ -47,6 +45,7 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
             s_dateComponentsFormatter.allowedUnits = NSCalendarUnitMinute;
             s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
         });
+        // Minimum is 1 minute
         return [s_dateComponentsFormatter stringFromTimeInterval:fmax(60., duration)];
     }
 }

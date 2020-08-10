@@ -17,8 +17,7 @@
 
 static NSString *LabelFormattedDuration(NSTimeInterval duration)
 {
-    // Display days if > 24 hours
-    if (duration > 60. * 60. * 24.) {
+    if (duration >= 60. * 60. * 24.) {
         static NSDateComponentsFormatter *s_dateComponentsFormatter;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
@@ -28,8 +27,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         });
         return [s_dateComponentsFormatter stringFromTimeInterval:duration];
     }
-    // Display hours if > 1 hour
-    else if (duration > 60. * 60.) {
+    else if (duration >= 60. * 60.) {
         static NSDateComponentsFormatter *s_dateComponentsFormatter;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
