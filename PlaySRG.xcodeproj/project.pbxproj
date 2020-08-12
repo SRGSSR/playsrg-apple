@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -709,101 +709,6 @@
 		6F331D6E24D076D500C096AB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6B24D076D500C096AB /* ProfileView.swift */; };
 		6F331D6F24D076D500C096AB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6B24D076D500C096AB /* ProfileView.swift */; };
 		6F331D7024D076D500C096AB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6B24D076D500C096AB /* ProfileView.swift */; };
-		6F331D8424D082D700C096AB /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7124D082D300C096AB /* MAKVONotificationCenter.framework */; };
-		6F331D8524D082D700C096AB /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7224D082D300C096AB /* SRGNetwork.framework */; };
-		6F331D8624D082D700C096AB /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7324D082D300C096AB /* SRGUserData.framework */; };
-		6F331D8724D082D700C096AB /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7424D082D400C096AB /* libextobjc.framework */; };
-		6F331D8824D082D700C096AB /* SRGDataProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7524D082D400C096AB /* SRGDataProvider.framework */; };
-		6F331D8924D082D700C096AB /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7624D082D400C096AB /* SRGLogger.framework */; };
-		6F331D8A24D082D700C096AB /* SRGContentProtection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7724D082D400C096AB /* SRGContentProtection.framework */; };
-		6F331D8B24D082D700C096AB /* SRGMediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7824D082D500C096AB /* SRGMediaPlayer.framework */; };
-		6F331D8C24D082D800C096AB /* SRGIdentity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7924D082D500C096AB /* SRGIdentity.framework */; };
-		6F331D8D24D082D800C096AB /* SRGAnalytics_Identity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7A24D082D500C096AB /* SRGAnalytics_Identity.framework */; };
-		6F331D8E24D082D800C096AB /* SRGAppearance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7B24D082D500C096AB /* SRGAppearance.framework */; };
-		6F331D8F24D082D800C096AB /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7C24D082D500C096AB /* UICKeyChainStore.framework */; };
-		6F331D9024D082D800C096AB /* SRGDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7D24D082D600C096AB /* SRGDiagnostics.framework */; };
-		6F331D9124D082D800C096AB /* SRGAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7E24D082D600C096AB /* SRGAnalytics.framework */; };
-		6F331D9224D082D800C096AB /* YYWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7F24D082D600C096AB /* YYWebImage.framework */; };
-		6F331D9324D082D800C096AB /* SRGAnalytics_DataProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8024D082D600C096AB /* SRGAnalytics_DataProvider.framework */; };
-		6F331D9424D082D800C096AB /* FXReachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8124D082D700C096AB /* FXReachability.framework */; };
-		6F331D9524D082D800C096AB /* SRGAnalytics_MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8224D082D700C096AB /* SRGAnalytics_MediaPlayer.framework */; };
-		6F331D9624D082D800C096AB /* SRGLetterbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8324D082D700C096AB /* SRGLetterbox.framework */; };
-		6F331D9724D082F700C096AB /* FXReachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8124D082D700C096AB /* FXReachability.framework */; };
-		6F331D9824D082F700C096AB /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7424D082D400C096AB /* libextobjc.framework */; };
-		6F331D9924D082F700C096AB /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7124D082D300C096AB /* MAKVONotificationCenter.framework */; };
-		6F331D9A24D082F700C096AB /* SRGAnalytics_DataProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8024D082D600C096AB /* SRGAnalytics_DataProvider.framework */; };
-		6F331D9B24D082F700C096AB /* SRGAnalytics_Identity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7A24D082D500C096AB /* SRGAnalytics_Identity.framework */; };
-		6F331D9C24D082F700C096AB /* SRGAnalytics_MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8224D082D700C096AB /* SRGAnalytics_MediaPlayer.framework */; };
-		6F331D9D24D082F700C096AB /* SRGAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7E24D082D600C096AB /* SRGAnalytics.framework */; };
-		6F331D9E24D082F700C096AB /* SRGAppearance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7B24D082D500C096AB /* SRGAppearance.framework */; };
-		6F331D9F24D082F700C096AB /* SRGContentProtection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7724D082D400C096AB /* SRGContentProtection.framework */; };
-		6F331DA024D082F700C096AB /* SRGDataProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7524D082D400C096AB /* SRGDataProvider.framework */; };
-		6F331DA124D082F700C096AB /* SRGDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7D24D082D600C096AB /* SRGDiagnostics.framework */; };
-		6F331DA224D082F700C096AB /* SRGIdentity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7924D082D500C096AB /* SRGIdentity.framework */; };
-		6F331DA324D082F700C096AB /* SRGLetterbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8324D082D700C096AB /* SRGLetterbox.framework */; };
-		6F331DA424D082F700C096AB /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7624D082D400C096AB /* SRGLogger.framework */; };
-		6F331DA524D082F700C096AB /* SRGMediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7824D082D500C096AB /* SRGMediaPlayer.framework */; };
-		6F331DA624D082F700C096AB /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7224D082D300C096AB /* SRGNetwork.framework */; };
-		6F331DA724D082F700C096AB /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7324D082D300C096AB /* SRGUserData.framework */; };
-		6F331DA824D082F700C096AB /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7C24D082D500C096AB /* UICKeyChainStore.framework */; };
-		6F331DA924D082F700C096AB /* YYWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7F24D082D600C096AB /* YYWebImage.framework */; };
-		6F331DAA24D0832A00C096AB /* FXReachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8124D082D700C096AB /* FXReachability.framework */; };
-		6F331DAB24D0832A00C096AB /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7424D082D400C096AB /* libextobjc.framework */; };
-		6F331DAC24D0832A00C096AB /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7124D082D300C096AB /* MAKVONotificationCenter.framework */; };
-		6F331DAD24D0832A00C096AB /* SRGAnalytics_DataProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8024D082D600C096AB /* SRGAnalytics_DataProvider.framework */; };
-		6F331DAE24D0832A00C096AB /* SRGAnalytics_Identity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7A24D082D500C096AB /* SRGAnalytics_Identity.framework */; };
-		6F331DAF24D0832A00C096AB /* SRGAnalytics_MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8224D082D700C096AB /* SRGAnalytics_MediaPlayer.framework */; };
-		6F331DB024D0832A00C096AB /* SRGAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7E24D082D600C096AB /* SRGAnalytics.framework */; };
-		6F331DB124D0832A00C096AB /* SRGAppearance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7B24D082D500C096AB /* SRGAppearance.framework */; };
-		6F331DB224D0832A00C096AB /* SRGContentProtection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7724D082D400C096AB /* SRGContentProtection.framework */; };
-		6F331DB324D0832A00C096AB /* SRGDataProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7524D082D400C096AB /* SRGDataProvider.framework */; };
-		6F331DB424D0832A00C096AB /* SRGDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7D24D082D600C096AB /* SRGDiagnostics.framework */; };
-		6F331DB524D0832A00C096AB /* SRGIdentity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7924D082D500C096AB /* SRGIdentity.framework */; };
-		6F331DB624D0832A00C096AB /* SRGLetterbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8324D082D700C096AB /* SRGLetterbox.framework */; };
-		6F331DB724D0832A00C096AB /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7624D082D400C096AB /* SRGLogger.framework */; };
-		6F331DB824D0832A00C096AB /* SRGMediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7824D082D500C096AB /* SRGMediaPlayer.framework */; };
-		6F331DB924D0832A00C096AB /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7224D082D300C096AB /* SRGNetwork.framework */; };
-		6F331DBA24D0832A00C096AB /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7324D082D300C096AB /* SRGUserData.framework */; };
-		6F331DBB24D0832A00C096AB /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7C24D082D500C096AB /* UICKeyChainStore.framework */; };
-		6F331DBC24D0832B00C096AB /* YYWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7F24D082D600C096AB /* YYWebImage.framework */; };
-		6F331DBD24D0834400C096AB /* FXReachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8124D082D700C096AB /* FXReachability.framework */; };
-		6F331DBE24D0834400C096AB /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7424D082D400C096AB /* libextobjc.framework */; };
-		6F331DBF24D0834400C096AB /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7124D082D300C096AB /* MAKVONotificationCenter.framework */; };
-		6F331DC024D0834400C096AB /* SRGAnalytics_DataProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8024D082D600C096AB /* SRGAnalytics_DataProvider.framework */; };
-		6F331DC124D0834400C096AB /* SRGAnalytics_Identity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7A24D082D500C096AB /* SRGAnalytics_Identity.framework */; };
-		6F331DC224D0834400C096AB /* SRGAnalytics_MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8224D082D700C096AB /* SRGAnalytics_MediaPlayer.framework */; };
-		6F331DC324D0834400C096AB /* SRGAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7E24D082D600C096AB /* SRGAnalytics.framework */; };
-		6F331DC424D0834400C096AB /* SRGAppearance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7B24D082D500C096AB /* SRGAppearance.framework */; };
-		6F331DC524D0834400C096AB /* SRGContentProtection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7724D082D400C096AB /* SRGContentProtection.framework */; };
-		6F331DC624D0834400C096AB /* SRGDataProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7524D082D400C096AB /* SRGDataProvider.framework */; };
-		6F331DC724D0834400C096AB /* SRGDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7D24D082D600C096AB /* SRGDiagnostics.framework */; };
-		6F331DC824D0834400C096AB /* SRGIdentity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7924D082D500C096AB /* SRGIdentity.framework */; };
-		6F331DC924D0834400C096AB /* SRGLetterbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8324D082D700C096AB /* SRGLetterbox.framework */; };
-		6F331DCA24D0834400C096AB /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7624D082D400C096AB /* SRGLogger.framework */; };
-		6F331DCB24D0834400C096AB /* SRGMediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7824D082D500C096AB /* SRGMediaPlayer.framework */; };
-		6F331DCC24D0834400C096AB /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7224D082D300C096AB /* SRGNetwork.framework */; };
-		6F331DCD24D0834400C096AB /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7324D082D300C096AB /* SRGUserData.framework */; };
-		6F331DCE24D0834400C096AB /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7C24D082D500C096AB /* UICKeyChainStore.framework */; };
-		6F331DCF24D0834400C096AB /* YYWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7F24D082D600C096AB /* YYWebImage.framework */; };
-		6F331DD024D0835400C096AB /* FXReachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8124D082D700C096AB /* FXReachability.framework */; };
-		6F331DD124D0835400C096AB /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7424D082D400C096AB /* libextobjc.framework */; };
-		6F331DD224D0835400C096AB /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7124D082D300C096AB /* MAKVONotificationCenter.framework */; };
-		6F331DD324D0835400C096AB /* SRGAnalytics_DataProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8024D082D600C096AB /* SRGAnalytics_DataProvider.framework */; };
-		6F331DD424D0835400C096AB /* SRGAnalytics_Identity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7A24D082D500C096AB /* SRGAnalytics_Identity.framework */; };
-		6F331DD524D0835400C096AB /* SRGAnalytics_MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8224D082D700C096AB /* SRGAnalytics_MediaPlayer.framework */; };
-		6F331DD624D0835400C096AB /* SRGAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7E24D082D600C096AB /* SRGAnalytics.framework */; };
-		6F331DD724D0835400C096AB /* SRGAppearance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7B24D082D500C096AB /* SRGAppearance.framework */; };
-		6F331DD824D0835400C096AB /* SRGContentProtection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7724D082D400C096AB /* SRGContentProtection.framework */; };
-		6F331DD924D0835400C096AB /* SRGDataProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7524D082D400C096AB /* SRGDataProvider.framework */; };
-		6F331DDA24D0835400C096AB /* SRGDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7D24D082D600C096AB /* SRGDiagnostics.framework */; };
-		6F331DDB24D0835400C096AB /* SRGIdentity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7924D082D500C096AB /* SRGIdentity.framework */; };
-		6F331DDC24D0835400C096AB /* SRGLetterbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D8324D082D700C096AB /* SRGLetterbox.framework */; };
-		6F331DDD24D0835400C096AB /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7624D082D400C096AB /* SRGLogger.framework */; };
-		6F331DDE24D0835400C096AB /* SRGMediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7824D082D500C096AB /* SRGMediaPlayer.framework */; };
-		6F331DDF24D0835400C096AB /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7224D082D300C096AB /* SRGNetwork.framework */; };
-		6F331DE024D0835400C096AB /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7324D082D300C096AB /* SRGUserData.framework */; };
-		6F331DE124D0835400C096AB /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7C24D082D500C096AB /* UICKeyChainStore.framework */; };
-		6F331DE224D0835400C096AB /* YYWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331D7F24D082D600C096AB /* YYWebImage.framework */; };
 		6F331DEA24D0846200C096AB /* SRGDataProvider.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE524D0846100C096AB /* SRGDataProvider.bundle */; };
 		6F331DEB24D0846200C096AB /* SRGDataProvider.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE524D0846100C096AB /* SRGDataProvider.bundle */; };
 		6F331DEC24D0846200C096AB /* SRGDataProvider.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE524D0846100C096AB /* SRGDataProvider.bundle */; };
@@ -859,46 +764,6 @@
 		6F331E2424D0848D00C096AB /* SRGNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0824D0848C00C096AB /* SRGNetwork.bundle */; };
 		6F331E2524D0848D00C096AB /* SRGNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0824D0848C00C096AB /* SRGNetwork.bundle */; };
 		6F331E2624D0848D00C096AB /* SRGNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0824D0848C00C096AB /* SRGNetwork.bundle */; };
-		6F331E2B24D0852000C096AB /* TCSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2724D0851F00C096AB /* TCSDK.framework */; };
-		6F331E2C24D0852000C096AB /* TCSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2724D0851F00C096AB /* TCSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E2D24D0852000C096AB /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2824D0851F00C096AB /* ComScore.framework */; };
-		6F331E2E24D0852000C096AB /* ComScore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2824D0851F00C096AB /* ComScore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E2F24D0852000C096AB /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2924D0852000C096AB /* Mantle.framework */; };
-		6F331E3024D0852000C096AB /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2924D0852000C096AB /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E3124D0852000C096AB /* TCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2A24D0852000C096AB /* TCCore.framework */; };
-		6F331E3224D0852000C096AB /* TCCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2A24D0852000C096AB /* TCCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E3424D0853700C096AB /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2824D0851F00C096AB /* ComScore.framework */; };
-		6F331E3524D0853700C096AB /* ComScore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2824D0851F00C096AB /* ComScore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E3624D0853700C096AB /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2924D0852000C096AB /* Mantle.framework */; };
-		6F331E3724D0853700C096AB /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2924D0852000C096AB /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E3824D0853700C096AB /* TCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2A24D0852000C096AB /* TCCore.framework */; };
-		6F331E3924D0853700C096AB /* TCCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2A24D0852000C096AB /* TCCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E3A24D0853700C096AB /* TCSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2724D0851F00C096AB /* TCSDK.framework */; };
-		6F331E3B24D0853800C096AB /* TCSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2724D0851F00C096AB /* TCSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E3D24D0854F00C096AB /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2824D0851F00C096AB /* ComScore.framework */; };
-		6F331E3E24D0854F00C096AB /* ComScore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2824D0851F00C096AB /* ComScore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E3F24D0854F00C096AB /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2924D0852000C096AB /* Mantle.framework */; };
-		6F331E4024D0854F00C096AB /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2924D0852000C096AB /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E4124D0854F00C096AB /* TCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2A24D0852000C096AB /* TCCore.framework */; };
-		6F331E4224D0854F00C096AB /* TCCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2A24D0852000C096AB /* TCCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E4324D0854F00C096AB /* TCSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2724D0851F00C096AB /* TCSDK.framework */; };
-		6F331E4424D0854F00C096AB /* TCSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2724D0851F00C096AB /* TCSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E4624D0856000C096AB /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2824D0851F00C096AB /* ComScore.framework */; };
-		6F331E4724D0856000C096AB /* ComScore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2824D0851F00C096AB /* ComScore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E4824D0856000C096AB /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2924D0852000C096AB /* Mantle.framework */; };
-		6F331E4924D0856000C096AB /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2924D0852000C096AB /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E4A24D0856000C096AB /* TCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2A24D0852000C096AB /* TCCore.framework */; };
-		6F331E4B24D0856000C096AB /* TCCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2A24D0852000C096AB /* TCCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E4C24D0856000C096AB /* TCSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2724D0851F00C096AB /* TCSDK.framework */; };
-		6F331E4D24D0856000C096AB /* TCSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2724D0851F00C096AB /* TCSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E4F24D0857400C096AB /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2824D0851F00C096AB /* ComScore.framework */; };
-		6F331E5024D0857400C096AB /* ComScore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2824D0851F00C096AB /* ComScore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E5124D0857400C096AB /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2924D0852000C096AB /* Mantle.framework */; };
-		6F331E5224D0857400C096AB /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2924D0852000C096AB /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E5324D0857400C096AB /* TCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2A24D0852000C096AB /* TCCore.framework */; };
-		6F331E5424D0857400C096AB /* TCCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2A24D0852000C096AB /* TCCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6F331E5524D0857400C096AB /* TCSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2724D0851F00C096AB /* TCSDK.framework */; };
-		6F331E5624D0857400C096AB /* TCSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F331E2724D0851F00C096AB /* TCSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F340F45220DA7E900778CA3 /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F340F44220DA7E900778CA3 /* SRGUserData.framework */; };
 		6F340F46220DA7FC00778CA3 /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F340F44220DA7E900778CA3 /* SRGUserData.framework */; };
 		6F340F47220DA80B00778CA3 /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F340F44220DA7E900778CA3 /* SRGUserData.framework */; };
@@ -1186,6 +1051,8 @@
 		6F6B643521A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B642D21A70FAA00E207FC /* HomeStatusHeaderView.xib */; };
 		6F6B643621A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B642D21A70FAA00E207FC /* HomeStatusHeaderView.xib */; };
 		6F6B643721A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B642D21A70FAA00E207FC /* HomeStatusHeaderView.xib */; };
+		6F6DD3A824E449BA003F9437 /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6F6DD3A724E449BA003F9437 /* SRGLetterbox */; };
+		6F6DD3AB24E449D7003F9437 /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6F6DD3AA24E449D7003F9437 /* SRGDataProviderCombine */; };
 		6F7218131DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
 		6F7218141DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
 		6F7218151DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
@@ -1311,6 +1178,16 @@
 		6FA7EC3B20AB0FEB00A9C5FE /* Onboardings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */; };
 		6FA7EC3C20AB0FEB00A9C5FE /* Onboardings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */; };
 		6FA7EC3D20AB0FEB00A9C5FE /* Onboardings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */; };
+		6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1724E44B6400B1A56E /* SRGLetterbox */; };
+		6FA84A1A24E44B6400B1A56E /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1924E44B6400B1A56E /* SRGDataProviderCombine */; };
+		6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1B24E44B6D00B1A56E /* SRGLetterbox */; };
+		6FA84A1E24E44B6D00B1A56E /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1D24E44B6D00B1A56E /* SRGDataProviderCombine */; };
+		6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1F24E44B7500B1A56E /* SRGLetterbox */; };
+		6FA84A2224E44B7500B1A56E /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2124E44B7500B1A56E /* SRGDataProviderCombine */; };
+		6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2324E44B7B00B1A56E /* SRGLetterbox */; };
+		6FA84A2624E44B7B00B1A56E /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2524E44B7B00B1A56E /* SRGDataProviderCombine */; };
+		6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2724E44B8300B1A56E /* SRGLetterbox */; };
+		6FA84A2A24E44B8300B1A56E /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2924E44B8300B1A56E /* SRGDataProviderCombine */; };
 		6FA9ECAC20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */; };
 		6FA9ECAD20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */; };
 		6FA9ECAE20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */; };
@@ -1827,76 +1704,6 @@
 				6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6F331E3324D0852100C096AB /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				6F331E3224D0852000C096AB /* TCCore.framework in Embed Frameworks */,
-				6F331E2C24D0852000C096AB /* TCSDK.framework in Embed Frameworks */,
-				6F331E2E24D0852000C096AB /* ComScore.framework in Embed Frameworks */,
-				6F331E3024D0852000C096AB /* Mantle.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6F331E3C24D0853800C096AB /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				6F331E3B24D0853800C096AB /* TCSDK.framework in Embed Frameworks */,
-				6F331E3524D0853700C096AB /* ComScore.framework in Embed Frameworks */,
-				6F331E3924D0853700C096AB /* TCCore.framework in Embed Frameworks */,
-				6F331E3724D0853700C096AB /* Mantle.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6F331E4524D0854F00C096AB /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				6F331E4424D0854F00C096AB /* TCSDK.framework in Embed Frameworks */,
-				6F331E3E24D0854F00C096AB /* ComScore.framework in Embed Frameworks */,
-				6F331E4224D0854F00C096AB /* TCCore.framework in Embed Frameworks */,
-				6F331E4024D0854F00C096AB /* Mantle.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6F331E4E24D0856100C096AB /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				6F331E4D24D0856000C096AB /* TCSDK.framework in Embed Frameworks */,
-				6F331E4724D0856000C096AB /* ComScore.framework in Embed Frameworks */,
-				6F331E4B24D0856000C096AB /* TCCore.framework in Embed Frameworks */,
-				6F331E4924D0856000C096AB /* Mantle.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6F331E5724D0857400C096AB /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				6F331E5624D0857400C096AB /* TCSDK.framework in Embed Frameworks */,
-				6F331E5024D0857400C096AB /* ComScore.framework in Embed Frameworks */,
-				6F331E5424D0857400C096AB /* TCCore.framework in Embed Frameworks */,
-				6F331E5224D0857400C096AB /* Mantle.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E67BB69A1D3E640C00E1FEA3 /* Embed Frameworks */ = {
@@ -2625,6 +2432,7 @@
 				6FADEF9F248E6EB900A5F948 /* AirshipCore.framework in Frameworks */,
 				6F340F45220DA7E900778CA3 /* SRGUserData.framework in Frameworks */,
 				6F1A95F2216DFA0D00DB15AA /* SRGIdentity.framework in Frameworks */,
+				6F6DD3AB24E449D7003F9437 /* SRGDataProviderCombine in Frameworks */,
 				6FBF243E2148232B00E576A2 /* SRGDiagnostics.framework in Frameworks */,
 				6FF3B68E2137DC8400F8A5E2 /* SRGContentProtection.framework in Frameworks */,
 				08B6F7E6210CF8660097EF8B /* CoreData.framework in Frameworks */,
@@ -2646,6 +2454,7 @@
 				6F5F7FE21F382E9D00C330EC /* TCCore.framework in Frameworks */,
 				E67BB6981D3E640C00E1FEA3 /* Mantle.framework in Frameworks */,
 				E60178521D635E130000362E /* ComScore.framework in Frameworks */,
+				6F6DD3A824E449BA003F9437 /* SRGLetterbox in Frameworks */,
 				6F5F7FE41F382E9D00C330EC /* TCSDK.framework in Frameworks */,
 				7ACE7CA000370D1208243956 /* libPods-PlaySRG-Play SRF.a in Frameworks */,
 			);
@@ -2880,29 +2689,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F331E2B24D0852000C096AB /* TCSDK.framework in Frameworks */,
-				6F331D8424D082D700C096AB /* MAKVONotificationCenter.framework in Frameworks */,
-				6F331E3124D0852000C096AB /* TCCore.framework in Frameworks */,
-				6F331D8524D082D700C096AB /* SRGNetwork.framework in Frameworks */,
-				6F331D8624D082D700C096AB /* SRGUserData.framework in Frameworks */,
-				6F331D8724D082D700C096AB /* libextobjc.framework in Frameworks */,
-				6F331E2F24D0852000C096AB /* Mantle.framework in Frameworks */,
-				6F331D8824D082D700C096AB /* SRGDataProvider.framework in Frameworks */,
-				6F331D8924D082D700C096AB /* SRGLogger.framework in Frameworks */,
-				6F331D8A24D082D700C096AB /* SRGContentProtection.framework in Frameworks */,
-				6F331D8B24D082D700C096AB /* SRGMediaPlayer.framework in Frameworks */,
-				6F331D8C24D082D800C096AB /* SRGIdentity.framework in Frameworks */,
-				6F331D8D24D082D800C096AB /* SRGAnalytics_Identity.framework in Frameworks */,
-				6F331D8E24D082D800C096AB /* SRGAppearance.framework in Frameworks */,
-				6F331D8F24D082D800C096AB /* UICKeyChainStore.framework in Frameworks */,
-				6F331D9024D082D800C096AB /* SRGDiagnostics.framework in Frameworks */,
-				6F331D9124D082D800C096AB /* SRGAnalytics.framework in Frameworks */,
-				6F331D9224D082D800C096AB /* YYWebImage.framework in Frameworks */,
-				6F331D9324D082D800C096AB /* SRGAnalytics_DataProvider.framework in Frameworks */,
-				6F331D9424D082D800C096AB /* FXReachability.framework in Frameworks */,
-				6F331D9524D082D800C096AB /* SRGAnalytics_MediaPlayer.framework in Frameworks */,
-				6F331D9624D082D800C096AB /* SRGLetterbox.framework in Frameworks */,
-				6F331E2D24D0852000C096AB /* ComScore.framework in Frameworks */,
+				6FA84A1A24E44B6400B1A56E /* SRGDataProviderCombine in Frameworks */,
+				6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2910,29 +2698,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F331D9724D082F700C096AB /* FXReachability.framework in Frameworks */,
-				6F331E3424D0853700C096AB /* ComScore.framework in Frameworks */,
-				6F331E3624D0853700C096AB /* Mantle.framework in Frameworks */,
-				6F331D9824D082F700C096AB /* libextobjc.framework in Frameworks */,
-				6F331D9924D082F700C096AB /* MAKVONotificationCenter.framework in Frameworks */,
-				6F331D9A24D082F700C096AB /* SRGAnalytics_DataProvider.framework in Frameworks */,
-				6F331D9B24D082F700C096AB /* SRGAnalytics_Identity.framework in Frameworks */,
-				6F331D9C24D082F700C096AB /* SRGAnalytics_MediaPlayer.framework in Frameworks */,
-				6F331E3824D0853700C096AB /* TCCore.framework in Frameworks */,
-				6F331D9D24D082F700C096AB /* SRGAnalytics.framework in Frameworks */,
-				6F331D9E24D082F700C096AB /* SRGAppearance.framework in Frameworks */,
-				6F331D9F24D082F700C096AB /* SRGContentProtection.framework in Frameworks */,
-				6F331DA024D082F700C096AB /* SRGDataProvider.framework in Frameworks */,
-				6F331DA124D082F700C096AB /* SRGDiagnostics.framework in Frameworks */,
-				6F331DA224D082F700C096AB /* SRGIdentity.framework in Frameworks */,
-				6F331DA324D082F700C096AB /* SRGLetterbox.framework in Frameworks */,
-				6F331DA424D082F700C096AB /* SRGLogger.framework in Frameworks */,
-				6F331DA524D082F700C096AB /* SRGMediaPlayer.framework in Frameworks */,
-				6F331E3A24D0853700C096AB /* TCSDK.framework in Frameworks */,
-				6F331DA624D082F700C096AB /* SRGNetwork.framework in Frameworks */,
-				6F331DA724D082F700C096AB /* SRGUserData.framework in Frameworks */,
-				6F331DA824D082F700C096AB /* UICKeyChainStore.framework in Frameworks */,
-				6F331DA924D082F700C096AB /* YYWebImage.framework in Frameworks */,
+				6FA84A1E24E44B6D00B1A56E /* SRGDataProviderCombine in Frameworks */,
+				6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2940,29 +2707,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F331DAA24D0832A00C096AB /* FXReachability.framework in Frameworks */,
-				6F331E3D24D0854F00C096AB /* ComScore.framework in Frameworks */,
-				6F331E3F24D0854F00C096AB /* Mantle.framework in Frameworks */,
-				6F331DAB24D0832A00C096AB /* libextobjc.framework in Frameworks */,
-				6F331DAC24D0832A00C096AB /* MAKVONotificationCenter.framework in Frameworks */,
-				6F331DAD24D0832A00C096AB /* SRGAnalytics_DataProvider.framework in Frameworks */,
-				6F331DAE24D0832A00C096AB /* SRGAnalytics_Identity.framework in Frameworks */,
-				6F331DAF24D0832A00C096AB /* SRGAnalytics_MediaPlayer.framework in Frameworks */,
-				6F331E4124D0854F00C096AB /* TCCore.framework in Frameworks */,
-				6F331DB024D0832A00C096AB /* SRGAnalytics.framework in Frameworks */,
-				6F331DB124D0832A00C096AB /* SRGAppearance.framework in Frameworks */,
-				6F331DB224D0832A00C096AB /* SRGContentProtection.framework in Frameworks */,
-				6F331DB324D0832A00C096AB /* SRGDataProvider.framework in Frameworks */,
-				6F331DB424D0832A00C096AB /* SRGDiagnostics.framework in Frameworks */,
-				6F331DB524D0832A00C096AB /* SRGIdentity.framework in Frameworks */,
-				6F331DB624D0832A00C096AB /* SRGLetterbox.framework in Frameworks */,
-				6F331DB724D0832A00C096AB /* SRGLogger.framework in Frameworks */,
-				6F331DB824D0832A00C096AB /* SRGMediaPlayer.framework in Frameworks */,
-				6F331E4324D0854F00C096AB /* TCSDK.framework in Frameworks */,
-				6F331DB924D0832A00C096AB /* SRGNetwork.framework in Frameworks */,
-				6F331DBA24D0832A00C096AB /* SRGUserData.framework in Frameworks */,
-				6F331DBB24D0832A00C096AB /* UICKeyChainStore.framework in Frameworks */,
-				6F331DBC24D0832B00C096AB /* YYWebImage.framework in Frameworks */,
+				6FA84A2224E44B7500B1A56E /* SRGDataProviderCombine in Frameworks */,
+				6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2970,29 +2716,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F331DBD24D0834400C096AB /* FXReachability.framework in Frameworks */,
-				6F331E4624D0856000C096AB /* ComScore.framework in Frameworks */,
-				6F331E4824D0856000C096AB /* Mantle.framework in Frameworks */,
-				6F331DBE24D0834400C096AB /* libextobjc.framework in Frameworks */,
-				6F331DBF24D0834400C096AB /* MAKVONotificationCenter.framework in Frameworks */,
-				6F331DC024D0834400C096AB /* SRGAnalytics_DataProvider.framework in Frameworks */,
-				6F331DC124D0834400C096AB /* SRGAnalytics_Identity.framework in Frameworks */,
-				6F331DC224D0834400C096AB /* SRGAnalytics_MediaPlayer.framework in Frameworks */,
-				6F331E4A24D0856000C096AB /* TCCore.framework in Frameworks */,
-				6F331DC324D0834400C096AB /* SRGAnalytics.framework in Frameworks */,
-				6F331DC424D0834400C096AB /* SRGAppearance.framework in Frameworks */,
-				6F331DC524D0834400C096AB /* SRGContentProtection.framework in Frameworks */,
-				6F331DC624D0834400C096AB /* SRGDataProvider.framework in Frameworks */,
-				6F331DC724D0834400C096AB /* SRGDiagnostics.framework in Frameworks */,
-				6F331DC824D0834400C096AB /* SRGIdentity.framework in Frameworks */,
-				6F331DC924D0834400C096AB /* SRGLetterbox.framework in Frameworks */,
-				6F331DCA24D0834400C096AB /* SRGLogger.framework in Frameworks */,
-				6F331DCB24D0834400C096AB /* SRGMediaPlayer.framework in Frameworks */,
-				6F331E4C24D0856000C096AB /* TCSDK.framework in Frameworks */,
-				6F331DCC24D0834400C096AB /* SRGNetwork.framework in Frameworks */,
-				6F331DCD24D0834400C096AB /* SRGUserData.framework in Frameworks */,
-				6F331DCE24D0834400C096AB /* UICKeyChainStore.framework in Frameworks */,
-				6F331DCF24D0834400C096AB /* YYWebImage.framework in Frameworks */,
+				6FA84A2624E44B7B00B1A56E /* SRGDataProviderCombine in Frameworks */,
+				6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3000,29 +2725,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F331DD024D0835400C096AB /* FXReachability.framework in Frameworks */,
-				6F331E4F24D0857400C096AB /* ComScore.framework in Frameworks */,
-				6F331E5124D0857400C096AB /* Mantle.framework in Frameworks */,
-				6F331DD124D0835400C096AB /* libextobjc.framework in Frameworks */,
-				6F331DD224D0835400C096AB /* MAKVONotificationCenter.framework in Frameworks */,
-				6F331DD324D0835400C096AB /* SRGAnalytics_DataProvider.framework in Frameworks */,
-				6F331DD424D0835400C096AB /* SRGAnalytics_Identity.framework in Frameworks */,
-				6F331DD524D0835400C096AB /* SRGAnalytics_MediaPlayer.framework in Frameworks */,
-				6F331E5324D0857400C096AB /* TCCore.framework in Frameworks */,
-				6F331DD624D0835400C096AB /* SRGAnalytics.framework in Frameworks */,
-				6F331DD724D0835400C096AB /* SRGAppearance.framework in Frameworks */,
-				6F331DD824D0835400C096AB /* SRGContentProtection.framework in Frameworks */,
-				6F331DD924D0835400C096AB /* SRGDataProvider.framework in Frameworks */,
-				6F331DDA24D0835400C096AB /* SRGDiagnostics.framework in Frameworks */,
-				6F331DDB24D0835400C096AB /* SRGIdentity.framework in Frameworks */,
-				6F331DDC24D0835400C096AB /* SRGLetterbox.framework in Frameworks */,
-				6F331DDD24D0835400C096AB /* SRGLogger.framework in Frameworks */,
-				6F331DDE24D0835400C096AB /* SRGMediaPlayer.framework in Frameworks */,
-				6F331E5524D0857400C096AB /* TCSDK.framework in Frameworks */,
-				6F331DDF24D0835400C096AB /* SRGNetwork.framework in Frameworks */,
-				6F331DE024D0835400C096AB /* SRGUserData.framework in Frameworks */,
-				6F331DE124D0835400C096AB /* UICKeyChainStore.framework in Frameworks */,
-				6F331DE224D0835400C096AB /* YYWebImage.framework in Frameworks */,
+				6FA84A2A24E44B8300B1A56E /* SRGDataProviderCombine in Frameworks */,
+				6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4379,6 +4083,10 @@
 				6F0CFB3920C94DF6006B2CE4 /* PBXTargetDependency */,
 			);
 			name = "Play SRF";
+			packageProductDependencies = (
+				6F6DD3A724E449BA003F9437 /* SRGLetterbox */,
+				6F6DD3AA24E449D7003F9437 /* SRGDataProviderCombine */,
+			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
 			productType = "com.apple.product-type.application";
@@ -4603,14 +4311,17 @@
 				6F331CE024D06B8200C096AB /* Sources */,
 				6F331CE124D06B8200C096AB /* Frameworks */,
 				6F331CE224D06B8200C096AB /* Resources */,
-				6F331E3324D0852100C096AB /* Embed Frameworks */,
-				088884C924D4A41300B2E0DD /* Copy Frameworks (Carthage) */,
+				088884C924D4A41300B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Play SRF TV";
+			packageProductDependencies = (
+				6FA84A1724E44B6400B1A56E /* SRGLetterbox */,
+				6FA84A1924E44B6400B1A56E /* SRGDataProviderCombine */,
+			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
 			productType = "com.apple.product-type.application";
@@ -4622,14 +4333,17 @@
 				6F331CF824D06BA200C096AB /* Sources */,
 				6F331CF924D06BA200C096AB /* Frameworks */,
 				6F331CFA24D06BA200C096AB /* Resources */,
-				6F331E3C24D0853800C096AB /* Embed Frameworks */,
-				088884C824D4A40D00B2E0DD /* Copy Frameworks (Carthage) */,
+				088884C824D4A40D00B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Play RTS TV";
+			packageProductDependencies = (
+				6FA84A1B24E44B6D00B1A56E /* SRGLetterbox */,
+				6FA84A1D24E44B6D00B1A56E /* SRGDataProviderCombine */,
+			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
 			productType = "com.apple.product-type.application";
@@ -4641,14 +4355,17 @@
 				6F331D1024D06BB800C096AB /* Sources */,
 				6F331D1124D06BB800C096AB /* Frameworks */,
 				6F331D1224D06BB800C096AB /* Resources */,
-				6F331E4524D0854F00C096AB /* Embed Frameworks */,
-				088884C724D4A40700B2E0DD /* Copy Frameworks (Carthage) */,
+				088884C724D4A40700B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Play RSI TV";
+			packageProductDependencies = (
+				6FA84A1F24E44B7500B1A56E /* SRGLetterbox */,
+				6FA84A2124E44B7500B1A56E /* SRGDataProviderCombine */,
+			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
 			productType = "com.apple.product-type.application";
@@ -4660,14 +4377,17 @@
 				6F331D2824D06BC600C096AB /* Sources */,
 				6F331D2924D06BC600C096AB /* Frameworks */,
 				6F331D2A24D06BC600C096AB /* Resources */,
-				6F331E4E24D0856100C096AB /* Embed Frameworks */,
-				088884C624D4A40100B2E0DD /* Copy Frameworks (Carthage) */,
+				088884C624D4A40100B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Play RTR TV";
+			packageProductDependencies = (
+				6FA84A2324E44B7B00B1A56E /* SRGLetterbox */,
+				6FA84A2524E44B7B00B1A56E /* SRGDataProviderCombine */,
+			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
 			productType = "com.apple.product-type.application";
@@ -4679,14 +4399,17 @@
 				6F331D4024D06C2600C096AB /* Sources */,
 				6F331D4124D06C2600C096AB /* Frameworks */,
 				6F331D4224D06C2600C096AB /* Resources */,
-				6F331E5724D0857400C096AB /* Embed Frameworks */,
-				088884C524D4847000B2E0DD /* Copy Frameworks (Carthage) */,
+				088884C524D4847000B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Play SWI TV";
+			packageProductDependencies = (
+				6FA84A2724E44B8300B1A56E /* SRGLetterbox */,
+				6FA84A2924E44B8300B1A56E /* SRGDataProviderCombine */,
+			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
 			productType = "com.apple.product-type.application";
@@ -4891,6 +4614,10 @@
 				de,
 			);
 			mainGroup = 08C68D461D38D49600BB8AAA;
+			packageReferences = (
+				6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */,
+				6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */,
+			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -5648,7 +5375,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
-		088884C524D4847000B2E0DD /* Copy Frameworks (Carthage) */ = {
+		088884C524D4847000B2E0DD /* Copy Frameworks (SPM beta workaround) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5656,12 +5383,11 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/Mantle.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/ComScore.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/TCCore.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/TCSDK.framework",
+				"$(BUILT_PRODUCTS_DIR)/ComScore.framework",
+				"$(BUILT_PRODUCTS_DIR)/TCCore.framework",
+				"$(BUILT_PRODUCTS_DIR)/TCSDK.framework",
 			);
-			name = "Copy Frameworks (Carthage)";
+			name = "Copy Frameworks (SPM beta workaround)";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -5670,7 +5396,7 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		088884C624D4A40100B2E0DD /* Copy Frameworks (Carthage) */ = {
+		088884C624D4A40100B2E0DD /* Copy Frameworks (SPM beta workaround) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5678,12 +5404,11 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/Mantle.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/ComScore.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/TCCore.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/TCSDK.framework",
+				"$(BUILT_PRODUCTS_DIR)/ComScore.framework",
+				"$(BUILT_PRODUCTS_DIR)/TCCore.framework",
+				"$(BUILT_PRODUCTS_DIR)/TCSDK.framework",
 			);
-			name = "Copy Frameworks (Carthage)";
+			name = "Copy Frameworks (SPM beta workaround)";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -5692,7 +5417,7 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		088884C724D4A40700B2E0DD /* Copy Frameworks (Carthage) */ = {
+		088884C724D4A40700B2E0DD /* Copy Frameworks (SPM beta workaround) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5700,12 +5425,11 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/Mantle.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/ComScore.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/TCCore.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/TCSDK.framework",
+				"$(BUILT_PRODUCTS_DIR)/ComScore.framework",
+				"$(BUILT_PRODUCTS_DIR)/TCCore.framework",
+				"$(BUILT_PRODUCTS_DIR)/TCSDK.framework",
 			);
-			name = "Copy Frameworks (Carthage)";
+			name = "Copy Frameworks (SPM beta workaround)";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -5714,7 +5438,7 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		088884C824D4A40D00B2E0DD /* Copy Frameworks (Carthage) */ = {
+		088884C824D4A40D00B2E0DD /* Copy Frameworks (SPM beta workaround) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5722,12 +5446,11 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/Mantle.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/ComScore.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/TCCore.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/TCSDK.framework",
+				"$(BUILT_PRODUCTS_DIR)/ComScore.framework",
+				"$(BUILT_PRODUCTS_DIR)/TCCore.framework",
+				"$(BUILT_PRODUCTS_DIR)/TCSDK.framework",
 			);
-			name = "Copy Frameworks (Carthage)";
+			name = "Copy Frameworks (SPM beta workaround)";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -5736,7 +5459,7 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		088884C924D4A41300B2E0DD /* Copy Frameworks (Carthage) */ = {
+		088884C924D4A41300B2E0DD /* Copy Frameworks (SPM beta workaround) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5744,12 +5467,11 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/Mantle.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/ComScore.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/TCCore.framework",
-				"$(SRCROOT)/Carthage/Build/tvOS/TCSDK.framework",
+				"$(BUILT_PRODUCTS_DIR)/ComScore.framework",
+				"$(BUILT_PRODUCTS_DIR)/TCCore.framework",
+				"$(BUILT_PRODUCTS_DIR)/TCSDK.framework",
 			);
-			name = "Copy Frameworks (Carthage)";
+			name = "Copy Frameworks (SPM beta workaround)";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -7921,7 +7643,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -7952,12 +7678,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play SRF";
 			};
@@ -7982,12 +7713,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play SRF";
 			};
@@ -8012,12 +7748,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play SRF";
 			};
@@ -8039,7 +7780,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -8070,12 +7815,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play RTS";
 			};
@@ -8100,12 +7850,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play RTS";
 			};
@@ -8130,12 +7885,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play RTS";
 			};
@@ -8157,7 +7917,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -8188,12 +7952,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play RSI";
 			};
@@ -8218,12 +7987,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play RSI";
 			};
@@ -8248,12 +8022,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play RSI";
 			};
@@ -8275,7 +8054,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -8306,12 +8089,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play RTR";
 			};
@@ -8336,12 +8124,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play RTR";
 			};
@@ -8366,12 +8159,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play RTR";
 			};
@@ -8393,7 +8191,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
@@ -8424,12 +8226,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play SWI";
 			};
@@ -8454,12 +8261,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play SWI";
 			};
@@ -8484,12 +8296,17 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "Play SWI";
 			};
@@ -8645,7 +8462,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -8674,7 +8494,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -8702,7 +8525,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -8731,7 +8557,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -8759,7 +8588,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -8788,7 +8620,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -8816,7 +8651,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -8845,7 +8683,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -8872,7 +8713,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -8900,7 +8744,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -8993,7 +8840,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -9022,7 +8872,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -9051,7 +8904,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -9080,7 +8936,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -9108,7 +8967,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -9200,7 +9062,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -9231,7 +9096,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -9262,7 +9130,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -9293,7 +9164,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -9323,7 +9197,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -9353,7 +9230,11 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9416,7 +9297,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9482,7 +9367,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9548,7 +9437,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9580,7 +9473,11 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9643,7 +9540,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9709,7 +9610,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9775,7 +9680,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9807,7 +9716,11 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -9870,7 +9783,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9936,7 +9853,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10002,7 +9923,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10034,7 +9959,11 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -10097,7 +10026,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10163,7 +10096,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10229,7 +10166,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10260,7 +10201,11 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -10322,7 +10267,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10387,7 +10336,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10452,7 +10405,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10481,14 +10438,12 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
@@ -10548,11 +10503,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -10562,13 +10512,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play SRF";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -10622,11 +10576,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -10636,13 +10585,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play SRF";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -10696,11 +10649,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -10710,13 +10658,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play SRF";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -10742,14 +10694,12 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
@@ -10809,11 +10759,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -10823,13 +10768,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play RTS";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -10883,11 +10832,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -10897,13 +10841,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play RTS";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -10957,11 +10905,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -10971,13 +10914,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play RTS";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -11003,14 +10950,12 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
@@ -11070,11 +11015,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -11084,13 +11024,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play RSI";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -11144,11 +11088,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -11158,13 +11097,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play RSI";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -11218,11 +11161,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -11232,13 +11170,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play RSI";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -11264,14 +11206,12 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
@@ -11331,11 +11271,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -11345,13 +11280,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play RTR";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -11405,11 +11344,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -11419,13 +11353,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play RTR";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -11479,11 +11417,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -11493,13 +11426,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play RTR";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -11525,14 +11462,12 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
@@ -11592,11 +11527,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -11606,13 +11536,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play SWI";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -11666,11 +11600,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -11680,13 +11609,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play SWI";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -11740,11 +11673,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -11754,13 +11682,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "Play SWI";
 				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
@@ -12003,6 +11935,88 @@
 			defaultConfigurationName = Nightly;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
+			requirement = {
+				branch = "feature/spm-support";
+				kind = branch;
+			};
+		};
+		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
+			requirement = {
+				branch = "feature/spm-support";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6F6DD3A724E449BA003F9437 /* SRGLetterbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
+			productName = SRGLetterbox;
+		};
+		6F6DD3AA24E449D7003F9437 /* SRGDataProviderCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
+			productName = SRGDataProviderCombine;
+		};
+		6FA84A1724E44B6400B1A56E /* SRGLetterbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
+			productName = SRGLetterbox;
+		};
+		6FA84A1924E44B6400B1A56E /* SRGDataProviderCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
+			productName = SRGDataProviderCombine;
+		};
+		6FA84A1B24E44B6D00B1A56E /* SRGLetterbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
+			productName = SRGLetterbox;
+		};
+		6FA84A1D24E44B6D00B1A56E /* SRGDataProviderCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
+			productName = SRGDataProviderCombine;
+		};
+		6FA84A1F24E44B7500B1A56E /* SRGLetterbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
+			productName = SRGLetterbox;
+		};
+		6FA84A2124E44B7500B1A56E /* SRGDataProviderCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
+			productName = SRGDataProviderCombine;
+		};
+		6FA84A2324E44B7B00B1A56E /* SRGLetterbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
+			productName = SRGLetterbox;
+		};
+		6FA84A2524E44B7B00B1A56E /* SRGDataProviderCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
+			productName = SRGDataProviderCombine;
+		};
+		6FA84A2724E44B8300B1A56E /* SRGLetterbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
+			productName = SRGLetterbox;
+		};
+		6FA84A2924E44B8300B1A56E /* SRGDataProviderCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
+			productName = SRGDataProviderCombine;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 08C68D471D38D49600BB8AAA /* Project object */;
 }
