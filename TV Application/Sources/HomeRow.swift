@@ -7,7 +7,7 @@
 import SRGDataProviderCombine
 
 class HomeRow: ObservableObject, Identifiable {
-    enum Id : Equatable {
+    enum Id: Equatable {
         case trending
         case latest
         case mostPopular
@@ -92,5 +92,11 @@ class HomeRow: ObservableObject, Identifiable {
     
     private static func moduleTitle(for type: SRGModuleType) -> String {
         return type == .event ? "Event" : "Module"
+    }
+}
+
+extension HomeRow: Equatable {
+    static func == (lhs: HomeRow, rhs: HomeRow) -> Bool {
+        return lhs.id == rhs.id
     }
 }

@@ -29,6 +29,28 @@ struct HomeSwimlane: View {
     }
 }
 
+struct HomeHeroSwimlane: View {
+    @ObservedObject var row: HomeRow
+    
+    var body: some View {
+        ScrollView(.horizontal) {
+            HStack {
+                if row.medias.count > 0 {
+                    ForEach(row.medias, id: \.uid) { media in
+                        HeroCell(media: media)
+                    }
+                }
+                else {
+                    ForEach(0..<2) { _ in
+                        HeroCell(media: nil)
+                    }
+                }
+            }
+            .padding([.leading, .trailing], VideosView.horizontalPadding)
+        }
+    }
+}
+
 struct HomeSwimlaneHeader: View {
     let row: HomeRow
     
@@ -49,8 +71,13 @@ struct VideosView: View {
         ScrollView {
             VStack {
                 ForEach(model.rows) { row in
-                    Section(header: HomeSwimlaneHeader(row: row)) {
-                        HomeSwimlane(row: row)
+                    if row == model.rows.first {
+                        HomeHeroSwimlane(row: row)
+                    }
+                    else {
+                        Section(header: HomeSwimlaneHeader(row: row)) {
+                            HomeSwimlane(row: row)
+                        }
                     }
                 }
             }
