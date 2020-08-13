@@ -73,11 +73,11 @@ class HomeModel: ObservableObject {
     }
     
     private func loadModules(with type: SRGModuleType) {
-        guard Self.configuredRowIds.contains(.latestForModule(nil, type: .event)) else { return }
+        guard Self.configuredRowIds.contains(.latestForModule(nil, type: type)) else { return }
         
         SRGDataProvider.current!.modules(for: ApplicationConfiguration.vendor, type: type)
             .map { result in
-                result.modules.map { HomeRow.Id.latestForModule($0, type: .event) }
+                result.modules.map { HomeRow.Id.latestForModule($0, type: type) }
             }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
