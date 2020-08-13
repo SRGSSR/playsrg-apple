@@ -39,13 +39,13 @@ class HomeRow: ObservableObject, Identifiable {
         let dataProvider = SRGDataProvider.current!
         switch id {
             case .trending:
-                return dataProvider.tvTrendingMedias(for: .RTS)
+                return dataProvider.tvTrendingMedias(for: ApplicationConfiguration.vendor)
                     .map(\.medias)
                     .replaceError(with: [])
                     .receive(on: DispatchQueue.main)
                     .assign(to: \.medias, on: self)
             case .latest:
-                return dataProvider.tvLatestMedias(for: .RTS)
+                return dataProvider.tvLatestMedias(for: ApplicationConfiguration.vendor)
                     .map(\.medias)
                     .replaceError(with: [])
                     .receive(on: DispatchQueue.main)

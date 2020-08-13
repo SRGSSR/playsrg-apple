@@ -13,8 +13,15 @@ struct HomeSwimlane: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                ForEach(row.medias, id: \.uid) { media in
-                    MediaCell(media: media)
+                if row.medias.count > 0 {
+                    ForEach(row.medias, id: \.uid) { media in
+                        MediaCell(media: media)
+                    }
+                }
+                else {
+                    ForEach(0..<10) { _ in
+                        MediaCell(media: nil)
+                    }
                 }
             }
             .padding([.leading, .trailing], VideosView.horizontalPadding)
@@ -35,11 +42,20 @@ struct HomeSwimlaneHeader: View {
 }
 
 struct MediaCell: View {
-    let media: SRGMedia
+    let media: SRGMedia?
+    
+    var title: String {
+        guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
+        return media.title
+    }
+    
+    var redactionReason: RedactionReasons {
+        return media == nil ? .placeholder : .init()
+    }
     
     var body: some View {
         Button(action: { /* Open the player */ }) {
-            Text(media.title)
+            Text(title)
                 .padding()
                 .frame(width: 375, height: 210)
                 .background(Color.red)
@@ -47,6 +63,7 @@ struct MediaCell: View {
         .buttonStyle(CardButtonStyle())
         .padding(.top, 20)
         .padding(.bottom, 80)
+        .redacted(reason: redactionReason)
     }
 }
 

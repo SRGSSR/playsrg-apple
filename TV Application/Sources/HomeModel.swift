@@ -59,7 +59,7 @@ class HomeModel: ObservableObject {
         cancellables = []
         self.refresh(rows: rows)
         
-        SRGDataProvider.current!.tvTopics(for: .RTS)
+        SRGDataProvider.current!.tvTopics(for: ApplicationConfiguration.vendor)
             .map {
                 return $0.0.map { HomeRow(id: .latestForTopic($0)) }
             }
