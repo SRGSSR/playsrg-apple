@@ -8,7 +8,7 @@ import SRGDataProviderCombine
 
 class HomeModel: ObservableObject {
     // TODO: Will later be generated from application configuration
-    private static let defaultRowIds: [HomeRow.Id] = [.trending, .latest, .latestForModule(nil, type: .event), .latestForTopic(nil)]
+    private static let configuredRowIds: [HomeRow.Id] = [.trending, .latest, .latestForModule(nil, type: .event), .latestForTopic(nil)]
     
     private var eventRowIds: [HomeRow.Id] = []
     private var topicRowIds: [HomeRow.Id] = []
@@ -16,6 +16,16 @@ class HomeModel: ObservableObject {
     @Published private(set) var rows = [HomeRow]()
     
     private var cancellables = Set<AnyCancellable>()
+    
+    func refresh() {
+        cancellables = []
+        
+        synchronizeRows()
+        loadRows()
+        
+        loadModules(with: .event)
+        loadTopics()
+    }
     
     private func addRow(with id: HomeRow.Id, to rows: inout [HomeRow]) {
         if let existingRow = self.rows.first(where: { $0.id == id }) {
@@ -34,7 +44,7 @@ class HomeModel: ObservableObject {
     
     private func synchronizeRows() {
         var updatedRows = [HomeRow]()
-        for id in Self.defaultRowIds {
+        for id in Self.configuredRowIds {
             if case let .latestForModule(_, type: type) = id, type == .event {
                 addRows(with: eventRowIds, to: &updatedRows)
             }
@@ -48,7 +58,7 @@ class HomeModel: ObservableObject {
         rows = updatedRows
     }
     
-    func loadRows(with ids: [HomeRow.Id]? = nil) {
+    private func loadRows(with ids: [HomeRow.Id]? = nil) {
         func reloadedRows(with ids: [HomeRow.Id]?) -> [HomeRow] {
             guard let ids = ids else { return rows }
             return rows.filter { ids.contains($0.id) }
@@ -60,17 +70,11 @@ class HomeModel: ObservableObject {
             }
         }
     }
-            
-    func refresh() {
-        cancellables = []
+    
+    private func loadModules(with type: SRGModuleType) {
+        guard Self.configuredRowIds.contains(.latestForModule(nil, type: .event)) else { return }
         
-        self.synchronizeRows()
-        self.loadRows()
-        
-        let vendor = ApplicationConfiguration.vendor
-        let dataProvider = SRGDataProvider.current!
-        
-        dataProvider.modules(for: vendor, type: .event)
+        SRGDataProvider.current!.modules(for: ApplicationConfiguration.vendor, type: type)
             .map { result in
                 result.modules.map { HomeRow.Id.latestForModule($0, type: .event) }
             }
@@ -82,8 +86,12 @@ class HomeModel: ObservableObject {
                 self.loadRows(with: rowIds)
             }
             .store(in: &cancellables)
+    }
+    
+    private func loadTopics() {
+        guard Self.configuredRowIds.contains(.latestForTopic(nil)) else { return }
         
-        dataProvider.tvTopics(for: vendor)
+        SRGDataProvider.current!.tvTopics(for: ApplicationConfiguration.vendor)
             .map { result in
                 result.topics.map { HomeRow.Id.latestForTopic($0) }
             }
