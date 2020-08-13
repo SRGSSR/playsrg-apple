@@ -46,7 +46,9 @@ class HomeRow: ObservableObject, Identifiable {
         self.id = id
     }
     
-    func load() -> AnyCancellable? {
+    typealias Output = (medias: [SRGMedia], response: URLResponse)
+    
+    private func mediasPublisher() -> AnyPublisher<Output, Error>? {
         let dataProvider = SRGDataProvider.current!
         let vendor = ApplicationConfiguration.vendor
         let pageSize = ApplicationConfiguration.pageSize
@@ -55,43 +57,37 @@ class HomeRow: ObservableObject, Identifiable {
             case .trending:
                 return dataProvider.tvTrendingMedias(for: vendor, limit: pageSize, editorialLimit: ApplicationConfiguration.tvTrendingEditorialLimit,
                                                      episodesOnly: ApplicationConfiguration.tvTrendingEpisodesOnly)
-                    .map(\.medias)
-                    .replaceError(with: [])
-                    .receive(on: DispatchQueue.main)
-                    .assign(to: \.medias, on: self)
             case .latest:
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
-                    .map(\.medias)
-                    .replaceError(with: [])
-                    .receive(on: DispatchQueue.main)
-                    .assign(to: \.medias, on: self)
+                    .map { ($0.medias, $0.response) }
+                    .eraseToAnyPublisher()
             case .mostPopular:
                 return dataProvider.tvMostPopularMedias(for: vendor, pageSize: pageSize)
-                    .map(\.medias)
-                    .replaceError(with: [])
-                    .receive(on: DispatchQueue.main)
-                    .assign(to: \.medias, on: self)
+                    .map { ($0.medias, $0.response) }
+                    .eraseToAnyPublisher()
             case .soonExpiring:
                 return dataProvider.tvSoonExpiringMedias(for: vendor, pageSize: pageSize)
-                    .map(\.medias)
-                    .replaceError(with: [])
-                    .receive(on: DispatchQueue.main)
-                    .assign(to: \.medias, on: self)
+                    .map { ($0.medias, $0.response) }
+                    .eraseToAnyPublisher()
             case let .latestForModule(module, type: _):
                 guard let urn = module?.urn else { return nil }
                 return dataProvider.latestMediasForModule(withUrn: urn, pageSize: pageSize)
-                    .map(\.medias)
-                    .replaceError(with: [])
-                    .receive(on: DispatchQueue.main)
-                    .assign(to: \.medias, on: self)
+                    .map { ($0.medias, $0.response) }
+                    .eraseToAnyPublisher()
             case let .latestForTopic(topic):
                 guard let urn = topic?.urn else { return nil }
                 return dataProvider.latestMediasForTopic(withUrn: urn, pageSize: pageSize)
-                    .map(\.medias)
-                    .replaceError(with: [])
-                    .receive(on: DispatchQueue.main)
-                    .assign(to: \.medias, on: self)
+                    .map { ($0.medias, $0.response) }
+                    .eraseToAnyPublisher()
         }
+    }
+    
+    func load() -> AnyCancellable? {
+        return mediasPublisher()?
+            .map(\.medias)
+            .replaceError(with: [])
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.medias, on: self)
     }
     
     private static func moduleTitle(for type: SRGModuleType) -> String {
