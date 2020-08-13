@@ -41,32 +41,6 @@ struct HomeSwimlaneHeader: View {
     }
 }
 
-struct MediaCell: View {
-    let media: SRGMedia?
-    
-    var title: String {
-        guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
-        return media.title
-    }
-    
-    var redactionReason: RedactionReasons {
-        return media == nil ? .placeholder : .init()
-    }
-    
-    var body: some View {
-        Button(action: { /* Open the player */ }) {
-            Text(title)
-                .padding()
-                .frame(width: 375, height: 211)
-                .background(Color.red)
-        }
-        .buttonStyle(CardButtonStyle())
-        .padding(.top, 20)
-        .padding(.bottom, 80)
-        .redacted(reason: redactionReason)
-    }
-}
-
 struct VideosView: View {
     @StateObject var model = HomeModel()
     static let horizontalPadding: CGFloat = 40
