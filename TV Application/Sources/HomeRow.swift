@@ -11,7 +11,7 @@ class HomeRow: ObservableObject, Identifiable {
         case trending
         case latest
         case latestForTopic(_ topic: SRGTopic?)
-        case latestForModule(_ module: SRGModule?)
+        case latestForModule(_ module: SRGModule?, type: SRGModuleType)
     }
     
     let id: Id
@@ -24,8 +24,13 @@ class HomeRow: ObservableObject, Identifiable {
                 return "Trending now"
             case .latest:
                 return "Latest videos"
-            case let .latestForModule(module):
-                return module?.title ?? "Module"
+            case let .latestForModule(module, type):
+                if let module = module {
+                    return module.title
+                }
+                else {
+                    return Self.moduleTitle(for: type)
+                }
             case let .latestForTopic(topic):
                 return topic?.title ?? "Topic"
         }
@@ -33,6 +38,10 @@ class HomeRow: ObservableObject, Identifiable {
     
     init(id: Id) {
         self.id = id
+    }
+    
+    static func moduleTitle(for type: SRGModuleType) -> String {
+        return type == .event ? "Event" : "Module"
     }
     
     func load() -> AnyCancellable? {
@@ -53,7 +62,7 @@ class HomeRow: ObservableObject, Identifiable {
                     .replaceError(with: [])
                     .receive(on: DispatchQueue.main)
                     .assign(to: \.medias, on: self)
-            case let .latestForModule(module):
+            case let .latestForModule(module, type: _):
                 guard let urn = module?.urn else { return nil }
                 return dataProvider.latestMediasForModule(withUrn: urn, pageSize: pageSize)
                     .map(\.medias)

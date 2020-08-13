@@ -8,9 +8,9 @@ import SRGDataProviderCombine
 
 class HomeModel: ObservableObject {
     // TODO: Will later be generated from application configuration
-    private static let defaultRowIds: [HomeRow.Id] = [.trending, .latest, .latestForModule(nil), .latestForTopic(nil)]
+    private static let defaultRowIds: [HomeRow.Id] = [.trending, .latest, .latestForModule(nil, type: .event), .latestForTopic(nil)]
     
-    private var moduleRowIds: [HomeRow.Id] = []
+    private var eventRowIds: [HomeRow.Id] = []
     private var topicRowIds: [HomeRow.Id] = []
     
     @Published private(set) var rows = [HomeRow]()
@@ -35,8 +35,8 @@ class HomeModel: ObservableObject {
     private func synchronizeRows() {
         var updatedRows = [HomeRow]()
         for id in Self.defaultRowIds {
-            if case .latestForModule = id {
-                addRows(with: moduleRowIds, to: &updatedRows)
+            if case let .latestForModule(_, type: type) = id, type == .event {
+                addRows(with: eventRowIds, to: &updatedRows)
             }
             else if case .latestForTopic = id {
                 addRows(with: topicRowIds, to: &updatedRows)
@@ -72,12 +72,12 @@ class HomeModel: ObservableObject {
         
         dataProvider.modules(for: vendor, type: .event)
             .map { result in
-                result.modules.map { HomeRow.Id.latestForModule($0) }
+                result.modules.map { HomeRow.Id.latestForModule($0, type: .event) }
             }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
             .sink { rowIds in
-                self.moduleRowIds = rowIds
+                self.eventRowIds = rowIds
                 self.synchronizeRows()
                 self.loadRows(with: rowIds)
             }
