@@ -51,7 +51,8 @@ class HomeRow: ObservableObject, Identifiable {
         
         switch id {
             case .trending:
-                return dataProvider.tvTrendingMedias(for: vendor, pageSize: pageSize)
+                return dataProvider.tvTrendingMedias(for: vendor, limit: pageSize, editorialLimit: ApplicationConfiguration.tvTrendingEditorialLimit,
+                                                     episodesOnly: ApplicationConfiguration.tvTrendingEpisodesOnly)
                     .map(\.medias)
                     .replaceError(with: [])
                     .receive(on: DispatchQueue.main)
