@@ -7,67 +7,92 @@
 import SRGDataProviderCombine
 
 class HomeModel: ObservableObject {
-    private static let rowIds: [HomeRow.Id] = [.trending, .latest, .topics]
+    // TODO: Will later be generated from application configuration
+    private static let defaultRowIds: [HomeRow.Id] = [.trending, .latest, .latestForModule(nil), .latestForTopic(nil)]
+    
+    private var moduleRowIds: [HomeRow.Id] = []
+    private var topicRowIds: [HomeRow.Id] = []
     
     @Published private(set) var rows = [HomeRow]()
-    var cancellables = Set<AnyCancellable>()
     
-    func findRow(id: HomeRow.Id) -> HomeRow? {
-        return rows.first(where: { $0.id == id })
+    private var cancellables = Set<AnyCancellable>()
+    
+    private func addRow(with id: HomeRow.Id, to rows: inout [HomeRow]) {
+        if let existingRow = self.rows.first(where: { $0.id == id }) {
+            rows.append(existingRow)
+        }
+        else {
+            rows.append(HomeRow(id: id))
+        }
     }
     
-    func updateRows(topicRows: [HomeRow] = []) {
+    private func addRows(with ids: [HomeRow.Id], to rows: inout [HomeRow]) {
+        for id in ids {
+            addRow(with: id, to: &rows)
+        }
+    }
+    
+    private func synchronizeRows() {
         var updatedRows = [HomeRow]()
-        
-        for id in Self.rowIds {
-            if id == .topics {
-                for row in topicRows {
-                    if let existingRow = findRow(id: row.id) {
-                        updatedRows.append(existingRow)
-                    }
-                    else {
-                        updatedRows.append(row)
-                    }
-                }
+        for id in Self.defaultRowIds {
+            if case .latestForModule = id {
+                addRows(with: moduleRowIds, to: &updatedRows)
+            }
+            else if case .latestForTopic = id {
+                addRows(with: topicRowIds, to: &updatedRows)
             }
             else {
-                if let existingRow = findRow(id: id) {
-                    updatedRows.append(existingRow)
-                }
-                else {
-                    updatedRows.append(HomeRow(id: id))
-                }
+                addRow(with: id, to: &updatedRows)
             }
         }
-        
         rows = updatedRows
     }
     
-    init() {
-        updateRows()
-    }
-    
-    func refresh(rows: [HomeRow]) {
-        for row in rows {
+    func loadRows(with ids: [HomeRow.Id]? = nil) {
+        func reloadedRows(with ids: [HomeRow.Id]?) -> [HomeRow] {
+            guard let ids = ids else { return rows }
+            return rows.filter { ids.contains($0.id) }
+        }
+        
+        for row in reloadedRows(with: ids) {
             if let cancellable = row.load() {
                 cancellables.insert(cancellable)
             }
         }
     }
-    
+            
     func refresh() {
         cancellables = []
-        self.refresh(rows: rows)
         
-        SRGDataProvider.current!.tvTopics(for: ApplicationConfiguration.vendor)
-            .map {
-                return $0.0.map { HomeRow(id: .latestForTopic($0)) }
+        self.synchronizeRows()
+        self.loadRows()
+        
+        let vendor = ApplicationConfiguration.vendor
+        let dataProvider = SRGDataProvider.current!
+        
+        dataProvider.modules(for: vendor, type: .event)
+            .map { result in
+                result.modules.map { HomeRow.Id.latestForModule($0) }
             }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
-            .sink { topicRows in
-                self.updateRows(topicRows: topicRows)
-                self.refresh(rows: topicRows)
+            .sink { rowIds in
+                self.moduleRowIds = rowIds
+                self.synchronizeRows()
+                self.loadRows(with: rowIds)
+            }
+            .store(in: &cancellables)
+        
+        dataProvider.tvTopics(for: vendor)
+            .map { result in
+                result.topics.map { HomeRow.Id.latestForTopic($0) }
+            }
+            .replaceError(with: [])
+            .receive(on: DispatchQueue.main)
+            .sink { rowIds in
+                self.topicRowIds = rowIds
+                self.synchronizeRows()
+                self.loadRows(with: rowIds)
             }
             .store(in: &cancellables)
     }

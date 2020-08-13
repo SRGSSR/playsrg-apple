@@ -57,7 +57,7 @@ struct MediaCell: View {
         Button(action: { /* Open the player */ }) {
             Text(title)
                 .padding()
-                .frame(width: 375, height: 210)
+                .frame(width: 375, height: 211)
                 .background(Color.red)
         }
         .buttonStyle(CardButtonStyle())

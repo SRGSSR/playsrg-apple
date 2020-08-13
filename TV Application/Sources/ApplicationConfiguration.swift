@@ -7,5 +7,6 @@
 import SRGDataProviderModel
 
 struct ApplicationConfiguration {
-    static let vendor = SRGVendor.RTS
+    static let vendor: SRGVendor = .RTS
+    static let pageSize: UInt = 20
 }
