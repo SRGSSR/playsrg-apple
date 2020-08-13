@@ -10,13 +10,15 @@ class HomeRow: ObservableObject, Identifiable {
     enum Id : Equatable {
         case trending
         case latest
+        case mostPopular
+        case soonExpiring
         case latestForTopic(_ topic: SRGTopic?)
         case latestForModule(_ module: SRGModule?, type: SRGModuleType)
     }
     
     let id: Id
     
-    @Published var medias: [SRGMedia] = []
+    @Published private(set) var medias: [SRGMedia] = []
     
     var title: String {
         switch id {
@@ -24,6 +26,10 @@ class HomeRow: ObservableObject, Identifiable {
                 return "Trending now"
             case .latest:
                 return "Latest videos"
+            case .mostPopular:
+                return "Popular"
+            case .soonExpiring:
+                return "Soon expiring"
             case let .latestForModule(module, type):
                 if let module = module {
                     return module.title
@@ -38,10 +44,6 @@ class HomeRow: ObservableObject, Identifiable {
     
     init(id: Id) {
         self.id = id
-    }
-    
-    static func moduleTitle(for type: SRGModuleType) -> String {
-        return type == .event ? "Event" : "Module"
     }
     
     func load() -> AnyCancellable? {
@@ -63,6 +65,18 @@ class HomeRow: ObservableObject, Identifiable {
                     .replaceError(with: [])
                     .receive(on: DispatchQueue.main)
                     .assign(to: \.medias, on: self)
+            case .mostPopular:
+                return dataProvider.tvMostPopularMedias(for: vendor, pageSize: pageSize)
+                    .map(\.medias)
+                    .replaceError(with: [])
+                    .receive(on: DispatchQueue.main)
+                    .assign(to: \.medias, on: self)
+            case .soonExpiring:
+                return dataProvider.tvSoonExpiringMedias(for: vendor, pageSize: pageSize)
+                    .map(\.medias)
+                    .replaceError(with: [])
+                    .receive(on: DispatchQueue.main)
+                    .assign(to: \.medias, on: self)
             case let .latestForModule(module, type: _):
                 guard let urn = module?.urn else { return nil }
                 return dataProvider.latestMediasForModule(withUrn: urn, pageSize: pageSize)
@@ -78,5 +92,9 @@ class HomeRow: ObservableObject, Identifiable {
                     .receive(on: DispatchQueue.main)
                     .assign(to: \.medias, on: self)
         }
+    }
+    
+    private static func moduleTitle(for type: SRGModuleType) -> String {
+        return type == .event ? "Event" : "Module"
     }
 }

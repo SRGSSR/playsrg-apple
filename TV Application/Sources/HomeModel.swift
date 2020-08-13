@@ -8,7 +8,8 @@ import SRGDataProviderCombine
 
 class HomeModel: ObservableObject {
     // TODO: Will later be generated from application configuration
-    private static let configuredRowIds: [HomeRow.Id] = [.trending, .latest, .latestForModule(nil, type: .event), .latestForTopic(nil)]
+    private static let configuredRowIds: [HomeRow.Id] = [.trending, .latest, .latestForModule(nil, type: .event), .latestForTopic(nil),
+                                                         .mostPopular, .soonExpiring]
     
     private var eventRowIds: [HomeRow.Id] = []
     private var topicRowIds: [HomeRow.Id] = []
