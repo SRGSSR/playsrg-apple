@@ -6,12 +6,21 @@
 
 import SRGDataProviderCombine
 
+/**
+ *  Abstract base class for homepage rows.
+ */
 class HomeRow: Identifiable, Equatable {
+    /**
+     *  The appearance to apply to the row.
+     */
     enum Appearance: Equatable {
         case `default`
         case hero
     }
     
+    /**
+     *  The row identifier.
+     */
     enum Id: Equatable {
         case trending(appearance: Appearance)
         case latest
@@ -22,6 +31,9 @@ class HomeRow: Identifiable, Equatable {
         case topics
     }
     
+    /**
+     *  Row factory method.
+     */
     static func makeRow(for id: Id) -> HomeRow {
         switch id {
             case .topics:
@@ -85,7 +97,7 @@ final class HomeMediaRow: HomeRow, ObservableObject {
             .assign(to: \.medias, on: self)
     }
     
-    typealias Output = (medias: [SRGMedia], response: URLResponse)
+    private typealias Output = (medias: [SRGMedia], response: URLResponse)
     
     private func mediasPublisher() -> AnyPublisher<Output, Error>? {
         let dataProvider = SRGDataProvider.current!

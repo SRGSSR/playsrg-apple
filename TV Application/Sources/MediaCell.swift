@@ -8,8 +8,8 @@ import SRGDataProviderModel
 import SwiftUI
 
 struct MediaCell: View {
-    static let cellWidth: CGFloat = 375
-    static let cellSize = CGSize(width: Self.cellWidth, height: Self.cellWidth * 9 / 16)
+    private static let cellWidth: CGFloat = 375
+    private static let cellSize = CGSize(width: Self.cellWidth, height: Self.cellWidth * 9 / 16)
     
     let media: SRGMedia?
     

@@ -6,6 +6,9 @@
 
 import SwiftUI
 
+/**
+ *  Factory swimlane. Installs the proper type of swimlane based on the row type.
+ */
 struct HomeSwimlane: View {
     let row: HomeRow
     
