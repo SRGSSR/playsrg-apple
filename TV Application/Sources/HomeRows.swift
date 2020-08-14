@@ -7,8 +7,13 @@
 import SRGDataProviderCombine
 
 class HomeRow: Identifiable, Equatable {
+    enum Appearance: Equatable {
+        case `default`
+        case hero
+    }
+    
     enum Id: Equatable {
-        case trending
+        case trending(appearance: Appearance)
         case latest
         case mostPopular
         case soonExpiring

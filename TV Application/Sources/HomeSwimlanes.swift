@@ -8,11 +8,10 @@ import SwiftUI
 
 struct HomeSwimlane: View {
     let row: HomeRow
-    let top: Bool
     
     var body: some View {
         if let row = row as? HomeMediaRow {
-            if top {
+            if case let .trending(appearance: appearance) = row.id, appearance == .hero {
                 HomeMediaHeroSwimlane(row: row)
             }
             else {

@@ -15,7 +15,7 @@ struct VideosView: View {
         ScrollView {
             VStack {
                 ForEach(model.rows) { row in
-                    HomeSwimlane(row: row, top: model.rows.first == row)
+                    HomeSwimlane(row: row)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
