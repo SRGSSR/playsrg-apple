@@ -82,7 +82,7 @@ struct HomeTopicSwimlane: View {
                     }
                 }
                 else {
-                    ForEach(0..<2) { _ in
+                    ForEach(0..<10) { _ in
                         TopicCell(topic: nil)
                     }
                 }
