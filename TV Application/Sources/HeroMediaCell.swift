@@ -33,6 +33,8 @@ struct HeroMediaCell: View {
                 Rectangle()
                     .fill(Color(white: 0, opacity: 0.4))
                 Text(title)
+                    .lineLimit(2)
+                    .foregroundColor(.white)
                     .padding()
             }
             .frame(width: Self.cellSize.width, height: Self.cellSize.height)

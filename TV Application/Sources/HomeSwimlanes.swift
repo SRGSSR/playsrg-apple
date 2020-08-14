@@ -104,7 +104,6 @@ struct HomeSwimlaneHeader: View {
                 .font(.headline)
                 .padding([.leading, .trailing], VideosView.horizontalPadding)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.blue)
         }
     }
 }
