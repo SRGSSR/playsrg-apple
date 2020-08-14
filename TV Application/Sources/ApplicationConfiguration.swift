@@ -11,4 +11,14 @@ struct ApplicationConfiguration {
     static let pageSize: UInt = 20
     static let tvTrendingEditorialLimit: UInt = 3
     static let tvTrendingEpisodesOnly: Bool = false
+    
+    static let rowIds: [HomeRow.Id] = [
+        .trending(appearance: .hero),
+        .topics,
+        .latestForModule(nil, type: .event),
+        .latestForTopic(nil),
+        .latest,
+        .mostPopular,
+        .soonExpiring
+    ]
 }

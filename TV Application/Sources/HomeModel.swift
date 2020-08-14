@@ -7,16 +7,7 @@
 import SRGDataProviderCombine
 
 class HomeModel: ObservableObject {
-    // TODO: Will later be generated from application configuration
-    private static let configuredRowIds: [HomeRow.Id] = [
-        .trending(appearance: .hero),
-        .topics,
-        .latestForModule(nil, type: .event),
-        .latestForTopic(nil),
-        .latest,
-        .mostPopular,
-        .soonExpiring
-    ]
+    private let rowIds = ApplicationConfiguration.rowIds
     
     private var eventRowIds: [HomeRow.Id] = []
     private var topicRowIds: [HomeRow.Id] = []
@@ -52,7 +43,7 @@ class HomeModel: ObservableObject {
     
     private func synchronizeRows() {
         var updatedRows = [HomeRow]()
-        for id in Self.configuredRowIds {
+        for id in rowIds {
             if case let .latestForModule(_, type: type) = id, type == .event {
                 addRows(with: eventRowIds, to: &updatedRows)
             }
@@ -80,7 +71,7 @@ class HomeModel: ObservableObject {
     }
     
     private func loadModules(with type: SRGModuleType) {
-        guard Self.configuredRowIds.contains(.latestForModule(nil, type: type)) else { return }
+        guard rowIds.contains(.latestForModule(nil, type: type)) else { return }
         
         SRGDataProvider.current!.modules(for: ApplicationConfiguration.vendor, type: type)
             .map { result in
@@ -97,7 +88,7 @@ class HomeModel: ObservableObject {
     }
     
     private func loadTopics() {
-        guard Self.configuredRowIds.contains(.latestForTopic(nil)) else { return }
+        guard rowIds.contains(.latestForTopic(nil)) else { return }
         
         SRGDataProvider.current!.tvTopics(for: ApplicationConfiguration.vendor)
             .map { result in
