@@ -13,12 +13,12 @@ struct ApplicationConfiguration {
     static let tvTrendingEpisodesOnly: Bool = false
     
     static let rowIds: [HomeRow.Id] = [
-        .trending(appearance: .hero),
-        .topics,
-        .latestForModule(nil, type: .event),
-        .latestForTopic(nil),
-        .latest,
-        .mostPopular,
-        .soonExpiring
+        .tvTrending(appearance: .hero),
+        .tvTopics,
+        .tvLatestForModule(nil, type: .event),
+        .tvLatestForTopic(nil),
+        .tvLatest,
+        .tvMostPopular,
+        .tvSoonExpiring
     ]
 }

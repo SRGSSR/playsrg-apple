@@ -14,7 +14,7 @@ struct HomeSwimlane: View {
     
     var body: some View {
         if let row = row as? HomeMediaRow {
-            if case let .trending(appearance: appearance) = row.id, appearance == .hero {
+            if case let .tvTrending(appearance: appearance) = row.id, appearance == .hero {
                 HomeMediaHeroSwimlane(row: row)
             }
             else {

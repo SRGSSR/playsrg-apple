@@ -44,10 +44,10 @@ class HomeModel: ObservableObject {
     private func synchronizeRows() {
         var updatedRows = [HomeRow]()
         for id in rowIds {
-            if case let .latestForModule(_, type: type) = id, type == .event {
+            if case let .tvLatestForModule(_, type: type) = id, type == .event {
                 addRows(with: eventRowIds, to: &updatedRows)
             }
-            else if case .latestForTopic = id {
+            else if case .tvLatestForTopic = id {
                 addRows(with: topicRowIds, to: &updatedRows)
             }
             else {
@@ -71,11 +71,11 @@ class HomeModel: ObservableObject {
     }
     
     private func loadModules(with type: SRGModuleType) {
-        guard rowIds.contains(.latestForModule(nil, type: type)) else { return }
+        guard rowIds.contains(.tvLatestForModule(nil, type: type)) else { return }
         
         SRGDataProvider.current!.modules(for: ApplicationConfiguration.vendor, type: type)
             .map { result in
-                result.modules.map { HomeMediaRow.Id.latestForModule($0, type: type) }
+                result.modules.map { HomeMediaRow.Id.tvLatestForModule($0, type: type) }
             }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
@@ -88,11 +88,11 @@ class HomeModel: ObservableObject {
     }
     
     private func loadTopics() {
-        guard rowIds.contains(.latestForTopic(nil)) else { return }
+        guard rowIds.contains(.tvLatestForTopic(nil)) else { return }
         
         SRGDataProvider.current!.tvTopics(for: ApplicationConfiguration.vendor)
             .map { result in
-                result.topics.map { HomeMediaRow.Id.latestForTopic($0) }
+                result.topics.map { HomeMediaRow.Id.tvLatestForTopic($0) }
             }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
