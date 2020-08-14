@@ -6,7 +6,7 @@
 
 import SRGDataProviderCombine
 
-class HomeRow: ObservableObject, Identifiable {
+class HomeRow: Identifiable, Equatable {
     enum Id: Equatable {
         case trending
         case latest
@@ -14,13 +14,41 @@ class HomeRow: ObservableObject, Identifiable {
         case soonExpiring
         case latestForTopic(_ topic: SRGTopic?)
         case latestForModule(_ module: SRGModule?, type: SRGModuleType)
+        case topics
     }
     
-    let id: Id
+    static func makeRow(for id: Id) -> HomeRow {
+        switch id {
+            case .topics:
+                return HomeTopicRow(id: id)
+            default:
+                return HomeMediaRow(id: id)
+        }
+    }
     
+    final let id: Id
+    
+    var title: String? {
+        return nil
+    }
+    
+    func load() -> AnyCancellable? {
+        return nil
+    }
+    
+    init(id: Id) {
+        self.id = id
+    }
+    
+    static func == (lhs: HomeRow, rhs: HomeRow) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+final class HomeMediaRow: HomeRow, ObservableObject {
     @Published private(set) var medias: [SRGMedia] = []
     
-    var title: String {
+    override var title: String? {
         switch id {
             case .trending:
                 return "Trending now"
@@ -39,11 +67,17 @@ class HomeRow: ObservableObject, Identifiable {
                 }
             case let .latestForTopic(topic):
                 return topic?.title ?? "Topic"
+            default:
+                return nil
         }
     }
     
-    init(id: Id) {
-        self.id = id
+    override func load() -> AnyCancellable? {
+        return mediasPublisher()?
+            .map(\.medias)
+            .replaceError(with: [])
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.medias, on: self)
     }
     
     typealias Output = (medias: [SRGMedia], response: URLResponse)
@@ -79,15 +113,9 @@ class HomeRow: ObservableObject, Identifiable {
                 return dataProvider.latestMediasForTopic(withUrn: urn, pageSize: pageSize)
                     .map { ($0.medias, $0.response) }
                     .eraseToAnyPublisher()
+            default:
+                return nil
         }
-    }
-    
-    func load() -> AnyCancellable? {
-        return mediasPublisher()?
-            .map(\.medias)
-            .replaceError(with: [])
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.medias, on: self)
     }
     
     private static func moduleTitle(for type: SRGModuleType) -> String {
@@ -95,8 +123,28 @@ class HomeRow: ObservableObject, Identifiable {
     }
 }
 
-extension HomeRow: Equatable {
-    static func == (lhs: HomeRow, rhs: HomeRow) -> Bool {
-        return lhs.id == rhs.id
+final class HomeTopicRow: HomeRow, ObservableObject {
+    @Published private(set) var topics: [SRGTopic] = []
+    
+    override var title: String? {
+        switch id {
+            case .topics:
+                return nil;
+            default:
+                return nil;
+        }
+    }
+    
+    override func load() -> AnyCancellable? {
+        switch id {
+            case .topics:
+                return SRGDataProvider.current!.tvTopics(for: ApplicationConfiguration.vendor)
+                    .map(\.topics)
+                    .replaceError(with: [])
+                    .receive(on: DispatchQueue.main)
+                    .assign(to: \.topics, on: self)
+            default:
+                return nil;
+        }
     }
 }

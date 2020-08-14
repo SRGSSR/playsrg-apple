@@ -8,8 +8,8 @@ import SRGDataProviderCombine
 
 class HomeModel: ObservableObject {
     // TODO: Will later be generated from application configuration
-    private static let configuredRowIds: [HomeRow.Id] = [.trending, .latest, .latestForModule(nil, type: .event), .latestForTopic(nil),
-                                                         .mostPopular, .soonExpiring]
+    private static let configuredRowIds: [HomeRow.Id] = [.trending, .topics, .latestForModule(nil, type: .event), .latestForTopic(nil),
+                                                         .latest, .mostPopular, .soonExpiring]
     
     private var eventRowIds: [HomeRow.Id] = []
     private var topicRowIds: [HomeRow.Id] = []
@@ -33,7 +33,7 @@ class HomeModel: ObservableObject {
             rows.append(existingRow)
         }
         else {
-            rows.append(HomeRow(id: id))
+            rows.append(HomeRow.makeRow(for: id))
         }
     }
     
@@ -77,7 +77,7 @@ class HomeModel: ObservableObject {
         
         SRGDataProvider.current!.modules(for: ApplicationConfiguration.vendor, type: type)
             .map { result in
-                result.modules.map { HomeRow.Id.latestForModule($0, type: type) }
+                result.modules.map { HomeMediaRow.Id.latestForModule($0, type: type) }
             }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
@@ -94,7 +94,7 @@ class HomeModel: ObservableObject {
         
         SRGDataProvider.current!.tvTopics(for: ApplicationConfiguration.vendor)
             .map { result in
-                result.topics.map { HomeRow.Id.latestForTopic($0) }
+                result.topics.map { HomeMediaRow.Id.latestForTopic($0) }
             }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)

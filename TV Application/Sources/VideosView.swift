@@ -7,62 +7,6 @@
 import SRGDataProviderModel
 import SwiftUI
 
-struct HomeSwimlane: View {
-    @ObservedObject var row: HomeRow
-    
-    var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                if row.medias.count > 0 {
-                    ForEach(row.medias, id: \.uid) { media in
-                        MediaCell(media: media)
-                    }
-                }
-                else {
-                    ForEach(0..<10) { _ in
-                        MediaCell(media: nil)
-                    }
-                }
-            }
-            .padding([.leading, .trailing], VideosView.horizontalPadding)
-        }
-    }
-}
-
-struct HomeHeroSwimlane: View {
-    @ObservedObject var row: HomeRow
-    
-    var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                if row.medias.count > 0 {
-                    ForEach(row.medias, id: \.uid) { media in
-                        HeroCell(media: media)
-                    }
-                }
-                else {
-                    ForEach(0..<2) { _ in
-                        HeroCell(media: nil)
-                    }
-                }
-            }
-            .padding([.leading, .trailing], VideosView.horizontalPadding)
-        }
-    }
-}
-
-struct HomeSwimlaneHeader: View {
-    let row: HomeRow
-    
-    var body: some View {
-        Text(row.title)
-            .font(.headline)
-            .padding([.leading, .trailing], VideosView.horizontalPadding)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.blue)
-    }
-}
-
 struct VideosView: View {
     @StateObject var model = HomeModel()
     static let horizontalPadding: CGFloat = 40
@@ -71,14 +15,7 @@ struct VideosView: View {
         ScrollView {
             VStack {
                 ForEach(model.rows) { row in
-                    if row == model.rows.first {
-                        HomeHeroSwimlane(row: row)
-                    }
-                    else {
-                        Section(header: HomeSwimlaneHeader(row: row)) {
-                            HomeSwimlane(row: row)
-                        }
-                    }
+                    HomeSwimlane(row: row, top: model.rows.first == row)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
