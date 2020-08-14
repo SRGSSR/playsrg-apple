@@ -56,12 +56,12 @@ struct HomeMediaHeroSwimlane: View {
             HStack(spacing: 40) {
                 if row.medias.count > 0 {
                     ForEach(row.medias, id: \.uid) { media in
-                        HeroCell(media: media)
+                        HeroMediaCell(media: media)
                     }
                 }
                 else {
                     ForEach(0..<2) { _ in
-                        HeroCell(media: nil)
+                        HeroMediaCell(media: nil)
                     }
                 }
             }

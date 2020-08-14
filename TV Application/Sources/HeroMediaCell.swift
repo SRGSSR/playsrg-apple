@@ -7,7 +7,7 @@
 import SRGDataProviderModel
 import SwiftUI
 
-struct HeroCell: View {
+struct HeroMediaCell: View {
     static let cellSize = CGSize(width: 1740, height: 560)
     
     let media: SRGMedia?
