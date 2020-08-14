@@ -8,7 +8,8 @@ import SRGDataProviderModel
 import SwiftUI
 
 struct TopicCell: View {
-    static let cellSize = CGSize(width: 250, height: 250 * 9 / 16)
+    static let cellWidth: CGFloat = 250
+    static let cellSize = CGSize(width: Self.cellWidth, height: Self.cellWidth * 9 / 16)
     
     let topic: SRGTopic?
     
