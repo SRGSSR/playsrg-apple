@@ -28,7 +28,7 @@ struct HeroCell: View {
     var body: some View {
         Button(action: { /* Open the player */ }) {
             ZStack {
-                ImageView(url: imageUrl)
+                ImageView(url: imageUrl, contentMode: .fill)
                     .whenRedacted { $0.hidden() }
                 Text(title)
                     .padding()
