@@ -29,6 +29,18 @@ class HomeRow: Identifiable, Equatable {
         case tvLatestForTopic(_ topic: SRGTopic?)
         case tvLatestForModule(_ module: SRGModule?, type: SRGModuleType)
         case tvTopics
+        
+        case radioLatestEpisodes(channelUid: String)
+        case radioMostPopular(channelUid: String)
+        case radioLatest(channelUid: String)
+        case radioLatestVideos(channelUid: String)
+        
+        case tvLive
+        case radioLive
+        case radioLiveSatellite
+        
+        case liveCenter
+        case tvScheduledLivestreams
     }
     
     /**
@@ -72,7 +84,7 @@ final class HomeMediaRow: HomeRow, ObservableObject {
             case .tvLatest:
                 return "Latest videos"
             case .tvMostPopular:
-                return "Popular"
+                return "Most popular"
             case .tvSoonExpiring:
                 return "Soon expiring"
             case let .tvLatestForModule(module, type):
@@ -84,6 +96,24 @@ final class HomeMediaRow: HomeRow, ObservableObject {
                 }
             case let .tvLatestForTopic(topic):
                 return topic?.title ?? "Topic"
+            case .radioLatestEpisodes:
+                return "Latest episodes"
+            case .radioMostPopular:
+                return "Most popular"
+            case .radioLatest:
+                return "Latest audios"
+            case .radioLatestVideos:
+                return "Latest videos"
+            case .tvLive:
+                return "TV channels"
+            case .radioLive:
+                return "Radio channels"
+            case .radioLiveSatellite:
+                return "Thematic channels"
+            case .liveCenter:
+                return "Sport"
+            case .tvScheduledLivestreams:
+                return "Events"
             default:
                 return nil
         }
@@ -128,6 +158,36 @@ final class HomeMediaRow: HomeRow, ObservableObject {
             case let .tvLatestForTopic(topic):
                 guard let urn = topic?.urn else { return nil }
                 return dataProvider.latestMediasForTopic(withUrn: urn, pageSize: pageSize)
+                    .map { ($0.medias, $0.response) }
+                    .eraseToAnyPublisher()
+            case let .radioLatestEpisodes(channelUid: channelUid):
+                return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize)
+                    .map { ($0.medias, $0.response) }
+                    .eraseToAnyPublisher()
+            case let .radioMostPopular(channelUid: channelUid):
+                return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize)
+                    .map { ($0.medias, $0.response) }
+                    .eraseToAnyPublisher()
+            case let .radioLatest(channelUid: channelUid):
+                return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize)
+                    .map { ($0.medias, $0.response) }
+                    .eraseToAnyPublisher()
+            case let .radioLatestVideos(channelUid: channelUid):
+                return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize)
+                    .map { ($0.medias, $0.response) }
+                    .eraseToAnyPublisher()
+            case .tvLive:
+                return dataProvider.tvLivestreams(for: vendor)
+            case .radioLive:
+                return dataProvider.radioLivestreams(for: vendor, contentProviders: .default)
+            case .radioLiveSatellite:
+                return dataProvider.radioLivestreams(for: vendor, contentProviders: .swissSatelliteRadio)
+            case .liveCenter:
+                return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize)
+                    .map { ($0.medias, $0.response) }
+                    .eraseToAnyPublisher()
+            case .tvScheduledLivestreams:
+                return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize)
                     .map { ($0.medias, $0.response) }
                     .eraseToAnyPublisher()
             default:

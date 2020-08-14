@@ -10,6 +10,8 @@ import SwiftUI
  *  Factory swimlane. Installs the proper type of swimlane based on the row type.
  */
 struct HomeSwimlane: View {
+    static let horizontalPadding: CGFloat = 40
+    
     let row: HomeRow
     
     var body: some View {
@@ -46,7 +48,7 @@ struct HomeMediaSwimlane: View {
                     }
                 }
             }
-            .padding([.leading, .trailing], VideosView.horizontalPadding)
+            .padding([.leading, .trailing], HomeSwimlane.horizontalPadding)
         }
     }
 }
@@ -68,7 +70,7 @@ struct HomeMediaHeroSwimlane: View {
                     }
                 }
             }
-            .padding([.leading, .trailing], VideosView.horizontalPadding)
+            .padding([.leading, .trailing], HomeSwimlane.horizontalPadding)
         }
     }
 }
@@ -90,7 +92,7 @@ struct HomeTopicSwimlane: View {
                     }
                 }
             }
-            .padding([.leading, .trailing], VideosView.horizontalPadding)
+            .padding([.leading, .trailing], HomeSwimlane.horizontalPadding)
         }
     }
 }
@@ -102,7 +104,7 @@ struct HomeSwimlaneHeader: View {
         if let title = row.title {
             Text(title)
                 .font(.headline)
-                .padding([.leading, .trailing], VideosView.horizontalPadding)
+                .padding([.leading, .trailing], HomeSwimlane.horizontalPadding)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }

@@ -7,8 +7,10 @@
 import SwiftUI
 
 struct AudiosView: View {
+    @StateObject var model = HomeModel(rowIds: ApplicationConfiguration.radioHomeRowIds(for: "a9e7621504c6959e35c3ecbe7f6bed0446cdf8da"))
+    
     var body: some View {
-        Text("Audios").padding()
+        HomeView(model: model)
     }
 }
 

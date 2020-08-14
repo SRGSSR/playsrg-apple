@@ -7,8 +7,10 @@
 import SwiftUI
 
 struct LiveView: View {
+    @StateObject var model = HomeModel(rowIds: ApplicationConfiguration.liveHomeRowIds)
+    
     var body: some View {
-        Text("Live")
+        HomeView(model: model)
     }
 }
 

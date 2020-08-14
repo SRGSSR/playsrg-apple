@@ -8,22 +8,10 @@ import SRGDataProviderModel
 import SwiftUI
 
 struct VideosView: View {
-    @StateObject var model = HomeModel()
-    static let horizontalPadding: CGFloat = 40
+    @StateObject var model = HomeModel(rowIds: ApplicationConfiguration.tvHomeRowIds)
     
     var body: some View {
-        ScrollView {
-            VStack {
-                ForEach(model.rows) { row in
-                    HomeSwimlane(row: row)
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-        .onAppear {
-            model.refresh()
-        }
-        .ignoresSafeArea(.all, edges: [.leading, .trailing, .bottom])
+        HomeView(model: model)
     }
 }
 

@@ -7,7 +7,7 @@
 import SRGDataProviderCombine
 
 class HomeModel: ObservableObject {
-    private let rowIds = ApplicationConfiguration.rowIds
+    let rowIds: [HomeRow.Id]
     
     private var eventRowIds: [HomeRow.Id] = []
     private var topicRowIds: [HomeRow.Id] = []
@@ -15,6 +15,10 @@ class HomeModel: ObservableObject {
     @Published private(set) var rows = [HomeRow]()
     
     private var cancellables = Set<AnyCancellable>()
+    
+    init(rowIds: [HomeRow.Id]) {
+        self.rowIds = rowIds
+    }
     
     func refresh() {
         cancellables = []

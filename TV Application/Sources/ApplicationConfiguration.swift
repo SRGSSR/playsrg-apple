@@ -12,7 +12,7 @@ struct ApplicationConfiguration {
     static let tvTrendingEditorialLimit: UInt = 3
     static let tvTrendingEpisodesOnly: Bool = false
     
-    static let rowIds: [HomeRow.Id] = [
+    static let tvHomeRowIds: [HomeRow.Id] = [
         .tvTrending(appearance: .hero),
         .tvTopics,
         .tvLatestForModule(nil, type: .event),
@@ -20,5 +20,22 @@ struct ApplicationConfiguration {
         .tvLatest,
         .tvMostPopular,
         .tvSoonExpiring
+    ]
+    
+    static func radioHomeRowIds(for channelUid: String) -> [HomeRow.Id] {
+        return [
+            .radioLatestEpisodes(channelUid: channelUid),
+            .radioMostPopular(channelUid: channelUid),
+            .radioLatest(channelUid: channelUid),
+            .radioLatestVideos(channelUid: channelUid)
+        ]
+    }
+    
+    static let liveHomeRowIds: [HomeRow.Id] = [
+        .tvLive,
+        .radioLive,
+        .radioLiveSatellite,
+        .liveCenter,
+        .tvScheduledLivestreams
     ]
 }
