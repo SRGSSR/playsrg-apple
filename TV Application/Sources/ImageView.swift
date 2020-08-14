@@ -37,6 +37,7 @@ struct ImageView: View {
     
     var body: some View {
         ZStack {
+            Rectangle().fill(Color.black)
             if let url = url {
                 FetchView(url: url, contentMode: contentMode)
             }
