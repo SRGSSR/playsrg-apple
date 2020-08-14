@@ -8,7 +8,7 @@ import SRGDataProviderModel
 import SwiftUI
 
 struct TopicCell: View {
-    static let cellSize = CGSize(width: 249, height: 140)
+    static let cellSize = CGSize(width: 250, height: 250 * 9 / 16)
     
     let topic: SRGTopic?
     
@@ -30,12 +30,13 @@ struct TopicCell: View {
             ZStack {
                 ImageView(url: imageUrl)
                     .whenRedacted { $0.hidden() }
+                Rectangle()
+                    .fill(Color(white: 0, opacity: 0.4))
                 Text(title)
                     .lineLimit(1)
                     .padding()
-                    .frame(width: Self.cellSize.width, height: Self.cellSize.height)
-                    .background(Color(white: 0, opacity: 0.4))
             }
+            .frame(width: Self.cellSize.width, height: Self.cellSize.height)
         }
         .buttonStyle(CardButtonStyle())
         .padding(.top, 20)

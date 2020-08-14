@@ -8,7 +8,7 @@ import SRGDataProviderModel
 import SwiftUI
 
 struct MediaCell: View {
-    static let cellSize = CGSize(width: 375, height: 211)
+    static let cellSize = CGSize(width: 375, height: 375 * 9 / 16)
     
     let media: SRGMedia?
     
@@ -30,11 +30,12 @@ struct MediaCell: View {
             ZStack {
                 ImageView(url: imageUrl)
                     .whenRedacted { $0.hidden() }
+                Rectangle()
+                    .fill(Color(white: 0, opacity: 0.4))
                 Text(title)
                     .padding()
-                    .frame(width: Self.cellSize.width, height: Self.cellSize.height)
-                    .background(Color(white: 0, opacity: 0.4))
             }
+            .frame(width: Self.cellSize.width, height: Self.cellSize.height)
         }
         .buttonStyle(CardButtonStyle())
         .padding(.top, 20)

@@ -30,11 +30,12 @@ struct HeroMediaCell: View {
             ZStack {
                 ImageView(url: imageUrl, contentMode: .fill)
                     .whenRedacted { $0.hidden() }
+                Rectangle()
+                    .fill(Color(white: 0, opacity: 0.4))
                 Text(title)
                     .padding()
-                    .frame(width: Self.cellSize.width, height: Self.cellSize.height)
-                    .background(Color(white: 0, opacity: 0.4))
             }
+            .frame(width: Self.cellSize.width, height: Self.cellSize.height)
         }
         .buttonStyle(CardButtonStyle())
         .padding(.top, 20)
