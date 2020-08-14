@@ -14,8 +14,7 @@ struct TopicCell: View {
     let topic: SRGTopic?
     
     private var title: String {
-        guard let topic = topic else { return String(repeating: " ", count: .random(in: 5..<10)) }
-        return topic.title
+        return topic?.title ?? ""
     }
     
     private var imageUrl: URL? {
