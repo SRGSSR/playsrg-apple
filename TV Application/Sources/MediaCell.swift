@@ -13,6 +13,8 @@ struct MediaCell: View {
     
     let media: SRGMedia?
     
+    @State private var isPresented = false
+    
     private var title: String {
         guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
         return media.title
@@ -27,7 +29,11 @@ struct MediaCell: View {
     }
     
     var body: some View {
-        Button(action: { /* Open the player */ }) {
+        Button(action: {
+            if media != nil {
+                isPresented.toggle()
+            }
+        }) {
             ZStack {
                 ImageView(url: imageUrl)
                     .whenRedacted { $0.hidden() }
@@ -39,6 +45,9 @@ struct MediaCell: View {
             }
             .frame(width: Self.cellSize.width, height: Self.cellSize.height)
         }
+        .fullScreenCover(isPresented: $isPresented, content: {
+            PlayerView(media: media!)
+        })
         .buttonStyle(CardButtonStyle())
         .padding(.top, 20)
         .padding(.bottom, 80)
