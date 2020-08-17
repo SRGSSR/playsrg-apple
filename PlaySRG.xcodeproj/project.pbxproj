@@ -714,61 +714,6 @@
 		6F331D6E24D076D500C096AB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6B24D076D500C096AB /* ProfileView.swift */; };
 		6F331D6F24D076D500C096AB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6B24D076D500C096AB /* ProfileView.swift */; };
 		6F331D7024D076D500C096AB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6B24D076D500C096AB /* ProfileView.swift */; };
-		6F331DEA24D0846200C096AB /* SRGDataProvider.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE524D0846100C096AB /* SRGDataProvider.bundle */; };
-		6F331DEB24D0846200C096AB /* SRGDataProvider.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE524D0846100C096AB /* SRGDataProvider.bundle */; };
-		6F331DEC24D0846200C096AB /* SRGDataProvider.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE524D0846100C096AB /* SRGDataProvider.bundle */; };
-		6F331DED24D0846200C096AB /* SRGDataProvider.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE524D0846100C096AB /* SRGDataProvider.bundle */; };
-		6F331DEE24D0846200C096AB /* SRGDataProvider.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE524D0846100C096AB /* SRGDataProvider.bundle */; };
-		6F331DEF24D0846200C096AB /* SRGAnalytics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE624D0846100C096AB /* SRGAnalytics.bundle */; };
-		6F331DF024D0846200C096AB /* SRGAnalytics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE624D0846100C096AB /* SRGAnalytics.bundle */; };
-		6F331DF124D0846200C096AB /* SRGAnalytics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE624D0846100C096AB /* SRGAnalytics.bundle */; };
-		6F331DF224D0846200C096AB /* SRGAnalytics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE624D0846100C096AB /* SRGAnalytics.bundle */; };
-		6F331DF324D0846200C096AB /* SRGAnalytics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE624D0846100C096AB /* SRGAnalytics.bundle */; };
-		6F331DF424D0846200C096AB /* SRGContentProtection.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE724D0846200C096AB /* SRGContentProtection.bundle */; };
-		6F331DF524D0846200C096AB /* SRGContentProtection.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE724D0846200C096AB /* SRGContentProtection.bundle */; };
-		6F331DF624D0846200C096AB /* SRGContentProtection.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE724D0846200C096AB /* SRGContentProtection.bundle */; };
-		6F331DF724D0846200C096AB /* SRGContentProtection.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE724D0846200C096AB /* SRGContentProtection.bundle */; };
-		6F331DF824D0846200C096AB /* SRGContentProtection.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE724D0846200C096AB /* SRGContentProtection.bundle */; };
-		6F331DF924D0846200C096AB /* SRGDiagnostics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE824D0846200C096AB /* SRGDiagnostics.bundle */; };
-		6F331DFA24D0846200C096AB /* SRGDiagnostics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE824D0846200C096AB /* SRGDiagnostics.bundle */; };
-		6F331DFB24D0846200C096AB /* SRGDiagnostics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE824D0846200C096AB /* SRGDiagnostics.bundle */; };
-		6F331DFC24D0846200C096AB /* SRGDiagnostics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE824D0846200C096AB /* SRGDiagnostics.bundle */; };
-		6F331DFD24D0846200C096AB /* SRGDiagnostics.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE824D0846200C096AB /* SRGDiagnostics.bundle */; };
-		6F331DFE24D0846200C096AB /* SRGAppearance.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE924D0846200C096AB /* SRGAppearance.bundle */; };
-		6F331DFF24D0846200C096AB /* SRGAppearance.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE924D0846200C096AB /* SRGAppearance.bundle */; };
-		6F331E0024D0846200C096AB /* SRGAppearance.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE924D0846200C096AB /* SRGAppearance.bundle */; };
-		6F331E0124D0846300C096AB /* SRGAppearance.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE924D0846200C096AB /* SRGAppearance.bundle */; };
-		6F331E0224D0846300C096AB /* SRGAppearance.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331DE924D0846200C096AB /* SRGAppearance.bundle */; };
-		6F331E0924D0848D00C096AB /* SRGUserData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0324D0848B00C096AB /* SRGUserData.bundle */; };
-		6F331E0A24D0848D00C096AB /* SRGUserData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0324D0848B00C096AB /* SRGUserData.bundle */; };
-		6F331E0B24D0848D00C096AB /* SRGUserData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0324D0848B00C096AB /* SRGUserData.bundle */; };
-		6F331E0C24D0848D00C096AB /* SRGUserData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0324D0848B00C096AB /* SRGUserData.bundle */; };
-		6F331E0D24D0848D00C096AB /* SRGUserData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0324D0848B00C096AB /* SRGUserData.bundle */; };
-		6F331E0E24D0848D00C096AB /* SRGLetterbox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0424D0848C00C096AB /* SRGLetterbox.bundle */; };
-		6F331E0F24D0848D00C096AB /* SRGLetterbox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0424D0848C00C096AB /* SRGLetterbox.bundle */; };
-		6F331E1024D0848D00C096AB /* SRGLetterbox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0424D0848C00C096AB /* SRGLetterbox.bundle */; };
-		6F331E1124D0848D00C096AB /* SRGLetterbox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0424D0848C00C096AB /* SRGLetterbox.bundle */; };
-		6F331E1224D0848D00C096AB /* SRGLetterbox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0424D0848C00C096AB /* SRGLetterbox.bundle */; };
-		6F331E1324D0848D00C096AB /* SRGLogger.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0524D0848C00C096AB /* SRGLogger.bundle */; };
-		6F331E1424D0848D00C096AB /* SRGLogger.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0524D0848C00C096AB /* SRGLogger.bundle */; };
-		6F331E1524D0848D00C096AB /* SRGLogger.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0524D0848C00C096AB /* SRGLogger.bundle */; };
-		6F331E1624D0848D00C096AB /* SRGLogger.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0524D0848C00C096AB /* SRGLogger.bundle */; };
-		6F331E1724D0848D00C096AB /* SRGLogger.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0524D0848C00C096AB /* SRGLogger.bundle */; };
-		6F331E1824D0848D00C096AB /* SRGIdentity.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0624D0848C00C096AB /* SRGIdentity.bundle */; };
-		6F331E1924D0848D00C096AB /* SRGIdentity.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0624D0848C00C096AB /* SRGIdentity.bundle */; };
-		6F331E1A24D0848D00C096AB /* SRGIdentity.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0624D0848C00C096AB /* SRGIdentity.bundle */; };
-		6F331E1B24D0848D00C096AB /* SRGIdentity.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0624D0848C00C096AB /* SRGIdentity.bundle */; };
-		6F331E1C24D0848D00C096AB /* SRGIdentity.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0624D0848C00C096AB /* SRGIdentity.bundle */; };
-		6F331E1D24D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0724D0848C00C096AB /* SRGMediaPlayer.bundle */; };
-		6F331E1E24D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0724D0848C00C096AB /* SRGMediaPlayer.bundle */; };
-		6F331E1F24D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0724D0848C00C096AB /* SRGMediaPlayer.bundle */; };
-		6F331E2024D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0724D0848C00C096AB /* SRGMediaPlayer.bundle */; };
-		6F331E2124D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0724D0848C00C096AB /* SRGMediaPlayer.bundle */; };
-		6F331E2224D0848D00C096AB /* SRGNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0824D0848C00C096AB /* SRGNetwork.bundle */; };
-		6F331E2324D0848D00C096AB /* SRGNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0824D0848C00C096AB /* SRGNetwork.bundle */; };
-		6F331E2424D0848D00C096AB /* SRGNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0824D0848C00C096AB /* SRGNetwork.bundle */; };
-		6F331E2524D0848D00C096AB /* SRGNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0824D0848C00C096AB /* SRGNetwork.bundle */; };
-		6F331E2624D0848D00C096AB /* SRGNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F331E0824D0848C00C096AB /* SRGNetwork.bundle */; };
 		6F340F45220DA7E900778CA3 /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F340F44220DA7E900778CA3 /* SRGUserData.framework */; };
 		6F340F46220DA7FC00778CA3 /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F340F44220DA7E900778CA3 /* SRGUserData.framework */; };
 		6F340F47220DA80B00778CA3 /* SRGUserData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F340F44220DA7E900778CA3 /* SRGUserData.framework */; };
@@ -2132,17 +2077,6 @@
 		6F331D8124D082D700C096AB /* FXReachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FXReachability.framework; path = Carthage/Build/tvOS/Static/FXReachability.framework; sourceTree = "<group>"; };
 		6F331D8224D082D700C096AB /* SRGAnalytics_MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGAnalytics_MediaPlayer.framework; path = Carthage/Build/tvOS/Static/SRGAnalytics_MediaPlayer.framework; sourceTree = "<group>"; };
 		6F331D8324D082D700C096AB /* SRGLetterbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGLetterbox.framework; path = Carthage/Build/tvOS/Static/SRGLetterbox.framework; sourceTree = "<group>"; };
-		6F331DE524D0846100C096AB /* SRGDataProvider.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGDataProvider.bundle; path = Carthage/Build/tvOS/Static/SRGDataProvider.framework/SRGDataProvider.bundle; sourceTree = "<group>"; };
-		6F331DE624D0846100C096AB /* SRGAnalytics.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGAnalytics.bundle; path = Carthage/Build/tvOS/Static/SRGAnalytics.framework/SRGAnalytics.bundle; sourceTree = "<group>"; };
-		6F331DE724D0846200C096AB /* SRGContentProtection.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGContentProtection.bundle; path = Carthage/Build/tvOS/Static/SRGContentProtection.framework/SRGContentProtection.bundle; sourceTree = "<group>"; };
-		6F331DE824D0846200C096AB /* SRGDiagnostics.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGDiagnostics.bundle; path = Carthage/Build/tvOS/Static/SRGDiagnostics.framework/SRGDiagnostics.bundle; sourceTree = "<group>"; };
-		6F331DE924D0846200C096AB /* SRGAppearance.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGAppearance.bundle; path = Carthage/Build/tvOS/Static/SRGAppearance.framework/SRGAppearance.bundle; sourceTree = "<group>"; };
-		6F331E0324D0848B00C096AB /* SRGUserData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGUserData.bundle; path = Carthage/Build/tvOS/Static/SRGUserData.framework/SRGUserData.bundle; sourceTree = "<group>"; };
-		6F331E0424D0848C00C096AB /* SRGLetterbox.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGLetterbox.bundle; path = Carthage/Build/tvOS/Static/SRGLetterbox.framework/SRGLetterbox.bundle; sourceTree = "<group>"; };
-		6F331E0524D0848C00C096AB /* SRGLogger.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGLogger.bundle; path = Carthage/Build/tvOS/Static/SRGLogger.framework/SRGLogger.bundle; sourceTree = "<group>"; };
-		6F331E0624D0848C00C096AB /* SRGIdentity.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGIdentity.bundle; path = Carthage/Build/tvOS/Static/SRGIdentity.framework/SRGIdentity.bundle; sourceTree = "<group>"; };
-		6F331E0724D0848C00C096AB /* SRGMediaPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGMediaPlayer.bundle; path = Carthage/Build/tvOS/Static/SRGMediaPlayer.framework/SRGMediaPlayer.bundle; sourceTree = "<group>"; };
-		6F331E0824D0848C00C096AB /* SRGNetwork.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SRGNetwork.bundle; path = Carthage/Build/tvOS/Static/SRGNetwork.framework/SRGNetwork.bundle; sourceTree = "<group>"; };
 		6F331E2724D0851F00C096AB /* TCSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TCSDK.framework; path = Carthage/Build/tvOS/TCSDK.framework; sourceTree = "<group>"; };
 		6F331E2824D0851F00C096AB /* ComScore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComScore.framework; path = Carthage/Build/tvOS/ComScore.framework; sourceTree = "<group>"; };
 		6F331E2924D0852000C096AB /* Mantle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mantle.framework; path = Carthage/Build/tvOS/Mantle.framework; sourceTree = "<group>"; };
@@ -3910,47 +3844,36 @@
 				080731B5222453EC00AF9C83 /* SRGAnalytics_Identity.framework */,
 				6F331D8224D082D700C096AB /* SRGAnalytics_MediaPlayer.framework */,
 				6F0C99282121F9E000073AB6 /* SRGAnalytics_MediaPlayer.framework */,
-				6F331DE624D0846100C096AB /* SRGAnalytics.bundle */,
 				6F0C99882121FBD700073AB6 /* SRGAnalytics.bundle */,
 				6F331D7E24D082D600C096AB /* SRGAnalytics.framework */,
 				6F0C99262121F9E000073AB6 /* SRGAnalytics.framework */,
-				6F331DE924D0846200C096AB /* SRGAppearance.bundle */,
 				6F0C99872121FBD600073AB6 /* SRGAppearance.bundle */,
 				6F331D7B24D082D500C096AB /* SRGAppearance.framework */,
 				6F0C99272121F9E000073AB6 /* SRGAppearance.framework */,
-				6F331DE724D0846200C096AB /* SRGContentProtection.bundle */,
 				6FF3B6932137DCD500F8A5E2 /* SRGContentProtection.bundle */,
 				6F331D7724D082D400C096AB /* SRGContentProtection.framework */,
 				6FF3B68D2137DC8400F8A5E2 /* SRGContentProtection.framework */,
-				6F331DE524D0846100C096AB /* SRGDataProvider.bundle */,
 				6F0C998B2121FBD700073AB6 /* SRGDataProvider.bundle */,
 				6F331D7524D082D400C096AB /* SRGDataProvider.framework */,
 				6F0C99212121F9DF00073AB6 /* SRGDataProvider.framework */,
-				6F331DE824D0846200C096AB /* SRGDiagnostics.bundle */,
 				6FBF24432148238300E576A2 /* SRGDiagnostics.bundle */,
 				6F331D7D24D082D600C096AB /* SRGDiagnostics.framework */,
 				6FBF243D2148232A00E576A2 /* SRGDiagnostics.framework */,
-				6F331E0624D0848C00C096AB /* SRGIdentity.bundle */,
 				6F1A95EA216DF98C00DB15AA /* SRGIdentity.bundle */,
 				6F331D7924D082D500C096AB /* SRGIdentity.framework */,
 				6F1A95E7216DF96900DB15AA /* SRGIdentity.framework */,
-				6F331E0424D0848C00C096AB /* SRGLetterbox.bundle */,
 				6F0C99862121FBD600073AB6 /* SRGLetterbox.bundle */,
 				6F331D8324D082D700C096AB /* SRGLetterbox.framework */,
 				6F0C99242121F9DF00073AB6 /* SRGLetterbox.framework */,
-				6F331E0524D0848C00C096AB /* SRGLogger.bundle */,
 				6F0C998C2121FBD800073AB6 /* SRGLogger.bundle */,
 				6F331D7624D082D400C096AB /* SRGLogger.framework */,
 				6F0C992A2121F9E000073AB6 /* SRGLogger.framework */,
-				6F331E0724D0848C00C096AB /* SRGMediaPlayer.bundle */,
 				6F0C99852121FBD600073AB6 /* SRGMediaPlayer.bundle */,
 				6F331D7824D082D500C096AB /* SRGMediaPlayer.framework */,
 				6F0C99232121F9DF00073AB6 /* SRGMediaPlayer.framework */,
-				6F331E0824D0848C00C096AB /* SRGNetwork.bundle */,
 				6F0C99892121FBD700073AB6 /* SRGNetwork.bundle */,
 				6F331D7224D082D300C096AB /* SRGNetwork.framework */,
 				6F0C992C2121F9E100073AB6 /* SRGNetwork.framework */,
-				6F331E0324D0848B00C096AB /* SRGUserData.bundle */,
 				6F340F4A220DA86B00778CA3 /* SRGUserData.bundle */,
 				6F331D7324D082D300C096AB /* SRGUserData.framework */,
 				6F340F44220DA7E900778CA3 /* SRGUserData.framework */,
@@ -5235,21 +5158,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F331DFE24D0846200C096AB /* SRGAppearance.bundle in Resources */,
-				6F331DF924D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
-				6F331E0E24D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
 				6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */,
-				6F331E2224D0848D00C096AB /* SRGNetwork.bundle in Resources */,
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
-				6F331DF424D0846200C096AB /* SRGContentProtection.bundle in Resources */,
 				6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */,
-				6F331E1D24D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */,
-				6F331DEF24D0846200C096AB /* SRGAnalytics.bundle in Resources */,
-				6F331E0924D0848D00C096AB /* SRGUserData.bundle in Resources */,
-				6F331E1824D0848D00C096AB /* SRGIdentity.bundle in Resources */,
 				6F331CEB24D06B8400C096AB /* Assets.xcassets in Resources */,
-				6F331E1324D0848D00C096AB /* SRGLogger.bundle in Resources */,
-				6F331DEA24D0846200C096AB /* SRGDataProvider.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5257,21 +5169,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F331DFF24D0846200C096AB /* SRGAppearance.bundle in Resources */,
-				6F331DFA24D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
-				6F331E0F24D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
-				6F331E2324D0848D00C096AB /* SRGNetwork.bundle in Resources */,
 				6F4FCB0924D07040002675EF /* Preview Assets.xcassets in Resources */,
-				6F331DF524D0846200C096AB /* SRGContentProtection.bundle in Resources */,
 				6F4FCB0D24D07054002675EF /* Assets.xcassets in Resources */,
-				6F331E1E24D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */,
-				6F331DF024D0846200C096AB /* SRGAnalytics.bundle in Resources */,
 				6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */,
-				6F331E0A24D0848D00C096AB /* SRGUserData.bundle in Resources */,
-				6F331E1924D0848D00C096AB /* SRGIdentity.bundle in Resources */,
-				6F331E1424D0848D00C096AB /* SRGLogger.bundle in Resources */,
-				6F331DEB24D0846200C096AB /* SRGDataProvider.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5280,20 +5181,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
-				6F331E0024D0846200C096AB /* SRGAppearance.bundle in Resources */,
-				6F331DFB24D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
 				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
-				6F331E1024D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
-				6F331E2424D0848D00C096AB /* SRGNetwork.bundle in Resources */,
 				6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */,
-				6F331DF624D0846200C096AB /* SRGContentProtection.bundle in Resources */,
 				6F4FCB0E24D07054002675EF /* Assets.xcassets in Resources */,
-				6F331E1F24D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */,
-				6F331DF124D0846200C096AB /* SRGAnalytics.bundle in Resources */,
-				6F331E0B24D0848D00C096AB /* SRGUserData.bundle in Resources */,
-				6F331E1A24D0848D00C096AB /* SRGIdentity.bundle in Resources */,
-				6F331E1524D0848D00C096AB /* SRGLogger.bundle in Resources */,
-				6F331DEC24D0846200C096AB /* SRGDataProvider.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5301,21 +5191,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F331E0124D0846300C096AB /* SRGAppearance.bundle in Resources */,
-				6F331DFC24D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
-				6F331E1124D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
-				6F331E2524D0848D00C096AB /* SRGNetwork.bundle in Resources */,
 				6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */,
-				6F331DF724D0846200C096AB /* SRGContentProtection.bundle in Resources */,
 				6F4FCB0F24D07055002675EF /* Assets.xcassets in Resources */,
-				6F331E2024D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */,
-				6F331DF224D0846200C096AB /* SRGAnalytics.bundle in Resources */,
-				6F331E0C24D0848D00C096AB /* SRGUserData.bundle in Resources */,
-				6F331E1B24D0848D00C096AB /* SRGIdentity.bundle in Resources */,
 				6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */,
-				6F331E1624D0848D00C096AB /* SRGLogger.bundle in Resources */,
-				6F331DED24D0846200C096AB /* SRGDataProvider.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5324,20 +5203,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
-				6F331E0224D0846300C096AB /* SRGAppearance.bundle in Resources */,
-				6F331DFD24D0846200C096AB /* SRGDiagnostics.bundle in Resources */,
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
-				6F331E1224D0848D00C096AB /* SRGLetterbox.bundle in Resources */,
-				6F331E2624D0848D00C096AB /* SRGNetwork.bundle in Resources */,
 				6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */,
-				6F331DF824D0846200C096AB /* SRGContentProtection.bundle in Resources */,
 				6F4FCB1024D07055002675EF /* Assets.xcassets in Resources */,
-				6F331E2124D0848D00C096AB /* SRGMediaPlayer.bundle in Resources */,
-				6F331DF324D0846200C096AB /* SRGAnalytics.bundle in Resources */,
-				6F331E0D24D0848D00C096AB /* SRGUserData.bundle in Resources */,
-				6F331E1C24D0848D00C096AB /* SRGIdentity.bundle in Resources */,
-				6F331E1724D0848D00C096AB /* SRGLogger.bundle in Resources */,
-				6F331DEE24D0846200C096AB /* SRGDataProvider.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
