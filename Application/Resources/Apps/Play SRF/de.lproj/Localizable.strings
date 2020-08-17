@@ -107,6 +107,9 @@
 /* Settings section header */
 "Content" = "Medientyp";
 
+/* Sort by date option */
+"Date" = "Datum";
+
 /* Title of a delete button
    Title of the delete button in the alert view when deleting a download in the player view */
 "Delete" = "Löschen";
@@ -122,6 +125,9 @@
 
 /* Introductory title displayed at the top of the onboarding list */
 "Discover" = "Entdecken";
+
+/* User activity title when displaying a show page */
+"Display %@ episodes" = "Zeige die Folgen von %@";
 
 /* No comment provided by engineer. */
 "Do you want to send an anonymous crash report so we can fix the issue?" = "Wollen Sie einen anonymen Absturzreport senden, damit wir das Problem lösen können?";
@@ -211,6 +217,11 @@
 
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
 "less than 1 hour" = "< 1 Stunde";
+
+/* Suggested invocation phrase to listen to a show
+   Suggested invocation phrase to listen to an audio
+   User activity title when listening to an audio */
+"Listen to %@" = "%@ hören";
 
 /* Introductory text for what is currently on air, displayed on the mini player
    Short label identifying a livestream. Display in uppercase. */
@@ -365,6 +376,9 @@
 /* Title of the action view to choose a regional radio */
 "Regional radios" = "Radio SRF 1 mit Regionaljournal";
 
+/* Sort by relevance option */
+"Relevance" = "Relevanz";
+
 /* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
 "Remove all content" = "Alle Elemente entfernen";
 
@@ -450,6 +464,9 @@
 
 /* Short label identifying content which will be available soon. */
 "Soon" = "In Kürze";
+
+/* Settings section header */
+"Sort by" = "Sortieren nach";
 
 /* Title label used to present live center medias. Only on test versions. */
 "Sport" = "Sport";
@@ -564,6 +581,11 @@
 
 /* Header for video and audio search results */
 "Videos and audios" = "Video und Audio";
+
+/* Suggested invocation phrase to watch a show
+   Suggested invocation phrase to watch a video
+   User activity title when watching a video */
+"Watch %@" = "%@ schauen";
 
 /* Label to present the watch later list */
 "Watch later" = "Später schauen";

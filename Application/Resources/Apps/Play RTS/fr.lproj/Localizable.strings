@@ -107,6 +107,9 @@
 /* Settings section header */
 "Content" = "Contenu";
 
+/* Sort by date option */
+"Date" = "Date";
+
 /* Title of a delete button
    Title of the delete button in the alert view when deleting a download in the player view */
 "Delete" = "Supprimer";
@@ -373,6 +376,9 @@
 /* Title of the action view to choose a regional radio */
 "Regional radios" = "Radios régionales";
 
+/* Sort by relevance option */
+"Relevance" = "Pertinence";
+
 /* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
 "Remove all content" = "Supprimer tout le contenu";
 
@@ -458,6 +464,9 @@
 
 /* Short label identifying content which will be available soon. */
 "Soon" = "Prochainement";
+
+/* Settings section header */
+"Sort by" = "Trier par";
 
 /* Title label used to present live center medias. Only on test versions. */
 "Sport" = "Sport";
