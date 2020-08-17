@@ -20,6 +20,7 @@
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
+#import <Intents/Intents.h>
 #import <libextobjc/libextobjc.h>
 #import <SRGAppearance/SRGAppearance.h>
 
@@ -267,11 +268,16 @@
 {
     [super updateUserActivityState:userActivity];
     
-    userActivity.title = self.show.title;
+    userActivity.title = [NSString stringWithFormat:NSLocalizedString(@"Display %@ episodes", @"User activity title when displaying a show page"), self.show.title];
     [userActivity addUserInfoEntriesFromDictionary:@{ @"URNString" : self.show.URN,
                                                       @"SRGShowData" : [NSKeyedArchiver archivedDataWithRootObject:self.show requiringSecureCoding:NO error:NULL],
                                                       @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
     userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
+    
+    userActivity.eligibleForPrediction = YES;
+    userActivity.persistentIdentifier = self.show.URN;
+    NSString *suggestedInvocationPhraseFormat = (self.show.transmission == SRGTransmissionRadio) ? NSLocalizedString(@"Listen to %@", @"Suggested invocation phrase to listen to a show") : NSLocalizedString(@"Watch %@", @"Suggested invocation phrase to watch a show");
+    userActivity.suggestedInvocationPhrase = [NSString stringWithFormat:suggestedInvocationPhraseFormat, self.show.title];
 }
 
 #pragma mark UI

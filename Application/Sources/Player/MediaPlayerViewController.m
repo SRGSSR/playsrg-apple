@@ -58,6 +58,7 @@
 
 #import <FXReachability/FXReachability.h>
 #import <GoogleCast/GoogleCast.h>
+#import <Intents/Intents.h>
 #import <libextobjc/libextobjc.h>
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
 #import <Masonry/Masonry.h>
@@ -699,14 +700,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGMedia *mainChapterMedia = [self mainChapterMedia];
     if (mainChapterMedia) {
-        userActivity.title = mainChapterMedia.title;
+        NSString *userActivityTitleFormat = (mainChapterMedia.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen to %@", @"User activity title when listening to an audio") : NSLocalizedString(@"Watch %@", @"User activity title when watching a video");
+        userActivity.title = [NSString stringWithFormat:userActivityTitleFormat, mainChapterMedia.title];
         if (mainChapterMedia.endDate) {
             userActivity.expirationDate = mainChapterMedia.endDate;
         }
+        BOOL isLiveStream = (mainChapterMedia.contentType == SRGContentTypeLivestream);
         
         NSNumber *position = nil;
         CMTime currentTime = self.letterboxController.currentTime;
-        if (CMTIME_IS_VALID(currentTime)
+        if (! isLiveStream && CMTIME_IS_VALID(currentTime)
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateIdle
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
@@ -721,6 +724,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                                           @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
         userActivity.requiredUserInfoKeys = [NSSet setWithArray:userActivity.userInfo.allKeys];
         userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:mainChapterMedia atTime:currentTime];
+        
+        if (isLiveStream && mainChapterMedia.channel) {
+            userActivity.eligibleForPrediction = YES;
+            userActivity.persistentIdentifier = mainChapterMedia.URN;
+            NSString *suggestedInvocationPhraseFormat = (mainChapterMedia.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen to %@", @"Suggested invocation phrase to listen to an audio") : NSLocalizedString(@"Watch %@", @"Suggested invocation phrase to watch a video");
+            userActivity.suggestedInvocationPhrase = [NSString stringWithFormat:suggestedInvocationPhraseFormat, mainChapterMedia.channel.title];
+        }
     }
     else {
         [userActivity resignCurrent];
