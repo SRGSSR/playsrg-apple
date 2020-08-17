@@ -2091,7 +2091,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     [self.livestreamMedias enumerateObjectsUsingBlock:^(SRGMedia * _Nonnull media, NSUInteger idx, BOOL * _Nonnull stop) {
         [alertController addAction:[UIAlertAction actionWithTitle:media.title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            ApplicationSettingSetLastSelectedRadioLivestreamURN(media.URN);
             ApplicationSettingSetSelectedLivestreamURNForChannelUid(media.channel.uid, media.URN);
             
             // Use the playback state if playing

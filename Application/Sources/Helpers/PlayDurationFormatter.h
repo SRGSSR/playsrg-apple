@@ -18,9 +18,4 @@ OBJC_EXPORT NSString *PlayFormattedDuration(NSTimeInterval duration);
  */
 OBJC_EXPORT NSString *PlayHumanReadableFormattedDuration(NSTimeInterval duration);
 
-/**
- *  Formats a duration in a compact form, only telling number of days or hours.
- */
-OBJC_EXPORT NSString *PlayShortFormattedDuration(NSTimeInterval duration);
-
 NS_ASSUME_NONNULL_END

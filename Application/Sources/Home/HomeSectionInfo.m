@@ -9,6 +9,7 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Favorites.h"
+#import "HomeLiveMediaVerticalListTableViewCell.h"
 #import "HomeMediaListTableViewCell.h"
 #import "HomeShowListTableViewCell.h"
 #import "HomeShowsAccessTableViewCell.h"
@@ -17,23 +18,6 @@
 
 #import <libextobjc/libextobjc.h>
 #import <SRGDataProvider/SRGDataProvider.h>
-
-static NSArray<SRGMedia *> *HomeSectionReorderedMedias(NSArray<SRGMedia *> *medias, NSString *firstURN)
-{
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGMedia * _Nullable media, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return [media.URN isEqualToString:firstURN];
-    }];
-    SRGMedia *firstMedia = [medias filteredArrayUsingPredicate:predicate].firstObject;
-    if (firstMedia) {
-        NSMutableArray<SRGMedia *> *reorderedMedias = medias.mutableCopy;
-        [reorderedMedias removeObject:firstMedia];
-        [reorderedMedias insertObject:firstMedia atIndex:0];
-        return reorderedMedias.copy;
-    }
-    else {
-        return medias;
-    }
-}
 
 @interface HomeSectionInfo ()
 
@@ -94,6 +78,9 @@ static NSArray<SRGMedia *> *HomeSectionReorderedMedias(NSArray<SRGMedia *> *medi
     }
     else if (self.homeSection == HomeSectionTVFavoriteShows || self.homeSection == HomeSectionRadioFavoriteShows) {
         return HomeShowListTableViewCell.class;
+    }
+    else if (self.homeSection == HomeSectionTVLive || self.homeSection == HomeSectionRadioLive || self.homeSection == HomeSectionRadioLiveSatellite) {
+        return HomeLiveMediaVerticalListTableViewCell.class;
     }
     else {
         return HomeMediaListTableViewCell.class;
@@ -263,9 +250,7 @@ static NSArray<SRGMedia *> *HomeSectionReorderedMedias(NSArray<SRGMedia *> *medi
         case HomeSectionTVLive: {
             SRGBaseRequest *request = [SRGDataProvider.currentDataProvider tvLivestreamsForVendor:vendor withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                 [requestQueue reportError:error];
-                
-                NSString *lastSelectedURN = ApplicationSettingLastSelectedTVLivestreamURN();
-                paginatedItemListCompletionBlock(HomeSectionReorderedMedias(medias, lastSelectedURN), [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+                paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
             }];
             [requestQueue addRequest:request resume:YES];
             break;
@@ -362,17 +347,14 @@ static NSArray<SRGMedia *> *HomeSectionReorderedMedias(NSArray<SRGMedia *> *medi
             if (self.identifier) {
                 SRGRequest *request = [SRGDataProvider.currentDataProvider radioLivestreamsForVendor:vendor channelUid:self.identifier withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                     [requestQueue reportError:error];
-                    
-                    NSString *lastSelectedURN = ApplicationSettingLastSelectedRadioLivestreamURN();
-                    paginatedItemListCompletionBlock(HomeSectionReorderedMedias(medias, lastSelectedURN), [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+                    paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
                 }];
                 [requestQueue addRequest:request resume:YES];
             }
             else {
                 [self refreshRadioLivestreamsForVendor:vendor withRequestQueue:requestQueue completionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                     // Error reporting is done by the refresh method directly, do not report twice here
-                    NSString *lastSelectedURN = ApplicationSettingLastSelectedRadioLivestreamURN();
-                    paginatedItemListCompletionBlock(HomeSectionReorderedMedias(medias, lastSelectedURN), [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+                    paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
                 }];
             }
             break;

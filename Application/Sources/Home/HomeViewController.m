@@ -13,6 +13,7 @@
 #import "Favorites.h"
 #import "GoogleCastBarButtonItem.h"
 #import "Layout.h"
+#import "HomeLiveMediaVerticalListTableViewCell.h"
 #import "HomeSectionHeaderView.h"
 #import "HomeMediaListTableViewCell.h"
 #import "HomeSectionInfo.h"
@@ -117,6 +118,9 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     
     Class mediaListCellClass = HomeMediaListTableViewCell.class;
     [self.tableView registerClass:mediaListCellClass forCellReuseIdentifier:NSStringFromClass(mediaListCellClass)];
+    
+    Class mediaVerticalListCellClass = HomeLiveMediaVerticalListTableViewCell.class;
+    [self.tableView registerClass:mediaVerticalListCellClass forCellReuseIdentifier:NSStringFromClass(mediaVerticalListCellClass)];
     
     Class showListCellClass = HomeShowListTableViewCell.class;
     [self.tableView registerClass:showListCellClass forCellReuseIdentifier:NSStringFromClass(showListCellClass)];
@@ -392,12 +396,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
 
 - (BOOL)isFeaturedInSection:(NSUInteger)section
 {
-    if (self.applicationSectionInfo.applicationSection == ApplicationSectionLive) {
-        return YES;
-    }
-    else {
-        return section == 0;
-    }
+    return section == 0;
 }
 
 - (HomeHeaderType)headerTypeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo tableView:(UITableView *)tableView inSection:(NSUInteger)section
