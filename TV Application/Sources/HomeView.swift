@@ -21,6 +21,9 @@ struct HomeView: View {
         .onAppear {
             model.refresh()
         }
+        .onDisappear {
+            model.cancelRefresh()
+        }
         .ignoresSafeArea(.all, edges: [.leading, .trailing, .bottom])
     }
 }

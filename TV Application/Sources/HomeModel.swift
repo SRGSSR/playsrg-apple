@@ -30,6 +30,10 @@ class HomeModel: ObservableObject {
         loadTopics()
     }
     
+    func cancelRefresh() {
+        cancellables = []
+    }
+    
     private func addRow(with id: HomeRow.Id, to rows: inout [HomeRow]) {
         if let existingRow = self.rows.first(where: { $0.id == id }) {
             rows.append(existingRow)
