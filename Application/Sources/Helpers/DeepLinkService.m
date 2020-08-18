@@ -65,13 +65,10 @@ DeeplinkAction const DeeplinkActionLink = @"link";
                 completionBlock(success);
             }] requestWithOptions:SRGRequestOptionBackgroundCompletionEnabled] resume];
         };
+        
+        [self updateDeepLinkScript];
     }
     return self;
-}
-
-- (void)setup
-{
-    [self updateDeepLinkScript];
 }
 
 #pragma mark Getters and setters
@@ -134,7 +131,6 @@ DeeplinkAction const DeeplinkActionLink = @"link";
 {
     if ([FXReachability sharedInstance].reachable && !self.request.running) {
         NSURL *URL = [NSURL URLWithString:@"api/v2/deeplink/parsePlayUrl.js" relativeToURL:self.serviceURL];
-        
         SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (data) {
                 NSError *writeError = nil;
