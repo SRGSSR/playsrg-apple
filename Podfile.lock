@@ -1,6 +1,11 @@
 PODS:
   - AutoCoding (2.2.3)
   - BDKCollectionIndexView (2.0.0)
+  - Firebase/Analytics (6.30.0):
+    - Firebase/Core
+  - Firebase/Core (6.30.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 6.7.2)
   - Firebase/CoreOnly (6.30.0):
     - FirebaseCore (= 6.10.0)
   - Firebase/RemoteConfig (6.30.0):
@@ -8,6 +13,15 @@ PODS:
     - FirebaseRemoteConfig (~> 4.9.0)
   - FirebaseABTesting (4.2.0):
     - FirebaseCore (~> 6.10)
+  - FirebaseAnalytics (6.7.2):
+    - FirebaseCore (~> 6.8)
+    - FirebaseInstallations (~> 1.4)
+    - GoogleAppMeasurement (= 6.7.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/MethodSwizzler (~> 6.7)
+    - GoogleUtilities/Network (~> 6.7)
+    - "GoogleUtilities/NSData+zlib (~> 6.7)"
+    - nanopb (~> 1.30905.0)
   - FirebaseCore (6.10.0):
     - FirebaseCoreDiagnostics (~> 1.3)
     - GoogleUtilities/Environment (~> 6.7)
@@ -34,13 +48,31 @@ PODS:
     - Protobuf (~> 3.0)
   - google-cast-sdk-no-bluetooth/Core (4.4.6):
     - Protobuf (~> 3.0)
+  - GoogleAppMeasurement (6.7.2):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/MethodSwizzler (~> 6.7)
+    - GoogleUtilities/Network (~> 6.7)
+    - "GoogleUtilities/NSData+zlib (~> 6.7)"
+    - nanopb (~> 1.30905.0)
   - GoogleDataTransport (7.2.0):
     - nanopb (~> 1.30905.0)
+  - GoogleUtilities/AppDelegateSwizzler (6.7.2):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
   - GoogleUtilities/Environment (6.7.2):
     - PromisesObjC (~> 1.2)
   - GoogleUtilities/Logger (6.7.2):
     - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (6.7.2):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (6.7.2):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
   - "GoogleUtilities/NSData+zlib (6.7.2)"
+  - GoogleUtilities/Reachability (6.7.2):
+    - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
   - InAppSettingsKit (3.0.1)
@@ -98,6 +130,7 @@ PODS:
 DEPENDENCIES:
   - AutoCoding (~> 2.2.3)
   - BDKCollectionIndexView (~> 2.0.0)
+  - Firebase/Analytics (~> 6.30.0)
   - Firebase/RemoteConfig (~> 6.30.0)
   - FSCalendar (= 2.7.9)
   - google-cast-sdk-no-bluetooth (~> 4.4.6)
@@ -113,12 +146,14 @@ SPEC REPOS:
     - BDKCollectionIndexView
     - Firebase
     - FirebaseABTesting
+    - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseInstallations
     - FirebaseRemoteConfig
     - FSCalendar
     - google-cast-sdk-no-bluetooth
+    - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
     - InAppSettingsKit
@@ -136,12 +171,14 @@ SPEC CHECKSUMS:
   BDKCollectionIndexView: 8433e02d7e2483edcbef793c910f95d73efed567
   Firebase: 210f41ca352067d83b1ba4fd2e7fb49a0c017397
   FirebaseABTesting: 8a9d8df3acc2b43f4a22014ddf9f601bca6af699
+  FirebaseAnalytics: a299a86ef70fcc6aa011418bc65a7e101fb9636c
   FirebaseCore: 9a41e2de78fef10f63cee30ab10e2945266bc1fc
   FirebaseCoreDiagnostics: 7535fe695737f8c5b350584292a70b7f8ff0357b
   FirebaseInstallations: 45f9d44d3a8d6f780fa337ee8987dad87210fcbc
   FirebaseRemoteConfig: e40f9e084658210c4d9c341cfa9f6cab6ad4f67e
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
   google-cast-sdk-no-bluetooth: 0b2f106f07592fe08bb78851bfd20a89e1cb613b
+  GoogleAppMeasurement: 3def7652b1f5b5a576178dc332e2a36a260fbef6
   GoogleDataTransport: 672fb0ce96fe7f7f31d43672fca62ad2c9c86f7b
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   InAppSettingsKit: 0d6cf327364085375cbfd8011fd6ae1c0d2c7d1c
@@ -154,6 +191,6 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
 
-PODFILE CHECKSUM: 53db9b52290ea7973c2f05117e29459d6c837e0d
+PODFILE CHECKSUM: 0986c3660cf69ec50ce770b7537e3fec84026cf6
 
 COCOAPODS: 1.9.3

@@ -148,6 +148,26 @@ body:
                    …
 version: 4.2.0
 
+name: FirebaseAnalytics, nameSpecified: 
+body: Copyright 2020 Googl…
+version: 6.7.2
+
+name: FirebaseAnalytics, nameSpecified: 
+body: Copyright 2020 Googl…
+version: 6.7.2
+
+name: FirebaseAnalytics, nameSpecified: 
+body: Copyright 2020 Googl…
+version: 6.7.2
+
+name: FirebaseAnalytics, nameSpecified: 
+body: Copyright 2020 Googl…
+version: 6.7.2
+
+name: FirebaseAnalytics, nameSpecified: 
+body: Copyright 2020 Googl…
+version: 6.7.2
+
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
@@ -387,6 +407,26 @@ version: 4.4.6
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
 version: 4.4.6
+
+name: GoogleAppMeasurement, nameSpecified: 
+body: Copyright 2020 Googl…
+version: 6.7.2
+
+name: GoogleAppMeasurement, nameSpecified: 
+body: Copyright 2020 Googl…
+version: 6.7.2
+
+name: GoogleAppMeasurement, nameSpecified: 
+body: Copyright 2020 Googl…
+version: 6.7.2
+
+name: GoogleAppMeasurement, nameSpecified: 
+body: Copyright 2020 Googl…
+version: 6.7.2
+
+name: GoogleAppMeasurement, nameSpecified: 
+body: Copyright 2020 Googl…
+version: 6.7.2
 
 name: GoogleDataTransport, nameSpecified: 
 body: 

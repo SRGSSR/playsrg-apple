@@ -5,6 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 inhibit_all_warnings!
 
 abstract_target 'Play SRG' do
+  pod 'Firebase/Analytics', '~> 6.30.0'
   pod 'Firebase/RemoteConfig', '~> 6.30.0'
 
   abstract_target 'iOS' do
