@@ -392,7 +392,6 @@
 		08C691371D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C691331D391A1B00BB8AAA /* HomeMediaListTableViewCell.m */; };
 		08C691381D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C691331D391A1B00BB8AAA /* HomeMediaListTableViewCell.m */; };
 		08C691391D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C691331D391A1B00BB8AAA /* HomeMediaListTableViewCell.m */; };
-		08D313585365FC2279A430F9 /* libPods-PlaySRG-Play RSI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 150A5554C7A1428D98119E57 /* libPods-PlaySRG-Play RSI.a */; };
 		08DADF8C20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 08DADF8B20D92D6400291AD1 /* placeholder_notification-180.pdf */; };
 		08DADF8D20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 08DADF8B20D92D6400291AD1 /* placeholder_notification-180.pdf */; };
 		08DADF8E20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 08DADF8B20D92D6400291AD1 /* placeholder_notification-180.pdf */; };
@@ -418,8 +417,12 @@
 		08E4BDD420CB1E180079AD9D /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
 		08E4BDD520CB1E1E0079AD9D /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
 		08E4BDD620CB1E230079AD9D /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67BB6971D3E640C00E1FEA3 /* Mantle.framework */; };
-		1E1EFD82A17818BFF3C8F854 /* libPods-PlaySRG-Play RTS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5467A8A9E7F3956DE79E690C /* libPods-PlaySRG-Play RTS.a */; };
-		67AB424805C53ACDE3DD097B /* libPods-PlaySRG-Play SWI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B1E633E3F114EAEC3E74D3 /* libPods-PlaySRG-Play SWI.a */; };
+		0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 624E718ECC7F02E540440901 /* libPods-Play SRG-tvOS-Play RTR TV.a */; };
+		2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3780F919C25BC0944528A5FD /* libPods-Play SRG-iOS-Play RSI.a */; };
+		2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CC3BC704FD48424BB497B2 /* libPods-Play SRG-tvOS-Play RTS TV.a */; };
+		4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD1DB5E0679F09CC8A63D91 /* libPods-Play SRG-tvOS-Play SWI TV.a */; };
+		4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B84B55ACE1A98284136AC0E /* libPods-Play SRG-iOS-Play SRF.a */; };
+		6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF0993A83F1F18CBE90AF3E9 /* libPods-Play SRG-iOS-Play SWI.a */; };
 		6F00875D219AA888004BD6FF /* StoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00875C219AA888004BD6FF /* StoreReview.m */; };
 		6F00875E219AA888004BD6FF /* StoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00875C219AA888004BD6FF /* StoreReview.m */; };
 		6F00875F219AA888004BD6FF /* StoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00875C219AA888004BD6FF /* StoreReview.m */; };
@@ -1493,8 +1496,9 @@
 		6FFCB62624504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
 		6FFCB62724504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
 		6FFCB62824504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
-		7ACE7CA000370D1208243956 /* libPods-PlaySRG-Play SRF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D6E859054BE4FCA7A62352E /* libPods-PlaySRG-Play SRF.a */; };
-		E1D8F87EB9409ADB326F446F /* libPods-PlaySRG-Play RTR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866AF638938EFA7338C23B03 /* libPods-PlaySRG-Play RTR.a */; };
+		70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB348106F5307D86C18CA361 /* libPods-Play SRG-iOS-Play RTS.a */; };
+		8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D81BAFCE19BF2C2B612FE3A2 /* libPods-Play SRG-tvOS-Play SRF TV.a */; };
+		D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A39FE8CAE184E875FB2D868 /* libPods-Play SRG-iOS-Play RTR.a */; };
 		E60178521D635E130000362E /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; };
 		E60178541D635E160000362E /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; };
 		E60178561D635E190000362E /* ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E60178511D635E130000362E /* ComScore.framework */; };
@@ -1585,6 +1589,7 @@
 		E6E2DF2E1D6AD33400791EDE /* ShowHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E2DF2B1D6AD33400791EDE /* ShowHeaderView.xib */; };
 		E6E2DF2F1D6AD33400791EDE /* ShowHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E2DF2B1D6AD33400791EDE /* ShowHeaderView.xib */; };
 		E6E2DF301D6AD33400791EDE /* ShowHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E2DF2B1D6AD33400791EDE /* ShowHeaderView.xib */; };
+		FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CFA73B98E03BB3298E17EB /* libPods-Play SRG-tvOS-Play RSI TV.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1719,7 +1724,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		051E95475182108980358378 /* Pods-PlaySRG-Play RTS.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTS.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS.beta.xcconfig"; sourceTree = "<group>"; };
+		00E494C3E1EB4D27F2A95D22 /* Pods-Play SRG-iOS-Play RTR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.debug.xcconfig"; sourceTree = "<group>"; };
+		0308888C90C1881DBBFCDB84 /* Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
 		0801E0791D4A4A810008021E /* RadioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannel.h; sourceTree = "<group>"; };
 		0801E07A1D4A4A810008021E /* RadioChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioChannel.m; sourceTree = "<group>"; };
 		0804916622831DEE00E4CEC2 /* HomeShowListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeShowListTableViewCell.h; sourceTree = "<group>"; };
@@ -1823,6 +1830,7 @@
 		0887824923AD61D500629312 /* HomeLiveMediaCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeLiveMediaCollectionViewCell.xib; sourceTree = "<group>"; };
 		088899432077627900242654 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		088899442077627900242654 /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
+		089CD93D56BFBE4308BCDE5B /* Pods-Play SRG-tvOS-Play SWI TV.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SWI TV.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SWI TV/Pods-Play SRG-tvOS-Play SWI TV.appstore.xcconfig"; sourceTree = "<group>"; };
 		089EA00F201148170070E11A /* NSTimer+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+PlaySRG.h"; sourceTree = "<group>"; };
 		089EA010201148180070E11A /* NSTimer+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+PlaySRG.m"; sourceTree = "<group>"; };
 		08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGDataProvider+PlaySRG.m"; sourceTree = "<group>"; };
@@ -1836,7 +1844,7 @@
 		08B2A5382426511700C6EED3 /* SRGModule+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGModule+PlaySRG.m"; sourceTree = "<group>"; };
 		08B2A5392426511800C6EED3 /* SRGModule+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGModule+PlaySRG.h"; sourceTree = "<group>"; };
 		08B6F7E5210CF8660097EF8B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		08B77A402409BDF200A3BC3B /* Play Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play Application.xcconfig"; sourceTree = "<group>"; };
+		08B77A402409BDF200A3BC3B /* Play iOS Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS Application.xcconfig"; sourceTree = "<group>"; };
 		08B77A452409C06000A3BC3B /* Play SRF screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SRF screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationScreenshots.swift; sourceTree = "<group>"; };
 		08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -1892,20 +1900,27 @@
 		08DD9D561FFE6EDA00115906 /* ModuleHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleHeaderView.h; sourceTree = "<group>"; };
 		08DD9D581FFE6EDA00115906 /* ModuleHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleHeaderView.m; sourceTree = "<group>"; };
 		08DD9D591FFE6EDA00115906 /* ModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleViewController.m; sourceTree = "<group>"; };
-		0B2F6A29ECF348EE38AA4211 /* Pods-PlaySRG-Play RTR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR.debug.xcconfig"; sourceTree = "<group>"; };
-		0D6E859054BE4FCA7A62352E /* libPods-PlaySRG-Play SRF.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaySRG-Play SRF.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		150A5554C7A1428D98119E57 /* libPods-PlaySRG-Play RSI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaySRG-Play RSI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		199878CE1AE76E2B8B99BE6A /* Pods-PlaySRG-Play RTS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS.debug.xcconfig"; sourceTree = "<group>"; };
-		1A396888AFE85E6202914203 /* Pods-PlaySRG-Play RSI.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RSI.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RSI/Pods-PlaySRG-Play RSI.beta.xcconfig"; sourceTree = "<group>"; };
-		1DF4A3F8DC864546029B9768 /* Pods-PlaySRG-Play RTR.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTR.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR.appstore.xcconfig"; sourceTree = "<group>"; };
-		2C2531A93A602B33B9BEE927 /* Pods-PlaySRG-Play RSI.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RSI.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RSI/Pods-PlaySRG-Play RSI.appstore.xcconfig"; sourceTree = "<group>"; };
-		36D1CAB384848002E732817C /* Pods-PlaySRG-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
-		4805A273FAEBBC301D6DD645 /* Pods-PlaySRG-Play SWI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play SWI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play SWI/Pods-PlaySRG-Play SWI.nightly.xcconfig"; sourceTree = "<group>"; };
-		4E8D44CAC74FCC37F4EF6C48 /* Pods-PlaySRG-Play SRF.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play SRF.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play SRF/Pods-PlaySRG-Play SRF.beta.xcconfig"; sourceTree = "<group>"; };
-		4F662930F039984FE42FCF68 /* Pods-PlaySRG-Play SWI.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play SWI.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play SWI/Pods-PlaySRG-Play SWI.appstore.xcconfig"; sourceTree = "<group>"; };
-		5467A8A9E7F3956DE79E690C /* libPods-PlaySRG-Play RTS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaySRG-Play RTS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		578EE28E01A0687054641299 /* Pods-PlaySRG-Play RTR.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTR.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR.beta.xcconfig"; sourceTree = "<group>"; };
-		5CA73886C1B816E3660CB5E6 /* Pods-PlaySRG-Play SRF.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play SRF.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play SRF/Pods-PlaySRG-Play SRF.nightly.xcconfig"; sourceTree = "<group>"; };
+		096E5AC5C979FBF1F072A888 /* Pods-Play SRG-iOS-Play RSI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; sourceTree = "<group>"; };
+		0A4B38B692D4F377D70590D1 /* Pods-Play SRG-iOS-Play SWI.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; sourceTree = "<group>"; };
+		0AD1DB5E0679F09CC8A63D91 /* libPods-Play SRG-tvOS-Play SWI TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-tvOS-Play SWI TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BE5DAB62CDE5B1AB16221B1 /* Pods-Play SRG-iOS-Play RSI.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.appstore.xcconfig"; sourceTree = "<group>"; };
+		0DE7B2C29BE715E26936528F /* Pods-Play SRG-iOS-Play RTS.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.nightly.xcconfig"; sourceTree = "<group>"; };
+		0F45A4220963DAFF7C4E485E /* Pods-Play SRG-iOS-Play RTS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.debug.xcconfig"; sourceTree = "<group>"; };
+		12829F17C58E0E94AA8581F8 /* Pods-Play SRG-tvOS-Play RSI TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RSI TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RSI TV/Pods-Play SRG-tvOS-Play RSI TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		1B84B55ACE1A98284136AC0E /* libPods-Play SRG-iOS-Play SRF.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-iOS-Play SRF.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2252098ACCDEBD3AA877F43B /* Pods-Play SRG-tvOS-Play RTR TV.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTR TV.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTR TV/Pods-Play SRG-tvOS-Play RTR TV.beta.xcconfig"; sourceTree = "<group>"; };
+		26B8D19FCEF51E9B267F34E1 /* Pods-Play SRG-iOS-Play RTS.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.beta.xcconfig"; sourceTree = "<group>"; };
+		350C9EF1CA15C86166413AB4 /* Pods-Play SRG-tvOS-Play RTR TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTR TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTR TV/Pods-Play SRG-tvOS-Play RTR TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		3780F919C25BC0944528A5FD /* libPods-Play SRG-iOS-Play RSI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-iOS-Play RSI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		440D5D03A2A02AC62DC4040B /* Pods-Play SRG-tvOS-Play RSI TV.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RSI TV.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RSI TV/Pods-Play SRG-tvOS-Play RSI TV.beta.xcconfig"; sourceTree = "<group>"; };
+		478E8037AE96E5CBFF1EB1C8 /* Pods-Play SRG-iOS-Play RSI.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.beta.xcconfig"; sourceTree = "<group>"; };
+		52E74FBFA1CAB47863D9ECEB /* Pods-Play SRG-tvOS-Play RTS TV.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTS TV.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.beta.xcconfig"; sourceTree = "<group>"; };
+		53B51785B4D437C84E6FDBA2 /* Pods-Play SRG-tvOS-Play RSI TV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RSI TV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RSI TV/Pods-Play SRG-tvOS-Play RSI TV.debug.xcconfig"; sourceTree = "<group>"; };
+		624E718ECC7F02E540440901 /* libPods-Play SRG-tvOS-Play RTR TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-tvOS-Play RTR TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		64070818DAAEDF96D9575347 /* Pods-Play SRG-iOS-Play SRF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SRF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.debug.xcconfig"; sourceTree = "<group>"; };
+		640C32BF9990D8053AD33554 /* Pods-Play SRG-tvOS-Play SWI TV.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SWI TV.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SWI TV/Pods-Play SRG-tvOS-Play SWI TV.beta.xcconfig"; sourceTree = "<group>"; };
+		6A39FE8CAE184E875FB2D868 /* libPods-Play SRG-iOS-Play RTR.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-iOS-Play RTR.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ADC4098DF422C77345A1EF9 /* Pods-Play SRG-tvOS-Play RSI TV.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RSI TV.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RSI TV/Pods-Play SRG-tvOS-Play RSI TV.appstore.xcconfig"; sourceTree = "<group>"; };
 		6F00875B219AA888004BD6FF /* StoreReview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreReview.h; sourceTree = "<group>"; };
 		6F00875C219AA888004BD6FF /* StoreReview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreReview.m; sourceTree = "<group>"; };
 		6F0506E5245468EE0053253E /* SplitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
@@ -2136,6 +2151,27 @@
 		6F861AF71DAE65A600C46102 /* SRGMediaPlayerDesignables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGMediaPlayerDesignables.m; sourceTree = "<group>"; };
 		6F88139323D85DD600A00826 /* GoogleCastBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleCastBarButtonItem.h; sourceTree = "<group>"; };
 		6F88139423D85DD600A00826 /* GoogleCastBarButtonItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleCastBarButtonItem.m; sourceTree = "<group>"; };
+		6F88408024EBF92A007463ED /* Play RSI TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		6F88408124EBF92A007463ED /* Play RTS TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		6F88408224EBF92A007463ED /* Play SWI TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.debug.xcconfig"; sourceTree = "<group>"; };
+		6F88408324EBF92B007463ED /* Play RTR TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		6F88408424EBF92B007463ED /* Play RTS TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.debug.xcconfig"; sourceTree = "<group>"; };
+		6F88408524EBF92C007463ED /* Play SWI TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		6F88408624EBF92C007463ED /* Play RTS TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		6F88408724EBF92C007463ED /* Play SRF TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.beta.xcconfig"; sourceTree = "<group>"; };
+		6F88408824EBF92C007463ED /* Play RTR TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		6F88408924EBF92D007463ED /* Play RSI TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.debug.xcconfig"; sourceTree = "<group>"; };
+		6F88408A24EBF92D007463ED /* Play SRF TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		6F88408B24EBF92D007463ED /* Play RTR TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.debug.xcconfig"; sourceTree = "<group>"; };
+		6F88408C24EBF92E007463ED /* Play RTS TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.beta.xcconfig"; sourceTree = "<group>"; };
+		6F88408D24EBF92E007463ED /* Play SWI TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		6F88408E24EBF92F007463ED /* Play SWI TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.beta.xcconfig"; sourceTree = "<group>"; };
+		6F88408F24EBF92F007463ED /* Play RSI TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		6F88409024EBF930007463ED /* Play RTR TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.beta.xcconfig"; sourceTree = "<group>"; };
+		6F88409124EBF930007463ED /* Play RSI TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.beta.xcconfig"; sourceTree = "<group>"; };
+		6F88409224EBF930007463ED /* Play SRF TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		6F88409324EBF931007463ED /* Play SRF TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.debug.xcconfig"; sourceTree = "<group>"; };
+		6F88409424EC05E4007463ED /* Play tvOS Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play tvOS Application.xcconfig"; sourceTree = "<group>"; };
 		6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoconutKit.framework; path = Carthage/Build/iOS/Static/CoconutKit.framework; sourceTree = "<group>"; };
 		6F9122BD1DC8708400725EEB /* PlayErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayErrors.h; sourceTree = "<group>"; };
 		6F9122BE1DC8708400725EEB /* PlayErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayErrors.m; sourceTree = "<group>"; };
@@ -2277,13 +2313,29 @@
 		6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchSettingsViewController.storyboard; sourceTree = "<group>"; };
 		6FFCB62224504C6C00D16466 /* SwimlaneCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwimlaneCollectionViewLayout.h; sourceTree = "<group>"; };
 		6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwimlaneCollectionViewLayout.m; sourceTree = "<group>"; };
-		866AF638938EFA7338C23B03 /* libPods-PlaySRG-Play RTR.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaySRG-Play RTR.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9BDBB65E7B9D845CB1576750 /* Pods-PlaySRG-Play RTS.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTS.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS.nightly.xcconfig"; sourceTree = "<group>"; };
-		A0923E657497DE17CE057F6E /* Pods-PlaySRG-Play RTR.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RTR.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR.nightly.xcconfig"; sourceTree = "<group>"; };
-		CD853D536D4B448EAFBB3C4F /* Pods-PlaySRG-Play SWI.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play SWI.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play SWI/Pods-PlaySRG-Play SWI.beta.xcconfig"; sourceTree = "<group>"; };
-		D392C8B5814D1494AE9207DE /* Pods-PlaySRG-Play RSI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RSI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RSI/Pods-PlaySRG-Play RSI.debug.xcconfig"; sourceTree = "<group>"; };
-		DAC7D77D78B4B69004709A0D /* Pods-PlaySRG-Play SRF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play SRF.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play SRF/Pods-PlaySRG-Play SRF.debug.xcconfig"; sourceTree = "<group>"; };
-		E186CB13020D78150445B0CB /* Pods-PlaySRG-Play SRF.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play SRF.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play SRF/Pods-PlaySRG-Play SRF.appstore.xcconfig"; sourceTree = "<group>"; };
+		7D4D90DEC67A54E9E386CAD4 /* Pods-Play SRG-iOS-Play RSI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.debug.xcconfig"; sourceTree = "<group>"; };
+		87A982BD56B5181A6E802E03 /* Pods-Play SRG-tvOS-Play RTS TV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTS TV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.debug.xcconfig"; sourceTree = "<group>"; };
+		881AC8571743B65FBCF1192E /* Pods-Play SRG-iOS-Play RTR.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.appstore.xcconfig"; sourceTree = "<group>"; };
+		92B4B46D0768088FD67B3EFC /* Pods-Play SRG-iOS-Play RTR.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.beta.xcconfig"; sourceTree = "<group>"; };
+		95C2A04103A3A3F3A9B9291C /* Pods-Play SRG-iOS-Play SWI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; sourceTree = "<group>"; };
+		A660CE9179B6F1E81374096F /* Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SWI TV/Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		A7E130D069D1EEFCAE9360BC /* Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTR TV/Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		AB348106F5307D86C18CA361 /* libPods-Play SRG-iOS-Play RTS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-iOS-Play RTS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC24B637A7059190147676F6 /* Pods-Play SRG-iOS-Play RTR.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.nightly.xcconfig"; sourceTree = "<group>"; };
+		AD5B233082BA1088BD5E70D8 /* Pods-Play SRG-tvOS-Play SRF TV.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SRF TV.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SRF TV/Pods-Play SRG-tvOS-Play SRF TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		AF0993A83F1F18CBE90AF3E9 /* libPods-Play SRG-iOS-Play SWI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-iOS-Play SWI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0A0A54C3B7CECF98315E41F /* Pods-Play SRG-iOS-Play SRF.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SRF.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.beta.xcconfig"; sourceTree = "<group>"; };
+		B218A2EDA3990E9749397CB2 /* Pods-Play SRG-tvOS-Play SWI TV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SWI TV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SWI TV/Pods-Play SRG-tvOS-Play SWI TV.debug.xcconfig"; sourceTree = "<group>"; };
+		B55BDEFBEBED1FD93AA63BCF /* Pods-Play SRG-tvOS-Play RTS TV.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTS TV.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		B8D77F4DC758BB2FBC0CCF77 /* Pods-Play SRG-tvOS-Play SRF TV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SRF TV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SRF TV/Pods-Play SRG-tvOS-Play SRF TV.debug.xcconfig"; sourceTree = "<group>"; };
+		C2F404C7EFD8C15CE65D3380 /* Pods-Play SRG-iOS-Play SRF.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SRF.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.nightly.xcconfig"; sourceTree = "<group>"; };
+		C6D201D3F3CD4D0869FF4D4E /* Pods-Play SRG-tvOS-Play SRF TV.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SRF TV.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SRF TV/Pods-Play SRG-tvOS-Play SRF TV.beta.xcconfig"; sourceTree = "<group>"; };
+		C71A05E19398D699A2462440 /* Pods-Play SRG-tvOS-Play RTR TV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTR TV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTR TV/Pods-Play SRG-tvOS-Play RTR TV.debug.xcconfig"; sourceTree = "<group>"; };
+		C7CC3BC704FD48424BB497B2 /* libPods-Play SRG-tvOS-Play RTS TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-tvOS-Play RTS TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9708808FAB753042E133403 /* Pods-Play SRG-iOS-Play SWI.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.appstore.xcconfig"; sourceTree = "<group>"; };
+		D4CFA73B98E03BB3298E17EB /* libPods-Play SRG-tvOS-Play RSI TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-tvOS-Play RSI TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D81BAFCE19BF2C2B612FE3A2 /* libPods-Play SRG-tvOS-Play SRF TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-tvOS-Play SRF TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC9698F7CBD46B73BA105098 /* Pods-Play SRG-iOS-Play SWI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.debug.xcconfig"; sourceTree = "<group>"; };
 		E60178511D635E130000362E /* ComScore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComScore.framework; path = Carthage/Build/iOS/ComScore.framework; sourceTree = "<group>"; };
 		E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftMessagesBridge.swift; sourceTree = "<group>"; };
 		E62459F31D488DC300482BE9 /* Play-Swift-Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Play-Swift-Bridge.h"; sourceTree = "<group>"; };
@@ -2313,9 +2365,8 @@
 		E6E2DF241D6AD32800791EDE /* ShowHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowHeaderView.h; sourceTree = "<group>"; };
 		E6E2DF251D6AD32800791EDE /* ShowHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowHeaderView.m; sourceTree = "<group>"; };
 		E6E2DF2B1D6AD33400791EDE /* ShowHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowHeaderView.xib; sourceTree = "<group>"; };
-		EF3D9E4D18D6FD51AB99D74A /* Pods-PlaySRG-Play RSI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play RSI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play RSI/Pods-PlaySRG-Play RSI.nightly.xcconfig"; sourceTree = "<group>"; };
-		F0B1E633E3F114EAEC3E74D3 /* libPods-PlaySRG-Play SWI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaySRG-Play SWI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F541B0D1F40DADA8E0B6B36D /* Pods-PlaySRG-Play SWI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaySRG-Play SWI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaySRG-Play SWI/Pods-PlaySRG-Play SWI.debug.xcconfig"; sourceTree = "<group>"; };
+		EC2DF535757623B50FE8F3E2 /* Pods-Play SRG-iOS-Play SRF.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SRF.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.appstore.xcconfig"; sourceTree = "<group>"; };
+		F96229F633EA40ACB18CD9F0 /* Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SRF TV/Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2392,7 +2443,7 @@
 				E60178521D635E130000362E /* ComScore.framework in Frameworks */,
 				6F6DD3A824E449BA003F9437 /* SRGLetterbox in Frameworks */,
 				6F5F7FE41F382E9D00C330EC /* TCSDK.framework in Frameworks */,
-				7ACE7CA000370D1208243956 /* libPods-PlaySRG-Play SRF.a in Frameworks */,
+				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2432,7 +2483,7 @@
 				E67FFA271D3E6840007BD7BA /* Mantle.framework in Frameworks */,
 				E60178541D635E160000362E /* ComScore.framework in Frameworks */,
 				6F5F7FE81F382EB700C330EC /* TCSDK.framework in Frameworks */,
-				1E1EFD82A17818BFF3C8F854 /* libPods-PlaySRG-Play RTS.a in Frameworks */,
+				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2472,7 +2523,7 @@
 				E67FFA2C1D3E6844007BD7BA /* Mantle.framework in Frameworks */,
 				E60178561D635E190000362E /* ComScore.framework in Frameworks */,
 				6F5F7FEC1F382EBB00C330EC /* TCSDK.framework in Frameworks */,
-				08D313585365FC2279A430F9 /* libPods-PlaySRG-Play RSI.a in Frameworks */,
+				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2512,7 +2563,7 @@
 				E67FFA311D3E6847007BD7BA /* Mantle.framework in Frameworks */,
 				E60178581D635E1D0000362E /* ComScore.framework in Frameworks */,
 				6F5F7FF01F382EBF00C330EC /* TCSDK.framework in Frameworks */,
-				E1D8F87EB9409ADB326F446F /* libPods-PlaySRG-Play RTR.a in Frameworks */,
+				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2552,7 +2603,7 @@
 				E67FFA361D3E684B007BD7BA /* Mantle.framework in Frameworks */,
 				E601785A1D635E210000362E /* ComScore.framework in Frameworks */,
 				6F5F7FF41F382EC400C330EC /* TCSDK.framework in Frameworks */,
-				67AB424805C53ACDE3DD097B /* libPods-PlaySRG-Play SWI.a in Frameworks */,
+				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2629,6 +2680,7 @@
 				6FA84A1A24E44B6400B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AA724E590EE00FF286E /* FetchImage in Frameworks */,
+				8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2640,6 +2692,7 @@
 				6FA84A1E24E44B6D00B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAB24E590F400FF286E /* FetchImage in Frameworks */,
+				2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2651,6 +2704,7 @@
 				6FA84A2224E44B7500B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAF24E590FC00FF286E /* FetchImage in Frameworks */,
+				FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2662,6 +2716,7 @@
 				6FA84A2624E44B7B00B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB324E5910400FF286E /* FetchImage in Frameworks */,
+				0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2673,6 +2728,7 @@
 				6FA84A2A24E44B8300B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB724E5910B00FF286E /* FetchImage in Frameworks */,
+				4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3240,26 +3296,46 @@
 		45D67F958D75253E27BCDE9C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D392C8B5814D1494AE9207DE /* Pods-PlaySRG-Play RSI.debug.xcconfig */,
-				2C2531A93A602B33B9BEE927 /* Pods-PlaySRG-Play RSI.appstore.xcconfig */,
-				1A396888AFE85E6202914203 /* Pods-PlaySRG-Play RSI.beta.xcconfig */,
-				EF3D9E4D18D6FD51AB99D74A /* Pods-PlaySRG-Play RSI.nightly.xcconfig */,
-				0B2F6A29ECF348EE38AA4211 /* Pods-PlaySRG-Play RTR.debug.xcconfig */,
-				1DF4A3F8DC864546029B9768 /* Pods-PlaySRG-Play RTR.appstore.xcconfig */,
-				578EE28E01A0687054641299 /* Pods-PlaySRG-Play RTR.beta.xcconfig */,
-				A0923E657497DE17CE057F6E /* Pods-PlaySRG-Play RTR.nightly.xcconfig */,
-				199878CE1AE76E2B8B99BE6A /* Pods-PlaySRG-Play RTS.debug.xcconfig */,
-				36D1CAB384848002E732817C /* Pods-PlaySRG-Play RTS.appstore.xcconfig */,
-				051E95475182108980358378 /* Pods-PlaySRG-Play RTS.beta.xcconfig */,
-				9BDBB65E7B9D845CB1576750 /* Pods-PlaySRG-Play RTS.nightly.xcconfig */,
-				DAC7D77D78B4B69004709A0D /* Pods-PlaySRG-Play SRF.debug.xcconfig */,
-				E186CB13020D78150445B0CB /* Pods-PlaySRG-Play SRF.appstore.xcconfig */,
-				4E8D44CAC74FCC37F4EF6C48 /* Pods-PlaySRG-Play SRF.beta.xcconfig */,
-				5CA73886C1B816E3660CB5E6 /* Pods-PlaySRG-Play SRF.nightly.xcconfig */,
-				F541B0D1F40DADA8E0B6B36D /* Pods-PlaySRG-Play SWI.debug.xcconfig */,
-				4F662930F039984FE42FCF68 /* Pods-PlaySRG-Play SWI.appstore.xcconfig */,
-				CD853D536D4B448EAFBB3C4F /* Pods-PlaySRG-Play SWI.beta.xcconfig */,
-				4805A273FAEBBC301D6DD645 /* Pods-PlaySRG-Play SWI.nightly.xcconfig */,
+				7D4D90DEC67A54E9E386CAD4 /* Pods-Play SRG-iOS-Play RSI.debug.xcconfig */,
+				0BE5DAB62CDE5B1AB16221B1 /* Pods-Play SRG-iOS-Play RSI.appstore.xcconfig */,
+				478E8037AE96E5CBFF1EB1C8 /* Pods-Play SRG-iOS-Play RSI.beta.xcconfig */,
+				096E5AC5C979FBF1F072A888 /* Pods-Play SRG-iOS-Play RSI.nightly.xcconfig */,
+				00E494C3E1EB4D27F2A95D22 /* Pods-Play SRG-iOS-Play RTR.debug.xcconfig */,
+				881AC8571743B65FBCF1192E /* Pods-Play SRG-iOS-Play RTR.appstore.xcconfig */,
+				92B4B46D0768088FD67B3EFC /* Pods-Play SRG-iOS-Play RTR.beta.xcconfig */,
+				AC24B637A7059190147676F6 /* Pods-Play SRG-iOS-Play RTR.nightly.xcconfig */,
+				0F45A4220963DAFF7C4E485E /* Pods-Play SRG-iOS-Play RTS.debug.xcconfig */,
+				05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */,
+				26B8D19FCEF51E9B267F34E1 /* Pods-Play SRG-iOS-Play RTS.beta.xcconfig */,
+				0DE7B2C29BE715E26936528F /* Pods-Play SRG-iOS-Play RTS.nightly.xcconfig */,
+				64070818DAAEDF96D9575347 /* Pods-Play SRG-iOS-Play SRF.debug.xcconfig */,
+				EC2DF535757623B50FE8F3E2 /* Pods-Play SRG-iOS-Play SRF.appstore.xcconfig */,
+				B0A0A54C3B7CECF98315E41F /* Pods-Play SRG-iOS-Play SRF.beta.xcconfig */,
+				C2F404C7EFD8C15CE65D3380 /* Pods-Play SRG-iOS-Play SRF.nightly.xcconfig */,
+				DC9698F7CBD46B73BA105098 /* Pods-Play SRG-iOS-Play SWI.debug.xcconfig */,
+				C9708808FAB753042E133403 /* Pods-Play SRG-iOS-Play SWI.appstore.xcconfig */,
+				0A4B38B692D4F377D70590D1 /* Pods-Play SRG-iOS-Play SWI.beta.xcconfig */,
+				95C2A04103A3A3F3A9B9291C /* Pods-Play SRG-iOS-Play SWI.nightly.xcconfig */,
+				53B51785B4D437C84E6FDBA2 /* Pods-Play SRG-tvOS-Play RSI TV.debug.xcconfig */,
+				6ADC4098DF422C77345A1EF9 /* Pods-Play SRG-tvOS-Play RSI TV.appstore.xcconfig */,
+				440D5D03A2A02AC62DC4040B /* Pods-Play SRG-tvOS-Play RSI TV.beta.xcconfig */,
+				12829F17C58E0E94AA8581F8 /* Pods-Play SRG-tvOS-Play RSI TV.nightly.xcconfig */,
+				C71A05E19398D699A2462440 /* Pods-Play SRG-tvOS-Play RTR TV.debug.xcconfig */,
+				A7E130D069D1EEFCAE9360BC /* Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig */,
+				2252098ACCDEBD3AA877F43B /* Pods-Play SRG-tvOS-Play RTR TV.beta.xcconfig */,
+				350C9EF1CA15C86166413AB4 /* Pods-Play SRG-tvOS-Play RTR TV.nightly.xcconfig */,
+				87A982BD56B5181A6E802E03 /* Pods-Play SRG-tvOS-Play RTS TV.debug.xcconfig */,
+				B55BDEFBEBED1FD93AA63BCF /* Pods-Play SRG-tvOS-Play RTS TV.appstore.xcconfig */,
+				52E74FBFA1CAB47863D9ECEB /* Pods-Play SRG-tvOS-Play RTS TV.beta.xcconfig */,
+				0308888C90C1881DBBFCDB84 /* Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig */,
+				B8D77F4DC758BB2FBC0CCF77 /* Pods-Play SRG-tvOS-Play SRF TV.debug.xcconfig */,
+				AD5B233082BA1088BD5E70D8 /* Pods-Play SRG-tvOS-Play SRF TV.appstore.xcconfig */,
+				C6D201D3F3CD4D0869FF4D4E /* Pods-Play SRG-tvOS-Play SRF TV.beta.xcconfig */,
+				F96229F633EA40ACB18CD9F0 /* Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig */,
+				B218A2EDA3990E9749397CB2 /* Pods-Play SRG-tvOS-Play SWI TV.debug.xcconfig */,
+				089CD93D56BFBE4308BCDE5B /* Pods-Play SRG-tvOS-Play SWI TV.appstore.xcconfig */,
+				640C32BF9990D8053AD33554 /* Pods-Play SRG-tvOS-Play SWI TV.beta.xcconfig */,
+				A660CE9179B6F1E81374096F /* Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -3281,28 +3357,49 @@
 		6F0136DF21395B8400B95405 /* Xcode */ = {
 			isa = PBXGroup;
 			children = (
-				08B77A402409BDF200A3BC3B /* Play Application.xcconfig */,
+				08B77A402409BDF200A3BC3B /* Play iOS Application.xcconfig */,
 				0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */,
+				6F88408024EBF92A007463ED /* Play RSI TV.appstore.xcconfig */,
+				6F88409124EBF930007463ED /* Play RSI TV.beta.xcconfig */,
+				6F88408924EBF92D007463ED /* Play RSI TV.debug.xcconfig */,
+				6F88408F24EBF92F007463ED /* Play RSI TV.nightly.xcconfig */,
 				6F1EBE19222EBB7D003E0722 /* Play RSI.appstore.xcconfig */,
 				6F1EBE13222EBB7C003E0722 /* Play RSI.beta.xcconfig */,
 				6F1EBE0F222EBB7C003E0722 /* Play RSI.debug.xcconfig */,
 				6F1EBE10222EBB7C003E0722 /* Play RSI.nightly.xcconfig */,
+				6F88408824EBF92C007463ED /* Play RTR TV.appstore.xcconfig */,
+				6F88409024EBF930007463ED /* Play RTR TV.beta.xcconfig */,
+				6F88408B24EBF92D007463ED /* Play RTR TV.debug.xcconfig */,
+				6F88408324EBF92B007463ED /* Play RTR TV.nightly.xcconfig */,
 				6F1EBE17222EBB7D003E0722 /* Play RTR.appstore.xcconfig */,
 				6F1EBE15222EBB7D003E0722 /* Play RTR.beta.xcconfig */,
 				6F1EBE0E222EBB7C003E0722 /* Play RTR.debug.xcconfig */,
 				6F1EBE1D222EBB7E003E0722 /* Play RTR.nightly.xcconfig */,
+				6F88408124EBF92A007463ED /* Play RTS TV.appstore.xcconfig */,
+				6F88408C24EBF92E007463ED /* Play RTS TV.beta.xcconfig */,
+				6F88408424EBF92B007463ED /* Play RTS TV.debug.xcconfig */,
+				6F88408624EBF92C007463ED /* Play RTS TV.nightly.xcconfig */,
 				6F1EBE0C222EBB7C003E0722 /* Play RTS.appstore.xcconfig */,
 				6F1EBE0D222EBB7C003E0722 /* Play RTS.beta.xcconfig */,
 				6F1EBE0B222EBB7B003E0722 /* Play RTS.debug.xcconfig */,
 				6F1EBE11222EBB7C003E0722 /* Play RTS.nightly.xcconfig */,
+				6F88408A24EBF92D007463ED /* Play SRF TV.appstore.xcconfig */,
+				6F88408724EBF92C007463ED /* Play SRF TV.beta.xcconfig */,
+				6F88409324EBF931007463ED /* Play SRF TV.debug.xcconfig */,
+				6F88409224EBF930007463ED /* Play SRF TV.nightly.xcconfig */,
 				6F1EBE1A222EBB7D003E0722 /* Play SRF.appstore.xcconfig */,
 				6F1EBE1B222EBB7D003E0722 /* Play SRF.beta.xcconfig */,
 				6F1EBE1C222EBB7E003E0722 /* Play SRF.debug.xcconfig */,
 				6F1EBE18222EBB7D003E0722 /* Play SRF.nightly.xcconfig */,
+				6F88408D24EBF92E007463ED /* Play SWI TV.appstore.xcconfig */,
+				6F88408E24EBF92F007463ED /* Play SWI TV.beta.xcconfig */,
+				6F88408224EBF92A007463ED /* Play SWI TV.debug.xcconfig */,
+				6F88408524EBF92C007463ED /* Play SWI TV.nightly.xcconfig */,
 				6F1EBE1E222EBB7E003E0722 /* Play SWI.appstore.xcconfig */,
 				6F1EBE12222EBB7C003E0722 /* Play SWI.beta.xcconfig */,
 				6F1EBE14222EBB7D003E0722 /* Play SWI.debug.xcconfig */,
 				6F1EBE16222EBB7D003E0722 /* Play SWI.nightly.xcconfig */,
+				6F88409424EC05E4007463ED /* Play tvOS Application.xcconfig */,
 				0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */,
 				08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */,
 			);
@@ -3748,11 +3845,6 @@
 				6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */,
 				6F0C991F2121F9DF00073AB6 /* FXReachability.framework */,
 				6F0C99202121F9DF00073AB6 /* libextobjc.framework */,
-				150A5554C7A1428D98119E57 /* libPods-PlaySRG-Play RSI.a */,
-				866AF638938EFA7338C23B03 /* libPods-PlaySRG-Play RTR.a */,
-				5467A8A9E7F3956DE79E690C /* libPods-PlaySRG-Play RTS.a */,
-				0D6E859054BE4FCA7A62352E /* libPods-PlaySRG-Play SRF.a */,
-				F0B1E633E3F114EAEC3E74D3 /* libPods-PlaySRG-Play SWI.a */,
 				6F0C992B2121F9E100073AB6 /* MAKVONotificationCenter.framework */,
 				E67BB6971D3E640C00E1FEA3 /* Mantle.framework */,
 				6F5392DA2248FF490002BF87 /* Masonry.framework */,
@@ -3785,6 +3877,16 @@
 				6F5F7FE11F382E9D00C330EC /* TCSDK.framework */,
 				6F5392A82248CF470002BF87 /* UICKeyChainStore.framework */,
 				6F5392BE2248DB6F0002BF87 /* YYWebImage.framework */,
+				3780F919C25BC0944528A5FD /* libPods-Play SRG-iOS-Play RSI.a */,
+				6A39FE8CAE184E875FB2D868 /* libPods-Play SRG-iOS-Play RTR.a */,
+				AB348106F5307D86C18CA361 /* libPods-Play SRG-iOS-Play RTS.a */,
+				1B84B55ACE1A98284136AC0E /* libPods-Play SRG-iOS-Play SRF.a */,
+				AF0993A83F1F18CBE90AF3E9 /* libPods-Play SRG-iOS-Play SWI.a */,
+				D4CFA73B98E03BB3298E17EB /* libPods-Play SRG-tvOS-Play RSI TV.a */,
+				624E718ECC7F02E540440901 /* libPods-Play SRG-tvOS-Play RTR TV.a */,
+				C7CC3BC704FD48424BB497B2 /* libPods-Play SRG-tvOS-Play RTS TV.a */,
+				D81BAFCE19BF2C2B612FE3A2 /* libPods-Play SRG-tvOS-Play SRF TV.a */,
+				0AD1DB5E0679F09CC8A63D91 /* libPods-Play SRG-tvOS-Play SWI TV.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -4225,6 +4327,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F331CF724D06B8400C096AB /* Build configuration list for PBXNativeTarget "Play SRF TV" */;
 			buildPhases = (
+				3F06504E4BC663E2337102FC /* [CP] Check Pods Manifest.lock */,
 				6F331CE024D06B8200C096AB /* Sources */,
 				6F331CE124D06B8200C096AB /* Frameworks */,
 				6F331CE224D06B8200C096AB /* Resources */,
@@ -4249,6 +4352,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F331D0B24D06BA300C096AB /* Build configuration list for PBXNativeTarget "Play RTS TV" */;
 			buildPhases = (
+				FAE3B1C7F74BDAE7DC78737D /* [CP] Check Pods Manifest.lock */,
 				6F331CF824D06BA200C096AB /* Sources */,
 				6F331CF924D06BA200C096AB /* Frameworks */,
 				6F331CFA24D06BA200C096AB /* Resources */,
@@ -4273,6 +4377,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F331D2324D06BB800C096AB /* Build configuration list for PBXNativeTarget "Play RSI TV" */;
 			buildPhases = (
+				E7AC0E2F6A0FB261ACE34DB4 /* [CP] Check Pods Manifest.lock */,
 				6F331D1024D06BB800C096AB /* Sources */,
 				6F331D1124D06BB800C096AB /* Frameworks */,
 				6F331D1224D06BB800C096AB /* Resources */,
@@ -4297,6 +4402,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F331D3B24D06BC700C096AB /* Build configuration list for PBXNativeTarget "Play RTR TV" */;
 			buildPhases = (
+				1FF1158BC96D38AD87F2F9E1 /* [CP] Check Pods Manifest.lock */,
 				6F331D2824D06BC600C096AB /* Sources */,
 				6F331D2924D06BC600C096AB /* Frameworks */,
 				6F331D2A24D06BC600C096AB /* Resources */,
@@ -4321,6 +4427,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F331D5324D06C2700C096AB /* Build configuration list for PBXNativeTarget "Play SWI TV" */;
 			buildPhases = (
+				69679F3DF79A5A7DF70B2B79 /* [CP] Check Pods Manifest.lock */,
 				6F331D4024D06C2600C096AB /* Sources */,
 				6F331D4124D06C2600C096AB /* Frameworks */,
 				6F331D4224D06C2600C096AB /* Resources */,
@@ -5584,6 +5691,28 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ ! -z \"${PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:0:Values:3 ${PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.inApp.server.plist\"\nfi\n";
 		};
+		1FF1158BC96D38AD87F2F9E1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Play SRG-tvOS-Play RTR TV-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		232237A98B5828DBC825D3FD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -5595,7 +5724,29 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PlaySRG-Play SRF-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Play SRG-iOS-Play SRF-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3F06504E4BC663E2337102FC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Play SRG-tvOS-Play SRF TV-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5608,15 +5759,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play SRF/Pods-PlaySRG-Play SRF-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play SRF/Pods-PlaySRG-Play SRF-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play SRF/Pods-PlaySRG-Play SRF-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		49ADB3012DE6D27CE66B2113 /* [CP] Check Pods Manifest.lock */ = {
@@ -5630,7 +5781,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PlaySRG-Play SWI-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Play SRG-iOS-Play SWI-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5643,15 +5794,37 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RTS/Pods-PlaySRG-Play RTS-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		69679F3DF79A5A7DF70B2B79 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Play SRG-tvOS-Play SWI TV-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6F0108D022E96E96002DC778 /* Insert Version In Settings Bundle */ = {
@@ -5989,7 +6162,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PlaySRG-Play RSI-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Play SRG-iOS-Play RSI-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -6007,7 +6180,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PlaySRG-Play RTS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Play SRG-iOS-Play RTS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -6020,15 +6193,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RSI/Pods-PlaySRG-Play RSI-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RSI/Pods-PlaySRG-Play RSI-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RSI/Pods-PlaySRG-Play RSI-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9C3D1D8DF4FF07B5A8C53C11 /* [CP] Copy Pods Resources */ = {
@@ -6037,15 +6210,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play SWI/Pods-PlaySRG-Play SWI-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play SWI/Pods-PlaySRG-Play SWI-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play SWI/Pods-PlaySRG-Play SWI-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E65311DD1D3E69A700B4B8BB /* Copy Frameworks (Carthage) */ = {
@@ -6148,21 +6321,65 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
+		E7AC0E2F6A0FB261ACE34DB4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Play SRG-tvOS-Play RSI TV-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F036A8D455D4D1988A3D0455 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PlaySRG-Play RTR/Pods-PlaySRG-Play RTR-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FAE3B1C7F74BDAE7DC78737D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Play SRG-tvOS-Play RTS TV-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FBB9B98911CFC58048BECCF7 /* [CP] Check Pods Manifest.lock */ = {
@@ -6176,7 +6393,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PlaySRG-Play RTR-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Play SRG-iOS-Play RTR-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -10310,7 +10527,7 @@
 		};
 		6F331CF324D06B8400C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88409324EBF931007463ED /* Play SRF TV.debug.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -10346,7 +10563,7 @@
 		};
 		6F331CF424D06B8400C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408A24EBF92D007463ED /* Play SRF TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
@@ -10418,7 +10635,7 @@
 		};
 		6F331CF524D06B8400C096AB /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408724EBF92C007463ED /* Play SRF TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
@@ -10490,7 +10707,7 @@
 		};
 		6F331CF624D06B8400C096AB /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88409224EBF930007463ED /* Play SRF TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
@@ -10562,7 +10779,7 @@
 		};
 		6F331D0C24D06BA300C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408424EBF92B007463ED /* Play RTS TV.debug.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -10598,7 +10815,7 @@
 		};
 		6F331D0D24D06BA300C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408124EBF92A007463ED /* Play RTS TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
@@ -10670,7 +10887,7 @@
 		};
 		6F331D0E24D06BA300C096AB /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408C24EBF92E007463ED /* Play RTS TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
@@ -10742,7 +10959,7 @@
 		};
 		6F331D0F24D06BA300C096AB /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408624EBF92C007463ED /* Play RTS TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
@@ -10814,7 +11031,7 @@
 		};
 		6F331D2424D06BB800C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408924EBF92D007463ED /* Play RSI TV.debug.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -10850,7 +11067,7 @@
 		};
 		6F331D2524D06BB800C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408024EBF92A007463ED /* Play RSI TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
@@ -10922,7 +11139,7 @@
 		};
 		6F331D2624D06BB800C096AB /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88409124EBF930007463ED /* Play RSI TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
@@ -10994,7 +11211,7 @@
 		};
 		6F331D2724D06BB800C096AB /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408F24EBF92F007463ED /* Play RSI TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
@@ -11066,7 +11283,7 @@
 		};
 		6F331D3C24D06BC700C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408B24EBF92D007463ED /* Play RTR TV.debug.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -11102,7 +11319,7 @@
 		};
 		6F331D3D24D06BC700C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408824EBF92C007463ED /* Play RTR TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
@@ -11174,7 +11391,7 @@
 		};
 		6F331D3E24D06BC700C096AB /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88409024EBF930007463ED /* Play RTR TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
@@ -11246,7 +11463,7 @@
 		};
 		6F331D3F24D06BC700C096AB /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408324EBF92B007463ED /* Play RTR TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
@@ -11318,7 +11535,7 @@
 		};
 		6F331D5424D06C2700C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408224EBF92A007463ED /* Play SWI TV.debug.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -11354,7 +11571,7 @@
 		};
 		6F331D5524D06C2700C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408D24EBF92E007463ED /* Play SWI TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
@@ -11426,7 +11643,7 @@
 		};
 		6F331D5624D06C2700C096AB /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408E24EBF92F007463ED /* Play SWI TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
@@ -11498,7 +11715,7 @@
 		};
 		6F331D5724D06C2700C096AB /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */;
+			baseConfigurationReference = 6F88408524EBF92C007463ED /* Play SWI TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
