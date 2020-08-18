@@ -57,6 +57,12 @@
 
 static void *s_kvoContext = &s_kvoContext;
 
+@interface PlayAppDelegate ()
+
+@property (nonatomic) DeepLinkService *deepLinkService;
+
+@end
+
 @implementation PlayAppDelegate
 
 #pragma mark Getters and setters
@@ -81,8 +87,6 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    
     [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
     
     // The configuration file, copied at build time in the main product bundle, will have the standard Firebase
@@ -90,6 +94,9 @@ static void *s_kvoContext = &s_kvoContext;
     if ([NSBundle.mainBundle pathForResource:@"GoogleService-Info" ofType:@"plist"]) {
         [FIRApp configure];
     }
+    
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    self.deepLinkService = [[DeepLinkService alloc] initWithServiceURL:applicationConfiguration.middlewareURL];
     
     NSURL *identityWebserviceURL = applicationConfiguration.identityWebserviceURL;
     NSURL *identityWebsiteURL = applicationConfiguration.identityWebsiteURL;
@@ -226,7 +233,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:YES];
     if (! [supportedActions containsObject:URLComponents.host.lowercaseString]) {
-        NSURL *deepLinkURL = [DeepLinkService.sharedService schemeURLFromWebURL:URL];
+        NSURL *deepLinkURL = [self.deepLinkService schemeURLFromWebURL:URL];
         if (deepLinkURL) {
             URLComponents = [NSURLComponents componentsWithURL:deepLinkURL resolvingAgainstBaseURL:YES];
         }

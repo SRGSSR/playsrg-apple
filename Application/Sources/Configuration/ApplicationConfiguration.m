@@ -316,7 +316,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 #if defined(DEBUG) || defined(NIGHTLY)
         // Make it possible to retrieve the configuration more frequently during development
         // See https://firebase.google.com/support/faq/#remote-config-values
-        self.remoteConfig.configSettings = [[FIRRemoteConfigSettings alloc] initWithDeveloperModeEnabled:YES];
+        self.remoteConfig.configSettings = [[FIRRemoteConfigSettings alloc] init];
+        self.remoteConfig.configSettings.minimumFetchInterval = 0.;
 #endif
         
         // Read the embedded configuration JSON
@@ -363,7 +364,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 #endif
     
     [self.remoteConfig fetchWithExpirationDuration:kExpirationDuration completionHandler:^(FIRRemoteConfigFetchStatus status, NSError * _Nullable error) {
-        [self.remoteConfig activateFetched];
+        [self.remoteConfig activateWithCompletion:nil];
         
         if (! [self synchronizeRemoteConfiguration]) {
             PlayLogWarning(@"configuration", @"The newly fetched remote application configuration is invalid and was not applied");

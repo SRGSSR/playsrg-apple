@@ -6,7 +6,6 @@
 
 #import "DeepLinkService.h"
 
-#import "ApplicationConfiguration.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayLogger.h"
 
@@ -30,29 +29,20 @@ DeeplinkAction const DeeplinkActionLink = @"link";
 
 @interface DeepLinkService ()
 
+@property (nonatomic) NSURL *serviceURL;
 @property (nonatomic, weak) SRGRequest *request;
 
 @end
 
 @implementation DeepLinkService
 
-#pragma mark Class methods
-
-+ (DeepLinkService *)sharedService
-{
-    static dispatch_once_t s_onceToken;
-    static DeepLinkService *s_sharedService;
-    dispatch_once(&s_onceToken, ^{
-        s_sharedService = [[DeepLinkService alloc] init];
-    });
-    return s_sharedService;
-}
-
 #pragma mark Object lifecycle
 
-- (instancetype)init
+- (instancetype)initWithServiceURL:(NSURL *)serviceURL
 {
     if (self = [super init]) {
+        self.serviceURL = serviceURL;
+        
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(reachabilityDidChange:)
                                                    name:FXReachabilityStatusDidChangeNotification
@@ -63,8 +53,7 @@ DeeplinkAction const DeeplinkActionLink = @"link";
                                                  object:nil];
         
         [SRGDiagnosticsService serviceWithName:DeepLinkDiagnosticsServiceName].submissionBlock = ^(NSDictionary * _Nonnull JSONDictionary, void (^ _Nonnull completionBlock)(BOOL)) {
-            NSURL *middlewareURL = ApplicationConfiguration.sharedApplicationConfiguration.middlewareURL;
-            NSURL *diagnosticsServiceURL = [NSURL URLWithString:@"api/v1/deeplink/report" relativeToURL:middlewareURL];
+            NSURL *diagnosticsServiceURL = [NSURL URLWithString:@"api/v1/deeplink/report" relativeToURL:serviceURL];
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:diagnosticsServiceURL];
             request.HTTPMethod = @"POST";
             [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -144,8 +133,7 @@ DeeplinkAction const DeeplinkActionLink = @"link";
 - (void)updateDeepLinkScript
 {
     if ([FXReachability sharedInstance].reachable && !self.request.running) {
-        NSURL *middlewareURL = ApplicationConfiguration.sharedApplicationConfiguration.middlewareURL;
-        NSURL *URL = [NSURL URLWithString:@"api/v2/deeplink/parsePlayUrl.js" relativeToURL:middlewareURL];
+        NSURL *URL = [NSURL URLWithString:@"api/v2/deeplink/parsePlayUrl.js" relativeToURL:self.serviceURL];
         
         SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (data) {
@@ -176,8 +164,3 @@ DeeplinkAction const DeeplinkActionLink = @"link";
 }
 
 @end
-
-__attribute__((constructor)) static void DeepLinkServiceInit(void)
-{
-    [DeepLinkService.sharedService setup];
-}

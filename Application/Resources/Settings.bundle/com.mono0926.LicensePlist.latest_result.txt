@@ -49,129 +49,304 @@ body: Copyright (c) 2013 B…
 version: 2.0.0
 
 name: Firebase, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.15.0
+body: 
+                   …
+version: 6.30.0
 
 name: Firebase, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.15.0
+body: 
+                   …
+version: 6.30.0
 
 name: Firebase, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.15.0
+body: 
+                   …
+version: 6.30.0
 
 name: Firebase, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.15.0
+body: 
+                   …
+version: 6.30.0
 
 name: Firebase, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.15.0
+body: 
+                   …
+version: 6.30.0
+
+name: Firebase, nameSpecified: 
+body: 
+                   …
+version: 6.30.0
+
+name: Firebase, nameSpecified: 
+body: 
+                   …
+version: 6.30.0
+
+name: Firebase, nameSpecified: 
+body: 
+                   …
+version: 6.30.0
+
+name: Firebase, nameSpecified: 
+body: 
+                   …
+version: 6.30.0
+
+name: Firebase, nameSpecified: 
+body: 
+                   …
+version: 6.30.0
 
 name: FirebaseABTesting, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 2.0.0
+body: 
+                   …
+version: 4.2.0
 
 name: FirebaseABTesting, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 2.0.0
+body: 
+                   …
+version: 4.2.0
 
 name: FirebaseABTesting, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 2.0.0
+body: 
+                   …
+version: 4.2.0
 
 name: FirebaseABTesting, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 2.0.0
+body: 
+                   …
+version: 4.2.0
 
 name: FirebaseABTesting, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 2.0.0
+body: 
+                   …
+version: 4.2.0
 
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+name: FirebaseABTesting, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
 
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+name: FirebaseABTesting, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
 
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+name: FirebaseABTesting, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
 
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+name: FirebaseABTesting, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
 
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+name: FirebaseABTesting, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 5.1.10
+version: 6.10.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 5.1.10
+version: 6.10.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 5.1.10
+version: 6.10.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 5.1.10
+version: 6.10.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 5.1.10
+version: 6.10.0
 
-name: FirebaseInstanceID, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.3.0
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.10.0
 
-name: FirebaseInstanceID, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.3.0
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.10.0
 
-name: FirebaseInstanceID, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.3.0
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.10.0
 
-name: FirebaseInstanceID, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.3.0
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.10.0
 
-name: FirebaseInstanceID, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.3.0
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.10.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.5.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.5.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.5.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.5.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.5.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.5.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.5.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.5.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.5.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.5.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.6.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.6.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.6.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.6.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.6.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.6.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.6.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.6.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.6.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.6.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.1.0
+body: 
+                   …
+version: 4.9.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.1.0
+body: 
+                   …
+version: 4.9.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.1.0
+body: 
+                   …
+version: 4.9.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.1.0
+body: 
+                   …
+version: 4.9.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.1.0
+body: 
+                   …
+version: 4.9.0
+
+name: FirebaseRemoteConfig, nameSpecified: 
+body: 
+                   …
+version: 4.9.0
+
+name: FirebaseRemoteConfig, nameSpecified: 
+body: 
+                   …
+version: 4.9.0
+
+name: FirebaseRemoteConfig, nameSpecified: 
+body: 
+                   …
+version: 4.9.0
+
+name: FirebaseRemoteConfig, nameSpecified: 
+body: 
+                   …
+version: 4.9.0
+
+name: FirebaseRemoteConfig, nameSpecified: 
+body: 
+                   …
+version: 4.9.0
 
 name: FSCalendar, nameSpecified: 
 body: Copyright (c) 2013-2…
@@ -213,50 +388,105 @@ name: google-cast-sdk-no-bluetooth, nameSpecified:
 body: https://developers.g…
 version: 4.4.6
 
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.2.0
 
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.2.0
 
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.2.0
 
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.2.0
 
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.2.0
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.2.0
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.2.0
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.2.0
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.2.0
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.2.0
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 5.3.7
+version: 6.7.2
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 5.3.7
+version: 6.7.2
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 5.3.7
+version: 6.7.2
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 5.3.7
+version: 6.7.2
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 5.3.7
+version: 6.7.2
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.7.2
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.7.2
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.7.2
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.7.2
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.7.2
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
@@ -350,23 +580,43 @@ version: 1.6.8
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 0.3.901
+version: 1.30905.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 0.3.901
+version: 1.30905.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 0.3.901
+version: 1.30905.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 0.3.901
+version: 1.30905.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 0.3.901
+version: 1.30905.0
+
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 1.30905.0
+
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 1.30905.0
+
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 1.30905.0
+
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 1.30905.0
+
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 1.30905.0
 
 name: paper-onboarding, nameSpecified: 
 body: The MIT License (MIT…
@@ -387,6 +637,56 @@ version: 6.1.5
 name: paper-onboarding, nameSpecified: 
 body: The MIT License (MIT…
 version: 6.1.5
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.10
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.10
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.10
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.10
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.10
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.10
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.10
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.10
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.10
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.10
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
