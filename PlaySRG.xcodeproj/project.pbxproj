@@ -1009,8 +1009,6 @@
 		6F6B643521A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B642D21A70FAA00E207FC /* HomeStatusHeaderView.xib */; };
 		6F6B643621A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B642D21A70FAA00E207FC /* HomeStatusHeaderView.xib */; };
 		6F6B643721A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B642D21A70FAA00E207FC /* HomeStatusHeaderView.xib */; };
-		6F6DD3A824E449BA003F9437 /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6F6DD3A724E449BA003F9437 /* SRGLetterbox */; };
-		6F6DD3AB24E449D7003F9437 /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6F6DD3AA24E449D7003F9437 /* SRGDataProviderCombine */; };
 		6F7218131DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
 		6F7218141DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
 		6F7218151DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
@@ -2419,7 +2417,6 @@
 				6FADEF9F248E6EB900A5F948 /* AirshipCore.framework in Frameworks */,
 				6F340F45220DA7E900778CA3 /* SRGUserData.framework in Frameworks */,
 				6F1A95F2216DFA0D00DB15AA /* SRGIdentity.framework in Frameworks */,
-				6F6DD3AB24E449D7003F9437 /* SRGDataProviderCombine in Frameworks */,
 				6FBF243E2148232B00E576A2 /* SRGDiagnostics.framework in Frameworks */,
 				6FF3B68E2137DC8400F8A5E2 /* SRGContentProtection.framework in Frameworks */,
 				08B6F7E6210CF8660097EF8B /* CoreData.framework in Frameworks */,
@@ -2441,7 +2438,6 @@
 				6F5F7FE21F382E9D00C330EC /* TCCore.framework in Frameworks */,
 				E67BB6981D3E640C00E1FEA3 /* Mantle.framework in Frameworks */,
 				E60178521D635E130000362E /* ComScore.framework in Frameworks */,
-				6F6DD3A824E449BA003F9437 /* SRGLetterbox in Frameworks */,
 				6F5F7FE41F382E9D00C330EC /* TCSDK.framework in Frameworks */,
 				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
 			);
@@ -4107,8 +4103,6 @@
 			);
 			name = "Play SRF";
 			packageProductDependencies = (
-				6F6DD3A724E449BA003F9437 /* SRGLetterbox */,
-				6F6DD3AA24E449D7003F9437 /* SRGDataProviderCombine */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -12057,16 +12051,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6F6DD3A724E449BA003F9437 /* SRGLetterbox */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
-			productName = SRGLetterbox;
-		};
-		6F6DD3AA24E449D7003F9437 /* SRGDataProviderCombine */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
-			productName = SRGDataProviderCombine;
-		};
 		6FA84A1724E44B6400B1A56E /* SRGLetterbox */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
