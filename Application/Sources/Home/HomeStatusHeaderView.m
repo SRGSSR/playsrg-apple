@@ -28,6 +28,11 @@
 
 #pragma mark Class methods
 
++ (HomeStatusHeaderView *)view
+{
+    return [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
+}
+
 + (CGFloat)heightForServiceMessage:(SRGServiceMessage *)serviceMessage withSize:(CGSize)size
 {
     HomeStatusHeaderView *headerView = [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;

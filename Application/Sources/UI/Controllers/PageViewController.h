@@ -7,7 +7,6 @@
 #import "ContentInsets.h"
 #import "TabBarActionable.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,14 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  To use `PageViewController`, bind its `placeholderViews` property to a single view where pages will be displayed.
  */
-@interface PageViewController : HLSPlaceholderViewController <ContainerContentInsets, SRGAnalyticsContainerViewTracking, TabBarActionable, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface PageViewController : UIViewController <ContainerContentInsets, SRGAnalyticsContainerViewTracking, TabBarActionable, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 /**
  *  Create an instance displaying the supplied view controllers, and starting at the specified page.
  *
  *  @discussion If the page is not valid, the first page will be used instead.
  */
-- (instancetype)initWithViewControllers:(NSArray<UIViewController *> *)viewControllers initialPage:(NSUInteger)initialPage NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithViewControllers:(NSArray<UIViewController *> *)viewControllers initialPage:(NSUInteger)initialPage;
 
 /**
  *  Create an instance displaying the supplied view controllers, and starting with the first page.

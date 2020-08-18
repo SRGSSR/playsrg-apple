@@ -246,7 +246,7 @@
     if (self.lastRequestError) {
         // Multiple errors. Pick the first ones
         NSError *error = self.lastRequestError;
-        if ([error hasCode:SRGNetworkErrorMultiple withinDomain:SRGNetworkErrorDomain]) {
+        if ([error.domain isEqualToString:SRGNetworkErrorDomain] && error.code == SRGNetworkErrorMultiple) {
             error = [error.userInfo[SRGNetworkErrorsKey] firstObject];
         }
         return [[NSAttributedString alloc] initWithString:error.localizedDescription

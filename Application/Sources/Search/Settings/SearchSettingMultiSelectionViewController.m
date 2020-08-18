@@ -35,7 +35,7 @@
 
 - (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier items:(NSArray<SearchSettingsMultiSelectionItem *> *)items selectedValues:(NSSet<NSString *> *)selectedValues
 {
-    if (self = [super init]) {
+    if (self = [self initFromStoryboard]) {
         self.title = title;
         self.identifier = identifier;
         self.items = items;
@@ -43,6 +43,12 @@
         self.selectedValues = selectedValues;
     }
     return self;
+}
+
+- (instancetype)initFromStoryboard
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
+    return storyboard.instantiateInitialViewController;
 }
 
 #pragma clang diagnostic push

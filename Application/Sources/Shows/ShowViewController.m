@@ -18,6 +18,7 @@
 #import "ShowHeaderView.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
+#import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 #import <Intents/Intents.h>
@@ -237,7 +238,7 @@
             
             activityViewController.modalPresentationStyle = UIModalPresentationPopover;
             
-            UIViewController *viewController = self.play_previewingContext.sourceView.nearestViewController;
+            UIViewController *viewController = self.play_previewingContext.sourceView.play_nearestViewController;
             [viewController presentViewController:activityViewController animated:YES completion:nil];
         }];
         [previewActionItems addObject:shareAction];
@@ -246,7 +247,7 @@
     UIPreviewAction *openAction = [UIPreviewAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a show from the preview window") style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
         ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:self.show fromPushNotification:NO];
         
-        UIViewController *viewController = self.play_previewingContext.sourceView.nearestViewController;
+        UIViewController *viewController = self.play_previewingContext.sourceView.play_nearestViewController;
         UINavigationController *navigationController = viewController.navigationController;
         if (navigationController) {
             [navigationController pushViewController:showViewController animated:YES];

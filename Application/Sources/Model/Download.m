@@ -12,7 +12,6 @@
 #import "PlayLogger.h"
 #import "UIImage+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <FXReachability/FXReachability.h>
 #import <libextobjc/libextobjc.h>
 
@@ -116,7 +115,8 @@ static NSArray<Download *> *s_sortedDownloads;
 
 + (NSString *)downloadsFilePath
 {
-    return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"downloads.plist"];
+    NSString *libraryDirectoryPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).firstObject;
+    return [libraryDirectoryPath stringByAppendingPathComponent:@"downloads.plist"];
 }
 
 + (NSDictionary<NSString *, Download *> *)loadDownloadsDictionary
@@ -154,7 +154,8 @@ static NSArray<Download *> *s_sortedDownloads;
 
 + (NSString *)downloadsBackupFilePath
 {
-    return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"downloadsBackup.plist"];
+    NSString *libraryDirectoryPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).firstObject;
+    return [libraryDirectoryPath stringByAppendingPathComponent:@"downloadsBackup.plist"];
 }
 
 + (NSDictionary<NSString *, Download *> *)loadDownloadsBackupDictionary
@@ -227,7 +228,8 @@ static NSArray<Download *> *s_sortedDownloads;
     static NSString *s_downloadsDirectoryURLString;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_downloadsDirectoryURLString = [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"Downloads"];
+        NSString *libraryDirectoryPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).firstObject;
+        s_downloadsDirectoryURLString = [libraryDirectoryPath stringByAppendingPathComponent:@"Downloads"];
         NSError *error = nil;
         [NSFileManager.defaultManager createDirectoryAtPath:s_downloadsDirectoryURLString
                                 withIntermediateDirectories:YES

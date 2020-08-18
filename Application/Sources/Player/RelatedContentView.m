@@ -21,6 +21,13 @@
 
 @implementation RelatedContentView
 
+#pragma mark Class methods
+
++ (RelatedContentView *)view
+{
+    return [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
+}
+
 #pragma mark Overrides
 
 - (void)awakeFromNib

@@ -18,6 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, getter=play_isActuallyHidden) BOOL play_actuallyHidden;
 
+/**
+ * Return the nearest view controller which displays the view, nil if none
+ */
+@property (nonatomic, readonly, weak, nullable) __kindof UIViewController *play_nearestViewController;
+
 @end
 
 NS_ASSUME_NONNULL_END

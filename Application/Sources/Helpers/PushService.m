@@ -11,9 +11,9 @@
 #import "ApplicationSettings.h"
 #import "PlayAppDelegate.h"
 #import "Notification.h"
+#import "UIView+PlaySRG.h"
 
 #import <Airship/AirshipLib.h>
-#import <CoconutKit/CoconutKit.h>
 #import <libextobjc/libextobjc.h>
 #import <UserNotifications/UserNotifications.h>
 
@@ -351,7 +351,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show inView:(UIView *)view
 {
-    return [self toggleSubscriptionForShow:show inViewController:view.nearestViewController];
+    return [self toggleSubscriptionForShow:show inViewController:view.play_nearestViewController];
 }
 
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show inViewController:(UIViewController *)viewController

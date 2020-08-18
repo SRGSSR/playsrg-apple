@@ -38,12 +38,18 @@ static void *s_kvoContext = &s_kvoContext;
              customizationBlock:(WebViewControllerCustomizationBlock)customizationBlock
                 decisionHandler:(WKNavigationActionPolicy (^)(NSURL *))decisionHandler
 {
-    if (self = [super init]) {
+    if (self = [self initFromStoryboard]) {
         self.request = request;
         self.customizationBlock = customizationBlock;
         self.decisionHandler = decisionHandler;
     }
     return self;
+}
+
+- (instancetype)initFromStoryboard
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
+    return storyboard.instantiateInitialViewController;
 }
 
 - (void)dealloc
@@ -195,7 +201,7 @@ static void *s_kvoContext = &s_kvoContext;
     }
 
     if ([updatedError.domain isEqualToString:NSURLErrorDomain]) {
-        self.errorLabel.text = HLSLocalizedDescriptionForCFNetworkError(updatedError.code);
+        self.errorLabel.text = [NSHTTPURLResponse srg_localizedStringForURLErrorCode:updatedError.code];
         
         [UIView animateWithDuration:0.3 animations:^{
             self.progressView.alpha = 0.f;
@@ -235,7 +241,7 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)webViewController_reachabilityDidChange:(NSNotification *)notification
 {
     if ([FXReachability sharedInstance].reachable) {
-        if (self.viewVisible) {
+        if (self.play_viewVisible) {
             [self.webView loadRequest:self.request];
         }
     }

@@ -9,9 +9,9 @@
 #import "ApplicationSettings.h"
 #import "HomeLiveMediaCollectionViewCell.h"
 #import "Layout.h"
+#import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface HomeLiveMediaVerticalListTableViewCell ()
@@ -122,7 +122,7 @@
 {
     if (! [self isEmpty]) {
         SRGMedia *media = self.homeSectionInfo.items[indexPath.row];
-        [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
+        [self.play_nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }
 

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ModuleViewController : MediasViewController <SRGAnalyticsViewTracking, UIGestureRecognizerDelegate>
 
-- (instancetype)initWithModule:(SRGModule *)module NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithModule:(SRGModule *)module;
 
 @end
 

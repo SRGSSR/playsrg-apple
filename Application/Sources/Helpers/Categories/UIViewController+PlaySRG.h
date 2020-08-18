@@ -38,6 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)play_isMovingFromParentViewController;
 
 /**
+ * Return YES iff the view is displayed and visible (appearing, appeared, or disappearing)
+ */
+@property (nonatomic, readonly, getter=play_isViewVisible) BOOL play_viewVisible;
+
+/**
  *  The previewing context (peek) from which the view controller is presented, if any.
  */
 @property (nonatomic, readonly, nullable) id<UIViewControllerPreviewing> play_previewingContext;

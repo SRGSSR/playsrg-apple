@@ -15,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, copy) NSString *play_localizedUppercaseFirstLetterString;
 
+/**
+ *  Calculate the MD5 hash.
+ */
+@property (nonatomic, readonly, copy) NSString *play_md5hash;
+
 @end
 
 NS_ASSUME_NONNULL_END

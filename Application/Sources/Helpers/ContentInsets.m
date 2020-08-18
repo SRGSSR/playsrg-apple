@@ -6,27 +6,64 @@
 
 #import "ContentInsets.h"
 
-#import <CoconutKit/CoconutKit.h>
+#import "UIView+PlaySRG.h"
+
 #import <DZNEmptyDataSet/DZNEmptyDataSet.h>
-
-static void (*s_viewDidLoad)(id, SEL) = NULL;
-static void (*s_viewWillAppear)(id, SEL) = NULL;
-static void (*s_willLayoutSubviews)(id, SEL) = NULL;
-
-static void swizzled_viewDidLoad(UIViewController *self, SEL _cmd);
-static void swizzled_viewWillAppear(UIViewController *self, SEL _cmd);
-static void swizzled_willLayoutSubviews(UIViewController *self, SEL _cmd);
+#import <objc/runtime.h>
 
 static void UpdateContentInsetsForViewController(UIViewController *viewController);
 
 @implementation UIViewController (ContentInsets)
 
+#pragma mark Class methods
+
 + (void)load
 {
-    HLSSwizzleSelector(self, @selector(viewDidLoad), swizzled_viewDidLoad, &s_viewDidLoad);
-    HLSSwizzleSelector(self, @selector(viewWillAppear:), swizzled_viewWillAppear, &s_viewWillAppear);
-    HLSSwizzleSelector(self, @selector(viewWillLayoutSubviews), swizzled_willLayoutSubviews, &s_willLayoutSubviews);
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewDidLoad)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_ContentInsets_swizzled_viewDidLoad)));
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewWillAppear:)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_ContentInsets_swizzled_viewWillAppear:)));
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewWillLayoutSubviews)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_ContentInsets_swizzled_viewWillLayoutSubviews)));
 }
+
+#pragma mark Swizzled methods
+
+- (void)UIViewController_ContentInsets_swizzled_viewDidLoad
+{
+    [self UIViewController_ContentInsets_swizzled_viewDidLoad];
+    
+    // Apply content insets calculations in -viewDidLoad as well for correct initial content offset
+    UpdateContentInsetsForViewController(self);
+}
+
+- (void)UIViewController_ContentInsets_swizzled_viewWillAppear:(BOOL)animated
+{
+    [self UIViewController_ContentInsets_swizzled_viewWillAppear:animated];
+    
+    // DZNEmpty data set calculations must account for content insets. Perform with the next run loop iteration to force
+    // a data set reload with accurate context for calculations.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UpdateContentInsetsForViewController(self);
+        
+        if ([self conformsToProtocol:@protocol(ContentInsets)]) {
+            UIViewController<ContentInsets> *contentViewController = (UIViewController<ContentInsets> *)self;
+            NSArray<UIScrollView *> *scrollViews = contentViewController.play_contentScrollViews;
+            [scrollViews enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
+                [scrollView reloadEmptyDataSet];
+            }];
+        }
+    });
+}
+
+- (void)UIViewController_ContentInsets_swizzled_viewWillLayoutSubviews
+{
+    [self UIViewController_ContentInsets_swizzled_viewWillLayoutSubviews];
+    
+    UpdateContentInsetsForViewController(self);
+}
+
+#pragma mark Updates
 
 - (void)play_setNeedsContentInsetsUpdate
 {
@@ -92,8 +129,9 @@ UIEdgeInsets ContentInsetsForScrollView(UIScrollView *scrollView)
 {
     // Extract the padding applied to the scroll view, if any
     UIEdgeInsets paddingInsets = UIEdgeInsetsZero;
-    if ([scrollView.nearestViewController conformsToProtocol:@protocol(ContentInsets)]) {
-        UIViewController<ContentInsets> *contentViewController = (UIViewController<ContentInsets> *)scrollView.nearestViewController;
+    UIViewController *nearestViewController = scrollView.play_nearestViewController;
+    if ([nearestViewController conformsToProtocol:@protocol(ContentInsets)]) {
+        UIViewController<ContentInsets> *contentViewController = (UIViewController<ContentInsets> *)nearestViewController;
         if ([contentViewController.play_contentScrollViews containsObject:scrollView]) {
             paddingInsets = contentViewController.play_paddingContentInsets;
         }
@@ -111,38 +149,4 @@ CGFloat VerticalOffsetForEmptyDataSet(UIScrollView *scrollView)
     // scroll area. This is required since the empty view is not resized to take into account content insets.
     UIEdgeInsets contentInsets = ContentInsetsForScrollView(scrollView);
     return -(contentInsets.top + contentInsets.bottom) / 2.f;
-}
-
-static void swizzled_viewDidLoad(UIViewController *self, SEL _cmd)
-{
-    s_viewDidLoad(self, _cmd);
-    
-    // Apply content insets calculations in -viewDidLoad as well for correct initial content offset
-    UpdateContentInsetsForViewController(self);
-}
-
-static void swizzled_viewWillAppear(UIViewController *self, SEL _cmd)
-{
-    s_viewWillAppear(self, _cmd);
-    
-    // DZNEmpty data set calculations must account for content insets. Perform with the next run loop iteration to force
-    // a data set reload with accurate context for calculations.
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UpdateContentInsetsForViewController(self);
-        
-        if ([self conformsToProtocol:@protocol(ContentInsets)]) {
-            UIViewController<ContentInsets> *contentViewController = (UIViewController<ContentInsets> *)self;
-            NSArray<UIScrollView *> *scrollViews = contentViewController.play_contentScrollViews;
-            [scrollViews enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
-                [scrollView reloadEmptyDataSet];
-            }];
-        }
-    });
-}
-
-static void swizzled_willLayoutSubviews(UIViewController *self, SEL _cmd)
-{
-    s_willLayoutSubviews(self, _cmd);
-    
-    UpdateContentInsetsForViewController(self);
 }

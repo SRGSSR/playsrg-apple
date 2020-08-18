@@ -208,7 +208,7 @@
     if (self.lastRequestError) {
         // Multiple errors. Pick the first ones
         NSError *error = self.lastRequestError;
-        if ([error hasCode:SRGNetworkErrorMultiple withinDomain:SRGNetworkErrorDomain]) {
+        if ([error.domain isEqualToString:SRGNetworkErrorDomain] && error.code == SRGNetworkErrorMultiple) {
             error = [error.userInfo[SRGNetworkErrorsKey] firstObject];
         }
         return [[NSAttributedString alloc] initWithString:error.localizedDescription attributes:attributes];
@@ -270,13 +270,13 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    HLSMissingMethodImplementation();
+    [self doesNotRecognizeSelector:_cmd];
     return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    HLSMissingMethodImplementation();
+    [self doesNotRecognizeSelector:_cmd];
     return [UICollectionViewCell new];
 }
 

@@ -9,7 +9,6 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayLogger.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <FXReachability/FXReachability.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 #import <SRGDiagnostics/SRGDiagnostics.h>
@@ -122,7 +121,8 @@ DeeplinkAction const DeeplinkActionLink = @"link";
 
 - (NSString *)libraryParsePlayURLFilePath
 {
-    return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"parsePlayUrl.js"];
+    NSString *libraryDirectoryPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).firstObject;
+    return [libraryDirectoryPath stringByAppendingPathComponent:@"parsePlayUrl.js"];
 }
 
 #pragma mark Data retrieval

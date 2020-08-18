@@ -27,7 +27,7 @@
 @property (nonatomic) RadioChannel *radioChannel;
 @property (nonatomic) NSDate *initialDate;
 
-@property (nonatomic, weak) UIPageViewController *pageViewController;
+@property (nonatomic) UIPageViewController *pageViewController;
 
 @property (nonatomic, weak) IBOutlet Calendar *calendar;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *calendarHeightConstraint;
@@ -44,7 +44,7 @@
 
 - (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel date:(NSDate *)date
 {
-    if (self = [super init]) {
+    if (self = [self initFromStoryboard]) {
         self.radioChannel = radioChannel;
         self.initialDate = date;
         self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];
@@ -53,11 +53,15 @@
                                                                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                                                  options:@{ UIPageViewControllerOptionInterPageSpacingKey : @100.f }];
         pageViewController.delegate = self;
-        
-        [self setInsetViewController:pageViewController atIndex:0];
         self.pageViewController = pageViewController;
     }
     return self;
+}
+
+- (instancetype)initFromStoryboard
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
+    return storyboard.instantiateInitialViewController;
 }
 
 - (instancetype)init
@@ -77,6 +81,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self addChildViewController:self.pageViewController];
+    
+    UIView *pageView = self.pageViewController.view;
+    [self.view insertSubview:pageView atIndex:0];
+    [NSLayoutConstraint activateConstraints:@[
+        [pageView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [pageView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+        [pageView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [pageView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor]
+    ]];
+    
+    [self.pageViewController didMoveToParentViewController:self];
     
     self.view.backgroundColor = UIColor.play_blackColor;
     
@@ -125,13 +142,17 @@
     
     [self updateFonts];
     
-    NSDate *date = [self.initialDate isEarlierThanDate:self.calendar.today] ? self.initialDate : self.calendar.today;
+    NSDate *date = ([self.initialDate compare:self.calendar.today] == NSOrderedAscending) ? self.initialDate : self.calendar.today;
     [self showMediasForDate:date animated:NO];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contentSizeCategoryDidChange:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
     
     // Cannot use `-calendar:boundingRectWillChange:animated: since not called with end values.
     @weakify(self)
@@ -191,13 +212,6 @@
     
     // Days
     calendarAppearance.titleFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-}
-
-- (void)updateForContentSizeCategory
-{
-    [super updateForContentSizeCategory];
-    
-    [self updateFonts];
 }
 
 #pragma mark Status bar
@@ -443,6 +457,11 @@
     
     // Reload the date range
     [self.calendar reloadData];
+}
+
+- (void)contentSizeCategoryDidChange:(NSNotification *)notification
+{
+    [self updateFonts];
 }
 
 @end

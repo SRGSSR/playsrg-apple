@@ -4,14 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoconutKit/CoconutKit.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGDataProvider/SRGDataProvider.h>
 #import <SRGLetterbox/SRGLetterbox.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MediaPreviewViewController : HLSViewController <SRGAnalyticsViewTracking, SRGLetterboxViewDelegate>
+@interface MediaPreviewViewController : UIViewController <SRGAnalyticsViewTracking, SRGLetterboxViewDelegate>
 
 - (instancetype)initWithMedia:(SRGMedia *)media;
 

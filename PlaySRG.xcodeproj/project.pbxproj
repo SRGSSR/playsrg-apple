@@ -1079,11 +1079,6 @@
 		6F88139723D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F88139423D85DD600A00826 /* GoogleCastBarButtonItem.m */; };
 		6F88139823D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F88139423D85DD600A00826 /* GoogleCastBarButtonItem.m */; };
 		6F88139923D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F88139423D85DD600A00826 /* GoogleCastBarButtonItem.m */; };
-		6F8CAE902122C5DF005046BA /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */; };
-		6F8CAE912122C5F1005046BA /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */; };
-		6F8CAE922122C5FE005046BA /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */; };
-		6F8CAE932122C607005046BA /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */; };
-		6F8CAE942122C60F005046BA /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */; };
 		6F9122BF1DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6F9122C01DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6F9122C11DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
@@ -2180,7 +2175,6 @@
 		6F88409224EBF930007463ED /* Play SRF TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		6F88409324EBF931007463ED /* Play SRF TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.debug.xcconfig"; sourceTree = "<group>"; };
 		6F88409424EC05E4007463ED /* Play tvOS Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play tvOS Application.xcconfig"; sourceTree = "<group>"; };
-		6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoconutKit.framework; path = Carthage/Build/iOS/Static/CoconutKit.framework; sourceTree = "<group>"; };
 		6F9122BD1DC8708400725EEB /* PlayErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayErrors.h; sourceTree = "<group>"; };
 		6F9122BE1DC8708400725EEB /* PlayErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayErrors.m; sourceTree = "<group>"; };
 		6F93962420CA5AE1003ECC1B /* NotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
@@ -2430,7 +2424,6 @@
 				6FBF243E2148232B00E576A2 /* SRGDiagnostics.framework in Frameworks */,
 				6FF3B68E2137DC8400F8A5E2 /* SRGContentProtection.framework in Frameworks */,
 				08B6F7E6210CF8660097EF8B /* CoreData.framework in Frameworks */,
-				6F8CAE902122C5DF005046BA /* CoconutKit.framework in Frameworks */,
 				6F0C99652121FA6B00073AB6 /* FXReachability.framework in Frameworks */,
 				6F0C99662121FA6B00073AB6 /* libextobjc.framework in Frameworks */,
 				6F0C99672121FA6B00073AB6 /* MAKVONotificationCenter.framework in Frameworks */,
@@ -2470,7 +2463,6 @@
 				6FBF243F2148234100E576A2 /* SRGDiagnostics.framework in Frameworks */,
 				6FF3B68F2137DC9400F8A5E2 /* SRGContentProtection.framework in Frameworks */,
 				08B6F7E7210CF86F0097EF8B /* CoreData.framework in Frameworks */,
-				6F8CAE912122C5F1005046BA /* CoconutKit.framework in Frameworks */,
 				6F0C99572121FA5E00073AB6 /* FXReachability.framework in Frameworks */,
 				6F0C99582121FA5E00073AB6 /* libextobjc.framework in Frameworks */,
 				6F0C99592121FA5E00073AB6 /* MAKVONotificationCenter.framework in Frameworks */,
@@ -2510,7 +2502,6 @@
 				6FBF24402148234D00E576A2 /* SRGDiagnostics.framework in Frameworks */,
 				6FF3B6902137DCA400F8A5E2 /* SRGContentProtection.framework in Frameworks */,
 				08B6F7E8210CF8760097EF8B /* CoreData.framework in Frameworks */,
-				6F8CAE922122C5FE005046BA /* CoconutKit.framework in Frameworks */,
 				6F0C99492121FA5200073AB6 /* FXReachability.framework in Frameworks */,
 				6F0C994A2121FA5200073AB6 /* libextobjc.framework in Frameworks */,
 				6F0C994B2121FA5200073AB6 /* MAKVONotificationCenter.framework in Frameworks */,
@@ -2550,7 +2541,6 @@
 				6FBF24412148235800E576A2 /* SRGDiagnostics.framework in Frameworks */,
 				6FF3B6912137DCB300F8A5E2 /* SRGContentProtection.framework in Frameworks */,
 				08B6F7E9210CF87C0097EF8B /* CoreData.framework in Frameworks */,
-				6F8CAE932122C607005046BA /* CoconutKit.framework in Frameworks */,
 				6F0C993B2121FA4600073AB6 /* FXReachability.framework in Frameworks */,
 				6F0C993C2121FA4600073AB6 /* libextobjc.framework in Frameworks */,
 				6F0C993D2121FA4600073AB6 /* MAKVONotificationCenter.framework in Frameworks */,
@@ -2590,7 +2580,6 @@
 				6FBF24422148236400E576A2 /* SRGDiagnostics.framework in Frameworks */,
 				6FF3B6922137DCC000F8A5E2 /* SRGContentProtection.framework in Frameworks */,
 				08B6F7EA210CF8840097EF8B /* CoreData.framework in Frameworks */,
-				6F8CAE942122C60F005046BA /* CoconutKit.framework in Frameworks */,
 				6F0C992D2121F9E100073AB6 /* FXReachability.framework in Frameworks */,
 				6F0C992E2121F9E100073AB6 /* libextobjc.framework in Frameworks */,
 				6F0C992F2121F9E100073AB6 /* SRGDataProvider.framework in Frameworks */,
@@ -3845,7 +3834,6 @@
 				6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */,
 				6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */,
 				6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */,
-				6F8CAE8F2122C5DF005046BA /* CoconutKit.framework */,
 				E60178511D635E130000362E /* ComScore.framework */,
 				08B6F7E5210CF8660097EF8B /* CoreData.framework */,
 				6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */,

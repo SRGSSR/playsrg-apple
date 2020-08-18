@@ -120,7 +120,8 @@ static void *s_kvoContext = &s_kvoContext;
                                                  object:SRGIdentityService.currentIdentityService];
     }
     
-    NSURL *storeFileURL = [HLSApplicationLibraryDirectoryURL() URLByAppendingPathComponent:@"PlayData.sqlite"];
+    NSURL *libraryDirectoryURL = [NSURL fileURLWithPath:NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).firstObject];
+    NSURL *storeFileURL = [libraryDirectoryURL URLByAppendingPathComponent:@"PlayData.sqlite"];
     SRGUserData.currentUserData = [[SRGUserData alloc] initWithStoreFileURL:storeFileURL
                                                                  serviceURL:applicationConfiguration.userDataServiceURL
                                                             identityService:SRGIdentityService.currentIdentityService];
@@ -528,7 +529,7 @@ static void *s_kvoContext = &s_kvoContext;
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
-                                 localizedDescription:NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff")];
+                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff") }];
             [Banner showError:error inViewController:nil];
         }
         
@@ -555,7 +556,7 @@ static void *s_kvoContext = &s_kvoContext;
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
-                                 localizedDescription:NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff")];
+                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff") }];
             [Banner showError:error inViewController:nil];
         }
         
@@ -698,7 +699,7 @@ static void *s_kvoContext = &s_kvoContext;
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                      code:PlayErrorCodeNotFound
-                                     localizedDescription:NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff, deep linking or a push notification")];
+                                                 userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff, deep linking or a push notification") }];
                 [Banner showError:error inViewController:nil];
             }
         }] resume];
@@ -720,7 +721,7 @@ static void *s_kvoContext = &s_kvoContext;
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                      code:PlayErrorCodeNotFound
-                                     localizedDescription:NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff, deep linking or a push notification")];
+                                                 userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff, deep linking or a push notification") }];
                 [Banner showError:error inViewController:nil];
             }
         }] resume];
@@ -739,7 +740,7 @@ static void *s_kvoContext = &s_kvoContext;
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
-                                 localizedDescription:NSLocalizedString(@"The page cannot be opened.", @"Error message when a topic cannot be opened via Handoff, deep linking or a push notification")];
+                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The page cannot be opened.", @"Error message when a topic cannot be opened via Handoff, deep linking or a push notification") }];
             [Banner showError:error inViewController:nil];
         }
     }] resume];
@@ -757,7 +758,7 @@ static void *s_kvoContext = &s_kvoContext;
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
-                                 localizedDescription:NSLocalizedString(@"The page cannot be opened.", @"Error message when an event module cannot be opened via Handoff, deep linking or a push notification")];
+                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The page cannot be opened.", @"Error message when an event module cannot be opened via Handoff, deep linking or a push notification") }];
             [Banner showError:error inViewController:nil];
         }
     }] resume];

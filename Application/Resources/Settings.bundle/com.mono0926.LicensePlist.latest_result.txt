@@ -772,8 +772,6 @@ name: Aiolos, nameSpecified: , owner: IdeasOnCanvas, version: 1.3.0
 
 name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 3.3.4
 
-name: CoconutKit, nameSpecified: , owner: defagos, version: 3.4
-
 name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 6.6.0
 
 name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1

@@ -15,9 +15,9 @@
 #import "SRGModule+PlaySRG.h"
 #import "SwimlaneCollectionViewLayout.h"
 #import "UIColor+PlaySRG.h"
+#import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
@@ -214,7 +214,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 {
     if (! [self isEmpty]) {
         SRGMedia *media = self.homeSectionInfo.items[indexPath.row];
-        [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
+        [self.play_nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }
 

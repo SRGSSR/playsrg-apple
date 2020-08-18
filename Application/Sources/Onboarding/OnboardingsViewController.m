@@ -106,7 +106,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     Onboarding *onboarding = self.onboardings[indexPath.row];
-    OnboardingViewController *onboardingViewController = [[OnboardingViewController alloc] initWithOnboarding:onboarding];
+    OnboardingViewController *onboardingViewController = [OnboardingViewController viewControllerFor:onboarding];
     onboardingViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:onboardingViewController animated:YES completion:nil];
 }

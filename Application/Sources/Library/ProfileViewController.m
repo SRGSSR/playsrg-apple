@@ -44,10 +44,16 @@
 
 - (instancetype)init
 {
-    if (self = [super init]) {
+    if (self = [self initFromStoryboard]) {
         self.title = NSLocalizedString(@"Profile", @"Title displayed at the top of the profile view");
     }
     return self;
+}
+
+- (instancetype)initFromStoryboard
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
+    return storyboard.instantiateInitialViewController;
 }
 
 #pragma mark View lifecycle
@@ -425,7 +431,7 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    if (self.viewVisible) {
+    if (self.play_viewVisible) {
         [PushService.sharedService resetApplicationBadge];
         
         // Ensure correct notification badge on notification cell availability after:
@@ -437,7 +443,7 @@
 
 - (void)applicationWillResignActive:(NSNotification *)notification
 {
-    if (self.viewVisible) {
+    if (self.play_viewVisible) {
         [PushService.sharedService resetApplicationBadge];
     }
 }

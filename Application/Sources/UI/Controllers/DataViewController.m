@@ -46,7 +46,7 @@
 
 - (void)dataViewController_applicationDidBecomeActive:(NSNotification *)notification
 {
-    if (self.viewVisible) {
+    if (self.play_viewVisible) {
         [self refresh];
     }
 }
@@ -54,7 +54,7 @@
 - (void)dataViewController_reachabilityDidChange:(NSNotification *)notification
 {
     if ([FXReachability sharedInstance].reachable) {
-        if (self.viewVisible) {
+        if (self.play_viewVisible) {
             [self refresh];
         }
     }

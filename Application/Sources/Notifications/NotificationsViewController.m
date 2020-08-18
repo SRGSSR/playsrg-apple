@@ -339,14 +339,14 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    if (self.viewVisible) {
+    if (self.play_viewVisible) {
         [PushService.sharedService resetApplicationBadge];
     }
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification
 {
-    if (self.viewVisible) {
+    if (self.play_viewVisible) {
         [PushService.sharedService resetApplicationBadge];
     }
 }
@@ -355,7 +355,7 @@
 {
     [self refresh];
     
-    if (self.viewVisible) {
+    if (self.play_viewVisible) {
         [PushService.sharedService resetApplicationBadge];
     }
 }

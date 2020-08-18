@@ -17,7 +17,7 @@
 
 @interface PageViewController () <MDCTabBarDelegate>
 
-@property (nonatomic, weak) UIPageViewController *pageViewController;
+@property (nonatomic) UIPageViewController *pageViewController;
 
 @property (nonatomic) NSArray<UIViewController *> *viewControllers;
 @property (nonatomic) NSUInteger initialPage;
@@ -54,7 +54,6 @@
             pageViewController.dataSource = self;
         }
         
-        [self setInsetViewController:pageViewController atIndex:0];
         self.pageViewController = pageViewController;
     }
     return self;
@@ -72,12 +71,18 @@
     self.view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     self.view.backgroundColor = UIColor.play_blackColor;
     
-    UIView *placeholderView = [[UIView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:placeholderView];
-    [placeholderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
-    self.placeholderViews = @[placeholderView];
+    [self addChildViewController:self.pageViewController];
+    
+    UIView *pageView = self.pageViewController.view;
+    [self.view insertSubview:pageView atIndex:0];
+    [NSLayoutConstraint activateConstraints:@[
+        [pageView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [pageView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+        [pageView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [pageView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor]
+    ]];
+    
+    [self.pageViewController didMoveToParentViewController:self];
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
     [self.view addSubview:blurView];
@@ -120,6 +125,11 @@
     }];
     self.tabBar = tabBar;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pageViewController_contentSizeCategoryDidChange:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+    
     [self updateFonts];
 }
 
@@ -149,13 +159,6 @@
 }
 
 #pragma mark Accessibility
-
-- (void)updateForContentSizeCategory
-{
-    [super updateForContentSizeCategory];
-    
-    [self updateFonts];
-}
 
 - (BOOL)accessibilityPerformEscape
 {
@@ -289,6 +292,13 @@
         [self.tabBar setSelectedItem:self.tabBar.items[currentIndex] animated:YES];;
         [self didDisplayViewController:newViewController animated:YES];
     }
+}
+
+#pragma mark Notifications
+
+- (void)pageViewController_contentSizeCategoryDidChange:(NSNotification *)notification
+{
+    [self updateFonts];
 }
 
 @end

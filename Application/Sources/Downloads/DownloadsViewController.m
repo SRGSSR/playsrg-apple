@@ -278,7 +278,9 @@
              inViewController:self];
     }
     else {
-        NSError *error = [NSError errorWithDomain:PlayErrorDomain code:PlayErrorCodeNotFound localizedDescription:NSLocalizedString(@"Media not available yet", @"Message on top screen when trying to open a media in the download list and the media is not downloaded.")];
+        NSError *error = [NSError errorWithDomain:PlayErrorDomain
+                                             code:PlayErrorCodeNotFound
+                                         userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"Media not available yet", @"Message on top screen when trying to open a media in the download list and the media is not downloaded.") }];
         [Banner showError:error inViewController:self];
     }
 }

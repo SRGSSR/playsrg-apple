@@ -9,6 +9,7 @@
 #import "Layout.h"
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
+#import "UIView+PlaySRG.h"
 
 #import <SRGAppearance/SRGAppearance.h>
 
@@ -121,7 +122,7 @@
     if (! [self isEmpty]) {
         SRGShow *show = self.homeSectionInfo.items[indexPath.row];
         ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
-        [self.nearestViewController.navigationController pushViewController:showViewController animated:YES];
+        [self.play_nearestViewController.navigationController pushViewController:showViewController animated:YES];
     }
 }
 

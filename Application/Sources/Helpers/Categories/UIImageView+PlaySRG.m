@@ -10,22 +10,12 @@
 #import "PlayErrors.h"
 #import "UIImage+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 #import <YYWebImage/YYWebImage.h>
-
-static void (*s_willMoveToWindow)(id, SEL, id) = NULL;
-
-static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *window);
 
 @implementation UIImageView (PlaySRG)
 
 #pragma mark Class methods
-
-+ (void)load
-{
-    HLSSwizzleSelector(self, @selector(willMoveToWindow:), swizzled_willMoveToWindow, &s_willMoveToWindow);
-}
 
 + (UIImageView *)play_loadingImageView48WithTintColor:(UIColor *)tintColor
 {
@@ -187,11 +177,3 @@ static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *win
 }
 
 @end
-
-static void swizzled_willMoveToWindow(UIImageView *self, SEL _cmd, UIWindow *window)
-{
-    // Workaround UIImage view tint color bug in cells. See http://stackoverflow.com/a/26042893/760435
-    UIImage *image = self.image;
-    self.image = nil;
-    self.image = image;
-}

@@ -9,7 +9,6 @@
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface NavigationController ()
@@ -29,8 +28,6 @@
                             statusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     if (self = [super initWithRootViewController:rootViewController]) {
-        self.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
-        
         UINavigationBar *navigationBar = self.navigationBar;
         navigationBar.barStyle = UIBarStyleBlack;
         
@@ -60,6 +57,18 @@
 }
 
 #pragma clang diagnostic pop
+
+#pragma mark Rotation
+
+- (BOOL)shouldAutorotate
+{
+    return [self.topViewController shouldAutorotate];
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return [self.topViewController supportedInterfaceOrientations];
+}
 
 #pragma mark Status bar
 

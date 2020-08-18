@@ -11,6 +11,7 @@
 #import "History.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
+#import "NSString+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 #import "WebViewController.h"
@@ -30,6 +31,13 @@
 @end
 
 @implementation ProfileAccountHeaderView
+
+#pragma mark Class methods
+
++ (ProfileAccountHeaderView *)view
+{
+    return [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
+}
 
 #pragma mark Overrides
 
@@ -121,7 +129,7 @@
     
     NSString *emailAddress = identityService.emailAddress;
     if (emailAddress) {
-        NSString *gravatarImageURLString = [NSString stringWithFormat:@"https://www.gravatar.com/avatar/%@?d=404&s=%@", emailAddress.lowercaseString.md5hash, @(kImageSize)];
+        NSString *gravatarImageURLString = [NSString stringWithFormat:@"https://www.gravatar.com/avatar/%@?d=404&s=%@", emailAddress.lowercaseString.play_md5hash, @(kImageSize)];
         NSURL *gravatarImageURL = [NSURL URLWithString:gravatarImageURLString];
         YYWebImageManager *webImageManager = YYWebImageManager.sharedManager;
         UIImage *cachedImage = [webImageManager.cache getImageForKey:[webImageManager cacheKeyForURL:gravatarImageURL]];

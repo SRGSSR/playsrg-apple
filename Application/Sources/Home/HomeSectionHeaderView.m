@@ -14,8 +14,8 @@
 #import "NSBundle+PlaySRG.h"
 #import "PageViewController.h"
 #import "SRGModule+PlaySRG.h"
+#import "UIView+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface HomeSectionHeaderView ()
@@ -103,7 +103,7 @@
     else {
         viewController = [[HomeMediasViewController alloc] initWithHomeSectionInfo:homeSectionInfo];
     }
-    [self.nearestViewController.navigationController pushViewController:viewController animated:YES];
+    [self.play_nearestViewController.navigationController pushViewController:viewController animated:YES];
 }
 
 @end

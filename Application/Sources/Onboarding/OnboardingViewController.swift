@@ -9,18 +9,17 @@ import paper_onboarding
 import SRGAppearance
 
 @objc(OnboardingViewController) public class OnboardingViewController : BaseViewController {
-    
     final var onboarding: Onboarding!
     
-    weak var paperOnboarding: PaperOnboarding!
+    private weak var paperOnboarding: PaperOnboarding!
     
-    @IBOutlet weak var previousButton: UIButton!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet private weak var previousButton: UIButton!
+    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var nextButton: UIButton!
     
-    @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var buttonBottomConstraint: NSLayoutConstraint!
     
-    var isTall: Bool {
+    private var isTall: Bool {
         get {
             return self.view.frame.height >= 600.0
         }
@@ -28,15 +27,12 @@ import SRGAppearance
     
     // MARK: Object lifecycle
     
-    @objc init(onboarding: Onboarding!) {
-        super.init(storyboardName: nil, bundle: nil)
-        
-        self.onboarding = onboarding
-        self.title = onboarding.title
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    @objc public static func viewController(for onboarding: Onboarding!) -> OnboardingViewController {
+        let storyboard = UIStoryboard(name: "OnboardingViewController", bundle: nil)
+        let viewController = storyboard.instantiateInitialViewController() as! OnboardingViewController
+        viewController.onboarding = onboarding
+        viewController.title = onboarding.title
+        return viewController
     }
     
     // MARK: View lifecycle
@@ -79,7 +75,7 @@ import SRGAppearance
     
     // MARK: Rotation
     
-    public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    public func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             return .all
         }
@@ -157,7 +153,6 @@ import SRGAppearance
 }
 
 extension OnboardingViewController : PaperOnboardingDataSource {
-    
     public func onboardingItemsCount() -> Int {
         return self.onboarding.pages.count
     }
@@ -187,7 +182,6 @@ extension OnboardingViewController : PaperOnboardingDataSource {
 }
 
 extension OnboardingViewController : PaperOnboardingDelegate {
-    
     public func onboardingWillTransitonToIndex(_ index: Int) {
         self.updateUserInterface(index: index, animated: true)
     }
@@ -209,7 +203,6 @@ extension OnboardingViewController : PaperOnboardingDelegate {
 }
 
 extension OnboardingViewController : SRGAnalyticsViewTracking {
-    
     public var srg_pageViewTitle: String {
         return self.onboarding.title
     }

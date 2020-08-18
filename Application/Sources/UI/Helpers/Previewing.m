@@ -6,7 +6,7 @@
 
 #import "Previewing.h"
 
-#import <CoconutKit/CoconutKit.h>
+#import <objc/runtime.h>
 
 static void *s_contextMenuInteraction = &s_contextMenuInteraction;
 static void *s_previewContextViewControllerKey = &s_previewContextViewControllerKey;
@@ -40,22 +40,22 @@ static void *s_previewingHandleKey = &s_previewingHandleKey;
 
 - (UIContextMenuInteraction *)contextMenuInteraction
 {
-    return hls_getAssociatedObject(self, s_contextMenuInteraction);
+    return [objc_getAssociatedObject(self, s_contextMenuInteraction) nonretainedObjectValue];
 }
 
 - (void)setContextMenuInteraction:(UIContextMenuInteraction *)contextMenuInteraction
 {
-    hls_setAssociatedObject(self, s_contextMenuInteraction, contextMenuInteraction, HLS_ASSOCIATION_WEAK_NONATOMIC);
+    objc_setAssociatedObject(self, s_contextMenuInteraction, [NSValue valueWithNonretainedObject:contextMenuInteraction], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (UIViewController *)previewContextViewController
 {
-    return hls_getAssociatedObject(self, s_previewContextViewControllerKey);
+    return [objc_getAssociatedObject(self, s_previewContextViewControllerKey) nonretainedObjectValue];
 }
 
 - (void)setPreviewContextViewController:(UIViewController *)previewContextViewController
 {
-    hls_setAssociatedObject(self, s_previewContextViewControllerKey, previewContextViewController, HLS_ASSOCIATION_WEAK_NONATOMIC);
+    objc_setAssociatedObject(self, s_previewContextViewControllerKey, [NSValue valueWithNonretainedObject:previewContextViewController], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (id<UIViewControllerPreviewing>)previewingHandle

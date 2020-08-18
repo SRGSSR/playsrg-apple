@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ShowViewController : MediasViewController <SRGAnalyticsViewTracking, UIGestureRecognizerDelegate>
 
-- (instancetype)initWithShow:(SRGShow *)show fromPushNotification:(BOOL)fromPushNotification NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithShow:(SRGShow *)show fromPushNotification:(BOOL)fromPushNotification;
 
 @end
 
