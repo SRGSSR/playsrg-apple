@@ -312,6 +312,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 - (instancetype)init
 {
     if (self = [super init]) {
+        // FIXME: With the updated Firebase version we use, this fails if [FIRApp configure] fails. This prevents
+        //        the open source version from starting properly (the assertion below is triggered anyway).
         self.remoteConfig = [FIRRemoteConfig remoteConfig];
 #if defined(DEBUG) || defined(NIGHTLY)
         // Make it possible to retrieve the configuration more frequently during development
