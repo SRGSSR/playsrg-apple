@@ -108,7 +108,7 @@ struct HomeShowsAccessSwimlane: View {
     var body: some View {
         HStack {
             Button(action: { /* Open show list */ }) {
-                Text("Show A-Z")
+                Text("A to Z")
             }
             Button(action: { /* Open calendar */ }) {
                 Text("By date")
@@ -122,7 +122,7 @@ struct HomeSwimlaneHeader: View {
     
     var body: some View {
         if let title = row.title {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .font(.headline)
                 .padding([.leading, .trailing], HomeSwimlane.horizontalPadding)
                 .frame(maxWidth: .infinity, alignment: .leading)

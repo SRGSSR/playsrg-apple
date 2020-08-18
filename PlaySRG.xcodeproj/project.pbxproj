@@ -262,6 +262,16 @@
 		0875852423A0025F00FA7207 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850A23A0025E00FA7207 /* ProfileViewController.m */; };
 		0875852523A0025F00FA7207 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850A23A0025E00FA7207 /* ProfileViewController.m */; };
 		0875852623A0025F00FA7207 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850A23A0025E00FA7207 /* ProfileViewController.m */; };
+		08777DB124EC3340006F2EC7 /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA1381EE034D500BEC4DA /* Accessibility.strings */; };
+		08777DB224EC3340006F2EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690041D38E08C00BB8AAA /* Localizable.strings */; };
+		08777DB324EC3997006F2EC7 /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA1321EE034B000BEC4DA /* Accessibility.strings */; };
+		08777DB424EC3997006F2EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C68F9A1D38DF8300BB8AAA /* Localizable.strings */; };
+		08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C68FD71D38E04B00BB8AAA /* Localizable.strings */; };
+		08777DB624EC399F006F2EC7 /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA1351EE034C500BEC4DA /* Accessibility.strings */; };
+		08777DB724EC39AE006F2EC7 /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA13B1EE034E200BEC4DA /* Accessibility.strings */; };
+		08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690381D38E0BE00BB8AAA /* Localizable.strings */; };
+		08777DB924EC39B7006F2EC7 /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA13E1EE034EF00BEC4DA /* Accessibility.strings */; };
+		08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690741D38E3E600BB8AAA /* Localizable.strings */; };
 		087BC6631EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
@@ -5157,9 +5167,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */,
+				08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */,
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
 				6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */,
 				6F331CEB24D06B8400C096AB /* Assets.xcassets in Resources */,
+				08777DB724EC39AE006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5168,9 +5180,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
+				08777DB224EC3340006F2EC7 /* Localizable.strings in Resources */,
 				6F4FCB0924D07040002675EF /* Preview Assets.xcassets in Resources */,
 				6F4FCB0D24D07054002675EF /* Assets.xcassets in Resources */,
 				6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */,
+				08777DB124EC3340006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5179,9 +5193,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
+				08777DB424EC3997006F2EC7 /* Localizable.strings in Resources */,
 				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */,
 				6F4FCB0E24D07054002675EF /* Assets.xcassets in Resources */,
+				08777DB324EC3997006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5189,10 +5205,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */,
 				6F4FCB0F24D07055002675EF /* Assets.xcassets in Resources */,
 				6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */,
+				08777DB624EC399F006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5201,9 +5219,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
+				08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */,
 				6F4FCB1024D07055002675EF /* Assets.xcassets in Resources */,
+				08777DB924EC39B7006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

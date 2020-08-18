@@ -84,13 +84,13 @@ final class HomeMediaRow: HomeRow, ObservableObject {
     override var title: String? {
         switch id {
             case .tvTrending:
-                return "Trending now"
+                return "Trending videos"
             case .tvLatest:
-                return "Latest videos"
+                return "The latest episodes"
             case .tvMostPopular:
                 return "Most popular"
             case .tvSoonExpiring:
-                return "Soon expiring"
+                return "Available for a limited time"
             case let .tvLatestForModule(module, type):
                 if let module = module {
                     return module.title
@@ -101,11 +101,11 @@ final class HomeMediaRow: HomeRow, ObservableObject {
             case let .tvLatestForTopic(topic):
                 return topic?.title ?? "Topic"
             case .radioLatestEpisodes:
-                return "Latest episodes"
+                return "The latest audios"
             case .radioMostPopular:
-                return "Most popular"
+                return "Most listened to"
             case .radioLatest:
-                return "Latest audios"
+                return "The latest audios"
             case .radioLatestVideos:
                 return "Latest videos"
             case .tvLive:
