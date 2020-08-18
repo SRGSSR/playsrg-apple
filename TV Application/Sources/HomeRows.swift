@@ -29,11 +29,13 @@ class HomeRow: Identifiable, Equatable {
         case tvLatestForTopic(_ topic: SRGTopic?)
         case tvLatestForModule(_ module: SRGModule?, type: SRGModuleType)
         case tvTopics
+        case tvShowsAccess
         
         case radioLatestEpisodes(channelUid: String)
         case radioMostPopular(channelUid: String)
         case radioLatest(channelUid: String)
         case radioLatestVideos(channelUid: String)
+        case radioShowsAccess(channelUid: String)
         
         case tvLive
         case radioLive
@@ -50,6 +52,8 @@ class HomeRow: Identifiable, Equatable {
         switch id {
             case .tvTopics:
                 return HomeTopicRow(id: id)
+            case .tvShowsAccess, .radioShowsAccess:
+                return HomeShowsAccessRow(id: id)
             default:
                 return HomeMediaRow(id: id)
         }
@@ -203,15 +207,6 @@ final class HomeMediaRow: HomeRow, ObservableObject {
 final class HomeTopicRow: HomeRow, ObservableObject {
     @Published private(set) var topics: [SRGTopic] = []
     
-    override var title: String? {
-        switch id {
-            case .tvTopics:
-                return nil;
-            default:
-                return nil;
-        }
-    }
-    
     override func load() -> AnyCancellable? {
         switch id {
             case .tvTopics:
@@ -223,5 +218,11 @@ final class HomeTopicRow: HomeRow, ObservableObject {
             default:
                 return nil;
         }
+    }
+}
+
+final class HomeShowsAccessRow: HomeRow {
+    override var title: String? {
+        return "Shows"
     }
 }

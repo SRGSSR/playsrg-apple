@@ -15,6 +15,7 @@ struct ApplicationConfiguration {
     static let tvHomeRowIds: [HomeRow.Id] = [
         .tvTrending(appearance: .hero),
         .tvTopics,
+        .tvShowsAccess,
         .tvLatestForModule(nil, type: .event),
         .tvLatestForTopic(nil),
         .tvLatest,
@@ -25,6 +26,7 @@ struct ApplicationConfiguration {
     static func radioHomeRowIds(for channelUid: String) -> [HomeRow.Id] {
         return [
             .radioLatestEpisodes(channelUid: channelUid),
+            .radioShowsAccess(channelUid: channelUid),
             .radioMostPopular(channelUid: channelUid),
             .radioLatest(channelUid: channelUid),
             .radioLatestVideos(channelUid: channelUid)

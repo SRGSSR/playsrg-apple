@@ -28,6 +28,11 @@ struct HomeSwimlane: View {
         else if let row = row as? HomeTopicRow {
             HomeTopicSwimlane(row: row)
         }
+        else if let row = row as? HomeShowsAccessRow {
+            Section(header: HomeSwimlaneHeader(row: row)) {
+                HomeShowsAccessSwimlane(row: row)
+            }
+        }
     }
 }
 
@@ -97,8 +102,23 @@ struct HomeTopicSwimlane: View {
     }
 }
 
+struct HomeShowsAccessSwimlane: View {
+    var row: HomeShowsAccessRow
+    
+    var body: some View {
+        HStack {
+            Button(action: { /* Open show list */ }) {
+                Text("Show A-Z")
+            }
+            Button(action: { /* Open calendar */ }) {
+                Text("By date")
+            }
+        }
+    }
+}
+
 struct HomeSwimlaneHeader: View {
-    let row: HomeMediaRow
+    let row: HomeRow
     
     var body: some View {
         if let title = row.title {
