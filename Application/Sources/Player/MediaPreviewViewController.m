@@ -31,7 +31,6 @@
 #import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
-#import <Masonry/Masonry.h>
 #import <SRGAnalytics_DataProvider/SRGAnalytics_DataProvider.h>
 #import <SRGAppearance/SRGAppearance.h>
 #import <SRGMediaPlayer/SRGMediaPlayer.h>

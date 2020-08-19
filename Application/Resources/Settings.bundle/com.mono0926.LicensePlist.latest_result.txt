@@ -786,8 +786,6 @@ name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: 1.0_srg4
 
 name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.2
 
-name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
-
 name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 4.2.3
 
 name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.1.0

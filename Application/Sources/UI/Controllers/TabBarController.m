@@ -22,7 +22,6 @@
 
 #import <libextobjc/libextobjc.h>
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
-#import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 static const CGFloat MiniPlayerHeight = 50.f;
@@ -33,9 +32,21 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 @property (nonatomic, weak) MiniPlayerView *miniPlayerView;
 @property (nonatomic, readonly) CGFloat miniPlayerOffset;
 
+@property (nonatomic, readonly) NSLayoutConstraint *playerWidthConstraint;
+@property (nonatomic, readonly) NSLayoutConstraint *playerLeadingConstraint;
+@property (nonatomic, readonly) NSLayoutConstraint *playerTrailingConstraint;
+@property (nonatomic, readonly) NSLayoutConstraint *playerHeightConstraint;
+@property (nonatomic, readonly) NSLayoutConstraint *playerBottomConstraint;
+
 @end
 
 @implementation TabBarController
+
+@synthesize playerWidthConstraint = _playerWidthConstraint;
+@synthesize playerLeadingConstraint = _playerLeadingConstraint;
+@synthesize playerTrailingConstraint = _playerTrailingConstraint;
+@synthesize playerHeightConstraint = _playerHeightConstraint;
+@synthesize playerBottomConstraint = _playerBottomConstraint;
 
 #pragma mark Object lifecycle
 
@@ -89,6 +100,46 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     return UIAccessibilityIsVoiceOverRunning() ? 0.f : MiniPlayerDefaultOffset;
 }
 
+- (NSLayoutConstraint *)playerWidthConstraint
+{
+    if (! _playerWidthConstraint) {
+        _playerWidthConstraint = [self.miniPlayerView.widthAnchor constraintEqualToConstant:0.f];
+    }
+    return _playerWidthConstraint;
+}
+
+- (NSLayoutConstraint *)playerLeadingConstraint
+{
+    if (! _playerLeadingConstraint) {
+        _playerLeadingConstraint = [self.miniPlayerView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor];
+    }
+    return _playerLeadingConstraint;
+}
+
+- (NSLayoutConstraint *)playerTrailingConstraint
+{
+    if (! _playerTrailingConstraint) {
+        _playerTrailingConstraint = [self.miniPlayerView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor];
+    }
+    return _playerTrailingConstraint;
+}
+
+- (NSLayoutConstraint *)playerHeightConstraint
+{
+    if (! _playerHeightConstraint) {
+        _playerHeightConstraint = [self.miniPlayerView.heightAnchor constraintEqualToConstant:0.f];
+    }
+    return _playerHeightConstraint;
+}
+
+- (NSLayoutConstraint *)playerBottomConstraint
+{
+    if (! _playerBottomConstraint) {
+        _playerBottomConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.tabBar.topAnchor];
+    }
+    return _playerBottomConstraint;
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -105,6 +156,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     
     // The mini player is not available for all BUs
     MiniPlayerView *miniPlayerView = [[MiniPlayerView alloc] initWithFrame:CGRectZero];
+    miniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
     miniPlayerView.layer.shadowOpacity = 0.9f;
     miniPlayerView.layer.shadowRadius = 5.f;
     [self.view insertSubview:miniPlayerView belowSubview:self.tabBar];
@@ -304,33 +356,41 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 - (void)updateLayoutAnimated:(BOOL)animated
 {
     void (^animations)(void) = ^{
-        [self.miniPlayerView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
-            
-            if (! UIAccessibilityIsVoiceOverRunning() && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-                // Use 1/3 of the space, minimum of 500 pixels. If the player cannot fit in 80% of the screen,
-                // use all available space.
-                CGFloat availableWidth = CGRectGetWidth(self.view.frame) - 2 * self.miniPlayerOffset;
-                CGFloat width = fmaxf(availableWidth / 3.f, 500.f);
-                if (width > 0.8f * availableWidth) {
-                    width = availableWidth;
-                }
-                make.width.equalTo(@(width));
-            }
-            else {
-                make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).with.offset(self.miniPlayerOffset);
-                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).with.offset(-self.miniPlayerOffset);
+        if (! UIAccessibilityIsVoiceOverRunning() && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            // Use 1/3 of the space, minimum of 500 pixels. If the player cannot fit in 80% of the screen,
+            // use all available space.
+            CGFloat availableWidth = CGRectGetWidth(self.view.frame) - 2 * self.miniPlayerOffset;
+            CGFloat width = fmaxf(availableWidth / 3.f, 500.f);
+            if (width > 0.8f * availableWidth) {
+                width = availableWidth;
             }
             
-            if (self.miniPlayerView.active) {
-                make.height.equalTo(@(MiniPlayerHeight));
-                make.bottom.equalTo(self.tabBar.mas_top).with.offset(-self.miniPlayerOffset);
-            }
-            else {
-                make.height.equalTo(@0);
-                make.bottom.equalTo(self.tabBar.mas_top);
-            }
-        }];
+            self.playerWidthConstraint.constant = width;
+            self.playerWidthConstraint.active = YES;
+            
+            self.playerLeadingConstraint.active = NO;
+        }
+        else {
+            self.playerWidthConstraint.active = NO;
+            
+            self.playerLeadingConstraint.constant = self.miniPlayerOffset;
+            self.playerLeadingConstraint.active = YES;
+        }
+        
+        self.playerTrailingConstraint.constant = -self.miniPlayerOffset;
+        self.playerTrailingConstraint.active = YES;
+        
+        if (self.miniPlayerView.active) {
+            self.playerHeightConstraint.constant = MiniPlayerHeight;
+            self.playerBottomConstraint.constant = -self.miniPlayerOffset;
+        }
+        else {
+            self.playerHeightConstraint.constant = 0.f;
+            self.playerBottomConstraint.constant = 0.f;
+        }
+        
+        self.playerHeightConstraint.active = YES;
+        self.playerBottomConstraint.active = YES;
         
         CALayer *miniPlayerLayer = self.miniPlayerView.layer;
         if (UIAccessibilityIsVoiceOverRunning()) {

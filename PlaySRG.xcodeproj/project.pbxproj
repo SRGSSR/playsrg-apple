@@ -969,11 +969,6 @@
 		6F5392C12248DB960002BF87 /* YYWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392BE2248DB6F0002BF87 /* YYWebImage.framework */; };
 		6F5392C22248DBA70002BF87 /* YYWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392BE2248DB6F0002BF87 /* YYWebImage.framework */; };
 		6F5392C32248DBB80002BF87 /* YYWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392BE2248DB6F0002BF87 /* YYWebImage.framework */; };
-		6F5392DB2248FF4A0002BF87 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392DA2248FF490002BF87 /* Masonry.framework */; };
-		6F5392DC2248FF620002BF87 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392DA2248FF490002BF87 /* Masonry.framework */; };
-		6F5392DD2248FF790002BF87 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392DA2248FF490002BF87 /* Masonry.framework */; };
-		6F5392DE2248FF970002BF87 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392DA2248FF490002BF87 /* Masonry.framework */; };
-		6F5392DF2248FFAB0002BF87 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392DA2248FF490002BF87 /* Masonry.framework */; };
 		6F556B381DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
@@ -2114,7 +2109,6 @@
 		6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/Static/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		6F5392A82248CF470002BF87 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UICKeyChainStore.framework; path = Carthage/Build/iOS/Static/UICKeyChainStore.framework; sourceTree = "<group>"; };
 		6F5392BE2248DB6F0002BF87 /* YYWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YYWebImage.framework; path = Carthage/Build/iOS/Static/YYWebImage.framework; sourceTree = "<group>"; };
-		6F5392DA2248FF490002BF87 /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = Carthage/Build/iOS/Static/Masonry.framework; sourceTree = "<group>"; };
 		6F556B361DDC419800B5DEA2 /* SettingsBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsBaseViewController.h; sourceTree = "<group>"; };
 		6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsBaseViewController.m; sourceTree = "<group>"; };
 		6F556DB020D1174100C3573A /* NotificationService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NotificationService-Info.plist"; sourceTree = "<group>"; };
@@ -2414,7 +2408,6 @@
 				6FE01B062360358D008EBB27 /* AppCenter.framework in Frameworks */,
 				6FE01B072360358D008EBB27 /* AppCenterCrashes.framework in Frameworks */,
 				6FE01B082360358D008EBB27 /* AppCenterDistribute.framework in Frameworks */,
-				6F5392DB2248FF4A0002BF87 /* Masonry.framework in Frameworks */,
 				6F5392BF2248DB6F0002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392A92248CF470002BF87 /* UICKeyChainStore.framework in Frameworks */,
 				6F5392992248C33E0002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
@@ -2453,7 +2446,6 @@
 				6FE01B09236035AB008EBB27 /* AppCenter.framework in Frameworks */,
 				6FE01B0A236035AB008EBB27 /* AppCenterCrashes.framework in Frameworks */,
 				6FE01B0B236035AB008EBB27 /* AppCenterDistribute.framework in Frameworks */,
-				6F5392DC2248FF620002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C02248DB850002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AA2248CF5B0002BF87 /* UICKeyChainStore.framework in Frameworks */,
 				6F53929A2248C35B0002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
@@ -2492,7 +2484,6 @@
 				6FE01B0C23603DB7008EBB27 /* AppCenter.framework in Frameworks */,
 				6FE01B0D23603DB7008EBB27 /* AppCenterCrashes.framework in Frameworks */,
 				6FE01B0E23603DB7008EBB27 /* AppCenterDistribute.framework in Frameworks */,
-				6F5392DD2248FF790002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C12248DB960002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AB2248CF740002BF87 /* UICKeyChainStore.framework in Frameworks */,
 				6F53929B2248C36C0002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
@@ -2531,7 +2522,6 @@
 				6FE01B0F23603DCE008EBB27 /* AppCenter.framework in Frameworks */,
 				6FE01B1023603DCE008EBB27 /* AppCenterCrashes.framework in Frameworks */,
 				6FE01B1123603DCE008EBB27 /* AppCenterDistribute.framework in Frameworks */,
-				6F5392DE2248FF970002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C22248DBA70002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AC2248CF8C0002BF87 /* UICKeyChainStore.framework in Frameworks */,
 				6F53929C2248C3810002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
@@ -2570,7 +2560,6 @@
 				6FE01B1223603DDF008EBB27 /* AppCenter.framework in Frameworks */,
 				6FE01B1323603DDF008EBB27 /* AppCenterCrashes.framework in Frameworks */,
 				6FE01B1423603DDF008EBB27 /* AppCenterDistribute.framework in Frameworks */,
-				6F5392DF2248FFAB0002BF87 /* Masonry.framework in Frameworks */,
 				6F5392C32248DBB80002BF87 /* YYWebImage.framework in Frameworks */,
 				6F5392AD2248CF9D0002BF87 /* UICKeyChainStore.framework in Frameworks */,
 				6F53929D2248C3940002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
@@ -3841,7 +3830,6 @@
 				6F0C99202121F9DF00073AB6 /* libextobjc.framework */,
 				6F0C992B2121F9E100073AB6 /* MAKVONotificationCenter.framework */,
 				E67BB6971D3E640C00E1FEA3 /* Mantle.framework */,
-				6F5392DA2248FF490002BF87 /* Masonry.framework */,
 				6F0C99252121F9E000073AB6 /* SRGAnalytics_DataProvider.framework */,
 				080731B5222453EC00AF9C83 /* SRGAnalytics_Identity.framework */,
 				6F0C99282121F9E000073AB6 /* SRGAnalytics_MediaPlayer.framework */,

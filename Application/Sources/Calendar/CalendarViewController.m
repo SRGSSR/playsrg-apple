@@ -19,7 +19,6 @@
 
 #import <libextobjc/libextobjc.h>
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
-#import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface CalendarViewController ()
@@ -85,6 +84,7 @@
     [self addChildViewController:self.pageViewController];
     
     UIView *pageView = self.pageViewController.view;
+    pageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view insertSubview:pageView atIndex:0];
     [NSLayoutConstraint activateConstraints:@[
         [pageView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
@@ -98,10 +98,15 @@
     self.view.backgroundColor = UIColor.play_blackColor;
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
+    blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view insertSubview:blurView belowSubview:self.calendar];
-    [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.calendar);
-    }];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [blurView.topAnchor constraintEqualToAnchor:self.calendar.topAnchor],
+        [blurView.bottomAnchor constraintEqualToAnchor:self.calendar.bottomAnchor],
+        [blurView.leadingAnchor constraintEqualToAnchor:self.calendar.leadingAnchor],
+        [blurView.trailingAnchor constraintEqualToAnchor:self.calendar.trailingAnchor]
+    ]];
     
     self.calendar.dataSource = self;
     self.calendar.delegate = self;

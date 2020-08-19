@@ -12,7 +12,6 @@
 
 #import <FXReachability/FXReachability.h>
 #import <libextobjc/libextobjc.h>
-#import <Masonry/Masonry.h>
 
 static void *s_kvoContext = &s_kvoContext;
 
@@ -76,27 +75,32 @@ static void *s_kvoContext = &s_kvoContext;
     
     // WKWebView cannot be instantiated in storyboards, do it programmatically
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+    webView.translatesAutoresizingMaskIntoConstraints = NO;
     webView.opaque = NO;
     webView.backgroundColor = UIColor.clearColor;
     webView.alpha = 0.0f;
     webView.navigationDelegate = self;
     webView.scrollView.delegate = self;
     [self.view insertSubview:webView atIndex:0];
-    [webView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view);
-        make.bottom.equalTo(self.view);
-        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-    }];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [webView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [webView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+        [webView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor],
+        [webView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor]
+    ]];
     self.webView = webView;
     
     UIImageView *loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
+    loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
     loadingImageView.hidden = YES;
     [self.view insertSubview:loadingImageView atIndex:0];
-    [loadingImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.errorLabel);
-    }];
     self.loadingImageView = loadingImageView;
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [loadingImageView.centerXAnchor constraintEqualToAnchor:self.errorLabel.centerXAnchor],
+        [loadingImageView.centerYAnchor constraintEqualToAnchor:self.errorLabel.centerYAnchor]
+    ]];
     
     if (self.customizationBlock) {
         self.customizationBlock(webView);

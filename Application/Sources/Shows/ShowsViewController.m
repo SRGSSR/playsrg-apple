@@ -18,7 +18,6 @@
 
 #import <BDKCollectionIndexView/BDKCollectionIndexView.h>
 #import <libextobjc/libextobjc.h>
-#import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface ShowsViewController () {
@@ -90,12 +89,20 @@
     self.collectionView = collectionView;
     
     BDKCollectionIndexView *collectionIndexView = [[BDKCollectionIndexView alloc] initWithFrame:CGRectZero indexTitles:nil];
+    collectionIndexView.translatesAutoresizingMaskIntoConstraints = NO;
     collectionIndexView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.7f];
     collectionIndexView.tintColor = UIColor.play_lightGrayColor;
     collectionIndexView.alpha = 1.f;
     [collectionIndexView addTarget:self action:@selector(collectionIndexChanged:) forControlEvents:UIControlEventValueChanged];
     [view addSubview:collectionIndexView];
     self.collectionIndexView = collectionIndexView;
+
+    [NSLayoutConstraint activateConstraints:@[
+        [collectionIndexView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [collectionIndexView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
+        [collectionIndexView.rightAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.rightAnchor],
+        [collectionIndexView.widthAnchor constraintEqualToConstant:28.f]
+    ]];
     
     NSString *cellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
@@ -128,18 +135,6 @@
     [NSNotificationCenter.defaultCenter removeObserver:self
                                                   name:UIAccessibilityElementFocusedNotification
                                                 object:nil];
-}
-
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    
-    [self.collectionIndexView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-        make.right.equalTo(self.view.mas_right);
-        make.width.equalTo(@28.f);
-    }];
 }
 
 #pragma mark Rotation

@@ -12,7 +12,6 @@
 #import "UIVisualEffectView+PlaySRG.h"
 
 #import "MaterialTabs.h"
-#import <Masonry/Masonry.h>
 #import <SRGAppearance/SRGAppearance.h>
 
 @interface PageViewController () <MDCTabBarDelegate>
@@ -74,6 +73,7 @@
     [self addChildViewController:self.pageViewController];
     
     UIView *pageView = self.pageViewController.view;
+    pageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view insertSubview:pageView atIndex:0];
     [NSLayoutConstraint activateConstraints:@[
         [pageView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
@@ -85,14 +85,16 @@
     [self.pageViewController didMoveToParentViewController:self];
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
+    blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:blurView];
-    [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_safeAreaLayoutGuide);
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
-        make.height.equalTo(@60);
-    }];
     self.blurView = blurView;
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [blurView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [blurView.heightAnchor constraintEqualToConstant:60.f],
+        [blurView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [blurView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor]
+    ]];
     
     __block BOOL hasImage = NO;
     
@@ -106,6 +108,7 @@
     }];
     
     MDCTabBar *tabBar = [[MDCTabBar alloc] initWithFrame:blurView.bounds];
+    tabBar.translatesAutoresizingMaskIntoConstraints = NO;
     tabBar.itemAppearance = hasImage ? MDCTabBarItemAppearanceImages : MDCTabBarItemAppearanceTitles;
     tabBar.alignment = MDCTabBarAlignmentCenter;
     tabBar.delegate = self;
@@ -120,10 +123,14 @@
     tabBar.rippleColor = UIColor.clearColor;
     
     [blurView.contentView addSubview:tabBar];
-    [tabBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(blurView.contentView);
-    }];
     self.tabBar = tabBar;
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [tabBar.topAnchor constraintEqualToAnchor:blurView.contentView.topAnchor],
+        [tabBar.bottomAnchor constraintEqualToAnchor:blurView.contentView.bottomAnchor],
+        [tabBar.leadingAnchor constraintEqualToAnchor:blurView.contentView.leadingAnchor],
+        [tabBar.trailingAnchor constraintEqualToAnchor:blurView.contentView.trailingAnchor]
+    ]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pageViewController_contentSizeCategoryDidChange:)

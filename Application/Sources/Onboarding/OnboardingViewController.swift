@@ -4,7 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-import Masonry
 import paper_onboarding
 import SRGAppearance
 
@@ -61,9 +60,12 @@ import SRGAppearance
         self.view.insertSubview(paperOnboarding, at: 0)
         self.paperOnboarding = paperOnboarding
         
-        paperOnboarding.mas_makeConstraints { make in
-            make?.edges.equalTo()(self.view)
-        }
+        NSLayoutConstraint.activate([
+            paperOnboarding.topAnchor.constraint(equalTo: self.view.topAnchor),
+            paperOnboarding.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            paperOnboarding.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            paperOnboarding.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+        ])
         
         self.updateUserInterface(index: 0, animated: false)
         
