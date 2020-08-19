@@ -113,7 +113,7 @@ final class HomeMediaRow: HomeRow, ObservableObject {
             case .radioLive:
                 return "Radio channels"
             case .radioLiveSatellite:
-                return "Thematic channels"
+                return "Thematic radios"
             case .liveCenter:
                 return "Sport"
             case .tvScheduledLivestreams:
