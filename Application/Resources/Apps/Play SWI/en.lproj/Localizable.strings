@@ -22,6 +22,9 @@
 /* Title displayed on the radio home button */
 "%@ overview" = "%@ overview";
 
+/* Text displayed on live cells telling how much time remains for a program currently on air */
+"%@ remaining" = "%@ remaining";
+
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ views";
 
