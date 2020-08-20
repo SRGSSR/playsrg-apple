@@ -96,13 +96,6 @@
     [collectionIndexView addTarget:self action:@selector(collectionIndexChanged:) forControlEvents:UIControlEventValueChanged];
     [view addSubview:collectionIndexView];
     self.collectionIndexView = collectionIndexView;
-
-    [NSLayoutConstraint activateConstraints:@[
-        [collectionIndexView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
-        [collectionIndexView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
-        [collectionIndexView.rightAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.rightAnchor],
-        [collectionIndexView.widthAnchor constraintEqualToConstant:28.f]
-    ]];
     
     NSString *cellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
     UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
@@ -113,6 +106,18 @@
     [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
     self.view = view;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.collectionIndexView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [self.collectionIndexView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
+        [self.collectionIndexView.rightAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.rightAnchor],
+        [self.collectionIndexView.widthAnchor constraintEqualToConstant:28.f]
+    ]];
 }
 
 - (void)viewWillAppear:(BOOL)animated

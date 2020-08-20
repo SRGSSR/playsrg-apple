@@ -75,6 +75,7 @@
     UIView *pageView = self.pageViewController.view;
     pageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view insertSubview:pageView atIndex:0];
+    
     [NSLayoutConstraint activateConstraints:@[
         [pageView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
         [pageView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
@@ -90,7 +91,7 @@
     self.blurView = blurView;
     
     [NSLayoutConstraint activateConstraints:@[
-        [blurView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [blurView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
         [blurView.heightAnchor constraintEqualToConstant:60.f],
         [blurView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
         [blurView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor]
