@@ -7,6 +7,7 @@
 #import "TabBarController.h"
 
 #import "AccessibilityIdentifierConstants.h"
+#import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "HomeViewController.h"
 #import "Layout.h"

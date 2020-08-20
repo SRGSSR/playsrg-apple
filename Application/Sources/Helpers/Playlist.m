@@ -6,6 +6,7 @@
 
 #import "Playlist.h"
 
+#import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "History.h"
 #import "Recommendation.h"

@@ -7,6 +7,7 @@
 #import "HomeLiveMediaCollectionViewCell.h"
 
 #import "AnalyticsConstants.h"
+#import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "ChannelService.h"
 #import "Layout.h"

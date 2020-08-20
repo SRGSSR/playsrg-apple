@@ -8,19 +8,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// Forward declarations
-@class RadioChannel;
-
-/**
- *  Images associated with the radio channel.
- */
-OBJC_EXPORT UIImage *RadioChannelLogo22Image(RadioChannel * _Nullable radioChannel);
-OBJC_EXPORT UIImage *RadioChannelLogo32Image(RadioChannel * _Nullable radioChannel);
-
 /**
  *  Represent a radio channel in the application configuration.
  */
 @interface RadioChannel : Channel
+
+- (nullable instancetype)initWithDictionary:(NSDictionary *)dictionary
+                        defaultHomeSections:(NSArray<NSNumber *> *)defaultHomeSections NS_DESIGNATED_INITIALIZER;
 
 /**
  *  The home sections ordered list.
@@ -28,5 +22,11 @@ OBJC_EXPORT UIImage *RadioChannelLogo32Image(RadioChannel * _Nullable radioChann
 @property (nonatomic, readonly) NSArray<NSNumber *> *homeSections;                      // wrap `HomeSection` values
 
 @end
+
+/**
+ *  Images associated with the radio channel.
+ */
+OBJC_EXPORT UIImage *RadioChannelLogo22Image(RadioChannel * _Nullable radioChannel);
+OBJC_EXPORT UIImage *RadioChannelLogo32Image(RadioChannel * _Nullable radioChannel);
 
 NS_ASSUME_NONNULL_END

@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSection.h"
 #import "Calendar.h"
 #import "DailyMediasViewController.h"
 #import "MediaCollectionViewCell.h"

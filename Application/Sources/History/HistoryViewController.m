@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSection.h"
 #import "History.h"
 #import "HistoryTableViewCell.h"
 #import "Layout.h"

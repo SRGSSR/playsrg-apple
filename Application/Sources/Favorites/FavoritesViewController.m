@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSection.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
 #import "ShowViewController.h"

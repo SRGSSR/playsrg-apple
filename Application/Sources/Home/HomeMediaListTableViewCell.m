@@ -6,6 +6,7 @@
 
 #import "HomeMediaListTableViewCell.h"
 
+#import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "HomeLiveMediaCollectionViewCell.h"
 #import "HomeMediaCollectionHeaderView.h"

@@ -4,7 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "AnalyticsConstants.h"
 #import "RadioChannel.h"
 #import "TVChannel.h"
 
@@ -15,66 +14,6 @@
 @import SRGLetterbox;
 
 NS_ASSUME_NONNULL_BEGIN
-
-typedef NS_ENUM(NSInteger, HomeSection) {
-    HomeSectionUnknown = 0,
-    
-    // TV sections
-    HomeSectionTVTrending,
-    HomeSectionTVEvents,
-    HomeSectionTVTopics,
-    HomeSectionTVTopicsAccess,
-    HomeSectionTVLatest,
-    HomeSectionTVMostPopular,
-    HomeSectionTVSoonExpiring,
-    HomeSectionTVShowsAccess,
-    HomeSectionTVFavoriteShows,
-    
-    // Radio sections
-    HomeSectionRadioLatestEpisodes,
-    HomeSectionRadioMostPopular,
-    HomeSectionRadioLatest,
-    HomeSectionRadioLatestVideos,
-    HomeSectionRadioAllShows,
-    HomeSectionRadioShowsAccess,
-    HomeSectionRadioFavoriteShows,
-    
-    // Live sections
-    HomeSectionTVLive,
-    HomeSectionRadioLive,
-    HomeSectionRadioLiveSatellite,
-    HomeSectionTVLiveCenter,
-    HomeSectionTVScheduledLivestreams
-};
-
-typedef NS_ENUM(NSInteger, TopicSection) {
-    TopicSectionUnknown = 0,
-    TopicSectionLatest,
-    TopicSectionMostPopular
-};
-
-typedef NS_ENUM(NSInteger, ApplicationSection) {
-    ApplicationSectionUnknown = 0,
-    
-    ApplicationSectionSearch,
-    ApplicationSectionFavorites,
-    ApplicationSectionWatchLater,
-    ApplicationSectionDownloads,
-    ApplicationSectionHistory,
-    ApplicationSectionNotifications,
-    
-    ApplicationSectionOverview,
-    ApplicationSectionLive,
-    ApplicationSectionShowByDate,
-    ApplicationSectionShowAZ
-};
-
-OBJC_EXPORT NSString *TitleForApplicationSection(ApplicationSection applicationSection);
-OBJC_EXPORT NSString *TitleForHomeSection(HomeSection homeSection);
-OBJC_EXPORT NSString *TitleForTopicSection(TopicSection topicSection);
-
-OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection);
-OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection);
 
 OBJC_EXPORT void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller);
 OBJC_EXPORT NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval duration);

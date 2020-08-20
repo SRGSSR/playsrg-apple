@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSection.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"

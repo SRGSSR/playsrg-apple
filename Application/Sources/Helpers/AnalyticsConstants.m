@@ -118,3 +118,44 @@ AnalyticsType const AnalyticsTypeActionOpenPlayApp = @"open_play_app";
 AnalyticsValue const AnalyticsTypeValueSharingContent = @"content";
 AnalyticsValue const AnalyticsTypeValueSharingContentAtTime = @"content_at_time";
 AnalyticsValue const AnalyticsTypeValueSharingCurrentClip = @"current_clip";
+
+AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
+{
+    static NSDictionary<NSNumber *, NSString *> *s_titles;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_titles = @{ @(HomeSectionTVTrending) : AnalyticsPageTitleTrending,
+                      @(HomeSectionTVLive) : AnalyticsPageTitleTV,
+                      @(HomeSectionTVLatest) : AnalyticsPageTitleLatest,
+                      @(HomeSectionTVMostPopular) : AnalyticsPageTitleMostPopular,
+                      @(HomeSectionTVSoonExpiring) : AnalyticsPageTitleSoonExpiring,
+                      @(HomeSectionTVScheduledLivestreams) : AnalyticsPageTitleEvents,
+                      @(HomeSectionTVLiveCenter) : AnalyticsPageTitleSports,
+                      @(HomeSectionTVFavoriteShows) : AnalyticsPageTitleFavorites,
+                      @(HomeSectionRadioLive) : AnalyticsPageTitleRadio,
+                      @(HomeSectionRadioLiveSatellite) : AnalyticsPageTitleRadioSatellite,
+                      @(HomeSectionRadioLatestEpisodes) : AnalyticsPageTitleLatestEpisodes,
+                      @(HomeSectionRadioMostPopular) : AnalyticsPageTitleMostPopular,
+                      @(HomeSectionRadioLatest) : AnalyticsPageTitleLatest,
+                      @(HomeSectionRadioLatestVideos) : AnalyticsPageTitleLatest,
+                      @(HomeSectionRadioFavoriteShows) : AnalyticsPageTitleFavorites };
+    });
+    
+    NSString *title = s_titles[@(homeSection)];
+    NSCAssert(title != nil, @"Section with missing page title. Please fix");
+    return title ?: @"";
+}
+
+AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection)
+{
+    static NSDictionary<NSNumber *, NSString *> *s_titles;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_titles = @{ @(TopicSectionLatest) : AnalyticsPageTitleLatest,
+                      @(TopicSectionMostPopular) : AnalyticsPageTitleMostPopular };
+    });
+    
+    NSString *title = s_titles[@(topicSection)];
+    NSCAssert(title != nil, @"Section with missing page title. Please fix");
+    return title ?: @"";
+}

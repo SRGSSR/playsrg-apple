@@ -4,7 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-@import Foundation;
+#import "HomeSection.h"
+#import "TopicSection.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -263,5 +264,8 @@ OBJC_EXPORT AnalyticsType const AnalyticsTypeActionOpenPlayApp;
 OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContent;
 OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContentAtTime;
 OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingCurrentClip;
+
+OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection);
+OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection);
 
 NS_ASSUME_NONNULL_END

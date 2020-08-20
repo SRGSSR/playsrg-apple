@@ -7,6 +7,7 @@
 #import "HomeMediasViewController.h"
 
 #import "AnalyticsConstants.h"
+#import "ApplicationConfiguration.h"
 #import "Layout.h"
 #import "PageViewController.h"
 #import "UIColor+PlaySRG.h"

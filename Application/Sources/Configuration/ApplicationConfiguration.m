@@ -7,99 +7,17 @@
 #import "ApplicationConfiguration.h"
 
 #import "ApplicationSettings.h"
+#import "FirebaseConfiguration.h"
 #import "PlayLogger.h"
 #import "UIColor+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 
-@import Firebase;
 @import GoogleCast;
 @import libextobjc;
 @import SRGAppearance;
 @import SRGLetterbox;
 
 NSString * const ApplicationConfigurationDidChangeNotification = @"ApplicationConfigurationDidChangeNotification";
-
-NSString *TitleForHomeSection(HomeSection homeSection)
-{
-    static NSDictionary<NSNumber *, NSString *> *s_names;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(HomeSectionTVTrending) : NSLocalizedString(@"Trending videos", @"Title label used to present trending TV videos"),
-                     @(HomeSectionTVLive) : NSLocalizedString(@"TV channels", @"Title label to present main TV livestreams"),
-                     @(HomeSectionTVEvents) : NSLocalizedString(@"Highlights", @"Title label used to present TV event modules while loading. It appears if no network connection available and no cache available."),
-                     @(HomeSectionTVTopics) : NSLocalizedString(@"Topics", @"Title label used to present TV topics while loading. It appears if no network connection available and no cache available."),
-                     @(HomeSectionTVTopicsAccess) : NSLocalizedString(@"Topics", @"Title label used to present TV topics"),
-                     @(HomeSectionTVLatest) : NSLocalizedString(@"Latest videos", @"Title label used to present the latest videos"),
-                     @(HomeSectionTVMostPopular) : NSLocalizedString(@"Most popular", @"Title label used to present the TV most seen / clicked / popular videos"),
-                     @(HomeSectionTVSoonExpiring) : NSLocalizedString(@"Available for a limited time", @"Title label used to present the soon expiring videos"),
-                     @(HomeSectionTVScheduledLivestreams) : NSLocalizedString(@"Events", @"Title label used to present scheduled livestream medias. Only on test versions."),
-                     @(HomeSectionTVLiveCenter) : NSLocalizedString(@"Sport", @"Title label used to present live center medias. Only on test versions."),
-                     @(HomeSectionTVShowsAccess) : NSLocalizedString(@"Shows", @"Title label used to present the TV shows AZ and TV shows by date access buttons."),
-                     @(HomeSectionTVFavoriteShows) : NSLocalizedString(@"Favorites", @"Title label used to present the TV favorite shows."),
-                     @(HomeSectionRadioLive) : NSLocalizedString(@"Radio channels", @"Title label to present main radio livestreams"),
-                     @(HomeSectionRadioLiveSatellite) : NSLocalizedString(@"Thematic radios", @"Title label to present Swiss satellite radios"),
-                     @(HomeSectionRadioLatestEpisodes) : NSLocalizedString(@"The latest episodes", @"Title label used to present the radio latest audio episodes"),
-                     @(HomeSectionRadioMostPopular) : NSLocalizedString(@"Most listened to", @"Title label used to present the radio most listened / popular audio medias"),
-                     @(HomeSectionRadioLatest) : NSLocalizedString(@"The latest audios", @"Title label used to present the radio latest audios"),
-                     @(HomeSectionRadioLatestVideos) : NSLocalizedString(@"Latest videos", @"Title label used to present the radio latest videos"),
-                     @(HomeSectionRadioAllShows) : NSLocalizedString(@"Shows", @"Title label used to present radio associated shows"),
-                     @(HomeSectionRadioShowsAccess) : NSLocalizedString(@"Shows", @"Title label used to present the radio shows AZ and radio shows by date access buttons."),
-                     @(HomeSectionRadioFavoriteShows) : NSLocalizedString(@"Favorites", @"Title label used to present the radio favorite shows.") };
-    });
-    return s_names[@(homeSection)];
-}
-
-NSString *TitleForTopicSection(TopicSection topicSection)
-{
-    static NSDictionary<NSNumber *, NSString *> *s_names;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(TopicSectionLatest) : NSLocalizedString(@"Most recent", @"Short title for the most recent video topic list"),
-                     @(TopicSectionMostPopular) : NSLocalizedString(@"Most popular", @"Short title for the most clicked video topic list") };
-    });
-    return s_names[@(topicSection)];
-}
-
-AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
-{
-    static NSDictionary<NSNumber *, NSString *> *s_titles;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_titles = @{ @(HomeSectionTVTrending) : AnalyticsPageTitleTrending,
-                      @(HomeSectionTVLive) : AnalyticsPageTitleTV,
-                      @(HomeSectionTVLatest) : AnalyticsPageTitleLatest,
-                      @(HomeSectionTVMostPopular) : AnalyticsPageTitleMostPopular,
-                      @(HomeSectionTVSoonExpiring) : AnalyticsPageTitleSoonExpiring,
-                      @(HomeSectionTVScheduledLivestreams) : AnalyticsPageTitleEvents,
-                      @(HomeSectionTVLiveCenter) : AnalyticsPageTitleSports,
-                      @(HomeSectionTVFavoriteShows) : AnalyticsPageTitleFavorites,
-                      @(HomeSectionRadioLive) : AnalyticsPageTitleRadio,
-                      @(HomeSectionRadioLiveSatellite) : AnalyticsPageTitleRadioSatellite,
-                      @(HomeSectionRadioLatestEpisodes) : AnalyticsPageTitleLatestEpisodes,
-                      @(HomeSectionRadioMostPopular) : AnalyticsPageTitleMostPopular,
-                      @(HomeSectionRadioLatest) : AnalyticsPageTitleLatest,
-                      @(HomeSectionRadioLatestVideos) : AnalyticsPageTitleLatest,
-                      @(HomeSectionRadioFavoriteShows) : AnalyticsPageTitleFavorites };
-    });
-    
-    NSString *title = s_titles[@(homeSection)];
-    NSCAssert(title != nil, @"Section with missing page title. Please fix");
-    return title ?: @"";
-}
-
-AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection)
-{
-    static NSDictionary<NSNumber *, NSString *> *s_titles;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_titles = @{ @(TopicSectionLatest) : AnalyticsPageTitleLatest,
-                      @(TopicSectionMostPopular) : AnalyticsPageTitleMostPopular };
-    });
-    
-    NSString *title = s_titles[@(topicSection)];
-    NSCAssert(title != nil, @"Section with missing page title. Please fix");
-    return title ?: @"";
-}
 
 static NSString *AnalyticsBusinessUnitIdentifier(NSString *businessUnitIdentifier)
 {
@@ -129,68 +47,6 @@ static SRGVendor DataProviderVendor(NSString *businessUnitIdentifier)
     return s_vendors[businessUnitIdentifier].integerValue;
 }
 
-static HomeSection HomeSectionWithString(NSString *string)
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSString *, NSNumber *> *s_sections;
-    dispatch_once(&s_onceToken, ^{
-        s_sections = @{ @"tvTrending" : @(HomeSectionTVTrending),
-                        @"tvLive" : @(HomeSectionTVLive),
-                        @"tvEvents" : @(HomeSectionTVEvents),
-                        @"tvTopics" : @(HomeSectionTVTopics),
-                        @"tvTopicsAccess" : @(HomeSectionTVTopicsAccess),
-                        @"tvLatest" : @(HomeSectionTVLatest),
-                        @"tvMostPopular" : @(HomeSectionTVMostPopular),
-                        @"tvSoonExpiring" : @(HomeSectionTVSoonExpiring),
-                        @"tvScheduledLivestreams" : @(HomeSectionTVScheduledLivestreams),
-                        @"tvLiveCenter" : @(HomeSectionTVLiveCenter),
-                        @"tvShowsAccess" : @(HomeSectionTVShowsAccess),
-                        @"tvFavoriteShows" : @(HomeSectionTVFavoriteShows),
-                        @"radioLive" : @(HomeSectionRadioLive),
-                        @"radioLiveSatellite" : @(HomeSectionRadioLiveSatellite),
-                        @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
-                        @"radioMostPopular" : @(HomeSectionRadioMostPopular),
-                        @"radioLatest" : @(HomeSectionRadioLatest),
-                        @"radioLatestVideos" : @(HomeSectionRadioLatestVideos),
-                        @"radioAllShows" : @(HomeSectionRadioAllShows),
-                        @"radioShowsAccess" : @(HomeSectionRadioShowsAccess),
-                        @"radioFavoriteShows" : @(HomeSectionRadioFavoriteShows) };
-    });
-    NSNumber *section = s_sections[string];
-    return section ? section.integerValue : HomeSectionUnknown;
-}
-
-static TopicSection TopicSectionWithString(NSString *string)
-{
-    static dispatch_once_t s_onceToken;
-    static NSDictionary<NSString *, NSNumber *> *s_sections;
-    dispatch_once(&s_onceToken, ^{
-        s_sections = @{ @"latest" : @(TopicSectionLatest),
-                        @"mostPopular" : @(TopicSectionMostPopular) };
-    });
-    NSNumber *section = s_sections[string];
-    return section ? section.integerValue : TopicSectionUnknown;
-}
-
-NSString *TitleForApplicationSection(ApplicationSection applicationSection)
-{
-    static NSDictionary<NSNumber *, NSString *> *s_names;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_names = @{ @(ApplicationSectionDownloads) : NSLocalizedString(@"Downloads", @"Label to present downloads"),
-                     @(ApplicationSectionFavorites) : NSLocalizedString(@"Favorites", @"Label to present Favorites"),
-                     @(ApplicationSectionHistory) : NSLocalizedString(@"History", @"Label to present history"),
-                     @(ApplicationSectionNotifications) : NSLocalizedString(@"Notifications", @"Label to present the help page"),
-                     @(ApplicationSectionSearch) : NSLocalizedString(@"Search", @"Label to present the search view"),
-                     @(ApplicationSectionShowByDate) : NSLocalizedString(@"Programmes by date", @"Label to present programmes by date"),
-                     @(ApplicationSectionOverview) : NSLocalizedString(@"Overview", @"Label to present the main Videos / Audios views"),
-                     @(ApplicationSectionLive) : NSLocalizedString(@"Livestreams", @"Label to present the Livestreams view"),
-                     @(ApplicationSectionShowAZ) : NSLocalizedString(@"Programmes A-Z", @"Label to present shows A to Z (radio or TV)"),
-                     @(ApplicationSectionWatchLater) : NSLocalizedString(@"Watch later", @"Label to present the watch later list") };
-    });
-    return s_names[@(applicationSection)];
-}
-
 void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller)
 {
     controller.serviceURL = SRGDataProvider.currentDataProvider.serviceURL;
@@ -211,7 +67,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @interface ApplicationConfiguration ()
 
-@property (nonatomic) FIRRemoteConfig *remoteConfig;
+@property (nonatomic) FirebaseConfiguration *firebaseConfiguration;
 
 @property (nonatomic) SRGVendor vendor;
 
@@ -312,34 +168,20 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 - (instancetype)init
 {
     if (self = [super init]) {
-        // FIXME: With the updated Firebase version we use, this fails if [FIRApp configure] fails. This prevents
-        //        the open source version from starting properly (the assertion below is triggered anyway).
-        self.remoteConfig = [FIRRemoteConfig remoteConfig];
-#if defined(DEBUG) || defined(NIGHTLY)
-        // Make it possible to retrieve the configuration more frequently during development
-        // See https://firebase.google.com/support/faq/#remote-config-values
-        self.remoteConfig.configSettings = [[FIRRemoteConfigSettings alloc] init];
-        self.remoteConfig.configSettings.minimumFetchInterval = 0.;
-#endif
-        
         // Read the embedded configuration JSON
         NSString *configurationFile = [NSBundle.mainBundle pathForResource:@"ApplicationConfiguration" ofType:@"json"];
         NSData *configurationFileData = [NSData dataWithContentsOfFile:configurationFile];
-        id configurationJSONObject = [NSJSONSerialization JSONObjectWithData:configurationFileData options:0 error:NULL];
-        NSAssert([configurationJSONObject isKindOfClass:NSDictionary.class], @"A valid default configuration dictionary is required");
+        id defaultsDictionary = [NSJSONSerialization JSONObjectWithData:configurationFileData options:0 error:NULL];
+        NSAssert([defaultsDictionary isKindOfClass:NSDictionary.class], @"A valid default configuration dictionary is required");
         
-        // Use this JSON as default remote configuration
-        [self.remoteConfig setDefaults:configurationJSONObject];
+        self.firebaseConfiguration = [[FirebaseConfiguration alloc] initWithDefaultsDictionary:defaultsDictionary updateBlock:^(FirebaseConfiguration * _Nonnull configuration) {
+            if (! [self synchronizeWithFirebaseConfiguration:configuration]) {
+                PlayLogWarning(@"configuration", @"The newly fetched remote application configuration is invalid and was not applied");
+            }
+        }];
         
-        __unused BOOL isDefaultRemoteConfigValid = [self synchronizeRemoteConfiguration];
+        __unused BOOL isDefaultRemoteConfigValid = [self synchronizeWithFirebaseConfiguration:self.firebaseConfiguration];
         NSAssert(isDefaultRemoteConfigValid, @"The default remote configuration must be valid");
-        
-        [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(applicationDidBecomeActive:)
-                                                   name:UIApplicationDidBecomeActiveNotification
-                                                 object:nil];
-        
-        [self update];
     }
     return self;
 }
@@ -355,90 +197,67 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 #pragma mark Remote configuration
 
-- (void)update
-{
-    // Cached configuration expiration must be large enough, except in development builds, see
-    //   https://firebase.google.com/support/faq/#remote-config-values
-#if defined(DEBUG) || defined(NIGHTLY)
-    static const NSTimeInterval kExpirationDuration = 30.;
-#else
-    static const NSTimeInterval kExpirationDuration = 15. * 60.;
-#endif
-    
-    [self.remoteConfig fetchWithExpirationDuration:kExpirationDuration completionHandler:^(FIRRemoteConfigFetchStatus status, NSError * _Nullable error) {
-        [self.remoteConfig activateWithCompletion:nil];
-        
-        if (! [self synchronizeRemoteConfiguration]) {
-            PlayLogWarning(@"configuration", @"The newly fetched remote application configuration is invalid and was not applied");
-        }
-    }];
-}
-
 // Return YES iff the activated remote configuration is valid, and stores the corresponding values. If the configuration
 // is not valid, the method returns NO and does not synchronize anything (i.e. the values will not be reflected by
 // the ApplicationConfiguration instance)
-- (BOOL)synchronizeRemoteConfiguration
+- (BOOL)synchronizeWithFirebaseConfiguration:(FirebaseConfiguration *)firebaseConfiguration
 {
     //
     // Mandatory values. Do not update the local configuration if one is missing
     //
     
-    NSString *businessUnitIdentifier = [self.remoteConfig configValueForKey:@"businessUnit"].stringValue;
-    if (businessUnitIdentifier.length == 0) {
-        return NO;
-    }
-    
+    NSString *businessUnitIdentifier = [firebaseConfiguration stringForKey:@"businessUnit"];
     SRGVendor vendor = DataProviderVendor(businessUnitIdentifier);
     if (vendor == SRGVendorNone) {
         return NO;
     }
     
     NSString *analyticsBusinessUnitIdentifier = AnalyticsBusinessUnitIdentifier(businessUnitIdentifier);
-    if (analyticsBusinessUnitIdentifier.length == 0) {
+    if (! analyticsBusinessUnitIdentifier) {
         return NO;
     }
     
-    FIRRemoteConfigValue *analyticsContainer = [self.remoteConfig configValueForKey:@"container"];
-    if (analyticsContainer.source == FIRRemoteConfigSourceStatic) {
+    NSNumber *analyticsContainer = [firebaseConfiguration numberForKey:@"container"];
+    if (! analyticsContainer) {
         return NO;
     }
     
-    NSString *comScoreVirtualSite = [self.remoteConfig configValueForKey:@"comScoreVirtualSite"].stringValue;
-    if (comScoreVirtualSite.length == 0) {
+    NSString *comScoreVirtualSite = [firebaseConfiguration stringForKey:@"comScoreVirtualSite"];
+    if (! comScoreVirtualSite) {
         return NO;
     }
     
-    NSString *netMetrixIdentifier = [self.remoteConfig configValueForKey:@"netMetrixIdentifier"].stringValue;
-    if (netMetrixIdentifier.length == 0) {
+    NSString *netMetrixIdentifier = [firebaseConfiguration stringForKey:@"netMetrixIdentifier"];
+    if (! netMetrixIdentifier) {
         return NO;
     }
     
-    NSString *playURLString = [self.remoteConfig configValueForKey:@"playURL"].stringValue;
-    NSURL *playURL = (playURLString.length != 0) ? [NSURL URLWithString:playURLString] : nil;
+    NSString *playURLString = [firebaseConfiguration stringForKey:@"playURL"];
+    NSURL *playURL = playURLString ? [NSURL URLWithString:playURLString] : nil;
     if (! playURL) {
         return NO;
     }
     
-    NSString *middlewareURLString = [self.remoteConfig configValueForKey:@"middlewareURL"].stringValue;
-    NSURL *middlewareURL = (middlewareURLString.length != 0) ? [NSURL URLWithString:middlewareURLString] : nil;
+    NSString *middlewareURLString = [firebaseConfiguration stringForKey:@"middlewareURL"];
+    NSURL *middlewareURL = middlewareURLString ? [NSURL URLWithString:middlewareURLString] : nil;
     if (! middlewareURL) {
         return NO;
     }
     
-    NSString *whatsNewURLString = [self.remoteConfig configValueForKey:@"whatsNewURL"].stringValue;
-    NSURL *whatsNewURL = (whatsNewURLString.length != 0) ? [NSURL URLWithString:whatsNewURLString] : nil;
+    NSString *whatsNewURLString = [firebaseConfiguration stringForKey:@"whatsNewURL"];
+    NSURL *whatsNewURL = whatsNewURLString ? [NSURL URLWithString:whatsNewURLString] : nil;
     if (! whatsNewURL) {
         return NO;
     }
     
-    NSNumber *appStoreProductIdentifier = [self.remoteConfig configValueForKey:@"appStoreProductIdentifier"].numberValue;
-    if (appStoreProductIdentifier.integerValue == 0) {
+    NSNumber *appStoreProductIdentifier = [firebaseConfiguration numberForKey:@"appStoreProductIdentifier"];
+    if (! appStoreProductIdentifier) {
         return NO;
     }
     
     // Update mandatory values
     self.analyticsBusinessUnitIdentifier = analyticsBusinessUnitIdentifier;
-    self.analyticsContainer = analyticsContainer.numberValue.integerValue;
+    self.analyticsContainer = analyticsContainer.integerValue;
     self.vendor = vendor;
     self.comScoreVirtualSite = comScoreVirtualSite;
     self.netMetrixIdentifier = netMetrixIdentifier;
@@ -453,194 +272,98 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     // Optional values
     //
     
-    NSString *voiceOverLanguageCode = [self.remoteConfig configValueForKey:@"voiceOverLanguageCode"].stringValue;
-    self.voiceOverLanguageCode = (voiceOverLanguageCode.length != 0) ? voiceOverLanguageCode : nil;
+    NSString *voiceOverLanguageCode = [firebaseConfiguration stringForKey:@"voiceOverLanguageCode"];
+    self.voiceOverLanguageCode = voiceOverLanguageCode;
     
-    NSString *googleCastReceiverIdentifier = [self.remoteConfig configValueForKey:@"googleCastReceiverIdentifier"].stringValue;
-    self.googleCastReceiverIdentifier = (googleCastReceiverIdentifier.length != 0) ? googleCastReceiverIdentifier : kGCKDefaultMediaReceiverApplicationID;
+    NSString *googleCastReceiverIdentifier = [firebaseConfiguration stringForKey:@"googleCastReceiverIdentifier"];
+    self.googleCastReceiverIdentifier = googleCastReceiverIdentifier ?: kGCKDefaultMediaReceiverApplicationID;
     
-    NSString *identityWebserviceURLString = [self.remoteConfig configValueForKey:@"identityWebserviceURL"].stringValue;
-    self.identityWebserviceURL = (identityWebserviceURLString.length != 0) ? [NSURL URLWithString:identityWebserviceURLString] : nil;
+    NSString *identityWebserviceURLString = [firebaseConfiguration stringForKey:@"identityWebserviceURL"];
+    self.identityWebserviceURL = identityWebserviceURLString ? [NSURL URLWithString:identityWebserviceURLString] : nil;
     
-    NSString *identityWebsiteURLString = [self.remoteConfig configValueForKey:@"identityWebsiteURL"].stringValue;
-    self.identityWebsiteURL = (identityWebsiteURLString.length != 0) ? [NSURL URLWithString:identityWebsiteURLString] : nil;
+    NSString *identityWebsiteURLString = [firebaseConfiguration stringForKey:@"identityWebsiteURL"];
+    self.identityWebsiteURL = identityWebsiteURLString ? [NSURL URLWithString:identityWebsiteURLString] : nil;
     
-    NSString *userDataServiceURLString = [self.remoteConfig configValueForKey:@"userDataServiceURL"].stringValue;
-    self.userDataServiceURL = (userDataServiceURLString.length != 0) ? [NSURL URLWithString:userDataServiceURLString] : nil;
+    NSString *userDataServiceURLString = [firebaseConfiguration stringForKey:@"userDataServiceURL"];
+    self.userDataServiceURL = userDataServiceURLString ? [NSURL URLWithString:userDataServiceURLString] : nil;
     
-    NSString *feedbackURLString = [self.remoteConfig configValueForKey:@"feedbackURL"].stringValue;
-    self.feedbackURL = (feedbackURLString.length != 0) ? [NSURL URLWithString:feedbackURLString] : nil;
+    NSString *feedbackURLString = [firebaseConfiguration stringForKey:@"feedbackURL"];
+    self.feedbackURL = feedbackURLString ? [NSURL URLWithString:feedbackURLString] : nil;
     
-    NSString *impressumURLString = [self.remoteConfig configValueForKey:@"impressumURL"].stringValue;
-    self.impressumURL = (impressumURLString.length != 0) ? [NSURL URLWithString:impressumURLString] : nil;
+    NSString *impressumURLString = [firebaseConfiguration stringForKey:@"impressumURL"];
+    self.impressumURL = impressumURLString ? [NSURL URLWithString:impressumURLString] : nil;
     
-    NSString *betaTestingURLString = [self.remoteConfig configValueForKey:@"betaTestingURL"].stringValue;
-    self.betaTestingURL = (betaTestingURLString.length != 0) ? [NSURL URLWithString:betaTestingURLString] : nil;
+    NSString *betaTestingURLString = [firebaseConfiguration stringForKey:@"betaTestingURL"];
+    self.betaTestingURL = betaTestingURLString ? [NSURL URLWithString:betaTestingURLString] : nil;
     
-    NSString *tvBetaTestingURLString = [self.remoteConfig configValueForKey:@"tvBetaTestingURL"].stringValue;
-    self.tvBetaTestingURL = (tvBetaTestingURLString.length != 0) ? [NSURL URLWithString:tvBetaTestingURLString] : nil;
+    NSString *tvBetaTestingURLString = [firebaseConfiguration stringForKey:@"tvBetaTestingURL"];
+    self.tvBetaTestingURL = tvBetaTestingURLString ? [NSURL URLWithString:tvBetaTestingURLString] : nil;
+
+    NSString *sourceCodeURLString = [firebaseConfiguration stringForKey:@"sourceCodeURL"];
+    self.sourceCodeURL = sourceCodeURLString ? [NSURL URLWithString:sourceCodeURLString] : nil;
     
-    NSString *sourceCodeURLString = [self.remoteConfig configValueForKey:@"sourceCodeURL"].stringValue;
-    self.sourceCodeURL = (sourceCodeURLString.length != 0) ? [NSURL URLWithString:sourceCodeURLString] : nil;
+    NSString *termsAndConditionsURLString = [firebaseConfiguration stringForKey:@"termsAndConditionsURL"];
+    self.termsAndConditionsURL = termsAndConditionsURLString ? [NSURL URLWithString:termsAndConditionsURLString] : nil;
     
-    NSString *termsAndConditionsURLString = [self.remoteConfig configValueForKey:@"termsAndConditionsURL"].stringValue;
-    self.termsAndConditionsURL = (termsAndConditionsURLString.length != 0) ? [NSURL URLWithString:termsAndConditionsURLString] : nil;
+    NSString *dataProtectionURLString = [firebaseConfiguration stringForKey:@"dataProtectionURL"];
+    self.dataProtectionURL = dataProtectionURLString ? [NSURL URLWithString:dataProtectionURLString] : nil;
     
-    NSString *dataProtectionURLString = [self.remoteConfig configValueForKey:@"dataProtectionURL"].stringValue;
-    self.dataProtectionURL = (dataProtectionURLString.length != 0) ? [NSURL URLWithString:dataProtectionURLString] : nil;
+    NSNumber *minimumSocialViewCount = [firebaseConfiguration numberForKey:@"minimumSocialViewCount"];
+    self.minimumSocialViewCount = minimumSocialViewCount ? MAX(minimumSocialViewCount.integerValue, 0) : NSIntegerMax;
     
-    FIRRemoteConfigValue *minimumSocialViewCount = [self.remoteConfig configValueForKey:@"minimumSocialViewCount"];
-    self.minimumSocialViewCount = (minimumSocialViewCount.stringValue.length > 0) ? MAX(minimumSocialViewCount.numberValue.integerValue, 0) : NSIntegerMax;
+    self.downloadsHintsHidden = [firebaseConfiguration boolForKey:@"downloadsHintsHidden"];
+    self.moreEpisodesHidden = [firebaseConfiguration boolForKey:@"moreEpisodesHidden"];
     
-    self.downloadsHintsHidden = [self.remoteConfig configValueForKey:@"downloadsHintsHidden"].boolValue;
-    self.moreEpisodesHidden = [self.remoteConfig configValueForKey:@"moreEpisodesHidden"].boolValue;
+    self.subtitleAvailabilityHidden = [firebaseConfiguration boolForKey:@"subtitleAvailabilityHidden"];
+    self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];
     
-    self.subtitleAvailabilityHidden = [self.remoteConfig configValueForKey:@"subtitleAvailabilityHidden"].boolValue;
-    self.audioDescriptionAvailabilityHidden = [self.remoteConfig configValueForKey:@"audioDescriptionAvailabilityHidden"].boolValue;
+    self.videoHomeSections = [firebaseConfiguration homeSectionsForKey:@"videoHomeSections"];
+    self.liveHomeSections = [firebaseConfiguration homeSectionsForKey:@"liveHomeSections"];
     
-    NSString *videoHomeSectionsString = [self.remoteConfig configValueForKey:@"videoHomeSections"].stringValue;
-    self.videoHomeSections = [self homeSectionsFromString:videoHomeSectionsString];
+    self.tvTrendingEpisodesOnly = [firebaseConfiguration boolForKey:@"tvTrendingEpisodesOnly"];
     
-    NSString *liveHomeSectionsString = [self.remoteConfig configValueForKey:@"liveHomeSections"].stringValue;
-    self.liveHomeSections = [self homeSectionsFromString:liveHomeSectionsString];
+    NSNumber *tvTrendingEditorialLimit = [firebaseConfiguration numberForKey:@"tvTrendingEditorialLimit"];
+    self.tvTrendingEditorialLimit = tvTrendingEditorialLimit ? @(MAX(tvTrendingEditorialLimit.integerValue, 0)) : nil;
     
-    self.tvTrendingEpisodesOnly = [self.remoteConfig configValueForKey:@"tvTrendingEpisodesOnly"].boolValue;
+    self.tvFeaturedHomeSectionHeaderHidden = [firebaseConfiguration boolForKey:@"tvFeaturedHomeSectionHeaderHidden"];
     
-    FIRRemoteConfigValue *tvTrendingEditorialLimit = [self.remoteConfig configValueForKey:@"tvTrendingEditorialLimit"];
-    self.tvTrendingEditorialLimit = (tvTrendingEditorialLimit.source != FIRRemoteConfigSourceStatic) ? @(MAX(tvTrendingEditorialLimit.numberValue.integerValue, 0)) : nil;
+    self.topicSections = [firebaseConfiguration topicSectionsForKey:@"topicSections"];
+    self.topicSectionsWithSubtopics = [firebaseConfiguration topicSectionsForKey:@"topicSectionsWithSubtopics"];
     
-    self.tvFeaturedHomeSectionHeaderHidden = [self.remoteConfig configValueForKey:@"tvFeaturedHomeSectionHeaderHidden"].boolValue;
+    self.topicHomeHeadersHidden = [firebaseConfiguration boolForKey:@"topicHomeHeadersHidden"];
     
-    NSMutableArray<NSNumber *> *topicSections = [NSMutableArray array];
-    NSString *topicSectionsString = [self.remoteConfig configValueForKey:@"topicSections"].stringValue;
-    if (topicSectionsString.length != 0) {
-        NSArray<NSString *> *topicSectionIdentifiers = [topicSectionsString componentsSeparatedByString:@","];
-        for (NSString *identifier in topicSectionIdentifiers) {
-            TopicSection topicSection = TopicSectionWithString(identifier);
-            if (topicSection != TopicSectionUnknown) {
-                [topicSections addObject:@(topicSection)];
-            }
-            else {
-                PlayLogWarning(@"configuration", @"Unknown topic section identifier %@. Skipped.", identifier);
-            }
-        }
-    }
-    self.topicSections = topicSections.copy;
+    self.audioHomeSections = [firebaseConfiguration homeSectionsForKey:@"audioHomeSections"];
     
-    NSMutableArray<NSNumber *> *topicSectionsWithSubtopics = [NSMutableArray array];
-    NSString *topicSectionsWithSubtopicsString = [self.remoteConfig configValueForKey:@"topicSectionsWithSubtopics"].stringValue;
-    if (topicSectionsWithSubtopicsString.length != 0) {
-        NSArray<NSString *> *topicSectionIdentifiers = [topicSectionsWithSubtopicsString componentsSeparatedByString:@","];
-        for (NSString *identifier in topicSectionIdentifiers) {
-            TopicSection topicSection = TopicSectionWithString(identifier);
-            if (topicSection != TopicSectionUnknown) {
-                [topicSectionsWithSubtopics addObject:@(topicSection)];
-            }
-            else {
-                PlayLogWarning(@"configuration", @"Unknown topic section with subtopics identifier %@. Skipped.", identifier);
-            }
-        }
-    }
-    self.topicSectionsWithSubtopics = topicSectionsWithSubtopics.copy;
+    self.radioFeaturedHomeSectionHeaderHidden = [firebaseConfiguration boolForKey:@"radioFeaturedHomeSectionHeaderHidden"];
     
-    self.topicHomeHeadersHidden = [self.remoteConfig configValueForKey:@"topicHomeHeadersHidden"].boolValue;
+    self.radioChannels = [firebaseConfiguration radioChannelsForKey:@"radioChannels" defaultHomeSections:self.audioHomeSections];
+    self.tvChannels = [firebaseConfiguration tvChannelsForKey:@"tvChannels"];
     
-    NSString *audioHomeSectionsString = [self.remoteConfig configValueForKey:@"audioHomeSections"].stringValue;
-    self.audioHomeSections = [self homeSectionsFromString:audioHomeSectionsString];
+    NSNumber *pageSize = [firebaseConfiguration numberForKey:@"pageSize"];
+    self.pageSize = pageSize ? MAX(pageSize.unsignedIntegerValue, 1) : 20;
     
-    self.radioFeaturedHomeSectionHeaderHidden = [self.remoteConfig configValueForKey:@"radioFeaturedHomeSectionHeaderHidden"].boolValue;
+    NSNumber *continuousPlaybackPlayerViewTransitionDuration = [firebaseConfiguration numberForKey:@"continuousPlaybackPlayerViewTransitionDuration"];
+    self.continuousPlaybackPlayerViewTransitionDuration = continuousPlaybackPlayerViewTransitionDuration ? fmax(continuousPlaybackPlayerViewTransitionDuration.doubleValue, 0.) : SRGLetterboxContinuousPlaybackDisabled;
     
-    NSMutableArray<RadioChannel *> *radioChannels = [NSMutableArray array];
-    if ([self.remoteConfig configValueForKey:@"radioChannels"].stringValue.length) {
-        NSData *radioChannelsJSONData = [self.remoteConfig configValueForKey:@"radioChannels"].dataValue;
-        id radioChannelsJSONObject = [NSJSONSerialization JSONObjectWithData:radioChannelsJSONData options:0 error:NULL];
-        if ([radioChannelsJSONObject isKindOfClass:NSArray.class]) {
-            for (id radioChannelDictionary in radioChannelsJSONObject) {
-                if ([radioChannelDictionary isKindOfClass:NSDictionary.class]) {
-                    // Transform homeSections string to a homeSection array, or use the default one
-                    NSArray<NSNumber *> *homeSections = self.audioHomeSections;
-                    
-                    id audioHomeSectionsValue = radioChannelDictionary[@"homeSections"];
-                    if ([audioHomeSectionsValue isKindOfClass:NSString.class]) {
-                        NSArray<NSNumber *> *homeSectionsOverrides = [self homeSectionsFromString:audioHomeSectionsValue];
-                        if (homeSectionsOverrides.count != 0) {
-                            homeSections = homeSectionsOverrides;
-                        }
-                    }
-                    
-                    NSMutableDictionary *mutableRadioChannelDictionary = [radioChannelDictionary mutableCopy];
-                    mutableRadioChannelDictionary[@"homeSections"] = homeSections;
-                    RadioChannel *radioChannel = [[RadioChannel alloc] initWithDictionary:mutableRadioChannelDictionary.copy];
-                    if (radioChannel) {
-                        [radioChannels addObject:radioChannel];
-                    }
-                    else {
-                        PlayLogWarning(@"configuration", @"Radio channel configuration is not valid. The dictionary of %@ is not valid.", radioChannelDictionary[@"uid"]);
-                    }
-                }
-                else {
-                    PlayLogWarning(@"configuration", @"Radio channel configuration is not valid. A dictionary is required.");
-                }
-            }
-        }
-        else {
-            PlayLogWarning(@"configuration", @"Radio channel configuration is not valid. A JSON array is required.");
-        }
-    }
-    self.radioChannels = radioChannels.copy;
+    NSNumber *continuousPlaybackForegroundTransitionDuration = [firebaseConfiguration numberForKey:@"continuousPlaybackForegroundTransitionDuration"];
+    self.continuousPlaybackForegroundTransitionDuration = continuousPlaybackForegroundTransitionDuration ? fmax(continuousPlaybackForegroundTransitionDuration.doubleValue, 0.) : SRGLetterboxContinuousPlaybackDisabled;
     
-    NSMutableArray<TVChannel *> *tvChannels = [NSMutableArray array];
-    if ([self.remoteConfig configValueForKey:@"tvChannels"].stringValue.length) {
-        NSData *tvChannelsJSONData = [self.remoteConfig configValueForKey:@"tvChannels"].dataValue;
-        id tvChannelsJSONObject = [NSJSONSerialization JSONObjectWithData:tvChannelsJSONData options:0 error:NULL];
-        if ([tvChannelsJSONObject isKindOfClass:NSArray.class]) {
-            for (id tvChannelDictionary in tvChannelsJSONObject) {
-                if ([tvChannelDictionary isKindOfClass:NSDictionary.class]) {
-                    TVChannel *tvChannel = [[TVChannel alloc] initWithDictionary:tvChannelDictionary];
-                    if (tvChannel) {
-                        [tvChannels addObject:tvChannel];
-                    }
-                    else {
-                        PlayLogWarning(@"configuration", @"TV channel configuration is not valid. The dictionary of %@ is not valid.", tvChannelDictionary[@"uid"]);
-                    }
-                }
-                else {
-                    PlayLogWarning(@"configuration", @"TV channel configuration is not valid. A dictionary is required.");
-                }
-            }
-        }
-        else {
-            PlayLogWarning(@"configuration", @"TV channel configuration is not valid. A JSON array is required.");
-        }
-    }
-    self.tvChannels = tvChannels.copy;
+    NSNumber *continuousPlaybackBackgroundTransitionDuration = [firebaseConfiguration numberForKey:@"continuousPlaybackBackgroundTransitionDuration"];
+    self.continuousPlaybackBackgroundTransitionDuration = continuousPlaybackBackgroundTransitionDuration ? fmax(continuousPlaybackBackgroundTransitionDuration.doubleValue, 0.) : SRGLetterboxContinuousPlaybackDisabled;
     
-    FIRRemoteConfigValue *pageSize = [self.remoteConfig configValueForKey:@"pageSize"];
-    self.pageSize = (pageSize.source != FIRRemoteConfigSourceStatic) ? MAX(pageSize.numberValue.unsignedIntegerValue, 1) : 20;
+    NSNumber *endTolerance = [firebaseConfiguration numberForKey:@"endTolerance"];
+    self.endTolerance = fmax(endTolerance.doubleValue, 0.);
     
-    FIRRemoteConfigValue *continuousPlaybackPlayerViewTransitionDuration = [self.remoteConfig configValueForKey:@"continuousPlaybackPlayerViewTransitionDuration"];
-    self.continuousPlaybackPlayerViewTransitionDuration = (continuousPlaybackPlayerViewTransitionDuration.stringValue.length > 0) ? fmax(continuousPlaybackPlayerViewTransitionDuration.numberValue.doubleValue, 0.) : SRGLetterboxContinuousPlaybackDisabled;
+    NSNumber *endToleranceRatio = [firebaseConfiguration numberForKey:@"endToleranceRatio"];
+    self.endToleranceRatio = fmaxf(endToleranceRatio.floatValue, 0.f);
     
-    FIRRemoteConfigValue *continuousPlaybackForegroundTransitionDuration = [self.remoteConfig configValueForKey:@"continuousPlaybackForegroundTransitionDuration"];
-    self.continuousPlaybackForegroundTransitionDuration = (continuousPlaybackForegroundTransitionDuration.stringValue.length > 0) ? fmax(continuousPlaybackForegroundTransitionDuration.numberValue.doubleValue, 0.) : SRGLetterboxContinuousPlaybackDisabled;
+    self.hiddenOnboardingUids = [[firebaseConfiguration stringForKey:@"hiddenOnboardings"] componentsSeparatedByString:@","] ?: @[];
     
-    FIRRemoteConfigValue *continuousPlaybackBackgroundTransitionDuration = [self.remoteConfig configValueForKey:@"continuousPlaybackBackgroundTransitionDuration"];
-    self.continuousPlaybackBackgroundTransitionDuration = (continuousPlaybackBackgroundTransitionDuration.stringValue.length > 0) ? fmax(continuousPlaybackBackgroundTransitionDuration.numberValue.doubleValue, 0.) : SRGLetterboxContinuousPlaybackDisabled;
+    self.searchSettingsHidden = [firebaseConfiguration boolForKey:@"searchSettingsHidden"];
+    self.searchSettingSubtitledHidden = [firebaseConfiguration boolForKey:@"searchSettingSubtitledHidden"];
+    self.showsSearchHidden = [firebaseConfiguration boolForKey:@"showsSearchHidden"];
     
-    FIRRemoteConfigValue *endTolerance = [self.remoteConfig configValueForKey:@"endTolerance"];
-    self.endTolerance = (endTolerance.stringValue.length > 0) ? fmax(endTolerance.numberValue.doubleValue, 0.) : 0.;
-    
-    FIRRemoteConfigValue *endToleranceRatio = [self.remoteConfig configValueForKey:@"endToleranceRatio"];
-    self.endToleranceRatio = (endToleranceRatio.stringValue.length > 0) ? fmaxf(endToleranceRatio.numberValue.floatValue, 0.f) : 0.f;
-    
-    self.hiddenOnboardingUids = [[self.remoteConfig configValueForKey:@"hiddenOnboardings"].stringValue componentsSeparatedByString:@","];
-    
-    self.searchSettingsHidden = [self.remoteConfig configValueForKey:@"searchSettingsHidden"].boolValue;
-    self.searchSettingSubtitledHidden = [self.remoteConfig configValueForKey:@"searchSettingSubtitledHidden"].boolValue;
-    self.searchSortingCriteriumHidden = [self.remoteConfig configValueForKey:@"searchSortingCriteriumHidden"].boolValue;
-    self.showsSearchHidden = [self.remoteConfig configValueForKey:@"showsSearchHidden"].boolValue;
-    
-    self.logoutMenuEnabled = [self.remoteConfig configValueForKey:@"logoutMenuEnabled"].boolValue;
+    self.logoutMenuEnabled = [firebaseConfiguration boolForKey:@"logoutMenuEnabled"];
     
     [NSNotificationCenter.defaultCenter postNotificationName:ApplicationConfigurationDidChangeNotification
                                                       object:self];
@@ -648,7 +371,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return YES;
 }
 
-#pragma mark Getter
+#pragma mark Getters and setters
 
 - (NSURL *)playURL
 {
@@ -773,31 +496,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
                            stringByAppendingPathComponent:moduleTypeName]
                           stringByAppendingPathComponent:module.seoName];
     return URLComponents.URL;
-}
-
-- (NSArray<NSNumber *> *)homeSectionsFromString:(NSString *)homeSectionsString
-{
-    NSMutableArray<NSNumber *> *homeSections = [NSMutableArray array];
-    if (homeSectionsString.length != 0) {
-        NSArray<NSString *> *homeSectionIdentifiers = [homeSectionsString componentsSeparatedByString:@","];
-        for (NSString *identifier in homeSectionIdentifiers) {
-            HomeSection homeSection = HomeSectionWithString(identifier);
-            if (homeSection != HomeSectionUnknown) {
-                [homeSections addObject:@(homeSection)];
-            }
-            else {
-                PlayLogWarning(@"configuration", @"Unknown home section identifier %@. Skipped.", identifier);
-            }
-        }
-    }
-    return homeSections.copy;
-}
-
-#pragma mark Notifications
-
-- (void)applicationDidBecomeActive:(NSNotification *)notification
-{
-    [self update];
 }
 
 #pragma mark Description
