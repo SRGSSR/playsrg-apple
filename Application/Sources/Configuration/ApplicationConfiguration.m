@@ -11,11 +11,11 @@
 #import "UIColor+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 
-#import <Firebase/Firebase.h>
-#import <GoogleCast/GoogleCast.h>
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGLetterbox/SRGLetterbox.h>
+@import Firebase;
+@import GoogleCast;
+@import libextobjc;
+@import SRGAppearance;
+@import SRGLetterbox;
 
 NSString * const ApplicationConfigurationDidChangeNotification = @"ApplicationConfigurationDidChangeNotification";
 

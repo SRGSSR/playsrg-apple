@@ -13,8 +13,8 @@
 #import "UIImageView+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import libextobjc;
+@import SRGAppearance;
 
 @interface TableRequestViewController ()
 

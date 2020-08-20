@@ -6,7 +6,7 @@
 
 #import "MostSearchedShowCollectionViewCell.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface MostSearchedShowCollectionViewCell ()
 

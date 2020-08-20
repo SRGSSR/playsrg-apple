@@ -9,10 +9,10 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayLogger.h"
 
-#import <FXReachability/FXReachability.h>
-#import <JavaScriptCore/JavaScriptCore.h>
-#import <SRGDiagnostics/SRGDiagnostics.h>
-#import <SRGNetwork/SRGNetwork.h>
+@import FXReachability;
+@import JavaScriptCore;
+@import SRGDiagnostics;
+@import SRGNetwork;
 
 NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceName";
 

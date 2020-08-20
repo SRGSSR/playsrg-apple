@@ -4,8 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGLetterbox/SRGLetterbox.h>
+@import SRGAnalytics;
+@import SRGLetterbox;
 
 NS_ASSUME_NONNULL_BEGIN
 

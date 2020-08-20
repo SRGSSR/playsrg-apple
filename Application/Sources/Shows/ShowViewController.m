@@ -21,9 +21,9 @@
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <Intents/Intents.h>
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import Intents;
+@import libextobjc;
+@import SRGAppearance;
 
 @interface ShowViewController ()
 

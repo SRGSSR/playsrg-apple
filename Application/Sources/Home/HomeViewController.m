@@ -32,10 +32,10 @@
 #import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <SRGUserData/SRGUserData.h>
+@import libextobjc;
+@import SRGAppearance;
+@import SRGDataProvider;
+@import SRGUserData;
 
 typedef NS_ENUM(NSInteger, HomeHeaderType) {
     HomeHeaderTypeNone,         // No header

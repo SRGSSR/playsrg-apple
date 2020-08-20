@@ -13,8 +13,8 @@
 #import "SwimlaneCollectionViewLayout.h"
 #import "UIView+PlaySRG.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAnalytics;
+@import SRGAppearance;
 
 // Small margin to avoid overlap with the horizontal scrolling indicator
 static const CGFloat kBottomInset = 15.f;

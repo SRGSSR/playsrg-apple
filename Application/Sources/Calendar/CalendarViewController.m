@@ -17,9 +17,9 @@
 #import "UIViewController+PlaySRG.h"
 #import "UIVisualEffectView+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <MAKVONotificationCenter/MAKVONotificationCenter.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import libextobjc;
+@import MAKVONotificationCenter;
+@import SRGAppearance;
 
 @interface CalendarViewController ()
 

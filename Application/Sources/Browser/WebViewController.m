@@ -10,8 +10,8 @@
 #import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <FXReachability/FXReachability.h>
-#import <libextobjc/libextobjc.h>
+@import FXReachability;
+@import libextobjc;
 
 static void *s_kvoContext = &s_kvoContext;
 

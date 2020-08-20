@@ -13,7 +13,7 @@
 #import "SRGMedia+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 static NSString *LabelFormattedDuration(NSTimeInterval duration)
 {

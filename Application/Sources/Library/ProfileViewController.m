@@ -26,8 +26,8 @@
 #import "UIViewController+PlaySRG.h"
 #import "WatchLaterViewController.h"
 
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGIdentity/SRGIdentity.h>
+@import SRGAppearance;
+@import SRGIdentity;
 
 @interface ProfileViewController ()
 

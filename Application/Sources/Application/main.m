@@ -6,7 +6,7 @@
 
 #import "PlayAppDelegate.h"
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 int main(int argc, char * argv[])
 {

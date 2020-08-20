@@ -7,8 +7,8 @@
 #import "ContentInsets.h"
 #import "TableRequestViewController.h"
 
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <SRGLetterbox/SRGLetterbox.h>
+@import SRGDataProvider;
+@import SRGLetterbox;
 
 NS_ASSUME_NONNULL_BEGIN
 

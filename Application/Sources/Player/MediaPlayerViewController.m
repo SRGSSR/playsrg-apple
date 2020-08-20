@@ -56,14 +56,14 @@
 #import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
-#import <FXReachability/FXReachability.h>
-#import <GoogleCast/GoogleCast.h>
-#import <Intents/Intents.h>
-#import <libextobjc/libextobjc.h>
-#import <MAKVONotificationCenter/MAKVONotificationCenter.h>
-#import <SRGAnalytics_DataProvider/SRGAnalytics_DataProvider.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGUserData/SRGUserData.h>
+@import FXReachability;
+@import GoogleCast;
+@import Intents;
+@import libextobjc;
+@import MAKVONotificationCenter;
+@import SRGAnalytics_DataProvider;
+@import SRGAppearance;
+@import SRGUserData;
 
 NSString * const MediaPlayerViewControllerVisibilityDidChangeNotification = @"MediaPlayerViewControllerVisibilityDidChangeNotification";
 NSString * const MediaPlayerViewControllerVisibleKey = @"MediaPlayerViewControllerVisible";

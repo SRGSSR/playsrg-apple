@@ -11,7 +11,7 @@
 #import "ShowViewController.h"
 #import "UIView+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface HomeShowVerticalListTableViewCell ()
 

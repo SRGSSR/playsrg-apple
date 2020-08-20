@@ -18,9 +18,9 @@
 #import "WatchLater.h"
 #import "WatchLaterTableViewCell.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGUserData/SRGUserData.h>
+@import libextobjc;
+@import SRGAnalytics;
+@import SRGUserData;
 
 @interface WatchLaterViewController () <WatchLaterTableViewCellDelegate>
 

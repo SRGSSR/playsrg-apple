@@ -20,10 +20,10 @@
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <MAKVONotificationCenter/MAKVONotificationCenter.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGLetterbox/SRGLetterbox.h>
-#import <libextobjc/libextobjc.h>
+@import MAKVONotificationCenter;
+@import SRGAppearance;
+@import SRGLetterbox;
+@import libextobjc;
 
 @interface PlayMiniPlayerView () <AccessibilityViewDelegate, SRGPlaybackButtonDelegate>
 

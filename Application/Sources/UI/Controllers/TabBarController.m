@@ -20,9 +20,9 @@
 #import "TabBarActionable.h"
 #import "UIColor+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <MAKVONotificationCenter/MAKVONotificationCenter.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import libextobjc;
+@import MAKVONotificationCenter;
+@import SRGAppearance;
 
 static const CGFloat MiniPlayerHeight = 50.f;
 static const CGFloat MiniPlayerDefaultOffset = 5.f;

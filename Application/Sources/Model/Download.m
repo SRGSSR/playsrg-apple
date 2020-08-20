@@ -12,8 +12,8 @@
 #import "PlayLogger.h"
 #import "UIImage+PlaySRG.h"
 
-#import <FXReachability/FXReachability.h>
-#import <libextobjc/libextobjc.h>
+@import FXReachability;
+@import libextobjc;
 
 NSString * const DownloadStateDidChangeNotification = @"DownloadStateDidChangeNotification";
 NSString * const DownloadStateKey = @"DownloadState";

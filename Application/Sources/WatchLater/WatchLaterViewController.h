@@ -6,7 +6,7 @@
 
 #import "TableRequestViewController.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
+@import SRGAnalytics;
 
 NS_ASSUME_NONNULL_BEGIN
 

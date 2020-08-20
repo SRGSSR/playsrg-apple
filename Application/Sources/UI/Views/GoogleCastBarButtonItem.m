@@ -6,9 +6,9 @@
 
 #import "GoogleCastBarButtonItem.h"
 
-#import <GoogleCast/GoogleCast.h>
-#import <libextobjc/libextobjc.h>
-#import <MAKVONotificationCenter/MAKVONotificationCenter.h>
+@import GoogleCast;
+@import libextobjc;
+@import MAKVONotificationCenter;
 
 @interface GoogleCastBarButtonItem ()
 

@@ -31,9 +31,9 @@
 #import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
-#import <SRGAnalytics_DataProvider/SRGAnalytics_DataProvider.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGMediaPlayer/SRGMediaPlayer.h>
+@import SRGAnalytics_DataProvider;
+@import SRGAppearance;
+@import SRGMediaPlayer;
 
 @interface MediaPreviewViewController ()
 

@@ -12,7 +12,7 @@
 #import "UIVisualEffectView+PlaySRG.h"
 
 #import "MaterialTabs.h"
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface PageViewController () <MDCTabBarDelegate>
 

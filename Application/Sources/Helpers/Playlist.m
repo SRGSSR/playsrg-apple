@@ -10,9 +10,9 @@
 #import "History.h"
 #import "Recommendation.h"
 
-#import <FXReachability/FXReachability.h>
-#import <libextobjc/libextobjc.h>
-#import <SRGNetwork/SRGNetwork.h>
+@import FXReachability;
+@import libextobjc;
+@import SRGNetwork;
 
 @interface Playlist ()
 

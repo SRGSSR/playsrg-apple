@@ -6,8 +6,8 @@
 
 #import "ApplicationConfiguration.h"
 
-#import <Foundation/Foundation.h>
-#import <SRGDataProvider/SRGDataProvider.h>
+@import Foundation;
+@import SRGDataProvider;
 
 NS_ASSUME_NONNULL_BEGIN
 

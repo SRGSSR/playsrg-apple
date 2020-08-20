@@ -15,10 +15,10 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGUserData/SRGUserData.h>
+@import libextobjc;
+@import SRGAnalytics;
+@import SRGAppearance;
+@import SRGUserData;
 
 @interface FavoriteTableViewCell ()
 

@@ -16,12 +16,12 @@
 #import "UIWindow+PlaySRG.h"
 #import "WebViewController.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGIdentity/SRGIdentity.h>
-#import <SRGUserData/SRGUserData.h>
-#import <YYWebImage/YYWebImage.h>
+@import libextobjc;
+@import SRGAppearance;
+@import SRGAnalytics;
+@import SRGIdentity;
+@import SRGUserData;
+@import YYWebImage;
 
 @interface ProfileAccountHeaderView ()
 

@@ -8,11 +8,11 @@
 #import "RadioChannel.h"
 #import "TVChannel.h"
 
-#import <CoreMedia/CoreMedia.h>
-#import <Foundation/Foundation.h>
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <SRGLetterbox/SRGLetterbox.h>
+@import CoreMedia;
+@import Foundation;
+@import SRGAnalytics;
+@import SRGDataProvider;
+@import SRGLetterbox;
 
 NS_ASSUME_NONNULL_BEGIN
 

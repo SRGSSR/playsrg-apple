@@ -9,8 +9,8 @@
 #import "Banner.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <FXReachability/FXReachability.h>
-#import <SRGDataProvider/SRGDataProvider.h>
+@import FXReachability;
+@import SRGDataProvider;
 
 @implementation DataViewController
 

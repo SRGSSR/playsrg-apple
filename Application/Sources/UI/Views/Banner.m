@@ -11,8 +11,8 @@
 #import "UIColor+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGDataProvider/SRGDataProvider.h>
+@import SRGAppearance;
+@import SRGDataProvider;
 
 static NSString *BannerShortenedName(NSString *name);
 

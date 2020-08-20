@@ -14,8 +14,8 @@
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAnalytics;
+@import SRGAppearance;
 
 @interface ShowCollectionViewCell ()
 

@@ -11,8 +11,8 @@
 #import "PlayApplication.h"
 #import "PushService+Private.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGUserData/SRGUserData.h>
+@import libextobjc;
+@import SRGUserData;
 
 NSString * const PlayPreferencesDomain = @"play";
 

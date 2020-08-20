@@ -7,8 +7,8 @@
 #import "ContentInsets.h"
 #import "RequestViewController.h"
 
-#import <DZNEmptyDataSet/DZNEmptyDataSet.h>
-#import <SRGAnalytics/SRGAnalytics.h>
+@import DZNEmptyDataSet;
+@import SRGAnalytics;
 
 NS_ASSUME_NONNULL_BEGIN
 

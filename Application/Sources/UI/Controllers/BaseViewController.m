@@ -25,8 +25,9 @@
 #import "WatchLater.h"
 
 #import <objc/runtime.h>
-#import <libextobjc/libextobjc.h>
-#import <SRGAnalytics/SRGAnalytics.h>
+
+@import libextobjc;
+@import SRGAnalytics;
 
 static void commonInit(BaseViewController *self);
 

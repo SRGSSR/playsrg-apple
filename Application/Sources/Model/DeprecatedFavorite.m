@@ -12,8 +12,8 @@
 #import "PlayErrors.h"
 #import "PlayLogger.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGLogger/SRGLogger.h>
+@import libextobjc;
+@import SRGLogger;
 
 static NSString *FavoriteIdentifier(FavoriteType type, NSString *uid);
 

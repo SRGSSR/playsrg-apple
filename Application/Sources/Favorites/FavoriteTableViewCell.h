@@ -7,8 +7,9 @@
 #import "Previewing.h"
 
 #import <MGSwipeTableCell/MGSwipeTableCell.h>
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <UIKit/UIKit.h>
+
+@import SRGDataProvider;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

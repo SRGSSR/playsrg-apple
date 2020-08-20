@@ -8,7 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 CGSize SizeForImageScale(ImageScale imageScale)
 {

@@ -10,8 +10,8 @@
 #import "PlayErrors.h"
 #import "UIImage+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
-#import <YYWebImage/YYWebImage.h>
+@import SRGAppearance;
+@import YYWebImage;
 
 @implementation UIImageView (PlaySRG)
 

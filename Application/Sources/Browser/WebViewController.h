@@ -8,8 +8,8 @@
 #import "BaseViewController.h"
 #import "ContentInsets.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <WebKit/WebKit.h>
+@import SRGAnalytics;
+@import WebKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -18,7 +18,7 @@
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 {

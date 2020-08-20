@@ -11,11 +11,12 @@
 #import "PlayApplication.h"
 #import "UIWindow+PlaySRG.h"
 
-#import <FXReachability/FXReachability.h>
 #import <InAppSettingsKit/IASKSettingsReader.h>
 #import <InAppSettingsKit/IASKSpecifier.h>
-#import <libextobjc/libextobjc.h>
-#import <SRGLetterbox/SRGLetterbox.h>
+
+@import FXReachability;
+@import libextobjc;
+@import SRGLetterbox;
 
 NSString * const PlaySRGSettingHDOverCellularEnabled = @"PlaySRGSettingHDOverCellularEnabled";
 NSString * const PlaySRGSettingPresenterModeEnabled = @"PlaySRGSettingPresenterModeEnabled";

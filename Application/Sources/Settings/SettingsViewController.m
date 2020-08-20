@@ -23,16 +23,17 @@
 #import "UIWindow+PlaySRG.h"
 #import "WebViewController.h"
 
-#import <AppCenterDistribute/AppCenterDistribute.h>
-#import <FLEX/FLEX.h>
 #import <InAppSettingsKit/IASKSettingsReader.h>
-#import <libextobjc/libextobjc.h>
-#import <SafariServices/SafariServices.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGUserData/SRGUserData.h>
-#import <SRGIdentity/SRGIdentity.h>
-#import <SRGLetterbox/SRGLetterbox.h>
-#import <YYWebImage/YYWebImage.h>
+
+@import AppCenterDistribute;
+@import FLEX;
+@import libextobjc;
+@import SafariServices;
+@import SRGAppearance;
+@import SRGUserData;
+@import SRGIdentity;
+@import SRGLetterbox;
+@import YYWebImage;
 
 // Public settings
 static NSString * const SettingsFeaturesButton = @"Button_Features";

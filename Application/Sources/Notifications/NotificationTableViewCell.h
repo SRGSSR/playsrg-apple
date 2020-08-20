@@ -7,7 +7,8 @@
 #import "Notification.h"
 
 #import <MGSwipeTableCell/MGSwipeTableCell.h>
-#import <UIKit/UIKit.h>
+
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

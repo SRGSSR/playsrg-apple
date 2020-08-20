@@ -10,8 +10,8 @@
 #import "ForegroundTimer.h"
 #import "SRGProgram+PlaySRG.h"
 
-#import <FXReachability/FXReachability.h>
-#import <libextobjc/libextobjc.h>
+@import FXReachability;
+@import libextobjc;
 
 @interface ChannelService ()
 

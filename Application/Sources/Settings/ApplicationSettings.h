@@ -6,7 +6,7 @@
 
 #import "ApplicationConfiguration.h"
 
-#import <SRGLetterbox/SRGLetterbox.h>
+@import SRGLetterbox;
 
 NS_ASSUME_NONNULL_BEGIN
 

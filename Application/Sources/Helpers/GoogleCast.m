@@ -12,9 +12,10 @@
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
-#import <GoogleCast/GoogleCast.h>
 #import <objc/runtime.h>
-#import <SRGAnalytics/SRGAnalytics.h>
+
+@import GoogleCast;
+@import SRGAnalytics;
 
 NSString * const GoogleCastPlaybackDidStartNotification = @"GoogleCastPlaybackDidStartNotification";
 NSString * const GoogleCastMediaKey = @"GoogleCastMedia";

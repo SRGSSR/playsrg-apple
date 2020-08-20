@@ -4,10 +4,10 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoreMedia/CoreMedia.h>
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <SRGLetterbox/SRGLetterbox.h>
-#import <UIKit/UIKit.h>
+@import CoreMedia;
+@import SRGDataProvider;
+@import SRGLetterbox;
+@import UIKit;
 
 /**
  *  Player types.

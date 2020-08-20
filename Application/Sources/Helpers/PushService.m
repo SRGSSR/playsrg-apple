@@ -13,9 +13,9 @@
 #import "Notification.h"
 #import "UIView+PlaySRG.h"
 
-#import <Airship/AirshipLib.h>
-#import <libextobjc/libextobjc.h>
-#import <UserNotifications/UserNotifications.h>
+@import Airship;
+@import libextobjc;
+@import UserNotifications;
 
 NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNotification";
 NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidChangeNotification";

@@ -6,7 +6,7 @@
 
 #import "DataViewController.h"
 
-#import <SRGDataProvider/SRGDataProvider.h>
+@import SRGDataProvider;
 
 NS_ASSUME_NONNULL_BEGIN
 

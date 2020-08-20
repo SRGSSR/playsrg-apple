@@ -19,9 +19,10 @@
 #import "UIDevice+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
-#import <GoogleCast/GoogleCast.h>
 #import <objc/runtime.h>
-#import <SRGAnalytics_DataProvider/SRGAnalytics_DataProvider.h>
+
+@import GoogleCast;
+@import SRGAnalytics_DataProvider;
 
 static Playlist *s_playlist;
 

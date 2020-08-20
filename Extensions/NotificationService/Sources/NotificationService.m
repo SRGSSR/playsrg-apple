@@ -8,7 +8,7 @@
 
 #import "Notification.h"
 
-#import <MobileCoreServices/MobileCoreServices.h>
+@import MobileCoreServices;
 
 static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
 {

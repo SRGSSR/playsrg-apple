@@ -8,7 +8,7 @@
 #import "Download.h"
 #import "UIColor+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface DownloadFooterSectionView ()
 

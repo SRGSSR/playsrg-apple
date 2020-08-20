@@ -34,25 +34,26 @@
 #import "UpdateInfo.h"
 #import "WatchLater.h"
 
-#import <Airship/AirshipLib.h>
-#import <AppCenter/AppCenter.h>
-#import <AppCenterCrashes/AppCenterCrashes.h>
-#import <AppCenterDistribute/AppCenterDistribute.h>
-#import <AVFoundation/AVFoundation.h>
-#import <Firebase/Firebase.h>
 #import <InAppSettingsKit/IASKSettingsReader.h>
-#import <libextobjc/libextobjc.h>
-#import <Mantle/Mantle.h>
-#import <SafariServices/SafariServices.h>
-#import <SRGAnalytics_Identity/SRGAnalytics_Identity.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <SRGIdentity/SRGIdentity.h>
-#import <SRGLetterbox/SRGLetterbox.h>
-#import <SRGUserData/SRGUserData.h>
+
+@import Airship;
+@import AppCenter;
+@import AppCenterCrashes;
+@import AppCenterDistribute;
+@import AVFoundation;
+@import Firebase;
+@import libextobjc;
+@import Mantle;
+@import SafariServices;
+@import SRGAnalytics_Identity;
+@import SRGAppearance;
+@import SRGDataProvider;
+@import SRGIdentity;
+@import SRGLetterbox;
+@import SRGUserData;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-#import <Fingertips/Fingertips.h>
+@import Fingertips;
 #endif
 
 static void *s_kvoContext = &s_kvoContext;

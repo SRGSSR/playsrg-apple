@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <SRGLetterbox/SRGLetterbox.h>
+@import SRGLetterbox;
 
 /**
  *  File for clients to opt-in for designable support (preview in Interface Builder)

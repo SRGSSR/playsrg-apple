@@ -13,8 +13,8 @@
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import libextobjc;
+@import SRGAppearance;
 
 @interface NotificationTableViewCell ()
 

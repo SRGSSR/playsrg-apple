@@ -11,7 +11,7 @@
 #import "UIApplication+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface RelatedContentView ()
 

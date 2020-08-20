@@ -24,9 +24,9 @@
 #import "UISearchBar+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import libextobjc;
+@import SRGAnalytics;
+@import SRGAppearance;
 
 @interface SearchViewController () <SearchSettingsViewControllerDelegate>
 

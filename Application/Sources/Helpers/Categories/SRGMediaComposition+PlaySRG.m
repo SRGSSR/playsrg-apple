@@ -6,7 +6,7 @@
 
 #import "SRGMediaComposition+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
+@import libextobjc;
 
 @implementation SRGMediaComposition (PlaySRG)
 

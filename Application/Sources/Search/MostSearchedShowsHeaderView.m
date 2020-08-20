@@ -6,7 +6,7 @@
 
 #import "MostSearchedShowsHeaderView.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface MostSearchedShowsHeaderView ()
 
