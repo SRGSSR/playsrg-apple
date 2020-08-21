@@ -9,8 +9,9 @@ import SwiftUI
 struct ProfileView: View {
     private static let version: String = {
         let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        let bundleNameSuffix = Bundle.main.infoDictionary!["BundleNameSuffix"] as! String
         let buildString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
-        return String(format: "%@ (%@)", appVersion, buildString)
+        return String(format: "%@%@ (%@)", appVersion, bundleNameSuffix, buildString)
     }()
     
     var body: some View {
@@ -18,7 +19,7 @@ struct ProfileView: View {
             Spacer()
             Text("Profile")
             Spacer()
-            Text("Version: \(Self.version)")
+            Text(Self.version)
         }
     }
 }
