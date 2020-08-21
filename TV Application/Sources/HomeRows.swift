@@ -35,6 +35,7 @@ class HomeRow: Identifiable, Equatable {
         case radioMostPopular(channelUid: String)
         case radioLatest(channelUid: String)
         case radioLatestVideos(channelUid: String)
+        case radioAllShows(channelUid: String)
         case radioShowsAccess(channelUid: String)
         
         case tvLive
@@ -54,6 +55,8 @@ class HomeRow: Identifiable, Equatable {
                 return HomeTopicsAccessRow(id: id)
             case .tvShowsAccess, .radioShowsAccess:
                 return HomeShowsAccessRow(id: id)
+            case .radioAllShows:
+                return HomeRadioShowsRow(id: id)
             default:
                 return HomeMediaRow(id: id)
         }
@@ -217,6 +220,32 @@ final class HomeTopicsAccessRow: HomeRow, ObservableObject {
                     .replaceError(with: [])
                     .receive(on: DispatchQueue.main)
                     .assign(to: \.topics, on: self)
+            default:
+                return nil;
+        }
+    }
+}
+
+final class HomeRadioShowsRow: HomeRow, ObservableObject {
+    @Published private(set) var shows: [SRGShow] = []
+    
+    override var title: String? {
+        switch id {
+            case .radioAllShows:
+                return "Shows"
+            default:
+                return nil
+        }
+    }
+    
+    override func load() -> AnyCancellable? {
+        switch id {
+            case let .radioAllShows(channelUid):
+                return SRGDataProvider.current!.radioShows(for: ApplicationConfiguration.shared.vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize)
+                    .map(\.shows)
+                    .replaceError(with: [])
+                    .receive(on: DispatchQueue.main)
+                    .assign(to: \.shows, on: self)
             default:
                 return nil;
         }

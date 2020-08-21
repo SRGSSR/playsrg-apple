@@ -1234,6 +1234,11 @@
 		6FB0BB3D20AEF5C4007C5D87 /* Onboarding.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FB0BB3B20AEF5C4007C5D87 /* Onboarding.strings */; };
 		6FB0BB4020AEF5D1007C5D87 /* Onboarding.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FB0BB3E20AEF5D1007C5D87 /* Onboarding.strings */; };
 		6FB0BB4320AEF5DC007C5D87 /* Onboarding.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FB0BB4120AEF5DC007C5D87 /* Onboarding.strings */; };
+		6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */; };
+		6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */; };
+		6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */; };
+		6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */; };
+		6FB1ADFE24EFEF2C00E80C1E /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */; };
 		6FB3C1A81DBCE783008160B4 /* MediaPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3C1A61DBCE783008160B4 /* MediaPreviewViewController.m */; };
 		6FB3C1A91DBCE783008160B4 /* MediaPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3C1A61DBCE783008160B4 /* MediaPreviewViewController.m */; };
 		6FB3C1AA1DBCE783008160B4 /* MediaPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3C1A61DBCE783008160B4 /* MediaPreviewViewController.m */; };
@@ -2301,6 +2306,7 @@
 		6FB0BB3C20AEF5C4007C5D87 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Onboarding.strings; sourceTree = "<group>"; };
 		6FB0BB3F20AEF5D1007C5D87 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Onboarding.strings; sourceTree = "<group>"; };
 		6FB0BB4220AEF5DC007C5D87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Onboarding.strings; sourceTree = "<group>"; };
+		6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		6FB340D823E1A21500BC83BF /* TabBarActionable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarActionable.h; sourceTree = "<group>"; };
 		6FB3C1A51DBCE783008160B4 /* MediaPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPreviewViewController.h; sourceTree = "<group>"; };
 		6FB3C1A61DBCE783008160B4 /* MediaPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPreviewViewController.m; sourceTree = "<group>"; };
@@ -3670,6 +3676,7 @@
 				6FFCC5E324EFBF2100805B0F /* RadioChannel.swift */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
 				6F331D6524D076C800C096AB /* SearchView.swift */,
+				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
 				6FDFD88B24E6BC9200F20382 /* TopicCell.swift */,
 				6F331D5924D0766500C096AB /* VideosView.swift */,
 			);
@@ -7608,6 +7615,7 @@
 				6F1D31B324E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6FA84A2C24E4525000B1A56E /* HomeRows.swift in Sources */,
 				6FCC73BA24E6F8EE00ECF73F /* HomeView.swift in Sources */,
+				6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FCC73AE24E6E68600ECF73F /* PlayerView.swift in Sources */,
 				6F331D6624D076C800C096AB /* SearchView.swift in Sources */,
 				6F331CE924D06B8200C096AB /* AudiosView.swift in Sources */,
@@ -7642,6 +7650,7 @@
 				6F1D31B424E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6FA84A2D24E4525000B1A56E /* HomeRows.swift in Sources */,
 				6FCC73BB24E6F8EE00ECF73F /* HomeView.swift in Sources */,
+				6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FCC73AF24E6E68600ECF73F /* PlayerView.swift in Sources */,
 				6F331D6724D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAF824D06FF7002675EF /* AudiosView.swift in Sources */,
@@ -7676,6 +7685,7 @@
 				6F1D31B524E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6FA84A2E24E4525000B1A56E /* HomeRows.swift in Sources */,
 				6FCC73BC24E6F8EE00ECF73F /* HomeView.swift in Sources */,
+				6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FCC73B024E6E68600ECF73F /* PlayerView.swift in Sources */,
 				6F331D6824D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAFA24D06FF7002675EF /* AudiosView.swift in Sources */,
@@ -7710,6 +7720,7 @@
 				6F1D31B624E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6FA84A2F24E4525000B1A56E /* HomeRows.swift in Sources */,
 				6FCC73BD24E6F8EE00ECF73F /* HomeView.swift in Sources */,
+				6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FCC73B124E6E68600ECF73F /* PlayerView.swift in Sources */,
 				6F331D6924D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAFC24D06FF7002675EF /* AudiosView.swift in Sources */,
@@ -7744,6 +7755,7 @@
 				6F1D31B724E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6FA84A3024E4525000B1A56E /* HomeRows.swift in Sources */,
 				6FCC73BE24E6F8EE00ECF73F /* HomeView.swift in Sources */,
+				6FB1ADFE24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FCC73B224E6E68600ECF73F /* PlayerView.swift in Sources */,
 				6F331D6A24D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAFE24D06FF8002675EF /* AudiosView.swift in Sources */,

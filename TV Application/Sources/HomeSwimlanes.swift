@@ -33,6 +33,11 @@ struct HomeSwimlane: View {
                 HomeShowsAccessSwimlane(row: row)
             }
         }
+        else if let row = row as? HomeRadioShowsRow {
+            Section(header: HomeSwimlaneHeader(row: row)) {
+                HomeShowsSwimlane(row: row)
+            }
+        }
     }
 }
 
@@ -113,6 +118,28 @@ struct HomeShowsAccessSwimlane: View {
             Button(action: { /* Open calendar */ }) {
                 Text("By date")
             }
+        }
+    }
+}
+
+struct HomeShowsSwimlane: View {
+    @ObservedObject var row: HomeRadioShowsRow
+    
+    var body: some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 40) {
+                if row.shows.count > 0 {
+                    ForEach(row.shows, id: \.uid) { show in
+                        ShowCell(show: show)
+                    }
+                }
+                else {
+                    ForEach(0..<10) { _ in
+                        ShowCell(show: nil)
+                    }
+                }
+            }
+            .padding([.leading, .trailing], HomeSwimlane.horizontalPadding)
         }
     }
 }
