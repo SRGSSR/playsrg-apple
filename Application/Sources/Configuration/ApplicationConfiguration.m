@@ -9,10 +9,11 @@
 #import "ApplicationSettings.h"
 #import "FirebaseConfiguration.h"
 #import "PlayLogger.h"
-#import "UIColor+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 
+#if TARGET_OS_IOS
 @import GoogleCast;
+#endif
 @import libextobjc;
 @import SRGAppearance;
 @import SRGLetterbox;
@@ -51,7 +52,9 @@ void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *con
 {
     controller.serviceURL = SRGDataProvider.currentDataProvider.serviceURL;
     controller.globalParameters = SRGDataProvider.currentDataProvider.globalParameters;
+#if TARGET_OS_IOS
     controller.backgroundVideoPlaybackEnabled = ApplicationSettingBackgroundVideoPlaybackEnabled();
+#endif
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     controller.endTolerance = applicationConfiguration.endTolerance;
@@ -79,7 +82,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, copy) NSString *voiceOverLanguageCode;
 
+#if TARGET_OS_IOS
 @property (nonatomic, copy) NSString *googleCastReceiverIdentifier;
+#endif
 @property (nonatomic, copy) NSNumber *appStoreProductIdentifier;
 
 @property (nonatomic) NSURL *playURL;
@@ -275,8 +280,10 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     NSString *voiceOverLanguageCode = [firebaseConfiguration stringForKey:@"voiceOverLanguageCode"];
     self.voiceOverLanguageCode = voiceOverLanguageCode;
     
+#if TARGET_OS_IOS
     NSString *googleCastReceiverIdentifier = [firebaseConfiguration stringForKey:@"googleCastReceiverIdentifier"];
     self.googleCastReceiverIdentifier = googleCastReceiverIdentifier ?: kGCKDefaultMediaReceiverApplicationID;
+#endif
     
     NSString *identityWebserviceURLString = [firebaseConfiguration stringForKey:@"identityWebserviceURL"];
     self.identityWebserviceURL = identityWebserviceURLString ? [NSURL URLWithString:identityWebserviceURLString] : nil;

@@ -6,38 +6,66 @@
 
 import SRGDataProviderModel
 
-struct ApplicationConfiguration {
-    static let vendor: SRGVendor = .RTS
-    static let pageSize: UInt = 10
-    static let tvTrendingEditorialLimit: UInt = 3
-    static let tvTrendingEpisodesOnly: Bool = false
-    
-    static let tvHomeRowIds: [HomeRow.Id] = [
-        .tvTrending(appearance: .hero),
-        .tvTopics,
-        .tvShowsAccess,
-        .tvLatestForModule(nil, type: .event),
-        .tvLatestForTopic(nil),
-        .tvLatest,
-        .tvMostPopular,
-        .tvSoonExpiring
-    ]
-    
-    static func radioHomeRowIds(for channelUid: String) -> [HomeRow.Id] {
-        return [
-            .radioLatestEpisodes(channelUid: channelUid),
-            .radioShowsAccess(channelUid: channelUid),
-            .radioMostPopular(channelUid: channelUid),
-            .radioLatest(channelUid: channelUid),
-            .radioLatestVideos(channelUid: channelUid)
-        ]
+extension ApplicationConfiguration {
+    private func videoHomeRowId(from homeSection: HomeSection) -> HomeRow.Id? {
+        switch homeSection {
+            case .tvTrending:
+                return .tvTrending(appearance: .hero)
+            case .tvLatest:
+                return .tvLatest
+            case .tvMostPopular:
+                return .tvMostPopular
+            case .tvSoonExpiring:
+                return .tvSoonExpiring
+            case .tvEvents:
+                return .tvLatestForModule(nil, type: .event)
+            case .tvTopics:
+                return .tvLatestForTopic(nil)
+            case .tvTopicsAccess:
+                return .tvTopicsAccess
+            case .tvShowsAccess:
+                return .tvShowsAccess
+            default:
+                return nil
+        }
     }
     
-    static let liveHomeRowIds: [HomeRow.Id] = [
-        .tvLive,
-        .radioLive,
-        .radioLiveSatellite,
-        .liveCenter,
-        .tvScheduledLivestreams
-    ]
+    private func liveHomeRowId(from homeSection: HomeSection) -> HomeRow.Id? {
+        switch homeSection {
+            case .tvLive:
+                return .tvLive
+            case .radioLive:
+                return .radioLive
+            case .radioLiveSatellite:
+                return .radioLiveSatellite
+            case .tvLiveCenter:
+                return .tvLiveCenter
+            case .tvScheduledLivestreams:
+                return .tvScheduledLivestreams
+            default:
+                return nil
+        }
+    }
+    
+    func videoHomeRowIds() -> [HomeRow.Id] {
+        var rowIds = [HomeRow.Id]()
+        for homeSection in videoHomeSections {
+            if let homeSection = HomeSection(rawValue: homeSection.intValue),
+               let rowId = videoHomeRowId(from: homeSection) {
+                rowIds.append(rowId)
+            }
+        }
+        return rowIds
+    }
+    
+    func liveHomeRowIds() -> [HomeRow.Id] {
+        var rowIds = [HomeRow.Id]()
+        for homeSection in liveHomeSections {
+            if let homeSection = HomeSection(rawValue: homeSection.intValue),
+               let rowId = liveHomeRowId(from: homeSection) {
+                rowIds.append(rowId)
+            }
+        }
+        return rowIds
+    }
 }

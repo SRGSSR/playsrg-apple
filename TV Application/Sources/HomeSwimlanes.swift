@@ -25,7 +25,7 @@ struct HomeSwimlane: View {
                 }
             }
         }
-        else if let row = row as? HomeTopicRow {
+        else if let row = row as? HomeTopicsAccessRow {
             HomeTopicSwimlane(row: row)
         }
         else if let row = row as? HomeShowsAccessRow {
@@ -81,7 +81,7 @@ struct HomeMediaHeroSwimlane: View {
 }
 
 struct HomeTopicSwimlane: View {
-    @ObservedObject var row: HomeTopicRow
+    @ObservedObject var row: HomeTopicsAccessRow
     
     var body: some View {
         ScrollView(.horizontal) {

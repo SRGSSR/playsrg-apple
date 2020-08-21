@@ -28,7 +28,7 @@ class HomeRow: Identifiable, Equatable {
         case tvSoonExpiring
         case tvLatestForTopic(_ topic: SRGTopic?)
         case tvLatestForModule(_ module: SRGModule?, type: SRGModuleType)
-        case tvTopics
+        case tvTopicsAccess
         case tvShowsAccess
         
         case radioLatestEpisodes(channelUid: String)
@@ -41,7 +41,7 @@ class HomeRow: Identifiable, Equatable {
         case radioLive
         case radioLiveSatellite
         
-        case liveCenter
+        case tvLiveCenter
         case tvScheduledLivestreams
     }
     
@@ -50,8 +50,8 @@ class HomeRow: Identifiable, Equatable {
      */
     static func makeRow(for id: Id) -> HomeRow {
         switch id {
-            case .tvTopics:
-                return HomeTopicRow(id: id)
+            case .tvTopicsAccess:
+                return HomeTopicsAccessRow(id: id)
             case .tvShowsAccess, .radioShowsAccess:
                 return HomeShowsAccessRow(id: id)
             default:
@@ -114,7 +114,7 @@ final class HomeMediaRow: HomeRow, ObservableObject {
                 return "Radio channels"
             case .radioLiveSatellite:
                 return "Thematic radios"
-            case .liveCenter:
+            case .tvLiveCenter:
                 return "Sport"
             case .tvScheduledLivestreams:
                 return "Events"
@@ -135,13 +135,15 @@ final class HomeMediaRow: HomeRow, ObservableObject {
     
     private func mediasPublisher() -> AnyPublisher<Output, Error>? {
         let dataProvider = SRGDataProvider.current!
-        let vendor = ApplicationConfiguration.vendor
-        let pageSize = ApplicationConfiguration.pageSize
+        let configuration = ApplicationConfiguration.shared
+        
+        let vendor = configuration.vendor
+        let pageSize = configuration.pageSize
         
         switch id {
             case .tvTrending:
-                return dataProvider.tvTrendingMedias(for: vendor, limit: pageSize, editorialLimit: ApplicationConfiguration.tvTrendingEditorialLimit,
-                                                     episodesOnly: ApplicationConfiguration.tvTrendingEpisodesOnly)
+                return dataProvider.tvTrendingMedias(for: vendor, limit: pageSize, editorialLimit: configuration.tvTrendingEditorialLimit?.uintValue,
+                                                     episodesOnly: configuration.tvTrendingEpisodesOnly)
             case .tvLatest:
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
                     .map { ($0.medias, $0.response) }
@@ -186,7 +188,7 @@ final class HomeMediaRow: HomeRow, ObservableObject {
                 return dataProvider.radioLivestreams(for: vendor, contentProviders: .default)
             case .radioLiveSatellite:
                 return dataProvider.radioLivestreams(for: vendor, contentProviders: .swissSatelliteRadio)
-            case .liveCenter:
+            case .tvLiveCenter:
                 return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize)
                     .map { ($0.medias, $0.response) }
                     .eraseToAnyPublisher()
@@ -204,13 +206,13 @@ final class HomeMediaRow: HomeRow, ObservableObject {
     }
 }
 
-final class HomeTopicRow: HomeRow, ObservableObject {
+final class HomeTopicsAccessRow: HomeRow, ObservableObject {
     @Published private(set) var topics: [SRGTopic] = []
     
     override func load() -> AnyCancellable? {
         switch id {
-            case .tvTopics:
-                return SRGDataProvider.current!.tvTopics(for: ApplicationConfiguration.vendor)
+            case .tvTopicsAccess:
+                return SRGDataProvider.current!.tvTopics(for: ApplicationConfiguration.shared.vendor)
                     .map(\.topics)
                     .replaceError(with: [])
                     .receive(on: DispatchQueue.main)

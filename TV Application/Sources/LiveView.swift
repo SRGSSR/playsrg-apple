@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct LiveView: View {
-    @StateObject var model = HomeModel(rowIds: ApplicationConfiguration.liveHomeRowIds)
+    @StateObject var model = HomeModel(rowIds: ApplicationConfiguration.shared.liveHomeRowIds())
     
     var body: some View {
         HomeView(model: model)

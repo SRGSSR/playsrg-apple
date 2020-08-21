@@ -81,7 +81,7 @@ class HomeModel: ObservableObject {
     private func loadModules(with type: SRGModuleType) {
         guard rowIds.contains(.tvLatestForModule(nil, type: type)) else { return }
         
-        SRGDataProvider.current!.modules(for: ApplicationConfiguration.vendor, type: type)
+        SRGDataProvider.current!.modules(for: ApplicationConfiguration.shared.vendor, type: type)
             .map { result in
                 result.modules.map { HomeMediaRow.Id.tvLatestForModule($0, type: type) }
             }
@@ -98,7 +98,7 @@ class HomeModel: ObservableObject {
     private func loadTopics() {
         guard rowIds.contains(.tvLatestForTopic(nil)) else { return }
         
-        SRGDataProvider.current!.tvTopics(for: ApplicationConfiguration.vendor)
+        SRGDataProvider.current!.tvTopics(for: ApplicationConfiguration.shared.vendor)
             .map { result in
                 result.topics.map { HomeMediaRow.Id.tvLatestForTopic($0) }
             }

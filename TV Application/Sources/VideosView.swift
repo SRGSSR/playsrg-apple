@@ -8,7 +8,7 @@ import SRGDataProviderModel
 import SwiftUI
 
 struct VideosView: View {
-    @StateObject var model = HomeModel(rowIds: ApplicationConfiguration.tvHomeRowIds)
+    @StateObject var model = HomeModel(rowIds: ApplicationConfiguration.shared.videoHomeRowIds())
     
     var body: some View {
         HomeView(model: model)
