@@ -18,12 +18,6 @@ struct HomeView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .onAppear {
-            model.refresh()
-        }
-        .onDisappear {
-            model.cancelRefresh()
-        }
         .ignoresSafeArea(.all, edges: [.leading, .trailing, .bottom])
     }
 }

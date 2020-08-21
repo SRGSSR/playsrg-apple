@@ -7,10 +7,16 @@
 import SwiftUI
 
 struct LiveView: View {
-    @StateObject var model = HomeModel(rowIds: ApplicationConfiguration.shared.liveHomeRowIds())
+    @StateObject var model = HomeModel(id: .live)
     
     var body: some View {
         HomeView(model: model)
+            .onAppear {
+                model.refresh()
+            }
+            .onDisappear {
+                model.cancelRefresh()
+            }
     }
 }
 

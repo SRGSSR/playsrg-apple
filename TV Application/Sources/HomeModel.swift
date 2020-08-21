@@ -6,7 +6,14 @@
 
 import SRGDataProviderCombine
 
-class HomeModel: ObservableObject {
+class HomeModel: Identifiable, ObservableObject {
+    enum Id {
+        case video
+        case audio(channel: RadioChannel)
+        case live
+    }
+    
+    let id: Id
     let rowIds: [HomeRow.Id]
     
     private var eventRowIds: [HomeRow.Id] = []
@@ -16,8 +23,9 @@ class HomeModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    init(rowIds: [HomeRow.Id]) {
-        self.rowIds = rowIds
+    init(id: Id) {
+        self.id = id
+        self.rowIds = Self.rowIds(for: id)
     }
     
     func refresh() {
@@ -32,6 +40,17 @@ class HomeModel: ObservableObject {
     
     func cancelRefresh() {
         cancellables = []
+    }
+    
+    private static func rowIds(for id: Id) -> [HomeRow.Id] {
+        switch id {
+            case .video:
+                return ApplicationConfiguration.shared.videoHomeRowIds()
+            case let .audio(channel):
+                return channel.homeRowIds()
+            case .live:
+                return ApplicationConfiguration.shared.liveHomeRowIds()
+        }
     }
     
     private func addRow(with id: HomeRow.Id, to rows: inout [HomeRow]) {
