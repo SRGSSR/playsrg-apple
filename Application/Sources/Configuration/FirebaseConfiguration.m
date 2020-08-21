@@ -62,6 +62,11 @@ NSArray<NSNumber *> *FirebaseConfigurationHomeSections(NSString *string)
     for (NSString *identifier in homeSectionIdentifiers) {
         HomeSection homeSection = HomeSectionWithString(identifier);
         if (homeSection != HomeSectionUnknown) {
+            // The environment variable SKIP_TV_EVENTS is used to remove events when generating screenshots.
+            if (homeSection == HomeSectionTVEvents && [NSProcessInfo.processInfo.arguments containsObject:@"SKIP_TV_EVENTS"]) {
+                continue;
+            }
+            
             [homeSections addObject:@(homeSection)];
         }
         else {
