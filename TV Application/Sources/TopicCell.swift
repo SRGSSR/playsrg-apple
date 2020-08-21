@@ -18,7 +18,7 @@ struct TopicCell: View {
     }
     
     private var imageUrl: URL? {
-        return topic?.imageURL(for: .height, withValue: Self.cellSize.height, type: .default)
+        return topic?.imageURL(for: .width, withValue: Self.cellSize.width, type: .default)
     }
     
     private var redactionReason: RedactionReasons {

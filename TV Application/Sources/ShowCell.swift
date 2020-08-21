@@ -19,7 +19,7 @@ struct ShowCell: View {
     }
     
     private var imageUrl: URL? {
-        return show?.imageURL(for: .height, withValue: Self.cellSize.height, type: .default)
+        return show?.imageURL(for: .width, withValue: Self.cellSize.width, type: .default)
     }
     
     private var redactionReason: RedactionReasons {

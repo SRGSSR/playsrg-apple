@@ -15,7 +15,7 @@ struct HeroMediaCell: View {
     @State private var isPresented = false
     
     private var imageUrl: URL? {
-        return media?.imageURL(for: .height, withValue: Self.cellSize.height, type: .default)
+        return media?.imageURL(for: .width, withValue: Self.cellSize.width, type: .default)
     }
     
     private var redactionReason: RedactionReasons {
