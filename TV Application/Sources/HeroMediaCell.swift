@@ -14,11 +14,6 @@ struct HeroMediaCell: View {
     
     @State private var isPresented = false
     
-    private var title: String {
-        guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
-        return media.title
-    }
-    
     private var imageUrl: URL? {
         return media?.imageURL(for: .height, withValue: Self.cellSize.height, type: .default)
     }
@@ -36,11 +31,11 @@ struct HeroMediaCell: View {
             ZStack {
                 ImageView(url: imageUrl, contentMode: .fill)
                     .whenRedacted { $0.hidden() }
+                    .frame(maxWidth: Self.cellSize.width, maxHeight: Self.cellSize.height)
                 Rectangle()
                     .fill(Color(white: 0, opacity: 0.4))
-                Text(title)
-                    .lineLimit(2)
-                    .foregroundColor(.white)
+                DescriptionView(media: media)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     .padding()
             }
             .frame(width: Self.cellSize.width, height: Self.cellSize.height)
@@ -52,5 +47,33 @@ struct HeroMediaCell: View {
         .padding(.top, 20)
         .padding(.bottom, 80)
         .redacted(reason: redactionReason)
+    }
+}
+
+struct DescriptionView: View {
+    let media: SRGMedia?
+    
+    private var title: String {
+        guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
+        return media.title
+    }
+    
+    private var subtitle: String {
+        guard let media = media else { return String(repeating: " ", count: .random(in: 12..<18)) }
+        return DateFormatters.dateAndTime(for: media.date)
+    }
+    
+    var body: some View {
+        VStack {
+            Text(title)
+                .font(.title2)
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.white)
+            Text(subtitle)
+                .font(.body)
+                .lineLimit(1)
+                .foregroundColor(.white)
+        }
     }
 }
