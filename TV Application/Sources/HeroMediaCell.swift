@@ -8,14 +8,10 @@ import SRGDataProviderModel
 import SwiftUI
 
 struct HeroMediaCell: View {
-    private static let cellSize = CGSize(width: 1740, height: 560)
-    
     let media: SRGMedia?
     
-    @State private var isPresented = false
-    
     private var imageUrl: URL? {
-        return media?.imageURL(for: .width, withValue: Self.cellSize.width, type: .default)
+        return media?.imageURL(for: .width, withValue: 1000, type: .default)
     }
     
     private var redactionReason: RedactionReasons {
@@ -23,29 +19,16 @@ struct HeroMediaCell: View {
     }
     
     var body: some View {
-        Button(action: {
-            if media != nil {
-                isPresented.toggle()
-            }
-        }) {
-            ZStack {
-                ImageView(url: imageUrl, contentMode: .fill)
-                    .whenRedacted { $0.hidden() }
-                    .frame(maxWidth: Self.cellSize.width, maxHeight: Self.cellSize.height)
-                Rectangle()
-                    .fill(Color(white: 0, opacity: 0.4))
-                DescriptionView(media: media)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                    .padding()
-            }
-            .frame(width: Self.cellSize.width, height: Self.cellSize.height)
+        ZStack {
+            ImageView(url: imageUrl, contentMode: .fill)
+                .whenRedacted { $0.hidden() }
+            Rectangle()
+                .fill(Color(white: 0, opacity: 0.4))
+            DescriptionView(media: media)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                .padding(60)
         }
-        .fullScreenCover(isPresented: $isPresented, content: {
-            PlayerView(media: media!)
-        })
-        .buttonStyle(CardButtonStyle())
-        .padding(.top, 20)
-        .padding(.bottom, 80)
+        .cornerRadius(10)
         .redacted(reason: redactionReason)
     }
 }

@@ -9,15 +9,77 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var model: HomeModel
     
+    private static func groupSize(for rowId: HomeRowId) -> NSCollectionLayoutSize {
+        switch rowId {
+            case let .tvTrending(appearance: appearance):
+                if appearance == .hero {
+                    return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
+                }
+                else {
+                    return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
+                }
+            case .tvTopicsAccess:
+                return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
+            case .tvShowsAccess, .radioShowsAccess:
+                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
+            default:
+                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
+        }
+    }
+    
     var body: some View {
-        ScrollView {
-            VStack {
-                ForEach(model.rows) { row in
-                    HomeSwimlane(row: row)
+        CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let rowId = model.rows[sectionIndex].section
+            let groupSize = Self.groupSize(for: rowId)
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            
+            if rowId.title != nil {
+                let header = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(66)),
+                    elementKind: UICollectionView.elementKindSectionHeader,
+                    alignment: .topLeading
+                )
+                section.boundarySupplementaryItems = [header]
+            }
+            
+            section.orthogonalScrollingBehavior = .continuous
+            section.interGroupSpacing = 40
+            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0)
+            return section
+        } cellBuilder: { indexPath, item in
+            Group {
+                switch item.content {
+                    case let .media(media):
+                        if case let .tvTrending(appearance: appearance) = item.rowId, appearance == .hero {
+                            HeroMediaCell(media: media)
+                        }
+                        else {
+                            MediaCell(media: media)
+                        }
+                    case let .show(show):
+                        ShowCell(show: show)
+                    case let .topic(topic):
+                        TopicCell(topic: topic)
+                    case .showsAccess:
+                        ShowsAccessCell()
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } supplementaryViewBuilder: { kind, indexPath in
+            if kind == UICollectionView.elementKindSectionHeader {
+                let rowId = model.rows[indexPath.section].section
+                if let title = rowId.title {
+                    Text(title)
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                }
+            }
         }
-        .ignoresSafeArea(.all, edges: [.leading, .trailing, .bottom])
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea(.all)
     }
 }

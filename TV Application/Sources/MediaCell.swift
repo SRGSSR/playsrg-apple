@@ -8,12 +8,7 @@ import SRGDataProviderModel
 import SwiftUI
 
 struct MediaCell: View {
-    private static let cellWidth: CGFloat = 375
-    private static let cellSize = CGSize(width: Self.cellWidth, height: Self.cellWidth * 9 / 16)
-    
     let media: SRGMedia?
-    
-    @State private var isPresented = false
     
     private var title: String {
         guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
@@ -21,7 +16,7 @@ struct MediaCell: View {
     }
     
     private var imageUrl: URL? {
-        return media?.imageURL(for: .width, withValue: Self.cellSize.width, type: .default)
+        return media?.imageURL(for: .width, withValue: 200, type: .default)
     }
     
     private var redactionReason: RedactionReasons {
@@ -29,29 +24,16 @@ struct MediaCell: View {
     }
     
     var body: some View {
-        Button(action: {
-            if media != nil {
-                isPresented.toggle()
-            }
-        }) {
-            ZStack {
-                ImageView(url: imageUrl)
-                    .whenRedacted { $0.hidden() }
-                    .frame(maxWidth: Self.cellSize.width, maxHeight: Self.cellSize.height)
-                Rectangle()
-                    .fill(Color(white: 0, opacity: 0.4))
-                Text(title)
-                    .foregroundColor(.white)
-                    .padding()
-            }
-            .frame(width: Self.cellSize.width, height: Self.cellSize.height)
+        ZStack {
+            ImageView(url: imageUrl)
+                .whenRedacted { $0.hidden() }
+            Rectangle()
+                .fill(Color(white: 0, opacity: 0.4))
+            Text(title)
+                .foregroundColor(.white)
+                .padding()
         }
-        .fullScreenCover(isPresented: $isPresented, content: {
-            PlayerView(media: media!)
-        })
-        .buttonStyle(CardButtonStyle())
-        .padding(.top, 20)
-        .padding(.bottom, 80)
+        .cornerRadius(10)
         .redacted(reason: redactionReason)
     }
 }

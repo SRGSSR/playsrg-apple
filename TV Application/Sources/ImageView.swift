@@ -18,12 +18,15 @@ struct ImageView: View {
         }
 
         public var body: some View {
-            image.view?
-                .resizable()
-                .aspectRatio(contentMode: contentMode)
-                .animation(.default)
-                .onAppear(perform: image.fetch)
-                .onDisappear(perform: image.cancel)
+            GeometryReader { geometry in
+                image.view?
+                    .resizable()
+                    .aspectRatio(contentMode: contentMode)
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .animation(.default)
+                    .onAppear(perform: image.fetch)
+                    .onDisappear(perform: image.cancel)
+            }
         }
     }
     
@@ -36,8 +39,13 @@ struct ImageView: View {
     }
     
     var body: some View {
-        if let url = url {
-            FetchView(url: url, contentMode: contentMode)
+        ZStack {
+            Rectangle()
+                .fill(Color.black)
+            if let url = url {
+                FetchView(url: url, contentMode: contentMode)
+            }
         }
+        .clipped()
     }
 }

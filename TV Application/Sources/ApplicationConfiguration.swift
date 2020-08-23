@@ -7,7 +7,7 @@
 import SRGDataProviderModel
 
 extension ApplicationConfiguration {
-    private func videoHomeRowId(from homeSection: HomeSection) -> HomeRow.Id? {
+    private func videoHomeRowId(from homeSection: HomeSection) -> HomeRowId? {
         switch homeSection {
             case .tvTrending:
                 return .tvTrending(appearance: .hero)
@@ -30,7 +30,7 @@ extension ApplicationConfiguration {
         }
     }
     
-    private func liveHomeRowId(from homeSection: HomeSection) -> HomeRow.Id? {
+    private func liveHomeRowId(from homeSection: HomeSection) -> HomeRowId? {
         switch homeSection {
             case .tvLive:
                 return .tvLive
@@ -47,8 +47,8 @@ extension ApplicationConfiguration {
         }
     }
     
-    func videoHomeRowIds() -> [HomeRow.Id] {
-        var rowIds = [HomeRow.Id]()
+    func videoHomeRowIds() -> [HomeRowId] {
+        var rowIds = [HomeRowId]()
         for homeSection in videoHomeSections {
             if let homeSection = HomeSection(rawValue: homeSection.intValue),
                let rowId = videoHomeRowId(from: homeSection) {
@@ -58,8 +58,8 @@ extension ApplicationConfiguration {
         return rowIds
     }
     
-    func liveHomeRowIds() -> [HomeRow.Id] {
-        var rowIds = [HomeRow.Id]()
+    func liveHomeRowIds() -> [HomeRowId] {
+        var rowIds = [HomeRowId]()
         for homeSection in liveHomeSections {
             if let homeSection = HomeSection(rawValue: homeSection.intValue),
                let rowId = liveHomeRowId(from: homeSection) {

@@ -5,7 +5,7 @@
 //
 
 extension RadioChannel {
-    private func homeRowId(from homeSection: HomeSection, withChannelUid channelUid: String) -> HomeRow.Id? {
+    private func homeRowId(from homeSection: HomeSection, withChannelUid channelUid: String) -> HomeRowId? {
         switch homeSection {
             case .radioLatestEpisodes:
                 return .radioLatestEpisodes(channelUid: channelUid)
@@ -24,8 +24,8 @@ extension RadioChannel {
         }
     }
     
-    func homeRowIds() -> [HomeRow.Id] {
-        var rowIds = [HomeRow.Id]()
+    func homeRowIds() -> [HomeRowId] {
+        var rowIds = [HomeRowId]()
         for homeSection in homeSections {
             if let homeSection = HomeSection(rawValue: homeSection.intValue),
                let rowId = homeRowId(from: homeSection, withChannelUid: uid) {
