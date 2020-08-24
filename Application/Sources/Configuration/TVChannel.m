@@ -14,7 +14,12 @@
 
 @end
 
-UIImage *TVChannelBanner22Image(TVChannel *tvChannel)
+UIImage *TVChannelLogo22Image(TVChannel *tvChannel)
 {
     return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-22", tvChannel.resourceUid]] ?: [UIImage imageNamed:@"tv-22"];
+}
+
+UIImage *TVChannelLogo32Image(TVChannel *tvChannel)
+{
+    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-32", tvChannel.resourceUid]] ?: [UIImage imageNamed:@"tv-32"];
 }

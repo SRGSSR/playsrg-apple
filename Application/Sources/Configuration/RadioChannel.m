@@ -29,12 +29,12 @@
 
 @end
 
-UIImage *RadioChannelBanner22Image(RadioChannel *radioChannel)
-{
-    return [UIImage imageNamed:[NSString stringWithFormat:@"banner_%@-22", radioChannel.resourceUid]] ?: RadioChannelLogo22Image(radioChannel);
-}
-
 UIImage *RadioChannelLogo22Image(RadioChannel *radioChannel)
 {
     return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-22", radioChannel.resourceUid]] ?: [UIImage imageNamed:@"radioset-22"];
+}
+
+UIImage *RadioChannelLogo32Image(RadioChannel *radioChannel)
+{
+    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-32", radioChannel.resourceUid]] ?: [UIImage imageNamed:@"radioset-32"];
 }
