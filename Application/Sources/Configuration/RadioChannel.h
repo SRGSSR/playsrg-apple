@@ -18,11 +18,6 @@ OBJC_EXPORT UIImage *RadioChannelBanner22Image(RadioChannel * _Nullable radioCha
 OBJC_EXPORT UIImage *RadioChannelLogo22Image(RadioChannel * _Nullable radioChannel);
 
 /**
- *  Image overrides.
- */
-OBJC_EXPORT NSString * _Nullable RadioChannelImageOverridePath(RadioChannel * _Nullable radioChannel, NSString *type);
-
-/**
  *  Represent a radio channel in the application configuration.
  */
 @interface RadioChannel : Channel

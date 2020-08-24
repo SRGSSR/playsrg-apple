@@ -38,9 +38,3 @@ UIImage *RadioChannelLogo22Image(RadioChannel *radioChannel)
 {
     return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-22", radioChannel.resourceUid]] ?: [UIImage imageNamed:@"radioset-22"];
 }
-
-NSString *RadioChannelImageOverridePath(RadioChannel *radioChannel, NSString *type)
-{
-    NSString *overrideImageName = [NSString stringWithFormat:@"override_%@_%@", type, radioChannel.resourceUid];
-    return [NSBundle.mainBundle pathForResource:overrideImageName ofType:@"pdf"];
-}
