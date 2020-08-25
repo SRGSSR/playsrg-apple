@@ -62,7 +62,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brJ-7K-RUg">
                                                 <rect key="frame" x="0.0" y="0.0" width="284" height="32"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" placeholderIntrinsicWidth="53" placeholderIntrinsicHeight="32" translatesAutoresizingMaskIntoConstraints="NO" id="WqR-Gg-ZwJ" userLabel="Logo Image View">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" placeholderIntrinsicWidth="53" placeholderIntrinsicHeight="32" translatesAutoresizingMaskIntoConstraints="NO" id="WqR-Gg-ZwJ" userLabel="Logo Image View">
                                                         <rect key="frame" x="0.0" y="0.0" width="53" height="32"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </imageView>
