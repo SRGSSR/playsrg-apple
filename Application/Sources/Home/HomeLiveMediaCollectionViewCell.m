@@ -70,6 +70,7 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topSpaceConstraint;
+@property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *horizontalSpaceConstraints;
 
 @property (nonatomic, weak) id channelRegistration;
 
@@ -112,7 +113,11 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 {
     [super layoutSubviews];
     
-    self.topSpaceConstraint.constant = (CGRectGetWidth(self.frame) < 170.f) ? 4.f : 12.f;
+    BOOL isSmallLayout = (CGRectGetWidth(self.frame) < 170.f);
+    self.topSpaceConstraint.constant = isSmallLayout ? 4.f : 12.f;
+    [self.horizontalSpaceConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
+        constraint.constant = isSmallLayout ? 4.f : 8.f;
+    }];
 }
 
 - (void)prepareForReuse
@@ -257,7 +262,7 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
     
     SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
-        UIImage *logoImage = channel.play_banner22Image;
+        UIImage *logoImage = channel.play_logo32Image;
         self.logoImageView.image = logoImage;
         
         SRGProgram *currentProgram = [self.programComposition play_programAtDate:NSDate.date];
@@ -286,7 +291,7 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
     }
     else {
         self.titleLabel.text = self.media.title;
-        self.logoImageView.image = (self.media.mediaType == SRGMediaTypeAudio) ? RadioChannelBanner22Image(nil) : TVChannelBanner22Image(nil);
+        self.logoImageView.image = (self.media.mediaType == SRGMediaTypeAudio) ? RadioChannelLogo32Image(nil) : TVChannelLogo32Image(nil);
         
         NSString *showTitle = self.media.show.title;
         if (showTitle && ! [self.media.title containsString:showTitle]) {

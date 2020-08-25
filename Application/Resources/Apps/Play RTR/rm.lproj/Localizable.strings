@@ -22,6 +22,9 @@
 /* Title displayed on the radio home button */
 "%@ overview" = "%@ survista";
 
+/* Text displayed on live cells telling how much time remains for a program currently on air */
+"%@ remaining" = "Anc %@";
+
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ visualisaziuns";
 
@@ -127,7 +130,7 @@
 "Discover" = "Scuvrir";
 
 /* User activity title when displaying a show page */
-"Display %@ episodes" = "Display %@ episodes";
+"Display %@ episodes" = "Mussa las episodas %@";
 
 /* No comment provided by engineer. */
 "Do you want to send an anonymous crash report so we can fix the issue?" = "Vulais trametter in  rapport anonim, per che nus possian schliar il problem?";
@@ -221,7 +224,7 @@
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
    User activity title when listening to an audio */
-"Listen to %@" = "Listen to %@";
+"Listen to %@" = "Tadlar %@";
 
 /* Introductory text for what is currently on air, displayed on the mini player
    Short label identifying a livestream. Display in uppercase. */
@@ -585,7 +588,7 @@
 /* Suggested invocation phrase to watch a show
    Suggested invocation phrase to watch a video
    User activity title when watching a video */
-"Watch %@" = "Watch %@";
+"Watch %@" = "Guardar %@";
 
 /* Label to present the watch later list */
 "Watch later" = "Guardar pli tard";

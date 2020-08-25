@@ -14,13 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Images associated with the radio channel.
  */
-OBJC_EXPORT UIImage *RadioChannelBanner22Image(RadioChannel * _Nullable radioChannel);
 OBJC_EXPORT UIImage *RadioChannelLogo22Image(RadioChannel * _Nullable radioChannel);
-
-/**
- *  Image overrides.
- */
-OBJC_EXPORT NSString * _Nullable RadioChannelImageOverridePath(RadioChannel * _Nullable radioChannel, NSString *type);
+OBJC_EXPORT UIImage *RadioChannelLogo32Image(RadioChannel * _Nullable radioChannel);
 
 /**
  *  Represent a radio channel in the application configuration.
