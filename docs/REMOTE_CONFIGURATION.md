@@ -99,7 +99,6 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `radioLatestEpisodes`: The latest episodes.
 * `radioLatestVideos`: The latest videos.
 * `radioMostPopular`: The most popular audios.
-* `radioMyListShows`: Shows from "My list".
 * `radioShowsAccess`: A-Z and By date access buttons.
 
 ### User interface options
