@@ -9,34 +9,42 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var model: HomeModel
     
-    private static func groupSize(for rowId: HomeRowId) -> NSCollectionLayoutSize {
-        switch rowId {
-            case let .tvTrending(appearance: appearance):
-                if appearance == .hero {
-                    return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
-                }
-                else {
+    private static func swimlaneSectionLayout(for rowId: HomeRowId) -> NSCollectionLayoutSection {
+        func layoutGroupSize(for rowId: HomeRowId) -> NSCollectionLayoutSize {
+            switch rowId {
+                case let .tvTrending(appearance: appearance):
+                    if appearance == .hero {
+                        return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
+                    }
+                    else {
+                        return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
+                    }
+                case .tvTopicsAccess:
+                    return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
+                case .tvShowsAccess, .radioShowsAccess:
+                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
+                default:
                     return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
-                }
-            case .tvTopicsAccess:
-                return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
-            case .tvShowsAccess, .radioShowsAccess:
-                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
-            default:
-                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
+            }
         }
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = layoutGroupSize(for: rowId)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.interGroupSpacing = 40
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0)
+        return section
     }
     
     var body: some View {
         CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            
             let rowId = model.rows[sectionIndex].section
-            let groupSize = Self.groupSize(for: rowId)
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-            
-            let section = NSCollectionLayoutSection(group: group)
+            let section = Self.swimlaneSectionLayout(for: rowId)
             
             if rowId.title != nil {
                 let header = NSCollectionLayoutBoundarySupplementaryItem(
@@ -47,9 +55,6 @@ struct HomeView: View {
                 section.boundarySupplementaryItems = [header]
             }
             
-            section.orthogonalScrollingBehavior = .continuous
-            section.interGroupSpacing = 40
-            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0)
             return section
         } cellBuilder: { indexPath, item in
             Group {
