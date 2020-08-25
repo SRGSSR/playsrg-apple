@@ -180,6 +180,8 @@
                 <outlet property="titleLabel" destination="OO0-yH-uvq" id="Mly-C6-vRF"/>
                 <outlet property="topSpaceConstraint" destination="KFA-KF-aq3" id="GOQ-1t-Kd6"/>
                 <outlet property="wrapperView" destination="BOH-Yb-rlq" id="Mt7-tY-EJg"/>
+                <outletCollection property="horizontalSpaceConstraints" destination="K3C-cc-afv" id="1iL-QF-Hus"/>
+                <outletCollection property="horizontalSpaceConstraints" destination="L7K-40-t9C" id="WN1-z5-a2D"/>
             </connections>
             <point key="canvasLocation" x="11.199999999999999" y="134.93253373313345"/>
         </collectionViewCell>

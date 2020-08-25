@@ -70,6 +70,7 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topSpaceConstraint;
+@property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *horizontalSpaceConstraints;
 
 @property (nonatomic, weak) id channelRegistration;
 
@@ -112,7 +113,11 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 {
     [super layoutSubviews];
     
-    self.topSpaceConstraint.constant = (CGRectGetWidth(self.frame) < 170.f) ? 4.f : 12.f;
+    BOOL isSmallLayout = (CGRectGetWidth(self.frame) < 170.f);
+    self.topSpaceConstraint.constant = isSmallLayout ? 4.f : 12.f;
+    [self.horizontalSpaceConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
+        constraint.constant = isSmallLayout ? 4.f : 8.f;
+    }];
 }
 
 - (void)prepareForReuse
