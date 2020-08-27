@@ -96,6 +96,17 @@ platform :ios do
     bump_build_number_beta_workflow
   end
 
+  desc 'Upload a new build (bitcode) on AppStore Connect with the current build number.'
+  lane :appStoreUploads do
+    notify_build_number_to_ci(nil)
+    
+    sh 'bundle exec fastlane ios swiAppStoreUpload'
+    sh 'bundle exec fastlane ios srfAppStoreUpload'
+    sh 'bundle exec fastlane ios rtsAppStoreUpload'
+    sh 'bundle exec fastlane ios rsiAppStoreUpload'
+    sh 'bundle exec fastlane ios rtrAppStoreUpload'
+  end
+
   desc 'SWI: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :swiAppStoreUpload do
     testflight_lane(scheme: 'Play SWI')
@@ -195,6 +206,11 @@ platform :ios do
   desc 'Build, upload to TestFlight'
   private_lane :testflight_lane do |options|
     scheme = options[:scheme]
+    build_number = get_build_number
+
+    can_upload = can_upload_testflight_build(nil)
+    UI.message(scheme + ' ' + build_number + ' already uploaded 🔁✅') unless can_upload
+    next unless can_upload
 
     build_lane(
       configuration: 'AppStore',
@@ -205,6 +221,7 @@ platform :ios do
     pilot(
       skip_waiting_for_build_processing: true
     )
+    UI.message(scheme + ' ' + build_number + ' uploaded ✅')
 
     clean_build_artifacts
   end
@@ -487,6 +504,15 @@ def upload_screenshots(platform)
     overwrite_screenshots: true,
     force: true # Don't stop to wait manual preview
   )
+end
+
+def can_upload_testflight_build(platform)
+  platform ||= 'ios'
+
+  appstore_build_number = latest_testflight_build_number(platform: platform)
+  local_build_number = get_build_number
+
+  (appstore_build_number < local_build_number.to_i)
 end
 
 # Beta workflow: tag the new beta, bump build number and push to the repo,

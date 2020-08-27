@@ -26,6 +26,11 @@ For each BUs, build a new nightly on App Center, with a new build number, greate
 fastlane ios betas
 ```
 For each BUs, build a new beta on App Center with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
+### ios appStoreUploads
+```
+fastlane ios appStoreUploads
+```
+Upload a new build (bitcode) on AppStore Connect with the current build number.
 ### ios swiAppStoreUpload
 ```
 fastlane ios swiAppStoreUpload
