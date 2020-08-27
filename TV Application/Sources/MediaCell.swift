@@ -5,7 +5,6 @@
 //
 
 import SRGAppearance
-import SRGLetterbox
 import SwiftUI
 
 struct MediaCell: View {
@@ -26,6 +25,8 @@ struct MediaCell: View {
     
     @State var isFocused: Bool = false
     
+    @State private var isPresented = false
+    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -34,12 +35,8 @@ struct MediaCell: View {
         GeometryReader { geometry in
             VStack {
                 Button(action: {
-                    // TODO: Could / should be presented with SwiftUI, but presentation flag must be part of topmost state
-                    if let media = media,
-                       let rootViewController = UIApplication.shared.windows.first?.rootViewController {
-                        let letterboxViewController = SRGLetterboxViewController()
-                        letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                        rootViewController.present(letterboxViewController, animated: true, completion: nil)
+                    if media != nil {
+                        isPresented.toggle()
                     }
                 }) {
                     MediaVisual(media: media, scale: .small, contentMode: .fit)
@@ -57,6 +54,9 @@ struct MediaCell: View {
             }
             .redacted(reason: redactionReason)
             .onFocusChange { isFocused = $0 }
+            .fullScreenCover(isPresented: $isPresented, content: {
+                DetailView(media: media!)
+            })
         }
     }
 }

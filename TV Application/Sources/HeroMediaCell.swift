@@ -5,7 +5,6 @@
 //
 
 import SRGAppearance
-import SRGLetterbox
 import SwiftUI
 
 struct HeroMediaCell: View {
@@ -44,6 +43,8 @@ struct HeroMediaCell: View {
     
     let media: SRGMedia?
     
+    @State private var isPresented = false
+    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -51,12 +52,8 @@ struct HeroMediaCell: View {
     var body: some View {
         GeometryReader { geometry in
             Button(action: {
-                // TODO: Could / should be presented with SwiftUI, but presentation flag must be part of topmost state
-                if let media = media,
-                   let rootViewController = UIApplication.shared.windows.first?.rootViewController {
-                    let letterboxViewController = SRGLetterboxViewController()
-                    letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                    rootViewController.present(letterboxViewController, animated: true, completion: nil)
+                if media != nil {
+                    isPresented.toggle()
                 }
             }) {
                 HStack(spacing: 0) {
@@ -70,6 +67,9 @@ struct HeroMediaCell: View {
                 .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
                 .redacted(reason: redactionReason)
             }
+            .fullScreenCover(isPresented: $isPresented, content: {
+                DetailView(media: media!)
+            })
             .buttonStyle(CardButtonStyle())
         }
     }
