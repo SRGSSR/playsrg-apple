@@ -21,7 +21,7 @@ struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
  */
 struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, SupplementaryView: View>: UIViewRepresentable {
     /**
-     *  Cell host root view. Only required to fix safe area insets incorrectly applied to `UIHostingController` in cells.
+     *  Cell host root view. Only required to fix safe area insets otherwise applied to `UIHostingController` in cells.
      */
     private struct HostRootView<Body: View>: View {
         let hostedView: Body

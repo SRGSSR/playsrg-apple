@@ -126,8 +126,8 @@ enum HomeRowId: Hashable {
     
     var title: String? {
         switch self {
-            case .tvTrending:
-                return "Trending videos"
+            case let .tvTrending(appearance: appearance):
+                return appearance != .hero ? "Trending videos" : nil
             case .tvLatest:
                 return "The latest episodes"
             case .tvMostPopular:

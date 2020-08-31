@@ -20,7 +20,7 @@ struct PlayerView: View {
         }
         
         func updateUIViewController(_ uiViewController: SRGLetterboxViewController, context: Context) {
-            // No bindings
+            
         }
     }
     
