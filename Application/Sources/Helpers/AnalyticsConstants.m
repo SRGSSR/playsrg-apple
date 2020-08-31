@@ -23,6 +23,7 @@ AnalyticsPageLevel const AnalyticsPageLevelUser = @"user";
 AnalyticsPageLevel const AnalyticsPageLevelVideo = @"video";
 
 AnalyticsPageTitle const AnalyticsPageTitleBetaTesting = @"beta testing";
+AnalyticsPageTitle const AnalyticsPageTitleBetaTvTesting = @"beta TV testing";
 AnalyticsPageTitle const AnalyticsPageTitleDevices = @"devices";
 AnalyticsPageTitle const AnalyticsPageTitleDownloads = @"downloads";
 AnalyticsPageTitle const AnalyticsPageTitleEvents = @"events";
