@@ -127,46 +127,41 @@ enum HomeRowId: Hashable {
     var title: String? {
         switch self {
             case let .tvTrending(appearance: appearance):
-                return appearance != .hero ? "Trending videos" : nil
+                return appearance != .hero ? NSLocalizedString("Trending videos", comment: "Title label used to present trending TV videos") : nil
             case .tvLatest:
-                return "The latest episodes"
+                return NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos")
             case .tvMostPopular:
-                return "Most popular"
+                return NSLocalizedString("Most popular", comment: "Title label used to present the TV most popular videos")
             case .tvSoonExpiring:
-                return "Available for a limited time"
-            case let .tvLatestForModule(module, type):
-                if let module = module {
-                    return module.title
-                }
-                else {
-                    return type == .event ? "Event" : "Module"
-                }
+                return NSLocalizedString("Available for a limited time", comment: "Title label used to present the soon expiring videos")
+            case let .tvLatestForModule(module, _):
+                return module?.title ?? NSLocalizedString("Highlights", comment: "Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available")
             case let .tvLatestForTopic(topic):
-                return topic?.title ?? "Topic"
+                return topic?.title ?? NSLocalizedString("Topics", comment: "Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available")
             case .tvShowsAccess:
-                return "Shows"
+                return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
             case .radioLatestEpisodes:
-                return "The latest audios"
+                return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
             case .radioMostPopular:
-                return "Most listened to"
+                return NSLocalizedString("Most listened to", comment: "Title label used to present the radio most popular audio medias")
             case .radioLatest:
-                return "The latest audios"
+                return NSLocalizedString("The latest audios", comment: "Title label used to present the radio latest audios")
             case .radioLatestVideos:
-                return "Latest videos"
+                return NSLocalizedString("Latest videos", comment: "Title label used to present the radio latest videos")
             case .radioAllShows:
-                return "Shows"
+                return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
             case .radioShowsAccess:
-                return "Shows"
+                return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
             case .tvLive:
-                return "TV channels"
+                return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
             case .radioLive:
-                return "Radio channels"
+                return NSLocalizedString("Radio channels", comment: "Title label to present main radio livestreams")
             case .radioLiveSatellite:
-                return "Thematic radios"
+                return NSLocalizedString("Thematic radios", comment: "Title label to present Swiss satellite radios")
             case .tvLiveCenter:
-                return "Sport"
+                return NSLocalizedString("Sport", comment: "Title label used to present live center medias")
             case .tvScheduledLivestreams:
-                return "Events"
+                return NSLocalizedString("Events", comment: "Title label used to present scheduled livestream medias")
             default:
                 return nil
         }
