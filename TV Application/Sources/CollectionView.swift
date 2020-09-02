@@ -43,13 +43,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             }
         }
         
-        // TODO: Better implementation (maybe not here)
-        override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-            coordinator.addCoordinatedAnimations {
-                self.transform = self.isFocused ? CGAffineTransform(scaleX: 1.03, y: 1.03) : .identity
-            }
-        }
-        
         var hostedCell: Cell? {
             willSet {
                 // Creating a `UIHostingController` is cheap.
