@@ -430,7 +430,7 @@ version: 7.0.1
 
 name: Aiolos, nameSpecified: , owner: IdeasOnCanvas, version: 1.3.0
 
-name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 3.3.2
+name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 3.3.3
 
 name: CoconutKit, nameSpecified: , owner: defagos, version: 3.4
 
@@ -440,7 +440,7 @@ name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
 
 name: FXReachability, nameSpecified: , owner: SRGSSR, version: 1.3.2_srg4
 
-name: ios-library, nameSpecified: , owner: urbanairship, version: 13.5.1
+name: ios-library, nameSpecified: , owner: urbanairship, version: 13.5.4
 
 name: libextobjc, nameSpecified: , owner: SRGSSR, version: 0.6_srg2
 
@@ -450,7 +450,7 @@ name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.1
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 6034917
+name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 4.2.1
 
 name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.1.0
 
@@ -462,11 +462,11 @@ name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
 name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 2.0.3
 
-name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: db061d7
+name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 5.0.1
 
 name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: 887a066
+name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: 5.0.2
 
 name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: 2.0.2
 
