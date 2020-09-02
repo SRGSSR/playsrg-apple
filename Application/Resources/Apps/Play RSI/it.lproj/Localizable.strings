@@ -365,7 +365,7 @@
 "Pull to reload" = "Scorrere verso il basso per ricaricare";
 
 /* Title label to present main radio livestreams */
-"Radio channels" = "Tutte le emittenti radio";
+"Radio channels" = "Reti radio";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Ricevitore inattivo.";
