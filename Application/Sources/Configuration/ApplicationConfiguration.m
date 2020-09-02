@@ -238,6 +238,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *termsAndConditionsURL;
 @property (nonatomic) NSURL *dataProtectionURL;
 @property (nonatomic) NSURL *betaTestingURL;
+@property (nonatomic) NSURL *tvBetaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
@@ -472,6 +473,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *betaTestingURLString = [self.remoteConfig configValueForKey:@"betaTestingURL"].stringValue;
     self.betaTestingURL = (betaTestingURLString.length != 0) ? [NSURL URLWithString:betaTestingURLString] : nil;
+    
+    NSString *tvBetaTestingURLString = [self.remoteConfig configValueForKey:@"tvBetaTestingURL"].stringValue;
+    self.tvBetaTestingURL = (tvBetaTestingURLString.length != 0) ? [NSURL URLWithString:tvBetaTestingURLString] : nil;
     
     NSString *sourceCodeURLString = [self.remoteConfig configValueForKey:@"sourceCodeURL"].stringValue;
     self.sourceCodeURL = (sourceCodeURLString.length != 0) ? [NSURL URLWithString:sourceCodeURLString] : nil;

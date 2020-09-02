@@ -186,6 +186,16 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Become a beta tester on Apple TV</string>
+			<key>Key</key>
+			<string>Button_TvBetaTesting</string>
+			<key>IASKTextAlignment</key>
+			<string>IASKUITextAlignmentLeft</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>IASKCustomViewSpecifier</string>
 			<key>Title</key>
 			<string>Version</string>
