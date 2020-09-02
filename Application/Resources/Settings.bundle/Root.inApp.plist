@@ -190,7 +190,7 @@
 			<key>Title</key>
 			<string>Become a beta tester on Apple TV</string>
 			<key>Key</key>
-			<string>Button_BetaTvTesting</string>
+			<string>Button_TvBetaTesting</string>
 			<key>IASKTextAlignment</key>
 			<string>IASKUITextAlignmentLeft</string>
 		</dict>

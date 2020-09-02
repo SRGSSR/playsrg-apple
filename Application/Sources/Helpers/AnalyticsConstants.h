@@ -32,7 +32,7 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelVideo;
 typedef NSString * AnalyticsPageTitle NS_STRING_ENUM;
 
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleBetaTesting;
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleBetaTvTesting;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTvBetaTesting;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDevices;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDownloads;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleEvents;

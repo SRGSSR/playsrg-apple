@@ -21,7 +21,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 ## URLs
 
 * `betaTestingURL` (optional, string): The URL of the page where beta testers can register.
-* `betaTvTestingURL` (optional, string): The URL of the page where Apple TV beta testers can register.
+* `tvBetaTestingURL` (optional, string): The URL of the page where Apple TV beta testers can register.
 * `feedbackURL` (optional, string): The URL of the feedback form.
 * `dataProtectionURL` (optional, string): The URL of the data protection information page.
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed. 
