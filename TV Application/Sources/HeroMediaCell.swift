@@ -10,6 +10,8 @@ import SwiftUI
 struct HeroMediaCell: View {
     let media: SRGMedia?
     
+    @State private var isPresented = false
+    
     private var imageUrl: URL? {
         return media?.imageURL(for: .width, withValue: 1000, type: .default)
     }
@@ -18,9 +20,15 @@ struct HeroMediaCell: View {
         return media == nil ? .placeholder : .init()
     }
     
+    private func play() {
+        if media != nil {
+            isPresented.toggle()
+        }
+    }
+    
     var body: some View {
         GeometryReader { geometry in
-            Button(action: {}) {
+            Button(action: play) {
                 ZStack {
                     ImageView(url: imageUrl, contentMode: .fill)
                         .whenRedacted { $0.hidden() }
@@ -34,6 +42,9 @@ struct HeroMediaCell: View {
             }
             .buttonStyle(CardButtonStyle())
             .redacted(reason: redactionReason)
+            .fullScreenCover(isPresented: $isPresented, content: {
+                PlayerView(media: media!)
+            })
         }
     }
 }

@@ -10,6 +10,8 @@ import SwiftUI
 struct MediaCell: View {
     let media: SRGMedia?
     
+    @State private var isPresented = false
+    
     private var title: String {
         guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
         return media.title
@@ -23,10 +25,16 @@ struct MediaCell: View {
         return media == nil ? .placeholder : .init()
     }
     
+    private func play() {
+        if media != nil {
+            isPresented.toggle()
+        }
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Button(action: {}) {
+                Button(action: play) {
                     ImageView(url: imageUrl)
                         .whenRedacted { $0.hidden() }
                         .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
@@ -37,6 +45,9 @@ struct MediaCell: View {
                     .frame(width: geometry.size.width, alignment: .leading)
             }
             .redacted(reason: redactionReason)
+            .fullScreenCover(isPresented: $isPresented, content: {
+                PlayerView(media: media!)
+            })
         }
     }
 }
