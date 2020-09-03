@@ -29,10 +29,22 @@ struct DurationLabel: View {
     }
 }
 
-struct MediaCell: View {
+struct MediaVisualView: View {
     let media: SRGMedia?
     
-    @State private var isPresented = false
+    private var imageUrl: URL? {
+        return media?.imageURL(for: .width, withValue: 200, type: .default)
+    }
+    
+    var body: some View {
+        ImageView(url: imageUrl)
+            .overlay(DurationLabel(media: media), alignment: .bottomTrailing)
+            .whenRedacted { $0.hidden() }
+    }
+}
+
+struct MediaDescriptionView: View {
+    let media: SRGMedia?
     
     static private func showName(for media: SRGMedia) -> String? {
         guard let show = media.show else { return nil }
@@ -54,9 +66,19 @@ struct MediaCell: View {
         }
     }
     
-    private var imageUrl: URL? {
-        return media?.imageURL(for: .width, withValue: 200, type: .default)
+    var body: some View {
+        Text(title)
+            .lineLimit(2)
+        Text(subtitle)
+            .font(.caption)
+            .lineLimit(1)
     }
+}
+
+struct MediaCell: View {
+    let media: SRGMedia?
+    
+    @State private var isPresented = false
     
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
@@ -72,21 +94,13 @@ struct MediaCell: View {
         GeometryReader { geometry in
             VStack {
                 Button(action: play) {
-                    ImageView(url: imageUrl)
-                        .overlay(DurationLabel(media: media), alignment: .bottomTrailing)
-                        .whenRedacted { $0.hidden() }
+                    MediaVisualView(media: media)
                         .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                 }
                 .buttonStyle(CardButtonStyle())
                 
-                Group {
-                    Text(title)
-                        .lineLimit(2)
-                    Text(subtitle)
-                        .font(.caption)
-                        .lineLimit(1)
-                }
-                .frame(width: geometry.size.width, alignment: .leading)
+                MediaDescriptionView(media: media)
+                    .frame(width: geometry.size.width, alignment: .leading)
             }
             .redacted(reason: redactionReason)
             .fullScreenCover(isPresented: $isPresented, content: {
