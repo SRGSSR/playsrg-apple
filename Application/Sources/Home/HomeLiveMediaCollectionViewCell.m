@@ -20,11 +20,35 @@
 #import "SRGProgramComposition+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
-#import "UILabel+PlaySRG.h"
 
 #import <libextobjc/libextobjc.h>
 #import <SRGAnalytics/SRGAnalytics.h>
 #import <SRGAppearance/SRGAppearance.h>
+
+static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
+{
+    if (duration >= 60. * 60.) {
+        static NSDateComponentsFormatter *s_dateComponentsFormatter;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitHour;
+            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        });
+        return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+    }
+    else {
+        static NSDateComponentsFormatter *s_dateComponentsFormatter;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitMinute;
+            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        });
+        // Minimum is 1 minute
+        return [s_dateComponentsFormatter stringFromTimeInterval:fmax(60., duration)];
+    }
+}
 
 @interface HomeLiveMediaCollectionViewCell ()
 
@@ -34,17 +58,19 @@
 @property (nonatomic, weak) IBOutlet UIView *placeholderView;
 @property (nonatomic, weak) IBOutlet UIImageView *placeholderImageView;
 
+@property (nonatomic, weak) IBOutlet UIView *wrapperView;
 @property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
-@property (nonatomic, weak) IBOutlet UILabel *recentLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
-@property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 
 @property (nonatomic, weak) IBOutlet UIView *blockingOverlayView;
 @property (nonatomic, weak) IBOutlet UIImageView *blockingReasonImageView;
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *topSpaceConstraint;
+@property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *horizontalSpaceConstraints;
 
 @property (nonatomic, weak) id channelRegistration;
 
@@ -72,21 +98,26 @@
     
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
-    self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
+    self.titleLabel.textColor = UIColor.whiteColor;
+    self.subtitleLabel.textColor = UIColor.whiteColor;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    self.thumbnailImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
-    self.thumbnailImageView.layer.masksToBounds = YES;
     
-    self.recentLabel.layer.cornerRadius = LayoutStandardLabelCornerRadius;
-    self.recentLabel.layer.masksToBounds = YES;
-    self.recentLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
-    self.recentLabel.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"Last played", @"Label on recently played livestreams").uppercaseString];
-    self.recentLabel.hidden = YES;
-    
-    self.durationLabel.backgroundColor = UIColor.play_blackDurationLabelBackgroundColor;
+    self.wrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
+    self.wrapperView.layer.masksToBounds = YES;
     
     self.blockingOverlayView.hidden = YES;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    BOOL isSmallLayout = (CGRectGetWidth(self.frame) < 170.f);
+    self.topSpaceConstraint.constant = isSmallLayout ? 4.f : 12.f;
+    [self.horizontalSpaceConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
+        constraint.constant = isSmallLayout ? 4.f : 8.f;
+    }];
 }
 
 - (void)prepareForReuse
@@ -148,10 +179,6 @@
     SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
         NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ live", @"Live content label, with a channel title"), channel.title];
-        if (! self.recentLabel.hidden) {
-            [accessibilityLabel appendFormat:@", %@", PlaySRGAccessibilityLocalizedString(@"Last played", @"Label on recently played livestreams")];
-        }
-        
         SRGProgram *currentProgram = [self.programComposition play_programAtDate:NSDate.date];
         if (currentProgram) {
             [accessibilityLabel appendFormat:@", %@", currentProgram.title];
@@ -218,42 +245,32 @@
     self.placeholderView.hidden = YES;
     
     self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
-    
-    self.recentLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
-    self.recentLabel.hidden = ! [self.media.URN isEqualToString:ApplicationSettingLastSelectedTVLivestreamURN()]
-        && ! [self.media.URN isEqualToString:ApplicationSettingLastSelectedRadioLivestreamURN()];
     
     SRGBlockingReason blockingReason = [self.media blockingReasonAtDate:NSDate.date];
     if (blockingReason == SRGBlockingReasonNone || blockingReason == SRGBlockingReasonStartDate) {
         self.blockingOverlayView.hidden = YES;
-        
-        self.titleLabel.textColor = UIColor.whiteColor;
     }
     else {
         self.blockingOverlayView.hidden = NO;
         self.blockingReasonImageView.image = [UIImage play_imageForBlockingReason:blockingReason];
-        
-        self.titleLabel.textColor = UIColor.play_lightGrayColor;
     }
     
-    SRGAppearanceFontTextStyle subtitleTextStyle = SRGAppearanceFontTextStyleSubtitle;
+    CGFloat subtitleFontSize = 11.f;
     ImageScale imageScale = ImageScaleMedium;
     
-    self.subtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:subtitleTextStyle];
-    
-    [self.durationLabel play_displayDurationLabelForMediaMetadata:self.media];
+    self.subtitleLabel.font = [UIFont srg_mediumFontWithSize:subtitleFontSize];
     
     SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
-        UIImage *logoImage = channel.play_banner22Image;
+        UIImage *logoImage = channel.play_logo32Image;
         self.logoImageView.image = logoImage;
-        self.logoImageView.hidden = (logoImage == nil);
         
         SRGProgram *currentProgram = [self.programComposition play_programAtDate:NSDate.date];
         if (currentProgram) {
             self.titleLabel.text = currentProgram.title;
-            self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
+            
+            NSTimeInterval remainingTimeInterval = [currentProgram.endDate timeIntervalSinceDate:NSDate.date];
+            self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ remaining", "Text displayed on live cells telling how much time remains for a program currently on air"), RemainingTimeFormattedDuration(remainingTimeInterval)];
             
             float progress = [NSDate.date timeIntervalSinceDate:currentProgram.startDate] / ([currentProgram.endDate timeIntervalSinceDate:currentProgram.startDate]);
             self.progressView.progress = fmaxf(fminf(progress, 1.f), 0.f);
@@ -274,16 +291,16 @@
     }
     else {
         self.titleLabel.text = self.media.title;
-        self.logoImageView.hidden = YES;
+        self.logoImageView.image = (self.media.mediaType == SRGMediaTypeAudio) ? RadioChannelLogo32Image(nil) : TVChannelLogo32Image(nil);
         
         NSString *showTitle = self.media.show.title;
         if (showTitle && ! [self.media.title containsString:showTitle]) {
             NSMutableAttributedString *subtitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ - ", showTitle]
-                                                                                         attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:subtitleTextStyle] }];
+                                                                                         attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithSize:subtitleFontSize] }];
             
             NSDateFormatter *dateFormatter = NSDateFormatter.play_relativeDateAndTimeFormatter;
             [subtitle appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:self.media.date].play_localizedUppercaseFirstLetterString
-                                                                             attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithTextStyle:subtitleTextStyle] }]];
+                                                                             attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithSize:subtitleFontSize] }]];
             
             self.subtitleLabel.attributedText = subtitle.copy;
         }

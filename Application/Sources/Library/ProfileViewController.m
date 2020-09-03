@@ -230,8 +230,16 @@
         return NO;
     }
     
-    // Do not reload a section if already the current one
+    // Do not reload a section if already the current one (just return to the navigation root if possible)
     if (! self.splitViewController.collapsed && [applicationSectionInfo isEqual:self.currentSectionInfo]) {
+        NSArray<UIViewController *> *viewControllers = self.splitViewController.viewControllers;
+        if (viewControllers.count == 2) {
+            UIViewController *detailViewController = viewControllers[1];
+            if ([detailViewController isKindOfClass:UINavigationController.class]) {
+                UINavigationController *detailNavigationController = (UINavigationController *)detailViewController;
+                [detailNavigationController popToRootViewControllerAnimated:animated];
+            }
+        }
         return YES;
     }
     

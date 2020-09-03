@@ -22,6 +22,9 @@
 /* Title displayed on the radio home button */
 "%@ overview" = "%@ overview";
 
+/* Text displayed on live cells telling how much time remains for a program currently on air */
+"%@ remaining" = "%@ remaining";
+
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ views";
 
@@ -107,6 +110,9 @@
 /* Settings section header */
 "Content" = "Content";
 
+/* Sort by date option */
+"Date" = "Date";
+
 /* Title of a delete button
    Title of the delete button in the alert view when deleting a download in the player view */
 "Delete" = "Delete";
@@ -122,6 +128,9 @@
 
 /* Introductory title displayed at the top of the onboarding list */
 "Discover" = "Discover";
+
+/* User activity title when displaying a show page */
+"Display %@ episodes" = "Display %@ videos";
 
 /* No comment provided by engineer. */
 "Do you want to send an anonymous crash report so we can fix the issue?" = "Do you want to send an anonymous crash report so we can fix the issue?";
@@ -211,6 +220,11 @@
 
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
 "less than 1 hour" = "less than 1 hour";
+
+/* Suggested invocation phrase to listen to a show
+   Suggested invocation phrase to listen to an audio
+   User activity title when listening to an audio */
+"Listen to %@" = "Listen to %@";
 
 /* Introductory text for what is currently on air, displayed on the mini player
    Short label identifying a livestream. Display in uppercase. */
@@ -365,6 +379,9 @@
 /* Title of the action view to choose a regional radio */
 "Regional radios" = "Regional radios";
 
+/* Sort by relevance option */
+"Relevance" = "Relevance";
+
 /* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
 "Remove all content" = "Remove all content";
 
@@ -450,6 +467,9 @@
 
 /* Short label identifying content which will be available soon. */
 "Soon" = "Soon";
+
+/* Settings section header */
+"Sort by" = "Sort by";
 
 /* Title label used to present live center medias. Only on test versions. */
 "Sport" = "Sport";
@@ -564,6 +584,11 @@
 
 /* Header for video and audio search results */
 "Videos and audios" = "Videos and audios";
+
+/* Suggested invocation phrase to watch a show
+   Suggested invocation phrase to watch a video
+   User activity title when watching a video */
+"Watch %@" = "Watch %@";
 
 /* Label to present the watch later list */
 "Watch later" = "Watch later";

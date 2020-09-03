@@ -22,6 +22,9 @@
 /* Title displayed on the radio home button */
 "%@ overview" = "%@ home";
 
+/* Text displayed on live cells telling how much time remains for a program currently on air */
+"%@ remaining" = "Ancora %@";
+
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ visualizzazioni";
 
@@ -107,6 +110,9 @@
 /* Settings section header */
 "Content" = "Contenuto";
 
+/* Sort by date option */
+"Date" = "Data";
+
 /* Title of a delete button
    Title of the delete button in the alert view when deleting a download in the player view */
 "Delete" = "Elimina";
@@ -122,6 +128,9 @@
 
 /* Introductory title displayed at the top of the onboarding list */
 "Discover" = "Scopri";
+
+/* User activity title when displaying a show page */
+"Display %@ episodes" = "Mostra le puntate di %@";
 
 /* No comment provided by engineer. */
 "Do you want to send an anonymous crash report so we can fix the issue?" = "Desidera inviare una segnalazione (anonima) su questo problema così da permetterci di risolverlo?";
@@ -211,6 +220,11 @@
 
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
 "less than 1 hour" = "meno di 1 ora";
+
+/* Suggested invocation phrase to listen to a show
+   Suggested invocation phrase to listen to an audio
+   User activity title when listening to an audio */
+"Listen to %@" = "Ascolta %@";
 
 /* Introductory text for what is currently on air, displayed on the mini player
    Short label identifying a livestream. Display in uppercase. */
@@ -351,7 +365,7 @@
 "Pull to reload" = "Scorrere verso il basso per ricaricare";
 
 /* Title label to present main radio livestreams */
-"Radio channels" = "Tutte le emittenti radio";
+"Radio channels" = "Reti radio";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Ricevitore inattivo.";
@@ -364,6 +378,9 @@
 
 /* Title of the action view to choose a regional radio */
 "Regional radios" = "Radio regionali";
+
+/* Sort by relevance option */
+"Relevance" = "Pertinenza";
 
 /* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
 "Remove all content" = "Rimuovere tutto";
@@ -450,6 +467,9 @@
 
 /* Short label identifying content which will be available soon. */
 "Soon" = "Presto";
+
+/* Settings section header */
+"Sort by" = "Ordinare per";
 
 /* Title label used to present live center medias. Only on test versions. */
 "Sport" = "Sport";
@@ -564,6 +584,11 @@
 
 /* Header for video and audio search results */
 "Videos and audios" = "Video e audio";
+
+/* Suggested invocation phrase to watch a show
+   Suggested invocation phrase to watch a video
+   User activity title when watching a video */
+"Watch %@" = "Guarda %@";
 
 /* Label to present the watch later list */
 "Watch later" = "Guardare dopo";

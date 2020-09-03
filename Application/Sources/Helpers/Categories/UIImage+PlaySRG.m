@@ -121,20 +121,4 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
     return filePath ? [self srg_vectorImageAtPath:filePath withSize:SizeForImageScale(imageScale)] : nil;
 }
 
-+ (NSString *)overrideImagePathForUid:(NSString *)uid withType:(NSString *)type
-{
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    RadioChannel *radioChannel = [applicationConfiguration radioChannelForUid:uid];
-    if (radioChannel) {
-        return RadioChannelImageOverridePath(radioChannel, type);
-    }
-    
-    TVChannel *tvChannel = [applicationConfiguration tvChannelForUid:uid];
-    if (tvChannel) {
-        return TVChannelImageOverridePath(tvChannel, type);
-    }
-    
-    return nil;
-}
-
 @end

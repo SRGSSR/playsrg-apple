@@ -74,7 +74,7 @@ OBJC_EXPORT CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFlo
 OBJC_EXPORT CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large);
 
 /**
- *  Live media cell (16:9 artwork + text area) size for collection layouts, for a given item width.
+ *  Live media cell (16:9 artwork + progress area) size for collection layouts, for a given item width.
  *
  *  @param itemWidth The width of the item.
  */

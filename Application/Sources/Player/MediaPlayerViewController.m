@@ -58,6 +58,7 @@
 
 #import <FXReachability/FXReachability.h>
 #import <GoogleCast/GoogleCast.h>
+#import <Intents/Intents.h>
 #import <libextobjc/libextobjc.h>
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
 #import <Masonry/Masonry.h>
@@ -609,11 +610,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             BOOL isLandscape = (size.width > size.height);
             [self.letterboxView setFullScreen:isLandscape animated:NO /* will be animated with the view transition */];
             
-            if (isLandscape && self.letterboxView.userInterfaceTogglable
-                    && ! UIAccessibilityIsVoiceOverRunning()
-                    && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePaused
-                    && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
-                [self.letterboxView setUserInterfaceHidden:YES animated:NO /* will be animated with the view transition */];
+            if (isLandscape) {
+                [self hidePlayerUserInterfaceAnimated:NO /* will be animated with the view transition */];
             }
         }
         [self scrollToNearestProgramAnimated:NO];
@@ -702,14 +700,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     SRGMedia *mainChapterMedia = [self mainChapterMedia];
     if (mainChapterMedia) {
-        userActivity.title = mainChapterMedia.title;
+        NSString *userActivityTitleFormat = (mainChapterMedia.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen to %@", @"User activity title when listening to an audio") : NSLocalizedString(@"Watch %@", @"User activity title when watching a video");
+        userActivity.title = [NSString stringWithFormat:userActivityTitleFormat, mainChapterMedia.title];
         if (mainChapterMedia.endDate) {
             userActivity.expirationDate = mainChapterMedia.endDate;
         }
+        BOOL isLiveStream = (mainChapterMedia.contentType == SRGContentTypeLivestream);
         
         NSNumber *position = nil;
         CMTime currentTime = self.letterboxController.currentTime;
-        if (CMTIME_IS_VALID(currentTime)
+        if (! isLiveStream && CMTIME_IS_VALID(currentTime)
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateIdle
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
@@ -724,6 +724,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                                           @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
         userActivity.requiredUserInfoKeys = [NSSet setWithArray:userActivity.userInfo.allKeys];
         userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:mainChapterMedia atTime:currentTime];
+        
+        if (isLiveStream && mainChapterMedia.channel) {
+            userActivity.eligibleForPrediction = YES;
+            userActivity.persistentIdentifier = mainChapterMedia.URN;
+            NSString *suggestedInvocationPhraseFormat = (mainChapterMedia.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen to %@", @"Suggested invocation phrase to listen to an audio") : NSLocalizedString(@"Watch %@", @"Suggested invocation phrase to watch a video");
+            userActivity.suggestedInvocationPhrase = [NSString stringWithFormat:suggestedInvocationPhraseFormat, mainChapterMedia.channel.title];
+        }
     }
     else {
         [userActivity resignCurrent];
@@ -1081,6 +1088,16 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.metadataHeightConstraint.active = fullScreen;
     
     [self setNeedsStatusBarAppearanceUpdate];
+}
+
+- (void)hidePlayerUserInterfaceAnimated:(BOOL)animated
+{
+    if (self.letterboxView.userInterfaceTogglable
+            && ! UIAccessibilityIsVoiceOverRunning()
+            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePaused
+            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
+        [self.letterboxView setUserInterfaceHidden:YES animated:animated];
+    }
 }
 
 - (void)setDetailsExpanded:(BOOL)expanded animated:(BOOL)animated
@@ -1570,6 +1587,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self setFullScreen:fullScreen];
         [self updateTimelineVisibilityForFullScreen:fullScreen animated:NO];
         [self updateSongPanelFor:self.traitCollection fullScreen:fullScreen];
+        
+        if (fullScreen) {
+            [self hidePlayerUserInterfaceAnimated:NO];
+        }
     };
     
     void (^completion)(BOOL) = ^(BOOL finished) {
@@ -2070,7 +2091,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     [self.livestreamMedias enumerateObjectsUsingBlock:^(SRGMedia * _Nonnull media, NSUInteger idx, BOOL * _Nonnull stop) {
         [alertController addAction:[UIAlertAction actionWithTitle:media.title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            ApplicationSettingSetLastSelectedRadioLivestreamURN(media.URN);
             ApplicationSettingSetSelectedLivestreamURNForChannelUid(media.channel.uid, media.URN);
             
             // Use the playback state if playing

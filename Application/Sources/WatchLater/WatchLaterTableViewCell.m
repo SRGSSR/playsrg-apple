@@ -271,7 +271,7 @@
     [self.subtitlesLabel play_setSubtitlesAvailableBadge];
     
     // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
-    NSString *contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
+    UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     if (SRGAppearanceCompareContentSizeCategories(contentSizeCategory, UIContentSizeCategoryExtraLarge) == NSOrderedDescending) {
         self.titleLabel.numberOfLines = (isWebFirst || hasSubtitles || hasAudioDescription) ? 1 : 2;
     }

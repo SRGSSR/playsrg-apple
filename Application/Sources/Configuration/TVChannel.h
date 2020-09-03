@@ -14,12 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Images associated with the TV channel.
  */
-OBJC_EXPORT UIImage *TVChannelBanner22Image(TVChannel * _Nullable tvChannel);
-
-/**
- *  Image overrides.
- */
-OBJC_EXPORT NSString * _Nullable TVChannelImageOverridePath(TVChannel * _Nullable tvChannel, NSString *type);
+OBJC_EXPORT UIImage *TVChannelLogo22Image(TVChannel * _Nullable tvChannel);
+OBJC_EXPORT UIImage *TVChannelLogo32Image(TVChannel * _Nullable tvChannel);
 
 /**
  *  Represent a TV channel in the application configuration.

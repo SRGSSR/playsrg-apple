@@ -43,6 +43,7 @@ static NSString * const SettingsDataProtectionButton = @"Button_DataProtection";
 static NSString * const SettingsFeedbackButton = @"Button_Feedback";
 static NSString * const SettingsSourceCodeButton = @"Button_SourceCode";
 static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
+static NSString * const SettingsTvBetaTestingButton = @"Button_TvBetaTesting";
 static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersion";
 
 // Autoplay group
@@ -205,6 +206,10 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [hiddenKeys addObject:SettingsBetaTestingButton];
     }
     
+    if (! applicationConfiguration.tvBetaTestingURL) {
+        [hiddenKeys addObject:SettingsTvBetaTestingButton];
+    }
+    
     self.hiddenKeys = hiddenKeys.copy;
 }
 
@@ -335,6 +340,14 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         
         [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:^(BOOL success) {
             [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleBetaTesting levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
+        }];
+    }
+    else if ([specifier.key isEqualToString:SettingsTvBetaTestingButton]) {
+        NSURL *tvBetaTestingURL = ApplicationConfiguration.sharedApplicationConfiguration.tvBetaTestingURL;
+        NSAssert(tvBetaTestingURL, @"Button must not be displayed if no Apple TV beta testing URL has been specified");
+        
+        [UIApplication.sharedApplication play_openURL:tvBetaTestingURL withCompletionHandler:^(BOOL success) {
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleTvBetaTesting levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
         }];
     }
     else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {

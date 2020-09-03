@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "RTS_Info.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

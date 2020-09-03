@@ -27,6 +27,9 @@ platform :ios do
       end
     end
 
+    # Only used by FastLane actions
+    xcversion(version: '~> 11')
+
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
       Dir.chdir('..') { sh 'make bootstrap' }
@@ -91,6 +94,17 @@ platform :ios do
     end
 
     bump_build_number_beta_workflow
+  end
+
+  desc 'Upload a new build (bitcode) on AppStore Connect with the current build number.'
+  lane :appStoreUploads do
+    notify_build_number_to_ci(nil)
+    
+    sh 'bundle exec fastlane ios swiAppStoreUpload'
+    sh 'bundle exec fastlane ios srfAppStoreUpload'
+    sh 'bundle exec fastlane ios rtsAppStoreUpload'
+    sh 'bundle exec fastlane ios rsiAppStoreUpload'
+    sh 'bundle exec fastlane ios rtrAppStoreUpload'
   end
 
   desc 'SWI: Upload a new build (bitcode) on AppStore Connect with the current build number.'
@@ -192,6 +206,11 @@ platform :ios do
   desc 'Build, upload to TestFlight'
   private_lane :testflight_lane do |options|
     scheme = options[:scheme]
+    build_number = get_build_number
+
+    can_upload = can_upload_testflight_build(nil)
+    UI.message(scheme + ' ' + build_number + ' already uploaded 🔁✅') unless can_upload
+    next unless can_upload
 
     build_lane(
       configuration: 'AppStore',
@@ -202,6 +221,7 @@ platform :ios do
     pilot(
       skip_waiting_for_build_processing: true
     )
+    UI.message(scheme + ' ' + build_number + ' uploaded ✅')
 
     clean_build_artifacts
   end
@@ -486,6 +506,15 @@ def upload_screenshots(platform)
   )
 end
 
+def can_upload_testflight_build(platform)
+  platform ||= 'ios'
+
+  appstore_build_number = latest_testflight_build_number(platform: platform)
+  local_build_number = get_build_number
+
+  (appstore_build_number < local_build_number.to_i)
+end
+
 # Beta workflow: tag the new beta, bump build number and push to the repo,
 # only if we're not in a release process.
 def bump_build_number_beta_workflow
@@ -496,7 +525,7 @@ def bump_build_number_beta_workflow
 
   return if is_in_release_process
 
-  add_git_tag(tag: tag_version)
+  add_git_tag(tag: 'ios/' + tag_version)
   bump_build_number_commit
   push_to_git_remote
 end

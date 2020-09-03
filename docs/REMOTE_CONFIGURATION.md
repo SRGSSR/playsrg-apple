@@ -21,6 +21,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 ## URLs
 
 * `betaTestingURL` (optional, string): The URL of the page where beta testers can register.
+* `tvBetaTestingURL` (optional, string): The URL of the page where Apple TV beta testers can register.
 * `feedbackURL` (optional, string): The URL of the feedback form.
 * `dataProtectionURL` (optional, string): The URL of the data protection information page.
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed. 
@@ -99,7 +100,6 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `radioLatestEpisodes`: The latest episodes.
 * `radioLatestVideos`: The latest videos.
 * `radioMostPopular`: The most popular audios.
-* `radioMyListShows`: Shows from "My list".
 * `radioShowsAccess`: A-Z and By date access buttons.
 
 ### User interface options
@@ -122,6 +122,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 
 * `searchSettingsHidden` (optional, boolean): Set to `true` to hide support for search settings.
 * `searchSettingSubtitledHidden` (optional, boolean): Set to `true` to hide the subtitled option in the search settings.
+* `searchSortingCriteriumHidden` (optional, boolean): Set to `true` to hide the sorting criterium option in the search settings.
 * `showsSearchHidden ` (optional, boolean): Set to `true` to hide show search results.
 
 ## Continuous playback

@@ -111,6 +111,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *termsAndConditionsURL;
 @property (nonatomic, readonly, nullable) NSURL *dataProtectionURL;
 @property (nonatomic, readonly, nullable) NSURL *betaTestingURL;
+@property (nonatomic, readonly, nullable) NSURL *tvBetaTestingURL;
 @property (nonatomic, readonly, nullable) NSURL *sourceCodeURL;
 
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
@@ -156,6 +157,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;
 @property (nonatomic, readonly, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
+@property (nonatomic, readonly, getter=isSearchSortingCriteriumHidden) BOOL searchSortingCriteriumHidden;
 @property (nonatomic, readonly, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
 - (nullable RadioChannel *)radioChannelForUid:(NSString *)uid;

@@ -238,6 +238,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *termsAndConditionsURL;
 @property (nonatomic) NSURL *dataProtectionURL;
 @property (nonatomic) NSURL *betaTestingURL;
+@property (nonatomic) NSURL *tvBetaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
@@ -283,6 +284,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;
 @property (nonatomic, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
+@property (nonatomic, getter=isSearchSortingCriteriumHidden) BOOL searchSortingCriteriumHidden;
 @property (nonatomic, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -472,6 +474,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     NSString *betaTestingURLString = [self.remoteConfig configValueForKey:@"betaTestingURL"].stringValue;
     self.betaTestingURL = (betaTestingURLString.length != 0) ? [NSURL URLWithString:betaTestingURLString] : nil;
     
+    NSString *tvBetaTestingURLString = [self.remoteConfig configValueForKey:@"tvBetaTestingURL"].stringValue;
+    self.tvBetaTestingURL = (tvBetaTestingURLString.length != 0) ? [NSURL URLWithString:tvBetaTestingURLString] : nil;
+    
     NSString *sourceCodeURLString = [self.remoteConfig configValueForKey:@"sourceCodeURL"].stringValue;
     self.sourceCodeURL = (sourceCodeURLString.length != 0) ? [NSURL URLWithString:sourceCodeURLString] : nil;
     
@@ -636,6 +641,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.searchSettingsHidden = [self.remoteConfig configValueForKey:@"searchSettingsHidden"].boolValue;
     self.searchSettingSubtitledHidden = [self.remoteConfig configValueForKey:@"searchSettingSubtitledHidden"].boolValue;
+    self.searchSortingCriteriumHidden = [self.remoteConfig configValueForKey:@"searchSortingCriteriumHidden"].boolValue;
     self.showsSearchHidden = [self.remoteConfig configValueForKey:@"showsSearchHidden"].boolValue;
     
     self.logoutMenuEnabled = [self.remoteConfig configValueForKey:@"logoutMenuEnabled"].boolValue;

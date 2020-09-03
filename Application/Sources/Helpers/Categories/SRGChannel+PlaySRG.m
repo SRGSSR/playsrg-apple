@@ -12,17 +12,17 @@
 
 @implementation SRGChannel (PlaySRG)
 
-- (UIImage *)play_banner22Image
+- (UIImage *)play_logo32Image
 {
     if (self.transmission == SRGTransmissionRadio) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), self.uid];
         RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration.radioChannels filteredArrayUsingPredicate:predicate].firstObject;
-        return RadioChannelBanner22Image(radioChannel);
+        return RadioChannelLogo32Image(radioChannel);
     }
     else {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(TVChannel.new, uid), self.uid];
         TVChannel *tvChannel = [ApplicationConfiguration.sharedApplicationConfiguration.tvChannels filteredArrayUsingPredicate:predicate].firstObject;
-        return TVChannelBanner22Image(tvChannel);
+        return TVChannelLogo32Image(tvChannel);
     }
 }
 
