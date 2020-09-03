@@ -7,6 +7,12 @@
 import SRGDataProviderModel
 import SwiftUI
 
+struct FocusedKey: PreferenceKey {
+    static var defaultValue: Bool = false
+    
+    static func reduce(value: inout Bool, nextValue: () -> Bool) {}
+}
+
 struct DurationLabel: View {
     let media: SRGMedia?
     
@@ -32,12 +38,16 @@ struct DurationLabel: View {
 struct MediaVisualView: View {
     let media: SRGMedia?
     
+    @Environment(\.isFocused) var isFocused: Bool
+    
     private var imageUrl: URL? {
         return media?.imageURL(for: .width, withValue: 200, type: .default)
     }
     
     var body: some View {
         ImageView(url: imageUrl)
+            .background(isFocused ? Color.red : Color.white)
+            .preference(key: FocusedKey.self, value: isFocused)
             .overlay(DurationLabel(media: media), alignment: .bottomTrailing)
             .whenRedacted { $0.hidden() }
     }
@@ -80,6 +90,10 @@ struct MediaCell: View {
     
     @State private var isPresented = false
     
+    /// Focus is received by the Button, detected in its title view, and bubbled up with preferences so that we
+    /// can apply a similar focused appearance to the sibling description view.
+    @State private var isFocused = false
+    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -101,6 +115,12 @@ struct MediaCell: View {
                 
                 MediaDescriptionView(media: media)
                     .frame(width: geometry.size.width, alignment: .leading)
+                    .scaleEffect(isFocused ? 1.1 : 1)
+                    .offset(x: 0, y: isFocused ? 10 : 0)
+                    .animation(.easeInOut(duration: 0.2))
+            }
+            .onPreferenceChange(FocusedKey.self) { value in
+                isFocused = value
             }
             .redacted(reason: redactionReason)
             .fullScreenCover(isPresented: $isPresented, content: {
