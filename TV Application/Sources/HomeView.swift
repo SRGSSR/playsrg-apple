@@ -24,7 +24,7 @@ struct HomeView: View {
                 case .tvShowsAccess, .radioShowsAccess:
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
                 default:
-                    return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
+                    return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(340))
             }
         }
         
@@ -37,7 +37,7 @@ struct HomeView: View {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = 40
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
         return section
     }
     

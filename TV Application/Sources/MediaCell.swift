@@ -24,16 +24,19 @@ struct MediaCell: View {
     }
     
     var body: some View {
-        ZStack {
-            ImageView(url: imageUrl)
-                .whenRedacted { $0.hidden() }
-            Rectangle()
-                .fill(Color(white: 0, opacity: 0.4))
-            Text(title)
-                .foregroundColor(.white)
-                .padding()
+        GeometryReader { geometry in
+            VStack {
+                Button(action: {}) {
+                    ImageView(url: imageUrl)
+                        .whenRedacted { $0.hidden() }
+                        .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                }
+                .buttonStyle(CardButtonStyle())
+                
+                Text(title)
+                    .frame(width: geometry.size.width, alignment: .leading)
+            }
+            .redacted(reason: redactionReason)
         }
-        .cornerRadius(10)
-        .redacted(reason: redactionReason)
     }
 }
