@@ -6,6 +6,14 @@
 
 import SwiftUI
 
+extension CollectionView {
+    func synchronizeParentTabScrolling() -> some View {
+        var collectionView = self
+        collectionView.parentTabScrollingEnabled = true
+        return collectionView
+    }
+}
+
 // TODO: Implement HostCell and HostSupplementaryView with an intermediate HostView subview
 // See https://stackoverflow.com/questions/61552497/uitableviewheaderfooterview-with-swiftui-content-getting-automatic-safe-area-ins
 extension UIHostingController {
@@ -141,6 +149,9 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     /// Supplementary view builder
     let supplementaryViewBuilder: (String, IndexPath) -> SupplementaryView
     
+    /// If `true`, tabs move in sync with the collection.
+    fileprivate var parentTabScrollingEnabled: Bool = false
+    
     /**
      *  Create a collection view displaying the specified data with cells delivered by the provided builder.
      */
@@ -210,6 +221,10 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     func updateUIView(_ uiView: UICollectionView, context: Context) {
         let coordinator = context.coordinator
         coordinator.sectionLayoutProvider = self.sectionLayoutProvider
+        
+        if parentTabScrollingEnabled {
+            uiView.play_nearestViewController?.tabBarObservedScrollView = uiView
+        }
         
         guard let dataSource = coordinator.dataSource else { return }
         

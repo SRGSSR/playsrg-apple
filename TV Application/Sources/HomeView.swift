@@ -86,6 +86,7 @@ struct HomeView: View {
                 }
             }
         }
+        .synchronizeParentTabScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
     }
