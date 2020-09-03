@@ -117,10 +117,11 @@ struct MediaCell: View {
                     .frame(width: geometry.size.width, alignment: .leading)
                     .scaleEffect(isFocused ? 1.1 : 1)
                     .offset(x: 0, y: isFocused ? 10 : 0)
-                    .animation(.easeInOut(duration: 0.2))
             }
             .onPreferenceChange(FocusedKey.self) { value in
-                isFocused = value
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    isFocused = value
+                }
             }
             .redacted(reason: redactionReason)
             .fullScreenCover(isPresented: $isPresented, content: {
