@@ -7,6 +7,28 @@
 import SRGDataProviderModel
 import SwiftUI
 
+struct DurationLabel: View {
+    let media: SRGMedia?
+    
+    private var duration: String? {
+        guard let media = media else { return nil }
+        return DurationFormatters.minutes(for: media.duration / 1000)
+    }
+    
+    var body: some View {
+        if let duration = duration {
+            Text(duration)
+                .font(.caption)
+                .foregroundColor(.white)
+                .padding([.top, .bottom], 5)
+                .padding([.leading, .trailing], 8)
+                .background(Color.init(white: 0, opacity: 0.5))
+                .cornerRadius(4)
+                .padding([.trailing, .bottom], 8)
+        }
+    }
+}
+
 struct MediaCell: View {
     let media: SRGMedia?
     
@@ -36,6 +58,7 @@ struct MediaCell: View {
             VStack {
                 Button(action: play) {
                     ImageView(url: imageUrl)
+                        .overlay(DurationLabel(media: media), alignment: .bottomTrailing)
                         .whenRedacted { $0.hidden() }
                         .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                 }
