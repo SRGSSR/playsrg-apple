@@ -34,9 +34,24 @@ struct MediaCell: View {
     
     @State private var isPresented = false
     
+    static private func showName(for media: SRGMedia) -> String? {
+        guard let show = media.show else { return nil }
+        return !media.title.contains(show.title) ? show.title : nil
+    }
+    
     private var title: String {
         guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
         return media.title
+    }
+    
+    private var subtitle: String {
+        guard let media = media else { return String(repeating: " ", count: .random(in: 20..<30)) }
+        if let showName = Self.showName(for: media) {
+            return "\(showName) - \(DateFormatters.formattedRelativeDate(for: media.date))"
+        }
+        else {
+            return DateFormatters.formattedRelativeDateAndTime(for: media.date)
+        }
     }
     
     private var imageUrl: URL? {
@@ -64,8 +79,14 @@ struct MediaCell: View {
                 }
                 .buttonStyle(CardButtonStyle())
                 
-                Text(title)
-                    .frame(width: geometry.size.width, alignment: .leading)
+                Group {
+                    Text(title)
+                        .lineLimit(2)
+                    Text(subtitle)
+                        .font(.caption)
+                        .lineLimit(1)
+                }
+                .frame(width: geometry.size.width, alignment: .leading)
             }
             .redacted(reason: redactionReason)
             .fullScreenCover(isPresented: $isPresented, content: {

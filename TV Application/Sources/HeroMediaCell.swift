@@ -59,7 +59,7 @@ struct DescriptionView: View {
     
     private var subtitle: String {
         guard let media = media else { return String(repeating: " ", count: .random(in: 12..<18)) }
-        return DateFormatters.dateAndTime(for: media.date)
+        return DateFormatters.formattedRelativeDateAndTime(for: media.date)
     }
     
     var body: some View {

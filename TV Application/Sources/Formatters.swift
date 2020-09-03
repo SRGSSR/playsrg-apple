@@ -7,15 +7,28 @@
 import Foundation
 
 struct DateFormatters {
-    private static let timeAndDateFormatter: DateFormatter = {
+    private static let relativeDateAndTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .long
+        formatter.dateStyle = .short
         formatter.timeStyle = .short
+        formatter.doesRelativeDateFormatting = true
         return formatter
     }()
     
-    static func dateAndTime(for date: Date) -> String {
-        return timeAndDateFormatter.string(from: date)
+    static func formattedRelativeDateAndTime(for date: Date) -> String {
+        return relativeDateAndTimeFormatter.string(from: date)
+    }
+    
+    private static let relativeDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
+        formatter.doesRelativeDateFormatting = true
+        return formatter
+    }()
+    
+    static func formattedRelativeDate(for date: Date) -> String {
+        return relativeDateFormatter.string(from: date)
     }
 }
 
