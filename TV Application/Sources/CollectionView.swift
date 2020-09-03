@@ -14,7 +14,6 @@ extension CollectionView {
     }
 }
 
-// TODO: Implement HostCell and HostSupplementaryView with an intermediate HostView subview
 // See https://stackoverflow.com/questions/61552497/uitableviewheaderfooterview-with-swiftui-content-getting-automatic-safe-area-ins
 extension UIHostingController {
     convenience public init(rootView: Content, ignoreSafeArea: Bool) {
@@ -73,6 +72,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             if let hostView = hostController?.view {
                 hostView.removeFromSuperview()
             }
+            hostController = nil
         }
         
         override var canBecomeFocused: Bool {
@@ -100,6 +100,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             if let hostView = hostController?.view {
                 hostView.removeFromSuperview()
             }
+            hostController = nil
         }
         
         var hostedSupplementaryView: SupplementaryView? {
