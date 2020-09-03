@@ -23,6 +23,8 @@ struct HomeView: View {
                     return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
                 case .tvShowsAccess, .radioShowsAccess:
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
+                case .radioAllShows:
+                    return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
                 default:
                     return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(340))
             }

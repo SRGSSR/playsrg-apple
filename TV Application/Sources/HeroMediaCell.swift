@@ -19,17 +19,22 @@ struct HeroMediaCell: View {
     }
     
     var body: some View {
-        ZStack {
-            ImageView(url: imageUrl, contentMode: .fill)
-                .whenRedacted { $0.hidden() }
-            Rectangle()
-                .fill(Color(white: 0, opacity: 0.4))
-            DescriptionView(media: media)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                .padding(60)
+        GeometryReader { geometry in
+            Button(action: {}) {
+                ZStack {
+                    ImageView(url: imageUrl, contentMode: .fill)
+                        .whenRedacted { $0.hidden() }
+                    Rectangle()
+                        .fill(Color(white: 0, opacity: 0.4))
+                    DescriptionView(media: media)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                        .padding(60)
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+            }
+            .buttonStyle(CardButtonStyle())
+            .redacted(reason: redactionReason)
         }
-        .cornerRadius(10)
-        .redacted(reason: redactionReason)
     }
 }
 

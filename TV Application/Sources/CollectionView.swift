@@ -6,6 +6,41 @@
 
 import SwiftUI
 
+// TODO: Implement HostCell and HostSupplementaryView with an intermediate HostView subview
+// See https://stackoverflow.com/questions/61552497/uitableviewheaderfooterview-with-swiftui-content-getting-automatic-safe-area-ins
+extension UIHostingController {
+    convenience public init(rootView: Content, ignoreSafeArea: Bool) {
+        self.init(rootView: rootView)
+        
+        if ignoreSafeArea {
+            disableSafeArea()
+        }
+    }
+    
+    func disableSafeArea() {
+        guard let viewClass = object_getClass(view) else { return }
+        
+        let viewSubclassName = String(cString: class_getName(viewClass)).appending("_IgnoreSafeArea")
+        if let viewSubclass = NSClassFromString(viewSubclassName) {
+            object_setClass(view, viewSubclass)
+        }
+        else {
+            guard let viewClassNameUtf8 = (viewSubclassName as NSString).utf8String else { return }
+            guard let viewSubclass = objc_allocateClassPair(viewClass, viewClassNameUtf8, 0) else { return }
+            
+            if let method = class_getInstanceMethod(UIView.self, #selector(getter: UIView.safeAreaInsets)) {
+                let safeAreaInsets: @convention(block) (AnyObject) -> UIEdgeInsets = { _ in
+                    return .zero
+                }
+                class_addMethod(viewSubclass, #selector(getter: UIView.safeAreaInsets), imp_implementationWithBlock(safeAreaInsets), method_getTypeEncoding(method))
+            }
+            
+            objc_registerClassPair(viewSubclass)
+            object_setClass(view, viewSubclass)
+        }
+    }
+}
+
 /**
  *  Collection row.
  */
@@ -21,21 +56,10 @@ struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
  */
 struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, SupplementaryView: View>: UIViewRepresentable {
     /**
-     *  Cell host root view. Only required to fix safe area insets otherwise applied to `UIHostingController` in cells.
-     */
-    private struct HostRootView<Body: View>: View {
-        let hostedView: Body
-        
-        var body: some View {
-            hostedView.ignoresSafeArea(.all)
-        }
-    }
-    
-    /**
      *  `UICollectionView` cell hosting a `SwiftUI` view.
      */
     private class HostCell: UICollectionViewCell {
-        private var hostController: UIHostingController<HostRootView<Cell>>?
+        private var hostController: UIHostingController<Cell>?
         
         override func prepareForReuse() {
             if let hostView = hostController?.view {
@@ -51,7 +75,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             willSet {
                 // Creating a `UIHostingController` is cheap.
                 guard let view = newValue else { return }
-                hostController = UIHostingController(rootView: HostRootView(hostedView: view))
+                hostController = UIHostingController(rootView: view, ignoreSafeArea: true)
                 if let hostView = hostController?.view {
                     hostView.frame = contentView.bounds
                     hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -62,7 +86,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     }
     
     private class HostSupplementaryView: UICollectionReusableView {
-        private var hostController: UIHostingController<HostRootView<SupplementaryView>>?
+        private var hostController: UIHostingController<SupplementaryView>?
         
         override func prepareForReuse() {
             if let hostView = hostController?.view {
@@ -74,7 +98,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             willSet {
                 // Creating a `UIHostingController` is cheap.
                 guard let view = newValue else { return }
-                hostController = UIHostingController(rootView: HostRootView(hostedView: view))
+                hostController = UIHostingController(rootView: view, ignoreSafeArea: true)
                 if let hostView = hostController?.view {
                     hostView.frame = self.bounds
                     hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -200,4 +224,3 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         }
     }
 }
-
