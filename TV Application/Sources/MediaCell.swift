@@ -55,6 +55,21 @@ struct BlockingOverlay: View {
     }
 }
 
+struct Badge: View {
+    let text: String
+    let color: Color
+    
+    var body: some View {
+        Text(text)
+            .font(.caption)
+            .foregroundColor(.white)
+            .padding([.top, .bottom], 5)
+            .padding([.leading, .trailing], 8)
+            .background(color)
+            .cornerRadius(4)
+    }
+}
+
 struct MediaVisualView: View {
     let media: SRGMedia?
     
@@ -67,6 +82,39 @@ struct MediaVisualView: View {
     private var youthProtectionLogoImage: UIImage? {
         guard let youthProtectionColor = media?.youthProtectionColor else { return nil }
         return YouthProtectionImageForColor(youthProtectionColor)
+    }
+    
+    static func formattedDuration(from: Date, to: Date) -> String? {
+        guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
+        switch days {
+            case 0:
+                return DurationFormatters.hours(for: to.timeIntervalSince(from))
+            case 1:
+                return DurationFormatters.days(for: to.timeIntervalSince(from))
+            default:
+                return nil
+        }
+    }
+    
+    private func availabilityBadgeProperties() -> (text: String, color: Color)? {
+        guard let media = media else { return nil }
+        
+        let now = Date()
+        let availabilty = media.timeAvailability(at: now)
+        switch availabilty {
+            case .notAvailableAnymore:
+                return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), .gray)
+            case .available:
+                guard let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream else { return nil }
+                if let remainingDays = Self.formattedDuration(from: now, to: endDate) {
+                    return (NSLocalizedString("\(remainingDays) left", comment: "Short label displayed on medias expiring soon"), .orange)
+                }
+                else {
+                    return nil
+                }
+            default:
+                return nil
+        }
     }
     
     var body: some View {
@@ -89,17 +137,16 @@ struct MediaVisualView: View {
             .padding([.leading, .trailing, .bottom], 8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             
-            if let isWebFirst = media?.play_isWebFirst, isWebFirst {
-                Text(NSLocalizedString("Web first", comment: "Web first label on media cells"))
-                    .font(.caption)
-                    .foregroundColor(.white)
-                    .padding([.top, .bottom], 5)
-                    .padding([.leading, .trailing], 8)
-                    .background(Color(.srg_blue))
-                    .cornerRadius(4)
-                    .padding([.leading, .top], 8)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            Group {
+                if let isWebFirst = media?.play_isWebFirst, isWebFirst {
+                    Badge(text: NSLocalizedString("Web first", comment: "Web first label on media cells"), color: Color(.srg_blue))
+                }
+                else if let availabilityBadgeProperties = availabilityBadgeProperties() {
+                    Badge(text: availabilityBadgeProperties.text, color: availabilityBadgeProperties.color)
+                }
             }
+            .padding([.leading, .top], 8)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             
             BlockingOverlay(media: media)
         }
