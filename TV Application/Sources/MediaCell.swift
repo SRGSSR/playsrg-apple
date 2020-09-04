@@ -76,7 +76,7 @@ struct MediaVisualView: View {
     @Environment(\.isFocused) var isFocused: Bool
     
     private var imageUrl: URL? {
-        return media?.imageURL(for: .width, withValue: 200, type: .default)
+        return media?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
     }
     
     private var youthProtectionLogoImage: UIImage? {
