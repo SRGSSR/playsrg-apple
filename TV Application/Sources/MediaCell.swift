@@ -75,13 +75,18 @@ struct MediaVisualView: View {
                 .whenRedacted { $0.hidden() }
             
             HStack(spacing: 4) {
+                if media?.presentation == .presentation360 {
+                    Image("360_media-25")
+                        .colorInvert()
+                }
+                Spacer()
                 if let youthProtectionLogoImage = youthProtectionLogoImage {
                     Image(uiImage: youthProtectionLogoImage)
                 }
                 DurationLabel(media: media)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-            .padding([.trailing, .bottom], 8)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            .padding([.leading, .trailing, .bottom], 8)
             
             BlockingOverlay(media: media)
         }
