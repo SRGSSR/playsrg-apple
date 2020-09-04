@@ -777,6 +777,11 @@
 		6F3E0A0323D055DD009B00C1 /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */; };
 		6F3E0A0423D055DD009B00C1 /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */; };
 		6F3E0A0523D055DD009B00C1 /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */; };
+		6F3F1AAE25027CA2000FF4DD /* RSIResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47AE1DD19A5B00C79E67 /* RSIResources.xcassets */; };
+		6F3F1AAF25027CA8000FF4DD /* RTRResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B01DD19A6900C79E67 /* RTRResources.xcassets */; };
+		6F3F1AB025027CAE000FF4DD /* RTSResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B21DD19A7B00C79E67 /* RTSResources.xcassets */; };
+		6F3F1AB125027CB5000FF4DD /* SRFResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B41DD19A8500C79E67 /* SRFResources.xcassets */; };
+		6F3F1AB225027CBA000FF4DD /* SWIResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B61DD19A9100C79E67 /* SWIResources.xcassets */; };
 		6F40920022DCF43D005F3850 /* Previewing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4091FF22DCF43D005F3850 /* Previewing.m */; };
 		6F40920122DCF43D005F3850 /* Previewing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4091FF22DCF43D005F3850 /* Previewing.m */; };
 		6F40920222DCF43D005F3850 /* Previewing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4091FF22DCF43D005F3850 /* Previewing.m */; };
@@ -5274,6 +5279,7 @@
 				6F5AA59C2502666A00718420 /* CommonImages.xcassets in Resources */,
 				6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */,
+				6F3F1AB125027CB5000FF4DD /* SRFResources.xcassets in Resources */,
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
 				6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */,
 				6FFCC5EC24EFC1FA00805B0F /* ApplicationConfiguration.json in Resources */,
@@ -5287,6 +5293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F5AA59D2502666B00718420 /* CommonImages.xcassets in Resources */,
+				6F3F1AB025027CAE000FF4DD /* RTSResources.xcassets in Resources */,
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB224EC3340006F2EC7 /* Localizable.strings in Resources */,
 				6F4FCB0924D07040002675EF /* Preview Assets.xcassets in Resources */,
@@ -5303,6 +5310,7 @@
 			files = (
 				6F5AA59E2502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
+				6F3F1AAE25027CA2000FF4DD /* RSIResources.xcassets in Resources */,
 				08777DB424EC3997006F2EC7 /* Localizable.strings in Resources */,
 				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */,
@@ -5322,6 +5330,7 @@
 				6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */,
 				6F4FCB0F24D07055002675EF /* Assets.xcassets in Resources */,
 				6FFCC5EA24EFC1F400805B0F /* ApplicationConfiguration.json in Resources */,
+				6F3F1AAF25027CA8000FF4DD /* RTRResources.xcassets in Resources */,
 				6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */,
 				08777DB624EC399F006F2EC7 /* Accessibility.strings in Resources */,
 			);
@@ -5334,6 +5343,7 @@
 				6F5AA5A02502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
 				08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */,
+				6F3F1AB225027CBA000FF4DD /* SWIResources.xcassets in Resources */,
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */,
 				6FFCC5ED24EFC1FD00805B0F /* ApplicationConfiguration.json in Resources */,

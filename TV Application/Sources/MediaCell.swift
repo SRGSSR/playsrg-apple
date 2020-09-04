@@ -30,7 +30,6 @@ struct DurationLabel: View {
                 .padding([.leading, .trailing], 8)
                 .background(Color.init(white: 0, opacity: 0.5))
                 .cornerRadius(4)
-                .padding([.trailing, .bottom], 8)
         }
     }
 }
@@ -38,17 +37,17 @@ struct DurationLabel: View {
 struct BlockingOverlay: View {
     let media: SRGMedia?
     
-    private var blockingIcon: UIImage? {
+    private var blockingIconImage: UIImage? {
         guard let blockingReason = media?.blockingReason(at: Date()) else { return nil }
         return UIImage.play_image(for: blockingReason)
     }
     
     var body: some View {
-        if let blockingIcon = blockingIcon {
+        if let blockingIconImage = blockingIconImage {
             ZStack {
                 Rectangle()
                     .fill(Color(white: 0, opacity: 0.6))
-                Image(uiImage: blockingIcon)
+                Image(uiImage: blockingIconImage)
                     .colorInvert()
             }
         }
@@ -64,12 +63,26 @@ struct MediaVisualView: View {
         return media?.imageURL(for: .width, withValue: 200, type: .default)
     }
     
+    private var youthProtectionLogoImage: UIImage? {
+        guard let youthProtectionColor = media?.youthProtectionColor else { return nil }
+        return YouthProtectionImageForColor(youthProtectionColor)
+    }
+    
     var body: some View {
         ZStack {
             ImageView(url: imageUrl)
                 .preference(key: FocusedKey.self, value: isFocused)
-                .overlay(DurationLabel(media: media), alignment: .bottomTrailing)
                 .whenRedacted { $0.hidden() }
+            
+            HStack(spacing: 4) {
+                if let youthProtectionLogoImage = youthProtectionLogoImage {
+                    Image(uiImage: youthProtectionLogoImage)
+                }
+                DurationLabel(media: media)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+            .padding([.trailing, .bottom], 8)
+            
             BlockingOverlay(media: media)
         }
     }
