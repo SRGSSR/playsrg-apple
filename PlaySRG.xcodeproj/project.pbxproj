@@ -782,6 +782,11 @@
 		6F3F1AB025027CAE000FF4DD /* RTSResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B21DD19A7B00C79E67 /* RTSResources.xcassets */; };
 		6F3F1AB125027CB5000FF4DD /* SRFResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B41DD19A8500C79E67 /* SRFResources.xcassets */; };
 		6F3F1AB225027CBA000FF4DD /* SWIResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B61DD19A9100C79E67 /* SWIResources.xcassets */; };
+		6F3F1AB3250286DA000FF4DD /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
+		6F3F1AB5250286DB000FF4DD /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
+		6F3F1AB6250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
+		6F3F1AB7250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
+		6F3F1AB8250286DD000FF4DD /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
 		6F40920022DCF43D005F3850 /* Previewing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4091FF22DCF43D005F3850 /* Previewing.m */; };
 		6F40920122DCF43D005F3850 /* Previewing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4091FF22DCF43D005F3850 /* Previewing.m */; };
 		6F40920222DCF43D005F3850 /* Previewing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4091FF22DCF43D005F3850 /* Previewing.m */; };
@@ -7664,6 +7669,7 @@
 				6FC413D324EEEDC900FDF806 /* TopicSection.m in Sources */,
 				6FC413F724EF0DEA00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F331D6024D0769A00C096AB /* LiveView.swift in Sources */,
+				6F3F1AB3250286DA000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2ABF24E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F11CE9A24F4259100FF5D0B /* ShowsAccessCell.swift in Sources */,
 				6F331D6C24D076D500C096AB /* ProfileView.swift in Sources */,
@@ -7702,6 +7708,7 @@
 				6FC413DB24EEEDC900FDF806 /* TopicSection.m in Sources */,
 				6FC413F824EF0DEB00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F331D6124D0769A00C096AB /* LiveView.swift in Sources */,
+				6F3F1AB6250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC024E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F11CE9B24F4259100FF5D0B /* ShowsAccessCell.swift in Sources */,
 				6F331D6D24D076D500C096AB /* ProfileView.swift in Sources */,
@@ -7740,6 +7747,7 @@
 				6FC413E324EEEDCA00FDF806 /* TopicSection.m in Sources */,
 				6FC413F924EF0DEC00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F331D6224D0769A00C096AB /* LiveView.swift in Sources */,
+				6F3F1AB5250286DB000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC124E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F11CE9C24F4259100FF5D0B /* ShowsAccessCell.swift in Sources */,
 				6F331D6E24D076D500C096AB /* ProfileView.swift in Sources */,
@@ -7778,6 +7786,7 @@
 				6FC413EB24EEEDCA00FDF806 /* TopicSection.m in Sources */,
 				6FC413FA24EF0DED00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F331D6324D0769A00C096AB /* LiveView.swift in Sources */,
+				6F3F1AB7250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC224E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F11CE9D24F4259100FF5D0B /* ShowsAccessCell.swift in Sources */,
 				6F331D6F24D076D500C096AB /* ProfileView.swift in Sources */,
@@ -7816,6 +7825,7 @@
 				6FC413F324EEEDCB00FDF806 /* TopicSection.m in Sources */,
 				6FC413FB24EF0DEE00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F331D6424D0769A00C096AB /* LiveView.swift in Sources */,
+				6F3F1AB8250286DD000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC324E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F11CE9E24F4259100FF5D0B /* ShowsAccessCell.swift in Sources */,
 				6F331D7024D076D500C096AB /* ProfileView.swift in Sources */,

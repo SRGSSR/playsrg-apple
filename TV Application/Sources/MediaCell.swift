@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearance
 import SRGDataProviderModel
 import SwiftUI
 
@@ -85,8 +86,20 @@ struct MediaVisualView: View {
                 }
                 DurationLabel(media: media)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             .padding([.leading, .trailing, .bottom], 8)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            
+            if let isWebFirst = media?.play_isWebFirst, isWebFirst {
+                Text(NSLocalizedString("Web first", comment: "Web first label on media cells"))
+                    .font(.caption)
+                    .foregroundColor(.white)
+                    .padding([.top, .bottom], 5)
+                    .padding([.leading, .trailing], 8)
+                    .background(Color(.srg_blue))
+                    .cornerRadius(4)
+                    .padding([.leading, .top], 8)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            }
             
             BlockingOverlay(media: media)
         }
