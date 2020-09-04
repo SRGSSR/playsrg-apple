@@ -298,6 +298,10 @@ platform :ios do
     options = update_options_to_appstore(options)
 
     options[:team_id] = app_config.try_fetch_value(:team_id)
+
+    # TODO: Remove when Xcode 12 used to build iOS
+    xcode11_ignore_spm if options[:platform] == 'iOS'
+
     destination = 'generic/platform=' + options[:platform]
     lane_name = lane_context[SharedValues::LANE_NAME]
     output_directory = 'fastlane/export/' + lane_name + '/'
@@ -709,6 +713,17 @@ def beta_app_review_info
     contact_last_name: ENV['ITUNES_CONNECT_REVIEW_LAST_NAME'],
     contact_phone: ENV['ITUNES_CONNECT_REVIEW_PHONE']
   }
+end
+
+# Ignore SPM with Xcode 11, swift tools version 5.3.0 required.
+def xcode11_ignore_spm
+  Dir.chdir('..') do
+    file_name = 'PlaySRG.xcodeproj/project.pbxproj'
+    file = File.open(file_name, 'a+')
+    pbxproj = file.read
+    new_pbxproj = pbxproj.gsub('packageReferences =', 'packageReferences_ignored =')
+    File.open(file_name, 'w') { |f| f.write(new_pbxproj) }
+  end
 end
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
