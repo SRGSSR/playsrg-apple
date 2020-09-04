@@ -16,9 +16,9 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios iOSnightlies
+### ios nightlies
 ```
-fastlane ios iOSnightlies
+fastlane ios nightlies
 ```
 For each BUs, build a new iOS nightly on App Center
 ### ios tvOSnightlies

@@ -42,7 +42,7 @@ platform :ios do
   end
 
   desc 'For each BUs, build a new iOS nightly on App Center'
-  lane :iOSnightlies do
+  lane :nightlies do # TODO: rename to iOSnightlies with a CI update
     platform = 'iOS'
 
     build_number = latest_appcenter_build_number(appcenter_nightly_names)
