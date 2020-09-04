@@ -4,7 +4,16 @@
 //  License information is available from the LICENSE file.
 //
 
+// FIXME: Only SRGDataProviderModel when using SPM
+#import <TargetConditionals.h>
+
+#if TARGET_OS_IOS
 @import SRGDataProvider;
+#else
+@import SRGDataProviderModel;
+#endif
+// End of FIXME
+
 @import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -47,8 +56,8 @@ OBJC_EXPORT UIImage * _Nullable YouthProtectionImageForColor(SRGYouthProtectionC
 /**
  *  Return an image generated from the vector image at the specified path.
  *
- *  @param filePath The path of the vector image to use.
- *  @param scale    The scale of the image to create.
+ *  @param filePath   The path of the vector image to use.
+ *  @param imageScale The scale of the image to create.
  *
  *  @return The generated image, `nil` if generation failed or if the path is `nil`.
  */

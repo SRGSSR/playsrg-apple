@@ -1019,6 +1019,16 @@
 		6F58664C1DD226EE005DAFE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5866491DD226EE005DAFE4 /* Settings.bundle */; };
 		6F58664D1DD226EE005DAFE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5866491DD226EE005DAFE4 /* Settings.bundle */; };
 		6F58664E1DD226EE005DAFE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5866491DD226EE005DAFE4 /* Settings.bundle */; };
+		6F5AA59725024C4800718420 /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
+		6F5AA59825024C4900718420 /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
+		6F5AA59925024C4900718420 /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
+		6F5AA59A25024C4A00718420 /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
+		6F5AA59B25024C4B00718420 /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
+		6F5AA59C2502666A00718420 /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
+		6F5AA59D2502666B00718420 /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
+		6F5AA59E2502666C00718420 /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
+		6F5AA59F2502666C00718420 /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
+		6F5AA5A02502666C00718420 /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
 		6F5F4FC41DB10CFD0011CCA3 /* RelatedContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */; };
 		6F5F4FC51DB10CFD0011CCA3 /* RelatedContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */; };
 		6F5F4FC61DB10CFD0011CCA3 /* RelatedContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */; };
@@ -5261,6 +5271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F5AA59C2502666A00718420 /* CommonImages.xcassets in Resources */,
 				6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */,
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
@@ -5275,6 +5286,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F5AA59D2502666B00718420 /* CommonImages.xcassets in Resources */,
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB224EC3340006F2EC7 /* Localizable.strings in Resources */,
 				6F4FCB0924D07040002675EF /* Preview Assets.xcassets in Resources */,
@@ -5289,6 +5301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F5AA59E2502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
 				08777DB424EC3997006F2EC7 /* Localizable.strings in Resources */,
 				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
@@ -5303,6 +5316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F5AA59F2502666C00718420 /* CommonImages.xcassets in Resources */,
 				08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */,
@@ -5317,6 +5331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F5AA5A02502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
 				08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
@@ -7633,6 +7648,7 @@
 				6F331D6624D076C800C096AB /* SearchView.swift in Sources */,
 				6F331CE924D06B8200C096AB /* AudiosView.swift in Sources */,
 				6F331CE724D06B8200C096AB /* AppDelegate.swift in Sources */,
+				6F5AA59725024C4800718420 /* UIImage+PlaySRG.m in Sources */,
 				6FC413D424EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3224E452F800B1A56E /* HomeModel.swift in Sources */,
 				6FC413D324EEEDC900FDF806 /* TopicSection.m in Sources */,
@@ -7670,6 +7686,7 @@
 				6F331D6724D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAF824D06FF7002675EF /* AudiosView.swift in Sources */,
 				6F4FCAF724D06FF7002675EF /* AppDelegate.swift in Sources */,
+				6F5AA59825024C4900718420 /* UIImage+PlaySRG.m in Sources */,
 				6FC413DC24EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3324E452F800B1A56E /* HomeModel.swift in Sources */,
 				6FC413DB24EEEDC900FDF806 /* TopicSection.m in Sources */,
@@ -7707,6 +7724,7 @@
 				6F331D6824D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAFA24D06FF7002675EF /* AudiosView.swift in Sources */,
 				6F4FCAF924D06FF7002675EF /* AppDelegate.swift in Sources */,
+				6F5AA59925024C4900718420 /* UIImage+PlaySRG.m in Sources */,
 				6FC413E424EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3424E452F800B1A56E /* HomeModel.swift in Sources */,
 				6FC413E324EEEDCA00FDF806 /* TopicSection.m in Sources */,
@@ -7744,6 +7762,7 @@
 				6F331D6924D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAFC24D06FF7002675EF /* AudiosView.swift in Sources */,
 				6F4FCAFB24D06FF7002675EF /* AppDelegate.swift in Sources */,
+				6F5AA59A25024C4A00718420 /* UIImage+PlaySRG.m in Sources */,
 				6FC413EC24EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3524E452F800B1A56E /* HomeModel.swift in Sources */,
 				6FC413EB24EEEDCA00FDF806 /* TopicSection.m in Sources */,
@@ -7781,6 +7800,7 @@
 				6F331D6A24D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAFE24D06FF8002675EF /* AudiosView.swift in Sources */,
 				6F4FCAFD24D06FF8002675EF /* AppDelegate.swift in Sources */,
+				6F5AA59B25024C4B00718420 /* UIImage+PlaySRG.m in Sources */,
 				6FC413F424EEEDCB00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3624E452F800B1A56E /* HomeModel.swift in Sources */,
 				6FC413F324EEEDCB00FDF806 /* TopicSection.m in Sources */,

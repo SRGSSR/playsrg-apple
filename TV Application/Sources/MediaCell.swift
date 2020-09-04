@@ -35,6 +35,26 @@ struct DurationLabel: View {
     }
 }
 
+struct BlockingOverlay: View {
+    let media: SRGMedia?
+    
+    private var blockingIcon: UIImage? {
+        guard let blockingReason = media?.blockingReason(at: Date()) else { return nil }
+        return UIImage.play_image(for: blockingReason)
+    }
+    
+    var body: some View {
+        if let blockingIcon = blockingIcon {
+            ZStack {
+                Rectangle()
+                    .fill(Color(white: 0, opacity: 0.6))
+                Image(uiImage: blockingIcon)
+                    .colorInvert()
+            }
+        }
+    }
+}
+
 struct MediaVisualView: View {
     let media: SRGMedia?
     
@@ -45,11 +65,13 @@ struct MediaVisualView: View {
     }
     
     var body: some View {
-        ImageView(url: imageUrl)
-            .background(isFocused ? Color.red : Color.white)
-            .preference(key: FocusedKey.self, value: isFocused)
-            .overlay(DurationLabel(media: media), alignment: .bottomTrailing)
-            .whenRedacted { $0.hidden() }
+        ZStack {
+            ImageView(url: imageUrl)
+                .preference(key: FocusedKey.self, value: isFocused)
+                .overlay(DurationLabel(media: media), alignment: .bottomTrailing)
+                .whenRedacted { $0.hidden() }
+            BlockingOverlay(media: media)
+        }
     }
 }
 

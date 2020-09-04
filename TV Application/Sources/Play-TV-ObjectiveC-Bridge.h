@@ -8,4 +8,5 @@
 // Objective-C headers will be automatically exposed to all Swift source files.
 
 #import "ApplicationConfiguration.h"
+#import "UIImage+PlaySRG.h"
 #import "UIView+PlaySRG.h"
