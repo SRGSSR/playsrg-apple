@@ -33,19 +33,16 @@ struct HeroMediaCell: View {
     
     var body: some View {
         GeometryReader { geometry in
-            Button(action: {}) {
-                ZStack {
-                    MediaVisual(media: media, scale: .large, contentMode: .fill) {
-                        Rectangle()
-                            .fill(Color(white: 0, opacity: 0.4))
-                        DescriptionView(media: media)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                            .padding(60)
-                    }
+            ZStack {
+                MediaVisual(media: media, scale: .large, contentMode: .fill) {
+                    Rectangle()
+                        .fill(Color(white: 0, opacity: 0.4))
+                    DescriptionView(media: media)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                        .padding(60)
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height)
             }
-            .buttonStyle(CardButtonStyle())
+            .frame(width: geometry.size.width, height: geometry.size.height)
             .redacted(reason: redactionReason)
         }
     }

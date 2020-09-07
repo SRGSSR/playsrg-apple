@@ -30,14 +30,11 @@ struct MediaCell: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Button(action: {}) {
-                    MediaVisual(media: media, scale: .small, contentMode: .fit) {
-                        Rectangle()
-                            .fill(Color.clear)
-                    }
-                    .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                MediaVisual(media: media, scale: .small, contentMode: .fit) {
+                    Rectangle()
+                        .fill(Color.clear)
                 }
-                .buttonStyle(CardButtonStyle())
+                .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                 
                 DescriptionView(media: media)
                     .frame(width: geometry.size.width, alignment: .leading)

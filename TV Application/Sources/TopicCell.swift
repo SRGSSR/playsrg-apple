@@ -24,22 +24,19 @@ struct TopicCell: View {
     
     var body: some View {
         GeometryReader { geometry in
-            Button(action: {}) {
-                ZStack {
-                    ImageView(url: imageUrl)
-                        .whenRedacted { $0.hidden() }
-                    Rectangle()
-                        .fill(Color(white: 0, opacity: 0.4))
-                    Text(title)
-                        .srgFont(.regular, size: .headline)
-                        .lineLimit(1)
-                        .foregroundColor(.white)
-                        .padding(20)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
+            ZStack {
+                ImageView(url: imageUrl)
+                    .whenRedacted { $0.hidden() }
+                Rectangle()
+                    .fill(Color(white: 0, opacity: 0.4))
+                Text(title)
+                    .srgFont(.regular, size: .headline)
+                    .lineLimit(1)
+                    .foregroundColor(.white)
+                    .padding(20)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             }
-            .buttonStyle(CardButtonStyle())
+            .frame(width: geometry.size.width, height: geometry.size.height)
             .redacted(reason: redactionReason)
         }
     }
