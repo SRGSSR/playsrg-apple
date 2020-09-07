@@ -62,6 +62,15 @@ struct HomeView: View {
         }
     }
     
+    private static func isHeroAppearance(for item: HomeRowItem) -> Bool {
+        if case let .tvTrending(appearance: appearance) = item.rowId, appearance == .hero {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
     var body: some View {
         CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
             let rowId = model.rows[sectionIndex].section
@@ -81,16 +90,27 @@ struct HomeView: View {
             Group {
                 switch item.content {
                     case let .media(media):
-                        if case let .tvTrending(appearance: appearance) = item.rowId, appearance == .hero {
+                        if Self.isHeroAppearance(for: item) {
                             HeroMediaCell(media: media)
                         }
                         else {
                             MediaCell(media: media)
                         }
+                    case .mediaPlaceholder:
+                        if Self.isHeroAppearance(for: item) {
+                            HeroMediaCell(media: nil)
+                        }
+                        else {
+                            MediaCell(media: nil)
+                        }
                     case let .show(show):
                         ShowCell(show: show)
+                    case .showPlaceholder:
+                        ShowCell(show: nil)
                     case let .topic(topic):
                         TopicCell(topic: topic)
+                    case .topicPlaceholder:
+                        TopicCell(topic: nil)
                     case .showsAccess:
                         ShowsAccessCell()
                 }

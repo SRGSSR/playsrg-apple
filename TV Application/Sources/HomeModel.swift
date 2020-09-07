@@ -171,9 +171,15 @@ enum HomeRowId: Hashable {
 struct HomeRowItem: Hashable {
     // Various kinds of objects which can be displayed on the home.
     enum Content: Hashable {
+        case mediaPlaceholder(index: Int)
         case media(_ media: SRGMedia)
+        
+        case showPlaceholder(index: Int)
         case show(_ show: SRGShow)
+        
+        case topicPlaceholder(index: Int)
         case topic(_ topic: SRGTopic)
+        
         case showsAccess
     }
     
@@ -193,6 +199,8 @@ class HomeModel: Identifiable, ObservableObject {
         case audio(channel: RadioChannel)
         case live
     }
+    
+    static let numberOfPlaceholders = 10
     
     let id: Id
     let rowIds: [HomeRowId]
@@ -240,14 +248,20 @@ class HomeModel: Identifiable, ObservableObject {
         if let existingRow = self.rows.first(where: { $0.section == id }) {
             rows.append(existingRow)
         }
-        else if case .tvShowsAccess = id {
-            rows.append(Row(section: id, items: [HomeRowItem(rowId: id, content: .showsAccess)]))
-        }
-        else if case .radioShowsAccess = id {
-            rows.append(Row(section: id, items: [HomeRowItem(rowId: id, content: .showsAccess)]))
-        }
         else {
-            rows.append(Row(section: id, items: []))
+            func items(for id: HomeRowId) -> [HomeRowItem] {
+                switch id {
+                    case .tvShowsAccess, .radioShowsAccess:
+                        return [HomeRowItem(rowId: id, content: .showsAccess)]
+                    case .tvTopicsAccess:
+                        return (0..<Self.numberOfPlaceholders).map { HomeRowItem(rowId: id, content: .topicPlaceholder(index: $0)) }
+                    case .radioAllShows:
+                        return (0..<Self.numberOfPlaceholders).map { HomeRowItem(rowId: id, content: .showPlaceholder(index: $0)) }
+                    default:
+                        return (0..<Self.numberOfPlaceholders).map { HomeRowItem(rowId: id, content: .mediaPlaceholder(index: $0)) }
+                }
+            }
+            rows.append(Row(section: id, items: items(for: id)))
         }
     }
     
