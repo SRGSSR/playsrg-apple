@@ -48,6 +48,7 @@ struct ShowCell: View {
                 
                 Text(title)
                     .srgFont(.regular, size: .subtitle)
+                    .opacity(isFocused ? 1 : 0.5)
                     .frame(width: geometry.size.width, alignment: .leading)
                     .scaleEffect(isFocused ? 1.1 : 1)
                     .offset(x: 0, y: isFocused ? 10 : 0)
