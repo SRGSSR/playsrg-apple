@@ -27,21 +27,13 @@ struct HeroMediaCell: View {
     
     let media: SRGMedia?
     
-    @State private var isPresented = false
-    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
     
-    private func play() {
-        if media != nil {
-            isPresented.toggle()
-        }
-    }
-    
     var body: some View {
         GeometryReader { geometry in
-            Button(action: play) {
+            Button(action: {}) {
                 ZStack {
                     MediaVisual(media: media, scale: .large, contentMode: .fill) {
                         Rectangle()
@@ -55,9 +47,6 @@ struct HeroMediaCell: View {
             }
             .buttonStyle(CardButtonStyle())
             .redacted(reason: redactionReason)
-            .fullScreenCover(isPresented: $isPresented) {
-                PlayerView(media: media!)
-            }
         }
     }
 }

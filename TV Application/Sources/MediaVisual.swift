@@ -77,8 +77,6 @@ struct MediaVisual<Overlay: View>: View {
         self.overlay = overlay
     }
     
-    @Environment(\.isFocused) private var isFocused: Bool
-    
     private var imageUrl: URL? {
         return media?.imageURL(for: .width, withValue: SizeForImageScale(scale).width, type: .default)
     }
@@ -124,7 +122,6 @@ struct MediaVisual<Overlay: View>: View {
     var body: some View {
         ZStack {
             ImageView(url: imageUrl, contentMode: contentMode)
-                .preference(key: FocusedKey.self, value: isFocused)
                 .whenRedacted { $0.hidden() }
             overlay()
             

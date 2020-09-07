@@ -23,44 +23,26 @@ struct MediaCell: View {
     
     let media: SRGMedia?
     
-    @State private var isPresented = false
-    @State private var isFocused = false
-    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
-    }
-    
-    private func play() {
-        if media != nil {
-            isPresented.toggle()
-        }
     }
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Button(action: play) {
+                Button(action: {}) {
                     MediaVisual(media: media, scale: .small, contentMode: .fit) {
-                        Rectangle().fill(Color.clear)
-                    }.frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                        Rectangle()
+                            .fill(Color.clear)
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                 }
                 .buttonStyle(CardButtonStyle())
                 
                 DescriptionView(media: media)
                     .frame(width: geometry.size.width, alignment: .leading)
-                    .opacity(isFocused ? 1 : 0.5)
-                    .scaleEffect(isFocused ? 1.1 : 1)
-                    .offset(x: 0, y: isFocused ? 10 : 0)
-            }
-            .onPreferenceChange(FocusedKey.self) { value in
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    isFocused = value
-                }
             }
             .redacted(reason: redactionReason)
-            .fullScreenCover(isPresented: $isPresented) {
-                PlayerView(media: media!)
-            }
         }
     }
 }

@@ -75,10 +75,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             hostController = nil
         }
         
-        override var canBecomeFocused: Bool {
-            return false
-        }
-        
         var hostedCell: Cell? {
             willSet {
                 // Creating a `UIHostingController` is cheap.
