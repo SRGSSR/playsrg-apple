@@ -87,33 +87,31 @@ struct HomeView: View {
             
             return section
         } cell: { indexPath, item in
-            Group {
-                switch item.content {
-                    case let .media(media):
-                        if Self.isHeroAppearance(for: item) {
-                            HeroMediaCell(media: media)
-                        }
-                        else {
-                            MediaCell(media: media)
-                        }
-                    case .mediaPlaceholder:
-                        if Self.isHeroAppearance(for: item) {
-                            HeroMediaCell(media: nil)
-                        }
-                        else {
-                            MediaCell(media: nil)
-                        }
-                    case let .show(show):
-                        ShowCell(show: show)
-                    case .showPlaceholder:
-                        ShowCell(show: nil)
-                    case let .topic(topic):
-                        TopicCell(topic: topic)
-                    case .topicPlaceholder:
-                        TopicCell(topic: nil)
-                    case .showsAccess:
-                        ShowsAccessCell()
-                }
+            switch item.content {
+                case let .media(media):
+                    if Self.isHeroAppearance(for: item) {
+                        HeroMediaCell(media: media)
+                    }
+                    else {
+                        MediaCell(media: media)
+                    }
+                case .mediaPlaceholder:
+                    if Self.isHeroAppearance(for: item) {
+                        HeroMediaCell(media: nil)
+                    }
+                    else {
+                        MediaCell(media: nil)
+                    }
+                case let .show(show):
+                    ShowCell(show: show)
+                case .showPlaceholder:
+                    ShowCell(show: nil)
+                case let .topic(topic):
+                    TopicCell(topic: topic)
+                case .topicPlaceholder:
+                    TopicCell(topic: nil)
+                case .showsAccess:
+                    ShowsAccessCell()
             }
         } supplementaryView: { kind, indexPath in
             if kind == UICollectionView.elementKindSectionHeader {
