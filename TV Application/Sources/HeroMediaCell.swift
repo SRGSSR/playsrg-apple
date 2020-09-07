@@ -13,11 +13,11 @@ struct HeroMediaCell: View {
         var body: some View {
             VStack {
                 Text(MediaDescription.title(for: media))
-                    .font(.title2)
+                    .srgFont(.bold, size: .title)
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
                 Text(MediaDescription.subtitle(for: media))
-                    .font(.body)
+                    .srgFont(.regular, size: .headline)
                     .lineLimit(1)
             }
             .foregroundColor(.white)

@@ -31,9 +31,11 @@ struct TopicCell: View {
                     Rectangle()
                         .fill(Color(white: 0, opacity: 0.4))
                     Text(title)
+                        .srgFont(.regular, size: .headline)
                         .lineLimit(1)
                         .foregroundColor(.white)
-                        .padding()
+                        .padding(20)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }

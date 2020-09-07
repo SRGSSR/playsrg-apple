@@ -24,7 +24,7 @@ struct MediaVisual<Overlay: View>: View {
         var body: some View {
             if let duration = duration {
                 Text(duration)
-                    .font(.caption)
+                    .srgFont(.regular, size: .caption)
                     .foregroundColor(.white)
                     .padding([.top, .bottom], 5)
                     .padding([.leading, .trailing], 8)
@@ -60,7 +60,7 @@ struct MediaVisual<Overlay: View>: View {
         
         var body: some View {
             Text(text)
-                .font(.caption)
+                .srgFont(.regular, size: .caption)
                 .foregroundColor(.white)
                 .padding([.top, .bottom], 5)
                 .padding([.leading, .trailing], 8)

@@ -50,7 +50,7 @@ struct HomeView: View {
             
             if rowId.title != nil {
                 let header = NSCollectionLayoutBoundarySupplementaryItem(
-                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(66)),
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)),
                     elementKind: UICollectionView.elementKindSectionHeader,
                     alignment: .topLeading
                 )
@@ -81,8 +81,8 @@ struct HomeView: View {
                 let rowId = model.rows[indexPath.section].section
                 if let title = rowId.title {
                     Text(title)
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .srgFont(.regular, size: .title)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                 }
             }
         }
