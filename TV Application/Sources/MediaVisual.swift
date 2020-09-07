@@ -102,8 +102,8 @@ struct MediaVisual<Overlay: View>: View {
         guard let media = media else { return nil }
         
         let now = Date()
-        let availabilty = media.timeAvailability(at: now)
-        switch availabilty {
+        let availability = media.timeAvailability(at: now)
+        switch availability {
             case .notAvailableAnymore:
                 return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), .gray)
             case .available:
