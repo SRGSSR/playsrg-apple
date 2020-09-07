@@ -126,6 +126,8 @@ struct MediaVisual<Overlay: View>: View {
                 .whenRedacted { $0.hidden() }
             overlay()
             
+            BlockingOverlay(media: media)
+            
             HStack(spacing: 4) {
                 if media?.presentation == .presentation360 {
                     Image("360_media-25")
@@ -150,8 +152,6 @@ struct MediaVisual<Overlay: View>: View {
             }
             .padding([.leading, .top], 8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            
-            BlockingOverlay(media: media)
         }
     }
 }
