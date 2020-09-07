@@ -11,30 +11,10 @@ struct MediaCell: View {
     private struct DescriptionView: View {
         let media: SRGMedia?
         
-        static private func showName(for media: SRGMedia) -> String? {
-            guard let show = media.show else { return nil }
-            return !media.title.contains(show.title) ? show.title : nil
-        }
-        
-        private var title: String {
-            guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
-            return media.title
-        }
-        
-        private var subtitle: String {
-            guard let media = media else { return String(repeating: " ", count: .random(in: 20..<30)) }
-            if let showName = Self.showName(for: media) {
-                return "\(showName) - \(DateFormatters.formattedRelativeDate(for: media.date))"
-            }
-            else {
-                return DateFormatters.formattedRelativeDateAndTime(for: media.date)
-            }
-        }
-        
         var body: some View {
-            Text(title)
+            Text(MediaDescription.title(for: media))
                 .lineLimit(2)
-            Text(subtitle)
+            Text(MediaDescription.subtitle(for: media))
                 .font(.caption)
                 .lineLimit(1)
         }
