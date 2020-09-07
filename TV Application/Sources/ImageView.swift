@@ -24,7 +24,6 @@ struct ImageView: View {
                     .aspectRatio(contentMode: contentMode)
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .clipped()
-                    .animation(.default)
                     .onAppear(perform: image.fetch)
                     .onDisappear(perform: image.cancel)
             }
@@ -40,8 +39,11 @@ struct ImageView: View {
     }
     
     var body: some View {
-        if let url = url {
-            FetchView(url: url, contentMode: contentMode)
+        ZStack {
+            if let url = url {
+                FetchView(url: url, contentMode: contentMode)
+            }
         }
+        .animation(.default)
     }
 }
