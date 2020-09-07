@@ -109,7 +109,7 @@ struct MediaVisual<Overlay: View>: View {
             case .available:
                 guard let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream else { return nil }
                 if let remainingDays = Self.formattedDuration(from: now, to: endDate) {
-                    return (NSLocalizedString("\(remainingDays) left", comment: "Short label displayed on medias expiring soon"), .orange)
+                    return (NSLocalizedString("\(remainingDays) left", comment: "Short label displayed on medias expiring soon"), Color(.play_orange))
                 }
                 else {
                     return nil
