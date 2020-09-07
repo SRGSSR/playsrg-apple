@@ -4,10 +4,36 @@
 //  License information is available from the LICENSE file.
 //
 
-import SRGDataProviderModel
 import SwiftUI
 
 struct HeroMediaCell: View {
+    private struct DescriptionView: View {
+        let media: SRGMedia?
+        
+        private var title: String {
+            guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
+            return media.title
+        }
+        
+        private var subtitle: String {
+            guard let media = media else { return String(repeating: " ", count: .random(in: 12..<18)) }
+            return DateFormatters.formattedRelativeDateAndTime(for: media.date)
+        }
+        
+        var body: some View {
+            VStack {
+                Text(title)
+                    .font(.title2)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
+                Text(subtitle)
+                    .font(.body)
+                    .lineLimit(1)
+            }
+            .foregroundColor(.white)
+        }
+    }
+    
     let media: SRGMedia?
     
     @State private var isPresented = false
@@ -45,34 +71,6 @@ struct HeroMediaCell: View {
             .fullScreenCover(isPresented: $isPresented) {
                 PlayerView(media: media!)
             }
-        }
-    }
-}
-
-struct DescriptionView: View {
-    let media: SRGMedia?
-    
-    private var title: String {
-        guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
-        return media.title
-    }
-    
-    private var subtitle: String {
-        guard let media = media else { return String(repeating: " ", count: .random(in: 12..<18)) }
-        return DateFormatters.formattedRelativeDateAndTime(for: media.date)
-    }
-    
-    var body: some View {
-        VStack {
-            Text(title)
-                .font(.title2)
-                .lineLimit(2)
-                .multilineTextAlignment(.center)
-                .foregroundColor(.white)
-            Text(subtitle)
-                .font(.body)
-                .lineLimit(1)
-                .foregroundColor(.white)
         }
     }
 }
