@@ -8,15 +8,29 @@ import SRGDataProviderModel
 import SwiftUI
 
 struct ShowCell: View {
+    private struct VisualView: View {
+        let show: SRGShow?
+        
+        @Environment(\.isFocused) private var isFocused: Bool
+        
+        private var imageUrl: URL? {
+            return show?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
+        }
+        
+        var body: some View {
+            ImageView(url: imageUrl)
+                .preference(key: FocusedKey.self, value: isFocused)
+                .whenRedacted { $0.hidden() }
+        }
+    }
+    
     let show: SRGShow?
+    
+    @State private var isFocused = false
     
     private var title: String {
         guard let show = show else { return String(repeating: " ", count: .random(in: 10..<20)) }
         return show.title
-    }
-    
-    private var imageUrl: URL? {
-        return show?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
     }
     
     private var redactionReason: RedactionReasons {
@@ -25,19 +39,24 @@ struct ShowCell: View {
     
     var body: some View {
         GeometryReader { geometry in
-            Button(action: {}) {
-                ZStack {
-                    ImageView(url: imageUrl)
-                        .whenRedacted { $0.hidden() }
-                    Rectangle()
-                        .fill(Color(white: 0, opacity: 0.4))
-                    Text(title)
-                        .foregroundColor(.white)
-                        .padding()
+            VStack {
+                Button(action: {}) {
+                    VisualView(show: show)
+                        .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height)
+                .buttonStyle(CardButtonStyle())
+                
+                Text(title)
+                    .srgFont(.regular, size: .subtitle)
+                    .frame(width: geometry.size.width, alignment: .leading)
+                    .scaleEffect(isFocused ? 1.1 : 1)
+                    .offset(x: 0, y: isFocused ? 10 : 0)
             }
-            .buttonStyle(CardButtonStyle())
+            .onPreferenceChange(FocusedKey.self) { value in
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    isFocused = value
+                }
+            }
             .redacted(reason: redactionReason)
         }
     }

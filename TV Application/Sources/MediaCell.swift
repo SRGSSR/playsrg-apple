@@ -24,9 +24,6 @@ struct MediaCell: View {
     let media: SRGMedia?
     
     @State private var isPresented = false
-    
-    /// Focus is received by the Button, detected in its title view, and bubbled up with preferences so that we
-    /// can apply a similar focused appearance to the sibling description view.
     @State private var isFocused = false
     
     private var redactionReason: RedactionReasons {
