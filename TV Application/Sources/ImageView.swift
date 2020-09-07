@@ -23,6 +23,7 @@ struct ImageView: View {
                     .resizable()
                     .aspectRatio(contentMode: contentMode)
                     .frame(width: geometry.size.width, height: geometry.size.height)
+                    .clipped()
                     .animation(.default)
                     .onAppear(perform: image.fetch)
                     .onDisappear(perform: image.cancel)
