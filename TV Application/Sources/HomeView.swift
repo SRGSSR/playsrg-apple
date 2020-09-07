@@ -43,14 +43,33 @@ struct HomeView: View {
         return section
     }
     
+    private static func lead(for rowId: HomeRowId) -> String? {
+        if case let .tvLatestForModule(module, type: _) = rowId {
+            return module?.lead
+        }
+        else {
+            return nil
+        }
+    }
+    
+    private static func swimlaneSectionHeaderHeight(for rowId: HomeRowId) -> CGFloat? {
+        guard rowId.title != nil else { return nil }
+        if let lead = Self.lead(for: rowId), !lead.isEmpty {
+            return 140
+        }
+        else {
+            return 100
+        }
+    }
+    
     var body: some View {
         CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
             let rowId = model.rows[sectionIndex].section
             let section = Self.swimlaneSectionLayout(for: rowId)
             
-            if rowId.title != nil {
+            if let headerHeight = Self.swimlaneSectionHeaderHeight(for: rowId) {
                 let header = NSCollectionLayoutBoundarySupplementaryItem(
-                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)),
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight)),
                     elementKind: UICollectionView.elementKindSectionHeader,
                     alignment: .topLeading
                 )
@@ -78,12 +97,21 @@ struct HomeView: View {
             }
         } supplementaryView: { kind, indexPath in
             if kind == UICollectionView.elementKindSectionHeader {
-                let rowId = model.rows[indexPath.section].section
-                if let title = rowId.title {
-                    Text(title)
-                        .srgFont(.regular, size: .title)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                VStack(alignment: .leading) {
+                    let rowId = model.rows[indexPath.section].section
+                    if let title = rowId.title {
+                        Text(title)
+                            .srgFont(.regular, size: .title)
+                            .lineLimit(1)
+                    }
+                    if let lead = Self.lead(for: rowId) {
+                        Text(lead)
+                            .srgFont(.regular, size: .headline)
+                            .lineLimit(1)
+                            .opacity(0.8)
+                    }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             }
         }
         .synchronizeParentTabScrolling()

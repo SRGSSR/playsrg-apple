@@ -19,6 +19,7 @@ struct HeroMediaCell: View {
                 Text(MediaDescription.subtitle(for: media))
                     .srgFont(.regular, size: .headline)
                     .lineLimit(1)
+                    .opacity(0.6)
             }
             .foregroundColor(.white)
         }
