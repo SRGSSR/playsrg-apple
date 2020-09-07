@@ -42,9 +42,9 @@ struct HeroMediaCell: View {
             }
             .buttonStyle(CardButtonStyle())
             .redacted(reason: redactionReason)
-            .fullScreenCover(isPresented: $isPresented, content: {
+            .fullScreenCover(isPresented: $isPresented) {
                 PlayerView(media: media!)
-            })
+            }
         }
     }
 }
