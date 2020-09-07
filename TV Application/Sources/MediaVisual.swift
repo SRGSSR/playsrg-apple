@@ -6,13 +6,13 @@
 
 import SwiftUI
 
-struct MediaVisual: View {
-    struct FocusedKey: PreferenceKey {
-        static var defaultValue: Bool = false
-        
-        static func reduce(value: inout Bool, nextValue: () -> Bool) {}
-    }
+struct FocusedKey: PreferenceKey {
+    static var defaultValue: Bool = false
     
+    static func reduce(value: inout Bool, nextValue: () -> Bool) {}
+}
+
+struct MediaVisual<Overlay: View>: View {
     private struct DurationLabel: View {
         let media: SRGMedia?
         
@@ -70,11 +70,21 @@ struct MediaVisual: View {
     }
     
     let media: SRGMedia?
+    let scale: ImageScale
+    let contentMode: ContentMode
+    var overlay: () -> Overlay
+    
+    init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode, @ViewBuilder overlay: @escaping () -> Overlay) {
+        self.media = media
+        self.scale = scale
+        self.contentMode = contentMode
+        self.overlay = overlay
+    }
     
     @Environment(\.isFocused) private var isFocused: Bool
     
     private var imageUrl: URL? {
-        return media?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
+        return media?.imageURL(for: .width, withValue: SizeForImageScale(scale).width, type: .default)
     }
     
     private var youthProtectionLogoImage: UIImage? {
@@ -117,9 +127,10 @@ struct MediaVisual: View {
     
     var body: some View {
         ZStack {
-            ImageView(url: imageUrl)
+            ImageView(url: imageUrl, contentMode: contentMode)
                 .preference(key: FocusedKey.self, value: isFocused)
                 .whenRedacted { $0.hidden() }
+            overlay()
             
             HStack(spacing: 4) {
                 if media?.presentation == .presentation360 {

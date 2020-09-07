@@ -42,8 +42,9 @@ struct MediaCell: View {
         GeometryReader { geometry in
             VStack {
                 Button(action: play) {
-                    MediaVisual(media: media)
-                        .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                    MediaVisual(media: media, scale: .small, contentMode: .fit) {
+                        Rectangle().fill(Color.clear)
+                    }.frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                 }
                 .buttonStyle(CardButtonStyle())
                 
@@ -52,7 +53,7 @@ struct MediaCell: View {
                     .scaleEffect(isFocused ? 1.1 : 1)
                     .offset(x: 0, y: isFocused ? 10 : 0)
             }
-            .onPreferenceChange(MediaVisual.FocusedKey.self) { value in
+            .onPreferenceChange(FocusedKey.self) { value in
                 withAnimation(.easeInOut(duration: 0.2)) {
                     isFocused = value
                 }

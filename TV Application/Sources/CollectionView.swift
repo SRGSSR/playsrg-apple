@@ -145,10 +145,10 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     let sectionLayoutProvider: (Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection
     
     /// Cell view builder.
-    let cellBuilder: (IndexPath, Item) -> Cell
+    let cell: (IndexPath, Item) -> Cell
     
     /// Supplementary view builder
-    let supplementaryViewBuilder: (String, IndexPath) -> SupplementaryView
+    let supplementaryView: (String, IndexPath) -> SupplementaryView
     
     /// If `true`, tabs move in sync with the collection.
     fileprivate var parentTabScrollingEnabled: Bool = false
@@ -158,12 +158,12 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
      */
     init(rows: [CollectionRow<Section, Item>],
          sectionLayoutProvider: @escaping (Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection,
-         @ViewBuilder cellBuilder: @escaping (IndexPath, Item) -> Cell,
-         @ViewBuilder supplementaryViewBuilder: @escaping (String, IndexPath) -> SupplementaryView) {
+         @ViewBuilder cell: @escaping (IndexPath, Item) -> Cell,
+         @ViewBuilder supplementaryView: @escaping (String, IndexPath) -> SupplementaryView) {
         self.rows = rows
         self.sectionLayoutProvider = sectionLayoutProvider
-        self.cellBuilder = cellBuilder
-        self.supplementaryViewBuilder = supplementaryViewBuilder
+        self.cell = cell
+        self.supplementaryView = supplementaryView
     }
     
     /**
@@ -198,9 +198,9 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         collectionView.register(HostCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
         let dataSource = Coordinator.DataSource(collectionView: collectionView) { collectionView, indexPath, item -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? HostCell
-            cell?.hostedCell = cellBuilder(indexPath, item)
-            return cell
+            let hostCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? HostCell
+            hostCell?.hostedCell = cell(indexPath, item)
+            return hostCell
         }
         context.coordinator.dataSource = dataSource
         
@@ -212,7 +212,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             }
             
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: supplementaryViewIdentifier, for: indexPath) as? HostSupplementaryView
-            view?.hostedSupplementaryView = supplementaryViewBuilder(kind, indexPath)
+            view?.hostedSupplementaryView = supplementaryView(kind, indexPath)
             return view
         }
         

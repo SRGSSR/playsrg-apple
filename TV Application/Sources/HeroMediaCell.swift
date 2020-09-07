@@ -10,23 +10,13 @@ struct HeroMediaCell: View {
     private struct DescriptionView: View {
         let media: SRGMedia?
         
-        private var title: String {
-            guard let media = media else { return String(repeating: " ", count: .random(in: 15..<30)) }
-            return media.title
-        }
-        
-        private var subtitle: String {
-            guard let media = media else { return String(repeating: " ", count: .random(in: 12..<18)) }
-            return DateFormatters.formattedRelativeDateAndTime(for: media.date)
-        }
-        
         var body: some View {
             VStack {
-                Text(title)
+                Text(MediaDescription.title(for: media))
                     .font(.title2)
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
-                Text(subtitle)
+                Text(MediaDescription.subtitle(for: media))
                     .font(.body)
                     .lineLimit(1)
             }
@@ -37,10 +27,6 @@ struct HeroMediaCell: View {
     let media: SRGMedia?
     
     @State private var isPresented = false
-    
-    private var imageUrl: URL? {
-        return media?.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
-    }
     
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
@@ -56,13 +42,13 @@ struct HeroMediaCell: View {
         GeometryReader { geometry in
             Button(action: play) {
                 ZStack {
-                    ImageView(url: imageUrl, contentMode: .fill)
-                        .whenRedacted { $0.hidden() }
-                    Rectangle()
-                        .fill(Color(white: 0, opacity: 0.4))
-                    DescriptionView(media: media)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                        .padding(60)
+                    MediaVisual(media: media, scale: .large, contentMode: .fill) {
+                        Rectangle()
+                            .fill(Color(white: 0, opacity: 0.4))
+                        DescriptionView(media: media)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                            .padding(60)
+                    }
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }

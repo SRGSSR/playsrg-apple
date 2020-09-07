@@ -58,7 +58,7 @@ struct HomeView: View {
             }
             
             return section
-        } cellBuilder: { indexPath, item in
+        } cell: { indexPath, item in
             Group {
                 switch item.content {
                     case let .media(media):
@@ -76,7 +76,7 @@ struct HomeView: View {
                         ShowsAccessCell()
                 }
             }
-        } supplementaryViewBuilder: { kind, indexPath in
+        } supplementaryView: { kind, indexPath in
             if kind == UICollectionView.elementKindSectionHeader {
                 let rowId = model.rows[indexPath.section].section
                 if let title = rowId.title {
