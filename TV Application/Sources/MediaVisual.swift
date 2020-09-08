@@ -42,7 +42,7 @@ struct MediaVisual<Overlay: View>: View {
                     Rectangle()
                         .fill(Color(white: 0, opacity: 0.6))
                     Image(uiImage: blockingIconImage)
-                        .colorInvert()
+                        .foregroundColor(.white)
                 }
             }
         }
@@ -131,7 +131,7 @@ struct MediaVisual<Overlay: View>: View {
             HStack(spacing: 4) {
                 if media?.presentation == .presentation360 {
                     Image("360_media-25")
-                        .colorInvert()
+                        .foregroundColor(.white)
                 }
                 Spacer()
                 if let youthProtectionLogoImage = youthProtectionLogoImage {
@@ -153,5 +153,11 @@ struct MediaVisual<Overlay: View>: View {
             .padding([.leading, .top], 8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
+    }
+}
+
+struct MediaVisual_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }
