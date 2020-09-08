@@ -30,6 +30,7 @@ struct MediaVisual<Overlay: View>: View {
 
     private struct BlockingOverlay: View {
         let media: SRGMedia?
+        let scale: ImageScale
         
         private var blockingIconImage: UIImage? {
             guard let blockingReason = media?.blockingReason(at: Date()) else { return nil }
@@ -43,6 +44,7 @@ struct MediaVisual<Overlay: View>: View {
                         .fill(Color(white: 0, opacity: 0.6))
                     Image(uiImage: blockingIconImage)
                         .foregroundColor(.white)
+                        .scaleEffect(scale == .small ? 0.6 : scale == .medium ? 0.8 : 1.0)
                 }
             }
         }
@@ -126,7 +128,7 @@ struct MediaVisual<Overlay: View>: View {
                 .whenRedacted { $0.hidden() }
             overlay()
             
-            BlockingOverlay(media: media)
+            BlockingOverlay(media: media, scale: scale)
             
             HStack(spacing: 4) {
                 if media?.presentation == .presentation360 {
