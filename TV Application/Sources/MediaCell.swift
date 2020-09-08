@@ -23,6 +23,8 @@ struct MediaCell: View {
     
     let media: SRGMedia?
     
+    @Environment(\.isFocused) private var isFocused: Bool
+    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -35,11 +37,17 @@ struct MediaCell: View {
                         .fill(Color.clear)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                .cornerRadius(12)
+                .shadow(radius: isFocused ? 20 : 0)
                 
                 DescriptionView(media: media)
+                    .opacity(isFocused ? 1 : 0.5)
                     .frame(width: geometry.size.width, alignment: .leading)
             }
+            .scaleEffect(isFocused ? 1.1 : 1)
+            .offset(x: 0, y: isFocused ? 10 : 0)
             .redacted(reason: redactionReason)
+            .animation(.default)
         }
     }
 }

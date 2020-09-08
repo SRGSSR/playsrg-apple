@@ -4,11 +4,12 @@
 //  License information is available from the LICENSE file.
 //
 
-import SRGDataProviderModel
 import SwiftUI
 
 struct TopicCell: View {
     let topic: SRGTopic?
+    
+    @Environment(\.isFocused) private var isFocused: Bool
     
     private var title: String {
         return topic?.title ?? ""
@@ -37,7 +38,11 @@ struct TopicCell: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
+            .cornerRadius(12)
+            .shadow(radius: isFocused ? 20 : 0)
+            .scaleEffect(isFocused ? 1.1 : 1)
             .redacted(reason: redactionReason)
+            .animation(.default)
         }
     }
 }

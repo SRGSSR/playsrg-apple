@@ -27,6 +27,8 @@ struct HeroMediaCell: View {
     
     let media: SRGMedia?
     
+    @Environment(\.isFocused) private var isFocused: Bool
+    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -43,7 +45,11 @@ struct HeroMediaCell: View {
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
+            .cornerRadius(12)
+            .shadow(radius: isFocused ? 20 : 0)
+            .scaleEffect(isFocused ? 1.02 : 1)
             .redacted(reason: redactionReason)
+            .animation(.default)
         }
     }
 }
