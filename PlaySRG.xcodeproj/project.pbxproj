@@ -1364,11 +1364,6 @@
 		6FC8866D1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866E1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866F1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
-		6FCC73AE24E6E68600ECF73F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC73AD24E6E68600ECF73F /* PlayerView.swift */; };
-		6FCC73AF24E6E68600ECF73F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC73AD24E6E68600ECF73F /* PlayerView.swift */; };
-		6FCC73B024E6E68600ECF73F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC73AD24E6E68600ECF73F /* PlayerView.swift */; };
-		6FCC73B124E6E68600ECF73F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC73AD24E6E68600ECF73F /* PlayerView.swift */; };
-		6FCC73B224E6E68600ECF73F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC73AD24E6E68600ECF73F /* PlayerView.swift */; };
 		6FCC73BA24E6F8EE00ECF73F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC73B924E6F8EE00ECF73F /* HomeView.swift */; };
 		6FCC73BB24E6F8EE00ECF73F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC73B924E6F8EE00ECF73F /* HomeView.swift */; };
 		6FCC73BC24E6F8EE00ECF73F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC73B924E6F8EE00ECF73F /* HomeView.swift */; };
@@ -2369,7 +2364,6 @@
 		6FC4140124EF11F400FDF806 /* Play-TV-ObjectiveC-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Play-TV-ObjectiveC-Bridge.h"; sourceTree = "<group>"; };
 		6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGProgram+PlaySRG.h"; sourceTree = "<group>"; };
 		6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGProgram+PlaySRG.m"; sourceTree = "<group>"; };
-		6FCC73AD24E6E68600ECF73F /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		6FCC73B924E6F8EE00ECF73F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		6FD1204A24D19268008CB2F8 /* SRFAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SRFAssets.xcassets; sourceTree = "<group>"; };
 		6FD1205124D1927A008CB2F8 /* RTSAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RTSAssets.xcassets; sourceTree = "<group>"; };
@@ -3723,7 +3717,6 @@
 				6FF8F155250609CF009A741F /* MediaDescription.swift */,
 				6F3F1AB925060496000FF4DD /* MediaVisual.swift */,
 				6FC4140124EF11F400FDF806 /* Play-TV-ObjectiveC-Bridge.h */,
-				6FCC73AD24E6E68600ECF73F /* PlayerView.swift */,
 				6F331D6B24D076D500C096AB /* ProfileView.swift */,
 				6FFCC5E324EFBF2100805B0F /* RadioChannel.swift */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
@@ -7680,7 +7673,6 @@
 				6F4BCBE124EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BA24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
-				6FCC73AE24E6E68600ECF73F /* PlayerView.swift in Sources */,
 				6F331D6624D076C800C096AB /* SearchView.swift in Sources */,
 				6F331CE924D06B8200C096AB /* AudiosView.swift in Sources */,
 				6F331CE724D06B8200C096AB /* AppDelegate.swift in Sources */,
@@ -7722,7 +7714,6 @@
 				6F4BCBE224EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BB24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
-				6FCC73AF24E6E68600ECF73F /* PlayerView.swift in Sources */,
 				6F331D6724D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAF824D06FF7002675EF /* AudiosView.swift in Sources */,
 				6F4FCAF724D06FF7002675EF /* AppDelegate.swift in Sources */,
@@ -7764,7 +7755,6 @@
 				6F4BCBE324EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BC24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
-				6FCC73B024E6E68600ECF73F /* PlayerView.swift in Sources */,
 				6F331D6824D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAFA24D06FF7002675EF /* AudiosView.swift in Sources */,
 				6F4FCAF924D06FF7002675EF /* AppDelegate.swift in Sources */,
@@ -7806,7 +7796,6 @@
 				6F4BCBE424EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BD24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
-				6FCC73B124E6E68600ECF73F /* PlayerView.swift in Sources */,
 				6F331D6924D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAFC24D06FF7002675EF /* AudiosView.swift in Sources */,
 				6F4FCAFB24D06FF7002675EF /* AppDelegate.swift in Sources */,
@@ -7848,7 +7837,6 @@
 				6F4BCBE524EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BE24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6FB1ADFE24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
-				6FCC73B224E6E68600ECF73F /* PlayerView.swift in Sources */,
 				6F331D6A24D076C800C096AB /* SearchView.swift in Sources */,
 				6F4FCAFE24D06FF8002675EF /* AudiosView.swift in Sources */,
 				6F4FCAFD24D06FF8002675EF /* AppDelegate.swift in Sources */,
