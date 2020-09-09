@@ -28,7 +28,7 @@ struct HeroMediaCell: View {
                     Spacer()
                         .frame(height: 40)
                     Text(summary)
-                        .srgFont(.regular, size: .body)
+                        .srgFont(.regular, size: .subtitle)
                         .lineLimit(4)
                         .multilineTextAlignment(.center)
                         .opacity(0.8)
