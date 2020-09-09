@@ -5,6 +5,7 @@
 //
 
 import Firebase
+import SRGAppearance
 import SRGDataProvider
 import SwiftUI
 import UIKit
@@ -12,6 +13,25 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    
+    private static func configuredTabBarController() -> UITabBarController {
+        let tabBarController = UITabBarController()
+        tabBarController.view.backgroundColor = .play_black
+        
+        let appearance = UITabBarAppearance()
+        appearance.backgroundColor = .play_cardGrayBackground
+        appearance.selectionIndicatorTintColor = .srg_color(fromHexadecimalString: "#979797")
+        
+        let itemAppearance = appearance.inlineLayoutAppearance
+        itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIFont.srg_mediumFont(withSize: 28),
+                                                     NSAttributedString.Key.foregroundColor: UIColor.white]
+        itemAppearance.focused.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.srg_color(fromHexadecimalString: "#161616")!]
+        
+        tabBarController.tabBar.standardAppearance = appearance
+        return tabBarController
+    }
+    
+    // MARK: - UIApplicationDelegate protocol
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if let _ = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") {
@@ -55,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         profileViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Profile", comment: "Profile tab title"), image: nil, tag: 4)
         viewControllers.append(profileViewController)
         
-        let tabBarController = UITabBarController()
+        let tabBarController = Self.configuredTabBarController()
         tabBarController.viewControllers = viewControllers
         window.rootViewController = tabBarController
         return true
