@@ -43,6 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewControllers.append(liveViewController)
         }
         
+        let showsViewController = UIHostingController(rootView: ShowsView())
+        showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
+        viewControllers.append(showsViewController)
+        
         let searchViewController = UIHostingController(rootView: SearchView())
         searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 3)
         viewControllers.append(searchViewController)
