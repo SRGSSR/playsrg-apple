@@ -158,6 +158,15 @@ enum HomeRowId: Hashable {
             return nil
         }
     }
+    
+    var lead: String? {
+        if case let .tvLatestForModule(module, type: _) = self {
+            return module?.lead
+        }
+        else {
+            return nil
+        }
+    }
 }
 
 struct HomeRowItem: Hashable {
