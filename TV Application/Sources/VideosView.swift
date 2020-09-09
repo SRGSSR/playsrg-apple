@@ -20,8 +20,3 @@ struct VideosView: View {
     }
 }
 
-struct VideosView_Previews: PreviewProvider {
-    static var previews: some View {
-        VideosView()
-    }
-}

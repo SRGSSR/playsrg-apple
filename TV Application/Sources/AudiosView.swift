@@ -83,9 +83,3 @@ struct RadioChannelView: View {
             }
     }
 }
-
-struct AudiosView_Previews: PreviewProvider {
-    static var previews: some View {
-        AudiosView()
-    }
-}

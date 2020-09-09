@@ -18,9 +18,3 @@ struct ShowsAccessCell: View {
         }
     }
 }
-
-struct ShowsAccessCell_Previews: PreviewProvider {
-    static var previews: some View {
-        ShowsAccessCell()
-    }
-}

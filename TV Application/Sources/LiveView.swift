@@ -19,9 +19,3 @@ struct LiveView: View {
             }
     }
 }
-
-struct LivestreamsView_Previews: PreviewProvider {
-    static var previews: some View {
-        LiveView()
-    }
-}
