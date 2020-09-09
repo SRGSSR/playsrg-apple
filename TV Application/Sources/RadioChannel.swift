@@ -7,20 +7,20 @@
 extension RadioChannel {
     private func homeRowId(from homeSection: HomeSection, withChannelUid channelUid: String) -> HomeRowId? {
         switch homeSection {
-            case .radioLatestEpisodes:
-                return .radioLatestEpisodes(channelUid: channelUid)
-            case .radioMostPopular:
-                return .radioMostPopular(channelUid: channelUid)
-            case .radioLatest:
-                return .radioLatest(channelUid: channelUid)
-            case .radioLatestVideos:
-                return .radioLatestVideos(channelUid: channelUid)
-            case .radioAllShows:
-                return .radioAllShows(channelUid: channelUid)
-            case .radioShowsAccess:
-                return .radioShowsAccess(channelUid: channelUid)
-            default:
-                return nil
+        case .radioLatestEpisodes:
+            return .radioLatestEpisodes(channelUid: channelUid)
+        case .radioMostPopular:
+            return .radioMostPopular(channelUid: channelUid)
+        case .radioLatest:
+            return .radioLatest(channelUid: channelUid)
+        case .radioLatestVideos:
+            return .radioLatestVideos(channelUid: channelUid)
+        case .radioAllShows:
+            return .radioAllShows(channelUid: channelUid)
+        case .radioShowsAccess:
+            return .radioShowsAccess(channelUid: channelUid)
+        default:
+            return nil
         }
     }
     

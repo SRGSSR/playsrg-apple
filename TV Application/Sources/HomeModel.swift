@@ -48,122 +48,122 @@ enum HomeRowId: Hashable {
         let pageSize = configuration.pageSize
         
         switch self {
-            case .tvTrending:
-                return dataProvider.tvTrendingMedias(for: vendor, limit: pageSize, editorialLimit: configuration.tvTrendingEditorialLimit?.uintValue,
-                                                     episodesOnly: configuration.tvTrendingEpisodesOnly)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case .tvLatest:
-                return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case .tvMostPopular:
-                return dataProvider.tvMostPopularMedias(for: vendor, pageSize: pageSize)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case .tvSoonExpiring:
-                return dataProvider.tvSoonExpiringMedias(for: vendor, pageSize: pageSize)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case let .tvLatestForModule(module, type: _):
-                guard let urn = module?.urn else { return nil }
-                return dataProvider.latestMediasForModule(withUrn: urn, pageSize: pageSize)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case .tvTopicsAccess:
-                return SRGDataProvider.current!.tvTopics(for: vendor)
-                    .map { $0.topics.map { HomeRowItem(rowId: self, content: .topic($0)) } }
-                    .eraseToAnyPublisher()
-            case let .tvLatestForTopic(topic):
-                guard let urn = topic?.urn else { return nil }
-                return dataProvider.latestMediasForTopic(withUrn: urn, pageSize: pageSize)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case let .radioLatestEpisodes(channelUid: channelUid):
-                return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case let .radioMostPopular(channelUid: channelUid):
-                return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case let .radioLatest(channelUid: channelUid):
-                return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case let .radioLatestVideos(channelUid: channelUid):
-                return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case let .radioAllShows(channelUid):
-                return SRGDataProvider.current!.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize)
-                    .map { $0.shows.map { HomeRowItem(rowId: self, content: .show($0)) } }
-                    .eraseToAnyPublisher()
-            case .tvLive:
-                return dataProvider.tvLivestreams(for: vendor)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case .radioLive:
-                return dataProvider.radioLivestreams(for: vendor, contentProviders: .default)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case .radioLiveSatellite:
-                return dataProvider.radioLivestreams(for: vendor, contentProviders: .swissSatelliteRadio)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case .tvLiveCenter:
-                return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case .tvScheduledLivestreams:
-                return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize)
-                    .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            default:
-                return nil
+        case .tvTrending:
+            return dataProvider.tvTrendingMedias(for: vendor, limit: pageSize, editorialLimit: configuration.tvTrendingEditorialLimit?.uintValue,
+                                                 episodesOnly: configuration.tvTrendingEpisodesOnly)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case .tvLatest:
+            return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case .tvMostPopular:
+            return dataProvider.tvMostPopularMedias(for: vendor, pageSize: pageSize)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case .tvSoonExpiring:
+            return dataProvider.tvSoonExpiringMedias(for: vendor, pageSize: pageSize)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case let .tvLatestForModule(module, type: _):
+            guard let urn = module?.urn else { return nil }
+            return dataProvider.latestMediasForModule(withUrn: urn, pageSize: pageSize)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case .tvTopicsAccess:
+            return SRGDataProvider.current!.tvTopics(for: vendor)
+                .map { $0.topics.map { HomeRowItem(rowId: self, content: .topic($0)) } }
+                .eraseToAnyPublisher()
+        case let .tvLatestForTopic(topic):
+            guard let urn = topic?.urn else { return nil }
+            return dataProvider.latestMediasForTopic(withUrn: urn, pageSize: pageSize)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case let .radioLatestEpisodes(channelUid: channelUid):
+            return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case let .radioMostPopular(channelUid: channelUid):
+            return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case let .radioLatest(channelUid: channelUid):
+            return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case let .radioLatestVideos(channelUid: channelUid):
+            return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case let .radioAllShows(channelUid):
+            return SRGDataProvider.current!.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize)
+                .map { $0.shows.map { HomeRowItem(rowId: self, content: .show($0)) } }
+                .eraseToAnyPublisher()
+        case .tvLive:
+            return dataProvider.tvLivestreams(for: vendor)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case .radioLive:
+            return dataProvider.radioLivestreams(for: vendor, contentProviders: .default)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case .radioLiveSatellite:
+            return dataProvider.radioLivestreams(for: vendor, contentProviders: .swissSatelliteRadio)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case .tvLiveCenter:
+            return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        case .tvScheduledLivestreams:
+            return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize)
+                .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
+                .eraseToAnyPublisher()
+        default:
+            return nil
         }
     }
     
     var title: String? {
         switch self {
-            case let .tvTrending(appearance: appearance):
-                return appearance != .hero ? NSLocalizedString("Trending videos", comment: "Title label used to present trending TV videos") : nil
-            case .tvLatest:
-                return NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos")
-            case .tvMostPopular:
-                return NSLocalizedString("Most popular", comment: "Title label used to present the TV most popular videos")
-            case .tvSoonExpiring:
-                return NSLocalizedString("Available for a limited time", comment: "Title label used to present the soon expiring videos")
-            case let .tvLatestForModule(module, _):
-                return module?.title ?? NSLocalizedString("Highlights", comment: "Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available")
-            case let .tvLatestForTopic(topic):
-                return topic?.title ?? NSLocalizedString("Topics", comment: "Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available")
-            case .tvShowsAccess:
-                return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
-            case .radioLatestEpisodes:
-                return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
-            case .radioMostPopular:
-                return NSLocalizedString("Most listened to", comment: "Title label used to present the radio most popular audio medias")
-            case .radioLatest:
-                return NSLocalizedString("The latest audios", comment: "Title label used to present the radio latest audios")
-            case .radioLatestVideos:
-                return NSLocalizedString("Latest videos", comment: "Title label used to present the radio latest videos")
-            case .radioAllShows:
-                return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
-            case .radioShowsAccess:
-                return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
-            case .tvLive:
-                return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
-            case .radioLive:
-                return NSLocalizedString("Radio channels", comment: "Title label to present main radio livestreams")
-            case .radioLiveSatellite:
-                return NSLocalizedString("Thematic radios", comment: "Title label to present Swiss satellite radios")
-            case .tvLiveCenter:
-                return NSLocalizedString("Sport", comment: "Title label used to present live center medias")
-            case .tvScheduledLivestreams:
-                return NSLocalizedString("Events", comment: "Title label used to present scheduled livestream medias")
-            default:
-                return nil
+        case let .tvTrending(appearance: appearance):
+            return appearance != .hero ? NSLocalizedString("Trending videos", comment: "Title label used to present trending TV videos") : nil
+        case .tvLatest:
+            return NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos")
+        case .tvMostPopular:
+            return NSLocalizedString("Most popular", comment: "Title label used to present the TV most popular videos")
+        case .tvSoonExpiring:
+            return NSLocalizedString("Available for a limited time", comment: "Title label used to present the soon expiring videos")
+        case let .tvLatestForModule(module, _):
+            return module?.title ?? NSLocalizedString("Highlights", comment: "Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available")
+        case let .tvLatestForTopic(topic):
+            return topic?.title ?? NSLocalizedString("Topics", comment: "Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available")
+        case .tvShowsAccess:
+            return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
+        case .radioLatestEpisodes:
+            return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
+        case .radioMostPopular:
+            return NSLocalizedString("Most listened to", comment: "Title label used to present the radio most popular audio medias")
+        case .radioLatest:
+            return NSLocalizedString("The latest audios", comment: "Title label used to present the radio latest audios")
+        case .radioLatestVideos:
+            return NSLocalizedString("Latest videos", comment: "Title label used to present the radio latest videos")
+        case .radioAllShows:
+            return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
+        case .radioShowsAccess:
+            return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
+        case .tvLive:
+            return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
+        case .radioLive:
+            return NSLocalizedString("Radio channels", comment: "Title label to present main radio livestreams")
+        case .radioLiveSatellite:
+            return NSLocalizedString("Thematic radios", comment: "Title label to present Swiss satellite radios")
+        case .tvLiveCenter:
+            return NSLocalizedString("Sport", comment: "Title label used to present live center medias")
+        case .tvScheduledLivestreams:
+            return NSLocalizedString("Events", comment: "Title label used to present scheduled livestream medias")
+        default:
+            return nil
         }
     }
 }
@@ -235,12 +235,12 @@ class HomeModel: Identifiable, ObservableObject {
     
     private static func rowIds(for id: Id) -> [HomeRowId] {
         switch id {
-            case .video:
-                return ApplicationConfiguration.shared.videoHomeRowIds()
-            case let .audio(channel):
-                return channel.homeRowIds()
-            case .live:
-                return ApplicationConfiguration.shared.liveHomeRowIds()
+        case .video:
+            return ApplicationConfiguration.shared.videoHomeRowIds()
+        case let .audio(channel):
+            return channel.homeRowIds()
+        case .live:
+            return ApplicationConfiguration.shared.liveHomeRowIds()
         }
     }
     
@@ -251,14 +251,14 @@ class HomeModel: Identifiable, ObservableObject {
         else {
             func items(for id: HomeRowId) -> [HomeRowItem] {
                 switch id {
-                    case .tvShowsAccess, .radioShowsAccess:
-                        return [HomeRowItem(rowId: id, content: .showsAccess)]
-                    case .tvTopicsAccess:
-                        return (0..<Self.numberOfPlaceholders).map { HomeRowItem(rowId: id, content: .topicPlaceholder(index: $0)) }
-                    case .radioAllShows:
-                        return (0..<Self.numberOfPlaceholders).map { HomeRowItem(rowId: id, content: .showPlaceholder(index: $0)) }
-                    default:
-                        return (0..<Self.numberOfPlaceholders).map { HomeRowItem(rowId: id, content: .mediaPlaceholder(index: $0)) }
+                case .tvShowsAccess, .radioShowsAccess:
+                    return [HomeRowItem(rowId: id, content: .showsAccess)]
+                case .tvTopicsAccess:
+                    return (0..<Self.numberOfPlaceholders).map { HomeRowItem(rowId: id, content: .topicPlaceholder(index: $0)) }
+                case .radioAllShows:
+                    return (0..<Self.numberOfPlaceholders).map { HomeRowItem(rowId: id, content: .showPlaceholder(index: $0)) }
+                default:
+                    return (0..<Self.numberOfPlaceholders).map { HomeRowItem(rowId: id, content: .mediaPlaceholder(index: $0)) }
                 }
             }
             rows.append(Row(section: id, items: items(for: id)))

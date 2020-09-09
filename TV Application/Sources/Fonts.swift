@@ -25,26 +25,26 @@ enum SRGFont {
         
         fileprivate var name: String {
             switch self {
-                case .regular:
-                    return "SRGSSRTypeTextApp-Regular"
-                case .bold:
-                    return "SRGSSRTypeTextApp-Bold"
-                case .heavy:
-                    return "SRGSSRTypeTextApp-Heavy"
-                case .light:
-                    return "SRGSSRTypeTextApp-Light"
-                case .medium:
-                    return "SRGSSRTypeTextApp-Medium"
-                case .italic:
-                    return "SRGSSRTypeTextApp-Italic"
-                case .boldItalic:
-                    return "SRGSSRTypeTextApp-BoldItalic"
-                case .regularSerif:
-                    return "SRGSSRTypeSerifTextApp-Regular"
-                case .lightSerif:
-                    return "SRGSSRTypeSerifTextApp-Light"
-                case .mediumSerif:
-                    return "SRGSSRTypeTextApp-Regular"
+            case .regular:
+                return "SRGSSRTypeTextApp-Regular"
+            case .bold:
+                return "SRGSSRTypeTextApp-Bold"
+            case .heavy:
+                return "SRGSSRTypeTextApp-Heavy"
+            case .light:
+                return "SRGSSRTypeTextApp-Light"
+            case .medium:
+                return "SRGSSRTypeTextApp-Medium"
+            case .italic:
+                return "SRGSSRTypeTextApp-Italic"
+            case .boldItalic:
+                return "SRGSSRTypeTextApp-BoldItalic"
+            case .regularSerif:
+                return "SRGSSRTypeSerifTextApp-Regular"
+            case .lightSerif:
+                return "SRGSSRTypeSerifTextApp-Light"
+            case .mediumSerif:
+                return "SRGSSRTypeTextApp-Regular"
             }
         }
     }
@@ -58,16 +58,16 @@ enum SRGFont {
         
         fileprivate var properties: (size: CGFloat, textStyle: Font.TextStyle) {
             switch self {
-                case .caption:
-                    return (20, .caption)
-                case .subtitle:
-                    return (29, .body)
-                case .body:
-                    return (26, .body)
-                case .headline:
-                    return (31, .headline)
-                case .title:
-                    return (48, .title)
+            case .caption:
+                return (20, .caption)
+            case .subtitle:
+                return (29, .body)
+            case .body:
+                return (26, .body)
+            case .headline:
+                return (31, .headline)
+            case .title:
+                return (48, .title)
             }
         }
     }

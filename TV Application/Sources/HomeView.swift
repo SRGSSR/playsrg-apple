@@ -13,21 +13,30 @@ struct HomeView: View {
     private static func swimlaneSectionLayout(for rowId: HomeRowId) -> NSCollectionLayoutSection {
         func layoutGroupSize(for rowId: HomeRowId) -> NSCollectionLayoutSize {
             switch rowId {
-                case let .tvTrending(appearance: appearance):
-                    if appearance == .hero {
-                        return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
-                    }
-                    else {
-                        return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
-                    }
-                case .tvTopicsAccess:
-                    return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
-                case .tvShowsAccess, .radioShowsAccess:
-                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
-                case .radioAllShows:
+            case let .tvTrending(appearance: appearance):
+                if appearance == .hero {
+                    return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
+                }
+                else {
                     return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
-                default:
-                    return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(340))
+                }
+            case .tvTopicsAccess:
+                return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
+            case .tvShowsAccess, .radioShowsAccess:
+                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
+            case .radioAllShows:
+                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
+            default:
+                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(340))
+            }
+        }
+        
+        func contentInsets(for rowId: HomeRowId) -> NSDirectionalEdgeInsets {
+            switch rowId {
+            case .tvTopicsAccess:
+                return NSDirectionalEdgeInsets(top: 80, leading: 0, bottom: 80, trailing: 0)
+            default:
+                return NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
             }
         }
         
@@ -40,7 +49,7 @@ struct HomeView: View {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = 40
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
+        section.contentInsets = contentInsets(for: rowId)
         return section
     }
     
@@ -89,30 +98,30 @@ struct HomeView: View {
             return section
         } cell: { indexPath, item in
             switch item.content {
-                case let .media(media):
-                    if Self.isHeroAppearance(for: item) {
-                        HeroMediaCell(media: media)
-                    }
-                    else {
-                        MediaCell(media: media)
-                    }
-                case .mediaPlaceholder:
-                    if Self.isHeroAppearance(for: item) {
-                        HeroMediaCell(media: nil)
-                    }
-                    else {
-                        MediaCell(media: nil)
-                    }
-                case let .show(show):
-                    ShowCell(show: show)
-                case .showPlaceholder:
-                    ShowCell(show: nil)
-                case let .topic(topic):
-                    TopicCell(topic: topic)
-                case .topicPlaceholder:
-                    TopicCell(topic: nil)
-                case .showsAccess:
-                    ShowsAccessCell()
+            case let .media(media):
+                if Self.isHeroAppearance(for: item) {
+                    HeroMediaCell(media: media)
+                }
+                else {
+                    MediaCell(media: media)
+                }
+            case .mediaPlaceholder:
+                if Self.isHeroAppearance(for: item) {
+                    HeroMediaCell(media: nil)
+                }
+                else {
+                    MediaCell(media: nil)
+                }
+            case let .show(show):
+                ShowCell(show: show)
+            case .showPlaceholder:
+                ShowCell(show: nil)
+            case let .topic(topic):
+                TopicCell(topic: topic)
+            case .topicPlaceholder:
+                TopicCell(topic: nil)
+            case .showsAccess:
+                ShowsAccessCell()
             }
         } supplementaryView: { kind, indexPath in
             if kind == UICollectionView.elementKindSectionHeader {
@@ -135,14 +144,14 @@ struct HomeView: View {
         }
         .onSelect { indexPath, item in
             switch item.content {
-                case let .media(media):
-                    if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
-                        let letterboxViewController = SRGLetterboxViewController()
-                        letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                        rootViewController.present(letterboxViewController, animated: true, completion: nil)
-                    }
-                default:
-                    ()
+            case let .media(media):
+                if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+                    let letterboxViewController = SRGLetterboxViewController()
+                    letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
+                    rootViewController.present(letterboxViewController, animated: true, completion: nil)
+                }
+            default:
+                ()
             }
         }
         .synchronizeParentTabScrolling()

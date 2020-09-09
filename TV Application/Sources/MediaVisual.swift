@@ -33,7 +33,7 @@ struct MediaVisual<Overlay: View>: View {
             }
         }
     }
-
+    
     private struct BlockingOverlay: View {
         let media: SRGMedia?
         
@@ -53,7 +53,7 @@ struct MediaVisual<Overlay: View>: View {
             }
         }
     }
-
+    
     private struct Badge: View {
         let text: String
         let color: Color
@@ -93,12 +93,12 @@ struct MediaVisual<Overlay: View>: View {
     static func formattedDuration(from: Date, to: Date) -> String? {
         guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
         switch days {
-            case 0:
-                return DurationFormatters.hours(for: to.timeIntervalSince(from))
-            case 1:
-                return DurationFormatters.days(for: to.timeIntervalSince(from))
-            default:
-                return nil
+        case 0:
+            return DurationFormatters.hours(for: to.timeIntervalSince(from))
+        case 1:
+            return DurationFormatters.days(for: to.timeIntervalSince(from))
+        default:
+            return nil
         }
     }
     
