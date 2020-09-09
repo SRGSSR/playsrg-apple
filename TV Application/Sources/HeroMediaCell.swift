@@ -22,7 +22,7 @@ struct HeroMediaCell: View {
                     .frame(height: 20)
                 Text(MediaDescription.subtitle(for: media))
                     .srgFont(.medium, size: .title)
-                    .lineLimit(3)
+                    .lineLimit(2)
                     .multilineTextAlignment(.center)
                 if let summary = MediaDescription.summary(for: media) {
                     Spacer()
