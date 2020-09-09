@@ -25,7 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let itemAppearance = appearance.inlineLayoutAppearance
         itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIFont.srg_mediumFont(withSize: 28),
                                                      NSAttributedString.Key.foregroundColor: UIColor.white]
-        itemAppearance.focused.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.srg_color(fromHexadecimalString: "#161616")!]
+        
+        let activeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.srg_color(fromHexadecimalString: "#161616")!]
+        itemAppearance.selected.titleTextAttributes = activeTitleTextAttributes
+        itemAppearance.focused.titleTextAttributes = activeTitleTextAttributes
         
         tabBarController.tabBar.standardAppearance = appearance
         return tabBarController
