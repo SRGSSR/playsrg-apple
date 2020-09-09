@@ -17,7 +17,7 @@ struct HeroMediaCell: View {
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
                 Text(MediaDescription.subtitle(for: media))
-                    .srgFont(.regular, size: .headline)
+                    .srgFont(.medium, size: .headline)
                     .lineLimit(1)
                     .opacity(0.6)
             }

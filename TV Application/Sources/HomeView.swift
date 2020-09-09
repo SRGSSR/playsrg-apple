@@ -125,12 +125,12 @@ struct HomeView: View {
                     let rowId = model.rows[indexPath.section].section
                     if let title = rowId.title {
                         Text(title)
-                            .srgFont(.regular, size: .title)
+                            .srgFont(.medium, size: .title)
                             .lineLimit(1)
                     }
                     if let lead = Self.lead(for: rowId) {
                         Text(lead)
-                            .srgFont(.regular, size: .headline)
+                            .srgFont(.light, size: .headline)
                             .lineLimit(1)
                             .opacity(0.8)
                     }

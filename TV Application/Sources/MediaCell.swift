@@ -13,11 +13,11 @@ struct MediaCell: View {
         
         var body: some View {
             Text(MediaDescription.title(for: media))
-                .srgFont(.regular, size: .subtitle)
+                .srgFont(.medium, size: .subtitle)
                 .lineLimit(2)
             Text(MediaDescription.subtitle(for: media))
-                .srgFont(.regular, size: .caption)
-                .lineLimit(1)
+                .srgFont(.light, size: .subtitle)
+                .lineLimit(2)
         }
     }
     

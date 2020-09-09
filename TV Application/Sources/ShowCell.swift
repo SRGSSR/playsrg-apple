@@ -42,7 +42,7 @@ struct ShowCell: View {
                     .shadow(radius: isFocused ? 20 : 0)
                 
                 Text(title)
-                    .srgFont(.regular, size: .subtitle)
+                    .srgFont(.medium, size: .subtitle)
                     .opacity(isFocused ? 1 : 0.5)
                     .frame(width: geometry.size.width, alignment: .leading)
             }
