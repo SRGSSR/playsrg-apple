@@ -24,14 +24,12 @@ enum HomeRowId: Hashable {
     case tvLatestForModule(_ module: SRGModule?, type: SRGModuleType)
     case tvLatestForTopic(_ topic: SRGTopic?)
     case tvTopicsAccess
-    case tvShowsAccess
     
     case radioLatestEpisodes(channelUid: String)
     case radioMostPopular(channelUid: String)
     case radioLatest(channelUid: String)
     case radioLatestVideos(channelUid: String)
     case radioAllShows(channelUid: String)
-    case radioShowsAccess(channelUid: String)
     
     case tvLive
     case radioLive
@@ -119,8 +117,6 @@ enum HomeRowId: Hashable {
             return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize)
                 .map { $0.medias.map { HomeRowItem(rowId: self, content: .media($0)) } }
                 .eraseToAnyPublisher()
-        default:
-            return nil
         }
     }
     
@@ -138,8 +134,6 @@ enum HomeRowId: Hashable {
             return module?.title ?? NSLocalizedString("Highlights", comment: "Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available")
         case let .tvLatestForTopic(topic):
             return topic?.title ?? NSLocalizedString("Topics", comment: "Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available")
-        case .tvShowsAccess:
-            return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
         case .radioLatestEpisodes:
             return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
         case .radioMostPopular:
@@ -150,8 +144,6 @@ enum HomeRowId: Hashable {
             return NSLocalizedString("Latest videos", comment: "Title label used to present the radio latest videos")
         case .radioAllShows:
             return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
-        case .radioShowsAccess:
-            return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
         case .tvLive:
             return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
         case .radioLive:
@@ -179,8 +171,6 @@ struct HomeRowItem: Hashable {
         
         case topicPlaceholder(index: Int)
         case topic(_ topic: SRGTopic)
-        
-        case showsAccess
     }
     
     // Some items might appear in several rows but need to be uniquely defined. We thus add the section to each item
@@ -251,8 +241,6 @@ class HomeModel: Identifiable, ObservableObject {
         else {
             func items(for id: HomeRowId) -> [HomeRowItem] {
                 switch id {
-                case .tvShowsAccess, .radioShowsAccess:
-                    return [HomeRowItem(rowId: id, content: .showsAccess)]
                 case .tvTopicsAccess:
                     return (0..<Self.numberOfPlaceholders).map { HomeRowItem(rowId: id, content: .topicPlaceholder(index: $0)) }
                 case .radioAllShows:

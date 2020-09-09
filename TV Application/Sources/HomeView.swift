@@ -22,8 +22,6 @@ struct HomeView: View {
                 }
             case .tvTopicsAccess:
                 return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
-            case .tvShowsAccess, .radioShowsAccess:
-                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
             case .radioAllShows:
                 return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
             default:
@@ -120,8 +118,6 @@ struct HomeView: View {
                 TopicCell(topic: topic)
             case .topicPlaceholder:
                 TopicCell(topic: nil)
-            case .showsAccess:
-                ShowsAccessCell()
             }
         } supplementaryView: { kind, indexPath in
             if kind == UICollectionView.elementKindSectionHeader {
