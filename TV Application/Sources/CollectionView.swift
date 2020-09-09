@@ -182,8 +182,8 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         /// Store whether the data source is currently empty.
         fileprivate var isEmpty: Bool = true
         
-        /// Registered view identifiers for supplementary views.
-        fileprivate var registeredSupplementaryViewIdentifiers: [String] = []
+        /// Registered view kinds for supplementary views.
+        fileprivate var registeredSupplementaryViewKinds: [String] = []
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             if let onSelect = onSelect,
@@ -267,9 +267,9 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             let coordinator = context.coordinator
-            if !coordinator.registeredSupplementaryViewIdentifiers.contains(kind) {
+            if !coordinator.registeredSupplementaryViewKinds.contains(kind) {
                 collectionView.register(HostSupplementaryView.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: supplementaryViewIdentifier)
-                coordinator.registeredSupplementaryViewIdentifiers.append(kind)
+                coordinator.registeredSupplementaryViewKinds.append(kind)
             }
             
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: supplementaryViewIdentifier, for: indexPath) as? HostSupplementaryView

@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var model: HomeModel
     
-    private static func swimlaneSectionLayout(for rowId: HomeRowId) -> NSCollectionLayoutSection {
+    private static func swimlaneLayoutSection(for rowId: HomeRowId) -> NSCollectionLayoutSection {
         func layoutGroupSize(for rowId: HomeRowId) -> NSCollectionLayoutSize {
             switch rowId {
             case let .tvTrending(appearance: appearance):
@@ -82,7 +82,7 @@ struct HomeView: View {
     var body: some View {
         CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
             let rowId = model.rows[sectionIndex].section
-            let section = Self.swimlaneSectionLayout(for: rowId)
+            let section = Self.swimlaneLayoutSection(for: rowId)
             
             if let headerHeight = Self.swimlaneSectionHeaderHeight(for: rowId) {
                 let header = NSCollectionLayoutBoundarySupplementaryItem(
