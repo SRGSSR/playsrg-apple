@@ -116,13 +116,15 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     /**
      *  View coordinator.
      */
-    class Coordinator {
+    class Coordinator: NSObject, UICollectionViewDelegate {
         fileprivate typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
         
         /// Data source for the collection view.
         fileprivate var dataSource: DataSource? = nil
         
-        var sectionLayoutProvider: ((Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection)?
+        // Blocks from parent collection.
+        fileprivate var sectionLayoutProvider: ((Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection)?
+        fileprivate var onSelect: OnSelect?
         
         /// Hash of the data represented by the data source. Provides for a cheap way of checking when data changes.
         fileprivate var dataHash: Int? = nil
@@ -131,8 +133,17 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         fileprivate var isEmpty: Bool = true
         
         /// Registered view identifiers for supplementary views.
-        var registeredSupplementaryViewIdentifiers: [String] = []
+        fileprivate var registeredSupplementaryViewIdentifiers: [String] = []
+        
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            if let onSelect = onSelect,
+               let item = dataSource?.itemIdentifier(for: indexPath) {
+                onSelect(indexPath, item)
+            }
+        }
     }
+    
+    typealias OnSelect = (IndexPath, Item) -> Void
     
     /// Data displayed by the collection view.
     let rows: [CollectionRow<Section, Item>]
@@ -143,8 +154,11 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     /// Cell view builder.
     let cell: (IndexPath, Item) -> Cell
     
-    /// Supplementary view builder
+    /// Supplementary view builder.
     let supplementaryView: (String, IndexPath) -> SupplementaryView
+    
+    /// Selection action.
+    fileprivate var onSelect: OnSelect? = nil
     
     /// If `true`, tabs move in sync with the collection.
     fileprivate var parentTabScrollingEnabled: Bool = false
@@ -191,6 +205,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         let supplementaryViewIdentifier = "hostSupplementaryView"
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout(context: context))
+        collectionView.delegate = context.coordinator
         collectionView.register(HostCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
         let dataSource = Coordinator.DataSource(collectionView: collectionView) { collectionView, indexPath, item -> UICollectionViewCell? in
@@ -218,6 +233,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     func updateUIView(_ uiView: UICollectionView, context: Context) {
         let coordinator = context.coordinator
         coordinator.sectionLayoutProvider = self.sectionLayoutProvider
+        coordinator.onSelect = self.onSelect
         
         if parentTabScrollingEnabled {
             uiView.play_nearestViewController?.tabBarObservedScrollView = uiView
@@ -234,5 +250,13 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             dataSource.apply(snapshot(), animatingDifferences: animated)
             coordinator.dataHash = dataHash
         }
+    }
+}
+
+extension CollectionView {
+    func onSelect(_ onSelect: @escaping OnSelect) -> Self {
+        var collectionView = self
+        collectionView.onSelect = onSelect
+        return collectionView
     }
 }
