@@ -21,12 +21,31 @@ struct MediaCell: View {
         }
     }
     
+    private struct Appearance {
+        let shadowRadius: CGFloat
+        let opacity: Double
+        let scale: CGFloat
+    }
+    
     let media: SRGMedia?
     
     @Environment(\.isFocused) private var isFocused: Bool
+    @Environment(\.isPressed) private var isPressed: Bool
     
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
+    }
+    
+    private var appearance: Appearance {
+        if isPressed {
+            return Appearance(shadowRadius: 10, opacity: 1, scale: 1.05)
+        }
+        else if isFocused {
+            return Appearance(shadowRadius: 20, opacity: 1, scale: 1.1)
+        }
+        else {
+            return Appearance(shadowRadius: 0, opacity: 0.5, scale: 1)
+        }
     }
     
     var body: some View {
@@ -35,14 +54,13 @@ struct MediaCell: View {
                 MediaVisual(media: media, scale: .small, contentMode: .fit)
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                     .cornerRadius(12)
-                    .shadow(radius: isFocused ? 20 : 0)
+                    .shadow(radius: appearance.shadowRadius)
                 
                 DescriptionView(media: media)
-                    .opacity(isFocused ? 1 : 0.5)
+                    .opacity(appearance.opacity)
                     .frame(width: geometry.size.width, alignment: .leading)
             }
-            .scaleEffect(isFocused ? 1.1 : 1)
-            .offset(x: 0, y: isFocused ? 10 : 0)
+            .scaleEffect(appearance.scale)
             .redacted(reason: redactionReason)
             .animation(.default)
         }
