@@ -12,7 +12,13 @@ struct MediaVisual<Overlay: View>: View {
         
         private var duration: String? {
             guard let media = media else { return nil }
-            return DurationFormatters.minutes(for: media.duration / 1000)
+            let isLivestreamOrScheduledLivestream = (media.contentType == SRGContentType.livestream || media.contentType == SRGContentType.scheduledLivestream)
+            if isLivestreamOrScheduledLivestream {
+                return NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.")
+            }
+            else {
+                return DurationFormatters.minutes(for: media.duration / 1000)
+            }
         }
         
         var body: some View {
@@ -102,18 +108,20 @@ struct MediaVisual<Overlay: View>: View {
         let now = Date()
         let availability = media.timeAvailability(at: now)
         switch availability {
-            case .notAvailableAnymore:
-                return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), .gray)
-            case .available:
-                guard let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream else { return nil }
-                if let remainingDays = Self.formattedDuration(from: now, to: endDate) {
-                    return (NSLocalizedString("\(remainingDays) left", comment: "Short label displayed on medias expiring soon"), Color(.play_orange))
-                }
-                else {
-                    return nil
-                }
-            default:
+        case .notYetAvailable:
+            return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), Color(.play_orange))
+        case .notAvailableAnymore:
+            return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), Color(.play_gray))
+        case .available:
+            guard let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream else { return nil }
+            if let remainingDays = Self.formattedDuration(from: now, to: endDate) {
+                return (NSLocalizedString("\(remainingDays) left", comment: "Short label displayed on medias expiring soon"), Color(.play_orange))
+            }
+            else {
                 return nil
+            }
+        default:
+            return nil
         }
     }
     
