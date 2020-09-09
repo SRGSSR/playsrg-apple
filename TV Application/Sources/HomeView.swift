@@ -38,6 +38,16 @@ struct HomeView: View {
             }
         }
         
+        func boundarySupplementaryItems(for rowId: HomeRowId) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            guard let headerHeight = swimlaneSectionHeaderHeight(for: rowId) else { return [] }
+            let header = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight)),
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .topLeading
+            )
+            return [header]
+        }
+        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
@@ -48,6 +58,7 @@ struct HomeView: View {
         section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = 40
         section.contentInsets = contentInsets(for: rowId)
+        section.boundarySupplementaryItems = boundarySupplementaryItems(for: rowId)
         return section
     }
     
@@ -82,18 +93,7 @@ struct HomeView: View {
     var body: some View {
         CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
             let rowId = model.rows[sectionIndex].section
-            let section = Self.swimlaneLayoutSection(for: rowId)
-            
-            if let headerHeight = Self.swimlaneSectionHeaderHeight(for: rowId) {
-                let header = NSCollectionLayoutBoundarySupplementaryItem(
-                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight)),
-                    elementKind: UICollectionView.elementKindSectionHeader,
-                    alignment: .topLeading
-                )
-                section.boundarySupplementaryItems = [header]
-            }
-            
-            return section
+            return Self.swimlaneLayoutSection(for: rowId)
         } cell: { indexPath, item in
             switch item.content {
             case let .media(media):
