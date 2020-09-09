@@ -6,6 +6,17 @@
 
 import SwiftUI
 
+private struct IsPressedKey: EnvironmentKey {
+    static var defaultValue: Bool = false
+}
+
+extension EnvironmentValues {
+    var isPressed: Bool {
+        get { self[IsPressedKey.self] }
+        set { self[IsPressedKey.self] = newValue }
+    }
+}
+
 extension CollectionView {
     func synchronizeParentTabScrolling() -> some View {
         var collectionView = self
@@ -63,10 +74,25 @@ struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
  */
 struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, SupplementaryView: View>: UIViewRepresentable {
     /**
+     *  Host root view to broadcast button press information in the environment.
+     */
+    private struct HostCellRootView<Body: View>: View {
+        let hostedView: Body
+        @ObservedObject var hostCell: HostCell
+        
+        var body: some View {
+            hostedView
+                .environment(\.isPressed, hostCell.isPressed)
+        }
+    }
+    
+    /**
      *  `UICollectionView` cell hosting a `SwiftUI` view.
      */
-    private class HostCell: UICollectionViewCell {
-        private var hostController: UIHostingController<Cell>?
+    private class HostCell: UICollectionViewCell, ObservableObject {
+        private var hostController: UIHostingController<HostCellRootView<Cell>>?
+        
+        @Published fileprivate var isPressed: Bool = false
         
         override func prepareForReuse() {
             if let hostView = hostController?.view {
@@ -79,12 +105,36 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             willSet {
                 // Creating a `UIHostingController` is cheap.
                 guard let view = newValue else { return }
-                hostController = UIHostingController(rootView: view, ignoreSafeArea: true)
+                hostController = UIHostingController(rootView: HostCellRootView(hostedView: view, hostCell: self), ignoreSafeArea: true)
                 if let hostView = hostController?.view {
                     hostView.frame = contentView.bounds
                     hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                     contentView.addSubview(hostView)
                 }
+            }
+        }
+        
+        override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+            super.pressesBegan(presses, with: event)
+            
+            for press in presses where press.type == .select {
+                isPressed = true
+            }
+        }
+        
+        override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+            super.pressesEnded(presses, with: event)
+            
+            for press in presses where press.type == .select {
+                isPressed = false
+            }
+        }
+        
+        override func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+            super.pressesCancelled(presses, with: event)
+            
+            for press in presses where press.type == .select {
+                isPressed = false
             }
         }
     }
