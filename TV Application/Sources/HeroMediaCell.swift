@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearance
 import SwiftUI
 
 struct HeroMediaCell: View {
@@ -12,14 +13,27 @@ struct HeroMediaCell: View {
         
         var body: some View {
             VStack {
+                Spacer()
                 Text(MediaDescription.title(for: media))
-                    .srgFont(.bold, size: .title)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                Text(MediaDescription.subtitle(for: media))
-                    .srgFont(.medium, size: .headline)
+                    .srgFont(.regular, size: .subtitle)
                     .lineLimit(1)
-                    .opacity(0.6)
+                    .opacity(0.8)
+                Spacer()
+                    .frame(height: 20)
+                Text(MediaDescription.subtitle(for: media))
+                    .srgFont(.medium, size: .title)
+                    .lineLimit(3)
+                    .multilineTextAlignment(.center)
+                if let summary = MediaDescription.summary(for: media) {
+                    Spacer()
+                        .frame(height: 40)
+                    Text(summary)
+                        .srgFont(.regular, size: .body)
+                        .lineLimit(4)
+                        .multilineTextAlignment(.center)
+                        .opacity(0.8)
+                }
+                Spacer()
             }
             .foregroundColor(.white)
         }
@@ -35,16 +49,15 @@ struct HeroMediaCell: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
-                MediaVisual(media: media, scale: .large, contentMode: .fill) {
-                    Rectangle()
-                        .fill(Color(white: 0, opacity: 0.4))
-                    DescriptionView(media: media)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                        .padding(60)
-                }
+            HStack(spacing: 0) {
+                MediaVisual(media: media, scale: .large)
+                    .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
+                DescriptionView(media: media)
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
+            .background(Color(.srg_color(fromHexadecimalString: "#333333")!))
             .cornerRadius(12)
             .shadow(radius: isFocused ? 20 : 0)
             .scaleEffect(isFocused ? 1.02 : 1)

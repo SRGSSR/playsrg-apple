@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct MediaVisual<Overlay: View>: View {
+struct MediaVisual: View {
     private struct DurationLabel: View {
         let media: SRGMedia?
         
@@ -72,13 +72,11 @@ struct MediaVisual<Overlay: View>: View {
     let media: SRGMedia?
     let scale: ImageScale
     let contentMode: ContentMode
-    var overlay: () -> Overlay
     
-    init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode, @ViewBuilder overlay: @escaping () -> Overlay) {
+    init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode = .fit) {
         self.media = media
         self.scale = scale
         self.contentMode = contentMode
-        self.overlay = overlay
     }
     
     private var imageUrl: URL? {
@@ -129,7 +127,6 @@ struct MediaVisual<Overlay: View>: View {
         ZStack {
             ImageView(url: imageUrl, contentMode: contentMode)
                 .whenRedacted { $0.hidden() }
-            overlay()
             
             BlockingOverlay(media: media)
             

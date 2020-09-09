@@ -32,13 +32,10 @@ struct MediaCell: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                MediaVisual(media: media, scale: .small, contentMode: .fit) {
-                    Rectangle()
-                        .fill(Color.clear)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                .cornerRadius(12)
-                .shadow(radius: isFocused ? 20 : 0)
+                MediaVisual(media: media, scale: .small, contentMode: .fit)
+                    .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                    .cornerRadius(12)
+                    .shadow(radius: isFocused ? 20 : 0)
                 
                 DescriptionView(media: media)
                     .opacity(isFocused ? 1 : 0.5)

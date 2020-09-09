@@ -25,4 +25,9 @@ struct MediaDescription {
             return DateFormatters.formattedRelativeDateAndTime(for: media.date)
         }
     }
+    
+    static func summary(for media: SRGMedia?) -> String? {
+        guard let media = media else { return placeholder(minLength: 120, maxLength: 200) }
+        return media.summary
+    }
 }
