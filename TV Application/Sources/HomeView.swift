@@ -135,6 +135,7 @@ struct HomeView: View {
                             .opacity(0.8)
                     }
                 }
+                .opacity(0.8)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             }
         }
