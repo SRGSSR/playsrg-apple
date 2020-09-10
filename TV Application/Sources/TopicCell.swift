@@ -7,15 +7,7 @@
 import SwiftUI
 
 struct TopicCell: View {
-    private struct Appearance {
-        let shadowRadius: CGFloat
-        let scale: CGFloat
-    }
-    
     let topic: SRGTopic?
-    
-    @Environment(\.isFocused) private var isFocused: Bool
-    @Environment(\.isPressed) private var isPressed: Bool
     
     private var title: String {
         return topic?.title ?? ""
@@ -27,18 +19,6 @@ struct TopicCell: View {
     
     private var redactionReason: RedactionReasons {
         return topic == nil ? .placeholder : .init()
-    }
-    
-    private var appearance: Appearance {
-        if isPressed {
-            return Appearance(shadowRadius: 10, scale: 1.05)
-        }
-        else if isFocused {
-            return Appearance(shadowRadius: 20, scale: 1.1)
-        }
-        else {
-            return Appearance(shadowRadius: 0, scale: 1)
-        }
     }
     
     var body: some View {
@@ -56,11 +36,7 @@ struct TopicCell: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
-            .cornerRadius(12)
-            .shadow(radius: appearance.shadowRadius)
-            .scaleEffect(appearance.scale)
             .redacted(reason: redactionReason)
-            .animation(.default)
         }
     }
 }

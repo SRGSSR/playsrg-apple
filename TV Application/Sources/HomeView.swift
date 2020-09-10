@@ -4,7 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-import SRGLetterbox
 import SwiftUI
 
 struct HomeView: View {
@@ -146,18 +145,6 @@ struct HomeView: View {
         } supplementaryView: { kind, indexPath in
             let rowId = model.rows[indexPath.section].section
             SupplementaryView(rowId: rowId, kind: kind)
-        }
-        .onSelect { indexPath, item in
-            switch item.content {
-            case let .media(media):
-                if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
-                    let letterboxViewController = SRGLetterboxViewController()
-                    letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                    rootViewController.present(letterboxViewController, animated: true, completion: nil)
-                }
-            default:
-                ()
-            }
         }
         .synchronizeParentTabScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

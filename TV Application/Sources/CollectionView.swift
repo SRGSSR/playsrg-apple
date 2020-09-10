@@ -6,17 +6,6 @@
 
 import SwiftUI
 
-private struct IsPressedKey: EnvironmentKey {
-    static var defaultValue: Bool = false
-}
-
-extension EnvironmentValues {
-    var isPressed: Bool {
-        get { self[IsPressedKey.self] }
-        set { self[IsPressedKey.self] = newValue }
-    }
-}
-
 extension CollectionView {
     func synchronizeParentTabScrolling() -> some View {
         var collectionView = self
@@ -74,23 +63,10 @@ struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
  */
 struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, SupplementaryView: View>: UIViewRepresentable {
     /**
-     *  Host root view to broadcast button press information in the environment.
-     */
-    private struct HostCellRootView<Body: View>: View {
-        let hostedView: Body
-        @ObservedObject var hostCell: HostCell
-        
-        var body: some View {
-            hostedView
-                .environment(\.isPressed, hostCell.isPressed)
-        }
-    }
-    
-    /**
      *  `UICollectionView` cell hosting a `SwiftUI` view.
      */
     private class HostCell: UICollectionViewCell, ObservableObject {
-        private var hostController: UIHostingController<HostCellRootView<Cell>>?
+        private var hostController: UIHostingController<Cell>?
         
         @Published fileprivate var isPressed: Bool = false
         
@@ -105,36 +81,12 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             willSet {
                 // Creating a `UIHostingController` is cheap.
                 guard let view = newValue else { return }
-                hostController = UIHostingController(rootView: HostCellRootView(hostedView: view, hostCell: self), ignoreSafeArea: true)
+                hostController = UIHostingController(rootView: view, ignoreSafeArea: true)
                 if let hostView = hostController?.view {
                     hostView.frame = contentView.bounds
                     hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                     contentView.addSubview(hostView)
                 }
-            }
-        }
-        
-        override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-            super.pressesBegan(presses, with: event)
-            
-            for press in presses where press.type == .select {
-                isPressed = true
-            }
-        }
-        
-        override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-            super.pressesEnded(presses, with: event)
-            
-            for press in presses where press.type == .select {
-                isPressed = false
-            }
-        }
-        
-        override func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-            super.pressesCancelled(presses, with: event)
-            
-            for press in presses where press.type == .select {
-                isPressed = false
             }
         }
     }
@@ -233,9 +185,8 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         /// Data source for the collection view.
         fileprivate var dataSource: DataSource? = nil
         
-        // Blocks from parent collection.
+        /// Provider for the section layout.
         fileprivate var sectionLayoutProvider: ((Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection)?
-        fileprivate var onSelect: OnSelect?
         
         /// Hash of the data represented by the data source. Provides for a cheap way of checking when data changes.
         fileprivate var dataHash: Int? = nil
@@ -246,13 +197,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         /// Registered view kinds for supplementary views.
         fileprivate var registeredSupplementaryViewKinds: [String] = []
         
-        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            if let onSelect = onSelect,
-               let item = dataSource?.itemIdentifier(for: indexPath) {
-                onSelect(indexPath, item)
-            }
-        }
-        
         func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
             if let focusGuideBackgroundView = view as? FocusGuideBackgroundView {
                 focusGuideBackgroundView.section = indexPath.section
@@ -260,8 +204,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             }
         }
     }
-    
-    typealias OnSelect = (IndexPath, Item) -> Void
     
     /// Data displayed by the collection view.
     let rows: [CollectionRow<Section, Item>]
@@ -274,9 +216,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     
     /// Supplementary view builder.
     let supplementaryView: (String, IndexPath) -> SupplementaryView
-    
-    /// Selection action.
-    fileprivate var onSelect: OnSelect? = nil
     
     /// If `true`, tabs move in sync with the collection.
     fileprivate var parentTabScrollingEnabled: Bool = false
@@ -359,7 +298,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     func updateUIView(_ uiView: UICollectionView, context: Context) {
         let coordinator = context.coordinator
         coordinator.sectionLayoutProvider = self.sectionLayoutProvider
-        coordinator.onSelect = self.onSelect
         
         if parentTabScrollingEnabled {
             uiView.play_nearestViewController?.tabBarObservedScrollView = uiView
@@ -376,13 +314,5 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             dataSource.apply(snapshot(), animatingDifferences: animated)
             coordinator.dataHash = dataHash
         }
-    }
-}
-
-extension CollectionView {
-    func onSelect(_ onSelect: @escaping OnSelect) -> Self {
-        var collectionView = self
-        collectionView.onSelect = onSelect
-        return collectionView
     }
 }
