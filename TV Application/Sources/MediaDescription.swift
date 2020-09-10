@@ -7,17 +7,17 @@
 import Foundation
 
 struct MediaDescription {
-    private static func placeholder(minLength: Int, maxLength: Int) -> String {
-        return String(repeating: " ", count: .random(in: minLength..<maxLength))
+    private static func placeholder(length: Int) -> String {
+        return String(repeating: " ", count: length)
     }
     
     static func title(for media: SRGMedia?) -> String {
-        guard let media = media else { return placeholder(minLength: 15, maxLength: 30) }
+        guard let media = media else { return placeholder(length: 20) }
         return media.show?.title ?? media.title
     }
     
     static func subtitle(for media: SRGMedia?) -> String {
-        guard let media = media else { return placeholder(minLength: 20, maxLength: 30) }
+        guard let media = media else { return placeholder(length: 25) }
         if let showTitle = media.show?.title, !media.title.contains(showTitle) {
             return media.title
         }
@@ -27,7 +27,7 @@ struct MediaDescription {
     }
     
     static func summary(for media: SRGMedia?) -> String? {
-        guard let media = media else { return placeholder(minLength: 120, maxLength: 200) }
+        guard let media = media else { return placeholder(length: 160) }
         return media.summary
     }
 }
