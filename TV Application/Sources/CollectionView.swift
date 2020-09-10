@@ -68,8 +68,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     private class HostCell: UICollectionViewCell, ObservableObject {
         private var hostController: UIHostingController<Cell>?
         
-        @Published fileprivate var isPressed: Bool = false
-        
         override func prepareForReuse() {
             if let hostView = hostController?.view {
                 hostView.removeFromSuperview()
