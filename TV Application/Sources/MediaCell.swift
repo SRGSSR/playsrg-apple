@@ -5,6 +5,7 @@
 //
 
 import SRGAppearance
+import SRGLetterbox
 import SwiftUI
 
 struct MediaCell: View {
@@ -30,7 +31,15 @@ struct MediaCell: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Button(action: {}) {
+                Button(action: {
+                    // TODO: Could / should be presented with SwiftUI, but presentation flag must be part of topmost state
+                    if let media = media,
+                       let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+                        let letterboxViewController = SRGLetterboxViewController()
+                        letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
+                        rootViewController.present(letterboxViewController, animated: true, completion: nil)
+                    }
+                }) {
                     MediaVisual(media: media, scale: .small, contentMode: .fit)
                         .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                 }
