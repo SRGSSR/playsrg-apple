@@ -193,9 +193,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         /// Hash of the data represented by the data source. Provides for a cheap way of checking when data changes.
         fileprivate var dataHash: Int? = nil
         
-        /// Store whether the data source is currently empty.
-        fileprivate var isEmpty: Bool = true
-        
         /// Registered view kinds for supplementary views.
         fileprivate var registeredSupplementaryViewKinds: [String] = []
         
@@ -312,8 +309,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         // which can be cheaply checked for changes.
         let dataHash = rows.hashValue
         if coordinator.dataHash != dataHash {
-            let animated = !coordinator.isEmpty && !rows.isEmpty
-            dataSource.apply(snapshot(), animatingDifferences: animated)
+            dataSource.apply(snapshot(), animatingDifferences: true)
             coordinator.dataHash = dataHash
         }
     }
