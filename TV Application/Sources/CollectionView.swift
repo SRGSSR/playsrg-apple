@@ -89,6 +89,10 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
                 }
             }
         }
+        
+        override var canBecomeFocused: Bool {
+            return false
+        }
     }
     
     private class HostSupplementaryView: UICollectionReusableView {

@@ -34,8 +34,12 @@ struct ShowCell: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                VisualView(show: show)
-                    .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
+                Button(action: {}) {
+                    VisualView(show: show)
+                        .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
+                }
+                .buttonStyle(CardButtonStyle())
+                
                 Text(title)
                     .srgFont(.medium, size: .subtitle)
                     .frame(width: geometry.size.width, alignment: .leading)

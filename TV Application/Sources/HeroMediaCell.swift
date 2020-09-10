@@ -47,16 +47,19 @@ struct HeroMediaCell: View {
     
     var body: some View {
         GeometryReader { geometry in
-            HStack(spacing: 0) {
-                MediaVisual(media: media, scale: .large)
-                    .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
-                DescriptionView(media: media)
-                    .padding()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            Button(action: {}) {
+                HStack(spacing: 0) {
+                    MediaVisual(media: media, scale: .large)
+                        .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
+                    DescriptionView(media: media)
+                        .padding()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .background(Color(.srg_color(fromHexadecimalString: "#333333")!))
+                .redacted(reason: redactionReason)
             }
-            .frame(width: geometry.size.width, height: geometry.size.height)
-            .background(Color(.srg_color(fromHexadecimalString: "#333333")!))
-            .redacted(reason: redactionReason)
+            .buttonStyle(CardButtonStyle())
         }
     }
 }
