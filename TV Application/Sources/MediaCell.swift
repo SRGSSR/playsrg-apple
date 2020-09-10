@@ -24,6 +24,8 @@ struct MediaCell: View {
     
     let media: SRGMedia?
     
+    @State var isFocused: Bool = false
+    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -42,13 +44,19 @@ struct MediaCell: View {
                 }) {
                     MediaVisual(media: media, scale: .small, contentMode: .fit)
                         .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                        .reportFocusChanges()
                 }
                 .buttonStyle(CardButtonStyle())
                 
                 DescriptionView(media: media)
                     .frame(width: geometry.size.width, alignment: .leading)
+                    .opacity(isFocused ? 1 : 0.5)
+                    .offset(x: 0, y: isFocused ? 10 : 0)
+                    .scaleEffect(isFocused ? 1.1 : 1, anchor: .top)
+                    .animation(.easeInOut(duration: 0.2))
             }
             .redacted(reason: redactionReason)
+            .onFocusChange { isFocused = $0 }
         }
     }
 }
