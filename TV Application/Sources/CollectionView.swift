@@ -330,6 +330,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         let supplementaryViewIdentifier = "hostSupplementaryView"
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout(context: context))
+        collectionView.remembersLastFocusedIndexPath = true
         collectionView.delegate = context.coordinator
         collectionView.register(HostCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
