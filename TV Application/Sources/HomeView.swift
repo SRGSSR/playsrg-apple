@@ -102,6 +102,15 @@ struct HomeView: View {
             }
         }
         
+        func continuousGroupLeadingBoundary(for rowId: HomeRowId) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
+            if case let .tvTrending(appearance: appearance) = rowId, appearance == .hero {
+                return .continuous
+            }
+            else {
+                return .continuousGroupLeadingBoundary
+            }
+        }
+        
         func boundarySupplementaryItems(for rowId: HomeRowId) -> [NSCollectionLayoutBoundarySupplementaryItem] {
             guard let headerHeight = swimlaneSectionHeaderHeight(for: rowId) else { return [] }
             let header = NSCollectionLayoutBoundarySupplementaryItem(
@@ -119,7 +128,7 @@ struct HomeView: View {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = continuousGroupLeadingBoundary(for: rowId)
         section.interGroupSpacing = 40
         section.contentInsets = contentInsets(for: rowId)
         section.boundarySupplementaryItems = boundarySupplementaryItems(for: rowId)
