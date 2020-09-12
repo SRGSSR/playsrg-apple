@@ -285,7 +285,8 @@ class HomeModel: Identifiable, ObservableObject {
     }
     
     private func updateRow(with id: HomeRowId, items: [HomeRowItem]) {
-        guard let index = rows.firstIndex(where: { $0.section == id }) else { return }
+        guard items.count != 0,
+              let index = rows.firstIndex(where: { $0.section == id }) else { return }
         rows[index] = Row(section: id, items: items)
     }
     
@@ -309,7 +310,7 @@ class HomeModel: Identifiable, ObservableObject {
             .map { result in
                 result.modules.map { HomeRowId.tvLatestForModule($0, type: type) }
             }
-            .replaceError(with: [])
+            .replaceError(with: eventRowIds)
             .receive(on: DispatchQueue.main)
             .sink { rowIds in
                 self.eventRowIds = rowIds
@@ -326,7 +327,7 @@ class HomeModel: Identifiable, ObservableObject {
             .map { result in
                 result.topics.map { HomeRowId.tvLatestForTopic($0) }
             }
-            .replaceError(with: [])
+            .replaceError(with: topicRowIds)
             .receive(on: DispatchQueue.main)
             .sink { rowIds in
                 self.topicRowIds = rowIds
