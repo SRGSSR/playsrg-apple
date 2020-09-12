@@ -17,6 +17,8 @@ struct VideosView: View {
             .onDisappear {
                 model.cancelRefresh()
             }
+            .onResume {
+                model.refresh()
+            }
     }
 }
-

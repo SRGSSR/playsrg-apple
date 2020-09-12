@@ -81,5 +81,8 @@ struct RadioChannelView: View {
             .onDisappear {
                 model.cancelRefresh()
             }
+            .onResume {
+                model.refresh()
+            }
     }
 }

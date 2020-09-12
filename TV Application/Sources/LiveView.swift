@@ -17,5 +17,8 @@ struct LiveView: View {
             .onDisappear {
                 model.cancelRefresh()
             }
+            .onResume {
+                model.refresh()
+            }
     }
 }
