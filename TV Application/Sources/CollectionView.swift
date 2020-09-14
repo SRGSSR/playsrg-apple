@@ -257,6 +257,19 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         return layout
     }
     
+    private func reloadData(context: Context, animated: Bool = false) {
+        let coordinator = context.coordinator
+        coordinator.sectionLayoutProvider = self.sectionLayoutProvider
+        
+        guard let dataSource = coordinator.dataSource else { return }
+        
+        let rowsHash = rows.hashValue
+        if coordinator.rowsHash != rowsHash {
+            dataSource.apply(snapshot(), animatingDifferences: animated)
+            coordinator.rowsHash = rowsHash
+        }
+    }
+    
     // MARK: - UIViewRepresentable implementation
     
     func makeCoordinator() -> Coordinator {
@@ -291,26 +304,15 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             return view
         }
         
+        reloadData(context: context)
         return collectionView
     }
     
     func updateUIView(_ uiView: UICollectionView, context: Context) {
-        let coordinator = context.coordinator
-        coordinator.sectionLayoutProvider = self.sectionLayoutProvider
-        
         if parentTabScrollingEnabled {
             uiView.play_nearestViewController?.tabBarObservedScrollView = uiView
         }
         
-        guard let dataSource = coordinator.dataSource else { return }
-        
-        // This method is called when the data changes, but also when the environment changes (rotation, focus change,
-        // etc.). To ensure costly refreshes are only performed when the data changes, we store a hash of the data
-        // which can be cheaply checked for changes.
-        let rowsHash = rows.hashValue
-        if coordinator.rowsHash != rowsHash {
-            dataSource.apply(snapshot(), animatingDifferences: true)
-            coordinator.rowsHash = rowsHash
-        }
+        reloadData(context: context, animated: true)
     }
 }
