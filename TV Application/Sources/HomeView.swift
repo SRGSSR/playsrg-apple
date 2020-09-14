@@ -66,6 +66,8 @@ struct HomeView: View {
                             .srgFont(.light, size: .headline)
                             .lineLimit(1)
                             .opacity(0.8)
+                        Spacer()
+                            .frame(height: 10)
                     }
                 }
                 .opacity(0.8)
