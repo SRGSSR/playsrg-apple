@@ -191,7 +191,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         fileprivate var sectionLayoutProvider: ((Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection)?
         
         /// Hash of the data represented by the data source. Provides for a cheap way of checking when data changes.
-        fileprivate var dataHash: Int? = nil
+        fileprivate var rowsHash: Int? = nil
         
         /// Registered view kinds for supplementary views.
         fileprivate var registeredSupplementaryViewKinds: [String] = []
@@ -272,7 +272,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         collectionView.delegate = context.coordinator
         collectionView.register(HostCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
-        let dataSource = Coordinator.DataSource(collectionView: collectionView) { collectionView, indexPath, item -> UICollectionViewCell? in
+        let dataSource = Coordinator.DataSource(collectionView: collectionView) { collectionView, indexPath, item in
             let hostCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? HostCell
             hostCell?.hostedCell = cell(indexPath, item)
             return hostCell
@@ -307,10 +307,10 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         // This method is called when the data changes, but also when the environment changes (rotation, focus change,
         // etc.). To ensure costly refreshes are only performed when the data changes, we store a hash of the data
         // which can be cheaply checked for changes.
-        let dataHash = rows.hashValue
-        if coordinator.dataHash != dataHash {
+        let rowsHash = rows.hashValue
+        if coordinator.rowsHash != rowsHash {
             dataSource.apply(snapshot(), animatingDifferences: true)
-            coordinator.dataHash = dataHash
+            coordinator.rowsHash = rowsHash
         }
     }
 }
