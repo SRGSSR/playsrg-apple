@@ -16,23 +16,25 @@ struct HeroMediaCell: View {
             VStack {
                 Spacer()
                 Text(MediaDescription.title(for: media))
-                    .srgFont(.regular, size: .subtitle)
+                    .srgFont(.regular, size: .subheadline)
                     .lineLimit(1)
                     .opacity(0.8)
                 Spacer()
-                    .frame(height: 20)
+                    .frame(height: 10)
                 Text(MediaDescription.subtitle(for: media))
                     .srgFont(.medium, size: .title)
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
+                    .padding()
                 if let summary = MediaDescription.summary(for: media) {
                     Spacer()
-                        .frame(height: 40)
+                        .frame(height: 20)
                     Text(summary)
                         .srgFont(.regular, size: .subtitle)
                         .lineLimit(4)
                         .multilineTextAlignment(.center)
                         .opacity(0.8)
+                        .padding()
                 }
                 Spacer()
             }
@@ -65,7 +67,7 @@ struct HeroMediaCell: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color(.srg_color(fromHexadecimalString: "#333333")!))
+                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
                 .redacted(reason: redactionReason)
             }
             .buttonStyle(CardButtonStyle())

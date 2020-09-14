@@ -52,6 +52,7 @@ enum SRGFont {
     enum Size {
         case caption
         case subtitle
+        case subheadline
         case body
         case headline
         case title
@@ -60,6 +61,8 @@ enum SRGFont {
             switch self {
             case .caption:
                 return (20, .caption)
+            case .subheadline:
+                return (24, .subheadline)
             case .subtitle:
                 return (29, .body)
             case .body:
@@ -67,7 +70,7 @@ enum SRGFont {
             case .headline:
                 return (31, .headline)
             case .title:
-                return (48, .title)
+                return (42, .title)
             }
         }
     }
