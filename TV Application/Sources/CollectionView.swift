@@ -65,7 +65,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     /**
      *  `UICollectionView` cell hosting a `SwiftUI` view.
      */
-    private class HostCell: UICollectionViewCell, ObservableObject {
+    private class HostCell: UICollectionViewCell {
         private var hostController: UIHostingController<Cell>?
         
         override func prepareForReuse() {
