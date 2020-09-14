@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !configuration.liveHomeSections.isEmpty {
             let liveViewController = UIHostingController(rootView: LiveView())
-            liveViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Live", comment: "Live tab title"), image: nil, tag: 2)
+            liveViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), image: nil, tag: 2)
             viewControllers.append(liveViewController)
         }
         
