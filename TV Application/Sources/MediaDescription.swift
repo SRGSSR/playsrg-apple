@@ -18,6 +18,7 @@ struct MediaDescription {
     
     static func subtitle(for media: SRGMedia?) -> String {
         guard let media = media else { return placeholder(length: 25) }
+        guard media.contentType != .livestream else { return "" }
         if let showTitle = media.show?.title, !media.title.contains(showTitle) {
             return media.title
         }
