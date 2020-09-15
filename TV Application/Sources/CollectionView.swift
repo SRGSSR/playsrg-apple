@@ -87,10 +87,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
                 }
             }
         }
-        
-        override var canBecomeFocused: Bool {
-            return false
-        }
     }
     
     private class HostSupplementaryView: UICollectionReusableView {
@@ -196,6 +192,13 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         /// Registered view kinds for supplementary views.
         fileprivate var registeredSupplementaryViewKinds: [String] = []
         
+        /// Whether cells are currently focusable.
+        fileprivate var focusable: Bool = false
+        
+        public func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+            return focusable
+        }
+        
         func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
             if let focusGuideBackgroundView = view as? FocusGuideBackgroundView {
                 focusGuideBackgroundView.section = indexPath.section
@@ -257,7 +260,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         return layout
     }
     
-    private func reloadData(context: Context, animated: Bool = false) {
+    private func reloadData(in collectionView: UICollectionView, context: Context, animated: Bool = false) {
         let coordinator = context.coordinator
         coordinator.sectionLayoutProvider = self.sectionLayoutProvider
         
@@ -265,7 +268,12 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         
         let rowsHash = rows.hashValue
         if coordinator.rowsHash != rowsHash {
-            dataSource.apply(snapshot(), animatingDifferences: animated)
+            dataSource.apply(snapshot(), animatingDifferences: animated) {
+                coordinator.focusable = true
+                collectionView.setNeedsFocusUpdate()
+                collectionView.updateFocusIfNeeded()
+                coordinator.focusable = false
+            }
             coordinator.rowsHash = rowsHash
         }
     }
@@ -281,7 +289,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         let supplementaryViewIdentifier = "hostSupplementaryView"
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout(context: context))
-        collectionView.remembersLastFocusedIndexPath = true
         collectionView.delegate = context.coordinator
         collectionView.register(HostCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
@@ -304,7 +311,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             return view
         }
         
-        reloadData(context: context)
+        reloadData(in: collectionView, context: context)
         return collectionView
     }
     
@@ -313,6 +320,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             uiView.play_nearestViewController?.tabBarObservedScrollView = uiView
         }
         
-        reloadData(context: context, animated: true)
+        reloadData(in: uiView, context: context, animated: true)
     }
 }
