@@ -14,9 +14,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    private static func configuredTabBarController() -> UITabBarController {
-        let tabBarController = UITabBarController()
-        tabBarController.view.backgroundColor = .play_black
+    private static func configuredTabBarController(tabBarController: UITabBarController) {
+        tabBarController.view.backgroundColor = (UIScreen.main.traitCollection.userInterfaceStyle == .dark) ? .play_black : .play_lightGray
         
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = .play_cardGrayBackground
@@ -31,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         itemAppearance.focused.titleTextAttributes = activeTitleTextAttributes
         
         tabBarController.tabBar.standardAppearance = appearance
-        return tabBarController
     }
     
     // MARK: - UIApplicationDelegate protocol
@@ -78,9 +76,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         profileViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Profile", comment: "Profile tab title"), image: nil, tag: 4)
         viewControllers.append(profileViewController)
         
-        let tabBarController = Self.configuredTabBarController()
+        let tabBarController = UITabBarController()
+        Self.configuredTabBarController(tabBarController: tabBarController)
         tabBarController.viewControllers = viewControllers
         window.rootViewController = tabBarController
         return true
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        if let tabBarController = self.window?.rootViewController as? UITabBarController {
+            Self.configuredTabBarController(tabBarController: tabBarController)
+        }
     }
 }
