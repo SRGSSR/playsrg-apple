@@ -446,31 +446,31 @@ name: libextobjc, nameSpecified: , owner: SRGSSR, version: 0.6_srg2
 
 name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: 1.0_srg4
 
-name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.1
+name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.2
 
 name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
 
-name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 4.2.1
+name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 4.2.2
 
 name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.1.0
 
 name: srgcontentprotection-apple, nameSpecified: , owner: SRGSSR, version: 2.0.2
 
-name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 8.0.0
+name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 8.0.1
 
 name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 2.0.3
+name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 2.0.4
 
-name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 5.0.1
+name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 5.0.2
 
 name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
 
-name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: 5.0.2
+name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: 5.0.3
 
 name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: 2.0.2
 
-name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: 2.0.3
+name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: 2.0.4
 
 name: tagcommander-apple, nameSpecified: , owner: SRGSSR, version: 4.5.4_4.4.1_srg3
 
@@ -480,4 +480,4 @@ name: YYWebImage, nameSpecified: , owner: SRGSSR, version: 1.0.5_srg2
 
 add-version-numbers: true
 
-LicensePlist Version: 1.8.3
+LicensePlist Version: 2.16.0
