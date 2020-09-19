@@ -117,5 +117,6 @@
   "3.1.0-338": "- UI improvement for video livestreams.\n- Long press to copy the song title and artist name.",
   "3.1.1-339": "- Always hide the playback controls after entering full screen.\n- Fix screen incorrectly turning off when watching videos with sound over AirPlay.\n- Fix issue leading to the loading indicator being displayed more than necessary.\n- iPad profile split view: Reset right navigation to its root when tapping again on left cells.",
   "3.1.1-340": "- Updated TV and radio channel overview on the Live tab. \n- Add \"sort by\" filter in Search tab.\n- iOS prediction for TV and radio livestreams.",
-  "3.1.1-341": "- Correctly take into account SDH accessibility opt-in when choosing subtitles automatically."
+  "3.1.1-341": "- Correctly take into account SDH accessibility opt-in when choosing subtitles automatically.",
+  "3.1.2-342": "- Fix an iOS 14 regression leading to the player still continuing playback of a video in the background, even after having been properly released."
 }
