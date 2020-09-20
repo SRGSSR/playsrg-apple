@@ -6,5 +6,5 @@ github "microsoft/appcenter-sdk-apple" ~> 3.1.0
 github "SRGSSR/DZNEmptyDataSet" "v1.8.1_srg1"
 github "SRGSSR/Masonry" "v1.1.0_srg1"
 github "urbanairship/ios-library" ~> 13.3.2
-github "SRGSSR/srgletterbox-apple" "5.0.1"
-github "SRGSSR/srguserdata-apple" "2.0.3"
+github "SRGSSR/srgletterbox-apple" "5.0.2"
+github "SRGSSR/srguserdata-apple" "2.0.4"
