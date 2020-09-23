@@ -565,9 +565,6 @@ end
 
 # Update dSYMs from AppStore to App Center.
 def update_dsyms(app_identifier, platform, appcenter_appname, options)
-  # TODO: Please retest after https://github.com/fastlane/fastlane/issues/17140
-  return
-
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
   output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
