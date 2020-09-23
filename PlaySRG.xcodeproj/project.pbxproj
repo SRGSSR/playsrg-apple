@@ -6265,7 +6265,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"\n";
+			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nrm -f /tmp/Package.swift\ntouch /tmp/Package.swift\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --package-path \"/tmp/Package.swift\" --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"\n";
 		};
 		6FE3C7C31F74EEA500D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6279,7 +6279,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"";
+			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nrm -f /tmp/Package.swift\ntouch /tmp/Package.swift\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --package-path \"/tmp/Package.swift\" --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"\n";
 		};
 		6FE3C7C41F74EEBE00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6293,7 +6293,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"";
+			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nrm -f /tmp/Package.swift\ntouch /tmp/Package.swift\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --package-path \"/tmp/Package.swift\" --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"\n";
 		};
 		6FE3C7C61F74EECF00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6307,7 +6307,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"";
+			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nrm -f /tmp/Package.swift\ntouch /tmp/Package.swift\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --package-path \"/tmp/Package.swift\" --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"\n";
 		};
 		6FE3C7C71F74EEDB00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6321,7 +6321,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"";
+			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nrm -f /tmp/Package.swift\ntouch /tmp/Package.swift\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --package-path \"/tmp/Package.swift\" --github-token \"$LICENSE_PLIST_GITHUB_TOKEN\"\n";
 		};
 		6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
