@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/SRGSSR/ComScore-xcframework-apple.git",
         "state": {
           "branch": null,
-          "revision": "86bc427330768e5803ae98d39d8a3d756d01bc9d",
-          "version": "6.5.0"
+          "revision": "b5dc5dc60435f363a744e17975957361c844aa38",
+          "version": "6.6.0"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "998588c80611e4fe9b71dd4323fa938ee62f4ff7",
-          "version": "9.1.1"
+          "revision": "a2a56211cd80614e1ac90bf2e76c5329f4f6b3d0",
+          "version": "9.1.2"
         }
       },
       {
@@ -69,7 +69,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": "feature/spm-support",
-          "revision": "9746614355a456d09945a9c81e5771c604915cd6",
+          "revision": "fd07b72ff581c992558131e3a89e3a439a37fd49",
           "version": null
         }
       },
@@ -78,7 +78,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
         "state": {
           "branch": "feature/spm-support",
-          "revision": "05325a14b0aa2c8e5e343aa452ec37c2f862511f",
+          "revision": "a01c3a6d36cf303f77f9f4261378fd1f695b8336",
           "version": null
         }
       },
@@ -87,7 +87,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
         "state": {
           "branch": "feature/spm-support",
-          "revision": "8c3b9acc297c4a5a28073a4edb5b821ec47c2b79",
+          "revision": "4c62c46612119340126e04490381c88a8d247d59",
           "version": null
         }
       },
@@ -96,7 +96,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "feature/spm-support",
-          "revision": "1e63058b8f2971ff3ed25d81f101cac8996c7891",
+          "revision": "1c4c231ccaee2601af630ff440c24793f9523215",
           "version": null
         }
       },
@@ -114,7 +114,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
           "branch": "feature/spm-support",
-          "revision": "bc7a7e534e6756d7a1f4e7e98182e818d2e0bdc8",
+          "revision": "fa19100c8614bd208796a614c44b38c1f1c9251a",
           "version": null
         }
       },
@@ -123,7 +123,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "feature/spm-support",
-          "revision": "0337ed07babc585fc9ba29288a9e4197c09ed098",
+          "revision": "4268632e60008098a40abee22b479e694f988531",
           "version": null
         }
       },
@@ -141,7 +141,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
           "branch": "feature/spm-support",
-          "revision": "d25678d7ce9bce76d86ea783812265b74f89c187",
+          "revision": "c4ac97bead4d77c49bb1845fc8597347ac312246",
           "version": null
         }
       },
@@ -150,7 +150,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgnetwork-apple.git",
         "state": {
           "branch": "feature/spm-support",
-          "revision": "ffcf1817a2ab3d0ded4a6e86334e3cd4a277d191",
+          "revision": "f9ec437e4b76f157a879b56f239fe301f88c673e",
           "version": null
         }
       },
