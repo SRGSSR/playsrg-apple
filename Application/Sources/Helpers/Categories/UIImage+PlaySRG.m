@@ -92,13 +92,9 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
             break;
         }
             
-        case SRGBlockingReasonAgeRating12: {
-            return [UIImage imageNamed:@"rating_12-25"];
-            break;
-        }
-            
+        case SRGBlockingReasonAgeRating12:
         case SRGBlockingReasonAgeRating18: {
-            return [UIImage imageNamed:@"rating_18-25"];
+            return [UIImage imageNamed:@"age_rating-25"];
             break;
         }
             
