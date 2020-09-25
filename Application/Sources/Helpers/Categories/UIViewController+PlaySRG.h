@@ -4,10 +4,10 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoreMedia/CoreMedia.h>
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <SRGLetterbox/SRGLetterbox.h>
-#import <UIKit/UIKit.h>
+@import CoreMedia;
+@import SRGDataProvider;
+@import SRGLetterbox;
+@import UIKit;
 
 /**
  *  Player types.
@@ -36,6 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)play_isMovingToParentViewController;
 - (BOOL)play_isMovingFromParentViewController;
+
+/**
+ * Return YES iff the view is displayed and visible (appearing, appeared, or disappearing)
+ */
+@property (nonatomic, readonly, getter=play_isViewVisible) BOOL play_viewVisible;
 
 /**
  *  The previewing context (peek) from which the view controller is presented, if any.

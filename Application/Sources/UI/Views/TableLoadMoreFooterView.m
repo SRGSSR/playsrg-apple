@@ -9,20 +9,21 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
-#import <Masonry/Masonry.h>
-
 @implementation TableLoadMoreFooterView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        UIImageView *loadingImageView = [UIImageView play_loadingImageView48WithTintColor:UIColor.play_lightGrayColor];
-        [self addSubview:loadingImageView];
-        [loadingImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self);
-        }];
-        
         self.backgroundColor = UIColor.clearColor;
+        
+        UIImageView *loadingImageView = [UIImageView play_loadingImageView48WithTintColor:UIColor.play_lightGrayColor];
+        loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:loadingImageView];
+        
+        [NSLayoutConstraint activateConstraints:@[
+            [loadingImageView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+            [loadingImageView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor],
+        ]];
     }
     return self;
 }

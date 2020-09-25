@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSection.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
@@ -18,9 +19,9 @@
 #import "WatchLater.h"
 #import "WatchLaterTableViewCell.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGUserData/SRGUserData.h>
+@import libextobjc;
+@import SRGAnalytics;
+@import SRGUserData;
 
 @interface WatchLaterViewController () <WatchLaterTableViewCellDelegate>
 

@@ -11,10 +11,10 @@
 #import "ShowCollectionViewCell.h"
 #import "ShowViewController.h"
 #import "SwimlaneCollectionViewLayout.h"
+#import "UIView+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAnalytics;
+@import SRGAppearance;
 
 // Small margin to avoid overlap with the horizontal scrolling indicator
 static const CGFloat kBottomInset = 15.f;
@@ -128,7 +128,7 @@ static const CGFloat kBottomInset = 15.f;
 {
     SRGShow *show = self.shows[indexPath.row];
     ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
-    [self.nearestViewController.navigationController pushViewController:showViewController animated:YES];
+    [self.play_nearestViewController.navigationController pushViewController:showViewController animated:YES];
     
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.value = show.URN;

@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSection.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "ShowCollectionViewCell.h"
@@ -17,9 +18,9 @@
 #import "UIViewController+PlaySRG.h"
 
 #import <BDKCollectionIndexView/BDKCollectionIndexView.h>
-#import <libextobjc/libextobjc.h>
-#import <Masonry/Masonry.h>
-#import <SRGAppearance/SRGAppearance.h>
+
+@import libextobjc;
+@import SRGAppearance;
 
 @interface ShowsViewController () {
 @private
@@ -90,6 +91,7 @@
     self.collectionView = collectionView;
     
     BDKCollectionIndexView *collectionIndexView = [[BDKCollectionIndexView alloc] initWithFrame:CGRectZero indexTitles:nil];
+    collectionIndexView.translatesAutoresizingMaskIntoConstraints = NO;
     collectionIndexView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.7f];
     collectionIndexView.tintColor = UIColor.play_lightGrayColor;
     collectionIndexView.alpha = 1.f;
@@ -106,6 +108,18 @@
     [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
     self.view = view;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.collectionIndexView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [self.collectionIndexView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
+        [self.collectionIndexView.rightAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.rightAnchor],
+        [self.collectionIndexView.widthAnchor constraintEqualToConstant:28.f]
+    ]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -128,18 +142,6 @@
     [NSNotificationCenter.defaultCenter removeObserver:self
                                                   name:UIAccessibilityElementFocusedNotification
                                                 object:nil];
-}
-
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    
-    [self.collectionIndexView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-        make.right.equalTo(self.view.mas_right);
-        make.width.equalTo(@28.f);
-    }];
 }
 
 #pragma mark Rotation

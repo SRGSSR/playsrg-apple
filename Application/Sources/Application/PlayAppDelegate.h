@@ -7,8 +7,8 @@
 #import "AnalyticsConstants.h"
 #import "TabBarController.h"
 
-#import <StoreKit/StoreKit.h>
-#import <UIKit/UIKit.h>
+@import StoreKit;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

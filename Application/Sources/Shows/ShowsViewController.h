@@ -7,7 +7,7 @@
 #import "CollectionRequestViewController.h"
 #import "RadioChannel.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
+@import SRGAnalytics;
 
 NS_ASSUME_NONNULL_BEGIN
 

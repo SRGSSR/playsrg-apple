@@ -4,9 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoreMedia/CoreMedia.h>
-#import <SRGLetterbox/SRGLetterbox.h>
-#import <UIKit/UIKit.h>
+@import CoreMedia;
+@import SRGLetterbox;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  is.
  */
 @property (nonatomic, readonly, getter=play_isActuallyHidden) BOOL play_actuallyHidden;
+
+/**
+ * Return the nearest view controller which displays the view, nil if none
+ */
+@property (nonatomic, readonly, weak, nullable) __kindof UIViewController *play_nearestViewController;
 
 @end
 

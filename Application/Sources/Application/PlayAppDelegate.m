@@ -34,28 +34,35 @@
 #import "UpdateInfo.h"
 #import "WatchLater.h"
 
-#import <Airship/AirshipLib.h>
-#import <AppCenter/AppCenter.h>
-#import <AppCenterCrashes/AppCenterCrashes.h>
-#import <AppCenterDistribute/AppCenterDistribute.h>
-#import <AVFoundation/AVFoundation.h>
-#import <Firebase/Firebase.h>
 #import <InAppSettingsKit/IASKSettingsReader.h>
-#import <libextobjc/libextobjc.h>
-#import <Mantle/Mantle.h>
-#import <SafariServices/SafariServices.h>
-#import <SRGAnalytics_Identity/SRGAnalytics_Identity.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <SRGIdentity/SRGIdentity.h>
-#import <SRGLetterbox/SRGLetterbox.h>
-#import <SRGUserData/SRGUserData.h>
+
+@import Airship;
+@import AppCenter;
+@import AppCenterCrashes;
+@import AppCenterDistribute;
+@import AVFoundation;
+@import Firebase;
+@import libextobjc;
+@import Mantle;
+@import SafariServices;
+@import SRGAnalytics_Identity;
+@import SRGAppearance;
+@import SRGDataProvider;
+@import SRGIdentity;
+@import SRGLetterbox;
+@import SRGUserData;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-#import <Fingertips/Fingertips.h>
+@import Fingertips;
 #endif
 
 static void *s_kvoContext = &s_kvoContext;
+
+@interface PlayAppDelegate ()
+
+@property (nonatomic) DeepLinkService *deepLinkService;
+
+@end
 
 @implementation PlayAppDelegate
 
@@ -81,8 +88,6 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    
     [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
     
     // The configuration file, copied at build time in the main product bundle, will have the standard Firebase
@@ -90,6 +95,9 @@ static void *s_kvoContext = &s_kvoContext;
     if ([NSBundle.mainBundle pathForResource:@"GoogleService-Info" ofType:@"plist"]) {
         [FIRApp configure];
     }
+    
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    self.deepLinkService = [[DeepLinkService alloc] initWithServiceURL:applicationConfiguration.middlewareURL];
     
     NSURL *identityWebserviceURL = applicationConfiguration.identityWebserviceURL;
     NSURL *identityWebsiteURL = applicationConfiguration.identityWebsiteURL;
@@ -113,7 +121,8 @@ static void *s_kvoContext = &s_kvoContext;
                                                  object:SRGIdentityService.currentIdentityService];
     }
     
-    NSURL *storeFileURL = [HLSApplicationLibraryDirectoryURL() URLByAppendingPathComponent:@"PlayData.sqlite"];
+    NSURL *libraryDirectoryURL = [NSURL fileURLWithPath:NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).firstObject];
+    NSURL *storeFileURL = [libraryDirectoryURL URLByAppendingPathComponent:@"PlayData.sqlite"];
     SRGUserData.currentUserData = [[SRGUserData alloc] initWithStoreFileURL:storeFileURL
                                                                  serviceURL:applicationConfiguration.userDataServiceURL
                                                             identityService:SRGIdentityService.currentIdentityService];
@@ -226,7 +235,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:YES];
     if (! [supportedActions containsObject:URLComponents.host.lowercaseString]) {
-        NSURL *deepLinkURL = [DeepLinkService.sharedService schemeURLFromWebURL:URL];
+        NSURL *deepLinkURL = [self.deepLinkService schemeURLFromWebURL:URL];
         if (deepLinkURL) {
             URLComponents = [NSURLComponents componentsWithURL:deepLinkURL resolvingAgainstBaseURL:YES];
         }
@@ -521,7 +530,7 @@ static void *s_kvoContext = &s_kvoContext;
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
-                                 localizedDescription:NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff")];
+                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff") }];
             [Banner showError:error inViewController:nil];
         }
         
@@ -548,7 +557,7 @@ static void *s_kvoContext = &s_kvoContext;
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
-                                 localizedDescription:NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff")];
+                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff") }];
             [Banner showError:error inViewController:nil];
         }
         
@@ -691,7 +700,7 @@ static void *s_kvoContext = &s_kvoContext;
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                      code:PlayErrorCodeNotFound
-                                     localizedDescription:NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff, deep linking or a push notification")];
+                                                 userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff, deep linking or a push notification") }];
                 [Banner showError:error inViewController:nil];
             }
         }] resume];
@@ -713,7 +722,7 @@ static void *s_kvoContext = &s_kvoContext;
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                      code:PlayErrorCodeNotFound
-                                     localizedDescription:NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff, deep linking or a push notification")];
+                                                 userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff, deep linking or a push notification") }];
                 [Banner showError:error inViewController:nil];
             }
         }] resume];
@@ -732,7 +741,7 @@ static void *s_kvoContext = &s_kvoContext;
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
-                                 localizedDescription:NSLocalizedString(@"The page cannot be opened.", @"Error message when a topic cannot be opened via Handoff, deep linking or a push notification")];
+                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The page cannot be opened.", @"Error message when a topic cannot be opened via Handoff, deep linking or a push notification") }];
             [Banner showError:error inViewController:nil];
         }
     }] resume];
@@ -750,7 +759,7 @@ static void *s_kvoContext = &s_kvoContext;
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
-                                 localizedDescription:NSLocalizedString(@"The page cannot be opened.", @"Error message when an event module cannot be opened via Handoff, deep linking or a push notification")];
+                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The page cannot be opened.", @"Error message when an event module cannot be opened via Handoff, deep linking or a push notification") }];
             [Banner showError:error inViewController:nil];
         }
     }] resume];

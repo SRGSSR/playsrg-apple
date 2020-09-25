@@ -9,10 +9,10 @@
 #import "NSBundle+PlaySRG.h"
 #import "Play-Swift-Bridge.h"
 #import "UIColor+PlaySRG.h"
+#import "UIView+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGDataProvider/SRGDataProvider.h>
+@import SRGAppearance;
+@import SRGDataProvider;
 
 static NSString *BannerShortenedName(NSString *name);
 
@@ -22,7 +22,7 @@ static NSString *BannerShortenedName(NSString *name);
 
 + (void)showWithStyle:(BannerStyle)style message:(NSString *)message image:(UIImage *)image sticky:(BOOL)sticky inView:(UIView *)view
 {
-    [self showWithStyle:style message:message image:image sticky:sticky inViewController:view.nearestViewController];
+    [self showWithStyle:style message:message image:image sticky:sticky inViewController:view.play_nearestViewController];
 }
 
 + (void)showWithStyle:(BannerStyle)style message:(NSString *)message image:(UIImage *)image sticky:(BOOL)sticky inViewController:(UIViewController *)viewController
@@ -72,7 +72,7 @@ static NSString *BannerShortenedName(NSString *name);
 
 + (void)showError:(NSError *)error inView:(UIView *)view
 {
-    [self showError:error inViewController:view.nearestViewController];
+    [self showError:error inViewController:view.play_nearestViewController];
 }
 
 + (void)showError:(NSError *)error inViewController:(UIViewController *)viewController
@@ -82,12 +82,12 @@ static NSString *BannerShortenedName(NSString *name);
     }
     
     // Multiple errors. Pick the first ones
-    if ([error hasCode:SRGNetworkErrorMultiple withinDomain:SRGNetworkErrorDomain]) {
+    if ([error.domain isEqualToString:SRGNetworkErrorDomain] && error.code == SRGNetworkErrorMultiple) {
         error = [error.userInfo[SRGNetworkErrorsKey] firstObject];
     }
     
     // Never display cancellation errors
-    if ([error hasCode:NSURLErrorCancelled withinDomain:NSURLErrorDomain]) {
+    if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
         return;
     }
     
@@ -96,7 +96,7 @@ static NSString *BannerShortenedName(NSString *name);
 
 + (void)showFavorite:(BOOL)isFavorite forItemWithName:(NSString *)name inView:(UIView *)view
 {
-    [self showFavorite:isFavorite forItemWithName:name inViewController:view.nearestViewController];
+    [self showFavorite:isFavorite forItemWithName:name inViewController:view.play_nearestViewController];
 }
 
 + (void)showFavorite:(BOOL)isFavorite forItemWithName:(NSString *)name inViewController:(UIViewController *)viewController
@@ -113,7 +113,7 @@ static NSString *BannerShortenedName(NSString *name);
 
 + (void)showSubscription:(BOOL)subscribed forShowWithName:(NSString *)name inView:(UIView *)view
 {
-    [self showSubscription:subscribed forShowWithName:name inViewController:view.nearestViewController];
+    [self showSubscription:subscribed forShowWithName:name inViewController:view.play_nearestViewController];
 }
 
 + (void)showSubscription:(BOOL)subscribed forShowWithName:(NSString *)name inViewController:(UIViewController *)viewController
@@ -130,7 +130,7 @@ static NSString *BannerShortenedName(NSString *name);
 
 + (void)showWatchLaterAdded:(BOOL)added forItemWithName:(NSString *)name inView:(UIView *)view
 {
-    [self showWatchLaterAdded:added forItemWithName:name inViewController:view.nearestViewController];
+    [self showWatchLaterAdded:added forItemWithName:name inViewController:view.play_nearestViewController];
 }
 
 + (void)showWatchLaterAdded:(BOOL)added forItemWithName:(NSString *)name inViewController:(UIViewController *)viewController

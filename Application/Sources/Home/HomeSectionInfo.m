@@ -16,8 +16,8 @@
 #import "HomeShowVerticalListTableViewCell.h"
 #import "HomeTopicListTableViewCell.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGDataProvider/SRGDataProvider.h>
+@import libextobjc;
+@import SRGDataProvider;
 
 @interface HomeSectionInfo ()
 

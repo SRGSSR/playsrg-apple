@@ -1,1 +1,3 @@
+#include "Xcode/Play iOS.xcconfig"
+
 SWIFT_OBJC_BRIDGING_HEADER=$(PROJECT_DIR)/UITests/Screenshots/Sources/Bridges/Screenshots-ObjectiveC-Bridge.h

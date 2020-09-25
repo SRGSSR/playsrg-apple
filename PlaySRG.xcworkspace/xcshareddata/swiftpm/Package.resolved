@@ -1,0 +1,196 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ComScore",
+        "repositoryURL": "https://github.com/SRGSSR/ComScore-xcframework-apple.git",
+        "state": {
+          "branch": null,
+          "revision": "b5dc5dc60435f363a744e17975957361c844aa38",
+          "version": "6.6.0"
+        }
+      },
+      {
+        "package": "FetchImage",
+        "repositoryURL": "https://github.com/kean/FetchImage.git",
+        "state": {
+          "branch": null,
+          "revision": "b9ea4f9f97a4bc9fde452cea277d25d0a4f8f6df",
+          "version": "0.2.1"
+        }
+      },
+      {
+        "package": "FXReachability",
+        "repositoryURL": "https://github.com/SRGSSR/FXReachability.git",
+        "state": {
+          "branch": "master",
+          "revision": "1eac916df0045630e779fa60eef22ed0d185e15f",
+          "version": null
+        }
+      },
+      {
+        "package": "libextobjc",
+        "repositoryURL": "https://github.com/SRGSSR/libextobjc.git",
+        "state": {
+          "branch": "master",
+          "revision": "30ee5b73bdf57a826978aa146881277f22369be1",
+          "version": null
+        }
+      },
+      {
+        "package": "MAKVONotificationCenter",
+        "repositoryURL": "https://github.com/SRGSSR/MAKVONotificationCenter.git",
+        "state": {
+          "branch": "master",
+          "revision": "60395e0601ffd4a784856b423d4cac558366276d",
+          "version": null
+        }
+      },
+      {
+        "package": "Mantle",
+        "repositoryURL": "https://github.com/SRGSSR/Mantle.git",
+        "state": {
+          "branch": "swift-package-manager-support",
+          "revision": "cd18bf7f9c6c5a0d2f4aec6012fe1615b86032fe",
+          "version": null
+        }
+      },
+      {
+        "package": "Nuke",
+        "repositoryURL": "https://github.com/kean/Nuke.git",
+        "state": {
+          "branch": null,
+          "revision": "a2a56211cd80614e1ac90bf2e76c5329f4f6b3d0",
+          "version": "9.1.2"
+        }
+      },
+      {
+        "package": "SRGAnalytics",
+        "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "9b9158dc7fde510da53945c901205b21394193fb",
+          "version": null
+        }
+      },
+      {
+        "package": "SRGAppearance",
+        "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "6274a2d02f98f5624016023822b323c59545442f",
+          "version": null
+        }
+      },
+      {
+        "package": "SRGContentProtection",
+        "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "5b1587d9212e1bbaceea3f6ca054232807c3308f",
+          "version": null
+        }
+      },
+      {
+        "package": "SRGDataProvider",
+        "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "0148eef50f74f9fd75155c74aa4b15170015fdbb",
+          "version": null
+        }
+      },
+      {
+        "package": "SRGDiagnostics",
+        "repositoryURL": "https://github.com/SRGSSR/srgdiagnostics-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "3a95f5138f019e91d4e721e3afc3aa3863f4a4a2",
+          "version": null
+        }
+      },
+      {
+        "package": "SRGIdentity",
+        "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "79048b860a672de2ae6e1d5487ba0cdec67ee193",
+          "version": null
+        }
+      },
+      {
+        "package": "SRGLetterbox",
+        "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "fdd2e1b7b0b330c05a36e39cdc4b44e4347ecd08",
+          "version": null
+        }
+      },
+      {
+        "package": "SRGLogger",
+        "repositoryURL": "https://github.com/SRGSSR/srglogger-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "0f40b67ae8f93c31271570deb16c6a5bd0a17419",
+          "version": null
+        }
+      },
+      {
+        "package": "SRGMediaPlayer",
+        "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "f775aa12b2758fbc0ff2091baf1fd1cc2957ff77",
+          "version": null
+        }
+      },
+      {
+        "package": "SRGNetwork",
+        "repositoryURL": "https://github.com/SRGSSR/srgnetwork-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "98c50251b8f2c94e626e1a264eb560c52662aa57",
+          "version": null
+        }
+      },
+      {
+        "package": "TCCore",
+        "repositoryURL": "https://github.com/SRGSSR/TCCore-xcframework-apple.git",
+        "state": {
+          "branch": null,
+          "revision": "be5774e8e68bbf29a9da93506e6bfa6de1177268",
+          "version": "4.5.4-srg3"
+        }
+      },
+      {
+        "package": "TCSDK",
+        "repositoryURL": "https://github.com/SRGSSR/TCSDK-xcframework-apple.git",
+        "state": {
+          "branch": null,
+          "revision": "391dbdc47db04f4049fdabca6b5d1f5446589d3f",
+          "version": "4.4.1-srg3"
+        }
+      },
+      {
+        "package": "UICKeyChainStore",
+        "repositoryURL": "https://github.com/kishikawakatsumi/UICKeyChainStore.git",
+        "state": {
+          "branch": null,
+          "revision": "2f0380d539ec53b66eef211b3c983749ad9e2686",
+          "version": "2.2.0"
+        }
+      },
+      {
+        "package": "YYWebImage",
+        "repositoryURL": "https://github.com/SRGSSR/YYWebImage.git",
+        "state": {
+          "branch": "master",
+          "revision": "f7408c97fd0e897e1bb8b3e8b01e0c8e9dc22123",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

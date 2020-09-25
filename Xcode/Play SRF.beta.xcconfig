@@ -1,4 +1,4 @@
 #include "Xcode/Links/Play SRF.beta.xcconfig"
-#include "Pods/Target Support Files/Pods-PlaySRG-Play SRF/Pods-PlaySRG-Play SRF.beta.xcconfig"
-#include "Xcode/Play Application.xcconfig"
+#include "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.beta.xcconfig"
+#include "Xcode/Play iOS Application.xcconfig"
 

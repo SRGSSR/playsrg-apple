@@ -31,10 +31,9 @@
 #import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
-#import <Masonry/Masonry.h>
-#import <SRGAnalytics_DataProvider/SRGAnalytics_DataProvider.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGMediaPlayer/SRGMediaPlayer.h>
+@import SRGAnalytics_DataProvider;
+@import SRGAppearance;
+@import SRGMediaPlayer;
 
 @interface MediaPreviewViewController ()
 
@@ -69,10 +68,16 @@
 
 - (instancetype)initWithMedia:(SRGMedia *)media
 {
-    if (self = [super init]) {
+    if (self = [self initFromStoryboard]) {
         self.media = media;
     }
     return self;
+}
+
+- (instancetype)initFromStoryboard
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
+    return storyboard.instantiateInitialViewController;
 }
 
 #pragma mark View lifecycle
@@ -98,6 +103,10 @@
                                            selector:@selector(mediaMetadataDidChange:)
                                                name:SRGLetterboxMetadataDidChangeNotification
                                              object:self.letterboxController];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contentSizeCategoryDidChange:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
     
     self.letterboxController.contentURLOverridingBlock = ^(NSString *URN) {
         Download *download = [Download downloadForURN:URN];
@@ -168,15 +177,6 @@
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & UIViewController.play_supportedInterfaceOrientations;
-}
-
-#pragma mark Accessibility
-
-- (void)updateForContentSizeCategory
-{
-    [super updateForContentSizeCategory];
-    
-    [self updateFonts];
 }
 
 #pragma mark Peek and pop
@@ -266,7 +266,7 @@
             
             activityViewController.modalPresentationStyle = UIModalPresentationPopover;
             
-            UIViewController *viewController = self.play_previewingContext.sourceView.nearestViewController;
+            UIViewController *viewController = self.play_previewingContext.sourceView.play_nearestViewController;
             [viewController presentViewController:activityViewController animated:YES completion:nil];
         }];
         [previewActionItems addObject:shareAction];
@@ -276,7 +276,7 @@
         UIPreviewAction *showAction = [UIPreviewAction actionWithTitle:NSLocalizedString(@"More episodes", @"Button label to open the show episode page from the preview window") style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
             ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:self.media.show fromPushNotification:NO];
             
-            UIViewController *viewController = self.play_previewingContext.sourceView.nearestViewController;
+            UIViewController *viewController = self.play_previewingContext.sourceView.play_nearestViewController;
             UINavigationController *navigationController = viewController.navigationController;
             if (navigationController) {
                 [navigationController pushViewController:showViewController animated:YES];
@@ -294,7 +294,7 @@
         self.shouldRestoreServicePlayback = NO;
         
         UIView *sourceView = self.play_previewingContext.sourceView;
-        [sourceView.nearestViewController play_presentMediaPlayerFromLetterboxController:self.letterboxController withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:nil];
+        [sourceView.play_nearestViewController play_presentMediaPlayerFromLetterboxController:self.letterboxController withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:nil];
     }];
     [previewActionItems addObject:openAction];
     
@@ -374,6 +374,12 @@
 
 #pragma mark Notifications
 
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+    // Automatically resumes playback since we have no controls
+    [self.letterboxController togglePlayPause];
+}
+
 - (void)mediaMetadataDidChange:(NSNotification *)notification
 {
     [self reloadData];
@@ -382,15 +388,14 @@
     SRGMediaComposition *previousMediaComposition = notification.userInfo[SRGLetterboxPreviousMediaCompositionKey];
     SRGMediaComposition *mediaComposition = notification.userInfo[SRGLetterboxMediaCompositionKey];
     
-    if ([self isViewVisible] && mediaComposition && ! [mediaComposition.fullLengthMedia isEqual:previousMediaComposition.fullLengthMedia]) {
+    if (self.play_viewVisible && mediaComposition && ! [mediaComposition.fullLengthMedia isEqual:previousMediaComposition.fullLengthMedia]) {
         [self srg_trackPageView];
     }
 }
 
-- (void)applicationDidBecomeActive:(NSNotification *)notification
+- (void)contentSizeCategoryDidChange:(NSNotification *)notification
 {
-    // Automatically resumes playback since we have no controls
-    [self.letterboxController togglePlayPause];
+    [self updateFonts];
 }
 
 @end

@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  Return the receiver with the first letter changed to uppercase (does not alter the other letters).
  */
 @property (nonatomic, readonly, copy) NSString *play_localizedUppercaseFirstLetterString;
+
+/**
+ *  Calculate the MD5 hash.
+ */
+@property (nonatomic, readonly, copy) NSString *play_md5hash;
 
 @end
 

@@ -21,10 +21,10 @@
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGUserData/SRGUserData.h>
+@import libextobjc;
+@import SRGAnalytics;
+@import SRGAppearance;
+@import SRGUserData;
 
 @interface WatchLaterTableViewCell ()
 

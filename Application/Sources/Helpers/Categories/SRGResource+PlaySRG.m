@@ -6,7 +6,7 @@
 
 #import "SRGResource+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
+@import libextobjc;
 
 @implementation SRGResource (PlaySRG)
 

@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSection.h"
 #import "Banner.h"
 #import "Layout.h"
 #import "NSArray+PlaySRG.h"
@@ -21,7 +22,7 @@
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface NotificationsViewController ()
 
@@ -339,14 +340,14 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    if (self.viewVisible) {
+    if (self.play_viewVisible) {
         [PushService.sharedService resetApplicationBadge];
     }
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification
 {
-    if (self.viewVisible) {
+    if (self.play_viewVisible) {
         [PushService.sharedService resetApplicationBadge];
     }
 }
@@ -355,7 +356,7 @@
 {
     [self refresh];
     
-    if (self.viewVisible) {
+    if (self.play_viewVisible) {
         [PushService.sharedService resetApplicationBadge];
     }
 }

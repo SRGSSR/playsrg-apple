@@ -6,7 +6,7 @@
 
 #import "UpdateInfo.h"
 
-#import <libextobjc/libextobjc.h>
+@import libextobjc;
 
 @interface UpdateInfo ()
 

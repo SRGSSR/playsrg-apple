@@ -12,9 +12,8 @@
 #import "PlayErrors.h"
 #import "PlayLogger.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <libextobjc/libextobjc.h>
-#import <SRGLogger/SRGLogger.h>
+@import libextobjc;
+@import SRGLogger;
 
 static NSString *FavoriteIdentifier(FavoriteType type, NSString *uid);
 
@@ -88,7 +87,8 @@ static NSArray<DeprecatedFavorite *> *s_sortedFavorites;
 
 + (NSString *)favoritesFilePath
 {
-    return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"favorites.plist"];
+    NSString *libraryDirectoryPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).firstObject;
+    return [libraryDirectoryPath stringByAppendingPathComponent:@"favorites.plist"];
 }
 
 + (NSDictionary<NSString *, DeprecatedFavorite *> *)loadFavoritesDictionary
@@ -126,7 +126,8 @@ static NSArray<DeprecatedFavorite *> *s_sortedFavorites;
 
 + (NSString *)favoritesBackupFilePath
 {
-    return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"favoritesBackup.plist"];
+    NSString *libraryDirectoryPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).firstObject;
+    return [libraryDirectoryPath stringByAppendingPathComponent:@"favoritesBackup.plist"];
 }
 
 + (NSDictionary<NSString *, DeprecatedFavorite *> *)loadFavoritesBackupDictionary

@@ -19,9 +19,10 @@
 #import "UIDevice+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <GoogleCast/GoogleCast.h>
-#import <SRGAnalytics_DataProvider/SRGAnalytics_DataProvider.h>
+#import <objc/runtime.h>
+
+@import GoogleCast;
+@import SRGAnalytics_DataProvider;
 
 static Playlist *s_playlist;
 
@@ -36,12 +37,7 @@ static Playlist *SharedPlaylistForURN(NSString *URN)
 static void *s_previewingDelegatesKey = &s_previewingDelegatesKey;
 static void *s_longPressGestureRecognizerKey = &s_longPressGestureRecognizerKey;
 static void *s_previewingContextKey = &s_previewingContextKey;
-
-// Original implementation of the methods we swizzle
-static id (*s_registerForPreviewingWithDelegate_sourceView)(id, SEL, id, id) = NULL;
-
-// Swizzled method implementations
-static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_sourceView(UIViewController *self, SEL _cmd, id<UIViewControllerPreviewingDelegate> delegate, UIView *sourceView);
+static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
 @implementation UIViewController (PlaySRG)
 
@@ -49,7 +45,12 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
 
 + (void)load
 {
-    HLSSwizzleSelector(self, @selector(registerForPreviewingWithDelegate:sourceView:), swizzle_registerForPreviewingWithDelegate_sourceView, &s_registerForPreviewingWithDelegate_sourceView);
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewWillAppear:)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewWillAppear:)));
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewDidDisappear:)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewDidDisappear:)));
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(registerForPreviewingWithDelegate:sourceView:)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:sourceView:)));
 }
 
 + (UIInterfaceOrientationMask)play_supportedInterfaceOrientations
@@ -60,6 +61,61 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     else {
         return UIInterfaceOrientationMaskAll;
     }
+}
+
+#pragma mark Swizzled methods
+
+// Only swizzle registration method. Unregistration is automatic, and associated objects are automatically cleaned up when the
+// object they are associated to is deallocated
+- (id<UIViewControllerPreviewing>)UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:(id<UIViewControllerPreviewingDelegate>)delegate sourceView:(UIView *)sourceView
+{
+    if ([delegate conformsToProtocol:@protocol(PreviewingDelegate)]) {
+        NSMutableSet<PreviewingDelegate *> *previewingDelegates = objc_getAssociatedObject(self, s_previewingDelegatesKey);
+        if (! previewingDelegates) {
+            previewingDelegates = [NSMutableSet set];
+            objc_setAssociatedObject(self, s_previewingDelegatesKey, previewingDelegates, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        }
+        
+        PreviewingDelegate *previewingDelegate = [[PreviewingDelegate alloc] initWithRealDelegate:(id<PreviewingDelegate>)delegate];
+        [previewingDelegates addObject:previewingDelegate];
+        
+        id<UIViewControllerPreviewing> previewingViewController = nil;
+        
+        // Register for 3D Touch support if available
+        // Warning: FLEX lies about 3D touch support. When running the app in the simulator with FLEX linked, the following
+        //          condition is always true
+        if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+            previewingViewController = [self UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:previewingDelegate sourceView:sourceView];
+        }
+
+        UIGestureRecognizer *longPressGestureRecognizer = [objc_getAssociatedObject(sourceView, s_longPressGestureRecognizerKey) nonretainedObjectValue];
+        if (longPressGestureRecognizer) {
+            [sourceView removeGestureRecognizer:longPressGestureRecognizer];
+        }
+        
+        longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:previewingDelegate action:@selector(handleLongPress:)];
+        [sourceView addGestureRecognizer:longPressGestureRecognizer];
+        objc_setAssociatedObject(sourceView, s_longPressGestureRecognizerKey, [NSValue valueWithNonretainedObject:longPressGestureRecognizer], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+        return previewingViewController;
+    }
+    else {
+        return [self UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:delegate sourceView:sourceView];
+    }
+}
+
+- (void)UIViewController_PlaySRG_swizzled_viewWillAppear:(BOOL)animated
+{
+    [self UIViewController_PlaySRG_swizzled_viewWillAppear:animated];
+    
+    [self play_setViewVisible:YES];
+}
+
+- (void)UIViewController_PlaySRG_swizzled_viewDidDisappear:(BOOL)animated
+{
+    [self UIViewController_PlaySRG_swizzled_viewDidDisappear:animated];
+    
+    [self play_setViewVisible:NO];
 }
 
 #pragma mark Getters and setters
@@ -112,6 +168,16 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     }
     
     return NO;
+}
+
+- (BOOL)play_isViewVisible
+{
+    return [objc_getAssociatedObject(self, s_isViewVisibleKey) boolValue];
+}
+
+- (void)play_setViewVisible:(BOOL)visible
+{
+    objc_setAssociatedObject(self, s_isViewVisibleKey, @(visible), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Previewing
@@ -329,44 +395,3 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
 }
 
 @end
-
-#pragma mark Functions
-
-// Only swizzle registration method. Unregistration is automatic, and associated objects are automatically cleaned up when the
-// object they are associated to is deallocated
-static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_sourceView(UIViewController *self, SEL _cmd, id<UIViewControllerPreviewingDelegate> delegate, UIView *sourceView)
-{
-    if ([delegate conformsToProtocol:@protocol(PreviewingDelegate)]) {
-        NSMutableSet<PreviewingDelegate *> *previewingDelegates = objc_getAssociatedObject(self, s_previewingDelegatesKey);
-        if (! previewingDelegates) {
-            previewingDelegates = [NSMutableSet set];
-            objc_setAssociatedObject(self, s_previewingDelegatesKey, previewingDelegates, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        }
-        
-        PreviewingDelegate *previewingDelegate = [[PreviewingDelegate alloc] initWithRealDelegate:(id<PreviewingDelegate>)delegate];
-        [previewingDelegates addObject:previewingDelegate];
-        
-        id<UIViewControllerPreviewing> previewingViewController = nil;
-        
-        // Register for 3D Touch support if available
-        // Warning: FLEX lies about 3D touch support. When running the app in the simulator with FLEX linked, the following
-        //          condition is always true
-        if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
-            previewingViewController = s_registerForPreviewingWithDelegate_sourceView(self, _cmd, previewingDelegate, sourceView);
-        }
-
-        UIGestureRecognizer *longPressGestureRecognizer = hls_getAssociatedObject(sourceView, s_longPressGestureRecognizerKey);
-        if (longPressGestureRecognizer) {
-            [sourceView removeGestureRecognizer:longPressGestureRecognizer];
-        }
-        
-        longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:previewingDelegate action:@selector(handleLongPress:)];
-        [sourceView addGestureRecognizer:longPressGestureRecognizer];
-        hls_setAssociatedObject(sourceView, s_longPressGestureRecognizerKey, longPressGestureRecognizer, HLS_ASSOCIATION_WEAK_NONATOMIC);
-
-        return previewingViewController;
-    }
-    else {
-        return s_registerForPreviewingWithDelegate_sourceView(self, _cmd, delegate, sourceView);
-    }
-}

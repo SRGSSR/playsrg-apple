@@ -16,10 +16,11 @@
 #import "NSBundle+PlaySRG.h"
 #import "PlayAppDelegate.h"
 #import "UIColor+PlaySRG.h"
+#import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
+@import libextobjc;
 
 @interface ModuleViewController ()
 
@@ -180,7 +181,7 @@
             
             activityViewController.modalPresentationStyle = UIModalPresentationPopover;
             
-            UIViewController *viewController = self.play_previewingContext.sourceView.nearestViewController;
+            UIViewController *viewController = self.play_previewingContext.sourceView.play_nearestViewController;
             [viewController presentViewController:activityViewController animated:YES completion:nil];
         }];
         [previewActionItems addObject:shareAction];
@@ -189,7 +190,7 @@
     UIPreviewAction *openAction = [UIPreviewAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a module from the preview window") style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
         UIApplication *application = UIApplication.sharedApplication;
         PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
-        __kindof UIViewController *viewController = self.play_previewingContext.sourceView.nearestViewController;
+        __kindof UIViewController *viewController = self.play_previewingContext.sourceView.play_nearestViewController;
         UINavigationController *navigationController = [viewController isKindOfClass:UINavigationController.class] ? viewController : appDelegate.rootTabBarController.selectedViewController;
         [navigationController pushViewController:self animated:YES];
     }];

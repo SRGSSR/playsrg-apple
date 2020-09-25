@@ -12,8 +12,8 @@
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import libextobjc;
+@import SRGAppearance;
 
 @interface RadioChannelsViewController ()
 

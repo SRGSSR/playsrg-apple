@@ -20,10 +20,10 @@
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <MAKVONotificationCenter/MAKVONotificationCenter.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGLetterbox/SRGLetterbox.h>
-#import <libextobjc/libextobjc.h>
+@import MAKVONotificationCenter;
+@import SRGAppearance;
+@import SRGLetterbox;
+@import libextobjc;
 
 @interface PlayMiniPlayerView () <AccessibilityViewDelegate, SRGPlaybackButtonDelegate>
 
@@ -395,7 +395,7 @@
     
     if (state == SRGPlaybackButtonStatePlay && media.mediaType == SRGMediaTypeVideo && ! ApplicationSettingBackgroundVideoPlaybackEnabled()
             && ! AVAudioSession.srg_isAirPlayActive && ! controller.pictureInPictureActive) {
-        [self.nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
+        [self.play_nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }
 
@@ -431,10 +431,10 @@
     
     SRGLetterboxController *controller = self.controller;
     if ([controller.media isEqual:media]) {
-        [self.nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
+        [self.play_nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
     else {
-        [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
+        [self.play_nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }
 

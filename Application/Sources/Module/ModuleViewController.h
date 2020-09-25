@@ -6,14 +6,14 @@
 
 #import "MediasViewController.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGDataProvider/SRGDataProvider.h>
+@import SRGAnalytics;
+@import SRGDataProvider;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ModuleViewController : MediasViewController <SRGAnalyticsViewTracking, UIGestureRecognizerDelegate>
 
-- (instancetype)initWithModule:(SRGModule *)module NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithModule:(SRGModule *)module;
 
 @end
 

@@ -6,7 +6,7 @@
 
 #import "TranslucentTitleHeaderView.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface TranslucentTitleHeaderView ()
 

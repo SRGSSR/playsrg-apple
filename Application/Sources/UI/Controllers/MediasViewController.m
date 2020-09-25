@@ -10,7 +10,7 @@
 #import "MediaCollectionViewCell.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @implementation MediasViewController
 

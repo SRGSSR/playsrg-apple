@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,9 +29,9 @@ OBJC_EXPORT DeeplinkAction const DeeplinkActionLink;
 @interface DeepLinkService : NSObject
 
 /**
- *  Service singleton.
+ *  Create a new instance update using the service available at the specified URL.
  */
-@property (class, nonatomic, readonly) DeepLinkService *sharedService;
+- (instancetype)initWithServiceURL:(NSURL *)serviceURL;
 
 /**
  *  Converts a web URL into a scheme URL.

@@ -8,7 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 
-#import <libextobjc/libextobjc.h>
+@import libextobjc;
 
 @interface Onboarding ()
 

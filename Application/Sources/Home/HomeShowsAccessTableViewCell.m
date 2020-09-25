@@ -13,9 +13,10 @@
 #import "ShowsViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
+#import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface HomeShowsAccessTableViewCell ()
 
@@ -121,14 +122,14 @@
 {
     RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:self.homeSectionInfo.identifier];
     UIViewController *viewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:nil];
-    [self.nearestViewController.navigationController pushViewController:viewController animated:YES];
+    [self.play_nearestViewController.navigationController pushViewController:viewController animated:YES];
 }
 
 - (IBAction)openShowsByDate:(id)sender
 {
     RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:self.homeSectionInfo.identifier];
     UIViewController *viewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:nil];
-    [self.nearestViewController.navigationController pushViewController:viewController animated:YES];
+    [self.play_nearestViewController.navigationController pushViewController:viewController animated:YES];
 }
 
 @end

@@ -21,8 +21,8 @@
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import libextobjc;
+@import SRGAppearance;
 
 typedef NSString * SearchSettingSectionType NS_STRING_ENUM;
 
@@ -131,12 +131,18 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 
 - (instancetype)initWithQuery:(NSString *)query settings:(SRGMediaSearchSettings *)settings
 {
-    if (self = [super init]) {
+    if (self = [self initFromStoryboard]) {
         self.query = query;
         self.settings = settings.copy ?: SearchSettingsViewController.defaultSettings;
         self.settings.aggregationsEnabled = YES;
     }
     return self;
+}
+
+- (instancetype)initFromStoryboard
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
+    return storyboard.instantiateInitialViewController;
 }
 
 #pragma clang diagnostic push

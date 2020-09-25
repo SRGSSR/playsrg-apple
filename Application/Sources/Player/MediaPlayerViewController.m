@@ -56,15 +56,14 @@
 #import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
-#import <FXReachability/FXReachability.h>
-#import <GoogleCast/GoogleCast.h>
-#import <Intents/Intents.h>
-#import <libextobjc/libextobjc.h>
-#import <MAKVONotificationCenter/MAKVONotificationCenter.h>
-#import <Masonry/Masonry.h>
-#import <SRGAnalytics_DataProvider/SRGAnalytics_DataProvider.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGUserData/SRGUserData.h>
+@import FXReachability;
+@import GoogleCast;
+@import Intents;
+@import libextobjc;
+@import MAKVONotificationCenter;
+@import SRGAnalytics_DataProvider;
+@import SRGAppearance;
+@import SRGUserData;
 
 NSString * const MediaPlayerViewControllerVisibilityDidChangeNotification = @"MediaPlayerViewControllerVisibilityDidChangeNotification";
 NSString * const MediaPlayerViewControllerVisibleKey = @"MediaPlayerViewControllerVisible";
@@ -226,7 +225,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     // Otherwise instantiate a fresh instance
     else {
-        if (self = [super init]) {
+        if (self = [self initFromStoryboard]) {
             self.originalURN = URN;
             self.originalPosition = position;
             self.fromPushNotification = fromPushNotification;
@@ -250,7 +249,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     // Otherwise instantiate a fresh instance
     else {
-        if (self = [super init]) {
+        if (self = [self initFromStoryboard]) {
             self.originalMedia = media;
             self.originalPosition = position;
             self.fromPushNotification = fromPushNotification;
@@ -262,7 +261,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (instancetype)initWithController:(SRGLetterboxController *)controller position:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification
 {
-    if (self = [super init]) {
+    if (self = [self initFromStoryboard]) {
         self.originalLetterboxController = controller;
         self.originalPosition = position;
         self.fromPushNotification = fromPushNotification;
@@ -271,6 +270,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.letterboxController = controller;
     }
     return self;
+}
+
+- (instancetype)initFromStoryboard
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
+    return storyboard.instantiateInitialViewController;
 }
 
 - (void)dealloc
@@ -487,6 +492,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contentSizeCategoryDidChange:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
     
     @weakify(self)
     self.userInterfaceUpdateTimer = [ForegroundTimer timerWithTimeInterval:1. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
@@ -637,14 +646,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 }
 
 #pragma mark Accessibility
-
-- (void)updateForContentSizeCategory
-{
-    [super updateForContentSizeCategory];
-    
-    [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
-    [self reloadProgramInformationAnimated:NO];
-}
 
 - (BOOL)accessibilityPerformEscape
 {
@@ -1243,7 +1244,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     else {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later-48"] forState:UIControlStateNormal];
-        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Add to the watch later list", @"Media watch later creation label");
+        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Add to the watch later list", @"Media watch later addition label");
     }
 }
 
@@ -2346,6 +2347,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
 {
     [self updateDetailsAppearance];
+}
+
+- (void)contentSizeCategoryDidChange:(NSNotification *)notification
+{
+    [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
+    [self reloadProgramInformationAnimated:NO];
 }
 
 @end

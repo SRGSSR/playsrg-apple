@@ -4,8 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <GoogleCast/GoogleCast.h>
-#import <UIKit/UIKit.h>
+@import GoogleCast;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

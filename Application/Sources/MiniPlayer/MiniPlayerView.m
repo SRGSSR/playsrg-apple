@@ -13,10 +13,9 @@
 #import "UIColor+PlaySRG.h"
 #import "UIVisualEffectView+PlaySRG.h"
 
-#import <GoogleCast/GoogleCast.h>
-#import <libextobjc/libextobjc.h>
-#import <MAKVONotificationCenter/MAKVONotificationCenter.h>
-#import <Masonry/Masonry.h>
+@import GoogleCast;
+@import libextobjc;
+@import MAKVONotificationCenter;
 
 @interface MiniPlayerView ()
 
@@ -35,17 +34,27 @@
 {
     if (self = [super initWithFrame:frame]) {
         UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
+        blurView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:blurView];
-        [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
-        }];
+        
+        [NSLayoutConstraint activateConstraints:@[
+            [blurView.topAnchor constraintEqualToAnchor:self.topAnchor],
+            [blurView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor],
+            [blurView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
+            [blurView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]
+        ]];
         
         PlayMiniPlayerView *playMiniPlayerView = PlayMiniPlayerView.view;
+        playMiniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:playMiniPlayerView];
-        [playMiniPlayerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
-        }];
         self.playMiniPlayerView = playMiniPlayerView;
+                
+        [NSLayoutConstraint activateConstraints:@[
+            [playMiniPlayerView.topAnchor constraintEqualToAnchor:self.topAnchor],
+            [playMiniPlayerView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor],
+            [playMiniPlayerView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
+            [playMiniPlayerView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]
+        ]];
         
         @weakify(self)
         [self.playMiniPlayerView addObserver:self keyPath:@keypath(PlayMiniPlayerView.new, media) options:0 block:^(MAKVONotification *notification) {
@@ -54,11 +63,16 @@
         }];
         
         GoogleCastMiniPlayerView *googleCastMiniPlayerView = GoogleCastMiniPlayerView.view;
+        googleCastMiniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:googleCastMiniPlayerView];
-        [googleCastMiniPlayerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
-        }];
         self.googleCastMiniPlayerView = googleCastMiniPlayerView;
+        
+        [NSLayoutConstraint activateConstraints:@[
+            [googleCastMiniPlayerView.topAnchor constraintEqualToAnchor:self.topAnchor],
+            [googleCastMiniPlayerView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor],
+            [googleCastMiniPlayerView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
+            [googleCastMiniPlayerView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]
+        ]];
         
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(mediaPlayerViewControllerVisibilityDidChange:)

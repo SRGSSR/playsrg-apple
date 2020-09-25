@@ -10,9 +10,9 @@
 #import "Download.h"
 #import "NSTimer+PlaySRG.h"
 
-#import <GoogleCast/GoogleCast.h>
-#import <SRGLetterbox/SRGLetterbox.h>
-#import <SRGUserData/SRGUserData.h>
+@import GoogleCast;
+@import SRGLetterbox;
+@import SRGUserData;
 
 static NSMutableDictionary<NSString *, NSNumber *> *s_cachedProgresses;
 static NSTimer *s_trackerTimer;

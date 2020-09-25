@@ -1,0 +1,3 @@
+#include "Xcode/Play tvOS.xcconfig"
+
+SWIFT_OBJC_BRIDGING_HEADER=$(PROJECT_DIR)/TV Application/Sources/Play-TV-ObjectiveC-Bridge.h

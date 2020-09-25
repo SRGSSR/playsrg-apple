@@ -10,9 +10,10 @@
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import "InAppSettingsKit/IASKSettingsReader.h"
+#import <InAppSettingsKit/IASKSettingsReader.h>
 #import <objc/runtime.h>
-#import <SRGAppearance/SRGAppearance.h>
+
+@import SRGAppearance;
 
 @implementation SettingsBaseViewController
 

@@ -12,7 +12,7 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 static const CGFloat SongTableViewMargin = 42.f;
 

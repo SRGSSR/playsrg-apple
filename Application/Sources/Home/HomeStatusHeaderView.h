@@ -4,14 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoconutKit/CoconutKit.h>
-#import <SRGDataProvider/SRGDataProvider.h>
+@import SRGDataProvider;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeStatusHeaderView : HLSNibView
+@interface HomeStatusHeaderView : UIView
 
 + (CGFloat)heightForServiceMessage:(SRGServiceMessage *)serviceMessage withSize:(CGSize)size;
+
+@property (class, nonatomic, readonly) HomeStatusHeaderView *view;
 
 @property (nonatomic, nullable) SRGServiceMessage *serviceMessage;
 

@@ -12,12 +12,11 @@
 #import "UIVisualEffectView+PlaySRG.h"
 
 #import "MaterialTabs.h"
-#import <Masonry/Masonry.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface PageViewController () <MDCTabBarDelegate>
 
-@property (nonatomic, weak) UIPageViewController *pageViewController;
+@property (nonatomic) UIPageViewController *pageViewController;
 
 @property (nonatomic) NSArray<UIViewController *> *viewControllers;
 @property (nonatomic) NSUInteger initialPage;
@@ -54,7 +53,6 @@
             pageViewController.dataSource = self;
         }
         
-        [self setInsetViewController:pageViewController atIndex:0];
         self.pageViewController = pageViewController;
     }
     return self;
@@ -72,22 +70,32 @@
     self.view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     self.view.backgroundColor = UIColor.play_blackColor;
     
-    UIView *placeholderView = [[UIView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:placeholderView];
-    [placeholderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
-    self.placeholderViews = @[placeholderView];
+    [self addChildViewController:self.pageViewController];
+    
+    UIView *pageView = self.pageViewController.view;
+    pageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view insertSubview:pageView atIndex:0];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [pageView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [pageView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+        [pageView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [pageView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor]
+    ]];
+    
+    [self.pageViewController didMoveToParentViewController:self];
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
+    blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:blurView];
-    [blurView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_safeAreaLayoutGuide);
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
-        make.height.equalTo(@60);
-    }];
     self.blurView = blurView;
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [blurView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [blurView.heightAnchor constraintEqualToConstant:60.f],
+        [blurView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [blurView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor]
+    ]];
     
     __block BOOL hasImage = NO;
     
@@ -101,6 +109,7 @@
     }];
     
     MDCTabBar *tabBar = [[MDCTabBar alloc] initWithFrame:blurView.bounds];
+    tabBar.translatesAutoresizingMaskIntoConstraints = NO;
     tabBar.itemAppearance = hasImage ? MDCTabBarItemAppearanceImages : MDCTabBarItemAppearanceTitles;
     tabBar.alignment = MDCTabBarAlignmentCenter;
     tabBar.delegate = self;
@@ -115,10 +124,19 @@
     tabBar.rippleColor = UIColor.clearColor;
     
     [blurView.contentView addSubview:tabBar];
-    [tabBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(blurView.contentView);
-    }];
     self.tabBar = tabBar;
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [tabBar.topAnchor constraintEqualToAnchor:blurView.contentView.topAnchor],
+        [tabBar.bottomAnchor constraintEqualToAnchor:blurView.contentView.bottomAnchor],
+        [tabBar.leadingAnchor constraintEqualToAnchor:blurView.contentView.leadingAnchor],
+        [tabBar.trailingAnchor constraintEqualToAnchor:blurView.contentView.trailingAnchor]
+    ]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pageViewController_contentSizeCategoryDidChange:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
     
     [self updateFonts];
 }
@@ -149,13 +167,6 @@
 }
 
 #pragma mark Accessibility
-
-- (void)updateForContentSizeCategory
-{
-    [super updateForContentSizeCategory];
-    
-    [self updateFonts];
-}
 
 - (BOOL)accessibilityPerformEscape
 {
@@ -289,6 +300,13 @@
         [self.tabBar setSelectedItem:self.tabBar.items[currentIndex] animated:YES];;
         [self didDisplayViewController:newViewController animated:YES];
     }
+}
+
+#pragma mark Notifications
+
+- (void)pageViewController_contentSizeCategoryDidChange:(NSNotification *)notification
+{
+    [self updateFonts];
 }
 
 @end

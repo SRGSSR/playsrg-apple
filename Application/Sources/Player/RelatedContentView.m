@@ -11,7 +11,7 @@
 #import "UIApplication+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface RelatedContentView ()
 
@@ -20,6 +20,13 @@
 @end
 
 @implementation RelatedContentView
+
+#pragma mark Class methods
+
++ (RelatedContentView *)view
+{
+    return [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
+}
 
 #pragma mark Overrides
 

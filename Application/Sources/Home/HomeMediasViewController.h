@@ -7,7 +7,7 @@
 #import "HomeSectionInfo.h"
 #import "MediasViewController.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
+@import SRGAnalytics;
 
 NS_ASSUME_NONNULL_BEGIN
 

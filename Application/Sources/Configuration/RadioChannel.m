@@ -6,6 +6,8 @@
 
 #import "RadioChannel.h"
 
+#import "FirebaseConfiguration.h"
+
 @interface RadioChannel ()
 
 @property (nonatomic) NSArray<NSNumber *> *homeSections;
@@ -16,15 +18,18 @@
 
 #pragma Object lifecycle
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary defaultHomeSections:(NSArray<NSNumber *> *)defaultHomeSections
 {
     if (self = [super initWithDictionary:dictionary]) {
-        self.homeSections = dictionary[@"homeSections"];
-        if (! [self.homeSections isKindOfClass:NSArray.class] || self.homeSections.count == 0) {
-            return nil;
-        }
+        id homeSections = dictionary[@"homeSections"];
+        self.homeSections = [homeSections isKindOfClass:NSString.class] ? FirebaseConfigurationHomeSections(homeSections) : defaultHomeSections;
     }
     return self;
+}
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+    return [self initWithDictionary:dictionary defaultHomeSections:@[]];
 }
 
 @end

@@ -4,8 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Mantle/Mantle.h>
-#import <UIKit/UIKit.h>
+@import Mantle;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

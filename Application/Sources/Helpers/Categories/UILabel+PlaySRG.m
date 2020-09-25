@@ -13,7 +13,7 @@
 #import "SRGMedia+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 static NSString *LabelFormattedDuration(NSTimeInterval duration)
 {
@@ -97,7 +97,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
-    self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"WEB FIRST", @"Web first label on media cells")].uppercaseString;
+    self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"Web first", @"Web first label on media cells")].uppercaseString;
 }
 
 #pragma mark Private

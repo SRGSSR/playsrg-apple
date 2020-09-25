@@ -6,7 +6,7 @@
 
 #import "Channel.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 static SongsViewStyle SongsViewStyleWithString(NSString *string)
 {

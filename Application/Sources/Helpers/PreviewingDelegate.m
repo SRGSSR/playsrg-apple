@@ -6,7 +6,7 @@
 
 #import "PreviewingDelegate.h"
 
-#import <libextobjc/libextobjc.h>
+@import libextobjc;
 
 static void *s_kvoContext = &s_kvoContext;
 
