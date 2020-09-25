@@ -23,7 +23,7 @@
         "package": "FXReachability",
         "repositoryURL": "https://github.com/SRGSSR/FXReachability.git",
         "state": {
-          "branch": "feature/spm-support",
+          "branch": "master",
           "revision": "1eac916df0045630e779fa60eef22ed0d185e15f",
           "version": null
         }
@@ -32,7 +32,7 @@
         "package": "libextobjc",
         "repositoryURL": "https://github.com/SRGSSR/libextobjc.git",
         "state": {
-          "branch": "feature/spm-support",
+          "branch": "master",
           "revision": "30ee5b73bdf57a826978aa146881277f22369be1",
           "version": null
         }
@@ -41,7 +41,7 @@
         "package": "MAKVONotificationCenter",
         "repositoryURL": "https://github.com/SRGSSR/MAKVONotificationCenter.git",
         "state": {
-          "branch": "feature/spm-support",
+          "branch": "master",
           "revision": "60395e0601ffd4a784856b423d4cac558366276d",
           "version": null
         }
@@ -68,8 +68,8 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": "feature/spm-support",
-          "revision": "fd07b72ff581c992558131e3a89e3a439a37fd49",
+          "branch": "develop",
+          "revision": "9b9158dc7fde510da53945c901205b21394193fb",
           "version": null
         }
       },
@@ -77,8 +77,8 @@
         "package": "SRGAppearance",
         "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
         "state": {
-          "branch": "feature/spm-support",
-          "revision": "a01c3a6d36cf303f77f9f4261378fd1f695b8336",
+          "branch": "develop",
+          "revision": "6274a2d02f98f5624016023822b323c59545442f",
           "version": null
         }
       },
@@ -86,8 +86,8 @@
         "package": "SRGContentProtection",
         "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
         "state": {
-          "branch": "feature/spm-support",
-          "revision": "4c62c46612119340126e04490381c88a8d247d59",
+          "branch": "develop",
+          "revision": "5b1587d9212e1bbaceea3f6ca054232807c3308f",
           "version": null
         }
       },
@@ -95,8 +95,8 @@
         "package": "SRGDataProvider",
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
-          "branch": "feature/spm-support",
-          "revision": "1c4c231ccaee2601af630ff440c24793f9523215",
+          "branch": "develop",
+          "revision": "0148eef50f74f9fd75155c74aa4b15170015fdbb",
           "version": null
         }
       },
@@ -104,8 +104,8 @@
         "package": "SRGDiagnostics",
         "repositoryURL": "https://github.com/SRGSSR/srgdiagnostics-apple.git",
         "state": {
-          "branch": "feature/spm-support",
-          "revision": "16584a136f60fcb1c55167548276bfee4a594d6a",
+          "branch": "develop",
+          "revision": "3a95f5138f019e91d4e721e3afc3aa3863f4a4a2",
           "version": null
         }
       },
@@ -113,8 +113,8 @@
         "package": "SRGIdentity",
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
-          "branch": "feature/spm-support",
-          "revision": "fa19100c8614bd208796a614c44b38c1f1c9251a",
+          "branch": "develop",
+          "revision": "79048b860a672de2ae6e1d5487ba0cdec67ee193",
           "version": null
         }
       },
@@ -122,8 +122,8 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "feature/spm-support",
-          "revision": "4268632e60008098a40abee22b479e694f988531",
+          "branch": "develop",
+          "revision": "fdd2e1b7b0b330c05a36e39cdc4b44e4347ecd08",
           "version": null
         }
       },
@@ -131,8 +131,8 @@
         "package": "SRGLogger",
         "repositoryURL": "https://github.com/SRGSSR/srglogger-apple.git",
         "state": {
-          "branch": "feature/spm-support",
-          "revision": "f362dff71515f75ebe098f993d6951af067516fa",
+          "branch": "develop",
+          "revision": "0f40b67ae8f93c31271570deb16c6a5bd0a17419",
           "version": null
         }
       },
@@ -140,8 +140,8 @@
         "package": "SRGMediaPlayer",
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
-          "branch": "feature/spm-support",
-          "revision": "c4ac97bead4d77c49bb1845fc8597347ac312246",
+          "branch": "develop",
+          "revision": "f775aa12b2758fbc0ff2091baf1fd1cc2957ff77",
           "version": null
         }
       },
@@ -149,8 +149,8 @@
         "package": "SRGNetwork",
         "repositoryURL": "https://github.com/SRGSSR/srgnetwork-apple.git",
         "state": {
-          "branch": "feature/spm-support",
-          "revision": "f9ec437e4b76f157a879b56f239fe301f88c673e",
+          "branch": "develop",
+          "revision": "98c50251b8f2c94e626e1a264eb560c52662aa57",
           "version": null
         }
       },
@@ -185,7 +185,7 @@
         "package": "YYWebImage",
         "repositoryURL": "https://github.com/SRGSSR/YYWebImage.git",
         "state": {
-          "branch": "feature/spm-support",
+          "branch": "master",
           "revision": "f7408c97fd0e897e1bb8b3e8b01e0c8e9dc22123",
           "version": null
         }
