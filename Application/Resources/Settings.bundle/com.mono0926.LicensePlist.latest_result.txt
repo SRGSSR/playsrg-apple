@@ -698,26 +698,6 @@ name: nanopb, nameSpecified:
 body: Copyright (c) 2011 P…
 version: 1.30905.0
 
-name: paper-onboarding, nameSpecified: 
-body: The MIT License (MIT…
-version: 6.1.5
-
-name: paper-onboarding, nameSpecified: 
-body: The MIT License (MIT…
-version: 6.1.5
-
-name: paper-onboarding, nameSpecified: 
-body: The MIT License (MIT…
-version: 6.1.5
-
-name: paper-onboarding, nameSpecified: 
-body: The MIT License (MIT…
-version: 6.1.5
-
-name: paper-onboarding, nameSpecified: 
-body: The MIT License (MIT…
-version: 6.1.5
-
 name: PromisesObjC, nameSpecified: 
 body: 
                    …
@@ -787,26 +767,6 @@ version: 3.6.1
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
 version: 3.6.1
-
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 7.0.1
-
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 7.0.1
-
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 7.0.1
-
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 7.0.1
-
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 7.0.1
 
 name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 
 
@@ -825,6 +785,8 @@ name: MAKVONotificationCenter, nameSpecified: MAKVONotificationCenter, owner: SR
 name: Mantle, nameSpecified: Mantle, owner: SRGSSR, version: 
 
 name: Nuke, nameSpecified: Nuke, owner: kean, version: 9.1.2
+
+name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5
 
 name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 
 
@@ -847,6 +809,8 @@ name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, versio
 name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 
 
 name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 
+
+name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 
 
 name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg3
 

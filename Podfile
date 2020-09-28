@@ -22,8 +22,6 @@ abstract_target 'Play SRG' do
     pod 'InAppSettingsKit', '~> 3.0.1'
     pod 'MaterialComponents/Tabs', '~> 109.5'
     pod 'MGSwipeTableCell', '~> 1.6.8'
-    pod 'paper-onboarding', '~> 6.1.5'
-    pod 'SwiftMessages', '~> 7.0.1'
 
     target 'Play SRF' do
     end

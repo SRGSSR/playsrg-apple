@@ -246,7 +246,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/paper-onboarding</string>
 			<key>Title</key>
-			<string>paper-onboarding (6.1.5)</string>
+			<string>PaperOnboarding (6.1.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -358,7 +358,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/SwiftMessages</string>
 			<key>Title</key>
-			<string>SwiftMessages (7.0.1)</string>
+			<string>SwiftMessages</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

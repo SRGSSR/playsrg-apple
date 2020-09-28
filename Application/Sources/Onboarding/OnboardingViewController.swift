@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-import paper_onboarding
+import PaperOnboarding
 import SRGAppearance
 
 @objc(OnboardingViewController) public class OnboardingViewController : BaseViewController {

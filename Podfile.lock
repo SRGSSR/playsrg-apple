@@ -131,12 +131,8 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
-  - paper-onboarding (6.1.5)
   - PromisesObjC (1.2.10)
   - Protobuf (3.6.1)
-  - SwiftMessages (7.0.1):
-    - SwiftMessages/App (= 7.0.1)
-  - SwiftMessages/App (7.0.1)
 
 DEPENDENCIES:
   - AppCenter (~> 3.3.4)
@@ -151,8 +147,6 @@ DEPENDENCIES:
   - InAppSettingsKit (~> 3.0.1)
   - MaterialComponents/Tabs (~> 109.5)
   - MGSwipeTableCell (~> 1.6.8)
-  - paper-onboarding (~> 6.1.5)
-  - SwiftMessages (~> 7.0.1)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -176,10 +170,8 @@ SPEC REPOS:
     - MDFInternationalization
     - MGSwipeTableCell
     - nanopb
-    - paper-onboarding
     - PromisesObjC
     - Protobuf
-    - SwiftMessages
 
 EXTERNAL SOURCES:
   DZNEmptyDataSet:
@@ -213,11 +205,9 @@ SPEC CHECKSUMS:
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MGSwipeTableCell: dc4eca3212ed38a563b27d6aa7b3c01ce656c1e2
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
-  paper-onboarding: fede1799b1da6988f3788e3b71654583c6f3bce1
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
 
-PODFILE CHECKSUM: 88a8aa4420f5b8d7327c70f34696d08f59f19a6b
+PODFILE CHECKSUM: 09a42e7b9bf82cb3073561204dd0cdc5d69c037a
 
 COCOAPODS: 1.9.3

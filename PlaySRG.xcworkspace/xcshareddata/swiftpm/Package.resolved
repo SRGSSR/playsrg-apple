@@ -83,6 +83,15 @@
         }
       },
       {
+        "package": "PaperOnboarding",
+        "repositoryURL": "https://github.com/Ramotion/paper-onboarding.git",
+        "state": {
+          "branch": null,
+          "revision": "c36df080b1001c385cc14c85f3b1c5ea36531fd0",
+          "version": "6.1.5"
+        }
+      },
+      {
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
@@ -178,6 +187,15 @@
         "state": {
           "branch": "develop",
           "revision": "6127e3b31dedaf4bc10ac3220f39b08ee348a5b7",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftMessages",
+        "repositoryURL": "https://github.com/SwiftKickMobile/SwiftMessages.git",
+        "state": {
+          "branch": "work/xcode12",
+          "revision": "5acae56d5fdd57a3610a211b8c348d97e3d76364",
           "version": null
         }
       },
