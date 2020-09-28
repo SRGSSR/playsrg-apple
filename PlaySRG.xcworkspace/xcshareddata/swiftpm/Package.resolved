@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "Airship",
+        "repositoryURL": "https://github.com/urbanairship/ios-library.git",
+        "state": {
+          "branch": null,
+          "revision": "b58aea09e2962e9e5b4c678e82462c6eaf07316c",
+          "version": "14.1.2"
+        }
+      },
+      {
         "package": "libextobjc",
         "repositoryURL": "https://github.com/SRGSSR/libextobjc.git",
         "state": {

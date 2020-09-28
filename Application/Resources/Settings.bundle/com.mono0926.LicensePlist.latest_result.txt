@@ -808,12 +808,6 @@ name: SwiftMessages, nameSpecified:
 body: Copyright (c) 2016 S…
 version: 7.0.1
 
-name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 3.3.4
-
-name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
-
-name: ios-library, nameSpecified: , owner: urbanairship, version: 13.5.6
-
 name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 
 
 name: ComScore-xcframework-apple, nameSpecified: ComScore, owner: SRGSSR, version: 6.6.0
@@ -821,6 +815,8 @@ name: ComScore-xcframework-apple, nameSpecified: ComScore, owner: SRGSSR, versio
 name: FetchImage, nameSpecified: FetchImage, owner: kean, version: 0.2.1
 
 name: FXReachability, nameSpecified: FXReachability, owner: SRGSSR, version: 
+
+name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 14.1.2
 
 name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version: 
 

@@ -36,7 +36,7 @@
 
 #import <InAppSettingsKit/IASKSettingsReader.h>
 
-@import Airship;
+@import AirshipCore;
 @import AppCenter;
 @import AppCenterCrashes;
 @import AppCenterDistribute;

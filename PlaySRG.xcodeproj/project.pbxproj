@@ -1079,11 +1079,6 @@
 		6FAAF78F20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */; };
 		6FAAF79020CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */; };
 		6FAAF79120CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */; };
-		6FADEF9F248E6EB900A5F948 /* AirshipCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; };
-		6FADEFA1248E6EDE00A5F948 /* AirshipCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; };
-		6FADEFA3248E6EEF00A5F948 /* AirshipCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; };
-		6FADEFA5248E6EFD00A5F948 /* AirshipCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; };
-		6FADEFA7248E6F0A00A5F948 /* AirshipCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */; };
 		6FAF43001EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
 		6FAF43011EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
 		6FAF43021EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
@@ -1204,6 +1199,11 @@
 		6FD2CBC51DD19B0200B44958 /* placeholder_media-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CBC21DD19B0200B44958 /* placeholder_media-180.pdf */; };
 		6FD2CBC61DD19B0200B44958 /* placeholder_media-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CBC21DD19B0200B44958 /* placeholder_media-180.pdf */; };
 		6FD2CBC71DD19B0200B44958 /* placeholder_media-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CBC21DD19B0200B44958 /* placeholder_media-180.pdf */; };
+		6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095925221A1000E621EF /* AirshipCore */; };
+		6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095B25221A1A00E621EF /* AirshipCore */; };
+		6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095D25221A2300E621EF /* AirshipCore */; };
+		6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095F25221A2B00E621EF /* AirshipCore */; };
+		6FD4096225221A3500E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4096125221A3500E621EF /* AirshipCore */; };
 		6FD633DE1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633DC1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m */; };
 		6FD633DF1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633DC1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m */; };
 		6FD633E01FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633DC1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m */; };
@@ -2089,7 +2089,6 @@
 		6FAAF77A20CABA3A00BB58A3 /* Notification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notification.m; sourceTree = "<group>"; };
 		6FAAF78620CABC0D00BB58A3 /* NSFileManager+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+PlaySRG.h"; sourceTree = "<group>"; };
 		6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+PlaySRG.m"; sourceTree = "<group>"; };
-		6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AirshipCore.framework; path = Carthage/Build/iOS/AirshipCore.framework; sourceTree = "<group>"; };
 		6FAF42FD1EF7CD8A0074E033 /* HomeTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTopicViewController.h; sourceTree = "<group>"; };
 		6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTopicViewController.m; sourceTree = "<group>"; };
 		6FB053E924D42066004B0CE1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -2285,10 +2284,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */,
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
-				6FADEF9F248E6EB900A5F948 /* AirshipCore.framework in Frameworks */,
 				6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */,
 				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
 			);
@@ -2298,11 +2297,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */,
 				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
-				6FADEFA1248E6EDE00A5F948 /* AirshipCore.framework in Frameworks */,
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2311,11 +2310,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */,
 				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
 				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
-				6FADEFA3248E6EEF00A5F948 /* AirshipCore.framework in Frameworks */,
 				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2324,11 +2323,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */,
 				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
 				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
-				6FADEFA5248E6EFD00A5F948 /* AirshipCore.framework in Frameworks */,
 				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2337,11 +2336,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD4096225221A3500E621EF /* AirshipCore in Frameworks */,
 				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
 				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
-				6FADEFA7248E6F0A00A5F948 /* AirshipCore.framework in Frameworks */,
 				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3563,7 +3562,6 @@
 		E65311E31D3E6FD100B4B8BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */,
 				3780F919C25BC0944528A5FD /* libPods-Play SRG-iOS-Play RSI.a */,
 				6A39FE8CAE184E875FB2D868 /* libPods-Play SRG-iOS-Play RTR.a */,
 				AB348106F5307D86C18CA361 /* libPods-Play SRG-iOS-Play RTS.a */,
@@ -3783,7 +3781,6 @@
 				08B4A22E20935AB100474EBB /* Copy Urban Airship Configuration File */,
 				6FD84B4720F872C50059C817 /* Register SRF Old URL Scheme For Backwards Compatibility */,
 				6FE1B4A41DCBCB390094D5BA /* Embed Debugging Frameworks */,
-				E65311DD1D3E69A700B4B8BB /* Copy Frameworks (Carthage) */,
 				6F0CFB4020C94DF6006B2CE4 /* Embed App Extensions */,
 				43935C186E7C3FA3D9A3CC33 /* [CP] Copy Pods Resources */,
 				6F5E54992521E3C7004334E4 /* Extract Signing Identity */,
@@ -3799,6 +3796,7 @@
 				6F2545B42521C14E00F9F4FE /* SRGLetterbox */,
 				6F25463A2521C34800F9F4FE /* Aiolos */,
 				6F2546C02521CFD400F9F4FE /* SRGAnalyticsIdentity */,
+				6FD4095925221A1000E621EF /* AirshipCore */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -3821,7 +3819,6 @@
 				6F19381E1EFA9D4C0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */,
 				6FE1B4A31DCBCB310094D5BA /* Embed Debugging Frameworks */,
-				E65311DE1D3E69C800B4B8BB /* Copy Frameworks (Carthage) */,
 				6F0CFB5320C94E77006B2CE4 /* Embed App Extensions */,
 				61F7B1B1FC7E1DB00591868E /* [CP] Copy Pods Resources */,
 				6F5E549A2521E3D0004334E4 /* Extract Signing Identity */,
@@ -3837,6 +3834,7 @@
 				6F2545B82521C15E00F9F4FE /* SRGUserData */,
 				6F2546502521C35300F9F4FE /* Aiolos */,
 				6F2546C22521CFDC00F9F4FE /* SRGAnalyticsIdentity */,
+				6FD4095B25221A1A00E621EF /* AirshipCore */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -3859,7 +3857,6 @@
 				6F1938201EFA9D590017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22F20935ABE00474EBB /* Copy Urban Airship Configuration File */,
 				6FE1B4A21DCBCB290094D5BA /* Embed Debugging Frameworks */,
-				E65311DF1D3E69CD00B4B8BB /* Copy Frameworks (Carthage) */,
 				6F0CFB6620C94E8E006B2CE4 /* Embed App Extensions */,
 				8CB5D42DBD5EAABC62E8D1A4 /* [CP] Copy Pods Resources */,
 				6F5E549B2521E3D6004334E4 /* Extract Signing Identity */,
@@ -3875,6 +3872,7 @@
 				6F2545BC2521C16800F9F4FE /* SRGUserData */,
 				6F2546522521C35A00F9F4FE /* Aiolos */,
 				6F2546C42521CFEA00F9F4FE /* SRGAnalyticsIdentity */,
+				6FD4095D25221A2300E621EF /* AirshipCore */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -3897,7 +3895,6 @@
 				6F1938211EFA9D5D0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23020935ADE00474EBB /* Copy Urban Airship Configuration File */,
 				6FE1B4A11DCBCB210094D5BA /* Embed Debugging Frameworks */,
-				E65311E01D3E69D100B4B8BB /* Copy Frameworks (Carthage) */,
 				6F0CFB7920C94EC8006B2CE4 /* Embed App Extensions */,
 				F036A8D455D4D1988A3D0455 /* [CP] Copy Pods Resources */,
 				6F5E549C2521E3DE004334E4 /* Extract Signing Identity */,
@@ -3913,6 +3910,7 @@
 				6F2545C02521C17000F9F4FE /* SRGUserData */,
 				6F2546542521C36100F9F4FE /* Aiolos */,
 				6F2546C62521CFF000F9F4FE /* SRGAnalyticsIdentity */,
+				6FD4095F25221A2B00E621EF /* AirshipCore */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -3935,7 +3933,6 @@
 				6F1938221EFA9D600017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23120935AE700474EBB /* Copy Urban Airship Configuration File */,
 				6FE1B4A01DCBC8270094D5BA /* Embed Debugging Frameworks */,
-				E65311E21D3E69DA00B4B8BB /* Copy Frameworks (Carthage) */,
 				6F0CFB8C20C94EE5006B2CE4 /* Embed App Extensions */,
 				9C3D1D8DF4FF07B5A8C53C11 /* [CP] Copy Pods Resources */,
 				6F5E549D2521E3E7004334E4 /* Extract Signing Identity */,
@@ -3951,6 +3948,7 @@
 				6F2545C42521C17700F9F4FE /* SRGUserData */,
 				6F2546562521C36E00F9F4FE /* Aiolos */,
 				6F2546C82521CFFA00F9F4FE /* SRGAnalyticsIdentity */,
+				6FD4096125221A3500E621EF /* AirshipCore */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -4389,6 +4387,7 @@
 				6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */,
 				6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */,
 				6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */,
+				6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -6051,81 +6050,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		E65311DD1D3E69A700B4B8BB /* Copy Frameworks (Carthage) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/AirshipCore.framework",
-			);
-			name = "Copy Frameworks (Carthage)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		E65311DE1D3E69C800B4B8BB /* Copy Frameworks (Carthage) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/AirshipCore.framework",
-			);
-			name = "Copy Frameworks (Carthage)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		E65311DF1D3E69CD00B4B8BB /* Copy Frameworks (Carthage) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/AirshipCore.framework",
-			);
-			name = "Copy Frameworks (Carthage)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		E65311E01D3E69D100B4B8BB /* Copy Frameworks (Carthage) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/AirshipCore.framework",
-			);
-			name = "Copy Frameworks (Carthage)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		E65311E21D3E69DA00B4B8BB /* Copy Frameworks (Carthage) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/AirshipCore.framework",
-			);
-			name = "Copy Frameworks (Carthage)";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		E7AC0E2F6A0FB261ACE34DB4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -11899,6 +11823,14 @@
 				minimumVersion = 0.2.1;
 			};
 		};
+		6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/urbanairship/ios-library.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -12076,6 +12008,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
+		};
+		6FD4095925221A1000E621EF /* AirshipCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */;
+			productName = AirshipCore;
+		};
+		6FD4095B25221A1A00E621EF /* AirshipCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */;
+			productName = AirshipCore;
+		};
+		6FD4095D25221A2300E621EF /* AirshipCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */;
+			productName = AirshipCore;
+		};
+		6FD4095F25221A2B00E621EF /* AirshipCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */;
+			productName = AirshipCore;
+		};
+		6FD4096125221A3500E621EF /* AirshipCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */;
+			productName = AirshipCore;
 		};
 		6FDB2AA424E590EE00FF286E /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;

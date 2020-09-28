@@ -1,3 +1,2 @@
 github "Flipboard/FLEX" "4.1.1"
 github "mapbox/Fingertips" "cdffabac5506103a2c7cc5aedeed4021df2501da"
-github "urbanairship/ios-library" ~> 13.3.2
