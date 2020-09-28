@@ -18,6 +18,7 @@
 
 @import GoogleCast;
 @import SRGAnalytics;
+@import SRGAppearance;
 
 NSString * const GoogleCastPlaybackDidStartNotification = @"GoogleCastPlaybackDidStartNotification";
 NSString * const GoogleCastMediaKey = @"GoogleCastMedia";
@@ -182,6 +183,12 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
             styleAttributes.bodyTextColor = UIColor.whiteColor;
             styleAttributes.captionTextColor = UIColor.whiteColor;
             styleAttributes.iconTintColor = UIColor.whiteColor;
+            
+            styleAttributes.headingTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
+            styleAttributes.bodyTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+            styleAttributes.buttonTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+            styleAttributes.captionTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+            
             styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
             styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
             styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
