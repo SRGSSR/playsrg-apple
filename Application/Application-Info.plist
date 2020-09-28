@@ -172,6 +172,8 @@
 	</dict>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The application uses the microphone for Google Cast receiver discovery.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>The application uses the local network for Google Cast receiver discovery.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER).playing</string>
@@ -249,5 +251,10 @@
 	<string>Dark</string>
 	<key>AVInitialRouteSharingPolicy</key>
 	<string>LongFormVideo</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_googlecast._tcp</string>
+		<string>1AC2931D._googlecast._tcp</string>
+	</array>
 </dict>
 </plist>

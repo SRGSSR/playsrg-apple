@@ -3,3 +3,4 @@
 "History" = "History";
 "Search" = "Search";
 "NSMicrophoneUsageDescription" = "The application uses the microphone for Google Cast receiver discovery.";
+"NSLocalNetworkUsageDescription" = "The application uses the local network for Google Cast receiver discovery.";
