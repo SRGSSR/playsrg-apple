@@ -10,39 +10,39 @@ PODS:
   - AppCenter/Distribute (3.3.4):
     - AppCenter/Core
   - AutoCoding (2.2.3)
-  - BDKCollectionIndexView (2.0.0)
+  - BDKCollectionIndexView (2.2.2)
   - DZNEmptyDataSet (1.8.1)
-  - Firebase/Analytics (6.30.0):
+  - Firebase/Analytics (6.33.0):
     - Firebase/Core
-  - Firebase/Core (6.30.0):
+  - Firebase/Core (6.33.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 6.7.2)
-  - Firebase/CoreOnly (6.30.0):
-    - FirebaseCore (= 6.10.0)
-  - Firebase/RemoteConfig (6.30.0):
+    - FirebaseAnalytics (= 6.8.3)
+  - Firebase/CoreOnly (6.33.0):
+    - FirebaseCore (= 6.10.3)
+  - Firebase/RemoteConfig (6.33.0):
     - Firebase/CoreOnly
     - FirebaseRemoteConfig (~> 4.9.0)
   - FirebaseABTesting (4.2.0):
     - FirebaseCore (~> 6.10)
-  - FirebaseAnalytics (6.7.2):
-    - FirebaseCore (~> 6.8)
-    - FirebaseInstallations (~> 1.4)
-    - GoogleAppMeasurement (= 6.7.2)
+  - FirebaseAnalytics (6.8.3):
+    - FirebaseCore (~> 6.10)
+    - FirebaseInstallations (~> 1.6)
+    - GoogleAppMeasurement (= 6.8.3)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
     - GoogleUtilities/MethodSwizzler (~> 6.7)
     - GoogleUtilities/Network (~> 6.7)
     - "GoogleUtilities/NSData+zlib (~> 6.7)"
-    - nanopb (~> 1.30905.0)
-  - FirebaseCore (6.10.0):
-    - FirebaseCoreDiagnostics (~> 1.3)
+    - nanopb (~> 1.30906.0)
+  - FirebaseCore (6.10.3):
+    - FirebaseCoreDiagnostics (~> 1.6)
     - GoogleUtilities/Environment (~> 6.7)
     - GoogleUtilities/Logger (~> 6.7)
-  - FirebaseCoreDiagnostics (1.5.0):
-    - GoogleDataTransport (~> 7.0)
+  - FirebaseCoreDiagnostics (1.7.0):
+    - GoogleDataTransport (~> 7.4)
     - GoogleUtilities/Environment (~> 6.7)
     - GoogleUtilities/Logger (~> 6.7)
-    - nanopb (~> 1.30905.0)
-  - FirebaseInstallations (1.6.0):
+    - nanopb (~> 1.30906.0)
+  - FirebaseInstallations (1.7.0):
     - FirebaseCore (~> 6.10)
     - GoogleUtilities/Environment (~> 6.7)
     - GoogleUtilities/UserDefaults (~> 6.7)
@@ -53,20 +53,22 @@ PODS:
     - FirebaseInstallations (~> 1.6)
     - GoogleUtilities/Environment (~> 6.7)
     - "GoogleUtilities/NSData+zlib (~> 6.7)"
-  - FSCalendar (2.7.9)
-  - google-cast-sdk-no-bluetooth (4.4.6):
-    - google-cast-sdk-no-bluetooth/Core (= 4.4.6)
-    - Protobuf (~> 3.0)
-  - google-cast-sdk-no-bluetooth/Core (4.4.6):
-    - Protobuf (~> 3.0)
-  - GoogleAppMeasurement (6.7.2):
+  - FSCalendar (2.8.1)
+  - google-cast-sdk-no-bluetooth (4.5.0):
+    - google-cast-sdk-no-bluetooth/Core (= 4.5.0)
+    - GTMSessionFetcher/Core (~> 1.0)
+    - Protobuf (~> 3.12)
+  - google-cast-sdk-no-bluetooth/Core (4.5.0):
+    - GTMSessionFetcher/Core (~> 1.0)
+    - Protobuf (~> 3.12)
+  - GoogleAppMeasurement (6.8.3):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
     - GoogleUtilities/MethodSwizzler (~> 6.7)
     - GoogleUtilities/Network (~> 6.7)
     - "GoogleUtilities/NSData+zlib (~> 6.7)"
-    - nanopb (~> 1.30905.0)
-  - GoogleDataTransport (7.2.0):
-    - nanopb (~> 1.30905.0)
+    - nanopb (~> 1.30906.0)
+  - GoogleDataTransport (7.4.0):
+    - nanopb (~> 1.30906.0)
   - GoogleUtilities/AppDelegateSwizzler (6.7.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -86,31 +88,32 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
-  - InAppSettingsKit (3.0.1)
-  - MaterialComponents/AnimationTiming (109.5.0)
-  - MaterialComponents/Availability (109.5.0)
-  - MaterialComponents/Elevation (109.5.0):
+  - GTMSessionFetcher/Core (1.4.0)
+  - InAppSettingsKit (3.1.3)
+  - MaterialComponents/AnimationTiming (116.0.1)
+  - MaterialComponents/Availability (116.0.1)
+  - MaterialComponents/Elevation (116.0.1):
     - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/Ink (109.5.0):
+  - MaterialComponents/Ink (116.0.1):
     - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/Palettes (109.5.0)
-  - MaterialComponents/private/Application (109.5.0)
-  - MaterialComponents/private/Color (109.5.0):
+  - MaterialComponents/Palettes (116.0.1)
+  - MaterialComponents/private/Application (116.0.1)
+  - MaterialComponents/private/Color (116.0.1):
     - MaterialComponents/Availability
-  - MaterialComponents/private/Math (109.5.0)
-  - MaterialComponents/Ripple (109.5.0):
+  - MaterialComponents/private/Math (116.0.1)
+  - MaterialComponents/Ripple (116.0.1):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/ShadowElevations (109.5.0)
-  - MaterialComponents/ShadowLayer (109.5.0):
+  - MaterialComponents/ShadowElevations (116.0.1)
+  - MaterialComponents/ShadowLayer (116.0.1):
     - MaterialComponents/ShadowElevations
-  - MaterialComponents/Tabs (109.5.0):
+  - MaterialComponents/Tabs (116.0.1):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Elevation
     - MaterialComponents/Ink
@@ -121,32 +124,34 @@ PODS:
     - MaterialComponents/ShadowLayer
     - MaterialComponents/Typography
     - MDFInternationalization
-  - MaterialComponents/Typography (109.5.0):
+  - MaterialComponents/Typography (116.0.1):
     - MaterialComponents/private/Application
     - MaterialComponents/private/Math
+    - MDFTextAccessibility
   - MDFInternationalization (2.0.0)
-  - MGSwipeTableCell (1.6.8)
-  - nanopb (1.30905.0):
-    - nanopb/decode (= 1.30905.0)
-    - nanopb/encode (= 1.30905.0)
-  - nanopb/decode (1.30905.0)
-  - nanopb/encode (1.30905.0)
+  - MDFTextAccessibility (2.0.0)
+  - MGSwipeTableCell (1.6.11)
+  - nanopb (1.30906.0):
+    - nanopb/decode (= 1.30906.0)
+    - nanopb/encode (= 1.30906.0)
+  - nanopb/decode (1.30906.0)
+  - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.10)
-  - Protobuf (3.6.1)
+  - Protobuf (3.13.0)
 
 DEPENDENCIES:
-  - AppCenter (~> 3.3.4)
-  - AppCenter/Distribute (~> 3.3.4)
-  - AutoCoding (~> 2.2.3)
-  - BDKCollectionIndexView (~> 2.0.0)
+  - AppCenter
+  - AppCenter/Distribute
+  - AutoCoding
+  - BDKCollectionIndexView
   - DZNEmptyDataSet (from `https://github.com/dzenbot/DZNEmptyDataSet.git`, commit `8deb3fe69f75c5022a53a903468b29552dc70e66`)
-  - Firebase/Analytics (~> 6.30.0)
-  - Firebase/RemoteConfig (~> 6.30.0)
-  - FSCalendar (= 2.7.9)
-  - google-cast-sdk-no-bluetooth (~> 4.4.6)
-  - InAppSettingsKit (~> 3.0.1)
-  - MaterialComponents/Tabs (~> 109.5)
-  - MGSwipeTableCell (~> 1.6.8)
+  - Firebase/Analytics
+  - Firebase/RemoteConfig
+  - FSCalendar
+  - google-cast-sdk-no-bluetooth
+  - InAppSettingsKit
+  - MaterialComponents/Tabs
+  - MGSwipeTableCell
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -165,9 +170,11 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - GTMSessionFetcher
     - InAppSettingsKit
     - MaterialComponents
     - MDFInternationalization
+    - MDFTextAccessibility
     - MGSwipeTableCell
     - nanopb
     - PromisesObjC
@@ -186,28 +193,30 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AppCenter: 0487be185c038ed2ecc5ed38219af1dcd280af23
   AutoCoding: 90ca3cbc0d77a37cfff75167d705b44148c5fc51
-  BDKCollectionIndexView: 8433e02d7e2483edcbef793c910f95d73efed567
+  BDKCollectionIndexView: 489a0c57d27fafe6944ef61e5a4192902148ea84
   DZNEmptyDataSet: b94434220f87d9dda46660eb4f07a424778e93b4
-  Firebase: 210f41ca352067d83b1ba4fd2e7fb49a0c017397
+  Firebase: 8db6f2d1b2c5e2984efba4949a145875a8f65fe5
   FirebaseABTesting: 8a9d8df3acc2b43f4a22014ddf9f601bca6af699
-  FirebaseAnalytics: a299a86ef70fcc6aa011418bc65a7e101fb9636c
-  FirebaseCore: 9a41e2de78fef10f63cee30ab10e2945266bc1fc
-  FirebaseCoreDiagnostics: 7535fe695737f8c5b350584292a70b7f8ff0357b
-  FirebaseInstallations: 45f9d44d3a8d6f780fa337ee8987dad87210fcbc
+  FirebaseAnalytics: 5dd088bd2e67bb9d13dbf792d1164ceaf3052193
+  FirebaseCore: d889d9e12535b7f36ac8bfbf1713a0836a3012cd
+  FirebaseCoreDiagnostics: 770ac5958e1372ce67959ae4b4f31d8e127c3ac1
+  FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
   FirebaseRemoteConfig: e40f9e084658210c4d9c341cfa9f6cab6ad4f67e
-  FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
-  google-cast-sdk-no-bluetooth: 0b2f106f07592fe08bb78851bfd20a89e1cb613b
-  GoogleAppMeasurement: 3def7652b1f5b5a576178dc332e2a36a260fbef6
-  GoogleDataTransport: 672fb0ce96fe7f7f31d43672fca62ad2c9c86f7b
+  FSCalendar: 5245140456fcbcac5824c203b98bd8068bdfee1a
+  google-cast-sdk-no-bluetooth: a01e9da91e15059e2d4b40ce98bd85240e23db8c
+  GoogleAppMeasurement: 966e88df9d19c15715137bb2ddaf52373f111436
+  GoogleDataTransport: b7f406340a291370045a270c599e53c6fa6ec20f
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
-  InAppSettingsKit: 0d6cf327364085375cbfd8011fd6ae1c0d2c7d1c
-  MaterialComponents: 7698cdf7eacb5f192456dbbe597aa7a8857fa3ef
+  GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  InAppSettingsKit: 665a44fe11d4f06be6ec91516ae8c8b11d658b26
+  MaterialComponents: a8759fa4dd253b6026648730ec0252c428dee589
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
-  MGSwipeTableCell: dc4eca3212ed38a563b27d6aa7b3c01ce656c1e2
-  nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
+  MGSwipeTableCell: b804e4e450dee439c42250be90bd50458bf67fce
+  nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
-  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
 
-PODFILE CHECKSUM: 09a42e7b9bf82cb3073561204dd0cdc5d69c037a
+PODFILE CHECKSUM: 3e3c433cd6e648a98dbce6ff2f1ef52abe27fae7
 
 COCOAPODS: 1.9.3

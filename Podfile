@@ -5,23 +5,26 @@ source 'https://github.com/CocoaPods/Specs.git'
 inhibit_all_warnings!
 
 abstract_target 'Play SRG' do
-  pod 'Firebase/Analytics', '~> 6.30.0'
-  pod 'Firebase/RemoteConfig', '~> 6.30.0'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/RemoteConfig'
 
   abstract_target 'iOS' do
     platform :ios, '12.0'
 
-    pod 'AppCenter', '~> 3.3.4'
-    pod 'AppCenter/Distribute', '~> 3.3.4'
+    pod 'AppCenter'
+    pod 'AppCenter/Distribute'
 
-    pod 'AutoCoding', '~> 2.2.3'
-    pod 'BDKCollectionIndexView', '~> 2.0.0'
+    pod 'AutoCoding'
+    pod 'BDKCollectionIndexView'
+
+    # On master
     pod 'DZNEmptyDataSet', :git => 'https://github.com/dzenbot/DZNEmptyDataSet.git', :commit => '8deb3fe69f75c5022a53a903468b29552dc70e66'
-    pod 'FSCalendar', '2.7.9'
-    pod 'google-cast-sdk-no-bluetooth', '~> 4.4.6'
-    pod 'InAppSettingsKit', '~> 3.0.1'
-    pod 'MaterialComponents/Tabs', '~> 109.5'
-    pod 'MGSwipeTableCell', '~> 1.6.8'
+
+    pod 'FSCalendar'
+    pod 'google-cast-sdk-no-bluetooth'
+    pod 'InAppSettingsKit'
+    pod 'MaterialComponents/Tabs'
+    pod 'MGSwipeTableCell'
 
     target 'Play SRF' do
     end
