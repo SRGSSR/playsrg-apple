@@ -92,7 +92,7 @@
     
     BDKCollectionIndexView *collectionIndexView = [[BDKCollectionIndexView alloc] initWithFrame:CGRectZero indexTitles:nil];
     collectionIndexView.translatesAutoresizingMaskIntoConstraints = NO;
-    collectionIndexView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.7f];
+    collectionIndexView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.4f];
     collectionIndexView.tintColor = UIColor.play_lightGrayColor;
     collectionIndexView.alpha = 1.f;
     [collectionIndexView addTarget:self action:@selector(collectionIndexChanged:) forControlEvents:UIControlEventValueChanged];
