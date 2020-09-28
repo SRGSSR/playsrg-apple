@@ -11,6 +11,9 @@ abstract_target 'Play SRG' do
   abstract_target 'iOS' do
     platform :ios, '12.0'
 
+    pod 'AppCenter', '~> 3.3.4'
+    pod 'AppCenter/Distribute', '~> 3.3.4'
+    
     pod 'AutoCoding', '~> 2.2.3'
     pod 'BDKCollectionIndexView', '~> 2.0.0'
     pod 'FSCalendar', '2.7.9'

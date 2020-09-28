@@ -1314,26 +1314,6 @@
 		6FDFD88E24E6BC9200F20382 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDFD88B24E6BC9200F20382 /* TopicCell.swift */; };
 		6FDFD88F24E6BC9200F20382 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDFD88B24E6BC9200F20382 /* TopicCell.swift */; };
 		6FDFD89024E6BC9200F20382 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDFD88B24E6BC9200F20382 /* TopicCell.swift */; };
-		6FE01B062360358D008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
-		6FE01B072360358D008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
-		6FE01B082360358D008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
-		6FE01B09236035AB008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
-		6FE01B0A236035AB008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
-		6FE01B0B236035AB008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
-		6FE01B0C23603DB7008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
-		6FE01B0D23603DB7008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
-		6FE01B0E23603DB7008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
-		6FE01B0F23603DCE008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
-		6FE01B1023603DCE008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
-		6FE01B1123603DCE008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
-		6FE01B1223603DDF008EBB27 /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B032360358C008EBB27 /* AppCenter.framework */; };
-		6FE01B1323603DDF008EBB27 /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */; };
-		6FE01B1423603DDF008EBB27 /* AppCenterDistribute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */; };
-		6FE01B1623603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
-		6FE01B1723603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
-		6FE01B1823603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
-		6FE01B1923603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
-		6FE01B1A23603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */; };
 		6FE1B4971DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		6FE1B4981DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		6FE1B4991DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
@@ -2185,10 +2165,6 @@
 		6FDF08D4218B126700B2AF2C /* UpdateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateInfo.h; sourceTree = "<group>"; };
 		6FDF08D5218B126700B2AF2C /* OnboardingPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingPage.h; sourceTree = "<group>"; };
 		6FDFD88B24E6BC9200F20382 /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
-		6FE01B032360358C008EBB27 /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenter.framework; path = Carthage/Build/iOS/AppCenter.framework; sourceTree = "<group>"; };
-		6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterCrashes.framework; path = Carthage/Build/iOS/AppCenterCrashes.framework; sourceTree = "<group>"; };
-		6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppCenterDistribute.framework; path = Carthage/Build/iOS/AppCenterDistribute.framework; sourceTree = "<group>"; };
-		6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AppCenterDistributeResources.bundle; path = Carthage/Build/iOS/AppCenterDistribute.framework/AppCenterDistributeResources.bundle; sourceTree = "<group>"; };
 		6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsConstants.h; sourceTree = "<group>"; };
 		6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsConstants.m; sourceTree = "<group>"; };
 		6FE1B9171FAC34D600A58F3B /* ContentInsets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentInsets.h; sourceTree = "<group>"; };
@@ -2315,10 +2291,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FE01B062360358D008EBB27 /* AppCenter.framework in Frameworks */,
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
-				6FE01B072360358D008EBB27 /* AppCenterCrashes.framework in Frameworks */,
-				6FE01B082360358D008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
 				6F5392992248C33E0002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
@@ -2333,9 +2306,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
-				6FE01B09236035AB008EBB27 /* AppCenter.framework in Frameworks */,
-				6FE01B0A236035AB008EBB27 /* AppCenterCrashes.framework in Frameworks */,
-				6FE01B0B236035AB008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
@@ -2350,9 +2320,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
-				6FE01B0C23603DB7008EBB27 /* AppCenter.framework in Frameworks */,
-				6FE01B0D23603DB7008EBB27 /* AppCenterCrashes.framework in Frameworks */,
-				6FE01B0E23603DB7008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
 				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
@@ -2367,9 +2334,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
-				6FE01B0F23603DCE008EBB27 /* AppCenter.framework in Frameworks */,
-				6FE01B1023603DCE008EBB27 /* AppCenterCrashes.framework in Frameworks */,
-				6FE01B1123603DCE008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
 				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
@@ -2384,9 +2348,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
-				6FE01B1223603DDF008EBB27 /* AppCenter.framework in Frameworks */,
-				6FE01B1323603DDF008EBB27 /* AppCenterCrashes.framework in Frameworks */,
-				6FE01B1423603DDF008EBB27 /* AppCenterDistribute.framework in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
 				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
@@ -3614,10 +3575,6 @@
 			isa = PBXGroup;
 			children = (
 				6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */,
-				6FE01B032360358C008EBB27 /* AppCenter.framework */,
-				6FE01B042360358D008EBB27 /* AppCenterCrashes.framework */,
-				6FE01B052360358D008EBB27 /* AppCenterDistribute.framework */,
-				6FE01B1523603E92008EBB27 /* AppCenterDistributeResources.bundle */,
 				6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */,
 				3780F919C25BC0944528A5FD /* libPods-Play SRG-iOS-Play RSI.a */,
 				6A39FE8CAE184E875FB2D868 /* libPods-Play SRG-iOS-Play RTR.a */,
@@ -4535,7 +4492,6 @@
 				6F3B0227245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F40920D22DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
 				6F0A7F0520AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
-				6FE01B1623603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				0837CEAA1D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
 				6F6B643321A70FAA00E207FC /* HomeStatusHeaderView.xib in Resources */,
 				6FD633E31FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
@@ -4593,7 +4549,6 @@
 				082590F31F054ACD00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				6FD88F7D22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
-				6FE01B1723603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6F12E4D822D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				0875851E23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FF7BBB322A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
@@ -4693,7 +4648,6 @@
 				0875851023A0025F00FA7207 /* ProfileAccountHeaderView.xib in Resources */,
 				0804917822832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
 				08DADF8E20D92D6500291AD1 /* placeholder_notification-180.pdf in Resources */,
-				6FE01B1823603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6FF7BBB422A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				E66BEC231DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				08C68FA51D38DF8300BB8AAA /* Localizable.strings in Resources */,
@@ -4774,7 +4728,6 @@
 				6F40921022DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
 				6F475FFD1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
 				E694A9FD1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
-				6FE01B1923603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4836,7 +4789,6 @@
 				6FB0BB4320AEF5DC007C5D87 /* Onboarding.strings in Resources */,
 				6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */,
 				6FA9ECCA20C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
-				6FE01B1A23603E92008EBB27 /* AppCenterDistributeResources.bundle in Resources */,
 				6F2962002006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				6F475FFE1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
 				E694A9FE1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,

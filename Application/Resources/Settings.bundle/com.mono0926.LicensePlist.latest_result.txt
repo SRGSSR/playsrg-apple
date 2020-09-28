@@ -1,3 +1,23 @@
+name: AppCenter, nameSpecified: 
+body: Visual Studio App Ce…
+version: 3.3.4
+
+name: AppCenter, nameSpecified: 
+body: Visual Studio App Ce…
+version: 3.3.4
+
+name: AppCenter, nameSpecified: 
+body: Visual Studio App Ce…
+version: 3.3.4
+
+name: AppCenter, nameSpecified: 
+body: Visual Studio App Ce…
+version: 3.3.4
+
+name: AppCenter, nameSpecified: 
+body: Visual Studio App Ce…
+version: 3.3.4
+
 name: AutoCoding, nameSpecified: 
 body: AutoCoding
 

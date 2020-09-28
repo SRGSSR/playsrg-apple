@@ -1,4 +1,14 @@
 PODS:
+  - AppCenter (3.3.4):
+    - AppCenter/Analytics (= 3.3.4)
+    - AppCenter/Crashes (= 3.3.4)
+  - AppCenter/Analytics (3.3.4):
+    - AppCenter/Core
+  - AppCenter/Core (3.3.4)
+  - AppCenter/Crashes (3.3.4):
+    - AppCenter/Core
+  - AppCenter/Distribute (3.3.4):
+    - AppCenter/Core
   - AutoCoding (2.2.3)
   - BDKCollectionIndexView (2.0.0)
   - Firebase/Analytics (6.30.0):
@@ -128,6 +138,8 @@ PODS:
   - SwiftMessages/App (7.0.1)
 
 DEPENDENCIES:
+  - AppCenter (~> 3.3.4)
+  - AppCenter/Distribute (~> 3.3.4)
   - AutoCoding (~> 2.2.3)
   - BDKCollectionIndexView (~> 2.0.0)
   - Firebase/Analytics (~> 6.30.0)
@@ -142,6 +154,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - AppCenter
     - AutoCoding
     - BDKCollectionIndexView
     - Firebase
@@ -167,6 +180,7 @@ SPEC REPOS:
     - SwiftMessages
 
 SPEC CHECKSUMS:
+  AppCenter: 0487be185c038ed2ecc5ed38219af1dcd280af23
   AutoCoding: 90ca3cbc0d77a37cfff75167d705b44148c5fc51
   BDKCollectionIndexView: 8433e02d7e2483edcbef793c910f95d73efed567
   Firebase: 210f41ca352067d83b1ba4fd2e7fb49a0c017397
@@ -191,6 +205,6 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
 
-PODFILE CHECKSUM: 0986c3660cf69ec50ce770b7537e3fec84026cf6
+PODFILE CHECKSUM: 8e0fddb4f2d79935dbb45c6720223d2dff612cb0
 
 COCOAPODS: 1.9.3
