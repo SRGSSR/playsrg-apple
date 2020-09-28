@@ -12,6 +12,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/Aiolos</string>
+			<key>Title</key>
+			<string>Aiolos</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/appcenter-sdk-apple</string>
 			<key>Title</key>
 			<string>appcenter-sdk-apple (3.3.4)</string>
@@ -39,6 +47,14 @@
 			<string>com.mono0926.LicensePlist/DZNEmptyDataSet</string>
 			<key>Title</key>
 			<string>DZNEmptyDataSet (v1.8.1_srg1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/FetchImage</string>
+			<key>Title</key>
+			<string>FetchImage (0.2.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -108,6 +124,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/FXReachability</string>
+			<key>Title</key>
+			<string>FXReachability</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/google-cast-sdk-no-bluetooth</string>
 			<key>Title</key>
 			<string>google-cast-sdk-no-bluetooth (4.4.6)</string>
@@ -156,6 +180,30 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/libextobjc</string>
+			<key>Title</key>
+			<string>libextobjc</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/MAKVONotificationCenter</string>
+			<key>Title</key>
+			<string>MAKVONotificationCenter</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/Mantle</string>
+			<key>Title</key>
+			<string>Mantle</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/MaterialComponents</string>
 			<key>Title</key>
 			<string>MaterialComponents (109.5.0)</string>
@@ -188,6 +236,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/Nuke</string>
+			<key>Title</key>
+			<string>Nuke (9.1.2)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/paper-onboarding</string>
 			<key>Title</key>
 			<string>paper-onboarding (6.1.5)</string>
@@ -212,9 +268,113 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
+			<key>Title</key>
+			<string>SRGAnalytics</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/srgappearance-apple</string>
+			<key>Title</key>
+			<string>SRGAppearance</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/srgcontentprotection-apple</string>
+			<key>Title</key>
+			<string>SRGContentProtection</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/srgdataprovider-apple</string>
+			<key>Title</key>
+			<string>SRGDataProvider</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/srgdiagnostics-apple</string>
+			<key>Title</key>
+			<string>SRGDiagnostics</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/srgidentity-apple</string>
+			<key>Title</key>
+			<string>SRGIdentity</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
+			<key>Title</key>
+			<string>SRGLetterbox</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/srglogger-apple</string>
+			<key>Title</key>
+			<string>SRGLogger</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/srgmediaplayer-apple</string>
+			<key>Title</key>
+			<string>SRGMediaPlayer</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/srgnetwork-apple</string>
+			<key>Title</key>
+			<string>SRGNetwork</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/srguserdata-apple</string>
+			<key>Title</key>
+			<string>SRGUserData</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/SwiftMessages</string>
 			<key>Title</key>
 			<string>SwiftMessages (7.0.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/UICKeyChainStore</string>
+			<key>Title</key>
+			<string>UICKeyChainStore (2.2.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/YYWebImage</string>
+			<key>Title</key>
+			<string>YYWebImage</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

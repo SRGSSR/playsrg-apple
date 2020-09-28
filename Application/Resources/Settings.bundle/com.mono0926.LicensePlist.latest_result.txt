@@ -774,6 +774,52 @@ name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
 
 name: ios-library, nameSpecified: , owner: urbanairship, version: 13.5.6
 
+name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 
+
+name: ComScore-xcframework-apple, nameSpecified: ComScore, owner: SRGSSR, version: 6.6.0
+
+name: FetchImage, nameSpecified: FetchImage, owner: kean, version: 0.2.1
+
+name: FXReachability, nameSpecified: FXReachability, owner: SRGSSR, version: 
+
+name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version: 
+
+name: MAKVONotificationCenter, nameSpecified: MAKVONotificationCenter, owner: SRGSSR, version: 
+
+name: Mantle, nameSpecified: Mantle, owner: SRGSSR, version: 
+
+name: Nuke, nameSpecified: Nuke, owner: kean, version: 9.1.2
+
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 
+
+name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 
+
+name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 
+
+name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 
+
+name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 
+
+name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 
+
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 
+
+name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 
+
+name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 
+
+name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 
+
+name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 
+
+name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg3
+
+name: TCSDK-xcframework-apple, nameSpecified: TCSDK, owner: SRGSSR, version: 4.4.1-srg3
+
+name: UICKeyChainStore, nameSpecified: UICKeyChainStore, owner: kishikawakatsumi, version: 2.2.0
+
+name: YYWebImage, nameSpecified: YYWebImage, owner: SRGSSR, version: 
+
 add-version-numbers: true
 
 LicensePlist Version: 2.16.0
