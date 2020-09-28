@@ -10,6 +10,7 @@
 #import "ApplicationConfiguration.h"
 #import "History.h"
 #import "PlayErrors.h"
+#import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
@@ -176,6 +177,11 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
         // afterwards, so that the associated performance impact is mitigated.
         dispatch_async(dispatch_get_main_queue(), ^{
             GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
+            styleAttributes.backgroundColor = UIColor.play_blackColor;
+            styleAttributes.headingTextColor = UIColor.whiteColor;
+            styleAttributes.bodyTextColor = UIColor.whiteColor;
+            styleAttributes.captionTextColor = UIColor.whiteColor;
+            styleAttributes.iconTintColor = UIColor.whiteColor;
             styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
             styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
             styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
