@@ -834,11 +834,6 @@
 		6F4FCB0E24D07054002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
 		6F4FCB0F24D07055002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
 		6F4FCB1024D07055002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
-		6F5392992248C33E0002BF87 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */; };
-		6F53929A2248C35B0002BF87 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */; };
-		6F53929B2248C36C0002BF87 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */; };
-		6F53929C2248C3810002BF87 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */; };
-		6F53929D2248C3940002BF87 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */; };
 		6F556B381DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
@@ -1993,7 +1988,6 @@
 		6F4EA13C1EE034E200BEC4DA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		6F4EA13F1EE034EF00BEC4DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		6F4EA1411EE0351B00BEC4DA /* NSBundle+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+PlaySRG.h"; sourceTree = "<group>"; };
-		6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/Static/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		6F556B361DDC419800B5DEA2 /* SettingsBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsBaseViewController.h; sourceTree = "<group>"; };
 		6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsBaseViewController.m; sourceTree = "<group>"; };
 		6F556DB020D1174100C3573A /* NotificationService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NotificationService-Info.plist"; sourceTree = "<group>"; };
@@ -2294,7 +2288,6 @@
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
-				6F5392992248C33E0002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
 				6FADEF9F248E6EB900A5F948 /* AirshipCore.framework in Frameworks */,
 				6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */,
 				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
@@ -2309,7 +2302,6 @@
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
-				6F53929A2248C35B0002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
 				6FADEFA1248E6EDE00A5F948 /* AirshipCore.framework in Frameworks */,
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
 			);
@@ -2323,7 +2315,6 @@
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
 				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
-				6F53929B2248C36C0002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
 				6FADEFA3248E6EEF00A5F948 /* AirshipCore.framework in Frameworks */,
 				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
 			);
@@ -2337,7 +2328,6 @@
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
 				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
-				6F53929C2248C3810002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
 				6FADEFA5248E6EFD00A5F948 /* AirshipCore.framework in Frameworks */,
 				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
 			);
@@ -2351,7 +2341,6 @@
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
 				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
-				6F53929D2248C3940002BF87 /* DZNEmptyDataSet.framework in Frameworks */,
 				6FADEFA7248E6F0A00A5F948 /* AirshipCore.framework in Frameworks */,
 				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
 			);
@@ -3575,7 +3564,6 @@
 			isa = PBXGroup;
 			children = (
 				6FADEF9E248E6EB900A5F948 /* AirshipCore.framework */,
-				6F5392982248C33E0002BF87 /* DZNEmptyDataSet.framework */,
 				3780F919C25BC0944528A5FD /* libPods-Play SRG-iOS-Play RSI.a */,
 				6A39FE8CAE184E875FB2D868 /* libPods-Play SRG-iOS-Play RTR.a */,
 				AB348106F5307D86C18CA361 /* libPods-Play SRG-iOS-Play RTS.a */,

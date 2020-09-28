@@ -11,6 +11,7 @@ PODS:
     - AppCenter/Core
   - AutoCoding (2.2.3)
   - BDKCollectionIndexView (2.0.0)
+  - DZNEmptyDataSet (1.8.1)
   - Firebase/Analytics (6.30.0):
     - Firebase/Core
   - Firebase/Core (6.30.0):
@@ -142,6 +143,7 @@ DEPENDENCIES:
   - AppCenter/Distribute (~> 3.3.4)
   - AutoCoding (~> 2.2.3)
   - BDKCollectionIndexView (~> 2.0.0)
+  - DZNEmptyDataSet (from `https://github.com/dzenbot/DZNEmptyDataSet.git`, commit `8deb3fe69f75c5022a53a903468b29552dc70e66`)
   - Firebase/Analytics (~> 6.30.0)
   - Firebase/RemoteConfig (~> 6.30.0)
   - FSCalendar (= 2.7.9)
@@ -179,10 +181,21 @@ SPEC REPOS:
     - Protobuf
     - SwiftMessages
 
+EXTERNAL SOURCES:
+  DZNEmptyDataSet:
+    :commit: 8deb3fe69f75c5022a53a903468b29552dc70e66
+    :git: https://github.com/dzenbot/DZNEmptyDataSet.git
+
+CHECKOUT OPTIONS:
+  DZNEmptyDataSet:
+    :commit: 8deb3fe69f75c5022a53a903468b29552dc70e66
+    :git: https://github.com/dzenbot/DZNEmptyDataSet.git
+
 SPEC CHECKSUMS:
   AppCenter: 0487be185c038ed2ecc5ed38219af1dcd280af23
   AutoCoding: 90ca3cbc0d77a37cfff75167d705b44148c5fc51
   BDKCollectionIndexView: 8433e02d7e2483edcbef793c910f95d73efed567
+  DZNEmptyDataSet: b94434220f87d9dda46660eb4f07a424778e93b4
   Firebase: 210f41ca352067d83b1ba4fd2e7fb49a0c017397
   FirebaseABTesting: 8a9d8df3acc2b43f4a22014ddf9f601bca6af699
   FirebaseAnalytics: a299a86ef70fcc6aa011418bc65a7e101fb9636c
@@ -205,6 +218,6 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
 
-PODFILE CHECKSUM: 8e0fddb4f2d79935dbb45c6720223d2dff612cb0
+PODFILE CHECKSUM: 88a8aa4420f5b8d7327c70f34696d08f59f19a6b
 
 COCOAPODS: 1.9.3
