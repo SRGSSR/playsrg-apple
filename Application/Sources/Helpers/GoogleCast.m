@@ -157,9 +157,9 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 - (instancetype)init
 {
     if (self = [super init]) {
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        
-        GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:applicationConfiguration.googleCastReceiverIdentifier];
+        NSString *googleCastReceiverIdentifier = [NSBundle.mainBundle objectForInfoDictionaryKey:@"GoogleCastReceiverIdentifier"];
+        NSAssert(googleCastReceiverIdentifier != nil, @"A Google Cast receiver identifier is required");
+        GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:googleCastReceiverIdentifier];
         GCKCastOptions *options = [[GCKCastOptions alloc] initWithDiscoveryCriteria:discoveryCriteria];
         [GCKCastContext setSharedInstanceWithOptions:options];
         [GCKCastContext sharedInstance].useDefaultExpandedMediaControls = YES;

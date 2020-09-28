@@ -23,7 +23,7 @@
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>${PRODUCT_BUNDLE_IDENTIFIER}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -251,10 +251,12 @@
 	<string>Dark</string>
 	<key>AVInitialRouteSharingPolicy</key>
 	<string>LongFormVideo</string>
+	<key>GoogleCastReceiverIdentifier</key>
+	<string>${GOOGLE_CAST_RECEIVER_IDENTIFIER}</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_googlecast._tcp</string>
-		<string>_1AC2931D._googlecast._tcp</string>
+		<string>_${GOOGLE_CAST_RECEIVER_IDENTIFIER}._googlecast._tcp</string>
 	</array>
 </dict>
 </plist>

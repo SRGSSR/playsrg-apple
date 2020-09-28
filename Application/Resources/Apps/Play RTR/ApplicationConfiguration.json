@@ -3,7 +3,6 @@
   "container": 10,
   "comScoreVirtualSite": "rtr-player-ios-v",
   "netMetrixIdentifier": "srgplayer",
-  "googleCastReceiverIdentifier": "1AC2931D",
   "appStoreProductIdentifier": 920754925,
   "playURL": "https://www.rtr.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",

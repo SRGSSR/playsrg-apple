@@ -11,9 +11,6 @@
 #import "PlayLogger.h"
 #import "SRGMedia+PlaySRG.h"
 
-#if TARGET_OS_IOS
-@import GoogleCast;
-#endif
 @import libextobjc;
 @import SRGAppearance;
 @import SRGLetterbox;
@@ -279,11 +276,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *voiceOverLanguageCode = [firebaseConfiguration stringForKey:@"voiceOverLanguageCode"];
     self.voiceOverLanguageCode = voiceOverLanguageCode;
-    
-#if TARGET_OS_IOS
-    NSString *googleCastReceiverIdentifier = [firebaseConfiguration stringForKey:@"googleCastReceiverIdentifier"];
-    self.googleCastReceiverIdentifier = googleCastReceiverIdentifier ?: kGCKDefaultMediaReceiverApplicationID;
-#endif
     
     NSString *identityWebserviceURLString = [firebaseConfiguration stringForKey:@"identityWebserviceURL"];
     self.identityWebserviceURL = identityWebserviceURLString ? [NSURL URLWithString:identityWebserviceURLString] : nil;

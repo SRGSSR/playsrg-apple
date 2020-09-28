@@ -37,7 +37,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 // Might be nil for "exotic" languages like Rumantsch
 @property (nonatomic, readonly, copy, nullable) NSString *voiceOverLanguageCode;
 
-@property (nonatomic, readonly, copy) NSString *googleCastReceiverIdentifier API_UNAVAILABLE(tvos);
 @property (nonatomic, readonly, copy) NSNumber *appStoreProductIdentifier;
 
 @property (nonatomic, readonly) NSURL *playURL;
