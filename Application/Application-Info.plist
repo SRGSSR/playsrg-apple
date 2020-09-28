@@ -254,7 +254,7 @@
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_googlecast._tcp</string>
-		<string>1AC2931D._googlecast._tcp</string>
+		<string>_1AC2931D._googlecast._tcp</string>
 	</array>
 </dict>
 </plist>
