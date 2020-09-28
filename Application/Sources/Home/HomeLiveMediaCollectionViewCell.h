@@ -6,7 +6,7 @@
 
 #import "Previewing.h"
 
-@import SRGDataProvider;
+@import SRGDataProviderModel;
 
 NS_ASSUME_NONNULL_BEGIN
 

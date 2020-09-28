@@ -22,7 +22,7 @@
 #import <objc/runtime.h>
 
 @import GoogleCast;
-@import SRGAnalytics_DataProvider;
+@import SRGDataProviderNetwork;
 
 static Playlist *s_playlist;
 

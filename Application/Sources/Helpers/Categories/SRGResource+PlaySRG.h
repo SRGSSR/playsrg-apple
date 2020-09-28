@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-@import SRGDataProvider;
+@import SRGDataProviderModel;
 
 NS_ASSUME_NONNULL_BEGIN
 

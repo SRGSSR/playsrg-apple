@@ -12,6 +12,7 @@
 
 @import FXReachability;
 @import libextobjc;
+@import SRGNetwork;
 
 static void *s_kvoContext = &s_kvoContext;
 

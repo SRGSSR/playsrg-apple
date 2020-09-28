@@ -13,6 +13,7 @@
 @import JavaScriptCore;
 @import SRGDiagnostics;
 @import SRGNetwork;
+@import UIKit;
 
 NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceName";
 

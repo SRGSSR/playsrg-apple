@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Aiolos",
+        "repositoryURL": "https://github.com/IdeasOnCanvas/Aiolos.git",
+        "state": {
+          "branch": "main",
+          "revision": "5405495ef59c719c28a72e92fa7e75129fc58981",
+          "version": null
+        }
+      },
+      {
         "package": "ComScore",
         "repositoryURL": "https://github.com/SRGSSR/ComScore-xcframework-apple.git",
         "state": {
@@ -151,6 +160,15 @@
         "state": {
           "branch": "develop",
           "revision": "98c50251b8f2c94e626e1a264eb560c52662aa57",
+          "version": null
+        }
+      },
+      {
+        "package": "SRGUserData",
+        "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "6127e3b31dedaf4bc10ac3220f39b08ee348a5b7",
           "version": null
         }
       },

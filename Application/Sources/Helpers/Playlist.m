@@ -13,7 +13,7 @@
 
 @import FXReachability;
 @import libextobjc;
-@import SRGNetwork;
+@import SRGDataProviderNetwork;
 
 @interface Playlist ()
 

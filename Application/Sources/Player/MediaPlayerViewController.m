@@ -61,7 +61,7 @@
 @import Intents;
 @import libextobjc;
 @import MAKVONotificationCenter;
-@import SRGAnalytics_DataProvider;
+@import SRGAnalyticsDataProvider;
 @import SRGAppearance;
 @import SRGUserData;
 
@@ -1957,8 +1957,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
             
             SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:sharingMedia.URN];
-            if (subdivision) {
-                [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType subdivision:subdivision withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+            if (subdivision.event) {
+                [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType URN:subdivision.URN event:subdivision.event withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                     // Nothing
                 }] resume];
             }

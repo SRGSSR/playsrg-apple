@@ -8,7 +8,7 @@
 
 #import <MGSwipeTableCell/MGSwipeTableCell.h>
 
-@import SRGDataProvider;
+@import SRGDataProviderModel;
 @import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN

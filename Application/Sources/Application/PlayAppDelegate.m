@@ -45,7 +45,7 @@
 @import libextobjc;
 @import Mantle;
 @import SafariServices;
-@import SRGAnalytics_Identity;
+@import SRGAnalyticsIdentity;
 @import SRGAppearance;
 @import SRGDataProvider;
 @import SRGIdentity;

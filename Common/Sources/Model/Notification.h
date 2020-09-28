@@ -5,7 +5,7 @@
 //
 
 @import Foundation;
-@import SRGDataProvider;
+@import SRGDataProviderModel;
 @import UserNotifications;
 
 NS_ASSUME_NONNULL_BEGIN

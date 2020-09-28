@@ -52,7 +52,7 @@
 {
     _show = show;
     
-    self.titleLabel.font = [UIFont srg_regularFontWithTextStyle:UIFontTextStyleBody];
+    self.titleLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
     self.titleLabel.text = show.title;
 }
 

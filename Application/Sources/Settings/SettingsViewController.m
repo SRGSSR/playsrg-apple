@@ -30,6 +30,7 @@
 @import libextobjc;
 @import SafariServices;
 @import SRGAppearance;
+@import SRGDataProviderNetwork;
 @import SRGUserData;
 @import SRGIdentity;
 @import SRGLetterbox;
