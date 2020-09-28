@@ -87,7 +87,7 @@ bootstrap:
 	$(call restore_cartfile_resolved,proprietary)
 	@carthage bootstrap $(CARTHAGE_RESOLUTION_FLAGS)
 	$(call save_cartfile_resolved,proprietary)
-	@carthage build $(CARTHAGE_BUILD_FLAGS)
+	@Scripts/carthage-build.sh $(CARTHAGE_BUILD_FLAGS)
 	@echo "... done.\n"
 
 .PHONY: update
@@ -96,7 +96,7 @@ update: setup public.dependencies
 	$(call restore_cartfile_private,proprietary)
 	@carthage update $(CARTHAGE_RESOLUTION_FLAGS)
 	$(call save_cartfile_resolved,proprietary)
-	@carthage build $(CARTHAGE_BUILD_FLAGS)
+	@Scripts/carthage-build.sh $(CARTHAGE_BUILD_FLAGS)
 	@echo "... done.\n"
 
 # Public dependency compilation
@@ -108,7 +108,7 @@ public.bootstrap: public.setup
 	$(call restore_cartfile_resolved,public)
 	@carthage bootstrap $(CARTHAGE_RESOLUTION_FLAGS)
 	$(call save_cartfile_resolved,public)
-	@carthage build $(CARTHAGE_BUILD_FLAGS)
+	@Scripts/carthage-build.sh $(CARTHAGE_BUILD_FLAGS)
 	@echo "... done.\n"
 
 .PHONY: public.update
@@ -117,7 +117,7 @@ public.update: public.setup
 	$(call restore_cartfile_private,public)
 	@carthage update $(CARTHAGE_RESOLUTION_FLAGS)
 	$(call save_cartfile_resolved,public)
-	@carthage build $(CARTHAGE_BUILD_FLAGS)
+	@Scripts/carthage-build.sh $(CARTHAGE_BUILD_FLAGS)
 	@echo "... done.\n"
 
 # Setup
