@@ -638,7 +638,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (BOOL)accessibilityPerformEscape
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self play_dismissViewControllerAnimated:YES completion:nil];
     return YES;
 }
 
@@ -1692,7 +1692,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (BOOL)letterboxDismissUserInterfaceForPictureInPicture
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self play_dismissViewControllerAnimated:YES completion:nil];
     return YES;
 }
 
@@ -2106,7 +2106,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (IBAction)close:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self play_dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark Gesture recognizers

@@ -48,6 +48,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, nullable) id<UIViewControllerPreviewing> play_previewingContext;
 
 /**
+ *  The top view controller of the receiver hierarchy.
+ */
+@property (nonatomic, readonly) UIViewController *play_topViewController;
+
+/**
  *  Play the specified media, presenting the appropriate media player based on the current context (whether Google Cast
  *  is enabled or not). The player is displayed modally, with the provided completion block called on completion. The
  *  player attempts to start at the specified position (use `nil` for the default location, resuming at the last playback
@@ -79,6 +84,13 @@ NS_ASSUME_NONNULL_BEGIN
                                   fromPushNotification:(BOOL)fromPushNotification
                                               animated:(BOOL)animated
                                             completion:(nullable void (^)(PlayerType playerType))completion;
+
+/**
+ *  Dismiss the view controller, ensuring a compatible suitable orientation is applied to the revealed view controller.
+ *
+ *  @discussion Useful when a custom modal presentation style is applied. In general use standard dismissal.
+ */
+- (void)play_dismissViewControllerAnimated:(BOOL)animated completion:(nullable void (^)(void))completion;
 
 @end
 

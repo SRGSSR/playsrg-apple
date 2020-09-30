@@ -22,6 +22,7 @@
 #import <objc/runtime.h>
 
 @import GoogleCast;
+@import libextobjc;
 @import SRGDataProviderNetwork;
 
 static Playlist *s_playlist;
@@ -178,6 +179,15 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 - (void)play_setViewVisible:(BOOL)visible
 {
     objc_setAssociatedObject(self, s_isViewVisibleKey, @(visible), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UIViewController *)play_topViewController
+{
+    UIViewController *topViewController = self;
+    while (topViewController.presentedViewController) {
+        topViewController = topViewController.presentedViewController;
+    }
+    return topViewController;
 }
 
 #pragma mark Previewing
@@ -392,6 +402,34 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
             }];
         }
     }];
+}
+
+- (BOOL)play_supportsOrientation:(UIInterfaceOrientation)orientation
+{
+    return (self.supportedInterfaceOrientations & (1 << orientation)) != 0;
+}
+
+- (void)play_dismissViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
+{
+    UIViewController *topViewController = self.play_topViewController;
+    
+    // See https://stackoverflow.com/a/29560217
+    UIViewController *presentingViewController = topViewController.presentingViewController;
+    if (! [presentingViewController play_supportsOrientation:(UIInterfaceOrientation)UIDevice.currentDevice.orientation]) {
+        if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationPortrait]) {
+            [UIDevice.currentDevice setValue:@(UIDeviceOrientationPortrait) forKey:@keypath(UIDevice.new, orientation)];
+        }
+        else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+            [UIDevice.currentDevice setValue:@(UIDeviceOrientationPortraitUpsideDown) forKey:@keypath(UIDevice.new, orientation)];
+        }
+        else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationLandscapeLeft]) {
+            [UIDevice.currentDevice setValue:@(UIDeviceOrientationLandscapeLeft) forKey:@keypath(UIDevice.new, orientation)];
+        }
+        else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationLandscapeRight]) {
+            [UIDevice.currentDevice setValue:@(UIDeviceOrientationLandscapeRight) forKey:@keypath(UIDevice.new, orientation)];
+        }
+    }
+    [self dismissViewControllerAnimated:animated completion:completion];
 }
 
 @end

@@ -6,15 +6,13 @@
 
 #import "UIWindow+PlaySRG.h"
 
+#import "UIViewController+PlaySRG.h"
+
 @implementation UIWindow (PlaySRG)
 
 - (UIViewController *)play_topViewController
 {
-    UIViewController *topViewController = self.rootViewController;
-    while (topViewController.presentedViewController) {
-        topViewController = topViewController.presentedViewController;
-    }
-    return topViewController;
+    return self.rootViewController.play_topViewController;
 }
 
 - (void)play_dismissAllViewControllersAnimated:(BOOL)animated completion:(void (^)(void))completion
