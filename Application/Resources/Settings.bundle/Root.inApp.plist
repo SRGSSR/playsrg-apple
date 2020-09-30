@@ -93,8 +93,6 @@
 			<string>Group_Permissions</string>
 			<key>Title</key>
 			<string>Manage permissions</string>
-			<key>FooterText</key>
-			<string>Local network access must be allowed for Google Cast receiver discovery.</string>
 		</dict>
 		<dict>
 			<key>Type</key>

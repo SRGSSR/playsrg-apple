@@ -43,6 +43,7 @@ static NSString * const SettingsAutoplayGroup = @"Group_Autoplay";
 static NSString * const SettingsDisplayGroup = @"Group_Display";
 
 // Permissions group
+static NSString * const SettingsPermissionsGroup = @"Group_Permissions";
 static NSString * const SettingsSystemSettingsButton = @"Button_SystemSettings";
 
 // Information group
@@ -449,7 +450,17 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             NSString *dateString = synchronizationDate ? [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:synchronizationDate] : NSLocalizedString(@"Never", @"Text displayed when no data synchronization has been made yet");
             return [NSString stringWithFormat:NSLocalizedString(@"Last synchronization: %@", @"Introductory text for the most recent data synchronization date"), dateString];
         }
-        return nil;
+        else {
+            return nil;
+        }
+    }
+    else if ([key isEqualToString:SettingsPermissionsGroup]) {
+        if (@available(iOS 14, *)) {
+            return NSLocalizedString(@"Local network access must be allowed for Google Cast receiver discovery.", @"Setting footer message for system permission group. New rule for iOS 14 and more.");
+        }
+        else {
+            return nil;
+        }
     }
     else {
         return nil;
