@@ -538,6 +538,11 @@
 		6F1F92A022A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */; };
 		6F1F92A122A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */; };
 		6F1F92A222A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */; };
+		6F24913325248CDB00621C27 /* FirebaseStorageFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F24913225248CDB00621C27 /* FirebaseStorageFix.m */; };
+		6F24913425248CDB00621C27 /* FirebaseStorageFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F24913225248CDB00621C27 /* FirebaseStorageFix.m */; };
+		6F24913525248CDB00621C27 /* FirebaseStorageFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F24913225248CDB00621C27 /* FirebaseStorageFix.m */; };
+		6F24913625248CDB00621C27 /* FirebaseStorageFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F24913225248CDB00621C27 /* FirebaseStorageFix.m */; };
+		6F24913725248CDB00621C27 /* FirebaseStorageFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F24913225248CDB00621C27 /* FirebaseStorageFix.m */; };
 		6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2544F42521BAA400F9F4FE /* SRGUserData */; };
 		6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545B42521C14E00F9F4FE /* SRGLetterbox */; };
 		6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545B62521C15E00F9F4FE /* SRGLetterbox */; };
@@ -1897,6 +1902,7 @@
 		6F1F80652508ECA800FD8FE7 /* ShowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsView.swift; sourceTree = "<group>"; };
 		6F1F929C22A539D40026BFAC /* SearchShowListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchShowListCollectionViewCell.h; sourceTree = "<group>"; };
 		6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchShowListCollectionViewCell.m; sourceTree = "<group>"; };
+		6F24913225248CDB00621C27 /* FirebaseStorageFix.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebaseStorageFix.m; sourceTree = "<group>"; };
 		6F2961FB2006186000CAB0E4 /* placeholder_media_list-180.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "placeholder_media_list-180.pdf"; sourceTree = "<group>"; };
 		6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaPlayerViewController+SongPanel.swift"; sourceTree = "<group>"; };
 		6F331CE424D06B8200C096AB /* Play SRF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play SRF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2697,6 +2703,7 @@
 				6FD6861E2460670600B8018A /* Channel.m */,
 				6F566E7E24EE95CB0024B4CA /* FirebaseConfiguration.h */,
 				6F566E7F24EE95CB0024B4CA /* FirebaseConfiguration.m */,
+				6F24913225248CDB00621C27 /* FirebaseStorageFix.m */,
 				6F566E8524EEC2AD0024B4CA /* HomeSection.h */,
 				6F566E8624EEC2AD0024B4CA /* HomeSection.m */,
 				0801E0791D4A4A810008021E /* RadioChannel.h */,
@@ -7281,6 +7288,7 @@
 				6F1D31B324E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80662508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F4BCBE124EFF7C3001ABA17 /* Formatters.swift in Sources */,
+				6F24913325248CDB00621C27 /* FirebaseStorageFix.m in Sources */,
 				6FCC73BA24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6F331D6624D076C800C096AB /* SearchView.swift in Sources */,
@@ -7324,6 +7332,7 @@
 				6F1D31B424E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80672508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F4BCBE224EFF7C3001ABA17 /* Formatters.swift in Sources */,
+				6F24913425248CDB00621C27 /* FirebaseStorageFix.m in Sources */,
 				6FCC73BB24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6F331D6724D076C800C096AB /* SearchView.swift in Sources */,
@@ -7367,6 +7376,7 @@
 				6F1D31B524E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80682508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F4BCBE324EFF7C3001ABA17 /* Formatters.swift in Sources */,
+				6F24913525248CDB00621C27 /* FirebaseStorageFix.m in Sources */,
 				6FCC73BC24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6F331D6824D076C800C096AB /* SearchView.swift in Sources */,
@@ -7410,6 +7420,7 @@
 				6F1D31B624E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80692508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F4BCBE424EFF7C3001ABA17 /* Formatters.swift in Sources */,
+				6F24913625248CDB00621C27 /* FirebaseStorageFix.m in Sources */,
 				6FCC73BD24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6F331D6924D076C800C096AB /* SearchView.swift in Sources */,
@@ -7453,6 +7464,7 @@
 				6F1D31B724E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F806A2508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F4BCBE524EFF7C3001ABA17 /* Formatters.swift in Sources */,
+				6F24913725248CDB00621C27 /* FirebaseStorageFix.m in Sources */,
 				6FCC73BE24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6FB1ADFE24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6F331D6A24D076C800C096AB /* SearchView.swift in Sources */,
