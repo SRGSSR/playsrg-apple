@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1200"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "# Expanded code sign identity is not provided to post actions. To ensure we use the same identity as Xcode, we write it to a temporary file during a build phase so that we can retrieve it here.&#10;CODE_SIGN_IDENTITY=`cat /tmp/play-srf-tv-signing-identity`&#10;&#10;# Apply codes signing to all framworks in the final product.&#10;find &quot;${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}&quot; -mindepth 1 -maxdepth 1 -type d -exec /usr/bin/codesign --force --sign ${CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements {} \;&#10;"
+               shellToInvoke = "/bin/bash">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "6F331CE324D06B8200C096AB"
+                     BuildableName = "Play SRF.app"
+                     BlueprintName = "Play SRF TV"
+                     ReferencedContainer = "container:PlaySRG.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"

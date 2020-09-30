@@ -4089,6 +4089,7 @@
 				6F331CE224D06B8200C096AB /* Resources */,
 				088884C924D4A41300B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 				6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */,
+				6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */,
 			);
 			buildRules = (
 			);
@@ -4115,6 +4116,7 @@
 				6F331CFA24D06BA200C096AB /* Resources */,
 				088884C824D4A40D00B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 				6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */,
+				6F3FA4D925246E0000ABEE9A /* Extract Signing Identity */,
 			);
 			buildRules = (
 			);
@@ -4141,6 +4143,7 @@
 				6F331D1224D06BB800C096AB /* Resources */,
 				088884C724D4A40700B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 				6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */,
+				6F3FA4DA25246E0500ABEE9A /* Extract Signing Identity */,
 			);
 			buildRules = (
 			);
@@ -4167,6 +4170,7 @@
 				6F331D2A24D06BC600C096AB /* Resources */,
 				088884C624D4A40100B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 				6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */,
+				6F3FA4EF25246E1100ABEE9A /* Extract Signing Identity */,
 			);
 			buildRules = (
 			);
@@ -4193,6 +4197,7 @@
 				6F331D4224D06C2600C096AB /* Resources */,
 				088884C524D4847000B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 				6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */,
+				6F3FA50425246E1A00ABEE9A /* Extract Signing Identity */,
 			);
 			buildRules = (
 			);
@@ -5668,6 +5673,96 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi";
+		};
+		6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Extract Signing Identity";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"${EXPANDED_CODE_SIGN_IDENTITY}\" > /tmp/play-srf-tv-signing-identity\n";
+		};
+		6F3FA4D925246E0000ABEE9A /* Extract Signing Identity */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Extract Signing Identity";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"${EXPANDED_CODE_SIGN_IDENTITY}\" > /tmp/play-rts-tv-signing-identity\n";
+		};
+		6F3FA4DA25246E0500ABEE9A /* Extract Signing Identity */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Extract Signing Identity";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"${EXPANDED_CODE_SIGN_IDENTITY}\" > /tmp/play-rsi-tv-signing-identity\n";
+		};
+		6F3FA4EF25246E1100ABEE9A /* Extract Signing Identity */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Extract Signing Identity";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"${EXPANDED_CODE_SIGN_IDENTITY}\" > /tmp/play-rtr-tv-signing-identity\n";
+		};
+		6F3FA50425246E1A00ABEE9A /* Extract Signing Identity */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Extract Signing Identity";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"${EXPANDED_CODE_SIGN_IDENTITY}\" > /tmp/play-swi-tv-signing-identity\n";
 		};
 		6F5E54992521E3C7004334E4 /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
