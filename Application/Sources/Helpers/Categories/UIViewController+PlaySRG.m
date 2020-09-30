@@ -248,7 +248,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
     else {
         void (^openPlayer)(void) = ^{
             MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:position fromPushNotification:fromPushNotification];
-            mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+            mediaPlayerViewController.modalPresentationStyle = UIModalPresentationCustom;
             SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
             letterboxController.playlistDataSource = SharedPlaylistForURN(media.URN);
             [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
@@ -285,7 +285,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
     
     void (^openPlayer)(void) = ^{
         MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithController:letterboxController position:nil fromPushNotification:fromPushNotification];
-        mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        mediaPlayerViewController.modalPresentationStyle = UIModalPresentationCustom;
         letterboxController.playlistDataSource = SharedPlaylistForURN(letterboxController.URN);
         [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
     };
