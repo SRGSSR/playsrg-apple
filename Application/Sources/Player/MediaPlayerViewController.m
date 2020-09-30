@@ -65,9 +65,6 @@
 @import SRGAppearance;
 @import SRGUserData;
 
-NSString * const MediaPlayerViewControllerVisibilityDidChangeNotification = @"MediaPlayerViewControllerVisibilityDidChangeNotification";
-NSString * const MediaPlayerViewControllerVisibleKey = @"MediaPlayerViewControllerVisible";
-
 // Store the most recently used landscape orientation, also between player instantiations (so that the user last used
 // orientation is preferred)
 static UIDeviceOrientation s_previouslyUsedLandscapeDeviceOrientation = UIDeviceOrientationLandscapeLeft;
@@ -544,10 +541,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self scrollToNearestSongAnimated:NO];
         [self updateSelectionForCurrentSong];
         
-        [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
-                                                          object:self
-                                                        userInfo:@{ MediaPlayerViewControllerVisibleKey : @YES }];
-        
         [SRGLetterboxService.sharedService enableWithController:self.letterboxController pictureInPictureDelegate:self];
     }
     
@@ -584,10 +577,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
         
         [self.livestreamMediasRequest cancel];
-        
-        [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
-                                                          object:self
-                                                        userInfo:@{ MediaPlayerViewControllerVisibleKey : @NO }];
     }
     else if (self.letterboxController.media.mediaType == SRGMediaTypeVideo) {
         [self.letterboxController pause];
