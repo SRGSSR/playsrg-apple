@@ -11938,7 +11938,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = "feature/modal-presentation-fix";
+				branch = develop;
 				kind = branch;
 			};
 		};

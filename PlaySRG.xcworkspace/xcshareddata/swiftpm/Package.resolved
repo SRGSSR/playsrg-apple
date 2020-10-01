@@ -96,7 +96,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "9b9158dc7fde510da53945c901205b21394193fb",
+          "revision": "69112333791dcff289315f5962e8b9dc864a2e62",
           "version": null
         }
       },
@@ -114,7 +114,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "5b1587d9212e1bbaceea3f6ca054232807c3308f",
+          "revision": "9118fad1918eaf5ebff4cdb742defd8b00bec367",
           "version": null
         }
       },
@@ -123,7 +123,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "0148eef50f74f9fd75155c74aa4b15170015fdbb",
+          "revision": "988cb9a0f9473635c145752f44e570852c30af48",
           "version": null
         }
       },
@@ -149,8 +149,8 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "feature/modal-presentation-fix",
-          "revision": "77a1f4861e23aded9b03d794fa05c7165a58c273",
+          "branch": "develop",
+          "revision": "6129033e59bd4c93df7025a0e244890491b16fcb",
           "version": null
         }
       },
@@ -168,7 +168,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "f775aa12b2758fbc0ff2091baf1fd1cc2957ff77",
+          "revision": "957014e617cc8cfe83ce6a8cf92f1ecf21b0e25c",
           "version": null
         }
       },
@@ -186,7 +186,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "6127e3b31dedaf4bc10ac3220f39b08ee348a5b7",
+          "revision": "785751a6047249f4a80b3cd038eff9aadf4e3f0f",
           "version": null
         }
       },
