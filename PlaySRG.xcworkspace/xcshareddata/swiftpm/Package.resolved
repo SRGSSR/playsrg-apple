@@ -149,8 +149,8 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "fdd2e1b7b0b330c05a36e39cdc4b44e4347ecd08",
+          "branch": "feature/modal-presentation-fix",
+          "revision": "77a1f4861e23aded9b03d794fa05c7165a58c273",
           "version": null
         }
       },
