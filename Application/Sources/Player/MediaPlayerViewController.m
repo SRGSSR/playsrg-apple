@@ -67,7 +67,7 @@
 
 // Store the most recently used landscape orientation, also between player instantiations (so that the user last used
 // orientation is preferred)
-static UIDeviceOrientation s_previouslyUsedLandscapeDeviceOrientation = UIDeviceOrientationLandscapeLeft;
+static UIInterfaceOrientation s_previouslyUsedLandscapeInterfaceOrientation = UIInterfaceOrientationLandscapeLeft;
 
 static const UILayoutPriority MediaPlayerBottomConstraintNormalPriority = 850;
 static const UILayoutPriority MediaPlayerBottomConstraintFullScreenPriority = 950;
@@ -411,8 +411,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     // iPhone devices: Set full screen in landscape orientation (done before the view is actually displayed. This
     // avoids status bar hiccups)
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
-        BOOL isLandscape = UIDeviceOrientationIsValidInterfaceOrientation(deviceOrientation) ? UIDeviceOrientationIsLandscape(deviceOrientation) : UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation);
+        BOOL isLandscape = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation);
         
         self.statusBarHidden = isLandscape;
         self.transitioning = isLandscape;
@@ -617,9 +616,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self reloadSongPanelSize];
         [self scrollToNearestSongAnimated:NO];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
-        if (UIDeviceOrientationIsLandscape(deviceOrientation)) {
-            s_previouslyUsedLandscapeDeviceOrientation = deviceOrientation;
+        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.statusBarOrientation;
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+            s_previouslyUsedLandscapeInterfaceOrientation = interfaceOrientation;
         }
         self.transitioning = NO;
     }];
@@ -1549,9 +1548,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView toggleFullScreen:(BOOL)fullScreen animated:(BOOL)animated withCompletionHandler:(nonnull void (^)(BOOL))completionHandler
 {
-    void (^rotate)(UIDeviceOrientation) = ^(UIDeviceOrientation orientation) {
+    void (^rotate)(UIInterfaceOrientation) = ^(UIInterfaceOrientation orientation) {
         // We interrupt the rotation attempt and trigger a rotation (which itself will toggle the expected full-screen display)
         completionHandler(NO);
+        
+        // User interface orientations are a subset of device orientations with matching values
         [UIDevice.currentDevice setValue:@(orientation) forKey:@keypath(UIDevice.new, orientation)];
     };
     
@@ -1559,13 +1560,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     // we force a rotation, which itself will perform the appropriate transition from or to full-screen
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && ! self.transitioning) {
         if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation)) {
-            rotate(UIDeviceOrientationPortrait);
+            rotate(UIInterfaceOrientationPortrait);
             return;
         }
         else {
             // Only force rotation from portrait to landscape orientation if the content is better watched in landscape orientation
             if (letterboxView.aspectRatio > 1.f) {
-                rotate(s_previouslyUsedLandscapeDeviceOrientation);
+                rotate(s_previouslyUsedLandscapeInterfaceOrientation);
                 return;
             }
         }
