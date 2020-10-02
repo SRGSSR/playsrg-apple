@@ -92,7 +92,7 @@
 			<key>Key</key>
 			<string>Group_Permissions</string>
 			<key>Title</key>
-			<string>Manage permissions</string>
+			<string>Permissions</string>
 		</dict>
 		<dict>
 			<key>Type</key>
