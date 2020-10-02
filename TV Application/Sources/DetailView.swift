@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearance
 import SRGDataProviderModel
 import SRGLetterbox
 import SwiftUI
@@ -31,15 +32,26 @@ struct DetailView: View {
                 .fill(Color(white: 0, opacity: 0.4))
             VStack(alignment: .leading) {
                 Text(media.title)
-                    .font(.title)
+                    .srgFont(.bold, size: .title)
                     .foregroundColor(.white)
-                    .padding()
+                    .padding([.top, .bottom], 5)
+                
+                if let show = media.show {
+                    Text(show.title)
+                        .srgFont(.regular, size: .headline)
+                        .foregroundColor(.white)
+                        .padding([.top, .bottom], 5)
+                }
                 
                 if let summary = media.play_fullSummary {
                     Text(summary)
+                        .srgFont(.light, size: .subtitle)
                         .foregroundColor(.white)
-                        .padding()
+                        .padding([.top, .bottom], 5)
                 }
+                
+                Spacer()
+                    .frame(height: 90)
                 
                 HStack {
                     Button(action: {
@@ -55,8 +67,9 @@ struct DetailView: View {
                     Button(action: { /* Toggle Watch Later state */ }) {
                         Image(systemName: "clock")
                     }
+                    }
                 }
-                .padding()
+                .padding([.top, .bottom], 5)
             }
             .padding()
         }
