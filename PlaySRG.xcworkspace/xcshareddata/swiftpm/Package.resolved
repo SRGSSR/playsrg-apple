@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Aiolos",
+        "repositoryURL": "https://github.com/IdeasOnCanvas/Aiolos.git",
+        "state": {
+          "branch": "main",
+          "revision": "5405495ef59c719c28a72e92fa7e75129fc58981",
+          "version": null
+        }
+      },
+      {
         "package": "ComScore",
         "repositoryURL": "https://github.com/SRGSSR/ComScore-xcframework-apple.git",
         "state": {
@@ -26,6 +35,15 @@
           "branch": "master",
           "revision": "1eac916df0045630e779fa60eef22ed0d185e15f",
           "version": null
+        }
+      },
+      {
+        "package": "Airship",
+        "repositoryURL": "https://github.com/urbanairship/ios-library.git",
+        "state": {
+          "branch": null,
+          "revision": "b58aea09e2962e9e5b4c678e82462c6eaf07316c",
+          "version": "14.1.2"
         }
       },
       {
@@ -65,11 +83,20 @@
         }
       },
       {
+        "package": "PaperOnboarding",
+        "repositoryURL": "https://github.com/Ramotion/paper-onboarding.git",
+        "state": {
+          "branch": null,
+          "revision": "c36df080b1001c385cc14c85f3b1c5ea36531fd0",
+          "version": "6.1.5"
+        }
+      },
+      {
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "9b9158dc7fde510da53945c901205b21394193fb",
+          "revision": "69112333791dcff289315f5962e8b9dc864a2e62",
           "version": null
         }
       },
@@ -87,7 +114,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "5b1587d9212e1bbaceea3f6ca054232807c3308f",
+          "revision": "9118fad1918eaf5ebff4cdb742defd8b00bec367",
           "version": null
         }
       },
@@ -96,7 +123,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "0148eef50f74f9fd75155c74aa4b15170015fdbb",
+          "revision": "988cb9a0f9473635c145752f44e570852c30af48",
           "version": null
         }
       },
@@ -123,7 +150,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "fdd2e1b7b0b330c05a36e39cdc4b44e4347ecd08",
+          "revision": "6129033e59bd4c93df7025a0e244890491b16fcb",
           "version": null
         }
       },
@@ -141,7 +168,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "f775aa12b2758fbc0ff2091baf1fd1cc2957ff77",
+          "revision": "957014e617cc8cfe83ce6a8cf92f1ecf21b0e25c",
           "version": null
         }
       },
@@ -151,6 +178,24 @@
         "state": {
           "branch": "develop",
           "revision": "98c50251b8f2c94e626e1a264eb560c52662aa57",
+          "version": null
+        }
+      },
+      {
+        "package": "SRGUserData",
+        "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
+        "state": {
+          "branch": "develop",
+          "revision": "785751a6047249f4a80b3cd038eff9aadf4e3f0f",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftMessages",
+        "repositoryURL": "https://github.com/SwiftKickMobile/SwiftMessages.git",
+        "state": {
+          "branch": "work/xcode12",
+          "revision": "5acae56d5fdd57a3610a211b8c348d97e3d76364",
           "version": null
         }
       },

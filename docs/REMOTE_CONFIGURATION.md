@@ -14,7 +14,6 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 * `appStoreProductIdentifier` (mandatory, number): Application product identifier on the AppStore.
 * `businessUnit` (mandatory, string): The identifier of the business unit.
-* `googleCastReceiverIdentifier` (optional, string): Identifier of the Google Cast receiver to use. If not set, the default Google Cast receiver is used.
 * `pageSize` (optional, number): The page size to use for media lists in general, 20 if not set.
 * `voiceOverLanguageCode` (optional, string): The code of the language associated with the application. If set, this language is used when reading texts for accessibility purposes, otherwise the device language is used.
 

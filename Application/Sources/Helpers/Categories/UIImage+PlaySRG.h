@@ -4,16 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-// FIXME: Only SRGDataProviderModel when using SPM
-#import <TargetConditionals.h>
-
-#if TARGET_OS_IOS
-@import SRGDataProvider;
-#else
 @import SRGDataProviderModel;
-#endif
-// End of FIXME
-
 @import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN

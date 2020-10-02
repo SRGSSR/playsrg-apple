@@ -10,6 +10,7 @@
 #import "ApplicationConfiguration.h"
 #import "History.h"
 #import "PlayErrors.h"
+#import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
@@ -17,6 +18,7 @@
 
 @import GoogleCast;
 @import SRGAnalytics;
+@import SRGAppearance;
 
 NSString * const GoogleCastPlaybackDidStartNotification = @"GoogleCastPlaybackDidStartNotification";
 NSString * const GoogleCastMediaKey = @"GoogleCastMedia";
@@ -155,9 +157,9 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 - (instancetype)init
 {
     if (self = [super init]) {
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        
-        GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:applicationConfiguration.googleCastReceiverIdentifier];
+        NSString *googleCastReceiverIdentifier = [NSBundle.mainBundle objectForInfoDictionaryKey:@"GoogleCastReceiverIdentifier"];
+        NSAssert(googleCastReceiverIdentifier != nil, @"A Google Cast receiver identifier is required");
+        GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:googleCastReceiverIdentifier];
         GCKCastOptions *options = [[GCKCastOptions alloc] initWithDiscoveryCriteria:discoveryCriteria];
         [GCKCastContext setSharedInstanceWithOptions:options];
         [GCKCastContext sharedInstance].useDefaultExpandedMediaControls = YES;
@@ -176,6 +178,17 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
         // afterwards, so that the associated performance impact is mitigated.
         dispatch_async(dispatch_get_main_queue(), ^{
             GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
+            styleAttributes.backgroundColor = UIColor.play_blackColor;
+            styleAttributes.headingTextColor = UIColor.whiteColor;
+            styleAttributes.bodyTextColor = UIColor.whiteColor;
+            styleAttributes.captionTextColor = UIColor.whiteColor;
+            styleAttributes.iconTintColor = UIColor.whiteColor;
+            
+            styleAttributes.headingTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
+            styleAttributes.bodyTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+            styleAttributes.buttonTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+            styleAttributes.captionTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+            
             styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
             styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
             styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];

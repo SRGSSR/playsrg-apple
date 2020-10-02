@@ -36,7 +36,7 @@
 
 #import <InAppSettingsKit/IASKSettingsReader.h>
 
-@import Airship;
+@import AirshipCore;
 @import AppCenter;
 @import AppCenterCrashes;
 @import AppCenterDistribute;
@@ -45,7 +45,7 @@
 @import libextobjc;
 @import Mantle;
 @import SafariServices;
-@import SRGAnalytics_Identity;
+@import SRGAnalyticsIdentity;
 @import SRGAppearance;
 @import SRGDataProvider;
 @import SRGIdentity;
@@ -90,7 +90,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
     
-    // The configuration file, copied at build time in the main product bundle, will have the standard Firebase
+    // The configuration file, copied at build time in the main product bundle, has the standard Firebase
     // configuration filename
     if ([NSBundle.mainBundle pathForResource:@"GoogleService-Info" ofType:@"plist"]) {
         [FIRApp configure];

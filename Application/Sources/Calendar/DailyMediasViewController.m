@@ -13,6 +13,8 @@
 #import "UIDevice+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
+@import SRGDataProviderNetwork;
+
 @interface DailyMediasViewController ()
 
 @property (nonatomic) NSDate *date;
@@ -101,7 +103,7 @@
     
     SRGDay *day = [SRGDay dayFromDate:self.date];
     if (self.radioChannel) {
-        SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider radioEpisodesForVendor:applicationConfiguration.vendor day:day channelUid:self.radioChannel.uid withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
+        SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider radioEpisodesForVendor:applicationConfiguration.vendor channelUid:self.radioChannel.uid day:day withCompletionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
         [requestQueue addRequest:request resume:YES];
     }
     else {

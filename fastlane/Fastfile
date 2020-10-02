@@ -29,16 +29,12 @@ platform :ios do
       end
     end
 
-    # TODO: fix Carthage build with Xcode 12 (Mantle and Carthage issue). Use Xcode 11.
-    xcversion(version: '~> 11')
+    xcversion(version: '~> 12')
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
       Dir.chdir('..') { sh 'make bootstrap' }
     end
-
-    # Build project with desired Xcode version.
-    srg_xcversion(platform)
   end
 
   desc 'For each BUs, build a new iOS nightly on App Center'
@@ -299,9 +295,6 @@ platform :ios do
 
     options[:team_id] = app_config.try_fetch_value(:team_id)
 
-    # TODO: Remove when Xcode 12 used to build iOS
-    xcode11_ignore_spm if options[:platform] == 'iOS'
-
     destination = 'generic/platform=' + options[:platform]
     lane_name = lane_context[SharedValues::LANE_NAME]
     output_directory = 'fastlane/export/' + lane_name + '/'
@@ -366,11 +359,6 @@ platform :ios do
     #   success: false
     # )
   end
-end
-
-def srg_xcversion(platform)
-  # Only used by FastLane actions (not with command line script)
-  xcversion(version: '~> ' + (platform == 'tvOS' ? '12' : '11'))
 end
 
 def app_config
@@ -710,17 +698,6 @@ def beta_app_review_info
     contact_last_name: ENV['ITUNES_CONNECT_REVIEW_LAST_NAME'],
     contact_phone: ENV['ITUNES_CONNECT_REVIEW_PHONE']
   }
-end
-
-# Ignore SPM with Xcode 11, swift tools version 5.3.0 required.
-def xcode11_ignore_spm
-  Dir.chdir('..') do
-    file_name = 'PlaySRG.xcodeproj/project.pbxproj'
-    file = File.open(file_name, 'a+')
-    pbxproj = file.read
-    new_pbxproj = pbxproj.gsub('packageReferences =', 'packageReferences_ignored =')
-    File.open(file_name, 'w') { |f| f.write(new_pbxproj) }
-  end
 end
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md

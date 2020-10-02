@@ -8,7 +8,7 @@
 #import "TopicSection.h"
 
 @import Foundation;
-@import SRGDataProvider;
+@import SRGDataProviderNetwork;
 
 NS_ASSUME_NONNULL_BEGIN
 

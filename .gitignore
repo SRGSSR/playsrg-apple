@@ -10,8 +10,6 @@ xcuserdata
 /Configuration
 
 /Carthage
-/Cartfile.private
-/Cartfile.resolved
 
 /.env
 /Xcode/Links

@@ -12,6 +12,7 @@
 
 @import FXReachability;
 @import libextobjc;
+@import SRGDataProviderNetwork;
 
 @interface ChannelService ()
 

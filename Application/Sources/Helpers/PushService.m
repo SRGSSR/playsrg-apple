@@ -13,7 +13,7 @@
 #import "Notification.h"
 #import "UIView+PlaySRG.h"
 
-@import Airship;
+@import AirshipCore;
 @import libextobjc;
 @import UserNotifications;
 

@@ -31,7 +31,7 @@
 #import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
-@import SRGAnalytics_DataProvider;
+@import SRGAnalyticsDataProvider;
 @import SRGAppearance;
 @import SRGMediaPlayer;
 
@@ -249,8 +249,8 @@
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
                 
                 SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:self.media.URN];
-                if (subdivision) {
-                    [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType subdivision:subdivision withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                if (subdivision.event) {
+                    [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType URN:subdivision.URN event:subdivision.event withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                         // Nothing
                     }] resume];
                 }

@@ -9,9 +9,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-OBJC_EXPORT NSString * const MediaPlayerViewControllerVisibilityDidChangeNotification;
-OBJC_EXPORT NSString * const MediaPlayerViewControllerVisibleKey;
-
 @interface MediaPlayerViewController : UIViewController <SRGLetterboxViewDelegate, SRGLetterboxPictureInPictureDelegate, SRGAnalyticsViewTracking,
     UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate, NSUserActivityDelegate>
 

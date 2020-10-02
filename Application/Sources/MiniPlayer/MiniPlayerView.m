@@ -22,7 +22,6 @@
 @property (nonatomic, weak) PlayMiniPlayerView *playMiniPlayerView;
 @property (nonatomic, weak) GoogleCastMiniPlayerView *googleCastMiniPlayerView;
 @property (nonatomic, getter=isActive) BOOL active;
-@property (nonatomic, getter=isMediaPlayerVisible) BOOL mediaPlayerVisible;
 
 @end
 
@@ -75,10 +74,6 @@
         ]];
         
         [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(mediaPlayerViewControllerVisibilityDidChange:)
-                                                   name:MediaPlayerViewControllerVisibilityDidChangeNotification
-                                                 object:nil];
-        [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(googleCastStateDidChange:)
                                                    name:kGCKCastStateDidChangeNotification
                                                  object:nil];
@@ -95,7 +90,7 @@
     BOOL isGoogleCastConnected = [GCKCastContext sharedInstance].sessionManager.connectionState == GCKConnectionStateConnected;
     BOOL hasMedia = self.playMiniPlayerView.media != nil;
     
-    self.active = isGoogleCastConnected || (hasMedia && ! self.mediaPlayerVisible);
+    self.active = isGoogleCastConnected || hasMedia;
     
     void (^animations)(void) = ^{
         if (isGoogleCastConnected) {
@@ -124,7 +119,6 @@
 
 - (void)mediaPlayerViewControllerVisibilityDidChange:(NSNotification *)notification
 {
-    self.mediaPlayerVisible = [notification.userInfo[MediaPlayerViewControllerVisibleKey] boolValue];
     [self updateLayoutAnimated:YES];
 }
 
