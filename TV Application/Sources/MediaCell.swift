@@ -24,9 +24,7 @@ struct MediaCell: View {
     let media: SRGMedia?
     
     @State var isFocused: Bool = false
-    
-    @State private var isPresented = false
-    
+        
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -35,8 +33,11 @@ struct MediaCell: View {
         GeometryReader { geometry in
             VStack {
                 Button(action: {
-                    if media != nil {
-                        isPresented.toggle()
+                    // TODO: Could / should be presented with SwiftUI, but presentation flag must be part of topmost state
+                    if let media = media,
+                       let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+                        let hostController = UIHostingController(rootView: DetailView(media: media), ignoreSafeArea: true)
+                        rootViewController.present(hostController, animated: true, completion: nil)
                     }
                 }) {
                     MediaVisual(media: media, scale: .small, contentMode: .fit)
@@ -54,9 +55,6 @@ struct MediaCell: View {
             }
             .redacted(reason: redactionReason)
             .onFocusChange { isFocused = $0 }
-            .fullScreenCover(isPresented: $isPresented, content: {
-                DetailView(media: media!)
-            })
         }
     }
 }

@@ -56,10 +56,10 @@ struct DetailView: View {
                 HStack {
                     Button(action: {
                         // TODO: Could / should be presented with SwiftUI, but presentation flag must be part of topmost state
-                        if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+                        if let presentedViewController = UIApplication.shared.windows.first?.rootViewController?.presentedViewController {
                             let letterboxViewController = SRGLetterboxViewController()
                             letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                            rootViewController.present(letterboxViewController, animated: true, completion: nil)
+                            presentedViewController.present(letterboxViewController, animated: true, completion: nil)
                         }
                     }) {
                         Image(systemName: "play.fill")

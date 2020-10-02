@@ -43,8 +43,6 @@ struct HeroMediaCell: View {
     
     let media: SRGMedia?
     
-    @State private var isPresented = false
-    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -52,8 +50,11 @@ struct HeroMediaCell: View {
     var body: some View {
         GeometryReader { geometry in
             Button(action: {
-                if media != nil {
-                    isPresented.toggle()
+                // TODO: Could / should be presented with SwiftUI, but presentation flag must be part of topmost state
+                if let media = media,
+                   let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+                    let hostController = UIHostingController(rootView: DetailView(media: media), ignoreSafeArea: true)
+                    rootViewController.present(hostController, animated: true, completion: nil)
                 }
             }) {
                 HStack(spacing: 0) {
@@ -67,9 +68,6 @@ struct HeroMediaCell: View {
                 .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
                 .redacted(reason: redactionReason)
             }
-            .fullScreenCover(isPresented: $isPresented, content: {
-                DetailView(media: media!)
-            })
             .buttonStyle(CardButtonStyle())
         }
     }
