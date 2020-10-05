@@ -129,18 +129,31 @@ struct MediaDetailView: View {
                         Rectangle()
                             .fill(Color(.srg_color(fromHexadecimalString: "#222222")!))
                             .opacity(0.8)
-                        ScrollView(.horizontal) {
-                            HStack(spacing: 40) {
-                                ForEach(model.relatedMedias, id: \.uid) { media in
-                                    MediaCell(media: media)
-                                        .padding(.top, 30)
-                                        .frame(width: 280)
+                        ZStack {
+                            Text(NSLocalizedString("Last episodes", comment: "Last episode list title"))
+                                .srgFont(.medium, size: .headline)
+                                .foregroundColor(.gray)
+                                .padding([.leading, .trailing], 40)
+                                .padding(.top, 15)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                            ScrollView(.horizontal) {
+                                HStack(spacing: 40) {
+                                    ForEach(model.relatedMedias, id: \.uid) { media in
+                                        MediaCell(media: media)
+                                            .frame(width: 280)
+                                    }
                                 }
+                                .padding(.top, 70)
+                                .padding([.leading, .trailing], 40)
                             }
-                            .padding([.leading, .trailing], 40)
                         }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 305)
+                    .frame(maxWidth: .infinity, maxHeight: 350)
+                }
+                else {
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(maxWidth: .infinity, maxHeight: 305)
                 }
             }
         }
