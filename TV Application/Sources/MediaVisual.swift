@@ -66,7 +66,7 @@ struct MediaVisual: View {
         switch days {
         case 0:
             return DurationFormatters.shortHours(for: to.timeIntervalSince(from))
-        case 1:
+        case 1...3:
             return DurationFormatters.shortDays(for: to.timeIntervalSince(from))
         default:
             return nil
