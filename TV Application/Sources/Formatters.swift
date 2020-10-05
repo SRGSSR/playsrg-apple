@@ -68,4 +68,28 @@ struct DurationFormatters {
     static func shortDays(for duration: TimeInterval) -> String {
         return Self.shortDayFormatter.string(from: max(duration, 60 * 60 * 24))!
     }
+    
+    private static let hourFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour]
+        formatter.unitsStyle = .full
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }()
+    
+    static func hours(for duration: TimeInterval) -> String {
+        return Self.hourFormatter.string(from: max(duration, 60 * 60))!
+    }
+    
+    private static let dayFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.day]
+        formatter.unitsStyle = .full
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }()
+    
+    static func days(for duration: TimeInterval) -> String {
+        return Self.dayFormatter.string(from: max(duration, 60 * 60 * 24))!
+    }
 }

@@ -15,9 +15,9 @@ struct MediaDescription {
         guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
         switch days {
         case 0:
-            return DurationFormatters.shortHours(for: to.timeIntervalSince(from))
+            return DurationFormatters.hours(for: to.timeIntervalSince(from))
         case 1...30:
-            return DurationFormatters.shortDays(for: to.timeIntervalSince(from))
+            return DurationFormatters.days(for: to.timeIntervalSince(from))
         default:
             return nil
         }
