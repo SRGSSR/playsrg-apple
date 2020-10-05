@@ -33,20 +33,18 @@
 
 - (BOOL)play_areSubtitlesAvailable
 {
-    return [self subtitleVariantsForSource:self.recommendedSubtitleVariantSource].count != 0;
+    return self.play_subtitleVariants.count != 0;
 }
 
 - (BOOL)play_isAudioDescriptionAvailable
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGVariant.new, type), @(SRGVariantTypeAudioDescription)];
-    NSArray<SRGVariant *> *audioVariants = [self audioVariantsForSource:self.recommendedAudioVariantSource];
-    return [audioVariants filteredArrayUsingPredicate:predicate].count != 0;
+    return [self.play_audioVariants filteredArrayUsingPredicate:predicate].count != 0;
 }
 
 - (BOOL)play_isMultiAudioAvailable
 {
-    NSArray<SRGVariant *> *audioVariants = [self audioVariantsForSource:self.recommendedAudioVariantSource];
-    NSArray<NSLocale *> *locales = [audioVariants valueForKey:@keypath(SRGVariant.new, locale)];
+    NSArray<NSLocale *> *locales = [self.play_audioVariants valueForKey:@keypath(SRGVariant.new, locale)];
     return [NSSet setWithArray:locales].count > 1;
 }
 
@@ -54,6 +52,26 @@
 {
     NSDate *date = NSDate.date;
     return [self.date compare:date] == NSOrderedDescending && [self timeAvailabilityAtDate:date] == SRGTimeAvailabilityAvailable && self.contentType == SRGContentTypeEpisode;
+}
+
+- (NSArray<NSString *> *)play_subtitleLanguages
+{
+    return [self.play_subtitleVariants valueForKeyPath:@keypath(SRGVariant.new, language)];
+}
+
+- (NSArray<NSString *> *)play_audioLanguages
+{
+    return [self.play_audioVariants valueForKeyPath:@keypath(SRGVariant.new, language)];
+}
+
+- (NSArray<SRGVariant *> *)play_subtitleVariants
+{
+    return [self subtitleVariantsForSource:self.recommendedSubtitleVariantSource];
+}
+
+- (NSArray<SRGVariant *> *)play_audioVariants
+{
+    return [self audioVariantsForSource:self.recommendedAudioVariantSource];
 }
 
 @end

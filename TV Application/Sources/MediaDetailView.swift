@@ -64,6 +64,22 @@ struct MediaDetailView: View {
                             Image(uiImage: youthProtectionLogoImage)
                         }
                         DurationLabel(media: media)
+                        if let subtitleLanguages = media.play_subtitleLanguages, subtitleLanguages.count != 0 {
+                            Spacer()
+                                .frame(width: 25)
+                            Image("subtitles_off-22")
+                            Text(subtitleLanguages.joined(separator: " - "))
+                                .srgFont(.regular, size: .caption)
+                                .foregroundColor(.white)
+                        }
+                        if let audioLanguages = media.play_audioLanguages, audioLanguages.count != 0 {
+                            Spacer()
+                                .frame(width: 25)
+                            Image("audios-22")
+                            Text(audioLanguages.joined(separator: " - "))
+                                .srgFont(.regular, size: .caption)
+                                .foregroundColor(.white)
+                        }
                     }
                     
                     if let summary = media.play_fullSummary {
