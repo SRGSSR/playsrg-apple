@@ -23,7 +23,7 @@ struct MediaCell: View {
     
     let media: SRGMedia?
     
-    @State var isFocused: Bool = false
+    @State private var isFocused: Bool = false
         
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()

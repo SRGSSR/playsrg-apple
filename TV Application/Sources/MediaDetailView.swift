@@ -43,17 +43,15 @@ struct MediaDetailView: View {
                     Spacer()
                     
                     HStack {
-                        Button(action: {
+                        LabeledButton(icon: "play.fill", label: NSLocalizedString("Play", comment: "Play button label")) {
                             if let presentedViewController = UIApplication.shared.windows.first?.rootViewController?.presentedViewController {
                                 let letterboxViewController = SRGLetterboxViewController()
                                 letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
                                 presentedViewController.present(letterboxViewController, animated: true, completion: nil)
                             }
-                        }) {
-                            Image(systemName: "play.fill")
                         }
-                        Button(action: { /* Toggle Watch Later state */ }) {
-                            Image(systemName: "clock")
+                        LabeledButton(icon: "clock", label: NSLocalizedString("Watch later", comment: "Watch later button label")) {
+                            /* Toggle Watch Later state */
                         }
                     }
                 }
