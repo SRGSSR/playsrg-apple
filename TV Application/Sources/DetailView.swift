@@ -14,51 +14,51 @@ struct MediaDetailView: View {
         let media: SRGMedia
         
         var body: some View {
-            VStack(alignment: .leading) {
-                Text(media.title)
-                    .srgFont(.bold, size: .title)
-                    .foregroundColor(.white)
-                    .padding([.top, .bottom], 5)
-                
-                if let show = media.show {
-                    Text(show.title)
+            GeometryReader { geometry in
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(MediaDescription.subtitle(for: media))
+                        .srgFont(.bold, size: .title)
+                        .lineLimit(3)
+                        .foregroundColor(.white)
+                        .padding([.top, .bottom], 5)
+                    Text(MediaDescription.title(for: media))
                         .srgFont(.regular, size: .headline)
                         .foregroundColor(.white)
                         .padding([.top, .bottom], 5)
-                }
-                
-                if let summary = media.play_fullSummary {
-                    Text(summary)
-                        .srgFont(.light, size: .subtitle)
-                        .foregroundColor(.white)
-                        .padding([.top, .bottom], 5)
-                }
-                
-                Spacer()
-                
-                HStack {
-                    Button(action: {
-                        if let presentedViewController = UIApplication.shared.windows.first?.rootViewController?.presentedViewController {
-                            let letterboxViewController = SRGLetterboxViewController()
-                            letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                            presentedViewController.present(letterboxViewController, animated: true, completion: nil)
+                    
+                    if let summary = media.play_fullSummary {
+                        Text(summary)
+                            .srgFont(.light, size: .subtitle)
+                            .foregroundColor(.white)
+                            .padding([.top, .bottom], 5)
+                    }
+                    
+                    Spacer()
+                    
+                    HStack {
+                        Button(action: {
+                            if let presentedViewController = UIApplication.shared.windows.first?.rootViewController?.presentedViewController {
+                                let letterboxViewController = SRGLetterboxViewController()
+                                letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
+                                presentedViewController.present(letterboxViewController, animated: true, completion: nil)
+                            }
+                        }) {
+                            Image(systemName: "play.fill")
                         }
-                    }) {
-                        Image(systemName: "play.fill")
-                    }
-                    Button(action: { /* Toggle Watch Later state */ }) {
-                        Image(systemName: "clock")
+                        Button(action: { /* Toggle Watch Later state */ }) {
+                            Image(systemName: "clock")
+                        }
                     }
                 }
+                .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .topLeading)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
     }
     
     let media: SRGMedia
     
     private var imageUrl: URL? {
-        return media.imageURL(for: .width, withValue: UIScreen.main.bounds.width, type: .default)
+        return media.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
     }
     
     var body: some View {
