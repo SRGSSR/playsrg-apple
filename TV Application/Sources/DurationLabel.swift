@@ -16,7 +16,7 @@ struct DurationLabel: View {
             return NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.")
         }
         else {
-            return DurationFormatters.minutes(for: media.duration / 1000)
+            return DurationFormatters.shortMinutes(for: media.duration / 1000)
         }
     }
     

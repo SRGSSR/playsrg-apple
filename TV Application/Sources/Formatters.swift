@@ -41,7 +41,7 @@ struct DurationFormatters {
         return formatter
     }()
     
-    static func minutes(for duration: TimeInterval) -> String {
+    static func shortMinutes(for duration: TimeInterval) -> String {
         return Self.shortMinuteFormatter.string(from: max(duration, 60))!
     }
     
@@ -53,7 +53,7 @@ struct DurationFormatters {
         return formatter
     }()
     
-    static func hours(for duration: TimeInterval) -> String {
+    static func shortHours(for duration: TimeInterval) -> String {
         return Self.shortHourFormatter.string(from: max(duration, 60 * 60))!
     }
     
@@ -65,7 +65,7 @@ struct DurationFormatters {
         return formatter
     }()
     
-    static func days(for duration: TimeInterval) -> String {
+    static func shortDays(for duration: TimeInterval) -> String {
         return Self.shortDayFormatter.string(from: max(duration, 60 * 60 * 24))!
     }
 }

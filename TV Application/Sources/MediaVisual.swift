@@ -65,9 +65,9 @@ struct MediaVisual: View {
         guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
         switch days {
         case 0:
-            return DurationFormatters.hours(for: to.timeIntervalSince(from))
+            return DurationFormatters.shortHours(for: to.timeIntervalSince(from))
         case 1:
-            return DurationFormatters.days(for: to.timeIntervalSince(from))
+            return DurationFormatters.shortDays(for: to.timeIntervalSince(from))
         default:
             return nil
         }
