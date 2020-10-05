@@ -77,10 +77,10 @@ struct MediaDetailView: View {
                     .padding([.top, .leading, .trailing], 100)
                     .padding(.bottom, 30)
                 Rectangle()
-                    .fill(Color.gray)
+                    .fill(Color(.srg_color(fromHexadecimalString: "#222222")!))
+                    .opacity(0.8)
                     .frame(maxWidth: .infinity, maxHeight: 305)
             }
-            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.play_black))
