@@ -114,7 +114,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "9118fad1918eaf5ebff4cdb742defd8b00bec367",
+          "revision": "7288d9fbb8dfcaf9d7f38c61b9166cdc8567e28f",
           "version": null
         }
       },
@@ -150,7 +150,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "6129033e59bd4c93df7025a0e244890491b16fcb",
+          "revision": "df67d61de745f7da9192ddb1171d91d69f92b010",
           "version": null
         }
       },
@@ -195,7 +195,7 @@
         "repositoryURL": "https://github.com/SwiftKickMobile/SwiftMessages.git",
         "state": {
           "branch": "work/xcode12",
-          "revision": "5acae56d5fdd57a3610a211b8c348d97e3d76364",
+          "revision": "72170eca3241cb3928b3078470fc339a7cc8bf2d",
           "version": null
         }
       },
