@@ -40,6 +40,13 @@ struct MediaDetailView: View {
                             .padding([.top, .bottom], 5)
                     }
                     
+                    if let availability = MediaDescription.availability(for: media) {
+                        Text(availability)
+                            .srgFont(.light, size: .subheadline)
+                            .foregroundColor(.white)
+                            .padding([.top, .bottom], 5)
+                    }
+                    
                     Spacer()
                     
                     HStack {
