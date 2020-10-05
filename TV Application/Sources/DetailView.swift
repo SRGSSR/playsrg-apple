@@ -25,7 +25,13 @@ struct MediaDetailView: View {
                         .srgFont(.regular, size: .headline)
                         .foregroundColor(.white)
                         .padding([.top, .bottom], 5)
-                    DurationLabel(media: media)
+                    
+                    HStack(spacing: 4) {
+                        if let youthProtectionLogoImage = YouthProtectionImageForColor(media.youthProtectionColor) {
+                            Image(uiImage: youthProtectionLogoImage)
+                        }
+                        DurationLabel(media: media)
+                    }
                     
                     if let summary = media.play_fullSummary {
                         Text(summary)
