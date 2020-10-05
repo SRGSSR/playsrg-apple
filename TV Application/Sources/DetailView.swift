@@ -9,19 +9,11 @@ import SRGDataProviderModel
 import SRGLetterbox
 import SwiftUI
 
-struct DetailView: View {
-    let media: SRGMedia
-    
-    private var imageUrl: URL? {
-        return media.imageURL(for: .width, withValue: UIScreen.main.bounds.width, type: .default)
-    }
-    
-    var body: some View {
-        ZStack {
-            ImageView(url: imageUrl)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            Rectangle()
-                .fill(Color(white: 0, opacity: 0.4))
+struct MediaDetailView: View {
+    private struct DescriptionView: View {
+        let media: SRGMedia
+        
+        var body: some View {
             VStack(alignment: .leading) {
                 Text(media.title)
                     .srgFont(.bold, size: .title)
@@ -43,7 +35,6 @@ struct DetailView: View {
                 }
                 
                 Spacer()
-                    .frame(height: 90)
                 
                 HStack {
                     Button(action: {
@@ -60,7 +51,31 @@ struct DetailView: View {
                     }
                 }
             }
-            .padding([.top, .bottom], 5)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
+    }
+    
+    let media: SRGMedia
+    
+    private var imageUrl: URL? {
+        return media.imageURL(for: .width, withValue: UIScreen.main.bounds.width, type: .default)
+    }
+    
+    var body: some View {
+        ZStack {
+            ImageView(url: imageUrl)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            Rectangle()
+                .fill(Color(white: 0, opacity: 0.6))
+            VStack {
+                DescriptionView(media: media)
+                    .padding([.top, .leading, .trailing], 100)
+                    .padding(.bottom, 30)
+                Rectangle()
+                    .fill(Color.gray)
+                    .frame(maxWidth: .infinity, maxHeight: 305)
+            }
+            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.play_black))

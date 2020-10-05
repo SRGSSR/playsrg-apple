@@ -52,7 +52,7 @@ struct HeroMediaCell: View {
             Button(action: {
                 if let media = media,
                    let rootViewController = UIApplication.shared.windows.first?.rootViewController {
-                    let hostController = UIHostingController(rootView: DetailView(media: media))
+                    let hostController = UIHostingController(rootView: MediaDetailView(media: media))
                     rootViewController.present(hostController, animated: true, completion: nil)
                 }
             }) {
