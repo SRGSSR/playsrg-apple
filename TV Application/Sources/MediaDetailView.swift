@@ -5,9 +5,42 @@
 //
 
 import SRGAppearance
-import SRGDataProviderModel
+import SRGDataProviderCombine
 import SRGLetterbox
 import SwiftUI
+
+class MediaDetailModel: ObservableObject {
+    let media: SRGMedia
+    
+    @Published private(set) var relatedMedias: [SRGMedia] = []
+    
+    var cancellables = Set<AnyCancellable>()
+    
+    init(media: SRGMedia) {
+        self.media = media
+    }
+    
+    func refresh() {
+        guard let show = media.show else { return }
+        SRGDataProvider.current!.latestEpisodesForShow(withUrn: show.urn)
+            .map { result -> [SRGMedia] in
+                guard let episodes = result.episodeComposition.episodes else { return [] }
+                return episodes.flatMap { episode -> [SRGMedia] in
+                    guard let medias = episode.medias else { return [] }
+                    return medias.filter { media in
+                        return media.contentType == .episode || media.contentType == .scheduledLivestream
+                    }
+                }
+            }
+            .replaceError(with: [])
+            .assign(to: \.relatedMedias, on: self)
+            .store(in: &cancellables)
+    }
+    
+    func cancelRefresh() {
+        cancellables = []
+    }
+}
 
 struct MediaDetailView: View {
     private struct DescriptionView: View {
@@ -69,6 +102,13 @@ struct MediaDetailView: View {
     
     let media: SRGMedia
     
+    @ObservedObject var model: MediaDetailModel
+    
+    init(media: SRGMedia) {
+        self.media = media
+        model = MediaDetailModel(media: media)
+    }
+    
     private var imageUrl: URL? {
         return media.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
     }
@@ -83,14 +123,38 @@ struct MediaDetailView: View {
                 DescriptionView(media: media)
                     .padding([.top, .leading, .trailing], 100)
                     .padding(.bottom, 30)
-                Rectangle()
-                    .fill(Color(.srg_color(fromHexadecimalString: "#222222")!))
-                    .opacity(0.8)
+                
+                if !model.relatedMedias.isEmpty {
+                    ZStack {
+                        Rectangle()
+                            .fill(Color(.srg_color(fromHexadecimalString: "#222222")!))
+                            .opacity(0.8)
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 40) {
+                                ForEach(model.relatedMedias, id: \.uid) { media in
+                                    MediaCell(media: media)
+                                        .padding(.top, 30)
+                                        .frame(width: 280)
+                                }
+                            }
+                            .padding([.leading, .trailing], 40)
+                        }
+                    }
                     .frame(maxWidth: .infinity, maxHeight: 305)
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.play_black))
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            model.refresh()
+        }
+        .onDisappear {
+            model.cancelRefresh()
+        }
+        .onResume {
+            model.refresh()
+        }
     }
 }
