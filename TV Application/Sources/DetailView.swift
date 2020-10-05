@@ -12,22 +12,14 @@ import SwiftUI
 struct DetailView: View {
     let media: SRGMedia
     
-    @State private var isPresented = false
-    
     private var imageUrl: URL? {
         return media.imageURL(for: .width, withValue: UIScreen.main.bounds.width, type: .default)
-    }
-    
-    private var redactionReason: RedactionReasons {
-        return .init()
     }
     
     var body: some View {
         ZStack {
             ImageView(url: imageUrl)
-                .whenRedacted { $0.hidden() }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .redacted(reason: redactionReason)
             Rectangle()
                 .fill(Color(white: 0, opacity: 0.4))
             VStack(alignment: .leading) {
@@ -55,7 +47,6 @@ struct DetailView: View {
                 
                 HStack {
                     Button(action: {
-                        // TODO: Could / should be presented with SwiftUI, but presentation flag must be part of topmost state
                         if let presentedViewController = UIApplication.shared.windows.first?.rootViewController?.presentedViewController {
                             let letterboxViewController = SRGLetterboxViewController()
                             letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
@@ -67,15 +58,12 @@ struct DetailView: View {
                     Button(action: { /* Toggle Watch Later state */ }) {
                         Image(systemName: "clock")
                     }
-                    }
                 }
-                .padding([.top, .bottom], 5)
             }
-            .padding()
+            .padding([.top, .bottom], 5)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black)
+        .background(Color(.play_black))
         .edgesIgnoringSafeArea(.all)
-        .redacted(reason: redactionReason)
     }
 }

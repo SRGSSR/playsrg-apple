@@ -50,10 +50,9 @@ struct HeroMediaCell: View {
     var body: some View {
         GeometryReader { geometry in
             Button(action: {
-                // TODO: Could / should be presented with SwiftUI, but presentation flag must be part of topmost state
                 if let media = media,
                    let rootViewController = UIApplication.shared.windows.first?.rootViewController {
-                    let hostController = UIHostingController(rootView: DetailView(media: media), ignoreSafeArea: true)
+                    let hostController = UIHostingController(rootView: DetailView(media: media))
                     rootViewController.present(hostController, animated: true, completion: nil)
                 }
             }) {
