@@ -12,14 +12,19 @@ struct MediaDetailView: View {
     let media: SRGMedia
     
     @ObservedObject var model: MediaDetailModel
+    @State var currentMedia: SRGMedia?
     
     init(media: SRGMedia) {
         self.media = media
         model = MediaDetailModel(media: media)
     }
     
+    private var displayedMedia: SRGMedia {
+        return currentMedia ?? media
+    }
+    
     private var imageUrl: URL? {
-        return media.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
+        return displayedMedia.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
     }
     
     var body: some View {
@@ -29,10 +34,10 @@ struct MediaDetailView: View {
             Rectangle()
                 .fill(Color(white: 0, opacity: 0.6))
             VStack {
-                DescriptionView(media: media)
+                DescriptionView(media: displayedMedia)
                     .padding([.top, .leading, .trailing], 100)
                     .padding(.bottom, 30)
-                RelatedMediasView(model: model)
+                RelatedMediasView(model: model, focusedMedia: $currentMedia)
                     .frame(maxWidth: .infinity, maxHeight: 350)
             }
         }
@@ -155,6 +160,12 @@ extension MediaDetailView {
 extension MediaDetailView {
     private struct RelatedMediasView: View {
         @ObservedObject var model: MediaDetailModel
+        @Binding var focusedMedia: SRGMedia?
+        
+        init(model: MediaDetailModel, focusedMedia: Binding<SRGMedia?>) {
+            self.model = model
+            self._focusedMedia = focusedMedia
+        }
         
         var body: some View {
             ZStack {
@@ -175,6 +186,11 @@ extension MediaDetailView {
                                     ForEach(model.relatedMedias, id: \.uid) { media in
                                         MediaCell(media: media)
                                             .frame(width: 280)
+                                            .onFocusChange { focused in
+                                                if focused {
+                                                    focusedMedia = media
+                                                }
+                                            }
                                     }
                                 }
                                 .padding(.top, 70)
