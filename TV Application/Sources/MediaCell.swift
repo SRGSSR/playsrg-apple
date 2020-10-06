@@ -8,19 +8,6 @@ import SRGAppearance
 import SwiftUI
 
 struct MediaCell: View {
-    private struct DescriptionView: View {
-        let media: SRGMedia?
-        
-        var body: some View {
-            Text(MediaDescription.title(for: media))
-                .srgFont(.medium, size: .subtitle)
-                .lineLimit(2)
-            Text(MediaDescription.subtitle(for: media))
-                .srgFont(.light, size: .subtitle)
-                .lineLimit(2)
-        }
-    }
-    
     let media: SRGMedia?
     
     @State private var isFocused: Bool = false
@@ -54,6 +41,21 @@ struct MediaCell: View {
             }
             .redacted(reason: redactionReason)
             .onFocusChange { isFocused = $0 }
+        }
+    }
+}
+
+extension MediaCell {
+    private struct DescriptionView: View {
+        let media: SRGMedia?
+        
+        var body: some View {
+            Text(MediaDescription.title(for: media))
+                .srgFont(.medium, size: .subtitle)
+                .lineLimit(2)
+            Text(MediaDescription.subtitle(for: media))
+                .srgFont(.light, size: .subtitle)
+                .lineLimit(2)
         }
     }
 }

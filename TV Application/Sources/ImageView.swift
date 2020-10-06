@@ -8,6 +8,25 @@ import FetchImage
 import SwiftUI
 
 struct ImageView: View {
+    let url: URL?
+    let contentMode: ContentMode
+    
+    init(url: URL?, contentMode: ContentMode = .fit) {
+        self.url = url
+        self.contentMode = contentMode
+    }
+    
+    var body: some View {
+        ZStack {
+            if let url = url {
+                FetchView(url: url, contentMode: contentMode)
+            }
+        }
+        .animation(.default)
+    }
+}
+
+extension ImageView {
     private struct FetchView: View {
         @ObservedObject var image: FetchImage
         let contentMode: ContentMode
@@ -28,22 +47,5 @@ struct ImageView: View {
                     .onDisappear(perform: image.cancel)
             }
         }
-    }
-    
-    let url: URL?
-    let contentMode: ContentMode
-    
-    init(url: URL?, contentMode: ContentMode = .fit) {
-        self.url = url
-        self.contentMode = contentMode
-    }
-    
-    var body: some View {
-        ZStack {
-            if let url = url {
-                FetchView(url: url, contentMode: contentMode)
-            }
-        }
-        .animation(.default)
     }
 }

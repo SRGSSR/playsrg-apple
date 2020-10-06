@@ -8,6 +8,38 @@ import SRGAppearance
 import SwiftUI
 
 struct HeroMediaCell: View {
+    let media: SRGMedia?
+    
+    private var redactionReason: RedactionReasons {
+        return media == nil ? .placeholder : .init()
+    }
+    
+    var body: some View {
+        GeometryReader { geometry in
+            Button(action: {
+                if let media = media,
+                   let topViewController = UIApplication.shared.windows.first?.topViewController {
+                    let hostController = UIHostingController(rootView: MediaDetailView(media: media))
+                    topViewController.present(hostController, animated: true, completion: nil)
+                }
+            }) {
+                HStack(spacing: 0) {
+                    MediaVisual(media: media, scale: .large)
+                        .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
+                    DescriptionView(media: media)
+                        .padding()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
+                .redacted(reason: redactionReason)
+            }
+            .buttonStyle(CardButtonStyle())
+        }
+    }
+}
+
+extension HeroMediaCell {
     private struct DescriptionView: View {
         let media: SRGMedia?
         
@@ -38,36 +70,6 @@ struct HeroMediaCell: View {
                 Spacer()
             }
             .foregroundColor(.white)
-        }
-    }
-    
-    let media: SRGMedia?
-    
-    private var redactionReason: RedactionReasons {
-        return media == nil ? .placeholder : .init()
-    }
-    
-    var body: some View {
-        GeometryReader { geometry in
-            Button(action: {
-                if let media = media,
-                   let topViewController = UIApplication.shared.windows.first?.topViewController {
-                    let hostController = UIHostingController(rootView: MediaDetailView(media: media))
-                    topViewController.present(hostController, animated: true, completion: nil)
-                }
-            }) {
-                HStack(spacing: 0) {
-                    MediaVisual(media: media, scale: .large)
-                        .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
-                    DescriptionView(media: media)
-                        .padding()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
-                .redacted(reason: redactionReason)
-            }
-            .buttonStyle(CardButtonStyle())
         }
     }
 }

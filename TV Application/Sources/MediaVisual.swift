@@ -7,41 +7,6 @@
 import SwiftUI
 
 struct MediaVisual: View {
-    private struct BlockingOverlay: View {
-        let media: SRGMedia?
-        
-        private var blockingIconImage: UIImage? {
-            guard let blockingReason = media?.blockingReason(at: Date()) else { return nil }
-            return UIImage.play_image(for: blockingReason)
-        }
-        
-        var body: some View {
-            if let blockingIconImage = blockingIconImage {
-                ZStack {
-                    Rectangle()
-                        .fill(Color(white: 0, opacity: 0.6))
-                    Image(uiImage: blockingIconImage)
-                        .foregroundColor(.white)
-                }
-            }
-        }
-    }
-    
-    private struct Badge: View {
-        let text: String
-        let color: Color
-        
-        var body: some View {
-            Text(text)
-                .srgFont(.medium, size: .caption)
-                .foregroundColor(.white)
-                .padding([.top, .bottom], 5)
-                .padding([.leading, .trailing], 8)
-                .background(color)
-                .cornerRadius(4)
-        }
-    }
-    
     let media: SRGMedia?
     let scale: ImageScale
     let contentMode: ContentMode
@@ -127,6 +92,45 @@ struct MediaVisual: View {
             }
             .padding([.leading, .top], 8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
+    }
+}
+
+extension MediaVisual {
+    private struct BlockingOverlay: View {
+        let media: SRGMedia?
+        
+        private var blockingIconImage: UIImage? {
+            guard let blockingReason = media?.blockingReason(at: Date()) else { return nil }
+            return UIImage.play_image(for: blockingReason)
+        }
+        
+        var body: some View {
+            if let blockingIconImage = blockingIconImage {
+                ZStack {
+                    Rectangle()
+                        .fill(Color(white: 0, opacity: 0.6))
+                    Image(uiImage: blockingIconImage)
+                        .foregroundColor(.white)
+                }
+            }
+        }
+    }
+}
+
+extension MediaVisual {
+    private struct Badge: View {
+        let text: String
+        let color: Color
+        
+        var body: some View {
+            Text(text)
+                .srgFont(.medium, size: .caption)
+                .foregroundColor(.white)
+                .padding([.top, .bottom], 5)
+                .padding([.leading, .trailing], 8)
+                .background(color)
+                .cornerRadius(4)
         }
     }
 }

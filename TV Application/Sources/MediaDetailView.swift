@@ -5,117 +5,10 @@
 //
 
 import SRGAppearance
-import SRGDataProviderCombine
 import SRGLetterbox
 import SwiftUI
 
-class MediaDetailModel: ObservableObject {
-    let media: SRGMedia
-    
-    @Published private(set) var relatedMedias: [SRGMedia] = []
-    
-    var cancellables = Set<AnyCancellable>()
-    
-    init(media: SRGMedia) {
-        self.media = media
-    }
-    
-    func refresh() {
-        guard let show = media.show else { return }
-        SRGDataProvider.current!.latestEpisodesForShow(withUrn: show.urn)
-            .map { result -> [SRGMedia] in
-                guard let episodes = result.episodeComposition.episodes else { return [] }
-                return episodes.flatMap { episode -> [SRGMedia] in
-                    guard let medias = episode.medias else { return [] }
-                    return medias.filter { media in
-                        return media.contentType == .episode || media.contentType == .scheduledLivestream
-                    }
-                }
-            }
-            .replaceError(with: [])
-            .assign(to: \.relatedMedias, on: self)
-            .store(in: &cancellables)
-    }
-    
-    func cancelRefresh() {
-        cancellables = []
-    }
-}
-
 struct MediaDetailView: View {
-    private struct DescriptionView: View {
-        let media: SRGMedia
-        
-        var body: some View {
-            GeometryReader { geometry in
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(MediaDescription.subtitle(for: media))
-                        .srgFont(.bold, size: .title)
-                        .lineLimit(3)
-                        .foregroundColor(.white)
-                        .padding([.top, .bottom], 5)
-                    Text(MediaDescription.title(for: media))
-                        .srgFont(.regular, size: .headline)
-                        .foregroundColor(.white)
-                        .padding([.top, .bottom], 5)
-                    
-                    HStack(spacing: 4) {
-                        if let youthProtectionLogoImage = YouthProtectionImageForColor(media.youthProtectionColor) {
-                            Image(uiImage: youthProtectionLogoImage)
-                        }
-                        DurationLabel(media: media)
-                        if let subtitleLanguages = media.play_subtitleLanguages, subtitleLanguages.count != 0 {
-                            Spacer()
-                                .frame(width: 25)
-                            Image("subtitles_off-22")
-                            Text(subtitleLanguages.joined(separator: " - "))
-                                .srgFont(.regular, size: .caption)
-                                .foregroundColor(.white)
-                        }
-                        if let audioLanguages = media.play_audioLanguages, audioLanguages.count != 0 {
-                            Spacer()
-                                .frame(width: 25)
-                            Image("audios-22")
-                            Text(audioLanguages.joined(separator: " - "))
-                                .srgFont(.regular, size: .caption)
-                                .foregroundColor(.white)
-                        }
-                    }
-                    
-                    if let summary = media.play_fullSummary {
-                        Text(summary)
-                            .srgFont(.light, size: .subtitle)
-                            .foregroundColor(.white)
-                            .padding([.top, .bottom], 5)
-                    }
-                    
-                    if let availability = MediaDescription.availability(for: media) {
-                        Text(availability)
-                            .srgFont(.light, size: .subheadline)
-                            .foregroundColor(.white)
-                            .padding([.top, .bottom], 5)
-                    }
-                    
-                    Spacer()
-                    
-                    HStack {
-                        LabeledButton(icon: "play.fill", label: NSLocalizedString("Play", comment: "Play button label")) {
-                            if let topViewController = UIApplication.shared.windows.first?.topViewController {
-                                let letterboxViewController = SRGLetterboxViewController()
-                                letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                                topViewController.present(letterboxViewController, animated: true, completion: nil)
-                            }
-                        }
-                        LabeledButton(icon: "clock", label: NSLocalizedString("Watch later", comment: "Watch later button label")) {
-                            /* Toggle Watch Later state */
-                        }
-                    }
-                }
-                .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .topLeading)
-            }
-        }
-    }
-    
     let media: SRGMedia
     
     @ObservedObject var model: MediaDetailModel
@@ -139,7 +32,132 @@ struct MediaDetailView: View {
                 DescriptionView(media: media)
                     .padding([.top, .leading, .trailing], 100)
                     .padding(.bottom, 30)
-                
+                RelatedMediasView(model: model)
+                    .frame(maxWidth: .infinity, maxHeight: 350)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(.play_black))
+        .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            model.refresh()
+        }
+        .onDisappear {
+            model.cancelRefresh()
+        }
+        .onResume {
+            model.refresh()
+        }
+    }
+}
+
+extension MediaDetailView {
+    struct PropertiesView: View {
+        let media: SRGMedia
+        
+        var body: some View {
+            HStack(spacing: 4) {
+                if let youthProtectionLogoImage = YouthProtectionImageForColor(media.youthProtectionColor) {
+                    Image(uiImage: youthProtectionLogoImage)
+                }
+                DurationLabel(media: media)
+                if let subtitleLanguages = media.play_subtitleLanguages, subtitleLanguages.count != 0 {
+                    Spacer()
+                        .frame(width: 25)
+                    Image("subtitles_off-22")
+                    Text(subtitleLanguages.joined(separator: " - "))
+                        .srgFont(.regular, size: .caption)
+                        .foregroundColor(.white)
+                }
+                if let audioLanguages = media.play_audioLanguages, audioLanguages.count != 0 {
+                    Spacer()
+                        .frame(width: 25)
+                    Image("audios-22")
+                    Text(audioLanguages.joined(separator: " - "))
+                        .srgFont(.regular, size: .caption)
+                        .foregroundColor(.white)
+                }
+            }
+        }
+    }
+}
+
+extension MediaDetailView {
+    struct SummaryView: View {
+        let media: SRGMedia
+        
+        var body: some View {
+            if let summary = media.play_fullSummary {
+                Text(summary)
+                    .srgFont(.light, size: .subtitle)
+                    .foregroundColor(.white)
+                    .padding([.top, .bottom], 5)
+            }
+            
+            if let availability = MediaDescription.availability(for: media) {
+                Text(availability)
+                    .srgFont(.light, size: .subheadline)
+                    .foregroundColor(.white)
+                    .padding([.top, .bottom], 5)
+            }
+        }
+    }
+}
+
+extension MediaDetailView {
+    struct ActionsView: View {
+        let media: SRGMedia
+        
+        var body: some View {
+            HStack {
+                LabeledButton(icon: "play.fill", label: NSLocalizedString("Play", comment: "Play button label")) {
+                    if let topViewController = UIApplication.shared.windows.first?.topViewController {
+                        let letterboxViewController = SRGLetterboxViewController()
+                        letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
+                        topViewController.present(letterboxViewController, animated: true, completion: nil)
+                    }
+                }
+                LabeledButton(icon: "clock", label: NSLocalizedString("Watch later", comment: "Watch later button label")) {
+                    /* Toggle Watch Later state */
+                }
+            }
+        }
+    }
+}
+
+extension MediaDetailView {
+    private struct DescriptionView: View {
+        let media: SRGMedia
+        
+        var body: some View {
+            GeometryReader { geometry in
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(MediaDescription.subtitle(for: media))
+                        .srgFont(.bold, size: .title)
+                        .lineLimit(3)
+                        .foregroundColor(.white)
+                        .padding([.top, .bottom], 5)
+                    Text(MediaDescription.title(for: media))
+                        .srgFont(.regular, size: .headline)
+                        .foregroundColor(.white)
+                        .padding([.top, .bottom], 5)
+                    PropertiesView(media: media)
+                    SummaryView(media: media)
+                    Spacer()
+                    ActionsView(media: media)
+                }
+                .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .topLeading)
+            }
+        }
+    }
+}
+
+extension MediaDetailView {
+    private struct RelatedMediasView: View {
+        @ObservedObject var model: MediaDetailModel
+        
+        var body: some View {
+            ZStack {
                 if !model.relatedMedias.isEmpty {
                     ZStack {
                         Rectangle()
@@ -164,26 +182,13 @@ struct MediaDetailView: View {
                             }
                         }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 350)
                 }
                 else {
                     Rectangle()
                         .fill(Color.clear)
-                        .frame(maxWidth: .infinity, maxHeight: 305)
                 }
             }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.play_black))
-        .edgesIgnoringSafeArea(.all)
-        .onAppear {
-            model.refresh()
-        }
-        .onDisappear {
-            model.cancelRefresh()
-        }
-        .onResume {
-            model.refresh()
+            .animation(.default)
         }
     }
 }
