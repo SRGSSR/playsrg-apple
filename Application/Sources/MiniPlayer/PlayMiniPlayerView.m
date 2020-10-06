@@ -144,10 +144,6 @@
                                                name:UIContentSizeCategoryDidChangeNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(audioSessionRouteDidChange:)
-                                               name:AVAudioSessionRouteChangeNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(googleCastPlaybackDidStart:)
                                                name:GoogleCastPlaybackDidStartNotification
                                              object:nil];
@@ -459,16 +455,6 @@
 - (void)contentSizeCategoryDidChange:(NSNotification *)notification
 {
     [self reloadData];
-}
-
-- (void)audioSessionRouteDidChange:(NSNotification *)notification
-{
-    // Called on a background thread!
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.media.mediaType == SRGMediaTypeVideo && ! AVAudioSession.srg_isAirPlayActive) {
-            [self.controller stop];
-        }
-    });
 }
 
 - (void)googleCastPlaybackDidStart:(NSNotification *)notification
