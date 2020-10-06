@@ -232,7 +232,7 @@
 "Livestreams" = "Live";
 
 /* Setting footer message for system permission group. New rule for iOS 14 and more. */
-"Local network access must be allowed for Google Cast receiver discovery." = "Local network access must be allowed for Google Cast receiver discovery.";
+"Local network access must be allowed for Google Cast receiver discovery." = "Per poter utilizzare un adattatore Google Cast è necessario permettere l'accesso alla rete locale.";
 
 /* Text displayed within the login / sign up profile header when no user is displayed */
 "Login / Sign up" = "Login / Registrati";
@@ -478,7 +478,7 @@
 "ST" = "ST";
 
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
-"Still available for %@" = "Ancora disponibile per %@";
+"Still available for %@" = "Disponibile ancora per %@";
 
 /* Message displayed when no notifications have been received */
 "Subscribe to shows you like to be notified when a new episode is available." = "Abbonati ai programmi che preferisci. Riceverai una notifica ogni volta che un nuovo episodio sarà disponibile.";

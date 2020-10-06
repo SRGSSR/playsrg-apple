@@ -3,4 +3,4 @@
 "History" = "Zuletzt gesehen";
 "Search" = "Suche";
 "NSMicrophoneUsageDescription" = "Die App benutzt das Mikrofon, um Google Cast Empfänger zu erkennen.";
-"NSLocalNetworkUsageDescription" = "The application uses the local network for Google Cast receiver discovery.";
+"NSLocalNetworkUsageDescription" = "Die Applikation verwendet das lokale Netzwerk für die Erkennung von Google Cast-Empfängern.";

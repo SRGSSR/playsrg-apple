@@ -232,7 +232,7 @@
 "Livestreams" = "Live";
 
 /* Setting footer message for system permission group. New rule for iOS 14 and more. */
-"Local network access must be allowed for Google Cast receiver discovery." = "Local network access must be allowed for Google Cast receiver discovery.";
+"Local network access must be allowed for Google Cast receiver discovery." = "Der lokale Netzwerkzugriff muss für die Erkennung von Google Cast-Empfängern zugelassen werden.";
 
 /* Text displayed within the login / sign up profile header when no user is displayed */
 "Login / Sign up" = "Anmelden / Registrieren";
@@ -594,7 +594,7 @@
 "Watch later" = "Später schauen";
 
 /* Web first label on media cells */
-"Web first" = "Vorab";
+"Web first" = "vorab";
 
 /* Title displayed at the top of the What's new view */
 "What's new" = "Neue Funktionen";
