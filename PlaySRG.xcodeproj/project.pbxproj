@@ -11804,7 +11804,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = develop;
+				branch = "feature/error-cleanup-fix";
 				kind = branch;
 			};
 		};
