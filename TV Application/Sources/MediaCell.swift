@@ -34,9 +34,9 @@ struct MediaCell: View {
             VStack {
                 Button(action: {
                     if let media = media,
-                       let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+                       let topViewController = UIApplication.shared.windows.first?.topViewController {
                         let hostController = UIHostingController(rootView: MediaDetailView(media: media))
-                        rootViewController.present(hostController, animated: true, completion: nil)
+                        topViewController.present(hostController, animated: true, completion: nil)
                     }
                 }) {
                     MediaVisual(media: media, scale: .small, contentMode: .fit)

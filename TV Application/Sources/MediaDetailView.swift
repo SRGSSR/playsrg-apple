@@ -100,10 +100,10 @@ struct MediaDetailView: View {
                     
                     HStack {
                         LabeledButton(icon: "play.fill", label: NSLocalizedString("Play", comment: "Play button label")) {
-                            if let presentedViewController = UIApplication.shared.windows.first?.rootViewController?.presentedViewController {
+                            if let topViewController = UIApplication.shared.windows.first?.topViewController {
                                 let letterboxViewController = SRGLetterboxViewController()
                                 letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                                presentedViewController.present(letterboxViewController, animated: true, completion: nil)
+                                topViewController.present(letterboxViewController, animated: true, completion: nil)
                             }
                         }
                         LabeledButton(icon: "clock", label: NSLocalizedString("Watch later", comment: "Watch later button label")) {

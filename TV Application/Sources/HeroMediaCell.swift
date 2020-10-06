@@ -51,9 +51,9 @@ struct HeroMediaCell: View {
         GeometryReader { geometry in
             Button(action: {
                 if let media = media,
-                   let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+                   let topViewController = UIApplication.shared.windows.first?.topViewController {
                     let hostController = UIHostingController(rootView: MediaDetailView(media: media))
-                    rootViewController.present(hostController, animated: true, completion: nil)
+                    topViewController.present(hostController, animated: true, completion: nil)
                 }
             }) {
                 HStack(spacing: 0) {
