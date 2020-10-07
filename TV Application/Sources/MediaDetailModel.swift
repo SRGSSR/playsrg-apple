@@ -19,20 +19,8 @@ class MediaDetailModel: ObservableObject {
     
     func refresh() {
         guard let show = media.show else { return }
-        SRGDataProvider.current!.latestEpisodesForShow(withUrn: show.urn)
-            .map { result -> [SRGMedia] in
-                guard let episodes = result.episodeComposition.episodes else { return [] }
-                var latestMedias = episodes.flatMap { episode -> [SRGMedia] in
-                    guard let medias = episode.medias else { return [] }
-                    return medias.filter { media in
-                        return media.contentType == .episode || media.contentType == .scheduledLivestream
-                    }
-                }
-                if !latestMedias.contains(self.media) {
-                    latestMedias.append(self.media)
-                }
-                return latestMedias
-            }
+        SRGDataProvider.current!.latestMediasForShows(withUrns: [show.urn], filter: .episodesOnly)
+            .map { $0.medias }
             .replaceError(with: [])
             .assign(to: \.relatedMedias, on: self)
             .store(in: &cancellables)
