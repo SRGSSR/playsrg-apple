@@ -154,7 +154,9 @@ platform :ios do
 
   desc 'Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :appStoreUploads do
-    notify_build_number_to_ci(nil)
+    platform = 'iOS'
+
+    notify_build_number_to_ci(platform, nil)
 
     sh 'bundle exec fastlane ios swiAppStoreUpload'
     sh 'bundle exec fastlane ios srfAppStoreUpload'
