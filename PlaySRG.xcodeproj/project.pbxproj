@@ -8546,7 +8546,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8578,7 +8577,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8609,7 +8607,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8641,7 +8638,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8672,7 +8668,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8704,7 +8699,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8735,7 +8729,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8767,7 +8760,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8797,7 +8789,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8828,7 +8819,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8881,7 +8871,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 344;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -8926,7 +8915,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8958,7 +8946,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -8990,7 +8977,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -9022,7 +9008,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -9053,7 +9038,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -9149,7 +9133,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -9183,7 +9166,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -9217,7 +9199,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -9251,7 +9232,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -9284,7 +9264,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
