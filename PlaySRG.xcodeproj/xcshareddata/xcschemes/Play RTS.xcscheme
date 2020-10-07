@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "# Expanded code sign identity is not provided to post actions. To ensure we use the same identity as Xcode, we write it to a temporary file during a build phase so that we can retrieve it here.&#10;CODE_SIGN_IDENTITY=`cat /tmp/play-rts-signing-identity`&#10;&#10;# Apply codes signing to all framworks in the final product.&#10;find &quot;${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}&quot; -mindepth 1 -maxdepth 1 -type d -exec /usr/bin/codesign --force --sign ${CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements {} \;&#10;"
+               scriptText = "# Expanded code sign identity is not provided to post actions. To ensure we use the same identity as Xcode, we write it to a temporary file during a build phase so that we can retrieve it here.&#10;CODE_SIGN_IDENTITY=`cat /tmp/play-rts-signing-identity`&#10;&#10;# Apply codes signing to all framworks in the final product.&#10;find &quot;${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}&quot; -mindepth 1 -maxdepth 1 -type d -exec /usr/bin/codesign --force --sign ${CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements {} \;&#10;&#10;# Remove duplicated copy of binary frameworks in Plugins folder.&#10;find &quot;${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}&quot; -mindepth 1 -maxdepth 1 -type d -name &quot;*.framework&quot; -exec rm -Rf {} \;&#10;"
                shellToInvoke = "/bin/bash">
                <EnvironmentBuildable>
                   <BuildableReference
