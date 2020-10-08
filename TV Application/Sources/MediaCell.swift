@@ -37,6 +37,7 @@ struct MediaCell: View {
                         .reportFocusChanges()
                 }
                 .buttonStyle(CardButtonStyle())
+                .onFocusChange { isFocused = $0 }
                 
                 DescriptionView(media: media)
                     .frame(width: geometry.size.width, alignment: .leading)
@@ -46,7 +47,6 @@ struct MediaCell: View {
                     .animation(.easeInOut(duration: 0.2))
             }
             .redacted(reason: redactionReason)
-            .onFocusChange { isFocused = $0 }
         }
     }
 }
