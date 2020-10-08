@@ -191,13 +191,13 @@ extension MediaDetailView {
                                                 topViewController.present(letterboxViewController, animated: true, completion: nil)
                                             }
                                         })
-                                            .frame(width: 280)
-                                            .onFocusChange { focused in
-                                                if focused {
-                                                    focusedMedia = media
-                                                }
+                                        .frame(width: 280)
+                                        .onFocusChange { focused in
+                                            if focused {
+                                                focusedMedia = media
                                             }
-                                            .animation(nil)
+                                        }
+                                        .animation(nil)
                                     }
                                 }
                                 .padding(.top, 70)
