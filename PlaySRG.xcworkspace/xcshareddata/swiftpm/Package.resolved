@@ -66,10 +66,10 @@
       },
       {
         "package": "Mantle",
-        "repositoryURL": "https://github.com/SRGSSR/Mantle.git",
+        "repositoryURL": "https://github.com/Mantle/Mantle.git",
         "state": {
-          "branch": "swift-package-manager-support",
-          "revision": "cd18bf7f9c6c5a0d2f4aec6012fe1615b86032fe",
+          "branch": "master",
+          "revision": "d123b3aa351b6b98155ab489deaacc56e1a84b4b",
           "version": null
         }
       },
@@ -114,7 +114,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "7288d9fbb8dfcaf9d7f38c61b9166cdc8567e28f",
+          "revision": "46f2717b8c4f9df23a84948d77a2da7acbd0bc99",
           "version": null
         }
       },
@@ -123,7 +123,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "988cb9a0f9473635c145752f44e570852c30af48",
+          "revision": "61bd258dc4efbd2a00be34e3e192cf38f3116ee3",
           "version": null
         }
       },
@@ -141,7 +141,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "79048b860a672de2ae6e1d5487ba0cdec67ee193",
+          "revision": "19b5a7d7ea3a2c832a3640141f2b4135a60118f9",
           "version": null
         }
       },
@@ -186,7 +186,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "785751a6047249f4a80b3cd038eff9aadf4e3f0f",
+          "revision": "3bc2383a9c43b5ff15f2dd375657cee18acf391e",
           "version": null
         }
       },
