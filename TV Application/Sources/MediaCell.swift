@@ -9,8 +9,14 @@ import SwiftUI
 
 struct MediaCell: View {
     let media: SRGMedia?
+    let action: (() -> Void)?
     
     @State private var isFocused: Bool = false
+    
+    init(media: SRGMedia?, action: (() -> Void)? = nil) {
+        self.media = media
+        self.action = action
+    }
         
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
@@ -19,7 +25,7 @@ struct MediaCell: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Button(action: {
+                Button(action: action ?? {
                     if let media = media,
                        let topViewController = UIApplication.shared.windows.first?.topViewController {
                         let hostController = UIHostingController(rootView: MediaDetailView(media: media))

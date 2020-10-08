@@ -184,7 +184,13 @@ extension MediaDetailView {
                             ScrollView(.horizontal) {
                                 HStack(spacing: 40) {
                                     ForEach(model.relatedMedias, id: \.uid) { media in
-                                        MediaCell(media: media)
+                                        MediaCell(media: media, action: {
+                                            if let topViewController = UIApplication.shared.windows.first?.topViewController {
+                                                let letterboxViewController = SRGLetterboxViewController()
+                                                letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
+                                                topViewController.present(letterboxViewController, animated: true, completion: nil)
+                                            }
+                                        })
                                             .frame(width: 280)
                                             .onFocusChange { focused in
                                                 if focused {
