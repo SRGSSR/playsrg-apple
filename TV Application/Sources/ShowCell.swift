@@ -32,6 +32,7 @@ struct ShowCell: View {
                     .frame(width: geometry.size.width, alignment: .leading)
             }
             .redacted(reason: redactionReason)
+            .animation(nil)
         }
     }
 }

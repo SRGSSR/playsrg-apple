@@ -197,7 +197,6 @@ extension MediaDetailView {
                                                 focusedMedia = media
                                             }
                                         }
-                                        .animation(nil)
                                     }
                                 }
                                 .padding(.top, 70)

@@ -47,6 +47,7 @@ struct MediaCell: View {
                     .animation(.easeInOut(duration: 0.2))
             }
             .redacted(reason: redactionReason)
+            .animation(nil)
         }
     }
 }
