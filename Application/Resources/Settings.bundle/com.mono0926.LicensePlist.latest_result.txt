@@ -832,7 +832,7 @@ name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version:
 
 name: MAKVONotificationCenter, nameSpecified: MAKVONotificationCenter, owner: SRGSSR, version: 
 
-name: Mantle, nameSpecified: Mantle, owner: SRGSSR, version: 
+name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 
 
 name: Nuke, nameSpecified: Nuke, owner: kean, version: 9.1.2
 
