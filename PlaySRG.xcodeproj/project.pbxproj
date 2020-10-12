@@ -4094,7 +4094,6 @@
 				6F331CE024D06B8200C096AB /* Sources */,
 				6F331CE124D06B8200C096AB /* Frameworks */,
 				6F331CE224D06B8200C096AB /* Resources */,
-				088884C924D4A41300B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 				6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */,
 				6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */,
 			);
@@ -4121,7 +4120,6 @@
 				6F331CF824D06BA200C096AB /* Sources */,
 				6F331CF924D06BA200C096AB /* Frameworks */,
 				6F331CFA24D06BA200C096AB /* Resources */,
-				088884C824D4A40D00B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 				6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA4D925246E0000ABEE9A /* Extract Signing Identity */,
 			);
@@ -4148,7 +4146,6 @@
 				6F331D1024D06BB800C096AB /* Sources */,
 				6F331D1124D06BB800C096AB /* Frameworks */,
 				6F331D1224D06BB800C096AB /* Resources */,
-				088884C724D4A40700B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 				6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */,
 				6F3FA4DA25246E0500ABEE9A /* Extract Signing Identity */,
 			);
@@ -4175,7 +4172,6 @@
 				6F331D2824D06BC600C096AB /* Sources */,
 				6F331D2924D06BC600C096AB /* Frameworks */,
 				6F331D2A24D06BC600C096AB /* Resources */,
-				088884C624D4A40100B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 				6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */,
 				6F3FA4EF25246E1100ABEE9A /* Extract Signing Identity */,
 			);
@@ -4202,7 +4198,6 @@
 				6F331D4024D06C2600C096AB /* Sources */,
 				6F331D4124D06C2600C096AB /* Frameworks */,
 				6F331D4224D06C2600C096AB /* Resources */,
-				088884C524D4847000B2E0DD /* Copy Frameworks (SPM beta workaround) */,
 				6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA50425246E1A00ABEE9A /* Extract Signing Identity */,
 			);
@@ -5049,111 +5044,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
-		};
-		088884C524D4847000B2E0DD /* Copy Frameworks (SPM beta workaround) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/ComScore.framework",
-				"$(BUILT_PRODUCTS_DIR)/TCCore.framework",
-				"$(BUILT_PRODUCTS_DIR)/TCSDK.framework",
-			);
-			name = "Copy Frameworks (SPM beta workaround)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		088884C624D4A40100B2E0DD /* Copy Frameworks (SPM beta workaround) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/ComScore.framework",
-				"$(BUILT_PRODUCTS_DIR)/TCCore.framework",
-				"$(BUILT_PRODUCTS_DIR)/TCSDK.framework",
-			);
-			name = "Copy Frameworks (SPM beta workaround)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		088884C724D4A40700B2E0DD /* Copy Frameworks (SPM beta workaround) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/ComScore.framework",
-				"$(BUILT_PRODUCTS_DIR)/TCCore.framework",
-				"$(BUILT_PRODUCTS_DIR)/TCSDK.framework",
-			);
-			name = "Copy Frameworks (SPM beta workaround)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		088884C824D4A40D00B2E0DD /* Copy Frameworks (SPM beta workaround) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/ComScore.framework",
-				"$(BUILT_PRODUCTS_DIR)/TCCore.framework",
-				"$(BUILT_PRODUCTS_DIR)/TCSDK.framework",
-			);
-			name = "Copy Frameworks (SPM beta workaround)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		088884C924D4A41300B2E0DD /* Copy Frameworks (SPM beta workaround) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/ComScore.framework",
-				"$(BUILT_PRODUCTS_DIR)/TCCore.framework",
-				"$(BUILT_PRODUCTS_DIR)/TCSDK.framework",
-			);
-			name = "Copy Frameworks (SPM beta workaround)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
