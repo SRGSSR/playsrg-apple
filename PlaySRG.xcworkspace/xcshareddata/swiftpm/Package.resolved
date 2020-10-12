@@ -149,7 +149,7 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "feature/error-cleanup-fix",
+          "branch": "develop",
           "revision": "a554274207bee8c5f4076e882cdf1256a1a73b1a",
           "version": null
         }
