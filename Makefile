@@ -48,7 +48,7 @@ setup:
 	@echo "Setting up proprietary project..."
 
 	@if [ ! -d $(CONFIGURATION_FOLDER) ]; then \
-		git clone https://github.com/SRGSSR/playsrg-ios-configuration.git $(CONFIGURATION_FOLDER); \
+		git clone https://github.com/SRGSSR/playsrg-apple-configuration.git $(CONFIGURATION_FOLDER); \
 	else \
 		echo "A $(CONFIGURATION_FOLDER) folder is already available."; \
 	fi;
