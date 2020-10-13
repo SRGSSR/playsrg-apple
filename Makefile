@@ -33,14 +33,14 @@ all: bootstrap
 bootstrap:
 	@echo "Building dependencies..."
 	@carthage bootstrap $(CARTHAGE_RESOLUTION_FLAGS)
-	@Scripts/carthage-build.sh $(CARTHAGE_BUILD_FLAGS)
+	@Scripts/carthage.sh build $(CARTHAGE_BUILD_FLAGS)
 	@echo "... done.\n"
 
 .PHONY: update
 update:
 	@echo "Updating and building proprietary dependencies..."
 	@carthage update $(CARTHAGE_RESOLUTION_FLAGS)
-	@Scripts/carthage-build.sh $(CARTHAGE_BUILD_FLAGS)
+	@Scripts/carthage.sh build $(CARTHAGE_BUILD_FLAGS)
 	@echo "... done.\n"
 
 .PHONY: setup
