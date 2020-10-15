@@ -232,7 +232,7 @@
 "Livestreams" = "Live";
 
 /* Setting footer message for system permission group. New rule for iOS 14 and more. */
-"Local network access must be allowed for Google Cast receiver discovery." = "Local network access must be allowed for Google Cast receiver discovery.";
+"Local network access must be allowed for Google Cast receiver discovery." = "Il access a la rait locala è necessari per utilisar Google Cast. ";
 
 /* Text displayed within the login / sign up profile header when no user is displayed */
 "Login / Sign up" = "Login";
