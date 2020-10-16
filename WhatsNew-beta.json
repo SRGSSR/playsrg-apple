@@ -120,5 +120,6 @@
   "3.1.1-341": "- Correctly take into account SDH accessibility opt-in when choosing subtitles automatically.",
   "3.1.2-342": "- Fix an iOS 14 regression leading to the player still continuing playback of a video in the background, even after having been properly released.",
   "3.1.3-343": "- Age rating icons have been replaced with a generic one without reference to FSK ratings.\n- Update measurement components for iOS 14.",
-  "3.1.4-344": "- iOS 14 support.\n- New Google Cast onboard user experience (local network access).\n- Add permissions section in application settings view.\n- Fix glitches associated with restoration from picture in picture."
+  "3.1.4-344": "- iOS 14 support.\n- New Google Cast onboard user experience (local network access).\n- Add permissions section in application settings view.\n- Fix glitches associated with restoration from picture in picture.",
+  "3.1.4-345": "- Fix playback incorrectly restarting in background without user interaction.\n- Fix video playback incorrectly stopped when disconnecting a Bluetooth headset or speaker."
 }
