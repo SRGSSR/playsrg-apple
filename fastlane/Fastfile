@@ -167,27 +167,27 @@ platform :ios do
 
   desc 'SWI: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :swiAppStoreUpload do
-    testflight_lane(scheme: 'Play SWI')
+    testflight_lane(platform: 'iOS', scheme: 'Play SWI')
   end
 
   desc 'SRF: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :srfAppStoreUpload do
-    testflight_lane(scheme: 'Play SRF')
+    testflight_lane(platform: 'iOS', scheme: 'Play SRF')
   end
 
   desc 'RTS: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :rtsAppStoreUpload do
-    testflight_lane(scheme: 'Play RTS')
+    testflight_lane(platform: 'iOS', scheme: 'Play RTS')
   end
 
   desc 'RSI: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :rsiAppStoreUpload do
-    testflight_lane(scheme: 'Play RSI')
+    testflight_lane(platform: 'iOS', scheme: 'Play RSI')
   end
 
   desc 'RTR: Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :rtrAppStoreUpload do
-    testflight_lane(scheme: 'Play RTR')
+    testflight_lane(platform: 'iOS', scheme: 'Play RTR')
   end
 
   desc 'Send latest dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
@@ -263,23 +263,23 @@ platform :ios do
 
   desc 'Build, upload to TestFlight'
   private_lane :testflight_lane do |options|
-    scheme = options[:scheme]
-    build_number = get_build_number
+    options[:platform] ||= 'iOS'
+    build_number = xcode_build_number(options[:platform])
 
-    can_upload = can_upload_testflight_build(nil)
-    UI.message(scheme + ' ' + build_number + ' already uploaded 🔁✅') unless can_upload
+    can_upload = can_upload_testflight_build(options[:platform])
+    UI.message(options[:scheme] + ' (' + options[:platform] + ') ' + build_number + ' already uploaded 🔁✅') unless can_upload
     next unless can_upload
 
     build_lane(
       configuration: 'AppStore',
-      scheme: scheme,
+      scheme: options[:scheme],
       export_to_appstore: true
     )
 
     pilot(
       skip_waiting_for_build_processing: true
     )
-    UI.message(scheme + ' ' + build_number + ' uploaded ✅')
+    UI.message(options[:scheme] + ' (' + options[:platform] + ') ' + build_number + ' uploaded ✅')
 
     clean_build_artifacts
   end
@@ -656,10 +656,10 @@ def upload_screenshots(platform)
 end
 
 def can_upload_testflight_build(platform)
-  platform ||= 'ios'
+  platform ||= 'iOS'
 
-  appstore_build_number = latest_testflight_build_number(platform: platform)
-  local_build_number = get_build_number
+  appstore_build_number = latest_testflight_build_number(platform: appstore_platform(platform))
+  local_build_number = xcode_build_number(platform)
 
   (appstore_build_number < local_build_number.to_i)
 end
