@@ -68,9 +68,9 @@
         "package": "Mantle",
         "repositoryURL": "https://github.com/Mantle/Mantle.git",
         "state": {
-          "branch": "master",
-          "revision": "d123b3aa351b6b98155ab489deaacc56e1a84b4b",
-          "version": null
+          "branch": null,
+          "revision": "eb4ad298d81c023bcba20810ceffba695378ded4",
+          "version": "2.1.6"
         }
       },
       {
@@ -123,7 +123,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "61bd258dc4efbd2a00be34e3e192cf38f3116ee3",
+          "revision": "5079b0566670217c860c8e7d0a4a0a5b074e48d1",
           "version": null
         }
       },
@@ -141,7 +141,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "19b5a7d7ea3a2c832a3640141f2b4135a60118f9",
+          "revision": "b02b26ee7f93fc29d802aa8f7238f8705aaaa6c8",
           "version": null
         }
       },
@@ -150,7 +150,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "c1ab3b5410c514d2bfc7ed96370b076e65a5a7e8",
+          "revision": "8c7920afe2e322585cc066555a14f5f5bfeac58b",
           "version": null
         }
       },
