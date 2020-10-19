@@ -422,6 +422,11 @@
 		08DD9D6A1FFE6EFA00115906 /* ModuleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D581FFE6EDA00115906 /* ModuleHeaderView.m */; };
 		08DD9D6B1FFE6EFA00115906 /* ModuleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DD9D541FFE6EDA00115906 /* ModuleHeaderView.xib */; };
 		08DD9D6C1FFE6EFA00115906 /* ModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9D591FFE6EDA00115906 /* ModuleViewController.m */; };
+		08FD789D253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
+		08FD789E253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
+		08FD789F253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
+		08FD78A0253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
+		08FD78A1253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
 		0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 624E718ECC7F02E540440901 /* libPods-Play SRG-tvOS-Play RTR TV.a */; };
 		2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3780F919C25BC0944528A5FD /* libPods-Play SRG-iOS-Play RSI.a */; };
 		2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CC3BC704FD48424BB497B2 /* libPods-Play SRG-tvOS-Play RTS TV.a */; };
@@ -1842,6 +1847,7 @@
 		08DD9D561FFE6EDA00115906 /* ModuleHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleHeaderView.h; sourceTree = "<group>"; };
 		08DD9D581FFE6EDA00115906 /* ModuleHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleHeaderView.m; sourceTree = "<group>"; };
 		08DD9D591FFE6EDA00115906 /* ModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleViewController.m; sourceTree = "<group>"; };
+		08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
 		096E5AC5C979FBF1F072A888 /* Pods-Play SRG-iOS-Play RSI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; sourceTree = "<group>"; };
 		0A4B38B692D4F377D70590D1 /* Pods-Play SRG-iOS-Play SWI.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; sourceTree = "<group>"; };
 		0AD1DB5E0679F09CC8A63D91 /* libPods-Play SRG-tvOS-Play SWI TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-tvOS-Play SWI TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3362,6 +3368,7 @@
 				6FFF1631250A20EF0053CDA6 /* FocusDetector.swift */,
 				6F82430B250637BE00E931A0 /* Fonts.swift */,
 				6F4BCBE024EFF7C3001ABA17 /* Formatters.swift */,
+				08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */,
 				6F355AA224E65CB400F1500E /* HeroMediaCell.swift */,
 				6FA84A3124E452F700B1A56E /* HomeModel.swift */,
 				6FCC73B924E6F8EE00ECF73F /* HomeView.swift */,
@@ -7241,6 +7248,7 @@
 				6FF8F156250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F331D5A24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413D624EEEDC900FDF806 /* Channel.m in Sources */,
+				08FD789D253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
 				6FC413CF24EEEDC900FDF806 /* TVChannel.m in Sources */,
 				6F3F1ABA25060496000FF4DD /* MediaVisual.swift in Sources */,
 				6F4F78AF252AF7670011DBCA /* DurationLabel.swift in Sources */,
@@ -7290,6 +7298,7 @@
 				6FF8F157250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F331D5B24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413DE24EEEDC900FDF806 /* Channel.m in Sources */,
+				08FD789E253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
 				6FC413D724EEEDC900FDF806 /* TVChannel.m in Sources */,
 				6F3F1ABB25060496000FF4DD /* MediaVisual.swift in Sources */,
 				6F4F78B0252AF7670011DBCA /* DurationLabel.swift in Sources */,
@@ -7339,6 +7348,7 @@
 				6FF8F158250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F331D5C24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413E624EEEDCA00FDF806 /* Channel.m in Sources */,
+				08FD789F253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
 				6FC413DF24EEEDCA00FDF806 /* TVChannel.m in Sources */,
 				6F3F1ABC25060496000FF4DD /* MediaVisual.swift in Sources */,
 				6F4F78B1252AF7670011DBCA /* DurationLabel.swift in Sources */,
@@ -7388,6 +7398,7 @@
 				6FF8F159250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F331D5D24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413EE24EEEDCA00FDF806 /* Channel.m in Sources */,
+				08FD78A0253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
 				6FC413E724EEEDCA00FDF806 /* TVChannel.m in Sources */,
 				6F3F1ABD25060496000FF4DD /* MediaVisual.swift in Sources */,
 				6F4F78B2252AF7670011DBCA /* DurationLabel.swift in Sources */,
@@ -7437,6 +7448,7 @@
 				6FF8F15A250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F331D5E24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413F624EEEDCB00FDF806 /* Channel.m in Sources */,
+				08FD78A1253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
 				6FC413EF24EEEDCB00FDF806 /* TVChannel.m in Sources */,
 				6F3F1ABE25060496000FF4DD /* MediaVisual.swift in Sources */,
 				6F4F78B3252AF7670011DBCA /* DurationLabel.swift in Sources */,

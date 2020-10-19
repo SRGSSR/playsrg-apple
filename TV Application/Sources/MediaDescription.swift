@@ -35,7 +35,7 @@ struct MediaDescription {
             return media.title
         }
         else {
-            return DateFormatters.formattedRelativeDateAndTime(for: media.date)
+            return DateFormatters.formattedRelativeDateAndTime(for: media.date).capitalizedFirstLetter
         }
     }
     
