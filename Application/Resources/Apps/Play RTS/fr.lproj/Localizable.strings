@@ -343,6 +343,9 @@
 /* Settings section header */
 "Period" = "Période";
 
+/* Play button label */
+"Play" = "Jouer";
+
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Jouable à l'étranger";
 

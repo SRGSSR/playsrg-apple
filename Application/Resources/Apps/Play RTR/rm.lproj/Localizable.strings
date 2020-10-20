@@ -343,6 +343,9 @@
 /* Settings section header */
 "Period" = "Interval";
 
+/* Play button label */
+"Play" = "Laschar ir";
+
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Disponibel en l'exteriur";
 

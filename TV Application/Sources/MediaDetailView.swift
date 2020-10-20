@@ -118,18 +118,26 @@ extension MediaDetailView {
         let media: SRGMedia
         
         var body: some View {
-            HStack {
-                LabeledButton(icon: "play.fill", label: NSLocalizedString("Play", comment: "Play button label")) {
+            HStack(spacing: 10) {
+                LabeledButton(icon: "play-50", label: NSLocalizedString("Play", comment: "Play button label")) {
                     if let topViewController = UIApplication.shared.windows.first?.topViewController {
                         let letterboxViewController = SRGLetterboxViewController()
                         letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
                         topViewController.present(letterboxViewController, animated: true, completion: nil)
                     }
                 }
-                LabeledButton(icon: "clock", label: NSLocalizedString("Watch later", comment: "Watch later button label")) {
+                .frame(width: 200)
+                LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Watch later", comment: "Watch later button label")) {
                     /* Toggle Watch Later state */
                 }
+                .frame(width: 200)
+                LabeledButton(icon: "episodes-22", label: NSLocalizedString("Episodes", comment:"Episodes button label")) {
+                    /* Open show page */
+                }
+                .frame(width: 200)
+                Spacer()
             }
+            .frame(height: 80)
         }
     }
 }

@@ -16,7 +16,8 @@ struct LabeledButton: View {
     var body: some View {
         VStack {
             Button(action: action) {
-                Image(systemName: icon)
+                Image(icon)
+                    .foregroundColor(Color.white)
                     .reportFocusChanges()
             }
             Text(label)
