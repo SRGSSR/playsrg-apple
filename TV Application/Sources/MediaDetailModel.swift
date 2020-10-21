@@ -18,6 +18,8 @@ class MediaDetailModel: ObservableObject {
     }
     
     func refresh() {
+        if media.contentType == .livestream { return }
+        
         let middleWareURL:URL? = ApplicationConfiguration.shared.middlewareURL
         guard let _ = middleWareURL else { return }
         
