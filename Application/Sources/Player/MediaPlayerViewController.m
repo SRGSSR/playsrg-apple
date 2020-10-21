@@ -1572,9 +1572,15 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     
     // Status bar is NOT updated after rotation consistently, so we must store the desired status bar visibility once
-    // we have reliable information to determine it. On iPhone in landscape orientation it is always hidden by the
-    // system and we must avoid hiding it.
-    self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication.statusBarOrientation));
+    // we have reliable information to determine it.
+    if (@available(iOS 13 , *)) {
+        // On iPhone in landscape orientation it is always hidden since iOS 13, in which case we must not hide it
+        // to avoid incorrect safe area insets after returning from landscape orientation.
+        self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication.statusBarOrientation));
+    }
+    else {
+        self.statusBarHidden = fullScreen;
+    }
     
     void (^animations)(void) = ^{
         [self setFullScreen:fullScreen];
