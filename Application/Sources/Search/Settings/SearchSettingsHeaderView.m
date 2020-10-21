@@ -6,8 +6,6 @@
 
 #import "SearchSettingsHeaderView.h"
 
-#import "UIColor+PlaySRG.h"
-
 @import SRGAppearance;
 
 @interface SearchSettingsHeaderView ()
@@ -41,8 +39,6 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
-    self.contentView.backgroundColor = UIColor.play_popoverGrayBackgroundColor;
     
     self.titleLabel.textColor = UIColor.whiteColor;
 }

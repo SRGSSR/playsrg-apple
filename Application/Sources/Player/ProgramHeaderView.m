@@ -6,8 +6,6 @@
 
 #import "ProgramHeaderView.h"
 
-#import "UIColor+PlaySRG.h"
-
 @import SRGAppearance;
 
 @interface ProgramHeaderView ()
@@ -24,7 +22,6 @@
 {
     [super awakeFromNib];
     
-    self.contentView.backgroundColor = UIColor.play_blackColor;
     self.titleLabel.textColor = UIColor.whiteColor;
 }
 
