@@ -127,14 +127,19 @@ extension MediaDetailView {
                     }
                 }
                 .frame(width: 200)
+                
                 LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Watch later", comment: "Watch later button label")) {
                     /* Toggle Watch Later state */
                 }
                 .frame(width: 200)
-                LabeledButton(icon: "episodes-22", label: NSLocalizedString("Episodes", comment:"Episodes button label")) {
-                    /* Open show page */
+                
+                if let _ = media.show {
+                    LabeledButton(icon: "episodes-22", label: NSLocalizedString("Episodes", comment:"Episodes button label")) {
+                        /* Open show page */
+                    }
+                    .frame(width: 200)
                 }
-                .frame(width: 200)
+                
                 Spacer()
             }
             .frame(height: 80)
