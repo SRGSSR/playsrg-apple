@@ -548,7 +548,6 @@ static void commonInit(BaseViewController *self);
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a media from the start from the long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             void (^openPlayer)(void) = ^{
                 MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:nil fromPushNotification:NO];
-                mediaPlayerViewController.modalPresentationStyle = UIModalPresentationCustom;
                 [self presentViewController:mediaPlayerViewController animated:YES completion:nil];
             };
             

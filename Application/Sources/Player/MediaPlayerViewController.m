@@ -641,6 +641,18 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     return YES;
 }
 
+#pragma mark Modal presentation
+
+- (UIModalPresentationStyle)modalPresentationStyle
+{
+    return UIModalPresentationCustom;
+}
+
+- (BOOL)modalPresentationCapturesStatusBarAppearance
+{
+    return YES;
+}
+
 #pragma mark Status bar
 
 - (BOOL)prefersStatusBarHidden
