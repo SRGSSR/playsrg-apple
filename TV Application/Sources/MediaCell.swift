@@ -26,10 +26,8 @@ struct MediaCell: View {
         GeometryReader { geometry in
             VStack {
                 Button(action: action ?? {
-                    if let media = media,
-                       let topViewController = UIApplication.shared.windows.first?.topViewController {
-                        let hostController = UIHostingController(rootView: MediaDetailView(media: media))
-                        topViewController.present(hostController, animated: true, completion: nil)
+                    if let media = media {
+                        navigateToMedia(media: media)
                     }
                 }) {
                     MediaVisual(media: media, scale: .small, contentMode: .fit)

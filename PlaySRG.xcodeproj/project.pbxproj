@@ -27,6 +27,11 @@
 		0804917D22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0804917522832C5C00E4CEC2 /* HomeShowCollectionViewCell.m */; };
 		0804917E22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0804917522832C5C00E4CEC2 /* HomeShowCollectionViewCell.m */; };
 		0804917F22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0804917522832C5C00E4CEC2 /* HomeShowCollectionViewCell.m */; };
+		0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
+		0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
+		080570402540E0FC00A59C9D /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
+		080570412540E0FC00A59C9D /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
+		080570422540E0FC00A59C9D /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
 		0806E7B81D50D918002ED406 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0806E7B61D50D918002ED406 /* SettingsViewController.m */; };
 		0806E7B91D50D918002ED406 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0806E7B61D50D918002ED406 /* SettingsViewController.m */; };
 		0806E7BA1D50D919002ED406 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0806E7B61D50D918002ED406 /* SettingsViewController.m */; };
@@ -1682,6 +1687,7 @@
 		0804917322832C5C00E4CEC2 /* HomeShowCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeShowCollectionViewCell.h; sourceTree = "<group>"; };
 		0804917422832C5C00E4CEC2 /* HomeShowCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeShowCollectionViewCell.xib; sourceTree = "<group>"; };
 		0804917522832C5C00E4CEC2 /* HomeShowCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeShowCollectionViewCell.m; sourceTree = "<group>"; };
+		0805703D2540E0FC00A59C9D /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		0806E7B51D50D918002ED406 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		0806E7B61D50D918002ED406 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		081220A41DD079BB00BF8326 /* DownloadsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadsViewController.h; sourceTree = "<group>"; };
@@ -3381,6 +3387,7 @@
 				086499B124F69FF20027373E /* MediaDetailView.swift */,
 				6F3F1AB925060496000FF4DD /* MediaVisual.swift */,
 				6F5E63A4250CB32E00056160 /* Modifiers.swift */,
+				0805703D2540E0FC00A59C9D /* Navigation.swift */,
 				6FC4140124EF11F400FDF806 /* Play-TV-ObjectiveC-Bridge.h */,
 				6F331D6B24D076D500C096AB /* ProfileView.swift */,
 				6FFCC5E324EFBF2100805B0F /* RadioChannel.swift */,
@@ -7212,6 +7219,7 @@
 				086499B224F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6FC413D524EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */,
 				6F026EED250134FD00BAE8D1 /* UIView+PlaySRG.m in Sources */,
+				0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED544252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6FDB2ABA24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E424EFBF2100805B0F /* RadioChannel.swift in Sources */,
@@ -7262,6 +7270,7 @@
 				086499B324F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6FC413DD24EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */,
 				6F026EEE250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
+				0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED545252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6FDB2ABB24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E524EFBF2100805B0F /* RadioChannel.swift in Sources */,
@@ -7312,6 +7321,7 @@
 				086499B424F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6FC413E524EEEDCA00FDF806 /* ApplicationConfiguration.m in Sources */,
 				6F026EEF250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
+				080570402540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED546252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6FDB2ABC24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E624EFBF2100805B0F /* RadioChannel.swift in Sources */,
@@ -7362,6 +7372,7 @@
 				086499B524F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6FC413ED24EEEDCA00FDF806 /* ApplicationConfiguration.m in Sources */,
 				6F026EF0250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
+				080570412540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED547252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6FDB2ABD24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E724EFBF2100805B0F /* RadioChannel.swift in Sources */,
@@ -7412,6 +7423,7 @@
 				086499B624F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6FC413F524EEEDCB00FDF806 /* ApplicationConfiguration.m in Sources */,
 				6F026EF1250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
+				080570422540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED548252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6FDB2ABE24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E824EFBF2100805B0F /* RadioChannel.swift in Sources */,
