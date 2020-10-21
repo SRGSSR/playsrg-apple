@@ -191,7 +191,7 @@ extension MediaDetailView {
                             .fill(Color(.srg_color(fromHexadecimalString: "#222222")!))
                             .opacity(0.8)
                         ZStack {
-                            Text(NSLocalizedString("Last episodes", comment: "Last episode list title"))
+                            Text(NSLocalizedString("Related content", comment: "Related content media list title"))
                                 .srgFont(.medium, size: .headline)
                                 .foregroundColor(.gray)
                                 .padding([.leading, .trailing], 40)

@@ -18,15 +18,31 @@ class MediaDetailModel: ObservableObject {
     }
     
     func refresh() {
-        guard let show = media.show else { return }
-        SRGDataProvider.current!.latestMediasForShows(withUrns: [show.urn], filter: .episodesOnly)
-            .map { $0.medias }
-            .replaceError(with: [])
-            .assign(to: \.relatedMedias, on: self)
-            .store(in: &cancellables)
+        let middleWareURL:URL? = ApplicationConfiguration.shared.middlewareURL
+        guard let _ = middleWareURL else { return }
+        
+        let resourcePath = "api/v2/playlist/recommendation/continuousPlayback/" + self.media.urn
+        let middlewareURL = URL(string: resourcePath, relativeTo: middleWareURL)!
+        
+        URLSession.shared.dataTaskPublisher(for: middlewareURL)
+            .map { $0.data }
+            .decode(type: Recommendation.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+            .sink(receiveCompletion: {_ in }, receiveValue: { recommendation in
+                SRGDataProvider.current!.medias(withUrns: recommendation.urns)
+                    .map { $0.medias }
+                    .replaceError(with: [])
+                    .assign(to: \.relatedMedias, on: self)
+                    .store(in: &self.cancellables)
+            }).store(in: &cancellables)
     }
     
     func cancelRefresh() {
         cancellables = []
     }
+}
+
+struct Recommendation: Codable {
+    let recommendationId: String
+    let urns: [String]
 }
