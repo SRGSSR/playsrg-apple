@@ -10,12 +10,29 @@
 #import "PlayErrors.h"
 #import "UIImage+PlaySRG.h"
 
+#import <objc/runtime.h>
+
 @import SRGAppearance;
 @import YYWebImage;
 
 @implementation UIImageView (PlaySRG)
 
 #pragma mark Class methods
+
++ (void)load
+{
+    if (@available(iOS 13, *)) {}
+    else {
+        // `-willMoveToWindow:` is not implemented on UIImageView on iOS 12, so attempt to add it first. Use swizzling if
+        // if some minor or patch version implements it.
+        Method injectedMethod = class_getInstanceMethod(self, @selector(UIImageView_PlaySRG_injected_willMoveToWindow:));
+        BOOL added = class_addMethod(self, @selector(willMoveToWindow:), method_getImplementation(injectedMethod), method_getTypeEncoding(injectedMethod));
+        if (! added) {
+            method_exchangeImplementations(class_getInstanceMethod(self, @selector(willMoveToWindow:)),
+                                           class_getInstanceMethod(self, @selector(UIImageView_PlaySRG_swizzled_willMoveToWindow:)));
+        }
+    }
+}
 
 + (UIImageView *)play_loadingImageView48WithTintColor:(UIColor *)tintColor
 {
@@ -174,6 +191,28 @@
 - (void)play_resetImage
 {
     [self yy_setImageWithURL:nil options:0];
+}
+
+- (void)play_fixImageTintColor
+{
+    // Workaround UIImage view tint color bug in cells. See http://stackoverflow.com/a/26042893/760435
+    UIImage *image = self.image;
+    self.image = nil;
+    self.image = image;
+}
+
+- (void)UIImageView_PlaySRG_swizzled_willMoveToWindow:(UIWindow *)window
+{
+    [self UIImageView_PlaySRG_injected_willMoveToWindow:window];
+    
+    [self play_fixImageTintColor];
+}
+
+- (void)UIImageView_PlaySRG_injected_willMoveToWindow:(UIWindow *)window
+{
+    [super willMoveToWindow:window];
+    
+    [self play_fixImageTintColor];
 }
 
 @end
