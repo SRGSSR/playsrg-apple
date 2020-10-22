@@ -1209,11 +1209,6 @@
 		6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095D25221A2300E621EF /* AirshipCore */; };
 		6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095F25221A2B00E621EF /* AirshipCore */; };
 		6FD4096225221A3500E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4096125221A3500E621EF /* AirshipCore */; };
-		6FD409ED25221BC900E621EF /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD409EC25221BC900E621EF /* SwiftMessages */; };
-		6FD40A0325221BD700E621EF /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A0225221BD700E621EF /* SwiftMessages */; };
-		6FD40A1925221BDF00E621EF /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A1825221BDF00E621EF /* SwiftMessages */; };
-		6FD40A1B25221BE400E621EF /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A1A25221BE400E621EF /* SwiftMessages */; };
-		6FD40A3125221BEA00E621EF /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A3025221BEA00E621EF /* SwiftMessages */; };
 		6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A4725221C2D00E621EF /* PaperOnboarding */; };
 		6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A5D25221C3A00E621EF /* PaperOnboarding */; };
 		6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A7325221C4300E621EF /* PaperOnboarding */; };
@@ -2301,7 +2296,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */,
-				6FD409ED25221BC900E621EF /* SwiftMessages in Frameworks */,
 				6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */,
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
@@ -2316,7 +2310,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */,
-				6FD40A0325221BD700E621EF /* SwiftMessages in Frameworks */,
 				6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */,
 				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
@@ -2331,7 +2324,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */,
-				6FD40A1925221BDF00E621EF /* SwiftMessages in Frameworks */,
 				6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */,
 				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
@@ -2346,7 +2338,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */,
-				6FD40A1B25221BE400E621EF /* SwiftMessages in Frameworks */,
 				6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */,
 				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
@@ -2361,7 +2352,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD4096225221A3500E621EF /* AirshipCore in Frameworks */,
-				6FD40A3125221BEA00E621EF /* SwiftMessages in Frameworks */,
 				6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */,
 				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
@@ -3824,7 +3814,6 @@
 				6F25463A2521C34800F9F4FE /* Aiolos */,
 				6F2546C02521CFD400F9F4FE /* SRGAnalyticsIdentity */,
 				6FD4095925221A1000E621EF /* AirshipCore */,
-				6FD409EC25221BC900E621EF /* SwiftMessages */,
 				6FD40A4725221C2D00E621EF /* PaperOnboarding */,
 			);
 			productName = "Play SRF";
@@ -3864,7 +3853,6 @@
 				6F2546502521C35300F9F4FE /* Aiolos */,
 				6F2546C22521CFDC00F9F4FE /* SRGAnalyticsIdentity */,
 				6FD4095B25221A1A00E621EF /* AirshipCore */,
-				6FD40A0225221BD700E621EF /* SwiftMessages */,
 				6FD40A5D25221C3A00E621EF /* PaperOnboarding */,
 			);
 			productName = "Play RTS";
@@ -3904,7 +3892,6 @@
 				6F2546522521C35A00F9F4FE /* Aiolos */,
 				6F2546C42521CFEA00F9F4FE /* SRGAnalyticsIdentity */,
 				6FD4095D25221A2300E621EF /* AirshipCore */,
-				6FD40A1825221BDF00E621EF /* SwiftMessages */,
 				6FD40A7325221C4300E621EF /* PaperOnboarding */,
 			);
 			productName = "Play RSI";
@@ -3944,7 +3931,6 @@
 				6F2546542521C36100F9F4FE /* Aiolos */,
 				6F2546C62521CFF000F9F4FE /* SRGAnalyticsIdentity */,
 				6FD4095F25221A2B00E621EF /* AirshipCore */,
-				6FD40A1A25221BE400E621EF /* SwiftMessages */,
 				6FD40A7525221C4900E621EF /* PaperOnboarding */,
 			);
 			productName = "Play RTR";
@@ -3984,7 +3970,6 @@
 				6F2546562521C36E00F9F4FE /* Aiolos */,
 				6F2546C82521CFFA00F9F4FE /* SRGAnalyticsIdentity */,
 				6FD4096125221A3500E621EF /* AirshipCore */,
-				6FD40A3025221BEA00E621EF /* SwiftMessages */,
 				6FD40A8B25221C4F00E621EF /* PaperOnboarding */,
 			);
 			productName = "Play SWI";
@@ -4425,7 +4410,6 @@
 				6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */,
 				6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */,
 				6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */,
-				6FD409EB25221BC900E621EF /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 				6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
@@ -11816,14 +11800,6 @@
 				kind = branch;
 			};
 		};
-		6FD409EB25221BC900E621EF /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages.git";
-			requirement = {
-				branch = work/xcode12;
-				kind = branch;
-			};
-		};
 		6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Ramotion/paper-onboarding.git";
@@ -12058,31 +12034,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */;
 			productName = AirshipCore;
-		};
-		6FD409EC25221BC900E621EF /* SwiftMessages */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FD409EB25221BC900E621EF /* XCRemoteSwiftPackageReference "SwiftMessages" */;
-			productName = SwiftMessages;
-		};
-		6FD40A0225221BD700E621EF /* SwiftMessages */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FD409EB25221BC900E621EF /* XCRemoteSwiftPackageReference "SwiftMessages" */;
-			productName = SwiftMessages;
-		};
-		6FD40A1825221BDF00E621EF /* SwiftMessages */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FD409EB25221BC900E621EF /* XCRemoteSwiftPackageReference "SwiftMessages" */;
-			productName = SwiftMessages;
-		};
-		6FD40A1A25221BE400E621EF /* SwiftMessages */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FD409EB25221BC900E621EF /* XCRemoteSwiftPackageReference "SwiftMessages" */;
-			productName = SwiftMessages;
-		};
-		6FD40A3025221BEA00E621EF /* SwiftMessages */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FD409EB25221BC900E621EF /* XCRemoteSwiftPackageReference "SwiftMessages" */;
-			productName = SwiftMessages;
 		};
 		6FD40A4725221C2D00E621EF /* PaperOnboarding */ = {
 			isa = XCSwiftPackageProductDependency;
