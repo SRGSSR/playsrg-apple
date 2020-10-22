@@ -12,7 +12,7 @@ struct MediaDetailView: View {
     let media: SRGMedia
     
     @ObservedObject var model: MediaDetailModel
-    @State var currentMedia: SRGMedia?
+    @State private var currentMedia: SRGMedia?
     
     init(media: SRGMedia) {
         self.media = media
@@ -91,18 +91,18 @@ extension MediaDetailView {
     }
 }
 
-struct TextButtonStyle: ButtonStyle {
-    let focused: Bool
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .background(focused ? Color(UIColor.init(white: 1, alpha: 0.1)) : Color.clear)
-            .scaleEffect(focused && !configuration.isPressed ? 1.02 : 1)
-    }
-}
-
 extension MediaDetailView {
     struct SummaryView: View {
+        private struct TextButtonStyle: ButtonStyle {
+            let focused: Bool
+            
+            func makeBody(configuration: Configuration) -> some View {
+                configuration.label
+                    .background(focused ? Color(UIColor.init(white: 1, alpha: 0.1)) : Color.clear)
+                    .scaleEffect(focused && !configuration.isPressed ? 1.02 : 1)
+            }
+        }
+        
         let media: SRGMedia
         
         @State var isFocused: Bool = false
