@@ -17,12 +17,12 @@ struct LabeledButton: View {
         VStack {
             Button(action: action) {
                 Image(icon)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(isFocused ? .darkGray : .white)
                     .reportFocusChanges()
             }
             Text(label)
                 .srgFont(.regular, size: .subtitle)
-                .foregroundColor(isFocused ? .white : .gray)
+                .foregroundColor(isFocused ? .white : .darkGray)
         }
         .onFocusChange { isFocused = $0 }
     }

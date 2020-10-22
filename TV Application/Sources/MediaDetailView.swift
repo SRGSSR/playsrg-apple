@@ -133,7 +133,7 @@ extension MediaDetailView {
                 }
                 .frame(width: 200)
                 
-                if let _ = media.show {
+                if media.show != nil {
                     LabeledButton(icon: "episodes-22", label: NSLocalizedString("Episodes", comment:"Episodes button label")) {
                         /* Open show page */
                     }
