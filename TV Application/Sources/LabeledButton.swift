@@ -22,7 +22,7 @@ struct LabeledButton: View {
             }
             Text(label)
                 .srgFont(.regular, size: .subtitle)
-                .foregroundColor(isFocused ? .white : .darkGray)
+                .foregroundColor(isFocused ? .white : .gray)
         }
         .onFocusChange { isFocused = $0 }
     }
