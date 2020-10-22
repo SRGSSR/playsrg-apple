@@ -110,7 +110,9 @@ extension MediaDetailView {
         var body: some View {
             GeometryReader { geometry in
                 if let summary = media.play_fullSummary {
-                    Button(action: {}, label: {
+                    Button(action: {
+                        showText(summary)
+                    }, label: {
                         Text(summary)
                             .foregroundColor(.white)
                             .srgFont(.light, size: .subtitle)
@@ -144,7 +146,7 @@ extension MediaDetailView {
         var body: some View {
             HStack(spacing: 10) {
                 LabeledButton(icon: "play-50", label: NSLocalizedString("Play", comment: "Play button label")) {
-                    navigateToMedia(media: media, play: true)
+                    navigateToMedia(media, play: true)
                 }
                 .frame(width: 200)
                 
@@ -226,7 +228,7 @@ extension MediaDetailView {
                                 HStack(spacing: 40) {
                                     ForEach(model.relatedMedias, id: \.uid) { media in
                                         MediaCell(media: media, action: {
-                                            navigateToMedia(media: media, play: true)
+                                            navigateToMedia(media, play: true)
                                         })
                                         .frame(width: 280)
                                         .onFocusChange { focused in

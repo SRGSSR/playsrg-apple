@@ -51,6 +51,8 @@ abstract_target 'Play SRG' do
   abstract_target 'tvOS' do
     platform :tvos, '14.0'
 
+    pod 'TvOSTextViewer'
+
     target 'Play SRF TV' do
     end
 

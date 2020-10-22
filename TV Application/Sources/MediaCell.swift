@@ -27,7 +27,7 @@ struct MediaCell: View {
             VStack {
                 Button(action: action ?? {
                     if let media = media {
-                        navigateToMedia(media: media)
+                        navigateToMedia(media)
                     }
                 }) {
                     MediaVisual(media: media, scale: .small, contentMode: .fit)

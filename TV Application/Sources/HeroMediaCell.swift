@@ -18,7 +18,7 @@ struct HeroMediaCell: View {
         GeometryReader { geometry in
             Button(action: {
                 if let media = media {
-                    navigateToMedia(media: media)
+                    navigateToMedia(media)
                 }
             }) {
                 HStack(spacing: 0) {
