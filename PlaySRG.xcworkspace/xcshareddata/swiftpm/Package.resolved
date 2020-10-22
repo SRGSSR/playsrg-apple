@@ -191,15 +191,6 @@
         }
       },
       {
-        "package": "SwiftMessages",
-        "repositoryURL": "https://github.com/SwiftKickMobile/SwiftMessages.git",
-        "state": {
-          "branch": "work/xcode12",
-          "revision": "72170eca3241cb3928b3078470fc339a7cc8bf2d",
-          "version": null
-        }
-      },
-      {
         "package": "TCCore",
         "repositoryURL": "https://github.com/SRGSSR/TCCore-xcframework-apple.git",
         "state": {

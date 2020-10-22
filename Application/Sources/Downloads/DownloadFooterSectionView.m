@@ -16,7 +16,6 @@
 @property (nonatomic) long long totalFreeSpaceSize;
 @property (nonatomic) NSMutableDictionary<NSString *, NSProgress *> *progresses;
 
-@property (nonatomic, weak) IBOutlet UIView *mainView;
 @property (nonatomic, weak) IBOutlet UILabel *centerLabel;
 
 @end
@@ -36,7 +35,7 @@
 {
     [super awakeFromNib];
     
-    self.mainView.backgroundColor = UIColor.clearColor;
+    self.backgroundView = [[UIView alloc] init];
     
     self.centerLabel.textColor = UIColor.whiteColor;
     self.centerLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];

@@ -25,6 +25,7 @@ abstract_target 'Play SRG' do
     pod 'InAppSettingsKit'
     pod 'MaterialComponents/Tabs'
     pod 'MGSwipeTableCell'
+    pod 'SwiftMessages'
 
     target 'Play SRF' do
     end

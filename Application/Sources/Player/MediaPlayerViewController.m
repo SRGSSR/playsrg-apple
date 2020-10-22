@@ -408,17 +408,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];
     
-    // iPhone devices: Set full screen in landscape orientation (done before the view is actually displayed. This
-    // avoids status bar hiccups)
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        BOOL isLandscape = UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation);
-        
-        self.statusBarHidden = isLandscape;
-        self.transitioning = isLandscape;
-        [self.letterboxView setFullScreen:isLandscape animated:NO];
-        self.transitioning = NO;
-    }
-    
     // Use original controller, if any has been provided
     if (self.originalLetterboxController) {
         self.letterboxView.controller = self.letterboxController;
@@ -638,6 +627,18 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (BOOL)accessibilityPerformEscape
 {
     [self play_dismissViewControllerAnimated:YES completion:nil];
+    return YES;
+}
+
+#pragma mark Modal presentation
+
+- (UIModalPresentationStyle)modalPresentationStyle
+{
+    return UIModalPresentationCustom;
+}
+
+- (BOOL)modalPresentationCapturesStatusBarAppearance
+{
     return YES;
 }
 
@@ -1075,8 +1076,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     // Force metadata panel to a height of 0
     self.metadataHeightConstraint.active = fullScreen;
-    
-    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)hidePlayerUserInterfaceAnimated:(BOOL)animated
@@ -1572,12 +1571,22 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
     }
     
-    self.statusBarHidden = fullScreen;
+    // Status bar is NOT updated after rotation consistently, so we must store the desired status bar visibility once
+    // we have reliable information to determine it.
+    if (@available(iOS 13 , *)) {
+        // On iPhone in landscape orientation it is always hidden since iOS 13, in which case we must not hide it
+        // to avoid incorrect safe area insets after returning from landscape orientation.
+        self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication.statusBarOrientation));
+    }
+    else {
+        self.statusBarHidden = fullScreen;
+    }
     
     void (^animations)(void) = ^{
         [self setFullScreen:fullScreen];
         [self updateTimelineVisibilityForFullScreen:fullScreen animated:NO];
         [self updateSongPanelFor:self.traitCollection fullScreen:fullScreen];
+        [self setNeedsStatusBarAppearanceUpdate];
         
         if (fullScreen) {
             [self hidePlayerUserInterfaceAnimated:NO];
