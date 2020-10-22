@@ -91,23 +91,47 @@ extension MediaDetailView {
     }
 }
 
+struct TextButtonStyle: ButtonStyle {
+    let focused: Bool
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(focused ? Color(UIColor.init(white: 1, alpha: 0.1)) : Color.clear)
+            .scaleEffect(focused && !configuration.isPressed ? 1.02 : 1)
+    }
+}
+
 extension MediaDetailView {
     struct SummaryView: View {
         let media: SRGMedia
         
+        @State var isFocused: Bool = false
+        
         var body: some View {
-            if let summary = media.play_fullSummary {
-                Text(summary)
-                    .srgFont(.light, size: .subtitle)
-                    .foregroundColor(.white)
-                    .padding([.top, .bottom], 5)
-            }
-            
-            if let availability = MediaDescription.availability(for: media) {
-                Text(availability)
-                    .srgFont(.light, size: .subheadline)
-                    .foregroundColor(.white)
-                    .padding([.top, .bottom], 5)
+            GeometryReader { geometry in
+                if let summary = media.play_fullSummary {
+                    Button(action: {}, label: {
+                        Text(summary)
+                            .foregroundColor(.white)
+                            .srgFont(.light, size: .subtitle)
+                            .frame(width: geometry.size.width)
+                            .padding([.top, .bottom], 5)
+                            .reportFocusChanges()
+                    })
+                    .onFocusChange { focused in
+                        withAnimation {
+                            isFocused = focused
+                        }
+                    }
+                    .buttonStyle(TextButtonStyle(focused: isFocused))
+                }
+                
+                if let availability = MediaDescription.availability(for: media) {
+                    Text(availability)
+                        .srgFont(.light, size: .subheadline)
+                        .foregroundColor(.white)
+                        .padding([.top, .bottom], 5)
+                }
             }
         }
     }
