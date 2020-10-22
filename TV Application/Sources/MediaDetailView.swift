@@ -144,11 +144,7 @@ extension MediaDetailView {
         var body: some View {
             HStack(spacing: 10) {
                 LabeledButton(icon: "play-50", label: NSLocalizedString("Play", comment: "Play button label")) {
-                    if let topViewController = UIApplication.shared.windows.first?.topViewController {
-                        let letterboxViewController = SRGLetterboxViewController()
-                        letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                        topViewController.present(letterboxViewController, animated: true, completion: nil)
-                    }
+                    navigateToMedia(media: media, play: true)
                 }
                 .frame(width: 200)
                 
@@ -230,11 +226,7 @@ extension MediaDetailView {
                                 HStack(spacing: 40) {
                                     ForEach(model.relatedMedias, id: \.uid) { media in
                                         MediaCell(media: media, action: {
-                                            if let topViewController = UIApplication.shared.windows.first?.topViewController {
-                                                let letterboxViewController = SRGLetterboxViewController()
-                                                letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                                                topViewController.present(letterboxViewController, animated: true, completion: nil)
-                                            }
+                                            navigateToMedia(media: media, play: true)
                                         })
                                         .frame(width: 280)
                                         .onFocusChange { focused in
