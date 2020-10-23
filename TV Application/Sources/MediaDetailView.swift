@@ -175,6 +175,8 @@ extension MediaDetailView {
     private struct DescriptionView: View {
         let media: SRGMedia
         
+        @Namespace private var namespace
+        
         var body: some View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
@@ -195,8 +197,10 @@ extension MediaDetailView {
                     SummaryView(media: media)
                     Spacer()
                     ActionsView(media: media)
+                        .prefersDefaultFocus(in: namespace)
                 }
                 .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .topLeading)
+                .focusScope(namespace)
             }
         }
     }
