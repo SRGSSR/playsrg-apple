@@ -109,30 +109,32 @@ extension MediaDetailView {
         
         var body: some View {
             GeometryReader { geometry in
-                if let summary = media.play_fullSummary {
-                    Button(action: {
-                        showText(summary)
-                    }, label: {
-                        Text(summary)
-                            .foregroundColor(.white)
-                            .srgFont(.light, size: .subtitle)
-                            .frame(width: geometry.size.width)
-                            .padding([.top, .bottom], 5)
-                            .reportFocusChanges()
-                    })
-                    .onFocusChange { focused in
-                        withAnimation {
-                            isFocused = focused
+                VStack(alignment: .leading, spacing: 0) {
+                    if let summary = media.play_fullSummary {
+                        Button(action: {
+                            showText(summary)
+                        }, label: {
+                            Text(summary)
+                                .foregroundColor(.white)
+                                .srgFont(.light, size: .subtitle)
+                                .frame(width: geometry.size.width)
+                                .padding([.top, .bottom], 5)
+                                .reportFocusChanges()
+                        })
+                        .onFocusChange { focused in
+                            withAnimation {
+                                isFocused = focused
+                            }
                         }
+                        .buttonStyle(TextButtonStyle(focused: isFocused))
                     }
-                    .buttonStyle(TextButtonStyle(focused: isFocused))
-                }
-                
-                if let availability = MediaDescription.availability(for: media) {
-                    Text(availability)
-                        .srgFont(.light, size: .subheadline)
-                        .foregroundColor(.white)
-                        .padding([.top, .bottom], 5)
+                    
+                    if let availability = MediaDescription.availability(for: media) {
+                        Text(availability)
+                            .srgFont(.light, size: .subheadline)
+                            .foregroundColor(.white)
+                            .padding([.top, .bottom], 5)
+                    }
                 }
             }
         }
