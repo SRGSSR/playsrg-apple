@@ -8,7 +8,7 @@ import TvOSTextViewer
 import SwiftUI
 
 func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = true) {
-    guard let topViewController = UIApplication.shared.windows.first?.topViewController else { return }
+    guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
     
     if !play && media.contentType != .livestream {
         let hostController = UIHostingController(rootView: MediaDetailView(media: media))
@@ -22,7 +22,7 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
 }
 
 func showText(_ text: String, animated: Bool = true) {
-    guard let topViewController = UIApplication.shared.windows.first?.topViewController else { return }
+    guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
     
     let textViewController = TvOSTextViewerViewController()
     textViewController.text = text
