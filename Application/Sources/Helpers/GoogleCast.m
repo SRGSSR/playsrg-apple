@@ -209,18 +209,21 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 {
     GCKCastState castState = [notification.userInfo[kGCKNotificationKeyCastState] integerValue];
     if (castState == GCKCastStateConnected) {
-        SRGLetterboxService *service = SRGLetterboxService.sharedService;
-        SRGLetterboxController *controller = service.controller;
-        
-        // Transfer local playback to Google Cast
-        if (controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
-            [UIApplication.sharedApplication.keyWindow.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
-                if (playerType == PlayerTypeGoogleCast) {
-                    [service disable];
-                    [controller reset];
-                }
-            }];
-        }
+        // Wait a bit so that Google Cast devices view on top disappeared.
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            SRGLetterboxService *service = SRGLetterboxService.sharedService;
+            SRGLetterboxController *controller = service.controller;
+            
+            // Transfer local playback to Google Cast
+            if (controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
+                [UIApplication.sharedApplication.keyWindow.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
+                    if (playerType == PlayerTypeGoogleCast) {
+                        [service disable];
+                        [controller reset];
+                    }
+                }];
+            }
+        });
     }
 }
 
