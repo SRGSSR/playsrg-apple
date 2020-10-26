@@ -117,7 +117,7 @@ extension MediaDetailView {
                             Text(summary)
                                 .foregroundColor(.white)
                                 .srgFont(.light, size: .subtitle)
-                                .frame(width: geometry.size.width)
+                                .frame(width: geometry.size.width, alignment: .leading)
                                 .padding([.top, .bottom], 5)
                                 .reportFocusChanges()
                         })
