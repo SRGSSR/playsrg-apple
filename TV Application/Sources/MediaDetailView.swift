@@ -183,29 +183,31 @@ extension MediaDetailView {
         @Namespace private var namespace
         
         var body: some View {
-            GeometryReader { geometry in
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(MediaDescription.subtitle(for: media))
-                        .srgFont(.bold, size: .title)
-                        .lineLimit(3)
-                        .foregroundColor(.white)
-                        .padding([.top, .bottom], 0)
-                    Text(MediaDescription.title(for: media))
-                        .srgFont(.regular, size: .headline)
-                        .foregroundColor(.white)
-                        .padding([.top, .bottom], 0)
-                    Spacer()
-                        .frame(height: 20)
-                    PropertiesView(media: media)
-                    Spacer()
-                        .frame(height: 20)
-                    SummaryView(media: media)
-                    Spacer()
-                    ActionsView(media: media)
-                        .prefersDefaultFocus(in: namespace)
+            FocusableRegion {
+                GeometryReader { geometry in
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(MediaDescription.subtitle(for: media))
+                            .srgFont(.bold, size: .title)
+                            .lineLimit(3)
+                            .foregroundColor(.white)
+                            .padding([.top, .bottom], 0)
+                        Text(MediaDescription.title(for: media))
+                            .srgFont(.regular, size: .headline)
+                            .foregroundColor(.white)
+                            .padding([.top, .bottom], 0)
+                        Spacer()
+                            .frame(height: 20)
+                        PropertiesView(media: media)
+                        Spacer()
+                            .frame(height: 20)
+                        SummaryView(media: media)
+                        Spacer()
+                        ActionsView(media: media)
+                            .prefersDefaultFocus(in: namespace)
+                    }
+                    .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .leading)
+                    .focusScope(namespace)
                 }
-                .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .topLeading)
-                .focusScope(namespace)
             }
         }
     }

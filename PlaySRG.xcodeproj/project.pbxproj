@@ -1054,6 +1054,11 @@
 		6F9D2745203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
 		6F9D2746203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
 		6F9D2747203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
+		6FA14535254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
+		6FA14536254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
+		6FA14537254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
+		6FA14538254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
+		6FA14539254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
 		6FA5D15D1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */; };
 		6FA5D15E1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */; };
 		6FA5D15F1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */; };
@@ -2136,6 +2141,7 @@
 		6F9897CC2412582400B390A2 /* Layout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Layout.m; sourceTree = "<group>"; };
 		6F9D2741203AD99C00FDE899 /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
 		6F9D2742203AD99C00FDE899 /* Playlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Playlist.m; sourceTree = "<group>"; };
+		6FA14534254729DA006E8D3B /* FocusableRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableRegion.swift; sourceTree = "<group>"; };
 		6FA5D15B1F2077B10059E4E2 /* NSString+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PlaySRG.h"; sourceTree = "<group>"; };
 		6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PlaySRG.m"; sourceTree = "<group>"; };
 		6FA6C0612458064C00518DE6 /* SRGProgramComposition+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGProgramComposition+PlaySRG.h"; sourceTree = "<group>"; };
@@ -3381,6 +3387,7 @@
 				6F79E0A92541647400A28E79 /* Colors.swift */,
 				6F4F78AE252AF7670011DBCA /* DurationLabel.swift */,
 				6FFF1631250A20EF0053CDA6 /* FocusDetector.swift */,
+				6FA14534254729DA006E8D3B /* FocusableRegion.swift */,
 				6F82430B250637BE00E931A0 /* Fonts.swift */,
 				6F4BCBE024EFF7C3001ABA17 /* Formatters.swift */,
 				08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */,
@@ -7253,6 +7260,7 @@
 				6FC413D424EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3224E452F800B1A56E /* HomeModel.swift in Sources */,
 				6FFF1632250A20EF0053CDA6 /* FocusDetector.swift in Sources */,
+				6FA14535254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				6FC413D324EEEDC900FDF806 /* TopicSection.m in Sources */,
 				6FC413F724EF0DEA00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F82430C250637BE00E931A0 /* Fonts.swift in Sources */,
@@ -7306,6 +7314,7 @@
 				6FC413DC24EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3324E452F800B1A56E /* HomeModel.swift in Sources */,
 				6FFF1633250A20EF0053CDA6 /* FocusDetector.swift in Sources */,
+				6FA14536254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				6FC413DB24EEEDC900FDF806 /* TopicSection.m in Sources */,
 				6FC413F824EF0DEB00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F82430D250637BE00E931A0 /* Fonts.swift in Sources */,
@@ -7359,6 +7368,7 @@
 				6FC413E424EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3424E452F800B1A56E /* HomeModel.swift in Sources */,
 				6FFF1634250A20EF0053CDA6 /* FocusDetector.swift in Sources */,
+				6FA14537254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				6FC413E324EEEDCA00FDF806 /* TopicSection.m in Sources */,
 				6FC413F924EF0DEC00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F82430E250637BE00E931A0 /* Fonts.swift in Sources */,
@@ -7412,6 +7422,7 @@
 				6FC413EC24EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3524E452F800B1A56E /* HomeModel.swift in Sources */,
 				6FFF1635250A20EF0053CDA6 /* FocusDetector.swift in Sources */,
+				6FA14538254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				6FC413EB24EEEDCA00FDF806 /* TopicSection.m in Sources */,
 				6FC413FA24EF0DED00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F82430F250637BE00E931A0 /* Fonts.swift in Sources */,
@@ -7465,6 +7476,7 @@
 				6FC413F424EEEDCB00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3624E452F800B1A56E /* HomeModel.swift in Sources */,
 				6FFF1636250A20EF0053CDA6 /* FocusDetector.swift in Sources */,
+				6FA14539254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				6FC413F324EEEDCB00FDF806 /* TopicSection.m in Sources */,
 				6FC413FB24EF0DEE00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F824310250637BE00E931A0 /* Fonts.swift in Sources */,
