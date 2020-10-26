@@ -152,6 +152,17 @@
     [self didDisplayViewController:initialViewController animated:NO];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        // Force a refresh of the tab bar so that the alignment is correct after rotation
+        self.tabBar.alignment = MDCTabBarAlignmentLeading;
+        self.tabBar.alignment = MDCTabBarAlignmentCenter;
+    } completion:nil];
+}
+
 #pragma mark Rotation
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
