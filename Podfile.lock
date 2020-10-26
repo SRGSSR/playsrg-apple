@@ -138,9 +138,6 @@ PODS:
   - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.11)
   - Protobuf (3.13.0)
-  - SwiftMessages (8.0.2):
-    - SwiftMessages/App (= 8.0.2)
-  - SwiftMessages/App (8.0.2)
 
 DEPENDENCIES:
   - AppCenter
@@ -155,7 +152,6 @@ DEPENDENCIES:
   - InAppSettingsKit
   - MaterialComponents/Tabs
   - MGSwipeTableCell
-  - SwiftMessages
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -183,7 +179,6 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
-    - SwiftMessages
 
 EXTERNAL SOURCES:
   DZNEmptyDataSet:
@@ -221,8 +216,7 @@ SPEC CHECKSUMS:
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
-  SwiftMessages: 633304165351b8e3dcbb81a71f8efcd86f9c1669
 
-PODFILE CHECKSUM: f77e7e1e9e22fc995a7bc3ae876c44bf6444ae65
+PODFILE CHECKSUM: 3e3c433cd6e648a98dbce6ff2f1ef52abe27fae7
 
 COCOAPODS: 1.9.3

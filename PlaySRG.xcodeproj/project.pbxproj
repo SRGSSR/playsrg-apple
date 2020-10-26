@@ -52,6 +52,11 @@
 		081220C31DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
 		081220C41DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
 		081220C51DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
+		081454BB2546CDD500BB7CA6 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081454BA2546CDD500BB7CA6 /* SwiftMessages */; };
+		081455142546CE4300BB7CA6 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455132546CE4300BB7CA6 /* SwiftMessages */; };
+		081455162546CE4F00BB7CA6 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455152546CE4F00BB7CA6 /* SwiftMessages */; };
+		081455182546CE5700BB7CA6 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455172546CE5700BB7CA6 /* SwiftMessages */; };
+		0814551A2546CE5F00BB7CA6 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455192546CE5F00BB7CA6 /* SwiftMessages */; };
 		081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
 		081DAA211E099DAE00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
 		081DAA221E099DAF00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
@@ -2297,6 +2302,7 @@
 			files = (
 				6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */,
 				6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */,
+				081454BB2546CDD500BB7CA6 /* SwiftMessages in Frameworks */,
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
@@ -2311,6 +2317,7 @@
 			files = (
 				6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */,
 				6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */,
+				081455142546CE4300BB7CA6 /* SwiftMessages in Frameworks */,
 				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
@@ -2325,6 +2332,7 @@
 			files = (
 				6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */,
 				6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */,
+				081455162546CE4F00BB7CA6 /* SwiftMessages in Frameworks */,
 				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
@@ -2339,6 +2347,7 @@
 			files = (
 				6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */,
 				6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */,
+				081455182546CE5700BB7CA6 /* SwiftMessages in Frameworks */,
 				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
@@ -2353,6 +2362,7 @@
 			files = (
 				6FD4096225221A3500E621EF /* AirshipCore in Frameworks */,
 				6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */,
+				0814551A2546CE5F00BB7CA6 /* SwiftMessages in Frameworks */,
 				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
@@ -3815,6 +3825,7 @@
 				6F2546C02521CFD400F9F4FE /* SRGAnalyticsIdentity */,
 				6FD4095925221A1000E621EF /* AirshipCore */,
 				6FD40A4725221C2D00E621EF /* PaperOnboarding */,
+				081454BA2546CDD500BB7CA6 /* SwiftMessages */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -3854,6 +3865,7 @@
 				6F2546C22521CFDC00F9F4FE /* SRGAnalyticsIdentity */,
 				6FD4095B25221A1A00E621EF /* AirshipCore */,
 				6FD40A5D25221C3A00E621EF /* PaperOnboarding */,
+				081455132546CE4300BB7CA6 /* SwiftMessages */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -3893,6 +3905,7 @@
 				6F2546C42521CFEA00F9F4FE /* SRGAnalyticsIdentity */,
 				6FD4095D25221A2300E621EF /* AirshipCore */,
 				6FD40A7325221C4300E621EF /* PaperOnboarding */,
+				081455152546CE4F00BB7CA6 /* SwiftMessages */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -3932,6 +3945,7 @@
 				6F2546C62521CFF000F9F4FE /* SRGAnalyticsIdentity */,
 				6FD4095F25221A2B00E621EF /* AirshipCore */,
 				6FD40A7525221C4900E621EF /* PaperOnboarding */,
+				081455172546CE5700BB7CA6 /* SwiftMessages */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -3971,6 +3985,7 @@
 				6F2546C82521CFFA00F9F4FE /* SRGAnalyticsIdentity */,
 				6FD4096125221A3500E621EF /* AirshipCore */,
 				6FD40A8B25221C4F00E621EF /* PaperOnboarding */,
+				081455192546CE5F00BB7CA6 /* SwiftMessages */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -4411,6 +4426,7 @@
 				6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */,
 				6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */,
 				6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */,
+				081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -11760,6 +11776,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.3;
+			};
+		};
 		6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
@@ -11835,6 +11859,31 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		081454BA2546CDD500BB7CA6 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
+		};
+		081455132546CE4300BB7CA6 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
+		};
+		081455152546CE4F00BB7CA6 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
+		};
+		081455172546CE5700BB7CA6 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
+		};
+		081455192546CE5F00BB7CA6 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
+		};
 		6F2544F42521BAA400F9F4FE /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;

@@ -818,26 +818,6 @@ name: Protobuf, nameSpecified:
 body: Copyright 2008 Googl…
 version: 3.13.0
 
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 8.0.2
-
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 8.0.2
-
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 8.0.2
-
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 8.0.2
-
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 8.0.2
-
 name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 
 
 name: ComScore-xcframework-apple, nameSpecified: ComScore, owner: SRGSSR, version: 6.6.0
@@ -879,6 +859,8 @@ name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, versio
 name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.0
 
 name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.0.0
+
+name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 8.0.3
 
 name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg3
 
