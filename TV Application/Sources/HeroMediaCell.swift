@@ -33,7 +33,6 @@ struct HeroMediaCell: View {
                 .redacted(reason: redactionReason)
             }
             .buttonStyle(CardButtonStyle())
-            .animation(nil)
         }
     }
 }

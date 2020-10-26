@@ -40,7 +40,6 @@ struct TopicCell: View {
                 .redacted(reason: redactionReason)
             }
             .buttonStyle(CardButtonStyle())
-            .animation(nil)
         }
     }
 }

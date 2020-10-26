@@ -17,34 +17,42 @@ struct ImageView: View {
     }
     
     var body: some View {
-        ZStack {
-            if let url = url {
-                FetchView(url: url, contentMode: contentMode)
-            }
+        if let url = url {
+            FetchView(url: url, contentMode: contentMode)
         }
-        .animation(.default)
     }
 }
 
 extension ImageView {
     private struct FetchView: View {
-        @ObservedObject var image: FetchImage
         let contentMode: ContentMode
         
+        @ObservedObject var fetchImage: FetchImage
+        
+        // Use separate state so that we can track image loading and only animate such changes. Since FetchImage
+        // immediately fetches the image the state is initially set to true.
+        @State var isLoading: Bool = true
+        
         init(url: URL, contentMode: ContentMode) {
-            image = FetchImage(url: url)
+            fetchImage = FetchImage(url: url)
             self.contentMode = contentMode
         }
-
+        
         public var body: some View {
             GeometryReader { geometry in
-                image.view?
+                fetchImage.view?
                     .resizable()
                     .aspectRatio(contentMode: contentMode)
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .clipped()
-                    .onAppear(perform: image.fetch)
-                    .onDisappear(perform: image.cancel)
+                    .onReceive(fetchImage.$isLoading) { loading in
+                        withAnimation {
+                            isLoading = loading
+                        }
+                    }
+                    .onAppear(perform: fetchImage.fetch)
+                    .onDisappear(perform: fetchImage.cancel)
+                    .opacity(isLoading ? 0 : 1)
             }
         }
     }

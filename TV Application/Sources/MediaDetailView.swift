@@ -255,7 +255,6 @@ extension MediaDetailView {
                         .fill(Color.clear)
                 }
             }
-            .animation(.default)
         }
     }
 }
