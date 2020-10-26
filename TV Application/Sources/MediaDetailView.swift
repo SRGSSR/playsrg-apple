@@ -66,6 +66,11 @@ extension MediaDetailView {
                     Image(uiImage: youthProtectionLogoImage)
                 }
                 DurationLabel(media: media)
+                if let isWebFirst = media.play_isWebFirst, isWebFirst {
+                    Spacer()
+                        .frame(width: 25)
+                    Badge(text: NSLocalizedString("Web first", comment: "Web first label on media detail page"), color: Color(.srg_blue))
+                }
                 if let subtitleLanguages = media.play_subtitleLanguages, subtitleLanguages.count != 0 {
                     Spacer()
                         .frame(width: 25)

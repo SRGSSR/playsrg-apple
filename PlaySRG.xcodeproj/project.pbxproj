@@ -57,11 +57,11 @@
 		081220C31DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
 		081220C41DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
 		081220C51DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
-		081454BB2546CDD500BB7CA6 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081454BA2546CDD500BB7CA6 /* SwiftMessages */; };
-		081455142546CE4300BB7CA6 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455132546CE4300BB7CA6 /* SwiftMessages */; };
-		081455162546CE4F00BB7CA6 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455152546CE4F00BB7CA6 /* SwiftMessages */; };
-		081455182546CE5700BB7CA6 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455172546CE5700BB7CA6 /* SwiftMessages */; };
-		0814551A2546CE5F00BB7CA6 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455192546CE5F00BB7CA6 /* SwiftMessages */; };
+		081456312547740600BB7CA6 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081456302547740600BB7CA6 /* Badge.swift */; };
+		081456322547740600BB7CA6 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081456302547740600BB7CA6 /* Badge.swift */; };
+		081456332547740600BB7CA6 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081456302547740600BB7CA6 /* Badge.swift */; };
+		081456342547740600BB7CA6 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081456302547740600BB7CA6 /* Badge.swift */; };
+		081456352547740600BB7CA6 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081456302547740600BB7CA6 /* Badge.swift */; };
 		081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
 		081DAA211E099DAE00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
 		081DAA221E099DAF00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
@@ -1702,6 +1702,7 @@
 		081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadTableViewCell.xib; sourceTree = "<group>"; };
 		081220BF1DD0ADAC00BF8326 /* DownloadSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadSession.h; sourceTree = "<group>"; };
 		081220C01DD0ADAC00BF8326 /* DownloadSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadSession.m; sourceTree = "<group>"; };
+		081456302547740600BB7CA6 /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS.xcconfig"; sourceTree = "<group>"; };
 		0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play tvOS.xcconfig"; sourceTree = "<group>"; };
 		081DAA1C1E099A3A00018623 /* DownloadFooterSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFooterSectionView.h; sourceTree = "<group>"; };
@@ -3375,6 +3376,7 @@
 				6F331CE624D06B8200C096AB /* AppDelegate.swift */,
 				6F1D31B224E5369A005C778B /* ApplicationConfiguration.swift */,
 				6F331CE824D06B8200C096AB /* AudiosView.swift */,
+				081456302547740600BB7CA6 /* Badge.swift */,
 				6FF60CC824F2FA8D006013C2 /* CollectionView.swift */,
 				6F79E0A92541647400A28E79 /* Colors.swift */,
 				6F4F78AE252AF7670011DBCA /* DurationLabel.swift */,
@@ -7226,6 +7228,7 @@
 				086499B224F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AA2541647400A28E79 /* Colors.swift in Sources */,
 				6FC413D524EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */,
+				081456312547740600BB7CA6 /* Badge.swift in Sources */,
 				6F026EED250134FD00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED544252B00B000ECE97B /* LabeledButton.swift in Sources */,
@@ -7278,6 +7281,7 @@
 				086499B324F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AB2541647400A28E79 /* Colors.swift in Sources */,
 				6FC413DD24EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */,
+				081456322547740600BB7CA6 /* Badge.swift in Sources */,
 				6F026EEE250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED545252B00B000ECE97B /* LabeledButton.swift in Sources */,
@@ -7330,6 +7334,7 @@
 				086499B424F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AC2541647400A28E79 /* Colors.swift in Sources */,
 				6FC413E524EEEDCA00FDF806 /* ApplicationConfiguration.m in Sources */,
+				081456332547740600BB7CA6 /* Badge.swift in Sources */,
 				6F026EEF250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				080570402540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED546252B00B000ECE97B /* LabeledButton.swift in Sources */,
@@ -7382,6 +7387,7 @@
 				086499B524F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AD2541647400A28E79 /* Colors.swift in Sources */,
 				6FC413ED24EEEDCA00FDF806 /* ApplicationConfiguration.m in Sources */,
+				081456342547740600BB7CA6 /* Badge.swift in Sources */,
 				6F026EF0250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				080570412540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED547252B00B000ECE97B /* LabeledButton.swift in Sources */,
@@ -7434,6 +7440,7 @@
 				086499B624F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AE2541647400A28E79 /* Colors.swift in Sources */,
 				6FC413F524EEEDCB00FDF806 /* ApplicationConfiguration.m in Sources */,
+				081456352547740600BB7CA6 /* Badge.swift in Sources */,
 				6F026EF1250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				080570422540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED548252B00B000ECE97B /* LabeledButton.swift in Sources */,
