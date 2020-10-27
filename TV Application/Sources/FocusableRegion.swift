@@ -6,42 +6,36 @@
 
 import SwiftUI
 
-struct FocusableRegion<Content: View>: UIViewRepresentable {
-    class Coordinator {
-        fileprivate var hostController: UIHostingController<Content>?
-    }
-    
+/**
+ *  A region which can capture the focus, no matter the focus comes from.
+ */
+struct FocusableRegion<Content: View>: UIViewControllerRepresentable {
     private let content: () -> Content
     
     init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
     }
     
-    func makeCoordinator() -> Coordinator {
-        return Coordinator()
-    }
-    
-    func makeUIView(context: Context) -> UIView {
+    func makeUIViewController(context: Context) -> UIHostingController<Content> {
         let hostController = UIHostingController(rootView: content(), ignoreSafeArea: true)
-        context.coordinator.hostController = hostController
         
-        let hostView = hostController.view!
+        if let hostView = hostController.view {
+            let focusGuide = UIFocusGuide()
+            focusGuide.preferredFocusEnvironments = [hostView]
+            hostView.addLayoutGuide(focusGuide)
+            
+            NSLayoutConstraint.activate([
+                focusGuide.topAnchor.constraint(equalTo: hostView.topAnchor),
+                focusGuide.bottomAnchor.constraint(equalTo: hostView.bottomAnchor),
+                focusGuide.leadingAnchor.constraint(equalTo: hostView.leadingAnchor),
+                focusGuide.trailingAnchor.constraint(equalTo: hostView.trailingAnchor)
+            ])
+        }
         
-        let focusGuide = UIFocusGuide()
-        focusGuide.preferredFocusEnvironments = [hostView]
-        hostView.addLayoutGuide(focusGuide)
-        
-        NSLayoutConstraint.activate([
-            focusGuide.topAnchor.constraint(equalTo: hostView.topAnchor),
-            focusGuide.bottomAnchor.constraint(equalTo: hostView.bottomAnchor),
-            focusGuide.leadingAnchor.constraint(equalTo: hostView.leadingAnchor),
-            focusGuide.trailingAnchor.constraint(equalTo: hostView.trailingAnchor)
-        ])
-        
-        return hostView
+        return hostController
     }
     
-    func updateUIView(_ uiView: UIView, context: Context) {
-        context.coordinator.hostController?.rootView = content()
+    func updateUIViewController(_ uiViewController: UIHostingController<Content>, context: Context) {
+        uiViewController.rootView = content()
     }
 }
