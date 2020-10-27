@@ -151,27 +151,19 @@ extension MediaDetailView {
         let media: SRGMedia
         
         var body: some View {
-            HStack(spacing: 10) {
+            HStack(spacing: 30) {
                 LabeledButton(icon: "play-50", label: NSLocalizedString("Play", comment: "Play button label")) {
                     navigateToMedia(media, play: true)
                 }
-                .frame(width: 200)
-                
                 LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Watch later", comment: "Watch later button label")) {
                     /* Toggle Watch Later state */
                 }
-                .frame(width: 200)
-                
                 if media.show != nil {
                     LabeledButton(icon: "episodes-22", label: NSLocalizedString("Episodes", comment:"Episodes button label")) {
                         /* Open show page */
                     }
-                    .frame(width: 200)
                 }
-                
-                Spacer()
             }
-            .frame(height: 80)
         }
     }
 }
