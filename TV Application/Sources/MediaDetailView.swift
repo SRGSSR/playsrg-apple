@@ -194,9 +194,9 @@ extension MediaDetailView {
                 LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Watch later", comment: "Watch later button label")) {
                     /* Toggle Watch Later state */
                 }
-                if media.show != nil {
+                if let show = media.show {
                     LabeledButton(icon: "episodes-22", label: NSLocalizedString("Episodes", comment:"Episodes button label")) {
-                        /* Open show page */
+                        navigateToShow(show)
                     }
                 }
             }
