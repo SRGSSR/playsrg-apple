@@ -63,3 +63,21 @@ extension MediaCell {
         }
     }
 }
+
+struct MediaCell_Previews: PreviewProvider {
+    
+    static var mediaPreview: SRGMedia {
+        let asset = NSDataAsset(name: "media-rts-tv")!
+        let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
+        
+        return try! MTLJSONAdapter(modelClass: SRGMedia.self)?.model(fromJSONDictionary: jsonData) as! SRGMedia
+    }
+    
+    static var previews: some View {
+        Group {
+            MediaCell(media: mediaPreview)
+                .previewLayout(.fixed(width: 375, height: 211))
+                .previewDisplayName("RTS media")
+        }
+    }
+}
