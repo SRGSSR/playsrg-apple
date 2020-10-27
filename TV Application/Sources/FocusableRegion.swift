@@ -22,36 +22,23 @@ struct FocusableRegion<Content: View>: UIViewRepresentable {
     }
     
     func makeUIView(context: Context) -> UIView {
-        let view = UIView()
-        
-        let focusGuide = UIFocusGuide()
-        view.addLayoutGuide(focusGuide)
-        
-        NSLayoutConstraint.activate([
-            focusGuide.topAnchor.constraint(equalTo: view.topAnchor),
-            focusGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            focusGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            focusGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-        
         let hostController = UIHostingController(rootView: content(), ignoreSafeArea: true)
         context.coordinator.hostController = hostController
         
-        if let hostView = hostController.view {
-            hostView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(hostView)
-            
-            NSLayoutConstraint.activate([
-                hostView.topAnchor.constraint(equalTo: view.topAnchor),
-                hostView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                hostView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                hostView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ])
-            
-            focusGuide.preferredFocusEnvironments = [hostView]
-        }
+        let hostView = hostController.view!
         
-        return view
+        let focusGuide = UIFocusGuide()
+        focusGuide.preferredFocusEnvironments = [hostView]
+        hostView.addLayoutGuide(focusGuide)
+        
+        NSLayoutConstraint.activate([
+            focusGuide.topAnchor.constraint(equalTo: hostView.topAnchor),
+            focusGuide.bottomAnchor.constraint(equalTo: hostView.bottomAnchor),
+            focusGuide.leadingAnchor.constraint(equalTo: hostView.leadingAnchor),
+            focusGuide.trailingAnchor.constraint(equalTo: hostView.trailingAnchor)
+        ])
+        
+        return hostView
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
