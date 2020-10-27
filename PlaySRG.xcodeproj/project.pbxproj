@@ -147,6 +147,11 @@
 		0841E70822F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */; };
 		0841E70922F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */; };
 		0841E70A22F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */; };
+		084F0968254861A0009DEDD2 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081454BA2546CDD500BB7CA6 /* SwiftMessages */; };
+		084F0969254861A0009DEDD2 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455132546CE4300BB7CA6 /* SwiftMessages */; };
+		084F096A254861A0009DEDD2 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455152546CE4F00BB7CA6 /* SwiftMessages */; };
+		084F096B254861A0009DEDD2 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455172546CE5700BB7CA6 /* SwiftMessages */; };
+		084F096C254861A0009DEDD2 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455192546CE5F00BB7CA6 /* SwiftMessages */; };
 		084F94B022D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */; };
 		084F94B122D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */; };
 		084F94B222D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */; };
@@ -1299,15 +1304,10 @@
 		6FD88F8C22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */; };
 		6FD88F8D22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */; };
 		6FD88F8E22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */; };
-		6FDB2AA524E590EE00FF286E /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AA424E590EE00FF286E /* Nuke */; };
 		6FDB2AA724E590EE00FF286E /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AA624E590EE00FF286E /* FetchImage */; };
-		6FDB2AA924E590F400FF286E /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AA824E590F400FF286E /* Nuke */; };
 		6FDB2AAB24E590F400FF286E /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AAA24E590F400FF286E /* FetchImage */; };
-		6FDB2AAD24E590FC00FF286E /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AAC24E590FC00FF286E /* Nuke */; };
 		6FDB2AAF24E590FC00FF286E /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AAE24E590FC00FF286E /* FetchImage */; };
-		6FDB2AB124E5910400FF286E /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AB024E5910400FF286E /* Nuke */; };
 		6FDB2AB324E5910400FF286E /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AB224E5910400FF286E /* FetchImage */; };
-		6FDB2AB524E5910B00FF286E /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AB424E5910B00FF286E /* Nuke */; };
 		6FDB2AB724E5910B00FF286E /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AB624E5910B00FF286E /* FetchImage */; };
 		6FDB2ABA24E5916F00FF286E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AB824E5916F00FF286E /* ImageView.swift */; };
 		6FDB2ABB24E5916F00FF286E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AB824E5916F00FF286E /* ImageView.swift */; };
@@ -2357,7 +2357,7 @@
 			files = (
 				6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */,
 				6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */,
-				081454BB2546CDD500BB7CA6 /* SwiftMessages in Frameworks */,
+				084F0968254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
@@ -2372,7 +2372,7 @@
 			files = (
 				6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */,
 				6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */,
-				081455142546CE4300BB7CA6 /* SwiftMessages in Frameworks */,
+				084F0969254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
@@ -2387,7 +2387,7 @@
 			files = (
 				6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */,
 				6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */,
-				081455162546CE4F00BB7CA6 /* SwiftMessages in Frameworks */,
+				084F096A254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
@@ -2402,7 +2402,7 @@
 			files = (
 				6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */,
 				6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */,
-				081455182546CE5700BB7CA6 /* SwiftMessages in Frameworks */,
+				084F096B254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
@@ -2417,7 +2417,7 @@
 			files = (
 				6FD4096225221A3500E621EF /* AirshipCore in Frameworks */,
 				6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */,
-				0814551A2546CE5F00BB7CA6 /* SwiftMessages in Frameworks */,
+				084F096C254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
@@ -2470,7 +2470,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FDB2AA524E590EE00FF286E /* Nuke in Frameworks */,
 				6FA84A1A24E44B6400B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AA724E590EE00FF286E /* FetchImage in Frameworks */,
@@ -2482,7 +2481,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FDB2AA924E590F400FF286E /* Nuke in Frameworks */,
 				6FA84A1E24E44B6D00B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAB24E590F400FF286E /* FetchImage in Frameworks */,
@@ -2494,7 +2492,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FDB2AAD24E590FC00FF286E /* Nuke in Frameworks */,
 				6FA84A2224E44B7500B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAF24E590FC00FF286E /* FetchImage in Frameworks */,
@@ -2506,7 +2503,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FDB2AB124E5910400FF286E /* Nuke in Frameworks */,
 				6FA84A2624E44B7B00B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB324E5910400FF286E /* FetchImage in Frameworks */,
@@ -2518,7 +2514,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FDB2AB524E5910B00FF286E /* Nuke in Frameworks */,
 				6FA84A2A24E44B8300B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB724E5910B00FF286E /* FetchImage in Frameworks */,
@@ -4170,7 +4165,6 @@
 			packageProductDependencies = (
 				6FA84A1724E44B6400B1A56E /* SRGLetterbox */,
 				6FA84A1924E44B6400B1A56E /* SRGDataProviderCombine */,
-				6FDB2AA424E590EE00FF286E /* Nuke */,
 				6FDB2AA624E590EE00FF286E /* FetchImage */,
 			);
 			productName = "Play SRF TV";
@@ -4196,7 +4190,6 @@
 			packageProductDependencies = (
 				6FA84A1B24E44B6D00B1A56E /* SRGLetterbox */,
 				6FA84A1D24E44B6D00B1A56E /* SRGDataProviderCombine */,
-				6FDB2AA824E590F400FF286E /* Nuke */,
 				6FDB2AAA24E590F400FF286E /* FetchImage */,
 			);
 			productName = "Play RTS TV";
@@ -4222,7 +4215,6 @@
 			packageProductDependencies = (
 				6FA84A1F24E44B7500B1A56E /* SRGLetterbox */,
 				6FA84A2124E44B7500B1A56E /* SRGDataProviderCombine */,
-				6FDB2AAC24E590FC00FF286E /* Nuke */,
 				6FDB2AAE24E590FC00FF286E /* FetchImage */,
 			);
 			productName = "Play RSI TV";
@@ -4248,7 +4240,6 @@
 			packageProductDependencies = (
 				6FA84A2324E44B7B00B1A56E /* SRGLetterbox */,
 				6FA84A2524E44B7B00B1A56E /* SRGDataProviderCombine */,
-				6FDB2AB024E5910400FF286E /* Nuke */,
 				6FDB2AB224E5910400FF286E /* FetchImage */,
 			);
 			productName = "Play RTR TV";
@@ -4274,7 +4265,6 @@
 			packageProductDependencies = (
 				6FA84A2724E44B8300B1A56E /* SRGLetterbox */,
 				6FA84A2924E44B8300B1A56E /* SRGDataProviderCombine */,
-				6FDB2AB424E5910B00FF286E /* Nuke */,
 				6FDB2AB624E5910B00FF286E /* FetchImage */,
 			);
 			productName = "Play SWI TV";
@@ -4484,7 +4474,6 @@
 			packageReferences = (
 				6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */,
 				6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */,
-				6FDB2AA224E590BE00FF286E /* XCRemoteSwiftPackageReference "Nuke" */,
 				6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */,
 				6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */,
 				6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */,
@@ -11947,14 +11936,6 @@
 				minimumVersion = 6.1.5;
 			};
 		};
-		6FDB2AA224E590BE00FF286E /* XCRemoteSwiftPackageReference "Nuke" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kean/Nuke.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.1.1;
-			};
-		};
 		6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/FetchImage.git";
@@ -12224,50 +12205,25 @@
 			package = 6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */;
 			productName = PaperOnboarding;
 		};
-		6FDB2AA424E590EE00FF286E /* Nuke */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA224E590BE00FF286E /* XCRemoteSwiftPackageReference "Nuke" */;
-			productName = Nuke;
-		};
 		6FDB2AA624E590EE00FF286E /* FetchImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
 			productName = FetchImage;
-		};
-		6FDB2AA824E590F400FF286E /* Nuke */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA224E590BE00FF286E /* XCRemoteSwiftPackageReference "Nuke" */;
-			productName = Nuke;
 		};
 		6FDB2AAA24E590F400FF286E /* FetchImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
 			productName = FetchImage;
 		};
-		6FDB2AAC24E590FC00FF286E /* Nuke */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA224E590BE00FF286E /* XCRemoteSwiftPackageReference "Nuke" */;
-			productName = Nuke;
-		};
 		6FDB2AAE24E590FC00FF286E /* FetchImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
 			productName = FetchImage;
 		};
-		6FDB2AB024E5910400FF286E /* Nuke */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA224E590BE00FF286E /* XCRemoteSwiftPackageReference "Nuke" */;
-			productName = Nuke;
-		};
 		6FDB2AB224E5910400FF286E /* FetchImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
 			productName = FetchImage;
-		};
-		6FDB2AB424E5910B00FF286E /* Nuke */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA224E590BE00FF286E /* XCRemoteSwiftPackageReference "Nuke" */;
-			productName = Nuke;
 		};
 		6FDB2AB624E5910B00FF286E /* FetchImage */ = {
 			isa = XCSwiftPackageProductDependency;
