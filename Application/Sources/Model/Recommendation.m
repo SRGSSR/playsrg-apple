@@ -6,7 +6,7 @@
 
 #import "Recommendation.h"
 
-#import <libextobjc/libextobjc.h>
+@import libextobjc;
 
 @interface Recommendation ()
 

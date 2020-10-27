@@ -23,18 +23,31 @@
 #import "UIWindow+PlaySRG.h"
 #import "WebViewController.h"
 
-#import <AppCenterDistribute/AppCenterDistribute.h>
-#import <FLEX/FLEX.h>
 #import <InAppSettingsKit/IASKSettingsReader.h>
-#import <libextobjc/libextobjc.h>
-#import <SafariServices/SafariServices.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGUserData/SRGUserData.h>
-#import <SRGIdentity/SRGIdentity.h>
-#import <SRGLetterbox/SRGLetterbox.h>
-#import <YYWebImage/YYWebImage.h>
 
-// Public settings
+@import AppCenterDistribute;
+@import FLEX;
+@import libextobjc;
+@import SafariServices;
+@import SRGAppearance;
+@import SRGDataProviderNetwork;
+@import SRGUserData;
+@import SRGIdentity;
+@import SRGLetterbox;
+@import YYWebImage;
+
+// Autoplay group
+static NSString * const SettingsAutoplayGroup = @"Group_Autoplay";
+
+// Display group
+static NSString * const SettingsDisplayGroup = @"Group_Display";
+
+// Permissions group
+static NSString * const SettingsPermissionsGroup = @"Group_Permissions";
+static NSString * const SettingsSystemSettingsButton = @"Button_SystemSettings";
+
+// Information group
+static NSString * const SettingsInformationGroup = @"Group_Information";
 static NSString * const SettingsFeaturesButton = @"Button_Features";
 static NSString * const SettingsWhatsNewButton = @"Button_WhatsNew";
 static NSString * const SettingsTermsAndConditionsButton = @"Button_TermsAndConditions";
@@ -46,22 +59,12 @@ static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
 static NSString * const SettingsTvBetaTestingButton = @"Button_TvBetaTesting";
 static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersion";
 
-// Autoplay group
-static NSString * const SettingsAutoplayGroup = @"Group_Autoplay";
-
-// Display group
-static NSString * const SettingsDisplayGroup = @"Group_Display";
-
-// Information group
-static NSString * const SettingsInformationGroup = @"Group_Information";
-
 // Advanced features settings group
 static NSString * const SettingsAdvancedFeaturesGroup = @"Group_AdvancedFeatures";
 static NSString * const SettingsServerSettingsButton = @"Button_ServerSettings";
 static NSString * const SettingsUserLocationSettingsButton = @"Button_UserLocationSettings";
-static NSString * const SettingsSubscribeToAllShowsButton = @"Button_SubscribeToAllShows";
-static NSString * const SettingsSystemSettingsButton = @"Button_SystemSettings";
 static NSString * const SettingsVersionsAndReleaseNotes = @"Button_VersionsAndReleaseNotes";
+static NSString * const SettingsSubscribeToAllShowsButton = @"Button_SubscribeToAllShows";
 
 // Reset group
 static NSString * const SettingsResetGroup = @"Group_Reset";
@@ -142,7 +145,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:PlaySRGSettingStandaloneEnabled];
     [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
-    [hiddenKeys addObject:SettingsSystemSettingsButton];
     [hiddenKeys addObject:SettingsResetGroup];
     [hiddenKeys addObject:SettingsClearWebCacheButton];
     [hiddenKeys addObject:SettingsClearVectorImageCacheButton];
@@ -257,7 +259,11 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
 - (void)settingsViewController:(IASKAppSettingsViewController *)settingsViewController buttonTappedForSpecifier:(IASKSpecifier *)specifier
 {
-    if ([specifier.key isEqualToString:SettingsWhatsNewButton]) {
+    if ([specifier.key isEqualToString:SettingsSystemSettingsButton]) {
+        NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        [UIApplication.sharedApplication openURL:URL options:@{} completionHandler:nil];
+    }
+    else if ([specifier.key isEqualToString:SettingsWhatsNewButton]) {
         [self loadWhatsNewWithCompletionHandler:^(UIViewController * _Nullable viewController, NSError * _Nullable error) {
             if (error) {
                 [Banner showError:error inViewController:self];
@@ -417,10 +423,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             [self.requestQueue addRequest:radioRequest resume:YES];
         }
     }
-    else if ([specifier.key isEqualToString:SettingsSystemSettingsButton]) {
-        NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        [UIApplication.sharedApplication openURL:URL options:@{} completionHandler:nil];
-    }
     else if ([specifier.key isEqualToString:SettingsClearWebCacheButton]) {
         [self clearWebCache];
     }
@@ -448,7 +450,17 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             NSString *dateString = synchronizationDate ? [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:synchronizationDate] : NSLocalizedString(@"Never", @"Text displayed when no data synchronization has been made yet");
             return [NSString stringWithFormat:NSLocalizedString(@"Last synchronization: %@", @"Introductory text for the most recent data synchronization date"), dateString];
         }
-        return nil;
+        else {
+            return nil;
+        }
+    }
+    else if ([key isEqualToString:SettingsPermissionsGroup]) {
+        if (@available(iOS 14, *)) {
+            return NSLocalizedString(@"Local network access must be allowed for Google Cast receiver discovery.", @"Setting footer message for system permission group. New rule for iOS 14 and more.");
+        }
+        else {
+            return nil;
+        }
     }
     else {
         return nil;

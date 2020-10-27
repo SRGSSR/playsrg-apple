@@ -8,7 +8,8 @@
 #import "DataViewController.h"
 
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
-#import <SRGAnalytics/SRGAnalytics.h>
+
+@import SRGAnalytics;
 
 NS_ASSUME_NONNULL_BEGIN
 

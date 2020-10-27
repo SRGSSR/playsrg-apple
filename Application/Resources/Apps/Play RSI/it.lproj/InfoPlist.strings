@@ -3,3 +3,4 @@
 "History" = "Cronologia";
 "Search" = "Ricerca";
 "NSMicrophoneUsageDescription" = "L'applicazione utilizza il microfono per rilevare il ricevitore Google Cast.";
+"NSLocalNetworkUsageDescription" = "Questa app usa la rete locale per identificare un ricevitore Google Cast.";

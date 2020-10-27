@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSection.h"
 #import "History.h"
 #import "HistoryTableViewCell.h"
 #import "Layout.h"
@@ -18,9 +19,9 @@
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGUserData/SRGUserData.h>
+@import libextobjc;
+@import SRGAnalytics;
+@import SRGUserData;
 
 @interface HistoryViewController () <HistoryTableViewCellDelegate>
 

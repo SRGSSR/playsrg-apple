@@ -21,9 +21,9 @@
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGUserData/SRGUserData.h>
+@import SRGAnalytics;
+@import SRGAppearance;
+@import SRGUserData;
 
 @interface HomeMediaCollectionViewCell ()
 

@@ -1,4 +1,4 @@
-.DS_Store
+	.DS_Store
 
 *.xccheckout
 *.xcscmblueprint
@@ -10,16 +10,14 @@ xcuserdata
 /Configuration
 
 /Carthage
-/Cartfile.private
-/Cartfile.resolved
 
 /.env
 /Xcode/Links
 
 /fastlane/export
-/fastlane/last-nightlies-success-git-commit-hash.txt
+/fastlane/*commit-hash.txt
 /fastlane/Preview.html
-/fastlane/report.xml
+/fastlane/*.xml
 /fastlane/screenshots
 /fastlane/test_output
 

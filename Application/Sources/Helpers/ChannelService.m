@@ -10,9 +10,9 @@
 #import "ForegroundTimer.h"
 #import "SRGProgram+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <FXReachability/FXReachability.h>
-#import <libextobjc/libextobjc.h>
+@import FXReachability;
+@import libextobjc;
+@import SRGDataProviderNetwork;
 
 @interface ChannelService ()
 

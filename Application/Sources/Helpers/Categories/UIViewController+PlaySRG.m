@@ -19,9 +19,11 @@
 #import "UIDevice+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <GoogleCast/GoogleCast.h>
-#import <SRGAnalytics_DataProvider/SRGAnalytics_DataProvider.h>
+#import <objc/runtime.h>
+
+@import GoogleCast;
+@import libextobjc;
+@import SRGDataProviderNetwork;
 
 static Playlist *s_playlist;
 
@@ -36,12 +38,7 @@ static Playlist *SharedPlaylistForURN(NSString *URN)
 static void *s_previewingDelegatesKey = &s_previewingDelegatesKey;
 static void *s_longPressGestureRecognizerKey = &s_longPressGestureRecognizerKey;
 static void *s_previewingContextKey = &s_previewingContextKey;
-
-// Original implementation of the methods we swizzle
-static id (*s_registerForPreviewingWithDelegate_sourceView)(id, SEL, id, id) = NULL;
-
-// Swizzled method implementations
-static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_sourceView(UIViewController *self, SEL _cmd, id<UIViewControllerPreviewingDelegate> delegate, UIView *sourceView);
+static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
 @implementation UIViewController (PlaySRG)
 
@@ -49,7 +46,12 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
 
 + (void)load
 {
-    HLSSwizzleSelector(self, @selector(registerForPreviewingWithDelegate:sourceView:), swizzle_registerForPreviewingWithDelegate_sourceView, &s_registerForPreviewingWithDelegate_sourceView);
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewWillAppear:)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewWillAppear:)));
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewDidDisappear:)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewDidDisappear:)));
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(registerForPreviewingWithDelegate:sourceView:)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:sourceView:)));
 }
 
 + (UIInterfaceOrientationMask)play_supportedInterfaceOrientations
@@ -60,6 +62,61 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     else {
         return UIInterfaceOrientationMaskAll;
     }
+}
+
+#pragma mark Swizzled methods
+
+// Only swizzle registration method. Unregistration is automatic, and associated objects are automatically cleaned up when the
+// object they are associated to is deallocated
+- (id<UIViewControllerPreviewing>)UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:(id<UIViewControllerPreviewingDelegate>)delegate sourceView:(UIView *)sourceView
+{
+    if ([delegate conformsToProtocol:@protocol(PreviewingDelegate)]) {
+        NSMutableSet<PreviewingDelegate *> *previewingDelegates = objc_getAssociatedObject(self, s_previewingDelegatesKey);
+        if (! previewingDelegates) {
+            previewingDelegates = [NSMutableSet set];
+            objc_setAssociatedObject(self, s_previewingDelegatesKey, previewingDelegates, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        }
+        
+        PreviewingDelegate *previewingDelegate = [[PreviewingDelegate alloc] initWithRealDelegate:(id<PreviewingDelegate>)delegate];
+        [previewingDelegates addObject:previewingDelegate];
+        
+        id<UIViewControllerPreviewing> previewingViewController = nil;
+        
+        // Register for 3D Touch support if available
+        // Warning: FLEX lies about 3D touch support. When running the app in the simulator with FLEX linked, the following
+        //          condition is always true
+        if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+            previewingViewController = [self UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:previewingDelegate sourceView:sourceView];
+        }
+
+        UIGestureRecognizer *longPressGestureRecognizer = [objc_getAssociatedObject(sourceView, s_longPressGestureRecognizerKey) nonretainedObjectValue];
+        if (longPressGestureRecognizer) {
+            [sourceView removeGestureRecognizer:longPressGestureRecognizer];
+        }
+        
+        longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:previewingDelegate action:@selector(handleLongPress:)];
+        [sourceView addGestureRecognizer:longPressGestureRecognizer];
+        objc_setAssociatedObject(sourceView, s_longPressGestureRecognizerKey, [NSValue valueWithNonretainedObject:longPressGestureRecognizer], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+        return previewingViewController;
+    }
+    else {
+        return [self UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:delegate sourceView:sourceView];
+    }
+}
+
+- (void)UIViewController_PlaySRG_swizzled_viewWillAppear:(BOOL)animated
+{
+    [self UIViewController_PlaySRG_swizzled_viewWillAppear:animated];
+    
+    [self play_setViewVisible:YES];
+}
+
+- (void)UIViewController_PlaySRG_swizzled_viewDidDisappear:(BOOL)animated
+{
+    [self UIViewController_PlaySRG_swizzled_viewDidDisappear:animated];
+    
+    [self play_setViewVisible:NO];
 }
 
 #pragma mark Getters and setters
@@ -112,6 +169,25 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     }
     
     return NO;
+}
+
+- (BOOL)play_isViewVisible
+{
+    return [objc_getAssociatedObject(self, s_isViewVisibleKey) boolValue];
+}
+
+- (void)play_setViewVisible:(BOOL)visible
+{
+    objc_setAssociatedObject(self, s_isViewVisibleKey, @(visible), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UIViewController *)play_topViewController
+{
+    UIViewController *topViewController = self;
+    while (topViewController.presentedViewController) {
+        topViewController = topViewController.presentedViewController;
+    }
+    return topViewController;
 }
 
 #pragma mark Previewing
@@ -182,7 +258,6 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     else {
         void (^openPlayer)(void) = ^{
             MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:position fromPushNotification:fromPushNotification];
-            mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
             SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
             letterboxController.playlistDataSource = SharedPlaylistForURN(media.URN);
             [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
@@ -219,7 +294,6 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     
     void (^openPlayer)(void) = ^{
         MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithController:letterboxController position:nil fromPushNotification:fromPushNotification];
-        mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         letterboxController.playlistDataSource = SharedPlaylistForURN(letterboxController.URN);
         [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
     };
@@ -328,45 +402,32 @@ static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_
     }];
 }
 
-@end
-
-#pragma mark Functions
-
-// Only swizzle registration method. Unregistration is automatic, and associated objects are automatically cleaned up when the
-// object they are associated to is deallocated
-static id<UIViewControllerPreviewing> swizzle_registerForPreviewingWithDelegate_sourceView(UIViewController *self, SEL _cmd, id<UIViewControllerPreviewingDelegate> delegate, UIView *sourceView)
+- (BOOL)play_supportsOrientation:(UIInterfaceOrientation)orientation
 {
-    if ([delegate conformsToProtocol:@protocol(PreviewingDelegate)]) {
-        NSMutableSet<PreviewingDelegate *> *previewingDelegates = objc_getAssociatedObject(self, s_previewingDelegatesKey);
-        if (! previewingDelegates) {
-            previewingDelegates = [NSMutableSet set];
-            objc_setAssociatedObject(self, s_previewingDelegatesKey, previewingDelegates, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        }
-        
-        PreviewingDelegate *previewingDelegate = [[PreviewingDelegate alloc] initWithRealDelegate:(id<PreviewingDelegate>)delegate];
-        [previewingDelegates addObject:previewingDelegate];
-        
-        id<UIViewControllerPreviewing> previewingViewController = nil;
-        
-        // Register for 3D Touch support if available
-        // Warning: FLEX lies about 3D touch support. When running the app in the simulator with FLEX linked, the following
-        //          condition is always true
-        if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
-            previewingViewController = s_registerForPreviewingWithDelegate_sourceView(self, _cmd, previewingDelegate, sourceView);
-        }
-
-        UIGestureRecognizer *longPressGestureRecognizer = hls_getAssociatedObject(sourceView, s_longPressGestureRecognizerKey);
-        if (longPressGestureRecognizer) {
-            [sourceView removeGestureRecognizer:longPressGestureRecognizer];
-        }
-        
-        longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:previewingDelegate action:@selector(handleLongPress:)];
-        [sourceView addGestureRecognizer:longPressGestureRecognizer];
-        hls_setAssociatedObject(sourceView, s_longPressGestureRecognizerKey, longPressGestureRecognizer, HLS_ASSOCIATION_WEAK_NONATOMIC);
-
-        return previewingViewController;
-    }
-    else {
-        return s_registerForPreviewingWithDelegate_sourceView(self, _cmd, delegate, sourceView);
-    }
+    return (self.supportedInterfaceOrientations & (1 << orientation)) != 0;
 }
+
+- (void)play_dismissViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
+{
+    UIViewController *topViewController = self.play_topViewController;
+    
+    // See https://stackoverflow.com/a/29560217
+    UIViewController *presentingViewController = topViewController.presentingViewController;
+    if (! [presentingViewController play_supportsOrientation:(UIInterfaceOrientation)UIDevice.currentDevice.orientation]) {
+        if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationPortrait]) {
+            [UIDevice.currentDevice setValue:@(UIDeviceOrientationPortrait) forKey:@keypath(UIDevice.new, orientation)];
+        }
+        else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+            [UIDevice.currentDevice setValue:@(UIDeviceOrientationPortraitUpsideDown) forKey:@keypath(UIDevice.new, orientation)];
+        }
+        else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationLandscapeLeft]) {
+            [UIDevice.currentDevice setValue:@(UIDeviceOrientationLandscapeLeft) forKey:@keypath(UIDevice.new, orientation)];
+        }
+        else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationLandscapeRight]) {
+            [UIDevice.currentDevice setValue:@(UIDeviceOrientationLandscapeRight) forKey:@keypath(UIDevice.new, orientation)];
+        }
+    }
+    [self dismissViewControllerAnimated:animated completion:completion];
+}
+
+@end

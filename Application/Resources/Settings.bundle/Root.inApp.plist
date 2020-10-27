@@ -90,6 +90,22 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Key</key>
+			<string>Group_Permissions</string>
+			<key>Title</key>
+			<string>Permissions</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Open system settings</string>
+			<key>Key</key>
+			<string>Button_SystemSettings</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Key</key>
 			<string>Group_Information</string>
 			<key>Title</key>
 			<string>Information</string>
@@ -263,14 +279,6 @@
 			<string>Subscribe to all shows</string>
 			<key>Key</key>
 			<string>Button_SubscribeToAllShows</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
-			<key>Title</key>
-			<string>Open system settings</string>
-			<key>Key</key>
-			<string>Button_SystemSettings</string>
 		</dict>
 		<dict>
 			<key>Type</key>

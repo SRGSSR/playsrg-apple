@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSection.h"
 #import "Banner.h"
 #import "Download.h"
 #import "DownloadFooterSectionView.h"
@@ -20,9 +21,9 @@
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import libextobjc;
+@import SRGAnalytics;
+@import SRGAppearance;
 
 @interface DownloadsViewController ()
 
@@ -278,7 +279,9 @@
              inViewController:self];
     }
     else {
-        NSError *error = [NSError errorWithDomain:PlayErrorDomain code:PlayErrorCodeNotFound localizedDescription:NSLocalizedString(@"Media not available yet", @"Message on top screen when trying to open a media in the download list and the media is not downloaded.")];
+        NSError *error = [NSError errorWithDomain:PlayErrorDomain
+                                             code:PlayErrorCodeNotFound
+                                         userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"Media not available yet", @"Message on top screen when trying to open a media in the download list and the media is not downloaded.") }];
         [Banner showError:error inViewController:self];
     }
 }

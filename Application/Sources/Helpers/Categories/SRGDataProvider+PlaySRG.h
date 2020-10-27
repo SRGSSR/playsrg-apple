@@ -4,19 +4,20 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <SRGDataProvider/SRGDataProvider.h>
+@import SRGDataProviderNetwork;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SRGDataProvider (PlaySRG)
 
 /**
- *  Increase the specified activity type from 1 unit for the specified subdivision.
+ *  Increase the specified activity type from 1 unit for the specified URN with associated event data.
  *
  *  @return A request to be resumed if the activity type can be associated with a social count, `nil` otherwise.
  */
 - (nullable SRGRequest *)play_increaseSocialCountForActivityType:(UIActivityType)activityType
-                                                     subdivision:(SRGSubdivision *)subdivision
+                                                             URN:(NSString *)URN
+                                                           event:(NSString *)event
                                              withCompletionBlock:(SRGSocialCountOverviewCompletionBlock)completionBlock;
 
 @end

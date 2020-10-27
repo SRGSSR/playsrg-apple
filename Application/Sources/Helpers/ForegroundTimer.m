@@ -8,8 +8,8 @@
 
 #import "NSTimer+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <UIKit/UIKit.h>
+@import libextobjc;
+@import UIKit;
 
 @interface ForegroundTimer ()
 

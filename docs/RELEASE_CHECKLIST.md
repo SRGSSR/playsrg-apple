@@ -19,11 +19,11 @@
 | Wait until the binary has been validated on AppStore Connect ||||||
 | Collect DSYMs and upload it on AppCenter (with fastlane) ||||||
 | Update production remote configuration on Firebase ||||||
-| Publish TestFlight versions on AppStore Connect ||||||
+| Distribute TestFlight versions on AppStore Connect ||||||
 | Check what's new in AppCenter betas or TestFlight versions ||||||
 | Ask the PO to approve the version ||||||
 | Submit to Apple review ||||||
-| Update status page on Confluence ||||||
+| Update status page on Confluence (Up coming status, statistics changes) ||||||
 | Obtain successful Apple review ||||||
 | Release to the store ||||||
 | Check that the application is available in production ||||||
@@ -34,5 +34,5 @@
 | Push master, develop and tag ||||||
 | Close milestone and issues on github |||||||||||||||
 | Create github release |||||||||||||||
-| Update status page on Confluence ||||||
-| Update AppCenter beta release notes highlight the beta version corresponding to the production version ||||||
+| Update status page on Confluence (Release date, old versions) ||||||
+| Update AppCenter beta release notes to highlight the beta version corresponding to the production version ||||||

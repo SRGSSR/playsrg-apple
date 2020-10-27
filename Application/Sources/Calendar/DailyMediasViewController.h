@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Instantiate for medias belonging to the specified radio channel and date. If no channel is provided, TV medias will
  *  be displayed instead. If date is nil, today's medias will be displayed.
  */
-- (instancetype)initWithDate:(nullable NSDate *)date radioChannel:(nullable RadioChannel *)radioChannel NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDate:(nullable NSDate *)date radioChannel:(nullable RadioChannel *)radioChannel;
 
 @property (nonatomic, readonly, nullable) NSDate *date;
 @property (nonatomic, readonly, nullable) RadioChannel *radioChannel;

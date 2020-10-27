@@ -56,22 +56,18 @@
 #import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
-#import <FXReachability/FXReachability.h>
-#import <GoogleCast/GoogleCast.h>
-#import <Intents/Intents.h>
-#import <libextobjc/libextobjc.h>
-#import <MAKVONotificationCenter/MAKVONotificationCenter.h>
-#import <Masonry/Masonry.h>
-#import <SRGAnalytics_DataProvider/SRGAnalytics_DataProvider.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGUserData/SRGUserData.h>
-
-NSString * const MediaPlayerViewControllerVisibilityDidChangeNotification = @"MediaPlayerViewControllerVisibilityDidChangeNotification";
-NSString * const MediaPlayerViewControllerVisibleKey = @"MediaPlayerViewControllerVisible";
+@import FXReachability;
+@import GoogleCast;
+@import Intents;
+@import libextobjc;
+@import MAKVONotificationCenter;
+@import SRGAnalyticsDataProvider;
+@import SRGAppearance;
+@import SRGUserData;
 
 // Store the most recently used landscape orientation, also between player instantiations (so that the user last used
 // orientation is preferred)
-static UIDeviceOrientation s_previouslyUsedLandscapeDeviceOrientation = UIDeviceOrientationLandscapeLeft;
+static UIInterfaceOrientation s_previouslyUsedLandscapeInterfaceOrientation = UIInterfaceOrientationLandscapeLeft;
 
 static const UILayoutPriority MediaPlayerBottomConstraintNormalPriority = 850;
 static const UILayoutPriority MediaPlayerBottomConstraintFullScreenPriority = 950;
@@ -226,7 +222,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     // Otherwise instantiate a fresh instance
     else {
-        if (self = [super init]) {
+        if (self = [self initFromStoryboard]) {
             self.originalURN = URN;
             self.originalPosition = position;
             self.fromPushNotification = fromPushNotification;
@@ -250,7 +246,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     // Otherwise instantiate a fresh instance
     else {
-        if (self = [super init]) {
+        if (self = [self initFromStoryboard]) {
             self.originalMedia = media;
             self.originalPosition = position;
             self.fromPushNotification = fromPushNotification;
@@ -262,7 +258,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (instancetype)initWithController:(SRGLetterboxController *)controller position:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification
 {
-    if (self = [super init]) {
+    if (self = [self initFromStoryboard]) {
         self.originalLetterboxController = controller;
         self.originalPosition = position;
         self.fromPushNotification = fromPushNotification;
@@ -271,6 +267,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         self.letterboxController = controller;
     }
     return self;
+}
+
+- (instancetype)initFromStoryboard
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
+    return storyboard.instantiateInitialViewController;
 }
 
 - (void)dealloc
@@ -406,18 +408,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];
     
-    // iPhone devices: Set full screen in landscape orientation (done before the view is actually displayed. This
-    // avoids status bar hiccups)
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
-        BOOL isLandscape = UIDeviceOrientationIsValidInterfaceOrientation(deviceOrientation) ? UIDeviceOrientationIsLandscape(deviceOrientation) : UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation);
-        
-        self.statusBarHidden = isLandscape;
-        self.transitioning = isLandscape;
-        [self.letterboxView setFullScreen:isLandscape animated:NO];
-        self.transitioning = NO;
-    }
-    
     // Use original controller, if any has been provided
     if (self.originalLetterboxController) {
         self.letterboxView.controller = self.letterboxController;
@@ -487,6 +477,10 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contentSizeCategoryDidChange:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
     
     @weakify(self)
     self.userInterfaceUpdateTimer = [ForegroundTimer timerWithTimeInterval:1. repeats:YES block:^(ForegroundTimer * _Nonnull timer) {
@@ -535,10 +529,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self scrollToNearestSongAnimated:NO];
         [self updateSelectionForCurrentSong];
         
-        [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
-                                                          object:self
-                                                        userInfo:@{ MediaPlayerViewControllerVisibleKey : @YES }];
-        
         [SRGLetterboxService.sharedService enableWithController:self.letterboxController pictureInPictureDelegate:self];
     }
     
@@ -575,10 +565,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         }
         
         [self.livestreamMediasRequest cancel];
-        
-        [NSNotificationCenter.defaultCenter postNotificationName:MediaPlayerViewControllerVisibilityDidChangeNotification
-                                                          object:self
-                                                        userInfo:@{ MediaPlayerViewControllerVisibleKey : @NO }];
     }
     else if (self.letterboxController.media.mediaType == SRGMediaTypeVideo) {
         [self.letterboxController pause];
@@ -619,9 +605,9 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         [self reloadSongPanelSize];
         [self scrollToNearestSongAnimated:NO];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
-        if (UIDeviceOrientationIsLandscape(deviceOrientation)) {
-            s_previouslyUsedLandscapeDeviceOrientation = deviceOrientation;
+        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.statusBarOrientation;
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+            s_previouslyUsedLandscapeInterfaceOrientation = interfaceOrientation;
         }
         self.transitioning = NO;
     }];
@@ -638,17 +624,21 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 #pragma mark Accessibility
 
-- (void)updateForContentSizeCategory
-{
-    [super updateForContentSizeCategory];
-    
-    [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
-    [self reloadProgramInformationAnimated:NO];
-}
-
 - (BOOL)accessibilityPerformEscape
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self play_dismissViewControllerAnimated:YES completion:nil];
+    return YES;
+}
+
+#pragma mark Modal presentation
+
+- (UIModalPresentationStyle)modalPresentationStyle
+{
+    return UIModalPresentationCustom;
+}
+
+- (BOOL)modalPresentationCapturesStatusBarAppearance
+{
     return YES;
 }
 
@@ -1086,8 +1076,6 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     
     // Force metadata panel to a height of 0
     self.metadataHeightConstraint.active = fullScreen;
-    
-    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)hidePlayerUserInterfaceAnimated:(BOOL)animated
@@ -1243,7 +1231,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     }
     else {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later-48"] forState:UIControlStateNormal];
-        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Add to the watch later list", @"Media watch later creation label");
+        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Add to the watch later list", @"Media watch later addition label");
     }
 }
 
@@ -1559,9 +1547,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView toggleFullScreen:(BOOL)fullScreen animated:(BOOL)animated withCompletionHandler:(nonnull void (^)(BOOL))completionHandler
 {
-    void (^rotate)(UIDeviceOrientation) = ^(UIDeviceOrientation orientation) {
+    void (^rotate)(UIInterfaceOrientation) = ^(UIInterfaceOrientation orientation) {
         // We interrupt the rotation attempt and trigger a rotation (which itself will toggle the expected full-screen display)
         completionHandler(NO);
+        
+        // User interface orientations are a subset of device orientations with matching values
         [UIDevice.currentDevice setValue:@(orientation) forKey:@keypath(UIDevice.new, orientation)];
     };
     
@@ -1569,24 +1559,34 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     // we force a rotation, which itself will perform the appropriate transition from or to full-screen
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && ! self.transitioning) {
         if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation)) {
-            rotate(UIDeviceOrientationPortrait);
+            rotate(UIInterfaceOrientationPortrait);
             return;
         }
         else {
             // Only force rotation from portrait to landscape orientation if the content is better watched in landscape orientation
             if (letterboxView.aspectRatio > 1.f) {
-                rotate(s_previouslyUsedLandscapeDeviceOrientation);
+                rotate(s_previouslyUsedLandscapeInterfaceOrientation);
                 return;
             }
         }
     }
     
-    self.statusBarHidden = fullScreen;
+    // Status bar is NOT updated after rotation consistently, so we must store the desired status bar visibility once
+    // we have reliable information to determine it.
+    if (@available(iOS 13 , *)) {
+        // On iPhone in landscape orientation it is always hidden since iOS 13, in which case we must not hide it
+        // to avoid incorrect safe area insets after returning from landscape orientation.
+        self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication.statusBarOrientation));
+    }
+    else {
+        self.statusBarHidden = fullScreen;
+    }
     
     void (^animations)(void) = ^{
         [self setFullScreen:fullScreen];
         [self updateTimelineVisibilityForFullScreen:fullScreen animated:NO];
         [self updateSongPanelFor:self.traitCollection fullScreen:fullScreen];
+        [self setNeedsStatusBarAppearanceUpdate];
         
         if (fullScreen) {
             [self hidePlayerUserInterfaceAnimated:NO];
@@ -1702,7 +1702,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (BOOL)letterboxDismissUserInterfaceForPictureInPicture
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self play_dismissViewControllerAnimated:YES completion:nil];
     return YES;
 }
 
@@ -1956,8 +1956,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
             
             SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:sharingMedia.URN];
-            if (subdivision) {
-                [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType subdivision:subdivision withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+            if (subdivision.event) {
+                [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType URN:subdivision.URN event:subdivision.event withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                     // Nothing
                 }] resume];
             }
@@ -2116,7 +2116,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (IBAction)close:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self play_dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark Gesture recognizers
@@ -2346,6 +2346,12 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
 {
     [self updateDetailsAppearance];
+}
+
+- (void)contentSizeCategoryDidChange:(NSNotification *)notification
+{
+    [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
+    [self reloadProgramInformationAnimated:NO];
 }
 
 @end

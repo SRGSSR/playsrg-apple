@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) UIColor *play_blackColor;
 @property (class, nonatomic, readonly) UIColor *play_lightGrayColor;
 @property (class, nonatomic, readonly) UIColor *play_grayColor;
+@property (class, nonatomic, readonly) UIColor *play_orangeColor;
 @property (class, nonatomic, readonly) UIColor *play_popoverGrayBackgroundColor;
 
 @property (class, nonatomic, readonly) UIColor *play_cardGrayBackgroundColor;

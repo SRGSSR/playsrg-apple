@@ -9,7 +9,7 @@
 #import "UIColor+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
-#import <SafariServices/SafariServices.h>
+@import SafariServices;
 
 @implementation UIApplication (PlaySRG)
 

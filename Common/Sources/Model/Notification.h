@@ -4,9 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <UserNotifications/UserNotifications.h>
+@import Foundation;
+@import SRGDataProviderModel;
+@import UserNotifications;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -12,7 +12,8 @@
 #import "TabBarActionable.h"
 
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
-#import <SRGAnalytics/SRGAnalytics.h>
+
+@import SRGAnalytics;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Instantiate a home for the specified application section, displayed the provided home sections.
  */
-- (instancetype)initWithApplicationSectionInfo:(ApplicationSectionInfo *)applicationSection homeSections:(NSArray<NSNumber *> *)homeSections NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithApplicationSectionInfo:(ApplicationSectionInfo *)applicationSection homeSections:(NSArray<NSNumber *> *)homeSections;
 
 /**
  *  The associated radio channel, if any.

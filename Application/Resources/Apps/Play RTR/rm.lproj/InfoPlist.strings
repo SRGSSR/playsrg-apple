@@ -3,3 +3,4 @@
 "History" = "Cronologia";
 "Search" = "Tschertga";
 "NSMicrophoneUsageDescription" = "L'applicaziun dovra il microfon per chattar il receptur Google Cast.";
+"NSLocalNetworkUsageDescription" = "La applicaziun utilisescha la rait locala per Google Cast.";

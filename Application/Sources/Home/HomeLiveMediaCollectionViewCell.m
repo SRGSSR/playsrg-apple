@@ -7,6 +7,7 @@
 #import "HomeLiveMediaCollectionViewCell.h"
 
 #import "AnalyticsConstants.h"
+#import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "ChannelService.h"
 #import "Layout.h"
@@ -21,9 +22,9 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import libextobjc;
+@import SRGAnalytics;
+@import SRGAppearance;
 
 static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 {

@@ -8,13 +8,14 @@
 
 #import "ApplicationConfiguration.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 CGSize SizeForImageScale(ImageScale imageScale)
 {
     static NSDictionary *s_widths;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
+#if TARGET_OS_IOS
         if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
             s_widths = @{ @(ImageScaleSmall) : @(200.f),
                           @(ImageScaleMedium) : @(340.f),
@@ -25,6 +26,11 @@ CGSize SizeForImageScale(ImageScale imageScale)
                           @(ImageScaleMedium) : @(500.f),
                           @(ImageScaleLarge) : @(800.f)};
         }
+#else
+        s_widths = @{ @(ImageScaleSmall) : @(350.f),
+                      @(ImageScaleMedium) : @(1000.f),
+                      @(ImageScaleLarge) : @(1600.f)};
+#endif
     });
     
     // Use 2x maximum as scale. Sufficient for a good result without having to load very large images

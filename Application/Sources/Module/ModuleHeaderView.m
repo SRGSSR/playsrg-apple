@@ -12,8 +12,8 @@
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
-#import <SRGAnalytics/SRGAnalytics.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAnalytics;
+@import SRGAppearance;
 
 // Choose the good aspect ratio for the logo image view, depending of the screen size
 static const UILayoutPriority LogoImageViewAspectRatioConstraintNormalPriority = 900;

@@ -6,10 +6,6 @@
 
 #import "UIView+PlaySRG.h"
 
-#import "UIViewController+PlaySRG_Private.h"
-
-#import <CoconutKit/CoconutKit.h>
-
 @implementation UIView (PlaySRG)
 
 #pragma mark Getters and setters
@@ -24,6 +20,18 @@
         view = view.superview;
     }
     return NO;
+}
+
+- (UIViewController *)play_nearestViewController
+{
+    UIResponder *responder = self.nextResponder;
+    while (responder) {
+        if ([responder isKindOfClass:UIViewController.class]) {
+            return (UIViewController *)responder;
+        }
+        responder = responder.nextResponder;
+    }
+    return nil;
 }
 
 @end

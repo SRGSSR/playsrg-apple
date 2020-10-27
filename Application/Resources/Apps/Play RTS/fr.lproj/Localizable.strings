@@ -159,7 +159,7 @@
 /* Question displayed at the top of an alert asking the user to enable notifications */
 "Enable notifications?" = "Activer les notifications ?";
 
-/* Title label used to present scheduled livestream medias. Only on test versions. */
+/* Title label used to present scheduled livestream medias */
 "Events" = "Événements";
 
 /* Short label identifying content which has expired. */
@@ -167,8 +167,8 @@
 
 /* Favorite show label when added ,in the show view
    Label to present Favorites
-   Title label used to present the radio favorite shows.
-   Title label used to present the TV favorite shows. */
+   Title label used to present the radio favorite shows
+   Title label used to present the TV favorite shows */
 "Favorites" = "Favoris";
 
 /* Title displayed at the top of the features list */
@@ -184,7 +184,7 @@
 /* Total free space size, display at the bottom of download list */
 "Free space: %@" = "Capacité disponible : %@";
 
-/* Title label used to present TV event modules while loading. It appears if no network connection available and no cache available. */
+/* Title label used to present TV event modules while loading. It appears if no network connection is available and no cache is available */
 "Highlights" = "Mises en avant";
 
 /* Label to present history */
@@ -198,9 +198,6 @@
 
 /* Title of the alert view to keep autoplay permanently */
 "Keep autoplay?" = "Garder la lecture automatique ?";
-
-/* Label on recently played livestreams */
-"Last played" = "Joué en dernier";
 
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Dernière synchronisation : %@";
@@ -234,6 +231,9 @@
    Title displayed at the top of the livestream view */
 "Livestreams" = "Directs";
 
+/* Setting footer message for system permission group. New rule for iOS 14 and more. */
+"Local network access must be allowed for Google Cast receiver discovery." = "L'accès au réseau local doit être autorisé pour pouvoir découvrir un récepteur Google Cast.";
+
 /* Text displayed within the login / sign up profile header when no user is displayed */
 "Login / Sign up" = "Connexion / Inscription";
 
@@ -254,11 +254,11 @@
 /* Title of the related content player section */
 "More on this subject" = "Pour aller plus loin";
 
-/* Title label used to present the radio most listened / popular audio medias */
+/* Title label used to present the radio most popular audio medias */
 "Most listened to" = "Les plus écoutés";
 
 /* Short title for the most clicked video topic list
-   Title label used to present the TV most seen / clicked / popular videos */
+   Title label used to present the TV most popular videos */
 "Most popular" = "Les plus vues";
 
 /* Short title for the most recent video topic list */
@@ -458,8 +458,8 @@
    Shows search setting option
    Shows search setting option list view title
    Title label used to present radio associated shows
-   Title label used to present the radio shows AZ and radio shows by date access buttons.
-   Title label used to present the TV shows AZ and TV shows by date access buttons. */
+   Title label used to present the radio shows AZ and radio shows by date access buttons
+   Title label used to present the TV shows AZ and TV shows by date access buttons */
 "Shows" = "Émissions";
 
 /* Title of the button to skip updating the application */
@@ -471,7 +471,7 @@
 /* Settings section header */
 "Sort by" = "Trier par";
 
-/* Title label used to present live center medias. Only on test versions. */
+/* Title label used to present live center medias */
 "Sport" = "Sport";
 
 /* Subtitles short label on media cells */
@@ -558,7 +558,7 @@
 
 /* Categories search setting option
    Title label used to present TV topics
-   Title label used to present TV topics while loading. It appears if no network connection available and no cache available.
+   Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available
    Topics search setting option list view title */
 "Topics" = "Catégories";
 
@@ -594,7 +594,7 @@
 "Watch later" = "Plus tard";
 
 /* Web first label on media cells */
-"WEB FIRST" = "EXCLU";
+"Web first" = "Exclu";
 
 /* Title displayed at the top of the What's new view */
 "What's new" = "Nouveautés";

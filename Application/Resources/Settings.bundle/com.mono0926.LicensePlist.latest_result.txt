@@ -1,3 +1,23 @@
+name: AppCenter, nameSpecified: 
+body: Visual Studio App Ce…
+version: 3.3.4
+
+name: AppCenter, nameSpecified: 
+body: Visual Studio App Ce…
+version: 3.3.4
+
+name: AppCenter, nameSpecified: 
+body: Visual Studio App Ce…
+version: 3.3.4
+
+name: AppCenter, nameSpecified: 
+body: Visual Studio App Ce…
+version: 3.3.4
+
+name: AppCenter, nameSpecified: 
+body: Visual Studio App Ce…
+version: 3.3.4
+
 name: AutoCoding, nameSpecified: 
 body: AutoCoding
 
@@ -30,278 +50,593 @@ version: 2.2.3
 
 name: BDKCollectionIndexView, nameSpecified: 
 body: Copyright (c) 2013 B…
-version: 2.0.0
+version: 2.2.2
 
 name: BDKCollectionIndexView, nameSpecified: 
 body: Copyright (c) 2013 B…
-version: 2.0.0
+version: 2.2.2
 
 name: BDKCollectionIndexView, nameSpecified: 
 body: Copyright (c) 2013 B…
-version: 2.0.0
+version: 2.2.2
 
 name: BDKCollectionIndexView, nameSpecified: 
 body: Copyright (c) 2013 B…
-version: 2.0.0
+version: 2.2.2
 
 name: BDKCollectionIndexView, nameSpecified: 
 body: Copyright (c) 2013 B…
-version: 2.0.0
+version: 2.2.2
+
+name: DZNEmptyDataSet, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.8.1
+
+name: DZNEmptyDataSet, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.8.1
+
+name: DZNEmptyDataSet, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.8.1
+
+name: DZNEmptyDataSet, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.8.1
+
+name: DZNEmptyDataSet, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.8.1
 
 name: Firebase, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.15.0
+body: 
+                   …
+version: 6.34.0
 
 name: Firebase, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.15.0
+body: 
+                   …
+version: 6.34.0
 
 name: Firebase, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.15.0
+body: 
+                   …
+version: 6.34.0
 
 name: Firebase, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.15.0
+body: 
+                   …
+version: 6.34.0
 
 name: Firebase, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.15.0
+body: 
+                   …
+version: 6.34.0
+
+name: Firebase, nameSpecified: 
+body: 
+                   …
+version: 6.34.0
+
+name: Firebase, nameSpecified: 
+body: 
+                   …
+version: 6.34.0
+
+name: Firebase, nameSpecified: 
+body: 
+                   …
+version: 6.34.0
+
+name: Firebase, nameSpecified: 
+body: 
+                   …
+version: 6.34.0
+
+name: Firebase, nameSpecified: 
+body: 
+                   …
+version: 6.34.0
 
 name: FirebaseABTesting, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 2.0.0
+body: 
+                   …
+version: 4.2.0
 
 name: FirebaseABTesting, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 2.0.0
+body: 
+                   …
+version: 4.2.0
 
 name: FirebaseABTesting, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 2.0.0
+body: 
+                   …
+version: 4.2.0
 
 name: FirebaseABTesting, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 2.0.0
+body: 
+                   …
+version: 4.2.0
 
 name: FirebaseABTesting, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 2.0.0
+body: 
+                   …
+version: 4.2.0
+
+name: FirebaseABTesting, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
+
+name: FirebaseABTesting, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
+
+name: FirebaseABTesting, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
+
+name: FirebaseABTesting, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
+
+name: FirebaseABTesting, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
 
 name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+body: Copyright 2020 Googl…
+version: 6.9.0
 
 name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+body: Copyright 2020 Googl…
+version: 6.9.0
 
 name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+body: Copyright 2020 Googl…
+version: 6.9.0
 
 name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+body: Copyright 2020 Googl…
+version: 6.9.0
 
 name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+body: Copyright 2020 Googl…
+version: 6.9.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 5.1.10
+version: 6.10.4
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 5.1.10
+version: 6.10.4
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 5.1.10
+version: 6.10.4
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 5.1.10
+version: 6.10.4
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 5.1.10
+version: 6.10.4
 
-name: FirebaseInstanceID, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.3.0
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.10.4
 
-name: FirebaseInstanceID, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.3.0
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.10.4
 
-name: FirebaseInstanceID, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.3.0
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.10.4
 
-name: FirebaseInstanceID, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.3.0
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.10.4
 
-name: FirebaseInstanceID, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.3.0
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.10.4
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseCoreDiagnostics, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
+
+name: FirebaseInstallations, nameSpecified: 
+body: 
+                   …
+version: 1.7.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.1.0
+body: 
+                   …
+version: 4.9.1
 
 name: FirebaseRemoteConfig, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.1.0
+body: 
+                   …
+version: 4.9.1
 
 name: FirebaseRemoteConfig, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.1.0
+body: 
+                   …
+version: 4.9.1
 
 name: FirebaseRemoteConfig, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.1.0
+body: 
+                   …
+version: 4.9.1
 
 name: FirebaseRemoteConfig, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 3.1.0
+body: 
+                   …
+version: 4.9.1
+
+name: FirebaseRemoteConfig, nameSpecified: 
+body: 
+                   …
+version: 4.9.1
+
+name: FirebaseRemoteConfig, nameSpecified: 
+body: 
+                   …
+version: 4.9.1
+
+name: FirebaseRemoteConfig, nameSpecified: 
+body: 
+                   …
+version: 4.9.1
+
+name: FirebaseRemoteConfig, nameSpecified: 
+body: 
+                   …
+version: 4.9.1
+
+name: FirebaseRemoteConfig, nameSpecified: 
+body: 
+                   …
+version: 4.9.1
 
 name: FSCalendar, nameSpecified: 
 body: Copyright (c) 2013-2…
-version: 2.7.9
+version: 2.8.1
 
 name: FSCalendar, nameSpecified: 
 body: Copyright (c) 2013-2…
-version: 2.7.9
+version: 2.8.1
 
 name: FSCalendar, nameSpecified: 
 body: Copyright (c) 2013-2…
-version: 2.7.9
+version: 2.8.1
 
 name: FSCalendar, nameSpecified: 
 body: Copyright (c) 2013-2…
-version: 2.7.9
+version: 2.8.1
 
 name: FSCalendar, nameSpecified: 
 body: Copyright (c) 2013-2…
-version: 2.7.9
+version: 2.8.1
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.4.6
+version: 4.5.1
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.4.6
+version: 4.5.1
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.4.6
+version: 4.5.1
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.4.6
+version: 4.5.1
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.4.6
+version: 4.5.1
 
 name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+body: Copyright 2020 Googl…
+version: 6.9.0
 
 name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+body: Copyright 2020 Googl…
+version: 6.9.0
 
 name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+body: Copyright 2020 Googl…
+version: 6.9.0
 
 name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+body: Copyright 2020 Googl…
+version: 6.9.0
 
 name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 5.4.0
+body: Copyright 2020 Googl…
+version: 6.9.0
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.5.1
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.5.1
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.5.1
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.5.1
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.5.1
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.5.1
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.5.1
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.5.1
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.5.1
+
+name: GoogleDataTransport, nameSpecified: 
+body: 
+                   …
+version: 7.5.1
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 5.3.7
+version: 6.7.2
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 5.3.7
+version: 6.7.2
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 5.3.7
+version: 6.7.2
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 5.3.7
+version: 6.7.2
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 5.3.7
+version: 6.7.2
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.7.2
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.7.2
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.7.2
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.7.2
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.7.2
+
+name: GTMSessionFetcher, nameSpecified: 
+body: 
+                   …
+version: 1.4.0
+
+name: GTMSessionFetcher, nameSpecified: 
+body: 
+                   …
+version: 1.4.0
+
+name: GTMSessionFetcher, nameSpecified: 
+body: 
+                   …
+version: 1.4.0
+
+name: GTMSessionFetcher, nameSpecified: 
+body: 
+                   …
+version: 1.4.0
+
+name: GTMSessionFetcher, nameSpecified: 
+body: 
+                   …
+version: 1.4.0
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 3.0.1
+version: 3.1.4
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 3.0.1
+version: 3.1.4
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 3.0.1
+version: 3.1.4
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 3.0.1
+version: 3.1.4
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 3.0.1
+version: 3.1.4
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 109.5.0
+version: 118.0.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 109.5.0
+version: 118.0.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 109.5.0
+version: 118.0.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 109.5.0
+version: 118.0.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 109.5.0
+version: 118.0.0
 
 name: MDFInternationalization, nameSpecified: 
 body: 
@@ -328,155 +663,212 @@ body:
                    …
 version: 2.0.0
 
-name: MGSwipeTableCell, nameSpecified: 
-body: The MIT License (MIT…
-version: 1.6.8
+name: MDFTextAccessibility, nameSpecified: 
+body: 
+                   …
+version: 2.0.0
+
+name: MDFTextAccessibility, nameSpecified: 
+body: 
+                   …
+version: 2.0.0
+
+name: MDFTextAccessibility, nameSpecified: 
+body: 
+                   …
+version: 2.0.0
+
+name: MDFTextAccessibility, nameSpecified: 
+body: 
+                   …
+version: 2.0.0
+
+name: MDFTextAccessibility, nameSpecified: 
+body: 
+                   …
+version: 2.0.0
 
 name: MGSwipeTableCell, nameSpecified: 
 body: The MIT License (MIT…
-version: 1.6.8
+version: 1.6.11
 
 name: MGSwipeTableCell, nameSpecified: 
 body: The MIT License (MIT…
-version: 1.6.8
+version: 1.6.11
 
 name: MGSwipeTableCell, nameSpecified: 
 body: The MIT License (MIT…
-version: 1.6.8
+version: 1.6.11
 
 name: MGSwipeTableCell, nameSpecified: 
 body: The MIT License (MIT…
-version: 1.6.8
+version: 1.6.11
+
+name: MGSwipeTableCell, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.6.11
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 0.3.901
+version: 1.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 0.3.901
+version: 1.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 0.3.901
+version: 1.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 0.3.901
+version: 1.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 0.3.901
+version: 1.30906.0
 
-name: paper-onboarding, nameSpecified: 
-body: The MIT License (MIT…
-version: 6.1.5
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 1.30906.0
 
-name: paper-onboarding, nameSpecified: 
-body: The MIT License (MIT…
-version: 6.1.5
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 1.30906.0
 
-name: paper-onboarding, nameSpecified: 
-body: The MIT License (MIT…
-version: 6.1.5
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 1.30906.0
 
-name: paper-onboarding, nameSpecified: 
-body: The MIT License (MIT…
-version: 6.1.5
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 1.30906.0
 
-name: paper-onboarding, nameSpecified: 
-body: The MIT License (MIT…
-version: 6.1.5
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 1.30906.0
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.11
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.11
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.11
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.11
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.11
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.11
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.11
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.11
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.11
+
+name: PromisesObjC, nameSpecified: 
+body: 
+                   …
+version: 1.2.11
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.6.1
+version: 3.13.0
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.6.1
+version: 3.13.0
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.6.1
+version: 3.13.0
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.6.1
+version: 3.13.0
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.6.1
+version: 3.13.0
 
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 7.0.1
+name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 
 
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 7.0.1
+name: ComScore-xcframework-apple, nameSpecified: ComScore, owner: SRGSSR, version: 6.6.0
 
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 7.0.1
+name: FetchImage, nameSpecified: FetchImage, owner: kean, version: 0.2.1
 
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 7.0.1
+name: FXReachability, nameSpecified: FXReachability, owner: SRGSSR, version: 1.3.2-srg5
 
-name: SwiftMessages, nameSpecified: 
-body: Copyright (c) 2016 S…
-version: 7.0.1
+name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 14.1.2
 
-name: Aiolos, nameSpecified: , owner: IdeasOnCanvas, version: 1.3.0
+name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version: 0.6.0-srg3
 
-name: appcenter-sdk-apple, nameSpecified: , owner: microsoft, version: 3.3.4
+name: MAKVONotificationCenter, nameSpecified: MAKVONotificationCenter, owner: SRGSSR, version: 1.0.0-srg5
 
-name: CoconutKit, nameSpecified: , owner: defagos, version: 3.4
+name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.6
 
-name: ComScore-iOS-watchOS-tvOS, nameSpecified: , owner: SRGSSR, version: 6.6.0
+name: Nuke, nameSpecified: Nuke, owner: kean, version: 9.1.2
 
-name: DZNEmptyDataSet, nameSpecified: , owner: SRGSSR, version: v1.8.1_srg1
+name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5
 
-name: FXReachability, nameSpecified: , owner: SRGSSR, version: 1.3.2_srg4
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 5.0.0
 
-name: ios-library, nameSpecified: , owner: urbanairship, version: 13.5.6
+name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 3.0.0
 
-name: libextobjc, nameSpecified: , owner: SRGSSR, version: 0.6_srg2
+name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.0.0
 
-name: MAKVONotificationCenter, nameSpecified: , owner: SRGSSR, version: 1.0_srg4
+name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 9.0.0
 
-name: Mantle, nameSpecified: , owner: Mantle, version: 2.1.2
+name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.0.0
 
-name: Masonry, nameSpecified: , owner: SRGSSR, version: v1.1.0_srg1
+name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.0.0
 
-name: srganalytics-apple, nameSpecified: , owner: SRGSSR, version: 4.2.3
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 6.0.0
 
-name: srgappearance-apple, nameSpecified: , owner: SRGSSR, version: 2.1.0
+name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.0
 
-name: srgcontentprotection-apple, nameSpecified: , owner: SRGSSR, version: 2.0.2
+name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 6.0.0
 
-name: srgdataprovider-apple, nameSpecified: , owner: SRGSSR, version: 8.0.1
+name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.0
 
-name: srgdiagnostics-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
+name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.0.0
 
-name: srgidentity-apple, nameSpecified: , owner: SRGSSR, version: 2.0.4
+name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 8.0.3
 
-name: srgletterbox-apple, nameSpecified: , owner: SRGSSR, version: 5.0.3
+name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg3
 
-name: srglogger-apple, nameSpecified: , owner: SRGSSR, version: 2.0.1
+name: TCSDK-xcframework-apple, nameSpecified: TCSDK, owner: SRGSSR, version: 4.4.1-srg3
 
-name: srgmediaplayer-apple, nameSpecified: , owner: SRGSSR, version: 5.0.3
+name: UICKeyChainStore, nameSpecified: UICKeyChainStore, owner: kishikawakatsumi, version: 2.2.1
 
-name: srgnetwork-apple, nameSpecified: , owner: SRGSSR, version: 2.0.2
-
-name: srguserdata-apple, nameSpecified: , owner: SRGSSR, version: 2.0.4
-
-name: tagcommander-apple, nameSpecified: , owner: SRGSSR, version: 4.5.4_4.4.1_srg3
-
-name: UICKeyChainStore, nameSpecified: , owner: SRGSSR, version: v2.1.2_srg1
-
-name: YYWebImage, nameSpecified: , owner: SRGSSR, version: 1.0.5_srg2
+name: YYWebImage, nameSpecified: YYWebImage, owner: SRGSSR, version: 1.0.5-srg3
 
 add-version-numbers: true
 

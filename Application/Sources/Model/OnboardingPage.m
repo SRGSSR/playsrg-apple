@@ -6,8 +6,8 @@
 
 #import "OnboardingPage.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import libextobjc;
+@import SRGAppearance;
 
 @interface OnboardingPage ()
 

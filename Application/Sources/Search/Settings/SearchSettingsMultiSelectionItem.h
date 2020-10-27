@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Mantle/Mantle.h>
+@import Mantle;
 
 NS_ASSUME_NONNULL_BEGIN
 

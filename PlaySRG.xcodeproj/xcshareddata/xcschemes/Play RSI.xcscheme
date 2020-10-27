@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1150"
-   version = "1.3">
+   LastUpgradeVersion = "1210"
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "# Expanded code sign identity is not provided to post actions. To ensure we use the same identity as Xcode, we write it to a temporary file during a build phase so that we can retrieve it here.&#10;CODE_SIGN_IDENTITY=`cat /tmp/play-rsi-signing-identity`&#10;&#10;# Apply codes signing to all framworks in the final product.&#10;find &quot;${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}&quot; -mindepth 1 -maxdepth 1 -type d -exec /usr/bin/codesign --force --sign ${CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements {} \;&#10;&#10;# Remove duplicated copy of binary frameworks in Plugins folder.&#10;find &quot;${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}&quot; -mindepth 1 -maxdepth 1 -type d -name &quot;*.framework&quot; -exec rm -Rf {} \;&#10;"
+               shellToInvoke = "/bin/bash">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "08C68DF61D38D72000BB8AAA"
+                     BuildableName = "Play RSI.app"
+                     BlueprintName = "Play RSI"
+                     ReferencedContainer = "container:PlaySRG.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -27,15 +46,6 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "08C68DF61D38D72000BB8AAA"
-            BuildableName = "Play RSI.app"
-            BlueprintName = "Play RSI"
-            ReferencedContainer = "container:PlaySRG.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <Testables>
       </Testables>
    </TestAction>

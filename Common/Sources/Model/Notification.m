@@ -10,8 +10,8 @@
 #import "NSFileManager+PlaySRG.h"
 #import "PlayLogger.h"
 
-#import <libextobjc/libextobjc.h>
-#import <Mantle/Mantle.h>
+@import libextobjc;
+@import Mantle;
 
 static NSString *NotificationDescriptionForType(NotificationType notificationType)
 {

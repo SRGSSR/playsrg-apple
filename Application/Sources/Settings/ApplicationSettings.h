@@ -4,9 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "ApplicationConfiguration.h"
+#import "RadioChannel.h"
 
-#import <SRGLetterbox/SRGLetterbox.h>
+@import SRGLetterbox;
 
 NS_ASSUME_NONNULL_BEGIN
 

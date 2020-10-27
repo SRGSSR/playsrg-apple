@@ -1,13 +1,17 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "filename" : "outofswitzerlandv2.pdf"
+      "filename" : "outofswitzerlandv2.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "geoloc icon.pdf",
+      "idiom" : "tv"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   },
   "properties" : {
     "template-rendering-intent" : "template"

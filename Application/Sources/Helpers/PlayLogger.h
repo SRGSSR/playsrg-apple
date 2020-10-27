@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <SRGLogger/SRGLogger.h>
+@import SRGLogger;
 
 /**
  *  Macros for logging

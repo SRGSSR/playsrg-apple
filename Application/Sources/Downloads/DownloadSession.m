@@ -9,9 +9,9 @@
 #import "Download+Private.h"
 #import "PlayLogger.h"
 
-#import <FXReachability/FXReachability.h>
-#import <libextobjc/libextobjc.h>
-#import <SRGLogger/SRGLogger.h>
+@import FXReachability;
+@import libextobjc;
+@import SRGLogger;
 
 NSString * const DownloadSessionStateDidChangeNotification = @"DownloadSessionStateDidChangeNotification";
 NSString * const DownloadSessionStateKey = @"DownloadSessionState";

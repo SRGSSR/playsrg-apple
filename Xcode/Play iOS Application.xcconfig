@@ -1,0 +1,3 @@
+#include "Xcode/Play iOS.xcconfig"
+
+SWIFT_OBJC_BRIDGING_HEADER=$(PROJECT_DIR)/Application/Sources/Bridges/Play-ObjectiveC-Bridge.h

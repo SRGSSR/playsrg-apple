@@ -11,7 +11,7 @@
 #import "UIApplication+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface HomeStatusHeaderView ()
 
@@ -27,6 +27,11 @@
 @implementation HomeStatusHeaderView
 
 #pragma mark Class methods
+
++ (HomeStatusHeaderView *)view
+{
+    return [NSBundle.mainBundle loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
+}
 
 + (CGFloat)heightForServiceMessage:(SRGServiceMessage *)serviceMessage withSize:(CGSize)size
 {

@@ -25,8 +25,11 @@
 #import "WatchLater.h"
 
 #import <objc/runtime.h>
-#import <libextobjc/libextobjc.h>
-#import <SRGAnalytics/SRGAnalytics.h>
+
+@import libextobjc;
+@import SRGAnalytics;
+
+static void commonInit(BaseViewController *self);
 
 // Inner class conforming to `UIPopoverPresentationControllerDelegate` to avoid having `BaseViewController` conform to
 // it.
@@ -55,6 +58,24 @@
 
 @synthesize presentationControllerDelegate = _presentationControllerDelegate;
 
+#pragma mark Object lifecycle
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        commonInit(self);
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    if (self = [super initWithCoder:coder]) {
+        commonInit(self);
+    }
+    return self;
+}
+
 #pragma mark Getters and setters
 
 - (UIViewController *)previewContextViewController
@@ -69,6 +90,11 @@
     }
     return _presentationControllerDelegate;
 }
+
+#pragma mark Subclassing hooks
+
+- (void)updateForContentSizeCategory
+{}
 
 #pragma mark Accessibility
 
@@ -522,7 +548,6 @@
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a media from the start from the long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             void (^openPlayer)(void) = ^{
                 MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:nil fromPushNotification:NO];
-                mediaPlayerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
                 [self presentViewController:mediaPlayerViewController animated:YES completion:nil];
             };
             
@@ -664,4 +689,19 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+#pragma mark Notifications
+
+- (void)baseViewController_contentSizeCategoryDidChange:(NSNotification *)notification
+{
+    [self updateForContentSizeCategory];
+}
+
 @end
+
+static void commonInit(BaseViewController *self)
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(baseViewController_contentSizeCategoryDidChange:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+}

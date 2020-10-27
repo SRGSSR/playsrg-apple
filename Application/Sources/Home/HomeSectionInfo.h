@@ -4,10 +4,11 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "ApplicationConfiguration.h"
+#import "HomeSection.h"
+#import "TopicSection.h"
 
-#import <Foundation/Foundation.h>
-#import <SRGDataProvider/SRGDataProvider.h>
+@import Foundation;
+@import SRGDataProviderNetwork;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -6,7 +6,7 @@
 
 #import "StoreReview.h"
 
-#import <StoreKit/StoreKit.h>
+@import StoreKit;
 
 @implementation StoreReview
 

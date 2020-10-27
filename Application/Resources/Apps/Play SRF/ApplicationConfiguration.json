@@ -4,7 +4,6 @@
   "comScoreVirtualSite": "srf-player-ios-v",
   "netMetrixIdentifier": "srgplayer",
   "voiceOverLanguageCode": "de",
-  "googleCastReceiverIdentifier": "1AC2931D",
   "appStoreProductIdentifier": 638194352,
   "playURL": "https://www.srf.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",

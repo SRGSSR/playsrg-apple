@@ -10,6 +10,7 @@
 #import "HomeTopicViewController.h"
 #import "Layout.h"
 #import "SwimlaneCollectionViewLayout.h"
+#import "UIView+PlaySRG.h"
 
 static CGFloat kCellHeight = 100.f;
 
@@ -126,7 +127,7 @@ static CGFloat kCellHeight = 100.f;
     if (! [self isEmpty]) {
         SRGTopic *topic = self.homeSectionInfo.items[indexPath.row];
         HomeTopicViewController *topicViewController = [[HomeTopicViewController alloc] initWithTopic:topic];
-        [self.nearestViewController.navigationController pushViewController:topicViewController animated:YES];
+        [self.play_nearestViewController.navigationController pushViewController:topicViewController animated:YES];
     }
 }
 

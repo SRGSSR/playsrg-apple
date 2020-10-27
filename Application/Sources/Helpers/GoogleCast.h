@@ -4,8 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <SRGMediaPlayer/SRGMediaPlayer.h>
+@import SRGDataProviderModel;
+@import SRGMediaPlayer;
 
 NS_ASSUME_NONNULL_BEGIN
 

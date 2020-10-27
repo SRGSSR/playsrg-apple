@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "display-gamut" : "sRGB",
+      "filename" : "layer1-srgb.png",
+      "idiom" : "tv",
+      "scale" : "1x"
+    },
+    {
+      "display-gamut" : "display-P3",
+      "filename" : "layer1-p3@2x.png",
+      "idiom" : "tv",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

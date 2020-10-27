@@ -9,7 +9,7 @@
 #import "NSArray+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
+@import libextobjc;
 
 static void commonInit(ListRequestViewController *self);
 
@@ -219,7 +219,7 @@ static void commonInit(ListRequestViewController *self);
 
 - (SRGRequest *)requestForListWithCompletionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
-    HLSMissingMethodImplementation();
+    [self doesNotRecognizeSelector:_cmd];
     return [SRGRequest new];
 }
 

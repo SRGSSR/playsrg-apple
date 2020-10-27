@@ -6,7 +6,7 @@
 
 #import "UIColor+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @implementation UIColor (PlaySRG)
 
@@ -43,6 +43,11 @@
 + (UIColor *)play_grayColor
 {
     return [UIColor srg_colorFromHexadecimalString:@"#979797"];
+}
+
++ (UIColor *)play_orangeColor
+{
+    return [UIColor srg_colorFromHexadecimalString:@"#df5200"];
 }
 
 + (UIColor *)play_popoverGrayBackgroundColor

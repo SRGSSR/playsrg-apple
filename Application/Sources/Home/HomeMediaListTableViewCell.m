@@ -6,6 +6,7 @@
 
 #import "HomeMediaListTableViewCell.h"
 
+#import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "HomeLiveMediaCollectionViewCell.h"
 #import "HomeMediaCollectionHeaderView.h"
@@ -15,11 +16,10 @@
 #import "SRGModule+PlaySRG.h"
 #import "SwimlaneCollectionViewLayout.h"
 #import "UIColor+PlaySRG.h"
+#import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <Masonry/Masonry.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 {
@@ -74,14 +74,16 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         self.selectedBackgroundView.backgroundColor = UIColor.clearColor;
         
         UIView *moduleBackgroundView = [[UIView alloc] initWithFrame:self.contentView.bounds];
+        moduleBackgroundView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:moduleBackgroundView];
-        [moduleBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView.mas_top);
-            make.height.mas_equalTo(75.f);
-            make.left.equalTo(self.contentView.mas_left);
-            make.right.equalTo(self.contentView.mas_right);
-        }];
         self.moduleBackgroundView = moduleBackgroundView;
+        
+        [NSLayoutConstraint activateConstraints:@[
+            [moduleBackgroundView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor],
+            [moduleBackgroundView.heightAnchor constraintEqualToConstant:75.f],
+            [moduleBackgroundView.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor],
+            [moduleBackgroundView.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor]
+        ]];
         
         UIView *wrapperView = [[UIView alloc] initWithFrame:self.contentView.bounds];
         wrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -214,7 +216,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
 {
     if (! [self isEmpty]) {
         SRGMedia *media = self.homeSectionInfo.items[indexPath.row];
-        [self.nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
+        [self.play_nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }
 

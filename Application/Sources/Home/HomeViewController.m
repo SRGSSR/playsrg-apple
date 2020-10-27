@@ -32,11 +32,10 @@
 #import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <SRGUserData/SRGUserData.h>
+@import libextobjc;
+@import SRGAppearance;
+@import SRGDataProvider;
+@import SRGUserData;
 
 typedef NS_ENUM(NSInteger, HomeHeaderType) {
     HomeHeaderTypeNone,         // No header
@@ -446,7 +445,7 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     NSError *error = self.lastRequestError;
     if (error) {
         // Multiple errors. Pick the first ones
-        if ([error hasCode:SRGNetworkErrorMultiple withinDomain:SRGNetworkErrorDomain]) {
+        if ([error.domain isEqualToString:SRGNetworkErrorDomain] && error.code == SRGNetworkErrorMultiple) {
             error = [error.userInfo[SRGNetworkErrorsKey] firstObject];
         }
         title = error.localizedDescription;

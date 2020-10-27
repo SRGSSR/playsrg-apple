@@ -4,12 +4,14 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoconutKit/CoconutKit.h>
-#import <SRGDataProvider/SRGDataProvider.h>
+@import SRGDataProviderModel;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RelatedContentView : HLSNibView
+@interface RelatedContentView : UIView
+
+@property (class, nonatomic, readonly) RelatedContentView *view;
 
 @property (nonatomic) SRGRelatedContent *relatedContent;
 

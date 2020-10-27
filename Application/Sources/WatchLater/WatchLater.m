@@ -9,8 +9,8 @@
 #import "DeprecatedFavorite.h"
 #import "NSArray+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGUserData/SRGUserData.h>
+@import libextobjc;
+@import SRGUserData;
 
 NSString * const WatchLaterDidChangeNotification = @"WatchLaterDidChangeNotification";
 NSString * const WatchLaterMediaMetadataUidKey = @"WatchLaterMediaMetadataUid";

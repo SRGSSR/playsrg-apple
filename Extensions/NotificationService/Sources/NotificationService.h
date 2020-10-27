@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <UserNotifications/UserNotifications.h>
+@import UserNotifications;
 
 NS_ASSUME_NONNULL_BEGIN
 

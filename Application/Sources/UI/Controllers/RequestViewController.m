@@ -8,7 +8,7 @@
 
 #import "UIViewController+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
+@import libextobjc;
 
 @interface RequestViewController ()
 

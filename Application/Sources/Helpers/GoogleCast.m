@@ -6,15 +6,19 @@
 
 #import "GoogleCast.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "History.h"
 #import "PlayErrors.h"
+#import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <GoogleCast/GoogleCast.h>
-#import <SRGAnalytics/SRGAnalytics.h>
+#import <objc/runtime.h>
+
+@import GoogleCast;
+@import SRGAnalytics;
+@import SRGAppearance;
 
 NSString * const GoogleCastPlaybackDidStartNotification = @"GoogleCastPlaybackDidStartNotification";
 NSString * const GoogleCastMediaKey = @"GoogleCastMedia";
@@ -37,7 +41,7 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
         if (pError) {
             *pError = [NSError errorWithDomain:PlayErrorDomain
                                           code:PlayErrorCodeReceiver
-                          localizedDescription:NSLocalizedString(@"No Google Cast receiver is available.", @"Message displayed if no Google Cast receiver is available")];
+                                      userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"No Google Cast receiver is available.", @"Message displayed if no Google Cast receiver is available") }];
         }
         return NO;
     }
@@ -50,7 +54,7 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
         if (pError) {
             *pError = [NSError errorWithDomain:PlayErrorDomain
                                           code:PlayErrorCodeReceiver
-                          localizedDescription:NSLocalizedString(@"The Google Cast receiver cannot play videos.", @"Message displayed if the Google Cast receiver cannot play videos")];
+                                      userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The Google Cast receiver cannot play videos.", @"Message displayed if the Google Cast receiver cannot play videos") }];
         }
         return NO;
     }
@@ -58,7 +62,7 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
         if (pError) {
             *pError = [NSError errorWithDomain:PlayErrorDomain
                                           code:PlayErrorCodeReceiver
-                          localizedDescription:NSLocalizedString(@"The Google Cast receiver cannot play audios.", @"Message displayed if the Google Cast receiver cannot play audios")];
+                                      userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The Google Cast receiver cannot play audios.", @"Message displayed if the Google Cast receiver cannot play audios") }];
         }
         return NO;
     }
@@ -66,7 +70,7 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
         if (pError) {
             *pError = [NSError errorWithDomain:PlayErrorDomain
                                           code:PlayErrorCodeForbidden
-                          localizedDescription:NSLocalizedString(@"This content is not allowed to be played with Google Cast.", @"Message displayed when attempting to play some content not allowed to be played with Google Cast")];
+                                      userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"This content is not allowed to be played with Google Cast.", @"Message displayed when attempting to play some content not allowed to be played with Google Cast") }];
         }
         return NO;
     }
@@ -80,7 +84,7 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
         if (pError) {
             *pError = [NSError errorWithDomain:PlayErrorDomain
                                           code:PlayErrorCodeForbidden
-                          localizedDescription:NSLocalizedString(@"This content is not allowed to be played with Google Cast.", @"Message displayed when attempting to play some content not allowed to be played with Google Cast")];
+                                      userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"This content is not allowed to be played with Google Cast.", @"Message displayed when attempting to play some content not allowed to be played with Google Cast") }];
         }
         return NO;
     }
@@ -94,7 +98,7 @@ BOOL GoogleCastIsPossible(SRGMediaComposition *mediaComposition, NSError **pErro
         if (pError) {
             *pError = [NSError errorWithDomain:PlayErrorDomain
                                           code:PlayErrorCodeForbidden
-                          localizedDescription:NSLocalizedString(@"This content is not allowed to be played with Google Cast.", @"Message displayed when attempting to play some content not allowed to be played with Google Cast")];
+                                      userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"This content is not allowed to be played with Google Cast.", @"Message displayed when attempting to play some content not allowed to be played with Google Cast") }];
         }
         return NO;
     }
@@ -153,9 +157,9 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 - (instancetype)init
 {
     if (self = [super init]) {
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        
-        GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:applicationConfiguration.googleCastReceiverIdentifier];
+        NSString *googleCastReceiverIdentifier = [NSBundle.mainBundle objectForInfoDictionaryKey:@"GoogleCastReceiverIdentifier"];
+        NSAssert(googleCastReceiverIdentifier != nil, @"A Google Cast receiver identifier is required");
+        GCKDiscoveryCriteria *discoveryCriteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:googleCastReceiverIdentifier];
         GCKCastOptions *options = [[GCKCastOptions alloc] initWithDiscoveryCriteria:discoveryCriteria];
         [GCKCastContext setSharedInstanceWithOptions:options];
         [GCKCastContext sharedInstance].useDefaultExpandedMediaControls = YES;
@@ -174,6 +178,17 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
         // afterwards, so that the associated performance impact is mitigated.
         dispatch_async(dispatch_get_main_queue(), ^{
             GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
+            styleAttributes.backgroundColor = UIColor.play_blackColor;
+            styleAttributes.headingTextColor = UIColor.whiteColor;
+            styleAttributes.bodyTextColor = UIColor.whiteColor;
+            styleAttributes.captionTextColor = UIColor.whiteColor;
+            styleAttributes.iconTintColor = UIColor.whiteColor;
+            
+            styleAttributes.headingTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
+            styleAttributes.bodyTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+            styleAttributes.buttonTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+            styleAttributes.captionTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+            
             styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
             styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
             styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
@@ -194,18 +209,21 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 {
     GCKCastState castState = [notification.userInfo[kGCKNotificationKeyCastState] integerValue];
     if (castState == GCKCastStateConnected) {
-        SRGLetterboxService *service = SRGLetterboxService.sharedService;
-        SRGLetterboxController *controller = service.controller;
-        
-        // Transfer local playback to Google Cast
-        if (controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
-            [UIApplication.sharedApplication.keyWindow.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
-                if (playerType == PlayerTypeGoogleCast) {
-                    [service disable];
-                    [controller reset];
-                }
-            }];
-        }
+        // Wait a bit so that Google Cast devices view on top disappeared.
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            SRGLetterboxService *service = SRGLetterboxService.sharedService;
+            SRGLetterboxController *controller = service.controller;
+            
+            // Transfer local playback to Google Cast
+            if (controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
+                [UIApplication.sharedApplication.keyWindow.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
+                    if (playerType == PlayerTypeGoogleCast) {
+                        [service disable];
+                        [controller reset];
+                    }
+                }];
+            }
+        });
     }
 }
 
@@ -233,28 +251,9 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 
 @end
 
-static id (*s_GCKUICastButton_initWithFrame)(id, SEL, CGRect) = NULL;
-static id (*s_GCKUICastButton_initWithCoder)(id, SEL, id) = NULL;
-
 static void commonInit(GCKUICastButton *self)
 {
     [self addTarget:self action:@selector(openGoogleCastDeviceSelection:) forControlEvents:UIControlEventTouchUpInside];
-}
-
-static id swizzled_initWithFrame(GCKUICastButton *self, SEL _cmd, CGRect frame)
-{
-    if ((self = s_GCKUICastButton_initWithFrame(self, _cmd, frame))) {
-        commonInit(self);
-    }
-    return self;
-}
-
-static id swizzled_initWithCoder(GCKUICastButton *self, SEL _cmd, NSCoder *decoder)
-{
-    if ((self = s_GCKUICastButton_initWithCoder(self, _cmd, decoder))) {
-        commonInit(self);
-    }
-    return self;
 }
 
 @implementation GCKUICastButton (GoogleCast)
@@ -263,8 +262,30 @@ static id swizzled_initWithCoder(GCKUICastButton *self, SEL _cmd, NSCoder *decod
 
 + (void)load
 {
-    HLSSwizzleSelector(self, @selector(initWithFrame:), swizzled_initWithFrame, &s_GCKUICastButton_initWithFrame);
-    HLSSwizzleSelector(self, @selector(initWithCoder:), swizzled_initWithCoder, &s_GCKUICastButton_initWithCoder);
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(initWithFrame:)),
+                                   class_getInstanceMethod(self, @selector(GCKUICastButton_GoogleCast_swizzled_initWithFrame:)));
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(initWithCoder:)),
+                                   class_getInstanceMethod(self, @selector(GCKUICastButton_GoogleCast_swizzled_initWithCoder:)));
+}
+
+#pragma mark Swizzled methods
+
+- (id)GCKUICastButton_GoogleCast_swizzled_initWithFrame:(CGRect)frame
+{
+    id zelf = [self GCKUICastButton_GoogleCast_swizzled_initWithFrame:frame];
+    if (zelf) {
+        commonInit(zelf);
+    }
+    return zelf;
+}
+
+- (id)GCKUICastButton_GoogleCast_swizzled_initWithCoder:(NSCoder *)decoder
+{
+    id zelf = [self GCKUICastButton_GoogleCast_swizzled_initWithCoder:decoder];
+    if (zelf) {
+        commonInit(zelf);
+    }
+    return zelf;
 }
 
 #pragma mark Actions

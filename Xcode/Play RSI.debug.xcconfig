@@ -1,3 +1,3 @@
 #include "Xcode/Links/Play RSI.debug.xcconfig"
-#include "Pods/Target Support Files/Pods-PlaySRG-Play RSI/Pods-PlaySRG-Play RSI.debug.xcconfig"
-#include "Xcode/Play Application.xcconfig"
+#include "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.debug.xcconfig"
+#include "Xcode/Play iOS Application.xcconfig"

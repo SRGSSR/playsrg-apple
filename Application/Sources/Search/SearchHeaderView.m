@@ -8,7 +8,7 @@
 
 #import "Layout.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface SearchHeaderView ()
 

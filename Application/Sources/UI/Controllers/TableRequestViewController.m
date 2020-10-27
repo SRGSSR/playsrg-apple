@@ -13,8 +13,8 @@
 #import "UIImageView+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
+@import libextobjc;
+@import SRGAppearance;
 
 @interface TableRequestViewController ()
 
@@ -242,7 +242,7 @@
     if (self.lastRequestError) {
         // Multiple errors. Pick the first ones
         NSError *error = self.lastRequestError;
-        if ([error hasCode:SRGNetworkErrorMultiple withinDomain:SRGNetworkErrorDomain]) {
+        if ([error.domain isEqualToString:SRGNetworkErrorDomain] && error.code == SRGNetworkErrorMultiple) {
             error = [error.userInfo[SRGNetworkErrorsKey] firstObject];
         }
         return [[NSAttributedString alloc] initWithString:error.localizedDescription attributes:attributes];
@@ -304,13 +304,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    HLSMissingMethodImplementation();
+    [self doesNotRecognizeSelector:_cmd];
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    HLSMissingMethodImplementation();
+    [self doesNotRecognizeSelector:_cmd];
     return UITableViewCell.new;
 }
 

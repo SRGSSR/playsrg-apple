@@ -12,8 +12,9 @@
 #import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
+#import "UIView+PlaySRG.h"
 
-#import <SRGAppearance/SRGAppearance.h>
+@import SRGAppearance;
 
 @interface HomeMediaCollectionHeaderView ()
 
@@ -189,7 +190,7 @@
     else {
         return;
     }
-    [self.nearestViewController.navigationController pushViewController:viewController animated:YES];
+    [self.play_nearestViewController.navigationController pushViewController:viewController animated:YES];
 }
 
 @end

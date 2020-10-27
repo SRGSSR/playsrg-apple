@@ -8,6 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSection.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
 #import "ShowViewController.h"
@@ -20,10 +21,10 @@
 #import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-#import <libextobjc/libextobjc.h>
-#import <SRGAppearance/SRGAppearance.h>
-#import <SRGDataProvider/SRGDataProvider.h>
-#import <SRGUserData/SRGUserData.h>
+@import libextobjc;
+@import SRGAppearance;
+@import SRGDataProvider;
+@import SRGUserData;
 
 @interface FavoritesViewController () <FavoriteTableViewCellDelegate>
 
@@ -246,7 +247,7 @@
     if (self.lastRequestError) {
         // Multiple errors. Pick the first ones
         NSError *error = self.lastRequestError;
-        if ([error hasCode:SRGNetworkErrorMultiple withinDomain:SRGNetworkErrorDomain]) {
+        if ([error.domain isEqualToString:SRGNetworkErrorDomain] && error.code == SRGNetworkErrorMultiple) {
             error = [error.userInfo[SRGNetworkErrorsKey] firstObject];
         }
         return [[NSAttributedString alloc] initWithString:error.localizedDescription
