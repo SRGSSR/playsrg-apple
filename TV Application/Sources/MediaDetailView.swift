@@ -57,39 +57,75 @@ struct MediaDetailView: View {
 }
 
 extension MediaDetailView {
-    struct PropertiesView: View {
+    private struct DescriptionView: View {
+        let media: SRGMedia
+        
+        @Namespace private var namespace
+        
+        var body: some View {
+            FocusableRegion {
+                GeometryReader { geometry in
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(MediaDescription.subtitle(for: media))
+                            .srgFont(.bold, size: .title)
+                            .lineLimit(3)
+                            .foregroundColor(.white)
+                        Text(MediaDescription.title(for: media))
+                            .srgFont(.regular, size: .headline)
+                            .foregroundColor(.white)
+                        Spacer()
+                            .frame(height: 20)
+                        AttributesView(media: media)
+                        Spacer()
+                            .frame(height: 20)
+                        SummaryView(media: media)
+                        Spacer()
+                        ActionsView(media: media)
+                            .prefersDefaultFocus(in: namespace)
+                    }
+                    .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .leading)
+                    .focusScope(namespace)
+                }
+            }
+        }
+    }
+}
+
+extension MediaDetailView {
+    struct AttributeView: View {
+        let icon: String
+        let values: [String]
+        
+        var body: some View {
+            HStack(spacing: 10) {
+                Image(icon)
+                Text(values.joined(separator: " - "))
+                    .srgFont(.regular, size: .caption)
+                    .foregroundColor(.white)
+            }
+        }
+    }
+    
+    struct AttributesView: View {
         let media: SRGMedia
         
         var body: some View {
-            HStack(spacing: 4) {
-                if let youthProtectionLogoImage = YouthProtectionImageForColor(media.youthProtectionColor) {
-                    Image(uiImage: youthProtectionLogoImage)
+            HStack(spacing: 30) {
+                HStack(spacing: 4) {
+                    if let youthProtectionLogoImage = YouthProtectionImageForColor(media.youthProtectionColor) {
+                        Image(uiImage: youthProtectionLogoImage)
+                    }
+                    DurationLabel(media: media)
                 }
-                DurationLabel(media: media)
+                
                 if let isWebFirst = media.play_isWebFirst, isWebFirst {
-                    Spacer()
-                        .frame(width: 25)
                     Badge(text: NSLocalizedString("Web first", comment: "Web first label on media detail page"), color: Color(.srg_blue))
                 }
-                if let subtitleLanguages = media.play_subtitleLanguages, subtitleLanguages.count != 0 {
-                    Spacer()
-                        .frame(width: 25)
-                    Image("subtitles_off-22")
-                    Spacer()
-                        .frame(width: 5)
-                    Text(subtitleLanguages.joined(separator: " - "))
-                        .srgFont(.regular, size: .caption)
-                        .foregroundColor(.white)
+                if let subtitleLanguages = media.play_subtitleLanguages, !subtitleLanguages.isEmpty {
+                    AttributeView(icon: "subtitles_off-22", values: subtitleLanguages)
                 }
-                if let audioLanguages = media.play_audioLanguages, audioLanguages.count != 0 {
-                    Spacer()
-                        .frame(width: 25)
-                    Image("audios-22")
-                    Spacer()
-                        .frame(width: 5)
-                    Text(audioLanguages.joined(separator: " - "))
-                        .srgFont(.regular, size: .caption)
-                        .foregroundColor(.white)
+                if let audioLanguages = media.play_audioLanguages, !audioLanguages.isEmpty {
+                    AttributeView(icon: "audios-22", values: audioLanguages)
                 }
             }
         }
@@ -162,41 +198,6 @@ extension MediaDetailView {
                     LabeledButton(icon: "episodes-22", label: NSLocalizedString("Episodes", comment:"Episodes button label")) {
                         /* Open show page */
                     }
-                }
-            }
-        }
-    }
-}
-
-extension MediaDetailView {
-    private struct DescriptionView: View {
-        let media: SRGMedia
-        
-        @Namespace private var namespace
-        
-        var body: some View {
-            FocusableRegion {
-                GeometryReader { geometry in
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text(MediaDescription.subtitle(for: media))
-                            .srgFont(.bold, size: .title)
-                            .lineLimit(3)
-                            .foregroundColor(.white)
-                        Text(MediaDescription.title(for: media))
-                            .srgFont(.regular, size: .headline)
-                            .foregroundColor(.white)
-                        Spacer()
-                            .frame(height: 20)
-                        PropertiesView(media: media)
-                        Spacer()
-                            .frame(height: 20)
-                        SummaryView(media: media)
-                        Spacer()
-                        ActionsView(media: media)
-                            .prefersDefaultFocus(in: namespace)
-                    }
-                    .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .leading)
-                    .focusScope(namespace)
                 }
             }
         }
