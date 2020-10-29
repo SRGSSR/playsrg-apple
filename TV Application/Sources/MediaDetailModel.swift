@@ -27,7 +27,7 @@ class MediaDetailModel: ObservableObject {
         
         let middlewareUrl = ApplicationConfiguration.shared.middlewareURL
         
-        let resourcePath = "api/v2/playlist/recommendation/continuousPlayback/" + media.urn
+        let resourcePath = "api/v2/playlist/recommendation/relatedContent/" + media.urn
         let url = URL(string: resourcePath, relativeTo: middlewareUrl)!
         
         URLSession.shared.dataTaskPublisher(for: url)
