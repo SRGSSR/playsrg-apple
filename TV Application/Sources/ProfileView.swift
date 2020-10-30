@@ -10,8 +10,9 @@ struct ProfileView: View {
     private static let version: String = {
         let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
         let bundleNameSuffix = Bundle.main.infoDictionary!["BundleNameSuffix"] as! String
+        let buildName = Bundle.main.infoDictionary!["BuildName"] as! String
         let buildString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
-        return String(format: "%@%@ (%@)", appVersion, bundleNameSuffix, buildString)
+        return String(format: "%@%@%@ (%@)", appVersion, bundleNameSuffix, buildName, buildString)
     }()
     
     var body: some View {
