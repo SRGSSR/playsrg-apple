@@ -54,7 +54,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Firebase</string>
 			<key>Title</key>
-			<string>Firebase (6.34.0)</string>
+			<string>Firebase (7.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -62,7 +62,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FirebaseABTesting</string>
 			<key>Title</key>
-			<string>FirebaseABTesting (4.2.0)</string>
+			<string>FirebaseABTesting (7.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -70,7 +70,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FirebaseAnalytics</string>
 			<key>Title</key>
-			<string>FirebaseAnalytics (6.9.0)</string>
+			<string>FirebaseAnalytics (7.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -78,7 +78,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FirebaseCore</string>
 			<key>Title</key>
-			<string>FirebaseCore (6.10.4)</string>
+			<string>FirebaseCore (7.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -86,7 +86,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FirebaseCoreDiagnostics</string>
 			<key>Title</key>
-			<string>FirebaseCoreDiagnostics (1.7.0)</string>
+			<string>FirebaseCoreDiagnostics (7.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -94,7 +94,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FirebaseInstallations</string>
 			<key>Title</key>
-			<string>FirebaseInstallations (1.7.0)</string>
+			<string>FirebaseInstallations (7.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -102,7 +102,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FirebaseRemoteConfig</string>
 			<key>Title</key>
-			<string>FirebaseRemoteConfig (4.9.1)</string>
+			<string>FirebaseRemoteConfig (7.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -134,7 +134,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleAppMeasurement</string>
 			<key>Title</key>
-			<string>GoogleAppMeasurement (6.9.0)</string>
+			<string>GoogleAppMeasurement (7.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -142,7 +142,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleDataTransport</string>
 			<key>Title</key>
-			<string>GoogleDataTransport (7.5.1)</string>
+			<string>GoogleDataTransport (8.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -150,7 +150,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleUtilities</string>
 			<key>Title</key>
-			<string>GoogleUtilities (6.7.2)</string>
+			<string>GoogleUtilities (7.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -158,7 +158,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GTMSessionFetcher</string>
 			<key>Title</key>
-			<string>GTMSessionFetcher (1.4.0)</string>
+			<string>GTMSessionFetcher (1.5.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -206,7 +206,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/MaterialComponents</string>
 			<key>Title</key>
-			<string>MaterialComponents (118.0.0)</string>
+			<string>MaterialComponents (118.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -238,7 +238,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/nanopb</string>
 			<key>Title</key>
-			<string>nanopb (1.30906.0)</string>
+			<string>nanopb (2.30906.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
