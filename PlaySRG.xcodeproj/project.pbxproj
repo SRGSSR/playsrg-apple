@@ -5560,7 +5560,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6F19381E1EFA9D4C0017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5574,7 +5574,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6F1938201EFA9D590017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5588,7 +5588,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6F1938211EFA9D5D0017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5602,7 +5602,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6F1938221EFA9D600017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5616,7 +5616,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5978,7 +5978,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5996,7 +5996,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6014,7 +6014,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6032,7 +6032,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6050,7 +6050,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		78466A9B6015AEDBE68B70AE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
