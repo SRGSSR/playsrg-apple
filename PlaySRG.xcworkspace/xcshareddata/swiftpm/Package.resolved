@@ -95,9 +95,9 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": null,
-          "revision": "3d9304541fb3b1b0f5767360a887258b26053ca5",
-          "version": "5.0.0"
+          "branch": "develop",
+          "revision": "b853712998cf95b562a34244c68cc101ab46317f",
+          "version": null
         }
       },
       {
@@ -149,9 +149,9 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": null,
-          "revision": "ee3223f55e9a72fabdaea56b9e28c3c9e760f281",
-          "version": "6.0.0"
+          "branch": "develop",
+          "revision": "1088597efd77e49dde803f7ce8405aa4a0fa505f",
+          "version": null
         }
       },
       {
@@ -167,9 +167,9 @@
         "package": "SRGMediaPlayer",
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
-          "branch": null,
-          "revision": "7a89c2d7ade084c31e9b0271ad7d0b9fcd85b743",
-          "version": "6.0.0"
+          "branch": "develop",
+          "revision": "9d15a62433e43e880a578d4c82f0849742782cee",
+          "version": null
         }
       },
       {

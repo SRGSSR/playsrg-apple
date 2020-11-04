@@ -834,7 +834,7 @@ name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.6
 
 name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5
 
-name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 5.0.0
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 
 
 name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 3.0.0
 
@@ -846,11 +846,11 @@ name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, versio
 
 name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.0.0
 
-name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 6.0.0
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.0
 
-name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 6.0.0
+name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 
 
 name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.0
 
