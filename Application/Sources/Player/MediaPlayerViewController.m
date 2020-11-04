@@ -1728,6 +1728,13 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitlePictureInPicture labels:labels];
 }
 
+- (void)letterboxDidStopPlaybackFromPictureInPicture
+{
+    if (! ApplicationSettingBackgroundVideoPlaybackEnabled()) {
+        [SRGLetterboxService.sharedService disableForController:self.letterboxController];
+    }
+}
+
 #pragma mark UIGestureRecognizerDelegate protocol
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
