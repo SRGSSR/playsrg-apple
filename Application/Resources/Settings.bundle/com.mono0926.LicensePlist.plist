@@ -174,7 +174,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/ios-library</string>
 			<key>Title</key>
-			<string>Airship (14.1.2)</string>
+			<string>Airship (14.1.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -278,7 +278,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgappearance-apple</string>
 			<key>Title</key>
-			<string>SRGAppearance (3.0.0)</string>
+			<string>SRGAppearance (3.0.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
