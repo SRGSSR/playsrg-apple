@@ -7,19 +7,6 @@
 import SwiftUI
 
 struct ShowCell: View {
-    private struct VisualView: View {
-        let show: SRGShow?
-        
-        private var imageUrl: URL? {
-            return show?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
-        }
-        
-        var body: some View {
-            ImageView(url: imageUrl)
-                .whenRedacted { $0.hidden() }
-        }
-    }
-    
     let show: SRGShow?
     
     private var title: String {
@@ -45,6 +32,21 @@ struct ShowCell: View {
                     .frame(width: geometry.size.width, alignment: .leading)
             }
             .redacted(reason: redactionReason)
+        }
+    }
+}
+
+extension ShowCell {
+    private struct VisualView: View {
+        let show: SRGShow?
+        
+        private var imageUrl: URL? {
+            return show?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
+        }
+        
+        var body: some View {
+            ImageView(url: imageUrl)
+                .whenRedacted { $0.hidden() }
         }
     }
 }

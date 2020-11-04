@@ -39,6 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FirebaseApp.configure()
         }
         
+        try? AVAudioSession.sharedInstance().setCategory(.playback)
+        
         SRGDataProvider.current = SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
         
         let window = UIWindow(frame: UIScreen.main.bounds)

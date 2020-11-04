@@ -5,10 +5,39 @@
 //
 
 import SRGAppearance
-import SRGLetterbox
 import SwiftUI
 
 struct HeroMediaCell: View {
+    let media: SRGMedia?
+    
+    private var redactionReason: RedactionReasons {
+        return media == nil ? .placeholder : .init()
+    }
+    
+    var body: some View {
+        GeometryReader { geometry in
+            Button(action: {
+                if let media = media {
+                    navigateToMedia(media)
+                }
+            }) {
+                HStack(spacing: 0) {
+                    MediaVisual(media: media, scale: .large)
+                        .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
+                    DescriptionView(media: media)
+                        .padding()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
+                .redacted(reason: redactionReason)
+            }
+            .buttonStyle(CardButtonStyle())
+        }
+    }
+}
+
+extension HeroMediaCell {
     private struct DescriptionView: View {
         let media: SRGMedia?
         
@@ -39,38 +68,6 @@ struct HeroMediaCell: View {
                 Spacer()
             }
             .foregroundColor(.white)
-        }
-    }
-    
-    let media: SRGMedia?
-    
-    private var redactionReason: RedactionReasons {
-        return media == nil ? .placeholder : .init()
-    }
-    
-    var body: some View {
-        GeometryReader { geometry in
-            Button(action: {
-                // TODO: Could / should be presented with SwiftUI, but presentation flag must be part of topmost state
-                if let media = media,
-                   let rootViewController = UIApplication.shared.windows.first?.rootViewController {
-                    let letterboxViewController = SRGLetterboxViewController()
-                    letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                    rootViewController.present(letterboxViewController, animated: true, completion: nil)
-                }
-            }) {
-                HStack(spacing: 0) {
-                    MediaVisual(media: media, scale: .large)
-                        .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
-                    DescriptionView(media: media)
-                        .padding()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
-                .redacted(reason: redactionReason)
-            }
-            .buttonStyle(CardButtonStyle())
         }
     }
 }

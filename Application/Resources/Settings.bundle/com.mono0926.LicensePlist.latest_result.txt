@@ -91,322 +91,322 @@ version: 1.8.1
 name: Firebase, nameSpecified: 
 body: 
                    …
-version: 6.34.0
+version: 7.0.0
 
 name: Firebase, nameSpecified: 
 body: 
                    …
-version: 6.34.0
+version: 7.0.0
 
 name: Firebase, nameSpecified: 
 body: 
                    …
-version: 6.34.0
+version: 7.0.0
 
 name: Firebase, nameSpecified: 
 body: 
                    …
-version: 6.34.0
+version: 7.0.0
 
 name: Firebase, nameSpecified: 
 body: 
                    …
-version: 6.34.0
+version: 7.0.0
 
 name: Firebase, nameSpecified: 
 body: 
                    …
-version: 6.34.0
+version: 7.0.0
 
 name: Firebase, nameSpecified: 
 body: 
                    …
-version: 6.34.0
+version: 7.0.0
 
 name: Firebase, nameSpecified: 
 body: 
                    …
-version: 6.34.0
+version: 7.0.0
 
 name: Firebase, nameSpecified: 
 body: 
                    …
-version: 6.34.0
+version: 7.0.0
 
 name: Firebase, nameSpecified: 
 body: 
                    …
-version: 6.34.0
+version: 7.0.0
 
 name: FirebaseABTesting, nameSpecified: 
 body: 
                    …
-version: 4.2.0
+version: 7.0.0
 
 name: FirebaseABTesting, nameSpecified: 
 body: 
                    …
-version: 4.2.0
+version: 7.0.0
 
 name: FirebaseABTesting, nameSpecified: 
 body: 
                    …
-version: 4.2.0
+version: 7.0.0
 
 name: FirebaseABTesting, nameSpecified: 
 body: 
                    …
-version: 4.2.0
+version: 7.0.0
 
 name: FirebaseABTesting, nameSpecified: 
 body: 
                    …
-version: 4.2.0
+version: 7.0.0
 
 name: FirebaseABTesting, nameSpecified: 
 body: 
                    …
-version: 4.2.0
+version: 7.0.0
 
 name: FirebaseABTesting, nameSpecified: 
 body: 
                    …
-version: 4.2.0
+version: 7.0.0
 
 name: FirebaseABTesting, nameSpecified: 
 body: 
                    …
-version: 4.2.0
+version: 7.0.0
 
 name: FirebaseABTesting, nameSpecified: 
 body: 
                    …
-version: 4.2.0
+version: 7.0.0
 
 name: FirebaseABTesting, nameSpecified: 
 body: 
                    …
-version: 4.2.0
+version: 7.0.0
 
 name: FirebaseAnalytics, nameSpecified: 
 body: Copyright 2020 Googl…
-version: 6.9.0
+version: 7.0.0
 
 name: FirebaseAnalytics, nameSpecified: 
 body: Copyright 2020 Googl…
-version: 6.9.0
+version: 7.0.0
 
 name: FirebaseAnalytics, nameSpecified: 
 body: Copyright 2020 Googl…
-version: 6.9.0
+version: 7.0.0
 
 name: FirebaseAnalytics, nameSpecified: 
 body: Copyright 2020 Googl…
-version: 6.9.0
+version: 7.0.0
 
 name: FirebaseAnalytics, nameSpecified: 
 body: Copyright 2020 Googl…
-version: 6.9.0
+version: 7.0.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 6.10.4
+version: 7.0.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 6.10.4
+version: 7.0.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 6.10.4
+version: 7.0.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 6.10.4
+version: 7.0.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 6.10.4
+version: 7.0.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 6.10.4
+version: 7.0.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 6.10.4
+version: 7.0.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 6.10.4
+version: 7.0.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 6.10.4
+version: 7.0.0
 
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
-version: 6.10.4
+version: 7.0.0
 
 name: FirebaseCoreDiagnostics, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseCoreDiagnostics, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseCoreDiagnostics, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseCoreDiagnostics, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseCoreDiagnostics, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseCoreDiagnostics, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseCoreDiagnostics, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseCoreDiagnostics, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseCoreDiagnostics, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseCoreDiagnostics, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseInstallations, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseInstallations, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseInstallations, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseInstallations, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseInstallations, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseInstallations, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseInstallations, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseInstallations, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseInstallations, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseInstallations, nameSpecified: 
 body: 
                    …
-version: 1.7.0
+version: 7.0.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
 body: 
                    …
-version: 4.9.1
+version: 7.0.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
 body: 
                    …
-version: 4.9.1
+version: 7.0.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
 body: 
                    …
-version: 4.9.1
+version: 7.0.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
 body: 
                    …
-version: 4.9.1
+version: 7.0.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
 body: 
                    …
-version: 4.9.1
+version: 7.0.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
 body: 
                    …
-version: 4.9.1
+version: 7.0.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
 body: 
                    …
-version: 4.9.1
+version: 7.0.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
 body: 
                    …
-version: 4.9.1
+version: 7.0.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
 body: 
                    …
-version: 4.9.1
+version: 7.0.0
 
 name: FirebaseRemoteConfig, nameSpecified: 
 body: 
                    …
-version: 4.9.1
+version: 7.0.0
 
 name: FSCalendar, nameSpecified: 
 body: Copyright (c) 2013-2…
@@ -450,148 +450,148 @@ version: 4.5.1
 
 name: GoogleAppMeasurement, nameSpecified: 
 body: Copyright 2020 Googl…
-version: 6.9.0
+version: 7.0.0
 
 name: GoogleAppMeasurement, nameSpecified: 
 body: Copyright 2020 Googl…
-version: 6.9.0
+version: 7.0.0
 
 name: GoogleAppMeasurement, nameSpecified: 
 body: Copyright 2020 Googl…
-version: 6.9.0
+version: 7.0.0
 
 name: GoogleAppMeasurement, nameSpecified: 
 body: Copyright 2020 Googl…
-version: 6.9.0
+version: 7.0.0
 
 name: GoogleAppMeasurement, nameSpecified: 
 body: Copyright 2020 Googl…
-version: 6.9.0
+version: 7.0.0
 
 name: GoogleDataTransport, nameSpecified: 
 body: 
                    …
-version: 7.5.1
+version: 8.0.0
 
 name: GoogleDataTransport, nameSpecified: 
 body: 
                    …
-version: 7.5.1
+version: 8.0.0
 
 name: GoogleDataTransport, nameSpecified: 
 body: 
                    …
-version: 7.5.1
+version: 8.0.0
 
 name: GoogleDataTransport, nameSpecified: 
 body: 
                    …
-version: 7.5.1
+version: 8.0.0
 
 name: GoogleDataTransport, nameSpecified: 
 body: 
                    …
-version: 7.5.1
+version: 8.0.0
 
 name: GoogleDataTransport, nameSpecified: 
 body: 
                    …
-version: 7.5.1
+version: 8.0.0
 
 name: GoogleDataTransport, nameSpecified: 
 body: 
                    …
-version: 7.5.1
+version: 8.0.0
 
 name: GoogleDataTransport, nameSpecified: 
 body: 
                    …
-version: 7.5.1
+version: 8.0.0
 
 name: GoogleDataTransport, nameSpecified: 
 body: 
                    …
-version: 7.5.1
+version: 8.0.0
 
 name: GoogleDataTransport, nameSpecified: 
 body: 
                    …
-version: 7.5.1
+version: 8.0.0
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 6.7.2
+version: 7.0.0
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 6.7.2
+version: 7.0.0
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 6.7.2
+version: 7.0.0
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 6.7.2
+version: 7.0.0
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 6.7.2
+version: 7.0.0
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 6.7.2
+version: 7.0.0
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 6.7.2
+version: 7.0.0
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 6.7.2
+version: 7.0.0
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 6.7.2
+version: 7.0.0
 
 name: GoogleUtilities, nameSpecified: 
 body: 
                    …
-version: 6.7.2
+version: 7.0.0
 
 name: GTMSessionFetcher, nameSpecified: 
 body: 
                    …
-version: 1.4.0
+version: 1.5.0
 
 name: GTMSessionFetcher, nameSpecified: 
 body: 
                    …
-version: 1.4.0
+version: 1.5.0
 
 name: GTMSessionFetcher, nameSpecified: 
 body: 
                    …
-version: 1.4.0
+version: 1.5.0
 
 name: GTMSessionFetcher, nameSpecified: 
 body: 
                    …
-version: 1.4.0
+version: 1.5.0
 
 name: GTMSessionFetcher, nameSpecified: 
 body: 
                    …
-version: 1.4.0
+version: 1.5.0
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
@@ -616,27 +616,27 @@ version: 3.1.4
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 118.0.0
+version: 118.2.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 118.0.0
+version: 118.2.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 118.0.0
+version: 118.2.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 118.0.0
+version: 118.2.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 118.0.0
+version: 118.2.0
 
 name: MDFInternationalization, nameSpecified: 
 body: 
@@ -710,43 +710,43 @@ version: 1.6.11
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 1.30906.0
+version: 2.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 1.30906.0
+version: 2.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 1.30906.0
+version: 2.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 1.30906.0
+version: 2.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 1.30906.0
+version: 2.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 1.30906.0
+version: 2.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 1.30906.0
+version: 2.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 1.30906.0
+version: 2.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 1.30906.0
+version: 2.30906.0
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
-version: 1.30906.0
+version: 2.30906.0
 
 name: PromisesObjC, nameSpecified: 
 body: 
@@ -822,8 +822,6 @@ name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version:
 
 name: ComScore-xcframework-apple, nameSpecified: ComScore, owner: SRGSSR, version: 6.6.0
 
-name: FetchImage, nameSpecified: FetchImage, owner: kean, version: 0.2.1
-
 name: FXReachability, nameSpecified: FXReachability, owner: SRGSSR, version: 1.3.2-srg5
 
 name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 14.1.2
@@ -833,8 +831,6 @@ name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version: 0.6.0-srg3
 name: MAKVONotificationCenter, nameSpecified: MAKVONotificationCenter, owner: SRGSSR, version: 1.0.0-srg5
 
 name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.6
-
-name: Nuke, nameSpecified: Nuke, owner: kean, version: 9.1.2
 
 name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5
 

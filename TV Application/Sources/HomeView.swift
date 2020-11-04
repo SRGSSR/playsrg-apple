@@ -9,73 +9,6 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var model: HomeModel
     
-    private struct Cell: View {
-        let item: HomeRowItem
-        
-        private static func isHeroAppearance(for item: HomeRowItem) -> Bool {
-            if case let .tvTrending(appearance: appearance) = item.rowId, appearance == .hero {
-                return true
-            }
-            else {
-                return false
-            }
-        }
-        
-        var body: some View {
-            switch item.content {
-            case let .media(media):
-                if Self.isHeroAppearance(for: item) {
-                    HeroMediaCell(media: media)
-                }
-                else {
-                    MediaCell(media: media)
-                }
-            case .mediaPlaceholder:
-                if Self.isHeroAppearance(for: item) {
-                    HeroMediaCell(media: nil)
-                }
-                else {
-                    MediaCell(media: nil)
-                }
-            case let .show(show):
-                ShowCell(show: show)
-            case .showPlaceholder:
-                ShowCell(show: nil)
-            case let .topic(topic):
-                TopicCell(topic: topic)
-            case .topicPlaceholder:
-                TopicCell(topic: nil)
-            }
-        }
-    }
-    
-    private struct SupplementaryView: View {
-        let rowId: HomeRowId
-        let kind: String
-        
-        var body: some View {
-            if kind == UICollectionView.elementKindSectionHeader {
-                VStack(alignment: .leading) {
-                    if let title = rowId.title {
-                        Text(title)
-                            .srgFont(.medium, size: .title)
-                            .lineLimit(1)
-                    }
-                    if let lead = rowId.lead {
-                        Text(lead)
-                            .srgFont(.light, size: .headline)
-                            .lineLimit(1)
-                            .opacity(0.8)
-                        Spacer()
-                            .frame(height: 10)
-                    }
-                }
-                .opacity(0.8)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-            }
-        }
-    }
-    
     private static func swimlaneLayoutSection(for rowId: HomeRowId) -> NSCollectionLayoutSection {
         func layoutGroupSize(for rowId: HomeRowId) -> NSCollectionLayoutSize {
             switch rowId {
@@ -160,5 +93,76 @@ struct HomeView: View {
         .synchronizeParentTabScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
+    }
+}
+
+extension HomeView {
+    private struct Cell: View {
+        let item: HomeRowItem
+        
+        private static func isHeroAppearance(for item: HomeRowItem) -> Bool {
+            if case let .tvTrending(appearance: appearance) = item.rowId, appearance == .hero {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        
+        var body: some View {
+            switch item.content {
+            case let .media(media):
+                if Self.isHeroAppearance(for: item) {
+                    HeroMediaCell(media: media)
+                }
+                else {
+                    MediaCell(media: media)
+                }
+            case .mediaPlaceholder:
+                if Self.isHeroAppearance(for: item) {
+                    HeroMediaCell(media: nil)
+                }
+                else {
+                    MediaCell(media: nil)
+                }
+            case let .show(show):
+                ShowCell(show: show)
+            case .showPlaceholder:
+                ShowCell(show: nil)
+            case let .topic(topic):
+                TopicCell(topic: topic)
+            case .topicPlaceholder:
+                TopicCell(topic: nil)
+            }
+        }
+    }
+}
+
+extension HomeView {
+    private struct SupplementaryView: View {
+        let rowId: HomeRowId
+        let kind: String
+        
+        var body: some View {
+            if kind == UICollectionView.elementKindSectionHeader {
+                VStack(alignment: .leading) {
+                    if let title = rowId.title {
+                        Text(title)
+                            .srgFont(.medium, size: .title)
+                            .lineLimit(1)
+                    }
+                    if let lead = rowId.lead {
+                        Text(lead)
+                            .srgFont(.light, size: .headline)
+                            .lineLimit(1)
+                            .opacity(0.8)
+                        Spacer()
+                            .frame(height: 10)
+                    }
+                }
+                .opacity(0.8)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+            }
+        }
     }
 }

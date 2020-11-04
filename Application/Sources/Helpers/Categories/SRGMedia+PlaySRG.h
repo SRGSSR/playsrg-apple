@@ -27,6 +27,9 @@ OBJC_EXPORT BOOL PlayIsSwissTXTURN(NSString *URN);
 
 @property (nonatomic, readonly, getter=play_isWebFirst) BOOL play_webFirst;
 
+@property (nonatomic, readonly) NSArray<NSString *> *play_subtitleLanguages;
+@property (nonatomic, readonly) NSArray<NSString *> *play_audioLanguages;
+
 @end
 
 NS_ASSUME_NONNULL_END
