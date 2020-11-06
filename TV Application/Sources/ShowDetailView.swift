@@ -9,21 +9,13 @@ import SwiftUI
 
 struct ShowDetailView: View {
     let show: SRGShow
-        
-    init(show: SRGShow) {
-        self.show = show
-    }
     
     var body: some View {
-        ZStack {
-            VStack {
-                DescriptionView(show: show)
-                    .frame(maxWidth: .infinity, maxHeight: 300)
-                    .padding(.zero)
-                Spacer()
-                // Collection or LazyVGrid
-            }
-            .padding(.zero)
+        VStack(spacing: 20) {
+            DescriptionView(show: show)
+                .frame(maxWidth: .infinity, maxHeight: 300)
+            Rectangle()
+                .fill(Color.white)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding([.top, .leading, .trailing], 100)
@@ -42,46 +34,31 @@ extension ShowDetailView {
         
         var body: some View {
             GeometryReader { geometry in
-                HStack {
+                HStack(alignment: .top) {
                     ImageView(url: imageUrl)
-                        .frame(maxWidth: geometry.size.width / 3, maxHeight: .infinity)
-                        .padding(.zero)
+                        .frame(width: geometry.size.height * 16 / 9)
+                    
                     VStack(alignment: .leading, spacing: 0) {
                         Text(show.title)
                             .srgFont(.bold, size: .title)
                             .lineLimit(3)
                             .foregroundColor(.white)
-                            .padding(.zero)
                         if let lead = show.lead {
                             Text(lead)
                                 .srgFont(.regular, size: .headline)
                                 .foregroundColor(.white)
-                                .padding(.zero)
                         }
                         
                         Spacer()
                     }
-                    .frame(alignment: .topLeading)
-                    ActionsView(show: show)
+                    
+                    Spacer()
+                    
+                    LabeledButton(icon: "favorite-22", label: NSLocalizedString("Add to favorites", comment:"Add to favorites button label")) {
+                        /* Toggle Favorite state */
+                    }
                 }
             }
-        }
-    }
-}
-
-extension ShowDetailView {
-    private struct ActionsView: View {
-        let show: SRGShow
-        
-        var body: some View {
-            VStack(alignment: .trailing) {
-                LabeledButton(icon: "favorite-22", label: NSLocalizedString("Add to favorites", comment:"Add to favorites button label")) {
-                    /* Toggle Favorite state */
-                }
-                Spacer()
-            }
-            .frame(width: 200)
-            .padding(.zero)
         }
     }
 }
