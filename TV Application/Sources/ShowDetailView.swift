@@ -17,27 +17,39 @@ struct ShowDetailView: View {
         model = ShowDetailModel(show: show)
     }
     
+    private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(300)),
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .topLeading
+        )
+        return [header]
+    }
+    
+    private static func layoutSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
+        return section
+    }
+    
     var body: some View {
         VStack(spacing: 20) {
-            DescriptionView(show: show)
-                .frame(maxWidth: .infinity, maxHeight: 300)
             CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-                
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
-                
-                return NSCollectionLayoutSection(group: group)
+                return Self.layoutSection()
             } cell: { indexPath, item in
                 MediaCell(media: item)
             } supplementaryView: { kind, indexPath in
-                
+                DescriptionView(show: show)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding([.top, .leading, .trailing], 100)
         .background(Color(.play_black))
         .edgesIgnoringSafeArea(.all)
         .onAppear {
