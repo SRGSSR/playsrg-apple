@@ -20,7 +20,7 @@ class ShowDetailModel: ObservableObject {
     }
     
     func refresh() {
-        SRGDataProvider.current!.latestMediasForShows(withUrns: [show.urn])
+        SRGDataProvider.current!.latestMediasForShows(withUrns: [show.urn], pageSize: ApplicationConfiguration.shared.pageSize)
             .map { result in
                 return [Row(section: .main, items: result.medias)]
             }

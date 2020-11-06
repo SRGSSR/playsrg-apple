@@ -21,8 +21,20 @@ struct ShowDetailView: View {
         VStack(spacing: 20) {
             DescriptionView(show: show)
                 .frame(maxWidth: .infinity, maxHeight: 300)
-            Rectangle()
-                .fill(Color.white)
+            CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
+                
+                return NSCollectionLayoutSection(group: group)
+            } cell: { indexPath, item in
+                MediaCell(media: item)
+            } supplementaryView: { kind, indexPath in
+                
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding([.top, .leading, .trailing], 100)
