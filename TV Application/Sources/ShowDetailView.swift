@@ -10,17 +10,34 @@ import SwiftUI
 struct ShowDetailView: View {
     let show: SRGShow
     
+    @ObservedObject var model: ShowDetailModel
+    
+    init(show: SRGShow) {
+        self.show = show
+        model = ShowDetailModel(show: show)
+    }
+    
     var body: some View {
         VStack(spacing: 20) {
             DescriptionView(show: show)
                 .frame(maxWidth: .infinity, maxHeight: 300)
             Rectangle()
                 .fill(Color.white)
+            Text("Medias: \(model.medias.count)")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding([.top, .leading, .trailing], 100)
         .background(Color(.play_black))
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            model.refresh()
+        }
+        .onDisappear {
+            model.cancelRefresh()
+        }
+        .onResume {
+            model.refresh()
+        }
     }
 }
 
