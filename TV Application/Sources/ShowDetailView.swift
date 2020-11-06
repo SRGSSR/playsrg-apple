@@ -46,7 +46,7 @@ struct ShowDetailView: View {
             } cell: { indexPath, item in
                 MediaCell(media: item)
             } supplementaryView: { kind, indexPath in
-                DescriptionView(show: show)
+                HeaderView(show: show)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -65,7 +65,7 @@ struct ShowDetailView: View {
 }
 
 extension ShowDetailView {
-    private struct DescriptionView: View {
+    private struct HeaderView: View {
         let show: SRGShow
         
         private var imageUrl: URL? {
@@ -74,28 +74,30 @@ extension ShowDetailView {
         
         var body: some View {
             GeometryReader { geometry in
-                HStack(alignment: .top) {
-                    ImageView(url: imageUrl)
-                        .frame(width: geometry.size.height * 16 / 9)
-                    
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text(show.title)
-                            .srgFont(.bold, size: .title)
-                            .lineLimit(3)
-                            .foregroundColor(.white)
-                        if let lead = show.lead {
-                            Text(lead)
-                                .srgFont(.regular, size: .headline)
+                FocusableRegion {
+                    HStack(alignment: .top) {
+                        ImageView(url: imageUrl)
+                            .frame(width: geometry.size.height * 16 / 9)
+                        
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(show.title)
+                                .srgFont(.bold, size: .title)
+                                .lineLimit(3)
                                 .foregroundColor(.white)
+                            if let lead = show.lead {
+                                Text(lead)
+                                    .srgFont(.regular, size: .headline)
+                                    .foregroundColor(.white)
+                            }
+                            
+                            Spacer()
                         }
                         
                         Spacer()
-                    }
-                    
-                    Spacer()
-                    
-                    LabeledButton(icon: "favorite-22", label: NSLocalizedString("Add to favorites", comment:"Add to favorites button label")) {
-                        /* Toggle Favorite state */
+                        
+                        LabeledButton(icon: "favorite-22", label: NSLocalizedString("Add to favorites", comment:"Add to favorites button label")) {
+                            /* Toggle Favorite state */
+                        }
                     }
                 }
             }
