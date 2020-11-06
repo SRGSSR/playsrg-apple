@@ -23,7 +23,6 @@ struct ShowDetailView: View {
                 .frame(maxWidth: .infinity, maxHeight: 300)
             Rectangle()
                 .fill(Color.white)
-            Text("Medias: \(model.medias.count)")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding([.top, .leading, .trailing], 100)

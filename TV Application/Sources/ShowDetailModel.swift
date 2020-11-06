@@ -9,7 +9,9 @@ import SRGDataProviderCombine
 class ShowDetailModel: ObservableObject {
     let show: SRGShow
     
-    @Published private(set) var medias: [SRGMedia] = []
+    typealias Row = CollectionRow<Section, SRGMedia>
+    
+    @Published private(set) var rows: [Row] = []
     
     var cancellables = Set<AnyCancellable>()
     
@@ -19,14 +21,22 @@ class ShowDetailModel: ObservableObject {
     
     func refresh() {
         SRGDataProvider.current!.latestMediasForShows(withUrns: [show.urn])
-            .map { $0.medias }
+            .map { result in
+                return [Row(section: .main, items: result.medias)]
+            }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
-            .assign(to: \.medias, on: self)
+            .assign(to: \.rows, on: self)
             .store(in: &cancellables)
     }
     
     func cancelRefresh() {
         cancellables = []
+    }
+}
+
+extension ShowDetailModel {
+    enum Section: Hashable {
+        case main
     }
 }
