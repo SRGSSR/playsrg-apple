@@ -38,6 +38,7 @@ class MediaDetailModel: ObservableObject {
             }
             .map { $0.medias }
             .replaceError(with: [])
+            .receive(on: DispatchQueue.main)
             .assign(to: \.relatedMedias, on: self)
             .store(in: &cancellables)
     }
