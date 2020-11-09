@@ -33,9 +33,16 @@ struct LabeledButton: View {
 
 struct LabeledButton_Previews: PreviewProvider {
     static var previews: some View {
-        HStack(alignment: .top) {
+        Group {
             LabeledButton(icon: "episodes-22", label: "Episodes", action: {})
+                .previewLayout(PreviewLayout.sizeThatFits)
+                .padding()
+                .previewDisplayName("Short label")
+            
             LabeledButton(icon: "favorite-22", label: "Watch later", action: {})
+                .previewLayout(PreviewLayout.sizeThatFits)
+                .padding()
+                .previewDisplayName("Long label")
         }
     }
 }

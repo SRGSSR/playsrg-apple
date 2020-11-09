@@ -60,15 +60,18 @@ extension ImageView {
 
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
+        Group {
             ImageView(url: URL(string: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/450")!)
-                .frame(width: 200)
+                .previewLayout(PreviewLayout.sizeThatFits)
+                .previewDisplayName("Intrinsic size")
+            
             ImageView(url: URL(string: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/450")!)
-                .frame(width: 400, height: 400)
-                .background(Color.white)
+                .previewLayout(.fixed(width: 600, height: 600))
+                .previewDisplayName("600x600, fit")
+            
             ImageView(url: URL(string: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/450")!, contentMode: .fill)
-                .frame(width: 400, height: 400)
-                .background(Color.white)
+                .previewLayout(.fixed(width: 600, height: 600))
+                .previewDisplayName("600x600, fill")
         }
     }
 }
