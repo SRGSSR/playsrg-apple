@@ -57,3 +57,19 @@ extension ImageView {
         }
     }
 }
+
+struct ImageView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            ImageView(url: URL(string: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/450")!)
+                .frame(width: 200)
+            ImageView(url: URL(string: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/450")!)
+                .frame(width: 400, height: 400)
+                .background(Color.white)
+            ImageView(url: URL(string: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/450")!, contentMode: .fill)
+                .frame(width: 400, height: 400)
+                .background(Color.white)
+        }
+    }
+}
+
