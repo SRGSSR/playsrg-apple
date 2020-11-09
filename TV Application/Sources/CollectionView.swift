@@ -113,67 +113,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         }
     }
     
-    private class FocusGuideBackgroundView: UICollectionReusableView {
-        private class FocusGuide: UIFocusGuide {
-            var section: Int? = nil
-            weak var collectionView: UICollectionView? = nil
-            
-            private var visibleCells: [UICollectionViewCell] {
-                guard let collectionView = collectionView else { return [] }
-                let indexPaths = collectionView.indexPathsForVisibleItems.sorted().reversed().filter { $0.section == section }
-                return indexPaths.map { collectionView.cellForItem(at: $0)! }
-            }
-            
-            override var preferredFocusEnvironments: [UIFocusEnvironment]! {
-                get { visibleCells }
-                set {}
-            }
-        }
-        
-        var section: Int? {
-            get {
-                focusGuide.section
-            }
-            set {
-                focusGuide.section = newValue
-            }
-        }
-        
-        var collectionView: UICollectionView? {
-            get {
-                focusGuide.collectionView
-            }
-            set {
-                focusGuide.collectionView = newValue
-            }
-        }
-        
-        private weak var focusGuide: FocusGuide!
-        
-        private func createFocusGuide() {
-            let focusGuide = FocusGuide()
-            addLayoutGuide(focusGuide)
-            self.focusGuide = focusGuide
-            
-            NSLayoutConstraint.activate([
-                focusGuide.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-                focusGuide.heightAnchor.constraint(equalToConstant: 1),
-                focusGuide.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-                focusGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor)
-            ])
-        }
-        
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-            createFocusGuide()
-        }
-        
-        required init?(coder: NSCoder) {
-            super.init(coder: coder)
-            createFocusGuide()
-        }
-    }
-    
     /**
      *  View coordinator.
      */
@@ -197,13 +136,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         
         public func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
             return focusable
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-            if let focusGuideBackgroundView = view as? FocusGuideBackgroundView {
-                focusGuideBackgroundView.section = indexPath.section
-                focusGuideBackgroundView.collectionView = collectionView
-            }
         }
     }
     
@@ -248,16 +180,9 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     }
     
     private func layout(context: Context) -> UICollectionViewLayout {
-        let focusGuideIdentifier = "focusGuide"
-        
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-            let section = context.coordinator.sectionLayoutProvider!(sectionIndex, layoutEnvironment)
-            let focusGuide = NSCollectionLayoutDecorationItem.background(elementKind: focusGuideIdentifier)
-            section.decorationItems.append(focusGuide)
-            return section
+        return UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+            return context.coordinator.sectionLayoutProvider!(sectionIndex, layoutEnvironment)
         }
-        layout.register(FocusGuideBackgroundView.self, forDecorationViewOfKind: focusGuideIdentifier)
-        return layout
     }
     
     private func reloadData(in collectionView: UICollectionView, context: Context, animated: Bool = false) {
