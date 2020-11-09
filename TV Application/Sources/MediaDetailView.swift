@@ -247,3 +247,18 @@ struct MediaDetailView: View {
         }
     }
 }
+
+struct MediaDetailView_Previews: PreviewProvider {
+    
+    static var mediaPreview: SRGMedia {
+        let asset = NSDataAsset(name: "media-rts-tv")!
+        let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
+        
+        return try! MTLJSONAdapter(modelClass: SRGMedia.self)?.model(fromJSONDictionary: jsonData) as! SRGMedia
+    }
+    
+    static var previews: some View {
+        MediaDetailView(media: mediaPreview)
+            .previewDisplayName("RTS media")
+    }
+}
