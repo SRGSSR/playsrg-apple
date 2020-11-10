@@ -22,6 +22,7 @@ class ShowDetailModel: ObservableObject {
     }
     
     func refresh() {
+        guard rows.isEmpty else { return }
         loadNextPage()
     }
     
