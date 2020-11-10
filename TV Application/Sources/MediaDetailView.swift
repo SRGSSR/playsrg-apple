@@ -30,7 +30,6 @@ struct MediaDetailView: View {
     var body: some View {
         ZStack {
             ImageView(url: imageUrl)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             Rectangle()
                 .fill(Color(white: 0, opacity: 0.6))
             VStack {
