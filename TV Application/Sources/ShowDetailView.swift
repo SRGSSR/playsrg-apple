@@ -117,11 +117,14 @@ extension ShowDetailView {
                         ImageView(url: imageUrl)
                             .frame(width: geometry.size.height * 16 / 9)
                         
-                        VStack(alignment: .leading, spacing: 0) {
+                        VStack(alignment: .leading, spacing: 5) {
                             Text(show.title)
                                 .srgFont(.bold, size: .title)
                                 .lineLimit(3)
                                 .foregroundColor(.white)
+                            if let broadcastInformationMessage = show.broadcastInformation?.message {
+                                Badge(text: broadcastInformationMessage, color: Color(.play_gray))
+                            }
                             if let lead = show.lead {
                                 Text(lead)
                                     .srgFont(.regular, size: .headline)

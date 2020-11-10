@@ -35,5 +35,10 @@
       "lead": "Reportagen, Dokumentarfilme, Dok-Serien. SRF bietet dem User Geschichten, so einzigartig wie das Leben.",
       "description": "Gesellschaft, Natur, Tiere, Politik, Geschichte, Sport und Wirtschaft. Die Dokus von SRF beleuchten alle Bereiche des Lebens. Feinfühlig, nachfragend, überraschend und unterhaltsam."
     }
-  ]
+  ],
+  "broadcastInformation": {
+    "hintText": "8. Staffel ab 7. Dezember",
+    "startDate": "2020-11-02T09:44:00+01:00",
+    "endDate": "2020-12-07T23:30:00+01:00"
+  }
 }
