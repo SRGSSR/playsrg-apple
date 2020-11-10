@@ -186,7 +186,7 @@ extension MediaDetailView {
         let media: SRGMedia
         
         var body: some View {
-            HStack(spacing: 30) {
+            HStack(alignment: .top, spacing: 30) {
                 // TODO: 22 icon?
                 LabeledButton(icon: "play-50", label: NSLocalizedString("Play", comment: "Play button label")) {
                     navigateToMedia(media, play: true)
