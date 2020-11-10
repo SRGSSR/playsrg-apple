@@ -12,10 +12,9 @@ class ShowDetailModel: ObservableObject {
     typealias Row = CollectionRow<Section, SRGMedia>
     
     @Published private(set) var rows: [Row] = []
+    @Published private(set) var error: Error? = nil
     
     private var cancellables = Set<AnyCancellable>()
-    
-    private var error: Error? = nil
     private var nextPage: SRGDataProvider.LatestMediasForShows.Page? = nil
     
     init(show: SRGShow) {

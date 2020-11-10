@@ -10,6 +10,8 @@ import SwiftUI
 struct ShowDetailView: View {
     let show: SRGShow
     
+    static let headerHeight: CGFloat = 400
+    
     @ObservedObject var model: ShowDetailModel
     
     init(show: SRGShow) {
@@ -31,7 +33,7 @@ struct ShowDetailView: View {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
         
         let section = NSCollectionLayoutSection(group: group)
@@ -40,7 +42,18 @@ struct ShowDetailView: View {
     }
     
     var body: some View {
-        VStack(spacing: 20) {
+        if let error = model.error {
+            VStack(spacing: 20) {
+                HeaderView(show: show)
+                    .frame(height: Self.headerHeight)
+                Text(error.localizedDescription)
+                    .srgFont(.regular, size: .headline)
+                    .lineLimit(2)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
+        else {
             CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
                 return Self.layoutSection()
             } cell: { indexPath, item in
@@ -51,18 +64,18 @@ struct ShowDetailView: View {
             } supplementaryView: { kind, indexPath in
                 HeaderView(show: show)
             }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.play_black))
-        .edgesIgnoringSafeArea(.all)
-        .onAppear {
-            model.refresh()
-        }
-        .onDisappear {
-            model.cancelRefresh()
-        }
-        .onResume {
-            model.refresh()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(.play_black))
+            .edgesIgnoringSafeArea(.all)
+            .onAppear {
+                model.refresh()
+            }
+            .onDisappear {
+                model.cancelRefresh()
+            }
+            .onResume {
+                model.refresh()
+            }
         }
     }
 }
