@@ -8,52 +8,68 @@ import SRGAppearance
 import SwiftUI
 
 struct ShowDetailView: View {
-    let show: SRGShow
-    
     static let headerHeight: CGFloat = 400
     
     @ObservedObject var model: ShowDetailModel
     
     init(show: SRGShow) {
-        self.show = show
         model = ShowDetailModel(show: show)
     }
     
-    private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(300)),
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .topLeading
-        )
-        return [header]
-    }
-    
-    private static func layoutSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
-        return section
-    }
-    
     var body: some View {
-        if let error = model.error {
-            VStack(spacing: 20) {
-                HeaderView(show: show)
-                    .frame(height: Self.headerHeight)
-                Text(friendlyMessage(for: error))
-                    .srgFont(.regular, size: .headline)
-                    .lineLimit(2)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+        Group {
+            if model.loading && model.rows.isEmpty {
+                LoadingView()
+            }
+            else if let error = model.error {
+                ErrorView(error: error)
+            }
+            else {
+                DataView(model: model)
             }
         }
-        else {
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(.play_black))
+        .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            model.refresh()
+        }
+        .onDisappear {
+            model.cancelRefresh()
+        }
+        .onResume {
+            model.refresh()
+        }
+    }
+}
+
+extension ShowDetailView {
+    private struct DataView: View {
+        @ObservedObject var model: ShowDetailModel
+        
+        private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            let header = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(300)),
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .topLeading
+            )
+            return [header]
+        }
+        
+        private static func layoutSection() -> NSCollectionLayoutSection {
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
+            return section
+        }
+        
+        var body: some View {
             CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
                 return Self.layoutSection()
             } cell: { indexPath, item in
@@ -62,20 +78,30 @@ struct ShowDetailView: View {
                         model.loadNextPage(from: item)
                     }
             } supplementaryView: { kind, indexPath in
-                HeaderView(show: show)
+                HeaderView(show: model.show)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(.play_black))
-            .edgesIgnoringSafeArea(.all)
-            .onAppear {
-                model.refresh()
-            }
-            .onDisappear {
-                model.cancelRefresh()
-            }
-            .onResume {
-                model.refresh()
-            }
+        }
+    }
+    
+    private struct LoadingView: View {
+        var body: some View {
+            Text("Loading")
+                .srgFont(.regular, size: .headline)
+                .lineLimit(2)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+    
+    private struct ErrorView: View {
+        let error: Error
+        
+        var body: some View {
+            Text(friendlyMessage(for: error))
+                .srgFont(.regular, size: .headline)
+                .lineLimit(2)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }

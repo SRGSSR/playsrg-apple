@@ -13,6 +13,7 @@ class ShowDetailModel: ObservableObject {
     
     @Published private(set) var rows: [Row] = []
     @Published private(set) var error: Error? = nil
+    @Published private(set) var loading = false
     
     private var cancellables = Set<AnyCancellable>()
     private var nextPage: SRGDataProvider.LatestMediasForShows.Page? = nil
@@ -31,7 +32,15 @@ class ShowDetailModel: ObservableObject {
     // Also read https://www.donnywals.com/implementing-an-infinite-scrolling-list-with-swiftui-and-combine/
     func loadNextPage(from media: SRGMedia? = nil) {
         guard let publisher = publisher(from: media) else { return }
-        publisher.receive(on: DispatchQueue.main)
+        publisher
+            .receive(on: DispatchQueue.main)
+            .handleEvents { _ in
+                self.loading = true
+            } receiveCompletion: { _ in
+                self.loading = false
+            } receiveCancel: {
+                self.loading = false
+            }
             .sink(receiveCompletion: { completion in
                 if case let .failure(error) = completion {
                     self.error = error
