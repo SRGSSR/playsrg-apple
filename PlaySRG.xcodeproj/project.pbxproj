@@ -10443,6 +10443,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playsrf;
 			};
 			name = Debug;
 		};
@@ -10514,6 +10515,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playsrf;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10586,6 +10588,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playsrf;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -10658,6 +10661,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playsrf;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -10695,6 +10699,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrts;
 			};
 			name = Debug;
 		};
@@ -10766,6 +10771,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrts;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10838,6 +10844,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrts;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -10910,6 +10917,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrts;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -10947,6 +10955,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrsi;
 			};
 			name = Debug;
 		};
@@ -11018,6 +11027,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrsi;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11090,6 +11100,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrsi;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11162,6 +11173,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrsi;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11199,6 +11211,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrtr;
 			};
 			name = Debug;
 		};
@@ -11270,6 +11283,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrtr;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11342,6 +11356,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrtr;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11414,6 +11429,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playrtr;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11451,6 +11467,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playswi;
 			};
 			name = Debug;
 		};
@@ -11522,6 +11539,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playswi;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11594,6 +11612,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playswi;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11666,6 +11685,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				URL_BASE_SCHEME = playswi;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;

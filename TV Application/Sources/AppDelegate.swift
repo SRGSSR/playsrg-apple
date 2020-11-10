@@ -6,13 +6,15 @@
 
 import Firebase
 import SRGAppearance
-import SRGDataProvider
+import SRGDataProviderCombine
 import SwiftUI
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    
+    private var cancellables = Set<AnyCancellable>()
     
     private static func configuredTabBarController(tabBarController: UITabBarController) {
         tabBarController.view.backgroundColor = (UIScreen.main.traitCollection.userInterfaceStyle == .dark) ? .play_black : .play_lightGray
@@ -89,5 +91,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let tabBarController = self.window?.rootViewController as? UITabBarController {
             Self.configuredTabBarController(tabBarController: tabBarController)
         }
+    }
+    
+    // See URL_SCHEMES.md
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        guard let deeplinkAction = url.host else { return false }
+        
+        if deeplinkAction == "media" {
+            let mediaURN = url.lastPathComponent
+            SRGDataProvider.current?.media(withUrn: mediaURN)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { completion in
+                }, receiveValue: { (media, response) in
+                    navigateToMedia(media)
+                })
+                .store(in: &cancellables)
+            return true
+        }
+        else if deeplinkAction == "show" {
+            let showURN = url.lastPathComponent
+            SRGDataProvider.current?.show(withUrn: showURN)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { completion in
+                }, receiveValue: { (show, response) in
+                    navigateToShow(show)
+                })
+                .store(in: &cancellables)
+            return true
+        }
+        return false
     }
 }
