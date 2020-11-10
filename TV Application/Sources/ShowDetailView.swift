@@ -85,11 +85,7 @@ extension ShowDetailView {
     
     private struct LoadingView: View {
         var body: some View {
-            Text("Loading")
-                .srgFont(.regular, size: .headline)
-                .lineLimit(2)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            ProgressView()
         }
     }
     
