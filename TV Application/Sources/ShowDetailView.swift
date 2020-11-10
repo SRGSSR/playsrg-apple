@@ -45,6 +45,9 @@ struct ShowDetailView: View {
                 return Self.layoutSection()
             } cell: { indexPath, item in
                 MediaCell(media: item)
+                    .onAppear {
+                        model.loadNextPage(from: item)
+                    }
             } supplementaryView: { kind, indexPath in
                 HeaderView(show: show)
             }
