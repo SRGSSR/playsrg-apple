@@ -1,3 +1,6 @@
 #include "Xcode/Play tvOS.xcconfig"
 
+PRODUCT_BUNDLE_IDENTIFIER = $(APP_BUNDLE_IDENTIFIER)
+PRODUCT_NAME = $(BASE_PRODUCT_NAME)
+SDKROOT = appletvos
 SWIFT_OBJC_BRIDGING_HEADER=$(PROJECT_DIR)/TV Application/Sources/Play-TV-ObjectiveC-Bridge.h
