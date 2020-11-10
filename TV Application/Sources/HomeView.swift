@@ -116,14 +116,14 @@ extension HomeView {
                     HeroMediaCell(media: media)
                 }
                 else {
-                    MediaCell(media: media)
+                    MediaCell(media: media, style: .show)
                 }
             case .mediaPlaceholder:
                 if Self.isHeroAppearance(for: item) {
                     HeroMediaCell(media: nil)
                 }
                 else {
-                    MediaCell(media: nil)
+                    MediaCell(media: nil, style: .show)
                 }
             case let .show(show):
                 ShowCell(show: show)

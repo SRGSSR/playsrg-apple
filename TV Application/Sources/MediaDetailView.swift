@@ -65,11 +65,11 @@ extension MediaDetailView {
             FocusableRegion {
                 GeometryReader { geometry in
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(MediaDescription.subtitle(for: media))
+                        Text(MediaDescription.subtitle(for: media, style: .show))
                             .srgFont(.bold, size: .title)
                             .lineLimit(3)
                             .foregroundColor(.white)
-                        Text(MediaDescription.title(for: media))
+                        Text(MediaDescription.title(for: media, style: .show))
                             .srgFont(.regular, size: .headline)
                             .foregroundColor(.white)
                         Spacer()
@@ -231,7 +231,7 @@ extension MediaDetailView {
                             ScrollView(.horizontal) {
                                 HStack(spacing: 40) {
                                     ForEach(model.relatedMedias, id: \.uid) { media in
-                                        MediaCell(media: media, action: {
+                                        MediaCell(media: media, style: .show, action: {
                                             navigateToMedia(media, play: true)
                                         })
                                         .frame(width: 280)

@@ -7,6 +7,13 @@
 import Foundation
 
 struct MediaDescription {
+    enum Style {
+        /// Show information emphasis
+        case show
+        /// Date information emphasis
+        case date
+    }
+    
     private static func placeholder(length: Int) -> String {
         return String(repeating: " ", count: length)
     }
@@ -23,18 +30,30 @@ struct MediaDescription {
         }
     }
     
-    static func title(for media: SRGMedia?) -> String {
+    static func title(for media: SRGMedia?, style: Style = .date) -> String {
         guard let media = media else { return placeholder(length: 20) }
-        return media.show?.title ?? media.title
-    }
-    
-    static func subtitle(for media: SRGMedia?) -> String {
-        guard let media = media else { return placeholder(length: 25) }
-        guard media.contentType != .livestream else { return "" }
-        if let showTitle = media.show?.title, !media.title.contains(showTitle) {
+        
+        switch style {
+        case .show:
+            return media.show?.title ?? media.title
+        case .date:
             return media.title
         }
-        else {
+    }
+    
+    static func subtitle(for media: SRGMedia?, style: Style = .date) -> String {
+        guard let media = media else { return placeholder(length: 25) }
+        guard media.contentType != .livestream else { return "" }
+        
+        switch style {
+        case .show:
+            if let showTitle = media.show?.title, !media.title.contains(showTitle) {
+                return media.title
+            }
+            else {
+                return DateFormatters.formattedRelativeDateAndTime(for: media.date).capitalizedFirstLetter
+            }
+        case .date:
             return DateFormatters.formattedRelativeDateAndTime(for: media.date).capitalizedFirstLetter
         }
     }

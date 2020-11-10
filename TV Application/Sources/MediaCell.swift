@@ -9,12 +9,14 @@ import SwiftUI
 
 struct MediaCell: View {
     let media: SRGMedia?
+    let style: MediaDescription.Style
     let action: (() -> Void)?
     
     @State private var isFocused: Bool = false
     
-    init(media: SRGMedia?, action: (() -> Void)? = nil) {
+    init(media: SRGMedia?, style: MediaDescription.Style = .date, action: (() -> Void)? = nil) {
         self.media = media
+        self.style = style
         self.action = action
     }
         
@@ -37,7 +39,7 @@ struct MediaCell: View {
                 .buttonStyle(CardButtonStyle())
                 .onFocusChange { isFocused = $0 }
                 
-                DescriptionView(media: media)
+                DescriptionView(media: media, style: style)
                     .frame(width: geometry.size.width, alignment: .leading)
                     .opacity(isFocused ? 1 : 0.5)
                     .offset(x: 0, y: isFocused ? 10 : 0)
@@ -52,12 +54,13 @@ struct MediaCell: View {
 extension MediaCell {
     private struct DescriptionView: View {
         let media: SRGMedia?
+        let style: MediaDescription.Style
         
         var body: some View {
-            Text(MediaDescription.title(for: media))
+            Text(MediaDescription.title(for: media, style: style))
                 .srgFont(.medium, size: .subtitle)
                 .lineLimit(2)
-            Text(MediaDescription.subtitle(for: media))
+            Text(MediaDescription.subtitle(for: media, style: style))
                 .srgFont(.light, size: .subtitle)
                 .lineLimit(2)
         }
@@ -76,8 +79,12 @@ struct MediaCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             MediaCell(media: mediaPreview)
-                .previewLayout(.fixed(width: 375, height: 211))
-                .previewDisplayName("RTS media")
+                .previewLayout(.fixed(width: 375, height: 400))
+                .previewDisplayName("RTS media, default date style")
+            
+            MediaCell(media: mediaPreview, style: .show)
+                .previewLayout(.fixed(width: 375, height: 400))
+                .previewDisplayName("RTS media, show style")
         }
     }
 }
