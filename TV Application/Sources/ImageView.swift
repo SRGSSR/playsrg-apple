@@ -46,8 +46,11 @@ extension ImageView {
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .clipped()
                     .onReceive(fetchImage.$isLoading) { loading in
-                        withAnimation {
-                            isLoading = loading
+                        // Use async dispatch to avoid animation glitches
+                        DispatchQueue.main.async {
+                            withAnimation {
+                                isLoading = loading
+                            }
                         }
                     }
                     .onAppear(perform: fetchImage.fetch)
