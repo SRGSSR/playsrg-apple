@@ -46,7 +46,7 @@ struct ShowDetailView: View {
             VStack(spacing: 20) {
                 HeaderView(show: show)
                     .frame(height: Self.headerHeight)
-                Text(error.localizedDescription)
+                Text(friendlyMessage(for: error))
                     .srgFont(.regular, size: .headline)
                     .lineLimit(2)
                     .foregroundColor(.white)
