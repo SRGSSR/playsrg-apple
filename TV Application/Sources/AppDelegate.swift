@@ -98,22 +98,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let deeplinkAction = url.host else { return false }
         
         if deeplinkAction == "media" {
-            let mediaURN = url.lastPathComponent
-            SRGDataProvider.current?.media(withUrn: mediaURN)
+            let mediaUrn = url.lastPathComponent
+            SRGDataProvider.current?.media(withUrn: mediaUrn)
                 .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { completion in
-                }, receiveValue: { (media, response) in
+                .sink(receiveCompletion: { _ in
+                }, receiveValue: { media, _ in
                     navigateToMedia(media)
                 })
                 .store(in: &cancellables)
             return true
         }
         else if deeplinkAction == "show" {
-            let showURN = url.lastPathComponent
-            SRGDataProvider.current?.show(withUrn: showURN)
+            let showUrn = url.lastPathComponent
+            SRGDataProvider.current?.show(withUrn: showUrn)
                 .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { completion in
-                }, receiveValue: { (show, response) in
+                .sink(receiveCompletion: { _ in
+                }, receiveValue: { show, _ in
                     navigateToShow(show)
                 })
                 .store(in: &cancellables)
