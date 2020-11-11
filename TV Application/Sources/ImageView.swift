@@ -21,9 +21,7 @@ struct ImageView: View {
             FetchView(url: url, contentMode: contentMode)
         }
     }
-}
-
-extension ImageView {
+    
     private struct FetchView: View {
         let contentMode: ContentMode
         

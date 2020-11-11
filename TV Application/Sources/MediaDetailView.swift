@@ -53,9 +53,7 @@ struct MediaDetailView: View {
             model.refresh()
         }
     }
-}
-
-extension MediaDetailView {
+    
     private struct DescriptionView: View {
         let media: SRGMedia
         
@@ -88,9 +86,7 @@ extension MediaDetailView {
             }
         }
     }
-}
-
-extension MediaDetailView {
+    
     struct AttributeView: View {
         let icon: String
         let values: [String]
@@ -129,9 +125,7 @@ extension MediaDetailView {
             }
         }
     }
-}
-
-extension MediaDetailView {
+    
     struct SummaryView: View {
         private struct TextButtonStyle: ButtonStyle {
             let focused: Bool
@@ -179,9 +173,7 @@ extension MediaDetailView {
             }
         }
     }
-}
-
-extension MediaDetailView {
+    
     struct ActionsView: View {
         let media: SRGMedia
         
@@ -202,9 +194,7 @@ extension MediaDetailView {
             }
         }
     }
-}
-
-extension MediaDetailView {
+    
     private struct RelatedMediasView: View {
         @ObservedObject var model: MediaDetailModel
         @Binding var focusedMedia: SRGMedia?

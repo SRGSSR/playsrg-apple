@@ -34,9 +34,7 @@ struct ShowCell: View {
             .redacted(reason: redactionReason)
         }
     }
-}
-
-extension ShowCell {
+    
     private struct VisualView: View {
         let show: SRGShow?
         

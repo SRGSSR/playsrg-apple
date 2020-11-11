@@ -94,9 +94,7 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
     }
-}
-
-extension HomeView {
+    
     private struct Cell: View {
         let item: HomeModel.RowItem
         
@@ -136,9 +134,7 @@ extension HomeView {
             }
         }
     }
-}
-
-extension HomeView {
+    
     private struct SupplementaryView: View {
         let rowId: HomeModel.RowId
         let kind: String

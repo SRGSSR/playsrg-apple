@@ -41,9 +41,7 @@ struct ShowDetailView: View {
             model.refresh()
         }
     }
-}
-
-extension ShowDetailView {
+    
     private struct DataView: View {
         @ObservedObject var model: ShowDetailModel
         
@@ -100,9 +98,7 @@ extension ShowDetailView {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
-}
-
-extension ShowDetailView {
+    
     private struct HeaderView: View {
         let show: SRGShow
         

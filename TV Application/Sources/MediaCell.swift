@@ -49,9 +49,7 @@ struct MediaCell: View {
             .redacted(reason: redactionReason)
         }
     }
-}
-
-extension MediaCell {
+    
     private struct DescriptionView: View {
         let media: SRGMedia?
         let style: MediaDescription.Style

@@ -35,9 +35,7 @@ struct HeroMediaCell: View {
             .buttonStyle(CardButtonStyle())
         }
     }
-}
-
-extension HeroMediaCell {
+    
     private struct DescriptionView: View {
         let media: SRGMedia?
         
