@@ -45,7 +45,7 @@ struct ShowDetailView: View {
         
         private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
             let header = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(300)),
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(450)),
                 elementKind: UICollectionView.elementKindSectionHeader,
                 alignment: .topLeading
             )
@@ -98,42 +98,56 @@ struct ShowDetailView: View {
         }
     }
     
-    private struct HeaderView: View {
+    private struct VisualView: View {
         let show: SRGShow
+        
+        private static let height: CGFloat = 300
         
         private var imageUrl: URL? {
             return show.imageURL(for: .width, withValue: SizeForImageScale(.medium).width, type: .default)
         }
         
         var body: some View {
+            HStack(alignment: .top) {
+                ImageView(url: imageUrl)
+                    .frame(width: Self.height * 16 / 9, height: Self.height)
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(show.title)
+                        .srgFont(.bold, size: .title)
+                        .lineLimit(3)
+                        .foregroundColor(.white)
+                    if let broadcastInformationMessage = show.broadcastInformation?.message {
+                        Badge(text: broadcastInformationMessage, color: Color(.play_gray))
+                    }
+                    if let lead = show.lead {
+                        Text(lead)
+                            .srgFont(.regular, size: .headline)
+                            .foregroundColor(.white)
+                    }
+                    Spacer()
+                }
+                Spacer()
+                LabeledButton(icon: "favorite-22", label: NSLocalizedString("Add to favorites", comment:"Add to favorites button label")) {
+                    /* Toggle Favorite state */
+                }
+            }
+        }
+    }
+    
+    private struct HeaderView: View {
+        let show: SRGShow
+        
+        var body: some View {
             GeometryReader { geometry in
                 FocusableRegion {
-                    HStack(alignment: .top) {
-                        ImageView(url: imageUrl)
-                            .frame(width: geometry.size.height * 16 / 9)
-                        
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text(show.title)
-                                .srgFont(.bold, size: .title)
-                                .lineLimit(3)
-                                .foregroundColor(.white)
-                            if let broadcastInformationMessage = show.broadcastInformation?.message {
-                                Badge(text: broadcastInformationMessage, color: Color(.play_gray))
-                            }
-                            if let lead = show.lead {
-                                Text(lead)
-                                    .srgFont(.regular, size: .headline)
-                                    .foregroundColor(.white)
-                            }
-                            
-                            Spacer()
-                        }
-                        
+                    VStack {
+                        VisualView(show: show)
                         Spacer()
-                        
-                        LabeledButton(icon: "favorite-22", label: NSLocalizedString("Add to favorites", comment:"Add to favorites button label")) {
-                            /* Toggle Favorite state */
-                        }
+                        Text(NSLocalizedString("Available episodes", comment: "Title of the show episode header"))
+                            .srgFont(.medium, size: .title)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
             }
