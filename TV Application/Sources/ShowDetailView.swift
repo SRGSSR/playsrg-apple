@@ -128,7 +128,7 @@ struct ShowDetailView: View {
                     Spacer()
                 }
                 Spacer()
-                LabeledButton(icon: "favorite-22", label: NSLocalizedString("Add to favorites", comment:"Add to favorites button label")) {
+                LabeledButton(icon: "favorite-22", label: NSLocalizedString("Favorite", comment:"Favorite button label")) {
                     /* Toggle Favorite state */
                 }
             }
