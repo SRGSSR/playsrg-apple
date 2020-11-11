@@ -1,5 +1,5 @@
 #include "Xcode/Play iOS.xcconfig"
 
-PRODUCT_BUNDLE_IDENTIFIER = $(APP_BUNDLE_IDENTIFIER)
+PRODUCT_BUNDLE_IDENTIFIER = $(APP_BUNDLE_IDENTIFIER).notification-service-extension
 PRODUCT_NAME = $(BASE_PRODUCT_NAME) notification service extension
 SDKROOT = iphoneos
