@@ -75,6 +75,7 @@ struct ShowDetailView: View {
                     }
             } supplementaryView: { kind, indexPath in
                 HeaderView(show: model.show)
+                    .padding([.leading, .trailing], 20)
             }
         }
     }
