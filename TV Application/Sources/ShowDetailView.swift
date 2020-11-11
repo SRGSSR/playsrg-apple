@@ -8,8 +8,6 @@ import SRGAppearance
 import SwiftUI
 
 struct ShowDetailView: View {
-    static let headerHeight: CGFloat = 400
-    
     @ObservedObject var model: ShowDetailModel
     
     init(show: SRGShow) {
@@ -59,7 +57,7 @@ struct ShowDetailView: View {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
             
             let section = NSCollectionLayoutSection(group: group)
