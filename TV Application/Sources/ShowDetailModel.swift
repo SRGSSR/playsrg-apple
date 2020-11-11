@@ -69,7 +69,7 @@ class ShowDetailModel: ObservableObject {
             return SRGDataProvider.current!.latestMediasForShows(at: nextPage)
         }
         else {
-            return SRGDataProvider.current!.latestMediasForShows(withUrns: [show.urn], pageSize: ApplicationConfiguration.shared.pageSize)
+            return SRGDataProvider.current!.latestMediasForShows(withUrns: [show.urn], filter: .episodesOnly, pageSize: ApplicationConfiguration.shared.pageSize)
         }
     }
 }
