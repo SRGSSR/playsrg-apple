@@ -78,6 +78,7 @@ struct MediaDetailView: View {
                         SummaryView(media: media)
                         Spacer()
                         ActionsView(media: media)
+                            .layoutPriority(1)
                             .prefersDefaultFocus(in: namespace)
                     }
                     .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .leading)
