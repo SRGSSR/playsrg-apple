@@ -128,7 +128,7 @@ struct ShowDetailView: View {
                     Spacer()
                 }
                 Spacer()
-                LabeledButton(icon: "favorite-22", label: NSLocalizedString("Favorite", comment:"Favorite button label")) {
+                LabeledButton(icon: "favorite-22", label: NSLocalizedString("Favorite", comment:"Show favorite button label")) {
                     /* Toggle Favorite state */
                 }
             }
@@ -144,7 +144,7 @@ struct ShowDetailView: View {
                     VStack {
                         VisualView(show: show)
                         Spacer()
-                        Text(NSLocalizedString("Available episodes", comment: "Title of the show episode header"))
+                        Text(NSLocalizedString("Available episodes", comment: "Title of the show episode list header"))
                             .srgFont(.medium, size: .title)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
