@@ -184,7 +184,7 @@ struct MediaDetailView: View {
                 LabeledButton(icon: "play-50", label: media.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio") : NSLocalizedString("Watch", comment: "Play button label for video")) {
                     navigateToMedia(media, play: true)
                 }
-                LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Watch later", comment: "Watch later button label")) {
+                LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Later", comment: "Watch or listen later button label")) {
                     /* Toggle Watch Later state */
                 }
                 if let show = media.show {
