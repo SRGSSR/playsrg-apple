@@ -45,7 +45,7 @@ struct ShowDetailView: View {
         
         private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
             let header = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(450)),
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(500)),
                 elementKind: UICollectionView.elementKindSectionHeader,
                 alignment: .topLeading
             )
@@ -111,6 +111,7 @@ struct ShowDetailView: View {
             HStack(alignment: .top) {
                 ImageView(url: imageUrl)
                     .frame(width: Self.height * 16 / 9, height: Self.height)
+                    .cornerRadius(10)
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text(show.title)
@@ -131,6 +132,7 @@ struct ShowDetailView: View {
                 LabeledButton(icon: "favorite-22", label: NSLocalizedString("Favorite", comment:"Show favorite button label")) {
                     /* Toggle Favorite state */
                 }
+                .padding(.leading, 100)
             }
         }
     }
