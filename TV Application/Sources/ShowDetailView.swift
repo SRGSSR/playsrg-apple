@@ -10,24 +10,96 @@ import SwiftUI
 struct ShowDetailView: View {
     @ObservedObject var model: ShowDetailModel
     
+    enum Section: Hashable {
+        case medias
+        case information
+    }
+    
+    enum Content: Hashable {
+        case loading
+        case message(_ message: String)
+        case media(_ media: SRGMedia)
+    }
+    
+    typealias Row = CollectionRow<Section, Content>
+    
     init(show: SRGShow) {
         model = ShowDetailModel(show: show)
     }
     
-    var body: some View {
-        Group {
-            if model.loading && model.rows.isEmpty {
-                LoadingView()
-            }
-            else if let error = model.error {
-                ErrorView(error: error)
-            }
-            else if model.isEmpty {
-                EmptyView()
+    private var rows: [Row] {
+        switch model.state {
+        case .loading:
+            return [Row(section: .information, items: [.loading])]
+        case let .failed(error: error):
+            let item = Content.message(friendlyMessage(for: error))
+            return [Row(section: .information, items: [item])]
+        case let .loaded(medias: medias):
+            if !medias.isEmpty {
+                return [Row(section: .medias, items: medias.map { .media($0) })]
             }
             else {
-                DataView(model: model)
+                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"))
+                return [Row(section: .information, items: [item])]
             }
+        }
+    }
+    
+    private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(500)),
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .topLeading
+        )
+        return [header]
+    }
+    
+    private static func layoutGroup(for section: Section) -> NSCollectionLayoutGroup {
+        switch section {
+        case .medias:
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
+            return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
+        case .information:
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
+            return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        }
+    }
+    
+    private static func layoutSection(for section: Section) -> NSCollectionLayoutSection {
+        let section = NSCollectionLayoutSection(group: layoutGroup(for: section))
+        section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
+        return section
+    }
+    
+    var body: some View {
+        CollectionView(rows: rows) { _, _ in
+            return Self.layoutSection(for: rows.first!.section)
+        } cell: { _, item in
+            switch item {
+            case .loading:
+                ProgressView()
+            case let .message(message):
+                Text(message)
+                    .srgFont(.regular, size: .headline)
+                    .lineLimit(2)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            case let .media(media):
+                MediaCell(media: media)
+                    .onAppear {
+                        model.loadNextPage(from: media)
+                    }
+            }
+        } supplementaryView: { kind, indexPath in
+            HeaderView(show: model.show)
+                .padding([.leading, .trailing], 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.play_black))
@@ -40,74 +112,6 @@ struct ShowDetailView: View {
         }
         .onResume {
             model.refresh()
-        }
-    }
-    
-    private struct DataView: View {
-        @ObservedObject var model: ShowDetailModel
-        
-        private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
-            let header = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(500)),
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .topLeading
-            )
-            return [header]
-        }
-        
-        private static func layoutSection() -> NSCollectionLayoutSection {
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-            
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
-            
-            let section = NSCollectionLayoutSection(group: group)
-            section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
-            return section
-        }
-        
-        var body: some View {
-            CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
-                return Self.layoutSection()
-            } cell: { indexPath, item in
-                MediaCell(media: item)
-                    .onAppear {
-                        model.loadNextPage(from: item)
-                    }
-            } supplementaryView: { kind, indexPath in
-                HeaderView(show: model.show)
-                    .padding([.leading, .trailing], 20)
-            }
-        }
-    }
-    
-    private struct LoadingView: View {
-        var body: some View {
-            ProgressView()
-        }
-    }
-    
-    private struct ErrorView: View {
-        let error: Error
-        
-        var body: some View {
-            Text(friendlyMessage(for: error))
-                .srgFont(.regular, size: .headline)
-                .lineLimit(2)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-    }
-    
-    private struct EmptyView: View {
-        var body: some View {
-            Text(NSLocalizedString("No results", comment: "Default text displayed when no results are available"))
-                .srgFont(.regular, size: .headline)
-                .lineLimit(2)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
     

@@ -9,25 +9,24 @@ import SRGDataProviderCombine
 class ShowDetailModel: ObservableObject {
     let show: SRGShow
     
-    typealias Row = CollectionRow<Section, SRGMedia>
+    enum State {
+        case loading
+        case failed(error: Error)
+        case loaded(medias: [SRGMedia])
+    }
     
-    @Published private(set) var rows: [Row] = []
-    @Published private(set) var error: Error? = nil
-    @Published private(set) var loading = false
+    @Published private(set) var state = State.loaded(medias: [])
     
     private var cancellables = Set<AnyCancellable>()
+    private var medias: [SRGMedia] = []
     private var nextPage: SRGDataProvider.LatestMediasForShows.Page? = nil
-    
-    var isEmpty: Bool {
-        return rows.firstIndex { !$0.items.isEmpty } == nil
-    }
     
     init(show: SRGShow) {
         self.show = show
     }
     
     func refresh() {
-        guard rows.isEmpty else { return }
+        guard medias.isEmpty else { return }
         loadNextPage()
     }
     
@@ -38,25 +37,18 @@ class ShowDetailModel: ObservableObject {
         guard let publisher = publisher(from: media) else { return }
         publisher
             .receive(on: DispatchQueue.main)
-            .handleEvents { _ in
-                self.loading = true
-            } receiveCompletion: { _ in
-                self.loading = false
-            } receiveCancel: {
-                self.loading = false
-            }
+            .handleEvents(receiveRequest:  { _ in
+                if self.medias.isEmpty {
+                    self.state = .loading
+                }
+            })
             .sink(receiveCompletion: { completion in
                 if case let .failure(error) = completion {
-                    self.error = error
-                }
-                else {
-                    self.error = nil
+                    self.state = .failed(error: error)
                 }
             }, receiveValue: { result in
-                var medias = self.rows.first?.items ?? []
-                medias.append(contentsOf: result.medias)
-                
-                self.rows = [Row(section: .main, items: medias)]
+                self.medias.append(contentsOf: result.medias)
+                self.state = .loaded(medias: self.medias)
                 self.nextPage = result.nextPage
             })
             .store(in: &cancellables)
@@ -67,19 +59,14 @@ class ShowDetailModel: ObservableObject {
     }
     
     private func publisher(from media: SRGMedia?) -> AnyPublisher<SRGDataProvider.LatestMediasForShows.Output, Error>? {
-        // TODO: Probably use episode composition request, which returns more episodes in the past
+        // TODO: Use byURN request when available to have more results
+        //       See https://jira.srg.beecollaboration.com/browse/PLAY-3886
         if let media = media {
-            guard let nextPage = nextPage, media == rows.first?.items.last else { return nil }
+            guard let nextPage = nextPage, media == medias.last else { return nil }
             return SRGDataProvider.current!.latestMediasForShows(at: nextPage)
         }
         else {
             return SRGDataProvider.current!.latestMediasForShows(withUrns: [show.urn], filter: .episodesOnly, pageSize: ApplicationConfiguration.shared.pageSize)
         }
-    }
-}
-
-extension ShowDetailModel {
-    enum Section: Hashable {
-        case main
     }
 }
