@@ -18,6 +18,10 @@ class ShowDetailModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private var nextPage: SRGDataProvider.LatestMediasForShows.Page? = nil
     
+    var isEmpty: Bool {
+        return rows.firstIndex { !$0.items.isEmpty } == nil
+    }
+    
     init(show: SRGShow) {
         self.show = show
     }

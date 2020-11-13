@@ -22,6 +22,9 @@ struct ShowDetailView: View {
             else if let error = model.error {
                 ErrorView(error: error)
             }
+            else if model.isEmpty {
+                EmptyView()
+            }
             else {
                 DataView(model: model)
             }
@@ -91,6 +94,16 @@ struct ShowDetailView: View {
         
         var body: some View {
             Text(friendlyMessage(for: error))
+                .srgFont(.regular, size: .headline)
+                .lineLimit(2)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+    
+    private struct EmptyView: View {
+        var body: some View {
+            Text(NSLocalizedString("No results", comment: "Default text displayed when no results are available"))
                 .srgFont(.regular, size: .headline)
                 .lineLimit(2)
                 .foregroundColor(.white)
