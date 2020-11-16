@@ -21,8 +21,10 @@ extension ApplicationConfiguration {
             return .tvLatestForModule(nil, type: .event)
         case .tvTopics:
             return .tvLatestForTopic(nil)
+        #if DEBUG
         case .tvTopicsAccess:
             return .tvTopicsAccess
+        #endif
         default:
             return nil
         }

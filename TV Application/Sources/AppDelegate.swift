@@ -68,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewControllers.append(liveViewController)
         }
         
+        #if DEBUG
         let showsViewController = UIHostingController(rootView: ShowsView())
         showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
         viewControllers.append(showsViewController)
@@ -79,6 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let profileViewController = UIHostingController(rootView: ProfileView())
         profileViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Profile", comment: "Profile tab title"), image: nil, tag: 4)
         viewControllers.append(profileViewController)
+        #endif
         
         let tabBarController = UITabBarController()
         Self.configuredTabBarController(tabBarController: tabBarController)

@@ -146,10 +146,16 @@ struct ShowDetailView: View {
                     Spacer()
                 }
                 Spacer()
+                #if NIGHTY
                 LabeledButton(icon: "favorite-22", label: NSLocalizedString("Favorite", comment:"Show favorite button label")) {
                     /* Toggle Favorite state */
                 }
                 .padding(.leading, 100)
+                #else
+                Spacer()
+                    .frame(width: 120)
+                    .padding(.leading, 100)
+                #endif
             }
         }
     }
