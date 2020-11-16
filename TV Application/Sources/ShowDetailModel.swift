@@ -61,7 +61,7 @@ class ShowDetailModel: ObservableObject {
     private func publisher(from media: SRGMedia?) -> AnyPublisher<SRGDataProvider.LatestMediasForShows.Output, Error>? {
         // TODO: Use byURN request when available to have more results
         //       See https://jira.srg.beecollaboration.com/browse/PLAY-3886
-        if let media = media {
+        if media != nil {
             guard let nextPage = nextPage, media == medias.last else { return nil }
             return SRGDataProvider.current!.latestMediasForShows(at: nextPage)
         }
