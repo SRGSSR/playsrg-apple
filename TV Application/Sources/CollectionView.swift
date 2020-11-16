@@ -7,7 +7,7 @@
 import SwiftUI
 
 extension CollectionView {
-    func synchronizeParentTabScrolling() -> some View {
+    func synchronizeParentTabScrolling() -> CollectionView {
         var collectionView = self
         collectionView.parentTabScrollingEnabled = true
         return collectionView

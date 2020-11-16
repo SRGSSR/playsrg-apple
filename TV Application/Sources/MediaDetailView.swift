@@ -154,13 +154,8 @@ struct MediaDetailView: View {
                                 .srgFont(.light, size: .subtitle)
                                 .frame(width: geometry.size.width, alignment: .leading)
                                 .padding([.top, .bottom], 5)
-                                .reportFocusChanges()
+                                .onFocusChange { isFocused = $0 }
                         })
-                        .onFocusChange { focused in
-                            withAnimation {
-                                isFocused = focused
-                            }
-                        }
                         .buttonStyle(TextButtonStyle(focused: isFocused))
                     }
                     
@@ -222,15 +217,15 @@ struct MediaDetailView: View {
                             ScrollView(.horizontal) {
                                 HStack(spacing: 40) {
                                     ForEach(model.relatedMedias, id: \.uid) { media in
-                                        MediaCell(media: media, style: .show, action: {
+                                        MediaCell(media: media, style: .show) {
                                             navigateToMedia(media, play: true)
-                                        })
-                                        .frame(width: 280)
-                                        .onFocusChange { focused in
-                                            if focused {
+                                        }
+                                        .onFocus { isFocused in
+                                            if isFocused {
                                                 focusedMedia = media
                                             }
                                         }
+                                        .frame(width: 280)
                                     }
                                 }
                                 .padding(.top, 70)

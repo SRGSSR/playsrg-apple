@@ -18,7 +18,7 @@ struct LabeledButton: View {
             Button(action: action) {
                 Image(icon)
                     .foregroundColor(isFocused ? .darkGray : .white)
-                    .reportFocusChanges()
+                    .onFocusChange { isFocused = $0 }
             }
             Text(label)
                 .srgFont(.regular, size: .subtitle)
@@ -27,7 +27,6 @@ struct LabeledButton: View {
                 .foregroundColor(isFocused ? .white : .gray)
         }
         .frame(width: 120)
-        .onFocusChange { isFocused = $0 }
     }
 }
 
