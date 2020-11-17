@@ -46,12 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let configuration = ApplicationConfiguration.shared
         
-        let analyticsConfiguration = SRGAnalyticsConfiguration.init(
-            businessUnitIdentifier:configuration.analyticsBusinessUnitIdentifier,
-            container:configuration.analyticsContainer,
-            comScoreVirtualSite:configuration.comScoreVirtualSite,
-            netMetrixIdentifier:configuration.netMetrixIdentifier
-            )
+        let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
+                                                               container: configuration.analyticsContainer,
+                                                               comScoreVirtualSite: configuration.comScoreVirtualSite,
+                                                               netMetrixIdentifier: configuration.netMetrixIdentifier)
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration)
         
         SRGDataProvider.current = SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
