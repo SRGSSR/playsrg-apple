@@ -96,7 +96,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "b853712998cf95b562a34244c68cc101ab46317f",
+          "revision": "2b0458695dc471ec52b6f1455330d506b474604d",
           "version": null
         }
       },
@@ -150,7 +150,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "ee90523dcf8a6af0d0a359936ada26063550b5b5",
+          "revision": "7efa77cb187ceae9e272b462c70b9bb50049b096",
           "version": null
         }
       },
@@ -168,7 +168,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "9d15a62433e43e880a578d4c82f0849742782cee",
+          "revision": "81cfbf88dea29dd6531e60a85ee4e7c48f820a47",
           "version": null
         }
       },
