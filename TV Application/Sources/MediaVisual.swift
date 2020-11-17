@@ -94,9 +94,7 @@ struct MediaVisual: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
     }
-}
-
-extension MediaVisual {
+    
     private struct BlockingOverlay: View {
         let media: SRGMedia?
         

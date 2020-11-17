@@ -18,12 +18,30 @@ struct LabeledButton: View {
             Button(action: action) {
                 Image(icon)
                     .foregroundColor(isFocused ? .darkGray : .white)
-                    .reportFocusChanges()
+                    .onFocusChange { isFocused = $0 }
             }
             Text(label)
                 .srgFont(.regular, size: .subtitle)
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
                 .foregroundColor(isFocused ? .white : .gray)
         }
-        .onFocusChange { isFocused = $0 }
+        .frame(width: 120)
+    }
+}
+
+struct LabeledButton_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            LabeledButton(icon: "episodes-22", label: "Episodes", action: {})
+                .previewLayout(PreviewLayout.sizeThatFits)
+                .padding()
+                .previewDisplayName("Short label")
+            
+            LabeledButton(icon: "favorite-22", label: "Watch later", action: {})
+                .previewLayout(PreviewLayout.sizeThatFits)
+                .padding()
+                .previewDisplayName("Long label")
+        }
     }
 }

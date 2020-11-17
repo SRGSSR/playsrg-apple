@@ -35,22 +35,20 @@ struct HeroMediaCell: View {
             .buttonStyle(CardButtonStyle())
         }
     }
-}
-
-extension HeroMediaCell {
+    
     private struct DescriptionView: View {
         let media: SRGMedia?
         
         var body: some View {
             VStack {
                 Spacer()
-                Text(MediaDescription.title(for: media))
+                Text(MediaDescription.title(for: media, style: .show))
                     .srgFont(.regular, size: .subheadline)
                     .lineLimit(1)
                     .opacity(0.8)
                 Spacer()
                     .frame(height: 10)
-                Text(MediaDescription.subtitle(for: media))
+                Text(MediaDescription.subtitle(for: media, style: .show))
                     .srgFont(.medium, size: .title)
                     .lineLimit(2)
                     .multilineTextAlignment(.center)

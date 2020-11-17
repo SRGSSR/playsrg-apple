@@ -26,6 +26,13 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
     }
 }
 
+func navigateToShow(_ show: SRGShow, animated: Bool = true) {
+    guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
+    
+    let hostController = UIHostingController(rootView: ShowDetailView(show: show))
+    topViewController.present(hostController, animated: animated, completion: nil)
+}
+
 func showText(_ text: String, animated: Bool = true) {
     guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
     

@@ -9,8 +9,8 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var model: HomeModel
     
-    private static func swimlaneLayoutSection(for rowId: HomeRowId) -> NSCollectionLayoutSection {
-        func layoutGroupSize(for rowId: HomeRowId) -> NSCollectionLayoutSize {
+    private static func swimlaneLayoutSection(for rowId: HomeModel.RowId) -> NSCollectionLayoutSection {
+        func layoutGroupSize(for rowId: HomeModel.RowId) -> NSCollectionLayoutSize {
             switch rowId {
             case let .tvTrending(appearance: appearance):
                 if appearance == .hero {
@@ -19,8 +19,10 @@ struct HomeView: View {
                 else {
                     return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
                 }
+            #if DEBUG
             case .tvTopicsAccess:
                 return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
+            #endif
             case .radioAllShows:
                 return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
             default:
@@ -28,16 +30,20 @@ struct HomeView: View {
             }
         }
         
-        func contentInsets(for rowId: HomeRowId) -> NSDirectionalEdgeInsets {
+        func contentInsets(for rowId: HomeModel.RowId) -> NSDirectionalEdgeInsets {
             switch rowId {
+            #if DEBUG
             case .tvTopicsAccess:
                 return NSDirectionalEdgeInsets(top: 80, leading: 0, bottom: 80, trailing: 0)
+            #endif
+            case .tvTrending(appearance: _):
+                return NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0)
             default:
                 return NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
             }
         }
         
-        func continuousGroupLeadingBoundary(for rowId: HomeRowId) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
+        func continuousGroupLeadingBoundary(for rowId: HomeModel.RowId) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
             if case let .tvTrending(appearance: appearance) = rowId, appearance == .hero {
                 return .continuous
             }
@@ -46,7 +52,7 @@ struct HomeView: View {
             }
         }
         
-        func boundarySupplementaryItems(for rowId: HomeRowId) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+        func boundarySupplementaryItems(for rowId: HomeModel.RowId) -> [NSCollectionLayoutBoundarySupplementaryItem] {
             guard let headerHeight = swimlaneSectionHeaderHeight(for: rowId) else { return [] }
             let header = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight)),
@@ -70,7 +76,7 @@ struct HomeView: View {
         return section
     }
     
-    private static func swimlaneSectionHeaderHeight(for rowId: HomeRowId) -> CGFloat? {
+    private static func swimlaneSectionHeaderHeight(for rowId: HomeModel.RowId) -> CGFloat? {
         guard rowId.title != nil else { return nil }
         if let lead = rowId.lead, !lead.isEmpty {
             return 140
@@ -94,13 +100,11 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
     }
-}
-
-extension HomeView {
+    
     private struct Cell: View {
-        let item: HomeRowItem
+        let item: HomeModel.RowItem
         
-        private static func isHeroAppearance(for item: HomeRowItem) -> Bool {
+        private static func isHeroAppearance(for item: HomeModel.RowItem) -> Bool {
             if case let .tvTrending(appearance: appearance) = item.rowId, appearance == .hero {
                 return true
             }
@@ -116,14 +120,14 @@ extension HomeView {
                     HeroMediaCell(media: media)
                 }
                 else {
-                    MediaCell(media: media)
+                    MediaCell(media: media, style: .show)
                 }
             case .mediaPlaceholder:
                 if Self.isHeroAppearance(for: item) {
                     HeroMediaCell(media: nil)
                 }
                 else {
-                    MediaCell(media: nil)
+                    MediaCell(media: nil, style: .show)
                 }
             case let .show(show):
                 ShowCell(show: show)
@@ -136,11 +140,9 @@ extension HomeView {
             }
         }
     }
-}
-
-extension HomeView {
+    
     private struct SupplementaryView: View {
-        let rowId: HomeRowId
+        let rowId: HomeModel.RowId
         let kind: String
         
         var body: some View {

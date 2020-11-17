@@ -1,0 +1,3 @@
+APP_BASE_IDENTIFIER = ch.rts.rtsplayer
+BASE_PRODUCT_NAME = Play RTS
+URL_BASE_SCHEME  = playrts

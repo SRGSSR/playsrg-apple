@@ -21,9 +21,7 @@ struct ImageView: View {
             FetchView(url: url, contentMode: contentMode)
         }
     }
-}
-
-extension ImageView {
+    
     private struct FetchView: View {
         let contentMode: ContentMode
         
@@ -46,8 +44,11 @@ extension ImageView {
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .clipped()
                     .onReceive(fetchImage.$isLoading) { loading in
-                        withAnimation {
-                            isLoading = loading
+                        // Use async dispatch to avoid animation glitches
+                        DispatchQueue.main.async {
+                            withAnimation {
+                                isLoading = loading
+                            }
                         }
                     }
                     .onAppear(perform: fetchImage.fetch)
@@ -57,3 +58,22 @@ extension ImageView {
         }
     }
 }
+
+struct ImageView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            ImageView(url: URL(string: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/450")!)
+                .previewLayout(PreviewLayout.sizeThatFits)
+                .previewDisplayName("Intrinsic size")
+            
+            ImageView(url: URL(string: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/450")!)
+                .previewLayout(.fixed(width: 600, height: 600))
+                .previewDisplayName("600x600, fit")
+            
+            ImageView(url: URL(string: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/450")!, contentMode: .fill)
+                .previewLayout(.fixed(width: 600, height: 600))
+                .previewDisplayName("600x600, fill")
+        }
+    }
+}
+

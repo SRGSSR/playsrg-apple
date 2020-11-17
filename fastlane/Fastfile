@@ -89,7 +89,7 @@ platform :ios do
 
     tvos_schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
-      update_app_identifier_to_appstore(app_identifier)
+      update_app_identifier_to_appstore(platform, app_identifier)
 
       build_lane(
         configuration: 'Nightly',
@@ -545,12 +545,14 @@ def xcodebuid_grep_output(output)
   output.split(/\n/) [line_count - 1]
 end
 
-# Update only the demo app identifier for App Store Connect submit.
-def update_app_identifier_to_appstore(app_identifier)
-  update_app_identifier(
-    plist_path: 'TV Application/TV-Application-Info.plist',
-    app_identifier: app_identifier
+# Update only the app identifier for App Store Connect submit.
+def update_app_identifier_to_appstore(platform, app_identifier)
+  update_xcconfig_value(
+    path: 'Xcode/Play ' + platform + ' Application.xcconfig',
+    name: 'PRODUCT_BUNDLE_IDENTIFIER',
+    value: app_identifier
   )
+  app_identifier
 end
 
 # Update dSYMs from AppStore to App Center.

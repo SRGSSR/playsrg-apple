@@ -9,12 +9,16 @@ import SwiftUI
 
 struct MediaCell: View {
     let media: SRGMedia?
+    let style: MediaDescription.Style
     let action: (() -> Void)?
+    
+    fileprivate var onFocusAction: ((Bool) -> Void)? = nil
     
     @State private var isFocused: Bool = false
     
-    init(media: SRGMedia?, action: (() -> Void)? = nil) {
+    init(media: SRGMedia?, style: MediaDescription.Style = .date, action: (() -> Void)? = nil) {
         self.media = media
+        self.style = style
         self.action = action
     }
         
@@ -32,12 +36,17 @@ struct MediaCell: View {
                 }) {
                     MediaVisual(media: media, scale: .small, contentMode: .fit)
                         .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                        .reportFocusChanges()
+                        .onFocusChange { focused in
+                            isFocused = focused
+                            
+                            if let onFocusAction = self.onFocusAction {
+                                onFocusAction(focused)
+                            }
+                        }
                 }
                 .buttonStyle(CardButtonStyle())
-                .onFocusChange { isFocused = $0 }
                 
-                DescriptionView(media: media)
+                DescriptionView(media: media, style: style)
                     .frame(width: geometry.size.width, alignment: .leading)
                     .opacity(isFocused ? 1 : 0.5)
                     .offset(x: 0, y: isFocused ? 10 : 0)
@@ -47,19 +56,48 @@ struct MediaCell: View {
             .redacted(reason: redactionReason)
         }
     }
+    
+    private struct DescriptionView: View {
+        let media: SRGMedia?
+        let style: MediaDescription.Style
+        
+        var body: some View {
+            Text(MediaDescription.title(for: media, style: style))
+                .srgFont(.medium, size: .subtitle)
+                .lineLimit(2)
+            Text(MediaDescription.subtitle(for: media, style: style))
+                .srgFont(.light, size: .subtitle)
+                .lineLimit(2)
+        }
+    }
 }
 
 extension MediaCell {
-    private struct DescriptionView: View {
-        let media: SRGMedia?
+    func onFocus(perform action: @escaping (Bool) -> Void) -> MediaCell {
+        var mediaCell = self
+        mediaCell.onFocusAction = action
+        return mediaCell
+    }
+}
+
+struct MediaCell_Previews: PreviewProvider {
+    
+    static var mediaPreview: SRGMedia {
+        let asset = NSDataAsset(name: "media-rts-tv")!
+        let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
         
-        var body: some View {
-            Text(MediaDescription.title(for: media))
-                .srgFont(.medium, size: .subtitle)
-                .lineLimit(2)
-            Text(MediaDescription.subtitle(for: media))
-                .srgFont(.light, size: .subtitle)
-                .lineLimit(2)
+        return try! MTLJSONAdapter(modelClass: SRGMedia.self)?.model(fromJSONDictionary: jsonData) as! SRGMedia
+    }
+    
+    static var previews: some View {
+        Group {
+            MediaCell(media: mediaPreview)
+                .previewLayout(.fixed(width: 375, height: 400))
+                .previewDisplayName("RTS media, default date style")
+            
+            MediaCell(media: mediaPreview, style: .show)
+                .previewLayout(.fixed(width: 375, height: 400))
+                .previewDisplayName("RTS media, show style")
         }
     }
 }

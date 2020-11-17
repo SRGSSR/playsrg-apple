@@ -1,3 +1,4 @@
 #include "Xcode/Links/Play RTS.nightly.xcconfig"
 #include "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.nightly.xcconfig"
 #include "Xcode/Play iOS Application.xcconfig"
+#include "Xcode/Play RTS.xcconfig"

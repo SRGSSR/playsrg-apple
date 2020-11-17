@@ -1,2 +1,3 @@
 #include "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SRF TV/Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig"
 #include "Xcode/Play tvOS Application.xcconfig"
+#include "Xcode/Play SRF.xcconfig"

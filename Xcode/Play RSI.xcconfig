@@ -1,0 +1,3 @@
+APP_BASE_IDENTIFIER = ch.rsi.rsiplayer
+BASE_PRODUCT_NAME = Play RSI
+URL_BASE_SCHEME  = playrsi

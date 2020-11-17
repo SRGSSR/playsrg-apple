@@ -30,7 +30,6 @@ struct MediaDetailView: View {
     var body: some View {
         ZStack {
             ImageView(url: imageUrl)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             Rectangle()
                 .fill(Color(white: 0, opacity: 0.6))
             VStack {
@@ -54,9 +53,7 @@ struct MediaDetailView: View {
             model.refresh()
         }
     }
-}
-
-extension MediaDetailView {
+    
     private struct DescriptionView: View {
         let media: SRGMedia
         
@@ -66,11 +63,11 @@ extension MediaDetailView {
             FocusableRegion {
                 GeometryReader { geometry in
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(MediaDescription.subtitle(for: media))
+                        Text(MediaDescription.subtitle(for: media, style: .show))
                             .srgFont(.bold, size: .title)
                             .lineLimit(3)
                             .foregroundColor(.white)
-                        Text(MediaDescription.title(for: media))
+                        Text(MediaDescription.title(for: media, style: .show))
                             .srgFont(.regular, size: .headline)
                             .foregroundColor(.white)
                         Spacer()
@@ -81,6 +78,7 @@ extension MediaDetailView {
                         SummaryView(media: media)
                         Spacer()
                         ActionsView(media: media)
+                            .layoutPriority(1)
                             .prefersDefaultFocus(in: namespace)
                     }
                     .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .leading)
@@ -89,9 +87,7 @@ extension MediaDetailView {
             }
         }
     }
-}
-
-extension MediaDetailView {
+    
     struct AttributeView: View {
         let icon: String
         let values: [String]
@@ -130,9 +126,7 @@ extension MediaDetailView {
             }
         }
     }
-}
-
-extension MediaDetailView {
+    
     struct SummaryView: View {
         private struct TextButtonStyle: ButtonStyle {
             let focused: Bool
@@ -160,13 +154,8 @@ extension MediaDetailView {
                                 .srgFont(.light, size: .subtitle)
                                 .frame(width: geometry.size.width, alignment: .leading)
                                 .padding([.top, .bottom], 5)
-                                .reportFocusChanges()
+                                .onFocusChange { isFocused = $0 }
                         })
-                        .onFocusChange { focused in
-                            withAnimation {
-                                isFocused = focused
-                            }
-                        }
                         .buttonStyle(TextButtonStyle(focused: isFocused))
                     }
                     
@@ -180,31 +169,30 @@ extension MediaDetailView {
             }
         }
     }
-}
-
-extension MediaDetailView {
+    
     struct ActionsView: View {
         let media: SRGMedia
         
         var body: some View {
-            HStack(spacing: 30) {
-                LabeledButton(icon: "play-50", label: NSLocalizedString("Play", comment: "Play button label")) {
+            HStack(alignment: .top, spacing: 30) {
+                // TODO: 22 icon?
+                LabeledButton(icon: "play-50", label: media.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio") : NSLocalizedString("Watch", comment: "Play button label for video")) {
                     navigateToMedia(media, play: true)
                 }
-                LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Watch later", comment: "Watch later button label")) {
+                #if DEBUG
+                LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Later", comment: "Watch or listen later button label")) {
                     /* Toggle Watch Later state */
                 }
-                if media.show != nil {
-                    LabeledButton(icon: "episodes-22", label: NSLocalizedString("Episodes", comment:"Episodes button label")) {
-                        /* Open show page */
+                #endif
+                if let show = media.show {
+                    LabeledButton(icon: "episodes-22", label: NSLocalizedString("Show", comment:"Show button label")) {
+                        navigateToShow(show)
                     }
                 }
             }
         }
     }
-}
-
-extension MediaDetailView {
+    
     private struct RelatedMediasView: View {
         @ObservedObject var model: MediaDetailModel
         @Binding var focusedMedia: SRGMedia?
@@ -231,15 +219,15 @@ extension MediaDetailView {
                             ScrollView(.horizontal) {
                                 HStack(spacing: 40) {
                                     ForEach(model.relatedMedias, id: \.uid) { media in
-                                        MediaCell(media: media, action: {
+                                        MediaCell(media: media, style: .show) {
                                             navigateToMedia(media, play: true)
-                                        })
-                                        .frame(width: 280)
-                                        .onFocusChange { focused in
-                                            if focused {
+                                        }
+                                        .onFocus { isFocused in
+                                            if isFocused {
                                                 focusedMedia = media
                                             }
                                         }
+                                        .frame(width: 280)
                                     }
                                 }
                                 .padding(.top, 70)
@@ -254,5 +242,20 @@ extension MediaDetailView {
                 }
             }
         }
+    }
+}
+
+struct MediaDetailView_Previews: PreviewProvider {
+    
+    static var mediaPreview: SRGMedia {
+        let asset = NSDataAsset(name: "media-rts-tv")!
+        let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
+        
+        return try! MTLJSONAdapter(modelClass: SRGMedia.self)?.model(fromJSONDictionary: jsonData) as! SRGMedia
+    }
+    
+    static var previews: some View {
+        MediaDetailView(media: mediaPreview)
+            .previewDisplayName("RTS media")
     }
 }

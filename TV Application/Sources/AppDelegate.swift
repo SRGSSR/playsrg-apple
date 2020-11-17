@@ -6,13 +6,15 @@
 
 import Firebase
 import SRGAppearance
-import SRGDataProvider
+import SRGDataProviderCombine
 import SwiftUI
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    
+    private var cancellables = Set<AnyCancellable>()
     
     private static func configuredTabBarController(tabBarController: UITabBarController) {
         tabBarController.view.backgroundColor = (UIScreen.main.traitCollection.userInterfaceStyle == .dark) ? .play_black : .play_lightGray
@@ -66,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewControllers.append(liveViewController)
         }
         
+        #if DEBUG
         let showsViewController = UIHostingController(rootView: ShowsView())
         showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
         viewControllers.append(showsViewController)
@@ -77,6 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let profileViewController = UIHostingController(rootView: ProfileView())
         profileViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Profile", comment: "Profile tab title"), image: nil, tag: 4)
         viewControllers.append(profileViewController)
+        #endif
         
         let tabBarController = UITabBarController()
         Self.configuredTabBarController(tabBarController: tabBarController)
@@ -89,5 +93,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let tabBarController = self.window?.rootViewController as? UITabBarController {
             Self.configuredTabBarController(tabBarController: tabBarController)
         }
+    }
+    
+    // See URL_SCHEMES.md
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        guard let deeplinkAction = url.host else { return false }
+        
+        if deeplinkAction == "media" {
+            let mediaUrn = url.lastPathComponent
+            SRGDataProvider.current?.media(withUrn: mediaUrn)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { _ in
+                }, receiveValue: { media, _ in
+                    navigateToMedia(media)
+                })
+                .store(in: &cancellables)
+            return true
+        }
+        else if deeplinkAction == "show" {
+            let showUrn = url.lastPathComponent
+            SRGDataProvider.current?.show(withUrn: showUrn)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { _ in
+                }, receiveValue: { show, _ in
+                    navigateToShow(show)
+                })
+                .store(in: &cancellables)
+            return true
+        }
+        return false
     }
 }

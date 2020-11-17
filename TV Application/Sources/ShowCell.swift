@@ -34,9 +34,7 @@ struct ShowCell: View {
             .redacted(reason: redactionReason)
         }
     }
-}
-
-extension ShowCell {
+    
     private struct VisualView: View {
         let show: SRGShow?
         
@@ -47,6 +45,24 @@ extension ShowCell {
         var body: some View {
             ImageView(url: imageUrl)
                 .whenRedacted { $0.hidden() }
+        }
+    }
+}
+
+struct ShowCell_Previews: PreviewProvider {
+    
+    static var showPreview: SRGShow {
+        let asset = NSDataAsset(name: "show-srf-tv")!
+        let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
+        
+        return try! MTLJSONAdapter(modelClass: SRGShow.self)?.model(fromJSONDictionary: jsonData) as! SRGShow
+    }
+    
+    static var previews: some View {
+        Group {
+            ShowCell(show: showPreview)
+                .previewLayout(.fixed(width: 375, height: 211))
+                .previewDisplayName("SRF show")
         }
     }
 }

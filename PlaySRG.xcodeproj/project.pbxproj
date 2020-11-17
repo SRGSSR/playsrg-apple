@@ -242,6 +242,11 @@
 		086F8D6B22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D5322984B29001BE2F4 /* FavoriteTableViewCell.m */; };
 		086F8D6C22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D5322984B29001BE2F4 /* FavoriteTableViewCell.m */; };
 		086F8D6D22984B29001BE2F4 /* FavoriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D5322984B29001BE2F4 /* FavoriteTableViewCell.m */; };
+		08742C5925481CC8006E2DCE /* ShowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08742C5825481CC8006E2DCE /* ShowDetailView.swift */; };
+		08742C5A25481CC8006E2DCE /* ShowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08742C5825481CC8006E2DCE /* ShowDetailView.swift */; };
+		08742C5B25481CC8006E2DCE /* ShowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08742C5825481CC8006E2DCE /* ShowDetailView.swift */; };
+		08742C5C25481CC8006E2DCE /* ShowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08742C5825481CC8006E2DCE /* ShowDetailView.swift */; };
+		08742C5D25481CC8006E2DCE /* ShowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08742C5825481CC8006E2DCE /* ShowDetailView.swift */; };
 		08754F40201BAFD700458F3A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08754F3D201BAFCC00458F3A /* InfoPlist.strings */; };
 		08754F44201BAFF500458F3A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08754F41201BAFF100458F3A /* InfoPlist.strings */; };
 		08754F48201BB00400458F3A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08754F45201BB00000458F3A /* InfoPlist.strings */; };
@@ -483,6 +488,11 @@
 		6F0CFB6020C94E8E006B2CE4 /* Play RSI notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB5820C94E8E006B2CE4 /* Play RSI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6F0CFB7320C94EC8006B2CE4 /* Play RTR notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB6B20C94EC8006B2CE4 /* Play RTR notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB7E20C94EE5006B2CE4 /* Play SWI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0E39CD25558A0F004C3A12 /* ShowDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E39CC25558A0F004C3A12 /* ShowDetailModel.swift */; };
+		6F0E39CE25558A0F004C3A12 /* ShowDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E39CC25558A0F004C3A12 /* ShowDetailModel.swift */; };
+		6F0E39CF25558A0F004C3A12 /* ShowDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E39CC25558A0F004C3A12 /* ShowDetailModel.swift */; };
+		6F0E39D025558A0F004C3A12 /* ShowDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E39CC25558A0F004C3A12 /* ShowDetailModel.swift */; };
+		6F0E39D125558A0F004C3A12 /* ShowDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E39CC25558A0F004C3A12 /* ShowDetailModel.swift */; };
 		6F0E8D981F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */; };
 		6F0E8D991F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */; };
 		6F0E8D9A1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */; };
@@ -598,6 +608,11 @@
 		6F2961FE2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list-180.pdf */; };
 		6F2961FF2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list-180.pdf */; };
 		6F2962002006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list-180.pdf */; };
+		6F298860255ADDCD007A8E2B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F29885F255ADDCD007A8E2B /* Errors.swift */; };
+		6F298861255ADDCD007A8E2B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F29885F255ADDCD007A8E2B /* Errors.swift */; };
+		6F298862255ADDCD007A8E2B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F29885F255ADDCD007A8E2B /* Errors.swift */; };
+		6F298863255ADDCD007A8E2B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F29885F255ADDCD007A8E2B /* Errors.swift */; };
+		6F298864255ADDCD007A8E2B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F29885F255ADDCD007A8E2B /* Errors.swift */; };
 		6F2AB1B42487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
@@ -1449,11 +1464,11 @@
 		6FFCC5EB24EFC1F700805B0F /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F1938311EFBFE9E0017B1D1 /* ApplicationConfiguration.json */; };
 		6FFCC5EC24EFC1FA00805B0F /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F1938351EFBFEBC0017B1D1 /* ApplicationConfiguration.json */; };
 		6FFCC5ED24EFC1FD00805B0F /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F1938371EFBFEC80017B1D1 /* ApplicationConfiguration.json */; };
-		6FFF1632250A20EF0053CDA6 /* FocusDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusDetector.swift */; };
-		6FFF1633250A20EF0053CDA6 /* FocusDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusDetector.swift */; };
-		6FFF1634250A20EF0053CDA6 /* FocusDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusDetector.swift */; };
-		6FFF1635250A20EF0053CDA6 /* FocusDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusDetector.swift */; };
-		6FFF1636250A20EF0053CDA6 /* FocusDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusDetector.swift */; };
+		6FFF1632250A20EF0053CDA6 /* FocusTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */; };
+		6FFF1633250A20EF0053CDA6 /* FocusTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */; };
+		6FFF1634250A20EF0053CDA6 /* FocusTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */; };
+		6FFF1635250A20EF0053CDA6 /* FocusTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */; };
+		6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */; };
 		6FFFB99D252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFB99C252C9EAC004E40AE /* UIKit+Extensions.swift */; };
 		6FFFB99E252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFB99C252C9EAC004E40AE /* UIKit+Extensions.swift */; };
 		6FFFB99F252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFB99C252C9EAC004E40AE /* UIKit+Extensions.swift */; };
@@ -1763,6 +1778,7 @@
 		086F8D5122984B29001BE2F4 /* Favorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorites.h; sourceTree = "<group>"; };
 		086F8D5322984B29001BE2F4 /* FavoriteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewCell.m; sourceTree = "<group>"; };
 		086F8D5422984B29001BE2F4 /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
+		08742C5825481CC8006E2DCE /* ShowDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailView.swift; sourceTree = "<group>"; };
 		08754F3E201BAFCC00458F3A /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		08754F42201BAFF100458F3A /* rm */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = rm; path = rm.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		08754F46201BB00000458F3A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1815,7 +1831,6 @@
 		08B77AEE240A86FC00A3BC3B /* AccessibilityIdentifierConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessibilityIdentifierConstants.h; sourceTree = "<group>"; };
 		08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessibilityIdentifierConstants.m; sourceTree = "<group>"; };
 		08B77AFB240A8D0A00A3BC3B /* Screenshots-ObjectiveC-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Screenshots-ObjectiveC-Bridge.h"; sourceTree = "<group>"; };
-		08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Screenshots.xcconfig; sourceTree = "<group>"; };
 		08BAABD71E7613F0007644D7 /* HomeMediasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediasViewController.h; sourceTree = "<group>"; };
 		08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediasViewController.m; sourceTree = "<group>"; };
 		08BDB5B1228D520000335898 /* PushService+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushService+Private.h"; sourceTree = "<group>"; };
@@ -1859,6 +1874,23 @@
 		08DD9D561FFE6EDA00115906 /* ModuleHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleHeaderView.h; sourceTree = "<group>"; };
 		08DD9D581FFE6EDA00115906 /* ModuleHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleHeaderView.m; sourceTree = "<group>"; };
 		08DD9D591FFE6EDA00115906 /* ModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleViewController.m; sourceTree = "<group>"; };
+		08E7881C255B4D5B00E17515 /* Play RTR.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.xcconfig"; sourceTree = "<group>"; };
+		08E7881E255B4D5C00E17515 /* Play SWI.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.xcconfig"; sourceTree = "<group>"; };
+		08E78820255B4D5D00E17515 /* Play SRF.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.xcconfig"; sourceTree = "<group>"; };
+		08E78822255B4D5D00E17515 /* Play RSI.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.xcconfig"; sourceTree = "<group>"; };
+		08E78823255B4D5E00E17515 /* Play RTS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.xcconfig"; sourceTree = "<group>"; };
+		08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08E7890A255B59D800E17515 /* Play iOS Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08E7899D255B605E00E17515 /* Play iOS Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
 		096E5AC5C979FBF1F072A888 /* Pods-Play SRG-iOS-Play RSI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; sourceTree = "<group>"; };
 		0A4B38B692D4F377D70590D1 /* Pods-Play SRG-iOS-Play SWI.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; sourceTree = "<group>"; };
@@ -1897,6 +1929,7 @@
 		6F0CFB5820C94E8E006B2CE4 /* Play RSI notification service extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play RSI notification service extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0CFB6B20C94EC8006B2CE4 /* Play RTR notification service extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play RTR notification service extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0CFB7E20C94EE5006B2CE4 /* Play SWI notification service extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play SWI notification service extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F0E39CC25558A0F004C3A12 /* ShowDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailModel.swift; sourceTree = "<group>"; };
 		6F0E8D961F14F62F002014C3 /* SRGChannel+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGChannel+PlaySRG.h"; sourceTree = "<group>"; };
 		6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGChannel+PlaySRG.m"; sourceTree = "<group>"; };
 		6F0ED543252B00B000ECE97B /* LabeledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledButton.swift; sourceTree = "<group>"; };
@@ -1948,6 +1981,7 @@
 		6F1F929C22A539D40026BFAC /* SearchShowListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchShowListCollectionViewCell.h; sourceTree = "<group>"; };
 		6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchShowListCollectionViewCell.m; sourceTree = "<group>"; };
 		6F2961FB2006186000CAB0E4 /* placeholder_media_list-180.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "placeholder_media_list-180.pdf"; sourceTree = "<group>"; };
+		6F29885F255ADDCD007A8E2B /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaPlayerViewController+SongPanel.swift"; sourceTree = "<group>"; };
 		6F331CE424D06B8200C096AB /* Play SRF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play SRF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F331CE624D06B8200C096AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -2252,7 +2286,7 @@
 		6FFCB62224504C6C00D16466 /* SwimlaneCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwimlaneCollectionViewLayout.h; sourceTree = "<group>"; };
 		6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwimlaneCollectionViewLayout.m; sourceTree = "<group>"; };
 		6FFCC5E324EFBF2100805B0F /* RadioChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannel.swift; sourceTree = "<group>"; };
-		6FFF1631250A20EF0053CDA6 /* FocusDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusDetector.swift; sourceTree = "<group>"; };
+		6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTracker.swift; sourceTree = "<group>"; };
 		6FFFB99C252C9EAC004E40AE /* UIKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Extensions.swift"; sourceTree = "<group>"; };
 		6FFFB9B6252CA310004E40AE /* MediaDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailModel.swift; sourceTree = "<group>"; };
 		7D4D90DEC67A54E9E386CAD4 /* Pods-Play SRG-iOS-Play RSI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3149,7 +3183,11 @@
 			isa = PBXGroup;
 			children = (
 				08B77A402409BDF200A3BC3B /* Play iOS Application.xcconfig */,
+				08E7890A255B59D800E17515 /* Play iOS Notification Service Extension.xcconfig */,
+				08E7899D255B605E00E17515 /* Play iOS Screenshots.xcconfig */,
 				0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */,
+				08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */,
+				08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */,
 				6F88408024EBF92A007463ED /* Play RSI TV.appstore.xcconfig */,
 				6F88409124EBF930007463ED /* Play RSI TV.beta.xcconfig */,
 				6F88408924EBF92D007463ED /* Play RSI TV.debug.xcconfig */,
@@ -3158,6 +3196,9 @@
 				6F1EBE13222EBB7C003E0722 /* Play RSI.beta.xcconfig */,
 				6F1EBE0F222EBB7C003E0722 /* Play RSI.debug.xcconfig */,
 				6F1EBE10222EBB7C003E0722 /* Play RSI.nightly.xcconfig */,
+				08E78822255B4D5D00E17515 /* Play RSI.xcconfig */,
+				08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */,
+				08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */,
 				6F88408824EBF92C007463ED /* Play RTR TV.appstore.xcconfig */,
 				6F88409024EBF930007463ED /* Play RTR TV.beta.xcconfig */,
 				6F88408B24EBF92D007463ED /* Play RTR TV.debug.xcconfig */,
@@ -3166,6 +3207,9 @@
 				6F1EBE15222EBB7D003E0722 /* Play RTR.beta.xcconfig */,
 				6F1EBE0E222EBB7C003E0722 /* Play RTR.debug.xcconfig */,
 				6F1EBE1D222EBB7E003E0722 /* Play RTR.nightly.xcconfig */,
+				08E7881C255B4D5B00E17515 /* Play RTR.xcconfig */,
+				08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */,
+				08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */,
 				6F88408124EBF92A007463ED /* Play RTS TV.appstore.xcconfig */,
 				6F88408C24EBF92E007463ED /* Play RTS TV.beta.xcconfig */,
 				6F88408424EBF92B007463ED /* Play RTS TV.debug.xcconfig */,
@@ -3174,6 +3218,9 @@
 				6F1EBE0D222EBB7C003E0722 /* Play RTS.beta.xcconfig */,
 				6F1EBE0B222EBB7B003E0722 /* Play RTS.debug.xcconfig */,
 				6F1EBE11222EBB7C003E0722 /* Play RTS.nightly.xcconfig */,
+				08E78823255B4D5E00E17515 /* Play RTS.xcconfig */,
+				08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */,
+				08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */,
 				6F88408A24EBF92D007463ED /* Play SRF TV.appstore.xcconfig */,
 				6F88408724EBF92C007463ED /* Play SRF TV.beta.xcconfig */,
 				6F88409324EBF931007463ED /* Play SRF TV.debug.xcconfig */,
@@ -3182,6 +3229,9 @@
 				6F1EBE1B222EBB7D003E0722 /* Play SRF.beta.xcconfig */,
 				6F1EBE1C222EBB7E003E0722 /* Play SRF.debug.xcconfig */,
 				6F1EBE18222EBB7D003E0722 /* Play SRF.nightly.xcconfig */,
+				08E78820255B4D5D00E17515 /* Play SRF.xcconfig */,
+				08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */,
+				08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */,
 				6F88408D24EBF92E007463ED /* Play SWI TV.appstore.xcconfig */,
 				6F88408E24EBF92F007463ED /* Play SWI TV.beta.xcconfig */,
 				6F88408224EBF92A007463ED /* Play SWI TV.debug.xcconfig */,
@@ -3190,9 +3240,9 @@
 				6F1EBE12222EBB7C003E0722 /* Play SWI.beta.xcconfig */,
 				6F1EBE14222EBB7D003E0722 /* Play SWI.debug.xcconfig */,
 				6F1EBE16222EBB7D003E0722 /* Play SWI.nightly.xcconfig */,
+				08E7881E255B4D5C00E17515 /* Play SWI.xcconfig */,
 				6F88409424EC05E4007463ED /* Play tvOS Application.xcconfig */,
 				0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */,
-				08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */,
 			);
 			path = Xcode;
 			sourceTree = "<group>";
@@ -3374,8 +3424,9 @@
 				6FF60CC824F2FA8D006013C2 /* CollectionView.swift */,
 				6F79E0A92541647400A28E79 /* Colors.swift */,
 				6F4F78AE252AF7670011DBCA /* DurationLabel.swift */,
-				6FFF1631250A20EF0053CDA6 /* FocusDetector.swift */,
+				6F29885F255ADDCD007A8E2B /* Errors.swift */,
 				6FA14534254729DA006E8D3B /* FocusableRegion.swift */,
+				6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */,
 				6F82430B250637BE00E931A0 /* Fonts.swift */,
 				6F4BCBE024EFF7C3001ABA17 /* Formatters.swift */,
 				08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */,
@@ -3398,6 +3449,8 @@
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
 				6F331D6524D076C800C096AB /* SearchView.swift */,
 				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
+				6F0E39CC25558A0F004C3A12 /* ShowDetailModel.swift */,
+				08742C5825481CC8006E2DCE /* ShowDetailView.swift */,
 				6F1F80652508ECA800FD8FE7 /* ShowsView.swift */,
 				6FDFD88B24E6BC9200F20382 /* TopicCell.swift */,
 				6FFFB99C252C9EAC004E40AE /* UIKit+Extensions.swift */,
@@ -7219,6 +7272,7 @@
 				6FC413D524EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */,
 				081456312547740600BB7CA6 /* Badge.swift in Sources */,
 				6F026EED250134FD00BAE8D1 /* UIView+PlaySRG.m in Sources */,
+				6F0E39CD25558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
 				0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED544252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6FDB2ABA24E5916F00FF286E /* ImageView.swift in Sources */,
@@ -7240,7 +7294,7 @@
 				6F5AA59725024C4800718420 /* UIImage+PlaySRG.m in Sources */,
 				6FC413D424EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3224E452F800B1A56E /* HomeModel.swift in Sources */,
-				6FFF1632250A20EF0053CDA6 /* FocusDetector.swift in Sources */,
+				6FFF1632250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6FA14535254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				6FC413D324EEEDC900FDF806 /* TopicSection.m in Sources */,
 				6FC413F724EF0DEA00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
@@ -7249,6 +7303,7 @@
 				6F3F1AB3250286DA000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2ABF24E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9B7252CA310004E40AE /* MediaDetailModel.swift in Sources */,
+				08742C5925481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F331D6C24D076D500C096AB /* ProfileView.swift in Sources */,
 				6FDB2AC524E5923600FF286E /* MediaCell.swift in Sources */,
 				6FDFD88C24E6BC9200F20382 /* TopicCell.swift in Sources */,
@@ -7260,6 +7315,7 @@
 				6FC413CF24EEEDC900FDF806 /* TVChannel.m in Sources */,
 				6F3F1ABA25060496000FF4DD /* MediaVisual.swift in Sources */,
 				6F4F78AF252AF7670011DBCA /* DurationLabel.swift in Sources */,
+				6F298860255ADDCD007A8E2B /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7272,6 +7328,7 @@
 				6FC413DD24EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */,
 				081456322547740600BB7CA6 /* Badge.swift in Sources */,
 				6F026EEE250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
+				6F0E39CE25558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
 				0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED545252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6FDB2ABB24E5916F00FF286E /* ImageView.swift in Sources */,
@@ -7293,7 +7350,7 @@
 				6F5AA59825024C4900718420 /* UIImage+PlaySRG.m in Sources */,
 				6FC413DC24EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3324E452F800B1A56E /* HomeModel.swift in Sources */,
-				6FFF1633250A20EF0053CDA6 /* FocusDetector.swift in Sources */,
+				6FFF1633250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6FA14536254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				6FC413DB24EEEDC900FDF806 /* TopicSection.m in Sources */,
 				6FC413F824EF0DEB00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
@@ -7302,6 +7359,7 @@
 				6F3F1AB6250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC024E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9B8252CA310004E40AE /* MediaDetailModel.swift in Sources */,
+				08742C5A25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F331D6D24D076D500C096AB /* ProfileView.swift in Sources */,
 				6FDB2AC624E5923600FF286E /* MediaCell.swift in Sources */,
 				6FDFD88D24E6BC9200F20382 /* TopicCell.swift in Sources */,
@@ -7313,6 +7371,7 @@
 				6FC413D724EEEDC900FDF806 /* TVChannel.m in Sources */,
 				6F3F1ABB25060496000FF4DD /* MediaVisual.swift in Sources */,
 				6F4F78B0252AF7670011DBCA /* DurationLabel.swift in Sources */,
+				6F298861255ADDCD007A8E2B /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7325,6 +7384,7 @@
 				6FC413E524EEEDCA00FDF806 /* ApplicationConfiguration.m in Sources */,
 				081456332547740600BB7CA6 /* Badge.swift in Sources */,
 				6F026EEF250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
+				6F0E39CF25558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
 				080570402540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED546252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6FDB2ABC24E5916F00FF286E /* ImageView.swift in Sources */,
@@ -7346,7 +7406,7 @@
 				6F5AA59925024C4900718420 /* UIImage+PlaySRG.m in Sources */,
 				6FC413E424EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3424E452F800B1A56E /* HomeModel.swift in Sources */,
-				6FFF1634250A20EF0053CDA6 /* FocusDetector.swift in Sources */,
+				6FFF1634250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6FA14537254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				6FC413E324EEEDCA00FDF806 /* TopicSection.m in Sources */,
 				6FC413F924EF0DEC00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
@@ -7355,6 +7415,7 @@
 				6F3F1AB5250286DB000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC124E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9B9252CA310004E40AE /* MediaDetailModel.swift in Sources */,
+				08742C5B25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F331D6E24D076D500C096AB /* ProfileView.swift in Sources */,
 				6FDB2AC724E5923600FF286E /* MediaCell.swift in Sources */,
 				6FDFD88E24E6BC9200F20382 /* TopicCell.swift in Sources */,
@@ -7366,6 +7427,7 @@
 				6FC413DF24EEEDCA00FDF806 /* TVChannel.m in Sources */,
 				6F3F1ABC25060496000FF4DD /* MediaVisual.swift in Sources */,
 				6F4F78B1252AF7670011DBCA /* DurationLabel.swift in Sources */,
+				6F298862255ADDCD007A8E2B /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7378,6 +7440,7 @@
 				6FC413ED24EEEDCA00FDF806 /* ApplicationConfiguration.m in Sources */,
 				081456342547740600BB7CA6 /* Badge.swift in Sources */,
 				6F026EF0250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
+				6F0E39D025558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
 				080570412540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED547252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6FDB2ABD24E5916F00FF286E /* ImageView.swift in Sources */,
@@ -7399,7 +7462,7 @@
 				6F5AA59A25024C4A00718420 /* UIImage+PlaySRG.m in Sources */,
 				6FC413EC24EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3524E452F800B1A56E /* HomeModel.swift in Sources */,
-				6FFF1635250A20EF0053CDA6 /* FocusDetector.swift in Sources */,
+				6FFF1635250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6FA14538254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				6FC413EB24EEEDCA00FDF806 /* TopicSection.m in Sources */,
 				6FC413FA24EF0DED00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
@@ -7408,6 +7471,7 @@
 				6F3F1AB7250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC224E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9BA252CA310004E40AE /* MediaDetailModel.swift in Sources */,
+				08742C5C25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F331D6F24D076D500C096AB /* ProfileView.swift in Sources */,
 				6FDB2AC824E5923600FF286E /* MediaCell.swift in Sources */,
 				6FDFD88F24E6BC9200F20382 /* TopicCell.swift in Sources */,
@@ -7419,6 +7483,7 @@
 				6FC413E724EEEDCA00FDF806 /* TVChannel.m in Sources */,
 				6F3F1ABD25060496000FF4DD /* MediaVisual.swift in Sources */,
 				6F4F78B2252AF7670011DBCA /* DurationLabel.swift in Sources */,
+				6F298863255ADDCD007A8E2B /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7431,6 +7496,7 @@
 				6FC413F524EEEDCB00FDF806 /* ApplicationConfiguration.m in Sources */,
 				081456352547740600BB7CA6 /* Badge.swift in Sources */,
 				6F026EF1250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
+				6F0E39D125558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
 				080570422540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED548252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6FDB2ABE24E5916F00FF286E /* ImageView.swift in Sources */,
@@ -7452,7 +7518,7 @@
 				6F5AA59B25024C4B00718420 /* UIImage+PlaySRG.m in Sources */,
 				6FC413F424EEEDCB00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3624E452F800B1A56E /* HomeModel.swift in Sources */,
-				6FFF1636250A20EF0053CDA6 /* FocusDetector.swift in Sources */,
+				6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6FA14539254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				6FC413F324EEEDCB00FDF806 /* TopicSection.m in Sources */,
 				6FC413FB24EF0DEE00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
@@ -7461,6 +7527,7 @@
 				6F3F1AB8250286DD000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC324E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9BB252CA310004E40AE /* MediaDetailModel.swift in Sources */,
+				08742C5D25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F331D7024D076D500C096AB /* ProfileView.swift in Sources */,
 				6FDB2AC924E5923600FF286E /* MediaCell.swift in Sources */,
 				6FDFD89024E6BC9200F20382 /* TopicCell.swift in Sources */,
@@ -7472,6 +7539,7 @@
 				6FC413EF24EEEDCB00FDF806 /* TVChannel.m in Sources */,
 				6F3F1ABE25060496000FF4DD /* MediaVisual.swift in Sources */,
 				6F4F78B3252AF7670011DBCA /* DurationLabel.swift in Sources */,
+				6F298864255ADDCD007A8E2B /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7696,7 +7764,7 @@
 /* Begin XCBuildConfiguration section */
 		08B77A4D2409C06000A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -7717,8 +7785,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -7728,7 +7794,7 @@
 		};
 		08B77A4E2409C06000A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -7752,8 +7818,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -7763,7 +7827,7 @@
 		};
 		08B77A4F2409C06000A3BC3B /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -7787,8 +7851,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -7798,7 +7860,7 @@
 		};
 		08B77A502409C06000A3BC3B /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -7822,8 +7884,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -7833,7 +7893,7 @@
 		};
 		08B77AAD2409E0A300A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -7854,8 +7914,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -7865,7 +7923,7 @@
 		};
 		08B77AAE2409E0A300A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -7889,8 +7947,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -7900,7 +7956,7 @@
 		};
 		08B77AAF2409E0A300A3BC3B /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -7924,8 +7980,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -7935,7 +7989,7 @@
 		};
 		08B77AB02409E0A300A3BC3B /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -7959,8 +8013,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -7970,7 +8022,7 @@
 		};
 		08B77ABF240A78F200A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -7991,8 +8043,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -8002,7 +8052,7 @@
 		};
 		08B77AC0240A78F200A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -8026,8 +8076,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -8037,7 +8085,7 @@
 		};
 		08B77AC1240A78F200A3BC3B /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -8061,8 +8109,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -8072,7 +8118,7 @@
 		};
 		08B77AC2240A78F200A3BC3B /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -8096,8 +8142,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -8107,7 +8151,7 @@
 		};
 		08B77AD0240A7E3200A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -8128,8 +8172,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -8139,7 +8181,7 @@
 		};
 		08B77AD1240A7E3200A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -8163,8 +8205,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -8174,7 +8214,7 @@
 		};
 		08B77AD2240A7E3200A3BC3B /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -8198,8 +8238,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -8209,7 +8247,7 @@
 		};
 		08B77AD3240A7E3200A3BC3B /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -8233,8 +8271,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -8244,7 +8280,7 @@
 		};
 		08B77ADF240A7E5000A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -8265,8 +8301,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -8276,7 +8310,7 @@
 		};
 		08B77AE0240A7E5000A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -8300,8 +8334,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -8311,7 +8343,7 @@
 		};
 		08B77AE1240A7E5000A3BC3B /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -8335,8 +8367,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -8346,7 +8376,7 @@
 		};
 		08B77AE2240A7E5000A3BC3B /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B77AFC240A8DF100A3BC3B /* Screenshots.xcconfig */;
+			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
 				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -8370,8 +8400,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).screenshots-uitest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -8518,7 +8546,6 @@
 			baseConfigurationReference = 6F1EBE1C222EBB7E003E0722 /* Play SRF.debug.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8536,11 +8563,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playsrf;
 			};
 			name = Debug;
 		};
@@ -8549,7 +8573,6 @@
 			baseConfigurationReference = 6F1EBE1A222EBB7D003E0722 /* Play SRF.appstore.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8567,10 +8590,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playsrf;
 			};
 			name = AppStore;
 		};
@@ -8579,7 +8599,6 @@
 			baseConfigurationReference = 6F1EBE0B222EBB7B003E0722 /* Play RTS.debug.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8597,11 +8616,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrts;
 			};
 			name = Debug;
 		};
@@ -8610,7 +8626,6 @@
 			baseConfigurationReference = 6F1EBE0C222EBB7C003E0722 /* Play RTS.appstore.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8628,10 +8643,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrts;
 			};
 			name = AppStore;
 		};
@@ -8640,7 +8652,6 @@
 			baseConfigurationReference = 6F1EBE0F222EBB7C003E0722 /* Play RSI.debug.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8658,11 +8669,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrsi;
 			};
 			name = Debug;
 		};
@@ -8671,7 +8679,6 @@
 			baseConfigurationReference = 6F1EBE19222EBB7D003E0722 /* Play RSI.appstore.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8689,10 +8696,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrsi;
 			};
 			name = AppStore;
 		};
@@ -8701,7 +8705,6 @@
 			baseConfigurationReference = 6F1EBE0E222EBB7C003E0722 /* Play RTR.debug.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8719,11 +8722,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrtr;
 			};
 			name = Debug;
 		};
@@ -8732,7 +8732,6 @@
 			baseConfigurationReference = 6F1EBE17222EBB7D003E0722 /* Play RTR.appstore.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8750,10 +8749,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrtr;
 			};
 			name = AppStore;
 		};
@@ -8762,7 +8758,6 @@
 			baseConfigurationReference = 6F1EBE14222EBB7D003E0722 /* Play SWI.debug.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8779,11 +8774,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playswi;
 			};
 			name = Debug;
 		};
@@ -8792,7 +8784,6 @@
 			baseConfigurationReference = 6F1EBE1E222EBB7E003E0722 /* Play SWI.appstore.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8809,10 +8800,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playswi;
 			};
 			name = AppStore;
 		};
@@ -8887,7 +8875,6 @@
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8905,10 +8892,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playsrf;
 			};
 			name = Beta;
 		};
@@ -8918,7 +8902,6 @@
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8936,10 +8919,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrts;
 			};
 			name = Beta;
 		};
@@ -8949,7 +8929,6 @@
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8967,10 +8946,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrsi;
 			};
 			name = Beta;
 		};
@@ -8980,7 +8956,6 @@
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -8998,10 +8973,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrtr;
 			};
 			name = Beta;
 		};
@@ -9011,7 +8983,6 @@
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -9028,10 +8999,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playswi;
 			};
 			name = Beta;
 		};
@@ -9106,7 +9074,6 @@
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -9124,12 +9091,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playsrf;
 			};
 			name = Nightly;
 		};
@@ -9139,7 +9103,6 @@
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -9157,12 +9120,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrts;
 			};
 			name = Nightly;
 		};
@@ -9172,7 +9132,6 @@
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -9190,12 +9149,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrsi;
 			};
 			name = Nightly;
 		};
@@ -9205,7 +9161,6 @@
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -9223,12 +9178,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playrtr;
 			};
 			name = Nightly;
 		};
@@ -9238,7 +9190,6 @@
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -9255,19 +9206,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
-				URL_BASE_SCHEME = playswi;
 			};
 			name = Nightly;
 		};
 		6F0CFB3B20C94DF6006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -9284,8 +9231,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -9293,10 +9238,9 @@
 		};
 		6F0CFB3C20C94DF6006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -9347,9 +9291,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -9358,10 +9299,9 @@
 		};
 		6F0CFB3D20C94DF6006B2CE4 /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -9412,9 +9352,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -9423,10 +9360,9 @@
 		};
 		6F0CFB3E20C94DF6006B2CE4 /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -9477,9 +9413,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -9488,9 +9421,8 @@
 		};
 		6F0CFB4F20C94E77006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -9507,8 +9439,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -9516,10 +9446,9 @@
 		};
 		6F0CFB5020C94E77006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -9570,9 +9499,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -9581,10 +9507,9 @@
 		};
 		6F0CFB5120C94E77006B2CE4 /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -9635,9 +9560,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -9646,10 +9568,9 @@
 		};
 		6F0CFB5220C94E77006B2CE4 /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -9700,9 +9621,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -9711,9 +9629,8 @@
 		};
 		6F0CFB6220C94E8E006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -9730,8 +9647,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -9739,10 +9654,9 @@
 		};
 		6F0CFB6320C94E8E006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -9793,9 +9707,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -9804,10 +9715,9 @@
 		};
 		6F0CFB6420C94E8E006B2CE4 /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -9858,9 +9768,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -9869,10 +9776,9 @@
 		};
 		6F0CFB6520C94E8E006B2CE4 /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -9923,9 +9829,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -9934,9 +9837,8 @@
 		};
 		6F0CFB7520C94EC8006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -9953,8 +9855,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -9962,10 +9862,9 @@
 		};
 		6F0CFB7620C94EC8006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10016,9 +9915,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -10027,10 +9923,9 @@
 		};
 		6F0CFB7720C94EC8006B2CE4 /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10081,9 +9976,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -10092,10 +9984,9 @@
 		};
 		6F0CFB7820C94EC8006B2CE4 /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10146,9 +10037,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -10157,9 +10045,8 @@
 		};
 		6F0CFB8820C94EE5006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -10175,8 +10062,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -10184,10 +10069,9 @@
 		};
 		6F0CFB8920C94EE5006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10237,9 +10121,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -10248,10 +10129,9 @@
 		};
 		6F0CFB8A20C94EE5006B2CE4 /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10301,9 +10181,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -10312,10 +10189,9 @@
 		};
 		6F0CFB8B20C94EE5006B2CE4 /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */;
+			baseConfigurationReference = 08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10365,9 +10241,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER).notification-service-extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -10378,7 +10251,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F88409324EBF931007463ED /* Play SRF TV.debug.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Debug$(BUILD_NAME_SUFFIX)";
@@ -10400,9 +10272,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play SRF";
-				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -10415,7 +10284,6 @@
 			baseConfigurationReference = 6F88408A24EBF92D007463ED /* Play SRF TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "";
@@ -10471,9 +10339,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play SRF";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -10487,7 +10352,6 @@
 			baseConfigurationReference = 6F88408724EBF92C007463ED /* Play SRF TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Beta$(BUILD_NAME_SUFFIX)";
@@ -10543,9 +10407,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play SRF";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -10559,7 +10420,6 @@
 			baseConfigurationReference = 6F88409224EBF930007463ED /* Play SRF TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Nightly$(BUILD_NAME_SUFFIX)";
@@ -10615,9 +10475,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play SRF";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -10630,7 +10487,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F88408424EBF92B007463ED /* Play RTS TV.debug.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Debug$(BUILD_NAME_SUFFIX)";
@@ -10652,9 +10508,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RTS";
-				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -10667,7 +10520,6 @@
 			baseConfigurationReference = 6F88408124EBF92A007463ED /* Play RTS TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "";
@@ -10723,9 +10575,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RTS";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -10739,7 +10588,6 @@
 			baseConfigurationReference = 6F88408C24EBF92E007463ED /* Play RTS TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Beta$(BUILD_NAME_SUFFIX)";
@@ -10795,9 +10643,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RTS";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -10811,7 +10656,6 @@
 			baseConfigurationReference = 6F88408624EBF92C007463ED /* Play RTS TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Nightly$(BUILD_NAME_SUFFIX)";
@@ -10867,9 +10711,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RTS";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -10882,7 +10723,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F88408924EBF92D007463ED /* Play RSI TV.debug.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Debug$(BUILD_NAME_SUFFIX)";
@@ -10904,9 +10744,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RSI";
-				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -10919,7 +10756,6 @@
 			baseConfigurationReference = 6F88408024EBF92A007463ED /* Play RSI TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "";
@@ -10975,9 +10811,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RSI";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -10991,7 +10824,6 @@
 			baseConfigurationReference = 6F88409124EBF930007463ED /* Play RSI TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Beta$(BUILD_NAME_SUFFIX)";
@@ -11047,9 +10879,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RSI";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -11063,7 +10892,6 @@
 			baseConfigurationReference = 6F88408F24EBF92F007463ED /* Play RSI TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Nighty$(BUILD_NAME_SUFFIX)";
@@ -11119,9 +10947,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RSI";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -11134,7 +10959,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F88408B24EBF92D007463ED /* Play RTR TV.debug.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Debug$(BUILD_NAME_SUFFIX)";
@@ -11156,9 +10980,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RTR";
-				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -11171,7 +10992,6 @@
 			baseConfigurationReference = 6F88408824EBF92C007463ED /* Play RTR TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "";
@@ -11227,9 +11047,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RTR";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -11243,7 +11060,6 @@
 			baseConfigurationReference = 6F88409024EBF930007463ED /* Play RTR TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Beta$(BUILD_NAME_SUFFIX)";
@@ -11299,9 +11115,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RTR";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -11315,7 +11128,6 @@
 			baseConfigurationReference = 6F88408324EBF92B007463ED /* Play RTR TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Nightly$(BUILD_NAME_SUFFIX)";
@@ -11371,9 +11183,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play RTR";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -11386,7 +11195,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F88408224EBF92A007463ED /* Play SWI TV.debug.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Debug$(BUILD_NAME_SUFFIX)";
@@ -11408,9 +11216,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play SWI";
-				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -11423,7 +11228,6 @@
 			baseConfigurationReference = 6F88408D24EBF92E007463ED /* Play SWI TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "";
@@ -11479,9 +11283,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play SWI";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -11495,7 +11296,6 @@
 			baseConfigurationReference = 6F88408E24EBF92F007463ED /* Play SWI TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Beta$(BUILD_NAME_SUFFIX)";
@@ -11551,9 +11351,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play SWI";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -11567,7 +11364,6 @@
 			baseConfigurationReference = 6F88408524EBF92C007463ED /* Play SWI TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUILD_NAME = "Nighty$(BUILD_NAME_SUFFIX)";
@@ -11623,9 +11419,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
-				PRODUCT_NAME = "Play SWI";
-				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
