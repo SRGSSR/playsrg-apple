@@ -5,6 +5,7 @@
 //
 
 import Firebase
+import SRGAnalytics
 import SRGAppearance
 import SRGDataProviderCombine
 import SwiftUI
@@ -43,13 +44,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         
+        let configuration = ApplicationConfiguration.shared
+        
+        let analyticsConfiguration = SRGAnalyticsConfiguration.init(
+            businessUnitIdentifier:configuration.analyticsBusinessUnitIdentifier,
+            container:configuration.analyticsContainer,
+            comScoreVirtualSite:configuration.comScoreVirtualSite,
+            netMetrixIdentifier:configuration.netMetrixIdentifier
+            )
+        SRGAnalyticsTracker.shared.start(with: analyticsConfiguration)
+        
         SRGDataProvider.current = SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
         self.window = window
         
-        let configuration = ApplicationConfiguration.shared
         var viewControllers = [UIViewController]()
         
         let videosViewController = UIHostingController(rootView: VideosView())
