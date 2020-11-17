@@ -8,6 +8,16 @@ import SwiftUI
 
 struct ShowCell: View {
     let show: SRGShow?
+    let action: (() -> Void)?
+    
+    fileprivate var onFocusAction: ((Bool) -> Void)? = nil
+    
+    @State private var isFocused: Bool = false
+    
+    init(show: SRGShow?, action: (() -> Void)? = nil) {
+        self.show = show
+        self.action = action
+    }
     
     private var title: String {
         guard let show = show else { return String(repeating: " ", count: .random(in: 10..<20)) }
@@ -21,15 +31,30 @@ struct ShowCell: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Button(action: {}) {
+                Button(action: action ?? {
+                    if let show = show {
+                        navigateToShow(show)
+                    }
+                }) {
                     VisualView(show: show)
                         .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
+                        .onFocusChange { focused in
+                            isFocused = focused
+                            
+                            if let onFocusAction = self.onFocusAction {
+                                onFocusAction(focused)
+                            }
+                        }
                 }
                 .buttonStyle(CardButtonStyle())
                 
                 Text(title)
                     .srgFont(.medium, size: .subtitle)
                     .frame(width: geometry.size.width, alignment: .leading)
+                    .opacity(isFocused ? 1 : 0.5)
+                    .offset(x: 0, y: isFocused ? 10 : 0)
+                    .scaleEffect(isFocused ? 1.1 : 1, anchor: .top)
+                    .animation(.easeInOut(duration: 0.2))
             }
             .redacted(reason: redactionReason)
         }
@@ -46,6 +71,14 @@ struct ShowCell: View {
             ImageView(url: imageUrl)
                 .whenRedacted { $0.hidden() }
         }
+    }
+}
+
+extension ShowCell {
+    func onFocus(perform action: @escaping (Bool) -> Void) -> ShowCell {
+        var showCell = self
+        showCell.onFocusAction = action
+        return showCell
     }
 }
 
