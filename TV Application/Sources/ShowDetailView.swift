@@ -146,7 +146,7 @@ struct ShowDetailView: View {
                     Spacer()
                 }
                 Spacer()
-                #if NIGHTY
+                #if DEBUG
                 LabeledButton(icon: "favorite-22", label: NSLocalizedString("Favorite", comment:"Show favorite button label")) {
                     /* Toggle Favorite state */
                 }

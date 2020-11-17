@@ -35,10 +35,9 @@ struct HomeView: View {
             #if DEBUG
             case .tvTopicsAccess:
                 return NSDirectionalEdgeInsets(top: 80, leading: 0, bottom: 80, trailing: 0)
-            #else
+            #endif
             case .tvTrending(appearance: _):
                 return NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0)
-            #endif
             default:
                 return NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
             }
