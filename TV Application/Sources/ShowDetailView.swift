@@ -97,7 +97,7 @@ struct ShowDetailView: View {
                         model.loadNextPage(from: media)
                     }
             }
-        } supplementaryView: { kind, indexPath in
+        } supplementaryView: { _, _ in
             HeaderView(show: model.show)
                 .padding([.leading, .trailing], 20)
         }
