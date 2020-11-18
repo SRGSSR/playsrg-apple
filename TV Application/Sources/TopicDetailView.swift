@@ -45,6 +45,15 @@ struct TopicDetailView: View {
         }
     }
     
+    private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60)),
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .topLeading
+        )
+        return [header]
+    }
+    
     private static func layoutGroup(for section: Section) -> NSCollectionLayoutGroup {
         switch section {
         case .medias:
@@ -64,7 +73,9 @@ struct TopicDetailView: View {
     }
     
     private static func layoutSection(for section: Section) -> NSCollectionLayoutSection {
-        return NSCollectionLayoutSection(group: layoutGroup(for: section))
+        let section = NSCollectionLayoutSection(group: layoutGroup(for: section))
+        section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
+        return section
     }
     
     var body: some View {
@@ -81,14 +92,14 @@ struct TopicDetailView: View {
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             case let .media(media):
-                MediaCell(media: media)
+                MediaCell(media: media, style: .show)
                     .onAppear {
                         model.loadNextPage(from: media)
                     }
             }
         } supplementaryView: { _, _ in
-            Rectangle()
-                .fill(Color.clear)
+            HeaderView(topic: model.topic)
+                .padding([.leading, .trailing], 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.play_black))
@@ -101,6 +112,17 @@ struct TopicDetailView: View {
         }
         .onResume {
             model.refresh()
+        }
+    }
+    
+    private struct HeaderView: View {
+        let topic: SRGTopic
+        
+        var body: some View {
+            Text(topic.title)
+                .srgFont(.medium, size: .title)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
