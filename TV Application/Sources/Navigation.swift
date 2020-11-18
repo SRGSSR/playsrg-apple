@@ -33,6 +33,13 @@ func navigateToShow(_ show: SRGShow, animated: Bool = true) {
     topViewController.present(hostController, animated: animated, completion: nil)
 }
 
+func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {
+    guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
+    
+    let hostController = UIHostingController(rootView: TopicDetailView(topic: topic))
+    topViewController.present(hostController, animated: animated, completion: nil)
+}
+
 func showText(_ text: String, animated: Bool = true) {
     guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
     

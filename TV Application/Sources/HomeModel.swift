@@ -64,10 +64,8 @@ class HomeModel: Identifiable, ObservableObject {
         else {
             func items(for id: RowId) -> [RowItem] {
                 switch id {
-                #if DEBUG
                 case .tvTopicsAccess:
                     return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .topicPlaceholder(index: $0)) }
-                #endif
                 case .radioAllShows:
                     return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
                 default:
@@ -167,9 +165,7 @@ extension HomeModel {
         case tvSoonExpiring
         case tvLatestForModule(_ module: SRGModule?, type: SRGModuleType)
         case tvLatestForTopic(_ topic: SRGTopic?)
-        #if DEBUG
         case tvTopicsAccess
-        #endif
         
         case radioLatestEpisodes(channelUid: String)
         case radioMostPopular(channelUid: String)
@@ -214,12 +210,10 @@ extension HomeModel {
                 return dataProvider.latestMediasForModule(withUrn: urn, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
-            #if DEBUG
             case .tvTopicsAccess:
                 return SRGDataProvider.current!.tvTopics(for: vendor)
                     .map { $0.topics.map { RowItem(rowId: self, content: .topic($0)) } }
                     .eraseToAnyPublisher()
-            #endif
             case let .tvLatestForTopic(topic):
                 guard let urn = topic?.urn else { return nil }
                 return dataProvider.latestMediasForTopic(withUrn: urn, pageSize: pageSize)

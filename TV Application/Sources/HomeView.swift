@@ -19,10 +19,8 @@ struct HomeView: View {
                 else {
                     return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
                 }
-            #if DEBUG
             case .tvTopicsAccess:
                 return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
-            #endif
             case .radioAllShows:
                 return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
             default:
@@ -32,10 +30,8 @@ struct HomeView: View {
         
         func contentInsets(for rowId: HomeModel.RowId) -> NSDirectionalEdgeInsets {
             switch rowId {
-            #if DEBUG
             case .tvTopicsAccess:
                 return NSDirectionalEdgeInsets(top: 80, leading: 0, bottom: 80, trailing: 0)
-            #endif
             case .tvTrending(appearance: _):
                 return NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0)
             default:
