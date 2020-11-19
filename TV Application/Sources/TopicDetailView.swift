@@ -6,7 +6,6 @@
 
 import SwiftUI
 
-// TODO: We can probably create a common abstraction for media lists, see ShowDetailView. The code is nearly identical
 struct TopicDetailView: View {
     @ObservedObject var model: TopicDetailModel
     

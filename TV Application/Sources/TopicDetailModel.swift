@@ -6,7 +6,6 @@
 
 import SRGDataProviderCombine
 
-// TODO: We can probably create a common abstraction for media lists, see ShowDetailModel. The code is nearly identical
 class TopicDetailModel: ObservableObject {
     let topic: SRGTopic
     
