@@ -113,6 +113,9 @@ struct HomeView: View {
                 if Self.isHeroAppearance(for: item) {
                     HeroMediaCell(media: media)
                 }
+                else if media.contentType == .livestream {
+                    LiveMediaCell(media: media)
+                }
                 else {
                     MediaCell(media: media, style: .show)
                 }
