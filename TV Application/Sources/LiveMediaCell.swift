@@ -39,6 +39,18 @@ struct LiveMediaCell: View, LiveMediaData {
         }
     }
     
+    private var logoImage: UIImage? {
+        if let channel = channel {
+            return channel.play_logo32Image
+        }
+        else if let media = media {
+            return media.mediaType == .audio ? RadioChannelLogo32Image(nil) : TVChannelLogo32Image(nil)
+        }
+        else {
+            return nil
+        }
+    }
+    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -65,14 +77,20 @@ struct LiveMediaCell: View, LiveMediaData {
                         navigateToMedia(media)
                     }
                 }) {
-                    ZStack {
+                    ZStack(alignment: .topLeading) {
                         ImageView(url: imageUrl)
-                            .onFocusChange { isFocused = $0 }
                             .whenRedacted { $0.hidden() }
                         Rectangle()
                             .fill(Color(white: 0, opacity: 0.6))
+                        if let logoImage = logoImage {
+                            Image(uiImage: logoImage)
+                                .whenRedacted { $0.hidden() }
+                                .padding()
+                        }
                         BlockingOverlay(media: media)
+                            .whenRedacted { $0.hidden() }
                     }
+                    .onFocusChange { isFocused = $0 }
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                 }
                 .buttonStyle(CardButtonStyle())

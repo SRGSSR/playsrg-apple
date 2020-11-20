@@ -672,6 +672,11 @@
 		6F3B0229245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */; };
 		6F3B022A245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */; };
 		6F3B022B245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B0226245AAF6B00C5A8D7 /* ProgramTableViewCell.xib */; };
+		6F3D67E1256827DD0030922B /* SRGChannel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */; };
+		6F3D67F6256827DE0030922B /* SRGChannel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */; };
+		6F3D67F7256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */; };
+		6F3D680C256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */; };
+		6F3D680D256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */; };
 		6F3E0A0123D055DD009B00C1 /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */; };
 		6F3E0A0223D055DD009B00C1 /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */; };
 		6F3E0A0323D055DD009B00C1 /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */; };
@@ -7651,6 +7656,7 @@
 				6FC413D424EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3224E452F800B1A56E /* HomeModel.swift in Sources */,
 				6F85F7502567ED0D00AC8286 /* ChannelService.m in Sources */,
+				6F3D67E1256827DD0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FFF1632250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B142567FC6F00DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6FA14535254729DA006E8D3B /* FocusableRegion.swift in Sources */,
@@ -7718,6 +7724,7 @@
 				6FC413DC24EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3324E452F800B1A56E /* HomeModel.swift in Sources */,
 				6F85F7652567ED0E00AC8286 /* ChannelService.m in Sources */,
+				6F3D67F6256827DE0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FFF1633250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B292567FC7000DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6FA14536254729DA006E8D3B /* FocusableRegion.swift in Sources */,
@@ -7785,6 +7792,7 @@
 				6FC413E424EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3424E452F800B1A56E /* HomeModel.swift in Sources */,
 				6F85F7662567ED0F00AC8286 /* ChannelService.m in Sources */,
+				6F3D67F7256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FFF1634250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B2A2567FC7100DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6FA14537254729DA006E8D3B /* FocusableRegion.swift in Sources */,
@@ -7852,6 +7860,7 @@
 				6FC413EC24EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3524E452F800B1A56E /* HomeModel.swift in Sources */,
 				6F85F7672567ED0F00AC8286 /* ChannelService.m in Sources */,
+				6F3D680C256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FFF1635250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B2B2567FC7100DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6FA14538254729DA006E8D3B /* FocusableRegion.swift in Sources */,
@@ -7919,6 +7928,7 @@
 				6FC413F424EEEDCB00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3624E452F800B1A56E /* HomeModel.swift in Sources */,
 				6F85F7682567ED0F00AC8286 /* ChannelService.m in Sources */,
+				6F3D680D256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B2C2567FC7200DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6FA14539254729DA006E8D3B /* FocusableRegion.swift in Sources */,
