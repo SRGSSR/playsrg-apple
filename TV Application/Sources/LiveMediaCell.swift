@@ -108,6 +108,7 @@ struct LiveMediaCell: View, LiveMediaData {
                 
                 DescriptionView(media: media, programComposition: programComposition, date: date)
                     .frame(width: geometry.size.width, alignment: .leading)
+                    .animation(nil)
                     .opacity(isFocused ? 1 : 0.5)
                     .offset(x: 0, y: isFocused ? 10 : 0)
                     .scaleEffect(isFocused ? 1.1 : 1, anchor: .top)
