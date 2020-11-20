@@ -10,6 +10,7 @@
 #import "ApplicationConfiguration.h"
 #import "ChannelService.h"
 #import "SRGMedia+PlaySRG.h"
+#import "SRGProgramComposition+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIView+PlaySRG.h"
