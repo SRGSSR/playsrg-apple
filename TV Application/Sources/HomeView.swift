@@ -32,8 +32,6 @@ struct HomeView: View {
             switch rowId {
             case .tvTopicsAccess:
                 return NSDirectionalEdgeInsets(top: 80, leading: 0, bottom: 80, trailing: 0)
-            case .tvTrending(appearance: _):
-                return NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0)
             default:
                 return NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
             }
