@@ -113,7 +113,7 @@ struct HomeView: View {
                 if Self.isHeroAppearance(for: item) {
                     HeroMediaCell(media: media)
                 }
-                else if media.contentType == .livestream || media.contentType == .scheduledLivestream {
+                else if HomeModel.RowId.liveIds.contains(item.rowId) {
                     LiveMediaCell(media: media)
                 }
                 else {
