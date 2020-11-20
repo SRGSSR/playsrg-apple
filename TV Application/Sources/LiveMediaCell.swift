@@ -51,6 +51,12 @@ struct LiveMediaCell: View, LiveMediaData {
         }
     }
     
+    private var progress: Double? {
+        guard channel != nil else { return nil }
+        guard let currentProgram = program(at: date) else { return 1 }
+        return date.timeIntervalSince(currentProgram.startDate) / currentProgram.endDate.timeIntervalSince(currentProgram.startDate)
+    }
+    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -77,14 +83,21 @@ struct LiveMediaCell: View, LiveMediaData {
                         navigateToMedia(media)
                     }
                 }) {
-                    ZStack(alignment: .topLeading) {
+                    ZStack {
                         ImageView(url: imageUrl)
                             .whenRedacted { $0.hidden() }
                         Rectangle()
                             .fill(Color(white: 0, opacity: 0.6))
                         if let logoImage = logoImage {
                             Image(uiImage: logoImage)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                                 .whenRedacted { $0.hidden() }
+                                .padding()
+                        }
+                        if let progress = progress {
+                            ProgressView(value: progress)
+                                .accentColor(Color(UIColor.play_progressRed))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                                 .padding()
                         }
                         BlockingOverlay(media: media)
