@@ -24,8 +24,7 @@ class ShowsModel: ObservableObject {
     }
     
     func loadPage() {
-        guard let publisher = publisher() else { return }
-        publisher
+        SRGDataProvider.current!.tvShows(for: ApplicationConfiguration.shared.vendor, pageSize: SRGDataProviderUnlimitedPageSize)
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveRequest:  { _ in
                 if self.alphabeticalShows.isEmpty {
@@ -59,9 +58,5 @@ class ShowsModel: ObservableObject {
     
     func cancelRefresh() {
         cancellables = []
-    }
-    
-    private func publisher() -> AnyPublisher<SRGDataProvider.TVShows.Output, Error>? {
-        return SRGDataProvider.current!.tvShows(for: ApplicationConfiguration.shared.vendor, pageSize: SRGDataProviderUnlimitedPageSize)
     }
 }
