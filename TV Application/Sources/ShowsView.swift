@@ -36,8 +36,8 @@ struct ShowsView: View {
             return [Row(section: .information, items: [item])]
         case let .loaded(alphabeticalShows: alphabeticalShows):
             if !alphabeticalShows.isEmpty {
-                return alphabeticalShows.map { (character: Character, shows: [SRGShow]) -> Row in
-                    Row(section: .shows(character: character), items: shows.map { .show($0) })
+                return alphabeticalShows.map { entry in
+                    Row(section: .shows(character: entry.character), items: entry.shows.map { .show($0) })
                 }
             }
             else {
