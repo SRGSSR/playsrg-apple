@@ -38,14 +38,20 @@ class ShowsModel: ObservableObject {
                 }
             }, receiveValue: { result in
                 self.alphabeticalShows = Dictionary(grouping: result.shows) { (show) -> Character in
-                    return show.title.uppercased().first! // TODO: group #, use upper case, remove accents / diacritics
+                    // Remove accents / diacritics and extract the first character (for wide chars / emoji support)
+                    guard let letter = show.title.folding(options: .diacriticInsensitive, locale: .current).uppercased().first else { return "#" }
+                    
+                    if !letter.isLetter {
+                        return "#"
                     }
-                    .map { (key: Character, value: [SRGShow]) -> (letter: Character, shows: [SRGShow]) in
-                        (letter: key, shows: value)
-                    }
-                    .sorted { (left, right) -> Bool in
-                        left.letter < right.letter
-                    }
+                    return letter
+                }
+                .map { (key: Character, value: [SRGShow]) -> (letter: Character, shows: [SRGShow]) in
+                    (letter: key, shows: value)
+                }
+                .sorted { (left, right) -> Bool in
+                    left.letter < right.letter
+                }
                 self.state = .loaded(alphabeticalShows: self.alphabeticalShows)
             })
             .store(in: &cancellables)
