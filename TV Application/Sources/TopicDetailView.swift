@@ -4,11 +4,10 @@
 //  License information is available from the LICENSE file.
 //
 
-import SRGAppearance
 import SwiftUI
 
-struct ShowDetailView: View {
-    @ObservedObject var model: ShowDetailModel
+struct TopicDetailView: View {
+    @ObservedObject var model: TopicDetailModel
     
     enum Section: Hashable {
         case medias
@@ -23,8 +22,8 @@ struct ShowDetailView: View {
     
     typealias Row = CollectionRow<Section, Content>
     
-    init(show: SRGShow) {
-        model = ShowDetailModel(show: show)
+    init(topic: SRGTopic) {
+        model = TopicDetailModel(topic: topic)
     }
     
     private var rows: [Row] {
@@ -47,7 +46,7 @@ struct ShowDetailView: View {
     
     private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(500)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60)),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .topLeading
         )
@@ -92,13 +91,13 @@ struct ShowDetailView: View {
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             case let .media(media):
-                MediaCell(media: media)
+                MediaCell(media: media, style: .show)
                     .onAppear {
                         model.loadNextPage(from: media)
                     }
             }
         } supplementaryView: { _, _ in
-            HeaderView(show: model.show)
+            HeaderView(topic: model.topic)
                 .padding([.leading, .trailing], 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -115,82 +114,14 @@ struct ShowDetailView: View {
         }
     }
     
-    private struct VisualView: View {
-        let show: SRGShow
-        
-        private static let height: CGFloat = 300
-        
-        private var imageUrl: URL? {
-            return show.imageURL(for: .width, withValue: SizeForImageScale(.medium).width, type: .default)
-        }
-        
-        var body: some View {
-            HStack(alignment: .top) {
-                ImageView(url: imageUrl)
-                    .frame(width: Self.height * 16 / 9, height: Self.height)
-                    .cornerRadius(10)
-                
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(show.title)
-                        .srgFont(.bold, size: .title)
-                        .lineLimit(3)
-                        .foregroundColor(.white)
-                    if let broadcastInformationMessage = show.broadcastInformation?.message {
-                        Badge(text: broadcastInformationMessage, color: Color(.play_gray))
-                    }
-                    if let lead = show.lead {
-                        Text(lead)
-                            .srgFont(.regular, size: .headline)
-                            .foregroundColor(.white)
-                    }
-                    Spacer()
-                }
-                Spacer()
-                #if DEBUG
-                LabeledButton(icon: "favorite-22", label: NSLocalizedString("Favorite", comment:"Show favorite button label")) {
-                    /* Toggle Favorite state */
-                }
-                .padding(.leading, 100)
-                #else
-                Spacer()
-                    .frame(width: 120)
-                    .padding(.leading, 100)
-                #endif
-            }
-        }
-    }
-    
     private struct HeaderView: View {
-        let show: SRGShow
+        let topic: SRGTopic
         
         var body: some View {
-            GeometryReader { geometry in
-                FocusableRegion {
-                    VStack {
-                        VisualView(show: show)
-                        Spacer()
-                        Text(NSLocalizedString("Available episodes", comment: "Title of the show episode list header"))
-                            .srgFont(.medium, size: .title)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                }
-            }
+            Text(topic.title)
+                .srgFont(.medium, size: .title)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
-    }
-}
-
-struct ShowDetailView_Previews: PreviewProvider {
-    
-    static var showPreview: SRGShow {
-        let asset = NSDataAsset(name: "show-srf-tv")!
-        let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
-        
-        return try! MTLJSONAdapter(modelClass: SRGShow.self)?.model(fromJSONDictionary: jsonData) as! SRGShow
-    }
-    
-    static var previews: some View {
-        ShowDetailView(show: showPreview)
-            .previewDisplayName("SRF show")
     }
 }

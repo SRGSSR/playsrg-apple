@@ -23,7 +23,11 @@ struct TopicCell: View {
     
     var body: some View {
         GeometryReader { geometry in
-            Button(action: {}) {
+            Button(action: {
+                if let topic = topic {
+                    navigateToTopic(topic)
+                }
+            }) {
                 ZStack {
                     ImageView(url: imageUrl)
                         .whenRedacted { $0.hidden() }
