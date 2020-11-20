@@ -10,13 +10,13 @@ class ShowsModel: ObservableObject {
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(alphabeticalShows: [(letter: Character, shows: [SRGShow])])
+        case loaded(alphabeticalShows: [(character: Character, shows: [SRGShow])])
     }
     
     @Published private(set) var state = State.loaded(alphabeticalShows: [])
     
     private var cancellables = Set<AnyCancellable>()
-    private var alphabeticalShows: [(letter: Character, shows: [SRGShow])] = []
+    private var alphabeticalShows: [(character: Character, shows: [SRGShow])] = []
     
     func refresh() {
         guard alphabeticalShows.isEmpty else { return }
@@ -39,18 +39,18 @@ class ShowsModel: ObservableObject {
             }, receiveValue: { result in
                 self.alphabeticalShows = Dictionary(grouping: result.shows) { (show) -> Character in
                     // Remove accents / diacritics and extract the first character (for wide chars / emoji support)
-                    guard let letter = show.title.folding(options: .diacriticInsensitive, locale: .current).uppercased().first else { return "#" }
+                    guard let character = show.title.folding(options: .diacriticInsensitive, locale: .current).uppercased().first else { return "#" }
                     
-                    if !letter.isLetter {
+                    if !character.isLetter {
                         return "#"
                     }
-                    return letter
+                    return character
                 }
-                .map { (key: Character, value: [SRGShow]) -> (letter: Character, shows: [SRGShow]) in
-                    (letter: key, shows: value)
+                .map { (key: Character, value: [SRGShow]) -> (character: Character, shows: [SRGShow]) in
+                    (character: key, shows: value)
                 }
                 .sorted { (left, right) -> Bool in
-                    left.letter < right.letter
+                    left.character < right.character
                 }
                 self.state = .loaded(alphabeticalShows: self.alphabeticalShows)
             })

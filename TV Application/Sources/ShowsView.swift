@@ -11,7 +11,7 @@ struct ShowsView: View {
     @ObservedObject var model: ShowsModel
     
     enum Section: Hashable {
-        case shows(letter: Character)
+        case shows(character: Character)
         case information
     }
     
@@ -36,8 +36,8 @@ struct ShowsView: View {
             return [Row(section: .information, items: [item])]
         case let .loaded(alphabeticalShows: alphabeticalShows):
             if !alphabeticalShows.isEmpty {
-                return alphabeticalShows.map { (letter: Character, shows: [SRGShow]) -> Row in
-                    Row(section: .shows(letter: letter), items: shows.map { .show($0) })
+                return alphabeticalShows.map { (character: Character, shows: [SRGShow]) -> Row in
+                    Row(section: .shows(character: character), items: shows.map { .show($0) })
                 }
             }
             else {
@@ -105,7 +105,7 @@ struct ShowsView: View {
                 Rectangle()
                     .fill(Color.clear)
             case let .loaded(alphabeticalShows: alphabeticalShows):
-                HeaderView(letter: alphabeticalShows[indexPath.section].letter)
+                HeaderView(character: alphabeticalShows[indexPath.section].character)
                     .padding([.leading, .trailing], 20)
             }
         }
@@ -124,11 +124,11 @@ struct ShowsView: View {
     }
     
     private struct HeaderView: View {
-        let letter: Character
+        let character: Character
         
         var body: some View {
             GeometryReader { geometry in
-                Text(String(letter))
+                Text(String(character))
                     .srgFont(.medium, size: .title)
                     .lineLimit(1)
             }
