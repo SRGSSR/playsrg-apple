@@ -10,16 +10,16 @@ class ShowsModel: ObservableObject {
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(shows: [SRGShow])
+        case loaded(alphabeticalShows: [(letter: Character, shows: [SRGShow])])
     }
     
-    @Published private(set) var state = State.loaded(shows: [])
+    @Published private(set) var state = State.loaded(alphabeticalShows: [])
     
     private var cancellables = Set<AnyCancellable>()
-    private var shows: [SRGShow] = []
+    private var alphabeticalShows: [(letter: Character, shows: [SRGShow])] = []
     
     func refresh() {
-        guard shows.isEmpty else { return }
+        guard alphabeticalShows.isEmpty else { return }
         loadPage()
     }
     
@@ -28,7 +28,7 @@ class ShowsModel: ObservableObject {
         publisher
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveRequest:  { _ in
-                if self.shows.isEmpty {
+                if self.alphabeticalShows.isEmpty {
                     self.state = .loading
                 }
             })
@@ -37,8 +37,16 @@ class ShowsModel: ObservableObject {
                     self.state = .failed(error: error)
                 }
             }, receiveValue: { result in
-                self.shows.append(contentsOf: result.shows)
-                self.state = .loaded(shows: self.shows)
+                self.alphabeticalShows = Dictionary(grouping: result.shows) { (show) -> Character in
+                    return show.title.uppercased().first! // TODO: group #, use upper case, remove accents / diacritics
+                    }
+                    .map { (key: Character, value: [SRGShow]) -> (letter: Character, shows: [SRGShow]) in
+                        (letter: key, shows: value)
+                    }
+                    .sorted { (left, right) -> Bool in
+                        left.letter < right.letter
+                    }
+                self.state = .loaded(alphabeticalShows: self.alphabeticalShows)
             })
             .store(in: &cancellables)
     }

@@ -11,7 +11,7 @@ struct ShowsView: View {
     @ObservedObject var model: ShowsModel
     
     enum Section: Hashable {
-        case shows
+        case shows(letter: Character)
         case information
     }
     
@@ -34,9 +34,11 @@ struct ShowsView: View {
         case let .failed(error: error):
             let item = Content.message(friendlyMessage(for: error))
             return [Row(section: .information, items: [item])]
-        case let .loaded(shows: shows):
-            if !shows.isEmpty {
-                return [Row(section: .shows, items: shows.map { .show($0) })]
+        case let .loaded(alphabeticalShows: alphabeticalShows):
+            if !alphabeticalShows.isEmpty {
+                return alphabeticalShows.map { (letter: Character, shows: [SRGShow]) -> Row in
+                    Row(section: .shows(letter: letter), items: shows.map { .show($0) })
+                }
             }
             else {
                 let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"))
@@ -95,8 +97,17 @@ struct ShowsView: View {
                 ShowCell(show: show)
             }
         } supplementaryView: { kind, indexPath in
-            HeaderView()
-                .padding([.leading, .trailing], 20)
+            switch model.state {
+            case .loading:
+                Rectangle()
+                    .fill(Color.clear)
+            case .failed(error: _):
+                Rectangle()
+                    .fill(Color.clear)
+            case let .loaded(alphabeticalShows: alphabeticalShows):
+                HeaderView(letter: alphabeticalShows[indexPath.section].letter)
+                    .padding([.leading, .trailing], 20)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.play_black))
@@ -113,9 +124,11 @@ struct ShowsView: View {
     }
     
     private struct HeaderView: View {
+        let letter: Character
+        
         var body: some View {
             GeometryReader { geometry in
-                Text("A to Z")
+                Text(String(letter))
                     .srgFont(.medium, size: .title)
                     .lineLimit(1)
             }
