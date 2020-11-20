@@ -85,13 +85,12 @@ struct LiveMediaCell: View, LiveMediaData {
                 }) {
                     ZStack {
                         ImageView(url: imageUrl)
-                            .whenRedacted { $0.hidden() }
                         Rectangle()
                             .fill(Color(white: 0, opacity: 0.6))
+                            .whenRedacted { $0.hidden() }
                         if let logoImage = logoImage {
                             Image(uiImage: logoImage)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                                .whenRedacted { $0.hidden() }
                                 .padding()
                         }
                         if let progress = progress {
@@ -101,7 +100,6 @@ struct LiveMediaCell: View, LiveMediaData {
                                 .padding()
                         }
                         BlockingOverlay(media: media)
-                            .whenRedacted { $0.hidden() }
                     }
                     .onFocusChange { isFocused = $0 }
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)

@@ -69,7 +69,6 @@ struct ShowCell: View {
         
         var body: some View {
             ImageView(url: imageUrl)
-                .whenRedacted { $0.hidden() }
         }
     }
 }

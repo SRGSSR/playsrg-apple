@@ -30,7 +30,6 @@ struct TopicCell: View {
             }) {
                 ZStack {
                     ImageView(url: imageUrl)
-                        .whenRedacted { $0.hidden() }
                     Rectangle()
                         .fill(Color(white: 0, opacity: 0.4))
                     Text(title)

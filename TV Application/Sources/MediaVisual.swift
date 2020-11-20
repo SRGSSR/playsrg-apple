@@ -64,8 +64,6 @@ struct MediaVisual: View {
     var body: some View {
         ZStack {
             ImageView(url: imageUrl, contentMode: contentMode)
-                .whenRedacted { $0.hidden() }
-            
             BlockingOverlay(media: media)
             
             HStack(spacing: 4) {
