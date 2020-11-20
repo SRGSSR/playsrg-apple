@@ -17,9 +17,7 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
     else {
         let letterboxViewController = SRGLetterboxViewController()
         
-        // TODO: Don't do it for AppStore build
-        letterboxViewController.controller.serviceURL = SRGDataProvider.current?.serviceURL
-        letterboxViewController.controller.globalParameters = SRGDataProvider.current?.globalParameters
+        applyLetterboxControllerSettings(to: letterboxViewController.controller)
         
         letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
         topViewController.present(letterboxViewController, animated: animated, completion: nil)
@@ -50,4 +48,13 @@ func showText(_ text: String, animated: Bool = true) {
     textViewController.textEdgeInsets = UIEdgeInsets(top: 100, left: 250, bottom: 100, right: 250)
     textViewController.modalPresentationStyle = .overFullScreen
     topViewController.present(textViewController, animated: animated)
+}
+
+fileprivate func applyLetterboxControllerSettings(to controller: SRGLetterboxController) {
+    controller.serviceURL = SRGDataProvider.current?.serviceURL
+    controller.globalParameters = SRGDataProvider.current?.globalParameters
+    
+    let applicationConfiguration = ApplicationConfiguration.shared
+    controller.endTolerance = applicationConfiguration.endTolerance;
+    controller.endToleranceRatio = applicationConfiguration.endToleranceRatio;
 }
