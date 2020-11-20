@@ -17,7 +17,7 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
     else {
         let letterboxViewController = SRGLetterboxViewController()
         
-        applyLetterboxControllerSettings(controller: letterboxViewController.controller)
+        applyLetterboxControllerSettings(to: letterboxViewController.controller)
         
         letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
         topViewController.present(letterboxViewController, animated: animated, completion: nil)
@@ -50,7 +50,7 @@ func showText(_ text: String, animated: Bool = true) {
     topViewController.present(textViewController, animated: animated)
 }
 
-func applyLetterboxControllerSettings(controller: SRGLetterboxController) {
+fileprivate func applyLetterboxControllerSettings(to controller: SRGLetterboxController) {
     controller.serviceURL = SRGDataProvider.current?.serviceURL
     controller.globalParameters = SRGDataProvider.current?.globalParameters
     
