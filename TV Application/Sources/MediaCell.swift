@@ -62,12 +62,14 @@ struct MediaCell: View {
         let style: MediaDescription.Style
         
         var body: some View {
-            Text(MediaDescription.title(for: media, style: style))
-                .srgFont(.medium, size: .subtitle)
-                .lineLimit(2)
-            Text(MediaDescription.subtitle(for: media, style: style))
-                .srgFont(.light, size: .subtitle)
-                .lineLimit(2)
+            VStack(alignment: .leading) {
+                Text(MediaDescription.title(for: media, style: style))
+                    .srgFont(.medium, size: .subtitle)
+                    .lineLimit(2)
+                Text(MediaDescription.subtitle(for: media, style: style))
+                    .srgFont(.light, size: .subtitle)
+                    .lineLimit(2)
+            }
         }
     }
 }

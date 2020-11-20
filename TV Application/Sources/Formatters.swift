@@ -6,6 +6,8 @@
 
 import Foundation
 
+// TODO: Maybe this code could be shared with iOS formatters
+
 struct DateFormatters {
     private static let relativeDateAndTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -35,7 +37,7 @@ struct DateFormatters {
 struct DurationFormatters {
     private static let shortMinuteFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.minute]
+        formatter.allowedUnits = .minute
         formatter.unitsStyle = .short
         formatter.zeroFormattingBehavior = .pad
         return formatter
@@ -47,7 +49,7 @@ struct DurationFormatters {
     
     private static let shortHourFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour]
+        formatter.allowedUnits = .hour
         formatter.unitsStyle = .short
         formatter.zeroFormattingBehavior = .pad
         return formatter
@@ -59,7 +61,7 @@ struct DurationFormatters {
     
     private static let shortDayFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.day]
+        formatter.allowedUnits = .day
         formatter.unitsStyle = .short
         formatter.zeroFormattingBehavior = .pad
         return formatter
@@ -71,7 +73,7 @@ struct DurationFormatters {
     
     private static let hourFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour]
+        formatter.allowedUnits = .hour
         formatter.unitsStyle = .full
         formatter.zeroFormattingBehavior = .pad
         return formatter
@@ -83,7 +85,7 @@ struct DurationFormatters {
     
     private static let dayFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.day]
+        formatter.allowedUnits = .day
         formatter.unitsStyle = .full
         formatter.zeroFormattingBehavior = .pad
         return formatter
@@ -91,5 +93,28 @@ struct DurationFormatters {
     
     static func days(for duration: TimeInterval) -> String {
         return Self.dayFormatter.string(from: max(duration, 60 * 60 * 24))!
+    }
+    
+    private static let remainingHoursFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = .hour
+        formatter.unitsStyle = .full
+        return formatter
+    }()
+    
+    private static let remainingMinutesFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = .minute
+        formatter.unitsStyle = .full
+        return formatter
+    }()
+    
+    static func remainingTime(for duration: TimeInterval) -> String {
+        if duration >= 60 * 60 {
+            return Self.remainingHoursFormatter.string(from: duration)!
+        }
+        else {
+            return Self.remainingMinutesFormatter.string(from: max(60, duration))!
+        }
     }
 }
