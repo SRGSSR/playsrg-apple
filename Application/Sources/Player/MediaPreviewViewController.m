@@ -58,7 +58,7 @@
 @property (nonatomic) BOOL shouldRestoreServicePlayback;
 @property (nonatomic, copy) NSString *previousAudioSessionCategory;
 
-@property (nonatomic, weak) id channelRegistration;
+@property (nonatomic, weak) id channelObserver;
 
 @end
 
@@ -136,7 +136,7 @@
             self.preferredContentSize = CGSizeMake(width, factor * 9.f / 16.f * width);
             
             if (self.media.contentType == SRGContentTypeLivestream && self.media.channel) {
-                self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:self.media.channel livestreamUid:self.media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
+                self.channelObserver = [ChannelService.sharedService addObserverForUpdatesWithChannel:self.media.channel livestreamUid:self.media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
                     self.programComposition = programComposition;
                     [self reloadData];
                 }];
@@ -158,7 +158,7 @@
     [super viewDidDisappear:animated];
     
     if ([self play_isMovingFromParentViewController]) {
-        [ChannelService.sharedService removeObserver:self.channelRegistration];
+        [ChannelService.sharedService removeObserver:self.channelObserver];
         
         // Restore playback on exit. Works well with cancelled peek, as well as with pop, without additional checks. Wait
         // a little bit since peek view dismissal occurs just before an action item has been selected. Moreover, having

@@ -200,7 +200,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 @property (nonatomic) BOOL shouldDisplayBackgroundVideoPlaybackPrompt;
 @property (nonatomic) BOOL displayBackgroundVideoPlaybackPrompt;
 
-@property (nonatomic, weak) id channelRegistration;
+@property (nonatomic, weak) id channelObserver;
 
 @end
 
@@ -1041,8 +1041,8 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         return;
     }
     
-    [ChannelService.sharedService removeObserver:self.channelRegistration];
-    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:mainMedia.channel livestreamUid:mainMedia.uid block:^(SRGProgramComposition * _Nullable programComposition) {
+    [ChannelService.sharedService removeObserver:self.channelObserver];
+    self.channelObserver = [ChannelService.sharedService addObserverForUpdatesWithChannel:mainMedia.channel livestreamUid:mainMedia.uid block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
         [self reloadProgramInformationAnimated:YES];
     }];
@@ -1051,7 +1051,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
 - (void)unregisterChannelUpdates
 {
-    [ChannelService.sharedService removeObserver:self.channelRegistration];
+    [ChannelService.sharedService removeObserver:self.channelObserver];
 }
 
 #pragma mark UI

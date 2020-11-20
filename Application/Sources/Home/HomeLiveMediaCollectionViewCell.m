@@ -73,7 +73,7 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topSpaceConstraint;
 @property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *horizontalSpaceConstraints;
 
-@property (nonatomic, weak) id channelRegistration;
+@property (nonatomic, weak) id channelObserver;
 
 @end
 
@@ -220,8 +220,8 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
         return;
     }
     
-    [ChannelService.sharedService removeObserver:self.channelRegistration];
-    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:media.channel livestreamUid:media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
+    [ChannelService.sharedService removeObserver:self.channelObserver];
+    self.channelObserver = [ChannelService.sharedService addObserverForUpdatesWithChannel:media.channel livestreamUid:media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
         [self reloadData];
     }];
@@ -229,7 +229,7 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 
 - (void)unregisterChannelUpdates
 {
-    [ChannelService.sharedService removeObserver:self.channelRegistration];
+    [ChannelService.sharedService removeObserver:self.channelObserver];
 }
 
 #pragma mark UI

@@ -41,7 +41,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *closeButton;
 
 @property (nonatomic, weak) id periodicTimeObserver;
-@property (nonatomic, weak) id channelRegistration;
+@property (nonatomic, weak) id channelObserver;
 
 @end
 
@@ -312,8 +312,8 @@
         return;
     }
     
-    [ChannelService.sharedService removeObserver:self.channelRegistration];
-    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:mainMedia.channel livestreamUid:mainMedia.uid block:^(SRGProgramComposition * _Nullable programComposition) {
+    [ChannelService.sharedService removeObserver:self.channelObserver];
+    self.channelObserver = [ChannelService.sharedService addObserverForUpdatesWithChannel:mainMedia.channel livestreamUid:mainMedia.uid block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
         [self reloadData];
     }];
@@ -321,7 +321,7 @@
 
 - (void)unregisterChannelUpdates
 {
-    [ChannelService.sharedService removeObserver:self.channelRegistration];
+    [ChannelService.sharedService removeObserver:self.channelObserver];
 }
 
 #pragma mark AccessibilityViewDelegate protocol
