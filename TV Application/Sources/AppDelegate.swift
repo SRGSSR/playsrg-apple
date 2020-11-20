@@ -78,11 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewControllers.append(liveViewController)
         }
         
-        #if DEBUG
         let showsViewController = UIHostingController(rootView: ShowsView())
         showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
         viewControllers.append(showsViewController)
         
+        #if DEBUG
         let searchViewController = UIHostingController(rootView: SearchView())
         searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 3)
         viewControllers.append(searchViewController)
