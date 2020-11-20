@@ -96,7 +96,7 @@ struct ShowsView: View {
             case let .show(show):
                 ShowCell(show: show)
             }
-        } supplementaryView: { kind, indexPath in
+        } supplementaryView: { _, indexPath in
             switch model.state {
             case .loading:
                 Rectangle()
@@ -109,6 +109,7 @@ struct ShowsView: View {
                     .padding([.leading, .trailing], 20)
             }
         }
+        .synchronizeParentTabScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.play_black))
         .edgesIgnoringSafeArea(.all)
