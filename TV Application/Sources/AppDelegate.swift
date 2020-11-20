@@ -64,11 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         videosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Videos", comment: "Videos tab title"), image: nil, tag: 0)
         viewControllers.append(videosViewController)
         
+        #if DEBUG
         if !configuration.radioChannels.isEmpty {
             let audiosViewController = UIHostingController(rootView: AudiosView())
             audiosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
             viewControllers.append(audiosViewController)
         }
+        #endif
         
         if !configuration.liveHomeSections.isEmpty {
             let liveViewController = UIHostingController(rootView: LiveView())
