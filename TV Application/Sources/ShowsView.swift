@@ -98,10 +98,7 @@ struct ShowsView: View {
             }
         } supplementaryView: { _, indexPath in
             switch model.state {
-            case .loading:
-                Rectangle()
-                    .fill(Color.clear)
-            case .failed(error: _):
+            case .loading, .failed:
                 Rectangle()
                     .fill(Color.clear)
             case let .loaded(alphabeticalShows: alphabeticalShows):
