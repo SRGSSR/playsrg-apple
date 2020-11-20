@@ -15,8 +15,8 @@ extension LiveMediaData {
         return programComposition?.channel ?? media?.channel
     }
     
-    var currentProgram: SRGProgram? {
-        return programComposition?.play_program(at: Date())
+    func program(at date: Date) -> SRGProgram? {
+        return programComposition?.play_program(at: date)
     }
 }
 
@@ -25,13 +25,14 @@ struct LiveMediaCell: View, LiveMediaData {
     
     @State var channelObserver: Any?
     @State var programComposition: SRGProgramComposition?
+    @State var date = Date()
     
     @State private var isFocused: Bool = false
     
     private var imageUrl: URL? {
         let width = SizeForImageScale(.small).width
         if let channel = channel {
-            return currentProgram?.imageURL(for: .width, withValue: width, type: .default) ?? channel.imageURL(for: .width, withValue: width, type: .default)
+            return program(at: date)?.imageURL(for: .width, withValue: width, type: .default) ?? channel.imageURL(for: .width, withValue: width, type: .default)
         }
         else {
             return media?.imageURL(for: .width, withValue: width, type: .default)
@@ -48,6 +49,7 @@ struct LiveMediaCell: View, LiveMediaData {
               media.contentType == .livestream else { return }
         channelObserver = ChannelService.shared.addObserverForUpdates(with: channel, livestreamUid: media.uid) { composition in
             programComposition = composition
+            date = Date()
         }
     }
     
@@ -75,7 +77,7 @@ struct LiveMediaCell: View, LiveMediaData {
                 }
                 .buttonStyle(CardButtonStyle())
                 
-                DescriptionView(media: media, programComposition: programComposition)
+                DescriptionView(media: media, programComposition: programComposition, date: date)
                     .frame(width: geometry.size.width, alignment: .leading)
                     .opacity(isFocused ? 1 : 0.5)
                     .offset(x: 0, y: isFocused ? 10 : 0)
@@ -95,10 +97,11 @@ struct LiveMediaCell: View, LiveMediaData {
     private struct DescriptionView: View, LiveMediaData {
         let media: SRGMedia?
         let programComposition: SRGProgramComposition?
+        let date: Date
         
         private var title: String {
             if let channel = channel {
-                return currentProgram?.title ?? channel.title
+                return program(at: date)?.title ?? channel.title
             }
             else {
                 return MediaDescription.title(for: media)
@@ -106,8 +109,8 @@ struct LiveMediaCell: View, LiveMediaData {
         }
         
         private var subtitle: String? {
-            guard let currentProgram = currentProgram else { return nil }
-            let remainingTimeInterval = currentProgram.endDate.timeIntervalSince(Date())
+            guard let currentProgram = program(at: date) else { return nil }
+            let remainingTimeInterval = currentProgram.endDate.timeIntervalSince(date)
             let remainingTime = DurationFormatters.remainingTime(for: remainingTimeInterval)
             return NSLocalizedString("\(remainingTime) remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air")
         }
