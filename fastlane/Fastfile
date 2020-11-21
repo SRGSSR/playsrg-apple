@@ -22,10 +22,10 @@ platform :ios do
     platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
 
     # For betas, before all, check if we have a beta release description
-    if lane.to_s == 'betas'
+    if lane.to_s.downcase.include?('betas')
       what_s_new = what_s_new_for_beta(platform)
       if what_s_new.empty?
-        UI.user_error!('Whoops, WhatsNew-beta.json has no release note for ' + tag_version(platform) + '.')
+        UI.user_error!('Whoops, WhatsNew-' + platform + '-beta.json has no release note for ' + tag_version(platform) + '.')
       end
     end
 
@@ -152,6 +152,53 @@ platform :ios do
     bump_build_number_beta_workflow(platform)
   end
 
+  desc 'For each BUs, build a new tvOS beta AppStore Connect with the current build number and wait build processing. If we\'re not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number'
+  lane :tvOSbetas do
+    platform = 'tvOS'
+
+    notify_build_number_to_ci(platform, nil)
+
+    tvos_schemes.each_index do |index|
+      app_identifier = appstore_beta_identifiers[index]
+
+      can_upload = can_upload_testflight_build(platform, app_identifier)
+      UI.message(tvos_schemes[index] + ' (Beta ' + build_number + ') already uploaded 🔁✅') unless can_upload
+      next unless can_upload
+
+      update_app_identifier_to_appstore(platform, app_identifier)
+
+      build_lane(
+        configuration: 'Beta',
+        scheme: tvos_schemes[index],
+        display_name_suffix: ' 🎯',
+        version_suffix: '-beta',
+        platform: platform,
+        export_to_appstore: true
+      )
+
+      pilot(
+        app_identifier: app_identifier,
+        app_platform: appstore_platform(platform),
+        changelog: what_s_new_for_beta(platform),
+        distribute_external: true,
+        demo_account_required: false,
+        beta_app_review_info: beta_app_review_info,
+        groups: ENV['ITUNES_CONNECT_BETA_GROUPS']
+      )
+
+      UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
+      sleep(90)
+
+      update_dsyms(app_identifier, platform, appcenter_tv_beta_names[index], nil)
+
+      clean_build_artifacts
+
+      UI.message tvos_schemes[index] + ' (Beta ' + build_number + ') delivered. ✅'
+    end
+
+    bump_build_number_beta_workflow(platform)
+  end
+
   desc 'Upload a new build (bitcode) on AppStore Connect with the current build number.'
   lane :appStoreUploads do
     platform = 'iOS'
@@ -266,7 +313,7 @@ platform :ios do
     options[:platform] ||= 'iOS'
     build_number = xcode_build_number(options[:platform])
 
-    can_upload = can_upload_testflight_build(options[:platform])
+    can_upload = can_upload_testflight_build(options[:platform], nil)
     UI.message(options[:scheme] + ' (' + options[:platform] + ') ' + build_number + ' already uploaded 🔁✅') unless can_upload
     next unless can_upload
 
@@ -403,12 +450,28 @@ def appcenter_beta_names
    ENV['PLAY_RTR_BETA_APPCENTER_APPNAME']]
 end
 
+def appcenter_tv_beta_names
+  [ENV['PLAY_SWI_TV_BETA_APPCENTER_APPNAME'],
+   ENV['PLAY_RTS_TV_BETA_APPCENTER_APPNAME'],
+   ENV['PLAY_SRF_TV_BETA_APPCENTER_APPNAME'],
+   ENV['PLAY_RSI_TV_BETA_APPCENTER_APPNAME'],
+   ENV['PLAY_RTR_TV_BETA_APPCENTER_APPNAME']]
+end
+
 def appstore_nightly_identifiers
   [ENV['ITUNES_CONNECT_NIGHLTY_SWI_APP_IDENTIFIER'],
    ENV['ITUNES_CONNECT_NIGHLTY_RTS_APP_IDENTIFIER'],
    ENV['ITUNES_CONNECT_NIGHLTY_SRF_APP_IDENTIFIER'],
    ENV['ITUNES_CONNECT_NIGHLTY_RSI_APP_IDENTIFIER'],
    ENV['ITUNES_CONNECT_NIGHLTY_RTR_APP_IDENTIFIER']]
+end
+
+def appstore_beta_identifiers
+  [ENV['ITUNES_CONNECT_BETA_SWI_APP_IDENTIFIER'],
+   ENV['ITUNES_CONNECT_BETA_RTS_APP_IDENTIFIER'],
+   ENV['ITUNES_CONNECT_BETA_SRF_APP_IDENTIFIER'],
+   ENV['ITUNES_CONNECT_BETA_RSI_APP_IDENTIFIER'],
+   ENV['ITUNES_CONNECT_BETA_RTR_APP_IDENTIFIER']]
 end
 
 # Returns current tag version
@@ -418,7 +481,7 @@ end
 
 # Returns the what's new text from WhatsNew-beta.json file in the repository
 def what_s_new_for_beta(platform)
-  file = File.open('../WhatsNew-beta.json', 'r') # TODO: by platform
+  file = File.open('../WhatsNew-' + platform + '-beta.json', 'r')
   json = JSON.parse(file.read)
   file.close
   what_s_new = json[tag_version(platform)]
@@ -657,10 +720,14 @@ def upload_screenshots(platform)
   )
 end
 
-def can_upload_testflight_build(platform)
+def can_upload_testflight_build(platform, app_identifier)
   platform ||= 'iOS'
+  app_identifier ||= app_config.try_fetch_value(:app_identifier)
 
-  appstore_build_number = latest_testflight_build_number(platform: appstore_platform(platform))
+  appstore_build_number = latest_testflight_build_number(
+    platform: appstore_platform(platform),
+    app_identifier: app_identifier
+  )
   local_build_number = xcode_build_number(platform)
 
   (appstore_build_number < local_build_number.to_i)

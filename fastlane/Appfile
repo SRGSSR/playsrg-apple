@@ -116,4 +116,11 @@ for_platform :ios do
     apple_dev_portal_id "#{ENV['SRGSSR_APPLE_DEV_PORTAL_ID']}"
     team_id "#{ENV['SRGSSR_TEAM_ID']}"
   end
+
+  for_lane :tvOSbetas do
+    itunes_connect_id "#{ENV['SRGSSR_ITUNES_CONNECT_ID']}"
+    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
+    apple_dev_portal_id "#{ENV['SRGSSR_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+  end
 end

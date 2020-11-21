@@ -31,6 +31,11 @@ For each BUs, build a new tvOS nightly on AppStore Connect and wait build proces
 fastlane ios betas
 ```
 For each BUs, build a new beta on App Center with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
+### ios tvOSbetas
+```
+fastlane ios tvOSbetas
+```
+For each BUs, build a new tvOS beta AppStore Connect with the current build number and wait build processing. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
 ### ios appStoreUploads
 ```
 fastlane ios appStoreUploads
