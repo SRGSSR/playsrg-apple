@@ -20,107 +20,107 @@ or alternatively using `brew install fastlane`
 ```
 fastlane ios nightlies
 ```
-For each BUs, build a new iOS nightly on App Center
+Build a new iOS nightly on App Center
 ### ios tvOSnightlies
 ```
 fastlane ios tvOSnightlies
 ```
-For each BUs, build a new tvOS nightly on AppStore Connect and wait build processing.
+Build a new tvOS nightly on AppStore Connect and wait build processing.
 ### ios betas
 ```
 fastlane ios betas
 ```
-For each BUs, build a new beta on App Center with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
+Build a new iOS beta on App Center with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
 ### ios tvOSbetas
 ```
 fastlane ios tvOSbetas
 ```
-For each BUs, build a new tvOS beta AppStore Connect with the current build number and wait build processing. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
+Build a new tvOS beta on AppStore Connect with the current build number and wait build processing. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
 ### ios appStoreUploads
 ```
 fastlane ios appStoreUploads
 ```
-Upload a new build (bitcode) on AppStore Connect with the current build number.
+Upload a new iOS build on AppStore Connect with the current build number.
 ### ios swiAppStoreUpload
 ```
 fastlane ios swiAppStoreUpload
 ```
-SWI: Upload a new build (bitcode) on AppStore Connect with the current build number.
+SWI: Upload a new iOS build on AppStore Connect with the current build number.
 ### ios srfAppStoreUpload
 ```
 fastlane ios srfAppStoreUpload
 ```
-SRF: Upload a new build (bitcode) on AppStore Connect with the current build number.
+SRF: Upload a new iOS build on AppStore Connect with the current build number.
 ### ios rtsAppStoreUpload
 ```
 fastlane ios rtsAppStoreUpload
 ```
-RTS: Upload a new build (bitcode) on AppStore Connect with the current build number.
+RTS: Upload a new iOS build on AppStore Connect with the current build number.
 ### ios rsiAppStoreUpload
 ```
 fastlane ios rsiAppStoreUpload
 ```
-RSI: Upload a new build (bitcode) on AppStore Connect with the current build number.
+RSI: Upload a new iOS build on AppStore Connect with the current build number.
 ### ios rtrAppStoreUpload
 ```
 fastlane ios rtrAppStoreUpload
 ```
-RTR: Upload a new build (bitcode) on AppStore Connect with the current build number.
+RTR: Upload a new iOS build on AppStore Connect with the current build number.
 ### ios dSYMs
 ```
 fastlane ios dSYMs
 ```
-Send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+Send latest iOS dSYMs to App Center. Optional 'version' or 'min_version' parameters.
 ### ios swiDSYMs
 ```
 fastlane ios swiDSYMs
 ```
-SWI: Send latest dSYMs to App Center, with same parameters.
+SWI: Send latest iOS dSYMs to App Center, with same parameters.
 ### ios srfDSYMs
 ```
 fastlane ios srfDSYMs
 ```
-SFR: Send latest dSYMs to App Center, with same parameters.
+SFR: Send latest iOS dSYMs to App Center, with same parameters.
 ### ios rtsDSYMs
 ```
 fastlane ios rtsDSYMs
 ```
-RTS: Send latest dSYMs to App Center, with same parameters.
+RTS: Send latest iOS dSYMs to App Center, with same parameters.
 ### ios rsiDSYMs
 ```
 fastlane ios rsiDSYMs
 ```
-RSI: Send latest dSYMs to App Center, with same parameters.
+RSI: Send latest iOS dSYMs to App Center, with same parameters.
 ### ios rtrDSYMs
 ```
 fastlane ios rtrDSYMs
 ```
-RTR: Send latest dSYMs to App Center, with same parameters.
+RTR: Send latest iOS dSYMs to App Center, with same parameters.
 ### ios swiScreenshots
 ```
 fastlane ios swiScreenshots
 ```
-SWI: Make screenshots and overwrite on AppStoreConnect.
+SWI: Make iOS screenshots and overwrite on AppStoreConnect.
 ### ios srfScreenshots
 ```
 fastlane ios srfScreenshots
 ```
-SRF: Make screenshots and overwrite on AppStoreConnect.
+SRF: Make iOS screenshots and overwrite on AppStoreConnect.
 ### ios rtsScreenshots
 ```
 fastlane ios rtsScreenshots
 ```
-RTS: Make screenshots and overwrite on AppStoreConnect.
+RTS: Make iOS screenshots and overwrite on AppStoreConnect.
 ### ios rsiScreenshots
 ```
 fastlane ios rsiScreenshots
 ```
-RSI: Make screenshots and overwrite on AppStoreConnect.
+RSI: Make iOS screenshots and overwrite on AppStoreConnect.
 ### ios rtrScreenshots
 ```
 fastlane ios rtrScreenshots
 ```
-RTR: Make screenshots and overwrite on AppStoreConnect.
+RTR: Make iOS screenshots and overwrite on AppStoreConnect.
 
 ----
 

@@ -37,7 +37,7 @@ platform :ios do
     end
   end
 
-  desc 'For each BUs, build a new iOS nightly on App Center'
+  desc 'Build a new iOS nightly on App Center'
   lane :nightlies do
     platform = 'iOS'
 
@@ -74,7 +74,7 @@ platform :ios do
     save_last_nightlies_success_git_commit_hash(platform)
   end
 
-  desc 'For each BUs, build a new tvOS nightly on AppStore Connect and wait build processing.'
+  desc 'Build a new tvOS nightly on AppStore Connect and wait build processing.'
   lane :tvOSnightlies do
     platform = 'tvOS'
 
@@ -124,7 +124,7 @@ platform :ios do
     save_last_nightlies_success_git_commit_hash(platform)
   end
 
-  desc 'For each BUs, build a new beta on App Center with the current build number. If we\'re not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number'
+  desc 'Build a new iOS beta on App Center with the current build number. If we\'re not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number'
   lane :betas do
     platform = 'iOS'
 
@@ -152,7 +152,7 @@ platform :ios do
     bump_build_number_beta_workflow(platform)
   end
 
-  desc 'For each BUs, build a new tvOS beta AppStore Connect with the current build number and wait build processing. If we\'re not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number'
+  desc 'Build a new tvOS beta on AppStore Connect with the current build number and wait build processing. If we\'re not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number'
   lane :tvOSbetas do
     platform = 'tvOS'
 
@@ -199,7 +199,7 @@ platform :ios do
     bump_build_number_beta_workflow(platform)
   end
 
-  desc 'Upload a new build (bitcode) on AppStore Connect with the current build number.'
+  desc 'Upload a new iOS build on AppStore Connect with the current build number.'
   lane :appStoreUploads do
     platform = 'iOS'
 
@@ -212,32 +212,32 @@ platform :ios do
     sh 'bundle exec fastlane ios rtrAppStoreUpload'
   end
 
-  desc 'SWI: Upload a new build (bitcode) on AppStore Connect with the current build number.'
+  desc 'SWI: Upload a new iOS build on AppStore Connect with the current build number.'
   lane :swiAppStoreUpload do
     testflight_lane(platform: 'iOS', scheme: 'Play SWI')
   end
 
-  desc 'SRF: Upload a new build (bitcode) on AppStore Connect with the current build number.'
+  desc 'SRF: Upload a new iOS build on AppStore Connect with the current build number.'
   lane :srfAppStoreUpload do
     testflight_lane(platform: 'iOS', scheme: 'Play SRF')
   end
 
-  desc 'RTS: Upload a new build (bitcode) on AppStore Connect with the current build number.'
+  desc 'RTS: Upload a new iOS build on AppStore Connect with the current build number.'
   lane :rtsAppStoreUpload do
     testflight_lane(platform: 'iOS', scheme: 'Play RTS')
   end
 
-  desc 'RSI: Upload a new build (bitcode) on AppStore Connect with the current build number.'
+  desc 'RSI: Upload a new iOS build on AppStore Connect with the current build number.'
   lane :rsiAppStoreUpload do
     testflight_lane(platform: 'iOS', scheme: 'Play RSI')
   end
 
-  desc 'RTR: Upload a new build (bitcode) on AppStore Connect with the current build number.'
+  desc 'RTR: Upload a new iOS build on AppStore Connect with the current build number.'
   lane :rtrAppStoreUpload do
     testflight_lane(platform: 'iOS', scheme: 'Play RTR')
   end
 
-  desc 'Send latest dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  desc 'Send latest iOS dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
   lane :dSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
@@ -253,56 +253,56 @@ platform :ios do
     sh 'bundle exec fastlane ios rtrDSYMs' + options
   end
 
-  desc 'SWI: Send latest dSYMs to App Center, with same parameters.'
+  desc 'SWI: Send latest iOS dSYMs to App Center, with same parameters.'
   lane :swiDSYMs do |options|
     update_dsyms(nil, nil, ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'SFR: Send latest dSYMs to App Center, with same parameters.'
+  desc 'SFR: Send latest iOS dSYMs to App Center, with same parameters.'
   lane :srfDSYMs do |options|
     update_dsyms(nil, nil, ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTS: Send latest dSYMs to App Center, with same parameters.'
+  desc 'RTS: Send latest iOS dSYMs to App Center, with same parameters.'
   lane :rtsDSYMs do |options|
     update_dsyms(nil, nil, ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RSI: Send latest dSYMs to App Center, with same parameters.'
+  desc 'RSI: Send latest iOS dSYMs to App Center, with same parameters.'
   lane :rsiDSYMs do |options|
     update_dsyms(nil, nil, ENV['PLAY_RSI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTR: Send latest dSYMs to App Center, with same parameters.'
+  desc 'RTR: Send latest iOS dSYMs to App Center, with same parameters.'
   lane :rtrDSYMs do |options|
     update_dsyms(nil, nil, ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'SWI: Make screenshots and overwrite on AppStoreConnect.'
+  desc 'SWI: Make iOS screenshots and overwrite on AppStoreConnect.'
   lane :swiScreenshots do
     screenshots('Play SWI screenshots', ['en-US'])
     upload_screenshots(nil)
   end
 
-  desc 'SRF: Make screenshots and overwrite on AppStoreConnect.'
+  desc 'SRF: Make iOS screenshots and overwrite on AppStoreConnect.'
   lane :srfScreenshots do
     screenshots('Play SRF screenshots', ['de-DE'])
     upload_screenshots(nil)
   end
 
-  desc 'RTS: Make screenshots and overwrite on AppStoreConnect.'
+  desc 'RTS: Make iOS screenshots and overwrite on AppStoreConnect.'
   lane :rtsScreenshots do
     screenshots('Play RTS screenshots', ['fr-FR'])
     upload_screenshots(nil)
   end
 
-  desc 'RSI: Make screenshots and overwrite on AppStoreConnect.'
+  desc 'RSI: Make iOS screenshots and overwrite on AppStoreConnect.'
   lane :rsiScreenshots do
     screenshots('Play RSI screenshots', ['it'])
     upload_screenshots(nil)
   end
 
-  desc 'RTR: Make screenshots and overwrite on AppStoreConnect.'
+  desc 'RTR: Make iOS screenshots and overwrite on AppStoreConnect.'
   lane :rtrScreenshots do
     screenshots('Play RTR screenshots', ['de-DE'])
     upload_screenshots(nil)
