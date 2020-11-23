@@ -87,7 +87,7 @@ do
         CACHE_APPICON_PATH="${SCRIPT_DIR}/generate-icons-caches/${WIDTH}"
 
         if [ ! -e "${CACHE_APPICON_PATH}" ]; then
-            mkdir ${CACHE_APPICON_PATH}
+            mkdir -p ${CACHE_APPICON_PATH}
         fi
 
         if [ "${CONFIGURATION}" == "Beta" ]; then
