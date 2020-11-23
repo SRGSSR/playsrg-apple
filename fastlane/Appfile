@@ -12,7 +12,21 @@ for_platform :ios do
     team_id "#{ENV['SWI_TEAM_ID']}"
   end
 
+  for_lane :tvOSswiAppStoreUpload do
+    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['SWI_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['SWI_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['SWI_TEAM_ID']}"
+  end
+
   for_lane :swiDSYMs do
+    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['SWI_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['SWI_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['SWI_TEAM_ID']}"
+  end
+
+  for_lane :tvOSswiDSYMs do
     app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
     itunes_connect_id "#{ENV['SWI_ITUNES_CONNECT_ID']}"
     apple_dev_portal_id "#{ENV['SWI_APPLE_DEV_PORTAL_ID']}"
@@ -26,7 +40,21 @@ for_platform :ios do
     team_id "#{ENV['SWI_TEAM_ID']}"
   end
 
+  for_lane :tvOSswiScreenshots do
+    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['SWI_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['SWI_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['SWI_TEAM_ID']}"
+  end
+
   for_lane :srfAppStoreUpload do
+    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['SRF_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['SRF_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['SRF_TEAM_ID']}"
+  end
+
+  for_lane :tvOSsrfAppStoreUpload do
     app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
     itunes_connect_id "#{ENV['SRF_ITUNES_CONNECT_ID']}"
     apple_dev_portal_id "#{ENV['SRF_APPLE_DEV_PORTAL_ID']}"
@@ -40,7 +68,21 @@ for_platform :ios do
     team_id "#{ENV['SRF_TEAM_ID']}"
   end
 
+  for_lane :tvOSsrfDSYMs do
+    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['SRF_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['SRF_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['SRF_TEAM_ID']}"
+  end
+
   for_lane :srfScreenshots do
+    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['SRF_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['SRF_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['SRF_TEAM_ID']}"
+  end
+
+  for_lane :tvOSsrfScreenshots do
     app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
     itunes_connect_id "#{ENV['SRF_ITUNES_CONNECT_ID']}"
     apple_dev_portal_id "#{ENV['SRF_APPLE_DEV_PORTAL_ID']}"
@@ -54,7 +96,21 @@ for_platform :ios do
     team_id "#{ENV['RTS_TEAM_ID']}"
   end
 
+  for_lane :tvOSrtsAppStoreUpload do
+    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['RTS_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['RTS_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['RTS_TEAM_ID']}"
+  end
+
   for_lane :rtsDSYMs do
+    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['RTS_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['RTS_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['RTS_TEAM_ID']}"
+  end
+
+  for_lane :tvOSrtsDSYMs do
     app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
     itunes_connect_id "#{ENV['RTS_ITUNES_CONNECT_ID']}"
     apple_dev_portal_id "#{ENV['RTS_APPLE_DEV_PORTAL_ID']}"
@@ -68,7 +124,21 @@ for_platform :ios do
     team_id "#{ENV['RTS_TEAM_ID']}"
   end
 
+  for_lane :tvOSrtsScreenshots do
+    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['RTS_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['RTS_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['RTS_TEAM_ID']}"
+  end
+
   for_lane :rsiAppStoreUpload do
+    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['RSI_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['RSI_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['RSI_TEAM_ID']}"
+  end
+
+  for_lane :tvOSrsiAppStoreUpload do
     app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
     itunes_connect_id "#{ENV['RSI_ITUNES_CONNECT_ID']}"
     apple_dev_portal_id "#{ENV['RSI_APPLE_DEV_PORTAL_ID']}"
@@ -82,7 +152,21 @@ for_platform :ios do
     team_id "#{ENV['RSI_TEAM_ID']}"
   end
 
+  for_lane :tvOSrsiDSYMs do
+    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['RSI_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['RSI_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['RSI_TEAM_ID']}"
+  end
+
   for_lane :rsiScreenshots do
+    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['RSI_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['RSI_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['RSI_TEAM_ID']}"
+  end
+
+  for_lane :tvOSrsiScreenshots do
     app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
     itunes_connect_id "#{ENV['RSI_ITUNES_CONNECT_ID']}"
     apple_dev_portal_id "#{ENV['RSI_APPLE_DEV_PORTAL_ID']}"
@@ -96,7 +180,21 @@ for_platform :ios do
     team_id "#{ENV['RTR_TEAM_ID']}"
   end
 
+  for_lane :tvOSrtrAppStoreUpload do
+    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['RTR_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['RTR_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['RTR_TEAM_ID']}"
+  end
+
   for_lane :rtrDSYMs do
+    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['RTR_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['RTR_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['RTR_TEAM_ID']}"
+  end
+
+  for_lane :tvOSrtrDSYMs do
     app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
     itunes_connect_id "#{ENV['RTR_ITUNES_CONNECT_ID']}"
     apple_dev_portal_id "#{ENV['RTR_APPLE_DEV_PORTAL_ID']}"
@@ -110,7 +208,21 @@ for_platform :ios do
     team_id "#{ENV['RTR_TEAM_ID']}"
   end
 
+  for_lane :tvOSrtrScreenshots do
+    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
+    itunes_connect_id "#{ENV['RTR_ITUNES_CONNECT_ID']}"
+    apple_dev_portal_id "#{ENV['RTR_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['RTR_TEAM_ID']}"
+  end
+
   for_lane :tvOSnightlies do
+    itunes_connect_id "#{ENV['SRGSSR_ITUNES_CONNECT_ID']}"
+    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
+    apple_dev_portal_id "#{ENV['SRGSSR_APPLE_DEV_PORTAL_ID']}"
+    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+  end
+
+  for_lane :tvOSbetas do
     itunes_connect_id "#{ENV['SRGSSR_ITUNES_CONNECT_ID']}"
     itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
     apple_dev_portal_id "#{ENV['SRGSSR_APPLE_DEV_PORTAL_ID']}"

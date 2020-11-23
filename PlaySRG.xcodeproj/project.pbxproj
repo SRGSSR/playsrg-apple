@@ -4218,9 +4218,12 @@
 			buildConfigurationList = 6F331CF724D06B8400C096AB /* Build configuration list for PBXNativeTarget "Play SRF TV" */;
 			buildPhases = (
 				3F06504E4BC663E2337102FC /* [CP] Check Pods Manifest.lock */,
+				08C13555256B2746002F67B8 /* Restore original icons if needed */,
 				6F331CE024D06B8200C096AB /* Sources */,
 				6F331CE124D06B8200C096AB /* Frameworks */,
+				08C13557256B277B002F67B8 /* Make custom icons */,
 				6F331CE224D06B8200C096AB /* Resources */,
+				08C13558256B27AC002F67B8 /* Restore original icons */,
 				6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */,
 				6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */,
 			);
@@ -4243,9 +4246,12 @@
 			buildConfigurationList = 6F331D0B24D06BA300C096AB /* Build configuration list for PBXNativeTarget "Play RTS TV" */;
 			buildPhases = (
 				FAE3B1C7F74BDAE7DC78737D /* [CP] Check Pods Manifest.lock */,
+				08C1356D256B28C0002F67B8 /* Restore original icons if needed */,
 				6F331CF824D06BA200C096AB /* Sources */,
 				6F331CF924D06BA200C096AB /* Frameworks */,
+				08C13571256B291D002F67B8 /* Make custom icons */,
 				6F331CFA24D06BA200C096AB /* Resources */,
+				08C13575256B2977002F67B8 /* Restore original icons */,
 				6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA4D925246E0000ABEE9A /* Extract Signing Identity */,
 			);
@@ -4268,9 +4274,12 @@
 			buildConfigurationList = 6F331D2324D06BB800C096AB /* Build configuration list for PBXNativeTarget "Play RSI TV" */;
 			buildPhases = (
 				E7AC0E2F6A0FB261ACE34DB4 /* [CP] Check Pods Manifest.lock */,
+				08C1356E256B28C7002F67B8 /* Restore original icons if needed */,
 				6F331D1024D06BB800C096AB /* Sources */,
 				6F331D1124D06BB800C096AB /* Frameworks */,
+				08C13572256B2922002F67B8 /* Make custom icons */,
 				6F331D1224D06BB800C096AB /* Resources */,
+				08C13576256B297E002F67B8 /* Restore original icons */,
 				6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */,
 				6F3FA4DA25246E0500ABEE9A /* Extract Signing Identity */,
 			);
@@ -4293,9 +4302,12 @@
 			buildConfigurationList = 6F331D3B24D06BC700C096AB /* Build configuration list for PBXNativeTarget "Play RTR TV" */;
 			buildPhases = (
 				1FF1158BC96D38AD87F2F9E1 /* [CP] Check Pods Manifest.lock */,
+				08C1356F256B28CF002F67B8 /* Restore original icons if needed */,
 				6F331D2824D06BC600C096AB /* Sources */,
 				6F331D2924D06BC600C096AB /* Frameworks */,
+				08C13573256B2927002F67B8 /* Make custom icons */,
 				6F331D2A24D06BC600C096AB /* Resources */,
+				08C13577256B2983002F67B8 /* Restore original icons */,
 				6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */,
 				6F3FA4EF25246E1100ABEE9A /* Extract Signing Identity */,
 			);
@@ -4318,9 +4330,12 @@
 			buildConfigurationList = 6F331D5324D06C2700C096AB /* Build configuration list for PBXNativeTarget "Play SWI TV" */;
 			buildPhases = (
 				69679F3DF79A5A7DF70B2B79 /* [CP] Check Pods Manifest.lock */,
+				08C13570256B28D7002F67B8 /* Restore original icons if needed */,
 				6F331D4024D06C2600C096AB /* Sources */,
 				6F331D4124D06C2600C096AB /* Frameworks */,
+				08C13574256B292C002F67B8 /* Make custom icons */,
 				6F331D4224D06C2600C096AB /* Resources */,
+				08C13578256B2989002F67B8 /* Restore original icons */,
 				6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA50425246E1A00ABEE9A /* Extract Signing Identity */,
 			);
@@ -5262,7 +5277,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		08B836961FBDC08400D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5290,7 +5305,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		08B836981FBDC0A100D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5305,6 +5320,276 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+		};
+		08C13555256B2746002F67B8 /* Restore original icons if needed */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Restore original icons if needed";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
+		};
+		08C13557256B277B002F67B8 /* Make custom icons */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Make custom icons";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
+		};
+		08C13558256B27AC002F67B8 /* Restore original icons */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Restore original icons";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
+		};
+		08C1356D256B28C0002F67B8 /* Restore original icons if needed */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Restore original icons if needed";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
+		};
+		08C1356E256B28C7002F67B8 /* Restore original icons if needed */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Restore original icons if needed";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
+		};
+		08C1356F256B28CF002F67B8 /* Restore original icons if needed */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Restore original icons if needed";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
+		};
+		08C13570256B28D7002F67B8 /* Restore original icons if needed */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Restore original icons if needed";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
+		};
+		08C13571256B291D002F67B8 /* Make custom icons */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Make custom icons";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
+		};
+		08C13572256B2922002F67B8 /* Make custom icons */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Make custom icons";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
+		};
+		08C13573256B2927002F67B8 /* Make custom icons */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Make custom icons";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
+		};
+		08C13574256B292C002F67B8 /* Make custom icons */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Make custom icons";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
+		};
+		08C13575256B2977002F67B8 /* Restore original icons */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Restore original icons";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
+		};
+		08C13576256B297E002F67B8 /* Restore original icons */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Restore original icons";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
+		};
+		08C13577256B2983002F67B8 /* Restore original icons */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Restore original icons";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
+		};
+		08C13578256B2989002F67B8 /* Restore original icons */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Restore original icons";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		08C3ADF9222B018700BB7AF7 /* Update Play MMF service URL */ = {
 			isa = PBXShellScriptBuildPhase;
