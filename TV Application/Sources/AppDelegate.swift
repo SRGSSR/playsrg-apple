@@ -18,8 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var cancellables = Set<AnyCancellable>()
     
     private static func configuredTabBarController(tabBarController: UITabBarController) {
-        tabBarController.view.backgroundColor = (UIScreen.main.traitCollection.userInterfaceStyle == .dark) ? .play_black : .play_lightGray
-        
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = .play_cardGrayBackground
         appearance.selectionIndicatorTintColor = .srg_color(fromHexadecimalString: "#979797")
@@ -35,34 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController.tabBar.standardAppearance = appearance
     }
     
-    // MARK: - UIApplicationDelegate protocol
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil {
-            FirebaseApp.configure()
-        }
-        
-        try? AVAudioSession.sharedInstance().setCategory(.playback)
-        
-        let configuration = ApplicationConfiguration.shared
-        
-        let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
-                                                               container: configuration.analyticsContainer,
-                                                               siteName: configuration.comScoreVirtualSite,
-                                                               netMetrixIdentifier: configuration.netMetrixIdentifier)
-        SRGAnalyticsTracker.shared.start(with: analyticsConfiguration)
-        
-        SRGDataProvider.current = SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
-        
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.makeKeyAndVisible()
-        self.window = window
-        
+    private func applicationRootViewController() -> UIViewController? {
         var viewControllers = [UIViewController]()
         
         let videosViewController = UIHostingController(rootView: VideosView())
         videosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Videos", comment: "Videos tab title"), image: nil, tag: 0)
         viewControllers.append(videosViewController)
+        
+        let configuration = ApplicationConfiguration.shared
         
         #if DEBUG
         if !configuration.radioChannels.isEmpty {
@@ -92,10 +70,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         viewControllers.append(profileViewController)
         #endif
         
-        let tabBarController = UITabBarController()
-        Self.configuredTabBarController(tabBarController: tabBarController)
-        tabBarController.viewControllers = viewControllers
-        window.rootViewController = tabBarController
+        if viewControllers.count > 1 {
+            let tabBarController = UITabBarController()
+            Self.configuredTabBarController(tabBarController: tabBarController)
+            tabBarController.viewControllers = viewControllers
+            return tabBarController
+        }
+        else {
+            return viewControllers.first
+        }
+    }
+    
+    // MARK: - UIApplicationDelegate protocol
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        if Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil {
+            FirebaseApp.configure()
+        }
+        
+        try? AVAudioSession.sharedInstance().setCategory(.playback)
+        
+        let configuration = ApplicationConfiguration.shared
+        let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
+                                                               container: configuration.analyticsContainer,
+                                                               siteName: configuration.comScoreVirtualSite,
+                                                               netMetrixIdentifier: configuration.netMetrixIdentifier)
+        SRGAnalyticsTracker.shared.start(with: analyticsConfiguration)
+        
+        SRGDataProvider.current = SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
+        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.makeKeyAndVisible()
+        self.window = window
+        
+        let rootViewController = applicationRootViewController()!
+        rootViewController.view.backgroundColor = (UIScreen.main.traitCollection.userInterfaceStyle == .dark) ? .play_black : .play_lightGray
+        window.rootViewController = rootViewController
         return true
     }
     
