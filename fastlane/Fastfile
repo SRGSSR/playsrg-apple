@@ -119,6 +119,7 @@ platform :ios do
       update_dsyms(app_identifier, platform, appcenter_tv_nightly_names[index], nil)
 
       clean_build_artifacts
+      reset_app_identifier_to_appstore(platform)
 
       UI.message tvos_schemes[index] + ' (Nightly ' + build_number + ') delivered. ✅'
     end
@@ -196,6 +197,7 @@ platform :ios do
       update_dsyms(app_identifier, platform, appcenter_tv_beta_names[index], nil)
 
       clean_build_artifacts
+      reset_app_identifier_to_appstore(platform)
 
       UI.message tvos_schemes[index] + ' (Beta ' + build_number + ') delivered. ✅'
     end
@@ -713,6 +715,14 @@ def update_app_identifier_to_appstore(platform, app_identifier)
     value: app_identifier
   )
   app_identifier
+end
+
+# Reset the updated app identifier after App Store Connect submission.
+def reset_app_identifier_to_appstore(platform)
+  reset_git_repo(
+    force: true,
+    files: ['Xcode/Play ' + platform + ' Application.xcconfig']
+  )
 end
 
 # Update dSYMs from AppStore to App Center.
