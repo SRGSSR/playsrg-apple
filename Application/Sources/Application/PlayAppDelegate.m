@@ -658,7 +658,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
                                                                                                        container:applicationConfiguration.analyticsContainer
-                                                                                             comScoreVirtualSite:applicationConfiguration.comScoreVirtualSite
+                                                                                                        siteName:applicationConfiguration.comScoreVirtualSite
                                                                                              netMetrixIdentifier:applicationConfiguration.netMetrixIdentifier];
     [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
                                               identityService:SRGIdentityService.currentIdentityService];

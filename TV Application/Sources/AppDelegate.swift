@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
                                                                container: configuration.analyticsContainer,
-                                                               comScoreVirtualSite: configuration.comScoreVirtualSite,
+                                                               siteName: configuration.comScoreVirtualSite,
                                                                netMetrixIdentifier: configuration.netMetrixIdentifier)
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration)
         

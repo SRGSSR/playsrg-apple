@@ -286,7 +286,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgcontentprotection-apple</string>
 			<key>Title</key>
-			<string>SRGContentProtection (3.0.0)</string>
+			<string>SRGContentProtection</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
