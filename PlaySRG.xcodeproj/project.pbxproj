@@ -548,6 +548,11 @@
 		6F12E4E922D8676600BC1718 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */; };
 		6F12E4EA22D8676600BC1718 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */; };
 		6F12E4EB22D8676600BC1718 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */; };
+		6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
+		6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
+		6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
+		6F151E2A256BF5CF009082F8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
+		6F151E2B256BF5CF009082F8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
 		6F167F4A248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicListTableViewCell.m */; };
 		6F167F4B248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicListTableViewCell.m */; };
 		6F167F4C248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167F49248197C700B8E7F1 /* HomeTopicListTableViewCell.m */; };
@@ -2007,6 +2012,7 @@
 		6F12E4DF22D8676300BC1718 /* SearchHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHeaderView.m; sourceTree = "<group>"; };
 		6F12E4E022D8676300BC1718 /* SearchHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHeaderView.h; sourceTree = "<group>"; };
 		6F12E4E122D8676500BC1718 /* SearchHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchHeaderView.xib; sourceTree = "<group>"; };
+		6F151E26256BF5CF009082F8 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		6F167F48248197C700B8E7F1 /* HomeTopicListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTopicListTableViewCell.h; sourceTree = "<group>"; };
 		6F167F49248197C700B8E7F1 /* HomeTopicListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTopicListTableViewCell.m; sourceTree = "<group>"; };
 		6F167F4F248198DC00B8E7F1 /* HomeTopicCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTopicCollectionViewCell.h; sourceTree = "<group>"; };
@@ -3512,6 +3518,7 @@
 				0805703D2540E0FC00A59C9D /* Navigation.swift */,
 				6FC4140124EF11F400FDF806 /* Play-TV-ObjectiveC-Bridge.h */,
 				6F331D6B24D076D500C096AB /* ProfileView.swift */,
+				6F151E26256BF5CF009082F8 /* ProgressBar.swift */,
 				6FFCC5E324EFBF2100805B0F /* RadioChannel.swift */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
 				6F331D6524D076C800C096AB /* SearchView.swift */,
@@ -7644,6 +7651,7 @@
 				6F1F80662508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F4BCBE124EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BA24E6F8EE00ECF73F /* HomeView.swift in Sources */,
+				6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6F331D6624D076C800C096AB /* SearchView.swift in Sources */,
 				6F426B4225680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
@@ -7712,6 +7720,7 @@
 				6F1F80672508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F4BCBE224EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BB24E6F8EE00ECF73F /* HomeView.swift in Sources */,
+				6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6F331D6724D076C800C096AB /* SearchView.swift in Sources */,
 				6F426B4325680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
@@ -7780,6 +7789,7 @@
 				6F1F80682508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F4BCBE324EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BC24E6F8EE00ECF73F /* HomeView.swift in Sources */,
+				6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6F331D6824D076C800C096AB /* SearchView.swift in Sources */,
 				6F426B4425680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
@@ -7848,6 +7858,7 @@
 				6F1F80692508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F4BCBE424EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BD24E6F8EE00ECF73F /* HomeView.swift in Sources */,
+				6F151E2A256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6F331D6924D076C800C096AB /* SearchView.swift in Sources */,
 				6F426B4525680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
@@ -7916,6 +7927,7 @@
 				6F1F806A2508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F4BCBE524EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BE24E6F8EE00ECF73F /* HomeView.swift in Sources */,
+				6F151E2B256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFE24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6F331D6A24D076C800C096AB /* SearchView.swift in Sources */,
 				6F426B4625680A8F00DD22AB /* BlockingOverlay.swift in Sources */,

@@ -94,10 +94,10 @@ struct LiveMediaCell: View, LiveMediaData {
                                 .padding()
                         }
                         if let progress = progress {
-                            ProgressView(value: progress)
+                            ProgressBar(value: progress)
                                 .accentColor(Color(UIColor.play_progressRed))
+                                .frame(height: 4)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                                .padding()
                         }
                         BlockingOverlay(media: media)
                     }
