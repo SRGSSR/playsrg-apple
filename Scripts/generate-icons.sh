@@ -19,11 +19,14 @@ DUPLICATE_IOS_APPICON_PATH="${SOURCE_IOS_RESOURCES_PATH}/OriginalAppIcon.appicon
 SOURCE_TVOS_RESOURCES_PATH="${SRCROOT}/TV Application/Resources/Play ${BUSINESS_UNIT}/${BUSINESS_UNIT}Assets.xcassets"
 SOURCE_TVOS_APPICON_PATH="${SOURCE_TVOS_RESOURCES_PATH}/App Icon & Top Shelf Image.brandassets/App Icon.imagestack/Layer 4.imagestacklayer/Content.imageset"
 DUPLICATE_TVOS_APPICON_PATH="${SOURCE_TVOS_RESOURCES_PATH}/OriginalAppIcon.appiconset"
+SOURCE_TVOS_APPSTOREICON_PATH="${SOURCE_TVOS_RESOURCES_PATH}/App Icon & Top Shelf Image.brandassets/App Icon - App Store.imagestack/Layer 4.imagestacklayer/Content.imageset"
+DUPLICATE_TVOS_APPSTOREICON_PATH="${SOURCE_TVOS_RESOURCES_PATH}/OriginalAppStoreIcon.appiconset"
 
 echo $PYTHON_NIGHTLIES_TAG "Duplicate original icons..."
 
 cp -fR "${SOURCE_IOS_APPICON_PATH}" "${DUPLICATE_IOS_APPICON_PATH}"
 cp -fR "${SOURCE_TVOS_APPICON_PATH}" "${DUPLICATE_TVOS_APPICON_PATH}"
+cp -fR "${SOURCE_TVOS_APPSTOREICON_PATH}" "${DUPLICATE_TVOS_APPSTOREICON_PATH}"
 
 BUNDLE_IDENTIFIER=${PRODUCT_BUNDLE_IDENTIFIER}
 BUILD_NUMBER=${CURRENT_PROJECT_VERSION}
@@ -48,7 +51,7 @@ fi
 CONTENTS_JSON="${SOURCE_IOS_APPICON_PATH}/Contents.json"
 
 echo "Processing Icons..."
-for CONTENTS_JSON in "${SOURCE_IOS_APPICON_PATH}/Contents.json" "${SOURCE_TVOS_APPICON_PATH}/Contents.json";
+for CONTENTS_JSON in "${SOURCE_IOS_APPICON_PATH}/Contents.json" "${SOURCE_TVOS_APPICON_PATH}/Contents.json" "${SOURCE_TVOS_APPSTOREICON_PATH}/Contents.json";
 do
     ICON_COUNT=$(jq -r '.images | length-1' "${CONTENTS_JSON}")
     for i in $(jot - 0 ${ICON_COUNT});
@@ -78,8 +81,10 @@ do
             continue
         fi
 
+        WIDTH=`identify -format %w "${SOURCE_ICON_PATH}"`
+
         SCRIPT_DIR=`dirname $BASH_SOURCE`
-        CACHE_APPICON_PATH="${SCRIPT_DIR}/generate-icons-caches"
+        CACHE_APPICON_PATH="${SCRIPT_DIR}/generate-icons-caches/${WIDTH}"
 
         if [ ! -e "${CACHE_APPICON_PATH}" ]; then
             mkdir ${CACHE_APPICON_PATH}
@@ -94,18 +99,17 @@ do
         else
             TITLE="Dev"
         fi
-
+        
         SCRIPT_ICON_PATH="${CACHE_APPICON_PATH}/${TITLE}-${filename}"
 
         if [ "$LAST_RUN" != "$CURRENT_RUN" ] || [! -e "${SCRIPT_ICON_PATH}"]; then
-            WIDTH=`identify -format %w "${SOURCE_ICON_PATH}"`
             if [ ${idiom} == "tv" ]; then
               HEIGHT=`echo "${WIDTH}/16" | bc`  
             else
               HEIGHT=`echo "${WIDTH}/6" | bc`  
             fi
 
-            if [ "${BUILD_NUMBER}" != "" ]; then
+            if [ "${BUILD_NUMBER}" != "" ] && [[ "${CONTENTS_JSON}" != *"App Icon - App Store"* ]]; then
                 CAPTION="${TITLE}-${BUILD_NUMBER}"
             else
                 CAPTION="${TITLE}"
