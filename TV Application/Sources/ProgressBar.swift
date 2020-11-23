@@ -23,7 +23,7 @@ struct ProgressBar: View {
     }
     
     init(value: Double) {
-        self.value = min(1, max(0, value))
+        self.value = value.clamped(to: 0...1)
     }
 }
 
