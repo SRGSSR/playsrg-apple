@@ -162,6 +162,8 @@ platform :ios do
 
     notify_build_number_to_ci(platform, nil)
 
+    build_number = xcode_build_number(platform)
+
     tvos_schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
 
