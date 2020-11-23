@@ -6,6 +6,71 @@
 
 #import "PlayDurationFormatter.h"
 
+NSString *PlayFormattedHours(NSTimeInterval duration)
+{
+    static NSDateComponentsFormatter *s_dateComponentsFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+        s_dateComponentsFormatter.allowedUnits = NSCalendarUnitHour;
+        s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+    });
+    return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+}
+
+NSString *PlayFormattedDays(NSTimeInterval duration)
+{
+    static NSDateComponentsFormatter *s_dateComponentsFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+        s_dateComponentsFormatter.allowedUnits = NSCalendarUnitDay;
+        s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+    });
+    return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+}
+
+NSString *PlayShortFormattedMinutes(NSTimeInterval duration)
+{
+    static NSDateComponentsFormatter *s_dateComponentsFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+        s_dateComponentsFormatter.allowedUnits = NSCalendarUnitMinute;
+        s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleShort;
+        s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+    });
+    return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+}
+
+NSString *PlayShortFormattedHours(NSTimeInterval duration)
+{
+    static NSDateComponentsFormatter *s_dateComponentsFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+        s_dateComponentsFormatter.allowedUnits = NSCalendarUnitHour;
+        s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleShort;
+        s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+    });
+    return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+}
+
+NSString *PlayShortFormattedDays(NSTimeInterval duration)
+{
+    static NSDateComponentsFormatter *s_dateComponentsFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+        s_dateComponentsFormatter.allowedUnits = NSCalendarUnitDay;
+        s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleShort;
+        s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+    });
+    return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+}
+
 NSString *PlayFormattedDuration(NSTimeInterval duration)
 {
     if (duration <= 60. * 60.) {
@@ -53,5 +118,30 @@ NSString *PlayHumanReadableFormattedDuration(NSTimeInterval duration)
             s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
         });
         return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+    }
+}
+
+NSString *PlayRemainingTimeFormattedDuration(NSTimeInterval duration)
+{
+    if (duration >= 60. * 60.) {
+        static NSDateComponentsFormatter *s_dateComponentsFormatter;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitHour;
+            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        });
+        return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+    }
+    else {
+        static NSDateComponentsFormatter *s_dateComponentsFormatter;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitMinute;
+            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        });
+        // Minimum is 1 minute
+        return [s_dateComponentsFormatter stringFromTimeInterval:fmax(60., duration)];
     }
 }

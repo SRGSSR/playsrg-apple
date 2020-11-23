@@ -873,11 +873,6 @@
 		6F488ACD22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F488ACA22EED363002B1150 /* PlayAccessibilityFormatter.m */; };
 		6F488ACE22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F488ACA22EED363002B1150 /* PlayAccessibilityFormatter.m */; };
 		6F488ACF22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F488ACA22EED363002B1150 /* PlayAccessibilityFormatter.m */; };
-		6F4BCBE124EFF7C3001ABA17 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BCBE024EFF7C3001ABA17 /* Formatters.swift */; };
-		6F4BCBE224EFF7C3001ABA17 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BCBE024EFF7C3001ABA17 /* Formatters.swift */; };
-		6F4BCBE324EFF7C3001ABA17 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BCBE024EFF7C3001ABA17 /* Formatters.swift */; };
-		6F4BCBE424EFF7C3001ABA17 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BCBE024EFF7C3001ABA17 /* Formatters.swift */; };
-		6F4BCBE524EFF7C3001ABA17 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BCBE024EFF7C3001ABA17 /* Formatters.swift */; };
 		6F4C0A7520DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4C0A7420DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.m */; };
 		6F4C0A7620DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4C0A7420DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.m */; };
 		6F4C0A7720DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4C0A7420DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.m */; };
@@ -1469,6 +1464,16 @@
 		6FEC91AB21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
 		6FEC91AC21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
 		6FEC91AD21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
+		6FF129C4256C0A9D0042F446 /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
+		6FF129C5256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
+		6FF129C6256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
+		6FF129C7256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
+		6FF129C8256C0A9F0042F446 /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
+		6FF129DD256C0D370042F446 /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
+		6FF129F2256C0D370042F446 /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
+		6FF129F3256C0D380042F446 /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
+		6FF12A08256C0D390042F446 /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
+		6FF12A09256C0D390042F446 /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
 		6FF1EA46256569FC005FFEEA /* TopicDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF1EA45256569FC005FFEEA /* TopicDetailModel.swift */; };
 		6FF1EA47256569FC005FFEEA /* TopicDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF1EA45256569FC005FFEEA /* TopicDetailModel.swift */; };
 		6FF1EA48256569FC005FFEEA /* TopicDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF1EA45256569FC005FFEEA /* TopicDetailModel.swift */; };
@@ -2145,7 +2150,6 @@
 		6F4855A81E3A38D600B0141C /* SRGLetterboxDesignables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGLetterboxDesignables.m; sourceTree = "<group>"; };
 		6F488AC922EED363002B1150 /* PlayAccessibilityFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayAccessibilityFormatter.h; sourceTree = "<group>"; };
 		6F488ACA22EED363002B1150 /* PlayAccessibilityFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayAccessibilityFormatter.m; sourceTree = "<group>"; };
-		6F4BCBE024EFF7C3001ABA17 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		6F4C0A7320DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeShowVerticalListTableViewCell.h; sourceTree = "<group>"; };
 		6F4C0A7420DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeShowVerticalListTableViewCell.m; sourceTree = "<group>"; };
 		6F4C673B1EA6115C006A0A3B /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -3507,7 +3511,6 @@
 				6FA14534254729DA006E8D3B /* FocusableRegion.swift */,
 				6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */,
 				6F82430B250637BE00E931A0 /* Fonts.swift */,
-				6F4BCBE024EFF7C3001ABA17 /* Formatters.swift */,
 				08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */,
 				6F355AA224E65CB400F1500E /* HeroMediaCell.swift */,
 				6FA84A3124E452F700B1A56E /* HomeModel.swift */,
@@ -7656,7 +7659,6 @@
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F1D31B324E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80662508ECA800FD8FE7 /* ShowsView.swift in Sources */,
-				6F4BCBE124EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BA24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -7683,11 +7685,13 @@
 				6F3F1AB3250286DA000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2ABF24E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9B7252CA310004E40AE /* MediaDetailModel.swift in Sources */,
+				6FF129DD256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				08742C5925481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F331D6C24D076D500C096AB /* ProfileView.swift in Sources */,
 				6F85F7822567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F81E2567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
 				6FDB2AC524E5923600FF286E /* MediaCell.swift in Sources */,
+				6FF129C4256C0A9D0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDFD88C24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413D024EEEDC900FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F156250609CF009A741F /* MediaDescription.swift in Sources */,
@@ -7726,7 +7730,6 @@
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F1D31B424E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80672508ECA800FD8FE7 /* ShowsView.swift in Sources */,
-				6F4BCBE224EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BB24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -7753,11 +7756,13 @@
 				6F3F1AB6250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC024E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9B8252CA310004E40AE /* MediaDetailModel.swift in Sources */,
+				6FF129F2256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				08742C5A25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F331D6D24D076D500C096AB /* ProfileView.swift in Sources */,
 				6F85F7972567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F81F2567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
 				6FDB2AC624E5923600FF286E /* MediaCell.swift in Sources */,
+				6FF129C5256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDFD88D24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413D824EEEDC900FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F157250609CF009A741F /* MediaDescription.swift in Sources */,
@@ -7796,7 +7801,6 @@
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F1D31B524E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80682508ECA800FD8FE7 /* ShowsView.swift in Sources */,
-				6F4BCBE324EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BC24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -7823,11 +7827,13 @@
 				6F3F1AB5250286DB000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC124E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9B9252CA310004E40AE /* MediaDetailModel.swift in Sources */,
+				6FF129F3256C0D380042F446 /* PlayDurationFormatter.m in Sources */,
 				08742C5B25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F331D6E24D076D500C096AB /* ProfileView.swift in Sources */,
 				6F85F7AC2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8202567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
 				6FDB2AC724E5923600FF286E /* MediaCell.swift in Sources */,
+				6FF129C6256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDFD88E24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413E024EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F158250609CF009A741F /* MediaDescription.swift in Sources */,
@@ -7866,7 +7872,6 @@
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F1D31B624E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80692508ECA800FD8FE7 /* ShowsView.swift in Sources */,
-				6F4BCBE424EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BD24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E2A256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -7893,11 +7898,13 @@
 				6F3F1AB7250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC224E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9BA252CA310004E40AE /* MediaDetailModel.swift in Sources */,
+				6FF12A08256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				08742C5C25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F331D6F24D076D500C096AB /* ProfileView.swift in Sources */,
 				6F85F7AD2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8212567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
 				6FDB2AC824E5923600FF286E /* MediaCell.swift in Sources */,
+				6FF129C7256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDFD88F24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413E824EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F159250609CF009A741F /* MediaDescription.swift in Sources */,
@@ -7936,7 +7943,6 @@
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F1D31B724E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F806A2508ECA800FD8FE7 /* ShowsView.swift in Sources */,
-				6F4BCBE524EFF7C3001ABA17 /* Formatters.swift in Sources */,
 				6FCC73BE24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E2B256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFE24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -7963,11 +7969,13 @@
 				6F3F1AB8250286DD000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC324E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9BB252CA310004E40AE /* MediaDetailModel.swift in Sources */,
+				6FF12A09256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				08742C5D25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F331D7024D076D500C096AB /* ProfileView.swift in Sources */,
 				6F85F7AE2567ED2300AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8222567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
 				6FDB2AC924E5923600FF286E /* MediaCell.swift in Sources */,
+				6FF129C8256C0A9F0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDFD89024E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413F024EEEDCB00FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F15A250609CF009A741F /* MediaDescription.swift in Sources */,
