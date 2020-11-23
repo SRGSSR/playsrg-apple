@@ -526,7 +526,7 @@ def ios_schemes
 end
 
 def tvos_schemes
-  ['Play RTS TV', 'Play SRF TV', 'Play RSI TV', 'Play RTR TV']
+  ['Play SWI TV', 'Play RTS TV', 'Play SRF TV', 'Play RSI TV', 'Play RTR TV']
 end
 
 def appcenter_nightly_names
@@ -554,7 +554,8 @@ def appcenter_beta_names
 end
 
 def appcenter_tv_beta_names
-  [ENV['PLAY_RTS_TV_BETA_APPCENTER_APPNAME'],
+  [ENV['PLAY_SWI_TV_BETA_APPCENTER_APPNAME'],
+   ENV['PLAY_RTS_TV_BETA_APPCENTER_APPNAME'],
    ENV['PLAY_SRF_TV_BETA_APPCENTER_APPNAME'],
    ENV['PLAY_RSI_TV_BETA_APPCENTER_APPNAME'],
    ENV['PLAY_RTR_TV_BETA_APPCENTER_APPNAME']]
@@ -569,7 +570,8 @@ def appstore_nightly_identifiers
 end
 
 def appstore_beta_identifiers
-  [ENV['ITUNES_CONNECT_BETA_RTS_APP_IDENTIFIER'],
+  [ENV['ITUNES_CONNECT_BETA_SWI_APP_IDENTIFIER'],
+   ENV['ITUNES_CONNECT_BETA_RTS_APP_IDENTIFIER'],
    ENV['ITUNES_CONNECT_BETA_SRF_APP_IDENTIFIER'],
    ENV['ITUNES_CONNECT_BETA_RSI_APP_IDENTIFIER'],
    ENV['ITUNES_CONNECT_BETA_RTR_APP_IDENTIFIER']]
