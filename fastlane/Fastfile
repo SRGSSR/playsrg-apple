@@ -828,7 +828,16 @@ def upload_screenshots(platform)
 end
 
 def can_upload_testflight_build(platform, app_identifier)
-  true
+  platform ||= 'iOS'
+  app_identifier ||= app_config.try_fetch_value(:app_identifier)
+
+  appstore_build_number = latest_testflight_build_number(
+    platform: appstore_platform(platform),
+    app_identifier: app_identifier
+  )
+  local_build_number = xcode_build_number(platform)
+
+  (appstore_build_number < local_build_number.to_i)
 end
 
 # Beta workflow: tag the new beta, bump build number and push to the repo,
