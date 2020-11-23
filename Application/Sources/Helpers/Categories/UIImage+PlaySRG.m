@@ -28,8 +28,8 @@ CGSize SizeForImageScale(ImageScale imageScale)
         }
 #else
         s_widths = @{ @(ImageScaleSmall) : @(350.f),
-                      @(ImageScaleMedium) : @(1000.f),
-                      @(ImageScaleLarge) : @(1600.f)};
+                      @(ImageScaleMedium) : @(800.f),
+                      @(ImageScaleLarge) : @(1000.f)};
 #endif
     });
     
