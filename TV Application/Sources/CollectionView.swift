@@ -165,7 +165,11 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         var cleanedRows = [CollectionRow<Section, Item>]()
         for row in rows {
             let cleanedRow = CollectionRow(section: row.section, items: row.items.filter {
-                addedItems.updateValue(true, forKey: $0) == nil
+                let isNew = addedItems.updateValue(true, forKey: $0) == nil
+                if !isNew {
+                    PlayLogWarning(category: "collection", message: "A duplicate item has been removed: \($0)")
+                }
+                return isNew
             })
             cleanedRows.append(cleanedRow)
         }
