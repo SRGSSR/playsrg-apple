@@ -155,13 +155,31 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     fileprivate var parentTabScrollingEnabled: Bool = false
     
     /**
+     *  Remove item duplicates. As items can be moved between sections no item must appear multiple times, whether in
+     *  the same row or in different rows.
+     *
+     *  Idea borrowed from https://www.hackingwithswift.com/example-code/language/how-to-remove-duplicate-items-from-an-array
+     */
+    private static func removeDuplicates(in rows: [CollectionRow<Section, Item>]) -> [CollectionRow<Section, Item>] {
+        var addedItems = [Item: Bool]()
+        var cleanedRows = [CollectionRow<Section, Item>]()
+        for row in rows {
+            let cleanedRow = CollectionRow(section: row.section, items: row.items.filter {
+                addedItems.updateValue(true, forKey: $0) == nil
+            })
+            cleanedRows.append(cleanedRow)
+        }
+        return cleanedRows
+    }
+    
+    /**
      *  Create a collection view displaying the specified data with cells delivered by the provided builder.
      */
     init(rows: [CollectionRow<Section, Item>],
          sectionLayoutProvider: @escaping (Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection,
          @ViewBuilder cell: @escaping (IndexPath, Item) -> Cell,
          @ViewBuilder supplementaryView: @escaping (String, IndexPath) -> SupplementaryView) {
-        self.rows = rows
+        self.rows = Self.removeDuplicates(in: rows)
         self.sectionLayoutProvider = sectionLayoutProvider
         self.cell = cell
         self.supplementaryView = supplementaryView
