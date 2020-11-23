@@ -187,8 +187,10 @@ platform :ios do
         app_identifier: app_identifier,
         app_platform: appstore_platform(platform),
         changelog: what_s_new_for_beta(platform),
-        distribute_external: false,
-        demo_account_required: false
+        distribute_external: true,
+        demo_account_required: false,
+        beta_app_review_info: beta_app_review_info,
+        groups: ENV['ITUNES_CONNECT_BETA_GROUPS']
       )
 
       UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
