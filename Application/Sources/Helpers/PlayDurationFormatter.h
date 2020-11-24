@@ -15,7 +15,7 @@ OBJC_EXPORT NSString *PlayFormattedHours(NSTimeInterval duration);
 OBJC_EXPORT NSString *PlayFormattedDays(NSTimeInterval duration);
 
 /**
- *  Short duration formatters for a single unit.
+ *  Short duration formatters for a single unit (minimum 1 unit).
  */
 OBJC_EXPORT NSString *PlayShortFormattedMinutes(NSTimeInterval duration);
 OBJC_EXPORT NSString *PlayShortFormattedHours(NSTimeInterval duration);
