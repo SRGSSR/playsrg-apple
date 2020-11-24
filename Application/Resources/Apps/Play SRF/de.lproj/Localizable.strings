@@ -560,7 +560,7 @@
    Title label used to present TV topics
    Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available
    Topics search setting option list view title */
-"Topics" = "Themen";
+"Topics" = "Kategorien";
 
 /* Total space size, display at the bottom of download list */
 "Total space used: %@" = "Benötigter Speicher: %@";
