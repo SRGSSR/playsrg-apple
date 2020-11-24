@@ -34,7 +34,7 @@
 /* More than 3 min option */
 "> 30 min" = "> 30 min";
 
-/* Short title displayed in home page shows section. */
+/* Short title displayed in home pages on a button. */
 "A to Z" = "Dad A fin Z";
 
 /* Button label to add a media to the watch later list, from the media long-press menu
@@ -92,7 +92,7 @@
 /* Title label used to present the soon expiring videos */
 "Available for a limited time" = "Accessibel per in tschert temp";
 
-/* Short title displayed in home page shows section. */
+/* Short title displayed in home pages on a button. */
 "By date" = "Tenor data";
 
 /* Label of the button to close the media long-press menu
@@ -343,9 +343,6 @@
 /* Settings section header */
 "Period" = "Interval";
 
-/* Play button label */
-"Play" = "Laschar ir";
-
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Disponibel en l'exteriur";
 
@@ -354,12 +351,6 @@
 
 /* Title displayed at the top of the profile view */
 "Profile" = "Profils";
-
-/* Label to present shows A to Z (radio or TV) */
-"Programmes A-Z" = "Emissiuns dad A fin Z";
-
-/* Label to present programmes by date */
-"Programmes by date" = "Emissiuns tenor data";
 
 /* Settings section header */
 "Properties" = "Funcziunalitads";
@@ -464,6 +455,12 @@
    Title label used to present the radio shows AZ and radio shows by date access buttons
    Title label used to present the TV shows AZ and TV shows by date access buttons */
 "Shows" = "Emissiuns";
+
+/* Label to present shows A to Z (radio or TV) */
+"Shows A to Z" = "Emissiuns dad A fin Z";
+
+/* Label to present shows (episodes) by date (radio or TV) */
+"Shows by date" = "Emissiuns tenor data";
 
 /* Title of the button to skip updating the application */
 "Skip" = "Finir";

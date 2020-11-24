@@ -16,10 +16,10 @@ NSString *TitleForApplicationSection(ApplicationSection applicationSection)
                      @(ApplicationSectionHistory) : NSLocalizedString(@"History", @"Label to present history"),
                      @(ApplicationSectionNotifications) : NSLocalizedString(@"Notifications", @"Label to present the help page"),
                      @(ApplicationSectionSearch) : NSLocalizedString(@"Search", @"Label to present the search view"),
-                     @(ApplicationSectionShowByDate) : NSLocalizedString(@"Programmes by date", @"Label to present programmes by date"),
+                     @(ApplicationSectionShowByDate) : NSLocalizedString(@"Shows by date", @"Label to present shows (episodes) by date (radio or TV)"),
                      @(ApplicationSectionOverview) : NSLocalizedString(@"Overview", @"Label to present the main Videos / Audios views"),
                      @(ApplicationSectionLive) : NSLocalizedString(@"Livestreams", @"Label to present the Livestreams view"),
-                     @(ApplicationSectionShowAZ) : NSLocalizedString(@"Programmes A-Z", @"Label to present shows A to Z (radio or TV)"),
+                     @(ApplicationSectionShowAZ) : NSLocalizedString(@"Shows A to Z", @"Label to present shows A to Z (radio or TV)"),
                      @(ApplicationSectionWatchLater) : NSLocalizedString(@"Watch later", @"Label to present the watch later list") };
     });
     return s_names[@(applicationSection)];

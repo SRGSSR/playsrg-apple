@@ -34,7 +34,7 @@
 /* More than 3 min option */
 "> 30 min" = "> 30 min";
 
-/* Short title displayed in home page shows section. */
+/* Short title displayed in home pages on a button. */
 "A to Z" = "De A à Z";
 
 /* Button label to add a media to the watch later list, from the media long-press menu
@@ -92,7 +92,7 @@
 /* Title label used to present the soon expiring videos */
 "Available for a limited time" = "Disponible pour un temps limité";
 
-/* Short title displayed in home page shows section. */
+/* Short title displayed in home pages on a button. */
 "By date" = "Par date";
 
 /* Label of the button to close the media long-press menu
@@ -343,9 +343,6 @@
 /* Settings section header */
 "Period" = "Période";
 
-/* Play button label */
-"Play" = "Jouer";
-
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Jouable à l'étranger";
 
@@ -354,12 +351,6 @@
 
 /* Title displayed at the top of the profile view */
 "Profile" = "Profil";
-
-/* Label to present shows A to Z (radio or TV) */
-"Programmes A-Z" = "Émissions de A à Z";
-
-/* Label to present programmes by date */
-"Programmes by date" = "Émissions par date";
 
 /* Settings section header */
 "Properties" = "Propriétés";
@@ -464,6 +455,12 @@
    Title label used to present the radio shows AZ and radio shows by date access buttons
    Title label used to present the TV shows AZ and TV shows by date access buttons */
 "Shows" = "Émissions";
+
+/* Label to present shows A to Z (radio or TV) */
+"Shows A to Z" = "Émissions de A à Z";
+
+/* Label to present shows (episodes) by date (radio or TV) */
+"Shows by date" = "Émissions par date";
 
 /* Title of the button to skip updating the application */
 "Skip" = "Ignorer";

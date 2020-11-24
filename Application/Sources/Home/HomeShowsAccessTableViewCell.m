@@ -65,14 +65,14 @@
     self.showsAtoZButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.showsAtoZButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showsAtoZButton.layer.masksToBounds = YES;
-    [self.showsAtoZButton setTitle:NSLocalizedString(@"A to Z", @"Short title displayed in home page shows section.") forState:UIControlStateNormal];
-    self.showsAtoZButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Programmes A-Z", @"Title displayed in home page shows section.");
+    [self.showsAtoZButton setTitle:NSLocalizedString(@"A to Z", @"Short title displayed in home pages on a button.") forState:UIControlStateNormal];
+    self.showsAtoZButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"A to Z shows", @"Title pronounced in home pages on shows A to Z button.");
     
     self.showsByDateButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
     self.showsByDateButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showsByDateButton.layer.masksToBounds = YES;
-    [self.showsByDateButton setTitle:NSLocalizedString(@"By date", @"Short title displayed in home page shows section.") forState:UIControlStateNormal];
-    self.showsByDateButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Programmes by date", @"Title displayed in home page shows section.");
+    [self.showsByDateButton setTitle:NSLocalizedString(@"By date", @"Short title displayed in home pages on a button.") forState:UIControlStateNormal];
+    self.showsByDateButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Shows by date", @"Title pronounced in home pages on shows by date button.");
 }
 
 - (void)reloadData
