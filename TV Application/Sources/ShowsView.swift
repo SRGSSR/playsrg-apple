@@ -128,6 +128,8 @@ struct ShowsView: View {
             GeometryReader { geometry in
                 Text(String(character))
                     .srgFont(.medium, size: .title)
+                    .foregroundColor(.white)
+                    .opacity(0.8)
                     .lineLimit(1)
             }
         }

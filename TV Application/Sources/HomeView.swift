@@ -86,9 +86,9 @@ struct HomeView: View {
             return Self.swimlaneLayoutSection(for: rowId)
         } cell: { _, item in
             Cell(item: item)
-        } supplementaryView: { kind, indexPath in
+        } supplementaryView: { _, indexPath in
             let rowId = model.rows[indexPath.section].section
-            SupplementaryView(rowId: rowId, kind: kind)
+            HeaderView(rowId: rowId)
         }
         .synchronizeParentTabScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -138,30 +138,27 @@ struct HomeView: View {
         }
     }
     
-    private struct SupplementaryView: View {
+    private struct HeaderView: View {
         let rowId: HomeModel.RowId
-        let kind: String
         
         var body: some View {
-            if kind == UICollectionView.elementKindSectionHeader {
-                VStack(alignment: .leading) {
-                    if let title = rowId.title {
-                        Text(title)
-                            .srgFont(.medium, size: .title)
-                            .lineLimit(1)
-                    }
-                    if let lead = rowId.lead {
-                        Text(lead)
-                            .srgFont(.light, size: .headline)
-                            .lineLimit(1)
-                            .opacity(0.8)
-                        Spacer()
-                            .frame(height: 10)
-                    }
+            VStack(alignment: .leading) {
+                if let title = rowId.title {
+                    Text(title)
+                        .srgFont(.medium, size: .title)
+                        .lineLimit(1)
                 }
-                .opacity(0.8)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                if let lead = rowId.lead {
+                    Text(lead)
+                        .srgFont(.light, size: .headline)
+                        .lineLimit(1)
+                        .opacity(0.8)
+                    Spacer()
+                        .frame(height: 10)
+                }
             }
+            .opacity(0.8)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
         }
     }
 }
