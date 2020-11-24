@@ -114,7 +114,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "8b192cf4122c253585eb931449b5de5ca92fe21c",
+          "revision": "7e27b1c85d38bc9275ba908493b31ea2a3de954e",
           "version": null
         }
       },
@@ -158,9 +158,9 @@
         "package": "SRGLogger",
         "repositoryURL": "https://github.com/SRGSSR/srglogger-apple.git",
         "state": {
-          "branch": "master",
+          "branch": null,
           "revision": "cfc39d1223ed039aeb7df38c6c7570977b22d1aa",
-          "version": null
+          "version": "3.0.0"
         }
       },
       {
@@ -168,7 +168,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "168439edd70bca0d447831f02de2afe63f772b8c",
+          "revision": "571ec3fd1f0494ef07cad1d38729b1c711cee8d8",
           "version": null
         }
       },
