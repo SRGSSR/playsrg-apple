@@ -95,9 +95,9 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "b3cabade8fb87e72b7fd37e1fef59707dbc57ba6",
-          "version": null
+          "branch": null,
+          "revision": "0778abbb37b5d5410fdebce8317e937db53cdbc6",
+          "version": "6.0.0"
         }
       },
       {
@@ -113,9 +113,9 @@
         "package": "SRGContentProtection",
         "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "7e27b1c85d38bc9275ba908493b31ea2a3de954e",
-          "version": null
+          "branch": null,
+          "revision": "596f4161b4460fc648d30d5d3ca2c16f249863ef",
+          "version": "3.0.1"
         }
       },
       {
@@ -149,9 +149,9 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "ae67a9108df103ce01532cf0757e6a3921216a78",
-          "version": null
+          "branch": null,
+          "revision": "fbd233c69993c6b2d31da8302ec2a70db0b6baf6",
+          "version": "6.1.0"
         }
       },
       {
@@ -167,9 +167,9 @@
         "package": "SRGMediaPlayer",
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "571ec3fd1f0494ef07cad1d38729b1c711cee8d8",
-          "version": null
+          "branch": null,
+          "revision": "a0f192296817d471fbe48dc8623ab851a9266369",
+          "version": "6.1.0"
         }
       },
       {
