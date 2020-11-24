@@ -22,9 +22,9 @@ struct MediaDescription {
         guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
         switch days {
         case 0:
-            return DurationFormatters.hours(for: to.timeIntervalSince(from))
+            return PlayFormattedHours(to.timeIntervalSince(from))
         case 1...30:
-            return DurationFormatters.days(for: to.timeIntervalSince(from))
+            return PlayFormattedDays(to.timeIntervalSince(from))
         default:
             return nil
         }
@@ -51,10 +51,10 @@ struct MediaDescription {
                 return media.title
             }
             else {
-                return DateFormatters.formattedRelativeDateAndTime(for: media.date).capitalizedFirstLetter
+                return DateFormatter.play_relativeDateAndTime.string(from: media.date).capitalizedFirstLetter
             }
         case .date:
-            return DateFormatters.formattedRelativeDateAndTime(for: media.date).capitalizedFirstLetter
+            return DateFormatter.play_relativeDateAndTime.string(from: media.date).capitalizedFirstLetter
         }
     }
     
@@ -66,8 +66,7 @@ struct MediaDescription {
     static func availability(for media: SRGMedia?) -> String? {
         guard let media = media else { return placeholder(length: 25) }
         let now = Date()
-        let availability = media.timeAvailability(at: now)
-        switch availability {
+        switch media.timeAvailability(at: now) {
         case .notAvailableAnymore:
             let endDate = (media.endDate != nil) ? media.endDate! : media.date.addingTimeInterval(media.duration / 1000)
             guard let expiringDays = Self.formattedDuration(from: now, to: endDate) else { return nil }

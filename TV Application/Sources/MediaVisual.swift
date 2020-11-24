@@ -30,9 +30,9 @@ struct MediaVisual: View {
         guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
         switch days {
         case 0:
-            return DurationFormatters.shortHours(for: to.timeIntervalSince(from))
+            return PlayShortFormattedHours(to.timeIntervalSince(from))
         case 1...3:
-            return DurationFormatters.shortDays(for: to.timeIntervalSince(from))
+            return PlayShortFormattedDays(to.timeIntervalSince(from))
         default:
             return nil
         }
@@ -64,8 +64,6 @@ struct MediaVisual: View {
     var body: some View {
         ZStack {
             ImageView(url: imageUrl, contentMode: contentMode)
-                .whenRedacted { $0.hidden() }
-            
             BlockingOverlay(media: media)
             
             HStack(spacing: 4) {
@@ -92,26 +90,6 @@ struct MediaVisual: View {
             }
             .padding([.leading, .top], 8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        }
-    }
-    
-    private struct BlockingOverlay: View {
-        let media: SRGMedia?
-        
-        private var blockingIconImage: UIImage? {
-            guard let blockingReason = media?.blockingReason(at: Date()) else { return nil }
-            return UIImage.play_image(for: blockingReason)
-        }
-        
-        var body: some View {
-            if let blockingIconImage = blockingIconImage {
-                ZStack {
-                    Rectangle()
-                        .fill(Color(white: 0, opacity: 0.6))
-                    Image(uiImage: blockingIconImage)
-                        .foregroundColor(.white)
-                }
-            }
         }
     }
 }

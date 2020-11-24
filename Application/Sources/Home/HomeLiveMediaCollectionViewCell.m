@@ -26,31 +26,6 @@
 @import SRGAnalytics;
 @import SRGAppearance;
 
-static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
-{
-    if (duration >= 60. * 60.) {
-        static NSDateComponentsFormatter *s_dateComponentsFormatter;
-        static dispatch_once_t s_onceToken;
-        dispatch_once(&s_onceToken, ^{
-            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
-            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitHour;
-            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
-        });
-        return [s_dateComponentsFormatter stringFromTimeInterval:duration];
-    }
-    else {
-        static NSDateComponentsFormatter *s_dateComponentsFormatter;
-        static dispatch_once_t s_onceToken;
-        dispatch_once(&s_onceToken, ^{
-            s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
-            s_dateComponentsFormatter.allowedUnits = NSCalendarUnitMinute;
-            s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
-        });
-        // Minimum is 1 minute
-        return [s_dateComponentsFormatter stringFromTimeInterval:fmax(60., duration)];
-    }
-}
-
 @interface HomeLiveMediaCollectionViewCell ()
 
 @property (nonatomic) SRGProgramComposition *programComposition;
@@ -73,7 +48,7 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topSpaceConstraint;
 @property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *horizontalSpaceConstraints;
 
-@property (nonatomic, weak) id channelRegistration;
+@property (nonatomic, weak) id channelObserver;
 
 @end
 
@@ -220,8 +195,8 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
         return;
     }
     
-    [ChannelService.sharedService removeObserver:self.channelRegistration];
-    self.channelRegistration = [ChannelService.sharedService addObserver:self forUpdatesWithChannel:media.channel livestreamUid:media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
+    [ChannelService.sharedService removeObserver:self.channelObserver];
+    self.channelObserver = [ChannelService.sharedService addObserverForUpdatesWithChannel:media.channel livestreamUid:media.uid block:^(SRGProgramComposition * _Nullable programComposition) {
         self.programComposition = programComposition;
         [self reloadData];
     }];
@@ -229,7 +204,7 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
 
 - (void)unregisterChannelUpdates
 {
-    [ChannelService.sharedService removeObserver:self.channelRegistration];
+    [ChannelService.sharedService removeObserver:self.channelObserver];
 }
 
 #pragma mark UI
@@ -271,7 +246,7 @@ static NSString *RemainingTimeFormattedDuration(NSTimeInterval duration)
             self.titleLabel.text = currentProgram.title;
             
             NSTimeInterval remainingTimeInterval = [currentProgram.endDate timeIntervalSinceDate:NSDate.date];
-            self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ remaining", "Text displayed on live cells telling how much time remains for a program currently on air"), RemainingTimeFormattedDuration(remainingTimeInterval)];
+            self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ remaining", "Text displayed on live cells telling how much time remains for a program currently on air"), PlayRemainingTimeFormattedDuration(remainingTimeInterval)];
             
             float progress = [NSDate.date timeIntervalSinceDate:currentProgram.startDate] / ([currentProgram.endDate timeIntervalSinceDate:currentProgram.startDate]);
             self.progressView.progress = fmaxf(fminf(progress, 1.f), 0.f);

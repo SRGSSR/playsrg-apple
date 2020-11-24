@@ -48,6 +48,7 @@ struct MediaCell: View {
                 
                 DescriptionView(media: media, style: style)
                     .frame(width: geometry.size.width, alignment: .leading)
+                    .animation(nil)
                     .opacity(isFocused ? 1 : 0.5)
                     .offset(x: 0, y: isFocused ? 10 : 0)
                     .scaleEffect(isFocused ? 1.1 : 1, anchor: .top)
@@ -62,12 +63,14 @@ struct MediaCell: View {
         let style: MediaDescription.Style
         
         var body: some View {
-            Text(MediaDescription.title(for: media, style: style))
-                .srgFont(.medium, size: .subtitle)
-                .lineLimit(2)
-            Text(MediaDescription.subtitle(for: media, style: style))
-                .srgFont(.light, size: .subtitle)
-                .lineLimit(2)
+            VStack(alignment: .leading) {
+                Text(MediaDescription.title(for: media, style: style))
+                    .srgFont(.medium, size: .subtitle)
+                    .lineLimit(2)
+                Text(MediaDescription.subtitle(for: media, style: style))
+                    .srgFont(.light, size: .subtitle)
+                    .lineLimit(2)
+            }
         }
     }
 }

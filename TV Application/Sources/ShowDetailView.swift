@@ -172,6 +172,7 @@ struct ShowDetailView: View {
                         Text(NSLocalizedString("Available episodes", comment: "Title of the show episode list header"))
                             .srgFont(.medium, size: .title)
                             .foregroundColor(.white)
+                            .opacity(0.8)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }

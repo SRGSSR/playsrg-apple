@@ -8,7 +8,12 @@
 // Objective-C headers will be automatically exposed to all Swift source files.
 
 #import "ApplicationConfiguration.h"
+#import "ChannelService.h"
+#import "NSDateFormatter+PlaySRG.h"
+#import "PlayDurationFormatter.h"
+#import "SRGChannel+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
+#import "SRGProgramComposition+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIView+PlaySRG.h"

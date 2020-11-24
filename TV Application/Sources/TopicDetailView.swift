@@ -121,6 +121,7 @@ struct TopicDetailView: View {
             Text(topic.title)
                 .srgFont(.medium, size: .title)
                 .foregroundColor(.white)
+                .opacity(0.8)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }

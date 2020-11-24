@@ -180,6 +180,10 @@ extension HomeModel {
         case tvLiveCenter
         case tvScheduledLivestreams
         
+        static var liveIds: [RowId] {
+            return [.tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams]
+        }
+        
         func publisher() -> AnyPublisher<[RowItem], Error>? {
             let dataProvider = SRGDataProvider.current!
             let configuration = ApplicationConfiguration.shared
