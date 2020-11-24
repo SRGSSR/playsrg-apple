@@ -169,7 +169,7 @@ struct ShowDetailView: View {
                     VStack {
                         VisualView(show: show)
                         Spacer()
-                        Text(NSLocalizedString("Available episodes", comment: "Title of the show episode list header"))
+                        Text(NSLocalizedString("Available episodes", comment: "Title of the episode list header in show detail view"))
                             .srgFont(.medium, size: .title)
                             .foregroundColor(.white)
                             .opacity(0.8)

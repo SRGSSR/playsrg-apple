@@ -50,8 +50,8 @@ struct MediaVisual: View {
             return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), Color(.play_gray))
         case .available:
             guard let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream else { return nil }
-            if let remainingDays = Self.formattedDuration(from: now, to: endDate) {
-                return (NSLocalizedString("\(remainingDays) left", comment: "Short label displayed on medias expiring soon"), Color(.play_orange))
+            if let remainingTime = Self.formattedDuration(from: now, to: endDate) {
+                return (String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime), Color(.play_orange))
             }
             else {
                 return nil
