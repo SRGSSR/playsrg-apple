@@ -944,6 +944,7 @@
 		6F58664C1DD226EE005DAFE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5866491DD226EE005DAFE4 /* Settings.bundle */; };
 		6F58664D1DD226EE005DAFE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5866491DD226EE005DAFE4 /* Settings.bundle */; };
 		6F58664E1DD226EE005DAFE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5866491DD226EE005DAFE4 /* Settings.bundle */; };
+		6F5A7914256ED7E000E884F2 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F5AA59725024C4800718420 /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
 		6F5AA59825024C4900718420 /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
 		6F5AA59925024C4900718420 /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
@@ -8011,6 +8012,7 @@
 				6FF12AA6256C58FE0042F446 /* Logger.swift in Sources */,
 				6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B2C2567FC7200DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
+				6F5A7914256ED7E000E884F2 /* History.m in Sources */,
 				6FA14539254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				6FC413F324EEEDCB00FDF806 /* TopicSection.m in Sources */,
 				6FC413FB24EF0DEE00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
