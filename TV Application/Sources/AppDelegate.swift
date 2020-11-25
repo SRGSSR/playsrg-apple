@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let showsViewController = UIHostingController(rootView: ShowsView())
-        showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Programmes A-Z", comment: "Shows tab title displaying TV AZ shows"), image: nil, tag: 3)
+        showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows A-Z", comment: "Shows A-Z tab title"), image: nil, tag: 3)
         viewControllers.append(showsViewController)
         
         #if DEBUG

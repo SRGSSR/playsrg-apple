@@ -16,6 +16,9 @@
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ is idle.";
 
+/* Short label displayed on a media expiring soon */
+"%@ left" = "%@ left";
+
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ listenings";
 
@@ -34,7 +37,7 @@
 /* More than 3 min option */
 "> 30 min" = "> 30 min";
 
-/* Short title displayed in home page shows section. */
+/* Short title displayed in home pages on a button. */
 "A to Z" = "A to Z";
 
 /* Button label to add a media to the watch later list, from the media long-press menu
@@ -78,6 +81,7 @@
 "Are you sure you want to delete the selected items?" = "Are you sure you want to delete the selected items?";
 
 /* Audios option
+   Audios tab title
    Header for audio search results
    Title displayed at the top of the audio view */
 "Audios" = "Audios";
@@ -89,10 +93,13 @@
 /* Message description displayed when the user could not be subscribed to all TV and radio shows */
 "Automatic subscriptions failed. Please retry." = "Automatic subscriptions failed. Please retry.";
 
+/* Title of the episode list header in show detail view */
+"Available episodes" = "Available videos";
+
 /* Title label used to present the soon expiring videos */
 "Available for a limited time" = "Available for a limited time";
 
-/* Short title displayed in home page shows section. */
+/* Short title displayed in home pages on a button. */
 "By date" = "By date";
 
 /* Label of the button to close the media long-press menu
@@ -165,6 +172,9 @@
 /* Short label identifying content which has expired. */
 "Expired" = "Expired";
 
+/* Show favorite button label */
+"Favorite" = "Favorite";
+
 /* Favorite show label when added ,in the show view
    Label to present Favorites
    Title label used to present the radio favorite shows
@@ -184,7 +194,8 @@
 /* Total free space size, display at the bottom of download list */
 "Free space: %@" = "Free space: %@";
 
-/* Title label used to present TV event modules while loading. It appears if no network connection is available and no cache is available */
+/* Title label used to present TV event modules while loading. It appears if no network connection is available and no cache is available
+   Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
 "Highlights" = "Highlights";
 
 /* Label to present history */
@@ -205,7 +216,8 @@
 /* Period setting option */
 "Last week" = "Last week";
 
-/* Label for the button for deciding to opt-in for background video playback at a later time */
+/* Label for the button for deciding to opt-in for background video playback at a later time
+   Watch or listen later button label in media detail view */
 "Later" = "Later";
 
 /* Title label used to present the latest videos
@@ -218,6 +230,9 @@
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
 "less than 1 hour" = "less than 1 hour";
 
+/* Play button label for audio in media detail view */
+"Listen" = "Listen";
+
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
    User activity title when listening to an audio */
@@ -228,6 +243,7 @@
 "Live" = "Live";
 
 /* Label to present the Livestreams view
+   Livestreams tab title
    Title displayed at the top of the livestream view */
 "Livestreams" = "Live";
 
@@ -343,23 +359,15 @@
 /* Settings section header */
 "Period" = "Period";
 
-/* Play button label */
-"Play" = "Play";
-
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Playable abroad";
 
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Previous";
 
-/* Title displayed at the top of the profile view */
+/* Profile tab title
+   Title displayed at the top of the profile view */
 "Profile" = "Profile";
-
-/* Label to present shows A to Z (radio or TV) */
-"Programmes A-Z" = "Programmes A-Z";
-
-/* Label to present programmes by date */
-"Programmes by date" = "Programmes by date";
 
 /* Settings section header */
 "Properties" = "Properties";
@@ -381,6 +389,9 @@
 
 /* Title of the action view to choose a regional radio */
 "Regional radios" = "Regional radios";
+
+/* Related content media list title */
+"Related content" = "Related content";
 
 /* Sort by relevance option */
 "Relevance" = "Relevance";
@@ -429,6 +440,7 @@
 
 /* Label to present the search view
    Search placeholder text
+   Search tab title
    Title displayed when there is no search criterium entered */
 "Search" = "Search";
 
@@ -453,6 +465,9 @@
    Title of the action view to choose a sharing action */
 "Share" = "Share";
 
+/* Show (program) button label in media detail view */
+"Show" = "Topic";
+
 /* Show more button label when a link is available for broadcast information. */
 "Show more" = "Show more";
 
@@ -463,7 +478,16 @@
    Title label used to present radio associated shows
    Title label used to present the radio shows AZ and radio shows by date access buttons
    Title label used to present the TV shows AZ and TV shows by date access buttons */
-"Shows" = "Shows";
+"Shows" = "Topics";
+
+/* Label to present shows A to Z (radio or TV) */
+"Shows A to Z" = "Topics A to Z";
+
+/* Shows A-Z tab title */
+"Shows A-Z" = "Topics A-Z";
+
+/* Label to present shows (episodes) by date (radio or TV) */
+"Shows by date" = "Topics by date";
 
 /* Title of the button to skip updating the application */
 "Skip" = "Skip";
@@ -507,6 +531,9 @@
 /* Message displayed when some content (media, show, etc.) has been copied to the clipboard
    Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "The content has been copied to the clipboard.";
+
+/* Error message returned for invalid data */
+"The data is invalid" = "The data is invalid";
 
 /* Button label to share the entire episode being played. */
 "The entire episode" = "The entire video";
@@ -582,11 +609,15 @@
 
 /* Header for video search results
    Title displayed at the top of the video view
-   Videos option */
+   Videos option
+   Videos tab title */
 "Videos" = "Videos";
 
 /* Header for video and audio search results */
 "Videos and audios" = "Videos and audios";
+
+/* Play button label for video in media detail view */
+"Watch" = "Watch";
 
 /* Suggested invocation phrase to watch a show
    Suggested invocation phrase to watch a video
@@ -596,7 +627,8 @@
 /* Label to present the watch later list */
 "Watch later" = "Watch later";
 
-/* Web first label on media cells */
+/* Web first label on media cells
+   Web first label on media detail page */
 "Web first" = "Web first";
 
 /* Title displayed at the top of the What's new view */

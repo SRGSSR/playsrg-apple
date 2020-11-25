@@ -142,7 +142,7 @@ struct LiveMediaCell: View, LiveMediaData {
             guard let currentProgram = program(at: date) else { return nil }
             let remainingTimeInterval = currentProgram.endDate.timeIntervalSince(date)
             let remainingTime = PlayRemainingTimeFormattedDuration(remainingTimeInterval)
-            return NSLocalizedString("\(remainingTime) remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air")
+            return String(format: NSLocalizedString("%@ remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air"), remainingTime)
         }
         
         var body: some View {
