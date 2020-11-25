@@ -95,10 +95,7 @@ struct LiveMediaCell: View, LiveMediaData {
         
         private var logoImage: UIImage? {
             if let channel = channel {
-                return channel.play_logo32Image
-            }
-            else if let media = media {
-                return media.mediaType == .audio ? RadioChannelLogo32Image(nil) : TVChannelLogo32Image(nil)
+                return channel.play_logo60Image
             }
             else {
                 return nil

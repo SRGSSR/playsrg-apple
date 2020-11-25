@@ -23,3 +23,8 @@ UIImage *TVChannelLogo32Image(TVChannel *tvChannel)
 {
     return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-32", tvChannel.resourceUid]] ?: [UIImage imageNamed:@"tv-32"];
 }
+
+UIImage *TVChannelLogo60Image(TVChannel *tvChannel)
+{
+    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-60", tvChannel.resourceUid]];
+}
