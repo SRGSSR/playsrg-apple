@@ -8,6 +8,7 @@ import Firebase
 import SRGAnalytics
 import SRGAppearance
 import SRGDataProviderCombine
+import SRGUserData
 import SwiftUI
 import UIKit
 
@@ -91,6 +92,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         
         let configuration = ApplicationConfiguration.shared
+        
+        let cachesDirectoryUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!)
+        let storeFileUrl = cachesDirectoryUrl.appendingPathComponent("PlayData.sqlite")
+        SRGUserData.current = SRGUserData(storeFileURL: storeFileUrl, serviceURL: configuration.userDataServiceURL, identityService: nil)
+        
         let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
                                                                container: configuration.analyticsContainer,
                                                                siteName: configuration.comScoreVirtualSite,
