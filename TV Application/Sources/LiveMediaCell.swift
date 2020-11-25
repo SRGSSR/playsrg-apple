@@ -23,10 +23,9 @@ extension LiveMediaData {
 struct LiveMediaCell: View, LiveMediaData {
     let media: SRGMedia?
     
-    @State var channelObserver: Any?
     @State var programComposition: SRGProgramComposition?
-    @State var date = Date()
-    
+    @State private var channelObserver: Any?
+    @State private var date = Date()
     @State private var isFocused: Bool = false
     
     private var imageUrl: URL? {
