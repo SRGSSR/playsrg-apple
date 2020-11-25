@@ -6,8 +6,10 @@
 
 import SwiftUI
 
-struct TopicDetailView: View {
-    @ObservedObject var model: TopicDetailModel
+// TODO: We could have a generic media grid view displaying a model (we need a protocol to define what
+//       this is). Then TopicDetailView and HistoryView will be replaced with this view.
+struct HistoryView: View {
+    @ObservedObject var model = HistoryModel()
     
     enum Section: Hashable {
         case medias
@@ -21,10 +23,6 @@ struct TopicDetailView: View {
     }
     
     typealias Row = CollectionRow<Section, Content>
-    
-    init(topic: SRGTopic) {
-        model = TopicDetailModel(topic: topic)
-    }
     
     private var rows: [Row] {
         switch model.state {
@@ -97,7 +95,7 @@ struct TopicDetailView: View {
                     }
             }
         } supplementaryView: { _, _ in
-            HeaderView(title: model.topic.title)
+            HeaderView(title: "History (WIP)")
                 .padding([.leading, .trailing], 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

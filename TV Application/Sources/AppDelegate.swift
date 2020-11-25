@@ -69,6 +69,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let profileViewController = UIHostingController(rootView: ProfileView())
         profileViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Profile", comment: "Profile tab title"), image: nil, tag: 4)
         viewControllers.append(profileViewController)
+        
+        let historyViewController = UIHostingController(rootView: HistoryView())
+        historyViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("History", comment: "Profile tab title"), image: nil, tag: 4)
+        viewControllers.append(historyViewController)
         #endif
         
         if viewControllers.count > 1 {
