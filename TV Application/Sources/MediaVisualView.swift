@@ -4,12 +4,16 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGUserData
 import SwiftUI
 
 struct MediaVisualView: View {
     let media: SRGMedia?
     let scale: ImageScale
     let contentMode: ContentMode
+    
+    @State private var progress: Double = 0
+    @State private var taskHandle: String? = nil
     
     init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode = .fit) {
         self.media = media
@@ -61,6 +65,11 @@ struct MediaVisualView: View {
         }
     }
     
+    private func updateProgress() {
+        HistoryPlaybackProgressAsyncCancel(taskHandle)
+        taskHandle = HistoryPlaybackProgressForMediaMetadataAsync(media, { progress = Double($0) })
+    }
+    
     var body: some View {
         ZStack {
             ImageView(url: imageUrl, contentMode: contentMode)
@@ -80,6 +89,14 @@ struct MediaVisualView: View {
             .padding([.leading, .trailing, .bottom], 8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             
+            if let progress = progress {
+                ProgressBar(value: progress)
+                    .opacity(progress != 0 ? 1 : 0)
+                    .accentColor(Color(UIColor.play_progressRed))
+                    .frame(height: 5)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            }
+            
             Group {
                 if let isWebFirst = media?.play_isWebFirst, isWebFirst {
                     Badge(text: NSLocalizedString("Web first", comment: "Web first label on media cells"), color: Color(.srg_blue))
@@ -90,6 +107,16 @@ struct MediaVisualView: View {
             }
             .padding([.leading, .top], 8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
+        .onAppear {
+            updateProgress()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange)) { notification in
+            if let updatedUrns = notification.userInfo?[SRGHistoryEntriesUidsKey] as? Set<String>,
+               let media = media,
+               updatedUrns.contains(media.urn) {
+                updateProgress()
+            }
         }
     }
 }
