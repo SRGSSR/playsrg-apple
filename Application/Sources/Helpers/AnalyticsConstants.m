@@ -5,7 +5,6 @@
 //
 
 #import "AnalyticsConstants.h"
-#import "NSBundle+PlaySRG.h"
 
 // See reference specifications at https://confluence.srg.beecollaboration.com/display/SRGPLAY/Play+SRG+simplified+page+view+analytics
 
