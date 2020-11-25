@@ -93,6 +93,27 @@ struct HomeView: View {
         .synchronizeParentTabScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
+        .onAppear {
+            SRGAnalyticsTracker.shared.trackPageView(title: analyticsPageTitle(), levels: analyticsPageLevels())
+        }
+        .onResume {
+            SRGAnalyticsTracker.shared.trackPageView(title: analyticsPageTitle(), levels: analyticsPageLevels())
+        }
+    }
+    
+    private func analyticsPageTitle() -> String {
+        return AnalyticsPageTitle.home.rawValue
+    }
+    
+    private func analyticsPageLevels() -> [String] {
+        switch self.model.id {
+        case .video:
+            return [ AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.video.rawValue ]
+        case let .audio(channel):
+            return [ AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name ]
+        case .live:
+            return [ AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.live.rawValue ]
+        }
     }
     
     private struct Cell: View {

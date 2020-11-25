@@ -112,13 +112,23 @@ struct ShowsView: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             model.refresh()
+            SRGAnalyticsTracker.shared.trackPageView(title: analyticsPageTitle(), levels: analyticsPageLevels())
         }
         .onDisappear {
             model.cancelRefresh()
         }
         .onResume {
             model.refresh()
+            SRGAnalyticsTracker.shared.trackPageView(title: analyticsPageTitle(), levels: analyticsPageLevels())
         }
+    }
+    
+    private func analyticsPageTitle() -> String {
+        return AnalyticsPageTitle.showsAZ.rawValue
+    }
+    
+    private func analyticsPageLevels() -> [String] {
+        return [ AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.video.rawValue ]
     }
     
     private struct HeaderView: View {

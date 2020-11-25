@@ -105,13 +105,23 @@ struct TopicDetailView: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             model.refresh()
+            SRGAnalyticsTracker.shared.trackPageView(title: analyticsPageTitle(), levels: analyticsPageLevels())
         }
         .onDisappear {
             model.cancelRefresh()
         }
         .onResume {
             model.refresh()
+            SRGAnalyticsTracker.shared.trackPageView(title: analyticsPageTitle(), levels: analyticsPageLevels())
         }
+    }
+    
+    private func analyticsPageTitle() -> String {
+        return AnalyticsPageTitle.latest.rawValue
+    }
+    
+    private func analyticsPageLevels() -> [String] {
+        return [ AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.video.rawValue, self.model.topic.title ]
     }
     
     private struct HeaderView: View {
