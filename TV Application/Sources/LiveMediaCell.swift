@@ -28,34 +28,6 @@ struct LiveMediaCell: View, LiveMediaData {
     @State private var date = Date()
     @State private var isFocused: Bool = false
     
-    private var imageUrl: URL? {
-        let width = SizeForImageScale(.small).width
-        if let channel = channel {
-            return program(at: date)?.imageURL(for: .width, withValue: width, type: .default) ?? channel.imageURL(for: .width, withValue: width, type: .default)
-        }
-        else {
-            return media?.imageURL(for: .width, withValue: width, type: .default)
-        }
-    }
-    
-    private var logoImage: UIImage? {
-        if let channel = channel {
-            return channel.play_logo32Image
-        }
-        else if let media = media {
-            return media.mediaType == .audio ? RadioChannelLogo32Image(nil) : TVChannelLogo32Image(nil)
-        }
-        else {
-            return nil
-        }
-    }
-    
-    private var progress: Double? {
-        guard channel != nil else { return nil }
-        guard let currentProgram = program(at: date) else { return 1 }
-        return date.timeIntervalSince(currentProgram.startDate) / currentProgram.endDate.timeIntervalSince(currentProgram.startDate)
-    }
-    
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -82,26 +54,9 @@ struct LiveMediaCell: View, LiveMediaData {
                         navigateToMedia(media)
                     }
                 }) {
-                    ZStack {
-                        ImageView(url: imageUrl)
-                        Rectangle()
-                            .fill(Color(white: 0, opacity: 0.6))
-                            .whenRedacted { $0.hidden() }
-                        if let logoImage = logoImage {
-                            Image(uiImage: logoImage)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                                .padding()
-                        }
-                        if let progress = progress {
-                            ProgressBar(value: progress)
-                                .accentColor(Color(UIColor.play_progressRed))
-                                .frame(height: 4)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                        }
-                        BlockingOverlay(media: media)
-                    }
-                    .onFocusChange { isFocused = $0 }
-                    .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                    VisualView(media: media, programComposition: programComposition, date: date)
+                        .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                        .onFocusChange { isFocused = $0 }
                 }
                 .buttonStyle(CardButtonStyle())
                 
@@ -120,6 +75,61 @@ struct LiveMediaCell: View, LiveMediaData {
         }
         .onDisappear {
             unregisterChannelUpdates()
+        }
+    }
+    
+    private struct VisualView: View, LiveMediaData {
+        let media: SRGMedia?
+        let programComposition: SRGProgramComposition?
+        let date: Date
+        
+        private var imageUrl: URL? {
+            let width = SizeForImageScale(.small).width
+            if let channel = channel {
+                return program(at: date)?.imageURL(for: .width, withValue: width, type: .default) ?? channel.imageURL(for: .width, withValue: width, type: .default)
+            }
+            else {
+                return media?.imageURL(for: .width, withValue: width, type: .default)
+            }
+        }
+        
+        private var logoImage: UIImage? {
+            if let channel = channel {
+                return channel.play_logo32Image
+            }
+            else if let media = media {
+                return media.mediaType == .audio ? RadioChannelLogo32Image(nil) : TVChannelLogo32Image(nil)
+            }
+            else {
+                return nil
+            }
+        }
+        
+        private var progress: Double? {
+            guard channel != nil else { return nil }
+            guard let currentProgram = program(at: date) else { return 1 }
+            return date.timeIntervalSince(currentProgram.startDate) / currentProgram.endDate.timeIntervalSince(currentProgram.startDate)
+        }
+        
+        var body: some View {
+            ZStack {
+                ImageView(url: imageUrl)
+                Rectangle()
+                    .fill(Color(white: 0, opacity: 0.6))
+                    .whenRedacted { $0.hidden() }
+                if let logoImage = logoImage {
+                    Image(uiImage: logoImage)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .padding()
+                }
+                if let progress = progress {
+                    ProgressBar(value: progress)
+                        .accentColor(Color(UIColor.play_progressRed))
+                        .frame(height: 4)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                }
+                BlockingOverlay(media: media)
+            }
         }
     }
     

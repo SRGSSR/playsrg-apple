@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct MediaVisual: View {
+struct MediaVisualView: View {
     let media: SRGMedia?
     let scale: ImageScale
     let contentMode: ContentMode

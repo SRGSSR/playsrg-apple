@@ -702,11 +702,11 @@
 		6F3F1AB6250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
 		6F3F1AB7250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
 		6F3F1AB8250286DD000FF4DD /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
-		6F3F1ABA25060496000FF4DD /* MediaVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F1AB925060496000FF4DD /* MediaVisual.swift */; };
-		6F3F1ABB25060496000FF4DD /* MediaVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F1AB925060496000FF4DD /* MediaVisual.swift */; };
-		6F3F1ABC25060496000FF4DD /* MediaVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F1AB925060496000FF4DD /* MediaVisual.swift */; };
-		6F3F1ABD25060496000FF4DD /* MediaVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F1AB925060496000FF4DD /* MediaVisual.swift */; };
-		6F3F1ABE25060496000FF4DD /* MediaVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F1AB925060496000FF4DD /* MediaVisual.swift */; };
+		6F3F1ABA25060496000FF4DD /* MediaVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F1AB925060496000FF4DD /* MediaVisualView.swift */; };
+		6F3F1ABB25060496000FF4DD /* MediaVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F1AB925060496000FF4DD /* MediaVisualView.swift */; };
+		6F3F1ABC25060496000FF4DD /* MediaVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F1AB925060496000FF4DD /* MediaVisualView.swift */; };
+		6F3F1ABD25060496000FF4DD /* MediaVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F1AB925060496000FF4DD /* MediaVisualView.swift */; };
+		6F3F1ABE25060496000FF4DD /* MediaVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F1AB925060496000FF4DD /* MediaVisualView.swift */; };
 		6F40920022DCF43D005F3850 /* Previewing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4091FF22DCF43D005F3850 /* Previewing.m */; };
 		6F40920122DCF43D005F3850 /* Previewing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4091FF22DCF43D005F3850 /* Previewing.m */; };
 		6F40920222DCF43D005F3850 /* Previewing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4091FF22DCF43D005F3850 /* Previewing.m */; };
@@ -2108,7 +2108,7 @@
 		6F3E09FF23D055DD009B00C1 /* SettingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingTableViewCell.h; sourceTree = "<group>"; };
 		6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewCell.m; sourceTree = "<group>"; };
 		6F3E6A9224978FC8004B26D6 /* MediaPlayerViewController+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MediaPlayerViewController+Private.h"; sourceTree = "<group>"; };
-		6F3F1AB925060496000FF4DD /* MediaVisual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaVisual.swift; sourceTree = "<group>"; };
+		6F3F1AB925060496000FF4DD /* MediaVisualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaVisualView.swift; sourceTree = "<group>"; };
 		6F4091FF22DCF43D005F3850 /* Previewing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Previewing.m; sourceTree = "<group>"; };
 		6F40920522DCFE2A005F3850 /* MostSearchedShowCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MostSearchedShowCollectionViewCell.h; sourceTree = "<group>"; };
 		6F40920622DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MostSearchedShowCollectionViewCell.m; sourceTree = "<group>"; };
@@ -3554,7 +3554,7 @@
 				6FF8F155250609CF009A741F /* MediaDescription.swift */,
 				6FFFB9B6252CA310004E40AE /* MediaDetailModel.swift */,
 				086499B124F69FF20027373E /* MediaDetailView.swift */,
-				6F3F1AB925060496000FF4DD /* MediaVisual.swift */,
+				6F3F1AB925060496000FF4DD /* MediaVisualView.swift */,
 				6F5E63A4250CB32E00056160 /* Modifiers.swift */,
 				0805703D2540E0FC00A59C9D /* Navigation.swift */,
 				6FC4140124EF11F400FDF806 /* Play-TV-ObjectiveC-Bridge.h */,
@@ -7744,7 +7744,7 @@
 				6FC413D624EEEDC900FDF806 /* Channel.m in Sources */,
 				08FD789D253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
 				6FC413CF24EEEDC900FDF806 /* TVChannel.m in Sources */,
-				6F3F1ABA25060496000FF4DD /* MediaVisual.swift in Sources */,
+				6F3F1ABA25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6F4F78AF252AF7670011DBCA /* DurationLabel.swift in Sources */,
 				6F298860255ADDCD007A8E2B /* Errors.swift in Sources */,
 			);
@@ -7817,7 +7817,7 @@
 				6FC413DE24EEEDC900FDF806 /* Channel.m in Sources */,
 				08FD789E253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
 				6FC413D724EEEDC900FDF806 /* TVChannel.m in Sources */,
-				6F3F1ABB25060496000FF4DD /* MediaVisual.swift in Sources */,
+				6F3F1ABB25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6F4F78B0252AF7670011DBCA /* DurationLabel.swift in Sources */,
 				6F298861255ADDCD007A8E2B /* Errors.swift in Sources */,
 			);
@@ -7890,7 +7890,7 @@
 				6FC413E624EEEDCA00FDF806 /* Channel.m in Sources */,
 				08FD789F253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
 				6FC413DF24EEEDCA00FDF806 /* TVChannel.m in Sources */,
-				6F3F1ABC25060496000FF4DD /* MediaVisual.swift in Sources */,
+				6F3F1ABC25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6F4F78B1252AF7670011DBCA /* DurationLabel.swift in Sources */,
 				6F298862255ADDCD007A8E2B /* Errors.swift in Sources */,
 			);
@@ -7963,7 +7963,7 @@
 				6FC413EE24EEEDCA00FDF806 /* Channel.m in Sources */,
 				08FD78A0253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
 				6FC413E724EEEDCA00FDF806 /* TVChannel.m in Sources */,
-				6F3F1ABD25060496000FF4DD /* MediaVisual.swift in Sources */,
+				6F3F1ABD25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6F4F78B2252AF7670011DBCA /* DurationLabel.swift in Sources */,
 				6F298863255ADDCD007A8E2B /* Errors.swift in Sources */,
 			);
@@ -8035,7 +8035,7 @@
 				6FC413F624EEEDCB00FDF806 /* Channel.m in Sources */,
 				08FD78A1253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
 				6FC413EF24EEEDCB00FDF806 /* TVChannel.m in Sources */,
-				6F3F1ABE25060496000FF4DD /* MediaVisual.swift in Sources */,
+				6F3F1ABE25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6F4F78B3252AF7670011DBCA /* DurationLabel.swift in Sources */,
 				6F298864255ADDCD007A8E2B /* Errors.swift in Sources */,
 			);
