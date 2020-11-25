@@ -149,9 +149,9 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": null,
-          "revision": "fbd233c69993c6b2d31da8302ec2a70db0b6baf6",
-          "version": "6.1.0"
+          "branch": "feature/info-panel",
+          "revision": "905fba735470b3d64ecfd472b388a10b86bb2a5b",
+          "version": null
         }
       },
       {
