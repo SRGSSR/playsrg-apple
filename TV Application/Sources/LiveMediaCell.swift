@@ -48,7 +48,7 @@ struct LiveMediaCell: View, LiveMediaData {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack {
+            VStack(spacing: 10) {
                 Button(action: {
                     if let media = media {
                         navigateToMedia(media)
@@ -102,12 +102,6 @@ struct LiveMediaCell: View, LiveMediaData {
             }
         }
         
-        private var progress: Double? {
-            guard channel != nil else { return nil }
-            guard let currentProgram = program(at: date) else { return 1 }
-            return date.timeIntervalSince(currentProgram.startDate) / currentProgram.endDate.timeIntervalSince(currentProgram.startDate)
-        }
-        
         var body: some View {
             ZStack {
                 ImageView(url: imageUrl)
@@ -118,12 +112,6 @@ struct LiveMediaCell: View, LiveMediaData {
                     Image(uiImage: logoImage)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .padding()
-                }
-                if let progress = progress {
-                    ProgressBar(value: progress)
-                        .accentColor(Color(UIColor.play_progressRed))
-                        .frame(height: 5)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 }
                 BlockingOverlay(media: media)
             }
@@ -151,8 +139,19 @@ struct LiveMediaCell: View, LiveMediaData {
             return String(format: NSLocalizedString("%@ remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air"), remainingTime)
         }
         
+        private var progress: Double? {
+            guard channel != nil else { return nil }
+            guard let currentProgram = program(at: date) else { return 1 }
+            return date.timeIntervalSince(currentProgram.startDate) / currentProgram.endDate.timeIntervalSince(currentProgram.startDate)
+        }
+        
         var body: some View {
             VStack(alignment: .leading) {
+                if let progress = progress {
+                    ProgressBar(value: progress)
+                        .accentColor(Color(UIColor.play_progressRed))
+                        .frame(maxWidth: .infinity, maxHeight: 5)
+                }
                 Text(title)
                     .srgFont(.medium, size: .subtitle)
                     .lineLimit(2)
