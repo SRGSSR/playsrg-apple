@@ -134,6 +134,6 @@ extension TopicDetailView {
     }
     
     private var analyticsPageLevels: [String] {
-        return [AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.video.rawValue, self.model.topic.title]
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, self.model.topic.title]
     }
 }

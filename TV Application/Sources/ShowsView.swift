@@ -144,7 +144,7 @@ extension ShowsView {
     }
     
     private var analyticsPageLevels: [String] {
-        return [AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.video.rawValue]
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
     }
 }
 

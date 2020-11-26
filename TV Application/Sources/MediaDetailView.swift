@@ -252,7 +252,7 @@ extension MediaDetailView {
     }
     
     private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.application.rawValue]
+        return [AnalyticsPageLevel.play.rawValue]
     }
 }
 

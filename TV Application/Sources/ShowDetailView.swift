@@ -189,7 +189,7 @@ extension ShowDetailView {
     
     private var analyticsPageLevels: [String] {
         let level1: AnalyticsPageLevel = self.model.show.transmission == .radio ? .audio : .video
-        return [AnalyticsPageLevel.application.rawValue, level1.rawValue, AnalyticsPageLevel.show.rawValue]
+        return [AnalyticsPageLevel.play.rawValue, level1.rawValue, AnalyticsPageLevel.show.rawValue]
     }
 }
 
