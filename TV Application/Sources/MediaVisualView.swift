@@ -49,7 +49,7 @@ struct MediaVisualView: View {
         let availability = media.timeAvailability(at: now)
         switch availability {
         case .notYetAvailable:
-            return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), Color(.play_orange))
+            return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), Color(.play_gray))
         case .notAvailableAnymore:
             return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), Color(.play_gray))
         case .available:
