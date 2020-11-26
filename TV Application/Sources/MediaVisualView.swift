@@ -4,12 +4,16 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGUserData
 import SwiftUI
 
-struct MediaVisual: View {
+struct MediaVisualView: View {
     let media: SRGMedia?
     let scale: ImageScale
     let contentMode: ContentMode
+    
+    @State private var progress: Double = 0
+    @State private var taskHandle: String? = nil
     
     init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode = .fit) {
         self.media = media
@@ -45,7 +49,7 @@ struct MediaVisual: View {
         let availability = media.timeAvailability(at: now)
         switch availability {
         case .notYetAvailable:
-            return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), Color(.play_orange))
+            return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), Color(.play_gray))
         case .notAvailableAnymore:
             return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), Color(.play_gray))
         case .available:
@@ -59,6 +63,11 @@ struct MediaVisual: View {
         default:
             return nil
         }
+    }
+    
+    private func updateProgress() {
+        HistoryPlaybackProgressAsyncCancel(taskHandle)
+        taskHandle = HistoryPlaybackProgressForMediaMetadataAsync(media, { progress = Double($0) })
     }
     
     var body: some View {
@@ -80,6 +89,13 @@ struct MediaVisual: View {
             .padding([.leading, .trailing, .bottom], 8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             
+            if let progress = progress {
+                ProgressBar(value: progress)
+                    .opacity(progress != 0 ? 1 : 0)
+                    .frame(height: 8)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            }
+            
             Group {
                 if let isWebFirst = media?.play_isWebFirst, isWebFirst {
                     Badge(text: NSLocalizedString("Web first", comment: "Web first label on media cells"), color: Color(.srg_blue))
@@ -90,6 +106,16 @@ struct MediaVisual: View {
             }
             .padding([.leading, .top], 8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
+        .onAppear {
+            updateProgress()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange)) { notification in
+            if let updatedUrns = notification.userInfo?[SRGHistoryEntriesUidsKey] as? Set<String>,
+               let media = media,
+               updatedUrns.contains(media.urn) {
+                updateProgress()
+            }
         }
     }
 }

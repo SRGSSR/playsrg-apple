@@ -43,3 +43,8 @@ UIImage *RadioChannelLogo32Image(RadioChannel *radioChannel)
 {
     return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-32", radioChannel.resourceUid]] ?: [UIImage imageNamed:@"radioset-32"];
 }
+
+UIImage *RadioChannelLogo60Image(RadioChannel *radioChannel)
+{
+    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-60", radioChannel.resourceUid]];
+}

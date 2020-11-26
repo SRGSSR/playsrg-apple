@@ -17,9 +17,14 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
     else {
         let letterboxViewController = SRGLetterboxViewController()
         
-        applyLetterboxControllerSettings(to: letterboxViewController.controller)
-        
-        letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
+        let controller = letterboxViewController.controller
+        applyLetterboxControllerSettings(to: controller)
+        controller.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: Int32(NSEC_PER_SEC)), queue: nil) { _ in
+            HistoryUpdateLetterboxPlaybackProgress(controller)
+        }
+
+        let position = HistoryResumePlaybackPositionForMedia(media)
+        controller.playMedia(media, at: position, withPreferredSettings: nil)
         topViewController.present(letterboxViewController, animated: animated, completion: nil)
     }
 }

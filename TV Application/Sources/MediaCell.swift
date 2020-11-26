@@ -34,7 +34,7 @@ struct MediaCell: View {
                         navigateToMedia(media)
                     }
                 }) {
-                    MediaVisual(media: media, scale: .small, contentMode: .fit)
+                    MediaVisualView(media: media, scale: .small, contentMode: .fit)
                         .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                         .onFocusChange { focused in
                             isFocused = focused

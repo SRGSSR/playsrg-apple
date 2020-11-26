@@ -97,7 +97,7 @@ struct TopicDetailView: View {
                     }
             }
         } supplementaryView: { _, _ in
-            HeaderView(topic: model.topic)
+            HeaderView(title: model.topic.title)
                 .padding([.leading, .trailing], 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -115,10 +115,10 @@ struct TopicDetailView: View {
     }
     
     private struct HeaderView: View {
-        let topic: SRGTopic
+        let title: String
         
         var body: some View {
-            Text(topic.title)
+            Text(title)
                 .srgFont(.medium, size: .title)
                 .foregroundColor(.white)
                 .opacity(0.8)

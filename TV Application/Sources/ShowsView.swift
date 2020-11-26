@@ -49,7 +49,7 @@ struct ShowsView: View {
     
     private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(80)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .topLeading
         )
@@ -63,7 +63,7 @@ struct ShowsView: View {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(350))
             return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
         case .information:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -128,9 +128,10 @@ struct ShowsView: View {
             GeometryReader { geometry in
                 Text(String(character))
                     .srgFont(.medium, size: .title)
+                    .lineLimit(1)
                     .foregroundColor(.white)
                     .opacity(0.8)
-                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             }
         }
     }

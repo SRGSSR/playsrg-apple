@@ -26,4 +26,18 @@
     }
 }
 
+- (UIImage *)play_logo60Image
+{
+    if (self.transmission == SRGTransmissionRadio) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), self.uid];
+        RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration.radioChannels filteredArrayUsingPredicate:predicate].firstObject;
+        return RadioChannelLogo60Image(radioChannel);
+    }
+    else {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(TVChannel.new, uid), self.uid];
+        TVChannel *tvChannel = [ApplicationConfiguration.sharedApplicationConfiguration.tvChannels filteredArrayUsingPredicate:predicate].firstObject;
+        return TVChannelLogo60Image(tvChannel);
+    }
+}
+
 @end

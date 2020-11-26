@@ -22,7 +22,7 @@ struct HeroMediaCell: View {
                 }
             }) {
                 HStack(spacing: 0) {
-                    MediaVisual(media: media, scale: .large)
+                    MediaVisualView(media: media, scale: .large)
                         .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
                     DescriptionView(media: media)
                         .padding()
