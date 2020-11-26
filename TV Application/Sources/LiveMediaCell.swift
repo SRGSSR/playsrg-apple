@@ -139,10 +139,15 @@ struct LiveMediaCell: View, LiveMediaData {
         }
         
         private var subtitle: String? {
-            guard let currentProgram = program(at: date) else { return nil }
-            let remainingTimeInterval = currentProgram.endDate.timeIntervalSince(date)
-            let remainingTime = PlayRemainingTimeFormattedDuration(remainingTimeInterval)
-            return String(format: NSLocalizedString("%@ remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air"), remainingTime)
+            if let media = media, media.contentType == .scheduledLivestream {
+                return MediaDescription.subtitle(for: media)
+            }
+            else {
+                guard let currentProgram = program(at: date) else { return nil }
+                let remainingTimeInterval = currentProgram.endDate.timeIntervalSince(date)
+                let remainingTime = PlayRemainingTimeFormattedDuration(remainingTimeInterval)
+                return String(format: NSLocalizedString("%@ remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air"), remainingTime)
+            }
         }
         
         private var progress: Double? {
