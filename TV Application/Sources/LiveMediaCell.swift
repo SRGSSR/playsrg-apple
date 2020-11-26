@@ -51,7 +51,7 @@ struct LiveMediaCell: View, LiveMediaData {
             VStack(spacing: 10) {
                 Button(action: {
                     if let media = media {
-                        navigateToMedia(media)
+                        navigateToMedia(media, play: true)
                     }
                 }) {
                     VisualView(media: media, programComposition: programComposition, date: date)

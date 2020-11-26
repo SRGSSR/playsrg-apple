@@ -117,7 +117,10 @@ struct HomeView: View {
                     LiveMediaCell(media: media)
                 }
                 else {
-                    MediaCell(media: media, style: .show)
+                    MediaCell(media: media, style: .show) {
+                        let play = HomeModel.RowId.liveIds.contains(item.rowId)
+                        navigateToMedia(media, play: play)
+                    }
                 }
             case .mediaPlaceholder:
                 if Self.isHeroAppearance(for: item) {
