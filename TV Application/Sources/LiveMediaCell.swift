@@ -151,9 +151,19 @@ struct LiveMediaCell: View, LiveMediaData {
         }
         
         private var progress: Double? {
-            guard channel != nil else { return nil }
-            guard let currentProgram = program(at: date) else { return 1 }
-            return date.timeIntervalSince(currentProgram.startDate) / currentProgram.endDate.timeIntervalSince(currentProgram.startDate)
+            if channel != nil {
+                guard let currentProgram = program(at: date) else { return 1 }
+                return date.timeIntervalSince(currentProgram.startDate) / currentProgram.endDate.timeIntervalSince(currentProgram.startDate)
+            }
+            else if let media = media, media.contentType == .scheduledLivestream, media.timeAvailability(at: Date()) == .available,
+                    let startDate = media.startDate,
+                    let endDate = media.endDate {
+                let progress = Date().timeIntervalSince(startDate) / endDate.timeIntervalSince(startDate)
+                return progress.clamped(to: 0...1)
+            }
+            else {
+                return nil
+            }
         }
         
         var body: some View {
