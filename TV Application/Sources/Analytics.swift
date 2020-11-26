@@ -11,6 +11,8 @@ struct TrackerView: View {
     let title: String
     let levels: [String]?
     
+    @State private var isDisplayed: Bool = false
+    
     private func trackPageView() {
         SRGAnalyticsTracker.shared.trackPageView(withTitle: title, levels: levels)
     }
@@ -19,10 +21,19 @@ struct TrackerView: View {
         Rectangle()
             .fill(Color.clear)
             .onAppear {
-                trackPageView()
+                if !isDisplayed {
+                    trackPageView()
+                    isDisplayed = true
+                }
+            }
+            .onDisappear() {
+                isDisplayed = false
             }
             .onResume {
-                 trackPageView()
+                if !isDisplayed {
+                    trackPageView()
+                    isDisplayed = true
+                }
             }
     }
 }
