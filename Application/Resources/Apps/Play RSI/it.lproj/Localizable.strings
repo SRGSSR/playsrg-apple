@@ -231,7 +231,7 @@
 "less than 1 hour" = "meno di 1 ora";
 
 /* Play button label for audio in media detail view */
-"Listen" = "Listen";
+"Listen" = "Ascolta";
 
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
@@ -617,7 +617,7 @@
 "Videos and audios" = "Video e audio";
 
 /* Play button label for video in media detail view */
-"Watch" = "Watch";
+"Watch" = "Guarda";
 
 /* Suggested invocation phrase to watch a show
    Suggested invocation phrase to watch a video
