@@ -112,6 +112,7 @@ struct TopicDetailView: View {
         .onResume {
             model.refresh()
         }
+        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct HeaderView: View {
@@ -124,5 +125,15 @@ struct TopicDetailView: View {
                 .opacity(0.8)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
+    }
+}
+
+extension TopicDetailView {
+    private var analyticsPageTitle: String {
+        return AnalyticsPageTitle.latest.rawValue
+    }
+    
+    private var analyticsPageLevels: [String] {
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, self.model.topic.title]
     }
 }

@@ -113,6 +113,7 @@ struct ShowDetailView: View {
         .onResume {
             model.refresh()
         }
+        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct VisualView: View {
@@ -178,6 +179,17 @@ struct ShowDetailView: View {
                 }
             }
         }
+    }
+}
+
+extension ShowDetailView {
+    private var analyticsPageTitle: String {
+        return self.model.show.title
+    }
+    
+    private var analyticsPageLevels: [String] {
+        let level1: AnalyticsPageLevel = self.model.show.transmission == .radio ? .audio : .video
+        return [AnalyticsPageLevel.play.rawValue, level1.rawValue, AnalyticsPageLevel.show.rawValue]
     }
 }
 

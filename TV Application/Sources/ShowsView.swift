@@ -119,6 +119,7 @@ struct ShowsView: View {
         .onResume {
             model.refresh()
         }
+        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct HeaderView: View {
@@ -134,6 +135,16 @@ struct ShowsView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             }
         }
+    }
+}
+
+extension ShowsView {
+    private var analyticsPageTitle: String {
+        return AnalyticsPageTitle.showsAZ.rawValue
+    }
+    
+    private var analyticsPageLevels: [String] {
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
     }
 }
 

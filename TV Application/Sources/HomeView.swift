@@ -93,6 +93,7 @@ struct HomeView: View {
         .synchronizeParentTabScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
+        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct Cell: View {
@@ -162,6 +163,23 @@ struct HomeView: View {
             }
             .opacity(0.8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+        }
+    }
+}
+
+extension HomeView {
+    private var analyticsPageTitle: String {
+        return AnalyticsPageTitle.home.rawValue
+    }
+    
+    private var analyticsPageLevels: [String] {
+        switch self.model.id {
+        case .video:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+        case let .audio(channel):
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+        case .live:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
         }
     }
 }

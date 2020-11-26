@@ -52,6 +52,7 @@ struct MediaDetailView: View {
         .onResume {
             model.refresh()
         }
+        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct DescriptionView: View {
@@ -242,6 +243,16 @@ struct MediaDetailView: View {
                 }
             }
         }
+    }
+}
+
+extension MediaDetailView {
+    private var analyticsPageTitle: String {
+        return AnalyticsPageTitle.media.rawValue
+    }
+    
+    private var analyticsPageLevels: [String]? {
+        return [AnalyticsPageLevel.play.rawValue]
     }
 }
 
