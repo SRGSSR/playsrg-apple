@@ -49,7 +49,7 @@ struct ShowsView: View {
     
     private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(80)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .topLeading
         )
@@ -128,9 +128,10 @@ struct ShowsView: View {
             GeometryReader { geometry in
                 Text(String(character))
                     .srgFont(.medium, size: .title)
+                    .lineLimit(1)
                     .foregroundColor(.white)
                     .opacity(0.8)
-                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             }
         }
     }
