@@ -160,8 +160,7 @@ struct LiveMediaCell: View, LiveMediaData {
             VStack(alignment: .leading) {
                 if let progress = progress {
                     ProgressBar(value: progress)
-                        .accentColor(Color(UIColor.play_progressRed))
-                        .frame(maxWidth: .infinity, maxHeight: 5)
+                        .frame(maxWidth: .infinity, maxHeight: 8)
                 }
                 Text(title)
                     .srgFont(.medium, size: .subtitle)

@@ -92,8 +92,7 @@ struct MediaVisualView: View {
             if let progress = progress {
                 ProgressBar(value: progress)
                     .opacity(progress != 0 ? 1 : 0)
-                    .accentColor(Color(UIColor.play_progressRed))
-                    .frame(height: 5)
+                    .frame(height: 8)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
             
