@@ -171,6 +171,7 @@ struct LiveMediaCell: View, LiveMediaData {
                 if let progress = progress {
                     ProgressBar(value: progress)
                         .frame(maxWidth: .infinity, maxHeight: 8)
+                        .cornerRadius(4)
                 }
                 Text(title)
                     .srgFont(.medium, size: .subtitle)
