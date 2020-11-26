@@ -105,10 +105,9 @@ struct LiveMediaCell: View, LiveMediaData {
         var body: some View {
             ZStack {
                 ImageView(url: imageUrl)
-                Rectangle()
-                    .fill(Color(white: 0, opacity: 0.6))
-                    .whenRedacted { $0.hidden() }
                 if let logoImage = logoImage {
+                    Rectangle()
+                        .fill(Color(white: 0, opacity: 0.6))
                     Image(uiImage: logoImage)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .padding()
