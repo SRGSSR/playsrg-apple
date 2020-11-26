@@ -114,14 +114,18 @@ struct HomeView: View {
                 if Self.isHeroAppearance(for: item) {
                     HeroMediaCell(media: media)
                 }
-                else if media.contentType == .livestream || media.contentType == .scheduledLivestream {
-                    LiveMediaCell(media: media)
+                else if HomeModel.RowId.liveIds.contains(item.rowId) {
+                    if media.contentType == .livestream || media.contentType == .scheduledLivestream {
+                        LiveMediaCell(media: media)
+                    }
+                    else {
+                        MediaCell(media: media, style: .show) {
+                            navigateToMedia(media, play: true)
+                        }
+                    }
                 }
                 else {
-                    MediaCell(media: media, style: .show) {
-                        let play = HomeModel.RowId.liveIds.contains(item.rowId)
-                        navigateToMedia(media, play: play)
-                    }
+                    MediaCell(media: media, style: .show)
                 }
             case .mediaPlaceholder:
                 if Self.isHeroAppearance(for: item) {
