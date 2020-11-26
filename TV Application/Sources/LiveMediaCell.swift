@@ -112,6 +112,13 @@ struct LiveMediaCell: View, LiveMediaData {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .padding()
                 }
+                else if let media = media, media.timeAvailability(at: Date()) == .notYetAvailable {
+                    Rectangle()
+                        .fill(Color(white: 0, opacity: 0.6))
+                    Badge(text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), color: Color(.play_orange))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .padding([.leading, .top], 8)
+                }
                 BlockingOverlay(media: media)
             }
         }
