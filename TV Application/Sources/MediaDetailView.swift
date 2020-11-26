@@ -45,23 +45,14 @@ struct MediaDetailView: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             model.refresh()
-            SRGAnalyticsTracker.shared.trackPageView(title: analyticsPageTitle(), levels: analyticsPageLevels())
         }
         .onDisappear {
             model.cancelRefresh()
         }
         .onResume {
             model.refresh()
-            SRGAnalyticsTracker.shared.trackPageView(title: analyticsPageTitle(), levels: analyticsPageLevels())
         }
-    }
-    
-    private func analyticsPageTitle() -> String {
-        return AnalyticsPageTitle.media.rawValue
-    }
-    
-    private func analyticsPageLevels() -> [String] {
-        return [ AnalyticsPageLevel.application.rawValue ]
+        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct DescriptionView: View {
@@ -252,6 +243,16 @@ struct MediaDetailView: View {
                 }
             }
         }
+    }
+}
+
+extension MediaDetailView {
+    private var analyticsPageTitle: String {
+        return AnalyticsPageTitle.media.rawValue
+    }
+    
+    private var analyticsPageLevels: [String]? {
+        return [AnalyticsPageLevel.application.rawValue]
     }
 }
 

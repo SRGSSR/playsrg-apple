@@ -106,24 +106,14 @@ struct ShowDetailView: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             model.refresh()
-            SRGAnalyticsTracker.shared.trackPageView(title: analyticsPageTitle(), levels: analyticsPageLevels())
         }
         .onDisappear {
             model.cancelRefresh()
         }
         .onResume {
             model.refresh()
-            SRGAnalyticsTracker.shared.trackPageView(title: analyticsPageTitle(), levels: analyticsPageLevels())
         }
-    }
-    
-    private func analyticsPageTitle() -> String {
-        return self.model.show.title
-    }
-    
-    private func analyticsPageLevels() -> [String] {
-        let level1 = self.model.show.transmission == .radio ? AnalyticsPageLevel.audio : AnalyticsPageLevel.video
-        return [ AnalyticsPageLevel.application.rawValue, level1.rawValue, AnalyticsPageLevel.show.rawValue ]
+        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct VisualView: View {
@@ -189,6 +179,17 @@ struct ShowDetailView: View {
                 }
             }
         }
+    }
+}
+
+extension ShowDetailView {
+    private var analyticsPageTitle: String {
+        return self.model.show.title
+    }
+    
+    private var analyticsPageLevels: [String] {
+        let level1: AnalyticsPageLevel = self.model.show.transmission == .radio ? .audio : .video
+        return [AnalyticsPageLevel.application.rawValue, level1.rawValue, AnalyticsPageLevel.show.rawValue]
     }
 }
 
