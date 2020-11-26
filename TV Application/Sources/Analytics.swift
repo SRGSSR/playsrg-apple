@@ -29,10 +29,9 @@ struct TrackerView: View {
             .onDisappear() {
                 isDisplayed = false
             }
-            .onResume {
-                if !isDisplayed {
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                if isDisplayed {
                     trackPageView()
-                    isDisplayed = true
                 }
             }
     }
