@@ -9,10 +9,14 @@ import SwiftUI
 struct DurationLabel: View {
     let media: SRGMedia?
     
+    private var isLivestream: Bool {
+        guard let media = media else { return false }
+        return media.contentType == .livestream || media.contentType == .scheduledLivestream
+    }
+    
     private var duration: String? {
         guard let media = media else { return nil }
-        let isLivestreamOrScheduledLivestream = (media.contentType == SRGContentType.livestream || media.contentType == SRGContentType.scheduledLivestream)
-        if isLivestreamOrScheduledLivestream {
+        if isLivestream {
             return NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.")
         }
         else {
@@ -27,7 +31,7 @@ struct DurationLabel: View {
                 .foregroundColor(.white)
                 .padding([.top, .bottom], 5)
                 .padding([.leading, .trailing], 8)
-                .background(Color.init(white: 0, opacity: 0.5))
+                .background(isLivestream ? Color(.play_liveRed) : Color(white: 0, opacity: 0.5))
                 .cornerRadius(4)
         }
     }
