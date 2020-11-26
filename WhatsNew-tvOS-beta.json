@@ -1,3 +1,4 @@
 {
-  "1.0.0-1": "First beta for tvOS.\n\n- Videos tab with TV topics, trending, events.\n- Livestreams tab with TV and radio live channels.\n- Shows tab with main TV shows."
+  "1.0.0-1": "First beta for tvOS.\n\n- Videos tab with TV topics, trending, events.\n- Livestreams tab with TV and radio live channels.\n- Shows tab with main TV shows.",
+  "1.0.0-2": "- Current program display on the livestreams tab.\n- Playback can be resumed.\n- Standard page view measurements."
 }
