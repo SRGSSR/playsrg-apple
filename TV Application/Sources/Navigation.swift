@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAnalytics
 import TvOSTextViewer
 import SwiftUI
 
@@ -26,6 +27,7 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
         let position = HistoryResumePlaybackPositionForMedia(media)
         controller.playMedia(media, at: position, withPreferredSettings: nil)
         topViewController.present(letterboxViewController, animated: animated, completion: nil)
+        SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
     }
 }
 
