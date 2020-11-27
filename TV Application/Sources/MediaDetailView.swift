@@ -174,10 +174,19 @@ struct MediaDetailView: View {
     struct ActionsView: View {
         let media: SRGMedia
         
+        var playButtonLabel: String {
+            if HistoryPlaybackProgressForMediaMetadata(media) == 0 {
+                return media.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio in media detail view") : NSLocalizedString("Watch", comment: "Play button label for video in media detail view")
+            }
+            else {
+                return NSLocalizedString("Resume", comment: "Resume playback button label")
+            }
+        }
+        
         var body: some View {
             HStack(alignment: .top, spacing: 30) {
                 // TODO: 22 icon?
-                LabeledButton(icon: "play-50", label: media.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio in media detail view") : NSLocalizedString("Watch", comment: "Play button label for video in media detail view")) {
+                LabeledButton(icon: "play-50", label: playButtonLabel) {
                     navigateToMedia(media, play: true)
                 }
                 #if DEBUG
