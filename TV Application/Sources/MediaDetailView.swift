@@ -226,7 +226,7 @@ struct MediaDetailView: View {
                             .fill(Color(.srg_color(fromHexadecimalString: "#222222")!))
                             .opacity(0.8)
                         ZStack {
-                            Text(NSLocalizedString("Related content", comment: "Related content media list title"))
+                            Text(NSLocalizedString("This might interest you", comment: "Related content media list title"))
                                 .srgFont(.medium, size: .headline)
                                 .foregroundColor(.gray)
                                 .padding([.leading, .trailing], 40)
