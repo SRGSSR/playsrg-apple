@@ -65,6 +65,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly) BOOL tvTrendingEpisodesOnly;
 @property (nonatomic, readonly, nullable) NSNumber *tvTrendingEditorialLimit;
+@property (nonatomic, readonly) BOOL tvTrendingPrefersHeroStage;
 
 @property (nonatomic, readonly, getter=isTvFeaturedHomeSectionHeaderHidden) BOOL tvFeaturedHomeSectionHeaderHidden;
 

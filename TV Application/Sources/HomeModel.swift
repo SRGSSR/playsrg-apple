@@ -193,10 +193,17 @@ extension HomeModel {
             
             switch self {
             case .tvTrending:
-                return dataProvider.tvTrendingMedias(for: vendor, limit: pageSize, editorialLimit: configuration.tvTrendingEditorialLimit?.uintValue,
-                                                     episodesOnly: configuration.tvTrendingEpisodesOnly)
-                    .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
+                if configuration.tvTrendingPrefersHeroStage {
+                    return dataProvider.tvHeroStageMedias(for: vendor)
+                        .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
+                        .eraseToAnyPublisher()
+                }
+                else {
+                    return dataProvider.tvTrendingMedias(for: vendor, limit: pageSize, editorialLimit: configuration.tvTrendingEditorialLimit?.uintValue,
+                                                         episodesOnly: configuration.tvTrendingEpisodesOnly)
+                        .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
+                        .eraseToAnyPublisher()
+                }
             case .tvLatest:
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }

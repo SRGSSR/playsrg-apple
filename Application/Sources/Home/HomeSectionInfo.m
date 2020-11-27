@@ -231,11 +231,20 @@
     
     switch (self.homeSection) {
         case HomeSectionTVTrending: {
-            SRGBaseRequest *request = [SRGDataProvider.currentDataProvider tvTrendingMediasForVendor:vendor withLimit:@(pageSize) editorialLimit:applicationConfiguration.tvTrendingEditorialLimit episodesOnly:applicationConfiguration.tvTrendingEpisodesOnly completionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-                [requestQueue reportError:error];
-                paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
-            }];
-            [requestQueue addRequest:request resume:YES];
+            if (applicationConfiguration.tvTrendingPrefersHeroStage) {
+                SRGBaseRequest *request = [SRGDataProvider.currentDataProvider tvHeroStageMediasForVendor:vendor withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                    [requestQueue reportError:error];
+                    paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+                }];
+                [requestQueue addRequest:request resume:YES];
+            }
+            else {
+                SRGBaseRequest *request = [SRGDataProvider.currentDataProvider tvTrendingMediasForVendor:vendor withLimit:@(pageSize) editorialLimit:applicationConfiguration.tvTrendingEditorialLimit episodesOnly:applicationConfiguration.tvTrendingEpisodesOnly completionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                    [requestQueue reportError:error];
+                    paginatedItemListCompletionBlock(medias, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
+                }];
+                [requestQueue addRequest:request resume:YES];
+            }
             break;
         }
             

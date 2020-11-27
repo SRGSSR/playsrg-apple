@@ -110,6 +110,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) BOOL tvTrendingEpisodesOnly;
 @property (nonatomic) NSNumber *tvTrendingEditorialLimit;
+@property (nonatomic) BOOL tvTrendingPrefersHeroStage;
 
 @property (nonatomic, getter=isTvFeaturedHomeSectionHeaderHidden) BOOL tvFeaturedHomeSectionHeaderHidden;
 
@@ -323,6 +324,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSNumber *tvTrendingEditorialLimit = [firebaseConfiguration numberForKey:@"tvTrendingEditorialLimit"];
     self.tvTrendingEditorialLimit = tvTrendingEditorialLimit ? @(MAX(tvTrendingEditorialLimit.integerValue, 0)) : nil;
+    
+    self.tvTrendingPrefersHeroStage = [firebaseConfiguration boolForKey:@"tvTrendingPrefersHeroStage"];
     
     self.tvFeaturedHomeSectionHeaderHidden = [firebaseConfiguration boolForKey:@"tvFeaturedHomeSectionHeaderHidden"];
     
