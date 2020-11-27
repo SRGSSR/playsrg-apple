@@ -24,7 +24,7 @@ struct HomeView: View {
             case .radioAllShows:
                 return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
             default:
-                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(340))
+                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(360))
             }
         }
         
