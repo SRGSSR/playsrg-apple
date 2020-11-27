@@ -65,11 +65,11 @@ struct MediaDetailView: View {
                 GeometryReader { geometry in
                     VStack(alignment: .leading, spacing: 0) {
                         Text(MediaDescription.subtitle(for: media, style: .show))
-                            .srgFont(.bold, size: .title)
+                            .srgFont(.title1)
                             .lineLimit(3)
                             .foregroundColor(.white)
                         Text(MediaDescription.title(for: media, style: .show))
-                            .srgFont(.regular, size: .headline)
+                            .srgFont(.headline1)
                             .foregroundColor(.white)
                         Spacer()
                             .frame(height: 20)
@@ -97,7 +97,7 @@ struct MediaDetailView: View {
             HStack(spacing: 10) {
                 Image(icon)
                 Text(values.joined(separator: " - "))
-                    .srgFont(.regular, size: .caption)
+                    .srgFont(.overline)
                     .foregroundColor(.white)
             }
         }
@@ -160,7 +160,7 @@ struct MediaDetailView: View {
                         }, label: {
                             Text(summary)
                                 .foregroundColor(.white)
-                                .srgFont(.light, size: .subtitle)
+                                .srgFont(.body)
                                 .frame(width: geometry.size.width, alignment: .leading)
                                 .padding([.top, .bottom], 5)
                                 .onFocusChange { isFocused = $0 }
@@ -169,7 +169,7 @@ struct MediaDetailView: View {
                     }
                     
                     Text(availabilityInformation)
-                        .srgFont(.light, size: .subheadline)
+                        .srgFont(.overline)
                         .foregroundColor(.white)
                         .padding([.top, .bottom], 5)
                 }
@@ -227,7 +227,7 @@ struct MediaDetailView: View {
                             .opacity(0.8)
                         ZStack {
                             Text(NSLocalizedString("This might interest you", comment: "Related content media list title"))
-                                .srgFont(.medium, size: .headline)
+                                .srgFont(.body)
                                 .foregroundColor(.gray)
                                 .padding([.leading, .trailing], 40)
                                 .padding(.top, 15)

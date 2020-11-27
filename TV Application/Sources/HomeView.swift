@@ -153,12 +153,12 @@ struct HomeView: View {
             VStack(alignment: .leading) {
                 if let title = rowId.title {
                     Text(title)
-                        .srgFont(.medium, size: .title)
+                        .srgFont(.title2)
                         .lineLimit(1)
                 }
                 if let lead = rowId.lead {
                     Text(lead)
-                        .srgFont(.light, size: .headline)
+                        .srgFont(.subtitle)
                         .lineLimit(1)
                         .opacity(0.8)
                     Spacer()

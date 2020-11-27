@@ -86,7 +86,7 @@ struct TopicDetailView: View {
                 ProgressView()
             case let .message(message):
                 Text(message)
-                    .srgFont(.regular, size: .headline)
+                    .srgFont(.body)
                     .lineLimit(2)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -120,7 +120,7 @@ struct TopicDetailView: View {
         
         var body: some View {
             Text(title)
-                .srgFont(.medium, size: .title)
+                .srgFont(.title2)
                 .foregroundColor(.white)
                 .opacity(0.8)
                 .frame(maxWidth: .infinity, alignment: .leading)

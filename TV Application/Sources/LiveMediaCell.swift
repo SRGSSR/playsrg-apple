@@ -174,12 +174,12 @@ struct LiveMediaCell: View, LiveMediaData {
                         .cornerRadius(4)
                 }
                 Text(title)
-                    .srgFont(.medium, size: .subtitle)
+                    .srgFont(.subtitle)
                     .lineLimit(2)
                 
                 if let subtitle = subtitle {
                     Text(subtitle)
-                        .srgFont(.light, size: .subtitle)
+                        .srgFont(.headline2)
                         .lineLimit(2)
                 }
             }

@@ -89,7 +89,7 @@ struct ShowsView: View {
                 ProgressView()
             case let .message(message):
                 Text(message)
-                    .srgFont(.regular, size: .headline)
+                    .srgFont(.body)
                     .lineLimit(2)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -128,7 +128,7 @@ struct ShowsView: View {
         var body: some View {
             GeometryReader { geometry in
                 Text(String(character))
-                    .srgFont(.medium, size: .title)
+                    .srgFont(.title2)
                     .lineLimit(1)
                     .foregroundColor(.white)
                     .opacity(0.8)
