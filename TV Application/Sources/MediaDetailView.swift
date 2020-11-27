@@ -143,6 +143,14 @@ struct MediaDetailView: View {
         
         @State var isFocused: Bool = false
         
+        var availabilityInformation: String {
+            var publication = String(format: NSLocalizedString("Published on %@", comment:"Publication date lead on the media detail page"), DateFormatter.play_dateAndTime.string(from: media.date))
+            if let availability = MediaDescription.availability(for: media) {
+                publication += " - " + availability
+            }
+            return publication
+        }
+        
         var body: some View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
@@ -160,12 +168,10 @@ struct MediaDetailView: View {
                         .buttonStyle(TextButtonStyle(focused: isFocused))
                     }
                     
-                    if let availability = MediaDescription.availability(for: media) {
-                        Text(availability)
-                            .srgFont(.light, size: .subheadline)
-                            .foregroundColor(.white)
-                            .padding([.top, .bottom], 5)
-                    }
+                    Text(availabilityInformation)
+                        .srgFont(.light, size: .subheadline)
+                        .foregroundColor(.white)
+                        .padding([.top, .bottom], 5)
                 }
             }
         }
