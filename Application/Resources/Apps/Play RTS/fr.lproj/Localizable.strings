@@ -382,6 +382,8 @@
 /* Title label to present main radio livestreams */
 "Radio channels" = "Chaînes radio";
 
+"Readily available" = "Déjà disponible";
+
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Le récepteur est en attente.";
 

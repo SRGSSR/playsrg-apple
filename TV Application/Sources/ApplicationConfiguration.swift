@@ -13,6 +13,8 @@ extension ApplicationConfiguration {
             return .tvTrending(appearance: .hero)
         case .tvLatest:
             return .tvLatest
+        case .tvWebFirst:
+            return .tvWebFirst
         case .tvMostPopular:
             return .tvMostPopular
         case .tvSoonExpiring:

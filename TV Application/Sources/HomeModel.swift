@@ -161,6 +161,7 @@ extension HomeModel {
     enum RowId: Hashable {
         case tvTrending(appearance: RowAppearance)
         case tvLatest
+        case tvWebFirst
         case tvMostPopular
         case tvSoonExpiring
         case tvLatestForModule(_ module: SRGModule?, type: SRGModuleType)
@@ -206,6 +207,10 @@ extension HomeModel {
                 }
             case .tvLatest:
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
+                    .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
+                    .eraseToAnyPublisher()
+            case .tvWebFirst:
+                return dataProvider.tvLatestWebFirstEpisodes(for: vendor, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case .tvMostPopular:
@@ -279,6 +284,8 @@ extension HomeModel {
                 return appearance != .hero ? NSLocalizedString("Trending videos", comment: "Title label used to present trending TV videos") : nil
             case .tvLatest:
                 return NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos")
+            case .tvWebFirst:
+                return NSLocalizedString("Readily available", comment: "Title label used to present readily available videos")
             case .tvMostPopular:
                 return NSLocalizedString("Most popular", comment: "Title label used to present the TV most popular videos")
             case .tvSoonExpiring:

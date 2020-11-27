@@ -316,6 +316,15 @@
             break;
         }
             
+        case HomeSectionTVWebFirst: {
+            SRGBaseRequest *request = [[[SRGDataProvider.currentDataProvider tvLatestWebFirstEpisodesForVendor:vendor withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+                [requestQueue reportError:error];
+                paginatedItemListCompletionBlock(medias, page, nextPage, HTTPResponse, error);
+            }] requestWithPageSize:pageSize] requestWithPage:page];
+            [requestQueue addRequest:request resume:YES];
+            break;
+        }
+            
         case HomeSectionTVMostPopular: {
             SRGBaseRequest *request = [[[SRGDataProvider.currentDataProvider tvMostPopularMediasForVendor:vendor withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                 [requestQueue reportError:error];
