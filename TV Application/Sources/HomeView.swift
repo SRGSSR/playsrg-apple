@@ -17,7 +17,7 @@ struct HomeView: View {
                     return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
                 }
                 else {
-                    return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
+                    return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(360))
                 }
             case .tvTopicsAccess:
                 return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
