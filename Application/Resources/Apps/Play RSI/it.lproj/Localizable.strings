@@ -376,9 +376,6 @@
 /* Settings section header */
 "Properties" = "Proprietà";
 
-/* Publication date lead on the media detail page */
-"Published on %@" = "Pubblicato il %@";
-
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Scorrere verso il basso per ricaricare";
 

@@ -144,7 +144,7 @@ struct MediaDetailView: View {
         @State var isFocused: Bool = false
         
         var availabilityInformation: String {
-            var publication = String(format: NSLocalizedString("Published on %@", comment:"Publication date lead on the media detail page"), DateFormatter.play_dateAndTime.string(from: media.date))
+            var publication = DateFormatter.play_dateAndTime.string(from: media.date)
             if let availability = MediaDescription.availability(for: media) {
                 publication += " - " + availability
             }
