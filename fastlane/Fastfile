@@ -856,6 +856,7 @@ def bump_build_number_beta_workflow(platform)
 
   add_git_tag(tag: platform.downcase + '/' + tag_version(platform))
   bump_build_number_commit(platform)
+  git_pull(rebase: true)
   push_to_git_remote
 end
 
