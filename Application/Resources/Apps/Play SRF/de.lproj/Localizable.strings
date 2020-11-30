@@ -94,7 +94,7 @@
 "Automatic subscriptions failed. Please retry." = "Fehler beim Abonnieren aller Push-Mitteilungen. Bitte erneut versuchen.";
 
 /* Title of the episode list header in show detail view */
-"Available episodes" = "Mehr aus der Sendung";
+"Available episodes" = "Verfügbare Videos";
 
 /* Title label used to present the soon expiring videos */
 "Available for a limited time" = "Nur noch kurze Zeit online";
@@ -198,8 +198,12 @@
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
 "Highlights" = "Highlights";
 
-/* Label to present history */
+/* Label to present history
+   Profile tab title */
 "History" = "Zuletzt gesehen";
+
+/* Home tab title */
+"Home" = "Home";
 
 /* Image copyright introductory label */
 "Image credit: %@" = "Bild: %@";
@@ -231,7 +235,7 @@
 "less than 1 hour" = "< 1 Stunde";
 
 /* Play button label for audio in media detail view */
-"Listen" = "Listen";
+"Listen" = "Abspielen";
 
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
@@ -372,6 +376,9 @@
 /* Settings section header */
 "Properties" = "Eigenschaften";
 
+/* Publication date lead on the media detail page */
+"Published on %@" = "Published on %@";
+
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Herunterziehen, um Seite nochmals zu laden";
 
@@ -389,9 +396,6 @@
 
 /* Title of the action view to choose a regional radio */
 "Regional radios" = "Radio SRF 1 mit Regionaljournal";
-
-/* Related content media list title */
-"Related content" = "Mehr zum Thema";
 
 /* Sort by relevance option */
 "Relevance" = "Relevanz";
@@ -437,6 +441,9 @@
 
 /* Title of the reset search settings button */
 "Reset" = "Zurücksetzen";
+
+/* Resume playback button label */
+"Resume" = "Resume";
 
 /* Label to present the search view
    Search placeholder text
@@ -576,6 +583,9 @@
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Aus rechtlichen Gründen kann dieser Inhalt nicht mit Google Cast abgespielt werden.";
 
+/* Related content media list title */
+"This might interest you" = "This might interest you";
+
 /* Period setting option */
 "This week" = "Diese Woche";
 
@@ -609,15 +619,14 @@
 
 /* Header for video search results
    Title displayed at the top of the video view
-   Videos option
-   Videos tab title */
+   Videos option */
 "Videos" = "Videos";
 
 /* Header for video and audio search results */
 "Videos and audios" = "Video und Audio";
 
 /* Play button label for video in media detail view */
-"Watch" = "Watch";
+"Watch" = "Abspielen";
 
 /* Suggested invocation phrase to watch a show
    Suggested invocation phrase to watch a video
@@ -629,7 +638,7 @@
 
 /* Web first label on media cells
    Web first label on media detail page */
-"Web first" = "vorab";
+"Web first" = "Vorab";
 
 /* Title displayed at the top of the What's new view */
 "What's new" = "Neue Funktionen";

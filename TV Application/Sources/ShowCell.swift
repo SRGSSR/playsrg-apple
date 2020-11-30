@@ -49,7 +49,7 @@ struct ShowCell: View {
                 .buttonStyle(CardButtonStyle())
                 
                 Text(title)
-                    .srgFont(.medium, size: .subtitle)
+                    .srgFont(.subtitle)
                     .frame(width: geometry.size.width, alignment: .leading)
                     .opacity(isFocused ? 1 : 0.5)
                     .offset(x: 0, y: isFocused ? 10 : 0)

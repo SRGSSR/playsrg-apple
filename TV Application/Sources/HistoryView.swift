@@ -58,7 +58,7 @@ struct HistoryView: View {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(420))
             return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
         case .information:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -84,7 +84,7 @@ struct HistoryView: View {
                 ProgressView()
             case let .message(message):
                 Text(message)
-                    .srgFont(.regular, size: .headline)
+                    .srgFont(.body)
                     .lineLimit(2)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -117,7 +117,7 @@ struct HistoryView: View {
         
         var body: some View {
             Text(title)
-                .srgFont(.medium, size: .title)
+                .srgFont(.title2)
                 .foregroundColor(.white)
                 .opacity(0.8)
                 .frame(maxWidth: .infinity, alignment: .leading)

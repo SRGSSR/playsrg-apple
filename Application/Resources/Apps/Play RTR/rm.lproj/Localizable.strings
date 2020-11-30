@@ -198,8 +198,12 @@
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
 "Highlights" = "Highlights";
 
-/* Label to present history */
+/* Label to present history
+   Profile tab title */
 "History" = "Cronologia";
+
+/* Home tab title */
+"Home" = "Home";
 
 /* Image copyright introductory label */
 "Image credit: %@" = "Maletg:%@";
@@ -372,6 +376,9 @@
 /* Settings section header */
 "Properties" = "Funcziunalitads";
 
+/* Publication date lead on the media detail page */
+"Published on %@" = "Published on %@";
+
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Trair giu per rechargiar";
 
@@ -389,9 +396,6 @@
 
 /* Title of the action view to choose a regional radio */
 "Regional radios" = "Radios regiunals";
-
-/* Related content media list title */
-"Related content" = "Cuntegn relatà";
 
 /* Sort by relevance option */
 "Relevance" = "Relevanza";
@@ -437,6 +441,9 @@
 
 /* Title of the reset search settings button */
 "Reset" = "Reset";
+
+/* Resume playback button label */
+"Resume" = "Resume";
 
 /* Label to present the search view
    Search placeholder text
@@ -576,6 +583,9 @@
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Il cuntegn n'è betg lubì da Google Cast.";
 
+/* Related content media list title */
+"This might interest you" = "This might interest you";
+
 /* Period setting option */
 "This week" = "Emna actuala";
 
@@ -609,8 +619,7 @@
 
 /* Header for video search results
    Title displayed at the top of the video view
-   Videos option
-   Videos tab title */
+   Videos option */
 "Videos" = "Videos";
 
 /* Header for video and audio search results */

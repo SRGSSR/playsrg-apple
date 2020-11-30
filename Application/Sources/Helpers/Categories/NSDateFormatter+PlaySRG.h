@@ -16,6 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) NSDateFormatter *play_timeFormatter;
 
 /**
+ *  Absolute date and time formatting.
+ */
+@property (class, nonatomic, readonly) NSDateFormatter *play_dateAndTimeFormatter;
+
+/**
  *  Relative date and time formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today.
  *
  * @discussion Use `PlayAccessibilityRelativeDateAndTimeFromDate` for accessibility-oriented formatting.

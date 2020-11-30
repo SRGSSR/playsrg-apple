@@ -61,7 +61,7 @@ struct ShowDetailView: View {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(420))
             return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
         case .information:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -87,7 +87,7 @@ struct ShowDetailView: View {
                 ProgressView()
             case let .message(message):
                 Text(message)
-                    .srgFont(.regular, size: .headline)
+                    .srgFont(.body)
                     .lineLimit(2)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -133,7 +133,7 @@ struct ShowDetailView: View {
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text(show.title)
-                        .srgFont(.bold, size: .title)
+                        .srgFont(.title1)
                         .lineLimit(3)
                         .foregroundColor(.white)
                     if let broadcastInformationMessage = show.broadcastInformation?.message {
@@ -141,7 +141,7 @@ struct ShowDetailView: View {
                     }
                     if let lead = show.lead {
                         Text(lead)
-                            .srgFont(.regular, size: .headline)
+                            .srgFont(.subtitle)
                             .foregroundColor(.white)
                     }
                     Spacer()
@@ -171,7 +171,7 @@ struct ShowDetailView: View {
                         VisualView(show: show)
                         Spacer()
                         Text(NSLocalizedString("Available episodes", comment: "Title of the episode list header in show detail view"))
-                            .srgFont(.medium, size: .title)
+                            .srgFont(.title2)
                             .foregroundColor(.white)
                             .opacity(0.8)
                             .frame(maxWidth: .infinity, alignment: .leading)

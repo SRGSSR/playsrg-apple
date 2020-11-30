@@ -21,12 +21,12 @@ struct LabeledButton: View {
                     .onFocusChange { isFocused = $0 }
             }
             Text(label)
-                .srgFont(.regular, size: .subtitle)
+                .srgFont(.button2)
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .foregroundColor(isFocused ? .white : .gray)
         }
-        .frame(width: 120)
+        .frame(width: 130)
     }
 }
 

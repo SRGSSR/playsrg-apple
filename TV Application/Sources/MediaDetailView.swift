@@ -65,11 +65,11 @@ struct MediaDetailView: View {
                 GeometryReader { geometry in
                     VStack(alignment: .leading, spacing: 0) {
                         Text(MediaDescription.subtitle(for: media, style: .show))
-                            .srgFont(.bold, size: .title)
+                            .srgFont(.title1)
                             .lineLimit(3)
                             .foregroundColor(.white)
                         Text(MediaDescription.title(for: media, style: .show))
-                            .srgFont(.regular, size: .headline)
+                            .srgFont(.headline1)
                             .foregroundColor(.white)
                         Spacer()
                             .frame(height: 20)
@@ -97,7 +97,7 @@ struct MediaDetailView: View {
             HStack(spacing: 10) {
                 Image(icon)
                 Text(values.joined(separator: " - "))
-                    .srgFont(.regular, size: .caption)
+                    .srgFont(.overline)
                     .foregroundColor(.white)
             }
         }
@@ -143,6 +143,14 @@ struct MediaDetailView: View {
         
         @State var isFocused: Bool = false
         
+        var availabilityInformation: String {
+            var publication = String(format: NSLocalizedString("Published on %@", comment:"Publication date lead on the media detail page"), DateFormatter.play_dateAndTime.string(from: media.date))
+            if let availability = MediaDescription.availability(for: media) {
+                publication += " - " + availability
+            }
+            return publication
+        }
+        
         var body: some View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
@@ -152,7 +160,7 @@ struct MediaDetailView: View {
                         }, label: {
                             Text(summary)
                                 .foregroundColor(.white)
-                                .srgFont(.light, size: .subtitle)
+                                .srgFont(.body)
                                 .frame(width: geometry.size.width, alignment: .leading)
                                 .padding([.top, .bottom], 5)
                                 .onFocusChange { isFocused = $0 }
@@ -160,12 +168,10 @@ struct MediaDetailView: View {
                         .buttonStyle(TextButtonStyle(focused: isFocused))
                     }
                     
-                    if let availability = MediaDescription.availability(for: media) {
-                        Text(availability)
-                            .srgFont(.light, size: .subheadline)
-                            .foregroundColor(.white)
-                            .padding([.top, .bottom], 5)
-                    }
+                    Text(availabilityInformation)
+                        .srgFont(.overline)
+                        .foregroundColor(.white)
+                        .padding([.top, .bottom], 5)
                 }
             }
         }
@@ -174,10 +180,19 @@ struct MediaDetailView: View {
     struct ActionsView: View {
         let media: SRGMedia
         
+        var playButtonLabel: String {
+            if HistoryPlaybackProgressForMediaMetadata(media) == 0 {
+                return media.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio in media detail view") : NSLocalizedString("Watch", comment: "Play button label for video in media detail view")
+            }
+            else {
+                return NSLocalizedString("Resume", comment: "Resume playback button label")
+            }
+        }
+        
         var body: some View {
             HStack(alignment: .top, spacing: 30) {
                 // TODO: 22 icon?
-                LabeledButton(icon: "play-50", label: media.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio in media detail view") : NSLocalizedString("Watch", comment: "Play button label for video in media detail view")) {
+                LabeledButton(icon: "play-50", label: playButtonLabel) {
                     navigateToMedia(media, play: true)
                 }
                 #if DEBUG
@@ -211,8 +226,8 @@ struct MediaDetailView: View {
                             .fill(Color(.srg_color(fromHexadecimalString: "#222222")!))
                             .opacity(0.8)
                         ZStack {
-                            Text(NSLocalizedString("Related content", comment: "Related content media list title"))
-                                .srgFont(.medium, size: .headline)
+                            Text(NSLocalizedString("This might interest you", comment: "Related content media list title"))
+                                .srgFont(.body)
                                 .foregroundColor(.gray)
                                 .padding([.leading, .trailing], 40)
                                 .padding(.top, 15)

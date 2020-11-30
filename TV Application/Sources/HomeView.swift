@@ -17,14 +17,14 @@ struct HomeView: View {
                     return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
                 }
                 else {
-                    return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
+                    return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(360))
                 }
             case .tvTopicsAccess:
                 return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
             case .radioAllShows:
                 return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
             default:
-                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(340))
+                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(360))
             }
         }
         
@@ -114,14 +114,18 @@ struct HomeView: View {
                 if Self.isHeroAppearance(for: item) {
                     HeroMediaCell(media: media)
                 }
-                else if media.contentType == .livestream || media.contentType == .scheduledLivestream {
-                    LiveMediaCell(media: media)
+                else if HomeModel.RowId.liveIds.contains(item.rowId) {
+                    if media.contentType == .livestream || media.contentType == .scheduledLivestream {
+                        LiveMediaCell(media: media)
+                    }
+                    else {
+                        MediaCell(media: media, style: .show) {
+                            navigateToMedia(media, play: true)
+                        }
+                    }
                 }
                 else {
-                    MediaCell(media: media, style: .show) {
-                        let play = HomeModel.RowId.liveIds.contains(item.rowId)
-                        navigateToMedia(media, play: play)
-                    }
+                    MediaCell(media: media, style: .show)
                 }
             case .mediaPlaceholder:
                 if Self.isHeroAppearance(for: item) {
@@ -149,12 +153,12 @@ struct HomeView: View {
             VStack(alignment: .leading) {
                 if let title = rowId.title {
                     Text(title)
-                        .srgFont(.medium, size: .title)
+                        .srgFont(.title2)
                         .lineLimit(1)
                 }
                 if let lead = rowId.lead {
                     Text(lead)
-                        .srgFont(.light, size: .headline)
+                        .srgFont(.subtitle)
                         .lineLimit(1)
                         .opacity(0.8)
                     Spacer()
