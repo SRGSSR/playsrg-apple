@@ -443,7 +443,7 @@
 "Reset" = "Zurücksetzen";
 
 /* Resume playback button label */
-"Resume" = "Resume";
+"Resume" = "Weiter abspielen";
 
 /* Label to present the search view
    Search placeholder text
@@ -584,7 +584,7 @@
 "This content is not allowed to be played with Google Cast." = "Aus rechtlichen Gründen kann dieser Inhalt nicht mit Google Cast abgespielt werden.";
 
 /* Related content media list title */
-"This might interest you" = "This might interest you";
+"This might interest you" = "Das könnte Sie auch interessieren";
 
 /* Period setting option */
 "This week" = "Diese Woche";

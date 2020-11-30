@@ -235,7 +235,7 @@
 "less than 1 hour" = "main ch'ina ura";
 
 /* Play button label for audio in media detail view */
-"Listen" = "Listen";
+"Listen" = "Tadlar";
 
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
@@ -377,7 +377,7 @@
 "Properties" = "Funcziunalitads";
 
 /* Publication date lead on the media detail page */
-"Published on %@" = "Published on %@";
+"Published on %@" = "Publitgà ils %@";
 
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Trair giu per rechargiar";
@@ -443,7 +443,7 @@
 "Reset" = "Reset";
 
 /* Resume playback button label */
-"Resume" = "Resume";
+"Resume" = "Guardar vinavant";
 
 /* Label to present the search view
    Search placeholder text
@@ -584,7 +584,7 @@
 "This content is not allowed to be played with Google Cast." = "Il cuntegn n'è betg lubì da Google Cast.";
 
 /* Related content media list title */
-"This might interest you" = "This might interest you";
+"This might interest you" = "Quai pudess interessar Vus";
 
 /* Period setting option */
 "This week" = "Emna actuala";
@@ -626,7 +626,7 @@
 "Videos and audios" = "Videos ed audios";
 
 /* Play button label for video in media detail view */
-"Watch" = "Watch";
+"Watch" = "Guardar";
 
 /* Suggested invocation phrase to watch a show
    Suggested invocation phrase to watch a video
