@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var viewControllers = [UIViewController]()
         
         let videosViewController = UIHostingController(rootView: VideosView())
-        videosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Videos", comment: "Videos tab title"), image: nil, tag: 0)
+        videosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home tab title"), image: nil, tag: 0)
         viewControllers.append(videosViewController)
         
         let configuration = ApplicationConfiguration.shared
