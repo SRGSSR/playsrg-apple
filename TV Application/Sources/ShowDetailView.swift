@@ -10,6 +10,8 @@ import SwiftUI
 struct ShowDetailView: View {
     @ObservedObject var model: ShowDetailModel
     
+    static let headerHeight: CGFloat = 500
+    
     enum Section: Hashable {
         case medias
         case information
@@ -17,7 +19,7 @@ struct ShowDetailView: View {
     
     enum Content: Hashable {
         case loading
-        case message(_ message: String)
+        case message(_ message: String, iconName: String)
         case media(_ media: SRGMedia)
     }
     
@@ -32,14 +34,14 @@ struct ShowDetailView: View {
         case .loading:
             return [Row(section: .information, items: [.loading])]
         case let .failed(error: error):
-            let item = Content.message(friendlyMessage(for: error))
+            let item = Content.message(friendlyMessage(for: error), iconName: "error-90")
             return [Row(section: .information, items: [item])]
         case let .loaded(medias: medias):
             if !medias.isEmpty {
                 return [Row(section: .medias, items: medias.map { .media($0) })]
             }
             else {
-                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"))
+                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-90")
                 return [Row(section: .information, items: [item])]
             }
         }
@@ -47,14 +49,14 @@ struct ShowDetailView: View {
     
     private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(500)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(Self.headerHeight)),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .topLeading
         )
         return [header]
     }
     
-    private static func layoutGroup(for section: Section) -> NSCollectionLayoutGroup {
+    private static func layoutGroup(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutGroup {
         switch section {
         case .medias:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -67,53 +69,59 @@ struct ShowDetailView: View {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
+            let height = geometry.size.height - Self.headerHeight
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
             return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         }
     }
     
-    private static func layoutSection(for section: Section) -> NSCollectionLayoutSection {
-        let section = NSCollectionLayoutSection(group: layoutGroup(for: section))
+    private static func layoutSection(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutSection {
+        let section = NSCollectionLayoutSection(group: layoutGroup(for: section, geometry: geometry))
         section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
         return section
     }
     
     var body: some View {
-        CollectionView(rows: rows) { _, _ in
-            return Self.layoutSection(for: rows.first!.section)
-        } cell: { _, item in
-            switch item {
-            case .loading:
-                ProgressView()
-            case let .message(message):
-                Text(message)
-                    .srgFont(.body)
-                    .lineLimit(2)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            case let .media(media):
-                MediaCell(media: media)
-                    .onAppear {
-                        model.loadNextPage(from: media)
+        GeometryReader { geometry in
+            CollectionView(rows: rows) { _, _ in
+                return Self.layoutSection(for: rows.first!.section, geometry: geometry)
+            } cell: { _, item in
+                switch item {
+                case .loading:
+                    ProgressView()
+                case let .message(text, iconName):
+                    VStack(spacing: 20) {
+                        Image(iconName)
+                        Text(text)
+                            .srgFont(.body)
+                            .lineLimit(2)
+                            .foregroundColor(.white)
                     }
+                    .padding()
+                case let .media(media):
+                    MediaCell(media: media)
+                        .onAppear {
+                            model.loadNextPage(from: media)
+                        }
+                }
+            } supplementaryView: { _, _ in
+                HeaderView(show: model.show)
+                    .padding([.leading, .trailing], 20)
             }
-        } supplementaryView: { _, _ in
-            HeaderView(show: model.show)
-                .padding([.leading, .trailing], 20)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(.play_black))
+            .edgesIgnoringSafeArea(.all)
+            .onAppear {
+                model.refresh()
+            }
+            .onDisappear {
+                model.cancelRefresh()
+            }
+            .onResume {
+                model.refresh()
+            }
+            .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.play_black))
-        .edgesIgnoringSafeArea(.all)
-        .onAppear {
-            model.refresh()
-        }
-        .onDisappear {
-            model.cancelRefresh()
-        }
-        .onResume {
-            model.refresh()
-        }
-        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct VisualView: View {
