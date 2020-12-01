@@ -23,8 +23,7 @@ struct HomeView: View {
                 let width = CGFloat(250)
                 return NSCollectionLayoutSize(widthDimension: .absolute(width), heightDimension: .absolute(width * 9 / 16))
             case .radioAllShows:
-                let width = CGFloat(375)
-                return NSCollectionLayoutSize(widthDimension: .absolute(width), heightDimension: .absolute(width * 9 / 16))
+                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(260))
             default:
                 return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(360))
             }
