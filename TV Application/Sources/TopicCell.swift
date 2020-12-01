@@ -29,7 +29,7 @@ struct TopicCell: View {
                 }
             }) {
                 ZStack {
-                    ImageView(url: imageUrl, contentMode: .fill)
+                    ImageView(url: imageUrl)
                     Rectangle()
                         .fill(Color(white: 0, opacity: 0.4))
                     Text(title)

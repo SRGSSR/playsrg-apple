@@ -36,11 +36,30 @@ struct ImageView: View {
             self.contentMode = contentMode
         }
         
+        private func optimalContentMode(for size: CGSize) -> ContentMode {
+            guard contentMode == .fit,
+                  let imageSize = fetchImage.image?.size else { return contentMode }
+            
+            let tolerance = CGFloat(0.01)
+            
+            // Calculate the size of the fitted image in the provided size. If matching up to a given tolerance,
+            // then apply filling behavior instead to have a perfect fit (thus entirely hiding the image background)
+            // while only slightly stretching the image.
+            if size.width > size.height {
+                let resizedImageHeight = imageSize.height * size.width / imageSize.width
+                return (resizedImageHeight - size.height).magnitude / size.height < tolerance ? .fill : .fit
+            }
+            else {
+                let resizedImageWidth = imageSize.width * size.height / imageSize.height
+                return (resizedImageWidth - size.width).magnitude / size.width < tolerance ? .fill : .fit
+            }
+        }
+        
         public var body: some View {
             GeometryReader { geometry in
                 fetchImage.view?
                     .resizable()
-                    .aspectRatio(contentMode: contentMode)
+                    .aspectRatio(contentMode: optimalContentMode(for: geometry.size))
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .clipped()
                     .onReceive(fetchImage.$isLoading) { loading in
