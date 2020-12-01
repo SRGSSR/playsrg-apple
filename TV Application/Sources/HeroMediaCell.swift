@@ -43,7 +43,7 @@ struct HeroMediaCell: View {
             VStack {
                 Spacer()
                 Text(MediaDescription.title(for: media, style: .show))
-                    .srgFont(.overline)
+                    .srgFont(.subtitle)
                     .lineLimit(1)
                     .opacity(0.8)
                 Spacer()
