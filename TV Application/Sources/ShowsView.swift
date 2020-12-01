@@ -109,7 +109,9 @@ struct ShowsView: View {
                     Rectangle()
                         .fill(Color.clear)
                 case let .loaded(alphabeticalShows: alphabeticalShows):
-                    HeaderView(character: alphabeticalShows[indexPath.section].character)
+                    let character = alphabeticalShows[indexPath.section].character
+                    let title = (character == "#") ? "#0-9" : String(character)
+                    HeaderView(title: title)
                         .padding([.leading, .trailing], 20)
                 }
             }
@@ -131,11 +133,11 @@ struct ShowsView: View {
     }
     
     private struct HeaderView: View {
-        let character: Character
+        let title: String
         
         var body: some View {
             GeometryReader { geometry in
-                Text(String(character))
+                Text(title)
                     .srgFont(.title2)
                     .lineLimit(1)
                     .foregroundColor(.white)
