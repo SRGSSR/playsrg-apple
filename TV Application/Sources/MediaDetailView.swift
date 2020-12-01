@@ -56,13 +56,15 @@ struct MediaDetailView: View {
             FocusableRegion {
                 GeometryReader { geometry in
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(MediaDescription.subtitle(for: model.media, style: .show))
+                        Text(model.media.title)
                             .srgFont(.title1)
                             .lineLimit(3)
                             .foregroundColor(.white)
-                        Text(MediaDescription.title(for: model.media, style: .show))
-                            .srgFont(.headline1)
-                            .foregroundColor(.white)
+                        if let showTitle = model.media.show?.title, showTitle.lowercased() != model.media.title.lowercased() {
+                            Text(showTitle)
+                                .srgFont(.headline1)
+                                .foregroundColor(.white)
+                        }
                         Spacer()
                             .frame(height: 20)
                         AttributesView(model: model)
