@@ -10,8 +10,6 @@ import SwiftUI
 struct ShowsView: View {
     @ObservedObject var model: ShowsModel
     
-    static let headerHeight: CGFloat = 100
-    
     enum Section: Hashable {
         case shows(character: Character)
         case information
@@ -51,7 +49,7 @@ struct ShowsView: View {
     
     private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(Self.headerHeight)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60)),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .topLeading
         )
@@ -78,13 +76,10 @@ struct ShowsView: View {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            let height = geometry.size.height - Self.headerHeight
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(geometry.size.height))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
-            let section = NSCollectionLayoutSection(group: group)
-            section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
-            return section
+            return NSCollectionLayoutSection(group: group)
         }
     }
     
