@@ -8,7 +8,10 @@ import FXReachability
 import SwiftUI
 
 extension View {
-    func onResume(perform action: @escaping () -> Void) -> some View {
+    /**
+     *  Called when the application is woken up, either by the user or network being reachable again.
+     */
+    func onWake(perform action: @escaping () -> Void) -> some View {
         onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             action()
         }

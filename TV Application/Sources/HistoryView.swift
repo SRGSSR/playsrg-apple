@@ -114,7 +114,7 @@ struct HistoryView: View {
             .onDisappear {
                 model.cancelRefresh()
             }
-            .onResume {
+            .onWake {
                 model.refresh()
             }
         }

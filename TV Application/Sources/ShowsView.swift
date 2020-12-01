@@ -125,7 +125,7 @@ struct ShowsView: View {
             .onDisappear {
                 model.cancelRefresh()
             }
-            .onResume {
+            .onWake {
                 model.refresh()
             }
             .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
