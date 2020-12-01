@@ -66,12 +66,13 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `tvEvents`: Event modules (expand into a row per event).
 * `tvFavoriteShows`: TV shows added to the favorites.
 * `tvLatest`: The latest medias.
+* `tvWebFirst`: Medias available first on Play.
 * `tvMostPopular`: The most popular videos.
 * `tvShowsAccess`: A-Z and By date access buttons.
 * `tvSoonExpiring`: Soon expiring videos.
 * `tvTopics`: Topics (expand into a row per topic).
 * `tvTopicsAccess`: Topic access.
-* `tvTrending`: Trending medias and editorial picks. See `tvTrendingEpisodesOnly` and `tvTrendingEditorialLimit` options.
+* `tvTrending`: Trending medias and editorial picks. See `tvTrendingEpisodesOnly`, `tvTrendingEditorialLimit` and `tvTrendingPrefersHeroStage` options.
 
 ### Topic configuration
 
@@ -86,6 +87,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `tvFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured TV media lists will not display any header.
 * `tvTrendingEpisodesOnly` (optional, boolean): If set to `true`, `tvTrending` only returns episodes.
 * `tvTrendingEditorialLimit` (optional, number): The maximum number of editorial recommendations returned by `tvTrending`. If not set, all are returned.
+* `tvTrendingPrefersHeroStage` (optional, boolean): If set to `true`, `tvTrending` returns hero stage content (`tvTrendingEpisodesOnly` and `tvTrendingEditorialLimit` are ignored).
 
 ## Audio homepage
 

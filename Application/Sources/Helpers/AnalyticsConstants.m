@@ -50,6 +50,7 @@ AnalyticsPageTitle const AnalyticsPageTitleSports = @"sports";
 AnalyticsPageTitle const AnalyticsPageTitleTrending = @"trending";
 AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
 AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
+AnalyticsPageTitle const AnalyticsPageTitleWebFirst = @"web first";
 AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
 
 AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
@@ -127,6 +128,7 @@ AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
         s_titles = @{ @(HomeSectionTVTrending) : AnalyticsPageTitleTrending,
                       @(HomeSectionTVLive) : AnalyticsPageTitleTV,
                       @(HomeSectionTVLatest) : AnalyticsPageTitleLatest,
+                      @(HomeSectionTVWebFirst) : AnalyticsPageTitleWebFirst,
                       @(HomeSectionTVMostPopular) : AnalyticsPageTitleMostPopular,
                       @(HomeSectionTVSoonExpiring) : AnalyticsPageTitleSoonExpiring,
                       @(HomeSectionTVScheduledLivestreams) : AnalyticsPageTitleEvents,

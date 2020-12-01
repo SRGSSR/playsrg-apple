@@ -161,6 +161,7 @@ extension HomeModel {
     enum RowId: Hashable {
         case tvTrending(appearance: RowAppearance)
         case tvLatest
+        case tvWebFirst
         case tvMostPopular
         case tvSoonExpiring
         case tvLatestForModule(_ module: SRGModule?, type: SRGModuleType)
@@ -193,12 +194,23 @@ extension HomeModel {
             
             switch self {
             case .tvTrending:
-                return dataProvider.tvTrendingMedias(for: vendor, limit: pageSize, editorialLimit: configuration.tvTrendingEditorialLimit?.uintValue,
-                                                     episodesOnly: configuration.tvTrendingEpisodesOnly)
-                    .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
+                if configuration.tvTrendingPrefersHeroStage {
+                    return dataProvider.tvHeroStageMedias(for: vendor)
+                        .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
+                        .eraseToAnyPublisher()
+                }
+                else {
+                    return dataProvider.tvTrendingMedias(for: vendor, limit: pageSize, editorialLimit: configuration.tvTrendingEditorialLimit?.uintValue,
+                                                         episodesOnly: configuration.tvTrendingEpisodesOnly)
+                        .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
+                        .eraseToAnyPublisher()
+                }
             case .tvLatest:
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
+                    .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
+                    .eraseToAnyPublisher()
+            case .tvWebFirst:
+                return dataProvider.tvLatestWebFirstEpisodes(for: vendor, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case .tvMostPopular:
@@ -272,6 +284,8 @@ extension HomeModel {
                 return appearance != .hero ? NSLocalizedString("Trending videos", comment: "Title label used to present trending TV videos") : nil
             case .tvLatest:
                 return NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos")
+            case .tvWebFirst:
+                return NSLocalizedString("Already available", comment: "Title label used to present already available videos, usually badged as web first")
             case .tvMostPopular:
                 return NSLocalizedString("Most popular", comment: "Title label used to present the TV most popular videos")
             case .tvSoonExpiring:

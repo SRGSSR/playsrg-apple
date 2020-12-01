@@ -61,6 +61,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSports;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTrending;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTV;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWatchLater;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWebFirst;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
 
 /**

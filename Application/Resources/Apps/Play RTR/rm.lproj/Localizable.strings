@@ -62,6 +62,9 @@
 /* Title of the first cell of a media list on homepage. */
 "All content" = "Entir cuntegn";
 
+/* Title label used to present already available videos, usually badged as web first */
+"Already available" = "Already available";
+
 /* No comment provided by engineer. */
 "Always send" = "Trametter adina";
 

@@ -22,6 +22,7 @@ static HomeSection HomeSectionWithString(NSString *string)
                         @"tvTopics" : @(HomeSectionTVTopics),
                         @"tvTopicsAccess" : @(HomeSectionTVTopicsAccess),
                         @"tvLatest" : @(HomeSectionTVLatest),
+                        @"tvWebFirst": @(HomeSectionTVWebFirst),
                         @"tvMostPopular" : @(HomeSectionTVMostPopular),
                         @"tvSoonExpiring" : @(HomeSectionTVSoonExpiring),
                         @"tvScheduledLivestreams" : @(HomeSectionTVScheduledLivestreams),
