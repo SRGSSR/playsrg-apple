@@ -67,16 +67,18 @@ struct MediaDetailView: View {
                         }
                         Spacer()
                             .frame(height: 20)
-                        AttributesView(model: model)
-                        Spacer()
-                            .frame(height: 20)
-                        SummaryView(model: model)
-                        Spacer()
-                        ActionsView(model: model)
-                            .layoutPriority(1)
-                            .prefersDefaultFocus(in: namespace)
+                        VStack(alignment: .leading, spacing: 0) {
+                            AttributesView(model: model)
+                            Spacer()
+                                .frame(height: 20)
+                            SummaryView(model: model)
+                            Spacer()
+                            ActionsView(model: model)
+                                .layoutPriority(1)
+                                .prefersDefaultFocus(in: namespace)
+                        }
+                        .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .leading)
                     }
-                    .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .leading)
                     .focusScope(namespace)
                 }
             }
