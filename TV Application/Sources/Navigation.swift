@@ -50,8 +50,10 @@ func showText(_ text: String, animated: Bool = true) {
     
     let textViewController = TvOSTextViewerViewController()
     textViewController.text = text
-    textViewController.textAttributes = [.foregroundColor: UIColor.white,
-                                         .font: UIFont.srg_regularFont(withTextStyle: .subtitle)]
+    textViewController.textAttributes = [
+        .foregroundColor: UIColor.white,
+        .font: SRGFont.uiFont(.body)
+    ]
     textViewController.textEdgeInsets = UIEdgeInsets(top: 100, left: 250, bottom: 100, right: 250)
     textViewController.modalPresentationStyle = .overFullScreen
     topViewController.present(textViewController, animated: animated)

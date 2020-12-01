@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import UIKit
 import SwiftUI
 
 // FIXME: Should be moved to SRG Appearance, see issues
@@ -90,13 +91,22 @@ enum SRGFont {
         }
     }
     
-    static public func font(_ style: Style, relativeTo textStyle: Font.TextStyle) -> Font {
+    static public func font(_ style: Style, relativeTo textStyle: Font.TextStyle = .body) -> Font {
         let properties = style.properties
         return .custom(properties.kind.name, size: properties.size, relativeTo: textStyle)
     }
     
+    static public func uiFont(_ style: Style, relativeTo textStyle: UIFont.TextStyle = .body) -> UIFont {
+        let properties = style.properties
+        return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: uiFont(properties.kind, fixedSize: properties.size))
+    }
+    
     static public func font(_ kind: Kind, fixedSize: CGFloat) -> Font {
         return .custom(kind.name, fixedSize: fixedSize)
+    }
+    
+    static public func uiFont(_ kind: Kind, fixedSize: CGFloat) -> UIFont {
+        return UIFont(name: kind.name, size: fixedSize)!
     }
 }
 
