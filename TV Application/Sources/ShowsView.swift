@@ -51,7 +51,7 @@ struct ShowsView: View {
     
     private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(Self.headerHeight)),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .topLeading
         )
