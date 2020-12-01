@@ -60,11 +60,6 @@ struct MediaVisualView: View {
                     .frame(height: 8)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
-            
-            if let media = media {
-                AvailabilityBadge(media: media)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            }
         }
         .onAppear {
             updateProgress()

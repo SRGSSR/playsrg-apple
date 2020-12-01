@@ -63,6 +63,9 @@ struct HeroMediaCell: View {
                         .opacity(0.8)
                         .padding()
                 }
+                if let media = media {
+                    AvailabilityBadge(media: media)
+                }
                 Spacer()
             }
             .foregroundColor(.white)
