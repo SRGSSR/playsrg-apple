@@ -70,6 +70,7 @@ struct MediaCell: View {
                 Text(MediaDescription.subtitle(for: media, style: style))
                     .srgFont(.headline2)
                     .lineLimit(2)
+                    .layoutPriority(1)
             }
         }
     }
