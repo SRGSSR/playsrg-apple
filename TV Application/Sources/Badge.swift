@@ -12,7 +12,7 @@ struct Badge: View {
     
     var body: some View {
         Text(text)
-            .srgFont(.label)
+            .srgFont(.caption)
             .foregroundColor(.white)
             .padding([.top, .bottom], 5)
             .padding([.leading, .trailing], 8)
