@@ -17,7 +17,7 @@ NSString *TitleForHomeSection(HomeSection homeSection)
                      @(HomeSectionTVTopics) : NSLocalizedString(@"Topics", @"Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available"),
                      @(HomeSectionTVTopicsAccess) : NSLocalizedString(@"Topics", @"Title label used to present TV topics"),
                      @(HomeSectionTVLatest) : NSLocalizedString(@"Latest videos", @"Title label used to present the latest videos"),
-                     @(HomeSectionTVWebFirst) : NSLocalizedString(@"Readily available", @"Title label used to present readily available videos"),
+                     @(HomeSectionTVWebFirst) : NSLocalizedString(@"Already available", @"Title label used to present already available videos, usually badged as web first"),
                      @(HomeSectionTVMostPopular) : NSLocalizedString(@"Most popular", @"Title label used to present the TV most popular videos"),
                      @(HomeSectionTVSoonExpiring) : NSLocalizedString(@"Available for a limited time", @"Title label used to present the soon expiring videos"),
                      @(HomeSectionTVScheduledLivestreams) : NSLocalizedString(@"Events", @"Title label used to present scheduled livestream medias"),

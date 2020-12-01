@@ -285,7 +285,7 @@ extension HomeModel {
             case .tvLatest:
                 return NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos")
             case .tvWebFirst:
-                return NSLocalizedString("Readily available", comment: "Title label used to present readily available videos")
+                return NSLocalizedString("Already available", comment: "Title label used to present already available videos, usually badged as web first")
             case .tvMostPopular:
                 return NSLocalizedString("Most popular", comment: "Title label used to present the TV most popular videos")
             case .tvSoonExpiring:
