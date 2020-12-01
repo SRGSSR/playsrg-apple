@@ -94,6 +94,7 @@ struct HistoryView: View {
                             .lineLimit(2)
                             .foregroundColor(.white)
                     }
+                    .opacity(0.8)
                     .padding()
                 case let .media(media):
                     MediaCell(media: media, style: .show)
