@@ -68,7 +68,7 @@ struct MediaCell: View {
                     .srgFont(.subtitle)
                     .lineLimit(2)
                 Text(MediaDescription.subtitle(for: media, style: style))
-                    .srgFont(.headline2)
+                    .srgFont(style == .date ? .overline : .headline2)
                     .lineLimit(2)
                     .layoutPriority(1)
             }

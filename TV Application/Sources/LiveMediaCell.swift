@@ -179,7 +179,7 @@ struct LiveMediaCell: View, LiveMediaData {
                 
                 if let subtitle = subtitle {
                     Text(subtitle)
-                        .srgFont(.headline2)
+                        .srgFont(.overline)
                         .lineLimit(2)
                 }
             }

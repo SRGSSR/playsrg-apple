@@ -121,7 +121,7 @@ struct HomeView: View {
                         LiveMediaCell(media: media)
                     }
                     else {
-                        MediaCell(media: media, style: .show) {
+                        MediaCell(media: media, style: .date) {
                             navigateToMedia(media, play: true)
                         }
                     }
