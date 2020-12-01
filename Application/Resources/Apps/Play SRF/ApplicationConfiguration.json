@@ -10,6 +10,7 @@
   "videoHomeSections": "tvTrending,tvTopicsAccess,tvShowsAccess,tvFavoriteShows,tvEvents,tvTopics",
   "liveHomeSections": "tvLive,radioLive",
   "tvTrendingEpisodesOnly": true,
+  "tvTrendingPrefersHeroStage": true,
   "tvFeaturedHomeSectionHeaderHidden": true,
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioMostPopular,radioLatestEpisodes",
   "radioFeaturedHomeSectionHeaderHidden": true,
