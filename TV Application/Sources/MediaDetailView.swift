@@ -9,22 +9,14 @@ import SRGLetterbox
 import SwiftUI
 
 struct MediaDetailView: View {
-    let media: SRGMedia
-    
     @ObservedObject var model: MediaDetailModel
-    @State private var currentMedia: SRGMedia?
     
     init(media: SRGMedia) {
-        self.media = media
         model = MediaDetailModel(media: media)
     }
     
-    private var displayedMedia: SRGMedia {
-        return currentMedia ?? media
-    }
-    
     private var imageUrl: URL? {
-        return displayedMedia.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
+        return model.media.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
     }
     
     var body: some View {
@@ -33,10 +25,10 @@ struct MediaDetailView: View {
             Rectangle()
                 .fill(Color(white: 0, opacity: 0.6))
             VStack {
-                DescriptionView(media: displayedMedia)
+                DescriptionView(model: model)
                     .padding([.top, .leading, .trailing], 100)
                     .padding(.bottom, 30)
-                RelatedMediasView(model: model, focusedMedia: $currentMedia)
+                RelatedMediasView(model: model)
                     .frame(maxWidth: .infinity, maxHeight: 350)
             }
         }
@@ -56,7 +48,7 @@ struct MediaDetailView: View {
     }
     
     private struct DescriptionView: View {
-        let media: SRGMedia
+        @ObservedObject var model: MediaDetailModel
         
         @Namespace private var namespace
         
@@ -64,21 +56,21 @@ struct MediaDetailView: View {
             FocusableRegion {
                 GeometryReader { geometry in
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(MediaDescription.subtitle(for: media, style: .show))
+                        Text(MediaDescription.subtitle(for: model.media, style: .show))
                             .srgFont(.title1)
                             .lineLimit(3)
                             .foregroundColor(.white)
-                        Text(MediaDescription.title(for: media, style: .show))
+                        Text(MediaDescription.title(for: model.media, style: .show))
                             .srgFont(.headline1)
                             .foregroundColor(.white)
                         Spacer()
                             .frame(height: 20)
-                        AttributesView(media: media)
+                        AttributesView(model: model)
                         Spacer()
                             .frame(height: 20)
-                        SummaryView(media: media)
+                        SummaryView(model: model)
                         Spacer()
-                        ActionsView(media: media)
+                        ActionsView(model: model)
                             .layoutPriority(1)
                             .prefersDefaultFocus(in: namespace)
                     }
@@ -104,24 +96,24 @@ struct MediaDetailView: View {
     }
     
     struct AttributesView: View {
-        let media: SRGMedia
+        @ObservedObject var model: MediaDetailModel
         
         var body: some View {
             HStack(spacing: 30) {
                 HStack(spacing: 4) {
-                    if let youthProtectionLogoImage = YouthProtectionImageForColor(media.youthProtectionColor) {
+                    if let youthProtectionLogoImage = YouthProtectionImageForColor(model.media.youthProtectionColor) {
                         Image(uiImage: youthProtectionLogoImage)
                     }
-                    DurationLabel(media: media)
+                    DurationLabel(media: model.media)
                 }
                 
-                if let isWebFirst = media.play_isWebFirst, isWebFirst {
+                if let isWebFirst = model.media.play_isWebFirst, isWebFirst {
                     Badge(text: NSLocalizedString("Web first", comment: "Web first label on media detail page"), color: Color(.srg_blue))
                 }
-                if let subtitleLanguages = media.play_subtitleLanguages, !subtitleLanguages.isEmpty {
+                if let subtitleLanguages = model.media.play_subtitleLanguages, !subtitleLanguages.isEmpty {
                     AttributeView(icon: "subtitles_off-22", values: subtitleLanguages)
                 }
-                if let audioLanguages = media.play_audioLanguages, !audioLanguages.isEmpty {
+                if let audioLanguages = model.media.play_audioLanguages, !audioLanguages.isEmpty {
                     AttributeView(icon: "audios-22", values: audioLanguages)
                 }
             }
@@ -139,13 +131,12 @@ struct MediaDetailView: View {
             }
         }
         
-        let media: SRGMedia
-        
+        @ObservedObject var model: MediaDetailModel
         @State var isFocused: Bool = false
         
         var availabilityInformation: String {
-            var publication = DateFormatter.play_dateAndTime.string(from: media.date)
-            if let availability = MediaDescription.availability(for: media) {
+            var publication = DateFormatter.play_dateAndTime.string(from: model.media.date)
+            if let availability = MediaDescription.availability(for: model.media) {
                 publication += " - " + availability
             }
             return publication
@@ -154,7 +145,7 @@ struct MediaDetailView: View {
         var body: some View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
-                    if let summary = media.play_fullSummary {
+                    if let summary = model.media.play_fullSummary {
                         Button(action: {
                             showText(summary)
                         }, label: {
@@ -178,11 +169,11 @@ struct MediaDetailView: View {
     }
     
     struct ActionsView: View {
-        let media: SRGMedia
+        @ObservedObject var model: MediaDetailModel
         
         var playButtonLabel: String {
-            if HistoryPlaybackProgressForMediaMetadata(media) == 0 {
-                return media.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio in media detail view") : NSLocalizedString("Watch", comment: "Play button label for video in media detail view")
+            if HistoryPlaybackProgressForMediaMetadata(model.media) == 0 {
+                return model.media.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio in media detail view") : NSLocalizedString("Watch", comment: "Play button label for video in media detail view")
             }
             else {
                 return NSLocalizedString("Resume", comment: "Resume playback button label")
@@ -193,14 +184,14 @@ struct MediaDetailView: View {
             HStack(alignment: .top, spacing: 30) {
                 // TODO: 22 icon?
                 LabeledButton(icon: "play-50", label: playButtonLabel) {
-                    navigateToMedia(media, play: true)
+                    navigateToMedia(model.media, play: true)
                 }
                 #if DEBUG
                 LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Later", comment: "Watch or listen later button label in media detail view")) {
                     /* Toggle Watch Later state */
                 }
                 #endif
-                if let show = media.show {
+                if let show = model.media.show {
                     LabeledButton(icon: "episodes-22", label: NSLocalizedString("Show", comment:"Show (program) button label in media detail view")) {
                         navigateToShow(show)
                     }
@@ -211,12 +202,6 @@ struct MediaDetailView: View {
     
     private struct RelatedMediasView: View {
         @ObservedObject var model: MediaDetailModel
-        @Binding var focusedMedia: SRGMedia?
-        
-        init(model: MediaDetailModel, focusedMedia: Binding<SRGMedia?>) {
-            self.model = model
-            self._focusedMedia = focusedMedia
-        }
         
         var body: some View {
             ZStack {
@@ -240,7 +225,7 @@ struct MediaDetailView: View {
                                         }
                                         .onFocus { isFocused in
                                             if isFocused {
-                                                focusedMedia = media
+                                                model.selectedMedia = media
                                             }
                                         }
                                         .frame(width: 280)

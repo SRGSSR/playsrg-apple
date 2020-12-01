@@ -12,22 +12,27 @@ class MediaDetailModel: ObservableObject {
         let urns: [String]
     }
     
-    let media: SRGMedia
+    private let initialMedia: SRGMedia
     
     @Published private(set) var relatedMedias: [SRGMedia] = []
+    @Published var selectedMedia: SRGMedia? = nil
     
     var cancellables = Set<AnyCancellable>()
     
     init(media: SRGMedia) {
-        self.media = media
+        self.initialMedia = media
+    }
+    
+    var media: SRGMedia {
+        return selectedMedia ?? initialMedia
     }
     
     func refresh() {
-        if media.contentType == .livestream { return }
+        if initialMedia.contentType == .livestream { return }
         
         let middlewareUrl = ApplicationConfiguration.shared.middlewareURL
         
-        let resourcePath = "api/v2/playlist/recommendation/relatedContent/" + media.urn
+        let resourcePath = "api/v2/playlist/recommendation/relatedContent/" + initialMedia.urn
         let url = URL(string: resourcePath, relativeTo: middlewareUrl)!
         
         URLSession.shared.dataTaskPublisher(for: url)
