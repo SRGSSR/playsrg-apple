@@ -58,29 +58,34 @@ struct ShowsView: View {
         return [header]
     }
     
-    private static func layoutGroup(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutGroup {
+    private static func layoutSection(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutSection {
         switch section {
         case .shows:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(350))
-            return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
+            let width = CGFloat(375)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(width), heightDimension: .absolute(width * 9 / 16))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+            section.interGroupSpacing = 40
+            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0)
+            section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
+            return section
         case .information:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
             let height = geometry.size.height - Self.headerHeight
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
-            return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
+            return section
         }
-    }
-    
-    private static func layoutSection(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutSection {
-        let section = NSCollectionLayoutSection(group: layoutGroup(for: section, geometry: geometry))
-        section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
-        return section
     }
     
     var body: some View {
@@ -113,7 +118,6 @@ struct ShowsView: View {
                     let character = alphabeticalShows[indexPath.section].character
                     let title = (character == "#") ? "#0-9" : String(character)
                     HeaderView(title: title)
-                        .padding([.leading, .trailing], 20)
                 }
             }
             .synchronizeParentTabScrolling()
