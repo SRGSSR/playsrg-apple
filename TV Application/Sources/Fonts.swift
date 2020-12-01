@@ -71,7 +71,7 @@ enum SRGFont {
             case .headline1:
                 return (32, .regular)
             case .headline2:
-                return (32, .medium)
+                return (30, .medium)
             case .subtitle:
                 return (32, .light)
             case .body:
