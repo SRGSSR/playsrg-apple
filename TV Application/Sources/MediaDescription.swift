@@ -22,7 +22,8 @@ struct MediaDescription {
         guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
         switch days {
         case 0:
-            return PlayFormattedHours(to.timeIntervalSince(from))
+            // Minimum displayed is 1 hour
+            return PlayFormattedHours(max(to.timeIntervalSince(from), 60 * 60))
         case 1...30:
             return PlayFormattedDays(to.timeIntervalSince(from))
         default:
