@@ -46,7 +46,7 @@ struct AvailabilityBadge: View {
         case .notAvailableAnymore:
             return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), Color(.play_gray))
         case .available:
-            guard let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream else { return nil }
+            guard let endDate = media.endDate, media.contentType == .episode else { return nil }
             if let remainingTime = Self.formattedDuration(from: now, to: endDate) {
                 return (String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime), Color(.play_orange))
             }
