@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAnalyticsSwiftUI
 import SRGAppearance
 import SRGLetterbox
 import SwiftUI
@@ -44,7 +45,7 @@ struct MediaDetailView: View {
         .onWake {
             model.refresh()
         }
-        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
+        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct DescriptionView: View {

@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAnalyticsSwiftUI
 import SwiftUI
 
 struct HomeView: View {
@@ -94,7 +95,7 @@ struct HomeView: View {
         .synchronizeParentTabScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
-        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
+        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct Cell: View {

@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAnalyticsSwiftUI
 import SwiftUI
 
 struct TopicDetailView: View {
@@ -154,7 +155,7 @@ struct TopicDetailView: View {
             .onWake {
                 model.refresh()
             }
-            .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
+            .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
         }
     }
     

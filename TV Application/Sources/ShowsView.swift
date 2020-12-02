@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAnalyticsSwiftUI
 import SRGAppearance
 import SwiftUI
 
@@ -127,7 +128,7 @@ struct ShowsView: View {
             .onWake {
                 model.refresh()
             }
-            .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
+            .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
         }
     }
     
