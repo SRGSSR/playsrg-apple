@@ -107,6 +107,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                container: configuration.analyticsContainer,
                                                                siteName: configuration.tvSiteName,
                                                                netMetrixIdentifier: configuration.netMetrixIdentifier)
+        #if DEBUG || NIGHLTY || BETA
+        analyticsConfiguration.environmentMode = .preProduction
+        #endif
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration)
         
         SRGDataProvider.current = SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
