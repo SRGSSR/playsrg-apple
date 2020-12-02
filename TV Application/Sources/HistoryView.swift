@@ -58,10 +58,11 @@ struct HistoryView: View {
         case .medias:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
             
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(420))
-            return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
+            group.interItemSpacing = .fixed(40)
+            return group
         case .information:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -74,6 +75,7 @@ struct HistoryView: View {
     
     private static func layoutSection(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutSection {
         let section = NSCollectionLayoutSection(group: layoutGroup(for: section, geometry: geometry))
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
         section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
         return section
     }
@@ -104,7 +106,6 @@ struct HistoryView: View {
                 }
             } supplementaryView: { _, _ in
                 HeaderView(title: "History (WIP)")
-                    .padding([.leading, .trailing], 20)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(.play_black))
@@ -129,7 +130,7 @@ struct HistoryView: View {
                 .srgFont(.title2)
                 .foregroundColor(.white)
                 .opacity(0.8)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
         }
     }
 }

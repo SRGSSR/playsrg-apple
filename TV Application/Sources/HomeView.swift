@@ -82,7 +82,7 @@ struct HomeView: View {
     }
     
     var body: some View {
-        CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
+        CollectionView(rows: model.rows) { sectionIndex, _ in
             let rowId = model.rows[sectionIndex].section
             return Self.swimlaneLayoutSection(for: rowId)
         } cell: { _, item in
@@ -162,8 +162,6 @@ struct HomeView: View {
                         .srgFont(.subtitle)
                         .lineLimit(1)
                         .opacity(0.8)
-                    Spacer()
-                        .frame(height: 10)
                 }
             }
             .opacity(0.8)

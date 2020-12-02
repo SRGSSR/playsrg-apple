@@ -12,13 +12,16 @@ class TopicDetailModel: ObservableObject {
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(medias: [SRGMedia])
+        case loaded(mostPopularMedias: [SRGMedia], latestMedias: [SRGMedia])
     }
     
-    @Published private(set) var state = State.loaded(medias: [])
+    @Published private(set) var state = State.loaded(mostPopularMedias: [], latestMedias: [])
     
     private var cancellables = Set<AnyCancellable>()
-    private var medias: [SRGMedia] = []
+    
+    private var mostPopularMedias: [SRGMedia] = []
+    
+    private var latestMedias: [SRGMedia] = []
     private var nextPage: SRGDataProvider.LatestMediasForTopic.Page? = nil
     
     init(topic: SRGTopic) {
@@ -26,16 +29,19 @@ class TopicDetailModel: ObservableObject {
     }
     
     func refresh() {
-        guard medias.isEmpty else { return }
+        // Pagination is on latest medias, so if some are already loaded do not perform a refresh
+        guard latestMedias.isEmpty else { return }
         loadNextPage()
     }
     
     func loadNextPage(from media: SRGMedia? = nil) {
-        guard let publisher = publisher(from: media) else { return }
-        publisher
+        guard let latestPublisher = latestPublisher(from: media) else { return }
+        
+        let mostPopularPublisher = SRGDataProvider.current!.mostPopularMediasForTopic(withUrn: topic.urn, pageSize: ApplicationConfiguration.shared.pageSize)
+        Publishers.CombineLatest(mostPopularPublisher, latestPublisher)
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveRequest:  { _ in
-                if self.medias.isEmpty {
+                if self.mostPopularMedias.isEmpty && self.latestMedias.isEmpty {
                     self.state = .loading
                 }
             })
@@ -43,10 +49,11 @@ class TopicDetailModel: ObservableObject {
                 if case let .failure(error) = completion {
                     self.state = .failed(error: error)
                 }
-            }, receiveValue: { result in
-                self.medias.append(contentsOf: result.medias)
-                self.state = .loaded(medias: self.medias)
-                self.nextPage = result.nextPage
+            }, receiveValue: { combined in
+                self.mostPopularMedias = combined.0.medias
+                self.latestMedias.append(contentsOf: combined.1.medias)
+                self.state = .loaded(mostPopularMedias: self.mostPopularMedias, latestMedias: self.latestMedias)
+                self.nextPage = combined.1.nextPage
             })
             .store(in: &cancellables)
     }
@@ -55,9 +62,9 @@ class TopicDetailModel: ObservableObject {
         cancellables = []
     }
     
-    private func publisher(from media: SRGMedia?) -> AnyPublisher<SRGDataProvider.LatestMediasForTopic.Output, Error>? {
+    private func latestPublisher(from media: SRGMedia?) -> AnyPublisher<SRGDataProvider.LatestMediasForTopic.Output, Error>? {
         if media != nil {
-            guard let nextPage = nextPage, media == medias.last else { return nil }
+            guard let nextPage = nextPage, media == latestMedias.last else { return nil }
             return SRGDataProvider.current!.latestMediasForTopic(at: nextPage)
         }
         else {
