@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if configuration.videoHomeSections.contains(NSNumber(value: HomeSection.tvShowsAccess.rawValue)) {
             let showsViewController = UIHostingController(rootView: ShowsView())
-            showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows A-Z", comment: "Shows A-Z tab title"), image: nil, tag: 3)
+            showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
             viewControllers.append(showsViewController)
         }
         

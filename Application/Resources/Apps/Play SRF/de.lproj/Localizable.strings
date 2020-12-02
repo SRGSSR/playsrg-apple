@@ -484,14 +484,12 @@
    Shows search setting option list view title
    Title label used to present radio associated shows
    Title label used to present the radio shows AZ and radio shows by date access buttons
-   Title label used to present the TV shows AZ and TV shows by date access buttons */
+   Title label used to present the TV shows AZ and TV shows by date access buttons
+   Shows tab title */
 "Shows" = "Sendungen";
 
 /* Label to present shows A to Z (radio or TV) */
 "Shows A to Z" = "Sendungen A bis Z";
-
-/* Shows A-Z tab title */
-"Shows A-Z" = "Sendungen A-Z";
 
 /* Label to present shows (episodes) by date (radio or TV) */
 "Shows by date" = "Sendungen nach Datum";
