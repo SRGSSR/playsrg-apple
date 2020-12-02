@@ -1,7 +1,8 @@
 {
   "businessUnit": "rtr",
   "container": 10,
-  "comScoreVirtualSite": "rtr-player-ios-v",
+  "siteName": "rtr-player-ios-v",
+  "tvSiteName": "rtr-player-tvos-apple",
   "netMetrixIdentifier": "srgplayer",
   "appStoreProductIdentifier": 920754925,
   "playURL": "https://www.rtr.ch/play/",

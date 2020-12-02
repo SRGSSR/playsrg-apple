@@ -105,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
                                                                container: configuration.analyticsContainer,
-                                                               siteName: configuration.comScoreVirtualSite,
+                                                               siteName: configuration.tvSiteName,
                                                                netMetrixIdentifier: configuration.netMetrixIdentifier)
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration)
         

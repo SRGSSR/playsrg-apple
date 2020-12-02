@@ -1,7 +1,8 @@
 {
   "businessUnit": "rsi",
   "container": 10,
-  "comScoreVirtualSite": "rsi-player-ios-v",
+  "siteName": "rsi-player-ios-v",
+  "tvSiteName": "rsi-player-tvos-apple",
   "netMetrixIdentifier": "srgplayer",
   "voiceOverLanguageCode": "it",
   "appStoreProductIdentifier": 920753497,
