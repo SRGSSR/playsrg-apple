@@ -67,7 +67,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         NSTimeInterval timeIntervalAfterEnd = [nowDate timeIntervalSinceDate:endDate];
         text = [NSString stringWithFormat:NSLocalizedString(@"Not available since %@", @"Explains that a content has expired (days or hours ago). Displayed in the media player view."), LabelFormattedDuration(timeIntervalAfterEnd)];
     }
-    else if (timeAvailability == SRGTimeAvailabilityAvailable && object.endDate && object.contentType != SRGContentTypeScheduledLivestream && object.contentType != SRGContentTypeLivestream) {
+    else if (timeAvailability == SRGTimeAvailabilityAvailable && object.endDate && object.contentType != SRGContentTypeScheduledLivestream && object.contentType != SRGContentTypeLivestream && object.contentType != SRGContentTypeTrailer) {
         NSDateComponents *monthsDateComponents = [NSCalendar.currentCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:object.endDate options:0];
         if (monthsDateComponents.day <= 30) {
             NSTimeInterval timeIntervalBeforeEnd = [object.endDate timeIntervalSinceDate:nowDate];
