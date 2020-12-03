@@ -271,8 +271,9 @@
 
 /* Button label to open the show episode page from the long-press menu
    Button label to open the show episode page from the preview window
+   Button to access more episodes from the media detail view
    Context menu action to open more episodes associated with a media */
-"More episodes" = "Weitere Sendungen zeigen";
+"More episodes" = "Mehr zur Sendung";
 
 /* Title of the related content player section */
 "More on this subject" = "Mehr zum Thema";
@@ -471,9 +472,6 @@
    Context menu action to share a show
    Title of the action view to choose a sharing action */
 "Share" = "Teilen";
-
-/* Show (program) button label in media detail view */
-"Show" = "Sendung";
 
 /* Show more button label when a link is available for broadcast information. */
 "Show more" = "Mehr erfahren";

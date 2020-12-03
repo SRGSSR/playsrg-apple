@@ -472,9 +472,6 @@
    Title of the action view to choose a sharing action */
 "Share" = "Condividere";
 
-/* Show (program) button label in media detail view */
-"Show" = "Programma";
-
 /* Show more button label when a link is available for broadcast information. */
 "Show more" = "Ulteriori informazioni";
 

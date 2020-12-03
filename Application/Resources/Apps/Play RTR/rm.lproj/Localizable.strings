@@ -472,9 +472,6 @@
    Title of the action view to choose a sharing action */
 "Share" = "Parter";
 
-/* Show (program) button label in media detail view */
-"Show" = "Emissiun";
-
 /* Show more button label when a link is available for broadcast information. */
 "Show more" = "Dapli";
 
