@@ -48,7 +48,7 @@ struct HomeView: View {
             }
         }
         
-        func boundarySupplementaryItems(for rowId: HomeModel.RowId) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+        func header(for rowId: HomeModel.RowId) -> [NSCollectionLayoutBoundarySupplementaryItem] {
             guard let headerHeight = swimlaneSectionHeaderHeight(for: rowId) else { return [] }
             let header = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight)),
@@ -68,7 +68,7 @@ struct HomeView: View {
         section.orthogonalScrollingBehavior = continuousGroupLeadingBoundary(for: rowId)
         section.interGroupSpacing = 40
         section.contentInsets = contentInsets(for: rowId)
-        section.boundarySupplementaryItems = boundarySupplementaryItems(for: rowId)
+        section.boundarySupplementaryItems = header(for: rowId)
         return section
     }
     
