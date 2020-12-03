@@ -79,7 +79,7 @@
 "Manages account information" = "Anmeldeinformationen verwalten";
 
 /* A more episode button label */
-"More episodes" = "Weitere Folgen";
+"More episodes" = "Mehr zur Sendung";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mein Konto";

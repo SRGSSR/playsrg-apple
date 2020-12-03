@@ -135,11 +135,16 @@ struct TopicDetailView: View {
                     }
                 }
             } supplementaryView: { _, indexPath in
-                let section = rows[indexPath.section].section
-                switch section {
-                case .latestMedias:
-                    HeaderView(title: NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos"))
-                default:
+                if rows.count > 1 {
+                    let section = rows[indexPath.section].section
+                    switch section {
+                    case .latestMedias:
+                        HeaderView(title: NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos"))
+                    default:
+                        TitleView(title: model.topic.title)
+                    }
+                }
+                else {
                     TitleView(title: model.topic.title)
                 }
             }
