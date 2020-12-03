@@ -185,10 +185,10 @@ struct TopicDetailView: View {
 
 extension TopicDetailView {
     private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.latest.rawValue
+        return self.model.topic.title
     }
     
     private var analyticsPageLevels: [String] {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, self.model.topic.title]
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
     }
 }
