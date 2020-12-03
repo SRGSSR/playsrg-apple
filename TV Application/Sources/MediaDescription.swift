@@ -32,7 +32,7 @@ struct MediaDescription {
     }
     
     static func title(for media: SRGMedia?, style: Style = .date) -> String {
-        guard let media = media else { return placeholder(length: 20) }
+        guard let media = media else { return placeholder(length: 15) }
         
         switch style {
         case .show:
@@ -43,7 +43,7 @@ struct MediaDescription {
     }
     
     static func subtitle(for media: SRGMedia?, style: Style = .date) -> String {
-        guard let media = media else { return placeholder(length: 25) }
+        guard let media = media else { return placeholder(length: 20) }
         guard media.contentType != .livestream else { return "" }
         
         switch style {
