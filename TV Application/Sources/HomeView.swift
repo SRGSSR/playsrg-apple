@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAnalyticsSwiftUI
 import SwiftUI
 
 struct HomeView: View {
@@ -20,9 +21,10 @@ struct HomeView: View {
                     return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(360))
                 }
             case .tvTopicsAccess:
-                return NSCollectionLayoutSize(widthDimension: .absolute(250), heightDimension: .absolute(141))
+                let width = CGFloat(250)
+                return NSCollectionLayoutSize(widthDimension: .absolute(width), heightDimension: .absolute(width * 9 / 16))
             case .radioAllShows:
-                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(211))
+                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(260))
             default:
                 return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(360))
             }
@@ -81,7 +83,7 @@ struct HomeView: View {
     }
     
     var body: some View {
-        CollectionView(rows: model.rows) { sectionIndex, layoutEnvironment in
+        CollectionView(rows: model.rows) { sectionIndex, _ in
             let rowId = model.rows[sectionIndex].section
             return Self.swimlaneLayoutSection(for: rowId)
         } cell: { _, item in
@@ -93,7 +95,7 @@ struct HomeView: View {
         .synchronizeParentTabScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
-        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
+        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct Cell: View {
@@ -119,7 +121,7 @@ struct HomeView: View {
                         LiveMediaCell(media: media)
                     }
                     else {
-                        MediaCell(media: media, style: .show) {
+                        MediaCell(media: media, style: .date) {
                             navigateToMedia(media, play: true)
                         }
                     }
@@ -161,8 +163,6 @@ struct HomeView: View {
                         .srgFont(.subtitle)
                         .lineLimit(1)
                         .opacity(0.8)
-                    Spacer()
-                        .frame(height: 10)
                 }
             }
             .opacity(0.8)

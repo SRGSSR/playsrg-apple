@@ -34,15 +34,21 @@ struct MediaCell: View {
                         navigateToMedia(media)
                     }
                 }) {
-                    MediaVisualView(media: media, scale: .small, contentMode: .fit)
-                        .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                        .onFocusChange { focused in
-                            isFocused = focused
-                            
-                            if let onFocusAction = self.onFocusAction {
-                                onFocusAction(focused)
+                    ZStack {
+                        MediaVisualView(media: media, scale: .small, contentMode: .fit)
+                            .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                            .onFocusChange { focused in
+                                isFocused = focused
+                                
+                                if let onFocusAction = self.onFocusAction {
+                                    onFocusAction(focused)
+                                }
                             }
+                        if let media = media {
+                            AvailabilityBadge(media: media)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         }
+                    }
                 }
                 .buttonStyle(CardButtonStyle())
                 
@@ -68,8 +74,9 @@ struct MediaCell: View {
                     .srgFont(.subtitle)
                     .lineLimit(2)
                 Text(MediaDescription.subtitle(for: media, style: style))
-                    .srgFont(.headline2)
+                    .srgFont(style == .date ? .overline : .headline2)
                     .lineLimit(2)
+                    .layoutPriority(1)
             }
         }
     }

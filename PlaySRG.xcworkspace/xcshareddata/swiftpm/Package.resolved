@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "7df01b0d5b42b3fa8930cf0803264116c4e219e1",
-          "version": "9.1.3"
+          "revision": "ef122e4512e84020dca9d8f598408fdb38658946",
+          "version": "9.2.0"
         }
       },
       {
@@ -96,7 +96,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "5456c36f927b30975b38df60a449ab35755060ea",
+          "revision": "c6d6cba30ccf4898a9ddc4a60388f3d099ba7b55",
           "version": null
         }
       },
@@ -123,7 +123,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "3878562e9a0ff395d6a101b2a783e7728aa8144c",
+          "revision": "d5740a5a599e5037e378cf86a0a7ed5e9d04dbf6",
           "version": null
         }
       },

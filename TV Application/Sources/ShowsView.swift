@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAnalyticsSwiftUI
 import SRGAppearance
 import SwiftUI
 
@@ -17,7 +18,7 @@ struct ShowsView: View {
     
     enum Content: Hashable {
         case loading
-        case message(_ message: String)
+        case message(_ message: String, iconName: String)
         case show(_ show: SRGShow)
     }
     
@@ -32,7 +33,7 @@ struct ShowsView: View {
         case .loading:
             return [Row(section: .information, items: [.loading])]
         case let .failed(error: error):
-            let item = Content.message(friendlyMessage(for: error))
+            let item = Content.message(friendlyMessage(for: error), iconName: "error-90")
             return [Row(section: .information, items: [item])]
         case let .loaded(alphabeticalShows: alphabeticalShows):
             if !alphabeticalShows.isEmpty {
@@ -41,7 +42,7 @@ struct ShowsView: View {
                 }
             }
             else {
-                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"))
+                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-90")
                 return [Row(section: .information, items: [item])]
             }
         }
@@ -49,85 +50,94 @@ struct ShowsView: View {
     
     private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)),
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60)),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .topLeading
         )
         return [header]
     }
     
-    private static func layoutGroup(for section: Section) -> NSCollectionLayoutGroup {
+    private static func layoutSection(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutSection {
         switch section {
         case .shows:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(350))
-            return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(260))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+            section.interGroupSpacing = 40
+            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 80, trailing: 0)
+            section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
+            return section
         case .information:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(400))
-            return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(geometry.size.height))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            
+            return NSCollectionLayoutSection(group: group)
         }
-    }
-    
-    private static func layoutSection(for section: Section) -> NSCollectionLayoutSection {
-        let section = NSCollectionLayoutSection(group: layoutGroup(for: section))
-        section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
-        return section
     }
     
     var body: some View {
-        CollectionView(rows: rows) { _, _ in
-            return Self.layoutSection(for: rows.first!.section)
-        } cell: { _, item in
-            switch item {
-            case .loading:
-                ProgressView()
-            case let .message(message):
-                Text(message)
-                    .srgFont(.body)
-                    .lineLimit(2)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            case let .show(show):
-                ShowCell(show: show)
+        GeometryReader { geometry in
+            CollectionView(rows: rows) { _, _ in
+                return Self.layoutSection(for: rows.first!.section, geometry: geometry)
+            } cell: { _, item in
+                switch item {
+                case .loading:
+                    ProgressView()
+                case let .message(text, iconName):
+                    VStack(spacing: 20) {
+                        Image(iconName)
+                        Text(text)
+                            .srgFont(.body)
+                            .lineLimit(2)
+                            .foregroundColor(.white)
+                    }
+                    .opacity(0.8)
+                    .padding()
+                case let .show(show):
+                    ShowCell(show: show)
+                }
+            } supplementaryView: { _, indexPath in
+                switch model.state {
+                case .loading, .failed:
+                    Rectangle()
+                        .fill(Color.clear)
+                case let .loaded(alphabeticalShows: alphabeticalShows):
+                    let character = alphabeticalShows[indexPath.section].character
+                    let title = (character == "#") ? "#0-9" : String(character)
+                    HeaderView(title: title)
+                }
             }
-        } supplementaryView: { _, indexPath in
-            switch model.state {
-            case .loading, .failed:
-                Rectangle()
-                    .fill(Color.clear)
-            case let .loaded(alphabeticalShows: alphabeticalShows):
-                HeaderView(character: alphabeticalShows[indexPath.section].character)
-                    .padding([.leading, .trailing], 20)
+            .synchronizeParentTabScrolling()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(.play_black))
+            .edgesIgnoringSafeArea(.all)
+            .onAppear {
+                model.refresh()
             }
+            .onDisappear {
+                model.cancelRefresh()
+            }
+            .onWake {
+                model.refresh()
+            }
+            .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
         }
-        .synchronizeParentTabScrolling()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.play_black))
-        .edgesIgnoringSafeArea(.all)
-        .onAppear {
-            model.refresh()
-        }
-        .onDisappear {
-            model.cancelRefresh()
-        }
-        .onResume {
-            model.refresh()
-        }
-        .tracked(with: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct HeaderView: View {
-        let character: Character
+        let title: String
         
         var body: some View {
             GeometryReader { geometry in
-                Text(String(character))
+                Text(title)
                     .srgFont(.title2)
                     .lineLimit(1)
                     .foregroundColor(.white)

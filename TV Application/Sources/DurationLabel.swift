@@ -27,7 +27,7 @@ struct DurationLabel: View {
     var body: some View {
         if let duration = duration {
             Text(duration)
-                .srgFont(.label)
+                .srgFont(.caption)
                 .foregroundColor(.white)
                 .padding([.top, .bottom], 5)
                 .padding([.leading, .trailing], 8)

@@ -1,7 +1,8 @@
 {
   "businessUnit": "rts",
   "container": 10,
-  "comScoreVirtualSite": "rts-player-ios-v",
+  "siteName": "rts-player-ios-v",
+  "tvSiteName": "rts-player-tvos-apple",
   "netMetrixIdentifier": "srgplayer",
   "voiceOverLanguageCode": "fr",
   "appStoreProductIdentifier": 920754415,

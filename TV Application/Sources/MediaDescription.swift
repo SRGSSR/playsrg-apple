@@ -22,7 +22,8 @@ struct MediaDescription {
         guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
         switch days {
         case 0:
-            return PlayFormattedHours(to.timeIntervalSince(from))
+            // Minimum displayed is 1 hour
+            return PlayFormattedHours(max(to.timeIntervalSince(from), 60 * 60))
         case 1...30:
             return PlayFormattedDays(to.timeIntervalSince(from))
         default:
@@ -47,7 +48,7 @@ struct MediaDescription {
         
         switch style {
         case .show:
-            if let showTitle = media.show?.title, media.title != showTitle {
+            if let showTitle = media.show?.title, media.title.lowercased() != showTitle.lowercased() {
                 return media.title
             }
             else {
@@ -72,7 +73,7 @@ struct MediaDescription {
             guard let expiringDays = Self.formattedDuration(from: now, to: endDate) else { return nil }
             return String(format: NSLocalizedString("Not available since %@", comment:"Explains that a content has expired (days or hours ago). Displayed in the media player view."), expiringDays)
         case .available:
-            guard let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream else { return nil }
+            guard let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream, media.contentType != .trailer else { return nil }
             guard let remainingDays = Self.formattedDuration(from: now, to: endDate) else { return nil }
             return String(format: NSLocalizedString("Still available for %@", comment:"Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view."), remainingDays)
         default:

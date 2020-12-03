@@ -33,7 +33,8 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 ## Analytics
 
-* `comScoreVirtualSite` (mandatory, string): The comScore virtual site to send events to.
+* `siteName` (mandatory, string): The iOS site name to send events to.
+* `tvSiteName` (mandatory, string): The tvOS site name to send events to.
 * `netMetrixIdentifier` (mandatory, string): The NetMetrix application identifier.
 
 ## Channel configuration

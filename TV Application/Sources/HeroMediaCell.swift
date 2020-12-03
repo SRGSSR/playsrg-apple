@@ -43,7 +43,7 @@ struct HeroMediaCell: View {
             VStack {
                 Spacer()
                 Text(MediaDescription.title(for: media, style: .show))
-                    .srgFont(.overline)
+                    .srgFont(.subtitle)
                     .lineLimit(1)
                     .opacity(0.8)
                 Spacer()
@@ -62,6 +62,9 @@ struct HeroMediaCell: View {
                         .multilineTextAlignment(.center)
                         .opacity(0.8)
                         .padding()
+                }
+                if let media = media {
+                    AvailabilityBadge(media: media)
                 }
                 Spacer()
             }

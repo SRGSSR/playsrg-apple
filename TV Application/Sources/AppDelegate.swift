@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if configuration.videoHomeSections.contains(NSNumber(value: HomeSection.tvShowsAccess.rawValue)) {
             let showsViewController = UIHostingController(rootView: ShowsView())
-            showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows A-Z", comment: "Shows A-Z tab title"), image: nil, tag: 3)
+            showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
             viewControllers.append(showsViewController)
         }
         
@@ -105,8 +105,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
                                                                container: configuration.analyticsContainer,
-                                                               siteName: configuration.comScoreVirtualSite,
+                                                               siteName: configuration.tvSiteName,
                                                                netMetrixIdentifier: configuration.netMetrixIdentifier)
+        #if DEBUG || NIGHLTY || BETA
+        analyticsConfiguration.environmentMode = .preProduction
+        #endif
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration)
         
         SRGDataProvider.current = SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())

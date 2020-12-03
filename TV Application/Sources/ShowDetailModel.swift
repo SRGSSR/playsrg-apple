@@ -19,7 +19,7 @@ class ShowDetailModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     private var medias: [SRGMedia] = []
-    private var nextPage: SRGDataProvider.LatestMediasForShows.Page? = nil
+    private var nextPage: SRGDataProvider.LatestMediasForShow.Page? = nil
     
     init(show: SRGShow) {
         self.show = show
@@ -58,15 +58,13 @@ class ShowDetailModel: ObservableObject {
         cancellables = []
     }
     
-    private func publisher(from media: SRGMedia?) -> AnyPublisher<SRGDataProvider.LatestMediasForShows.Output, Error>? {
-        // TODO: Use byURN request when available to have more results
-        //       See https://jira.srg.beecollaboration.com/browse/PLAY-3886
+    private func publisher(from media: SRGMedia?) -> AnyPublisher<SRGDataProvider.LatestMediasForShow.Output, Error>? {
         if media != nil {
             guard let nextPage = nextPage, media == medias.last else { return nil }
-            return SRGDataProvider.current!.latestMediasForShows(at: nextPage)
+            return SRGDataProvider.current!.latestMediasForShow(at: nextPage)
         }
         else {
-            return SRGDataProvider.current!.latestMediasForShows(withUrns: [show.urn], filter: .episodesOnly, pageSize: ApplicationConfiguration.shared.pageSize)
+            return SRGDataProvider.current!.latestMediasForShow(withUrn: show.urn, pageSize: ApplicationConfiguration.shared.pageSize)
         }
     }
 }
