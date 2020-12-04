@@ -44,7 +44,7 @@ struct HistoryView: View {
         }
     }
     
-    private static func boundarySupplementaryItems() -> [NSCollectionLayoutBoundarySupplementaryItem] {
+    private static func header() -> [NSCollectionLayoutBoundarySupplementaryItem] {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(Self.headerHeight)),
             elementKind: UICollectionView.elementKindSectionHeader,
@@ -53,31 +53,33 @@ struct HistoryView: View {
         return [header]
     }
     
-    private static func layoutGroup(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutGroup {
+    private static func layoutSection(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutSection {
         switch section {
         case .medias:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(420))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(380))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
             group.interItemSpacing = .fixed(40)
-            return group
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
+            section.interGroupSpacing = 40
+            section.boundarySupplementaryItems = Self.header()
+            return section
         case .information:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
             let height = geometry.size.height - Self.headerHeight
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
-            return NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.boundarySupplementaryItems = Self.header()
+            return section
         }
-    }
-    
-    private static func layoutSection(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutSection {
-        let section = NSCollectionLayoutSection(group: layoutGroup(for: section, geometry: geometry))
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
-        section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
-        return section
     }
     
     var body: some View {
@@ -87,7 +89,7 @@ struct HistoryView: View {
             } cell: { _, item in
                 switch item {
                 case .loading:
-                    ProgressView()
+                    ActivityIndicator()
                 case let .message(text, iconName):
                     VStack(spacing: 20) {
                         Image(iconName)

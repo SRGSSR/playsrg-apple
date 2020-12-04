@@ -96,9 +96,6 @@
 /* Message description displayed when the user could not be subscribed to all TV and radio shows */
 "Automatic subscriptions failed. Please retry." = "L'abonnement automatique a échoué. Veuillez réessayer.";
 
-/* Title of the episode list header in show detail view */
-"Available episodes" = "Épisodes disponibles";
-
 /* Title label used to present the soon expiring videos */
 "Available for a limited time" = "Disponible pour un temps limité";
 

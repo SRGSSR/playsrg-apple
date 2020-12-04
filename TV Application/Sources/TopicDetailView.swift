@@ -54,7 +54,7 @@ struct TopicDetailView: View {
         }
     }
     
-    private static func boundarySupplementaryItems(withHeight height: CGFloat = Self.headerHeight) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+    private static func header(withHeight height: CGFloat = Self.headerHeight) -> [NSCollectionLayoutBoundarySupplementaryItem] {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height)),
             elementKind: UICollectionView.elementKindSectionHeader,
@@ -76,19 +76,20 @@ struct TopicDetailView: View {
             section.orthogonalScrollingBehavior = .continuous
             section.interGroupSpacing = 40
             section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
-            section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
+            section.boundarySupplementaryItems = Self.header()
             return section
         case .latestMedias:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(420))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(380))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
             group.interItemSpacing = .fixed(40)
             
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
-            section.boundarySupplementaryItems = Self.boundarySupplementaryItems(withHeight: 100)
+            section.interGroupSpacing = 40
+            section.boundarySupplementaryItems = Self.header(withHeight: 100)
             return section
         case .information:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -99,7 +100,7 @@ struct TopicDetailView: View {
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
             let section = NSCollectionLayoutSection(group: group)
-            section.boundarySupplementaryItems = Self.boundarySupplementaryItems()
+            section.boundarySupplementaryItems = Self.header()
             return section
         }
     }
@@ -112,7 +113,7 @@ struct TopicDetailView: View {
             } cell: { _, item in
                 switch item {
                 case .loading:
-                    ProgressView()
+                    ActivityIndicator()
                 case let .message(text, iconName):
                     VStack(spacing: 20) {
                         Image(iconName)
