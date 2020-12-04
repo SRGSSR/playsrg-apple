@@ -41,6 +41,9 @@ struct TopicCell: View {
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .redacted(reason: redactionReason)
+                .accessibilityElement()
+                .accessibilityLabel(topic?.title ?? "")
+                .accessibility(addTraits: .isButton)
             }
             .buttonStyle(CardButtonStyle())
         }
