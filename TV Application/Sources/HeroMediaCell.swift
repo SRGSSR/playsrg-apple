@@ -31,6 +31,9 @@ struct HeroMediaCell: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
                 .redacted(reason: redactionReason)
+                .accessibilityElement()
+                .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
+                .accessibility(addTraits: .isButton)
             }
             .buttonStyle(CardButtonStyle())
         }
