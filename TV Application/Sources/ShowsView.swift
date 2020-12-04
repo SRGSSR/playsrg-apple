@@ -90,7 +90,7 @@ struct ShowsView: View {
             } cell: { _, item in
                 switch item {
                 case .loading:
-                    ProgressView()
+                    ActivityIndicator()
                 case let .message(text, iconName):
                     VStack(spacing: 20) {
                         Image(iconName)
