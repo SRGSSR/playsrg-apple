@@ -98,6 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         
         let configuration = ApplicationConfiguration.shared
+        application.accessibilityLanguage = configuration.voiceOverLanguageCode;
         
         let cachesDirectoryUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!)
         let storeFileUrl = cachesDirectoryUrl.appendingPathComponent("PlayData.sqlite")
