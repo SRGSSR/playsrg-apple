@@ -21,17 +21,6 @@ struct MediaCell: View {
         self.style = style
         self.action = action
     }
-    
-    private var accessibilityLabel: String {
-        guard let media = media else { return "" }
-        if let showTitle = media.show?.title,
-           !media.title.lowercased().contains(showTitle.lowercased()) {
-            return showTitle.appending(", \(media.title)")
-        }
-        else {
-            return media.title
-        }
-    }
         
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
@@ -56,7 +45,7 @@ struct MediaCell: View {
                                 }
                             }
                             .accessibilityElement()
-                            .accessibilityLabel(accessibilityLabel)
+                            .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
                             .accessibility(addTraits: .isButton)
                             
                         if let media = media {
