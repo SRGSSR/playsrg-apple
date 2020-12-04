@@ -11,7 +11,7 @@ import SwiftUI
 struct ShowDetailView: View {
     @ObservedObject var model: ShowDetailModel
     
-    static let headerHeight: CGFloat = 500
+    static let headerHeight: CGFloat = 450
     
     enum Section: Hashable {
         case medias
@@ -183,11 +183,6 @@ struct ShowDetailView: View {
                     VStack {
                         VisualView(show: show)
                         Spacer()
-                        Text(NSLocalizedString("Available episodes", comment: "Title of the episode list header in show detail view"))
-                            .srgFont(.title2)
-                            .foregroundColor(.white)
-                            .opacity(0.8)
-                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
             }
