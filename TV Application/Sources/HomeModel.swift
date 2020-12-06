@@ -66,6 +66,8 @@ class HomeModel: Identifiable, ObservableObject {
                 switch id {
                 case .tvTopicsAccess:
                     return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .topicPlaceholder(index: $0)) }
+                case .tvFavoriteShows:
+                    return FavoritesShowURNs().count == 0 ? [] : (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
                 case .radioAllShows:
                     return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
                 default:
@@ -161,6 +163,7 @@ extension HomeModel {
     enum RowId: Hashable {
         case tvTrending(appearance: RowAppearance)
         case tvLatest
+        case tvFavoriteShows
         case tvWebFirst
         case tvMostPopular
         case tvSoonExpiring
@@ -205,6 +208,10 @@ extension HomeModel {
                         .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                         .eraseToAnyPublisher()
                 }
+            case .tvFavoriteShows:
+                return dataProvider.shows(withUrns: Array(FavoritesShowURNs()))
+                    .map { $0.shows.map { RowItem(rowId: self, content: .show($0)) } }
+                    .eraseToAnyPublisher()
             case .tvLatest:
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
@@ -282,6 +289,8 @@ extension HomeModel {
             switch self {
             case let .tvTrending(appearance: appearance):
                 return appearance != .hero ? NSLocalizedString("Trending videos", comment: "Title label used to present trending TV videos") : nil
+            case .tvFavoriteShows:
+                return NSLocalizedString("Favorites", comment: "Title label used to present the TV favorite shows")
             case .tvLatest:
                 return NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos")
             case .tvWebFirst:
