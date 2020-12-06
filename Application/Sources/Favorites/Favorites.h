@@ -44,6 +44,7 @@ OBJC_EXPORT void FavoritesToggleShow(SRGShow * _Nonnull show);
 OBJC_EXPORT NSSet<NSString *> * _Nonnull FavoritesShowURNs(void);
 
 
+#if TARGET_OS_IOS
 /**
  *  @name Subscriptions
  */
@@ -81,5 +82,6 @@ OBJC_EXPORT void FavoritesSetup(void);
  *  Migrate depretaced favorites (legacy plist-based way of bookmarking shows) and subscriptions, if any to Favorites.
  */
 OBJC_EXPORT void FavoritesMigrate(void);
+#endif
 
 NS_ASSUME_NONNULL_END

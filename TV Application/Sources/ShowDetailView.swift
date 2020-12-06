@@ -132,6 +132,8 @@ struct ShowDetailView: View {
     private struct VisualView: View {
         let show: SRGShow
         
+        @State var isFavorite: Bool = false
+        
         private static let height: CGFloat = 300
         
         private var imageUrl: URL? {
@@ -161,15 +163,20 @@ struct ShowDetailView: View {
                 }
                 Spacer()
                 #if DEBUG
-                LabeledButton(icon: "favorite-22", label: NSLocalizedString("Favorite", comment:"Show favorite button label")) {
-                    /* Toggle Favorite state */
+                LabeledButton(icon: isFavorite ? "favorite_full-22" : "favorite-22", label: isFavorite ? NSLocalizedString("Favorite", comment:"Favorite show label when added ,in the show view") : NSLocalizedString("Not favorite", comment:"Favorite show label to add it, in the show view")) {
+                    FavoritesToggleShow(show)
+                    isFavorite = FavoritesContainsShow(show)
+                    
                 }
                 .padding(.leading, 100)
                 #else
                 Spacer()
-                    .frame(width: 120)
+                    .frame(width: 130)
                     .padding(.leading, 100)
                 #endif
+            }
+            .onAppear {
+                isFavorite = FavoritesContainsShow(show)
             }
         }
     }

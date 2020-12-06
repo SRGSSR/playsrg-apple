@@ -302,6 +302,11 @@
 		08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690381D38E0BE00BB8AAA /* Localizable.strings */; };
 		08777DB924EC39B7006F2EC7 /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA13E1EE034EF00BEC4DA /* Accessibility.strings */; };
 		08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690741D38E3E600BB8AAA /* Localizable.strings */; };
+		087B5F48257C5028002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F49257C5029002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F4A257C502A002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F4B257C502B002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F4C257C502C002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
 		087BC6631EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
@@ -7761,6 +7766,7 @@
 				6FE4F0F9257A371200223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7425656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F153257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F48257C5028002F58AF /* Favorites.m in Sources */,
 				6FDB2ABA24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E424EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA324E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -7843,6 +7849,7 @@
 				6FE4F10E257A371300223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7525656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F154257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F49257C5029002F58AF /* Favorites.m in Sources */,
 				6FDB2ABB24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E524EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA424E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -7925,6 +7932,7 @@
 				6FE4F10F257A371400223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7625656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F155257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F4A257C502A002F58AF /* Favorites.m in Sources */,
 				6FDB2ABC24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E624EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA524E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -8007,6 +8015,7 @@
 				6FE4F124257A371500223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7725656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F156257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F4B257C502B002F58AF /* Favorites.m in Sources */,
 				6FDB2ABD24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E724EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA624E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -8089,6 +8098,7 @@
 				6FE4F125257A371500223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7825656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F157257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F4C257C502C002F58AF /* Favorites.m in Sources */,
 				6FDB2ABE24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E824EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA724E65CB400F1500E /* HeroMediaCell.swift in Sources */,
