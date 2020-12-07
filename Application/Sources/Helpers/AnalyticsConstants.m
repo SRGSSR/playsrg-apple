@@ -5,7 +5,6 @@
 //
 
 #import "AnalyticsConstants.h"
-#import "NSBundle+PlaySRG.h"
 
 // See reference specifications at https://confluence.srg.beecollaboration.com/display/SRGPLAY/Play+SRG+simplified+page+view+analytics
 
@@ -36,6 +35,7 @@ AnalyticsPageTitle const AnalyticsPageTitleLatest = @"latest";
 AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes = @"latest episodes";
 AnalyticsPageTitle const AnalyticsPageTitleLicense = @"license";
 AnalyticsPageTitle const AnalyticsPageTitleLicenses = @"licenses";
+AnalyticsPageTitle const AnalyticsPageTitleMedia = @"media";
 AnalyticsPageTitle const AnalyticsPageTitleMostPopular = @"most popular";
 AnalyticsPageTitle const AnalyticsPageTitleNotifications = @"notifications";
 AnalyticsPageTitle const AnalyticsPageTitlePlayer = @"player";
@@ -50,6 +50,7 @@ AnalyticsPageTitle const AnalyticsPageTitleSports = @"sports";
 AnalyticsPageTitle const AnalyticsPageTitleTrending = @"trending";
 AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
 AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
+AnalyticsPageTitle const AnalyticsPageTitleWebFirst = @"web first";
 AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
 
 AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
@@ -127,6 +128,7 @@ AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
         s_titles = @{ @(HomeSectionTVTrending) : AnalyticsPageTitleTrending,
                       @(HomeSectionTVLive) : AnalyticsPageTitleTV,
                       @(HomeSectionTVLatest) : AnalyticsPageTitleLatest,
+                      @(HomeSectionTVWebFirst) : AnalyticsPageTitleWebFirst,
                       @(HomeSectionTVMostPopular) : AnalyticsPageTitleMostPopular,
                       @(HomeSectionTVSoonExpiring) : AnalyticsPageTitleSoonExpiring,
                       @(HomeSectionTVScheduledLivestreams) : AnalyticsPageTitleEvents,

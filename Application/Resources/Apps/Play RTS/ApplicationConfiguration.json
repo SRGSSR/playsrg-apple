@@ -1,7 +1,8 @@
 {
   "businessUnit": "rts",
   "container": 10,
-  "comScoreVirtualSite": "rts-player-ios-v",
+  "siteName": "rts-player-ios-v",
+  "tvSiteName": "rts-player-tvos-apple",
   "netMetrixIdentifier": "srgplayer",
   "voiceOverLanguageCode": "fr",
   "appStoreProductIdentifier": 920754415,
@@ -10,7 +11,7 @@
   "identityWebserviceURL": "https://hummingbird.rts.ch/api/profile",
   "identityWebsiteURL": "https://www.rts.ch/profile",
   "userDataServiceURL": "https://profil.rts.ch/api",
-  "videoHomeSections": "tvTrending,tvTopicsAccess,tvShowsAccess,tvFavoriteShows,tvEvents,tvTopics",
+  "videoHomeSections": "tvTrending,tvTopicsAccess,tvShowsAccess,tvFavoriteShows,tvWebFirst,tvEvents,tvTopics",
   "liveHomeSections": "tvLive,radioLive",
   "tvTrendingEpisodesOnly": false,
   "tvTrendingEditorialLimit": 3,
@@ -33,7 +34,5 @@
   "endToleranceRatio": 0.01,
   "hiddenOnboardings": "favorites,resume_playback,watch_later",
   "searchSettingSubtitledHidden": true,
-  "searchSortingCriteriumHidden": true,
-  "subtitleAvailabilityHidden": true,
-  "audioDescriptionAvailabilityHidden": true
+  "searchSortingCriteriumHidden": true
 }

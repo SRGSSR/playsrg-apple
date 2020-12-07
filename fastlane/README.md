@@ -20,102 +20,167 @@ or alternatively using `brew install fastlane`
 ```
 fastlane ios nightlies
 ```
-For each BUs, build a new iOS nightly on App Center
+Builds a new iOS nightly on App Center.
 ### ios tvOSnightlies
 ```
 fastlane ios tvOSnightlies
 ```
-For each BUs, build a new tvOS nightly on AppStore Connect and wait build processing.
+Builds a new tvOS nightly on AppStore Connect and waits build processing.
 ### ios betas
 ```
 fastlane ios betas
 ```
-For each BUs, build a new beta on App Center with the current build number. If we're not in a release or hotfix process (master, release/* or hotfix/*), tag the current version on the repository and bump the build number
+Builds a new iOS beta on App Center with the current build number. If not in a release/hotfix process (master, release/* or hotfix/*), tags the current version, bumps the build number and pushes.
+### ios tvOSbetas
+```
+fastlane ios tvOSbetas
+```
+Builds a new tvOS beta on AppStore Connect with the current build number and waits build processing. If not in a release/hotfix process (master, release/* or hotfix/*), tags the current version, bumps the build number and pushes.
 ### ios appStoreUploads
 ```
 fastlane ios appStoreUploads
 ```
-Upload a new build (bitcode) on AppStore Connect with the current build number.
-### ios swiAppStoreUpload
+Uploads a new iOS build on AppStore Connect with the current build number.
+### ios tvOSappStoreUploads
 ```
-fastlane ios swiAppStoreUpload
+fastlane ios tvOSappStoreUploads
 ```
-SWI: Upload a new build (bitcode) on AppStore Connect with the current build number.
-### ios srfAppStoreUpload
-```
-fastlane ios srfAppStoreUpload
-```
-SRF: Upload a new build (bitcode) on AppStore Connect with the current build number.
-### ios rtsAppStoreUpload
-```
-fastlane ios rtsAppStoreUpload
-```
-RTS: Upload a new build (bitcode) on AppStore Connect with the current build number.
-### ios rsiAppStoreUpload
-```
-fastlane ios rsiAppStoreUpload
-```
-RSI: Upload a new build (bitcode) on AppStore Connect with the current build number.
-### ios rtrAppStoreUpload
-```
-fastlane ios rtrAppStoreUpload
-```
-RTR: Upload a new build (bitcode) on AppStore Connect with the current build number.
+Uploads a new tvOS build on AppStore Connect with the current build number.
 ### ios dSYMs
 ```
 fastlane ios dSYMs
 ```
-Send latest dSYMs to App Center. Optional 'version' or 'min_version' parameters.
-### ios swiDSYMs
+Sends latest iOS dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+### ios tvOSdSYMs
 ```
-fastlane ios swiDSYMs
+fastlane ios tvOSdSYMs
 ```
-SWI: Send latest dSYMs to App Center, with same parameters.
-### ios srfDSYMs
-```
-fastlane ios srfDSYMs
-```
-SFR: Send latest dSYMs to App Center, with same parameters.
-### ios rtsDSYMs
-```
-fastlane ios rtsDSYMs
-```
-RTS: Send latest dSYMs to App Center, with same parameters.
-### ios rsiDSYMs
-```
-fastlane ios rsiDSYMs
-```
-RSI: Send latest dSYMs to App Center, with same parameters.
-### ios rtrDSYMs
-```
-fastlane ios rtrDSYMs
-```
-RTR: Send latest dSYMs to App Center, with same parameters.
+Sends latest tvOS dSYMs to App Center. Optional 'version' or 'min_version' parameters.
 ### ios swiScreenshots
 ```
 fastlane ios swiScreenshots
 ```
-SWI: Make screenshots and overwrite on AppStoreConnect.
+SWI: Makes iOS screenshots and replaces currents on AppStoreConnect.
 ### ios srfScreenshots
 ```
 fastlane ios srfScreenshots
 ```
-SRF: Make screenshots and overwrite on AppStoreConnect.
+SRF: Makes iOS screenshots and replaces currents on AppStoreConnect.
 ### ios rtsScreenshots
 ```
 fastlane ios rtsScreenshots
 ```
-RTS: Make screenshots and overwrite on AppStoreConnect.
+RTS: Makes iOS screenshots and replaces currents on AppStoreConnect.
 ### ios rsiScreenshots
 ```
 fastlane ios rsiScreenshots
 ```
-RSI: Make screenshots and overwrite on AppStoreConnect.
+RSI: Makes iOS screenshots and replaces currents on AppStoreConnect.
 ### ios rtrScreenshots
 ```
 fastlane ios rtrScreenshots
 ```
-RTR: Make screenshots and overwrite on AppStoreConnect.
+RTR: Makes iOS screenshots and replaces currents on AppStoreConnect.
+### ios swiAppStoreUpload
+```
+fastlane ios swiAppStoreUpload
+```
+SWI: Uploads a new iOS build on AppStore Connect with the current build number.
+### ios srfAppStoreUpload
+```
+fastlane ios srfAppStoreUpload
+```
+SRF: Uploads a new iOS build on AppStore Connect with the current build number.
+### ios rtsAppStoreUpload
+```
+fastlane ios rtsAppStoreUpload
+```
+RTS: Uploads a new iOS build on AppStore Connect with the current build number.
+### ios rsiAppStoreUpload
+```
+fastlane ios rsiAppStoreUpload
+```
+RSI: Uploads a new iOS build on AppStore Connect with the current build number.
+### ios rtrAppStoreUpload
+```
+fastlane ios rtrAppStoreUpload
+```
+RTR: Uploads a new iOS build on AppStore Connect with the current build number.
+### ios swiDSYMs
+```
+fastlane ios swiDSYMs
+```
+SWI: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
+### ios srfDSYMs
+```
+fastlane ios srfDSYMs
+```
+SFR: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
+### ios rtsDSYMs
+```
+fastlane ios rtsDSYMs
+```
+RTS: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
+### ios rsiDSYMs
+```
+fastlane ios rsiDSYMs
+```
+RSI: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
+### ios rtrDSYMs
+```
+fastlane ios rtrDSYMs
+```
+RTR: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
+### ios tvOSswiAppStoreUpload
+```
+fastlane ios tvOSswiAppStoreUpload
+```
+SWI: Uploads a new tvOS build on AppStore Connect with the current build number.
+### ios tvOSsrfAppStoreUpload
+```
+fastlane ios tvOSsrfAppStoreUpload
+```
+SRF: Uploads a new tvOS build on AppStore Connect with the current build number.
+### ios tvOSrtsAppStoreUpload
+```
+fastlane ios tvOSrtsAppStoreUpload
+```
+RTS: Uploads a new tvOS build on AppStore Connect with the current build number.
+### ios tvOSrsiAppStoreUpload
+```
+fastlane ios tvOSrsiAppStoreUpload
+```
+RSI: Uploads a new tvOS build on AppStore Connect with the current build number.
+### ios tvOSrtrAppStoreUpload
+```
+fastlane ios tvOSrtrAppStoreUpload
+```
+RTR: Uploads a new tvOS build on AppStore Connect with the current build number.
+### ios tvOSswiDSYMs
+```
+fastlane ios tvOSswiDSYMs
+```
+SWI: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
+### ios tvOSsrfDSYMs
+```
+fastlane ios tvOSsrfDSYMs
+```
+SFR: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
+### ios tvOSrtsDSYMs
+```
+fastlane ios tvOSrtsDSYMs
+```
+RTS: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
+### ios tvOSrsiDSYMs
+```
+fastlane ios tvOSrsiDSYMs
+```
+RSI: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
+### ios tvOSrtrDSYMs
+```
+fastlane ios tvOSrtrDSYMs
+```
+RTR: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
 
 ----
 

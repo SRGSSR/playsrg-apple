@@ -29,6 +29,8 @@
 
 @property (nonatomic) SRGShow *show;
 
+@property (nonatomic, weak) UIBarButtonItem *shareBarButtonItem;
+
 @property (nonatomic, getter=isFromPushNotification) BOOL fromPushNotification;
 
 @end
@@ -79,12 +81,13 @@
     
     NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
     if (sharingURL) {
-        UIBarButtonItem *shareButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share-22"]
-                                                                            style:UIBarButtonItemStylePlain
-                                                                           target:self
-                                                                           action:@selector(shareContent:)];
-        shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
-        self.navigationItem.rightBarButtonItems = @[ shareButtonItem ];
+        UIBarButtonItem *shareBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share-22"]
+                                                                               style:UIBarButtonItemStylePlain
+                                                                              target:self
+                                                                              action:@selector(shareContent:)];
+        shareBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
+        self.navigationItem.rightBarButtonItems = @[ shareBarButtonItem ];
+        self.shareBarButtonItem = shareBarButtonItem;
     }
     
     [self updateAppearanceForSize:self.view.frame.size];
@@ -353,11 +356,7 @@
     activityViewController.modalPresentationStyle = UIModalPresentationPopover;
     
     UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
-    UIView *barButtonItemView = [barButtonItem valueForKey:@"view"];
-    if (barButtonItemView) {
-        popoverPresentationController.sourceView = barButtonItemView;
-        popoverPresentationController.sourceRect = barButtonItemView.bounds;
-    }
+    popoverPresentationController.barButtonItem = self.shareBarButtonItem;
     
     [self presentViewController:activityViewController animated:YES completion:nil];
 }

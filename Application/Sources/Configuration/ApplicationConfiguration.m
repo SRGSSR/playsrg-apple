@@ -74,7 +74,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, copy) SRGAnalyticsBusinessUnitIdentifier analyticsBusinessUnitIdentifier;
 @property (nonatomic) NSInteger analyticsContainer;
 
-@property (nonatomic, copy) NSString *comScoreVirtualSite;
+@property (nonatomic, copy) NSString *siteName;
+@property (nonatomic, copy) NSString *tvSiteName;
 @property (nonatomic, copy) NSString *netMetrixIdentifier;
 
 @property (nonatomic, copy) NSString *voiceOverLanguageCode;
@@ -110,6 +111,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) BOOL tvTrendingEpisodesOnly;
 @property (nonatomic) NSNumber *tvTrendingEditorialLimit;
+@property (nonatomic) BOOL tvTrendingPrefersHeroStage;
 
 @property (nonatomic, getter=isTvFeaturedHomeSectionHeaderHidden) BOOL tvFeaturedHomeSectionHeaderHidden;
 
@@ -224,8 +226,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
     
-    NSString *comScoreVirtualSite = [firebaseConfiguration stringForKey:@"comScoreVirtualSite"];
-    if (! comScoreVirtualSite) {
+    NSString *siteName = [firebaseConfiguration stringForKey:@"siteName"];
+    if (! siteName) {
+        return NO;
+    }
+    
+    NSString *tvSiteName = [firebaseConfiguration stringForKey:@"tvSiteName"];
+    if (! tvSiteName) {
         return NO;
     }
     
@@ -261,7 +268,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.analyticsBusinessUnitIdentifier = analyticsBusinessUnitIdentifier;
     self.analyticsContainer = analyticsContainer.integerValue;
     self.vendor = vendor;
-    self.comScoreVirtualSite = comScoreVirtualSite;
+    self.siteName = siteName;
+    self.tvSiteName = tvSiteName;
     self.netMetrixIdentifier = netMetrixIdentifier;
     
     self.playURL = playURL;
@@ -323,6 +331,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSNumber *tvTrendingEditorialLimit = [firebaseConfiguration numberForKey:@"tvTrendingEditorialLimit"];
     self.tvTrendingEditorialLimit = tvTrendingEditorialLimit ? @(MAX(tvTrendingEditorialLimit.integerValue, 0)) : nil;
+    
+    self.tvTrendingPrefersHeroStage = [firebaseConfiguration boolForKey:@"tvTrendingPrefersHeroStage"];
     
     self.tvFeaturedHomeSectionHeaderHidden = [firebaseConfiguration boolForKey:@"tvFeaturedHomeSectionHeaderHidden"];
     

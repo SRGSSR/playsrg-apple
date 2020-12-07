@@ -1,7 +1,8 @@
 {
   "businessUnit": "srf",
   "container": 10,
-  "comScoreVirtualSite": "srf-player-ios-v",
+  "siteName": "srf-player-ios-v",
+  "tvSiteName": "srf-player-tvos-apple",
   "netMetrixIdentifier": "srgplayer",
   "voiceOverLanguageCode": "de",
   "appStoreProductIdentifier": 638194352,
@@ -10,6 +11,7 @@
   "videoHomeSections": "tvTrending,tvTopicsAccess,tvShowsAccess,tvFavoriteShows,tvEvents,tvTopics",
   "liveHomeSections": "tvLive,radioLive",
   "tvTrendingEpisodesOnly": true,
+  "tvTrendingPrefersHeroStage": true,
   "tvFeaturedHomeSectionHeaderHidden": true,
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioMostPopular,radioLatestEpisodes",
   "radioFeaturedHomeSectionHeaderHidden": true,

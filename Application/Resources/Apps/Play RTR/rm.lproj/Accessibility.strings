@@ -14,11 +14,14 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ vis";
 
+/* Title pronounced in home pages on shows A to Z button. */
+"A to Z shows" = "Emissiuns dad A fin Z";
+
 /* Favorite show label when not in favorites, in the player view
    Favorite show label when not in favorites, in the show view */
 "Add to favorites" = "Agiunscher a favurits";
 
-/* Media watch later creation label */
+/* Media watch later addition label */
 "Add to the watch later list" = "Agiuntar a la glista per guardar pli tard";
 
 /* Title of the first cell of a media list on homepage. */
@@ -65,9 +68,6 @@
 
 /* Introductory title for information notifications */
 "Information" = "Infurmaziun";
-
-/* Label on recently played livestreams */
-"Last played" = "Ultim guardà";
 
 /* Accessibility introductory text for the logged in user */
 "Logged in user: %@" = "Utilisader annunzià: %@";
@@ -123,12 +123,6 @@
 /* Song cell hint */
 "Plays the music." = "Lascha tadlar musica.";
 
-/* Title displayed in home page shows section. */
-"Programmes A-Z" = "Emissiuns dad A fin Z";
-
-/* Title displayed in home page shows section. */
-"Programmes by date" = "Emissiuns tenor data";
-
 /* Mini player label */
 "Recently played: %@" = "Laschà ì ultimamain: %@";
 
@@ -159,6 +153,9 @@
 
 /* Homepage header action hint */
 "Shows all contents." = "Mussar tuts cuntegns.";
+
+/* Title pronounced in home pages on shows by date button. */
+"Shows by date" = "Emissiuns tenor data";
 
 /* Stop button label */
 "Stop" = "Stop";

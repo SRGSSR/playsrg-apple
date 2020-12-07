@@ -7,44 +7,10 @@
 import SwiftUI
 
 extension CollectionView {
-    func synchronizeParentTabScrolling() -> some View {
+    func synchronizeParentTabScrolling() -> CollectionView {
         var collectionView = self
         collectionView.parentTabScrollingEnabled = true
         return collectionView
-    }
-}
-
-// See https://stackoverflow.com/questions/61552497/uitableviewheaderfooterview-with-swiftui-content-getting-automatic-safe-area-ins
-extension UIHostingController {
-    convenience public init(rootView: Content, ignoreSafeArea: Bool) {
-        self.init(rootView: rootView)
-        
-        if ignoreSafeArea {
-            disableSafeArea()
-        }
-    }
-    
-    func disableSafeArea() {
-        guard let viewClass = object_getClass(view) else { return }
-        
-        let viewSubclassName = String(cString: class_getName(viewClass)).appending("_IgnoreSafeArea")
-        if let viewSubclass = NSClassFromString(viewSubclassName) {
-            object_setClass(view, viewSubclass)
-        }
-        else {
-            guard let viewClassNameUtf8 = (viewSubclassName as NSString).utf8String else { return }
-            guard let viewSubclass = objc_allocateClassPair(viewClass, viewClassNameUtf8, 0) else { return }
-            
-            if let method = class_getInstanceMethod(UIView.self, #selector(getter: UIView.safeAreaInsets)) {
-                let safeAreaInsets: @convention(block) (AnyObject) -> UIEdgeInsets = { _ in
-                    return .zero
-                }
-                class_addMethod(viewSubclass, #selector(getter: UIView.safeAreaInsets), imp_implementationWithBlock(safeAreaInsets), method_getTypeEncoding(method))
-            }
-            
-            objc_registerClassPair(viewSubclass)
-            object_setClass(view, viewSubclass)
-        }
     }
 }
 
@@ -113,67 +79,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         }
     }
     
-    private class FocusGuideBackgroundView: UICollectionReusableView {
-        private class FocusGuide: UIFocusGuide {
-            var section: Int? = nil
-            weak var collectionView: UICollectionView? = nil
-            
-            private var visibleCells: [UICollectionViewCell] {
-                guard let collectionView = collectionView else { return [] }
-                let indexPaths = collectionView.indexPathsForVisibleItems.sorted().reversed().filter { $0.section == section }
-                return indexPaths.map { collectionView.cellForItem(at: $0)! }
-            }
-            
-            override var preferredFocusEnvironments: [UIFocusEnvironment]! {
-                get { visibleCells }
-                set {}
-            }
-        }
-        
-        var section: Int? {
-            get {
-                focusGuide.section
-            }
-            set {
-                focusGuide.section = newValue
-            }
-        }
-        
-        var collectionView: UICollectionView? {
-            get {
-                focusGuide.collectionView
-            }
-            set {
-                focusGuide.collectionView = newValue
-            }
-        }
-        
-        private weak var focusGuide: FocusGuide!
-        
-        private func createFocusGuide() {
-            let focusGuide = FocusGuide()
-            addLayoutGuide(focusGuide)
-            self.focusGuide = focusGuide
-            
-            NSLayoutConstraint.activate([
-                focusGuide.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-                focusGuide.heightAnchor.constraint(equalToConstant: 1),
-                focusGuide.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-                focusGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor)
-            ])
-        }
-        
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-            createFocusGuide()
-        }
-        
-        required init?(coder: NSCoder) {
-            super.init(coder: coder)
-            createFocusGuide()
-        }
-    }
-    
     /**
      *  View coordinator.
      */
@@ -198,13 +103,6 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         public func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
             return focusable
         }
-        
-        func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-            if let focusGuideBackgroundView = view as? FocusGuideBackgroundView {
-                focusGuideBackgroundView.section = indexPath.section
-                focusGuideBackgroundView.collectionView = collectionView
-            }
-        }
     }
     
     /// Data displayed by the collection view.
@@ -223,13 +121,35 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     fileprivate var parentTabScrollingEnabled: Bool = false
     
     /**
+     *  Remove item duplicates. As items can be moved between sections no item must appear multiple times, whether in
+     *  the same row or in different rows.
+     *
+     *  Idea borrowed from https://www.hackingwithswift.com/example-code/language/how-to-remove-duplicate-items-from-an-array
+     */
+    private static func removeDuplicates(in rows: [CollectionRow<Section, Item>]) -> [CollectionRow<Section, Item>] {
+        var addedItems = [Item: Bool]()
+        var cleanedRows = [CollectionRow<Section, Item>]()
+        for row in rows {
+            let cleanedRow = CollectionRow(section: row.section, items: row.items.filter {
+                let isNew = addedItems.updateValue(true, forKey: $0) == nil
+                if !isNew {
+                    PlayLogWarning(category: "collection", message: "A duplicate item has been removed: \($0)")
+                }
+                return isNew
+            })
+            cleanedRows.append(cleanedRow)
+        }
+        return cleanedRows
+    }
+    
+    /**
      *  Create a collection view displaying the specified data with cells delivered by the provided builder.
      */
     init(rows: [CollectionRow<Section, Item>],
          sectionLayoutProvider: @escaping (Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection,
          @ViewBuilder cell: @escaping (IndexPath, Item) -> Cell,
          @ViewBuilder supplementaryView: @escaping (String, IndexPath) -> SupplementaryView) {
-        self.rows = rows
+        self.rows = Self.removeDuplicates(in: rows)
         self.sectionLayoutProvider = sectionLayoutProvider
         self.cell = cell
         self.supplementaryView = supplementaryView
@@ -248,16 +168,9 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     }
     
     private func layout(context: Context) -> UICollectionViewLayout {
-        let focusGuideIdentifier = "focusGuide"
-        
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-            let section = context.coordinator.sectionLayoutProvider!(sectionIndex, layoutEnvironment)
-            let focusGuide = NSCollectionLayoutDecorationItem.background(elementKind: focusGuideIdentifier)
-            section.decorationItems.append(focusGuide)
-            return section
+        return UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+            return context.coordinator.sectionLayoutProvider!(sectionIndex, layoutEnvironment)
         }
-        layout.register(FocusGuideBackgroundView.self, forDecorationViewOfKind: focusGuideIdentifier)
-        return layout
     }
     
     private func reloadData(in collectionView: UICollectionView, context: Context, animated: Bool = false) {

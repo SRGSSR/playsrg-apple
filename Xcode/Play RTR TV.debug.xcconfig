@@ -1,2 +1,3 @@
 #include "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTR TV/Pods-Play SRG-tvOS-Play RTR TV.debug.xcconfig"
 #include "Xcode/Play tvOS Application.xcconfig"
+#include "Xcode/Play RTR.xcconfig"

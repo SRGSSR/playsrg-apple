@@ -31,7 +31,8 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, copy) SRGAnalyticsBusinessUnitIdentifier analyticsBusinessUnitIdentifier;
 @property (nonatomic, readonly) NSInteger analyticsContainer;
 
-@property (nonatomic, readonly, copy) NSString *comScoreVirtualSite;
+@property (nonatomic, readonly, copy) NSString *siteName;
+@property (nonatomic, readonly, copy) NSString *tvSiteName;
 @property (nonatomic, readonly, copy) NSString *netMetrixIdentifier;
 
 // Might be nil for "exotic" languages like Rumantsch
@@ -65,6 +66,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly) BOOL tvTrendingEpisodesOnly;
 @property (nonatomic, readonly, nullable) NSNumber *tvTrendingEditorialLimit;
+@property (nonatomic, readonly) BOOL tvTrendingPrefersHeroStage;
 
 @property (nonatomic, readonly, getter=isTvFeaturedHomeSectionHeaderHidden) BOOL tvFeaturedHomeSectionHeaderHidden;
 

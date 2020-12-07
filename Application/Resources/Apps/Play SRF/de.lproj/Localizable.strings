@@ -16,6 +16,9 @@
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ wartet.";
 
+/* Short label displayed on a media expiring soon */
+"%@ left" = "Noch %@";
+
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@";
 
@@ -34,7 +37,7 @@
 /* More than 3 min option */
 "> 30 min" = "> 30 min";
 
-/* Short title displayed in home page shows section. */
+/* Short title displayed in home pages on a button. */
 "A to Z" = "A bis Z";
 
 /* Button label to add a media to the watch later list, from the media long-press menu
@@ -59,6 +62,9 @@
 /* Title of the first cell of a media list on homepage. */
 "All content" = "Alle anzeigen";
 
+/* Title label used to present already available videos, usually badged as web first */
+"Already available" = "Vorab online verfügbar";
+
 /* No comment provided by engineer. */
 "Always send" = "Immer senden";
 
@@ -78,6 +84,7 @@
 "Are you sure you want to delete the selected items?" = "Sind Sie sicher, dass Sie die ausgewählten Elemente löschen wollen?";
 
 /* Audios option
+   Audios tab title
    Header for audio search results
    Title displayed at the top of the audio view */
 "Audios" = "Audios";
@@ -92,7 +99,7 @@
 /* Title label used to present the soon expiring videos */
 "Available for a limited time" = "Nur noch kurze Zeit online";
 
-/* Short title displayed in home page shows section. */
+/* Short title displayed in home pages on a button. */
 "By date" = "Nach Datum";
 
 /* Label of the button to close the media long-press menu
@@ -165,6 +172,9 @@
 /* Short label identifying content which has expired. */
 "Expired" = "Abgelaufen";
 
+/* Show favorite button label */
+"Favorite" = "Favoriten";
+
 /* Favorite show label when added ,in the show view
    Label to present Favorites
    Title label used to present the radio favorite shows
@@ -184,11 +194,16 @@
 /* Total free space size, display at the bottom of download list */
 "Free space: %@" = "Verfügbarer Speicher: %@";
 
-/* Title label used to present TV event modules while loading. It appears if no network connection is available and no cache is available */
+/* Title label used to present TV event modules while loading. It appears if no network connection is available and no cache is available
+   Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
 "Highlights" = "Highlights";
 
-/* Label to present history */
+/* Label to present history
+   Profile tab title */
 "History" = "Zuletzt gesehen";
+
+/* Home tab title */
+"Home" = "Home";
 
 /* Image copyright introductory label */
 "Image credit: %@" = "Bild: %@";
@@ -205,7 +220,8 @@
 /* Period setting option */
 "Last week" = "Letzte Woche";
 
-/* Label for the button for deciding to opt-in for background video playback at a later time */
+/* Label for the button for deciding to opt-in for background video playback at a later time
+   Watch or listen later button label in media detail view */
 "Later" = "Später";
 
 /* Title label used to present the latest videos
@@ -218,6 +234,9 @@
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
 "less than 1 hour" = "< 1 Stunde";
 
+/* Play button label for audio in media detail view */
+"Listen" = "Abspielen";
+
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
    User activity title when listening to an audio */
@@ -228,6 +247,7 @@
 "Live" = "Live";
 
 /* Label to present the Livestreams view
+   Livestreams tab title
    Title displayed at the top of the livestream view */
 "Livestreams" = "Live";
 
@@ -248,8 +268,9 @@
 
 /* Button label to open the show episode page from the long-press menu
    Button label to open the show episode page from the preview window
+   Button to access more episodes from the media detail view
    Context menu action to open more episodes associated with a media */
-"More episodes" = "Weitere Sendungen zeigen";
+"More episodes" = "Mehr zur Sendung";
 
 /* Title of the related content player section */
 "More on this subject" = "Mehr zum Thema";
@@ -349,14 +370,9 @@
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Zurück";
 
-/* Title displayed at the top of the profile view */
+/* Profile tab title
+   Title displayed at the top of the profile view */
 "Profile" = "Profil";
-
-/* Label to present shows A to Z (radio or TV) */
-"Programmes A-Z" = "Sendungen A bis Z";
-
-/* Label to present programmes by date */
-"Programmes by date" = "Sendungen nach Datum";
 
 /* Settings section header */
 "Properties" = "Eigenschaften";
@@ -424,8 +440,12 @@
 /* Title of the reset search settings button */
 "Reset" = "Zurücksetzen";
 
+/* Resume playback button label */
+"Resume" = "Weiter abspielen";
+
 /* Label to present the search view
    Search placeholder text
+   Search tab title
    Title displayed when there is no search criterium entered */
 "Search" = "Suche";
 
@@ -459,8 +479,15 @@
    Shows search setting option list view title
    Title label used to present radio associated shows
    Title label used to present the radio shows AZ and radio shows by date access buttons
-   Title label used to present the TV shows AZ and TV shows by date access buttons */
+   Title label used to present the TV shows AZ and TV shows by date access buttons
+   Shows tab title */
 "Shows" = "Sendungen";
+
+/* Label to present shows A to Z (radio or TV) */
+"Shows A to Z" = "Sendungen A bis Z";
+
+/* Label to present shows (episodes) by date (radio or TV) */
+"Shows by date" = "Sendungen nach Datum";
 
 /* Title of the button to skip updating the application */
 "Skip" = "Abbrechen";
@@ -505,6 +532,9 @@
    Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "Kopiert.";
 
+/* Error message returned for invalid data */
+"The data is invalid" = "Fehlerhafte Daten: Aktion konnte nicht ausgeführt werden";
+
 /* Button label to share the entire episode being played. */
 "The entire episode" = "Ganze Sendung";
 
@@ -546,6 +576,9 @@
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Aus rechtlichen Gründen kann dieser Inhalt nicht mit Google Cast abgespielt werden.";
 
+/* Related content media list title */
+"This might interest you" = "Das könnte Sie auch interessieren";
+
 /* Period setting option */
 "This week" = "Diese Woche";
 
@@ -560,7 +593,7 @@
    Title label used to present TV topics
    Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available
    Topics search setting option list view title */
-"Topics" = "Themen";
+"Topics" = "Kategorien";
 
 /* Total space size, display at the bottom of download list */
 "Total space used: %@" = "Benötigter Speicher: %@";
@@ -585,6 +618,9 @@
 /* Header for video and audio search results */
 "Videos and audios" = "Video und Audio";
 
+/* Play button label for video in media detail view */
+"Watch" = "Abspielen";
+
 /* Suggested invocation phrase to watch a show
    Suggested invocation phrase to watch a video
    User activity title when watching a video */
@@ -593,8 +629,9 @@
 /* Label to present the watch later list */
 "Watch later" = "Später schauen";
 
-/* Web first label on media cells */
-"Web first" = "vorab";
+/* Web first label on media cells
+   Web first label on media detail page */
+"Web first" = "Vorab";
 
 /* Title displayed at the top of the What's new view */
 "What's new" = "Neue Funktionen";

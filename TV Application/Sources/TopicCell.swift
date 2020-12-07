@@ -23,14 +23,17 @@ struct TopicCell: View {
     
     var body: some View {
         GeometryReader { geometry in
-            Button(action: {}) {
+            Button(action: {
+                if let topic = topic {
+                    navigateToTopic(topic)
+                }
+            }) {
                 ZStack {
                     ImageView(url: imageUrl)
-                        .whenRedacted { $0.hidden() }
                     Rectangle()
                         .fill(Color(white: 0, opacity: 0.4))
                     Text(title)
-                        .srgFont(.medium, size: .subtitle)
+                        .srgFont(.overline)
                         .lineLimit(1)
                         .foregroundColor(.white)
                         .padding(20)
@@ -38,6 +41,9 @@ struct TopicCell: View {
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .redacted(reason: redactionReason)
+                .accessibilityElement()
+                .accessibilityLabel(topic?.title ?? "")
+                .accessibility(addTraits: .isButton)
             }
             .buttonStyle(CardButtonStyle())
         }

@@ -46,6 +46,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatest;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicense;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicenses;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMedia;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMostPopular;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleNotifications;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitlePlayer;
@@ -60,6 +61,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSports;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTrending;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTV;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWatchLater;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWebFirst;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
 
 /**

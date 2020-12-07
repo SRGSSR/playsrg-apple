@@ -7,15 +7,20 @@
 #import "History.h"
 
 #import "ApplicationConfiguration.h"
+#if TARGET_OS_IOS
 #import "Download.h"
+#endif
 #import "NSTimer+PlaySRG.h"
 
+#if TARGET_OS_IOS
 @import GoogleCast;
-@import SRGLetterbox;
+#endif
 @import SRGUserData;
 
 static NSMutableDictionary<NSString *, NSNumber *> *s_cachedProgresses;
+#if TARGET_OS_IOS
 static NSTimer *s_trackerTimer;
+#endif
 
 #pragma mark Helpers
 
@@ -55,73 +60,103 @@ static SRGMedia *HistoryChapterMedia(SRGLetterboxController *controller)
         return [mediaComposition mediaForSubdivision:mediaComposition.mainChapter];
     }
     
+#if TARGET_OS_IOS
     SRGMedia *media = controller.media;
     if (media && [Download downloadForMedia:media]) {
         return media;
     }
+#endif
     
     return nil;
 }
 
 #pragma mark Player tracker
 
+/**
+ *  Update progress information based on the provided controller.
+ */
+void HistoryUpdateLetterboxPlaybackProgress(SRGLetterboxController *letterboxController)
+{
+    if (letterboxController.playbackState != SRGMediaPlayerPlaybackStatePlaying) {
+        return;
+    }
+    
+    SRGMedia *chapterMedia = HistoryChapterMedia(letterboxController);
+    if (! chapterMedia || chapterMedia.contentType == SRGContentTypeLivestream) {
+        return;
+    }
+    
+    CMTime currentTime = letterboxController.currentTime;
+    CMTime chapterPlaybackTime = (chapterMedia.contentType != SRGContentTypeScheduledLivestream && CMTIME_IS_VALID(currentTime)) ? currentTime : kCMTimeZero;
+    NSString *deviceUid = UIDevice.currentDevice.name;
+    
+    // Save the segment position.
+    SRGSubdivision *subdivision = letterboxController.subdivision;
+    if ([subdivision isKindOfClass:SRGSegment.class]) {
+        SRGSegment *segment = (SRGSegment *)subdivision;
+        CMTime segmentPlaybackTime = CMTimeMaximum(CMTimeSubtract(chapterPlaybackTime, CMTimeMakeWithSeconds(segment.markIn / 1000., NSEC_PER_SEC)), kCMTimeZero);
+        [SRGUserData.currentUserData.history saveHistoryEntryWithUid:segment.URN lastPlaybackTime:segmentPlaybackTime deviceUid:deviceUid completionBlock:nil];
+    }
+    
+    // Save the main full-length position (update after the segment so that full-length entries are always more recent than corresponding
+    // segment entries)
+    [SRGUserData.currentUserData.history saveHistoryEntryWithUid:chapterMedia.URN lastPlaybackTime:chapterPlaybackTime deviceUid:deviceUid completionBlock:nil];
+}
+
+#if TARGET_OS_IOS
+
+/**
+ *  Return YES if a cast session is active and update the progress if needed.
+ */
+static BOOL HistoryUpdateGoogleCastPlaybackProgress(void)
+{
+    GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
+    if (! session) {
+        return NO;
+    }
+    
+    GCKRemoteMediaClient *remoteMediaClient = session.remoteMediaClient;
+    GCKMediaStatus *mediaStatus = remoteMediaClient.mediaStatus;
+    if (mediaStatus.playerState != GCKMediaPlayerStatePlaying) {
+        return YES;
+    }
+    
+    // Only for on-demand streams
+    GCKMediaInformation *mediaInformation = mediaStatus.mediaInformation;
+    if (mediaInformation.streamType != GCKMediaStreamTypeBuffered) {
+        return YES;
+    }
+    
+    NSString *URN = mediaInformation.contentID;
+    if (! URN) {
+        return YES;
+    }
+    
+    // Use approximate value. The value in GCKMediaStatus is updated from time to time. The approximateStreamPosition
+    // interpolates between known values to get a smoother progress
+    NSTimeInterval streamPosition = remoteMediaClient.approximateStreamPosition;
+    NSString *deviceUid = UIDevice.currentDevice.name;
+    [SRGUserData.currentUserData.history saveHistoryEntryWithUid:URN lastPlaybackTime:CMTimeMakeWithSeconds(streamPosition, NSEC_PER_SEC) deviceUid:deviceUid completionBlock:nil];
+    
+    return YES;
+}
+
+#endif
+
 __attribute__((constructor)) static void HistoryPlayerTrackerInit(void)
 {
     s_cachedProgresses = [NSMutableDictionary dictionary];
+    
+#if TARGET_OS_IOS
     s_trackerTimer = [NSTimer play_timerWithTimeInterval:1. repeats:YES block:^(NSTimer * _Nonnull timer) {
-        NSString *deviceUid = UIDevice.currentDevice.name;
+        if (HistoryUpdateGoogleCastPlaybackProgress()) {
+            return;
+        }
         
-        GCKSession *session = [GCKCastContext sharedInstance].sessionManager.currentSession;
-        if (session) {
-            GCKRemoteMediaClient *remoteMediaClient = session.remoteMediaClient;
-            GCKMediaStatus *mediaStatus = remoteMediaClient.mediaStatus;
-            if (mediaStatus.playerState != GCKMediaPlayerStatePlaying) {
-                return;
-            }
-            
-            // Only for on-demand streams
-            GCKMediaInformation *mediaInformation = mediaStatus.mediaInformation;
-            if (mediaInformation.streamType != GCKMediaStreamTypeBuffered) {
-                return;
-            }
-            
-            NSString *URN = mediaInformation.contentID;
-            if (! URN) {
-                return;
-            }
-            
-            // Use approximate value. The value in GCKMediaStatus is updated from time to time. The approximateStreamPosition
-            // interpolates between known values to get a smoother progress
-            NSTimeInterval streamPosition = remoteMediaClient.approximateStreamPosition;
-            [SRGUserData.currentUserData.history saveHistoryEntryWithUid:URN lastPlaybackTime:CMTimeMakeWithSeconds(streamPosition, NSEC_PER_SEC) deviceUid:deviceUid completionBlock:nil];
-        }
-        else {
-            SRGLetterboxController *letterboxController = SRGLetterboxService.sharedService.controller;
-            if (letterboxController.playbackState != SRGMediaPlayerPlaybackStatePlaying) {
-                return;
-            }
-            
-            SRGMedia *chapterMedia = HistoryChapterMedia(letterboxController);
-            if (! chapterMedia || chapterMedia.contentType == SRGContentTypeLivestream) {
-                return;
-            }
-            
-            CMTime currentTime = letterboxController.currentTime;
-            CMTime chapterPlaybackTime = (chapterMedia.contentType != SRGContentTypeScheduledLivestream && CMTIME_IS_VALID(currentTime)) ? currentTime : kCMTimeZero;
-            
-            // Save the segment position.
-            SRGSubdivision *subdivision = letterboxController.subdivision;
-            if ([subdivision isKindOfClass:SRGSegment.class]) {
-                SRGSegment *segment = (SRGSegment *)subdivision;
-                CMTime segmentPlaybackTime = CMTimeMaximum(CMTimeSubtract(chapterPlaybackTime, CMTimeMakeWithSeconds(segment.markIn / 1000., NSEC_PER_SEC)), kCMTimeZero);
-                [SRGUserData.currentUserData.history saveHistoryEntryWithUid:segment.URN lastPlaybackTime:segmentPlaybackTime deviceUid:deviceUid completionBlock:nil];
-            }
-            
-            // Save the main full-length position (update after the segment so that full-length entries are always more recent than corresponding
-            // segment entries)
-            [SRGUserData.currentUserData.history saveHistoryEntryWithUid:chapterMedia.URN lastPlaybackTime:chapterPlaybackTime deviceUid:deviceUid completionBlock:nil];
-        }
+        SRGLetterboxController *letterboxController = SRGLetterboxService.sharedService.controller;
+        HistoryUpdateLetterboxPlaybackProgress(letterboxController);
     }];
+#endif
 }
 
 #pragma mark Media metadata functions

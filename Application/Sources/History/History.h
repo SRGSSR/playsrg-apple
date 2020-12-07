@@ -5,9 +5,15 @@
 //
 
 @import SRGDataProviderModel;
+@import SRGLetterbox;
 @import SRGMediaPlayer;
 
 NS_ASSUME_NONNULL_BEGIN
+
+/**
+ *  Update playback progress based on the provided controller.
+ */
+OBJC_EXPORT void HistoryUpdateLetterboxPlaybackProgress(SRGLetterboxController *letterboxController);
 
 /**
  *  Return the playback progress corresponding to the specified playback position and media duration. This takes

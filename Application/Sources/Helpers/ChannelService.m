@@ -79,7 +79,7 @@
 
 #pragma mark Registration
 
-- (id)addObserver:(id)observer forUpdatesWithChannel:(SRGChannel *)channel livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block
+- (id)addObserverForUpdatesWithChannel:(SRGChannel *)channel livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block
 {
     ChannelServiceSetup *setup = [[ChannelServiceSetup alloc] initWithChannel:channel livestreamUid:livestreamUid];
     NSMutableDictionary<NSString *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[setup];

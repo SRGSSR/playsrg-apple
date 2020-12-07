@@ -5,27 +5,23 @@
 //
 
 import SRGAppearance
-import SRGLetterbox
 import SwiftUI
 
 struct MediaCell: View {
-    private struct DescriptionView: View {
-        let media: SRGMedia?
-        
-        var body: some View {
-            Text(MediaDescription.title(for: media))
-                .srgFont(.medium, size: .subtitle)
-                .lineLimit(2)
-            Text(MediaDescription.subtitle(for: media))
-                .srgFont(.light, size: .subtitle)
-                .lineLimit(2)
-        }
-    }
-    
     let media: SRGMedia?
+    let style: MediaDescription.Style
+    let action: (() -> Void)?
     
-    @State var isFocused: Bool = false
+    fileprivate var onFocusAction: ((Bool) -> Void)? = nil
     
+    @State private var isFocused: Bool = false
+    
+    init(media: SRGMedia?, style: MediaDescription.Style = .date, action: (() -> Void)? = nil) {
+        self.media = media
+        self.style = style
+        self.action = action
+    }
+        
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -33,30 +29,90 @@ struct MediaCell: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Button(action: {
-                    // TODO: Could / should be presented with SwiftUI, but presentation flag must be part of topmost state
-                    if let media = media,
-                       let rootViewController = UIApplication.shared.windows.first?.rootViewController {
-                        let letterboxViewController = SRGLetterboxViewController()
-                        letterboxViewController.controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                        rootViewController.present(letterboxViewController, animated: true, completion: nil)
+                Button(action: action ?? {
+                    if let media = media {
+                        navigateToMedia(media)
                     }
                 }) {
-                    MediaVisual(media: media, scale: .small, contentMode: .fit)
-                        .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                        .reportFocusChanges()
+                    ZStack {
+                        MediaVisualView(media: media, scale: .small, contentMode: .fit)
+                            .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                            .onFocusChange { focused in
+                                isFocused = focused
+                                
+                                if let onFocusAction = self.onFocusAction {
+                                    onFocusAction(focused)
+                                }
+                            }
+                            .accessibilityElement()
+                            .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
+                            .accessibility(addTraits: .isButton)
+                            
+                        if let media = media {
+                            AvailabilityBadge(media: media)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                                .accessibility(hidden: true)
+                        }
+                    }
                 }
                 .buttonStyle(CardButtonStyle())
                 
-                DescriptionView(media: media)
+                DescriptionView(media: media, style: style)
                     .frame(width: geometry.size.width, alignment: .leading)
+                    .animation(nil)
                     .opacity(isFocused ? 1 : 0.5)
                     .offset(x: 0, y: isFocused ? 10 : 0)
                     .scaleEffect(isFocused ? 1.1 : 1, anchor: .top)
                     .animation(.easeInOut(duration: 0.2))
             }
             .redacted(reason: redactionReason)
-            .onFocusChange { isFocused = $0 }
+        }
+    }
+    
+    private struct DescriptionView: View {
+        let media: SRGMedia?
+        let style: MediaDescription.Style
+        
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text(MediaDescription.title(for: media, style: style))
+                    .srgFont(.subtitle)
+                    .lineLimit(2)
+                Text(MediaDescription.subtitle(for: media, style: style))
+                    .srgFont(style == .date ? .overline : .headline2)
+                    .lineLimit(2)
+                    .layoutPriority(1)
+            }
+        }
+    }
+}
+
+extension MediaCell {
+    func onFocus(perform action: @escaping (Bool) -> Void) -> MediaCell {
+        var mediaCell = self
+        mediaCell.onFocusAction = action
+        return mediaCell
+    }
+}
+
+struct MediaCell_Previews: PreviewProvider {
+    
+    static var mediaPreview: SRGMedia {
+        let asset = NSDataAsset(name: "media-rts-tv")!
+        let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
+        
+        return try! MTLJSONAdapter(modelClass: SRGMedia.self)?.model(fromJSONDictionary: jsonData) as! SRGMedia
+    }
+    
+    static var previews: some View {
+        Group {
+            MediaCell(media: mediaPreview)
+                .previewLayout(.fixed(width: 375, height: 400))
+                .previewDisplayName("RTS media, default date style")
+            
+            MediaCell(media: mediaPreview, style: .show)
+                .previewLayout(.fixed(width: 375, height: 400))
+                .previewDisplayName("RTS media, show style")
         }
     }
 }

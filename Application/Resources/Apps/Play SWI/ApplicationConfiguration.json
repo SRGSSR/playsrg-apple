@@ -1,7 +1,8 @@
 {
   "businessUnit": "swi",
   "container": 10,
-  "comScoreVirtualSite": "swi-player-ios-v",
+  "siteName": "swi-player-ios-v",
+  "tvSiteName": "swi-player-tvos-apple",
   "netMetrixIdentifier": "srgplayer",
   "voiceOverLanguageCode": "en",
   "appStoreProductIdentifier": 920785201,

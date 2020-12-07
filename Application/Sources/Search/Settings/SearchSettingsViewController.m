@@ -200,26 +200,6 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     return [super supportedInterfaceOrientations] & UIViewController.play_supportedInterfaceOrientations;
 }
 
-#pragma mark Responsiveness
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
-    [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        self.popoverPresentationController.sourceRect = self.popoverPresentationController.sourceView.bounds;
-    }];
-}
-
-- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
-    
-    [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        self.popoverPresentationController.sourceRect = self.popoverPresentationController.sourceView.bounds;
-    }];
-}
-
 #pragma mark Status bar
 
 - (UIStatusBarStyle)preferredStatusBarStyle

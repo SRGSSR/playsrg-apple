@@ -1,0 +1,6 @@
+#include "Xcode/Play iOS.xcconfig"
+
+PRODUCT_BUNDLE_IDENTIFIER = $(APP_BUNDLE_IDENTIFIER).screenshots-uitest
+PRODUCT_NAME = $(BASE_PRODUCT_NAME) screenshots
+SDKROOT = iphoneos
+SWIFT_OBJC_BRIDGING_HEADER=$(PROJECT_DIR)/UITests/Screenshots/Sources/Bridges/Screenshots-ObjectiveC-Bridge.h

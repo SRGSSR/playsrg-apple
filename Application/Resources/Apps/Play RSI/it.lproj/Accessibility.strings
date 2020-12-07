@@ -14,11 +14,14 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ visualizzazioni";
 
+/* Title pronounced in home pages on shows A to Z button. */
+"A to Z shows" = "Programmi dalla A alla Z";
+
 /* Favorite show label when not in favorites, in the player view
    Favorite show label when not in favorites, in the show view */
 "Add to favorites" = "Aggiungere ai preferiti";
 
-/* Media watch later creation label */
+/* Media watch later addition label */
 "Add to the watch later list" = "Aggiungere a \"Guardare dopo\"";
 
 /* Title of the first cell of a media list on homepage. */
@@ -65,9 +68,6 @@
 
 /* Introductory title for information notifications */
 "Information" = "Informazioni";
-
-/* Label on recently played livestreams */
-"Last played" = "Ultimo contenuto visionato";
 
 /* Accessibility introductory text for the logged in user */
 "Logged in user: %@" = "Utente connesso: %@";
@@ -123,12 +123,6 @@
 /* Song cell hint */
 "Plays the music." = "Riprodurre la musica.";
 
-/* Title displayed in home page shows section. */
-"Programmes A-Z" = "Trasmissioni dalla A alla Z";
-
-/* Title displayed in home page shows section. */
-"Programmes by date" = "Trasmissioni per data";
-
 /* Mini player label */
 "Recently played: %@" = "Riprodotto di recente: %@";
 
@@ -159,6 +153,9 @@
 
 /* Homepage header action hint */
 "Shows all contents." = "Mostra tutti i contenuti.";
+
+/* Title pronounced in home pages on shows by date button. */
+"Shows by date" = "Programmi per data";
 
 /* Stop button label */
 "Stop" = "Stop";

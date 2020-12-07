@@ -38,6 +38,8 @@
 
 @property (nonatomic) SRGMediaSearchSettings *settings;
 
+@property (nonatomic, weak) UIBarButtonItem *filtersBarButtonItem;
+
 @end
 
 @implementation SearchViewController
@@ -215,7 +217,7 @@
     NSString *query = self.query;
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:self.settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber *total, SRGMediaAggregations *aggregations, NSArray<SRGSearchSuggestion *> * suggestions, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+    SRGPageRequest *mediaSearchRequest = [[[SRGDataProvider.currentDataProvider mediasForVendor:applicationConfiguration.vendor matchingQuery:query withSettings:self.settings completionBlock:^(NSArray<NSString *> * _Nullable mediaURNs, NSNumber * _Nullable total, SRGMediaAggregations * _Nullable aggregations, NSArray<SRGSearchSuggestion *> * _Nullable suggestions, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (error) {
             completionHandler(nil, page, nil, HTTPResponse, error);
             return;
@@ -321,23 +323,31 @@
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     if (! applicationConfiguration.searchSettingsHidden) {
-        UIButton *filtersButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [filtersButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
+        if (! self.filtersBarButtonItem) {
+            UIButton *filtersButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [filtersButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
+            
+            filtersButton.titleLabel.font = [UIFont srg_regularFontWithSize:16.f];
+            [filtersButton setTitle:NSLocalizedString(@"Filters", @"Filters button title") forState:UIControlStateNormal];
+            [filtersButton setTitleColor:UIColor.grayColor forState:UIControlStateHighlighted];
+            
+            // See https://stackoverflow.com/a/25559946/760435
+            static const CGFloat kInset = 2.f;
+            filtersButton.imageEdgeInsets = UIEdgeInsetsMake(0.f, -kInset, 0.f, kInset);
+            filtersButton.titleEdgeInsets = UIEdgeInsetsMake(0.f, kInset, 0.f, -kInset);
+            filtersButton.contentEdgeInsets = UIEdgeInsetsMake(0.f, kInset, 0.f, kInset);
+            
+            UIBarButtonItem *filtersBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:filtersButton];
+            self.navigationItem.rightBarButtonItem = filtersBarButtonItem;
+            self.filtersBarButtonItem = filtersBarButtonItem;
+        }
         
-        filtersButton.titleLabel.font = [UIFont srg_regularFontWithSize:16.f];
-        [filtersButton setTitle:NSLocalizedString(@"Filters", @"Filters button title") forState:UIControlStateNormal];
-        [filtersButton setTitleColor:UIColor.grayColor forState:UIControlStateHighlighted];
+        id customView = self.filtersBarButtonItem.customView;
+        NSAssert([customView isKindOfClass:UIButton.class], @"Expect a button by construction");
         
-        // See https://stackoverflow.com/a/25559946/760435
-        static const CGFloat kInset = 2.f;
-        filtersButton.imageEdgeInsets = UIEdgeInsetsMake(0.f, -kInset, 0.f, kInset);
-        filtersButton.titleEdgeInsets = UIEdgeInsetsMake(0.f, kInset, 0.f, -kInset);
-        filtersButton.contentEdgeInsets = UIEdgeInsetsMake(0.f, kInset, 0.f, kInset);
-        
+        UIButton *filtersButton = customView;
         UIImage *image = [SearchViewController containsAdvancedSettings:self.settings] ? [UIImage imageNamed:@"filter_on-22"] : [UIImage imageNamed:@"filter_off-22"];
         [filtersButton setImage:image forState:UIControlStateNormal];
-        
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:filtersButton];
     }
     else {
         self.navigationItem.rightBarButtonItem = nil;
@@ -698,9 +708,7 @@
     UIPopoverPresentationController *popoverPresentationController = navigationController.popoverPresentationController;
     popoverPresentationController.backgroundColor = UIColor.play_popoverGrayBackgroundColor;
     popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
-    
-    popoverPresentationController.sourceView = sender;
-    popoverPresentationController.sourceRect = [sender bounds];
+    popoverPresentationController.barButtonItem = self.filtersBarButtonItem;
     
     [self presentViewController:navigationController animated:YES completion:nil];
 }

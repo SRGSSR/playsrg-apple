@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/urbanairship/ios-library.git",
         "state": {
           "branch": null,
-          "revision": "b58aea09e2962e9e5b4c678e82462c6eaf07316c",
-          "version": "14.1.2"
+          "revision": "60f7bc6592ec118abe3ed40d0341e381b0231784",
+          "version": "14.1.3"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "a2a56211cd80614e1ac90bf2e76c5329f4f6b3d0",
-          "version": "9.1.2"
+          "revision": "ef122e4512e84020dca9d8f598408fdb38658946",
+          "version": "9.2.0"
         }
       },
       {
@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": null,
-          "revision": "3d9304541fb3b1b0f5767360a887258b26053ca5",
-          "version": "5.0.0"
+          "revision": "e6b9b4aee2a36c4f0586b7f481f52dc4f9a7646a",
+          "version": "6.1.0"
         }
       },
       {
@@ -105,8 +105,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
         "state": {
           "branch": null,
-          "revision": "48258a788952348c7fa38b5b8e9181b25f3c87b8",
-          "version": "3.0.0"
+          "revision": "80ebf882d46451001c1fd7d3e21baa264ad88477",
+          "version": "3.0.1"
         }
       },
       {
@@ -114,8 +114,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
         "state": {
           "branch": null,
-          "revision": "e85f920a9e3f34af2e605d55b0509223eb4bf5e8",
-          "version": "3.0.0"
+          "revision": "596f4161b4460fc648d30d5d3ca2c16f249863ef",
+          "version": "3.0.1"
         }
       },
       {
@@ -123,8 +123,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": null,
-          "revision": "39d8331ffee2b484e907f4e5f8746706cc71763c",
-          "version": "9.0.0"
+          "revision": "02673482b77adacbcdeac82db60116f893d2d817",
+          "version": "9.1.0"
         }
       },
       {
@@ -150,8 +150,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": null,
-          "revision": "ee3223f55e9a72fabdaea56b9e28c3c9e760f281",
-          "version": "6.0.0"
+          "revision": "6cc4d43e5d76097a3c09cee84acdf86b9ba9b416",
+          "version": "6.1.1"
         }
       },
       {
@@ -168,8 +168,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
           "branch": null,
-          "revision": "7a89c2d7ade084c31e9b0271ad7d0b9fcd85b743",
-          "version": "6.0.0"
+          "revision": "a0f192296817d471fbe48dc8623ab851a9266369",
+          "version": "6.1.0"
         }
       },
       {
