@@ -32,6 +32,19 @@ struct LiveMediaCell: View, LiveMediaData {
         return media == nil ? .placeholder : .init()
     }
     
+    private var accessibilityLabel: String {
+        if let channel = channel {
+            var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", "Live content label, with a channel title"), channel.title)
+            if let currentProgram = program(at: Date()) {
+                label.append(", \(currentProgram.title)")
+            }
+            return label
+        }
+        else {
+            return MediaDescription.accessibilityLabel(for: media)
+        }
+    }
+    
     private func registerForChannelUpdates() {
         guard let media = media,
               let channel = media.channel,
@@ -57,6 +70,9 @@ struct LiveMediaCell: View, LiveMediaData {
                     VisualView(media: media, programComposition: programComposition, date: date)
                         .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                         .onFocusChange { isFocused = $0 }
+                        .accessibilityElement()
+                        .accessibilityLabel(accessibilityLabel)
+                        .accessibility(addTraits: .isButton)
                 }
                 .buttonStyle(CardButtonStyle())
                 

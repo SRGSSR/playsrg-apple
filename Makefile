@@ -45,7 +45,7 @@ update:
 
 .PHONY: setup
 setup:
-	@echo "Setting up proprietary project..."
+	@echo "Setting up the project..."
 
 	@if [ ! -d $(CONFIGURATION_FOLDER) ]; then \
 		git clone https://github.com/SRGSSR/playsrg-apple-configuration.git $(CONFIGURATION_FOLDER); \
@@ -62,19 +62,6 @@ setup:
 
 	@echo "... done.\n"
 
-.PHONY: public.setup
-public.setup:
-	@echo "Setting up public project..."
-
-	@rm -rf $(CONFIGURATION_FOLDER)
-	@rm -rf .env
-	@mkdir -p Xcode/Links
-	@pushd Xcode/Links > /dev/null; ln -fs ../Public/*.xcconfig .
-
-	@pod install
-	
-	@echo "... done.\n"
-
 .PHONY: clean
 clean:
 	@echo "Cleaning up build products..."
@@ -84,14 +71,10 @@ clean:
 
 .PHONY: help
 help:
-	@echo "The following targets must be used for proprietary builds:"
+	@echo "The following targets are available:"
 	@echo "   all                         Build project dependencies and the project"
 	@echo "   bootstrap                   Build previously resolved dependencies"
 	@echo "   update                      Update and build dependencies"
 	@echo "   setup                       Setup project"
-	@echo "   public.setup                Setup project (public settings)"
-	
-	@echo ""
-	@echo "The following targets are widely available:"
 	@echo "   help                        Display this message"
 	@echo "   clean                       Clean the project and its dependencies"

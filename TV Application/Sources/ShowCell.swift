@@ -45,6 +45,9 @@ struct ShowCell: View {
                                 onFocusAction(focused)
                             }
                         }
+                        .accessibilityElement()
+                        .accessibilityLabel(show?.title ?? "")
+                        .accessibility(addTraits: .isButton)
                 }
                 .buttonStyle(CardButtonStyle())
                 

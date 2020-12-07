@@ -44,9 +44,14 @@ struct MediaCell: View {
                                     onFocusAction(focused)
                                 }
                             }
+                            .accessibilityElement()
+                            .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
+                            .accessibility(addTraits: .isButton)
+                            
                         if let media = media {
                             AvailabilityBadge(media: media)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                                .accessibility(hidden: true)
                         }
                     }
                 }

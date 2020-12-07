@@ -11,6 +11,7 @@
 #import "ApplicationConfiguration.h"
 #import "ChannelService.h"
 #import "History.h"
+#import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayDurationFormatter.h"
 #import "SRGChannel+PlaySRG.h"
