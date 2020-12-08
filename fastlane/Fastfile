@@ -180,7 +180,7 @@ platform :ios do
       app_identifier = appstore_beta_identifiers[index]
 
       can_upload = can_upload_testflight_build(platform, app_identifier)
-      UI.message(tvos_schemes[index] + ' (Beta ' + build_number + ') already uploaded 🔁✅') unless can_upload
+      UI.message(tvos_schemes[index] + ' (Beta ' + build_number + ') already uploaded 🔁 ✅') unless can_upload
       next unless can_upload
 
       update_app_identifier_to_appstore(platform, app_identifier)
@@ -437,7 +437,7 @@ platform :ios do
     build_number = xcode_build_number(options[:platform])
 
     can_upload = can_upload_testflight_build(options[:platform], nil)
-    UI.message(options[:scheme] + ' (' + options[:platform] + ') ' + build_number + ' already uploaded 🔁✅') unless can_upload
+    UI.message(options[:scheme] + ' (' + options[:platform] + ') ' + build_number + ' already uploaded 🔁 ✅') unless can_upload
     next unless can_upload
 
     build_lane(
@@ -532,19 +532,29 @@ platform :ios do
       UI.message(app_identifier + ' app does not exist. ⚠️') unless app
       next unless app
 
-      testers = Spaceship::TestFlight::Tester.search(app_id: app.id, text: email)
-      UI.message(email + ' is already a tester for ' + app.name + '. 🔁✅') unless testers.count.zero?
-      next unless testers.count.zero?
-
       group_name = options[:group_name] || ENV['ITUNES_CONNECT_BETA_GROUPS']
-      groups = app.get_beta_groups(filter: { name: group_name })
-      UI.message(group_name + ' group does not exist for ' + app.name + '. ⚠️') if groups.count.zero?
-      next if groups.count.zero?
+      group = app.get_beta_groups(filter: { name: group_name }).first
+      UI.message(group_name + ' group does not exist for ' + app.name + '. ⚠️') unless group
+      next unless group
+
+      tester = Spaceship::TestFlight::Tester.search(app_id: app.id, text: email).first
+      if tester
+        if tester.status == 'invited'
+          Spaceship::ConnectAPI.delete_beta_tester_from_apps(
+            beta_tester_id: tester.tester_id,
+            app_ids: [app.id]
+          )
+          UI.message(email + ' was invited as a tester for ' + app.name + '. Invitation removed. 📨 🚮')
+        else # accepted or installed
+          UI.message(email + ' is already a tester for ' + app.name + ' (status: ' + tester.status + '). 🔁 ✅')
+          next
+        end
+      end
 
       tester = { email: email, firstName: options[:first_name], lastName: options[:last_name] }
-      groups.first.post_bulk_beta_tester_assignments(beta_testers: [tester])
+      group.post_bulk_beta_tester_assignments(beta_testers: [tester])
 
-      UI.message email + ' tester added to ' + groups.first.name + ' for ' + app.name + '. ✅'
+      UI.message email + ' tester added to ' + group.name + ' for ' + app.name + '. Invitation sent. 📨 ✅'
     end
   end
 
