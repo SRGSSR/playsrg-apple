@@ -214,8 +214,12 @@ extension HomeModel {
                         .eraseToAnyPublisher()
                 }
             case .tvFavoriteShows:
-                return dataProvider.shows(withUrns: Array(FavoritesShowURNs()), pageSize: pageSize)
-                    .map { $0.shows.sorted(by: { $0.title < $1.title }).map { RowItem(rowId: self, content: .show($0)) } }
+                // TODO: Chain next pages to get all favorite shows
+                return dataProvider.shows(withUrns: Array(FavoritesShowURNs()), pageSize: 50) // Use max page size allowed.
+                    .map { $0.shows
+                        .filter { $0.transmission == .TV }
+                        .sorted(by: { $0.title < $1.title })
+                        .map { RowItem(rowId: self, content: .show($0)) } }
                     .eraseToAnyPublisher()
             case .tvLatest:
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
