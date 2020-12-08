@@ -192,7 +192,7 @@ extension HomeModel {
         static var liveIds: [RowId] {
             return [.tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams]
         }
-        
+                
         func publisher() -> AnyPublisher<[RowItem], Error>? {
             let dataProvider = SRGDataProvider.current!
             let configuration = ApplicationConfiguration.shared
@@ -214,8 +214,8 @@ extension HomeModel {
                         .eraseToAnyPublisher()
                 }
             case .tvFavoriteShows:
-                return dataProvider.shows(withUrns: Array(FavoritesShowURNs()))
-                    .map { $0.shows.map { RowItem(rowId: self, content: .show($0)) } }
+                return dataProvider.shows(withUrns: Array(FavoritesShowURNs()), pageSize: pageSize)
+                    .map { $0.shows.sorted(by: { $0.title < $1.title }).map { RowItem(rowId: self, content: .show($0)) } }
                     .eraseToAnyPublisher()
             case .tvLatest:
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
