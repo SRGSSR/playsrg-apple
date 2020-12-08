@@ -59,22 +59,27 @@ class HomeModel: Identifiable, ObservableObject {
     
     private func addRow(with id: RowId, to rows: inout [Row]) {
         if let existingRow = self.rows.first(where: { $0.section == id }) {
-            rows.append(existingRow)
+            if existingRow.section != .tvFavoriteShows || FavoritesShowURNs().count != 0 {
+                rows.append(existingRow)
+            }
         }
         else {
-            func items(for id: RowId) -> [RowItem] {
+            func items(for id: RowId) -> [RowItem]? {
                 switch id {
                 case .tvTopicsAccess:
                     return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .topicPlaceholder(index: $0)) }
                 case .tvFavoriteShows:
-                    return FavoritesShowURNs().count == 0 ? [] : (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
+                    return FavoritesShowURNs().count == 0 ? nil : (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
                 case .radioAllShows:
                     return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
                 default:
                     return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .mediaPlaceholder(index: $0)) }
                 }
             }
-            rows.append(Row(section: id, items: items(for: id)))
+            
+            if let rowItems = items(for: id) {
+                rows.append(Row(section: id, items: rowItems))
+            }
         }
     }
     
