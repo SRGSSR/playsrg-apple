@@ -127,6 +127,17 @@ platform :ios do
     save_last_nightlies_success_git_commit_hash(platform)
   end
 
+  desc 'Add tvOS nightly tester (email required)'
+  lane :tvOSnightlyTester do |options|
+    addTestFlightTester(
+      email: options[:email],
+      first_name: options[:first_name],
+      last_name: options[:last_name],
+      app_identifiers: appstore_nightly_identifiers,
+      group_name: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS']
+    )
+  end
+
   # Betas
 
   desc 'Builds a new iOS beta on App Center with the current build number. If not in a release/hotfix process (master, release/* or hotfix/*), tags the current version, bumps the build number and pushes.'
@@ -205,6 +216,17 @@ platform :ios do
     end
 
     bump_build_number_beta_workflow(platform)
+  end
+
+  desc 'Add tvOS beta tester (email required)'
+  lane :tvOSbetaTester do |options|
+    addTestFlightTester(
+      email: options[:email],
+      first_name: options[:first_name],
+      last_name: options[:last_name],
+      app_identifiers: appstore_beta_identifiers,
+      group_name: ENV['ITUNES_CONNECT_BETA_GROUPS']
+    )
   end
 
   # Prods
@@ -492,6 +514,40 @@ platform :ios do
     end
   end
 
+  desc 'Add tester to TestFlight, by default for betas'
+  private_lane :addTestFlightTester do |options|
+    email = options[:email]
+    if !email || email.length.zero?
+      UI.user_error!('email parameter is required.')
+      return false
+    end
+
+    ENV['FASTLANE_ITC_TEAM_ID'] = app_config.try_fetch_value(:itc_team_id)
+    Spaceship::Tunes.login
+    Spaceship::Tunes.select_team
+
+    app_identifiers = options[:app_identifiers] || appstore_beta_identifiers
+    app_identifiers.each do |app_identifier|
+      app = Spaceship::ConnectAPI::App.find(app_identifier)
+      UI.message(app_identifier + ' app does not exist. ⚠️') unless app
+      next unless app
+
+      testers = Spaceship::TestFlight::Tester.search(app_id: app.id, text: email)
+      UI.message(email + ' is already a tester for ' + app.name + '. 🔁✅') unless testers.count.zero?
+      next unless testers.count.zero?
+
+      group_name = options[:group_name] || ENV['ITUNES_CONNECT_BETA_GROUPS']
+      groups = app.get_beta_groups(filter: { name: group_name })
+      UI.message(group_name + ' group does not exist for ' + app.name + '. ⚠️') if groups.count.zero?
+      next if groups.count.zero?
+
+      tester = { email: email, firstName: options[:first_name], lastName: options[:last_name] }
+      groups.first.post_bulk_beta_tester_assignments(beta_testers: [tester])
+
+      UI.message email + ' tester added to ' + groups.first.name + ' for ' + app.name + '. ✅'
+    end
+  end
+
   after_all do |lane|
     reset_git_repo(skip_clean: true) if cleaned_lane_condition(lane)
 
@@ -518,7 +574,7 @@ def app_config
 end
 
 def cleaned_lane_condition(lane)
-  (lane.to_s != 'devLane') && (!lane.to_s.downcase.include? 'dsym')
+  (lane.to_s != 'devLane') && (!lane.to_s.downcase.include? 'dsym') && (!lane.to_s.downcase.include? 'tester')
 end
 
 def ios_schemes
