@@ -131,7 +131,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTopicSections(NSString *string)
     if (self = [super init]) {
         self.remoteConfig = [FIRRemoteConfig remoteConfig];
         if (self.remoteConfig) {
-#if defined(DEBUG) || defined(NIGHTLY)
+#if defined(DEBUG)
             // Make it possible to retrieve the configuration more frequently during development
             // See https://firebase.google.com/support/faq/#remote-config-values
             self.remoteConfig.configSettings = [[FIRRemoteConfigSettings alloc] init];
@@ -290,7 +290,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTopicSections(NSString *string)
 {
     // Cached configuration expiration must be large enough, except in development builds, see
     //   https://firebase.google.com/support/faq/#remote-config-values
-#if defined(DEBUG) || defined(NIGHTLY)
+#if defined(DEBUG)
     static const NSTimeInterval kExpirationDuration = 30.;
 #else
     static const NSTimeInterval kExpirationDuration = 15. * 60.;
