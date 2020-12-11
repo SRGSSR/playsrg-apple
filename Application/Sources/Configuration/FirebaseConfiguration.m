@@ -137,10 +137,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTopicSections(NSString *string)
             self.remoteConfig.configSettings = [[FIRRemoteConfigSettings alloc] init];
             self.remoteConfig.configSettings.minimumFetchInterval = 0.;
 #endif
-            
-            // Call `-activateWithCompletion:` to immediately apply any local remote config readily available on top of the default one
             [self.remoteConfig setDefaults:defaultsDictionary];
-            [self.remoteConfig activateWithCompletion:nil];
             
             self.updateBlock = updateBlock;
             
