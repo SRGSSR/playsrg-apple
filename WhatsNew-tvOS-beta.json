@@ -3,5 +3,6 @@
   "1.0.0-2": "- Current program display on the livestreams tab.\n- Playback can be resumed.\n- Standard page view measurements.",
   "1.0.0-3": "- Updated translations for all BUs.\n- Add date information in media view.\n- \"Resume\" button instead of \"Watch\" button if needed.\n- Only one tab for Play SWI.",
   "1.0.0-4": "- Redesigned TV show A-Z page.\n- Add most popular videos at the top of topic pages.\n- Correctly update play button state when playback can be resumed.\n- Improve suggestions displayed for SRF at the top of the homepage.\n- Add support for web first video display on the homepage.\n- Conform to official page view measurement specifications.",
-  "1.0.0-5": "- Basic accessibility.\n- More episodes button renamed on the media detail page.\n- Remove episode header on the show detail page.\n- Correctly update play button state when content playback is completed."
+  "1.0.0-5": "- Basic accessibility.\n- More episodes button renamed on the media detail page.\n- Remove episode header on the show detail page.\n- Correctly update play button state when content playback is completed.",
+  "1.0.1-6": "- Fix remote configuration update.\n- Fix potential crashes in production builds."
 }
