@@ -22,6 +22,13 @@ OBJC_EXPORT NSArray<NSNumber * /* TopicSection */> * _Nullable FirebaseConfigura
 @interface FirebaseConfiguration: NSObject
 
 /**
+ *  Clears the Firebase Configuration cache.
+ *
+ *  @discussion: Call it before `[FIRApp configure]`.
+ */
++ (void)clearFirebaseConfigurationCache;
+
+/**
  *  Create a configuration with the provided dictionary as local fallback, and a block called when the configuration
  *  is updated.
  */

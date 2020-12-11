@@ -124,6 +124,19 @@ NSArray<NSNumber *> *FirebaseConfigurationTopicSections(NSString *string)
     return dictionary.copy;
 }
 
++ (void)clearFirebaseConfigurationCache
+{
+#if TARGET_OS_IOS
+    NSString *directoryPath = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES).firstObject;
+#else
+    NSString *directoryPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+#endif
+    NSString *remoteConfigurationPathForDatabase = [directoryPath stringByAppendingPathComponent:@"Google/RemoteConfig/RemoteConfig.sqlite3"];
+    if ([NSFileManager.defaultManager fileExistsAtPath:remoteConfigurationPathForDatabase]) {
+        [NSFileManager.defaultManager removeItemAtPath:remoteConfigurationPathForDatabase error:NULL];
+    }
+}
+
 #pragma mark Object lifecycle
 
 - (instancetype)initWithDefaultsDictionary:(NSDictionary *)defaultsDictionary updateBlock:(void (^)(FirebaseConfiguration * _Nonnull))updateBlock

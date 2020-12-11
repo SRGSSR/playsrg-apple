@@ -13,6 +13,7 @@
 #import "DeepLinkService.h"
 #import "Download.h"
 #import "Favorites.h"
+#import "FirebaseConfiguration.h"
 #import "GoogleCast.h"
 #import "History.h"
 #import "HomeTopicViewController.h"
@@ -89,6 +90,12 @@ static void *s_kvoContext = &s_kvoContext;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
+    
+    // Processes run once in the lifetime of the application
+    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+        [FirebaseConfiguration clearFirebaseConfigurationCache];
+        completionHandler(YES);
+    }, @"FirebaseConfigurationReset", nil);
     
     // The configuration file, copied at build time in the main product bundle, has the standard Firebase
     // configuration filename
