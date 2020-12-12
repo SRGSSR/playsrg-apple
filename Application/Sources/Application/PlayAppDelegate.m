@@ -13,7 +13,6 @@
 #import "DeepLinkService.h"
 #import "Download.h"
 #import "Favorites.h"
-#import "FirebaseConfiguration.h"
 #import "GoogleCast.h"
 #import "History.h"
 #import "HomeTopicViewController.h"
@@ -23,6 +22,7 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PlayErrors.h"
+#import "PlayFirebaseConfiguration.h"
 #import "Playlist.h"
 #import "PlayLogger.h"
 #import "PushService.h"
@@ -93,7 +93,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     // Processes run once in the lifetime of the application
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
-        [FirebaseConfiguration clearFirebaseConfigurationCache];
+        [PlayFirebaseConfiguration clearFirebaseConfigurationCache];
         completionHandler(YES);
     }, @"FirebaseConfigurationReset", nil);
     

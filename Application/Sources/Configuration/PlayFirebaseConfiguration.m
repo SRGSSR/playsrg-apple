@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "FirebaseConfiguration.h"
+#import "PlayFirebaseConfiguration.h"
 
 #import "PlayLogger.h"
 
@@ -96,15 +96,15 @@ NSArray<NSNumber *> *FirebaseConfigurationTopicSections(NSString *string)
     return topicSections.copy;
 }
 
-@interface FirebaseConfiguration ()
+@interface PlayFirebaseConfiguration ()
 
 @property (nonatomic) FIRRemoteConfig *remoteConfig;
 @property (nonatomic) NSDictionary *dictionary;
-@property (nonatomic) void (^updateBlock)(FirebaseConfiguration *);
+@property (nonatomic) void (^updateBlock)(PlayFirebaseConfiguration *);
 
 @end
 
-@implementation FirebaseConfiguration
+@implementation PlayFirebaseConfiguration
 
 #pragma mark Class methods
 
@@ -139,7 +139,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTopicSections(NSString *string)
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithDefaultsDictionary:(NSDictionary *)defaultsDictionary updateBlock:(void (^)(FirebaseConfiguration * _Nonnull))updateBlock
+- (instancetype)initWithDefaultsDictionary:(NSDictionary *)defaultsDictionary updateBlock:(void (^)(PlayFirebaseConfiguration * _Nonnull))updateBlock
 {
     if (self = [super init]) {
         self.remoteConfig = [FIRRemoteConfig remoteConfig];
