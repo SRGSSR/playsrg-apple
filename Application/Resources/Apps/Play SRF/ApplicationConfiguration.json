@@ -8,7 +8,7 @@
   "appStoreProductIdentifier": 638194352,
   "playURL": "https://www.srf.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
-  "videoHomeSections": "tvTrending,tvTopicsAccess,tvShowsAccess,tvFavoriteShows,tvEvents,tvTopics",
+  "videoHomeSections": "tvTrending,tvTopicsAccess,tvShowsAccess,tvFavoriteShows,tvEvents,tvTopics,tvSoonExpiring",
   "liveHomeSections": "tvLive,radioLive",
   "tvTrendingEpisodesOnly": true,
   "tvTrendingPrefersHeroStage": true,

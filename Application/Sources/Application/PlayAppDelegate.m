@@ -22,6 +22,7 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PlayErrors.h"
+#import "PlayFirebaseConfiguration.h"
 #import "Playlist.h"
 #import "PlayLogger.h"
 #import "PushService.h"
@@ -89,6 +90,12 @@ static void *s_kvoContext = &s_kvoContext;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
+    
+    // Processes run once in the lifetime of the application
+    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+        [PlayFirebaseConfiguration clearFirebaseConfigurationCache];
+        completionHandler(YES);
+    }, @"FirebaseConfigurationReset", nil);
     
     // The configuration file, copied at build time in the main product bundle, has the standard Firebase
     // configuration filename

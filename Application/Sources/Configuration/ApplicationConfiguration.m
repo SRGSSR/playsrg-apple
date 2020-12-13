@@ -7,7 +7,7 @@
 #import "ApplicationConfiguration.h"
 
 #import "ApplicationSettings.h"
-#import "FirebaseConfiguration.h"
+#import "PlayFirebaseConfiguration.h"
 #import "PlayLogger.h"
 #import "SRGMedia+PlaySRG.h"
 
@@ -67,7 +67,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @interface ApplicationConfiguration ()
 
-@property (nonatomic) FirebaseConfiguration *firebaseConfiguration;
+@property (nonatomic) PlayFirebaseConfiguration *firebaseConfiguration;
 
 @property (nonatomic) SRGVendor vendor;
 
@@ -178,7 +178,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         id defaultsDictionary = [NSJSONSerialization JSONObjectWithData:configurationFileData options:0 error:NULL];
         NSAssert([defaultsDictionary isKindOfClass:NSDictionary.class], @"A valid default configuration dictionary is required");
         
-        self.firebaseConfiguration = [[FirebaseConfiguration alloc] initWithDefaultsDictionary:defaultsDictionary updateBlock:^(FirebaseConfiguration * _Nonnull configuration) {
+        self.firebaseConfiguration = [[PlayFirebaseConfiguration alloc] initWithDefaultsDictionary:defaultsDictionary updateBlock:^(PlayFirebaseConfiguration * _Nonnull configuration) {
             if (! [self synchronizeWithFirebaseConfiguration:configuration]) {
                 PlayLogWarning(@"configuration", @"The newly fetched remote application configuration is invalid and was not applied");
             }
@@ -204,7 +204,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 // Return YES iff the activated remote configuration is valid, and stores the corresponding values. If the configuration
 // is not valid, the method returns NO and does not synchronize anything (i.e. the values will not be reflected by
 // the ApplicationConfiguration instance)
-- (BOOL)synchronizeWithFirebaseConfiguration:(FirebaseConfiguration *)firebaseConfiguration
+- (BOOL)synchronizeWithFirebaseConfiguration:(PlayFirebaseConfiguration *)firebaseConfiguration
 {
     //
     // Mandatory values. Do not update the local configuration if one is missing
