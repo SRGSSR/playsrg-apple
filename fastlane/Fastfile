@@ -127,6 +127,17 @@ platform :ios do
     save_last_nightlies_success_git_commit_hash(platform)
   end
 
+  desc 'Add tvOS nightly tester (email required)'
+  lane :tvOSnightlyTester do |options|
+    addTestFlightTester(
+      email: options[:email],
+      first_name: options[:first_name],
+      last_name: options[:last_name],
+      app_identifiers: appstore_nightly_identifiers,
+      group_name: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS']
+    )
+  end
+
   # Betas
 
   desc 'Builds a new iOS beta on App Center with the current build number. If not in a release/hotfix process (master, release/* or hotfix/*), tags the current version, bumps the build number and pushes.'
@@ -169,7 +180,7 @@ platform :ios do
       app_identifier = appstore_beta_identifiers[index]
 
       can_upload = can_upload_testflight_build(platform, app_identifier)
-      UI.message(tvos_schemes[index] + ' (Beta ' + build_number + ') already uploaded 🔁✅') unless can_upload
+      UI.message(tvos_schemes[index] + ' (Beta ' + build_number + ') already uploaded 🔁 ✅') unless can_upload
       next unless can_upload
 
       update_app_identifier_to_appstore(platform, app_identifier)
@@ -205,6 +216,17 @@ platform :ios do
     end
 
     bump_build_number_beta_workflow(platform)
+  end
+
+  desc 'Add tvOS beta tester (email required)'
+  lane :tvOSbetaTester do |options|
+    addTestFlightTester(
+      email: options[:email],
+      first_name: options[:first_name],
+      last_name: options[:last_name],
+      app_identifiers: appstore_beta_identifiers,
+      group_name: ENV['ITUNES_CONNECT_BETA_GROUPS']
+    )
   end
 
   # Prods
@@ -415,7 +437,7 @@ platform :ios do
     build_number = xcode_build_number(options[:platform])
 
     can_upload = can_upload_testflight_build(options[:platform], nil)
-    UI.message(options[:scheme] + ' (' + options[:platform] + ') ' + build_number + ' already uploaded 🔁✅') unless can_upload
+    UI.message(options[:scheme] + ' (' + options[:platform] + ') ' + build_number + ' already uploaded 🔁 ✅') unless can_upload
     next unless can_upload
 
     build_lane(
@@ -492,6 +514,40 @@ platform :ios do
     end
   end
 
+  desc 'Add tester to TestFlight, by default for tvOS betas'
+  private_lane :addTestFlightTester do |options|
+    email = spaceship_email_required(options[:email])
+    return false unless email
+
+    app_identifiers = options[:app_identifiers] || appstore_beta_identifiers
+    group_name = options[:group_name] || ENV['ITUNES_CONNECT_BETA_GROUPS']
+
+    spaceship_login
+
+    app_identifiers.each do |app_identifier|
+      app = spaceship_app(app_identifier)
+      next unless app
+
+      group = spaceship_get_group(app, group_name)
+      next unless group
+
+      tester = spaceship_get_tester(app, email)
+      if tester
+        if tester.status == 'invited'
+          spaceship_delete_tester(app, tester)
+          UI.message(email + ' was invited as a tester for ' + app.name + '. Invitation removed. 📨 🚮')
+        else # accepted or installed
+          UI.message(email + ' is already a tester for ' + app.name + ' (status: ' + tester.status + '). 🔁 ✅')
+          next
+        end
+      end
+
+      spaceship_add_tester(group, email, options[:first_name], options[:last_name])
+
+      UI.message email + ' tester added to ' + group.name + ' for ' + app.name + '. Invitation sent. 📨 ✅'
+    end
+  end
+
   after_all do |lane|
     reset_git_repo(skip_clean: true) if cleaned_lane_condition(lane)
 
@@ -518,7 +574,9 @@ def app_config
 end
 
 def cleaned_lane_condition(lane)
-  (lane.to_s != 'devLane') && (!lane.to_s.downcase.include? 'dsym')
+  (lane.to_s != 'devLane') &&
+    (!lane.to_s.downcase.include? 'dsym') &&
+    (!lane.to_s.downcase.include? 'tester')
 end
 
 def ios_schemes
@@ -881,6 +939,52 @@ def beta_app_review_info
     contact_last_name: ENV['ITUNES_CONNECT_REVIEW_LAST_NAME'],
     contact_phone: ENV['ITUNES_CONNECT_REVIEW_PHONE']
   }
+end
+
+def spaceship_login
+  ENV['FASTLANE_ITC_TEAM_ID'] = app_config.try_fetch_value(:itc_team_id)
+  Spaceship::Tunes.login
+  Spaceship::Tunes.select_team
+end
+
+def spaceship_email_required(email)
+  if !email || email.length.zero?
+    UI.user_error!('email parameter is required.')
+    return
+  end
+  email
+end
+
+def spaceship_app(app_identifier)
+  app = Spaceship::ConnectAPI::App.find(app_identifier)
+  UI.message(app_identifier + ' app does not exist. ⚠️') unless app
+  app
+end
+
+def spaceship_get_group(app, group_name)
+  group = app.get_beta_groups(filter: { name: group_name }).first
+  UI.message(group_name + ' group does not exist for ' + app.name + '. ⚠️') unless group
+  group
+end
+
+def spaceship_get_tester(app, email)
+  Spaceship::TestFlight::Tester.search(app_id: app.id, text: email).first
+end
+
+def spaceship_delete_tester(app, tester)
+  Spaceship::ConnectAPI.delete_beta_tester_from_apps(
+    beta_tester_id: tester.tester_id,
+    app_ids: [app.id]
+  )
+end
+
+def spaceship_new_tester(email, first_name, last_name)
+  { email: email, firstName: first_name, lastName: last_name }
+end
+
+def spaceship_add_tester(group, email, first_name, last_name)
+  tester = spaceship_new_tester(email, first_name, last_name)
+  group.post_bulk_beta_tester_assignments(beta_testers: [tester])
 end
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md

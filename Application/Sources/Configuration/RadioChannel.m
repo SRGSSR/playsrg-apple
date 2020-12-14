@@ -6,7 +6,7 @@
 
 #import "RadioChannel.h"
 
-#import "FirebaseConfiguration.h"
+#import "PlayFirebaseConfiguration.h"
 
 @interface RadioChannel ()
 

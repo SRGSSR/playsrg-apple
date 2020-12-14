@@ -91,6 +91,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - UIApplicationDelegate protocol
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Processes run once in the lifetime of the application
+        PlayApplicationRunOnce({ completionHandler -> Void in
+            PlayFirebaseConfiguration.clearCache()
+            completionHandler(true)
+        }, "FirebaseConfigurationReset", nil)
+        
         if Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil {
             FirebaseApp.configure()
         }

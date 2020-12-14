@@ -26,6 +26,11 @@ Builds a new iOS nightly on App Center.
 fastlane ios tvOSnightlies
 ```
 Builds a new tvOS nightly on AppStore Connect and waits build processing.
+### ios tvOSnightlyTester
+```
+fastlane ios tvOSnightlyTester
+```
+Add tvOS nightly tester (email required)
 ### ios betas
 ```
 fastlane ios betas
@@ -36,6 +41,11 @@ Builds a new iOS beta on App Center with the current build number. If not in a r
 fastlane ios tvOSbetas
 ```
 Builds a new tvOS beta on AppStore Connect with the current build number and waits build processing. If not in a release/hotfix process (master, release/* or hotfix/*), tags the current version, bumps the build number and pushes.
+### ios tvOSbetaTester
+```
+fastlane ios tvOSbetaTester
+```
+Add tvOS beta tester (email required)
 ### ios appStoreUploads
 ```
 fastlane ios appStoreUploads
