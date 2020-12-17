@@ -128,5 +128,6 @@
   "3.1.5-349": "- Improve suggestions displayed for SRF at the top of the homepage.\n- Add support for web first video display on the homepage.",
   "3.1.5-350": "- All SRG libraries updated. \n- AppStore release.",
   "3.1.6-351": "- Fix remote configuration update.\n- Fix potential crashes in production builds.",
-  "3.1.6-352": "- Fix remote configuration update."
+  "3.1.6-352": "- Fix remote configuration update.",
+  "3.1.7-353": "- AirPlay compatibility fix on old Apple TV devices."
 }
