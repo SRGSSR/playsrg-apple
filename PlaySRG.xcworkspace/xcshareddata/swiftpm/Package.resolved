@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/urbanairship/ios-library.git",
         "state": {
           "branch": null,
-          "revision": "60f7bc6592ec118abe3ed40d0341e381b0231784",
-          "version": "14.1.3"
+          "revision": "47ea7ee2edb18c07bdffd883f9a4dbbfc8ee2c54",
+          "version": "14.2.0"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "ef122e4512e84020dca9d8f598408fdb38658946",
-          "version": "9.2.0"
+          "revision": "8ef63f49528518bdb9ba1d2f65461e65f47c543b",
+          "version": "9.2.1"
         }
       },
       {
@@ -114,8 +114,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
         "state": {
           "branch": null,
-          "revision": "e1283da6d4e8be3a933f043b414eff4e9e4c69a6",
-          "version": "3.0.2"
+          "revision": "a839c5343c8789f33c34d07d2a24a7de6eb4c054",
+          "version": "3.0.3"
         }
       },
       {
@@ -195,8 +195,8 @@
         "repositoryURL": "https://github.com/SwiftKickMobile/SwiftMessages.git",
         "state": {
           "branch": null,
-          "revision": "0d1068917cc7cb4de0d50de736aa3ed50b227bf0",
-          "version": "8.0.3"
+          "revision": "f7297cc4e9acfaf6710cada80a396d58ff8de5b3",
+          "version": "8.0.4"
         }
       },
       {
