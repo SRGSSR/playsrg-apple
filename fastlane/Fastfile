@@ -517,7 +517,10 @@ platform :ios do
   desc 'Add tester to TestFlight, by default for tvOS betas'
   private_lane :addTestFlightTester do |options|
     email = spaceship_email_required(options[:email])
-    return false unless email
+    email ||= spaceship_email_required(prompt(text: 'email: '))
+    return UI.user_error!('A valid email is required. (email parameter)') unless email
+
+    UI.message('Preparing invitations to ' + email + '. 📩')
 
     app_identifiers = options[:app_identifiers] || appstore_beta_identifiers
     group_name = options[:group_name] || ENV['ITUNES_CONNECT_BETA_GROUPS']
@@ -948,11 +951,9 @@ def spaceship_login
 end
 
 def spaceship_email_required(email)
-  if !email || email.length.zero?
-    UI.user_error!('email parameter is required.')
-    return
-  end
-  email
+  return if !email || (email.strip !~ URI::MailTo::EMAIL_REGEXP)
+
+  email.strip
 end
 
 def spaceship_app(app_identifier)
