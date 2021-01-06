@@ -214,12 +214,11 @@ extension HomeModel {
                         .eraseToAnyPublisher()
                 }
             case .tvFavoriteShows:
-                // TODO: Chain next pages to get all favorite shows
-                return dataProvider.shows(withUrns: Array(FavoritesShowURNs()), pageSize: 50) // Use max page size allowed.
-                    .map { $0.shows
+                return favoriteShowsPublisher(withUrns: Array(FavoritesShowURNs()))
+                    .map { $0
                         .filter { $0.transmission == .TV }
                         .sorted(by: { $0.title < $1.title })
-                        .map { RowItem(rowId: self, content: .show($0)) } }
+                        .map { RowItem(rowId: self, content: .show($0)) }}
                     .eraseToAnyPublisher()
             case .tvLatest:
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
@@ -292,6 +291,27 @@ extension HomeModel {
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             }
+        }
+        
+        private func favoriteShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
+            let dataProvider = SRGDataProvider.current!
+            let pagePublisher = CurrentValueSubject<SRGDataProvider.Shows.Page?, Never>(nil)
+            
+            return pagePublisher
+                .flatMap({ page in
+                    return page != nil ? dataProvider.shows(at: page!) : dataProvider.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
+                })
+                .handleEvents(receiveOutput: { result in
+                    if let nextPage = result.nextPage {
+                        pagePublisher.value = nextPage
+                    } else {
+                        pagePublisher.send(completion: .finished)
+                    }
+                })
+                .reduce([SRGShow](), { collectedShows, result in
+                    return collectedShows + result.shows
+                })
+                .eraseToAnyPublisher()
         }
         
         var title: String? {
