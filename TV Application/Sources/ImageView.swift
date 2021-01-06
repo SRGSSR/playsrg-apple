@@ -28,12 +28,13 @@ struct ImageView: View {
         @ObservedObject var fetchImage: FetchImage
         
         // Use separate state so that we can track image loading and only animate such changes. Since FetchImage
-        // immediately fetches the image the state is initially set to true.
+        // immediately fetched the image in 0.2.X, the state is initially set to true and `fetch()`is called.
         @State var isLoading: Bool = true
         
         init(url: URL, contentMode: ContentMode) {
             fetchImage = FetchImage(url: url)
             self.contentMode = contentMode
+            fetchImage.fetch()
         }
         
         private func optimalContentMode(for size: CGSize) -> ContentMode {
