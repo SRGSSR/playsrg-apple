@@ -141,8 +141,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
           "branch": null,
-          "revision": "6afd54a62d4ab7e3466ad26b020877571841f44d",
-          "version": "3.0.1"
+          "revision": "d5e50ad123a17b297ad817244facb536ae8b7c34",
+          "version": "3.0.2"
         }
       },
       {
@@ -168,8 +168,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
           "branch": null,
-          "revision": "86d55f920da032ff89c1998c4a488aec3936b2a4",
-          "version": "6.1.1"
+          "revision": "7ba6b8f78205ec9186d67aa9d1c40e376ffd4909",
+          "version": "6.1.2"
         }
       },
       {
