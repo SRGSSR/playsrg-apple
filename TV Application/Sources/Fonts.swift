@@ -83,9 +83,9 @@ enum SRGFont {
                 return (28, .regular)
             case .overline:
                 return (24, .regular)
-            case .caption:
-                return (20, .medium)
             case .label:
+                return (20, .bold)
+            case .caption:
                 return (18, .medium)
             }
         }
