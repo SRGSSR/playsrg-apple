@@ -42,7 +42,13 @@ class HomeModel: Identifiable, ObservableObject {
         
         loadModules(with: .event)
         loadTopics()
-        loadFavoriteShows()
+        
+        switch id {
+        case let .audio(channel):
+            loadFavoriteShows(transmission: .radio, channelUid: channel.uid)
+        default:
+            loadFavoriteShows(transmission: .TV)
+        }
     }
     
     func cancelRefresh() {
@@ -62,7 +68,12 @@ class HomeModel: Identifiable, ObservableObject {
     
     private func addRow(with id: RowId, to rows: inout [Row]) {
         if let existingRow = self.rows.first(where: { $0.section == id }) {
-            if existingRow.section != .tvFavoriteShows || favoriteShows.count != 0 {
+            switch existingRow.section {
+            case .tvFavoriteShows, .radioFavoriteShows:
+                if favoriteShows.count != 0 {
+                    rows.append(existingRow)
+                }
+            default:
                 rows.append(existingRow)
             }
         }
@@ -71,7 +82,7 @@ class HomeModel: Identifiable, ObservableObject {
                 switch id {
                 case .tvTopicsAccess:
                     return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .topicPlaceholder(index: $0)) }
-                case .tvFavoriteShows:
+                case .tvFavoriteShows, .radioFavoriteShows:
                     return favoriteShows.count == 0 ? nil : (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
                 case .radioAllShows:
                     return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
@@ -161,12 +172,12 @@ class HomeModel: Identifiable, ObservableObject {
             .store(in: &cancellables)
     }
     
-    private func loadFavoriteShows() {
-        guard rowIds.contains(.tvFavoriteShows) else { return }
-        
+    private func loadFavoriteShows(transmission: SRGTransmission, channelUid: String? = nil) {
+        guard rowIds.contains(.tvFavoriteShows) || (channelUid != nil && rowIds.contains(.radioFavoriteShows(channelUid: channelUid!))) else { return }
+                
         favoriteShowsPublisher(withUrns: Array(FavoritesShowURNs()))
             .map { $0
-                .filter { $0.transmission == .TV }
+                .filter { $0.transmission == transmission && (channelUid == nil || $0.primaryChannelUid == channelUid) }
                 .sorted(by: { $0.title < $1.title })
             }
             .replaceError(with: favoriteShows)
@@ -174,7 +185,7 @@ class HomeModel: Identifiable, ObservableObject {
             .sink { shows in
                 self.favoriteShows = shows
                 self.synchronizeRows()
-                self.loadRows(with: [.tvFavoriteShows])
+                self.loadRows(with: [transmission == .TV ? .tvFavoriteShows : .radioFavoriteShows(channelUid: channelUid!)])
             }
             .store(in: &cancellables)
     }
@@ -223,6 +234,7 @@ extension HomeModel {
         case radioLatest(channelUid: String)
         case radioLatestVideos(channelUid: String)
         case radioAllShows(channelUid: String)
+        case radioFavoriteShows(channelUid: String)
         
         case tvLive
         case radioLive
@@ -255,11 +267,6 @@ extension HomeModel {
                         .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                         .eraseToAnyPublisher()
                 }
-            case .tvFavoriteShows:
-                return CurrentValueSubject<[SRGShow], Error>(favoriteShows)
-                    .map { $0
-                        .map { RowItem(rowId: self, content: .show($0)) }}
-                    .eraseToAnyPublisher()
             case .tvLatest:
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
@@ -289,6 +296,11 @@ extension HomeModel {
                 guard let urn = topic?.urn else { return nil }
                 return dataProvider.latestMediasForTopic(withUrn: urn, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
+                    .eraseToAnyPublisher()
+            case .tvFavoriteShows, .radioFavoriteShows:
+                return CurrentValueSubject<[SRGShow], Error>(favoriteShows)
+                    .map { $0
+                        .map { RowItem(rowId: self, content: .show($0)) }}
                     .eraseToAnyPublisher()
             case let .radioLatestEpisodes(channelUid: channelUid):
                 return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize)
@@ -337,8 +349,6 @@ extension HomeModel {
             switch self {
             case let .tvTrending(appearance: appearance):
                 return appearance != .hero ? NSLocalizedString("Trending videos", comment: "Title label used to present trending TV videos") : nil
-            case .tvFavoriteShows:
-                return NSLocalizedString("Favorites", comment: "Title label used to present the TV favorite shows")
             case .tvLatest:
                 return NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos")
             case .tvWebFirst:
@@ -351,6 +361,8 @@ extension HomeModel {
                 return module?.title ?? NSLocalizedString("Highlights", comment: "Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available")
             case let .tvLatestForTopic(topic):
                 return topic?.title ?? NSLocalizedString("Topics", comment: "Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available")
+            case .tvFavoriteShows, .radioFavoriteShows:
+                return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
             case .radioLatestEpisodes:
                 return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
             case .radioMostPopular:

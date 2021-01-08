@@ -17,6 +17,8 @@ extension RadioChannel {
             return .radioLatestVideos(channelUid: channelUid)
         case .radioAllShows:
             return .radioAllShows(channelUid: channelUid)
+        case .radioFavoriteShows:
+            return .radioFavoriteShows(channelUid: channelUid)
         default:
             return nil
         }
