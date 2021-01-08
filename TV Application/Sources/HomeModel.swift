@@ -16,10 +16,14 @@ class HomeModel: Identifiable, ObservableObject {
     static let numberOfPlaceholders = 10
     
     let id: Id
+    let channelUid: String?
+    
     let rowIds: [RowId]
     
     private var eventRowIds: [RowId] = []
     private var topicRowIds: [RowId] = []
+    
+    private var favoriteShows = [SRGShow]()
     
     typealias Row = CollectionRow<RowId, RowItem>
         
@@ -27,10 +31,15 @@ class HomeModel: Identifiable, ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    private var favoriteShows = [SRGShow]()
-    
     init(id: Id) {
         self.id = id
+        switch id {
+        case let .audio(channel):
+            self.channelUid = channel.uid
+        default:
+            self.channelUid = nil
+        }
+        
         self.rowIds = Self.rowIds(for: id)
     }
     
@@ -44,8 +53,8 @@ class HomeModel: Identifiable, ObservableObject {
         loadTopics()
         
         switch id {
-        case let .audio(channel):
-            loadFavoriteShows(transmission: .radio, channelUid: channel.uid)
+        case .audio:
+            loadFavoriteShows(transmission: .radio, channelUid: channelUid)
         default:
             loadFavoriteShows(transmission: .TV)
         }
@@ -64,6 +73,10 @@ class HomeModel: Identifiable, ObservableObject {
         case .live:
             return ApplicationConfiguration.shared.liveHomeRowIds()
         }
+    }
+    
+    func containsFavoriteRows() -> Bool {
+        return rowIds.contains(.tvFavoriteShows) || (channelUid != nil && rowIds.contains(.radioFavoriteShows(channelUid: channelUid!)))
     }
     
     private func addRow(with id: RowId, to rows: inout [Row]) {
@@ -173,7 +186,7 @@ class HomeModel: Identifiable, ObservableObject {
     }
     
     private func loadFavoriteShows(transmission: SRGTransmission, channelUid: String? = nil) {
-        guard rowIds.contains(.tvFavoriteShows) || (channelUid != nil && rowIds.contains(.radioFavoriteShows(channelUid: channelUid!))) else { return }
+        guard containsFavoriteRows() else { return }
                 
         favoriteShowsPublisher(withUrns: Array(FavoritesShowURNs()))
             .map { $0
