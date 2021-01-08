@@ -192,7 +192,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTopicSections(NSString *string)
 {
     if (self.remoteConfig) {
         FIRRemoteConfigValue *value = [self.remoteConfig configValueForKey:key];
-        return (value.source != FIRRemoteConfigSourceStatic) ? value.numberValue : nil;
+        return (value.source != FIRRemoteConfigSourceStatic && value.dataValue.length != 0) ? value.numberValue : nil;
     }
     else {
         id object = self.dictionary[key];
