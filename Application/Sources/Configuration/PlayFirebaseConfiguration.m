@@ -208,17 +208,13 @@ NSArray<NSNumber *> *FirebaseConfigurationTopicSections(NSString *string)
 
 - (id)JSONObjectForKey:(NSString *)key
 {
-    NSString *string = [self stringForKey:key];
-    if (! string) {
-        return nil;
+    if (self.remoteConfig) {
+        FIRRemoteConfigValue *value = [self.remoteConfig configValueForKey:key];
+        return (value.source != FIRRemoteConfigSourceStatic && value.dataValue.length != 0) ? value.JSONValue : nil;
     }
-    
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    if (! data) {
-        return nil;
+    else {
+        return self.dictionary[key];
     }
-    
-    return [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
 }
 
 - (NSArray *)JSONArrayForKey:(NSString *)key
