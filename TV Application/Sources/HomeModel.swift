@@ -22,10 +22,12 @@ class HomeModel: Identifiable, ObservableObject {
     private var topicRowIds: [RowId] = []
     
     typealias Row = CollectionRow<RowId, RowItem>
-    
+        
     @Published private(set) var rows = [Row]()
     
     private var cancellables = Set<AnyCancellable>()
+    
+    private var favoriteShows = [SRGShow]()
     
     init(id: Id) {
         self.id = id
@@ -40,6 +42,7 @@ class HomeModel: Identifiable, ObservableObject {
         
         loadModules(with: .event)
         loadTopics()
+        loadFavoriteShows()
     }
     
     func cancelRefresh() {
@@ -59,7 +62,7 @@ class HomeModel: Identifiable, ObservableObject {
     
     private func addRow(with id: RowId, to rows: inout [Row]) {
         if let existingRow = self.rows.first(where: { $0.section == id }) {
-            if existingRow.section != .tvFavoriteShows || FavoritesShowURNs().count != 0 {
+            if existingRow.section != .tvFavoriteShows || favoriteShows.count != 0 {
                 rows.append(existingRow)
             }
         }
@@ -69,7 +72,7 @@ class HomeModel: Identifiable, ObservableObject {
                 case .tvTopicsAccess:
                     return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .topicPlaceholder(index: $0)) }
                 case .tvFavoriteShows:
-                    return FavoritesShowURNs().count == 0 ? nil : (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
+                    return favoriteShows.count == 0 ? nil : (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
                 case .radioAllShows:
                     return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
                 default:
@@ -114,7 +117,7 @@ class HomeModel: Identifiable, ObservableObject {
     private func loadRows(with ids: [RowId]? = nil) {
         let reloadedRowIds = ids ?? rowIds
         for rowId in reloadedRowIds {
-            rowId.publisher()?
+            rowId.publisher(favoriteShows: favoriteShows)?
                 .replaceError(with: [])
                 .receive(on: DispatchQueue.main)
                 .sink { items in
@@ -157,6 +160,45 @@ class HomeModel: Identifiable, ObservableObject {
             }
             .store(in: &cancellables)
     }
+    
+    private func loadFavoriteShows() {
+        guard rowIds.contains(.tvFavoriteShows) else { return }
+        
+        favoriteShowsPublisher(withUrns: Array(FavoritesShowURNs()))
+            .map { $0
+                .filter { $0.transmission == .TV }
+                .sorted(by: { $0.title < $1.title })
+            }
+            .replaceError(with: favoriteShows)
+            .receive(on: DispatchQueue.main)
+            .sink { shows in
+                self.favoriteShows = shows
+                self.synchronizeRows()
+                self.loadRows(with: [.tvFavoriteShows])
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func favoriteShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
+        let dataProvider = SRGDataProvider.current!
+        let pagePublisher = CurrentValueSubject<SRGDataProvider.Shows.Page?, Never>(nil)
+        
+        return pagePublisher
+            .flatMap({ page in
+                return page != nil ? dataProvider.shows(at: page!) : dataProvider.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            })
+            .handleEvents(receiveOutput: { result in
+                if let nextPage = result.nextPage {
+                    pagePublisher.value = nextPage
+                } else {
+                    pagePublisher.send(completion: .finished)
+                }
+            })
+            .reduce([SRGShow](), { collectedShows, result in
+                return collectedShows + result.shows
+            })
+            .eraseToAnyPublisher()
+    }
 }
 
 extension HomeModel {
@@ -193,7 +235,7 @@ extension HomeModel {
             return [.tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams]
         }
                 
-        func publisher() -> AnyPublisher<[RowItem], Error>? {
+        func publisher(favoriteShows: [SRGShow]) -> AnyPublisher<[RowItem], Error>? {
             let dataProvider = SRGDataProvider.current!
             let configuration = ApplicationConfiguration.shared
             
@@ -214,10 +256,8 @@ extension HomeModel {
                         .eraseToAnyPublisher()
                 }
             case .tvFavoriteShows:
-                return favoriteShowsPublisher(withUrns: Array(FavoritesShowURNs()))
+                return CurrentValueSubject<[SRGShow], Error>(favoriteShows)
                     .map { $0
-                        .filter { $0.transmission == .TV }
-                        .sorted(by: { $0.title < $1.title })
                         .map { RowItem(rowId: self, content: .show($0)) }}
                     .eraseToAnyPublisher()
             case .tvLatest:
@@ -291,27 +331,6 @@ extension HomeModel {
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             }
-        }
-        
-        private func favoriteShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
-            let dataProvider = SRGDataProvider.current!
-            let pagePublisher = CurrentValueSubject<SRGDataProvider.Shows.Page?, Never>(nil)
-            
-            return pagePublisher
-                .flatMap({ page in
-                    return page != nil ? dataProvider.shows(at: page!) : dataProvider.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
-                })
-                .handleEvents(receiveOutput: { result in
-                    if let nextPage = result.nextPage {
-                        pagePublisher.value = nextPage
-                    } else {
-                        pagePublisher.send(completion: .finished)
-                    }
-                })
-                .reduce([SRGShow](), { collectedShows, result in
-                    return collectedShows + result.shows
-                })
-                .eraseToAnyPublisher()
         }
         
         var title: String? {
