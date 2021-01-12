@@ -117,8 +117,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = ApplicationConfiguration.shared
         application.accessibilityLanguage = configuration.voiceOverLanguageCode;
         
-        if (configuration.identityWebserviceURL != nil && configuration.identityWebsiteURL != nil) {
-            SRGIdentityService.current = SRGIdentityService.init(webserviceURL: configuration.identityWebserviceURL!, websiteURL: configuration.identityWebsiteURL!)
+        if let identityWebserviceURL = configuration.identityWebserviceURL,
+           let identityWebsiteURL = configuration.identityWebsiteURL {
+            SRGIdentityService.current = SRGIdentityService.init(webserviceURL: identityWebserviceURL, websiteURL: identityWebsiteURL)
         }
         
         let cachesDirectoryUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!)

@@ -125,9 +125,6 @@ struct SettingsView: View {
             refresHistoryInformation()
             refresFavoritesInformation()
         }
-        .onDisappear {
-            
-        }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)) { notification in
             refreshIdentityInformation()
         }
