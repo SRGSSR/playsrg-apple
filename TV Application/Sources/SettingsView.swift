@@ -27,32 +27,31 @@ struct SettingsView: View {
     }()
     
     private func refreshIdentityInformation() {
-        isLoggedIn = (SRGIdentityService.current != nil) ? SRGIdentityService.current!.isLoggedIn : false
+        isLoggedIn = SRGIdentityService.current?.isLoggedIn ?? false
         account = SRGIdentityService.current?.account
     }
     
-    private func refresHistoryInformation() {
-        hasHistoryEntries = SRGUserData.current?.history.historyEntries(matching: nil, sortedWith: nil).count ?? 0 > 0
+    private func refreshHistoryInformation() {
+        let historyEntriesCount = SRGUserData.current?.history.historyEntries(matching: nil, sortedWith: nil).count ?? 0
+        hasHistoryEntries = historyEntriesCount > 0
     }
     
-    private func refresFavoritesInformation() {
+    private func refreshFavoritesInformation() {
         hasFavorites = FavoritesShowURNs().count > 0
     }
     
     var body: some View {
         VStack() {
             Spacer()
-            if let identityService: SRGIdentityService = SRGIdentityService.current {
+            if let identityService = SRGIdentityService.current {
                 if isLoggedIn {
-                    let emailAddress = identityService.emailAddress
-                    let accountDisplayName = account?.displayName
-                    Text(accountDisplayName != nil ? accountDisplayName! : emailAddress != nil  ? emailAddress! : NSLocalizedString("My account", comment: "Text displayed when a user is logged in but no information has been retrieved yet"))
+                    Text(account?.displayName ?? identityService.emailAddress ?? NSLocalizedString("My account", comment: "Text displayed when a user is logged in but no information has been retrieved yet"))
                 }
                 else {
                     Text(NSLocalizedString("Not logged in", comment: "Text displayed when no user is logged in"))
                 }
                 Button(action: {
-                    if (isLoggedIn) {
+                    if isLoggedIn {
                         self.displayLogoutAlert = true
                     }
                     else {
@@ -122,8 +121,8 @@ struct SettingsView: View {
         }
         .onAppear {
             refreshIdentityInformation()
-            refresHistoryInformation()
-            refresFavoritesInformation()
+            refreshHistoryInformation()
+            refreshFavoritesInformation()
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)) { notification in
             refreshIdentityInformation()
@@ -138,10 +137,10 @@ struct SettingsView: View {
             refreshIdentityInformation()
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)) { notification in
-            refresHistoryInformation()
+            refreshHistoryInformation()
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)) { notification in
-            refresFavoritesInformation()
+            refreshFavoritesInformation()
         }
     }
 }
