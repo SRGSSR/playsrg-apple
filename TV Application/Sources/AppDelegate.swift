@@ -79,12 +79,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         #if DEBUG
         let historyViewController = UIHostingController(rootView: HistoryView())
-        historyViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("History", comment: "Profile tab title"), image: nil, tag: 6)
+        historyViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("History", comment: "History tab title"), image: nil, tag: 6)
         viewControllers.append(historyViewController)
         #endif
         
         let settingsViewController = UIHostingController(rootView: SettingsView())
-        settingsViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "settings-22")?.withRenderingMode(.alwaysTemplate), tag: 7)
+        settingsViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "settings-22")!.withRenderingMode(.alwaysTemplate), tag: 7)
         settingsViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Settings", "Settings button label on home view")
         viewControllers.append(settingsViewController)
         
