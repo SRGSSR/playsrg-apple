@@ -162,7 +162,7 @@ struct ShowDetailView: View {
                     Spacer()
                 }
                 Spacer()
-                LabeledButton(icon: isFavorite ? "favorite_full-22" : "favorite-22", label: isFavorite ? NSLocalizedString("Favorite", comment:"Favorite show label when added ,in the show view") : NSLocalizedString("Add to favorites", comment:"Favorite show label when not in favorites, in the show view"), style: .small) {
+                LabeledButton(icon: isFavorite ? "favorite_full-22" : "favorite-22", label: isFavorite ? NSLocalizedString("Remove from favorites", comment: "Label of a button to remove a show from favorites") : NSLocalizedString("Add to favorites", comment: "Label of a button to add a show to favorites"), style: .small) {
                     FavoritesToggleShow(show)
                     isFavorite = FavoritesContainsShow(show)
                     

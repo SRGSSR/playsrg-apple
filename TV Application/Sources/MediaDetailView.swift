@@ -198,7 +198,7 @@ struct MediaDetailView: View {
                 }
                 #endif
                 if let show = model.media.show {
-                    LabeledButton(icon: "episodes-22", label: NSLocalizedString("More episodes", comment:"Button to access more episodes from the media detail view"), style: .standard) {
+                    LabeledButton(icon: "episodes-22", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the media detail view"), style: .standard) {
                         navigateToShow(show)
                     }
                 }
