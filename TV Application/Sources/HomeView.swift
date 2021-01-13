@@ -24,7 +24,7 @@ struct HomeView: View {
             case .tvTopicsAccess:
                 let width = CGFloat(250)
                 return NSCollectionLayoutSize(widthDimension: .absolute(width), heightDimension: .absolute(width * 9 / 16))
-            case .radioAllShows:
+            case .radioAllShows, .tvFavoriteShows, .radioFavoriteShows:
                 return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(260))
             default:
                 return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(360))
@@ -100,8 +100,8 @@ struct HomeView: View {
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)) { notification in
             guard model.containsFavoriteRows() else { return }
             
-            let domains = notification.userInfo?[SRGPreferencesDomainsKey] as! Set<String>
-            if (domains.contains(PlayPreferencesDomain)) {
+            if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>,
+               domains.contains(PlayPreferencesDomain) {
                 model.refresh()
             }
         }
@@ -125,7 +125,7 @@ struct HomeView: View {
                 if Self.isHeroAppearance(for: item) {
                     HeroMediaCell(media: media)
                 }
-                else if HomeModel.RowId.liveIds.contains(item.rowId) {
+                else if item.rowId.isLive {
                     if media.contentType == .livestream || media.contentType == .scheduledLivestream {
                         LiveMediaCell(media: media)
                     }

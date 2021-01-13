@@ -11,36 +11,41 @@ class HomeModel: Identifiable, ObservableObject {
         case video
         case audio(channel: RadioChannel)
         case live
+        
+        var defaultRowIds: [RowId] {
+            switch self {
+            case .video:
+                return ApplicationConfiguration.shared.videoHomeRowIds()
+            case let .audio(channel):
+                return channel.homeRowIds()
+            case .live:
+                return ApplicationConfiguration.shared.liveHomeRowIds()
+            }
+        }
     }
     
-    static let numberOfPlaceholders = 10
-    
     let id: Id
-    let channelUid: String?
-    
     let rowIds: [RowId]
     
     private var eventRowIds: [RowId] = []
     private var topicRowIds: [RowId] = []
     
-    private var favoriteShows = [SRGShow]()
-    
     typealias Row = CollectionRow<RowId, RowItem>
-        
-    @Published private(set) var rows = [Row]()
+    
+    // Store all rows so that row updates always find a matching row. Only return non-empty ones, publicly though
+    private var loadedRows: [Row] = [] {
+        didSet {
+            rows = loadedRows.filter { !$0.items.isEmpty }
+        }
+    }
+    
+    @Published private(set) var rows: [Row] = []
     
     private var cancellables = Set<AnyCancellable>()
     
     init(id: Id) {
         self.id = id
-        switch id {
-        case let .audio(channel):
-            self.channelUid = channel.uid
-        default:
-            self.channelUid = nil
-        }
-        
-        self.rowIds = Self.rowIds(for: id)
+        self.rowIds = id.defaultRowIds
     }
     
     func refresh() {
@@ -51,62 +56,22 @@ class HomeModel: Identifiable, ObservableObject {
         
         loadModules(with: .event)
         loadTopics()
-        
-        switch id {
-        case .audio:
-            loadFavoriteShows(transmission: .radio, channelUid: channelUid)
-        default:
-            loadFavoriteShows(transmission: .TV)
-        }
     }
     
     func cancelRefresh() {
         cancellables = []
     }
     
-    private static func rowIds(for id: Id) -> [RowId] {
-        switch id {
-        case .video:
-            return ApplicationConfiguration.shared.videoHomeRowIds()
-        case let .audio(channel):
-            return channel.homeRowIds()
-        case .live:
-            return ApplicationConfiguration.shared.liveHomeRowIds()
-        }
-    }
-    
     func containsFavoriteRows() -> Bool {
-        return rowIds.contains(.tvFavoriteShows) || (channelUid != nil && rowIds.contains(.radioFavoriteShows(channelUid: channelUid!)))
+        return rowIds.contains { $0.isFavoriteShows }
     }
     
     private func addRow(with id: RowId, to rows: inout [Row]) {
-        if let existingRow = self.rows.first(where: { $0.section == id }) {
-            switch existingRow.section {
-            case .tvFavoriteShows, .radioFavoriteShows:
-                if favoriteShows.count != 0 {
-                    rows.append(existingRow)
-                }
-            default:
-                rows.append(existingRow)
-            }
+        if let existingRow = loadedRows.first(where: { $0.section == id }), !existingRow.items.isEmpty {
+            rows.append(existingRow)
         }
         else {
-            func items(for id: RowId) -> [RowItem]? {
-                switch id {
-                case .tvTopicsAccess:
-                    return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .topicPlaceholder(index: $0)) }
-                case .tvFavoriteShows, .radioFavoriteShows:
-                    return favoriteShows.count == 0 ? nil : (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
-                case .radioAllShows:
-                    return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
-                default:
-                    return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .mediaPlaceholder(index: $0)) }
-                }
-            }
-            
-            if let rowItems = items(for: id) {
-                rows.append(Row(section: id, items: rowItems))
-            }
+            rows.append(Row(section: id, items: id.placeholderItems))
         }
     }
     
@@ -129,19 +94,18 @@ class HomeModel: Identifiable, ObservableObject {
                 addRow(with: id, to: &updatedRows)
             }
         }
-        rows = updatedRows
+        loadedRows = updatedRows
     }
     
     private func updateRow(with id: RowId, items: [RowItem]) {
-        guard items.count != 0,
-              let index = rows.firstIndex(where: { $0.section == id }) else { return }
-        rows[index] = Row(section: id, items: items)
+        guard let index = loadedRows.firstIndex(where: { $0.section == id }) else { return }
+        loadedRows[index] = Row(section: id, items: items)
     }
     
     private func loadRows(with ids: [RowId]? = nil) {
         let reloadedRowIds = ids ?? rowIds
         for rowId in reloadedRowIds {
-            rowId.publisher(favoriteShows: favoriteShows)?
+            rowId.publisher()?
                 .replaceError(with: [])
                 .receive(on: DispatchQueue.main)
                 .sink { items in
@@ -184,45 +148,6 @@ class HomeModel: Identifiable, ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
-    private func loadFavoriteShows(transmission: SRGTransmission, channelUid: String? = nil) {
-        guard containsFavoriteRows() else { return }
-                
-        favoriteShowsPublisher(withUrns: Array(FavoritesShowURNs()))
-            .map { $0
-                .filter { $0.transmission == transmission && (channelUid == nil || $0.primaryChannelUid == channelUid) }
-                .sorted(by: { $0.title < $1.title })
-            }
-            .replaceError(with: favoriteShows)
-            .receive(on: DispatchQueue.main)
-            .sink { shows in
-                self.favoriteShows = shows
-                self.synchronizeRows()
-                self.loadRows(with: [transmission == .TV ? .tvFavoriteShows : .radioFavoriteShows(channelUid: channelUid!)])
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func favoriteShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
-        let dataProvider = SRGDataProvider.current!
-        let pagePublisher = CurrentValueSubject<SRGDataProvider.Shows.Page?, Never>(nil)
-        
-        return pagePublisher
-            .flatMap({ page in
-                return page != nil ? dataProvider.shows(at: page!) : dataProvider.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
-            })
-            .handleEvents(receiveOutput: { result in
-                if let nextPage = result.nextPage {
-                    pagePublisher.value = nextPage
-                } else {
-                    pagePublisher.send(completion: .finished)
-                }
-            })
-            .reduce([SRGShow](), { collectedShows, result in
-                return collectedShows + result.shows
-            })
-            .eraseToAnyPublisher()
-    }
 }
 
 extension HomeModel {
@@ -256,11 +181,40 @@ extension HomeModel {
         case tvLiveCenter
         case tvScheduledLivestreams
         
-        static var liveIds: [RowId] {
-            return [.tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams]
+        static let numberOfPlaceholders = 10
+        
+        var isLive: Bool {
+            switch self {
+            case .tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        var isFavoriteShows: Bool {
+            switch self {
+            case .tvFavoriteShows, .radioFavoriteShows:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        var placeholderItems: [RowItem] {
+            switch self {
+            case .tvTopicsAccess:
+                return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .topicPlaceholder(index: $0)) }
+            case .tvFavoriteShows, .radioFavoriteShows:
+                return []
+            case .radioAllShows:
+                return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
+            default:
+                return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .mediaPlaceholder(index: $0)) }
+            }
         }
                 
-        func publisher(favoriteShows: [SRGShow]) -> AnyPublisher<[RowItem], Error>? {
+        func publisher() -> AnyPublisher<[RowItem], Error>? {
             let dataProvider = SRGDataProvider.current!
             let configuration = ApplicationConfiguration.shared
             
@@ -284,6 +238,10 @@ extension HomeModel {
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
+            case .tvFavoriteShows, .radioFavoriteShows:
+                return showsPublisher(withUrns: Array(FavoritesShowURNs()))
+                    .map { compatibleShows($0).map { RowItem(rowId: self, content: .show($0)) } }
+                    .eraseToAnyPublisher()
             case .tvWebFirst:
                 return dataProvider.tvLatestWebFirstEpisodes(for: vendor, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
@@ -302,18 +260,13 @@ extension HomeModel {
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case .tvTopicsAccess:
-                return SRGDataProvider.current!.tvTopics(for: vendor)
+                return dataProvider.tvTopics(for: vendor)
                     .map { $0.topics.map { RowItem(rowId: self, content: .topic($0)) } }
                     .eraseToAnyPublisher()
             case let .tvLatestForTopic(topic):
                 guard let urn = topic?.urn else { return nil }
                 return dataProvider.latestMediasForTopic(withUrn: urn, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
-                    .eraseToAnyPublisher()
-            case .tvFavoriteShows, .radioFavoriteShows:
-                return CurrentValueSubject<[SRGShow], Error>(favoriteShows)
-                    .map { $0
-                        .map { RowItem(rowId: self, content: .show($0)) }}
                     .eraseToAnyPublisher()
             case let .radioLatestEpisodes(channelUid: channelUid):
                 return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize)
@@ -332,7 +285,7 @@ extension HomeModel {
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case let .radioAllShows(channelUid):
-                return SRGDataProvider.current!.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize)
+                return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize)
                     .map { $0.shows.map { RowItem(rowId: self, content: .show($0)) } }
                     .eraseToAnyPublisher()
             case .tvLive:
@@ -356,6 +309,43 @@ extension HomeModel {
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             }
+        }
+        
+        private func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
+            let dataProvider = SRGDataProvider.current!
+            let pagePublisher = CurrentValueSubject<SRGDataProvider.Shows.Page?, Never>(nil)
+            
+            return pagePublisher
+                .flatMap { page in
+                    return page != nil ? dataProvider.shows(at: page!) : dataProvider.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
+                }
+                .handleEvents(receiveOutput: { result in
+                    if let nextPage = result.nextPage {
+                        pagePublisher.value = nextPage
+                    }
+                    else {
+                        pagePublisher.send(completion: .finished)
+                    }
+                })
+                .reduce([SRGShow]()) { collectedShows, result in
+                    return collectedShows + result.shows
+                }
+                .eraseToAnyPublisher()
+        }
+        
+        private func canContain(show: SRGShow) -> Bool {
+            switch self {
+            case .tvFavoriteShows:
+                return show.transmission == .TV
+            case let .radioFavoriteShows(channelUid: channelUid):
+                return show.transmission == .radio && show.primaryChannelUid == channelUid
+            default:
+                return false
+            }
+        }
+        
+        private func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
+            return shows.filter { self.canContain(show: $0) }.sorted(by: { $0.title < $1.title })
         }
         
         var title: String? {
@@ -430,9 +420,5 @@ extension HomeModel {
         // to ensure unicity.
         let rowId: RowId
         let content: Content
-        
-        static func == (lhs: RowItem, rhs: RowItem) -> Bool {
-            return lhs.rowId == rhs.rowId && lhs.content == rhs.content
-        }
     }
 }
