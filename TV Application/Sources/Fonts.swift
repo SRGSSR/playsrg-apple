@@ -60,8 +60,8 @@ enum SRGFont {
         case button1
         case button2
         case overline
-        case caption
         case label
+        case caption
         
         fileprivate var properties: (size: CGFloat, kind: SRGFont.Kind) {
             switch self {
