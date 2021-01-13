@@ -127,7 +127,7 @@ private extension MediaPlayerViewController {
         let contentNavigationController = NavigationController(rootViewController: songsViewController, tintColor: .white,
                                                                backgroundColor: .play_cardGrayBackground, separator: false, statusBarStyle: .default)
         
-        let tapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(togglePanel(_:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(togglePanel(_:)))
         contentNavigationController.navigationBar.addGestureRecognizer(tapGestureRecognizer)
         self.tapGestureRecognizer = tapGestureRecognizer
         

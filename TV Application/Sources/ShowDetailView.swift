@@ -167,7 +167,7 @@ struct ShowDetailView: View {
                     isFavorite = FavoritesContainsShow(show)
                     
                     let analyticsTitle = isFavorite ? AnalyticsTitle.favoriteAdd : AnalyticsTitle.favoriteRemove
-                    let labels = SRGAnalyticsHiddenEventLabels.init()
+                    let labels = SRGAnalyticsHiddenEventLabels()
                     labels.source = AnalyticsSource.button.rawValue
                     labels.value = show.urn
                     SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
