@@ -336,9 +336,6 @@
 /* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
 "Not available since %@" = "Plus disponible depuis %@";
 
-/* Show favorite button label */
-"Not favorite" = "Non favori";
-
 /* Text displayed when no user is logged in */
 "Not logged in" = "Non connecté";
 
