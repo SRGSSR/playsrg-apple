@@ -14,9 +14,9 @@ struct SettingsView: View {
     @State var hasHistoryEntries: Bool = false
     @State var hasFavorites: Bool = false
     
-    @State var displayLogoutAlert = false
-    @State var displayRemoveFavoritesAlert = false
-    @State var displayRemoveHistoryAlert = false
+    @State var logoutAlertDisplayed = false
+    @State var favoritesRemovalAlertDisplayed = false
+    @State var historyRemovalAlertDisplayed = false
     
     private static let version: String = {
         let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
@@ -52,7 +52,7 @@ struct SettingsView: View {
                 }
                 Button(action: {
                     if isLoggedIn {
-                        self.displayLogoutAlert = true
+                        self.logoutAlertDisplayed = true
                     }
                     else {
                         identityService.login(withEmailAddress: nil)
@@ -61,7 +61,7 @@ struct SettingsView: View {
                     Text(isLoggedIn ? NSLocalizedString("Logout", comment: "Logout button on Apple TV") : NSLocalizedString("Login", comment: "Login button on Apple TV"))
                 }
                 .padding()
-                .alert(isPresented: $displayLogoutAlert) {
+                .alert(isPresented: $logoutAlertDisplayed) {
                     let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of the cancel button in the alert view when logout"))) {}
                     let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Logout", comment: "Logout button on Apple TV"))) {
                         identityService.logout()
@@ -74,12 +74,12 @@ struct SettingsView: View {
             }
             if hasHistoryEntries {
                 Button(action: {
-                    self.displayRemoveHistoryAlert = true
+                    self.historyRemovalAlertDisplayed = true
                 }) {
                     Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
                 }
                 .padding()
-                .alert(isPresented: $displayRemoveHistoryAlert) {
+                .alert(isPresented: $historyRemovalAlertDisplayed) {
                     let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
                     let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                         SRGUserData.current?.history.discardHistoryEntries(withUids: nil, completionBlock: nil)
@@ -96,12 +96,12 @@ struct SettingsView: View {
             }
             if hasFavorites {
                 Button(action: {
-                    self.displayRemoveFavoritesAlert = true
+                    self.favoritesRemovalAlertDisplayed = true
                 }) {
                     Text(NSLocalizedString("Remove all favorites", comment: "Remove all favorites button title"))
                 }
                 .padding()
-                .alert(isPresented: $displayRemoveFavoritesAlert) {
+                .alert(isPresented: $favoritesRemovalAlertDisplayed) {
                     let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
                     let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                         FavoritesRemoveShows(nil);
