@@ -83,10 +83,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         viewControllers.append(historyViewController)
         #endif
         
+        #if DEBUG || NIGHLTY
         let settingsViewController = UIHostingController(rootView: SettingsView())
         settingsViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "settings-22")!.withRenderingMode(.alwaysTemplate), tag: 7)
         settingsViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Settings", "Settings button label on home view")
         viewControllers.append(settingsViewController)
+        #endif
         
         if viewControllers.count > 1 {
             let tabBarController = UITabBarController()
