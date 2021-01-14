@@ -17,8 +17,11 @@ struct ImageView: View {
     }
     
     var body: some View {
-        if let url = url {
-            FetchView(url: url, contentMode: contentMode)
+        // Wrap into ZStack so that when no URL is provided we still have a view filling all available space
+        ZStack {
+            if let url = url {
+                FetchView(url: url, contentMode: contentMode)
+            }
         }
     }
     
