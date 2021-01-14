@@ -53,7 +53,7 @@ struct SettingsView: View {
             .frame(maxWidth: .infinity)
             List {
                 if let identityService = SRGIdentityService.current {
-                    Section(header: Text("Profil").srgFont(.headline1)) {
+                    Section(header: Text(NSLocalizedString("Profile", comment: "Settings section header")).srgFont(.headline1)) {
                     if isLoggedIn {
                         Text(account?.displayName ?? identityService.emailAddress ?? NSLocalizedString("My account", comment: "Text displayed when a user is logged in but no information has been retrieved yet"))
                             .srgFont(.subtitle)
@@ -88,7 +88,7 @@ struct SettingsView: View {
                     }
                     }
                 }
-                Section(header: Text("Content").srgFont(.headline1)) {
+                Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1)) {
                 if hasHistoryEntries {
                     Button(action: {
                         self.historyRemovalAlertDisplayed = true
