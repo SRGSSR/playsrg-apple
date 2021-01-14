@@ -5,6 +5,7 @@
 //
 
 import SRGDataProviderCombine
+import SRGUserData
 
 class HomeModel: Identifiable, ObservableObject {
     enum Id {
@@ -41,15 +42,26 @@ class HomeModel: Identifiable, ObservableObject {
     
     @Published private(set) var rows: [Row] = []
     
-    private var cancellables = Set<AnyCancellable>()
+    private var globalCancellables = Set<AnyCancellable>()
+    private var refreshCancellables = Set<AnyCancellable>()
     
     init(id: Id) {
         self.id = id
         self.rowIds = id.defaultRowIds
+            
+        NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
+            .sink { notification in
+                guard self.rowIds.contains(where: { $0.isFavoriteShows }) else { return }
+                
+                if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
+                    self.refresh()
+                }
+            }
+            .store(in: &globalCancellables)
     }
     
     func refresh() {
-        cancellables = []
+        refreshCancellables = []
         
         synchronizeRows()
         loadRows()
@@ -59,11 +71,7 @@ class HomeModel: Identifiable, ObservableObject {
     }
     
     func cancelRefresh() {
-        cancellables = []
-    }
-    
-    func containsFavoriteRows() -> Bool {
-        return rowIds.contains { $0.isFavoriteShows }
+        refreshCancellables = []
     }
     
     private func addRow(with id: RowId, to rows: inout [Row]) {
@@ -111,7 +119,7 @@ class HomeModel: Identifiable, ObservableObject {
                 .sink { items in
                     self.updateRow(with: rowId, items: items)
                 }
-                .store(in: &cancellables)
+                .store(in: &refreshCancellables)
         }
     }
     
@@ -129,7 +137,7 @@ class HomeModel: Identifiable, ObservableObject {
                 self.synchronizeRows()
                 self.loadRows(with: rowIds)
             }
-            .store(in: &cancellables)
+            .store(in: &refreshCancellables)
     }
     
     private func loadTopics() {
@@ -146,7 +154,7 @@ class HomeModel: Identifiable, ObservableObject {
                 self.synchronizeRows()
                 self.loadRows(with: rowIds)
             }
-            .store(in: &cancellables)
+            .store(in: &refreshCancellables)
     }
 }
 

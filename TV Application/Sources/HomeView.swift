@@ -5,7 +5,6 @@
 //
 
 import SRGAnalyticsSwiftUI
-import SRGUserData
 import SwiftUI
 
 struct HomeView: View {
@@ -97,14 +96,6 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)) { notification in
-            guard model.containsFavoriteRows() else { return }
-            
-            if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>,
-               domains.contains(PlayPreferencesDomain) {
-                model.refresh()
-            }
-        }
     }
     
     private struct Cell: View {
