@@ -48,6 +48,7 @@ struct SettingsView: View {
                     .cornerRadius(25)
                 Text(Self.version)
                     .srgFont(.overline)
+                    .opacity(0.8)
                 Spacer()
             }
             .frame(maxWidth: .infinity)
