@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         viewControllers.append(historyViewController)
         #endif
         
-        #if DEBUG || NIGHLTY
+        #if DEBUG || NIGHTLY
         let settingsViewController = UIHostingController(rootView: SettingsView())
         settingsViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "settings-22")!.withRenderingMode(.alwaysTemplate), tag: 7)
         settingsViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Settings", "Settings button label on home view")
@@ -132,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                container: configuration.analyticsContainer,
                                                                siteName: configuration.tvSiteName,
                                                                netMetrixIdentifier: configuration.netMetrixIdentifier)
-        #if DEBUG || NIGHLTY || BETA
+        #if DEBUG || NIGHTLY || BETA
         analyticsConfiguration.environmentMode = .preProduction
         #endif
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration, identityService: SRGIdentityService.current)
