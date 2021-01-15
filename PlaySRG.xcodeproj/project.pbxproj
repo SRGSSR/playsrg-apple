@@ -1179,6 +1179,16 @@
 		6F9DDCCD25B1A07E001D5688 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */; };
 		6F9DDCCE25B1A07E001D5688 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */; };
 		6F9DDCCF25B1A07E001D5688 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */; };
+		6F9DDCF925B1ABB7001D5688 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */; };
+		6F9DDCFA25B1ABB7001D5688 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */; };
+		6F9DDCFB25B1ABB7001D5688 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */; };
+		6F9DDCFC25B1ABB7001D5688 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */; };
+		6F9DDCFD25B1ABB7001D5688 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */; };
+		6F9DDD2725B1ABD2001D5688 /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */; };
+		6F9DDD2825B1ABD2001D5688 /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */; };
+		6F9DDD2925B1ABD2001D5688 /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */; };
+		6F9DDD2A25B1ABD2001D5688 /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */; };
+		6F9DDD2B25B1ABD2001D5688 /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */; };
 		6FA14535254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
 		6FA14536254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
 		6FA14537254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
@@ -2330,6 +2340,8 @@
 		6F9D2741203AD99C00FDE899 /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
 		6F9D2742203AD99C00FDE899 /* Playlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Playlist.m; sourceTree = "<group>"; };
 		6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
+		6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsModel.swift; sourceTree = "<group>"; };
 		6FA14534254729DA006E8D3B /* FocusableRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableRegion.swift; sourceTree = "<group>"; };
 		6FA5D15B1F2077B10059E4E2 /* NSString+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PlaySRG.h"; sourceTree = "<group>"; };
 		6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PlaySRG.m"; sourceTree = "<group>"; };
@@ -3645,6 +3657,8 @@
 				6FFCC5E324EFBF2100805B0F /* RadioChannel.swift */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
 				08EA3EB6259E33C9008D412F /* SettingsView.swift */,
+				6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */,
+				6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */,
 				6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */,
 				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
 				6F0E39CC25558A0F004C3A12 /* ShowDetailModel.swift */,
@@ -7796,6 +7810,7 @@
 				6FC413D124EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EB7259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F9DDCF925B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B324E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80662508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F5A792A256EE61200E884F2 /* HistoryModel.swift in Sources */,
@@ -7843,6 +7858,7 @@
 				6FC413D024EEEDC900FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F156250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E55256BFCEB009082F8 /* Extensions.swift in Sources */,
+				6F9DDD2725B1ABD2001D5688 /* SearchResultsModel.swift in Sources */,
 				6F331D5A24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413D624EEEDC900FDF806 /* Channel.m in Sources */,
 				08FD789D253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
@@ -7879,6 +7895,7 @@
 				6FC413D924EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EB8259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F9DDCFA25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B424E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80672508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F5A792B256EE61200E884F2 /* HistoryModel.swift in Sources */,
@@ -7926,6 +7943,7 @@
 				6FC413D824EEEDC900FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F157250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E56256BFCEB009082F8 /* Extensions.swift in Sources */,
+				6F9DDD2825B1ABD2001D5688 /* SearchResultsModel.swift in Sources */,
 				6F331D5B24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413DE24EEEDC900FDF806 /* Channel.m in Sources */,
 				08FD789E253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
@@ -7962,6 +7980,7 @@
 				6FC413E124EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EB9259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F9DDCFB25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B524E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80682508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F5A792C256EE61200E884F2 /* HistoryModel.swift in Sources */,
@@ -8009,6 +8028,7 @@
 				6FC413E024EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F158250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E57256BFCEB009082F8 /* Extensions.swift in Sources */,
+				6F9DDD2925B1ABD2001D5688 /* SearchResultsModel.swift in Sources */,
 				6F331D5C24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413E624EEEDCA00FDF806 /* Channel.m in Sources */,
 				08FD789F253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
@@ -8045,6 +8065,7 @@
 				6FC413E924EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EBA259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F9DDCFC25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B624E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80692508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F5A792D256EE61200E884F2 /* HistoryModel.swift in Sources */,
@@ -8092,6 +8113,7 @@
 				6FC413E824EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F159250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E58256BFCEB009082F8 /* Extensions.swift in Sources */,
+				6F9DDD2A25B1ABD2001D5688 /* SearchResultsModel.swift in Sources */,
 				6F331D5D24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413EE24EEEDCA00FDF806 /* Channel.m in Sources */,
 				08FD78A0253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
@@ -8128,6 +8150,7 @@
 				6FC413F124EEEDCB00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EBB259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F9DDCFD25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B724E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F806A2508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F5A792E256EE61200E884F2 /* HistoryModel.swift in Sources */,
@@ -8175,6 +8198,7 @@
 				6FC413F024EEEDCB00FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F15A250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E59256BFCEB009082F8 /* Extensions.swift in Sources */,
+				6F9DDD2B25B1ABD2001D5688 /* SearchResultsModel.swift in Sources */,
 				6F331D5E24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413F624EEEDCB00FDF806 /* Channel.m in Sources */,
 				08FD78A1253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,

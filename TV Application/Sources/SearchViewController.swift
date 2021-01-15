@@ -4,23 +4,20 @@
 //  License information is available from the LICENSE file.
 //
 
+import SwiftUI
 import UIKit
 
-// TODO: Turn into a UIHostingController
-// TODO: Somehow make searchController.searchControllerObservedScrollView = scrollView possible for SwiftUI views
-class SearchResultsViewController: UIViewController {
-    override func loadView() {
-        view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .white
-    }
-}
-
 class SearchViewController: UIViewController {
+    private var model = SearchResultsModel()
+    
     private let searchController: UISearchController
     private let searchContainerViewController: UISearchContainerViewController
     
     init() {
-        searchController = UISearchController(searchResultsController: SearchResultsViewController())
+        let searchResultsView = SearchResultsView(model: model)
+        let searchResultsViewController = UIHostingController(rootView: searchResultsView)
+        searchController = UISearchController(searchResultsController: searchResultsViewController)
+        
         searchContainerViewController = UISearchContainerViewController(searchController: searchController)
         super.init(nibName: nil, bundle: nil)
         
@@ -43,6 +40,6 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
+        model.query = searchController.searchBar.text
     }
 }

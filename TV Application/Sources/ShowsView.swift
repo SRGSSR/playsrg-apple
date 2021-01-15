@@ -9,7 +9,7 @@ import SRGAppearance
 import SwiftUI
 
 struct ShowsView: View {
-    @ObservedObject var model: ShowsModel
+    @ObservedObject var model: ShowsModel = ShowsModel()
     
     enum Section: Hashable {
         case shows(character: Character)
@@ -23,10 +23,6 @@ struct ShowsView: View {
     }
     
     typealias Row = CollectionRow<Section, Content>
-    
-    init() {
-        model = ShowsModel()
-    }
     
     private var rows: [Row] {
         switch model.state {
