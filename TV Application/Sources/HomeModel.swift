@@ -255,9 +255,9 @@ extension HomeModel {
                 return showsPublisher(withUrns: Array(FavoritesShowURNs()))
                     .map { compatibleShows($0).map { $0.urn } }
                     .flatMap { urns in
-                        return dataProvider.latestMediasForShows(withUrns: urns.chunked(into: 15).first ?? [], filter: .episodesOnly, maximumPublicationDay: nil, pageSize: pageSize)
+                        return latestMediasForShowsPublisher(withUrns: urns)
                     }
-                    .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
+                    .map { $0.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case .tvWebFirst:
                 return dataProvider.tvLatestWebFirstEpisodes(for: vendor, pageSize: pageSize)
@@ -346,6 +346,21 @@ extension HomeModel {
                 })
                 .reduce([SRGShow]()) { collectedShows, result in
                     return collectedShows + result.shows
+                }
+                .eraseToAnyPublisher()
+        }
+        
+        private func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
+            let dataProvider = SRGDataProvider.current!
+            
+            /* Load latest 15 medias for each 3 shows */
+            return urns.chunked(into: 3).publisher
+                .flatMap({ urns in
+                    return dataProvider.latestMediasForShows(withUrns: urns, filter: .episodesOnly, maximumPublicationDay: nil, pageSize: 15)
+                })
+                .reduce([SRGMedia]()) { collectedMedias, result in
+                    let medias = collectedMedias + result.medias
+                    return medias.sorted(by: { $0.date > $1.date })
                 }
                 .eraseToAnyPublisher()
         }
