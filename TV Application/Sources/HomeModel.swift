@@ -168,6 +168,7 @@ extension HomeModel {
         case tvTrending(appearance: RowAppearance)
         case tvLatest
         case tvFavoriteShows
+        case tvFavoriteShowsLatest
         case tvWebFirst
         case tvMostPopular
         case tvSoonExpiring
@@ -202,7 +203,7 @@ extension HomeModel {
         
         var isFavoriteShows: Bool {
             switch self {
-            case .tvFavoriteShows, .radioFavoriteShows:
+            case .tvFavoriteShows, .tvFavoriteShowsLatest, .radioFavoriteShows:
                 return true
             default:
                 return false
@@ -213,7 +214,7 @@ extension HomeModel {
             switch self {
             case .tvTopicsAccess:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .topicPlaceholder(index: $0)) }
-            case .tvFavoriteShows, .radioFavoriteShows:
+            case .tvFavoriteShows, .tvFavoriteShowsLatest, .radioFavoriteShows:
                 return []
             case .radioAllShows:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
@@ -249,6 +250,14 @@ extension HomeModel {
             case .tvFavoriteShows, .radioFavoriteShows:
                 return showsPublisher(withUrns: Array(FavoritesShowURNs()))
                     .map { compatibleShows($0).map { RowItem(rowId: self, content: .show($0)) } }
+                    .eraseToAnyPublisher()
+            case .tvFavoriteShowsLatest:
+                return showsPublisher(withUrns: Array(FavoritesShowURNs()))
+                    .map { compatibleShows($0).map { $0.urn } }
+                    .flatMap { urns in
+                        return dataProvider.latestMediasForShows(withUrns: urns, filter: .episodesOnly, maximumPublicationDay: nil, pageSize: pageSize)
+                    }
+                    .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case .tvWebFirst:
                 return dataProvider.tvLatestWebFirstEpisodes(for: vendor, pageSize: pageSize)
@@ -343,7 +352,7 @@ extension HomeModel {
         
         private func canContain(show: SRGShow) -> Bool {
             switch self {
-            case .tvFavoriteShows:
+            case .tvFavoriteShows, .tvFavoriteShowsLatest:
                 return show.transmission == .TV
             case let .radioFavoriteShows(channelUid: channelUid):
                 return show.transmission == .radio && show.primaryChannelUid == channelUid
@@ -374,6 +383,8 @@ extension HomeModel {
                 return topic?.title ?? NSLocalizedString("Topics", comment: "Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available")
             case .tvFavoriteShows, .radioFavoriteShows:
                 return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
+            case .tvFavoriteShowsLatest:
+                return NSLocalizedString("Latest for you", comment: "Title label used to present the TV or radio favorite shows latest media")
             case .radioLatestEpisodes:
                 return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
             case .radioMostPopular:

@@ -29,6 +29,7 @@ static HomeSection HomeSectionWithString(NSString *string)
                         @"tvLiveCenter" : @(HomeSectionTVLiveCenter),
                         @"tvShowsAccess" : @(HomeSectionTVShowsAccess),
                         @"tvFavoriteShows" : @(HomeSectionTVFavoriteShows),
+                        @"tvFavoriteShowsLatest" : @(HomeSectionTVFavoriteShowsLatest),
                         @"radioLive" : @(HomeSectionRadioLive),
                         @"radioLiveSatellite" : @(HomeSectionRadioLiveSatellite),
                         @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
