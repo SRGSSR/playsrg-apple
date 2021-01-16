@@ -255,7 +255,7 @@ extension HomeModel {
                 return showsPublisher(withUrns: Array(FavoritesShowURNs()))
                     .map { compatibleShows($0).map { $0.urn } }
                     .flatMap { urns in
-                        return dataProvider.latestMediasForShows(withUrns: urns, filter: .episodesOnly, maximumPublicationDay: nil, pageSize: pageSize)
+                        return dataProvider.latestMediasForShows(withUrns: urns.chunked(into: 15).first ?? [], filter: .episodesOnly, maximumPublicationDay: nil, pageSize: pageSize)
                     }
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
@@ -439,5 +439,13 @@ extension HomeModel {
         // to ensure unicity.
         let rowId: RowId
         let content: Content
+    }
+}
+
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
     }
 }
