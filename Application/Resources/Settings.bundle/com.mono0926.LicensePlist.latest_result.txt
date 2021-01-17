@@ -844,7 +844,7 @@ name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, vers
 
 name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.0.1
 
-name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.0.2
+name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 
 
 name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 6.1.2
 

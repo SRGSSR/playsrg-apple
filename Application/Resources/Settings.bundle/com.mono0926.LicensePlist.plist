@@ -310,7 +310,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-apple</string>
 			<key>Title</key>
-			<string>SRGIdentity (3.0.2)</string>
+			<string>SRGIdentity</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
