@@ -95,9 +95,9 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": null,
-          "revision": "635e3b52b672e5965c4c489a14735deb165cb8a5",
-          "version": "6.1.1"
+          "branch": "develop",
+          "revision": "5b4d80439a52bc55009528012565113fd6105640",
+          "version": null
         }
       },
       {

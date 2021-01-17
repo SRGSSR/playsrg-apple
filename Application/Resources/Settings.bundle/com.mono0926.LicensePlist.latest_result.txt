@@ -834,7 +834,7 @@ name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.6
 
 name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5
 
-name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 6.1.1
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 
 
 name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 3.0.2
 

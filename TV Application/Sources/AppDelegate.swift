@@ -130,8 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
                                                                container: configuration.analyticsContainer,
-                                                               siteName: configuration.tvSiteName,
-                                                               netMetrixIdentifier: configuration.netMetrixIdentifier)
+                                                               siteName: configuration.tvSiteName)
         #if DEBUG || NIGHTLY || BETA
         analyticsConfiguration.environmentMode = .preProduction
         #endif

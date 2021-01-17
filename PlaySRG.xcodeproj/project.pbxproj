@@ -12352,8 +12352,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.1.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */ = {

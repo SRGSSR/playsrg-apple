@@ -3,7 +3,6 @@
   "container": 10,
   "siteName": "rsi-player-ios-v",
   "tvSiteName": "rsi-player-tvos-apple",
-  "netMetrixIdentifier": "srgplayer",
   "voiceOverLanguageCode": "it",
   "appStoreProductIdentifier": 920753497,
   "playURL": "https://www.rsi.ch/play/",

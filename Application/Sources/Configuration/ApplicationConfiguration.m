@@ -76,7 +76,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, copy) NSString *siteName;
 @property (nonatomic, copy) NSString *tvSiteName;
-@property (nonatomic, copy) NSString *netMetrixIdentifier;
 
 @property (nonatomic, copy) NSString *voiceOverLanguageCode;
 
@@ -236,11 +235,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
     
-    NSString *netMetrixIdentifier = [firebaseConfiguration stringForKey:@"netMetrixIdentifier"];
-    if (! netMetrixIdentifier) {
-        return NO;
-    }
-    
     NSString *playURLString = [firebaseConfiguration stringForKey:@"playURL"];
     NSURL *playURL = playURLString ? [NSURL URLWithString:playURLString] : nil;
     if (! playURL) {
@@ -270,7 +264,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.vendor = vendor;
     self.siteName = siteName;
     self.tvSiteName = tvSiteName;
-    self.netMetrixIdentifier = netMetrixIdentifier;
     
     self.playURL = playURL;
     self.middlewareURL = middlewareURL;
