@@ -53,7 +53,7 @@
 /* Button label to add a show to favorites in the show long-press menu
    Button label to add a show to favorites in the show preview window
    Context menu action to add a show to favorites
-   Favorite show label to add it, in the show view */
+   Label displayed in the show view when a show can be favorited */
 "Add to favorites" = "Ajouter aux favoris";
 
 /* All option */
@@ -110,7 +110,8 @@
    Label of the button to close the module long-press menu
    Label of the button to close the show long-press menu
    Title of a cancel button
-   Title of the cancel button in the alert view when deleting a download in the player view */
+   Title of the cancel button in the alert view when deleting a download in the player view
+   Title of the cancel button in the alert view when logout */
 "Cancel" = "Annuler";
 
 /* Information message of the action view to choose a regional radio
@@ -127,7 +128,8 @@
    Title of the delete button in the alert view when deleting a download in the player view */
 "Delete" = "Supprimer";
 
-/* Title of the confirmation pop-up displayed when the user is about to clear the history */
+/* Delete history button title
+   Title of the confirmation pop-up displayed when the user is about to clear the history */
 "Delete history" = "Supprimer l'historique";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete selected history entries */
@@ -175,13 +177,11 @@
 /* Short label identifying content which has expired. */
 "Expired" = "Expiré";
 
-/* Show favorite button label */
-"Favorite" = "Favori";
-
-/* Favorite show label when added ,in the show view
+/* Label displayed in the show view when a show has been favorited
    Label to present Favorites
    Title label used to present the radio favorite shows
-   Title label used to present the TV favorite shows */
+   Title label used to present the TV favorite shows
+   Title label used to present the TV or radio favorite shows */
 "Favorites" = "Favoris";
 
 /* Title displayed at the top of the features list */
@@ -201,8 +201,8 @@
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
 "Highlights" = "Mises en avant";
 
-/* Label to present history
-   Profile tab title */
+/* History tab title
+   Label to present history */
 "History" = "Historique";
 
 /* Home tab title */
@@ -260,10 +260,11 @@
 /* Login button on Apple TV */
 "Login" = "Connexion";
 
-/* Text displayed within the login / sign up profile header when no user is displayed */
+/* Text displayed within the login / sign up profile header when no user is logged in */
 "Login / Sign up" = "Connexion / Inscription";
 
-/* Logout button on Apple TV */
+/* Logout alert view title on Apple TV
+   Logout button on Apple TV */
 "Logout" = "Déconnexion";
 
 /* Message title displayed when the user is forced to update the application. */
@@ -383,6 +384,7 @@
 "Previous" = "Précédent";
 
 /* Profile tab title
+   Settings section header
    Title displayed at the top of the profile view */
 "Profile" = "Profil";
 
@@ -416,7 +418,8 @@
 /* Title of the confirmation pop-up displayed when the user is about to delete all download items */
 "Remove all downloads" = "Supprimer tous les téléchargements";
 
-/* Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
+/* Remove all favorites button title
+   Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
 "Remove all favorites" = "Supprimer les favoris";
 
 /* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list */
@@ -489,10 +492,10 @@
    Show search result header
    Shows search setting option
    Shows search setting option list view title
+   Shows tab title
    Title label used to present radio associated shows
    Title label used to present the radio shows AZ and radio shows by date access buttons
-   Title label used to present the TV shows AZ and TV shows by date access buttons
-   Shows tab title */
+   Title label used to present the TV shows AZ and TV shows by date access buttons */
 "Shows" = "Émissions";
 
 /* Label to present shows A to Z (radio or TV) */
