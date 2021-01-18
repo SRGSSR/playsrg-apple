@@ -670,7 +670,6 @@
 		6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F331CE724D06B8200C096AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F331CE924D06B8200C096AB /* AudiosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE824D06B8200C096AB /* AudiosView.swift */; };
-		6F331CEB24D06B8400C096AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
 		6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F331D5A24D0766500C096AB /* VideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D5924D0766500C096AB /* VideosView.swift */; };
 		6F331D5B24D0766500C096AB /* VideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D5924D0766500C096AB /* VideosView.swift */; };
@@ -940,10 +939,6 @@
 		6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
-		6F4FCB0D24D07054002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
-		6F4FCB0E24D07054002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
-		6F4FCB0F24D07055002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
-		6F4FCB1024D07055002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
 		6F556B381DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
@@ -2150,7 +2145,6 @@
 		6F331CE424D06B8200C096AB /* Play SRF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play SRF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F331CE624D06B8200C096AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F331CE824D06B8200C096AB /* AudiosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudiosView.swift; sourceTree = "<group>"; };
-		6F331CEA24D06B8400C096AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F331CED24D06B8400C096AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6F331CF224D06B8400C096AB /* TV-Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TV-Application-Info.plist"; sourceTree = "<group>"; };
 		6F331CFC24D06BA200C096AB /* Play RTS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play RTS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3674,7 +3668,6 @@
 				6FB053E524D42021004B0CE1 /* Play RTS */,
 				6FB053E824D42022004B0CE1 /* Play SRF */,
 				6FB053E724D42022004B0CE1 /* Play SWI */,
-				6F331CEA24D06B8400C096AB /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -5182,7 +5175,6 @@
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
 				6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */,
 				6FFCC5EC24EFC1FA00805B0F /* ApplicationConfiguration.json in Resources */,
-				6F331CEB24D06B8400C096AB /* Assets.xcassets in Resources */,
 				08777DB724EC39AE006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5196,7 +5188,6 @@
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB224EC3340006F2EC7 /* Localizable.strings in Resources */,
 				6F4FCB0924D07040002675EF /* Preview Assets.xcassets in Resources */,
-				6F4FCB0D24D07054002675EF /* Assets.xcassets in Resources */,
 				6FFCC5EB24EFC1F700805B0F /* ApplicationConfiguration.json in Resources */,
 				6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */,
 				08777DB124EC3340006F2EC7 /* Accessibility.strings in Resources */,
@@ -5214,7 +5205,6 @@
 				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */,
 				6FFCC5E924EFC1F100805B0F /* ApplicationConfiguration.json in Resources */,
-				6F4FCB0E24D07054002675EF /* Assets.xcassets in Resources */,
 				08777DB324EC3997006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5227,7 +5217,6 @@
 				08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */,
-				6F4FCB0F24D07055002675EF /* Assets.xcassets in Resources */,
 				6FFCC5EA24EFC1F400805B0F /* ApplicationConfiguration.json in Resources */,
 				6F3F1AAF25027CA8000FF4DD /* RTRResources.xcassets in Resources */,
 				6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */,
@@ -5246,7 +5235,6 @@
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */,
 				6FFCC5ED24EFC1FD00805B0F /* ApplicationConfiguration.json in Resources */,
-				6F4FCB1024D07055002675EF /* Assets.xcassets in Resources */,
 				08777DB924EC39B7006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
