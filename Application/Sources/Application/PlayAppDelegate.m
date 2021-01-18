@@ -665,8 +665,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
                                                                                                        container:applicationConfiguration.analyticsContainer
-                                                                                                        siteName:applicationConfiguration.siteName
-                                                                                             netMetrixIdentifier:applicationConfiguration.netMetrixIdentifier];
+                                                                                                        siteName:applicationConfiguration.siteName];
     [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
                                               identityService:SRGIdentityService.currentIdentityService];
 }

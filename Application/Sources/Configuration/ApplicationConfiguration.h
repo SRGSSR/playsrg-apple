@@ -33,7 +33,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, copy) NSString *siteName;
 @property (nonatomic, readonly, copy) NSString *tvSiteName;
-@property (nonatomic, readonly, copy) NSString *netMetrixIdentifier;
 
 // Might be nil for "exotic" languages like Rumantsch
 @property (nonatomic, readonly, copy, nullable) NSString *voiceOverLanguageCode;

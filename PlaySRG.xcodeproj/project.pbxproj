@@ -302,6 +302,11 @@
 		08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690381D38E0BE00BB8AAA /* Localizable.strings */; };
 		08777DB924EC39B7006F2EC7 /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA13E1EE034EF00BEC4DA /* Accessibility.strings */; };
 		08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690741D38E3E600BB8AAA /* Localizable.strings */; };
+		087B5F48257C5028002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F49257C5029002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F4A257C502A002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F4B257C502B002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F4C257C502C002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
 		087BC6631EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
@@ -457,6 +462,21 @@
 		08E6136825843C8200C5FE4B /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
 		08E6136925843C8200C5FE4B /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
 		08E6136A25843C8300C5FE4B /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
+		08EA3E78259D2AD6008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E77259D2AD6008D412F /* SRGIdentity */; };
+		08EA3E7C259D2AE8008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7B259D2AE8008D412F /* SRGIdentity */; };
+		08EA3E7E259D2AEF008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7D259D2AEF008D412F /* SRGIdentity */; };
+		08EA3E80259D2AF7008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7F259D2AF7008D412F /* SRGIdentity */; };
+		08EA3E82259D2B1B008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E81259D2B1B008D412F /* SRGIdentity */; };
+		08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */; };
+		08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */; };
+		08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */; };
+		08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */; };
+		08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */; };
+		08EA3EB7259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
+		08EA3EB8259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
+		08EA3EB9259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
+		08EA3EBA259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
+		08EA3EBB259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
 		08FD789D253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
 		08FD789E253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
 		08FD789F253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
@@ -650,7 +670,6 @@
 		6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F331CE724D06B8200C096AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F331CE924D06B8200C096AB /* AudiosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE824D06B8200C096AB /* AudiosView.swift */; };
-		6F331CEB24D06B8400C096AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
 		6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F331D5A24D0766500C096AB /* VideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D5924D0766500C096AB /* VideosView.swift */; };
 		6F331D5B24D0766500C096AB /* VideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D5924D0766500C096AB /* VideosView.swift */; };
@@ -920,10 +939,6 @@
 		6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
-		6F4FCB0D24D07054002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
-		6F4FCB0E24D07054002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
-		6F4FCB0F24D07055002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
-		6F4FCB1024D07055002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
 		6F556B381DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
@@ -1494,11 +1509,6 @@
 		6FE4F0CE257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0CF257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0D0257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
-		6FE4F0F9257A371200223F22 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
-		6FE4F10E257A371300223F22 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
-		6FE4F10F257A371400223F22 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
-		6FE4F124257A371500223F22 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
-		6FE4F125257A371500223F22 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
 		6FE4F13A257A372800223F22 /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6FE4F13B257A372800223F22 /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6FE4F13C257A372800223F22 /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
@@ -2037,6 +2047,7 @@
 		08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08EA3EB6259E33C9008D412F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
 		096E5AC5C979FBF1F072A888 /* Pods-Play SRG-iOS-Play RSI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; sourceTree = "<group>"; };
 		0A4B38B692D4F377D70590D1 /* Pods-Play SRG-iOS-Play SWI.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; sourceTree = "<group>"; };
@@ -2134,7 +2145,6 @@
 		6F331CE424D06B8200C096AB /* Play SRF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play SRF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F331CE624D06B8200C096AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F331CE824D06B8200C096AB /* AudiosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudiosView.swift; sourceTree = "<group>"; };
-		6F331CEA24D06B8400C096AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F331CED24D06B8400C096AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6F331CF224D06B8400C096AB /* TV-Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TV-Application-Info.plist"; sourceTree = "<group>"; };
 		6F331CFC24D06BA200C096AB /* Play RTS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play RTS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2654,12 +2664,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				08209A0B25780AAA0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E78259D2AD6008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC3256E41EE00E42E31 /* SRGUserData in Frameworks */,
 				6FA84A1A24E44B6400B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AA724E590EE00FF286E /* FetchImage in Frameworks */,
 				8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */,
 				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
+				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2668,12 +2680,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				082099F525780A7F0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E82259D2B1B008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC5256E41F500E42E31 /* SRGUserData in Frameworks */,
 				6FA84A1E24E44B6D00B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAB24E590F400FF286E /* FetchImage in Frameworks */,
 				2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */,
 				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
+				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2682,12 +2696,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				08209A0D25780ABE0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E7C259D2AE8008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC7256E41FB00E42E31 /* SRGUserData in Frameworks */,
 				6FA84A2224E44B7500B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAF24E590FC00FF286E /* FetchImage in Frameworks */,
 				FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */,
 				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
+				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2696,12 +2712,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				08209A0F25780AC50077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E7E259D2AEF008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC9256E420200E42E31 /* SRGUserData in Frameworks */,
 				6FA84A2624E44B7B00B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB324E5910400FF286E /* FetchImage in Frameworks */,
 				0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */,
 				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
+				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2710,12 +2728,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				08209A1125780ACB0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E80259D2AF7008D412F /* SRGIdentity in Frameworks */,
 				6F61CCCB256E420800E42E31 /* SRGUserData in Frameworks */,
 				6FA84A2A24E44B8300B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB724E5910B00FF286E /* FetchImage in Frameworks */,
 				4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */,
 				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
+				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3625,6 +3645,7 @@
 				6FFCC5E324EFBF2100805B0F /* RadioChannel.swift */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
 				6F331D6524D076C800C096AB /* SearchView.swift */,
+				08EA3EB6259E33C9008D412F /* SettingsView.swift */,
 				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
 				6F0E39CC25558A0F004C3A12 /* ShowDetailModel.swift */,
 				08742C5825481CC8006E2DCE /* ShowDetailView.swift */,
@@ -3647,7 +3668,6 @@
 				6FB053E524D42021004B0CE1 /* Play RTS */,
 				6FB053E824D42022004B0CE1 /* Play SRF */,
 				6FB053E724D42022004B0CE1 /* Play SWI */,
-				6F331CEA24D06B8400C096AB /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -4398,6 +4418,8 @@
 				6FF12A47256C58A70042F446 /* SRGLoggerSwift */,
 				6F61CCC2256E41EE00E42E31 /* SRGUserData */,
 				08209A0A25780AAA0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E77259D2AD6008D412F /* SRGIdentity */,
+				08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */,
 			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
@@ -4429,6 +4451,8 @@
 				6FF12A5D256C58B20042F446 /* SRGLoggerSwift */,
 				6F61CCC4256E41F500E42E31 /* SRGUserData */,
 				082099F425780A7F0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E81259D2B1B008D412F /* SRGIdentity */,
+				08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */,
 			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
@@ -4460,6 +4484,8 @@
 				6FF12A73256C58BB0042F446 /* SRGLoggerSwift */,
 				6F61CCC6256E41FB00E42E31 /* SRGUserData */,
 				08209A0C25780ABE0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E7B259D2AE8008D412F /* SRGIdentity */,
+				08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */,
 			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
@@ -4491,6 +4517,8 @@
 				6FF12A75256C58C40042F446 /* SRGLoggerSwift */,
 				6F61CCC8256E420200E42E31 /* SRGUserData */,
 				08209A0E25780AC50077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E7D259D2AEF008D412F /* SRGIdentity */,
+				08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */,
 			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
@@ -4522,6 +4550,8 @@
 				6FF12A8B256C58CC0042F446 /* SRGLoggerSwift */,
 				6F61CCCA256E420800E42E31 /* SRGUserData */,
 				08209A1025780ACB0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E7F259D2AF7008D412F /* SRGIdentity */,
+				08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */,
 			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
@@ -4535,7 +4565,7 @@
 			attributes = {
 				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "SRG SSR";
 				TargetAttributes = {
 					08B77A442409C06000A3BC3B = {
@@ -4738,6 +4768,7 @@
 				6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */,
 				081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 				6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */,
+				08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -5144,7 +5175,6 @@
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
 				6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */,
 				6FFCC5EC24EFC1FA00805B0F /* ApplicationConfiguration.json in Resources */,
-				6F331CEB24D06B8400C096AB /* Assets.xcassets in Resources */,
 				08777DB724EC39AE006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5158,7 +5188,6 @@
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB224EC3340006F2EC7 /* Localizable.strings in Resources */,
 				6F4FCB0924D07040002675EF /* Preview Assets.xcassets in Resources */,
-				6F4FCB0D24D07054002675EF /* Assets.xcassets in Resources */,
 				6FFCC5EB24EFC1F700805B0F /* ApplicationConfiguration.json in Resources */,
 				6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */,
 				08777DB124EC3340006F2EC7 /* Accessibility.strings in Resources */,
@@ -5176,7 +5205,6 @@
 				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */,
 				6FFCC5E924EFC1F100805B0F /* ApplicationConfiguration.json in Resources */,
-				6F4FCB0E24D07054002675EF /* Assets.xcassets in Resources */,
 				08777DB324EC3997006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5189,7 +5217,6 @@
 				08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */,
-				6F4FCB0F24D07055002675EF /* Assets.xcassets in Resources */,
 				6FFCC5EA24EFC1F400805B0F /* ApplicationConfiguration.json in Resources */,
 				6F3F1AAF25027CA8000FF4DD /* RTRResources.xcassets in Resources */,
 				6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */,
@@ -5208,7 +5235,6 @@
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */,
 				6FFCC5ED24EFC1FD00805B0F /* ApplicationConfiguration.json in Resources */,
-				6F4FCB1024D07055002675EF /* Assets.xcassets in Resources */,
 				08777DB924EC39B7006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7758,9 +7784,9 @@
 				6FF1EA46256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED544252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FE4F0F9257A371200223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7425656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F153257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F48257C5028002F58AF /* Favorites.m in Sources */,
 				6FDB2ABA24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E424EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA324E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -7768,6 +7794,7 @@
 				6FFFB99D252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CC924F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413D124EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
+				08EA3EB7259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F1D31B324E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80662508ECA800FD8FE7 /* ShowsView.swift in Sources */,
@@ -7840,9 +7867,9 @@
 				6FF1EA47256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED545252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FE4F10E257A371300223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7525656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F154257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F49257C5029002F58AF /* Favorites.m in Sources */,
 				6FDB2ABB24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E524EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA424E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -7850,6 +7877,7 @@
 				6FFFB99E252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCA24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413D924EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
+				08EA3EB8259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F1D31B424E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80672508ECA800FD8FE7 /* ShowsView.swift in Sources */,
@@ -7922,9 +7950,9 @@
 				6FF1EA48256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				080570402540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED546252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FE4F10F257A371400223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7625656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F155257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F4A257C502A002F58AF /* Favorites.m in Sources */,
 				6FDB2ABC24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E624EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA524E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -7932,6 +7960,7 @@
 				6FFFB99F252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCB24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413E124EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
+				08EA3EB9259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F1D31B524E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80682508ECA800FD8FE7 /* ShowsView.swift in Sources */,
@@ -8004,9 +8033,9 @@
 				6FF1EA49256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				080570412540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED547252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FE4F124257A371500223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7725656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F156257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F4B257C502B002F58AF /* Favorites.m in Sources */,
 				6FDB2ABD24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E724EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA624E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -8014,6 +8043,7 @@
 				6FFFB9A0252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCC24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413E924EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
+				08EA3EBA259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F1D31B624E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80692508ECA800FD8FE7 /* ShowsView.swift in Sources */,
@@ -8086,9 +8116,9 @@
 				6FF1EA4A256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				080570422540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED548252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FE4F125257A371500223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7825656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F157257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F4C257C502C002F58AF /* Favorites.m in Sources */,
 				6FDB2ABE24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E824EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA724E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -8096,6 +8126,7 @@
 				6FFFB9A1252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCD24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413F124EEEDCB00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
+				08EA3EBB259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F1D31B724E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F806A2508ECA800FD8FE7 /* ShowsView.swift in Sources */,
@@ -9080,6 +9111,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
@@ -9471,6 +9503,7 @@
 				MARKETING_VERSION_SUFFIX = "-beta";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
@@ -9670,6 +9703,7 @@
 				MARKETING_VERSION_SUFFIX = "-nightly";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = NIGHTLY;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
@@ -10883,7 +10917,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -11119,7 +11152,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -11355,7 +11387,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -11591,7 +11622,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -11827,7 +11857,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -12283,6 +12312,14 @@
 				minimumVersion = 8.0.3;
 			};
 		};
+		08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
 		6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
@@ -12303,8 +12340,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.1.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */ = {
@@ -12407,6 +12444,56 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsSwiftUI;
+		};
+		08EA3E77259D2AD6008D412F /* SRGIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
+			productName = SRGIdentity;
+		};
+		08EA3E7B259D2AE8008D412F /* SRGIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
+			productName = SRGIdentity;
+		};
+		08EA3E7D259D2AEF008D412F /* SRGIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
+			productName = SRGIdentity;
+		};
+		08EA3E7F259D2AF7008D412F /* SRGIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
+			productName = SRGIdentity;
+		};
+		08EA3E81259D2B1B008D412F /* SRGIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
+			productName = SRGIdentity;
+		};
+		08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsIdentity;
+		};
+		08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsIdentity;
+		};
+		08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsIdentity;
+		};
+		08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsIdentity;
+		};
+		08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsIdentity;
 		};
 		6F2544F42521BAA400F9F4FE /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;

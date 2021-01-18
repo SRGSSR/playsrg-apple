@@ -29,7 +29,7 @@ struct LabeledButton: View {
                 .multilineTextAlignment(.center)
                 .foregroundColor(isFocused ? .white : .gray)
         }
-        .frame(width: 130)
+        .frame(width: 160)
     }
 }
 

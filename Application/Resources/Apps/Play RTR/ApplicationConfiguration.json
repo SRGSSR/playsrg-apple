@@ -3,7 +3,6 @@
   "container": 10,
   "siteName": "rtr-player-ios-v",
   "tvSiteName": "rtr-player-tvos-apple",
-  "netMetrixIdentifier": "srgplayer",
   "appStoreProductIdentifier": 920754925,
   "playURL": "https://www.rtr.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",

@@ -132,6 +132,8 @@ struct ShowDetailView: View {
     private struct VisualView: View {
         let show: SRGShow
         
+        @State var isFavorite: Bool = false
+        
         private static let height: CGFloat = 300
         
         private var imageUrl: URL? {
@@ -160,16 +162,20 @@ struct ShowDetailView: View {
                     Spacer()
                 }
                 Spacer()
-                #if DEBUG
-                LabeledButton(icon: "favorite-22", label: NSLocalizedString("Favorite", comment:"Show favorite button label")) {
-                    /* Toggle Favorite state */
+                LabeledButton(icon: isFavorite ? "favorite_full-22" : "favorite-22", label: isFavorite ? NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited") : NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited")) {
+                    FavoritesToggleShow(show)
+                    isFavorite = FavoritesContainsShow(show)
+                    
+                    let analyticsTitle = isFavorite ? AnalyticsTitle.favoriteAdd : AnalyticsTitle.favoriteRemove
+                    let labels = SRGAnalyticsHiddenEventLabels()
+                    labels.source = AnalyticsSource.button.rawValue
+                    labels.value = show.urn
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
                 }
                 .padding(.leading, 100)
-                #else
-                Spacer()
-                    .frame(width: 120)
-                    .padding(.leading, 100)
-                #endif
+            }
+            .onAppear {
+                isFavorite = FavoritesContainsShow(show)
             }
         }
     }

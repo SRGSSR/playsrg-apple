@@ -3,7 +3,6 @@
   "container": 10,
   "siteName": "srf-player-ios-v",
   "tvSiteName": "srf-player-tvos-apple",
-  "netMetrixIdentifier": "srgplayer",
   "voiceOverLanguageCode": "de",
   "appStoreProductIdentifier": 638194352,
   "playURL": "https://www.srf.ch/play/",

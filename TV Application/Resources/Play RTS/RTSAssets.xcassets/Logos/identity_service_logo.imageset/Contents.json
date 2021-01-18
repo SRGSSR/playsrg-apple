@@ -1,7 +1,8 @@
 {
-  "colors" : [
+  "images" : [
     {
-      "idiom" : "universal"
+      "filename" : "marts.pdf",
+      "idiom" : "tv"
     }
   ],
   "info" : {

@@ -60,8 +60,8 @@ enum SRGFont {
         case button1
         case button2
         case overline
-        case caption
         case label
+        case caption
         
         fileprivate var properties: (size: CGFloat, kind: SRGFont.Kind) {
             switch self {
@@ -80,12 +80,12 @@ enum SRGFont {
             case .button1:
                 return (32, .medium)
             case .button2:
-                return (28, .regular)
+                return (26, .regular)
             case .overline:
                 return (24, .regular)
-            case .caption:
-                return (20, .medium)
             case .label:
+                return (20, .bold)
+            case .caption:
                 return (18, .medium)
             }
         }

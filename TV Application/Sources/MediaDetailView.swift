@@ -131,7 +131,7 @@ struct MediaDetailView: View {
             
             func makeBody(configuration: Configuration) -> some View {
                 configuration.label
-                    .background(focused ? Color(UIColor.init(white: 1, alpha: 0.3)) : Color.clear)
+                    .background(focused ? Color(UIColor(white: 1, alpha: 0.3)) : Color.clear)
                     .scaleEffect(focused && !configuration.isPressed ? 1.02 : 1)
             }
         }
@@ -198,7 +198,7 @@ struct MediaDetailView: View {
                 }
                 #endif
                 if let show = model.media.show {
-                    LabeledButton(icon: "episodes-22", label: NSLocalizedString("More episodes", comment:"Button to access more episodes from the media detail view")) {
+                    LabeledButton(icon: "episodes-22", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the media detail view")) {
                         navigateToShow(show)
                     }
                 }

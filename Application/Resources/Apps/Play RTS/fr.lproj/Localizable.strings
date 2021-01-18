@@ -83,6 +83,9 @@
    Confirmation message displayed when the user is about to remove selected entries from the watch later list */
 "Are you sure you want to delete the selected items?" = "Etes-vous sûr de vouloir supprimer les éléments sélectionnés ?";
 
+/* Confirmation message displayed when the user is about to logout on Apple TV */
+"Are you sure you want to logout?" = "Etes-vous sûr de vouloir vous déconnecter ?";
+
 /* Audios option
    Audios tab title
    Header for audio search results
@@ -254,8 +257,14 @@
 /* Setting footer message for system permission group. New rule for iOS 14 and more. */
 "Local network access must be allowed for Google Cast receiver discovery." = "L'accès au réseau local doit être autorisé pour pouvoir découvrir un récepteur Google Cast.";
 
+/* Login button on Apple TV */
+"Login" = "Connexion";
+
 /* Text displayed within the login / sign up profile header when no user is displayed */
 "Login / Sign up" = "Connexion / Inscription";
+
+/* Logout button on Apple TV */
+"Logout" = "Déconnexion";
 
 /* Message title displayed when the user is forced to update the application. */
 "Mandatory update" = "Mise à jour obligatoire";
@@ -326,6 +335,9 @@
 
 /* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
 "Not available since %@" = "Plus disponible depuis %@";
+
+/* Text displayed when no user is logged in */
+"Not logged in" = "Non connecté";
 
 /* Label to present the help page */
 "Notifications" = "Notifications";

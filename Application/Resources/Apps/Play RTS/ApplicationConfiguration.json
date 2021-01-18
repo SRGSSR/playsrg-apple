@@ -3,7 +3,6 @@
   "container": 10,
   "siteName": "rts-player-ios-v",
   "tvSiteName": "rts-player-tvos-apple",
-  "netMetrixIdentifier": "srgplayer",
   "voiceOverLanguageCode": "fr",
   "appStoreProductIdentifier": 920754415,
   "playURL": "https://www.rts.ch/play/",

@@ -3,7 +3,6 @@
   "container": 10,
   "siteName": "swi-player-ios-v",
   "tvSiteName": "swi-player-tvos-apple",
-  "netMetrixIdentifier": "srgplayer",
   "voiceOverLanguageCode": "en",
   "appStoreProductIdentifier": 920785201,
   "playURL": "https://play.swissinfo.ch/play/",
