@@ -95,7 +95,7 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": "feature/official-spm-support",
+          "branch": "develop",
           "revision": "948af85cf4185e0e77d1e7511cac08255d545e0c",
           "version": null
         }

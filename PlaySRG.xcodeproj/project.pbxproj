@@ -12340,7 +12340,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				branch = "feature/official-spm-support";
+				branch = develop;
 				kind = branch;
 			};
 		};
