@@ -12,11 +12,11 @@
       },
       {
         "package": "ComScore",
-        "repositoryURL": "https://github.com/SRGSSR/ComScore-xcframework-apple.git",
+        "repositoryURL": "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
         "state": {
           "branch": null,
-          "revision": "b5dc5dc60435f363a744e17975957361c844aa38",
-          "version": "6.6.0"
+          "revision": "805ef197755a66e634fccb5d23d9068ca5c1f395",
+          "version": "6.7.0"
         }
       },
       {
@@ -95,8 +95,8 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "5b4d80439a52bc55009528012565113fd6105640",
+          "branch": "feature/official-spm-support",
+          "revision": "948af85cf4185e0e77d1e7511cac08255d545e0c",
           "version": null
         }
       },
