@@ -80,7 +80,7 @@ enum SRGFont {
             case .button1:
                 return (32, .medium)
             case .button2:
-                return (28, .regular)
+                return (26, .regular)
             case .overline:
                 return (24, .regular)
             case .label:
