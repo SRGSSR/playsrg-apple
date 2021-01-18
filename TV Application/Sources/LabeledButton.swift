@@ -17,7 +17,6 @@ struct LabeledButton: View {
         VStack {
             Button(action: action) {
                 Image(icon)
-                    .frame(width: 80, height: 54)
                     .foregroundColor(isFocused ? .darkGray : .white)
                     .onFocusChange { isFocused = $0 }
                     .accessibilityElement()
