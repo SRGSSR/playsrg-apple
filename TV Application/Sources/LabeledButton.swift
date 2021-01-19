@@ -9,6 +9,7 @@ import SwiftUI
 struct LabeledButton: View {
     let icon: String
     let label: String
+    let accessibilityLabel: String?
     let action: () -> Void
     
     @State private var isFocused: Bool = false
@@ -21,7 +22,7 @@ struct LabeledButton: View {
                     .foregroundColor(isFocused ? .darkGray : .white)
                     .onFocusChange { isFocused = $0 }
                     .accessibilityElement()
-                    .accessibilityLabel(label)
+                    .accessibilityLabel(accessibilityLabel ?? label)
                     .accessibility(addTraits: .isButton)
             }
             Text(label)
@@ -37,12 +38,12 @@ struct LabeledButton: View {
 struct LabeledButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LabeledButton(icon: "episodes-22", label: "Episodes", action: {})
+            LabeledButton(icon: "episodes-22", label: "Episodes", accessibilityLabel: nil, action: {})
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .padding()
                 .previewDisplayName("Short label")
             
-            LabeledButton(icon: "favorite-22", label: "Watch later", action: {})
+            LabeledButton(icon: "favorite-22", label: "Watch later", accessibilityLabel: nil, action: {})
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .padding()
                 .previewDisplayName("Long label")
