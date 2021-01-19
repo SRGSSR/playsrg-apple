@@ -129,5 +129,6 @@
   "3.1.5-350": "- All SRG libraries updated. \n- AppStore release.",
   "3.1.6-351": "- Fix remote configuration update.\n- Fix potential crashes in production builds.",
   "3.1.6-352": "- Fix remote configuration update.",
-  "3.1.7-353": "- AirPlay compatibility fix on old Apple TV devices."
+  "3.1.7-353": "- AirPlay compatibility fix on old Apple TV devices.",
+  "3.1.8-354": "- Remove NetMetrix measurements."
 }
