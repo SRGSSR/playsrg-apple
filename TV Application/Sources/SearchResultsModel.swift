@@ -80,7 +80,7 @@ class SearchResultsModel: ObservableObject {
     }
     
     private var searchSettings: SRGMediaSearchSettings {
-        var settings = SRGMediaSearchSettings()
+        let settings = SRGMediaSearchSettings()
         settings.mediaType = .video
         return settings
     }
