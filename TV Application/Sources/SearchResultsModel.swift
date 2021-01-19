@@ -18,18 +18,25 @@ class SearchResultsModel: ObservableObject {
         public typealias Output = (medias: [SRGMedia], page: Page, nextPage: Page?, response: URLResponse)
     }
     
+    @Published var query: String = ""
     @Published private(set) var state = State.loaded(medias: [])
     
-    private var cancellables = Set<AnyCancellable>()
+    private var globalCancellables = Set<AnyCancellable>()
+    private var refreshCancellables = Set<AnyCancellable>()
+    
     private var medias: [SRGMedia] = []
     private var nextPage: Medias.Page? = nil
     
-    @Published var query: String = "" {
-        didSet {
-            cancelRefresh()
-            medias.removeAll()
-            loadNextPage()
-        }
+    init() {
+        $query
+            .removeDuplicates()
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .sink { _ in
+                self.cancelRefresh()
+                self.medias.removeAll()
+                self.loadNextPage()
+            }
+            .store(in: &globalCancellables)
     }
     
     func refresh() {
@@ -55,11 +62,11 @@ class SearchResultsModel: ObservableObject {
                 self.state = .loaded(medias: self.medias)
                 self.nextPage = result.nextPage
             })
-            .store(in: &cancellables)
+            .store(in: &refreshCancellables)
     }
     
     func cancelRefresh() {
-        cancellables = []
+        refreshCancellables = []
     }
     
     private func publisher(from media: SRGMedia?) -> AnyPublisher<Medias.Output, Error>? {
