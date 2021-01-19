@@ -33,6 +33,10 @@ struct SearchResultsView: View {
             if !medias.isEmpty {
                 return [Row(section: .medias, items: medias.map { .media($0) })]
             }
+            else if model.query.isEmpty {
+                let item = Content.message(NSLocalizedString("Type to start searching", comment: "Default text displayed when no search criterium has been entered"), iconName: "search-90")
+                return [Row(section: .information, items: [item])]
+            }
             else {
                 let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-90")
                 return [Row(section: .information, items: [item])]

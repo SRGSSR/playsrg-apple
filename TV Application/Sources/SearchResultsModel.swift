@@ -35,8 +35,10 @@ class SearchResultsModel: ObservableObject {
             .removeDuplicates()
             .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { _ in
-                self.cancelRefresh()
                 self.medias.removeAll()
+                self.nextPage = nil
+                
+                self.cancelRefresh()
                 self.loadNextPage()
             }
             .store(in: &globalCancellables)
@@ -48,6 +50,11 @@ class SearchResultsModel: ObservableObject {
     }
     
     func loadNextPage(from media: SRGMedia? = nil) {
+        guard !query.isEmpty else {
+            self.state = .loaded(medias: [])
+            return
+        }
+        
         guard let publisher = publisher(from: media) else { return }
         publisher
             .receive(on: DispatchQueue.main)
