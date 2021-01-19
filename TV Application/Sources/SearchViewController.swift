@@ -40,6 +40,6 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        model.query = searchController.searchBar.text
+        model.query = searchController.searchBar.text ?? ""
     }
 }

@@ -24,7 +24,13 @@ class SearchResultsModel: ObservableObject {
     private var medias: [SRGMedia] = []
     private var nextPage: Medias.Page? = nil
     
-    @Published var query: String? = nil
+    @Published var query: String = "" {
+        didSet {
+            cancelRefresh()
+            medias.removeAll()
+            loadNextPage()
+        }
+    }
     
     func refresh() {
         guard medias.isEmpty else { return }
