@@ -92,7 +92,7 @@ struct HomeView: View {
             let rowId = model.rows[indexPath.section].section
             HeaderView(rowId: rowId)
         }
-        .synchronizeParentTabScrolling()
+        .synchronizeTabBarScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)

@@ -24,6 +24,9 @@ class SearchViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         searchController.searchResultsUpdater = self
+        
+        model.viewController = self
+        model.searchController = searchController
     }
     
     required init?(coder: NSCoder) {

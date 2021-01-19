@@ -6,8 +6,6 @@
 
 import SwiftUI
 
-// TODO: Somehow make searchController.searchControllerObservedScrollView = scrollView possible for SwiftUI views
-//       (in particular our CollectionView)
 struct SearchResultsView: View {
     @ObservedObject var model: SearchResultsModel
     
@@ -95,6 +93,8 @@ struct SearchResultsView: View {
             } supplementaryView: { _, _ in
                 
             }
+            .synchronizeSearchScrolling(with: model.searchController)
+            .synchronizeTabBarScrolling(with: model.viewController)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(.play_black))
             .edgesIgnoringSafeArea(.all)

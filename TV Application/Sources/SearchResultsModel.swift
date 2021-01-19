@@ -21,6 +21,9 @@ class SearchResultsModel: ObservableObject {
     @Published var query: String = ""
     @Published private(set) var state = State.loaded(medias: [])
     
+    weak var searchController: UISearchController? = nil
+    weak var viewController: UIViewController? = nil
+    
     private var globalCancellables = Set<AnyCancellable>()
     private var refreshCancellables = Set<AnyCancellable>()
     

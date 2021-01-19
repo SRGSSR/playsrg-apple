@@ -111,7 +111,7 @@ struct ShowsView: View {
                     HeaderView(title: title)
                 }
             }
-            .synchronizeParentTabScrolling()
+            .synchronizeTabBarScrolling()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(.play_black))
             .edgesIgnoringSafeArea(.all)
