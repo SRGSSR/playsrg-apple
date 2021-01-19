@@ -74,10 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         #if DEBUG
-        let profileViewController = UIHostingController(rootView: ProfileView())
-        profileViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Profile", comment: "Profile tab title"), image: nil, tag: 5)
-        viewControllers.append(profileViewController)
-
         let historyViewController = UIHostingController(rootView: HistoryView())
         historyViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("History", comment: "History tab title"), image: nil, tag: 6)
         viewControllers.append(historyViewController)
