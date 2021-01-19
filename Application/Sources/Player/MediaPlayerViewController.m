@@ -1290,7 +1290,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     [self.favoriteButton setImage:image forState:UIControlStateNormal];
     [self.currentProgramFavoriteButton setImage:image forState:UIControlStateNormal];
     
-    NSString *accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite show label when in favorites, in the player view") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite show label when not in favorites, in the player view");
+    NSString *accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite label in the player view when a show has been favorited") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite label in the player view when a show can be favorited");
     self.favoriteButton.accessibilityLabel = accessibilityLabel;
     self.currentProgramFavoriteButton.accessibilityLabel = accessibilityLabel;
 }

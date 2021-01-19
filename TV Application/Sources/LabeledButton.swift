@@ -9,9 +9,17 @@ import SwiftUI
 struct LabeledButton: View {
     let icon: String
     let label: String
+    let accessibilityLabel: String
     let action: () -> Void
     
     @State private var isFocused: Bool = false
+    
+    init(icon: String, label: String, accessibilityLabel: String? = nil, action: @escaping () -> Void) {
+        self.icon = icon
+        self.label = label
+        self.accessibilityLabel = accessibilityLabel ?? label
+        self.action = action
+    }
     
     var body: some View {
         VStack {
@@ -21,7 +29,7 @@ struct LabeledButton: View {
                     .foregroundColor(isFocused ? .darkGray : .white)
                     .onFocusChange { isFocused = $0 }
                     .accessibilityElement()
-                    .accessibilityLabel(label)
+                    .accessibilityLabel(accessibilityLabel)
                     .accessibility(addTraits: .isButton)
             }
             Text(label)
