@@ -5,6 +5,7 @@
 //
 
 import Combine
+import SRGAnalytics
 import SwiftUI
 import UIKit
 
@@ -42,5 +43,15 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         model.query = searchController.searchBar.text ?? ""
+    }
+}
+
+extension SearchViewController: SRGAnalyticsViewTracking {
+    var srg_pageViewTitle: String {
+        return AnalyticsPageTitle.home.rawValue
+    }
+    
+    var srg_pageViewLevels: [String]? {
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.search.rawValue]
     }
 }
