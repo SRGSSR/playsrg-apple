@@ -189,16 +189,16 @@ struct MediaDetailView: View {
         var body: some View {
             HStack(alignment: .top, spacing: 30) {
                 // TODO: 22 icon?
-                LabeledButton(icon: "play-50", label: playButtonLabel, accessibilityLabel: nil) {
+                LabeledButton(icon: "play-50", label: playButtonLabel) {
                     navigateToMedia(model.media, play: true)
                 }
                 #if DEBUG
-                LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Later", comment: "Watch or listen later button label in media detail view"), accessibilityLabel: nil) {
+                LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Later", comment: "Watch or listen later button label in media detail view")) {
                     /* Toggle Watch Later state */
                 }
                 #endif
                 if let show = model.media.show {
-                    LabeledButton(icon: "episodes-22", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the media detail view"), accessibilityLabel: nil) {
+                    LabeledButton(icon: "episodes-22", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the media detail view")) {
                         navigateToShow(show)
                     }
                 }
