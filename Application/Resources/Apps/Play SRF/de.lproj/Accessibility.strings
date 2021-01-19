@@ -17,8 +17,8 @@
 /* Title pronounced in home pages on shows A to Z button. */
 "A to Z shows" = "Sendungen A bis Z";
 
-/* Favorite show label when not in favorites, in the player view
-   Favorite show label when not in favorites, in the show view */
+/* Favorite label in the player view when a show can be favorited
+   Favorite label in the show view when a show can be favorited */
 "Add to favorites" = "Zu den Favoriten hinzufügen";
 
 /* Media watch later addition label */
@@ -129,8 +129,8 @@
 /* A download button label */
 "Remove download" = "Download entfernen";
 
-/* Favorite show label when in favorites, in the player view
-   Favorite show label when in favorites, in the show view */
+/* Favorite label in the player view when a show has been favorited
+   Favorite label in the show view when a show has been favorited */
 "Remove from favorites" = "Aus den Favoriten entfernen";
 
 /* Media watch later removal label */
