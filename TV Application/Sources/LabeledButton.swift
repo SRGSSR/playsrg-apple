@@ -17,6 +17,7 @@ struct LabeledButton: View {
         VStack {
             Button(action: action) {
                 Image(icon)
+                    .frame(width: 68)
                     .foregroundColor(isFocused ? .darkGray : .white)
                     .onFocusChange { isFocused = $0 }
                     .accessibilityElement()
@@ -29,7 +30,7 @@ struct LabeledButton: View {
                 .multilineTextAlignment(.center)
                 .foregroundColor(isFocused ? .white : .gray)
         }
-        .frame(width: 160)
+        .frame(width: 148)
     }
 }
 
