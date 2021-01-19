@@ -211,7 +211,8 @@ struct MediaDetailView: View {
         
         var body: some View {
             ZStack {
-                if !model.relatedMedias.isEmpty {
+                // The first item is always the current one, so at least 2 medias are required to offer related content
+                if model.relatedMedias.count > 1 {
                     ZStack {
                         Rectangle()
                             .fill(Color(.srg_color(fromHexadecimalString: "#222222")!))
