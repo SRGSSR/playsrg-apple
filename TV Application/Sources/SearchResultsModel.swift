@@ -79,6 +79,12 @@ class SearchResultsModel: ObservableObject {
         refreshCancellables = []
     }
     
+    private var searchSettings: SRGMediaSearchSettings {
+        var settings = SRGMediaSearchSettings()
+        settings.mediaType = .video
+        return settings
+    }
+    
     private func publisher(from media: SRGMedia?) -> AnyPublisher<Medias.Output, Error>? {
         return searchPublisher(from: media)?
             .flatMap { searchResult in
@@ -97,7 +103,7 @@ class SearchResultsModel: ObservableObject {
         }
         else {
             let applicationConfiguration = ApplicationConfiguration.shared
-            return SRGDataProvider.current!.medias(for: applicationConfiguration.vendor, matchingQuery: query, with: nil, pageSize: applicationConfiguration.pageSize)
+            return SRGDataProvider.current!.medias(for: applicationConfiguration.vendor, matchingQuery: query, with: searchSettings, pageSize: applicationConfiguration.pageSize)
         }
     }
 }
