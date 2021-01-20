@@ -107,8 +107,8 @@ platform :ios do
         app_identifier: app_identifier,
         app_platform: appstore_platform(platform),
         changelog: changelog,
-        distribute_external: true,
-        groups: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS'],
+        # distribute_external: true,
+        # groups: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS'],
         demo_account_required: false,
         beta_app_review_info: beta_app_review_info
       )
