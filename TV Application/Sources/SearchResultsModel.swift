@@ -10,16 +10,16 @@ class SearchResultsModel: ObservableObject {
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(medias: [SRGMedia])
+        case loaded(medias: [SRGMedia], suggestions: [SRGSearchSuggestion])
     }
     
     enum Medias {
         public typealias Page = SRGDataProvider.MediasMatchingQuery.Page
-        public typealias Output = (medias: [SRGMedia], page: Page, nextPage: Page?, response: URLResponse)
+        public typealias Output = (medias: [SRGMedia], suggestions: [SRGSearchSuggestion], page: Page, nextPage: Page?, response: URLResponse)
     }
     
     @Published var query: String = ""
-    @Published private(set) var state = State.loaded(medias: [])
+    @Published private(set) var state = State.loaded(medias: [], suggestions: [])
     
     weak var searchController: UISearchController? = nil
     weak var viewController: UIViewController? = nil
@@ -51,7 +51,7 @@ class SearchResultsModel: ObservableObject {
     
     func loadNextPage(from media: SRGMedia? = nil) {
         guard !query.isEmpty else {
-            self.state = .loaded(medias: [])
+            self.state = .loaded(medias: [], suggestions: [])
             return
         }
         
@@ -69,7 +69,7 @@ class SearchResultsModel: ObservableObject {
                 }
             }, receiveValue: { result in
                 self.medias.append(contentsOf: result.medias)
-                self.state = .loaded(medias: self.medias)
+                self.state = .loaded(medias: self.medias, suggestions: result.suggestions)
                 self.nextPage = result.nextPage
             })
             .store(in: &refreshCancellables)
@@ -79,9 +79,12 @@ class SearchResultsModel: ObservableObject {
         refreshCancellables = []
     }
     
-    private var searchSettings: SRGMediaSearchSettings {
+    private var searchSettings: SRGMediaSearchSettings? {
+        guard !ApplicationConfiguration.shared.areSearchSettingsHidden else { return nil }
+        
         let settings = SRGMediaSearchSettings()
         settings.mediaType = .video
+        settings.suggestionsEnabled = true
         return settings
     }
     
@@ -90,7 +93,7 @@ class SearchResultsModel: ObservableObject {
             .flatMap { searchResult in
                 return SRGDataProvider.current!.medias(withUrns: searchResult.mediaUrns)
                     .map { mediaResult in
-                        (mediaResult.medias, searchResult.page, searchResult.nextPage, searchResult.response)
+                        (mediaResult.medias, searchResult.suggestions ?? [], searchResult.page, searchResult.nextPage, searchResult.response)
                     }
             }
             .eraseToAnyPublisher()

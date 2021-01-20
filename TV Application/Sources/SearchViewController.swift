@@ -15,6 +15,8 @@ class SearchViewController: UIViewController {
     private let searchController: UISearchController
     private let searchContainerViewController: UISearchContainerViewController
     
+    private var cancellables = Set<AnyCancellable>()
+    
     init() {
         let searchResultsView = SearchResultsView(model: model)
         let searchResultsViewController = UIHostingController(rootView: searchResultsView)
@@ -27,6 +29,17 @@ class SearchViewController: UIViewController {
         
         model.viewController = self
         model.searchController = searchController
+        
+        model.$state
+            .sink { state in
+                if case let .loaded(medias: _, suggestions: suggestions) = state {
+                    self.searchController.searchSuggestions = suggestions.map { UISearchSuggestionItem(localizedSuggestion: $0.text) }
+                }
+                else {
+                    self.searchController.searchSuggestions = nil
+                }
+            }
+            .store(in: &cancellables)
     }
     
     required init?(coder: NSCoder) {

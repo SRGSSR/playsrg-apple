@@ -29,7 +29,7 @@ struct SearchResultsView: View {
         case let .failed(error: error):
             let item = Content.message(friendlyMessage(for: error), iconName: "error-90")
             return [Row(section: .information, items: [item])]
-        case let .loaded(medias: medias):
+        case let .loaded(medias: medias, suggestions: _):
             if !medias.isEmpty {
                 return [Row(section: .medias, items: medias.map { .media($0) })]
             }
