@@ -18,7 +18,17 @@ class SearchResultsModel: ObservableObject {
         public typealias Output = (medias: [SRGMedia], suggestions: [SRGSearchSuggestion], page: Page, nextPage: Page?, response: URLResponse)
     }
     
-    @Published var query: String = ""
+    private var querySubject = CurrentValueSubject<String, Never>("")
+    
+    var query: String {
+        get {
+            querySubject.value
+        }
+        set {
+            querySubject.value = newValue
+        }
+    }
+    
     @Published private(set) var state = State.loaded(medias: [], suggestions: [])
     
     weak var searchController: UISearchController? = nil
@@ -31,7 +41,7 @@ class SearchResultsModel: ObservableObject {
     private var nextPage: Medias.Page? = nil
     
     init() {
-        $query
+        querySubject
             .removeDuplicates()
             .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { _ in
