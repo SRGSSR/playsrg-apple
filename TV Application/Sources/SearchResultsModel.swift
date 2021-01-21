@@ -101,7 +101,7 @@ class SearchResultsModel: ObservableObject {
     private func publisher(from media: SRGMedia?) -> AnyPublisher<Medias.Output, Error>? {
         return searchPublisher(from: media)?
             .flatMap { searchResult in
-                return SRGDataProvider.current!.medias(withUrns: searchResult.mediaUrns)
+                return SRGDataProvider.current!.medias(withUrns: searchResult.mediaUrns, pageSize: ApplicationConfiguration.shared.pageSize)
                     .map { mediaResult in
                         (mediaResult.medias, searchResult.suggestions ?? [], searchResult.page, searchResult.nextPage, searchResult.response)
                     }
