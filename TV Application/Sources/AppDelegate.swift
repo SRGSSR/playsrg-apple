@@ -67,11 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewControllers.append(showsViewController)
         }
         
-        #if DEBUG || NIGHTLY
         let searchViewController = SearchViewController()
         searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 4)
         viewControllers.append(searchViewController)
-        #endif
         
         #if DEBUG
         let historyViewController = UIHostingController(rootView: HistoryView())
