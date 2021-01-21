@@ -83,8 +83,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 
 ### User interface options
 
-* `topicHomeHeadersHidden` (optional, boolean): If set to `true`, the quick access header item on home page topics swimlanes will not be displayed.
-* `tvFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured TV media lists will not display any header.
+* `tvFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured TV media lists will not display any title header.
 * `tvTrendingEpisodesOnly` (optional, boolean): If set to `true`, `tvTrending` only returns episodes.
 * `tvTrendingEditorialLimit` (optional, number): The maximum number of editorial recommendations returned by `tvTrending`. If not set, all are returned.
 * `tvTrendingPrefersHeroStage` (optional, boolean): If set to `true`, `tvTrending` returns hero stage content (`tvTrendingEpisodesOnly` and `tvTrendingEditorialLimit` are ignored).

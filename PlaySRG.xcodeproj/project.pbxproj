@@ -87,16 +87,6 @@
 		0821D540227F5ED300FC091F /* DeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeepLinkService.m */; };
 		0821D541227F5ED300FC091F /* DeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeepLinkService.m */; };
 		0821D542227F5ED300FC091F /* DeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeepLinkService.m */; };
-		082590F01F054A6A00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
-		082590F11F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */; };
-		082590F21F054ACD00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
-		082590F31F054ACD00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */; };
-		082590F41F054ACE00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
-		082590F51F054ACE00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */; };
-		082590F61F054ACE00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
-		082590F71F054ACE00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */; };
-		082590F81F054ACF00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
-		082590F91F054ACF00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */; };
 		0827DA1E1F0D36D900A31A42 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
 		0827DA1F1F0D36E200A31A42 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
 		0827DA201F0D36E200A31A42 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
@@ -1888,9 +1878,6 @@
 		08209307208F522A00711DE4 /* PushService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushService.m; sourceTree = "<group>"; };
 		0821D53C227F5ED300FC091F /* DeepLinkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeepLinkService.h; sourceTree = "<group>"; };
 		0821D53D227F5ED300FC091F /* DeepLinkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeepLinkService.m; sourceTree = "<group>"; };
-		082590ED1F054A6A00BB527C /* HomeMediaCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediaCollectionHeaderView.h; sourceTree = "<group>"; };
-		082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediaCollectionHeaderView.m; sourceTree = "<group>"; };
-		082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeMediaCollectionHeaderView.xib; sourceTree = "<group>"; };
 		0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+PlaySRG.m"; sourceTree = "<group>"; };
 		0827DA231F0D437400A31A42 /* SRGMedia+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGMedia+PlaySRG.h"; sourceTree = "<group>"; };
 		0827DA241F0D437400A31A42 /* SRGMedia+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGMedia+PlaySRG.m"; sourceTree = "<group>"; };
@@ -3168,9 +3155,6 @@
 				0887824923AD61D500629312 /* HomeLiveMediaCollectionViewCell.xib */,
 				6FE9B54324B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.h */,
 				6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */,
-				082590ED1F054A6A00BB527C /* HomeMediaCollectionHeaderView.h */,
-				082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */,
-				082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */,
 				0837CEA61D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.h */,
 				0837CEA71D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.m */,
 				0837CEA81D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.xib */,
@@ -4888,7 +4872,6 @@
 				6F12E4D522D866E600BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				086F8D5F22984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				08DD9D5A1FFE6EDB00115906 /* ModuleHeaderView.xib in Resources */,
-				082590F11F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				E66BEC211DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F2961FC2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				0828BB3A22E62831009617A7 /* parsePlayUrl.js in Resources */,
@@ -4921,7 +4904,6 @@
 				E6DB5F2F1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				6F0A7F0620AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FE28774248168A100358CFF /* SongTableViewCell.xib in Resources */,
-				082590F31F054ACD00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				6FD88F7D22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F12E4D822D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
@@ -5005,7 +4987,6 @@
 				0837CEAE1D3FAEE200A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
 				086321112258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				6FB3C1AF1DBCE783008160B4 /* MediaPreviewViewController.storyboard in Resources */,
-				082590F51F054ACE00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				08754F40201BAFD700458F3A /* InfoPlist.strings in Resources */,
 				6F3A47AF1DD19A5B00C79E67 /* RSIResources.xcassets in Resources */,
 				6F12DB4D21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
@@ -5057,7 +5038,6 @@
 				084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				0804917922832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
 				6FF7BBB522A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
-				082590F71F054ACE00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				6F3B022A245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				0837CEB01D3FAEE200A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
 				6F12E4DC22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
@@ -5138,7 +5118,6 @@
 				6FD88F8022D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				E6E2DF301D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				6F12DB4F21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
-				082590F91F054ACF00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				08564B271D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
 				6FD633E71FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
 				0828BB3E22E62831009617A7 /* parsePlayUrl.js in Resources */,
@@ -6869,7 +6848,6 @@
 				08C68F941D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6FDF08EB218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6FB3C1A81DBCE783008160B4 /* MediaPreviewViewController.m in Sources */,
-				082590F01F054A6A00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6FDF08D7218B126700B2AF2C /* Download.m in Sources */,
 				6F7C35B523708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				6F93DE1A20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
@@ -7008,7 +6986,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0859ADC722D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
-				082590F21F054ACD00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106A20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760801EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				0804917C22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */,
@@ -7189,7 +7166,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0859ADC822D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
-				082590F41F054ACE00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106B20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760871EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				0804917D22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */,
@@ -7370,7 +7346,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0859ADC922D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
-				082590F61F054ACE00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106C20443230009FE197 /* PlayApplication.m in Sources */,
 				6F47608E1EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				0804917E22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */,
@@ -7551,7 +7526,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0859ADCA22D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
-				082590F81F054ACF00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106D20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760951EB37DF2003021EA /* UIDevice+PlaySRG.m in Sources */,
 				0804917F22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */,
