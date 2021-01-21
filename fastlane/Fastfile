@@ -108,9 +108,9 @@ platform :ios do
         app_platform: appstore_platform(platform),
         changelog: changelog,
         distribute_external: true,
+        groups: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS'],
         demo_account_required: false,
-        beta_app_review_info: beta_app_review_info,
-        groups: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS']
+        beta_app_review_info: beta_app_review_info
       )
 
       UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
@@ -199,9 +199,9 @@ platform :ios do
         app_platform: appstore_platform(platform),
         changelog: what_s_new_for_beta(platform),
         distribute_external: true,
+        groups: ENV['ITUNES_CONNECT_BETA_GROUPS'],
         demo_account_required: false,
-        beta_app_review_info: beta_app_review_info,
-        groups: ENV['ITUNES_CONNECT_BETA_GROUPS']
+        beta_app_review_info: beta_app_review_info
       )
 
       UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'

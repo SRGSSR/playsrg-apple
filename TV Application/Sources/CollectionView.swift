@@ -6,10 +6,25 @@
 
 import SwiftUI
 
+/**
+ *  Used as magic value (similar to NSNull.null in Objective-C) for default nearest view controller resolution.
+ */
+fileprivate final class NearestViewController: UIViewController {
+    static let shared = NearestViewController()
+}
+
 extension CollectionView {
-    func synchronizeParentTabScrolling() -> CollectionView {
+    func synchronizeTabBarScrolling(with viewController: UIViewController? = nil) -> CollectionView {
         var collectionView = self
-        collectionView.parentTabScrollingEnabled = true
+        collectionView.parentViewController = viewController ?? NearestViewController.shared
+        return collectionView
+    }
+}
+
+extension CollectionView {
+    func synchronizeSearchScrolling(with controller: UISearchController?) -> CollectionView {
+        var collectionView = self
+        collectionView.parentSearchController = controller
         return collectionView
     }
 }
@@ -117,8 +132,11 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     /// Supplementary view builder.
     let supplementaryView: (String, IndexPath) -> SupplementaryView
     
-    /// If `true`, tabs move in sync with the collection.
-    fileprivate var parentTabScrollingEnabled: Bool = false
+    /// The view controller (child of a tab bar controller) which should be moved when scrolling occurs.
+    fileprivate weak var parentViewController: UIViewController? = nil
+    
+    /// The parent search controller to move the collection with, if any.
+    fileprivate weak var parentSearchController: UISearchController? = nil
     
     /**
      *  Remove item duplicates. As items can be moved between sections no item must appear multiple times, whether in
@@ -229,9 +247,13 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     }
     
     func updateUIView(_ uiView: UICollectionView, context: Context) {
-        if parentTabScrollingEnabled {
+        if parentViewController == NearestViewController.shared {
             uiView.play_nearestViewController?.tabBarObservedScrollView = uiView
         }
+        else {
+            parentViewController?.tabBarObservedScrollView = uiView
+        }
+        parentSearchController?.searchControllerObservedScrollView = uiView
         
         reloadData(in: uiView, context: context, animated: true)
     }

@@ -41,7 +41,15 @@ class MediaDetailModel: ObservableObject {
             .flatMap { recommendation in
                 return SRGDataProvider.current!.medias(withUrns: recommendation.urns)
             }
-            .map { $0.medias }
+            .map { result in
+                let medias = result.medias
+                if medias.count == 1 && medias.first == self.initialMedia {
+                    return []
+                }
+                else {
+                    return medias
+                }
+            }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
             .assign(to: \.relatedMedias, on: self)
