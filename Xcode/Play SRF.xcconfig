@@ -1,3 +1,4 @@
 APP_BASE_IDENTIFIER = ch.srf.srfplayer
 BASE_PRODUCT_NAME = Play SRF
 URL_BASE_SCHEME  = playsrf
+WEB_CREDENTIALS_DOMAIN = webcredentials:*.srf.ch

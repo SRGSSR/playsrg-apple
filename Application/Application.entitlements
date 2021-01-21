@@ -8,6 +8,7 @@
 	<array>
 		<string>${APP_LINKS_DOMAIN}</string>
 		<string>${ACTIVITY_CONTINUATION_DOMAIN}</string>
+		<string>${WEB_CREDENTIALS_DOMAIN}</string>
 	</array>
 	<key>com.apple.developer.networking.wifi-info</key>
 	<true/>
