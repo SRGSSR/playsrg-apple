@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ModuleHeaderView" id="7YI-iM-3v4" customClass="ModuleHeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="371" height="279"/>
+            <rect key="frame" x="0.0" y="0.0" width="371" height="65"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sae-FF-dJE">
-                    <rect key="frame" x="0.0" y="0.0" width="371" height="208.5"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="Sae-FF-dJE" secondAttribute="height" multiplier="10:3" priority="700" id="0Tw-a7-vPO"/>
-                        <constraint firstAttribute="width" secondItem="Sae-FF-dJE" secondAttribute="height" multiplier="16:9" priority="900" id="5xa-GV-ZZN"/>
-                    </constraints>
-                </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BCR-3L-grh">
-                    <rect key="frame" x="8" y="216.5" width="355" height="54.5"/>
+                    <rect key="frame" x="8" y="8" width="355" height="49"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="&lt;title&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyW-ox-kMV">
-                            <rect key="frame" x="0.0" y="0.0" width="355" height="26"/>
+                            <rect key="frame" x="0.0" y="0.0" width="355" height="20.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="&lt;subtitle&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ART-wi-iC6">
-                            <rect key="frame" x="0.0" y="34" width="355" height="20.5"/>
+                            <rect key="frame" x="0.0" y="28.5" width="355" height="20.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -40,22 +33,16 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Sae-FF-dJE" secondAttribute="trailing" id="1sa-pg-Bet"/>
-                <constraint firstItem="Sae-FF-dJE" firstAttribute="top" secondItem="7YI-iM-3v4" secondAttribute="top" id="QYa-Rv-4Oa"/>
+                <constraint firstItem="BCR-3L-grh" firstAttribute="top" secondItem="7YI-iM-3v4" secondAttribute="top" constant="8" id="I9B-yo-VAG"/>
                 <constraint firstAttribute="trailing" secondItem="BCR-3L-grh" secondAttribute="trailing" constant="8" id="au6-4S-Yf9"/>
                 <constraint firstItem="BCR-3L-grh" firstAttribute="leading" secondItem="7YI-iM-3v4" secondAttribute="leading" constant="8" id="bqh-d5-K0K"/>
-                <constraint firstItem="Sae-FF-dJE" firstAttribute="leading" secondItem="7YI-iM-3v4" secondAttribute="leading" id="cay-wg-9km"/>
-                <constraint firstItem="BCR-3L-grh" firstAttribute="top" secondItem="Sae-FF-dJE" secondAttribute="bottom" constant="8" id="nrF-zo-otR"/>
                 <constraint firstAttribute="bottom" secondItem="BCR-3L-grh" secondAttribute="bottom" constant="8" id="qTU-KJ-aMM"/>
             </constraints>
             <connections>
-                <outlet property="logoImageView" destination="Sae-FF-dJE" id="WXs-zb-rU3"/>
-                <outlet property="logoImageViewRatio16_9Constraint" destination="5xa-GV-ZZN" id="VLL-5f-AhA"/>
-                <outlet property="logoImageViewRatioBigLandscapeScreenConstraint" destination="0Tw-a7-vPO" id="bRi-C2-kPH"/>
                 <outlet property="subtitleLabel" destination="ART-wi-iC6" id="Wfq-IF-z7l"/>
                 <outlet property="titleLabel" destination="yyW-ox-kMV" id="I75-mY-TQP"/>
             </connections>
-            <point key="canvasLocation" x="483.5" y="85.5"/>
+            <point key="canvasLocation" x="397.60000000000002" y="-132.68365817091455"/>
         </collectionReusableView>
     </objects>
 </document>
