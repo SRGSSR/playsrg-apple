@@ -33,7 +33,7 @@ struct SearchResultsView: View {
             return [Row(section: .information, items: [item])]
         case let .mostSearched(shows: shows):
             if !shows.isEmpty {
-                return [Row(section: .medias, items: shows.map { .show($0) })]
+                return [Row(section: .shows, items: shows.map { .show($0) })]
             }
             else {
                 let item = Content.message(NSLocalizedString("Type to start searching", comment: "Default text displayed when no search criterium has been entered"), iconName: "search-90")
@@ -56,11 +56,23 @@ struct SearchResultsView: View {
     
     private static func layoutSection(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutSection {
         switch section {
-        case .medias, .shows:
+        case .medias:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(380))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
+            group.interItemSpacing = .fixed(40)
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
+            section.interGroupSpacing = 40
+            return section
+        case .shows:
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(320))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
             group.interItemSpacing = .fixed(40)
             
