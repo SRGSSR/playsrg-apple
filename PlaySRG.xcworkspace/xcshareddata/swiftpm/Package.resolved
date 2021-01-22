@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/urbanairship/ios-library.git",
         "state": {
           "branch": null,
-          "revision": "e55f9b449d8c47100a7c1f42dfd3a8247d7fce01",
-          "version": "14.2.1"
+          "revision": "003482364d1158394b911418bb0316cd5a8792b6",
+          "version": "14.2.2"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "fdde04a80497b54e2773c5e5d02dfbb9bdbe99a9",
-          "version": "9.2.3"
+          "revision": "961597d324949c7003c77d602bfc4d5519b47e81",
+          "version": "9.2.4"
         }
       },
       {
@@ -141,7 +141,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "e03c21b485826c174191e3dae27a506f2d3ff6e0",
+          "revision": "20fd3c6e0975c97e8df51e817791e210a15784c1",
           "version": null
         }
       },
