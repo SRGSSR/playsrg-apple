@@ -9,7 +9,6 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "HomeLiveMediaCollectionViewCell.h"
-#import "HomeMediaCollectionHeaderView.h"
 #import "HomeMediaCollectionViewCell.h"
 #import "Layout.h"
 #import "MediaPlayerViewController.h"
@@ -120,10 +119,6 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         NSString *liveMediaCellIdentifier = NSStringFromClass(HomeLiveMediaCollectionViewCell.class);
         UINib *liveMediaCellNib = [UINib nibWithNibName:liveMediaCellIdentifier bundle:nil];
         [collectionView registerNib:liveMediaCellNib forCellWithReuseIdentifier:liveMediaCellIdentifier];
-        
-        NSString *headerViewIdentifier = NSStringFromClass(HomeMediaCollectionHeaderView.class);
-        UINib *headerNib = [UINib nibWithNibName:headerViewIdentifier bundle:nil];
-        [collectionView registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewIdentifier];
     }
     return self;
 }
@@ -177,17 +172,6 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
     }
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-    NSAssert([kind isEqualToString:UICollectionElementKindSectionHeader], @"Only section headers are currently used");
-    
-    HomeMediaCollectionHeaderView *homeMediaCollectionHeaderView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                                                                      withReuseIdentifier:NSStringFromClass(HomeMediaCollectionHeaderView.class)
-                                                                                                             forIndexPath:indexPath];
-    homeMediaCollectionHeaderView.leftEdgeInset = LayoutStandardMargin;
-    return homeMediaCollectionHeaderView;
-}
-
 #pragma mark UICollectionViewDelegate protocol
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -201,14 +185,6 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
     else {
         HomeMediaCollectionViewCell *mediaCell = (HomeMediaCollectionViewCell *)cell;
         [mediaCell setMedia:media module:self.homeSectionInfo.module featured:self.featured];
-    }
-}
-
-- (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
-{
-    if ([view isKindOfClass:HomeMediaCollectionHeaderView.class]) {
-        HomeMediaCollectionHeaderView *headerView = (HomeMediaCollectionHeaderView *)view;
-        [headerView setHomeSectionInfo:self.homeSectionInfo featured:self.featured];
     }
 }
 
@@ -227,26 +203,9 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
     return [HomeMediaListTableViewCell itemSizeForHomeSectionInfo:self.homeSectionInfo bounds:collectionView.bounds featured:self.featured];
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    if (self.homeSectionInfo.module || (self.homeSectionInfo.topic && ! ApplicationConfiguration.sharedApplicationConfiguration.topicHomeHeadersHidden)) {
-        CGSize size = [self collectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
-        size.width += LayoutStandardMargin;
-        return size;
-    }
-    else {
-        return CGSizeZero;
-    }
-}
-
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    if (self.homeSectionInfo.module) {
-        return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, LayoutStandardMargin);
-    }
-    else {
-        return UIEdgeInsetsMake(0.f, LayoutStandardMargin, 0.f, LayoutStandardMargin);
-    }
+    return UIEdgeInsetsMake(0.f, LayoutStandardMargin, 0.f, LayoutStandardMargin);
 }
 
 #pragma mark UIScrollViewDelegate protocol

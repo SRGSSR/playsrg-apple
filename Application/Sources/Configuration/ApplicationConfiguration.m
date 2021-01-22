@@ -119,8 +119,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSArray<NSNumber *> *topicSections;
 @property (nonatomic) NSArray<NSNumber *> *topicSectionsWithSubtopics;
 
-@property (nonatomic, getter=areTopicHomeHeadersHidden) BOOL topicHomeHeadersHidden;
-
 @property (nonatomic) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic) NSArray<NSNumber *> *audioHomeSections;                           // wrap `HomeSection` values
 
@@ -331,8 +329,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.topicSections = [firebaseConfiguration topicSectionsForKey:@"topicSections"];
     self.topicSectionsWithSubtopics = [firebaseConfiguration topicSectionsForKey:@"topicSectionsWithSubtopics"];
-    
-    self.topicHomeHeadersHidden = [firebaseConfiguration boolForKey:@"topicHomeHeadersHidden"];
     
     self.audioHomeSections = [firebaseConfiguration homeSectionsForKey:@"audioHomeSections"];
     

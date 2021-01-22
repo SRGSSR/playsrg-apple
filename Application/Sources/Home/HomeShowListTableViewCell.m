@@ -159,10 +159,7 @@ static const CGFloat kBottomInset = 15.f;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    if (self.homeSectionInfo.module) {
-        return UIEdgeInsetsMake(0.f, collectionViewLayout.minimumInteritemSpacing, 0.f, LayoutStandardMargin);
-    }
-    else if (self.homeSectionInfo.homeSection == HomeSectionTVFavoriteShows || self.homeSectionInfo.homeSection == HomeSectionRadioFavoriteShows || self.homeSectionInfo.homeSection == HomeSectionRadioAllShows) {
+    if (self.homeSectionInfo.homeSection == HomeSectionTVFavoriteShows || self.homeSectionInfo.homeSection == HomeSectionRadioFavoriteShows || self.homeSectionInfo.homeSection == HomeSectionRadioAllShows) {
         return UIEdgeInsetsMake(0.f, LayoutStandardMargin, kBottomInset, LayoutStandardMargin);
     }
     else {

@@ -13,7 +13,6 @@
   "tvFeaturedHomeSectionHeaderHidden": true,
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioMostPopular",
   "radioFeaturedHomeSectionHeaderHidden": true,
-  "topicHomeHeadersHidden": true,
   "topicSections": "latest,mostPopular",
   "topicSectionsWithSubtopics": "latest",
   "minimumSocialViewCount": 50,
