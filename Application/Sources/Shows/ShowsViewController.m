@@ -95,6 +95,7 @@
     collectionIndexView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.4f];
     collectionIndexView.tintColor = UIColor.play_lightGrayColor;
     collectionIndexView.alpha = 1.f;
+    collectionIndexView.hidden = YES;
     [collectionIndexView addTarget:self action:@selector(collectionIndexChanged:) forControlEvents:UIControlEventValueChanged];
     [view addSubview:collectionIndexView];
     self.collectionIndexView = collectionIndexView;
@@ -207,6 +208,7 @@
     self.indexLetters = [showsAlphabeticalMap.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     self.collectionIndexView.indexTitles = self.indexLetters;
+    self.collectionIndexView.hidden = (self.indexLetters.count == 0);
     
     // Call last to continue with the reload process, based on the sorted data
     [super refreshDidFinishWithError:error];
