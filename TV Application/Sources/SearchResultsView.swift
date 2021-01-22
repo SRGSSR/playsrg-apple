@@ -11,6 +11,7 @@ struct SearchResultsView: View {
     
     enum Section: Hashable {
         case medias
+        case shows
         case information
     }
     
@@ -18,6 +19,7 @@ struct SearchResultsView: View {
         case loading
         case message(_ message: String, iconName: String)
         case media(_ media: SRGMedia)
+        case show(_ show: SRGShow)
     }
     
     typealias Row = CollectionRow<Section, Content>
@@ -46,7 +48,7 @@ struct SearchResultsView: View {
     
     private static func layoutSection(for section: Section, geometry: GeometryProxy) -> NSCollectionLayoutSection {
         switch section {
-        case .medias:
+        case .medias, .shows:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
@@ -88,6 +90,8 @@ struct SearchResultsView: View {
                     }
                     .opacity(0.8)
                     .padding()
+                case let .show(show):
+                    ShowCell(show: show)
                 case let .media(media):
                     MediaCell(media: media, style: .show)
                         .onAppear {
