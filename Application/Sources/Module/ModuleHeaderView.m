@@ -6,11 +6,6 @@
 
 #import "ModuleHeaderView.h"
 
-#import "AnalyticsConstants.h"
-#import "NSBundle+PlaySRG.h"
-#import "UIColor+PlaySRG.h"
-
-@import SRGAnalytics;
 @import SRGAppearance;
 
 @interface ModuleHeaderView ()
