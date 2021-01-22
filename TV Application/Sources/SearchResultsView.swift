@@ -76,9 +76,16 @@ struct SearchResultsView: View {
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 4)
             group.interItemSpacing = .fixed(40)
             
+            let header = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)),
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .topLeading
+            )
+            
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
             section.interGroupSpacing = 40
+            section.boundarySupplementaryItems = [header]
             return section
         case .information:
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -118,8 +125,14 @@ struct SearchResultsView: View {
                             model.loadNextPage(from: media)
                         }
                 }
-            } supplementaryView: { _, _ in
-                
+            } supplementaryView: { _, indexPath in
+                let section = rows[indexPath.section].section
+                if section == .shows {
+                    Text(NSLocalizedString("Most searched shows", comment: "Most searched shows header"))
+                        .srgFont(.title2)
+                        .opacity(0.8)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                }
             }
             .synchronizeSearchScrolling(with: model.searchController)
             .synchronizeTabBarScrolling(with: model.viewController)
