@@ -31,6 +31,14 @@ struct SearchResultsView: View {
         case let .failed(error: error):
             let item = Content.message(friendlyMessage(for: error), iconName: "error-90")
             return [Row(section: .information, items: [item])]
+        case let .mostSearched(shows: shows):
+            if !shows.isEmpty {
+                return [Row(section: .medias, items: shows.map { .show($0) })]
+            }
+            else {
+                let item = Content.message(NSLocalizedString("Type to start searching", comment: "Default text displayed when no search criterium has been entered"), iconName: "search-90")
+                return [Row(section: .information, items: [item])]
+            }
         case let .loaded(medias: medias, suggestions: _):
             if !medias.isEmpty {
                 return [Row(section: .medias, items: medias.map { .media($0) })]
