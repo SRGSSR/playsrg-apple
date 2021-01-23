@@ -398,10 +398,8 @@ extension HomeModel {
                 return topic?.title ?? NSLocalizedString("Topics", comment: "Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available")
             case .tvFavoriteShows, .radioFavoriteShows:
                 return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
-            case .tvFavoriteShowsLatest:
-                return NSLocalizedString("Latest for you", comment: "Title label used to present the TV or radio favorite shows latest media")
-            case .radioLatestEpisodes:
-                return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
+            case .radioLatestEpisodes, .tvFavoriteShowsLatest:
+                return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes or the TV favorite shows latest episodes")
             case .radioMostPopular:
                 return NSLocalizedString("Most listened to", comment: "Title label used to present the radio most popular audio medias")
             case .radioLatest:
