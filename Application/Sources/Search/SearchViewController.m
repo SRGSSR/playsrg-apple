@@ -269,7 +269,7 @@
 - (void)prepareMostSearchedShowsRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    SRGRequest *request = [SRGDataProvider.currentDataProvider mostSearchedShowsForVendor:applicationConfiguration.vendor withCompletionBlock:^(NSArray<SRGShow *> * _Nullable shows, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+    SRGRequest *request = [SRGDataProvider.currentDataProvider mostSearchedShowsForVendor:applicationConfiguration.vendor mediaType:SRGMediaTypeNone withCompletionBlock:^(NSArray<SRGShow *> * _Nullable shows, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         completionHandler(shows, [SRGPage new] /* The request does not support pagination, but we need to return a page */, nil, HTTPResponse, error);
     }];
     [requestQueue addRequest:request resume:YES];

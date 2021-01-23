@@ -840,7 +840,7 @@ name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version:
 
 name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.0.3
 
-name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 9.1.1
+name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 
 
 name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.0.1
 

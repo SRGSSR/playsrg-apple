@@ -12304,8 +12304,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.1.0;
+				branch = "feature/most-searched-shows-update";
+				kind = branch;
 			};
 		};
 		6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */ = {
