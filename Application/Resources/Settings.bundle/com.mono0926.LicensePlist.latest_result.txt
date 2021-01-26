@@ -846,7 +846,7 @@ name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, versio
 
 name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 
 
-name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 6.1.2
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.1
 

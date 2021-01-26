@@ -66,7 +66,7 @@ class SearchResultsModel: ObservableObject {
                 self.state = .loaded(medias: [], suggestions: [])
             }
             else {
-                SRGDataProvider.current!.mostSearchedShows(for: ApplicationConfiguration.shared.vendor, matchingTransmission: .TV)
+                SRGDataProvider.current!.mostSearchedShows(for: ApplicationConfiguration.shared.vendor, matching: .TV)
                     .receive(on: DispatchQueue.main)
                     .handleEvents(receiveRequest: { _ in
                         self.state = .loading
