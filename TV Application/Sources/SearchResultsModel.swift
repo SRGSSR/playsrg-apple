@@ -111,6 +111,7 @@ class SearchResultsModel: ObservableObject {
         guard !ApplicationConfiguration.shared.areSearchSettingsHidden else { return nil }
         
         let settings = SRGMediaSearchSettings()
+        settings.aggregationsEnabled = false
         settings.mediaType = .video
         settings.suggestionsEnabled = true
         return settings
