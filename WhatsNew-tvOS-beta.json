@@ -6,5 +6,6 @@
   "1.0.0-5": "- Basic accessibility.\n- More episodes button renamed on the media detail page.\n- Remove episode header on the show detail page.\n- Correctly update play button state when content playback is completed.",
   "1.0.1-6": "- Fix remote configuration update.\n- Fix potential crashes in production builds.",
   "1.0.1-7": "- Fix remote configuration update.",
-  "1.1.0-8": "- Add show favorites swimlane."
+  "1.1.0-8": "- Add show favorites swimlane.",
+  "1.1.0-9": "- Add search page."
 }
