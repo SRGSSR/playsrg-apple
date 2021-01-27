@@ -24,9 +24,6 @@
 /* Media watch later addition label */
 "Add to the watch later list" = "Aggiungere a \"Guardare dopo\"";
 
-/* Title of the first cell of a media list on homepage. */
-"All content for \"%@\"" = "Mostra tutto \"%@\"";
-
 /* Accessibility label for a media cell with audio description
    Accessibility label for the audio description badge */
 "Audio described" = "Audiodescrizione";
