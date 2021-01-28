@@ -15,34 +15,20 @@
 - (UIImage *)play_logo32Image
 {
     if (self.transmission == SRGTransmissionRadio) {
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        NSArray<RadioChannel *> *radioChannels = [applicationConfiguration.radioChannels arrayByAddingObjectsFromArray:applicationConfiguration.ssatrChannels];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), self.uid];
-        RadioChannel *radioChannel = [radioChannels filteredArrayUsingPredicate:predicate].firstObject;
-        return RadioChannelLogo32Image(radioChannel);
+        return RadioChannelLogo32Image([ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:self.uid]);
     }
     else {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(TVChannel.new, uid), self.uid];
-        TVChannel *tvChannel = [ApplicationConfiguration.sharedApplicationConfiguration.tvChannels filteredArrayUsingPredicate:predicate].firstObject;
-        return TVChannelLogo32Image(tvChannel);
+        return TVChannelLogo32Image([ApplicationConfiguration.sharedApplicationConfiguration tvChannelForUid:self.uid]);
     }
 }
 
 - (UIImage *)play_logo60Image
 {
     if (self.transmission == SRGTransmissionRadio) {
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        NSArray<RadioChannel *> *radioChannels = [applicationConfiguration.radioChannels arrayByAddingObjectsFromArray:applicationConfiguration.ssatrChannels];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), self.uid];
-        RadioChannel *radioChannel = [radioChannels filteredArrayUsingPredicate:predicate].firstObject;
-        return RadioChannelLogo60Image(radioChannel);
+        return RadioChannelLogo60Image([ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:self.uid]);
     }
     else {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(TVChannel.new, uid), self.uid];
-        TVChannel *tvChannel = [ApplicationConfiguration.sharedApplicationConfiguration.tvChannels filteredArrayUsingPredicate:predicate].firstObject;
-        return TVChannelLogo60Image(tvChannel);
+        return TVChannelLogo60Image([ApplicationConfiguration.sharedApplicationConfiguration tvChannelForUid:self.uid]);
     }
 }
 
