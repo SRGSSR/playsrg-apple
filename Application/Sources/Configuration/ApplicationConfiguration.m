@@ -124,6 +124,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) NSArray<TVChannel *> *tvChannels;
 
+@property (nonatomic) NSArray<RadioChannel *> *ssatrChannels;
+
 @property (nonatomic, getter=isRadioFeaturedHomeSectionHeaderHidden) BOOL radioFeaturedHomeSectionHeaderHidden;
 
 @property (nonatomic) NSUInteger pageSize;
@@ -336,6 +338,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.radioChannels = [firebaseConfiguration radioChannelsForKey:@"radioChannels" defaultHomeSections:self.audioHomeSections];
     self.tvChannels = [firebaseConfiguration tvChannelsForKey:@"tvChannels"];
+    self.ssatrChannels = [firebaseConfiguration radioChannelsForKey:@"ssatrChannels" defaultHomeSections:nil];
     
     NSNumber *pageSize = [firebaseConfiguration numberForKey:@"pageSize"];
     self.pageSize = pageSize ? MAX(pageSize.unsignedIntegerValue, 1) : 20;
@@ -390,7 +393,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return nil;
     }
     
-    return [self.radioChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), uid]].firstObject;
+    NSArray<RadioChannel *> *radioChannels = [self.radioChannels arrayByAddingObjectsFromArray:self.ssatrChannels];
+    return [radioChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), uid]].firstObject;
 }
 
 - (TVChannel *)tvChannelForUid:(NSString *)uid

@@ -15,8 +15,11 @@
 - (UIImage *)play_logo32Image
 {
     if (self.transmission == SRGTransmissionRadio) {
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        NSArray<RadioChannel *> *radioChannels = [applicationConfiguration.radioChannels arrayByAddingObjectsFromArray:applicationConfiguration.ssatrChannels];
+        
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), self.uid];
-        RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration.radioChannels filteredArrayUsingPredicate:predicate].firstObject;
+        RadioChannel *radioChannel = [radioChannels filteredArrayUsingPredicate:predicate].firstObject;
         return RadioChannelLogo32Image(radioChannel);
     }
     else {
@@ -29,8 +32,11 @@
 - (UIImage *)play_logo60Image
 {
     if (self.transmission == SRGTransmissionRadio) {
+        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+        NSArray<RadioChannel *> *radioChannels = [applicationConfiguration.radioChannels arrayByAddingObjectsFromArray:applicationConfiguration.ssatrChannels];
+        
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), self.uid];
-        RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration.radioChannels filteredArrayUsingPredicate:predicate].firstObject;
+        RadioChannel *radioChannel = [radioChannels filteredArrayUsingPredicate:predicate].firstObject;
         return RadioChannelLogo60Image(radioChannel);
     }
     else {
