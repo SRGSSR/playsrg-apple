@@ -59,9 +59,6 @@
 /* All option */
 "All" = "Tutto";
 
-/* Title of the first cell of a media list on homepage. */
-"All content" = "Mostra tutto";
-
 /* Title label used to present already available videos, usually badged as web first */
 "Already available" = "Già disponibile";
 
@@ -84,7 +81,7 @@
 "Are you sure you want to delete the selected items?" = "Sei sicuro di voler eliminare gli elementi selezionati?";
 
 /* Confirmation message displayed when the user is about to logout on Apple TV */
-"Are you sure you want to logout?" = "Are you sure you want to logout?";
+"Are you sure you want to logout?" = "Vuoi davvero effettuare il logout?";
 
 /* Audios option
    Audios tab title
@@ -301,6 +298,9 @@
 /* Song list title */
 "Music" = "Musica";
 
+/* Title label to present musical Swiss satellite radios */
+"Music radios" = "Radio musicali";
+
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Il mio account";
 
@@ -338,7 +338,7 @@
 "Not available since %@" = "Non disponibile da %@";
 
 /* Text displayed when no user is logged in */
-"Not logged in" = "Not logged in";
+"Not logged in" = "Non hai effettuato il login";
 
 /* Label to present the help page */
 "Notifications" = "Notifiche";
@@ -383,8 +383,7 @@
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Precedente";
 
-/* Profile tab title
-   Settings section header
+/* Settings section header
    Title displayed at the top of the profile view */
 "Profile" = "Profilo";
 
@@ -585,9 +584,6 @@
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "Il programma non può essere aperto.";
 
-/* Title label to present Swiss satellite radios */
-"Thematic radios" = "Radio tematiche";
-
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Non è permesso riprodurre questo contenuto con Google Cast.";
 
@@ -619,7 +615,8 @@
 /* Title label to present main TV livestreams */
 "TV channels" = "Canali TV";
 
-/* Message displayed when there is no search criterium entered */
+/* Default text displayed when no search criterium has been entered
+   Message displayed when there is no search criterium entered */
 "Type to start searching" = "Iniziare a scrivere per avviare la ricerca";
 
 /* Title of the button to update the application */

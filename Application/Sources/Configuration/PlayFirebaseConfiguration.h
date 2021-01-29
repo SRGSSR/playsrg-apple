@@ -56,7 +56,7 @@ OBJC_EXPORT NSArray<NSNumber * /* TopicSection */> * _Nullable FirebaseConfigura
 /**
  *  Channel accessors. Return an empty array if no valid data is found under the specified key.
  */
-- (NSArray<RadioChannel *> *)radioChannelsForKey:(NSString *)key defaultHomeSections:(NSArray<NSNumber * /* HomeSection */> *)defaultHomeSections;
+- (NSArray<RadioChannel *> *)radioChannelsForKey:(NSString *)key defaultHomeSections:(nullable NSArray<NSNumber * /* HomeSection */> *)defaultHomeSections;
 - (NSArray<TVChannel *> *)tvChannelsForKey:(NSString *)key;
 
 @end
