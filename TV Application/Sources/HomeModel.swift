@@ -389,7 +389,7 @@ extension HomeModel {
             case .radioLive:
                 return NSLocalizedString("Radio channels", comment: "Title label to present main radio livestreams")
             case .radioLiveSatellite:
-                return NSLocalizedString("Thematic radios", comment: "Title label to present Swiss satellite radios")
+                return NSLocalizedString("Music radios", comment: "Title label to present musical Swiss satellite radios")
             case .tvLiveCenter:
                 return NSLocalizedString("Sport", comment: "Title label used to present live center medias")
             case .tvScheduledLivestreams:
