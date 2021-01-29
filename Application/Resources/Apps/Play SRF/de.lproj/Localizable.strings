@@ -59,9 +59,6 @@
 /* All option */
 "All" = "Alle";
 
-/* Title of the first cell of a media list on homepage. */
-"All content" = "Alle anzeigen";
-
 /* Title label used to present already available videos, usually badged as web first */
 "Already available" = "Vorab online verfügbar";
 
@@ -301,6 +298,9 @@
 /* Song list title */
 "Music" = "Musik";
 
+/* Title label to present musical Swiss satellite radios */
+"Music radios" = "Music radios";
+
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mein Konto";
 
@@ -383,8 +383,7 @@
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Zurück";
 
-/* Profile tab title
-   Settings section header
+/* Settings section header
    Title displayed at the top of the profile view */
 "Profile" = "Profil";
 
@@ -585,9 +584,6 @@
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "Die Sendung kann nicht geöffnet werden.";
 
-/* Title label to present Swiss satellite radios */
-"Thematic radios" = "Swiss Satellite Radio";
-
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Aus rechtlichen Gründen kann dieser Inhalt nicht mit Google Cast abgespielt werden.";
 
@@ -619,7 +615,8 @@
 /* Title label to present main TV livestreams */
 "TV channels" = "TV-Sender";
 
-/* Message displayed when there is no search criterium entered */
+/* Default text displayed when no search criterium has been entered
+   Message displayed when there is no search criterium entered */
 "Type to start searching" = "Suchbegriff eingeben";
 
 /* Title of the button to update the application */
