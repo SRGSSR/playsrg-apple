@@ -81,7 +81,7 @@
 "Are you sure you want to delete the selected items?" = "Sind Sie sicher, dass Sie die ausgewählten Elemente löschen wollen?";
 
 /* Confirmation message displayed when the user is about to logout on Apple TV */
-"Are you sure you want to logout?" = "Are you sure you want to logout?";
+"Are you sure you want to logout?" = "Sind Sie sicher, dass Sie sich abmelden wollen?";
 
 /* Audios option
    Audios tab title
@@ -255,14 +255,14 @@
 "Local network access must be allowed for Google Cast receiver discovery." = "Der lokale Netzwerkzugriff muss für die Erkennung von Google Cast-Empfängern zugelassen werden.";
 
 /* Login button on Apple TV */
-"Login" = "Login";
+"Login" = "Anmelden";
 
 /* Text displayed within the login / sign up profile header when no user is logged in */
 "Login / Sign up" = "Anmelden / Registrieren";
 
 /* Logout alert view title on Apple TV
    Logout button on Apple TV */
-"Logout" = "Logout";
+"Logout" = "Abmelden";
 
 /* Message title displayed when the user is forced to update the application. */
 "Mandatory update" = "Update erforderlich";
@@ -299,7 +299,7 @@
 "Music" = "Musik";
 
 /* Title label to present musical Swiss satellite radios */
-"Music radios" = "Music radios";
+"Music radios" = "Musikradio";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mein Konto";
@@ -338,7 +338,7 @@
 "Not available since %@" = "Nicht mehr verfügbar seit %@";
 
 /* Text displayed when no user is logged in */
-"Not logged in" = "Not logged in";
+"Not logged in" = "Nicht angemeldet";
 
 /* Label to present the help page */
 "Notifications" = "Push-Mitteilungen";
