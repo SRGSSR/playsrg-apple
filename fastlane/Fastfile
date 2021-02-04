@@ -29,6 +29,8 @@ platform :ios do
       end
     end
 
+    appstore_skip_2fa_upgrade
+
     xcversion(version: '~> 12')
 
     if cleaned_lane_condition(lane)
@@ -764,6 +766,11 @@ end
 def appstore_platform(platform)
   appstore_platforms = { 'iOS' => 'ios', 'tvOS' => 'appletvos' }
   appstore_platforms[platform]
+end
+
+# New AppStore Connect rule introduced in 02.2021: https://github.com/fastlane/fastlane/issues/18098#issuecomment-772970322
+def appstore_skip_2fa_upgrade
+  ENV['SPACESHIP_SKIP_2FA_UPGRADE'] = '1'
 end
 
 # Returns clean xcodebuid grep output, without warning and errors
