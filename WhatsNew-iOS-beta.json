@@ -131,5 +131,6 @@
   "3.1.6-352": "- Fix remote configuration update.",
   "3.1.7-353": "- AirPlay compatibility fix on old Apple TV devices.",
   "3.1.8-354": "- Remove NetMetrix measurements.",
-  "3.1.8-355": "- Remove event module image.\n- Avoid empty A-Z shows index being displayed on appearance"
+  "3.1.8-355": "- Remove event module image.\n- Avoid empty A-Z shows index being displayed on appearance",
+  "3.1.8-356": "- Swiss Satellite radio channels have logos."
 }
