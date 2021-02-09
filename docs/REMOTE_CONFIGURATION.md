@@ -66,6 +66,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 
 * `tvEvents`: Event modules (expand into a row per event).
 * `tvFavoriteShows`: TV shows added to the favorites.
+* `tvFavoriteLatestEpisodes`: The latest episodes from TV shows added to the favorites.
 * `tvLatest`: The latest medias.
 * `tvWebFirst`: Medias available first on Play.
 * `tvMostPopular`: The most popular videos.

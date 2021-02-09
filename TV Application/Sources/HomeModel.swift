@@ -168,6 +168,7 @@ extension HomeModel {
         case tvTrending(appearance: RowAppearance)
         case tvLatest
         case tvFavoriteShows
+        case tvFavoriteLatestEpisodes
         case tvWebFirst
         case tvMostPopular
         case tvSoonExpiring
@@ -202,7 +203,7 @@ extension HomeModel {
         
         var isFavoriteShows: Bool {
             switch self {
-            case .tvFavoriteShows, .radioFavoriteShows:
+            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows:
                 return true
             default:
                 return false
@@ -213,7 +214,7 @@ extension HomeModel {
             switch self {
             case .tvTopicsAccess:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .topicPlaceholder(index: $0)) }
-            case .tvFavoriteShows, .radioFavoriteShows:
+            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows:
                 return []
             case .radioAllShows:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
@@ -249,6 +250,14 @@ extension HomeModel {
             case .tvFavoriteShows, .radioFavoriteShows:
                 return showsPublisher(withUrns: Array(FavoritesShowURNs()))
                     .map { compatibleShows($0).map { RowItem(rowId: self, content: .show($0)) } }
+                    .eraseToAnyPublisher()
+            case .tvFavoriteLatestEpisodes:
+                return showsPublisher(withUrns: Array(FavoritesShowURNs()))
+                    .map { compatibleShows($0).map { $0.urn } }
+                    .flatMap { urns in
+                        return latestMediasForShowsPublisher(withUrns: urns)
+                    }
+                    .map { $0.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case .tvWebFirst:
                 return dataProvider.tvLatestWebFirstEpisodes(for: vendor, pageSize: pageSize)
@@ -341,9 +350,27 @@ extension HomeModel {
                 .eraseToAnyPublisher()
         }
         
+        private func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
+            let dataProvider = SRGDataProvider.current!
+            
+            /* Load latest 15 medias for each 3 shows, get last 30 episodes */
+            return urns.publisher
+                .collect(3)
+                .flatMap { urns in
+                    return dataProvider.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
+                }
+                .reduce([SRGMedia]()) { collectedMedias, result in
+                    return collectedMedias + result.medias
+                }
+                .map { medias in
+                    return Array(medias.sorted(by: { $0.date > $1.date }).prefix(30))
+                }
+                .eraseToAnyPublisher()
+        }
+        
         private func canContain(show: SRGShow) -> Bool {
             switch self {
-            case .tvFavoriteShows:
+            case .tvFavoriteShows, .tvFavoriteLatestEpisodes:
                 return show.transmission == .TV
             case let .radioFavoriteShows(channelUid: channelUid):
                 return show.transmission == .radio && show.primaryChannelUid == channelUid
@@ -374,6 +401,8 @@ extension HomeModel {
                 return topic?.title ?? NSLocalizedString("Topics", comment: "Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available")
             case .tvFavoriteShows, .radioFavoriteShows:
                 return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
+            case .tvFavoriteLatestEpisodes:
+                return NSLocalizedString("This might interest you", comment: "Title label used to present the latest medias from TV favorite shows")
             case .radioLatestEpisodes:
                 return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
             case .radioMostPopular:
