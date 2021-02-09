@@ -1866,7 +1866,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     UIKeyCommand *togglePlayPauseCommand = [UIKeyCommand keyCommandWithInput:@" "
                                                                modifierFlags:0
                                                                       action:@selector(togglePlayPause:)];
-    togglePlayPauseCommand.discoverabilityTitle = (self.letterboxController.resource.streamType == SRGMediaPlayerStreamTypeLive) ? NSLocalizedString(@"Play / Stop", @"Stop shortcut label") : NSLocalizedString(@"Play / Pause", @"Stop shortcut label");
+    togglePlayPauseCommand.discoverabilityTitle = (self.letterboxController.resource.streamType == SRGMediaPlayerStreamTypeLive) ? NSLocalizedString(@"Play / Stop", @"Play / Stop shortcut label") : NSLocalizedString(@"Play / Pause", @"Play / Pause shortcut label");
     [keyCommands addObject:togglePlayPauseCommand];
     
     UIKeyCommand *toggleFullScreenCommand = [UIKeyCommand keyCommandWithInput:@"f"
@@ -1876,8 +1876,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [keyCommands addObject:toggleFullScreenCommand];
     
     UIKeyCommand *exitFullScreenCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputEscape
-                                                                modifierFlags:0
-                                                                       action:@selector(exitFullScreen:)];
+                                                              modifierFlags:0
+                                                                     action:@selector(exitFullScreen:)];
     [keyCommands addObject:exitFullScreenCommand];
     
     if ([self.letterboxController canSkipWithInterval:SRGLetterboxForwardSkipInterval]) {
