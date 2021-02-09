@@ -149,8 +149,8 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "feature/keyboard-shortcuts",
-          "revision": "b64c2a85041d4831cf0c2b96503bf33cad5514bb",
+          "branch": "develop",
+          "revision": "f0823fa5c16fc9f7047b0ecfe0d84241e04dd690",
           "version": null
         }
       },
