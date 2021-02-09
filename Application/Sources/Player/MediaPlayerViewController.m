@@ -80,6 +80,18 @@ static const CGFloat MediaPlayerDetailsLabelCollapsedHeight = 90.f;
 static const UILayoutPriority MediaPlayerDetailsLabelNormalPriority = 999;       // Cannot mutate priority of required installed constraints (throws an exception at runtime), so use lower priority
 static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
+static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibilityFormatter(void)
+{
+    static NSDateComponentsFormatter *s_dateComponentsFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+        s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        s_dateComponentsFormatter.allowedUnits = NSCalendarUnitSecond;
+    });
+    return s_dateComponentsFormatter;
+}
+
 @interface MediaPlayerViewController ()
 
 @property (nonatomic) NSString *originalURN;                                     // original URN to be played (otherwise rely on Letterbox controller information)
@@ -1854,20 +1866,20 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
     UIKeyCommand *togglePlayPauseCommand = [UIKeyCommand keyCommandWithInput:@" "
                                                                modifierFlags:0
                                                                       action:@selector(togglePlayPause:)
-                                                        discoverabilityTitle:NSLocalizedString(@"Play / Pause", @"Play / Pause keyboard shortcut label")];
+                                                        discoverabilityTitle:[self togglePlayPauseDiscoverabilityTitle]];
     [keyCommands addObject:togglePlayPauseCommand];
     
     UIKeyCommand *toggleFullScreenCommand = [UIKeyCommand keyCommandWithInput:@"f"
                                                                 modifierFlags:0
                                                                        action:@selector(toggleFullScreen:)
-                                                         discoverabilityTitle:NSLocalizedString(@"Toggle Full Screen", @"Toggle full screen shortcut label")];
+                                                         discoverabilityTitle:[self toggleFullScreenDiscoverabilityTitle]];
     [keyCommands addObject:toggleFullScreenCommand];
     
     if ([self.letterboxController canSkipWithInterval:SRGLetterboxForwardSkipInterval]) {
         UIKeyCommand *skipForwardCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow
                                                                modifierFlags:0
                                                                       action:@selector(skipForward:)
-                                                        discoverabilityTitle:NSLocalizedString(@"Skip Ahead", @"Skip ahead shortcut label")];
+                                                        discoverabilityTitle:[self skipForwardDiscoverabilityTitle]];
         [keyCommands addObject:skipForwardCommand];
     }
     
@@ -1875,7 +1887,7 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         UIKeyCommand *skipBackwardCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow
                                                                 modifierFlags:0
                                                                        action:@selector(skipBackward:)
-                                                         discoverabilityTitle:NSLocalizedString(@"Skip Back", @"Skip back shortcut label")];
+                                                         discoverabilityTitle:[self skipBackwardDiscoverabilityTitle]];
         [keyCommands addObject:skipBackwardCommand];
     }
     
@@ -1883,11 +1895,52 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
         UIKeyCommand *skipToLiveCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow
                                                               modifierFlags:UIKeyModifierCommand
                                                                      action:@selector(skipToLive:)
-                                                       discoverabilityTitle:NSLocalizedString(@"Skip to Live", @"Skip to live shortcut label")];
+                                                       discoverabilityTitle:NSLocalizedString(@"Back to live", @"Back to live shortcut label")];
         [keyCommands addObject:skipToLiveCommand];
     }
     
+    if ([self.letterboxController canStartOver]) {
+        UIKeyCommand *startOverCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow
+                                                             modifierFlags:UIKeyModifierCommand
+                                                                    action:@selector(startOver:)
+                                                      discoverabilityTitle:NSLocalizedString(@"Start over", @"Start over shortcut label")];
+        [keyCommands addObject:startOverCommand];
+    }
+    
     return keyCommands.copy;
+}
+
+- (NSString *)togglePlayPauseDiscoverabilityTitle
+{
+    if (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
+        BOOL isLiveOnly = (self.letterboxController.resource.streamType == SRGMediaPlayerStreamTypeLive);
+        return isLiveOnly ? NSLocalizedString(@"Stop", @"Stop shortcut label") : NSLocalizedString(@"Pause", @"Pause shortcut label");
+    }
+    else {
+        return NSLocalizedString(@"Play", @"Play shortcut label");
+    }
+}
+
+- (NSString *)toggleFullScreenDiscoverabilityTitle
+{
+    if (self.letterboxView.fullScreen) {
+        return NSLocalizedString(@"Exit full screen", @"Exit full screen shortcut label");
+    }
+    else {
+        return NSLocalizedString(@"Full screen", @"Full screen shortcut label");
+    }
+}
+
+- (NSString *)skipForwardDiscoverabilityTitle
+{
+    return [NSString stringWithFormat:NSLocalizedString(@"%@ backward", @"Seek backward shortcut label"),
+            [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxBackwardSkipInterval]];
+}
+
+- (NSString *)skipBackwardDiscoverabilityTitle
+{
+    return [NSString stringWithFormat:NSLocalizedString(@"%@ forward", @"Seek forward shortcut label"),
+            [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxForwardSkipInterval]];
 }
 
 - (void)togglePlayPause:(UIKeyCommand *)command
@@ -1913,6 +1966,11 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 - (void)skipToLive:(UIKeyCommand *)command
 {
     [self.letterboxController skipToLiveWithCompletionHandler:nil];
+}
+
+- (void)startOver:(UIKeyCommand *)command
+{
+    [self.letterboxController startOverWithCompletionHandler:nil];
 }
 
 #pragma mark Actions
