@@ -80,6 +80,18 @@ static const CGFloat MediaPlayerDetailsLabelCollapsedHeight = 90.f;
 static const UILayoutPriority MediaPlayerDetailsLabelNormalPriority = 999;       // Cannot mutate priority of required installed constraints (throws an exception at runtime), so use lower priority
 static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 
+static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibilityFormatter(void)
+{
+    static NSDateComponentsFormatter *s_dateComponentsFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+        s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        s_dateComponentsFormatter.allowedUnits = NSCalendarUnitSecond;
+    });
+    return s_dateComponentsFormatter;
+}
+
 @interface MediaPlayerViewController ()
 
 @property (nonatomic) NSString *originalURN;                                     // original URN to be played (otherwise rely on Letterbox controller information)
@@ -1843,6 +1855,102 @@ static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
 {
     // Return the installed interactive transition, if any
     return self.interactiveTransition;
+}
+
+#pragma mark Keyboard shortcuts
+
+- (NSArray<UIKeyCommand *> *)keyCommands
+{
+    NSMutableArray<UIKeyCommand *> *keyCommands = [NSMutableArray array];
+    
+    UIKeyCommand *togglePlayPauseCommand = [UIKeyCommand keyCommandWithInput:@" "
+                                                               modifierFlags:0
+                                                                      action:@selector(togglePlayPause:)];
+    togglePlayPauseCommand.discoverabilityTitle = (self.letterboxController.resource.streamType == SRGMediaPlayerStreamTypeLive) ? NSLocalizedString(@"Play / Stop", @"Play / Stop shortcut label") : NSLocalizedString(@"Play / Pause", @"Play / Pause shortcut label");
+    [keyCommands addObject:togglePlayPauseCommand];
+    
+    UIKeyCommand *toggleFullScreenCommand = [UIKeyCommand keyCommandWithInput:@"f"
+                                                                modifierFlags:0
+                                                                       action:@selector(toggleFullScreen:)];
+    toggleFullScreenCommand.discoverabilityTitle = NSLocalizedString(@"Full screen", @"Full screen shortcut label");
+    [keyCommands addObject:toggleFullScreenCommand];
+    
+    UIKeyCommand *exitFullScreenCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputEscape
+                                                              modifierFlags:0
+                                                                     action:@selector(exitFullScreen:)];
+    [keyCommands addObject:exitFullScreenCommand];
+    
+    if ([self.letterboxController canSkipWithInterval:SRGLetterboxForwardSkipInterval]) {
+        UIKeyCommand *skipForwardCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow
+                                                               modifierFlags:0
+                                                                      action:@selector(skipForward:)];
+        skipForwardCommand.discoverabilityTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ forward", @"Seek forward shortcut label"),
+                                                    [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxForwardSkipInterval]];
+        [keyCommands addObject:skipForwardCommand];
+    }
+    
+    if ([self.letterboxController canSkipWithInterval:-SRGLetterboxBackwardSkipInterval]) {
+        UIKeyCommand *skipBackwardCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow
+                                                                modifierFlags:0
+                                                                       action:@selector(skipBackward:)];
+        skipBackwardCommand.discoverabilityTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ backward", @"Seek backward shortcut label"),
+                                                   [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxBackwardSkipInterval]];
+        
+        [keyCommands addObject:skipBackwardCommand];
+    }
+    
+    if ([self.letterboxController canSkipToLive]) {
+        UIKeyCommand *skipToLiveCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow
+                                                              modifierFlags:UIKeyModifierCommand
+                                                                     action:@selector(skipToLive:)];
+        skipToLiveCommand.discoverabilityTitle = NSLocalizedString(@"Back to live", @"Back to live shortcut label");
+        [keyCommands addObject:skipToLiveCommand];
+    }
+    
+    if ([self.letterboxController canStartOver]) {
+        UIKeyCommand *startOverCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow
+                                                             modifierFlags:UIKeyModifierCommand
+                                                                    action:@selector(startOver:)];
+        startOverCommand.discoverabilityTitle = NSLocalizedString(@"Start over", @"Start over shortcut label");
+        [keyCommands addObject:startOverCommand];
+    }
+    
+    return keyCommands.copy;
+}
+
+- (void)togglePlayPause:(UIKeyCommand *)command
+{
+    [self.letterboxController togglePlayPause];
+}
+
+- (void)toggleFullScreen:(UIKeyCommand *)command
+{
+    [self.letterboxView setFullScreen:! self.letterboxView.fullScreen animated:YES];
+}
+
+- (void)exitFullScreen:(UIKeyCommand *)command
+{
+    [self.letterboxView setFullScreen:NO animated:YES];
+}
+
+- (void)skipForward:(UIKeyCommand *)command
+{
+    [self.letterboxController skipWithInterval:SRGLetterboxForwardSkipInterval completionHandler:nil];
+}
+
+- (void)skipBackward:(UIKeyCommand *)command
+{
+    [self.letterboxController skipWithInterval:-SRGLetterboxBackwardSkipInterval completionHandler:nil];
+}
+
+- (void)skipToLive:(UIKeyCommand *)command
+{
+    [self.letterboxController skipToLiveWithCompletionHandler:nil];
+}
+
+- (void)startOver:(UIKeyCommand *)command
+{
+    [self.letterboxController startOverWithCompletionHandler:nil];
 }
 
 #pragma mark Actions
