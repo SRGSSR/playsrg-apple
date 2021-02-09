@@ -354,7 +354,8 @@ extension HomeModel {
             let dataProvider = SRGDataProvider.current!
             
             /* Load latest 15 medias for each 3 shows, get last 30 episodes */
-            return urns.chunked(into: 3).publisher
+            return urns.publisher
+                .collect(3)
                 .flatMap { urns in
                     return dataProvider.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
                 }
