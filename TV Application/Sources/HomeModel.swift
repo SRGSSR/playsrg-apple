@@ -355,9 +355,9 @@ extension HomeModel {
             
             /* Load latest 15 medias for each 3 shows, get last 30 episodes */
             return urns.chunked(into: 3).publisher
-                .flatMap({ urns in
-                    return dataProvider.latestMediasForShows(withUrns: urns, filter: .episodesOnly, maximumPublicationDay: nil, pageSize: 15)
-                })
+                .flatMap { urns in
+                    return dataProvider.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
+                }
                 .reduce([SRGMedia]()) { collectedMedias, result in
                     let medias = collectedMedias + result.medias
                     return medias.sorted(by: { $0.date > $1.date }).chunked(into: 30).first ?? []
