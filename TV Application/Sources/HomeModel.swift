@@ -362,7 +362,7 @@ extension HomeModel {
                     return collectedMedias + result.medias
                 }
                 .map { medias in
-                    return medias.sorted(by: { $0.date > $1.date }).chunked(into: 30).first ?? []
+                    return Array(medias.sorted(by: { $0.date > $1.date }).prefix(30))
                 }
                 .eraseToAnyPublisher()
         }
