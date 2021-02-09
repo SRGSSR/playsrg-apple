@@ -359,7 +359,9 @@ extension HomeModel {
                     return dataProvider.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
                 }
                 .reduce([SRGMedia]()) { collectedMedias, result in
-                    let medias = collectedMedias + result.medias
+                    return collectedMedias + result.medias
+                }
+                .map { medias in
                     return medias.sorted(by: { $0.date > $1.date }).chunked(into: 30).first ?? []
                 }
                 .eraseToAnyPublisher()
