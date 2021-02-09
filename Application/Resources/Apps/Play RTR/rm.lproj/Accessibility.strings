@@ -9,7 +9,7 @@
 
 /* Live content label, with a channel title
    Live content label, with a media title */
-"%@ live" = "%@live";
+"%@ live" = "%@ live";
 
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ vis";

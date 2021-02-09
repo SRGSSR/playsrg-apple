@@ -1,5 +1,11 @@
+/* Seek backward shortcut label */
+"%@ backward" = "%@ enavos";
+
 /* The amount of episodes available for a show */
 "%@ episodes" = "%@ episodas";
+
+/* Seek forward shortcut label */
+"%@ forward" = "%@ enavant";
 
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Watch later\"" = "%@ è vegnì agiuntà a \"guardar pli tard\"";
@@ -99,6 +105,9 @@
 /* Title label used to present the soon expiring videos */
 "Available for a limited time" = "Accessibel per in tschert temp";
 
+/* Back to live shortcut label */
+"Back to live" = "Back to live";
+
 /* Short title displayed in home pages on a button. */
 "By date" = "Tenor data";
 
@@ -193,6 +202,9 @@
 
 /* Total free space size, display at the bottom of download list */
 "Free space: %@" = "Spaci liber: %@";
+
+/* Full screen shortcut label */
+"Full screen" = "Full screen";
 
 /* Title label used to present TV event modules while loading. It appears if no network connection is available and no cache is available
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
@@ -377,6 +389,12 @@
 /* Settings section header */
 "Period" = "Interval";
 
+/* Play / Pause shortcut label */
+"Play / Pause" = "Play / Pause";
+
+/* Play / Stop shortcut label */
+"Play / Stop" = "Play / Stop";
+
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Disponibel en l'exteriur";
 
@@ -518,6 +536,9 @@
 /* Subtitles short label on media cells */
 "ST" = "ST";
 
+/* Start over shortcut label */
+"Start over" = "Start over";
+
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Anc accessibel per %@";
 
@@ -587,7 +608,8 @@
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Il cuntegn n'è betg lubì da Google Cast.";
 
-/* Related content media list title */
+/* Related content media list title
+   Title label used to present the latest medias from TV favorite shows */
 "This might interest you" = "Quai pudess interessar Vus";
 
 /* Period setting option */
