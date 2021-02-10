@@ -156,27 +156,9 @@
 
 - (void)prepareRefreshWithRequestQueue:(SRGRequestQueue *)requestQueue page:(SRGPage *)page completionHandler:(ListRequestPageCompletionHandler)completionHandler
 {
-    SRGPaginatedEpisodeCompositionCompletionBlock completionBlock = ^(SRGEpisodeComposition * _Nullable episodeComposition, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ || %K == %@", @keypath(SRGMedia.new, contentType), @(SRGContentTypeEpisode), @keypath(SRGMedia.new, contentType), @(SRGContentTypeScheduledLivestream)];
-        
-        NSMutableArray *medias = [NSMutableArray array];
-        for (SRGEpisode *episode in episodeComposition.episodes) {
-            NSArray *mediasForEpisode = [episode.medias filteredArrayUsingPredicate:predicate];
-            [medias addObjectsFromArray:mediasForEpisode];
-        }
-        
-        if (episodeComposition.show) {
-            self.show = episodeComposition.show;
-            
-            [self updateAppearanceForSize:self.view.frame.size];
-        }
-        
-        completionHandler(medias.copy, page, nextPage, HTTPResponse, error);
-    };
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
-    NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
-    
-    SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider latestEpisodesForShowWithURN:self.show.URN maximumPublicationDay:nil completionBlock:completionBlock] requestWithPageSize:pageSize] requestWithPage:page];
+    SRGPageRequest *request = [[[SRGDataProvider.currentDataProvider latestMediasForShowWithURN:self.show.URN completionBlock:completionHandler] requestWithPageSize:applicationConfiguration.pageSize] requestWithPage:page];
     [requestQueue addRequest:request resume:YES];
 }
 
