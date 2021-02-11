@@ -87,7 +87,7 @@
 "Are you sure you want to delete the selected items?" = "Vulais Vus propi stizzar il elements selectà?";
 
 /* Confirmation message displayed when the user is about to logout on Apple TV */
-"Are you sure you want to logout?" = "Are you sure you want to logout?";
+"Are you sure you want to logout?" = "Vulais vus propi far il logout?";
 
 /* Audios option
    Audios tab title
@@ -106,7 +106,7 @@
 "Available for a limited time" = "Accessibel per in tschert temp";
 
 /* Back to live shortcut label */
-"Back to live" = "Back to live";
+"Back to live" = "Enavos tar live";
 
 /* Short title displayed in home pages on a button. */
 "By date" = "Tenor data";
@@ -204,7 +204,7 @@
 "Free space: %@" = "Spaci liber: %@";
 
 /* Full screen shortcut label */
-"Full screen" = "Full screen";
+"Full screen" = "Monitur cumplain";
 
 /* Title label used to present TV event modules while loading. It appears if no network connection is available and no cache is available
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
@@ -311,7 +311,7 @@
 "Music" = "Musica";
 
 /* Title label to present musical Swiss satellite radios */
-"Music radios" = "Music radios";
+"Music radios" = "Radios musicals";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mes conto";
@@ -350,7 +350,7 @@
 "Not available since %@" = "Betg accessibel dapi %@";
 
 /* Text displayed when no user is logged in */
-"Not logged in" = "Not logged in";
+"Not logged in" = "Betg annunzià";
 
 /* Label to present the help page */
 "Notifications" = "Notificaziuns";
@@ -390,7 +390,7 @@
 "Period" = "Interval";
 
 /* Play / Pause shortcut label */
-"Play / Pause" = "Play / Pause";
+"Play / Pause" = "Play / Pausa";
 
 /* Play / Stop shortcut label */
 "Play / Stop" = "Play / Stop";
@@ -537,7 +537,7 @@
 "ST" = "ST";
 
 /* Start over shortcut label */
-"Start over" = "Start over";
+"Start over" = "Recumenzar";
 
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Anc accessibel per %@";
