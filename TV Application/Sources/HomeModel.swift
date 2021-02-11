@@ -402,7 +402,7 @@ extension HomeModel {
             case .tvFavoriteShows, .radioFavoriteShows:
                 return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
             case .tvFavoriteLatestEpisodes:
-                return NSLocalizedString("This might interest you", comment: "Title label used to present the latest medias from TV favorite shows")
+                return NSLocalizedString("Last episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
             case .radioLatestEpisodes:
                 return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
             case .radioMostPopular:

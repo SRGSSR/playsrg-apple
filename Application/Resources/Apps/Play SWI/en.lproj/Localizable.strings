@@ -226,6 +226,9 @@
 /* Title of the alert view to keep autoplay permanently */
 "Keep autoplay?" = "Keep autoplay?";
 
+/* Title label used to present the latest episodes from TV favorite shows */
+"Last episodes from your favorites" = "Last episodes from your favorites";
+
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Last synchronization: %@";
 
