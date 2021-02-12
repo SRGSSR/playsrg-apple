@@ -834,19 +834,19 @@ name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.6
 
 name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5
 
-name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.0.0
 
 name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 3.0.2
 
 name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.0.3
 
-name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 
+name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 10.0.0
 
 name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.0.1
 
-name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 
+name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.0.3
 
-name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 6.2.0
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.1
 
@@ -868,4 +868,4 @@ name: YYWebImage, nameSpecified: YYWebImage, owner: SRGSSR, version: 1.0.5-srg3
 
 add-version-numbers: true
 
-LicensePlist Version: 2.16.0
+LicensePlist Version: 3.0.5
