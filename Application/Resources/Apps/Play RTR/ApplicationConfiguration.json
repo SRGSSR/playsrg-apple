@@ -6,7 +6,7 @@
   "appStoreProductIdentifier": 920754925,
   "playURL": "https://www.rtr.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
-  "videoHomeSections": "tvTrending,tvTopicsAccess,tvShowsAccess,tvFavoriteShows,tvEvents,tvTopics",
+  "videoHomeSections": "tvTrending,tvTopicsAccess,tvShowsAccess,tvFavoriteShows,tvFavoriteLatestEpisodes,tvEvents,tvTopics",
   "liveHomeSections": "tvLive,radioLive",
   "tvTrendingEpisodesOnly": true,
   "tvFeaturedHomeSectionHeaderHidden": true,
