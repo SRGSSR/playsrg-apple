@@ -227,7 +227,7 @@
 "Keep autoplay?" = "Mantenere l'autoplay attivo?";
 
 /* Title label used to present the latest episodes from TV favorite shows */
-"Last episodes from your favorites" = "Last episodes from your favorites";
+"Latest episodes from your favorites" = "Latest episodes from your favorites";
 
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Ultima sincronizzazione: %@";

@@ -227,7 +227,7 @@
 "Keep autoplay?" = "Garder la lecture automatique ?";
 
 /* Title label used to present the latest episodes from TV favorite shows */
-"Last episodes from your favorites" = "Derniers épisodes de vos favoris";
+"Latest episodes from your favorites" = "Derniers épisodes de vos favoris";
 
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Dernière synchronisation : %@";
