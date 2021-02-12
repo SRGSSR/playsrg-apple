@@ -103,10 +103,18 @@ struct SettingsView: View {
                         let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                             SRGUserData.current?.history.discardHistoryEntries(withUids: nil, completionBlock: nil)
                         }
-                        return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the confirmation pop-up displayed when the user is about to clear the history")),
-                                     message: Text(NSLocalizedString("Are you sure you want to delete all items?", comment: "Confirmation message displayed when the user is about to delete the whole history")),
-                                     primaryButton: primaryButton,
-                                     secondaryButton: secondaryButton)
+                        if let loggedIn = SRGIdentityService.current?.isLoggedIn, loggedIn {
+                            return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the confirmation pop-up displayed when the user is about to clear the history")),
+                                         message: Text(NSLocalizedString("This will erase the history on all devices connected to your account. Continue?", comment: "Confirmation message displayed when a logged in user is about to delete the whole history")),
+                                         primaryButton: primaryButton,
+                                         secondaryButton: secondaryButton)
+                        }
+                        else {
+                            return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the confirmation pop-up displayed when the user is about to clear the history")),
+                                         message: Text(NSLocalizedString("Are you sure you want to delete all items?", comment: "Confirmation message displayed when the user is about to delete the whole history")),
+                                         primaryButton: primaryButton,
+                                         secondaryButton: secondaryButton)
+                        }
                     }
                 }
                 else {
