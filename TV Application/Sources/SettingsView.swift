@@ -75,10 +75,18 @@ struct SettingsView: View {
         let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
             FavoritesRemoveShows(nil);
         }
-        return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
-                     message: Text(NSLocalizedString("Are you sure you want to delete all items?", comment: "Confirmation message displayed when the user is about to clean all favorites")),
-                     primaryButton: primaryButton,
-                     secondaryButton: secondaryButton)
+        if let loggedIn = SRGIdentityService.current?.isLoggedIn, loggedIn {
+            return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
+                         message: Text(NSLocalizedString("This will remove all favorites and associated notification subscriptions on all devices connected to your account. Continue?", comment: "Confirmation message displayed when a logged in user is about to clean all favorites")),
+                         primaryButton: primaryButton,
+                         secondaryButton: secondaryButton)
+        }
+        else {
+            return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
+                         message: Text(NSLocalizedString("Are you sure you want to delete all items?", comment: "Confirmation message displayed when the user is about to clean all favorites")),
+                         primaryButton: primaryButton,
+                         secondaryButton: secondaryButton)
+        }
     }
     
     var body: some View {
