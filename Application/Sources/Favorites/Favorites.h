@@ -44,10 +44,11 @@ OBJC_EXPORT void FavoritesToggleShow(SRGShow * _Nonnull show);
 OBJC_EXPORT NSSet<NSString *> * _Nonnull FavoritesShowURNs(void);
 
 
-#if TARGET_OS_IOS
 /**
  *  @name Subscriptions
  */
+
+#if TARGET_OS_IOS
 
 /**
  *  Toggle a subscription for a favorited show.
@@ -56,11 +57,14 @@ OBJC_EXPORT NSSet<NSString *> * _Nonnull FavoritesShowURNs(void);
  */
 OBJC_EXPORT BOOL FavoritesToggleSubscriptionForShow(SRGShow * _Nonnull show, UIView * _Nullable view);
 
+#endif
+
 /**
  *  Return `YES` iff the user has subscribed to the specified show.
  */
 OBJC_EXPORT BOOL FavoritesIsSubscribedToShow(SRGShow * _Nonnull show);
 
+#if TARGET_OS_IOS
 
 /**
  *  @name Setup
@@ -82,6 +86,7 @@ OBJC_EXPORT void FavoritesSetup(void);
  *  Migrate depretaced favorites (legacy plist-based way of bookmarking shows) and subscriptions, if any to Favorites.
  */
 OBJC_EXPORT void FavoritesMigrate(void);
+
 #endif
 
 NS_ASSUME_NONNULL_END
