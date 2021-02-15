@@ -29,7 +29,9 @@ static HomeSection HomeSectionWithString(NSString *string)
                         @"tvLiveCenter" : @(HomeSectionTVLiveCenter),
                         @"tvShowsAccess" : @(HomeSectionTVShowsAccess),
                         @"tvFavoriteShows" : @(HomeSectionTVFavoriteShows),
+#if TARGET_OS_TV
                         @"tvFavoriteLatestEpisodes" : @(HomeSectionTVFavoriteLatestEpisodes),
+#endif
                         @"radioLive" : @(HomeSectionRadioLive),
                         @"radioLiveSatellite" : @(HomeSectionRadioLiveSatellite),
                         @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
