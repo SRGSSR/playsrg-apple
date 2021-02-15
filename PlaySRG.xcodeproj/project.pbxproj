@@ -919,6 +919,7 @@
 		6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
+		6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */; };
 		6F556B381DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
@@ -1374,6 +1375,25 @@
 		6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A7325221C4300E621EF /* PaperOnboarding */; };
 		6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A7525221C4900E621EF /* PaperOnboarding */; };
 		6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A8B25221C4F00E621EF /* PaperOnboarding */; };
+		6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C2D25DAB63D00874EAF /* FirebaseRemoteConfig */; };
+		6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4325DAB64700874EAF /* FirebaseRemoteConfig */; };
+		6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4525DAB65100874EAF /* FirebaseRemoteConfig */; };
+		6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4725DAB65900874EAF /* FirebaseRemoteConfig */; };
+		6FD46C7225DAB66000874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */; };
+		6FD46C8825DAB66600874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */; };
+		6FD46C8A25DAB66D00874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */; };
+		6FD46CA025DAB67400874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */; };
+		6FD46CA225DAB67A00874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */; };
+		6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CB825DAB76D00874EAF /* AppCenterCrashes */; };
+		6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */; };
+		6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */; };
+		6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */; };
+		6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CE825DAB7C300874EAF /* AppCenterCrashes */; };
+		6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */; };
+		6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D0025DAB80300874EAF /* AppCenterCrashes */; };
+		6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D0225DAB80300874EAF /* AppCenterDistribute */; };
+		6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D1825DAB80C00874EAF /* AppCenterCrashes */; };
+		6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */; };
 		6FD633DE1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633DC1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m */; };
 		6FD633DF1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633DC1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m */; };
 		6FD633E01FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633DC1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m */; };
@@ -2542,10 +2562,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */,
+				6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */,
 				6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */,
 				084F0968254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
+				6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
 				6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */,
@@ -2557,10 +2580,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */,
 				6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */,
 				084F0969254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
+				6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
@@ -2572,10 +2598,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */,
 				6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */,
 				084F096A254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
+				6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
 				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
@@ -2587,10 +2616,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */,
 				6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */,
 				084F096B254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
+				6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
 				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
@@ -2602,10 +2634,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096225221A3500E621EF /* AirshipCore in Frameworks */,
 				6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */,
 				084F096C254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
+				6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
 				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
@@ -2666,6 +2701,7 @@
 				8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */,
 				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6FD46C7225DAB66000874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2682,6 +2718,7 @@
 				2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */,
 				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6FD46C8825DAB66600874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2698,6 +2735,7 @@
 				FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */,
 				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6FD46C8A25DAB66D00874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2714,6 +2752,7 @@
 				0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */,
 				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6FD46CA025DAB67400874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2730,6 +2769,7 @@
 				4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */,
 				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6FD46CA225DAB67A00874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4125,6 +4165,9 @@
 				6FD4095925221A1000E621EF /* AirshipCore */,
 				6FD40A4725221C2D00E621EF /* PaperOnboarding */,
 				081454BA2546CDD500BB7CA6 /* SwiftMessages */,
+				6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */,
+				6FD46CB825DAB76D00874EAF /* AppCenterCrashes */,
+				6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -4165,6 +4208,9 @@
 				6FD4095B25221A1A00E621EF /* AirshipCore */,
 				6FD40A5D25221C3A00E621EF /* PaperOnboarding */,
 				081455132546CE4300BB7CA6 /* SwiftMessages */,
+				6FD46C2D25DAB63D00874EAF /* FirebaseRemoteConfig */,
+				6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */,
+				6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -4205,6 +4251,9 @@
 				6FD4095D25221A2300E621EF /* AirshipCore */,
 				6FD40A7325221C4300E621EF /* PaperOnboarding */,
 				081455152546CE4F00BB7CA6 /* SwiftMessages */,
+				6FD46C4325DAB64700874EAF /* FirebaseRemoteConfig */,
+				6FD46CE825DAB7C300874EAF /* AppCenterCrashes */,
+				6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -4245,6 +4294,9 @@
 				6FD4095F25221A2B00E621EF /* AirshipCore */,
 				6FD40A7525221C4900E621EF /* PaperOnboarding */,
 				081455172546CE5700BB7CA6 /* SwiftMessages */,
+				6FD46C4525DAB65100874EAF /* FirebaseRemoteConfig */,
+				6FD46D0025DAB80300874EAF /* AppCenterCrashes */,
+				6FD46D0225DAB80300874EAF /* AppCenterDistribute */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -4285,6 +4337,9 @@
 				6FD4096125221A3500E621EF /* AirshipCore */,
 				6FD40A8B25221C4F00E621EF /* PaperOnboarding */,
 				081455192546CE5F00BB7CA6 /* SwiftMessages */,
+				6FD46C4725DAB65900874EAF /* FirebaseRemoteConfig */,
+				6FD46D1825DAB80C00874EAF /* AppCenterCrashes */,
+				6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -4413,6 +4468,7 @@
 				08209A0A25780AAA0077CF8B /* SRGAnalyticsSwiftUI */,
 				08EA3E77259D2AD6008D412F /* SRGIdentity */,
 				08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */,
+				6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */,
 			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
@@ -4446,6 +4502,7 @@
 				082099F425780A7F0077CF8B /* SRGAnalyticsSwiftUI */,
 				08EA3E81259D2B1B008D412F /* SRGIdentity */,
 				08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */,
+				6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */,
 			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
@@ -4479,6 +4536,7 @@
 				08209A0C25780ABE0077CF8B /* SRGAnalyticsSwiftUI */,
 				08EA3E7B259D2AE8008D412F /* SRGIdentity */,
 				08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */,
+				6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */,
 			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
@@ -4512,6 +4570,7 @@
 				08209A0E25780AC50077CF8B /* SRGAnalyticsSwiftUI */,
 				08EA3E7D259D2AEF008D412F /* SRGIdentity */,
 				08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */,
+				6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */,
 			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
@@ -4545,6 +4604,7 @@
 				08209A1025780ACB0077CF8B /* SRGAnalyticsSwiftUI */,
 				08EA3E7F259D2AF7008D412F /* SRGIdentity */,
 				08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */,
+				6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */,
 			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
@@ -4762,6 +4822,8 @@
 				081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 				6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */,
 				08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */,
+				6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -12292,6 +12354,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.6.0;
+			};
+		};
 		6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
@@ -12314,6 +12384,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 6.1.5;
+			};
+		};
+		6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
 			};
 		};
 		6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */ = {
@@ -12568,6 +12646,11 @@
 			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
+		6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
 		6F61CCC2256E41EE00E42E31 /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
@@ -12692,6 +12775,101 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */;
 			productName = PaperOnboarding;
+		};
+		6FD46C2D25DAB63D00874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C4325DAB64700874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C4525DAB65100874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C4725DAB65900874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46CB825DAB76D00874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46CE825DAB7C300874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46D0025DAB80300874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46D0225DAB80300874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46D1825DAB80C00874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
 		};
 		6FDB2AA624E590EE00FF286E /* FetchImage */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -153,7 +153,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:SettingsDeveloperGroup];
     [hiddenKeys addObject:SettingsFLEXButton];
 #else
-    if (! MSDistribute.isEnabled) {
+    if (! MSACDistribute.isEnabled) {
         [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     }
     
@@ -359,7 +359,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {
         // Clear internal App Center timestamp to force a new update request
         [NSUserDefaults.standardUserDefaults removeObjectForKey:@"MSAppCenterPostponedTimestamp"];
-        [MSDistribute checkForUpdate];
+        [MSACDistribute checkForUpdate];
         
         // Display version history
         NSString *appCenterURLString = [NSBundle.mainBundle.infoDictionary objectForKey:@"AppCenterURL"];
