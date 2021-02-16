@@ -8,7 +8,7 @@ import SRGIdentity
 import SRGUserData
 import SwiftUI
 
-struct SettingsView: View {
+struct ProfileView: View {
     @State var isLoggedIn: Bool = false
     @State var account: SRGAccount?
     @State var hasHistoryEntries: Bool = false

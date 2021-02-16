@@ -462,11 +462,11 @@
 		08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */; };
 		08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */; };
 		08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */; };
-		08EA3EB7259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
-		08EA3EB8259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
-		08EA3EB9259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
-		08EA3EBA259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
-		08EA3EBB259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
+		08EA3EB7259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
+		08EA3EB8259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
+		08EA3EB9259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
+		08EA3EBA259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
+		08EA3EBB259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
 		08FD789D253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
 		08FD789E253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
 		08FD789F253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
@@ -2064,7 +2064,7 @@
 		08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI Screenshots.xcconfig"; sourceTree = "<group>"; };
-		08EA3EB6259E33C9008D412F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		08EA3EB6259E33C9008D412F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		08FCE82525BA11C00031C512 /* TV-Application.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TV-Application.entitlements"; sourceTree = "<group>"; };
 		08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
 		096E5AC5C979FBF1F072A888 /* Pods-Play SRG-iOS-Play RSI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; sourceTree = "<group>"; };
@@ -3685,7 +3685,7 @@
 				6F151E26256BF5CF009082F8 /* ProgressBar.swift */,
 				6FFCC5E324EFBF2100805B0F /* RadioChannel.swift */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
-				08EA3EB6259E33C9008D412F /* SettingsView.swift */,
+				08EA3EB6259E33C9008D412F /* ProfileView.swift */,
 				6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */,
 				6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */,
 				6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */,
@@ -7854,7 +7854,7 @@
 				6FFFB99D252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CC924F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413D124EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EB7259E33C9008D412F /* SettingsView.swift in Sources */,
+				08EA3EB7259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCF925B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B324E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
@@ -7938,7 +7938,7 @@
 				6FFFB99E252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCA24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413D924EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EB8259E33C9008D412F /* SettingsView.swift in Sources */,
+				08EA3EB8259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFA25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B424E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
@@ -8022,7 +8022,7 @@
 				6FFFB99F252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCB24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413E124EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EB9259E33C9008D412F /* SettingsView.swift in Sources */,
+				08EA3EB9259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFB25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B524E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
@@ -8106,7 +8106,7 @@
 				6FFFB9A0252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCC24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413E924EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EBA259E33C9008D412F /* SettingsView.swift in Sources */,
+				08EA3EBA259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFC25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B624E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
@@ -8190,7 +8190,7 @@
 				6FFFB9A1252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCD24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413F124EEEDCB00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EBB259E33C9008D412F /* SettingsView.swift in Sources */,
+				08EA3EBB259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFD25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B724E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
