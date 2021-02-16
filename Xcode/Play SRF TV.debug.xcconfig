@@ -2,3 +2,5 @@
 #include "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SRF TV/Pods-Play SRG-tvOS-Play SRF TV.debug.xcconfig"
 #include "Xcode/Play tvOS Application.xcconfig"
 #include "Xcode/Play SRF.xcconfig"
+
+APP_IDENTIFIER_PREFIX = ch.srgssr
