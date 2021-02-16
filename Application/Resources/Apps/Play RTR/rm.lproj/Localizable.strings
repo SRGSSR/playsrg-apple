@@ -227,7 +227,7 @@
 "Keep autoplay?" = "Tegnair autoplay?";
 
 /* Title label used to present the latest episodes from TV favorite shows */
-"Latest episodes from your favorites" = "Latest episodes from your favorites";
+"Latest episodes from your favorites" = "Novissimas episodas da voss favurits";
 
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Ultima sincronisaziun: %@";
