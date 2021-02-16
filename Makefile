@@ -5,7 +5,7 @@ CONFIGURATION_COMMIT_SHA1=0c03c6be83db2bb897182ec96435596623dc049d
 
 CARTHAGE_FOLDER=Carthage
 CARTHAGE_RESOLUTION_FLAGS=--new-resolver --no-build
-CARTHAGE_BUILD_FLAGS=--platform iOS --cache-builds --configuration Release-static
+CARTHAGE_BUILD_FLAGS=--platform iOS --cache-builds
 
 # Checkout a commit for a repository in the specified directory. Fails if the repository is dirty of if the
 # commit does not exist.  
