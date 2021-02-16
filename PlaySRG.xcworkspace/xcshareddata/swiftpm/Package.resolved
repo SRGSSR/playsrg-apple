@@ -60,7 +60,7 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "0dd2ad1054177670dfa5bb1bbc6767e2a965095d",
+          "revision": "14dff7e19375288c7e34df8444c85d314f26d7cf",
           "version": "7.6.0"
         }
       },
@@ -123,8 +123,8 @@
         "repositoryURL": "https://github.com/urbanairship/ios-library.git",
         "state": {
           "branch": null,
-          "revision": "003482364d1158394b911418bb0316cd5a8792b6",
-          "version": "14.2.2"
+          "revision": "bd0e009c54be941d85d52d8cd7b49b745a37dc78",
+          "version": "14.2.3"
         }
       },
       {
