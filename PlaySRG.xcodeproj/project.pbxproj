@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
+		08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
+		08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
+		08013F4325DC50DA0099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
+		08013F4425DC50DB0099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		0801E07B1D4A4A810008021E /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
 		0801E07C1D4A4A810008021E /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
 		0801E07D1D4A4A810008021E /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
@@ -1875,6 +1880,7 @@
 		00E494C3E1EB4D27F2A95D22 /* Pods-Play SRG-iOS-Play RTR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.debug.xcconfig"; sourceTree = "<group>"; };
 		0308888C90C1881DBBFCDB84 /* Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
+		08013EB325DC28F60099A6E8 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS14.3.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		0801E0791D4A4A810008021E /* RadioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannel.h; sourceTree = "<group>"; };
 		0801E07A1D4A4A810008021E /* RadioChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioChannel.m; sourceTree = "<group>"; };
 		0804916622831DEE00E4CEC2 /* HomeShowListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeShowListTableViewCell.h; sourceTree = "<group>"; };
@@ -2704,6 +2710,7 @@
 				6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AA724E590EE00FF286E /* FetchImage in Frameworks */,
 				8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */,
+				08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */,
@@ -2722,6 +2729,7 @@
 				6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAB24E590F400FF286E /* FetchImage in Frameworks */,
 				2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */,
+				08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */,
@@ -2740,6 +2748,7 @@
 				6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAF24E590FC00FF286E /* FetchImage in Frameworks */,
 				FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */,
+				08013F4325DC50DA0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */,
@@ -2758,6 +2767,7 @@
 				6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB324E5910400FF286E /* FetchImage in Frameworks */,
 				0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */,
+				08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */,
@@ -2776,6 +2786,7 @@
 				6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB724E5910B00FF286E /* FetchImage in Frameworks */,
 				4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */,
+				08013F4425DC50DB0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */,
@@ -3948,6 +3959,7 @@
 				C7CC3BC704FD48424BB497B2 /* libPods-Play SRG-tvOS-Play RTS TV.a */,
 				D81BAFCE19BF2C2B612FE3A2 /* libPods-Play SRG-tvOS-Play SRF TV.a */,
 				0AD1DB5E0679F09CC8A63D91 /* libPods-Play SRG-tvOS-Play SWI TV.a */,
+				08013EB325DC28F60099A6E8 /* TVServices.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

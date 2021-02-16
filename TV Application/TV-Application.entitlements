@@ -6,5 +6,9 @@
 	<array>
 		<string>${WEB_CREDENTIALS_DOMAIN}</string>
 	</array>
+	<key>com.apple.developer.user-management</key>
+	<array>
+		<string>runs-as-current-user</string>
+	</array>
 </dict>
 </plist>
