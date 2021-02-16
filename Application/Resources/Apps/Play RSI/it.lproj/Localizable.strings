@@ -106,7 +106,7 @@
 "Available for a limited time" = "Disponibile per un periodo limitato";
 
 /* Back to live shortcut label */
-"Back to live" = "Back to live";
+"Back to live" = "Ritorno al Live";
 
 /* Short title displayed in home pages on a button. */
 "By date" = "Per data";
@@ -204,7 +204,7 @@
 "Free space: %@" = "Spazio libero: %@";
 
 /* Full screen shortcut label */
-"Full screen" = "Full screen";
+"Full screen" = "Schermo intero";
 
 /* Title label used to present TV event modules while loading. It appears if no network connection is available and no cache is available
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
@@ -227,7 +227,7 @@
 "Keep autoplay?" = "Mantenere l'autoplay attivo?";
 
 /* Title label used to present the latest episodes from TV favorite shows */
-"Latest episodes from your favorites" = "Latest episodes from your favorites";
+"Latest episodes from your favorites" = "Episodi più recenti fra i programmi preferiti";
 
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Ultima sincronizzazione: %@";
@@ -393,7 +393,7 @@
 "Period" = "Periodo";
 
 /* Play / Pause shortcut label */
-"Play / Pause" = "Play / Pause";
+"Play / Pause" = "Play / Pausa";
 
 /* Play / Stop shortcut label */
 "Play / Stop" = "Play / Stop";
@@ -540,7 +540,7 @@
 "ST" = "ST";
 
 /* Start over shortcut label */
-"Start over" = "Start over";
+"Start over" = "Ripartire dall'inizio";
 
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Disponibile ancora per %@";

@@ -106,7 +106,7 @@
 "Available for a limited time" = "Nur noch kurze Zeit online";
 
 /* Back to live shortcut label */
-"Back to live" = "Back to live";
+"Back to live" = "Zurück zu live";
 
 /* Short title displayed in home pages on a button. */
 "By date" = "Nach Datum";
@@ -204,7 +204,7 @@
 "Free space: %@" = "Verfügbarer Speicher: %@";
 
 /* Full screen shortcut label */
-"Full screen" = "Full screen";
+"Full screen" = "Vollbild";
 
 /* Title label used to present TV event modules while loading. It appears if no network connection is available and no cache is available
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
@@ -227,7 +227,7 @@
 "Keep autoplay?" = "Autoplay aktivert behalten?";
 
 /* Title label used to present the latest episodes from TV favorite shows */
-"Latest episodes from your favorites" = "Latest episodes from your favorites";
+"Latest episodes from your favorites" = "Neueste Videos aus Ihren Favoriten";
 
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Letzte Synchronisierung: %@";
@@ -396,7 +396,7 @@
 "Play / Pause" = "Play / Pausa";
 
 /* Play / Stop shortcut label */
-"Play / Stop" = "Play / Stop";
+"Play / Stop" = "Abspielen / Pause";
 
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Im Ausland verfügbar";
@@ -540,7 +540,7 @@
 "ST" = "UT";
 
 /* Start over shortcut label */
-"Start over" = "Start over";
+"Start over" = "Von vorne beginnen";
 
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Noch %@ online";
