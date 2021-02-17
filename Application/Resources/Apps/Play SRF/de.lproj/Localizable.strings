@@ -393,10 +393,10 @@
 "Period" = "Zeitraum";
 
 /* Play / Pause shortcut label */
-"Play / Pause" = "Play / Pause";
+"Play / Pause" = "Start / Pause";
 
 /* Play / Stop shortcut label */
-"Play / Stop" = "Play / Stop";
+"Play / Stop" = "Start / Stopp";
 
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Im Ausland verfügbar";
