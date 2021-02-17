@@ -62,6 +62,17 @@ setup:
 
 	@echo "... done.\n"
 
+.PHONY: public.setup
+public.setup:
+	@echo "Setting up the project..."
+
+	@mkdir -p Xcode/Links
+	@pushd Xcode/Links > /dev/null; ln -fs ../Public/*.xcconfig .
+
+	@pod install
+
+	@echo "... done.\n"
+
 .PHONY: clean
 clean:
 	@echo "Cleaning up build products..."
@@ -75,6 +86,7 @@ help:
 	@echo "   all                         Build project dependencies and the project"
 	@echo "   bootstrap                   Build previously resolved dependencies"
 	@echo "   update                      Update and build dependencies"
-	@echo "   setup                       Setup project"
+	@echo "   setup                       Setup project (internal SRG SSR use)"
+	@echo "   public.setup                Setup project (public)"
 	@echo "   help                        Display this message"
 	@echo "   clean                       Clean the project and its dependencies"
