@@ -68,9 +68,6 @@
 /* Title label used to present already available videos, usually badged as web first */
 "Already available" = "Già disponibile";
 
-/* No comment provided by engineer. */
-"Always send" = "Inviare sempre";
-
 /* Confirmation message displayed when the user is about to clean all favorites
    Confirmation message displayed when the user is about to clean the watch later list
    Confirmation message displayed when the user is about to delete all download items
@@ -150,12 +147,6 @@
 /* User activity title when displaying a show page */
 "Display %@ episodes" = "Mostra le puntate di %@";
 
-/* No comment provided by engineer. */
-"Do you want to send an anonymous crash report so we can fix the issue?" = "Desidera inviare una segnalazione (anonima) su questo problema così da permetterci di risolverlo?";
-
-/* No comment provided by engineer. */
-"Don't send" = "Non inviare";
-
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Scaricabile";
 
@@ -226,9 +217,6 @@
 /* Title of the alert view to keep autoplay permanently */
 "Keep autoplay?" = "Mantenere l'autoplay attivo?";
 
-/* Title label used to present the latest episodes from TV favorite shows */
-"Latest episodes from your favorites" = "Episodi più recenti fra i programmi preferiti";
-
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Ultima sincronizzazione: %@";
 
@@ -238,6 +226,9 @@
 /* Label for the button for deciding to opt-in for background video playback at a later time
    Watch or listen later button label in media detail view */
 "Later" = "Dopo";
+
+/* Title label used to present the latest episodes from TV favorite shows */
+"Latest episodes from your favorites" = "Episodi più recenti fra i programmi preferiti";
 
 /* Title label used to present the latest videos
    Title label used to present the radio latest videos */
@@ -484,9 +475,6 @@
    Title displayed when there is no search criterium entered */
 "Search" = "Ricerca";
 
-/* No comment provided by engineer. */
-"Send" = "Inviare";
-
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Server modificato in '%@'";
 
@@ -557,9 +545,6 @@
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Sottotitolato";
 
-/* No comment provided by engineer. */
-"The application unexpectedly quit" = "L'applicazione si è chiusa inaspettatamente";
-
 /* Button label to share the content being played. */
 "The content" = "Il contenuto";
 
@@ -611,8 +596,7 @@
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Non è permesso riprodurre questo contenuto con Google Cast.";
 
-/* Related content media list title
-   Title label used to present the latest medias from TV favorite shows */
+/* Related content media list title */
 "This might interest you" = "Potrebbero interessarti";
 
 /* Period setting option */
