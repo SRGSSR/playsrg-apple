@@ -9,5 +9,6 @@
   "1.1.0-8": "- Add show favorites swimlane.",
   "1.1.0-9": "- Add search page.",
   "1.1.0-10": "- Swiss Satellite radio channels have logos.\n- The content comes from the TVPLAY vector.",
-  "1.1.0-11": "- Add latest favorite episodes swimlane."
+  "1.1.0-11": "- Add latest favorite episodes swimlane.",
+  "1.1.0-12": "- Update latest favorite episodes swimlane title."
 }

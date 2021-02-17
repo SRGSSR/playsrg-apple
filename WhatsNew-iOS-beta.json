@@ -132,5 +132,6 @@
   "3.1.7-353": "- AirPlay compatibility fix on old Apple TV devices.",
   "3.1.8-354": "- Remove NetMetrix measurements.",
   "3.1.8-355": "- Remove event module image.\n- Avoid empty A-Z shows index being displayed on appearance",
-  "3.1.8-356": "- Swiss Satellite radio channels have logos."
+  "3.1.8-356": "- Swiss Satellite radio channels have logos.",
+  "3.1.8-357": "- Playback can be controlled using an external keyboard.\n- Crashes are always reported to AppCenter without the need for user consent."
 }
