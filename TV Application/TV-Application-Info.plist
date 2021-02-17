@@ -51,5 +51,7 @@
 			</array>
 		</dict>
 	</array>
+	<key>AppCenterSecret</key>
+	<string>${APPCENTER_SECRET}</string>
 </dict>
 </plist>
