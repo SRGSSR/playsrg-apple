@@ -5,5 +5,10 @@
   "1.0.0-4": "- Redesigned TV show A-Z page.\n- Add most popular videos at the top of topic pages.\n- Correctly update play button state when playback can be resumed.\n- Improve suggestions displayed for SRF at the top of the homepage.\n- Add support for web first video display on the homepage.\n- Conform to official page view measurement specifications.",
   "1.0.0-5": "- Basic accessibility.\n- More episodes button renamed on the media detail page.\n- Remove episode header on the show detail page.\n- Correctly update play button state when content playback is completed.",
   "1.0.1-6": "- Fix remote configuration update.\n- Fix potential crashes in production builds.",
-  "1.0.1-7": "- Fix remote configuration update."
+  "1.0.1-7": "- Fix remote configuration update.",
+  "1.1.0-8": "- Add show favorites swimlane.",
+  "1.1.0-9": "- Add search page.",
+  "1.1.0-10": "- Swiss Satellite radio channels have logos.\n- The content comes from the TVPLAY vector.",
+  "1.1.0-11": "- Add latest favorite episodes swimlane.",
+  "1.1.0-12": "- Update latest favorite episodes swimlane title."
 }

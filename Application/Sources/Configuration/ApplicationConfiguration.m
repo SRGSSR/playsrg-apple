@@ -76,7 +76,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, copy) NSString *siteName;
 @property (nonatomic, copy) NSString *tvSiteName;
-@property (nonatomic, copy) NSString *netMetrixIdentifier;
 
 @property (nonatomic, copy) NSString *voiceOverLanguageCode;
 
@@ -120,12 +119,12 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSArray<NSNumber *> *topicSections;
 @property (nonatomic) NSArray<NSNumber *> *topicSectionsWithSubtopics;
 
-@property (nonatomic, getter=areTopicHomeHeadersHidden) BOOL topicHomeHeadersHidden;
-
 @property (nonatomic) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic) NSArray<NSNumber *> *audioHomeSections;                           // wrap `HomeSection` values
 
 @property (nonatomic) NSArray<TVChannel *> *tvChannels;
+
+@property (nonatomic) NSArray<RadioChannel *> *satelliteRadioChannels;
 
 @property (nonatomic, getter=isRadioFeaturedHomeSectionHeaderHidden) BOOL radioFeaturedHomeSectionHeaderHidden;
 
@@ -236,11 +235,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
     
-    NSString *netMetrixIdentifier = [firebaseConfiguration stringForKey:@"netMetrixIdentifier"];
-    if (! netMetrixIdentifier) {
-        return NO;
-    }
-    
     NSString *playURLString = [firebaseConfiguration stringForKey:@"playURL"];
     NSURL *playURL = playURLString ? [NSURL URLWithString:playURLString] : nil;
     if (! playURL) {
@@ -270,7 +264,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.vendor = vendor;
     self.siteName = siteName;
     self.tvSiteName = tvSiteName;
-    self.netMetrixIdentifier = netMetrixIdentifier;
     
     self.playURL = playURL;
     self.middlewareURL = middlewareURL;
@@ -339,14 +332,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.topicSections = [firebaseConfiguration topicSectionsForKey:@"topicSections"];
     self.topicSectionsWithSubtopics = [firebaseConfiguration topicSectionsForKey:@"topicSectionsWithSubtopics"];
     
-    self.topicHomeHeadersHidden = [firebaseConfiguration boolForKey:@"topicHomeHeadersHidden"];
-    
     self.audioHomeSections = [firebaseConfiguration homeSectionsForKey:@"audioHomeSections"];
     
     self.radioFeaturedHomeSectionHeaderHidden = [firebaseConfiguration boolForKey:@"radioFeaturedHomeSectionHeaderHidden"];
     
     self.radioChannels = [firebaseConfiguration radioChannelsForKey:@"radioChannels" defaultHomeSections:self.audioHomeSections];
     self.tvChannels = [firebaseConfiguration tvChannelsForKey:@"tvChannels"];
+    self.satelliteRadioChannels = [firebaseConfiguration radioChannelsForKey:@"satelliteRadioChannels" defaultHomeSections:nil];
     
     NSNumber *pageSize = [firebaseConfiguration numberForKey:@"pageSize"];
     self.pageSize = pageSize ? MAX(pageSize.unsignedIntegerValue, 1) : 20;
@@ -401,7 +393,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return nil;
     }
     
-    return [self.radioChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), uid]].firstObject;
+    NSArray<RadioChannel *> *radioChannels = [self.radioChannels arrayByAddingObjectsFromArray:self.satelliteRadioChannels];
+    return [radioChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), uid]].firstObject;
 }
 
 - (TVChannel *)tvChannelForUid:(NSString *)uid

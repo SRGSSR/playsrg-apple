@@ -22,7 +22,7 @@
 {
     if (self = [super initWithDictionary:dictionary]) {
         id homeSections = dictionary[@"homeSections"];
-        self.homeSections = [homeSections isKindOfClass:NSString.class] ? FirebaseConfigurationHomeSections(homeSections) : defaultHomeSections;
+        self.homeSections = [homeSections isKindOfClass:NSString.class] ? FirebaseConfigurationHomeSections(homeSections) : defaultHomeSections ?: @[];
     }
     return self;
 }

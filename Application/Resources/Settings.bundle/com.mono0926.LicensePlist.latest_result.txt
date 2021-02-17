@@ -1,23 +1,3 @@
-name: AppCenter, nameSpecified: 
-body: Visual Studio App Ce…
-version: 3.3.4
-
-name: AppCenter, nameSpecified: 
-body: Visual Studio App Ce…
-version: 3.3.4
-
-name: AppCenter, nameSpecified: 
-body: Visual Studio App Ce…
-version: 3.3.4
-
-name: AppCenter, nameSpecified: 
-body: Visual Studio App Ce…
-version: 3.3.4
-
-name: AppCenter, nameSpecified: 
-body: Visual Studio App Ce…
-version: 3.3.4
-
 name: AutoCoding, nameSpecified: 
 body: AutoCoding
 
@@ -88,326 +68,6 @@ name: DZNEmptyDataSet, nameSpecified:
 body: The MIT License (MIT…
 version: 1.8.1
 
-name: Firebase, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: Firebase, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: Firebase, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: Firebase, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: Firebase, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: Firebase, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: Firebase, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: Firebase, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: Firebase, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: Firebase, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseABTesting, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseABTesting, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseABTesting, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseABTesting, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseABTesting, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseABTesting, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseABTesting, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseABTesting, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseABTesting, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseABTesting, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2020 Googl…
-version: 7.0.0
-
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2020 Googl…
-version: 7.0.0
-
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2020 Googl…
-version: 7.0.0
-
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2020 Googl…
-version: 7.0.0
-
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2020 Googl…
-version: 7.0.0
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCoreDiagnostics, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCoreDiagnostics, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCoreDiagnostics, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCoreDiagnostics, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCoreDiagnostics, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCoreDiagnostics, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCoreDiagnostics, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCoreDiagnostics, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCoreDiagnostics, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseCoreDiagnostics, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseInstallations, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseInstallations, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseInstallations, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseInstallations, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseInstallations, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseInstallations, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseInstallations, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseInstallations, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseInstallations, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseInstallations, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseRemoteConfig, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseRemoteConfig, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseRemoteConfig, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseRemoteConfig, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseRemoteConfig, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseRemoteConfig, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseRemoteConfig, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseRemoteConfig, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseRemoteConfig, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: FirebaseRemoteConfig, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
 name: FSCalendar, nameSpecified: 
 body: Copyright (c) 2013-2…
 version: 2.8.1
@@ -447,126 +107,6 @@ version: 4.5.1
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
 version: 4.5.1
-
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2020 Googl…
-version: 7.0.0
-
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2020 Googl…
-version: 7.0.0
-
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2020 Googl…
-version: 7.0.0
-
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2020 Googl…
-version: 7.0.0
-
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2020 Googl…
-version: 7.0.0
-
-name: GoogleDataTransport, nameSpecified: 
-body: 
-                   …
-version: 8.0.0
-
-name: GoogleDataTransport, nameSpecified: 
-body: 
-                   …
-version: 8.0.0
-
-name: GoogleDataTransport, nameSpecified: 
-body: 
-                   …
-version: 8.0.0
-
-name: GoogleDataTransport, nameSpecified: 
-body: 
-                   …
-version: 8.0.0
-
-name: GoogleDataTransport, nameSpecified: 
-body: 
-                   …
-version: 8.0.0
-
-name: GoogleDataTransport, nameSpecified: 
-body: 
-                   …
-version: 8.0.0
-
-name: GoogleDataTransport, nameSpecified: 
-body: 
-                   …
-version: 8.0.0
-
-name: GoogleDataTransport, nameSpecified: 
-body: 
-                   …
-version: 8.0.0
-
-name: GoogleDataTransport, nameSpecified: 
-body: 
-                   …
-version: 8.0.0
-
-name: GoogleDataTransport, nameSpecified: 
-body: 
-                   …
-version: 8.0.0
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 7.0.0
 
 name: GTMSessionFetcher, nameSpecified: 
 body: 
@@ -708,96 +248,6 @@ name: MGSwipeTableCell, nameSpecified:
 body: The MIT License (MIT…
 version: 1.6.11
 
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 2.30906.0
-
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 2.30906.0
-
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 2.30906.0
-
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 2.30906.0
-
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 2.30906.0
-
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 2.30906.0
-
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 2.30906.0
-
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 2.30906.0
-
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 2.30906.0
-
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 2.30906.0
-
-name: PromisesObjC, nameSpecified: 
-body: 
-                   …
-version: 1.2.11
-
-name: PromisesObjC, nameSpecified: 
-body: 
-                   …
-version: 1.2.11
-
-name: PromisesObjC, nameSpecified: 
-body: 
-                   …
-version: 1.2.11
-
-name: PromisesObjC, nameSpecified: 
-body: 
-                   …
-version: 1.2.11
-
-name: PromisesObjC, nameSpecified: 
-body: 
-                   …
-version: 1.2.11
-
-name: PromisesObjC, nameSpecified: 
-body: 
-                   …
-version: 1.2.11
-
-name: PromisesObjC, nameSpecified: 
-body: 
-                   …
-version: 1.2.11
-
-name: PromisesObjC, nameSpecified: 
-body: 
-                   …
-version: 1.2.11
-
-name: PromisesObjC, nameSpecified: 
-body: 
-                   …
-version: 1.2.11
-
-name: PromisesObjC, nameSpecified: 
-body: 
-                   …
-version: 1.2.11
-
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
 version: 3.13.0
@@ -817,14 +267,34 @@ version: 3.13.0
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
 version: 3.13.0
+
+name: abseil-cpp-SwiftPM, nameSpecified: abseil, owner: firebase, version: 0.20200225.0
 
 name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 
 
-name: ComScore-xcframework-apple, nameSpecified: ComScore, owner: SRGSSR, version: 6.6.0
+name: appcenter-sdk-apple, nameSpecified: AppCenter, owner: microsoft, version: 4.1.0
+
+name: boringssl-SwiftPM, nameSpecified: BoringSSL-GRPC, owner: firebase, version: 0.0.7
+
+name: Comscore-Swift-Package-Manager, nameSpecified: ComScore, owner: comScore, version: 6.7.0
+
+name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 7.6.0
 
 name: FXReachability, nameSpecified: FXReachability, owner: SRGSSR, version: 1.3.2-srg5
 
-name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 14.2.0
+name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 7.5.1
+
+name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 8.2.0
+
+name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.2.2
+
+name: grpc-SwiftPM, nameSpecified: gRPC, owner: firebase, version: 1.28.2
+
+name: gtm-session-fetcher, nameSpecified: GTMSessionFetcher, owner: google, version: 1.5.0
+
+name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 14.2.3
+
+name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.1
 
 name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version: 0.6.0-srg3
 
@@ -832,31 +302,37 @@ name: MAKVONotificationCenter, nameSpecified: MAKVONotificationCenter, owner: SR
 
 name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.6
 
+name: nanopb, nameSpecified: nanopb, owner: firebase, version: 2.30907.0
+
 name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5
 
-name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 6.1.1
+name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version: 1.8.1
+
+name: promises, nameSpecified: Promises, owner: google, version: 1.2.12
+
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.0.0
 
 name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 3.0.2
 
 name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.0.3
 
-name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 9.1.1
+name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 10.0.0
 
 name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.0.1
 
-name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.0.1
+name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.0.3
 
-name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 6.1.2
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 6.2.0
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.1
 
-name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 6.1.1
+name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 6.1.2
 
 name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.1
 
 name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.0.1
 
-name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 8.0.4
+name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 8.0.5
 
 name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg3
 
@@ -868,4 +344,4 @@ name: YYWebImage, nameSpecified: YYWebImage, owner: SRGSSR, version: 1.0.5-srg3
 
 add-version-numbers: true
 
-LicensePlist Version: 2.16.0
+LicensePlist Version: 3.0.5

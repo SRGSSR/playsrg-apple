@@ -29,6 +29,8 @@ platform :ios do
       end
     end
 
+    appstore_skip_2fa_upgrade
+
     xcversion(version: '~> 12')
 
     if cleaned_lane_condition(lane)
@@ -108,9 +110,9 @@ platform :ios do
         app_platform: appstore_platform(platform),
         changelog: changelog,
         distribute_external: true,
+        groups: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS'],
         demo_account_required: false,
-        beta_app_review_info: beta_app_review_info,
-        groups: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS']
+        beta_app_review_info: beta_app_review_info
       )
 
       UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
@@ -199,9 +201,9 @@ platform :ios do
         app_platform: appstore_platform(platform),
         changelog: what_s_new_for_beta(platform),
         distribute_external: true,
+        groups: ENV['ITUNES_CONNECT_BETA_GROUPS'],
         demo_account_required: false,
-        beta_app_review_info: beta_app_review_info,
-        groups: ENV['ITUNES_CONNECT_BETA_GROUPS']
+        beta_app_review_info: beta_app_review_info
       )
 
       UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
@@ -764,6 +766,11 @@ end
 def appstore_platform(platform)
   appstore_platforms = { 'iOS' => 'ios', 'tvOS' => 'appletvos' }
   appstore_platforms[platform]
+end
+
+# New AppStore Connect rule introduced in 02.2021: https://github.com/fastlane/fastlane/issues/18098#issuecomment-772970322
+def appstore_skip_2fa_upgrade
+  ENV['SPACESHIP_SKIP_2FA_UPGRADE'] = '1'
 end
 
 # Returns clean xcodebuid grep output, without warning and errors

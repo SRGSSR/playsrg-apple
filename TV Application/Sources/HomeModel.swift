@@ -5,15 +5,25 @@
 //
 
 import SRGDataProviderCombine
+import SRGUserData
 
 class HomeModel: Identifiable, ObservableObject {
     enum Id {
         case video
         case audio(channel: RadioChannel)
         case live
+        
+        var defaultRowIds: [RowId] {
+            switch self {
+            case .video:
+                return ApplicationConfiguration.shared.videoHomeRowIds()
+            case let .audio(channel):
+                return channel.homeRowIds()
+            case .live:
+                return ApplicationConfiguration.shared.liveHomeRowIds()
+            }
+        }
     }
-    
-    static let numberOfPlaceholders = 10
     
     let id: Id
     let rowIds: [RowId]
@@ -23,17 +33,35 @@ class HomeModel: Identifiable, ObservableObject {
     
     typealias Row = CollectionRow<RowId, RowItem>
     
-    @Published private(set) var rows = [Row]()
+    // Store all rows so that row updates always find a matching row. Only return non-empty ones, publicly though
+    private var loadedRows: [Row] = [] {
+        didSet {
+            rows = loadedRows.filter { !$0.items.isEmpty }
+        }
+    }
     
-    private var cancellables = Set<AnyCancellable>()
+    @Published private(set) var rows: [Row] = []
+    
+    private var globalCancellables = Set<AnyCancellable>()
+    private var refreshCancellables = Set<AnyCancellable>()
     
     init(id: Id) {
         self.id = id
-        self.rowIds = Self.rowIds(for: id)
+        self.rowIds = id.defaultRowIds
+            
+        NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
+            .sink { notification in
+                guard self.rowIds.contains(where: { $0.isFavoriteShows }) else { return }
+                
+                if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
+                    self.refresh()
+                }
+            }
+            .store(in: &globalCancellables)
     }
     
     func refresh() {
-        cancellables = []
+        refreshCancellables = []
         
         synchronizeRows()
         loadRows()
@@ -43,36 +71,15 @@ class HomeModel: Identifiable, ObservableObject {
     }
     
     func cancelRefresh() {
-        cancellables = []
-    }
-    
-    private static func rowIds(for id: Id) -> [RowId] {
-        switch id {
-        case .video:
-            return ApplicationConfiguration.shared.videoHomeRowIds()
-        case let .audio(channel):
-            return channel.homeRowIds()
-        case .live:
-            return ApplicationConfiguration.shared.liveHomeRowIds()
-        }
+        refreshCancellables = []
     }
     
     private func addRow(with id: RowId, to rows: inout [Row]) {
-        if let existingRow = self.rows.first(where: { $0.section == id }) {
+        if let existingRow = loadedRows.first(where: { $0.section == id }), !existingRow.items.isEmpty {
             rows.append(existingRow)
         }
         else {
-            func items(for id: RowId) -> [RowItem] {
-                switch id {
-                case .tvTopicsAccess:
-                    return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .topicPlaceholder(index: $0)) }
-                case .radioAllShows:
-                    return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .showPlaceholder(index: $0)) }
-                default:
-                    return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: id, content: .mediaPlaceholder(index: $0)) }
-                }
-            }
-            rows.append(Row(section: id, items: items(for: id)))
+            rows.append(Row(section: id, items: id.placeholderItems))
         }
     }
     
@@ -95,13 +102,12 @@ class HomeModel: Identifiable, ObservableObject {
                 addRow(with: id, to: &updatedRows)
             }
         }
-        rows = updatedRows
+        loadedRows = updatedRows
     }
     
     private func updateRow(with id: RowId, items: [RowItem]) {
-        guard items.count != 0,
-              let index = rows.firstIndex(where: { $0.section == id }) else { return }
-        rows[index] = Row(section: id, items: items)
+        guard let index = loadedRows.firstIndex(where: { $0.section == id }) else { return }
+        loadedRows[index] = Row(section: id, items: items)
     }
     
     private func loadRows(with ids: [RowId]? = nil) {
@@ -113,7 +119,7 @@ class HomeModel: Identifiable, ObservableObject {
                 .sink { items in
                     self.updateRow(with: rowId, items: items)
                 }
-                .store(in: &cancellables)
+                .store(in: &refreshCancellables)
         }
     }
     
@@ -131,7 +137,7 @@ class HomeModel: Identifiable, ObservableObject {
                 self.synchronizeRows()
                 self.loadRows(with: rowIds)
             }
-            .store(in: &cancellables)
+            .store(in: &refreshCancellables)
     }
     
     private func loadTopics() {
@@ -148,7 +154,7 @@ class HomeModel: Identifiable, ObservableObject {
                 self.synchronizeRows()
                 self.loadRows(with: rowIds)
             }
-            .store(in: &cancellables)
+            .store(in: &refreshCancellables)
     }
 }
 
@@ -161,6 +167,8 @@ extension HomeModel {
     enum RowId: Hashable {
         case tvTrending(appearance: RowAppearance)
         case tvLatest
+        case tvFavoriteShows
+        case tvFavoriteLatestEpisodes
         case tvWebFirst
         case tvMostPopular
         case tvSoonExpiring
@@ -173,6 +181,7 @@ extension HomeModel {
         case radioLatest(channelUid: String)
         case radioLatestVideos(channelUid: String)
         case radioAllShows(channelUid: String)
+        case radioFavoriteShows(channelUid: String)
         
         case tvLive
         case radioLive
@@ -181,10 +190,39 @@ extension HomeModel {
         case tvLiveCenter
         case tvScheduledLivestreams
         
-        static var liveIds: [RowId] {
-            return [.tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams]
+        static let numberOfPlaceholders = 10
+        
+        var isLive: Bool {
+            switch self {
+            case .tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams:
+                return true
+            default:
+                return false
+            }
         }
         
+        var isFavoriteShows: Bool {
+            switch self {
+            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        var placeholderItems: [RowItem] {
+            switch self {
+            case .tvTopicsAccess:
+                return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .topicPlaceholder(index: $0)) }
+            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows:
+                return []
+            case .radioAllShows:
+                return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
+            default:
+                return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .mediaPlaceholder(index: $0)) }
+            }
+        }
+                
         func publisher() -> AnyPublisher<[RowItem], Error>? {
             let dataProvider = SRGDataProvider.current!
             let configuration = ApplicationConfiguration.shared
@@ -209,6 +247,18 @@ extension HomeModel {
                 return dataProvider.tvLatestMedias(for: vendor, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
+            case .tvFavoriteShows, .radioFavoriteShows:
+                return showsPublisher(withUrns: Array(FavoritesShowURNs()))
+                    .map { compatibleShows($0).map { RowItem(rowId: self, content: .show($0)) } }
+                    .eraseToAnyPublisher()
+            case .tvFavoriteLatestEpisodes:
+                return showsPublisher(withUrns: Array(FavoritesShowURNs()))
+                    .map { compatibleShows($0).map { $0.urn } }
+                    .flatMap { urns in
+                        return latestMediasForShowsPublisher(withUrns: urns)
+                    }
+                    .map { $0.map { RowItem(rowId: self, content: .media($0)) } }
+                    .eraseToAnyPublisher()
             case .tvWebFirst:
                 return dataProvider.tvLatestWebFirstEpisodes(for: vendor, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
@@ -227,7 +277,7 @@ extension HomeModel {
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case .tvTopicsAccess:
-                return SRGDataProvider.current!.tvTopics(for: vendor)
+                return dataProvider.tvTopics(for: vendor)
                     .map { $0.topics.map { RowItem(rowId: self, content: .topic($0)) } }
                     .eraseToAnyPublisher()
             case let .tvLatestForTopic(topic):
@@ -252,7 +302,7 @@ extension HomeModel {
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case let .radioAllShows(channelUid):
-                return SRGDataProvider.current!.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize)
+                return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize)
                     .map { $0.shows.map { RowItem(rowId: self, content: .show($0)) } }
                     .eraseToAnyPublisher()
             case .tvLive:
@@ -278,6 +328,61 @@ extension HomeModel {
             }
         }
         
+        private func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
+            let dataProvider = SRGDataProvider.current!
+            let pagePublisher = CurrentValueSubject<SRGDataProvider.Shows.Page?, Never>(nil)
+            
+            return pagePublisher
+                .flatMap { page in
+                    return page != nil ? dataProvider.shows(at: page!) : dataProvider.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
+                }
+                .handleEvents(receiveOutput: { result in
+                    if let nextPage = result.nextPage {
+                        pagePublisher.value = nextPage
+                    }
+                    else {
+                        pagePublisher.send(completion: .finished)
+                    }
+                })
+                .reduce([SRGShow]()) { collectedShows, result in
+                    return collectedShows + result.shows
+                }
+                .eraseToAnyPublisher()
+        }
+        
+        private func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
+            let dataProvider = SRGDataProvider.current!
+            
+            /* Load latest 15 medias for each 3 shows, get last 30 episodes */
+            return urns.publisher
+                .collect(3)
+                .flatMap { urns in
+                    return dataProvider.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
+                }
+                .reduce([SRGMedia]()) { collectedMedias, result in
+                    return collectedMedias + result.medias
+                }
+                .map { medias in
+                    return Array(medias.sorted(by: { $0.date > $1.date }).prefix(30))
+                }
+                .eraseToAnyPublisher()
+        }
+        
+        private func canContain(show: SRGShow) -> Bool {
+            switch self {
+            case .tvFavoriteShows, .tvFavoriteLatestEpisodes:
+                return show.transmission == .TV
+            case let .radioFavoriteShows(channelUid: channelUid):
+                return show.transmission == .radio && show.primaryChannelUid == channelUid
+            default:
+                return false
+            }
+        }
+        
+        private func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
+            return shows.filter { self.canContain(show: $0) }.sorted(by: { $0.title < $1.title })
+        }
+        
         var title: String? {
             switch self {
             case let .tvTrending(appearance: appearance):
@@ -294,6 +399,10 @@ extension HomeModel {
                 return module?.title ?? NSLocalizedString("Highlights", comment: "Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available")
             case let .tvLatestForTopic(topic):
                 return topic?.title ?? NSLocalizedString("Topics", comment: "Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available")
+            case .tvFavoriteShows, .radioFavoriteShows:
+                return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
+            case .tvFavoriteLatestEpisodes:
+                return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
             case .radioLatestEpisodes:
                 return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
             case .radioMostPopular:
@@ -309,7 +418,7 @@ extension HomeModel {
             case .radioLive:
                 return NSLocalizedString("Radio channels", comment: "Title label to present main radio livestreams")
             case .radioLiveSatellite:
-                return NSLocalizedString("Thematic radios", comment: "Title label to present Swiss satellite radios")
+                return NSLocalizedString("Music radios", comment: "Title label to present musical Swiss satellite radios")
             case .tvLiveCenter:
                 return NSLocalizedString("Sport", comment: "Title label used to present live center medias")
             case .tvScheduledLivestreams:
@@ -348,9 +457,5 @@ extension HomeModel {
         // to ensure unicity.
         let rowId: RowId
         let content: Content
-        
-        static func == (lhs: RowItem, rhs: RowItem) -> Bool {
-            return lhs.rowId == rhs.rowId && lhs.content == rhs.content
-        }
     }
 }

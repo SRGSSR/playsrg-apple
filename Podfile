@@ -5,13 +5,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 inhibit_all_warnings!
 
 abstract_target 'Play SRG' do
-  pod 'Firebase/RemoteConfig'
-
   abstract_target 'iOS' do
     platform :ios, '12.0'
-
-    pod 'AppCenter'
-    pod 'AppCenter/Distribute'
 
     pod 'AutoCoding'
     pod 'BDKCollectionIndexView'
@@ -19,7 +14,6 @@ abstract_target 'Play SRG' do
     # On master
     pod 'DZNEmptyDataSet', :git => 'https://github.com/dzenbot/DZNEmptyDataSet.git', :commit => '8deb3fe69f75c5022a53a903468b29552dc70e66'
 
-    pod 'Firebase/Analytics'
     pod 'FSCalendar'
     pod 'google-cast-sdk-no-bluetooth'
     pod 'InAppSettingsKit', '3.1.4' # 3.1.5 has a public header exposition issue

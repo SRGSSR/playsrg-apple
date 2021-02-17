@@ -16,8 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, nullable) SRGModule *module;
 
-- (void)updateAspectRatioWithSize:(CGSize)size;
-
 @end
 
 NS_ASSUME_NONNULL_END

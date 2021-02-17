@@ -35,7 +35,6 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 * `siteName` (mandatory, string): The iOS site name to send events to.
 * `tvSiteName` (mandatory, string): The tvOS site name to send events to.
-* `netMetrixIdentifier` (mandatory, string): The NetMetrix application identifier.
 
 ## Channel configuration
 
@@ -44,6 +43,7 @@ TV and radio channels are configured with corresponding JSON dictionaries:
 * `tvChannels` (optional, JSON): A JSON array of JSON dictionaries describing TV channel configuration. Available common keys are listed below.
 * `radioChannels` (optional, JSON): A JSON array of JSON dictionaries describing radio channel configuration. Available common keys are listed below, with the additional following specific keys:
     * `homeSections` (optional, string, multiple): The sections to be displayed on the channel homepage. Refer to _Audio homepage_ for available values. If omitted, the global `audioHomeSections` setting is used instead (in which case this value is required).
+* `satelliteRadioChannels` (optional, JSON): A JSON array of JSON dictionaries describing Swiss satellite radio channel configuration. Available common keys are listed below.
 
 The keys common to both TV and radio channels JSON dictionaries are:
 
@@ -66,6 +66,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 
 * `tvEvents`: Event modules (expand into a row per event).
 * `tvFavoriteShows`: TV shows added to the favorites.
+* `tvFavoriteLatestEpisodes`: The latest episodes from TV shows added to the favorites.
 * `tvLatest`: The latest medias.
 * `tvWebFirst`: Medias available first on Play.
 * `tvMostPopular`: The most popular videos.
@@ -84,8 +85,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 
 ### User interface options
 
-* `topicHomeHeadersHidden` (optional, boolean): If set to `true`, the quick access header item on home page topics swimlanes will not be displayed.
-* `tvFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured TV media lists will not display any header.
+* `tvFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured TV media lists will not display any title header.
 * `tvTrendingEpisodesOnly` (optional, boolean): If set to `true`, `tvTrending` only returns episodes.
 * `tvTrendingEditorialLimit` (optional, number): The maximum number of editorial recommendations returned by `tvTrending`. If not set, all are returned.
 * `tvTrendingPrefersHeroStage` (optional, boolean): If set to `true`, `tvTrending` returns hero stage content (`tvTrendingEpisodesOnly` and `tvTrendingEditorialLimit` are ignored).
@@ -116,7 +116,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 
 * `tvLive`: TV livestreams.
 * `radioLive`: Radio livestreams.
-* `radioLiveSatellite`: Satellite radio livestreams.
+* `radioLiveSatellite`: Swiss Satellite radio livestreams.
 * `tvLiveCenter`: SwissTXT livestreams.
 * `tvScheduledLivestreams`: Scheduled livestreams.
 

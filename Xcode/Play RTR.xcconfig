@@ -1,3 +1,4 @@
 APP_BASE_IDENTIFIER = ch.rtr.rtrplayer
 BASE_PRODUCT_NAME = Play RTR
 URL_BASE_SCHEME  = playrtr
+WEB_CREDENTIALS_DOMAIN = webcredentials:*.rtr.ch

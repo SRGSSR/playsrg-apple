@@ -593,27 +593,8 @@ static void *s_kvoContext = &s_kvoContext;
         return;
     }
     
-    [MSCrashes setUserConfirmationHandler:^BOOL(NSArray<MSErrorReport *> * _Nonnull errorReports) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"The application unexpectedly quit", nil)
-                                                                                 message:NSLocalizedString(@"Do you want to send an anonymous crash report so we can fix the issue?", nil)
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Don't send", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [MSCrashes notifyWithUserConfirmation:MSUserConfirmationDontSend];
-        }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [MSCrashes notifyWithUserConfirmation:MSUserConfirmationSend];
-        }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Always send", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [MSCrashes notifyWithUserConfirmation:MSUserConfirmationAlways];
-        }]];
-        [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
-        
-        return YES;
-    }];
-    
-    MSDistribute.updateTrack = MSUpdateTrackPrivate;
-    
-    [MSAppCenter start:appCenterSecret withServices:@[ MSCrashes.class, MSDistribute.class ]];
+    MSACDistribute.updateTrack = MSACUpdateTrackPrivate;
+    [MSACAppCenter start:appCenterSecret withServices:@[ MSACCrashes.class, MSACDistribute.class ]];
 }
 
 - (void)setupDataProvider
@@ -665,8 +646,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
                                                                                                        container:applicationConfiguration.analyticsContainer
-                                                                                                        siteName:applicationConfiguration.siteName
-                                                                                             netMetrixIdentifier:applicationConfiguration.netMetrixIdentifier];
+                                                                                                        siteName:applicationConfiguration.siteName];
     [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
                                               identityService:SRGIdentityService.currentIdentityService];
 }

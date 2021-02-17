@@ -1,11 +1,11 @@
 #!/usr/bin/xcrun make -f
 
 CONFIGURATION_FOLDER=Configuration
-CONFIGURATION_COMMIT_SHA1=a02ab73778811e71c82f8095743dca3b4240224f
+CONFIGURATION_COMMIT_SHA1=deebf878df4c7d470b5294665976357ad9fa8300
 
 CARTHAGE_FOLDER=Carthage
 CARTHAGE_RESOLUTION_FLAGS=--new-resolver --no-build
-CARTHAGE_BUILD_FLAGS=--platform iOS --cache-builds --configuration Release-static
+CARTHAGE_BUILD_FLAGS=--platform iOS --cache-builds
 
 # Checkout a commit for a repository in the specified directory. Fails if the repository is dirty of if the
 # commit does not exist.  
@@ -62,6 +62,17 @@ setup:
 
 	@echo "... done.\n"
 
+.PHONY: public.setup
+public.setup:
+	@echo "Setting up the project..."
+
+	@mkdir -p Xcode/Links
+	@pushd Xcode/Links > /dev/null; ln -fs ../Public/*.xcconfig .
+
+	@pod install
+
+	@echo "... done.\n"
+
 .PHONY: clean
 clean:
 	@echo "Cleaning up build products..."
@@ -75,6 +86,7 @@ help:
 	@echo "   all                         Build project dependencies and the project"
 	@echo "   bootstrap                   Build previously resolved dependencies"
 	@echo "   update                      Update and build dependencies"
-	@echo "   setup                       Setup project"
+	@echo "   setup                       Setup project (internal SRG SSR use)"
+	@echo "   public.setup                Setup project (public)"
 	@echo "   help                        Display this message"
 	@echo "   clean                       Clean the project and its dependencies"

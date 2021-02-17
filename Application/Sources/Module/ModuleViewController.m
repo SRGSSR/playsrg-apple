@@ -108,11 +108,6 @@
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         [self.collectionView.collectionViewLayout invalidateLayout];
         [self updateAppearanceForSize:size];
-        
-        ModuleHeaderView *headerView = (ModuleHeaderView *)[self.collectionView supplementaryViewForElementKind:UICollectionElementKindSectionHeader atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        if (headerView) {
-            [headerView updateAspectRatioWithSize:self.collectionView.frame.size];
-        }
     } completion:nil];
 }
 
@@ -121,11 +116,6 @@
     [super traitCollectionDidChange:previousTraitCollection];
     
     [self.collectionView.collectionViewLayout invalidateLayout];
-    ModuleHeaderView *headerView = (ModuleHeaderView *)[self.collectionView supplementaryViewForElementKind:UICollectionElementKindSectionHeader atIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    if (headerView) {
-        [headerView updateAspectRatioWithSize:self.collectionView.frame.size];
-    }
-    
     [self updateAppearanceForSize:self.view.frame.size];
 }
 
@@ -294,9 +284,7 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        ModuleHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(ModuleHeaderView.class) forIndexPath:indexPath];
-        [headerView updateAspectRatioWithSize:collectionView.frame.size];
-        return headerView;
+        return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(ModuleHeaderView.class) forIndexPath:indexPath];
     }
     else {
         return [super collectionView:collectionView viewForSupplementaryElementOfKind:kind atIndexPath:indexPath];

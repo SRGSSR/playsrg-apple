@@ -4,8 +4,10 @@
 //  License information is available from the LICENSE file.
 //
 
+import AppCenter
+import AppCenterCrashes
 import Firebase
-import SRGAnalytics
+import SRGAnalyticsIdentity
 import SRGAppearance
 import SRGDataProviderCombine
 import SRGUserData
@@ -26,10 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let itemAppearance = appearance.inlineLayoutAppearance
         itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIFont.srg_mediumFont(withSize: 28),
                                                      NSAttributedString.Key.foregroundColor: UIColor.white]
+        itemAppearance.normal.iconColor = .white
         
-        let activeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.srg_color(fromHexadecimalString: "#161616")!]
+        let activeColor = UIColor.srg_color(fromHexadecimalString: "#161616")!
+        let activeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: activeColor]
         itemAppearance.selected.titleTextAttributes = activeTitleTextAttributes
+        itemAppearance.selected.iconColor = activeColor
         itemAppearance.focused.titleTextAttributes = activeTitleTextAttributes
+        itemAppearance.focused.iconColor = activeColor
         
         tabBarController.tabBar.standardAppearance = appearance
     }
@@ -63,18 +69,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewControllers.append(showsViewController)
         }
         
-        #if DEBUG
-        let searchViewController = UIHostingController(rootView: SearchView())
-        searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 3)
+        let searchViewController = SearchViewController()
+        searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 4)
         viewControllers.append(searchViewController)
         
-        let profileViewController = UIHostingController(rootView: ProfileView())
-        profileViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Profile", comment: "Profile tab title"), image: nil, tag: 4)
-        viewControllers.append(profileViewController)
-        
+        #if DEBUG
         let historyViewController = UIHostingController(rootView: HistoryView())
-        historyViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("History", comment: "Profile tab title"), image: nil, tag: 4)
+        historyViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("History", comment: "History tab title"), image: nil, tag: 6)
         viewControllers.append(historyViewController)
+        #endif
+        
+        #if DEBUG || NIGHTLY
+        let settingsViewController = UIHostingController(rootView: SettingsView())
+        settingsViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "settings-22")!.withRenderingMode(.alwaysTemplate), tag: 7)
+        settingsViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Settings", "Settings button label on home view")
+        viewControllers.append(settingsViewController)
         #endif
         
         if viewControllers.count > 1 {
@@ -86,6 +95,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             return viewControllers.first
         }
+    }
+    
+    private func setupAppCenter() {
+        guard let appCenterSecret = Bundle.main.object(forInfoDictionaryKey: "AppCenterSecret") as? String, !appCenterSecret.isEmpty else { return }
+        AppCenter.start(withAppSecret: appCenterSecret, services: [Crashes.self])
     }
     
     // MARK: - UIApplicationDelegate protocol
@@ -101,23 +115,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FirebaseApp.configure()
         }
         
+        #if !DEBUG
+        setupAppCenter()
+        #endif
+        
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         
         let configuration = ApplicationConfiguration.shared
         application.accessibilityLanguage = configuration.voiceOverLanguageCode;
         
+        if let identityWebserviceURL = configuration.identityWebserviceURL,
+           let identityWebsiteURL = configuration.identityWebsiteURL {
+            SRGIdentityService.current = SRGIdentityService(webserviceURL: identityWebserviceURL, websiteURL: identityWebsiteURL)
+        }
+        
         let cachesDirectoryUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!)
         let storeFileUrl = cachesDirectoryUrl.appendingPathComponent("PlayData.sqlite")
-        SRGUserData.current = SRGUserData(storeFileURL: storeFileUrl, serviceURL: configuration.userDataServiceURL, identityService: nil)
+        SRGUserData.current = SRGUserData(storeFileURL: storeFileUrl, serviceURL: configuration.userDataServiceURL, identityService: SRGIdentityService.current)
         
         let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
                                                                container: configuration.analyticsContainer,
-                                                               siteName: configuration.tvSiteName,
-                                                               netMetrixIdentifier: configuration.netMetrixIdentifier)
-        #if DEBUG || NIGHLTY || BETA
+                                                               siteName: configuration.tvSiteName)
+        #if DEBUG || NIGHTLY || BETA
         analyticsConfiguration.environmentMode = .preProduction
         #endif
-        SRGAnalyticsTracker.shared.start(with: analyticsConfiguration)
+        SRGAnalyticsTracker.shared.start(with: analyticsConfiguration, identityService: SRGIdentityService.current)
         
         SRGDataProvider.current = SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
         

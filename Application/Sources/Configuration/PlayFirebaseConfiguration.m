@@ -29,6 +29,9 @@ static HomeSection HomeSectionWithString(NSString *string)
                         @"tvLiveCenter" : @(HomeSectionTVLiveCenter),
                         @"tvShowsAccess" : @(HomeSectionTVShowsAccess),
                         @"tvFavoriteShows" : @(HomeSectionTVFavoriteShows),
+#if TARGET_OS_TV
+                        @"tvFavoriteLatestEpisodes" : @(HomeSectionTVFavoriteLatestEpisodes),
+#endif
                         @"radioLive" : @(HomeSectionRadioLive),
                         @"radioLiveSatellite" : @(HomeSectionRadioLiveSatellite),
                         @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
@@ -174,13 +177,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTopicSections(NSString *string)
 {
     if (self.remoteConfig) {
         FIRRemoteConfigValue *value = [self.remoteConfig configValueForKey:key];
-        if (value.source != FIRRemoteConfigSourceStatic) {
-            NSString *stringValue = value.stringValue;
-            return (stringValue.length != 0) ? stringValue : nil;
-        }
-        else {
-            return nil;
-        }
+        return (value.source != FIRRemoteConfigSourceStatic && value.dataValue.length != 0) ? value.stringValue : nil;
     }
     else {
         id object = self.dictionary[key];
@@ -192,7 +189,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTopicSections(NSString *string)
 {
     if (self.remoteConfig) {
         FIRRemoteConfigValue *value = [self.remoteConfig configValueForKey:key];
-        return (value.source != FIRRemoteConfigSourceStatic) ? value.numberValue : nil;
+        return (value.source != FIRRemoteConfigSourceStatic && value.dataValue.length != 0) ? value.numberValue : nil;
     }
     else {
         id object = self.dictionary[key];
@@ -214,17 +211,13 @@ NSArray<NSNumber *> *FirebaseConfigurationTopicSections(NSString *string)
 
 - (id)JSONObjectForKey:(NSString *)key
 {
-    NSString *string = [self stringForKey:key];
-    if (! string) {
-        return nil;
+    if (self.remoteConfig) {
+        FIRRemoteConfigValue *value = [self.remoteConfig configValueForKey:key];
+        return (value.source != FIRRemoteConfigSourceStatic && value.dataValue.length != 0) ? value.JSONValue : nil;
     }
-    
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    if (! data) {
-        return nil;
+    else {
+        return self.dictionary[key];
     }
-    
-    return [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
 }
 
 - (NSArray *)JSONArrayForKey:(NSString *)key

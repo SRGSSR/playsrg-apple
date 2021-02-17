@@ -207,11 +207,19 @@
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
-   limitations under the License.
-
-================================================================================
-
-The following copyright from Landon J. Fuller applies to the isAppEncrypted
+   limitations under the License.</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>----------------------------------------</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>The following copyright from Landon J. Fuller applies to the isAppEncrypted
 function in Environment/third_party/GULAppEnvironmentUtil.m.
 
 Copyright (c) 2017 Landon J. Fuller &lt;landon@landonf.org&gt;

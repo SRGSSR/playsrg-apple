@@ -6,10 +6,12 @@
 
 #import "Favorites.h"
 
+#if TARGET_OS_IOS
 #import "DeprecatedFavorite.h"
 #import "NSSet+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PushService+Private.h"
+#endif
 
 @import libextobjc;
 @import SRGUserData;
@@ -39,6 +41,7 @@ void FavoritesAddShowURNWithDate(NSString *URN, NSDate *date)
     }
 }
 
+#if TARGET_OS_IOS
 BOOL FavoritesIsSubscribedToShowURN(NSString * _Nonnull URN)
 {
     if (! FavoritesContainsShowURN(URN)) {
@@ -98,6 +101,7 @@ void FavoritesSetup(void)
         }
     }];
 }
+#endif
 
 #pragma mark Favorite entries
 
@@ -145,6 +149,7 @@ NSSet<NSString *> *FavoritesShowURNs(void)
     return URNs ? [NSSet setWithArray:URNs] : [NSSet set];
 }
 
+#if TARGET_OS_IOS
 #pragma mark Notification subscriptions
 
 BOOL FavoritesToggleSubscriptionForShow(SRGShow *show, UIView *view)
@@ -204,3 +209,4 @@ void FavoritesMigrate(void)
         completionHandler(YES);
     }, SubscriptionsToFavoritesMigrationDoneKey, nil);
 }
+#endif

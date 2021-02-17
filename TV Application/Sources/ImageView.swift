@@ -17,8 +17,11 @@ struct ImageView: View {
     }
     
     var body: some View {
-        if let url = url {
-            FetchView(url: url, contentMode: contentMode)
+        // Wrap into ZStack so that when no URL is provided we still have a view filling all available space
+        ZStack {
+            if let url = url {
+                FetchView(url: url, contentMode: contentMode)
+            }
         }
     }
     
@@ -27,13 +30,14 @@ struct ImageView: View {
         
         @ObservedObject var fetchImage: FetchImage
         
-        // Use separate state so that we can track image loading and only animate such changes. Since FetchImage
-        // immediately fetches the image the state is initially set to true.
+        // Use separate state so that we can track image loading and only animate such changes. Initially set to `true`
+        // since we fetch the image at initialization time.
         @State var isLoading: Bool = true
         
         init(url: URL, contentMode: ContentMode) {
             fetchImage = FetchImage(url: url)
             self.contentMode = contentMode
+            fetchImage.fetch()
         }
         
         private func optimalContentMode(for size: CGSize) -> ContentMode {

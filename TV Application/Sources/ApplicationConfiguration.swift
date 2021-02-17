@@ -11,6 +11,10 @@ extension ApplicationConfiguration {
         switch homeSection {
         case .tvTrending:
             return .tvTrending(appearance: .hero)
+        case .tvFavoriteShows:
+            return .tvFavoriteShows
+        case .tvFavoriteLatestEpisodes:
+            return .tvFavoriteLatestEpisodes
         case .tvLatest:
             return .tvLatest
         case .tvWebFirst:

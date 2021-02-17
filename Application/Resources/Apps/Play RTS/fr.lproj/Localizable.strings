@@ -1,5 +1,11 @@
+/* Seek backward shortcut label */
+"%@ backward" = "Reculer de %@";
+
 /* The amount of episodes available for a show */
 "%@ episodes" = "%@ épisodes";
+
+/* Seek forward shortcut label */
+"%@ forward" = "Avancer de %@";
 
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Watch later\"" = "%@ a été ajouté à \"Plus tard\"";
@@ -53,20 +59,14 @@
 /* Button label to add a show to favorites in the show long-press menu
    Button label to add a show to favorites in the show preview window
    Context menu action to add a show to favorites
-   Favorite show label to add it, in the show view */
+   Label displayed in the show view when a show can be favorited */
 "Add to favorites" = "Ajouter aux favoris";
 
 /* All option */
 "All" = "Tout";
 
-/* Title of the first cell of a media list on homepage. */
-"All content" = "Tout le contenu";
-
 /* Title label used to present already available videos, usually badged as web first */
 "Already available" = "Déjà disponible";
-
-/* No comment provided by engineer. */
-"Always send" = "Toujours envoyer";
 
 /* Confirmation message displayed when the user is about to clean all favorites
    Confirmation message displayed when the user is about to clean the watch later list
@@ -82,6 +82,9 @@
    Confirmation message displayed when the user is about to remove selected entries from favorites
    Confirmation message displayed when the user is about to remove selected entries from the watch later list */
 "Are you sure you want to delete the selected items?" = "Etes-vous sûr de vouloir supprimer les éléments sélectionnés ?";
+
+/* Confirmation message displayed when the user is about to logout on Apple TV */
+"Are you sure you want to logout?" = "Etes-vous sûr de vouloir vous déconnecter ?";
 
 /* Audios option
    Audios tab title
@@ -99,6 +102,9 @@
 /* Title label used to present the soon expiring videos */
 "Available for a limited time" = "Disponible pour un temps limité";
 
+/* Back to live shortcut label */
+"Back to live" = "Retourner au direct";
+
 /* Short title displayed in home pages on a button. */
 "By date" = "Par date";
 
@@ -107,7 +113,8 @@
    Label of the button to close the module long-press menu
    Label of the button to close the show long-press menu
    Title of a cancel button
-   Title of the cancel button in the alert view when deleting a download in the player view */
+   Title of the cancel button in the alert view when deleting a download in the player view
+   Title of the cancel button in the alert view when logout */
 "Cancel" = "Annuler";
 
 /* Information message of the action view to choose a regional radio
@@ -124,7 +131,8 @@
    Title of the delete button in the alert view when deleting a download in the player view */
 "Delete" = "Supprimer";
 
-/* Title of the confirmation pop-up displayed when the user is about to clear the history */
+/* Delete history button title
+   Title of the confirmation pop-up displayed when the user is about to clear the history */
 "Delete history" = "Supprimer l'historique";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete selected history entries */
@@ -138,12 +146,6 @@
 
 /* User activity title when displaying a show page */
 "Display %@ episodes" = "Afficher les épisodes pour %@";
-
-/* No comment provided by engineer. */
-"Do you want to send an anonymous crash report so we can fix the issue?" = "Souhaitez-vous envoyer un rapport d'erreur afin que nous puissions corriger ce problème?";
-
-/* No comment provided by engineer. */
-"Don't send" = "Ne pas envoyer";
 
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Téléchargeable";
@@ -172,13 +174,11 @@
 /* Short label identifying content which has expired. */
 "Expired" = "Expiré";
 
-/* Show favorite button label */
-"Favorite" = "Favori";
-
-/* Favorite show label when added ,in the show view
+/* Label displayed in the show view when a show has been favorited
    Label to present Favorites
    Title label used to present the radio favorite shows
-   Title label used to present the TV favorite shows */
+   Title label used to present the TV favorite shows
+   Title label used to present the TV or radio favorite shows */
 "Favorites" = "Favoris";
 
 /* Title displayed at the top of the features list */
@@ -194,12 +194,15 @@
 /* Total free space size, display at the bottom of download list */
 "Free space: %@" = "Capacité disponible : %@";
 
+/* Full screen shortcut label */
+"Full screen" = "Plein écran";
+
 /* Title label used to present TV event modules while loading. It appears if no network connection is available and no cache is available
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
 "Highlights" = "Mises en avant";
 
-/* Label to present history
-   Profile tab title */
+/* History tab title
+   Label to present history */
 "History" = "Historique";
 
 /* Home tab title */
@@ -223,6 +226,9 @@
 /* Label for the button for deciding to opt-in for background video playback at a later time
    Watch or listen later button label in media detail view */
 "Later" = "Plus tard";
+
+/* Title label used to present the latest episodes from TV favorite shows */
+"Latest episodes from your favorites" = "Derniers épisodes de vos favoris";
 
 /* Title label used to present the latest videos
    Title label used to present the radio latest videos */
@@ -254,8 +260,15 @@
 /* Setting footer message for system permission group. New rule for iOS 14 and more. */
 "Local network access must be allowed for Google Cast receiver discovery." = "L'accès au réseau local doit être autorisé pour pouvoir découvrir un récepteur Google Cast.";
 
-/* Text displayed within the login / sign up profile header when no user is displayed */
+/* Login button on Apple TV */
+"Login" = "Connexion";
+
+/* Text displayed within the login / sign up profile header when no user is logged in */
 "Login / Sign up" = "Connexion / Inscription";
+
+/* Logout alert view title on Apple TV
+   Logout button on Apple TV */
+"Logout" = "Déconnexion";
 
 /* Message title displayed when the user is forced to update the application. */
 "Mandatory update" = "Mise à jour obligatoire";
@@ -290,6 +303,9 @@
 
 /* Song list title */
 "Music" = "Musique";
+
+/* Title label to present musical Swiss satellite radios */
+"Music radios" = "Radios musicales";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mon compte";
@@ -326,6 +342,9 @@
 
 /* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
 "Not available since %@" = "Plus disponible depuis %@";
+
+/* Text displayed when no user is logged in */
+"Not logged in" = "Non connecté";
 
 /* Label to present the help page */
 "Notifications" = "Notifications";
@@ -364,13 +383,19 @@
 /* Settings section header */
 "Period" = "Période";
 
+/* Play / Pause shortcut label */
+"Play / Pause" = "Lecture / Pause";
+
+/* Play / Stop shortcut label */
+"Play / Stop" = "Lecture / Stop";
+
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Jouable à l'étranger";
 
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Précédent";
 
-/* Profile tab title
+/* Settings section header
    Title displayed at the top of the profile view */
 "Profile" = "Profil";
 
@@ -404,7 +429,8 @@
 /* Title of the confirmation pop-up displayed when the user is about to delete all download items */
 "Remove all downloads" = "Supprimer tous les téléchargements";
 
-/* Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
+/* Remove all favorites button title
+   Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
 "Remove all favorites" = "Supprimer les favoris";
 
 /* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list */
@@ -449,9 +475,6 @@
    Title displayed when there is no search criterium entered */
 "Search" = "Recherche";
 
-/* No comment provided by engineer. */
-"Send" = "Envoyer";
-
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Serveur réglé sur '%@'";
 
@@ -477,10 +500,10 @@
    Show search result header
    Shows search setting option
    Shows search setting option list view title
+   Shows tab title
    Title label used to present radio associated shows
    Title label used to present the radio shows AZ and radio shows by date access buttons
-   Title label used to present the TV shows AZ and TV shows by date access buttons
-   Shows tab title */
+   Title label used to present the TV shows AZ and TV shows by date access buttons */
 "Shows" = "Émissions";
 
 /* Label to present shows A to Z (radio or TV) */
@@ -504,6 +527,9 @@
 /* Subtitles short label on media cells */
 "ST" = "ST";
 
+/* Start over shortcut label */
+"Start over" = "Reprendre au début";
+
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Disponible %@";
 
@@ -518,9 +544,6 @@
 
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Sous-titré";
-
-/* No comment provided by engineer. */
-"The application unexpectedly quit" = "L'application a été quittée de manière inopinée";
 
 /* Button label to share the content being played. */
 "The content" = "Le contenu";
@@ -570,9 +593,6 @@
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "L'émission ne peut pas être ouverte.";
 
-/* Title label to present Swiss satellite radios */
-"Thematic radios" = "Radios thématiques";
-
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Ce contenu n'a pas le droit d'être lu par Google Cast.";
 
@@ -604,7 +624,8 @@
 /* Title label to present main TV livestreams */
 "TV channels" = "Chaînes TV";
 
-/* Message displayed when there is no search criterium entered */
+/* Default text displayed when no search criterium has been entered
+   Message displayed when there is no search criterium entered */
 "Type to start searching" = "Saisissez un critère pour commencer la recherche";
 
 /* Title of the button to update the application */

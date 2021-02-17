@@ -87,16 +87,6 @@
 		0821D540227F5ED300FC091F /* DeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeepLinkService.m */; };
 		0821D541227F5ED300FC091F /* DeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeepLinkService.m */; };
 		0821D542227F5ED300FC091F /* DeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeepLinkService.m */; };
-		082590F01F054A6A00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
-		082590F11F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */; };
-		082590F21F054ACD00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
-		082590F31F054ACD00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */; };
-		082590F41F054ACE00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
-		082590F51F054ACE00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */; };
-		082590F61F054ACE00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
-		082590F71F054ACE00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */; };
-		082590F81F054ACF00BB527C /* HomeMediaCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */; };
-		082590F91F054ACF00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */; };
 		0827DA1E1F0D36D900A31A42 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
 		0827DA1F1F0D36E200A31A42 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
 		0827DA201F0D36E200A31A42 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
@@ -302,6 +292,11 @@
 		08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690381D38E0BE00BB8AAA /* Localizable.strings */; };
 		08777DB924EC39B7006F2EC7 /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA13E1EE034EF00BEC4DA /* Accessibility.strings */; };
 		08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690741D38E3E600BB8AAA /* Localizable.strings */; };
+		087B5F48257C5028002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F49257C5029002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F4A257C502A002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F4B257C502B002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
+		087B5F4C257C502C002F58AF /* Favorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 086F8D4D22984B29001BE2F4 /* Favorites.m */; };
 		087BC6631EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
 		087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */; };
@@ -457,6 +452,21 @@
 		08E6136825843C8200C5FE4B /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
 		08E6136925843C8200C5FE4B /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
 		08E6136A25843C8300C5FE4B /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
+		08EA3E78259D2AD6008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E77259D2AD6008D412F /* SRGIdentity */; };
+		08EA3E7C259D2AE8008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7B259D2AE8008D412F /* SRGIdentity */; };
+		08EA3E7E259D2AEF008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7D259D2AEF008D412F /* SRGIdentity */; };
+		08EA3E80259D2AF7008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7F259D2AF7008D412F /* SRGIdentity */; };
+		08EA3E82259D2B1B008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E81259D2B1B008D412F /* SRGIdentity */; };
+		08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */; };
+		08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */; };
+		08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */; };
+		08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */; };
+		08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */; };
+		08EA3EB7259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
+		08EA3EB8259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
+		08EA3EB9259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
+		08EA3EBA259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
+		08EA3EBB259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
 		08FD789D253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
 		08FD789E253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
 		08FD789F253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
@@ -648,9 +658,13 @@
 		6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
+		6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */; };
+		6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */; };
+		6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */; };
+		6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */; };
+		6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBB325DD2703007DA242 /* AppCenterCrashes */; };
 		6F331CE724D06B8200C096AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F331CE924D06B8200C096AB /* AudiosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE824D06B8200C096AB /* AudiosView.swift */; };
-		6F331CEB24D06B8400C096AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
 		6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F331D5A24D0766500C096AB /* VideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D5924D0766500C096AB /* VideosView.swift */; };
 		6F331D5B24D0766500C096AB /* VideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D5924D0766500C096AB /* VideosView.swift */; };
@@ -662,16 +676,6 @@
 		6F331D6224D0769A00C096AB /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D5F24D0769A00C096AB /* LiveView.swift */; };
 		6F331D6324D0769A00C096AB /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D5F24D0769A00C096AB /* LiveView.swift */; };
 		6F331D6424D0769A00C096AB /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D5F24D0769A00C096AB /* LiveView.swift */; };
-		6F331D6624D076C800C096AB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6524D076C800C096AB /* SearchView.swift */; };
-		6F331D6724D076C800C096AB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6524D076C800C096AB /* SearchView.swift */; };
-		6F331D6824D076C800C096AB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6524D076C800C096AB /* SearchView.swift */; };
-		6F331D6924D076C800C096AB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6524D076C800C096AB /* SearchView.swift */; };
-		6F331D6A24D076C800C096AB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6524D076C800C096AB /* SearchView.swift */; };
-		6F331D6C24D076D500C096AB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6B24D076D500C096AB /* ProfileView.swift */; };
-		6F331D6D24D076D500C096AB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6B24D076D500C096AB /* ProfileView.swift */; };
-		6F331D6E24D076D500C096AB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6B24D076D500C096AB /* ProfileView.swift */; };
-		6F331D6F24D076D500C096AB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6B24D076D500C096AB /* ProfileView.swift */; };
-		6F331D7024D076D500C096AB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331D6B24D076D500C096AB /* ProfileView.swift */; };
 		6F340F52220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F340F53220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F340F54220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
@@ -920,10 +924,7 @@
 		6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
-		6F4FCB0D24D07054002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
-		6F4FCB0E24D07054002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
-		6F4FCB0F24D07055002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
-		6F4FCB1024D07055002675EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CEA24D06B8400C096AB /* Assets.xcassets */; };
+		6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */; };
 		6F556B381DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
@@ -1164,6 +1165,21 @@
 		6F9D2745203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
 		6F9D2746203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
 		6F9D2747203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
+		6F9DDCCB25B1A07E001D5688 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */; };
+		6F9DDCCC25B1A07E001D5688 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */; };
+		6F9DDCCD25B1A07E001D5688 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */; };
+		6F9DDCCE25B1A07E001D5688 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */; };
+		6F9DDCCF25B1A07E001D5688 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */; };
+		6F9DDCF925B1ABB7001D5688 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */; };
+		6F9DDCFA25B1ABB7001D5688 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */; };
+		6F9DDCFB25B1ABB7001D5688 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */; };
+		6F9DDCFC25B1ABB7001D5688 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */; };
+		6F9DDCFD25B1ABB7001D5688 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */; };
+		6F9DDD2725B1ABD2001D5688 /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */; };
+		6F9DDD2825B1ABD2001D5688 /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */; };
+		6F9DDD2925B1ABD2001D5688 /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */; };
+		6F9DDD2A25B1ABD2001D5688 /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */; };
+		6F9DDD2B25B1ABD2001D5688 /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */; };
 		6FA14535254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
 		6FA14536254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
 		6FA14537254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
@@ -1364,6 +1380,25 @@
 		6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A7325221C4300E621EF /* PaperOnboarding */; };
 		6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A7525221C4900E621EF /* PaperOnboarding */; };
 		6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A8B25221C4F00E621EF /* PaperOnboarding */; };
+		6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C2D25DAB63D00874EAF /* FirebaseRemoteConfig */; };
+		6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4325DAB64700874EAF /* FirebaseRemoteConfig */; };
+		6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4525DAB65100874EAF /* FirebaseRemoteConfig */; };
+		6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4725DAB65900874EAF /* FirebaseRemoteConfig */; };
+		6FD46C7225DAB66000874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */; };
+		6FD46C8825DAB66600874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */; };
+		6FD46C8A25DAB66D00874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */; };
+		6FD46CA025DAB67400874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */; };
+		6FD46CA225DAB67A00874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */; };
+		6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CB825DAB76D00874EAF /* AppCenterCrashes */; };
+		6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */; };
+		6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */; };
+		6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */; };
+		6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CE825DAB7C300874EAF /* AppCenterCrashes */; };
+		6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */; };
+		6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D0025DAB80300874EAF /* AppCenterCrashes */; };
+		6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D0225DAB80300874EAF /* AppCenterDistribute */; };
+		6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D1825DAB80C00874EAF /* AppCenterCrashes */; };
+		6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */; };
 		6FD633DE1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633DC1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m */; };
 		6FD633DF1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633DC1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m */; };
 		6FD633E01FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD633DC1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m */; };
@@ -1494,11 +1529,6 @@
 		6FE4F0CE257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0CF257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0D0257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
-		6FE4F0F9257A371200223F22 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
-		6FE4F10E257A371300223F22 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
-		6FE4F10F257A371400223F22 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
-		6FE4F124257A371500223F22 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
-		6FE4F125257A371500223F22 /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
 		6FE4F13A257A372800223F22 /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6FE4F13B257A372800223F22 /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6FE4F13C257A372800223F22 /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
@@ -1873,9 +1903,6 @@
 		08209307208F522A00711DE4 /* PushService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushService.m; sourceTree = "<group>"; };
 		0821D53C227F5ED300FC091F /* DeepLinkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeepLinkService.h; sourceTree = "<group>"; };
 		0821D53D227F5ED300FC091F /* DeepLinkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeepLinkService.m; sourceTree = "<group>"; };
-		082590ED1F054A6A00BB527C /* HomeMediaCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediaCollectionHeaderView.h; sourceTree = "<group>"; };
-		082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediaCollectionHeaderView.m; sourceTree = "<group>"; };
-		082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeMediaCollectionHeaderView.xib; sourceTree = "<group>"; };
 		0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+PlaySRG.m"; sourceTree = "<group>"; };
 		0827DA231F0D437400A31A42 /* SRGMedia+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGMedia+PlaySRG.h"; sourceTree = "<group>"; };
 		0827DA241F0D437400A31A42 /* SRGMedia+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGMedia+PlaySRG.m"; sourceTree = "<group>"; };
@@ -2037,6 +2064,8 @@
 		08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08EA3EB6259E33C9008D412F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		08FCE82525BA11C00031C512 /* TV-Application.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TV-Application.entitlements"; sourceTree = "<group>"; };
 		08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
 		096E5AC5C979FBF1F072A888 /* Pods-Play SRG-iOS-Play RSI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; sourceTree = "<group>"; };
 		0A4B38B692D4F377D70590D1 /* Pods-Play SRG-iOS-Play SWI.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; sourceTree = "<group>"; };
@@ -2134,7 +2163,6 @@
 		6F331CE424D06B8200C096AB /* Play SRF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play SRF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F331CE624D06B8200C096AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F331CE824D06B8200C096AB /* AudiosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudiosView.swift; sourceTree = "<group>"; };
-		6F331CEA24D06B8400C096AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F331CED24D06B8400C096AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6F331CF224D06B8400C096AB /* TV-Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TV-Application-Info.plist"; sourceTree = "<group>"; };
 		6F331CFC24D06BA200C096AB /* Play RTS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play RTS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2143,8 +2171,6 @@
 		6F331D4424D06C2600C096AB /* Play SWI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play SWI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F331D5924D0766500C096AB /* VideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosView.swift; sourceTree = "<group>"; };
 		6F331D5F24D0769A00C096AB /* LiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
-		6F331D6524D076C800C096AB /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		6F331D6B24D076D500C096AB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		6F340F50220DA99B00778CA3 /* History.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		6F340F51220DA99B00778CA3 /* History.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		6F355AA224E65CB400F1500E /* HeroMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroMediaCell.swift; sourceTree = "<group>"; };
@@ -2320,6 +2346,9 @@
 		6F9897CC2412582400B390A2 /* Layout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Layout.m; sourceTree = "<group>"; };
 		6F9D2741203AD99C00FDE899 /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
 		6F9D2742203AD99C00FDE899 /* Playlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Playlist.m; sourceTree = "<group>"; };
+		6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
+		6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsModel.swift; sourceTree = "<group>"; };
 		6FA14534254729DA006E8D3B /* FocusableRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableRegion.swift; sourceTree = "<group>"; };
 		6FA5D15B1F2077B10059E4E2 /* NSString+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PlaySRG.h"; sourceTree = "<group>"; };
 		6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PlaySRG.m"; sourceTree = "<group>"; };
@@ -2538,10 +2567,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */,
+				6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */,
 				6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */,
 				084F0968254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
+				6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
 				6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */,
@@ -2553,10 +2585,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */,
 				6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */,
 				084F0969254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
+				6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
@@ -2568,10 +2603,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */,
 				6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */,
 				084F096A254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
+				6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
 				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
@@ -2583,10 +2621,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */,
 				6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */,
 				084F096B254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
+				6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
 				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
@@ -2598,10 +2639,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096225221A3500E621EF /* AirshipCore in Frameworks */,
 				6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */,
 				084F096C254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
+				6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
 				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
@@ -2654,12 +2698,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				08209A0B25780AAA0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E78259D2AD6008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC3256E41EE00E42E31 /* SRGUserData in Frameworks */,
 				6FA84A1A24E44B6400B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AA724E590EE00FF286E /* FetchImage in Frameworks */,
 				8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */,
 				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
+				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */,
+				6FD46C7225DAB66000874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2668,12 +2716,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				082099F525780A7F0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E82259D2B1B008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC5256E41F500E42E31 /* SRGUserData in Frameworks */,
 				6FA84A1E24E44B6D00B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAB24E590F400FF286E /* FetchImage in Frameworks */,
 				2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */,
 				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
+				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */,
+				6FD46C8825DAB66600874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2682,12 +2734,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				08209A0D25780ABE0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E7C259D2AE8008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC7256E41FB00E42E31 /* SRGUserData in Frameworks */,
 				6FA84A2224E44B7500B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAF24E590FC00FF286E /* FetchImage in Frameworks */,
 				FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */,
 				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
+				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */,
+				6FD46C8A25DAB66D00874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2696,12 +2752,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				08209A0F25780AC50077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E7E259D2AEF008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC9256E420200E42E31 /* SRGUserData in Frameworks */,
 				6FA84A2624E44B7B00B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB324E5910400FF286E /* FetchImage in Frameworks */,
 				0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */,
 				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
+				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */,
+				6FD46CA025DAB67400874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2710,12 +2770,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				08209A1125780ACB0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E80259D2AF7008D412F /* SRGIdentity in Frameworks */,
 				6F61CCCB256E420800E42E31 /* SRGUserData in Frameworks */,
 				6FA84A2A24E44B8300B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB724E5910B00FF286E /* FetchImage in Frameworks */,
 				4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */,
 				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
+				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */,
+				6FD46CA225DAB67A00874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3142,9 +3206,6 @@
 				0887824923AD61D500629312 /* HomeLiveMediaCollectionViewCell.xib */,
 				6FE9B54324B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.h */,
 				6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */,
-				082590ED1F054A6A00BB527C /* HomeMediaCollectionHeaderView.h */,
-				082590EE1F054A6A00BB527C /* HomeMediaCollectionHeaderView.m */,
-				082590EF1F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib */,
 				0837CEA61D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.h */,
 				0837CEA71D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.m */,
 				0837CEA81D3F7B5D00A1E089 /* HomeMediaCollectionViewCell.xib */,
@@ -3433,6 +3494,7 @@
 				6F4FCB1224D07077002675EF /* Resources */,
 				6F331CEC24D06B8400C096AB /* Preview Content */,
 				6F331CF224D06B8400C096AB /* TV-Application-Info.plist */,
+				08FCE82525BA11C00031C512 /* TV-Application.entitlements */,
 			);
 			path = "TV Application";
 			sourceTree = "<group>";
@@ -3620,11 +3682,13 @@
 				6F5E63A4250CB32E00056160 /* Modifiers.swift */,
 				0805703D2540E0FC00A59C9D /* Navigation.swift */,
 				6FC4140124EF11F400FDF806 /* Play-TV-ObjectiveC-Bridge.h */,
-				6F331D6B24D076D500C096AB /* ProfileView.swift */,
 				6F151E26256BF5CF009082F8 /* ProgressBar.swift */,
 				6FFCC5E324EFBF2100805B0F /* RadioChannel.swift */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
-				6F331D6524D076C800C096AB /* SearchView.swift */,
+				08EA3EB6259E33C9008D412F /* SettingsView.swift */,
+				6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */,
+				6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */,
+				6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */,
 				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
 				6F0E39CC25558A0F004C3A12 /* ShowDetailModel.swift */,
 				08742C5825481CC8006E2DCE /* ShowDetailView.swift */,
@@ -3647,7 +3711,6 @@
 				6FB053E524D42021004B0CE1 /* Play RTS */,
 				6FB053E824D42022004B0CE1 /* Play SRF */,
 				6FB053E724D42022004B0CE1 /* Play SWI */,
-				6F331CEA24D06B8400C096AB /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -4112,6 +4175,9 @@
 				6FD4095925221A1000E621EF /* AirshipCore */,
 				6FD40A4725221C2D00E621EF /* PaperOnboarding */,
 				081454BA2546CDD500BB7CA6 /* SwiftMessages */,
+				6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */,
+				6FD46CB825DAB76D00874EAF /* AppCenterCrashes */,
+				6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -4152,6 +4218,9 @@
 				6FD4095B25221A1A00E621EF /* AirshipCore */,
 				6FD40A5D25221C3A00E621EF /* PaperOnboarding */,
 				081455132546CE4300BB7CA6 /* SwiftMessages */,
+				6FD46C2D25DAB63D00874EAF /* FirebaseRemoteConfig */,
+				6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */,
+				6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -4192,6 +4261,9 @@
 				6FD4095D25221A2300E621EF /* AirshipCore */,
 				6FD40A7325221C4300E621EF /* PaperOnboarding */,
 				081455152546CE4F00BB7CA6 /* SwiftMessages */,
+				6FD46C4325DAB64700874EAF /* FirebaseRemoteConfig */,
+				6FD46CE825DAB7C300874EAF /* AppCenterCrashes */,
+				6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -4232,6 +4304,9 @@
 				6FD4095F25221A2B00E621EF /* AirshipCore */,
 				6FD40A7525221C4900E621EF /* PaperOnboarding */,
 				081455172546CE5700BB7CA6 /* SwiftMessages */,
+				6FD46C4525DAB65100874EAF /* FirebaseRemoteConfig */,
+				6FD46D0025DAB80300874EAF /* AppCenterCrashes */,
+				6FD46D0225DAB80300874EAF /* AppCenterDistribute */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -4272,6 +4347,9 @@
 				6FD4096125221A3500E621EF /* AirshipCore */,
 				6FD40A8B25221C4F00E621EF /* PaperOnboarding */,
 				081455192546CE5F00BB7CA6 /* SwiftMessages */,
+				6FD46C4725DAB65900874EAF /* FirebaseRemoteConfig */,
+				6FD46D1825DAB80C00874EAF /* AppCenterCrashes */,
+				6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -4398,6 +4476,10 @@
 				6FF12A47256C58A70042F446 /* SRGLoggerSwift */,
 				6F61CCC2256E41EE00E42E31 /* SRGUserData */,
 				08209A0A25780AAA0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E77259D2AD6008D412F /* SRGIdentity */,
+				08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */,
+				6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */,
+				6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */,
 			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
@@ -4429,6 +4511,10 @@
 				6FF12A5D256C58B20042F446 /* SRGLoggerSwift */,
 				6F61CCC4256E41F500E42E31 /* SRGUserData */,
 				082099F425780A7F0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E81259D2B1B008D412F /* SRGIdentity */,
+				08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */,
+				6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */,
+				6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */,
 			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
@@ -4460,6 +4546,10 @@
 				6FF12A73256C58BB0042F446 /* SRGLoggerSwift */,
 				6F61CCC6256E41FB00E42E31 /* SRGUserData */,
 				08209A0C25780ABE0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E7B259D2AE8008D412F /* SRGIdentity */,
+				08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */,
+				6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */,
+				6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */,
 			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
@@ -4491,6 +4581,10 @@
 				6FF12A75256C58C40042F446 /* SRGLoggerSwift */,
 				6F61CCC8256E420200E42E31 /* SRGUserData */,
 				08209A0E25780AC50077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E7D259D2AEF008D412F /* SRGIdentity */,
+				08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */,
+				6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */,
+				6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */,
 			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
@@ -4522,6 +4616,10 @@
 				6FF12A8B256C58CC0042F446 /* SRGLoggerSwift */,
 				6F61CCCA256E420800E42E31 /* SRGUserData */,
 				08209A1025780ACB0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E7F259D2AF7008D412F /* SRGIdentity */,
+				08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */,
+				6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */,
+				6F2DBBB325DD2703007DA242 /* AppCenterCrashes */,
 			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
@@ -4535,7 +4633,7 @@
 			attributes = {
 				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "SRG SSR";
 				TargetAttributes = {
 					08B77A442409C06000A3BC3B = {
@@ -4738,6 +4836,9 @@
 				6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */,
 				081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 				6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */,
+				08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */,
+				6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -4850,7 +4951,6 @@
 				6F12E4D522D866E600BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				086F8D5F22984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				08DD9D5A1FFE6EDB00115906 /* ModuleHeaderView.xib in Resources */,
-				082590F11F054A6A00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				E66BEC211DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F2961FC2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				0828BB3A22E62831009617A7 /* parsePlayUrl.js in Resources */,
@@ -4883,7 +4983,6 @@
 				E6DB5F2F1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				6F0A7F0620AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FE28774248168A100358CFF /* SongTableViewCell.xib in Resources */,
-				082590F31F054ACD00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				6FD88F7D22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F12E4D822D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
@@ -4967,7 +5066,6 @@
 				0837CEAE1D3FAEE200A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
 				086321112258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				6FB3C1AF1DBCE783008160B4 /* MediaPreviewViewController.storyboard in Resources */,
-				082590F51F054ACE00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				08754F40201BAFD700458F3A /* InfoPlist.strings in Resources */,
 				6F3A47AF1DD19A5B00C79E67 /* RSIResources.xcassets in Resources */,
 				6F12DB4D21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
@@ -5019,7 +5117,6 @@
 				084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				0804917922832C5D00E4CEC2 /* HomeShowCollectionViewCell.xib in Resources */,
 				6FF7BBB522A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
-				082590F71F054ACE00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				6F3B022A245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				0837CEB01D3FAEE200A1E089 /* HomeMediaCollectionViewCell.xib in Resources */,
 				6F12E4DC22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
@@ -5100,7 +5197,6 @@
 				6FD88F8022D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				E6E2DF301D6AD33400791EDE /* ShowHeaderView.xib in Resources */,
 				6F12DB4F21A3EFBF0054879D /* HistoryTableViewCell.xib in Resources */,
-				082590F91F054ACF00BB527C /* HomeMediaCollectionHeaderView.xib in Resources */,
 				08564B271D41112800381549 /* HomeSectionHeaderView.xib in Resources */,
 				6FD633E71FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
 				0828BB3E22E62831009617A7 /* parsePlayUrl.js in Resources */,
@@ -5144,7 +5240,6 @@
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
 				6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */,
 				6FFCC5EC24EFC1FA00805B0F /* ApplicationConfiguration.json in Resources */,
-				6F331CEB24D06B8400C096AB /* Assets.xcassets in Resources */,
 				08777DB724EC39AE006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5158,7 +5253,6 @@
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB224EC3340006F2EC7 /* Localizable.strings in Resources */,
 				6F4FCB0924D07040002675EF /* Preview Assets.xcassets in Resources */,
-				6F4FCB0D24D07054002675EF /* Assets.xcassets in Resources */,
 				6FFCC5EB24EFC1F700805B0F /* ApplicationConfiguration.json in Resources */,
 				6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */,
 				08777DB124EC3340006F2EC7 /* Accessibility.strings in Resources */,
@@ -5176,7 +5270,6 @@
 				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */,
 				6FFCC5E924EFC1F100805B0F /* ApplicationConfiguration.json in Resources */,
-				6F4FCB0E24D07054002675EF /* Assets.xcassets in Resources */,
 				08777DB324EC3997006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5189,7 +5282,6 @@
 				08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */,
-				6F4FCB0F24D07055002675EF /* Assets.xcassets in Resources */,
 				6FFCC5EA24EFC1F400805B0F /* ApplicationConfiguration.json in Resources */,
 				6F3F1AAF25027CA8000FF4DD /* RTRResources.xcassets in Resources */,
 				6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */,
@@ -5208,7 +5300,6 @@
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */,
 				6FFCC5ED24EFC1FD00805B0F /* ApplicationConfiguration.json in Resources */,
-				6F4FCB1024D07055002675EF /* Assets.xcassets in Resources */,
 				08777DB924EC39B7006F2EC7 /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6836,7 +6927,6 @@
 				08C68F941D38DEA100BB8AAA /* HomeViewController.m in Sources */,
 				6FDF08EB218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6FB3C1A81DBCE783008160B4 /* MediaPreviewViewController.m in Sources */,
-				082590F01F054A6A00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6FDF08D7218B126700B2AF2C /* Download.m in Sources */,
 				6F7C35B523708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				6F93DE1A20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
@@ -6975,7 +7065,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0859ADC722D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
-				082590F21F054ACD00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106A20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760801EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				0804917C22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */,
@@ -7156,7 +7245,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0859ADC822D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
-				082590F41F054ACE00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106B20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760871EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				0804917D22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */,
@@ -7337,7 +7425,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0859ADC922D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
-				082590F61F054ACE00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106C20443230009FE197 /* PlayApplication.m in Sources */,
 				6F47608E1EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				0804917E22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */,
@@ -7518,7 +7605,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0859ADCA22D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
-				082590F81F054ACF00BB527C /* HomeMediaCollectionHeaderView.m in Sources */,
 				6F80106D20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760951EB37DF2003021EA /* UIDevice+PlaySRG.m in Sources */,
 				0804917F22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */,
@@ -7758,9 +7844,9 @@
 				6FF1EA46256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED544252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FE4F0F9257A371200223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7425656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F153257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F48257C5028002F58AF /* Favorites.m in Sources */,
 				6FDB2ABA24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E424EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA324E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -7768,14 +7854,15 @@
 				6FFFB99D252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CC924F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413D124EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
+				08EA3EB7259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F9DDCF925B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B324E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80662508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F5A792A256EE61200E884F2 /* HistoryModel.swift in Sources */,
 				6FCC73BA24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
-				6F331D6624D076C800C096AB /* SearchView.swift in Sources */,
 				6FE4F13A257A372800223F22 /* PlayErrors.m in Sources */,
 				6F426B4225680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
 				6F331CE924D06B8200C096AB /* AudiosView.swift in Sources */,
@@ -7790,6 +7877,7 @@
 				6F85F7502567ED0D00AC8286 /* ChannelService.m in Sources */,
 				6F3D67E1256827DD0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FF12AA2256C58FE0042F446 /* Logger.swift in Sources */,
+				6F9DDCCB25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1632250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B142567FC6F00DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAA256E419F00E42E31 /* History.m in Sources */,
@@ -7807,7 +7895,6 @@
 				08E6135225843C7E00C5FE4B /* PlayApplication.m in Sources */,
 				6FF129DD256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				08742C5925481CC8006E2DCE /* ShowDetailView.swift in Sources */,
-				6F331D6C24D076D500C096AB /* ProfileView.swift in Sources */,
 				6F85F7822567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F81E2567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
 				6FDB2AC524E5923600FF286E /* MediaCell.swift in Sources */,
@@ -7816,6 +7903,7 @@
 				6FC413D024EEEDC900FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F156250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E55256BFCEB009082F8 /* Extensions.swift in Sources */,
+				6F9DDD2725B1ABD2001D5688 /* SearchResultsModel.swift in Sources */,
 				6F331D5A24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413D624EEEDC900FDF806 /* Channel.m in Sources */,
 				08FD789D253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
@@ -7840,9 +7928,9 @@
 				6FF1EA47256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED545252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FE4F10E257A371300223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7525656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F154257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F49257C5029002F58AF /* Favorites.m in Sources */,
 				6FDB2ABB24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E524EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA424E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -7850,14 +7938,15 @@
 				6FFFB99E252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCA24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413D924EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
+				08EA3EB8259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F9DDCFA25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B424E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80672508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F5A792B256EE61200E884F2 /* HistoryModel.swift in Sources */,
 				6FCC73BB24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
-				6F331D6724D076C800C096AB /* SearchView.swift in Sources */,
 				6FE4F13B257A372800223F22 /* PlayErrors.m in Sources */,
 				6F426B4325680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
 				6F4FCAF824D06FF7002675EF /* AudiosView.swift in Sources */,
@@ -7872,6 +7961,7 @@
 				6F85F7652567ED0E00AC8286 /* ChannelService.m in Sources */,
 				6F3D67F6256827DE0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FF12AA3256C58FE0042F446 /* Logger.swift in Sources */,
+				6F9DDCCC25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1633250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B292567FC7000DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAB256E419F00E42E31 /* History.m in Sources */,
@@ -7889,7 +7979,6 @@
 				08E6136725843C8100C5FE4B /* PlayApplication.m in Sources */,
 				6FF129F2256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				08742C5A25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
-				6F331D6D24D076D500C096AB /* ProfileView.swift in Sources */,
 				6F85F7972567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F81F2567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
 				6FDB2AC624E5923600FF286E /* MediaCell.swift in Sources */,
@@ -7898,6 +7987,7 @@
 				6FC413D824EEEDC900FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F157250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E56256BFCEB009082F8 /* Extensions.swift in Sources */,
+				6F9DDD2825B1ABD2001D5688 /* SearchResultsModel.swift in Sources */,
 				6F331D5B24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413DE24EEEDC900FDF806 /* Channel.m in Sources */,
 				08FD789E253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
@@ -7922,9 +8012,9 @@
 				6FF1EA48256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				080570402540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED546252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FE4F10F257A371400223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7625656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F155257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F4A257C502A002F58AF /* Favorites.m in Sources */,
 				6FDB2ABC24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E624EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA524E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -7932,14 +8022,15 @@
 				6FFFB99F252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCB24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413E124EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
+				08EA3EB9259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F9DDCFB25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B524E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80682508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F5A792C256EE61200E884F2 /* HistoryModel.swift in Sources */,
 				6FCC73BC24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
-				6F331D6824D076C800C096AB /* SearchView.swift in Sources */,
 				6FE4F13C257A372800223F22 /* PlayErrors.m in Sources */,
 				6F426B4425680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
 				6F4FCAFA24D06FF7002675EF /* AudiosView.swift in Sources */,
@@ -7954,6 +8045,7 @@
 				6F85F7662567ED0F00AC8286 /* ChannelService.m in Sources */,
 				6F3D67F7256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FF12AA4256C58FE0042F446 /* Logger.swift in Sources */,
+				6F9DDCCD25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1634250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B2A2567FC7100DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAC256E41A000E42E31 /* History.m in Sources */,
@@ -7971,7 +8063,6 @@
 				08E6136825843C8200C5FE4B /* PlayApplication.m in Sources */,
 				6FF129F3256C0D380042F446 /* PlayDurationFormatter.m in Sources */,
 				08742C5B25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
-				6F331D6E24D076D500C096AB /* ProfileView.swift in Sources */,
 				6F85F7AC2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8202567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
 				6FDB2AC724E5923600FF286E /* MediaCell.swift in Sources */,
@@ -7980,6 +8071,7 @@
 				6FC413E024EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F158250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E57256BFCEB009082F8 /* Extensions.swift in Sources */,
+				6F9DDD2925B1ABD2001D5688 /* SearchResultsModel.swift in Sources */,
 				6F331D5C24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413E624EEEDCA00FDF806 /* Channel.m in Sources */,
 				08FD789F253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
@@ -8004,9 +8096,9 @@
 				6FF1EA49256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				080570412540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED547252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FE4F124257A371500223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7725656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F156257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F4B257C502B002F58AF /* Favorites.m in Sources */,
 				6FDB2ABD24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E724EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA624E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -8014,14 +8106,15 @@
 				6FFFB9A0252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCC24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413E924EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
+				08EA3EBA259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F9DDCFC25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B624E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80692508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F5A792D256EE61200E884F2 /* HistoryModel.swift in Sources */,
 				6FCC73BD24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E2A256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
-				6F331D6924D076C800C096AB /* SearchView.swift in Sources */,
 				6FE4F13D257A372900223F22 /* PlayErrors.m in Sources */,
 				6F426B4525680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
 				6F4FCAFC24D06FF7002675EF /* AudiosView.swift in Sources */,
@@ -8036,6 +8129,7 @@
 				6F85F7672567ED0F00AC8286 /* ChannelService.m in Sources */,
 				6F3D680C256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FF12AA5256C58FE0042F446 /* Logger.swift in Sources */,
+				6F9DDCCE25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1635250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B2B2567FC7100DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAD256E41A000E42E31 /* History.m in Sources */,
@@ -8053,7 +8147,6 @@
 				08E6136925843C8200C5FE4B /* PlayApplication.m in Sources */,
 				6FF12A08256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				08742C5C25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
-				6F331D6F24D076D500C096AB /* ProfileView.swift in Sources */,
 				6F85F7AD2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8212567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
 				6FDB2AC824E5923600FF286E /* MediaCell.swift in Sources */,
@@ -8062,6 +8155,7 @@
 				6FC413E824EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F159250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E58256BFCEB009082F8 /* Extensions.swift in Sources */,
+				6F9DDD2A25B1ABD2001D5688 /* SearchResultsModel.swift in Sources */,
 				6F331D5D24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413EE24EEEDCA00FDF806 /* Channel.m in Sources */,
 				08FD78A0253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
@@ -8086,9 +8180,9 @@
 				6FF1EA4A256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				080570422540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED548252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FE4F125257A371500223F22 /* NSBundle+PlaySRG.m in Sources */,
 				6FF1EA7825656BE3005FFEEA /* TopicDetailView.swift in Sources */,
 				6FE4F157257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				087B5F4C257C502C002F58AF /* Favorites.m in Sources */,
 				6FDB2ABE24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E824EFBF2100805B0F /* RadioChannel.swift in Sources */,
 				6F355AA724E65CB400F1500E /* HeroMediaCell.swift in Sources */,
@@ -8096,14 +8190,15 @@
 				6FFFB9A1252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCD24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413F124EEEDCB00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
+				08EA3EBB259E33C9008D412F /* SettingsView.swift in Sources */,
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F9DDCFD25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B724E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F806A2508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6F5A792E256EE61200E884F2 /* HistoryModel.swift in Sources */,
 				6FCC73BE24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E2B256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFE24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
-				6F331D6A24D076C800C096AB /* SearchView.swift in Sources */,
 				6FE4F13E257A372900223F22 /* PlayErrors.m in Sources */,
 				6F426B4625680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
 				6F4FCAFE24D06FF8002675EF /* AudiosView.swift in Sources */,
@@ -8118,6 +8213,7 @@
 				6F85F7682567ED0F00AC8286 /* ChannelService.m in Sources */,
 				6F3D680D256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FF12AA6256C58FE0042F446 /* Logger.swift in Sources */,
+				6F9DDCCF25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B2C2567FC7200DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F5A7914256ED7E000E884F2 /* History.m in Sources */,
@@ -8135,7 +8231,6 @@
 				08E6136A25843C8300C5FE4B /* PlayApplication.m in Sources */,
 				6FF12A09256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				08742C5D25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
-				6F331D7024D076D500C096AB /* ProfileView.swift in Sources */,
 				6F85F7AE2567ED2300AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8222567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
 				6FDB2AC924E5923600FF286E /* MediaCell.swift in Sources */,
@@ -8144,6 +8239,7 @@
 				6FC413F024EEEDCB00FDF806 /* ApplicationSection.m in Sources */,
 				6FF8F15A250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E59256BFCEB009082F8 /* Extensions.swift in Sources */,
+				6F9DDD2B25B1ABD2001D5688 /* SearchResultsModel.swift in Sources */,
 				6F331D5E24D0766500C096AB /* VideosView.swift in Sources */,
 				6FC413F624EEEDCB00FDF806 /* Channel.m in Sources */,
 				08FD78A1253E0D3500EF302A /* Foundation+Extensions.swift in Sources */,
@@ -9080,6 +9176,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
@@ -9160,7 +9257,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9187,7 +9283,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JA876HZNN2;
@@ -9213,7 +9308,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9240,7 +9334,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8779C367VK;
@@ -9266,7 +9359,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9293,7 +9385,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Y7342J76KH;
@@ -9319,7 +9410,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9346,7 +9436,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
@@ -9372,7 +9461,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "play-mmf.herokuapp.com";
@@ -9398,7 +9486,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = R36WF3S37T;
 				DOMAIN = "*.swissinfo.ch";
@@ -9471,6 +9558,7 @@
 				MARKETING_VERSION_SUFFIX = "-beta";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
@@ -9489,7 +9577,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9516,7 +9603,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9543,7 +9629,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9570,7 +9655,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9597,7 +9681,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-swi.stage.srf.ch";
@@ -9670,6 +9753,7 @@
 				MARKETING_VERSION_SUFFIX = "-nightly";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = NIGHTLY;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
@@ -9688,7 +9772,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9717,7 +9800,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9746,7 +9828,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9775,7 +9856,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -9804,7 +9884,6 @@
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Application/Application.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-swi.test.srf.ch";
@@ -9830,7 +9909,6 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -9878,7 +9956,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -9939,7 +10016,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10000,7 +10076,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10038,7 +10113,6 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10086,7 +10160,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10147,7 +10220,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10208,7 +10280,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10246,7 +10317,6 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10294,7 +10364,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10355,7 +10424,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10416,7 +10484,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10454,7 +10521,6 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10502,7 +10568,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10563,7 +10628,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10624,7 +10688,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -10662,7 +10725,6 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -10709,7 +10771,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -10769,7 +10830,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -10829,7 +10889,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -10883,7 +10942,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -11119,7 +11177,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -11355,7 +11412,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -11591,7 +11647,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -11827,7 +11882,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -12283,6 +12337,14 @@
 				minimumVersion = 8.0.3;
 			};
 		};
+		08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.3;
+			};
+		};
 		6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
@@ -12304,7 +12366,15 @@
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 6.1.0;
+				minimumVersion = 7.0.0;
+			};
+		};
+		6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.6.0;
 			};
 		};
 		6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */ = {
@@ -12312,7 +12382,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 6.1.1;
+				minimumVersion = 6.2.0;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
@@ -12320,7 +12390,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.1.0;
+				minimumVersion = 10.0.0;
 			};
 		};
 		6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */ = {
@@ -12329,6 +12399,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 6.1.5;
+			};
+		};
+		6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
 			};
 		};
 		6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */ = {
@@ -12407,6 +12485,56 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsSwiftUI;
+		};
+		08EA3E77259D2AD6008D412F /* SRGIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
+			productName = SRGIdentity;
+		};
+		08EA3E7B259D2AE8008D412F /* SRGIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
+			productName = SRGIdentity;
+		};
+		08EA3E7D259D2AEF008D412F /* SRGIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
+			productName = SRGIdentity;
+		};
+		08EA3E7F259D2AF7008D412F /* SRGIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
+			productName = SRGIdentity;
+		};
+		08EA3E81259D2B1B008D412F /* SRGIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
+			productName = SRGIdentity;
+		};
+		08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsIdentity;
+		};
+		08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsIdentity;
+		};
+		08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsIdentity;
+		};
+		08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsIdentity;
+		};
+		08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsIdentity;
 		};
 		6F2544F42521BAA400F9F4FE /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -12533,6 +12661,36 @@
 			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
+		6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBB325DD2703007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
 		6F61CCC2256E41EE00E42E31 /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
@@ -12657,6 +12815,101 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */;
 			productName = PaperOnboarding;
+		};
+		6FD46C2D25DAB63D00874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C4325DAB64700874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C4525DAB65100874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C4725DAB65900874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		6FD46CB825DAB76D00874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46CE825DAB7C300874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46D0025DAB80300874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46D0225DAB80300874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46D1825DAB80C00874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
 		};
 		6FDB2AA624E590EE00FF286E /* FetchImage */ = {
 			isa = XCSwiftPackageProductDependency;

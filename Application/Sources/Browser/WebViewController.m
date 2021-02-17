@@ -157,7 +157,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (NSString *)srg_pageViewTitle
 {
-    return self.analyticsPageTitle;
+    return self.analyticsPageTitle ?: @"";
 }
 
 - (NSArray<NSString *> *)srg_pageViewLevels

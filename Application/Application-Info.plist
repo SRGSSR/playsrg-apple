@@ -105,6 +105,13 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
+			<key>akamaized.net</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
 			<key>rsi.ch</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>

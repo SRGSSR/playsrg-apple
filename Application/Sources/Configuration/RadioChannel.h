@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RadioChannel : Channel
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *)dictionary
-                        defaultHomeSections:(NSArray<NSNumber *> *)defaultHomeSections NS_DESIGNATED_INITIALIZER;
+                        defaultHomeSections:(nullable NSArray<NSNumber *> *)defaultHomeSections NS_DESIGNATED_INITIALIZER;
 
 /**
  *  The home sections ordered list.

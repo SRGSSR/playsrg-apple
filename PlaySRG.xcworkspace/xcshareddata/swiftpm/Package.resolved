@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "abseil",
+        "repositoryURL": "https://github.com/firebase/abseil-cpp-SwiftPM.git",
+        "state": {
+          "branch": null,
+          "revision": "05d8107f2971a37e6c77245b7c4c6b0a7e97bc99",
+          "version": "0.20200225.0"
+        }
+      },
+      {
         "package": "Aiolos",
         "repositoryURL": "https://github.com/IdeasOnCanvas/Aiolos.git",
         "state": {
@@ -11,12 +20,30 @@
         }
       },
       {
-        "package": "ComScore",
-        "repositoryURL": "https://github.com/SRGSSR/ComScore-xcframework-apple.git",
+        "package": "AppCenter",
+        "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
         "state": {
           "branch": null,
-          "revision": "b5dc5dc60435f363a744e17975957361c844aa38",
-          "version": "6.6.0"
+          "revision": "484dead179e6d7edd534d0d7defdf65c14a5b426",
+          "version": "4.1.0"
+        }
+      },
+      {
+        "package": "BoringSSL-GRPC",
+        "repositoryURL": "https://github.com/firebase/boringssl-SwiftPM.git",
+        "state": {
+          "branch": null,
+          "revision": "7bcafa2660bc58715c39637494550d1ed7cd7229",
+          "version": "0.0.7"
+        }
+      },
+      {
+        "package": "ComScore",
+        "repositoryURL": "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
+        "state": {
+          "branch": null,
+          "revision": "805ef197755a66e634fccb5d23d9068ca5c1f395",
+          "version": "6.7.0"
         }
       },
       {
@@ -24,8 +51,17 @@
         "repositoryURL": "https://github.com/kean/FetchImage.git",
         "state": {
           "branch": null,
-          "revision": "b9ea4f9f97a4bc9fde452cea277d25d0a4f8f6df",
-          "version": "0.2.1"
+          "revision": "3b68b12f25d6060ed102523ebff394c4f8e31cec",
+          "version": "0.3.0"
+        }
+      },
+      {
+        "package": "Firebase",
+        "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
+        "state": {
+          "branch": null,
+          "revision": "14dff7e19375288c7e34df8444c85d314f26d7cf",
+          "version": "7.6.0"
         }
       },
       {
@@ -38,12 +74,66 @@
         }
       },
       {
+        "package": "GoogleAppMeasurement",
+        "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
+        "state": {
+          "branch": null,
+          "revision": "38205d8e39f806f71b048f93427337c9511c9402",
+          "version": "7.5.1"
+        }
+      },
+      {
+        "package": "GoogleDataTransport",
+        "repositoryURL": "https://github.com/google/GoogleDataTransport.git",
+        "state": {
+          "branch": null,
+          "revision": "2e8a342494d20fcf209b61a45cddc1668b5ccc6d",
+          "version": "8.2.0"
+        }
+      },
+      {
+        "package": "GoogleUtilities",
+        "repositoryURL": "https://github.com/google/GoogleUtilities.git",
+        "state": {
+          "branch": null,
+          "revision": "2c7d33099a3c3da1139bb1e8eb94e46e0dacf075",
+          "version": "7.2.2"
+        }
+      },
+      {
+        "package": "gRPC",
+        "repositoryURL": "https://github.com/firebase/grpc-SwiftPM.git",
+        "state": {
+          "branch": null,
+          "revision": "91b62619e6c83bc5f1b99d9d60fe46b2862d3a5a",
+          "version": "1.28.2"
+        }
+      },
+      {
+        "package": "GTMSessionFetcher",
+        "repositoryURL": "https://github.com/google/gtm-session-fetcher.git",
+        "state": {
+          "branch": null,
+          "revision": "91ed3d188eb95705fef3c249453b81f32dc557d1",
+          "version": "1.5.0"
+        }
+      },
+      {
         "package": "Airship",
         "repositoryURL": "https://github.com/urbanairship/ios-library.git",
         "state": {
           "branch": null,
-          "revision": "47ea7ee2edb18c07bdffd883f9a4dbbfc8ee2c54",
-          "version": "14.2.0"
+          "revision": "bd0e009c54be941d85d52d8cd7b49b745a37dc78",
+          "version": "14.2.3"
+        }
+      },
+      {
+        "package": "leveldb",
+        "repositoryURL": "https://github.com/firebase/leveldb.git",
+        "state": {
+          "branch": null,
+          "revision": "fa1f25f296a766e5a789c4dacd4798dea798b2c2",
+          "version": "1.22.1"
         }
       },
       {
@@ -74,12 +164,21 @@
         }
       },
       {
+        "package": "nanopb",
+        "repositoryURL": "https://github.com/firebase/nanopb.git",
+        "state": {
+          "branch": null,
+          "revision": "c2d43e59d8ec880ed261366818f0cacc5c8cc2e6",
+          "version": "2.30907.0"
+        }
+      },
+      {
         "package": "Nuke",
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "8ef63f49528518bdb9ba1d2f65461e65f47c543b",
-          "version": "9.2.1"
+          "revision": "961597d324949c7003c77d602bfc4d5519b47e81",
+          "version": "9.2.4"
         }
       },
       {
@@ -92,12 +191,30 @@
         }
       },
       {
+        "package": "PLCrashReporter",
+        "repositoryURL": "https://github.com/microsoft/PLCrashReporter.git",
+        "state": {
+          "branch": null,
+          "revision": "de6b8f9db4b2a0aa859a5507550a70548e4da936",
+          "version": "1.8.1"
+        }
+      },
+      {
+        "package": "Promises",
+        "repositoryURL": "https://github.com/google/promises.git",
+        "state": {
+          "branch": null,
+          "revision": "afa9a1ace74e116848d4f743599ab83e584ff8cb",
+          "version": "1.2.12"
+        }
+      },
+      {
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": null,
-          "revision": "635e3b52b672e5965c4c489a14735deb165cb8a5",
-          "version": "6.1.1"
+          "revision": "8d2ccb6b835bb21504dcb7ee67358b8a4ed6ab63",
+          "version": "7.0.0"
         }
       },
       {
@@ -123,8 +240,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": null,
-          "revision": "520956426ce8fdbeaab5cd506748ec09cb6a054f",
-          "version": "9.1.1"
+          "revision": "6556ac22f611b1f4913264ebb20f513165b0f748",
+          "version": "10.0.0"
         }
       },
       {
@@ -141,8 +258,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
           "branch": null,
-          "revision": "6afd54a62d4ab7e3466ad26b020877571841f44d",
-          "version": "3.0.1"
+          "revision": "4b5db1151c7f15364665cbfbc28dfce5b60cfceb",
+          "version": "3.0.3"
         }
       },
       {
@@ -150,8 +267,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": null,
-          "revision": "b81d1d96007bd7d85337743ae5692570b39f92b3",
-          "version": "6.1.2"
+          "revision": "3a1db335d17aab7404586e6be37ce0e22d1879ee",
+          "version": "6.2.0"
         }
       },
       {
@@ -168,8 +285,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
           "branch": null,
-          "revision": "86d55f920da032ff89c1998c4a488aec3936b2a4",
-          "version": "6.1.1"
+          "revision": "7ba6b8f78205ec9186d67aa9d1c40e376ffd4909",
+          "version": "6.1.2"
         }
       },
       {
@@ -195,8 +312,8 @@
         "repositoryURL": "https://github.com/SwiftKickMobile/SwiftMessages.git",
         "state": {
           "branch": null,
-          "revision": "f7297cc4e9acfaf6710cada80a396d58ff8de5b3",
-          "version": "8.0.4"
+          "revision": "243fa7596818e3a96a7f0563453b3f35a674a5fb",
+          "version": "8.0.5"
         }
       },
       {

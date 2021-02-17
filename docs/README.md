@@ -75,6 +75,16 @@ If you are part of the SRG SSR organization be sure to setup the project first:
 make setup
 ```
 
+### Open source builds
+
+If you are not part of the SRG SSR organization you can still build the project. Setup the project first:
+
+```
+make public.setup
+```
+
+This setup does not contain private configuration information we use for publishing the applications, but otherwise works the same.
+
 ### Running the project
 
 Dependencies must retrieve and built first:
