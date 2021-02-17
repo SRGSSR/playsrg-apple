@@ -76,7 +76,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic, readonly) NSArray<TVChannel *> *tvChannels;
-@property (nonatomic, readonly) NSArray<RadioChannel *> *ssatrChannels;
+@property (nonatomic, readonly) NSArray<RadioChannel *> *satelliteRadioChannels;
 
 @property (nonatomic, readonly, getter=isRadioFeaturedHomeSectionHeaderHidden) BOOL radioFeaturedHomeSectionHeaderHidden;
 

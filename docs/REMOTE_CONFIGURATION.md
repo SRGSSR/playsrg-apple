@@ -43,7 +43,7 @@ TV and radio channels are configured with corresponding JSON dictionaries:
 * `tvChannels` (optional, JSON): A JSON array of JSON dictionaries describing TV channel configuration. Available common keys are listed below.
 * `radioChannels` (optional, JSON): A JSON array of JSON dictionaries describing radio channel configuration. Available common keys are listed below, with the additional following specific keys:
     * `homeSections` (optional, string, multiple): The sections to be displayed on the channel homepage. Refer to _Audio homepage_ for available values. If omitted, the global `audioHomeSections` setting is used instead (in which case this value is required).
-* `ssatrChannels` (optional, JSON): A JSON array of JSON dictionaries describing Swiss satellite radio channel configuration. Available common keys are listed below.
+* `satelliteRadioChannels` (optional, JSON): A JSON array of JSON dictionaries describing Swiss satellite radio channel configuration. Available common keys are listed below.
 
 The keys common to both TV and radio channels JSON dictionaries are:
 
@@ -116,7 +116,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 
 * `tvLive`: TV livestreams.
 * `radioLive`: Radio livestreams.
-* `radioLiveSatellite`: Satellite radio livestreams.
+* `radioLiveSatellite`: Swiss Satellite radio livestreams.
 * `tvLiveCenter`: SwissTXT livestreams.
 * `tvScheduledLivestreams`: Scheduled livestreams.
 
