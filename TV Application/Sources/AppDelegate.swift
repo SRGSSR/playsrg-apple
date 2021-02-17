@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+import AppCenter
+import AppCenterCrashes
 import Firebase
 import SRGAnalyticsIdentity
 import SRGAppearance
@@ -95,6 +97,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    private func setupAppCenter() {
+        guard let appCenterSecret = Bundle.main.object(forInfoDictionaryKey: "AppCenterSecret") as? String, !appCenterSecret.isEmpty else { return }
+        AppCenter.start(withAppSecret: appCenterSecret, services: [Crashes.self])
+    }
+    
     // MARK: - UIApplicationDelegate protocol
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -107,6 +114,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil {
             FirebaseApp.configure()
         }
+        
+        #if !DEBUG
+        setupAppCenter()
+        #endif
         
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         

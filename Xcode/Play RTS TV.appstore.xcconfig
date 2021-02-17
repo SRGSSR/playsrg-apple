@@ -1,3 +1,4 @@
+#include "Xcode/Links/Play RTS TV.appstore.xcconfig"
 #include "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.appstore.xcconfig"
 #include "Xcode/Play tvOS Application.xcconfig"
 #include "Xcode/Play RTS.xcconfig"

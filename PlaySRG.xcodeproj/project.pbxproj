@@ -658,6 +658,11 @@
 		6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
+		6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */; };
+		6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */; };
+		6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */; };
+		6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */; };
+		6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBB325DD2703007DA242 /* AppCenterCrashes */; };
 		6F331CE724D06B8200C096AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F331CE924D06B8200C096AB /* AudiosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE824D06B8200C096AB /* AudiosView.swift */; };
 		6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
@@ -2701,6 +2706,7 @@
 				8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */,
 				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C7225DAB66000874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2718,6 +2724,7 @@
 				2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */,
 				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C8825DAB66600874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2735,6 +2742,7 @@
 				FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */,
 				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C8A25DAB66D00874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2752,6 +2760,7 @@
 				0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */,
 				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46CA025DAB67400874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2769,6 +2778,7 @@
 				4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */,
 				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46CA225DAB67A00874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4469,6 +4479,7 @@
 				08EA3E77259D2AD6008D412F /* SRGIdentity */,
 				08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */,
 				6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */,
+				6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */,
 			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
@@ -4503,6 +4514,7 @@
 				08EA3E81259D2B1B008D412F /* SRGIdentity */,
 				08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */,
 				6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */,
+				6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */,
 			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
@@ -4537,6 +4549,7 @@
 				08EA3E7B259D2AE8008D412F /* SRGIdentity */,
 				08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */,
 				6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */,
+				6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */,
 			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
@@ -4571,6 +4584,7 @@
 				08EA3E7D259D2AEF008D412F /* SRGIdentity */,
 				08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */,
 				6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */,
+				6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */,
 			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
@@ -4605,6 +4619,7 @@
 				08EA3E7F259D2AF7008D412F /* SRGIdentity */,
 				08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */,
 				6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */,
+				6F2DBBB325DD2703007DA242 /* AppCenterCrashes */,
 			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
@@ -12645,6 +12660,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
+		};
+		6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBB325DD2703007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
 		};
 		6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
