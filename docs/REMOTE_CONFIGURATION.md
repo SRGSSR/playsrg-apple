@@ -116,7 +116,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 
 * `tvLive`: TV livestreams.
 * `radioLive`: Radio livestreams.
-* `radioLiveSatellite`: Satellite radio livestreams.
+* `radioLiveSatellite`: Swiss Satellite radio livestreams.
 * `tvLiveCenter`: SwissTXT livestreams.
 * `tvScheduledLivestreams`: Scheduled livestreams.
 

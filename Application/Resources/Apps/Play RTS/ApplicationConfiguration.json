@@ -11,7 +11,7 @@
   "identityWebsiteURL": "https://www.rts.ch/profile",
   "userDataServiceURL": "https://profil.rts.ch/api",
   "videoHomeSections": "tvTrending,tvTopicsAccess,tvShowsAccess,tvFavoriteShows,tvFavoriteLatestEpisodes,tvWebFirst,tvEvents,tvTopics,tvSoonExpiring",
-  "liveHomeSections": "tvLive,radioLive,tvScheduledLivestreams",
+  "liveHomeSections": "tvLive,radioLive,radioLiveSatellite,tvScheduledLivestreams",
   "tvTrendingEpisodesOnly": false,
   "tvTrendingEditorialLimit": 3,
   "tvFeaturedHomeSectionHeaderHidden": true,
