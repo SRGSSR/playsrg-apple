@@ -99,25 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setupAppCenter() {
         guard let appCenterSecret = Bundle.main.object(forInfoDictionaryKey: "AppCenterSecret") as? String, !appCenterSecret.isEmpty else { return }
-        
         AppCenter.start(withAppSecret: appCenterSecret, services: [Crashes.self])
-        
-        Crashes.userConfirmationHandler = { _ in
-            let alertController = UIAlertController(title: NSLocalizedString("The application unexpectedly quit", comment: "Title of the dialog displayed after the application crashed"),
-                                                    message: NSLocalizedString("Do you want to send an anonymous crash report so we can fix the issue?", comment: "Message inviting the user to submit a crash report"),
-                                                    preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("Don't send", comment: "Title of the button to refuse sending crash reports"), style: .cancel, handler: { _ in
-                Crashes.notify(with: .dontSend)
-            }))
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("Send", comment: "Title of the button to accept sending crash reports"), style: .default, handler: { _ in
-                Crashes.notify(with: .send)
-            }))
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("Always send", comment: "Title of the button to always send crash reports"), style: .default, handler: { _ in
-                Crashes.notify(with: .always)
-            }))
-            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
-            return true
-        }
     }
     
     // MARK: - UIApplicationDelegate protocol
