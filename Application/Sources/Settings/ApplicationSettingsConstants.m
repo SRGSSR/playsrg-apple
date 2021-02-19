@@ -16,3 +16,14 @@ NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed = @"PlaySRG
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
 NSString * const PlaySRGSettingServiceURL = @"PlaySRGSettingServiceURL";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
+
+__attribute__((constructor)) static void ApplicationSettingsConstantsInit(void)
+{
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults registerDefaults:@{ PlaySRGSettingHDOverCellularEnabled : @YES,
+                                      PlaySRGSettingPresenterModeEnabled : @NO,
+                                      PlaySRGSettingStandaloneEnabled : @NO,
+                                      PlaySRGSettingAutoplayEnabled : @YES,
+                                      PlaySRGSettingBackgroundVideoPlaybackEnabled : @NO }];
+    [userDefaults synchronize];
+}
