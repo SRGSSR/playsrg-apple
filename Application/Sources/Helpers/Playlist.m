@@ -127,7 +127,7 @@ static Playlist *s_playlist;
 {
 #if TARGET_OS_TV
     if ([NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAutoplayEnabled]) {
-        return ApplicationConfiguration.sharedApplicationConfiguration.continuousPlaybackForegroundTransitionDuration;
+        return ApplicationConfiguration.sharedApplicationConfiguration.continuousPlaybackPlayerViewTransitionDuration;
     }
     else {
         return SRGLetterboxContinuousPlaybackDisabled;
