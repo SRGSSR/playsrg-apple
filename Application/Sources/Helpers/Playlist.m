@@ -22,6 +22,8 @@
 @import libextobjc;
 @import SRGDataProviderNetwork;
 
+static Playlist *s_playlist;
+
 @interface Playlist ()
 
 @property (nonatomic, copy) NSString *URN;
@@ -166,3 +168,9 @@
 }
 
 @end
+
+Playlist *PlaylistForURN(NSString *URN)
+{
+    s_playlist = URN ? [[Playlist alloc] initWithURN:URN] : nil;
+    return s_playlist;
+}
