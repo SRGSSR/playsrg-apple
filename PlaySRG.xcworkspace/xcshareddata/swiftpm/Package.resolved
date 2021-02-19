@@ -257,9 +257,9 @@
         "package": "SRGIdentity",
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
-          "branch": null,
-          "revision": "4b5db1151c7f15364665cbfbc28dfce5b60cfceb",
-          "version": "3.0.3"
+          "branch": "develop",
+          "revision": "2006d0f530b750f06d65ef86954598409e69c9dc",
+          "version": null
         }
       },
       {

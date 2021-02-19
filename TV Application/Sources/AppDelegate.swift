@@ -80,10 +80,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         #if DEBUG || NIGHTLY
-        let settingsViewController = UIHostingController(rootView: SettingsView())
-        settingsViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "settings-22")!.withRenderingMode(.alwaysTemplate), tag: 7)
-        settingsViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Settings", "Settings button label on home view")
-        viewControllers.append(settingsViewController)
+        let profileViewController = UIHostingController(rootView: ProfileView())
+        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile-34")!.withRenderingMode(.alwaysTemplate), tag: 7)
+        profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", "Profile button label on home view")
+        viewControllers.append(profileViewController)
         #endif
         
         if viewControllers.count > 1 {
