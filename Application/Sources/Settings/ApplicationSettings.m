@@ -52,17 +52,6 @@ NSValueTransformer *TabBarItemIdentifierTransformer(void)
     return s_transformer;
 }
 
-__attribute__((constructor)) static void ApplicationSettingsInit(void)
-{
-    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    [userDefaults registerDefaults:@{ PlaySRGSettingHDOverCellularEnabled : @YES,
-                                      PlaySRGSettingPresenterModeEnabled : @NO,
-                                      PlaySRGSettingStandaloneEnabled : @NO,
-                                      PlaySRGSettingAutoplayEnabled : @YES,
-                                      PlaySRGSettingBackgroundVideoPlaybackEnabled : @NO }];
-    [userDefaults synchronize];
-}
-
 BOOL ApplicationSettingPresenterModeEnabled(void)
 {
     return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingPresenterModeEnabled];
