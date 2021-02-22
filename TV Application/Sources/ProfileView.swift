@@ -32,7 +32,7 @@ struct ProfileView: View {
     private var loginButtonText: String {
         guard isLoggedIn else { return  NSLocalizedString("Login", comment: "Login button on Apple TV") }
         if let username = account?.displayName ?? SRGIdentityService.current?.emailAddress {
-            return String(format: NSLocalizedString("Logout (%@)", comment: "Logout button on Apple TV"), username)
+            return NSLocalizedString("Logout", comment: "Logout button on Apple TV").appending(" (\(username))")
         }
         else {
             return NSLocalizedString("Logout", comment: "Logout button on Apple TV")
