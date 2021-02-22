@@ -106,7 +106,7 @@ struct ProfileView: View {
         List {
             if let identityService = SRGIdentityService.current {
                 Section(header: Text(NSLocalizedString("Profile", comment: "Settings section header")).srgFont(.headline1),
-                        footer: Text(NSLocalizedString("Synchronize playback history, favorites and content to be watched later on all devices connected to your account.", comment: "Login benefits description footer"))) {
+                        footer: Text(NSLocalizedString("Synchronize playback history, favorites and content to be watched later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.overline).opacity(0.8)) {
                     Button(action: {
                         if isLoggedIn {
                             logoutAlertDisplayed = true
@@ -123,7 +123,7 @@ struct ProfileView: View {
                 }
             }
             Section(header: Text(NSLocalizedString("Playback", comment: "Playback settings section header")),
-                    footer: Text(NSLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Playback description footer"))) {
+                    footer: Text(NSLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Playback description footer")).srgFont(.overline).opacity(0.8)) {
                 Button(action: {
                     isAutoplayEnabled = !isAutoplayEnabled
                 }) {
