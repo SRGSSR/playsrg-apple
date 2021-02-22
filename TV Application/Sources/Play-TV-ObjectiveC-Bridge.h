@@ -9,6 +9,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSettingsConstants.h"
 #import "ChannelService.h"
 #import "Favorites.h"
 #import "History.h"

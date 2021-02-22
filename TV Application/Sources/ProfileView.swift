@@ -14,6 +14,8 @@ struct ProfileView: View {
     @State var hasHistoryEntries: Bool = false
     @State var hasFavorites: Bool = false
     
+    @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled: Bool = false
+    
     @State var logoutAlertDisplayed = false
     @State var favoritesRemovalAlertDisplayed = false
     @State var historyRemovalAlertDisplayed = false
@@ -105,7 +107,7 @@ struct ProfileView: View {
                     }
                     Button(action: {
                         if isLoggedIn {
-                            self.logoutAlertDisplayed = true
+                            logoutAlertDisplayed = true
                         }
                         else {
                             identityService.login(withEmailAddress: nil)
@@ -118,11 +120,27 @@ struct ProfileView: View {
                     .alert(isPresented: $logoutAlertDisplayed, content: logoutAlert)
                 }
             }
+            Section(header: Text(NSLocalizedString("Playback", comment: "Playback settings section header")),
+                    footer: Text(NSLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Playback description footer"))) {
+                Button(action: {
+                    isAutoplayEnabled = !isAutoplayEnabled
+                }) {
+                    HStack {
+                        Text(NSLocalizedString("Autoplay", comment: "Autoplay setting"))
+                            .srgFont(.button1)
+                        Spacer()
+                        Text(isAutoplayEnabled ? NSLocalizedString("Enabled", comment: "Enabled state label") : NSLocalizedString("Disabled", comment: "Disabled state label"))
+                            .srgFont(.button1)
+                            .foregroundColor(.gray)
+                    }
+                }
+                .padding()
+            }
             Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1),
                     footer: Text(Self.version).srgFont(.overline).opacity(0.8)) {
                 if hasHistoryEntries {
                     Button(action: {
-                        self.historyRemovalAlertDisplayed = true
+                        historyRemovalAlertDisplayed = true
                     }) {
                         Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
                             .srgFont(.button1)
@@ -137,7 +155,7 @@ struct ProfileView: View {
                 }
                 if hasFavorites {
                     Button(action: {
-                        self.favoritesRemovalAlertDisplayed = true
+                        favoritesRemovalAlertDisplayed = true
                     }) {
                         Text(NSLocalizedString("Remove all favorites", comment: "Remove all favorites button title"))
                             .srgFont(.button1)
