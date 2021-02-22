@@ -3,4 +3,4 @@
 #include "Xcode/Play tvOS Application.xcconfig"
 #include "Xcode/Play RSI.xcconfig"
 
-APP_IDENTIFIER_PREFIX = ch.srgssr
+PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.$(APP_PLAYER_IDENTIFIER)$(BUNDLE_IDENTIFIER_SUFFIX)
