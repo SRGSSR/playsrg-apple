@@ -13,6 +13,7 @@ struct ProfileView: View {
     @State var account: SRGAccount?
     @State var hasHistoryEntries: Bool = false
     @State var hasFavorites: Bool = false
+    @State var synchronizationDate: Date? = nil
     
     @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled: Bool = false
     
@@ -30,13 +31,18 @@ struct ProfileView: View {
     
     private var loginButtonText: String {
         guard isLoggedIn else { return  NSLocalizedString("Login", comment: "Login button on Apple TV") }
-        
         if let username = account?.displayName ?? SRGIdentityService.current?.emailAddress {
             return String(format: NSLocalizedString("Logout (%@)", comment: "Logout button on Apple TV"), username)
         }
         else {
             return NSLocalizedString("Logout", comment: "Logout button on Apple TV")
         }
+    }
+    
+    private var synchronizationMessage: String? {
+        guard isLoggedIn else { return nil }
+        let dateString = (synchronizationDate != nil) ? DateFormatter.play_relativeDateAndTime.string(from: synchronizationDate!) : NSLocalizedString("Never", comment: "Text displayed when no data synchronization has been made yet")
+        return String(format: NSLocalizedString("Last synchronization: %@", comment: "Introductory text for the most recent data synchronization date"), dateString)
     }
     
     private func refreshIdentityInformation() {
@@ -51,6 +57,10 @@ struct ProfileView: View {
     
     private func refreshFavoritesInformation() {
         hasFavorites = FavoritesShowURNs().count > 0
+    }
+    
+    private func refreshSynchronizationDate() {
+        synchronizationDate = SRGUserData.current?.user.synchronizationDate
     }
     
     private func logoutAlert() -> Alert {
@@ -139,7 +149,7 @@ struct ProfileView: View {
                 .padding()
             }
             Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1),
-                    footer: Text(Self.version).srgFont(.overline).opacity(0.8)) {
+                    footer: Text(synchronizationMessage ?? "").srgFont(.overline).opacity(0.8)) {
                 Button(action: {
                     if hasHistoryEntries {
                         historyRemovalAlertDisplayed = true
@@ -164,6 +174,19 @@ struct ProfileView: View {
                 .padding()
                 .alert(isPresented: $favoritesRemovalAlertDisplayed, content: favoritesRemovalAlert)
             }
+            Section(header: Text(NSLocalizedString("Information", comment: "Information section header")).srgFont(.headline1)) {
+                Button(action: {}) {
+                    HStack {
+                        Text(NSLocalizedString("Version", comment: "Version introductory label"))
+                            .srgFont(.button1)
+                        Spacer()
+                        Text(Self.version)
+                            .srgFont(.button1)
+                            .foregroundColor(.gray)
+                    }
+                }
+                .padding()
+            }
         }
         .listStyle(GroupedListStyle())
         .frame(maxWidth: 1054)
@@ -172,24 +195,28 @@ struct ProfileView: View {
             refreshIdentityInformation()
             refreshHistoryInformation()
             refreshFavoritesInformation()
+            refreshSynchronizationDate()
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)) { notification in
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)) { _ in
             refreshIdentityInformation()
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)) { notification in
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)) { _ in
             refreshIdentityInformation()
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceDidUpdateAccount, object: SRGIdentityService.current)) { notification in
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceDidUpdateAccount, object: SRGIdentityService.current)) { _ in
             refreshIdentityInformation()
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)) { notification in
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)) { _ in
             refreshIdentityInformation()
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)) { notification in
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)) { _ in
             refreshHistoryInformation()
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)) { notification in
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)) { _ in
             refreshFavoritesInformation()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGUserDataDidFinishSynchronization, object: SRGUserData.current)) { _ in
+            refreshSynchronizationDate()
         }
     }
 }
