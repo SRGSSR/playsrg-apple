@@ -342,7 +342,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgnetwork-apple</string>
 			<key>Title</key>
-			<string>SRGNetwork (3.0.1)</string>
+			<string>SRGNetwork (3.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

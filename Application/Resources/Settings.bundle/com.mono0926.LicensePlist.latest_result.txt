@@ -328,7 +328,7 @@ name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.1
 
 name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 6.1.2
 
-name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.1
+name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.2
 
 name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.0.1
 
