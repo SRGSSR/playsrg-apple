@@ -105,7 +105,8 @@ struct ProfileView: View {
     var body: some View {
         List {
             if let identityService = SRGIdentityService.current {
-                Section(header: Text(NSLocalizedString("Profile", comment: "Settings section header")).srgFont(.headline1)) {
+                Section(header: Text(NSLocalizedString("Profile", comment: "Settings section header")).srgFont(.headline1),
+                        footer: Text(NSLocalizedString("Synchronize playback history, favorites and content to be watched later on all devices connected to your account", comment: "Login benefits description footer"))) {
                     Button(action: {
                         if isLoggedIn {
                             logoutAlertDisplayed = true
