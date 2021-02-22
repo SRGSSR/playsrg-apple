@@ -28,6 +28,17 @@ struct ProfileView: View {
         return String(format: "%@%@%@ (%@)", appVersion, bundleNameSuffix.count > 0 ? " " + bundleNameSuffix : "", buildName.count > 0 ? " " + buildName : "", buildString)
     }()
     
+    private var loginButtonText: String {
+        guard isLoggedIn else { return  NSLocalizedString("Login", comment: "Login button on Apple TV") }
+        
+        if let username = account?.displayName ?? SRGIdentityService.current?.emailAddress {
+            return String(format: NSLocalizedString("Logout (%@)", comment: "Logout button on Apple TV"), username)
+        }
+        else {
+            return NSLocalizedString("Logout", comment: "Logout button on Apple TV")
+        }
+    }
+    
     private func refreshIdentityInformation() {
         isLoggedIn = SRGIdentityService.current?.isLoggedIn ?? false
         account = SRGIdentityService.current?.account
@@ -95,16 +106,6 @@ struct ProfileView: View {
         List {
             if let identityService = SRGIdentityService.current {
                 Section(header: Text(NSLocalizedString("Profile", comment: "Settings section header")).srgFont(.headline1)) {
-                    if isLoggedIn {
-                        Text(account?.displayName ?? identityService.emailAddress ?? NSLocalizedString("My account", comment: "Text displayed when a user is logged in but no information has been retrieved yet"))
-                            .srgFont(.button1)
-                            .padding()
-                    }
-                    else {
-                        Text(NSLocalizedString("Not logged in", comment: "Text displayed when no user is logged in"))
-                            .srgFont(.button1)
-                            .padding()
-                    }
                     Button(action: {
                         if isLoggedIn {
                             logoutAlertDisplayed = true
@@ -113,7 +114,7 @@ struct ProfileView: View {
                             identityService.login(withEmailAddress: nil)
                         }
                     }) {
-                        Text(isLoggedIn ? NSLocalizedString("Logout", comment: "Logout button on Apple TV") : NSLocalizedString("Login", comment: "Login button on Apple TV"))
+                        Text(loginButtonText)
                             .srgFont(.button1)
                     }
                     .padding()
@@ -138,36 +139,29 @@ struct ProfileView: View {
             }
             Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1),
                     footer: Text(Self.version).srgFont(.overline).opacity(0.8)) {
-                if hasHistoryEntries {
-                    Button(action: {
+                Button(action: {
+                    if hasHistoryEntries {
                         historyRemovalAlertDisplayed = true
-                    }) {
-                        Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
-                            .srgFont(.button1)
                     }
-                    .padding()
-                    .alert(isPresented: $historyRemovalAlertDisplayed, content: historyRemovalAlert)
-                }
-                else {
-                    Text(NSLocalizedString("No history", comment: "Text displayed when no history is available"))
+                }) {
+                    Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
                         .srgFont(.button1)
-                        .padding()
+                        .foregroundColor(hasHistoryEntries ? .primary : .gray)
                 }
-                if hasFavorites {
-                    Button(action: {
+                .padding()
+                .alert(isPresented: $historyRemovalAlertDisplayed, content: historyRemovalAlert)
+
+                Button(action: {
+                    if hasFavorites {
                         favoritesRemovalAlertDisplayed = true
-                    }) {
-                        Text(NSLocalizedString("Remove all favorites", comment: "Remove all favorites button title"))
-                            .srgFont(.button1)
                     }
-                    .padding()
-                    .alert(isPresented: $favoritesRemovalAlertDisplayed, content: favoritesRemovalAlert)
-                }
-                else {
-                    Text(NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available"))
+                }) {
+                    Text(NSLocalizedString("Remove all favorites", comment: "Remove all favorites button title"))
                         .srgFont(.button1)
-                        .padding()
+                        .foregroundColor(hasFavorites ? .primary : .gray)
                 }
+                .padding()
+                .alert(isPresented: $favoritesRemovalAlertDisplayed, content: favoritesRemovalAlert)
             }
         }
         .listStyle(GroupedListStyle())
