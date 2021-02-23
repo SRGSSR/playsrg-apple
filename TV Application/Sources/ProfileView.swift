@@ -105,7 +105,7 @@ struct ProfileView: View {
                     Spacer()
                     Text(isAutoplayEnabled ? NSLocalizedString("Enabled", comment: "Enabled state label") : NSLocalizedString("Disabled", comment: "Disabled state label"))
                         .srgFont(.button1)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                 }
             }
             .padding()
@@ -143,7 +143,7 @@ struct ProfileView: View {
             }) {
                 Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
                     .srgFont(.button1)
-                    .foregroundColor(model.hasHistoryEntries ? .primary : .gray)
+                    .foregroundColor(model.hasHistoryEntries ? .primary : .secondary)
             }
             .padding()
             .alert(isPresented: $alertDisplayed, content: alert)
@@ -181,7 +181,7 @@ struct ProfileView: View {
             }) {
                 Text(NSLocalizedString("Remove all favorites", comment: "Remove all favorites button title"))
                     .srgFont(.button1)
-                    .foregroundColor(model.hasFavorites ? .primary : .gray)
+                    .foregroundColor(model.hasFavorites ? .primary : .secondary)
             }
             .padding()
             .alert(isPresented: $alertDisplayed, content: alert)
@@ -199,7 +199,7 @@ struct ProfileView: View {
                     Spacer()
                     Text(model.version)
                         .srgFont(.button1)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                 }
             }
             .padding()
