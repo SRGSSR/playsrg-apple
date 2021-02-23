@@ -89,6 +89,8 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSAssert(NSClassFromString(@"ASIdentifierManager") == Nil, @"No implicit AdSupport.framework dependency must be found");
+    
     [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
     
     // Processes run once in the lifetime of the application
