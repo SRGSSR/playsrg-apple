@@ -175,6 +175,7 @@ extension HomeModel {
         case tvLatestForModule(_ module: SRGModule?, type: SRGModuleType)
         case tvLatestForTopic(_ topic: SRGTopic?)
         case tvTopicsAccess
+        case tvHistory
         
         case radioLatestEpisodes(channelUid: String)
         case radioMostPopular(channelUid: String)
@@ -214,7 +215,7 @@ extension HomeModel {
             switch self {
             case .tvTopicsAccess:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .topicPlaceholder(index: $0)) }
-            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows:
+            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows, .tvHistory:
                 return []
             case .radioAllShows:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
@@ -284,6 +285,10 @@ extension HomeModel {
                 guard let urn = topic?.urn else { return nil }
                 return dataProvider.latestMediasForTopic(withUrn: urn, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
+                    .eraseToAnyPublisher()
+            case .tvHistory:
+                return historyPublisher()
+                    .map { compatibleMedias($0).prefix(Int(pageSize)).map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case let .radioLatestEpisodes(channelUid: channelUid):
                 return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize)
@@ -368,6 +373,35 @@ extension HomeModel {
                 .eraseToAnyPublisher()
         }
         
+        private func historyEntries() -> Future<[SRGHistoryEntry], Error> {
+            return Future { promise in
+                // TODO: Compile-checked keypath
+                let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+                SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
+                    if let error = error {
+                        promise(.failure(error))
+                    }
+                    else {
+                        promise(.success(historyEntries ?? []))
+                    }
+                }
+            }
+        }
+        
+        private func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
+            let dataProvider = SRGDataProvider.current!
+            
+            return historyEntries()
+                .map { historyEntries in
+                    historyEntries.compactMap { $0.uid }
+                }
+                .flatMap { urns in
+                    return dataProvider.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+                }
+                .map { $0.medias }
+                .eraseToAnyPublisher()
+        }
+        
         private func canContain(show: SRGShow) -> Bool {
             switch self {
             case .tvFavoriteShows, .tvFavoriteLatestEpisodes:
@@ -381,6 +415,10 @@ extension HomeModel {
         
         private func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
             return shows.filter { self.canContain(show: $0) }.sorted(by: { $0.title < $1.title })
+        }
+        
+        private func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
+            return medias.filter { $0.mediaType == .video }
         }
         
         var title: String? {
@@ -403,6 +441,8 @@ extension HomeModel {
                 return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
             case .tvFavoriteLatestEpisodes:
                 return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
+            case .tvHistory:
+                return NSLocalizedString("History", comment: "Title label used to present the user video history")
             case .radioLatestEpisodes:
                 return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
             case .radioMostPopular:
