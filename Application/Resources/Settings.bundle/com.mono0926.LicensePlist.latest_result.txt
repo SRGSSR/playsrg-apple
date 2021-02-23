@@ -310,7 +310,7 @@ name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version
 
 name: promises, nameSpecified: Promises, owner: google, version: 1.2.12
 
-name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.0.0
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.0.1
 
 name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 3.0.2
 
@@ -334,9 +334,9 @@ name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.0
 
 name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 8.0.5
 
-name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg3
+name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg5
 
-name: TCSDK-xcframework-apple, nameSpecified: TCSDK, owner: SRGSSR, version: 4.4.1-srg3
+name: TCSDK-xcframework-apple, nameSpecified: TCSDK, owner: SRGSSR, version: 4.4.1-srg5
 
 name: UICKeyChainStore, nameSpecified: UICKeyChainStore, owner: kishikawakatsumi, version: 2.2.1
 
