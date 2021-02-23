@@ -176,6 +176,7 @@ extension HomeModel {
         case tvLatestForTopic(_ topic: SRGTopic?)
         case tvTopicsAccess
         case tvHistory
+        case tvLater
         
         case radioLatestEpisodes(channelUid: String)
         case radioMostPopular(channelUid: String)
@@ -215,7 +216,7 @@ extension HomeModel {
             switch self {
             case .tvTopicsAccess:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .topicPlaceholder(index: $0)) }
-            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows, .tvHistory:
+            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows, .tvHistory, .tvLater:
                 return []
             case .radioAllShows:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
@@ -288,6 +289,10 @@ extension HomeModel {
                     .eraseToAnyPublisher()
             case .tvHistory:
                 return historyPublisher()
+                    .map { compatibleMedias($0).prefix(Int(pageSize)).map { RowItem(rowId: self, content: .media($0)) } }
+                    .eraseToAnyPublisher()
+            case .tvLater:
+                return laterPublisher()
                     .map { compatibleMedias($0).prefix(Int(pageSize)).map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case let .radioLatestEpisodes(channelUid: channelUid):
@@ -373,6 +378,34 @@ extension HomeModel {
                 .eraseToAnyPublisher()
         }
         
+        private func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
+            let dataProvider = SRGDataProvider.current!
+            
+            return historyEntries()
+                .map { historyEntries in
+                    historyEntries.compactMap { $0.uid }
+                }
+                .flatMap { urns in
+                    return dataProvider.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+                }
+                .map { $0.medias }
+                .eraseToAnyPublisher()
+        }
+        
+        private func laterPublisher() -> AnyPublisher<[SRGMedia], Error> {
+            let dataProvider = SRGDataProvider.current!
+            
+            return playlistEntries()
+                .map { playlistEntries in
+                    playlistEntries.compactMap { $0.uid }
+                }
+                .flatMap { urns in
+                    return dataProvider.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+                }
+                .map { $0.medias }
+                .eraseToAnyPublisher()
+        }
+        
         private func historyEntries() -> Future<[SRGHistoryEntry], Error> {
             return Future { promise in
                 // TODO: Compile-checked keypath
@@ -388,18 +421,19 @@ extension HomeModel {
             }
         }
         
-        private func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
-            let dataProvider = SRGDataProvider.current!
-            
-            return historyEntries()
-                .map { historyEntries in
-                    historyEntries.compactMap { $0.uid }
+        private func playlistEntries() -> Future<[SRGPlaylistEntry], Error> {
+            return Future { promise in
+                // TODO: Compile-checked keypath
+                let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+                SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
+                    if let error = error {
+                        promise(.failure(error))
+                    }
+                    else {
+                        promise(.success(playlistEntries ?? []))
+                    }
                 }
-                .flatMap { urns in
-                    return dataProvider.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
-                }
-                .map { $0.medias }
-                .eraseToAnyPublisher()
+            }
         }
         
         private func canContain(show: SRGShow) -> Bool {
@@ -443,6 +477,8 @@ extension HomeModel {
                 return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
             case .tvHistory:
                 return NSLocalizedString("History", comment: "Title label used to present the user video history")
+            case .tvLater:
+                return NSLocalizedString("Watch later", comment: "Title Label used to present the video watch later list")
             case .radioLatestEpisodes:
                 return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
             case .radioMostPopular:

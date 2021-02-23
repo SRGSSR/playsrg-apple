@@ -31,6 +31,8 @@ extension ApplicationConfiguration {
             return .tvTopicsAccess
         case .tvHistory:
             return .tvHistory
+        case .tvLater:
+            return .tvLater
         default:
             return nil
         }
