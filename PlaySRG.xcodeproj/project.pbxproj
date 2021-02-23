@@ -1075,6 +1075,11 @@
 		6F82430E250637BE00E931A0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
 		6F82430F250637BE00E931A0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
 		6F824310250637BE00E931A0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
+		6F83873025E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
+		6F83873125E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
+		6F83873225E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
+		6F83873325E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
+		6F83873425E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
 		6F85E4B71EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */; };
 		6F85E4B81EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */; };
 		6F85E4B91EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */; };
@@ -2327,6 +2332,7 @@
 		6F8144122008FA970075F52F /* GoogleCast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleCast.h; sourceTree = "<group>"; };
 		6F8144132008FA970075F52F /* GoogleCast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleCast.m; sourceTree = "<group>"; };
 		6F82430B250637BE00E931A0 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		6F83872F25E507DC00BDCB25 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		6F85E4B51EEA8F9B00552256 /* UIView+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PlaySRG.h"; sourceTree = "<group>"; };
 		6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PlaySRG.m"; sourceTree = "<group>"; };
 		6F85F81D2567F0D100AC8286 /* LiveMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMediaCell.swift; sourceTree = "<group>"; };
@@ -3717,10 +3723,11 @@
 				6F5E63A4250CB32E00056160 /* Modifiers.swift */,
 				0805703D2540E0FC00A59C9D /* Navigation.swift */,
 				6FC4140124EF11F400FDF806 /* Play-TV-ObjectiveC-Bridge.h */,
+				6F83872F25E507DC00BDCB25 /* ProfileModel.swift */,
+				08EA3EB6259E33C9008D412F /* ProfileView.swift */,
 				6F151E26256BF5CF009082F8 /* ProgressBar.swift */,
 				6FFCC5E324EFBF2100805B0F /* RadioChannel.swift */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
-				08EA3EB6259E33C9008D412F /* ProfileView.swift */,
 				6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */,
 				6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */,
 				6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */,
@@ -7938,6 +7945,7 @@
 				08E6135225843C7E00C5FE4B /* PlayApplication.m in Sources */,
 				6FC44B4A25DE552300DE6E6F /* Recommendation.m in Sources */,
 				6FF129DD256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
+				6F83873025E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5925481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7822567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F81E2567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
@@ -8025,6 +8033,7 @@
 				08E6136725843C8100C5FE4B /* PlayApplication.m in Sources */,
 				6FC44B4B25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF129F2256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
+				6F83873125E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5A25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7972567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F81F2567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
@@ -8112,6 +8121,7 @@
 				08E6136825843C8200C5FE4B /* PlayApplication.m in Sources */,
 				6FC44B4C25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF129F3256C0D380042F446 /* PlayDurationFormatter.m in Sources */,
+				6F83873225E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5B25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7AC2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8202567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
@@ -8199,6 +8209,7 @@
 				08E6136925843C8200C5FE4B /* PlayApplication.m in Sources */,
 				6FC44B4D25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF12A08256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
+				6F83873325E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5C25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7AD2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8212567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
@@ -8286,6 +8297,7 @@
 				08E6136A25843C8300C5FE4B /* PlayApplication.m in Sources */,
 				6FC44B4E25DE552500DE6E6F /* Recommendation.m in Sources */,
 				6FF12A09256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
+				6F83873425E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5D25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7AE2567ED2300AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8222567F0D100AC8286 /* LiveMediaCell.swift in Sources */,

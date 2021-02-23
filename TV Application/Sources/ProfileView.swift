@@ -4,219 +4,205 @@
 //  License information is available from the LICENSE file.
 //
 
-import SRGIdentity
 import SRGUserData
 import SwiftUI
 
 struct ProfileView: View {
-    @State var isLoggedIn: Bool = false
-    @State var account: SRGAccount?
-    @State var hasHistoryEntries: Bool = false
-    @State var hasFavorites: Bool = false
-    @State var synchronizationDate: Date? = nil
+    @StateObject var model = ProfileModel()
     
-    @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled: Bool = false
-    
-    @State var logoutAlertDisplayed = false
-    @State var favoritesRemovalAlertDisplayed = false
-    @State var historyRemovalAlertDisplayed = false
-    
-    private static let version: String = {
-        let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
-        let bundleNameSuffix = Bundle.main.infoDictionary!["BundleNameSuffix"] as! String
-        let buildName = Bundle.main.infoDictionary!["BuildName"] as! String
-        let buildString = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
-        return String(format: "%@%@%@ (%@)", appVersion, bundleNameSuffix.count > 0 ? " " + bundleNameSuffix : "", buildName.count > 0 ? " " + buildName : "", buildString)
-    }()
-    
-    private var loginButtonText: String {
-        guard isLoggedIn else { return  NSLocalizedString("Login", comment: "Login button on Apple TV") }
-        if let username = account?.displayName ?? SRGIdentityService.current?.emailAddress {
-            return NSLocalizedString("Logout", comment: "Logout button on Apple TV").appending(" (\(username))")
-        }
-        else {
-            return NSLocalizedString("Logout", comment: "Logout button on Apple TV")
-        }
-    }
-    
-    private var synchronizationMessage: String? {
-        guard isLoggedIn else { return nil }
-        let dateString = (synchronizationDate != nil) ? DateFormatter.play_relativeDateAndTime.string(from: synchronizationDate!) : NSLocalizedString("Never", comment: "Text displayed when no data synchronization has been made yet")
+    var synchronizationMessage: String? {
+        guard model.isLoggedIn else { return nil }
+        let dateString = (model.synchronizationDate != nil) ? DateFormatter.play_relativeDateAndTime.string(from: model.synchronizationDate!) : NSLocalizedString("Never", comment: "Text displayed when no data synchronization has been made yet")
         return String(format: NSLocalizedString("Last synchronization: %@", comment: "Introductory text for the most recent data synchronization date"), dateString)
-    }
-    
-    private func refreshIdentityInformation() {
-        isLoggedIn = SRGIdentityService.current?.isLoggedIn ?? false
-        account = SRGIdentityService.current?.account
-    }
-    
-    private func refreshHistoryInformation() {
-        let historyEntriesCount = SRGUserData.current?.history.historyEntries(matching: nil, sortedWith: nil).count ?? 0
-        hasHistoryEntries = historyEntriesCount > 0
-    }
-    
-    private func refreshFavoritesInformation() {
-        hasFavorites = FavoritesShowURNs().count > 0
-    }
-    
-    private func refreshSynchronizationDate() {
-        synchronizationDate = SRGUserData.current?.user.synchronizationDate
-    }
-    
-    private func logoutAlert() -> Alert {
-        let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of the cancel button in the alert view when logout"))) {}
-        let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Logout", comment: "Logout button on Apple TV"))) {
-            SRGIdentityService.current?.logout()
-        }
-        return Alert(title: Text(NSLocalizedString("Logout", comment: "Logout alert view title on Apple TV")),
-                     message: Text(NSLocalizedString("Are you sure you want to logout?", comment: "Confirmation message displayed when the user is about to logout on Apple TV")),
-                     primaryButton: primaryButton,
-                     secondaryButton: secondaryButton)
-    }
-    
-    private func historyRemovalAlert() -> Alert {
-        let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
-        let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
-            SRGUserData.current?.history.discardHistoryEntries(withUids: nil, completionBlock: nil)
-        }
-        if let isLoggedIn = SRGIdentityService.current?.isLoggedIn, isLoggedIn {
-            return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the confirmation pop-up displayed when the user is about to clear the history")),
-                         message: Text(NSLocalizedString("This will erase the history on all devices connected to your account?", comment: "Confirmation message displayed when a logged in user is about to delete the whole history")),
-                         primaryButton: primaryButton,
-                         secondaryButton: secondaryButton)
-        }
-        else {
-            return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the confirmation pop-up displayed when the user is about to clear the history")),
-                         message: Text(NSLocalizedString("Are you sure you want to erase the whole history?", comment: "Confirmation message displayed when the user is about to delete the whole history")),
-                         primaryButton: primaryButton,
-                         secondaryButton: secondaryButton)
-        }
-    }
-    
-    private func favoritesRemovalAlert() -> Alert {
-        let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
-        let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
-            FavoritesRemoveShows(nil);
-        }
-        if let isLoggedIn = SRGIdentityService.current?.isLoggedIn, isLoggedIn {
-            return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
-                         message: Text(NSLocalizedString("This will remove all favorites and associated notification subscriptions on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to clean all favorites")),
-                         primaryButton: primaryButton,
-                         secondaryButton: secondaryButton)
-        }
-        else {
-            return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
-                         message: Text(NSLocalizedString("Are you sure you want to remove all favorites?", comment: "Confirmation message displayed when the user is about to clean all favorites")),
-                         primaryButton: primaryButton,
-                         secondaryButton: secondaryButton)
-        }
     }
     
     var body: some View {
         List {
-            if let identityService = SRGIdentityService.current {
+            if model.supportsLogin {
                 Section(header: Text(NSLocalizedString("Profile", comment: "Settings section header")).srgFont(.headline1),
                         footer: Text(NSLocalizedString("Synchronize playback history, favorites and content to be watched later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.overline).opacity(0.8)) {
-                    Button(action: {
-                        if isLoggedIn {
-                            logoutAlertDisplayed = true
-                        }
-                        else {
-                            identityService.login(withEmailAddress: nil)
-                        }
-                    }) {
-                        Text(loginButtonText)
-                            .srgFont(.button1)
-                    }
-                    .padding()
-                    .alert(isPresented: $logoutAlertDisplayed, content: logoutAlert)
+                    ProfileListItem(model: model)
                 }
             }
             Section(header: Text(NSLocalizedString("Playback", comment: "Playback settings section header")),
                     footer: Text(NSLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Playback description footer")).srgFont(.overline).opacity(0.8)) {
-                Button(action: {
-                    isAutoplayEnabled = !isAutoplayEnabled
-                }) {
-                    HStack {
-                        Text(NSLocalizedString("Autoplay", comment: "Autoplay setting"))
-                            .srgFont(.button1)
-                        Spacer()
-                        Text(isAutoplayEnabled ? NSLocalizedString("Enabled", comment: "Enabled state label") : NSLocalizedString("Disabled", comment: "Disabled state label"))
-                            .srgFont(.button1)
-                            .foregroundColor(.gray)
-                    }
-                }
-                .padding()
+                AutoplayListItem()
             }
-            Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1),
-                    footer: Text(synchronizationMessage ?? "").srgFont(.overline).opacity(0.8)) {
-                Button(action: {
-                    if hasHistoryEntries {
-                        historyRemovalAlertDisplayed = true
-                    }
-                }) {
-                    Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
-                        .srgFont(.button1)
-                        .foregroundColor(hasHistoryEntries ? .primary : .gray)
+            if let synchronizationMessage = synchronizationMessage {
+                Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1),
+                        footer: Text(synchronizationMessage).srgFont(.overline).opacity(0.8)) {
+                    HistoryRemovalListItem(model: model)
+                    FavoritesRemovalListItem(model: model)
                 }
-                .padding()
-                .alert(isPresented: $historyRemovalAlertDisplayed, content: historyRemovalAlert)
-
-                Button(action: {
-                    if hasFavorites {
-                        favoritesRemovalAlertDisplayed = true
-                    }
-                }) {
-                    Text(NSLocalizedString("Remove all favorites", comment: "Remove all favorites button title"))
-                        .srgFont(.button1)
-                        .foregroundColor(hasFavorites ? .primary : .gray)
+            }
+            else {
+                Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1)) {
+                    HistoryRemovalListItem(model: model)
+                    FavoritesRemovalListItem(model: model)
                 }
-                .padding()
-                .alert(isPresented: $favoritesRemovalAlertDisplayed, content: favoritesRemovalAlert)
             }
             Section(header: Text(NSLocalizedString("Information", comment: "Information section header")).srgFont(.headline1)) {
-                Button(action: {}) {
-                    HStack {
-                        Text(NSLocalizedString("Version", comment: "Version introductory label"))
-                            .srgFont(.button1)
-                        Spacer()
-                        Text(Self.version)
-                            .srgFont(.button1)
-                            .foregroundColor(.gray)
-                    }
-                }
-                .padding()
+                VersionListItem(model: model)
             }
         }
         .listStyle(GroupedListStyle())
         .frame(maxWidth: 1054)
         .padding(.top, 100)
-        .onAppear {
-            refreshIdentityInformation()
-            refreshHistoryInformation()
-            refreshFavoritesInformation()
-            refreshSynchronizationDate()
+    }
+    
+    struct ProfileListItem: View {
+        @ObservedObject var model: ProfileModel
+        @State var alertDisplayed = false
+        
+        var text: String {
+            guard model.isLoggedIn else { return  NSLocalizedString("Login", comment: "Login button on Apple TV") }
+            if let username = model.username {
+                return NSLocalizedString("Logout", comment: "Logout button on Apple TV").appending(" (\(username))")
+            }
+            else {
+                return NSLocalizedString("Logout", comment: "Logout button on Apple TV")
+            }
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)) { _ in
-            refreshIdentityInformation()
+        
+        func alert() -> Alert {
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of the cancel button in the alert view when logout"))) {}
+            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Logout", comment: "Logout button on Apple TV"))) {
+                model.logout()
+            }
+            return Alert(title: Text(NSLocalizedString("Logout", comment: "Logout alert view title on Apple TV")),
+                         message: Text(NSLocalizedString("Are you sure you want to logout?", comment: "Confirmation message displayed when the user is about to logout on Apple TV")),
+                         primaryButton: primaryButton,
+                         secondaryButton: secondaryButton)
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)) { _ in
-            refreshIdentityInformation()
+        
+        var body: some View {
+            Button(action: {
+                if model.isLoggedIn {
+                    alertDisplayed = true
+                }
+                else {
+                    model.login()
+                }
+            }) {
+                Text(text)
+                    .srgFont(.button1)
+            }
+            .padding()
+            .alert(isPresented: $alertDisplayed, content: alert)
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceDidUpdateAccount, object: SRGIdentityService.current)) { _ in
-            refreshIdentityInformation()
+    }
+    
+    struct AutoplayListItem: View {
+        @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled: Bool = false
+        
+        var body: some View {
+            Button(action: {
+                isAutoplayEnabled = !isAutoplayEnabled
+            }) {
+                HStack {
+                    Text(NSLocalizedString("Autoplay", comment: "Autoplay setting"))
+                        .srgFont(.button1)
+                    Spacer()
+                    Text(isAutoplayEnabled ? NSLocalizedString("Enabled", comment: "Enabled state label") : NSLocalizedString("Disabled", comment: "Disabled state label"))
+                        .srgFont(.button1)
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding()
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)) { _ in
-            refreshIdentityInformation()
+    }
+    
+    struct HistoryRemovalListItem: View {
+        @ObservedObject var model: ProfileModel
+        @State var alertDisplayed = false
+        
+        func alert() -> Alert {
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                model.removeHistory()
+            }
+            if model.isLoggedIn {
+                return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the confirmation pop-up displayed when the user is about to clear the history")),
+                             message: Text(NSLocalizedString("This will erase the history on all devices connected to your account?", comment: "Confirmation message displayed when a logged in user is about to delete the whole history")),
+                             primaryButton: primaryButton,
+                             secondaryButton: secondaryButton)
+            }
+            else {
+                return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the confirmation pop-up displayed when the user is about to clear the history")),
+                             message: Text(NSLocalizedString("Are you sure you want to erase the whole history?", comment: "Confirmation message displayed when the user is about to delete the whole history")),
+                             primaryButton: primaryButton,
+                             secondaryButton: secondaryButton)
+            }
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)) { _ in
-            refreshHistoryInformation()
+        
+        var body: some View {
+            Button(action: {
+                if model.hasHistoryEntries {
+                    alertDisplayed = true
+                }
+            }) {
+                Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
+                    .srgFont(.button1)
+                    .foregroundColor(model.hasHistoryEntries ? .primary : .gray)
+            }
+            .padding()
+            .alert(isPresented: $alertDisplayed, content: alert)
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)) { _ in
-            refreshFavoritesInformation()
+    }
+    
+    struct FavoritesRemovalListItem: View {
+        @ObservedObject var model: ProfileModel
+        @State var alertDisplayed = false
+        
+        func alert() -> Alert {
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                model.removeFavorites()
+            }
+            if model.isLoggedIn {
+                return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
+                             message: Text(NSLocalizedString("This will remove all favorites and associated notification subscriptions on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to clean all favorites")),
+                             primaryButton: primaryButton,
+                             secondaryButton: secondaryButton)
+            }
+            else {
+                return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
+                             message: Text(NSLocalizedString("Are you sure you want to remove all favorites?", comment: "Confirmation message displayed when the user is about to clean all favorites")),
+                             primaryButton: primaryButton,
+                             secondaryButton: secondaryButton)
+            }
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGUserDataDidFinishSynchronization, object: SRGUserData.current)) { _ in
-            refreshSynchronizationDate()
+        
+        var body: some View {
+            Button(action: {
+                if model.hasFavorites {
+                    alertDisplayed = true
+                }
+            }) {
+                Text(NSLocalizedString("Remove all favorites", comment: "Remove all favorites button title"))
+                    .srgFont(.button1)
+                    .foregroundColor(model.hasFavorites ? .primary : .gray)
+            }
+            .padding()
+            .alert(isPresented: $alertDisplayed, content: alert)
+        }
+    }
+    
+    struct VersionListItem: View {
+        var model: ProfileModel
+        
+        var body: some View {
+            Button(action: {}) {
+                HStack {
+                    Text(NSLocalizedString("Version", comment: "Version introductory label"))
+                        .srgFont(.button1)
+                    Spacer()
+                    Text(model.version)
+                        .srgFont(.button1)
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding()
         }
     }
 }
