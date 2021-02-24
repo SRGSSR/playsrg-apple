@@ -47,7 +47,7 @@ struct ProfileView: View {
         }
         .listStyle(GroupedListStyle())
         .frame(maxWidth: 1054)
-        .padding(.top, 100)
+        .padding(.top, model.supportsLogin ? 0 : 100)
     }
     
     struct ProfileListItem: View {
