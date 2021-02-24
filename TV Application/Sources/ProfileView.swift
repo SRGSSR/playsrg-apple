@@ -199,8 +199,8 @@ struct ProfileView: View {
                     Spacer()
                     Text(model.version)
                         .srgFont(.button1)
-                        .foregroundColor(.secondary)
                 }
+                .foregroundColor(.secondary)
             }
             .padding()
         }
