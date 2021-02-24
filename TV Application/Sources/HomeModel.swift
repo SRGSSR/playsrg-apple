@@ -61,17 +61,17 @@ class HomeModel: Identifiable, ObservableObject {
         
         NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
             .sink { notification in
-                guard self.rowIds.contains(where: { $0 == .tvHistory }) else { return }
+                guard self.rowIds.contains(.tvHistory) else { return }
                 
                 self.refresh()
             }
             .store(in: &globalCancellables)
         
-        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistsDidChange, object: SRGUserData.current?.preferences)
+        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistsDidChange, object: SRGUserData.current?.playlists)
             .sink { notification in
-                guard self.rowIds.contains(where: { $0 == .tvLater }) else { return }
+                guard self.rowIds.contains(.tvLater) else { return }
                 
-                if let domains = notification.userInfo?[SRGPlaylistsUidsKey] as? Set<String>, domains.contains(SRGPlaylistUid.watchLater.rawValue) {
+                if let playlistUids = notification.userInfo?[SRGPlaylistsUidsKey] as? Set<String>, playlistUids.contains(SRGPlaylistUid.watchLater.rawValue) {
                     self.refresh()
                 }
             }
