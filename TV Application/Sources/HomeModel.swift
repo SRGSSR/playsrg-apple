@@ -49,33 +49,33 @@ class HomeModel: Identifiable, ObservableObject {
         self.id = id
         self.rowIds = id.defaultRowIds
             
-        NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
-            .sink { notification in
-                guard self.rowIds.contains(where: { $0.isFavoriteShows }) else { return }
-                
-                if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
+        if self.rowIds.contains(where: { $0.isFavoriteShows }) {
+            NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
+                .sink { notification in
+                    if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
+                        self.refresh()
+                    }
+                }
+                .store(in: &globalCancellables)
+        }
+        
+        if self.rowIds.contains(.tvHistory) {
+            NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
+                .sink { _ in
                     self.refresh()
                 }
-            }
-            .store(in: &globalCancellables)
+                .store(in: &globalCancellables)
+        }
         
-        NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
-            .sink { notification in
-                guard self.rowIds.contains(.tvHistory) else { return }
-                
-                self.refresh()
-            }
-            .store(in: &globalCancellables)
-        
-        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistsDidChange, object: SRGUserData.current?.playlists)
-            .sink { notification in
-                guard self.rowIds.contains(.tvLater) else { return }
-                
-                if let playlistUids = notification.userInfo?[SRGPlaylistsUidsKey] as? Set<String>, playlistUids.contains(SRGPlaylistUid.watchLater.rawValue) {
-                    self.refresh()
+        if self.rowIds.contains(.tvLater) {
+            NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistsDidChange, object: SRGUserData.current?.playlists)
+                .sink { notification in
+                    if let playlistUids = notification.userInfo?[SRGPlaylistsUidsKey] as? Set<String>, playlistUids.contains(SRGPlaylistUid.watchLater.rawValue) {
+                        self.refresh()
+                    }
                 }
-            }
-            .store(in: &globalCancellables)
+                .store(in: &globalCancellables)
+        }
     }
     
     func refresh() {
