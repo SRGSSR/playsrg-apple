@@ -35,6 +35,7 @@ platform :ios do
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
+      clean_derived_data
       Dir.chdir('..') { sh 'make bootstrap' }
     end
   end
@@ -484,6 +485,7 @@ platform :ios do
       include_bitcode: options[:export_to_appstore],
       export_team_id: options[:team_id],
       destination: destination,
+      derived_data_path: derived_data_path,
       output_directory: output_directory
     )
   end
@@ -582,6 +584,14 @@ def cleaned_lane_condition(lane)
   (lane.to_s != 'devLane') &&
     (!lane.to_s.downcase.include? 'dsym') &&
     (!lane.to_s.downcase.include? 'tester')
+end
+
+def clean_derived_data
+  Dir.chdir('..') { FileUtils.remove_entry(derived_data_path, true) }
+end
+
+def derived_data_path
+  'build/DerivedData'
 end
 
 def ios_schemes
@@ -771,12 +781,6 @@ end
 # New AppStore Connect rule introduced in 02.2021: https://github.com/fastlane/fastlane/issues/18098#issuecomment-772970322
 def appstore_skip_2fa_upgrade
   ENV['SPACESHIP_SKIP_2FA_UPGRADE'] = '1'
-end
-
-# Returns clean xcodebuid grep output, without warning and errors
-def xcodebuid_grep_output(output)
-  line_count = output.lines.count
-  output.split(/\n/) [line_count - 1]
 end
 
 # Update only the app identifier for App Store Connect submit.
