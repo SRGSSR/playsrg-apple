@@ -123,21 +123,7 @@ static Playlist *s_playlist;
     }
 }
 
-- (NSTimeInterval)continuousPlaybackTransitionDurationForController:(SRGLetterboxController *)controller
-{
-#if TARGET_OS_TV
-    if ([NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAutoplayEnabled]) {
-        return ApplicationConfiguration.sharedApplicationConfiguration.continuousPlaybackPlayerViewTransitionDuration;
-    }
-    else {
-        return SRGLetterboxContinuousPlaybackDisabled;
-    }
-#else
-    return ApplicationSettingContinuousPlaybackTransitionDuration();
-#endif
-}
-
-- (void)controller:(SRGLetterboxController *)controller didTransitionToMedia:(SRGMedia *)media automatically:(BOOL)automatically
+- (void)controller:(SRGLetterboxController *)controller didChangeToMedia:(SRGMedia *)media
 {
     self.index = [self.medias indexOfObject:media];
 }
@@ -156,6 +142,22 @@ static Playlist *s_playlist;
 #endif
     playbackSettings.sourceUid = self.recommendationUid;
     return playbackSettings;
+}
+
+#pragma SRGLetterboxControllerPlaybackTransitionDelegate protocol
+
+- (NSTimeInterval)continuousPlaybackTransitionDurationForController:(SRGLetterboxController *)controller
+{
+#if TARGET_OS_TV
+    if ([NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAutoplayEnabled]) {
+        return ApplicationConfiguration.sharedApplicationConfiguration.continuousPlaybackPlayerViewTransitionDuration;
+    }
+    else {
+        return SRGLetterboxContinuousPlaybackDisabled;
+    }
+#else
+    return ApplicationSettingContinuousPlaybackTransitionDuration();
+#endif
 }
 
 #pragma mark Notifications

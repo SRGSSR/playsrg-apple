@@ -266,9 +266,9 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": null,
-          "revision": "3a1db335d17aab7404586e6be37ce0e22d1879ee",
-          "version": "6.2.0"
+          "branch": "feature/continuous-playback-improvements",
+          "revision": "eee458823379f73526e12d27fd4f07cfc6ef85cd",
+          "version": null
         }
       },
       {
