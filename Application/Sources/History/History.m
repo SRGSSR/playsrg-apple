@@ -22,6 +22,9 @@ static NSMutableDictionary<NSString *, NSNumber *> *s_cachedProgresses;
 static NSTimer *s_trackerTimer;
 #endif
 
+static BOOL HistoryIsProgressForMediaMetadataTracked(id<SRGMediaMetadata> mediaMetadata);
+static float HistoryPlaybackProgressForMediaMetadataHistoryEntry(SRGHistoryEntry *historyEntry, id<SRGMediaMetadata> mediaMetadata);
+
 #pragma mark Helpers
 
 float HistoryPlaybackProgress(NSTimeInterval playbackPosition, double durationInSeconds)
@@ -45,12 +48,16 @@ SRGPosition *HistoryResumePlaybackPositionForMedia(SRGMedia *media)
     // Allow faster seek to an earlier position, but not to a later position (playback for a history entry should not resume with
     // content the user has not seen yet)
     SRGHistoryEntry *historyEntry = [SRGUserData.currentUserData.history historyEntryWithUid:media.URN];
-    if (historyEntry) {
-        return [SRGPosition positionBeforeTime:historyEntry.lastPlaybackTime];
-    }
-    else {
+    if (! historyEntry) {
         return nil;
     }
+    
+    // Start at the default location if the content was played entirely.
+    if (HistoryPlaybackProgressForMediaMetadataHistoryEntry(historyEntry, media) == 1.f) {
+        return nil;
+    }
+    
+    return [SRGPosition positionBeforeTime:historyEntry.lastPlaybackTime];
 }
 
 static SRGMedia *HistoryChapterMedia(SRGLetterboxController *controller)
