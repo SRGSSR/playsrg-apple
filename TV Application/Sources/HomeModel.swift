@@ -412,7 +412,12 @@ extension HomeModel {
             .flatMap { urns in
                 return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
             }
-            .map { $0.medias }
+            .receive(on: DispatchQueue.main)
+            .map { $0.medias
+                .filter { media in
+                    return HistoryPlaybackProgressForMediaMetadata(media) != 1
+                }
+            }
             .eraseToAnyPublisher()
         }
         
@@ -478,7 +483,7 @@ extension HomeModel {
             case .tvFavoriteLatestEpisodes:
                 return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
             case .tvHistory:
-                return NSLocalizedString("History", comment: "Title label used to present the user video history")
+                return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
             case .tvWatchLater:
                 return NSLocalizedString("Watch later", comment: "Title Label used to present the video watch later list")
             case .radioLatestEpisodes:
