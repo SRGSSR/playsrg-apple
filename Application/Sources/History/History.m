@@ -40,8 +40,7 @@ float HistoryPlaybackProgress(NSTimeInterval playbackPosition, double durationIn
 
 SRGPosition *HistoryResumePlaybackPositionForMedia(SRGMedia *media)
 {
-    // Always start at the default location for livestreams and scheduled livestreams
-    if (media.contentType == SRGContentTypeLivestream || media.contentType == SRGContentTypeScheduledLivestream) {
+    if (! HistoryIsProgressForMediaMetadataTracked(media)) {
         return nil;
     }
     
