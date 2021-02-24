@@ -395,31 +395,7 @@ extension HomeModel {
         }
         
         private func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
-            return historyEntries()
-                .map { historyEntries in
-                    historyEntries.compactMap { $0.uid }
-                }
-                .flatMap { urns in
-                    return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
-                }
-                .map { $0.medias }
-                .eraseToAnyPublisher()
-        }
-        
-        private func laterPublisher() -> AnyPublisher<[SRGMedia], Error> {
-            return playlistEntries()
-                .map { playlistEntries in
-                    playlistEntries.compactMap { $0.uid }
-                }
-                .flatMap { urns in
-                    return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
-                }
-                .map { $0.medias }
-                .eraseToAnyPublisher()
-        }
-        
-        private func historyEntries() -> Future<[SRGHistoryEntry], Error> {
-            return Future { promise in
+            return Future<[SRGHistoryEntry], Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
                 SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
                     if let error = error {
@@ -430,10 +406,18 @@ extension HomeModel {
                     }
                 }
             }
+            .map { historyEntries in
+                historyEntries.compactMap { $0.uid }
+            }
+            .flatMap { urns in
+                return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            }
+            .map { $0.medias }
+            .eraseToAnyPublisher()
         }
         
-        private func playlistEntries() -> Future<[SRGPlaylistEntry], Error> {
-            return Future { promise in
+        private func laterPublisher() -> AnyPublisher<[SRGMedia], Error> {
+            return Future<[SRGPlaylistEntry], Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
                 SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
                     if let error = error {
@@ -444,6 +428,14 @@ extension HomeModel {
                     }
                 }
             }
+            .map { playlistEntries in
+                playlistEntries.compactMap { $0.uid }
+            }
+            .flatMap { urns in
+                return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            }
+            .map { $0.medias }
+            .eraseToAnyPublisher()
         }
         
         private func canContain(show: SRGShow) -> Bool {
