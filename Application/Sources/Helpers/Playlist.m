@@ -160,6 +160,20 @@ static Playlist *s_playlist;
 #endif
 }
 
+#if TARGET_OS_TV
+- (void)controllerDidEnPlaybackdWithoutTransition:(SRGLetterboxController *)controller
+{
+    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
+    while (topViewController.presentedViewController) {
+        topViewController = topViewController.presentedViewController;
+    }
+    
+    if ([topViewController isKindOfClass:SRGLetterboxViewController.class]) {
+        [topViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+#endif
+
 #pragma mark Notifications
 
 - (void)reachabilityDidChange:(NSNotification *)notification
