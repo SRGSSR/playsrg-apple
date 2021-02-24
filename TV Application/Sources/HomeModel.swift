@@ -67,7 +67,7 @@ class HomeModel: Identifiable, ObservableObject {
                 .store(in: &mainCancellables)
         }
         
-        if self.rowIds.contains(.tvLater) {
+        if self.rowIds.contains(.tvWatchLater) {
             NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistsDidChange, object: SRGUserData.current?.playlists)
                 .sink { notification in
                     if let playlistUids = notification.userInfo?[SRGPlaylistsUidsKey] as? Set<String>, playlistUids.contains(SRGPlaylistUid.watchLater.rawValue) {
@@ -194,7 +194,7 @@ extension HomeModel {
         case tvLatestForTopic(_ topic: SRGTopic?)
         case tvTopicsAccess
         case tvHistory
-        case tvLater
+        case tvWatchLater
         
         case radioLatestEpisodes(channelUid: String)
         case radioMostPopular(channelUid: String)
@@ -234,7 +234,7 @@ extension HomeModel {
             switch self {
             case .tvTopicsAccess:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .topicPlaceholder(index: $0)) }
-            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows, .tvHistory, .tvLater:
+            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows, .tvHistory, .tvWatchLater:
                 return []
             case .radioAllShows:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
@@ -309,7 +309,7 @@ extension HomeModel {
                 return historyPublisher()
                     .map { compatibleMedias($0).prefix(Int(pageSize)).map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
-            case .tvLater:
+            case .tvWatchLater:
                 return laterPublisher()
                     .map { compatibleMedias($0).prefix(Int(pageSize)).map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
@@ -479,7 +479,7 @@ extension HomeModel {
                 return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
             case .tvHistory:
                 return NSLocalizedString("History", comment: "Title label used to present the user video history")
-            case .tvLater:
+            case .tvWatchLater:
                 return NSLocalizedString("Watch later", comment: "Title Label used to present the video watch later list")
             case .radioLatestEpisodes:
                 return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")

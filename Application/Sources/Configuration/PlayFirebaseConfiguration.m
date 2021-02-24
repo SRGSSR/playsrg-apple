@@ -32,7 +32,7 @@ static HomeSection HomeSectionWithString(NSString *string)
 #if TARGET_OS_TV
                         @"tvFavoriteLatestEpisodes" : @(HomeSectionTVFavoriteLatestEpisodes),
                         @"tvHistory" : @(HomeSectionTVHistory),
-                        @"tvLater" : @(HomeSectionTVLater),
+                        @"tvWatchLater" : @(HomeSectionTVWatchLater),
 #endif
                         @"radioLive" : @(HomeSectionRadioLive),
                         @"radioLiveSatellite" : @(HomeSectionRadioLiveSatellite),
