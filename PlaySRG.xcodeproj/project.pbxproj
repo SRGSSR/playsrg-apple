@@ -1000,6 +1000,16 @@
 		6F61CCC7256E41FB00E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC6256E41FB00E42E31 /* SRGUserData */; };
 		6F61CCC9256E420200E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC8256E420200E42E31 /* SRGUserData */; };
 		6F61CCCB256E420800E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCCA256E420800E42E31 /* SRGUserData */; };
+		6F6B5BB825E640A600F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
+		6F6B5BB925E640A600F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
+		6F6B5BCE25E640A700F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
+		6F6B5BCF25E640A800F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
+		6F6B5BD025E640A800F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
+		6F6B5BE525E640C400F549E7 /* NSArray+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F939F6E2090A1B200D3B0C6 /* NSArray+PlaySRG.m */; };
+		6F6B5BE625E640C500F549E7 /* NSArray+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F939F6E2090A1B200D3B0C6 /* NSArray+PlaySRG.m */; };
+		6F6B5BE725E640C500F549E7 /* NSArray+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F939F6E2090A1B200D3B0C6 /* NSArray+PlaySRG.m */; };
+		6F6B5BE825E640C600F549E7 /* NSArray+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F939F6E2090A1B200D3B0C6 /* NSArray+PlaySRG.m */; };
+		6F6B5BE925E640C600F549E7 /* NSArray+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F939F6E2090A1B200D3B0C6 /* NSArray+PlaySRG.m */; };
 		6F6B642E21A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B642C21A70FAA00E207FC /* HomeStatusHeaderView.m */; };
 		6F6B642F21A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B642C21A70FAA00E207FC /* HomeStatusHeaderView.m */; };
 		6F6B643021A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B642C21A70FAA00E207FC /* HomeStatusHeaderView.m */; };
@@ -7874,6 +7884,7 @@
 				081456312547740600BB7CA6 /* Badges.swift in Sources */,
 				6F026EED250134FD00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FA8257AAF240077322C /* NSBundle+PlaySRG.m in Sources */,
+				6F6B5BB825E640A600F549E7 /* WatchLater.m in Sources */,
 				6F0E39CD25558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
 				6FC44B3125DE54F800DE6E6F /* Playlist.m in Sources */,
 				6FF1EA46256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
@@ -7905,6 +7916,7 @@
 				6F5E63A5250CB32E00056160 /* Modifiers.swift in Sources */,
 				085C2B09256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6F5AA59725024C4800718420 /* UIImage+PlaySRG.m in Sources */,
+				6F6B5BE525E640C400F549E7 /* NSArray+PlaySRG.m in Sources */,
 				6F85F7F02567ED3C00AC8286 /* SRGProgram+PlaySRG.m in Sources */,
 				6FC413D424EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3224E452F800B1A56E /* HomeModel.swift in Sources */,
@@ -7960,6 +7972,7 @@
 				081456322547740600BB7CA6 /* Badges.swift in Sources */,
 				6F026EEE250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FBD257AAF250077322C /* NSBundle+PlaySRG.m in Sources */,
+				6F6B5BB925E640A600F549E7 /* WatchLater.m in Sources */,
 				6F0E39CE25558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
 				6FC44B3225DE54F800DE6E6F /* Playlist.m in Sources */,
 				6FF1EA47256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
@@ -7991,6 +8004,7 @@
 				6F5E63A6250CB32E00056160 /* Modifiers.swift in Sources */,
 				085C2B0A256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6F5AA59825024C4900718420 /* UIImage+PlaySRG.m in Sources */,
+				6F6B5BE625E640C500F549E7 /* NSArray+PlaySRG.m in Sources */,
 				6F85F8052567ED3D00AC8286 /* SRGProgram+PlaySRG.m in Sources */,
 				6FC413DC24EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3324E452F800B1A56E /* HomeModel.swift in Sources */,
@@ -8046,6 +8060,7 @@
 				081456332547740600BB7CA6 /* Badges.swift in Sources */,
 				6F026EEF250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FBE257AAF250077322C /* NSBundle+PlaySRG.m in Sources */,
+				6F6B5BCE25E640A700F549E7 /* WatchLater.m in Sources */,
 				6F0E39CF25558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
 				6FC44B3325DE54F800DE6E6F /* Playlist.m in Sources */,
 				6FF1EA48256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
@@ -8077,6 +8092,7 @@
 				6F5E63A7250CB32E00056160 /* Modifiers.swift in Sources */,
 				085C2B0B256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6F5AA59925024C4900718420 /* UIImage+PlaySRG.m in Sources */,
+				6F6B5BE725E640C500F549E7 /* NSArray+PlaySRG.m in Sources */,
 				6F85F8062567ED3D00AC8286 /* SRGProgram+PlaySRG.m in Sources */,
 				6FC413E424EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3424E452F800B1A56E /* HomeModel.swift in Sources */,
@@ -8132,6 +8148,7 @@
 				081456342547740600BB7CA6 /* Badges.swift in Sources */,
 				6F026EF0250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FBF257AAF260077322C /* NSBundle+PlaySRG.m in Sources */,
+				6F6B5BCF25E640A800F549E7 /* WatchLater.m in Sources */,
 				6F0E39D025558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
 				6FC44B3425DE54F900DE6E6F /* Playlist.m in Sources */,
 				6FF1EA49256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
@@ -8163,6 +8180,7 @@
 				6F5E63A8250CB32E00056160 /* Modifiers.swift in Sources */,
 				085C2B0C256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6F5AA59A25024C4A00718420 /* UIImage+PlaySRG.m in Sources */,
+				6F6B5BE825E640C600F549E7 /* NSArray+PlaySRG.m in Sources */,
 				6F85F8072567ED3E00AC8286 /* SRGProgram+PlaySRG.m in Sources */,
 				6FC413EC24EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3524E452F800B1A56E /* HomeModel.swift in Sources */,
@@ -8218,6 +8236,7 @@
 				081456352547740600BB7CA6 /* Badges.swift in Sources */,
 				6F026EF1250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FC0257AAF270077322C /* NSBundle+PlaySRG.m in Sources */,
+				6F6B5BD025E640A800F549E7 /* WatchLater.m in Sources */,
 				6F0E39D125558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
 				6FC44B3525DE54F900DE6E6F /* Playlist.m in Sources */,
 				6FF1EA4A256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
@@ -8249,6 +8268,7 @@
 				6F5E63A9250CB32E00056160 /* Modifiers.swift in Sources */,
 				085C2B0D256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6F5AA59B25024C4B00718420 /* UIImage+PlaySRG.m in Sources */,
+				6F6B5BE925E640C600F549E7 /* NSArray+PlaySRG.m in Sources */,
 				6F85F8082567ED3E00AC8286 /* SRGProgram+PlaySRG.m in Sources */,
 				6FC413F424EEEDCB00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3624E452F800B1A56E /* HomeModel.swift in Sources */,

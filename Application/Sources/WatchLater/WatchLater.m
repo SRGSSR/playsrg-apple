@@ -6,7 +6,9 @@
 
 #import "WatchLater.h"
 
+#if TARGET_OS_IOS
 #import "DeprecatedFavorite.h"
+#endif
 #import "NSArray+PlaySRG.h"
 
 @import libextobjc;
@@ -78,6 +80,8 @@ void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, 
     }
 }
 
+#if TARGET_OS_IOS
+
 void WatchLaterMigrate(void)
 {
     NSCAssert(SRGUserData.currentUserData != nil, @"User data storage must be available");
@@ -116,3 +120,5 @@ void WatchLaterMigrate(void)
         }];
     }
 }
+
+#endif
