@@ -59,6 +59,11 @@ SRGPosition *HistoryResumePlaybackPositionForMedia(SRGMedia *media)
     return [SRGPosition positionBeforeTime:historyEntry.lastPlaybackTime];
 }
 
+BOOL HistoryCanResumePlaybackForMedia(SRGMedia *media)
+{
+    return [media blockingReasonAtDate:NSDate.date] == SRGBlockingReasonNone && HistoryPlaybackProgressForMediaMetadata(media) != 1.f;
+}
+
 static SRGMedia *HistoryChapterMedia(SRGLetterboxController *controller)
 {
     SRGMediaComposition *mediaComposition = controller.mediaComposition;

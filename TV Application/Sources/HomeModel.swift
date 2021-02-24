@@ -395,6 +395,12 @@ extension HomeModel {
         }
         
         private func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
+            // TODO: Currently suboptimal: For each media we determine if playback can be resumed, an operation on
+            //       the main thread and with a single user data access each time. We could  instead use a currrently
+            //       private history API to combine the history entries we have and the associated medias we retrieve
+            //       with a network request, calculating the progress on a background thread and with only a single
+            //       user data access (the one made at the beginning). This optimization seems premature, though, so
+            //       for the moment a simpler implementation is used.
             return Future<[SRGHistoryEntry], Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
                 SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
@@ -413,11 +419,7 @@ extension HomeModel {
                 return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
             }
             .receive(on: DispatchQueue.main)
-            .map { $0.medias
-                .filter { media in
-                    return HistoryPlaybackProgressForMediaMetadata(media) != 1
-                }
-            }
+            .map { $0.medias.filter { HistoryCanResumePlaybackForMedia($0) } }
             .eraseToAnyPublisher()
         }
         

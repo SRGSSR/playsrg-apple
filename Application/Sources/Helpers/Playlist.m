@@ -92,7 +92,7 @@ static Playlist *s_playlist;
             self.recommendationUid = recommendation.recommendationUid;
             
             NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGMedia * _Nullable media, NSDictionary<NSString *,id> * _Nullable bindings) {
-                return [media blockingReasonAtDate:NSDate.date] == SRGBlockingReasonNone && HistoryPlaybackProgressForMediaMetadata(media) != 1.f;
+                return HistoryCanResumePlaybackForMedia(media);
             }];
             self.medias = [medias filteredArrayUsingPredicate:predicate];
         }] requestWithPageSize:50];
