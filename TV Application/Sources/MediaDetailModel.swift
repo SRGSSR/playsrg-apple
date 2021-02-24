@@ -5,6 +5,7 @@
 //
 
 import SRGDataProviderCombine
+import SRGUserData
 
 class MediaDetailModel: ObservableObject {
     struct Recommendation: Codable {
@@ -16,11 +17,20 @@ class MediaDetailModel: ObservableObject {
     
     @Published private(set) var relatedMedias: [SRGMedia] = []
     @Published var selectedMedia: SRGMedia? = nil
+    @Published var watchedLater: Bool = false
     
-    var cancellables = Set<AnyCancellable>()
+    var mainCancellables = Set<AnyCancellable>()
+    var refreshCancellables = Set<AnyCancellable>()
     
     init(media: SRGMedia) {
         self.initialMedia = media
+        
+        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+            .sink { notification in
+                self.updateWatchedLater()
+            }
+            .store(in: &mainCancellables)
+        updateWatchedLater()
     }
     
     var media: SRGMedia {
@@ -45,10 +55,28 @@ class MediaDetailModel: ObservableObject {
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
             .assign(to: \.relatedMedias, on: self)
-            .store(in: &cancellables)
+            .store(in: &refreshCancellables)
     }
     
     func cancelRefresh() {
-        cancellables = []
+        refreshCancellables = []
+    }
+    
+    func toggleWatchLater() {
+        WatchLaterToggleMediaMetadata(media) { added, error in
+            guard error != nil else { return }
+            
+            let analyticsTitle = added ? AnalyticsTitle.watchLaterAdd : AnalyticsTitle.watchLaterRemove
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.source = AnalyticsSource.button.rawValue
+            labels.value = self.media.urn
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
+            
+            self.updateWatchedLater()
+        }
+    }
+    
+    private func updateWatchedLater() {
+        watchedLater = WatchLaterContainsMediaMetadata(media)
     }
 }

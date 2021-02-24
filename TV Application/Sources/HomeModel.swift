@@ -42,7 +42,7 @@ class HomeModel: Identifiable, ObservableObject {
     
     @Published private(set) var rows: [Row] = []
     
-    private var globalCancellables = Set<AnyCancellable>()
+    private var mainCancellables = Set<AnyCancellable>()
     private var refreshCancellables = Set<AnyCancellable>()
     
     init(id: Id) {
@@ -56,7 +56,7 @@ class HomeModel: Identifiable, ObservableObject {
                         self.refresh()
                     }
                 }
-                .store(in: &globalCancellables)
+                .store(in: &mainCancellables)
         }
         
         if self.rowIds.contains(.tvHistory) {
@@ -64,7 +64,7 @@ class HomeModel: Identifiable, ObservableObject {
                 .sink { _ in
                     self.refresh()
                 }
-                .store(in: &globalCancellables)
+                .store(in: &mainCancellables)
         }
         
         if self.rowIds.contains(.tvLater) {
@@ -74,7 +74,7 @@ class HomeModel: Identifiable, ObservableObject {
                         self.refresh()
                     }
                 }
-                .store(in: &globalCancellables)
+                .store(in: &mainCancellables)
         }
     }
     

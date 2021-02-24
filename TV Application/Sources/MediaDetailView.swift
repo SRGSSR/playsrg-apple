@@ -192,11 +192,9 @@ struct MediaDetailView: View {
                 LabeledButton(icon: "play-50", label: playButtonLabel) {
                     navigateToMedia(model.media, play: true)
                 }
-                #if DEBUG
-                LabeledButton(icon: "watch_later-22", label: NSLocalizedString("Later", comment: "Watch or listen later button label in media detail view")) {
-                    /* Toggle Watch Later state */
+                LabeledButton(icon: model.watchedLater ? "watch_later_full-22" : "watch_later-22", label: NSLocalizedString("Later", comment: "Watch or listen later button label in media detail view")) {
+                    model.toggleWatchLater()
                 }
-                #endif
                 if let show = model.media.show {
                     LabeledButton(icon: "episodes-22", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the media detail view")) {
                         navigateToShow(show)
