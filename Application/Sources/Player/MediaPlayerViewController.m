@@ -9,6 +9,7 @@
 #import "AccessibilityIdentifierConstants.h"
 #import "ActivityItemSource.h"
 #import "ApplicationSettings.h"
+#import "ApplicationSettingsConstants.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"

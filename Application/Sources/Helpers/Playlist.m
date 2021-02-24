@@ -7,13 +7,22 @@
 #import "Playlist.h"
 
 #import "ApplicationConfiguration.h"
-#import "ApplicationSettings.h"
 #import "History.h"
 #import "Recommendation.h"
+
+// TODO: For the moment settings on tvOS are limited so ApplicationSettings has not been split / refactored
+//       for simultaneous iOS / tvOS support. This could be improved when settings are enriched on tvOS.
+#if TARGET_OS_TV
+#import "ApplicationSettingsConstants.h"
+#else
+#import "ApplicationSettings.h"
+#endif
 
 @import FXReachability;
 @import libextobjc;
 @import SRGDataProviderNetwork;
+
+static Playlist *s_playlist;
 
 @interface Playlist ()
 
@@ -116,7 +125,16 @@
 
 - (NSTimeInterval)continuousPlaybackTransitionDurationForController:(SRGLetterboxController *)controller
 {
+#if TARGET_OS_TV
+    if ([NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAutoplayEnabled]) {
+        return ApplicationConfiguration.sharedApplicationConfiguration.continuousPlaybackPlayerViewTransitionDuration;
+    }
+    else {
+        return SRGLetterboxContinuousPlaybackDisabled;
+    }
+#else
     return ApplicationSettingContinuousPlaybackTransitionDuration();
+#endif
 }
 
 - (void)controller:(SRGLetterboxController *)controller didTransitionToMedia:(SRGMedia *)media automatically:(BOOL)automatically
@@ -131,7 +149,11 @@
 
 - (SRGLetterboxPlaybackSettings *)controller:(SRGLetterboxController *)controller preferredSettingsForMedia:(SRGMedia *)media
 {
+#if TARGET_OS_TV
+    SRGLetterboxPlaybackSettings *playbackSettings = [[SRGLetterboxPlaybackSettings alloc] init];
+#else
     SRGLetterboxPlaybackSettings *playbackSettings = ApplicationSettingPlaybackSettings();
+#endif
     playbackSettings.sourceUid = self.recommendationUid;
     return playbackSettings;
 }
@@ -146,3 +168,9 @@
 }
 
 @end
+
+Playlist *PlaylistForURN(NSString *URN)
+{
+    s_playlist = URN ? [[Playlist alloc] initWithURN:URN] : nil;
+    return s_playlist;
+}

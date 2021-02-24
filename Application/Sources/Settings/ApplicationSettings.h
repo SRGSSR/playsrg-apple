@@ -40,18 +40,6 @@ typedef NS_ENUM(NSInteger, TabBarItemIdentifier) {
     TabBarItemIdentifierProfile
 };
 
-OBJC_EXPORT NSString * const PlaySRGSettingHDOverCellularEnabled;
-OBJC_EXPORT NSString * const PlaySRGSettingPresenterModeEnabled;
-OBJC_EXPORT NSString * const PlaySRGSettingStandaloneEnabled;
-OBJC_EXPORT NSString * const PlaySRGSettingAutoplayEnabled;
-OBJC_EXPORT NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled;
-OBJC_EXPORT NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed;
-OBJC_EXPORT NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed;
-
-OBJC_EXPORT NSString * const PlaySRGSettingLastLoggedInEmailAddress;
-OBJC_EXPORT NSString * const PlaySRGSettingServiceURL;
-OBJC_EXPORT NSString * const PlaySRGSettingUserLocation;
-
 OBJC_EXPORT BOOL ApplicationSettingAlternateRadioHomepageDesignEnabled(void);
 OBJC_EXPORT BOOL ApplicationSettingPresenterModeEnabled(void);
 

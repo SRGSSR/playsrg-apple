@@ -7,6 +7,7 @@
 #import "ApplicationSettings.h"
 
 #import "ApplicationConfiguration.h"
+#import "ApplicationSettingsConstants.h"
 #import "MediaPlayerViewController.h"
 #import "PlayApplication.h"
 #import "UIWindow+PlaySRG.h"
@@ -18,21 +19,9 @@
 @import libextobjc;
 @import SRGLetterbox;
 
-NSString * const PlaySRGSettingHDOverCellularEnabled = @"PlaySRGSettingHDOverCellularEnabled";
-NSString * const PlaySRGSettingPresenterModeEnabled = @"PlaySRGSettingPresenterModeEnabled";
-NSString * const PlaySRGSettingStandaloneEnabled = @"PlaySRGSettingStandaloneEnabled";
-NSString * const PlaySRGSettingAutoplayEnabled = @"PlaySRGSettingAutoplayEnabled";
-NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled = @"PlaySRGSettingBackgroundVideoPlaybackEnabled";
-
-NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed = @"PlaySRGSettingSubtitleAvailabilityDisplayed";
-NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed = @"PlaySRGSettingAudioDescriptionAvailabilityDisplayed";
-
-NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
 NSString * const PlaySRGSettingLastOpenedRadioChannelUid = @"PlaySRGSettingLastOpenedRadioChannelUid";
 NSString * const PlaySRGSettingLastOpenedTabBarItem = @"PlaySRGSettingLastOpenedTabBarItem";
 NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLiveStreamURNForChannels";
-NSString * const PlaySRGSettingServiceURL = @"PlaySRGSettingServiceURL";
-NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
 
 NSValueTransformer *SettingUserLocationTransformer(void)
 {
@@ -61,17 +50,6 @@ NSValueTransformer *TabBarItemIdentifierTransformer(void)
                                                                   reverseDefaultValue:nil];
     });
     return s_transformer;
-}
-
-__attribute__((constructor)) static void ApplicationSettingsInit(void)
-{
-    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    [userDefaults registerDefaults:@{ PlaySRGSettingHDOverCellularEnabled : @YES,
-                                      PlaySRGSettingPresenterModeEnabled : @NO,
-                                      PlaySRGSettingStandaloneEnabled : @NO,
-                                      PlaySRGSettingAutoplayEnabled : @YES,
-                                      PlaySRGSettingBackgroundVideoPlaybackEnabled : @NO }];
-    [userDefaults synchronize];
 }
 
 BOOL ApplicationSettingPresenterModeEnabled(void)

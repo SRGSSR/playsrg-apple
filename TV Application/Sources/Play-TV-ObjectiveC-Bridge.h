@@ -9,6 +9,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSettingsConstants.h"
 #import "ChannelService.h"
 #import "Favorites.h"
 #import "History.h"
@@ -17,6 +18,7 @@
 #import "PlayApplication.h"
 #import "PlayDurationFormatter.h"
 #import "PlayFirebaseConfiguration.h"
+#import "Playlist.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
