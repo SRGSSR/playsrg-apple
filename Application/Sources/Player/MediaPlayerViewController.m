@@ -481,7 +481,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(playlistEntriesDidChange:)
                                                name:SRGPlaylistEntriesDidChangeNotification
-                                             object:nil];
+                                             object:SRGUserData.currentUserData.playlists];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(downloadStateDidChange:)
                                                name:DownloadStateDidChangeNotification
