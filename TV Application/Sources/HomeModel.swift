@@ -379,13 +379,11 @@ extension HomeModel {
         }
         
         private func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
-            let dataProvider = SRGDataProvider.current!
-            
             /* Load latest 15 medias for each 3 shows, get last 30 episodes */
             return urns.publisher
                 .collect(3)
                 .flatMap { urns in
-                    return dataProvider.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
+                    return SRGDataProvider.current!.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
                 }
                 .reduce([SRGMedia]()) { collectedMedias, result in
                     return collectedMedias + result.medias
@@ -397,28 +395,24 @@ extension HomeModel {
         }
         
         private func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
-            let dataProvider = SRGDataProvider.current!
-            
             return historyEntries()
                 .map { historyEntries in
                     historyEntries.compactMap { $0.uid }
                 }
                 .flatMap { urns in
-                    return dataProvider.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+                    return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
                 }
                 .map { $0.medias }
                 .eraseToAnyPublisher()
         }
         
         private func laterPublisher() -> AnyPublisher<[SRGMedia], Error> {
-            let dataProvider = SRGDataProvider.current!
-            
             return playlistEntries()
                 .map { playlistEntries in
                     playlistEntries.compactMap { $0.uid }
                 }
                 .flatMap { urns in
-                    return dataProvider.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+                    return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
                 }
                 .map { $0.medias }
                 .eraseToAnyPublisher()
