@@ -426,8 +426,7 @@ extension HomeModel {
         
         private func historyEntries() -> Future<[SRGHistoryEntry], Error> {
             return Future { promise in
-                // TODO: Compile-checked keypath
-                let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+                let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
                 SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
                     if let error = error {
                         promise(.failure(error))
@@ -441,8 +440,7 @@ extension HomeModel {
         
         private func playlistEntries() -> Future<[SRGPlaylistEntry], Error> {
             return Future { promise in
-                // TODO: Compile-checked keypath
-                let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+                let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
                 SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
                     if let error = error {
                         promise(.failure(error))
