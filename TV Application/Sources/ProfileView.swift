@@ -19,20 +19,20 @@ struct ProfileView: View {
     var body: some View {
         List {
             if model.supportsLogin {
-                Section(header: Text(NSLocalizedString("Profile", comment: "Settings section header")).srgFont(.headline1),
+                Section(header: Text(NSLocalizedString("Profile", comment: "Profile section header")).srgFont(.headline1),
                         footer: Text(NSLocalizedString("Synchronize playback history, favorites and content to be watched later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.overline).opacity(0.8)) {
                     ProfileListItem(model: model)
                 }
             }
             if let synchronizationMessage = synchronizationMessage {
-                Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1),
+                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.headline1),
                         footer: Text(synchronizationMessage).srgFont(.overline).opacity(0.8)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
                 }
             }
             else {
-                Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1)) {
+                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.headline1)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
                 }
@@ -55,7 +55,7 @@ struct ProfileView: View {
         @State var alertDisplayed = false
         
         var text: String {
-            guard model.isLoggedIn else { return  NSLocalizedString("Login", comment: "Login button on Apple TV") }
+            guard model.isLoggedIn else { return NSLocalizedString("Login", comment: "Login button on Apple TV") }
             if let username = model.username {
                 return NSLocalizedString("Logout", comment: "Logout button on Apple TV").appending(" (\(username))")
             }
@@ -123,7 +123,7 @@ struct ProfileView: View {
             }
             if model.isLoggedIn {
                 return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the confirmation pop-up displayed when the user is about to clear the history")),
-                             message: Text(NSLocalizedString("This will erase the history on all devices connected to your account?", comment: "Confirmation message displayed when a logged in user is about to delete the whole history")),
+                             message: Text(NSLocalizedString("This will erase the whole history on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to delete the whole history")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
@@ -161,7 +161,7 @@ struct ProfileView: View {
             }
             if model.isLoggedIn {
                 return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
-                             message: Text(NSLocalizedString("This will remove all favorites and associated notification subscriptions on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to clean all favorites")),
+                             message: Text(NSLocalizedString("This will remove all favorites and notifications subscriptions on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to clean all favorites")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }

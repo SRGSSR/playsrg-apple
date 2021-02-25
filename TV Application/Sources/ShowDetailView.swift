@@ -168,7 +168,7 @@ struct ShowDetailView: View {
                 toggleFavorite()
             }
             return Alert(title: Text(NSLocalizedString("Remove from favorites", comment: "Title of the confirmation pop-up displayed when the user is about to remove a favorite")),
-                         message: Text(NSLocalizedString("This will remove the favorite and associated notification subscription on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to remove a favorite")),
+                         message: Text(NSLocalizedString("This will remove the favorite and notifications subscription on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to remove a favorite")),
                          primaryButton: primaryButton,
                          secondaryButton: secondaryButton)
         }

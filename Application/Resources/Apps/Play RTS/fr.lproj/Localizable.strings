@@ -83,8 +83,14 @@
    Confirmation message displayed when the user is about to remove selected entries from the watch later list */
 "Are you sure you want to delete the selected items?" = "Etes-vous sûr de vouloir supprimer les éléments sélectionnés ?";
 
+/* Confirmation message displayed when the user is about to delete the whole history */
+"Are you sure you want to erase the whole history?" = "Etes-vous sûr de vouloir supprimer tout l'historique ?";
+
 /* Confirmation message displayed when the user is about to logout on Apple TV */
 "Are you sure you want to logout?" = "Etes-vous sûr de vouloir vous déconnecter ?";
+
+/* Confirmation message displayed when the user is about to clean all favorites */
+"Are you sure you want to remove all favorites?" = "Etes-vous sûr de vouloir supprimer tous les favoris ?";
 
 /* Audios option
    Audios tab title
@@ -121,7 +127,8 @@
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Choisissez une radio régionale";
 
-/* Settings section header */
+/* Profile content section header
+   Settings section header */
 "Content" = "Contenu";
 
 /* Sort by date option */
@@ -201,8 +208,7 @@
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
 "Highlights" = "Mises en avant";
 
-/* History tab title
-   Label to present history */
+/* Label to present history */
 "History" = "Historique";
 
 /* Home tab title */
@@ -343,9 +349,6 @@
 /* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
 "Not available since %@" = "Plus disponible depuis %@";
 
-/* Text displayed when no user is logged in */
-"Not logged in" = "Non connecté";
-
 /* Label to present the help page */
 "Notifications" = "Notifications";
 
@@ -395,7 +398,7 @@
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Précédent";
 
-/* Settings section header
+/* Profile section header
    Title displayed at the top of the profile view */
 "Profile" = "Profil";
 
@@ -422,6 +425,9 @@
 
 /* Sort by relevance option */
 "Relevance" = "Pertinence";
+
+/* Title of a removal button */
+"Remove" = "Supprimer";
 
 /* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
 "Remove all content" = "Supprimer tout le contenu";
@@ -457,7 +463,8 @@
 
 /* Button label to remove a show from favorites in the show long-press menu
    Button label to remove a show from favorites in the show preview window
-   Context menu action to remove a show from favorites */
+   Context menu action to remove a show from favorites
+   Title of the confirmation pop-up displayed when the user is about to remove a favorite */
 "Remove from favorites" = "Supprimer des favoris";
 
 /* Short label identifying a replay sport event. Display in uppercase. */
@@ -468,6 +475,9 @@
 
 /* Resume playback button label */
 "Resume" = "Reprendre";
+
+/* Title label used to present medias whose playback can be resumed */
+"Resume playback" = "Reprendre la lecture";
 
 /* Label to present the search view
    Search placeholder text
@@ -545,6 +555,9 @@
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Sous-titré";
 
+/* Login benefits description footer */
+"Synchronize playback history, favorites and content to be watched later on all devices connected to your account." = "Synchronisez l'historique de lecture, les favoris et le contenu à regarder plus tard sur tous les appareils connectés à votre compte.";
+
 /* Button label to share the content being played. */
 "The content" = "Le contenu";
 
@@ -602,6 +615,15 @@
 /* Period setting option */
 "This week" = "Cette semaine";
 
+/* Confirmation message displayed when a logged in user is about to delete the whole history */
+"This will erase the whole history on all devices connected to your account." = "Cela effacera tout l'historique sur tous les appareils connectés à votre compte.";
+
+/* Confirmation message displayed when a logged in user is about to clean all favorites */
+"This will remove all favorites and notifications subscriptions on all devices connected to your account." = "Cela supprimera tous les favoris et les abonnements aux notifications sur tous les appareils connectés à votre compte.";
+
+/* Confirmation message displayed when a logged in user is about to remove a favorite */
+"This will remove the favorite and notifications subscription on all devices connected to your account." = "Cela supprimera le favori et l'abonnement aux notifications sur tous les appareils connectés à votre compte.";
+
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Différé";
 
@@ -647,7 +669,8 @@
    User activity title when watching a video */
 "Watch %@" = "Regarder %@";
 
-/* Label to present the watch later list */
+/* Label to present the watch later list
+   Title Label used to present the video watch later list */
 "Watch later" = "Plus tard";
 
 /* Web first label on media cells
