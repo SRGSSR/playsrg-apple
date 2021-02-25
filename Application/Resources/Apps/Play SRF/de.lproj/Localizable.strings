@@ -331,13 +331,15 @@
 /* Text displayed when no downloads are available */
 "No downloads" = "Keine Downloads vorhanden";
 
-/* Text displayed when no favorites are available */
+/* Remove all favorites button title when no favorite
+   Text displayed when no favorites are available */
 "No favorites" = "Keine Favoriten vorhanden";
 
 /* Message displayed if no Google Cast receiver is available */
 "No Google Cast receiver is available." = "Kein Google Cast Empfänger verfügbar.";
 
-/* Text displayed when no history is available */
+/* Delete history button title when no history
+   Text displayed when no history is available */
 "No history" = "Keine History vorhanden";
 
 /* Text displayed when no notifications are available */
