@@ -24,10 +24,6 @@ struct ProfileView: View {
                     ProfileListItem(model: model)
                 }
             }
-            Section(header: Text(PlaySRGSettingsLocalizedString("Playback", "Playback settings section header")),
-                    footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", "Playback description footer")).srgFont(.overline).opacity(0.8)) {
-                AutoplayListItem()
-            }
             if let synchronizationMessage = synchronizationMessage {
                 Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1),
                         footer: Text(synchronizationMessage).srgFont(.overline).opacity(0.8)) {
@@ -40,6 +36,10 @@ struct ProfileView: View {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
                 }
+            }
+            Section(header: Text(PlaySRGSettingsLocalizedString("Playback", "Playback settings section header")),
+                    footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", "Playback description footer")).srgFont(.overline).opacity(0.8)) {
+                AutoplayListItem()
             }
             Section(header: Text(PlaySRGSettingsLocalizedString("Information", "Information section header")).srgFont(.headline1)) {
                 VersionListItem(model: model)
