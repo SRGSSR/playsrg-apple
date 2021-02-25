@@ -60,6 +60,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/Comscore-Swift-Package-Manager</string>
+			<key>Title</key>
+			<string>ComScore (6.7.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/DZNEmptyDataSet</string>
 			<key>Title</key>
 			<string>DZNEmptyDataSet (1.8.1)</string>
