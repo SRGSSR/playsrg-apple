@@ -428,9 +428,6 @@
 /* Sort by relevance option */
 "Relevance" = "Pertinence";
 
-/* Title of a removal button */
-"Remove" = "Supprimer";
-
 /* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
 "Remove all content" = "Supprimer tout le contenu";
 
