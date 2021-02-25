@@ -61,7 +61,7 @@ SRGPosition *HistoryResumePlaybackPositionForMedia(SRGMedia *media)
 
 BOOL HistoryCanResumePlaybackForMedia(SRGMedia *media)
 {
-    return [media blockingReasonAtDate:NSDate.date] == SRGBlockingReasonNone && HistoryPlaybackProgressForMediaMetadata(media) != 1.f;
+    return HistoryIsProgressForMediaMetadataTracked(media) && [media blockingReasonAtDate:NSDate.date] == SRGBlockingReasonNone && HistoryPlaybackProgressForMediaMetadata(media) != 1.f;
 }
 
 static SRGMedia *HistoryChapterMedia(SRGLetterboxController *controller)
