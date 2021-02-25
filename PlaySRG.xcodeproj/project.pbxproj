@@ -377,6 +377,11 @@
 		08B77AF7240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
 		08B77AF8240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
 		08B77AF9240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08B9618025E81BE200E8AC1B /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08B9617F25E81BE000E8AC1B /* Settings.strings */; };
+		08B961AA25E827EF00E8AC1B /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08B961A925E827EE00E8AC1B /* Settings.strings */; };
+		08B961D425E8280900E8AC1B /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08B961D325E8280800E8AC1B /* Settings.strings */; };
+		08B961D625E8281C00E8AC1B /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08B961D525E8281C00E8AC1B /* Settings.strings */; };
+		08B961EC25E8283F00E8AC1B /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08B961EB25E8283F00E8AC1B /* Settings.strings */; };
 		08B971CD256EF3FF00195901 /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		08B971E2256EF40000195901 /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		08B971E3256EF40100195901 /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
@@ -2035,6 +2040,11 @@
 		08B77AEE240A86FC00A3BC3B /* AccessibilityIdentifierConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessibilityIdentifierConstants.h; sourceTree = "<group>"; };
 		08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessibilityIdentifierConstants.m; sourceTree = "<group>"; };
 		08B77AFB240A8D0A00A3BC3B /* Screenshots-ObjectiveC-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Screenshots-ObjectiveC-Bridge.h"; sourceTree = "<group>"; };
+		08B9617F25E81BE000E8AC1B /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
+		08B961A925E827EE00E8AC1B /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
+		08B961D325E8280800E8AC1B /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
+		08B961D525E8281C00E8AC1B /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
+		08B961EB25E8283F00E8AC1B /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
 		08BAABD71E7613F0007644D7 /* HomeMediasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediasViewController.h; sourceTree = "<group>"; };
 		08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediasViewController.m; sourceTree = "<group>"; };
 		08BDB5B1228D520000335898 /* PushService+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushService+Private.h"; sourceTree = "<group>"; };
@@ -3877,6 +3887,7 @@
 			children = (
 				6FB053F024D4207A004B0CE1 /* LaunchScreen.storyboard */,
 				6FD1205F24D19294008CB2F8 /* RTRAssets.xcassets */,
+				08B961D325E8280800E8AC1B /* Settings.strings */,
 			);
 			path = "Play RTR";
 			sourceTree = "<group>";
@@ -3886,6 +3897,7 @@
 			children = (
 				6FB053F224D42083004B0CE1 /* LaunchScreen.storyboard */,
 				6FD1205124D1927A008CB2F8 /* RTSAssets.xcassets */,
+				08B9617F25E81BE000E8AC1B /* Settings.strings */,
 			);
 			path = "Play RTS";
 			sourceTree = "<group>";
@@ -3895,6 +3907,7 @@
 			children = (
 				6FB053E924D42066004B0CE1 /* LaunchScreen.storyboard */,
 				6FD1205824D19288008CB2F8 /* RSIAssets.xcassets */,
+				08B961A925E827EE00E8AC1B /* Settings.strings */,
 			);
 			path = "Play RSI";
 			sourceTree = "<group>";
@@ -3903,6 +3916,7 @@
 			isa = PBXGroup;
 			children = (
 				6FB053F624D42095004B0CE1 /* LaunchScreen.storyboard */,
+				08B961EB25E8283F00E8AC1B /* Settings.strings */,
 				6FD1206624D1929F008CB2F8 /* SWIAssets.xcassets */,
 			);
 			path = "Play SWI";
@@ -3912,6 +3926,7 @@
 			isa = PBXGroup;
 			children = (
 				6FB053F424D4208C004B0CE1 /* LaunchScreen.storyboard */,
+				08B961D525E8281C00E8AC1B /* Settings.strings */,
 				6FD1204A24D19268008CB2F8 /* SRFAssets.xcassets */,
 			);
 			path = "Play SRF";
@@ -5272,6 +5287,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B961D625E8281C00E8AC1B /* Settings.strings in Resources */,
 				6F5AA59C2502666A00718420 /* CommonImages.xcassets in Resources */,
 				6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */,
@@ -5287,6 +5303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B9618025E81BE200E8AC1B /* Settings.strings in Resources */,
 				6F5AA59D2502666B00718420 /* CommonImages.xcassets in Resources */,
 				6F3F1AB025027CAE000FF4DD /* RTSResources.xcassets in Resources */,
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
@@ -5302,6 +5319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B961AA25E827EF00E8AC1B /* Settings.strings in Resources */,
 				6F5AA59E2502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
 				6F3F1AAE25027CA2000FF4DD /* RSIResources.xcassets in Resources */,
@@ -5317,6 +5335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B961D425E8280900E8AC1B /* Settings.strings in Resources */,
 				6F5AA59F2502666C00718420 /* CommonImages.xcassets in Resources */,
 				08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
@@ -5332,6 +5351,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B961EC25E8283F00E8AC1B /* Settings.strings in Resources */,
 				6F5AA5A02502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
 				08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */,

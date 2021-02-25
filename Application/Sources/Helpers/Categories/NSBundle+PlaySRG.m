@@ -18,8 +18,12 @@ NSString *PlaySRGOnboardingLocalizedString(NSString *key, __unused NSString *com
 
 NSString *PlaySRGSettingsLocalizedString(NSString *key, __unused NSString *comment)
 {
+#if TARGET_OS_IOS
     NSString *settingsBundlePath = [NSBundle.mainBundle pathForResource:@"Settings" ofType:@"bundle"];
     return [[NSBundle bundleWithPath:settingsBundlePath] localizedStringForKey:key value:@"" table:@"Settings"];
+#else
+    return [NSBundle.mainBundle localizedStringForKey:key value:@"" table:@"Settings"];
+#endif
 }
 
 NSString *PlaySRGNonLocalizedString(NSString *string)

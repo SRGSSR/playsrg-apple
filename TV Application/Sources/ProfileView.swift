@@ -24,8 +24,8 @@ struct ProfileView: View {
                     ProfileListItem(model: model)
                 }
             }
-            Section(header: Text(NSLocalizedString("Playback", comment: "Playback settings section header")),
-                    footer: Text(NSLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Playback description footer")).srgFont(.overline).opacity(0.8)) {
+            Section(header: Text(PlaySRGSettingsLocalizedString("Playback", "Playback settings section header")),
+                    footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", "Playback description footer")).srgFont(.overline).opacity(0.8)) {
                 AutoplayListItem()
             }
             if let synchronizationMessage = synchronizationMessage {
@@ -41,7 +41,7 @@ struct ProfileView: View {
                     FavoritesRemovalListItem(model: model)
                 }
             }
-            Section(header: Text(NSLocalizedString("Information", comment: "Information section header")).srgFont(.headline1)) {
+            Section(header: Text(PlaySRGSettingsLocalizedString("Information", "Information section header")).srgFont(.headline1)) {
                 VersionListItem(model: model)
             }
         }
@@ -100,10 +100,10 @@ struct ProfileView: View {
                 isAutoplayEnabled = !isAutoplayEnabled
             }) {
                 HStack {
-                    Text(NSLocalizedString("Autoplay", comment: "Autoplay setting"))
+                    Text(PlaySRGSettingsLocalizedString("Autoplay", "Autoplay setting"))
                         .srgFont(.button1)
                     Spacer()
-                    Text(isAutoplayEnabled ? NSLocalizedString("Enabled", comment: "Enabled state label") : NSLocalizedString("Disabled", comment: "Disabled state label"))
+                    Text(isAutoplayEnabled ? PlaySRGSettingsLocalizedString("Yes", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("No", "Disabled state label on Apple TV"))
                         .srgFont(.button1)
                         .foregroundColor(.secondary)
                 }
@@ -194,7 +194,7 @@ struct ProfileView: View {
         var body: some View {
             Button(action: {}) {
                 HStack {
-                    Text(NSLocalizedString("Version", comment: "Version introductory label"))
+                    Text(PlaySRGSettingsLocalizedString("Version", "Version introductory label"))
                         .srgFont(.button1)
                     Spacer()
                     Text(model.version)
