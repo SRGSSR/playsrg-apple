@@ -17,7 +17,7 @@ class MediaDetailModel: ObservableObject {
     
     @Published private(set) var relatedMedias: [SRGMedia] = []
     @Published var selectedMedia: SRGMedia? = nil
-    @Published var watchedLater: Bool = false
+    @Published var isWatchedLater: Bool = false
     
     var mainCancellables = Set<AnyCancellable>()
     var refreshCancellables = Set<AnyCancellable>()
@@ -77,6 +77,6 @@ class MediaDetailModel: ObservableObject {
     }
     
     private func updateWatchedLater() {
-        watchedLater = WatchLaterContainsMediaMetadata(media)
+        isWatchedLater = WatchLaterContainsMediaMetadata(media)
     }
 }
