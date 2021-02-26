@@ -59,7 +59,7 @@ class HomeModel: Identifiable, ObservableObject {
                 .store(in: &mainCancellables)
         }
         
-        if self.rowIds.contains(.tvHistory) {
+        if self.rowIds.contains(.tvResumePlayback) {
             NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
                 .sink { _ in
                     self.refresh()
@@ -193,7 +193,7 @@ extension HomeModel {
         case tvLatestForModule(_ module: SRGModule?, type: SRGModuleType)
         case tvLatestForTopic(_ topic: SRGTopic?)
         case tvTopicsAccess
-        case tvHistory
+        case tvResumePlayback
         case tvWatchLater
         
         case radioLatestEpisodes(channelUid: String)
@@ -234,7 +234,7 @@ extension HomeModel {
             switch self {
             case .tvTopicsAccess:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .topicPlaceholder(index: $0)) }
-            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows, .tvHistory, .tvWatchLater:
+            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows, .tvResumePlayback, .tvWatchLater:
                 return []
             case .radioAllShows:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
@@ -305,7 +305,7 @@ extension HomeModel {
                 return dataProvider.latestMediasForTopic(withUrn: urn, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
-            case .tvHistory:
+            case .tvResumePlayback:
                 return historyPublisher()
                     .map { compatibleMedias($0).prefix(Int(pageSize)).map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
@@ -484,7 +484,7 @@ extension HomeModel {
                 return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
             case .tvFavoriteLatestEpisodes:
                 return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
-            case .tvHistory:
+            case .tvResumePlayback:
                 return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
             case .tvWatchLater:
                 return NSLocalizedString("Watch later", comment: "Title Label used to present the video watch later list")

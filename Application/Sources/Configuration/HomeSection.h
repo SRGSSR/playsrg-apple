@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, HomeSection) {
     HomeSectionTVShowsAccess,
     HomeSectionTVFavoriteShows,
     HomeSectionTVFavoriteLatestEpisodes API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios),
-    HomeSectionTVHistory API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios),
+    HomeSectionTVResumePlayback API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios),
     HomeSectionTVWatchLater API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios),
     
     // Radio sections
