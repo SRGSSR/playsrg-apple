@@ -617,10 +617,10 @@
 "This will erase the whole history on all devices connected to your account." = "Cela effacera tout l'historique sur tous les appareils connectés à votre compte.";
 
 /* Confirmation message displayed when a logged in user is about to clean all favorites */
-"This will remove all favorites and notification subscriptions on all devices connected to your account." = "Cela supprimera tous les favoris et les abonnements aux notifications sur tous les appareils connectés à votre compte.";
+"This will remove all favorites and notification subscriptions on all devices connected to your account." = "Ceci supprimera tous les favoris et les abonnements aux notifications sur tous les appareils connectés à votre compte.";
 
 /* Confirmation message displayed when a logged in user is about to remove a favorite */
-"This will remove the favorite and notification subscription on all devices connected to your account." = "Cela supprimera le favori et l'abonnement aux notifications sur tous les appareils connectés à votre compte.";
+"This will remove the favorite and notification subscription on all devices connected to your account." = "Ceci supprimera le favori et l'abonnement aux notifications sur tous les appareils connectés à votre compte.";
 
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Différé";
