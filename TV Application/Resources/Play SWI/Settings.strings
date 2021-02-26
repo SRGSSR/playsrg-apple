@@ -22,7 +22,8 @@
 "Information" = "Information";
 "Install previous version" = "Install previous version";
 "Licenses" = "Licenses";
-"No" = "No";
+"Off" = "Off";
+"On" = "On";
 "Open system settings" = "Open system settings";
 "Original images only" = "Original images only";
 "Outside Switzerland" = "Outside Switzerland";
@@ -47,5 +48,4 @@
 "What's new" = "What's new";
 "When enabled, more content is automatically played after playback of the current content ends." = "When enabled, more content is automatically played after playback of the current content ends.";
 "When enabled, video playback continues even when you leave the application." = "When enabled, video playback continues even when you leave the application.";
-"Yes" = "Yes";
 "Your feedback" = "Your feedback";

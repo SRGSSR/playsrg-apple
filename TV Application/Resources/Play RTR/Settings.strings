@@ -22,7 +22,8 @@
 "Information" = "Infurmaziun";
 "Install previous version" = "Installar la versiun precedenta";
 "Licenses" = "Licenzas";
-"No" = "No";
+"Off" = "Off";
+"On" = "On";
 "Open system settings" = "Avrir las preferenzas dal sistem";
 "Original images only" = "Mo maletgs originals";
 "Outside Switzerland" = "Ordaifer la Svizra";
@@ -47,5 +48,4 @@
 "What's new" = "Tge ch'è nov";
 "When enabled, more content is automatically played after playback of the current content ends." = "Automaticamein dapli cuntegn suenter playback sche inabel.";
 "When enabled, video playback continues even when you leave the application." = "Activà, ed il video marscha vinavant, era sche Vus bandunais l'applicaziun.";
-"Yes" = "Yes";
 "Your feedback" = "Voss resun";

@@ -103,7 +103,7 @@ struct ProfileView: View {
                     Text(PlaySRGSettingsLocalizedString("Autoplay", "Autoplay setting"))
                         .srgFont(.button1)
                     Spacer()
-                    Text(isAutoplayEnabled ? PlaySRGSettingsLocalizedString("Yes", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("No", "Disabled state label on Apple TV"))
+                    Text(isAutoplayEnabled ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
                         .srgFont(.button1)
                         .foregroundColor(.secondary)
                 }
