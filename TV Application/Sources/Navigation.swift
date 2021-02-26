@@ -19,7 +19,9 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
         let letterboxViewController = SRGLetterboxViewController()
         
         let controller = letterboxViewController.controller
-        controller.playlistDataSource = PlaylistForURN(media.urn)
+        let playlist = PlaylistForURN(media.urn)
+        controller.playlistDataSource = playlist
+        controller.playbackTransitionDelegate = playlist
         applyLetterboxControllerSettings(to: controller)
         
         controller.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: Int32(NSEC_PER_SEC)), queue: nil) { _ in

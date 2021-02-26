@@ -164,11 +164,11 @@ struct ShowDetailView: View {
         
         private func favoriteRemovalAlert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
-            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Remove", comment: "Title of a removal button"))) {
+            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                 toggleFavorite()
             }
             return Alert(title: Text(NSLocalizedString("Remove from favorites", comment: "Title of the confirmation pop-up displayed when the user is about to remove a favorite")),
-                         message: Text(NSLocalizedString("This will remove the favorite and associated notification subscription on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to remove a favorite")),
+                         message: Text(NSLocalizedString("This will remove the favorite and notification subscription on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to remove a favorite")),
                          primaryButton: primaryButton,
                          secondaryButton: secondaryButton)
         }

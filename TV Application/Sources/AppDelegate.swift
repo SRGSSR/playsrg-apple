@@ -73,12 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 4)
         viewControllers.append(searchViewController)
         
-        #if DEBUG
-        let historyViewController = UIHostingController(rootView: HistoryView())
-        historyViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("History", comment: "History tab title"), image: nil, tag: 6)
-        viewControllers.append(historyViewController)
-        #endif
-        
         #if DEBUG || NIGHTLY
         let profileViewController = UIHostingController(rootView: ProfileView())
         profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile-34")!.withRenderingMode(.alwaysTemplate), tag: 7)

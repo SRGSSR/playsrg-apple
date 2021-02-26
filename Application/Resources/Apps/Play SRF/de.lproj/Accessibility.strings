@@ -120,6 +120,9 @@
 /* Song cell hint */
 "Plays the music." = "Spielt die Musik ab.";
 
+/* Profile button label on home view */
+"Profile" = "Profil";
+
 /* Mini player label */
 "Recently played: %@" = "Kürzlich abgespielt: %@";
 

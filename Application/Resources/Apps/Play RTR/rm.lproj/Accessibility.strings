@@ -120,6 +120,9 @@
 /* Song cell hint */
 "Plays the music." = "Lascha tadlar musica.";
 
+/* Profile button label on home view */
+"Profile" = "Profils";
+
 /* Mini player label */
 "Recently played: %@" = "Laschà ì ultimamain: %@";
 

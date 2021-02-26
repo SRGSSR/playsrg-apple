@@ -33,7 +33,7 @@ OBJC_EXPORT NSString *HistoryPlaybackProgressForMediaMetadataAsync(id<SRGMediaMe
 /**
  *  Cancel a progress async request.
  */
-void HistoryPlaybackProgressAsyncCancel(NSString * _Nullable handle);
+OBJC_EXPORT void HistoryPlaybackProgressAsyncCancel(NSString * _Nullable handle);
 
 /**
  *  Return a recommended resume playback position for a media.
@@ -41,5 +41,12 @@ void HistoryPlaybackProgressAsyncCancel(NSString * _Nullable handle);
  *  @discussion Must be called from the main thread
  */
 OBJC_EXPORT SRGPosition * _Nullable HistoryResumePlaybackPositionForMedia(SRGMedia *media);
+
+/**
+ *  Return `YES` if playback can be resumed (or started, a special case of resuming).
+ *
+ *  @discussion Must be called from the main thread
+ */
+OBJC_EXPORT BOOL HistoryCanResumePlaybackForMedia(SRGMedia *media);
 
 NS_ASSUME_NONNULL_END

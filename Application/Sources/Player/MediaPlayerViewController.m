@@ -324,7 +324,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             labels.type = AnalyticsTypeActionDisplay;
             labels.value = letterboxController.continuousPlaybackUpcomingMedia.URN;
             
-            Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? letterboxController.playlistDataSource : nil;
+            Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
             labels.extraValue1 = playlist.recommendationUid;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
         }
@@ -481,7 +481,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(playlistEntriesDidChange:)
                                                name:SRGPlaylistEntriesDidChangeNotification
-                                             object:nil];
+                                             object:SRGUserData.currentUserData.playlists];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(downloadStateDidChange:)
                                                name:DownloadStateDidChangeNotification
@@ -559,7 +559,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         labels.type = AnalyticsTypeActionCancel;
         labels.value = self.letterboxController.continuousPlaybackUpcomingMedia.URN;
         
-        Playlist *playlist = [self.letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? self.letterboxController.playlistDataSource : nil;
+        Playlist *playlist = [self.letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)self.letterboxController.playlistDataSource : nil;
         labels.extraValue1 = playlist.recommendationUid;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
     }
@@ -1663,7 +1663,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     labels.value = upcomingMedia.URN;
     
     SRGLetterboxController *controller = letterboxView.controller;
-    Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? controller.playlistDataSource : nil;
+    Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
     labels.extraValue1 = playlist.recommendationUid;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
 }
@@ -1692,7 +1692,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     labels.value = upcomingMedia.URN;
     
     SRGLetterboxController *controller = letterboxView.controller;
-    Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? controller.playlistDataSource : nil;
+    Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
     labels.extraValue1 = playlist.recommendationUid;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
 }

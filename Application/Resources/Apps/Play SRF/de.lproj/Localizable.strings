@@ -46,7 +46,8 @@
 /* Short title displayed in home pages on a button. */
 "A to Z" = "A bis Z";
 
-/* Button label to add a media to the watch later list, from the media long-press menu
+/* Button label to add a media to the watch later list in media detail view
+   Button label to add a media to the watch later list, from the media long-press menu
    Button label to add a media to the watch later list, from the media preview window
    Context menu action to add a media to the watch later list */
 "Add to \"Watch later\"" = "Zu Später schauen hinzufügen";
@@ -83,8 +84,14 @@
    Confirmation message displayed when the user is about to remove selected entries from the watch later list */
 "Are you sure you want to delete the selected items?" = "Sind Sie sicher, dass Sie die ausgewählten Elemente löschen wollen?";
 
+/* Confirmation message displayed when the user is about to delete the whole history */
+"Are you sure you want to erase the whole history?" = "Are you sure you want to erase the whole history?";
+
 /* Confirmation message displayed when the user is about to logout on Apple TV */
 "Are you sure you want to logout?" = "Sind Sie sicher, dass Sie sich abmelden wollen?";
+
+/* Confirmation message displayed when the user is about to clean all favorites */
+"Are you sure you want to remove all favorites?" = "Are you sure you want to remove all favorites?";
 
 /* Audios option
    Audios tab title
@@ -121,8 +128,9 @@
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Wählen Sie Ihr Regionaljournal";
 
-/* Settings section header */
-"Content" = "Medientyp";
+/* Profile content section header
+   Settings section header */
+"Content" = "Inhalt";
 
 /* Sort by date option */
 "Date" = "Datum";
@@ -201,8 +209,7 @@
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
 "Highlights" = "Highlights";
 
-/* History tab title
-   Label to present history */
+/* Label to present history */
 "History" = "Zuletzt gesehen";
 
 /* Home tab title */
@@ -224,7 +231,7 @@
 "Last week" = "Letzte Woche";
 
 /* Label for the button for deciding to opt-in for background video playback at a later time
-   Watch or listen later button label in media detail view */
+   Watch or listen later button label when a media is in the watch later list in media detail view */
 "Later" = "Später";
 
 /* Title label used to present the latest episodes from TV favorite shows */
@@ -343,9 +350,6 @@
 /* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
 "Not available since %@" = "Nicht mehr verfügbar seit %@";
 
-/* Text displayed when no user is logged in */
-"Not logged in" = "Nicht angemeldet";
-
 /* Label to present the help page */
 "Notifications" = "Push-Mitteilungen";
 
@@ -395,7 +399,7 @@
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Zurück";
 
-/* Settings section header
+/* Profile section header
    Title displayed at the top of the profile view */
 "Profile" = "Profil";
 
@@ -457,7 +461,8 @@
 
 /* Button label to remove a show from favorites in the show long-press menu
    Button label to remove a show from favorites in the show preview window
-   Context menu action to remove a show from favorites */
+   Context menu action to remove a show from favorites
+   Title of the confirmation pop-up displayed when the user is about to remove a favorite */
 "Remove from favorites" = "Aus den Favoriten entfernen";
 
 /* Short label identifying a replay sport event. Display in uppercase. */
@@ -468,6 +473,9 @@
 
 /* Resume playback button label */
 "Resume" = "Weiter abspielen";
+
+/* Title label used to present medias whose playback can be resumed */
+"Resume playback" = "Resume playback";
 
 /* Label to present the search view
    Search placeholder text
@@ -545,6 +553,9 @@
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Mit Untertiteln";
 
+/* Login benefits description footer */
+"Synchronize playback history, favorites and content to be watched later on all devices connected to your account." = "Synchronize playback history, favorites and content to be watched later on all devices connected to your account.";
+
 /* Button label to share the content being played. */
 "The content" = "Ganzer Beitrag";
 
@@ -602,6 +613,15 @@
 /* Period setting option */
 "This week" = "Diese Woche";
 
+/* Confirmation message displayed when a logged in user is about to delete the whole history */
+"This will erase the whole history on all devices connected to your account." = "This will erase the whole history on all devices connected to your account.";
+
+/* Confirmation message displayed when a logged in user is about to clean all favorites */
+"This will remove all favorites and notification subscriptions on all devices connected to your account." = "This will remove all favorites and notification subscriptions on all devices connected to your account.";
+
+/* Confirmation message displayed when a logged in user is about to remove a favorite */
+"This will remove the favorite and notification subscription on all devices connected to your account." = "This will remove the favorite and notification subscription on all devices connected to your account.";
+
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Zeitversetzt";
 
@@ -647,7 +667,8 @@
    User activity title when watching a video */
 "Watch %@" = "%@ schauen";
 
-/* Label to present the watch later list */
+/* Label to present the watch later list
+   Title Label used to present the video watch later list */
 "Watch later" = "Später schauen";
 
 /* Web first label on media cells

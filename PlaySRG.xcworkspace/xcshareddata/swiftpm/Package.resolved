@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "14dff7e19375288c7e34df8444c85d314f26d7cf",
-          "version": "7.6.0"
+          "revision": "f4cd4db180486996d3b3216d11e7adf634695daa",
+          "version": "7.7.0"
         }
       },
       {
@@ -177,8 +177,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "961597d324949c7003c77d602bfc4d5519b47e81",
-          "version": "9.2.4"
+          "revision": "e2eb1b7b82983c6f6a2df496e850406a78cdef05",
+          "version": "9.3.0"
         }
       },
       {
@@ -258,7 +258,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "2006d0f530b750f06d65ef86954598409e69c9dc",
+          "revision": "5179342dec6f8615389591edf10eccd6bce3c240",
           "version": null
         }
       },
@@ -266,9 +266,9 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": null,
-          "revision": "3a1db335d17aab7404586e6be37ce0e22d1879ee",
-          "version": "6.2.0"
+          "branch": "develop",
+          "revision": "0db642f56ac022f81d37d4e2bdd516f4eceb1c7b",
+          "version": null
         }
       },
       {
@@ -305,6 +305,15 @@
           "branch": null,
           "revision": "8797a4e16fd44d2eeaa0ab1908539f3f7035c840",
           "version": "3.0.1"
+        }
+      },
+      {
+        "package": "SwiftProtobuf",
+        "repositoryURL": "https://github.com/apple/swift-protobuf.git",
+        "state": {
+          "branch": null,
+          "revision": "e1904bf5a5f79cb7e0ff68a427a53a93b652fcd1",
+          "version": "1.15.0"
         }
       },
       {

@@ -904,7 +904,7 @@ static void *s_kvoContext = &s_kvoContext;
         labels.value = media.URN;
         
         SRGLetterboxController *letterboxController = notification.object;
-        Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? letterboxController.playlistDataSource : nil;
+        Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
         labels.extraValue1 = playlist.recommendationUid;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
     }

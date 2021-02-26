@@ -18,7 +18,7 @@
   "whatsNewURL": "https://pastebin.com/raw/BRC1hPbt",
   "downloadsHintsHidden": true,
   "moreEpisodesHidden": true,
-  "continuousPlaybackPlayerViewTransitionDuration": 5,
+  "continuousPlaybackPlayerViewTransitionDuration": 10,
   "continuousPlaybackForegroundTransitionDuration": 0,
   "continuousPlaybackBackgroundTransitionDuration": 0,
   "endTolerance": 10,

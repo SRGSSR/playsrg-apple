@@ -19,35 +19,35 @@ struct ProfileView: View {
     var body: some View {
         List {
             if model.supportsLogin {
-                Section(header: Text(NSLocalizedString("Profile", comment: "Settings section header")).srgFont(.headline1),
+                Section(header: Text(NSLocalizedString("Profile", comment: "Profile section header")).srgFont(.headline1),
                         footer: Text(NSLocalizedString("Synchronize playback history, favorites and content to be watched later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.overline).opacity(0.8)) {
                     ProfileListItem(model: model)
                 }
             }
-            Section(header: Text(NSLocalizedString("Playback", comment: "Playback settings section header")),
-                    footer: Text(NSLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Playback description footer")).srgFont(.overline).opacity(0.8)) {
-                AutoplayListItem()
-            }
             if let synchronizationMessage = synchronizationMessage {
-                Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1),
+                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.headline1),
                         footer: Text(synchronizationMessage).srgFont(.overline).opacity(0.8)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
                 }
             }
             else {
-                Section(header: Text(NSLocalizedString("Content", comment: "Settings section header")).srgFont(.headline1)) {
+                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.headline1)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
                 }
             }
-            Section(header: Text(NSLocalizedString("Information", comment: "Information section header")).srgFont(.headline1)) {
+            Section(header: Text(PlaySRGSettingsLocalizedString("Playback", "Playback settings section header")),
+                    footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", "Playback description footer")).srgFont(.overline).opacity(0.8)) {
+                AutoplayListItem()
+            }
+            Section(header: Text(PlaySRGSettingsLocalizedString("Information", "Information section header")).srgFont(.headline1)) {
                 VersionListItem(model: model)
             }
         }
         .listStyle(GroupedListStyle())
         .frame(maxWidth: 1054)
-        .padding(.top, 100)
+        .padding(.top, model.supportsLogin ? 0 : 100)
     }
     
     struct ProfileListItem: View {
@@ -55,7 +55,7 @@ struct ProfileView: View {
         @State var alertDisplayed = false
         
         var text: String {
-            guard model.isLoggedIn else { return  NSLocalizedString("Login", comment: "Login button on Apple TV") }
+            guard model.isLoggedIn else { return NSLocalizedString("Login", comment: "Login button on Apple TV") }
             if let username = model.username {
                 return NSLocalizedString("Logout", comment: "Logout button on Apple TV").appending(" (\(username))")
             }
@@ -100,10 +100,10 @@ struct ProfileView: View {
                 isAutoplayEnabled = !isAutoplayEnabled
             }) {
                 HStack {
-                    Text(NSLocalizedString("Autoplay", comment: "Autoplay setting"))
+                    Text(PlaySRGSettingsLocalizedString("Autoplay", "Autoplay setting"))
                         .srgFont(.button1)
                     Spacer()
-                    Text(isAutoplayEnabled ? NSLocalizedString("Enabled", comment: "Enabled state label") : NSLocalizedString("Disabled", comment: "Disabled state label"))
+                    Text(isAutoplayEnabled ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
                         .srgFont(.button1)
                         .foregroundColor(.secondary)
                 }
@@ -123,7 +123,7 @@ struct ProfileView: View {
             }
             if model.isLoggedIn {
                 return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the confirmation pop-up displayed when the user is about to clear the history")),
-                             message: Text(NSLocalizedString("This will erase the history on all devices connected to your account?", comment: "Confirmation message displayed when a logged in user is about to delete the whole history")),
+                             message: Text(NSLocalizedString("This will erase the whole history on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to delete the whole history")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
@@ -161,7 +161,7 @@ struct ProfileView: View {
             }
             if model.isLoggedIn {
                 return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
-                             message: Text(NSLocalizedString("This will remove all favorites and associated notification subscriptions on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to clean all favorites")),
+                             message: Text(NSLocalizedString("This will remove all favorites and notification subscriptions on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to clean all favorites")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
@@ -194,13 +194,13 @@ struct ProfileView: View {
         var body: some View {
             Button(action: {}) {
                 HStack {
-                    Text(NSLocalizedString("Version", comment: "Version introductory label"))
+                    Text(PlaySRGSettingsLocalizedString("Version", "Version introductory label"))
                         .srgFont(.button1)
                     Spacer()
                     Text(model.version)
                         .srgFont(.button1)
-                        .foregroundColor(.secondary)
                 }
+                .foregroundColor(.secondary)
             }
             .padding()
         }
