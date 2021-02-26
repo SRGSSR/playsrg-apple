@@ -46,7 +46,8 @@
 /* Short title displayed in home pages on a button. */
 "A to Z" = "Dalla A alla Z";
 
-/* Button label to add a media to the watch later list, from the media long-press menu
+/* Button label to add a media to the watch later list in media detail view
+   Button label to add a media to the watch later list, from the media long-press menu
    Button label to add a media to the watch later list, from the media preview window
    Context menu action to add a media to the watch later list */
 "Add to \"Watch later\"" = "Aggiungere a \"Guardare dopo\"";
@@ -230,7 +231,7 @@
 "Last week" = "Ultima settimana";
 
 /* Label for the button for deciding to opt-in for background video playback at a later time
-   Watch or listen later button label in media detail view */
+   Watch or listen later button label when a media is in the watch later list in media detail view */
 "Later" = "Dopo";
 
 /* Title label used to present the latest episodes from TV favorite shows */
