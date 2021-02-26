@@ -129,7 +129,7 @@
 
 /* Profile content section header
    Settings section header */
-"Content" = "Medientyp";
+"Content" = "Inhalt";
 
 /* Sort by date option */
 "Date" = "Datum";
