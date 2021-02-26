@@ -141,7 +141,7 @@ struct ProfileView: View {
                     alertDisplayed = true
                 }
             }) {
-                Text(model.hasHistoryEntries ? NSLocalizedString("Delete history", comment: "Delete history button title") : NSLocalizedString("No history", comment: "Delete history button title when no history"))
+                Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
                     .srgFont(.button1)
                     .foregroundColor(model.hasHistoryEntries ? .primary : .secondary)
             }
@@ -179,7 +179,7 @@ struct ProfileView: View {
                     alertDisplayed = true
                 }
             }) {
-                Text(model.hasFavorites ? NSLocalizedString("Remove all favorites", comment: "Remove all favorites button title") : NSLocalizedString("No favorites", comment: "Remove all favorites button title when no favorite"))
+                Text(NSLocalizedString("Remove all favorites", comment: "Remove all favorites button title"))
                     .srgFont(.button1)
                     .foregroundColor(model.hasFavorites ? .primary : .secondary)
             }

@@ -331,15 +331,13 @@
 /* Text displayed when no downloads are available */
 "No downloads" = "Naginas telechargiadas";
 
-/* Remove all favorites button title when no favorite
-   Text displayed when no favorites are available */
+/* Text displayed when no favorites are available */
 "No favorites" = "Nagins favurits";
 
 /* Message displayed if no Google Cast receiver is available */
 "No Google Cast receiver is available." = "Nagin receptur Google Cast disponibel.";
 
-/* Delete history button title when no history
-   Text displayed when no history is available */
+/* Text displayed when no history is available */
 "No history" = "Nagina cronologia";
 
 /* Text displayed when no notifications are available */
