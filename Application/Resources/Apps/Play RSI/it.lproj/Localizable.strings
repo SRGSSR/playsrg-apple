@@ -617,10 +617,10 @@
 "This will erase the whole history on all devices connected to your account." = "This will erase the whole history on all devices connected to your account.";
 
 /* Confirmation message displayed when a logged in user is about to clean all favorites */
-"This will remove all favorites and notifications subscriptions on all devices connected to your account." = "This will remove all favorites and notifications subscriptions on all devices connected to your account.";
+"This will remove all favorites and notification subscriptions on all devices connected to your account." = "This will remove all favorites and notification subscriptions on all devices connected to your account.";
 
 /* Confirmation message displayed when a logged in user is about to remove a favorite */
-"This will remove the favorite and notifications subscription on all devices connected to your account." = "This will remove the favorite and notifications subscription on all devices connected to your account.";
+"This will remove the favorite and notification subscription on all devices connected to your account." = "This will remove the favorite and notification subscription on all devices connected to your account.";
 
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Differito";

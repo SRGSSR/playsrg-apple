@@ -161,7 +161,7 @@ struct ProfileView: View {
             }
             if model.isLoggedIn {
                 return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
-                             message: Text(NSLocalizedString("This will remove all favorites and notifications subscriptions on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to clean all favorites")),
+                             message: Text(NSLocalizedString("This will remove all favorites and notification subscriptions on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to clean all favorites")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
