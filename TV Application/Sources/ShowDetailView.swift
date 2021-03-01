@@ -212,12 +212,10 @@ struct ShowDetailView: View {
         let show: SRGShow
         
         var body: some View {
-            GeometryReader { geometry in
-                FocusableRegion {
-                    VStack {
-                        VisualView(show: show)
-                        Spacer()
-                    }
+            FocusableRegion {
+                VStack {
+                    VisualView(show: show)
+                    Spacer()
                 }
             }
         }
