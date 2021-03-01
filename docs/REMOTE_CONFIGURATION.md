@@ -75,7 +75,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `tvTopics`: Topics (expand into a row per topic).
 * `tvTopicsAccess`: Topic access.
 * `tvTrending`: Trending medias and editorial picks. See `tvTrendingEpisodesOnly`, `tvTrendingEditorialLimit` and `tvTrendingPrefersHeroStage` options.
-* `tvHistory`: The latest videos added to history.
+* `tvResumePlayback`: The videos from history that can be resumed.
 * `tvWatchLater`: The latest videos added to the watch later list.
 
 ### Topic configuration
