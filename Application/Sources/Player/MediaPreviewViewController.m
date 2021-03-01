@@ -187,7 +187,8 @@
     
     if (WatchLaterCanStoreMediaMetadata(self.media)) {
         BOOL inWatchLaterList = WatchLaterContainsMediaMetadata(self.media);
-        UIPreviewAction *watchLaterAction = [UIPreviewAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Later\"", @"Button label to remove a media from the later list, from the media preview window") : NSLocalizedString(@"Watch later", @"Button label to add a media to the later list, from the media preview window") style:inWatchLaterList ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        NSString *addActionTitle = (self.media.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen later", @"Button label to add an audio to the later list, from the media preview window") : NSLocalizedString(@"Watch later", @"Button label to add a video to the later list, from the media preview window");
+        UIPreviewAction *watchLaterAction = [UIPreviewAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Later\"", @"Button label to remove a media from the later list, from the media preview window") : addActionTitle style:inWatchLaterList ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
             WatchLaterToggleMediaMetadata(self.media, ^(BOOL added, NSError * _Nullable error) {
                 if (! error) {
                     AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;

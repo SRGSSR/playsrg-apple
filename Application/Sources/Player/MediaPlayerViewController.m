@@ -1244,7 +1244,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
     else {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later-48"] forState:UIControlStateNormal];
-        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Watch later", @"Media addition to later list label");
+        self.watchLaterButton.accessibilityLabel = (media.mediaType == SRGMediaTypeAudio) ? PlaySRGAccessibilityLocalizedString(@"Listen later", @"Media addition for an audio to later list label") : PlaySRGAccessibilityLocalizedString(@"Watch later", @"Media addition for a video to later list label");
     }
 }
 
