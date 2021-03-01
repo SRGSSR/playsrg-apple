@@ -93,7 +93,7 @@ void WatchLaterMigrate(void)
             return;
         }
         
-        // Don't add livestreams to the watch later list.
+        // Don't add livestreams to the later list.
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(DeprecatedFavorite.new, mediaContentType), @(FavoriteMediaContentTypeLive)];
         NSArray<DeprecatedFavorite *> *livestreamFavorites = [favorites filteredArrayUsingPredicate:predicate];
         [DeprecatedFavorite finishMigrationForFavorites:livestreamFavorites];

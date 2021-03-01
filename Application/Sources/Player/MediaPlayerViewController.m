@@ -1240,11 +1240,11 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     if (WatchLaterContainsMediaMetadata(media)) {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later_full-48"] forState:UIControlStateNormal];
-        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove from the watch later list", @"Media watch later removal label");
+        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove from \"Later\" list", @"Media removal from later list label");
     }
     else {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later-48"] forState:UIControlStateNormal];
-        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Add to the watch later list", @"Media watch later addition label");
+        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Watch later", @"Media addition to later list label");
     }
 }
 

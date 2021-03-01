@@ -121,7 +121,7 @@ static void commonInit(BaseViewController *self);
     
     if (WatchLaterCanStoreMediaMetadata(media)) {
         BOOL inWatchLaterList = WatchLaterContainsMediaMetadata(media);
-        UIAction *watchLaterAction = [UIAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Watch later\"", @"Context menu action to remove a media from the watch later list") : NSLocalizedString(@"Add to \"Watch later\"", @"Context menu action to add a media to the watch later list") image:inWatchLaterList ? [UIImage imageNamed:@"watch_later_full-22"] : [UIImage imageNamed:@"watch_later-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        UIAction *watchLaterAction = [UIAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Later\"", @"Context menu action to remove a media from the later list") : NSLocalizedString(@"Watch later", @"Context menu action to add a media to the later list") image:inWatchLaterList ? [UIImage imageNamed:@"watch_later_full-22"] : [UIImage imageNamed:@"watch_later-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
             WatchLaterToggleMediaMetadata(media, ^(BOOL added, NSError * _Nullable error) {
                 if (! error) {
                     AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
@@ -462,7 +462,7 @@ static void commonInit(BaseViewController *self);
         
         if (WatchLaterCanStoreMediaMetadata(media)) {
             BOOL inWatchLaterList = WatchLaterContainsMediaMetadata(media);
-            [alertController addAction:[UIAlertAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Watch later\"", @"Button label to remove a media from the watch later list, from the media long-press menu") : NSLocalizedString(@"Add to \"Watch later\"", @"Button label to add a media to the watch later list, from the media long-press menu") style:inWatchLaterList ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alertController addAction:[UIAlertAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Later\"", @"Button label to remove a media from the later list, from the media long-press menu") : NSLocalizedString(@"Watch later", @"Button label to add a media to the later list, from the media long-press menu") style:inWatchLaterList ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 WatchLaterToggleMediaMetadata(media, ^(BOOL added, NSError * _Nullable error) {
                     if (! error) {
                         AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
