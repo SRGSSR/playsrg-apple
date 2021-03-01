@@ -77,6 +77,7 @@ struct MediaDetailView: View {
                             ActionsView(model: model)
                                 .layoutPriority(1)
                                 .prefersDefaultFocus(in: namespace)
+                                .frame(height: 160, alignment: .top)
                         }
                         .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .leading)
                     }
