@@ -7,14 +7,14 @@
 /* Seek forward shortcut label */
 "%@ forward" = "%@ vorwärts";
 
-/* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been added to \"Watch later\"" = "%@ wurde zu Später schauen hinzugefügt";
+/* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been added to \"Later\"" = "%@ has been added to \"Later\"";
 
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
 "%@ has been added to favorites" = "%@ wurde zu den Favoriten hinzugefügt";
 
-/* Message displayed at the top of the screen when removing an item from the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been removed from \"Watch later\"" = "%@ wurde von Später schauen entfernt";
+/* Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been removed from \"Later\"" = "%@ has been removed from \"Later\"";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
 "%@ has been removed from favorites" = "%@ wurde von den Favoriten entfernt";
@@ -46,12 +46,6 @@
 /* Short title displayed in home pages on a button. */
 "A to Z" = "A bis Z";
 
-/* Button label to add a media to the watch later list in media detail view
-   Button label to add a media to the watch later list, from the media long-press menu
-   Button label to add a media to the watch later list, from the media preview window
-   Context menu action to add a media to the watch later list */
-"Add to \"Watch later\"" = "Zu Später schauen hinzufügen";
-
 /* Button label to add a download from the media long-press menu
    Button label to add a download from the media preview window
    Context menu action to add a media to the downloads */
@@ -70,7 +64,7 @@
 "Already available" = "Vorab online verfügbar";
 
 /* Confirmation message displayed when the user is about to clean all favorites
-   Confirmation message displayed when the user is about to clean the watch later list
+   Confirmation message displayed when the user is about to clean the later list
    Confirmation message displayed when the user is about to delete all download items
    Confirmation message displayed when the user is about to delete the whole history */
 "Are you sure you want to delete all items?" = "Sind Sie sicher, dass Sie alle Elemente löschen wollen?";
@@ -81,7 +75,7 @@
 /* Confirmation message displayed when the user is about to delete selected download items
    Confirmation message displayed when the user is about to delete selected history entries
    Confirmation message displayed when the user is about to remove selected entries from favorites
-   Confirmation message displayed when the user is about to remove selected entries from the watch later list */
+   Confirmation message displayed when the user is about to remove selected entries from the later list */
 "Are you sure you want to delete the selected items?" = "Sind Sie sicher, dass Sie die ausgewählten Elemente löschen wollen?";
 
 /* Confirmation message displayed when the user is about to delete the whole history */
@@ -231,7 +225,9 @@
 "Last week" = "Letzte Woche";
 
 /* Label for the button for deciding to opt-in for background video playback at a later time
-   Watch or listen later button label when a media is in the watch later list in media detail view */
+   Label to present the later list
+   Title Label used to present the video later list
+   Watch later or listen later button label in media detail view when a media is in the later list */
 "Later" = "Später";
 
 /* Title label used to present the latest episodes from TV favorite shows */
@@ -249,6 +245,12 @@
 
 /* Play button label for audio in media detail view */
 "Listen" = "Abspielen";
+
+/* Button label in media detail view to add an audio to the later list
+   Button label to add an audio to the later list, from the media long-press menu
+   Button label to add an audio to the later list, from the media preview window
+   Context menu action to add an audio to the later list */
+"Listen later" = "Listen later";
 
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
@@ -326,7 +328,7 @@
 /* Introductory time for next program information */
 "Next, at %@" = "Es folgt um %@";
 
-/* Text displayed when no media added to the watch later list */
+/* Text displayed when no media added to the later list */
 "No content" = "Liste leer";
 
 /* Text displayed when no downloads are available */
@@ -427,7 +429,7 @@
 /* Sort by relevance option */
 "Relevance" = "Relevanz";
 
-/* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
+/* Title of the confirmation pop-up displayed when the user is about to clean the later list */
 "Remove all content" = "Alle Elemente entfernen";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete all download items */
@@ -437,7 +439,7 @@
    Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
 "Remove all favorites" = "Alle Favoriten entfernen";
 
-/* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list */
+/* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the later list */
 "Remove content" = "Inhalt entfernen";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete a download */
@@ -449,10 +451,10 @@
 /* Title of the confirmation pop-up displayed when the user is about to delete selected favorite items */
 "Remove favorites" = "Favoriten entfernen";
 
-/* Button label to remove a media from the watch later list, from the media long-press menu
-   Button label to remove a media from the watch later list, from the media preview window
-   Context menu action to remove a media from the watch later list */
-"Remove from \"Watch later\"" = "Von Später schauen entfernen";
+/* Button label to remove a media from the later list, from the media long-press menu
+   Button label to remove a media from the later list, from the media preview window
+   Context menu action to remove a media from the later list */
+"Remove from \"Later\"" = "Remove from \"Later\"";
 
 /* Button label to remove a download from the media long-press menu
    Button label to remove a download from the media preview window
@@ -596,8 +598,8 @@
 "The page cannot be opened." = "Seite konnte nicht geöffnet werden.";
 
 /* Name of the favorite item, if no title or name to display
-   Name of the subscription item, if no title or name to display
-   Name of the watch later item, if no title or name to display */
+   Name of the later list item, if no title or name to display
+   Name of the subscription item, if no title or name to display */
 "The selected content" = "Der gewählte Inhalt";
 
 /* Error message when a show cannot be opened via Handoff
@@ -667,8 +669,10 @@
    User activity title when watching a video */
 "Watch %@" = "%@ schauen";
 
-/* Label to present the watch later list
-   Title Label used to present the video watch later list */
+/* Button label in media detail view to add a video to the later list
+   Button label to add a video to the later list, from the media long-press menu
+   Button label to add a video to the later list, from the media preview window
+   Context menu action to add a video to the later list */
 "Watch later" = "Später schauen";
 
 /* Web first label on media cells
@@ -685,8 +689,8 @@
    Description of the alert view to opt-in for background video playback */
 "You can manage this feature in the settings at any time." = "Sie können Autoplay in den Einstellungen wieder anpassen.";
 
-/* Hint displayed when no media added to the watch later list and the device supports 3D touch */
-"You can press on a content to add it to this watch later list" = "Drücken Sie fest auf eine Sendung, um sie zu Später schauen hinzuzufügen.";
+/* Hint displayed when no media added to the later list and the device supports 3D touch */
+"You can press on a content to add it to \"Later\"" = "You can press on a content to add it to \"Later\"";
 
 /* Hint displayed when no favorites are available and the device supports 3D touch */
 "You can press on an item to add it to favorites" = "Drücken Sie fest auf einen Inhalt, um ihn zu Ihren Favoriten hinzuzufügen";
@@ -694,8 +698,8 @@
 /* Hint displayed when no downloads are available and the device supports 3D touch */
 "You can press on an item to download it (not all items can be downloaded)" = "Drücken Sie fest auf ein beliebiges Video oder Audio, um es herunterzuladen. Achtung: Aus rechtlichen Gründen lassen sich nicht alle Inhalte herunterladen.";
 
-/* Hint displayed when no media added to the watch later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to this watch later list" = "Tippen und halten Sie eine Sendung, um sie zu Später schauen hinzuzufügen.";
+/* Hint displayed when no media added to the later list and the device does not support 3D touch */
+"You can tap and hold a content to add it to \"Later\"" = "You can tap and hold a content to add it to \"Later\"";
 
 /* Hint displayed when no favorites are available and the device does not support 3D touch */
 "You can tap and hold an item to add it to favorites" = "Tippen und halten Sie einen Inhalt, um ihn zu Ihren Favoriten hinzuzufügen";

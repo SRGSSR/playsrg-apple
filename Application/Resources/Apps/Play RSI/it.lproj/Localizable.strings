@@ -7,14 +7,14 @@
 /* Seek forward shortcut label */
 "%@ forward" = "%@ avanti";
 
-/* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been added to \"Watch later\"" = "%@ è stato aggiunto alla lista \"Guardare dopo\"";
+/* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been added to \"Later\"" = "%@ has been added to \"Later\"";
 
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
 "%@ has been added to favorites" = "%@ è stato aggiunto alla lista dei preferiti";
 
-/* Message displayed at the top of the screen when removing an item from the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been removed from \"Watch later\"" = "%@ è stato tolto dalla lista \"Guardare dopo\"";
+/* Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been removed from \"Later\"" = "%@ has been removed from \"Later\"";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
 "%@ has been removed from favorites" = "%@ è stato tolto dalla lista dei preferiti";
@@ -46,12 +46,6 @@
 /* Short title displayed in home pages on a button. */
 "A to Z" = "Dalla A alla Z";
 
-/* Button label to add a media to the watch later list in media detail view
-   Button label to add a media to the watch later list, from the media long-press menu
-   Button label to add a media to the watch later list, from the media preview window
-   Context menu action to add a media to the watch later list */
-"Add to \"Watch later\"" = "Aggiungere a \"Guardare dopo\"";
-
 /* Button label to add a download from the media long-press menu
    Button label to add a download from the media preview window
    Context menu action to add a media to the downloads */
@@ -70,7 +64,7 @@
 "Already available" = "Già disponibile";
 
 /* Confirmation message displayed when the user is about to clean all favorites
-   Confirmation message displayed when the user is about to clean the watch later list
+   Confirmation message displayed when the user is about to clean the later list
    Confirmation message displayed when the user is about to delete all download items
    Confirmation message displayed when the user is about to delete the whole history */
 "Are you sure you want to delete all items?" = "Sei sicuro di voler eliminare tutti gli elementi?";
@@ -81,17 +75,17 @@
 /* Confirmation message displayed when the user is about to delete selected download items
    Confirmation message displayed when the user is about to delete selected history entries
    Confirmation message displayed when the user is about to remove selected entries from favorites
-   Confirmation message displayed when the user is about to remove selected entries from the watch later list */
+   Confirmation message displayed when the user is about to remove selected entries from the later list */
 "Are you sure you want to delete the selected items?" = "Sei sicuro di voler eliminare gli elementi selezionati?";
 
 /* Confirmation message displayed when the user is about to delete the whole history */
-"Are you sure you want to erase the whole history?" = "Are you sure you want to erase the whole history?";
+"Are you sure you want to erase the whole history?" = "È sicuro di voler cancellare la cronologia?";
 
 /* Confirmation message displayed when the user is about to logout on Apple TV */
 "Are you sure you want to logout?" = "Vuoi davvero effettuare il logout?";
 
 /* Confirmation message displayed when the user is about to clean all favorites */
-"Are you sure you want to remove all favorites?" = "Are you sure you want to remove all favorites?";
+"Are you sure you want to remove all favorites?" = "Sei sicuro di voler eliminare tutti gli elementi preferiti?";
 
 /* Audios option
    Audios tab title
@@ -231,7 +225,9 @@
 "Last week" = "Ultima settimana";
 
 /* Label for the button for deciding to opt-in for background video playback at a later time
-   Watch or listen later button label when a media is in the watch later list in media detail view */
+   Label to present the later list
+   Title Label used to present the video later list
+   Watch later or listen later button label in media detail view when a media is in the later list */
 "Later" = "Dopo";
 
 /* Title label used to present the latest episodes from TV favorite shows */
@@ -249,6 +245,12 @@
 
 /* Play button label for audio in media detail view */
 "Listen" = "Ascolta";
+
+/* Button label in media detail view to add an audio to the later list
+   Button label to add an audio to the later list, from the media long-press menu
+   Button label to add an audio to the later list, from the media preview window
+   Context menu action to add an audio to the later list */
+"Listen later" = "Listen later";
 
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
@@ -326,7 +328,7 @@
 /* Introductory time for next program information */
 "Next, at %@" = "Prossimo alle %@";
 
-/* Text displayed when no media added to the watch later list */
+/* Text displayed when no media added to the later list */
 "No content" = "Nessun contenuto";
 
 /* Text displayed when no downloads are available */
@@ -427,7 +429,7 @@
 /* Sort by relevance option */
 "Relevance" = "Pertinenza";
 
-/* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
+/* Title of the confirmation pop-up displayed when the user is about to clean the later list */
 "Remove all content" = "Rimuovere tutto";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete all download items */
@@ -437,7 +439,7 @@
    Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
 "Remove all favorites" = "Rimuovi tutti i preferiti";
 
-/* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list */
+/* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the later list */
 "Remove content" = "Rimuovere il contenuto";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete a download */
@@ -449,10 +451,10 @@
 /* Title of the confirmation pop-up displayed when the user is about to delete selected favorite items */
 "Remove favorites" = "Rimuovere i preferiti";
 
-/* Button label to remove a media from the watch later list, from the media long-press menu
-   Button label to remove a media from the watch later list, from the media preview window
-   Context menu action to remove a media from the watch later list */
-"Remove from \"Watch later\"" = "Rimuovere da \"Guardare dopo\"";
+/* Button label to remove a media from the later list, from the media long-press menu
+   Button label to remove a media from the later list, from the media preview window
+   Context menu action to remove a media from the later list */
+"Remove from \"Later\"" = "Remove from \"Later\"";
 
 /* Button label to remove a download from the media long-press menu
    Button label to remove a download from the media preview window
@@ -475,7 +477,7 @@
 "Resume" = "Riprendi";
 
 /* Title label used to present medias whose playback can be resumed */
-"Resume playback" = "Resume playback";
+"Resume playback" = "Riprendere la riproduzione";
 
 /* Label to present the search view
    Search placeholder text
@@ -554,7 +556,7 @@
 "Subtitled" = "Sottotitolato";
 
 /* Login benefits description footer */
-"Synchronize playback history, favorites and content to be watched later on all devices connected to your account." = "Synchronize playback history, favorites and content to be watched later on all devices connected to your account.";
+"Synchronize playback history, favorites and content to be watched later on all devices connected to your account." = "Sincronizzare cronologia, preferiti ed elementi da guardare dopo su tutti i supporti collegati al tuo account.";
 
 /* Button label to share the content being played. */
 "The content" = "Il contenuto";
@@ -596,8 +598,8 @@
 "The page cannot be opened." = "La pagina non può essere aperta.";
 
 /* Name of the favorite item, if no title or name to display
-   Name of the subscription item, if no title or name to display
-   Name of the watch later item, if no title or name to display */
+   Name of the later list item, if no title or name to display
+   Name of the subscription item, if no title or name to display */
 "The selected content" = "Contenuto selezionato";
 
 /* Error message when a show cannot be opened via Handoff
@@ -614,13 +616,13 @@
 "This week" = "Questa settimana";
 
 /* Confirmation message displayed when a logged in user is about to delete the whole history */
-"This will erase the whole history on all devices connected to your account." = "This will erase the whole history on all devices connected to your account.";
+"This will erase the whole history on all devices connected to your account." = "Questo cancellerà la cronologia su tutti gli apparecchi collegati al tuo accunt.";
 
 /* Confirmation message displayed when a logged in user is about to clean all favorites */
-"This will remove all favorites and notification subscriptions on all devices connected to your account." = "This will remove all favorites and notification subscriptions on all devices connected to your account.";
+"This will remove all favorites and notification subscriptions on all devices connected to your account." = "Questo cancellerà i preferiti e le notifiche su tutti gli apparecchi collegati al tuo accunt.";
 
 /* Confirmation message displayed when a logged in user is about to remove a favorite */
-"This will remove the favorite and notification subscription on all devices connected to your account." = "This will remove the favorite and notification subscription on all devices connected to your account.";
+"This will remove the favorite and notification subscription on all devices connected to your account." = "Questo cancellerà i preferiti e le notifiche su tutti gli apparecchi collegati al tuo accunt.";
 
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Differito";
@@ -667,8 +669,10 @@
    User activity title when watching a video */
 "Watch %@" = "Guarda %@";
 
-/* Label to present the watch later list
-   Title Label used to present the video watch later list */
+/* Button label in media detail view to add a video to the later list
+   Button label to add a video to the later list, from the media long-press menu
+   Button label to add a video to the later list, from the media preview window
+   Context menu action to add a video to the later list */
 "Watch later" = "Guardare dopo";
 
 /* Web first label on media cells
@@ -685,8 +689,8 @@
    Description of the alert view to opt-in for background video playback */
 "You can manage this feature in the settings at any time." = "È possibile gestire questa funzionalità nelle impostazioni in qualsiasi momento.";
 
-/* Hint displayed when no media added to the watch later list and the device supports 3D touch */
-"You can press on a content to add it to this watch later list" = "Premere su un contenuto per aggiungerlo a \"Guardare dopo\"";
+/* Hint displayed when no media added to the later list and the device supports 3D touch */
+"You can press on a content to add it to \"Later\"" = "You can press on a content to add it to \"Later\"";
 
 /* Hint displayed when no favorites are available and the device supports 3D touch */
 "You can press on an item to add it to favorites" = "È possibile premere su qualsiasi elemento per aggiungerlo ai preferiti";
@@ -694,8 +698,8 @@
 /* Hint displayed when no downloads are available and the device supports 3D touch */
 "You can press on an item to download it (not all items can be downloaded)" = "È possibile premere su un elemento per scaricarlo (non tutti gli elementi possono essere scaricati)";
 
-/* Hint displayed when no media added to the watch later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to this watch later list" = "Tenere premere su un contenuto per aggiungerlo a \"Guardare dopo\"";
+/* Hint displayed when no media added to the later list and the device does not support 3D touch */
+"You can tap and hold a content to add it to \"Later\"" = "You can tap and hold a content to add it to \"Later\"";
 
 /* Hint displayed when no favorites are available and the device does not support 3D touch */
 "You can tap and hold an item to add it to favorites" = "È possibile toccare e tenere premuto un elemento per aggiungerlo ai preferiti";
