@@ -22,7 +22,8 @@
 "Add to favorites" = "Ajouter aux favoris";
 
 /* Media watch later addition label */
-"Add to the watch later list" = "Ajouter à \"Plus tard\"";
+"Watch later" = "Regarder plus tard";
+"Listen later" = "Écouter plus tard";
 
 /* Accessibility label for a media cell with audio description
    Accessibility label for the audio description badge */
@@ -134,7 +135,7 @@
 "Remove from favorites" = "Supprimer des favoris";
 
 /* Media watch later removal label */
-"Remove from the watch later list" = "Retirer de \"Plus tard\"";
+"Remove from \"Later\" list" = "Retirer de la liste \"Plus tard\"";
 
 /* A download button label */
 "Retry download" = "Réessayer le téléchargement";

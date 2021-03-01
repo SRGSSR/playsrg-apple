@@ -8,13 +8,13 @@
 "%@ forward" = "Avancer de %@";
 
 /* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been added to \"Watch later\"" = "%@ a été ajouté à \"Plus tard\"";
+"%@ has been added to \"Later\"" = "%@ a été ajouté à \"Plus tard\"";
 
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
 "%@ has been added to favorites" = "%@ a été ajouté aux favoris";
 
 /* Message displayed at the top of the screen when removing an item from the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been removed from \"Watch later\"" = "%@ a été retiré de \"Plus tard\"";
+"%@ has been removed from \"Later\"" = "%@ a été retiré de \"Plus tard\"";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
 "%@ has been removed from favorites" = "%@ a été supprimé des favoris";
@@ -250,6 +250,8 @@
 /* Play button label for audio in media detail view */
 "Listen" = "Écouter";
 
+"Listen later" = "Écouter plus tard";
+
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
    User activity title when listening to an audio */
@@ -453,6 +455,7 @@
    Button label to remove a media from the watch later list, from the media preview window
    Context menu action to remove a media from the watch later list */
 "Remove from \"Watch later\"" = "Supprimer de \"Plus tard\"";
+"Remove from \"Later\"" = "Supprimer de \"Plus tard\"";
 
 /* Button label to remove a download from the media long-press menu
    Button label to remove a download from the media preview window
@@ -669,7 +672,7 @@
 
 /* Label to present the watch later list
    Title Label used to present the video watch later list */
-"Watch later" = "Plus tard";
+"Watch later" = "Regarder plus tard";
 
 /* Web first label on media cells
    Web first label on media detail page */
@@ -686,7 +689,7 @@
 "You can manage this feature in the settings at any time." = "Vous pouvez activer ou désactiver cette fonctionnalité dans les réglages à tout moment.";
 
 /* Hint displayed when no media added to the watch later list and the device supports 3D touch */
-"You can press on a content to add it to this watch later list" = "Vous pouvez appuyer sur un élément pour l'ajouter à \"Plus tard\"";
+"You can press on a content to add it to \"Later\"" = "Vous pouvez appuyer sur un élément pour l'ajouter à \"Plus tard\"";
 
 /* Hint displayed when no favorites are available and the device supports 3D touch */
 "You can press on an item to add it to favorites" = "Vous pouvez appuyer sur un élément pour l'ajouter aux favoris";
@@ -695,7 +698,7 @@
 "You can press on an item to download it (not all items can be downloaded)" = "Vous pouvez appuyer sur un élément pour le télécharger (certains éléments ne peuvent être téléchargés)";
 
 /* Hint displayed when no media added to the watch later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to this watch later list" = "Vous pouvez appuyer longuement sur un élément pour l'ajouter à \"Plus tard\"";
+"You can tap and hold a content to add it to \"Later\"" = "Vous pouvez appuyer longuement sur un élément pour l'ajouter à \"Plus tard\"";
 
 /* Hint displayed when no favorites are available and the device does not support 3D touch */
 "You can tap and hold an item to add it to favorites" = "Vous pouvez appuyer longuement un élément pour l'ajouter aux favoris";
