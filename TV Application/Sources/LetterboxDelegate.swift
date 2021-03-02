@@ -9,7 +9,7 @@ import Combine
 class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
     static let shared = LetterboxDelegate()
     
-    var mainCancellables = Set<AnyCancellable>()
+    var cancellables = Set<AnyCancellable>()
 
     override init() {
         NotificationCenter.default.publisher(for: Notification.Name.SRGLetterboxPlaybackDidContinueAutomatically, object: nil)
@@ -26,7 +26,7 @@ class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
                 }
                 SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
             }
-            .store(in: &mainCancellables)
+            .store(in: &cancellables)
     }
 
     // MARK: - SRGLetterboxViewControllerDelegate protocol
