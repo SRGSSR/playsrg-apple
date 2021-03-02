@@ -4,11 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
 import SRGAnalytics
 import TvOSTextViewer
 import SwiftUI
 
 var isPresenting = false
+var cancellables = Set<AnyCancellable>()
 
 func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = true) {
     guard !isPresenting else { return }
@@ -30,6 +32,22 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
         controller.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: Int32(NSEC_PER_SEC)), queue: nil) { _ in
             HistoryUpdateLetterboxPlaybackProgress(controller)
         }
+        
+        controller.publisher(for: \.continuousPlaybackUpcomingMedia)
+            .sink { upcomingMedia in
+                guard let upcomingMedia = upcomingMedia else { return }
+                
+                let labels = SRGAnalyticsHiddenEventLabels()
+                labels.source = AnalyticsSource.automatic.rawValue
+                labels.type = AnalyticsType.actionDisplay.rawValue
+                labels.value = upcomingMedia.urn
+                
+                if let playlist = controller.playlistDataSource as? Playlist {
+                    labels.extraValue1 = playlist.recommendationUid;
+                }
+                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
+            }
+            .store(in: &cancellables)
         
         let position = HistoryResumePlaybackPositionForMedia(media)
         controller.playMedia(media, at: position, withPreferredSettings: nil)
