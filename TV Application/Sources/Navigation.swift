@@ -17,6 +17,7 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
     }
     else {
         let letterboxViewController = SRGLetterboxViewController()
+        letterboxViewController.delegate = LetterboxDelegate.shared
         
         let controller = letterboxViewController.controller
         let playlist = PlaylistForURN(media.urn)
@@ -27,7 +28,7 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
         controller.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: Int32(NSEC_PER_SEC)), queue: nil) { _ in
             HistoryUpdateLetterboxPlaybackProgress(controller)
         }
-
+        
         let position = HistoryResumePlaybackPositionForMedia(media)
         controller.playMedia(media, at: position, withPreferredSettings: nil)
         present(letterboxViewController, animated: animated) {
