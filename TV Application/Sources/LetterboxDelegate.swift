@@ -14,16 +14,14 @@ class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
     override init() {
         NotificationCenter.default.publisher(for: Notification.Name.SRGLetterboxPlaybackDidContinueAutomatically, object: nil)
             .sink { notification in
-                guard let media  = (notification.userInfo?[SRGLetterboxMediaKey]) as? SRGMedia else { return }
+                guard let media  = notification.userInfo?[SRGLetterboxMediaKey] as? SRGMedia else { return }
 
                 let labels = SRGAnalyticsHiddenEventLabels()
                 labels.source = AnalyticsSource.automatic.rawValue
                 labels.type = AnalyticsType.actionPlayMedia.rawValue
                 labels.value = media.urn
-
-                let controller = notification.object as! SRGLetterboxController
-                if controller.playlistDataSource is Playlist {
-                    let playlist = controller.playlistDataSource as! Playlist
+                
+                if let controller = notification.object as? SRGLetterboxController, let playlist = controller.playlistDataSource as? Playlist {
                     labels.extraValue1 = playlist.recommendationUid;
                 }
                 SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
@@ -39,8 +37,7 @@ class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
         labels.type = AnalyticsType.actionPlayMedia.rawValue
         labels.value = upcomingMedia.urn
         
-        if letterboxViewController.controller.playlistDataSource is Playlist {
-            let playlist = letterboxViewController.controller.playlistDataSource as! Playlist
+        if let playlist = letterboxViewController.controller.playlistDataSource as? Playlist {
             labels.extraValue1 = playlist.recommendationUid;
         }
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
@@ -52,8 +49,7 @@ class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
         labels.type = AnalyticsType.actionCancel.rawValue
         labels.value = upcomingMedia.urn
         
-        if letterboxViewController.controller.playlistDataSource is Playlist {
-            let playlist = letterboxViewController.controller.playlistDataSource as! Playlist
+        if let playlist = letterboxViewController.controller.playlistDataSource as? Playlist {
             labels.extraValue1 = playlist.recommendationUid;
         }
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
