@@ -8,9 +8,11 @@ import SRGAnalytics
 import TvOSTextViewer
 import SwiftUI
 
-var isPresenting: Bool = false
+var isPresenting = false
 
 func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = true) {
+    guard !isPresenting else { return }
+    
     if !play && media.contentType != .livestream {
         let hostController = UIHostingController(rootView: MediaDetailView(media: media))
         present(hostController, animated: animated)
@@ -38,16 +40,22 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
 }
 
 func navigateToShow(_ show: SRGShow, animated: Bool = true) {
+    guard !isPresenting else { return }
+    
     let hostController = UIHostingController(rootView: ShowDetailView(show: show))
     present(hostController, animated: animated)
 }
 
 func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {
+    guard !isPresenting else { return }
+    
     let hostController = UIHostingController(rootView: TopicDetailView(topic: topic))
     present(hostController, animated: animated)
 }
 
 func showText(_ text: String, animated: Bool = true) {
+    guard !isPresenting else { return }
+    
     let textViewController = TvOSTextViewerViewController()
     textViewController.text = text
     textViewController.textAttributes = [
@@ -59,8 +67,8 @@ func showText(_ text: String, animated: Bool = true) {
     present(textViewController, animated: animated)
 }
 
-func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
-    guard !isPresenting, let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
+fileprivate func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
+    guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
     
     isPresenting = true
     topViewController.present(viewController, animated: animated) {

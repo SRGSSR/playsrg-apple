@@ -14,7 +14,7 @@ class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
     override init() {
         NotificationCenter.default.publisher(for: Notification.Name.SRGLetterboxPlaybackDidContinueAutomatically, object: nil)
             .sink { notification in
-                guard let media  = notification.userInfo?[SRGLetterboxMediaKey] as? SRGMedia else { return }
+                guard let media = notification.userInfo?[SRGLetterboxMediaKey] as? SRGMedia else { return }
 
                 let labels = SRGAnalyticsHiddenEventLabels()
                 labels.source = AnalyticsSource.automatic.rawValue
