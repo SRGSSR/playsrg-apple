@@ -212,10 +212,10 @@ struct ProfileView: View {
 
 extension ProfileView {
     private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.settings.rawValue
+        return AnalyticsPageTitle.home.rawValue
     }
     
     private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
     }
 }
