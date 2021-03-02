@@ -8,12 +8,18 @@ import SRGAnalytics
 import TvOSTextViewer
 import SwiftUI
 
+var isPresenting: Bool = false
+
 func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = true) {
-    guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
+    guard !isPresenting, let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
     
     if !play && media.contentType != .livestream {
         let hostController = UIHostingController(rootView: MediaDetailView(media: media))
-        topViewController.present(hostController, animated: animated, completion: nil)
+        
+        isPresenting = true
+        topViewController.present(hostController, animated: animated) {
+            isPresenting = false
+        }
     }
     else {
         let letterboxViewController = SRGLetterboxViewController()
@@ -30,27 +36,39 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
 
         let position = HistoryResumePlaybackPositionForMedia(media)
         controller.playMedia(media, at: position, withPreferredSettings: nil)
-        topViewController.present(letterboxViewController, animated: animated, completion: nil)
-        SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
+        
+        isPresenting = true
+        topViewController.present(letterboxViewController, animated: animated) {
+            isPresenting = false
+            SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
+        }
     }
 }
 
 func navigateToShow(_ show: SRGShow, animated: Bool = true) {
-    guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
+    guard !isPresenting, let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
     
     let hostController = UIHostingController(rootView: ShowDetailView(show: show))
-    topViewController.present(hostController, animated: animated, completion: nil)
+    
+    isPresenting = true
+    topViewController.present(hostController, animated: animated) {
+        isPresenting = false
+    }
 }
 
 func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {
-    guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
+    guard !isPresenting, let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
     
     let hostController = UIHostingController(rootView: TopicDetailView(topic: topic))
-    topViewController.present(hostController, animated: animated, completion: nil)
+    
+    isPresenting = true
+    topViewController.present(hostController, animated: animated) {
+        isPresenting = false
+    }
 }
 
 func showText(_ text: String, animated: Bool = true) {
-    guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
+    guard !isPresenting, let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
     
     let textViewController = TvOSTextViewerViewController()
     textViewController.text = text
@@ -60,7 +78,11 @@ func showText(_ text: String, animated: Bool = true) {
     ]
     textViewController.textEdgeInsets = UIEdgeInsets(top: 100, left: 250, bottom: 100, right: 250)
     textViewController.modalPresentationStyle = .overFullScreen
-    topViewController.present(textViewController, animated: animated)
+    
+    isPresenting = true
+    topViewController.present(textViewController, animated: animated) {
+        isPresenting = false
+    }
 }
 
 fileprivate func applyLetterboxControllerSettings(to controller: SRGLetterboxController) {
