@@ -10,10 +10,10 @@ import SRGAnalytics
 import SRGUserData
 
 class ProfileModel: ObservableObject {
-    @Published private(set) var isLoggedIn: Bool = false
+    @Published private(set) var isLoggedIn = false
     @Published private(set) var account: SRGAccount? = nil
-    @Published private(set) var hasHistoryEntries: Bool = false
-    @Published private(set) var hasFavorites: Bool = false
+    @Published private(set) var hasHistoryEntries = false
+    @Published private(set) var hasFavorites = false
     @Published private(set) var synchronizationDate: Date? = nil
     
     private var cancellables = Set<AnyCancellable>()

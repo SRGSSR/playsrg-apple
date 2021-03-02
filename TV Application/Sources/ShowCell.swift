@@ -12,7 +12,7 @@ struct ShowCell: View {
     
     fileprivate var onFocusAction: ((Bool) -> Void)? = nil
     
-    @State private var isFocused: Bool = false
+    @State private var isFocused = false
     
     init(show: SRGShow?, action: (() -> Void)? = nil) {
         self.show = show

@@ -113,7 +113,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         fileprivate var registeredSupplementaryViewKinds: [String] = []
         
         /// Whether cells are currently focusable.
-        fileprivate var focusable: Bool = false
+        fileprivate var focusable = false
         
         public func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
             return focusable

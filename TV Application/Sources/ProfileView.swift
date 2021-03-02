@@ -96,7 +96,7 @@ struct ProfileView: View {
     }
     
     struct AutoplayListItem: View {
-        @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled: Bool = false
+        @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled = false
         
         var body: some View {
             Button(action: {

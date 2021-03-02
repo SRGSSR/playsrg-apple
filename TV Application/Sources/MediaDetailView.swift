@@ -138,7 +138,7 @@ struct MediaDetailView: View {
         }
         
         @ObservedObject var model: MediaDetailModel
-        @State var isFocused: Bool = false
+        @State var isFocused = false
         
         var availabilityInformation: String {
             var publication = DateFormatter.play_dateAndTime.string(from: model.media.date)
