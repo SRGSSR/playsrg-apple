@@ -133,7 +133,7 @@ struct ShowDetailView: View {
     private struct VisualView: View {
         let show: SRGShow
         
-        @State var isFavorite: Bool = false
+        @State var isFavorite = false
         @State var favoriteRemovalAlertDisplayed = false
         
         private static let height: CGFloat = 300

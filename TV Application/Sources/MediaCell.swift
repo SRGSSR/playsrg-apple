@@ -14,7 +14,7 @@ struct MediaCell: View {
     
     fileprivate var onFocusAction: ((Bool) -> Void)? = nil
     
-    @State private var isFocused: Bool = false
+    @State private var isFocused = false
     
     init(media: SRGMedia?, style: MediaDescription.Style = .date, action: (() -> Void)? = nil) {
         self.media = media

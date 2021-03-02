@@ -61,8 +61,8 @@
 {
     [super viewDidLoad];
     
-    self.emptyTableTitle = NSLocalizedString(@"No content", @"Text displayed when no media added to the watch later list");
-    self.emptyTableSubtitle = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a content to add it to this watch later list", @"Hint displayed when no media added to the watch later list and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a content to add it to this watch later list", @"Hint displayed when no media added to the watch later list and the device does not support 3D touch");
+    self.emptyTableTitle = NSLocalizedString(@"No content", @"Text displayed when no media added to the later list");
+    self.emptyTableSubtitle = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a content to add it to \"Later\"", @"Hint displayed when no media added to the later list and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a content to add it to \"Later\"", @"Hint displayed when no media added to the later list and the device does not support 3D touch");
     self.emptyCollectionImage = [UIImage imageNamed:@"watch_later-90"];
     
     NSString *cellIdentifier = NSStringFromClass(WatchLaterTableViewCell.class);
@@ -259,8 +259,8 @@
         }
     }
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:deleteAllModeEnabled ? NSLocalizedString(@"Remove all content", @"Title of the confirmation pop-up displayed when the user is about to clean the watch later list") : NSLocalizedString(@"Remove content", @"Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list")
-                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"Are you sure you want to delete all items?", @"Confirmation message displayed when the user is about to clean the watch later list") : NSLocalizedString(@"Are you sure you want to delete the selected items?", @"Confirmation message displayed when the user is about to remove selected entries from the watch later list")
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:deleteAllModeEnabled ? NSLocalizedString(@"Remove all content", @"Title of the confirmation pop-up displayed when the user is about to clean the later list") : NSLocalizedString(@"Remove content", @"Title of the confirmation pop-up displayed when the user is about to remove selected entries from the later list")
+                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"Are you sure you want to delete all items?", @"Confirmation message displayed when the user is about to clean the later list") : NSLocalizedString(@"Are you sure you want to delete the selected items?", @"Confirmation message displayed when the user is about to remove selected entries from the later list")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (deleteAllModeEnabled) {

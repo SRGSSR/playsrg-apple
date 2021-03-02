@@ -6,13 +6,14 @@
 
 import Combine
 import SwiftUI
+import SRGAnalytics
 import SRGUserData
 
 class ProfileModel: ObservableObject {
-    @Published private(set) var isLoggedIn: Bool = false
+    @Published private(set) var isLoggedIn = false
     @Published private(set) var account: SRGAccount? = nil
-    @Published private(set) var hasHistoryEntries: Bool = false
-    @Published private(set) var hasFavorites: Bool = false
+    @Published private(set) var hasHistoryEntries = false
+    @Published private(set) var hasFavorites = false
     @Published private(set) var synchronizationDate: Date? = nil
     
     private var cancellables = Set<AnyCancellable>()
@@ -79,7 +80,9 @@ class ProfileModel: ObservableObject {
     }
     
     func login() {
-        SRGIdentityService.current?.login(withEmailAddress: nil)
+        if let opened = SRGIdentityService.current?.login(withEmailAddress: nil), opened {
+            SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.login.rawValue, levels: [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue])
+        }
     }
     
     func logout() {

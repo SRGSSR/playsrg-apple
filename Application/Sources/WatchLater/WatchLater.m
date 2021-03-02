@@ -20,9 +20,17 @@ NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataStat
 
 #pragma mark Media metadata functions
 
-BOOL WatchLaterCanStoreMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
-{
-    return mediaMetadata.contentType != SRGContentTypeLivestream && [mediaMetadata timeAvailabilityAtDate:NSDate.date] != SRGTimeAvailabilityNotAvailableAnymore;
+WatchLaterAction WatchLaterAllowedActionForMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
+{    
+    if (WatchLaterContainsMediaMetadata(mediaMetadata)) {
+        return WatchLaterActionRemove;
+    }
+    else if (mediaMetadata.contentType != SRGContentTypeLivestream && [mediaMetadata timeAvailabilityAtDate:NSDate.date] != SRGTimeAvailabilityNotAvailableAnymore) {
+        return WatchLaterActionAdd;
+    }
+    else {
+        return WatchLaterActionNone;
+    }
 }
 
 BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
@@ -93,7 +101,7 @@ void WatchLaterMigrate(void)
             return;
         }
         
-        // Don't add livestreams to the watch later list.
+        // Don't add livestreams to the later list.
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(DeprecatedFavorite.new, mediaContentType), @(FavoriteMediaContentTypeLive)];
         NSArray<DeprecatedFavorite *> *livestreamFavorites = [favorites filteredArrayUsingPredicate:predicate];
         [DeprecatedFavorite finishMigrationForFavorites:livestreamFavorites];

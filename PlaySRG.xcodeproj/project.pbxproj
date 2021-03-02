@@ -347,6 +347,11 @@
 		08AA55BD1D49EFC800C5026E /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA55BA1D49EFBD00C5026E /* HomeTableViewCell.m */; };
 		08AA55BE1D49EFC800C5026E /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA55BA1D49EFBD00C5026E /* HomeTableViewCell.m */; };
 		08AA55BF1D49EFC800C5026E /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA55BA1D49EFBD00C5026E /* HomeTableViewCell.m */; };
+		08ADFB1F25EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
+		08ADFB2025EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
+		08ADFB2125EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
+		08ADFB2225EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
+		08ADFB2325EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
 		08AF9480217D27E40028B082 /* ActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* ActivityItemSource.m */; };
 		08AF9481217D27E40028B082 /* ActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* ActivityItemSource.m */; };
 		08AF9482217D27E40028B082 /* ActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* ActivityItemSource.m */; };
@@ -2024,6 +2029,7 @@
 		08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationConfiguration.m; sourceTree = "<group>"; };
 		08AA55B91D49EFBD00C5026E /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
 		08AA55BA1D49EFBD00C5026E /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
+		08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterboxDelegate.swift; sourceTree = "<group>"; };
 		08AF947E217D27E40028B082 /* ActivityItemSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityItemSource.h; sourceTree = "<group>"; };
 		08AF947F217D27E40028B082 /* ActivityItemSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityItemSource.m; sourceTree = "<group>"; };
 		08B2A5382426511700C6EED3 /* SRGModule+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGModule+PlaySRG.m"; sourceTree = "<group>"; };
@@ -3718,6 +3724,7 @@
 				6FCC73B924E6F8EE00ECF73F /* HomeView.swift */,
 				6FDB2AB824E5916F00FF286E /* ImageView.swift */,
 				6F0ED543252B00B000ECE97B /* LabeledButton.swift */,
+				08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */,
 				6F85F81D2567F0D100AC8286 /* LiveMediaCell.swift */,
 				6F331D5F24D0769A00C096AB /* LiveView.swift */,
 				6FF12AA1256C58FE0042F446 /* Logger.swift */,
@@ -7934,6 +7941,7 @@
 				6F331CE724D06B8200C096AB /* AppDelegate.swift in Sources */,
 				08B971CD256EF3FF00195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A5250CB32E00056160 /* Modifiers.swift in Sources */,
+				08ADFB1F25EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B09256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6F5AA59725024C4800718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE525E640C400F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8022,6 +8030,7 @@
 				6F4FCAF724D06FF7002675EF /* AppDelegate.swift in Sources */,
 				08B971E2256EF40000195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A6250CB32E00056160 /* Modifiers.swift in Sources */,
+				08ADFB2025EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0A256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6F5AA59825024C4900718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE625E640C500F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8110,6 +8119,7 @@
 				6F4FCAF924D06FF7002675EF /* AppDelegate.swift in Sources */,
 				08B971E3256EF40100195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A7250CB32E00056160 /* Modifiers.swift in Sources */,
+				08ADFB2125EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0B256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6F5AA59925024C4900718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE725E640C500F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8198,6 +8208,7 @@
 				6F4FCAFB24D06FF7002675EF /* AppDelegate.swift in Sources */,
 				08B971E4256EF40200195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A8250CB32E00056160 /* Modifiers.swift in Sources */,
+				08ADFB2225EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0C256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6F5AA59A25024C4A00718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE825E640C600F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8286,6 +8297,7 @@
 				6F4FCAFD24D06FF8002675EF /* AppDelegate.swift in Sources */,
 				08B971E5256EF40300195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A9250CB32E00056160 /* Modifiers.swift in Sources */,
+				08ADFB2325EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0D256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6F5AA59B25024C4B00718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE925E640C600F549E7 /* NSArray+PlaySRG.m in Sources */,

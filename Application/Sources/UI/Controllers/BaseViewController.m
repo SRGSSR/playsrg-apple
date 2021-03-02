@@ -119,9 +119,11 @@ static void commonInit(BaseViewController *self);
 {
     NSMutableArray<UIMenuElement *> *menuActions = [NSMutableArray array];
     
-    if (WatchLaterCanStoreMediaMetadata(media)) {
-        BOOL inWatchLaterList = WatchLaterContainsMediaMetadata(media);
-        UIAction *watchLaterAction = [UIAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Watch later\"", @"Context menu action to remove a media from the watch later list") : NSLocalizedString(@"Add to \"Watch later\"", @"Context menu action to add a media to the watch later list") image:inWatchLaterList ? [UIImage imageNamed:@"watch_later_full-22"] : [UIImage imageNamed:@"watch_later-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+    WatchLaterAction action = WatchLaterAllowedActionForMediaMetadata(media);
+    if (action != WatchLaterActionNone) {
+        BOOL isRemoval = (action == WatchLaterActionRemove);
+        NSString *addActionTitle = (media.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen later", @"Context menu action to add an audio to the later list") : NSLocalizedString(@"Watch later", @"Context menu action to add a video to the later list");
+        UIAction *watchLaterAction = [UIAction actionWithTitle:isRemoval ? NSLocalizedString(@"Remove from \"Later\"", @"Context menu action to remove a media from the later list") : addActionTitle image:isRemoval ? [UIImage imageNamed:@"watch_later_full-22"] : [UIImage imageNamed:@"watch_later-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
             WatchLaterToggleMediaMetadata(media, ^(BOOL added, NSError * _Nullable error) {
                 if (! error) {
                     AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
@@ -134,7 +136,7 @@ static void commonInit(BaseViewController *self);
                 }
             });
         }];
-        if (inWatchLaterList) {
+        if (isRemoval) {
             watchLaterAction.attributes = UIMenuElementAttributesDestructive;
         }
         [menuActions addObject:watchLaterAction];
@@ -460,9 +462,11 @@ static void commonInit(BaseViewController *self);
         NSString *message = (media.show.title && ! [media.title containsString:media.show.title]) ? media.show.title : nil;
         alertController = [UIAlertController alertControllerWithTitle:media.title message:message preferredStyle:UIAlertControllerStyleActionSheet];
         
-        if (WatchLaterCanStoreMediaMetadata(media)) {
-            BOOL inWatchLaterList = WatchLaterContainsMediaMetadata(media);
-            [alertController addAction:[UIAlertAction actionWithTitle:inWatchLaterList ? NSLocalizedString(@"Remove from \"Watch later\"", @"Button label to remove a media from the watch later list, from the media long-press menu") : NSLocalizedString(@"Add to \"Watch later\"", @"Button label to add a media to the watch later list, from the media long-press menu") style:inWatchLaterList ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        WatchLaterAction action = WatchLaterAllowedActionForMediaMetadata(media);
+        if (action != WatchLaterActionNone) {
+            BOOL isRemoval = (action == WatchLaterActionRemove);
+            NSString *addActionTitle = (media.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen later", @"Button label to add an audio to the later list, from the media long-press menu") : NSLocalizedString(@"Watch later", @"Button label to add a video to the later list, from the media long-press menu");
+            [alertController addAction:[UIAlertAction actionWithTitle:isRemoval ? NSLocalizedString(@"Remove from \"Later\"", @"Button label to remove a media from the later list, from the media long-press menu") : addActionTitle style:isRemoval ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 WatchLaterToggleMediaMetadata(media, ^(BOOL added, NSError * _Nullable error) {
                     if (! error) {
                         AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;

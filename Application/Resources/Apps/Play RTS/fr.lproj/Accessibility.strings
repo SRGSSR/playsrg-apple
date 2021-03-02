@@ -21,9 +21,6 @@
    Favorite label in the show view when a show can be favorited */
 "Add to favorites" = "Ajouter aux favoris";
 
-/* Media watch later addition label */
-"Add to the watch later list" = "Ajouter à \"Plus tard\"";
-
 /* Accessibility label for a media cell with audio description
    Accessibility label for the audio description badge */
 "Audio described" = "Audiodécrit";
@@ -65,6 +62,10 @@
 
 /* Introductory title for information notifications */
 "Information" = "Information";
+
+/* Media addition for an audio to later list label
+   Media addition to later list label in media detail view to add an audio to the later list */
+"Listen later" = "Écouter plus tard";
 
 /* Accessibility introductory text for the logged in user */
 "Logged in user: %@" = "Utilisateur connecté : %@";
@@ -129,12 +130,13 @@
 /* A download button label */
 "Remove download" = "Supprimer le téléchargement";
 
+/* Media removal from later list label
+   Media removal from later list label in the media detail view when a media is in the later list */
+"Remove from \"Later\" list" = "Supprimer de la liste \"Plus tard\"";
+
 /* Favorite label in the player view when a show has been favorited
    Favorite label in the show view when a show has been favorited */
 "Remove from favorites" = "Supprimer des favoris";
-
-/* Media watch later removal label */
-"Remove from the watch later list" = "Retirer de \"Plus tard\"";
 
 /* A download button label */
 "Retry download" = "Réessayer le téléchargement";
@@ -168,3 +170,7 @@
 
 /* Introductory title for warning notifications */
 "Warning" = "Attention";
+
+/* Media addition for a video to later list label
+   Media addition to later list label in media detail view to add a video to the later list */
+"Watch later" = "Regarder plus tard";

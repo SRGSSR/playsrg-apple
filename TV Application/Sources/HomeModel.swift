@@ -487,7 +487,7 @@ extension HomeModel {
             case .tvResumePlayback:
                 return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
             case .tvWatchLater:
-                return NSLocalizedString("Watch later", comment: "Title Label used to present the video watch later list")
+                return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
             case .radioLatestEpisodes:
                 return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
             case .radioMostPopular:

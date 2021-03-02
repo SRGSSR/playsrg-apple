@@ -1231,20 +1231,21 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)updateWatchLaterStatusForMedia:(SRGMedia *)media
 {
-    if (! WatchLaterCanStoreMediaMetadata(media) || self.letterboxController.continuousPlaybackUpcomingMedia || ! media) {
+    WatchLaterAction action = WatchLaterAllowedActionForMediaMetadata(media);
+    if (action == WatchLaterActionNone || self.letterboxController.continuousPlaybackUpcomingMedia || ! media) {
         self.watchLaterButton.hidden = YES;
         return;
     }
     
     self.watchLaterButton.hidden = NO;
     
-    if (WatchLaterContainsMediaMetadata(media)) {
+    if (action == WatchLaterActionRemove) {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later_full-48"] forState:UIControlStateNormal];
-        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove from the watch later list", @"Media watch later removal label");
+        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove from \"Later\" list", @"Media removal from later list label");
     }
     else {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later-48"] forState:UIControlStateNormal];
-        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Add to the watch later list", @"Media watch later addition label");
+        self.watchLaterButton.accessibilityLabel = (media.mediaType == SRGMediaTypeAudio) ? PlaySRGAccessibilityLocalizedString(@"Listen later", @"Media addition for an audio to later list label") : PlaySRGAccessibilityLocalizedString(@"Watch later", @"Media addition for a video to later list label");
     }
 }
 

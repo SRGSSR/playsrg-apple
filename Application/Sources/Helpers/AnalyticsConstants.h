@@ -46,6 +46,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatest;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicense;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicenses;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLogin;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMedia;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMostPopular;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleNotifications;
@@ -197,22 +198,22 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSearchTeaserOpen;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleUserActivity;
 
 /**
- *  Title for events related to watch later
+ *  Title for events related to later list
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterAdd;
 
 /**
- *  Title for events related to deletion of a watch later entry
+ *  Title for events related to deletion of a later list entry
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemove;
 
 /**
- *  Title for events related to deletion of all watch later entries
+ *  Title for events related to deletion of all later list entries
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemoveAll;
 
 /**
- *  Title for events related to watch later playback
+ *  Title for events related to later list entry playback
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterOpenMedia;
 

@@ -20,7 +20,7 @@ NSString *TitleForApplicationSection(ApplicationSection applicationSection)
                      @(ApplicationSectionOverview) : NSLocalizedString(@"Overview", @"Label to present the main Videos / Audios views"),
                      @(ApplicationSectionLive) : NSLocalizedString(@"Livestreams", @"Label to present the Livestreams view"),
                      @(ApplicationSectionShowAZ) : NSLocalizedString(@"Shows A to Z", @"Label to present shows A to Z (radio or TV)"),
-                     @(ApplicationSectionWatchLater) : NSLocalizedString(@"Watch later", @"Label to present the watch later list") };
+                     @(ApplicationSectionWatchLater) : NSLocalizedString(@"Later", @"Label to present the later list") };
     });
     return s_names[@(applicationSection)];
 }

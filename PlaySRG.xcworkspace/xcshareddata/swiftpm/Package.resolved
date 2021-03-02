@@ -42,7 +42,7 @@
         "repositoryURL": "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
         "state": {
           "branch": null,
-          "revision": "22e188345550b0870dfa0e98b4fb606f92916cf7",
+          "revision": "d57938089a95f54468c32c9d8034a277a602d060",
           "version": "6.7.1"
         }
       },
@@ -267,7 +267,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "0db642f56ac022f81d37d4e2bdd516f4eceb1c7b",
+          "revision": "3635cd5535d1269d0fa457e5902cd317ff60ef00",
           "version": null
         }
       },

@@ -50,6 +50,7 @@ struct ProfileView: View {
         .listStyle(GroupedListStyle())
         .frame(maxWidth: 1054)
         .padding(.top, model.supportsLogin ? 0 : 100)
+        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     struct ProfileListItem: View {
@@ -95,7 +96,7 @@ struct ProfileView: View {
     }
     
     struct AutoplayListItem: View {
-        @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled: Bool = false
+        @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled = false
         
         var body: some View {
             Button(action: {
@@ -206,5 +207,15 @@ struct ProfileView: View {
             }
             .padding()
         }
+    }
+}
+
+extension ProfileView {
+    private var analyticsPageTitle: String {
+        return AnalyticsPageTitle.home.rawValue
+    }
+    
+    private var analyticsPageLevels: [String]? {
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
     }
 }

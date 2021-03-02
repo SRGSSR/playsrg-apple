@@ -86,7 +86,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FSCalendar</string>
 			<key>Title</key>
-			<string>FSCalendar (2.8.1)</string>
+			<string>FSCalendar (2.8.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -102,7 +102,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/google-cast-sdk-no-bluetooth</string>
 			<key>Title</key>
-			<string>google-cast-sdk-no-bluetooth (4.5.1)</string>
+			<string>google-cast-sdk-no-bluetooth (4.5.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -206,7 +206,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/MaterialComponents</string>
 			<key>Title</key>
-			<string>MaterialComponents (118.2.0)</string>
+			<string>MaterialComponents (123.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -270,7 +270,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Protobuf</string>
 			<key>Title</key>
-			<string>Protobuf (3.13.0)</string>
+			<string>Protobuf (3.14.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
