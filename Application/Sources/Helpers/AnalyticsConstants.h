@@ -46,6 +46,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatest;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicense;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicenses;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLogin;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMedia;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMostPopular;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleNotifications;

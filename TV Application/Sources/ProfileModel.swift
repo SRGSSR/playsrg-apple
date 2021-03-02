@@ -6,6 +6,7 @@
 
 import Combine
 import SwiftUI
+import SRGAnalytics
 import SRGUserData
 
 class ProfileModel: ObservableObject {
@@ -79,7 +80,9 @@ class ProfileModel: ObservableObject {
     }
     
     func login() {
-        SRGIdentityService.current?.login(withEmailAddress: nil)
+        if let opened = SRGIdentityService.current?.login(withEmailAddress: nil), opened {
+            SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.login.rawValue, levels: [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue])
+        }
     }
     
     func logout() {
