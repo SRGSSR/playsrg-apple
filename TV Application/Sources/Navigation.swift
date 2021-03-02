@@ -11,15 +11,9 @@ import SwiftUI
 var isPresenting: Bool = false
 
 func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = true) {
-    guard !isPresenting, let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
-    
     if !play && media.contentType != .livestream {
         let hostController = UIHostingController(rootView: MediaDetailView(media: media))
-        
-        isPresenting = true
-        topViewController.present(hostController, animated: animated) {
-            isPresenting = false
-        }
+        present(hostController, animated: animated)
     }
     else {
         let letterboxViewController = SRGLetterboxViewController()
@@ -36,40 +30,23 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
 
         let position = HistoryResumePlaybackPositionForMedia(media)
         controller.playMedia(media, at: position, withPreferredSettings: nil)
-        
-        isPresenting = true
-        topViewController.present(letterboxViewController, animated: animated) {
-            isPresenting = false
+        present(letterboxViewController, animated: animated) {
             SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
         }
     }
 }
 
 func navigateToShow(_ show: SRGShow, animated: Bool = true) {
-    guard !isPresenting, let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
-    
     let hostController = UIHostingController(rootView: ShowDetailView(show: show))
-    
-    isPresenting = true
-    topViewController.present(hostController, animated: animated) {
-        isPresenting = false
-    }
+    present(hostController, animated: animated)
 }
 
 func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {
-    guard !isPresenting, let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
-    
     let hostController = UIHostingController(rootView: TopicDetailView(topic: topic))
-    
-    isPresenting = true
-    topViewController.present(hostController, animated: animated) {
-        isPresenting = false
-    }
+    present(hostController, animated: animated)
 }
 
 func showText(_ text: String, animated: Bool = true) {
-    guard !isPresenting, let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
-    
     let textViewController = TvOSTextViewerViewController()
     textViewController.text = text
     textViewController.textAttributes = [
@@ -78,10 +55,18 @@ func showText(_ text: String, animated: Bool = true) {
     ]
     textViewController.textEdgeInsets = UIEdgeInsets(top: 100, left: 250, bottom: 100, right: 250)
     textViewController.modalPresentationStyle = .overFullScreen
+    present(textViewController, animated: animated)
+}
+
+func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
+    guard !isPresenting, let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
     
     isPresenting = true
-    topViewController.present(textViewController, animated: animated) {
+    topViewController.present(viewController, animated: animated) {
         isPresenting = false
+        if let completion = completion {
+            completion()
+        }
     }
 }
 
