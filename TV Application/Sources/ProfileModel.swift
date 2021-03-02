@@ -81,7 +81,7 @@ class ProfileModel: ObservableObject {
     
     func login() {
         if let opened = SRGIdentityService.current?.login(withEmailAddress: nil), opened {
-            SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.login.rawValue, levels: [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue])
+            SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.login.rawValue, levels: [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue])
         }
     }
     
