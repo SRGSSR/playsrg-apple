@@ -17,7 +17,7 @@ class MediaDetailModel: ObservableObject {
     
     @Published private(set) var relatedMedias: [SRGMedia] = []
     @Published var selectedMedia: SRGMedia? = nil
-    @Published var isWatchedLater: Bool = false
+    @Published var watchLaterAllowedAction: WatchLaterAction = .none
     
     var mainCancellables = Set<AnyCancellable>()
     var refreshCancellables = Set<AnyCancellable>()
@@ -27,10 +27,10 @@ class MediaDetailModel: ObservableObject {
         
         NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .sink { notification in
-                self.updateWatchedLater()
+                self.updateWatchLaterAllowedAction()
             }
             .store(in: &mainCancellables)
-        updateWatchedLater()
+        updateWatchLaterAllowedAction()
     }
     
     var media: SRGMedia {
@@ -72,11 +72,11 @@ class MediaDetailModel: ObservableObject {
             labels.value = self.media.urn
             SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
             
-            self.updateWatchedLater()
+            self.updateWatchLaterAllowedAction()
         }
     }
     
-    private func updateWatchedLater() {
-        isWatchedLater = WatchLaterContainsMediaMetadata(media)
+    private func updateWatchLaterAllowedAction() {
+        watchLaterAllowedAction = WatchLaterAllowedActionForMediaMetadata(media)
     }
 }

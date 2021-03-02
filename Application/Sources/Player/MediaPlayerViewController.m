@@ -1231,14 +1231,15 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)updateWatchLaterStatusForMedia:(SRGMedia *)media
 {
-    if (! WatchLaterCanStoreMediaMetadata(media) || self.letterboxController.continuousPlaybackUpcomingMedia || ! media) {
+    WatchLaterAction action = WatchLaterAllowedActionForMediaMetadata(media);
+    if (action == WatchLaterActionNone || self.letterboxController.continuousPlaybackUpcomingMedia || ! media) {
         self.watchLaterButton.hidden = YES;
         return;
     }
     
     self.watchLaterButton.hidden = NO;
     
-    if (WatchLaterContainsMediaMetadata(media)) {
+    if (action == WatchLaterActionRemove) {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later_full-48"] forState:UIControlStateNormal];
         self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove from \"Later\" list", @"Media removal from later list label");
     }

@@ -193,10 +193,12 @@ struct MediaDetailView: View {
                 LabeledButton(icon: "play-50", label: playButtonLabel) {
                     navigateToMedia(model.media, play: true)
                 }
-                LabeledButton(icon: model.isWatchedLater ? "watch_later_full-22" : "watch_later-22",
-                              label: model.isWatchedLater ? NSLocalizedString("Later", comment: "Watch later or listen later button label in media detail view when a media is in the later list") : model.media.mediaType == .audio ? NSLocalizedString("Listen later", comment: "Button label in media detail view to add an audio to the later list") : NSLocalizedString("Watch later", comment: "Button label in media detail view to add a video to the later list"),
-                              accessibilityLabel: model.isWatchedLater ? PlaySRGAccessibilityLocalizedString("Remove from \"Later\" list", "Media removal from later list label in the media detail view when a media is in the later list") : model.media.mediaType == .audio ? PlaySRGAccessibilityLocalizedString("Listen later", "Media addition to later list label in media detail view to add an audio to the later list") : PlaySRGAccessibilityLocalizedString("Watch later", "Media addition to later list label in media detail view to add a video to the later list")) {
-                    model.toggleWatchLater()
+                if let action = model.watchLaterAllowedAction, action != .none, let isRemoval = (action == .remove) {
+                    LabeledButton(icon: isRemoval ? "watch_later_full-22" : "watch_later-22",
+                                  label: isRemoval ? NSLocalizedString("Later", comment: "Watch later or listen later button label in media detail view when a media is in the later list") : model.media.mediaType == .audio ? NSLocalizedString("Listen later", comment: "Button label in media detail view to add an audio to the later list") : NSLocalizedString("Watch later", comment: "Button label in media detail view to add a video to the later list"),
+                                  accessibilityLabel: isRemoval ? PlaySRGAccessibilityLocalizedString("Remove from \"Later\" list", "Media removal from later list label in the media detail view when a media is in the later list") : model.media.mediaType == .audio ? PlaySRGAccessibilityLocalizedString("Listen later", "Media addition to later list label in media detail view to add an audio to the later list") : PlaySRGAccessibilityLocalizedString("Watch later", "Media addition to later list label in media detail view to add a video to the later list")) {
+                        model.toggleWatchLater()
+                    }
                 }
                 if let show = model.media.show {
                     LabeledButton(icon: "episodes-22", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the media detail view")) {
