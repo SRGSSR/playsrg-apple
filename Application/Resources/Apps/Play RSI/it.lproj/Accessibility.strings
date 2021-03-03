@@ -65,7 +65,7 @@
 
 /* Media addition for an audio to later list label
    Media addition to later list label in media detail view to add an audio to the later list */
-"Listen later" = "Listen later";
+"Listen later" = "Ascoltare dopo";
 
 /* Accessibility introductory text for the logged in user */
 "Logged in user: %@" = "Utente connesso: %@";
@@ -132,7 +132,7 @@
 
 /* Media removal from later list label
    Media removal from later list label in the media detail view when a media is in the later list */
-"Remove from \"Later\" list" = "Remove from \"Later\" list";
+"Remove from \"Later\" list" = "Rimuovere da \"Ascoltare dopo\"";
 
 /* Favorite label in the player view when a show has been favorited
    Favorite label in the show view when a show has been favorited */

@@ -8,13 +8,13 @@
 "%@ forward" = "%@ vorwärts";
 
 /* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been added to \"Later\"" = "%@ has been added to \"Later\"";
+"%@ has been added to \"Later\"" = "%@ wurde der \"Später\" Liste hinzugefügt";
 
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
 "%@ has been added to favorites" = "%@ wurde zu den Favoriten hinzugefügt";
 
 /* Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been removed from \"Later\"" = "%@ has been removed from \"Later\"";
+"%@ has been removed from \"Later\"" = "%@ wurde von der \"Später\" Liste entfernt";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
 "%@ has been removed from favorites" = "%@ wurde von den Favoriten entfernt";
@@ -79,13 +79,13 @@
 "Are you sure you want to delete the selected items?" = "Sind Sie sicher, dass Sie die ausgewählten Elemente löschen wollen?";
 
 /* Confirmation message displayed when the user is about to delete the whole history */
-"Are you sure you want to erase the whole history?" = "Are you sure you want to erase the whole history?";
+"Are you sure you want to erase the whole history?" = "Sind Sie sicher, dass Sie den gesamten Verlauf löschen möchten?";
 
 /* Confirmation message displayed when the user is about to logout on Apple TV */
 "Are you sure you want to logout?" = "Sind Sie sicher, dass Sie sich abmelden wollen?";
 
 /* Confirmation message displayed when the user is about to clean all favorites */
-"Are you sure you want to remove all favorites?" = "Are you sure you want to remove all favorites?";
+"Are you sure you want to remove all favorites?" = "Sind Sie sicher, dass Sie alle Favoriten löschen möchten?";
 
 /* Audios option
    Audios tab title
@@ -250,7 +250,7 @@
    Button label to add an audio to the later list, from the media long-press menu
    Button label to add an audio to the later list, from the media preview window
    Context menu action to add an audio to the later list */
-"Listen later" = "Listen later";
+"Listen later" = "Später hören";
 
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
@@ -454,7 +454,7 @@
 /* Button label to remove a media from the later list, from the media long-press menu
    Button label to remove a media from the later list, from the media preview window
    Context menu action to remove a media from the later list */
-"Remove from \"Later\"" = "Remove from \"Later\"";
+"Remove from \"Later\"" = "Von \"Später\" Liste entfernen";
 
 /* Button label to remove a download from the media long-press menu
    Button label to remove a download from the media preview window
@@ -477,7 +477,7 @@
 "Resume" = "Weiter abspielen";
 
 /* Title label used to present medias whose playback can be resumed */
-"Resume playback" = "Resume playback";
+"Resume playback" = "Weiterschauen";
 
 /* Label to present the search view
    Search placeholder text
@@ -556,7 +556,7 @@
 "Subtitled" = "Mit Untertiteln";
 
 /* Login benefits description footer */
-"Synchronize playback history, favorites and content to be watched later on all devices connected to your account." = "Synchronize playback history, favorites and content to be watched later on all devices connected to your account.";
+"Synchronize playback history, favorites and content to be watched later on all devices connected to your account." = "Synchronisieren Sie den Wiedergabeverlauf, die Favoriten und den Inhalt, damit diese später auf allen mit Ihrem Konto verbundenen Geräten angezeigt werden kann.";
 
 /* Button label to share the content being played. */
 "The content" = "Ganzer Beitrag";
@@ -616,13 +616,13 @@
 "This week" = "Diese Woche";
 
 /* Confirmation message displayed when a logged in user is about to delete the whole history */
-"This will erase the whole history on all devices connected to your account." = "This will erase the whole history on all devices connected to your account.";
+"This will erase the whole history on all devices connected to your account." = "Dadurch wird der gesamte Verlauf auf allen mit Ihrem Konto verbundenen Geräten gelöscht.";
 
 /* Confirmation message displayed when a logged in user is about to clean all favorites */
-"This will remove all favorites and notification subscriptions on all devices connected to your account." = "This will remove all favorites and notification subscriptions on all devices connected to your account.";
+"This will remove all favorites and notification subscriptions on all devices connected to your account." = "Dadurch werden alle Favoriten und Benachrichtigungen auf allen mit Ihrem Konto verbundenen Geräten entfernt.";
 
 /* Confirmation message displayed when a logged in user is about to remove a favorite */
-"This will remove the favorite and notification subscription on all devices connected to your account." = "This will remove the favorite and notification subscription on all devices connected to your account.";
+"This will remove the favorite and notification subscription on all devices connected to your account." = "Dadurch werden die Favoriten und Benachrichtigungen auf allen mit Ihrem Konto verbundenen Geräten entfernt.";
 
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Zeitversetzt";
@@ -690,7 +690,7 @@
 "You can manage this feature in the settings at any time." = "Sie können Autoplay in den Einstellungen wieder anpassen.";
 
 /* Hint displayed when no media added to the later list and the device supports 3D touch */
-"You can press on a content to add it to \"Later\"" = "You can press on a content to add it to \"Later\"";
+"You can press on a content to add it to \"Later\"" = "Drücken Sie auf einen Inhalt, um ihn zur \"Später\" Liste hinzuzufügen.";
 
 /* Hint displayed when no favorites are available and the device supports 3D touch */
 "You can press on an item to add it to favorites" = "Drücken Sie fest auf einen Inhalt, um ihn zu Ihren Favoriten hinzuzufügen";
@@ -699,7 +699,7 @@
 "You can press on an item to download it (not all items can be downloaded)" = "Drücken Sie fest auf ein beliebiges Video oder Audio, um es herunterzuladen. Achtung: Aus rechtlichen Gründen lassen sich nicht alle Inhalte herunterladen.";
 
 /* Hint displayed when no media added to the later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to \"Later\"" = "You can tap and hold a content to add it to \"Later\"";
+"You can tap and hold a content to add it to \"Later\"" = "Tippen und halten Sie einen Inhalt, um ihn zur \"Später\" Liste hinzuzufügen.";
 
 /* Hint displayed when no favorites are available and the device does not support 3D touch */
 "You can tap and hold an item to add it to favorites" = "Tippen und halten Sie einen Inhalt, um ihn zu Ihren Favoriten hinzuzufügen";

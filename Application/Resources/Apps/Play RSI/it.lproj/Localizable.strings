@@ -8,13 +8,13 @@
 "%@ forward" = "%@ avanti";
 
 /* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been added to \"Later\"" = "%@ has been added to \"Later\"";
+"%@ has been added to \"Later\"" = "%@ è stato aggiunto alla lista \"Dopo\"";
 
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
 "%@ has been added to favorites" = "%@ è stato aggiunto alla lista dei preferiti";
 
 /* Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been removed from \"Later\"" = "%@ has been removed from \"Later\"";
+"%@ has been removed from \"Later\"" = "%@ è stato tolto dalla lista \"Dopo\"";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
 "%@ has been removed from favorites" = "%@ è stato tolto dalla lista dei preferiti";
@@ -250,7 +250,7 @@
    Button label to add an audio to the later list, from the media long-press menu
    Button label to add an audio to the later list, from the media preview window
    Context menu action to add an audio to the later list */
-"Listen later" = "Listen later";
+"Listen later" = "Ascoltare dopo";
 
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
@@ -454,7 +454,7 @@
 /* Button label to remove a media from the later list, from the media long-press menu
    Button label to remove a media from the later list, from the media preview window
    Context menu action to remove a media from the later list */
-"Remove from \"Later\"" = "Remove from \"Later\"";
+"Remove from \"Later\"" = "Rimuovere da \"Ascoltare dopo\"";
 
 /* Button label to remove a download from the media long-press menu
    Button label to remove a download from the media preview window
@@ -690,7 +690,7 @@
 "You can manage this feature in the settings at any time." = "È possibile gestire questa funzionalità nelle impostazioni in qualsiasi momento.";
 
 /* Hint displayed when no media added to the later list and the device supports 3D touch */
-"You can press on a content to add it to \"Later\"" = "You can press on a content to add it to \"Later\"";
+"You can press on a content to add it to \"Later\"" = "Premere su un contenuto per aggiungerlo a \"Dopo\"";
 
 /* Hint displayed when no favorites are available and the device supports 3D touch */
 "You can press on an item to add it to favorites" = "È possibile premere su qualsiasi elemento per aggiungerlo ai preferiti";
@@ -699,7 +699,7 @@
 "You can press on an item to download it (not all items can be downloaded)" = "È possibile premere su un elemento per scaricarlo (non tutti gli elementi possono essere scaricati)";
 
 /* Hint displayed when no media added to the later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to \"Later\"" = "You can tap and hold a content to add it to \"Later\"";
+"You can tap and hold a content to add it to \"Later\"" = "Tenere premuto su un contenuto per aggiungerlo a \"Dopo\"";
 
 /* Hint displayed when no favorites are available and the device does not support 3D touch */
 "You can tap and hold an item to add it to favorites" = "È possibile toccare e tenere premuto un elemento per aggiungerlo ai preferiti";
