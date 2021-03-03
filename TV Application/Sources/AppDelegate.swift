@@ -73,12 +73,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 4)
         viewControllers.append(searchViewController)
         
-        #if DEBUG || NIGHTLY
         let profileViewController = UIHostingController(rootView: ProfileView())
         profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile-34")!.withRenderingMode(.alwaysTemplate), tag: 7)
         profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", "Profile button label on home view")
         viewControllers.append(profileViewController)
-        #endif
         
         if viewControllers.count > 1 {
             let tabBarController = UITabBarController()
