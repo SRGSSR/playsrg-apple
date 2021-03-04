@@ -121,6 +121,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let identityWebserviceURL = configuration.identityWebserviceURL,
            let identityWebsiteURL = configuration.identityWebsiteURL {
             SRGIdentityService.current = SRGIdentityService(webserviceURL: identityWebserviceURL, websiteURL: identityWebsiteURL)
+            
+            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
+                .sink { _ in
+                    let labels = SRGAnalyticsHiddenEventLabels()
+                    labels.source = AnalyticsSource.button.rawValue
+                    labels.type = AnalyticsType.actionCancelLogin.rawValue
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.identity.rawValue, labels: labels)
+                }
+                .store(in: &cancellables)
+            
+            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
+                .sink { _ in
+                    let labels = SRGAnalyticsHiddenEventLabels()
+                    labels.source = AnalyticsSource.button.rawValue
+                    labels.type = AnalyticsType.actionLogin.rawValue
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.identity.rawValue, labels: labels)
+                }
+                .store(in: &cancellables)
+            
+            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
+                .sink { notification in
+                    let unexpectedLogout = notification.userInfo?[SRGIdentityServiceUnauthorizedKey] as? Bool ?? false
+
+                    let labels = SRGAnalyticsHiddenEventLabels()
+                    labels.source = unexpectedLogout ? AnalyticsSource.automatic.rawValue : AnalyticsSource.button.rawValue
+                    labels.type = AnalyticsType.actionLogout.rawValue
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.identity.rawValue, labels: labels)
+                }
+                .store(in: &cancellables)
         }
         
         let cachesDirectoryUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!)
