@@ -67,9 +67,9 @@ class HomeModel: Identifiable, ObservableObject {
         }
         
         if self.rowIds.contains(.tvWatchLater) {
-            NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistsDidChange, object: SRGUserData.current?.playlists)
+            NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
                 .sink { notification in
-                    guard let playlistUids = notification.userInfo?[SRGPlaylistsUidsKey] as? Set<String>, playlistUids.contains(SRGPlaylistUid.watchLater.rawValue) else { return }
+                    guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
                     self.refresh()
                 }
                 .store(in: &mainCancellables)
