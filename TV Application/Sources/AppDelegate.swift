@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SRGIdentityService.current = SRGIdentityService(webserviceURL: identityWebserviceURL, websiteURL: identityWebsiteURL)
             
             NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
-                .sink { notification in
+                .sink { _ in
                     let labels = SRGAnalyticsHiddenEventLabels()
                     labels.source = AnalyticsSource.button.rawValue
                     labels.type = AnalyticsType.actionCancelLogin.rawValue
@@ -132,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 .store(in: &cancellables)
             
             NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
-                .sink { notification in
+                .sink { _ in
                     let labels = SRGAnalyticsHiddenEventLabels()
                     labels.source = AnalyticsSource.button.rawValue
                     labels.type = AnalyticsType.actionLogin.rawValue
