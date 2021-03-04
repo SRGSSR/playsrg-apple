@@ -17,7 +17,7 @@ class MediaDetailModel: ObservableObject {
     
     @Published private(set) var relatedMedias: [SRGMedia] = []
     @Published var selectedMedia: SRGMedia? = nil
-    @Published var watchLaterAllowedAction: WatchLaterAction = .none
+    @Published private(set) var watchLaterAllowedAction: WatchLaterAction = .none
     
     var mainCancellables = Set<AnyCancellable>()
     var refreshCancellables = Set<AnyCancellable>()
