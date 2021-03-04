@@ -16,8 +16,12 @@ class MediaDetailModel: ObservableObject {
     private let initialMedia: SRGMedia
     
     @Published private(set) var relatedMedias: [SRGMedia] = []
-    @Published var selectedMedia: SRGMedia? = nil
     @Published private(set) var watchLaterAllowedAction: WatchLaterAction = .none
+    @Published var selectedMedia: SRGMedia? {
+        didSet {
+            updateWatchLaterAllowedAction()
+        }
+    }
     
     var mainCancellables = Set<AnyCancellable>()
     var refreshCancellables = Set<AnyCancellable>()
