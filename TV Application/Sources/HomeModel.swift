@@ -52,9 +52,8 @@ class HomeModel: Identifiable, ObservableObject {
         if self.rowIds.contains(where: { $0.isFavoriteShows }) {
             NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
                 .sink { notification in
-                    if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
-                        self.refresh()
-                    }
+                    guard let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) else { return }
+                    self.refresh()
                 }
                 .store(in: &mainCancellables)
         }
@@ -70,9 +69,8 @@ class HomeModel: Identifiable, ObservableObject {
         if self.rowIds.contains(.tvWatchLater) {
             NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistsDidChange, object: SRGUserData.current?.playlists)
                 .sink { notification in
-                    if let playlistUids = notification.userInfo?[SRGPlaylistsUidsKey] as? Set<String>, playlistUids.contains(SRGPlaylistUid.watchLater.rawValue) {
-                        self.refresh()
-                    }
+                    guard let playlistUids = notification.userInfo?[SRGPlaylistsUidsKey] as? Set<String>, playlistUids.contains(SRGPlaylistUid.watchLater.rawValue) else { return }
+                    self.refresh()
                 }
                 .store(in: &mainCancellables)
         }

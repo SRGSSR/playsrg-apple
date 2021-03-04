@@ -29,12 +29,14 @@ struct ProfileView: View {
                         footer: Text(synchronizationMessage).srgFont(.overline).opacity(0.8)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
+                    WatchLaterRemovalListItem(model: model)
                 }
             }
             else {
                 Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.headline1)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
+                    WatchLaterRemovalListItem(model: model)
                 }
             }
             if ApplicationConfiguration.shared.isContinuousPlaybackAvailable {
@@ -185,6 +187,44 @@ struct ProfileView: View {
                 Text(NSLocalizedString("Remove all favorites", comment: "Remove all favorites button title"))
                     .srgFont(.button1)
                     .foregroundColor(model.hasFavorites ? .primary : .secondary)
+            }
+            .padding()
+            .alert(isPresented: $alertDisplayed, content: alert)
+        }
+    }
+    
+    struct WatchLaterRemovalListItem: View {
+        @ObservedObject var model: ProfileModel
+        @State var alertDisplayed = false
+        
+        func alert() -> Alert {
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                model.removeWatchLaterItems()
+            }
+            if model.isLoggedIn {
+                return Alert(title: Text(NSLocalizedString("Remove all items saved for later", comment: "Title of the confirmation pop-up displayed when the user is about to delete items from the later list")),
+                             message: Text(NSLocalizedString("This will remove all items on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to clean all items from the later list")),
+                             primaryButton: primaryButton,
+                             secondaryButton: secondaryButton)
+            }
+            else {
+                return Alert(title: Text(NSLocalizedString("Remove all items saved for later", comment: "Title of the confirmation pop-up displayed when the user is about to delete items from the later list")),
+                             message: Text(NSLocalizedString("Are you sure you want to remove all items?", comment: "Confirmation message displayed when the user is about to clean all items saved for later")),
+                             primaryButton: primaryButton,
+                             secondaryButton: secondaryButton)
+            }
+        }
+        
+        var body: some View {
+            Button(action: {
+                if model.hasWatchLaterItems {
+                    alertDisplayed = true
+                }
+            }) {
+                Text(NSLocalizedString("Remove all items saved for later", comment: "Title of the button to remove all items saved for later"))
+                    .srgFont(.button1)
+                    .foregroundColor(model.hasWatchLaterItems ? .primary : .secondary)
             }
             .padding()
             .alert(isPresented: $alertDisplayed, content: alert)
