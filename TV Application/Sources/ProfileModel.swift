@@ -87,7 +87,8 @@ class ProfileModel: ObservableObject {
         updateWatchLaterInformation()
         
         NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
-            .sink { _ in
+            .sink { notification in
+                guard let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) else { return }
                 self.updateFavoritesInformation()
             }
             .store(in: &cancellables)
