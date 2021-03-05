@@ -32,7 +32,7 @@ class MediaDetailModel: ObservableObject {
         NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .sink { notification in
                 guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
-                guard let entriestUids = notification.userInfo?[SRGPlaylistEntriesUidsKey] as? Set<String>, entriestUids.contains(media.urn) else { return }
+                guard let entriesUids = notification.userInfo?[SRGPlaylistEntriesUidsKey] as? Set<String>, entriesUids.contains(media.urn) else { return }
                 self.updateWatchLaterAllowedAction()
             }
             .store(in: &mainCancellables)

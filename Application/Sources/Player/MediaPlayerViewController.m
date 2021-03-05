@@ -2453,8 +2453,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (void)playlistEntriesDidChange:(NSNotification *)notification
 {
     NSString *playlistUid = notification.userInfo[SRGPlaylistUidKey];
-    NSSet<NSString *> *entriestUids = notification.userInfo[SRGPlaylistEntriesUidsKey];
-    if ([playlistUid isEqualToString:SRGPlaylistUidWatchLater] && [entriestUids containsObject:[self mainChapterMedia].URN]) {
+    NSSet<NSString *> *entriesUids = notification.userInfo[SRGPlaylistEntriesUidsKey];
+    if ([playlistUid isEqualToString:SRGPlaylistUidWatchLater] && [entriesUids containsObject:[self mainChapterMedia].URN]) {
         [self updateWatchLaterStatus];
     }
 }
