@@ -29,8 +29,6 @@ platform :ios do
       end
     end
 
-    appstore_skip_2fa_upgrade
-
     xcversion(version: '~> 12')
 
     if cleaned_lane_condition(lane)
@@ -106,15 +104,7 @@ platform :ios do
         export_to_appstore: true
       )
 
-      pilot(
-        app_identifier: app_identifier,
-        app_platform: appstore_platform(platform),
-        changelog: changelog,
-        distribute_external: true,
-        groups: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS'],
-        demo_account_required: false,
-        beta_app_review_info: beta_app_review_info
-      )
+      srg_pilot(app_identifier, platform, changelog)
 
       UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
       sleep(90)
@@ -137,7 +127,7 @@ platform :ios do
       first_name: options[:first_name],
       last_name: options[:last_name],
       app_identifiers: appstore_nightly_identifiers,
-      group_name: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS']
+      group_name: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
     )
   end
 
@@ -197,15 +187,7 @@ platform :ios do
         export_to_appstore: true
       )
 
-      pilot(
-        app_identifier: app_identifier,
-        app_platform: appstore_platform(platform),
-        changelog: what_s_new_for_beta(platform),
-        distribute_external: true,
-        groups: ENV['ITUNES_CONNECT_BETA_GROUPS'],
-        demo_account_required: false,
-        beta_app_review_info: beta_app_review_info
-      )
+      srg_pilot(app_identifier, platform, changelog)
 
       UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
       sleep(90)
@@ -228,7 +210,7 @@ platform :ios do
       first_name: options[:first_name],
       last_name: options[:last_name],
       app_identifiers: appstore_beta_identifiers,
-      group_name: ENV['ITUNES_CONNECT_BETA_GROUPS']
+      group_name: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
     )
   end
 
@@ -450,6 +432,7 @@ platform :ios do
       export_to_appstore: true
     )
 
+    login_with_app_store_connect_api_key
     pilot(
       app_platform: appstore_platform(options[:platform]),
       skip_waiting_for_build_processing: true
@@ -527,7 +510,7 @@ platform :ios do
     UI.message('Preparing invitations to ' + email + '. 📩')
 
     app_identifiers = options[:app_identifiers] || appstore_beta_identifiers
-    group_name = options[:group_name] || ENV['ITUNES_CONNECT_BETA_GROUPS']
+    group_name = options[:group_name] || ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
 
     spaceship_login
 
@@ -648,6 +631,14 @@ def appstore_beta_identifiers
    ENV['ITUNES_CONNECT_BETA_SRF_APP_IDENTIFIER'],
    ENV['ITUNES_CONNECT_BETA_RSI_APP_IDENTIFIER'],
    ENV['ITUNES_CONNECT_BETA_RTR_APP_IDENTIFIER']]
+end
+
+def appstore_team_api_key_prefixs
+  { ENV['SWI_ITUNES_CONNECT_TEAM_ID'] => 'SWI',
+    ENV['RTS_ITUNES_CONNECT_TEAM_ID'] => 'RTS',
+    ENV['SRF_ITUNES_CONNECT_TEAM_ID'] => 'SRF',
+    ENV['RSI_ITUNES_CONNECT_TEAM_ID'] => 'RSI',
+    ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID'] => 'SRGSSR' } # RTR is in SRG SSR ASC team
 end
 
 # Returns current tag version
@@ -778,9 +769,15 @@ def appstore_platform(platform)
   appstore_platforms[platform]
 end
 
-# New AppStore Connect rule introduced in 02.2021: https://github.com/fastlane/fastlane/issues/18098#issuecomment-772970322
-def appstore_skip_2fa_upgrade
-  ENV['SPACESHIP_SKIP_2FA_UPGRADE'] = '1'
+def login_with_app_store_connect_api_key
+  itc_team_id = app_config.try_fetch_value(:itc_team_id)
+  key_prefix = appstore_team_api_key_prefixs[itc_team_id]
+
+  app_store_connect_api_key(
+    key_id: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_ID'],
+    issuer_id: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_ISSUER_ID'],
+    key_content: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_CONTENT']
+  )
 end
 
 # Update only the app identifier for App Store Connect submit.
@@ -791,6 +788,19 @@ def update_app_identifier_to_appstore(platform, app_identifier)
     value: app_identifier
   )
   app_identifier
+end
+
+def srg_pilot(app_identifier, platform, changelog)
+  login_with_app_store_connect_api_key
+  pilot(
+    app_identifier: app_identifier,
+    app_platform: appstore_platform(platform),
+    changelog: changelog,
+    distribute_external: true,
+    groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
+    demo_account_required: false,
+    beta_app_review_info: beta_app_review_info
+  )
 end
 
 # Reset the updated app identifier after App Store Connect submission.
@@ -808,16 +818,29 @@ def update_dsyms(app_identifier, platform, appcenter_appname, options)
   output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
+  try_update_dsyms(app_identifier, platform, appcenter_appname, options, output_directory)
+end
+
+def try_update_dsyms(app_identifier, platform, appcenter_appname, options, output_directory)
   min_version = options ? options[:min_version] : nil
   version = options ? options[:version] : nil
-  download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
-  upload_appcenter_dsyms(appcenter_appname)
+  begin
+    download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
+    upload_appcenter_dsyms(appcenter_appname)
+  rescue StandardError => e
+    UI.important('Update dSYMs failed (' + platform + ' / ' + appcenter_appname + '). ⚠️')
+    UI.error(e.message)
+  end
 end
 
 def download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
   version ||= 'latest'
+
+  # download_dsyms does not support api key token yet.
+  # See https://github.com/fastlane/fastlane/discussions/17485
+  # login_with_app_store_connect_api_key
   download_dsyms(
     app_identifier: app_identifier,
     platform: appstore_platform(platform),
@@ -866,6 +889,8 @@ end
 
 # Returns current build number on AppStore Connect
 def srg_latest_testflight_build_number(app_identifiers, platform)
+  login_with_app_store_connect_api_key
+
   build_number = 0
   app_identifiers.each_index do |index|
     number = latest_testflight_build_number(
@@ -893,6 +918,7 @@ end
 def upload_screenshots(platform)
   platform ||= 'iOS'
 
+  login_with_app_store_connect_api_key
   deliver(
     platform: appstore_platform(platform),
     app_version: xcode_marketing_version(platform),
@@ -907,6 +933,7 @@ def can_upload_testflight_build(platform, app_identifier)
   platform ||= 'iOS'
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
 
+  login_with_app_store_connect_api_key
   appstore_build_number = latest_testflight_build_number(
     platform: appstore_platform(platform),
     app_identifier: app_identifier
