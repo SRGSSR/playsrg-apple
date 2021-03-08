@@ -259,7 +259,7 @@
         }
     }
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete items saved for later", @"Title of the confirmation pop-up displayed when the user is about to delete items from the later list")
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete content saved for later", @"Title of the confirmation pop-up displayed when the user is about to delete content from the later list")
                                                                              message:deleteAllModeEnabled ? NSLocalizedString(@"This will delete all items.", @"Confirmation message displayed when the user is about to delete the later list") : NSLocalizedString(@"This will delete the selected items.", @"Confirmation message displayed when the user is about to delete selected entries from the later list")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
