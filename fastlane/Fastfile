@@ -33,7 +33,7 @@ platform :ios do
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
-      clean_derived_data
+      clean_derived_data unless skip_clean_derived_data
       Dir.chdir('..') { sh 'make bootstrap' }
     end
   end
@@ -539,7 +539,10 @@ platform :ios do
   end
 
   after_all do |lane|
-    reset_git_repo(skip_clean: true) if cleaned_lane_condition(lane)
+    if cleaned_lane_condition(lane)
+      ENV.delete('DERIVED_DATA_CLEANED')
+      reset_git_repo(skip_clean: true)
+    end
 
     # slack(
     #   message: "Successfully deployed new App Update."
@@ -549,6 +552,7 @@ platform :ios do
   error do |lane|
     if cleaned_lane_condition(lane)
       clean_build_artifacts
+      ENV.delete('DERIVED_DATA_CLEANED')
       reset_git_repo(skip_clean: true, force: true)
     end
 
@@ -569,8 +573,13 @@ def cleaned_lane_condition(lane)
     (!lane.to_s.downcase.include? 'tester')
 end
 
+def skip_clean_derived_data
+  ENV['DERIVED_DATA_CLEANED'] == '1'
+end
+
 def clean_derived_data
   Dir.chdir('..') { FileUtils.remove_entry(derived_data_path, true) }
+  ENV['DERIVED_DATA_CLEANED'] = '1'
 end
 
 def derived_data_path
