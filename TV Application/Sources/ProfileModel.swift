@@ -145,7 +145,9 @@ class ProfileModel: ObservableObject {
     private func updateHistoryInformation() {
         SRGUserData.current?.history.historyEntries(matching: nil, sortedWith: nil) { historyEntries, error in
             guard let isEmpty = historyEntries?.isEmpty else { return }
-            self.hasHistoryEntries = !isEmpty
+            DispatchQueue.main.async {
+                self.hasHistoryEntries = !isEmpty
+            }
         }
     }
     
@@ -156,7 +158,9 @@ class ProfileModel: ObservableObject {
     private func updateWatchLaterInformation() {
         SRGUserData.current?.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: nil) { entries, error in
             guard let isEmpty = entries?.isEmpty else { return }
-            self.hasWatchLaterItems = !isEmpty
+            DispatchQueue.main.async {
+                self.hasWatchLaterItems = !isEmpty
+            }
         }
     }
     
