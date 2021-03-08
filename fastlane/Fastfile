@@ -106,9 +106,6 @@ platform :ios do
 
       srg_pilot(app_identifier, platform, changelog)
 
-      UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
-      sleep(90)
-
       update_dsyms(app_identifier, platform, appcenter_tv_nightly_names[index], nil)
 
       clean_build_artifacts
@@ -118,6 +115,15 @@ platform :ios do
     end
 
     save_last_nightlies_success_git_commit_hash(platform)
+  end
+
+  desc 'Sends latest tvOS nightly dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  lane :tvOSnightlyDSYMs do |options|
+    tvos_schemes.each_index do |index|
+      app_identifier = appstore_nightly_identifiers[index]
+      appcenter_appname = appcenter_tv_nightly_names[index]
+      update_dsyms(app_identifier, 'tvOS', appcenter_appname, options)
+    end
   end
 
   desc 'Add tvOS nightly tester (email required)'
@@ -189,9 +195,6 @@ platform :ios do
 
       srg_pilot(app_identifier, platform, changelog)
 
-      UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
-      sleep(90)
-
       update_dsyms(app_identifier, platform, appcenter_tv_beta_names[index], nil)
 
       clean_build_artifacts
@@ -201,6 +204,15 @@ platform :ios do
     end
 
     bump_build_number_beta_workflow(platform)
+  end
+
+  desc 'Sends latest tvOS nightly dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  lane :tvOSbetaDSYMs do |options|
+    tvos_schemes.each_index do |index|
+      app_identifier = appstore_beta_identifiers[index]
+      appcenter_appname = appcenter_tv_beta_names[index]
+      update_dsyms(app_identifier, 'tvOS', appcenter_appname, options)
+    end
   end
 
   desc 'Add tvOS beta tester (email required)'
@@ -229,19 +241,6 @@ platform :ios do
     sh 'bundle exec fastlane ios rtrAppStoreUpload'
   end
 
-  desc 'Uploads a new tvOS build on AppStore Connect with the current build number.'
-  lane :tvOSappStoreUploads do
-    platform = 'tvOS'
-
-    notify_build_number_to_ci(platform, nil)
-
-    sh 'bundle exec fastlane ios tvOSswiAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSsrfAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSrtsAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSrsiAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSrtrAppStoreUpload'
-  end
-
   desc 'Sends latest iOS dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
   lane :dSYMs do |options|
     min_version = options[:min_version]
@@ -256,6 +255,19 @@ platform :ios do
     sh 'bundle exec fastlane ios rtsDSYMs' + options
     sh 'bundle exec fastlane ios rsiDSYMs' + options
     sh 'bundle exec fastlane ios rtrDSYMs' + options
+  end
+
+  desc 'Uploads a new tvOS build on AppStore Connect with the current build number.'
+  lane :tvOSappStoreUploads do
+    platform = 'tvOS'
+
+    notify_build_number_to_ci(platform, nil)
+
+    sh 'bundle exec fastlane ios tvOSswiAppStoreUpload'
+    sh 'bundle exec fastlane ios tvOSsrfAppStoreUpload'
+    sh 'bundle exec fastlane ios tvOSrtsAppStoreUpload'
+    sh 'bundle exec fastlane ios tvOSrsiAppStoreUpload'
+    sh 'bundle exec fastlane ios tvOSrtrAppStoreUpload'
   end
 
   desc 'Sends latest tvOS dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
@@ -836,6 +848,7 @@ def try_update_dsyms(app_identifier, platform, appcenter_appname, options, outpu
   begin
     download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
     upload_appcenter_dsyms(appcenter_appname)
+    lane_context.delete(SharedValues::DSYM_PATHS)
   rescue StandardError => e
     UI.important('Update dSYMs failed (' + platform + ' / ' + appcenter_appname + '). ⚠️')
     UI.error(e.message)
@@ -855,7 +868,9 @@ def download_appstore_dsyms(app_identifier, platform, min_version, version, outp
     platform: appstore_platform(platform),
     min_version: min_version,
     version: !min_version ? version : nil,
-    output_directory: output_directory
+    output_directory: output_directory,
+    wait_for_dsym_processing: true,
+    wait_timeout: 90
   )
 end
 

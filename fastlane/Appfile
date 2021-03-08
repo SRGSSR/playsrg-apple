@@ -191,12 +191,22 @@ for_platform :ios do
     team_id "#{ENV['SRGSSR_TEAM_ID']}"
   end
 
+  for_lane :tvOSnightlyDSYMs do
+    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+  end
+
   for_lane :tvOSnightlyTester do
     itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRGSSR_TEAM_ID']}"
   end
 
   for_lane :tvOSbetas do
+    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+  end
+
+  for_lane :tvOSbetaDSYMs do
     itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRGSSR_TEAM_ID']}"
   end
