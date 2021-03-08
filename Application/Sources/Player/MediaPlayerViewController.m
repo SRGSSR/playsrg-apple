@@ -1241,7 +1241,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     if (action == WatchLaterActionRemove) {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later_full-48"] forState:UIControlStateNormal];
-        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove from \"Later\" list", @"Media removal from later list label");
+        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Delete from \"Later\" list", @"Media deletion from later list label");
     }
     else {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later-48"] forState:UIControlStateNormal];
@@ -1284,7 +1284,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         case DownloadStateDownloaded: {
             [self.downloadButton.imageView stopAnimating];
             [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_full-48"] forState:UIControlStateNormal];
-            self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove download", @"A download button label");
+            self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Delete download", @"A download button label");
             break;
         }
             
@@ -1304,7 +1304,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [self.favoriteButton setImage:image forState:UIControlStateNormal];
     [self.currentProgramFavoriteButton setImage:image forState:UIControlStateNormal];
     
-    NSString *accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite label in the player view when a show has been favorited") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite label in the player view when a show can be favorited");
+    NSString *accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Delete from favorites", @"Favorite label in the player view when a show has been favorited") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite label in the player view when a show can be favorited");
     self.favoriteButton.accessibilityLabel = accessibilityLabel;
     self.currentProgramFavoriteButton.accessibilityLabel = accessibilityLabel;
 }
@@ -2007,8 +2007,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         toggleDownload();
     }
     else {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Remove download", @"Title of the confirmation pop-up displayed when the user is about to delete a download")
-                                                                                 message:NSLocalizedString(@"Are you sure you want to delete the downloaded media?", @"Confirmation message displayed when the user is about to delete a download")
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete download", @"Title of the confirmation pop-up displayed when the user is about to delete a download")
+                                                                                 message:NSLocalizedString(@"This will delete the downloaded media", @"Confirmation message displayed when the user is about to delete a download")
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of the cancel button in the alert view when deleting a download in the player view") style:UIAlertActionStyleDefault handler:nil]];
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of the delete button in the alert view when deleting a download in the player view") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {

@@ -128,15 +128,15 @@
 "Recently played: %@" = "Riprodotto di recente: %@";
 
 /* A download button label */
-"Remove download" = "Rimuovere i download";
+"Delete download" = "Rimuovere i download";
 
-/* Media removal from later list label
-   Media removal from later list label in the media detail view when a media is in the later list */
-"Remove from \"Later\" list" = "Rimuovere da \"Ascoltare dopo\"";
+/* Media deletion from later list label
+   Media deletion from later list label in the media detail view when a media is in the later list */
+"Delete from \"Later\" list" = "Rimuovere da \"Ascoltare dopo\"";
 
 /* Favorite label in the player view when a show has been favorited
    Favorite label in the show view when a show has been favorited */
-"Remove from favorites" = "Rimuovere dai preferiti";
+"Delete from favorites" = "Rimuovere dai preferiti";
 
 /* A download button label */
 "Retry download" = "Riprovare il download";

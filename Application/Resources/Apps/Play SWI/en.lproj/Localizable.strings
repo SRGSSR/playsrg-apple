@@ -14,10 +14,10 @@
 "%@ has been added to favorites" = "%@ has been added to favorites";
 
 /* Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been removed from \"Later\"" = "%@ has been removed from \"Later\"";
+"%@ has been deleted from \"Later\"" = "%@ has been deleted from \"Later\"";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
-"%@ has been removed from favorites" = "%@ has been removed from favorites";
+"%@ has been deleted from favorites" = "%@ has been deleted from favorites";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ is idle.";
@@ -63,20 +63,20 @@
 /* Title label used to present already available videos, usually badged as web first */
 "Already available" = "Already available";
 
-/* Confirmation message displayed when the user is about to clean all favorites
-   Confirmation message displayed when the user is about to clean the later list
+/* Confirmation message displayed when the user is about to delete all favorites
+   Confirmation message displayed when the user is about to delete the later list
    Confirmation message displayed when the user is about to delete all download items
    Confirmation message displayed when the user is about to delete the whole history */
-"Are you sure you want to delete all items?" = "Are you sure you want to delete all items?";
+"This will delete all items." = "This will delete all items.";
 
 /* Confirmation message displayed when the user is about to delete a download */
-"Are you sure you want to delete the downloaded media?" = "Are you sure you want to delete the downloaded media?";
+"This will delete all items." = "This will delete all items.";
 
 /* Confirmation message displayed when the user is about to delete selected download items
    Confirmation message displayed when the user is about to delete selected history entries
-   Confirmation message displayed when the user is about to remove selected entries from favorites
-   Confirmation message displayed when the user is about to remove selected entries from the later list */
-"Are you sure you want to delete the selected items?" = "Are you sure you want to delete the selected items?";
+   Confirmation message displayed when the user is about to delete selected entries from favorites
+   Confirmation message displayed when the user is about to delete selected entries from the later list */
+"This will delete the selected items." = "This will delete the selected items.";
 
 /* Confirmation message displayed when the user is about to delete the whole history */
 "Are you sure you want to erase the whole history?" = "Are you sure you want to erase the whole history?";
@@ -84,8 +84,8 @@
 /* Confirmation message displayed when the user is about to logout on Apple TV */
 "Are you sure you want to logout?" = "Are you sure you want to logout?";
 
-/* Confirmation message displayed when the user is about to clean all favorites */
-"Are you sure you want to remove all favorites?" = "Are you sure you want to remove all favorites?";
+/* Confirmation message displayed when the user is about to delete all favorites */
+"Are you sure you want to delete all favorites?" = "Are you sure you want to delete all favorites?";
 
 /* Audios option
    Audios tab title
@@ -429,43 +429,43 @@
 /* Sort by relevance option */
 "Relevance" = "Relevance";
 
-/* Title of the confirmation pop-up displayed when the user is about to clean the later list */
-"Remove all content" = "Remove all content";
+/* Title of the confirmation pop-up displayed when the user is about to delete the later list */
+"Delete items" = "Delete items";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete all download items */
-"Remove all downloads" = "Remove all downloads";
+"Delete downloads" = "Delete downloads";
 
-/* Remove all favorites button title
+/* Delete favorites button title
    Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
-"Remove all favorites" = "Remove all favorites";
+"Delete favorites" = "Delete favorites";
 
-/* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the later list */
-"Remove content" = "Remove content";
+/* Title of the confirmation pop-up displayed when the user is about to delete selected entries from the later list */
+"Delete item" = "Delete item";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete a download */
-"Remove download" = "Remove download";
+"Delete download" = "Delete download";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete selected download items */
-"Remove downloads" = "Remove downloads";
+"Delete downloads" = "Delete downloads";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete selected favorite items */
-"Remove favorites" = "Remove favorites";
+"Delete favorites" = "Delete favorites";
 
-/* Button label to remove a media from the later list, from the media long-press menu
-   Button label to remove a media from the later list, from the media preview window
-   Context menu action to remove a media from the later list */
-"Remove from \"Later\"" = "Remove from \"Later\"";
+/* Button label to delete a media from the later list, from the media long-press menu
+   Button label to delete a media from the later list, from the media preview window
+   Context menu action to delete a media from the later list */
+"Delete from \"Later\"" = "Delete from \"Later\"";
 
-/* Button label to remove a download from the media long-press menu
-   Button label to remove a download from the media preview window
-   Context menu action to remove a media from the downloads */
-"Remove from downloads" = "Remove from downloads";
+/* Button label to delete a download from the media long-press menu
+   Button label to delete a download from the media preview window
+   Context menu action to delete a media from the downloads */
+"Delete from downloads" = "Delete from downloads";
 
-/* Button label to remove a show from favorites in the show long-press menu
-   Button label to remove a show from favorites in the show preview window
-   Context menu action to remove a show from favorites
-   Title of the confirmation pop-up displayed when the user is about to remove a favorite */
-"Remove from favorites" = "Remove from favorites";
+/* Button label to delete a show from favorites in the show long-press menu
+   Button label to delete a show from favorites in the show preview window
+   Context menu action to delete a show from favorites
+   Title of the confirmation pop-up displayed when the user is about to delete a favorite */
+"Delete from favorites" = "Delete from favorites";
 
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
@@ -618,11 +618,11 @@
 /* Confirmation message displayed when a logged in user is about to delete the whole history */
 "This will erase the whole history on all devices connected to your account." = "This will erase the whole history on all devices connected to your account.";
 
-/* Confirmation message displayed when a logged in user is about to clean all favorites */
-"This will remove all favorites and notification subscriptions on all devices connected to your account." = "This will remove all favorites and notification subscriptions on all devices connected to your account.";
+/* Confirmation message displayed when a logged in user is about to delete all favorites */
+"This will delete all favorites and notification subscriptions on all devices connected to your account." = "This will delete all favorites and notification subscriptions on all devices connected to your account.";
 
-/* Confirmation message displayed when a logged in user is about to remove a favorite */
-"This will remove the favorite and notification subscription on all devices connected to your account." = "This will remove the favorite and notification subscription on all devices connected to your account.";
+/* Confirmation message displayed when a logged in user is about to delete a favorite */
+"This will delete the favorite and notification subscription on all devices connected to your account." = "This will delete the favorite and notification subscription on all devices connected to your account.";
 
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Time-shifted";

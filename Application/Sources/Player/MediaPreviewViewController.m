@@ -189,7 +189,7 @@
     if (action != WatchLaterActionNone) {
         BOOL isRemoval = (action == WatchLaterActionRemove);
         NSString *addActionTitle = (self.media.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen later", @"Button label to add an audio to the later list, from the media preview window") : NSLocalizedString(@"Watch later", @"Button label to add a video to the later list, from the media preview window");
-        UIPreviewAction *watchLaterAction = [UIPreviewAction actionWithTitle:isRemoval ? NSLocalizedString(@"Remove from \"Later\"", @"Button label to remove a media from the later list, from the media preview window") : addActionTitle style:isRemoval ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        UIPreviewAction *watchLaterAction = [UIPreviewAction actionWithTitle:isRemoval ? NSLocalizedString(@"Delete from \"Later\"", @"Button label to delete a media from the later list, from the media preview window") : addActionTitle style:isRemoval ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
             WatchLaterToggleMediaMetadata(self.media, ^(BOOL added, NSError * _Nullable error) {
                 if (! error) {
                     AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
@@ -209,7 +209,7 @@
     if (downloadable) {
         Download *download = [Download downloadForMedia:self.media];
         BOOL downloaded = (download != nil);
-        UIPreviewAction *downloadAction = [UIPreviewAction actionWithTitle:downloaded ? NSLocalizedString(@"Remove from downloads", @"Button label to remove a download from the media preview window") : NSLocalizedString(@"Add to downloads", @"Button label to add a download from the media preview window") style:downloaded ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        UIPreviewAction *downloadAction = [UIPreviewAction actionWithTitle:downloaded ? NSLocalizedString(@"Delete from downloads", @"Button label to delete a download from the media preview window") : NSLocalizedString(@"Add to downloads", @"Button label to add a download from the media preview window") style:downloaded ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
             if (downloaded) {
                 [Download removeDownload:download];
             }

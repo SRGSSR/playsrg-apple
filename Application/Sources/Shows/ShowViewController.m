@@ -194,7 +194,7 @@
     
     BOOL isFavorite = FavoritesContainsShow(self.show);
     
-    UIPreviewAction *favoriteAction = [UIPreviewAction actionWithTitle:isFavorite ? NSLocalizedString(@"Remove from favorites", @"Button label to remove a show from favorites in the show preview window") : NSLocalizedString(@"Add to favorites", @"Button label to add a show to favorites in the show preview window") style:isFavorite ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+    UIPreviewAction *favoriteAction = [UIPreviewAction actionWithTitle:isFavorite ? NSLocalizedString(@"Delete from favorites", @"Button label to delete a show from favorites in the show preview window") : NSLocalizedString(@"Add to favorites", @"Button label to add a show to favorites in the show preview window") style:isFavorite ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
         FavoritesToggleShow(self.show);
         
         // Use !isFavorite since favorite status has been reversed

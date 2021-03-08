@@ -167,8 +167,8 @@ struct ShowDetailView: View {
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                 toggleFavorite()
             }
-            return Alert(title: Text(NSLocalizedString("Remove from favorites", comment: "Title of the confirmation pop-up displayed when the user is about to remove a favorite")),
-                         message: Text(NSLocalizedString("This will remove the favorite and notification subscription on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to remove a favorite")),
+            return Alert(title: Text(NSLocalizedString("Delete from favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete a favorite")),
+                         message: Text(NSLocalizedString("This will delete the favorite and notification subscription on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to delete a favorite")),
                          primaryButton: primaryButton,
                          secondaryButton: secondaryButton)
         }
@@ -197,7 +197,7 @@ struct ShowDetailView: View {
                 Spacer()
                 LabeledButton(icon: isFavorite ? "favorite_full-22" : "favorite-22",
                               label: isFavorite ? NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited") : NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited"),
-                              accessibilityLabel: isFavorite ? PlaySRGAccessibilityLocalizedString("Remove from favorites", "Favorite label in the show view when a show has been favorited") : PlaySRGAccessibilityLocalizedString("Add to favorites", "Favorite label in the show view when a show can be favorited"),
+                              accessibilityLabel: isFavorite ? PlaySRGAccessibilityLocalizedString("Delete from favorites", "Favorite label in the show view when a show has been favorited") : PlaySRGAccessibilityLocalizedString("Add to favorites", "Favorite label in the show view when a show can be favorited"),
                               action: toggleFavoriteAction)
                     .padding(.leading, 100)
                     .alert(isPresented: $favoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)

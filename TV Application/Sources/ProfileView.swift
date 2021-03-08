@@ -75,7 +75,7 @@ struct ProfileView: View {
                 model.logout()
             }
             return Alert(title: Text(NSLocalizedString("Logout", comment: "Logout alert view title on Apple TV")),
-                         message: Text(NSLocalizedString("Playback history, favorites and content saved for later will be removed from this Apple TV.", comment: "Message displayed when the user is about to log out")),
+                         message: Text(NSLocalizedString("Playback history, favorites and content saved for later will be deleted from this Apple TV.", comment: "Message displayed when the user is about to log out")),
                          primaryButton: primaryButton,
                          secondaryButton: secondaryButton)
         }
@@ -164,13 +164,13 @@ struct ProfileView: View {
                 model.removeFavorites()
             }
             if model.isLoggedIn {
-                return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the message displayed when the user is about to remove all favorites")),
-                             message: Text(NSLocalizedString("Favorites and notification subscriptions will be removed on all devices connected to your account.", comment: "Message displayed when the user is about to remove all favorites")),
+                return Alert(title: Text(NSLocalizedString("Delete favorites", comment: "Title of the message displayed when the user is about to delete all favorites")),
+                             message: Text(NSLocalizedString("Favorites and notification subscriptions will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete all favorites")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
             else {
-                return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the message displayed when the user is about to remove all favorites")),
+                return Alert(title: Text(NSLocalizedString("Delete favorites", comment: "Title of the message displayed when the user is about to delete all favorites")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
@@ -182,7 +182,7 @@ struct ProfileView: View {
                     alertDisplayed = true
                 }
             }) {
-                Text(NSLocalizedString("Remove all favorites", comment: "Remove all favorites button title"))
+                Text(NSLocalizedString("Delete favorites", comment: "Delete favorites button title"))
                     .srgFont(.button1)
                     .foregroundColor(model.hasFavorites ? .primary : .secondary)
             }
@@ -201,13 +201,13 @@ struct ProfileView: View {
                 model.removeWatchLaterItems()
             }
             if model.isLoggedIn {
-                return Alert(title: Text(NSLocalizedString("Remove content saved for later", comment: "Title of the message displayed when the user is about to remove content saved for later")),
-                             message: Text(NSLocalizedString("Content saved for later will be removed on all devices connected to your account.", comment: "Message displayed when the user is about to remove content saved for later")),
+                return Alert(title: Text(NSLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
+                             message: Text(NSLocalizedString("Content saved for later will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete content saved for later")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
             else {
-                return Alert(title: Text(NSLocalizedString("Remove content saved for later", comment: "Title of the message displayed when the user is about to remove content saved for later")),
+                return Alert(title: Text(NSLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
@@ -219,7 +219,7 @@ struct ProfileView: View {
                     alertDisplayed = true
                 }
             }) {
-                Text(NSLocalizedString("Remove content saved for later", comment: "Title of the button to remove content saved for later"))
+                Text(NSLocalizedString("Delete content saved for later", comment: "Title of the button to delete content saved for later"))
                     .srgFont(.button1)
                     .foregroundColor(model.hasWatchLaterItems ? .primary : .secondary)
             }

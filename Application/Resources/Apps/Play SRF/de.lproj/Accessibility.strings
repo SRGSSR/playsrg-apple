@@ -128,15 +128,15 @@
 "Recently played: %@" = "Kürzlich abgespielt: %@";
 
 /* A download button label */
-"Remove download" = "Download entfernen";
+"Delete download" = "Download entfernen";
 
-/* Media removal from later list label
-   Media removal from later list label in the media detail view when a media is in the later list */
-"Remove from \"Later\" list" = "Von \"Später\" Liste entfernen";
+/* Media deletion from later list label
+   Media deletion from later list label in the media detail view when a media is in the later list */
+"Delete from \"Later\" list" = "Von \"Später\" Liste entfernen";
 
 /* Favorite label in the player view when a show has been favorited
    Favorite label in the show view when a show has been favorited */
-"Remove from favorites" = "Aus den Favoriten entfernen";
+"Delete from favorites" = "Aus den Favoriten entfernen";
 
 /* A download button label */
 "Retry download" = "Erneut herunterladen";

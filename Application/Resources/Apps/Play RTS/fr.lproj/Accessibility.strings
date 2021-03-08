@@ -128,15 +128,15 @@
 "Recently played: %@" = "Joué récemment : %@";
 
 /* A download button label */
-"Remove download" = "Supprimer le téléchargement";
+"Delete download" = "Supprimer le téléchargement";
 
-/* Media removal from later list label
-   Media removal from later list label in the media detail view when a media is in the later list */
-"Remove from \"Later\" list" = "Supprimer de la liste \"Plus tard\"";
+/* Media deletion from later list label
+   Media deletion from later list label in the media detail view when a media is in the later list */
+"Delete from \"Later\" list" = "Supprimer de la liste \"Plus tard\"";
 
 /* Favorite label in the player view when a show has been favorited
    Favorite label in the show view when a show has been favorited */
-"Remove from favorites" = "Supprimer des favoris";
+"Delete from favorites" = "Supprimer des favoris";
 
 /* A download button label */
 "Retry download" = "Réessayer le téléchargement";
