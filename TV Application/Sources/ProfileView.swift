@@ -20,7 +20,7 @@ struct ProfileView: View {
         List {
             if model.supportsLogin {
                 Section(header: Text(NSLocalizedString("Profile", comment: "Profile section header")).srgFont(.headline1),
-                        footer: Text(NSLocalizedString("Synchronize playback history, favorites and content to be watched later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.overline).opacity(0.8)) {
+                        footer: Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.overline).opacity(0.8)) {
                     ProfileListItem(model: model)
                 }
             }
@@ -75,7 +75,7 @@ struct ProfileView: View {
                 model.logout()
             }
             return Alert(title: Text(NSLocalizedString("Logout", comment: "Logout alert view title on Apple TV")),
-                         message: Text(NSLocalizedString("Are you sure you want to logout?", comment: "Confirmation message displayed when the user is about to logout on Apple TV")),
+                         message: Text(NSLocalizedString("Playback history, favorites and content saved for later will be removed from this Apple TV.", comment: "Message displayed when the user is about to log out")),
                          primaryButton: primaryButton,
                          secondaryButton: secondaryButton)
         }
@@ -127,14 +127,13 @@ struct ProfileView: View {
                 model.removeHistory()
             }
             if model.isLoggedIn {
-                return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the confirmation pop-up displayed when the user is about to clear the history")),
-                             message: Text(NSLocalizedString("This will erase the whole history on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to delete the whole history")),
+                return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
+                             message: Text(NSLocalizedString("The history will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete the history")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
             else {
-                return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the confirmation pop-up displayed when the user is about to clear the history")),
-                             message: Text(NSLocalizedString("Are you sure you want to erase the whole history?", comment: "Confirmation message displayed when the user is about to delete the whole history")),
+                return Alert(title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
@@ -165,14 +164,13 @@ struct ProfileView: View {
                 model.removeFavorites()
             }
             if model.isLoggedIn {
-                return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
-                             message: Text(NSLocalizedString("This will remove all favorites and notification subscriptions on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to clean all favorites")),
+                return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the message displayed when the user is about to remove all favorites")),
+                             message: Text(NSLocalizedString("Favorites and notification subscriptions will be removed on all devices connected to your account.", comment: "Message displayed when the user is about to remove all favorites")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
             else {
-                return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete all favorite items")),
-                             message: Text(NSLocalizedString("Are you sure you want to remove all favorites?", comment: "Confirmation message displayed when the user is about to clean all favorites")),
+                return Alert(title: Text(NSLocalizedString("Remove all favorites", comment: "Title of the message displayed when the user is about to remove all favorites")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
@@ -203,14 +201,13 @@ struct ProfileView: View {
                 model.removeWatchLaterItems()
             }
             if model.isLoggedIn {
-                return Alert(title: Text(NSLocalizedString("Remove all items saved for later", comment: "Title of the confirmation pop-up displayed when the user is about to delete items from the later list")),
-                             message: Text(NSLocalizedString("This will remove all items on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to clean all items from the later list")),
+                return Alert(title: Text(NSLocalizedString("Remove content saved for later", comment: "Title of the message displayed when the user is about to remove content saved for later")),
+                             message: Text(NSLocalizedString("Content saved for later will be removed on all devices connected to your account.", comment: "Message displayed when the user is about to remove content saved for later")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
             else {
-                return Alert(title: Text(NSLocalizedString("Remove all items saved for later", comment: "Title of the confirmation pop-up displayed when the user is about to delete items from the later list")),
-                             message: Text(NSLocalizedString("Are you sure you want to remove all items?", comment: "Confirmation message displayed when the user is about to clean all items saved for later")),
+                return Alert(title: Text(NSLocalizedString("Remove content saved for later", comment: "Title of the message displayed when the user is about to remove content saved for later")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
@@ -222,7 +219,7 @@ struct ProfileView: View {
                     alertDisplayed = true
                 }
             }) {
-                Text(NSLocalizedString("Remove all items saved for later", comment: "Title of the button to remove all items saved for later"))
+                Text(NSLocalizedString("Remove content saved for later", comment: "Title of the button to remove content saved for later"))
                     .srgFont(.button1)
                     .foregroundColor(model.hasWatchLaterItems ? .primary : .secondary)
             }
