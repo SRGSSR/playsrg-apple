@@ -2008,7 +2008,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
     else {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete download", @"Title of the confirmation pop-up displayed when the user is about to delete a download")
-                                                                                 message:NSLocalizedString(@"This will delete the downloaded media", @"Confirmation message displayed when the user is about to delete a download")
+                                                                                 message:NSLocalizedString(@"This will delete the downloaded media.", @"Confirmation message displayed when the user is about to delete a download")
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of the cancel button in the alert view when deleting a download in the player view") style:UIAlertActionStyleDefault handler:nil]];
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of the delete button in the alert view when deleting a download in the player view") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
