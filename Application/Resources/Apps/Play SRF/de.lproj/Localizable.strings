@@ -67,16 +67,16 @@
    Confirmation message displayed when the user is about to delete the later list
    Confirmation message displayed when the user is about to delete all download items
    Confirmation message displayed when the user is about to delete the whole history */
-"This will delete all items." = "Sind Sie sicher, dass Sie alle Elemente löschen wollen?";
+"All items will be deleted." = "Sind Sie sicher, dass Sie alle Elemente löschen wollen?";
 
 /* Confirmation message displayed when the user is about to delete a download */
-"This will delete all items." = "Sind Sie sicher, dass Sie alle Downloads löschen wollen?";
+"All items will be deleted." = "Sind Sie sicher, dass Sie alle Downloads löschen wollen?";
 
 /* Confirmation message displayed when the user is about to delete selected download items
    Confirmation message displayed when the user is about to delete selected history entries
    Confirmation message displayed when the user is about to delete selected entries from favorites
    Confirmation message displayed when the user is about to delete selected entries from the later list */
-"This will delete the selected items." = "Sind Sie sicher, dass Sie die ausgewählten Elemente löschen wollen?";
+"The selected items will be deleted." = "Sind Sie sicher, dass Sie die ausgewählten Elemente löschen wollen?";
 
 /* Confirmation message displayed when the user is about to delete the whole history */
 "Are you sure you want to erase the whole history?" = "Sind Sie sicher, dass Sie den gesamten Verlauf löschen möchten?";

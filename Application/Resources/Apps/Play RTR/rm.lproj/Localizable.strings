@@ -67,16 +67,16 @@
    Confirmation message displayed when the user is about to delete the later list
    Confirmation message displayed when the user is about to delete all download items
    Confirmation message displayed when the user is about to delete the whole history */
-"This will delete all items." = "Vulais Vus propi stizzar tut ils elements?";
+"All items will be deleted." = "Vulais Vus propi stizzar tut ils elements?";
 
 /* Confirmation message displayed when the user is about to delete a download */
-"This will delete all items." = "Vulais Vus propi stizzar la telechargiada selectada?";
+"All items will be deleted." = "Vulais Vus propi stizzar la telechargiada selectada?";
 
 /* Confirmation message displayed when the user is about to delete selected download items
    Confirmation message displayed when the user is about to delete selected history entries
    Confirmation message displayed when the user is about to delete selected entries from favorites
    Confirmation message displayed when the user is about to delete selected entries from the later list */
-"This will delete the selected items." = "Vulais Vus propi stizzar il elements selectà?";
+"The selected items will be deleted." = "Vulais Vus propi stizzar il elements selectà?";
 
 /* Confirmation message displayed when the user is about to delete the whole history */
 "Are you sure you want to erase the whole history?" = "Are you sure you want to erase the whole history?";

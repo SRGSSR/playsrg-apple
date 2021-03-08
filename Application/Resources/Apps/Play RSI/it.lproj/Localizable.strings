@@ -67,16 +67,16 @@
    Confirmation message displayed when the user is about to delete the later list
    Confirmation message displayed when the user is about to delete all download items
    Confirmation message displayed when the user is about to delete the whole history */
-"This will delete all items." = "Sei sicuro di voler eliminare tutti gli elementi?";
+"All items will be deleted." = "Sei sicuro di voler eliminare tutti gli elementi?";
 
 /* Confirmation message displayed when the user is about to delete a download */
-"This will delete all items." = "È di sicuro di voler eliminare gli elementi scaricati?";
+"All items will be deleted." = "È di sicuro di voler eliminare gli elementi scaricati?";
 
 /* Confirmation message displayed when the user is about to delete selected download items
    Confirmation message displayed when the user is about to delete selected history entries
    Confirmation message displayed when the user is about to delete selected entries from favorites
    Confirmation message displayed when the user is about to delete selected entries from the later list */
-"This will delete the selected items." = "Sei sicuro di voler eliminare gli elementi selezionati?";
+"The selected items will be deleted." = "Sei sicuro di voler eliminare gli elementi selezionati?";
 
 /* Confirmation message displayed when the user is about to delete the whole history */
 "Are you sure you want to erase the whole history?" = "È sicuro di voler cancellare la cronologia?";

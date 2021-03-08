@@ -320,7 +320,7 @@
     }
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete downloads", @"Title of the confirmation pop-up displayed when the user is about to delete download items")
-                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"This will delete all items.", @"Confirmation message displayed when the user is about to delete all download items") : NSLocalizedString(@"This will delete the selected items.", @"Confirmation message displayed when the user is about to delete selected download items")
+                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"All items will be deleted.", @"Confirmation message displayed when the user is about to delete all download items") : NSLocalizedString(@"The selected items will be deleted.", @"Confirmation message displayed when the user is about to delete selected download items")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (deleteAllModeEnabled) {

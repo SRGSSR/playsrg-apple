@@ -391,7 +391,7 @@
     }
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete favorites", @"Title of the confirmation pop-up displayed when the user is about to delete favorite items")
-                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"This will delete all items.", @"Confirmation message displayed when the user is about to delete all favorites") : NSLocalizedString(@"This will delete the selected items.", @"Confirmation message displayed when the user is about to delete selected entries from favorites")
+                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"All items will be deleted.", @"Confirmation message displayed when the user is about to delete all favorites") : NSLocalizedString(@"The selected items will be deleted.", @"Confirmation message displayed when the user is about to delete selected entries from favorites")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (deleteAllModeEnabled) {
