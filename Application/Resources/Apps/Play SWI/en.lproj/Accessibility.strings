@@ -42,6 +42,17 @@
 /* Delete button label */
 "Delete" = "Delete";
 
+/* A download button label */
+"Delete download" = "Delete download";
+
+/* Media deletion from later list label
+   Media deletion from later list label in the media detail view when a media is in the later list */
+"Delete from \"Later\" list" = "Delete from \"Later\" list";
+
+/* Favorite label in the player view when a show has been favorited
+   Favorite label in the show view when a show has been favorited */
+"Delete from favorites" = "Delete from favorites";
+
 /* Show unsubscription label */
 "Disable notifications for show" = "Disable notifications for topic";
 
@@ -126,17 +137,6 @@
 
 /* Mini player label */
 "Recently played: %@" = "Recently played: %@";
-
-/* A download button label */
-"Delete download" = "Delete download";
-
-/* Media deletion from later list label
-   Media deletion from later list label in the media detail view when a media is in the later list */
-"Delete from \"Later\" list" = "Delete from \"Later\" list";
-
-/* Favorite label in the player view when a show has been favorited
-   Favorite label in the show view when a show has been favorited */
-"Delete from favorites" = "Delete from favorites";
 
 /* A download button label */
 "Retry download" = "Retry download";

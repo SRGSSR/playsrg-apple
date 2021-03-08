@@ -8,7 +8,7 @@
 "%@ forward" = "%@ enavant";
 
 /* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been added to \"Later\"" = "%@ has been added to \"Later\"";
+"%@ has been added to \"Later\"" = "%@ è agiuntà a \"guardar pli tard\"";
 
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
 "%@ has been added to favorites" = "%@ è vegnì agiuntà a mes favurits";
@@ -17,7 +17,7 @@
 "%@ has been deleted from \"Later\"" = "%@ has been deleted from \"Later\"";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
-"%@ has been deleted from favorites" = "%@ è vegnì allontanà da mes favurits";
+"%@ has been deleted from favorites" = "%@ has been deleted from favorites";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ord funcziun.";
@@ -60,32 +60,14 @@
 /* All option */
 "All" = "Tut";
 
+/* Confirmation message displayed when the user is about to delete all download items
+   Confirmation message displayed when the user is about to delete all favorites
+   Confirmation message displayed when the user is about to delete the later list
+   Confirmation message displayed when the user is about to delete the whole history */
+"All items will be deleted." = "All items will be deleted.";
+
 /* Title label used to present already available videos, usually badged as web first */
 "Already available" = "Gia disponibel";
-
-/* Confirmation message displayed when the user is about to delete all favorites
-   Confirmation message displayed when the user is about to delete the later list
-   Confirmation message displayed when the user is about to delete all download items
-   Confirmation message displayed when the user is about to delete the whole history */
-"All items will be deleted." = "Vulais Vus propi stizzar tut ils elements?";
-
-/* Confirmation message displayed when the user is about to delete a download */
-"All items will be deleted." = "Vulais Vus propi stizzar la telechargiada selectada?";
-
-/* Confirmation message displayed when the user is about to delete selected download items
-   Confirmation message displayed when the user is about to delete selected history entries
-   Confirmation message displayed when the user is about to delete selected entries from favorites
-   Confirmation message displayed when the user is about to delete selected entries from the later list */
-"The selected items will be deleted." = "Vulais Vus propi stizzar il elements selectà?";
-
-/* Confirmation message displayed when the user is about to delete the whole history */
-"Are you sure you want to erase the whole history?" = "Are you sure you want to erase the whole history?";
-
-/* Confirmation message displayed when the user is about to logout on Apple TV */
-"Are you sure you want to logout?" = "Vulais vus propi far il logout?";
-
-/* Confirmation message displayed when the user is about to delete all favorites */
-"Are you sure you want to delete all favorites?" = "Are you sure you want to delete all favorites?";
 
 /* Audios option
    Audios tab title
@@ -126,19 +108,52 @@
    Settings section header */
 "Content" = "Cuntegn";
 
+/* Message displayed when the user is about to delete content saved for later */
+"Content saved for later will be deleted on all devices connected to your account." = "Content saved for later will be deleted on all devices connected to your account.";
+
 /* Sort by date option */
 "Date" = "Data";
 
 /* Title of a delete button
    Title of the delete button in the alert view when deleting a download in the player view */
-"Delete" = "Stizzar";
+"Delete" = "Delete";
+
+/* Title of the button to delete content saved for later
+   Title of the confirmation pop-up displayed when the user is about to delete content from the later list
+   Title of the message displayed when the user is about to delete content saved for later */
+"Delete content saved for later" = "Delete content saved for later";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete a download */
+"Delete download" = "Delete download";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete download items */
+"Delete downloads" = "Delete downloads";
+
+/* Delete favorites button title
+   Title of the confirmation pop-up displayed when the user is about to delete favorite items
+   Title of the message displayed when the user is about to delete all favorites */
+"Delete favorites" = "Delete favorites";
+
+/* Button label to delete a media from the later list, from the media long-press menu
+   Button label to delete a media from the later list, from the media preview window
+   Context menu action to delete a media from the later list */
+"Delete from \"Later\"" = "Delete from \"Later\"";
+
+/* Button label to delete a download from the media long-press menu
+   Button label to delete a download from the media preview window
+   Context menu action to delete a media from the downloads */
+"Delete from downloads" = "Delete from downloads";
+
+/* Button label to delete a show from favorites in the show long-press menu
+   Button label to delete a show from favorites in the show preview window
+   Context menu action to delete a show from favorites
+   Title of the confirmation pop-up displayed when the user is about to delete a favorite */
+"Delete from favorites" = "Delete from favorites";
 
 /* Delete history button title
-   Title of the confirmation pop-up displayed when the user is about to clear the history */
-"Delete history" = "Stizzar cronologia";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete selected history entries */
-"Delete history entries" = "Stizzar indicaziuns en cronologia";
+   Title of the confirmation pop-up displayed when the user is about to delete history entries
+   Title of the message displayed when the user is about to delete the history */
+"Delete history" = "Delete history";
 
 /* Label for the button disabling autoplay */
 "Disable" = "Inabel";
@@ -182,6 +197,9 @@
    Title label used to present the TV favorite shows
    Title label used to present the TV or radio favorite shows */
 "Favorites" = "Favurits";
+
+/* Message displayed when the user is about to delete all favorites */
+"Favorites and notification subscriptions will be deleted on all devices connected to your account." = "Favorites and notification subscriptions will be deleted on all devices connected to your account.";
 
 /* Title displayed at the top of the features list */
 "Features" = "Funcziuns";
@@ -250,7 +268,7 @@
    Button label to add an audio to the later list, from the media long-press menu
    Button label to add an audio to the later list, from the media preview window
    Context menu action to add an audio to the later list */
-"Listen later" = "Listen later";
+"Listen later" = "Tadlar pli tard";
 
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
@@ -398,6 +416,9 @@
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Disponibel en l'exteriur";
 
+/* Message displayed when the user is about to log out */
+"Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Playback history, favorites and content saved for later will be deleted from this Apple TV.";
+
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Precedent";
 
@@ -429,44 +450,6 @@
 /* Sort by relevance option */
 "Relevance" = "Relevanza";
 
-/* Title of the confirmation pop-up displayed when the user is about to delete the later list */
-"Delete items" = "Piglia davent tut il cuntegn";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete all download items */
-"Delete downloads" = "Allontanar tut las telechargiadas";
-
-/* Delete favorites button title
-   Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
-"Delete favorites" = "Allontanar tut ils favurits";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete selected entries from the later list */
-"Delete item" = "Pigliar davent cuntegn";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete a download */
-"Delete download" = "Allontanar telechargiada";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete selected download items */
-"Delete downloads" = "Allontanar telechargiadas";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete selected favorite items */
-"Delete favorites" = "Allontanar favurits";
-
-/* Button label to delete a media from the later list, from the media long-press menu
-   Button label to delete a media from the later list, from the media preview window
-   Context menu action to delete a media from the later list */
-"Delete from \"Later\"" = "Delete from \"Later\"";
-
-/* Button label to delete a download from the media long-press menu
-   Button label to delete a download from the media preview window
-   Context menu action to delete a media from the downloads */
-"Delete from downloads" = "Allontanar da telechargiadas";
-
-/* Button label to delete a show from favorites in the show long-press menu
-   Button label to delete a show from favorites in the show preview window
-   Context menu action to delete a show from favorites
-   Title of the confirmation pop-up displayed when the user is about to delete a favorite */
-"Delete from favorites" = "Allontanar da favurits";
-
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
 
@@ -477,7 +460,7 @@
 "Resume" = "Guardar vinavant";
 
 /* Title label used to present medias whose playback can be resumed */
-"Resume playback" = "Resume playback";
+"Resume playback" = "Cuntinuar";
 
 /* Label to present the search view
    Search placeholder text
@@ -556,7 +539,7 @@
 "Subtitled" = "Suttitels";
 
 /* Login benefits description footer */
-"Synchronize playback history, favorites and content to be watched later on all devices connected to your account." = "Synchronize playback history, favorites and content to be watched later on all devices connected to your account.";
+"Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Synchronize playback history, favorites and content saved for later on all devices connected to your account.";
 
 /* Button label to share the content being played. */
 "The content" = "Il cuntegn";
@@ -571,17 +554,26 @@
 /* Error message returned for invalid data */
 "The data is invalid" = "Las datas n'èn betg valaivlas";
 
+/* Confirmation message displayed when the user is about to delete a download */
+"The downloaded content will be deleted." = "The downloaded content will be deleted.";
+
 /* Button label to share the entire episode being played. */
 "The entire episode" = "Episoda entira";
 
 /* Button label to share the entire episode being played at time (hours / minutes / seconds). */
 "The episode at %@" = "Episoda a las %@";
 
+/* Confirmation message displayed when a logged in user is about to delete a favorite */
+"The favorite and notification subscription will be deleted on all devices connected to your account." = "The favorite and notification subscription will be deleted on all devices connected to your account.";
+
 /* Message displayed if the Google Cast receiver cannot play audios */
 "The Google Cast receiver cannot play audios." = "Receptur Google Cast na po laschar ir audios.";
 
 /* Message displayed if the Google Cast receiver cannot play videos */
 "The Google Cast receiver cannot play videos." = "Receptur Google Cast na po laschar ir videos.";
+
+/* Message displayed when the user is about to delete the history */
+"The history will be deleted on all devices connected to your account." = "The history will be deleted on all devices connected to your account.";
 
 /* Title label used to present the radio latest audios */
 "The latest audios" = "Ils pli novs audios";
@@ -602,6 +594,12 @@
    Name of the subscription item, if no title or name to display */
 "The selected content" = "Il cuntegn selecziunà";
 
+/* Confirmation message displayed when the user is about to delete selected download items
+   Confirmation message displayed when the user is about to delete selected entries from favorites
+   Confirmation message displayed when the user is about to delete selected entries from the later list
+   Confirmation message displayed when the user is about to delete selected history entries */
+"The selected items will be deleted." = "The selected items will be deleted.";
+
 /* Error message when a show cannot be opened via Handoff
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "La preschentaziun na po betg vegnir averta.";
@@ -614,15 +612,6 @@
 
 /* Period setting option */
 "This week" = "Emna actuala";
-
-/* Confirmation message displayed when a logged in user is about to delete the whole history */
-"This will erase the whole history on all devices connected to your account." = "This will erase the whole history on all devices connected to your account.";
-
-/* Confirmation message displayed when a logged in user is about to delete all favorites */
-"This will delete all favorites and notification subscriptions on all devices connected to your account." = "This will delete all favorites and notification subscriptions on all devices connected to your account.";
-
-/* Confirmation message displayed when a logged in user is about to delete a favorite */
-"This will delete the favorite and notification subscription on all devices connected to your account." = "This will delete the favorite and notification subscription on all devices connected to your account.";
 
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Differì";
@@ -690,7 +679,7 @@
 "You can manage this feature in the settings at any time." = "Vus paudais puspe activar questa funcziun.";
 
 /* Hint displayed when no media added to the later list and the device supports 3D touch */
-"You can press on a content to add it to \"Later\"" = "You can press on a content to add it to \"Later\"";
+"You can press on a content to add it to \"Later\"" = "Smatgar sin elements per agiuntar a \"pli tard\"";
 
 /* Hint displayed when no favorites are available and the device supports 3D touch */
 "You can press on an item to add it to favorites" = "Smatgar sin in element per aschuntar a Vos favurits";
@@ -699,7 +688,7 @@
 "You can press on an item to download it (not all items can be downloaded)" = "Smatgar sin in element per telechargiar quel (betg tut po vegnir telechargià)";
 
 /* Hint displayed when no media added to the later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to \"Later\"" = "You can tap and hold a content to add it to \"Later\"";
+"You can tap and hold a content to add it to \"Later\"" = "Tegnair smatgà in element per l'agiuntar a \"pli tard\"";
 
 /* Hint displayed when no favorites are available and the device does not support 3D touch */
 "You can tap and hold an item to add it to favorites" = "Vus pudais smatgar e tegnair Voss det sin in element per metter en Voss favurits";

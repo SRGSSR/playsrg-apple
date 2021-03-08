@@ -40,7 +40,18 @@
 "Closes the player and continue playing video with AirPlay." = "Chiude il player ma continua la riproduzione con AirPlay.";
 
 /* Delete button label */
-"Delete" = "Elimina";
+"Delete" = "Delete";
+
+/* A download button label */
+"Delete download" = "Delete download";
+
+/* Media deletion from later list label
+   Media deletion from later list label in the media detail view when a media is in the later list */
+"Delete from \"Later\" list" = "Delete from \"Later\" list";
+
+/* Favorite label in the player view when a show has been favorited
+   Favorite label in the show view when a show has been favorited */
+"Delete from favorites" = "Delete from favorites";
 
 /* Show unsubscription label */
 "Disable notifications for show" = "Disattivare le notifiche per il programma";
@@ -126,17 +137,6 @@
 
 /* Mini player label */
 "Recently played: %@" = "Riprodotto di recente: %@";
-
-/* A download button label */
-"Delete download" = "Rimuovere i download";
-
-/* Media deletion from later list label
-   Media deletion from later list label in the media detail view when a media is in the later list */
-"Delete from \"Later\" list" = "Rimuovere da \"Ascoltare dopo\"";
-
-/* Favorite label in the player view when a show has been favorited
-   Favorite label in the show view when a show has been favorited */
-"Delete from favorites" = "Rimuovere dai preferiti";
 
 /* A download button label */
 "Retry download" = "Riprovare il download";
