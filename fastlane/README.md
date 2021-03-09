@@ -26,6 +26,11 @@ Builds a new iOS nightly on App Center.
 fastlane ios tvOSnightlies
 ```
 Builds a new tvOS nightly on AppStore Connect and waits build processing.
+### ios tvOSnightlyDSYMs
+```
+fastlane ios tvOSnightlyDSYMs
+```
+Sends latest tvOS nightly dSYMs to App Center. Optional 'version' or 'min_version' parameters.
 ### ios tvOSnightlyTester
 ```
 fastlane ios tvOSnightlyTester
@@ -41,6 +46,11 @@ Builds a new iOS beta on App Center with the current build number. If not in a r
 fastlane ios tvOSbetas
 ```
 Builds a new tvOS beta on AppStore Connect with the current build number and waits build processing. If not in a release/hotfix process (master, release/* or hotfix/*), tags the current version, bumps the build number and pushes.
+### ios tvOSbetaDSYMs
+```
+fastlane ios tvOSbetaDSYMs
+```
+Sends latest tvOS nightly dSYMs to App Center. Optional 'version' or 'min_version' parameters.
 ### ios tvOSbetaTester
 ```
 fastlane ios tvOSbetaTester
@@ -51,16 +61,16 @@ Add tvOS beta tester (email required)
 fastlane ios appStoreUploads
 ```
 Uploads a new iOS build on AppStore Connect with the current build number.
-### ios tvOSappStoreUploads
-```
-fastlane ios tvOSappStoreUploads
-```
-Uploads a new tvOS build on AppStore Connect with the current build number.
 ### ios dSYMs
 ```
 fastlane ios dSYMs
 ```
 Sends latest iOS dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+### ios tvOSappStoreUploads
+```
+fastlane ios tvOSappStoreUploads
+```
+Uploads a new tvOS build on AppStore Connect with the current build number.
 ### ios tvOSdSYMs
 ```
 fastlane ios tvOSdSYMs
