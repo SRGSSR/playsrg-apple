@@ -12,7 +12,9 @@ abstract_target 'Play SRG' do
     pod 'BDKCollectionIndexView'
 
     # On master
-    pod 'DZNEmptyDataSet', :git => 'https://github.com/dzenbot/DZNEmptyDataSet.git', :commit => '8deb3fe69f75c5022a53a903468b29552dc70e66'
+    pod 'DZNEmptyDataSet',
+        git: 'https://github.com/dzenbot/DZNEmptyDataSet.git',
+        commit: '8deb3fe69f75c5022a53a903468b29552dc70e66'
 
     pod 'FSCalendar'
     pod 'google-cast-sdk-no-bluetooth'
@@ -36,10 +38,10 @@ abstract_target 'Play SRG' do
     end
 
     project 'PlaySRG.xcodeproj',
-      'Debug' => :debug,
-      'Nightly' => :release,
-      'Beta' => :release,
-      'AppStore' => :release
+            'Debug' => :debug,
+            'Nightly' => :release,
+            'Beta' => :release,
+            'AppStore' => :release
   end
 
   abstract_target 'tvOS' do
@@ -63,18 +65,20 @@ abstract_target 'Play SRG' do
     end
 
     project 'PlaySRG.xcodeproj',
-      'Debug' => :debug,
-      'Nightly' => :release,
-      'Beta' => :release,
-      'AppStore' => :release
+            'Debug' => :debug,
+            'Nightly' => :release,
+            'Beta' => :release,
+            'AppStore' => :release
   end
 end
 
 # Fix deployment target warnings. See https://stackoverflow.com/questions/37160688/set-deployment-target-for-cocoapodss-pod
+# Since all pods are not compatible with arm64 iOS simulator architecture
 post_install do |lib|
   lib.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
     end
   end
 end

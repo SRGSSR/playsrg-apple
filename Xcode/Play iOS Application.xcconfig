@@ -5,3 +5,6 @@ PRODUCT_NAME = $(BASE_PRODUCT_NAME)
 SDKROOT = iphoneos
 SWIFT_OBJC_BRIDGING_HEADER=$(PROJECT_DIR)/Application/Sources/Bridges/Play-ObjectiveC-Bridge.h
 CODE_SIGN_ENTITLEMENTS = $(PROJECT_DIR)/Application/Application.entitlements
+
+// Since all pods and ComScore are not compatible with arm64 iOS simulator architecture
+EXCLUDED_ARCHS[sdk=iphonesimulator*] = arm64
