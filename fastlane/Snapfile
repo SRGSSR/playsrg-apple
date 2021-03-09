@@ -9,11 +9,14 @@ devices([
         ])
 
 configuration('AppStore')
+xcargs('ONLY_ACTIVE_ARCH=YES')
 clean(true)
 
 clear_previous_screenshots(true)
 
 localize_simulator(true)
+override_status_bar(true)
 reinstall_app(true)
 
 launch_arguments(['SKIP_TV_EVENTS'])
+headless(true)
