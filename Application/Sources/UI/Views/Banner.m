@@ -105,7 +105,7 @@ static NSString *BannerShortenedName(NSString *name);
         name = NSLocalizedString(@"The selected content", @"Name of the favorite item, if no title or name to display");
     }
     
-    NSString *messageFormatString = isFavorite ? NSLocalizedString(@"%@ has been added to favorites", @"Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application.") : NSLocalizedString(@"%@ has been removed from favorites", @"Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application.");
+    NSString *messageFormatString = isFavorite ? NSLocalizedString(@"%@ has been added to favorites", @"Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application.") : NSLocalizedString(@"%@ has been deleted from favorites", @"Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application.");
     NSString *message = [NSString stringWithFormat:messageFormatString, BannerShortenedName(name)];
     UIImage *image = isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"];
     [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO inViewController:viewController];
@@ -139,7 +139,7 @@ static NSString *BannerShortenedName(NSString *name);
         name = NSLocalizedString(@"The selected content", @"Name of the later list item, if no title or name to display");
     }
     
-    NSString *messageFormatString = added ? NSLocalizedString(@"%@ has been added to \"Later\"", @"Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application.") : NSLocalizedString(@"%@ has been removed from \"Later\"", @"Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application.");
+    NSString *messageFormatString = added ? NSLocalizedString(@"%@ has been added to \"Later\"", @"Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application.") : NSLocalizedString(@"%@ has been deleted from \"Later\"", @"Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application.");
     NSString *message = [NSString stringWithFormat:messageFormatString, BannerShortenedName(name)];
     UIImage *image = added ? [UIImage imageNamed:@"watch_later_full-22"] : [UIImage imageNamed:@"watch_later-22"];
     [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO inViewController:viewController];

@@ -89,8 +89,10 @@ struct HomeView: View {
         } cell: { _, item in
             Cell(item: item)
         } supplementaryView: { _, indexPath in
-            let rowId = model.rows[indexPath.section].section
-            HeaderView(rowId: rowId)
+            if indexPath.section < model.rows.count {
+                let rowId = model.rows[indexPath.section].section
+                HeaderView(rowId: rowId)
+            }
         }
         .synchronizeTabBarScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -16,8 +16,12 @@ class MediaDetailModel: ObservableObject {
     private let initialMedia: SRGMedia
     
     @Published private(set) var relatedMedias: [SRGMedia] = []
-    @Published var selectedMedia: SRGMedia? = nil
-    @Published var watchLaterAllowedAction: WatchLaterAction = .none
+    @Published private(set) var watchLaterAllowedAction: WatchLaterAction = .none
+    @Published var selectedMedia: SRGMedia? {
+        didSet {
+            updateWatchLaterAllowedAction()
+        }
+    }
     
     var mainCancellables = Set<AnyCancellable>()
     var refreshCancellables = Set<AnyCancellable>()
@@ -27,6 +31,8 @@ class MediaDetailModel: ObservableObject {
         
         NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .sink { notification in
+                guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
+                guard let entriesUids = notification.userInfo?[SRGPlaylistEntriesUidsKey] as? Set<String>, entriesUids.contains(media.urn) else { return }
                 self.updateWatchLaterAllowedAction()
             }
             .store(in: &mainCancellables)

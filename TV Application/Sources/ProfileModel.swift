@@ -12,8 +12,31 @@ import SRGUserData
 class ProfileModel: ObservableObject {
     @Published private(set) var isLoggedIn = false
     @Published private(set) var account: SRGAccount? = nil
-    @Published private(set) var hasHistoryEntries = false
-    @Published private(set) var hasFavorites = false
+    
+    private(set) var hasHistoryEntries = false {
+        willSet {
+            if hasHistoryEntries != newValue {
+                objectWillChange.send()
+            }
+        }
+    }
+    
+    private(set) var hasFavorites = false {
+        willSet {
+            if hasFavorites != newValue {
+                objectWillChange.send()
+            }
+        }
+    }
+    
+    private(set) var hasWatchLaterItems = false {
+        willSet {
+            if hasWatchLaterItems != newValue {
+                objectWillChange.send()
+            }
+        }
+    }
+    
     @Published private(set) var synchronizationDate: Date? = nil
     
     private var cancellables = Set<AnyCancellable>()
@@ -55,8 +78,17 @@ class ProfileModel: ObservableObject {
             .store(in: &cancellables)
         updateHistoryInformation()
         
+        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+            .sink { notification in
+                guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
+                self.updateWatchLaterInformation()
+            }
+            .store(in: &cancellables)
+        updateWatchLaterInformation()
+        
         NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
-            .sink { _ in
+            .sink { notification in
+                guard let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) else { return }
                 self.updateFavoritesInformation()
             }
             .store(in: &cancellables)
@@ -101,18 +133,35 @@ class ProfileModel: ObservableObject {
         FavoritesRemoveShows(nil);
     }
     
+    func removeWatchLaterItems() {
+        SRGUserData.current?.playlists.discardPlaylistEntries(withUids: nil, fromPlaylistWithUid: SRGPlaylistUid.watchLater.rawValue, completionBlock: nil)
+    }
+    
     private func updateIdentityInformation() {
         isLoggedIn = SRGIdentityService.current?.isLoggedIn ?? false
         account = SRGIdentityService.current?.account
     }
     
     private func updateHistoryInformation() {
-        let historyEntriesCount = SRGUserData.current?.history.historyEntries(matching: nil, sortedWith: nil).count ?? 0
-        hasHistoryEntries = historyEntriesCount > 0
+        SRGUserData.current?.history.historyEntries(matching: nil, sortedWith: nil) { historyEntries, error in
+            guard let isEmpty = historyEntries?.isEmpty else { return }
+            DispatchQueue.main.async {
+                self.hasHistoryEntries = !isEmpty
+            }
+        }
     }
     
     private func updateFavoritesInformation() {
-        hasFavorites = FavoritesShowURNs().count > 0
+        hasFavorites = !FavoritesShowURNs().isEmpty
+    }
+    
+    private func updateWatchLaterInformation() {
+        SRGUserData.current?.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: nil) { entries, error in
+            guard let isEmpty = entries?.isEmpty else { return }
+            DispatchQueue.main.async {
+                self.hasWatchLaterItems = !isEmpty
+            }
+        }
     }
     
     private func updateSynchronizationDate() {

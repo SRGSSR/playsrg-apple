@@ -123,7 +123,7 @@ static void commonInit(BaseViewController *self);
     if (action != WatchLaterActionNone) {
         BOOL isRemoval = (action == WatchLaterActionRemove);
         NSString *addActionTitle = (media.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen later", @"Context menu action to add an audio to the later list") : NSLocalizedString(@"Watch later", @"Context menu action to add a video to the later list");
-        UIAction *watchLaterAction = [UIAction actionWithTitle:isRemoval ? NSLocalizedString(@"Remove from \"Later\"", @"Context menu action to remove a media from the later list") : addActionTitle image:isRemoval ? [UIImage imageNamed:@"watch_later_full-22"] : [UIImage imageNamed:@"watch_later-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        UIAction *watchLaterAction = [UIAction actionWithTitle:isRemoval ? NSLocalizedString(@"Delete from \"Later\"", @"Context menu action to delete a media from the later list") : addActionTitle image:isRemoval ? [UIImage imageNamed:@"watch_later_full-22"] : [UIImage imageNamed:@"watch_later-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
             WatchLaterToggleMediaMetadata(media, ^(BOOL added, NSError * _Nullable error) {
                 if (! error) {
                     AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
@@ -146,7 +146,7 @@ static void commonInit(BaseViewController *self);
     if (downloadable) {
         Download *download = [Download downloadForMedia:media];
         BOOL downloaded = (download != nil);
-        UIAction *downloadAction = [UIAction actionWithTitle:downloaded ? NSLocalizedString(@"Remove from downloads", @"Context menu action to remove a media from the downloads") : NSLocalizedString(@"Add to downloads", @"Context menu action to add a media to the downloads") image:downloaded ? [UIImage imageNamed:@"downloadable_full-22"] : [UIImage imageNamed:@"downloadable-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        UIAction *downloadAction = [UIAction actionWithTitle:downloaded ? NSLocalizedString(@"Delete from downloads", @"Context menu action to delete a media from the downloads") : NSLocalizedString(@"Add to downloads", @"Context menu action to add a media to the downloads") image:downloaded ? [UIImage imageNamed:@"downloadable_full-22"] : [UIImage imageNamed:@"downloadable-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
             if (downloaded) {
                 [Download removeDownload:download];
             }
@@ -271,7 +271,7 @@ static void commonInit(BaseViewController *self);
     NSMutableArray<UIMenuElement *> *menuActions = [NSMutableArray array];
     
     BOOL isFavorite = FavoritesContainsShow(show);
-    UIAction *favoriteAction = [UIAction actionWithTitle:isFavorite ? NSLocalizedString(@"Remove from favorites", @"Context menu action to remove a show from favorites") : NSLocalizedString(@"Add to favorites", @"Context menu action to add a show to favorites") image:isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+    UIAction *favoriteAction = [UIAction actionWithTitle:isFavorite ? NSLocalizedString(@"Delete from favorites", @"Context menu action to delete a show from favorites") : NSLocalizedString(@"Add to favorites", @"Context menu action to add a show to favorites") image:isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
         FavoritesToggleShow(show);
         
         // Use !isFavorite since favorite status has been reversed
@@ -466,7 +466,7 @@ static void commonInit(BaseViewController *self);
         if (action != WatchLaterActionNone) {
             BOOL isRemoval = (action == WatchLaterActionRemove);
             NSString *addActionTitle = (media.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen later", @"Button label to add an audio to the later list, from the media long-press menu") : NSLocalizedString(@"Watch later", @"Button label to add a video to the later list, from the media long-press menu");
-            [alertController addAction:[UIAlertAction actionWithTitle:isRemoval ? NSLocalizedString(@"Remove from \"Later\"", @"Button label to remove a media from the later list, from the media long-press menu") : addActionTitle style:isRemoval ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alertController addAction:[UIAlertAction actionWithTitle:isRemoval ? NSLocalizedString(@"Delete from \"Later\"", @"Button label to delete a media from the later list, from the media long-press menu") : addActionTitle style:isRemoval ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 WatchLaterToggleMediaMetadata(media, ^(BOOL added, NSError * _Nullable error) {
                     if (! error) {
                         AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
@@ -485,7 +485,7 @@ static void commonInit(BaseViewController *self);
         if (downloadable) {
             Download *download = [Download downloadForMedia:media];
             BOOL downloaded = (download != nil);
-            [alertController addAction:[UIAlertAction actionWithTitle:downloaded ? NSLocalizedString(@"Remove from downloads", @"Button label to remove a download from the media long-press menu") : NSLocalizedString(@"Add to downloads", @"Button label to add a download from the media long-press menu") style:downloaded ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alertController addAction:[UIAlertAction actionWithTitle:downloaded ? NSLocalizedString(@"Delete from downloads", @"Button label to delete a download from the media long-press menu") : NSLocalizedString(@"Add to downloads", @"Button label to add a download from the media long-press menu") style:downloaded ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 if (downloaded) {
                     [Download removeDownload:download];
                 }
@@ -621,7 +621,7 @@ static void commonInit(BaseViewController *self);
         alertController = [UIAlertController alertControllerWithTitle:show.title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
         BOOL isFavorite = FavoritesContainsShow(show);
-        [alertController addAction:[UIAlertAction actionWithTitle:isFavorite ? NSLocalizedString(@"Remove from favorites", @"Button label to remove a show from favorites in the show long-press menu") : NSLocalizedString(@"Add to favorites", @"Button label to add a show to favorites in the show long-press menu") style:isFavorite ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:isFavorite ? NSLocalizedString(@"Delete from favorites", @"Button label to delete a show from favorites in the show long-press menu") : NSLocalizedString(@"Add to favorites", @"Button label to add a show to favorites in the show long-press menu") style:isFavorite ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             FavoritesToggleShow(show);
             
             // Use !isFavorite since favorite status has been reversed

@@ -259,8 +259,8 @@
         }
     }
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:deleteAllModeEnabled ? NSLocalizedString(@"Remove all content", @"Title of the confirmation pop-up displayed when the user is about to clean the later list") : NSLocalizedString(@"Remove content", @"Title of the confirmation pop-up displayed when the user is about to remove selected entries from the later list")
-                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"Are you sure you want to delete all items?", @"Confirmation message displayed when the user is about to clean the later list") : NSLocalizedString(@"Are you sure you want to delete the selected items?", @"Confirmation message displayed when the user is about to remove selected entries from the later list")
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete content saved for later", @"Title of the confirmation pop-up displayed when the user is about to delete content from the later list")
+                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"All items will be deleted.", @"Confirmation message displayed when the user is about to delete the later list") : NSLocalizedString(@"The selected items will be deleted.", @"Confirmation message displayed when the user is about to delete selected entries from the later list")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (deleteAllModeEnabled) {
@@ -350,15 +350,18 @@
 
 - (void)playlistEntriesDidChange:(NSNotification *)notification
 {
-    // Update the URN list. If we had no media retrieval with pagination, a simple diff could then be used to animate between
-    // the previous list and the new one. Since we have pagination here, we can only automatially perform a refresh if a single
-    // page of content is or was displayed (because other pages after it depend on the first page).
-    [self updateMediaURNsWithCompletionBlock:^(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs) {
-        NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
-        if (! [previousURNs isEqual:self.mediaURNs] && (previousURNs.count <= pageSize || self.mediaURNs.count <= pageSize)) {
-            [self refresh];
-        }
-    }];
+    NSString *playlistUid = notification.userInfo[SRGPlaylistUidKey];
+    if ([playlistUid isEqualToString:SRGPlaylistUidWatchLater]) {
+        // Update the URN list. If we had no media retrieval with pagination, a simple diff could then be used to animate between
+        // the previous list and the new one. Since we have pagination here, we can only automatially perform a refresh if a single
+        // page of content is or was displayed (because other pages after it depend on the first page).
+        [self updateMediaURNsWithCompletionBlock:^(NSArray<NSString *> *URNs, NSArray<NSString *> *previousURNs) {
+            NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
+            if (! [previousURNs isEqual:self.mediaURNs] && (previousURNs.count <= pageSize || self.mediaURNs.count <= pageSize)) {
+                [self refresh];
+            }
+        }];
+    }
 }
 
 - (void)watchLaterDidChange:(NSNotification *)notification

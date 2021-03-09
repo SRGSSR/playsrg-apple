@@ -142,7 +142,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     NSString *title = [isFavorite ? NSLocalizedString(@"Favorites", @"Label displayed in the show view when a show has been favorited") : NSLocalizedString(@"Add to favorites", @"Label displayed in the show view when a show can be favorited") uppercaseString];
     [self.favoriteLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
                                                                                attributes:attributes] forState:UIControlStateNormal];
-    self.favoriteLabelButton.accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite label in the show view when a show has been favorited") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite label in the show view when a show can be favorited");
+    self.favoriteLabelButton.accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Delete from favorites", @"Favorite label in the show view when a show has been favorited") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite label in the show view when a show can be favorited");
 }
 
 - (void)updateSubscriptionStatus

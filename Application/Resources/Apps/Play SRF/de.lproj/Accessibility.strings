@@ -40,7 +40,18 @@
 "Closes the player and continue playing video with AirPlay." = "Schliesst den Player und spielt das Video mit AirPlay weiter ab.";
 
 /* Delete button label */
-"Delete" = "Löschen";
+"Delete" = "Delete";
+
+/* A download button label */
+"Delete download" = "Delete download";
+
+/* Media deletion from later list label
+   Media deletion from later list label in the media detail view when a media is in the later list */
+"Delete from \"Later\" list" = "Delete from \"Later\" list";
+
+/* Favorite label in the player view when a show has been favorited
+   Favorite label in the show view when a show has been favorited */
+"Delete from favorites" = "Delete from favorites";
 
 /* Show unsubscription label */
 "Disable notifications for show" = "Push-Mitteilungen deaktivieren";
@@ -95,7 +106,7 @@
 "Opens in Safari." = "Inhalt wird in Safari geöffnet.";
 
 /* Show cell hint */
-"Opens show details." = "Öffnet Sendungs-Detailseite";
+"Opens show details." = "Öffnet Sendungs-Detailseite.";
 
 /* Mini player action hint */
 "Opens the full screen player" = "Öffnet den Player";
@@ -126,17 +137,6 @@
 
 /* Mini player label */
 "Recently played: %@" = "Kürzlich abgespielt: %@";
-
-/* A download button label */
-"Remove download" = "Download entfernen";
-
-/* Media removal from later list label
-   Media removal from later list label in the media detail view when a media is in the later list */
-"Remove from \"Later\" list" = "Von \"Später\" Liste entfernen";
-
-/* Favorite label in the player view when a show has been favorited
-   Favorite label in the show view when a show has been favorited */
-"Remove from favorites" = "Aus den Favoriten entfernen";
 
 /* A download button label */
 "Retry download" = "Erneut herunterladen";
