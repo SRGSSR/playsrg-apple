@@ -156,6 +156,26 @@ RTR: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
 fastlane ios tvOSswiScreenshots
 ```
 SWI: Makes tvOS screenshots and replaces currents on AppStoreConnect.
+### ios tvOSsrfScreenshots
+```
+fastlane ios tvOSsrfScreenshots
+```
+SRF: Makes tvOS screenshots and replaces currents on AppStoreConnect.
+### ios tvOSrtsScreenshots
+```
+fastlane ios tvOSrtsScreenshots
+```
+RTS: Makes tvOS screenshots and replaces currents on AppStoreConnect.
+### ios tvOSrsiScreenshots
+```
+fastlane ios tvOSrsiScreenshots
+```
+RSI: Makes tvOS screenshots and replaces currents on AppStoreConnect.
+### ios tvOSrtrScreenshots
+```
+fastlane ios tvOSrtrScreenshots
+```
+RTR: Makes tvOS screenshots and replaces currents on AppStoreConnect.
 ### ios tvOSswiAppStoreUpload
 ```
 fastlane ios tvOSswiAppStoreUpload

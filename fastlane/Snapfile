@@ -9,7 +9,4 @@ localize_simulator(true)
 override_status_bar(true)
 reinstall_app(true)
 
-headless(true)
-number_of_retries(0)
-
 launch_arguments(['SKIP_TV_EVENTS'])

@@ -10,7 +10,12 @@ class ApplicationScreenshots: XCTestCase {
     
     var configuration: NSDictionary = [:]
     
+    #if os(iOS)
+    let sleepTime = UInt32(10)
+    #else
+    let sleepTime = UInt32(20)
     var tvOSTabBarIndex = 0
+    #endif
     
     override func setUp() {
         let app = XCUIApplication()
@@ -43,7 +48,7 @@ class ApplicationScreenshots: XCTestCase {
         if videosTabBarItemQuery.exists {
             selectTabBarItem(videosTabBarItemQuery)
             
-            sleep(10)
+            sleep(sleepTime)
             snapshot("1-VideosHomeScreen")
         }
         
@@ -51,7 +56,7 @@ class ApplicationScreenshots: XCTestCase {
         if audiosTabBarItemQuery.exists {
             selectTabBarItem(audiosTabBarItemQuery)
             
-            sleep(10)
+            sleep(sleepTime)
             snapshot("2-AudiosHomeScreen")
         }
         
@@ -59,7 +64,7 @@ class ApplicationScreenshots: XCTestCase {
         if livestreamsTabBarItemQuery.exists {
             selectTabBarItem(livestreamsTabBarItemQuery)
             
-            sleep(10)
+            sleep(sleepTime)
             snapshot("3-LiveHomeScreen")
             
             #if os(iOS)
@@ -67,7 +72,7 @@ class ApplicationScreenshots: XCTestCase {
             if firstRadioCellQuery.exists {
                 firstRadioCellQuery.tap()
                 
-                sleep(10)
+                sleep(sleepTime)
                 snapshot("4-RadioLivePlayer")
                 
                 let closeButtonQuery = application.buttons[AccessibilityIdentifier.closeButton.rawValue];
@@ -82,7 +87,7 @@ class ApplicationScreenshots: XCTestCase {
         if showsTabBarItemQuery.exists {
             selectTabBarItem(showsTabBarItemQuery)
             
-            sleep(10)
+            sleep(sleepTime)
             snapshot("5-ShowsScreen")
         }
         
@@ -96,7 +101,7 @@ class ApplicationScreenshots: XCTestCase {
             searchTextField.typeText(searchText as! String)
             application.typeText("\n")
             
-            sleep(10)
+            sleep(sleepTime)
             snapshot("6-SearchScreen")
         }
     }
@@ -109,6 +114,8 @@ class ApplicationScreenshots: XCTestCase {
             let remote: XCUIRemote = XCUIRemote.shared
             remote.press(.right)
             remote.press(.select)
+            sleep(2)
+            remote.press(.up) // Keep focus on the tab bar item
         }
         tvOSTabBarIndex += 1
         #endif

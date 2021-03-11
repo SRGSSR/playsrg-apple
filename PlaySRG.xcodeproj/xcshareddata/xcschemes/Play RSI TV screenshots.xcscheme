@@ -14,9 +14,9 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "08F3849325FA69BB00E1BCF0"
-               BuildableName = "Play SWI TV screenshots.xctest"
-               BlueprintName = "Play SWI TV screenshots"
+               BlueprintIdentifier = "08F3868A25FA9AE400E1BCF0"
+               BuildableName = "Play RSI TV screenshots.xctest"
+               BlueprintName = "Play RSI TV screenshots"
                ReferencedContainer = "container:PlaySRG.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "08F3849325FA69BB00E1BCF0"
-               BuildableName = "Play SWI TV screenshots.xctest"
-               BlueprintName = "Play SWI TV screenshots"
+               BlueprintIdentifier = "08F3868A25FA9AE400E1BCF0"
+               BuildableName = "Play RSI TV screenshots.xctest"
+               BlueprintName = "Play RSI TV screenshots"
                ReferencedContainer = "container:PlaySRG.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -60,9 +60,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "08F3849325FA69BB00E1BCF0"
-            BuildableName = "Play SWI TV screenshots.xctest"
-            BlueprintName = "Play SWI TV screenshots"
+            BlueprintIdentifier = "08F3868A25FA9AE400E1BCF0"
+            BuildableName = "Play RSI TV screenshots.xctest"
+            BlueprintName = "Play RSI TV screenshots"
             ReferencedContainer = "container:PlaySRG.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -392,6 +392,38 @@ platform :ios do
     # upload_screenshots(platform)
   end
 
+  desc 'SRF: Makes tvOS screenshots and replaces currents on AppStoreConnect.'
+  lane :tvOSsrfScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'Play SRF TV screenshots', ['de-DE'])
+    # upload_screenshots(platform)
+  end
+
+  desc 'RTS: Makes tvOS screenshots and replaces currents on AppStoreConnect.'
+  lane :tvOSrtsScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'Play RTS TV screenshots', ['fr-FR'])
+    # upload_screenshots(platform)
+  end
+
+  desc 'RSI: Makes tvOS screenshots and replaces currents on AppStoreConnect.'
+  lane :tvOSrsiScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'Play RSI TV screenshots', ['it'])
+    # upload_screenshots(platform)
+  end
+
+  desc 'RTR: Makes tvOS screenshots and replaces currents on AppStoreConnect.'
+  lane :tvOSrtrScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'Play RTR TV screenshots', ['de-DE'])
+    # upload_screenshots(platform)
+  end
+
   # Individual tvOS build uploads
 
   desc 'SWI: Uploads a new tvOS build on AppStore Connect with the current build number.'
