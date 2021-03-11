@@ -8651,7 +8651,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8684,7 +8683,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8717,7 +8715,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8750,7 +8747,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8780,7 +8776,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8813,7 +8808,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8846,7 +8840,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8879,7 +8872,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8909,7 +8901,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8942,7 +8933,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8975,7 +8965,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9008,7 +8997,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9038,7 +9026,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9071,7 +9058,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9104,7 +9090,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9137,7 +9122,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9167,7 +9151,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9200,7 +9183,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9233,7 +9215,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9266,7 +9247,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -10094,7 +10074,6 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				TEST_TARGET_NAME = "Play SWI";
 			};
 			name = Debug;
@@ -10128,7 +10107,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				TEST_TARGET_NAME = "Play SWI";
 			};
 			name = AppStore;
@@ -10162,7 +10140,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				TEST_TARGET_NAME = "Play SWI";
 			};
 			name = Beta;
@@ -10196,7 +10173,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				TEST_TARGET_NAME = "Play SWI";
 			};
 			name = Nightly;
@@ -10221,7 +10197,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -10280,7 +10255,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10340,7 +10314,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -10400,7 +10373,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -10425,7 +10397,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -10484,7 +10455,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10544,7 +10514,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -10604,7 +10573,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -10629,7 +10597,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -10688,7 +10655,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10748,7 +10714,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -10808,7 +10773,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -10833,7 +10797,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -10892,7 +10855,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10952,7 +10914,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11012,7 +10973,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11036,7 +10996,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -11094,7 +11053,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11153,7 +11111,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11212,7 +11169,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11244,7 +11200,6 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
 		};
@@ -11311,7 +11266,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11379,7 +11333,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11447,7 +11400,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11479,7 +11431,6 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
 		};
@@ -11546,7 +11497,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11614,7 +11564,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11682,7 +11631,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11714,7 +11662,6 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
 		};
@@ -11781,7 +11728,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11849,7 +11795,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11917,7 +11862,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11949,7 +11893,6 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
 		};
@@ -12016,7 +11959,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -12084,7 +12026,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -12152,7 +12093,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -12184,7 +12124,6 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
 		};
@@ -12251,7 +12190,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -12319,7 +12257,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -12387,7 +12324,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
