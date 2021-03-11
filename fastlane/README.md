@@ -151,6 +151,11 @@ RSI: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
 fastlane ios rtrDSYMs
 ```
 RTR: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
+### ios tvOSswiScreenshots
+```
+fastlane ios tvOSswiScreenshots
+```
+SWI: Makes tvOS screenshots and replaces currents on AppStoreConnect.
 ### ios tvOSswiAppStoreUpload
 ```
 fastlane ios tvOSswiAppStoreUpload

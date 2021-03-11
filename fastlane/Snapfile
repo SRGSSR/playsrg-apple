@@ -1,16 +1,7 @@
 # frozen_string_literal: true
 
-# A list of devices you want to take the screenshots from
-devices([
-          'iPhone 11 Pro Max', # 6.5 inch, required
-          'iPhone 8 Plus', # 5.5 inch, required
-          'iPad Pro (12.9-inch) (4th generation)', # 12.9 inch, required
-          'iPad Pro (12.9-inch) (2nd generation)' # 12.9 inch, required
-        ])
-
 configuration('AppStore')
 xcargs('ONLY_ACTIVE_ARCH=YES')
-clean(true)
 
 clear_previous_screenshots(true)
 
@@ -18,5 +9,7 @@ localize_simulator(true)
 override_status_bar(true)
 reinstall_app(true)
 
-launch_arguments(['SKIP_TV_EVENTS'])
 headless(true)
+number_of_retries(0)
+
+launch_arguments(['SKIP_TV_EVENTS'])

@@ -10,6 +10,8 @@ class ApplicationScreenshots: XCTestCase {
     
     var configuration: NSDictionary = [:]
     
+    var tvOSTabBarIndex = 0
+    
     override func setUp() {
         let app = XCUIApplication()
         setupSnapshot(app)
@@ -17,12 +19,14 @@ class ApplicationScreenshots: XCTestCase {
         
         continueAfterFailure = false
         
+        #if os(iOS)
         if (UIDevice.current.userInterfaceIdiom == .pad) {
             XCUIDevice.shared.orientation = .landscapeLeft
         }
         else {
             XCUIDevice.shared.orientation = .portrait
         }
+        #endif
         
         let testBundle = Bundle(for: type(of: self))
         if let path = testBundle.path(forResource: "Configuration", ofType: "plist") {
@@ -37,7 +41,7 @@ class ApplicationScreenshots: XCTestCase {
         
         let videosTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.videosTabBarItem.rawValue]
         if videosTabBarItemQuery.exists {
-            videosTabBarItemQuery.tap()
+            selectTabBarItem(videosTabBarItemQuery)
             
             sleep(10)
             snapshot("1-VideosHomeScreen")
@@ -45,7 +49,7 @@ class ApplicationScreenshots: XCTestCase {
         
         let audiosTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.audiosTabBarItem.rawValue]
         if audiosTabBarItemQuery.exists {
-            audiosTabBarItemQuery.tap()
+            selectTabBarItem(audiosTabBarItemQuery)
             
             sleep(10)
             snapshot("2-AudiosHomeScreen")
@@ -53,11 +57,12 @@ class ApplicationScreenshots: XCTestCase {
         
         let livestreamsTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.livestreamsTabBarItem.rawValue]
         if livestreamsTabBarItemQuery.exists {
-            livestreamsTabBarItemQuery.tap()
+            selectTabBarItem(livestreamsTabBarItemQuery)
             
             sleep(10)
             snapshot("3-LiveHomeScreen")
             
+            #if os(iOS)
             let firstRadioCellQuery = application.tables.firstMatch.cells.element(boundBy: 1).collectionViews.cells.firstMatch
             if firstRadioCellQuery.exists {
                 firstRadioCellQuery.tap()
@@ -70,20 +75,48 @@ class ApplicationScreenshots: XCTestCase {
                     closeButtonQuery.tap()
                 }
             }
+            #endif
+        }
+        
+        let showsTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.showsTabBarItem.rawValue]
+        if showsTabBarItemQuery.exists {
+            selectTabBarItem(showsTabBarItemQuery)
+            
+            sleep(10)
+            snapshot("5-ShowsScreen")
         }
         
         let searchText = configuration["SearchText"]
         let searchTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.searchTabBarItem.rawValue]
         if searchTabBarItemQuery.exists && searchText != nil {
-            searchTabBarItemQuery.tap()
+            selectTabBarItem(searchTabBarItemQuery)
             
             let searchTextField = application.searchFields.firstMatch
-            searchTextField.tap()
+            selectSearchTextField(searchTextField)
             searchTextField.typeText(searchText as! String)
             application.typeText("\n")
             
             sleep(10)
-            snapshot("5-SearchScreen")
+            snapshot("6-SearchScreen")
         }
+    }
+    
+    func selectTabBarItem(_ tabBarItem :XCUIElement) {
+        #if os(iOS)
+        tabBarItem.tap()
+        #else
+        if tvOSTabBarIndex > 0 {
+            let remote: XCUIRemote = XCUIRemote.shared
+            remote.press(.right)
+            remote.press(.select)
+        }
+        tvOSTabBarIndex += 1
+        #endif
+    }
+    
+    func selectSearchTextField(_ searchTextField :XCUIElement) {
+        #if os(iOS)
+        searchTextField.tap()
+        #endif
     }
 }

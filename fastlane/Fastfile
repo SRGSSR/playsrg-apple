@@ -290,32 +290,42 @@ platform :ios do
 
   desc 'SWI: Makes iOS screenshots and replaces currents on AppStoreConnect.'
   lane :swiScreenshots do
-    screenshots('Play SWI screenshots', ['en-US'])
-    # upload_screenshots(nil)
+    platform = 'iOS'
+
+    screenshots(platform, 'Play SWI screenshots', ['en-US'])
+    # upload_screenshots(platform)
   end
 
   desc 'SRF: Makes iOS screenshots and replaces currents on AppStoreConnect.'
   lane :srfScreenshots do
-    screenshots('Play SRF screenshots', ['de-DE'])
-    # upload_screenshots(nil)
+    platform = 'iOS'
+
+    screenshots(platform, 'Play SRF screenshots', ['de-DE'])
+    # upload_screenshots(platform)
   end
 
   desc 'RTS: Makes iOS screenshots and replaces currents on AppStoreConnect.'
   lane :rtsScreenshots do
-    screenshots('Play RTS screenshots', ['fr-FR'])
-    # upload_screenshots(nil)
+    platform = 'iOS'
+
+    screenshots(platform, 'Play RTS screenshots', ['fr-FR'])
+    # upload_screenshots(platform)
   end
 
   desc 'RSI: Makes iOS screenshots and replaces currents on AppStoreConnect.'
   lane :rsiScreenshots do
-    screenshots('Play RSI screenshots', ['it'])
-    # upload_screenshots(nil)
+    platform = 'iOS'
+
+    screenshots(platform, 'Play RSI screenshots', ['it'])
+    # upload_screenshots(platform)
   end
 
   desc 'RTR: Makes iOS screenshots and replaces currents on AppStoreConnect.'
   lane :rtrScreenshots do
-    screenshots('Play RTR screenshots', ['de-DE'])
-    # upload_screenshots(nil)
+    platform = 'iOS'
+
+    screenshots(platform, 'Play RTR screenshots', ['de-DE'])
+    # upload_screenshots(platform)
   end
 
   # Individual iOS build uploads
@@ -370,6 +380,16 @@ platform :ios do
   desc 'RTR: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
   lane :rtrDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
+  end
+
+  # Individual tvOS screenshots
+
+  desc 'SWI: Makes tvOS screenshots and replaces currents on AppStoreConnect.'
+  lane :tvOSswiScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'Play SWI TV screenshots', ['en-US'])
+    # upload_screenshots(platform)
   end
 
   # Individual tvOS build uploads
@@ -929,13 +949,15 @@ def srg_latest_testflight_build_number(app_identifiers, platform)
 end
 
 # Create screenshots for AppStoreConnect.
-def screenshots(scheme, languages)
+def screenshots(platform, scheme, languages)
+  platform ||= 'iOS'
   output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
   snapshot(
     scheme: scheme,
     languages: languages,
+    devices: snapshot_devices(platform),
     derived_data_path: derived_data_path,
     output_directory: output_directory
   )
@@ -1006,6 +1028,31 @@ def beta_app_review_info
     contact_last_name: ENV['ITUNES_CONNECT_REVIEW_LAST_NAME'],
     contact_phone: ENV['ITUNES_CONNECT_REVIEW_PHONE']
   }
+end
+
+def snapshot_devices(platform)
+  platform ||= 'iOS'
+
+  if platform == 'iOS'
+    snapshot_ios_devices
+  else
+    snapshot_tvos_devices
+  end
+end
+
+def snapshot_ios_devices
+  [
+    'iPhone 11 Pro Max', # 6.5 inch, required
+    'iPhone 8 Plus', # 5.5 inch, required
+    'iPad Pro (12.9-inch) (4th generation)', # 12.9 inch, required
+    'iPad Pro (12.9-inch) (2nd generation)' # 12.9 inch, required
+  ]
+end
+
+def snapshot_tvos_devices
+  [
+    'Apple TV'
+  ]
 end
 
 def spaceship_login
