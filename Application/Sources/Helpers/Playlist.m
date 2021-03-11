@@ -161,7 +161,7 @@ static Playlist *s_playlist;
 }
 
 #if TARGET_OS_TV
-- (void)controllerDidEnPlaybackdWithoutTransition:(SRGLetterboxController *)controller
+- (void)controllerDidEndPlaybackdWithoutTransition:(SRGLetterboxController *)controller
 {
     UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
     while (topViewController.presentedViewController) {
