@@ -324,26 +324,17 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsSourceCodeButton]) {
         NSURL *sourceCodeURL = ApplicationConfiguration.sharedApplicationConfiguration.sourceCodeURL;
         NSAssert(sourceCodeURL, @"Button must not be displayed if no source code URL has been specified");
-        
-        [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleSourceCode levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
-        }];
+        [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsBetaTestingButton]) {
         NSURL *betaTestingURL = ApplicationConfiguration.sharedApplicationConfiguration.betaTestingURL;
         NSAssert(betaTestingURL, @"Button must not be displayed if no beta testing URL has been specified");
-        
-        [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleBetaTesting levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
-        }];
+        [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsTvBetaTestingButton]) {
         NSURL *tvBetaTestingURL = ApplicationConfiguration.sharedApplicationConfiguration.tvBetaTestingURL;
         NSAssert(tvBetaTestingURL, @"Button must not be displayed if no Apple TV beta testing URL has been specified");
-        
-        [UIApplication.sharedApplication play_openURL:tvBetaTestingURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleTvBetaTesting levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
-        }];
+        [UIApplication.sharedApplication play_openURL:tvBetaTestingURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {
         // Clear internal App Center timestamp to force a new update request
