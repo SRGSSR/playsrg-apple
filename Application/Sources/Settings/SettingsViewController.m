@@ -278,11 +278,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsHelpAndCopyrightButton]) {
         NSURL *helpAndCopyrightURL = ApplicationConfiguration.sharedApplicationConfiguration.impressumURL;
         NSAssert(helpAndCopyrightURL, @"Button must not be displayed if no Impressum URL has been specified");
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:helpAndCopyrightURL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
-        webViewController.title = PlaySRGSettingsLocalizedString(@"Help and copyright", @"Title displayed at the top of the help and copyright view");
-        [self.navigationController pushViewController:webViewController animated:YES];
+        [UIApplication.sharedApplication play_openURL:helpAndCopyrightURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsTermsAndConditionsButton]) {
         NSURL *termsAndConditionsURL = ApplicationConfiguration.sharedApplicationConfiguration.termsAndConditionsURL;
