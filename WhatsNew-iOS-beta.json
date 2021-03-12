@@ -123,7 +123,7 @@
   "3.1.4-344": "- iOS 14 support.\n- New Google Cast onboard user experience (local network access).\n- Add permissions section in application settings view.\n- Fix glitches associated with restoration from picture in picture.",
   "3.1.4-345": "- Fix playback incorrectly restarting in background without user interaction.\n- Fix video playback incorrectly stopped when disconnecting a Bluetooth headset or speaker.",
   "3.1.4-346": "- Fix minor user interface issues.\n- Avoid playback starting on a Google Cast receiver and on the device simultaneously.\n- Fix a VoiceOver crash when opening a media.",
-  "3.1.5-347": "- Enable control center when using Picture in Picture.\n- Fix sharing and search filter popover anchoring issues for iPadOS 14. - Update analytics with new segment specifications.",
+  "3.1.5-347": "- Enable control center when using Picture in Picture.\n- Fix sharing and search filter popover anchoring issues for iPadOS 14.\n- Update analytics with new segment specifications.",
   "3.1.5-348": "- Support future SRG event livestreams.",
   "3.1.5-349": "- Improve suggestions displayed for SRF at the top of the homepage.\n- Add support for web first video display on the homepage.",
   "3.1.5-350": "- All SRG libraries updated. \n- AppStore release.",
