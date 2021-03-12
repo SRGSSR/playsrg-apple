@@ -33,8 +33,7 @@ class ApplicationScreenshots: XCTestCase {
         }
         #endif
         
-        let testBundle = Bundle(for: type(of: self))
-        if let path = testBundle.path(forResource: "Configuration", ofType: "plist") {
+        if let path = Bundle(for: type(of: self)).path(forResource: "Configuration", ofType: "plist") {
             configuration = NSDictionary(contentsOfFile: path) ?? [:]
         }
     }
@@ -106,7 +105,7 @@ class ApplicationScreenshots: XCTestCase {
         }
     }
     
-    func selectTabBarItem(_ tabBarItem :XCUIElement) {
+    func selectTabBarItem(_ tabBarItem: XCUIElement) {
         #if os(iOS)
         tabBarItem.tap()
         #else
@@ -121,7 +120,7 @@ class ApplicationScreenshots: XCTestCase {
         #endif
     }
     
-    func selectSearchTextField(_ searchTextField :XCUIElement) {
+    func selectSearchTextField(_ searchTextField: XCUIElement) {
         #if os(iOS)
         searchTextField.tap()
         #endif
