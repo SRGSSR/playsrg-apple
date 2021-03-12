@@ -21,8 +21,6 @@ AnalyticsPageLevel const AnalyticsPageLevelShow = @"show";
 AnalyticsPageLevel const AnalyticsPageLevelUser = @"user";
 AnalyticsPageLevel const AnalyticsPageLevelVideo = @"video";
 
-AnalyticsPageTitle const AnalyticsPageTitleBetaTesting = @"beta testing";
-AnalyticsPageTitle const AnalyticsPageTitleTvBetaTesting = @"tv beta testing";
 AnalyticsPageTitle const AnalyticsPageTitleDevices = @"devices";
 AnalyticsPageTitle const AnalyticsPageTitleDownloads = @"downloads";
 AnalyticsPageTitle const AnalyticsPageTitleEvents = @"events";
@@ -46,7 +44,6 @@ AnalyticsPageTitle const AnalyticsPageTitleSettings = @"settings";
 AnalyticsPageTitle const AnalyticsPageTitleShowsAZ = @"shows a-z";
 AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar = @"shows calendar";
 AnalyticsPageTitle const AnalyticsPageTitleSoonExpiring = @"soon expiring";
-AnalyticsPageTitle const AnalyticsPageTitleSourceCode = @"source code";
 AnalyticsPageTitle const AnalyticsPageTitleSports = @"sports";
 AnalyticsPageTitle const AnalyticsPageTitleTrending = @"trending";
 AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";

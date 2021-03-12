@@ -96,7 +96,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *termsAndConditionsURL;
 @property (nonatomic) NSURL *dataProtectionURL;
 @property (nonatomic) NSURL *betaTestingURL;
-@property (nonatomic) NSURL *tvBetaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
@@ -299,9 +298,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *betaTestingURLString = [firebaseConfiguration stringForKey:@"betaTestingURL"];
     self.betaTestingURL = betaTestingURLString ? [NSURL URLWithString:betaTestingURLString] : nil;
-    
-    NSString *tvBetaTestingURLString = [firebaseConfiguration stringForKey:@"tvBetaTestingURL"];
-    self.tvBetaTestingURL = tvBetaTestingURLString ? [NSURL URLWithString:tvBetaTestingURLString] : nil;
 
     NSString *sourceCodeURLString = [firebaseConfiguration stringForKey:@"sourceCodeURL"];
     self.sourceCodeURL = sourceCodeURLString ? [NSURL URLWithString:sourceCodeURLString] : nil;

@@ -57,7 +57,6 @@ static NSString * const SettingsDataProtectionButton = @"Button_DataProtection";
 static NSString * const SettingsFeedbackButton = @"Button_Feedback";
 static NSString * const SettingsSourceCodeButton = @"Button_SourceCode";
 static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
-static NSString * const SettingsTvBetaTestingButton = @"Button_TvBetaTesting";
 static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersion";
 
 // Advanced features settings group
@@ -209,10 +208,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [hiddenKeys addObject:SettingsBetaTestingButton];
     }
     
-    if (! applicationConfiguration.tvBetaTestingURL) {
-        [hiddenKeys addObject:SettingsTvBetaTestingButton];
-    }
-    
     self.hiddenKeys = hiddenKeys.copy;
 }
 
@@ -278,29 +273,17 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsHelpAndCopyrightButton]) {
         NSURL *helpAndCopyrightURL = ApplicationConfiguration.sharedApplicationConfiguration.impressumURL;
         NSAssert(helpAndCopyrightURL, @"Button must not be displayed if no Impressum URL has been specified");
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:helpAndCopyrightURL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
-        webViewController.title = PlaySRGSettingsLocalizedString(@"Help and copyright", @"Title displayed at the top of the help and copyright view");
-        [self.navigationController pushViewController:webViewController animated:YES];
+        [UIApplication.sharedApplication play_openURL:helpAndCopyrightURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsTermsAndConditionsButton]) {
         NSURL *termsAndConditionsURL = ApplicationConfiguration.sharedApplicationConfiguration.termsAndConditionsURL;
         NSAssert(termsAndConditionsURL, @"Button must not be displayed if no Terms and conditions URL has been specified");
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:termsAndConditionsURL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
-        webViewController.title = PlaySRGSettingsLocalizedString(@"Terms and conditions", @"Title displayed at the top of the Terms and conditions view");
-        [self.navigationController pushViewController:webViewController animated:YES];
+        [UIApplication.sharedApplication play_openURL:termsAndConditionsURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsDataProtectionButton]) {
         NSURL *dataProtectionURL = ApplicationConfiguration.sharedApplicationConfiguration.dataProtectionURL;
         NSAssert(dataProtectionURL, @"Button must not be displayed if no data protection URL has been specified");
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:dataProtectionURL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
-        webViewController.title = PlaySRGSettingsLocalizedString(@"Data protection", @"Title displayed at the top of the data protection view");
-        [self.navigationController pushViewController:webViewController animated:YES];
+        [UIApplication.sharedApplication play_openURL:dataProtectionURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsFeedbackButton]) {
         NSURL *feedbackURL = ApplicationConfiguration.sharedApplicationConfiguration.feedbackURL;
@@ -336,26 +319,12 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsSourceCodeButton]) {
         NSURL *sourceCodeURL = ApplicationConfiguration.sharedApplicationConfiguration.sourceCodeURL;
         NSAssert(sourceCodeURL, @"Button must not be displayed if no source code URL has been specified");
-        
-        [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleSourceCode levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
-        }];
+        [UIApplication.sharedApplication play_openURL:sourceCodeURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsBetaTestingButton]) {
         NSURL *betaTestingURL = ApplicationConfiguration.sharedApplicationConfiguration.betaTestingURL;
         NSAssert(betaTestingURL, @"Button must not be displayed if no beta testing URL has been specified");
-        
-        [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleBetaTesting levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
-        }];
-    }
-    else if ([specifier.key isEqualToString:SettingsTvBetaTestingButton]) {
-        NSURL *tvBetaTestingURL = ApplicationConfiguration.sharedApplicationConfiguration.tvBetaTestingURL;
-        NSAssert(tvBetaTestingURL, @"Button must not be displayed if no Apple TV beta testing URL has been specified");
-        
-        [UIApplication.sharedApplication play_openURL:tvBetaTestingURL withCompletionHandler:^(BOOL success) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleTvBetaTesting levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelApplication ]];
-        }];
+        [UIApplication.sharedApplication play_openURL:betaTestingURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsVersionsAndReleaseNotes]) {
         // Clear internal App Center timestamp to force a new update request
