@@ -5,8 +5,8 @@
 "Background video playback" = "Lecture vidéo en arrière-plan";
 "Become a beta tester" = "Devenez bêta-testeur";
 "Become a beta tester on Apple TV" = "Devenez bêta-testeur sur Apple TV";
-"By default, the application loads high-definition medias over cellular networks. To avoid possible extra costs, this option could be disable and the highest quality will be played only on Wi-Fi networks." = "Par défaut, l’application charge le contenu haute définition sur les réseaux cellulaires. Pour éviter les coûts supplémentaires éventuels, cette option peut être désactivée et la meilleure qualité sera jouée uniquement sur les réseaux Wi-Fi.";
-"Check for updates" = "Vérifier les mises-à-jour";
+"By default, the application loads high-definition medias over cellular networks. To avoid possible extra costs, this option could be disable and the highest quality will be played only on Wi-Fi networks." = "Par défaut, l’application charge le contenu haute définition sur les réseaux cellulaires. Pour éviter les coûts supplémentaires éventuels, cette option peut être désactivée afin que la meilleure qualité ne soit jouée que sur les réseaux Wi-Fi.";
+"Check for updates" = "Vérifier les mises à jour";
 "Clear all contents" = "Effacer tout le contenu";
 "Clear vector image cache" = "Effacer les images vectorielles";
 "Clear web cache" = "Effacer le cache web";
@@ -26,7 +26,7 @@
 "On" = "Oui";
 "Open system settings" = "Ouvrir Réglages";
 "Original images only" = "Images d'origine uniquement";
-"Outside Switzerland" = "En dehors de la Suisse";
+"Outside Switzerland" = "Hors de Suisse";
 "Permissions" = "Autorisations";
 "Playback" = "Lecture";
 "Presenter mode" = "Mode présentation";
