@@ -288,7 +288,7 @@ platform :ios do
 
   # Individual iOS screenshots
 
-  desc 'SWI: Makes iOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'SWI: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
   lane :swiScreenshots do
     platform = 'iOS'
 
@@ -296,7 +296,7 @@ platform :ios do
     # upload_screenshots(platform)
   end
 
-  desc 'SRF: Makes iOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'SRF: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
   lane :srfScreenshots do
     platform = 'iOS'
 
@@ -304,7 +304,7 @@ platform :ios do
     # upload_screenshots(platform)
   end
 
-  desc 'RTS: Makes iOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'RTS: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
   lane :rtsScreenshots do
     platform = 'iOS'
 
@@ -312,7 +312,7 @@ platform :ios do
     # upload_screenshots(platform)
   end
 
-  desc 'RSI: Makes iOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'RSI: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
   lane :rsiScreenshots do
     platform = 'iOS'
 
@@ -320,7 +320,7 @@ platform :ios do
     # upload_screenshots(platform)
   end
 
-  desc 'RTR: Makes iOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'RTR: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
   lane :rtrScreenshots do
     platform = 'iOS'
 
@@ -384,7 +384,7 @@ platform :ios do
 
   # Individual tvOS screenshots
 
-  desc 'SWI: Makes tvOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'SWI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
   lane :tvOSswiScreenshots do
     platform = 'tvOS'
 
@@ -392,7 +392,7 @@ platform :ios do
     # upload_screenshots(platform)
   end
 
-  desc 'SRF: Makes tvOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'SRF: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
   lane :tvOSsrfScreenshots do
     platform = 'tvOS'
 
@@ -400,7 +400,7 @@ platform :ios do
     # upload_screenshots(platform)
   end
 
-  desc 'RTS: Makes tvOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'RTS: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
   lane :tvOSrtsScreenshots do
     platform = 'tvOS'
 
@@ -408,7 +408,7 @@ platform :ios do
     # upload_screenshots(platform)
   end
 
-  desc 'RSI: Makes tvOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'RSI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
   lane :tvOSrsiScreenshots do
     platform = 'tvOS'
 
@@ -416,7 +416,7 @@ platform :ios do
     # upload_screenshots(platform)
   end
 
-  desc 'RTR: Makes tvOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'RTR: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
   lane :tvOSrtrScreenshots do
     platform = 'tvOS'
 

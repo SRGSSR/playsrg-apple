@@ -80,27 +80,27 @@ Sends latest tvOS dSYMs to App Center. Optional 'version' or 'min_version' param
 ```
 fastlane ios swiScreenshots
 ```
-SWI: Makes iOS screenshots and replaces currents on AppStoreConnect.
+SWI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 ### ios srfScreenshots
 ```
 fastlane ios srfScreenshots
 ```
-SRF: Makes iOS screenshots and replaces currents on AppStoreConnect.
+SRF: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 ### ios rtsScreenshots
 ```
 fastlane ios rtsScreenshots
 ```
-RTS: Makes iOS screenshots and replaces currents on AppStoreConnect.
+RTS: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 ### ios rsiScreenshots
 ```
 fastlane ios rsiScreenshots
 ```
-RSI: Makes iOS screenshots and replaces currents on AppStoreConnect.
+RSI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 ### ios rtrScreenshots
 ```
 fastlane ios rtrScreenshots
 ```
-RTR: Makes iOS screenshots and replaces currents on AppStoreConnect.
+RTR: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 ### ios swiAppStoreUpload
 ```
 fastlane ios swiAppStoreUpload
@@ -155,27 +155,27 @@ RTR: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
 ```
 fastlane ios tvOSswiScreenshots
 ```
-SWI: Makes tvOS screenshots and replaces currents on AppStoreConnect.
+SWI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
 ### ios tvOSsrfScreenshots
 ```
 fastlane ios tvOSsrfScreenshots
 ```
-SRF: Makes tvOS screenshots and replaces currents on AppStoreConnect.
+SRF: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
 ### ios tvOSrtsScreenshots
 ```
 fastlane ios tvOSrtsScreenshots
 ```
-RTS: Makes tvOS screenshots and replaces currents on AppStoreConnect.
+RTS: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
 ### ios tvOSrsiScreenshots
 ```
 fastlane ios tvOSrsiScreenshots
 ```
-RSI: Makes tvOS screenshots and replaces currents on AppStoreConnect.
+RSI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
 ### ios tvOSrtrScreenshots
 ```
 fastlane ios tvOSrtrScreenshots
 ```
-RTR: Makes tvOS screenshots and replaces currents on AppStoreConnect.
+RTR: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
 ### ios tvOSswiAppStoreUpload
 ```
 fastlane ios tvOSswiAppStoreUpload
