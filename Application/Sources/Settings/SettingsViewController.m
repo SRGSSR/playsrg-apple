@@ -287,20 +287,12 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsTermsAndConditionsButton]) {
         NSURL *termsAndConditionsURL = ApplicationConfiguration.sharedApplicationConfiguration.termsAndConditionsURL;
         NSAssert(termsAndConditionsURL, @"Button must not be displayed if no Terms and conditions URL has been specified");
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:termsAndConditionsURL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
-        webViewController.title = PlaySRGSettingsLocalizedString(@"Terms and conditions", @"Title displayed at the top of the Terms and conditions view");
-        [self.navigationController pushViewController:webViewController animated:YES];
+        [UIApplication.sharedApplication play_openURL:termsAndConditionsURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsDataProtectionButton]) {
         NSURL *dataProtectionURL = ApplicationConfiguration.sharedApplicationConfiguration.dataProtectionURL;
         NSAssert(dataProtectionURL, @"Button must not be displayed if no data protection URL has been specified");
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:dataProtectionURL];
-        WebViewController *webViewController = [[WebViewController alloc] initWithRequest:request customizationBlock:nil decisionHandler:nil];
-        webViewController.title = PlaySRGSettingsLocalizedString(@"Data protection", @"Title displayed at the top of the data protection view");
-        [self.navigationController pushViewController:webViewController animated:YES];
+        [UIApplication.sharedApplication play_openURL:dataProtectionURL withCompletionHandler:nil];
     }
     else if ([specifier.key isEqualToString:SettingsFeedbackButton]) {
         NSURL *feedbackURL = ApplicationConfiguration.sharedApplicationConfiguration.feedbackURL;

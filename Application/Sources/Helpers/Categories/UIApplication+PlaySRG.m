@@ -15,7 +15,7 @@
 
 - (void)play_openURL:(NSURL *)URL withCompletionHandler:(void (^)(BOOL))completion
 {
-    [self openURL:URL options:nil completionHandler:completion];
+    [self openURL:URL options:@{} completionHandler:completion];
 }
 
 @end
