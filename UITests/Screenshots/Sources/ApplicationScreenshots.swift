@@ -111,7 +111,7 @@ class ApplicationScreenshots: XCTestCase {
         tabBarItem.tap()
         #else
         if tvOSTabBarIndex > 0 {
-            let remote: XCUIRemote = XCUIRemote.shared
+            let remote = XCUIRemote.shared
             remote.press(.right)
             remote.press(.select)
             sleep(2)
