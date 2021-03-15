@@ -7,15 +7,14 @@
 import XCTest
 
 class ApplicationScreenshots: XCTestCase {
-    
-    var configuration: NSDictionary = [:]
-    
-    #if os(iOS)
-    let sleepTime = UInt32(10)
-    #else
-    let sleepTime = UInt32(20)
-    var tvOSTabBarIndex = 0
-    #endif
+    static let configuration: NSDictionary = {
+        if let path = Bundle(for: ApplicationScreenshots.self).path(forResource: "Configuration", ofType: "plist") {
+            return NSDictionary(contentsOfFile: path) ?? [:]
+        }
+        else {
+            return [:]
+        }
+    }()
     
     override func setUp() {
         let app = XCUIApplication()
@@ -23,106 +22,62 @@ class ApplicationScreenshots: XCTestCase {
         app.launch()
         
         continueAfterFailure = false
-        
-        #if os(iOS)
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
-            XCUIDevice.shared.orientation = .landscapeLeft
-        }
-        else {
-            XCUIDevice.shared.orientation = .portrait
-        }
-        #endif
-        
-        if let path = Bundle(for: type(of: self)).path(forResource: "Configuration", ofType: "plist") {
-            configuration = NSDictionary(contentsOfFile: path) ?? [:]
-        }
     }
     
     func testSnapshots() {
-        let application = XCUIApplication()
+        // Wait a bit for the focus engine to determine the first focused item
+        sleep(5)
         
-        let tabBarsQuery = application.tabBars
-        
-        let videosTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.videosTabBarItem.rawValue]
-        if videosTabBarItemQuery.exists {
-            selectTabBarItem(videosTabBarItemQuery)
-            
-            sleep(sleepTime)
-            snapshot("1-VideosHomeScreen")
-        }
-        
-        let audiosTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.audiosTabBarItem.rawValue]
-        if audiosTabBarItemQuery.exists {
-            selectTabBarItem(audiosTabBarItemQuery)
-            
-            sleep(sleepTime)
-            snapshot("2-AudiosHomeScreen")
-        }
-        
-        let livestreamsTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.livestreamsTabBarItem.rawValue]
-        if livestreamsTabBarItemQuery.exists {
-            selectTabBarItem(livestreamsTabBarItemQuery)
-            
-            sleep(sleepTime)
-            snapshot("3-LiveHomeScreen")
-            
-            #if os(iOS)
-            let firstRadioCellQuery = application.tables.firstMatch.cells.element(boundBy: 1).collectionViews.cells.firstMatch
-            if firstRadioCellQuery.exists {
-                firstRadioCellQuery.tap()
-                
-                sleep(sleepTime)
-                snapshot("4-RadioLivePlayer")
-                
-                let closeButtonQuery = application.buttons[AccessibilityIdentifier.closeButton.rawValue];
-                if closeButtonQuery.exists {
-                    closeButtonQuery.tap()
-                }
+        // Navigate tabs with the remote and perform the action depending on the tab which is reached
+        var previousIdentifier: String?
+        while true {
+            guard let identifier = focusedIdentifier, previousIdentifier != identifier else {
+                break
             }
-            #endif
-        }
-        
-        let showsTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.showsTabBarItem.rawValue]
-        if showsTabBarItemQuery.exists {
-            selectTabBarItem(showsTabBarItemQuery)
+            previousIdentifier = identifier
             
-            sleep(sleepTime)
-            snapshot("5-ShowsScreen")
-        }
-        
-        let searchText = configuration["SearchText"]
-        let searchTabBarItemQuery = tabBarsQuery.buttons[AccessibilityIdentifier.searchTabBarItem.rawValue]
-        if searchTabBarItemQuery.exists && searchText != nil {
-            selectTabBarItem(searchTabBarItemQuery)
+            switch identifier {
+            case AccessibilityIdentifier.videosTabBarItem.rawValue:
+                sleep(10)
+                snapshot("1-VideosHomeScreen")
+            case AccessibilityIdentifier.livestreamsTabBarItem.rawValue:
+                sleep(10)
+                snapshot("2-LiveHomeScreen")
+            case AccessibilityIdentifier.showsTabBarItem.rawValue:
+                sleep(20)       // Need more time for some BUs
+                snapshot("3-ShowsScreen")
+            case AccessibilityIdentifier.searchTabBarItem.rawValue:
+                if let searchText = Self.configuration["SearchText"] as? String {
+                    let searchField = XCUIApplication().searchFields.firstMatch
+                    searchField.typeText(searchText)
+                }
+                sleep(10)
+                snapshot("4-SearchScreen")
+            default:
+                ()
+            }
             
-            let searchTextField = application.searchFields.firstMatch
-            selectSearchTextField(searchTextField)
-            searchTextField.typeText(searchText as! String)
-            application.typeText("\n")
-            
-            sleep(sleepTime)
-            snapshot("6-SearchScreen")
+            moveToNextTabBarItem()
         }
     }
     
-    func selectTabBarItem(_ tabBarItem: XCUIElement) {
-        #if os(iOS)
-        tabBarItem.tap()
-        #else
-        if tvOSTabBarIndex > 0 {
-            let remote = XCUIRemote.shared
+    var focusedIdentifier: String? {
+        // String-based predicate recommended by `elements(matching:)` documentation
+        let identifier = XCUIApplication().descendants(matching: .any).element(matching: NSPredicate(format: "hasFocus == true")).identifier
+        return !identifier.isEmpty ? identifier : nil
+    }
+    
+    func moveToNextTabBarItem() {
+        let remote = XCUIRemote.shared
+        
+        // Press Menu if to return to the tab bar if needed. All our tab bar accessibility identifiers contain 'TabBarItem',
+        // which allows us to test against all possible identifiers without explicitly listing them
+        if let identifier = focusedIdentifier, identifier.contains("TabBarItem") {
             remote.press(.right)
-            remote.press(.select)
-            sleep(2)
-            remote.press(.up) // Keep focus on the tab bar item
         }
-        tvOSTabBarIndex += 1
-        #endif
-    }
-    
-    func selectSearchTextField(_ searchTextField: XCUIElement) {
-        #if os(iOS)
-        searchTextField.tap()
-        #endif
+        else {
+            remote.press(.menu)
+            remote.press(.right)
+        }
     }
 }
