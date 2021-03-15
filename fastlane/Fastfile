@@ -29,7 +29,7 @@ platform :ios do
       end
     end
 
-    xcversion(version: '12.4')
+    xcversion(version: '~> 12.4')
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
@@ -293,7 +293,7 @@ platform :ios do
     platform = 'iOS'
 
     screenshots(platform, 'Play SWI screenshots', ['en-US'])
-    # upload_screenshots(platform)
+    upload_screenshots(platform)
   end
 
   desc 'SRF: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
@@ -301,7 +301,7 @@ platform :ios do
     platform = 'iOS'
 
     screenshots(platform, 'Play SRF screenshots', ['de-DE'])
-    # upload_screenshots(platform)
+    upload_screenshots(platform)
   end
 
   desc 'RTS: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
@@ -309,7 +309,7 @@ platform :ios do
     platform = 'iOS'
 
     screenshots(platform, 'Play RTS screenshots', ['fr-FR'])
-    # upload_screenshots(platform)
+    upload_screenshots(platform)
   end
 
   desc 'RSI: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
@@ -317,7 +317,7 @@ platform :ios do
     platform = 'iOS'
 
     screenshots(platform, 'Play RSI screenshots', ['it'])
-    # upload_screenshots(platform)
+    upload_screenshots(platform)
   end
 
   desc 'RTR: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
@@ -325,7 +325,7 @@ platform :ios do
     platform = 'iOS'
 
     screenshots(platform, 'Play RTR screenshots', ['de-DE'])
-    # upload_screenshots(platform)
+    upload_screenshots(platform)
   end
 
   # Individual iOS build uploads
@@ -389,7 +389,7 @@ platform :ios do
     platform = 'tvOS'
 
     screenshots(platform, 'Play SWI TV screenshots', ['en-US'])
-    # upload_screenshots(platform)
+    upload_screenshots(platform)
   end
 
   desc 'SRF: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
@@ -397,7 +397,7 @@ platform :ios do
     platform = 'tvOS'
 
     screenshots(platform, 'Play SRF TV screenshots', ['de-DE'])
-    # upload_screenshots(platform)
+    upload_screenshots(platform)
   end
 
   desc 'RTS: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
@@ -405,7 +405,7 @@ platform :ios do
     platform = 'tvOS'
 
     screenshots(platform, 'Play RTS TV screenshots', ['fr-FR'])
-    # upload_screenshots(platform)
+    upload_screenshots(platform)
   end
 
   desc 'RSI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
@@ -413,7 +413,7 @@ platform :ios do
     platform = 'tvOS'
 
     screenshots(platform, 'Play RSI TV screenshots', ['it'])
-    # upload_screenshots(platform)
+    upload_screenshots(platform)
   end
 
   desc 'RTR: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
@@ -421,7 +421,7 @@ platform :ios do
     platform = 'tvOS'
 
     screenshots(platform, 'Play RTR TV screenshots', ['de-DE'])
-    # upload_screenshots(platform)
+    upload_screenshots(platform)
   end
 
   # Individual tvOS build uploads
