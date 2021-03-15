@@ -51,7 +51,6 @@ struct ProfileView: View {
         }
         .listStyle(GroupedListStyle())
         .frame(maxWidth: 1054)
-        .padding(.top, model.supportsLogin ? 0 : 60)
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
