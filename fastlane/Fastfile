@@ -301,7 +301,7 @@ platform :ios do
     platform = 'iOS'
 
     screenshots(platform, 'Play SRF screenshots', ['de-DE'])
-    upload_screenshots(platform)
+    # upload_screenshots(platform) # Don't erase existing ones, from SRF marketing team.
   end
 
   desc 'RTS: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
