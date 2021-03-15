@@ -40,18 +40,18 @@
 "Closes the player and continue playing video with AirPlay." = "Chiude il player ma continua la riproduzione con AirPlay.";
 
 /* Delete button label */
-"Delete" = "Delete";
+"Delete" = "Elimina";
 
 /* A download button label */
-"Delete download" = "Delete download";
+"Delete download" = "Eliminare il download";
 
 /* Media deletion from later list label
    Media deletion from later list label in the media detail view when a media is in the later list */
-"Delete from \"Later\" list" = "Delete from \"Later\" list";
+"Delete from \"Later\" list" = "Eliminare la lista \"Dopo\"";
 
 /* Favorite label in the player view when a show has been favorited
    Favorite label in the show view when a show has been favorited */
-"Delete from favorites" = "Delete from favorites";
+"Delete from favorites" = "Eliminare dai Preferiti";
 
 /* Show unsubscription label */
 "Disable notifications for show" = "Disattivare le notifiche per il programma";

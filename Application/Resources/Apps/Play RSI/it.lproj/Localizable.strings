@@ -14,10 +14,10 @@
 "%@ has been added to favorites" = "%@ è stato aggiunto alla lista dei preferiti";
 
 /* Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been deleted from \"Later\"" = "%@ has been deleted from \"Later\"";
+"%@ has been deleted from \"Later\"" = "%@ è stato tolto da \"Dopo\"";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
-"%@ has been deleted from favorites" = "%@ has been deleted from favorites";
+"%@ has been deleted from favorites" = "%@ è stato tolto dai Preferiti";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ è inattivo.";
@@ -64,7 +64,7 @@
    Confirmation message displayed when the user is about to delete all favorites
    Confirmation message displayed when the user is about to delete the later list
    Confirmation message displayed when the user is about to delete the whole history */
-"All items will be deleted." = "All items will be deleted.";
+"All items will be deleted." = "Tutti gli elementi saranno cancellati.";
 
 /* Title label used to present already available videos, usually badged as web first */
 "Already available" = "Già disponibile";
@@ -109,51 +109,51 @@
 "Content" = "Contenuto";
 
 /* Message displayed when the user is about to delete content saved for later */
-"Content saved for later will be deleted on all devices connected to your account." = "Content saved for later will be deleted on all devices connected to your account.";
+"Content saved for later will be deleted on all devices connected to your account." = "Il contenuto da consultare più tardi sarà rimosso da tutti gli apparecchi collegati al suo conto.";
 
 /* Sort by date option */
 "Date" = "Data";
 
 /* Title of a delete button
    Title of the delete button in the alert view when deleting a download in the player view */
-"Delete" = "Delete";
+"Delete" = "Eliminare";
 
 /* Title of the button to delete content saved for later
    Title of the confirmation pop-up displayed when the user is about to delete content from the later list
    Title of the message displayed when the user is about to delete content saved for later */
-"Delete content saved for later" = "Delete content saved for later";
+"Delete content saved for later" = "Eliminare il contenuto salvato per essere consultato più tardi";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete a download */
-"Delete download" = "Delete download";
+"Delete download" = "Rimuovere il download";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete download items */
-"Delete downloads" = "Delete downloads";
+"Delete downloads" = "Rimuovere i download";
 
 /* Delete favorites button title
    Title of the confirmation pop-up displayed when the user is about to delete favorite items
    Title of the message displayed when the user is about to delete all favorites */
-"Delete favorites" = "Delete favorites";
+"Delete favorites" = "Rimuovere i preferiti";
 
 /* Button label to delete a media from the later list, from the media long-press menu
    Button label to delete a media from the later list, from the media preview window
    Context menu action to delete a media from the later list */
-"Delete from \"Later\"" = "Delete from \"Later\"";
+"Delete from \"Later\"" = "Rimuovere da \"Dopo\"";
 
 /* Button label to delete a download from the media long-press menu
    Button label to delete a download from the media preview window
    Context menu action to delete a media from the downloads */
-"Delete from downloads" = "Delete from downloads";
+"Delete from downloads" = "Eliminare dai download";
 
 /* Button label to delete a show from favorites in the show long-press menu
    Button label to delete a show from favorites in the show preview window
    Context menu action to delete a show from favorites
    Title of the confirmation pop-up displayed when the user is about to delete a favorite */
-"Delete from favorites" = "Delete from favorites";
+"Delete from favorites" = "Eliminare dai Preferiti";
 
 /* Delete history button title
    Title of the confirmation pop-up displayed when the user is about to delete history entries
    Title of the message displayed when the user is about to delete the history */
-"Delete history" = "Delete history";
+"Delete history" = "Eliminare cronologia";
 
 /* Label for the button disabling autoplay */
 "Disable" = "Disattivare";
@@ -199,7 +199,7 @@
 "Favorites" = "Preferiti";
 
 /* Message displayed when the user is about to delete all favorites */
-"Favorites and notification subscriptions will be deleted on all devices connected to your account." = "Favorites and notification subscriptions will be deleted on all devices connected to your account.";
+"Favorites and notification subscriptions will be deleted on all devices connected to your account." = "Preferiti e notifiche saranno eliminati da tutti gli apparecchi connessi al suo account.";
 
 /* Title displayed at the top of the features list */
 "Features" = "Funzionalità";
@@ -417,7 +417,7 @@
 "Playable abroad" = "Disponibile all'estero";
 
 /* Message displayed when the user is about to log out */
-"Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Playback history, favorites and content saved for later will be deleted from this Apple TV.";
+"Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Cronologia, preferiti e elementi salvati per dopo saranno rimossi da questa Apple TV.";
 
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Precedente";
@@ -539,7 +539,7 @@
 "Subtitled" = "Sottotitolato";
 
 /* Login benefits description footer */
-"Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Synchronize playback history, favorites and content saved for later on all devices connected to your account.";
+"Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Sincronizzare cronologia, preferiti ed elementi da guardare dopo su tutti gli apparecchi collegati al suo account.";
 
 /* Button label to share the content being played. */
 "The content" = "Il contenuto";
@@ -555,7 +555,7 @@
 "The data is invalid" = "I dati non sono validi";
 
 /* Confirmation message displayed when the user is about to delete a download */
-"The downloaded content will be deleted." = "The downloaded content will be deleted.";
+"The downloaded content will be deleted." = "Il contenuto scaricato sarà eliminato.";
 
 /* Button label to share the entire episode being played. */
 "The entire episode" = "L'intero episodio";
@@ -564,7 +564,7 @@
 "The episode at %@" = "L'episodio a %@";
 
 /* Confirmation message displayed when a logged in user is about to delete a favorite */
-"The favorite and notification subscription will be deleted on all devices connected to your account." = "The favorite and notification subscription will be deleted on all devices connected to your account.";
+"The favorite and notification subscription will be deleted on all devices connected to your account." = "Preferiti e notifiche saranno eliminati da tutti gli apparecchi connessi al suo account.";
 
 /* Message displayed if the Google Cast receiver cannot play audios */
 "The Google Cast receiver cannot play audios." = "Il ricevitore Google Cast non può riprodurre audio.";
@@ -573,7 +573,7 @@
 "The Google Cast receiver cannot play videos." = "Il ricevitore Google Cast non può riprodurre video.";
 
 /* Message displayed when the user is about to delete the history */
-"The history will be deleted on all devices connected to your account." = "The history will be deleted on all devices connected to your account.";
+"The history will be deleted on all devices connected to your account." = "La cronologia sarà eliminata da tutti gli apparecchi collegati al suo account.";
 
 /* Title label used to present the radio latest audios */
 "The latest audios" = "Gli audio più recenti";
