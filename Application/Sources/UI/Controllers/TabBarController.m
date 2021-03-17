@@ -79,12 +79,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         self.viewControllers = viewControllers.copy;
         
-        if (@available(iOS 13, *)) {
-            self.tabBar.barTintColor = nil;
-        }
-        else {
-            self.tabBar.barTintColor = UIColor.play_blurTintColor;
-        }
+        self.tabBar.barTintColor = nil;
         
         TabBarItemIdentifier lastOpenTabBarItem = ApplicationSettingLastOpenedTabBarItemIdentifier();
         if (lastOpenTabBarItem) {

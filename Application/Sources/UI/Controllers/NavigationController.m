@@ -101,13 +101,7 @@
         navigationBar.translucent = NO;
     }
     else {
-        if (@available(iOS 13, *)) {
-            navigationBar.barTintColor = nil;
-        }
-        else {
-            navigationBar.barTintColor = UIColor.play_blurTintColor;
-        }
-        
+        navigationBar.barTintColor = nil;
         navigationBar.translucent = YES;
     }
     
