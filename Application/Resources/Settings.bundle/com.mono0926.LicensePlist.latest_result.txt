@@ -156,27 +156,27 @@ version: 3.1.4
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 123.0.0
+version: 118.2.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 123.0.0
+version: 118.2.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 123.0.0
+version: 118.2.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 123.0.0
+version: 118.2.0
 
 name: MaterialComponents, nameSpecified: 
 body: 
                    …
-version: 123.0.0
+version: 118.2.0
 
 name: MDFInternationalization, nameSpecified: 
 body: 

@@ -12,30 +12,30 @@ PODS:
     - Protobuf (~> 3.13)
   - GTMSessionFetcher/Core (1.5.0)
   - InAppSettingsKit (3.1.4)
-  - MaterialComponents/AnimationTiming (123.0.0)
-  - MaterialComponents/Availability (123.0.0)
-  - MaterialComponents/Elevation (123.0.0):
+  - MaterialComponents/AnimationTiming (118.2.0)
+  - MaterialComponents/Availability (118.2.0)
+  - MaterialComponents/Elevation (118.2.0):
     - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/Ink (123.0.0):
+  - MaterialComponents/Ink (118.2.0):
     - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/Palettes (123.0.0)
-  - MaterialComponents/private/Application (123.0.0)
-  - MaterialComponents/private/Color (123.0.0):
+  - MaterialComponents/Palettes (118.2.0)
+  - MaterialComponents/private/Application (118.2.0)
+  - MaterialComponents/private/Color (118.2.0):
     - MaterialComponents/Availability
-  - MaterialComponents/private/Math (123.0.0)
-  - MaterialComponents/Ripple (123.0.0):
+  - MaterialComponents/private/Math (118.2.0)
+  - MaterialComponents/Ripple (118.2.0):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/ShadowElevations (123.0.0)
-  - MaterialComponents/ShadowLayer (123.0.0):
+  - MaterialComponents/ShadowElevations (118.2.0)
+  - MaterialComponents/ShadowLayer (118.2.0):
     - MaterialComponents/ShadowElevations
-  - MaterialComponents/Tabs (123.0.0):
+  - MaterialComponents/Tabs (118.2.0):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Elevation
     - MaterialComponents/Ink
@@ -46,7 +46,7 @@ PODS:
     - MaterialComponents/ShadowLayer
     - MaterialComponents/Typography
     - MDFInternationalization
-  - MaterialComponents/Typography (123.0.0):
+  - MaterialComponents/Typography (118.2.0):
     - MaterialComponents/private/Application
     - MaterialComponents/private/Math
     - MDFTextAccessibility
@@ -63,7 +63,7 @@ DEPENDENCIES:
   - FSCalendar
   - google-cast-sdk-no-bluetooth
   - InAppSettingsKit (= 3.1.4)
-  - MaterialComponents/Tabs
+  - MaterialComponents/Tabs (= 118.2.0)
   - MGSwipeTableCell
   - TvOSTextViewer
 
@@ -100,13 +100,13 @@ SPEC CHECKSUMS:
   google-cast-sdk-no-bluetooth: 815df973d547e06a90768f4a72220950cd32d8cb
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   InAppSettingsKit: 01fb9774c74a11fefc521f29cb2338909e1c2b61
-  MaterialComponents: 7a40e33dc8726359d12e667b74a4007d87e4abd4
+  MaterialComponents: fc3dba46cf3ae8495728a875778b47d0c6ec7ed5
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
   MGSwipeTableCell: b804e4e450dee439c42250be90bd50458bf67fce
   Protobuf: 0cde852566359049847168e51bd1c690e0f70056
   TvOSTextViewer: c1a0c64286931e663d131dc680f908bcfa36e214
 
-PODFILE CHECKSUM: 6adc23e9a0d6c037c18ec8007a253f54db5868b5
+PODFILE CHECKSUM: a2016d03c7cd1e0a6311108e7a21774db74ef7d3
 
 COCOAPODS: 1.9.3

@@ -18,8 +18,8 @@ abstract_target 'Play SRG' do
 
     pod 'FSCalendar'
     pod 'google-cast-sdk-no-bluetooth'
-    pod 'InAppSettingsKit', '3.1.4' # 3.1.5 has a public header exposition issue
-    pod 'MaterialComponents/Tabs'
+    pod 'InAppSettingsKit', '3.1.4'             # 3.1.5 has a public header exposition issue
+    pod 'MaterialComponents/Tabs', '118.2.0'    # Tabs replaced with new implementation as of 119.0.0
     pod 'MGSwipeTableCell'
 
     target 'Play SRF' do
