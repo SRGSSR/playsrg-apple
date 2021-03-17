@@ -9,6 +9,8 @@
 
 #import "ApplicationConfiguration.h"
 #import "BaseViewController.h"
+#import "Favorites.h"
+#import "History.h"
 #import "MediaPlayerViewController.h"
 #import "MediaPlayerViewController+Private.h"
 #import "NavigationController.h"
