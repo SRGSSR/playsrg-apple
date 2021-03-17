@@ -21,7 +21,6 @@
 #import "Previewing.h"
 #import "ShowViewController.h"
 #import "UIViewController+PlaySRG.h"
-#import "UIViewController+PlaySRG_Private.h"
 #import "WatchLater.h"
 
 #import <objc/runtime.h>
@@ -78,11 +77,6 @@ static void commonInit(BaseViewController *self);
 
 #pragma mark Getters and setters
 
-- (UIViewController *)previewContextViewController
-{
-    return self;
-}
-
 - (BaseViewControllerPresentationControllerDelegate *)presentationControllerDelegate
 {
     if (! _presentationControllerDelegate) {
@@ -115,7 +109,7 @@ static void commonInit(BaseViewController *self);
 
 #pragma mark Context menus
 
-- (UIMenu *)contextMenuForMedia:(SRGMedia *)media API_AVAILABLE(ios(13.0))
+- (UIMenu *)contextMenuForMedia:(SRGMedia *)media
 {
     NSMutableArray<UIMenuElement *> *menuActions = [NSMutableArray array];
     
@@ -219,7 +213,7 @@ static void commonInit(BaseViewController *self);
     return [UIMenu menuWithTitle:@"" children:menuActions.copy];
 }
 
-- (UIMenu *)contextMenuForModule:(SRGModule *)module API_AVAILABLE(ios(13.0))
+- (UIMenu *)contextMenuForModule:(SRGModule *)module
 {
     NSMutableArray<UIMenuElement *> *menuActions = [NSMutableArray array];
     
@@ -266,7 +260,7 @@ static void commonInit(BaseViewController *self);
     return [UIMenu menuWithTitle:@"" children:menuActions.copy];
 }
 
-- (UIMenu *)contextMenuForShow:(SRGShow *)show API_AVAILABLE(ios(13.0))
+- (UIMenu *)contextMenuForShow:(SRGShow *)show
 {
     NSMutableArray<UIMenuElement *> *menuActions = [NSMutableArray array];
     
@@ -333,7 +327,7 @@ static void commonInit(BaseViewController *self);
 
 #pragma mark UIContextMenuInteractionDelegate protocol
 
-- (UIContextMenuConfiguration *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configurationForMenuAtLocation:(CGPoint)location API_AVAILABLE(ios(13.0))
+- (UIContextMenuConfiguration *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configurationForMenuAtLocation:(CGPoint)location
 {
     UIView *sourceView = interaction.view;
     if (! [sourceView conformsToProtocol:@protocol(Previewing)]) {
@@ -371,7 +365,7 @@ static void commonInit(BaseViewController *self);
     }
 }
 
-- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator API_AVAILABLE(ios(13.0))
+- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator
 {
     UIViewController *viewController = animator.previewViewController;
     animator.preferredCommitStyle = UIContextMenuInteractionCommitStylePop;
@@ -388,309 +382,11 @@ static void commonInit(BaseViewController *self);
     }];
 }
 
-- (UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(13.0))
+- (UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration
 {
     UIPreviewParameters *previewParameters = [[UIPreviewParameters alloc] init];
     previewParameters.backgroundColor = self.view.backgroundColor;
     return [[UITargetedPreview alloc] initWithView:interaction.view parameters:previewParameters];
-}
-
-#pragma mark UIViewControllerPreviewingDelegate protocol
-
-- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
-{
-    UIView *sourceView = [previewingContext sourceView];
-    if (! [sourceView conformsToProtocol:@protocol(Previewing)]) {
-        return nil;
-    }
-    
-    id previewObject = [(id<Previewing>)sourceView previewObject];
-    if (! previewObject) {
-        return nil;
-    }
-    
-    UIViewController *viewController = nil;
-    if ([previewObject isKindOfClass:SRGMedia.class]) {
-        viewController = [[MediaPreviewViewController alloc] initWithMedia:previewObject];
-    }
-    else if ([previewObject isKindOfClass:SRGModule.class]) {
-        viewController = [[ModuleViewController alloc] initWithModule:previewObject];
-    }
-    else if ([previewObject isKindOfClass:SRGShow.class]) {
-        viewController = [[ShowViewController alloc] initWithShow:previewObject fromPushNotification:NO];
-    }
-    else {
-        return nil;
-    }
-    
-    viewController.play_previewingContext = previewingContext;
-    return viewController;
-}
-
-- (void)previewingContext:(id<UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
-{
-    if ([viewControllerToCommit isKindOfClass:MediaPreviewViewController.class]) {
-        MediaPreviewViewController *mediaPreviewViewController = (MediaPreviewViewController *)viewControllerToCommit;
-        [self play_presentMediaPlayerFromLetterboxController:mediaPreviewViewController.letterboxController withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:nil];
-    }
-    else if ([viewControllerToCommit isKindOfClass:ModuleViewController.class]
-                || [viewControllerToCommit isKindOfClass:ShowViewController.class]
-                || [viewControllerToCommit isKindOfClass:HomeTopicViewController.class]) {
-        [self.navigationController pushViewController:viewControllerToCommit animated:YES];
-    }
-}
-
-#pragma mark 3D Touch fallback
-
-- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
-{
-    UIView *sourceView = gestureRecognizer.view;
-    if (! [sourceView conformsToProtocol:@protocol(Previewing)]) {
-        return;
-    }
-    
-    id previewObject = [(id<Previewing>)sourceView previewObject];
-    if (! previewObject) {
-        return;
-    }
-    
-    UIAlertController *alertController = nil;
-    
-    if ([previewObject isKindOfClass:SRGMedia.class]) {
-        SRGMedia *media = previewObject;
-        
-        NSString *message = (media.show.title && ! [media.title containsString:media.show.title]) ? media.show.title : nil;
-        alertController = [UIAlertController alertControllerWithTitle:media.title message:message preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        WatchLaterAction action = WatchLaterAllowedActionForMediaMetadata(media);
-        if (action != WatchLaterActionNone) {
-            BOOL isRemoval = (action == WatchLaterActionRemove);
-            NSString *addActionTitle = (media.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen later", @"Button label to add an audio to the later list, from the media long-press menu") : NSLocalizedString(@"Watch later", @"Button label to add a video to the later list, from the media long-press menu");
-            [alertController addAction:[UIAlertAction actionWithTitle:isRemoval ? NSLocalizedString(@"Delete from \"Later\"", @"Button label to delete a media from the later list, from the media long-press menu") : addActionTitle style:isRemoval ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                WatchLaterToggleMediaMetadata(media, ^(BOOL added, NSError * _Nullable error) {
-                    if (! error) {
-                        AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
-                        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                        labels.source = AnalyticsSourceLongPress;
-                        labels.value = media.URN;
-                        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-                        
-                        [Banner showWatchLaterAdded:added forItemWithName:media.title inViewController:self];
-                    }
-                });
-            }]];
-        }
-        
-        BOOL downloadable = [Download canDownloadMedia:media];
-        if (downloadable) {
-            Download *download = [Download downloadForMedia:media];
-            BOOL downloaded = (download != nil);
-            [alertController addAction:[UIAlertAction actionWithTitle:downloaded ? NSLocalizedString(@"Delete from downloads", @"Button label to delete a download from the media long-press menu") : NSLocalizedString(@"Add to downloads", @"Button label to add a download from the media long-press menu") style:downloaded ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                if (downloaded) {
-                    [Download removeDownload:download];
-                }
-                else {
-                    [Download addDownloadForMedia:media];
-                }
-                
-                // Use !downloaded since the status has been reversed
-                AnalyticsTitle analyticsTitle = ! downloaded ? AnalyticsTitleDownloadAdd : AnalyticsTitleDownloadRemove;
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = AnalyticsSourceLongPress;
-                labels.value = media.URN;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-            }]];
-        }
-        
-        NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:media atTime:kCMTimeZero];
-        if (sharingURL) {
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Share", @"Button label of the sharing choice in the media long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithMedia:media URL:sharingURL];
-                UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
-                activityViewController.excludedActivityTypes = @[ UIActivityTypePrint,
-                                                                  UIActivityTypeAssignToContact,
-                                                                  UIActivityTypeSaveToCameraRoll,
-                                                                  UIActivityTypePostToFlickr,
-                                                                  UIActivityTypePostToVimeo,
-                                                                  UIActivityTypePostToTencentWeibo ];
-                activityViewController.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
-                    if (! completed) {
-                        return;
-                    }
-                    
-                    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                    labels.type = activityType;
-                    labels.source = AnalyticsSourceLongPress;
-                    labels.value = media.URN;
-                    labels.extraValue1 = AnalyticsTypeValueSharingContent;
-                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
-                    
-                    if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
-                        [Banner showWithStyle:BannerStyleInfo
-                                      message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when some content (media, show, etc.) has been copied to the clipboard")
-                                        image:nil
-                                       sticky:NO
-                             inViewController:self];
-                    }
-                };
-                
-                UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
-                popoverPresentationController.sourceView = sourceView;
-                popoverPresentationController.sourceRect = sourceView.bounds;
-                
-                [self presentViewController:activityViewController animated:YES completion:nil];
-            }]];
-        }
-        
-        if (self.navigationController && ! ApplicationConfiguration.sharedApplicationConfiguration.moreEpisodesHidden && media.show) {
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"More episodes", @"Button label to open the show episode page from the long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:media.show fromPushNotification:NO];
-                [self.navigationController pushViewController:showViewController animated:YES];
-            }]];
-        }
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a media from the start from the long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            void (^openPlayer)(void) = ^{
-                MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:nil fromPushNotification:NO];
-                [self presentViewController:mediaPlayerViewController animated:YES completion:nil];
-            };
-            
-            if (@available(iOS 13, *)) {
-                [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
-                    if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
-                        openPlayer();
-                    }
-                }];
-            }
-            else {
-                openPlayer();
-            }
-        }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Label of the button to close the media long-press menu") style:UIAlertActionStyleCancel handler:nil]];
-    }
-    else if ([previewObject isKindOfClass:SRGModule.class]) {
-        SRGModule *module = previewObject;
-        
-        alertController = [UIAlertController alertControllerWithTitle:module.title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForModule:module];
-        if (sharingURL) {
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Share", @"Button label of the sharing choice in the module long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithModule:module URL:sharingURL];
-                UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
-                activityViewController.excludedActivityTypes = @[ UIActivityTypePrint,
-                                                                  UIActivityTypeAssignToContact,
-                                                                  UIActivityTypeSaveToCameraRoll,
-                                                                  UIActivityTypePostToFlickr,
-                                                                  UIActivityTypePostToVimeo,
-                                                                  UIActivityTypePostToTencentWeibo ];
-                activityViewController.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
-                    if (! completed) {
-                        return;
-                    }
-                    
-                    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                    labels.type = activityType;
-                    labels.source = AnalyticsSourceLongPress;
-                    labels.value = module.URN;
-                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingModule labels:labels];
-                    
-                    if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
-                        [Banner showWithStyle:BannerStyleInfo
-                                      message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when some content (media, show, etc.) has been copied to the clipboard")
-                                        image:nil
-                                       sticky:NO
-                             inViewController:self];
-                    }
-                };
-                [self presentViewController:activityViewController animated:YES completion:nil];
-            }]];
-        }
-        
-        if (self.navigationController) {
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a module from the from the long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                ModuleViewController *moduleViewController = [[ModuleViewController alloc] initWithModule:module];
-                [self.navigationController pushViewController:moduleViewController animated:YES];
-            }]];
-        }
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Label of the button to close the module long-press menu") style:UIAlertActionStyleCancel handler:nil]];
-    }
-    else if ([previewObject isKindOfClass:SRGShow.class]) {
-        SRGShow *show = previewObject;
-        
-        alertController = [UIAlertController alertControllerWithTitle:show.title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        BOOL isFavorite = FavoritesContainsShow(show);
-        [alertController addAction:[UIAlertAction actionWithTitle:isFavorite ? NSLocalizedString(@"Delete from favorites", @"Button label to delete a show from favorites in the show long-press menu") : NSLocalizedString(@"Add to favorites", @"Button label to add a show to favorites in the show long-press menu") style:isFavorite ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            FavoritesToggleShow(show);
-            
-            // Use !isFavorite since favorite status has been reversed
-            AnalyticsTitle analyticsTitle = ! isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceLongPress;
-            labels.value = show.URN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-            
-            [Banner showFavorite:! isFavorite forItemWithName:show.title inViewController:self];
-        }]];
-        
-        NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:show];
-        if (sharingURL) {
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Share", @"Button label of the sharing choice in the show long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithShow:show URL:sharingURL];
-                UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
-                activityViewController.excludedActivityTypes = @[ UIActivityTypePrint,
-                                                                  UIActivityTypeAssignToContact,
-                                                                  UIActivityTypeSaveToCameraRoll,
-                                                                  UIActivityTypePostToFlickr,
-                                                                  UIActivityTypePostToVimeo,
-                                                                  UIActivityTypePostToTencentWeibo ];
-                activityViewController.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
-                    if (! completed) {
-                        return;
-                    }
-                    
-                    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                    labels.type = activityType;
-                    labels.source = AnalyticsSourceLongPress;
-                    labels.value = show.URN;
-                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingShow labels:labels];
-                    
-                    if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
-                        [Banner showWithStyle:BannerStyleInfo
-                                      message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when some content (media, show, etc.) has been copied to the clipboard")
-                                        image:nil
-                                       sticky:NO
-                             inViewController:self];
-                    }
-                };
-                
-                UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
-                popoverPresentationController.sourceView = sourceView;
-                popoverPresentationController.sourceRect = sourceView.bounds;
-                
-                [self presentViewController:activityViewController animated:YES completion:nil];
-            }]];
-        }
-        
-        if (self.navigationController) {
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a show from the from the long-press menu") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
-                [self.navigationController pushViewController:showViewController animated:YES];
-            }]];
-        }
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Label of the button to close the show long-press menu") style:UIAlertActionStyleCancel handler:nil]];
-    }
-    else {
-        return;
-    }
-    
-    UIPopoverPresentationController *popoverPresentationController = alertController.popoverPresentationController;
-    popoverPresentationController.sourceView = sourceView;
-    
-    NSValue *previewAnchorRect = [sourceView respondsToSelector:@selector(previewAnchorRect)] ? [(id<Previewing>)sourceView previewAnchorRect] : nil;
-    popoverPresentationController.sourceRect = previewAnchorRect ? previewAnchorRect.CGRectValue : sourceView.bounds;
-    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark Notifications

@@ -145,7 +145,6 @@
     self.searchController.searchResultsUpdater = self;
     self.searchController.obscuresBackgroundDuringPresentation = NO;
     self.searchController.hidesNavigationBarDuringPresentation = NO;
-    self.searchController.delegate = self;
     
     UISearchBar *searchBar = self.searchController.searchBar;
     object_setClass(searchBar, SearchBar.class);
@@ -307,14 +306,6 @@
 - (BOOL)isLoading
 {
     return [super isLoading] || self.showsRequestQueue.running;
-}
-
-- (UIViewController *)previewContextViewController
-{
-    // The search results controller must be used as previewing context, see https://stackoverflow.com/a/42261971/760435.
-    // If no search results controller is used (`-[UISearchController initWithSearchResultsController:]` called with `nil`),
-    // the search controller must be used instead.
-    return self.searchController.active ? self.searchController : super.previewContextViewController;
 }
 
 #pragma mark UI
@@ -711,14 +702,6 @@
     popoverPresentationController.barButtonItem = self.filtersBarButtonItem;
     
     [self presentViewController:navigationController animated:YES completion:nil];
-}
-
-#pragma mark UISearchControllerDelegate protocol
-
-- (void)didPresentSearchController:(UISearchController *)searchController
-{
-    // Refresh preview registrations when the search controller has been displayed, see https://stackoverflow.com/a/42261971/760435.
-    [UIView play_updatePreviewRegistrationsInView:self.view];
 }
 
 #pragma mark UISearchResultsUpdating protocol

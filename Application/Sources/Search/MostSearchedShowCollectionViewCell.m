@@ -63,9 +63,4 @@
     return self.show;
 }
 
-- (NSValue *)previewAnchorRect
-{
-    return [NSValue valueWithCGRect:CGRectMake(0.f, 0.f, 30.f, CGRectGetHeight(self.frame))];
-}
-
 @end

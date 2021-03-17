@@ -43,11 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, getter=play_isViewVisible) BOOL play_viewVisible;
 
 /**
- *  The previewing context (peek) from which the view controller is presented, if any.
- */
-@property (nonatomic, readonly, nullable) id<UIViewControllerPreviewing> play_previewingContext;
-
-/**
  *  The top view controller of the receiver hierarchy.
  */
 @property (nonatomic, readonly) UIViewController *play_topViewController;

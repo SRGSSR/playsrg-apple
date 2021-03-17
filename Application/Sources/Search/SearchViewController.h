@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchViewController : CollectionRequestViewController <PlayApplicationNavigation, SRGAnalyticsViewTracking, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
+@interface SearchViewController : CollectionRequestViewController <PlayApplicationNavigation, SRGAnalyticsViewTracking, UISearchBarDelegate, UISearchResultsUpdating>
 
 @end
 

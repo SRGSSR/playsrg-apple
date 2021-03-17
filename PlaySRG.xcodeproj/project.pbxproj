@@ -1055,11 +1055,6 @@
 		6F6C0FBE257AAF250077322C /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
 		6F6C0FBF257AAF260077322C /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
 		6F6C0FC0257AAF270077322C /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
-		6F7218131DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
-		6F7218141DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
-		6F7218151DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
-		6F7218161DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
-		6F7218171DBE75AC00575072 /* PreviewingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7218121DBE75AC00575072 /* PreviewingDelegate.m */; };
 		6F79E0AA2541647400A28E79 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F79E0A92541647400A28E79 /* Colors.swift */; };
 		6F79E0AB2541647400A28E79 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F79E0A92541647400A28E79 /* Colors.swift */; };
 		6F79E0AC2541647400A28E79 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F79E0A92541647400A28E79 /* Colors.swift */; };
@@ -2210,7 +2205,6 @@
 		6F00875C219AA888004BD6FF /* StoreReview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreReview.m; sourceTree = "<group>"; };
 		6F0506E5245468EE0053253E /* SplitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
 		6F0506E6245468EE0053253E /* SplitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
-		6F05F254203C2F0200EEA894 /* UIViewController+PlaySRG_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PlaySRG_Private.h"; sourceTree = "<group>"; };
 		6F06E0A21DB7791300220FC6 /* ApplicationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationSettings.h; sourceTree = "<group>"; };
 		6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationSettings.m; sourceTree = "<group>"; };
 		6F0A416D1F6FAB6E000533E7 /* Calendar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Calendar.h; sourceTree = "<group>"; };
@@ -2398,8 +2392,6 @@
 		6F6B642B21A70FAA00E207FC /* HomeStatusHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeStatusHeaderView.h; sourceTree = "<group>"; };
 		6F6B642C21A70FAA00E207FC /* HomeStatusHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeStatusHeaderView.m; sourceTree = "<group>"; };
 		6F6B642D21A70FAA00E207FC /* HomeStatusHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeStatusHeaderView.xib; sourceTree = "<group>"; };
-		6F7218111DBE75AC00575072 /* PreviewingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewingDelegate.h; sourceTree = "<group>"; };
-		6F7218121DBE75AC00575072 /* PreviewingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewingDelegate.m; sourceTree = "<group>"; };
 		6F79E0A92541647400A28E79 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6F7C35B323708E8A00259BE7 /* SRGResource+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGResource+PlaySRG.h"; sourceTree = "<group>"; };
 		6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGResource+PlaySRG.m"; sourceTree = "<group>"; };
@@ -3032,8 +3024,6 @@
 				6F9D2741203AD99C00FDE899 /* Playlist.h */,
 				6F9D2742203AD99C00FDE899 /* Playlist.m */,
 				6F7CE6EF1DD6021700FA4A6D /* PlayLogger.h */,
-				6F7218111DBE75AC00575072 /* PreviewingDelegate.h */,
-				6F7218121DBE75AC00575072 /* PreviewingDelegate.m */,
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
@@ -3811,7 +3801,6 @@
 				6F4760731EB37D60003021EA /* UIStackView+PlaySRG.m */,
 				6F85E4B51EEA8F9B00552256 /* UIView+PlaySRG.h */,
 				6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */,
-				6F05F254203C2F0200EEA894 /* UIViewController+PlaySRG_Private.h */,
 				6F4760741EB37D60003021EA /* UIViewController+PlaySRG.h */,
 				6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */,
 				6F4760761EB37D60003021EA /* UIWindow+PlaySRG.h */,
@@ -7277,7 +7266,6 @@
 				08DD9D5D1FFE6EDB00115906 /* ModuleViewController.m in Sources */,
 				6F4760131EB37BC6003021EA /* Banner.m in Sources */,
 				6F167F4A248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
-				6F7218131DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F475FC81EB37BC6003021EA /* MediasViewController.m in Sources */,
 				6F47607C1EB37D60003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6FC1FA882292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
@@ -7488,7 +7476,6 @@
 				6FC8866C1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
 				084F94B122D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */,
 				0827DA1F1F0D36E200A31A42 /* NSBundle+PlaySRG.m in Sources */,
-				6F7218141DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F12E4E322D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				6F0EDA662448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F80E9C321A682E70027CA2F /* TableRequestViewController.m in Sources */,
@@ -7669,7 +7656,6 @@
 				6FC8866D1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
 				084F94B222D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */,
 				0827DA201F0D36E200A31A42 /* NSBundle+PlaySRG.m in Sources */,
-				6F7218151DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F12E4E422D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				6F0EDA672448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F80E9C421A682E70027CA2F /* TableRequestViewController.m in Sources */,
@@ -7850,7 +7836,6 @@
 				6FC8866E1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
 				084F94B322D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */,
 				0827DA211F0D36E400A31A42 /* NSBundle+PlaySRG.m in Sources */,
-				6F7218161DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F12E4E522D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				6F0EDA682448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F80E9C521A682E70027CA2F /* TableRequestViewController.m in Sources */,
@@ -8031,7 +8016,6 @@
 				6FC8866F1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
 				084F94B422D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */,
 				0827DA221F0D36E400A31A42 /* NSBundle+PlaySRG.m in Sources */,
-				6F7218171DBE75AC00575072 /* PreviewingDelegate.m in Sources */,
 				6F12E4E622D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				6F0EDA692448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F80E9C621A682E70027CA2F /* TableRequestViewController.m in Sources */,
