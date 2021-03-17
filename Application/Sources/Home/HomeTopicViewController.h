@@ -4,13 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "PageViewController.h"
+#import "PageContainerViewController.h"
 
 @import SRGDataProviderModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeTopicViewController : PageViewController
+@interface HomeTopicViewController : PageContainerViewController
 
 - (instancetype)initWithTopic:(SRGTopic *)topic;
 

@@ -15,9 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Abstract container class to display pages of contents, between which the user can change using a swipe or a tab strip.
  *  Tabs can be customized by associating a `UITabBarItem` with a view controller.
  *
- *  To use `PageViewController`, bind its `placeholderViews` property to a single view where pages will be displayed.
+ *  To use `PageContainerViewController`, bind its `placeholderViews` property to a single view where pages will be displayed.
  */
-@interface PageViewController : UIViewController <ContainerContentInsets, SRGAnalyticsContainerViewTracking, TabBarActionable, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface PageContainerViewController : UIViewController <ContainerContentInsets, SRGAnalyticsContainerViewTracking, TabBarActionable, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 /**
  *  Create an instance displaying the supplied view controllers, and starting at the specified page.
@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Subclassing hooks.
  */
-@interface PageViewController (Subclassing)
+@interface PageContainerViewController (Subclassing)
 
 /**
  *  Called when the spcified view controller has been displayed, either because the user tapped on the corresponding
@@ -58,12 +58,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface UIViewController (PageViewController)
+@interface UIViewController (PageContainerViewController)
 
 /**
  *  The parent page view controller, if any.
  */
-@property (nonatomic, readonly, nullable) PageViewController *play_pageViewController;
+@property (nonatomic, readonly, nullable) PageContainerViewController *play_pageContainerViewController;
 
 @end
 

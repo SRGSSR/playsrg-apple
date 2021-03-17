@@ -9,7 +9,7 @@
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Layout.h"
-#import "PageViewController.h"
+#import "PageContainerViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 

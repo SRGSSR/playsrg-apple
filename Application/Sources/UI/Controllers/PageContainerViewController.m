@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "PageViewController.h"
+#import "PageContainerViewController.h"
 
 #import "PlayLogger.h"
 #import "UIColor+PlaySRG.h"
@@ -14,7 +14,7 @@
 #import "MaterialTabs.h"
 @import SRGAppearance;
 
-@interface PageViewController () <MDCTabBarDelegate>
+@interface PageContainerViewController () <MDCTabBarDelegate>
 
 @property (nonatomic) UIPageViewController *pageViewController;
 
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation PageViewController
+@implementation PageContainerViewController
 
 #pragma mark Object lifecycle
 
@@ -134,7 +134,7 @@
     ]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(pageViewController_contentSizeCategoryDidChange:)
+                                             selector:@selector(pageContainerViewController_contentSizeCategoryDidChange:)
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
     
@@ -315,22 +315,22 @@
 
 #pragma mark Notifications
 
-- (void)pageViewController_contentSizeCategoryDidChange:(NSNotification *)notification
+- (void)pageContainerViewController_contentSizeCategoryDidChange:(NSNotification *)notification
 {
     [self updateFonts];
 }
 
 @end
 
-@implementation UIViewController (PageViewController)
+@implementation UIViewController (PageContainerViewController)
 
 #pragma mark Getters and setters
 
-- (PageViewController *)play_pageViewController
+- (PageContainerViewController *)play_pageContainerViewController
 {
     UIViewController *parentViewController = self.parentViewController.parentViewController;
-    if ([parentViewController isKindOfClass:PageViewController.class]) {
-        return (PageViewController *)parentViewController;
+    if ([parentViewController isKindOfClass:PageContainerViewController.class]) {
+        return (PageContainerViewController *)parentViewController;
     }
     else {
         return nil;

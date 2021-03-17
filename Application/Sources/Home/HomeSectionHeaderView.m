@@ -12,7 +12,7 @@
 #import "Layout.h"
 #import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
-#import "PageViewController.h"
+#import "PageContainerViewController.h"
 #import "SRGModule+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 

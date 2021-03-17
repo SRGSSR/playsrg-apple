@@ -7,11 +7,11 @@
 import SRGDataProviderModel
 import UIKit
 
-class ContentPageViewController: BaseViewController {
-    let model: ContentPageModel
+class PageViewController: BaseViewController {
+    let model: PageModel
     
-    init(id: ContentPageModel.Id) {
-        self.model = ContentPageModel(id: id)
+    init(id: PageModel.Id) {
+        self.model = PageModel(id: id)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,6 +26,6 @@ class ContentPageViewController: BaseViewController {
     }
 }
 
-extension ContentPageViewController: UICollectionViewDelegate {
+extension PageViewController: UICollectionViewDelegate {
     
 }

@@ -1,7 +1,7 @@
 import Foundation
 import SRGDataProviderModel
 
-class ContentPageModel: ObservableObject {
+class PageModel: ObservableObject {
     enum Id {
         case video
         case audio(channel: RadioChannel)
