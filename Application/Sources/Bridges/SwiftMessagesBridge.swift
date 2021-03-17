@@ -8,7 +8,7 @@ import SRGAppearance
 import SwiftMessages
 import UIKit
 
-open class SwiftMessagesBridge : NSObject {
+open class SwiftMessagesBridge: NSObject {
     
     /**
      *  Display a notification message.

@@ -633,6 +633,16 @@
 		6F167F59248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F167F56248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib */; };
 		6F167F5A248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F167F56248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib */; };
 		6F167F5B248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F167F56248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib */; };
+		6F16C7A326025698006F685A /* ContentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C7A226025698006F685A /* ContentPageViewController.swift */; };
+		6F16C7A426025698006F685A /* ContentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C7A226025698006F685A /* ContentPageViewController.swift */; };
+		6F16C7A526025698006F685A /* ContentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C7A226025698006F685A /* ContentPageViewController.swift */; };
+		6F16C7A626025698006F685A /* ContentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C7A226025698006F685A /* ContentPageViewController.swift */; };
+		6F16C7A726025698006F685A /* ContentPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C7A226025698006F685A /* ContentPageViewController.swift */; };
+		6F16C80C26025945006F685A /* ContentPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* ContentPageModel.swift */; };
+		6F16C80D26025945006F685A /* ContentPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* ContentPageModel.swift */; };
+		6F16C80E26025945006F685A /* ContentPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* ContentPageModel.swift */; };
+		6F16C80F26025945006F685A /* ContentPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* ContentPageModel.swift */; };
+		6F16C81026025945006F685A /* ContentPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* ContentPageModel.swift */; };
 		6F1938321EFBFE9E0017B1D1 /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F1938311EFBFE9E0017B1D1 /* ApplicationConfiguration.json */; };
 		6F1938331EFBFEA40017B1D1 /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F19382F1EFBFE8D0017B1D1 /* ApplicationConfiguration.json */; };
 		6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F19382D1EFBFE7F0017B1D1 /* ApplicationConfiguration.json */; };
@@ -2240,6 +2250,8 @@
 		6F167F4F248198DC00B8E7F1 /* HomeTopicCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTopicCollectionViewCell.h; sourceTree = "<group>"; };
 		6F167F50248198DC00B8E7F1 /* HomeTopicCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTopicCollectionViewCell.m; sourceTree = "<group>"; };
 		6F167F56248199BF00B8E7F1 /* HomeTopicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTopicCollectionViewCell.xib; sourceTree = "<group>"; };
+		6F16C7A226025698006F685A /* ContentPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentPageViewController.swift; sourceTree = "<group>"; };
+		6F16C80B26025945006F685A /* ContentPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentPageModel.swift; sourceTree = "<group>"; };
 		6F19382D1EFBFE7F0017B1D1 /* ApplicationConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApplicationConfiguration.json; sourceTree = "<group>"; };
 		6F19382F1EFBFE8D0017B1D1 /* ApplicationConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApplicationConfiguration.json; sourceTree = "<group>"; };
 		6F1938311EFBFE9E0017B1D1 /* ApplicationConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApplicationConfiguration.json; sourceTree = "<group>"; };
@@ -3322,6 +3334,7 @@
 				E6E673221D4A423E000C3CB9 /* Browser */,
 				E694A9F11D65F02700372DF0 /* Calendar */,
 				08AA551A1D49EBF600C5026E /* Configuration */,
+				6F16C7A126025698006F685A /* Content */,
 				6F861AF61DAE65A600C46102 /* Designables */,
 				081220731DCCE70400BF8326 /* Downloads */,
 				086F8D4C22984B29001BE2F4 /* Favorites */,
@@ -3649,6 +3662,15 @@
 				6F0A416E1F6FAB6E000533E7 /* Calendar.m */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		6F16C7A126025698006F685A /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				6F16C7A226025698006F685A /* ContentPageViewController.swift */,
+				6F16C80B26025945006F685A /* ContentPageModel.swift */,
+			);
+			path = Content;
 			sourceTree = "<group>";
 		};
 		6F331CE524D06B8200C096AB /* TV Application */ = {
@@ -7336,6 +7358,7 @@
 				6F167F51248198DC00B8E7F1 /* HomeTopicCollectionViewCell.m in Sources */,
 				6FDF08F0218B126700B2AF2C /* UpdateInfo.m in Sources */,
 				6F556B381DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
+				6F16C7A326025698006F685A /* ContentPageViewController.swift in Sources */,
 				6FA5D15D1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				6F475FCD1EB37BC6003021EA /* NavigationController.m in Sources */,
 				6FDF08FA218B126700B2AF2C /* DeprecatedFavorite.m in Sources */,
@@ -7374,6 +7397,7 @@
 				6FC0C695245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */,
 				087584EF23A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
+				6F16C80C26025945006F685A /* ContentPageModel.swift in Sources */,
 				6FAAF77C20CABA3A00BB58A3 /* Notification.m in Sources */,
 				6FC8866B1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
 				089EA011201148180070E11A /* NSTimer+PlaySRG.m in Sources */,
@@ -7553,7 +7577,9 @@
 				6F9897CE2412582400B390A2 /* Layout.m in Sources */,
 				0837CEAB1D3FAEE100A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
 				6F167F4B248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
+				6F16C80D26025945006F685A /* ContentPageModel.swift in Sources */,
 				6F475FBA1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
+				6F16C7A426025698006F685A /* ContentPageViewController.swift in Sources */,
 				6FDF08D8218B126700B2AF2C /* Download.m in Sources */,
 				6FB03F5D25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				0832BF1122BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
@@ -7733,7 +7759,9 @@
 				6F9897CF2412582400B390A2 /* Layout.m in Sources */,
 				0837CEAD1D3FAEE200A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
 				6F167F4C248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
+				6F16C80E26025945006F685A /* ContentPageModel.swift in Sources */,
 				6F475FBB1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
+				6F16C7A526025698006F685A /* ContentPageViewController.swift in Sources */,
 				6FDF08D9218B126700B2AF2C /* Download.m in Sources */,
 				6FB03F5E25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				0832BF1222BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
@@ -7913,7 +7941,9 @@
 				6F9897D02412582400B390A2 /* Layout.m in Sources */,
 				0837CEAF1D3FAEE200A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
 				6F167F4D248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
+				6F16C80F26025945006F685A /* ContentPageModel.swift in Sources */,
 				6F475FBC1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
+				6F16C7A626025698006F685A /* ContentPageViewController.swift in Sources */,
 				6FDF08DA218B126700B2AF2C /* Download.m in Sources */,
 				6FB03F5F25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				0832BF1322BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
@@ -8093,7 +8123,9 @@
 				6F9897D12412582400B390A2 /* Layout.m in Sources */,
 				0837CEB11D3FAEE300A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
 				6F167F4E248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
+				6F16C81026025945006F685A /* ContentPageModel.swift in Sources */,
 				6F475FBD1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
+				6F16C7A726025698006F685A /* ContentPageViewController.swift in Sources */,
 				6FDF08DB218B126700B2AF2C /* Download.m in Sources */,
 				6FB03F6025DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				0832BF1422BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
