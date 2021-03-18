@@ -155,6 +155,16 @@ class PageViewController: DataViewController {
     }
 }
 
+extension PageViewController: ContentInsets {
+    var play_contentScrollViews: [UIScrollView]? {
+        return collectionView != nil ? [collectionView] : nil
+    }
+    
+    var play_paddingContentInsets: UIEdgeInsets {
+        return LayoutStandardTableViewPaddingInsets
+    }
+}
+
 extension PageViewController: UICollectionViewDelegate {
     
 }
@@ -162,10 +172,6 @@ extension PageViewController: UICollectionViewDelegate {
 // TODO: Remaining protocols to implement, as was the case for HomeViewController
 
 #if false
-
-extension PageViewController: ContentInsets {
-    
-}
 
 extension PageViewController: DZNEmptyDataSetSource {
     
