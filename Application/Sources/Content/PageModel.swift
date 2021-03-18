@@ -137,18 +137,21 @@ class PageModel: Identifiable, ObservableObject {
         }
     }
     
-    private func placeholderItems(for contentSection: SRGContentSection) -> [RowItem] {
+    private func placeholderItems(for section: SRGContentSection) -> [RowItem] {
+        guard section.isSupported else {return [] }
+        
         let numberOfPlaceholders = 10
         
-        switch contentSection.presentation.type {
+        switch section.presentation.type {
         case .topicSelector:
-            return (0..<numberOfPlaceholders).map { RowItem(section: contentSection, content: .topicPlaceholder(index: $0)) }
+            return (0..<numberOfPlaceholders).map { RowItem(section: section, content: .topicPlaceholder(index: $0)) }
         case .favoriteShows, .resumePlayback, .watchLater:
             return []
+            // TODO: Show section
 //            case .radioAllShows:
 //                return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
         default:
-            return (0..<numberOfPlaceholders).map { RowItem(section: contentSection, content: .mediaPlaceholder(index: $0)) }
+            return (0..<numberOfPlaceholders).map { RowItem(section: section, content: .mediaPlaceholder(index: $0)) }
         }
     }
 }
@@ -385,6 +388,19 @@ extension SRGContentSection {
             return true
         }
         else {
+            return false
+        }
+    }
+    
+    var isSupported: Bool {
+        switch presentation.type {
+        case .none, .events, .personalizedProgram:
+            return false
+        case .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
+            return true
+        case .favoriteShows, .livestreams, .topicSelector, .resumePlayback, .watchLater:
+            return true
+        @unknown default:
             return false
         }
     }
