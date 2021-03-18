@@ -13,7 +13,11 @@ class PageViewController: DataViewController {
     private var cancellables = Set<AnyCancellable>()
     
     private var dataSource: UICollectionViewDiffableDataSource<PageModel.Section, PageModel.Item>!
+    
     private weak var collectionView: UICollectionView!
+    private weak var refreshControl: UIRefreshControl!
+    
+    private var refreshTriggered = false
     
     @objc static func videosViewController() -> UIViewController {
         return PageViewController(id: .video)
@@ -90,6 +94,7 @@ class PageViewController: DataViewController {
         let refreshControl = RefreshControl()
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
+        self.refreshControl = refreshControl
         
         self.view = view
     }
@@ -150,12 +155,21 @@ class PageViewController: DataViewController {
     func reloadData(withRows rows: [PageModel.Row]) {
         // Can be triggered on a background thread. Layout is updated on the main thread.
         DispatchQueue.global(qos: .userInteractive).async {
-            self.dataSource.apply(Self.snapshot(withRows: rows))
+            self.dataSource.apply(Self.snapshot(withRows: rows)) {
+                // Avoid stopping scrolling
+                // See http://stackoverflow.com/a/31681037/760435
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
+                }
+            }
         }
     }
     
-    @objc func pullToRefresh(_ sender: RefreshControl) {
-        refresh()
+    @objc func pullToRefresh(_ refreshControl: RefreshControl) {
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+        refreshTriggered = true
     }
 }
 
@@ -171,6 +185,16 @@ extension PageViewController: ContentInsets {
 
 extension PageViewController: UICollectionViewDelegate {
     
+}
+
+extension PageViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
+        if refreshTriggered {
+            refresh()
+            refreshTriggered = false
+        }
+    }
 }
 
 // TODO: Remaining protocols to implement, as was the case for HomeViewController
