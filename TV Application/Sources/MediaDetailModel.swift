@@ -70,7 +70,7 @@ class MediaDetailModel: ObservableObject {
     
     func toggleWatchLater() {
         WatchLaterToggleMediaMetadata(media) { added, error in
-            guard error != nil else { return }
+            guard error == nil else { return }
             
             let analyticsTitle = added ? AnalyticsTitle.watchLaterAdd : AnalyticsTitle.watchLaterRemove
             let labels = SRGAnalyticsHiddenEventLabels()
