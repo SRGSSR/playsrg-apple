@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct VideosView: View {
-    @StateObject var model = HomeModel(id: .video)
+    @StateObject var model = PageModel(id: .video)
     
     var body: some View {
         HomeView(model: model)

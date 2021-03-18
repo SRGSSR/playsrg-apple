@@ -10,7 +10,7 @@ class AudioModel: ObservableObject {
     struct RadioItem: Identifiable {
         let index: Int
         let channel: RadioChannel
-        let model: HomeModel
+        let model: PageModel
         
         var id: Int {
             return index
@@ -20,7 +20,7 @@ class AudioModel: ObservableObject {
     let items: [RadioItem] = {
         var items = [RadioItem]()
         for (index, channel) in ApplicationConfiguration.shared.radioChannels.enumerated() {
-            let model = HomeModel(id: .audio(channel: channel))
+            let model = PageModel(id: .audio(channel: channel))
             let item = RadioItem(index: index, channel: channel, model: model)
             items.append(item)
         }
@@ -67,9 +67,9 @@ struct RadioChannelSelector: View {
 }
 
 struct RadioChannelView: View {
-    let model: HomeModel
+    let model: PageModel
     
-    init(model: HomeModel) {
+    init(model: PageModel) {
         self.model = model
     }
     

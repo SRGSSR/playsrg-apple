@@ -30,16 +30,6 @@ extension CollectionView {
 }
 
 /**
- *  Collection row.
- */
-struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
-    /// Section.
-    let section: Section
-    /// Items contained within the section.
-    let items: [Item]
-}
-
-/**
  *  A `UICollectionView`-powered SwiftUI collection, whose cells are provided as SwiftUI views.
  */
 struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, SupplementaryView: View>: UIViewRepresentable {

@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct LiveView: View {
-    @StateObject var model = HomeModel(id: .live)
+    @StateObject var model = PageModel(id: .live)
     
     var body: some View {
         HomeView(model: model)
