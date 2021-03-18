@@ -17,17 +17,18 @@ class PageModel: Identifiable, ObservableObject {
     let id: Id
     var page: SRGContentPage? {
         didSet {
-            self.sections = self.page?.sections ?? []
-            
             self.synchronizeRows()
             self.loadRows()
         }
     }
-    var sections: [SRGContentSection]
     
     typealias Section = SRGContentSection
     typealias Item = RowItem
     typealias Row = CollectionRow<SRGContentSection, RowItem>
+    
+    private var pageSections: [SRGContentSection] {
+        return self.page?.sections ?? []
+    }
     
     // Store all rows so that row updates always find a matching row. Only return non-empty ones, publicly though
     private var loadedRows: [Row] = [] {
@@ -44,7 +45,6 @@ class PageModel: Identifiable, ObservableObject {
     init(id: Id) {
         self.id = id
         self.page = nil
-        self.sections = []
         
         loadPage()
     }
@@ -60,7 +60,7 @@ class PageModel: Identifiable, ObservableObject {
     }
     
     func subscribes() {
-        if self.sections.contains(where: { $0.presentation.type == .favoriteShows }) {
+        if self.pageSections.contains(where: { $0.presentation.type == .favoriteShows }) {
             NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
                 .sink { notification in
                     guard let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) else { return }
@@ -69,7 +69,7 @@ class PageModel: Identifiable, ObservableObject {
                 .store(in: &mainCancellables)
         }
         
-        if self.sections.contains(where: { $0.presentation.type == .resumePlayback }) {
+        if self.pageSections.contains(where: { $0.presentation.type == .resumePlayback }) {
             NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
                 .sink { _ in
                     self.refresh()
@@ -77,7 +77,7 @@ class PageModel: Identifiable, ObservableObject {
                 .store(in: &mainCancellables)
         }
         
-        if self.sections.contains(where: { $0.presentation.type == .watchLater }) {
+        if self.pageSections.contains(where: { $0.presentation.type == .watchLater }) {
             NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
                 .sink { notification in
                     guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
@@ -113,7 +113,7 @@ class PageModel: Identifiable, ObservableObject {
     
     private func synchronizeRows() {
         var updatedRows = [Row]()
-        for section in sections {
+        for section in pageSections {
             addRow(with: section, to: &updatedRows)
         }
         loadedRows = updatedRows
@@ -125,7 +125,7 @@ class PageModel: Identifiable, ObservableObject {
     }
     
     private func loadRows(with ids: [SRGContentSection]? = nil) {
-        let reloadedContentSections = ids ?? sections
+        let reloadedContentSections = ids ?? pageSections
         for section in reloadedContentSections {
             sectionPublisher(section)?
                 .replaceError(with: [])
