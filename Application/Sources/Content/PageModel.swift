@@ -25,6 +25,8 @@ class PageModel: Identifiable, ObservableObject {
     }
     var sections: [SRGContentSection]
     
+    typealias Section = SRGContentSection
+    typealias Item = RowItem
     typealias Row = CollectionRow<SRGContentSection, RowItem>
     
     // Store all rows so that row updates always find a matching row. Only return non-empty ones, publicly though
@@ -370,19 +372,19 @@ extension PageModel {
 
 extension SRGContentSection {
     var isLive: Bool {
-        switch presentation.type {
-        case .livestreams:
+        if case let .livestreams = presentation.type {
             return true
-        default:
+        }
+        else {
             return false
         }
     }
     
     var isFavoriteShows: Bool {
-        switch presentation.type {
-        case .favoriteShows:
+        if case let .favoriteShows = presentation.type {
             return true
-        default:
+        }
+        else {
             return false
         }
     }

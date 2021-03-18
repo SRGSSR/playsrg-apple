@@ -24,6 +24,15 @@ class PageViewController: DataViewController {
         return PageViewController(id: .live)
     }
     
+    private static func snapshot(withRows rows: [PageModel.Row]) -> NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item> {
+        var snapshot = NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item>()
+        for row in rows {
+            snapshot.appendSections([row.section])
+            snapshot.appendItems(row.items, toSection: row.section)
+        }
+        return snapshot
+    }
+    
     private static func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { _, _ in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
