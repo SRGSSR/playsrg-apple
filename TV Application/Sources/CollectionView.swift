@@ -151,6 +151,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         let rowsHash = rows.hashValue
         if coordinator.rowsHash != rowsHash {
             DispatchQueue.global(qos: .userInteractive).async {
+                // Can be triggered on a background thread. Layout is updated on the main thread.
                 dataSource.apply(snapshot(), animatingDifferences: animated) {
                     coordinator.focusable = true
                     collectionView.setNeedsFocusUpdate()

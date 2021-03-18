@@ -137,7 +137,6 @@ class PageViewController: DataViewController {
         }
         
         model.$rows
-            .receive(on: DispatchQueue.global(qos: .userInteractive))
             .sink { rows in
                 self.reloadData(withRows: rows)
             }
@@ -149,7 +148,10 @@ class PageViewController: DataViewController {
     }
     
     func reloadData(withRows rows: [PageModel.Row]) {
-        dataSource.apply(Self.snapshot(withRows: rows))
+        // Can be triggered on a background thread. Layout is updated on the main thread.
+        DispatchQueue.global(qos: .userInteractive) {
+            dataSource.apply(Self.snapshot(withRows: rows))
+        }
     }
     
     @objc func pullToRefresh(_ sender: RefreshControl) {
