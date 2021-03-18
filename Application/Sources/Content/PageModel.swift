@@ -139,18 +139,22 @@ class PageModel: Identifiable, ObservableObject {
     private func placeholderItems(for section: SRGContentSection) -> [RowItem] {
         guard section.isSupported else {return [] }
         
-        let numberOfPlaceholders = 10
+        let defaultNumberOfPlaceholders = 10
         
         switch section.presentation.type {
+        case .mediaHighlight:
+            return [ RowItem(section: section, content: .mediaPlaceholder(index: 0)) ]
+        case .showHighlight:
+            return [ RowItem(section: section, content: .showPlaceholder(index: 0)) ]
         case .topicSelector:
-            return (0..<numberOfPlaceholders).map { RowItem(section: section, content: .topicPlaceholder(index: $0)) }
+            return (0..<defaultNumberOfPlaceholders).map { RowItem(section: section, content: .topicPlaceholder(index: $0)) }
         case .favoriteShows, .resumePlayback, .watchLater:
             return []
             // TODO: Show section
 //            case .radioAllShows:
 //                return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
         default:
-            return (0..<numberOfPlaceholders).map { RowItem(section: section, content: .mediaPlaceholder(index: $0)) }
+            return (0..<defaultNumberOfPlaceholders).map { RowItem(section: section, content: .mediaPlaceholder(index: $0)) }
         }
     }
 }
@@ -194,9 +198,8 @@ extension PageModel {
         switch section.type {
         case .medias:
             return dataProvider.medias(for: section.vendor, contentSectionUid: section.uid, pageSize: pageSize)
-                .map { $0.medias.map { RowItem(section: section, content: .media($0)) } }
+                .map { self.filterItems($0.medias, section: section).map { RowItem(section: section, content: .media($0)) } }
                 .eraseToAnyPublisher()
-            
         case .showAndMedias:
             return dataProvider.showAndMedias(for: section.vendor, contentSectionUid: section.uid, pageSize: pageSize)
                 // TODO: add the show object first
@@ -204,7 +207,7 @@ extension PageModel {
                 .eraseToAnyPublisher()
         case .shows:
             return dataProvider.shows(for: section.vendor, contentSectionUid: section.uid, pageSize: pageSize)
-                .map { $0.shows.map { RowItem(section: section, content: .show($0)) } }
+                .map { self.filterItems($0.shows, section: section).map { RowItem(section: section, content: .show($0)) } }
                 .eraseToAnyPublisher()
         case .predefined:
             switch section.presentation.type {
@@ -268,6 +271,20 @@ extension PageModel {
             return medias.filter { $0.mediaType == .audio }
         default:
             return medias
+        }
+    }
+    
+    private func filterItems<T>(_ items: [T], section: SRGContentSection) -> [T] {
+        guard section.presentation.type == .mediaHighlight || section.presentation.type == .mediaHighlight else { return items }
+        
+        if section.presentation.isRandomized, let item = items.randomElement() {
+            return [ item ]
+        }
+        else if !section.presentation.isRandomized, let item = items.first {
+            return [ item ]
+        }
+        else {
+            return []
         }
     }
     
