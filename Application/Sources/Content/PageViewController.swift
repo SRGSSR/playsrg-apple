@@ -149,8 +149,8 @@ class PageViewController: DataViewController {
     
     func reloadData(withRows rows: [PageModel.Row]) {
         // Can be triggered on a background thread. Layout is updated on the main thread.
-        DispatchQueue.global(qos: .userInteractive) {
-            dataSource.apply(Self.snapshot(withRows: rows))
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.dataSource.apply(Self.snapshot(withRows: rows))
         }
     }
     
