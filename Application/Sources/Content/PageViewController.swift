@@ -41,12 +41,12 @@ class PageViewController: DataViewController {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(160), heightDimension: .absolute(90))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(210), heightDimension: .absolute(118))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-            section.interGroupSpacing = 40
+            section.interGroupSpacing = LayoutStandardMargin
             return section
         }
     }
