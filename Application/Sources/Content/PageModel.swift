@@ -372,7 +372,7 @@ extension PageModel {
 
 extension SRGContentSection {
     var isLive: Bool {
-        if case let .livestreams = presentation.type {
+        if case .livestreams = presentation.type {
             return true
         }
         else {
@@ -381,7 +381,7 @@ extension SRGContentSection {
     }
     
     var isFavoriteShows: Bool {
-        if case let .favoriteShows = presentation.type {
+        if case .favoriteShows = presentation.type {
             return true
         }
         else {
