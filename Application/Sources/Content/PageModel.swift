@@ -83,12 +83,16 @@ class PageModel: Identifiable, ObservableObject {
     }
         
     private func loadPage() {
-        SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
-            .map { $0.contentPage }
-            .replaceError(with: nil)
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.page, on: self)
-            .store(in: &refreshCancellables)
+        switch self.id {
+        case .video:
+            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
+                .map { $0.contentPage }
+                .replaceError(with: nil)
+                .receive(on: DispatchQueue.main)
+                .assign(to: \.page, on: self)
+                .store(in: &refreshCancellables)
+        case .audio, .live: break
+        }
     }
     
     private func addRow(with section: SRGContentSection, to rows: inout [Row]) {
