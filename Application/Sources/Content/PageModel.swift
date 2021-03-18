@@ -46,6 +46,29 @@ class PageModel: Identifiable, ObservableObject {
         self.id = id
         self.page = nil
         
+        NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
+            .sink { notification in
+                guard self.pageSections.contains(where: { $0.presentation.type == .favoriteShows }) else { return }
+                guard let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) else { return }
+                self.refresh()
+            }
+            .store(in: &mainCancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
+            .sink { _ in
+                guard self.pageSections.contains(where: { $0.presentation.type == .resumePlayback }) else { return }
+                self.refresh()
+            }
+            .store(in: &mainCancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+            .sink { notification in
+                guard self.pageSections.contains(where: { $0.presentation.type == .watchLater }) else { return }
+                guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
+                self.refresh()
+            }
+            .store(in: &mainCancellables)
+        
         loadPage()
     }
     
@@ -58,35 +81,7 @@ class PageModel: Identifiable, ObservableObject {
     func cancelRefresh() {
         refreshCancellables = []
     }
-    
-    func subscribes() {
-        if self.pageSections.contains(where: { $0.presentation.type == .favoriteShows }) {
-            NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
-                .sink { notification in
-                    guard let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) else { return }
-                    self.refresh()
-                }
-                .store(in: &mainCancellables)
-        }
         
-        if self.pageSections.contains(where: { $0.presentation.type == .resumePlayback }) {
-            NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
-                .sink { _ in
-                    self.refresh()
-                }
-                .store(in: &mainCancellables)
-        }
-        
-        if self.pageSections.contains(where: { $0.presentation.type == .watchLater }) {
-            NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
-                .sink { notification in
-                    guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
-                    self.refresh()
-                }
-                .store(in: &mainCancellables)
-        }
-    }
-    
     private func loadPage() {
         SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
             .map { $0.contentPage }
