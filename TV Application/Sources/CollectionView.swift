@@ -215,11 +215,13 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         
         let rowsHash = rows.hashValue
         if coordinator.rowsHash != rowsHash {
-            dataSource.apply(snapshot(), animatingDifferences: animated) {
-                coordinator.focusable = true
-                collectionView.setNeedsFocusUpdate()
-                collectionView.updateFocusIfNeeded()
-                coordinator.focusable = false
+            DispatchQueue.global(qos: .userInteractive).async {
+                dataSource.apply(snapshot(), animatingDifferences: animated) {
+                    coordinator.focusable = true
+                    collectionView.setNeedsFocusUpdate()
+                    collectionView.updateFocusIfNeeded()
+                    coordinator.focusable = false
+                }
             }
             coordinator.rowsHash = rowsHash
         }

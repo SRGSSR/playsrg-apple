@@ -30,7 +30,7 @@ class SearchResultsModel: ObservableObject {
         }
     }
     
-    @Published private(set) var state = State.loaded(medias: [], suggestions: [])
+    @Published private(set) var state = State.loading
     
     weak var searchController: UISearchController? = nil
     weak var viewController: UIViewController? = nil
