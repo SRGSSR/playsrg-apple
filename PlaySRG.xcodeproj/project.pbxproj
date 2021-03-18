@@ -1435,6 +1435,21 @@
 		6FCE7A3A260359240037A861 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E54256BFCEB009082F8 /* Extensions.swift */; };
 		6FCE7A3B260359240037A861 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E54256BFCEB009082F8 /* Extensions.swift */; };
 		6FCE7A3C260359250037A861 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E54256BFCEB009082F8 /* Extensions.swift */; };
+		6FCE7AC0260367B90037A861 /* HostViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7ABF260367B90037A861 /* HostViews.swift */; };
+		6FCE7AC1260367B90037A861 /* HostViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7ABF260367B90037A861 /* HostViews.swift */; };
+		6FCE7AC2260367B90037A861 /* HostViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7ABF260367B90037A861 /* HostViews.swift */; };
+		6FCE7AC3260367B90037A861 /* HostViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7ABF260367B90037A861 /* HostViews.swift */; };
+		6FCE7AC4260367B90037A861 /* HostViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7ABF260367B90037A861 /* HostViews.swift */; };
+		6FCE7AC5260367B90037A861 /* HostViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7ABF260367B90037A861 /* HostViews.swift */; };
+		6FCE7AC6260367B90037A861 /* HostViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7ABF260367B90037A861 /* HostViews.swift */; };
+		6FCE7AC7260367B90037A861 /* HostViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7ABF260367B90037A861 /* HostViews.swift */; };
+		6FCE7AC8260367B90037A861 /* HostViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7ABF260367B90037A861 /* HostViews.swift */; };
+		6FCE7AC9260367B90037A861 /* HostViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7ABF260367B90037A861 /* HostViews.swift */; };
+		6FCE7B1626036B6A0037A861 /* TemporaryCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7B1526036B6A0037A861 /* TemporaryCells.swift */; };
+		6FCE7B1726036B6A0037A861 /* TemporaryCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7B1526036B6A0037A861 /* TemporaryCells.swift */; };
+		6FCE7B1826036B6A0037A861 /* TemporaryCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7B1526036B6A0037A861 /* TemporaryCells.swift */; };
+		6FCE7B1926036B6A0037A861 /* TemporaryCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7B1526036B6A0037A861 /* TemporaryCells.swift */; };
+		6FCE7B1A26036B6A0037A861 /* TemporaryCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE7B1526036B6A0037A861 /* TemporaryCells.swift */; };
 		6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FD1204A24D19268008CB2F8 /* SRFAssets.xcassets */; };
 		6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FD1205124D1927A008CB2F8 /* RTSAssets.xcassets */; };
 		6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FD1205824D19288008CB2F8 /* RSIAssets.xcassets */; };
@@ -2528,6 +2543,8 @@
 		6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGProgram+PlaySRG.h"; sourceTree = "<group>"; };
 		6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGProgram+PlaySRG.m"; sourceTree = "<group>"; };
 		6FCC73B924E6F8EE00ECF73F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		6FCE7ABF260367B90037A861 /* HostViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViews.swift; sourceTree = "<group>"; };
+		6FCE7B1526036B6A0037A861 /* TemporaryCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryCells.swift; sourceTree = "<group>"; };
 		6FD1204A24D19268008CB2F8 /* SRFAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SRFAssets.xcassets; sourceTree = "<group>"; };
 		6FD1205124D1927A008CB2F8 /* RTSAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RTSAssets.xcassets; sourceTree = "<group>"; };
 		6FD1205824D19288008CB2F8 /* RSIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RSIAssets.xcassets; sourceTree = "<group>"; };
@@ -3683,6 +3700,8 @@
 		6F16C7A126025698006F685A /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				6FCE7ABF260367B90037A861 /* HostViews.swift */,
+				6FCE7B1526036B6A0037A861 /* TemporaryCells.swift */,
 				6F16C80B26025945006F685A /* PageModel.swift */,
 				6F16C7A226025698006F685A /* PageViewController.swift */,
 			);
@@ -7269,6 +7288,7 @@
 				081220C11DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F0506E7245468EE0053253E /* SplitViewController.m in Sources */,
 				6F566E9524EEC40A0024B4CA /* ApplicationSection.m in Sources */,
+				6FCE7AC0260367B90037A861 /* HostViews.swift in Sources */,
 				E6E2DF1A1D6ACA8B00791EDE /* ShowViewController.m in Sources */,
 				6F475FDC1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				6F475FF51EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
@@ -7346,6 +7366,7 @@
 				6F0A7EFF20AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				6F8144142008FA970075F52F /* GoogleCast.m in Sources */,
 				6FE2876D2481687A00358CFF /* SongTableViewCell.m in Sources */,
+				6FCE7B1626036B6A0037A861 /* TemporaryCells.swift in Sources */,
 				6F2AB1B42487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				08C68F8F1D38DEA100BB8AAA /* main.m in Sources */,
 				6FD88F7722D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
@@ -7493,6 +7514,7 @@
 				6F4760841EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
 				E6971AEE1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6FDF08F1218B126700B2AF2C /* UpdateInfo.m in Sources */,
+				6FCE7B1726036B6A0037A861 /* TemporaryCells.swift in Sources */,
 				0875852323A0025F00FA7207 /* ProfileViewController.m in Sources */,
 				6FA5D15E1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				08C691361D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
@@ -7595,6 +7617,7 @@
 				6F4C0A7620DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.m in Sources */,
 				6F4760001EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F566E8F24EEC37F0024B4CA /* TopicSection.m in Sources */,
+				6FCE7AC1260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8422D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F9897CE2412582400B390A2 /* Layout.m in Sources */,
 				0837CEAB1D3FAEE100A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
@@ -7676,6 +7699,7 @@
 				6F47608B1EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
 				E6971AEF1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6FDF08F2218B126700B2AF2C /* UpdateInfo.m in Sources */,
+				6FCE7B1826036B6A0037A861 /* TemporaryCells.swift in Sources */,
 				0875852423A0025F00FA7207 /* ProfileViewController.m in Sources */,
 				6FA5D15F1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				08C691371D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
@@ -7778,6 +7802,7 @@
 				6F4C0A7720DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.m in Sources */,
 				6F4760011EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F566E9024EEC37F0024B4CA /* TopicSection.m in Sources */,
+				6FCE7AC2260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8522D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F9897CF2412582400B390A2 /* Layout.m in Sources */,
 				0837CEAD1D3FAEE200A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
@@ -7859,6 +7884,7 @@
 				6F4760921EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
 				E6971AF01D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6FDF08F3218B126700B2AF2C /* UpdateInfo.m in Sources */,
+				6FCE7B1926036B6A0037A861 /* TemporaryCells.swift in Sources */,
 				0875852523A0025F00FA7207 /* ProfileViewController.m in Sources */,
 				6FA5D1601F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				08C691381D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
@@ -7961,6 +7987,7 @@
 				6F4C0A7820DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.m in Sources */,
 				6F4760021EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F566E9124EEC37F0024B4CA /* TopicSection.m in Sources */,
+				6FCE7AC3260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8622D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F9897D02412582400B390A2 /* Layout.m in Sources */,
 				0837CEAF1D3FAEE200A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
@@ -8042,6 +8069,7 @@
 				6F4760991EB37DF2003021EA /* UIViewController+PlaySRG.m in Sources */,
 				E6971AF11D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6FDF08F4218B126700B2AF2C /* UpdateInfo.m in Sources */,
+				6FCE7B1A26036B6A0037A861 /* TemporaryCells.swift in Sources */,
 				0875852623A0025F00FA7207 /* ProfileViewController.m in Sources */,
 				6FA5D1611F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				08C691391D391A1B00BB8AAA /* HomeMediaListTableViewCell.m in Sources */,
@@ -8144,6 +8172,7 @@
 				6F4C0A7920DCBC9D00069A85 /* HomeShowVerticalListTableViewCell.m in Sources */,
 				6F4760031EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F566E9224EEC37F0024B4CA /* TopicSection.m in Sources */,
+				6FCE7AC4260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8722D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F9897D12412582400B390A2 /* Layout.m in Sources */,
 				0837CEB11D3FAEE300A1E089 /* HomeMediaCollectionViewCell.m in Sources */,
@@ -8302,6 +8331,7 @@
 				6F5E63A5250CB32E00056160 /* Modifiers.swift in Sources */,
 				08ADFB1F25EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B09256472F800F57D38 /* ShowsModel.swift in Sources */,
+				6FCE7AC5260367B90037A861 /* HostViews.swift in Sources */,
 				08F3851125FA783A00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59725024C4800718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE525E640C400F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8392,6 +8422,7 @@
 				6F5E63A6250CB32E00056160 /* Modifiers.swift in Sources */,
 				08ADFB2025EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0A256472F800F57D38 /* ShowsModel.swift in Sources */,
+				6FCE7AC6260367B90037A861 /* HostViews.swift in Sources */,
 				08F3851225FA783B00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59825024C4900718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE625E640C500F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8482,6 +8513,7 @@
 				6F5E63A7250CB32E00056160 /* Modifiers.swift in Sources */,
 				08ADFB2125EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0B256472F800F57D38 /* ShowsModel.swift in Sources */,
+				6FCE7AC7260367B90037A861 /* HostViews.swift in Sources */,
 				08F3851325FA783C00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59925024C4900718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE725E640C500F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8572,6 +8604,7 @@
 				6F5E63A8250CB32E00056160 /* Modifiers.swift in Sources */,
 				08ADFB2225EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0C256472F800F57D38 /* ShowsModel.swift in Sources */,
+				6FCE7AC8260367B90037A861 /* HostViews.swift in Sources */,
 				08F3852A25FA784000E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59A25024C4A00718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE825E640C600F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8662,6 +8695,7 @@
 				6F5E63A9250CB32E00056160 /* Modifiers.swift in Sources */,
 				08ADFB2325EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0D256472F800F57D38 /* ShowsModel.swift in Sources */,
+				6FCE7AC9260367B90037A861 /* HostViews.swift in Sources */,
 				08F3852925FA783E00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59B25024C4B00718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE925E640C600F549E7 /* NSArray+PlaySRG.m in Sources */,

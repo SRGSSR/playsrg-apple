@@ -44,73 +44,6 @@ struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
  */
 struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, SupplementaryView: View>: UIViewRepresentable {
     /**
-     *  `UICollectionView` cell hosting a `SwiftUI` view.
-     */
-    private class HostCell: UICollectionViewCell {
-        private var hostController: UIHostingController<Cell>?
-        
-        private func addHostController(for cell: Cell?) {
-            guard let rootView = cell else { return }
-            hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
-            if let hostView = hostController?.view {
-                hostView.frame = contentView.bounds
-                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                contentView.addSubview(hostView)
-            }
-        }
-        
-        private func removeHostController() {
-            if let hostView = hostController?.view {
-                hostView.removeFromSuperview()
-            }
-            hostController = nil
-        }
-        
-        override func prepareForReuse() {
-            removeHostController()
-        }
-        
-        var hostedCell: Cell? {
-            willSet {
-                removeHostController()
-                addHostController(for: newValue)
-            }
-        }
-    }
-    
-    private class HostSupplementaryView: UICollectionReusableView {
-        private var hostController: UIHostingController<SupplementaryView>?
-        
-        private func addHostController(for supplementaryView: SupplementaryView?) {
-            guard let rootView = supplementaryView else { return }
-            hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
-            if let hostView = hostController?.view {
-                hostView.frame = bounds
-                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                addSubview(hostView)
-            }
-        }
-        
-        private func removeHostController() {
-            if let hostView = hostController?.view {
-                hostView.removeFromSuperview()
-            }
-            hostController = nil
-        }
-        
-        override func prepareForReuse() {
-            removeHostController()
-        }
-        
-        var hostedSupplementaryView: SupplementaryView? {
-            willSet {
-                removeHostController()
-                addHostController(for: newValue)
-            }
-        }
-    }
-    
-    /**
      *  View coordinator.
      */
     class Coordinator: NSObject, UICollectionViewDelegate {
@@ -241,14 +174,14 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout(context: context))
         collectionView.delegate = context.coordinator
-        collectionView.register(HostCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.register(HostCollectionViewCell<Cell>.self, forCellWithReuseIdentifier: cellIdentifier)
         
         let dataSource = Coordinator.DataSource(collectionView: collectionView) { collectionView, indexPath, item in
             let snapshot = context.coordinator.dataSource!.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             
-            let hostCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! HostCell
-            hostCell.hostedCell = cell(indexPath, section, item)
+            let hostCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! HostCollectionViewCell<Cell>
+            hostCell.content = cell(indexPath, section, item)
             return hostCell
         }
         context.coordinator.dataSource = dataSource
@@ -256,7 +189,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             let coordinator = context.coordinator
             if !coordinator.registeredSupplementaryViewKinds.contains(kind) {
-                collectionView.register(HostSupplementaryView.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: supplementaryViewIdentifier)
+                collectionView.register(HostSupplementaryView<SupplementaryView>.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: supplementaryViewIdentifier)
                 coordinator.registeredSupplementaryViewKinds.append(kind)
             }
             
@@ -264,8 +197,8 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             let section = snapshot.sectionIdentifiers[indexPath.section]
             let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
             
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: supplementaryViewIdentifier, for: indexPath) as! HostSupplementaryView
-            view.hostedSupplementaryView = supplementaryView(kind, indexPath, section, item)
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: supplementaryViewIdentifier, for: indexPath) as! HostSupplementaryView<SupplementaryView>
+            view.content = supplementaryView(kind, indexPath, section, item)
             return view
         }
         
