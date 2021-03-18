@@ -4,11 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
 import SRGDataProviderModel
 import UIKit
 
 class PageViewController: DataViewController {
-    let model: PageModel
+    private let model: PageModel
+    private var cancellables = Set<AnyCancellable>()
     
     @objc static func videosViewController() -> UIViewController {
         return PageViewController(id: .video)
@@ -72,8 +74,21 @@ class PageViewController: DataViewController {
         self.view = view
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        model.$rows.sink { rows in
+            self.reloadData(withRows: rows)
+        }
+        .store(in: &cancellables)
+    }
+    
     override func refresh() {
         model.refresh()
+    }
+    
+    func reloadData(withRows rows: [PageModel.Row]) {
+        print("--> Change triggered a reload")
     }
     
     @objc func pullToRefresh(_ sender: RefreshControl) {
