@@ -136,10 +136,12 @@ class PageViewController: DataViewController {
             }
         }
         
-        model.$rows.sink { rows in
-            self.reloadData(withRows: rows)
-        }
-        .store(in: &cancellables)
+        model.$rows
+            .receive(on: DispatchQueue.global(qos: .userInteractive))
+            .sink { rows in
+                self.reloadData(withRows: rows)
+            }
+            .store(in: &cancellables)
     }
     
     override func refresh() {
