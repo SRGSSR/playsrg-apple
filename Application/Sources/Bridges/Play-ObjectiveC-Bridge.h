@@ -18,6 +18,7 @@
 #import "Onboarding.h"
 #import "PlayAppDelegate.h"
 #import "PushService.h"
+#import "RefreshControl.h"
 #import "SongsViewController.h"
 #import "SRGLetterboxController+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
