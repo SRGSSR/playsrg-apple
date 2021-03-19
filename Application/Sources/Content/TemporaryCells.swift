@@ -24,11 +24,3 @@ struct ShowCell2: View {
         Text(show?.title ?? "<show>")
     }
 }
-
-struct TopicCell2: View {
-    let topic: SRGTopic?
-    
-    var body: some View {
-        Text(topic?.title ?? "<topic>")
-    }
-}

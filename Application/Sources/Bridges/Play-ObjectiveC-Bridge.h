@@ -24,5 +24,6 @@
 #import "SRGLetterboxController+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
+#import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"

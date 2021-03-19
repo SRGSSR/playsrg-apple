@@ -7,7 +7,7 @@
 import UIKit
 import SwiftUI
 
-// FIXME: Should be moved to SRG Appearance, see issues
+// FIXME: Should be adjusted for iOS and moved to SRG Appearance, see issues
 //          https://github.com/SRGSSR/srgappearance-apple/issues/3
 //          https://github.com/SRGSSR/srgappearance-apple/issues/4
 

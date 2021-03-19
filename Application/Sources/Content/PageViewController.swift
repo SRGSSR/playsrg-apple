@@ -109,7 +109,7 @@ class PageViewController: DataViewController {
         collectionView.register(HostCollectionViewCell<ShowCell2>.self, forCellWithReuseIdentifier: showCellIdentifier)
         
         let topicCellIdentifier = "TopicCell"
-        collectionView.register(HostCollectionViewCell<TopicCell2>.self, forCellWithReuseIdentifier: topicCellIdentifier)
+        collectionView.register(HostCollectionViewCell<TopicCell>.self, forCellWithReuseIdentifier: topicCellIdentifier)
         
         // TODO: Factor out cell dequeue code per type
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -131,12 +131,12 @@ class PageViewController: DataViewController {
                 showCell?.content = ShowCell2(show: nil)
                 return showCell
             case let .topic(topic):
-                let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell2>
-                topicCell?.content = TopicCell2(topic: topic)
+                let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell>
+                topicCell?.content = TopicCell(topic: topic)
                 return topicCell
             case .topicPlaceholder:
-                let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell2>
-                topicCell?.content = TopicCell2(topic: nil)
+                let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell>
+                topicCell?.content = TopicCell(topic: nil)
                 return topicCell
             }
         }
