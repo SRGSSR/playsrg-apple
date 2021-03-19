@@ -10,28 +10,23 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var model: PageModel
     
-    private static func swimlaneLayoutSection(for section: SRGContentSection) -> NSCollectionLayoutSection {
-        func layoutGroupSize(for section: SRGContentSection) -> NSCollectionLayoutSize {
-            switch section.presentation.type {
-            case .hero, .mediaHighlight, .showHighlight:
+    private static func swimlaneLayoutSection(for section: PageModel.RowSection) -> NSCollectionLayoutSection {
+        func layoutGroupSize(for section: PageModel.RowSection) -> NSCollectionLayoutSize {
+            switch section.layout {
+            case .featured:
                 return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
             case .topicSelector:
                 let width = CGFloat(250)
                 return NSCollectionLayoutSize(widthDimension: .absolute(width), heightDimension: .absolute(width * 9 / 16))
-            case .favoriteShows:
+            case .shows:
                 return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(260))
-            default:
-                if section.type == .shows {
-                    return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(260))
-                }
-                else {
-                    return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(360))
-                }
+            case .medias:
+                return NSCollectionLayoutSize(widthDimension: .absolute(375), heightDimension: .absolute(360))
             }
         }
         
-        func contentInsets(for section: SRGContentSection) -> NSDirectionalEdgeInsets {
-            switch section.presentation.type {
+        func contentInsets(for section: PageModel.RowSection) -> NSDirectionalEdgeInsets {
+            switch section.layout {
             case .topicSelector:
                 return NSDirectionalEdgeInsets(top: 80, leading: 0, bottom: 80, trailing: 0)
             default:
@@ -39,8 +34,8 @@ struct HomeView: View {
             }
         }
         
-        func continuousGroupLeadingBoundary(for section: SRGContentSection) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
-            if section.presentation.type == .hero {
+        func continuousGroupLeadingBoundary(for section: PageModel.RowSection) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
+            if section.layout == .featured {
                 return .continuous
             }
             else {
@@ -48,7 +43,7 @@ struct HomeView: View {
             }
         }
         
-        func header(for section: SRGContentSection) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+        func header(for section: PageModel.RowSection) -> [NSCollectionLayoutBoundarySupplementaryItem] {
             guard let headerHeight = swimlaneSectionHeaderHeight(for: section) else { return [] }
             let header = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight)),
@@ -72,9 +67,9 @@ struct HomeView: View {
         return layoutSection
     }
     
-    private static func swimlaneSectionHeaderHeight(for section: SRGContentSection) -> CGFloat? {
-        guard section.presentation.title != nil else { return nil }
-        if let summary = section.presentation.summary, !summary.isEmpty {
+    private static func swimlaneSectionHeaderHeight(for section: PageModel.RowSection) -> CGFloat? {
+        guard section.title != nil else { return nil }
+        if let summary = section.summary, !summary.isEmpty {
             return 140
         }
         else {
@@ -100,7 +95,7 @@ struct HomeView: View {
         let item: PageModel.RowItem
         
         private static func isHeroAppearance(for item: PageModel.RowItem) -> Bool {
-            return [.hero, .mediaHighlight, .showHighlight].contains(item.section.presentation.type)
+            return item.section.layout == .featured
         }
         
         var body: some View {
@@ -142,16 +137,16 @@ struct HomeView: View {
     }
     
     private struct HeaderView: View {
-        let section: SRGContentSection
+        let section: PageModel.RowSection
         
         var body: some View {
             VStack(alignment: .leading) {
-                if let title = section.presentation.title {
+                if let title = section.title {
                     Text(title)
                         .srgFont(.title2)
                         .lineLimit(1)
                 }
-                if let summary = section.presentation.summary {
+                if let summary = section.summary {
                     Text(summary)
                         .srgFont(.subtitle)
                         .lineLimit(1)
