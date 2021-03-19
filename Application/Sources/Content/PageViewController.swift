@@ -142,6 +142,7 @@ class PageViewController: DataViewController {
         }
         
         model.$rows
+            .debounce(for: 0.5, scheduler: RunLoop.main)
             .sink { rows in
                 self.reloadData(withRows: rows)
             }
