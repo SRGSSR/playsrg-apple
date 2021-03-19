@@ -480,9 +480,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     // Ensure correct notification button availability after:
     //   - Dismissal of the initial system alert (displayed once at most), asking the user to enable push notifications.
     //   - Returning from system settings, where the user might have updated push notification authorizations.
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateProfileTabBarItem];
-    });
+    [self updateProfileTabBarItem];
 }
 
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
