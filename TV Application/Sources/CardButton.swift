@@ -24,6 +24,7 @@ fileprivate struct CardButton<Content: View>: View {
             }) {
                 content()
                     .frame(width: geometry.size.width, height: geometry.size.height)
+                    .accessibility(addTraits: .isButton)
             }
             .buttonStyle(CardButtonStyle())
         }
@@ -32,7 +33,8 @@ fileprivate struct CardButton<Content: View>: View {
 
 extension View {
     /**
-     *  Wrap into a card button with associated optional action.
+     *  Wrap into a card button with associated optional action. If the receiver is accessible, a button trait is
+     *  automatically added.
      */
     func cardButton(action: (() -> Void)? = nil) -> some View {
         return CardButton(action: action) {

@@ -36,6 +36,5 @@ struct TopicCell: View {
         .redacted(reason: redactionReason)
         .accessibilityElement()
         .accessibilityLabel(topic?.title ?? "")
-        .accessibility(addTraits: .isButton)
     }
 }
