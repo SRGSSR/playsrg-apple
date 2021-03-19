@@ -27,7 +27,7 @@ struct LabeledButton: View {
                 Image(icon)
                     .frame(width: 68)
                     .foregroundColor(isFocused ? .darkGray : .white)
-                    .onFocusChange { isFocused = $0 }
+                    .onParentFocusChange { isFocused = $0 }
                     .accessibilityElement()
                     .accessibilityLabel(accessibilityLabel)
                     .accessibility(addTraits: .isButton)

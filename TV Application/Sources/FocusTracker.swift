@@ -24,7 +24,7 @@ fileprivate struct FocusTracker<Content: View>: View {
 }
 
 extension View {
-    func onFocusChange(perform action: @escaping (Bool) -> Void) -> some View {
+    func onParentFocusChange(perform action: @escaping (Bool) -> Void) -> some View {
         FocusTracker(action: action) {
             self
         }

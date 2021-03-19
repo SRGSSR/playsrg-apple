@@ -159,7 +159,7 @@ struct MediaDetailView: View {
                                 .srgFont(.body)
                                 .frame(width: geometry.size.width, alignment: .leading)
                                 .padding([.top, .bottom], 5)
-                                .onFocusChange { isFocused = $0 }
+                                .onParentFocusChange { isFocused = $0 }
                         })
                         .buttonStyle(TextButtonStyle(focused: isFocused))
                     }

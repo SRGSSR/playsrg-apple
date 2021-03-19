@@ -140,12 +140,8 @@ struct HomeView: View {
                 ShowCell(show: nil)
             case let .topic(topic):
                 TopicCell(topic: topic)
-                    .cardButton {
-                        navigateToTopic(topic)
-                    }
             case .topicPlaceholder:
                 TopicCell(topic: nil)
-                    .cardButton()
             }
         }
     }

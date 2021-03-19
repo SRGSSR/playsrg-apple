@@ -37,7 +37,7 @@ struct MediaCell: View {
                     ZStack {
                         MediaVisualView(media: media, scale: .small, contentMode: .fit)
                             .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                            .onFocusChange { focused in
+                            .onParentFocusChange { focused in
                                 isFocused = focused
                                 
                                 if let onFocusAction = self.onFocusAction {

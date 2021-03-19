@@ -106,7 +106,7 @@ class PageViewController: DataViewController {
         collectionView.register(HostCollectionViewCell<MediaCell2>.self, forCellWithReuseIdentifier: mediaCellIdentifier)
         
         let showCellIdentifier = "ShowCell"
-        collectionView.register(HostCollectionViewCell<ShowCell2>.self, forCellWithReuseIdentifier: showCellIdentifier)
+        collectionView.register(HostCollectionViewCell<ShowCell>.self, forCellWithReuseIdentifier: showCellIdentifier)
         
         let topicCellIdentifier = "TopicCell"
         collectionView.register(HostCollectionViewCell<TopicCell>.self, forCellWithReuseIdentifier: topicCellIdentifier)
@@ -123,12 +123,12 @@ class PageViewController: DataViewController {
                 mediaCell?.content = MediaCell2(media: nil)
                 return mediaCell
             case let .show(show):
-                let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell2>
-                showCell?.content = ShowCell2(show: show)
+                let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell>
+                showCell?.content = ShowCell(show: show)
                 return showCell
             case .showPlaceholder:
-                let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell2>
-                showCell?.content = ShowCell2(show: nil)
+                let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell>
+                showCell?.content = ShowCell(show: nil)
                 return showCell
             case let .topic(topic):
                 let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell>

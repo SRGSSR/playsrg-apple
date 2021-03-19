@@ -69,7 +69,7 @@ struct LiveMediaCell: View, LiveMediaData {
                 }) {
                     VisualView(media: media, programComposition: programComposition, date: date)
                         .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                        .onFocusChange { isFocused = $0 }
+                        .onParentFocusChange { isFocused = $0 }
                         .accessibilityElement()
                         .accessibilityLabel(accessibilityLabel)
                         .accessibility(addTraits: .isButton)

@@ -16,11 +16,3 @@ struct MediaCell2: View {
         Text(media?.title ?? "<media>")
     }
 }
-
-struct ShowCell2: View {
-    let show: SRGShow?
-    
-    var body: some View {
-        Text(show?.title ?? "<show>")
-    }
-}
