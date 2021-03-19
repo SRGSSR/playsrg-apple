@@ -182,7 +182,29 @@ extension PageModel {
     
     struct RowSection: Hashable {
         var title: String? {
-            return contentSection.presentation.title
+            if contentSection.type == .predefined {
+                switch contentSection.presentation.type {
+                case .favoriteShows:
+                    return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
+//                case .tvFavoriteLatestEpisodes:
+//                    return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
+                case .livestreams:
+                    return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
+                case .resumePlayback:
+                    return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
+                case .watchLater:
+                    return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
+                case .events, .topicSelector, .personalizedProgram:
+                    return nil
+                case .none, .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
+                    return nil
+                @unknown default:
+                    return nil
+                }
+            }
+            else {
+                return contentSection.presentation.title
+            }
         }
         
         var summary: String? {
