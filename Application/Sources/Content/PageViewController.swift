@@ -161,6 +161,7 @@ class PageViewController: DataViewController {
                 if self.refreshControl.isRefreshing {
                     self.refreshControl.endRefreshing()
                 }
+                self.collectionView.flashScrollIndicators()
             }
         }
     }
