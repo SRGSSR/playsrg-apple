@@ -142,7 +142,6 @@ class PageViewController: DataViewController {
         }
         
         model.$rows
-            .debounce(for: 0.5, scheduler: RunLoop.main)
             .sink { rows in
                 self.reloadData(withRows: rows)
             }
@@ -162,7 +161,6 @@ class PageViewController: DataViewController {
                 if self.refreshControl.isRefreshing {
                     self.refreshControl.endRefreshing()
                 }
-                self.collectionView.flashScrollIndicators()
             }
         }
     }
