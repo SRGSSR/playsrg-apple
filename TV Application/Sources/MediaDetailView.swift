@@ -54,36 +54,35 @@ struct MediaDetailView: View {
         @Namespace private var namespace
         
         var body: some View {
-            FocusableRegion {
-                GeometryReader { geometry in
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text(model.media.title)
-                            .srgFont(.title1)
-                            .lineLimit(3)
+            GeometryReader { geometry in
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(model.media.title)
+                        .srgFont(.title1)
+                        .lineLimit(3)
+                        .foregroundColor(.white)
+                    if let showTitle = model.media.show?.title, showTitle.lowercased() != model.media.title.lowercased() {
+                        Text(showTitle)
+                            .srgFont(.headline1)
                             .foregroundColor(.white)
-                        if let showTitle = model.media.show?.title, showTitle.lowercased() != model.media.title.lowercased() {
-                            Text(showTitle)
-                                .srgFont(.headline1)
-                                .foregroundColor(.white)
-                        }
+                    }
+                    Spacer()
+                        .frame(height: 20)
+                    VStack(alignment: .leading, spacing: 0) {
+                        AttributesView(model: model)
                         Spacer()
                             .frame(height: 20)
-                        VStack(alignment: .leading, spacing: 0) {
-                            AttributesView(model: model)
-                            Spacer()
-                                .frame(height: 20)
-                            SummaryView(model: model)
-                            Spacer()
-                            ActionsView(model: model)
-                                .layoutPriority(1)
-                                .prefersDefaultFocus(in: namespace)
-                                .frame(height: 160, alignment: .top)
-                        }
-                        .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .leading)
+                        SummaryView(model: model)
+                        Spacer()
+                        ActionsView(model: model)
+                            .layoutPriority(1)
+                            .prefersDefaultFocus(in: namespace)
+                            .frame(height: 160, alignment: .top)
                     }
-                    .focusScope(namespace)
+                    .frame(maxWidth: geometry.size.width / 2, maxHeight: .infinity, alignment: .leading)
                 }
+                .focusScope(namespace)
             }
+            .focusable()
         }
     }
     

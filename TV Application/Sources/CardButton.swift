@@ -31,6 +31,9 @@ fileprivate struct CardButton<Content: View>: View {
 }
 
 extension View {
+    /**
+     *  Wrap into a card button with associated optional action.
+     */
     func cardButton(action: (() -> Void)? = nil) -> some View {
         return CardButton(action: action) {
             self

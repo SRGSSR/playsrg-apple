@@ -212,12 +212,11 @@ struct ShowDetailView: View {
         let show: SRGShow
         
         var body: some View {
-            FocusableRegion {
-                VStack {
-                    VisualView(show: show)
-                    Spacer()
-                }
+            VStack {
+                VisualView(show: show)
+                Spacer()
             }
+            .focusable()
         }
     }
 }

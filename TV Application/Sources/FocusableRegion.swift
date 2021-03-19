@@ -6,10 +6,7 @@
 
 import SwiftUI
 
-/**
- *  A region which can capture the focus, no matter the focus comes from.
- */
-struct FocusableRegion<Content: View>: UIViewControllerRepresentable {
+fileprivate struct FocusableRegion<Content: View>: UIViewControllerRepresentable {
     private let content: () -> Content
     
     init(@ViewBuilder content: @escaping () -> Content) {
@@ -37,5 +34,16 @@ struct FocusableRegion<Content: View>: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIHostingController<Content>, context: Context) {
         uiViewController.rootView = content()
+    }
+}
+
+extension View {
+    /**
+     *  Ensure the whole view area can catch focus, redirecting it onto itself.
+     */
+    func focusable() -> some View {
+        return FocusableRegion {
+            self
+        }
     }
 }
