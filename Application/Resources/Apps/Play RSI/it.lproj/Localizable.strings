@@ -14,10 +14,10 @@
 "%@ has been added to favorites" = "%@ è stato aggiunto alla lista dei preferiti";
 
 /* Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been deleted from \"Later\"" = "%@ è stato tolto da \"Dopo\"";
+"%@ has been deleted from \"Later\"" = "%@ è stato eliminato da \"Dopo\"";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
-"%@ has been deleted from favorites" = "%@ è stato tolto dai Preferiti";
+"%@ has been deleted from favorites" = "%@ è stato eliminato dai Preferiti";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ è inattivo.";
@@ -64,7 +64,7 @@
    Confirmation message displayed when the user is about to delete all favorites
    Confirmation message displayed when the user is about to delete the later list
    Confirmation message displayed when the user is about to delete the whole history */
-"All items will be deleted." = "Tutti gli elementi saranno cancellati.";
+"All items will be deleted." = "Tutti gli elementi saranno eliminati.";
 
 /* Title label used to present already available videos, usually badged as web first */
 "Already available" = "Già disponibile";
@@ -109,7 +109,7 @@
 "Content" = "Contenuto";
 
 /* Message displayed when the user is about to delete content saved for later */
-"Content saved for later will be deleted on all devices connected to your account." = "Il contenuto da consultare più tardi sarà rimosso da tutti gli apparecchi collegati al suo conto.";
+"Content saved for later will be deleted on all devices connected to your account." = "Il contenuto da consultare dopo sarà eliminato da tutti gli apparecchi collegati al suo profilo.";
 
 /* Sort by date option */
 "Date" = "Data";
@@ -124,20 +124,20 @@
 "Delete content saved for later" = "Eliminare il contenuto salvato per essere consultato più tardi";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete a download */
-"Delete download" = "Rimuovere il download";
+"Delete download" = "Eliminare il download";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete download items */
-"Delete downloads" = "Rimuovere i download";
+"Delete downloads" = "Eliminare il download";
 
 /* Delete favorites button title
    Title of the confirmation pop-up displayed when the user is about to delete favorite items
    Title of the message displayed when the user is about to delete all favorites */
-"Delete favorites" = "Rimuovere i preferiti";
+"Delete favorites" = "Eliminare i preferiti";
 
 /* Button label to delete a media from the later list, from the media long-press menu
    Button label to delete a media from the later list, from the media preview window
    Context menu action to delete a media from the later list */
-"Delete from \"Later\"" = "Rimuovere da \"Dopo\"";
+"Delete from \"Later\"" = "Eliminare da \"Dopo\"";
 
 /* Button label to delete a download from the media long-press menu
    Button label to delete a download from the media preview window
@@ -199,7 +199,7 @@
 "Favorites" = "Preferiti";
 
 /* Message displayed when the user is about to delete all favorites */
-"Favorites and notification subscriptions will be deleted on all devices connected to your account." = "Preferiti e notifiche saranno eliminati da tutti gli apparecchi connessi al suo account.";
+"Favorites and notification subscriptions will be deleted on all devices connected to your account." = "Preferiti e notifiche saranno eliminati da tutti gli apparecchi connessi al suo profilo";
 
 /* Title displayed at the top of the features list */
 "Features" = "Funzionalità";
@@ -598,7 +598,7 @@
    Confirmation message displayed when the user is about to delete selected entries from favorites
    Confirmation message displayed when the user is about to delete selected entries from the later list
    Confirmation message displayed when the user is about to delete selected history entries */
-"The selected items will be deleted." = "The selected items will be deleted.";
+"The selected items will be deleted." = "L’elemento selezionato verrà eliminato";
 
 /* Error message when a show cannot be opened via Handoff
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
