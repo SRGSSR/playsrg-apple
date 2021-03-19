@@ -13,7 +13,7 @@ struct HomeView: View {
     private static func swimlaneLayoutSection(for section: SRGContentSection) -> NSCollectionLayoutSection {
         func layoutGroupSize(for section: SRGContentSection) -> NSCollectionLayoutSize {
             switch section.presentation.type {
-            case .hero:
+            case .hero, .mediaHighlight, .showHighlight:
                 return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
             case .topicSelector:
                 let width = CGFloat(250)
@@ -100,7 +100,7 @@ struct HomeView: View {
         let item: PageModel.RowItem
         
         private static func isHeroAppearance(for item: PageModel.RowItem) -> Bool {
-            return item.section.presentation.type == .hero
+            return [.hero, .mediaHighlight, .showHighlight].contains(item.section.presentation.type)
         }
         
         var body: some View {
