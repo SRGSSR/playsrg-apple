@@ -50,6 +50,7 @@ struct ShowCell: View {
             ImageView(url: imageUrl)
                 .accessibilityElement()
                 .accessibilityLabel(show?.title ?? "")
+                .accessibility(addTraits: .isButton)
         }
     }
     

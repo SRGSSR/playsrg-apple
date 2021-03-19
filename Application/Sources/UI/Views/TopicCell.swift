@@ -11,12 +11,16 @@ struct TopicCell: View {
     
     var body: some View {
         #if os(tvOS)
-        MainView(topic: topic)
-            .cardButton {
+        GeometryReader { geometry in
+            CardButton(action: {
                 if let topic = topic {
                     navigateToTopic(topic)
                 }
+            }) {
+                MainView(topic: topic)
+                    .frame(width: geometry.size.width, height: geometry.size.height)
             }
+        }
         #else
         MainView(topic: topic)
         #endif

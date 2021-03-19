@@ -28,45 +28,46 @@ struct MediaCell: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack {
-                Button(action: action ?? {
-                    if let media = media {
-                        navigateToMedia(media)
-                    }
-                }) {
-                    ZStack {
-                        MediaVisualView(media: media, scale: .small, contentMode: .fit)
-                            .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                            .onParentFocusChange { focused in
-                                isFocused = focused
-                                
-                                if let onFocusAction = self.onFocusAction {
-                                    onFocusAction(focused)
-                                }
-                            }
-                            .accessibilityElement()
-                            .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
-                            .accessibility(addTraits: .isButton)
+            #if os(tvOS)
+            LabeledCardButton(action: action ?? {
+                if let media = media {
+                    navigateToMedia(media)
+                }
+            }) {
+                ZStack {
+                    MediaVisualView(media: media, scale: .small, contentMode: .fit)
+                        .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                        .onParentFocusChange { focused in
+                            isFocused = focused
                             
-                        if let media = media {
-                            AvailabilityBadge(media: media)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                                .accessibility(hidden: true)
+                            if let onFocusAction = self.onFocusAction {
+                                onFocusAction(focused)
+                            }
                         }
+                        .accessibilityElement()
+                        .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
+                        .accessibility(addTraits: .isButton)
+                        
+                    if let media = media {
+                        AvailabilityBadge(media: media)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                            .accessibility(hidden: true)
                     }
                 }
-                .buttonStyle(CardButtonStyle())
-                
+            } label: {
                 DescriptionView(media: media, style: style)
                     .frame(width: geometry.size.width, alignment: .leading)
-                    .animation(nil)
-                    .opacity(isFocused ? 1 : 0.5)
-                    .offset(x: 0, y: isFocused ? 10 : 0)
-                    .scaleEffect(isFocused ? 1.1 : 1, anchor: .top)
-                    .animation(.easeInOut(duration: 0.2))
             }
-            .redacted(reason: redactionReason)
+            #else
+            VStack {
+                MediaVisualView(media: media, scale: .small, contentMode: .fit)
+                    .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                DescriptionView(media: media, style: style)
+                    .frame(width: geometry.size.width, alignment: .leading)
+            }
+            #endif
         }
+        .redacted(reason: redactionReason)
     }
     
     private struct DescriptionView: View {

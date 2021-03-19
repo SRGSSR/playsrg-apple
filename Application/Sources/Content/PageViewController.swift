@@ -103,7 +103,7 @@ class PageViewController: DataViewController {
         super.viewDidLoad()
         
         let mediaCellIdentifier = "MediaCell"
-        collectionView.register(HostCollectionViewCell<MediaCell2>.self, forCellWithReuseIdentifier: mediaCellIdentifier)
+        collectionView.register(HostCollectionViewCell<MediaCell>.self, forCellWithReuseIdentifier: mediaCellIdentifier)
         
         let showCellIdentifier = "ShowCell"
         collectionView.register(HostCollectionViewCell<ShowCell>.self, forCellWithReuseIdentifier: showCellIdentifier)
@@ -115,12 +115,12 @@ class PageViewController: DataViewController {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
             switch item.content {
             case let .media(media):
-                let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell2>
-                mediaCell?.content = MediaCell2(media: media)
+                let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
+                mediaCell?.content = MediaCell(media: media)
                 return mediaCell
             case .mediaPlaceholder:
-                let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell2>
-                mediaCell?.content = MediaCell2(media: nil)
+                let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
+                mediaCell?.content = MediaCell(media: nil)
                 return mediaCell
             case let .show(show):
                 let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell>

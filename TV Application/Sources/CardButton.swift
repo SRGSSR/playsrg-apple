@@ -7,8 +7,9 @@
 import SwiftUI
 
 /**
- *  A wrapper view for adding a card appearance to any view. Automatically adds the
- *  button accessibility trait to its content.
+ *  A wrapper view for adding a card appearance to any view.
+ *
+ *  @discussion Behaves like a button from content sizing. Use a parent geometry reader if needed.
  */
 struct CardButton<Content: View>: View {
     private let action: (() -> Void)?
@@ -21,23 +22,19 @@ struct CardButton<Content: View>: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            Button(action: {
-                if let action = action {
-                    action()
-                }
-            }) {
-                content()
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .accessibility(addTraits: .isButton)
-                    .onParentFocusChange { focused in
-                        if let onFocusAction = self.onFocusChangeAction {
-                            onFocusAction(focused)
-                        }
-                    }
+        Button(action: {
+            if let action = action {
+                action()
             }
-            .buttonStyle(CardButtonStyle())
+        }) {
+            content()
+                .onParentFocusChange { focused in
+                    if let onFocusAction = self.onFocusChangeAction {
+                        onFocusAction(focused)
+                    }
+                }
         }
+        .buttonStyle(CardButtonStyle())
     }
 }
 
@@ -52,20 +49,11 @@ extension CardButton {
     }
 }
 
-extension View {
-    /**
-     *  Wrap the receiver into a card button with associated optional action.
-     */
-    func cardButton(action: (() -> Void)? = nil) -> CardButton<Self> {
-        return CardButton(action: action) {
-            self
-        }
-    }
-}
-
 /**
- *  A wrapper view creating for adding a card appearance to any view, layout out a
+ *  A wrapper view creating for adding a card appearance to any view, with a
  *  label underneath which automatically scales when the card is focused.
+ *
+ *  @discussion Behaves like a button from content sizing. Use a parent geometry reader if needed.
  */
 struct LabeledCardButton<Content: View, Label: View>: View {
     private let action: (() -> Void)?

@@ -13,6 +13,12 @@ extension Comparable {
     }
 }
 
+extension String {
+    var capitalizedFirstLetter: String {
+        return prefix(1).capitalized + dropFirst()
+    }
+}
+
 // See https://stackoverflow.com/questions/61552497/uitableviewheaderfooterview-with-swiftui-content-getting-automatic-safe-area-ins
 extension UIHostingController {
     convenience public init(rootView: Content, ignoreSafeArea: Bool) {
