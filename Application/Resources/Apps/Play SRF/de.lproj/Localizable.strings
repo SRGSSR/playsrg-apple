@@ -121,7 +121,7 @@
 /* Title of the button to delete content saved for later
    Title of the confirmation pop-up displayed when the user is about to delete content from the later list
    Title of the message displayed when the user is about to delete content saved for later */
-"Delete content saved for later" = "Für später gespeicherte Inhalte werden löschen";
+"Delete content saved for later" = "Für später gespeicherte Inhalte löschen";
 
 /* Title of the confirmation pop-up displayed when the user is about to delete a download */
 "Delete download" = "Download löschen";
