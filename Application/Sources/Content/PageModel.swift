@@ -22,9 +22,9 @@ class PageModel: Identifiable, ObservableObject {
         }
     }
     
-    typealias Section = SRGContentSection
+    typealias Section = RowSection
     typealias Item = RowItem
-    typealias Row = CollectionRow<SRGContentSection, RowItem>
+    typealias Row = CollectionRow<Section, Item>
     
     private var pageSections: [SRGContentSection] {
         return self.page?.sections ?? []
@@ -95,74 +95,68 @@ class PageModel: Identifiable, ObservableObject {
         }
     }
     
-    private func addRow(with section: SRGContentSection, to rows: inout [Row]) {
-        if let existingRow = loadedRows.first(where: { $0.section == section }), !existingRow.items.isEmpty {
+    private func addRow(with contentSection: SRGContentSection, to rows: inout [Row]) {
+        if let existingRow = loadedRows.first(where: { $0.section.contentSection == contentSection }), !existingRow.items.isEmpty {
             rows.append(existingRow)
         }
         else {
-            rows.append(Row(section: section, items: placeholderItems(for: section)))
+            rows.append(Row(section: Section(contentSection: contentSection), items: placeholderItems(for: contentSection)))
         }
     }
     
-    private func addRows(with ids: [SRGContentSection], to rows: inout [Row]) {
-        for id in ids {
-            addRow(with: id, to: &rows)
+    private func addRows(with contentSections: [SRGContentSection], to rows: inout [Row]) {
+        for contentSection in contentSections {
+            addRow(with: contentSection, to: &rows)
         }
     }
     
     private func synchronizeRows() {
         var updatedRows = [Row]()
-        for section in pageSections {
-            addRow(with: section, to: &updatedRows)
+        for contentSection in pageSections {
+            addRow(with: contentSection, to: &updatedRows)
         }
         loadedRows = updatedRows
     }
     
-    private func updateRow(with section: SRGContentSection, items: [RowItem]) {
-        guard let index = loadedRows.firstIndex(where: { $0.section == section }) else { return }
-        loadedRows[index] = Row(section: section, items: items)
+    private func updateRow(with contentSection: SRGContentSection, items: [Item]) {
+        guard let index = loadedRows.firstIndex(where: { $0.section.contentSection == contentSection }) else { return }
+        loadedRows[index] = Row(section: Section(contentSection: contentSection), items: items)
     }
     
     private func loadRows(with ids: [SRGContentSection]? = nil) {
         let reloadedContentSections = ids ?? pageSections
-        for section in reloadedContentSections {
-            sectionPublisher(section)?
+        for contentSection in reloadedContentSections {
+            sectionPublisher(contentSection)?
                 .replaceError(with: [])
                 .receive(on: DispatchQueue.main)
                 .sink { items in
-                    self.updateRow(with: section, items: items)
+                    self.updateRow(with: contentSection, items: items)
                 }
                 .store(in: &refreshCancellables)
         }
     }
     
-    private func placeholderItems(for section: SRGContentSection) -> [RowItem] {
-        guard section.isSupported else {return [] }
+    private func placeholderItems(for contentSection: SRGContentSection) -> [Item] {
+        guard contentSection.isSupported else {return [] }
         
         let defaultNumberOfPlaceholders = 10
+        let section = Section(contentSection: contentSection)
         
-        switch section.presentation.type {
+        switch contentSection.presentation.type {
         case .mediaHighlight:
-            return [ RowItem(section: section, content: .mediaPlaceholder(index: 0)) ]
+            return [ Item(section: section, content: .mediaPlaceholder(index: 0)) ]
         case .showHighlight:
-            return [ RowItem(section: section, content: .showPlaceholder(index: 0)) ]
+            return [ Item(section: section, content: .showPlaceholder(index: 0)) ]
         case .topicSelector:
-            return (0..<defaultNumberOfPlaceholders).map { RowItem(section: section, content: .topicPlaceholder(index: $0)) }
+            return (0..<defaultNumberOfPlaceholders).map { Item(section: section, content: .topicPlaceholder(index: $0)) }
         case .favoriteShows, .resumePlayback, .watchLater:
             return []
             // TODO: Show section
 //            case .radioAllShows:
-//                return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
+//                return (0..<Self.numberOfPlaceholders).map { Item(rowId: self, content: .showPlaceholder(index: $0)) }
         default:
-            return (0..<defaultNumberOfPlaceholders).map { RowItem(section: section, content: .mediaPlaceholder(index: $0)) }
+            return (0..<defaultNumberOfPlaceholders).map { Item(section: section, content: .mediaPlaceholder(index: $0)) }
         }
-    }
-}
-
-extension PageModel {
-    enum RowAppearance: Equatable {
-        case `default`
-        case hero
     }
 }
 
@@ -182,38 +176,96 @@ extension PageModel {
         
         // Some items might appear in several rows but need to be uniquely defined. We thus add the section to each item
         // to ensure unicity.
-        let section: SRGContentSection
+        let section: RowSection
         let content: Content
+    }
+    
+    struct RowSection: Hashable {
+        var title: String? {
+            return contentSection.presentation.title
+        }
+        
+        var summary: String? {
+            return contentSection.presentation.summary
+        }
+        
+        var isLive: Bool {
+            if case .livestreams = contentSection.presentation.type {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        
+        var isFavoriteShows: Bool {
+            if case .favoriteShows = contentSection.presentation.type {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        
+        // Various kinds of layouts which can be displayed on the home.
+        enum Layout: Hashable {
+            case featured
+            case topicSelector
+            case shows
+            case medias
+        }
+        
+        var layout: Layout {
+            switch contentSection.presentation.type {
+            case .hero, .mediaHighlight, .showHighlight:
+                return .featured
+            case .topicSelector:
+                return .topicSelector
+            case .favoriteShows:
+                return .shows
+            default:
+                if contentSection.type == .shows {
+                    return .shows
+                }
+                else {
+                    return .medias
+                }
+            }
+        }
+        
+        fileprivate let contentSection: SRGContentSection
     }
 }
 
 extension PageModel {
-    func sectionPublisher(_ section: SRGContentSection) -> AnyPublisher<[RowItem], Error>? {
+    func sectionPublisher(_ contentSection: SRGContentSection) -> AnyPublisher<[Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
         let vendor = configuration.vendor
         let pageSize = configuration.pageSize
         
-        switch section.type {
+        let section = Section(contentSection: contentSection)
+        
+        switch contentSection.type {
         case .medias:
-            return dataProvider.medias(for: section.vendor, contentSectionUid: section.uid, pageSize: pageSize)
-                .map { self.filterItems($0.medias, section: section).map { RowItem(section: section, content: .media($0)) } }
+            return dataProvider.medias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize)
+                .map { self.filterItems($0.medias, section: contentSection).map { Item(section: section, content: .media($0)) } }
                 .eraseToAnyPublisher()
         case .showAndMedias:
-            return dataProvider.showAndMedias(for: section.vendor, contentSectionUid: section.uid, pageSize: pageSize)
+            return dataProvider.showAndMedias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize)
                 // TODO: add the show object first
-                .map { $0.showAndMedias.medias.map { RowItem(section: section, content: .media($0)) } }
+                .map { $0.showAndMedias.medias.map { Item(section: section, content: .media($0)) } }
                 .eraseToAnyPublisher()
         case .shows:
-            return dataProvider.shows(for: section.vendor, contentSectionUid: section.uid, pageSize: pageSize)
-                .map { self.filterItems($0.shows, section: section).map { RowItem(section: section, content: .show($0)) } }
+            return dataProvider.shows(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize)
+                .map { self.filterItems($0.shows, section: contentSection).map { Item(section: section, content: .show($0)) } }
                 .eraseToAnyPublisher()
         case .predefined:
-            switch section.presentation.type {
+            switch contentSection.presentation.type {
             case .favoriteShows:
                 return showsPublisher(withUrns: Array(FavoritesShowURNs()))
-                    .map { self.compatibleShows($0, inSection: section).map { RowItem(section: section, content: .show($0)) } }
+                    .map { self.compatibleShows($0, inSection: contentSection).map { Item(section: section, content: .show($0)) } }
                     .eraseToAnyPublisher()
 //            case .tvFavoriteLatestEpisodes:
 //                return showsPublisher(withUrns: Array(FavoritesShowURNs()))
@@ -221,23 +273,23 @@ extension PageModel {
 //                    .flatMap { urns in
 //                        return latestMediasForShowsPublisher(withUrns: urns)
 //                    }
-//                    .map { $0.map { RowItem(rowId: self, content: .media($0)) } }
+//                    .map { $0.map { Item(rowId: self, content: .media($0)) } }
 //                    .eraseToAnyPublisher()
             case .livestreams:
                 return dataProvider.tvLivestreams(for: vendor)
-                    .map { $0.medias.map { RowItem(section: section, content: .media($0)) } }
+                    .map { $0.medias.map { Item(section: section, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case .topicSelector:
                 return dataProvider.tvTopics(for: vendor)
-                    .map { $0.topics.map { RowItem(section: section, content: .topic($0)) } }
+                    .map { $0.topics.map { Item(section: section, content: .topic($0)) } }
                     .eraseToAnyPublisher()
             case .resumePlayback:
                 return historyPublisher()
-                    .map { self.compatibleMedias($0).prefix(Int(pageSize)).map { RowItem(section: section, content: .media($0)) } }
+                    .map { self.compatibleMedias($0).prefix(Int(pageSize)).map { Item(section: section, content: .media($0)) } }
                     .eraseToAnyPublisher()
             case .watchLater:
                 return laterPublisher()
-                    .map { self.compatibleMedias($0).prefix(Int(pageSize)).map { RowItem(section: section, content: .media($0)) } }
+                    .map { self.compatibleMedias($0).prefix(Int(pageSize)).map { Item(section: section, content: .media($0)) } }
                     .eraseToAnyPublisher()
             default:
                 return nil
@@ -390,24 +442,6 @@ extension PageModel {
 }
 
 extension SRGContentSection {
-    var isLive: Bool {
-        if case .livestreams = presentation.type {
-            return true
-        }
-        else {
-            return false
-        }
-    }
-    
-    var isFavoriteShows: Bool {
-        if case .favoriteShows = presentation.type {
-            return true
-        }
-        else {
-            return false
-        }
-    }
-    
     var isSupported: Bool {
         switch presentation.type {
         case .none, .events, .personalizedProgram:
