@@ -157,13 +157,16 @@ class PageModel: Identifiable, ObservableObject {
             return [ Item(section: section, content: .showPlaceholder(index: 0)) ]
         case .topicSelector:
             return (0..<defaultNumberOfPlaceholders).map { Item(section: section, content: .topicPlaceholder(index: $0)) }
-        case .favoriteShows, .resumePlayback, .watchLater:
-            return []
-            // TODO: Show section
-//            case .radioAllShows:
-//                return (0..<Self.numberOfPlaceholders).map { Item(rowId: self, content: .showPlaceholder(index: $0)) }
-        default:
+        case .swimlane, .hero, .grid, .livestreams:
             return (0..<defaultNumberOfPlaceholders).map { Item(section: section, content: .mediaPlaceholder(index: $0)) }
+        case .favoriteShows, .resumePlayback, .watchLater:
+            // Could be empty
+            return []
+        case .none, .events, .showAccess, .personalizedProgram:
+            // Not supported
+            return []
+        @unknown default:
+            return []
         }
     }
 }
@@ -180,6 +183,10 @@ extension PageModel {
             
             case topicPlaceholder(index: Int)
             case topic(_ topic: SRGTopic)
+            
+            #if os(iOS)
+            case showAccess
+            #endif
         }
         
         // Some items might appear in several rows but need to be uniquely defined. We thus add the section to each item
@@ -202,9 +209,12 @@ extension PageModel {
                     return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
                 case .watchLater:
                     return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
-                case .events, .topicSelector, .personalizedProgram:
+                case .showAccess:
+                    return NSLocalizedString("Shows", comment: "Title label used to present the TV or radio shows AZ and TV shows by date access buttons")
+                case .none, .topicSelector, .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
                     return nil
-                case .none, .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
+                case .events, .personalizedProgram:
+                    // Not supported
                     return nil
                 @unknown default:
                     return nil
@@ -241,6 +251,9 @@ extension PageModel {
         enum Layout: Hashable {
             case featured
             case topicSelector
+            #if os(iOS)
+            case showAccess
+            #endif
             case shows
             case medias
         }
@@ -251,15 +264,31 @@ extension PageModel {
                 return .featured
             case .topicSelector:
                 return .topicSelector
+            case .showAccess:
+                #if os(iOS)
+                return .showAccess
+                #else
+                // Not supported
+                return .medias
+                #endif
             case .favoriteShows:
                 return .shows
-            default:
+            case .swimlane, .grid:
                 if contentSection.type == .shows {
                     return .shows
                 }
                 else {
                     return .medias
                 }
+            case .livestreams, .resumePlayback, .watchLater:
+                return .medias
+            case .none:
+                return .medias
+            case .events, .personalizedProgram:
+                // Not supported
+                return .medias
+            @unknown default:
+                return .medias
             }
         }
         
@@ -321,10 +350,24 @@ extension PageModel {
                 return laterPublisher()
                     .map { self.compatibleMedias($0).prefix(Int(pageSize)).map { Item(section: section, content: .media($0)) } }
                     .eraseToAnyPublisher()
-            default:
+            case .showAccess:
+                #if os(iOS)
+                return CurrentValueSubject([ Item(section: section, content: .showAccess) ])
+                    .eraseToAnyPublisher()
+                #else
+                return nil
+                #endif
+            case .none, .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
+                return nil
+            case .events, .personalizedProgram:
+                // Not supported
+                return nil
+            @unknown default:
                 return nil
             }
-        default:
+        case .none:
+            return nil
+        @unknown default:
             return nil
         }
     }
@@ -474,12 +517,19 @@ extension PageModel {
 extension SRGContentSection {
     var isSupported: Bool {
         switch presentation.type {
-        case .none, .events, .personalizedProgram:
-            return false
         case .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
             return true
         case .favoriteShows, .livestreams, .topicSelector, .resumePlayback, .watchLater:
             return true
+        case .showAccess:
+            #if os(iOS)
+            return true
+            #else
+            return false
+            #endif
+        case .none, .events, .personalizedProgram:
+            // Not supported
+            return false
         @unknown default:
             return false
         }

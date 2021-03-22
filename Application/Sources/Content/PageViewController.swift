@@ -138,6 +138,11 @@ class PageViewController: DataViewController {
                 let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell>
                 topicCell?.content = TopicCell(topic: nil)
                 return topicCell
+            case .showAccess:
+                // TODO: ShowAccess cell
+                let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell>
+                topicCell?.content = TopicCell(topic: nil)
+                return topicCell
             }
         }
         
