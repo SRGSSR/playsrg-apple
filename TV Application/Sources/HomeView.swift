@@ -172,6 +172,8 @@ extension HomeView {
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
         case .live:
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+        case let .topic(topic):
+            return [AnalyticsPageLevel.play.rawValue, topic.transmission == .radio ? AnalyticsPageLevel.video.rawValue : AnalyticsPageLevel.video.rawValue, topic.title]
         }
     }
 }

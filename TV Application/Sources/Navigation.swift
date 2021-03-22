@@ -67,7 +67,7 @@ func navigateToShow(_ show: SRGShow, animated: Bool = true) {
 func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {
     guard !isPresenting else { return }
     
-    let hostController = UIHostingController(rootView: TopicDetailView(topic: topic))
+    let hostController = UIHostingController(rootView: TopicView(topic))
     present(hostController, animated: animated)
 }
 
