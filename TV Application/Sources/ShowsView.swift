@@ -153,7 +153,6 @@ extension ShowsView {
 }
 
 struct ShowsView_Previews: PreviewProvider {
-    
     static var showPreview: SRGShow {
         let asset = NSDataAsset(name: "show-srf-tv")!
         let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]

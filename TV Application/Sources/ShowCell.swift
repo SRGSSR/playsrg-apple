@@ -9,8 +9,16 @@ import SwiftUI
 struct ShowCell: View {
     let show: SRGShow?
     
+    private var imageUrl: URL? {
+        return show?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
+    }
+    
     private var redactionReason: RedactionReasons {
         return show == nil ? .placeholder : .init()
+    }
+    
+    private var accessibilityLabel: String {
+        return show?.title ?? ""
     }
     
     var body: some View {
@@ -21,37 +29,27 @@ struct ShowCell: View {
                     navigateToShow(show)
                 }
             }) {
-                VisualView(show: show)
+                ImageView(url: imageUrl)
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
+                    .accessibilityElement()
+                    .accessibilityLabel(accessibilityLabel)
+                    .accessibility(addTraits: .isButton)
             } label: {
                 DescriptionView(show: show)
                     .frame(width: geometry.size.width, alignment: .leading)
             }
             #else
             VStack {
-                VisualView(show: show)
+                ImageView(url: imageUrl)
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
                 DescriptionView(show: show)
                     .frame(width: geometry.size.width, alignment: .leading)
             }
+            .accessibilityElement()
+            .accessibilityLabel(accessibilityLabel)
             #endif
         }
         .redacted(reason: redactionReason)
-    }
-    
-    private struct VisualView: View {
-        let show: SRGShow?
-        
-        private var imageUrl: URL? {
-            return show?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
-        }
-        
-        var body: some View {
-            ImageView(url: imageUrl)
-                .accessibilityElement()
-                .accessibilityLabel(show?.title ?? "")
-                .accessibility(addTraits: .isButton)
-        }
     }
     
     private struct DescriptionView: View {

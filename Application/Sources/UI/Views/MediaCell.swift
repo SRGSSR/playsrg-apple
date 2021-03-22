@@ -65,6 +65,8 @@ struct MediaCell: View {
                 DescriptionView(media: media, style: style)
                     .frame(width: geometry.size.width, alignment: .leading)
             }
+            .accessibilityElement()
+            .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
             #endif
         }
         .redacted(reason: redactionReason)
@@ -97,7 +99,6 @@ extension MediaCell {
 }
 
 struct MediaCell_Previews: PreviewProvider {
-    
     static var mediaPreview: SRGMedia {
         let asset = NSDataAsset(name: "media-rts-tv")!
         let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]

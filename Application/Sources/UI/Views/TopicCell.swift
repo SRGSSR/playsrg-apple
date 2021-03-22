@@ -9,6 +9,10 @@ import SwiftUI
 struct TopicCell: View {
     let topic: SRGTopic?
     
+    private var accessibilityLabel: String {
+        return topic?.title ?? ""
+    }
+    
     var body: some View {
         #if os(tvOS)
         GeometryReader { geometry in
@@ -19,10 +23,15 @@ struct TopicCell: View {
             }) {
                 MainView(topic: topic)
                     .frame(width: geometry.size.width, height: geometry.size.height)
+                    .accessibilityElement()
+                    .accessibilityLabel(accessibilityLabel)
+                    .accessibility(addTraits: .isButton)
             }
         }
         #else
         MainView(topic: topic)
+            .accessibilityElement()
+            .accessibilityLabel(accessibilityLabel)
         #endif
     }
     
@@ -54,8 +63,6 @@ struct TopicCell: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             }
             .redacted(reason: redactionReason)
-            .accessibilityElement()
-            .accessibilityLabel(topic?.title ?? "")
         }
     }
 }
