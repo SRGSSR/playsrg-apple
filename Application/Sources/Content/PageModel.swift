@@ -12,6 +12,7 @@ class PageModel: Identifiable, ObservableObject {
         case video
         case audio(channel: RadioChannel)
         case live
+        case topic(topic: SRGTopic)
     }
     
     let id: Id
@@ -86,6 +87,13 @@ class PageModel: Identifiable, ObservableObject {
         switch self.id {
         case .video:
             SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
+                .map { $0.contentPage }
+                .replaceError(with: nil)
+                .receive(on: DispatchQueue.main)
+                .assign(to: \.page, on: self)
+                .store(in: &refreshCancellables)
+        case let .topic(topic: topic):
+            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
                 .map { $0.contentPage }
                 .replaceError(with: nil)
                 .receive(on: DispatchQueue.main)
