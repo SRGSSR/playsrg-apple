@@ -417,7 +417,7 @@
 "Playable abroad" = "Disponibile all'estero";
 
 /* Message displayed when the user is about to log out */
-"Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Cronologia, preferiti e elementi salvati per dopo saranno rimossi da questa Apple TV.";
+"Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Cronologia, preferiti e elementi salvati per dopo saranno eliminati da questa Apple TV.";
 
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Precedente";
