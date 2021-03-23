@@ -165,8 +165,6 @@ class PageModel: Identifiable, ObservableObject {
         case .none, .events, .showAccess, .personalizedProgram:
             // Not supported
             return []
-        @unknown default:
-            return []
         }
     }
 }
@@ -215,8 +213,6 @@ extension PageModel {
                     return nil
                 case .events, .personalizedProgram:
                     // Not supported
-                    return nil
-                @unknown default:
                     return nil
                 }
             }
@@ -286,8 +282,6 @@ extension PageModel {
                 return .medias
             case .events, .personalizedProgram:
                 // Not supported
-                return .medias
-            @unknown default:
                 return .medias
             }
         }
@@ -362,12 +356,8 @@ extension PageModel {
             case .events, .personalizedProgram:
                 // Not supported
                 return nil
-            @unknown default:
-                return nil
             }
         case .none:
-            return nil
-        @unknown default:
             return nil
         }
     }
@@ -529,8 +519,6 @@ extension SRGContentSection {
             #endif
         case .none, .events, .personalizedProgram:
             // Not supported
-            return false
-        @unknown default:
             return false
         }
     }
