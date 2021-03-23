@@ -407,32 +407,24 @@ extension PageModel {
         let dataProvider = SRGDataProvider.current!
         let pagePublisher = CurrentValueSubject<SRGDataProvider.Shows.Page?, Never>(nil)
         
-        // TODO: Fix for iOS 13
-        if #available(iOS 14.0, *) {
-            return pagePublisher
-                .flatMap { page in
-                    return page != nil ? dataProvider.shows(at: page!) : dataProvider.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
+        return pagePublisher
+            .flatMap { page in
+                return page != nil ? dataProvider.shows(at: page!) : dataProvider.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            }
+            .handleEvents(receiveOutput: { result in
+                if let nextPage = result.nextPage {
+                    pagePublisher.value = nextPage
                 }
-                .handleEvents(receiveOutput: { result in
-                    if let nextPage = result.nextPage {
-                        pagePublisher.value = nextPage
-                    }
-                    else {
-                        pagePublisher.send(completion: .finished)
-                    }
-                })
-                .reduce([SRGShow]()) { collectedShows, result in
-                    return collectedShows + result.shows
+                else {
+                    pagePublisher.send(completion: .finished)
                 }
-                .eraseToAnyPublisher()
-        }
-        else {
-            return dataProvider.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
-                .map { $0.shows }
-                .eraseToAnyPublisher()
-        }
+            })
+            .reduce([SRGShow]()) { collectedShows, result in
+                return collectedShows + result.shows
+            }
+            .eraseToAnyPublisher()
     }
-        
+    
     private func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
         // TODO: The compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
 //        /* Load latest 15 medias for each 3 shows, get last 30 episodes */
