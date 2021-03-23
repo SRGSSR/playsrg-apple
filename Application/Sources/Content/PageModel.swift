@@ -426,21 +426,18 @@ extension PageModel {
     }
     
     private func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
-        // TODO: The compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
-//        /* Load latest 15 medias for each 3 shows, get last 30 episodes */
-//        return urns.publisher
-//            .collect(3)
-//            .flatMap { urns in
-//                return SRGDataProvider.current!.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
-//            }
-//            .reduce([SRGMedia]()) { collectedMedias, result in
-//                return collectedMedias + result.medias
-//            }
-//            .map { medias in
-//                return Array(medias.sorted(by: { $0.date > $1.date }).prefix(30))
-//            }
-//            .eraseToAnyPublisher()
-        return Empty()
+        /* Load latest 15 medias for each 3 shows, get last 30 episodes */
+        return urns.publisher
+            .collect(3)
+            .flatMap { urns in
+                return SRGDataProvider.current!.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
+            }
+            .reduce([SRGMedia]()) { collectedMedias, result in
+                return collectedMedias + result.medias
+            }
+            .map { medias in
+                return Array(medias.sorted(by: { $0.date > $1.date }).prefix(30))
+            }
             .eraseToAnyPublisher()
     }
     
