@@ -159,10 +159,10 @@ class PageModel: Identifiable, ObservableObject {
             return (0..<defaultNumberOfPlaceholders).map { Item(section: section, content: .topicPlaceholder(index: $0)) }
         case .swimlane, .hero, .grid, .livestreams:
             return (0..<defaultNumberOfPlaceholders).map { Item(section: section, content: .mediaPlaceholder(index: $0)) }
-        case .favoriteShows, .resumePlayback, .watchLater:
+        case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram:
             // Could be empty
             return []
-        case .none, .events, .showAccess, .personalizedProgram:
+        case .none, .events, .showAccess:
             // Not supported
             return []
         }
@@ -199,8 +199,8 @@ extension PageModel {
                 switch contentSection.presentation.type {
                 case .favoriteShows:
                     return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
-//                case .tvFavoriteLatestEpisodes:
-//                    return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
+                case .personalizedProgram:
+                    return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
                 case .livestreams:
                     return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
                 case .resumePlayback:
@@ -211,7 +211,7 @@ extension PageModel {
                     return NSLocalizedString("Shows", comment: "Title label used to present the TV or radio shows AZ and TV shows by date access buttons")
                 case .none, .topicSelector, .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
                     return nil
-                case .events, .personalizedProgram:
+                case .events:
                     // Not supported
                     return nil
                 }
@@ -276,11 +276,9 @@ extension PageModel {
                 else {
                     return .medias
                 }
-            case .livestreams, .resumePlayback, .watchLater:
+            case .livestreams, .resumePlayback, .watchLater, .personalizedProgram:
                 return .medias
-            case .none:
-                return .medias
-            case .events, .personalizedProgram:
+            case .none, .events:
                 // Not supported
                 return .medias
             }
@@ -320,14 +318,14 @@ extension PageModel {
                 return showsPublisher(withUrns: Array(FavoritesShowURNs()))
                     .map { self.compatibleShows($0, inSection: contentSection).map { Item(section: section, content: .show($0)) } }
                     .eraseToAnyPublisher()
-//            case .tvFavoriteLatestEpisodes:
-//                return showsPublisher(withUrns: Array(FavoritesShowURNs()))
-//                    .map { compatibleShows($0).map { $0.urn } }
-//                    .flatMap { urns in
-//                        return latestMediasForShowsPublisher(withUrns: urns)
-//                    }
-//                    .map { $0.map { Item(rowId: self, content: .media($0)) } }
-//                    .eraseToAnyPublisher()
+            case .personalizedProgram:
+                return showsPublisher(withUrns: Array(FavoritesShowURNs()))
+                    .map { self.compatibleShows($0, inSection: contentSection).map { $0.urn } }
+                    .flatMap { urns in
+                        return self.latestMediasForShowsPublisher(withUrns: urns)
+                    }
+                    .map { $0.map { Item(section: section, content: .media($0)) } }
+                    .eraseToAnyPublisher()
             case .livestreams:
                 return dataProvider.tvLivestreams(for: vendor)
                     .map { $0.medias.map { Item(section: section, content: .media($0)) } }
@@ -353,7 +351,7 @@ extension PageModel {
                 #endif
             case .none, .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
                 return nil
-            case .events, .personalizedProgram:
+            case .events:
                 // Not supported
                 return nil
             }
@@ -498,7 +496,7 @@ extension SRGContentSection {
         switch presentation.type {
         case .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
             return true
-        case .favoriteShows, .livestreams, .topicSelector, .resumePlayback, .watchLater:
+        case .favoriteShows, .livestreams, .topicSelector, .resumePlayback, .watchLater, .personalizedProgram:
             return true
         case .showAccess:
             #if os(iOS)
@@ -506,7 +504,7 @@ extension SRGContentSection {
             #else
             return false
             #endif
-        case .none, .events, .personalizedProgram:
+        case .none, .events:
             // Not supported
             return false
         }
