@@ -11,5 +11,6 @@
   "1.1.0-10": "- Swiss Satellite radio channels have logos.\n- The content comes from the TVPLAY vector.",
   "1.1.0-11": "- Add latest favorite episodes swimlane.",
   "1.1.0-12": "- Update latest favorite episodes swimlane title.\n- Crashes are reported to AppCenter without the need for user consent.",
-  "1.2.0-13": "- Add Profile tab for user data management.\n- Add Later and Resume playback swimlanes to the homepage.\n- Add continuous playback with opt-out setting.\n- Synchronize Favorites, Later and Resume playback over a maRTS account (Play RTS only).\n- Fix frequent crashes occurring when opening a show detail page."
+  "1.2.0-13": "- Add Profile tab for user data management.\n- Add Later and Resume playback swimlanes to the homepage.\n- Add continuous playback with opt-out setting.\n- Synchronize Favorites, Later and Resume playback over a maRTS account (Play RTS only).\n- Fix frequent crashes occurring when opening a show detail page.",
+  "1.2.0-14": "- Navigation improvements when switching tabs.\n- Updated translations for all BUs.\n- Fixed management for related medias to watch later."
 }

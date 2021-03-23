@@ -134,5 +134,6 @@
   "3.1.8-355": "- Remove event module image.\n- Avoid empty A-Z shows index being displayed on appearance",
   "3.1.8-356": "- Swiss Satellite radio channels have logos.",
   "3.1.8-357": "- Playback can be controlled using an external keyboard.\n- Crashes are always reported to AppCenter without the need for user consent.",
-  "3.1.9-358": "- Allow removal of expired medias from the Later list.\n- Open website urls in the default browser application."
+  "3.1.9-358": "- Allow removal of expired medias from the Later list.\n- Open website urls in the default browser application.",
+  "3.1.9-359": "- Fix deadlock at application start\n- Updated translations for all BUs."
 }
