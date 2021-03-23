@@ -388,7 +388,7 @@ extension PageModel {
     }
     
     private func filterItems<T>(_ items: [T], section: SRGContentSection) -> [T] {
-        guard section.presentation.type == .mediaHighlight || section.presentation.type == .mediaHighlight else { return items }
+        guard section.presentation.type == .mediaHighlight || section.presentation.type == .showHighlight else { return items }
         
         if section.presentation.isRandomized, let item = items.randomElement() {
             return [ item ]
