@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
         "state": {
           "branch": null,
-          "revision": "484dead179e6d7edd534d0d7defdf65c14a5b426",
-          "version": "4.1.0"
+          "revision": "013bffe628b49433d7bc334146a4ed8c507c0e32",
+          "version": "4.1.1"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "6caa3bbb0fa73782ac80fe198c06ba0c8ba08269",
-          "version": "7.8.0"
+          "revision": "e118a7fb4319eaa37fd03c3b4216c93811d9c413",
+          "version": "7.8.1"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "e451106148d7842b1ef1ecfce98d07dd4cfa5f8b",
-          "version": "7.8.0"
+          "revision": "9db2a8536e804dced3ccf8c1b4d05051f014f941",
+          "version": "7.8.1"
         }
       },
       {
