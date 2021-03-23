@@ -162,8 +162,7 @@ class PageModel: Identifiable, ObservableObject {
         case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram:
             // Could be empty
             return []
-        case .none, .events, .showAccess:
-            // Not supported
+        case .none, .showAccess:
             return []
         }
     }
@@ -210,9 +209,6 @@ extension PageModel {
                 case .showAccess:
                     return NSLocalizedString("Shows", comment: "Title label used to present the TV or radio shows AZ and TV shows by date access buttons")
                 case .none, .topicSelector, .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
-                    return nil
-                case .events:
-                    // Not supported
                     return nil
                 }
             }
@@ -278,7 +274,7 @@ extension PageModel {
                 }
             case .livestreams, .resumePlayback, .watchLater, .personalizedProgram:
                 return .medias
-            case .none, .events:
+            case .none:
                 // Not supported
                 return .medias
             }
@@ -350,9 +346,6 @@ extension PageModel {
                 return nil
                 #endif
             case .none, .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
-                return nil
-            case .events:
-                // Not supported
                 return nil
             }
         case .none:
@@ -504,8 +497,7 @@ extension SRGContentSection {
             #else
             return false
             #endif
-        case .none, .events:
-            // Not supported
+        case .none:
             return false
         }
     }
