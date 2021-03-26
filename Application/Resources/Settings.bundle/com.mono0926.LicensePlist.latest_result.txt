@@ -310,7 +310,7 @@ name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version
 
 name: promises, nameSpecified: Promises, owner: google, version: 1.2.12
 
-name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.0.1
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.0.2
 
 name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 3.0.2
 
@@ -320,9 +320,9 @@ name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, vers
 
 name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.0.1
 
-name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 
+name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.0.4
 
-name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 7.0.0
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.1
 

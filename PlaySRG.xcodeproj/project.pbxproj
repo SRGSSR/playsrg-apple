@@ -13425,8 +13425,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
 			requirement = {
-				branch = develop;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.4;
 			};
 		};
 		6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */ = {
@@ -13450,7 +13450,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.1;
+				minimumVersion = 7.0.2;
 			};
 		};
 		6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -13465,8 +13465,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = develop;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {

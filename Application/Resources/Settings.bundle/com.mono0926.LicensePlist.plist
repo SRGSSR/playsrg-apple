@@ -278,7 +278,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
 			<key>Title</key>
-			<string>SRGAnalytics (7.0.1)</string>
+			<string>SRGAnalytics (7.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -318,7 +318,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-apple</string>
 			<key>Title</key>
-			<string>SRGIdentity</string>
+			<string>SRGIdentity (3.0.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -326,7 +326,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>SRGLetterbox</string>
+			<string>SRGLetterbox (7.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
