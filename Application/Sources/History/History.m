@@ -56,7 +56,9 @@ SRGPosition *HistoryResumePlaybackPositionForMedia(SRGMedia *media)
         return nil;
     }
     
-    return [SRGPosition positionBeforeTime:historyEntry.lastPlaybackTime];
+    // TODO: Fix stream issues (see https://github.com/SRGSSR/srgletterbox-apple/issues/245) then restore `positionBeforeTime:`
+    //       which was the initially desired behavior.
+    return [SRGPosition positionAtTime:historyEntry.lastPlaybackTime];
 }
 
 BOOL HistoryCanResumePlaybackForMedia(SRGMedia *media)
