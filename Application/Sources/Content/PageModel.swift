@@ -301,8 +301,11 @@ extension PageModel {
                 .eraseToAnyPublisher()
         case .showAndMedias:
             return dataProvider.showAndMedias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize)
-                // TODO: add the show object first
-                .map { $0.showAndMedias.medias.map { Item(section: section, content: .media($0)) } }
+                .map { var items = [Item]()
+                    if let show = $0.showAndMedias.show { items.append(Item(section: section, content: .show(show))) }
+                    items.append(contentsOf: $0.showAndMedias.medias.map { Item(section: section, content: .media($0)) })
+                    return items
+                }
                 .eraseToAnyPublisher()
         case .shows:
             return dataProvider.shows(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize)
