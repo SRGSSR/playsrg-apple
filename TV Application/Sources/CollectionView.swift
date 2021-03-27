@@ -49,23 +49,31 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     private class HostCell: UICollectionViewCell {
         private var hostController: UIHostingController<Cell>?
         
-        override func prepareForReuse() {
+        private func addHostController(for cell: Cell?) {
+            guard let rootView = cell else { return }
+            hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
+            if let hostView = hostController?.view {
+                hostView.frame = contentView.bounds
+                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                contentView.addSubview(hostView)
+            }
+        }
+        
+        private func removeHostController() {
             if let hostView = hostController?.view {
                 hostView.removeFromSuperview()
             }
             hostController = nil
         }
         
+        override func prepareForReuse() {
+            removeHostController()
+        }
+        
         var hostedCell: Cell? {
             willSet {
-                // Creating a `UIHostingController` is cheap.
-                guard let view = newValue else { return }
-                hostController = UIHostingController(rootView: view, ignoreSafeArea: true)
-                if let hostView = hostController?.view {
-                    hostView.frame = contentView.bounds
-                    hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                    contentView.addSubview(hostView)
-                }
+                removeHostController()
+                addHostController(for: newValue)
             }
         }
     }
@@ -73,23 +81,31 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     private class HostSupplementaryView: UICollectionReusableView {
         private var hostController: UIHostingController<SupplementaryView>?
         
-        override func prepareForReuse() {
+        private func addHostController(for supplementaryView: SupplementaryView?) {
+            guard let rootView = supplementaryView else { return }
+            hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
+            if let hostView = hostController?.view {
+                hostView.frame = bounds
+                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                addSubview(hostView)
+            }
+        }
+        
+        private func removeHostController() {
             if let hostView = hostController?.view {
                 hostView.removeFromSuperview()
             }
             hostController = nil
         }
         
+        override func prepareForReuse() {
+            removeHostController()
+        }
+        
         var hostedSupplementaryView: SupplementaryView? {
             willSet {
-                // Creating a `UIHostingController` is cheap.
-                guard let view = newValue else { return }
-                hostController = UIHostingController(rootView: view, ignoreSafeArea: true)
-                if let hostView = hostController?.view {
-                    hostView.frame = self.bounds
-                    hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                    addSubview(hostView)
-                }
+                removeHostController()
+                addHostController(for: newValue)
             }
         }
     }
@@ -113,7 +129,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         fileprivate var registeredSupplementaryViewKinds: [String] = []
         
         /// Whether cells are currently focusable.
-        fileprivate var focusable: Bool = false
+        fileprivate var focusable = false
         
         public func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
             return focusable
@@ -199,11 +215,13 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         
         let rowsHash = rows.hashValue
         if coordinator.rowsHash != rowsHash {
-            dataSource.apply(snapshot(), animatingDifferences: animated) {
-                coordinator.focusable = true
-                collectionView.setNeedsFocusUpdate()
-                collectionView.updateFocusIfNeeded()
-                coordinator.focusable = false
+            DispatchQueue.global(qos: .userInteractive).async {
+                dataSource.apply(snapshot(), animatingDifferences: animated) {
+                    coordinator.focusable = true
+                    collectionView.setNeedsFocusUpdate()
+                    collectionView.updateFocusIfNeeded()
+                    coordinator.focusable = false
+                }
             }
             coordinator.rowsHash = rowsHash
         }

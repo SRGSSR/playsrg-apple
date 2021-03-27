@@ -2,3 +2,5 @@
 #include "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SWI TV/Pods-Play SRG-tvOS-Play SWI TV.debug.xcconfig"
 #include "Xcode/Play tvOS Application.xcconfig"
 #include "Xcode/Play SWI.xcconfig"
+
+PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.$(APP_PLAYER_IDENTIFIER)$(BUNDLE_IDENTIFIER_SUFFIX)

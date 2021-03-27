@@ -41,20 +41,17 @@ void FavoritesAddShowURNWithDate(NSString *URN, NSDate *date)
     }
 }
 
-#if TARGET_OS_IOS
 BOOL FavoritesIsSubscribedToShowURN(NSString * _Nonnull URN)
 {
     if (! FavoritesContainsShowURN(URN)) {
         return NO;
     }
     
-    if (! PushService.sharedService.enabled) {
-        return NO;
-    }
-    
     NSString *path = [[[PlayFavoritesPath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
     return [SRGUserData.currentUserData.preferences numberAtPath:path inDomain:PlayPreferencesDomain].boolValue;
 }
+
+#if TARGET_OS_IOS
 
 // Force subscription, even if Push Notifications are disabled.
 void FavoritesSubscribeToShowURN(NSString *URN)
@@ -101,6 +98,7 @@ void FavoritesSetup(void)
         }
     }];
 }
+
 #endif
 
 #pragma mark Favorite entries
@@ -149,8 +147,9 @@ NSSet<NSString *> *FavoritesShowURNs(void)
     return URNs ? [NSSet setWithArray:URNs] : [NSSet set];
 }
 
-#if TARGET_OS_IOS
 #pragma mark Notification subscriptions
+
+#if TARGET_OS_IOS
 
 BOOL FavoritesToggleSubscriptionForShow(SRGShow *show, UIView *view)
 {
@@ -177,10 +176,14 @@ BOOL FavoritesToggleSubscriptionForShow(SRGShow *show, UIView *view)
     return YES;
 }
 
+#endif
+
 BOOL FavoritesIsSubscribedToShow(SRGShow *show)
 {
     return FavoritesIsSubscribedToShowURN(show.URN);
 }
+
+#if TARGET_OS_IOS
 
 #pragma mark Migration
 
@@ -209,4 +212,5 @@ void FavoritesMigrate(void)
         completionHandler(YES);
     }, SubscriptionsToFavoritesMigrationDoneKey, nil);
 }
+
 #endif

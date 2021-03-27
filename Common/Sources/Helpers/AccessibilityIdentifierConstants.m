@@ -9,6 +9,7 @@
 AccessibilityIdentifier const AccessibilityIdentifierVideosTabBarItem = @"videosTabBarItem";
 AccessibilityIdentifier const AccessibilityIdentifierAudiosTabBarItem =  @"audiosTabBarItem";
 AccessibilityIdentifier const AccessibilityIdentifierLivestreamsTabBarItem = @"livestreamsTabBarItem";
+AccessibilityIdentifier const AccessibilityIdentifierShowsTabBarItem = @"showsTabBarItem";
 AccessibilityIdentifier const AccessibilityIdentifierSearchTabBarItem = @"searchTabBarItem";
 AccessibilityIdentifier const AccessibilityIdentifierProfileTabBarItem = @"profileTabBarItem";
 

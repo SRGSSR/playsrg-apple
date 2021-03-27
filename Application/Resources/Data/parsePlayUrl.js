@@ -666,7 +666,7 @@ function openModule(server, bu, moduleType, moduleId) {
     return buildBuUri(bu,"module",topicUrn,options);
 }
 
-function openTvHomePage(server,bu){
+function openTvHomePage(server, bu){
     var options = {};
     if (server) {
         options['server'] = server;
@@ -674,7 +674,7 @@ function openTvHomePage(server,bu){
     return buildBuUri(bu,"home",null,options);
 }
 
-function openRadioHomePage(server,bu,channelId){
+function openRadioHomePage(server, bu, channelId){
     if (!channelId) {
         channelId = primaryChannelUidForBu(bu);
     }
@@ -688,7 +688,7 @@ function openRadioHomePage(server,bu,channelId){
     return buildBuUri(bu,"home",null,options);
 }
 
-function openAtoZ(server,bu,channelId,index){
+function openAtoZ(server, bu, channelId, index){
    var options = {};
    if(channelId) {
        options['channel_id'] = channelId;
@@ -702,14 +702,14 @@ function openAtoZ(server,bu,channelId,index){
    return buildBuUri(bu,"az",null,options);
 }
 
-function openRadioAtoZ(server,bu,channelId,index){
+function openRadioAtoZ(server, bu, channelId, index){
     if (!channelId) {
     	channelId = primaryChannelUidForBu(bu);
     }
     return openAtoZ(server,bu,channelId,index);
 }
 
-function openByDate(server,bu,channelId,date){
+function openByDate(server, bu, channelId, date){
     var options = {};
     if(channelId) {
         options['channel_id'] = channelId;
@@ -724,11 +724,11 @@ function openByDate(server,bu,channelId,date){
     return buildBuUri(bu, "bydate", null, options);
 }
 
-function openRadioByDate(server,bu,channelId,date) {
+function openRadioByDate(server, bu, channelId, date) {
     if (!channelId) {
         channelId = primaryChannelUidForBu(bu);
     }
-    return openByDate(server,bu,channelId,date);
+    return openByDate(server, bu, channelId, date);
 }
 
 function openSearch(server, bu, query, mediaType){
@@ -742,7 +742,7 @@ function openSearch(server, bu, query, mediaType){
     if (server) {
         options['server'] = server;
     }
-    return buildBuUri(bu,"search", null, options);
+    return buildBuUri(bu, "search", null, options);
 }
 
 function openURL(server, bu, scheme, hostname, pathname, queryParams, anchor) {
@@ -771,7 +771,7 @@ function openURL(server, bu, scheme, hostname, pathname, queryParams, anchor) {
     if (server) {
         options['server'] = server;
     }
-    return buildBuUri(bu,"link",null,options)
+    return buildBuUri(bu, "link", null, options)
 }
 
 // --- parsing functions

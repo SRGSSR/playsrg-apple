@@ -7,6 +7,7 @@
 #import "ProfileAccountHeaderView.h"
 
 #import "ApplicationSettings.h"
+#import "ApplicationSettingsConstants.h"
 #import "AnalyticsConstants.h"
 #import "History.h"
 #import "NavigationController.h"

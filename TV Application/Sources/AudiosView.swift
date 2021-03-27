@@ -30,7 +30,7 @@ class AudioModel: ObservableObject {
 
 struct AudiosView: View {
     @StateObject var model = AudioModel()
-    @State var currentIndex: Int = 0
+    @State var currentIndex = 0
     
     private var currentItem: AudioModel.RadioItem {
         return model.items[currentIndex]

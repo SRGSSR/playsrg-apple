@@ -20,7 +20,6 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 ## URLs
 
 * `betaTestingURL` (optional, string): The URL of the page where beta testers can register.
-* `tvBetaTestingURL` (optional, string): The URL of the page where Apple TV beta testers can register.
 * `feedbackURL` (optional, string): The URL of the feedback form.
 * `dataProtectionURL` (optional, string): The URL of the data protection information page.
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed. 
@@ -75,6 +74,8 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `tvTopics`: Topics (expand into a row per topic).
 * `tvTopicsAccess`: Topic access.
 * `tvTrending`: Trending medias and editorial picks. See `tvTrendingEpisodesOnly`, `tvTrendingEditorialLimit` and `tvTrendingPrefersHeroStage` options.
+* `tvResumePlayback`: The videos from history that can be resumed.
+* `tvWatchLater`: The latest videos added to the watch later list.
 
 ### Topic configuration
 

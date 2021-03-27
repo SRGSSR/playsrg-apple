@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
         "state": {
           "branch": null,
-          "revision": "484dead179e6d7edd534d0d7defdf65c14a5b426",
-          "version": "4.1.0"
+          "revision": "013bffe628b49433d7bc334146a4ed8c507c0e32",
+          "version": "4.1.1"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
         "state": {
           "branch": null,
-          "revision": "805ef197755a66e634fccb5d23d9068ca5c1f395",
-          "version": "6.7.0"
+          "revision": "d57938089a95f54468c32c9d8034a277a602d060",
+          "version": "6.7.1"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "14dff7e19375288c7e34df8444c85d314f26d7cf",
-          "version": "7.6.0"
+          "revision": "e118a7fb4319eaa37fd03c3b4216c93811d9c413",
+          "version": "7.8.1"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "38205d8e39f806f71b048f93427337c9511c9402",
-          "version": "7.5.1"
+          "revision": "9db2a8536e804dced3ccf8c1b4d05051f014f941",
+          "version": "7.8.1"
         }
       },
       {
@@ -87,8 +87,8 @@
         "repositoryURL": "https://github.com/google/GoogleDataTransport.git",
         "state": {
           "branch": null,
-          "revision": "2e8a342494d20fcf209b61a45cddc1668b5ccc6d",
-          "version": "8.2.0"
+          "revision": "34bd15a31149e42eadd6c75bd67aaea002e23bf4",
+          "version": "8.3.0"
         }
       },
       {
@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/google/GoogleUtilities.git",
         "state": {
           "branch": null,
-          "revision": "2c7d33099a3c3da1139bb1e8eb94e46e0dacf075",
-          "version": "7.2.2"
+          "revision": "1c47ea135322768023ecdcc9db79bf3df821209f",
+          "version": "7.3.0"
         }
       },
       {
@@ -177,8 +177,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "961597d324949c7003c77d602bfc4d5519b47e81",
-          "version": "9.2.4"
+          "revision": "ed4896dbd5c9e30dbd8c75db04c9614d2d751bd0",
+          "version": "9.3.1"
         }
       },
       {
@@ -213,8 +213,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": null,
-          "revision": "8d2ccb6b835bb21504dcb7ee67358b8a4ed6ab63",
-          "version": "7.0.0"
+          "revision": "5a1549c460ca7ec1254ece8a276fdd8fdef45838",
+          "version": "7.0.2"
         }
       },
       {
@@ -240,8 +240,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": null,
-          "revision": "6556ac22f611b1f4913264ebb20f513165b0f748",
-          "version": "10.0.0"
+          "revision": "1925363627bd1eabce8c63cc8541d5901e9d9266",
+          "version": "10.0.1"
         }
       },
       {
@@ -258,8 +258,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
           "branch": null,
-          "revision": "4b5db1151c7f15364665cbfbc28dfce5b60cfceb",
-          "version": "3.0.3"
+          "revision": "a5ab9cca5cb7dbbcc8615634c2f605d283d42963",
+          "version": "3.0.4"
         }
       },
       {
@@ -267,8 +267,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": null,
-          "revision": "3a1db335d17aab7404586e6be37ce0e22d1879ee",
-          "version": "6.2.0"
+          "revision": "7e0785d6b02e6d6842bce45e563fb3b2d062b16b",
+          "version": "7.0.0"
         }
       },
       {
@@ -294,8 +294,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgnetwork-apple.git",
         "state": {
           "branch": null,
-          "revision": "76a83f3b6219f501b589317f8cc0a11556e0565a",
-          "version": "3.0.1"
+          "revision": "46c78b8cb5738e0286e18f35c586547b1458bdcf",
+          "version": "3.0.2"
         }
       },
       {
@@ -305,6 +305,15 @@
           "branch": null,
           "revision": "8797a4e16fd44d2eeaa0ab1908539f3f7035c840",
           "version": "3.0.1"
+        }
+      },
+      {
+        "package": "SwiftProtobuf",
+        "repositoryURL": "https://github.com/apple/swift-protobuf.git",
+        "state": {
+          "branch": null,
+          "revision": "e1904bf5a5f79cb7e0ff68a427a53a93b652fcd1",
+          "version": "1.15.0"
         }
       },
       {
@@ -321,8 +330,8 @@
         "repositoryURL": "https://github.com/SRGSSR/TCCore-xcframework-apple.git",
         "state": {
           "branch": null,
-          "revision": "be5774e8e68bbf29a9da93506e6bfa6de1177268",
-          "version": "4.5.4-srg3"
+          "revision": "eb686883e63af28174472a09eda97acf07179c88",
+          "version": "4.5.4-srg5"
         }
       },
       {
@@ -330,8 +339,8 @@
         "repositoryURL": "https://github.com/SRGSSR/TCSDK-xcframework-apple.git",
         "state": {
           "branch": null,
-          "revision": "391dbdc47db04f4049fdabca6b5d1f5446589d3f",
-          "version": "4.4.1-srg3"
+          "revision": "c4becb0b250258b78cb46225af5e269da834db5a",
+          "version": "4.4.1-srg5"
         }
       },
       {

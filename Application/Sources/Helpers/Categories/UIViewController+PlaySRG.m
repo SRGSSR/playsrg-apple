@@ -25,14 +25,6 @@
 @import libextobjc;
 @import SRGDataProviderNetwork;
 
-static Playlist *s_playlist;
-
-static Playlist *SharedPlaylistForURN(NSString *URN)
-{
-    s_playlist = URN ? [[Playlist alloc] initWithURN:URN] : nil;
-    return s_playlist;
-}
-
 // We retain the presentation delegates with the view controller. If not unregistered, UIKit cleans them up when the
 // view controller is deallocated anyway. We must retain the delegates, otherwise they will get deallocated early
 static void *s_previewingDelegatesKey = &s_previewingDelegatesKey;
@@ -241,7 +233,9 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
     if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {
         MediaPlayerViewController *mediaPlayerViewController = (MediaPlayerViewController *)topViewController;
         SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
-        letterboxController.playlistDataSource = SharedPlaylistForURN(media.URN);
+        Playlist *playlist = PlaylistForURN(media.URN);
+        letterboxController.playlistDataSource = playlist;
+        letterboxController.playbackTransitionDelegate = playlist;
         
         if ([letterboxController.media isEqual:media] && letterboxController.playbackState != SRGMediaPlayerPlaybackStateIdle
                 && letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
@@ -259,7 +253,9 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
         void (^openPlayer)(void) = ^{
             MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:position fromPushNotification:fromPushNotification];
             SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
-            letterboxController.playlistDataSource = SharedPlaylistForURN(media.URN);
+            Playlist *playlist = PlaylistForURN(media.URN);
+            letterboxController.playlistDataSource = playlist;
+            letterboxController.playbackTransitionDelegate = playlist;
             [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
         };
         
@@ -294,7 +290,9 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
     
     void (^openPlayer)(void) = ^{
         MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithController:letterboxController position:nil fromPushNotification:fromPushNotification];
-        letterboxController.playlistDataSource = SharedPlaylistForURN(letterboxController.URN);
+        Playlist *playlist = PlaylistForURN(letterboxController.URN);
+        letterboxController.playlistDataSource = playlist;
+        letterboxController.playbackTransitionDelegate = playlist;
         [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
     };
     

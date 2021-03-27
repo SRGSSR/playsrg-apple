@@ -13,7 +13,7 @@ class ShowsModel: ObservableObject {
         case loaded(alphabeticalShows: [(character: Character, shows: [SRGShow])])
     }
     
-    @Published private(set) var state = State.loaded(alphabeticalShows: [])
+    @Published private(set) var state = State.loading
     
     private var cancellables = Set<AnyCancellable>()
     private var alphabeticalShows: [(character: Character, shows: [SRGShow])] = []

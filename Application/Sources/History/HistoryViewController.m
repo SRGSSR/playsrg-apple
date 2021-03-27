@@ -255,8 +255,8 @@
         }
     }
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:deleteAllModeEnabled ? NSLocalizedString(@"Delete history", @"Title of the confirmation pop-up displayed when the user is about to clear the history") : NSLocalizedString(@"Delete history entries", @"Title of the confirmation pop-up displayed when the user is about to delete selected history entries")
-                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"Are you sure you want to delete all items?", @"Confirmation message displayed when the user is about to delete the whole history") : NSLocalizedString(@"Are you sure you want to delete the selected items?", @"Confirmation message displayed when the user is about to delete selected history entries")
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete history", @"Title of the confirmation pop-up displayed when the user is about to delete history entries")
+                                                                             message:deleteAllModeEnabled ? NSLocalizedString(@"All items will be deleted.", @"Confirmation message displayed when the user is about to delete the whole history") : NSLocalizedString(@"The selected items will be deleted.", @"Confirmation message displayed when the user is about to delete selected history entries")
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (deleteAllModeEnabled) {

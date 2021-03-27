@@ -5,3 +5,6 @@ PRODUCT_NAME = $(BASE_PRODUCT_NAME)
 SDKROOT = appletvos
 SWIFT_OBJC_BRIDGING_HEADER=$(PROJECT_DIR)/TV Application/Sources/Play-TV-ObjectiveC-Bridge.h
 CODE_SIGN_ENTITLEMENTS = $(PROJECT_DIR)/TV Application/TV-Application.entitlements
+
+// Since ComScore is not compatible with arm64 tvOS simulator architecture
+EXCLUDED_ARCHS[sdk=appletvsimulator*] = arm64

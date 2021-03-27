@@ -15,7 +15,7 @@ class TopicDetailModel: ObservableObject {
         case loaded(mostPopularMedias: [SRGMedia], latestMedias: [SRGMedia])
     }
     
-    @Published private(set) var state = State.loaded(mostPopularMedias: [], latestMedias: [])
+    @Published private(set) var state = State.loading
     
     private var cancellables = Set<AnyCancellable>()
     

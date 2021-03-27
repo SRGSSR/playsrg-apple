@@ -12,8 +12,7 @@ The Play platform is more generally available on the web and on Android phones:
 | Android | [🤖](https://play.google.com/store/apps/details?id=ch.rsi.player) | [🤖](https://play.google.com/store/apps/details?id=ch.rtr.player) | [🤖](https://play.google.com/store/apps/details?id=ch.rts.player) | [🤖](https://play.google.com/store/apps/details?id=ch.srf.mobile.srfplayer) | [🤖](https://play.google.com/store/apps/details?id=ch.swissinfo.player) |
 | Web | [🖥](https://www.rsi.ch/play) | [🖥](https://www.rtr.ch/play) | [🖥](https://www.rts.ch/play) | [🖥](https://www.srf.ch/play) | [🖥](https://www.swissinfo.ch/play) |
 
-![Home](README-images/home.jpg) ![Player](README-images/player.jpg)
-![Home TV](README-images/home-tv.jpg)
+![Screenshots](README-images/iphone-screenshots.png)
 
 ## Features
 

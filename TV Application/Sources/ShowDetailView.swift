@@ -6,6 +6,7 @@
 
 import SRGAnalyticsSwiftUI
 import SRGAppearance
+import SRGIdentity
 import SwiftUI
 
 struct ShowDetailView: View {
@@ -132,12 +133,44 @@ struct ShowDetailView: View {
     private struct VisualView: View {
         let show: SRGShow
         
-        @State var isFavorite: Bool = false
+        @State var isFavorite = false
+        @State var favoriteRemovalAlertDisplayed = false
         
         private static let height: CGFloat = 300
         
         private var imageUrl: URL? {
             return show.imageURL(for: .width, withValue: SizeForImageScale(.medium).width, type: .default)
+        }
+        
+        private func toggleFavorite() {
+            FavoritesToggleShow(show)
+            isFavorite = FavoritesContainsShow(show)
+            
+            let analyticsTitle = isFavorite ? AnalyticsTitle.favoriteAdd : AnalyticsTitle.favoriteRemove
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.source = AnalyticsSource.button.rawValue
+            labels.value = show.urn
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
+        }
+        
+        private func toggleFavoriteAction() {
+            if FavoritesIsSubscribedToShow(show) {
+                favoriteRemovalAlertDisplayed = true
+            }
+            else {
+                toggleFavorite()
+            }
+        }
+        
+        private func favoriteRemovalAlert() -> Alert {
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                toggleFavorite()
+            }
+            return Alert(title: Text(NSLocalizedString("Delete from favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete a favorite")),
+                         message: Text(NSLocalizedString("The favorite and notification subscription will be deleted on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to delete a favorite")),
+                         primaryButton: primaryButton,
+                         secondaryButton: secondaryButton)
         }
         
         var body: some View {
@@ -164,18 +197,10 @@ struct ShowDetailView: View {
                 Spacer()
                 LabeledButton(icon: isFavorite ? "favorite_full-22" : "favorite-22",
                               label: isFavorite ? NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited") : NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited"),
-                              accessibilityLabel: isFavorite ? PlaySRGAccessibilityLocalizedString("Remove from favorites", "Favorite label in the show view when a show has been favorited") : PlaySRGAccessibilityLocalizedString("Add to favorites", "Favorite label in the show view when a show can be favorited")
-                ) {
-                    FavoritesToggleShow(show)
-                    isFavorite = FavoritesContainsShow(show)
-                    
-                    let analyticsTitle = isFavorite ? AnalyticsTitle.favoriteAdd : AnalyticsTitle.favoriteRemove
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.button.rawValue
-                    labels.value = show.urn
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
-                }
-                .padding(.leading, 100)
+                              accessibilityLabel: isFavorite ? PlaySRGAccessibilityLocalizedString("Delete from favorites", "Favorite label in the show view when a show has been favorited") : PlaySRGAccessibilityLocalizedString("Add to favorites", "Favorite label in the show view when a show can be favorited"),
+                              action: toggleFavoriteAction)
+                    .padding(.leading, 100)
+                    .alert(isPresented: $favoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
             }
             .onAppear {
                 isFavorite = FavoritesContainsShow(show)
@@ -187,12 +212,10 @@ struct ShowDetailView: View {
         let show: SRGShow
         
         var body: some View {
-            GeometryReader { geometry in
-                FocusableRegion {
-                    VStack {
-                        VisualView(show: show)
-                        Spacer()
-                    }
+            FocusableRegion {
+                VStack {
+                    VisualView(show: show)
+                    Spacer()
                 }
             }
         }

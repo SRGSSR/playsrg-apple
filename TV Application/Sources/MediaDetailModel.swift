@@ -5,6 +5,7 @@
 //
 
 import SRGDataProviderCombine
+import SRGUserData
 
 class MediaDetailModel: ObservableObject {
     struct Recommendation: Codable {
@@ -15,12 +16,27 @@ class MediaDetailModel: ObservableObject {
     private let initialMedia: SRGMedia
     
     @Published private(set) var relatedMedias: [SRGMedia] = []
-    @Published var selectedMedia: SRGMedia? = nil
+    @Published private(set) var watchLaterAllowedAction: WatchLaterAction = .none
+    @Published var selectedMedia: SRGMedia? {
+        didSet {
+            updateWatchLaterAllowedAction()
+        }
+    }
     
-    var cancellables = Set<AnyCancellable>()
+    var mainCancellables = Set<AnyCancellable>()
+    var refreshCancellables = Set<AnyCancellable>()
     
     init(media: SRGMedia) {
         self.initialMedia = media
+        
+        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+            .sink { notification in
+                guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
+                guard let entriesUids = notification.userInfo?[SRGPlaylistEntriesUidsKey] as? Set<String>, entriesUids.contains(media.urn) else { return }
+                self.updateWatchLaterAllowedAction()
+            }
+            .store(in: &mainCancellables)
+        updateWatchLaterAllowedAction()
     }
     
     var media: SRGMedia {
@@ -45,10 +61,28 @@ class MediaDetailModel: ObservableObject {
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
             .assign(to: \.relatedMedias, on: self)
-            .store(in: &cancellables)
+            .store(in: &refreshCancellables)
     }
     
     func cancelRefresh() {
-        cancellables = []
+        refreshCancellables = []
+    }
+    
+    func toggleWatchLater() {
+        WatchLaterToggleMediaMetadata(media) { added, error in
+            guard error == nil else { return }
+            
+            let analyticsTitle = added ? AnalyticsTitle.watchLaterAdd : AnalyticsTitle.watchLaterRemove
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.source = AnalyticsSource.button.rawValue
+            labels.value = self.media.urn
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
+            
+            self.updateWatchLaterAllowedAction()
+        }
+    }
+    
+    private func updateWatchLaterAllowedAction() {
+        watchLaterAllowedAction = WatchLaterAllowedActionForMediaMetadata(media)
     }
 }

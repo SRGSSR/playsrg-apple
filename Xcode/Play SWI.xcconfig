@@ -1,4 +1,5 @@
-APP_BASE_IDENTIFIER = ch.swi.swiplayer
+APP_PLAYER_IDENTIFIER = swiplayer
+APP_BASE_IDENTIFIER = ch.swi.$(APP_PLAYER_IDENTIFIER)
 BASE_PRODUCT_NAME = Play SWI
 URL_BASE_SCHEME  = playswi
 WEB_CREDENTIALS_DOMAIN = webcredentials:*.swissinfo.ch

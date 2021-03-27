@@ -12,7 +12,7 @@ struct LabeledButton: View {
     let accessibilityLabel: String
     let action: () -> Void
     
-    @State private var isFocused: Bool = false
+    @State private var isFocused = false
     
     init(icon: String, label: String, accessibilityLabel: String? = nil, action: @escaping () -> Void) {
         self.icon = icon

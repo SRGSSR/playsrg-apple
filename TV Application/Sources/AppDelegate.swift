@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let videosViewController = UIHostingController(rootView: VideosView())
         videosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home tab title"), image: nil, tag: 0)
+        videosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.videosTabBarItem.rawValue
         viewControllers.append(videosViewController)
         
         let configuration = ApplicationConfiguration.shared
@@ -53,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !configuration.radioChannels.isEmpty {
             let audiosViewController = UIHostingController(rootView: AudiosView())
             audiosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
+            audiosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.rawValue
             viewControllers.append(audiosViewController)
         }
         #endif
@@ -60,31 +62,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !configuration.liveHomeSections.isEmpty {
             let liveViewController = UIHostingController(rootView: LiveView())
             liveViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), image: nil, tag: 2)
+            liveViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.livestreamsTabBarItem.rawValue
             viewControllers.append(liveViewController)
         }
         
         if configuration.videoHomeSections.contains(NSNumber(value: HomeSection.tvShowsAccess.rawValue)) {
             let showsViewController = UIHostingController(rootView: ShowsView())
             showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
+            showsViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.showsTabBarItem.rawValue
             viewControllers.append(showsViewController)
         }
         
         let searchViewController = SearchViewController()
         searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 4)
+        searchViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.searchTabBarItem.rawValue
         viewControllers.append(searchViewController)
         
-        #if DEBUG
-        let historyViewController = UIHostingController(rootView: HistoryView())
-        historyViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("History", comment: "History tab title"), image: nil, tag: 6)
-        viewControllers.append(historyViewController)
-        #endif
-        
-        #if DEBUG || NIGHTLY
-        let settingsViewController = UIHostingController(rootView: SettingsView())
-        settingsViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "settings-22")!.withRenderingMode(.alwaysTemplate), tag: 7)
-        settingsViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Settings", "Settings button label on home view")
-        viewControllers.append(settingsViewController)
-        #endif
+        let profileViewController = UIHostingController(rootView: ProfileView())
+        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile-34")!.withRenderingMode(.alwaysTemplate), tag: 7)
+        profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", "Profile button label on home view")
+        profileViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.profileTabBarItem.rawValue
+        viewControllers.append(profileViewController)
         
         if viewControllers.count > 1 {
             let tabBarController = UITabBarController()
@@ -105,6 +103,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - UIApplicationDelegate protocol
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        assert(NSClassFromString("ASIdentifierManager") == nil, "No implicit AdSupport.framework dependency must be found")
+        
         // Processes run once in the lifetime of the application
         PlayApplicationRunOnce({ completionHandler -> Void in
             PlayFirebaseConfiguration.clearCache()
@@ -127,6 +127,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let identityWebserviceURL = configuration.identityWebserviceURL,
            let identityWebsiteURL = configuration.identityWebsiteURL {
             SRGIdentityService.current = SRGIdentityService(webserviceURL: identityWebserviceURL, websiteURL: identityWebsiteURL)
+            
+            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
+                .sink { _ in
+                    let labels = SRGAnalyticsHiddenEventLabels()
+                    labels.source = AnalyticsSource.button.rawValue
+                    labels.type = AnalyticsType.actionCancelLogin.rawValue
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.identity.rawValue, labels: labels)
+                }
+                .store(in: &cancellables)
+            
+            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
+                .sink { _ in
+                    let labels = SRGAnalyticsHiddenEventLabels()
+                    labels.source = AnalyticsSource.button.rawValue
+                    labels.type = AnalyticsType.actionLogin.rawValue
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.identity.rawValue, labels: labels)
+                }
+                .store(in: &cancellables)
+            
+            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
+                .sink { notification in
+                    let unexpectedLogout = notification.userInfo?[SRGIdentityServiceUnauthorizedKey] as? Bool ?? false
+
+                    let labels = SRGAnalyticsHiddenEventLabels()
+                    labels.source = unexpectedLogout ? AnalyticsSource.automatic.rawValue : AnalyticsSource.button.rawValue
+                    labels.type = AnalyticsType.actionLogout.rawValue
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.identity.rawValue, labels: labels)
+                }
+                .store(in: &cancellables)
         }
         
         let cachesDirectoryUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!)

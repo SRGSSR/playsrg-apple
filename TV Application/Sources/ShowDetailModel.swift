@@ -15,7 +15,7 @@ class ShowDetailModel: ObservableObject {
         case loaded(medias: [SRGMedia])
     }
     
-    @Published private(set) var state = State.loaded(medias: [])
+    @Published private(set) var state = State.loading
     
     private var cancellables = Set<AnyCancellable>()
     private var medias: [SRGMedia] = []

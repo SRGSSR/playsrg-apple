@@ -32,8 +32,6 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelVideo;
  */
 typedef NSString * AnalyticsPageTitle NS_STRING_ENUM;
 
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleBetaTesting;
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTvBetaTesting;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDevices;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDownloads;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleEvents;
@@ -46,6 +44,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatest;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicense;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicenses;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLogin;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMedia;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMostPopular;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleNotifications;
@@ -56,7 +55,6 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSettings;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsAZ;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSoonExpiring;
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSourceCode;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSports;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTrending;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTV;
@@ -197,22 +195,22 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSearchTeaserOpen;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleUserActivity;
 
 /**
- *  Title for events related to watch later
+ *  Title for events related to later list
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterAdd;
 
 /**
- *  Title for events related to deletion of a watch later entry
+ *  Title for events related to deletion of a later list entry
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemove;
 
 /**
- *  Title for events related to deletion of all watch later entries
+ *  Title for events related to deletion of all later list entries
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemoveAll;
 
 /**
- *  Title for events related to watch later playback
+ *  Title for events related to later list entry playback
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterOpenMedia;
 

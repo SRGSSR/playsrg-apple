@@ -30,12 +30,12 @@ class SearchResultsModel: ObservableObject {
         }
     }
     
-    @Published private(set) var state = State.loaded(medias: [], suggestions: [])
+    @Published private(set) var state = State.loading
     
     weak var searchController: UISearchController? = nil
     weak var viewController: UIViewController? = nil
     
-    private var globalCancellables = Set<AnyCancellable>()
+    private var mainCancellables = Set<AnyCancellable>()
     private var refreshCancellables = Set<AnyCancellable>()
     
     private var medias: [SRGMedia] = []
@@ -52,7 +52,7 @@ class SearchResultsModel: ObservableObject {
                 self.cancelRefresh()
                 self.loadNextPage()
             }
-            .store(in: &globalCancellables)
+            .store(in: &mainCancellables)
     }
     
     func refresh() {

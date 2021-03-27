@@ -8,6 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
+#import "ApplicationSettingsConstants.h"
 #import "Banner.h"
 #import "CalendarViewController.h"
 #import "DeepLinkService.h"
@@ -89,6 +90,8 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSAssert(NSClassFromString(@"ASIdentifierManager") == Nil, @"No implicit AdSupport.framework dependency must be found");
+    
     [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
     
     // Processes run once in the lifetime of the application
@@ -901,7 +904,7 @@ static void *s_kvoContext = &s_kvoContext;
         labels.value = media.URN;
         
         SRGLetterboxController *letterboxController = notification.object;
-        Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? letterboxController.playlistDataSource : nil;
+        Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
         labels.extraValue1 = playlist.recommendationUid;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
     }

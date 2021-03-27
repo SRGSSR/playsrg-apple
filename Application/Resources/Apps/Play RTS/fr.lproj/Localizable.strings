@@ -7,17 +7,17 @@
 /* Seek forward shortcut label */
 "%@ forward" = "Avancer de %@";
 
-/* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been added to \"Watch later\"" = "%@ a été ajouté à \"Plus tard\"";
+/* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been added to \"Later\"" = "%@ a été ajouté à \"Plus tard\"";
 
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
 "%@ has been added to favorites" = "%@ a été ajouté aux favoris";
 
-/* Message displayed at the top of the screen when removing an item from the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been removed from \"Watch later\"" = "%@ a été retiré de \"Plus tard\"";
+/* Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been deleted from \"Later\"" = "%@ a été supprimé de \"Plus tard\"";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
-"%@ has been removed from favorites" = "%@ a été supprimé des favoris";
+"%@ has been deleted from favorites" = "%@ a été supprimé des favoris";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ est en attente.";
@@ -46,11 +46,6 @@
 /* Short title displayed in home pages on a button. */
 "A to Z" = "De A à Z";
 
-/* Button label to add a media to the watch later list, from the media long-press menu
-   Button label to add a media to the watch later list, from the media preview window
-   Context menu action to add a media to the watch later list */
-"Add to \"Watch later\"" = "Ajouter à \"Plus tard\"";
-
 /* Button label to add a download from the media long-press menu
    Button label to add a download from the media preview window
    Context menu action to add a media to the downloads */
@@ -65,26 +60,14 @@
 /* All option */
 "All" = "Tout";
 
+/* Confirmation message displayed when the user is about to delete all download items
+   Confirmation message displayed when the user is about to delete all favorites
+   Confirmation message displayed when the user is about to delete the later list
+   Confirmation message displayed when the user is about to delete the whole history */
+"All items will be deleted." = "Tous les éléments seront supprimés.";
+
 /* Title label used to present already available videos, usually badged as web first */
 "Already available" = "Déjà disponible";
-
-/* Confirmation message displayed when the user is about to clean all favorites
-   Confirmation message displayed when the user is about to clean the watch later list
-   Confirmation message displayed when the user is about to delete all download items
-   Confirmation message displayed when the user is about to delete the whole history */
-"Are you sure you want to delete all items?" = "Etes-vous sûr de vouloir supprimer tous les éléments ?";
-
-/* Confirmation message displayed when the user is about to delete a download */
-"Are you sure you want to delete the downloaded media?" = "Etes-vous sûr de vouloir supprimer le téléchargement ?";
-
-/* Confirmation message displayed when the user is about to delete selected download items
-   Confirmation message displayed when the user is about to delete selected history entries
-   Confirmation message displayed when the user is about to remove selected entries from favorites
-   Confirmation message displayed when the user is about to remove selected entries from the watch later list */
-"Are you sure you want to delete the selected items?" = "Etes-vous sûr de vouloir supprimer les éléments sélectionnés ?";
-
-/* Confirmation message displayed when the user is about to logout on Apple TV */
-"Are you sure you want to logout?" = "Etes-vous sûr de vouloir vous déconnecter ?";
 
 /* Audios option
    Audios tab title
@@ -121,8 +104,12 @@
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Choisissez une radio régionale";
 
-/* Settings section header */
+/* Profile content section header
+   Settings section header */
 "Content" = "Contenu";
+
+/* Message displayed when the user is about to delete content saved for later */
+"Content saved for later will be deleted on all devices connected to your account." = "Le contenu à consulter plus tard sera supprimé sur tous les appareils liés à votre compte.";
 
 /* Sort by date option */
 "Date" = "Date";
@@ -131,12 +118,42 @@
    Title of the delete button in the alert view when deleting a download in the player view */
 "Delete" = "Supprimer";
 
-/* Delete history button title
-   Title of the confirmation pop-up displayed when the user is about to clear the history */
-"Delete history" = "Supprimer l'historique";
+/* Title of the button to delete content saved for later
+   Title of the confirmation pop-up displayed when the user is about to delete content from the later list
+   Title of the message displayed when the user is about to delete content saved for later */
+"Delete content saved for later" = "Supprimer le contenu à consulter plus tard";
 
-/* Title of the confirmation pop-up displayed when the user is about to delete selected history entries */
-"Delete history entries" = "Suppression de l’historique";
+/* Title of the confirmation pop-up displayed when the user is about to delete a download */
+"Delete download" = "Supprimer le téléchargement";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete download items */
+"Delete downloads" = "Supprimer les téléchargements";
+
+/* Delete favorites button title
+   Title of the confirmation pop-up displayed when the user is about to delete favorite items
+   Title of the message displayed when the user is about to delete all favorites */
+"Delete favorites" = "Supprimer les favoris";
+
+/* Button label to delete a media from the later list, from the media long-press menu
+   Button label to delete a media from the later list, from the media preview window
+   Context menu action to delete a media from the later list */
+"Delete from \"Later\"" = "Supprimer de \"Plus tard\"";
+
+/* Button label to delete a download from the media long-press menu
+   Button label to delete a download from the media preview window
+   Context menu action to delete a media from the downloads */
+"Delete from downloads" = "Supprimer des téléchargements";
+
+/* Button label to delete a show from favorites in the show long-press menu
+   Button label to delete a show from favorites in the show preview window
+   Context menu action to delete a show from favorites
+   Title of the confirmation pop-up displayed when the user is about to delete a favorite */
+"Delete from favorites" = "Supprimer des favoris";
+
+/* Delete history button title
+   Title of the confirmation pop-up displayed when the user is about to delete history entries
+   Title of the message displayed when the user is about to delete the history */
+"Delete history" = "Supprimer l'historique";
 
 /* Label for the button disabling autoplay */
 "Disable" = "Désactiver";
@@ -181,6 +198,9 @@
    Title label used to present the TV or radio favorite shows */
 "Favorites" = "Favoris";
 
+/* Message displayed when the user is about to delete all favorites */
+"Favorites and notification subscriptions will be deleted on all devices connected to your account." = "Les favoris et abonnements aux notifications seront supprimés sur tous les appareils liés à votre compte.";
+
 /* Title displayed at the top of the features list */
 "Features" = "Fonctionnalités";
 
@@ -201,8 +221,7 @@
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
 "Highlights" = "Mises en avant";
 
-/* History tab title
-   Label to present history */
+/* Label to present history */
 "History" = "Historique";
 
 /* Home tab title */
@@ -224,7 +243,9 @@
 "Last week" = "La semaine dernière";
 
 /* Label for the button for deciding to opt-in for background video playback at a later time
-   Watch or listen later button label in media detail view */
+   Label to present the later list
+   Title Label used to present the video later list
+   Watch later or listen later button label in media detail view when a media is in the later list */
 "Later" = "Plus tard";
 
 /* Title label used to present the latest episodes from TV favorite shows */
@@ -242,6 +263,12 @@
 
 /* Play button label for audio in media detail view */
 "Listen" = "Écouter";
+
+/* Button label in media detail view to add an audio to the later list
+   Button label to add an audio to the later list, from the media long-press menu
+   Button label to add an audio to the later list, from the media preview window
+   Context menu action to add an audio to the later list */
+"Listen later" = "Écouter plus tard";
 
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
@@ -319,7 +346,7 @@
 /* Introductory time for next program information */
 "Next, at %@" = "À suivre à %@";
 
-/* Text displayed when no media added to the watch later list */
+/* Text displayed when no media added to the later list */
 "No content" = "Aucun contenu";
 
 /* Text displayed when no downloads are available */
@@ -342,9 +369,6 @@
 
 /* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
 "Not available since %@" = "Plus disponible depuis %@";
-
-/* Text displayed when no user is logged in */
-"Not logged in" = "Non connecté";
 
 /* Label to present the help page */
 "Notifications" = "Notifications";
@@ -392,10 +416,13 @@
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Jouable à l'étranger";
 
+/* Message displayed when the user is about to log out */
+"Playback history, favorites and content saved for later will be deleted from this Apple TV." = "L'historique de lecture, les favoris et le contenu à consulter plus tard seront supprimés de cette Apple TV.";
+
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Précédent";
 
-/* Settings section header
+/* Profile section header
    Title displayed at the top of the profile view */
 "Profile" = "Profil";
 
@@ -423,43 +450,6 @@
 /* Sort by relevance option */
 "Relevance" = "Pertinence";
 
-/* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
-"Remove all content" = "Supprimer tout le contenu";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete all download items */
-"Remove all downloads" = "Supprimer tous les téléchargements";
-
-/* Remove all favorites button title
-   Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
-"Remove all favorites" = "Supprimer les favoris";
-
-/* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list */
-"Remove content" = "Supprimer des contenus";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete a download */
-"Remove download" = "Supprimer le téléchargement";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete selected download items */
-"Remove downloads" = "Supprimer les téléchargements";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete selected favorite items */
-"Remove favorites" = "Supprimer des favoris";
-
-/* Button label to remove a media from the watch later list, from the media long-press menu
-   Button label to remove a media from the watch later list, from the media preview window
-   Context menu action to remove a media from the watch later list */
-"Remove from \"Watch later\"" = "Supprimer de \"Plus tard\"";
-
-/* Button label to remove a download from the media long-press menu
-   Button label to remove a download from the media preview window
-   Context menu action to remove a media from the downloads */
-"Remove from downloads" = "Supprimer le téléchargement";
-
-/* Button label to remove a show from favorites in the show long-press menu
-   Button label to remove a show from favorites in the show preview window
-   Context menu action to remove a show from favorites */
-"Remove from favorites" = "Supprimer des favoris";
-
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Rediffusion";
 
@@ -468,6 +458,9 @@
 
 /* Resume playback button label */
 "Resume" = "Reprendre";
+
+/* Title label used to present medias whose playback can be resumed */
+"Resume playback" = "Reprendre la lecture";
 
 /* Label to present the search view
    Search placeholder text
@@ -545,6 +538,9 @@
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Sous-titré";
 
+/* Login benefits description footer */
+"Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Synchronisez l'historique de lecture, les favoris et le contenu à consulter plus tard sur tous les appareils liés à votre compte.";
+
 /* Button label to share the content being played. */
 "The content" = "Le contenu";
 
@@ -558,17 +554,26 @@
 /* Error message returned for invalid data */
 "The data is invalid" = "Les données ne sont pas valides";
 
+/* Confirmation message displayed when the user is about to delete a download */
+"The downloaded content will be deleted." = "Le contenu téléchargé sera supprimé.";
+
 /* Button label to share the entire episode being played. */
 "The entire episode" = "L'émission entière";
 
 /* Button label to share the entire episode being played at time (hours / minutes / seconds). */
 "The episode at %@" = "L'émission à %@";
 
+/* Confirmation message displayed when a logged in user is about to delete a favorite */
+"The favorite and notification subscription will be deleted on all devices connected to your account." = "Le favori et l'abonnement aux notifications seront supprimés sur tous les appareils liés à votre compte.";
+
 /* Message displayed if the Google Cast receiver cannot play audios */
 "The Google Cast receiver cannot play audios." = "Le récepteur Google Cast ne peut pas lire les audios.";
 
 /* Message displayed if the Google Cast receiver cannot play videos */
 "The Google Cast receiver cannot play videos." = "Le récepteur Google Cast ne peut pas lire les vidéos.";
+
+/* Message displayed when the user is about to delete the history */
+"The history will be deleted on all devices connected to your account." = "L'historique sera supprimé sur tous les appareils liés à votre compte.";
 
 /* Title label used to present the radio latest audios */
 "The latest audios" = "Derniers audios";
@@ -585,9 +590,15 @@
 "The page cannot be opened." = "La page ne peut être ouverte.";
 
 /* Name of the favorite item, if no title or name to display
-   Name of the subscription item, if no title or name to display
-   Name of the watch later item, if no title or name to display */
+   Name of the later list item, if no title or name to display
+   Name of the subscription item, if no title or name to display */
 "The selected content" = "Le contenu sélectionné";
+
+/* Confirmation message displayed when the user is about to delete selected download items
+   Confirmation message displayed when the user is about to delete selected entries from favorites
+   Confirmation message displayed when the user is about to delete selected entries from the later list
+   Confirmation message displayed when the user is about to delete selected history entries */
+"The selected items will be deleted." = "Les éléments sélectionnés seront supprimés.";
 
 /* Error message when a show cannot be opened via Handoff
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
@@ -647,8 +658,11 @@
    User activity title when watching a video */
 "Watch %@" = "Regarder %@";
 
-/* Label to present the watch later list */
-"Watch later" = "Plus tard";
+/* Button label in media detail view to add a video to the later list
+   Button label to add a video to the later list, from the media long-press menu
+   Button label to add a video to the later list, from the media preview window
+   Context menu action to add a video to the later list */
+"Watch later" = "Regarder plus tard";
 
 /* Web first label on media cells
    Web first label on media detail page */
@@ -664,8 +678,8 @@
    Description of the alert view to opt-in for background video playback */
 "You can manage this feature in the settings at any time." = "Vous pouvez activer ou désactiver cette fonctionnalité dans les réglages à tout moment.";
 
-/* Hint displayed when no media added to the watch later list and the device supports 3D touch */
-"You can press on a content to add it to this watch later list" = "Vous pouvez appuyer sur un élément pour l'ajouter à \"Plus tard\"";
+/* Hint displayed when no media added to the later list and the device supports 3D touch */
+"You can press on a content to add it to \"Later\"" = "Vous pouvez appuyer sur un élément pour l'ajouter à \"Plus tard\"";
 
 /* Hint displayed when no favorites are available and the device supports 3D touch */
 "You can press on an item to add it to favorites" = "Vous pouvez appuyer sur un élément pour l'ajouter aux favoris";
@@ -673,8 +687,8 @@
 /* Hint displayed when no downloads are available and the device supports 3D touch */
 "You can press on an item to download it (not all items can be downloaded)" = "Vous pouvez appuyer sur un élément pour le télécharger (certains éléments ne peuvent être téléchargés)";
 
-/* Hint displayed when no media added to the watch later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to this watch later list" = "Vous pouvez appuyer longuement sur un élément pour l'ajouter à \"Plus tard\"";
+/* Hint displayed when no media added to the later list and the device does not support 3D touch */
+"You can tap and hold a content to add it to \"Later\"" = "Vous pouvez appuyer longuement sur un élément pour l'ajouter à \"Plus tard\"";
 
 /* Hint displayed when no favorites are available and the device does not support 3D touch */
 "You can tap and hold an item to add it to favorites" = "Vous pouvez appuyer longuement un élément pour l'ajouter aux favoris";

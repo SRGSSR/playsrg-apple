@@ -26,7 +26,7 @@ struct LiveMediaCell: View, LiveMediaData {
     @State var programComposition: SRGProgramComposition?
     @State private var channelObserver: Any?
     @State private var date = Date()
-    @State private var isFocused: Bool = false
+    @State private var isFocused = false
     
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()

@@ -9,7 +9,7 @@ import SRGAppearance
 import SwiftUI
 
 struct ShowsView: View {
-    @ObservedObject var model: ShowsModel = ShowsModel()
+    @ObservedObject var model = ShowsModel()
     
     enum Section: Hashable {
         case shows(character: Character)
@@ -132,14 +132,12 @@ struct ShowsView: View {
         let title: String
         
         var body: some View {
-            GeometryReader { geometry in
-                Text(title)
-                    .srgFont(.title2)
-                    .lineLimit(1)
-                    .foregroundColor(.white)
-                    .opacity(0.8)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-            }
+            Text(title)
+                .srgFont(.title2)
+                .lineLimit(1)
+                .foregroundColor(.white)
+                .opacity(0.8)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
         }
     }
 }

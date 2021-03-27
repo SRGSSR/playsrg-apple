@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
+		08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
+		08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
+		08013F4325DC50DA0099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
+		08013F4425DC50DB0099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		0801E07B1D4A4A810008021E /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
 		0801E07C1D4A4A810008021E /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
 		0801E07D1D4A4A810008021E /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
@@ -342,6 +347,11 @@
 		08AA55BD1D49EFC800C5026E /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA55BA1D49EFBD00C5026E /* HomeTableViewCell.m */; };
 		08AA55BE1D49EFC800C5026E /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA55BA1D49EFBD00C5026E /* HomeTableViewCell.m */; };
 		08AA55BF1D49EFC800C5026E /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA55BA1D49EFBD00C5026E /* HomeTableViewCell.m */; };
+		08ADFB1F25EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
+		08ADFB2025EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
+		08ADFB2125EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
+		08ADFB2225EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
+		08ADFB2325EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
 		08AF9480217D27E40028B082 /* ActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* ActivityItemSource.m */; };
 		08AF9481217D27E40028B082 /* ActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* ActivityItemSource.m */; };
 		08AF9482217D27E40028B082 /* ActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* ActivityItemSource.m */; };
@@ -352,15 +362,15 @@
 		08B2A53C2426511800C6EED3 /* SRGModule+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B2A5382426511700C6EED3 /* SRGModule+PlaySRG.m */; };
 		08B2A53D2426511800C6EED3 /* SRGModule+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B2A5382426511700C6EED3 /* SRGModule+PlaySRG.m */; };
 		08B2A53E2426511800C6EED3 /* SRGModule+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B2A5382426511700C6EED3 /* SRGModule+PlaySRG.m */; };
-		08B77A5D2409C48700A3BC3B /* ApplicationScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */; };
+		08B77A5D2409C48700A3BC3B /* ApplicationScreenshots~ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots~ios.swift */; };
 		08B77A5E2409C48700A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
-		08B77AA82409E0A300A3BC3B /* ApplicationScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */; };
+		08B77AA82409E0A300A3BC3B /* ApplicationScreenshots~ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots~ios.swift */; };
 		08B77AA92409E0A300A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
-		08B77ABA240A78F200A3BC3B /* ApplicationScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */; };
+		08B77ABA240A78F200A3BC3B /* ApplicationScreenshots~ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots~ios.swift */; };
 		08B77ABB240A78F200A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
-		08B77ACB240A7E3200A3BC3B /* ApplicationScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */; };
+		08B77ACB240A7E3200A3BC3B /* ApplicationScreenshots~ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots~ios.swift */; };
 		08B77ACC240A7E3200A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
-		08B77ADA240A7E5000A3BC3B /* ApplicationScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */; };
+		08B77ADA240A7E5000A3BC3B /* ApplicationScreenshots~ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots~ios.swift */; };
 		08B77ADB240A7E5000A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
 		08B77AF0240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
 		08B77AF1240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
@@ -372,6 +382,11 @@
 		08B77AF7240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
 		08B77AF8240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
 		08B77AF9240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08B9618025E81BE200E8AC1B /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08B9617F25E81BE000E8AC1B /* Settings.strings */; };
+		08B961AA25E827EF00E8AC1B /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08B961A925E827EE00E8AC1B /* Settings.strings */; };
+		08B961D425E8280900E8AC1B /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08B961D325E8280800E8AC1B /* Settings.strings */; };
+		08B961D625E8281C00E8AC1B /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08B961D525E8281C00E8AC1B /* Settings.strings */; };
+		08B961EC25E8283F00E8AC1B /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08B961EB25E8283F00E8AC1B /* Settings.strings */; };
 		08B971CD256EF3FF00195901 /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		08B971E2256EF40000195901 /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		08B971E3256EF40100195901 /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
@@ -462,11 +477,31 @@
 		08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */; };
 		08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */; };
 		08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */; };
-		08EA3EB7259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
-		08EA3EB8259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
-		08EA3EB9259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
-		08EA3EBA259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
-		08EA3EBB259E33C9008D412F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* SettingsView.swift */; };
+		08EA3EB7259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
+		08EA3EB8259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
+		08EA3EB9259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
+		08EA3EBA259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
+		08EA3EBB259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
+		08F3849825FA69BB00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08F3849925FA69BB00E1BCF0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
+		08F3849C25FA69BB00E1BCF0 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB6B240DC39100BDFAEA /* Configuration.plist */; };
+		08F3851125FA783A00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08F3851225FA783B00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08F3851325FA783C00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08F3852925FA783E00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08F3852A25FA784000E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08F3865725FA9AD800E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08F3865825FA9AD800E1BCF0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
+		08F3865B25FA9AD800E1BCF0 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB6F240DC39100BDFAEA /* Configuration.plist */; };
+		08F3867E25FA9AE000E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08F3867F25FA9AE000E1BCF0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
+		08F3868225FA9AE000E1BCF0 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB73240DC39100BDFAEA /* Configuration.plist */; };
+		08F3868F25FA9AE400E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08F3869025FA9AE400E1BCF0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
+		08F3869325FA9AE400E1BCF0 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB6D240DC39100BDFAEA /* Configuration.plist */; };
+		08F386A025FA9AE800E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
+		08F386A125FA9AE800E1BCF0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
+		08F386A425FA9AE800E1BCF0 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB71240DC39100BDFAEA /* Configuration.plist */; };
 		08FD789D253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
 		08FD789E253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
 		08FD789F253E0D3500EF302A /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */; };
@@ -961,11 +996,6 @@
 		6F58664D1DD226EE005DAFE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5866491DD226EE005DAFE4 /* Settings.bundle */; };
 		6F58664E1DD226EE005DAFE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F5866491DD226EE005DAFE4 /* Settings.bundle */; };
 		6F5A7914256ED7E000E884F2 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
-		6F5A792A256EE61200E884F2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A7929256EE61200E884F2 /* HistoryModel.swift */; };
-		6F5A792B256EE61200E884F2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A7929256EE61200E884F2 /* HistoryModel.swift */; };
-		6F5A792C256EE61200E884F2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A7929256EE61200E884F2 /* HistoryModel.swift */; };
-		6F5A792D256EE61200E884F2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A7929256EE61200E884F2 /* HistoryModel.swift */; };
-		6F5A792E256EE61200E884F2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A7929256EE61200E884F2 /* HistoryModel.swift */; };
 		6F5AA59725024C4800718420 /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
 		6F5AA59825024C4900718420 /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
 		6F5AA59925024C4900718420 /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
@@ -1000,6 +1030,16 @@
 		6F61CCC7256E41FB00E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC6256E41FB00E42E31 /* SRGUserData */; };
 		6F61CCC9256E420200E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC8256E420200E42E31 /* SRGUserData */; };
 		6F61CCCB256E420800E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCCA256E420800E42E31 /* SRGUserData */; };
+		6F6B5BB825E640A600F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
+		6F6B5BB925E640A600F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
+		6F6B5BCE25E640A700F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
+		6F6B5BCF25E640A800F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
+		6F6B5BD025E640A800F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
+		6F6B5BE525E640C400F549E7 /* NSArray+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F939F6E2090A1B200D3B0C6 /* NSArray+PlaySRG.m */; };
+		6F6B5BE625E640C500F549E7 /* NSArray+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F939F6E2090A1B200D3B0C6 /* NSArray+PlaySRG.m */; };
+		6F6B5BE725E640C500F549E7 /* NSArray+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F939F6E2090A1B200D3B0C6 /* NSArray+PlaySRG.m */; };
+		6F6B5BE825E640C600F549E7 /* NSArray+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F939F6E2090A1B200D3B0C6 /* NSArray+PlaySRG.m */; };
+		6F6B5BE925E640C600F549E7 /* NSArray+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F939F6E2090A1B200D3B0C6 /* NSArray+PlaySRG.m */; };
 		6F6B642E21A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B642C21A70FAA00E207FC /* HomeStatusHeaderView.m */; };
 		6F6B642F21A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B642C21A70FAA00E207FC /* HomeStatusHeaderView.m */; };
 		6F6B643021A70FAA00E207FC /* HomeStatusHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B642C21A70FAA00E207FC /* HomeStatusHeaderView.m */; };
@@ -1070,6 +1110,11 @@
 		6F82430E250637BE00E931A0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
 		6F82430F250637BE00E931A0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
 		6F824310250637BE00E931A0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
+		6F83873025E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
+		6F83873125E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
+		6F83873225E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
+		6F83873325E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
+		6F83873425E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
 		6F85E4B71EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */; };
 		6F85E4B81EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */; };
 		6F85E4B91EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */; };
@@ -1115,6 +1160,11 @@
 		6F88139723D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F88139423D85DD600A00826 /* GoogleCastBarButtonItem.m */; };
 		6F88139823D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F88139423D85DD600A00826 /* GoogleCastBarButtonItem.m */; };
 		6F88139923D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F88139423D85DD600A00826 /* GoogleCastBarButtonItem.m */; };
+		6F8D5FB925FBB15200F948C1 /* ApplicationScreenshots~tvos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D5FB825FBB15100F948C1 /* ApplicationScreenshots~tvos.swift */; };
+		6F8D5FBA25FBB15200F948C1 /* ApplicationScreenshots~tvos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D5FB825FBB15100F948C1 /* ApplicationScreenshots~tvos.swift */; };
+		6F8D5FBB25FBB15200F948C1 /* ApplicationScreenshots~tvos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D5FB825FBB15100F948C1 /* ApplicationScreenshots~tvos.swift */; };
+		6F8D5FBC25FBB15200F948C1 /* ApplicationScreenshots~tvos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D5FB825FBB15100F948C1 /* ApplicationScreenshots~tvos.swift */; };
+		6F8D5FBD25FBB15200F948C1 /* ApplicationScreenshots~tvos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D5FB825FBB15100F948C1 /* ApplicationScreenshots~tvos.swift */; };
 		6F9122BF1DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6F9122C01DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
 		6F9122C11DC8708400725EEB /* PlayErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9122BE1DC8708400725EEB /* PlayErrors.m */; };
@@ -1145,11 +1195,6 @@
 		6F93DE1C20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */; };
 		6F93DE1D20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */; };
 		6F93DE1E20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */; };
-		6F975739256EEEC4004DA73C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F975738256EEEC4004DA73C /* HistoryView.swift */; };
-		6F97573A256EEEC4004DA73C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F975738256EEEC4004DA73C /* HistoryView.swift */; };
-		6F97573B256EEEC4004DA73C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F975738256EEEC4004DA73C /* HistoryView.swift */; };
-		6F97573C256EEEC4004DA73C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F975738256EEEC4004DA73C /* HistoryView.swift */; };
-		6F97573D256EEEC4004DA73C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F975738256EEEC4004DA73C /* HistoryView.swift */; };
 		6F982B93244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
 		6F982B94244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
 		6F982B95244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
@@ -1255,6 +1300,16 @@
 		6FAF43021EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
 		6FAF43031EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
 		6FAF43041EF7CD8A0074E033 /* HomeTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */; };
+		6FB03F5C25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */; };
+		6FB03F5D25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */; };
+		6FB03F5E25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */; };
+		6FB03F5F25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */; };
+		6FB03F6025DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */; };
+		6FB03F6125DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */; };
+		6FB03F6225DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */; };
+		6FB03F6325DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */; };
+		6FB03F6425DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */; };
+		6FB03F6525DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */; };
 		6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB053E924D42066004B0CE1 /* LaunchScreen.storyboard */; };
 		6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB053F024D4207A004B0CE1 /* LaunchScreen.storyboard */; };
 		6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB053F224D42083004B0CE1 /* LaunchScreen.storyboard */; };
@@ -1345,6 +1400,16 @@
 		6FC413F924EF0DEC00FDF806 /* SRGMedia+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA241F0D437400A31A42 /* SRGMedia+PlaySRG.m */; };
 		6FC413FA24EF0DED00FDF806 /* SRGMedia+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA241F0D437400A31A42 /* SRGMedia+PlaySRG.m */; };
 		6FC413FB24EF0DEE00FDF806 /* SRGMedia+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA241F0D437400A31A42 /* SRGMedia+PlaySRG.m */; };
+		6FC44B3125DE54F800DE6E6F /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
+		6FC44B3225DE54F800DE6E6F /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
+		6FC44B3325DE54F800DE6E6F /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
+		6FC44B3425DE54F900DE6E6F /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
+		6FC44B3525DE54F900DE6E6F /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
+		6FC44B4A25DE552300DE6E6F /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C6218B126700B2AF2C /* Recommendation.m */; };
+		6FC44B4B25DE552400DE6E6F /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C6218B126700B2AF2C /* Recommendation.m */; };
+		6FC44B4C25DE552400DE6E6F /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C6218B126700B2AF2C /* Recommendation.m */; };
+		6FC44B4D25DE552400DE6E6F /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C6218B126700B2AF2C /* Recommendation.m */; };
+		6FC44B4E25DE552500DE6E6F /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C6218B126700B2AF2C /* Recommendation.m */; };
 		6FC8866B1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866C1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866D1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
@@ -1776,6 +1841,41 @@
 			remoteGlobalIDString = 08C68E641D38D73C00BB8AAA;
 			remoteInfo = "Play SWI";
 		};
+		08F384B925FA69CE00E1BCF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C68D471D38D49600BB8AAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F331D4324D06C2600C096AB;
+			remoteInfo = "Play SWI TV";
+		};
+		08F3874225FA9B2400E1BCF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C68D471D38D49600BB8AAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F331CE324D06B8200C096AB;
+			remoteInfo = "Play SRF TV";
+		};
+		08F3875D25FA9B3800E1BCF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C68D471D38D49600BB8AAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F331CFB24D06BA200C096AB;
+			remoteInfo = "Play RTS TV";
+		};
+		08F3875F25FA9B4400E1BCF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C68D471D38D49600BB8AAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F331D1324D06BB800C096AB;
+			remoteInfo = "Play RSI TV";
+		};
+		08F3879325FA9B5600E1BCF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C68D471D38D49600BB8AAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F331D2B24D06BC600C096AB;
+			remoteInfo = "Play RTR TV";
+		};
 		6F0CFB3820C94DF6006B2CE4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08C68D471D38D49600BB8AAA /* Project object */;
@@ -1875,6 +1975,7 @@
 		00E494C3E1EB4D27F2A95D22 /* Pods-Play SRG-iOS-Play RTR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.debug.xcconfig"; sourceTree = "<group>"; };
 		0308888C90C1881DBBFCDB84 /* Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
+		08013EB325DC28F60099A6E8 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS14.3.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		0801E0791D4A4A810008021E /* RadioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannel.h; sourceTree = "<group>"; };
 		0801E07A1D4A4A810008021E /* RadioChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioChannel.m; sourceTree = "<group>"; };
 		0804916622831DEE00E4CEC2 /* HomeShowListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeShowListTableViewCell.h; sourceTree = "<group>"; };
@@ -1988,13 +2089,14 @@
 		08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationConfiguration.m; sourceTree = "<group>"; };
 		08AA55B91D49EFBD00C5026E /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
 		08AA55BA1D49EFBD00C5026E /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
+		08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterboxDelegate.swift; sourceTree = "<group>"; };
 		08AF947E217D27E40028B082 /* ActivityItemSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityItemSource.h; sourceTree = "<group>"; };
 		08AF947F217D27E40028B082 /* ActivityItemSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityItemSource.m; sourceTree = "<group>"; };
 		08B2A5382426511700C6EED3 /* SRGModule+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGModule+PlaySRG.m"; sourceTree = "<group>"; };
 		08B2A5392426511800C6EED3 /* SRGModule+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGModule+PlaySRG.h"; sourceTree = "<group>"; };
 		08B77A402409BDF200A3BC3B /* Play iOS Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS Application.xcconfig"; sourceTree = "<group>"; };
 		08B77A452409C06000A3BC3B /* Play SRF screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SRF screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationScreenshots.swift; sourceTree = "<group>"; };
+		08B77A5A2409C48700A3BC3B /* ApplicationScreenshots~ios.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApplicationScreenshots~ios.swift"; sourceTree = "<group>"; };
 		08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		08B77A5F2409CF2300A3BC3B /* Screenshots-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Screenshots-Info.plist"; sourceTree = "<group>"; };
 		08B77AB12409E0A300A3BC3B /* Play RTS screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RTS screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2004,6 +2106,11 @@
 		08B77AEE240A86FC00A3BC3B /* AccessibilityIdentifierConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessibilityIdentifierConstants.h; sourceTree = "<group>"; };
 		08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessibilityIdentifierConstants.m; sourceTree = "<group>"; };
 		08B77AFB240A8D0A00A3BC3B /* Screenshots-ObjectiveC-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Screenshots-ObjectiveC-Bridge.h"; sourceTree = "<group>"; };
+		08B9617F25E81BE000E8AC1B /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
+		08B961A925E827EE00E8AC1B /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
+		08B961D325E8280800E8AC1B /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
+		08B961D525E8281C00E8AC1B /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
+		08B961EB25E8283F00E8AC1B /* Settings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Settings.strings; sourceTree = "<group>"; };
 		08BAABD71E7613F0007644D7 /* HomeMediasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMediasViewController.h; sourceTree = "<group>"; };
 		08BAABD81E7613F0007644D7 /* HomeMediasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMediasViewController.m; sourceTree = "<group>"; };
 		08BDB5B1228D520000335898 /* PushService+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PushService+Private.h"; sourceTree = "<group>"; };
@@ -2064,7 +2171,18 @@
 		08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI Screenshots.xcconfig"; sourceTree = "<group>"; };
-		08EA3EB6259E33C9008D412F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		08EA3EB6259E33C9008D412F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		08F384A225FA69BB00E1BCF0 /* Play SWI TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SWI TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08F384D025FA6BA100E1BCF0 /* Play tvOS Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play tvOS Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08F3866125FA9AD800E1BCF0 /* Play SRF TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SRF TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08F3868825FA9AE000E1BCF0 /* Play RTS TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RTS TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08F3869925FA9AE400E1BCF0 /* Play RSI TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RSI TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08F386AA25FA9AE800E1BCF0 /* Play RTR TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RTR TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08FCE82525BA11C00031C512 /* TV-Application.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TV-Application.entitlements"; sourceTree = "<group>"; };
 		08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
 		096E5AC5C979FBF1F072A888 /* Pods-Play SRG-iOS-Play RSI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; sourceTree = "<group>"; };
@@ -2271,7 +2389,6 @@
 		6F56F9F2247C407000B2387B /* ChannelServiceSetup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChannelServiceSetup.h; sourceTree = "<group>"; };
 		6F56F9F3247C407000B2387B /* ChannelServiceSetup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChannelServiceSetup.m; sourceTree = "<group>"; };
 		6F5866491DD226EE005DAFE4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		6F5A7929256EE61200E884F2 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		6F5CAC86245FF04C0058F9B0 /* ProgramHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgramHeaderView.h; sourceTree = "<group>"; };
 		6F5E63A4250CB32E00056160 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		6F5F4FC11DB10CFD0011CCA3 /* RelatedContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedContentView.h; sourceTree = "<group>"; };
@@ -2301,6 +2418,7 @@
 		6F8144122008FA970075F52F /* GoogleCast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleCast.h; sourceTree = "<group>"; };
 		6F8144132008FA970075F52F /* GoogleCast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleCast.m; sourceTree = "<group>"; };
 		6F82430B250637BE00E931A0 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		6F83872F25E507DC00BDCB25 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		6F85E4B51EEA8F9B00552256 /* UIView+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PlaySRG.h"; sourceTree = "<group>"; };
 		6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PlaySRG.m"; sourceTree = "<group>"; };
 		6F85F81D2567F0D100AC8286 /* LiveMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMediaCell.swift; sourceTree = "<group>"; };
@@ -2328,6 +2446,7 @@
 		6F88409224EBF930007463ED /* Play SRF TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		6F88409324EBF931007463ED /* Play SRF TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.debug.xcconfig"; sourceTree = "<group>"; };
 		6F88409424EC05E4007463ED /* Play tvOS Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play tvOS Application.xcconfig"; sourceTree = "<group>"; };
+		6F8D5FB825FBB15100F948C1 /* ApplicationScreenshots~tvos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApplicationScreenshots~tvos.swift"; sourceTree = "<group>"; };
 		6F9122BD1DC8708400725EEB /* PlayErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayErrors.h; sourceTree = "<group>"; };
 		6F9122BE1DC8708400725EEB /* PlayErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayErrors.m; sourceTree = "<group>"; };
 		6F93962420CA5AE1003ECC1B /* NotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
@@ -2339,7 +2458,6 @@
 		6F93DE1220AE9A9900B71572 /* OnboardingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnboardingsViewController.storyboard; sourceTree = "<group>"; };
 		6F93DE1820AE9BE600B71572 /* OnboardingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnboardingTableViewCell.h; sourceTree = "<group>"; };
 		6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OnboardingTableViewCell.m; sourceTree = "<group>"; };
-		6F975738256EEEC4004DA73C /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		6F982B91244F1E1200C0386E /* TableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableView.h; sourceTree = "<group>"; };
 		6F982B92244F1E1200C0386E /* TableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableView.m; sourceTree = "<group>"; };
 		6F9897CB2412582400B390A2 /* Layout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
@@ -2368,6 +2486,8 @@
 		6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+PlaySRG.m"; sourceTree = "<group>"; };
 		6FAF42FD1EF7CD8A0074E033 /* HomeTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTopicViewController.h; sourceTree = "<group>"; };
 		6FAF42FE1EF7CD8A0074E033 /* HomeTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTopicViewController.m; sourceTree = "<group>"; };
+		6FB03F5A25DECB3A0033132B /* ApplicationSettingsConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationSettingsConstants.h; sourceTree = "<group>"; };
+		6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationSettingsConstants.m; sourceTree = "<group>"; };
 		6FB053E924D42066004B0CE1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FB053F024D4207A004B0CE1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FB053F224D42083004B0CE1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -2653,6 +2773,41 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		08F3849A25FA69BB00E1BCF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F3865925FA9AD800E1BCF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F3868025FA9AE000E1BCF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F3869125FA9AE400E1BCF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F386A225FA9AE800E1BCF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F0CFB2F20C94DF6006B2CE4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2704,6 +2859,7 @@
 				6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AA724E590EE00FF286E /* FetchImage in Frameworks */,
 				8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */,
+				08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */,
@@ -2722,6 +2878,7 @@
 				6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAB24E590F400FF286E /* FetchImage in Frameworks */,
 				2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */,
+				08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */,
@@ -2740,6 +2897,7 @@
 				6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAF24E590FC00FF286E /* FetchImage in Frameworks */,
 				FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */,
+				08013F4325DC50DA0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */,
@@ -2758,6 +2916,7 @@
 				6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB324E5910400FF286E /* FetchImage in Frameworks */,
 				0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */,
+				08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */,
@@ -2776,6 +2935,7 @@
 				6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB724E5910B00FF286E /* FetchImage in Frameworks */,
 				4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */,
+				08013F4425DC50DB0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */,
@@ -2791,6 +2951,8 @@
 			children = (
 				6F06E0A21DB7791300220FC6 /* ApplicationSettings.h */,
 				6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */,
+				6FB03F5A25DECB3A0033132B /* ApplicationSettingsConstants.h */,
+				6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */,
 				6F556B361DDC419800B5DEA2 /* SettingsBaseViewController.h */,
 				6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */,
 				0806E7B51D50D918002ED406 /* SettingsViewController.h */,
@@ -3061,7 +3223,8 @@
 			children = (
 				08B77AFA240A8D0A00A3BC3B /* Bridges */,
 				08B77A5B2409C48700A3BC3B /* Helpers */,
-				08B77A5A2409C48700A3BC3B /* ApplicationScreenshots.swift */,
+				08B77A5A2409C48700A3BC3B /* ApplicationScreenshots~ios.swift */,
+				6F8D5FB825FBB15100F948C1 /* ApplicationScreenshots~tvos.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -3128,6 +3291,11 @@
 				6F331D1424D06BB800C096AB /* Play RSI.app */,
 				6F331D2C24D06BC600C096AB /* Play RTR.app */,
 				6F331D4424D06C2600C096AB /* Play SWI.app */,
+				08F384A225FA69BB00E1BCF0 /* Play SWI TV screenshots.xctest */,
+				08F3866125FA9AD800E1BCF0 /* Play SRF TV screenshots.xctest */,
+				08F3868825FA9AE000E1BCF0 /* Play RTS TV screenshots.xctest */,
+				08F3869925FA9AE400E1BCF0 /* Play RSI TV screenshots.xctest */,
+				08F386AA25FA9AE800E1BCF0 /* Play RTR TV screenshots.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3419,6 +3587,7 @@
 				0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */,
 				08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */,
 				08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */,
+				08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */,
 				6F88408024EBF92A007463ED /* Play RSI TV.appstore.xcconfig */,
 				6F88409124EBF930007463ED /* Play RSI TV.beta.xcconfig */,
 				6F88408924EBF92D007463ED /* Play RSI TV.debug.xcconfig */,
@@ -3430,6 +3599,7 @@
 				08E78822255B4D5D00E17515 /* Play RSI.xcconfig */,
 				08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */,
 				08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */,
+				08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */,
 				6F88408824EBF92C007463ED /* Play RTR TV.appstore.xcconfig */,
 				6F88409024EBF930007463ED /* Play RTR TV.beta.xcconfig */,
 				6F88408B24EBF92D007463ED /* Play RTR TV.debug.xcconfig */,
@@ -3441,6 +3611,7 @@
 				08E7881C255B4D5B00E17515 /* Play RTR.xcconfig */,
 				08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */,
 				08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */,
+				08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */,
 				6F88408124EBF92A007463ED /* Play RTS TV.appstore.xcconfig */,
 				6F88408C24EBF92E007463ED /* Play RTS TV.beta.xcconfig */,
 				6F88408424EBF92B007463ED /* Play RTS TV.debug.xcconfig */,
@@ -3452,6 +3623,7 @@
 				08E78823255B4D5E00E17515 /* Play RTS.xcconfig */,
 				08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */,
 				08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */,
+				08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */,
 				6F88408A24EBF92D007463ED /* Play SRF TV.appstore.xcconfig */,
 				6F88408724EBF92C007463ED /* Play SRF TV.beta.xcconfig */,
 				6F88409324EBF931007463ED /* Play SRF TV.debug.xcconfig */,
@@ -3463,6 +3635,7 @@
 				08E78820255B4D5D00E17515 /* Play SRF.xcconfig */,
 				08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */,
 				08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */,
+				08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */,
 				6F88408D24EBF92E007463ED /* Play SWI TV.appstore.xcconfig */,
 				6F88408E24EBF92F007463ED /* Play SWI TV.beta.xcconfig */,
 				6F88408224EBF92A007463ED /* Play SWI TV.debug.xcconfig */,
@@ -3473,6 +3646,7 @@
 				6F1EBE16222EBB7D003E0722 /* Play SWI.nightly.xcconfig */,
 				08E7881E255B4D5C00E17515 /* Play SWI.xcconfig */,
 				6F88409424EC05E4007463ED /* Play tvOS Application.xcconfig */,
+				08F384D025FA6BA100E1BCF0 /* Play tvOS Screenshots.xcconfig */,
 				0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */,
 			);
 			path = Xcode;
@@ -3665,12 +3839,11 @@
 				6F82430B250637BE00E931A0 /* Fonts.swift */,
 				08FD789C253E0D3500EF302A /* Foundation+Extensions.swift */,
 				6F355AA224E65CB400F1500E /* HeroMediaCell.swift */,
-				6F5A7929256EE61200E884F2 /* HistoryModel.swift */,
-				6F975738256EEEC4004DA73C /* HistoryView.swift */,
 				6FA84A3124E452F700B1A56E /* HomeModel.swift */,
 				6FCC73B924E6F8EE00ECF73F /* HomeView.swift */,
 				6FDB2AB824E5916F00FF286E /* ImageView.swift */,
 				6F0ED543252B00B000ECE97B /* LabeledButton.swift */,
+				08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */,
 				6F85F81D2567F0D100AC8286 /* LiveMediaCell.swift */,
 				6F331D5F24D0769A00C096AB /* LiveView.swift */,
 				6FF12AA1256C58FE0042F446 /* Logger.swift */,
@@ -3682,10 +3855,11 @@
 				6F5E63A4250CB32E00056160 /* Modifiers.swift */,
 				0805703D2540E0FC00A59C9D /* Navigation.swift */,
 				6FC4140124EF11F400FDF806 /* Play-TV-ObjectiveC-Bridge.h */,
+				6F83872F25E507DC00BDCB25 /* ProfileModel.swift */,
+				08EA3EB6259E33C9008D412F /* ProfileView.swift */,
 				6F151E26256BF5CF009082F8 /* ProgressBar.swift */,
 				6FFCC5E324EFBF2100805B0F /* RadioChannel.swift */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
-				08EA3EB6259E33C9008D412F /* SettingsView.swift */,
 				6F9DDD2625B1ABD2001D5688 /* SearchResultsModel.swift */,
 				6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */,
 				6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */,
@@ -3839,6 +4013,7 @@
 			children = (
 				6FB053F024D4207A004B0CE1 /* LaunchScreen.storyboard */,
 				6FD1205F24D19294008CB2F8 /* RTRAssets.xcassets */,
+				08B961D325E8280800E8AC1B /* Settings.strings */,
 			);
 			path = "Play RTR";
 			sourceTree = "<group>";
@@ -3848,6 +4023,7 @@
 			children = (
 				6FB053F224D42083004B0CE1 /* LaunchScreen.storyboard */,
 				6FD1205124D1927A008CB2F8 /* RTSAssets.xcassets */,
+				08B9617F25E81BE000E8AC1B /* Settings.strings */,
 			);
 			path = "Play RTS";
 			sourceTree = "<group>";
@@ -3857,6 +4033,7 @@
 			children = (
 				6FB053E924D42066004B0CE1 /* LaunchScreen.storyboard */,
 				6FD1205824D19288008CB2F8 /* RSIAssets.xcassets */,
+				08B961A925E827EE00E8AC1B /* Settings.strings */,
 			);
 			path = "Play RSI";
 			sourceTree = "<group>";
@@ -3865,6 +4042,7 @@
 			isa = PBXGroup;
 			children = (
 				6FB053F624D42095004B0CE1 /* LaunchScreen.storyboard */,
+				08B961EB25E8283F00E8AC1B /* Settings.strings */,
 				6FD1206624D1929F008CB2F8 /* SWIAssets.xcassets */,
 			);
 			path = "Play SWI";
@@ -3874,6 +4052,7 @@
 			isa = PBXGroup;
 			children = (
 				6FB053F424D4208C004B0CE1 /* LaunchScreen.storyboard */,
+				08B961D525E8281C00E8AC1B /* Settings.strings */,
 				6FD1204A24D19268008CB2F8 /* SRFAssets.xcassets */,
 			);
 			path = "Play SRF";
@@ -3948,6 +4127,7 @@
 				C7CC3BC704FD48424BB497B2 /* libPods-Play SRG-tvOS-Play RTS TV.a */,
 				D81BAFCE19BF2C2B612FE3A2 /* libPods-Play SRG-tvOS-Play SRF TV.a */,
 				0AD1DB5E0679F09CC8A63D91 /* libPods-Play SRG-tvOS-Play SWI TV.a */,
+				08013EB325DC28F60099A6E8 /* TVServices.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -4355,6 +4535,96 @@
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
 			productType = "com.apple.product-type.application";
 		};
+		08F3849325FA69BB00E1BCF0 /* Play SWI TV screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08F3849D25FA69BB00E1BCF0 /* Build configuration list for PBXNativeTarget "Play SWI TV screenshots" */;
+			buildPhases = (
+				08F3849625FA69BB00E1BCF0 /* Sources */,
+				08F3849A25FA69BB00E1BCF0 /* Frameworks */,
+				08F3849B25FA69BB00E1BCF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08F384BA25FA69CE00E1BCF0 /* PBXTargetDependency */,
+			);
+			name = "Play SWI TV screenshots";
+			productName = "Play SRF screenshots";
+			productReference = 08F384A225FA69BB00E1BCF0 /* Play SWI TV screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		08F3865225FA9AD800E1BCF0 /* Play SRF TV screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08F3865C25FA9AD800E1BCF0 /* Build configuration list for PBXNativeTarget "Play SRF TV screenshots" */;
+			buildPhases = (
+				08F3865525FA9AD800E1BCF0 /* Sources */,
+				08F3865925FA9AD800E1BCF0 /* Frameworks */,
+				08F3865A25FA9AD800E1BCF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08F3874325FA9B2400E1BCF0 /* PBXTargetDependency */,
+			);
+			name = "Play SRF TV screenshots";
+			productName = "Play SRF screenshots";
+			productReference = 08F3866125FA9AD800E1BCF0 /* Play SRF TV screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		08F3867925FA9AE000E1BCF0 /* Play RTS TV screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08F3868325FA9AE000E1BCF0 /* Build configuration list for PBXNativeTarget "Play RTS TV screenshots" */;
+			buildPhases = (
+				08F3867C25FA9AE000E1BCF0 /* Sources */,
+				08F3868025FA9AE000E1BCF0 /* Frameworks */,
+				08F3868125FA9AE000E1BCF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08F3875E25FA9B3800E1BCF0 /* PBXTargetDependency */,
+			);
+			name = "Play RTS TV screenshots";
+			productName = "Play SRF screenshots";
+			productReference = 08F3868825FA9AE000E1BCF0 /* Play RTS TV screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		08F3868A25FA9AE400E1BCF0 /* Play RSI TV screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08F3869425FA9AE400E1BCF0 /* Build configuration list for PBXNativeTarget "Play RSI TV screenshots" */;
+			buildPhases = (
+				08F3868D25FA9AE400E1BCF0 /* Sources */,
+				08F3869125FA9AE400E1BCF0 /* Frameworks */,
+				08F3869225FA9AE400E1BCF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08F3876025FA9B4400E1BCF0 /* PBXTargetDependency */,
+			);
+			name = "Play RSI TV screenshots";
+			productName = "Play SRF screenshots";
+			productReference = 08F3869925FA9AE400E1BCF0 /* Play RSI TV screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		08F3869B25FA9AE800E1BCF0 /* Play RTR TV screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08F386A525FA9AE800E1BCF0 /* Build configuration list for PBXNativeTarget "Play RTR TV screenshots" */;
+			buildPhases = (
+				08F3869E25FA9AE800E1BCF0 /* Sources */,
+				08F386A225FA9AE800E1BCF0 /* Frameworks */,
+				08F386A325FA9AE800E1BCF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08F3879425FA9B5600E1BCF0 /* PBXTargetDependency */,
+			);
+			name = "Play RTR TV screenshots";
+			productName = "Play SRF screenshots";
+			productReference = 08F386AA25FA9AE800E1BCF0 /* Play RTR TV screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		6F0CFB3120C94DF6006B2CE4 /* Play SRF notification service extension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F0CFB3F20C94DF6006B2CE4 /* Build configuration list for PBXNativeTarget "Play SRF notification service extension" */;
@@ -4647,21 +4917,25 @@
 						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
+						TestTargetID = 08C68DBF1D38D70D00BB8AAA;
 					};
 					08B77AB6240A78F200A3BC3B = {
 						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
+						TestTargetID = 08C68DF61D38D72000BB8AAA;
 					};
 					08B77AC7240A7E3200A3BC3B = {
 						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
+						TestTargetID = 08C68E2D1D38D73000BB8AAA;
 					};
 					08B77AD6240A7E5000A3BC3B = {
 						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
+						TestTargetID = 08C68E641D38D73C00BB8AAA;
 					};
 					08C68D881D38D6F400BB8AAA = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -4735,6 +5009,21 @@
 							};
 						};
 					};
+					08F3849325FA69BB00E1BCF0 = {
+						TestTargetID = 6F331D4324D06C2600C096AB;
+					};
+					08F3865225FA9AD800E1BCF0 = {
+						TestTargetID = 6F331CE324D06B8200C096AB;
+					};
+					08F3867925FA9AE000E1BCF0 = {
+						TestTargetID = 6F331CFB24D06BA200C096AB;
+					};
+					08F3868A25FA9AE400E1BCF0 = {
+						TestTargetID = 6F331D1324D06BB800C096AB;
+					};
+					08F3869B25FA9AE800E1BCF0 = {
+						TestTargetID = 6F331D2B24D06BC600C096AB;
+					};
 					6F0CFB3120C94DF6006B2CE4 = {
 						CreatedOnToolsVersion = 9.4;
 						DevelopmentTeam = VMGRRW6SG7;
@@ -4787,27 +5076,22 @@
 					};
 					6F331CE324D06B8200C096AB = {
 						CreatedOnToolsVersion = 12.0;
-						DevelopmentTeam = VMGRRW6SG7;
 						ProvisioningStyle = Automatic;
 					};
 					6F331CFB24D06BA200C096AB = {
 						CreatedOnToolsVersion = 12.0;
-						DevelopmentTeam = VMGRRW6SG7;
 						ProvisioningStyle = Automatic;
 					};
 					6F331D1324D06BB800C096AB = {
 						CreatedOnToolsVersion = 12.0;
-						DevelopmentTeam = VMGRRW6SG7;
 						ProvisioningStyle = Automatic;
 					};
 					6F331D2B24D06BC600C096AB = {
 						CreatedOnToolsVersion = 12.0;
-						DevelopmentTeam = VMGRRW6SG7;
 						ProvisioningStyle = Automatic;
 					};
 					6F331D4324D06C2600C096AB = {
 						CreatedOnToolsVersion = 12.0;
-						DevelopmentTeam = VMGRRW6SG7;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -4864,6 +5148,11 @@
 				08B77AB6240A78F200A3BC3B /* Play RSI screenshots */,
 				08B77AC7240A7E3200A3BC3B /* Play RTR screenshots */,
 				08B77AD6240A7E5000A3BC3B /* Play SWI screenshots */,
+				08F3865225FA9AD800E1BCF0 /* Play SRF TV screenshots */,
+				08F3867925FA9AE000E1BCF0 /* Play RTS TV screenshots */,
+				08F3868A25FA9AE400E1BCF0 /* Play RSI TV screenshots */,
+				08F3869B25FA9AE800E1BCF0 /* Play RTR TV screenshots */,
+				08F3849325FA69BB00E1BCF0 /* Play SWI TV screenshots */,
 			);
 		};
 /* End PBXProject section */
@@ -5229,10 +5518,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		08F3849B25FA69BB00E1BCF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08F3849C25FA69BB00E1BCF0 /* Configuration.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F3865A25FA9AD800E1BCF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08F3865B25FA9AD800E1BCF0 /* Configuration.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F3868125FA9AE000E1BCF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08F3868225FA9AE000E1BCF0 /* Configuration.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F3869225FA9AE400E1BCF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08F3869325FA9AE400E1BCF0 /* Configuration.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F386A325FA9AE800E1BCF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08F386A425FA9AE800E1BCF0 /* Configuration.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F331CE224D06B8200C096AB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B961D625E8281C00E8AC1B /* Settings.strings in Resources */,
 				6F5AA59C2502666A00718420 /* CommonImages.xcassets in Resources */,
 				6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */,
@@ -5248,6 +5578,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B9618025E81BE200E8AC1B /* Settings.strings in Resources */,
 				6F5AA59D2502666B00718420 /* CommonImages.xcassets in Resources */,
 				6F3F1AB025027CAE000FF4DD /* RTSResources.xcassets in Resources */,
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
@@ -5263,6 +5594,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B961AA25E827EF00E8AC1B /* Settings.strings in Resources */,
 				6F5AA59E2502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
 				6F3F1AAE25027CA2000FF4DD /* RSIResources.xcassets in Resources */,
@@ -5278,6 +5610,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B961D425E8280900E8AC1B /* Settings.strings in Resources */,
 				6F5AA59F2502666C00718420 /* CommonImages.xcassets in Resources */,
 				08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
@@ -5293,6 +5626,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B961EC25E8283F00E8AC1B /* Settings.strings in Resources */,
 				6F5AA5A02502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
 				08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */,
@@ -6833,7 +7167,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08B77A5D2409C48700A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77A5D2409C48700A3BC3B /* ApplicationScreenshots~ios.swift in Sources */,
 				08B77AF5240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				08B77A5E2409C48700A3BC3B /* SnapshotHelper.swift in Sources */,
 			);
@@ -6843,7 +7177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08B77AA82409E0A300A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77AA82409E0A300A3BC3B /* ApplicationScreenshots~ios.swift in Sources */,
 				08B77AF6240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				08B77AA92409E0A300A3BC3B /* SnapshotHelper.swift in Sources */,
 			);
@@ -6853,7 +7187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08B77ABA240A78F200A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77ABA240A78F200A3BC3B /* ApplicationScreenshots~ios.swift in Sources */,
 				08B77AF7240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				08B77ABB240A78F200A3BC3B /* SnapshotHelper.swift in Sources */,
 			);
@@ -6863,7 +7197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08B77ACB240A7E3200A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77ACB240A7E3200A3BC3B /* ApplicationScreenshots~ios.swift in Sources */,
 				08B77AF8240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				08B77ACC240A7E3200A3BC3B /* SnapshotHelper.swift in Sources */,
 			);
@@ -6873,7 +7207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08B77ADA240A7E5000A3BC3B /* ApplicationScreenshots.swift in Sources */,
+				08B77ADA240A7E5000A3BC3B /* ApplicationScreenshots~ios.swift in Sources */,
 				08B77AF9240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
 				08B77ADB240A7E5000A3BC3B /* SnapshotHelper.swift in Sources */,
 			);
@@ -6971,6 +7305,7 @@
 				088899452077627900242654 /* TVChannel.m in Sources */,
 				6F3E0A0123D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
 				0827DA251F0D437400A31A42 /* SRGMedia+PlaySRG.m in Sources */,
+				6FB03F5C25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF7BB9C22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F5F4FC41DB10CFD0011CCA3 /* RelatedContentView.m in Sources */,
 				6F1F929E22A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */,
@@ -7233,6 +7568,7 @@
 				6F167F4B248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
 				6F475FBA1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08D8218B126700B2AF2C /* Download.m in Sources */,
+				6FB03F5D25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				0832BF1122BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				081DAA211E099DAE00018623 /* DownloadFooterSectionView.m in Sources */,
 				6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
@@ -7413,6 +7749,7 @@
 				6F167F4C248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
 				6F475FBB1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08D9218B126700B2AF2C /* Download.m in Sources */,
+				6FB03F5E25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				0832BF1222BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				081DAA221E099DAF00018623 /* DownloadFooterSectionView.m in Sources */,
 				6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
@@ -7593,6 +7930,7 @@
 				6F167F4D248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
 				6F475FBC1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08DA218B126700B2AF2C /* Download.m in Sources */,
+				6FB03F5F25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				0832BF1322BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				081DAA231E099DAF00018623 /* DownloadFooterSectionView.m in Sources */,
 				6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
@@ -7773,10 +8111,61 @@
 				6F167F4E248197C700B8E7F1 /* HomeTopicListTableViewCell.m in Sources */,
 				6F475FBD1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6FDF08DB218B126700B2AF2C /* Download.m in Sources */,
+				6FB03F6025DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				0832BF1422BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				081DAA241E099DB000018623 /* DownloadFooterSectionView.m in Sources */,
 				6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD61EB37BC6003021EA /* PageViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F3849625FA69BB00E1BCF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F8D5FBD25FBB15200F948C1 /* ApplicationScreenshots~tvos.swift in Sources */,
+				08F3849825FA69BB00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
+				08F3849925FA69BB00E1BCF0 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F3865525FA9AD800E1BCF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F8D5FB925FBB15200F948C1 /* ApplicationScreenshots~tvos.swift in Sources */,
+				08F3865725FA9AD800E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
+				08F3865825FA9AD800E1BCF0 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F3867C25FA9AE000E1BCF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F8D5FBA25FBB15200F948C1 /* ApplicationScreenshots~tvos.swift in Sources */,
+				08F3867E25FA9AE000E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
+				08F3867F25FA9AE000E1BCF0 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F3868D25FA9AE400E1BCF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F8D5FBB25FBB15200F948C1 /* ApplicationScreenshots~tvos.swift in Sources */,
+				08F3868F25FA9AE400E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
+				08F3869025FA9AE400E1BCF0 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08F3869E25FA9AE800E1BCF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F8D5FBC25FBB15200F948C1 /* ApplicationScreenshots~tvos.swift in Sources */,
+				08F386A025FA9AE800E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
+				08F386A125FA9AE800E1BCF0 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7840,7 +8229,9 @@
 				081456312547740600BB7CA6 /* Badges.swift in Sources */,
 				6F026EED250134FD00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FA8257AAF240077322C /* NSBundle+PlaySRG.m in Sources */,
+				6F6B5BB825E640A600F549E7 /* WatchLater.m in Sources */,
 				6F0E39CD25558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
+				6FC44B3125DE54F800DE6E6F /* Playlist.m in Sources */,
 				6FF1EA46256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED544252B00B000ECE97B /* LabeledButton.swift in Sources */,
@@ -7854,12 +8245,11 @@
 				6FFFB99D252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CC924F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413D124EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EB7259E33C9008D412F /* SettingsView.swift in Sources */,
+				08EA3EB7259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCF925B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B324E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80662508ECA800FD8FE7 /* ShowsView.swift in Sources */,
-				6F5A792A256EE61200E884F2 /* HistoryModel.swift in Sources */,
 				6FCC73BA24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -7869,13 +8259,17 @@
 				6F331CE724D06B8200C096AB /* AppDelegate.swift in Sources */,
 				08B971CD256EF3FF00195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A5250CB32E00056160 /* Modifiers.swift in Sources */,
+				08ADFB1F25EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B09256472F800F57D38 /* ShowsModel.swift in Sources */,
+				08F3851125FA783A00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59725024C4800718420 /* UIImage+PlaySRG.m in Sources */,
+				6F6B5BE525E640C400F549E7 /* NSArray+PlaySRG.m in Sources */,
 				6F85F7F02567ED3C00AC8286 /* SRGProgram+PlaySRG.m in Sources */,
 				6FC413D424EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3224E452F800B1A56E /* HomeModel.swift in Sources */,
 				6F85F7502567ED0D00AC8286 /* ChannelService.m in Sources */,
 				6F3D67E1256827DD0030922B /* SRGChannel+PlaySRG.m in Sources */,
+				6FB03F6125DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF12AA2256C58FE0042F446 /* Logger.swift in Sources */,
 				6F9DDCCB25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1632250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
@@ -7891,9 +8285,10 @@
 				6F3F1AB3250286DA000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2ABF24E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9B7252CA310004E40AE /* MediaDetailModel.swift in Sources */,
-				6F975739256EEEC4004DA73C /* HistoryView.swift in Sources */,
 				08E6135225843C7E00C5FE4B /* PlayApplication.m in Sources */,
+				6FC44B4A25DE552300DE6E6F /* Recommendation.m in Sources */,
 				6FF129DD256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
+				6F83873025E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5925481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7822567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F81E2567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
@@ -7924,7 +8319,9 @@
 				081456322547740600BB7CA6 /* Badges.swift in Sources */,
 				6F026EEE250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FBD257AAF250077322C /* NSBundle+PlaySRG.m in Sources */,
+				6F6B5BB925E640A600F549E7 /* WatchLater.m in Sources */,
 				6F0E39CE25558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
+				6FC44B3225DE54F800DE6E6F /* Playlist.m in Sources */,
 				6FF1EA47256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED545252B00B000ECE97B /* LabeledButton.swift in Sources */,
@@ -7938,12 +8335,11 @@
 				6FFFB99E252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCA24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413D924EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EB8259E33C9008D412F /* SettingsView.swift in Sources */,
+				08EA3EB8259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFA25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B424E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80672508ECA800FD8FE7 /* ShowsView.swift in Sources */,
-				6F5A792B256EE61200E884F2 /* HistoryModel.swift in Sources */,
 				6FCC73BB24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -7953,13 +8349,17 @@
 				6F4FCAF724D06FF7002675EF /* AppDelegate.swift in Sources */,
 				08B971E2256EF40000195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A6250CB32E00056160 /* Modifiers.swift in Sources */,
+				08ADFB2025EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0A256472F800F57D38 /* ShowsModel.swift in Sources */,
+				08F3851225FA783B00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59825024C4900718420 /* UIImage+PlaySRG.m in Sources */,
+				6F6B5BE625E640C500F549E7 /* NSArray+PlaySRG.m in Sources */,
 				6F85F8052567ED3D00AC8286 /* SRGProgram+PlaySRG.m in Sources */,
 				6FC413DC24EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6FA84A3324E452F800B1A56E /* HomeModel.swift in Sources */,
 				6F85F7652567ED0E00AC8286 /* ChannelService.m in Sources */,
 				6F3D67F6256827DE0030922B /* SRGChannel+PlaySRG.m in Sources */,
+				6FB03F6225DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF12AA3256C58FE0042F446 /* Logger.swift in Sources */,
 				6F9DDCCC25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1633250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
@@ -7975,9 +8375,10 @@
 				6F3F1AB6250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC024E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9B8252CA310004E40AE /* MediaDetailModel.swift in Sources */,
-				6F97573A256EEEC4004DA73C /* HistoryView.swift in Sources */,
 				08E6136725843C8100C5FE4B /* PlayApplication.m in Sources */,
+				6FC44B4B25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF129F2256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
+				6F83873125E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5A25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7972567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F81F2567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
@@ -8008,7 +8409,9 @@
 				081456332547740600BB7CA6 /* Badges.swift in Sources */,
 				6F026EEF250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FBE257AAF250077322C /* NSBundle+PlaySRG.m in Sources */,
+				6F6B5BCE25E640A700F549E7 /* WatchLater.m in Sources */,
 				6F0E39CF25558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
+				6FC44B3325DE54F800DE6E6F /* Playlist.m in Sources */,
 				6FF1EA48256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				080570402540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED546252B00B000ECE97B /* LabeledButton.swift in Sources */,
@@ -8022,12 +8425,11 @@
 				6FFFB99F252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCB24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413E124EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EB9259E33C9008D412F /* SettingsView.swift in Sources */,
+				08EA3EB9259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFB25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B524E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80682508ECA800FD8FE7 /* ShowsView.swift in Sources */,
-				6F5A792C256EE61200E884F2 /* HistoryModel.swift in Sources */,
 				6FCC73BC24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -8037,13 +8439,17 @@
 				6F4FCAF924D06FF7002675EF /* AppDelegate.swift in Sources */,
 				08B971E3256EF40100195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A7250CB32E00056160 /* Modifiers.swift in Sources */,
+				08ADFB2125EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0B256472F800F57D38 /* ShowsModel.swift in Sources */,
+				08F3851325FA783C00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59925024C4900718420 /* UIImage+PlaySRG.m in Sources */,
+				6F6B5BE725E640C500F549E7 /* NSArray+PlaySRG.m in Sources */,
 				6F85F8062567ED3D00AC8286 /* SRGProgram+PlaySRG.m in Sources */,
 				6FC413E424EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3424E452F800B1A56E /* HomeModel.swift in Sources */,
 				6F85F7662567ED0F00AC8286 /* ChannelService.m in Sources */,
 				6F3D67F7256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
+				6FB03F6325DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF12AA4256C58FE0042F446 /* Logger.swift in Sources */,
 				6F9DDCCD25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1634250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
@@ -8059,9 +8465,10 @@
 				6F3F1AB5250286DB000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC124E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9B9252CA310004E40AE /* MediaDetailModel.swift in Sources */,
-				6F97573B256EEEC4004DA73C /* HistoryView.swift in Sources */,
 				08E6136825843C8200C5FE4B /* PlayApplication.m in Sources */,
+				6FC44B4C25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF129F3256C0D380042F446 /* PlayDurationFormatter.m in Sources */,
+				6F83873225E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5B25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7AC2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8202567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
@@ -8092,7 +8499,9 @@
 				081456342547740600BB7CA6 /* Badges.swift in Sources */,
 				6F026EF0250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FBF257AAF260077322C /* NSBundle+PlaySRG.m in Sources */,
+				6F6B5BCF25E640A800F549E7 /* WatchLater.m in Sources */,
 				6F0E39D025558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
+				6FC44B3425DE54F900DE6E6F /* Playlist.m in Sources */,
 				6FF1EA49256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				080570412540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED547252B00B000ECE97B /* LabeledButton.swift in Sources */,
@@ -8106,12 +8515,11 @@
 				6FFFB9A0252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCC24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413E924EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EBA259E33C9008D412F /* SettingsView.swift in Sources */,
+				08EA3EBA259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFC25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B624E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F80692508ECA800FD8FE7 /* ShowsView.swift in Sources */,
-				6F5A792D256EE61200E884F2 /* HistoryModel.swift in Sources */,
 				6FCC73BD24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E2A256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -8121,13 +8529,17 @@
 				6F4FCAFB24D06FF7002675EF /* AppDelegate.swift in Sources */,
 				08B971E4256EF40200195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A8250CB32E00056160 /* Modifiers.swift in Sources */,
+				08ADFB2225EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0C256472F800F57D38 /* ShowsModel.swift in Sources */,
+				08F3852A25FA784000E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59A25024C4A00718420 /* UIImage+PlaySRG.m in Sources */,
+				6F6B5BE825E640C600F549E7 /* NSArray+PlaySRG.m in Sources */,
 				6F85F8072567ED3E00AC8286 /* SRGProgram+PlaySRG.m in Sources */,
 				6FC413EC24EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3524E452F800B1A56E /* HomeModel.swift in Sources */,
 				6F85F7672567ED0F00AC8286 /* ChannelService.m in Sources */,
 				6F3D680C256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
+				6FB03F6425DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF12AA5256C58FE0042F446 /* Logger.swift in Sources */,
 				6F9DDCCE25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1635250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
@@ -8143,9 +8555,10 @@
 				6F3F1AB7250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC224E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9BA252CA310004E40AE /* MediaDetailModel.swift in Sources */,
-				6F97573C256EEEC4004DA73C /* HistoryView.swift in Sources */,
 				08E6136925843C8200C5FE4B /* PlayApplication.m in Sources */,
+				6FC44B4D25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF12A08256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
+				6F83873325E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5C25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7AD2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8212567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
@@ -8176,7 +8589,9 @@
 				081456352547740600BB7CA6 /* Badges.swift in Sources */,
 				6F026EF1250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FC0257AAF270077322C /* NSBundle+PlaySRG.m in Sources */,
+				6F6B5BD025E640A800F549E7 /* WatchLater.m in Sources */,
 				6F0E39D125558A0F004C3A12 /* ShowDetailModel.swift in Sources */,
+				6FC44B3525DE54F900DE6E6F /* Playlist.m in Sources */,
 				6FF1EA4A256569FC005FFEEA /* TopicDetailModel.swift in Sources */,
 				080570422540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F0ED548252B00B000ECE97B /* LabeledButton.swift in Sources */,
@@ -8190,12 +8605,11 @@
 				6FFFB9A1252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCD24F2FA8D006013C2 /* CollectionView.swift in Sources */,
 				6FC413F124EEEDCB00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EBB259E33C9008D412F /* SettingsView.swift in Sources */,
+				08EA3EBB259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFD25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1D31B724E5369A005C778B /* ApplicationConfiguration.swift in Sources */,
 				6F1F806A2508ECA800FD8FE7 /* ShowsView.swift in Sources */,
-				6F5A792E256EE61200E884F2 /* HistoryModel.swift in Sources */,
 				6FCC73BE24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E2B256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFE24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -8205,13 +8619,17 @@
 				6F4FCAFD24D06FF8002675EF /* AppDelegate.swift in Sources */,
 				08B971E5256EF40300195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A9250CB32E00056160 /* Modifiers.swift in Sources */,
+				08ADFB2325EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0D256472F800F57D38 /* ShowsModel.swift in Sources */,
+				08F3852925FA783E00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59B25024C4B00718420 /* UIImage+PlaySRG.m in Sources */,
+				6F6B5BE925E640C600F549E7 /* NSArray+PlaySRG.m in Sources */,
 				6F85F8082567ED3E00AC8286 /* SRGProgram+PlaySRG.m in Sources */,
 				6FC413F424EEEDCB00FDF806 /* HomeSection.m in Sources */,
 				6FA84A3624E452F800B1A56E /* HomeModel.swift in Sources */,
 				6F85F7682567ED0F00AC8286 /* ChannelService.m in Sources */,
 				6F3D680D256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
+				6FB03F6525DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF12AA6256C58FE0042F446 /* Logger.swift in Sources */,
 				6F9DDCCF25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
@@ -8227,9 +8645,10 @@
 				6F3F1AB8250286DD000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FDB2AC324E5916F00FF286E /* RedactingView.swift in Sources */,
 				6FFFB9BB252CA310004E40AE /* MediaDetailModel.swift in Sources */,
-				6F97573D256EEEC4004DA73C /* HistoryView.swift in Sources */,
 				08E6136A25843C8300C5FE4B /* PlayApplication.m in Sources */,
+				6FC44B4E25DE552500DE6E6F /* Recommendation.m in Sources */,
 				6FF12A09256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
+				6F83873425E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5D25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7AE2567ED2300AC8286 /* ForegroundTimer.m in Sources */,
 				6F85F8222567F0D100AC8286 /* LiveMediaCell.swift in Sources */,
@@ -8277,6 +8696,31 @@
 			isa = PBXTargetDependency;
 			target = 08C68E641D38D73C00BB8AAA /* Play SWI */;
 			targetProxy = 08B77AE7240A7EA500A3BC3B /* PBXContainerItemProxy */;
+		};
+		08F384BA25FA69CE00E1BCF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F331D4324D06C2600C096AB /* Play SWI TV */;
+			targetProxy = 08F384B925FA69CE00E1BCF0 /* PBXContainerItemProxy */;
+		};
+		08F3874325FA9B2400E1BCF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F331CE324D06B8200C096AB /* Play SRF TV */;
+			targetProxy = 08F3874225FA9B2400E1BCF0 /* PBXContainerItemProxy */;
+		};
+		08F3875E25FA9B3800E1BCF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F331CFB24D06BA200C096AB /* Play RTS TV */;
+			targetProxy = 08F3875D25FA9B3800E1BCF0 /* PBXContainerItemProxy */;
+		};
+		08F3876025FA9B4400E1BCF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F331D1324D06BB800C096AB /* Play RSI TV */;
+			targetProxy = 08F3875F25FA9B4400E1BCF0 /* PBXContainerItemProxy */;
+		};
+		08F3879425FA9B5600E1BCF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F331D2B24D06BC600C096AB /* Play RTR TV */;
+			targetProxy = 08F3879325FA9B5600E1BCF0 /* PBXContainerItemProxy */;
 		};
 		6F0CFB3920C94DF6006B2CE4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -8484,7 +8928,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8517,7 +8960,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8550,7 +8992,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8583,7 +9024,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8613,7 +9053,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8646,7 +9085,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8679,7 +9117,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8712,7 +9149,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8742,7 +9178,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8775,7 +9210,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8808,7 +9242,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8841,7 +9274,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8871,7 +9303,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8904,7 +9335,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8937,7 +9367,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -8970,7 +9399,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9000,7 +9428,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9033,7 +9460,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9066,7 +9492,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9099,7 +9524,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9901,6 +10325,651 @@
 			};
 			name = Nightly;
 		};
+		08F3849E25FA69BB00E1BCF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SWI TV";
+			};
+			name = Debug;
+		};
+		08F3849F25FA69BB00E1BCF0 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SWI TV";
+			};
+			name = AppStore;
+		};
+		08F384A025FA69BB00E1BCF0 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SWI TV";
+			};
+			name = Beta;
+		};
+		08F384A125FA69BB00E1BCF0 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SWI TV";
+			};
+			name = Nightly;
+		};
+		08F3865D25FA9AD800E1BCF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SRF TV";
+			};
+			name = Debug;
+		};
+		08F3865E25FA9AD800E1BCF0 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SRF TV";
+			};
+			name = AppStore;
+		};
+		08F3865F25FA9AD800E1BCF0 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SRF TV";
+			};
+			name = Beta;
+		};
+		08F3866025FA9AD800E1BCF0 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play SRF TV";
+			};
+			name = Nightly;
+		};
+		08F3868425FA9AE000E1BCF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTS TV";
+			};
+			name = Debug;
+		};
+		08F3868525FA9AE000E1BCF0 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTS TV";
+			};
+			name = AppStore;
+		};
+		08F3868625FA9AE000E1BCF0 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTS TV";
+			};
+			name = Beta;
+		};
+		08F3868725FA9AE000E1BCF0 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTS TV";
+			};
+			name = Nightly;
+		};
+		08F3869525FA9AE400E1BCF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RSI TV";
+			};
+			name = Debug;
+		};
+		08F3869625FA9AE400E1BCF0 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RSI TV";
+			};
+			name = AppStore;
+		};
+		08F3869725FA9AE400E1BCF0 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RSI TV";
+			};
+			name = Beta;
+		};
+		08F3869825FA9AE400E1BCF0 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RSI TV";
+			};
+			name = Nightly;
+		};
+		08F386A625FA9AE800E1BCF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTR TV";
+			};
+			name = Debug;
+		};
+		08F386A725FA9AE800E1BCF0 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTR TV";
+			};
+			name = AppStore;
+		};
+		08F386A825FA9AE800E1BCF0 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTR TV";
+			};
+			name = Beta;
+		};
+		08F386A925FA9AE800E1BCF0 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
+			buildSettings = {
+				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Play RTR TV";
+			};
+			name = Nightly;
+		};
 		6F0CFB3B20C94DF6006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */;
@@ -9921,7 +10990,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -9980,7 +11048,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10040,7 +11107,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -10100,7 +11166,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -10125,7 +11190,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -10184,7 +11248,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10244,7 +11307,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -10304,7 +11366,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -10329,7 +11390,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -10388,7 +11448,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10448,7 +11507,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -10508,7 +11566,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -10533,7 +11590,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -10592,7 +11648,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10652,7 +11707,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -10712,7 +11766,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -10736,7 +11789,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -10794,7 +11846,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10853,7 +11904,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -10912,7 +11962,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -10932,7 +11981,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
@@ -10944,7 +11993,6 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
 		};
@@ -11011,7 +12059,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11057,7 +12104,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -11079,7 +12126,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11125,7 +12171,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -11147,7 +12193,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11167,7 +12212,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
@@ -11179,7 +12224,6 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
 		};
@@ -11246,7 +12290,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11292,7 +12335,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -11314,7 +12357,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11360,7 +12402,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -11382,7 +12424,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11402,7 +12443,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
@@ -11414,7 +12455,6 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
 		};
@@ -11481,7 +12521,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11527,7 +12566,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -11549,7 +12588,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11595,7 +12633,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -11617,7 +12655,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11637,7 +12674,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
@@ -11649,7 +12686,6 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
 		};
@@ -11716,7 +12752,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11762,7 +12797,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -11784,7 +12819,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11830,7 +12864,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -11852,7 +12886,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11872,7 +12905,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TV Application/TV-Application-Info.plist";
@@ -11884,7 +12917,6 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 			};
 			name = Debug;
 		};
@@ -11951,7 +12983,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -11997,7 +13028,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -12019,7 +13050,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -12065,7 +13095,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -12087,7 +13117,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -12212,6 +13241,61 @@
 				08C68E911D38D73D00BB8AAA /* AppStore */,
 				08C690F71D3900C400BB8AAA /* Beta */,
 				08C691071D3900CB00BB8AAA /* Nightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Nightly;
+		};
+		08F3849D25FA69BB00E1BCF0 /* Build configuration list for PBXNativeTarget "Play SWI TV screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08F3849E25FA69BB00E1BCF0 /* Debug */,
+				08F3849F25FA69BB00E1BCF0 /* AppStore */,
+				08F384A025FA69BB00E1BCF0 /* Beta */,
+				08F384A125FA69BB00E1BCF0 /* Nightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Nightly;
+		};
+		08F3865C25FA9AD800E1BCF0 /* Build configuration list for PBXNativeTarget "Play SRF TV screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08F3865D25FA9AD800E1BCF0 /* Debug */,
+				08F3865E25FA9AD800E1BCF0 /* AppStore */,
+				08F3865F25FA9AD800E1BCF0 /* Beta */,
+				08F3866025FA9AD800E1BCF0 /* Nightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Nightly;
+		};
+		08F3868325FA9AE000E1BCF0 /* Build configuration list for PBXNativeTarget "Play RTS TV screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08F3868425FA9AE000E1BCF0 /* Debug */,
+				08F3868525FA9AE000E1BCF0 /* AppStore */,
+				08F3868625FA9AE000E1BCF0 /* Beta */,
+				08F3868725FA9AE000E1BCF0 /* Nightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Nightly;
+		};
+		08F3869425FA9AE400E1BCF0 /* Build configuration list for PBXNativeTarget "Play RSI TV screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08F3869525FA9AE400E1BCF0 /* Debug */,
+				08F3869625FA9AE400E1BCF0 /* AppStore */,
+				08F3869725FA9AE400E1BCF0 /* Beta */,
+				08F3869825FA9AE400E1BCF0 /* Nightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Nightly;
+		};
+		08F386A525FA9AE800E1BCF0 /* Build configuration list for PBXNativeTarget "Play RTR TV screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08F386A625FA9AE800E1BCF0 /* Debug */,
+				08F386A725FA9AE800E1BCF0 /* AppStore */,
+				08F386A825FA9AE800E1BCF0 /* Beta */,
+				08F386A925FA9AE800E1BCF0 /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Nightly;
@@ -12342,7 +13426,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.3;
+				minimumVersion = 3.0.4;
 			};
 		};
 		6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */ = {
@@ -12366,7 +13450,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
+				minimumVersion = 7.0.2;
 			};
 		};
 		6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -12382,7 +13466,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 6.2.0;
+				minimumVersion = 7.0.0;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
@@ -12413,8 +13497,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/FetchImage.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.1;
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.3.0;
 			};
 		};
 		6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */ = {
@@ -12429,8 +13513,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/urbanairship/ios-library.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 14.1.2;
+				kind = exactVersion;
+				version = 14.2.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

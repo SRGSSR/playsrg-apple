@@ -7,8 +7,10 @@
 // This file lists all Objective-C headers which must be exposed to Swift code. Update the list as needed. All referenced
 // Objective-C headers will be automatically exposed to all Swift source files.
 
+#import "AccessibilityIdentifierConstants.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSettingsConstants.h"
 #import "ChannelService.h"
 #import "Favorites.h"
 #import "History.h"
@@ -17,6 +19,7 @@
 #import "PlayApplication.h"
 #import "PlayDurationFormatter.h"
 #import "PlayFirebaseConfiguration.h"
+#import "Playlist.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
@@ -24,3 +27,4 @@
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIView+PlaySRG.h"
+#import "WatchLater.h"

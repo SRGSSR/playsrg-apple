@@ -9,6 +9,7 @@
 #import "AccessibilityIdentifierConstants.h"
 #import "ActivityItemSource.h"
 #import "ApplicationSettings.h"
+#import "ApplicationSettingsConstants.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
@@ -323,7 +324,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             labels.type = AnalyticsTypeActionDisplay;
             labels.value = letterboxController.continuousPlaybackUpcomingMedia.URN;
             
-            Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? letterboxController.playlistDataSource : nil;
+            Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
             labels.extraValue1 = playlist.recommendationUid;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
         }
@@ -480,7 +481,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(playlistEntriesDidChange:)
                                                name:SRGPlaylistEntriesDidChangeNotification
-                                             object:nil];
+                                             object:SRGUserData.currentUserData.playlists];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(downloadStateDidChange:)
                                                name:DownloadStateDidChangeNotification
@@ -558,7 +559,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         labels.type = AnalyticsTypeActionCancel;
         labels.value = self.letterboxController.continuousPlaybackUpcomingMedia.URN;
         
-        Playlist *playlist = [self.letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? self.letterboxController.playlistDataSource : nil;
+        Playlist *playlist = [self.letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)self.letterboxController.playlistDataSource : nil;
         labels.extraValue1 = playlist.recommendationUid;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
     }
@@ -1230,20 +1231,21 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)updateWatchLaterStatusForMedia:(SRGMedia *)media
 {
-    if (! WatchLaterCanStoreMediaMetadata(media) || self.letterboxController.continuousPlaybackUpcomingMedia || ! media) {
+    WatchLaterAction action = WatchLaterAllowedActionForMediaMetadata(media);
+    if (action == WatchLaterActionNone || self.letterboxController.continuousPlaybackUpcomingMedia || ! media) {
         self.watchLaterButton.hidden = YES;
         return;
     }
     
     self.watchLaterButton.hidden = NO;
     
-    if (WatchLaterContainsMediaMetadata(media)) {
+    if (action == WatchLaterActionRemove) {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later_full-48"] forState:UIControlStateNormal];
-        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove from the watch later list", @"Media watch later removal label");
+        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Delete from \"Later\" list", @"Media deletion from later list label");
     }
     else {
         [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later-48"] forState:UIControlStateNormal];
-        self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Add to the watch later list", @"Media watch later addition label");
+        self.watchLaterButton.accessibilityLabel = (media.mediaType == SRGMediaTypeAudio) ? PlaySRGAccessibilityLocalizedString(@"Listen later", @"Media addition for an audio to later list label") : PlaySRGAccessibilityLocalizedString(@"Watch later", @"Media addition for a video to later list label");
     }
 }
 
@@ -1282,7 +1284,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         case DownloadStateDownloaded: {
             [self.downloadButton.imageView stopAnimating];
             [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_full-48"] forState:UIControlStateNormal];
-            self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Remove download", @"A download button label");
+            self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Delete download", @"A download button label");
             break;
         }
             
@@ -1302,7 +1304,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [self.favoriteButton setImage:image forState:UIControlStateNormal];
     [self.currentProgramFavoriteButton setImage:image forState:UIControlStateNormal];
     
-    NSString *accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Remove from favorites", @"Favorite label in the player view when a show has been favorited") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite label in the player view when a show can be favorited");
+    NSString *accessibilityLabel = isFavorite ? PlaySRGAccessibilityLocalizedString(@"Delete from favorites", @"Favorite label in the player view when a show has been favorited") : PlaySRGAccessibilityLocalizedString(@"Add to favorites", @"Favorite label in the player view when a show can be favorited");
     self.favoriteButton.accessibilityLabel = accessibilityLabel;
     self.currentProgramFavoriteButton.accessibilityLabel = accessibilityLabel;
 }
@@ -1662,7 +1664,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     labels.value = upcomingMedia.URN;
     
     SRGLetterboxController *controller = letterboxView.controller;
-    Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? controller.playlistDataSource : nil;
+    Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
     labels.extraValue1 = playlist.recommendationUid;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
 }
@@ -1691,7 +1693,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     labels.value = upcomingMedia.URN;
     
     SRGLetterboxController *controller = letterboxView.controller;
-    Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? controller.playlistDataSource : nil;
+    Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
     labels.extraValue1 = playlist.recommendationUid;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
 }
@@ -2005,8 +2007,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         toggleDownload();
     }
     else {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Remove download", @"Title of the confirmation pop-up displayed when the user is about to delete a download")
-                                                                                 message:NSLocalizedString(@"Are you sure you want to delete the downloaded media?", @"Confirmation message displayed when the user is about to delete a download")
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete download", @"Title of the confirmation pop-up displayed when the user is about to delete a download")
+                                                                                 message:NSLocalizedString(@"The downloaded content will be deleted.", @"Confirmation message displayed when the user is about to delete a download")
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of the cancel button in the alert view when deleting a download in the player view") style:UIAlertActionStyleDefault handler:nil]];
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of the delete button in the alert view when deleting a download in the player view") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -2450,7 +2452,11 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)playlistEntriesDidChange:(NSNotification *)notification
 {
-    [self updateWatchLaterStatus];
+    NSString *playlistUid = notification.userInfo[SRGPlaylistUidKey];
+    NSSet<NSString *> *entriesUids = notification.userInfo[SRGPlaylistEntriesUidsKey];
+    if ([playlistUid isEqualToString:SRGPlaylistUidWatchLater] && [entriesUids containsObject:[self mainChapterMedia].URN]) {
+        [self updateWatchLaterStatus];
+    }
 }
 
 - (void)downloadStateDidChange:(NSNotification *)notification

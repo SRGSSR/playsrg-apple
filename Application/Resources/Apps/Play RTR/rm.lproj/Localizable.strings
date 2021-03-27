@@ -7,17 +7,17 @@
 /* Seek forward shortcut label */
 "%@ forward" = "%@ enavant";
 
-/* Message displayed at the top of the screen when adding a media to the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been added to \"Watch later\"" = "%@ è vegnì agiuntà a \"guardar pli tard\"";
+/* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been added to \"Later\"" = "%@ è agiuntà a \"guardar pli tard\"";
 
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
 "%@ has been added to favorites" = "%@ è vegnì agiuntà a mes favurits";
 
-/* Message displayed at the top of the screen when removing an item from the watch later list. Quotes around the content placeholder are managed by the application. */
-"%@ has been removed from \"Watch later\"" = "%@ è vegnì allontanà da \"guardar pli tard\"";
+/* Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been deleted from \"Later\"" = "%@ è stizzà da \"guardar pli tard\"";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
-"%@ has been removed from favorites" = "%@ è vegnì allontanà da mes favurits";
+"%@ has been deleted from favorites" = "%@ è allontanà da mes favurits";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
 "%@ is idle." = "%@ord funcziun.";
@@ -46,11 +46,6 @@
 /* Short title displayed in home pages on a button. */
 "A to Z" = "Dad A fin Z";
 
-/* Button label to add a media to the watch later list, from the media long-press menu
-   Button label to add a media to the watch later list, from the media preview window
-   Context menu action to add a media to the watch later list */
-"Add to \"Watch later\"" = "Agiuntar a \"guardar pli tard\"";
-
 /* Button label to add a download from the media long-press menu
    Button label to add a download from the media preview window
    Context menu action to add a media to the downloads */
@@ -65,26 +60,14 @@
 /* All option */
 "All" = "Tut";
 
+/* Confirmation message displayed when the user is about to delete all download items
+   Confirmation message displayed when the user is about to delete all favorites
+   Confirmation message displayed when the user is about to delete the later list
+   Confirmation message displayed when the user is about to delete the whole history */
+"All items will be deleted." = "Tut ils elements vegnan allontanads";
+
 /* Title label used to present already available videos, usually badged as web first */
 "Already available" = "Gia disponibel";
-
-/* Confirmation message displayed when the user is about to clean all favorites
-   Confirmation message displayed when the user is about to clean the watch later list
-   Confirmation message displayed when the user is about to delete all download items
-   Confirmation message displayed when the user is about to delete the whole history */
-"Are you sure you want to delete all items?" = "Vulais Vus propi stizzar tut ils elements?";
-
-/* Confirmation message displayed when the user is about to delete a download */
-"Are you sure you want to delete the downloaded media?" = "Vulais Vus propi stizzar la telechargiada selectada?";
-
-/* Confirmation message displayed when the user is about to delete selected download items
-   Confirmation message displayed when the user is about to delete selected history entries
-   Confirmation message displayed when the user is about to remove selected entries from favorites
-   Confirmation message displayed when the user is about to remove selected entries from the watch later list */
-"Are you sure you want to delete the selected items?" = "Vulais Vus propi stizzar il elements selectà?";
-
-/* Confirmation message displayed when the user is about to logout on Apple TV */
-"Are you sure you want to logout?" = "Vulais vus propi far il logout?";
 
 /* Audios option
    Audios tab title
@@ -121,22 +104,56 @@
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Selecziunà tes radio regiunal";
 
-/* Settings section header */
+/* Profile content section header
+   Settings section header */
 "Content" = "Cuntegn";
+
+/* Message displayed when the user is about to delete content saved for later */
+"Content saved for later will be deleted on all devices connected to your account." = "Cuntegn arcunà per pli tard vegn allontanà da tut ils apparats cun voss account.";
 
 /* Sort by date option */
 "Date" = "Data";
 
 /* Title of a delete button
    Title of the delete button in the alert view when deleting a download in the player view */
-"Delete" = "Stizzar";
+"Delete" = "Allontanar";
+
+/* Title of the button to delete content saved for later
+   Title of the confirmation pop-up displayed when the user is about to delete content from the later list
+   Title of the message displayed when the user is about to delete content saved for later */
+"Delete content saved for later" = "Allontanar cuntegns arcunads per pli tard";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete a download */
+"Delete download" = "Allontanar download";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete download items */
+"Delete downloads" = "Allontanar downloads";
+
+/* Delete favorites button title
+   Title of the confirmation pop-up displayed when the user is about to delete favorite items
+   Title of the message displayed when the user is about to delete all favorites */
+"Delete favorites" = "Allontanar favurits";
+
+/* Button label to delete a media from the later list, from the media long-press menu
+   Button label to delete a media from the later list, from the media preview window
+   Context menu action to delete a media from the later list */
+"Delete from \"Later\"" = "Allontanar da \"pli tard\"";
+
+/* Button label to delete a download from the media long-press menu
+   Button label to delete a download from the media preview window
+   Context menu action to delete a media from the downloads */
+"Delete from downloads" = "Allontanar da downloads";
+
+/* Button label to delete a show from favorites in the show long-press menu
+   Button label to delete a show from favorites in the show preview window
+   Context menu action to delete a show from favorites
+   Title of the confirmation pop-up displayed when the user is about to delete a favorite */
+"Delete from favorites" = "Allontanar da favurits";
 
 /* Delete history button title
-   Title of the confirmation pop-up displayed when the user is about to clear the history */
-"Delete history" = "Stizzar cronologia";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete selected history entries */
-"Delete history entries" = "Stizzar indicaziuns en cronologia";
+   Title of the confirmation pop-up displayed when the user is about to delete history entries
+   Title of the message displayed when the user is about to delete the history */
+"Delete history" = "Allontanar cronologia";
 
 /* Label for the button disabling autoplay */
 "Disable" = "Inabel";
@@ -181,6 +198,9 @@
    Title label used to present the TV or radio favorite shows */
 "Favorites" = "Favurits";
 
+/* Message displayed when the user is about to delete all favorites */
+"Favorites and notification subscriptions will be deleted on all devices connected to your account." = "Favurits e registraziuns per notificaziuns vegnan allontanadas sin tut ils apparats colliads.";
+
 /* Title displayed at the top of the features list */
 "Features" = "Funcziuns";
 
@@ -201,8 +221,7 @@
    Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
 "Highlights" = "Highlights";
 
-/* History tab title
-   Label to present history */
+/* Label to present history */
 "History" = "Cronologia";
 
 /* Home tab title */
@@ -224,7 +243,9 @@
 "Last week" = "Ultima emna";
 
 /* Label for the button for deciding to opt-in for background video playback at a later time
-   Watch or listen later button label in media detail view */
+   Label to present the later list
+   Title Label used to present the video later list
+   Watch later or listen later button label in media detail view when a media is in the later list */
 "Later" = "Pli tard";
 
 /* Title label used to present the latest episodes from TV favorite shows */
@@ -242,6 +263,12 @@
 
 /* Play button label for audio in media detail view */
 "Listen" = "Tadlar";
+
+/* Button label in media detail view to add an audio to the later list
+   Button label to add an audio to the later list, from the media long-press menu
+   Button label to add an audio to the later list, from the media preview window
+   Context menu action to add an audio to the later list */
+"Listen later" = "Tadlar pli tard";
 
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio
@@ -319,7 +346,7 @@
 /* Introductory time for next program information */
 "Next, at %@" = "Proxim a las %@";
 
-/* Text displayed when no media added to the watch later list */
+/* Text displayed when no media added to the later list */
 "No content" = "Nagin cuntegn";
 
 /* Text displayed when no downloads are available */
@@ -342,9 +369,6 @@
 
 /* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
 "Not available since %@" = "Betg accessibel dapi %@";
-
-/* Text displayed when no user is logged in */
-"Not logged in" = "Betg annunzià";
 
 /* Label to present the help page */
 "Notifications" = "Notificaziuns";
@@ -392,10 +416,13 @@
 /* Name of the search setting to filter content playable abroard */
 "Playable abroad" = "Disponibel en l'exteriur";
 
+/* Message displayed when the user is about to log out */
+"Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Cronologia, favurits e cuntegns arcunads per pli tard vegnan allontanads da quest Apple TV.";
+
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Precedent";
 
-/* Settings section header
+/* Profile section header
    Title displayed at the top of the profile view */
 "Profile" = "Profils";
 
@@ -423,43 +450,6 @@
 /* Sort by relevance option */
 "Relevance" = "Relevanza";
 
-/* Title of the confirmation pop-up displayed when the user is about to clean the watch later list */
-"Remove all content" = "Piglia davent tut il cuntegn";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete all download items */
-"Remove all downloads" = "Allontanar tut las telechargiadas";
-
-/* Remove all favorites button title
-   Title of the confirmation pop-up displayed when the user is about to delete all favorite items */
-"Remove all favorites" = "Allontanar tut ils favurits";
-
-/* Title of the confirmation pop-up displayed when the user is about to remove selected entries from the watch later list */
-"Remove content" = "Pigliar davent cuntegn";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete a download */
-"Remove download" = "Allontanar telechargiada";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete selected download items */
-"Remove downloads" = "Allontanar telechargiadas";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete selected favorite items */
-"Remove favorites" = "Allontanar favurits";
-
-/* Button label to remove a media from the watch later list, from the media long-press menu
-   Button label to remove a media from the watch later list, from the media preview window
-   Context menu action to remove a media from the watch later list */
-"Remove from \"Watch later\"" = "Pigliar davent da \"guardar pli tard\"";
-
-/* Button label to remove a download from the media long-press menu
-   Button label to remove a download from the media preview window
-   Context menu action to remove a media from the downloads */
-"Remove from downloads" = "Allontanar da telechargiadas";
-
-/* Button label to remove a show from favorites in the show long-press menu
-   Button label to remove a show from favorites in the show preview window
-   Context menu action to remove a show from favorites */
-"Remove from favorites" = "Allontanar da favurits";
-
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
 
@@ -468,6 +458,9 @@
 
 /* Resume playback button label */
 "Resume" = "Guardar vinavant";
+
+/* Title label used to present medias whose playback can be resumed */
+"Resume playback" = "Cuntinuar";
 
 /* Label to present the search view
    Search placeholder text
@@ -545,6 +538,9 @@
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Suttitels";
 
+/* Login benefits description footer */
+"Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Sincronisar cronologia, favurits e cuntegns arcunads per pli tard sin tut ils apparats colliads.";
+
 /* Button label to share the content being played. */
 "The content" = "Il cuntegn";
 
@@ -558,17 +554,26 @@
 /* Error message returned for invalid data */
 "The data is invalid" = "Las datas n'èn betg valaivlas";
 
+/* Confirmation message displayed when the user is about to delete a download */
+"The downloaded content will be deleted." = "Il cuntegn chargià vegn allontanà.";
+
 /* Button label to share the entire episode being played. */
 "The entire episode" = "Episoda entira";
 
 /* Button label to share the entire episode being played at time (hours / minutes / seconds). */
 "The episode at %@" = "Episoda a las %@";
 
+/* Confirmation message displayed when a logged in user is about to delete a favorite */
+"The favorite and notification subscription will be deleted on all devices connected to your account." = "Favurits e registraziuns per notificaziuns vegnan allontanads sin tut ils apparats colliads.";
+
 /* Message displayed if the Google Cast receiver cannot play audios */
 "The Google Cast receiver cannot play audios." = "Receptur Google Cast na po laschar ir audios.";
 
 /* Message displayed if the Google Cast receiver cannot play videos */
 "The Google Cast receiver cannot play videos." = "Receptur Google Cast na po laschar ir videos.";
+
+/* Message displayed when the user is about to delete the history */
+"The history will be deleted on all devices connected to your account." = "Cronologia vegn allontanada sin tut ils apparats colliads.";
 
 /* Title label used to present the radio latest audios */
 "The latest audios" = "Ils pli novs audios";
@@ -585,9 +590,15 @@
 "The page cannot be opened." = "La preschentaziun na po betg vegnir averta.";
 
 /* Name of the favorite item, if no title or name to display
-   Name of the subscription item, if no title or name to display
-   Name of the watch later item, if no title or name to display */
+   Name of the later list item, if no title or name to display
+   Name of the subscription item, if no title or name to display */
 "The selected content" = "Il cuntegn selecziunà";
+
+/* Confirmation message displayed when the user is about to delete selected download items
+   Confirmation message displayed when the user is about to delete selected entries from favorites
+   Confirmation message displayed when the user is about to delete selected entries from the later list
+   Confirmation message displayed when the user is about to delete selected history entries */
+"The selected items will be deleted." = "Ils elements selecziunads vegnan allontanads.";
 
 /* Error message when a show cannot be opened via Handoff
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
@@ -647,7 +658,10 @@
    User activity title when watching a video */
 "Watch %@" = "Guardar %@";
 
-/* Label to present the watch later list */
+/* Button label in media detail view to add a video to the later list
+   Button label to add a video to the later list, from the media long-press menu
+   Button label to add a video to the later list, from the media preview window
+   Context menu action to add a video to the later list */
 "Watch later" = "Guardar pli tard";
 
 /* Web first label on media cells
@@ -664,8 +678,8 @@
    Description of the alert view to opt-in for background video playback */
 "You can manage this feature in the settings at any time." = "Vus paudais puspe activar questa funcziun.";
 
-/* Hint displayed when no media added to the watch later list and the device supports 3D touch */
-"You can press on a content to add it to this watch later list" = "Vus pudais smatgar sin in cutegn per l'agiuntar a la glista per guardar pli tard";
+/* Hint displayed when no media added to the later list and the device supports 3D touch */
+"You can press on a content to add it to \"Later\"" = "Smatgar sin elements per agiuntar a \"pli tard\"";
 
 /* Hint displayed when no favorites are available and the device supports 3D touch */
 "You can press on an item to add it to favorites" = "Smatgar sin in element per aschuntar a Vos favurits";
@@ -673,8 +687,8 @@
 /* Hint displayed when no downloads are available and the device supports 3D touch */
 "You can press on an item to download it (not all items can be downloaded)" = "Smatgar sin in element per telechargiar quel (betg tut po vegnir telechargià)";
 
-/* Hint displayed when no media added to the watch later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to this watch later list" = "Vus pudais smatgar e tegnair in cutegn per l'agiuntar a questa glista per guardar pli tard";
+/* Hint displayed when no media added to the later list and the device does not support 3D touch */
+"You can tap and hold a content to add it to \"Later\"" = "Tegnair smatgà in element per l'agiuntar a \"pli tard\"";
 
 /* Hint displayed when no favorites are available and the device does not support 3D touch */
 "You can tap and hold an item to add it to favorites" = "Vus pudais smatgar e tegnair Voss det sin in element per metter en Voss favurits";

@@ -29,12 +29,11 @@ platform :ios do
       end
     end
 
-    appstore_skip_2fa_upgrade
-
-    xcversion(version: '~> 12')
+    xcversion(version: '~> 12.4')
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
+      clean_derived_data unless skip_clean_derived_data
       Dir.chdir('..') { sh 'make bootstrap' }
     end
   end
@@ -105,18 +104,7 @@ platform :ios do
         export_to_appstore: true
       )
 
-      pilot(
-        app_identifier: app_identifier,
-        app_platform: appstore_platform(platform),
-        changelog: changelog,
-        distribute_external: true,
-        groups: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS'],
-        demo_account_required: false,
-        beta_app_review_info: beta_app_review_info
-      )
-
-      UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
-      sleep(90)
+      srg_pilot(app_identifier, platform, changelog)
 
       update_dsyms(app_identifier, platform, appcenter_tv_nightly_names[index], nil)
 
@@ -129,6 +117,15 @@ platform :ios do
     save_last_nightlies_success_git_commit_hash(platform)
   end
 
+  desc 'Sends latest tvOS nightly dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  lane :tvOSnightlyDSYMs do |options|
+    tvos_schemes.each_index do |index|
+      app_identifier = appstore_nightly_identifiers[index]
+      appcenter_appname = appcenter_tv_nightly_names[index]
+      update_dsyms(app_identifier, 'tvOS', appcenter_appname, options)
+    end
+  end
+
   desc 'Add tvOS nightly tester (email required)'
   lane :tvOSnightlyTester do |options|
     addTestFlightTester(
@@ -136,7 +133,7 @@ platform :ios do
       first_name: options[:first_name],
       last_name: options[:last_name],
       app_identifiers: appstore_nightly_identifiers,
-      group_name: ENV['ITUNES_CONNECT_NIGHTLY_GROUPS']
+      group_name: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
     )
   end
 
@@ -196,18 +193,7 @@ platform :ios do
         export_to_appstore: true
       )
 
-      pilot(
-        app_identifier: app_identifier,
-        app_platform: appstore_platform(platform),
-        changelog: what_s_new_for_beta(platform),
-        distribute_external: true,
-        groups: ENV['ITUNES_CONNECT_BETA_GROUPS'],
-        demo_account_required: false,
-        beta_app_review_info: beta_app_review_info
-      )
-
-      UI.message 'Wait 90 seconds before asking dSYMs. Not ready yet.'
-      sleep(90)
+      srg_pilot(app_identifier, platform, what_s_new_for_beta(platform))
 
       update_dsyms(app_identifier, platform, appcenter_tv_beta_names[index], nil)
 
@@ -220,6 +206,15 @@ platform :ios do
     bump_build_number_beta_workflow(platform)
   end
 
+  desc 'Sends latest tvOS nightly dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  lane :tvOSbetaDSYMs do |options|
+    tvos_schemes.each_index do |index|
+      app_identifier = appstore_beta_identifiers[index]
+      appcenter_appname = appcenter_tv_beta_names[index]
+      update_dsyms(app_identifier, 'tvOS', appcenter_appname, options)
+    end
+  end
+
   desc 'Add tvOS beta tester (email required)'
   lane :tvOSbetaTester do |options|
     addTestFlightTester(
@@ -227,7 +222,7 @@ platform :ios do
       first_name: options[:first_name],
       last_name: options[:last_name],
       app_identifiers: appstore_beta_identifiers,
-      group_name: ENV['ITUNES_CONNECT_BETA_GROUPS']
+      group_name: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
     )
   end
 
@@ -246,19 +241,6 @@ platform :ios do
     sh 'bundle exec fastlane ios rtrAppStoreUpload'
   end
 
-  desc 'Uploads a new tvOS build on AppStore Connect with the current build number.'
-  lane :tvOSappStoreUploads do
-    platform = 'tvOS'
-
-    notify_build_number_to_ci(platform, nil)
-
-    sh 'bundle exec fastlane ios tvOSswiAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSsrfAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSrtsAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSrsiAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSrtrAppStoreUpload'
-  end
-
   desc 'Sends latest iOS dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
   lane :dSYMs do |options|
     min_version = options[:min_version]
@@ -273,6 +255,19 @@ platform :ios do
     sh 'bundle exec fastlane ios rtsDSYMs' + options
     sh 'bundle exec fastlane ios rsiDSYMs' + options
     sh 'bundle exec fastlane ios rtrDSYMs' + options
+  end
+
+  desc 'Uploads a new tvOS build on AppStore Connect with the current build number.'
+  lane :tvOSappStoreUploads do
+    platform = 'tvOS'
+
+    notify_build_number_to_ci(platform, nil)
+
+    sh 'bundle exec fastlane ios tvOSswiAppStoreUpload'
+    sh 'bundle exec fastlane ios tvOSsrfAppStoreUpload'
+    sh 'bundle exec fastlane ios tvOSrtsAppStoreUpload'
+    sh 'bundle exec fastlane ios tvOSrsiAppStoreUpload'
+    sh 'bundle exec fastlane ios tvOSrtrAppStoreUpload'
   end
 
   desc 'Sends latest tvOS dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
@@ -293,34 +288,44 @@ platform :ios do
 
   # Individual iOS screenshots
 
-  desc 'SWI: Makes iOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'SWI: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
   lane :swiScreenshots do
-    screenshots('Play SWI screenshots', ['en-US'])
-    upload_screenshots(nil)
+    platform = 'iOS'
+
+    screenshots(platform, 'Play SWI screenshots', ['en-US'])
+    upload_screenshots(platform)
   end
 
-  desc 'SRF: Makes iOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'SRF: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
   lane :srfScreenshots do
-    screenshots('Play SRF screenshots', ['de-DE'])
-    upload_screenshots(nil)
+    platform = 'iOS'
+
+    screenshots(platform, 'Play SRF screenshots', ['de-DE'])
+    # upload_screenshots(platform) # Don't erase existing ones, from SRF marketing team.
   end
 
-  desc 'RTS: Makes iOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'RTS: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
   lane :rtsScreenshots do
-    screenshots('Play RTS screenshots', ['fr-FR'])
-    upload_screenshots(nil)
+    platform = 'iOS'
+
+    screenshots(platform, 'Play RTS screenshots', ['fr-FR'])
+    upload_screenshots(platform)
   end
 
-  desc 'RSI: Makes iOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'RSI: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
   lane :rsiScreenshots do
-    screenshots('Play RSI screenshots', ['it'])
-    upload_screenshots(nil)
+    platform = 'iOS'
+
+    screenshots(platform, 'Play RSI screenshots', ['it'])
+    upload_screenshots(platform)
   end
 
-  desc 'RTR: Makes iOS screenshots and replaces currents on AppStoreConnect.'
+  desc 'RTR: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
   lane :rtrScreenshots do
-    screenshots('Play RTR screenshots', ['de-DE'])
-    upload_screenshots(nil)
+    platform = 'iOS'
+
+    screenshots(platform, 'Play RTR screenshots', ['de-DE'])
+    upload_screenshots(platform)
   end
 
   # Individual iOS build uploads
@@ -375,6 +380,48 @@ platform :ios do
   desc 'RTR: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
   lane :rtrDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
+  end
+
+  # Individual tvOS screenshots
+
+  desc 'SWI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
+  lane :tvOSswiScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'Play SWI TV screenshots', ['en-US'])
+    upload_screenshots(platform)
+  end
+
+  desc 'SRF: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
+  lane :tvOSsrfScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'Play SRF TV screenshots', ['de-DE'])
+    upload_screenshots(platform)
+  end
+
+  desc 'RTS: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
+  lane :tvOSrtsScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'Play RTS TV screenshots', ['fr-FR'])
+    upload_screenshots(platform)
+  end
+
+  desc 'RSI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
+  lane :tvOSrsiScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'Play RSI TV screenshots', ['it'])
+    upload_screenshots(platform)
+  end
+
+  desc 'RTR: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
+  lane :tvOSrtrScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'Play RTR TV screenshots', ['de-DE'])
+    upload_screenshots(platform)
   end
 
   # Individual tvOS build uploads
@@ -449,6 +496,7 @@ platform :ios do
       export_to_appstore: true
     )
 
+    login_with_app_store_connect_api_key
     pilot(
       app_platform: appstore_platform(options[:platform]),
       skip_waiting_for_build_processing: true
@@ -484,6 +532,7 @@ platform :ios do
       include_bitcode: options[:export_to_appstore],
       export_team_id: options[:team_id],
       destination: destination,
+      derived_data_path: derived_data_path,
       output_directory: output_directory
     )
   end
@@ -525,7 +574,7 @@ platform :ios do
     UI.message('Preparing invitations to ' + email + '. 📩')
 
     app_identifiers = options[:app_identifiers] || appstore_beta_identifiers
-    group_name = options[:group_name] || ENV['ITUNES_CONNECT_BETA_GROUPS']
+    group_name = options[:group_name] || ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
 
     spaceship_login
 
@@ -554,7 +603,10 @@ platform :ios do
   end
 
   after_all do |lane|
-    reset_git_repo(skip_clean: true) if cleaned_lane_condition(lane)
+    if cleaned_lane_condition(lane)
+      ENV.delete('DERIVED_DATA_CLEANED')
+      reset_git_repo(skip_clean: true)
+    end
 
     # slack(
     #   message: "Successfully deployed new App Update."
@@ -564,6 +616,7 @@ platform :ios do
   error do |lane|
     if cleaned_lane_condition(lane)
       clean_build_artifacts
+      ENV.delete('DERIVED_DATA_CLEANED')
       reset_git_repo(skip_clean: true, force: true)
     end
 
@@ -581,7 +634,21 @@ end
 def cleaned_lane_condition(lane)
   (lane.to_s != 'devLane') &&
     (!lane.to_s.downcase.include? 'dsym') &&
-    (!lane.to_s.downcase.include? 'tester')
+    (!lane.to_s.downcase.include? 'tester') &&
+    (!lane.to_s.downcase.include? 'screenshots')
+end
+
+def skip_clean_derived_data
+  ENV['DERIVED_DATA_CLEANED'] == '1'
+end
+
+def clean_derived_data
+  Dir.chdir('..') { FileUtils.remove_entry(derived_data_path, true) }
+  ENV['DERIVED_DATA_CLEANED'] = '1'
+end
+
+def derived_data_path
+  'build/DerivedData'
 end
 
 def ios_schemes
@@ -638,6 +705,14 @@ def appstore_beta_identifiers
    ENV['ITUNES_CONNECT_BETA_SRF_APP_IDENTIFIER'],
    ENV['ITUNES_CONNECT_BETA_RSI_APP_IDENTIFIER'],
    ENV['ITUNES_CONNECT_BETA_RTR_APP_IDENTIFIER']]
+end
+
+def appstore_team_api_key_prefixs
+  { ENV['SWI_ITUNES_CONNECT_TEAM_ID'] => 'SWI',
+    ENV['RTS_ITUNES_CONNECT_TEAM_ID'] => 'RTS',
+    ENV['SRF_ITUNES_CONNECT_TEAM_ID'] => 'SRF',
+    ENV['RSI_ITUNES_CONNECT_TEAM_ID'] => 'RSI',
+    ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID'] => 'SRGSSR' } # RTR is in SRG SSR ASC team
 end
 
 # Returns current tag version
@@ -768,15 +843,15 @@ def appstore_platform(platform)
   appstore_platforms[platform]
 end
 
-# New AppStore Connect rule introduced in 02.2021: https://github.com/fastlane/fastlane/issues/18098#issuecomment-772970322
-def appstore_skip_2fa_upgrade
-  ENV['SPACESHIP_SKIP_2FA_UPGRADE'] = '1'
-end
+def login_with_app_store_connect_api_key
+  itc_team_id = app_config.try_fetch_value(:itc_team_id)
+  key_prefix = appstore_team_api_key_prefixs[itc_team_id]
 
-# Returns clean xcodebuid grep output, without warning and errors
-def xcodebuid_grep_output(output)
-  line_count = output.lines.count
-  output.split(/\n/) [line_count - 1]
+  app_store_connect_api_key(
+    key_id: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_ID'],
+    issuer_id: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_ISSUER_ID'],
+    key_content: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_CONTENT']
+  )
 end
 
 # Update only the app identifier for App Store Connect submit.
@@ -787,6 +862,19 @@ def update_app_identifier_to_appstore(platform, app_identifier)
     value: app_identifier
   )
   app_identifier
+end
+
+def srg_pilot(app_identifier, platform, changelog)
+  login_with_app_store_connect_api_key
+  pilot(
+    app_identifier: app_identifier,
+    app_platform: appstore_platform(platform),
+    changelog: changelog,
+    distribute_external: true,
+    groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
+    demo_account_required: false,
+    beta_app_review_info: beta_app_review_info
+  )
 end
 
 # Reset the updated app identifier after App Store Connect submission.
@@ -804,22 +892,38 @@ def update_dsyms(app_identifier, platform, appcenter_appname, options)
   output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
+  try_update_dsyms(app_identifier, platform, appcenter_appname, options, output_directory)
+end
+
+def try_update_dsyms(app_identifier, platform, appcenter_appname, options, output_directory)
   min_version = options ? options[:min_version] : nil
   version = options ? options[:version] : nil
-  download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
-  upload_appcenter_dsyms(appcenter_appname)
+  begin
+    download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
+    upload_appcenter_dsyms(appcenter_appname)
+    lane_context.delete(SharedValues::DSYM_PATHS)
+  rescue StandardError => e
+    UI.important('Update dSYMs failed (' + platform + ' / ' + appcenter_appname + '). ⚠️')
+    UI.error(e.message)
+  end
 end
 
 def download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
   version ||= 'latest'
+
+  # download_dsyms does not support api key token yet.
+  # See https://github.com/fastlane/fastlane/discussions/17485
+  # login_with_app_store_connect_api_key
   download_dsyms(
     app_identifier: app_identifier,
     platform: appstore_platform(platform),
     min_version: min_version,
     version: !min_version ? version : nil,
-    output_directory: output_directory
+    output_directory: output_directory,
+    wait_for_dsym_processing: true,
+    wait_timeout: 90
   )
 end
 
@@ -862,6 +966,8 @@ end
 
 # Returns current build number on AppStore Connect
 def srg_latest_testflight_build_number(app_identifiers, platform)
+  login_with_app_store_connect_api_key
+
   build_number = 0
   app_identifiers.each_index do |index|
     number = latest_testflight_build_number(
@@ -875,13 +981,16 @@ def srg_latest_testflight_build_number(app_identifiers, platform)
 end
 
 # Create screenshots for AppStoreConnect.
-def screenshots(scheme, languages)
+def screenshots(platform, scheme, languages)
+  platform ||= 'iOS'
   output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
   snapshot(
     scheme: scheme,
     languages: languages,
+    devices: snapshot_devices(platform),
+    derived_data_path: derived_data_path,
     output_directory: output_directory
   )
 end
@@ -889,12 +998,14 @@ end
 def upload_screenshots(platform)
   platform ||= 'iOS'
 
+  login_with_app_store_connect_api_key
   deliver(
     platform: appstore_platform(platform),
     app_version: xcode_marketing_version(platform),
     skip_binary_upload: true,
     skip_metadata: true,
     overwrite_screenshots: true,
+    precheck_include_in_app_purchases: false,
     force: true # Don't stop to wait manual preview
   )
 end
@@ -903,6 +1014,7 @@ def can_upload_testflight_build(platform, app_identifier)
   platform ||= 'iOS'
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
 
+  login_with_app_store_connect_api_key
   appstore_build_number = latest_testflight_build_number(
     platform: appstore_platform(platform),
     app_identifier: app_identifier
@@ -949,6 +1061,31 @@ def beta_app_review_info
     contact_last_name: ENV['ITUNES_CONNECT_REVIEW_LAST_NAME'],
     contact_phone: ENV['ITUNES_CONNECT_REVIEW_PHONE']
   }
+end
+
+def snapshot_devices(platform)
+  platform ||= 'iOS'
+
+  if platform == 'iOS'
+    snapshot_ios_devices
+  else
+    snapshot_tvos_devices
+  end
+end
+
+def snapshot_ios_devices
+  [
+    'iPhone 11 Pro Max', # 6.5 inch, required
+    'iPhone 8 Plus', # 5.5 inch, required
+    'iPad Pro (12.9-inch) (4th generation)', # 12.9 inch, required
+    'iPad Pro (12.9-inch) (2nd generation)' # 12.9 inch, required
+  ]
+end
+
+def snapshot_tvos_devices
+  [
+    'Apple TV'
+  ]
 end
 
 def spaceship_login

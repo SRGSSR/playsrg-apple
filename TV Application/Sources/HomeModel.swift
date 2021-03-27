@@ -42,22 +42,38 @@ class HomeModel: Identifiable, ObservableObject {
     
     @Published private(set) var rows: [Row] = []
     
-    private var globalCancellables = Set<AnyCancellable>()
+    private var mainCancellables = Set<AnyCancellable>()
     private var refreshCancellables = Set<AnyCancellable>()
     
     init(id: Id) {
         self.id = id
         self.rowIds = id.defaultRowIds
             
-        NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
-            .sink { notification in
-                guard self.rowIds.contains(where: { $0.isFavoriteShows }) else { return }
-                
-                if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
+        if self.rowIds.contains(where: { $0.isFavoriteShows }) {
+            NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
+                .sink { notification in
+                    guard let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) else { return }
                     self.refresh()
                 }
-            }
-            .store(in: &globalCancellables)
+                .store(in: &mainCancellables)
+        }
+        
+        if self.rowIds.contains(.tvResumePlayback) {
+            NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
+                .sink { _ in
+                    self.refresh()
+                }
+                .store(in: &mainCancellables)
+        }
+        
+        if self.rowIds.contains(.tvWatchLater) {
+            NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+                .sink { notification in
+                    guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
+                    self.refresh()
+                }
+                .store(in: &mainCancellables)
+        }
     }
     
     func refresh() {
@@ -175,6 +191,8 @@ extension HomeModel {
         case tvLatestForModule(_ module: SRGModule?, type: SRGModuleType)
         case tvLatestForTopic(_ topic: SRGTopic?)
         case tvTopicsAccess
+        case tvResumePlayback
+        case tvWatchLater
         
         case radioLatestEpisodes(channelUid: String)
         case radioMostPopular(channelUid: String)
@@ -214,7 +232,7 @@ extension HomeModel {
             switch self {
             case .tvTopicsAccess:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .topicPlaceholder(index: $0)) }
-            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows:
+            case .tvFavoriteShows, .tvFavoriteLatestEpisodes, .radioFavoriteShows, .tvResumePlayback, .tvWatchLater:
                 return []
             case .radioAllShows:
                 return (0..<Self.numberOfPlaceholders).map { RowItem(rowId: self, content: .showPlaceholder(index: $0)) }
@@ -285,6 +303,14 @@ extension HomeModel {
                 return dataProvider.latestMediasForTopic(withUrn: urn, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
                     .eraseToAnyPublisher()
+            case .tvResumePlayback:
+                return historyPublisher()
+                    .map { compatibleMedias($0).prefix(Int(pageSize)).map { RowItem(rowId: self, content: .media($0)) } }
+                    .eraseToAnyPublisher()
+            case .tvWatchLater:
+                return laterPublisher()
+                    .map { compatibleMedias($0).prefix(Int(pageSize)).map { RowItem(rowId: self, content: .media($0)) } }
+                    .eraseToAnyPublisher()
             case let .radioLatestEpisodes(channelUid: channelUid):
                 return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize)
                     .map { $0.medias.map { RowItem(rowId: self, content: .media($0)) } }
@@ -351,13 +377,11 @@ extension HomeModel {
         }
         
         private func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
-            let dataProvider = SRGDataProvider.current!
-            
             /* Load latest 15 medias for each 3 shows, get last 30 episodes */
             return urns.publisher
                 .collect(3)
                 .flatMap { urns in
-                    return dataProvider.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
+                    return SRGDataProvider.current!.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
                 }
                 .reduce([SRGMedia]()) { collectedMedias, result in
                     return collectedMedias + result.medias
@@ -366,6 +390,57 @@ extension HomeModel {
                     return Array(medias.sorted(by: { $0.date > $1.date }).prefix(30))
                 }
                 .eraseToAnyPublisher()
+        }
+        
+        private func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
+            // TODO: Currently suboptimal: For each media we determine if playback can be resumed, an operation on
+            //       the main thread and with a single user data access each time. We could  instead use a currrently
+            //       private history API to combine the history entries we have and the associated medias we retrieve
+            //       with a network request, calculating the progress on a background thread and with only a single
+            //       user data access (the one made at the beginning). This optimization seems premature, though, so
+            //       for the moment a simpler implementation is used.
+            return Future<[SRGHistoryEntry], Error> { promise in
+                let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
+                SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
+                    if let error = error {
+                        promise(.failure(error))
+                    }
+                    else {
+                        promise(.success(historyEntries ?? []))
+                    }
+                }
+            }
+            .map { historyEntries in
+                historyEntries.compactMap { $0.uid }
+            }
+            .flatMap { urns in
+                return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            }
+            .receive(on: DispatchQueue.main)
+            .map { $0.medias.filter { HistoryCanResumePlaybackForMedia($0) } }
+            .eraseToAnyPublisher()
+        }
+        
+        private func laterPublisher() -> AnyPublisher<[SRGMedia], Error> {
+            return Future<[SRGPlaylistEntry], Error> { promise in
+                let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
+                SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
+                    if let error = error {
+                        promise(.failure(error))
+                    }
+                    else {
+                        promise(.success(playlistEntries ?? []))
+                    }
+                }
+            }
+            .map { playlistEntries in
+                playlistEntries.compactMap { $0.uid }
+            }
+            .flatMap { urns in
+                return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            }
+            .map { $0.medias }
+            .eraseToAnyPublisher()
         }
         
         private func canContain(show: SRGShow) -> Bool {
@@ -381,6 +456,10 @@ extension HomeModel {
         
         private func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
             return shows.filter { self.canContain(show: $0) }.sorted(by: { $0.title < $1.title })
+        }
+        
+        private func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
+            return medias.filter { $0.mediaType == .video }
         }
         
         var title: String? {
@@ -403,6 +482,10 @@ extension HomeModel {
                 return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
             case .tvFavoriteLatestEpisodes:
                 return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
+            case .tvResumePlayback:
+                return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
+            case .tvWatchLater:
+                return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
             case .radioLatestEpisodes:
                 return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
             case .radioMostPopular:
