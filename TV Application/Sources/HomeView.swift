@@ -125,9 +125,19 @@ struct HomeView: View {
                     MediaCell(media: nil, style: .show)
                 }
             case let .show(show):
-                ShowCell(show: show)
+                if Self.isHeroAppearance(for: item) {
+                    HeroShowCell(show: show)
+                }
+                else {
+                    ShowCell(show: show)
+                }
             case .showPlaceholder:
-                ShowCell(show: nil)
+                if Self.isHeroAppearance(for: item) {
+                    HeroShowCell(show: nil)
+                }
+                else {
+                    ShowCell(show: nil)
+                }
             case let .topic(topic):
                 TopicCell(topic: topic)
             case .topicPlaceholder:
