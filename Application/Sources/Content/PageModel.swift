@@ -138,7 +138,7 @@ class PageModel: Identifiable, ObservableObject {
     }
     
     private func placeholderItems(for contentSection: SRGContentSection) -> [Item] {
-        guard contentSection.isSupported else {return [] }
+        guard contentSection.isSupported else { return [] }
         
         let defaultNumberOfPlaceholders = 10
         let section = Section(contentSection: contentSection)
@@ -272,7 +272,9 @@ extension PageModel {
 }
 
 extension PageModel {
-    func sectionPublisher(_ contentSection: SRGContentSection) -> AnyPublisher<[Item], Error>? {
+    private func sectionPublisher(_ contentSection: SRGContentSection) -> AnyPublisher<[Item], Error>? {
+        guard contentSection.isSupported else { return nil }
+
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
@@ -474,7 +476,7 @@ extension PageModel {
 }
 
 extension SRGContentSection {
-    var isSupported: Bool {
+    fileprivate var isSupported: Bool {
         switch presentation.type {
         case .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
             return true
