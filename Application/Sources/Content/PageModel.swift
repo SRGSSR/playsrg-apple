@@ -347,9 +347,8 @@ extension PageModel {
         switch self.id {
         case .video:
             return show.transmission == .TV
-        case .audio:
-            // TODO: filter by channelUid
-            return show.transmission == .radio // && show.primaryChannelUid == channelUid
+        case let .audio(channel: channel):
+            return show.transmission == .radio && show.primaryChannelUid == channel.uid
         default:
             return false
         }
@@ -363,8 +362,8 @@ extension PageModel {
         switch self.id {
         case .video:
             return medias.filter { $0.mediaType == .video }
-        case .audio:
-            return medias.filter { $0.mediaType == .audio }
+        case let .audio(channel: channel):
+            return medias.filter { $0.mediaType == .audio && $0.channel?.uid == channel.uid }
         default:
             return medias
         }
