@@ -138,8 +138,6 @@ class PageModel: Identifiable, ObservableObject {
     }
     
     private func placeholderItems(for contentSection: SRGContentSection) -> [Item] {
-        guard contentSection.isSupported else { return [] }
-        
         let defaultNumberOfPlaceholders = 10
         let section = Section(contentSection: contentSection)
         
@@ -273,8 +271,6 @@ extension PageModel {
 
 extension PageModel {
     private func sectionPublisher(_ contentSection: SRGContentSection) -> AnyPublisher<[Item], Error>? {
-        guard contentSection.isSupported else { return nil }
-
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
@@ -472,25 +468,6 @@ extension PageModel {
         }
         .map { $0.medias }
         .eraseToAnyPublisher()
-    }
-}
-
-extension SRGContentSection {
-    fileprivate var isSupported: Bool {
-        switch presentation.type {
-        case .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
-            return true
-        case .favoriteShows, .livestreams, .topicSelector, .resumePlayback, .watchLater, .personalizedProgram:
-            return true
-        case .showAccess:
-            #if os(iOS)
-            return true
-            #else
-            return false
-            #endif
-        case .none:
-            return false
-        }
     }
 }
 
