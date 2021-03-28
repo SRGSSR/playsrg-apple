@@ -242,6 +242,7 @@ extension PageModel {
         // Various kinds of layouts which can be displayed on the home.
         enum Layout: Hashable {
             case featured
+            case highlighted
             case topicSelector
             #if os(iOS)
             case showAccess
@@ -252,8 +253,10 @@ extension PageModel {
         
         var layout: Layout {
             switch contentSection.presentation.type {
-            case .hero, .mediaHighlight, .showHighlight:
+            case .hero:
                 return .featured
+            case .mediaHighlight, .showHighlight:
+                return .highlighted
             case .topicSelector:
                 return .topicSelector
             case .showAccess:

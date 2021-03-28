@@ -8,8 +8,14 @@ import SRGAppearance
 import SwiftUI
 
 struct HeroMediaCell: View {
-    let media: SRGMedia?
+    enum Layout {
+        case featured
+        case highlighted
+    }
     
+    let media: SRGMedia?
+    let layout: Layout
+
     private var redactionReason: RedactionReasons {
         return media == nil ? .placeholder : .init()
     }
@@ -24,7 +30,7 @@ struct HeroMediaCell: View {
                 HStack(spacing: 0) {
                     MediaVisualView(media: media, scale: .large)
                         .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
-                    DescriptionView(media: media)
+                    DescriptionView(media: media, layout: layout)
                         .padding()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
@@ -41,20 +47,33 @@ struct HeroMediaCell: View {
     
     private struct DescriptionView: View {
         let media: SRGMedia?
+        let layout: Layout
         
+        private func textAlignment() -> TextAlignment {
+            return layout == .highlighted ? .leading : .center
+        }
+        
+        private func alignment() -> Alignment {
+            return layout == .highlighted ? .leading : .center
+        }
+
         var body: some View {
             VStack {
                 Spacer()
                 Text(MediaDescription.title(for: media, style: .show))
                     .srgFont(.subtitle)
                     .lineLimit(1)
+                    .multilineTextAlignment(textAlignment())
+                    .frame(maxWidth: .infinity, alignment: alignment())
                     .opacity(0.8)
+                    .padding()
                 Spacer()
                     .frame(height: 10)
                 Text(MediaDescription.subtitle(for: media, style: .show))
                     .srgFont(.title2)
                     .lineLimit(2)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(textAlignment())
+                    .frame(maxWidth: .infinity, alignment: alignment())
                     .padding()
                 if let summary = MediaDescription.summary(for: media) {
                     Spacer()
@@ -62,7 +81,8 @@ struct HeroMediaCell: View {
                     Text(summary)
                         .srgFont(.body)
                         .lineLimit(4)
-                        .multilineTextAlignment(.center)
+                        .multilineTextAlignment(textAlignment())
+                        .frame(maxWidth: .infinity, alignment: alignment())
                         .opacity(0.8)
                         .padding()
                 }

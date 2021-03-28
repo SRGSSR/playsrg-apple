@@ -15,6 +15,8 @@ struct HomeView: View {
             switch section.layout {
             case .featured:
                 return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
+            case .highlighted:
+                return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(480))
             case .topicSelector:
                 let width = CGFloat(250)
                 return NSCollectionLayoutSize(widthDimension: .absolute(width), heightDimension: .absolute(width * 9 / 16))
@@ -35,10 +37,12 @@ struct HomeView: View {
         }
         
         func continuousGroupLeadingBoundary(for section: PageModel.RowSection) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
-            if section.layout == .featured {
+            switch section.layout {
+            case .featured:
                 return .continuous
-            }
-            else {
+            case .highlighted:
+                return .none
+            default:
                 return .continuousGroupLeadingBoundary
             }
         }
@@ -94,15 +98,14 @@ struct HomeView: View {
     private struct Cell: View {
         let item: PageModel.RowItem
         
-        private static func isHeroAppearance(for item: PageModel.RowItem) -> Bool {
-            return item.section.layout == .featured
-        }
-        
         var body: some View {
             switch item.content {
             case let .media(media):
-                if Self.isHeroAppearance(for: item) {
-                    HeroMediaCell(media: media)
+                if item.section.layout == .featured {
+                    HeroMediaCell(media: media, layout: .featured)
+                }
+                else if item.section.layout == .highlighted {
+                    HeroMediaCell(media: media, layout: .highlighted)
                 }
                 else if item.section.isLive {
                     if media.contentType == .livestream || media.contentType == .scheduledLivestream {
@@ -118,22 +121,31 @@ struct HomeView: View {
                     MediaCell(media: media, style: .show)
                 }
             case .mediaPlaceholder:
-                if Self.isHeroAppearance(for: item) {
-                    HeroMediaCell(media: nil)
+                if item.section.layout == .featured {
+                    HeroMediaCell(media: nil, layout: .featured)
+                }
+                else if item.section.layout == .highlighted {
+                    HeroMediaCell(media: nil, layout: .highlighted)
                 }
                 else {
                     MediaCell(media: nil, style: .show)
                 }
             case let .show(show):
-                if Self.isHeroAppearance(for: item) {
-                    HeroShowCell(show: show)
+                if item.section.layout == .featured {
+                    HeroShowCell(show: show, layout: .featured)
+                }
+                else if item.section.layout == .highlighted {
+                    HeroShowCell(show: show, layout: .highlighted)
                 }
                 else {
                     ShowCell(show: show)
                 }
             case .showPlaceholder:
-                if Self.isHeroAppearance(for: item) {
-                    HeroShowCell(show: nil)
+                if item.section.layout == .featured {
+                    HeroShowCell(show: nil, layout: .featured)
+                }
+                else if item.section.layout == .highlighted {
+                    HeroShowCell(show: nil, layout: .highlighted)
                 }
                 else {
                     ShowCell(show: nil)

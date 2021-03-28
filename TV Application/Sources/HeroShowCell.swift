@@ -8,8 +8,14 @@ import SRGAppearance
 import SwiftUI
 
 struct HeroShowCell: View {
-    let show: SRGShow?
+    enum Layout {
+        case featured
+        case highlighted
+    }
     
+    let show: SRGShow?
+    let layout: Layout
+
     private var redactionReason: RedactionReasons {
         return show == nil ? .placeholder : .init()
     }
@@ -28,7 +34,7 @@ struct HeroShowCell: View {
                 HStack(spacing: 0) {
                     ImageView(url: imageUrl)
                         .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
-                    DescriptionView(show: show)
+                    DescriptionView(show: show, layout: layout)
                         .padding()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
@@ -45,14 +51,24 @@ struct HeroShowCell: View {
     
     private struct DescriptionView: View {
         let show: SRGShow?
+        let layout: Layout
         
+        private func textAlignment() -> TextAlignment {
+            return layout == .highlighted ? .leading : .center
+        }
+        
+        private func alignment() -> Alignment {
+            return layout == .highlighted ? .leading : .center
+        }
+
         var body: some View {
             VStack {
                 Spacer()
                 Text(show?.title ?? "")
                     .srgFont(.title2)
                     .lineLimit(2)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(textAlignment())
+                    .frame(maxWidth: .infinity, alignment: alignment())
                     .padding()
                 if let lead = show?.lead {
                     Spacer()
@@ -60,7 +76,8 @@ struct HeroShowCell: View {
                     Text(lead)
                         .srgFont(.body)
                         .lineLimit(4)
-                        .multilineTextAlignment(.center)
+                        .multilineTextAlignment(textAlignment())
+                        .frame(maxWidth: .infinity, alignment: alignment())
                         .opacity(0.8)
                         .padding()
                 }

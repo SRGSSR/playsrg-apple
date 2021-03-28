@@ -131,7 +131,7 @@ struct TopicDetailView: View {
                                 model.loadNextPage(from: media)
                             }
                     default:
-                        HeroMediaCell(media: media)
+                        HeroMediaCell(media: media, layout: .highlighted)
                     }
                 }
             } supplementaryView: { _, indexPath, section, _ in
