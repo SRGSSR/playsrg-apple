@@ -127,7 +127,7 @@ class PageModel: Identifiable, ObservableObject {
     private func loadRows(with ids: [SRGContentSection]? = nil) {
         let reloadedContentSections = ids ?? pageSections
         for contentSection in reloadedContentSections {
-            sectionPublisher(contentSection)?
+            contentSectionPublisher(contentSection)?
                 .replaceError(with: [])
                 .receive(on: DispatchQueue.main)
                 .sink { items in
@@ -270,7 +270,7 @@ extension PageModel {
 }
 
 extension PageModel {
-    private func sectionPublisher(_ contentSection: SRGContentSection) -> AnyPublisher<[Item], Error>? {
+    private func contentSectionPublisher(_ contentSection: SRGContentSection) -> AnyPublisher<[Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
@@ -338,46 +338,6 @@ extension PageModel {
             }
         case .none:
             return nil
-        }
-    }
-    
-    private func canContain(show: SRGShow) -> Bool {
-        switch self.id {
-        case .video:
-            return show.transmission == .TV
-        case let .audio(channel: channel):
-            return show.transmission == .radio && show.primaryChannelUid == channel.uid
-        default:
-            return false
-        }
-    }
-    
-    private func compatibleShows(_ shows: [SRGShow], inSection: SRGContentSection) -> [SRGShow] {
-        return shows.filter { canContain(show: $0) }.sorted(by: { $0.title < $1.title })
-    }
-    
-    private func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
-        switch self.id {
-        case .video:
-            return medias.filter { $0.mediaType == .video }
-        case let .audio(channel: channel):
-            return medias.filter { $0.mediaType == .audio && $0.channel?.uid == channel.uid }
-        default:
-            return medias
-        }
-    }
-    
-    private func filterItems<T>(_ items: [T], section: SRGContentSection) -> [T] {
-        guard section.presentation.type == .mediaHighlight || section.presentation.type == .showHighlight else { return items }
-        
-        if section.presentation.isRandomized, let item = items.randomElement() {
-            return [ item ]
-        }
-        else if !section.presentation.isRandomized, let item = items.first {
-            return [ item ]
-        }
-        else {
-            return []
         }
     }
     
@@ -468,6 +428,48 @@ extension PageModel {
         }
         .map { $0.medias }
         .eraseToAnyPublisher()
+    }
+}
+
+extension PageModel {
+    private func canContain(show: SRGShow) -> Bool {
+        switch self.id {
+        case .video:
+            return show.transmission == .TV
+        case let .audio(channel: channel):
+            return show.transmission == .radio && show.primaryChannelUid == channel.uid
+        default:
+            return false
+        }
+    }
+    
+    private func compatibleShows(_ shows: [SRGShow], inSection: SRGContentSection) -> [SRGShow] {
+        return shows.filter { canContain(show: $0) }.sorted(by: { $0.title < $1.title })
+    }
+    
+    private func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
+        switch self.id {
+        case .video:
+            return medias.filter { $0.mediaType == .video }
+        case let .audio(channel: channel):
+            return medias.filter { $0.mediaType == .audio && $0.channel?.uid == channel.uid }
+        default:
+            return medias
+        }
+    }
+    
+    private func filterItems<T>(_ items: [T], section: SRGContentSection) -> [T] {
+        guard section.presentation.type == .mediaHighlight || section.presentation.type == .showHighlight else { return items }
+        
+        if section.presentation.isRandomized, let item = items.randomElement() {
+            return [ item ]
+        }
+        else if !section.presentation.isRandomized, let item = items.first {
+            return [ item ]
+        }
+        else {
+            return []
+        }
     }
 }
 
