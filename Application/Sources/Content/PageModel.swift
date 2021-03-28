@@ -16,7 +16,8 @@ class PageModel: Identifiable, ObservableObject {
     }
     
     let id: Id
-    var page: SRGContentPage? {
+    
+    private var page: SRGContentPage? {
         didSet {
             self.synchronizeRows()
             self.loadRows()
@@ -45,7 +46,6 @@ class PageModel: Identifiable, ObservableObject {
     
     init(id: Id) {
         self.id = id
-        self.page = nil
         
         NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .sink { notification in
@@ -75,7 +75,6 @@ class PageModel: Identifiable, ObservableObject {
     
     func refresh() {
         refreshCancellables = []
-        
         loadPage()
     }
     
@@ -109,12 +108,6 @@ class PageModel: Identifiable, ObservableObject {
         }
         else {
             rows.append(Row(section: Section(contentSection: contentSection), items: placeholderItems(for: contentSection)))
-        }
-    }
-    
-    private func addRows(with contentSections: [SRGContentSection], to rows: inout [Row]) {
-        for contentSection in contentSections {
-            addRow(with: contentSection, to: &rows)
         }
     }
     
@@ -223,15 +216,6 @@ extension PageModel {
         
         var isLive: Bool {
             if case .livestreams = contentSection.presentation.type {
-                return true
-            }
-            else {
-                return false
-            }
-        }
-        
-        var isFavoriteShows: Bool {
-            if case .favoriteShows = contentSection.presentation.type {
                 return true
             }
             else {
