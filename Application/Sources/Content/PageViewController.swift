@@ -111,6 +111,9 @@ class PageViewController: DataViewController {
         let topicCellIdentifier = "TopicCell"
         collectionView.register(HostCollectionViewCell<TopicCell>.self, forCellWithReuseIdentifier: topicCellIdentifier)
         
+        let showAccessCellIdentifier = "ShowAccessCell"
+        collectionView.register(HostCollectionViewCell<ShowAccessCell>.self, forCellWithReuseIdentifier: showAccessCellIdentifier)
+        
         // TODO: Factor out cell dequeue code per type
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
             switch item.content {
@@ -139,10 +142,9 @@ class PageViewController: DataViewController {
                 topicCell?.content = TopicCell(topic: nil)
                 return topicCell
             case .showAccess:
-                // TODO: ShowAccess cell
-                let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell>
-                topicCell?.content = TopicCell(topic: nil)
-                return topicCell
+                let showAccessCell = collectionView.dequeueReusableCell(withReuseIdentifier: showAccessCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowAccessCell>
+                showAccessCell?.content = ShowAccessCell(radioChannel: nil)
+                return showAccessCell
             }
         }
         
