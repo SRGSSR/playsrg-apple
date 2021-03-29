@@ -4,35 +4,48 @@
 //  License information is available from the LICENSE file.
 //
 
-import SRGDataProviderModel
-
 extension ApplicationConfiguration {
-    private func liveHomeRowId(from homeSection: HomeSection) -> SRGContentSection? {
+    private func liveHomePlaySection(from homeSection: HomeSection) -> PlaySection? {
         switch homeSection {
-        // TODO: Support remote config as SRGContentSection?
-//        case .tvLive:
-//            return .tvLive
-//        case .radioLive:
-//            return .radioLive
-//        case .radioLiveSatellite:
-//            return .radioLiveSatellite
-//        case .tvLiveCenter:
-//            return .tvLiveCenter
-//        case .tvScheduledLivestreams:
-//            return .tvScheduledLivestreams
+        case .tvLive:
+            return .tvLive
+        case .radioLive:
+            return .radioLive
+        case .radioLiveSatellite:
+            return .radioLiveSatellite
+        case .tvLiveCenter:
+            return .tvLiveCenter
+        case .tvScheduledLivestreams:
+            return .tvScheduledLivestreams
         default:
             return nil
         }
     }
     
-    func liveHomeRowIds() -> [SRGContentSection] {
-        var rowIds = [SRGContentSection]()
+    func liveHomePlaySections() -> [PlaySection] {
+        var playSections = [PlaySection]()
         for homeSection in liveHomeSections {
             if let homeSection = HomeSection(rawValue: homeSection.intValue),
-               let rowId = liveHomeRowId(from: homeSection) {
-                rowIds.append(rowId)
+               let playSection = liveHomePlaySection(from: homeSection) {
+                playSections.append(playSection)
             }
         }
-        return rowIds
+        return playSections
     }
+}
+
+enum PlaySection: Hashable {
+        case radioLatestEpisodes(channelUid: String)
+        case radioMostPopular(channelUid: String)
+        case radioLatest(channelUid: String)
+        case radioLatestVideos(channelUid: String)
+        case radioAllShows(channelUid: String)
+        case radioFavoriteShows(channelUid: String)
+        
+        case tvLive
+        case radioLive
+        case radioLiveSatellite
+        
+        case tvLiveCenter
+        case tvScheduledLivestreams
 }

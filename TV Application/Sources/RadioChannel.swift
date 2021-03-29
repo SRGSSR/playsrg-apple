@@ -5,31 +5,30 @@
 //
 
 extension RadioChannel {
-    private func homeRowId(from homeSection: HomeSection, withChannelUid channelUid: String) -> SRGContentSection? {
+    private func homePlaySection(from homeSection: HomeSection, withChannelUid channelUid: String) -> PlaySection? {
         switch homeSection {
-        // TODO: Support remote config as SRGContentSection?
-//        case .radioLatestEpisodes:
-//            return .radioLatestEpisodes(channelUid: channelUid)
-//        case .radioMostPopular:
-//            return .radioMostPopular(channelUid: channelUid)
-//        case .radioLatest:
-//            return .radioLatest(channelUid: channelUid)
-//        case .radioLatestVideos:
-//            return .radioLatestVideos(channelUid: channelUid)
-//        case .radioAllShows:
-//            return .radioAllShows(channelUid: channelUid)
-//        case .radioFavoriteShows:
-//            return .radioFavoriteShows(channelUid: channelUid)
+        case .radioLatestEpisodes:
+            return .radioLatestEpisodes(channelUid: channelUid)
+        case .radioMostPopular:
+            return .radioMostPopular(channelUid: channelUid)
+        case .radioLatest:
+            return .radioLatest(channelUid: channelUid)
+        case .radioLatestVideos:
+            return .radioLatestVideos(channelUid: channelUid)
+        case .radioAllShows:
+            return .radioAllShows(channelUid: channelUid)
+        case .radioFavoriteShows:
+            return .radioFavoriteShows(channelUid: channelUid)
         default:
             return nil
         }
     }
     
-    func homeRowIds() -> [SRGContentSection] {
-        var rowIds = [SRGContentSection]()
+    func homePlaySections() -> [PlaySection] {
+        var rowIds = [PlaySection]()
         for homeSection in homeSections {
             if let homeSection = HomeSection(rawValue: homeSection.intValue),
-               let rowId = homeRowId(from: homeSection, withChannelUid: uid) {
+               let rowId = homePlaySection(from: homeSection, withChannelUid: uid) {
                 rowIds.append(rowId)
             }
         }
