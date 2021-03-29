@@ -7,30 +7,34 @@
 import SRGAppearance
 import SwiftUI
 
-struct HeroMediaCell: View {
+struct FeaturedShowCell: View {
     enum Layout {
-        case featured
+        case hero
         case highlighted
     }
     
-    let media: SRGMedia?
+    let show: SRGShow?
     let layout: Layout
 
     private var redactionReason: RedactionReasons {
-        return media == nil ? .placeholder : .init()
+        return show == nil ? .placeholder : .init()
+    }
+    
+    private var imageUrl: URL? {
+        return show?.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
     }
     
     var body: some View {
         GeometryReader { geometry in
             Button(action: {
-                if let media = media {
-                    navigateToMedia(media)
+                if let show = show {
+                    navigateToShow(show)
                 }
             }) {
                 HStack(spacing: 0) {
-                    MediaVisualView(media: media, scale: .large)
+                    ImageView(url: imageUrl)
                         .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
-                    DescriptionView(media: media, layout: layout)
+                    DescriptionView(show: show, layout: layout)
                         .padding()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
@@ -38,7 +42,7 @@ struct HeroMediaCell: View {
                 .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
                 .redacted(reason: redactionReason)
                 .accessibilityElement()
-                .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
+                .accessibilityLabel(show?.title ?? "")
                 .accessibility(addTraits: .isButton)
             }
             .buttonStyle(CardButtonStyle())
@@ -46,7 +50,7 @@ struct HeroMediaCell: View {
     }
     
     private struct DescriptionView: View {
-        let media: SRGMedia?
+        let show: SRGShow?
         let layout: Layout
         
         private func textAlignment() -> TextAlignment {
@@ -60,25 +64,16 @@ struct HeroMediaCell: View {
         var body: some View {
             VStack {
                 Spacer()
-                Text(MediaDescription.title(for: media, style: .show))
-                    .srgFont(.subtitle)
-                    .lineLimit(1)
-                    .multilineTextAlignment(textAlignment())
-                    .frame(maxWidth: .infinity, alignment: alignment())
-                    .opacity(0.8)
-                    .padding()
-                Spacer()
-                    .frame(height: 10)
-                Text(MediaDescription.subtitle(for: media, style: .show))
+                Text(show?.title ?? "")
                     .srgFont(.title2)
                     .lineLimit(2)
                     .multilineTextAlignment(textAlignment())
                     .frame(maxWidth: .infinity, alignment: alignment())
                     .padding()
-                if let summary = MediaDescription.summary(for: media) {
+                if let lead = show?.lead {
                     Spacer()
                         .frame(height: 20)
-                    Text(summary)
+                    Text(lead)
                         .srgFont(.body)
                         .lineLimit(4)
                         .multilineTextAlignment(textAlignment())
@@ -86,12 +81,34 @@ struct HeroMediaCell: View {
                         .opacity(0.8)
                         .padding()
                 }
-                if let media = media {
-                    AvailabilityBadge(media: media)
+                
+                if let broadcastInformationMessage = show?.broadcastInformation?.message {
+                    Badge(text: broadcastInformationMessage, color: Color(.play_gray))
                 }
                 Spacer()
             }
             .foregroundColor(.white)
+        }
+    }
+}
+
+struct FeaturedShowCell_Previews: PreviewProvider {
+    static var showPreview: SRGShow {
+        let asset = NSDataAsset(name: "show-srf-tv")!
+        let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
+        
+        return try! MTLJSONAdapter(modelClass: SRGShow.self)?.model(fromJSONDictionary: jsonData) as! SRGShow
+    }
+    
+    static var previews: some View {
+        Group {
+            FeaturedShowCell(show: showPreview, layout: .hero)
+                .previewLayout(.fixed(width: 1740, height: 680))
+                .previewDisplayName("SRF show, hero layout")
+            
+            FeaturedShowCell(show: showPreview, layout: .highlighted)
+                .previewLayout(.fixed(width: 1740, height: 480))
+                .previewDisplayName("SRF show, highlighted layout")
         }
     }
 }

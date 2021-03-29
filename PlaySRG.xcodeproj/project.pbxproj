@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0800ED36260F88B70097B17B /* HeroShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800ED35260F88B70097B17B /* HeroShowCell.swift */; };
-		0800ED37260F88B70097B17B /* HeroShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800ED35260F88B70097B17B /* HeroShowCell.swift */; };
-		0800ED38260F88B70097B17B /* HeroShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800ED35260F88B70097B17B /* HeroShowCell.swift */; };
-		0800ED39260F88B70097B17B /* HeroShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800ED35260F88B70097B17B /* HeroShowCell.swift */; };
-		0800ED3A260F88B70097B17B /* HeroShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800ED35260F88B70097B17B /* HeroShowCell.swift */; };
+		0800ED36260F88B70097B17B /* FeaturedShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800ED35260F88B70097B17B /* FeaturedShowCell.swift */; };
+		0800ED37260F88B70097B17B /* FeaturedShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800ED35260F88B70097B17B /* FeaturedShowCell.swift */; };
+		0800ED38260F88B70097B17B /* FeaturedShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800ED35260F88B70097B17B /* FeaturedShowCell.swift */; };
+		0800ED39260F88B70097B17B /* FeaturedShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800ED35260F88B70097B17B /* FeaturedShowCell.swift */; };
+		0800ED3A260F88B70097B17B /* FeaturedShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800ED35260F88B70097B17B /* FeaturedShowCell.swift */; };
 		08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
@@ -766,11 +766,11 @@
 		6F340F54220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F340F55220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F340F56220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
-		6F355AA324E65CB400F1500E /* HeroMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F355AA224E65CB400F1500E /* HeroMediaCell.swift */; };
-		6F355AA424E65CB400F1500E /* HeroMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F355AA224E65CB400F1500E /* HeroMediaCell.swift */; };
-		6F355AA524E65CB400F1500E /* HeroMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F355AA224E65CB400F1500E /* HeroMediaCell.swift */; };
-		6F355AA624E65CB400F1500E /* HeroMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F355AA224E65CB400F1500E /* HeroMediaCell.swift */; };
-		6F355AA724E65CB400F1500E /* HeroMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F355AA224E65CB400F1500E /* HeroMediaCell.swift */; };
+		6F355AA324E65CB400F1500E /* FeaturedMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F355AA224E65CB400F1500E /* FeaturedMediaCell.swift */; };
+		6F355AA424E65CB400F1500E /* FeaturedMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F355AA224E65CB400F1500E /* FeaturedMediaCell.swift */; };
+		6F355AA524E65CB400F1500E /* FeaturedMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F355AA224E65CB400F1500E /* FeaturedMediaCell.swift */; };
+		6F355AA624E65CB400F1500E /* FeaturedMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F355AA224E65CB400F1500E /* FeaturedMediaCell.swift */; };
+		6F355AA724E65CB400F1500E /* FeaturedMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F355AA224E65CB400F1500E /* FeaturedMediaCell.swift */; };
 		6F3A47AF1DD19A5B00C79E67 /* RSIResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47AE1DD19A5B00C79E67 /* RSIResources.xcassets */; };
 		6F3A47B11DD19A6900C79E67 /* RTRResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B01DD19A6900C79E67 /* RTRResources.xcassets */; };
 		6F3A47B31DD19A7B00C79E67 /* RTSResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B21DD19A7B00C79E67 /* RTSResources.xcassets */; };
@@ -2065,7 +2065,7 @@
 		00E494C3E1EB4D27F2A95D22 /* Pods-Play SRG-iOS-Play RTR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.debug.xcconfig"; sourceTree = "<group>"; };
 		0308888C90C1881DBBFCDB84 /* Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
-		0800ED35260F88B70097B17B /* HeroShowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroShowCell.swift; sourceTree = "<group>"; };
+		0800ED35260F88B70097B17B /* FeaturedShowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedShowCell.swift; sourceTree = "<group>"; };
 		08013EB325DC28F60099A6E8 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS14.3.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		0801E0791D4A4A810008021E /* RadioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannel.h; sourceTree = "<group>"; };
 		0801E07A1D4A4A810008021E /* RadioChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioChannel.m; sourceTree = "<group>"; };
@@ -2384,7 +2384,7 @@
 		6F331D5F24D0769A00C096AB /* LiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
 		6F340F50220DA99B00778CA3 /* History.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		6F340F51220DA99B00778CA3 /* History.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
-		6F355AA224E65CB400F1500E /* HeroMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroMediaCell.swift; sourceTree = "<group>"; };
+		6F355AA224E65CB400F1500E /* FeaturedMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedMediaCell.swift; sourceTree = "<group>"; };
 		6F3A47AE1DD19A5B00C79E67 /* RSIResources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RSIResources.xcassets; sourceTree = "<group>"; };
 		6F3A47B01DD19A6900C79E67 /* RTRResources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RTRResources.xcassets; sourceTree = "<group>"; };
 		6F3A47B21DD19A7B00C79E67 /* RTSResources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RTSResources.xcassets; sourceTree = "<group>"; };
@@ -3953,8 +3953,8 @@
 				6F29885F255ADDCD007A8E2B /* Errors.swift */,
 				6FA14534254729DA006E8D3B /* FocusableRegion.swift */,
 				6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */,
-				6F355AA224E65CB400F1500E /* HeroMediaCell.swift */,
-				0800ED35260F88B70097B17B /* HeroShowCell.swift */,
+				6F355AA224E65CB400F1500E /* FeaturedMediaCell.swift */,
+				0800ED35260F88B70097B17B /* FeaturedShowCell.swift */,
 				6FCC73B924E6F8EE00ECF73F /* HomeView.swift */,
 				6F0ED543252B00B000ECE97B /* LabeledButton.swift */,
 				08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */,
@@ -8427,7 +8427,7 @@
 				087B5F48257C5028002F58AF /* Favorites.m in Sources */,
 				6FDB2ABA24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E424EFBF2100805B0F /* RadioChannel.swift in Sources */,
-				6F355AA324E65CB400F1500E /* HeroMediaCell.swift in Sources */,
+				6F355AA324E65CB400F1500E /* FeaturedMediaCell.swift in Sources */,
 				6FC413D224EEEDC900FDF806 /* RadioChannel.m in Sources */,
 				6FFFB99D252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CC924F2FA8D006013C2 /* CollectionView.swift in Sources */,
@@ -8446,7 +8446,7 @@
 				6F331CE724D06B8200C096AB /* AppDelegate.swift in Sources */,
 				08B971CD256EF3FF00195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A5250CB32E00056160 /* Modifiers.swift in Sources */,
-				0800ED36260F88B70097B17B /* HeroShowCell.swift in Sources */,
+				0800ED36260F88B70097B17B /* FeaturedShowCell.swift in Sources */,
 				08ADFB1F25EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B09256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6FCE7AC5260367B90037A861 /* HostViews.swift in Sources */,
@@ -8520,7 +8520,7 @@
 				087B5F49257C5029002F58AF /* Favorites.m in Sources */,
 				6FDB2ABB24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E524EFBF2100805B0F /* RadioChannel.swift in Sources */,
-				6F355AA424E65CB400F1500E /* HeroMediaCell.swift in Sources */,
+				6F355AA424E65CB400F1500E /* FeaturedMediaCell.swift in Sources */,
 				6FC413DA24EEEDC900FDF806 /* RadioChannel.m in Sources */,
 				6FFFB99E252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCA24F2FA8D006013C2 /* CollectionView.swift in Sources */,
@@ -8539,7 +8539,7 @@
 				6F4FCAF724D06FF7002675EF /* AppDelegate.swift in Sources */,
 				08B971E2256EF40000195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A6250CB32E00056160 /* Modifiers.swift in Sources */,
-				0800ED37260F88B70097B17B /* HeroShowCell.swift in Sources */,
+				0800ED37260F88B70097B17B /* FeaturedShowCell.swift in Sources */,
 				08ADFB2025EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0A256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6FCE7AC6260367B90037A861 /* HostViews.swift in Sources */,
@@ -8613,7 +8613,7 @@
 				087B5F4A257C502A002F58AF /* Favorites.m in Sources */,
 				6FDB2ABC24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E624EFBF2100805B0F /* RadioChannel.swift in Sources */,
-				6F355AA524E65CB400F1500E /* HeroMediaCell.swift in Sources */,
+				6F355AA524E65CB400F1500E /* FeaturedMediaCell.swift in Sources */,
 				6FC413E224EEEDCA00FDF806 /* RadioChannel.m in Sources */,
 				6FFFB99F252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCB24F2FA8D006013C2 /* CollectionView.swift in Sources */,
@@ -8632,7 +8632,7 @@
 				6F4FCAF924D06FF7002675EF /* AppDelegate.swift in Sources */,
 				08B971E3256EF40100195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A7250CB32E00056160 /* Modifiers.swift in Sources */,
-				0800ED38260F88B70097B17B /* HeroShowCell.swift in Sources */,
+				0800ED38260F88B70097B17B /* FeaturedShowCell.swift in Sources */,
 				08ADFB2125EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0B256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6FCE7AC7260367B90037A861 /* HostViews.swift in Sources */,
@@ -8706,7 +8706,7 @@
 				087B5F4B257C502B002F58AF /* Favorites.m in Sources */,
 				6FDB2ABD24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E724EFBF2100805B0F /* RadioChannel.swift in Sources */,
-				6F355AA624E65CB400F1500E /* HeroMediaCell.swift in Sources */,
+				6F355AA624E65CB400F1500E /* FeaturedMediaCell.swift in Sources */,
 				6FC413EA24EEEDCA00FDF806 /* RadioChannel.m in Sources */,
 				6FFFB9A0252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCC24F2FA8D006013C2 /* CollectionView.swift in Sources */,
@@ -8725,7 +8725,7 @@
 				6F4FCAFB24D06FF7002675EF /* AppDelegate.swift in Sources */,
 				08B971E4256EF40200195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A8250CB32E00056160 /* Modifiers.swift in Sources */,
-				0800ED39260F88B70097B17B /* HeroShowCell.swift in Sources */,
+				0800ED39260F88B70097B17B /* FeaturedShowCell.swift in Sources */,
 				08ADFB2225EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0C256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6FCE7AC8260367B90037A861 /* HostViews.swift in Sources */,
@@ -8799,7 +8799,7 @@
 				087B5F4C257C502C002F58AF /* Favorites.m in Sources */,
 				6FDB2ABE24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FFCC5E824EFBF2100805B0F /* RadioChannel.swift in Sources */,
-				6F355AA724E65CB400F1500E /* HeroMediaCell.swift in Sources */,
+				6F355AA724E65CB400F1500E /* FeaturedMediaCell.swift in Sources */,
 				6FC413F224EEEDCB00FDF806 /* RadioChannel.m in Sources */,
 				6FFFB9A1252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				6FF60CCD24F2FA8D006013C2 /* CollectionView.swift in Sources */,
@@ -8818,7 +8818,7 @@
 				6F4FCAFD24D06FF8002675EF /* AppDelegate.swift in Sources */,
 				08B971E5256EF40300195901 /* AnalyticsConstants.m in Sources */,
 				6F5E63A9250CB32E00056160 /* Modifiers.swift in Sources */,
-				0800ED3A260F88B70097B17B /* HeroShowCell.swift in Sources */,
+				0800ED3A260F88B70097B17B /* FeaturedShowCell.swift in Sources */,
 				08ADFB2325EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0D256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6FCE7AC9260367B90037A861 /* HostViews.swift in Sources */,

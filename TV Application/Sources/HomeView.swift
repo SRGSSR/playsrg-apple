@@ -13,7 +13,7 @@ struct HomeView: View {
     private static func swimlaneLayoutSection(for section: PageModel.RowSection) -> NSCollectionLayoutSection {
         func layoutGroupSize(for section: PageModel.RowSection) -> NSCollectionLayoutSize {
             switch section.layout {
-            case .featured:
+            case .hero:
                 return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
             case .highlighted:
                 return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(480))
@@ -38,7 +38,7 @@ struct HomeView: View {
         
         func continuousGroupLeadingBoundary(for section: PageModel.RowSection) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
             switch section.layout {
-            case .featured:
+            case .hero:
                 return .continuous
             case .highlighted:
                 return .none
@@ -101,11 +101,11 @@ struct HomeView: View {
         var body: some View {
             switch item.content {
             case let .media(media):
-                if item.section.layout == .featured {
-                    HeroMediaCell(media: media, layout: .featured)
+                if item.section.layout == .hero {
+                    FeaturedMediaCell(media: media, layout: .hero)
                 }
                 else if item.section.layout == .highlighted {
-                    HeroMediaCell(media: media, layout: .highlighted)
+                    FeaturedMediaCell(media: media, layout: .highlighted)
                 }
                 else if item.section.isLive {
                     if media.contentType == .livestream || media.contentType == .scheduledLivestream {
@@ -121,31 +121,31 @@ struct HomeView: View {
                     MediaCell(media: media, style: .show)
                 }
             case .mediaPlaceholder:
-                if item.section.layout == .featured {
-                    HeroMediaCell(media: nil, layout: .featured)
+                if item.section.layout == .hero {
+                    FeaturedMediaCell(media: nil, layout: .hero)
                 }
                 else if item.section.layout == .highlighted {
-                    HeroMediaCell(media: nil, layout: .highlighted)
+                    FeaturedMediaCell(media: nil, layout: .highlighted)
                 }
                 else {
                     MediaCell(media: nil, style: .show)
                 }
             case let .show(show):
-                if item.section.layout == .featured {
-                    HeroShowCell(show: show, layout: .featured)
+                if item.section.layout == .hero {
+                    FeaturedShowCell(show: show, layout: .hero)
                 }
                 else if item.section.layout == .highlighted {
-                    HeroShowCell(show: show, layout: .highlighted)
+                    FeaturedShowCell(show: show, layout: .highlighted)
                 }
                 else {
                     ShowCell(show: show)
                 }
             case .showPlaceholder:
-                if item.section.layout == .featured {
-                    HeroShowCell(show: nil, layout: .featured)
+                if item.section.layout == .hero {
+                    FeaturedShowCell(show: nil, layout: .hero)
                 }
                 else if item.section.layout == .highlighted {
-                    HeroShowCell(show: nil, layout: .highlighted)
+                    FeaturedShowCell(show: nil, layout: .highlighted)
                 }
                 else {
                     ShowCell(show: nil)
