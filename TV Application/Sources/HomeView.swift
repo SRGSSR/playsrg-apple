@@ -15,7 +15,7 @@ struct HomeView: View {
             switch section.layout {
             case .hero:
                 return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
-            case .highlighted:
+            case .highlight:
                 return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(480))
             case .topicSelector:
                 let width = CGFloat(250)
@@ -40,7 +40,7 @@ struct HomeView: View {
             switch section.layout {
             case .hero:
                 return .continuous
-            case .highlighted:
+            case .highlight:
                 return .none
             default:
                 return .continuousGroupLeadingBoundary
@@ -104,7 +104,7 @@ struct HomeView: View {
                 if item.section.layout == .hero {
                     FeaturedMediaCell(media: media, layout: .hero)
                 }
-                else if item.section.layout == .highlighted {
+                else if item.section.layout == .highlight {
                     FeaturedMediaCell(media: media, layout: .highlighted)
                 }
                 else if item.section.isLive {
@@ -124,7 +124,7 @@ struct HomeView: View {
                 if item.section.layout == .hero {
                     FeaturedMediaCell(media: nil, layout: .hero)
                 }
-                else if item.section.layout == .highlighted {
+                else if item.section.layout == .highlight {
                     FeaturedMediaCell(media: nil, layout: .highlighted)
                 }
                 else {
@@ -134,7 +134,7 @@ struct HomeView: View {
                 if item.section.layout == .hero {
                     FeaturedShowCell(show: show, layout: .hero)
                 }
-                else if item.section.layout == .highlighted {
+                else if item.section.layout == .highlight {
                     FeaturedShowCell(show: show, layout: .highlighted)
                 }
                 else {
@@ -144,7 +144,7 @@ struct HomeView: View {
                 if item.section.layout == .hero {
                     FeaturedShowCell(show: nil, layout: .hero)
                 }
-                else if item.section.layout == .highlighted {
+                else if item.section.layout == .highlight {
                     FeaturedShowCell(show: nil, layout: .highlighted)
                 }
                 else {
