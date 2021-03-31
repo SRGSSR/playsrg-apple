@@ -170,7 +170,7 @@ struct TopicDetailView: View {
         
         var body: some View {
             Text(title)
-                .srgFont(.title1)
+                .srgFont(.H1)
                 .foregroundColor(.white)
                 .opacity(0.8)
         }
@@ -181,7 +181,7 @@ struct TopicDetailView: View {
         
         var body: some View {
             Text(title)
-                .srgFont(.title2)
+                .srgFont(.H2)
                 .foregroundColor(.white)
                 .opacity(0.8)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)

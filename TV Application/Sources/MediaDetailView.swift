@@ -5,7 +5,7 @@
 //
 
 import SRGAnalyticsSwiftUI
-import SRGAppearance
+import SRGAppearanceSwift
 import SRGLetterbox
 import SwiftUI
 
@@ -57,12 +57,12 @@ struct MediaDetailView: View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
                     Text(model.media.title)
-                        .srgFont(.title1)
+                        .srgFont(.H1)
                         .lineLimit(3)
                         .foregroundColor(.white)
                     if let showTitle = model.media.show?.title, showTitle.lowercased() != model.media.title.lowercased() {
                         Text(showTitle)
-                            .srgFont(.headline1)
+                            .srgFont(.H3)
                             .foregroundColor(.white)
                     }
                     Spacer()

@@ -57,7 +57,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 
 - (void)play_displayAvailabilityLabelForMediaMetadata:(id<SRGMediaMetadata>)object
 {
-    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     NSString *text = nil;
     NSDate *nowDate = NSDate.date;
@@ -96,7 +96,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.backgroundColor = UIColor.srg_blueColor;
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
-    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+    self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
     self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"Web first", @"Web first label on media cells")].uppercaseString;
 }
 
@@ -104,7 +104,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 
 - (void)play_displayDurationLabelWithTimeAvailability:(SRGTimeAvailability)timeAvailability duration:(NSTimeInterval)duration isLivestreamOrScheduledLivestream:(BOOL)isLivestreamOrScheduledLivestream isLiveEvent:(BOOL)isLiveEvent
 {
-    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+    self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
     
     if (timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
         [self play_displayDurationLabelWithName:NSLocalizedString(@"Soon", @"Short label identifying content which will be available soon.") isLive:NO];
@@ -135,7 +135,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.layer.masksToBounds = YES;
     
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@  ", name].uppercaseString
-                                                                                       attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption],
+                                                                                       attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleCaption],
                                                                                                      NSForegroundColorAttributeName : UIColor.whiteColor }];
     self.attributedText = attributedText.copy;
     self.hidden = NO;
@@ -146,7 +146,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.backgroundColor = UIColor.play_whiteBadgeColor;
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
-    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+    self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
     self.text = [NSString stringWithFormat:@"  %@  ", string].uppercaseString;
     self.textColor = UIColor.blackColor;
 }

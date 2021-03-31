@@ -70,7 +70,7 @@ struct FeaturedMediaCell: View {
                 Spacer()
                     .frame(height: 10)
                 Text(MediaDescription.subtitle(for: media, style: .show))
-                    .srgFont(.title2)
+                    .srgFont(.H2)
                     .lineLimit(2)
                     .multilineTextAlignment(textAlignment())
                     .frame(maxWidth: .infinity, alignment: alignment())

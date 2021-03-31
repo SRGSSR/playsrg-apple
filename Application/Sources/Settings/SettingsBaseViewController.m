@@ -122,21 +122,21 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.02f];
-    cell.textLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    cell.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     cell.textLabel.textColor = UIColor.whiteColor;
-    cell.detailTextLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    cell.detailTextLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     cell.tintColor = UIColor.whiteColor;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UITableViewHeaderFooterView *)view forSection:(NSInteger)section
 {
-    view.textLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
+    view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
     view.textLabel.textColor = UIColor.play_lightGrayColor;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UITableViewHeaderFooterView *)view forSection:(NSInteger)section
 {
-    view.textLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -118,7 +118,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UITableViewHeaderFooterView *)view forSection:(NSInteger)section
 {
-    view.textLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
+    view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
     view.textLabel.textColor = UIColor.play_lightGrayColor;
     
     UIView *backgroundView = [[UIView alloc] init];

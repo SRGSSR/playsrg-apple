@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/firebase/abseil-cpp-SwiftPM.git",
         "state": {
           "branch": null,
-          "revision": "05d8107f2971a37e6c77245b7c4c6b0a7e97bc99",
-          "version": "0.20200225.0"
+          "revision": "697fb93ee29def0198c456118b69bdfea9a02a5d",
+          "version": "0.20200225.2"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/firebase/boringssl-SwiftPM.git",
         "state": {
           "branch": null,
-          "revision": "7bcafa2660bc58715c39637494550d1ed7cd7229",
-          "version": "0.0.7"
+          "revision": "6fbad5bf8bd80a36d342bf1693e4423870124d4c",
+          "version": "0.0.9"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "e118a7fb4319eaa37fd03c3b4216c93811d9c413",
-          "version": "7.8.1"
+          "revision": "6f680dd0c8892a315f354bb861b03c5c38829e56",
+          "version": "7.9.1"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "9db2a8536e804dced3ccf8c1b4d05051f014f941",
-          "version": "7.8.1"
+          "revision": "4a30a474eb175ebf3d3ede045614fad99fa9b9bf",
+          "version": "7.9.0"
         }
       },
       {
@@ -87,8 +87,8 @@
         "repositoryURL": "https://github.com/google/GoogleDataTransport.git",
         "state": {
           "branch": null,
-          "revision": "34bd15a31149e42eadd6c75bd67aaea002e23bf4",
-          "version": "8.3.0"
+          "revision": "3615a4ca10961d82ed2b5459cd9a5cb5ebc03ff2",
+          "version": "8.3.1"
         }
       },
       {
@@ -105,8 +105,8 @@
         "repositoryURL": "https://github.com/firebase/grpc-SwiftPM.git",
         "state": {
           "branch": null,
-          "revision": "91b62619e6c83bc5f1b99d9d60fe46b2862d3a5a",
-          "version": "1.28.2"
+          "revision": "23034739dda2f3355d081b54c1ab4e9667314b75",
+          "version": "1.28.3"
         }
       },
       {
@@ -132,8 +132,8 @@
         "repositoryURL": "https://github.com/firebase/leveldb.git",
         "state": {
           "branch": null,
-          "revision": "fa1f25f296a766e5a789c4dacd4798dea798b2c2",
-          "version": "1.22.1"
+          "revision": "0706abcc6b0bd9cedfbb015ba840e4a780b5159b",
+          "version": "1.22.2"
         }
       },
       {
@@ -177,8 +177,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "ed4896dbd5c9e30dbd8c75db04c9614d2d751bd0",
-          "version": "9.3.1"
+          "revision": "6e6c6b5f8acaaac1ac4f7024dcf40f2facabc0a3",
+          "version": "9.4.1"
         }
       },
       {
@@ -212,18 +212,18 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": null,
-          "revision": "5a1549c460ca7ec1254ece8a276fdd8fdef45838",
-          "version": "7.0.2"
+          "branch": "feature/font-overhaul",
+          "revision": "0c6844e43030af7abf9312842fbc7d781fe4aa43",
+          "version": null
         }
       },
       {
         "package": "SRGAppearance",
         "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
         "state": {
-          "branch": null,
-          "revision": "1e635509b57626073cfff3d74037214e2e42e6e5",
-          "version": "3.0.2"
+          "branch": "feature/font-overhaul",
+          "revision": "975a51fb7c43354289c24a814abdd1abd097f6f0",
+          "version": null
         }
       },
       {
@@ -257,18 +257,18 @@
         "package": "SRGIdentity",
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
-          "branch": null,
-          "revision": "a5ab9cca5cb7dbbcc8615634c2f605d283d42963",
-          "version": "3.0.4"
+          "branch": "feature/font-overhaul",
+          "revision": "65f0686f9afebf91a1ee9135dae3688bab7cb274",
+          "version": null
         }
       },
       {
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": null,
-          "revision": "7e0785d6b02e6d6842bce45e563fb3b2d062b16b",
-          "version": "7.0.0"
+          "branch": "feature/font-overhaul",
+          "revision": "3ebcaa140c16c7a9e6ee3e59988b3eab244bbe03",
+          "version": null
         }
       },
       {
@@ -302,9 +302,9 @@
         "package": "SRGUserData",
         "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
         "state": {
-          "branch": null,
-          "revision": "8797a4e16fd44d2eeaa0ab1908539f3f7035c840",
-          "version": "3.0.1"
+          "branch": "feature/font-overhaul",
+          "revision": "24ce5cc1014cd571fcab4a60a331a833f90fdc9b",
+          "version": null
         }
       },
       {

@@ -231,20 +231,20 @@
 {
     _media = media;
     
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     self.titleLabel.text = media.title;
     
     if (media.contentType != SRGContentTypeLivestream) {
         NSString *showTitle = media.show.title;
         if (showTitle && ! [media.title containsString:showTitle]) {
             NSMutableAttributedString *subtitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ - ", showTitle]
-                                                                                         attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle] }];
+                                                                                         attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle] }];
             [subtitle appendAttributedString:[[NSAttributedString alloc] initWithString:[NSDateFormatter.play_relativeDateFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString
-                                                                             attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle] }]];
+                                                                             attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle] }]];
             self.subtitleLabel.attributedText = subtitle.copy;
         }
         else {
-            self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+            self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
             self.subtitleLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
         }
     }

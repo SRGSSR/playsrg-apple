@@ -143,7 +143,7 @@
         [self.avatarImageView yy_setImageWithURL:nil placeholder:placeholderImage options:YYWebImageOptionSetImageWithFadeAnimation completion:nil];
     }
     
-    self.accountLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.accountLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     self.accountLabel.textColor = color;
     
     if (identityService.loggedIn) {

@@ -77,10 +77,10 @@
     
     if (serviceMessage.text) {
         NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:serviceMessage.text
-                                                                                           attributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody] }];
+                                                                                           attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleBody] }];
         if (serviceMessage.URL) {
             [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", NSLocalizedString(@"Learn more", @"Label inviting the user to learn more information about an issue")]
-                                                                                   attributes:@{ NSFontAttributeName : [UIFont srg_boldFontWithTextStyle:SRGAppearanceFontTextStyleBody] }]];
+                                                                                   attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleBody] }]];
         }
         self.messageLabel.attributedText = attributedText.copy;
     }

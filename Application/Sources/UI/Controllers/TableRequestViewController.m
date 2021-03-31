@@ -236,7 +236,7 @@
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     // Remark: No test for self.loading since a custom view is used in such cases
-    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
+    NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH1],
                                   NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
     
     if (self.lastRequestError) {
@@ -258,7 +258,7 @@
     NSString *description = (self.lastRequestError == nil) ? self.emptyTableSubtitle : NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it");
     if (description) {
         return [[NSAttributedString alloc] initWithString:description
-                                               attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                               attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
                                                              NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
     }
     else {

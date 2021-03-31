@@ -151,7 +151,7 @@
     
     searchBar.placeholder = NSLocalizedString(@"Search", @"Search placeholder text");
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    searchBar.play_textField.font = [UIFont srg_regularFontWithSize:18.f];
+    searchBar.play_textField.font = [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:18.f];
     searchBar.delegate = self;
     searchBar.text = self.query;
     searchBar.tintColor = UIColor.whiteColor;
@@ -318,7 +318,7 @@
             UIButton *filtersButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [filtersButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
             
-            filtersButton.titleLabel.font = [UIFont srg_regularFontWithSize:16.f];
+            filtersButton.titleLabel.font = [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f];
             [filtersButton setTitle:NSLocalizedString(@"Filters", @"Filters button title") forState:UIControlStateNormal];
             [filtersButton setTitleColor:UIColor.grayColor forState:UIControlStateHighlighted];
             

@@ -165,7 +165,7 @@ struct HomeView: View {
             VStack(alignment: .leading) {
                 if let title = section.title {
                     Text(title)
-                        .srgFont(.title2)
+                        .srgFont(.H2)
                         .lineLimit(1)
                 }
                 if let summary = section.summary {

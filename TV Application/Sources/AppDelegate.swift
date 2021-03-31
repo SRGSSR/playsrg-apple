@@ -8,7 +8,7 @@ import AppCenter
 import AppCenterCrashes
 import Firebase
 import SRGAnalyticsIdentity
-import SRGAppearance
+import SRGAppearanceSwift
 import SRGDataProviderCombine
 import SRGUserData
 import SwiftUI
@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appearance.selectionIndicatorTintColor = .srg_color(fromHexadecimalString: "#979797")
         
         let itemAppearance = appearance.inlineLayoutAppearance
-        itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIFont.srg_mediumFont(withSize: 28),
+        itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: SRGFont.font(family: .text, weight: .medium, size: 28) as UIFont,
                                                      NSAttributedString.Key.foregroundColor: UIColor.white]
         itemAppearance.normal.iconColor = .white
         

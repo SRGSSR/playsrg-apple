@@ -19,13 +19,13 @@ struct ProfileView: View {
     var body: some View {
         List {
             if model.supportsLogin {
-                Section(header: Text(NSLocalizedString("Profile", comment: "Profile section header")).srgFont(.headline1),
+                Section(header: Text(NSLocalizedString("Profile", comment: "Profile section header")).srgFont(.H3),
                         footer: Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.overline).opacity(0.8)) {
                     ProfileListItem(model: model)
                 }
             }
             if let synchronizationMessage = synchronizationMessage {
-                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.headline1),
+                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3),
                         footer: Text(synchronizationMessage).srgFont(.overline).opacity(0.8)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
@@ -33,7 +33,7 @@ struct ProfileView: View {
                 }
             }
             else {
-                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.headline1)) {
+                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
                     WatchLaterRemovalListItem(model: model)
@@ -45,7 +45,7 @@ struct ProfileView: View {
                     AutoplayListItem()
                 }
             }
-            Section(header: Text(PlaySRGSettingsLocalizedString("Information", "Information section header")).srgFont(.headline1)) {
+            Section(header: Text(PlaySRGSettingsLocalizedString("Information", "Information section header")).srgFont(.H3)) {
                 VersionListItem(model: model)
             }
         }

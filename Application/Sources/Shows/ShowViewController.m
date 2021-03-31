@@ -292,7 +292,7 @@
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
 {
     if (self.show.broadcastInformation.URL) {
-        NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
+        NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH1],
                                       NSForegroundColorAttributeName : UIColor.whiteColor };
         return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Show more", @"Show more button label when a link is available for broadcast information.") attributes:attributes];
     }

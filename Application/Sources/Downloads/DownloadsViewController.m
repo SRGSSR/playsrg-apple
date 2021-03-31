@@ -188,7 +188,7 @@
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
+    NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH1],
                                   NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No downloads", @"Text displayed when no downloads are available") attributes:attributes];
 }
@@ -197,7 +197,7 @@
 {
     NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on an item to download it (not all items can be downloaded)", @"Hint displayed when no downloads are available and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold an item to download it (not all items can be downloaded)", @"Hint displayed when no downloads are available and the device does not support 3D touch");
     return [[NSAttributedString alloc] initWithString:description
-                                           attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                           attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
                                                          NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
 }
 

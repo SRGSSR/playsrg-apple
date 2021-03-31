@@ -67,10 +67,10 @@
 {
     _module = module;
     
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
     self.titleLabel.text = module.title;
     
-    self.subtitleLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     self.subtitleLabel.text = module.lead;
 }
 

@@ -147,7 +147,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     UITabBar.appearance.tintColor = UIColor.whiteColor;
     
     for (NSNumber *controlState in @[ @(UIControlStateNormal), @(UIControlStateHighlighted), @(UIControlStateDisabled) ]) {
-        [UITabBarItem.appearance setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:12.f] }
+        [UITabBarItem.appearance setTitleTextAttributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:12.f] }
                                                forState:controlState.integerValue];
     }
     

@@ -128,7 +128,7 @@ struct SearchResultsView: View {
             } supplementaryView: { _, indexPath, section, _ in
                 if section == .shows {
                     Text(NSLocalizedString("Most searched shows", comment: "Most searched shows header"))
-                        .srgFont(.title2)
+                        .srgFont(.H2)
                         .opacity(0.8)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                 }

@@ -181,7 +181,7 @@ struct ShowDetailView: View {
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text(show.title)
-                        .srgFont(.title1)
+                        .srgFont(.H1)
                         .lineLimit(3)
                         .foregroundColor(.white)
                     if let broadcastInformationMessage = show.broadcastInformation?.message {

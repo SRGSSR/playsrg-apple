@@ -41,7 +41,7 @@
 {
     [super awakeFromNib];
     
-    [self.segmentedControl setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
+    [self.segmentedControl setTitleTextAttributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f] }
                                          forState:UIControlStateNormal];
     
     self.backgroundColor = UIColor.play_popoverGrayBackgroundColor;

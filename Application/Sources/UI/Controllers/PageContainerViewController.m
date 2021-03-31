@@ -234,7 +234,7 @@
 
 - (void)updateFonts
 {
-    UIFont *tabBarFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    UIFont *tabBarFont = [SRGFont fontWithStyle:SRGFontStyleBody];
     self.tabBar.unselectedItemTitleFont = tabBarFont;
     self.tabBar.selectedItemTitleFont = tabBarFont;
 }

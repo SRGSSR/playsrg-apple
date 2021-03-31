@@ -211,13 +211,13 @@
     FSCalendarAppearance *calendarAppearance = self.calendar.appearance;
     
     // Month / year
-    calendarAppearance.headerTitleFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    calendarAppearance.headerTitleFont = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     // Week days
-    calendarAppearance.weekdayFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    calendarAppearance.weekdayFont = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     // Days
-    calendarAppearance.titleFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    calendarAppearance.titleFont = [SRGFont fontWithStyle:SRGFontStyleBody];
 }
 
 #pragma mark Status bar

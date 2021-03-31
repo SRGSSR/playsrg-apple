@@ -220,7 +220,7 @@
     self.mediaView.hidden = NO;
     self.placeholderView.hidden = YES;
     
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     SRGBlockingReason blockingReason = [self.media blockingReasonAtDate:NSDate.date];
     if (blockingReason == SRGBlockingReasonNone || blockingReason == SRGBlockingReasonStartDate) {
@@ -234,7 +234,7 @@
     CGFloat subtitleFontSize = 11.f;
     ImageScale imageScale = ImageScaleMedium;
     
-    self.subtitleLabel.font = [UIFont srg_mediumFontWithSize:subtitleFontSize];
+    self.subtitleLabel.font = [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:subtitleFontSize];
     
     SRGChannel *channel = self.programComposition.channel ?: self.media.channel;
     if (channel) {
@@ -272,11 +272,11 @@
         NSString *showTitle = self.media.show.title;
         if (showTitle && ! [self.media.title containsString:showTitle]) {
             NSMutableAttributedString *subtitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ - ", showTitle]
-                                                                                         attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithSize:subtitleFontSize] }];
+                                                                                         attributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:subtitleFontSize] }];
             
             NSDateFormatter *dateFormatter = NSDateFormatter.play_relativeDateAndTimeFormatter;
             [subtitle appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:self.media.date].play_localizedUppercaseFirstLetterString
-                                                                             attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithSize:subtitleFontSize] }]];
+                                                                             attributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightLight fixedSize:subtitleFontSize] }]];
             
             self.subtitleLabel.attributedText = subtitle.copy;
         }

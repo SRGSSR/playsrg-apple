@@ -101,9 +101,9 @@ import SRGAppearance
         let smallFontSize = CGFloat(isTall ? 20.0 : 14.0)
         let largeFontSize = CGFloat(isTall ? 24.0 : 16.0)
         
-        self.previousButton.titleLabel?.font = UIFont.srg_mediumFont(withSize: smallFontSize)
-        self.closeButton.titleLabel?.font = UIFont.srg_mediumFont(withSize: largeFontSize)
-        self.nextButton.titleLabel?.font = UIFont.srg_mediumFont(withSize: smallFontSize)
+        self.previousButton.titleLabel?.font = SRGFont.font(family: .text, weight: .medium, fixedSize: smallFontSize)
+        self.closeButton.titleLabel?.font = SRGFont.font(family: .text, weight: .medium, fixedSize: largeFontSize)
+        self.nextButton.titleLabel?.font = SRGFont.font(family: .text, weight: .medium, fixedSize: smallFontSize)
         
         self.buttonBottomConstraint.constant = 0.19 * self.view.frame.height;
     }
@@ -176,8 +176,8 @@ extension OnboardingViewController : PaperOnboardingDataSource {
                                   color: page.color,
                                   titleColor: .white,
                                   descriptionColor: .white,
-                                  titleFont: UIFont.srg_mediumFont(withSize: titleFontSize),
-                                  descriptionFont: UIFont.srg_mediumFont(withSize: subtitleFontSize),
+                                  titleFont: SRGFont.font(family: .text, weight: .medium, fixedSize: titleFontSize),
+                                  descriptionFont: SRGFont.font(family: .text, weight: .medium, fixedSize: subtitleFontSize),
                                   descriptionLabelPadding: 30.0,
                                   titleLabelPadding: 15.0)
     }

@@ -191,11 +191,11 @@
 
 - (void)reloadData
 {
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     SRGChannel *channel = self.programComposition.channel;
     if (channel) {
-        self.liveLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.liveLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
         if (! self.controller || self.controller.live) {
             self.titleLabel.numberOfLines = 1;
             self.liveLabel.hidden = NO;

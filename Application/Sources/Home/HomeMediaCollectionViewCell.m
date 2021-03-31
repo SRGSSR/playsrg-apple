@@ -238,32 +238,32 @@
     self.mediaView.hidden = NO;
     self.placeholderView.hidden = YES;
     
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:self.featured ? SRGAppearanceFontTextStyleTitle : SRGAppearanceFontTextStyleBody];
+    self.titleLabel.font = self.featured ? [SRGFont fontWithStyle:SRGFontStyleH1] : [SRGFont fontWithStyle:SRGFontStyleBody];
     self.titleLabel.text = self.media.title;
     
-    self.durationLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
-    self.editorialLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+    self.durationLabel.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
+    self.editorialLabel.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
     
     self.editorialLabel.hidden = (self.media.source != SRGSourceEditor);
     
-    SRGAppearanceFontTextStyle subtitleTextStyle = self.featured ? SRGAppearanceFontTextStyleBody : SRGAppearanceFontTextStyleSubtitle;
+    SRGFontStyle subtitleTextStyle = self.featured ? SRGFontStyleBody : SRGFontStyleSubtitle;
     ImageScale imageScale = self.featured ? ImageScaleMedium : ImageScaleSmall;
     
     if (self.media.contentType != SRGContentTypeLivestream) {
         NSString *showTitle = self.media.show.title;
         if (showTitle && ! [self.media.title containsString:showTitle]) {
             NSMutableAttributedString *subtitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ - ", showTitle]
-                                                                                         attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:subtitleTextStyle] }];
+                                                                                         attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:subtitleTextStyle] }];
             
             BOOL displayTime = ([self.media blockingReasonAtDate:NSDate.date] == SRGBlockingReasonStartDate) && self.media.play_today;
             NSDateFormatter *dateFormatter = self.featured ? NSDateFormatter.play_relativeDateAndTimeFormatter : (displayTime ? NSDateFormatter.play_shortTimeFormatter : NSDateFormatter.play_relativeDateFormatter);
             [subtitle appendAttributedString:[[NSAttributedString alloc] initWithString:[dateFormatter stringFromDate:self.media.date].play_localizedUppercaseFirstLetterString
-                                                                             attributes:@{ NSFontAttributeName : [UIFont srg_lightFontWithTextStyle:subtitleTextStyle] }]];
+                                                                             attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:subtitleTextStyle] }]];
             
             self.subtitleLabel.attributedText = subtitle.copy;
         }
         else {
-            self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:subtitleTextStyle];
+            self.subtitleLabel.font = [SRGFont fontWithStyle:subtitleTextStyle];
             self.subtitleLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:self.media.date].play_localizedUppercaseFirstLetterString;
         }
     }

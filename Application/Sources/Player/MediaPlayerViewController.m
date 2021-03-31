@@ -756,7 +756,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     UIImage *closeButtonImage = (media.mediaType == SRGMediaTypeAudio || AVAudioSession.srg_isAirPlayActive || ApplicationSettingBackgroundVideoPlaybackEnabled()) ? [UIImage imageNamed:@"arrow_down-48"] : [UIImage imageNamed:@"close-48"];
     [self.closeButton setImage:closeButtonImage forState:UIControlStateNormal];
     
-    self.relatedContentsTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
+    self.relatedContentsTitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH3];
     self.relatedContentsTitleLabel.text = NSLocalizedString(@"More on this subject", @"Title of the related content player section");
     
     // Cleanup related content views first
@@ -812,7 +812,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             [self addSongPanelWithChannel:channel];
         }
         
-        self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.livestreamButton.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     }
     else {
         self.scrollView.hidden = NO;
@@ -820,10 +820,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
         
-        self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
+        self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
         self.titleLabel.text = media.title;
         
-        self.dateLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
         if (media.date) {
             self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
             self.dateLabel.accessibilityLabel = PlayAccessibilityRelativeDateAndTimeFromDate(media.date);
@@ -835,7 +835,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         [self removeSongPanel];
         
-        self.viewCountLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.viewCountLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
         
         NSPredicate *socialViewsPredicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGSocialCount.new, type), @(SRGSocialCountTypeSRGView)];
         SRGSocialCount *socialCount = [media.socialCounts filteredArrayUsingPredicate:socialViewsPredicate].firstObject;
@@ -869,7 +869,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         }
 #endif
         
-        self.summaryLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.summaryLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
         self.summaryLabel.text = media.play_fullSummary;
         
         BOOL downloaded = [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded;
@@ -895,12 +895,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self.subtitlesLabel play_setSubtitlesAvailableBadge];
         
         [self updateRadioHomeButton];
-        self.radioHomeButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.radioHomeButton.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
         
         UIImage *youthProtectionColorImage = YouthProtectionImageForColor(media.youthProtectionColor);
         if (youthProtectionColorImage) {
             self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
-            self.youthProtectionColorLabel.font = [UIFont srg_italicFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+            self.youthProtectionColorLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
             self.youthProtectionColorLabel.text = SRGMessageForYouthProtectionColor(media.youthProtectionColor);
             self.youthProtectionColorSpacerView.hidden = NO;
             [self.youthProtectionColorStackView play_setHidden:NO];
@@ -914,7 +914,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         NSString *imageCopyright = media.imageCopyright;
         if (imageCopyright) {
-            self.imageCopyrightLabel.font = [UIFont srg_italicFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+            self.imageCopyrightLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
             self.imageCopyrightLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Image credit: %@", @"Image copyright introductory label"), imageCopyright];
             self.imageCopyrightSpacerView.hidden = NO;
         }
@@ -934,10 +934,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (show) {
         [self.showThumbnailImageView play_requestImageForObject:show withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList unavailabilityHandler:nil];
         
-        self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
         self.showLabel.text = show.title;
         
-        self.numberOfEpisodesLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.numberOfEpisodesLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
         
         NSInteger numberOfEpisodes = show.numberOfEpisodes;
         if (numberOfEpisodes != 0) {
@@ -989,8 +989,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.currentProgramSubtitleLabel.textColor = foregroundColor;
     self.currentProgramFavoriteButton.tintColor = foregroundColor;
     
-    self.currentProgramTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
-    self.currentProgramSubtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    self.currentProgramTitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH3];
+    self.currentProgramSubtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
     
     SRGProgram *currentProgram = [self currentProgram];
     if (currentProgram) {

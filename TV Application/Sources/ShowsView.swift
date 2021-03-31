@@ -133,7 +133,7 @@ struct ShowsView: View {
         
         var body: some View {
             Text(title)
-                .srgFont(.title2)
+                .srgFont(.H2)
                 .lineLimit(1)
                 .foregroundColor(.white)
                 .opacity(0.8)

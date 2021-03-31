@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-import SRGAppearance
+import SRGAppearanceSwift
 import SwiftUI
 
 struct FeaturedShowCell: View {
@@ -65,7 +65,7 @@ struct FeaturedShowCell: View {
             VStack {
                 Spacer()
                 Text(show?.title ?? "")
-                    .srgFont(.title2)
+                    .srgFont(.H2)
                     .lineLimit(2)
                     .multilineTextAlignment(textAlignment())
                     .frame(maxWidth: .infinity, alignment: alignment())

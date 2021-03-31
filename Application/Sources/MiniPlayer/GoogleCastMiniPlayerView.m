@@ -115,8 +115,8 @@
 
 - (void)updateFonts
 {
-    self.liveLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.liveLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
 }
 
 #pragma mark Accessibility

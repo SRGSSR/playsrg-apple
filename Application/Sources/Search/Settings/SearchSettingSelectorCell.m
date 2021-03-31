@@ -24,7 +24,7 @@
 {
     _name = name;
     
-    self.nameLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.nameLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     self.nameLabel.text = name;
 }
 

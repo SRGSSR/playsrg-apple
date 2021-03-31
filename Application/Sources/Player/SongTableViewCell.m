@@ -40,17 +40,17 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 + (UIFont *)timeLabelFont
 {
-    return [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    return [SRGFont fontWithStyle:SRGFontStyleSubtitle];
 }
 
 + (UIFont *)titleLabelFont
 {
-    return [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    return [SRGFont fontWithStyle:SRGFontStyleBody];
 }
 
 + (UIFont *)artistLabelFont
 {
-    return [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    return [SRGFont fontWithStyle:SRGFontStyleBody];
 }
 
 + (CGFloat)heightForSong:(SRGSong *)song withCellWidth:(CGFloat)width

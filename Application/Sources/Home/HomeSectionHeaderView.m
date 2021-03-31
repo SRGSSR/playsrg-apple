@@ -38,7 +38,7 @@
     
     self.moduleBackgroundView.backgroundColor = homeSectionInfo.module.play_backgroundColor;
     
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
     self.titleLabel.text = homeSectionInfo.title;
     
     self.navigationButton.hidden = ! [homeSectionInfo canOpenList] || ! self.titleLabel.text;

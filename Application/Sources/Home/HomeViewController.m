@@ -455,14 +455,14 @@ typedef NS_ENUM(NSInteger, HomeHeaderType) {
     }
     
     return [[NSAttributedString alloc] initWithString:title
-                                           attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
+                                           attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH1],
                                                          NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
 }
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it")
-                                           attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                           attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
                                                          NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
 }
 

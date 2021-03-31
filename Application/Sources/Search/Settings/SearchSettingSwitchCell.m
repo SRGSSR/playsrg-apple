@@ -66,7 +66,7 @@
 - (void)reloadData
 {
     self.nameLabel.text = self.name;
-    self.nameLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.nameLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     self.valueSwitch.on = self.reader ? self.reader() : NO;
 }

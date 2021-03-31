@@ -6,6 +6,7 @@
 
 import Combine
 import SRGAnalytics
+import SRGAppearanceSwift
 import TvOSTextViewer
 import SwiftUI
 
@@ -78,7 +79,7 @@ func showText(_ text: String, animated: Bool = true) {
     textViewController.text = text
     textViewController.textAttributes = [
         .foregroundColor: UIColor.white,
-        .font: SRGFont.uiFont(.body)
+        .font: SRGFont.font(.body) as UIFont
     ]
     textViewController.textEdgeInsets = UIEdgeInsets(top: 100, left: 250, bottom: 100, right: 250)
     textViewController.modalPresentationStyle = .overFullScreen

@@ -48,7 +48,7 @@
 {
     _topic = topic;
     
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     self.titleLabel.text = topic.title;
     
     self.overlayView.hidden = (topic == nil);

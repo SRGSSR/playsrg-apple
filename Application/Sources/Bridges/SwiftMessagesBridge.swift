@@ -28,7 +28,7 @@ open class SwiftMessagesBridge: NSObject {
         
         let messageView = MessageView.viewFromNib(layout: .cardView)
         messageView.button?.isHidden = true
-        messageView.bodyLabel?.font = UIFont.srg_mediumFont(withTextStyle: SRGAppearanceFontTextStyle.body)
+        messageView.bodyLabel?.font = SRGFont.font(.body)
         messageView.configureDropShadow()
         
         messageView.configureContent(title: nil, body: message, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: nil, buttonTapHandler: nil)

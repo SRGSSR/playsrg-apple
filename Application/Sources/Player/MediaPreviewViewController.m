@@ -190,10 +190,10 @@
         if (currentProgram) {
             self.titleLabel.text = currentProgram.title;
             
-            self.channelLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+            self.channelLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
             self.channelLabel.text = channel.title;
             
-            self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+            self.programTimeLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
             self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
         }
         else {
@@ -217,12 +217,12 @@
 
 - (void)updateFonts
 {
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
-    self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    self.summaryLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
+    self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
+    self.summaryLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
-    self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    self.channelLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    self.programTimeLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
+    self.channelLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

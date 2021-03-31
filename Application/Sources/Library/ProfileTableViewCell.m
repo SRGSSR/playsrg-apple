@@ -28,7 +28,7 @@
 {
     _applicationSectionInfo = applicationSectionInfo;
     
-    self.titleLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
     self.titleLabel.text = applicationSectionInfo.title;
     
     self.iconImageView.image = applicationSectionInfo.image;

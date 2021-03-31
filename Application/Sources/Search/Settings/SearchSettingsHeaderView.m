@@ -23,7 +23,7 @@
 {
     _title = title;
     
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
     self.titleLabel.text = title;
 }
 

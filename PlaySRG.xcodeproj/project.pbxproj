@@ -758,11 +758,6 @@
 		6F30ABF42604B7A800457331 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AB824E5916F00FF286E /* ImageView.swift */; };
 		6F30ABF52604B7A800457331 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AB824E5916F00FF286E /* ImageView.swift */; };
 		6F30ABF62604B7A900457331 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AB824E5916F00FF286E /* ImageView.swift */; };
-		6F30AC102604B7E100457331 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
-		6F30AC2A2604B7E200457331 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
-		6F30AC2B2604B7E300457331 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
-		6F30AC2C2604B7E300457331 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
-		6F30AC2D2604B7E400457331 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
 		6F30ACB22604CDFD00457331 /* CardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30ACB12604CDFD00457331 /* CardButton.swift */; };
 		6F30ACB32604CDFD00457331 /* CardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30ACB12604CDFD00457331 /* CardButton.swift */; };
 		6F30ACB42604CDFD00457331 /* CardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30ACB12604CDFD00457331 /* CardButton.swift */; };
@@ -796,6 +791,16 @@
 		6F3A47B31DD19A7B00C79E67 /* RTSResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B21DD19A7B00C79E67 /* RTSResources.xcassets */; };
 		6F3A47B51DD19A8500C79E67 /* SRFResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B41DD19A8500C79E67 /* SRFResources.xcassets */; };
 		6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B61DD19A9100C79E67 /* SWIResources.xcassets */; };
+		6F3AED342614C5B6007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED332614C5B6007D591F /* SRGAppearanceSwift */; };
+		6F3AED4F2614C5D7007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED4E2614C5D7007D591F /* SRGAppearanceSwift */; };
+		6F3AED512614C5E1007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED502614C5E1007D591F /* SRGAppearanceSwift */; };
+		6F3AED6C2614C5E9007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED6B2614C5E9007D591F /* SRGAppearanceSwift */; };
+		6F3AED6E2614C5F0007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED6D2614C5F0007D591F /* SRGAppearanceSwift */; };
+		6F3AED892614C5FA007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED882614C5FA007D591F /* SRGAppearanceSwift */; };
+		6F3AEDA42614C601007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDA32614C601007D591F /* SRGAppearanceSwift */; };
+		6F3AEDA62614C607007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDA52614C607007D591F /* SRGAppearanceSwift */; };
+		6F3AEDA82614C60C007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDA72614C60C007D591F /* SRGAppearanceSwift */; };
+		6F3AEDC32614C613007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDC22614C613007D591F /* SRGAppearanceSwift */; };
 		6F3B0221245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */; };
 		6F3B0222245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */; };
 		6F3B0223245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */; };
@@ -1205,11 +1210,6 @@
 		6F8144162008FA970075F52F /* GoogleCast.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8144132008FA970075F52F /* GoogleCast.m */; };
 		6F8144172008FA970075F52F /* GoogleCast.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8144132008FA970075F52F /* GoogleCast.m */; };
 		6F8144182008FA970075F52F /* GoogleCast.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8144132008FA970075F52F /* GoogleCast.m */; };
-		6F82430C250637BE00E931A0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
-		6F82430D250637BE00E931A0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
-		6F82430E250637BE00E931A0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
-		6F82430F250637BE00E931A0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
-		6F824310250637BE00E931A0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82430B250637BE00E931A0 /* Fonts.swift */; };
 		6F83873025E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
 		6F83873125E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
 		6F83873225E507DC00BDCB25 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileModel.swift */; };
@@ -2525,7 +2525,6 @@
 		6F80E9C121A682E60027CA2F /* TableRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableRequestViewController.m; sourceTree = "<group>"; };
 		6F8144122008FA970075F52F /* GoogleCast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleCast.h; sourceTree = "<group>"; };
 		6F8144132008FA970075F52F /* GoogleCast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleCast.m; sourceTree = "<group>"; };
-		6F82430B250637BE00E931A0 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		6F83872F25E507DC00BDCB25 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		6F85E4B51EEA8F9B00552256 /* UIView+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PlaySRG.h"; sourceTree = "<group>"; };
 		6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PlaySRG.m"; sourceTree = "<group>"; };
@@ -2795,6 +2794,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */,
+				6F3AED342614C5B6007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */,
 				6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */,
@@ -2815,6 +2815,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F3AED4F2614C5D7007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */,
 				6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */,
@@ -2835,6 +2836,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F3AED512614C5E1007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */,
 				6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */,
@@ -2855,6 +2857,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F3AED6C2614C5E9007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */,
 				6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */,
@@ -2875,6 +2878,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F3AED6E2614C5F0007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096225221A3500E621EF /* AirshipCore in Frameworks */,
 				6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */,
@@ -2976,6 +2980,7 @@
 				6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AA724E590EE00FF286E /* FetchImage in Frameworks */,
 				8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */,
+				6F3AED892614C5FA007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
@@ -2995,6 +3000,7 @@
 				6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAB24E590F400FF286E /* FetchImage in Frameworks */,
 				2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */,
+				6F3AEDA42614C601007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
@@ -3014,6 +3020,7 @@
 				6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AAF24E590FC00FF286E /* FetchImage in Frameworks */,
 				FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */,
+				6F3AEDA62614C607007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4325DC50DA0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
@@ -3033,6 +3040,7 @@
 				6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB324E5910400FF286E /* FetchImage in Frameworks */,
 				0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */,
+				6F3AEDA82614C60C007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
@@ -3052,6 +3060,7 @@
 				6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */,
 				6FDB2AB724E5910B00FF286E /* FetchImage in Frameworks */,
 				4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */,
+				6F3AEDC32614C613007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4425DC50DB0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
 				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
@@ -3842,7 +3851,6 @@
 		6F475F9E1EB37BC6003021EA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6F82430B250637BE00E931A0 /* Fonts.swift */,
 				6FF8F155250609CF009A741F /* MediaDescription.swift */,
 				6F475F9F1EB37BC6003021EA /* ModalTransition.h */,
 				6F475FA01EB37BC6003021EA /* ModalTransition.m */,
@@ -4487,6 +4495,7 @@
 				6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */,
 				081A8BD62602B69600530FFF /* SRGDataProviderCombine */,
 				6F30ABCF2604B77500457331 /* FetchImage */,
+				6F3AED332614C5B6007D591F /* SRGAppearanceSwift */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -4532,6 +4541,7 @@
 				6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */,
 				081A8C222602C0EA00530FFF /* SRGDataProviderCombine */,
 				6F30ABD12604B77D00457331 /* FetchImage */,
+				6F3AED4E2614C5D7007D591F /* SRGAppearanceSwift */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -4577,6 +4587,7 @@
 				6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */,
 				081A8C242602C0F800530FFF /* SRGDataProviderCombine */,
 				6F30ABD32604B78700457331 /* FetchImage */,
+				6F3AED502614C5E1007D591F /* SRGAppearanceSwift */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -4622,6 +4633,7 @@
 				6FD46D0225DAB80300874EAF /* AppCenterDistribute */,
 				081A8C262602C10300530FFF /* SRGDataProviderCombine */,
 				6F30ABD52604B78E00457331 /* FetchImage */,
+				6F3AED6B2614C5E9007D591F /* SRGAppearanceSwift */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -4667,6 +4679,7 @@
 				6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */,
 				081A8C282602C10E00530FFF /* SRGDataProviderCombine */,
 				6F30ABD72604B79500457331 /* FetchImage */,
+				6F3AED6D2614C5F0007D591F /* SRGAppearanceSwift */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -4887,6 +4900,7 @@
 				08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */,
 				6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */,
 				6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */,
+				6F3AED882614C5FA007D591F /* SRGAppearanceSwift */,
 			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
@@ -4922,6 +4936,7 @@
 				08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */,
 				6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */,
 				6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */,
+				6F3AEDA32614C601007D591F /* SRGAppearanceSwift */,
 			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
@@ -4957,6 +4972,7 @@
 				08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */,
 				6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */,
 				6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */,
+				6F3AEDA52614C607007D591F /* SRGAppearanceSwift */,
 			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
@@ -4992,6 +5008,7 @@
 				08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */,
 				6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */,
 				6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */,
+				6F3AEDA72614C60C007D591F /* SRGAppearanceSwift */,
 			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
@@ -5027,6 +5044,7 @@
 				08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */,
 				6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */,
 				6F2DBBB325DD2703007DA242 /* AppCenterCrashes */,
+				6F3AEDC22614C613007D591F /* SRGAppearanceSwift */,
 			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
@@ -5260,6 +5278,7 @@
 				08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */,
 				6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
+				6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -7384,7 +7403,6 @@
 				6F566E8024EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6F0A416F1F6FAB6E000533E7 /* Calendar.m in Sources */,
 				6F475FD21EB37BC6003021EA /* PageContainerViewController.m in Sources */,
-				6F30AC102604B7E100457331 /* Fonts.swift in Sources */,
 				6F4C673E1EA6115C006A0A3B /* SearchViewController.m in Sources */,
 				6F4843D323EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F340F52220DA99B00778CA3 /* History.m in Sources */,
@@ -7683,7 +7701,6 @@
 				0804916F22831DEF00E4CEC2 /* HomeShowListTableViewCell.m in Sources */,
 				0827DA261F0D43BC00A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				08AF9481217D27E40028B082 /* ActivityItemSource.m in Sources */,
-				6F30AC2A2604B7E200457331 /* Fonts.swift in Sources */,
 				086BDE171EA63D5A00965F45 /* PlayMiniPlayerView.m in Sources */,
 				6F54D40126051035008B46FF /* DurationLabel.swift in Sources */,
 				08209309208F522B00711DE4 /* PushService.m in Sources */,
@@ -7880,7 +7897,6 @@
 				0804917022831DEF00E4CEC2 /* HomeShowListTableViewCell.m in Sources */,
 				0827DA271F0D43BD00A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				08AF9482217D27E40028B082 /* ActivityItemSource.m in Sources */,
-				6F30AC2B2604B7E300457331 /* Fonts.swift in Sources */,
 				086BDE191EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				6F54D40326051036008B46FF /* DurationLabel.swift in Sources */,
 				0820930A208F522B00711DE4 /* PushService.m in Sources */,
@@ -8077,7 +8093,6 @@
 				0804917122831DEF00E4CEC2 /* HomeShowListTableViewCell.m in Sources */,
 				0827DA281F0D43BD00A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				08AF9483217D27E40028B082 /* ActivityItemSource.m in Sources */,
-				6F30AC2C2604B7E300457331 /* Fonts.swift in Sources */,
 				086BDE1B1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				6F54D40526051036008B46FF /* DurationLabel.swift in Sources */,
 				0820930B208F522B00711DE4 /* PushService.m in Sources */,
@@ -8274,7 +8289,6 @@
 				0804917222831DEF00E4CEC2 /* HomeShowListTableViewCell.m in Sources */,
 				0827DA291F0D43BD00A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				08AF9484217D27E40028B082 /* ActivityItemSource.m in Sources */,
-				6F30AC2D2604B7E400457331 /* Fonts.swift in Sources */,
 				086BDE1D1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				6F54D40726051037008B46FF /* DurationLabel.swift in Sources */,
 				0820930C208F522B00711DE4 /* PushService.m in Sources */,
@@ -8498,7 +8512,6 @@
 				6FC413D324EEEDC900FDF806 /* TopicSection.m in Sources */,
 				6FC413F724EF0DEA00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7AF2567ED2A00AC8286 /* NSTimer+PlaySRG.m in Sources */,
-				6F82430C250637BE00E931A0 /* Fonts.swift in Sources */,
 				6FE4F0CC257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F331D6024D0769A00C096AB /* LiveView.swift in Sources */,
 				6F3F1AB3250286DA000FF4DD /* UIColor+PlaySRG.m in Sources */,
@@ -8591,7 +8604,6 @@
 				6FC413DB24EEEDC900FDF806 /* TopicSection.m in Sources */,
 				6FC413F824EF0DEB00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7C42567ED2B00AC8286 /* NSTimer+PlaySRG.m in Sources */,
-				6F82430D250637BE00E931A0 /* Fonts.swift in Sources */,
 				6FE4F0CD257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F331D6124D0769A00C096AB /* LiveView.swift in Sources */,
 				6F3F1AB6250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
@@ -8684,7 +8696,6 @@
 				6FC413E324EEEDCA00FDF806 /* TopicSection.m in Sources */,
 				6FC413F924EF0DEC00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7C52567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
-				6F82430E250637BE00E931A0 /* Fonts.swift in Sources */,
 				6FE4F0CE257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F331D6224D0769A00C096AB /* LiveView.swift in Sources */,
 				6F3F1AB5250286DB000FF4DD /* UIColor+PlaySRG.m in Sources */,
@@ -8777,7 +8788,6 @@
 				6FC413EB24EEEDCA00FDF806 /* TopicSection.m in Sources */,
 				6FC413FA24EF0DED00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7DA2567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
-				6F82430F250637BE00E931A0 /* Fonts.swift in Sources */,
 				6FE4F0CF257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F331D6324D0769A00C096AB /* LiveView.swift in Sources */,
 				6F3F1AB7250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
@@ -8870,7 +8880,6 @@
 				6FC413F324EEEDCB00FDF806 /* TopicSection.m in Sources */,
 				6FC413FB24EF0DEE00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7DB2567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
-				6F824310250637BE00E931A0 /* Fonts.swift in Sources */,
 				6FE4F0D0257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F331D6424D0769A00C096AB /* LiveView.swift in Sources */,
 				6F3F1AB8250286DD000FF4DD /* UIColor+PlaySRG.m in Sources */,
@@ -13665,8 +13674,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				branch = "feature/font-overhaul";
+				kind = branch;
 			};
 		};
 		6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */ = {
@@ -13681,8 +13690,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.2;
+				branch = "feature/font-overhaul";
+				kind = branch;
+			};
+		};
+		6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SRGSSR/srgappearance-apple.git";
+			requirement = {
+				branch = "feature/font-overhaul";
+				kind = branch;
 			};
 		};
 		6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -13697,8 +13714,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
+				branch = "feature/font-overhaul";
+				kind = branch;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
@@ -14051,6 +14068,56 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
 			productName = FetchImage;
+		};
+		6F3AED332614C5B6007D591F /* SRGAppearanceSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
+			productName = SRGAppearanceSwift;
+		};
+		6F3AED4E2614C5D7007D591F /* SRGAppearanceSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
+			productName = SRGAppearanceSwift;
+		};
+		6F3AED502614C5E1007D591F /* SRGAppearanceSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
+			productName = SRGAppearanceSwift;
+		};
+		6F3AED6B2614C5E9007D591F /* SRGAppearanceSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
+			productName = SRGAppearanceSwift;
+		};
+		6F3AED6D2614C5F0007D591F /* SRGAppearanceSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
+			productName = SRGAppearanceSwift;
+		};
+		6F3AED882614C5FA007D591F /* SRGAppearanceSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
+			productName = SRGAppearanceSwift;
+		};
+		6F3AEDA32614C601007D591F /* SRGAppearanceSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
+			productName = SRGAppearanceSwift;
+		};
+		6F3AEDA52614C607007D591F /* SRGAppearanceSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
+			productName = SRGAppearanceSwift;
+		};
+		6F3AEDA72614C60C007D591F /* SRGAppearanceSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
+			productName = SRGAppearanceSwift;
+		};
+		6F3AEDC22614C613007D591F /* SRGAppearanceSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
+			productName = SRGAppearanceSwift;
 		};
 		6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -88,8 +88,8 @@
     self.mainView.hidden = NO;
     self.placeholderView.hidden = YES;
     
-    self.showsAtoZButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    self.showsByDateButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.showsAtoZButton.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
+    self.showsByDateButton.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
 }
 
 #pragma mark Accessibility
