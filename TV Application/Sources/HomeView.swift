@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var model: PageModel
     
-    private static func swimlaneLayoutSection(for section: PageModel.RowSection) -> NSCollectionLayoutSection {
+    private static func swimlaneLayoutSection(for section: PageModel.RowSection, index: Int, pageTitle: String?) -> NSCollectionLayoutSection {
         func layoutGroupSize(for section: PageModel.RowSection) -> NSCollectionLayoutSize {
             switch section.layout {
             case .hero:
@@ -47,8 +47,8 @@ struct HomeView: View {
             }
         }
         
-        func header(for section: PageModel.RowSection) -> [NSCollectionLayoutBoundarySupplementaryItem] {
-            guard let headerHeight = swimlaneSectionHeaderHeight(for: section) else { return [] }
+        func header(for section: PageModel.RowSection, index: Int, pageTitle: String?) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            guard let headerHeight = swimlaneSectionHeaderHeight(for: section, index: index, pageTitle: pageTitle) else { return [] }
             let header = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight)),
                 elementKind: UICollectionView.elementKindSectionHeader,
@@ -67,32 +67,53 @@ struct HomeView: View {
         layoutSection.orthogonalScrollingBehavior = continuousGroupLeadingBoundary(for: section)
         layoutSection.interGroupSpacing = 40
         layoutSection.contentInsets = contentInsets(for: section)
-        layoutSection.boundarySupplementaryItems = header(for: section)
+        layoutSection.boundarySupplementaryItems = header(for: section, index: index, pageTitle: pageTitle)
         return layoutSection
     }
     
-    private static func swimlaneSectionHeaderHeight(for section: PageModel.RowSection) -> CGFloat? {
-        guard section.title != nil else { return 40 }
+    private static func swimlaneSectionHeaderHeight(for section: PageModel.RowSection, index: Int, pageTitle: String?) -> CGFloat? {
+        if index == 0, section.title == nil, pageTitle == nil {
+            return nil
+        }
+        
+        var height: CGFloat = 40
+        if let title = section.title, !title.isEmpty {
+            height += 60
+        }
         if let summary = section.summary, !summary.isEmpty {
-            return 140
+            height += 40
         }
-        else {
-            return 100
+        if let pageTitle = pageTitle, !pageTitle.isEmpty {
+            height += 60
         }
+        return height
     }
     
     var body: some View {
-        CollectionView(rows: model.rows) { _, section, _ in
-            return Self.swimlaneLayoutSection(for: section)
+        CollectionView(rows: model.rows) { sectionIndex, section, _ in
+            return Self.swimlaneLayoutSection(for: section, index: sectionIndex, pageTitle: model.title)
         } cell: { _, _, item in
             Cell(item: item)
-        } supplementaryView: { _, _, section, _ in
-            HeaderView(rowId: section)
+        } supplementaryView: { _, indexPath, section, _ in
+            HeaderView(section: section, pageTitle: indexPath.section == 0 ? model.title : nil)
         }
         .synchronizeTabBarScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
+    }
+    
+    private struct TitleView: View {
+        private let title: String?
+        
+        var body: some View {
+            if let title = title {
+            Text(title)
+                .srgFont(.H1)
+                .foregroundColor(.white)
+                .opacity(0.8)
+            }
+        }
     }
     
     private struct Cell: View {
@@ -160,8 +181,15 @@ struct HomeView: View {
     
     private struct HeaderView: View {
         let section: PageModel.RowSection
+        let pageTitle: String?
         
         var body: some View {
+            if let pageTitle = pageTitle {
+                Text(pageTitle)
+                    .srgFont(.H1)
+                    .foregroundColor(.white)
+                    .opacity(0.8)
+            }
             VStack(alignment: .leading) {
                 if let title = section.title {
                     Text(title)

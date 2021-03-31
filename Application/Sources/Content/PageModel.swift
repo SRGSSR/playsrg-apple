@@ -17,6 +17,19 @@ class PageModel: Identifiable, ObservableObject {
     
     let id: Id
     
+    var title: String? {
+        switch id {
+        case .video, .audio, .live:
+            return nil
+        case let .topic(topic: topic):
+            #if os(tvOS)
+            return topic.title
+            #else
+            return nil
+            #endif
+        }
+    }
+    
     typealias Section = RowSection
     typealias Item = RowItem
     typealias Row = CollectionRow<Section, Item>
