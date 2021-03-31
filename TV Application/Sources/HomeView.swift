@@ -72,7 +72,7 @@ struct HomeView: View {
     }
     
     private static func swimlaneSectionHeaderHeight(for section: PageModel.RowSection) -> CGFloat? {
-        guard section.title != nil else { return nil }
+        guard section.title != nil else { return 40 }
         if let summary = section.summary, !summary.isEmpty {
             return 140
         }
