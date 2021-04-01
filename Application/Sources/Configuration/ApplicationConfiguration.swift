@@ -35,17 +35,17 @@ extension ApplicationConfiguration {
 }
 
 enum PlaySection: Hashable {
-        case radioLatestEpisodes(channelUid: String)
-        case radioMostPopular(channelUid: String)
-        case radioLatest(channelUid: String)
-        case radioLatestVideos(channelUid: String)
-        case radioAllShows(channelUid: String)
-        case radioFavoriteShows(channelUid: String)
-        
-        case tvLive
-        case radioLive
-        case radioLiveSatellite
-        
-        case tvLiveCenter
-        case tvScheduledLivestreams
+    case radioLatestEpisodes(channelUid: String)
+    case radioMostPopular(channelUid: String)
+    case radioLatest(channelUid: String)
+    case radioLatestVideos(channelUid: String)
+    case radioAllShows(channelUid: String)
+    case radioFavoriteShows(channelUid: String)
+    
+    case tvLive
+    case radioLive
+    case radioLiveSatellite
+    
+    case tvLiveCenter
+    case tvScheduledLivestreams
 }

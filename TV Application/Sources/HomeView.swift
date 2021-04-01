@@ -10,9 +10,9 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var model: PageModel
     
-    private static func swimlaneLayoutSection(for section: PageModel.RowSection, index: Int, pageTitle: String?) -> NSCollectionLayoutSection {
-        func layoutGroupSize(for section: PageModel.RowSection) -> NSCollectionLayoutSize {
-            switch section.layout {
+    private static func swimlaneLayoutSection(for section: PageModel.Section, index: Int, pageTitle: String?) -> NSCollectionLayoutSection {
+        func layoutGroupSize(for section: PageModel.Section) -> NSCollectionLayoutSize {
+            switch section.properties.layout {
             case .hero:
                 return NSCollectionLayoutSize(widthDimension: .absolute(1740), heightDimension: .absolute(680))
             case .highlight:
@@ -27,8 +27,8 @@ struct HomeView: View {
             }
         }
         
-        func contentInsets(for section: PageModel.RowSection) -> NSDirectionalEdgeInsets {
-            switch section.layout {
+        func contentInsets(for section: PageModel.Section) -> NSDirectionalEdgeInsets {
+            switch section.properties.layout {
             case .topicSelector:
                 return NSDirectionalEdgeInsets(top: 80, leading: 0, bottom: 80, trailing: 0)
             default:
@@ -36,8 +36,8 @@ struct HomeView: View {
             }
         }
         
-        func continuousGroupLeadingBoundary(for section: PageModel.RowSection) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
-            switch section.layout {
+        func continuousGroupLeadingBoundary(for section: PageModel.Section) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
+            switch section.properties.layout {
             case .hero:
                 return .continuous
             case .highlight:
@@ -47,7 +47,7 @@ struct HomeView: View {
             }
         }
         
-        func header(for section: PageModel.RowSection, index: Int, pageTitle: String?) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+        func header(for section: PageModel.Section, index: Int, pageTitle: String?) -> [NSCollectionLayoutBoundarySupplementaryItem] {
             guard let headerHeight = swimlaneSectionHeaderHeight(for: section, index: index, pageTitle: pageTitle) else { return [] }
             let header = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight)),
@@ -63,6 +63,7 @@ struct HomeView: View {
         let groupSize = layoutGroupSize(for: section)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
+        // TODO: Have two kinds of supplementary items, one for the title, one for the section? Is this possible?
         let layoutSection = NSCollectionLayoutSection(group: group)
         layoutSection.orthogonalScrollingBehavior = continuousGroupLeadingBoundary(for: section)
         layoutSection.interGroupSpacing = 40
@@ -71,16 +72,16 @@ struct HomeView: View {
         return layoutSection
     }
     
-    private static func swimlaneSectionHeaderHeight(for section: PageModel.RowSection, index: Int, pageTitle: String?) -> CGFloat? {
-        if index == 0, section.title == nil, pageTitle == nil {
+    private static func swimlaneSectionHeaderHeight(for section: PageModel.Section, index: Int, pageTitle: String?) -> CGFloat? {
+        if index == 0, section.properties.title == nil, pageTitle == nil {
             return nil
         }
         
         var height: CGFloat = 40
-        if let title = section.title, !title.isEmpty {
+        if let title = section.properties.title, !title.isEmpty {
             height += 60
         }
-        if let summary = section.summary, !summary.isEmpty {
+        if let summary = section.properties.summary, !summary.isEmpty {
             height += 40
         }
         if let pageTitle = pageTitle, !pageTitle.isEmpty {
@@ -117,18 +118,18 @@ struct HomeView: View {
     }
     
     private struct Cell: View {
-        let item: PageModel.RowItem
+        let item: PageModel.Item
         
         var body: some View {
-            switch item.content {
-            case let .media(media):
-                if item.section.layout == .hero {
+            switch item {
+            case let .media(media, section: section):
+                if section.properties.layout == .hero {
                     FeaturedMediaCell(media: media, layout: .hero)
                 }
-                else if item.section.layout == .highlight {
+                else if section.properties.layout == .highlight {
                     FeaturedMediaCell(media: media, layout: .highlighted)
                 }
-                else if item.section.isLive {
+                else if section.properties.presentationType == .livestreams {
                     if media.contentType == .livestream || media.contentType == .scheduledLivestream {
                         LiveMediaCell(media: media)
                     }
@@ -141,37 +142,37 @@ struct HomeView: View {
                 else {
                     MediaCell(media: media, style: .show)
                 }
-            case .mediaPlaceholder:
-                if item.section.layout == .hero {
+            case let .mediaPlaceholder(_, section: section):
+                if section.properties.layout == .hero {
                     FeaturedMediaCell(media: nil, layout: .hero)
                 }
-                else if item.section.layout == .highlight {
+                else if section.properties.layout == .highlight {
                     FeaturedMediaCell(media: nil, layout: .highlighted)
                 }
                 else {
                     MediaCell(media: nil, style: .show)
                 }
-            case let .show(show):
-                if item.section.layout == .hero {
+            case let .show(show, section: section):
+                if section.properties.layout == .hero {
                     FeaturedShowCell(show: show, layout: .hero)
                 }
-                else if item.section.layout == .highlight {
+                else if section.properties.layout == .highlight {
                     FeaturedShowCell(show: show, layout: .highlighted)
                 }
                 else {
                     ShowCell(show: show)
                 }
-            case .showPlaceholder:
-                if item.section.layout == .hero {
+            case let .showPlaceholder(_, section: section):
+                if section.properties.layout == .hero {
                     FeaturedShowCell(show: nil, layout: .hero)
                 }
-                else if item.section.layout == .highlight {
+                else if section.properties.layout == .highlight {
                     FeaturedShowCell(show: nil, layout: .highlighted)
                 }
                 else {
                     ShowCell(show: nil)
                 }
-            case let .topic(topic):
+            case let .topic(topic, section: _):
                 TopicCell(topic: topic)
             case .topicPlaceholder:
                 TopicCell(topic: nil)
@@ -180,7 +181,7 @@ struct HomeView: View {
     }
     
     private struct HeaderView: View {
-        let section: PageModel.RowSection
+        let section: PageModel.Section
         let pageTitle: String?
         
         var body: some View {
@@ -191,12 +192,12 @@ struct HomeView: View {
                     .opacity(0.8)
             }
             VStack(alignment: .leading) {
-                if let title = section.title {
+                if let title = section.properties.title {
                     Text(title)
                         .srgFont(.H2)
                         .lineLimit(1)
                 }
-                if let summary = section.summary {
+                if let summary = section.properties.summary {
                     Text(summary)
                         .srgFont(.subtitle)
                         .lineLimit(1)
