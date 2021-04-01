@@ -34,7 +34,7 @@ class PageModel: Identifiable, ObservableObject {
     typealias Item = RowItem
     typealias Row = CollectionRow<Section, Item>
     
-    /*
+    /**
      *  SRGContent is content from IL PAC requests and pages
      */
     private var contentPage: SRGContentPage? {
@@ -47,8 +47,8 @@ class PageModel: Identifiable, ObservableObject {
         return contentPage?.sections ?? []
     }
     
-    /*
-     *  PlaySection is content from standard requests and FireBase configurations
+    /**
+     *  PlaySection is content from standard requests and Firebase configurations
      */
     private var playSections: [PlaySection] {
         switch id {
@@ -146,6 +146,8 @@ class PageModel: Identifiable, ObservableObject {
         loadRows()
     }
     
+    // TODO: Is either a PAC page or a remotely configured one. Mixing both does not make sense => probably have mutually
+    //       exclusive syntax (e.g. enum)
     private func synchronizeRows() {
         var updatedRows = [Row]()
         for contentSection in pageContentSections {
@@ -190,17 +192,14 @@ class PageModel: Identifiable, ObservableObject {
         if let contentSection = contentSection {
             switch contentSection.presentation.type {
             case .mediaHighlight:
-                return [ Item(section: section, content: .mediaPlaceholder(index: 0)) ]
+                return [Item(section: section, content: .mediaPlaceholder(index: 0))]
             case .showHighlight:
-                return [ Item(section: section, content: .showPlaceholder(index: 0)) ]
+                return [Item(section: section, content: .showPlaceholder(index: 0))]
             case .topicSelector:
                 return (0..<defaultNumberOfPlaceholders).map { Item(section: section, content: .topicPlaceholder(index: $0)) }
             case .swimlane, .hero, .grid, .livestreams:
                 return (0..<defaultNumberOfPlaceholders).map { Item(section: section, content: .mediaPlaceholder(index: $0)) }
-            case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram:
-                // Could be empty
-                return []
-            case .none, .showAccess:
+            case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .none, .showAccess:
                 return []
             }
         }
@@ -363,10 +362,7 @@ extension PageModel {
                     else {
                         return .medias
                     }
-                case .livestreams, .resumePlayback, .watchLater, .personalizedProgram:
-                    return .medias
-                case .none:
-                    // Not supported
+                case .none, .livestreams, .resumePlayback, .watchLater, .personalizedProgram:
                     return .medias
                 }
             }
@@ -643,10 +639,10 @@ extension PageModel {
         guard section.presentation.type == .mediaHighlight || section.presentation.type == .showHighlight else { return items }
         
         if section.presentation.isRandomized, let item = items.randomElement() {
-            return [ item ]
+            return [item]
         }
         else if !section.presentation.isRandomized, let item = items.first {
-            return [ item ]
+            return [item]
         }
         else {
             return []
