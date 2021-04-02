@@ -19,19 +19,21 @@ extension RadioChannel {
             return .radioAllShows(channelUid: channelUid)
         case .radioFavoriteShows:
             return .radioFavoriteShows(channelUid: channelUid)
+        case .radioShowsAccess:
+            return .radioShowAccess(channelUid: channelUid)
         default:
             return nil
         }
     }
     
     func homePlaySections() -> [PlaySection] {
-        var rowIds = [PlaySection]()
+        var playSections = [PlaySection]()
         for homeSection in homeSections {
             if let homeSection = HomeSection(rawValue: homeSection.intValue),
-               let rowId = homePlaySection(from: homeSection, withChannelUid: uid) {
-                rowIds.append(rowId)
+               let playSection = homePlaySection(from: homeSection, withChannelUid: uid) {
+                playSections.append(playSection)
             }
         }
-        return rowIds
+        return playSections
     }
 }

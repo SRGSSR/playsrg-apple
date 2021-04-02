@@ -41,6 +41,7 @@ enum PlaySection: Hashable {
     case radioLatestVideos(channelUid: String)
     case radioAllShows(channelUid: String)
     case radioFavoriteShows(channelUid: String)
+    case radioShowAccess(channelUid: String)
     
     case tvLive
     case radioLive

@@ -169,9 +169,9 @@ class PageViewController: DataViewController {
                 let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell>
                 topicCell?.content = TopicCell(topic: nil)
                 return topicCell
-            case .showAccess:
+            case let .showAccess(radioChannel, _):
                 let showAccessCell = collectionView.dequeueReusableCell(withReuseIdentifier: showAccessCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowAccessCell>
-                showAccessCell?.content = ShowAccessCell(radioChannel: nil)
+                showAccessCell?.content = ShowAccessCell(radioChannel: radioChannel)
                 return showAccessCell
             }
         }

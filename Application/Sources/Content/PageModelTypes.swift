@@ -59,7 +59,7 @@ extension PageModel {
         case topic(_ topic: SRGTopic, section: Section)
         
         #if os(iOS)
-        case showAccess(section: Section)
+        case showAccess(radioChannel: RadioChannel?, section: Section)
         #endif
     }
 }
@@ -79,7 +79,7 @@ extension SRGContentSection: PageSectionProperties {
             case .watchLater:
                 return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
             case .showAccess:
-                return NSLocalizedString("Shows", comment: "Title label used to present the TV or radio shows AZ and TV shows by date access buttons")
+                return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
             case .none, .topicSelector, .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
                 return nil
             }
@@ -195,7 +195,7 @@ extension SRGContentSection: PageSectionProperties {
                     .eraseToAnyPublisher()
             case .showAccess:
                 #if os(iOS)
-                return Just([.showAccess(section: section)])
+                return Just([.showAccess(radioChannel: nil, section: section)])
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
                 #else
@@ -239,6 +239,8 @@ extension PlaySection: PageSectionProperties {
             return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
         case .radioFavoriteShows:
             return NSLocalizedString("Favorites", comment: "Title label used to present the radio favorite shows")
+        case .radioShowAccess:
+            return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
         case .tvLive:
             return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
         case .radioLive:
@@ -266,6 +268,8 @@ extension PlaySection: PageSectionProperties {
             return .grid
         case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
             return .swimlane
+        case .radioShowAccess:
+            return .showAccess
         }
     }
     
@@ -275,6 +279,13 @@ extension PlaySection: PageSectionProperties {
             return .medias
         case .radioAllShows, .radioFavoriteShows:
             return .shows
+        case .radioShowAccess:
+            #if os(iOS)
+            return .showAccess
+            #else
+            // Not supported
+            return .medias
+            #endif
         }
     }
     
@@ -284,7 +295,7 @@ extension PlaySection: PageSectionProperties {
             return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0, section: section) }
         case .radioAllShows:
             return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0, section: section) }
-        case .radioFavoriteShows:
+        case .radioFavoriteShows, .radioShowAccess:
             return []
         }
     }
@@ -321,6 +332,14 @@ extension PlaySection: PageSectionProperties {
             return PageSectionPublisher.showsPublisher(withUrns: Array(FavoritesShowURNs()))
                 .map { id.compatibleShows($0).map { .show($0, section: section) } }
                 .eraseToAnyPublisher()
+        case let .radioShowAccess(channelUid):
+            #if os(iOS)
+            return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid), section: section)])
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+            #else
+            return nil
+            #endif
         case .tvLive:
             return dataProvider.tvLivestreams(for: vendor)
                 .map { $0.medias.map { .media($0, section: section) } }
