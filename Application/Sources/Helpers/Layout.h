@@ -20,6 +20,9 @@ static const CGFloat LayoutStandardViewCornerRadius = 4.f;
 static const CGFloat LayoutCollectionViewCellStandardWidth = 210.f;
 static const CGFloat LayoutTableViewCellStandardHeight = 84.f;
 
+static const CGFloat LayoutTableViewTopicCellHeight = 100.f;
+static const CGFloat LayoutTableViewShowAccessCellHeight = 50.f;
+
 /**
  *  Standard margin.
  */
@@ -87,5 +90,17 @@ OBJC_EXPORT CGSize LayoutLiveMediaStandardCollectionItemSize(CGFloat itemWidth);
  *  @param large     Large layout (e.g. featured).
  */
 OBJC_EXPORT CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large);
+
+/**
+ *  Topic cell (16:9 artwork) size for collection layouts.
+ *
+ **/
+OBJC_EXPORT CGSize LayoutTopicCollectionItemSize();
+
+/**
+ *  Show access cell size for collection layouts.
+ *
+ **/
+OBJC_EXPORT CGSize LayoutShowAccessCollectionItemSize(CGFloat itemWidth);
 
 NS_ASSUME_NONNULL_END

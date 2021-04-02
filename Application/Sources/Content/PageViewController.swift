@@ -40,18 +40,46 @@ class PageViewController: DataViewController {
         return snapshot
     }
     
-    private static func layout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { _, _ in
+    private func layout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+            func layoutGroupSize(for section: PageModel.Section?, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
+                // TODO: fix asynchronous self.model.rows and sectionIndex asked. Section must not bit optionnal.
+                guard let section = section else { return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)) }
+                
+                switch section.properties.layout {
+                case .hero, .highlight:
+                    let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width)
+                    let size = LayoutMediaStandardCollectionItemSize(width, true)
+                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
+                case .topicSelector:
+                    let size = LayoutTopicCollectionItemSize()
+                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
+                case .shows:
+                    let size = LayoutShowStandardCollectionItemSize(LayoutCollectionViewCellStandardWidth, false)
+                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
+                case .medias:
+                    // TODO: with Obj-C cells, live cells have different height as standard media cells. With Swift UI, there is currently to different.
+                    let size = LayoutMediaStandardCollectionItemSize(LayoutCollectionViewCellStandardWidth, false)
+                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
+                case .showAccess:
+                    let size = LayoutShowAccessCollectionItemSize(layoutEnvironment.container.effectiveContentSize.width)
+                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
+                }
+            }
+            
+            // TODO: fix asynchronous self.model.rows and sectionIndex asked. How to get Row array synchronized to Collection view layout?
+            let section = self.model.rows.count > sectionIndex ? self.model.rows[sectionIndex].section : nil
+            
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(210), heightDimension: .absolute(118))
+            let groupSize = layoutGroupSize(for: section, layoutEnvironment: layoutEnvironment)
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
-            let section = NSCollectionLayoutSection(group: group)
-            section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-            section.interGroupSpacing = LayoutStandardMargin
-            return section
+            let layoutSection = NSCollectionLayoutSection(group: group)
+            layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+            layoutSection.interGroupSpacing = LayoutStandardMargin
+            return layoutSection
         }
     }
     
@@ -77,7 +105,7 @@ class PageViewController: DataViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .play_black
         
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: Self.layout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false

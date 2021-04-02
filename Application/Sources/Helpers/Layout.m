@@ -170,3 +170,14 @@ CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
     CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
+
+CGSize LayoutTopicCollectionItemSize()
+{
+    CGFloat height = LayoutTableViewTopicCellHeight - 2 * LayoutStandardMargin;
+    return CGSizeMake(height * 16.f / 9.f, height);
+}
+
+CGSize LayoutShowAccessCollectionItemSize(CGFloat itemWidth)
+{
+    return CGSizeMake(itemWidth, LayoutTableViewShowAccessCellHeight);
+}
