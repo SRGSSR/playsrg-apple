@@ -260,8 +260,12 @@ extension PlaySection: PageSectionProperties {
         switch self {
         case .tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams:
             return .livestreams
-        case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos, .radioAllShows, .radioFavoriteShows:
-            return .none
+        case .radioFavoriteShows:
+            return .favoriteShows
+        case .radioAllShows:
+            return .grid
+        case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
+            return .swimlane
         }
     }
     
