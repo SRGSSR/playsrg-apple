@@ -5,7 +5,7 @@
 //
 
 extension RadioChannel {
-    private func homePlaySection(from homeSection: HomeSection, withChannelUid channelUid: String) -> PlaySection? {
+    private static func radioPlaySectionType(from homeSection: HomeSection, withChannelUid channelUid: String) -> PlaySectionType? {
         switch homeSection {
         case .radioLatestEpisodes:
             return .radioLatestEpisodes(channelUid: channelUid)
@@ -26,12 +26,28 @@ extension RadioChannel {
         }
     }
     
-    func homePlaySections() -> [PlaySection] {
+    private static func contentPresentationType(from playSectionType: PlaySectionType, index: Int) -> SRGContentPresentationType {
+        switch playSectionType {
+        case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
+            return index == 0 ? .hero : .swimlane
+        case .radioAllShows:
+            return .grid
+        case .radioFavoriteShows:
+            return .favoriteShows
+        case .radioShowAccess:
+            return .showAccess
+        case .tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams:
+            return .livestreams
+        }
+    }
+    
+    func playSections() -> [PlaySection] {
         var playSections = [PlaySection]()
-        for homeSection in homeSections {
+        for (index, homeSection) in homeSections.enumerated() {
             if let homeSection = HomeSection(rawValue: homeSection.intValue),
-               let playSection = homePlaySection(from: homeSection, withChannelUid: uid) {
-                playSections.append(playSection)
+               let playSectionType = Self.radioPlaySectionType(from: homeSection, withChannelUid: uid) {
+                let contentPresentationType = Self.contentPresentationType(from: playSectionType, index: index)
+                playSections.append(PlaySection(type: playSectionType, contentPresentationType: contentPresentationType))
             }
         }
         return playSections

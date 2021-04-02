@@ -226,7 +226,7 @@ extension SRGContentSection: PageSectionProperties {
 
 extension PlaySection: PageSectionProperties {
     var title: String? {
-        switch self {
+        switch self.type {
         case .radioLatestEpisodes:
             return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
         case .radioMostPopular:
@@ -259,24 +259,13 @@ extension PlaySection: PageSectionProperties {
     }
     
     var presentationType: SRGContentPresentationType {
-        switch self {
-        case .tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams:
-            return .livestreams
-        case .radioFavoriteShows:
-            return .favoriteShows
-        case .radioAllShows:
-            return .grid
-        case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
-            return .swimlane
-        case .radioShowAccess:
-            return .showAccess
-        }
+        return self.contentPresentationType
     }
     
     var layout: PageModel.SectionLayout {
-        switch self {
+        switch self.type {
         case .tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
-            return .medias
+            return (self.contentPresentationType == .hero) ? .hero : .medias
         case .radioAllShows, .radioFavoriteShows:
             return .shows
         case .radioShowAccess:
@@ -290,7 +279,7 @@ extension PlaySection: PageSectionProperties {
     }
     
     func placeholderItems(for section: PageModel.Section) -> [PageModel.Item] {
-        switch self {
+        switch self.type {
         case .tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
             return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0, section: section) }
         case .radioAllShows:
@@ -307,7 +296,7 @@ extension PlaySection: PageSectionProperties {
         let vendor = configuration.vendor
         let pageSize = configuration.pageSize
         
-        switch self {
+        switch self.type {
         case let .radioLatestEpisodes(channelUid: channelUid):
             return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize)
                 .map { $0.medias.map { .media($0, section: section) } }

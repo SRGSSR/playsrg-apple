@@ -5,7 +5,7 @@
 //
 
 extension ApplicationConfiguration {
-    private func liveHomePlaySection(from homeSection: HomeSection) -> PlaySection? {
+    private static func livePlaySectionType(from homeSection: HomeSection) -> PlaySectionType? {
         switch homeSection {
         case .tvLive:
             return .tvLive
@@ -26,15 +26,20 @@ extension ApplicationConfiguration {
         var playSections = [PlaySection]()
         for homeSection in liveHomeSections {
             if let homeSection = HomeSection(rawValue: homeSection.intValue),
-               let playSection = liveHomePlaySection(from: homeSection) {
-                playSections.append(playSection)
+               let playSectionType = Self.livePlaySectionType(from: homeSection) {
+                playSections.append(PlaySection(type: playSectionType, contentPresentationType: .livestreams))
             }
         }
         return playSections
     }
 }
 
-enum PlaySection: Hashable {
+struct PlaySection: Hashable {
+    let type: PlaySectionType
+    let contentPresentationType: SRGContentPresentationType
+}
+
+enum PlaySectionType: Hashable {
     case radioLatestEpisodes(channelUid: String)
     case radioMostPopular(channelUid: String)
     case radioLatest(channelUid: String)
