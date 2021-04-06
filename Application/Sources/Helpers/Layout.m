@@ -20,6 +20,10 @@ CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidth, CGFloat l
 
 CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth)
 {
+#if TARGET_OS_TV
+    return 1740;
+#else
+
     // Ensure cells never fill the entire width of the parent, so that the fact that content can be scrolled
     // is always obvious to the user
     static const CGFloat kHorizontalFillRatio = 0.9f;
@@ -29,6 +33,7 @@ CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth)
     CGFloat maxWidth = (traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ? 300.f : 450.f;
     
     return fmin(layoutWidth * kHorizontalFillRatio, maxWidth);
+#endif
 }
 
 CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor)
@@ -90,8 +95,21 @@ CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, 
     }
 }
 
-CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
+CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType)
 {
+#if TARGET_OS_TV
+    switch (collectionItemType) {
+        case LayoutCollectionItemTypeHero:
+            return CGSizeMake(itemWidth, 680.f);
+            break;
+        case LayoutCollectionItemTypeHighlight:
+            return CGSizeMake(itemWidth, 480.f);
+            break;
+        case LayoutCollectionItemTypeSwimlane:
+            return CGSizeMake(itemWidth, 360.f);
+            break;
+    }
+#else
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_largeTextHeights;
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_standardTextHeights;
     static dispatch_once_t s_onceToken;
@@ -123,9 +141,11 @@ CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
                                    UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @90 };
     });
     
+    BOOL large = (collectionItemType == LayoutCollectionItemTypeHero || collectionItemType == LayoutCollectionItemTypeHighlight);
     UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
+#endif
 }
 
 CGSize LayoutLiveMediaStandardCollectionItemSize(CGFloat itemWidth)
@@ -133,8 +153,21 @@ CGSize LayoutLiveMediaStandardCollectionItemSize(CGFloat itemWidth)
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + 11.f));
 }
 
-CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
+CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType)
 {
+#if TARGET_OS_TV
+    switch (collectionItemType) {
+        case LayoutCollectionItemTypeHero:
+            return CGSizeMake(itemWidth, 680.f);
+            break;
+        case LayoutCollectionItemTypeHighlight:
+            return CGSizeMake(itemWidth, 480.f);
+            break;
+        case LayoutCollectionItemTypeSwimlane:
+            return CGSizeMake(itemWidth, 280.f);
+            break;
+    }
+#else
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_largeTextHeights;
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_standardTextHeights;
     static dispatch_once_t s_onceToken;
@@ -166,9 +199,11 @@ CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
                                    UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @36 };
     });
     
+    BOOL large = (collectionItemType == LayoutCollectionItemTypeHero || collectionItemType == LayoutCollectionItemTypeHighlight);
     UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
+#endif
 }
 
 CGSize LayoutTopicCollectionItemSize(void)
