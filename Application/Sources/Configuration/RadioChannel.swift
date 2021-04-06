@@ -5,7 +5,7 @@
 //
 
 extension RadioChannel {
-    private static func radioPlaySectionType(from homeSection: HomeSection, withChannelUid channelUid: String) -> PlaySection.`Type`? {
+    private static func configuredSectionType(from homeSection: HomeSection, withChannelUid channelUid: String) -> ConfiguredSection.`Type`? {
         switch homeSection {
         case .radioLatestEpisodes:
             return .radioLatestEpisodes(channelUid: channelUid)
@@ -26,8 +26,8 @@ extension RadioChannel {
         }
     }
     
-    private static func contentPresentationType(from playSectionType: PlaySection.`Type`, index: Int) -> SRGContentPresentationType {
-        switch playSectionType {
+    private static func contentPresentationType(from configuredSectionType: ConfiguredSection.`Type`, index: Int) -> SRGContentPresentationType {
+        switch configuredSectionType {
         case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
             return index == 0 ? .hero : .swimlane
         case .radioAllShows:
@@ -41,15 +41,15 @@ extension RadioChannel {
         }
     }
     
-    func playSections() -> [PlaySection] {
-        var playSections = [PlaySection]()
+    func configuredSections() -> [ConfiguredSection] {
+        var configuredSections = [ConfiguredSection]()
         for (index, homeSection) in homeSections.enumerated() {
             if let homeSection = HomeSection(rawValue: homeSection.intValue),
-               let playSectionType = Self.radioPlaySectionType(from: homeSection, withChannelUid: uid) {
-                let contentPresentationType = Self.contentPresentationType(from: playSectionType, index: index)
-                playSections.append(PlaySection(type: playSectionType, contentPresentationType: contentPresentationType))
+               let configuredSectionType = Self.configuredSectionType(from: homeSection, withChannelUid: uid) {
+                let contentPresentationType = Self.contentPresentationType(from: configuredSectionType, index: index)
+                configuredSections.append(ConfiguredSection(type: configuredSectionType, contentPresentationType: contentPresentationType))
             }
         }
-        return playSections
+        return configuredSections
     }
 }

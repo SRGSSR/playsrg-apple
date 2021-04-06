@@ -24,7 +24,7 @@ extension PageModel {
     // TODO: Naming? e.g. serviced vs configured, content vs play, remote vs application, etc.
     enum Section: Hashable {
         case content(SRGContentSection)
-        case play(PlaySection)
+        case play(ConfiguredSection)
         
         var properties: PageSectionProperties {
             switch self {
@@ -224,7 +224,7 @@ extension SRGContentSection: PageSectionProperties {
     }
 }
 
-extension PlaySection: PageSectionProperties {
+extension ConfiguredSection: PageSectionProperties {
     var title: String? {
         switch self.type {
         case .radioLatestEpisodes:
