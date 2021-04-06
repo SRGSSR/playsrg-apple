@@ -23,9 +23,6 @@
 #import "UIViewController+PlaySRG.h"
 #import "WatchLater.h"
 
-#import <objc/runtime.h>
-
-@import libextobjc;
 @import SRGAnalytics;
 
 static void commonInit(BaseViewController *self);
