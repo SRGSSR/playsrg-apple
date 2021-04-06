@@ -5,7 +5,7 @@
 //
 
 extension RadioChannel {
-    private static func radioPlaySectionType(from homeSection: HomeSection, withChannelUid channelUid: String) -> PlaySectionType? {
+    private static func radioPlaySectionType(from homeSection: HomeSection, withChannelUid channelUid: String) -> PlaySection.`Type`? {
         switch homeSection {
         case .radioLatestEpisodes:
             return .radioLatestEpisodes(channelUid: channelUid)
@@ -26,7 +26,7 @@ extension RadioChannel {
         }
     }
     
-    private static func contentPresentationType(from playSectionType: PlaySectionType, index: Int) -> SRGContentPresentationType {
+    private static func contentPresentationType(from playSectionType: PlaySection.`Type`, index: Int) -> SRGContentPresentationType {
         switch playSectionType {
         case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
             return index == 0 ? .hero : .swimlane
