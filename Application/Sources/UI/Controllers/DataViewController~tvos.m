@@ -6,11 +6,9 @@
 
 #import "DataViewController.h"
 
-#import "Banner.h"
-#import "UIViewController+PlaySRG.h"
+// TODO: Use same file as ~ios implementation (but requires some work for UIViewController+PlaySRG.h first)
 
 @import FXReachability;
-@import SRGDataProvider;
 
 @implementation DataViewController
 
@@ -20,10 +18,6 @@
 {
     [super viewDidLoad];
     
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(dataViewController_applicationDidBecomeActive:)
-                                               name:UIApplicationDidBecomeActiveNotification
-                                             object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(dataViewController_reachabilityDidChange:)
                                                name:FXReachabilityStatusDidChangeNotification
@@ -44,19 +38,10 @@
 
 #pragma mark Notifications
 
-- (void)dataViewController_applicationDidBecomeActive:(NSNotification *)notification
-{
-    if (self.play_viewVisible) {
-        [self refresh];
-    }
-}
-
 - (void)dataViewController_reachabilityDidChange:(NSNotification *)notification
 {
     if ([FXReachability sharedInstance].reachable) {
-        if (self.play_viewVisible) {
-            [self refresh];
-        }
+        [self refresh];
     }
 }
 

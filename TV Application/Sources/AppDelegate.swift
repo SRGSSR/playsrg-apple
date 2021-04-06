@@ -44,10 +44,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func applicationRootViewController() -> UIViewController {
         var viewControllers = [UIViewController]()
         
-        let videosViewController = UIHostingController(rootView: VideosView())
+        let videosViewController = PageViewController(id: .video)
         videosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home tab title"), image: nil, tag: 0)
         videosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.videosTabBarItem.rawValue
         viewControllers.append(videosViewController)
+        
+        let videosViewController2 = UIHostingController(rootView: VideosView())
+        videosViewController2.tabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home tab title"), image: nil, tag: 0)
+        videosViewController2.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.videosTabBarItem.rawValue
+        viewControllers.append(videosViewController2)
         
         let configuration = ApplicationConfiguration.shared
         

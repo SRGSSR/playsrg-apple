@@ -47,7 +47,7 @@ static void commonInit(BaseViewController *self);
 
 @end
 
-@interface BaseViewController ()
+@interface BaseViewController () <UIContextMenuInteractionDelegate>
 
 @property (nonatomic, readonly) BaseViewControllerPresentationControllerDelegate *presentationControllerDelegate;
 

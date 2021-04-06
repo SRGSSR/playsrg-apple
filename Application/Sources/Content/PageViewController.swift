@@ -15,6 +15,8 @@ class PageViewController: DataViewController {
     private var dataSource: UICollectionViewDiffableDataSource<PageModel.Section, PageModel.Item>!
     
     private weak var collectionView: UICollectionView!
+    
+    @available (tvOS, unavailable)
     private weak var refreshControl: UIRefreshControl!
     
     private var refreshTriggered = false
@@ -114,10 +116,12 @@ class PageViewController: DataViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
+        #if os(iOS)
         let refreshControl = RefreshControl()
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
+        #endif
         
         self.view = view
     }
@@ -134,8 +138,10 @@ class PageViewController: DataViewController {
         let topicCellIdentifier = "TopicCell"
         collectionView.register(HostCollectionViewCell<TopicCell>.self, forCellWithReuseIdentifier: topicCellIdentifier)
         
+        #if os(iOS)
         let showAccessCellIdentifier = "ShowAccessCell"
         collectionView.register(HostCollectionViewCell<ShowAccessCell>.self, forCellWithReuseIdentifier: showAccessCellIdentifier)
+        #endif
         
         // TODO: Factor out cell dequeue code per type
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -164,10 +170,12 @@ class PageViewController: DataViewController {
                 let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell>
                 topicCell?.content = TopicCell(topic: nil)
                 return topicCell
+            #if os(iOS)
             case let .showAccess(radioChannel, _):
                 let showAccessCell = collectionView.dequeueReusableCell(withReuseIdentifier: showAccessCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowAccessCell>
                 showAccessCell?.content = ShowAccessCell(radioChannel: radioChannel)
                 return showAccessCell
+            #endif
             }
         }
         
@@ -186,21 +194,25 @@ class PageViewController: DataViewController {
         // Can be triggered on a background thread. Layout is updated on the main thread.
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(withRows: rows)) {
+                #if os(iOS)
                 // Avoid stopping scrolling
                 // See http://stackoverflow.com/a/31681037/760435
                 if self.refreshControl.isRefreshing {
                     self.refreshControl.endRefreshing()
                 }
+                #endif
             }
         }
     }
     
+    #if os(iOS)
     @objc func pullToRefresh(_ refreshControl: RefreshControl) {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
         }
         refreshTriggered = true
     }
+    #endif
 }
 
 extension PageViewController: ContentInsets {
