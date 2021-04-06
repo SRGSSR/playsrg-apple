@@ -42,9 +42,9 @@ extension PageModel {
         case topicSelector
         case shows
         case medias
-        #if os(iOS)
+        
+        @available(tvOS, unavailable)
         case showAccess
-        #endif
     }
     
     // On a page items must be unique per section, which is why a section parameter must be provided for each of them.
@@ -58,9 +58,8 @@ extension PageModel {
         case topicPlaceholder(index: Int, section: Section)
         case topic(_ topic: SRGTopic, section: Section)
         
-        #if os(iOS)
+        @available(tvOS, unavailable)
         case showAccess(radioChannel: RadioChannel?, section: Section)
-        #endif
     }
 }
 
@@ -131,7 +130,7 @@ extension SRGContentSection: PageSectionProperties {
             return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0, section: section) }
         case .swimlane, .hero, .grid, .livestreams:
             return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0, section: section) }
-        case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .none, .showAccess:
+        case .none, .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .showAccess:
             return []
         }
     }
