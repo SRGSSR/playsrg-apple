@@ -358,9 +358,9 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
 - (void)play_dismissViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
 {
+#if TARGET_OS_IOS
     UIViewController *topViewController = self.play_topViewController;
     
-#if TARGET_OS_IOS
     // See https://stackoverflow.com/a/29560217
     UIViewController *presentingViewController = topViewController.presentingViewController;
     if (! [presentingViewController play_supportsOrientation:(UIInterfaceOrientation)UIDevice.currentDevice.orientation]) {
