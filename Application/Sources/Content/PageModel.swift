@@ -133,7 +133,8 @@ class PageModel: Identifiable, ObservableObject {
                 .map { $0.contentPage.sections.map { Section.content($0) } }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
-            return CurrentValueSubject(channel.playSections().map { Section.play($0) })
+            return Just(channel.playSections().map { Section.play($0) })
+                .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         case .live:
             return Just(ApplicationConfiguration.shared.liveHomePlaySections().map { Section.play($0) })
