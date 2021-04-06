@@ -83,16 +83,12 @@ struct HomeView: View {
     }
     
     var body: some View {
-        CollectionView(rows: model.rows) { sectionIndex, _ in
-            let rowId = model.rows[sectionIndex].section
-            return Self.swimlaneLayoutSection(for: rowId)
+        CollectionView(rows: model.rows) { _, section, _ in
+            return Self.swimlaneLayoutSection(for: section)
         } cell: { _, item in
             Cell(item: item)
-        } supplementaryView: { _, indexPath in
-            if indexPath.section < model.rows.count {
-                let rowId = model.rows[indexPath.section].section
-                HeaderView(rowId: rowId)
-            }
+        } supplementaryView: { _, _, section, _ in
+            HeaderView(rowId: section)
         }
         .synchronizeTabBarScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)

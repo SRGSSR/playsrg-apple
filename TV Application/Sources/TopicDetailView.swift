@@ -107,8 +107,7 @@ struct TopicDetailView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            CollectionView(rows: rows) { sectionIndex, _ in
-                let section = rows[sectionIndex].section
+            CollectionView(rows: rows) { _, section, _ in
                 return Self.layoutSection(for: section, geometry: geometry)
             } cell: { _, item in
                 switch item {
@@ -135,17 +134,11 @@ struct TopicDetailView: View {
                         HeroMediaCell(media: media)
                     }
                 }
-            } supplementaryView: { _, indexPath in
-                if rows.count > 1 {
-                    let section = rows[indexPath.section].section
-                    switch section {
-                    case .latestMedias:
-                        HeaderView(title: NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos"))
-                    default:
-                        TitleView(title: model.topic.title)
-                    }
-                }
-                else {
+            } supplementaryView: { _, _, section, _ in
+                switch section {
+                case .latestMedias:
+                    HeaderView(title: NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos"))
+                default:
                     TitleView(title: model.topic.title)
                 }
             }

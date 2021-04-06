@@ -120,7 +120,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         fileprivate var dataSource: DataSource? = nil
         
         /// Provider for the section layout.
-        fileprivate var sectionLayoutProvider: ((Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection)?
+        fileprivate var sectionLayoutProvider: ((Int, Section, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection)?
         
         /// Hash of the data represented by the data source. Provides for a cheap way of checking when data changes.
         fileprivate var rowsHash: Int? = nil
@@ -140,13 +140,13 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     let rows: [CollectionRow<Section, Item>]
     
     /// Provider for the section layout.
-    let sectionLayoutProvider: (Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection
+    let sectionLayoutProvider: (Int, Section, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection
     
     /// Cell view builder.
     let cell: (IndexPath, Item) -> Cell
     
     /// Supplementary view builder.
-    let supplementaryView: (String, IndexPath) -> SupplementaryView
+    let supplementaryView: (String, IndexPath, Section, Item) -> SupplementaryView
     
     /// The view controller (child of a tab bar controller) which should be moved when scrolling occurs.
     fileprivate weak var parentViewController: UIViewController? = nil
@@ -180,9 +180,9 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
      *  Create a collection view displaying the specified data with cells delivered by the provided builder.
      */
     init(rows: [CollectionRow<Section, Item>],
-         sectionLayoutProvider: @escaping (Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection,
+         sectionLayoutProvider: @escaping (Int, Section, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection,
          @ViewBuilder cell: @escaping (IndexPath, Item) -> Cell,
-         @ViewBuilder supplementaryView: @escaping (String, IndexPath) -> SupplementaryView) {
+         @ViewBuilder supplementaryView: @escaping (String, IndexPath, Section, Item) -> SupplementaryView) {
         self.rows = Self.removeDuplicates(in: rows)
         self.sectionLayoutProvider = sectionLayoutProvider
         self.cell = cell
@@ -203,7 +203,9 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     
     private func layout(context: Context) -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-            return context.coordinator.sectionLayoutProvider!(sectionIndex, layoutEnvironment)
+            let coordinator = context.coordinator
+            let section = coordinator.dataSource!.snapshot().sectionIdentifiers[sectionIndex]
+            return coordinator.sectionLayoutProvider!(sectionIndex, section, layoutEnvironment)
         }
     }
     
@@ -242,8 +244,8 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         collectionView.register(HostCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
         let dataSource = Coordinator.DataSource(collectionView: collectionView) { collectionView, indexPath, item in
-            let hostCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? HostCell
-            hostCell?.hostedCell = cell(indexPath, item)
+            let hostCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! HostCell
+            hostCell.hostedCell = cell(indexPath, item)
             return hostCell
         }
         context.coordinator.dataSource = dataSource
@@ -255,8 +257,11 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
                 coordinator.registeredSupplementaryViewKinds.append(kind)
             }
             
-            guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: supplementaryViewIdentifier, for: indexPath) as? HostSupplementaryView else { return nil }
-            view.hostedSupplementaryView = supplementaryView(kind, indexPath)
+            let snapshot = dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: supplementaryViewIdentifier, for: indexPath) as! HostSupplementaryView
+            view.hostedSupplementaryView = supplementaryView(kind, indexPath, section, item)
             return view
         }
         

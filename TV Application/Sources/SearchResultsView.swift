@@ -101,8 +101,8 @@ struct SearchResultsView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            CollectionView(rows: rows) { _, _ in
-                return Self.layoutSection(for: rows.first!.section, geometry: geometry)
+            CollectionView(rows: rows) { _, section, _ in
+                return Self.layoutSection(for: section, geometry: geometry)
             } cell: { _, item in
                 switch item {
                 case .loading:
@@ -125,8 +125,7 @@ struct SearchResultsView: View {
                             model.loadNextPage(from: media)
                         }
                 }
-            } supplementaryView: { _, indexPath in
-                let section = rows[indexPath.section].section
+            } supplementaryView: { _, indexPath, section, _ in
                 if section == .shows {
                     Text(NSLocalizedString("Most searched shows", comment: "Most searched shows header"))
                         .srgFont(.title2)
