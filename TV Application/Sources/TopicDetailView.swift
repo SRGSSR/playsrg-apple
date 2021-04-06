@@ -134,12 +134,19 @@ struct TopicDetailView: View {
                         HeroMediaCell(media: media)
                     }
                 }
-            } supplementaryView: { _, _, section, _ in
-                switch section {
-                case .latestMedias:
-                    HeaderView(title: NSLocalizedString("Latest videos", comment: "Title label used to present the latest videos"))
-                default:
+            } supplementaryView: { _, indexPath, section, _ in
+                if indexPath.section == 0 {
                     TitleView(title: model.topic.title)
+                }
+                else {
+                    switch section {
+                    case .latestMedias:
+                        HeaderView(title: NSLocalizedString("Latest videos", comment: "Short title for the most recent video topic list"))
+                    case .mostPopularMedias:
+                        HeaderView(title: NSLocalizedString("Most popular", comment: "Short title for the most clicked video topic list"))
+                    case .information:
+                        TitleView(title: model.topic.title)
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
