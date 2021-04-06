@@ -226,7 +226,9 @@ extension PageViewController: ContentInsets {
 }
 
 extension PageViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
 }
 
 extension PageViewController: UIScrollViewDelegate {
