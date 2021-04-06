@@ -42,10 +42,7 @@ class PageViewController: DataViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-            func layoutGroupSize(for section: PageModel.Section?, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
-                // TODO: fix asynchronous self.model.rows and sectionIndex asked. Section must not bit optionnal.
-                guard let section = section else { return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)) }
-                
+            func layoutGroupSize(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
                 switch section.properties.layout {
                 case .hero, .highlight:
                     let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width)
@@ -58,7 +55,6 @@ class PageViewController: DataViewController {
                     let size = LayoutShowStandardCollectionItemSize(LayoutCollectionViewCellStandardWidth, false)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .medias:
-                    // TODO: with Obj-C cells, live cells have different height as standard media cells. With Swift UI, there is currently to different.
                     let size = LayoutMediaStandardCollectionItemSize(LayoutCollectionViewCellStandardWidth, false)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showAccess:
@@ -67,13 +63,10 @@ class PageViewController: DataViewController {
                 }
             }
             
-            // TODO: fix asynchronous self.model.rows and sectionIndex asked. How to get Row array synchronized to Collection view layout?
-            let section = self.model.rows.count > sectionIndex ? self.model.rows[sectionIndex].section : nil
-            
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            let groupSize = layoutGroupSize(for: section, layoutEnvironment: layoutEnvironment)
+            let groupSize = layoutGroupSize(for: self.model.rows[sectionIndex].section, layoutEnvironment: layoutEnvironment)
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
             let layoutSection = NSCollectionLayoutSection(group: group)
