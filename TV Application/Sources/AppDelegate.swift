@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController.tabBar.standardAppearance = appearance
     }
     
-    private func applicationRootViewController() -> UIViewController? {
+    private func applicationRootViewController() -> UIViewController {
         var viewControllers = [UIViewController]()
         
         let videosViewController = UIHostingController(rootView: VideosView())
@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return tabBarController
         }
         else {
-            return viewControllers.first
+            return viewControllers.first!
         }
     }
     
@@ -176,7 +176,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
         self.window = window
         
-        let rootViewController = applicationRootViewController()!
+        let rootViewController = applicationRootViewController()
         rootViewController.view.backgroundColor = (UIScreen.main.traitCollection.userInterfaceStyle == .dark) ? .play_black : .play_lightGray
         window.rootViewController = rootViewController
         return true
