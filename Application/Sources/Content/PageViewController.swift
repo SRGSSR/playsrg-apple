@@ -145,27 +145,124 @@ class PageViewController: DataViewController {
         #if os(iOS)
         let showAccessCellIdentifier = "ShowAccessCell"
         collectionView.register(HostCollectionViewCell<ShowAccessCell>.self, forCellWithReuseIdentifier: showAccessCellIdentifier)
+        #else
+        let featuredMediaCellIdentifier = "FeaturedMediaCell"
+        collectionView.register(HostCollectionViewCell<FeaturedMediaCell>.self, forCellWithReuseIdentifier: featuredMediaCellIdentifier)
+        
+        let featuredShowCellIdentifier = "FeaturedShowCell"
+        collectionView.register(HostCollectionViewCell<FeaturedShowCell>.self, forCellWithReuseIdentifier: featuredShowCellIdentifier)
+        
+        let liveMediaCellIdentifier = "LiveMediaCell"
+        collectionView.register(HostCollectionViewCell<LiveMediaCell>.self, forCellWithReuseIdentifier: liveMediaCellIdentifier)
         #endif
         
         // TODO: Factor out cell dequeue code per type
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
             switch item {
+            #if os(iOS)
             case let .media(media, _):
                 let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
                 mediaCell?.content = MediaCell(media: media)
                 return mediaCell
+            #else
+            case let .media(media, section):
+                if section.properties.layout == .hero {
+                    let featuredMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedMediaCell>
+                    featuredMediaCell?.content = FeaturedMediaCell(media: media, layout: .hero)
+                    return featuredMediaCell
+                }
+                else if section.properties.layout == .highlight {
+                    let featuredMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedMediaCell>
+                    featuredMediaCell?.content = FeaturedMediaCell(media: media, layout: .highlighted)
+                    return featuredMediaCell
+                }
+                else if section.properties.presentationType == .livestreams {
+                    if media.contentType == .livestream || media.contentType == .scheduledLivestream {
+                        let liveMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: liveMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<LiveMediaCell>
+                        liveMediaCell?.content = LiveMediaCell(media: media)
+                        return liveMediaCell
+                    }
+                    else {
+                        let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
+                        mediaCell?.content = MediaCell(media: media, style: .date)
+                        return mediaCell
+                    }
+                }
+                else {
+                    let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
+                    mediaCell?.content = MediaCell(media: media)
+                    return mediaCell
+                }
+            #endif
+            #if os(iOS)
             case .mediaPlaceholder:
                 let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
                 mediaCell?.content = MediaCell(media: nil)
                 return mediaCell
+            #else
+            case let .mediaPlaceholder(_, section):
+                if section.properties.layout == .hero {
+                    let featuredMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedMediaCell>
+                    featuredMediaCell?.content = FeaturedMediaCell(media: nil, layout: .hero)
+                    return featuredMediaCell
+                }
+                else if section.properties.layout == .highlight {
+                    let featuredMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedMediaCell>
+                    featuredMediaCell?.content = FeaturedMediaCell(media: nil, layout: .highlighted)
+                    return featuredMediaCell
+                }
+                else {
+                    let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
+                    mediaCell?.content = MediaCell(media: nil)
+                    return mediaCell
+                }
+            #endif
+            #if os(iOS)
             case let .show(show, _):
                 let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell>
                 showCell?.content = ShowCell(show: show)
                 return showCell
+            #else
+            case let .show(show, section):
+                if section.properties.layout == .hero {
+                    let featuredShowCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredShowCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedShowCell>
+                    featuredShowCell?.content = FeaturedShowCell(show: show, layout: .hero)
+                    return featuredShowCell
+                }
+                else if section.properties.layout == .highlight {
+                    let featuredShowCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredShowCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedShowCell>
+                    featuredShowCell?.content = FeaturedShowCell(show: show, layout: .highlighted)
+                    return featuredShowCell
+                }
+                else {
+                    let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell>
+                    showCell?.content = ShowCell(show: show)
+                    return showCell
+                }
+            #endif
+            #if os(iOS)
             case .showPlaceholder:
                 let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell>
                 showCell?.content = ShowCell(show: nil)
                 return showCell
+            #else
+            case let .showPlaceholder(_, section):
+                if section.properties.layout == .hero {
+                    let featuredShowCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredShowCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedShowCell>
+                    featuredShowCell?.content = FeaturedShowCell(show: nil, layout: .hero)
+                    return featuredShowCell
+                }
+                else if section.properties.layout == .highlight {
+                    let featuredShowCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredShowCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedShowCell>
+                    featuredShowCell?.content = FeaturedShowCell(show: nil, layout: .highlighted)
+                    return featuredShowCell
+                }
+                else {
+                    let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell>
+                    showCell?.content = ShowCell(show: nil)
+                    return showCell
+                }
+            #endif
             case let .topic(topic, _):
                 let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell>
                 topicCell?.content = TopicCell(topic: topic)
