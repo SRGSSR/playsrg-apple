@@ -100,6 +100,7 @@ struct HomeView: View {
         }
         .synchronizeTabBarScrolling()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(.play_black))
         .ignoresSafeArea(.all)
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
