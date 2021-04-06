@@ -14,7 +14,7 @@
 typedef NS_ENUM(NSInteger, PlayerType) {
     PlayerTypeNative,           // Native Letterbox-based player
     PlayerTypeGoogleCast        // Google Cast player interface
-};
+} API_UNAVAILABLE(tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Return the standard user interface orientations supported by the application. Useful when implementing the
  *  `-supportedInterfaceOrientations` of a view controller
  */
-@property (class, nonatomic, readonly) UIInterfaceOrientationMask play_supportedInterfaceOrientations;
+@property (class, nonatomic, readonly) UIInterfaceOrientationMask play_supportedInterfaceOrientations API_UNAVAILABLE(tvos);
 
 /**
  *  Convenience method to determine whether a view controller is appearing or disappearing. Take the parent view
@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
                       airPlaySuggestions:(BOOL)airPlaySuggestions
                     fromPushNotification:(BOOL)fromPushNotification
                                 animated:(BOOL)animated
-                              completion:(nullable void (^)(PlayerType playerType))completion;
+                              completion:(nullable void (^)(PlayerType playerType))completion API_UNAVAILABLE(tvos);
 
 /**
  *  Same as `-play_presentMediaPlayerWithMedia:atPosition:fromPushNotification:animated:completion:`, but resuming from
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 withAirPlaySuggestions:(BOOL)airPlaySuggestions
                                   fromPushNotification:(BOOL)fromPushNotification
                                               animated:(BOOL)animated
-                                            completion:(nullable void (^)(PlayerType playerType))completion;
+                                            completion:(nullable void (^)(PlayerType playerType))completion API_UNAVAILABLE(tvos);
 
 /**
  *  Dismiss the view controller, ensuring a compatible suitable orientation is applied to the revealed view controller.

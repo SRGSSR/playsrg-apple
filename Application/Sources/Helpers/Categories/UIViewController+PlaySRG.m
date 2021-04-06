@@ -6,23 +6,25 @@
 
 #import "UIViewController+PlaySRG.h"
 
+#import <objc/runtime.h>
+
+#if TARGET_OS_IOS
+
 #import "AnalyticsConstants.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
 #import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
-#import "PlayErrors.h"
 #import "Playlist.h"
-#import "Previewing.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
-
-#import <objc/runtime.h>
 
 @import GoogleCast;
 @import libextobjc;
 @import SRGDataProviderNetwork;
+
+#endif
 
 static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
@@ -38,6 +40,8 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
                                    class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewDidDisappear:)));
 }
 
+#if TARGET_OS_IOS
+
 + (UIInterfaceOrientationMask)play_supportedInterfaceOrientations
 {
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
@@ -47,6 +51,8 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
         return UIInterfaceOrientationMaskAll;
     }
 }
+
+#endif
 
 #pragma mark Swizzled methods
 
@@ -134,6 +140,8 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
     }
     return topViewController;
 }
+
+#if TARGET_OS_IOS
 
 #pragma mark Media player presentation
 
@@ -346,10 +354,13 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
     return (self.supportedInterfaceOrientations & (1 << orientation)) != 0;
 }
 
+#endif
+
 - (void)play_dismissViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
 {
     UIViewController *topViewController = self.play_topViewController;
     
+#if TARGET_OS_IOS
     // See https://stackoverflow.com/a/29560217
     UIViewController *presentingViewController = topViewController.presentingViewController;
     if (! [presentingViewController play_supportsOrientation:(UIInterfaceOrientation)UIDevice.currentDevice.orientation]) {
@@ -366,6 +377,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
             [UIDevice.currentDevice setValue:@(UIDeviceOrientationLandscapeRight) forKey:@keypath(UIDevice.new, orientation)];
         }
     }
+#endif
     [self dismissViewControllerAnimated:animated completion:completion];
 }
 
