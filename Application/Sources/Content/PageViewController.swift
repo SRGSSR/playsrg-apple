@@ -66,7 +66,9 @@ class PageViewController: DataViewController {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
-            let groupSize = layoutGroupSize(for: self.model.rows[sectionIndex].section, layoutEnvironment: layoutEnvironment)
+            let snapshot = self.dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[sectionIndex]
+            let groupSize = layoutGroupSize(for: section, layoutEnvironment: layoutEnvironment)
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
             let layoutSection = NSCollectionLayoutSection(group: group)
