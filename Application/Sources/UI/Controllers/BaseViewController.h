@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "Previewing.h"
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
