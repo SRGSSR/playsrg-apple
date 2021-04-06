@@ -171,7 +171,7 @@ CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 }
 
-CGSize LayoutTopicCollectionItemSize()
+CGSize LayoutTopicCollectionItemSize(void)
 {
     CGFloat height = LayoutTableViewTopicCellHeight - 2 * LayoutStandardMargin;
     return CGSizeMake(height * 16.f / 9.f, height);

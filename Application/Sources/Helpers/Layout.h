@@ -95,7 +95,7 @@ OBJC_EXPORT CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL 
  *  Topic cell (16:9 artwork) size for collection layouts.
  *
  **/
-OBJC_EXPORT CGSize LayoutTopicCollectionItemSize();
+OBJC_EXPORT CGSize LayoutTopicCollectionItemSize(void);
 
 /**
  *  Show access cell size for collection layouts.
