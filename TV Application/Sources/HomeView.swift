@@ -63,7 +63,6 @@ struct HomeView: View {
         let groupSize = layoutGroupSize(for: section)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
-        // TODO: Have two kinds of supplementary items, one for the title, one for the section? Is this possible?
         let layoutSection = NSCollectionLayoutSection(group: group)
         layoutSection.orthogonalScrollingBehavior = continuousGroupLeadingBoundary(for: section)
         layoutSection.interGroupSpacing = 40
