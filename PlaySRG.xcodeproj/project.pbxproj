@@ -9866,7 +9866,6 @@
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
 				URL_SCHEME = "$(URL_BASE_SCHEME)-debug";
-				USER_INTERFACE_STYLE = Automatic;
 			};
 			name = Debug;
 		};
@@ -9929,7 +9928,6 @@
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
 				URL_SCHEME = "$(URL_BASE_SCHEME)";
-				USER_INTERFACE_STYLE = Dark;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -10248,7 +10246,6 @@
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
 				URL_SCHEME = "$(URL_BASE_SCHEME)-beta";
-				USER_INTERFACE_STYLE = Dark;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -10443,7 +10440,6 @@
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
 				URL_SCHEME = "$(URL_BASE_SCHEME)-nightly";
-				USER_INTERFACE_STYLE = Dark;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;

@@ -172,13 +172,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SRGDataProvider.current = SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
         
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.makeKeyAndVisible()
-        self.window = window
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window!.makeKeyAndVisible()
+        window!.rootViewController = applicationRootViewController()
         
-        let rootViewController = applicationRootViewController()
-        rootViewController.view.backgroundColor = (UIScreen.main.traitCollection.userInterfaceStyle == .dark) ? .play_black : .play_lightGray
-        window.rootViewController = rootViewController
         return true
     }
     
