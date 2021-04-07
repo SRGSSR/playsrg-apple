@@ -103,7 +103,7 @@ struct SearchResultsView: View {
         GeometryReader { geometry in
             CollectionView(rows: rows) { _, section, _ in
                 return Self.layoutSection(for: section, geometry: geometry)
-            } cell: { _, item in
+            } cell: { _, _, item in
                 switch item {
                 case .loading:
                     ActivityIndicator()

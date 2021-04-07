@@ -143,7 +143,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     let sectionLayoutProvider: (Int, Section, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection
     
     /// Cell view builder.
-    let cell: (IndexPath, Item) -> Cell
+    let cell: (IndexPath, Section, Item) -> Cell
     
     /// Supplementary view builder.
     let supplementaryView: (String, IndexPath, Section, Item) -> SupplementaryView
@@ -181,7 +181,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
      */
     init(rows: [CollectionRow<Section, Item>],
          sectionLayoutProvider: @escaping (Int, Section, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection,
-         @ViewBuilder cell: @escaping (IndexPath, Item) -> Cell,
+         @ViewBuilder cell: @escaping (IndexPath, Section, Item) -> Cell,
          @ViewBuilder supplementaryView: @escaping (String, IndexPath, Section, Item) -> SupplementaryView) {
         self.rows = Self.removeDuplicates(in: rows)
         self.sectionLayoutProvider = sectionLayoutProvider
@@ -244,8 +244,11 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         collectionView.register(HostCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
         let dataSource = Coordinator.DataSource(collectionView: collectionView) { collectionView, indexPath, item in
+            let snapshot = context.coordinator.dataSource!.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            
             let hostCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! HostCell
-            hostCell.hostedCell = cell(indexPath, item)
+            hostCell.hostedCell = cell(indexPath, section, item)
             return hostCell
         }
         context.coordinator.dataSource = dataSource
@@ -257,9 +260,10 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
                 coordinator.registeredSupplementaryViewKinds.append(kind)
             }
             
-            let snapshot = dataSource.snapshot()
+            let snapshot = coordinator.dataSource!.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+            
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: supplementaryViewIdentifier, for: indexPath) as! HostSupplementaryView
             view.hostedSupplementaryView = supplementaryView(kind, indexPath, section, item)
             return view

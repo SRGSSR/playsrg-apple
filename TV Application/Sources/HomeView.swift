@@ -85,7 +85,7 @@ struct HomeView: View {
     var body: some View {
         CollectionView(rows: model.rows) { _, section, _ in
             return Self.swimlaneLayoutSection(for: section)
-        } cell: { _, item in
+        } cell: { _, _, item in
             Cell(item: item)
         } supplementaryView: { _, _, section, _ in
             HeaderView(rowId: section)
