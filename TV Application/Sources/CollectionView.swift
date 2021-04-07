@@ -32,7 +32,6 @@ extension CollectionView {
 /**
  *  A `UICollectionView`-powered SwiftUI collection, whose cells are provided as SwiftUI views.
  */
-// TODO: Get rid of this CollectionView, see https://github.com/SRGSSR/playsrg-apple/issues/169
 struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, SupplementaryView: View>: UIViewRepresentable {
     /**
      *  View coordinator.

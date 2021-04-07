@@ -23,7 +23,6 @@ CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth)
 #if TARGET_OS_TV
     return 1740;
 #else
-
     // Ensure cells never fill the entire width of the parent, so that the fact that content can be scrolled
     // is always obvious to the user
     static const CGFloat kHorizontalFillRatio = 0.9f;
