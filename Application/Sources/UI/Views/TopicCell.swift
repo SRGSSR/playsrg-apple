@@ -8,6 +8,12 @@ import SwiftUI
 
 struct TopicCell: View {
     let topic: SRGTopic?
+    let usingHostingController: Bool
+    
+    init(topic: SRGTopic?, usingHostingController: Bool = false) {
+        self.topic = topic
+        self.usingHostingController = usingHostingController
+    }
     
     private var accessibilityLabel: String {
         return topic?.title ?? ""
@@ -18,7 +24,7 @@ struct TopicCell: View {
         GeometryReader { geometry in
             CardButton(action: {
                 if let topic = topic {
-                    navigateToTopic(topic)
+                    navigateToTopic(topic, usingHostingController: usingHostingController)
                 }
             }) {
                 MainView(topic: topic)

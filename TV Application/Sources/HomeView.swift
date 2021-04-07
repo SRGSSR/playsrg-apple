@@ -173,9 +173,9 @@ struct HomeView: View {
                     ShowCell(show: nil)
                 }
             case let .topic(topic, section: _):
-                TopicCell(topic: topic)
+                TopicCell(topic: topic, usingHostingController: true)
             case .topicPlaceholder:
-                TopicCell(topic: nil)
+                TopicCell(topic: nil, usingHostingController: true)
             }
         }
     }

@@ -65,11 +65,17 @@ func navigateToShow(_ show: SRGShow, animated: Bool = true) {
     present(hostController, animated: animated)
 }
 
-func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {
+func navigateToTopic(_ topic: SRGTopic, usingHostingController: Bool, animated: Bool = true) {
     guard !isPresenting else { return }
     
-    let hostController = UIHostingController(rootView: TopicView(topic))
-    present(hostController, animated: animated)
+    if usingHostingController {
+        let hostController = UIHostingController(rootView: TopicView(topic))
+        present(hostController, animated: animated)
+    }
+    else {
+        let pageViewController = PageViewController(id: .topic(topic: topic))
+        present(pageViewController, animated: animated)
+    }
 }
 
 func showText(_ text: String, animated: Bool = true) {
