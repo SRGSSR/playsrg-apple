@@ -60,8 +60,11 @@ CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth)
 #endif
 }
 
-CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor)
+OBJC_EXPORT CGFloat LayoutCollectionSectionHeaderTitleHeight()
 {
+#if TARGET_OS_TV
+    return 60.f;
+#else
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_headerHeights;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
@@ -80,7 +83,13 @@ CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor)
     });
     
     UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat headerHeight = s_headerHeights[contentSizeCategory].floatValue;
+    return s_headerHeights[contentSizeCategory].floatValue;
+#endif
+}
+
+CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor)
+{
+    CGFloat headerHeight = LayoutCollectionSectionHeaderTitleHeight();
     if (hasBackgroundColor) {
         headerHeight += 6.f;
     }

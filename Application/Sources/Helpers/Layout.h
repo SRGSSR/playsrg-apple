@@ -76,6 +76,11 @@ OBJC_EXPORT CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidt
 OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth);
 
 /**
+ *  Return the standard height for a collection section header title
+ */
+OBJC_EXPORT CGFloat LayoutCollectionSectionHeaderTitleHeight(void);
+
+/**
  *  Return the standard height for table view headers.
  */
 OBJC_EXPORT CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor);

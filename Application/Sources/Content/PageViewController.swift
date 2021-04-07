@@ -44,6 +44,34 @@ class PageViewController: DataViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+            func sectionHeaderHeight(for section: PageModel.Section, index: Int, pageTitle: String?) -> CGFloat? {
+                if index == 0, section.properties.title == nil, pageTitle == nil {
+                    return nil
+                }
+                
+                var height: CGFloat = LayoutStandardMargin
+                if let title = section.properties.title, !title.isEmpty {
+                    height += LayoutCollectionSectionHeaderTitleHeight()
+                }
+                if let summary = section.properties.summary, !summary.isEmpty {
+                    height += (LayoutCollectionSectionHeaderTitleHeight() * 2 / 3).rounded(.up)
+                }
+                if let pageTitle = pageTitle, !pageTitle.isEmpty {
+                    height += LayoutCollectionSectionHeaderTitleHeight()
+                }
+                return height
+            }
+            
+            func supplementaryItems(for section: PageModel.Section, index: Int, pageTitle: String?) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+                guard let headerHeight = sectionHeaderHeight(for: section, index: index, pageTitle: pageTitle) else { return [] }
+                let header = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight)),
+                    elementKind: UICollectionView.elementKindSectionHeader,
+                    alignment: .topLeading
+                )
+                return [header]
+            }
+            
             func layoutGroupSize(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
                 switch section.properties.layout {
                 case .hero:
@@ -101,6 +129,7 @@ class PageViewController: DataViewController {
             layoutSection.orthogonalScrollingBehavior = continuousGroupLeadingBoundary(for: section)
             layoutSection.interGroupSpacing = LayoutStandardMargin
             layoutSection.contentInsets = contentInsets(for: section)
+            layoutSection.boundarySupplementaryItems = supplementaryItems(for: section, index: sectionIndex, pageTitle: self.model.title)
             return layoutSection
         }
     }
@@ -153,6 +182,9 @@ class PageViewController: DataViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let pageSectionHeaderViewIdentifier = "PageSectionHeaderView"
+        collectionView.register(HostSupplementaryView<PageSectionHeaderView>.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: pageSectionHeaderViewIdentifier)
         
         let mediaCellIdentifier = "MediaCell"
         collectionView.register(HostCollectionViewCell<MediaCell>.self, forCellWithReuseIdentifier: mediaCellIdentifier)
@@ -299,6 +331,18 @@ class PageViewController: DataViewController {
                 return showAccessCell
             #endif
             }
+        }
+        
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            guard kind == UICollectionView.elementKindSectionHeader else { return nil }
+            
+            let snapshot = self.dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            let pageTitle = indexPath.section == 0 ? self.model.title : nil
+            
+            let sectionHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: pageSectionHeaderViewIdentifier, for: indexPath) as! HostSupplementaryView<PageSectionHeaderView>
+            sectionHeaderView.content = PageSectionHeaderView(section: section, pageTitle: pageTitle)
+            return sectionHeaderView
         }
         
         model.$rows

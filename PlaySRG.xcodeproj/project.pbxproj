@@ -37,6 +37,16 @@
 		0804917D22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0804917522832C5C00E4CEC2 /* HomeShowCollectionViewCell.m */; };
 		0804917E22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0804917522832C5C00E4CEC2 /* HomeShowCollectionViewCell.m */; };
 		0804917F22832C5D00E4CEC2 /* HomeShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0804917522832C5C00E4CEC2 /* HomeShowCollectionViewCell.m */; };
+		0804D9D8261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */; };
+		0804D9D9261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */; };
+		0804D9DA261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */; };
+		0804D9DB261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */; };
+		0804D9DC261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */; };
+		0804D9DD261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */; };
+		0804D9DE261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */; };
+		0804D9DF261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */; };
+		0804D9E0261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */; };
+		0804D9E1261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */; };
 		0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
 		0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
 		080570402540E0FC00A59C9D /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
@@ -2124,6 +2134,7 @@
 		0804917322832C5C00E4CEC2 /* HomeShowCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeShowCollectionViewCell.h; sourceTree = "<group>"; };
 		0804917422832C5C00E4CEC2 /* HomeShowCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeShowCollectionViewCell.xib; sourceTree = "<group>"; };
 		0804917522832C5C00E4CEC2 /* HomeShowCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeShowCollectionViewCell.m; sourceTree = "<group>"; };
+		0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageSectionHeaderView.swift; sourceTree = "<group>"; };
 		0805703D2540E0FC00A59C9D /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		0806E7B51D50D918002ED406 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		0806E7B61D50D918002ED406 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -3924,6 +3935,7 @@
 				6F475FAD1EB37BC6003021EA /* MediaCollectionViewCell.m */,
 				6F475FAE1EB37BC6003021EA /* MediaCollectionViewCell.xib */,
 				6F3F1AB925060496000FF4DD /* MediaVisualView.swift */,
+				0804D9D7261DFFB600242C65 /* PageSectionHeaderView.swift */,
 				6F151E26256BF5CF009082F8 /* ProgressBar.swift */,
 				6F0EDA642448B0D800F0FED2 /* RefreshControl.h */,
 				6F0EDA632448B0D700F0FED2 /* RefreshControl.m */,
@@ -7486,6 +7498,7 @@
 				E64BA3FA1D4A587E002C10D5 /* WebViewController.m in Sources */,
 				0827DA1E1F0D36D900A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F88139523D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */,
+				0804D9D8261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6F47602F1EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6F0E8D981F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				08602BF72213786B0081D166 /* HomeShowsAccessTableViewCell.m in Sources */,
@@ -7751,6 +7764,7 @@
 				E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8B22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F53220DA99B00778CA3 /* History.m in Sources */,
+				0804D9D9261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FAAF77E20CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D5E1FFE6EF800115906 /* ModuleHeaderView.m in Sources */,
 				E65FB20C1D66D69700820696 /* DailyMediasViewController.m in Sources */,
@@ -7949,6 +7963,7 @@
 				E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8C22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F54220DA99B00778CA3 /* History.m in Sources */,
+				0804D9DA261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FAAF78020CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D621FFE6EF900115906 /* ModuleHeaderView.m in Sources */,
 				E65FB20D1D66D69700820696 /* DailyMediasViewController.m in Sources */,
@@ -8147,6 +8162,7 @@
 				E694A9F81D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8D22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F55220DA99B00778CA3 /* History.m in Sources */,
+				0804D9DB261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FAAF78220CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D661FFE6EF900115906 /* ModuleHeaderView.m in Sources */,
 				E65FB20E1D66D69700820696 /* DailyMediasViewController.m in Sources */,
@@ -8345,6 +8361,7 @@
 				E694A9F91D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6FD88F8E22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F56220DA99B00778CA3 /* History.m in Sources */,
+				0804D9DC261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FAAF78420CABA3A00BB58A3 /* Notification.m in Sources */,
 				08DD9D6A1FFE6EFA00115906 /* ModuleHeaderView.m in Sources */,
 				E65FB20F1D66D69700820696 /* DailyMediasViewController.m in Sources */,
@@ -8526,6 +8543,7 @@
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCF925B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80662508ECA800FD8FE7 /* ShowsView.swift in Sources */,
+				0804D9DD261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FCC73BA24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -8623,6 +8641,7 @@
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFA25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80672508ECA800FD8FE7 /* ShowsView.swift in Sources */,
+				0804D9DE261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FCC73BB24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -8720,6 +8739,7 @@
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFB25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80682508ECA800FD8FE7 /* ShowsView.swift in Sources */,
+				0804D9DF261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FCC73BC24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -8817,6 +8837,7 @@
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFC25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80692508ECA800FD8FE7 /* ShowsView.swift in Sources */,
+				0804D9E0261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FCC73BD24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E2A256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -8914,6 +8935,7 @@
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFD25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F806A2508ECA800FD8FE7 /* ShowsView.swift in Sources */,
+				0804D9E1261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FCC73BE24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E2B256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFE24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
