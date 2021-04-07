@@ -861,11 +861,11 @@
 		6F426B4425680A8F00DD22AB /* BlockingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */; };
 		6F426B4525680A8F00DD22AB /* BlockingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */; };
 		6F426B4625680A8F00DD22AB /* BlockingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */; };
-		6F475FB41EB37BC6003021EA /* BaseViewController~ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController~ios.m */; };
-		6F475FB51EB37BC6003021EA /* BaseViewController~ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController~ios.m */; };
-		6F475FB61EB37BC6003021EA /* BaseViewController~ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController~ios.m */; };
-		6F475FB71EB37BC6003021EA /* BaseViewController~ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController~ios.m */; };
-		6F475FB81EB37BC6003021EA /* BaseViewController~ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController~ios.m */; };
+		6F475FB41EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
+		6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
+		6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
+		6F475FB71EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
+		6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6F475FB91EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
 		6F475FBA1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
 		6F475FBB1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
@@ -1370,11 +1370,6 @@
 		6FA8E2E0261C9D3D003FFDCF /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C7A226025698006F685A /* PageViewController.swift */; };
 		6FA8E2FA261C9D3E003FFDCF /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C7A226025698006F685A /* PageViewController.swift */; };
 		6FA8E2FB261C9D3E003FFDCF /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C7A226025698006F685A /* PageViewController.swift */; };
-		6FA8E411261CAA8F003FFDCF /* BaseViewController~tvos.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8E401261CAA8E003FFDCF /* BaseViewController~tvos.m */; };
-		6FA8E412261CAA8F003FFDCF /* BaseViewController~tvos.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8E401261CAA8E003FFDCF /* BaseViewController~tvos.m */; };
-		6FA8E413261CAA8F003FFDCF /* BaseViewController~tvos.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8E401261CAA8E003FFDCF /* BaseViewController~tvos.m */; };
-		6FA8E414261CAA8F003FFDCF /* BaseViewController~tvos.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8E401261CAA8E003FFDCF /* BaseViewController~tvos.m */; };
-		6FA8E415261CAA8F003FFDCF /* BaseViewController~tvos.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8E401261CAA8E003FFDCF /* BaseViewController~tvos.m */; };
 		6FA8E4DE261CAC4D003FFDCF /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9897CC2412582400B390A2 /* Layout.m */; };
 		6FA8E4F8261CAC4E003FFDCF /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9897CC2412582400B390A2 /* Layout.m */; };
 		6FA8E4F9261CAC4E003FFDCF /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9897CC2412582400B390A2 /* Layout.m */; };
@@ -1744,6 +1739,11 @@
 		6FE28775248168A100358CFF /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FE28772248168A100358CFF /* SongTableViewCell.xib */; };
 		6FE28776248168A100358CFF /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FE28772248168A100358CFF /* SongTableViewCell.xib */; };
 		6FE28777248168A100358CFF /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FE28772248168A100358CFF /* SongTableViewCell.xib */; };
+		6FE374AC261D8F5900803E8F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
+		6FE374AD261D8F5A00803E8F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
+		6FE374AE261D8F5A00803E8F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
+		6FE374AF261D8F5B00803E8F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
+		6FE374B0261D8F5C00803E8F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6FE4F0CC257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0CD257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0CE257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
@@ -2455,7 +2455,7 @@
 		6F40920722DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MostSearchedShowCollectionViewCell.xib; sourceTree = "<group>"; };
 		6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingOverlay.swift; sourceTree = "<group>"; };
 		6F475F8C1EB37BC6003021EA /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		6F475F8D1EB37BC6003021EA /* BaseViewController~ios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BaseViewController~ios.m"; sourceTree = "<group>"; };
+		6F475F8D1EB37BC6003021EA /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		6F475F8E1EB37BC6003021EA /* CollectionRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionRequestViewController.h; sourceTree = "<group>"; };
 		6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionRequestViewController.m; sourceTree = "<group>"; };
 		6F475F901EB37BC6003021EA /* DataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
@@ -2616,7 +2616,6 @@
 		6FA6C0612458064C00518DE6 /* SRGProgramComposition+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGProgramComposition+PlaySRG.h"; sourceTree = "<group>"; };
 		6FA6C0622458064C00518DE6 /* SRGProgramComposition+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGProgramComposition+PlaySRG.m"; sourceTree = "<group>"; };
 		6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Onboardings.json; sourceTree = "<group>"; };
-		6FA8E401261CAA8E003FFDCF /* BaseViewController~tvos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BaseViewController~tvos.m"; sourceTree = "<group>"; };
 		6FA9ECAA20C7AA1600D3D6C2 /* NotificationsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
 		6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
 		6FA9ECB820C7AB3A00D3D6C2 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
@@ -3861,8 +3860,7 @@
 			isa = PBXGroup;
 			children = (
 				6F475F8C1EB37BC6003021EA /* BaseViewController.h */,
-				6F475F8D1EB37BC6003021EA /* BaseViewController~ios.m */,
-				6FA8E401261CAA8E003FFDCF /* BaseViewController~tvos.m */,
+				6F475F8D1EB37BC6003021EA /* BaseViewController.m */,
 				6F475F8E1EB37BC6003021EA /* CollectionRequestViewController.h */,
 				6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */,
 				6F475F901EB37BC6003021EA /* DataViewController.h */,
@@ -7520,7 +7518,7 @@
 				6F2AB1B42487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				08C68F8F1D38DEA100BB8AAA /* main.m in Sources */,
 				6FD88F7722D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
-				6F475FB41EB37BC6003021EA /* BaseViewController~ios.m in Sources */,
+				6F475FB41EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FE686E11EB9D57400067D40 /* ChannelService.m in Sources */,
 				08DD9D5C1FFE6EDB00115906 /* ModuleHeaderView.m in Sources */,
 				081220AA1DD079BB00BF8326 /* DownloadsViewController.m in Sources */,
@@ -7641,7 +7639,7 @@
 				6FAAF78A20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				08AA55BC1D49EFC700C5026E /* HomeTableViewCell.m in Sources */,
 				0806E7B91D50D918002ED406 /* SettingsViewController.m in Sources */,
-				6F475FB51EB37BC6003021EA /* BaseViewController~ios.m in Sources */,
+				6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6F54D39126050FFF008B46FF /* BlockingOverlay.swift in Sources */,
 				6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6FE2873D2481448C00358CFF /* SongsViewController.m in Sources */,
@@ -7839,7 +7837,7 @@
 				6FAAF78C20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				08AA55BD1D49EFC800C5026E /* HomeTableViewCell.m in Sources */,
 				0806E7BA1D50D919002ED406 /* SettingsViewController.m in Sources */,
-				6F475FB61EB37BC6003021EA /* BaseViewController~ios.m in Sources */,
+				6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6F54D39226050FFF008B46FF /* BlockingOverlay.swift in Sources */,
 				6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6FE2873E2481448C00358CFF /* SongsViewController.m in Sources */,
@@ -8037,7 +8035,7 @@
 				6FAAF78E20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				08AA55BE1D49EFC800C5026E /* HomeTableViewCell.m in Sources */,
 				0806E7BB1D50D919002ED406 /* SettingsViewController.m in Sources */,
-				6F475FB71EB37BC6003021EA /* BaseViewController~ios.m in Sources */,
+				6F475FB71EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6F54D39326051000008B46FF /* BlockingOverlay.swift in Sources */,
 				6FC1FA8B2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6FE2873F2481448C00358CFF /* SongsViewController.m in Sources */,
@@ -8235,7 +8233,7 @@
 				6FAAF79020CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				08AA55BF1D49EFC800C5026E /* HomeTableViewCell.m in Sources */,
 				0806E7BC1D50D919002ED406 /* SettingsViewController.m in Sources */,
-				6F475FB81EB37BC6003021EA /* BaseViewController~ios.m in Sources */,
+				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6F54D39426051000008B46FF /* BlockingOverlay.swift in Sources */,
 				6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6FE287402481448C00358CFF /* SongsViewController.m in Sources */,
@@ -8542,7 +8540,6 @@
 				08ADFB1F25EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B09256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6FCE7AC5260367B90037A861 /* HostViews.swift in Sources */,
-				6FA8E411261CAA8F003FFDCF /* BaseViewController~tvos.m in Sources */,
 				08F3851125FA783A00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59725024C4800718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE525E640C400F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8550,6 +8547,7 @@
 				6FA8E4DE261CAC4D003FFDCF /* Layout.m in Sources */,
 				6FC413D424EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6F85F7502567ED0D00AC8286 /* ChannelService.m in Sources */,
+				6FE374AC261D8F5900803E8F /* BaseViewController.m in Sources */,
 				6F3D67E1256827DD0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6125DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF12AA2256C58FE0042F446 /* Logger.swift in Sources */,
@@ -8639,7 +8637,6 @@
 				08ADFB2025EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0A256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6FCE7AC6260367B90037A861 /* HostViews.swift in Sources */,
-				6FA8E412261CAA8F003FFDCF /* BaseViewController~tvos.m in Sources */,
 				08F3851225FA783B00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59825024C4900718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE625E640C500F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8647,6 +8644,7 @@
 				6FA8E4F8261CAC4E003FFDCF /* Layout.m in Sources */,
 				6FC413DC24EEEDC900FDF806 /* HomeSection.m in Sources */,
 				6F85F7652567ED0E00AC8286 /* ChannelService.m in Sources */,
+				6FE374AD261D8F5A00803E8F /* BaseViewController.m in Sources */,
 				6F3D67F6256827DE0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6225DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF12AA3256C58FE0042F446 /* Logger.swift in Sources */,
@@ -8736,7 +8734,6 @@
 				08ADFB2125EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0B256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6FCE7AC7260367B90037A861 /* HostViews.swift in Sources */,
-				6FA8E413261CAA8F003FFDCF /* BaseViewController~tvos.m in Sources */,
 				08F3851325FA783C00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59925024C4900718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE725E640C500F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8744,6 +8741,7 @@
 				6FA8E4F9261CAC4E003FFDCF /* Layout.m in Sources */,
 				6FC413E424EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6F85F7662567ED0F00AC8286 /* ChannelService.m in Sources */,
+				6FE374AE261D8F5A00803E8F /* BaseViewController.m in Sources */,
 				6F3D67F7256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6325DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF12AA4256C58FE0042F446 /* Logger.swift in Sources */,
@@ -8833,7 +8831,6 @@
 				08ADFB2225EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0C256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6FCE7AC8260367B90037A861 /* HostViews.swift in Sources */,
-				6FA8E414261CAA8F003FFDCF /* BaseViewController~tvos.m in Sources */,
 				08F3852A25FA784000E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59A25024C4A00718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE825E640C600F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8841,6 +8838,7 @@
 				6FA8E4FA261CAC4F003FFDCF /* Layout.m in Sources */,
 				6FC413EC24EEEDCA00FDF806 /* HomeSection.m in Sources */,
 				6F85F7672567ED0F00AC8286 /* ChannelService.m in Sources */,
+				6FE374AF261D8F5B00803E8F /* BaseViewController.m in Sources */,
 				6F3D680C256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6425DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF12AA5256C58FE0042F446 /* Logger.swift in Sources */,
@@ -8930,7 +8928,6 @@
 				08ADFB2325EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				085C2B0D256472F800F57D38 /* ShowsModel.swift in Sources */,
 				6FCE7AC9260367B90037A861 /* HostViews.swift in Sources */,
-				6FA8E415261CAA8F003FFDCF /* BaseViewController~tvos.m in Sources */,
 				08F3852925FA783E00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */,
 				6F5AA59B25024C4B00718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE925E640C600F549E7 /* NSArray+PlaySRG.m in Sources */,
@@ -8938,6 +8935,7 @@
 				6FA8E4FB261CAC4F003FFDCF /* Layout.m in Sources */,
 				6FC413F424EEEDCB00FDF806 /* HomeSection.m in Sources */,
 				6F85F7682567ED0F00AC8286 /* ChannelService.m in Sources */,
+				6FE374B0261D8F5C00803E8F /* BaseViewController.m in Sources */,
 				6F3D680D256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6525DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF12AA6256C58FE0042F446 /* Logger.swift in Sources */,

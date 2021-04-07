@@ -6,6 +6,8 @@
 
 #import "BaseViewController.h"
 
+#if TARGET_OS_IOS
+
 #import "ActivityItemSource.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
@@ -24,8 +26,6 @@
 #import "WatchLater.h"
 
 @import SRGAnalytics;
-
-static void commonInit(BaseViewController *self);
 
 // Inner class conforming to `UIPopoverPresentationControllerDelegate` to avoid having `BaseViewController` conform to
 // it.
@@ -50,9 +50,11 @@ static void commonInit(BaseViewController *self);
 
 @end
 
-@implementation BaseViewController
+#endif
 
-@synthesize presentationControllerDelegate = _presentationControllerDelegate;
+static void commonInit(BaseViewController *self);
+
+@implementation BaseViewController
 
 #pragma mark Object lifecycle
 
@@ -72,7 +74,16 @@ static void commonInit(BaseViewController *self);
     return self;
 }
 
+#pragma mark Subclassing hooks
+
+- (void)updateForContentSizeCategory
+{}
+
+#if TARGET_OS_IOS
+
 #pragma mark Getters and setters
+
+@synthesize presentationControllerDelegate = _presentationControllerDelegate;
 
 - (BaseViewControllerPresentationControllerDelegate *)presentationControllerDelegate
 {
@@ -81,11 +92,6 @@ static void commonInit(BaseViewController *self);
     }
     return _presentationControllerDelegate;
 }
-
-#pragma mark Subclassing hooks
-
-- (void)updateForContentSizeCategory
-{}
 
 #pragma mark Accessibility
 
@@ -385,6 +391,8 @@ static void commonInit(BaseViewController *self);
     previewParameters.backgroundColor = self.view.backgroundColor;
     return [[UITargetedPreview alloc] initWithView:interaction.view parameters:previewParameters];
 }
+
+#endif
 
 #pragma mark Notifications
 
