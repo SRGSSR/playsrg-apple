@@ -643,10 +643,10 @@
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
          if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutTableViewCellStandardHeight);
+            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutStandardCellHeight);
         }
         else {
-            CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
+            CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
             return LayoutMediaStandardCollectionItemSize(itemWidth, NO);
         }
     }

@@ -53,7 +53,7 @@ static BOOL HomeSectionHasLiveContent(HomeSection homeSection)
         itemWidth = LayoutCollectionItemFeaturedWidth(CGRectGetWidth(bounds));
     }
     else {
-        itemWidth = LayoutCollectionViewCellStandardWidth;
+        itemWidth = LayoutStandardCellWidth;
     }
     
     if (HomeSectionHasLiveContent(homeSectionInfo.homeSection)) {

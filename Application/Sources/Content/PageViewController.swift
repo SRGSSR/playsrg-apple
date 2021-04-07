@@ -58,14 +58,34 @@ class PageViewController: DataViewController {
                     let size = LayoutTopicCollectionItemSize()
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .shows:
-                    let size = LayoutShowStandardCollectionItemSize(LayoutCollectionViewCellStandardWidth, .swimlane)
+                    let size = LayoutShowStandardCollectionItemSize(LayoutStandardCellWidth, .swimlane)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .medias:
-                    let size = LayoutMediaStandardCollectionItemSize(LayoutCollectionViewCellStandardWidth, .swimlane)
+                    let size = LayoutMediaStandardCollectionItemSize(LayoutStandardCellWidth, .swimlane)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showAccess:
                     let size = LayoutShowAccessCollectionItemSize(layoutEnvironment.container.effectiveContentSize.width)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
+                }
+            }
+            
+            func continuousGroupLeadingBoundary(for section: PageModel.Section) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
+                switch section.properties.layout {
+                case .hero:
+                    return .continuous
+                case .highlight:
+                    return .none
+                default:
+                    return .continuousGroupLeadingBoundary
+                }
+            }
+            
+            func contentInsets(for section: PageModel.Section) -> NSDirectionalEdgeInsets {
+                switch section.properties.layout {
+                case .topicSelector:
+                    return LayoutTopicSectionContentInsets
+                default:
+                    return LayoutStandardSectionContentInsets
                 }
             }
             
@@ -78,8 +98,9 @@ class PageViewController: DataViewController {
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
             let layoutSection = NSCollectionLayoutSection(group: group)
-            layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+            layoutSection.orthogonalScrollingBehavior = continuousGroupLeadingBoundary(for: section)
             layoutSection.interGroupSpacing = LayoutStandardMargin
+            layoutSection.contentInsets = contentInsets(for: section)
             return layoutSection
         }
     }

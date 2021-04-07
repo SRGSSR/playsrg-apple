@@ -43,7 +43,7 @@ static const CGFloat kBottomInset = 15.f;
         itemWidth = LayoutCollectionItemFeaturedWidth(CGRectGetWidth(bounds));
     }
     else {
-        itemWidth = LayoutCollectionViewCellStandardWidth;
+        itemWidth = LayoutStandardCellWidth;
     }
     return LayoutShowStandardCollectionItemSize(itemWidth, featured);
 }

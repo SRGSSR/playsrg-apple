@@ -38,7 +38,7 @@
 
 + (CGSize)itemSizeForHomeSectionInfo:(HomeSectionInfo *)homeSectionInfo bounds:(CGRect)bounds
 {
-    CGFloat approximateWidth = (CGRectGetWidth(bounds) < 1000.f) ? LayoutCollectionViewCellStandardWidth : 275.f;
+    CGFloat approximateWidth = (CGRectGetWidth(bounds) < 1000.f) ? LayoutStandardCellWidth : 275.f;
     CGFloat itemWidth = LayoutCollectionItemOptimalWidth(approximateWidth, CGRectGetWidth(bounds), LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
     return LayoutLiveMediaStandardCollectionItemSize(itemWidth);
 }

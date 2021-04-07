@@ -377,7 +377,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self notificationAtIndexPath:indexPath]) {
-        return LayoutTableViewCellStandardHeight + LayoutStandardMargin;
+        return LayoutStandardCellHeight + LayoutStandardMargin;
     }
     else {
         return LayoutStandardSimpleTableCellHeight();

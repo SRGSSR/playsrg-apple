@@ -249,7 +249,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return LayoutTableTopAlignedCellHeight(LayoutTableViewCellStandardHeight, LayoutStandardMargin, indexPath.row, self.downloads.count);
+    return LayoutTableTopAlignedCellHeight(LayoutStandardCellHeight, LayoutStandardMargin, indexPath.row, self.downloads.count);
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(DownloadTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

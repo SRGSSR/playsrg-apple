@@ -194,7 +194,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return LayoutTableTopAlignedCellHeight(LayoutTableViewCellStandardHeight, LayoutStandardMargin, indexPath.row, self.items.count);
+    return LayoutTableTopAlignedCellHeight(LayoutStandardCellHeight, LayoutStandardMargin, indexPath.row, self.items.count);
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(WatchLaterTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

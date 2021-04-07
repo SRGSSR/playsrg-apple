@@ -16,29 +16,43 @@ static const CGFloat LayoutStandardViewCornerRadius = 4.f;
 
 #if TARGET_OS_TV
 /**
+ *  Section content insets (tvOS).
+ */
+static const NSDirectionalEdgeInsets LayoutStandardSectionContentInsets = { 20.f, 0.f, 20.f, 0.f };
+static const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets = { 80.f, 0.f, 80.f, 0.f };
+
+/**
  *  Standard cell dimensions (tvOS).
  */
-static const CGFloat LayoutCollectionViewCellStandardWidth = 375.f;
+static const CGFloat LayoutStandardCellWidth = 375.f;
+static const CGFloat LayoutTopicCellWidth = 250.f;
 
-static const CGFloat LayoutTableViewTopicCellHeight = 170.f;
-
+/**
+ *  Standard margin (tvOS).
+ */
+static const CGFloat LayoutStandardMargin = 40.f;
 #else
+/**
+ *  Section content insets (iOS).
+ */
+static const NSDirectionalEdgeInsets LayoutStandardSectionContentInsets = { 10.f, 0.f, 10.f, 0.f };
+static const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets = { 10.f, 0.f, 10.f, 0.f };
+
 /**
  *  Standard cell dimensions (iOS).
  */
-static const CGFloat LayoutCollectionViewCellStandardWidth = 210.f;
-static const CGFloat LayoutTableViewCellStandardHeight = 84.f;
+static const CGFloat LayoutStandardCellWidth = 210.f;
+static const CGFloat LayoutTopicCellWidth = 150.f;
 
-static const CGFloat LayoutTableViewTopicCellHeight = 100.f;
+static const CGFloat LayoutStandardCellHeight = 84.f;
 
+/**
+ *  Standard margin (iOS).
+ */
+static const CGFloat LayoutStandardMargin = 10.f;
 #endif
 
 static const CGFloat LayoutTableViewShowAccessCellHeight = 50.f;
-
-/**
- *  Standard margin.
- */
-static const CGFloat LayoutStandardMargin = 10.f;
 
 /**
  *  Media standard collection item types
