@@ -11,48 +11,31 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Standard corner radius constants.
  */
-static const CGFloat LayoutStandardLabelCornerRadius = 2.f;
-static const CGFloat LayoutStandardViewCornerRadius = 4.f;
-
-#if TARGET_OS_TV
-/**
- *  Section content insets (tvOS).
- */
-static const NSDirectionalEdgeInsets LayoutStandardSectionContentInsets = { 20.f, 0.f, 20.f, 0.f };
-static const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets = { 80.f, 0.f, 80.f, 0.f };
+OBJC_EXPORT const CGFloat LayoutStandardLabelCornerRadius;
+OBJC_EXPORT const CGFloat LayoutStandardViewCornerRadius;
 
 /**
- *  Standard cell dimensions (tvOS).
+ *  Section content insets.
  */
-static const CGFloat LayoutStandardCellWidth = 375.f;
-static const CGFloat LayoutTopicCellWidth = 250.f;
+OBJC_EXPORT const NSDirectionalEdgeInsets LayoutStandardSectionContentInsets;
+OBJC_EXPORT const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets;
 
 /**
- *  Standard margin (tvOS).
+ *  Standard cell dimensions.
  */
-static const CGFloat LayoutStandardMargin = 40.f;
-#else
-/**
- *  Section content insets (iOS).
- */
-static const NSDirectionalEdgeInsets LayoutStandardSectionContentInsets = { 10.f, 0.f, 10.f, 0.f };
-static const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets = { 10.f, 0.f, 10.f, 0.f };
+OBJC_EXPORT const CGFloat LayoutStandardCellWidth;
+OBJC_EXPORT const CGFloat LayoutTopicCellWidth;
+OBJC_EXPORT const CGFloat LayoutStandardCellHeight API_UNAVAILABLE(tvos);
 
 /**
- *  Standard cell dimensions (iOS).
+ *  Standard margin.
  */
-static const CGFloat LayoutStandardCellWidth = 210.f;
-static const CGFloat LayoutTopicCellWidth = 150.f;
-
-static const CGFloat LayoutStandardCellHeight = 84.f;
+OBJC_EXPORT const CGFloat LayoutStandardMargin;
 
 /**
- *  Standard margin (iOS).
+ *  Standard table view padding.
  */
-static const CGFloat LayoutStandardMargin = 10.f;
-#endif
-
-static const CGFloat LayoutTableViewShowAccessCellHeight = 50.f;
+OBJC_EXPORT const UIEdgeInsets LayoutStandardTableViewPaddingInsets;
 
 /**
  *  Media standard collection item types
@@ -71,11 +54,6 @@ typedef NS_ENUM(NSInteger, LayoutCollectionItemType) {
      */
     LayoutCollectionItemTypeHighlight
 };
-
-/**
- *  Standard table view padding.
- */
-static const UIEdgeInsets LayoutStandardTableViewPaddingInsets = { LayoutStandardMargin, 0.f, LayoutStandardMargin, 0.f };
 
 /**
  *  Calculate the width to apply to items within a collection so that they approach some desired size, ensuring constant
@@ -137,14 +115,12 @@ OBJC_EXPORT CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, Layou
 
 /**
  *  Topic cell (16:9 artwork) size for collection layouts.
- *
- **/
+ */
 OBJC_EXPORT CGSize LayoutTopicCollectionItemSize(void);
 
 /**
  *  Show access cell size for collection layouts.
- *
- **/
+ */
 OBJC_EXPORT CGSize LayoutShowAccessCollectionItemSize(CGFloat itemWidth);
 
 NS_ASSUME_NONNULL_END

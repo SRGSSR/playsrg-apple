@@ -6,6 +6,31 @@
 
 #import "Layout.h"
 
+const CGFloat LayoutStandardLabelCornerRadius = 2.f;
+const CGFloat LayoutStandardViewCornerRadius = 4.f;
+
+#if TARGET_OS_TV
+const NSDirectionalEdgeInsets LayoutStandardSectionContentInsets = { 20.f, 0.f, 20.f, 0.f };
+const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets = { 80.f, 0.f, 80.f, 0.f };
+
+const CGFloat LayoutStandardCellWidth = 375.f;
+const CGFloat LayoutTopicCellWidth = 250.f;
+
+const CGFloat LayoutStandardMargin = 40.f;
+
+#else
+const NSDirectionalEdgeInsets LayoutStandardSectionContentInsets = { 10.f, 0.f, 10.f, 0.f };
+const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets = { 10.f, 0.f, 10.f, 0.f };
+
+const CGFloat LayoutStandardCellWidth = 210.f;
+const CGFloat LayoutTopicCellWidth = 150.f;
+const CGFloat LayoutStandardCellHeight = 84.f;
+
+const CGFloat LayoutStandardMargin = 10.f;
+#endif
+
+const UIEdgeInsets LayoutStandardTableViewPaddingInsets = { LayoutStandardMargin, 0.f, LayoutStandardMargin, 0.f };
+
 CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidth, CGFloat layoutWidth, CGFloat leadingInset, CGFloat trailingInset, CGFloat spacing)
 {
     CGFloat availableWidth = layoutWidth - leadingInset - trailingInset;
@@ -212,5 +237,5 @@ CGSize LayoutTopicCollectionItemSize(void)
 
 CGSize LayoutShowAccessCollectionItemSize(CGFloat itemWidth)
 {
-    return CGSizeMake(itemWidth, LayoutTableViewShowAccessCellHeight);
+    return CGSizeMake(itemWidth, 50.f);
 }
