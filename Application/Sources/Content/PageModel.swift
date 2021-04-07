@@ -8,39 +8,6 @@ import SRGDataProviderCombine
 import SRGUserData
 
 class PageModel: Identifiable, ObservableObject {
-    enum Id {
-        case video
-        case audio(channel: RadioChannel)
-        case live
-        case topic(topic: SRGTopic)
-        
-        func canContain(show: SRGShow) -> Bool {
-            switch self {
-            case .video:
-                return show.transmission == .TV
-            case let .audio(channel: channel):
-                return show.transmission == .radio && show.primaryChannelUid == channel.uid
-            default:
-                return false
-            }
-        }
-        
-        func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
-            return shows.filter { canContain(show: $0) }.sorted(by: { $0.title < $1.title })
-        }
-        
-        func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
-            switch self {
-            case .video:
-                return medias.filter { $0.mediaType == .video }
-            case let .audio(channel: channel):
-                return medias.filter { $0.mediaType == .audio && $0.channel?.uid == channel.uid }
-            default:
-                return medias
-            }
-        }
-    }
-    
     let id: Id
     
     var title: String? {
@@ -56,22 +23,26 @@ class PageModel: Identifiable, ObservableObject {
         }
     }
     
-    typealias Row = CollectionRow<Section, Item>
+    @Published private(set) var state: State = .loading
     
-    private var sections: [Section] = [] {
+    private var internalState: State = .loading {
         didSet {
-            refreshRows()
+            state = Self.nonEmptyState(internalState)
         }
     }
     
-    // Store all rows so that row updates always find a matching row. Only return non-empty ones publicly, though
-    private var loadedRows: [Row] = [] {
-        didSet {
-            rows = loadedRows.filter { !$0.items.isEmpty }
+    private var rows: [Row] {
+        if case let .loaded(rows: rows) = internalState {
+            return rows
+        }
+        else {
+            return []
         }
     }
     
-    @Published private(set) var rows: [Row] = []
+    private var sections: [Section] {
+        return rows.map { $0.section }
+    }
     
     private var mainCancellables = Set<AnyCancellable>()
     private var refreshCancellables = Set<AnyCancellable>()
@@ -116,9 +87,22 @@ class PageModel: Identifiable, ObservableObject {
         
     private func loadSections() {
         sectionsPublisher()
-            .replaceError(with: [])
             .receive(on: DispatchQueue.main)
-            .assign(to: \.sections, on: self)
+            .handleEvents(receiveRequest: { _ in
+                if self.rows.isEmpty {
+                    self.internalState = .loading
+                }
+            })
+            .sink { completion in
+                if case let .failure(error) = completion, self.rows.isEmpty {
+                    self.internalState = .failed(error: error)
+                }
+            } receiveValue: { result in
+                let rows = Self.refreshRows(id: self.id, sections: result, from: self.rows, in: &self.refreshCancellables) { section, items in
+                    self.internalState = .loaded(rows: Self.updatedRows(section: section, items: items, from: self.rows))
+                }
+                self.internalState = .loaded(rows: rows)
+            }
             .store(in: &refreshCancellables)
     }
     
@@ -143,8 +127,17 @@ class PageModel: Identifiable, ObservableObject {
         }
     }
     
-    private func addRow(with section: Section, to rows: inout [Row]) {
-        if let existingRow = loadedRows.first(where: { $0.section == section }), !existingRow.items.isEmpty {
+    private static func nonEmptyState(_ state: State) -> State {
+        if case let .loaded(rows: rows) = state {
+            return .loaded(rows: rows.filter { !$0.items.isEmpty })
+        }
+        else {
+            return state
+        }
+    }
+    
+    private static func appendRow(section: Section, from existingRows: [Row], to rows: inout [Row]) {
+        if let existingRow = existingRows.first(where: { $0.section == section }) {
             rows.append(existingRow)
         }
         else {
@@ -152,33 +145,29 @@ class PageModel: Identifiable, ObservableObject {
         }
     }
     
-    private func refreshRows() {
-        synchronizeRows()
-        loadRows()
-    }
-    
-    private func synchronizeRows() {
-        var updatedRows = [Row]()
+    // TODO: Could maybe have a [Row] publisher to update the state as rows are loaded. Like a network request, rewrite
+    //       refresh:
+    //         - Just() publisher with initial array of rows
+    //         - flatmap for each section, sending updates down the stream
+    private static func refreshRows(id: Id, sections: [Section], from existingRows: [Row], in cancellables: inout Set<AnyCancellable>, update: @escaping (Section, [Item]) -> Void) -> [Row] {
+        var rows = [Row]()
         for section in sections {
-            addRow(with: section, to: &updatedRows)
-        }
-        loadedRows = updatedRows
-    }
-    
-    private func updateRow(section: Section, items: [Item]) {
-        guard let index = loadedRows.firstIndex(where: { $0.section == section }) else { return }
-        loadedRows[index] = Row(section: section, items: items)
-    }
-    
-    private func loadRows() {
-        for section in sections {
+            appendRow(section: section, from: existingRows, to: &rows)
             section.properties.publisher(for: id, section: section)?
                 .replaceError(with: [])
                 .receive(on: DispatchQueue.main)
                 .sink { items in
-                    self.updateRow(section: section, items: items)
+                    update(section, items)
                 }
-                .store(in: &refreshCancellables)
+                .store(in: &cancellables)
         }
+        return rows
+    }
+    
+    private static func updatedRows(section: Section, items: [Item], from existingRows: [Row]) -> [Row] {
+        guard let index = existingRows.firstIndex(where: { $0.section == section }) else { return existingRows }
+        var rows = existingRows
+        rows[index] = Row(section: section, items: items)
+        return rows
     }
 }

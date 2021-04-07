@@ -21,6 +21,45 @@ protocol PageSectionProperties {
 }
 
 extension PageModel {
+    enum Id {
+        case video
+        case audio(channel: RadioChannel)
+        case live
+        case topic(topic: SRGTopic)
+        
+        func canContain(show: SRGShow) -> Bool {
+            switch self {
+            case .video:
+                return show.transmission == .TV
+            case let .audio(channel: channel):
+                return show.transmission == .radio && show.primaryChannelUid == channel.uid
+            default:
+                return false
+            }
+        }
+        
+        func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
+            return shows.filter { canContain(show: $0) }.sorted(by: { $0.title < $1.title })
+        }
+        
+        func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
+            switch self {
+            case .video:
+                return medias.filter { $0.mediaType == .video }
+            case let .audio(channel: channel):
+                return medias.filter { $0.mediaType == .audio && $0.channel?.uid == channel.uid }
+            default:
+                return medias
+            }
+        }
+    }
+    
+    enum State {
+        case loading
+        case failed(error: Error)
+        case loaded(rows: [Row])
+    }
+    
     enum Section: Hashable {
         case content(SRGContentSection)
         case configured(ConfiguredSection)
@@ -60,6 +99,8 @@ extension PageModel {
         @available(tvOS, unavailable)
         case showAccess(radioChannel: RadioChannel?, section: Section)
     }
+    
+    typealias Row = CollectionRow<Section, Item>
 }
 
 extension SRGContentSection: PageSectionProperties {

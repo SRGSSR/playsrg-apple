@@ -31,11 +31,11 @@ class ShowsModel: ObservableObject {
                     self.state = .loading
                 }
             })
-            .sink(receiveCompletion: { completion in
+            .sink { completion in
                 if case let .failure(error) = completion {
                     self.state = .failed(error: error)
                 }
-            }, receiveValue: { result in
+            } receiveValue: { result in
                 self.alphabeticalShows = Dictionary(grouping: result.shows) { show in
                     // Remove accents / diacritics and extract the first character (for wide chars / emoji support)
                     guard let character = show.title.folding(options: .diacriticInsensitive, locale: .current).uppercased().first else { return "#" }
@@ -46,7 +46,7 @@ class ShowsModel: ObservableObject {
                     left.character < right.character
                 }
                 self.state = .loaded(alphabeticalShows: self.alphabeticalShows)
-            })
+            }
             .store(in: &cancellables)
     }
     

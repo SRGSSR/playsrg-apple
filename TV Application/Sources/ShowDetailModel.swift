@@ -42,15 +42,15 @@ class ShowDetailModel: ObservableObject {
                     self.state = .loading
                 }
             })
-            .sink(receiveCompletion: { completion in
+            .sink { completion in
                 if case let .failure(error) = completion {
                     self.state = .failed(error: error)
                 }
-            }, receiveValue: { result in
+            } receiveValue: { result in
                 self.medias.append(contentsOf: result.medias)
                 self.state = .loaded(medias: self.medias)
                 self.nextPage = result.nextPage
-            })
+            }
             .store(in: &cancellables)
     }
     

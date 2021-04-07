@@ -345,9 +345,9 @@ class PageViewController: DataViewController {
             return sectionHeaderView
         }
         
-        model.$rows
-            .sink { rows in
-                self.reloadData(withRows: rows)
+        model.$state
+            .sink { state in
+                self.reloadData(with: state)
             }
             .store(in: &cancellables)
     }
@@ -356,17 +356,24 @@ class PageViewController: DataViewController {
         model.refresh()
     }
     
-    func reloadData(withRows rows: [PageModel.Row]) {
-        // Can be triggered on a background thread. Layout is updated on the main thread.
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.dataSource.apply(Self.snapshot(withRows: rows)) {
-                #if os(iOS)
-                // Avoid stopping scrolling
-                // See http://stackoverflow.com/a/31681037/760435
-                if self.refreshControl.isRefreshing {
-                    self.refreshControl.endRefreshing()
+    func reloadData(with state: PageModel.State) {
+        switch state {
+        case .loading:
+            print("Loading")
+        case let .failed(error: error):
+            print("Error: \(error)")
+        case let .loaded(rows: rows):
+            // Can be triggered on a background thread. Layout is updated on the main thread.
+            DispatchQueue.global(qos: .userInteractive).async {
+                self.dataSource.apply(Self.snapshot(withRows: rows)) {
+                    #if os(iOS)
+                    // Avoid stopping scrolling
+                    // See http://stackoverflow.com/a/31681037/760435
+                    if self.refreshControl.isRefreshing {
+                        self.refreshControl.endRefreshing()
+                    }
+                    #endif
                 }
-                #endif
             }
         }
     }

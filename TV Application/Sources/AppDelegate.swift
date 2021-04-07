@@ -199,10 +199,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let mediaUrn = url.lastPathComponent
             SRGDataProvider.current?.media(withUrn: mediaUrn)
                 .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { _ in
-                }, receiveValue: { media, _ in
+                .sink { _ in
+                } receiveValue: { media, _ in
                     navigateToMedia(media)
-                })
+                }
                 .store(in: &cancellables)
             return true
         }
@@ -210,10 +210,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let showUrn = url.lastPathComponent
             SRGDataProvider.current?.show(withUrn: showUrn)
                 .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { _ in
-                }, receiveValue: { show, _ in
+                .sink { _ in
+                } receiveValue: { show, _ in
                     navigateToShow(show)
-                })
+                }
                 .store(in: &cancellables)
             return true
         }

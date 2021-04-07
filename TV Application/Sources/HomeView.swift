@@ -90,18 +90,20 @@ struct HomeView: View {
     }
     
     var body: some View {
-        CollectionView(rows: model.rows) { sectionIndex, section, _ in
-            return Self.swimlaneLayoutSection(for: section, index: sectionIndex, pageTitle: model.title)
-        } cell: { _, _, item in
-            Cell(item: item)
-        } supplementaryView: { _, indexPath, section, _ in
-            HeaderView(section: section, pageTitle: indexPath.section == 0 ? model.title : nil)
+        if case let .loaded(rows: rows) = model.state {
+            CollectionView(rows: rows) { sectionIndex, section, _ in
+                return Self.swimlaneLayoutSection(for: section, index: sectionIndex, pageTitle: model.title)
+            } cell: { _, _, item in
+                Cell(item: item)
+            } supplementaryView: { _, indexPath, section, _ in
+                HeaderView(section: section, pageTitle: indexPath.section == 0 ? model.title : nil)
+            }
+            .synchronizeTabBarScrolling()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(.play_black))
+            .ignoresSafeArea(.all)
+            .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
         }
-        .synchronizeTabBarScrolling()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.play_black))
-        .ignoresSafeArea(.all)
-        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct TitleView: View {
