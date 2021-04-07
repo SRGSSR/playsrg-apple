@@ -21,16 +21,15 @@ protocol PageSectionProperties {
 }
 
 extension PageModel {
-    // TODO: Naming? e.g. serviced vs configured, content vs play, remote vs application, etc.
     enum Section: Hashable {
         case content(SRGContentSection)
-        case play(ConfiguredSection)
+        case configured(ConfiguredSection)
         
         var properties: PageSectionProperties {
             switch self {
             case let .content(section):
                 return section
-            case let .play(section):
+            case let .configured(section):
                 return section
             }
         }
