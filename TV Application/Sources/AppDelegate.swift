@@ -49,11 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         videosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.videosTabBarItem.rawValue
         viewControllers.append(videosViewController)
         
-        let videosViewController2 = UIHostingController(rootView: VideosView())
-        videosViewController2.tabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home tab title"), image: nil, tag: 0)
-        videosViewController2.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.videosTabBarItem.rawValue
-        viewControllers.append(videosViewController2)
-        
         let configuration = ApplicationConfiguration.shared
         
         #if DEBUG
@@ -66,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         if !configuration.liveHomeSections.isEmpty {
-            let liveViewController = UIHostingController(rootView: LiveView())
+            let liveViewController = PageViewController(id: .live)
             liveViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), image: nil, tag: 2)
             liveViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.livestreamsTabBarItem.rawValue
             viewControllers.append(liveViewController)
