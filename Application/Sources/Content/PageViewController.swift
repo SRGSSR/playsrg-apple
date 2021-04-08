@@ -179,7 +179,9 @@ class PageViewController: DataViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        #if os(iOS)
+        #if os(tvOS)
+        self.tabBarObservedScrollView = collectionView
+        #else
         let refreshControl = RefreshControl()
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
