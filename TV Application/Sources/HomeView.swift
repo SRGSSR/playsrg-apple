@@ -38,8 +38,6 @@ struct HomeView: View {
         
         func continuousGroupLeadingBoundary(for section: PageModel.Section) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
             switch section.properties.layout {
-            case .hero:
-                return .continuous
             case .highlight:
                 return .none
             default:
