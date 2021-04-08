@@ -51,23 +51,23 @@ class PageModel: Identifiable, ObservableObject {
         self.id = id
         
         NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
-            .sink { notification in
-                guard self.sections.contains(where: { $0.properties.presentationType == .favoriteShows }),
+            .sink { [weak self] notification in
+                guard let self = self, self.sections.contains(where: { $0.properties.presentationType == .favoriteShows }),
                       let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) else { return }
                 self.refresh()
             }
             .store(in: &mainCancellables)
         
         NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
-            .sink { _ in
-                guard self.sections.contains(where: { $0.properties.presentationType == .resumePlayback }) else { return }
+            .sink { [weak self] _ in
+                guard let self = self, self.sections.contains(where: { $0.properties.presentationType == .resumePlayback }) else { return }
                 self.refresh()
             }
             .store(in: &mainCancellables)
         
         NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
-            .sink { notification in
-                guard self.sections.contains(where: { $0.properties.presentationType == .watchLater }),
+            .sink { [weak self] notification in
+                guard let self = self, self.sections.contains(where: { $0.properties.presentationType == .watchLater }),
                       let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
                 self.refresh()
             }
@@ -88,16 +88,17 @@ class PageModel: Identifiable, ObservableObject {
     private func loadSections() {
         sectionsPublisher()
             .receive(on: DispatchQueue.main)
-            .handleEvents(receiveRequest: { _ in
-                if self.rows.isEmpty {
+            .handleEvents(receiveRequest: { [weak self] _ in
+                if let self = self, self.rows.isEmpty {
                     self.internalState = .loading
                 }
             })
-            .sink { completion in
-                if case let .failure(error) = completion, self.rows.isEmpty {
+            .sink { [weak self] completion in
+                if let self = self, case let .failure(error) = completion, self.rows.isEmpty {
                     self.internalState = .failed(error: error)
                 }
-            } receiveValue: { result in
+            } receiveValue: { [weak self] result in
+                guard let self = self else { return }
                 let rows = Self.refreshRows(id: self.id, sections: result, from: self.rows, in: &self.refreshCancellables) { section, items in
                     self.internalState = .loaded(rows: Self.updatedRows(section: section, items: items, from: self.rows))
                 }
@@ -149,6 +150,7 @@ class PageModel: Identifiable, ObservableObject {
     //       refresh:
     //         - Just() publisher with initial array of rows
     //         - flatmap for each section, sending updates down the stream
+    //       This could avoid references to self in Combine pipes
     private static func refreshRows(id: Id, sections: [Section], from existingRows: [Row], in cancellables: inout Set<AnyCancellable>, update: @escaping (Section, [Item]) -> Void) -> [Row] {
         var rows = [Row]()
         for section in sections {
