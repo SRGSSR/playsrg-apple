@@ -18,6 +18,7 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
         hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
         if let hostView = hostController?.view {
             hostView.frame = contentView.bounds
+            hostView.backgroundColor = .clear
             hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             contentView.addSubview(hostView)
         }
@@ -53,6 +54,7 @@ class HostSupplementaryView<Content: View>: UICollectionReusableView {
         hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
         if let hostView = hostController?.view {
             hostView.frame = bounds
+            hostView.backgroundColor = .clear
             hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             addSubview(hostView)
         }
