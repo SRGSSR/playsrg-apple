@@ -154,7 +154,7 @@ class PageModel: Identifiable, ObservableObject {
         for section in sections {
             appendRow(section: section, from: existingRows, to: &rows)
             section.properties.publisher(for: id, section: section)?
-                .replaceError(with: [])
+                .replaceError(with: section.properties.placeholderItems(for: section))
                 .receive(on: DispatchQueue.main)
                 .sink { items in
                     update(section, items)
