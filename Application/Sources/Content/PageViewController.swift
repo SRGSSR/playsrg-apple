@@ -229,7 +229,7 @@ class PageViewController: DataViewController {
             #if os(iOS)
             case let .media(media, _):
                 let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
-                mediaCell?.content = MediaCell(media: media)
+                mediaCell?.content = MediaCell(media: media, style: .show)
                 return mediaCell
             #else
             case let .media(media, section):
@@ -251,13 +251,13 @@ class PageViewController: DataViewController {
                     }
                     else {
                         let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
-                        mediaCell?.content = MediaCell(media: media, style: .date)
+                        mediaCell?.content = MediaCell(media: media)
                         return mediaCell
                     }
                 }
                 else {
                     let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
-                    mediaCell?.content = MediaCell(media: media)
+                    mediaCell?.content = MediaCell(media: media, style: .show)
                     return mediaCell
                 }
             #endif
