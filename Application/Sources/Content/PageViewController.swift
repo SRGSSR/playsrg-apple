@@ -420,6 +420,10 @@ extension PageViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
         return false
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // TODO: Open item
+    }
 }
 
 extension PageViewController: UIScrollViewDelegate {
