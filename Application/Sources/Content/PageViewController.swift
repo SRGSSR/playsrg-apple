@@ -5,6 +5,7 @@
 //
 
 import Combine
+import SRGAppearanceSwift
 import SRGDataProviderModel
 import UIKit
 
@@ -15,6 +16,7 @@ class PageViewController: DataViewController {
     private var dataSource: UICollectionViewDiffableDataSource<PageModel.Section, PageModel.Item>!
     
     private weak var collectionView: UICollectionView!
+    private var loadingImageView: UIImageView!
     
     @available (tvOS, unavailable)
     private weak var refreshControl: UIRefreshControl!
@@ -33,11 +35,13 @@ class PageViewController: DataViewController {
         return PageViewController(id: .live)
     }
     
-    private static func snapshot(withRows rows: [PageModel.Row]) -> NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item> {
+    private static func snapshot(from state: PageModel.State) -> NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item>()
-        for row in rows {
-            snapshot.appendSections([row.section])
-            snapshot.appendItems(row.items, toSection: row.section)
+        if case let .loaded(rows: rows) = state {
+            for row in rows {
+                snapshot.appendSections([row.section])
+                snapshot.appendItems(row.items, toSection: row.section)
+            }
         }
         return snapshot
     }
@@ -158,6 +162,9 @@ class PageViewController: DataViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
+        collectionView.emptyDataSetSource = self
+        collectionView.emptyDataSetDelegate = self
+        
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
@@ -176,6 +183,11 @@ class PageViewController: DataViewController {
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
         #endif
+        
+        // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
+        // stretched
+        loadingImageView = UIImageView.play_loadingImageView90(withTintColor: .play_lightGray)
+        loadingImageView.contentMode = .center
         
         self.view = view
     }
@@ -352,28 +364,27 @@ class PageViewController: DataViewController {
             .store(in: &cancellables)
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        collectionView.reloadEmptyDataSet()
+    }
+    
     override func refresh() {
         model.refresh()
     }
     
     func reloadData(with state: PageModel.State) {
-        switch state {
-        case .loading:
-            print("Loading")
-        case let .failed(error: error):
-            print("Error: \(error)")
-        case let .loaded(rows: rows):
-            // Can be triggered on a background thread. Layout is updated on the main thread.
-            DispatchQueue.global(qos: .userInteractive).async {
-                self.dataSource.apply(Self.snapshot(withRows: rows)) {
-                    #if os(iOS)
-                    // Avoid stopping scrolling
-                    // See http://stackoverflow.com/a/31681037/760435
-                    if self.refreshControl.isRefreshing {
-                        self.refreshControl.endRefreshing()
-                    }
-                    #endif
+        // Can be triggered on a background thread. Layout is updated on the main thread.
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.dataSource.apply(Self.snapshot(from: state)) {
+                self.collectionView.reloadEmptyDataSet()
+                #if os(iOS)
+                // Avoid stopping scrolling
+                // See http://stackoverflow.com/a/31681037/760435
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
                 }
+                #endif
             }
         }
     }
@@ -414,17 +425,67 @@ extension PageViewController: UIScrollViewDelegate {
     }
 }
 
-// TODO: Remaining protocols to implement, as was the case for HomeViewController
-
-#if false
-
 extension PageViewController: DZNEmptyDataSetSource {
+    func customView(forEmptyDataSet scrollView: UIScrollView) -> UIView? {
+        switch model.state {
+        case .loading:
+            return loadingImageView
+        default:
+            return nil
+        }
+    }
     
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        func titleString() -> String {
+            switch model.state {
+            case let .failed(error: error):
+                return error.localizedDescription
+            default:
+                return NSLocalizedString("No results", comment: "Default text displayed when no results are available");
+            }
+        }
+        return NSAttributedString(string: titleString(),
+                                  attributes: [
+                                    NSAttributedString.Key.font: SRGFont.font(.H1) as UIFont,
+                                    NSAttributedString.Key.foregroundColor: UIColor.play_lightGray
+                                  ])
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: NSLocalizedString("Pull to reload", comment: "Text displayed to inform the user she can pull a list to reload it"),
+                                  attributes: [
+                                    NSAttributedString.Key.font: SRGFont.font(.subtitle) as UIFont,
+                                    NSAttributedString.Key.foregroundColor: UIColor.play_lightGray
+                                  ])
+    }
+    
+    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+        switch model.state {
+        case .failed:
+            return UIImage(named: "error-90")
+        default:
+            return UIImage(named: "media-90")
+        }
+    }
+    
+    func imageTintColor(forEmptyDataSet scrollView: UIScrollView) -> UIColor? {
+        return .play_lightGray
+    }
+    
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView) -> CGFloat {
+        return VerticalOffsetForEmptyDataSet(scrollView)
+    }
 }
 
 extension PageViewController: DZNEmptyDataSetDelegate {
-    
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView) -> Bool {
+        return true
+    }
 }
+
+// TODO: Remaining protocols to implement, as was the case for HomeViewController
+
+#if false
 
 extension PageViewController: PlayApplicationNavigation {
     

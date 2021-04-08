@@ -27,5 +27,6 @@
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
+#import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
