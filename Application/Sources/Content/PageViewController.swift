@@ -22,6 +22,7 @@ class PageViewController: DataViewController {
     @available (tvOS, unavailable)
     private weak var refreshControl: UIRefreshControl!
     
+    private var reloadCount = 0
     private var refreshTriggered = false
     
     @objc static func videosViewController() -> UIViewController {
@@ -376,9 +377,12 @@ class PageViewController: DataViewController {
     
     func reloadData(with state: PageModel.State) {
         // Can be triggered on a background thread. Layout is updated on the main thread.
+        reloadCount += 1
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state)) {
                 self.collectionView.reloadEmptyDataSet()
+                self.reloadCount -= 1
+                
                 #if os(iOS)
                 // Avoid stopping scrolling
                 // See http://stackoverflow.com/a/31681037/760435
@@ -428,11 +432,16 @@ extension PageViewController: UIScrollViewDelegate {
 
 extension PageViewController: DZNEmptyDataSetSource {
     func customView(forEmptyDataSet scrollView: UIScrollView) -> UIView? {
-        switch model.state {
-        case .loading:
+        if reloadCount == 0 {
+            switch model.state {
+            case .loading:
+                return loadingImageView
+            default:
+                return nil
+            }
+        }
+        else {
             return loadingImageView
-        default:
-            return nil
         }
     }
     
