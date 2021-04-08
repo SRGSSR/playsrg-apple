@@ -7,7 +7,7 @@
 #import "DataViewController.h"
 #import "SearchSettingsMultiSelectionItem.h"
 
-#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
+@import DZNEmptyDataSet;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -10,12 +10,6 @@ abstract_target 'Play SRG' do
 
     pod 'AutoCoding'
     pod 'BDKCollectionIndexView'
-
-    # On master
-    pod 'DZNEmptyDataSet',
-        git: 'https://github.com/dzenbot/DZNEmptyDataSet.git',
-        commit: '8deb3fe69f75c5022a53a903468b29552dc70e66'
-
     pod 'FSCalendar'
     pod 'google-cast-sdk-no-bluetooth'
     pod 'InAppSettingsKit', '3.1.4'             # 3.1.5 has a public header exposition issue

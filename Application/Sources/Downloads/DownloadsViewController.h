@@ -7,8 +7,7 @@
 #import "ContentInsets.h"
 #import "DataViewController.h"
 
-#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
-
+@import DZNEmptyDataSet;
 @import SRGAnalytics;
 
 NS_ASSUME_NONNULL_BEGIN

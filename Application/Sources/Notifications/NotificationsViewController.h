@@ -8,8 +8,7 @@
 #import "DataViewController.h"
 #import "NotificationTableViewCell.h"
 
-#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
-
+@import DZNEmptyDataSet;
 @import SRGAnalytics;
 
 NS_ASSUME_NONNULL_BEGIN

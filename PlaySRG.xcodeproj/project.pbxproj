@@ -1779,6 +1779,21 @@
 		6FE9B54624B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */; };
 		6FE9B54724B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */; };
 		6FE9B54824B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9B54224B84748001D95E5 /* HomeLiveMediaVerticalListTableViewCell.m */; };
+		6FEC897A261F165600FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8979261F165600FF9762 /* DZNEmptyDataSet */; };
+		6FEC8995261F16BA00FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8994261F16BA00FF9762 /* DZNEmptyDataSet */; };
+		6FEC8997261F16C100FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8996261F16C100FF9762 /* DZNEmptyDataSet */; };
+		6FEC8999261F16C800FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8998261F16C800FF9762 /* DZNEmptyDataSet */; };
+		6FEC899B261F16CF00FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC899A261F16CF00FF9762 /* DZNEmptyDataSet */; };
+		6FEC899D261F16D500FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC899C261F16D500FF9762 /* DZNEmptyDataSet */; };
+		6FEC899F261F16DC00FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC899E261F16DC00FF9762 /* DZNEmptyDataSet */; };
+		6FEC89A1261F16E200FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC89A0261F16E200FF9762 /* DZNEmptyDataSet */; };
+		6FEC89A3261F16E800FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC89A2261F16E800FF9762 /* DZNEmptyDataSet */; };
+		6FEC89A5261F16EE00FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC89A4261F16EE00FF9762 /* DZNEmptyDataSet */; };
+		6FEC89EF261F19A000FF9762 /* ContentInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B9181FAC34D600A58F3B /* ContentInsets.m */; };
+		6FEC89F0261F19A100FF9762 /* ContentInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B9181FAC34D600A58F3B /* ContentInsets.m */; };
+		6FEC89F1261F19A100FF9762 /* ContentInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B9181FAC34D600A58F3B /* ContentInsets.m */; };
+		6FEC8A0B261F19A300FF9762 /* ContentInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B9181FAC34D600A58F3B /* ContentInsets.m */; };
+		6FEC8A0C261F19A300FF9762 /* ContentInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B9181FAC34D600A58F3B /* ContentInsets.m */; };
 		6FEC91A921A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
 		6FEC91AA21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
 		6FEC91AB21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
@@ -2853,6 +2868,7 @@
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
 				6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */,
 				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
+				6FEC897A261F165600FF9762 /* DZNEmptyDataSet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2874,6 +2890,7 @@
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
+				6FEC8995261F16BA00FF9762 /* DZNEmptyDataSet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2895,6 +2912,7 @@
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
 				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
 				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
+				6FEC8997261F16C100FF9762 /* DZNEmptyDataSet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2916,6 +2934,7 @@
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
 				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
 				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
+				6FEC8999261F16C800FF9762 /* DZNEmptyDataSet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2937,6 +2956,7 @@
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
 				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
 				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
+				6FEC899B261F16CF00FF9762 /* DZNEmptyDataSet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3029,6 +3049,7 @@
 				6F3AED892614C5FA007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
+				6FEC899D261F16D500FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C7225DAB66000874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3049,6 +3070,7 @@
 				6F3AEDA42614C601007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
+				6FEC899F261F16DC00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C8825DAB66600874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3069,6 +3091,7 @@
 				6F3AEDA62614C607007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4325DC50DA0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
+				6FEC89A1261F16E200FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C8A25DAB66D00874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3089,6 +3112,7 @@
 				6F3AEDA82614C60C007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
+				6FEC89A3261F16E800FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46CA025DAB67400874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3109,6 +3133,7 @@
 				6F3AEDC32614C613007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4425DC50DB0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
+				6FEC89A5261F16EE00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46CA225DAB67A00874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -4543,6 +4568,7 @@
 				081A8BD62602B69600530FFF /* SRGDataProviderCombine */,
 				6F30ABCF2604B77500457331 /* FetchImage */,
 				6F3AED332614C5B6007D591F /* SRGAppearanceSwift */,
+				6FEC8979261F165600FF9762 /* DZNEmptyDataSet */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -4589,6 +4615,7 @@
 				081A8C222602C0EA00530FFF /* SRGDataProviderCombine */,
 				6F30ABD12604B77D00457331 /* FetchImage */,
 				6F3AED4E2614C5D7007D591F /* SRGAppearanceSwift */,
+				6FEC8994261F16BA00FF9762 /* DZNEmptyDataSet */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -4635,6 +4662,7 @@
 				081A8C242602C0F800530FFF /* SRGDataProviderCombine */,
 				6F30ABD32604B78700457331 /* FetchImage */,
 				6F3AED502614C5E1007D591F /* SRGAppearanceSwift */,
+				6FEC8996261F16C100FF9762 /* DZNEmptyDataSet */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -4681,6 +4709,7 @@
 				081A8C262602C10300530FFF /* SRGDataProviderCombine */,
 				6F30ABD52604B78E00457331 /* FetchImage */,
 				6F3AED6B2614C5E9007D591F /* SRGAppearanceSwift */,
+				6FEC8998261F16C800FF9762 /* DZNEmptyDataSet */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -4727,6 +4756,7 @@
 				081A8C282602C10E00530FFF /* SRGDataProviderCombine */,
 				6F30ABD72604B79500457331 /* FetchImage */,
 				6F3AED6D2614C5F0007D591F /* SRGAppearanceSwift */,
+				6FEC899A261F16CF00FF9762 /* DZNEmptyDataSet */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -4948,6 +4978,7 @@
 				6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */,
 				6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */,
 				6F3AED882614C5FA007D591F /* SRGAppearanceSwift */,
+				6FEC899C261F16D500FF9762 /* DZNEmptyDataSet */,
 			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
@@ -4984,6 +5015,7 @@
 				6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */,
 				6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */,
 				6F3AEDA32614C601007D591F /* SRGAppearanceSwift */,
+				6FEC899E261F16DC00FF9762 /* DZNEmptyDataSet */,
 			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
@@ -5020,6 +5052,7 @@
 				6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */,
 				6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */,
 				6F3AEDA52614C607007D591F /* SRGAppearanceSwift */,
+				6FEC89A0261F16E200FF9762 /* DZNEmptyDataSet */,
 			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
@@ -5056,6 +5089,7 @@
 				6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */,
 				6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */,
 				6F3AEDA72614C60C007D591F /* SRGAppearanceSwift */,
+				6FEC89A2261F16E800FF9762 /* DZNEmptyDataSet */,
 			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
@@ -5092,6 +5126,7 @@
 				6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */,
 				6F2DBBB325DD2703007DA242 /* AppCenterCrashes */,
 				6F3AEDC22614C613007D591F /* SRGAppearanceSwift */,
+				6FEC89A4261F16EE00FF9762 /* DZNEmptyDataSet */,
 			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
@@ -5326,6 +5361,7 @@
 				6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 				6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */,
+				6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -8543,6 +8579,7 @@
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCF925B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80662508ECA800FD8FE7 /* ShowsView.swift in Sources */,
+				6FEC89EF261F19A000FF9762 /* ContentInsets.m in Sources */,
 				0804D9DD261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FCC73BA24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */,
@@ -8641,6 +8678,7 @@
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFA25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80672508ECA800FD8FE7 /* ShowsView.swift in Sources */,
+				6FEC89F0261F19A100FF9762 /* ContentInsets.m in Sources */,
 				0804D9DE261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FCC73BB24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */,
@@ -8739,6 +8777,7 @@
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFB25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80682508ECA800FD8FE7 /* ShowsView.swift in Sources */,
+				6FEC89F1261F19A100FF9762 /* ContentInsets.m in Sources */,
 				0804D9DF261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FCC73BC24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */,
@@ -8837,6 +8876,7 @@
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFC25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80692508ECA800FD8FE7 /* ShowsView.swift in Sources */,
+				6FEC8A0B261F19A300FF9762 /* ContentInsets.m in Sources */,
 				0804D9E0261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FCC73BD24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E2A256BF5CF009082F8 /* ProgressBar.swift in Sources */,
@@ -8935,6 +8975,7 @@
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F9DDCFD25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F806A2508ECA800FD8FE7 /* ShowsView.swift in Sources */,
+				6FEC8A0C261F19A300FF9762 /* ContentInsets.m in Sources */,
 				0804D9E1261DFFB700242C65 /* PageSectionHeaderView.swift in Sources */,
 				6FCC73BE24E6F8EE00ECF73F /* HomeView.swift in Sources */,
 				6F151E2B256BF5CF009082F8 /* ProgressBar.swift in Sources */,
@@ -13838,6 +13879,14 @@
 				minimumVersion = 0.3.0;
 			};
 		};
+		6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dzenbot/DZNEmptyDataSet.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srglogger-apple.git";
@@ -14456,6 +14505,56 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
 			productName = FetchImage;
+		};
+		6FEC8979261F165600FF9762 /* DZNEmptyDataSet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
+			productName = DZNEmptyDataSet;
+		};
+		6FEC8994261F16BA00FF9762 /* DZNEmptyDataSet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
+			productName = DZNEmptyDataSet;
+		};
+		6FEC8996261F16C100FF9762 /* DZNEmptyDataSet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
+			productName = DZNEmptyDataSet;
+		};
+		6FEC8998261F16C800FF9762 /* DZNEmptyDataSet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
+			productName = DZNEmptyDataSet;
+		};
+		6FEC899A261F16CF00FF9762 /* DZNEmptyDataSet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
+			productName = DZNEmptyDataSet;
+		};
+		6FEC899C261F16D500FF9762 /* DZNEmptyDataSet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
+			productName = DZNEmptyDataSet;
+		};
+		6FEC899E261F16DC00FF9762 /* DZNEmptyDataSet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
+			productName = DZNEmptyDataSet;
+		};
+		6FEC89A0261F16E200FF9762 /* DZNEmptyDataSet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
+			productName = DZNEmptyDataSet;
+		};
+		6FEC89A2261F16E800FF9762 /* DZNEmptyDataSet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
+			productName = DZNEmptyDataSet;
+		};
+		6FEC89A4261F16EE00FF9762 /* DZNEmptyDataSet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
+			productName = DZNEmptyDataSet;
 		};
 		6FF12A47256C58A70042F446 /* SRGLoggerSwift */ = {
 			isa = XCSwiftPackageProductDependency;

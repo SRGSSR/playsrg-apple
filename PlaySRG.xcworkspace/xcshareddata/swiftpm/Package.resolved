@@ -47,6 +47,15 @@
         }
       },
       {
+        "package": "DZNEmptyDataSet",
+        "repositoryURL": "https://github.com/dzenbot/DZNEmptyDataSet.git",
+        "state": {
+          "branch": "master",
+          "revision": "9bffa69a83a9fa58a14b3cf43cb6dd8a63774179",
+          "version": null
+        }
+      },
+      {
         "package": "FetchImage",
         "repositoryURL": "https://github.com/kean/FetchImage.git",
         "state": {

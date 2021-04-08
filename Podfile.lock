@@ -1,7 +1,6 @@
 PODS:
   - AutoCoding (2.2.3)
   - BDKCollectionIndexView (2.2.2)
-  - DZNEmptyDataSet (1.8.1)
   - FSCalendar (2.8.2)
   - google-cast-sdk-no-bluetooth (4.5.3):
     - google-cast-sdk-no-bluetooth/Core (= 4.5.3)
@@ -59,7 +58,6 @@ PODS:
 DEPENDENCIES:
   - AutoCoding
   - BDKCollectionIndexView
-  - DZNEmptyDataSet (from `https://github.com/dzenbot/DZNEmptyDataSet.git`, commit `8deb3fe69f75c5022a53a903468b29552dc70e66`)
   - FSCalendar
   - google-cast-sdk-no-bluetooth
   - InAppSettingsKit (= 3.1.4)
@@ -82,20 +80,9 @@ SPEC REPOS:
     - Protobuf
     - TvOSTextViewer
 
-EXTERNAL SOURCES:
-  DZNEmptyDataSet:
-    :commit: 8deb3fe69f75c5022a53a903468b29552dc70e66
-    :git: https://github.com/dzenbot/DZNEmptyDataSet.git
-
-CHECKOUT OPTIONS:
-  DZNEmptyDataSet:
-    :commit: 8deb3fe69f75c5022a53a903468b29552dc70e66
-    :git: https://github.com/dzenbot/DZNEmptyDataSet.git
-
 SPEC CHECKSUMS:
   AutoCoding: 90ca3cbc0d77a37cfff75167d705b44148c5fc51
   BDKCollectionIndexView: 489a0c57d27fafe6944ef61e5a4192902148ea84
-  DZNEmptyDataSet: b94434220f87d9dda46660eb4f07a424778e93b4
   FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   google-cast-sdk-no-bluetooth: 815df973d547e06a90768f4a72220950cd32d8cb
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
@@ -107,6 +94,6 @@ SPEC CHECKSUMS:
   Protobuf: 0cde852566359049847168e51bd1c690e0f70056
   TvOSTextViewer: c1a0c64286931e663d131dc680f908bcfa36e214
 
-PODFILE CHECKSUM: a2016d03c7cd1e0a6311108e7a21774db74ef7d3
+PODFILE CHECKSUM: 04b86f07f5f96187b5495f363884a1b2e452679c
 
 COCOAPODS: 1.9.3
