@@ -89,9 +89,9 @@ struct ShowDetailView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            CollectionView(rows: rows) { _, _ in
-                return Self.layoutSection(for: rows.first!.section, geometry: geometry)
-            } cell: { _, item in
+            CollectionView(rows: rows) { _, section, _ in
+                return Self.layoutSection(for: section, geometry: geometry)
+            } cell: { _, _, item in
                 switch item {
                 case .loading:
                     ActivityIndicator()
@@ -111,7 +111,7 @@ struct ShowDetailView: View {
                             model.loadNextPage(from: media)
                         }
                 }
-            } supplementaryView: { _, _ in
+            } supplementaryView: { _, _, _, _ in
                 HeaderView(show: model.show)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

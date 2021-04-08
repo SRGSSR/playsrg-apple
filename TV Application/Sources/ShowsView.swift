@@ -81,9 +81,9 @@ struct ShowsView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            CollectionView(rows: rows) { _, _ in
-                return Self.layoutSection(for: rows.first!.section, geometry: geometry)
-            } cell: { _, item in
+            CollectionView(rows: rows) { _, section, _ in
+                return Self.layoutSection(for: section, geometry: geometry)
+            } cell: { _, _, item in
                 switch item {
                 case .loading:
                     ActivityIndicator()
@@ -100,7 +100,7 @@ struct ShowsView: View {
                 case let .show(show):
                     ShowCell(show: show)
                 }
-            } supplementaryView: { _, indexPath in
+            } supplementaryView: { _, indexPath, _, _ in
                 switch model.state {
                 case .loading, .failed:
                     Rectangle()

@@ -13,5 +13,6 @@
   "1.1.0-12": "- Update latest favorite episodes swimlane title.\n- Crashes are reported to AppCenter without the need for user consent.",
   "1.2.0-13": "- Add Profile tab for user data management.\n- Add Later and Resume playback swimlanes to the homepage.\n- Add continuous playback with opt-out setting.\n- Synchronize Favorites, Later and Resume playback over a maRTS account (Play RTS only).\n- Fix frequent crashes occurring when opening a show detail page.",
   "1.2.0-14": "- Improve navigation performance.\n- Update translations for all BUs.\n- Fix watch later button behavior for related medias on the media detail page.",
-  "1.2.0-15": "- [RTS] Fix resume playback not correctly working for some content."
+  "1.2.0-15": "- [RTS] Fix resume playback not correctly working for some content.",
+  "1.2.1-16": "- Fix potential crashes when empty list are refreshed on home pages."
 }
