@@ -15,9 +15,9 @@ protocol PageSectionProperties {
     var summary: String? { get }
     var presentationType: SRGContentPresentationType { get }
     var layout: PageModel.SectionLayout { get }
+    var placeholderItems: [PageModel.Item] { get}
     
-    func placeholderItems(for section: PageModel.Section) -> [PageModel.Item]
-    func publisher(for id: PageModel.Id, section: PageModel.Section) -> AnyPublisher<[PageModel.Item], Error>?
+    func publisher(for id: PageModel.Id) -> AnyPublisher<[PageModel.Item], Error>?
 }
 
 extension PageModel {
@@ -160,27 +160,28 @@ extension SRGContentSection: PageSectionProperties {
         }
     }
     
-    func placeholderItems(for section: PageModel.Section) -> [PageModel.Item] {
+    var placeholderItems: [PageModel.Item] {
         switch presentation.type {
         case .mediaHighlight:
-            return [.mediaPlaceholder(index: 0, section: section)]
+            return [.mediaPlaceholder(index: 0, section: .content(self))]
         case .showHighlight:
-            return [.showPlaceholder(index: 0, section: section)]
+            return [.showPlaceholder(index: 0, section: .content(self))]
         case .topicSelector:
-            return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0, section: section) }
+            return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0, section: .content(self)) }
         case .swimlane, .hero, .grid, .livestreams:
-            return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0, section: section) }
+            return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0, section: .content(self)) }
         case .none, .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .showAccess:
             return []
         }
     }
     
-    func publisher(for id: PageModel.Id, section: PageModel.Section) -> AnyPublisher<[PageModel.Item], Error>? {
+    func publisher(for id: PageModel.Id) -> AnyPublisher<[PageModel.Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
         let vendor = configuration.vendor
         let pageSize = configuration.pageSize
+        let section = PageModel.Section.content(self)
         
         switch type {
         case .medias:
@@ -317,23 +318,24 @@ extension ConfiguredSection: PageSectionProperties {
         }
     }
     
-    func placeholderItems(for section: PageModel.Section) -> [PageModel.Item] {
+    var placeholderItems: [PageModel.Item] {
         switch self.type {
         case .tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
-            return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0, section: section) }
+            return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0, section: .configured(self)) }
         case .radioAllShows:
-            return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0, section: section) }
+            return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0, section: .configured(self)) }
         case .radioFavoriteShows, .radioShowAccess:
             return []
         }
     }
     
-    func publisher(for id: PageModel.Id, section: PageModel.Section) -> AnyPublisher<[PageModel.Item], Error>? {
+    func publisher(for id: PageModel.Id) -> AnyPublisher<[PageModel.Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
         let vendor = configuration.vendor
         let pageSize = configuration.pageSize
+        let section = PageModel.Section.configured(self)
         
         switch self.type {
         case let .radioLatestEpisodes(channelUid: channelUid):

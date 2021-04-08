@@ -141,7 +141,7 @@ class PageModel: Identifiable, ObservableObject {
             rows.append(existingRow)
         }
         else {
-            rows.append(Row(section: section, items: section.properties.placeholderItems(for: section)))
+            rows.append(Row(section: section, items: section.properties.placeholderItems))
         }
     }
     
@@ -153,8 +153,8 @@ class PageModel: Identifiable, ObservableObject {
         var rows = [Row]()
         for section in sections {
             appendRow(section: section, from: existingRows, to: &rows)
-            section.properties.publisher(for: id, section: section)?
-                .replaceError(with: section.properties.placeholderItems(for: section))
+            section.properties.publisher(for: id)?
+                .replaceError(with: section.properties.placeholderItems)
                 .receive(on: DispatchQueue.main)
                 .sink { items in
                     update(section, items)
