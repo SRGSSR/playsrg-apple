@@ -22,6 +22,7 @@
 #import "PlayDurationFormatter.h"
 #import "PushService.h"
 #import "RefreshControl.h"
+#import "ShowViewController.h"
 #import "SongsViewController.h"
 #import "SRGLetterboxController+PlaySRG.h"
 #import "UIColor+PlaySRG.h"

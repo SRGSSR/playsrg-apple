@@ -450,13 +450,38 @@ extension PageViewController: UICollectionViewDelegate {
         Self.configureSnappingForScrollViews(in: scrollView)
     }
     
+    #if os(iOS)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
+        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+        
+        switch item {
+        case let .media(media, section: _):
+            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+        case let .show(show, section: _):
+            if let navigationController = navigationController {
+                let showViewController = ShowViewController(show: show, fromPushNotification: false)
+                navigationController.pushViewController(showViewController, animated: true)
+            }
+        case let .topic(topic, section: _):
+            if let navigationController = navigationController {
+                let pageViewController = PageViewController(id: .topic(topic: topic))
+                // TODO: Should the title be managed based on the PageViewController id?
+                pageViewController.title = topic.title
+                navigationController.pushViewController(pageViewController, animated: true)
+            }
+        default:
+            ()
+        }
+    }
+    #endif
+    
+    #if os(tvOS)
     func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
         return false
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: Open item
-    }
+    #endif
 }
 
 extension PageViewController: UIScrollViewDelegate {
