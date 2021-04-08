@@ -61,7 +61,7 @@ class PageViewController: DataViewController {
     }
     
     private func layout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
             func sectionHeaderHeight(for section: PageModel.Section, index: Int, pageTitle: String?) -> CGFloat? {
                 if index == 0, section.properties.title == nil, pageTitle == nil {
                     return nil
@@ -140,6 +140,8 @@ class PageViewController: DataViewController {
                     return LayoutStandardSectionContentInsets
                 }
             }
+            
+            guard let self = self else { return nil }
             
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -367,8 +369,8 @@ class PageViewController: DataViewController {
             }
         }
         
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            guard kind == UICollectionView.elementKindSectionHeader else { return nil }
+        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            guard let self = self, kind == UICollectionView.elementKindSectionHeader else { return nil }
             
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
@@ -380,7 +382,8 @@ class PageViewController: DataViewController {
         }
         
         model.$state
-            .sink { state in
+            .sink { [weak self] state in
+                guard let self = self else { return }
                 self.reloadData(with: state)
             }
             .store(in: &cancellables)
