@@ -394,6 +394,10 @@ class PageViewController: DataViewController {
         Self.configureSnappingForScrollViews(in: collectionView)
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return Self.play_supportedInterfaceOrientations
+    }
+    
     override func refresh() {
         model.refresh()
     }
