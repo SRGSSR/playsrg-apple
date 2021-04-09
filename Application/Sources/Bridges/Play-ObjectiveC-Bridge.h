@@ -9,6 +9,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "BaseViewController.h"
+#import "CalendarViewController.h"
 #import "Favorites.h"
 #import "History.h"
 #import "Layout.h"
@@ -23,6 +24,7 @@
 #import "PushService.h"
 #import "RefreshControl.h"
 #import "ShowViewController.h"
+#import "ShowsViewController.h"
 #import "SongsViewController.h"
 #import "SRGLetterboxController+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
