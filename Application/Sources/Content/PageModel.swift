@@ -75,14 +75,6 @@ class PageModel: Identifiable, ObservableObject {
     }
     
     func refresh() {
-        loadRows()
-    }
-    
-    func cancelRefresh() {
-        refreshCancellables = []
-    }
-        
-    private func loadRows() {
         refreshCancellables = []
         
         Self.rowsPublisher(id: id, existingRows: rows)
@@ -93,6 +85,10 @@ class PageModel: Identifiable, ObservableObject {
             .receive(on: DispatchQueue.main)
             .weakAssign(to: \.internalState, on: self)
             .store(in: &refreshCancellables)
+    }
+    
+    func cancelRefresh() {
+        refreshCancellables = []
     }
     
     private static func reusableRows(from existingRows: [Row], for sections: [Section]) -> [Row] {
@@ -117,9 +113,11 @@ class PageModel: Identifiable, ObservableObject {
 }
 
 extension PageModel {
-    /// Publishes rows associated with a page id, reusing the provided rows during retrieval
+    /// Publishes rows associated with a page id, starting from the provided rows and updating them as they are retrieved
     private static func rowsPublisher(id: Id, existingRows: [Row]) -> AnyPublisher<[Row], Error> {
         return sectionsPublisher(id: id)
+            // For each section create a publisher which updates the associated row and publishes the entire updated
+            // row list as a result. A value is sent down the pipeline with each update.
             .flatMap { sections -> AnyPublisher<[Row], Never> in
                 var rows = reusableRows(from: existingRows, for: sections)
                 return Publishers.MergeMany(sections.map { section in
