@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
 import Foundation
 import SwiftUI
 
@@ -16,6 +17,15 @@ extension Comparable {
 extension String {
     var capitalizedFirstLetter: String {
         return prefix(1).capitalized + dropFirst()
+    }
+}
+
+// Borrowed from https://www.swiftbysundell.com/articles/combine-self-cancellable-memory-management/
+extension Publisher where Failure == Never {
+    func weakAssign<T: AnyObject>(to keyPath: ReferenceWritableKeyPath<T, Output>, on object: T) -> AnyCancellable {
+        sink { [weak object] value in
+            object?[keyPath: keyPath] = value
+        }
     }
 }
 

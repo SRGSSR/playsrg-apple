@@ -383,8 +383,7 @@ class PageViewController: DataViewController {
         
         model.$state
             .sink { [weak self] state in
-                guard let self = self else { return }
-                self.reloadData(with: state)
+                self?.reloadData(with: state)
             }
             .store(in: &cancellables)
     }
@@ -500,10 +499,10 @@ extension PageViewController: UIScrollViewDelegate {
 extension PageViewController: DZNEmptyDataSetSource {
     func customView(forEmptyDataSet scrollView: UIScrollView) -> UIView? {
         if reloadCount == 0 {
-            switch model.state {
-            case .loading:
+            if case .loading = model.state {
                 return loadingImageView
-            default:
+            }
+            else {
                 return nil
             }
         }
@@ -514,10 +513,10 @@ extension PageViewController: DZNEmptyDataSetSource {
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         func titleString() -> String {
-            switch model.state {
-            case let .failed(error: error):
+            if case let .failed(error: error) = model.state {
                 return error.localizedDescription
-            default:
+            }
+            else {
                 return NSLocalizedString("No results", comment: "Default text displayed when no results are available");
             }
         }
@@ -528,23 +527,21 @@ extension PageViewController: DZNEmptyDataSetSource {
                                   ])
     }
     
+    #if os(iOS)
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        #if os(iOS)
         return NSAttributedString(string: NSLocalizedString("Pull to reload", comment: "Text displayed to inform the user she can pull a list to reload it"),
                                   attributes: [
                                     NSAttributedString.Key.font: SRGFont.font(.subtitle) as UIFont,
                                     NSAttributedString.Key.foregroundColor: UIColor.play_lightGray
                                   ])
-        #else
-        return nil
-        #endif
     }
+    #endif
     
     func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-        switch model.state {
-        case .failed:
+        if case.failed = model.state {
             return UIImage(named: "error-90")
-        default:
+        }
+        else {
             return UIImage(named: "media-90")
         }
     }
