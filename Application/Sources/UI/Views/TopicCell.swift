@@ -54,7 +54,7 @@ struct TopicCell: View {
             ZStack {
                 ImageView(url: imageUrl)
                 Rectangle()
-                    .fill(Color(white: 0, opacity: 0.4))
+                    .fill(Color(white: 0, opacity: 0.2))
                 Text(title)
                     .srgFont(.overline)
                     .lineLimit(1)
