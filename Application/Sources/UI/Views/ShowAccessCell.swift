@@ -21,10 +21,9 @@ struct ShowAccessCell: View {
                 HStack {
                     Image("atoz-22")
                     Text(NSLocalizedString("A to Z", comment: "Short title displayed in home pages on a button."))
-                        .srgFont(.button2)
+                        .srgFont(.body)
                 }
-                .padding(5)
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.white.opacity(0.1))
                 .cornerRadius(LayoutStandardViewCornerRadius)
             }
@@ -40,18 +39,17 @@ struct ShowAccessCell: View {
                 HStack {
                     Image("calendar-22")
                     Text(NSLocalizedString("By date", comment: "Short title displayed in home pages on a button."))
-                        .srgFont(.button2)
+                        .srgFont(.body)
 
                 }
-                .padding(5)
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.white.opacity(0.1))
                 .cornerRadius(LayoutStandardViewCornerRadius)
             }
             .foregroundColor(.white)
             .accessibilityLabel(PlaySRGAccessibilityLocalizedString("Shows by date", "Title pronounced in home pages on shows by date button."))
         }
-        .padding()
+        .frame(height: 38)
     }
 }
 

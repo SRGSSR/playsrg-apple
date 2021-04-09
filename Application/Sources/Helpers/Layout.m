@@ -249,5 +249,5 @@ CGSize LayoutTopicCollectionItemSize(void)
 
 CGSize LayoutShowAccessCollectionItemSize(CGFloat itemWidth)
 {
-    return CGSizeMake(itemWidth, 50.f);
+    return CGSizeMake(itemWidth - 2 * LayoutStandardMargin, 50.f);
 }
