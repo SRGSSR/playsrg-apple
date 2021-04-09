@@ -52,7 +52,7 @@
 {
     _show = show;
     
-    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH4];
     self.titleLabel.text = show.title;
 }
 
