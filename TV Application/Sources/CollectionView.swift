@@ -34,6 +34,26 @@ extension CollectionView {
  */
 struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, SupplementaryView: View>: UIViewRepresentable {
     /**
+     *  `UICollectionView` subclass applying settings depending on the view hierarchy when displayed.
+     */
+    class WrappedCollectionView: UICollectionView {
+        weak var parentViewController: UIViewController?
+        
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            
+            if self.window != nil {
+                if parentViewController == NearestViewController.shared {
+                    play_nearestViewController?.tabBarObservedScrollView = self
+                }
+                else {
+                    parentViewController?.tabBarObservedScrollView = self
+                }
+            }
+        }
+    }
+    
+    /**
      *  View coordinator.
      */
     class Coordinator: NSObject, UICollectionViewDelegate {
@@ -159,11 +179,11 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         return Coordinator()
     }
     
-    func makeUIView(context: Context) -> UICollectionView {
+    func makeUIView(context: Context) -> WrappedCollectionView {
         let cellIdentifier = "hostCell"
         let supplementaryViewIdentifier = "hostSupplementaryView"
         
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout(context: context))
+        let collectionView = WrappedCollectionView(frame: .zero, collectionViewLayout: layout(context: context))
         collectionView.delegate = context.coordinator
         collectionView.register(HostCollectionViewCell<Cell>.self, forCellWithReuseIdentifier: cellIdentifier)
         
@@ -193,19 +213,14 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             return view
         }
         
+        collectionView.parentViewController = parentViewController
+        parentSearchController?.searchControllerObservedScrollView = collectionView
+        
         reloadData(in: collectionView, context: context)
         return collectionView
     }
     
-    func updateUIView(_ uiView: UICollectionView, context: Context) {
-        if parentViewController == NearestViewController.shared {
-            uiView.play_nearestViewController?.tabBarObservedScrollView = uiView
-        }
-        else {
-            parentViewController?.tabBarObservedScrollView = uiView
-        }
-        parentSearchController?.searchControllerObservedScrollView = uiView
-        
+    func updateUIView(_ uiView: WrappedCollectionView, context: Context) {
         reloadData(in: uiView, context: context, animated: true)
     }
 }
