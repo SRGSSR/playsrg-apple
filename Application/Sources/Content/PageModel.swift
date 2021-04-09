@@ -95,6 +95,48 @@ class PageModel: Identifiable, ObservableObject {
             .store(in: &refreshCancellables)
     }
     
+    private static func reusableRows(from existingRows: [Row], for sections: [Section]) -> [Row] {
+        return sections.map { section in
+            if let existingRow = existingRows.first(where: { $0.section == section }) {
+                return existingRow
+            }
+            else {
+                return Row(section: section, items: section.properties.placeholderItems)
+            }
+        }
+    }
+    
+    private static func state(from internalState: State) -> State {
+        if case let .loaded(rows: rows) = internalState {
+            return .loaded(rows: rows.filter { !$0.items.isEmpty })
+        }
+        else {
+            return internalState
+        }
+    }
+}
+
+extension PageModel {
+    /// Publishes rows associated with a page id, reusing the provided rows during retrieval
+    private static func rowsPublisher(id: Id, existingRows: [Row]) -> AnyPublisher<[Row], Error> {
+        return sectionsPublisher(id: id)
+            .flatMap { sections -> AnyPublisher<[Row], Never> in
+                var rows = reusableRows(from: existingRows, for: sections)
+                return Publishers.MergeMany(sections.map { section in
+                    Self.rowPublisher(id: id, section: section)
+                        .map { row in
+                            guard let index = rows.firstIndex(where: { $0.section == section }) else { return rows }
+                            rows[index] = row
+                            return rows
+                        }
+                        .eraseToAnyPublisher()
+                })
+                .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    /// Publishes sections associated with a page id
     private static func sectionsPublisher(id: Id) -> AnyPublisher<[Section], Error> {
         switch id {
         case .video:
@@ -116,35 +158,7 @@ class PageModel: Identifiable, ObservableObject {
         }
     }
     
-    private static func reusableRows(from existingRows: [Row], for sections: [Section]) -> [Row] {
-        return sections.map { section in
-            if let existingRow = existingRows.first(where: { $0.section == section }) {
-                return existingRow
-            }
-            else {
-                return Row(section: section, items: section.properties.placeholderItems)
-            }
-        }
-    }
-    
-    private static func rowsPublisher(id: Id, existingRows: [Row]) -> AnyPublisher<[Row], Error> {
-        return sectionsPublisher(id: id)
-            .flatMap { sections -> AnyPublisher<[Row], Never> in
-                var rows = reusableRows(from: existingRows, for: sections)
-                return Publishers.MergeMany(sections.map { section in
-                    Self.rowPublisher(id: id, section: section)
-                        .map { row in
-                            guard let index = rows.firstIndex(where: { $0.section == section }) else { return rows }
-                            rows[index] = row
-                            return rows
-                        }
-                        .eraseToAnyPublisher()
-                })
-                .eraseToAnyPublisher()
-            }
-            .eraseToAnyPublisher()
-    }
-    
+    /// Publishes the row for content for a given section and page id
     private static func rowPublisher(id: Id, section: Section) -> AnyPublisher<Row, Never> {
         if let publisher = section.properties.publisher(for: id) {
             return publisher
@@ -155,15 +169,6 @@ class PageModel: Identifiable, ObservableObject {
         else {
             return Just(Row(section: section, items: []))
                 .eraseToAnyPublisher()
-        }
-    }
-    
-    private static func state(from internalState: State) -> State {
-        if case let .loaded(rows: rows) = internalState {
-            return .loaded(rows: rows.filter { !$0.items.isEmpty })
-        }
-        else {
-            return internalState
         }
     }
 }
