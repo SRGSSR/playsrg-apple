@@ -62,6 +62,7 @@ struct MediaCell: View {
             VStack {
                 MediaVisualView(media: media, scale: .small, contentMode: .fit)
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                    .cornerRadius(LayoutStandardViewCornerRadius)
                 DescriptionView(media: media, style: style)
                     .frame(width: geometry.size.width, alignment: .leading)
             }

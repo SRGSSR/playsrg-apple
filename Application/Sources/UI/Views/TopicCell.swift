@@ -30,6 +30,7 @@ struct TopicCell: View {
         }
         #else
         MainView(topic: topic)
+            .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement()
             .accessibilityLabel(accessibilityLabel)
         #endif

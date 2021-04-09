@@ -26,6 +26,7 @@ struct ShowAccessCell: View {
                 .padding(5)
                 .frame(maxWidth: .infinity)
                 .background(Color.white.opacity(0.1))
+                .cornerRadius(LayoutStandardViewCornerRadius)
             }
             .foregroundColor(.white)
             .accessibilityLabel(PlaySRGAccessibilityLocalizedString("A to Z shows", "Title pronounced in home pages on shows A to Z button."))
@@ -45,6 +46,7 @@ struct ShowAccessCell: View {
                 .padding(5)
                 .frame(maxWidth: .infinity)
                 .background(Color.white.opacity(0.1))
+                .cornerRadius(LayoutStandardViewCornerRadius)
             }
             .foregroundColor(.white)
             .accessibilityLabel(PlaySRGAccessibilityLocalizedString("Shows by date", "Title pronounced in home pages on shows by date button."))
