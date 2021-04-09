@@ -79,9 +79,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, copy) NSString *voiceOverLanguageCode;
 
-#if TARGET_OS_IOS
-@property (nonatomic, copy) NSString *googleCastReceiverIdentifier;
-#endif
 @property (nonatomic, copy) NSNumber *appStoreProductIdentifier;
 
 @property (nonatomic) NSURL *playURL;
