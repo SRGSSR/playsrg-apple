@@ -17,12 +17,15 @@ struct ShowAccessCell: View {
                     let showsViewController = ShowsViewController(radioChannel: radioChannel, alphabeticalIndex: nil)
                     tabBarController.pushViewController(showsViewController, animated: true)
                 }
-            } ) {
+            }) {
                 HStack {
                     Image("atoz-22")
                     Text(NSLocalizedString("A to Z", comment: "Short title displayed in home pages on a button."))
                         .srgFont(.button2)
                 }
+                .padding(5)
+                .frame(maxWidth: .infinity)
+                .background(Color.white.opacity(0.1))
             }
             .foregroundColor(.white)
             .accessibilityLabel(PlaySRGAccessibilityLocalizedString("A to Z shows", "Title pronounced in home pages on shows A to Z button."))
@@ -32,13 +35,16 @@ struct ShowAccessCell: View {
                     let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
                     tabBarController.pushViewController(calendarViewController, animated: true)
                 }
-            } ) {
+            }) {
                 HStack {
                     Image("calendar-22")
                     Text(NSLocalizedString("By date", comment: "Short title displayed in home pages on a button."))
                         .srgFont(.button2)
 
                 }
+                .padding(5)
+                .frame(maxWidth: .infinity)
+                .background(Color.white.opacity(0.1))
             }
             .foregroundColor(.white)
             .accessibilityLabel(PlaySRGAccessibilityLocalizedString("Shows by date", "Title pronounced in home pages on shows by date button."))
