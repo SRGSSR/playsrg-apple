@@ -43,8 +43,12 @@ struct ShowCell: View {
                 ImageView(url: imageUrl)
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
                 DescriptionView(show: show)
+                    .padding(.bottom, 5)
+                    .padding(.horizontal, 8)
                     .frame(width: geometry.size.width, alignment: .leading)
             }
+            .background(Color(.play_cardGrayBackground))
+            .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement()
             .accessibilityLabel(accessibilityLabel)
             #endif

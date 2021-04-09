@@ -29,8 +29,8 @@ struct DurationLabel: View {
             Text(duration)
                 .srgFont(.caption)
                 .foregroundColor(.white)
-                .padding([.top, .bottom], 5)
-                .padding([.leading, .trailing], 8)
+                .padding(.vertical, 5)
+                .padding(.horizontal, 8)
                 .background(isLivestream ? Color(.play_liveRed) : Color(white: 0, opacity: 0.5))
                 .cornerRadius(4)
         }

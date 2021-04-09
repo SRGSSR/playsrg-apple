@@ -15,8 +15,8 @@ struct Badge: View {
         Text(text)
             .srgFont(.label)
             .foregroundColor(.white)
-            .padding([.top, .bottom], 5)
-            .padding([.leading, .trailing], 8)
+            .padding(.vertical, 5)
+            .padding(.horizontal, 8)
             .background(color)
             .cornerRadius(4)
     }

@@ -158,7 +158,7 @@ struct MediaDetailView: View {
                                 .foregroundColor(.white)
                                 .srgFont(.body)
                                 .frame(width: geometry.size.width, alignment: .leading)
-                                .padding([.top, .bottom], 5)
+                                .padding(.vertical, 5)
                                 .onParentFocusChange { isFocused = $0 }
                         })
                         .buttonStyle(TextButtonStyle(focused: isFocused))
@@ -167,7 +167,7 @@ struct MediaDetailView: View {
                     Text(availabilityInformation)
                         .srgFont(.overline)
                         .foregroundColor(.white)
-                        .padding([.top, .bottom], 5)
+                        .padding(.vertical, 5)
                 }
             }
         }
@@ -222,7 +222,7 @@ struct MediaDetailView: View {
                             Text(NSLocalizedString("This might interest you", comment: "Related content media list title"))
                                 .srgFont(.body)
                                 .foregroundColor(.gray)
-                                .padding([.leading, .trailing], 40)
+                                .padding(.horizontal, 40)
                                 .padding(.top, 15)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                             ScrollView(.horizontal) {
@@ -240,7 +240,7 @@ struct MediaDetailView: View {
                                     }
                                 }
                                 .padding(.top, 70)
-                                .padding([.leading, .trailing], 40)
+                                .padding(.horizontal, 40)
                             }
                         }
                     }
