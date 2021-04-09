@@ -33,6 +33,11 @@ OBJC_EXPORT const CGFloat LayoutStandardCellHeight API_UNAVAILABLE(tvos);
 OBJC_EXPORT const CGFloat LayoutStandardMargin;
 
 /**
+ *  Standard collection view padding.
+ */
+OBJC_EXPORT const UIEdgeInsets LayoutStandardCollectionViewPaddingInsets;
+
+/**
  *  Standard table view padding.
  */
 OBJC_EXPORT const UIEdgeInsets LayoutStandardTableViewPaddingInsets;

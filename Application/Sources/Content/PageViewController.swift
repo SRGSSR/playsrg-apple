@@ -436,7 +436,7 @@ extension PageViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return LayoutStandardTableViewPaddingInsets
+        return LayoutStandardCollectionViewPaddingInsets
     }
 }
 
