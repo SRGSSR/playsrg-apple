@@ -194,7 +194,7 @@ struct LiveMediaCell: View, LiveMediaData {
             VStack(alignment: .leading) {
                 if let progress = progress {
                     ProgressBar(value: progress)
-                        .frame(maxWidth: .infinity, maxHeight: 8)
+                        .frame(maxWidth: .infinity, maxHeight: LayoutProgressBarHeight)
                         .cornerRadius(4)
                 }
                 Text(title)

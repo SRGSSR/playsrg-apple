@@ -61,6 +61,12 @@ typedef NS_ENUM(NSInteger, LayoutCollectionItemType) {
 };
 
 /**
+ *  Progress bar height.
+ */
+OBJC_EXPORT const CGFloat LayoutProgressBarHeight;
+
+
+/**
  *  Calculate the width to apply to items within a collection so that they approach some desired size, ensuring constant
  *  spacing between items.
  *
