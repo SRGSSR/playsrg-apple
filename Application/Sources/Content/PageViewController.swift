@@ -567,6 +567,14 @@ extension PageViewController: DZNEmptyDataSetDelegate {
     }
 }
 
+#if os(iOS)
+extension PageViewController: TabBarActionable {
+    func performActiveTabAction(animated: Bool) {
+        collectionView.play_scrollToTop(animated: animated)
+    }
+}
+#endif
+
 // TODO: Remaining protocols to implement, as was the case for HomeViewController
 
 #if false
@@ -576,10 +584,6 @@ extension PageViewController: PlayApplicationNavigation {
 }
 
 extension PageViewController: SRGAnalyticsViewTracking {
-    
-}
-
-extension PageViewController: TabBarActionable {
     
 }
 

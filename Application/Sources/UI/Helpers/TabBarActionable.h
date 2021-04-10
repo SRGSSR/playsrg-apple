@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Protocol implemented by view controllers to respond to tab bar actions.
  */
+API_UNAVAILABLE(tvos)
 @protocol TabBarActionable <NSObject>
 
 /**
