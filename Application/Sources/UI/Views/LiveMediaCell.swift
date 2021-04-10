@@ -61,31 +61,35 @@ struct LiveMediaCell: View, LiveMediaData {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(spacing: 10) {
-                Button(action: {
-                    if let media = media {
-                        navigateToMedia(media, play: true)
-                    }
-                }) {
-                    VisualView(media: media, programComposition: programComposition, date: date)
-                        .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                        .onParentFocusChange { isFocused = $0 }
-                        .accessibilityElement()
-                        .accessibilityLabel(accessibilityLabel)
-                        .accessibility(addTraits: .isButton)
+            #if os(tvOS)
+            LabeledCardButton(action: {
+                if let media = media {
+                    navigateToMedia(media, play: true)
                 }
-                .buttonStyle(CardButtonStyle())
-                
+            }) {
+                VisualView(media: media, programComposition: programComposition, date: date)
+                    .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                    .onParentFocusChange { isFocused = $0 }
+                    .accessibilityElement()
+                    .accessibilityLabel(accessibilityLabel)
+                    .accessibility(addTraits: .isButton)
+            } label: {
                 DescriptionView(media: media, programComposition: programComposition, date: date)
                     .frame(width: geometry.size.width, alignment: .leading)
-                    .animation(nil)
-                    .opacity(isFocused ? 1 : 0.5)
-                    .offset(x: 0, y: isFocused ? 10 : 0)
-                    .scaleEffect(isFocused ? 1.1 : 1, anchor: .top)
-                    .animation(.easeInOut(duration: 0.2))
             }
-            .redacted(reason: redactionReason)
+            #else
+            VStack {
+                VisualView(media: media, programComposition: programComposition, date: date)
+                    .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                    .cornerRadius(LayoutStandardViewCornerRadius)
+                DescriptionView(media: media, programComposition: programComposition, date: date)
+                    .frame(width: geometry.size.width, alignment: .leading)
+            }
+            .accessibilityElement()
+            .accessibilityLabel(accessibilityLabel)
+            #endif
         }
+        .redacted(reason: redactionReason)
         .onAppear {
             registerForChannelUpdates()
         }
@@ -111,7 +115,11 @@ struct LiveMediaCell: View, LiveMediaData {
         
         private var logoImage: UIImage? {
             if let channel = channel {
+                #if os(tvOS)
                 return channel.play_logo60Image
+                #else
+                return channel.play_logo32Image
+                #endif
             }
             else {
                 return nil

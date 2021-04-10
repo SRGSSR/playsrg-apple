@@ -225,6 +225,9 @@ class PageViewController: DataViewController {
         let mediaCellIdentifier = "MediaCell"
         collectionView.register(HostCollectionViewCell<MediaCell>.self, forCellWithReuseIdentifier: mediaCellIdentifier)
         
+        let liveMediaCellIdentifier = "LiveMediaCell"
+        collectionView.register(HostCollectionViewCell<LiveMediaCell>.self, forCellWithReuseIdentifier: liveMediaCellIdentifier)
+       
         let showCellIdentifier = "ShowCell"
         collectionView.register(HostCollectionViewCell<ShowCell>.self, forCellWithReuseIdentifier: showCellIdentifier)
         
@@ -240,19 +243,30 @@ class PageViewController: DataViewController {
         
         let featuredShowCellIdentifier = "FeaturedShowCell"
         collectionView.register(HostCollectionViewCell<FeaturedShowCell>.self, forCellWithReuseIdentifier: featuredShowCellIdentifier)
-        
-        let liveMediaCellIdentifier = "LiveMediaCell"
-        collectionView.register(HostCollectionViewCell<LiveMediaCell>.self, forCellWithReuseIdentifier: liveMediaCellIdentifier)
         #endif
         
         // TODO: Factor out cell dequeue code per type
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
             switch item {
             #if os(iOS)
-            case let .media(media, _):
-                let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
-                mediaCell?.content = MediaCell(media: media, style: .show)
-                return mediaCell
+            case let .media(media, section):
+                if section.properties.presentationType == .livestreams {
+                    if media.contentType == .livestream || media.contentType == .scheduledLivestream {
+                        let liveMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: liveMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<LiveMediaCell>
+                        liveMediaCell?.content = LiveMediaCell(media: media)
+                        return liveMediaCell
+                    }
+                    else {
+                        let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
+                        mediaCell?.content = MediaCell(media: media)
+                        return mediaCell
+                    }
+                }
+                else {
+                    let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
+                    mediaCell?.content = MediaCell(media: media, style: .show)
+                    return mediaCell
+                }
             #else
             case let .media(media, section):
                 if section.properties.layout == .hero {
