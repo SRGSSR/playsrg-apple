@@ -10,12 +10,13 @@ import SRGUserData
 
 fileprivate let defaultNumberOfPlaceholders = 10
 
+/// Common abstraction for properties associated with a section
 protocol PageSectionProperties {
     var title: String? { get }
     var summary: String? { get }
     var presentationType: SRGContentPresentationType { get }
     var layout: PageModel.SectionLayout { get }
-    var placeholderItems: [PageModel.Item] { get}
+    var placeholderItems: [PageModel.Item] { get }
     
     func publisher(for id: PageModel.Id) -> AnyPublisher<[PageModel.Item], Error>?
 }
@@ -85,7 +86,8 @@ extension PageModel {
         case showAccess
     }
     
-    // On a page items must be unique per section, which is why a section parameter must be provided for each of them.
+    // Items can appear in several sections, which is why a section parameter must be provided for each of them so
+    // that each item is truly unique.
     enum Item: Hashable {
         case mediaPlaceholder(index: Int, section: Section)
         case media(_ media: SRGMedia, section: Section)
