@@ -37,18 +37,6 @@ class PageViewController: DataViewController {
         return PageViewController(id: .live)
     }
     
-    // Workaround for currently missing compositional layout APIs. Horizontal scroll views are used and
-    // lazily loaded when scrolling, so we must update their properties when the scroll position has
-    // changed.
-    static func configureSnappingForScrollViews(in scrollView: UIScrollView) {
-        for subview in scrollView.subviews {
-            if let subScrollView = subview as? UIScrollView {
-                subScrollView.decelerationRate = .fast
-                subScrollView.alwaysBounceHorizontal = true
-            }
-        }
-    }
-    
     private static func snapshot(from state: PageModel.State) -> NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item>()
         if case let .loaded(rows: rows) = state {
@@ -405,7 +393,6 @@ class PageViewController: DataViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         collectionView.reloadEmptyDataSet()
-        Self.configureSnappingForScrollViews(in: collectionView)
     }
     
     #if os(iOS)
@@ -425,8 +412,6 @@ class PageViewController: DataViewController {
             self.dataSource.apply(Self.snapshot(from: state)) {
                 self.collectionView.reloadEmptyDataSet()
                 self.reloadCount -= 1
-                
-                Self.configureSnappingForScrollViews(in: self.collectionView)
                 
                 #if os(iOS)
                 // Avoid stopping scrolling
@@ -460,18 +445,6 @@ extension PageViewController: ContentInsets {
 }
 
 extension PageViewController: UICollectionViewDelegate {
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        Self.configureSnappingForScrollViews(in: scrollView)
-    }
-    
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        Self.configureSnappingForScrollViews(in: scrollView)
-    }
-    
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        Self.configureSnappingForScrollViews(in: scrollView)
-    }
-    
     #if os(iOS)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let snapshot = dataSource.snapshot()
