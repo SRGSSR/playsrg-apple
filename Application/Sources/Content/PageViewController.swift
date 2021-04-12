@@ -365,7 +365,18 @@ class PageViewController: DataViewController {
             #if os(iOS)
             case let .showAccess(radioChannel, _):
                 let showAccessCell = collectionView.dequeueReusableCell(withReuseIdentifier: showAccessCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowAccessCell>
-                showAccessCell?.content = ShowAccessCell(radioChannel: radioChannel)
+                showAccessCell?.content = ShowAccessCell(radioChannel: radioChannel) { [weak self] type in
+                    if let navigationController = self?.navigationController {
+                        switch type {
+                        case .aToZ:
+                            let showsViewController = ShowsViewController(radioChannel: radioChannel, alphabeticalIndex: nil)
+                            navigationController.pushViewController(showsViewController, animated: true)
+                        case .date:
+                            let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
+                            navigationController.pushViewController(calendarViewController, animated: true)
+                        }
+                    }
+                }
                 return showAccessCell
             #endif
             }
