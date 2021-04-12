@@ -50,7 +50,7 @@ extension CardButton {
 }
 
 /**
- *  A wrapper view creating for adding a card appearance to any view, with a
+ *  A wrapper view created for adding a card appearance to any view, with a
  *  label underneath which automatically scales when the card is focused.
  *
  *  @discussion Behaves like a button from content sizing. Use a parent geometry reader if needed.

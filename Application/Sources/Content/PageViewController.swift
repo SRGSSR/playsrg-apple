@@ -423,9 +423,9 @@ class PageViewController: DataViewController {
     }
     
     func reloadData(with state: PageModel.State) {
-        // Can be triggered on a background thread. Layout is updated on the main thread.
         reloadCount += 1
         DispatchQueue.global(qos: .userInteractive).async {
+            // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
                 self.collectionView.reloadEmptyDataSet()
                 self.reloadCount -= 1
