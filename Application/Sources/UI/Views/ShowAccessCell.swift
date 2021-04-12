@@ -14,7 +14,7 @@ struct ShowAccessCell: View {
     }
     
     let radioChannel: RadioChannel?
-    let action: ((ButtonType) -> Void)
+    let action: (ButtonType) -> Void
     
     var body: some View {
         HStack(spacing: 10) {

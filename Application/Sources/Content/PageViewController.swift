@@ -240,7 +240,7 @@ class PageViewController: DataViewController {
         #endif
         
         // TODO: Factor out cell dequeue code per type
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
+        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, item in
             switch item {
             #if os(iOS)
             case let .media(media, section):
