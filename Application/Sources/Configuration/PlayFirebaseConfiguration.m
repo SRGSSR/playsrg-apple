@@ -16,24 +16,9 @@ static HomeSection HomeSectionWithString(NSString *string)
     static dispatch_once_t s_onceToken;
     static NSDictionary<NSString *, NSNumber *> *s_sections;
     dispatch_once(&s_onceToken, ^{
-        s_sections = @{ @"tvTrending" : @(HomeSectionTVTrending),
-                        @"tvLive" : @(HomeSectionTVLive),
-                        @"tvEvents" : @(HomeSectionTVEvents),
-                        @"tvTopics" : @(HomeSectionTVTopics),
-                        @"tvTopicsAccess" : @(HomeSectionTVTopicsAccess),
-                        @"tvLatest" : @(HomeSectionTVLatest),
-                        @"tvWebFirst": @(HomeSectionTVWebFirst),
-                        @"tvMostPopular" : @(HomeSectionTVMostPopular),
-                        @"tvSoonExpiring" : @(HomeSectionTVSoonExpiring),
+        s_sections = @{ @"tvLive" : @(HomeSectionTVLive),
                         @"tvScheduledLivestreams" : @(HomeSectionTVScheduledLivestreams),
                         @"tvLiveCenter" : @(HomeSectionTVLiveCenter),
-                        @"tvShowsAccess" : @(HomeSectionTVShowsAccess),
-                        @"tvFavoriteShows" : @(HomeSectionTVFavoriteShows),
-#if TARGET_OS_TV
-                        @"tvFavoriteLatestEpisodes" : @(HomeSectionTVFavoriteLatestEpisodes),
-                        @"tvResumePlayback" : @(HomeSectionTVResumePlayback),
-                        @"tvWatchLater" : @(HomeSectionTVWatchLater),
-#endif
                         @"radioLive" : @(HomeSectionRadioLive),
                         @"radioLiveSatellite" : @(HomeSectionRadioLiveSatellite),
                         @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
@@ -56,11 +41,6 @@ NSArray<NSNumber *> *FirebaseConfigurationHomeSections(NSString *string)
     for (NSString *identifier in homeSectionIdentifiers) {
         HomeSection homeSection = HomeSectionWithString(identifier);
         if (homeSection != HomeSectionUnknown) {
-            // The environment variable SKIP_TV_EVENTS is used to remove events when generating screenshots.
-            if (homeSection == HomeSectionTVEvents && [NSProcessInfo.processInfo.arguments containsObject:@"SKIP_TV_EVENTS"]) {
-                continue;
-            }
-            
             [homeSections addObject:@(homeSection)];
         }
         else {

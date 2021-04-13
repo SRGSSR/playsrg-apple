@@ -43,12 +43,9 @@ AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite = @"satellite radio";
 AnalyticsPageTitle const AnalyticsPageTitleSettings = @"settings";
 AnalyticsPageTitle const AnalyticsPageTitleShowsAZ = @"shows a-z";
 AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar = @"shows calendar";
-AnalyticsPageTitle const AnalyticsPageTitleSoonExpiring = @"soon expiring";
 AnalyticsPageTitle const AnalyticsPageTitleSports = @"sports";
-AnalyticsPageTitle const AnalyticsPageTitleTrending = @"trending";
 AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
 AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
-AnalyticsPageTitle const AnalyticsPageTitleWebFirst = @"web first";
 AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
 
 AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
@@ -123,15 +120,9 @@ AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
     static NSDictionary<NSNumber *, NSString *> *s_titles;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_titles = @{ @(HomeSectionTVTrending) : AnalyticsPageTitleTrending,
-                      @(HomeSectionTVLive) : AnalyticsPageTitleTV,
-                      @(HomeSectionTVLatest) : AnalyticsPageTitleLatest,
-                      @(HomeSectionTVWebFirst) : AnalyticsPageTitleWebFirst,
-                      @(HomeSectionTVMostPopular) : AnalyticsPageTitleMostPopular,
-                      @(HomeSectionTVSoonExpiring) : AnalyticsPageTitleSoonExpiring,
+        s_titles = @{ @(HomeSectionTVLive) : AnalyticsPageTitleTV,
                       @(HomeSectionTVScheduledLivestreams) : AnalyticsPageTitleEvents,
                       @(HomeSectionTVLiveCenter) : AnalyticsPageTitleSports,
-                      @(HomeSectionTVFavoriteShows) : AnalyticsPageTitleFavorites,
                       @(HomeSectionRadioLive) : AnalyticsPageTitleRadio,
                       @(HomeSectionRadioLiveSatellite) : AnalyticsPageTitleRadioSatellite,
                       @(HomeSectionRadioLatestEpisodes) : AnalyticsPageTitleLatestEpisodes,
