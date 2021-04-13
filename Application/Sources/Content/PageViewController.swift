@@ -112,7 +112,7 @@ class PageViewController: DataViewController {
                 }
             }
             
-            func continuousGroupLeadingBoundary(for section: PageModel.Section) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
+            func orthogonalScrollingBehavior(for section: PageModel.Section) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
                 switch section.properties.layout {
                 case .hero:
                 #if os(tvOS)
@@ -149,7 +149,7 @@ class PageViewController: DataViewController {
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
             let layoutSection = NSCollectionLayoutSection(group: group)
-            layoutSection.orthogonalScrollingBehavior = continuousGroupLeadingBoundary(for: section)
+            layoutSection.orthogonalScrollingBehavior = orthogonalScrollingBehavior(for: section)
             layoutSection.interGroupSpacing = LayoutStandardMargin
             layoutSection.contentInsets = contentInsets(for: section)
             layoutSection.boundarySupplementaryItems = supplementaryItems(for: section, index: sectionIndex, pageTitle: self.model.title)
