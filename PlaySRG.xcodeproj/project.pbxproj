@@ -1025,11 +1025,6 @@
 		6F566E8924EEC2AD0024B4CA /* HomeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8624EEC2AD0024B4CA /* HomeSection.m */; };
 		6F566E8A24EEC2AD0024B4CA /* HomeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8624EEC2AD0024B4CA /* HomeSection.m */; };
 		6F566E8B24EEC2AD0024B4CA /* HomeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8624EEC2AD0024B4CA /* HomeSection.m */; };
-		6F566E8E24EEC37F0024B4CA /* TopicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8D24EEC37F0024B4CA /* TopicSection.m */; };
-		6F566E8F24EEC37F0024B4CA /* TopicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8D24EEC37F0024B4CA /* TopicSection.m */; };
-		6F566E9024EEC37F0024B4CA /* TopicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8D24EEC37F0024B4CA /* TopicSection.m */; };
-		6F566E9124EEC37F0024B4CA /* TopicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8D24EEC37F0024B4CA /* TopicSection.m */; };
-		6F566E9224EEC37F0024B4CA /* TopicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8D24EEC37F0024B4CA /* TopicSection.m */; };
 		6F566E9524EEC40A0024B4CA /* ApplicationSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E9424EEC40A0024B4CA /* ApplicationSection.m */; };
 		6F566E9624EEC40A0024B4CA /* ApplicationSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E9424EEC40A0024B4CA /* ApplicationSection.m */; };
 		6F566E9724EEC40A0024B4CA /* ApplicationSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E9424EEC40A0024B4CA /* ApplicationSection.m */; };
@@ -1404,7 +1399,6 @@
 		6FC413D024EEEDC900FDF806 /* ApplicationSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E9424EEC40A0024B4CA /* ApplicationSection.m */; };
 		6FC413D124EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E7F24EE95CB0024B4CA /* PlayFirebaseConfiguration.m */; };
 		6FC413D224EEEDC900FDF806 /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
-		6FC413D324EEEDC900FDF806 /* TopicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8D24EEC37F0024B4CA /* TopicSection.m */; };
 		6FC413D424EEEDC900FDF806 /* HomeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8624EEC2AD0024B4CA /* HomeSection.m */; };
 		6FC413D524EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
 		6FC413D624EEEDC900FDF806 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6861E2460670600B8018A /* Channel.m */; };
@@ -1412,7 +1406,6 @@
 		6FC413D824EEEDC900FDF806 /* ApplicationSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E9424EEC40A0024B4CA /* ApplicationSection.m */; };
 		6FC413D924EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E7F24EE95CB0024B4CA /* PlayFirebaseConfiguration.m */; };
 		6FC413DA24EEEDC900FDF806 /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
-		6FC413DB24EEEDC900FDF806 /* TopicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8D24EEC37F0024B4CA /* TopicSection.m */; };
 		6FC413DC24EEEDC900FDF806 /* HomeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8624EEC2AD0024B4CA /* HomeSection.m */; };
 		6FC413DD24EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
 		6FC413DE24EEEDC900FDF806 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6861E2460670600B8018A /* Channel.m */; };
@@ -1420,7 +1413,6 @@
 		6FC413E024EEEDCA00FDF806 /* ApplicationSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E9424EEC40A0024B4CA /* ApplicationSection.m */; };
 		6FC413E124EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E7F24EE95CB0024B4CA /* PlayFirebaseConfiguration.m */; };
 		6FC413E224EEEDCA00FDF806 /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
-		6FC413E324EEEDCA00FDF806 /* TopicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8D24EEC37F0024B4CA /* TopicSection.m */; };
 		6FC413E424EEEDCA00FDF806 /* HomeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8624EEC2AD0024B4CA /* HomeSection.m */; };
 		6FC413E524EEEDCA00FDF806 /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
 		6FC413E624EEEDCA00FDF806 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6861E2460670600B8018A /* Channel.m */; };
@@ -1428,7 +1420,6 @@
 		6FC413E824EEEDCA00FDF806 /* ApplicationSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E9424EEC40A0024B4CA /* ApplicationSection.m */; };
 		6FC413E924EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E7F24EE95CB0024B4CA /* PlayFirebaseConfiguration.m */; };
 		6FC413EA24EEEDCA00FDF806 /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
-		6FC413EB24EEEDCA00FDF806 /* TopicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8D24EEC37F0024B4CA /* TopicSection.m */; };
 		6FC413EC24EEEDCA00FDF806 /* HomeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8624EEC2AD0024B4CA /* HomeSection.m */; };
 		6FC413ED24EEEDCA00FDF806 /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
 		6FC413EE24EEEDCA00FDF806 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6861E2460670600B8018A /* Channel.m */; };
@@ -1436,7 +1427,6 @@
 		6FC413F024EEEDCB00FDF806 /* ApplicationSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E9424EEC40A0024B4CA /* ApplicationSection.m */; };
 		6FC413F124EEEDCB00FDF806 /* PlayFirebaseConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E7F24EE95CB0024B4CA /* PlayFirebaseConfiguration.m */; };
 		6FC413F224EEEDCB00FDF806 /* RadioChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0801E07A1D4A4A810008021E /* RadioChannel.m */; };
-		6FC413F324EEEDCB00FDF806 /* TopicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8D24EEC37F0024B4CA /* TopicSection.m */; };
 		6FC413F424EEEDCB00FDF806 /* HomeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F566E8624EEC2AD0024B4CA /* HomeSection.m */; };
 		6FC413F524EEEDCB00FDF806 /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
 		6FC413F624EEEDCB00FDF806 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6861E2460670600B8018A /* Channel.m */; };
@@ -2424,8 +2414,6 @@
 		6F566E7F24EE95CB0024B4CA /* PlayFirebaseConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayFirebaseConfiguration.m; sourceTree = "<group>"; };
 		6F566E8524EEC2AD0024B4CA /* HomeSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeSection.h; sourceTree = "<group>"; };
 		6F566E8624EEC2AD0024B4CA /* HomeSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeSection.m; sourceTree = "<group>"; };
-		6F566E8C24EEC37F0024B4CA /* TopicSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopicSection.h; sourceTree = "<group>"; };
-		6F566E8D24EEC37F0024B4CA /* TopicSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopicSection.m; sourceTree = "<group>"; };
 		6F566E9324EEC40A0024B4CA /* ApplicationSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationSection.h; sourceTree = "<group>"; };
 		6F566E9424EEC40A0024B4CA /* ApplicationSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationSection.m; sourceTree = "<group>"; };
 		6F56F9F2247C407000B2387B /* ChannelServiceSetup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChannelServiceSetup.h; sourceTree = "<group>"; };
@@ -3243,8 +3231,6 @@
 				0801E0791D4A4A810008021E /* RadioChannel.h */,
 				0801E07A1D4A4A810008021E /* RadioChannel.m */,
 				085C0DCD261326C8008E07C8 /* RadioChannel.swift */,
-				6F566E8C24EEC37F0024B4CA /* TopicSection.h */,
-				6F566E8D24EEC37F0024B4CA /* TopicSection.m */,
 				088899442077627900242654 /* TVChannel.h */,
 				088899432077627900242654 /* TVChannel.m */,
 			);
@@ -7357,7 +7343,6 @@
 				6FCE7A38260359220037A861 /* Extensions.swift in Sources */,
 				08AF9480217D27E40028B082 /* ActivityItemSource.m in Sources */,
 				6F4843CC23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
-				6F566E8E24EEC37F0024B4CA /* TopicSection.m in Sources */,
 				6F12DB4621A3EFBF0054879D /* HistoryTableViewCell.m in Sources */,
 				6FA9ECBA20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */,
 				6F3B0221245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
@@ -7585,7 +7570,6 @@
 				6FF7BB9D22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F488ACC22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F4760001EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
-				6F566E8F24EEC37F0024B4CA /* TopicSection.m in Sources */,
 				6F9FFB4A261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC1260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8422D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
@@ -7770,7 +7754,6 @@
 				6FF7BB9E22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F488ACD22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F4760011EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
-				6F566E9024EEC37F0024B4CA /* TopicSection.m in Sources */,
 				6F9FFB4B261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC2260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8522D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
@@ -7955,7 +7938,6 @@
 				6FF7BB9F22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F488ACE22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F4760021EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
-				6F566E9124EEC37F0024B4CA /* TopicSection.m in Sources */,
 				6F9FFB4C261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC3260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8622D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
@@ -8140,7 +8122,6 @@
 				6FF7BBA022A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F488ACF22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F4760031EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
-				6F566E9224EEC37F0024B4CA /* TopicSection.m in Sources */,
 				6F9FFB4D261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC4260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8722D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
@@ -8320,7 +8301,6 @@
 				6F426B142567FC6F00DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAA256E419F00E42E31 /* History.m in Sources */,
 				6FA14535254729DA006E8D3B /* FocusableRegion.swift in Sources */,
-				6FC413D324EEEDC900FDF806 /* TopicSection.m in Sources */,
 				6FC413F724EF0DEA00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7AF2567ED2A00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CC257A368B00223F22 /* ActivityIndicator.swift in Sources */,
@@ -8420,7 +8400,6 @@
 				6F426B292567FC7000DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAB256E419F00E42E31 /* History.m in Sources */,
 				6FA14536254729DA006E8D3B /* FocusableRegion.swift in Sources */,
-				6FC413DB24EEEDC900FDF806 /* TopicSection.m in Sources */,
 				6FC413F824EF0DEB00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7C42567ED2B00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CD257A368B00223F22 /* ActivityIndicator.swift in Sources */,
@@ -8520,7 +8499,6 @@
 				6F426B2A2567FC7100DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAC256E41A000E42E31 /* History.m in Sources */,
 				6FA14537254729DA006E8D3B /* FocusableRegion.swift in Sources */,
-				6FC413E324EEEDCA00FDF806 /* TopicSection.m in Sources */,
 				6FC413F924EF0DEC00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7C52567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CE257A368B00223F22 /* ActivityIndicator.swift in Sources */,
@@ -8620,7 +8598,6 @@
 				6F426B2B2567FC7100DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAD256E41A000E42E31 /* History.m in Sources */,
 				6FA14538254729DA006E8D3B /* FocusableRegion.swift in Sources */,
-				6FC413EB24EEEDCA00FDF806 /* TopicSection.m in Sources */,
 				6FC413FA24EF0DED00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7DA2567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CF257A368B00223F22 /* ActivityIndicator.swift in Sources */,
@@ -8720,7 +8697,6 @@
 				6F426B2C2567FC7200DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F5A7914256ED7E000E884F2 /* History.m in Sources */,
 				6FA14539254729DA006E8D3B /* FocusableRegion.swift in Sources */,
-				6FC413F324EEEDCB00FDF806 /* TopicSection.m in Sources */,
 				6FC413FB24EF0DEE00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7DB2567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0D0257A368B00223F22 /* ActivityIndicator.swift in Sources */,

@@ -57,40 +57,6 @@ The keys common to both TV and radio channels JSON dictionaries are:
    * `collapsed`: Collapsed when added to the view.
    * `expanded`: Expanded when added to the view.
 
-## Video homepage
-
-`videoHomeSections` (optional, string, multiple): The sections to be displayed on the videos homepage, in the order they must appear.
-
-### Home sections
-
-* `tvEvents`: Event modules (expand into a row per event).
-* `tvFavoriteShows`: TV shows added to the favorites.
-* `tvFavoriteLatestEpisodes`: The latest episodes from TV shows added to the favorites.
-* `tvLatest`: The latest medias.
-* `tvWebFirst`: Medias available first on Play.
-* `tvMostPopular`: The most popular videos.
-* `tvShowsAccess`: A-Z and By date access buttons.
-* `tvSoonExpiring`: Soon expiring videos.
-* `tvTopics`: Topics (expand into a row per topic).
-* `tvTopicsAccess`: Topic access.
-* `tvTrending`: Trending medias and editorial picks. See `tvTrendingEpisodesOnly`, `tvTrendingEditorialLimit` and `tvTrendingPrefersHeroStage` options.
-* `tvResumePlayback`: The videos from history that can be resumed.
-* `tvWatchLater`: The latest videos added to the watch later list.
-
-### Topic configuration
-
-* `topicSections` (optional, string, multiple): The sections to be displayed when opening a topic. If none is provided, latest medias are displayed. Available values are:
-   * `latest`: The latest medias.
-   * `mostPopular`: The most popular medias.
-* `topicSectionsWithSubtopics` (optional, string, multiple): The sections to be displayed when opening a topic with subtopics. If none is provided, only subtopics are displayed. Available values are the same as `topicSections`.
-
-### User interface options
-
-* `tvFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured TV media lists will not display any title header.
-* `tvTrendingEpisodesOnly` (optional, boolean): If set to `true`, `tvTrending` only returns episodes.
-* `tvTrendingEditorialLimit` (optional, number): The maximum number of editorial recommendations returned by `tvTrending`. If not set, all are returned.
-* `tvTrendingPrefersHeroStage` (optional, boolean): If set to `true`, `tvTrending` returns hero stage content (`tvTrendingEpisodesOnly` and `tvTrendingEditorialLimit` are ignored).
-
 ## Audio homepage
 
 `audioHomeSections` (optional, string, multiple): The sections to be displayed on the audio homepage of a radio channel, in the order they must appear.

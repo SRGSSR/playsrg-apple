@@ -145,17 +145,3 @@ AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
     NSCAssert(title != nil, @"Section with missing page title. Please fix");
     return title ?: @"";
 }
-
-AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection)
-{
-    static NSDictionary<NSNumber *, NSString *> *s_titles;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_titles = @{ @(TopicSectionLatest) : AnalyticsPageTitleLatest,
-                      @(TopicSectionMostPopular) : AnalyticsPageTitleMostPopular };
-    });
-    
-    NSString *title = s_titles[@(topicSection)];
-    NSCAssert(title != nil, @"Section with missing page title. Please fix");
-    return title ?: @"";
-}

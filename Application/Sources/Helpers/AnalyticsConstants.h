@@ -5,7 +5,6 @@
 //
 
 #import "HomeSection.h"
-#import "TopicSection.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -266,6 +265,5 @@ OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContentAtTime;
 OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingCurrentClip;
 
 OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection);
-OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection);
 
 NS_ASSUME_NONNULL_END

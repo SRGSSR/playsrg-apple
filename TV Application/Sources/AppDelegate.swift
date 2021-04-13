@@ -67,7 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewControllers.append(liveViewController)
         }
         
-        if configuration.videoHomeSections.contains(NSNumber(value: HomeSection.tvShowsAccess.rawValue)) {
+        // TODO: Use new `hasShows` parameter replacing `areMoreEpisodesHidden`, see https://jira.srg.beecollaboration.com/browse/PLAYRTS-2803
+        if !configuration.areMoreEpisodesHidden {
             let showsViewController = UIHostingController(rootView: ShowsView())
             showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
             showsViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.showsTabBarItem.rawValue
