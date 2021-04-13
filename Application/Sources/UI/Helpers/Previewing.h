@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol Previewing <NSObject>
 
 /**
- *  The preview object attached to the view.
+ *  The preview object attached to the view, if any.
  */
-@property (nonatomic, readonly) id previewObject;
+@property (nonatomic, readonly, nullable) id previewObject;
 
 @end
 
