@@ -15,10 +15,10 @@
 #import "Download.h"
 #import "Favorites.h"
 #import "GoogleCast.h"
-#import "HomeTopicViewController.h"
 #import "MediaPlayerViewController.h"
 #import "MediaPreviewViewController.h"
 #import "ModuleViewController.h"
+#import "Play-Swift-Bridge.h"
 #import "PlayErrors.h"
 #import "Previewing.h"
 #import "ShowViewController.h"
@@ -379,7 +379,7 @@ static void commonInit(BaseViewController *self);
         }
         else if ([viewController isKindOfClass:ModuleViewController.class]
                     || [viewController isKindOfClass:ShowViewController.class]
-                    || [viewController isKindOfClass:HomeTopicViewController.class]) {
+                    || [viewController isKindOfClass:PageViewController.class]) {
             [self.navigationController pushViewController:viewController animated:YES];
         }
     }];

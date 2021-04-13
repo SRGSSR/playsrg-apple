@@ -46,6 +46,10 @@ class PageViewController: DataViewController {
         return PageViewController(id: .live)
     }
     
+    @objc static func topicViewController(for topic: SRGTopic) -> UIViewController {
+        return PageViewController(id: .topic(topic: topic))
+    }
+    
     private static func snapshot(from state: PageModel.State) -> NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item>()
         if case let .loaded(rows: rows) = state {
@@ -482,7 +486,8 @@ extension PageViewController: UICollectionViewDelegate {
         case let .topic(topic, section: _):
             if let navigationController = navigationController {
                 let pageViewController = PageViewController(id: .topic(topic: topic))
-                // TODO: Should the title be managed based on the PageViewController id?
+                // TODO: Should the title be managed based on the PageViewController id? Depending on the answer,
+                //       check -[PlayAppDelegate openTopicURN:]
                 pageViewController.title = topic.title
                 navigationController.pushViewController(pageViewController, animated: true)
             }

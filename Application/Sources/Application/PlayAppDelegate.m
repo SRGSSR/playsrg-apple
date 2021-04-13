@@ -16,11 +16,11 @@
 #import "Favorites.h"
 #import "GoogleCast.h"
 #import "History.h"
-#import "HomeTopicViewController.h"
 #import "MediaPlayerViewController.h"
 #import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
+#import "Play-Swift-Bridge.h"
 #import "PlayApplication.h"
 #import "PlayErrors.h"
 #import "PlayFirebaseConfiguration.h"
@@ -725,8 +725,8 @@ static void *s_kvoContext = &s_kvoContext;
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGTopic.new, URN), topicURN];
         SRGTopic *topic = [topics filteredArrayUsingPredicate:predicate].firstObject;
         if (topic) {
-            HomeTopicViewController *homeTopicViewController = [[HomeTopicViewController alloc] initWithTopic:topic];
-            [self.rootTabBarController pushViewController:homeTopicViewController animated:YES];
+            UIViewController *topicViewController = [PageViewController topicViewControllerFor:topic];
+            [self.rootTabBarController pushViewController:topicViewController animated:YES];
         }
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
