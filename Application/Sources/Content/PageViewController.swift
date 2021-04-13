@@ -22,6 +22,9 @@ class PageViewController: DataViewController {
     @available (tvOS, unavailable)
     private weak var refreshControl: UIRefreshControl!
     
+    // Deal with intermediate collection view asynchronous reload state, which is not part of the model but an
+    // an implementation detail. This helps `DZNEmptyDataSet` for which the collection might be empty while it
+    // is in fact rendering data.
     private var reloadCount = 0
     private var refreshTriggered = false
     
@@ -427,8 +430,8 @@ class PageViewController: DataViewController {
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
-                self.collectionView.reloadEmptyDataSet()
                 self.reloadCount -= 1
+                self.collectionView.reloadEmptyDataSet()
                 
                 #if os(iOS)
                 // Avoid stopping scrolling
@@ -508,16 +511,24 @@ extension PageViewController: UIScrollViewDelegate {
 
 extension PageViewController: DZNEmptyDataSetSource {
     func customView(forEmptyDataSet scrollView: UIScrollView) -> UIView? {
-        if reloadCount == 0 {
+        // When the collection view is asynchronously refreshed (short and efficient, but still not instantaneous
+        // and thus noticeable), display nothing if we already have content loaded.
+        if reloadCount != 0 {
+            if case let .loaded(rows: rows) = model.state, rows.count != 0 {
+                return UIView()
+            }
+            else {
+                return loadingImageView
+            }
+        }
+        // No async collection refresh is being made. Relying on the view model suffices.
+        else {
             if case .loading = model.state {
                 return loadingImageView
             }
             else {
                 return nil
             }
-        }
-        else {
-            return loadingImageView
         }
     }
     
