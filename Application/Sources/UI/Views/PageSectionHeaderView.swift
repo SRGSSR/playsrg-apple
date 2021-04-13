@@ -10,6 +10,21 @@ struct PageSectionHeaderView: View {
     let section: PageModel.Section
     let pageTitle: String?
     
+    @Environment(\.accessibilityEnabled) private var accessibilityEnabled
+        
+    private var accessibilityLabel: String {
+        if let summary = section.properties.summary {
+            return section.properties.accessibilityTitle + ", " + summary
+        }
+        else {
+            return section.properties.accessibilityTitle
+        }        
+    }
+    
+    private var accessibilityHint: String {
+        return section.properties.canOpenDetailPage ? PlaySRGAccessibilityLocalizedString("Shows all contents.", "Homepage header action hint") : ""
+    }
+    
     var body: some View {
         if let pageTitle = pageTitle {
             Text(pageTitle)
@@ -18,7 +33,7 @@ struct PageSectionHeaderView: View {
                 .opacity(0.8)
         }
         VStack(alignment: .leading) {
-            if let title = section.properties.title {
+            if let title = accessibilityEnabled ? section.properties.accessibilityTitle : section.properties.title {
                 Text(title)
                     .srgFont(.H2)
                     .lineLimit(1)
@@ -32,5 +47,9 @@ struct PageSectionHeaderView: View {
         }
         .opacity(0.8)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+        .accessibilityElement()
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityHint(accessibilityHint)
+        .accessibility(addTraits: .isHeader)
     }
 }

@@ -14,9 +14,11 @@ fileprivate let defaultNumberOfPlaceholders = 10
 protocol PageSectionProperties {
     var title: String? { get }
     var summary: String? { get }
+    var accessibilityTitle: String { get }
     var presentationType: SRGContentPresentationType { get }
     var layout: PageModel.SectionLayout { get }
     var placeholderItems: [PageModel.Item] { get }
+    var canOpenDetailPage: Bool { get }
     
     func publisher(for id: PageModel.Id) -> AnyPublisher<[PageModel.Item], Error>?
 }
@@ -134,6 +136,42 @@ extension SRGContentSection: PageSectionProperties {
         return presentation.summary
     }
     
+    var accessibilityTitle: String {
+        if let title = title, !title.isEmpty {
+            return title
+        }
+        
+        // Default accessiblity titles
+        switch presentation.type {
+        case .favoriteShows:
+            return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
+        case .personalizedProgram:
+            return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
+        case .livestreams:
+            return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
+        case .resumePlayback:
+            return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
+        case .watchLater:
+            return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
+        case .showAccess:
+            return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
+        case .topicSelector:
+            return NSLocalizedString("Topics", comment: "Title label used to present TV topics")
+        case .swimlane:
+            return PlaySRGAccessibilityLocalizedString("Content in swimlane", "Title label used to present content in swimlane with to editorial title")
+        case .hero:
+            return PlaySRGAccessibilityLocalizedString("Content in featured swimlane", "Title label used to present content in featured swimlane with to editorial title")
+        case .grid:
+            return PlaySRGAccessibilityLocalizedString("Content in grid", "Title label used to present content in grid with to editorial title")
+        case .mediaHighlight:
+            return PlaySRGAccessibilityLocalizedString("A highlighted content", "Title label used to present a highlighted content with to editorial title")
+        case .showHighlight:
+            return PlaySRGAccessibilityLocalizedString("A highlighted show", "Title label used to present a highlighted show with to editorial title")
+        case .none:
+            return PlaySRGAccessibilityLocalizedString("Some content", "Title label used to present some content with to editorial title")
+        }
+    }
+    
     var presentationType: SRGContentPresentationType {
         return presentation.type
     }
@@ -175,6 +213,10 @@ extension SRGContentSection: PageSectionProperties {
         case .none, .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .showAccess:
             return []
         }
+    }
+    
+    var canOpenDetailPage: Bool {
+        return presentation.hasDetailPage
     }
     
     func publisher(for id: PageModel.Id) -> AnyPublisher<[PageModel.Item], Error>? {
@@ -300,6 +342,15 @@ extension ConfiguredSection: PageSectionProperties {
         return nil
     }
     
+    var accessibilityTitle: String {
+        if let title = title, !title.isEmpty {
+            return title
+        }
+        else {
+            return PlaySRGAccessibilityLocalizedString("Some content", "Title label used to present some content with to editorial title")
+        }
+    }
+    
     var presentationType: SRGContentPresentationType {
         return self.contentPresentationType
     }
@@ -329,6 +380,11 @@ extension ConfiguredSection: PageSectionProperties {
         case .radioFavoriteShows, .radioShowAccess:
             return []
         }
+    }
+    
+    var canOpenDetailPage: Bool {
+        // TODO: Probably a grid media and show layouts
+        return (layout == .medias || layout == .shows) && presentationType != .grid
     }
     
     func publisher(for id: PageModel.Id) -> AnyPublisher<[PageModel.Item], Error>? {

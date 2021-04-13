@@ -12,8 +12,9 @@ import UIKit
 
 class PageViewController: DataViewController {
     private let model: PageModel
-    private var cancellables = Set<AnyCancellable>()
-    
+    private var refreshCancellables = Set<AnyCancellable>()
+    private var mainCancellables = Set<AnyCancellable>()
+
     private var dataSource: UICollectionViewDiffableDataSource<PageModel.Section, PageModel.Item>!
     
     private weak var collectionView: UICollectionView!
@@ -64,12 +65,14 @@ class PageViewController: DataViewController {
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
             func sectionHeaderHeight(for section: PageModel.Section, index: Int, pageTitle: String?) -> CGFloat? {
-                if index == 0, section.properties.title == nil, pageTitle == nil {
+                let title = UIAccessibility.isVoiceOverRunning ? section.properties.accessibilityTitle : section.properties.title
+                
+                if index == 0, title == nil, pageTitle == nil {
                     return nil
                 }
                 
                 var height: CGFloat = LayoutStandardMargin
-                if let title = section.properties.title, !title.isEmpty {
+                if let title = title, !title.isEmpty {
                     height += LayoutCollectionSectionHeaderTitleHeight()
                 }
                 if let summary = section.properties.summary, !summary.isEmpty {
@@ -411,7 +414,13 @@ class PageViewController: DataViewController {
             .sink { [weak self] state in
                 self?.reloadData(with: state)
             }
-            .store(in: &cancellables)
+            .store(in: &refreshCancellables)
+        
+        NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification, object: nil)
+            .sink { [weak self] _ in
+                self?.refresh()
+            }
+            .store(in: &mainCancellables)
     }
     
     override func viewWillLayoutSubviews() {
