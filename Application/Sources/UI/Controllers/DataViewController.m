@@ -6,9 +6,8 @@
 
 #import "DataViewController.h"
 
+#import "Reachability.h"
 #import "UIViewController+PlaySRG.h"
-
-@import FXReachability;
 
 @implementation DataViewController
 
@@ -51,7 +50,7 @@
 
 - (void)dataViewController_reachabilityDidChange:(NSNotification *)notification
 {
-    if ([FXReachability sharedInstance].reachable) {
+    if (ReachabilityBecameReachable(notification)) {
         if (self.play_viewVisible) {
             [self refresh];
         }

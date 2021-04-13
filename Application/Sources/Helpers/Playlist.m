@@ -8,6 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "History.h"
+#import "Reachability.h"
 #import "Recommendation.h"
 
 // TODO: For the moment settings on tvOS are limited so ApplicationSettings has not been split / refactored
@@ -18,7 +19,6 @@
 #import "ApplicationSettings.h"
 #endif
 
-@import FXReachability;
 @import libextobjc;
 @import SRGDataProviderNetwork;
 
@@ -178,7 +178,7 @@ static Playlist *s_playlist;
 
 - (void)reachabilityDidChange:(NSNotification *)notification
 {
-    if ([FXReachability sharedInstance].reachable) {
+    if (ReachabilityBecameReachable(notification)) {
         [self load];
     }
 }

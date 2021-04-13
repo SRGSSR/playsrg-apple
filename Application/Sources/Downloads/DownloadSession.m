@@ -8,8 +8,8 @@
 
 #import "Download+Private.h"
 #import "PlayLogger.h"
+#import "Reachability.h"
 
-@import FXReachability;
 @import libextobjc;
 @import SRGLogger;
 
@@ -316,7 +316,7 @@ didFinishDownloadingToURL:(NSURL *)location
         [download setNeedsStateUpdate];
     }];
     
-    if ([FXReachability isReachable]) {
+    if (ReachabilityBecameReachable(notification)) {
         [self restoreSessionState];
     }
 }

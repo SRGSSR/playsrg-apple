@@ -598,6 +598,16 @@
 		6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */; };
 		6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */; };
 		6F06E0A81DB7791300220FC6 /* ApplicationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */; };
+		6F0850F426256A7700B4E410 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0850F326256A7700B4E410 /* Reachability.m */; };
+		6F0850F526256A7700B4E410 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0850F326256A7700B4E410 /* Reachability.m */; };
+		6F0850F626256A7700B4E410 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0850F326256A7700B4E410 /* Reachability.m */; };
+		6F0850F726256A7700B4E410 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0850F326256A7700B4E410 /* Reachability.m */; };
+		6F0850F826256A7700B4E410 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0850F326256A7700B4E410 /* Reachability.m */; };
+		6F0850F926256A7700B4E410 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0850F326256A7700B4E410 /* Reachability.m */; };
+		6F0850FA26256A7700B4E410 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0850F326256A7700B4E410 /* Reachability.m */; };
+		6F0850FB26256A7700B4E410 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0850F326256A7700B4E410 /* Reachability.m */; };
+		6F0850FC26256A7700B4E410 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0850F326256A7700B4E410 /* Reachability.m */; };
+		6F0850FD26256A7700B4E410 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0850F326256A7700B4E410 /* Reachability.m */; };
 		6F0A416F1F6FAB6E000533E7 /* Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A416E1F6FAB6E000533E7 /* Calendar.m */; };
 		6F0A41701F6FAB6E000533E7 /* Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A416E1F6FAB6E000533E7 /* Calendar.m */; };
 		6F0A41711F6FAB6E000533E7 /* Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A416E1F6FAB6E000533E7 /* Calendar.m */; };
@@ -2393,6 +2403,8 @@
 		6F0506E6245468EE0053253E /* SplitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
 		6F06E0A21DB7791300220FC6 /* ApplicationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationSettings.h; sourceTree = "<group>"; };
 		6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationSettings.m; sourceTree = "<group>"; };
+		6F0850F226256A7700B4E410 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6F0850F326256A7700B4E410 /* Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		6F0A416D1F6FAB6E000533E7 /* Calendar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Calendar.h; sourceTree = "<group>"; };
 		6F0A416E1F6FAB6E000533E7 /* Calendar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Calendar.m; sourceTree = "<group>"; };
 		6F0A7EFE20AC0B9A00DF6723 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -3244,6 +3256,8 @@
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
+				6F0850F226256A7700B4E410 /* Reachability.h */,
+				6F0850F326256A7700B4E410 /* Reachability.m */,
 				6F00875B219AA888004BD6FF /* StoreReview.h */,
 				6F00875C219AA888004BD6FF /* StoreReview.m */,
 			);
@@ -7560,6 +7574,7 @@
 				088899452077627900242654 /* TVChannel.m in Sources */,
 				6F3E0A0123D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
 				0827DA251F0D437400A31A42 /* SRGMedia+PlaySRG.m in Sources */,
+				6F0850F426256A7700B4E410 /* Reachability.m in Sources */,
 				6FB03F5C25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF7BB9C22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F54D3FE26051035008B46FF /* MediaDescription.swift in Sources */,
@@ -7837,6 +7852,7 @@
 				6F4760301EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6F4760811EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4B81EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
+				6F0850F526256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2744203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F939F702090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				08602BF82213786B0081D166 /* HomeShowsAccessTableViewCell.m in Sources */,
@@ -8038,6 +8054,7 @@
 				6F4760311EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6F4760881EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4B91EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
+				6F0850F626256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2745203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F939F712090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				08602BF92213786B0081D166 /* HomeShowsAccessTableViewCell.m in Sources */,
@@ -8239,6 +8256,7 @@
 				6F4760321EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6F47608F1EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4BA1EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
+				6F0850F726256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2746203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F939F722090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				08602BFA2213786B0081D166 /* HomeShowsAccessTableViewCell.m in Sources */,
@@ -8440,6 +8458,7 @@
 				6F4760331EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6F4760961EB37DF2003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4BB1EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
+				6F0850F826256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2747203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F939F732090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				08602BFB2213786B0081D166 /* HomeShowsAccessTableViewCell.m in Sources */,
@@ -8645,6 +8664,7 @@
 				6F83873025E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5925481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7822567ED2000AC8286 /* ForegroundTimer.m in Sources */,
+				6F0850F926256A7700B4E410 /* Reachability.m in Sources */,
 				0809813F2622195900AA586B /* Badges.swift in Sources */,
 				6FDB2AC524E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2DE261C9D3C003FFDCF /* PageViewController.swift in Sources */,
@@ -8744,6 +8764,7 @@
 				6F83873125E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5A25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7972567ED2000AC8286 /* ForegroundTimer.m in Sources */,
+				6F0850FA26256A7700B4E410 /* Reachability.m in Sources */,
 				080981402622195900AA586B /* Badges.swift in Sources */,
 				6FDB2AC624E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2DF261C9D3D003FFDCF /* PageViewController.swift in Sources */,
@@ -8843,6 +8864,7 @@
 				6F83873225E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5B25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7AC2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
+				6F0850FB26256A7700B4E410 /* Reachability.m in Sources */,
 				080981412622195900AA586B /* Badges.swift in Sources */,
 				6FDB2AC724E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2E0261C9D3D003FFDCF /* PageViewController.swift in Sources */,
@@ -8942,6 +8964,7 @@
 				6F83873325E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5C25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7AD2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
+				6F0850FC26256A7700B4E410 /* Reachability.m in Sources */,
 				080981422622195900AA586B /* Badges.swift in Sources */,
 				6FDB2AC824E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2FA261C9D3E003FFDCF /* PageViewController.swift in Sources */,
@@ -9041,6 +9064,7 @@
 				6F83873425E507DC00BDCB25 /* ProfileModel.swift in Sources */,
 				08742C5D25481CC8006E2DCE /* ShowDetailView.swift in Sources */,
 				6F85F7AE2567ED2300AC8286 /* ForegroundTimer.m in Sources */,
+				6F0850FD26256A7700B4E410 /* Reachability.m in Sources */,
 				080981432622195900AA586B /* Badges.swift in Sources */,
 				6FDB2AC924E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2FB261C9D3E003FFDCF /* PageViewController.swift in Sources */,

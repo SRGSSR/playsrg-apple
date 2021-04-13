@@ -8,8 +8,8 @@
 
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayLogger.h"
+#import "Reachability.h"
 
-@import FXReachability;
 @import JavaScriptCore;
 @import SRGDiagnostics;
 @import SRGNetwork;
@@ -150,7 +150,7 @@ DeeplinkAction const DeeplinkActionLink = @"link";
 
 - (void)reachabilityDidChange:(NSNotification *)notification
 {
-    if ([FXReachability sharedInstance].reachable) {
+    if (ReachabilityBecameReachable(notification)) {
         [self updateDeepLinkScript];
     }
 }

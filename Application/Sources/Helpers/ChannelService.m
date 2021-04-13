@@ -8,9 +8,9 @@
 
 #import "ChannelServiceSetup.h"
 #import "ForegroundTimer.h"
+#import "Reachability.h"
 #import "SRGProgram+PlaySRG.h"
 
-@import FXReachability;
 @import libextobjc;
 @import SRGDataProviderNetwork;
 
@@ -162,7 +162,7 @@
 
 - (void)reachabilityDidChange:(NSNotification *)notification
 {
-    if ([FXReachability sharedInstance].reachable) {
+    if (ReachabilityBecameReachable(notification)) {
         [self updateChannels];
     }
 }

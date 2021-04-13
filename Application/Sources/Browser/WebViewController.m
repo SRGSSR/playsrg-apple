@@ -6,11 +6,11 @@
 
 #import "WebViewController.h"
 
+#import "Reachability.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-@import FXReachability;
 @import libextobjc;
 @import SRGNetwork;
 
@@ -245,7 +245,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)webViewController_reachabilityDidChange:(NSNotification *)notification
 {
-    if ([FXReachability sharedInstance].reachable) {
+    if (ReachabilityBecameReachable(notification)) {
         if (self.play_viewVisible) {
             [self.webView loadRequest:self.request];
         }

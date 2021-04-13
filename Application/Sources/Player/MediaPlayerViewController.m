@@ -34,6 +34,7 @@
 #import "Playlist.h"
 #import "ProgramHeaderView.h"
 #import "ProgramTableViewCell.h"
+#import "Reachability.h"
 #import "RelatedContentView.h"
 #import "ShowViewController.h"
 #import "SRGChannel+PlaySRG.h"
@@ -57,7 +58,6 @@
 #import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
-@import FXReachability;
 @import GoogleCast;
 @import Intents;
 @import libextobjc;
@@ -2441,7 +2441,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)reachabilityDidChange:(NSNotification *)notification
 {
-    if ([FXReachability sharedInstance].reachable) {
+    if (ReachabilityBecameReachable(notification)) {
         [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
         
         if (self.livestreamMedias.count == 0) {

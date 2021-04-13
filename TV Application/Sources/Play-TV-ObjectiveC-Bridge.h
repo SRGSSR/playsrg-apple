@@ -24,6 +24,7 @@
 #import "PlayDurationFormatter.h"
 #import "PlayFirebaseConfiguration.h"
 #import "Playlist.h"
+#import "Reachability.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
