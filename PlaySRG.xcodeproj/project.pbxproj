@@ -13815,8 +13815,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.4;
+				branch = "feature/font-overhaul";
+				kind = branch;
 			};
 		};
 		6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */ = {

@@ -222,7 +222,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": "feature/font-overhaul",
-          "revision": "0c6844e43030af7abf9312842fbc7d781fe4aa43",
+          "revision": "19b3e498b0e97bd2b70ea9dc0c856d5c2a64face",
           "version": null
         }
       },
@@ -267,7 +267,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
           "branch": "feature/font-overhaul",
-          "revision": "65f0686f9afebf91a1ee9135dae3688bab7cb274",
+          "revision": "e612e611411fcc9fb88dec8d56acf803ae51696a",
           "version": null
         }
       },
@@ -276,7 +276,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "feature/font-overhaul",
-          "revision": "3ebcaa140c16c7a9e6ee3e59988b3eab244bbe03",
+          "revision": "294717caf9db0aa47c01aee91e6598011b1a0347",
           "version": null
         }
       },
@@ -312,7 +312,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
         "state": {
           "branch": "feature/font-overhaul",
-          "revision": "24ce5cc1014cd571fcab4a60a331a833f90fdc9b",
+          "revision": "bd74d52d7381e7bdcdd92eaf6afc1981160708e3",
           "version": null
         }
       },
