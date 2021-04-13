@@ -77,10 +77,14 @@ class PageModel: Identifiable, ObservableObject {
     func refresh() {
         refreshCancellables = []
         
-        Self.rowsPublisher(id: id, existingRows: rows)
-            .map { State.loaded(rows: $0) }
-            .catch { error in
-                return Just(State.failed(error: error))
+        Just((id: self.id, rows: rows))
+            .throttle(for: 30, scheduler: RunLoop.main, latest: true)
+            .flatMap { context in
+                return Self.rowsPublisher(id: context.id, existingRows: context.rows)
+                    .map { State.loaded(rows: $0) }
+                    .catch { error in
+                        return Just(State.failed(error: error))
+                    }
             }
             .receive(on: DispatchQueue.main)
             .weakAssign(to: \.internalState, on: self)
