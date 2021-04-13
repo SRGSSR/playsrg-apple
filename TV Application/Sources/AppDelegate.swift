@@ -52,8 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = ApplicationConfiguration.shared
         
         #if DEBUG
-        if !configuration.radioChannels.isEmpty {
-            let audiosViewController = UIHostingController(rootView: AudiosView())
+        if let firstChannel = configuration.radioChannels.first {
+            let audiosViewController = PageViewController(id: .audio(channel: firstChannel))
             audiosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
             audiosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.rawValue
             viewControllers.append(audiosViewController)
