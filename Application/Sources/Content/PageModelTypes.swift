@@ -4,8 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-import Combine
-import SRGDataProviderModel
+import SRGDataProviderCombine
 import SRGUserData
 
 fileprivate let defaultNumberOfPlaceholders = 10
@@ -250,14 +249,14 @@ extension SRGContentSection: PageSectionProperties {
         case .predefined:
             switch presentation.type {
             case .favoriteShows:
-                return PageSectionPublisher.showsPublisher(withUrns: Array(FavoritesShowURNs()))
+                return dataProvider.showsPublisher(withUrns: Array(FavoritesShowURNs()))
                     .map { id.compatibleShows($0).map { .show($0, section: section) } }
                     .eraseToAnyPublisher()
             case .personalizedProgram:
-                return PageSectionPublisher.showsPublisher(withUrns: Array(FavoritesShowURNs()))
+                return dataProvider.showsPublisher(withUrns: Array(FavoritesShowURNs()))
                     .map { id.compatibleShows($0).map { $0.urn } }
                     .flatMap { urns in
-                        return PageSectionPublisher.latestMediasForShowsPublisher(withUrns: urns)
+                        return dataProvider.latestMediasForShowsPublisher(withUrns: urns)
                     }
                     .map { $0.map { .media($0, section: section) } }
                     .eraseToAnyPublisher()
@@ -270,11 +269,11 @@ extension SRGContentSection: PageSectionProperties {
                     .map { $0.topics.map { .topic($0, section: section) } }
                     .eraseToAnyPublisher()
             case .resumePlayback:
-                return PageSectionPublisher.historyPublisher()
+                return dataProvider.historyPublisher()
                     .map { id.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0, section: section) } }
                     .eraseToAnyPublisher()
             case .watchLater:
-                return PageSectionPublisher.laterPublisher()
+                return dataProvider.laterPublisher()
                     .map { id.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0, section: section) } }
                     .eraseToAnyPublisher()
             case .showAccess:
@@ -417,7 +416,7 @@ extension ConfiguredSection: PageSectionProperties {
                 .map { $0.shows.map { .show($0, section: section) } }
                 .eraseToAnyPublisher()
         case .radioFavoriteShows:
-            return PageSectionPublisher.showsPublisher(withUrns: Array(FavoritesShowURNs()))
+            return dataProvider.showsPublisher(withUrns: Array(FavoritesShowURNs()))
                 .map { id.compatibleShows($0).map { .show($0, section: section) } }
                 .eraseToAnyPublisher()
         case let .radioShowAccess(channelUid):
@@ -452,13 +451,13 @@ extension ConfiguredSection: PageSectionProperties {
     }
 }
 
-fileprivate struct PageSectionPublisher {
-    static func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
+fileprivate extension SRGDataProvider {
+    func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
         /* Load latest 15 medias for each 3 shows, get last 30 episodes */
         return urns.publisher
             .collect(3)
             .flatMap { urns in
-                return SRGDataProvider.current!.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
+                return self.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
             }
             .reduce([SRGMedia]()) { collectedMedias, result in
                 return collectedMedias + result.medias
@@ -469,7 +468,7 @@ fileprivate struct PageSectionPublisher {
             .eraseToAnyPublisher()
     }
     
-    static func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
+    func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
         // TODO: Currently suboptimal: For each media we determine if playback can be resumed, an operation on
         //       the main thread and with a single user data access each time. We could  instead use a currrently
         //       private history API to combine the history entries we have and the associated medias we retrieve
@@ -491,14 +490,14 @@ fileprivate struct PageSectionPublisher {
             historyEntries.compactMap { $0.uid }
         }
         .flatMap { urns in
-            return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
         }
         .receive(on: DispatchQueue.main)
         .map { $0.medias.filter { HistoryCanResumePlaybackForMedia($0) } }
         .eraseToAnyPublisher()
     }
     
-    static func laterPublisher() -> AnyPublisher<[SRGMedia], Error> {
+    func laterPublisher() -> AnyPublisher<[SRGMedia], Error> {
         return Future<[SRGPlaylistEntry], Error> { promise in
             let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
             SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
@@ -514,19 +513,18 @@ fileprivate struct PageSectionPublisher {
             playlistEntries.compactMap { $0.uid }
         }
         .flatMap { urns in
-            return SRGDataProvider.current!.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
         }
         .map { $0.medias }
         .eraseToAnyPublisher()
     }
     
-    static func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
-        let dataProvider = SRGDataProvider.current!
+    func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
         let pagePublisher = CurrentValueSubject<SRGDataProvider.Shows.Page?, Never>(nil)
         
         return pagePublisher
             .flatMap { page in
-                return page != nil ? dataProvider.shows(at: page!) : dataProvider.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
+                return page != nil ? self.shows(at: page!) : self.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
             }
             .handleEvents(receiveOutput: { result in
                 if let nextPage = result.nextPage {

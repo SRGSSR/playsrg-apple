@@ -80,7 +80,7 @@ class PageModel: Identifiable, ObservableObject {
         Just((id: self.id, rows: rows))
             .throttle(for: 30, scheduler: RunLoop.main, latest: true)
             .flatMap { context in
-                return Self.rowsPublisher(id: context.id, existingRows: context.rows)
+                return SRGDataProvider.current!.rowsPublisher(id: context.id, existingRows: context.rows)
                     .map { State.loaded(rows: $0) }
                     .catch { error in
                         return Just(State.failed(error: error))
@@ -95,17 +95,6 @@ class PageModel: Identifiable, ObservableObject {
         refreshCancellables = []
     }
     
-    private static func reusableRows(from existingRows: [Row], for sections: [Section]) -> [Row] {
-        return sections.map { section in
-            if let existingRow = existingRows.first(where: { $0.section == section }) {
-                return existingRow
-            }
-            else {
-                return Row(section: section, items: section.properties.placeholderItems)
-            }
-        }
-    }
-    
     private static func state(from internalState: State) -> State {
         if case let .loaded(rows: rows) = internalState {
             return .loaded(rows: rows.filter { !$0.items.isEmpty })
@@ -116,16 +105,16 @@ class PageModel: Identifiable, ObservableObject {
     }
 }
 
-extension PageModel {
+fileprivate extension SRGDataProvider {
     /// Publishes rows associated with a page id, starting from the provided rows and updating them as they are retrieved
-    private static func rowsPublisher(id: Id, existingRows: [Row]) -> AnyPublisher<[Row], Error> {
+    func rowsPublisher(id: PageModel.Id, existingRows: [PageModel.Row]) -> AnyPublisher<[PageModel.Row], Error> {
         return sectionsPublisher(id: id)
             // For each section create a publisher which updates the associated row and publishes the entire updated
             // row list as a result. A value is sent down the pipeline with each update.
-            .flatMap { sections -> AnyPublisher<[Row], Never> in
-                var rows = reusableRows(from: existingRows, for: sections)
+            .flatMap { sections -> AnyPublisher<[PageModel.Row], Never> in
+                var rows = Self.reusableRows(from: existingRows, for: sections)
                 return Publishers.MergeMany(sections.map { section in
-                    Self.rowPublisher(id: id, section: section)
+                    self.rowPublisher(id: id, section: section)
                         .map { row in
                             guard let index = rows.firstIndex(where: { $0.section == section }) else { return rows }
                             rows[index] = row
@@ -139,38 +128,49 @@ extension PageModel {
     }
     
     /// Publishes sections associated with a page id
-    private static func sectionsPublisher(id: Id) -> AnyPublisher<[Section], Error> {
+    func sectionsPublisher(id: PageModel.Id) -> AnyPublisher<[PageModel.Section], Error> {
         switch id {
         case .video:
-            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
-                .map { $0.contentPage.sections.map { Section.content($0) } }
+            return contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
+                .map { $0.contentPage.sections.map { PageModel.Section.content($0) } }
                 .eraseToAnyPublisher()
         case let .topic(topic: topic):
-            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
-                .map { $0.contentPage.sections.map { Section.content($0) } }
+            return contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
+                .map { $0.contentPage.sections.map { PageModel.Section.content($0) } }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
-            return Just(channel.configuredSections().map { Section.configured($0) })
+            return Just(channel.configuredSections().map { PageModel.Section.configured($0) })
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         case .live:
-            return Just(ApplicationConfiguration.shared.liveConfiguredSections().map { Section.configured($0) })
+            return Just(ApplicationConfiguration.shared.liveConfiguredSections().map { PageModel.Section.configured($0) })
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }
     }
     
     /// Publishes the row for content for a given section and page id
-    private static func rowPublisher(id: Id, section: Section) -> AnyPublisher<Row, Never> {
+    func rowPublisher(id: PageModel.Id, section: PageModel.Section) -> AnyPublisher<PageModel.Row, Never> {
         if let publisher = section.properties.publisher(for: id) {
             return publisher
                 .replaceError(with: section.properties.placeholderItems)
-                .map { Row(section: section, items: $0) }
+                .map { PageModel.Row(section: section, items: $0) }
                 .eraseToAnyPublisher()
         }
         else {
-            return Just(Row(section: section, items: []))
+            return Just(PageModel.Row(section: section, items: []))
                 .eraseToAnyPublisher()
+        }
+    }
+    
+    private static func reusableRows(from existingRows: [PageModel.Row], for sections: [PageModel.Section]) -> [PageModel.Row] {
+        return sections.map { section in
+            if let existingRow = existingRows.first(where: { $0.section == section }) {
+                return existingRow
+            }
+            else {
+                return PageModel.Row(section: section, items: section.properties.placeholderItems)
+            }
         }
     }
 }
